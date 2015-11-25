@@ -18,6 +18,13 @@ _Site administrators_ have admin privileges for this site. They have no special
 handling in this file; they are handled through the native Django is_admin
 flag, and site administrators have responsibility for designating who has that
 flag through the admin interface.
+
+This file is for defining information we need to track about each user class.
+The groups themselves are defined in groups.py.
+
+New users who sign up via oauth will be created as editors. Site administrators
+must define coordinators manually in the Django admin site, by adding them to
+the coordinators group.
 """
 
 from django.contrib.auth.models import User
