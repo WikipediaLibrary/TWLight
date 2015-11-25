@@ -1,0 +1,9 @@
+# This is tested on python 3.5.
+Django==1.8.6
+django-braces==1.8.1
+django-oauth-toolkit==0.9.0
+django-post-office==2.0.3
+jsonfield==1.0.3
+oauthlib==1.0.1
+six==1.10.0
+wheel==0.24.0
