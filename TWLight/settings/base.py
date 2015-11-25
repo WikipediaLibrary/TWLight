@@ -184,3 +184,35 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 # -----------------> third-party and TWLight configurations <-------------------
 # ------------------------------------------------------------------------------
+
+# DJANGO-ALLAUTH
+# ------------------------------------------------------------------------------
+
+# See https://django-allauth.readthedocs.org/en/latest/installation.html
+
+# Allauth requires 'django.template.context_processors.request' to be in
+# TEMPLATES[0]OPTIONS['context_processors']; it is by default, above.
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ALLAUTH_NEEDED_APPS = (
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # Allauth supports lots of social account providers, but not Wikipedia.
+    # Therefore we ignore all their built-in providers and supply our own.
+    'TWLight.wp_allauth'
+)
+
+INSTALLED_APPS += ALLAUTH_NEEDED_APPS
+
+SITE_ID = 1
+
+# Allauth also requires some URL configuration; see the top-level urls.py.

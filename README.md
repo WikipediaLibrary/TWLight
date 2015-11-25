@@ -6,3 +6,10 @@
     - `DJANGO_DEBUG` (must be `False` on production, can be `True` for testing)
     - `DJANGO_SECRET_KEY`
     - `DJANGO_SETTINGS_MODULE`
+
+## Configure allauth
+In the Django admin site...
+
+1. Add a Site for your domain, matching `settings.SITE_ID` (this will be 1 unless you have overridden it).
+2. Add a Social App (socialaccount app) for Wikipedia.
+3. Fill in the site and the OAuth app credentials obtained from Wikipedia.
