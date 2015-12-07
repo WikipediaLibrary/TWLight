@@ -44,7 +44,10 @@ from .helpers.wiki_list import WIKIS
 class Editor(models.Model):
     # Internal data
     user = models.OneToOneField(User)
-    last_updated = models.DateField(auto_now=True)
+    last_updated = models.DateField(auto_now=True,
+        help_text=_("When this information was last edited"))
+    account_created = models.DateField(auto_now_add=True,
+        help_text=_("When this information was first created"))
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~
     # Uses same field names as OAuth, but with wp_ prefixed.

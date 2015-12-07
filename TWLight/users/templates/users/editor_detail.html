@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load l10n %}
+
+{% block content %}
+  <h1>{% trans "Editor profile information" %}</h1>
+
+  <p>
+    {% blocktrans with account_created=object.account_created|localize %}
+      Information with an * was harvested from Wikipedia directly.
+      It was current as of {{ account_created }}.
+      Changes made on Wikipedia since that time have not been reflected here.
+    {% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans with last_updated=object.last_updated|localize %}
+      Other information was entered directly by users or site admins,
+      in their preferred language.
+      It was last edited on {{ last_updated }}.
+    {% endblocktrans %}
+  </p>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Wikipedia username *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.wp_username }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Wikipedia user ID *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.wp_sub }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Home wiki" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.home_wiki }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Wikipedia edit count *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.wp_editcount }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Date registered on Wikipedia *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.wp_registered }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Wikipedia groups *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {% for group in object.wp_groups %}
+        {{ group }} <br />
+      {% endfor %}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Wikipedia user rights *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {% for right in object.wp_rights %}
+        {{ right }} <br />
+      {% endfor %}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Contributions" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.contributions }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Email" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.email }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <p class="well">
+        {% blocktrans with username=object.user.username %}
+          {{ username }} has coordinator privileges on this site.
+        {% endblocktrans %}
+      </p>
+    </div>
+  </div>
+
+{% endblock %}
