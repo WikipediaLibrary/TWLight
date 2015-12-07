@@ -82,6 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'twlight',
+        # No user/pass here for ease of local development.
+        # production.py adds a user and a password to this setting.
         'HOST': 'localhost',
         'PORT': '5432',
     }

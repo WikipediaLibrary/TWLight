@@ -1,6 +1,23 @@
 # README.md
 
-* Set up a postgres database matching the parameters in the DATABASES setting. (Yes, it must be postgres.)
+## Server setup
+### Install app
+* `sudo mkdir /www-data`
+
+### nginx
+* `sudo apt-get install nginx`
+
+### postgres
+You must use postgres; TWLight is not compatible with other database backends.
+
+* `sudo apt-get install postgresql postgresql-contrib`
+* `sudo -- sudo -u postgres psql postgres` (Yes, you need `sudo` twice and the double underscore. See https://wikitech.wikimedia.org/wiki/Help:Sudo_Policies .)
+* `\password postgres` (Keep track of this password.)
+* `create database twlight;`
+* `\q`
+* Set an environment variable, `DJANGO_POSTGRES_PASSWORD`, equal to the postgres database password you created earlier.
+
+### Django dependencies
 * `pip install -r requirements.txt`
 * Set the following environment variables:
     - `DJANGO_DEBUG` (must be `False` on production, can be `True` for testing)

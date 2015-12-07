@@ -1,5 +1,7 @@
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
+import os
+
 from .base import *
 
 # This is the settings file that should be used in production. Before it is
@@ -8,3 +10,6 @@ from .base import *
 
 # See also the README.md for any environment configuration that needs to
 # happen.
+
+DATABASES['default']['USER'] = 'postgres'
+DATABASES['default']['PASSWORD'] = os.environ.get('DJANGO_POSTGRES_PASSWORD')
