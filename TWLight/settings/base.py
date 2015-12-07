@@ -39,7 +39,9 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = ()
 
-TWLIGHT_APPS = ()
+TWLIGHT_APPS = (
+    'TWLight.users',
+)
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TWLIGHT_APPS
 
@@ -67,7 +69,6 @@ MIDDLEWARE_CLASSES = (
 # servers to do a quick test.
 # DEBUG SHOULD BE FALSE ON PRODUCTION for security reasons.
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-TEMPLATE_DEBUG = DEBUG
 
 
 # DATABASE CONFIGURATION
@@ -208,7 +209,7 @@ ALLAUTH_NEEDED_APPS = (
     'allauth.socialaccount',
     # Allauth supports lots of social account providers, but not Wikipedia.
     # Therefore we ignore all their built-in providers and supply our own.
-    'TWLight.wp_allauth'
+    #'TWLight.wp_allauth'
 )
 
 INSTALLED_APPS += ALLAUTH_NEEDED_APPS
