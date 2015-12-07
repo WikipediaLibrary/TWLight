@@ -12,3 +12,8 @@ From user resource applications
     Status of all applications 
 Additional free-text items needed for partners: real name, country, occupation, affiliation, shipping address, other needed new fields  (Visible to editor, not visible to coordinator) 
 """
+
+"""
+Perms we will need, based on coding thus far:
+	can view editor detail pages: coordinators, site admins, self
+"""

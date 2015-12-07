@@ -6,14 +6,14 @@
   <h1>{% trans "Editor profile information" %}</h1>
 
   <p>
-    {% blocktrans with account_created=object.account_created|localize %}
+    {% blocktrans with account_created=editor.account_created|localize %}
       Information with an * was harvested from Wikipedia directly.
       It was current as of {{ account_created }}.
       Changes made on Wikipedia since that time have not been reflected here.
     {% endblocktrans %}
   </p>
   <p>
-    {% blocktrans with last_updated=object.last_updated|localize %}
+    {% blocktrans with last_updated=editor.last_updated|localize %}
       Other information was entered directly by users or site admins,
       in their preferred language.
       It was last edited on {{ last_updated }}.
@@ -25,42 +25,42 @@
       <strong>{% trans "Wikipedia username *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.wp_username }}
+      {{ editor.wp_username }}
     </div>
 
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia user ID *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.wp_sub }}
+      {{ editor.wp_sub }}
     </div>
 
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Home wiki" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.home_wiki }}
+      {{ editor.home_wiki }}
     </div>
 
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia edit count *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.wp_editcount }}
+      {{ editor.wp_editcount }}
     </div>
 
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Date registered on Wikipedia *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.wp_registered }}
+      {{ editor.wp_registered }}
     </div>
 
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia groups *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {% for group in object.wp_groups %}
+      {% for group in editor.wp_groups %}
         {{ group }} <br />
       {% endfor %}
     </div>
@@ -69,7 +69,7 @@
       <strong>{% trans "Wikipedia user rights *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {% for right in object.wp_rights %}
+      {% for right in editor.wp_rights %}
         {{ right }} <br />
       {% endfor %}
     </div>
@@ -78,21 +78,21 @@
       <strong>{% trans "Contributions" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.contributions }}
+      {{ editor.contributions }}
     </div>
 
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Email" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.email }}
+      {{ editor.email }}
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
       <p class="well">
-        {% blocktrans with username=object.user.username %}
+        {% blocktrans with username=editor.user.username %}
           {{ username }} has coordinator privileges on this site.
         {% endblocktrans %}
       </p>
