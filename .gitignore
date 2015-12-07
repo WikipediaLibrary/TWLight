@@ -1,4 +1,5 @@
 id_rsa
+id_rsa.*
 *.sqlite3
 
 # Created by https://www.gitignore.io/api/osx,django,python,sublimetext,vim,emacs
