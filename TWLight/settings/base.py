@@ -41,6 +41,8 @@ THIRD_PARTY_APPS = ()
 
 TWLIGHT_APPS = (
     'TWLight.users',
+    'TWLight.resources',
+    'TWLight.applications',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TWLIGHT_APPS

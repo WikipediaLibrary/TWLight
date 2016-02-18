@@ -9,6 +9,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from TWLight.users.urls import urlpatterns as users_urls
+from TWLight.applications.urls import urlpatterns as applications_urls
 
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
 
     # TWLight apps
     url(r'^users/', include(users_urls, namespace="users")),
+    url(r'^applications/', include(applications_urls,namespace="applications")),
 ]
