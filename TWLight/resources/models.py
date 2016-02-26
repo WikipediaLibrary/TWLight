@@ -7,6 +7,10 @@ class Partner(models.Model):
     This model tracks contact information for the partner as well as extra
     information they require on access grant applications.
     """
+    class Meta:
+        app_label = 'TWLight.resources'
+
+
     company_name = models.CharField(max_length=30,
         help_text="Partner organization's name (e.g. McFarland). Note: " \
         "this will be user-visible and *not translated*.")
@@ -78,6 +82,9 @@ class Stream(models.Model):
     different application information for different Streams, or if they have
     distinct contact information, et cetera.
     """
+    class Meta:
+        app_label = 'TWLight.resources'
+
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
     name = models.CharField(max_length=50,
@@ -105,6 +112,9 @@ class Contact(models.Model):
     managed elsewhere through a CRM, but this app needs to know just enough to
     send emails and tell coordinators whom they're dealing with.
     """
+    class Meta:
+        app_label = 'TWLight.resources'
+
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="contacts")
 

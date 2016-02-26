@@ -1,11 +1,13 @@
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 from TWLight.resources.models import Partner
 
 
 class Application(models.Model):
+    class Meta:
+        app_label = 'TWLight.applications'
+
     # status goes here
     # versioning needs to happen
     user = models.ForeignKey(User)

@@ -33,15 +33,18 @@ New users who sign up via oauth will be created as editors. Site administrators
 must define coordinators manually in the Django admin site, by adding them to
 the coordinators group.
 """
+import json
 
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.utils.translation import ugettext as _
 
 from .helpers.wiki_list import WIKIS
 
 class Editor(models.Model):
+    class Meta:
+        app_label = 'TWLight.users'
+
     # Internal data
     user = models.OneToOneField(User)
     last_updated = models.DateField(auto_now=True,
@@ -66,10 +69,24 @@ class Editor(models.Model):
     # to group X", which should suffice for our purposes. Creating
     # actual db representations of each group and right so as to
     # create FKs to all the users possessing them seems like overkill.
-    wp_groups = ArrayField(base_field=models.CharField(max_length=25),
-        help_text=_("Wikipedia groups"))
-    wp_rights = ArrayField(base_field=models.CharField(max_length=50),
-        help_text=_("Wikipedia user rights"))
+    #wp_groups = ArrayField(base_field=models.CharField(max_length=25),
+    #    help_text=_("Wikipedia groups"))
+    #wp_rights = ArrayField(base_field=models.CharField(max_length=50),
+    #    help_text=_("Wikipedia user rights"))
+
+    _wp_internal = models.TextField()
+
+    # this does not actually work because json.dumps doesn't perform enough
+    # validation - it can dump things we cannot subsequently load. It may be
+    # that all we need is to store a string and use
+    # filter(wp_groups__icontains=groupname) and call that good enough.
+    @property
+    def wp_internal(self):
+        return json.loads(self._wp_internal)
+    @wp_internal.setter
+    def wp_internal(self, value):
+        self._wp_internal = json.dumps(value)
+    
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     home_wiki = models.CharField(max_length=20, choices=WIKIS,
@@ -104,7 +121,12 @@ class Editor(models.Model):
         return url
 
 
+
 class Coordinator(models.Model):
+    class Meta:
+        app_label = 'TWLight.users'
+
     user = models.OneToOneField(User)
     is_coordinator = models.BooleanField(default=False,
         help_text=_("Does this user have coordinator permissions for this site?"))
+

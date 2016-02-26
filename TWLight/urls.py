@@ -15,7 +15,7 @@ from TWLight.applications.urls import urlpatterns as applications_urls
 urlpatterns = [
 	# Built-in
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/', include('allauth.urls')),
+    #url(r'^accounts/', include('allauth.urls')),
 
     # TWLight apps
     url(r'^users/', include(users_urls, namespace="users")),

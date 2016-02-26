@@ -36,6 +36,13 @@ You must use postgres; TWLight is not compatible with other database backends.
 * `\q`
 * Set an environment variable, `DJANGO_POSTGRES_PASSWORD`, equal to the postgres database password you created earlier.
 
+### whoops actually mysql
+* `CREATE DATABASE twlight CHARACTER SET UTF8;`
+* `CREATE USER twlight@localhost IDENTIFIED BY 'twlight';` (Use a better password in production.)
+* `GRANT ALL PRIVILEGES ON twlight.* TO twlight@localhost;`
+* `FLUSH PRIVILEGES;`
+* `exit`
+
 ### Django dependencies
 * `cd /www-data/TWLight`
 * `mkdir TWLight/logs`
@@ -44,6 +51,8 @@ You must use postgres; TWLight is not compatible with other database backends.
     - `DJANGO_DEBUG` (must be `False` on production, can be `True` for testing)
     - `DJANGO_SECRET_KEY`
     - `DJANGO_SETTINGS_MODULE`
+    - `DJANGO_DB_USER`
+    - `DJANGO_DB_PASSWORD`
 * `python manage.py migrate`
 * `python manage.py createsuperuser` (follow prompts)
 

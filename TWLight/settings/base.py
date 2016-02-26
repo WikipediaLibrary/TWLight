@@ -1,19 +1,21 @@
 """
 Base settings for TWLight project.
 
-This is not intended to be used as the live settings file for a project
-and will not work as one. You should instead use production.py, local.py,
-or another file that you write. These files should live in the settings
-directory; start with 'from .base import *'; and proceed to add or
-override settings as appropriate to their context. In particular, you
-will need to set ALLOWED_HOSTS before your app will run. You will also
+This is not intended to be used as the live settings file for a project and will
+not work as one. You should instead use production.py, local.py, or another file
+that you write. These files should live in the settings directory; start with
+'from .base import *'; and proceed to add or override settings as appropriate to
+their context. In particular, you will need to set ALLOWED_HOSTS before your app
+will run.
+
+If you want to use production settings, you are now done.  If not, you will also
 need to set the environment variables indicated in the README.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.8/topics/settings/
+https://docs.djangoproject.com/en/1.7/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.8/ref/settings/
+https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 import os
@@ -60,7 +62,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 )
 
 
@@ -78,16 +79,15 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-# TWLight _REQUIRES POSTGRES_ because the Editor model uses a postgres-specific
-# field type. Do not substitute mysql or other databases.
+# WMF sysadmins strongly prefer mysql, so use that.
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'twlight',
-        # No user/pass here for ease of local development.
-        # production.py adds a user and a password to this setting.
+        'USER': os.environ.get('DJANGO_DB_USER', None),
+        'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD', None),
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
     }
 }
 
@@ -190,34 +190,7 @@ LOGGING = {
 # -----------------> third-party and TWLight configurations <-------------------
 # ------------------------------------------------------------------------------
 
-# DJANGO-ALLAUTH
-# ------------------------------------------------------------------------------
-
-# See https://django-allauth.readthedocs.org/en/latest/installation.html
-
-# Allauth requires 'django.template.context_processors.request' to be in
-# TEMPLATES[0]OPTIONS['context_processors']; it is by default, above.
 
 AUTHENTICATION_BACKENDS = (
-    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
 )
-
-ALLAUTH_NEEDED_APPS = (
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    # Allauth supports lots of social account providers, but not Wikipedia.
-    # Therefore we ignore all their built-in providers and supply our own.
-    #'TWLight.wp_allauth'
-)
-
-INSTALLED_APPS += ALLAUTH_NEEDED_APPS
-
-SITE_ID = 1
-
-# Allauth also requires some URL configuration; see the top-level urls.py.
