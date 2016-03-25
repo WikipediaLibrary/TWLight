@@ -5,8 +5,10 @@ Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
 from django import forms
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponseServerError
+from django.utils.translation import ugettext as _
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
@@ -79,6 +81,12 @@ class SubmitApplicationView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         if not 'applications_request__partner_ids' in request.session.keys():
             raise HttpResponseServerError
+
+        if len(request.session['applications_request__partner_ids']) == 0:
+            messages.add_message(request, messages.WARNING,
+                _('You must choose at least one resource you want access to before applying for access.'))
+            return HttpResponseRedirect(reverse('applications:request'))
+
         return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
 
 
@@ -87,6 +95,15 @@ class SubmitApplicationView(TemplateView):
         context['user_form'], context['formset'] = self._get_forms()
         return context
 
+
+    def _get_partners(self):
+        """
+        Get the queryset of Partners with resources the user wants access to.
+        These partners were specified in RequestForApplicationView.
+        """
+        # This key is guaranteed by dispatch() to exist and be nonempty.
+        partner_ids = self.request.session['applications_request__partner_ids']
+        return Partner.objects.filter(id__in=partner_ids)
 
     def _get_forms(self):
         """
@@ -114,7 +131,8 @@ class SubmitApplicationView(TemplateView):
         # construct list of forms
         # in the template we will iterate over all of these
 
-        partners = Partner.objects.all()
+        
+        partners = self._get_partners()
         user_form = BaseUserAppForm()
         PartnerFormSet = forms.formset_factory(BasePartnerAppForm,
             extra=0)
