@@ -8,7 +8,7 @@ class Partner(models.Model):
     information they require on access grant applications.
     """
     class Meta:
-        app_label = 'TWLight.resources'
+        app_label = 'resources'
 
 
     company_name = models.CharField(max_length=30,
@@ -83,12 +83,12 @@ class Stream(models.Model):
     distinct contact information, et cetera.
     """
     class Meta:
-        app_label = 'TWLight.resources'
+        app_label = 'resources'
 
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
     name = models.CharField(max_length=50,
-        help_text="Name of stream (e.g. 'Health and Behavioral Sciences."
+        help_text="Name of stream (e.g. 'Health and Behavioral Sciences). "
             "Will be user-visible and *not translated*. Do not include the "
             "name of the partner here. If partner name and resource name "
             "need to be presented together, templates are responsible for "
@@ -113,7 +113,7 @@ class Contact(models.Model):
     send emails and tell coordinators whom they're dealing with.
     """
     class Meta:
-        app_label = 'TWLight.resources'
+        app_label = 'resources'
 
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="contacts")

@@ -6,12 +6,12 @@ from TWLight.resources.models import Partner
 
 class Application(models.Model):
     class Meta:
-        app_label = 'TWLight.applications'
+        app_label = 'applications'
 
     # status goes here
     # versioning needs to happen
     user = models.ForeignKey(User)
-    partners = models.ForeignKey(Partner)
+    partner = models.ForeignKey(Partner)
 
     rationale = models.TextField(blank=True)
     title_requested = models.CharField(max_length=128, blank=True)

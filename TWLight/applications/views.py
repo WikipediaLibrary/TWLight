@@ -6,11 +6,13 @@ status.
 """
 from django import forms
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseServerError
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
 from TWLight.resources.models import Partner
 
+from .forms import BaseUserAppForm, BasePartnerAppForm
 from .models import Application
 
 
@@ -53,39 +55,42 @@ class RequestForApplicationView(FormView):
 
         and construct your form accordingly
         """
-        app = ApplicationContainer()
-        app.user = self.request.user
-
-        # We have to save now, not only at our later save() call, because
-        # we can't add related objects to a ManyToMany field (in this case,
-        # Partners) until the base object has been saved.
-        app.save()
-
         # Get the IDs of the partner resources they want to apply for.
         # Because we had to prepend some text to the ID in get_form_class,
         # make sure to strip it off here, so we're left with just the ID for
-        # ease of database lookups.
+        # ease of database lookups. Store them in the session so we can
+        # construct the required form later.
         partner_ids = [int(key[8:]) for key in form.cleaned_data
                        if form.cleaned_data[key]]
 
-        for partner in Partner.objects.filter(pk__in=partner_ids):
-            app.partners.add(partner)
+        self.request.session['applications_request__partner_ids'] = partner_ids
 
-        app.save()
-
-        return HttpResponseRedirect(
-            reverse('applications:apply', kwargs={'pk': app.pk})
-        )
+        return HttpResponseRedirect(reverse('applications:apply'))
 
 
         # http://www.slideshare.net/kingkilr/forms-getting-your-moneys-worth
         # multipleformfactory here might be a good way to aggregate
 
-class SubmitApplicationView(FormView):
 
-    def get_form_class(self):
+
+class SubmitApplicationView(TemplateView):
+    template_name = 'applications/apply.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not 'applications_request__partner_ids' in request.session.keys():
+            raise HttpResponseServerError
+        return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
+
+
+    def get_context_data(self, **kwargs):
+        context = super(SubmitApplicationView, self).get_context_data(**kwargs)
+        context['user_form'], context['formset'] = self._get_forms()
+        return context
+
+
+    def _get_forms(self):
         """
-        We will dynamically construct a form which harvests exactly the
+        We will dynamically construct a set of forms which harvest exactly the
         information needed for editors to request access to their desired set of
         partner resources.
 
@@ -101,3 +106,33 @@ class SubmitApplicationView(FormView):
         The goal is to reduce the user's data entry burden to the minimum
         amount necessary for applications to be reviewed.
         """
+
+        # get partners
+        # determine whether any require each bit of user data
+        # construct user form accordingly
+        # create base application form for each partner
+        # construct list of forms
+        # in the template we will iterate over all of these
+
+        partners = Partner.objects.all()
+        user_form = BaseUserAppForm()
+        PartnerFormSet = forms.formset_factory(BasePartnerAppForm,
+            extra=0)
+        partner_forms = PartnerFormSet(initial=[{'partner': x} for x in partners])
+
+        return user_form, partner_forms
+
+    def post(self, request, *args, **kwargs):
+        # Write user form things to user data
+        # For each Partner, create and save an Application
+        print dir(request)
+        print request.POST
+
+        # Validate forms
+        # If invalid, return with errors
+        # If valid, then:
+        #   update user data
+        #   create an Application for each Partner/form
+        #   del session key
+        #   return to success page; should be user page with translatable message
+        pass

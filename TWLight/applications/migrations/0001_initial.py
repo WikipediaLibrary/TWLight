@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('resources', '__first__'),
+        ('resources', '0002_auto_20160324_1826'),
     ]
 
     operations = [
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('stream_requested', models.CharField(max_length=128, blank=True)),
                 ('comments', models.TextField(blank=True)),
                 ('agreement_with_terms', models.BooleanField(default=False)),
-                ('partners', models.ForeignKey(to='resources.Partner')),
+                ('partner', models.ForeignKey(to='resources.Partner')),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={

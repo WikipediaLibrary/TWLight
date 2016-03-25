@@ -8,7 +8,7 @@ urlpatterns = [
         views.RequestForApplicationView.as_view()),
         name='request'
     ),
-    url(r'^apply/(?P<pk>\d+)/', login_required(
+    url(r'^apply/', login_required(
         views.SubmitApplicationView.as_view()),
         name='apply'
     ),

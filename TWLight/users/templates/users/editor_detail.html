@@ -56,6 +56,7 @@
       {{ editor.wp_registered }}
     </div>
 
+    {% comment %}
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia groups *" %}</strong>
     </div>
@@ -64,7 +65,9 @@
         {{ group }} <br />
       {% endfor %}
     </div>
+    {% endcomment %}
 
+    {% comment %}
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia user rights *" %}</strong>
     </div>
@@ -73,6 +76,7 @@
         {{ right }} <br />
       {% endfor %}
     </div>
+    {% endcomment %}
 
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Contributions" %}</strong>

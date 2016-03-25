@@ -35,7 +35,7 @@ the coordinators group.
 """
 import json
 
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -43,10 +43,10 @@ from .helpers.wiki_list import WIKIS
 
 class Editor(models.Model):
     class Meta:
-        app_label = 'TWLight.users'
+        app_label = 'users'
 
     # Internal data
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     last_updated = models.DateField(auto_now=True,
         help_text=_("When this information was last edited"))
     account_created = models.DateField(auto_now_add=True,
@@ -89,7 +89,7 @@ class Editor(models.Model):
     
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    home_wiki = models.CharField(max_length=20, choices=WIKIS,
+    home_wiki = models.CharField(max_length=4, choices=WIKIS,
         help_text=_("Home wiki, as indicated by user"))
     contributions = models.TextField(
         help_text=_("Wiki contributions, as entered by user"))
@@ -119,14 +119,3 @@ class Editor(models.Model):
             user=self
         )
         return url
-
-
-
-class Coordinator(models.Model):
-    class Meta:
-        app_label = 'TWLight.users'
-
-    user = models.OneToOneField(User)
-    is_coordinator = models.BooleanField(default=False,
-        help_text=_("Does this user have coordinator permissions for this site?"))
-
