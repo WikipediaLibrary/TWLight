@@ -14,3 +14,11 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TWLight.settings.production")
 
 application = get_wsgi_application()
+
+try:
+    # If whitenoise is available, use it for serving staticfiles.
+    # If it's not, don't.
+    from whitenoise.django import DjangoWhiteNoise
+    application = DjangoWhiteNoise(application)
+except ImportError:
+    pass
