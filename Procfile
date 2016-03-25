@@ -1,1 +1,1 @@
-web: gunicorn TWLight.wsgi:application
+web: gunicorn TWLight.wsgi:application --log-file -
