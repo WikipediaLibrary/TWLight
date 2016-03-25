@@ -66,6 +66,8 @@ Read wmlabs puppetization docs and ensure that you can set this up there. Docume
 
 ## To run on heroku
 * `heroku config:set DJANGO_SETTINGS_MODULE='TWLight.settings.heroku'`
+* `heroku config:set DJANGO_SECRET_KEY=<something>`
+* On first deploy: `heroku run python manage.py syncdb`
 
 Heroku will install everything it needs via requirements.txt.
 
