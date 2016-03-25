@@ -19,28 +19,42 @@ from django import forms
 
 from TWLight.resources.models import Partner
 
+USER_FORM_FIELDS = ['real_name', 'country_of_residence', 'occupation',
+                    'affiliation']
+
+PARTNER_FORM_FIELDS = ['specific_stream', 'specific_title',
+                       'agreement_with_terms_of_use']
+
 
 class BaseUserAppForm(forms.Form):
     """
     The BaseApplicationUserForm contains all possible user-data-related fields
-    that an Application might need. applications/views will delete any fields
-    that are unneeded for a given Application.
+    that an Application might need. You can delete any fields that are unneeded
+    for a given Application by passing a fields_to_remove list into the
+    constructor.
 
     For this reason, blank=True is not supplied; we don't want to have any
-    optional fields, since the view present only the fields required for that
-    application.
+    optional fields, since the view is expected to present only the fields
+    required for its Application.
 
     Note: BooleanFields have required=False because otherwise Django will
     (foolishly) reject unchecked fields rather than interpreting them as
     False.
     """
 
-    real_name = forms.BooleanField(required=False)
-    country_of_residence = forms.BooleanField(required=False)
-    specific_title = forms.BooleanField(required=False)
-    specific_stream = forms.BooleanField(required=False)
-    occupation = forms.BooleanField(required=False)
-    affiliation = forms.BooleanField(required=False)
+    def __init__(self, fields_to_remove=None, *args, **kwargs):
+        """
+        Sets up form, then removes any fields that are unneeded for this
+        instance.
+        """
+        super(BaseUserAppForm, self).__init__(*args, **kwargs)
+        for field in fields_to_remove:
+            del self.fields[field]
+
+    real_name = forms.CharField(max_length=128)
+    country_of_residence = forms.CharField(max_length=128)
+    occupation = forms.CharField(max_length=128)
+    affiliation = forms.CharField(max_length=128)
 
 
 
@@ -57,11 +71,24 @@ class BasePartnerAppForm(forms.Form):
     two different entities' terms of use; you cannot expect the title being
     requested from each partner to be the same; etc.)
     """
+    def __init__(self, *args, **kwargs):
+        """
+        Sets up form; then, if a partner has been provided, removes any fields
+        not required by that partner.
+        """
+        super(BasePartnerAppForm, self).__init__(*args, **kwargs)
+        if 'partner' in self.initial.keys():
+            partner = self.initial['partner']
+            for field in PARTNER_FORM_FIELDS:
+                if not getattr(partner, field):
+                    del self.fields[field]
+
+
     partner = forms.ModelChoiceField(
         queryset=Partner.objects.all(),
         widget=forms.HiddenInput)
     rationale = forms.CharField(widget=forms.Textarea)
-    title_requested = forms.CharField(max_length=128)
-    stream_requested = forms.CharField(max_length=128)
-    comments = forms.CharField(widget=forms.Textarea)
-    agreement_with_terms = forms.BooleanField(required=False)
+    specific_stream = forms.CharField(max_length=128)
+    specific_title = forms.CharField(max_length=128)
+    comments = forms.CharField(widget=forms.Textarea, required=False)
+    agreement_with_terms_of_use = forms.BooleanField(required=False)

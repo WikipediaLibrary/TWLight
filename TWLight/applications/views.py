@@ -14,7 +14,7 @@ from django.views.generic.edit import FormView
 
 from TWLight.resources.models import Partner
 
-from .forms import BaseUserAppForm, BasePartnerAppForm
+from .forms import BaseUserAppForm, BasePartnerAppForm, USER_FORM_FIELDS
 from .models import Application
 
 
@@ -105,6 +105,34 @@ class SubmitApplicationView(TemplateView):
         partner_ids = self.request.session['applications_request__partner_ids']
         return Partner.objects.filter(id__in=partner_ids)
 
+
+    def _get_partner_formset(self, partners=None):
+        PartnerFormSet = forms.formset_factory(BasePartnerAppForm,
+            extra=0)
+
+        if self.request.POST:
+            return PartnerFormSet(self.request.POST)
+        else:
+            return PartnerFormSet(initial=[{'partner': x} for x in partners])
+
+
+    def _get_user_form(self, partners=None):
+        # Set up form to harvest user data. It will only ask for data required
+        # by at least one Partner.
+        # TODO: single-source-of-truth the USER_FORM_FIELDS via your test suite
+        # TODO: use profile data to supply form.initial
+        if self.request.POST:
+            return BaseUserAppForm(self.request.POST)
+        else:
+            fields_to_remove = []
+            for field in USER_FORM_FIELDS:
+                query = {'{field}'.format(field=field): True}
+                if not partners.filter(**query).count():
+                    fields_to_remove.append(field)
+
+            return BaseUserAppForm(fields_to_remove)
+
+
     def _get_forms(self):
         """
         We will dynamically construct a set of forms which harvest exactly the
@@ -124,27 +152,34 @@ class SubmitApplicationView(TemplateView):
         amount necessary for applications to be reviewed.
         """
 
-        # get partners
-        # determine whether any require each bit of user data
-        # construct user form accordingly
         # create base application form for each partner
         # construct list of forms
         # in the template we will iterate over all of these
-
-        
         partners = self._get_partners()
-        user_form = BaseUserAppForm()
-        PartnerFormSet = forms.formset_factory(BasePartnerAppForm,
-            extra=0)
-        partner_forms = PartnerFormSet(initial=[{'partner': x} for x in partners])
+
+        user_form = self._get_user_form(partners)
+        partner_forms = self._get_partner_formset(partners)
+
+        # TODO: implement mutually_exclusive Partner behavior
+        # TODO: single-source-of-truth the PARTNER_FORM_FIELDS
+        # TODO: make sure the forms works when an initial partner isn't supplied,
+        # or else is disallowed
 
         return user_form, partner_forms
+
 
     def post(self, request, *args, **kwargs):
         # Write user form things to user data
         # For each Partner, create and save an Application
-        print dir(request)
-        print request.POST
+        partner_forms = self._get_partner_formset()
+        user_form = self._get_user_form()
+
+        if partner_forms.is_valid() and user_form.is_valid():
+            # do stuff
+            pass
+        else:
+            # do other stuff
+            pass
 
         # Validate forms
         # If invalid, return with errors
