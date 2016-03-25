@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponseServerError
 from django.utils.translation import ugettext as _
+from django.views.defaults import server_error
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
@@ -80,7 +81,7 @@ class SubmitApplicationView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         if not 'applications_request__partner_ids' in request.session.keys():
-            raise HttpResponseServerError
+            return server_error(request)
 
         if len(request.session['applications_request__partner_ids']) == 0:
             messages.add_message(request, messages.WARNING,
