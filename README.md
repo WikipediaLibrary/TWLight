@@ -2,8 +2,6 @@
 
 You might need to sudo or otherwise alter permissions to be able to execute these commands.
 
-TODO whoops python3
-
 ## Server setup
 ### Prepare basics
 * `apt-get update`
@@ -65,3 +63,10 @@ In the Django admin site...
 
 ## TODO
 Read wmlabs puppetization docs and ensure that you can set this up there. Document accordingly.
+
+## To run on heroku
+* `heroku config:set DJANGO_SETTINGS_MODULE='TWLight.settings.heroku'`
+
+Heroku will install everything it needs via requirements.txt.
+
+Locally or on WMF servers, you only need requirements/base.txt and requirements/wmf.txt. (wmf.txt installs the expected mysql database, but heroku uses postgres.)

@@ -21,6 +21,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 # ------------------------------------------------------------------------------
@@ -80,6 +81,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 # WMF sysadmins strongly prefer mysql, so use that.
+# If you're deploying to Heroku, heroku.py will override this.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -136,8 +138,11 @@ TEMPLATE_DIRS = (
 
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
-
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_ROOT, 'static'),
+]
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
