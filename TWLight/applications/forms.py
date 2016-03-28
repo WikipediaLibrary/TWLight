@@ -16,7 +16,7 @@ form that takes a dict of required fields, and constructs the form accordingly.
 """
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, HTML, Submit, Div
+from crispy_forms.layout import Layout, Fieldset, Submit
 import logging
 import re
 
@@ -45,16 +45,16 @@ AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
 
 
 # ~~~~ Basic field names ~~~~ #
-USER_FORM_FIELDS = ['real_name', 'country_of_residence', 'occupation',
-                    'affiliation']
+USER_FORM_FIELDS = [REAL_NAME, COUNTRY_OF_RESIDENCE, OCCUPATION,
+                    AFFILIATION]
 
 # These fields are displayed for all partners.
-PARTNER_FORM_BASE_FIELDS = ['rationale', 'comments']
+PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS]
 
 # These fields are displayed only when a specific partner requires that
 # information.
-PARTNER_FORM_OPTIONAL_FIELDS = ['specific_stream', 'specific_title',
-                    'agreement_with_terms_of_use']
+PARTNER_FORM_OPTIONAL_FIELDS = [SPECIFIC_STREAM, SPECIFIC_TITLE,
+                                AGREEMENT_WITH_TERMS_OF_USE]
 
 
 # ~~~~ Field information ~~~~ #
