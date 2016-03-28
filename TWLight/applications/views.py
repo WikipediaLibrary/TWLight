@@ -78,7 +78,8 @@ class RequestForApplicationView(FormView):
 class SubmitApplicationView(FormView):
     template_name = 'applications/apply.html'
     form_class = BaseApplicationForm
-    # define success_url or get_success_url
+
+    # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
 
     def dispatch(self, request, *args, **kwargs):
         if not 'applications_request__partner_ids' in request.session.keys():
@@ -91,6 +92,58 @@ class SubmitApplicationView(FormView):
 
         return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
 
+
+    def get_form(self, form_class):
+        """
+        We will dynamically construct a form which harvests exactly the
+        information needed for editors to request access to their desired set of
+        partner resources. (Most of the actual work of form construction happens
+        in applications/forms.py. This view figures out what data to pass to
+        the base form's constructor: which information the partners in this
+        application require.)
+
+        In particular:
+        * We don't ask for information that we can harvest from their user
+          profile.
+        * We will ask for optional information if and only if any of the
+          requested partners require it.
+        * We will ask for optional information once if it is the same for all
+          resources (e.g. full name), and once per partner if it differs (e.g.
+          specific title requested).
+
+        The goal is to reduce the user's data entry burden to the minimum
+        amount necessary for applications to be reviewed.
+        """
+
+        kwargs = self.get_form_kwargs()
+
+        field_params = {}
+        partners = self._get_partners()
+        user_fields = self._get_user_fields(partners)
+
+        field_params['user'] = user_fields
+
+        for partner in partners:
+            key = 'partner_{id}'.format(id=partner.id)
+            fields = self._get_partner_fields(partner)
+            field_params[key] = fields
+
+        kwargs['field_params'] = field_params
+
+        return form_class(**kwargs)
+
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS,
+            _('Your application has been submitted. A coordinator will review '
+              'it and get back to you. You can check the status of your '
+              'applications on this page at any time.'))
+        user_home = reverse('users:editor_detail',
+            kwargs={'pk': self.request.user.pk})
+        return HttpResponseRedirect(user_home)
+
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     def _get_partners(self):
         """
@@ -125,68 +178,3 @@ class SubmitApplicationView(FormView):
         return needed_fields
 
 
-    def get_context_data(self, **kwargs):
-        context = super(SubmitApplicationView, self).get_context_data(**kwargs)
-        print context
-        return context
-
-
-    def get_form(self, form_class):
-        """
-        We will dynamically construct a form which harvests exactly the
-        information needed for editors to request access to their desired set of
-        partner resources.
-
-        In particular:
-        * We don't ask for information that we can harvest from their user
-          profile.
-        * We will ask for optional information if and only if any of the
-          requested partners require it.
-        * We will ask for optional information once if it is the same for all
-          resources (e.g. full name), and once per partner if it differs (e.g.
-          specific title requested).
-
-        The goal is to reduce the user's data entry burden to the minimum
-        amount necessary for applications to be reviewed.
-        """
-
-        kwargs = self.get_form_kwargs()
-
-        field_params = {}
-        partners = self._get_partners()
-        user_fields = self._get_user_fields(partners)
-
-        field_params['user'] = user_fields
-
-        for partner in partners:
-            print dir(partner)
-            key = 'partner_{id}'.format(id=partner.id)
-            fields = self._get_partner_fields(partner)
-            field_params[key] = fields
-
-        kwargs['field_params'] = field_params
-
-        return form_class(**kwargs)
-
-
-    def post(self, request, *args, **kwargs):
-        # Write user form things to user data
-        # For each Partner, create and save an Application
-        partner_forms = self._get_partner_formset()
-        user_form = self._get_user_form()
-
-        if partner_forms.is_valid() and user_form.is_valid():
-            # do stuff
-            pass
-        else:
-            # do other stuff
-            pass
-
-        # Validate forms
-        # If invalid, return with errors
-        # If valid, then:
-        #   update user data
-        #   create an Application for each Partner/form
-        #   del session key
-        #   return to success page; should be user page with translatable message
-        pass

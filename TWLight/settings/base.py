@@ -39,7 +39,9 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
 )
 
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    'crispy_forms',
+)
 
 TWLIGHT_APPS = (
     'TWLight.users',
@@ -184,3 +186,5 @@ LOGGING = {
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
