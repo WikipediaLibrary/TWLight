@@ -140,8 +140,12 @@ class SubmitApplicationView(FormView):
               'applications on this page at any time.'))
         user_home = reverse('users:editor_detail',
             kwargs={'pk': self.request.user.pk})
-        return HttpResponseRedirect(user_home)
+        return user_home
 
+
+    def form_valid(self, form):
+        # and now it is time to do form processing
+        return super(SubmitApplicationView, self).form_valid(form)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
