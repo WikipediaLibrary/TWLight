@@ -45,14 +45,23 @@ class Editor(models.Model):
     class Meta:
         app_label = 'users'
 
-    # Internal data
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+    # Database recordkeeping.
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     last_updated = models.DateField(auto_now=True,
         help_text=_("When this information was last edited"))
     account_created = models.DateField(auto_now_add=True,
         help_text=_("When this information was first created"))
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~
+    # Fields we may, or may not, have collected in the course of applications
+    # for resource grants.
+    # **** SENSITIVE USER DATA AHOY. ****
+    real_name = models.CharField(max_length=128, blank=True)
+    country_of_residence = models.CharField(max_length=128, blank=True)
+    occupation = models.CharField(max_length=128, blank=True)
+    affiliation = models.CharField(max_length=128, blank=True)
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
     # Data are current *as of the time of TWLight signup* but may get out of
     # sync thereafter.

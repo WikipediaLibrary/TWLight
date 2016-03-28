@@ -133,6 +133,22 @@ class SubmitApplicationView(FormView):
         return form_class(**kwargs)
 
 
+    def get_initial(self):
+        """
+        If we already know the user's real name, etc., use that to prefill form
+        fields.
+        """
+        initial = super(SubmitApplicationView, self).get_initial()
+        editor = self.request.user.editor
+
+        # Our form might not actually have all these fields, but that's OK;
+        # unneeded initial data will be discarded.
+        for field in USER_FORM_FIELDS:
+            initial[field] = getattr(editor, field)
+
+        return initial
+
+
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
             _('Your application has been submitted. A coordinator will review '
@@ -144,7 +160,16 @@ class SubmitApplicationView(FormView):
 
 
     def form_valid(self, form):
-        # and now it is time to do form processing
+        # Add user data to user profile.
+        editor = self.request.user.editor
+        for field in USER_FORM_FIELDS:
+            if field in form.cleaned_data:
+                setattr(editor, field, form.cleaned_data[field])
+
+        editor.save()
+
+        # TODO raw IDs in the admin site
+        # Create an Application for each partner resource.
         return super(SubmitApplicationView, self).form_valid(form)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
