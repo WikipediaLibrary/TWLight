@@ -230,30 +230,20 @@ class BaseApplicationForm(forms.Form):
         partner_layout = Fieldset(
             _('Your application to {partner}').format(partner=partner_object))
 
-        # Some partners don't need any of the extra data, so the partner
-        # data list will be empty. In this case, don't bother validating
-        # the data, and build a minimal form section - just enough to tell
-        # the user we noticed they requested that partner.
-        if not partner_data:
-            msg = _(
-                '{partner} does not require any additional information.'
-            ).format(partner=partner_object)
+        self._validate_partner_data(partner_data)
 
-            partner_layout.append(Div(
-                HTML(msg),
-                css_class = 'col-xs-12 col-sm-8 col-sm-push-4 col-md-9 col-md-push-3'
-            ))
-        else:
-            self._validate_partner_data(partner_data)
+        # partner_data lists the optional fields required by that partner;
+        # base fields should be in the form for all partners.
+        all_partner_data = partner_data + PARTNER_FORM_BASE_FIELDS
 
-            for datum in partner_data:
-                # This will yield fields with names like 'partner_1_occupation'.
-                # This will let us tell during form processing which fields
-                # belong to which partners.
-                field_name = '{partner}_{datum}'.format(
-                    partner=partner, datum=datum)
-                self.fields[field_name] = FIELD_TYPES[datum]
-                self.fields[field_name].label = FIELD_LABELS[datum]
-                partner_layout.append(field_name)
+        for datum in all_partner_data:
+            # This will yield fields with names like 'partner_1_occupation'.
+            # This will let us tell during form processing which fields
+            # belong to which partners.
+            field_name = '{partner}_{datum}'.format(
+                partner=partner, datum=datum)
+            self.fields[field_name] = FIELD_TYPES[datum]
+            self.fields[field_name].label = FIELD_LABELS[datum]
+            partner_layout.append(field_name)
 
         self.helper.layout.append(partner_layout)

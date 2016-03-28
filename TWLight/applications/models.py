@@ -14,7 +14,7 @@ class Application(models.Model):
     partner = models.ForeignKey(Partner)
 
     rationale = models.TextField(blank=True)
-    title_requested = models.CharField(max_length=128, blank=True)
-    stream_requested = models.CharField(max_length=128, blank=True)
+    specific_title = models.CharField(max_length=128, blank=True)
+    specific_stream = models.CharField(max_length=128, blank=True)
     comments = models.TextField(blank=True)
-    agreement_with_terms = models.BooleanField(default=False)
+    agreement_with_terms_of_use = models.BooleanField(default=False)

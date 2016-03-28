@@ -9,12 +9,11 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.views.defaults import server_error
 from django.views.generic.edit import FormView
 
 from TWLight.resources.models import Partner
 
-from .forms import BaseApplicationForm, USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS
+from .forms import BaseApplicationForm, USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS, PARTNER_FORM_BASE_FIELDS
 from .models import Application
 
 
@@ -83,7 +82,9 @@ class SubmitApplicationView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         if not 'applications_request__partner_ids' in request.session.keys():
-            return server_error(request)
+            messages.add_message(request, messages.WARNING,
+                _('You must choose at least one resource you want access to before applying for access.'))
+            return HttpResponseRedirect(reverse('applications:request'))
 
         if len(request.session['applications_request__partner_ids']) == 0:
             messages.add_message(request, messages.WARNING,
@@ -169,7 +170,34 @@ class SubmitApplicationView(FormView):
         editor.save()
 
         # TODO raw IDs in the admin site
-        # Create an Application for each partner resource.
+
+        # Create an Application for each partner resource. Remember that the
+        # partner_id parameters were added as an attribute on the form during
+        # form __init__, so we have them available now; no need to re-process
+        # them out of our session data. They were also validated during form
+        # instantiation; we rely on that validation here.
+        partner_fields = PARTNER_FORM_BASE_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS
+        for partner in form.field_params:
+            partner_id = partner[8:]
+            partner_obj = Partner.objects.get(id=partner_id)
+
+            app = Application()
+            app.user = self.request.user
+            app.partner = partner_obj
+
+            for field in partner_fields:
+                label = '{partner}_{field}'.format(partner=partner, field=field)
+                data = getattr(form.cleaned_data, label, None)
+                if data:
+                    setattr(app, field, data)
+
+            app.save()
+            # TODO test suite should also ensure Application matches our single
+            # source of truth
+
+        # And clean up the session so as not to confuse future applications.
+        del self.request.session['applications_request__partner_ids']
+
         return super(SubmitApplicationView, self).form_valid(form)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
