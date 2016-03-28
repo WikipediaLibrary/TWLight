@@ -7,15 +7,14 @@ status.
 from django import forms
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.views.defaults import server_error
-from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
 from TWLight.resources.models import Partner
 
-from .forms import BaseUserAppForm, BasePartnerAppForm, USER_FORM_FIELDS
+from .forms import BaseApplicationForm, USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS
 from .models import Application
 
 
@@ -76,8 +75,10 @@ class RequestForApplicationView(FormView):
 
 
 
-class SubmitApplicationView(TemplateView):
+class SubmitApplicationView(FormView):
     template_name = 'applications/apply.html'
+    form_class = BaseApplicationForm
+    # define success_url or get_success_url
 
     def dispatch(self, request, *args, **kwargs):
         if not 'applications_request__partner_ids' in request.session.keys():
@@ -91,12 +92,6 @@ class SubmitApplicationView(TemplateView):
         return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
 
 
-    def get_context_data(self, **kwargs):
-        context = super(SubmitApplicationView, self).get_context_data(**kwargs)
-        context['user_form'], context['formset'] = self._get_forms()
-        return context
-
-
     def _get_partners(self):
         """
         Get the queryset of Partners with resources the user wants access to.
@@ -107,36 +102,38 @@ class SubmitApplicationView(TemplateView):
         return Partner.objects.filter(id__in=partner_ids)
 
 
-    def _get_partner_formset(self, partners=None):
-        PartnerFormSet = forms.formset_factory(BasePartnerAppForm,
-            extra=0)
-
-        if self.request.POST:
-            return PartnerFormSet(self.request.POST)
-        else:
-            return PartnerFormSet(initial=[{'partner': x} for x in partners])
-
-
-    def _get_user_form(self, partners=None):
-        # Set up form to harvest user data. It will only ask for data required
-        # by at least one Partner.
-        # TODO: single-source-of-truth the USER_FORM_FIELDS via your test suite
-        # TODO: use profile data to supply form.initial
-        if self.request.POST:
-            return BaseUserAppForm(self.request.POST)
-        else:
-            fields_to_remove = []
-            for field in USER_FORM_FIELDS:
-                query = {'{field}'.format(field=field): True}
-                if not partners.filter(**query).count():
-                    fields_to_remove.append(field)
-
-            return BaseUserAppForm(fields_to_remove)
-
-
-    def _get_forms(self):
+    def _get_partner_fields(self, partner):
         """
-        We will dynamically construct a set of forms which harvest exactly the
+        Return a list of the partner-specific data fields required by the given
+        Partner.
+        """
+        return [field for field in PARTNER_FORM_OPTIONAL_FIELDS
+                if getattr(partner, field)]
+
+
+    def _get_user_fields(self, partners=None):
+        """
+        Return a list of user-specific data fields required by at least one
+        Partner to whom the user is requesting access.
+        """
+        needed_fields = []
+        for field in USER_FORM_FIELDS:
+            query = {'{field}'.format(field=field): True}
+            if partners.filter(**query).count():
+                needed_fields.append(field)
+
+        return needed_fields
+
+
+    def get_context_data(self, **kwargs):
+        context = super(SubmitApplicationView, self).get_context_data(**kwargs)
+        print context
+        return context
+
+
+    def get_form(self, form_class):
+        """
+        We will dynamically construct a form which harvests exactly the
         information needed for editors to request access to their desired set of
         partner resources.
 
@@ -153,20 +150,23 @@ class SubmitApplicationView(TemplateView):
         amount necessary for applications to be reviewed.
         """
 
-        # create base application form for each partner
-        # construct list of forms
-        # in the template we will iterate over all of these
+        kwargs = self.get_form_kwargs()
+
+        field_params = {}
         partners = self._get_partners()
+        user_fields = self._get_user_fields(partners)
 
-        user_form = self._get_user_form(partners)
-        partner_forms = self._get_partner_formset(partners)
+        field_params['user'] = user_fields
 
-        # TODO: implement mutually_exclusive Partner behavior
-        # TODO: single-source-of-truth the PARTNER_FORM_FIELDS
-        # TODO: make sure the forms works when an initial partner isn't supplied,
-        # or else is disallowed
+        for partner in partners:
+            print dir(partner)
+            key = 'partner_{id}'.format(id=partner.id)
+            fields = self._get_partner_fields(partner)
+            field_params[key] = fields
 
-        return user_form, partner_forms
+        kwargs['field_params'] = field_params
+
+        return form_class(**kwargs)
 
 
     def post(self, request, *args, **kwargs):

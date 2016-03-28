@@ -3,13 +3,8 @@
 {% block content %}
 <form method="post">
   {% csrf_token %}
-  {{ user_form.as_p }}
+  {{ form.as_p }}
 
-  {{ formset.management_form }}
-  {% for form in formset %}
-    <legend>{{ form.initial.partner }}</legend>
-    {{ form.as_p }}
-  {% endfor %}
   <input type="submit" value="submit">
 </form>
 {% endblock content %}

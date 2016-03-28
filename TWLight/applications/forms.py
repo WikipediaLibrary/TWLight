@@ -9,86 +9,165 @@ only want to ask them once for any piece of data even if multiple partners
 require it, and we *don't* want to ask them for data that *isn't* required by
 any of the partners in their set.
 
-These base forms contain *all* the data that an application might conceivably
-require. In views.py, we'll hide the ones not needed for any particular
-access grant request, and require. This is easier and more readable than constructing them on
-the fly.
+This means that the actual form we present to users must be generated
+dynamically; we cannot hardcode it here. What we have here instead is a base
+form that takes a dict of required fields, and constructs the form accordingly.
+(See the docstring of BaseApplicationForm for the expected dict format.)
 """
+
+import logging
+import re
 
 from django import forms
 
 from TWLight.resources.models import Partner
 
+
+logger = logging.getLogger(__name__)
+
+
+# ~~~~~~ move these to helpers.py once you've got your head around them ~~~~~~ #
+
+# ~~~~~ Named constants ~~~~~ #
+REAL_NAME = 'real_name'
+COUNTRY_OF_RESIDENCE = 'country_of_residence'
+OCCUPATION = 'occupation'
+AFFILIATION = 'affiliation'
+PARTNER = 'partner'
+RATIONALE = 'rationale'
+SPECIFIC_STREAM = 'specific_stream'
+SPECIFIC_TITLE = 'specific_title'
+COMMENTS = 'comments'
+AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
+
+
+# ~~~~ Basic field names ~~~~ #
 USER_FORM_FIELDS = ['real_name', 'country_of_residence', 'occupation',
                     'affiliation']
 
-PARTNER_FORM_FIELDS = ['specific_stream', 'specific_title',
-                       'agreement_with_terms_of_use']
+# These fields are displayed for all partners.
+PARTNER_FORM_BASE_FIELDS = ['rationale', 'comments']
+
+# These fields are displayed only when a specific partner requires that
+# information.
+PARTNER_FORM_OPTIONAL_FIELDS = ['specific_stream', 'specific_title',
+                    'agreement_with_terms_of_use']
 
 
-class BaseUserAppForm(forms.Form):
+# ~~~~~~ Field types ~~~~~~ #
+FIELD_TYPES = {
+    REAL_NAME: forms.CharField(max_length=128),
+    COUNTRY_OF_RESIDENCE: forms.CharField(max_length=128),
+    OCCUPATION: forms.CharField(max_length=128),
+    AFFILIATION: forms.CharField(max_length=128),
+    PARTNER: forms.ModelChoiceField(
+        queryset=Partner.objects.all(),
+        widget=forms.HiddenInput),
+    RATIONALE: forms.CharField(widget=forms.Textarea),
+    SPECIFIC_STREAM: forms.CharField(max_length=128),
+    SPECIFIC_TITLE: forms.CharField(max_length=128),
+    COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
+    AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(required=False),
+}
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+class BaseApplicationForm(forms.Form):
     """
-    The BaseApplicationUserForm contains all possible user-data-related fields
-    that an Application might need. You can delete any fields that are unneeded
-    for a given Application by passing a fields_to_remove list into the
-    constructor.
+    Given a dict of parameters describing the required fields for this
+    application, constructs a suitable application form.
 
-    For this reason, blank=True is not supplied; we don't want to have any
-    optional fields, since the view is expected to present only the fields
-    required for its Application.
+    Expected dict format:
+        {
+            'user': [list, of, required, user, data, fields],
+            'partner_1': [list, of, required, fields, for, partner, 1],
+            'partner_2': [list, of, required, fields, for, partner, 2],
+            (additional partners as needed)
+        }
 
-    Note: BooleanFields have required=False because otherwise Django will
-    (foolishly) reject unchecked fields rather than interpreting them as
-    False.
-    """
-
-    def __init__(self, fields_to_remove=None, *args, **kwargs):
-        """
-        Sets up form, then removes any fields that are unneeded for this
-        instance.
-        """
-        super(BaseUserAppForm, self).__init__(*args, **kwargs)
-        for field in fields_to_remove:
-            del self.fields[field]
-
-    real_name = forms.CharField(max_length=128)
-    country_of_residence = forms.CharField(max_length=128)
-    occupation = forms.CharField(max_length=128)
-    affiliation = forms.CharField(max_length=128)
-
-
-
-class BasePartnerAppForm(forms.Form):
-    """
-    As BaseApplicationUserForm, but for data that adheres to individual partner
-    requests.
-
-    We separate the forms because we will only ever need one
-    BaseApplicationUserForm per request (as there is only one user to harvest
-    data from), but different partners may want different information.
-    Furthermore, even where partners want the same fields, the data in those
-    fields will differ (you cannot have one checkbox governing agreement with
-    two different entities' terms of use; you cannot expect the title being
-    requested from each partner to be the same; etc.)
+    'user' is mandatory. 'partner_1' is mandatory. Additional partners are
+    optional.
     """
     def __init__(self, *args, **kwargs):
-        """
-        Sets up form; then, if a partner has been provided, removes any fields
-        not required by that partner.
-        """
-        super(BasePartnerAppForm, self).__init__(*args, **kwargs)
-        if 'partner' in self.initial.keys():
-            partner = self.initial['partner']
-            for field in PARTNER_FORM_FIELDS:
-                if not getattr(partner, field):
-                    del self.fields[field]
+        self._validate_parameters(**kwargs)
+        field_params = kwargs.pop('field_params')
+
+        super(BaseApplicationForm, self).__init__(*args, **kwargs)
+
+        user_data = field_params.pop('user')
+        self._validate_user_data(user_data)
+
+        for datum in user_data:
+            self.fields[datum] = FIELD_TYPES[datum]
+
+        for partner in field_params:
+            partner_data = field_params[partner]
+            self._validate_partner_data(partner, partner_data)
+
+            for datum in partner_data:
+                # This will yield fields with names like 'partner_1_occupation'.
+                # This will let us tell during form processing which fields
+                # belong to which partners.
+                self.fields['{partner}_{datum}'.format(
+                    partner=partner, datum=datum)] = FIELD_TYPES[datum]
 
 
-    partner = forms.ModelChoiceField(
-        queryset=Partner.objects.all(),
-        widget=forms.HiddenInput)
-    rationale = forms.CharField(widget=forms.Textarea)
-    specific_stream = forms.CharField(max_length=128)
-    specific_title = forms.CharField(max_length=128)
-    comments = forms.CharField(widget=forms.Textarea, required=False)
-    agreement_with_terms_of_use = forms.BooleanField(required=False)
+    def _validate_parameters(self, **kwargs):
+        """
+        Ensure that parameters have been passed in and match the format
+        specified in the docstring.
+        """
+        try:
+            field_params = kwargs['field_params']
+        except KeyError:
+            logger.exception('Tried to instantiate a BaseApplicationForm but '
+                'did not have field_params')
+            raise
+
+        try:
+            assert 'user' in field_params
+        except AssertionError:
+            logger.exception('Tried to instantiate a BaseApplicationForm but '
+                'there was no user parameter in field_params')
+            raise
+
+        try:
+            # We should have 'user' plus at least one partner in the keys.
+            assert len(field_params.keys()) >= 2
+        except AssertionError:
+            logger.exception('Tried to instantiate a BaseApplicationForm but '
+                'there was not enough information in field_params')
+            raise
+
+        expected = re.compile(r'partner_\d+')
+
+        for key in field_params.keys():
+            # All keys which are not the user data should be partner data.
+            if key != 'user':
+                try:
+                    assert expected.match(key)
+                except AssertionError:
+                    logger.exception('Tried to instantiate a BaseApplicationForm but '
+                        'there was a key that did not match any expected values')
+
+
+    def _validate_user_data(self, user_data):
+        try:
+            assert (set(user_data) <= set(USER_FORM_FIELDS))
+        except AssertionError:
+            logger.exception('BaseApplicationForm received invalid user data')
+            raise
+
+
+    def _validate_partner_data(self, partner, partner_data):
+        try:
+            assert (set(partner_data) <= set(PARTNER_FORM_OPTIONAL_FIELDS))
+
+            # Extract the number component of (e.g.) 'partner_1'.
+            partner_id = partner[8:]
+
+            # Verify that it is the ID number of a real partner.
+            partner = Partner.objects.get(id=partner_id)
+        except (AssertionError, Partner.DoesNotExist):
+            logger.exception('BaseApplicationForm received invalid partner data')
+            raise
