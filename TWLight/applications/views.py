@@ -4,12 +4,16 @@ Views for managing applications for resource grants go here.
 Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
 from django import forms
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.views.generic.edit import FormView
+from django.views.generic.list import ListView
+from django.views.generic.edit import FormView, UpdateView
 
 from TWLight.resources.models import Partner
 
@@ -17,7 +21,7 @@ from .forms import BaseApplicationForm, USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_
 from .models import Application
 
 
-class RequestForApplicationView(FormView):
+class RequestApplicationView(FormView):
     template_name = 'applications/request_for_application.html'
 
     def get_form_class(self):
@@ -184,6 +188,7 @@ class SubmitApplicationView(FormView):
             app = Application()
             app.user = self.request.user
             app.partner = partner_obj
+            # Status will be set to PENDING by default.
 
             for field in partner_fields:
                 label = '{partner}_{field}'.format(partner=partner, field=field)
@@ -241,3 +246,50 @@ class SubmitApplicationView(FormView):
         return needed_fields
 
 
+
+class ListApplicationsView(ListView):
+    model = Application
+
+
+class EvaluateApplicationView(UpdateView):
+    """
+    Allows Coordinators to:
+    * view applications
+    * view associated editor metadata
+    * assign status
+
+    TODO: let them add questions/comments and figure out how to communicate those
+    TODO: access control to just Coordinators
+    TODO: internationalize form labels
+    """
+    model = Application
+    fields = ['status']
+    template_name_suffix = '_evaluation_form'
+    success_url = reverse_lazy('applications:list')
+
+
+    def get_context_data(self, **kwargs):
+        context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
+        context['editor'] = self.object.user.editor
+        return context
+
+    def get_form(self, form_class):
+        form = super(EvaluateApplicationView, self).get_form(form_class)
+
+        form.helper = FormHelper()
+        form.helper.add_input(Submit(
+            'submit',
+            _('Set application status'),
+            css_class='center-block'))
+
+        return form
+
+# Application evaluation workflow needs...
+# listview: all open applications. filterable by user, status - check milestones/desiderata
+# evaluation view: app details, user details, status-setting form
+# add reversion - how should it be displayed? do I want to track who made changes?
+# ~~add status field - what are the options?~~
+# add section to user page where they can see application statuses
+# Remove coordinator class, add coordinator group, add access limits
+# do I want any kind of locking on application evaluation, so two people don't
+# review/edit the same app at once? or assignment?

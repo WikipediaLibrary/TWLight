@@ -8,8 +8,20 @@ class Application(models.Model):
     class Meta:
         app_label = 'applications'
 
-    # status goes here
-    # versioning needs to happen
+    PENDING = 0
+    QUESTION = 1
+    APPROVED = 2
+    NOT_APPROVED = 3
+
+    STATUS_CHOICES = (
+        (PENDING, 'Pending'),
+        (QUESTION, 'Question'),
+        (APPROVED, 'Approved'),
+        (NOT_APPROVED, 'Not approved'),
+    )
+
+    status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
+
     user = models.ForeignKey(User)
     partner = models.ForeignKey(Partner)
 

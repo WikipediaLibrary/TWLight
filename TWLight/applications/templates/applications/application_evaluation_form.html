@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h1>{% trans 'Evaluate application' %}</h1>
+
+  {% crispy form %}
+
+  <h2>{% trans 'Application' %}</h2>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Status' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.get_status_display }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Partner' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.partner }}
+    </div>
+
+    {% if object.specific_stream %}
+      <div class="col-xs-12 col-sm-4">
+        <strong>{% trans 'Collection requested' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ object.specific_stream }}
+      </div>
+    {% endif %}
+
+    {% if object.specific_title %}
+      <div class="col-xs-12 col-sm-4">
+        <strong>{% trans 'Title requested' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ object.specific_title }}
+      </div>
+    {% endif %}
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Why the editor wants access' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {% if object.rationale %}
+        {{ object.rationale }}
+      {% else %}
+        {% trans 'Not stated' %}
+      {% endif %}
+    </div>
+
+    {% if object.comments %}
+      <div class="col-xs-12 col-sm-4">
+        <strong>{% trans 'Extra comments from the editor' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ object.comments }}
+      </div>
+    {% endif %}    
+  </div>
+
+  <h2>{% trans 'User' %}</h2>
+
+  {% include 'users/editor_detail_data.html' %}
+
+{% endblock %}

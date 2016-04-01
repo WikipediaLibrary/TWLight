@@ -20,78 +20,7 @@
     {% endblocktrans %}
   </p>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia username *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_username }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia user ID *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_sub }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Home wiki" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.home_wiki }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia edit count *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_editcount }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Date registered on Wikipedia *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_registered }}
-    </div>
-
-    {% comment %}
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia groups *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {% for group in editor.wp_groups %}
-        {{ group }} <br />
-      {% endfor %}
-    </div>
-    {% endcomment %}
-
-    {% comment %}
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia user rights *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {% for right in editor.wp_rights %}
-        {{ right }} <br />
-      {% endfor %}
-    </div>
-    {% endcomment %}
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Contributions" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.contributions }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Email" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.email }}
-    </div>
-  </div>
+  {% include 'users/editor_detail_data.html' %}
 
   <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
