@@ -1,0 +1,9 @@
+{% load i18n %}
+
+  <ul class="list-unstyled">
+    {% for app in object_list %}
+      <li><span class="label label{{ app.get_bootstrap_class }}">{{ app.get_status_display }}</span> <a href="{{ app.get_absolute_url }}">{{ app }}</a></li>
+    {% empty %}
+      <li>{% trans 'None yet.' %}</li>
+    {% endfor %}      
+  </ul>

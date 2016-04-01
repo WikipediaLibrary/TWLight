@@ -2,8 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-  <h1>{% trans 'List of applications' %}</h1>
+  <h1>{{ title }}</h1>
 
-  Apps will go here.
+  <p>
+    {{ intro_text | safe }}
+  </p>
 
+  {% include 'applications/application_list_include.html' %}
 {% endblock %}

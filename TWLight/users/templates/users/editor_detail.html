@@ -6,21 +6,26 @@
   <h1>{% trans "Editor profile information" %}</h1>
 
   <p>
-    {% blocktrans with account_created=editor.account_created|localize %}
+    {% blocktrans with account_created_date=editor.account_created|localize %}
       Information with an * was harvested from Wikipedia directly.
-      It was current as of {{ account_created }}.
+      It was current as of {{ account_created_date }}.
       Changes made on Wikipedia since that time have not been reflected here.
     {% endblocktrans %}
   </p>
   <p>
-    {% blocktrans with last_updated=editor.last_updated|localize %}
+    {% blocktrans with last_updated_date=editor.last_updated|localize %}
       Other information was entered directly by users or site admins,
       in their preferred language.
-      It was last edited on {{ last_updated }}.
+      It was last edited on {{ last_updated_date }}.
     {% endblocktrans %}
   </p>
 
+  <h2>{% trans 'Editor data' %}</h2>
   {% include 'users/editor_detail_data.html' %}
+
+  <h2>{% trans 'Editor application history' %}</h2>
+
+  {% include 'applications/application_list_include.html' %}
 
   <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1">

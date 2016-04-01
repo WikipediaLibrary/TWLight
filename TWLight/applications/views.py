@@ -250,6 +250,90 @@ class SubmitApplicationView(FormView):
 class ListApplicationsView(ListView):
     model = Application
 
+    def get_queryset(self):
+        """
+        List only the open applications: that makes this page useful as a
+        reviewer queue. Approved and rejected applications should be listed
+        elsewhere: kept around for historical reasons, but kept off the main
+        page to preserve utility (and limit load time).
+        """
+        return Application.objects.filter(
+                status__in=[Application.PENDING, Application.QUESTION]
+             ).order_by('status', 'partner')
+
+
+    def get_context_data(self, **kwargs):
+        context = super(ListApplicationsView, self).get_context_data(**kwargs)
+
+        context['title'] = _('Queue of applications to review')
+
+        approved_url = reverse_lazy('applications:list_approved')
+        rejected_url = reverse_lazy('applications:list_rejected')
+        context['intro_text'] = _("""
+          This page lists only applications that still need to be reviewed.
+          You may also consult <a href="{approved_url}">approved</a> and
+          <a href="{rejected_url}">rejected</a> applications. 
+        """).format(approved_url=approved_url, rejected_url=rejected_url)
+
+        return context
+
+
+class ListApprovedApplicationsView(ListView):
+    model = Application
+
+    def get_queryset(self):
+        return Application.objects.filter(
+                status=Application.APPROVED
+             ).order_by('user', 'partner')
+
+
+    def get_context_data(self, **kwargs):
+        context = super(ListApprovedApplicationsView, self).get_context_data(**kwargs)
+
+        context['title'] = _('Approved applications')
+
+        open_url = reverse_lazy('applications:list')
+        rejected_url = reverse_lazy('applications:list_rejected')
+        context['intro_text'] = _("""
+          This page lists only applications that have been approved.
+          You may also consult <a href="{open_url}">pending or
+          under-discussion</a> and <a href="{rejected_url}">rejected</a>
+          applications. 
+        """).format(open_url=open_url, rejected_url=rejected_url)
+
+        return context
+
+    # TODO: paginate
+
+
+
+class ListRejectedApplicationsView(ListView):
+    model = Application
+
+    def get_queryset(self):
+        return Application.objects.filter(
+                status=Application.NOT_APPROVED
+             ).order_by('user', 'partner')
+
+
+    def get_context_data(self, **kwargs):
+        context = super(ListRejectedApplicationsView, self).get_context_data(**kwargs)
+
+        context['title'] = _('Rejected applications')
+
+        open_url = reverse_lazy('applications:list')
+        approved_url = reverse_lazy('applications:list_approved')
+        context['intro_text'] = _("""
+          This page lists only applications have been rejected.
+          You may also consult <a href="{open_url}">pending or
+          under-discussion</a> and <a href="{approved_url}">approved</a>
+          applications. 
+        """).format(open_url=open_url, approved_url=approved_url)
+
+        return context
+
+    # TODO: paginate
+
 
 class EvaluateApplicationView(UpdateView):
     """
@@ -285,11 +369,18 @@ class EvaluateApplicationView(UpdateView):
         return form
 
 # Application evaluation workflow needs...
-# listview: all open applications. filterable by user, status - check milestones/desiderata
-# evaluation view: app details, user details, status-setting form
+# ~~listview: all open applications.~~ filterable by user, status - check milestones/desiderata
+# ~~evaluation view: app details, user details, status-setting form~~
 # add reversion - how should it be displayed? do I want to track who made changes?
 # ~~add status field - what are the options?~~
-# add section to user page where they can see application statuses
+# ~~add section to user page where they can see application statuses~~
 # Remove coordinator class, add coordinator group, add access limits
 # do I want any kind of locking on application evaluation, so two people don't
 # review/edit the same app at once? or assignment?
+# Comments - check the scope, and then if at all possible attach comments to
+# app reviews so that whichever reviewer is on it can see the history. and
+# notify people that they have comments (either via email or via wikimedia edit API on the talk page).
+# Be really transparent about who can see which page.
+# make sure people cannot set status on their own apps, even if they are coordinators
+# make sure people CAN see/comment on their apps
+

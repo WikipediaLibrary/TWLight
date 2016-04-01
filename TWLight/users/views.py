@@ -17,4 +17,5 @@ class EditorDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         context['editor'] = self.get_object().editor
+        context['object_list'] = self.get_object().applications.all().order_by('status')
         return context

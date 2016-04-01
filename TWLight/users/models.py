@@ -128,3 +128,8 @@ class Editor(models.Model):
             user=self
         )
         return url
+
+
+    def __str__(self):
+        return self.wp_username
+
