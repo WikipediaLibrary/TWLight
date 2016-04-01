@@ -187,7 +187,13 @@ class SubmitApplicationView(FormView):
 
             for field in partner_fields:
                 label = '{partner}_{field}'.format(partner=partner, field=field)
-                data = getattr(form.cleaned_data, label, None)
+
+                try:
+                    data = form.cleaned_data[label]
+                except KeyError:
+                    # Not all forms require all fields, and that's OK.
+                    pass
+
                 if data:
                     setattr(app, field, data)
 
