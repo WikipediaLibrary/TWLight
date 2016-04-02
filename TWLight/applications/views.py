@@ -21,6 +21,9 @@ from .forms import BaseApplicationForm, USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_
 from .models import Application
 
 
+PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
+
+
 class RequestApplicationView(FormView):
     template_name = 'applications/request_for_application.html'
 
@@ -50,16 +53,6 @@ class RequestApplicationView(FormView):
         When users submit a valid request, construct a stub application and
         redirect users to the page where they fill it out.
         """
-
-        """
-        --> important <--
-        this is now out of sync with your models
-        you actually want to persist data to the session (sigh) with partner ids
-
-        then you want to construct Applications as needed in the next view
-
-        and construct your form accordingly
-        """
         # Get the IDs of the partner resources they want to apply for.
         # Because we had to prepend some text to the ID in get_form_class,
         # make sure to strip it off here, so we're left with just the ID for
@@ -68,7 +61,7 @@ class RequestApplicationView(FormView):
         partner_ids = [int(key[8:]) for key in form.cleaned_data
                        if form.cleaned_data[key]]
 
-        self.request.session['applications_request__partner_ids'] = partner_ids
+        self.request.session[PARTNERS_SESSION_KEY] = partner_ids
 
         return HttpResponseRedirect(reverse('applications:apply'))
 
@@ -85,12 +78,12 @@ class SubmitApplicationView(FormView):
     # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
 
     def dispatch(self, request, *args, **kwargs):
-        if not 'applications_request__partner_ids' in request.session.keys():
+        if not PARTNERS_SESSION_KEY in request.session.keys():
             messages.add_message(request, messages.WARNING,
                 _('You must choose at least one resource you want access to before applying for access.'))
             return HttpResponseRedirect(reverse('applications:request'))
 
-        if len(request.session['applications_request__partner_ids']) == 0:
+        if len(request.session[PARTNERS_SESSION_KEY]) == 0:
             messages.add_message(request, messages.WARNING,
                 _('You must choose at least one resource you want access to before applying for access.'))
             return HttpResponseRedirect(reverse('applications:request'))
@@ -173,8 +166,6 @@ class SubmitApplicationView(FormView):
 
         editor.save()
 
-        # TODO raw IDs in the admin site
-
         # Create an Application for each partner resource. Remember that the
         # partner_id parameters were added as an attribute on the form during
         # form __init__, so we have them available now; no need to re-process
@@ -207,7 +198,7 @@ class SubmitApplicationView(FormView):
             # source of truth
 
         # And clean up the session so as not to confuse future applications.
-        del self.request.session['applications_request__partner_ids']
+        del self.request.session[PARTNERS_SESSION_KEY]
 
         return super(SubmitApplicationView, self).form_valid(form)
 
@@ -219,7 +210,7 @@ class SubmitApplicationView(FormView):
         These partners were specified in RequestForApplicationView.
         """
         # This key is guaranteed by dispatch() to exist and be nonempty.
-        partner_ids = self.request.session['applications_request__partner_ids']
+        partner_ids = self.request.session[PARTNERS_SESSION_KEY]
         return Partner.objects.filter(id__in=partner_ids)
 
 
@@ -276,6 +267,7 @@ class ListApplicationsView(ListView):
         """).format(approved_url=approved_url, rejected_url=rejected_url)
 
         return context
+
 
 
 class ListApprovedApplicationsView(ListView):
@@ -335,6 +327,7 @@ class ListRejectedApplicationsView(ListView):
     # TODO: paginate
 
 
+
 class EvaluateApplicationView(UpdateView):
     """
     Allows Coordinators to:
@@ -374,7 +367,7 @@ class EvaluateApplicationView(UpdateView):
 # add reversion - how should it be displayed? do I want to track who made changes?
 # ~~add status field - what are the options?~~
 # ~~add section to user page where they can see application statuses~~
-# Remove coordinator class, add coordinator group, add access limits
+# ~~Remove coordinator class,~~ add coordinator group, add access limits
 # do I want any kind of locking on application evaluation, so two people don't
 # review/edit the same app at once? or assignment?
 # Comments - check the scope, and then if at all possible attach comments to
@@ -383,4 +376,3 @@ class EvaluateApplicationView(UpdateView):
 # Be really transparent about who can see which page.
 # make sure people cannot set status on their own apps, even if they are coordinators
 # make sure people CAN see/comment on their apps
-

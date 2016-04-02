@@ -2,6 +2,7 @@ defusedxml==0.4.1
 Django==1.7.7
 django-braces==1.4.0
 django-crispy-forms==1.4.0
+factory_boy==2.4.1
 jsonfield==0.9.13
 oauthlib==0.6.3
 python-openid==2.2.5

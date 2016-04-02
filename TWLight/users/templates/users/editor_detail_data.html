@@ -5,7 +5,7 @@
       <strong>{% trans "Wikipedia username *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_username }}
+      <a href="{{ editor.wp_user_page_url }}">{{ editor.wp_username }}</a>
     </div>
 
     <div class="col-xs-12 col-sm-4">
@@ -19,7 +19,7 @@
       <strong>{% trans "Home wiki" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ editor.home_wiki }}
+      {{ editor.get_home_wiki_display }}
     </div>
 
     <div class="col-xs-12 col-sm-4">

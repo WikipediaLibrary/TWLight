@@ -2,7 +2,7 @@
 This file holds user profile information. (The base User model is part of
 Django; profiles extend that with locally useful information.)
 
-TWLight has three user classes:
+TWLight has three user types:
 * editors
 * coordinators
 * site administrators.
@@ -12,26 +12,19 @@ grants. We track some of their data here to facilitate access grant
 decisions.
 
 _Coordinators_ are the Wikipedians who have responsibility for evaluating
-and deciding on access grants. Site administrators should designate
-coordinators through the Django admin site. Right now the only thing we
-need to track about coordinators is the fact that they ARE coordinators,
-but a class is provided in anticipation of future need.
+and deciding on access grants. Site administrators should add editors to the
+Coordinators group through the Django admin site.
 
 _Site administrators_ have admin privileges for this site. They have no special
 handling in this file; they are handled through the native Django is_admin
 flag, and site administrators have responsibility for designating who has that
-flag through the admin interface.
-
-We don't actually need to track editor data for coordinators or site admins,
-although in practice we probably will, if they create accounts through the
-public signup process.
-
-This file is for defining information we need to track about each user class.
-The groups themselves are defined in groups.py.
+flag through the admin site.
 
 New users who sign up via oauth will be created as editors. Site administrators
-must define coordinators manually in the Django admin site, by adding them to
-the coordinators group.
+may promote them to coordinators manually in the Django admin site, by adding
+them to the coordinators group. They can also directly create Django user
+accounts without attached Editors in the admin site, if for some reason it's
+useful to have account holders without attached Wikipedia data.
 """
 import json
 
@@ -106,10 +99,17 @@ class Editor(models.Model):
 
 
     @property
+    def wp_user_page_url(self):
+        url = 'https://{home_wiki_link}/wiki/User:{user.wp_username}'.format(
+            home_wiki_link=self.get_home_wiki_display(), user=self)
+        return url
+
+    @property
     def wp_link_edit_count(self):
-        url = '{base_url}?user={user.wp_username}&project={user.home_wiki}'.format(
+        url = '{base_url}?user={user.wp_username}&project={home_wiki_link}'.format(
             base_url='https://tools.wmflabs.org/xtools-ec/',
-            user=self
+            user=self,
+            home_wiki_link=self.get_home_wiki_display()
         )
         return url
 
@@ -123,9 +123,10 @@ class Editor(models.Model):
 
     @property
     def wp_link_pages_created(self):
-        url = '{base_url}?user={user.username}&project={user.home_wiki}&namespace=all&redirects=none'.format(
+        url = '{base_url}?user={user.username}&project={home_wiki_link}&namespace=all&redirects=none'.format(
             base_url='https://tools.wmflabs.org/xtools/pages/index.php',
-            user=self
+            user=self,
+            home_wiki_link=self.get_home_wiki_display()
         )
         return url
 
