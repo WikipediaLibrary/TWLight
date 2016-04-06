@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.forms.fields import BooleanField
+from django.db import models
 from django.test import TestCase, Client, RequestFactory
 
 from TWLight.resources.models import Partner, Stream
@@ -12,14 +13,11 @@ from TWLight.users.factories import EditorFactory
 from TWLight.users.models import Editor
 
 from . import views
-from .helpers import USER_FORM_FIELDS
+from .helpers import USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS, FIELD_TYPES
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
-"""
-totally test that resources.models.Partner, applications.models.Application,
-and applications.helpers are in sync.
-"""
+
 
 class SynchronizeFieldsTest(TestCase):
     """
@@ -60,14 +58,108 @@ class SynchronizeFieldsTest(TestCase):
     ensures that all of those places are kept in sync - that is, that we update
     all the things we need to update, if we update any of them.
 
+    Note: the Django _meta API changes in 1.8 and this code will need
+    to be updated accordingly if TWLight is upgraded to 1.8.
+
     # TODO top-level docs with update instructions for future-us
-    # TODO actually write this test
     """
 
     def test_user_form_fields_reflected_in_partner(self):
+        """
+        The Partner model should let each instance indicate whether it requires
+        the optional user data.
+        """
         for field in USER_FORM_FIELDS:
-            self.assertTrue(hasattr(Partner, field))
-            print Partner._meta.get_field(field)
+            self.assertTrue(field in Partner._meta.get_all_field_names())
+
+
+    def test_optional_partner_form_fields_reflected_in_partner(self):
+        """
+        The Partner model should let each instance indicate whether it requires
+        the optional partner data.
+        """
+        for field in PARTNER_FORM_OPTIONAL_FIELDS:
+            self.assertTrue(field in Partner._meta.get_all_field_names())
+
+
+    def test_partner_optional_fields_are_boolean(self):
+        """
+        The optional user and partner data fields on Partner should be
+        booleans, allowing each instance to indicate whether (True/False) it
+        requires that data.
+        """
+        optional_fields = USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS
+        for field in optional_fields:
+            self.assertTrue(
+                isinstance(Partner._meta.get_field(field),
+                    models.BooleanField))
+
+
+    def test_optional_partner_form_fields_reflected_in_application(self):
+        """
+        The Application model should let each instance record the optional
+        partner data, as needed.
+        """
+        for field in PARTNER_FORM_OPTIONAL_FIELDS:
+            self.assertTrue(field in Application._meta.get_all_field_names())
+
+
+    def test_application_optional_fields_match_field_type(self):
+        """
+        The optional partner-specific data fields on Application should
+        correspond to the FIELD_TYPES used on the form. Additionally, each
+        should allow blank=True (since not all instances require all data),
+        except for BooleanFields, which should default False (i.e. they should
+        default to not requiring the data).
+        """
+        for field in PARTNER_FORM_OPTIONAL_FIELDS:
+            # Ensure Application fields allow for empty data.
+            if not isinstance(Application._meta.get_field(field),
+                    models.BooleanField):
+                self.assertTrue(Application._meta.get_field(field).blank)
+            else:
+                self.assertFalse(Application._meta.get_field(field).default)
+
+            # Make sure the form fields we're using match what the model fields
+            # can record.
+            modelfield = Application._meta.get_field(field)
+            formfield = modelfield.formfield()
+
+            self.assertEqual(type(formfield), type(FIELD_TYPES[field]))
+
+
+    def test_user_form_fields_reflected_in_editor(self):
+        """
+        The Editor model should let each instance record the user data, as
+        needed.
+        """
+        for field in USER_FORM_FIELDS:
+            self.assertTrue(field in Editor._meta.get_all_field_names())
+
+
+    def test_editor_optional_fields_match_field_type(self):
+        """
+        The optional user data fields on Editor should correspond to the
+        FIELD_TYPES used on the application form. Additionally, each should
+        allow blank=True (since not all instances require all data), except for
+        BooleanFields, which should default False (i.e. they should default to
+        not requiring the data).
+        """
+        for field in USER_FORM_FIELDS:
+            # Ensure Editor fields allow for empty data.
+            if not isinstance(Editor._meta.get_field(field),
+                    models.BooleanField):
+                self.assertTrue(Editor._meta.get_field(field).blank)
+            else:
+                self.assertFalse(Editor._meta.get_field(field).default)
+
+            # Make sure the form fields we're using match what the model fields
+            # can record.
+            modelfield = Editor._meta.get_field(field)
+            formfield = modelfield.formfield()
+
+            self.assertEqual(type(formfield), type(FIELD_TYPES[field]))
+
 
 
 class BaseApplicationViewTest(TestCase):
@@ -174,7 +266,7 @@ class RequestApplicationTest(BaseApplicationViewTest):
 
         fieldkey = 'partner_{id}'.format(id=partner.id)
         self.assertIn(fieldkey, form.fields)
-        assert isinstance(form.fields[fieldkey], BooleanField)
+        assert isinstance(form.fields[fieldkey], forms.BooleanField)
 
         # Add Partners and seee how many form fields there are. We'll assume
         # that they're all of the correct type, having tested that the first
@@ -946,13 +1038,5 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
 
 """
-I think if I'm going to do this in a relatively transparent and maintainable
-way, I'm going to end up hardcoding the same optional-field information in
-several places. And if I'm going to do THAT, I need to test it. So test that the
-following cover the same fields:
-* some authoritative source of truth about optional fields
-* the list of optional fields available on Resource
-* the list of optional fields available in OptionalApplication
-
 users need to be able to see their own application status
 """

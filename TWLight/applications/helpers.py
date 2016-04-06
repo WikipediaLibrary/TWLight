@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, Stream
 
 # TODO clean up comments
 
@@ -78,7 +78,7 @@ FIELD_TYPES = {
         queryset=Partner.objects.all(),
         widget=forms.HiddenInput),
     RATIONALE: forms.CharField(widget=forms.Textarea),
-    SPECIFIC_STREAM: forms.CharField(max_length=128),
+    SPECIFIC_STREAM: forms.ModelChoiceField(queryset=Stream.objects.all()),
     SPECIFIC_TITLE: forms.CharField(max_length=128),
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
     AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(required=False),
