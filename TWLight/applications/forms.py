@@ -23,70 +23,16 @@ import re
 from django import forms
 from django.utils.translation import ugettext as _
 
+from TWLight.applications.helpers import (USER_FORM_FIELDS,
+                                          PARTNER_FORM_OPTIONAL_FIELDS,
+                                          PARTNER_FORM_BASE_FIELDS,
+                                          FIELD_TYPES,
+                                          FIELD_LABELS)
 from TWLight.resources.models import Partner
 
 
 logger = logging.getLogger(__name__)
 
-
-# ~~~~~~ move these to helpers.py once you've got your head around them ~~~~~~ #
-
-# ~~~~~ Named constants ~~~~~ #
-REAL_NAME = 'real_name'
-COUNTRY_OF_RESIDENCE = 'country_of_residence'
-OCCUPATION = 'occupation'
-AFFILIATION = 'affiliation'
-PARTNER = 'partner'
-RATIONALE = 'rationale'
-SPECIFIC_STREAM = 'specific_stream'
-SPECIFIC_TITLE = 'specific_title'
-COMMENTS = 'comments'
-AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
-
-
-# ~~~~ Basic field names ~~~~ #
-USER_FORM_FIELDS = [REAL_NAME, COUNTRY_OF_RESIDENCE, OCCUPATION,
-                    AFFILIATION]
-
-# These fields are displayed for all partners.
-PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS]
-
-# These fields are displayed only when a specific partner requires that
-# information.
-PARTNER_FORM_OPTIONAL_FIELDS = [SPECIFIC_STREAM, SPECIFIC_TITLE,
-                                AGREEMENT_WITH_TERMS_OF_USE]
-
-
-# ~~~~ Field information ~~~~ #
-FIELD_TYPES = {
-    REAL_NAME: forms.CharField(max_length=128),
-    COUNTRY_OF_RESIDENCE: forms.CharField(max_length=128),
-    OCCUPATION: forms.CharField(max_length=128),
-    AFFILIATION: forms.CharField(max_length=128),
-    PARTNER: forms.ModelChoiceField(
-        queryset=Partner.objects.all(),
-        widget=forms.HiddenInput),
-    RATIONALE: forms.CharField(widget=forms.Textarea),
-    SPECIFIC_STREAM: forms.CharField(max_length=128),
-    SPECIFIC_TITLE: forms.CharField(max_length=128),
-    COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
-    AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(required=False),
-}
-
-FIELD_LABELS = {
-    REAL_NAME: _('Your real name'),
-    COUNTRY_OF_RESIDENCE: _('Your country of residence'),
-    OCCUPATION: _('Your occupation'),
-    AFFILIATION: _('Your institutional affiliation'),
-    PARTNER: _('Publisher name'),
-    RATIONALE: _('Why do you want access to this resource?'),
-    SPECIFIC_STREAM: _('Which collection do you want access to?'),
-    SPECIFIC_TITLE: _('Which book do you want access to?'),
-    COMMENTS: _('Anything else you want to say'),
-    AGREEMENT_WITH_TERMS_OF_USE: _("Click to agree with the publisher's terms of use"),
-}
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
 class BaseApplicationForm(forms.Form):
     """

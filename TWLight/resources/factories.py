@@ -12,3 +12,4 @@ class PartnerFactory(factory.django.DjangoModelFactory):
         strategy = factory.CREATE_STRATEGY
 
     company_name = 'Publisher McPubface'
+    terms_of_use = 'https://example.com/terms'

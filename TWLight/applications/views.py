@@ -15,9 +15,12 @@ from django.utils.translation import ugettext as _
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView, UpdateView
 
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, Stream
 
-from .forms import BaseApplicationForm, USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS, PARTNER_FORM_BASE_FIELDS
+from .helpers import (USER_FORM_FIELDS,
+                      PARTNER_FORM_OPTIONAL_FIELDS,
+                      PARTNER_FORM_BASE_FIELDS)
+from .forms import BaseApplicationForm
 from .models import Application
 
 
@@ -78,14 +81,22 @@ class SubmitApplicationView(FormView):
     # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
 
     def dispatch(self, request, *args, **kwargs):
+        fail_msg = _('You must choose at least one resource you want access to before applying for access.')
         if not PARTNERS_SESSION_KEY in request.session.keys():
-            messages.add_message(request, messages.WARNING,
-                _('You must choose at least one resource you want access to before applying for access.'))
+            messages.add_message(request, messages.WARNING, fail_msg)
             return HttpResponseRedirect(reverse('applications:request'))
 
         if len(request.session[PARTNERS_SESSION_KEY]) == 0:
-            messages.add_message(request, messages.WARNING,
-                _('You must choose at least one resource you want access to before applying for access.'))
+            messages.add_message(request, messages.WARNING, fail_msg)
+            return HttpResponseRedirect(reverse('applications:request'))
+
+        try:
+            partners = self._get_partners()
+            if partners.count() == 0:
+                messages.add_message(request, messages.WARNING, fail_msg)
+                return HttpResponseRedirect(reverse('applications:request'))
+        except:
+            messages.add_message(request, messages.WARNING, fail_msg)
             return HttpResponseRedirect(reverse('applications:request'))
 
         return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
@@ -187,11 +198,19 @@ class SubmitApplicationView(FormView):
                 try:
                     data = form.cleaned_data[label]
                 except KeyError:
-                    # Not all forms require all fields, and that's OK.
-                    pass
+                    # Not all forms require all fields, and that's OK. However,
+                    # we do need to make sure to clear out the value of data
+                    # here, or we'll have carried it over from the previous
+                    # time through the loop, and who knows what sort of junk
+                    # data we'll write into the Application.
+                    data = None
 
                 if data:
-                    setattr(app, field, data)
+                    if field == 'specific_stream':
+                        stream = Stream.objects.get(pk=data)
+                        setattr(app, field, stream)
+                    else:
+                        setattr(app, field, data)
 
             app.save()
             # TODO test suite should also ensure Application matches our single
@@ -228,6 +247,9 @@ class SubmitApplicationView(FormView):
         Return a list of user-specific data fields required by at least one
         Partner to whom the user is requesting access.
         """
+        if not partners:
+            return None
+
         needed_fields = []
         for field in USER_FORM_FIELDS:
             query = {'{field}'.format(field=field): True}
