@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, Stream
 
 
 class Application(models.Model):
@@ -29,7 +29,9 @@ class Application(models.Model):
 
     rationale = models.TextField(blank=True)
     specific_title = models.CharField(max_length=128, blank=True)
-    specific_stream = models.CharField(max_length=128, blank=True)
+    specific_stream = models.ForeignKey(Stream,
+                            related_name='applications',
+                            blank=True, null=True)
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
 
