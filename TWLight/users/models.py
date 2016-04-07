@@ -26,15 +26,19 @@ them to the coordinators group. They can also directly create Django user
 accounts without attached Editors in the admin site, if for some reason it's
 useful to have account holders without attached Wikipedia data.
 """
+from datetime import datetime
 import json
+import logging
 
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
 
 from .helpers.wiki_list import WIKIS
 
 
+logger = logging.getLogger(__name__)
 
 # Woo yeah named constant!
 COORDINATOR_GROUP_NAME = 'Coordinators'
@@ -52,14 +56,6 @@ class Editor(models.Model):
     account_created = models.DateField(auto_now_add=True,
         help_text=_("When this information was first created"))
 
-    # Fields we may, or may not, have collected in the course of applications
-    # for resource grants.
-    # **** SENSITIVE USER DATA AHOY. ****
-    real_name = models.CharField(max_length=128, blank=True)
-    country_of_residence = models.CharField(max_length=128, blank=True)
-    occupation = models.CharField(max_length=128, blank=True)
-    affiliation = models.CharField(max_length=128, blank=True)
-
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
     # Data are current *as of the time of TWLight signup* but may get out of
@@ -68,7 +64,6 @@ class Editor(models.Model):
         help_text=_("Wikipedia username"))
     wp_editcount = models.IntegerField(help_text=_("Wikipedia edit count"))
     wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"))
-    # TODO what is the actual data format?
     wp_sub = models.IntegerField(help_text=_("Wikipedia user ID")) # WP user id.
 
     # ArrayField is a postgres-specific field type for storing
@@ -98,10 +93,20 @@ class Editor(models.Model):
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     home_wiki = models.CharField(max_length=4, choices=WIKIS,
-        help_text=_("Home wiki, as indicated by user"))
+        help_text=_("Home wiki, as indicated by user"),
+        blank=True)
     contributions = models.TextField(
-        help_text=_("Wiki contributions, as entered by user"))
-    email = models.EmailField(help_text=_("Email, as entered by user"))
+        help_text=_("Wiki contributions, as entered by user"),
+        blank=True)
+
+    # Fields we may, or may not, have collected in the course of applications
+    # for resource grants.
+    # **** SENSITIVE USER DATA AHOY. ****
+    real_name = models.CharField(max_length=128, blank=True)
+    country_of_residence = models.CharField(max_length=128, blank=True)
+    occupation = models.CharField(max_length=128, blank=True)
+    affiliation = models.CharField(max_length=128, blank=True)
+
 
 
     @property
@@ -137,6 +142,54 @@ class Editor(models.Model):
         return url
 
 
+    def update_from_wikipedia(self, identity):
+        """
+        Given the dict returned from the Wikipedia OAuth /identify endpoint,
+        update the instance accordingly.
+
+        This assumes that we have used wp_sub to match the Editor and the
+        Wikipedia info.
+
+        Expected identity data:
+
+        {
+            'username': identity['username'],       # wikipedia username
+            'sub': identity['sub'],                 # wikipedia ID
+            'rights': identity['rights'],           # user rights on-wiki
+            'editcount': identity['editcount'],
+            'email': identity['email'],
+
+            # Date registered: YYYYMMDDHHMMSS
+            'registered': identity['registered']
+        }
+
+        We could attempt to harvest real name, but we won't; we'll let
+        users enter it if required by partners, and avoid knowing the
+        data otherwise.
+        """
+
+        try:
+            assert self.wp_sub == identity['sub']
+        except AssertionError:
+            logger.exception('Was asked to update Editor data, but the '
+                'WP sub in the identity passed in did not match the wp_sub on '
+                'the instance. Not updating.')
+            raise
+
+        self.wp_username = identity['username']
+        self._wp_internal = identity['rights']
+        self.wp_editcount = identity['editcount']
+        reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+        self.wp_registered = reg_date
+        self.save()
+
+        self.user.email = identity['email']
+        self.user.save()
+
+
     def __str__(self):
         return self.wp_username
 
+
+    def get_absolute_url(self):
+        return reverse('users:editor_detail', kwargs={'pk': self.user.pk})

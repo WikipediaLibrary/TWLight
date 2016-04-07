@@ -7,4 +7,7 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/$',
         login_required(views.EditorDetailView.as_view()),
         name='editor_detail'),
+    url(r'^update/(?P<pk>\d+)/$',
+        login_required(views.EditorUpdateView.as_view()),
+        name='editor_update'),
 ]

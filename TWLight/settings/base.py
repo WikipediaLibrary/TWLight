@@ -133,6 +133,17 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+# Reiterating the default so we can add to it later.
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+)
+
 
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -183,8 +194,18 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
+# OAUTH CONFIGURATION
+# ------------------------------------------------------------------------------
+
 AUTHENTICATION_BACKENDS = (
+    'TWLight.users.authorization.OAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+WP_OAUTH_BASE_URL = 'https://en.wikipedia.org/w/index.php'
+
+CONSUMER_KEY = os.environ.get('TWLIGHT_CONSUMER_KEY', None)
+CONSUMER_SECRET = os.environ.get('TWLIGHT_CONSUMER_SECRET', None)
