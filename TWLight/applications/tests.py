@@ -2,7 +2,7 @@
 
 from django import forms
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.test import TestCase, Client, RequestFactory
@@ -10,7 +10,8 @@ from django.test import TestCase, Client, RequestFactory
 from TWLight.resources.models import Partner, Stream
 from TWLight.resources.factories import PartnerFactory
 from TWLight.users.factories import EditorFactory
-from TWLight.users.models import Editor
+from TWLight.users.models import Editor, COORDINATOR_GROUP_NAME
+from TWLight.users.tests import get_or_create_user
 
 from . import views
 from .helpers import USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS, FIELD_TYPES
@@ -165,29 +166,27 @@ class SynchronizeFieldsTest(TestCase):
 class BaseApplicationViewTest(TestCase):
     @classmethod
     def setUpClass(cls):
-        super(BaseApplicationTest, cls).setUpClass()
+        super(BaseApplicationViewTest, cls).setUpClass()
         cls.client = Client()
 
-        # Note: not an Editor.
-        cls.base_user = User.objects.create_user(
-            username='base_user', password='base_user')
 
-        cls.editor = User.objects.create_user(
-            username='editor', password='editor')
+        # Note: not an Editor.
+        cls.base_user = get_or_create_user('base_user')
+
+        cls.editor = get_or_create_user('editor')
         EditorFactory(user=cls.editor)
 
-        cls.editor2 = User.objects.create_user(
-            username='editor2', password='editor2')
+        cls.editor2 = get_or_create_user('editor2')
         EditorFactory(user=cls.editor2)
 
-        # TODO needs to actually be coordinator
-        cls.coordinator = User.objects.create_user(
-            username='coordinator', password='coordinator')
+        cls.coordinator = get_or_create_user('coordinator')
+        coordinators = Group.objects.get(name=COORDINATOR_GROUP_NAME)
+        coordinators.user_set.add(cls.coordinator)
 
 
     @classmethod
     def tearDownClass(cls):
-        super(BaseApplicationTest, cls).tearDownClass()
+        super(BaseApplicationViewTest, cls).tearDownClass()
         cls.base_user.delete()
         cls.editor.delete()
         cls.editor2.delete()
@@ -195,7 +194,7 @@ class BaseApplicationViewTest(TestCase):
 
 
     def tearDown(self):
-        super(BaseApplicationTest, self).tearDown()
+        super(BaseApplicationViewTest, self).tearDown()
         for partner in Partner.objects.all():
             partner.delete()
 
@@ -257,6 +256,11 @@ class RequestApplicationTest(BaseApplicationViewTest):
         """
         view = self._get_isolated_view(views.RequestApplicationView)
 
+        # Make sure we've zeroed out the Partners, so we have the number we
+        # expect.
+        for partner in Partner.objects.all():
+            partner.delete()
+
         # Check that it works with only one Partner in the database.
         partner = PartnerFactory()
 
@@ -268,7 +272,7 @@ class RequestApplicationTest(BaseApplicationViewTest):
         self.assertIn(fieldkey, form.fields)
         assert isinstance(form.fields[fieldkey], forms.BooleanField)
 
-        # Add Partners and seee how many form fields there are. We'll assume
+        # Add Partners and see how many form fields there are. We'll assume
         # that they're all of the correct type, having tested that the first
         # one is.
         _ = PartnerFactory()
@@ -650,8 +654,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             agreement_with_terms_of_use=False
         )
 
-        user = User.objects.create_user(
-            username='alice', password='alice')
+        user = get_or_create_user('alice')
+
         EditorFactory(
             user=user,
             # Same as the factory defaults, but repeated here because explicit

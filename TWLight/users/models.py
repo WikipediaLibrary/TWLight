@@ -34,6 +34,12 @@ from django.utils.translation import ugettext as _
 
 from .helpers.wiki_list import WIKIS
 
+
+
+# Woo yeah named constant!
+COORDINATOR_GROUP_NAME = 'Coordinators'
+
+
 class Editor(models.Model):
     class Meta:
         app_label = 'users'

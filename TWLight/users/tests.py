@@ -1,4 +1,3 @@
-from datetime import datetime
 import random
 
 from django.conf import settings
@@ -7,27 +6,26 @@ from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase, Client
 
 from .helpers.wiki_list import WIKIS
-from .models import Editor
-from .views import EditorDetailView
+from .factories import EditorFactory
 
 # Should be replaced with a proper factory, but factory-boy plus new migrations
 # infrastructure doesn't seem to work right in tests.
 
 todays_wiki = random.choice(WIKIS)[0]
 
-def create_editor(user):
-    editor = Editor()
-    editor.user = user
-    editor.wp_username = 'alice'
-    editor.wp_editcount = 42
-    editor.wp_registered = datetime.today()
-    editor.wp_sub = '316758'
-    editor._wp_internal = 'blah blah blah'
-    editor.home_wiki = todays_wiki
-    editor.contributions = 'telecommunications project on the Latin wiki'
-    editor.email = 'alice@example.com'
-    editor.save()
-    return editor
+
+def get_or_create_user(userpass):
+    """
+    create_user() lets us set the password directly, but will throw an
+    IntegrityError if a user with the username already exists.
+    get_or_create() lets us check to see if the user exists already, but
+    the password field contains the salted hash. Sigh. Let's make a
+    utility that checks for existence AND lets us set the pw.
+    """
+    user, _ = User.objects.get_or_create(username=userpass)
+    user.set_password(userpass)
+    user.save()
+    return user
 
 
 class ViewsTestCase(TestCase):
@@ -37,42 +35,43 @@ class ViewsTestCase(TestCase):
 
         # User 1: regular Editor
         self.username1 = 'alice'
-        self.user1, _ = User.objects.get_or_create(
-            username=self.username1, password='password')
-        self.editor1 = create_editor(self.user1)
+        self.user1 = get_or_create_user(self.username1)
+        self.editor1 = EditorFactory(user=self.user1)
         self.url1 = reverse('users:editor_detail',
-            kwargs={'pk': self.editor1.pk})
+            kwargs={'pk': self.user1.pk})
+
 
         # User 2: regular Editor
         self.username2 = 'bob'
-        self.user2, _ = User.objects.get_or_create(
-            username=self.username2, password='password')
-        self.editor2 = create_editor(self.user2)
+        self.user2 = get_or_create_user(self.username2)
+        self.editor2 = EditorFactory(user=self.user2)
         self.url2 = reverse('users:editor_detail',
-            kwargs={'pk': self.editor2.pk})
+            kwargs={'pk': self.user2.pk})
+
 
         # User 3: Site administrator
         self.username3 = 'carol'
-        self.user3, _ = User.objects.get_or_create(
-            username=self.username3, password='password')
-        self.user3.is_admin = True
+        self.user3 = get_or_create_user(self.username3)
+        self.user3.is_superuser = True
         self.user3.save()
-        self.editor3 = create_editor(self.user3)
+        self.editor3 = EditorFactory(user=self.user3)
 
 
     def tearDown(self):
         self.user1.delete()
         self.editor1.delete()
+        self.user2.delete()
+        self.editor2.delete()
+        self.user3.delete()
+        self.editor3.delete()
 
 
     # EditorDetailView resolves at URL
     def test_editor_detail_url_resolves(self):
         """
-        The EditorDetailView resolves and uses the expected function.
+        The EditorDetailView resolves.
         """
         found = resolve(self.url1)
-        self.assertEqual(found.func.__code__,
-            EditorDetailView.as_view().__code__)
 
 
     # Anonymous user cannot see editor page
@@ -85,14 +84,14 @@ class ViewsTestCase(TestCase):
 
     # Editor can see own page
     def test_editor_can_see_own_page(self):
-        self.client.login(username=self.username1, password='password')
+        self.client.login(username=self.username1, password=self.username1)
         response = self.client.get(self.url1)
         self.assertEqual(response.status_code, 200)
 
 
     # Editor cannot see someone else's info
     def test_editor_cannot_see_other_editor_page(self):
-        self.client.login(username=self.username1, password='password')
+        self.client.login(username=self.username1, password=self.username1)
         response = self.client.get(self.url2)
         self.assertEqual(response.status_code, 403)
 
@@ -108,17 +107,18 @@ class ViewsTestCase(TestCase):
 
     # Site admin can see someone else's info
     def test_site_admin_can_see_other_editor_page(self):
-        self.client.login(username=self.username3, password='password')
+        self.client.login(username=self.username3, password=self.username3)
         response = self.client.get(self.url1)
         self.assertEqual(response.status_code, 200)
 
+
     # Expected editor data is in the page
     def test_editor_page_has_data(self):
-        self.client.login(username=self.username1, password='password')
+        self.client.login(username=self.username1, password=self.username1)
         response = self.client.get(self.url1)
         content = response.content
         self.assertIn('alice', content)     # wp_username
-        self.assertIn(42, content)          # edit count
+        self.assertIn('42', content)          # edit count
         self.assertIn('blah blah blah', content)          # wp_internal
         self.assertIn(todays_wiki, content) # home wiki
         self.assertIn('telecommunications project on the Latin wiki', content)

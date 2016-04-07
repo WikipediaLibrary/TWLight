@@ -115,18 +115,20 @@ smallest possible data entry burden on users by:
 * asking for type 2 information only once per application, rather than once per
   partner.
 
-Facts related to this file are hardcoded in two other places in the database:
+Facts related to this file are hardcoded in three other places in the database:
 
 1) In TWLight.resources.models.Partner, which tracks whether a given partner
    requires the optional information;
 2) In TWLight.applications.forms.Application, which has fields for all
-   possible information (though any given application instance may leave
-   optional fields blank).
+   possible partner-specific information (though any given application instance
+   may leave optional fields blank).
+3) In TWLight.users.models.Editor, which records user data.
 
 Why this hardcoding? Well, having defined database models lets us take advantage
 of an awful lot of Django machinery. Also, dynamically generating everything on
 the fly might be slow and lead to hard-to-read code.
 
 applications.tests checks to make sure that these three sources are in agreement
-about the optional data fields available.
+about the optional data fields available: both their names and their types. It
+also checks that the constructed application form fields match those types.
 """

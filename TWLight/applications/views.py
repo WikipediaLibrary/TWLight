@@ -15,7 +15,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView, UpdateView
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
@@ -206,11 +206,7 @@ class SubmitApplicationView(FormView):
                     data = None
 
                 if data:
-                    if field == 'specific_stream':
-                        stream = Stream.objects.get(pk=data)
-                        setattr(app, field, stream)
-                    else:
-                        setattr(app, field, data)
+                    setattr(app, field, data)
 
             app.save()
             # TODO test suite should also ensure Application matches our single
@@ -230,7 +226,9 @@ class SubmitApplicationView(FormView):
         """
         # This key is guaranteed by dispatch() to exist and be nonempty.
         partner_ids = self.request.session[PARTNERS_SESSION_KEY]
-        return Partner.objects.filter(id__in=partner_ids)
+        partners = Partner.objects.filter(id__in=partner_ids)
+        assert len(partner_ids) == partners.count()
+        return partners
 
 
     def _get_partner_fields(self, partner):
