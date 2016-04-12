@@ -356,7 +356,8 @@ class EvaluateApplicationView(UpdateView):
     * assign status
 
     TODO: let them add questions/comments and figure out how to communicate those
-    TODO: access control to just Coordinators
+    TODO: access control to just Coordinators, and the Editor in question
+    TODO have internal-only comments (visible to just coordinators)
     TODO: internationalize form labels
     """
     model = Application

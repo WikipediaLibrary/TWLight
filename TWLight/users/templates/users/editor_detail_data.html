@@ -19,7 +19,9 @@
       <strong>{% trans "Home wiki" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ editor.get_home_wiki_display }}
+      {% if editor.home_wiki %}
+        {{ editor.get_home_wiki_display }}
+      {% else %}<br />{% endif %}
     </div>
 
     <div class="col-xs-12 col-sm-4">
@@ -62,7 +64,7 @@
       <strong>{% trans "Contributions" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ editor.contributions }}
+      {% if editor.contributions %}{{ editor.contributions }}{% else %}<br />{% endif %}
     </div>
 
     <div class="col-xs-12 col-sm-4">

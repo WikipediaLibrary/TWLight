@@ -37,6 +37,8 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.comments',
+    'django.contrib.sites',         # required by django.contrib.comments
 )
 
 THIRD_PARTY_APPS = (
@@ -50,7 +52,6 @@ TWLIGHT_APPS = (
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TWLIGHT_APPS
-
 
 
 # MIDDLEWARE CONFIGURATION
@@ -108,6 +109,8 @@ ALLOWED_HOSTS = []
 ROOT_URLCONF = 'TWLight.urls'
 
 WSGI_APPLICATION = 'TWLight.wsgi.application'
+
+SITE_ID = 1
 
 
 # INTERNATIONALIZATION CONFIGURATION
@@ -209,3 +212,7 @@ WP_OAUTH_BASE_URL = 'https://en.wikipedia.org/w/index.php'
 
 CONSUMER_KEY = os.environ.get('TWLIGHT_CONSUMER_KEY', None)
 CONSUMER_SECRET = os.environ.get('TWLIGHT_CONSUMER_SECRET', None)
+
+
+# COMMENTS CONFIGURATION
+# ------------------------------------------------------------------------------

@@ -17,6 +17,7 @@ urlpatterns = [
 	# Built-in
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^accounts/', include('allauth.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
 
     url(r'^oauth/login/$',
         auth.OAuthInitializeView.as_view(),
