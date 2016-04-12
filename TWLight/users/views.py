@@ -6,10 +6,12 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.utils.translation import ugettext as _
 
+from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly
+
 from .models import Editor
 
 
-class EditorDetailView(DetailView):
+class EditorDetailView(CoordinatorsOrSelf, DetailView):
     """
     User profile data page.
 
@@ -29,7 +31,7 @@ class EditorDetailView(DetailView):
         return context
 
 
-class EditorUpdateView(UpdateView):
+class EditorUpdateView(SelfOnly, UpdateView):
     """
     Allow Editors to add the information we can't harvest from OAuth, but
     would nonetheless like to have.

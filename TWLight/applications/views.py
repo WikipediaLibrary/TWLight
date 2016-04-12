@@ -15,6 +15,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView, UpdateView
 
+from TWLight.view_mixins import CoordinatorsOrSelf, CoordinatorsOnly, EditorsOnly
 from TWLight.resources.models import Partner
 
 from .helpers import (USER_FORM_FIELDS,
@@ -27,7 +28,7 @@ from .models import Application
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 
 
-class RequestApplicationView(FormView):
+class RequestApplicationView(EditorsOnly, FormView):
     template_name = 'applications/request_for_application.html'
 
     def get_form_class(self):
@@ -74,7 +75,7 @@ class RequestApplicationView(FormView):
 
 
 
-class SubmitApplicationView(FormView):
+class SubmitApplicationView(EditorsOnly, FormView):
     template_name = 'applications/apply.html'
     form_class = BaseApplicationForm
 
@@ -258,7 +259,7 @@ class SubmitApplicationView(FormView):
 
 
 
-class ListApplicationsView(ListView):
+class ListApplicationsView(CoordinatorsOnly, ListView):
     model = Application
 
     def get_queryset(self):
@@ -290,7 +291,7 @@ class ListApplicationsView(ListView):
 
 
 
-class ListApprovedApplicationsView(ListView):
+class ListApprovedApplicationsView(CoordinatorsOnly, ListView):
     model = Application
 
     def get_queryset(self):
@@ -319,7 +320,7 @@ class ListApprovedApplicationsView(ListView):
 
 
 
-class ListRejectedApplicationsView(ListView):
+class ListRejectedApplicationsView(CoordinatorsOnly, ListView):
     model = Application
 
     def get_queryset(self):
@@ -348,7 +349,7 @@ class ListRejectedApplicationsView(ListView):
 
 
 
-class EvaluateApplicationView(UpdateView):
+class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
     """
     Allows Coordinators to:
     * view applications
