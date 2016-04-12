@@ -6,12 +6,16 @@ status.
 """
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+import reversion
+from reversion.helpers import generate_patch_html
+
 
 from django import forms
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.utils.translation import ugettext as _
+from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView, UpdateView
 
@@ -368,6 +372,13 @@ class EvaluateApplicationView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.user.editor
+        context['versions'] = reversion.get_for_object(self.object)
+        print context['versions']
+        for version in context['versions']:
+            print dir(version)
+            print type(version)
+            print version.revision.date_created
+            print version.revision.user
         return context
 
     def get_form(self, form_class):
@@ -396,3 +407,36 @@ class EvaluateApplicationView(UpdateView):
 # Be really transparent about who can see which page.
 # make sure people cannot set status on their own apps, even if they are coordinators
 # make sure people CAN see/comment on their apps
+
+class DiffApplicationsView(TemplateView):
+    # TODO not sure if I really want this. It may be just the comment thread we
+    # need to track.
+    template_name = "applications/diff.html"
+
+    def get_object(self):
+        """
+        Fetch the Application whose revisions are being compared.
+        """
+        return Application.objects.get(pk=self.kwargs['pk'])
+
+
+    def post(self, request, *args, **kwargs):
+        diff_pk = long(request.POST['diff'])
+        orig_pk = long(request.POST['orig'])
+
+        try:
+            app = self.get_object()
+        except Application.DoesNotExist:
+            raise Http404
+
+        orig_revision = reversion.get_for_object(app).get(id=orig_pk)
+        diff_revision = reversion.get_for_object(app).get(id=diff_pk)
+
+        context = self.get_context_data()
+
+        patch_html = generate_patch_html(orig_revision, diff_revision,
+                                         "rationale", cleanup="semantic")
+
+        context['patch_html'] = patch_html
+
+        return self.render_to_response(context)

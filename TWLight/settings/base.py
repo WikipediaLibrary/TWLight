@@ -2,11 +2,11 @@
 Base settings for TWLight project.
 
 This is not intended to be used as the live settings file for a project and will
-not work as one. You should instead use production.py, local.py, or another file
-that you write. These files should live in the settings directory; start with
-'from .base import *'; and proceed to add or override settings as appropriate to
-their context. In particular, you will need to set ALLOWED_HOSTS before your app
-will run.
+not work as one. You should instead use production.py, local.py, heroku.py, or
+another file that you write. These files should live in the settings directory;
+start with 'from .base import *'; and proceed to add or override settings as
+appropriate to their context. In particular, you will need to set ALLOWED_HOSTS
+before your app will run.
 
 If you want to use production settings, you are now done.  If not, you will also
 need to set the environment variables indicated in the README.
@@ -41,6 +41,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'crispy_forms',
+    'reversion',
 )
 
 TWLIGHT_APPS = (
@@ -209,3 +210,14 @@ WP_OAUTH_BASE_URL = 'https://en.wikipedia.org/w/index.php'
 
 CONSUMER_KEY = os.environ.get('TWLIGHT_CONSUMER_KEY', None)
 CONSUMER_SECRET = os.environ.get('TWLIGHT_CONSUMER_SECRET', None)
+
+
+# REVERSION CONFIGURATION
+# ------------------------------------------------------------------------------
+
+# See https://django-reversion.readthedocs.org/ .
+
+# This will ensure that all changes to models registered with reversion are
+# automatically versioned & saved, and that they have request.user attached
+# to their metadata.
+MIDDLEWARE_CLASSES += ('reversion.middleware.RevisionMiddleware',)

@@ -28,4 +28,8 @@ urlpatterns = [
         views.ListRejectedApplicationsView.as_view()),
         name='list_rejected'
     ),
+    url(r'^diff/(?P<pk>\d+)/$', login_required(
+        views.DiffApplicationsView.as_view()),
+        name='diff'
+    ),
 ]
