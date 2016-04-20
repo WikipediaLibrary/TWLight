@@ -7,6 +7,7 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
@@ -16,7 +17,7 @@ from TWLight.applications.urls import urlpatterns as applications_urls
 urlpatterns = [
 	# Built-in
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/login/', auth_views.login, name='auth_login'),
     url(r'^comments/', include('django.contrib.comments.urls')),
 
     url(r'^oauth/login/$',
