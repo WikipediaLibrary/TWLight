@@ -1,9 +1,21 @@
 {% load i18n %}
+{% load l10n %}
 
   <ul class="list-unstyled">
     {% for app in object_list %}
-      <li><span class="label label{{ app.get_bootstrap_class }}">{{ app.get_status_display }}</span> <a href="{{ app.get_absolute_url }}">{{ app }}</a></li>
+      <li>
+        <span class="label label{{ app.get_bootstrap_class }}">
+          {{ app.get_status_display }}
+        </span>&nbsp;
+        <a href="{{ app.get_absolute_url }}">
+          {{ app }}
+        </a>
+        &mdash;
+        {% blocktrans with user=app.get_latest_revision.user review_date=app.get_latest_revision.date_created|localize %}
+          Last reviewed by {{ user }} on {{ review_date }}
+        {% endblocktrans %}
+      </li>
     {% empty %}
       <li>{% trans 'None yet.' %}</li>
     {% endfor %}      
-  </ul>
+</ul>

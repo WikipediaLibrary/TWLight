@@ -1,3 +1,5 @@
+import reversion
+
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
@@ -50,6 +52,7 @@ class Application(models.Model):
         APPROVED: '-success',
         NOT_APPROVED: '-danger',
     }
+
     def get_bootstrap_class(self):
         """
         What class should be applied to Bootstrap labels, buttons, alerts, etc.
@@ -59,6 +62,14 @@ class Application(models.Model):
         prepending 'label' or 'button', etc., as appropriate to the HTML object.
         """
         return self.LABELMAKER[self.status]
+
+
+    def get_latest_version(self):
+        return reversion.get_for_object(self)[0]
+
+
+    def get_latest_revision(self):
+        return self.get_latest_version().revision
 
 
     # TODO: order_by

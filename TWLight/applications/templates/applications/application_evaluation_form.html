@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load l10n %}
 {% load crispy_forms_tags %}
 {% load crispy_forms_field %}
 {% load comments %}
@@ -17,7 +18,7 @@
       <strong>{% trans 'Status' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.get_status_display }}
+      <span class="label label{{ object.get_bootstrap_class }} label-lg">{{ object.get_status_display }}
     </div>
 
     <div class="col-xs-12 col-sm-4">
@@ -112,13 +113,15 @@
             <div class="col-xs-2">
               <span class="label label{{ version|get_bootstrap_class_for_version }} pull-right">{{ version|get_status_display_for_version }}</span>
             </div>
-            <div class="col-xs-1">
-              <input type="radio" value="{{ version.id }}" name="orig" {% if forloop.first %}class="pull-left"checked{% else %}class="pull-left hidden"{% endif %}>
-              <input type="radio" value="{{ version.id }}" name="diff" {% if forloop.first %}class="pull-right hidden"{% else %}class="pull-right"{% endif %}>
-            </div>
+            {% comment %} # cool function, but the diff page isn't working yet
+              <div class="col-xs-1">
+                <input type="radio" value="{{ version.id }}" name="orig" {% if forloop.first %}class="pull-left"checked{% else %}class="pull-left hidden"{% endif %}>
+                <input type="radio" value="{{ version.id }}" name="diff" {% if forloop.first %}class="pull-right hidden"{% else %}class="pull-right"{% endif %}>
+              </div>
+            {% endcomment %}
             <div class="col-xs-9">
               <span class="pull-left">
-                {% blocktrans with user=version.revision.user review_date=version.revision.date_created %}
+                {% blocktrans with user=version.revision.user review_date=version.revision.date_created|localize %}
                   Reviewed by {{ user }} on {{ review_date }}
                 {% endblocktrans %}
               </span>
@@ -128,10 +131,12 @@
         <li>{% trans 'No previous versions.' %}</li>
       {% endfor %}      
     </ul>
+    {% comment %} # cool function, but the diff page isn't working yet
     <div class="row">
       <div class="col-xs-10 col-xs-push-2">
         <input type="submit" value="{% trans 'Compare selected revisions' %}" class="btn">
       </div>
     </div>
+    {% endcomment %}
 </form>
 {% endblock %}
