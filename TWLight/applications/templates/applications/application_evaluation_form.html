@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% load crispy_forms_field %}
 {% load comments %}
+{% load version_tags %}
 
 {% block content %}
   <h1>{% trans 'Evaluate application' %}</h1>
@@ -100,4 +101,37 @@
 
   {% include 'users/editor_detail_data.html' %}
 
+  <h2>{% trans 'Revision history' %}</h2>
+
+  <form method="POST" action="{% url 'applications:diff' object.pk %}">
+    {% csrf_token %}
+    <ul class="list-unstyled">
+      {% for version in versions %}
+        <li>
+          <div class="row">
+            <div class="col-xs-2">
+              <span class="label label{{ version|get_bootstrap_class_for_version }} pull-right">{{ version|get_status_display_for_version }}</span>
+            </div>
+            <div class="col-xs-1">
+              <input type="radio" value="{{ version.id }}" name="orig" {% if forloop.first %}class="pull-left"checked{% else %}class="pull-left hidden"{% endif %}>
+              <input type="radio" value="{{ version.id }}" name="diff" {% if forloop.first %}class="pull-right hidden"{% else %}class="pull-right"{% endif %}>
+            </div>
+            <div class="col-xs-9">
+              <span class="pull-left">
+                {% blocktrans with user=version.revision.user review_date=version.revision.date_created %}
+                  Reviewed by {{ user }} on {{ review_date }}
+                {% endblocktrans %}
+              </span>
+            </div>
+        </li>
+      {% empty %}
+        <li>{% trans 'No previous versions.' %}</li>
+      {% endfor %}      
+    </ul>
+    <div class="row">
+      <div class="col-xs-10 col-xs-push-2">
+        <input type="submit" value="{% trans 'Compare selected revisions' %}" class="btn">
+      </div>
+    </div>
+</form>
 {% endblock %}

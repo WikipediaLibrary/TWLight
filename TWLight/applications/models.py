@@ -44,6 +44,12 @@ class Application(models.Model):
         return reverse_lazy('applications:evaluate', kwargs={'pk': self.pk})
 
 
+    LABELMAKER = {
+        PENDING: '-primary',
+        QUESTION: '-warning',
+        APPROVED: '-success',
+        NOT_APPROVED: '-danger',
+    }
     def get_bootstrap_class(self):
         """
         What class should be applied to Bootstrap labels, buttons, alerts, etc.
@@ -52,13 +58,7 @@ class Application(models.Model):
         Returns a string like '-default'; the template is responsible for
         prepending 'label' or 'button', etc., as appropriate to the HTML object.
         """
-        labelmaker = {
-            self.PENDING: '-primary',
-            self.QUESTION: '-warning',
-            self.APPROVED: '-success',
-            self.NOT_APPROVED: '-danger',
-        }
-        return labelmaker[self.status]
+        return self.LABELMAKER[self.status]
 
 
     # TODO: order_by

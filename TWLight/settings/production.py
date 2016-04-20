@@ -21,3 +21,6 @@ SECRET_KEY = '8s8=)1direp%&imkq@91l)*9ot9^v*x+p@_6asq4z$k9kn&k*8'
 # https://docs.djangoproject.com/en/1.7/ref/databases/#connecting-to-the-database
 DATABASES['default']['USER'] = 'TWLight'
 DATABASES['default']['PASSWORD'] = os.environ.get('DJANGO_MYSQL_PASSWORD', '')
+
+
+# TODO add production consumer key and secret
