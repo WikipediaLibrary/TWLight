@@ -1,6 +1,9 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from TWLight.resources.fields import DurationField
+
+
 class Partner(models.Model):
     """
     A partner organization which provides access grants to paywalled resources.
@@ -33,6 +36,11 @@ class Partner(models.Model):
         "this Partner. If False, users can apply for multiple Streams at a "
         "time. This field must be filled in when Partners have multiple "
         "Streams, but may be left blank otherwise.")
+
+    access_grant_term = DurationField(
+        blank=True, null=True,
+        help_text="The standard length of an access grant from this Partner."
+        )
 
 
     # Non-universal form fields
