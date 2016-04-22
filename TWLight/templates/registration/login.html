@@ -1,10 +1,11 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 {% comment %}
 Honestly, this shouldn't come up; settings.LOGIN_URL should route people through
 OAuth, and admins who only have a user/pass should use the admin site. But
 here it is, just in case.
 {% endcomment %}
-{% extends "base.html" %}
-{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="row">

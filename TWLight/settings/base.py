@@ -207,6 +207,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # ------------------------------------------------------------------------------
 
 LOGIN_URL = reverse_lazy('oauth_login')
+LOGIN_REDIRECT_URL = reverse_lazy('users:home')
 
 AUTHENTICATION_BACKENDS = (
     'TWLight.users.authorization.OAuthBackend',

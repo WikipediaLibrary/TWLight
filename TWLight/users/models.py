@@ -40,9 +40,6 @@ from .helpers.wiki_list import WIKIS
 
 logger = logging.getLogger(__name__)
 
-# Woo yeah named constant!
-COORDINATOR_GROUP_NAME = 'Coordinators'
-
 
 class Editor(models.Model):
     class Meta:

@@ -2,13 +2,24 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 from django.contrib.auth.models import User
+from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
+from django.utils.decorators import classonlymethod
 from django.utils.translation import ugettext as _
 
 from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly
 
 from .models import Editor
+
+
+class UserDetailView(TemplateView):
+    template_name = 'users/user_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
 
 
 class EditorDetailView(CoordinatorsOrSelf, DetailView):
@@ -29,6 +40,39 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
         context['editor'] = self.get_object().editor
         context['object_list'] = self.get_object().applications.all().order_by('status')
         return context
+
+
+
+class UserHomeView(View):
+    """
+    The view for users to see their own profile data.
+
+    Dispatches to either EditorDetailView, if the User has an attached Editor,
+    or UserDetailView otherwise.
+
+    Does not do any access limitation; EditorDetailView and UserDetailView
+    are responsible for that.
+    """
+    editor_view = EditorDetailView
+    non_editor_view = UserDetailView
+
+    @classonlymethod
+    def as_view(cls):
+        def _get_view(request, *args, **kwargs):
+            if hasattr(request.user, 'editor'):
+                return_view = cls.editor_view
+            else:
+                return_view = cls.non_editor_view
+
+            print return_view.as_view()
+
+            if 'pk' in kwargs:
+                return return_view.as_view()(request, *args, **kwargs)
+            else:
+                kwargs.update({'pk': request.user.pk})
+                return return_view.as_view()(request, *args, **kwargs)
+
+        return _get_view
 
 
 class EditorUpdateView(SelfOnly, UpdateView):
