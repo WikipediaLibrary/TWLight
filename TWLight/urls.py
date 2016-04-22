@@ -18,6 +18,10 @@ urlpatterns = [
 	# Built-in
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/', auth_views.login, name='auth_login'),
+    url(r'^accounts/logout/',
+        auth_views.logout,
+        {'next_page': '/'},
+        name='auth_logout'),
     url(r'^comments/', include('django.contrib.comments.urls')),
 
     url(r'^oauth/login/$',
