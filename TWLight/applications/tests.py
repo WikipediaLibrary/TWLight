@@ -10,7 +10,8 @@ from django.test import TestCase, Client, RequestFactory
 from TWLight.resources.models import Partner, Stream
 from TWLight.resources.factories import PartnerFactory
 from TWLight.users.factories import EditorFactory
-from TWLight.users.models import Editor, COORDINATOR_GROUP_NAME
+from TWLight.users.groups import COORDINATOR_GROUP_NAME
+from TWLight.users.models import Editor
 from TWLight.users.tests import get_or_create_user
 
 from . import views

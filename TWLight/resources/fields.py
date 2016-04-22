@@ -17,8 +17,8 @@ import re
 import six
 
 from django.core import exceptions
-from django.db.models import Field
-from django.forms.fields import Field as FormField
+from django.db import models
+from django.forms import fields
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 
@@ -82,7 +82,7 @@ def parse_duration(value):
         return datetime.timedelta(**kw)
 
 
-class DurationField(Field):
+class DurationField(models.Field):
     """Stores timedelta objects.
     Uses interval on postgres, INVERAL DAY TO SECOND on Oracle, and bigint of
     microseconds on other databases.
@@ -143,7 +143,7 @@ class DurationField(Field):
 
 
 
-class FormDurationField(FormField):
+class FormDurationField(fields.Field):
     default_error_messages = {
         'invalid': _('Enter a valid duration.'),
     }
