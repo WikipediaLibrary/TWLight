@@ -16,10 +16,8 @@ from .models import Editor
 class UserDetailView(TemplateView):
     template_name = 'users/user_detail.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(UserDetailView, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
+    # Remember that 'user' is part of the default context.
+
 
 
 class EditorDetailView(CoordinatorsOrSelf, DetailView):
