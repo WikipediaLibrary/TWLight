@@ -375,12 +375,6 @@ class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.user.editor
         context['versions'] = reversion.get_for_object(self.object)
-        print context['versions']
-        for version in context['versions']:
-            print dir(version)
-            print type(version)
-            print version.revision.date_created
-            print version.revision.user
         return context
 
     def get_form(self, form_class):

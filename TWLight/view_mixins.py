@@ -14,6 +14,10 @@ class CoordinatorsOrSelf(UserPassesTestMixin):
     * Coordinators; or
     * The Editor who owns (or is) the object in the view; or
     * Superusers.
+
+    This mixin assumes that the decorated view has a get_object method, and that
+    the object in question has a ForeignKey, 'user', to the User model, or else
+    is an instance of User.
     """
 
     def test_func(self, user):
@@ -64,7 +68,8 @@ class SelfOnly(UserPassesTestMixin):
     * The user who owns (or is) the object in question.
 
     This mixin assumes that the decorated view has a get_object method, and that
-    the object in question has a ForeignKey, 'user', to the User model.
+    the object in question has a ForeignKey, 'user', to the User model, or else
+    is an instance of User.
     """
     def test_func(self, user):
         obj_owner_test = False # set default

@@ -103,9 +103,15 @@
   <nav class="clearfix" id="top-nav">
     {% if user.is_authenticated %}
       <span class="nav-greeting">
-        {% blocktrans with username=user.username %}
-          Hi, {{ username }}!
-        {% endblocktrans %}
+        {% if user.editor %}
+          {% blocktrans with username=user.editor.wp_username %}
+            Hi, {{ username }}!
+          {% endblocktrans %}
+        {% else %}
+          {% blocktrans with username=user.username %}
+            Hi, {{ username }}!
+          {% endblocktrans %}
+        {% endif %}
       </span>
     {% endif %}
     <ul class="nav nav-pills pull-right">

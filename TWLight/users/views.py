@@ -61,8 +61,6 @@ class UserHomeView(View):
             else:
                 return_view = cls.non_editor_view
 
-            print return_view.as_view()
-
             if 'pk' in kwargs:
                 return return_view.as_view()(request, *args, **kwargs)
             else:
