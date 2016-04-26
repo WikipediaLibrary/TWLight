@@ -162,12 +162,13 @@ class BaseApplicationForm(forms.Form):
     def _add_user_data_subform(self, user_data):
         self._validate_user_data(user_data)
 
-        user_data_layout = Fieldset(_('Information about you'))
-        for datum in user_data:
-            self.fields[datum] = FIELD_TYPES[datum]
-            self.fields[datum].label = FIELD_LABELS[datum]
-            user_data_layout.append(datum)
-        self.helper.layout.append(user_data_layout)
+        if user_data:
+            user_data_layout = Fieldset(_('Information about you'))
+            for datum in user_data:
+                self.fields[datum] = FIELD_TYPES[datum]
+                self.fields[datum].label = FIELD_LABELS[datum]
+                user_data_layout.append(datum)
+            self.helper.layout.append(user_data_layout)
 
 
     def _add_partner_data_subform(self, partner):
@@ -182,14 +183,15 @@ class BaseApplicationForm(forms.Form):
         # base fields should be in the form for all partners.
         all_partner_data = partner_data + PARTNER_FORM_BASE_FIELDS
 
-        for datum in all_partner_data:
-            # This will yield fields with names like 'partner_1_occupation'.
-            # This will let us tell during form processing which fields
-            # belong to which partners.
-            field_name = '{partner}_{datum}'.format(
-                partner=partner, datum=datum)
-            self.fields[field_name] = FIELD_TYPES[datum]
-            self.fields[field_name].label = FIELD_LABELS[datum]
-            partner_layout.append(field_name)
+        if all_partner_data:
+            for datum in all_partner_data:
+                # This will yield fields with names like 'partner_1_occupation'.
+                # This will let us tell during form processing which fields
+                # belong to which partners.
+                field_name = '{partner}_{datum}'.format(
+                    partner=partner, datum=datum)
+                self.fields[field_name] = FIELD_TYPES[datum]
+                self.fields[field_name].label = FIELD_LABELS[datum]
+                partner_layout.append(field_name)
 
-        self.helper.layout.append(partner_layout)
+            self.helper.layout.append(partner_layout)

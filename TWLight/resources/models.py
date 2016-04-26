@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from TWLight.resources.fields import DurationField
+from durationfield.db.models.fields.duration import DurationField
 
 
 class Partner(models.Model):

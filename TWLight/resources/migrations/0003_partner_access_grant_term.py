@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import TWLight.resources.fields
+import durationfield.db.models.fields.duration
 
 
 class Migration(migrations.Migration):
@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='partner',
             name='access_grant_term',
-            field=TWLight.resources.fields.DurationField(help_text=b'The standard length of an access grant from this Partner.', null=True, blank=True),
+            field=durationfield.db.models.fields.duration.DurationField(help_text=b'The standard length of an access grant from this Partner.', null=True, blank=True),
             preserve_default=True,
         ),
     ]

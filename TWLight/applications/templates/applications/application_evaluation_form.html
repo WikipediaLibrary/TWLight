@@ -15,6 +15,20 @@
 
   <div class="row">
     <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Date of application' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.date_created | localize }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Number of days open' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.get_num_days_open }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
       <strong>{% trans 'Status' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
@@ -121,9 +135,15 @@
             {% endcomment %}
             <div class="col-xs-9">
               <span class="pull-left">
-                {% blocktrans with user=version.revision.user review_date=version.revision.date_created|localize %}
-                  Reviewed by {{ user }} on {{ review_date }}
-                {% endblocktrans %}
+                {% if forloop.last %}
+                  {% blocktrans with user=version.revision.user review_date=version.revision.date_created|localize %}
+                    Submitted by by {{ user }} on {{ review_date }}
+                  {% endblocktrans %}
+                {% else %}
+                  {% blocktrans with user=version.revision.user review_date=version.revision.date_created|localize %}
+                    Reviewed by {{ user }} on {{ review_date }}
+                  {% endblocktrans %}
+                {% endif %}
               </span>
             </div>
         </li>

@@ -7,7 +7,8 @@ to the /admin section of the web page and can administer user accounts and
 other database objects. They are not written for 1) sysadmins or 2)
 less-privileged TWLight users.
 
-## Account classes
+## Users
+### Account classes
 There are 3 basic classes of accounts on TWLight:
 * Site administrator;
 * Coordinator;
@@ -31,9 +32,9 @@ Anyone who created their account via OAuth has editor privileges by default. You
 
 While site administrators can create accounts via `/admin`, it is recommended to let users create them via OAuth (upgrading them to coordinator or administrator if needed), because this means that their Wikipedia user information is automatically available.
 
-## Setting up an admin user
+### Setting up an admin user
 
-### If you don't have an admin user
+#### If you don't have an admin user
 When sysadmins run `python manage.py syncdb` to set up the database, they are
 asked if they want to set up an admin user. This is the simplest time to
 establish your admin account.
@@ -44,7 +45,7 @@ anyone else with command-line access) can run
 
 This is the one case where you want to manually create a user, rather than going via OAuth, because OAuth-created users won't have the privileges you need to administer the site, and you need to guarantee that someone does.
 
-### If you do, but want another
+#### If you do, but want another
 If you already have a superuser, you can create another with `createsuperuser`.
 
 Alternately, if you are a superuser (and especially if you don't have
@@ -58,9 +59,12 @@ command-line) access, do the following:
 * Save the new user. This will allow you to edit additional properties.
 * Click the superuser status checkbox and save.
 
-## Making someone a coordinator
+### Making someone a coordinator
 When people create accounts via OAuth, they have Editor status by default. To promote them to Coordinator:
 * Log into `/admin`
 * Find them under the Users section
 * Move _Coordinators_ from _Available groups_ to _Chosen groups_
 * Click _Save_
+
+## Partners
+https://django-durationfield.readthedocs.org/en/latest/#usage

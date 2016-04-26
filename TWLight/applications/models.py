@@ -1,3 +1,4 @@
+from datetime import date
 import reversion
 
 from django.contrib.auth.models import User
@@ -12,6 +13,7 @@ class Application(models.Model):
     class Meta:
         app_label = 'applications'
 
+
     PENDING = 0
     QUESTION = 1
     APPROVED = 2
@@ -25,6 +27,14 @@ class Application(models.Model):
     )
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
+    date_created = models.DateField(auto_now_add=True)
+
+    # Will be set on save() if status changes from PENDING/QUESTION to
+    # APPROVED/NOT APPROVED.
+    date_closed = models.DateField(blank=True, null=True,
+        help_text=_('Do not override this field! Its value is set automatically '
+                  'when the application is saved, and overriding it may have '
+                  'undesirable results.'))
 
     user = models.ForeignKey(User, related_name='applications')
     partner = models.ForeignKey(Partner, related_name='applications')
@@ -45,6 +55,19 @@ class Application(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('applications:evaluate', kwargs={'pk': self.pk})
 
+    def save(self, *args, **kwargs):
+        version = self.get_latest_version()
+        if version:
+            orig_status = version.field_dict['status']
+            if (orig_status in [self.PENDING, self.QUESTION]
+                and self.status in [self.APPROVED, self.NOT_APPROVED]
+                and not self.date_closed):
+
+                self.date_closed = date.today()
+
+        super(Application, self).save(*args, **kwargs)
+
+
 
     LABELMAKER = {
         PENDING: '-primary',
@@ -64,12 +87,55 @@ class Application(models.Model):
         return self.LABELMAKER[self.status]
 
 
+    def get_version_count(self):
+        return len(reversion.get_for_object(self))
+
+
     def get_latest_version(self):
-        return reversion.get_for_object(self)[0]
+        try:
+            return reversion.get_for_object(self)[0]
+        except TypeError:
+            # If no versions yet...
+            return None
 
 
     def get_latest_revision(self):
-        return self.get_latest_version().revision
+        version = self.get_latest_version()
 
+        if version:
+            return version.revision
+        else:
+            return None
+
+
+    def get_latest_reviewer(self):
+        revision = self.get_latest_revision()
+
+        if revision:
+            return revision.user
+        else:
+            return None
+
+
+    def get_latest_review_date(self):
+        revision = self.get_latest_revision()
+
+        if revision:
+            return revision.date_created
+        else:
+            return None
+
+
+    def get_num_days_open(self):
+        """
+        If the application has status PENDING or QUESTION, return the # of days
+        since the application was initiated. Otherwise, get the # of days
+        elapsed from application initiation to final status determination.
+        """
+        if self.status in [self.PENDING, self.QUESTION]:
+            return (self.date_created - date.today()).days
+        else:
+            assert self.status in [self.APPROVED, self.NOT_APPROVED]
+            return (self.date_created - self.date_closed).days
 
     # TODO: order_by

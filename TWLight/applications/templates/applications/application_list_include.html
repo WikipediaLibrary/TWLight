@@ -11,11 +11,15 @@
           {{ app }}
         </a>
         &mdash;
-        {% blocktrans with user=app.get_latest_revision.user review_date=app.get_latest_revision.date_created|localize %}
-          Last reviewed by {{ user }} on {{ review_date }}
-        {% endblocktrans %}
+        {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
+          {% blocktrans with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
+            Last reviewed by {{ reviewer }} on {{ review_date }}
+          {% endblocktrans %}
+        {% else %}
+          {% trans 'Not yet reviewed.' %}
+        {% endif %}
       </li>
     {% empty %}
-      <li>{% trans 'No applications yet.' %}</li>
+      <li>{% trans 'No applications right now.' %}</li>
     {% endfor %}      
   </ul>

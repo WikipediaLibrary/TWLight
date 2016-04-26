@@ -6,6 +6,7 @@ status.
 """
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from datetime import date, timedelta
 import reversion
 from reversion.helpers import generate_patch_html
 
@@ -346,6 +347,46 @@ class ListRejectedApplicationsView(CoordinatorsOnly, ListView):
           under-discussion</a> and <a href="{approved_url}">approved</a>
           applications. 
         """).format(open_url=open_url, approved_url=approved_url)
+
+        return context
+
+    # TODO: paginate
+
+
+
+class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
+    """
+    Lists access grants that are probably about to expire, based on a default
+    access grant length of 365 days.
+    """
+    model = Application
+
+    def get_queryset(self):
+        ten_months_ago = date.today() - timedelta(days=300)
+        return Application.objects.filter(
+                status=Application.APPROVED,
+                date_closed__lte=ten_months_ago,
+             ).order_by('date_closed')
+
+
+    def get_context_data(self, **kwargs):
+        context = super(ListExpiringApplicationsView, self).get_context_data(**kwargs)
+
+        context['title'] = _('Access grants expiring soon')
+
+        open_url = reverse_lazy('applications:list')
+        rejected_url = reverse_lazy('applications:list_rejected')
+        approved_url = reverse_lazy('applications:list_approved')
+
+        context['intro_text'] = _("""
+          This page lists approved applications whose access grants have expired
+          or are likely to expire soon, assuming a default access grant length
+          of 365 days.
+          You may also consult <a href="{open_url}">pending or
+          under-discussion</a>, <a href="{rejected_url}">rejected</a>, or
+          <a href="{approved_url}">all approved</a>
+          applications. 
+        """).format(open_url=open_url, rejected_url=rejected_url, approved_url=approved_url)
 
         return context
 

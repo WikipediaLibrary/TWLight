@@ -235,3 +235,12 @@ CONSUMER_SECRET = os.environ.get('TWLIGHT_CONSUMER_SECRET', None)
 # automatically versioned & saved, and that they have request.user attached
 # to their metadata.
 MIDDLEWARE_CLASSES += ('reversion.middleware.RevisionMiddleware',)
+
+
+
+# DURATIONFIELD CONFIGURATION
+# ------------------------------------------------------------------------------
+
+# See https://django-durationfield.readthedocs.org/en/latest/#usage
+DURATIONFIELD_ALLOW_MONTHS = True
+DURATIONFIELD_ALLOW_YEARS = True

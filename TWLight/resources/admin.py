@@ -5,7 +5,7 @@ from .models import Partner, Stream, Contact
 
 class PartnerAdmin(admin.ModelAdmin):
     search_fields = ('company_name',)
-    list_display = ('id', 'company_name', 'description',)
+    list_display = ('company_name', 'description', 'id',)
 
 admin.site.register(Partner, PartnerAdmin)
 
