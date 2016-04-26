@@ -5,7 +5,11 @@
       <strong>{% trans "Wikipedia username *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      <a href="{{ editor.wp_user_page_url }}">{{ editor.wp_username }}</a>
+      {% if editor.wp_user_page_url %}
+        <a href="{{ editor.wp_user_page_url }}">{{ editor.wp_username }}</a>
+      {% else %}
+        {{ editor.wp_username }}
+      {% endif %}
     </div>
 
     <div class="col-xs-12 col-sm-4">
@@ -21,7 +25,11 @@
     <div class="col-xs-12 col-sm-8">
       {% if editor.home_wiki %}
         {{ editor.get_home_wiki_display }}
-      {% else %}<br />{% endif %}
+      {% endif %}
+      {% ifequal editor.user user %}
+        <a href="{% url 'users:editor_update' editor.pk %}">(update)</a>
+      {% endifequal %}
+      <br />
     </div>
 
     <div class="col-xs-12 col-sm-4">
@@ -64,7 +72,13 @@
       <strong>{% trans "Contributions" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {% if editor.contributions %}{{ editor.contributions }}{% else %}<br />{% endif %}
+      {% if editor.contributions %}
+        {{ editor.contributions }}
+      {% endif %}
+      {% ifequal editor.user user %}
+        <a href="{% url 'users:editor_update' editor.pk %}">(update)</a>
+      {% endifequal %}
+      <br />
     </div>
 
     <div class="col-xs-12 col-sm-4">

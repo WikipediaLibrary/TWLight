@@ -108,8 +108,11 @@ class Editor(models.Model):
 
     @property
     def wp_user_page_url(self):
-        url = 'https://{home_wiki_link}/wiki/User:{user.wp_username}'.format(
-            home_wiki_link=self.get_home_wiki_display(), user=self)
+        if self.get_home_wiki_display():
+            url = 'https://{home_wiki_link}/wiki/User:{user.wp_username}'.format(
+                home_wiki_link=self.get_home_wiki_display(), user=self)
+        else:
+            url = None
         return url
 
     @property

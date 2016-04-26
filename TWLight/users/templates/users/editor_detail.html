@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load l10n %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <h1>{% trans "Editor profile information" %}</h1>
@@ -21,6 +22,15 @@
   </p>
 
   <h2>{% trans 'Editor data' %}</h2>
+  {% if not editor.home_wiki or not editor.contributions %}
+    <div class="well">
+      <h3>
+        {% trans 'Please complete your profile.' %}
+      </h3>
+      {% crispy form %}
+    </div>
+  {% endif %}
+
   {% include 'users/editor_detail_data.html' %}
 
   <h2>{% trans 'Editor application history' %}</h2>

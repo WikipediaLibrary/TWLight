@@ -1,15 +1,12 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-
 from django.contrib.auth.models import User
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.utils.decorators import classonlymethod
-from django.utils.translation import ugettext as _
 
 from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly
 
+from .forms import EditorUpdateForm
 from .models import Editor
 
 
@@ -35,8 +32,10 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
-        context['editor'] = self.get_object().editor
+        editor = self.get_object().editor
+        context['editor'] = editor
         context['object_list'] = self.get_object().applications.all().order_by('status')
+        context['form'] = EditorUpdateForm(instance=editor)
         return context
 
 
@@ -82,16 +81,5 @@ class EditorUpdateView(SelfOnly, UpdateView):
     can also be used if we'd like to let editors change this info later.
     """
     model = Editor
-    fields = ['home_wiki', 'contributions']
     template_name = 'users/editor_update.html'
-
-    def get_form(self, form_class):
-        form = super(EditorUpdateView, self).get_form(form_class)
-
-        form.helper = FormHelper()
-        form.helper.add_input(Submit(
-            'submit',
-            _('Update profile'),
-            css_class='center-block'))
-
-        return form
+    form_class = EditorUpdateForm
