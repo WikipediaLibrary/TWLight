@@ -61,10 +61,18 @@ class EditorsOnly(UserPassesTestMixin):
 class SelfOnly(UserPassesTestMixin):
     """
     Restricts visibility to:
-    * The user who owns the object in question.
+    * The user who owns (or is) the object in question.
 
     This mixin assumes that the decorated view has a get_object method, and that
     the object in question has a ForeignKey, 'user', to the User model.
     """
     def test_func(self, user):
-        return (self.get_object().user == user)
+        obj_owner_test = False # set default
+
+        obj = self.get_object()
+        if isinstance(obj, User):
+            obj_owner_test = (obj == user)
+        else:
+            obj_owner_test = (self.get_object().user == user)
+
+        return obj_owner_test
