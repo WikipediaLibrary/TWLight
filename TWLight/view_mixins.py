@@ -4,19 +4,25 @@ Commonly needed custom view mixins.
 
 from braces.views import UserPassesTestMixin
 
+from django.contrib.auth.models import User
+
 from TWLight.users.groups import coordinators
 
 class CoordinatorsOrSelf(UserPassesTestMixin):
     """
     Restricts visibility to:
     * Coordinators; or
-    * The Editor who owns the object in the view; or
+    * The Editor who owns (or is) the object in the view; or
     * Superusers.
     """
 
     def test_func(self, user):
         try:
-            obj_owner_test = (self.get_object().user == user)
+            obj = self.get_object()
+            if isinstance(obj, User):
+                obj_owner_test = (obj == user)
+            else:
+                obj_owner_test = (self.get_object().user == user)
         except AttributeError:
             obj_owner_test = False
 
