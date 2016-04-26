@@ -21,6 +21,16 @@
     {% endblocktrans %}
   </p>
 
+  <h2>{% trans 'Editor application history' %}</h2>
+
+  <p>
+    <a href="{% url 'applications:request' %}" class="btn btn-primary">
+      {% trans 'Start new application' %}
+    </a>
+  </p>
+
+  {% include 'applications/application_list_include.html' %}
+
   <h2>{% trans 'Editor data' %}</h2>
   {% if not editor.home_wiki or not editor.contributions %}
     <div class="well">
@@ -32,10 +42,6 @@
   {% endif %}
 
   {% include 'users/editor_detail_data.html' %}
-
-  <h2>{% trans 'Editor application history' %}</h2>
-
-  {% include 'applications/application_list_include.html' %}
 
   <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1">

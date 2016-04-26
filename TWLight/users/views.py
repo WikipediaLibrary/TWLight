@@ -19,22 +19,21 @@ class UserDetailView(TemplateView):
 
 class EditorDetailView(CoordinatorsOrSelf, DetailView):
     """
-    User profile data page.
-
-    This uses User as the base model so that the pk indicated in the URL
-    will be the same as the pk used in the admin site to access a given
-    user. However, the data presented is all profile data from the Editor
-    model, which is what site users need to actually make decisions about
-    access grants.
+    User profile data page for users who are Editors. Uses the Editor model,
+    because:
+    1) That's where most of the data is;
+    2) Using the Editor model means its URL parameter is consistent with that of
+       EditorDetailView, because you know Wikipedians will employ URL hacking
+       to get places on the site, and this simplifies that.
     """
-    model = User
+    model = Editor
     template_name = 'users/editor_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
-        editor = self.get_object().editor
-        context['editor'] = editor
-        context['object_list'] = self.get_object().applications.all().order_by('status')
+        editor = self.get_object()
+        context['editor'] = editor # allow for more semantic templates
+        context['object_list'] = editor.user.applications.all().order_by('status')
         context['form'] = EditorUpdateForm(instance=editor)
         return context
 
