@@ -52,6 +52,7 @@ TWLIGHT_APPS = (
     'TWLight.users',
     'TWLight.resources',
     'TWLight.applications',
+    'TWLight.emails',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TWLIGHT_APPS
@@ -244,3 +245,14 @@ MIDDLEWARE_CLASSES += ('reversion.middleware.RevisionMiddleware',)
 # See https://django-durationfield.readthedocs.org/en/latest/#usage
 DURATIONFIELD_ALLOW_MONTHS = True
 DURATIONFIELD_ALLOW_YEARS = True
+
+
+
+# DJMAIL CONFIGURATION
+# ------------------------------------------------------------------------------
+
+EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
+
+# This is a dummy backend that will write to stdout. Safe, yet useless.
+DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+INSTALLED_APPS += ('djmail',)

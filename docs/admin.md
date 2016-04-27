@@ -9,6 +9,10 @@ less-privileged TWLight users.
 
 In general, you will do admin-y things at the `/admin` URL. This gives you a GUI interface to the database. Good times.
 
+## Logging in
+
+_If you did not create your account via OAuth_, or did not manually fill in accurate Wikipedia editor profile data, you will not be able to use OAuth to log in. Instead, go to `/accounts/login`.
+
 ## Users
 ### Account classes
 There are 3 basic classes of accounts on TWLight:
@@ -74,5 +78,6 @@ TODO
 
 ## Sending emails
 TODO
-* you can define templated emails, but
-* signaling architecture
+* email is defined in codebase, not via admin interface
+* why? to be available to translators
+* 

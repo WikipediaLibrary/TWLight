@@ -4,7 +4,7 @@ import reversion
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
 
@@ -133,9 +133,9 @@ class Application(models.Model):
         elapsed from application initiation to final status determination.
         """
         if self.status in [self.PENDING, self.QUESTION]:
-            return (self.date_created - date.today()).days
+            return (date.today() - self.date_created).days
         else:
             assert self.status in [self.APPROVED, self.NOT_APPROVED]
-            return (self.date_created - self.date_closed).days
+            return (self.date_closed - self.date_created).days
 
     # TODO: order_by

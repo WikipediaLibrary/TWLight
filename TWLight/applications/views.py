@@ -401,14 +401,12 @@ class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
     * view associated editor metadata
     * assign status
 
-    TODO: let them add questions/comments and figure out how to communicate those
-    TODO: access control to just Coordinators, and the Editor in question
     TODO have internal-only comments (visible to just coordinators)
     TODO: internationalize form labels
     """
     model = Application
     fields = ['status']
-    template_name_suffix = '_evaluation_form'
+    template_name_suffix = '_evaluation'
     success_url = reverse_lazy('applications:list')
 
 

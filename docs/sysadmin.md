@@ -13,7 +13,7 @@ There are a few dependencies that are not available as debian packages, and they
 * `diff_match_patch`
 * `durationfield` (This can be removed, modulo updating its import statements, should TWLight be upgraded to Django 1.8, which includes durationfield natively.)
 * `mwoauth`
-* `post_office`
+* `djmail`
 
 ## System dependencies
 
@@ -31,6 +31,7 @@ There are a few dependencies that are not available as debian packages, and they
     * Set `CONSUMER_KEY` and `CONSUMER_SECRET` to whatever you need to authenticate to Wikimedia OAuth
     * Mostly this file just inherits from the base settings file, and that's fine.
 * TODO: email
+    * note: requires celery, redis for production-level performance
 * running Django
     * _Do not use `manage.py runserver`_: it is not suitable for production
     * `gunicorn` is often used to run Django; for a working example, see https://github.com/MeasureTheFuture/mothership_beta/blob/master/bin/gunicorn_start
