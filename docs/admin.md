@@ -7,6 +7,8 @@ to the /admin section of the web page and can administer user accounts and
 other database objects. They are not written for 1) sysadmins or 2)
 less-privileged TWLight users.
 
+In general, you will do admin-y things at the `/admin` URL. This gives you a GUI interface to the database. Good times.
+
 ## Users
 ### Account classes
 There are 3 basic classes of accounts on TWLight:
@@ -68,3 +70,9 @@ When people create accounts via OAuth, they have Editor status by default. To pr
 
 ## Partners
 https://django-durationfield.readthedocs.org/en/latest/#usage
+TODO
+
+## Sending emails
+TODO
+* you can define templated emails, but
+* signaling architecture
