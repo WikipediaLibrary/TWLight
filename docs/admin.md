@@ -11,7 +11,7 @@ In general, you will do admin-y things at the `/admin` URL. This gives you a GUI
 
 ## Logging in
 
-_If you did not create your account via OAuth_, or did not manually fill in accurate Wikipedia editor profile data, you will not be able to use OAuth to log in. Instead, go to `/accounts/login`.
+_If you did not create your account via OAuth_ and did not manually fill in accurate Wikipedia editor profile data after creating your account, you will not be able to use OAuth to log in. Instead, go to `/accounts/login`.
 
 ## Users
 ### Account classes
@@ -77,7 +77,24 @@ https://django-durationfield.readthedocs.org/en/latest/#usage
 TODO
 
 ## Sending emails
-TODO
-* email is defined in codebase, not via admin interface
-* why? to be available to translators
-* 
+
+Right now TWLight sends one type of email: comment notifications whenever someone comments on an application. Recipients are 1) the editor who owns that application; 2) anyone else who has commented on that application.
+
+To make TWLight send additional emails, you (or your friendly neighborhood developer) will need to write more code. Unfortunately form emails cannot be handled through `/admin`, because database objects are not visible to the translation infrastructure. Storing emails as HTML in the codebase, with the `{% trans %}` or `{% blocktrans %}` tag, means they will automatically be provided to translators via Django's internationalization mechanism.
+
+The existing `emails/tasks.py` provides a model for how additional emails can be incorporated into the codebase. The steps are:
+
+* Write files with the text you would like to send.
+    * These files should live in `emails/templates/emails/`
+    * They should have the following names:
+        * {your_email_type}-body-html.html
+        * {your_email_type}-subject.html
+        * {your_email_type}-body-text.html (optional; I have skipped it and just written a text-formatted email in the -body-html file)
+    * They should `{% load i18n %}` and use `{% trans %}` or `{% blocktrans %}` to mark text for translation.
+    * They are Django templates, so you can supply them with context which will be rendered in the usual manner.
+* Define a TemplateMail subclass in `emails/tasks.py` which has a line `name = {your_email_type}`.
+* Define a function in `emails/tasks.py` which sends the email. (See the `email =` and `email.send()` lines in `emails/tasks.py` for examples of 1) instantiating a class of your template mail; 2) sending it.)
+* Identify where you want to trigger email sending.
+* At that point, you have two options:
+    * call the function you just defined (this is in general easier and more debuggable, and you should do it unless you can't)
+    * send a signal, and make sure the function you defined is a `@receiver` of that signal (may be necessary if third-party apps, like `django.contrib.comments`, are your trigger)

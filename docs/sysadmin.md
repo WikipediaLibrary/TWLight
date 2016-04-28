@@ -30,8 +30,12 @@ There are a few dependencies that are not available as debian packages, and they
     * Change the `SECRET_KEY` if desired (can be anything, should be kept secret)
     * Set `CONSUMER_KEY` and `CONSUMER_SECRET` to whatever you need to authenticate to Wikimedia OAuth
     * Mostly this file just inherits from the base settings file, and that's fine.
-* TODO: email
-    * note: requires celery, redis for production-level performance
+* email
+    * TWLight occasionally sends emails. The code is nearly agnostic about its backend, but you do need to set one up.
+    * In `settings/local.py` you can see an example of configuring TWLight to use an SMTP server synchronously for mail sending.
+        * _Do not do this._ Synchronous mail sending will block the request/response loop and lead to some really long pageload times (and possibly timeouts).
+    * `settings/production.py` instead configures djmail to expect a celery backend.
+    * TODO make a sample celery config, get it working on heroku
 * running Django
     * _Do not use `manage.py runserver`_: it is not suitable for production
     * `gunicorn` is often used to run Django; for a working example, see https://github.com/MeasureTheFuture/mothership_beta/blob/master/bin/gunicorn_start
