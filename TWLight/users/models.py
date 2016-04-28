@@ -63,30 +63,12 @@ class Editor(models.Model):
     wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"))
     wp_sub = models.IntegerField(help_text=_("Wikipedia user ID")) # WP user id.
 
-    # ArrayField is a postgres-specific field type for storing
-    # lists in a structured format. ArrayField will permit us
-    # to do queries of the sort "filter all editors belonging
-    # to group X", which should suffice for our purposes. Creating
-    # actual db representations of each group and right so as to
-    # create FKs to all the users possessing them seems like overkill.
-    #wp_groups = ArrayField(base_field=models.CharField(max_length=25),
-    #    help_text=_("Wikipedia groups"))
-    #wp_rights = ArrayField(base_field=models.CharField(max_length=50),
-    #    help_text=_("Wikipedia user rights"))
+    # Should we want to filter these to check for specific group membership or
+    # user rights in future:
+    # Editor.objects.filter(wp_groups__icontains=groupname) or similar.
+    wp_groups = models.TextField(help_text=_("Wikipedia groups"))
+    wp_rights = models.TextField(help_text=_("Wikipedia user rights"))
 
-    _wp_internal = models.TextField()
-
-    # this does not actually work because json.dumps doesn't perform enough
-    # validation - it can dump things we cannot subsequently load. It may be
-    # that all we need is to store a string and use
-    # filter(wp_groups__icontains=groupname) and call that good enough.
-    @property
-    def wp_internal(self):
-        return json.loads(self._wp_internal)
-    @wp_internal.setter
-    def wp_internal(self, value):
-        self._wp_internal = json.dumps(value)
-    
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     home_wiki = models.CharField(max_length=4, choices=WIKIS,
@@ -177,7 +159,8 @@ class Editor(models.Model):
             raise
 
         self.wp_username = identity['username']
-        self._wp_internal = identity['rights']
+        self.wp_rights = identity['rights']
+        self.wp_groups = identity['groups']
         self.wp_editcount = identity['editcount']
         reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
         self.wp_registered = reg_date

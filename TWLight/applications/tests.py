@@ -2,7 +2,7 @@
 
 from django import forms
 from django.conf import settings
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.test import TestCase, Client, RequestFactory
@@ -10,7 +10,7 @@ from django.test import TestCase, Client, RequestFactory
 from TWLight.resources.models import Partner, Stream
 from TWLight.resources.factories import PartnerFactory
 from TWLight.users.factories import EditorFactory
-from TWLight.users.groups import COORDINATOR_GROUP_NAME
+from TWLight.users.groups import get_coordinators()
 from TWLight.users.models import Editor
 from TWLight.users.tests import get_or_create_user
 
@@ -181,7 +181,7 @@ class BaseApplicationViewTest(TestCase):
         EditorFactory(user=cls.editor2)
 
         cls.coordinator = get_or_create_user('coordinator')
-        coordinators = Group.objects.get(name=COORDINATOR_GROUP_NAME)
+        coordinators = get_coordinators()
         coordinators.user_set.add(cls.coordinator)
 
 

@@ -1,4 +1,4 @@
-import random
+from urlparse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -7,11 +7,10 @@ from django.test import TestCase, Client
 
 from .helpers.wiki_list import WIKIS
 from .factories import EditorFactory
+from .groups import get_coordinators
 
 # Should be replaced with a proper factory, but factory-boy plus new migrations
 # infrastructure doesn't seem to work right in tests.
-
-todays_wiki = random.choice(WIKIS)[0]
 
 
 def get_or_create_user(userpass):
@@ -57,6 +56,13 @@ class ViewsTestCase(TestCase):
         self.editor3 = EditorFactory(user=self.user3)
 
 
+        # User 4: Coordinator
+        self.username4 = 'eve'
+        self.user4 = get_or_create_user(self.username4)
+        self.editor4 = EditorFactory(user=self.user4)
+        get_coordinators().user_set.add(self.user4)
+
+
     def tearDown(self):
         self.user1.delete()
         self.editor1.delete()
@@ -71,59 +77,58 @@ class ViewsTestCase(TestCase):
         """
         The EditorDetailView resolves.
         """
-        found = resolve(self.url1)
+        _ = resolve(self.url1)
 
 
     # Anonymous user cannot see editor page
     def test_anon_user_cannot_see_editor_details(self):
-        response = self.client.get(self.url1)
-        redirect_url = '{redirect_base}?next={next}'.format(
-            redirect_base=settings.LOGIN_URL, next=self.url1)
-        self.assertRedirects(response, redirect_url)
+        response_url = self.client.get(self.url1).url
+
+        url_components = urlparse(response_url)
+        self.assertEqual(url_components.path, settings.LOGIN_URL)
 
 
     # Editor can see own page
     def test_editor_can_see_own_page(self):
         self.client.login(username=self.username1, password=self.username1)
-        response = self.client.get(self.url1)
+        response = self.client.get(self.url1, follow=True)
         self.assertEqual(response.status_code, 200)
 
 
     # Editor cannot see someone else's info
     def test_editor_cannot_see_other_editor_page(self):
         self.client.login(username=self.username1, password=self.username1)
-        response = self.client.get(self.url2)
+        response = self.client.get(self.url2, follow=True)
         self.assertEqual(response.status_code, 403)
 
 
     # Coordinator can see someone else's info
     def test_coordinator_access(self):
-        # This test needs to be written after we've ripped out the coordinator
-        # class, so we're just using groups.
-        # While you're at it, make sure user has a post-save hook to make
-        # Editors exist.
-        assert False
+        self.client.login(username=self.username4, password=self.username4)
+        response = self.client.get(self.url1, follow=True)
+        self.assertEqual(response.status_code, 200)
 
 
     # Site admin can see someone else's info
     def test_site_admin_can_see_other_editor_page(self):
         self.client.login(username=self.username3, password=self.username3)
-        response = self.client.get(self.url1)
+        response = self.client.get(self.url1, follow=True)
         self.assertEqual(response.status_code, 200)
 
 
     # Expected editor data is in the page
     def test_editor_page_has_data(self):
         self.client.login(username=self.username1, password=self.username1)
-        response = self.client.get(self.url1)
+        response = self.client.get(self.url1, follow=True)
         content = response.content
-        self.assertIn('alice', content)     # wp_username
-        self.assertIn('42', content)          # edit count
-        self.assertIn('blah blah blah', content)          # wp_internal
-        self.assertIn(todays_wiki, content) # home wiki
-        self.assertIn('telecommunications project on the Latin wiki', content)
 
-# Does django-braces give me a like can-see-own mixin? can I decorate that?
+        # This uses default data from EditorFactory.
+        self.assertIn('alice', content)                 # wp_username
+        self.assertIn('42', content)                    # edit count
+        self.assertIn('some groups', content)           # wp_groups
+        self.assertIn('some rights', content)           # wp_rights
+        self.assertIn(WIKIS[0][0], content)             # home wiki
+        self.assertIn('Cat floofing, telemetry, fermentation', content)
 
 # Test user creation
 # receiving signal from oauth results in creation of editor model

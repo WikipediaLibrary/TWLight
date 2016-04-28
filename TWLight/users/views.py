@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.views import redirect_to_login
+from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -80,3 +81,19 @@ class EditorUpdateView(SelfOnly, UpdateView):
     model = Editor
     template_name = 'users/editor_update.html'
     form_class = EditorUpdateForm
+
+
+class DenyAuthenticatedUsers(View):
+    """
+    This view is provided for use in view_mixins.py.
+
+    The default UserPassesTestMixin redirects all users through
+    settings.LOGIN_URL if they fail the test. This isn't the behavior we want;
+    users who are already logged-in but don't pass the test should get
+    PermissionDenied. Only unauthenticated users should be asked to log in.
+    """
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            raise PermissionDenied
+        else:
+            return redirect_to_login(request.get_full_path())            

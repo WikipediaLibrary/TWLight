@@ -15,6 +15,7 @@ class UserFactory(factory.django.DjangoModelFactory):
         django_get_or_create = ('username',)
 
     username = 'alice'
+    email = 'alice@example.com'
 
 
 
@@ -34,7 +35,7 @@ class EditorFactory(factory.django.DjangoModelFactory):
     wp_editcount = 42
     wp_registered = datetime.today()
     wp_sub = 318956
-    _wp_internal = 'nothing to see here'
+    wp_groups = 'some groups'
+    wp_rights = 'some rights'
     home_wiki = WIKIS[0][0]
     contributions = 'Cat floofing, telemetry, fermentation'
-    email = 'alice@example.com'

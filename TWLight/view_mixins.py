@@ -5,8 +5,13 @@ Commonly needed custom view mixins.
 from braces.views import UserPassesTestMixin
 
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 
-from TWLight.users.groups import coordinators
+from TWLight.users.groups import get_coordinators
+
+
+coordinators = get_coordinators()
+
 
 class CoordinatorsOrSelf(UserPassesTestMixin):
     """
@@ -19,6 +24,8 @@ class CoordinatorsOrSelf(UserPassesTestMixin):
     the object in question has a ForeignKey, 'user', to the User model, or else
     is an instance of User.
     """
+
+    login_url = reverse_lazy('users:test_permission')
 
     def test_func(self, user):
         try:
@@ -42,6 +49,8 @@ class CoordinatorsOnly(UserPassesTestMixin):
     * Superusers.
     """
 
+    login_url = reverse_lazy('users:test_permission')
+
     def test_func(self, user):
         return (user.is_superuser or
                 user in coordinators.user_set.all())
@@ -58,6 +67,8 @@ class EditorsOnly(UserPassesTestMixin):
     OAuth.
     """
 
+    login_url = reverse_lazy('users:test_permission')
+
     def test_func(self, user):
         return hasattr(user, 'editor')
 
@@ -71,6 +82,9 @@ class SelfOnly(UserPassesTestMixin):
     the object in question has a ForeignKey, 'user', to the User model, or else
     is an instance of User.
     """
+
+    login_url = reverse_lazy('users:test_permission')
+
     def test_func(self, user):
         obj_owner_test = False # set default
 

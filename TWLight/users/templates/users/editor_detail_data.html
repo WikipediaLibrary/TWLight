@@ -46,27 +46,19 @@
       {{ editor.wp_registered }}
     </div>
 
-    {% comment %}
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia groups *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {% for group in editor.wp_groups %}
-        {{ group }} <br />
-      {% endfor %}
+      {{ editor.wp_groups }}
     </div>
-    {% endcomment %}
 
-    {% comment %}
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia user rights *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {% for right in editor.wp_rights %}
-        {{ right }} <br />
-      {% endfor %}
+      {{ editor.wp_rights }}
     </div>
-    {% endcomment %}
 
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Contributions" %}</strong>

@@ -13,4 +13,7 @@ urlpatterns = [
     url(r'^update/(?P<pk>\d+)/$',
         login_required(views.EditorUpdateView.as_view()),
         name='editor_update'),
+    url(r'^test_permission/$',
+        views.DenyAuthenticatedUsers.as_view(),
+        name='test_permission'),
 ]
