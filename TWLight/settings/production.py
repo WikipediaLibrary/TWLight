@@ -24,3 +24,6 @@ DATABASES['default']['PASSWORD'] = os.environ.get('DJANGO_MYSQL_PASSWORD', '')
 
 
 # TODO add production consumer key and secret
+
+EMAIL_BACKEND = 'djmail.backends.celery.EmailBackend'
+DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
