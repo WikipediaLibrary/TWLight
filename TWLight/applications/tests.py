@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from urlparse import urlparse
 
 from django import forms
 from django.conf import settings
@@ -10,7 +11,7 @@ from django.test import TestCase, Client, RequestFactory
 from TWLight.resources.models import Partner, Stream
 from TWLight.resources.factories import PartnerFactory
 from TWLight.users.factories import EditorFactory
-from TWLight.users.groups import get_coordinators()
+from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
 from TWLight.users.tests import get_or_create_user
 
@@ -234,11 +235,12 @@ class RequestApplicationTest(BaseApplicationViewTest):
         # An anonymous user is prompted to login.
         response = self.client.get(self.url)
 
-        self.assertRedirects(response, settings.LOGIN_URL)
+        url_components = urlparse(response.url)
+        self.assertEqual(url_components.path, settings.LOGIN_URL)
 
         # A user who is not a WP editor does not have access.
         self.client.login(username='base_user', password='base_user')
-        response = self.client.get(self.url)
+        response = self.client.get(self.url, follow=True)
 
         self.assertEqual(response.status_code, 403)
 
@@ -378,17 +380,18 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # An anonymous user is prompted to login.
         response = self.client.get(self.url)
 
-        self.assertRedirects(response, settings.LOGIN_URL)
+        url_components = urlparse(response.url)
+        self.assertEqual(url_components.path, settings.LOGIN_URL)
 
         # A user who is not a WP editor does not have access.
         self.client.login(username='base_user', password='base_user')
-        response = self.client.get(self.url)
+        response = self.client.get(self.url, follow=True)
 
         self.assertEqual(response.status_code, 403)
 
         # An editor may see the page.
         self._login_editor()
-        response = self.client.get(self.url)
+        response = self.client.get(self.url, follow=True)
 
         self.assertEqual(response.status_code, 200)
 
@@ -715,11 +718,12 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             'partner_{id}_comments'.format(id=p1.id): 'None whatsoever',
         }
 
-        response = self.client.post(self.url, data=data, follow=True)
+        response = self.client.post(self.url, data=data)
+        redirect_path = urlparse(response.url).path
 
         expected_url = reverse('users:editor_detail',
                                 kwargs={'pk': self.editor.pk})
-        self.assertRedirects(response, expected_url)
+        self.assertEqual(redirect_path, expected_url)
 
 
     def test_user_profile_updates_on_success(self):
@@ -977,11 +981,12 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # An anonymous user is prompted to login.
         response = self.client.get(url)
 
-        self.assertRedirects(response, settings.LOGIN_URL)
+        url_components = urlparse(response.url)
+        self.assertEqual(url_components.path, settings.LOGIN_URL)
 
         # An editor who is not a coordinator may not see the page.
         self._login_editor()
-        response = self.client.get(url)
+        response = self.client.get(url, follow=True)
 
         self.assertEqual(response.status_code, 403)
 
