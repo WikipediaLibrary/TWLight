@@ -3,7 +3,11 @@ from urlparse import urlparse
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import resolve, reverse
+from django.template.loader import render_to_string
 from django.test import TestCase, Client
+
+from TWLight.applications.factories import ApplicationFactory
+from TWLight.applications.models import Application
 
 from .helpers.wiki_list import WIKIS
 from .factories import EditorFactory
@@ -37,7 +41,7 @@ class ViewsTestCase(TestCase):
         self.user1 = get_or_create_user(self.username1)
         self.editor1 = EditorFactory(user=self.user1)
         self.url1 = reverse('users:editor_detail',
-            kwargs={'pk': self.user1.pk})
+            kwargs={'pk': self.editor1.pk})
 
 
         # User 2: regular Editor
@@ -45,7 +49,7 @@ class ViewsTestCase(TestCase):
         self.user2 = get_or_create_user(self.username2)
         self.editor2 = EditorFactory(user=self.user2)
         self.url2 = reverse('users:editor_detail',
-            kwargs={'pk': self.user2.pk})
+            kwargs={'pk': self.editor2.pk})
 
 
         # User 3: Site administrator
@@ -70,6 +74,8 @@ class ViewsTestCase(TestCase):
         self.editor2.delete()
         self.user3.delete()
         self.editor3.delete()
+        self.user4.delete()
+        self.editor4.delete()
 
 
     # EditorDetailView resolves at URL
@@ -116,8 +122,8 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-    # Expected editor data is in the page
-    def test_editor_page_has_data(self):
+    # Expected editor personal data is in the page
+    def test_editor_page_has_editor_data(self):
         self.client.login(username=self.username1, password=self.username1)
         response = self.client.get(self.url1, follow=True)
         content = response.content
@@ -130,6 +136,25 @@ class ViewsTestCase(TestCase):
         self.assertIn(WIKIS[0][0], content)             # home wiki
         self.assertIn('Cat floofing, telemetry, fermentation', content)
 
+
+    # Expected editor application data is in the page
+    def test_editor_page_has_application_history(self):
+        app1 = ApplicationFactory(status=Application.PENDING, user=self.user1)
+        app2 = ApplicationFactory(status=Application.QUESTION, user=self.user1)
+        app3 = ApplicationFactory(status=Application.APPROVED, user=self.user1)
+        app4 = ApplicationFactory(status=Application.NOT_APPROVED, user=self.user1)
+
+        expected_html = render_to_string(
+            'applications/application_list_include.html',
+            {'object_list': [app1, app2, app3, app4]}
+            )
+
+        self.client.login(username=self.username1, password=self.username1)
+        response = self.client.get(self.url1, follow=True)
+        self.assertContains(response, expected_html)
+
+
+# TODO write these tests after design review
 # Test user creation
 # receiving signal from oauth results in creation of editor model
 # site admin status is false

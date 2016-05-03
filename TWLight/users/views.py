@@ -70,6 +70,7 @@ class UserHomeView(View):
         return _get_view
 
 
+
 class EditorUpdateView(SelfOnly, UpdateView):
     """
     Allow Editors to add the information we can't harvest from OAuth, but
@@ -81,6 +82,7 @@ class EditorUpdateView(SelfOnly, UpdateView):
     model = Editor
     template_name = 'users/editor_update.html'
     form_class = EditorUpdateForm
+
 
 
 class DenyAuthenticatedUsers(View):

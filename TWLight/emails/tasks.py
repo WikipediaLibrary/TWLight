@@ -79,24 +79,32 @@ def send_comment_notification_emails(sender, **kwargs):
         # Hopefully adequate default (only has path, not base URL)
         app_url = app.get_absolute_url()
 
-    # Send to editor who owns this application.
-    email = CommentNotificationEmailEditors()
-    email.send(app.user.email, {'app': app, 'app_url': app_url})
-    logger.info('Email queued for {app.user.email} about app #{app.pk}'.format(
-        app=app))
+    # If the editor who owns this application was not the comment poster, notify
+    # them of the new comment.
+    if current_comment.user_email != app.user.email:
+        email = CommentNotificationEmailEditors()
+        email.send(app.user.email, {'app': app, 'app_url': app_url})
+        logger.info('Email queued for {app.user.email} about app #{app.pk}'.format(
+            app=app))
 
-    # Send to any previous commenters on the thread (uses different template).
+    # Send to any previous commenters on the thread, other than the editor and
+    # the person who left the comment just now.
     all_comments = Comment.objects.filter(object_pk=app.pk, content_type=apptype)
     user_emails = set(
-        [comment.user_email for comment in all_comments]
+        [comment.user.email for comment in all_comments]
         )
 
-    # But don't email the person who left the comment just now. That's annoying.
     user_emails.remove(current_comment.user_email)
+    try:
+        user_emails.remove(app.user.email)
+    except KeyError:
+        # If the editor is not among the prior commenters, that's fine; no
+        # reason they should be.
+        pass
 
     for user_email in user_emails:
         email = CommentNotificationEmailOthers()
         email.send(user_email, {'app': app, 'app_url': app_url})
-        logger.info('Email queued for {user_email} about app #{app.pk}'.format(
+        logger.info('Email queued for {app.user.email} about app #{app.pk}'.format(
             app=app))
 

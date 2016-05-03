@@ -171,7 +171,6 @@ class BaseApplicationViewTest(TestCase):
         super(BaseApplicationViewTest, cls).setUpClass()
         cls.client = Client()
 
-
         # Note: not an Editor.
         cls.base_user = get_or_create_user('base_user')
 
@@ -1045,8 +1044,3 @@ class ListApplicationsTest(BaseApplicationViewTest):
         queryset = Application.objects.filter(
             status=Application.NOT_APPROVED)
         self._base_test_object_visibility(url, queryset)
-
-
-"""
-users need to be able to see their own application status
-"""
