@@ -39,7 +39,8 @@ class Partner(models.Model):
 
     access_grant_term = DurationField(
         blank=True, null=True,
-        help_text="The standard length of an access grant from this Partner."
+        help_text="The standard length of an access grant from this Partner. " \
+                  "Enter like '365 days' or '365d' or '1 year'."
         )
 
 

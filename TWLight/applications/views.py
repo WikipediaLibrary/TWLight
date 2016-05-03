@@ -382,7 +382,7 @@ class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
     def get_context_data(self, **kwargs):
         context = super(ListExpiringApplicationsView, self).get_context_data(**kwargs)
 
-        context['title'] = _('Access grants expiring soon')
+        context['title'] = _('Access grants up for renewal')
 
         open_url = reverse_lazy('applications:list')
         rejected_url = reverse_lazy('applications:list_rejected')
@@ -391,8 +391,7 @@ class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
         context['intro_text'] = _("""
           This page lists approved applications whose access grants have
           probably expired recently
-          or are likely to expire soon, assuming a default access grant length
-          of 365 days.
+          or are likely to expire soon.
           You may also consult <a href="{open_url}">pending or
           under-discussion</a>, <a href="{rejected_url}">rejected</a>, or
           <a href="{approved_url}">all approved</a>

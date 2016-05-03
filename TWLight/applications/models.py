@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date
 import reversion
 
 from django.contrib.auth.models import User
@@ -74,7 +74,7 @@ class Application(models.Model):
                 self.date_closed = date.today()
 
         if self.date_closed and not self.earliest_expiry_date:
-            self.earliest_expiry_date = self.date_closed + timedelta(days=365)
+            self.earliest_expiry_date = self.date_closed + self.partner.access_grant_term
 
         super(Application, self).save(*args, **kwargs)
 
