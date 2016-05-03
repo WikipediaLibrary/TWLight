@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load l10n %}
+
+  <ul class="list-unstyled">
+    {% for app in object_list %}
+      <li>
+        {% if app.is_probably_expired %}
+          <span class="lead">
+            <span class="label label-danger">
+              {% blocktrans with num_days=app.get_num_days_since_expiration %}
+                Expired {{ num_days }} days ago
+              {% endblocktrans %}
+            </span>
+          </span>&nbsp;
+        {% else %}
+          <span class="lead">
+            <span class="label label-info">
+              {% blocktrans with num_days=app.get_num_days_until_expiration %}
+                Expiring in {{ num_days }} days
+              {% endblocktrans %}
+            </span>
+          </span>&nbsp;
+        {% endif %}
+        <a href="{{ app.get_absolute_url }}">
+          {{ app }}
+        </a>
+        &mdash;
+        {% blocktrans with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
+          Approved by {{ reviewer }} on {{ review_date }}
+        {% endblocktrans %}
+      </li>
+    {% empty %}
+      <li>{% trans 'No applications right now.' %}</li>
+    {% endfor %}      
+  </ul>

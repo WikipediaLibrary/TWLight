@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 import reversion
 
 from django.contrib.auth.models import User
@@ -36,6 +36,14 @@ class Application(models.Model):
                   'when the application is saved, and overriding it may have '
                   'undesirable results.'))
 
+    # Will be set on save() based on date_closed and partner access grant
+    # lengths. In practice, because access grants are triggered manually
+    # after review on TWLight, the real expiry date is likely to be later.
+    earliest_expiry_date = models.DateField(blank=True, null=True,
+        help_text=_('Do not override this field! Its value is set automatically '
+                  'when the application is saved, and overriding it may have '
+                  'undesirable results.'))
+
     user = models.ForeignKey(User, related_name='applications')
     partner = models.ForeignKey(Partner, related_name='applications')
 
@@ -64,6 +72,9 @@ class Application(models.Model):
                 and not self.date_closed):
 
                 self.date_closed = date.today()
+
+        if self.date_closed and not self.earliest_expiry_date:
+            self.earliest_expiry_date = self.date_closed + timedelta(days=365)
 
         super(Application, self).save(*args, **kwargs)
 
@@ -137,5 +148,29 @@ class Application(models.Model):
         else:
             assert self.status in [self.APPROVED, self.NOT_APPROVED]
             return (self.date_closed - self.date_created).days
+
+
+    def is_probably_expired(self):
+        if self.earliest_expiry_date:
+            if self.earliest_expiry_date <= date.today():
+                return True
+
+        return False
+
+
+    def get_num_days_since_expiration(self):
+        if self.earliest_expiry_date:
+            if self.earliest_expiry_date <= date.today():
+                return (date.today() - self.earliest_expiry_date).days
+
+        return None
+
+
+    def get_num_days_until_expiration(self):
+        if self.earliest_expiry_date:
+            if self.earliest_expiry_date > date.today():
+                return (self.earliest_expiry_date - date.today()).days
+
+        return None
 
     # TODO: order_by

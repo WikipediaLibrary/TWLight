@@ -292,6 +292,9 @@ class ListApplicationsView(CoordinatorsOnly, ListView):
           <a href="{rejected_url}">rejected</a> applications. 
         """).format(approved_url=approved_url, rejected_url=rejected_url)
 
+        context['include_template'] = \
+            'applications/application_list_include.html'
+
         return context
 
 
@@ -318,6 +321,9 @@ class ListApprovedApplicationsView(CoordinatorsOnly, ListView):
           under-discussion</a> and <a href="{rejected_url}">rejected</a>
           applications. 
         """).format(open_url=open_url, rejected_url=rejected_url)
+
+        context['include_template'] = \
+            'applications/application_list_include.html'
 
         return context
 
@@ -348,6 +354,9 @@ class ListRejectedApplicationsView(CoordinatorsOnly, ListView):
           applications. 
         """).format(open_url=open_url, approved_url=approved_url)
 
+        context['include_template'] = \
+            'applications/application_list_include.html'
+
         return context
 
     # TODO: paginate
@@ -362,11 +371,12 @@ class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
     model = Application
 
     def get_queryset(self):
-        ten_months_ago = date.today() - timedelta(days=300)
+        two_months_from_now = date.today() + timedelta(days=60)
+
         return Application.objects.filter(
                 status=Application.APPROVED,
-                date_closed__lte=ten_months_ago,
-             ).order_by('date_closed')
+                earliest_expiry_date__lte=two_months_from_now,
+             ).order_by('earliest_expiry_date')
 
 
     def get_context_data(self, **kwargs):
@@ -379,7 +389,8 @@ class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
         approved_url = reverse_lazy('applications:list_approved')
 
         context['intro_text'] = _("""
-          This page lists approved applications whose access grants have expired
+          This page lists approved applications whose access grants have
+          probably expired recently
           or are likely to expire soon, assuming a default access grant length
           of 365 days.
           You may also consult <a href="{open_url}">pending or
@@ -387,6 +398,9 @@ class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
           <a href="{approved_url}">all approved</a>
           applications. 
         """).format(open_url=open_url, rejected_url=rejected_url, approved_url=approved_url)
+
+        context['include_template'] = \
+            'applications/application_list_expiring_include.html'
 
         return context
 
