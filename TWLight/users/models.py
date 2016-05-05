@@ -87,7 +87,16 @@ class Editor(models.Model):
     affiliation = models.CharField(max_length=128, blank=True)
 
 
+    @property
+    def get_wp_rights_as_list(self):
+        return list(self.wp_groups)
 
+    
+    @property
+    def get_wp_rights_as_list(self):
+        return list(self.wp_rights)
+
+    
     @property
     def wp_user_page_url(self):
         if self.get_home_wiki_display():
@@ -96,6 +105,7 @@ class Editor(models.Model):
         else:
             url = None
         return url
+
 
     @property
     def wp_link_edit_count(self):
@@ -106,6 +116,7 @@ class Editor(models.Model):
         )
         return url
 
+
     @property
     def wp_link_sul_info(self):
         url = '{base_url}?username={user.username}'.format(
@@ -113,6 +124,7 @@ class Editor(models.Model):
             user=self
         )
         return url
+
 
     @property
     def wp_link_pages_created(self):

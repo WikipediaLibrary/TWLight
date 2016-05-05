@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">Applications</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-user fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">{{ people|length }}</div>
+              <div>{% trans 'Open applications' %}</div>
+            </div>
+          </div>
+        </div>
+        <a href="{% url 'applications:list' %}">
+          <div class="panel-footer">
+            <span class="pull-left">{% trans 'See all open applications' %}</span>
+            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-green">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-star fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">{{ avg_days_open }}</div>
+              <div>{% trans 'Average time to reivew applications (days)' %}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-yellow">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-tag fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">{{ longest_open.get_num_days_open }}</div>
+              <div>{% trans 'Longest that any current application has been open (days)' %}</div>
+            </div>
+          </div>
+        </div>
+        <a href="{% url 'applications:evaluate' longest_open.pk %}">
+          <div class="panel-footer">
+            <span class="pull-left">{% trans 'Review it now' %}</span>
+            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">Editors</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p>
+        Here we might have things like:
+      </p>
+      <ul>
+        <li>The number of editors</li>
+        <li>Average number of applications per editor</li>
+        <li>Editors most/least likely to have applications accepted</li>
+        <li>
+          Graphs of number of applications or time to application status
+          decision by editor
+        </li>
+        <li>Average number of access grants per editor</li>
+        <li>
+          Graph of # of access grants by frequency (1 editor with 1 access
+          grant, 10 editors with 2, 5 editors with 3, 2 editors with 4, etc.)
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">Partners</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p>
+        Here we might have things like:
+      </p>
+      <ul>
+        <li>The number of partners</li>
+        <li>Average number of applications per partner</li>
+        <li>Graph of number of applications by partner</li>
+        <li>
+          Partners ranked by popularity (number of open applications; number of
+          applications all time)
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endblock content %}
