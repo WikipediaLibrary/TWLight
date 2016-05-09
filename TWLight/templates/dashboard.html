@@ -66,40 +66,7 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h2 class="page-header">Applications</h1>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      <h2 class="page-header">Editors</h1>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      <p>
-        Here we might have things like:
-      </p>
-      <ul>
-        <li>The number of editors</li>
-        <li>Average number of applications per editor</li>
-        <li>Editors most/least likely to have applications accepted</li>
-        <li>
-          Graphs of number of applications or time to application status
-          decision by editor
-        </li>
-        <li>Average number of access grants per editor</li>
-        <li>
-          Graph of # of access grants by frequency (1 editor with 1 access
-          grant, 10 editors with 2, 5 editors with 3, 2 editors with 4, etc.)
-        </li>
-      </ul>
-    </div>
-  </div>
-
+  <!-- begin partner metrics -->
   <div class="row">
     <div class="col-lg-12">
       <h2 class="page-header">Partners</h1>
@@ -108,21 +75,48 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <div id="partner-time-data" style="width:600px;height:300px"></div>
+      <h3>Number of partners over time</h3>
+      <div id="partner-time-graph" style="width:600px;height:300px"></div>
     </div>
   </div>
+  <!-- end partner metrics -->
+
+  <!-- begin editor metrics -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">Editors</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>Home wiki distribution</h3>
+      <div id="home-wiki-pie-graph" style="width:600px;height:300px"></div>
+    </div>
+  </div>
+  <!-- end editor metrics -->
+
+  <!-- begin application metrics -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">Applications</h1>
+    </div>
+  </div>
+  <!-- end application metrics -->
+
 {% endblock content %}
 
 {% block javascript %}
   <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.js" %}"></script>
   <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.time.js" %}"></script>
+  <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.pie.js" %}"></script>
 
   <script type="text/javascript">
     // Partners over time
-    var partner_time_graph = $("#partner-time-data");
+    var partner_time_graph = $("#partner-time-graph");
     var partner_time_data = {{ partner_time_data }};
-    var plot = $.plot(partner_time_graph, [partner_time_data], {
+    var partner_time_plot = $.plot(partner_time_graph, [partner_time_data], {
       xaxis: {
         mode: "time",
       },
@@ -132,6 +126,17 @@
         tickDecimals: 0,
       },
       colors: ['#5cb85c'],
+    });
+
+    // Homewiki distribution
+    var home_wiki_pie_graph = $("#home-wiki-pie-graph");
+    var home_wiki_pie_data = {{ home_wiki_pie_data | safe }};
+    var home_wiki_pie_plot = $.plot(home_wiki_pie_graph, home_wiki_pie_data, {
+      series: {
+        pie: { 
+          show: true
+        }
+      },
     });
   </script>
 {% endblock javascript %}}

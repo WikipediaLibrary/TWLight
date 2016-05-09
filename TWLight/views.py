@@ -3,12 +3,14 @@ Views for sitewide functionality that don't fit neatly into any of the apps.
 """
 from datetime import datetime
 from dateutil import relativedelta
+import json
 import time
 
 from django.views.generic import TemplateView
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
+from TWLight.users.helpers.wiki_list import WIKIS
 from TWLight.users.models import Editor
 
 from .view_mixins import CoordinatorsOnly
@@ -55,6 +57,25 @@ class DashboardView(CoordinatorsOnly, TemplateView):
         ])
 
         context['partner_time_data'] = data_series
+
+
+        # Editor data
+        # ----------------------------------------------------------------------
+
+        # Pie chart of home wiki distribution
+
+        wiki_data = []
+
+        for wiki in WIKIS:
+            editor_count = Editor.objects.filter(home_wiki=wiki[0]).count()
+            if editor_count:
+                wiki_data.append({'label': wiki[1], 'data': editor_count})
+
+        context['home_wiki_pie_data'] = json.dumps(wiki_data)
+
+
+        # Misc
+        # ----------------------------------------------------------------------
 
         # The application that has been waiting the longest for a final status
         # determination.
