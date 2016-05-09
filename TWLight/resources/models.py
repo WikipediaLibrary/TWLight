@@ -17,6 +17,7 @@ class Partner(models.Model):
     company_name = models.CharField(max_length=30,
         help_text="Partner organization's name (e.g. McFarland). Note: " \
         "this will be user-visible and *not translated*.")
+    date_created = models.DateField(auto_now_add=True)
 
 
     # Optional resource metadata

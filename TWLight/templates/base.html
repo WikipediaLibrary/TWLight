@@ -162,5 +162,9 @@
     {% endblock %}
     
   </div>
+
+  {% block javascript %}
+    {# We don't use any JS by default; individual pages that need it can add it here. #}
+  {% endblock javascript %}
 </body>
 </html>
