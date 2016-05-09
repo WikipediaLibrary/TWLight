@@ -15,10 +15,6 @@ urlpatterns = [
         views.EvaluateApplicationView.as_view(),
         name='evaluate'
     ),
-    url(r'^dashboard/$',
-        views.DashboardView.as_view(),
-        name='dashboard'
-    ),
     url(r'^list/$',
         views.ListApplicationsView.as_view(),
         name='list'

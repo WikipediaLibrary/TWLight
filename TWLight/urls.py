@@ -13,6 +13,8 @@ from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.applications.urls import urlpatterns as applications_urls
 
+from .views import DashboardView
+
 
 urlpatterns = [
 	# Built-in
@@ -30,6 +32,11 @@ urlpatterns = [
     url(r'^oauth/callback/$',
         auth.OAuthCallbackView.as_view(),
         name='oauth_callback'),
+
+    url(r'^dashboard/$',
+        DashboardView.as_view(),
+        name='dashboard'
+    ),
 
     # TWLight apps
     url(r'^users/', include(users_urls, namespace="users")),

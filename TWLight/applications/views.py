@@ -14,7 +14,6 @@ from reversion.helpers import generate_patch_html
 from django import forms
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.db.models import F, Avg, FloatField
 from django.http import HttpResponseRedirect, Http404
 from django.utils.translation import ugettext as _
 from django.views.generic.base import TemplateView
@@ -262,39 +261,6 @@ class SubmitApplicationView(EditorsOnly, FormView):
                 needed_fields.append(field)
 
         return needed_fields
-
-
-
-class DashboardView(CoordinatorsOnly, TemplateView):
-    """
-    Allow coordinators to see metrics about the application process.
-    """
-    template_name = 'applications/dashboard.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(DashboardView, self).get_context_data(**kwargs)
-
-        # The application that has been waiting the longest for a final status
-        # determination.
-        context['longest_open'] = Application.objects.filter(
-                status__in=[Application.PENDING, Application.QUESTION]
-            ).earliest('date_created')
-
-        # Average number of days until a final decision gets made on an
-        # application. This really wants to be a query using F expressions
-        # inside aggregate(), but that isn't implemented until Django 1.8.
-        closed_apps = Application.objects.filter(
-                status__in=[Application.APPROVED, Application.NOT_APPROVED]
-            )
-
-        total_seconds_open = reduce(lambda h, app:
-            h + (app.date_closed - app.date_created).total_seconds(),
-            closed_apps, 0)
-
-        avg_days_open = int(round((total_seconds_open / (closed_apps.count()))/86400, 0))
-        context['avg_days_open'] = avg_days_open
-
-        return context
 
 
 
