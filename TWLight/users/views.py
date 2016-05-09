@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -91,6 +92,7 @@ class EditorUpdateView(SelfOnly, UpdateView):
     model = Editor
     template_name = 'users/editor_update.html'
     form_class = EditorUpdateForm
+
 
 
 
