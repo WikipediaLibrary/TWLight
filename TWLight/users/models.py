@@ -27,7 +27,7 @@ accounts without attached Editors in the admin site, if for some reason it's
 useful to have account holders without attached Wikipedia data.
 """
 from datetime import datetime
-import json
+from jsonfield import JSONField
 import logging
 
 from django.conf import settings
@@ -66,8 +66,8 @@ class Editor(models.Model):
     # Should we want to filter these to check for specific group membership or
     # user rights in future:
     # Editor.objects.filter(wp_groups__icontains=groupname) or similar.
-    wp_groups = models.TextField(help_text=_("Wikipedia groups"))
-    wp_rights = models.TextField(help_text=_("Wikipedia user rights"))
+    wp_groups = JSONField(help_text=_("Wikipedia groups"))
+    wp_rights = JSONField(help_text=_("Wikipedia user rights"))
 
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -187,4 +187,4 @@ class Editor(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('users:editor_detail', kwargs={'pk': self.user.pk})
+        return reverse('users:editor_detail', kwargs={'pk': self.pk})

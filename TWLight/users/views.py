@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView, View
@@ -11,10 +12,16 @@ from .forms import EditorUpdateForm
 from .models import Editor
 
 
-class UserDetailView(TemplateView):
+class UserDetailView(SelfOnly, TemplateView):
     template_name = 'users/user_detail.html'
 
-    # Remember that 'user' is part of the default context.
+    def get_object(self):
+        """
+        Although 'user' is part of the default context, we need to define a
+        get_object in order to be able to use the SelfOnly mixin.
+        """
+        assert 'pk' in self.kwargs.keys()
+        return User.objects.get(pk=self.kwargs['pk'])
 
 
 
@@ -24,7 +31,7 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
     because:
     1) That's where most of the data is;
     2) Using the Editor model means its URL parameter is consistent with that of
-       EditorDetailView, because you know Wikipedians will employ URL hacking
+       EditorUpdateView, because you know Wikipedians will employ URL hacking
        to get places on the site, and this simplifies that.
     """
     model = Editor
@@ -56,16 +63,18 @@ class UserHomeView(View):
     @classonlymethod
     def as_view(cls):
         def _get_view(request, *args, **kwargs):
+            if request.user.is_anonymous():
+                # We can't use the django-braces LoginRequiredMixin here,
+                # because as_view applies at an earlier point in the process.
+                return redirect_to_login(request.get_full_path())
             if hasattr(request.user, 'editor'):
+                kwargs.update({'pk': request.user.editor.pk})
                 return_view = cls.editor_view
             else:
+                kwargs.update({'pk': request.user.pk})
                 return_view = cls.non_editor_view
 
-            if 'pk' in kwargs:
-                return return_view.as_view()(request, *args, **kwargs)
-            else:
-                kwargs.update({'pk': request.user.pk})
-                return return_view.as_view()(request, *args, **kwargs)
+            return return_view.as_view()(request, *args, **kwargs)
 
         return _get_view
 
