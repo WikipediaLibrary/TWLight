@@ -50,7 +50,7 @@ class Editor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     last_updated = models.DateField(auto_now=True,
         help_text=_("When this information was last edited"))
-    account_created = models.DateField(auto_now_add=True,
+    date_created = models.DateField(auto_now_add=True,
         help_text=_("When this information was first created"))
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
