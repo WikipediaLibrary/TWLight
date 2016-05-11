@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h2>{{ object }}</h2>
+
+  {% if object.description %}
+    {{ object.description }}
+  {% else %}
+    {% trans "No description available." %}
+  {% endif %}
+{% comment %}
+  other stuff to do:
+    list streams
+    add metrics
+    ???
+{% endcomment %}
+  <h3>{% trans "Special requirements for applicants" %}</h3>
+
+  {% trans "If this publisher has any particular requirements for applicants, they are listed here." %}
+
+  {% if object.agreement_with_terms_of_use %}
+    {% blocktrans with publisher=object.name url=object.terms_of_use %}
+      {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
+      of use</a>.
+    {% endblocktrans %}
+  {% endif %}
+
+  {% if object.real_name %}
+    {% blocktrans with publisher=object.name %}
+      {{ publisher }} requires that you provide your real name.
+    {% endblocktrans %}    
+  {% endif %}
+
+  {% if object.country_of_residence %}
+    {% blocktrans with publisher=object.name %}
+      {{ publisher }} requires that you provide your country of residence.
+    {% endblocktrans %}    
+  {% endif %}
+
+  {% if object.occupation %}
+    {% blocktrans with publisher=object.name %}
+      {{ publisher }} requires that you provide your occupation.
+    {% endblocktrans %}    
+  {% endif %}
+
+  {% if object.affiliation %}
+    {% blocktrans with publisher=object.name %}
+      {{ publisher }} requires that you provide your institutional affiliation.
+    {% endblocktrans %}    
+  {% endif %}
+
+  {% if object.specific_title %}
+    {% blocktrans with publisher=object.name %}
+      {{ publisher }} requires that you specify a particular title that you want
+      to access.
+    {% endblocktrans %}    
+  {% endif %}
+
+  {% if object.specific_stream %}
+    {% if object.mutually_exclusive %}
+      {% blocktrans with publisher=object.name %}
+        {{ publisher }} requires that you specify a specific collection that you
+        want to access. You may only apply for access to one collection at a
+        time.
+      {% endblocktrans %}    
+    {% else %}
+      {% blocktrans with publisher=object.name %}
+        {{ publisher }} requires that you specify one or more specific
+        collections that you want to access.
+      {% endblocktrans %}    
+    {% endif %}
+  {% endif %}
+{% endblock content %}

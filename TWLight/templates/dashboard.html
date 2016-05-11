@@ -18,7 +18,7 @@
           </div>
         </div>
         {# TODO fix link #}
-        <a href="{% url 'applications:list' %}">
+        <a href="{% url 'partners:list' %}">
           <div class="panel-footer">
             <span class="pull-left">{% trans 'See all partners' %}</span>
             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -36,10 +36,17 @@
             </div>
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_editors }}</div>
-              <div>{% trans 'Wikipedia editors with accounts (all time)' %}</div>
+              <div>{% trans 'Number of editors (all time)' %}</div>
             </div>
           </div>
         </div>
+        <a href="#users-section">
+          <div class="panel-footer">
+            <span class="pull-left">{% trans 'Jump to user metrics' %}</span>
+            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
       </div>
     </div>
     <div class="col-xs-12 col-md-4">
@@ -55,9 +62,9 @@
             </div>
           </div>
         </div>
-        <a href="{% url 'applications:list' %}">
+        <a href="#applications-section">
           <div class="panel-footer">
-            <span class="pull-left">{% trans 'See all open applications' %}</span>
+            <span class="pull-left">{% trans 'Jump to application metrics' %}</span>
             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
           </div>
@@ -84,7 +91,7 @@
   <!-- begin editor metrics -->
   <div class="row">
     <div class="col-lg-12">
-      <h2 class="page-header">{% trans "Editors" %}</h1>
+      <h2 class="page-header" id="users-section">{% trans "Editors" %}</h1>
     </div>
   </div>
 
@@ -134,7 +141,7 @@
   <!-- begin application metrics -->
   <div class="row">
     <div class="col-lg-12">
-      <h2 class="page-header">{% trans 'Applications' %}</h1>
+      <h2 class="page-header" id="applications-section">{% trans 'Applications' %}</h1>
 
       <h3>{% trans "Applications by number of days until decision" %}</h3>
       <p>

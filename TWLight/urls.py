@@ -11,6 +11,7 @@ from django.contrib.auth import views as auth_views
 
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
+from TWLight.resources.urls import urlpatterns as partners_urls
 from TWLight.applications.urls import urlpatterns as applications_urls
 
 from .views import DashboardView
@@ -40,5 +41,6 @@ urlpatterns = [
 
     # TWLight apps
     url(r'^users/', include(users_urls, namespace="users")),
-    url(r'^applications/', include(applications_urls,namespace="applications")),
+    url(r'^applications/', include(applications_urls, namespace="applications")),
+    url(r'^partners/', include(partners_urls, namespace="partners")),
 ]

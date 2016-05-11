@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h2>{% trans "List of partners" %}</h2>
+  <p>
+    {% blocktrans %}
+      If you're a coordinator or site administrator, you'll be able to see
+      per-partner metrics on the partner pages.
+    {% endblocktrans %}
+  </p>
+  <ul>
+    {% for partner in object_list %}
+      <li>
+        <a href="{{ partner.get_absolute_url }}">{{ partner }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

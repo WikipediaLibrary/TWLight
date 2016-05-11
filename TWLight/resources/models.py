@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse_lazy
 from django.db import models
 
 from durationfield.db.models.fields.duration import DurationField
@@ -76,6 +77,10 @@ class Partner(models.Model):
                 raise ValidationError('Since this resource has multiple '
                     'Streams, you must specify a value for mutually_exclusive.')
         super(Partner, self).save(*args, **kwargs)
+
+
+    def get_absolute_url(self):
+        return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
 
 
