@@ -90,8 +90,43 @@
 
   <div class="row">
     <div class="col-lg-12">
+      <!-- begin home_wiki distribution -->
       <h3>Home wiki distribution</h3>
-      <div id="home-wiki-pie-graph" style="width:600px;height:300px"></div>
+      <div class="row">
+        <div class="col-xs-12 col-md-8">
+          <div id="home-wiki-pie-graph" style="width:600px;height:300px"></div>          
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <table class="table table-striped table-hover">
+            <tr>
+              <th>
+                {% trans 'Home wiki' %}
+              </th>
+              <th>
+                {% trans 'Number of users' %}                
+              </th>
+            </tr>
+            {% for item in home_wiki_pie_data %}
+              <tr>
+                <td>
+                  {{ item.label }}
+                </td>
+                <td>
+                  {{ item.data }}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      <!-- end home_wiki distribution -->
+
+      <!-- begin home_wiki distribution over time -->
+      <h3>Home wiki distribution over time</h3>
+      <div id="home-wiki-bar-graph" style="width:600px;height:300px"></div>          
+
+      <!-- end home_wiki distribution over time -->
+
     </div>
   </div>
   <!-- end editor metrics -->
@@ -111,32 +146,59 @@
   <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.js" %}"></script>
   <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.time.js" %}"></script>
   <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.pie.js" %}"></script>
+  <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.stack.js" %}"></script>
 
   <script type="text/javascript">
-    // Partners over time
-    var partner_time_graph = $("#partner-time-graph");
-    var partner_time_data = {{ partner_time_data }};
-    var partner_time_plot = $.plot(partner_time_graph, [partner_time_data], {
-      xaxis: {
-        mode: "time",
-      },
-      yaxis: {
-        min: 0,
-        minTickSize: 1,
-        tickDecimals: 0,
-      },
-      colors: ['#5cb85c'],
-    });
+    $(function() {
+      // Partners over time
+      var partner_time_graph = $("#partner-time-graph");
+      var partner_time_data = {{ partner_time_data }};
+      var partner_time_plot = $.plot(partner_time_graph, [partner_time_data], {
+        xaxis: {
+          mode: "time",
+        },
+        yaxis: {
+          min: 0,
+          minTickSize: 1,
+          tickDecimals: 0,
+        },
+        colors: ['#5cb85c'],
+      });
 
-    // Homewiki distribution
-    var home_wiki_pie_graph = $("#home-wiki-pie-graph");
-    var home_wiki_pie_data = {{ home_wiki_pie_data | safe }};
-    var home_wiki_pie_plot = $.plot(home_wiki_pie_graph, home_wiki_pie_data, {
-      series: {
-        pie: { 
-          show: true
-        }
-      },
+      // Homewiki distribution (pie chart)
+      var home_wiki_pie_graph = $("#home-wiki-pie-graph");
+      var home_wiki_pie_data = {{ home_wiki_pie_data | safe }};
+      var home_wiki_pie_plot = $.plot(home_wiki_pie_graph, home_wiki_pie_data, {
+        series: {
+          pie: { 
+            show: true
+          }
+        },
+      });
+
+      // Homewiki distribution over time (stacked bar chart)
+      var home_wiki_bar_graph = $("#home-wiki-bar-graph");
+      var home_wiki_bar_data = {{ home_wiki_bar_data | safe }};
+      var home_wiki_bar_plot = $.plot(home_wiki_bar_graph, home_wiki_bar_data, {
+        legend: {
+          position: 'nw',
+        },
+        xaxis: {
+          mode: 'time',
+        },
+        yaxis: {
+          min: 0.01, // Just above zero: this hides bars on zero-height values.
+          minTickSize: 1,
+          tickDecimals: 0,
+        },
+        series: {
+          stack: true,
+          bars: {
+            show: true,
+            barWidth: 15*24*60*60*1000, // About half a month in milliseconds
+          }
+        },
+      });
     });
   </script>
 {% endblock javascript %}}

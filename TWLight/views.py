@@ -22,12 +22,28 @@ class DashboardView(CoordinatorsOnly, TemplateView):
     template_name = 'dashboard.html'
 
     def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+
+        # Helper functions
+        # ----------------------------------------------------------------------
+
         def _get_js_timestamp(datetime):
             # Expects a date or datetime object; returns same in milliseconds
             # since the epoch. (That is the date format expected by flot.js.)
-            return time.mktime(datetime.timetuple())*1000
+            return int(time.mktime(datetime.timetuple())*1000)
 
-        context = super(DashboardView, self).get_context_data(**kwargs)
+        def _add_home_wiki_bar_chart_point(data_series, datestamp):
+            js_timestamp = _get_js_timestamp(datestamp)
+            for wiki in WIKIS:
+                num_editors = Editor.objects.filter(
+                    home_wiki=wiki[0], date_created__lte=datestamp).count()
+                data_series[wiki[1]].insert(0, [js_timestamp, num_editors])
+
+            return data_series
+
+
+        # Overall data
+        # ----------------------------------------------------------------------
 
         context['total_apps'] = Application.objects.count()
         context['total_editors'] = Editor.objects.count()
@@ -62,7 +78,7 @@ class DashboardView(CoordinatorsOnly, TemplateView):
         # Editor data
         # ----------------------------------------------------------------------
 
-        # Pie chart of home wiki distribution
+        # Pie chart of home wiki distribution ----------------------------------
 
         wiki_data = []
 
@@ -71,7 +87,43 @@ class DashboardView(CoordinatorsOnly, TemplateView):
             if editor_count:
                 wiki_data.append({'label': wiki[1], 'data': editor_count})
 
-        context['home_wiki_pie_data'] = json.dumps(wiki_data)
+        # The table will make the most sense if it puts the most popular wikis
+        # on top.
+        wiki_data = sorted(wiki_data, key=lambda x: x['data'], reverse=True)
+
+        context['home_wiki_pie_data'] = wiki_data
+
+        # Bar chart of home wiki distribution over time ------------------------
+
+        data_series = {wiki[1]: [] for wiki in WIKIS}
+
+        earliest_date = Editor.objects.earliest('date_created').date_created
+        month = datetime.today().date()
+
+        while month >= earliest_date:
+            # We're going to go backwards from today rather than forward
+            # from the beginning of time because we want to include today, but
+            # the bar graph will look nicest if all the intervals are even -
+            # if we started at the earliest_date and added a month each time,
+            # today's data would be appended at some probably-not-month-long
+            # interval.
+            data_series = _add_home_wiki_bar_chart_point(data_series, month)
+
+            month -= relativedelta.relativedelta(months=1)
+
+        # Here we reformat our data_series (which has been a dict, for ease of
+        # manipulation in Python) into the list of {label, data} dicts expected
+        # by flot.js.
+        # While we're at it, we remove any home wikis with zero editors, as
+        # they'd just clutter up the graph without adding information.
+        # Because the number of editors per wiki strictly increases over time
+        # (as accounts are added), we can do this by simply looking at the
+        # editor count in the last data point for any given wiki and seeing if
+        # it is nonzero.
+        home_wiki_bar_data = [{'label': wiki, 'data': data_series[wiki]}
+                              for wiki in data_series
+                              if data_series[wiki][-1][1]]
+        context['home_wiki_bar_data'] = home_wiki_bar_data
 
 
         # Misc
