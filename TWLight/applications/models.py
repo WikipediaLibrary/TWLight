@@ -36,6 +36,18 @@ class Application(models.Model):
                   'when the application is saved, and overriding it may have '
                   'undesirable results.'))
 
+    # Will be set on save() if status changes from PENDING/QUESTION to
+    # APPROVED/NOT APPROVED.
+    # In Django 1.8+ we won't need this - we can use F expressions with
+    # annotate/aggregate to get all the metrics we want. But that feature isn't
+    # added until 1.8, and the view code we need to write without it is pretty
+    # messy (and requires us to do lots of stuff in Python rather than in the
+    # database). So we'll precompute here.
+    days_open = models.IntegerField(blank=True, null=True,
+        help_text=_('Do not override this field! Its value is set automatically '
+                  'when the application is saved, and overriding it may have '
+                  'undesirable results.'))
+
     # Will be set on save() based on date_closed and partner access grant
     # lengths. In practice, because access grants are triggered manually
     # after review on TWLight, the real expiry date is likely to be later.
@@ -72,6 +84,7 @@ class Application(models.Model):
                 and not self.date_closed):
 
                 self.date_closed = date.today()
+                self.days_open = (date.today() - self.date_created).days
 
         if self.date_closed and not self.earliest_expiry_date:
             self.earliest_expiry_date = self.date_closed + self.partner.access_grant_term
