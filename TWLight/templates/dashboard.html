@@ -36,7 +36,7 @@
             </div>
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_editors }}</div>
-              <div>{% trans 'Number of Wikipedia editors with accounts (all time)' %}</div>
+              <div>{% trans 'Wikipedia editors with accounts (all time)' %}</div>
             </div>
           </div>
         </div>
@@ -69,13 +69,13 @@
   <!-- begin partner metrics -->
   <div class="row">
     <div class="col-lg-12">
-      <h2 class="page-header">Partners</h1>
+      <h2 class="page-header">{% trans "Partners" %}</h1>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-12">
-      <h3>Number of partners over time</h3>
+      <h3>{% trans "Number of partners over time" %}</h3>
       <div id="partner-time-graph" style="width:600px;height:300px"></div>
     </div>
   </div>
@@ -84,14 +84,14 @@
   <!-- begin editor metrics -->
   <div class="row">
     <div class="col-lg-12">
-      <h2 class="page-header">Editors</h1>
+      <h2 class="page-header">{% trans "Editors" %}</h1>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-12">
       <!-- begin home_wiki distribution -->
-      <h3>Home wiki distribution</h3>
+      <h3>{% trans "Home wiki distribution" %}</h3>
       <div class="row">
         <div class="col-xs-12 col-md-8">
           <div id="home-wiki-pie-graph" style="width:600px;height:300px"></div>          
@@ -122,7 +122,7 @@
       <!-- end home_wiki distribution -->
 
       <!-- begin home_wiki distribution over time -->
-      <h3>Home wiki distribution over time</h3>
+      <h3>{% trans "Home wiki distribution over time" %}</h3>
       <div id="home-wiki-bar-graph" style="width:600px;height:300px"></div>          
 
       <!-- end home_wiki distribution over time -->
@@ -134,7 +134,35 @@
   <!-- begin application metrics -->
   <div class="row">
     <div class="col-lg-12">
-      <h2 class="page-header">Applications</h1>
+      <h2 class="page-header">{% trans 'Applications' %}</h1>
+
+      <h3>{% trans "Applications by number of days until decision" %}</h3>
+      <p>
+        {% blocktrans %}
+          The x axis is the number of days to make a final decision (either
+          approved or denied) on an application. The y axis is the number of
+          applications that have taken exactly that many days to decide.
+        {% endblocktrans %}
+      </p>
+      <div id="app-time-histogram-graph" style="width:600px;height:300px"></div>          
+
+      <h3>{% trans "Median days until application decision, per month" %}</h3>
+      <p>
+        {% blocktrans %}
+          This shows the median number of days to reach a decision on the
+          applications opened in a given month.
+        {% endblocktrans %}
+      </p>
+      <div id="app-medians-graph" style="width:600px;height:300px"></div>
+
+      <h3>{% trans "Current application status distribution" %}</h3>
+      <p>
+        {% blocktrans %}
+          This graph includes all applications opened ever on this site.
+        {% endblocktrans %}
+      </p>
+      <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+
     </div>
   </div>
   <!-- end application metrics -->
@@ -199,6 +227,62 @@
           }
         },
       });
+
+      // Application time-to-decision (histogram)
+      var app_time_histogram_graph = $("#app-time-histogram-graph");
+      var app_time_histogram_data = [{
+        'data': {{ app_time_histogram_data | safe }},
+        'label': ''
+      }];
+      var app_time_histogram_plot = $.plot(app_time_histogram_graph, app_time_histogram_data, {
+        yaxis: {
+          min: 0,
+          minTickSize: 1,
+          tickDecimals: 0,
+        },
+        xaxis: {
+          min: 0,
+        },
+        bars: {
+          show: true,
+          barWidth: 1,
+        }
+      });
+
+      // Median time-to-decision per month
+      var app_medians_graph = $("#app-medians-graph");
+      var app_medians_data = [{
+        'data': {{ app_medians_data | safe }},
+        'label': ''
+      }];
+      var app_medians_plot = $.plot(app_medians_graph, app_medians_data, {
+        yaxis: {
+          min: 0.01,
+          minTickSize: 1,
+          tickDecimals: 0,
+        },
+        xaxis: {
+          mode: 'time',
+          tickSize: [1, 'month'],
+        },
+        bars: {
+          show: true,
+          barWidth: 15*24*60*60*1000, // About half a month in milliseconds
+          align: 'center',
+        }
+      });
+
+      // Application status distribution (pie chart)
+      var app_distribution_graph = $("#app-distribution-graph");
+      var app_distribution_data = {{ app_distribution_data | safe }};
+      var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
+        series: {
+          pie: { 
+            show: true
+          }
+        },
+      });
+
     });
   </script>
 {% endblock javascript %}}

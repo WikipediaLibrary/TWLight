@@ -1,12 +1,15 @@
 """
 Views for sitewide functionality that don't fit neatly into any of the apps.
 """
-from datetime import datetime
 from dateutil import relativedelta
 import json
+import logging
 import time
 
+from django.db.models import Avg
 from django.views.generic import TemplateView
+from django.utils import timezone
+from django.utils.encoding import force_unicode
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
@@ -14,6 +17,10 @@ from TWLight.users.helpers.wiki_list import WIKIS
 from TWLight.users.models import Editor
 
 from .view_mixins import CoordinatorsOnly
+
+
+logger = logging.getLogger(__name__)
+
 
 class DashboardView(CoordinatorsOnly, TemplateView):
     """
@@ -47,7 +54,7 @@ class DashboardView(CoordinatorsOnly, TemplateView):
 
         context['total_apps'] = Application.objects.count()
         context['total_editors'] = Editor.objects.count()
-        context['total_partners'] = Partner.objects.count()   
+        context['total_partners'] = Partner.objects.count()
 
         # Partnership data
         # ----------------------------------------------------------------------
@@ -60,7 +67,7 @@ class DashboardView(CoordinatorsOnly, TemplateView):
 
         month = earliest_date
 
-        while month < datetime.today().date():
+        while month < timezone.now().date():
             # flot.js expects milliseconds since the epoch.
             js_timestamp = _get_js_timestamp(month)
             num_partners = Partner.objects.filter(date_created__lte=month).count()
@@ -68,7 +75,7 @@ class DashboardView(CoordinatorsOnly, TemplateView):
             month += relativedelta.relativedelta(months=1)
 
         data_series.append([
-            _get_js_timestamp(datetime.today().date()),
+            _get_js_timestamp(timezone.now().date()),
             Partner.objects.count()
         ])
 
@@ -98,7 +105,7 @@ class DashboardView(CoordinatorsOnly, TemplateView):
         data_series = {wiki[1]: [] for wiki in WIKIS}
 
         earliest_date = Editor.objects.earliest('date_created').date_created
-        month = datetime.today().date()
+        month = timezone.now().date()
 
         while month >= earliest_date:
             # We're going to go backwards from today rather than forward
@@ -126,27 +133,112 @@ class DashboardView(CoordinatorsOnly, TemplateView):
         context['home_wiki_bar_data'] = home_wiki_bar_data
 
 
-        # Misc
+        # Application data
         # ----------------------------------------------------------------------
 
         # The application that has been waiting the longest for a final status
-        # determination.
+        # determination. -------------------------------------------------------
         context['longest_open'] = Application.objects.filter(
                 status__in=[Application.PENDING, Application.QUESTION]
             ).earliest('date_created')
 
         # Average number of days until a final decision gets made on an
-        # application. This really wants to be a query using F expressions
-        # inside aggregate(), but that isn't implemented until Django 1.8.
+        # application. ---------------------------------------------------------
+
         closed_apps = Application.objects.filter(
                 status__in=[Application.APPROVED, Application.NOT_APPROVED]
             )
 
-        total_seconds_open = reduce(lambda h, app:
-            h + (app.date_closed - app.date_created).total_seconds(),
-            closed_apps, 0)
+        avg_days_open = float(closed_apps.aggregate(Avg('days_open'))['days_open__avg'])
 
-        avg_days_open = int(round((total_seconds_open / (closed_apps.count()))/86400, 0))
         context['avg_days_open'] = avg_days_open
+
+        # Histogram of time open -----------------------------------------------
+
+        data_series = {}
+
+        for app in closed_apps:
+            if not app.days_open:
+                logger.warning("Application #{pk} is closed but doesn't have a "
+                    "days_open value.".format(pk=app.pk))
+            else:
+                # They're stored as longs, which breaks flot.js's data
+                # expectations. But if we actually *need* a long int rather than
+                # an int to store the number of days until an app decision is
+                # reached, we have other problems.
+                int_days_open = int(app.days_open)
+                if int_days_open in data_series:
+                    data_series[int_days_open] += 1
+                else:
+                    data_series[int_days_open] = 1
+
+        # Reformat dict (easy to use in Python) into list-of-lists expected by
+        # float.
+        context['app_time_histogram_data'] = [[k, v] for (k, v) in data_series.items()]
+
+        # Median decision time per month ---------------------------------------
+
+        data_series = []
+        earliest_date = Application.objects.earliest('date_created').date_created
+
+        this_month_start = earliest_date.replace(day=1)
+        next_month_start = (earliest_date + \
+            relativedelta.relativedelta(months=1)).replace(day=1)
+
+        while this_month_start <= timezone.now().date():
+            days_to_close = list(
+                Application.objects.filter(
+                    status__in=[Application.APPROVED, Application.NOT_APPROVED],
+                    date_created__gte=this_month_start,
+                    date_created__lt=next_month_start
+                ).values_list('days_open', flat=True)
+            )
+
+            days_to_close.sort()
+
+            list_len = len(days_to_close)
+            if list_len < 1:
+                # Mathematically bogus, but will make graph display correctly.
+                median_days = 0
+            elif list_len % 2 == 1:
+                median_days = int(days_to_close[(list_len - 1 )/2])
+            else:
+                median_days = int((days_to_close[(list_len -1 )/2] +
+                               days_to_close[1 + (list_len -1 )/2]) / 2)
+
+            js_timestamp = _get_js_timestamp(this_month_start)
+            data_series.append([js_timestamp, median_days])
+
+            next_month_start += relativedelta.relativedelta(months=1)
+            this_month_start += relativedelta.relativedelta(months=1)
+
+        context['app_medians_data'] = data_series
+
+        # Application status pie chart -----------------------------------------
+
+        status_data = []
+
+        for status in Application.STATUS_CHOICES:
+            status_count = Application.objects.filter(status=status[0]).count()
+            # We have to force unicode here because we used ugettext_lazy, not
+            # ugettext, to internationalize the status labels in
+            # TWLight.applications.models.
+            # We had to use ugettext_lazy because the order in which Django
+            # initializes objects means the system will fail on startup if we
+            # try to use ugettext.
+            # However, ugettext_lazy returns a reference to the translated
+            # string, not the actual translation string. That reference is not
+            # suitable for use in templates, and inserting it directly into the
+            # javascript like this means that we bypass places that would
+            # usually translate the string.
+            # Therefore we need to force translation (using force_unicode, not
+            # force_str, because we don't know what language we might be
+            # dealing with.)
+            status_data.append({'label': force_unicode(status[1]), 'data': status_count})
+
+        # We have to use json.dumps and not just return the Python object
+        # because force_unicode will output u'' objects that will confuse
+        # JavaScript.
+        context['app_distribution_data'] = json.dumps(status_data)
 
         return context

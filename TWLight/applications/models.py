@@ -92,7 +92,6 @@ class Application(models.Model):
         super(Application, self).save(*args, **kwargs)
 
 
-
     LABELMAKER = {
         PENDING: '-primary',
         QUESTION: '-warning',
