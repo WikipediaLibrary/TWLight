@@ -50,7 +50,7 @@
       <strong>{% trans "Wikipedia groups *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {% for group in editor.get_wp_groups_as_list %}
+      {% for group in editor.get_wp_groups_display %}
         {{ group }}
       {% endfor %}
     </div>
@@ -59,7 +59,7 @@
       <strong>{% trans "Wikipedia user rights *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-     {% for right in editor.get_wp_rights_as_list %}
+     {% for right in editor.get_wp_rights_display %}
         {{ right }}
       {% endfor %}
     </div>

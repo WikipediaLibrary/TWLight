@@ -27,6 +27,7 @@ accounts without attached Editors in the admin site, if for some reason it's
 useful to have account holders without attached Wikipedia data.
 """
 from datetime import datetime
+import json
 import logging
 
 from django.conf import settings
@@ -87,16 +88,6 @@ class Editor(models.Model):
 
 
     @property
-    def get_wp_rights_as_list(self):
-        return list(self.wp_groups)
-
-    
-    @property
-    def get_wp_rights_as_list(self):
-        return list(self.wp_rights)
-
-    
-    @property
     def wp_user_page_url(self):
         if self.get_home_wiki_display():
             url = 'https://{home_wiki_link}/wiki/User:{user.wp_username}'.format(
@@ -135,6 +126,23 @@ class Editor(models.Model):
         return url
 
 
+    @property
+    def get_wp_rights_display(self):
+        """
+        This should be used to display wp_rights in a template, or any time
+        we need to manipulate the rights as a list rather than a string.
+        """
+        return json.loads(self.wp_rights)
+
+
+    @property
+    def get_wp_gropus_display(self):
+        """
+        As above, but for groups.
+        """
+        return json.loads(self.wp_groups)
+
+
     def update_from_wikipedia(self, identity):
         """
         Given the dict returned from the Wikipedia OAuth /identify endpoint,
@@ -170,8 +178,8 @@ class Editor(models.Model):
             raise
 
         self.wp_username = identity['username']
-        self.wp_rights = identity['rights']
-        self.wp_groups = identity['groups']
+        self.wp_rights = json.dumps(identity['rights'])
+        self.wp_groups = json.dumps(identity['groups'])
         self.wp_editcount = identity['editcount']
         reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
         self.wp_registered = reg_date
