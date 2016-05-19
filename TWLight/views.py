@@ -22,6 +22,23 @@ from .view_mixins import CoordinatorsOnly
 logger = logging.getLogger(__name__)
 
 
+def get_median(values_list):
+    """Given a list (of numbers), returns its median value."""
+    values_list.sort()
+    list_len = len(values_list)
+
+    if list_len < 1:
+        # Mathematically bogus, but will make graph display correctly.
+        median = 0
+    elif list_len % 2 == 1:
+        median = int(values_list[(list_len - 1 )/2])
+    else:
+        median = int((values_list[(list_len -1 )/2] +
+                       values_list[1 + (list_len -1 )/2]) / 2)
+
+    return median
+
+
 class DashboardView(CoordinatorsOnly, TemplateView):
     """
     Allow coordinators to see metrics about the application process.
@@ -194,17 +211,7 @@ class DashboardView(CoordinatorsOnly, TemplateView):
                 ).values_list('days_open', flat=True)
             )
 
-            days_to_close.sort()
-
-            list_len = len(days_to_close)
-            if list_len < 1:
-                # Mathematically bogus, but will make graph display correctly.
-                median_days = 0
-            elif list_len % 2 == 1:
-                median_days = int(days_to_close[(list_len - 1 )/2])
-            else:
-                median_days = int((days_to_close[(list_len -1 )/2] +
-                               days_to_close[1 + (list_len -1 )/2]) / 2)
+            median_days = get_median(days_to_close)
 
             js_timestamp = _get_js_timestamp(this_month_start)
             data_series.append([js_timestamp, median_days])

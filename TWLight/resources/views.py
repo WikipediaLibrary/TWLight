@@ -1,4 +1,8 @@
+from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
+
+from TWLight.applications.models import Application
+from TWLight.views import get_median
 
 from .models import Partner
 
@@ -16,3 +20,28 @@ class PartnersListView(ListView):
 
 class PartnersDetailView(DetailView):
     model = Partner
+
+    def get_context_data(self, **kwargs):
+        context = super(PartnersDetailView, self).get_context_data(**kwargs)
+
+        partner = self.get_object()
+
+        context['total_apps'] = Application.objects.filter(
+            partner=partner).count()
+
+        context['total_apps_approved'] = Application.objects.filter(
+            partner=partner, status=Application.APPROVED).count()
+
+        context['unique_users'] = User.objects.filter(
+            applications__partner=partner).distinct().count()
+
+        context['unique_users_approved'] = User.objects.filter(
+            applications__partner=partner,
+            applications__status=Application.APPROVED).distinct().count()
+
+        partner_app_time = Application.objects.filter(
+            partner=partner).values_list('days_open', flat=True)
+
+        context['median_days'] = get_median(list(partner_app_time))
+
+        return context
