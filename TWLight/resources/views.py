@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
 
 from TWLight.applications.models import Application
-from TWLight.views import get_median
+from TWLight.views import get_median, get_application_status_data
 
 from .models import Partner
 
@@ -43,5 +43,9 @@ class PartnersDetailView(DetailView):
             partner=partner).values_list('days_open', flat=True)
 
         context['median_days'] = get_median(list(partner_app_time))
+
+        context['app_distribution_data'] = get_application_status_data(
+                Application.objects.filter(partner=partner)
+            )
 
         return context

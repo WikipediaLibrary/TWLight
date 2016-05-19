@@ -39,6 +39,37 @@ def get_median(values_list):
     return median
 
 
+def get_application_status_data(queryset):
+    """
+    Returns json-formatted data about the status of Applications in a queryset
+    in a format suitable for display as a flot.js pie chart.
+    """
+    status_data = []
+
+    for status in Application.STATUS_CHOICES:
+        status_count = queryset.filter(status=status[0]).count()
+        # We have to force unicode here because we used ugettext_lazy, not
+        # ugettext, to internationalize the status labels in
+        # TWLight.applications.models.
+        # We had to use ugettext_lazy because the order in which Django
+        # initializes objects means the system will fail on startup if we
+        # try to use ugettext.
+        # However, ugettext_lazy returns a reference to the translated
+        # string, not the actual translation string. That reference is not
+        # suitable for use in templates, and inserting it directly into the
+        # javascript like this means that we bypass places that would
+        # usually translate the string.
+        # Therefore we need to force translation (using force_unicode, not
+        # force_str, because we don't know what language we might be
+        # dealing with.)
+        status_data.append({'label': force_unicode(status[1]), 'data': status_count})
+
+    # We have to use json.dumps and not just return the Python object
+    # because force_unicode will output u'' objects that will confuse
+    # JavaScript.
+    return json.dumps(status_data)
+
+
 class DashboardView(CoordinatorsOnly, TemplateView):
     """
     Allow coordinators to see metrics about the application process.
@@ -223,29 +254,8 @@ class DashboardView(CoordinatorsOnly, TemplateView):
 
         # Application status pie chart -----------------------------------------
 
-        status_data = []
-
-        for status in Application.STATUS_CHOICES:
-            status_count = Application.objects.filter(status=status[0]).count()
-            # We have to force unicode here because we used ugettext_lazy, not
-            # ugettext, to internationalize the status labels in
-            # TWLight.applications.models.
-            # We had to use ugettext_lazy because the order in which Django
-            # initializes objects means the system will fail on startup if we
-            # try to use ugettext.
-            # However, ugettext_lazy returns a reference to the translated
-            # string, not the actual translation string. That reference is not
-            # suitable for use in templates, and inserting it directly into the
-            # javascript like this means that we bypass places that would
-            # usually translate the string.
-            # Therefore we need to force translation (using force_unicode, not
-            # force_str, because we don't know what language we might be
-            # dealing with.)
-            status_data.append({'label': force_unicode(status[1]), 'data': status_count})
-
-        # We have to use json.dumps and not just return the Python object
-        # because force_unicode will output u'' objects that will confuse
-        # JavaScript.
-        context['app_distribution_data'] = json.dumps(status_data)
+        context['app_distribution_data'] = get_application_status_data(
+                Application.objects.all()
+            )
 
         return context

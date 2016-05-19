@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 {% load twlight_perms %}
 
 {% block content %}
@@ -13,8 +14,6 @@
 {% comment %}
   other stuff to do:
     list streams
-    add metrics
-    ???
 {% endcomment %}
   {% if user|coordinators_only %}
     <h3>{% trans "Metrics" %}</h3>
@@ -67,7 +66,28 @@
       </div>
     </div>
 
+    <h4>Applications by status</h4>
     
+    <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+
+    {% comment %}
+      TODO: reuse the infographic number idiom here, probably as sidebar
+    {% endcomment %}
+    <p>
+      {% blocktrans count counter=total_apps_approved %}
+        Number of applications approved (all time): {{ total_apps_approved }}
+      {% plural %}
+        Number of applications approved (all time): {{ total_apps_approved }}
+      {% endblocktrans %}
+    </p>
+
+    <p>
+      {% blocktrans count counter=unique_users_approved %}
+        Number of unique users with approved applications (all time): {{ unique_users_approved }}
+      {% plural %}
+        Number of unique users with approved applications (all time): {{ unique_users_approved }}
+      {% endblocktrans %}
+    </p>
   {% endif %}
 
   <h3>{% trans "Special requirements for applicants" %}</h3>
@@ -143,3 +163,25 @@
     </p>
   {% endif %}
 {% endblock content %}
+
+{% block javascript %}
+  {% if user|coordinators_only %} {# we only show metrics for coordinators #}
+    <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.js" %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.pie.js" %}"></script>
+    <script type="text/javascript">
+      $(function() {
+        // Application status distribution (pie chart)
+        var app_distribution_graph = $("#app-distribution-graph");
+        var app_distribution_data = {{ app_distribution_data | safe }};
+        var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
+          series: {
+            pie: { 
+              show: true,
+            }
+          },
+        });
+      });
+    </script>
+  {% endif %}
+{% endblock javascript %}
