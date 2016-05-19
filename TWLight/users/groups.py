@@ -9,4 +9,6 @@ def get_coordinators():
     # needs to be a function, not merely a statement like
     # coordinators = Group.objects.get(name=COORDINATOR_GROUP_NAME), because
     # that query will fail as Group won't exist yet.
+    # The actual Coordinators group is established by a migration, so it is
+    # guaranteed to exist at runtime.
     return Group.objects.get(name=COORDINATOR_GROUP_NAME)

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load twlight_perms %}
 
 {% block content %}
   <h2>{{ object }}</h2>
@@ -15,9 +16,14 @@
     add metrics
     ???
 {% endcomment %}
+  {% if user|coordinators_only %}
+    <h3>{% trans "Metrics" %}</h3>
+    
+  {% endif %}
+
   <h3>{% trans "Special requirements for applicants" %}</h3>
 
-  {% trans "If this publisher has any particular requirements for applicants, they are listed here." %}
+  {% trans "If this publisher has any special requirements for applicants, they are listed here." %}
 
   {% if object.agreement_with_terms_of_use %}
     {% blocktrans with publisher=object.name url=object.terms_of_use %}
