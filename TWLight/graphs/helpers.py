@@ -28,6 +28,9 @@ def get_js_timestamp(datetime):
 
 def get_median(values_list):
     """Given a list (of numbers), returns its median value."""
+    if not values_list:
+        return 0
+
     values_list.sort()
     list_len = len(values_list)
 
@@ -51,16 +54,18 @@ def get_data_count_by_month(queryset):
     otherwise agnostic about the model.
     """
     data_series = []
-    earliest_date = queryset.earliest('date_created').date_created
 
-    current_date = timezone.now().date()
+    if queryset:
+        earliest_date = queryset.earliest('date_created').date_created
 
-    while current_date >= earliest_date:
-        # flot.js expects milliseconds since the epoch.
-        js_timestamp = get_js_timestamp(current_date)
-        num_objs = queryset.filter(date_created__lte=current_date).count()
-        data_series.append([js_timestamp, num_objs])
-        current_date -= relativedelta.relativedelta(months=1)
+        current_date = timezone.now().date()
+
+        while current_date >= earliest_date:
+            # flot.js expects milliseconds since the epoch.
+            js_timestamp = get_js_timestamp(current_date)
+            num_objs = queryset.filter(date_created__lte=current_date).count()
+            data_series.append([js_timestamp, num_objs])
+            current_date -= relativedelta.relativedelta(months=1)
 
     return data_series
 
@@ -137,28 +142,30 @@ def get_median_decision_time(queryset):
     mean decision time.
     """
     data_series = []
-    earliest_date = queryset.earliest('date_created').date_created
 
-    this_month_start = earliest_date.replace(day=1)
-    next_month_start = (earliest_date + \
-        relativedelta.relativedelta(months=1)).replace(day=1)
+    if queryset:
+        earliest_date = queryset.earliest('date_created').date_created
 
-    while this_month_start <= timezone.now().date():
-        days_to_close = list(
-            Application.objects.filter(
-                status__in=[Application.APPROVED, Application.NOT_APPROVED],
-                date_created__gte=this_month_start,
-                date_created__lt=next_month_start
-            ).values_list('days_open', flat=True)
-        )
+        this_month_start = earliest_date.replace(day=1)
+        next_month_start = (earliest_date + \
+            relativedelta.relativedelta(months=1)).replace(day=1)
 
-        median_days = get_median(days_to_close)
+        while this_month_start <= timezone.now().date():
+            days_to_close = list(
+                Application.objects.filter(
+                    status__in=[Application.APPROVED, Application.NOT_APPROVED],
+                    date_created__gte=this_month_start,
+                    date_created__lt=next_month_start
+                ).values_list('days_open', flat=True)
+            )
 
-        js_timestamp = get_js_timestamp(this_month_start)
-        data_series.append([js_timestamp, median_days])
+            median_days = get_median(days_to_close)
 
-        next_month_start += relativedelta.relativedelta(months=1)
-        this_month_start += relativedelta.relativedelta(months=1)
+            js_timestamp = get_js_timestamp(this_month_start)
+            data_series.append([js_timestamp, median_days])
+
+            next_month_start += relativedelta.relativedelta(months=1)
+            this_month_start += relativedelta.relativedelta(months=1)
 
     return data_series
 
@@ -224,22 +231,24 @@ def get_users_by_partner_by_month(partner):
     """
 
     data_series = []
-    earliest_date = Application.objects.filter(
-        partner=partner).earliest('date_created').date_created
+    partner_apps = Application.objects.filter(partner=partner)
 
-    current_date = timezone.now().date()
+    if partner_apps:
+        earliest_date = partner_apps.earliest('date_created').date_created
 
-    while current_date >= earliest_date:
-        js_timestamp = get_js_timestamp(current_date)
+        current_date = timezone.now().date()
 
-        apps_to_date = Application.objects.filter(
-            partner=partner,
-            date_created__lte=current_date)
+        while current_date >= earliest_date:
+            js_timestamp = get_js_timestamp(current_date)
 
-        unique_users = User.objects.filter(
-            applications__in=apps_to_date).distinct().count()
+            apps_to_date = Application.objects.filter(
+                partner=partner,
+                date_created__lte=current_date)
 
-        data_series.append([js_timestamp, unique_users])
-        current_date -= relativedelta.relativedelta(months=1)
+            unique_users = User.objects.filter(
+                applications__in=apps_to_date).distinct().count()
+
+            data_series.append([js_timestamp, unique_users])
+            current_date -= relativedelta.relativedelta(months=1)
 
     return data_series
