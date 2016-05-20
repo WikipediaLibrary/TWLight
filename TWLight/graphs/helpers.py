@@ -1,6 +1,7 @@
 from dateutil import relativedelta
 import json
 import logging
+from numbers import Number
 import time
 
 from django.contrib.auth.models import User
@@ -28,7 +29,10 @@ def get_js_timestamp(datetime):
 
 def get_median(values_list):
     """Given a list (of numbers), returns its median value."""
-    if not values_list:
+    try:
+        for item in values_list:
+            assert isinstance(item, Number)
+    except AssertionError:
         return 0
 
     values_list.sort()
@@ -40,7 +44,7 @@ def get_median(values_list):
     elif list_len % 2 == 1:
         median = int(values_list[(list_len - 1 )/2])
     else:
-        median = int((values_list[(list_len -1 )/2] +
+        median = int((values_list[(list_len - 1 )/2] +
                        values_list[1 + (list_len -1 )/2]) / 2)
 
     return median
