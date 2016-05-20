@@ -82,7 +82,7 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <h3>{% trans "Number of partners over time" %}</h3>
+      <h3>{% trans "Number of partners over time" %} <a href="{% url 'csv:num_partners' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <div id="partner-time-graph" style="width:600px;height:300px"></div>
     </div>
   </div>
@@ -98,7 +98,7 @@
   <div class="row">
     <div class="col-lg-12">
       <!-- begin home_wiki distribution -->
-      <h3>{% trans "Home wiki distribution" %}</h3>
+      <h3>{% trans "Home wiki distribution" %} <a href="{% url 'csv:home_wiki_pie' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <div class="row">
         <div class="col-xs-12 col-md-8">
           <div id="home-wiki-pie-graph" style="width:600px;height:300px"></div>          
@@ -129,7 +129,7 @@
       <!-- end home_wiki distribution -->
 
       <!-- begin home_wiki distribution over time -->
-      <h3>{% trans "Home wiki distribution over time" %}</h3>
+      <h3>{% trans "Home wiki distribution over time" %} <a href="{% url 'csv:home_wiki_over_time' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <div id="home-wiki-bar-graph" style="width:600px;height:300px"></div>          
 
       <!-- end home_wiki distribution over time -->

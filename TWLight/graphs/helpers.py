@@ -14,6 +14,10 @@ from TWLight.users.models import Editor
 
 logger = logging.getLogger(__name__)
 
+# Output formats
+JSON = 'json'
+PYTHON = 'python'
+
 
 # Utilities --------------------------------------------------------------------
 def get_js_timestamp(datetime):
@@ -62,10 +66,11 @@ def get_data_count_by_month(queryset):
 
 
 # Application stats ------------------------------------------------------------
-def get_application_status_data(queryset):
+def get_application_status_data(queryset, data_format=JSON):
     """
-    Returns json-formatted data about the status of Applications in a queryset
-    in a format suitable for display as a flot.js pie chart.
+    Returns data about the status of Applications in a queryset. By default,
+    returns json in a format suitable for display as a flot.js pie chart; can
+    also return CSV.
     """
     status_data = []
 
@@ -87,10 +92,13 @@ def get_application_status_data(queryset):
         # dealing with.)
         status_data.append({'label': force_unicode(status[1]), 'data': status_count})
 
-    # We have to use json.dumps and not just return the Python object
-    # because force_unicode will output u'' objects that will confuse
-    # JavaScript.
-    return json.dumps(status_data)
+    if data_format == PYTHON:
+        return status_data
+    else:
+        # We have to use json.dumps and not just return the Python object
+        # because force_unicode will output u'' objects that will confuse
+        # JavaScript.
+        return json.dumps(status_data)
 
 
 def get_time_open_histogram(queryset):

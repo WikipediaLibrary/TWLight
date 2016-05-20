@@ -9,11 +9,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
+from TWLight.applications.urls import urlpatterns as applications_urls
+from TWLight.resources.urls import urlpatterns as partners_urls
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
-from TWLight.resources.urls import urlpatterns as partners_urls
-from TWLight.applications.urls import urlpatterns as applications_urls
-
+from TWLight.graphs.urls import csv_urlpatterns as csv_urls
 from TWLight.graphs.views import DashboardView
 
 
@@ -43,4 +43,5 @@ urlpatterns = [
     url(r'^users/', include(users_urls, namespace="users")),
     url(r'^applications/', include(applications_urls, namespace="applications")),
     url(r'^partners/', include(partners_urls, namespace="partners")),
+    url(r'^csv/', include(csv_urls, namespace="csv")),
 ]
