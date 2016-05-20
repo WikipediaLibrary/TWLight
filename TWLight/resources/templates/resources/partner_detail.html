@@ -4,7 +4,7 @@
 {% load twlight_perms %}
 
 {% block content %}
-  <h2>{{ object }}</h2>
+  <h1>{{ object }}</h1>
 
   {% if object.description %}
     {{ object.description }}
@@ -16,7 +16,7 @@
     list streams
 {% endcomment %}
   {% if user|coordinators_only %}
-    <h3>{% trans "Metrics" %}</h3>
+    <h2>{% trans "Metrics" %}</h2>
 
     <div class="row">
       <div class="col-xs-12 col-md-4">
@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    <h4>Applications by status</h4>
+    <h3>{% trans "Applications by status" %}</h3>
     
     <div id="app-distribution-graph" style="width:600px;height:300px"></div>
 
@@ -88,6 +88,21 @@
         Number of unique users with approved applications (all time): {{ unique_users_approved }}
       {% endblocktrans %}
     </p>
+
+    <h3>{% trans "Applications over time" %}</h3>
+    
+    <h3>{% trans "All applications" %}</h3>
+    
+    <div id="signups-time-graph" style="width:600px;height:300px"></div>
+
+    <h3>{% trans "Approved applications only" %}</h3>
+    
+    <div id="approved-signups-time-graph" style="width:600px;height:300px"></div>
+
+    <h3>{% trans "Unique users over time" %}</h3>
+
+    <div id="users-time-graph" style="width:600px;height:300px"></div>
+
   {% endif %}
 
   <h3>{% trans "Special requirements for applicants" %}</h3>
@@ -169,8 +184,58 @@
     <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.js" %}"></script>
     <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.pie.js" %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.time.js" %}"></script>
+
     <script type="text/javascript">
       $(function() {
+        // All applicationss by time
+        var signups_time_graph = $("#signups-time-graph");
+        var signups_time_data = {{ signups_time_data | safe }};
+        var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {
+          xaxis: {
+            mode: "time",
+            tickSize: [1, 'month'],
+          },
+          yaxis: {
+            min: 0,
+            minTickSize: 1,
+            tickDecimals: 0,
+          },
+          colors: ['#5cb85c'],
+        });
+
+        // Approved applications by time
+        var approved_signups_time_graph = $("#approved-signups-time-graph");
+        var approved_signups_time_data = {{ approved_signups_time_data | safe }};
+        var approved_signups_time_plot = $.plot(approved_signups_time_graph, [approved_signups_time_data], {
+          xaxis: {
+            mode: "time",
+            tickSize: [1, 'month'],
+          },
+          yaxis: {
+            min: 0,
+            minTickSize: 1,
+            tickDecimals: 0,
+          },
+          colors: ['#5cb85c'],
+        });
+
+        // Unique users by time
+        var users_time_graph = $("#users-time-graph");
+        var users_time_data = {{ users_time_data | safe }};
+        var users_time_plot = $.plot(users_time_graph, [users_time_data], {
+          xaxis: {
+            mode: "time",
+            tickSize: [1, 'month'],
+          },
+          yaxis: {
+            min: 0,
+            minTickSize: 1,
+            tickDecimals: 0,
+          },
+          colors: ['#f0ad4e'],
+        });
+
         // Application status distribution (pie chart)
         var app_distribution_graph = $("#app-distribution-graph");
         var app_distribution_data = {{ app_distribution_data | safe }};

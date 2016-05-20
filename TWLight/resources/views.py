@@ -2,9 +2,13 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
 
 from TWLight.applications.models import Application
-from TWLight.views import get_median, get_application_status_data
+from TWLight.views import (get_median,
+                           get_application_status_data,
+                           get_data_count_by_month,
+                           get_users_by_partner_by_month)
 
 from .models import Partner
+
 
 
 class PartnersListView(ListView):
@@ -47,5 +51,18 @@ class PartnersDetailView(DetailView):
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.filter(partner=partner)
             )
+
+        context['signups_time_data'] = get_data_count_by_month(
+                Application.objects.filter(partner=partner)
+            )
+
+        context['approved_signups_time_data'] = get_data_count_by_month(
+                Application.objects.filter(
+                    partner=partner,
+                    status=Application.APPROVED
+                )
+            )
+
+        context['users_time_data'] = get_users_by_partner_by_month(partner)
 
         return context

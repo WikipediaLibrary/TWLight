@@ -6,6 +6,7 @@ import json
 import logging
 import time
 
+from django.contrib.auth.models import User
 from django.db.models import Avg
 from django.views.generic import TemplateView
 from django.utils import timezone
@@ -20,6 +21,12 @@ from .view_mixins import CoordinatorsOnly
 
 
 logger = logging.getLogger(__name__)
+
+
+def _get_js_timestamp(datetime):
+    # Expects a date or datetime object; returns same in milliseconds
+    # since the epoch. (That is the date format expected by flot.js.)
+    return int(time.mktime(datetime.timetuple())*1000)
 
 
 def get_median(values_list):
@@ -70,6 +77,51 @@ def get_application_status_data(queryset):
     return json.dumps(status_data)
 
 
+def get_users_by_partner_by_month(partner):
+    # Build up a data series for number of unique users who have applied for
+    # access to a particular partner over time.
+
+    data_series = []
+    earliest_date = Application.objects.filter(
+        partner=partner).earliest('date_created').date_created
+
+    current_date = timezone.now().date()
+
+    while current_date >= earliest_date:
+        js_timestamp = _get_js_timestamp(current_date)
+
+        apps_to_date = Application.objects.filter(
+            partner=partner,
+            date_created__lte=current_date)
+
+        unique_users = User.objects.filter(
+            applications__in=apps_to_date).distinct().count()
+
+        data_series.append([js_timestamp, unique_users])
+        current_date -= relativedelta.relativedelta(months=1)
+
+    return data_series
+
+
+def get_data_count_by_month(queryset):
+    # Build up a data series for number of queryset members over time: one data
+    # point per month from the beginning of the queryset until today. Requires
+    # that the model have a date_created property
+    data_series = []
+    earliest_date = queryset.earliest('date_created').date_created
+
+    current_date = timezone.now().date()
+
+    while current_date >= earliest_date:
+        # flot.js expects milliseconds since the epoch.
+        js_timestamp = _get_js_timestamp(current_date)
+        num_objs = queryset.filter(date_created__lte=current_date).count()
+        data_series.append([js_timestamp, num_objs])
+        current_date -= relativedelta.relativedelta(months=1)
+
+    return data_series
+
+
 class DashboardView(CoordinatorsOnly, TemplateView):
     """
     Allow coordinators to see metrics about the application process.
@@ -81,11 +133,6 @@ class DashboardView(CoordinatorsOnly, TemplateView):
 
         # Helper functions
         # ----------------------------------------------------------------------
-
-        def _get_js_timestamp(datetime):
-            # Expects a date or datetime object; returns same in milliseconds
-            # since the epoch. (That is the date format expected by flot.js.)
-            return int(time.mktime(datetime.timetuple())*1000)
 
         def _add_home_wiki_bar_chart_point(data_series, datestamp):
             js_timestamp = _get_js_timestamp(datestamp)
@@ -107,27 +154,9 @@ class DashboardView(CoordinatorsOnly, TemplateView):
         # Partnership data
         # ----------------------------------------------------------------------
 
-        # Build up a data series for number of partners over time: one data
-        # point per month since the first partner, plus one data point for
-        # today.
-        data_series = []
-        earliest_date = Partner.objects.earliest('date_created').date_created
-
-        month = earliest_date
-
-        while month < timezone.now().date():
-            # flot.js expects milliseconds since the epoch.
-            js_timestamp = _get_js_timestamp(month)
-            num_partners = Partner.objects.filter(date_created__lte=month).count()
-            data_series.append([js_timestamp, num_partners])
-            month += relativedelta.relativedelta(months=1)
-
-        data_series.append([
-            _get_js_timestamp(timezone.now().date()),
-            Partner.objects.count()
-        ])
-
-        context['partner_time_data'] = data_series
+        context['partner_time_data'] = get_data_count_by_month(
+                Partner.objects.all()
+            )
 
 
         # Editor data
