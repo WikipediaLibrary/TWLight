@@ -14,7 +14,7 @@ from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.resources.urls import urlpatterns as partners_urls
 from TWLight.applications.urls import urlpatterns as applications_urls
 
-from .views import DashboardView
+from TWLight.graphs.views import DashboardView
 
 
 urlpatterns = [

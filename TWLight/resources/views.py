@@ -2,10 +2,10 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
 
 from TWLight.applications.models import Application
-from TWLight.views import (get_median,
-                           get_application_status_data,
-                           get_data_count_by_month,
-                           get_users_by_partner_by_month)
+from TWLight.graphs.helpers import (get_median,
+                                    get_application_status_data,
+                                    get_data_count_by_month,
+                                    get_users_by_partner_by_month)
 
 from .models import Partner
 
