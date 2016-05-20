@@ -53,6 +53,7 @@ TWLIGHT_APPS = (
     'TWLight.resources',
     'TWLight.applications',
     'TWLight.emails',
+    'TWLight.graphs',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TWLIGHT_APPS
