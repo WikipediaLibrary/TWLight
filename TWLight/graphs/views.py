@@ -4,6 +4,7 @@ import logging
 from django.db.models import Avg
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
+from django.utils.translation import ugettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
@@ -17,7 +18,8 @@ from .helpers import (get_application_status_data,
                       get_wiki_distribution_pie_data,
                       get_wiki_distribution_bar_data,
                       get_time_open_histogram,
-                      get_median_decision_time)
+                      get_median_decision_time,
+                      PYTHON)
 
 
 logger = logging.getLogger(__name__)
@@ -49,7 +51,11 @@ class DashboardView(CoordinatorsOnly, TemplateView):
         # Editor data
         # ----------------------------------------------------------------------
 
-        context['home_wiki_pie_data'] = get_wiki_distribution_pie_data()
+        # Although normally we'd want JSON for graphs, the pie chart can consume
+        # a normal dict, and the for loop to create the table requires a dict,
+        # not JSON.
+        context['home_wiki_pie_data'] = get_wiki_distribution_pie_data(
+            data_format=PYTHON)
 
         context['home_wiki_bar_data'] = get_wiki_distribution_bar_data()
 
@@ -118,7 +124,7 @@ class _CSVDownloadView(View):
         return response
 
 
-    def _write_data(self):
+    def _write_data(self, response):
         raise NotImplementedError
 
 
@@ -126,11 +132,12 @@ class _CSVDownloadView(View):
 class CSVNumPartners(_CSVDownloadView):
     def _write_data(self, response):
         data = get_data_count_by_month(
-                Partner.objects.all()
+                Partner.objects.all(),
+                data_format=PYTHON
             )
         writer = csv.writer(response)
 
-        writer.writerow(['Milliseconds since the epoch', 'Number of partners'])
+        writer.writerow([_('Milliseconds since the epoch'), _('Number of partners')])
 
         for row in data:
             writer.writerow(row)
@@ -139,11 +146,11 @@ class CSVNumPartners(_CSVDownloadView):
 
 class CSVHomeWikiPie(_CSVDownloadView):
     def _write_data(self, response):
-        data = get_wiki_distribution_pie_data()
+        data = get_wiki_distribution_pie_data(data_format=PYTHON)
 
         writer = csv.DictWriter(response, fieldnames=['label', 'data'])
 
-        writer.writerow({'label': 'Home wiki', 'data': 'Number of users'})
+        writer.writerow({'label': _('Home wiki'), 'data': _('Number of users')})
 
         for row in data:
             writer.writerow(row)
@@ -152,13 +159,65 @@ class CSVHomeWikiPie(_CSVDownloadView):
 
 class CSVHomeWikiOverTime(_CSVDownloadView):
     def _write_data(self, response):
-        data = get_wiki_distribution_bar_data()
+        data = get_wiki_distribution_bar_data(data_format=PYTHON)
 
         writer = csv.writer(response)
 
         writer.writerow(
-            ['Wiki', 'Milliseconds since the epoch', 'Number of users'])
+            [_('Wiki'), _('Milliseconds since the epoch'), _('Number of users')])
 
         for elem in data:
             for point in elem['data']:
                 writer.writerow([elem['label'], point[0], point[1]])
+
+
+
+class CSVAppTimeHistogram(_CSVDownloadView):
+    def _write_data(self, response):
+        closed_apps = Application.objects.filter(
+            status__in=[Application.APPROVED, Application.NOT_APPROVED]
+        )
+
+        data = get_time_open_histogram(closed_apps, data_format=PYTHON)
+
+        writer = csv.writer(response)
+
+        writer.writerow(
+            [_('Days until decision'), _('Number of applications')])
+
+        for row in data:
+            writer.writerow(row)
+
+
+
+class CSVAppMedians(_CSVDownloadView):
+    def _write_data(self, response):
+        data = get_median_decision_time(
+            Application.objects.all(),
+            data_format=PYTHON
+        )
+
+        writer = csv.writer(response)
+
+        writer.writerow(
+            [_('Month'), _('Median days until decision')])
+
+        for row in data:
+            writer.writerow(row)
+
+
+
+class CSVAppDistribution(_CSVDownloadView):
+    def _write_data(self, response):
+        data = get_application_status_data(
+            Application.objects.all(),
+            data_format=PYTHON
+        )
+
+        writer = csv.DictWriter(response, fieldnames=['label', 'data'])
+
+        writer.writerow({'label': _('Status'),
+                         'data': _('Number of applications')})
+
+        for row in data:
+            writer.writerow(row)

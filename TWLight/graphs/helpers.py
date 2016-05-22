@@ -15,10 +15,8 @@ from TWLight.users.models import Editor
 
 logger = logging.getLogger(__name__)
 
-# Output formats
 JSON = 'json'
 PYTHON = 'python'
-
 
 # Utilities --------------------------------------------------------------------
 def get_js_timestamp(datetime):
@@ -50,7 +48,7 @@ def get_median(values_list):
     return median
 
 
-def get_data_count_by_month(queryset):
+def get_data_count_by_month(queryset, data_format=JSON):
     """
     Given a queryset, return a data series for number of queryset members over
     time: one data point per month from the beginning of the queryset until
@@ -65,13 +63,20 @@ def get_data_count_by_month(queryset):
         current_date = timezone.now().date()
 
         while current_date >= earliest_date:
-            # flot.js expects milliseconds since the epoch.
-            js_timestamp = get_js_timestamp(current_date)
+            if data_format == JSON:
+                # flot.js expects milliseconds since the epoch.
+                timestamp = get_js_timestamp(current_date)
+            else:
+                timestamp = current_date
+
             num_objs = queryset.filter(date_created__lte=current_date).count()
-            data_series.append([js_timestamp, num_objs])
+            data_series.append([timestamp, num_objs])
             current_date -= relativedelta.relativedelta(months=1)
 
-    return data_series
+    if data_format == JSON:
+        return json.dumps(data_series)
+    else:
+        return data_series
 
 
 # Application stats ------------------------------------------------------------
@@ -110,7 +115,7 @@ def get_application_status_data(queryset, data_format=JSON):
         return json.dumps(status_data)
 
 
-def get_time_open_histogram(queryset):
+def get_time_open_histogram(queryset, data_format=JSON):
     """
     Expects a queryset of closed Applications; returns data suitable for
     generating a histogram of how long the apps were open.
@@ -136,11 +141,16 @@ def get_time_open_histogram(queryset):
                 data_series[int_days_open] = 1
 
     # Reformat dict (easy to use in Python) into list-of-lists expected by
-    # float.
-    return [[k, v] for (k, v) in data_series.items()]
+    # flot.
+    output = [[k, v] for (k, v) in data_series.items()]
+
+    if data_format == JSON:
+        return json.dumps(output)
+    else:
+        return output
 
 
-def get_median_decision_time(queryset):
+def get_median_decision_time(queryset, data_format=JSON):
     """
     Expects a queryset of Applications; returns data suitable for graphing
     mean decision time.
@@ -165,17 +175,23 @@ def get_median_decision_time(queryset):
 
             median_days = get_median(days_to_close)
 
-            js_timestamp = get_js_timestamp(this_month_start)
-            data_series.append([js_timestamp, median_days])
+            if data_format == JSON:
+                js_timestamp = get_js_timestamp(this_month_start)
+                data_series.append([js_timestamp, median_days])
+            else:
+                data_series.append([this_month_start, median_days])
 
             next_month_start += relativedelta.relativedelta(months=1)
             this_month_start += relativedelta.relativedelta(months=1)
 
-    return data_series
+    if data_format == JSON:
+        return json.dumps(data_series)
+    else:
+        return data_series
 
 
 # User stats ------------------------------------------------------------
-def get_wiki_distribution_pie_data():
+def get_wiki_distribution_pie_data(data_format=JSON):
     wiki_data = []
 
     for wiki in WIKIS:
@@ -185,16 +201,25 @@ def get_wiki_distribution_pie_data():
 
     # The table will make the most sense if it puts the most popular wikis
     # on top.
-    return sorted(wiki_data, key=lambda x: x['data'], reverse=True)
+    output = sorted(wiki_data, key=lambda x: x['data'], reverse=True)
+
+    if data_format == JSON:
+        return json.dumps(output)
+    else:
+        return output
 
 
-def get_wiki_distribution_bar_data():
+def get_wiki_distribution_bar_data(data_format=JSON):
     def _add_home_wiki_bar_chart_point(data_series, datestamp):
-        js_timestamp = get_js_timestamp(datestamp)
+        if data_format == JSON:
+            timestamp = get_js_timestamp(datestamp)
+        else:
+            timestamp = datestamp
+
         for wiki in WIKIS:
             num_editors = Editor.objects.filter(
                 home_wiki=wiki[0], date_created__lte=datestamp).count()
-            data_series[wiki[1]].insert(0, [js_timestamp, num_editors])
+            data_series[wiki[1]].insert(0, [timestamp, num_editors])
 
         return data_series
 
@@ -223,9 +248,14 @@ def get_wiki_distribution_bar_data():
     # (as accounts are added), we can do this by simply looking at the
     # editor count in the last data point for any given wiki and seeing if
     # it is nonzero.
-    return [{'label': wiki, 'data': data_series[wiki]}
+    output = [{'label': wiki, 'data': data_series[wiki]}
             for wiki in data_series
             if data_series[wiki][-1][1]]
+
+    if data_format == JSON:
+        return json.dumps(output)
+    else:
+        return output
 
 
 def get_users_by_partner_by_month(partner):
