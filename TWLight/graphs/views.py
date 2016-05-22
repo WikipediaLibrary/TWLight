@@ -108,7 +108,7 @@ class DashboardView(CoordinatorsOnly, TemplateView):
 # These views power "download as CSV" buttons. They provide the same data sets
 # that are reflected in the DashboardView, but as HttpResponses with csv data.
 
-class _CSVDownloadView(View):
+class _CSVDownloadView(CoordinatorsOnly, View):
     """
     Base view powering CSV downloads. Not intended to be used directly.
     URLs should point at subclasses of this view. Subclasses should implement a
@@ -131,13 +131,23 @@ class _CSVDownloadView(View):
 
 class CSVNumPartners(_CSVDownloadView):
     def _write_data(self, response):
-        data = get_data_count_by_month(
-                Partner.objects.all(),
-                data_format=PYTHON
-            )
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+
+            try:
+                queryset = Partner.objects.get(pk=pk)
+            except Partner.DoesNotExist:
+                logger.exception('Tried to access data for partner #{pk}, who '
+                                 'does not exist'.format(pk=pk))
+                raise
+
+        else:
+            queryset =Partner.objects.all()
+
+        data = get_data_count_by_month(queryset, data_format=PYTHON)
         writer = csv.writer(response)
 
-        writer.writerow([_('Milliseconds since the epoch'), _('Number of partners')])
+        writer.writerow([_('Date'), _('Number of partners')])
 
         for row in data:
             writer.writerow(row)
@@ -164,7 +174,7 @@ class CSVHomeWikiOverTime(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow(
-            [_('Wiki'), _('Milliseconds since the epoch'), _('Number of users')])
+            [_('Wiki'), _('Date'), _('Number of users')])
 
         for elem in data:
             for point in elem['data']:
@@ -218,6 +228,56 @@ class CSVAppDistribution(_CSVDownloadView):
 
         writer.writerow({'label': _('Status'),
                          'data': _('Number of applications')})
+
+        for row in data:
+            writer.writerow(row)
+
+
+
+class CSVAppCountByPartner(_CSVDownloadView):
+    def _write_data(self, response):
+        pk = self.kwargs['pk']
+        try:
+            partner = Partner.objects.get(pk=pk)
+        except Partner.DoesNotExist:
+            logger.exception('Tried to access data for partner #{pk}, who '
+                             'does not exist'.format(pk=pk))
+            raise
+
+        queryset = Application.objects.filter(partner=partner)
+
+        if 'approved' in self.kwargs:
+            queryset = queryset.filter(status=Application.APPROVED)
+
+        data = get_data_count_by_month(queryset, data_format=PYTHON)
+
+        writer = csv.writer(response)
+
+        writer.writerow([_('Date'),
+            _('Number of applications to {partner}').format(partner=partner)])
+
+        for row in data:
+            writer.writerow(row)
+
+
+
+class CSVUserCountByPartner(_CSVDownloadView):
+    def _write_data(self, response):
+        pk = self.kwargs['pk']
+
+        try:
+            partner = Partner.objects.get(pk=pk)
+        except Partner.DoesNotExist:
+            logger.exception('Tried to access data for partner #{pk}, who '
+                             'does not exist'.format(pk=pk))
+            raise
+
+        data = get_users_by_partner_by_month(partner, data_format=PYTHON)
+
+        writer = csv.writer(response)
+
+        writer.writerow([_('Date'),
+            _('Number of unique users who have applied to {partner}').format(partner=partner)])
 
         for row in data:
             writer.writerow(row)

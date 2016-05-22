@@ -258,7 +258,7 @@ def get_wiki_distribution_bar_data(data_format=JSON):
         return output
 
 
-def get_users_by_partner_by_month(partner):
+def get_users_by_partner_by_month(partner, data_format=JSON):
     """
     Given a partner, return a data series for number of unique users who have
     applied for access to that particular partner over time.
@@ -273,7 +273,10 @@ def get_users_by_partner_by_month(partner):
         current_date = timezone.now().date()
 
         while current_date >= earliest_date:
-            js_timestamp = get_js_timestamp(current_date)
+            if data_format == JSON:
+                timestamp = get_js_timestamp(current_date)
+            else:
+                timestamp = current_date
 
             apps_to_date = Application.objects.filter(
                 partner=partner,
@@ -282,7 +285,10 @@ def get_users_by_partner_by_month(partner):
             unique_users = User.objects.filter(
                 applications__in=apps_to_date).distinct().count()
 
-            data_series.append([js_timestamp, unique_users])
+            data_series.append([timestamp, unique_users])
             current_date -= relativedelta.relativedelta(months=1)
 
-    return data_series
+    if data_format == JSON:
+        return json.dumps(data_series)
+    else:
+        return data_series

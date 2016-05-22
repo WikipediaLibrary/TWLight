@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    <h3>{% trans "Applications by status" %}</h3>
+    <h3>{% trans "Applications by status" %} <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
     
     <div id="app-distribution-graph" style="width:600px;height:300px"></div>
 
@@ -91,15 +91,15 @@
 
     <h3>{% trans "Applications over time" %}</h3>
     
-    <h3>{% trans "All applications" %}</h3>
+    <h4>{% trans "All applications" %} <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h4>
     
     <div id="signups-time-graph" style="width:600px;height:300px"></div>
 
-    <h3>{% trans "Approved applications only" %}</h3>
+    <h4>{% trans "Approved applications only" %} <a href="{% url 'csv:approved_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h4>
     
     <div id="approved-signups-time-graph" style="width:600px;height:300px"></div>
 
-    <h3>{% trans "Unique users over time" %}</h3>
+    <h3>{% trans "Unique users over time" %} <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
 
     <div id="users-time-graph" style="width:600px;height:300px"></div>
 
