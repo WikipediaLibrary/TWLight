@@ -268,44 +268,42 @@ class SubmitApplicationView(EditorsOnly, FormView):
 
 
 
-class ListApplicationsView(CoordinatorsOnly, ListView):
+
+class _BaseListApplicationView(CoordinatorsOnly, ListView):
+    """
+    Factors out shared functionality for the application list views. Not
+    intended to be user-facing. Subclasses should implement get_queryset().
+    """
     model = Application
 
-    def get_queryset(self, **kwargs):
+    def _filter_queryset(self, base_qs, editor, partner):
         """
-        List only the open applications: that makes this page useful as a
-        reviewer queue. Approved and rejected applications should be listed
-        elsewhere: kept around for historical reasons, but kept off the main
-        page to preserve utility (and limit load time).
+        Handle filters that might have been passed in by post().
         """
-        base_qs = Application.objects.filter(
-                status__in=[Application.PENDING, Application.QUESTION]
-             ).order_by('status', 'partner')
-
-        # Handle filters that might have been passed in by post().
-        editor = kwargs.pop('editor', None)
         if editor:
             base_qs = base_qs.filter(editor=editor)
 
-        partner = kwargs.pop('partner', None)
         if partner:
             base_qs = base_qs.filter(partner=partner)
 
         return base_qs
 
 
+    def get_queryset(self):
+        raise NotImplementedError
+
+
     def get_context_data(self, **kwargs):
-        context = super(ListApplicationsView, self).get_context_data(**kwargs)
+        """
+        Subclasses should call super on this and add title, intro_text,
+        include_template (if different from the default), and any other context
+        specific to that subclass.
+        """
+        context = super(_BaseListApplicationView, self).get_context_data(**kwargs)
 
-        context['title'] = _('Queue of applications to review')
-
-        approved_url = reverse_lazy('applications:list_approved')
-        rejected_url = reverse_lazy('applications:list_rejected')
-        context['intro_text'] = _("""
-          This page lists only applications that still need to be reviewed.
-          You may also consult <a href="{approved_url}">approved</a> and
-          <a href="{rejected_url}">rejected</a> applications. 
-        """).format(approved_url=approved_url, rejected_url=rejected_url)
+        context['approved_url'] = reverse_lazy('applications:list_approved')
+        context['rejected_url'] = reverse_lazy('applications:list_rejected')
+        context['open_url'] = reverse_lazy('applications:list')
 
         context['include_template'] = \
             'applications/application_list_include.html'
@@ -316,6 +314,11 @@ class ListApplicationsView(CoordinatorsOnly, ListView):
 
 
     def post(self, request, *args, **kwargs):
+        """
+        Handles filters applied by the autocomplete form, limiting the queryset
+        and redisplaying the text. The self.render_to_response() incantation is
+        borrowed from django's form_invalid handling.
+        """
         try:
             # request.POST['editor'] will be the pk of an Editor instance, if
             # it exists.
@@ -344,14 +347,49 @@ class ListApplicationsView(CoordinatorsOnly, ListView):
         # render_to_response without having routed through get(), the
         # get_context_data call will fail when it looks for a self.object_list
         # and doesn't find one. Therefore we set it here.
-        self.object_list = self.get_queryset(editor=editor, partner=partner)
+        base_qs = self.get_queryset()
+        filtered_qs = self._filter_queryset(base_qs=base_qs,
+                                            editor=editor,
+                                            partner=partner)
+        self.object_list = filtered_qs
 
         return self.render_to_response(self.get_context_data())
 
+    # TODO paginate
+
+class ListApplicationsView(_BaseListApplicationView):
+
+    def get_queryset(self, **kwargs):
+        """
+        List only the open applications: that makes this page useful as a
+        reviewer queue. Approved and rejected applications should be listed
+        elsewhere: kept around for historical reasons, but kept off the main
+        page to preserve utility (and limit load time).
+        """
+        base_qs = Application.objects.filter(
+                status__in=[Application.PENDING, Application.QUESTION]
+             ).order_by('status', 'partner')
+
+        return base_qs
 
 
-class ListApprovedApplicationsView(CoordinatorsOnly, ListView):
-    model = Application
+    def get_context_data(self, **kwargs):
+        context = super(ListApplicationsView, self).get_context_data(**kwargs)
+
+        context['title'] = _('Queue of applications to review')
+
+        context['intro_text'] = _("""
+          This page lists only applications that still need to be reviewed.
+          You may also consult <a href="{approved_url}">approved</a> and
+          <a href="{rejected_url}">rejected</a> applications. 
+        """).format(approved_url=context['approved_url'],
+                    rejected_url=context['rejected_url'])
+
+        return context
+
+
+
+class ListApprovedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         return Application.objects.filter(
@@ -364,26 +402,19 @@ class ListApprovedApplicationsView(CoordinatorsOnly, ListView):
 
         context['title'] = _('Approved applications')
 
-        open_url = reverse_lazy('applications:list')
-        rejected_url = reverse_lazy('applications:list_rejected')
         context['intro_text'] = _("""
           This page lists only applications that have been approved.
           You may also consult <a href="{open_url}">pending or
           under-discussion</a> and <a href="{rejected_url}">rejected</a>
           applications. 
-        """).format(open_url=open_url, rejected_url=rejected_url)
-
-        context['include_template'] = \
-            'applications/application_list_include.html'
+        """).format(open_url=context['open_url'],
+                    rejected_url=context['rejected_url'])
 
         return context
 
-    # TODO: paginate
 
 
-
-class ListRejectedApplicationsView(CoordinatorsOnly, ListView):
-    model = Application
+class ListRejectedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         return Application.objects.filter(
@@ -396,30 +427,23 @@ class ListRejectedApplicationsView(CoordinatorsOnly, ListView):
 
         context['title'] = _('Rejected applications')
 
-        open_url = reverse_lazy('applications:list')
-        approved_url = reverse_lazy('applications:list_approved')
         context['intro_text'] = _("""
           This page lists only applications have been rejected.
           You may also consult <a href="{open_url}">pending or
           under-discussion</a> and <a href="{approved_url}">approved</a>
           applications. 
-        """).format(open_url=open_url, approved_url=approved_url)
-
-        context['include_template'] = \
-            'applications/application_list_include.html'
+        """).format(open_url=context['open_url'],
+                    approved_url=context['approved_url'])
 
         return context
 
-    # TODO: paginate
 
 
-
-class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
+class ListExpiringApplicationsView(_BaseListApplicationView):
     """
     Lists access grants that are probably about to expire, based on a default
     access grant length of 365 days.
     """
-    model = Application
 
     def get_queryset(self):
         two_months_from_now = date.today() + timedelta(days=60)
@@ -435,10 +459,6 @@ class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
 
         context['title'] = _('Access grants up for renewal')
 
-        open_url = reverse_lazy('applications:list')
-        rejected_url = reverse_lazy('applications:list_rejected')
-        approved_url = reverse_lazy('applications:list_approved')
-
         context['intro_text'] = _("""
           This page lists approved applications whose access grants have
           probably expired recently
@@ -447,14 +467,17 @@ class ListExpiringApplicationsView(CoordinatorsOnly, ListView):
           under-discussion</a>, <a href="{rejected_url}">rejected</a>, or
           <a href="{approved_url}">all approved</a>
           applications. 
-        """).format(open_url=open_url, rejected_url=rejected_url, approved_url=approved_url)
+        """).format(open_url=context['open_url'],
+                    rejected_url=context['rejected_url'],
+                    approved_url=context['approved_url'])
 
+        # Overrides default. We want different styling for this case to help
+        # coordinators prioritize expiring-soon vs. expired-already access
+        # grants.
         context['include_template'] = \
             'applications/application_list_expiring_include.html'
 
         return context
-
-    # TODO: paginate
 
 
 
