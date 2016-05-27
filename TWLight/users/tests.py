@@ -139,10 +139,10 @@ class ViewsTestCase(TestCase):
 
     # Expected editor application data is in the page
     def test_editor_page_has_application_history(self):
-        app1 = ApplicationFactory(status=Application.PENDING, user=self.user1)
-        app2 = ApplicationFactory(status=Application.QUESTION, user=self.user1)
-        app3 = ApplicationFactory(status=Application.APPROVED, user=self.user1)
-        app4 = ApplicationFactory(status=Application.NOT_APPROVED, user=self.user1)
+        app1 = ApplicationFactory(status=Application.PENDING, editor=self.user1.editor)
+        app2 = ApplicationFactory(status=Application.QUESTION, editor=self.user1.editor)
+        app3 = ApplicationFactory(status=Application.APPROVED, editor=self.user1.editor)
+        app4 = ApplicationFactory(status=Application.NOT_APPROVED, editor=self.user1.editor)
 
         expected_html = render_to_string(
             'applications/application_list_include.html',

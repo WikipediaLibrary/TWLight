@@ -43,7 +43,7 @@ class ApplicationCommentTest(TestCase):
         return comm
 
     def _set_up_email_test_objects(self):
-        app = ApplicationFactory(user=self.editor)
+        app = ApplicationFactory(editor=self.editor.editor)
 
         factory = RequestFactory()
         request = factory.post(get_form_target())

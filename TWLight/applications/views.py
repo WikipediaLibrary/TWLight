@@ -194,7 +194,7 @@ class SubmitApplicationView(EditorsOnly, FormView):
             partner_obj = Partner.objects.get(id=partner_id)
 
             app = Application()
-            app.user = self.request.user
+            app.editor = self.request.user.editor
             app.partner = partner_obj
             # Status will be set to PENDING by default.
 

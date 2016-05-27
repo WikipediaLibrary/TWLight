@@ -42,7 +42,7 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         editor = self.get_object()
         context['editor'] = editor # allow for more semantic templates
-        context['object_list'] = editor.user.applications.all().order_by('status')
+        context['object_list'] = editor.applications.all().order_by('status')
         context['form'] = EditorUpdateForm(instance=editor)
         return context
 

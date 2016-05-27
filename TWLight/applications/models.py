@@ -1,12 +1,12 @@
 from datetime import date
 import reversion
 
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
+from TWLight.users.models import Editor
 
 
 class Application(models.Model):
@@ -56,7 +56,7 @@ class Application(models.Model):
                   'when the application is saved, and overriding it may have '
                   'undesirable results.'))
 
-    user = models.ForeignKey(User, related_name='applications')
+    editor = models.ForeignKey(Editor, related_name='applications')
     partner = models.ForeignKey(Partner, related_name='applications')
 
     rationale = models.TextField(blank=True)
@@ -69,7 +69,7 @@ class Application(models.Model):
 
 
     def __str__(self):
-        return '{self.user} - {self.partner}'.format(self=self)
+        return '{self.editor} - {self.partner}'.format(self=self)
 
 
     def get_absolute_url(self):
