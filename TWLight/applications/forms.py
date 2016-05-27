@@ -17,7 +17,7 @@ form that takes a dict of required fields, and constructs the form accordingly.
 
 import autocomplete_light
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit
+from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput
 import logging
 import re
 
@@ -38,6 +38,20 @@ from .models import Application
 logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
+
+
+class StylableSubmit(BaseInput):
+    """
+    The built-in Submit adds classes that don't look right in our context;
+    we actually have to create our own input to get around this.
+    """
+    input_type = 'submit'
+
+    def __init__(self, *args, **kwargs):
+        self.field_classes = ''
+        super(StylableSubmit, self).__init__(*args, **kwargs)
+
+
 
 class BaseApplicationForm(forms.Form):
     """
@@ -203,11 +217,34 @@ class BaseApplicationForm(forms.Form):
 
 
 
-
 class ApplicationAutocomplete(autocomplete_light.ModelForm):
     class Meta:
         model = Application
         fields = ['editor', 'partner']
+
+    def __init__(self, *args, **kwargs):
+        super(ApplicationAutocomplete, self).__init__(*args, **kwargs)
+
+        # Prettify.
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-inline'
+        self.helper.field_template = 'bootstrap3/layout/inline_field.html'
+        self.helper.layout = Layout(
+            'editor',
+            'partner',
+            StylableSubmit('submit', 'Filter', css_class='btn btn-default')
+        )
+
+        # Required on the model, but optional for autocomplete, so overrride
+        # the default.
+        self.fields['editor'].required = False
+        self.fields['partner'].required = False
+
+        # Internationalize user-visible labels. These will appear inline as
+        # placeholders.
+        self.fields['editor'].label = _('Wikipedia username')
+        self.fields['partner'].label = _('Company name')
+
 
     def choices_for_request(self):
         # Make sure we're not leaking info via the autocomplete view; the view

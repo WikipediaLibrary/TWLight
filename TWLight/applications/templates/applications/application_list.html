@@ -10,18 +10,40 @@
     {{ intro_text | safe }}
   </p>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      {% trans "Limit applications by..." %}
+  <!-- begin filtering options/info -->
+  <div class="row">
+
+    <div class=" col-xs-12 col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          {% trans "Filter applications by..." %}
+        </div>
+        <div class="panel-body">
+          {% crispy autocomplete_form %}
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-      <form method="post" action="">
-        {% csrf_token %}
-        {{ autocomplete_form | crispy }}
-        <input type="submit" class="btn btn-default" />
-      </form>      
+
+    <div class=" col-xs-12 col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          {% trans "Current filters" %}
+        </div>
+        <div class="panel-body">
+          {% if filters %}
+            {% for filter in filters %}
+              {% if filter.object %}
+                <strong>{{ filter.label }}</strong> &mdash; {{ filter.object }}<br />
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            {% trans "None" %}
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
+  <!-- end filtering options/info -->
 
   {% include include_template %}
 {% endblock %}

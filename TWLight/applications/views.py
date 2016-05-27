@@ -268,7 +268,6 @@ class SubmitApplicationView(EditorsOnly, FormView):
 
 
 
-
 class _BaseListApplicationView(CoordinatorsOnly, ListView):
     """
     Factors out shared functionality for the application list views. Not
@@ -310,6 +309,10 @@ class _BaseListApplicationView(CoordinatorsOnly, ListView):
 
         context['autocomplete_form'] = ApplicationAutocomplete()
 
+        # Check if filters have been applied (i.e. by post()).
+        filters = kwargs.pop('filters', None)
+        context['filters'] = filters
+
         return context
 
 
@@ -343,6 +346,11 @@ class _BaseListApplicationView(CoordinatorsOnly, ListView):
                 'not exist'.format(pk=request.POST['partner']))
             raise
 
+        filters = [
+            {'label': _('Editor'), 'object': editor},
+            {'label': _('Publisher'), 'object': partner}
+        ]
+
         # ListView sets self.object_list in get(). That means if we call
         # render_to_response without having routed through get(), the
         # get_context_data call will fail when it looks for a self.object_list
@@ -353,9 +361,11 @@ class _BaseListApplicationView(CoordinatorsOnly, ListView):
                                             partner=partner)
         self.object_list = filtered_qs
 
-        return self.render_to_response(self.get_context_data())
+        return self.render_to_response(self.get_context_data(filters=filters))
 
     # TODO paginate
+
+
 
 class ListApplicationsView(_BaseListApplicationView):
 
@@ -394,7 +404,7 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         return Application.objects.filter(
                 status=Application.APPROVED
-             ).order_by('user', 'partner')
+             ).order_by('editor', 'partner')
 
 
     def get_context_data(self, **kwargs):
@@ -419,7 +429,7 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         return Application.objects.filter(
                 status=Application.NOT_APPROVED
-             ).order_by('user', 'partner')
+             ).order_by('editor', 'partner')
 
 
     def get_context_data(self, **kwargs):
@@ -434,6 +444,7 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
           applications. 
         """).format(open_url=context['open_url'],
                     approved_url=context['approved_url'])
+        print self.object_list
 
         return context
 
@@ -499,7 +510,7 @@ class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
-        context['editor'] = self.object.user.editor
+        context['editor'] = self.object.editor
         context['versions'] = reversion.get_for_object(self.object)
         return context
 
