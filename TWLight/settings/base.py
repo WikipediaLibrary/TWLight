@@ -46,6 +46,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'crispy_forms',
     'reversion',
+    'autocomplete_light',
 )
 
 TWLIGHT_APPS = (
@@ -56,7 +57,8 @@ TWLIGHT_APPS = (
     'TWLight.graphs',
 )
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TWLIGHT_APPS
+# autocomplete_light must go before django.contrib.admin
+INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 
 
 # MIDDLEWARE CONFIGURATION

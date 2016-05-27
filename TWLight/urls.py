@@ -18,15 +18,25 @@ from TWLight.graphs.views import DashboardView
 
 
 urlpatterns = [
-	# Built-in
+	# Built-in -----------------------------------------------------------------
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/', auth_views.login, name='auth_login'),
     url(r'^accounts/logout/',
         auth_views.logout,
         {'next_page': '/'},
         name='auth_logout'),
-    url(r'^comments/', include('django.contrib.comments.urls')),
 
+    # Third-party --------------------------------------------------------------
+    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
+
+    # TWLight apps -------------------------------------------------------------
+    url(r'^users/', include(users_urls, namespace="users")),
+    url(r'^applications/', include(applications_urls, namespace="applications")),
+    url(r'^partners/', include(partners_urls, namespace="partners")),
+    url(r'^csv/', include(csv_urls, namespace="csv")),
+
+    # Other TWLight views
     url(r'^oauth/login/$',
         auth.OAuthInitializeView.as_view(),
         name='oauth_login'),
@@ -39,9 +49,4 @@ urlpatterns = [
         name='dashboard'
     ),
 
-    # TWLight apps
-    url(r'^users/', include(users_urls, namespace="users")),
-    url(r'^applications/', include(applications_urls, namespace="applications")),
-    url(r'^partners/', include(partners_urls, namespace="partners")),
-    url(r'^csv/', include(csv_urls, namespace="csv")),
 ]

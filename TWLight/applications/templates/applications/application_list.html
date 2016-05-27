@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
   <h1>{{ title }}</h1>
@@ -10,3 +11,8 @@
 
   {% include include_template %}
 {% endblock %}
+
+{% block javascript %}
+  <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  {% include 'autocomplete_light/static.html' %}
+{% endblock javascript %}

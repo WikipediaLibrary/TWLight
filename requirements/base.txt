@@ -1,5 +1,6 @@
 defusedxml==0.4.1
 Django==1.7.7
+django-autocomplete-light==2.3.1
 django-braces==1.4.0
 django-crispy-forms==1.4.0
 django-reversion==1.8.4
