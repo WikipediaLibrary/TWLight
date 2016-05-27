@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <h1>{{ title }}</h1>
@@ -8,6 +9,19 @@
   <p>
     {{ intro_text | safe }}
   </p>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {% trans "Limit list by..." %}
+    </div>
+    <div class="panel-body">
+      <form method="post" action="">
+        {% csrf_token %}
+        {{ autocomplete_form | crispy }}
+        <input type="submit" class="btn btn-default" />
+      </form>      
+    </div>
+  </div>
 
   {% include include_template %}
 {% endblock %}

@@ -26,7 +26,7 @@ from TWLight.resources.models import Partner
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
                       PARTNER_FORM_BASE_FIELDS)
-from .forms import BaseApplicationForm
+from .forms import BaseApplicationForm, ApplicationAutocomplete
 from .models import Application
 
 
@@ -294,6 +294,8 @@ class ListApplicationsView(CoordinatorsOnly, ListView):
 
         context['include_template'] = \
             'applications/application_list_include.html'
+
+        context['autocomplete_form'] = ApplicationAutocomplete()
 
         return context
 

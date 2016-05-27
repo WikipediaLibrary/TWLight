@@ -15,6 +15,7 @@ form that takes a dict of required fields, and constructs the form accordingly.
 (See the docstring of BaseApplicationForm for the expected dict format.)
 """
 
+import autocomplete_light
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit
 import logging
@@ -23,16 +24,20 @@ import re
 from django import forms
 from django.utils.translation import ugettext as _
 
-from TWLight.applications.helpers import (USER_FORM_FIELDS,
-                                          PARTNER_FORM_OPTIONAL_FIELDS,
-                                          PARTNER_FORM_BASE_FIELDS,
-                                          FIELD_TYPES,
-                                          FIELD_LABELS)
 from TWLight.resources.models import Partner
+from TWLight.users.groups import get_coordinators
+
+from .helpers import (USER_FORM_FIELDS,
+                      PARTNER_FORM_OPTIONAL_FIELDS,
+                      PARTNER_FORM_BASE_FIELDS,
+                      FIELD_TYPES,
+                      FIELD_LABELS)
+from .models import Application
 
 
 logger = logging.getLogger(__name__)
 
+coordinators = get_coordinators()
 
 class BaseApplicationForm(forms.Form):
     """
@@ -195,3 +200,23 @@ class BaseApplicationForm(forms.Form):
                 partner_layout.append(field_name)
 
             self.helper.layout.append(partner_layout)
+
+
+
+
+class ApplicationAutocomplete(autocomplete_light.ModelForm):
+    class Meta:
+        model = Application
+        fields = ['editor', 'partner']
+
+    def choices_for_request(self):
+        # Make sure we're not leaking info via the autocomplete view; the view
+        # that uses autocompletes is CoordinatorsOnly, so the autocomplete
+        # should be too.
+        if not (self.request.user.is_superuser or
+                coordinators in self.request.user.groups.all()):
+            self.choices = []
+
+        return super(ApplicationAutocomplete, self).choices_for_request()
+
+autocomplete_light.register(ApplicationAutocomplete)
