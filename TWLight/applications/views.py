@@ -7,6 +7,7 @@ status.
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from datetime import date, timedelta
+import logging
 import reversion
 from reversion.helpers import generate_patch_html
 
@@ -22,6 +23,7 @@ from django.views.generic.edit import FormView, UpdateView
 
 from TWLight.view_mixins import CoordinatorsOrSelf, CoordinatorsOnly, EditorsOnly
 from TWLight.resources.models import Partner
+from TWLight.users.models import Editor
 
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
@@ -29,6 +31,8 @@ from .helpers import (USER_FORM_FIELDS,
 from .forms import BaseApplicationForm, ApplicationAutocomplete
 from .models import Application
 
+
+logger = logging.getLogger(__name__)
 
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 
@@ -267,16 +271,27 @@ class SubmitApplicationView(EditorsOnly, FormView):
 class ListApplicationsView(CoordinatorsOnly, ListView):
     model = Application
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         """
         List only the open applications: that makes this page useful as a
         reviewer queue. Approved and rejected applications should be listed
         elsewhere: kept around for historical reasons, but kept off the main
         page to preserve utility (and limit load time).
         """
-        return Application.objects.filter(
+        base_qs = Application.objects.filter(
                 status__in=[Application.PENDING, Application.QUESTION]
              ).order_by('status', 'partner')
+
+        # Handle filters that might have been passed in by post().
+        editor = kwargs.pop('editor', None)
+        if editor:
+            base_qs = base_qs.filter(editor=editor)
+
+        partner = kwargs.pop('partner', None)
+        if partner:
+            base_qs = base_qs.filter(partner=partner)
+
+        return base_qs
 
 
     def get_context_data(self, **kwargs):
@@ -298,6 +313,40 @@ class ListApplicationsView(CoordinatorsOnly, ListView):
         context['autocomplete_form'] = ApplicationAutocomplete()
 
         return context
+
+
+    def post(self, request, *args, **kwargs):
+        try:
+            # request.POST['editor'] will be the pk of an Editor instance, if
+            # it exists.
+            editor = Editor.objects.get(pk=request.POST['editor'])
+        except KeyError:
+            # Better to ask forgiveness than permission; if the POST data didn't
+            # have an editor, the user didn't filter by editor, and that's OK.
+            editor = None
+        except Editor.DoesNotExist:
+            # The format call is guaranteed to work, because if we got here we
+            # *don't* have a KeyError.
+            logger.exception('Autocomplete requested editor #{pk}, who does '
+                'not exist'.format(pk=request.POST['editor']))
+            raise
+
+        try:
+            partner = Partner.objects.get(pk=request.POST['partner'])
+        except KeyError:
+            partner = None
+        except Partner.DoesNotExist:
+            logger.exception('Autocomplete requested partner #{pk}, who does '
+                'not exist'.format(pk=request.POST['partner']))
+            raise
+
+        # ListView sets self.object_list in get(). That means if we call
+        # render_to_response without having routed through get(), the
+        # get_context_data call will fail when it looks for a self.object_list
+        # and doesn't find one. Therefore we set it here.
+        self.object_list = self.get_queryset(editor=editor, partner=partner)
+
+        return self.render_to_response(self.get_context_data())
 
 
 
