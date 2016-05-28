@@ -1,51 +1,59 @@
 {% load i18n %}
 {% load l10n %}
 
-<form method="post" action="{% url 'applications:batch_edit' %}">
-  {% csrf_token %}
-  <div class="form-group">
-    <ul class="list-unstyled">
-      {% for app in object_list %}
+{% if object_list %}
+  <form method="post" action="{% url 'applications:batch_edit' %}" id="batch_edit">
+    {% csrf_token %}
+    <div class="form-group">
+      <ul class="list-unstyled">
         <li>
-          <input type="checkbox" name="applications" value="{{ app.pk }}">
-          <span class="label label{{ app.get_bootstrap_class }}">
-            {{ app.get_status_display }}
-          </span>&nbsp;
-          <a href="{{ app.get_absolute_url }}">
-            {{ app }}
-          </a>
-          &mdash;
-          {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
-            {% blocktrans with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
-              Last reviewed by {{ reviewer }} on {{ review_date }}
-            {% endblocktrans %}
-          {% else %}
-            {% trans 'Not yet reviewed.' %}
-          {% endif %}
+          <input type="checkbox" id="select_all">
+          <strong>
+            {% trans "Select/deselect all" %}            
+          </strong>
         </li>
-      {% empty %}
-        <li>{% trans 'No applications right now.' %}</li>
-      {% endfor %}      
-    </ul>
-  </div>
+        {% for app in object_list %}
+          <li>
+            <input type="checkbox" name="applications" value="{{ app.pk }}">
+            <span class="label label{{ app.get_bootstrap_class }}">
+              {{ app.get_status_display }}
+            </span>&nbsp;
+            <a href="{{ app.get_absolute_url }}">
+              {{ app }}
+            </a>
+            &mdash;
+            {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
+              {% blocktrans with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
+                Last reviewed by {{ reviewer }} on {{ review_date }}
+              {% endblocktrans %}
+            {% else %}
+              {% trans 'Not yet reviewed.' %}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <div class="form-group">    
-        <label for="select_status">
-          {% trans "Status for all selected applications" %}
-        </label>
-        
-        <select name="batch_status" class="form-control" id="select_status">
-          {% for status in status_choices %}
-            <option value="{{ status.0 }}">{{ status.1 }}</option>
-          {% endfor %}
-        </select>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="form-group">    
+          <label for="select_status">
+            {% trans "Status for all selected applications" %}
+          </label>
+          
+          <select name="batch_status" class="form-control" id="select_status">
+            {% for status in status_choices %}
+              <option value="{{ status.0 }}">{{ status.1 }}</option>
+            {% endfor %}
+          </select>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="form-group">    
-    <input type="submit" class="btn btn-default" value="{% trans "Set status" %}" />
-  </div>
-</form>
+    <div class="form-group">    
+      <input type="submit" class="btn btn-default" value="{% trans "Set status" %}" />
+    </div>
+  </form>
+{% else %}
+  {% trans 'No applications right now.' %}
+{% endif %}
