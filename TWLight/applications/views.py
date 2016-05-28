@@ -17,7 +17,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 from django.utils.translation import ugettext as _
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView, UpdateView
 
@@ -395,6 +395,12 @@ class ListApplicationsView(_BaseListApplicationView):
         """).format(approved_url=context['approved_url'],
                     rejected_url=context['rejected_url'])
 
+        context['include_template'] = \
+            'applications/application_list_reviewable_include.html'
+
+        # For constructing the dropdown in the batch editing form.
+        context['status_choices'] = Application.STATUS_CHOICES
+
         return context
 
 
@@ -495,7 +501,7 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
 class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
     """
     Allows Coordinators to:
-    * view applications
+    * view single applications
     * view associated editor metadata
     * assign status
 
@@ -524,6 +530,12 @@ class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
             css_class='center-block'))
 
         return form
+
+
+
+class BatchEditView(View):
+    pass
+
 
 # Application evaluation workflow needs...
 # ~~listview: all open applications.~~ filterable by user, status - check milestones/desiderata
