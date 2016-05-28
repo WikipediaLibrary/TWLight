@@ -534,7 +534,39 @@ class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
 
 
 class BatchEditView(View):
-    pass
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        try:
+            assert 'applications' in request.POST
+            assert 'batch_status' in request.POST
+
+            status = request.POST['batch_status']
+            assert int(status) in [Application.PENDING,
+                                   Application.QUESTION,
+                                   Application.APPROVED,
+                                   Application.NOT_APPROVED]
+        except AssertionError:
+            logger.exception('Did not find valid data for batch editing')
+            raise
+
+
+        for app_pk in request.POST['applications']:
+            try:
+                app = Application.objects.get(pk=app_pk)
+            except Application.DoesNotExist:
+                logger.exception('Could not find app with posted pk {pk}; '
+                    'continuing through remaining apps'.format(pk=app_pk))
+                continue
+
+            app.status = status
+            app.save()
+
+        messages.add_message(request, messages.SUCCESS,
+            _('Batch update successful. Thank you for reviewing today.'))
+
+        return HttpResponseRedirect(reverse_lazy('applications:list'))
+
 
 
 # Application evaluation workflow needs...
