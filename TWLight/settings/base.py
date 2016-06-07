@@ -21,6 +21,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 
 from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -128,7 +129,17 @@ SITE_ID = 1
 
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us' # Sets site default language.
+
+LANGUAGES = (
+  ('fr', _('French')),
+  ('en', _('English')),
+)
+
+LOCALE_PATHS = (
+    # makemessages looks for locale/ in the top level, not the project level.
+    os.path.join(os.path.dirname(BASE_DIR), 'locale'),
+)
 
 TIME_ZONE = 'UTC'
 

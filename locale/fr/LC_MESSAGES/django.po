@@ -1,0 +1,896 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-07 21:35+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: TWLight/applications/forms.py:99
+msgid "Submit application"
+msgstr ""
+
+#: TWLight/applications/forms.py:185
+msgid "Information about you"
+msgstr ""
+
+#: TWLight/applications/forms.py:197
+#, python-brace-format
+msgid "Your application to {partner}"
+msgstr ""
+
+#: TWLight/applications/forms.py:245 TWLight/users/models.py:61
+msgid "Wikipedia username"
+msgstr ""
+
+#: TWLight/applications/forms.py:246
+msgid "Company name"
+msgstr ""
+
+#: TWLight/applications/helpers.py:88
+msgid "Your real name"
+msgstr ""
+
+#: TWLight/applications/helpers.py:89
+msgid "Your country of residence"
+msgstr ""
+
+#: TWLight/applications/helpers.py:90
+msgid "Your occupation"
+msgstr ""
+
+#: TWLight/applications/helpers.py:91
+msgid "Your institutional affiliation"
+msgstr ""
+
+#: TWLight/applications/helpers.py:92
+msgid "Publisher name"
+msgstr ""
+
+#: TWLight/applications/helpers.py:93
+msgid "Why do you want access to this resource?"
+msgstr ""
+
+#: TWLight/applications/helpers.py:94
+msgid "Which collection do you want access to?"
+msgstr ""
+
+#: TWLight/applications/helpers.py:95
+msgid "Which book do you want access to?"
+msgstr ""
+
+#: TWLight/applications/helpers.py:96
+msgid "Anything else you want to say"
+msgstr ""
+
+#: TWLight/applications/helpers.py:97
+msgid "Click to agree with the publisher's terms of use"
+msgstr ""
+
+#: TWLight/applications/models.py:23
+msgid "Pending"
+msgstr ""
+
+#: TWLight/applications/models.py:24
+msgid "Under discussion"
+msgstr ""
+
+#: TWLight/applications/models.py:25
+msgid "Approved"
+msgstr ""
+
+#: TWLight/applications/models.py:26
+msgid "Not approved"
+msgstr ""
+
+#: TWLight/applications/models.py:35 TWLight/applications/models.py:47
+#: TWLight/applications/models.py:55
+msgid ""
+"Do not override this field! Its value is set automatically when the "
+"application is saved, and overriding it may have undesirable results."
+msgstr ""
+
+#: TWLight/applications/views.py:94
+msgid ""
+"You must choose at least one resource you want access to before applying for "
+"access."
+msgstr ""
+
+#: TWLight/applications/views.py:173
+msgid ""
+"Your application has been submitted. A coordinator will review it and get "
+"back to you. You can check the status of your applications on this page at "
+"any time."
+msgstr ""
+
+#: TWLight/applications/views.py:350
+msgid "Editor"
+msgstr ""
+
+#: TWLight/applications/views.py:351
+msgid "Publisher"
+msgstr ""
+
+#: TWLight/applications/views.py:389
+msgid "Queue of applications to review"
+msgstr ""
+
+#: TWLight/applications/views.py:391
+#, python-brace-format
+msgid ""
+"\n"
+"          This page lists only applications that still need to be reviewed.\n"
+"          You may also consult <a href=\"{approved_url}\">approved</a> and\n"
+"          <a href=\"{rejected_url}\">rejected</a> applications. \n"
+"        "
+msgstr ""
+
+#: TWLight/applications/views.py:419
+msgid "Approved applications"
+msgstr ""
+
+#: TWLight/applications/views.py:421
+#, python-brace-format
+msgid ""
+"\n"
+"          This page lists only applications that have been approved.\n"
+"          You may also consult <a href=\"{open_url}\">pending or\n"
+"          under-discussion</a> and <a href=\"{rejected_url}\">rejected</a>\n"
+"          applications. \n"
+"        "
+msgstr ""
+
+#: TWLight/applications/views.py:444
+msgid "Rejected applications"
+msgstr ""
+
+#: TWLight/applications/views.py:446
+#, python-brace-format
+msgid ""
+"\n"
+"          This page lists only applications have been rejected.\n"
+"          You may also consult <a href=\"{open_url}\">pending or\n"
+"          under-discussion</a> and <a href=\"{approved_url}\">approved</a>\n"
+"          applications. \n"
+"        "
+msgstr ""
+
+#: TWLight/applications/views.py:476
+msgid "Access grants up for renewal"
+msgstr ""
+
+#: TWLight/applications/views.py:478
+#, python-brace-format
+msgid ""
+"\n"
+"          This page lists approved applications whose access grants have\n"
+"          probably expired recently\n"
+"          or are likely to expire soon.\n"
+"          You may also consult <a href=\"{open_url}\">pending or\n"
+"          under-discussion</a>, <a href=\"{rejected_url}\">rejected</a>, or\n"
+"          <a href=\"{approved_url}\">all approved</a>\n"
+"          applications. \n"
+"        "
+msgstr ""
+
+#: TWLight/applications/views.py:528
+msgid "Set application status"
+msgstr ""
+
+#: TWLight/applications/views.py:565
+msgid "Batch update successful. Thank you for reviewing today."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:10
+msgid "Evaluate application"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:14
+msgid "Application"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:18
+msgid "Date of application"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:26
+msgid "Number of days open"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:33
+msgid "Number of days since application was closed"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:41
+#: TWLight/graphs/views.py:229
+msgid "Status"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:48
+msgid "Partner"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:56
+msgid "Collection requested"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:65
+msgid "Title requested"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:73
+msgid "Why the editor wants access"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:79
+msgid "Not stated"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:85
+msgid "Extra comments from the editor"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:93
+msgid "Discussion"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:112
+msgid "Add comment"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:118
+msgid ""
+"\n"
+"      This page and its comments are visible to all Wikipedia Library\n"
+"      coordinators and to the editor who submitted this application.\n"
+"    "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:124
+msgid "User"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:128
+msgid "Revision history"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:149
+#, python-format
+msgid ""
+"\n"
+"                    Submitted by by %(user)s on %(review_date)s\n"
+"                  "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:153
+#, python-format
+msgid ""
+"\n"
+"                    Reviewed by %(user)s on %(review_date)s\n"
+"                  "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:161
+msgid "No previous versions."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:19
+msgid "Filter applications by..."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:30
+msgid "Current filters"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:40
+msgid "None"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:10
+#, python-format
+msgid ""
+"\n"
+"                Expired %(num_days)s days ago\n"
+"              "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:18
+#, python-format
+msgid ""
+"\n"
+"                Expiring in %(num_days)s days\n"
+"              "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:28
+#, python-format
+msgid ""
+"\n"
+"          Approved by %(reviewer)s on %(review_date)s\n"
+"        "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:33
+#: TWLight/applications/templates/applications/application_list_include.html:23
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:58
+msgid "No applications right now."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:15
+#, python-format
+msgid ""
+"\n"
+"            Last reviewed by %(reviewer)s on %(review_date)s\n"
+"          "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:19
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:30
+msgid "Not yet reviewed."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:12
+msgid "Select/deselect all"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:26
+#, python-format
+msgid ""
+"\n"
+"                Last reviewed by %(reviewer)s on %(review_date)s\n"
+"              "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:41
+msgid "Status for all selected applications"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:54
+msgid "Set status"
+msgstr ""
+
+#: TWLight/applications/templates/applications/request_for_application.html:7
+msgid "What do you want to access?"
+msgstr ""
+
+#: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:3
+#, python-format
+msgid ""
+"\n"
+"There is a new comment on your application to access resources provided by\n"
+"%(partner)s. Sometimes this means that a coordinator needs additional\n"
+"information from you in order to decide on your application, so please have\n"
+"a look. Your application is available at %(app_url)s.\n"
+"\n"
+"Thanks for helping make knowledge available to the world!\n"
+msgstr ""
+
+#: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
+msgid "New comment on your Wikipedia Library application"
+msgstr ""
+
+#: TWLight/emails/templates/emails/comment_notification_others-body-html.html:3
+#, python-format
+msgid ""
+"\n"
+"There is a new comment on a Wikipedia Library application that you also\n"
+"commented on. It may be providing an answer to a question you asked. You "
+"can\n"
+"see it at %(app_url)s.\n"
+"\n"
+"Thanks for helping review Wikipedia Library applications!\n"
+msgstr ""
+
+#: TWLight/emails/templates/emails/comment_notification_others-subject.html:3
+msgid "New comment on a Wikipedia Library application you commented on"
+msgstr ""
+
+#: TWLight/graphs/views.py:150 TWLight/graphs/views.py:177
+#: TWLight/graphs/views.py:256 TWLight/graphs/views.py:279
+msgid "Date"
+msgstr ""
+
+#: TWLight/graphs/views.py:150
+msgid "Number of partners"
+msgstr ""
+
+#: TWLight/graphs/views.py:163 TWLight/templates/dashboard.html:110
+#: TWLight/users/templates/users/editor_detail_data.html:23
+msgid "Home wiki"
+msgstr ""
+
+#: TWLight/graphs/views.py:163 TWLight/graphs/views.py:177
+#: TWLight/templates/dashboard.html:113
+msgid "Number of users"
+msgstr ""
+
+#: TWLight/graphs/views.py:177
+msgid "Wiki"
+msgstr ""
+
+#: TWLight/graphs/views.py:196
+msgid "Days until decision"
+msgstr ""
+
+#: TWLight/graphs/views.py:196 TWLight/graphs/views.py:230
+msgid "Number of applications"
+msgstr ""
+
+#: TWLight/graphs/views.py:213
+msgid "Month"
+msgstr ""
+
+#: TWLight/graphs/views.py:213
+msgid "Median days until decision"
+msgstr ""
+
+#: TWLight/graphs/views.py:257
+#, python-brace-format
+msgid "Number of applications to {partner}"
+msgstr ""
+
+#: TWLight/graphs/views.py:280
+#, python-brace-format
+msgid "Number of unique users who have applied to {partner}"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:12
+msgid "No description available."
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:19
+msgid "Metrics"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:31
+#: TWLight/templates/dashboard.html:61
+msgid "Total applications (all time)"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:46
+msgid "Total unique applicants (all time)"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:61
+msgid "Median days from application to decision"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:69
+msgid "Applications by status"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:69
+#: TWLight/resources/templates/resources/partner_detail.html:95
+#: TWLight/resources/templates/resources/partner_detail.html:99
+#: TWLight/resources/templates/resources/partner_detail.html:103
+#: TWLight/templates/dashboard.html:85 TWLight/templates/dashboard.html:101
+#: TWLight/templates/dashboard.html:132 TWLight/templates/dashboard.html:146
+#: TWLight/templates/dashboard.html:156 TWLight/templates/dashboard.html:165
+msgid "download as csv"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:78
+#, python-format
+msgid ""
+"\n"
+"        Number of applications approved (all time): %(total_apps_approved)s\n"
+"      "
+msgid_plural ""
+"\n"
+"        Number of applications approved (all time): %(total_apps_approved)s\n"
+"      "
+msgstr[0] ""
+msgstr[1] ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:86
+#, python-format
+msgid ""
+"\n"
+"        Number of unique users with approved applications (all time): "
+"%(unique_users_approved)s\n"
+"      "
+msgid_plural ""
+"\n"
+"        Number of unique users with approved applications (all time): "
+"%(unique_users_approved)s\n"
+"      "
+msgstr[0] ""
+msgstr[1] ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:93
+msgid "Applications over time"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:95
+msgid "All applications"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:99
+msgid "Approved applications only"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:103
+msgid "Unique users over time"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:109
+msgid "Special requirements for applicants"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:112
+msgid ""
+"If this publisher has any special requirements for applicants, they are "
+"listed here."
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:117
+#, python-format
+msgid ""
+"\n"
+"        %(publisher)s requires that you agree with its <a href=\"%(url)s"
+"\">terms\n"
+"        of use</a>.\n"
+"      "
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:126
+#, python-format
+msgid ""
+"\n"
+"        %(publisher)s requires that you provide your real name.\n"
+"      "
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:134
+#, python-format
+msgid ""
+"\n"
+"        %(publisher)s requires that you provide your country of residence.\n"
+"      "
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:142
+#, python-format
+msgid ""
+"\n"
+"        %(publisher)s requires that you provide your occupation.\n"
+"      "
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:150
+#, python-format
+msgid ""
+"\n"
+"        %(publisher)s requires that you provide your institutional "
+"affiliation.\n"
+"      "
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:158
+#, python-format
+msgid ""
+"\n"
+"        %(publisher)s requires that you specify a particular title that you "
+"want\n"
+"        to access.\n"
+"      "
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:168
+#, python-format
+msgid ""
+"\n"
+"          %(publisher)s requires that you specify a specific collection that "
+"you\n"
+"          want to access. You may only apply for access to one collection at "
+"a\n"
+"          time.\n"
+"        "
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_detail.html:174
+#, python-format
+msgid ""
+"\n"
+"          %(publisher)s requires that you specify one or more specific\n"
+"          collections that you want to access.\n"
+"        "
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_list.html:5
+msgid "List of partners"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_list.html:7
+msgid ""
+"\n"
+"      If you're a coordinator or site administrator, you'll be able to see\n"
+"      per-partner metrics on the partner pages.\n"
+"    "
+msgstr ""
+
+#: TWLight/settings/base.py:135
+msgid "French"
+msgstr ""
+
+#: TWLight/settings/base.py:136
+msgid "English"
+msgstr ""
+
+#: TWLight/templates/base.html:122 TWLight/templates/base.html.py:126
+#, python-format
+msgid ""
+"\n"
+"            Hi, %(username)s!\n"
+"          "
+msgstr ""
+
+#: TWLight/templates/base.html:170
+msgid "This is a template"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:16
+msgid "Total partners (all time)"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:23
+msgid "See all partners"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:39
+msgid "Number of editors (all time)"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:45
+msgid "Jump to user metrics"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:67
+msgid "Jump to application metrics"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:79
+msgid "Partners"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:85
+msgid "Number of partners over time"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:94
+msgid "Editors"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:101
+msgid "Home wiki distribution"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:132
+msgid "Home wiki distribution over time"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:144
+msgid "Applications"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:146
+msgid "Applications by number of days until decision"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:148
+msgid ""
+"\n"
+"          The x axis is the number of days to make a final decision (either\n"
+"          approved or denied) on an application. The y axis is the number "
+"of\n"
+"          applications that have taken exactly that many days to decide.\n"
+"        "
+msgstr ""
+
+#: TWLight/templates/dashboard.html:156
+msgid "Median days until application decision, per month"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:158
+msgid ""
+"\n"
+"          This shows the median number of days to reach a decision on the\n"
+"          applications opened in a given month.\n"
+"        "
+msgstr ""
+
+#: TWLight/templates/dashboard.html:165
+msgid "Current application status distribution"
+msgstr ""
+
+#: TWLight/templates/dashboard.html:167
+msgid ""
+"\n"
+"          This graph includes all applications opened ever on this site.\n"
+"        "
+msgstr ""
+
+#: TWLight/users/authorization.py:197
+msgid "Welcome back!"
+msgstr ""
+
+#: TWLight/users/forms.py:24
+msgid "Update profile"
+msgstr ""
+
+#: TWLight/users/models.py:52
+msgid "When this information was last edited"
+msgstr ""
+
+#: TWLight/users/models.py:54
+msgid "When this information was first created"
+msgstr ""
+
+#: TWLight/users/models.py:62
+msgid "Wikipedia edit count"
+msgstr ""
+
+#: TWLight/users/models.py:63
+msgid "Date registered at Wikipedia"
+msgstr ""
+
+#: TWLight/users/models.py:64
+msgid "Wikipedia user ID"
+msgstr ""
+
+#: TWLight/users/models.py:69
+msgid "Wikipedia groups"
+msgstr ""
+
+#: TWLight/users/models.py:70
+msgid "Wikipedia user rights"
+msgstr ""
+
+#: TWLight/users/models.py:75
+msgid "Home wiki, as indicated by user"
+msgstr ""
+
+#: TWLight/users/models.py:78
+msgid "Wiki contributions, as entered by user"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail.html:8
+#, python-format
+msgid "Editor profile information for %(username)s"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail.html:11
+#, python-format
+msgid ""
+"\n"
+"      Information with an * was harvested from Wikipedia directly.\n"
+"      It was current as of %(account_created_date)s.\n"
+"      Changes made on Wikipedia since that time have not been reflected "
+"here.\n"
+"    "
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail.html:18
+#, python-format
+msgid ""
+"\n"
+"      Other information was entered directly by users or site admins,\n"
+"      in their preferred language.\n"
+"      It was last edited on %(last_updated_date)s.\n"
+"    "
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail.html:25
+msgid "Editor application history"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail.html:29
+msgid "Start new application"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail.html:35
+msgid "Editor data"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail.html:40
+msgid "Please complete your profile."
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail.html:53
+#, python-format
+msgid ""
+"\n"
+"              %(username)s has coordinator privileges on this site.\n"
+"            "
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:5
+msgid "Wikipedia username *"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:16
+msgid "Wikipedia user ID *"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:36
+msgid "Wikipedia edit count *"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:43
+msgid "Date registered on Wikipedia *"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:50
+msgid "Contributions"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:63
+msgid "Wikipedia groups *"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:74
+msgid "Wikipedia user rights *"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:86
+msgid "Email *"
+msgstr ""
+
+#: TWLight/users/templates/users/editor_detail_data.html:91
+msgid ""
+"\n"
+"          Your email is visible only to you and site administrators, not to\n"
+"          volunteer Wikipedia Library coordinators.\n"
+"        "
+msgstr ""
+
+#: TWLight/users/templates/users/user_detail.html:6
+#, python-format
+msgid ""
+"\n"
+"      Hi, %(username)s! You don't have a Wikipedia editor profile attached\n"
+"      to your account here, so you are probably a site administrator.\n"
+"    "
+msgstr ""
+
+#: TWLight/users/templates/users/user_detail.html:13
+msgid ""
+"\n"
+"      If you aren't a site administrator, something weird has happened. You\n"
+"      won't be able to apply for access to protected resources without a\n"
+"      Wikipedia editor profile. Unless you know there's a good reason why "
+"your\n"
+"      account doesn't have an editor attached (e.g. you are a site\n"
+"      administrator), you should log out and create a new account by logging "
+"in\n"
+"      via OAuth, or contact a site administrator for help.\n"
+"    "
+msgstr ""
+
+#: durationfield/db/models/fields/duration.py:23
+msgid "A duration of time"
+msgstr ""
+
+#: durationfield/db/models/fields/duration.py:26
+msgid "This value must be in \"w d h min s ms us\" format."
+msgstr ""
+
+#: durationfield/db/models/fields/duration.py:27
+msgid "The value's type could not be converted"
+msgstr ""
+
+#: durationfield/forms/fields.py:13
+msgid "Enter a valid duration."
+msgstr ""
