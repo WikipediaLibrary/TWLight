@@ -136,7 +136,7 @@ class Editor(models.Model):
 
 
     @property
-    def get_wp_gropus_display(self):
+    def get_wp_groups_display(self):
         """
         As above, but for groups.
         """

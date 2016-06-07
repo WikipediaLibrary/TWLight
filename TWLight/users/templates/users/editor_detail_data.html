@@ -47,24 +47,6 @@
     </div>
 
     <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia groups *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {% for group in editor.get_wp_groups_display %}
-        {{ group }}
-      {% endfor %}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia user rights *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-     {% for right in editor.get_wp_rights_display %}
-        {{ right }}
-      {% endfor %}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Contributions" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
@@ -78,9 +60,38 @@
     </div>
 
     <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Email *" %}</strong>
+      <strong>{% trans "Wikipedia groups *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ editor.user.email }}
+      <ul>
+        {% for group in editor.get_wp_groups_display %}
+          <li>{{ group }}</li>
+        {% endfor %}
+      </ul>
     </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans "Wikipedia user rights *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      <ul>
+        {% for right in editor.get_wp_rights_display %}
+          <li>{{ right }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% ifequal editor.user user %}
+      <div class="col-xs-12 col-sm-4">
+        <strong>{% trans "Email *" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ editor.user.email }}<br />
+        <span class="glyphicon glyphicon-info-sign"></span>
+        {% blocktrans %}
+          Your email is visible only to you and site administrators, not to
+          volunteer Wikipedia Library coordinators.
+        {% endblocktrans %}
+      </div>
+    {% endifequal %}
   </div>

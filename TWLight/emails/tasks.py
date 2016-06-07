@@ -81,10 +81,10 @@ def send_comment_notification_emails(sender, **kwargs):
 
     # If the editor who owns this application was not the comment poster, notify
     # them of the new comment.
-    if current_comment.user_email != app.user.email:
+    if current_comment.user_email != app.editor.user.email:
         email = CommentNotificationEmailEditors()
-        email.send(app.user.email, {'app': app, 'app_url': app_url})
-        logger.info('Email queued for {app.user.email} about app #{app.pk}'.format(
+        email.send(app.editor.user.email, {'app': app, 'app_url': app_url})
+        logger.info('Email queued for {app.editor.user.email} about app #{app.pk}'.format(
             app=app))
 
     # Send to any previous commenters on the thread, other than the editor and
@@ -96,7 +96,7 @@ def send_comment_notification_emails(sender, **kwargs):
 
     user_emails.remove(current_comment.user_email)
     try:
-        user_emails.remove(app.user.email)
+        user_emails.remove(app.editor.user.email)
     except KeyError:
         # If the editor is not among the prior commenters, that's fine; no
         # reason they should be.
@@ -105,6 +105,6 @@ def send_comment_notification_emails(sender, **kwargs):
     for user_email in user_emails:
         email = CommentNotificationEmailOthers()
         email.send(user_email, {'app': app, 'app_url': app_url})
-        logger.info('Email queued for {app.user.email} about app #{app.pk}'.format(
+        logger.info('Email queued for {app.editor.user.email} about app #{app.pk}'.format(
             app=app))
 

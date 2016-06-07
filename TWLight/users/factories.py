@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import factory
+import json
 
 from django.contrib.auth.models import User
 
@@ -35,7 +36,7 @@ class EditorFactory(factory.django.DjangoModelFactory):
     wp_editcount = 42
     wp_registered = datetime.today()
     wp_sub = 318956
-    wp_groups = 'some groups'
-    wp_rights = 'some rights'
+    wp_groups = json.dumps(['some groups'])
+    wp_rights = json.dumps(['some rights'])
     home_wiki = WIKIS[0][0]
     contributions = 'Cat floofing, telemetry, fermentation'

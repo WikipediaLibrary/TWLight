@@ -2,9 +2,10 @@
 {% load i18n %}
 {% load l10n %}
 {% load crispy_forms_tags %}
+{% load twlight_perms %}
 
 {% block content %}
-  <h1>{% trans "Editor profile information" %}</h1>
+  <h1>{% blocktrans with username=editor.wp_username %}Editor profile information for {{ username }}{% endblocktrans %}</h1>
 
   <p>
     {% blocktrans with account_created_date=editor.account_created|localize %}
@@ -32,25 +33,29 @@
   {% include 'applications/application_list_include.html' %}
 
   <h2>{% trans 'Editor data' %}</h2>
-  {% if not editor.home_wiki or not editor.contributions %}
-    <div class="well">
-      <h3>
-        {% trans 'Please complete your profile.' %}
-      </h3>
-      {% crispy form %}
-    </div>
-  {% endif %}
+  {% ifequal editor.user user %} 
+    {% if not editor.home_wiki or not editor.contributions %}
+      <div class="well">
+        <h3>
+          {% trans 'Please complete your profile.' %}
+        </h3>
+        {% crispy form %}
+      </div>
+    {% endif %}    
+  {% endifequal %}
 
   {% include 'users/editor_detail_data.html' %}
 
-  <div class="row">
-    <div class="col-xs-12 col-md-10 col-md-offset-1">
-      <p class="well">
-        {% blocktrans with username=editor.wp_username %}
-          {{ username }} has coordinator privileges on this site.
-        {% endblocktrans %}
-      </p>
+  {% if editor.user|coordinators_only %}
+    <div class="row">
+      <div class="col-xs-12 col-md-10 col-md-offset-1">
+        <p class="well">
+            {% blocktrans with username=editor.wp_username %}
+              {{ username }} has coordinator privileges on this site.
+            {% endblocktrans %}
+        </p>
+      </div>
     </div>
-  </div>
+  {% endif %}
 
 {% endblock %}

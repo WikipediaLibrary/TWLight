@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
 from urlparse import urlparse
 
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
@@ -78,7 +78,6 @@ class ViewsTestCase(TestCase):
         self.editor4.delete()
 
 
-    # EditorDetailView resolves at URL
     def test_editor_detail_url_resolves(self):
         """
         The EditorDetailView resolves.
@@ -86,59 +85,60 @@ class ViewsTestCase(TestCase):
         _ = resolve(self.url1)
 
 
-    # Anonymous user cannot see editor page
     def test_anon_user_cannot_see_editor_details(self):
+        """Check that an anonymous user cannot see an editor page."""
         response_url = self.client.get(self.url1).url
 
         url_components = urlparse(response_url)
-        self.assertEqual(url_components.path, settings.LOGIN_URL)
+        permission_url = reverse('users:test_permission')
+        self.assertEqual(url_components.path, permission_url)
 
 
-    # Editor can see own page
     def test_editor_can_see_own_page(self):
+        """Check that editors can see their own pages."""
         self.client.login(username=self.username1, password=self.username1)
         response = self.client.get(self.url1, follow=True)
         self.assertEqual(response.status_code, 200)
 
 
-    # Editor cannot see someone else's info
     def test_editor_cannot_see_other_editor_page(self):
+        """Editors cannot see other editors' pages."""
         self.client.login(username=self.username1, password=self.username1)
         response = self.client.get(self.url2, follow=True)
         self.assertEqual(response.status_code, 403)
 
 
-    # Coordinator can see someone else's info
     def test_coordinator_access(self):
+        """Coordinators can see someone else's page."""
         self.client.login(username=self.username4, password=self.username4)
         response = self.client.get(self.url1, follow=True)
         self.assertEqual(response.status_code, 200)
 
 
-    # Site admin can see someone else's info
     def test_site_admin_can_see_other_editor_page(self):
+        """Site admins can see someone else's page."""
         self.client.login(username=self.username3, password=self.username3)
         response = self.client.get(self.url1, follow=True)
         self.assertEqual(response.status_code, 200)
 
 
-    # Expected editor personal data is in the page
     def test_editor_page_has_editor_data(self):
+        """Expected editor personal data is in their page."""
         self.client.login(username=self.username1, password=self.username1)
         response = self.client.get(self.url1, follow=True)
         content = response.content
 
         # This uses default data from EditorFactory.
-        self.assertIn('alice', content)                 # wp_username
-        self.assertIn('42', content)                    # edit count
+        self.assertIn('wp_alice', content)                 # wp_username
+        self.assertContains(response, '42')             # edit count
         self.assertIn('some groups', content)           # wp_groups
         self.assertIn('some rights', content)           # wp_rights
         self.assertIn(WIKIS[0][0], content)             # home wiki
         self.assertIn('Cat floofing, telemetry, fermentation', content)
 
 
-    # Expected editor application data is in the page
     def test_editor_page_has_application_history(self):
+        """Expected editor application data is in their page."""
         app1 = ApplicationFactory(status=Application.PENDING, editor=self.user1.editor)
         app2 = ApplicationFactory(status=Application.QUESTION, editor=self.user1.editor)
         app3 = ApplicationFactory(status=Application.APPROVED, editor=self.user1.editor)

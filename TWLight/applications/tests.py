@@ -232,10 +232,18 @@ class RequestApplicationTest(BaseApplicationViewTest):
         Only Editors should be able to request access to applications.
         """
         # An anonymous user is prompted to login.
-        response = self.client.get(self.url)
+        response = self.client.get(self.url, follow=True)
 
-        url_components = urlparse(response.url)
-        self.assertEqual(url_components.path, settings.LOGIN_URL)
+        # The redirect chain should contain the following:
+        # 0) /users/test_permission, which checks for authorization;
+        # 1) /oauth/login;
+        # 2) wikipedia.
+        (expected_url, status) = response.redirect_chain[1]
+
+        url_components = urlparse(expected_url)
+        login_url = unicode(settings.LOGIN_URL) # Force evaluation of proxy.
+        self.assertEqual(status, 302)
+        self.assertEqual(url_components.path, login_url)
 
         # A user who is not a WP editor does not have access.
         self.client.login(username='base_user', password='base_user')
@@ -377,10 +385,19 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         Only Editors should be able to request access to applications.
         """
         # An anonymous user is prompted to login.
-        response = self.client.get(self.url)
+        response = self.client.get(self.url, follow=True)
 
-        url_components = urlparse(response.url)
-        self.assertEqual(url_components.path, settings.LOGIN_URL)
+        # The redirect chain should contain the following:
+        # 0) /applications/request, the requested url;
+        # 1) /users/test_permission, which checks for authorization;
+        # 2) /oauth/login;
+        # 3) wikipedia.
+        (expected_url, status) = response.redirect_chain[2]
+
+        url_components = urlparse(expected_url)
+        login_url = unicode(settings.LOGIN_URL) # Force evaluation of proxy.
+        self.assertEqual(status, 302)
+        self.assertEqual(url_components.path, login_url)
 
         # A user who is not a WP editor does not have access.
         self.client.login(username='base_user', password='base_user')
@@ -658,6 +675,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         )
 
         user = get_or_create_user('alice')
+        if hasattr(user, 'editor'):
+            user.editor.delete()
 
         EditorFactory(
             user=user,
@@ -837,8 +856,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         # If the application has not been created, these lines will raise
         # DoesNotExist.
-        app1 = Application.objects.get(partner=p1, user=self.editor)
-        app2 = Application.objects.get(partner=p2, user=self.editor)
+        app1 = Application.objects.get(partner=p1, editor=self.editor.editor)
+        app2 = Application.objects.get(partner=p2, editor=self.editor.editor)
 
         # Make sure applications have the expected properties, based on the
         # partner requirements and submitted data.
@@ -978,10 +997,18 @@ class ListApplicationsTest(BaseApplicationViewTest):
         lists.
         """
         # An anonymous user is prompted to login.
-        response = self.client.get(url)
+        response = self.client.get(url, follow=True)
 
-        url_components = urlparse(response.url)
-        self.assertEqual(url_components.path, settings.LOGIN_URL)
+        # The redirect chain should contain the following:
+        # 0) /users/test_permission, which checks for authorization;
+        # 1) /oauth/login;
+        # 2) wikipedia.
+        (expected_url, status) = response.redirect_chain[1]
+
+        url_components = urlparse(expected_url)
+        login_url = unicode(settings.LOGIN_URL) # Force evaluation of proxy.
+        self.assertEqual(status, 302)
+        self.assertEqual(url_components.path, login_url)
 
         # An editor who is not a coordinator may not see the page.
         self._login_editor()
@@ -1044,3 +1071,136 @@ class ListApplicationsTest(BaseApplicationViewTest):
         queryset = Application.objects.filter(
             status=Application.NOT_APPROVED)
         self._base_test_object_visibility(url, queryset)
+
+
+    def test_queryset_unfiltered(self):
+        """
+        Make sure that ListApplicationsView has the correct queryset in context
+        when no filters are applied.
+        """
+        url = reverse('applications:list')
+        self.client.login(username='coordinator', password='coordinator')
+        response = self.client.get(url)
+
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION])
+        template_qs = response.context['object_list']
+
+        # We can't use assertQuerysetEqual, because the one returned by the view
+        # is ordered and this one is not. (Testing order is not important here.)
+        # And simply using sorted() (or sorted(list())) on the querysets is
+        # mysteriously unreliable. So we'll grab the pks of each queryset,
+        # sort them, and compare *those*. This is equivalent, semantically, to
+        # what we actually want ('are the same items in both querysets').
+        self.assertEqual(sorted([item.pk for item in expected_qs]),
+                         sorted([item.pk for item in template_qs]))
+
+
+    def _test_queryset_filtered_base(self):
+        """
+        Contains shared functionality for cases that make sure that
+        ListApplicationsView has the correct queryset in context when filters
+        are applied.
+        """
+        # Ensure that filtered and unfiltered Application querysets will be
+        # different.
+        new_editor = EditorFactory()
+        ApplicationFactory(status=Application.PENDING, editor=new_editor)
+
+        new_partner = PartnerFactory()
+        ApplicationFactory(status=Application.PENDING, partner=new_partner)
+
+        ApplicationFactory(status=Application.PENDING,
+                           partner=new_partner,
+                           editor=new_editor)
+
+        url = reverse('applications:list')
+        self.client.login(username='coordinator', password='coordinator')
+
+        return new_editor, new_partner, url
+
+
+    def test_queryset_filtered_case_1(self):
+        """
+        List is filtered by an editor.
+        """
+        new_editor, _, url = self._test_queryset_filtered_base()
+
+        response = self.client.post(url, data={'editor': new_editor.pk})
+
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION],
+            editor=new_editor)
+        template_qs = response.context['object_list']
+
+        self.assertEqual(sorted([item.pk for item in expected_qs]),
+                         sorted([item.pk for item in template_qs]))
+
+
+    def test_queryset_filtered_case_2(self):
+        """
+        List is filtered by a partner.
+        """
+        _, new_partner, url = self._test_queryset_filtered_base()
+
+        response = self.client.post(url, data={'partner': new_partner.pk})
+
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION],
+            partner=new_partner)
+        template_qs = response.context['object_list']
+
+        self.assertEqual(sorted([item.pk for item in expected_qs]),
+                         sorted([item.pk for item in template_qs]))
+
+
+    def test_queryset_filtered_case_3(self):
+        """
+        List is filtered by both editor and partner.
+        """
+        new_editor, new_partner, url = self._test_queryset_filtered_base()
+
+        response = self.client.post(url,
+            data={'editor': new_editor.pk, 'partner': new_partner.pk})
+
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION],
+            editor=new_editor,
+            partner=new_partner)
+        template_qs = response.context['object_list']
+
+        self.assertEqual(sorted([item.pk for item in expected_qs]),
+                         sorted([item.pk for item in template_qs]))
+
+
+    def test_filters_are_displayed(self):
+        """
+        Make sure that, if users have posted filters, they can see that status
+        reflected.
+        """
+        assert False
+
+
+    def test_invalid_editor_post_handling(self):
+        _, _, url = self._test_queryset_filtered_base()
+
+        # Check assumption.
+        self.assertFalse(Editor.objects.filter(pk=500))
+        with self.assertRaises(Editor.DoesNotExist):
+            response = self.client.post(url,
+                data={'editor': 500})
+
+
+    def test_invalid_partner_post_handling(self):
+        _, _, url = self._test_queryset_filtered_base()
+
+        # Check assumption.
+        self.assertFalse(Partner.objects.filter(pk=500))
+        with self.assertRaises(Partner.DoesNotExist):
+            response = self.client.post(url,
+                data={'partner': 500})
+
+
+# only coordinators can post to batch edit
+# posting to batch edit sets status
+# posting to batch edit without app or status fails appropriately?

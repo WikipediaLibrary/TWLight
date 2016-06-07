@@ -3,7 +3,7 @@
 import factory
 
 from TWLight.resources.factories import PartnerFactory
-from TWLight.users.factories import UserFactory
+from TWLight.users.factories import EditorFactory
 
 from TWLight.applications.models import Application
 
@@ -14,5 +14,5 @@ class ApplicationFactory(factory.django.DjangoModelFactory):
         model = Application
         strategy = factory.CREATE_STRATEGY
 
-    user = factory.SubFactory(UserFactory)
+    editor = factory.SubFactory(EditorFactory)
     partner = factory.SubFactory(PartnerFactory)

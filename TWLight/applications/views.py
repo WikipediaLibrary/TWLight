@@ -450,7 +450,6 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
           applications. 
         """).format(open_url=context['open_url'],
                     approved_url=context['approved_url'])
-        print self.object_list
 
         return context
 
