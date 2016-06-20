@@ -193,6 +193,7 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow(
+            # Translators: the number of days it took to decide on applications that have already been accepted/rejected.
             [_('Days until decision'), _('Number of applications')])
 
         for row in data:

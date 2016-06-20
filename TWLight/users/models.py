@@ -51,7 +51,7 @@ class Editor(models.Model):
     last_updated = models.DateField(auto_now=True,
         help_text=_("When this information was last edited"))
     date_created = models.DateField(auto_now_add=True,
-        help_text=_("When this information was first created"))
+        help_text=_("When this profile was first created"))
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.

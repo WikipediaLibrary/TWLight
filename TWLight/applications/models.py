@@ -20,7 +20,9 @@ class Application(models.Model):
     NOT_APPROVED = 3
 
     STATUS_CHOICES = (
+        # Translators: This is the status of an application that has not yet been reviewed.
         (PENDING, _('Pending')),
+        # Translators: This is the status of an application that reviewers have asked questions about.
         (QUESTION, _('Under discussion')),
         (APPROVED, _('Approved')),
         (NOT_APPROVED, _('Not approved')),

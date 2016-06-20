@@ -182,6 +182,7 @@ class BaseApplicationForm(forms.Form):
         self._validate_user_data(user_data)
 
         if user_data:
+            # Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
             user_data_layout = Fieldset(_('Information about you'))
             for datum in user_data:
                 self.fields[datum] = FIELD_TYPES[datum]

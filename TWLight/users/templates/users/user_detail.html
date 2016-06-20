@@ -3,6 +3,9 @@
 
 {% block content %}
   <p>
+    {% comment %}
+      Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
+    {% endcomment %}
     {% blocktrans with username=user.username %}
       Hi, {{ username }}! You don't have a Wikipedia editor profile attached
       to your account here, so you are probably a site administrator.

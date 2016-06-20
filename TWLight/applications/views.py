@@ -347,6 +347,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ListView):
             raise
 
         filters = [
+            # Translators: Editor = wikipedia editor, gender unknown.
             {'label': _('Editor'), 'object': editor},
             {'label': _('Publisher'), 'object': partner}
         ]
@@ -473,6 +474,7 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
     def get_context_data(self, **kwargs):
         context = super(ListExpiringApplicationsView, self).get_context_data(**kwargs)
 
+        # Translators: these are grants to specific editors whose term limit is about to expire.
         context['title'] = _('Access grants up for renewal')
 
         context['intro_text'] = _("""
@@ -525,6 +527,7 @@ class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
         form.helper = FormHelper()
         form.helper.add_input(Submit(
             'submit',
+            # Translators: this lets a reviewer set the status of a single application.
             _('Set application status'),
             css_class='center-block'))
 
