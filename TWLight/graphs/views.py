@@ -76,11 +76,14 @@ class DashboardView(CoordinatorsOnly, TemplateView):
                 status__in=[Application.APPROVED, Application.NOT_APPROVED]
             )
 
-        avg_days_open = float(
-            closed_apps.aggregate(
+        average_duration = closed_apps.aggregate(
                 Avg('days_open')
             )['days_open__avg']
-        )
+
+        if average_duration:
+            avg_days_open = float(average_duration)
+        else:
+            avg_days_open = None
 
         context['avg_days_open'] = avg_days_open
 

@@ -132,19 +132,19 @@
     <ul class="nav nav-pills pull-right">
       <li role="presentation">
         <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library">
-          The Wikipedia Library
+          {% trans "The Wikipedia Library" %}
         </a>
       </li>
       {% if user.is_authenticated %}
         <li role="presentation">
           <a href="{% url 'auth_logout' %}">
-            Log out
+            {% trans "Log out" %}
           </a>
         </li>
       {% else %}
         <li role="presentation">
           <a href="{% url 'oauth_login' %}">
-            Log in/sign up
+            {% trans "Log in/sign up" %}
           </a>
         </li>
       {% endif %}
@@ -156,7 +156,7 @@
         <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive center-block">
       </div>
       <div class="col-xs-12 col-sm-10">
-        <h1 class="text-justify-sm">The Wikipedia Library</h1>
+        <h1 class="text-justify-sm">{% trans "The Wikipedia Library" %}</h1>
       </div>      
     </div>
   </header>

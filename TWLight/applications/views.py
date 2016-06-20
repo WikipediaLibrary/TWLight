@@ -79,10 +79,6 @@ class RequestApplicationView(EditorsOnly, FormView):
         return HttpResponseRedirect(reverse('applications:apply'))
 
 
-        # http://www.slideshare.net/kingkilr/forms-getting-your-moneys-worth
-        # multipleformfactory here might be a good way to aggregate
-
-
 
 class SubmitApplicationView(EditorsOnly, FormView):
     template_name = 'applications/apply.html'
@@ -232,7 +228,7 @@ class SubmitApplicationView(EditorsOnly, FormView):
     def _get_partners(self):
         """
         Get the queryset of Partners with resources the user wants access to.
-        These partners were specified in RequestForApplicationView.
+        These partners were specified in RequestApplicationView.
         """
         # This key is guaranteed by dispatch() to exist and be nonempty.
         partner_ids = self.request.session[PARTNERS_SESSION_KEY]
@@ -419,13 +415,12 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
 
         context['title'] = _('Approved applications')
 
-        context['intro_text'] = _("""
-          This page lists only applications that have been approved.
-          You may also consult <a href="{open_url}">pending or
+        context['intro_text'] = _("""This page lists only applications that have
+          been approved. You may also consult <a href="{open_url}">pending or
           under-discussion</a> and <a href="{rejected_url}">rejected</a>
-          applications. 
-        """).format(open_url=context['open_url'],
-                    rejected_url=context['rejected_url'])
+          applications.""").format(
+                open_url=context['open_url'],
+                rejected_url=context['rejected_url'])
 
         return context
 
@@ -444,13 +439,12 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
         context['title'] = _('Rejected applications')
 
-        context['intro_text'] = _("""
-          This page lists only applications have been rejected.
-          You may also consult <a href="{open_url}">pending or
+        context['intro_text'] = _("""This page lists only applications that have
+          been rejected. You may also consult <a href="{open_url}">pending or
           under-discussion</a> and <a href="{approved_url}">approved</a>
-          applications. 
-        """).format(open_url=context['open_url'],
-                    approved_url=context['approved_url'])
+          applications. """).format(
+                open_url=context['open_url'],
+                approved_url=context['approved_url'])
 
         return context
 
@@ -477,17 +471,15 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
         # Translators: these are grants to specific editors whose term limit is about to expire.
         context['title'] = _('Access grants up for renewal')
 
-        context['intro_text'] = _("""
-          This page lists approved applications whose access grants have
-          probably expired recently
-          or are likely to expire soon.
-          You may also consult <a href="{open_url}">pending or
+        context['intro_text'] = _("""This page lists approved applications whose
+          access grants have probably expired recently or are likely to expire
+          soon. You may also consult <a href="{open_url}">pending or
           under-discussion</a>, <a href="{rejected_url}">rejected</a>, or
           <a href="{approved_url}">all approved</a>
-          applications. 
-        """).format(open_url=context['open_url'],
-                    rejected_url=context['rejected_url'],
-                    approved_url=context['approved_url'])
+          applications. """).format(
+                open_url=context['open_url'],
+                rejected_url=context['rejected_url'],
+                approved_url=context['approved_url'])
 
         # Overrides default. We want different styling for this case to help
         # coordinators prioritize expiring-soon vs. expired-already access

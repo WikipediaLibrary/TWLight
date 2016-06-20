@@ -7,7 +7,7 @@
         {% if app.is_probably_expired %}
           <span class="lead">
             <span class="label label-danger">
-              {% blocktrans with num_days=app.get_num_days_since_expiration %}
+              {% blocktrans trimmed with num_days=app.get_num_days_since_expiration %}
                 Expired {{ num_days }} days ago
               {% endblocktrans %}
             </span>
@@ -15,7 +15,7 @@
         {% else %}
           <span class="lead">
             <span class="label label-info">
-              {% blocktrans with num_days=app.get_num_days_until_expiration %}
+              {% blocktrans trimmed with num_days=app.get_num_days_until_expiration %}
                 Expiring in {{ num_days }} days
               {% endblocktrans %}
             </span>
@@ -25,7 +25,7 @@
           {{ app }}
         </a>
         &mdash;
-        {% blocktrans with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
+        {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
           Approved by {{ reviewer }} on {{ review_date }}
         {% endblocktrans %}
       </li>

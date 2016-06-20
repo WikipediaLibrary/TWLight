@@ -25,18 +25,18 @@ msgstr "Soummetre la demande"
 
 #: TWLight/applications/forms.py:185
 msgid "Information about you"
-msgstr "Vos données personnelles "
+msgstr "Vos donnÃ©es personnelles "
 
 
 #: TWLight/applications/forms.py:197
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr "Votre demande à {partner}"
+msgstr "Votre demande Ã  {partner}"
 
 
 #: TWLight/applications/forms.py:245 TWLight/users/models.py:61
 msgid "Wikipedia username"
-msgstr "Nom d'utilisateur dans Wikipédia"
+msgstr "Nom d'utilisateur dans WikipÃ©dia"
 
 
 #: TWLight/applications/forms.py:246
@@ -46,12 +46,12 @@ msgstr "Nom de votre compagnie"
 
 #: TWLight/applications/helpers.py:88
 msgid "Your real name"
-msgstr "Prénom et nom de famille"
+msgstr "PrÃ©nom et nom de famille"
 
 
 #: TWLight/applications/helpers.py:89
 msgid "Your country of residence"
-msgstr "Pays de résidence"
+msgstr "Pays de rÃ©sidence"
 
 
 #: TWLight/applications/helpers.py:90
@@ -71,17 +71,17 @@ msgstr "Nom de ressource"
 
 #: TWLight/applications/helpers.py:93
 msgid "Why do you want access to this resource?"
-msgstr "Pourquoi voulez-vous accéder à cette ressource?"
+msgstr "Pourquoi voulez-vous accÃ©der Ã  cette ressource?"
 
 
 #: TWLight/applications/helpers.py:94
 msgid "Which collection do you want access to?"
-msgstr "Quelle collection voulez-vous accès?"
+msgstr "Quelle collection voulez-vous accÃ¨s?"
 
 
 #: TWLight/applications/helpers.py:95
 msgid "Which book do you want access to?"
-msgstr "Quel livre voulez-vous accès?"
+msgstr "Quel livre voulez-vous accÃ¨s?"
 
 
 #: TWLight/applications/helpers.py:96
@@ -105,12 +105,12 @@ msgstr "En discussion"
 
 #: TWLight/applications/models.py:25
 msgid "Approved"
-msgstr "Approuvé"
+msgstr "ApprouvÃ©"
 
 
 #: TWLight/applications/models.py:26
 msgid "Not approved"
-msgstr "Non approuvé"
+msgstr "Non approuvÃ©"
 
 
 #: TWLight/applications/models.py:35 TWLight/applications/models.py:47
@@ -119,14 +119,14 @@ msgstr "Non approuvé"
 msgid ""
 "Do not override this field! Its value is set automatically when the "
 "application is saved, and overriding it may have undesirable results."
-msgstr "Ne pas remplacer ce champ! Sa valeur est définie automatiquement lorsque l'application "" est enregistrée, et son remplacement pourrait avoir des résultats indésirables"
+msgstr "Ne pas remplacer ce champ! Sa valeur est dÃ©finie automatiquement lorsque l'application "" est enregistrÃ©e, et son remplacement pourrait avoir des rÃ©sultats indÃ©sirables"
 
 
 #: TWLight/applications/views.py:94
 msgid ""
 "You must choose at least one resource you want access to before applying for "
 "access."
-msgstr "Vous devez choisir au moins une ressource à laquelle vous souhaitez accéder avant de demander l'accès"
+msgstr "Vous devez choisir au moins une ressource Ã  laquelle vous souhaitez accÃ©der avant de demander l'accÃ¨s"
 
 
 #: TWLight/applications/views.py:173
@@ -134,7 +134,7 @@ msgid ""
 "Your application has been submitted. A coordinator will review it and get "
 "back to you. You can check the status of your applications on this page at "
 "any time."
-msgstr "Votre demande a été soumise. Un coordonnateur l'examinera et vous répondra. Vous pouvez consulter l'état de votre demande sur cette page"
+msgstr "Votre demande a Ã©tÃ© soumise. Un coordonnateur l'examinera et vous rÃ©pondra. Vous pouvez consulter l'Ã©tat de votre demande sur cette page."
 
 
 #: TWLight/applications/views.py:350
@@ -144,7 +144,7 @@ msgstr "Utilisateur"
 
 #: TWLight/applications/views.py:351
 msgid "Publisher"
-msgstr "Maison d'édition"
+msgstr "Maison d'Ã©dition"
 
 
 #: TWLight/applications/views.py:389
@@ -161,13 +161,13 @@ msgid ""
 "          You may also consult <a href=\"{approved_url}\">approved</a> and\n"
 "          <a href=\"{rejected_url}\">rejected</a> applications. \n"
 "        "
-msgstr "Cette page contient uniquement les applications qui doivent encore être examinés. Vous pouvez également consulter les applications <a href=\"{approved_url}\">approuvés</a> et \n"
-"          <a href=\"{rejected_url}\">non approuvés</a>."
+msgstr "\nCette page contient uniquement les applications qui doivent encore Ãªtre examinÃ©s. Vous pouvez Ã©galement consulter les applications <a href=\"{approved_url}\">approuvÃ©s</a> et \n"
+"          <a href=\"{rejected_url}\">non approuvÃ©s</a>."
 
 
 #: TWLight/applications/views.py:419
 msgid "Approved applications"
-msgstr "Demandes approuvées"
+msgstr "Demandes approuvÃ©es"
 
 
 #: TWLight/applications/views.py:421
@@ -179,15 +179,14 @@ msgid ""
 "          You may also consult <a href=\"{open_url}\">pending or\n"
 "          under-discussion</a> and <a href=\"{rejected_url}\">rejected</a>\n"
 "          applications. \n"
-"        "
-msgstr "Cette page contient uniquement les applications qui ont été approuvés. Vous pouvez également consulter les applications <a href=\"{open_url}\">en attente ou\n"
-"          en discussion</a> et <a href=\"{rejected_url}\">non approuvé</a>\n"
+msgstr "\nCette page contient uniquement les applications qui ont Ã©tÃ© approuvÃ©s. Vous pouvez Ã©galement consulter les applications <a href=\"{open_url}\">en attente ou\n"
+"          en discussion</a> et <a href=\"{rejected_url}\">non approuvÃ©</a>\n"
 ""
 
 
 #: TWLight/applications/views.py:444
 msgid "Rejected applications"
-msgstr "Demandes non approuvés"
+msgstr "Demandes non approuvÃ©s"
 
 
 #: TWLight/applications/views.py:446
@@ -199,15 +198,14 @@ msgid ""
 "          You may also consult <a href=\"{open_url}\">pending or\n"
 "          under-discussion</a> and <a href=\"{approved_url}\">approved</a>\n"
 "          applications. \n"
-"        "
-msgstr "Cette page contient uniquement les applications qui ont été rejetées. Vous pouvez également consulter les applications <a href=\"{open_url}\">en attente ou\n"
-"          en discussion</a> et <a href=\"{approved_url}\">approuvés</a>\n"
+msgstr "\nCette page contient uniquement les applications qui ont Ã©tÃ© rejetÃ©es. Vous pouvez Ã©galement consulter les applications <a href=\"{open_url}\">en attente ou\n"
+"          en discussion</a> et <a href=\"{approved_url}\">approuvÃ©s</a>\n"
 "\n"
 
 
 #: TWLight/applications/views.py:476
 msgid "Access grants up for renewal"
-msgstr "Accès à renouveler"
+msgstr "AccÃ¨s Ã  renouveler"
 
 
 #: TWLight/applications/views.py:478
@@ -222,26 +220,25 @@ msgid ""
 "          under-discussion</a>, <a href=\"{rejected_url}\">rejected</a>, or\n"
 "          <a href=\"{approved_url}\">all approved</a>\n"
 "          applications. \n"
-"        "
-msgstr "Cette page contient les applications dont l'accès a probablement expiré récemment ou est susceptible d'expirer bientôt. Vous pouvez également consulter les applications  <a href=\"{open_url}\">en attente ou\n"
-"          en discussion</a>, <a href=\"{rejected_url}\">non approuvés</a>, ou\n"
-"          <a href=\"{approved_url}\">approuvés</a>\n"
+msgstr "\nCette page contient les applications dont l'accÃ¨s a probablement expirÃ© rÃ©cemment ou est susceptible d'expirer bientÃ´t. Vous pouvez Ã©galement consulter les applications  <a href=\"{open_url}\">en attente ou\n"
+"          en discussion</a>, <a href=\"{rejected_url}\">non approuvÃ©s</a>, ou\n"
+"          <a href=\"{approved_url}\">approuvÃ©s</a>\n"
 ". \n"
 
 
 #: TWLight/applications/views.py:528
 msgid "Set application status"
-msgstr "Définir le statut de l'application"
+msgstr "DÃ©finir le statut de l'application"
 
 
 #: TWLight/applications/views.py:565
 msgid "Batch update successful. Thank you for reviewing today."
-msgstr "Mise à jour par lot réussi. Merci pour votre examen."
+msgstr "Mise Ã  jour par lot rÃ©ussi. Merci pour votre examen."
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:10
 msgid "Evaluate application"
-msgstr "Évaluer l'application"
+msgstr "Ã‰valuer l'application"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -261,7 +258,7 @@ msgstr "Nombre de jours depuis l'application"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:33
 msgid "Number of days since application was closed"
-msgstr "Nombre de jours depuis l'application a été fermée"
+msgstr "Nombre de jours depuis l'application a Ã©tÃ© fermÃ©e"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:41
@@ -278,22 +275,22 @@ msgstr "Partenaire"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:56
 msgid "Collection requested"
-msgstr "Collection demandé"
+msgstr "Collection demandÃ©"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:65
 msgid "Title requested"
-msgstr "Titre demandé"
+msgstr "Titre demandÃ©"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:73
 msgid "Why the editor wants access"
-msgstr "Pourquoi l'utilisateur veut l'accès"
+msgstr "Pourquoi l'utilisateur veut l'accÃ¨s"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:79
 msgid "Not stated"
-msgstr "Non indiqué"
+msgstr "Non indiquÃ©"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:85
@@ -317,7 +314,7 @@ msgid ""
 "      This page and its comments are visible to all Wikipedia Library\n"
 "      coordinators and to the editor who submitted this application.\n"
 "    "
-msgstr "Cette page et ses commentaires sont visibles à tous les coordonnateurs la Bibliothèque Wikipédia et à l'utilisateur qui a soumis cette demande"
+msgstr "\nCette page et ses commentaires sont visibles Ã  tous les coordonnateurs la BibliothÃ¨que WikipÃ©dia et Ã  l'utilisateur qui a soumis cette demande"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:124
@@ -336,8 +333,7 @@ msgstr "Historique des versions"
 msgid ""
 "\n"
 "                    Submitted by by %(user)s on %(review_date)s\n"
-"                  "
-msgstr "Soumis par %(user)s le %(review_date)s\n"
+msgstr "\nSoumis par %(user)s le %(review_date)s\n"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:153
@@ -346,13 +342,12 @@ msgstr "Soumis par %(user)s le %(review_date)s\n"
 msgid ""
 "\n"
 "                    Reviewed by %(user)s on %(review_date)s\n"
-"                  "
-msgstr "Evalué par %(user)s le %(review_date)s\n"
+msgstr "\nEvaluÃ© par %(user)s le %(review_date)s\n"
 
 
 #: TWLight/applications/templates/applications/application_evaluation.html:161
 msgid "No previous versions."
-msgstr "Aucune versions précédentes"
+msgstr "Aucune versions prÃ©cÃ©dentes"
 #: TWLight/applications/templates/applications/application_list.html:19
 msgid "Filter applications by..."
 msgstr "Filtrer par..."
@@ -375,7 +370,7 @@ msgid ""
 "\n"
 "                Expired %(num_days)s days ago\n"
 "              "
-msgstr "Expiré il y a %(num_days)s jours"
+msgstr "\nExpirÃ© il y a %(num_days)s jours"
 
 
 #: TWLight/applications/templates/applications/application_list_expiring_include.html:18
@@ -385,7 +380,7 @@ msgid ""
 "\n"
 "                Expiring in %(num_days)s days\n"
 "              "
-msgstr "Expirant en %(num_days)s jours"
+msgstr "\nExpirant en %(num_days)s jours"
 
 
 #: TWLight/applications/templates/applications/application_list_expiring_include.html:28
@@ -394,8 +389,7 @@ msgstr "Expirant en %(num_days)s jours"
 msgid ""
 "\n"
 "          Approved by %(reviewer)s on %(review_date)s\n"
-"        "
-msgstr "Approuvé par %(reviewer)s le %(review_date)s\n"
+msgstr "\nApprouvÃ© par %(reviewer)s le %(review_date)s\n"
 
 
 #: TWLight/applications/templates/applications/application_list_expiring_include.html:33
@@ -413,8 +407,7 @@ msgstr "Aucune demande en ce moment"
 msgid ""
 "\n"
 "            Last reviewed by %(reviewer)s on %(review_date)s\n"
-"          "
-msgstr "Dernier évalué par %(reviewer)s le %(review_date)s\n"
+msgstr "\nDernier Ã©valuÃ© par %(reviewer)s le %(review_date)s\n"
 
 
 #: TWLight/applications/templates/applications/application_list_include.html:19
@@ -426,7 +419,7 @@ msgstr "Pas encore revu"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:12
 msgid "Select/deselect all"
-msgstr "Sélectionner tout / Désélectionner tout"
+msgstr "SÃ©lectionner tout / DÃ©sÃ©lectionner tout"
 
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:26
@@ -435,23 +428,22 @@ msgstr "Sélectionner tout / Désélectionner tout"
 msgid ""
 "\n"
 "                Last reviewed by %(reviewer)s on %(review_date)s\n"
-"              "
-msgstr "Dernier évalué par %(reviewer)s le %(review_date)s\n"
+msgstr "\nDernier Ã©valuÃ© par %(reviewer)s le %(review_date)s\n"
 
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:41
 msgid "Status for all selected applications"
-msgstr "Statut pour toutes les applications sélectionnées"
+msgstr "Statut pour toutes les applications sÃ©lectionnÃ©es"
 
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:54
 msgid "Set status"
-msgstr "Définir le statut"
+msgstr "DÃ©finir le statut"
 
 
 #: TWLight/applications/templates/applications/request_for_application.html:7
 msgid "What do you want to access?"
-msgstr "Qu'est-ce que vous voulez accéder?"
+msgstr "Qu'est-ce que vous voulez accÃ©der?"
 
 
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:3
@@ -465,12 +457,12 @@ msgid ""
 "a look. Your application is available at %(app_url)s.\n"
 "\n"
 "Thanks for helping make knowledge available to the world!\n"
-msgstr "Il y a un nouveau commentaire sur votre demande pour accéder aux ressources fournies par %(partner)s. Parfois, cela signifie qu'un coordinateur a besoin d'informations de votre part afin de se prononcer sur votre demande, alors s'il vous plaît jeter un oeil. Votre demande est disponible sur %(app_url)s.\n Merci de nous aider à partager les connaissances avec le monde!"
+msgstr "\nIl y a un nouveau commentaire sur votre demande pour accÃ©der aux ressources fournies par %(partner)s. Parfois, cela signifie qu'un coordinateur a besoin d'informations de votre part afin de se prononcer sur votre demande, alors s'il vous plaÃ®t jeter un oeil. Votre demande est disponible sur %(app_url)s.\n Merci de nous aider Ã  partager les connaissances avec le monde!\n"
 
 
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
 msgid "New comment on your Wikipedia Library application"
-msgstr "Nouveau commentaire sur votre demande de la Bibliothèque Wikipédia"
+msgstr "Nouveau commentaire sur votre demande de la BibliothÃ¨que WikipÃ©dia"
 
 
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:3
@@ -484,10 +476,10 @@ msgid ""
 "see it at %(app_url)s.\n"
 "\n"
 "Thanks for helping review Wikipedia Library applications!\n"
-msgstr "Il y a un nouveau commentaire sur une demande de la Bibliothèque Wikipédia que vous avez également commenté. Il pourrait fournir une réponse à une question que vous avez posée. Vous pouvez le voir à %(app_url)s.\n Merci de nous aider à évaluer les applications!"
+msgstr "\nIl y a un nouveau commentaire sur une demande de la BibliothÃ¨que WikipÃ©dia que vous avez Ã©galement commentÃ©. Il pourrait fournir une rÃ©ponse Ã  une question que vous avez posÃ©e. Vous pouvez le voir Ã  %(app_url)s.\n Merci de nous aider Ã  Ã©valuer les applications!\n"
 #: TWLight/emails/templates/emails/comment_notification_others-subject.html:3
 msgid "New comment on a Wikipedia Library application you commented on"
-msgstr "Nouveau commentaire sur une demande de la Bibliothèque Wikipédia que vous avez commenté"
+msgstr "Nouveau commentaire sur une demande de la BibliothÃ¨que WikipÃ©dia que vous avez commentÃ©"
 
 
 #: TWLight/graphs/views.py:150 TWLight/graphs/views.py:177
@@ -523,7 +515,7 @@ msgstr "Wiki"
 
 #: TWLight/graphs/views.py:196
 msgid "Days until decision"
-msgstr "Jours avant la décision"
+msgstr "Jours avant la dÃ©cision"
 
 
 #: TWLight/graphs/views.py:196 TWLight/graphs/views.py:230
@@ -538,19 +530,19 @@ msgstr "Mois"
 
 #: TWLight/graphs/views.py:213
 msgid "Median days until decision"
-msgstr "Délai médian en jours avant la décision"
+msgstr "DÃ©lai mÃ©dian en jours avant la dÃ©cision"
 
 
 #: TWLight/graphs/views.py:257
 #, python-brace-format
 msgid "Number of applications to {partner}"
-msgstr "Nombre d'applications à {partner}"
+msgstr "Nombre d'applications Ã  {partner}"
 
 
 #: TWLight/graphs/views.py:280
 #, python-brace-format
 msgid "Number of unique users who have applied to {partner}"
-msgstr "Nombre d'utilisateurs uniques qui ont demandé des ressources de {partner}"
+msgstr "Nombre d'utilisateurs uniques qui ont demandÃ© des ressources de {partner}"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:12
@@ -577,7 +569,7 @@ msgstr "Nombre d'utilisateurs uniques (tout le temps)"
 
 #: TWLight/resources/templates/resources/partner_detail.html:61
 msgid "Median days from application to decision"
-msgstr "Délai médian en jours de la demande à la décision"
+msgstr "DÃ©lai mÃ©dian en jours de la demande Ã  la dÃ©cision"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:69
@@ -599,7 +591,7 @@ msgstr "Demandes par statut"
 
 #: TWLight/templates/dashboard.html:156 TWLight/templates/dashboard.html:165
 msgid "download as csv"
-msgstr "Téléchargez en format CSV"
+msgstr "TÃ©lÃ©chargez en format CSV"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:78
@@ -614,7 +606,7 @@ msgid_plural ""
 "        Number of applications approved (all time): %(total_apps_approved)s\n"
 "      "
 msgstr[0] ""
-msgstr[1] "Demandes approuvées (tout le temps)"
+msgstr[1] "Demandes approuvÃ©es (tout le temps)"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:86
@@ -630,7 +622,7 @@ msgid_plural ""
 "%(unique_users_approved)s\n"
 "      "
 msgstr[0] ""
-msgstr[1] "Nombre d'utilisateurs uniques avec des demandes approuvées (tout le temps)"
+msgstr[1] "Nombre d'utilisateurs uniques avec des demandes approuvÃ©es (tout le temps)"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:93
@@ -645,7 +637,7 @@ msgstr "Toutes les demandes"
 
 #: TWLight/resources/templates/resources/partner_detail.html:99
 msgid "Approved applications only"
-msgstr "Seulement les demandes approuvées"
+msgstr "Seulement les demandes approuvÃ©es"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:103
@@ -655,14 +647,14 @@ msgstr "Nombre d'utilisateurs uniques dans le temps"
 
 #: TWLight/resources/templates/resources/partner_detail.html:109
 msgid "Special requirements for applicants"
-msgstr "Exigences particulières pour les demandeurs"
+msgstr "Exigences particuliÃ¨res pour les demandeurs"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:112
 msgid ""
 "If this publisher has any special requirements for applicants, they are "
 "listed here."
-msgstr "Si ce partenaire a des exigences particulières pour les demandeurs, ils sont énumérés ici"
+msgstr "Si ce partenaire a des exigences particuliÃ¨res pour les demandeurs, ils sont Ã©numÃ©rÃ©s ici"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:117
@@ -674,7 +666,7 @@ msgid ""
 "\">terms\n"
 "        of use</a>.\n"
 "      "
-msgstr "%(publisher)s exige que vous acceptez les <a href=\"%(url)s"
+msgstr "\n%(publisher)s exige que vous acceptez les <a href=\"%(url)s"
 "\">conditions\n"
 "         d'utilisation pour cette ressource"
 
@@ -695,7 +687,7 @@ msgid ""
 "\n"
 "        %(publisher)s requires that you provide your country of residence.\n"
 "      "
-msgstr "%(publisher)s exige que vous fournissiez votre pays de résidence"
+msgstr "\n%(publisher)s exige que vous fournissiez votre pays de rÃ©sidence"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:142
@@ -705,7 +697,7 @@ msgid ""
 "\n"
 "        %(publisher)s requires that you provide your occupation.\n"
 "      "
-msgstr "%(publisher)s exige que vous fournissiez votre profession"
+msgstr "\n%(publisher)s exige que vous fournissiez votre profession"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:150
@@ -716,7 +708,7 @@ msgid ""
 "        %(publisher)s requires that you provide your institutional "
 "affiliation.\n"
 "      "
-msgstr "%(publisher)s exige que vous fournissiez votre affiliation institutionnelle"
+msgstr "\n%(publisher)s exige que vous fournissiez votre affiliation institutionnelle"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:158
@@ -727,7 +719,7 @@ msgid ""
 "want\n"
 "        to access.\n"
 "      "
-msgstr "%(publisher)s exige que vous spécifiez le titre que vous souhaitez accéder"
+msgstr "\n%(publisher)s exige que vous spÃ©cifiez le titre que vous souhaitez accÃ©der"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:168
@@ -741,7 +733,7 @@ msgid ""
 "a\n"
 "          time.\n"
 "        "
-msgstr "%(publisher)s exige que vous spécifiez la collection que vous souhaitez accéder. Vous ne pouvez demander l'accès à une collection à la fois"
+msgstr "\n%(publisher)s exige que vous spÃ©cifiez la collection que vous souhaitez accÃ©der. Vous ne pouvez demander l'accÃ¨s Ã  une collection Ã  la fois"
 
 
 #: TWLight/resources/templates/resources/partner_detail.html:174
@@ -752,7 +744,7 @@ msgid ""
 "          %(publisher)s requires that you specify one or more specific\n"
 "          collections that you want to access.\n"
 "        "
-msgstr "%(publisher)s exige que vous spécifiez une ou plusieurs collections que vous souhaitez accéder"
+msgstr "\n%(publisher)s exige que vous spÃ©cifiez une ou plusieurs collections que vous souhaitez accÃ©der"
 
 
 #: TWLight/resources/templates/resources/partner_list.html:5
@@ -766,12 +758,12 @@ msgid ""
 "      If you're a coordinator or site administrator, you'll be able to see\n"
 "      per-partner metrics on the partner pages.\n"
 "    "
-msgstr "Si vous êtes un coordonnateur ou un administrateur de site, vous pouvez consulter les statistiques par partenaire sur les pages partenaires."
+msgstr "\nSi vous Ãªtes un coordonnateur ou un administrateur de site, vous pouvez consulter les statistiques par partenaire sur les pages partenaires."
 
 
 #: TWLight/settings/base.py:135
 msgid "French"
-msgstr "Français"
+msgstr "FranÃ§ais"
 
 
 #: TWLight/settings/base.py:136
@@ -786,12 +778,12 @@ msgid ""
 "\n"
 "            Hi, %(username)s!\n"
 "          "
-msgstr "Bonjour %(username)s!"
+msgstr "\nBonjour %(username)s!"
 
 
 #: TWLight/templates/base.html:170
 msgid "This is a template"
-msgstr "Ceci est un modèle"
+msgstr "Ceci est un modÃ¨le"
 
 
 #: TWLight/templates/dashboard.html:16
@@ -851,7 +843,7 @@ msgstr "Demandes"
 
 #: TWLight/templates/dashboard.html:146
 msgid "Applications by number of days until decision"
-msgstr "Demandes par nombre de jours avant la décision"
+msgstr "Demandes par nombre de jours avant la dÃ©cision"
 
 
 #: TWLight/templates/dashboard.html:148
@@ -862,12 +854,12 @@ msgid ""
 "of\n"
 "          applications that have taken exactly that many days to decide.\n"
 "        "
-msgstr "L'axe x représent le nombre de jours pour prendre une décision finale (soit approuver ou refuser) sur une demande. L'axe y représent le nombre de demandes qui ont été décidé dans exactement ce nombre de jours"
+msgstr "\nL'axe x reprÃ©sent le nombre de jours pour prendre une dÃ©cision finale (soit approuver ou refuser) sur une demande. L'axe y reprÃ©sent le nombre de demandes qui ont Ã©tÃ© dÃ©cidÃ© dans exactement ce nombre de jours"
 
 
 #: TWLight/templates/dashboard.html:156
 msgid "Median days until application decision, per month"
-msgstr "Délai médian en jours avant la décision, par mois"
+msgstr "DÃ©lai mÃ©dian en jours avant la dÃ©cision, par mois"
 
 
 #: TWLight/templates/dashboard.html:158
@@ -876,12 +868,12 @@ msgid ""
 "          This shows the median number of days to reach a decision on the\n"
 "          applications opened in a given month.\n"
 "        "
-msgstr "Cela montre le nombre médian de jours pour évaluer les demandes ouvertes dans un mois donné"
+msgstr "\nCela montre le nombre mÃ©dian de jours pour Ã©valuer les demandes ouvertes dans un mois donnÃ©"
 
 
 #: TWLight/templates/dashboard.html:165
 msgid "Current application status distribution"
-msgstr "Distribution de l'état actuel des demandes "
+msgstr "Distribution de l'Ã©tat actuel des demandes "
 
 
 #: TWLight/templates/dashboard.html:167
@@ -889,7 +881,7 @@ msgid ""
 "\n"
 "          This graph includes all applications opened ever on this site.\n"
 "        "
-msgstr "Ce graphe inclut toutes les demandes jamais ouvertes sur ce site"
+msgstr "\nCe graphe inclut toutes les demandes jamais ouvertes sur ce site"
 
 
 #: TWLight/users/authorization.py:197
@@ -899,17 +891,17 @@ msgstr "Bon retour!"
 
 #: TWLight/users/forms.py:24
 msgid "Update profile"
-msgstr "Mettre à jour le profil"
+msgstr "Mettre Ã  jour le profil"
 
 
 #: TWLight/users/models.py:52
 msgid "When this information was last edited"
-msgstr "Quand cette information a été modifié en dernier"
+msgstr "Quand cette information a Ã©tÃ© modifiÃ© en dernier"
 
 
 #: TWLight/users/models.py:54
 msgid "When this information was first created"
-msgstr "Quand cette information a été entré"
+msgstr "Quand cette information a Ã©tÃ© entrÃ©"
 
 
 #: TWLight/users/models.py:62
@@ -919,32 +911,32 @@ msgstr "Nombre total de modifications"
 
 #: TWLight/users/models.py:63
 msgid "Date registered at Wikipedia"
-msgstr "Date d'inscription à Wikipédia"
+msgstr "Date d'inscription Ã  WikipÃ©dia"
 
 
 #: TWLight/users/models.py:64
 msgid "Wikipedia user ID"
-msgstr "ID utilisateur à Wikipédia"
+msgstr "ID utilisateur Ã  WikipÃ©dia"
 
 
 #: TWLight/users/models.py:69
 msgid "Wikipedia groups"
-msgstr "Membre des groupes à Wikipédia"
+msgstr "Membre des groupes Ã  WikipÃ©dia"
 
 
 #: TWLight/users/models.py:70
 msgid "Wikipedia user rights"
-msgstr "Droits d'accès à Wikipédia"
+msgstr "Droits d'accÃ¨s Ã  WikipÃ©dia"
 
 
 #: TWLight/users/models.py:75
 msgid "Home wiki, as indicated by user"
-msgstr "Wiki principal, comme indiqué par l'utilisateur"
+msgstr "Wiki principal, comme indiquÃ© par l'utilisateur"
 
 
 #: TWLight/users/models.py:78
 msgid "Wiki contributions, as entered by user"
-msgstr "Contributions, comme indiqué par l'utilisateur"
+msgstr "Contributions, comme indiquÃ© par l'utilisateur"
 
 
 #: TWLight/users/templates/users/editor_detail.html:8
@@ -963,7 +955,7 @@ msgid ""
 "      Changes made on Wikipedia since that time have not been reflected "
 "here.\n"
 "    "
-msgstr "Informations avec * a été récolté de Wikipédia directement. Il était à jour en date de %(account_created_date)s. Les modifications effectuées sur Wikipédia depuis ce temps n'a pas été pris en compte ici."
+msgstr "\nInformations avec * a Ã©tÃ© rÃ©coltÃ© de WikipÃ©dia directement. Il Ã©tait Ã  jour en date de %(account_created_date)s. Les modifications effectuÃ©es sur WikipÃ©dia depuis ce temps n'a pas Ã©tÃ© pris en compte ici."
 
 
 #: TWLight/users/templates/users/editor_detail.html:18
@@ -975,7 +967,7 @@ msgid ""
 "      in their preferred language.\n"
 "      It was last edited on %(last_updated_date)s.\n"
 "    "
-msgstr "Autres informations a été ajouté directement par les utilisateurs ou les administrateurs du site, dans leur langue préférée. Il a été modifié en dernier le %(last_updated_date)s."
+msgstr "\nAutres informations a Ã©tÃ© ajoutÃ© directement par les utilisateurs ou les administrateurs du site, dans leur langue prÃ©fÃ©rÃ©e. Il a Ã©tÃ© modifiÃ© en dernier le %(last_updated_date)s."
 
 
 #: TWLight/users/templates/users/editor_detail.html:25
@@ -990,12 +982,12 @@ msgstr "Commencer nouvelle demande"
 
 #: TWLight/users/templates/users/editor_detail.html:35
 msgid "Editor data"
-msgstr "Données d'utilisateur"
+msgstr "DonnÃ©es d'utilisateur"
 
 
 #: TWLight/users/templates/users/editor_detail.html:40
 msgid "Please complete your profile."
-msgstr "S'il vous plaît compléter votre profil"
+msgstr "S'il vous plaÃ®t complÃ©ter votre profil"
 
 
 #: TWLight/users/templates/users/editor_detail.html:53
@@ -1005,17 +997,17 @@ msgid ""
 "\n"
 "              %(username)s has coordinator privileges on this site.\n"
 "            "
-msgstr "%(username)s a des privilèges de coordinateur sur ce site"
+msgstr "\n%(username)s a des privilÃ¨ges de coordinateur sur ce site"
 
 
 #: TWLight/users/templates/users/editor_detail_data.html:5
 msgid "Wikipedia username *"
-msgstr "Nom d'utilisateur dans Wikipédia"
+msgstr "Nom d'utilisateur dans WikipÃ©dia"
 
 
 #: TWLight/users/templates/users/editor_detail_data.html:16
 msgid "Wikipedia user ID *"
-msgstr "ID utilisateur à Wikipédia"
+msgstr "ID utilisateur Ã  WikipÃ©dia"
 
 
 #: TWLight/users/templates/users/editor_detail_data.html:36
@@ -1025,7 +1017,7 @@ msgstr "Nombre total de modifications"
 
 #: TWLight/users/templates/users/editor_detail_data.html:43
 msgid "Date registered on Wikipedia *"
-msgstr "Date d'inscription à Wikipédia"
+msgstr "Date d'inscription Ã  WikipÃ©dia"
 
 
 #: TWLight/users/templates/users/editor_detail_data.html:50
@@ -1035,12 +1027,12 @@ msgstr "Contributions"
 
 #: TWLight/users/templates/users/editor_detail_data.html:63
 msgid "Wikipedia groups *"
-msgstr "Membre des groupes à Wikipédia"
+msgstr "Membre des groupes Ã  WikipÃ©dia"
 
 
 #: TWLight/users/templates/users/editor_detail_data.html:74
 msgid "Wikipedia user rights *"
-msgstr "Droits d'accès à Wikipédia"
+msgstr "Droits d'accÃ¨s Ã  WikipÃ©dia"
 
 
 #: TWLight/users/templates/users/editor_detail_data.html:86
@@ -1054,7 +1046,7 @@ msgid ""
 "          Your email is visible only to you and site administrators, not to\n"
 "          volunteer Wikipedia Library coordinators.\n"
 "        "
-msgstr "Votre courriel est visible seulement pour vous et les administrateurs du site, pas pour les coordonnateurs bénévoles la Bibliothèque Wikipédia"
+msgstr "\nVotre courriel est visible seulement pour vous et les administrateurs du site, pas pour les coordonnateurs bÃ©nÃ©voles la BibliothÃ¨que WikipÃ©dia"
 
 
 #: TWLight/users/templates/users/user_detail.html:6
@@ -1065,7 +1057,7 @@ msgid ""
 "      Hi, %(username)s! You don't have a Wikipedia editor profile attached\n"
 "      to your account here, so you are probably a site administrator.\n"
 "    "
-msgstr "Bonjour, %(username)s! Vous n'avez pas de compte Wikipédia attaché à votre compte ici, alors vous êtes probablement un administrateur du site"
+msgstr "\nBonjour, %(username)s! Vous n'avez pas de compte WikipÃ©dia attachÃ© Ã  votre compte ici, alors vous Ãªtes probablement un administrateur du site"
 
 
 #: TWLight/users/templates/users/user_detail.html:13
@@ -1080,24 +1072,24 @@ msgid ""
 "in\n"
 "      via OAuth, or contact a site administrator for help.\n"
 "    "
-msgstr "Si vous n'êtes pas un administrateur du site, quelque chose de bizarre a eu lieu. Vous ne serez pas en mesure de demander l'accès aux ressources protégées sans un nom d'utilisateur. Sauf si vous savez qu'il y a une bonne raison pour laquelle votre compte n'a pas de nom d'utilisateur attaché (par exemple, vous êtes un administrateur du site), vous devez vous déconnecter et créer un nouveau compte en vous connectant via OAuth, ou contacter un administrateur du site pour demander de l'aide"
+msgstr "\nSi vous n'Ãªtes pas un administrateur du site, quelque chose de bizarre a eu lieu. Vous ne serez pas en mesure de demander l'accÃ¨s aux ressources protÃ©gÃ©es sans un nom d'utilisateur. Sauf si vous savez qu'il y a une bonne raison pour laquelle votre compte n'a pas de nom d'utilisateur attachÃ© (par exemple, vous Ãªtes un administrateur du site), vous devez vous dÃ©connecter et crÃ©er un nouveau compte en vous connectant via OAuth, ou contacter un administrateur du site pour demander de l'aide"
 
 
 #: durationfield/db/models/fields/duration.py:23
 msgid "A duration of time"
-msgstr "une durée de temps"
+msgstr "une durÃ©e de temps"
 
 
 #: durationfield/db/models/fields/duration.py:26
 msgid "This value must be in \"w d h min s ms us\" format."
-msgstr "Cette valeur doit être au format \"s j h min s ms us\"
+msgstr "Cette valeur doit Ãªtre au format \"s j h min s ms us\""
 
 
 #: durationfield/db/models/fields/duration.py:27
 msgid "The value's type could not be converted"
-msgstr "Le type de valeur ne peut pas être convertie"
+msgstr "Le type de valeur ne peut pas Ãªtre convertie"
 
 
 #: durationfield/forms/fields.py:13
 msgid "Enter a valid duration."
-msgstr "Entrez une durée valide"
+msgstr "Entrez une durÃ©e valide"

@@ -145,11 +145,11 @@
             <div class="col-xs-9">
               <span class="pull-left">
                 {% if forloop.last %}
-                  {% blocktrans with user=version.revision.user review_date=version.revision.date_created|localize %}
+                  {% blocktrans trimmed with user=version.revision.user review_date=version.revision.date_created|localize %}
                     Submitted by{{ user }} on {{ review_date }}
                   {% endblocktrans %}
                 {% else %}
-                  {% blocktrans with user=version.revision.user review_date=version.revision.date_created|localize %}
+                  {% blocktrans trimmed with user=version.revision.user review_date=version.revision.date_created|localize %}
                     Reviewed by {{ user }} on {{ review_date }}
                   {% endblocktrans %}
                 {% endif %}

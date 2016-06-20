@@ -11,7 +11,7 @@
     {% csrf_token %}
     {{ form | crispy }}
     <br />
-    <input type="submit" value="Submit" class="btn btn-primary" />
+    <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
 </form>
 
 {% endblock %}
