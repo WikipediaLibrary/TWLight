@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load staticfiles %}
+{% load twlight_perms %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,24 +48,53 @@
     }
 
     @media (max-width: 767px) {
-      #main-content, #top-nav {
+      #main-content {
         margin: auto 14px;
+      }
+
+      #top-nav, #footer {
+        padding-top: auto;
+        padding-bottom: auto;
+        padding-right: 14px;
+        padding-left: 14px;
       }
     }
     @media (min-width: 768px) and (max-width: 991px) {
-      #main-content, #top-nav {
+      #main-content {
         margin: auto 28px;
+      }
+
+      #top-nav, #footer {
+        padding-top: auto;
+        padding-bottom: auto;
+        padding-right: 28px;
+        padding-left: 28px;
       }
     }
     @media (min-width: 992px) {
-      #main-content, #top-nav {
+      #main-content {
         margin: auto 56px;
+      }
+
+      #top-nav, #footer {
+        padding-top: auto;
+        padding-bottom: auto;
+        padding-right: 56px;
+        padding-left: 56px;
       }
     }
 
     #top-nav {
       border-bottom: 1px solid #eee;
       margin-bottom: 20px;
+    }
+
+    #footer {
+      background-color: #f8f8f8;
+      border-top: 1px solid #eee;
+      margin-top: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
     }
 
     .nav-greeting {
@@ -115,27 +145,47 @@
   </style>
 </head>
 <body>
-  <nav class="clearfix" id="top-nav">
+  <nav class="nav navbar-default" id="top-nav">
     {% if user.is_authenticated %}
       <span class="nav-greeting">
+        {% url 'users:home' as home_url %}
         {% if user.editor %}
-          {% blocktrans with username=user.editor.wp_username %}
-            Hi, {{ username }}!
+          {% blocktrans with username=user.editor.wp_username%}
+            Hi, <a href="{{ home_url }}">{{ username }}</a>!
           {% endblocktrans %}
         {% else %}
           {% blocktrans with username=user.username %}
-            Hi, {{ username }}!
+            Hi, <a href="{{ home_url }}">{{ username }}</a>!
           {% endblocktrans %}
         {% endif %}
       </span>
     {% endif %}
     <ul class="nav nav-pills pull-right">
-      <li role="presentation">
-        <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library">
-          {% trans "The Wikipedia Library" %}
-        </a>
-      </li>
+      {% if user.editor %}
+        <li role="presentation">
+          <a href="{% url 'applications:request' %}">
+            {% trans "Apply for access" %}
+          </a>
+        </li>
+      {% endif %}
+      {% if user|coordinators_only %}
+        <li role="presentation">
+          <a href="{% url 'applications:list' %}">
+            {% trans "Review applications" %}
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="{% url 'dashboard' %}">
+            {% trans "See metrics" %}
+          </a>
+        </li>
+      {% endif %}
       {% if user.is_authenticated %}
+        <li role="presentation">
+          <a href="{% url 'partners:list' %}">
+            {% trans "Browse partners" %}
+          </a>
+        </li>
         <li role="presentation">
           <a href="{% url 'auth_logout' %}">
             {% trans "Log out" %}
@@ -156,7 +206,7 @@
         <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive center-block">
       </div>
       <div class="col-xs-12 col-sm-10">
-        <h1 class="text-justify-sm">{% trans "The Wikipedia Library" %}</h1>
+        <h1 class="text-justify-sm">{% trans "The Wikipedia Library Card Platform" %}</h1>
       </div>      
     </div>
   </header>
@@ -171,6 +221,16 @@
     {% endblock %}
     
   </div>
+  <footer id="footer">
+    <div class="row">
+      <div class="col-xs-12">
+        The Wikipedia Library Card Platform is a project of 
+        <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library">
+          {% trans "The Wikipedia Library" %}
+        </a>.
+      </div>
+    </div>
+  </footer>
 
   {% block javascript %}
     {# We don't use any JS by default; individual pages that need it can add it here. #}
