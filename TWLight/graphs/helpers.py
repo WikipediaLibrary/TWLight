@@ -283,7 +283,7 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
                 date_created__lte=current_date)
 
             unique_users = User.objects.filter(
-                applications__in=apps_to_date).distinct().count()
+                editor__applications__in=apps_to_date).distinct().count()
 
             data_series.append([timestamp, unique_users])
             current_date -= relativedelta.relativedelta(months=1)
