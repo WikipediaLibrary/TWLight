@@ -17,6 +17,7 @@
 
   <!-- Custom CSS -->
   <link href="{% static "css/startbootstrap/sb-admin-2.css" %}" rel="stylesheet">
+  <link href="{% static "css/startbootstrap/timeline.css" %}" rel="stylesheet">
 
   <!-- Custom Fonts -->
   <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
@@ -142,6 +143,20 @@
           text-align: left;
       }
     }
+
+    .half-timeline > li > .timeline-badge {
+      left: 0;
+    }
+
+    .half-timeline:before {
+      left: 0;
+    }
+
+    .half-timeline > li.timeline-inverted > .timeline-panel {
+      float: left;
+      margin-left: 50px;
+    }
+
   </style>
 </head>
 <body>

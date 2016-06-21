@@ -6,88 +6,141 @@
 {% block content %}
   <h1>{{ object }}</h1>
 
-  {% if object.description %}
-    {{ object.description }}
-  {% else %}
-    {% trans "No description available." %}
-  {% endif %}
+  <ul class="timeline half-timeline">
+    <li class="timeline-inverted">
+      <div class="timeline-badge"><i class="fa fa-info"></i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          {% if object.description %}
+            <p>{{ object.description }}</p>
+          {% else %}
+            {% trans "Description not available." %}
+          {% endif %}
+        </div>
+      </div>      
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge"><i class="fa fa-link"></i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          {% if object.terms_of_use %}
+            <p><a href="{{ object.terms_of_use }}">terms of use</a></p>
+          {% else %}
+            <p>{% trans "Terms of use not available." %}</p>
+          {% endif %}
+        </div>
+      </div>      
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge"><i class="fa fa-exclamation"></i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">{% trans "Special requirements for applicants" %}</h4>
+        </div>
+        <div class="timeline-body">
+          <p>
+            ({% trans "If this publisher has any special requirements for applicants, they are listed here." %})
+          </p>
+
+          <ul>
+            {% if object.agreement_with_terms_of_use %}
+              <li>
+                {% blocktrans with publisher=object.company_name url=object.terms_of_use %}
+                  {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
+                  of use</a>.
+                {% endblocktrans %}
+              </li>
+            {% endif %}
+
+            {% if object.real_name %}
+              <li>
+                {% blocktrans with publisher=object.company_name %}
+                  {{ publisher }} requires that you provide your real name.
+                {% endblocktrans %}
+              </li>
+            {% endif %}
+
+            {% if object.country_of_residence %}
+              <li>
+                {% blocktrans with publisher=object.company_name %}
+                  {{ publisher }} requires that you provide your country of residence.
+                {% endblocktrans %}
+              </li>
+            {% endif %}
+
+            {% if object.occupation %}
+              <li>
+                {% blocktrans with publisher=object.company_name %}
+                  {{ publisher }} requires that you provide your occupation.
+                {% endblocktrans %}
+              </li>
+            {% endif %}
+
+            {% if object.affiliation %}
+              <li>
+                {% blocktrans with publisher=object.company_name %}
+                  {{ publisher }} requires that you provide your institutional affiliation.
+                {% endblocktrans %}
+              </li>
+            {% endif %}
+
+            {% if object.specific_title %}
+              <li>
+                {% blocktrans with publisher=object.company_name %}
+                  {{ publisher }} requires that you specify a particular title that you want
+                  to access.
+                {% endblocktrans %}
+              </li>
+            {% endif %}
+
+            {% if object.specific_stream %}
+              <li>
+                {% if object.mutually_exclusive %}
+                  {% blocktrans with publisher=object.company_name %}
+                    {{ publisher }} requires that you specify a specific collection that you
+                    want to access. You may only apply for access to one collection at a
+                    time.
+                  {% endblocktrans %}
+                {% else %}
+                  {% blocktrans with publisher=object.company_name %}
+                    {{ publisher }} requires that you specify one or more specific
+                    collections that you want to access.
+                  {% endblocktrans %}
+                {% endif %}
+              </li>
+            {% endif %}
+          </ul>
+
+        </div>
+      </div>      
+    </li>
+    {% if object.streams.all %}
+      <li class="timeline-inverted">
+        <div class="timeline-badge"><i class="fa fa-tags"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4 class="timeline-title">{% trans "Collections" %}</h4>
+          </div>
+          <div class="timeline-body">
+            <ul>
+              {% for stream in object.streams.all %}
+                <li><b>{{ stream }}</b> {% if stream.description %}&mdash; {{ stream.description }}{% endif %}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>      
+      </li>
+    {% endif %}
+  </ul>
+
 {% comment %}
   other stuff to do:
     list streams
 {% endcomment %}
-
-  <h3>{% trans "Special requirements for applicants" %}</h3>
-
-  <p>
-    {% trans "If this publisher has any special requirements for applicants, they are listed here." %}
-  </p>
-
-  {% if object.agreement_with_terms_of_use %}
-    <p>
-      {% blocktrans with publisher=object.company_name url=object.terms_of_use %}
-        {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
-        of use</a>.
-      {% endblocktrans %}
-    </p>
-  {% endif %}
-
-  {% if object.real_name %}
-    <p>
-      {% blocktrans with publisher=object.company_name %}
-        {{ publisher }} requires that you provide your real name.
-      {% endblocktrans %}
-    </p>
-  {% endif %}
-
-  {% if object.country_of_residence %}
-    <p>
-      {% blocktrans with publisher=object.company_name %}
-        {{ publisher }} requires that you provide your country of residence.
-      {% endblocktrans %}
-    </p>
-  {% endif %}
-
-  {% if object.occupation %}
-    <p>
-      {% blocktrans with publisher=object.company_name %}
-        {{ publisher }} requires that you provide your occupation.
-      {% endblocktrans %}
-    </p>
-  {% endif %}
-
-  {% if object.affiliation %}
-    <p>
-      {% blocktrans with publisher=object.company_name %}
-        {{ publisher }} requires that you provide your institutional affiliation.
-      {% endblocktrans %}
-    </p>
-  {% endif %}
-
-  {% if object.specific_title %}
-    <p>
-      {% blocktrans with publisher=object.company_name %}
-        {{ publisher }} requires that you specify a particular title that you want
-        to access.
-      {% endblocktrans %}
-    </p>
-  {% endif %}
-
-  {% if object.specific_stream %}
-    <p>
-      {% if object.mutually_exclusive %}
-        {% blocktrans with publisher=object.company_name %}
-          {{ publisher }} requires that you specify a specific collection that you
-          want to access. You may only apply for access to one collection at a
-          time.
-        {% endblocktrans %}
-      {% else %}
-        {% blocktrans with publisher=object.company_name %}
-          {{ publisher }} requires that you specify one or more specific
-          collections that you want to access.
-        {% endblocktrans %}
-      {% endif %}
-    </p>
-  {% endif %}
 
   {% if user|coordinators_only %}
     <h2>{% trans "Metrics" %}</h2>
