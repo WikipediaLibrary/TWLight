@@ -9,6 +9,10 @@ less-privileged TWLight users.
 
 In general, you will do admin-y things at the `/admin` URL. This gives you a GUI interface to the database. Good times.
 
+## Translations
+
+See `locale/README.md`. You will need cooperation from a sysadmin if you do not have command-line access.
+
 ## Logging in
 
 _If you did not create your account via OAuth_ and did not manually fill in accurate Wikipedia editor profile data after creating your account, you will not be able to use OAuth to log in. Instead, go to `/accounts/login`.

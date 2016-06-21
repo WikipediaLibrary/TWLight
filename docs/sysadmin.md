@@ -3,6 +3,10 @@
 This documentation is aimed at the system administrator who is setting up an
 instance of TWLight. For further details, consult https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/ .
 
+## Translations
+
+See `locale/README.md`.
+
 ## Software dependencies
 
 The (versioned) dependencies you will need are indicated in `requirements/`.

@@ -131,6 +131,9 @@ SITE_ID = 1
 
 LANGUAGE_CODE = 'en-us' # Sets site default language.
 
+# First tuple element should be a standard language code; see
+# https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes .
+# Second is the human-readable form.
 LANGUAGES = (
   ('fr', _('French')),
   ('en', _('English')),

@@ -9,9 +9,13 @@ See https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#localization-
 Run these commands from the root `TWLight/` directory.
 
 1.`python manage.py makemessages -l <language_code> -e py,html` (make a file for a new language); and/or
-2. `python manage.py makemessages -a` (updates existing files)
+2. `python manage.py makemessages -a` (update existing files)
 3. Send the .po files to your translator(s) and have them fill in translation strings.
-4. `django-admin.py compilemessages` (compiles .po files processed by your translators into .mo files usable by the computer)
+4. `django-admin.py compilemessages` (compile .po files processed by your translators into .mo files usable by the computer)
+
+If you are adding a new language to the site, you will also need to add it to the settings file. Edit the `LANGUAGES` variable in `TWLight/settings/base.py`. It's OK to do this after you get the file from the translator; Django has suitable built-in translations of language names. IN fact, it's considerate to wait until after getting the translation file, because users may be frustrated if they choose a language and the site cannot display in that language.
+
+The contents of the `LANGUAGES` variable will automatically be offered to users as options for site translation on their user profile pages. If they choose a language that doesn't yet have a translation file available, the site will render in the default language specified by LANGUAGE_CODE. (Users may not be able to read this, but the app will not crash.) If the translation file is incomplete, translation strings will be rendered in their original language (probably English).
 
 ## Troubleshooting
 ### Having trouble setting things up?
