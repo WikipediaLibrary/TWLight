@@ -1,13 +1,14 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.helper import FormHelper, Layout
+from crispy_forms.layout import Submit, Button, Field
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.forms import ModelForm
+from django import forms
 from django.utils.translation import ugettext as _
 
 from .models import Editor
 
-class EditorUpdateForm(ModelForm):
+class EditorUpdateForm(forms.ModelForm):
     class Meta:
         model = Editor
         fields = ['home_wiki', 'contributions']
@@ -26,3 +27,14 @@ class EditorUpdateForm(ModelForm):
 
         editor = self.instance
         self.helper.form_action = reverse('users:editor_update', args=[editor.id])
+
+
+
+class SetLanguageForm(forms.Form):
+    language = forms.ChoiceField(settings.LANGUAGES)
+
+    def __init__(self, *args, **kwargs):
+        super(SetLanguageForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.label_class = 'sr-only'
+

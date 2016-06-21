@@ -25,6 +25,8 @@ urlpatterns = [
         auth_views.logout,
         {'next_page': '/'},
         name='auth_logout'),
+    # This makes the set language URL available.
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # Third-party --------------------------------------------------------------
     url(r'^comments/', include('django.contrib.comments.urls')),

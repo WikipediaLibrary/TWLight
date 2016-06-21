@@ -8,7 +8,7 @@ from django.utils.decorators import classonlymethod
 
 from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly
 
-from .forms import EditorUpdateForm
+from .forms import EditorUpdateForm, SetLanguageForm
 from .models import Editor
 
 
@@ -22,6 +22,12 @@ class UserDetailView(SelfOnly, TemplateView):
         """
         assert 'pk' in self.kwargs.keys()
         return User.objects.get(pk=self.kwargs['pk'])
+
+
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        context['language_form'] = SetLanguageForm()
+        return context
 
 
 
@@ -43,6 +49,7 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
         context['editor'] = editor # allow for more semantic templates
         context['object_list'] = editor.applications.all().order_by('status')
         context['form'] = EditorUpdateForm(instance=editor)
+        context['language_form'] = SetLanguageForm()
         return context
 
 

@@ -1,0 +1,28 @@
+{% comment %}
+  This whole thing exists because crispy forms insists on applying a
+  btn-primary class to Submit buttons, but replacing them with Button or
+  StrictButton yields a form that can't submit. Argh.
+{% endcomment %}
+
+{% load i18n %}
+{% load crispy_forms_field %}
+{% load crispy_forms_utils %}
+
+<div class="clearfix">
+  <form action="/i18n/setlang/" method="post" class="form-inline">
+    {% csrf_token %}
+    {% if form_show_errors %}
+      {% include "bootstrap3/errors.html" %}
+    {% endif %}
+    {% for field in language_form %}
+      <div id="div_{{ field.auto_id }}" class="form-group">
+          <label for="{{ field.id_for_label }}" class="sr-only">
+            {{ field.label|safe }}
+          </label>
+          {% crispy_field field 'placeholder' field.label %}
+      </div>
+    {% endfor %}
+    <input type="submit" name="submit" value="{% trans "Set language" %}" class="btn btn-default" />
+  </form>
+  <br />
+</div>
