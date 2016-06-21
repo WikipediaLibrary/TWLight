@@ -44,6 +44,9 @@ logger = logging.getLogger(__name__)
 class Editor(models.Model):
     class Meta:
         app_label = 'users'
+        # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
+        verbose_name = 'wikipedia editor'
+        verbose_name_plural = 'wikipedia editors'
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.

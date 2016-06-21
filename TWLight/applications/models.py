@@ -12,6 +12,8 @@ from TWLight.users.models import Editor
 class Application(models.Model):
     class Meta:
         app_label = 'applications'
+        verbose_name = 'application'
+        verbose_name_plural = 'applications'
 
 
     PENDING = 0

@@ -13,6 +13,8 @@ class Partner(models.Model):
     """
     class Meta:
         app_label = 'resources'
+        verbose_name = 'partner'
+        verbose_name_plural = 'partners'
 
 
     company_name = models.CharField(max_length=30,
@@ -99,6 +101,8 @@ class Stream(models.Model):
     """
     class Meta:
         app_label = 'resources'
+        verbose_name = 'collection'
+        verbose_name_plural = 'collections'
 
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
@@ -129,6 +133,8 @@ class Contact(models.Model):
     """
     class Meta:
         app_label = 'resources'
+        verbose_name = 'contact person'
+        verbose_name_plural = 'contact people'
 
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="contacts")
