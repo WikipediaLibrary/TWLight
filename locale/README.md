@@ -11,7 +11,7 @@ Run these commands from the root `TWLight/` directory.
 1.`python manage.py makemessages -l <language_code> -e py,html` (make a file for a new language); and/or
 2. `python manage.py makemessages -a` (update existing files)
 3. Send the .po files to your translator(s) and have them fill in translation strings.
-4. `django-admin.py compilemessages` (compile .po files processed by your translators into .mo files usable by the computer)
+4. `python manage.py compilemessages` (compile .po files processed by your translators into .mo files usable by the computer)
 
 If you are adding a new language to the site, you will also need to add it to the settings file. Edit the `LANGUAGES` variable in `TWLight/settings/base.py`. It's OK to do this after you get the file from the translator; Django has suitable built-in translations of language names. IN fact, it's considerate to wait until after getting the translation file, because users may be frustrated if they choose a language and the site cannot display in that language.
 
@@ -48,3 +48,7 @@ You can fix them manually. You can also improve your code to make them less like
 * Format multiline strings in .py files in ways that do not have leading or terminating newlines
 
 You should also ensure your translators know that they need to preserve whitespace (including whitespace-only lines), and that `\n` is a whitespace character.
+
+### `CommandError: The /path/to/django.po file has a BOM (Byte Order Mark). Django only supports .po files encoded in UTF-8 and without any BOM.` ?
+
+Remove the BOM. Techniques vary. See, e.g., https://stackoverflow.com/questions/1068650/using-awk-to-remove-the-byte-order-mark (command line) or http://blog.toshredsyousay.com/post/27543408832/how-to-add-or-remove-a-byte-order-mark (Sublime Text).
