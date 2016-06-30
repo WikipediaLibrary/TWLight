@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
@@ -41,6 +43,7 @@ class Partner(models.Model):
         "time. This field must be filled in when Partners have multiple "
         "Streams, but may be left blank otherwise.")
 
+    # See comment in save().
     access_grant_term = DurationField(
         blank=True, null=True,
         help_text="The standard length of an access grant from this Partner. " \
@@ -71,10 +74,17 @@ class Partner(models.Model):
 
 
     def save(self, *args, **kwargs):
+        if not self.access_grant_term:
+            # We can't declare a default access grant term in the ORM due to a
+            # bug not fixed in Django until 1.8:
+            # https://code.djangoproject.com/ticket/24566
+            # However, code elsewhere expects the access grant term to exist.
+            # So we will make sure it happens on model save.
+            self.access_grant_term = timedelta(days=20)
         if self.agreement_with_terms_of_use and not self.terms_of_use:
             raise ValidationError('When agreement with terms of use is '
                 'required, a link to terms of use must be provided.')
-        if self.streams.count():
+        if self.streams.count() > 1:
             if self.mutually_exclusive is None:
                 raise ValidationError('Since this resource has multiple '
                     'Streams, you must specify a value for mutually_exclusive.')
