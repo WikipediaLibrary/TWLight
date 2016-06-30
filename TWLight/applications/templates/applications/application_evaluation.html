@@ -146,7 +146,7 @@
               <span class="pull-left">
                 {% if forloop.last %}
                   {% blocktrans trimmed with user=version.revision.user review_date=version.revision.date_created|localize %}
-                    Submitted by{{ user }} on {{ review_date }}
+                    Submitted by {{ user }} on {{ review_date }}
                   {% endblocktrans %}
                 {% else %}
                   {% blocktrans trimmed with user=version.revision.user review_date=version.revision.date_created|localize %}
