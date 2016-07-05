@@ -8,10 +8,29 @@
 <h1>{% trans 'What do you want to access?' %}</h1>
 
 <form method="post">
-    {% csrf_token %}
-    {{ form | crispy }}
-    <br />
-    <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="form-group">
+      {% if field.errors %}
+        {{ field.errors }}
+      {% endif %}
+      <div id="div_id_{{ field.name }}" class="checkbox">
+        <label for="id_{{ field.name }}" class="pull-left">
+          <input class="checkboxinput checkbox" id="id_{{ field.name }}" name="{{ field.name }}" type="checkbox" />
+        </label>
+        <div class="col-xs-12 col-sm-3">
+          {% with field.field.widget.attrs.object as partner %}
+            {% include "resources/partner_tile.html" %}
+          {% endwith %}
+        </div>
+        <div class="clearfix hidden-xs"></div>
+      </div>
+    </div>
+  {% empty %}
+    {% trans "No partner data has been added to the database yet." %}
+  {% endfor %}
+  <br />
+  <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
 </form>
 
 {% endblock %}

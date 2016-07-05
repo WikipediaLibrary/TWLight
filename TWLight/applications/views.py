@@ -53,7 +53,12 @@ class RequestApplicationView(EditorsOnly, FormView):
             # http://stackoverflow.com/a/8289048
             field_name = 'partner_{id}'.format(id=partner.id)
             fields[field_name] = forms.BooleanField(
-                label=partner.company_name, required=False)
+                label=partner.company_name,
+                required=False,
+                # We need to pass the partner to the front end in order to
+                # render the partner information tiles. Widget attrs appear to
+                # be the place we can stash arbitrary metadata. Ugh.
+                widget=forms.CheckboxInput(attrs={'object': partner}))
             field_order.append(partner.company_name)
 
         form_class = type('RfAForm', (forms.Form,), fields)
