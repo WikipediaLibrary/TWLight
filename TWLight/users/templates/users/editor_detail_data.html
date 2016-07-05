@@ -2,7 +2,7 @@
 
   {% include 'users/language_form.html' %}
 
-  <div class="row">
+  <div class="row clearfix">
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia username *" %}</strong>
     </div>
@@ -13,14 +13,18 @@
         {{ editor.wp_username }}
       {% endif %}
     </div>
+  </div>
 
+  <div class="row clearfix">
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia user ID *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
       {{ editor.wp_sub }}
     </div>
+  </div>
 
+  <div class="row clearfix">
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Home wiki" %}</strong>
     </div>
@@ -33,21 +37,27 @@
       {% endifequal %}
       <br />
     </div>
+  </div>
 
+  <div class="row clearfix">
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Wikipedia edit count *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
       {{ editor.wp_editcount }}
     </div>
+  </div>
 
+  <div class="row clearfix">
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Date registered on Wikipedia *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
       {{ editor.wp_registered }}
     </div>
+  </div>
 
+  <div class="row clearfix">
     <div class="col-xs-12 col-sm-4">
       <strong>{% trans "Contributions" %}</strong>
     </div>
@@ -60,7 +70,9 @@
       {% endifequal %}
       <br />
     </div>
+  </div>
 
+  <div class="row clearfix">
     <div class="col-xs-12 col-sm-4">
       {# Translators: The groups will be listed in English even if the site isn't English; we get them directly from Wikipedia. #}
       <strong>{% trans "Wikipedia groups *" %}</strong>
@@ -72,7 +84,9 @@
         {% endfor %}
       </ul>
     </div>
+  </div>
 
+  <div class="row clearfix">
     <div class="col-xs-12 col-sm-4">
       {# Translators: The rights will be listed in English even if the site isn't English; we get them directly from Wikipedia. #}
       <strong>{% trans "Wikipedia user rights *" %}</strong>
@@ -84,8 +98,10 @@
         {% endfor %}
       </ul>
     </div>
+  </div>
 
-    {% ifequal editor.user user %}
+  {% ifequal editor.user user %}
+    <div class="row clearfix">
       <div class="col-xs-12 col-sm-4">
         <strong>{% trans "Email *" %}</strong>
       </div>
@@ -97,5 +113,5 @@
           volunteer Wikipedia Library coordinators.
         {% endblocktrans %}
       </div>
-    {% endifequal %}
-  </div>
+    </div>
+  {% endifequal %}
