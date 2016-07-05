@@ -32,7 +32,7 @@
   {% include 'users/editor_detail_data.html' %}
 
   <p>
-    {% blocktrans with account_created_date=editor.account_created|localize %}
+    {% blocktrans with account_created_date=editor.date_created|localize %}
       Information with an * was retrieved from Wikipedia directly.
       It was current as of {{ account_created_date }}.
       Changes made on Wikipedia since that time have not been reflected here.
