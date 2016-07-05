@@ -193,18 +193,19 @@
             {% trans "Review applications" %}
           </a>
         </li>
-        <li role="presentation">
-          <a href="{% url 'dashboard' %}">
-            {% trans "See metrics" %}
-          </a>
-        </li>
       {% endif %}
+      {# All users get to see metrics, so let them all see the link, too. #}
+      <li role="presentation">
+        <a href="{% url 'dashboard' %}">
+          {% trans "See metrics" %}
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="{% url 'partners:list' %}">
+          {% trans "Browse partners" %}
+        </a>
+      </li>
       {% if user.is_authenticated %}
-        <li role="presentation">
-          <a href="{% url 'partners:list' %}">
-            {% trans "Browse partners" %}
-          </a>
-        </li>
         <li role="presentation">
           <a href="{% url 'auth_logout' %}">
             {% trans "Log out" %}

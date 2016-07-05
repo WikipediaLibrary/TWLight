@@ -15,11 +15,9 @@
     {% endfor %}    
   </div>
 
-  {% if user|coordinators_only %}
-    <p>
-      {% blocktrans %}
-        You'll be able to see per-partner metrics on the partner pages.
-      {% endblocktrans %}      
-    </p>
-  {% endif %}
+  <p>
+    {% blocktrans %}
+      You can see per-partner metrics on the partner pages.
+    {% endblocktrans %}      
+  </p>
 {% endblock content %}

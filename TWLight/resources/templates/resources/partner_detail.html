@@ -142,165 +142,160 @@
     list streams
 {% endcomment %}
 
-  {% if user|coordinators_only %}
-    <h2>{% trans "Metrics" %}</h2>
+  <h2>{% trans "Metrics" %}</h2>
 
-    <div class="row">
-      <div class="col-xs-12 col-md-4">
-        <div class="panel panel-green">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3">
-                <i class="fa fa-align-left fa-5x"></i>
-              </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">{{ total_apps }}</div>
-                <div>{% trans 'Total applications (all time)' %}</div>
-              </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-green">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-align-left fa-5x"></i>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-4">
-        <div class="panel panel-yellow">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3">
-                <i class="fa fa-users fa-5x"></i>
-              </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">{{ unique_users }}</div>
-                <div>{% trans 'Total unique applicants (all time)' %}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-4">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3">
-                <i class="fa fa-clock-o fa-5x"></i>
-              </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">{{ median_days }}</div>
-                <div>{% trans 'Median days from application to decision' %}</div>
-              </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">{{ total_apps }}</div>
+              <div>{% trans 'Total applications (all time)' %}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-yellow">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-users fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">{{ unique_users }}</div>
+              <div>{% trans 'Total unique applicants (all time)' %}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-clock-o fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">{{ median_days }}</div>
+              <div>{% trans 'Median days from application to decision' %}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <h3>{% trans "Applications by status" %} <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-    
-    <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+  <h3>{% trans "Applications by status" %} <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+  
+  <div id="app-distribution-graph" style="width:600px;height:300px"></div>
 
-    {% comment %}
-      TODO: reuse the infographic number idiom here, probably as sidebar
-    {% endcomment %}
-    <p>
-      {% blocktrans count counter=total_apps_approved %}
-        Number of applications approved (all time): {{ total_apps_approved }}
-      {% plural %}
-        Number of applications approved (all time): {{ total_apps_approved }}
-      {% endblocktrans %}
-    </p>
+  {% comment %}
+    TODO: reuse the infographic number idiom here, probably as sidebar
+  {% endcomment %}
+  <p>
+    {% blocktrans count counter=total_apps_approved %}
+      Number of applications approved (all time): {{ total_apps_approved }}
+    {% plural %}
+      Number of applications approved (all time): {{ total_apps_approved }}
+    {% endblocktrans %}
+  </p>
 
-    <p>
-      {% blocktrans count counter=unique_users_approved %}
-        Number of unique users with approved applications (all time): {{ unique_users_approved }}
-      {% plural %}
-        Number of unique users with approved applications (all time): {{ unique_users_approved }}
-      {% endblocktrans %}
-    </p>
+  <p>
+    {% blocktrans count counter=unique_users_approved %}
+      Number of unique users with approved applications (all time): {{ unique_users_approved }}
+    {% plural %}
+      Number of unique users with approved applications (all time): {{ unique_users_approved }}
+    {% endblocktrans %}
+  </p>
 
-    <h3>{% trans "Applications over time" %}</h3>
-    
-    <h4>{% trans "All applications" %} <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h4>
-    
-    <div id="signups-time-graph" style="width:600px;height:300px"></div>
+  <h3>{% trans "Applications over time" %}</h3>
+  
+  <h4>{% trans "All applications" %} <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h4>
+  
+  <div id="signups-time-graph" style="width:600px;height:300px"></div>
 
-    <h4>{% trans "Approved applications only" %} <a href="{% url 'csv:approved_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h4>
-    
-    <div id="approved-signups-time-graph" style="width:600px;height:300px"></div>
+  <h4>{% trans "Approved applications only" %} <a href="{% url 'csv:approved_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h4>
+  
+  <div id="approved-signups-time-graph" style="width:600px;height:300px"></div>
 
-    <h3>{% trans "Unique users over time" %} <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+  <h3>{% trans "Unique users over time" %} <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
 
-    <div id="users-time-graph" style="width:600px;height:300px"></div>
-
-  {% endif %}
+  <div id="users-time-graph" style="width:600px;height:300px"></div>
 {% endblock content %}
 
 {% block javascript %}
-  {% if user|coordinators_only %} {# we only show metrics for coordinators #}
-    <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-    <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.js" %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.pie.js" %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.time.js" %}"></script>
+  <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.js" %}"></script>
+  <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.pie.js" %}"></script>
+  <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.time.js" %}"></script>
 
-    <script type="text/javascript">
-      $(function() {
-        // All applicationss by time
-        var signups_time_graph = $("#signups-time-graph");
-        var signups_time_data = {{ signups_time_data | safe }};
-        var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {
-          xaxis: {
-            mode: "time",
-            tickSize: [1, 'month'],
-          },
-          yaxis: {
-            min: 0,
-            minTickSize: 1,
-            tickDecimals: 0,
-          },
-          colors: ['#5cb85c'],
-        });
-
-        // Approved applications by time
-        var approved_signups_time_graph = $("#approved-signups-time-graph");
-        var approved_signups_time_data = {{ approved_signups_time_data | safe }};
-        var approved_signups_time_plot = $.plot(approved_signups_time_graph, [approved_signups_time_data], {
-          xaxis: {
-            mode: "time",
-            tickSize: [1, 'month'],
-          },
-          yaxis: {
-            min: 0,
-            minTickSize: 1,
-            tickDecimals: 0,
-          },
-          colors: ['#5cb85c'],
-        });
-
-        // Unique users by time
-        var users_time_graph = $("#users-time-graph");
-        var users_time_data = {{ users_time_data | safe }};
-        var users_time_plot = $.plot(users_time_graph, [users_time_data], {
-          xaxis: {
-            mode: "time",
-            tickSize: [1, 'month'],
-          },
-          yaxis: {
-            min: 0,
-            minTickSize: 1,
-            tickDecimals: 0,
-          },
-          colors: ['#f0ad4e'],
-        });
-
-        // Application status distribution (pie chart)
-        var app_distribution_graph = $("#app-distribution-graph");
-        var app_distribution_data = {{ app_distribution_data | safe }};
-        var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
-          series: {
-            pie: { 
-              show: true,
-            }
-          },
-        });
+  <script type="text/javascript">
+    $(function() {
+      // All applicationss by time
+      var signups_time_graph = $("#signups-time-graph");
+      var signups_time_data = {{ signups_time_data | safe }};
+      var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {
+        xaxis: {
+          mode: "time",
+          tickSize: [1, 'month'],
+        },
+        yaxis: {
+          min: 0,
+          minTickSize: 1,
+          tickDecimals: 0,
+        },
+        colors: ['#5cb85c'],
       });
-    </script>
-  {% endif %}
+
+      // Approved applications by time
+      var approved_signups_time_graph = $("#approved-signups-time-graph");
+      var approved_signups_time_data = {{ approved_signups_time_data | safe }};
+      var approved_signups_time_plot = $.plot(approved_signups_time_graph, [approved_signups_time_data], {
+        xaxis: {
+          mode: "time",
+          tickSize: [1, 'month'],
+        },
+        yaxis: {
+          min: 0,
+          minTickSize: 1,
+          tickDecimals: 0,
+        },
+        colors: ['#5cb85c'],
+      });
+
+      // Unique users by time
+      var users_time_graph = $("#users-time-graph");
+      var users_time_data = {{ users_time_data | safe }};
+      var users_time_plot = $.plot(users_time_graph, [users_time_data], {
+        xaxis: {
+          mode: "time",
+          tickSize: [1, 'month'],
+        },
+        yaxis: {
+          min: 0,
+          minTickSize: 1,
+          tickDecimals: 0,
+        },
+        colors: ['#f0ad4e'],
+      });
+
+      // Application status distribution (pie chart)
+      var app_distribution_graph = $("#app-distribution-graph");
+      var app_distribution_data = {{ app_distribution_data | safe }};
+      var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
+        series: {
+          pie: { 
+            show: true,
+          }
+        },
+      });
+    });
+  </script>
 {% endblock javascript %}

@@ -9,7 +9,6 @@ from django.utils.translation import ugettext as _
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
-from TWLight.view_mixins import CoordinatorsOnly
 
 from .helpers import (get_application_status_data,
                       get_data_count_by_month,
@@ -25,9 +24,9 @@ from .helpers import (get_application_status_data,
 logger = logging.getLogger(__name__)
 
 
-class DashboardView(CoordinatorsOnly, TemplateView):
+class DashboardView(TemplateView):
     """
-    Allow coordinators to see metrics about the application process.
+    Let people see metrics about the application process.
     """
     template_name = 'dashboard.html'
 
@@ -111,7 +110,7 @@ class DashboardView(CoordinatorsOnly, TemplateView):
 # These views power "download as CSV" buttons. They provide the same data sets
 # that are reflected in the DashboardView, but as HttpResponses with csv data.
 
-class _CSVDownloadView(CoordinatorsOnly, View):
+class _CSVDownloadView(View):
     """
     Base view powering CSV downloads. Not intended to be used directly.
     URLs should point at subclasses of this view. Subclasses should implement a
