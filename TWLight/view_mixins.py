@@ -95,3 +95,15 @@ class SelfOnly(UserPassesTestMixin):
             obj_owner_test = (self.get_object().user == user)
 
         return obj_owner_test
+
+
+class ToURequired(UserPassesTestMixin):
+    """
+    Restricts visibility to:
+    * Users who have agreed with the site's terms of use.
+    """
+
+    login_url = reverse_lazy('users:terms_of_use')
+
+    def test_func(self, user):
+        return hasattr(user, 'editor')

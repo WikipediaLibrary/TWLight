@@ -159,3 +159,8 @@ class ViewsTestCase(TestCase):
 # receiving signal from oauth results in creation of editor model
 # site admin status is false
 # editor model contains all expected info (mock out the signal)
+
+# Terms of use
+# After login they should be redirected to agreement page if not agreed
+# Likewise for request-for-application
+# Also for the application page itself

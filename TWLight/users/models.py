@@ -31,6 +31,7 @@ import json
 import logging
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -41,7 +42,38 @@ from .helpers.wiki_list import WIKIS
 logger = logging.getLogger(__name__)
 
 
+class UserProfile(models.Model):
+    """
+    This is for storing data that relates only to accounts on TWLight, _not_ to
+    Wikipedia accounts. All TWLight users have user profiles.
+    """
+    class Meta:
+        app_label = 'users'
+        # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
+        verbose_name = 'user profile'
+        verbose_name_plural = 'user profiles'
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    # Have they agreed to our terms?
+    terms_of_use = models.BooleanField(default=False)
+
+
+# Create user profiles automatically when users are created.
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+models.signals.post_save.connect(create_user_profile,
+                                 sender=settings.AUTH_USER_MODEL)
+
+
 class Editor(models.Model):
+    """
+    This model is for storing data related to people's accounts on Wikipedia.
+    It is possible for users to have TWLight accounts and not have associated
+    editors (if the account was created via manage.py createsuperuser),
+    although some site functions will not be accessible.
+    """
     class Meta:
         app_label = 'users'
         # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
