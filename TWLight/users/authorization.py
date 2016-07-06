@@ -190,11 +190,14 @@ class OAuthCallbackView(View):
         created = request.session.pop('user_created', False)
 
         if created:
-            messages.add_message(request, messages.INFO, _('Welcome back!'))
-            url = reverse_lazy('users:editor_detail',
+            # Translators: this message is displayed to users with brand new accounts.
+            messages.add_message(request, messages.INFO, _('Welcome! Please '
+                'agree to the terms of use.'))
+            url = reverse_lazy('terms',
                 kwargs={'pk': user.editor.pk})
         else:
-            url = reverse_lazy('users:editor_update',
+            messages.add_message(request, messages.INFO, _('Welcome back!'))
+            url = reverse_lazy('users:editor_detail',
                 kwargs={'pk': user.editor.pk})
 
         return HttpResponseRedirect(url)

@@ -1,12 +1,13 @@
-from crispy_forms.helper import FormHelper, Layout
-from crispy_forms.layout import Submit, Button, Field
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Submit
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django import forms
 from django.utils.translation import ugettext as _
 
-from .models import Editor
+from .models import Editor, UserProfile
+
 
 class EditorUpdateForm(forms.ModelForm):
     class Meta:
@@ -38,3 +39,24 @@ class SetLanguageForm(forms.Form):
         self.helper = FormHelper()
         self.helper.label_class = 'sr-only'
 
+
+
+class TermsForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['terms_of_use']
+
+
+    def __init__(self, *args, **kwargs):
+        super(TermsForm, self).__init__(*args, **kwargs)
+
+        self.fields['terms_of_use'].label = _("I agree with the terms of use")
+
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-inline'
+        self.helper.field_template = 'bootstrap3/layout/inline_field.html'
+
+        self.helper.layout = Layout(
+            'terms_of_use',
+            Submit('submit', 'Submit', css_class='btn btn-default')
+        )

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -8,8 +9,8 @@ from django.utils.decorators import classonlymethod
 
 from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly
 
-from .forms import EditorUpdateForm, SetLanguageForm
-from .models import Editor
+from .forms import EditorUpdateForm, SetLanguageForm, TermsForm
+from .models import Editor, UserProfile
 
 
 class UserDetailView(SelfOnly, TemplateView):
@@ -101,7 +102,6 @@ class EditorUpdateView(SelfOnly, UpdateView):
 
 
 
-
 class DenyAuthenticatedUsers(View):
     """
     This view is provided for use in view_mixins.py.
@@ -115,4 +115,55 @@ class DenyAuthenticatedUsers(View):
         if request.user.is_authenticated():
             raise PermissionDenied
         else:
-            return redirect_to_login(request.get_full_path())            
+            return redirect_to_login(request.get_full_path())
+
+
+
+class TermsView(UpdateView):
+    """
+    For authenticated users, this is a perfectly normal UpdateView that updates
+    their UserProfile with their decision on agreeing with the Terms of Use. It
+    also displays those terms.
+
+    For anonymous users, this view still displays the terms, but it does not
+    generate or show the form for agreeing with the terms, because that wouldn't
+    make any sense.
+    """
+    model = UserProfile
+    success_url = reverse_lazy('users:home')
+    template_name = 'users/terms.html'
+    form_class = TermsForm
+
+    def get_object(self, queryset=None):
+        """
+        For authenticated users, returns their associated UserProfile instance.
+        For anonymous users, returns None.
+        """
+        if self.request.user.is_authenticated():
+            return self.request.user.userprofile
+        else:
+            return None
+
+
+    def get_form(self, form_class=None):
+        """
+        For authenticated users, returns an instance of the form to be used in
+        this view. For anonymous users, returns None.
+        """
+        kwargs = self.get_form_kwargs()
+
+        if 'instance' not in kwargs:
+            return None
+        else:
+            return form_class(**self.get_form_kwargs())
+
+
+    def get_form_kwargs(self):
+        """
+        For authenticated users, returns the keyword arguments for instantiating
+        the form. For anonymous users, returns None.
+        """
+        kwargs = super(TermsView, self).get_form_kwargs()
+        if self.request.user.is_authenticated():
+            kwargs.update({'instance': self.request.user.userprofile})
+        return kwargs

@@ -10,11 +10,12 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 from TWLight.applications.urls import urlpatterns as applications_urls
+from TWLight.graphs.urls import csv_urlpatterns as csv_urls
+from TWLight.graphs.views import DashboardView
 from TWLight.resources.urls import urlpatterns as partners_urls
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
-from TWLight.graphs.urls import csv_urlpatterns as csv_urls
-from TWLight.graphs.views import DashboardView
+from TWLight.users.views import TermsView
 
 
 urlpatterns = [
@@ -51,4 +52,8 @@ urlpatterns = [
         name='dashboard'
     ),
 
+    url(r'^terms/$',
+        TermsView.as_view(),
+        name='terms'
+    ),
 ]

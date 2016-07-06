@@ -31,7 +31,6 @@ import json
 import logging
 
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -53,6 +52,7 @@ class UserProfile(models.Model):
         verbose_name = 'user profile'
         verbose_name_plural = 'user profiles'
 
+    # Related name for backwards queries defaults to "userprofile".
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Have they agreed to our terms?
     terms_of_use = models.BooleanField(default=False,
