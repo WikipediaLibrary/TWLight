@@ -55,7 +55,8 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Have they agreed to our terms?
-    terms_of_use = models.BooleanField(default=False)
+    terms_of_use = models.BooleanField(default=False,
+        help_text=_("Has this user agreed with the terms of use?"))
 
 
 # Create user profiles automatically when users are created.
