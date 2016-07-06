@@ -32,17 +32,11 @@
   {% include 'users/editor_detail_data.html' %}
 
   <p>
-    {% blocktrans with account_created_date=editor.date_created|localize %}
-      Information with an * was retrieved from Wikipedia directly.
-      It was current as of {{ account_created_date }}.
-      Changes made on Wikipedia since that time have not been reflected here.
-    {% endblocktrans %}
-  </p>
-  <p>
     {% blocktrans with last_updated_date=editor.last_updated|localize %}
+      Information with an * was retrieved from Wikipedia directly.
       Other information was entered directly by users or site admins,
       in their preferred language.
-      It was last edited on {{ last_updated_date }}.
+      It was last updated on {{ last_updated_date }}.
     {% endblocktrans %}
   </p>
 
