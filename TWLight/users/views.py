@@ -1,13 +1,17 @@
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.utils.decorators import classonlymethod
+from django.utils.http import is_safe_url
+from django.utils.translation import ugettext_lazy as _
 
-from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly
+from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly, coordinators
 
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm
 from .models import Editor, UserProfile
@@ -130,7 +134,6 @@ class TermsView(UpdateView):
     make any sense.
     """
     model = UserProfile
-    success_url = reverse_lazy('users:home')
     template_name = 'users/terms.html'
     form_class = TermsForm
 
@@ -167,3 +170,48 @@ class TermsView(UpdateView):
         if self.request.user.is_authenticated():
             kwargs.update({'instance': self.request.user.userprofile})
         return kwargs
+
+
+    def get_success_url(self):
+        def is_real_url(url):
+            """
+            Users might have altered the URL parameters. Let's not just blindly
+            redirect; let's actually make sure we can get somewhere first.
+            """
+            try:
+                resolve(url)
+                return True
+            except Resolver404:
+                return False
+
+
+        if self.get_object().terms_of_use:
+            # If they agreed with the terms, awesome. Send them where they were
+            # trying to go, if there's a meaningful `next` parameter in the URL;
+            # if not, send them to their home page as a sensible default.
+            next_param = self.request.GET.get(REDIRECT_FIELD_NAME, '')
+            if (next_param and
+                is_safe_url(url=next_param, host=self.request.get_host()) and
+                is_real_url(next_param)):
+                return next_param
+            else:
+                return reverse_lazy('users:home')
+
+        else:
+            # If they didn't agree, that's cool, but we should make sure they
+            # know about the limits. Send them to their home page rather than
+            # trying to parse the next parameter, because parsing next will
+            # put them in an obnoxious redirect loop - send them to where
+            # they were going, which promptly sends them back to the terms
+            # page because they haven't agreed to the terms....
+            if self.request.user in coordinators.user_set.all():
+                fail_msg = _('You may explore the site, but you will not be '
+                  'able to apply for access to materials or evaluate '
+                  'applications unless you agree with the terms of use.')
+            else:
+                fail_msg = _('You may explore the site, but you will not be '
+                  'able to apply for access to materials unless you agree with '
+                  'the terms of use.')
+
+            messages.add_message(self.request, messages.WARNING, fail_msg)
+            return reverse_lazy('users:home')
