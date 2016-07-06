@@ -187,12 +187,8 @@ class OAuthCallbackView(View):
         user = authenticate(request=request, access_token=access_token)
         login(request, user)
 
-        # If this is a new user, we want to harvest their home wiki and
-        # contributions info. Otherwise, send them on their merry way.
         created = request.session.pop('user_created', False)
 
-        # TODO: screw this, it's hard, you should just add the form to the
-        # profile page if you lack the data and let them do it right there
         if created:
             messages.add_message(request, messages.INFO, _('Welcome back!'))
             url = reverse_lazy('users:editor_detail',
