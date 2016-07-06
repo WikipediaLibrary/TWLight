@@ -103,7 +103,7 @@ class ToURequired(UserPassesTestMixin):
     * Users who have agreed with the site's terms of use.
     """
 
-    login_url = reverse_lazy('users:terms_of_use')
+    login_url = reverse_lazy('terms')
 
     def test_func(self, user):
-        return hasattr(user, 'editor')
+        return user.userprofile.terms_of_use

@@ -21,7 +21,10 @@ from django.views.generic.base import TemplateView, View
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView, UpdateView
 
-from TWLight.view_mixins import CoordinatorsOrSelf, CoordinatorsOnly, EditorsOnly
+from TWLight.view_mixins import (CoordinatorsOrSelf,
+                                 CoordinatorsOnly,
+                                 EditorsOnly,
+                                 ToURequired)
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
 
@@ -37,7 +40,7 @@ logger = logging.getLogger(__name__)
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 
 
-class RequestApplicationView(EditorsOnly, FormView):
+class RequestApplicationView(ToURequired, EditorsOnly, FormView):
     template_name = 'applications/request_for_application.html'
 
     def get_form_class(self):
@@ -85,7 +88,7 @@ class RequestApplicationView(EditorsOnly, FormView):
 
 
 
-class SubmitApplicationView(EditorsOnly, FormView):
+class SubmitApplicationView(ToURequired, EditorsOnly, FormView):
     template_name = 'applications/apply.html'
     form_class = BaseApplicationForm
 
@@ -269,7 +272,7 @@ class SubmitApplicationView(EditorsOnly, FormView):
 
 
 
-class _BaseListApplicationView(CoordinatorsOnly, ListView):
+class _BaseListApplicationView(ToURequired, CoordinatorsOnly, ListView):
     """
     Factors out shared functionality for the application list views. Not
     intended to be user-facing. Subclasses should implement get_queryset().
@@ -496,7 +499,7 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
 
 
 
-class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
+class EvaluateApplicationView(ToURequired, CoordinatorsOrSelf, UpdateView):
     """
     Allows Coordinators to:
     * view single applications
@@ -532,7 +535,7 @@ class EvaluateApplicationView(CoordinatorsOrSelf, UpdateView):
 
 
 
-class BatchEditView(View):
+class BatchEditView(ToURequired, View):
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
@@ -584,7 +587,7 @@ class BatchEditView(View):
 # make sure people cannot set status on their own apps, even if they are coordinators
 # make sure people CAN see/comment on their apps
 
-class DiffApplicationsView(TemplateView):
+class DiffApplicationsView(ToURequired, TemplateView):
     # TODO not sure if I really want this. It may be just the comment thread we
     # need to track.
     template_name = "applications/diff.html"
