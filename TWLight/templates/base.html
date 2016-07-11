@@ -11,7 +11,7 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <title>
-    TWLight
+    {% trans "The Wikipedia Library Card Platform" %}
   </title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -226,9 +226,11 @@
   </nav>
   <header>
     <div class="row">
-      <div class="col-xs-12 col-sm-2">
-        <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive center-block">
-      </div>
+      <a href="{% url 'homepage' %}">
+        <div class="col-xs-12 col-sm-2">
+          <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive center-block">
+        </div>
+      </a>
       <div class="col-xs-12 col-sm-10">
         <h1 class="text-justify-sm">{% trans "The Wikipedia Library Card Platform" %}</h1>
       </div>      
@@ -248,9 +250,19 @@
   <footer id="footer">
     <div class="row">
       <div class="col-xs-12">
-        The Wikipedia Library Card Platform is a project of 
-        <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library">
-          {% trans "The Wikipedia Library" %}</a>.
+        <p>
+          {% blocktrans trimmed %}
+            The Wikipedia Library Card Platform is a project of 
+            <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library">
+            The Wikipedia Library</a>.              
+          {% endblocktrans %}
+        </p>
+        <hr />
+      </div>
+      <div class="col-xs-12">
+        <ul class="list-unstyled pull-right">
+          <li><a href="{% url 'terms' %}">{% trans "Terms of use" %}</a></li>
+        </ul>
       </div>
     </div>
   </footer>

@@ -17,6 +17,8 @@ from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 
+from .views import HomePageView
+
 
 urlpatterns = [
 	# Built-in -----------------------------------------------------------------
@@ -55,5 +57,10 @@ urlpatterns = [
     url(r'^terms/$',
         TermsView.as_view(),
         name='terms'
+    ),
+
+    url(r'^$',
+        HomePageView.as_view(),
+        name='homepage'
     ),
 ]
