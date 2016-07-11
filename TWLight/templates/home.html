@@ -22,7 +22,7 @@
         </div>
         <div class="timeline-panel">
           <div class="timeline-body">
-            <p>{{ event.text }}</p>
+            <p>{{ event.text | safe }}</p>
 
             <p class="small pull-right">
               {{ event.date | localize }}

@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 
@@ -68,9 +69,12 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-align-left'
             event['color'] = '' # grey (default when no color class is applied)
-            event['text'] = _('{username} applied for access to {partner}').format(
-                username=app.editor.wp_username,
-                partner=app.partner.company_name)
+            event['text'] = _('{username} applied for access to '
+                '<a href="{url}">{partner}</a>').format(
+                    username=app.editor.wp_username,
+                    partner=app.partner.company_name,
+                    url=reverse_lazy('partners:detail',
+                        kwargs={'pk': app.partner.pk}))
             event['date'] = app.date_created
             activity.append(event)
 
@@ -82,9 +86,12 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-align-left'
             event['color'] = 'info' # light blue
-            event['text'] = _('{username} received access to {partner}').format(
-                username=grant.editor.wp_username,
-                partner=grant.partner.company_name)
+            event['text'] = _('{username} received access to '
+                '<a href="{url}">{partner}</a>').format(
+                    username=grant.editor.wp_username,
+                    partner=grant.partner.company_name,
+                    url=reverse_lazy('partners:detail',
+                        kwargs={'pk': grant.partner.pk}))
             event['date'] = grant.date_closed
             activity.append(event)
 
