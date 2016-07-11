@@ -17,7 +17,7 @@ form that takes a dict of required fields, and constructs the form accordingly.
 
 import autocomplete_light
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput
+from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput, Div
 import logging
 import re
 
@@ -31,7 +31,8 @@ from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
                       PARTNER_FORM_BASE_FIELDS,
                       FIELD_TYPES,
-                      FIELD_LABELS)
+                      FIELD_LABELS,
+                      AGREEMENT_WITH_TERMS_OF_USE)
 from .models import Application
 
 
@@ -82,7 +83,7 @@ class BaseApplicationForm(forms.Form):
         # TODO: form layout for RTL
         # TODO: figure out how to activate translation & localization for
         # form error messages
-        self.helper = FormHelper()
+        self.helper = FormHelper(self)
         self._initialize_form_helper()
 
         self.helper.layout = Layout()
@@ -93,6 +94,10 @@ class BaseApplicationForm(forms.Form):
         # For each partner, build a partner data section of the form.
         for partner in self.field_params:
             self._add_partner_data_subform(partner)
+
+        # Make sure to align any checkbox inputs with other field types
+        self.helper.filter_by_widget(forms.CheckboxInput).wrap(
+            Div, css_class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3")
 
         self.helper.add_input(Submit(
             'submit',
@@ -188,6 +193,7 @@ class BaseApplicationForm(forms.Form):
                 self.fields[datum] = FIELD_TYPES[datum]
                 self.fields[datum].label = FIELD_LABELS[datum]
                 user_data_layout.append(datum)
+
             self.helper.layout.append(user_data_layout)
 
 
@@ -212,6 +218,14 @@ class BaseApplicationForm(forms.Form):
                     partner=partner, datum=datum)
                 self.fields[field_name] = FIELD_TYPES[datum]
                 self.fields[field_name].label = FIELD_LABELS[datum]
+
+                if datum == AGREEMENT_WITH_TERMS_OF_USE:
+                    # Make sure that, if the partner requires agreement with
+                    # terms of use, that link is provided inline.
+                    help_text = '<a href="{url}">{url}</a>'.format(
+                        url=partner_object.terms_of_use)
+                    self.fields[field_name].help_text = help_text
+
                 partner_layout.append(field_name)
 
             self.helper.layout.append(partner_layout)
