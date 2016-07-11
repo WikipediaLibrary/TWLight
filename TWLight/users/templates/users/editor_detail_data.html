@@ -132,23 +132,78 @@
   {% ifequal editor.user user %}
     <hr />
 
+    <h3>Personal data</h3>
+
+    <p>
+      <span class="glyphicon glyphicon-info-sign"></span>
+      {% blocktrans trimmed %}
+        The following information is visible only to you, site administrators,
+        and (where required) publishing partners. It is not visible to volunteer Wikipedia Library coordinators.
+      {% endblocktrans %}
+    </p>
+
+    <p>
+      {% url 'users:pii_update' as update_url %}
+      {% blocktrans trimmed %}
+        You may <a href="{{ update_url }}">update or delete</a>
+        your data at any time.
+      {% endblocktrans %}
+    </p>
+
+    <hr />
+
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-3">
         <strong>{% trans "Email *" %}</strong>
       </div>
       <div class="col-xs-12 col-sm-9">
         {{ editor.user.email }}
-        {% ifequal editor.user user %}
-          <br />
-          <a href="{% url 'users:email_change' %}">{% trans "(update)" %}</a>
-        {% endifequal %}
-        <p>
-          <span class="glyphicon glyphicon-info-sign"></span>
-          {% blocktrans trimmed %}
-            Your email is visible only to you and site administrators, not to
-            volunteer Wikipedia Library coordinators.
-          {% endblocktrans %}
-        </p>
       </div>
     </div>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Real name" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.real_name }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Country of residence" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.country_of_residence }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Occupation" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.occupation }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Institutional affiliation" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.affiliation }}
+      </div>
+    </div>
+
+    <hr />
   {% endifequal %}

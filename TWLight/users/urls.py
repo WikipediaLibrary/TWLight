@@ -18,4 +18,7 @@ urlpatterns = [
     url(r'^email_change/$',
         views.EmailChangeView.as_view(),
         name='email_change'),
+    url(r'^update/$',
+        views.PIIUpdateView.as_view(),
+        name='pii_update'),
 ]

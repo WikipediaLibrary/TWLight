@@ -102,10 +102,62 @@ class EditorUpdateView(SelfOnly, UpdateView):
 
     This is intended for user during the original OAuth user creation flow, but
     can also be used if we'd like to let editors change this info later.
+
+    We handle personally identifying information through PIIUpdateView.
     """
     model = Editor
     template_name = 'users/editor_update.html'
     form_class = EditorUpdateForm
+
+
+
+class PIIUpdateView(SelfOnly, UpdateView):
+    """
+    Allow Editors to add the information we can't harvest from OAuth, but
+    would nonetheless like to have.
+
+    This is intended for user during the original OAuth user creation flow, but
+    can also be used if we'd like to let editors change this info later.
+
+    We handle personally identifying information through PIIUpdateView.
+    """
+    model = Editor
+    template_name = 'users/editor_update.html'
+    fields = ['real_name', 'country_of_residence', 'occupation', 'affiliation']
+
+    def get_object(self):
+        """
+        Users may only update their own information.
+        """
+        try:
+            assert self.request.user.is_authenticated()
+        except AssertionError:
+            raise PermissionDenied
+
+        return self.request.user.editor
+
+
+    def get_form(self, form_class):
+        """
+        Define get_form so that we can apply crispy styling.
+        """
+        form = super(PIIUpdateView, self).get_form(form_class)
+        form.helper = FormHelper()
+        form.helper.add_input(Submit(
+            'submit',
+            _('Update information'),
+            css_class='center-block'))
+
+        return form
+
+
+    def get_success_url(self):
+        """
+        Define get_success_url so that we can add a success message.
+        """
+        messages.add_message(self.request, messages.SUCCESS,
+            _('Your information has been updated.'))
+        return reverse_lazy('users:home')
 
 
 
