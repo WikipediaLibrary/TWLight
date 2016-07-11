@@ -80,7 +80,7 @@ class Partner(models.Model):
             # https://code.djangoproject.com/ticket/24566
             # However, code elsewhere expects the access grant term to exist.
             # So we will make sure it happens on model save.
-            self.access_grant_term = timedelta(days=20)
+            self.access_grant_term = timedelta(days=365)
         if self.agreement_with_terms_of_use and not self.terms_of_use:
             raise ValidationError('When agreement with terms of use is '
                 'required, a link to terms of use must be provided.')
