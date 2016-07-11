@@ -14,8 +14,11 @@
 # do I want/need to save the access token? Do I want to make sure to
 # periodically update people's wikipedia information, not just when they log in?
 
+from datetime import datetime, timedelta
+import json
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken
+import urllib2
 
 from django.conf import settings
 from django.contrib import messages
@@ -60,6 +63,40 @@ def rehydrate_token(token):
 
 class OAuthBackend(object):
 
+    def _is_user_valid(self, identity):
+        """
+        Check for the eligibility criteria laid out in the terms of service.
+        To wit, users must:
+        * Have >= 500 edits
+        * Be active for >= 6 months
+        * Have Special:Email User enabled
+        * Not be blocked on any projects
+        """
+        try:
+            # Check: >= 500 edits
+            assert int(identity['editcount']) >= 500
+
+            # Check: registered >= 6 months ago
+            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+            assert datetime.today().date() - timedelta(days=182) >= reg_date
+
+            # Check: Special:Email User enabled
+            endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=options'.format(base=identity['iss'])
+            userinfo = json.loads(urllib2.urlopen(endpoint).read())
+            logger.info('user info was {userinfo}'.format(userinfo=userinfo))
+
+            disablemail = userinfo['query']['userinfo']['options']['disablemail']
+            assert int(disablemail) == 0
+
+            # Check: not blocked
+            assert identity['blocked'] == False
+
+            return True
+        except AssertionError:
+            logger.exception('User was not valid.')
+            return False
+
+
     def _create_user_and_editor(self, identity):
         logger.info('creating user')
 
@@ -87,6 +124,11 @@ class OAuthBackend(object):
         If we have an Editor matching the identity returned by Wikipedia,
         update it with the identity parameters and return its associated user.
         If we don't, create an Editor and User, and return that user.
+
+        If the wikipedia account does not meet our eligibility criteria, create
+        a TWLight account if needed, but set it as inactive. Also deactivate
+        any existing accounts that have become ineligible.
+
         Also return a boolean that is True if we created a user during this
         call and False if we did not.
         """
@@ -95,11 +137,18 @@ class OAuthBackend(object):
             editor = Editor.objects.get(wp_sub=identity['sub'])
             user = editor.user
             created = False
+            editor.update_from_wikipedia(identity)
         except Editor.DoesNotExist:
             user, editor = self._create_user_and_editor(identity)
             created = True
 
         editor.update_from_wikipedia(identity)
+
+        valid = self._is_user_valid(identity)
+
+        if not valid:
+            user.is_inactive = True
+            user.save()
 
         return user, created
 
@@ -185,18 +234,36 @@ class OAuthCallbackView(View):
             raise PermissionDenied
 
         user = authenticate(request=request, access_token=access_token)
-        login(request, user)
-
         created = request.session.pop('user_created', False)
 
-        if created:
-            # Translators: this message is displayed to users with brand new accounts.
-            messages.add_message(request, messages.INFO, _('Welcome! Please '
-                'agree to the terms of use.'))
+        if user.is_inactive:
+            # Do NOT log in the user.
+
+            if created:
+                messages.add_message(request, messages.WARNING,
+                    _('Your Wikipedia account does not meet the eligibility '
+                      'criteria in the terms of use, so your Wikipedia Library '
+                      'Card Platform account cannot be activated.'))
+            else:
+                messages.add_message(request, messages.WARNING,
+                    _('Either your Wikipedia Library Card Platform account has '
+                      'been deactivated or your Wikipedia account no longer '
+                      'meets the eligibility criteria in the terms of use, so '
+                      'you cannot be logged in.'))
+
             url = reverse_lazy('terms')
+
         else:
-            messages.add_message(request, messages.INFO, _('Welcome back!'))
-            url = reverse_lazy('users:editor_detail',
-                kwargs={'pk': user.editor.pk})
+            login(request, user)
+
+            if created:
+                # Translators: this message is displayed to users with brand new accounts.
+                messages.add_message(request, messages.INFO, _('Welcome! Please '
+                    'agree to the terms of use.'))
+                url = reverse_lazy('terms')
+            else:
+                messages.add_message(request, messages.INFO, _('Welcome back!'))
+                url = reverse_lazy('users:editor_detail',
+                    kwargs={'pk': user.editor.pk})
 
         return HttpResponseRedirect(url)
