@@ -193,8 +193,7 @@ class OAuthCallbackView(View):
             # Translators: this message is displayed to users with brand new accounts.
             messages.add_message(request, messages.INFO, _('Welcome! Please '
                 'agree to the terms of use.'))
-            url = reverse_lazy('terms',
-                kwargs={'pk': user.editor.pk})
+            url = reverse_lazy('terms')
         else:
             messages.add_message(request, messages.INFO, _('Welcome back!'))
             url = reverse_lazy('users:editor_detail',
