@@ -1,3 +1,6 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -104,6 +107,47 @@ class EditorUpdateView(SelfOnly, UpdateView):
     template_name = 'users/editor_update.html'
     form_class = EditorUpdateForm
 
+
+
+class EmailChangeView(SelfOnly, UpdateView):
+    model = User
+    template_name = 'users/editor_update.html'
+    fields = ['email']
+
+    def get_object(self):
+        """
+        Users may only update their own email.
+        """
+        try:
+            assert self.request.user.is_authenticated()
+        except AssertionError:
+            raise PermissionDenied
+
+        return self.request.user
+
+
+    def get_form(self, form_class):
+        """
+        Define get_form so that we can apply crispy styling.
+        """
+        form = super(EmailChangeView, self).get_form(form_class)
+        form.helper = FormHelper()
+        form.helper.add_input(Submit(
+            'submit',
+            _('Update email'),
+            css_class='center-block'))
+
+        return form
+
+
+    def get_success_url(self):
+        """
+        Define get_success_url so that we can add a success message.
+        """
+        messages.add_message(self.request, messages.SUCCESS,
+            _('Your email has been changed to {email}.').format(
+                email=self.request.user.email))
+        return reverse_lazy('users:home')
 
 
 class DenyAuthenticatedUsers(View):

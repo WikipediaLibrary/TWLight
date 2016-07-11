@@ -27,7 +27,7 @@
       {% endif %}
       {% ifequal editor.user user %}
         <br />
-        <a href="{% url 'users:editor_update' editor.pk %}">(update)</a>
+        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
       {% endifequal %}
       {% if editor.wp_link_sul_info %}
         <br />
@@ -80,7 +80,7 @@
         {{ editor.contributions }}
       {% endif %}
       {% ifequal editor.user user %}
-        <a href="{% url 'users:editor_update' editor.pk %}">(update)</a>
+        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
       {% endifequal %}
       <br />
     </div>
@@ -138,6 +138,10 @@
       </div>
       <div class="col-xs-12 col-sm-9">
         {{ editor.user.email }}
+        {% ifequal editor.user user %}
+          <br />
+          <a href="{% url 'users:email_change' %}">{% trans "(update)" %}</a>
+        {% endifequal %}
         <p>
           <span class="glyphicon glyphicon-info-sign"></span>
           {% blocktrans trimmed %}

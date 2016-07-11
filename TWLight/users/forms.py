@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Submit
+from crispy_forms.layout import Submit, Layout
 
 from django.conf import settings
 from django.core.urlresolvers import reverse

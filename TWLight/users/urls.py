@@ -15,4 +15,7 @@ urlpatterns = [
     url(r'^test_permission/$',
         views.DenyAuthenticatedUsers.as_view(),
         name='test_permission'),
+    url(r'^email_change/$',
+        views.EmailChangeView.as_view(),
+        name='email_change'),
 ]
