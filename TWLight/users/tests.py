@@ -5,7 +5,8 @@ import json
 from mock import patch, Mock
 from urlparse import urlparse
 
-from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.auth.models import User, AnonymousUser
 from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
 from django.test import TestCase, Client, RequestFactory
@@ -187,6 +188,69 @@ class ViewsTestCase(TestCase):
 
         content = response.render().content
         self.assertIn(expected_html, content)
+
+
+    def test_user_home_view_anon(self):
+        """
+        If an AnonymousUser hits UserHomeView, they are redirected to login.
+        """
+        factory = RequestFactory()
+        request = factory.get(reverse('users:home'))
+        request.user = AnonymousUser()
+
+        response = views.UserHomeView.as_view()(request)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            settings.LOGIN_URL)
+
+
+    def test_user_home_view_is_editor(self):
+        """
+        If a User who is an editor hits UserHomeView, they see EditorDetailView.
+        """
+        user = UserFactory()
+        editor = EditorFactory(user=user)
+
+        factory = RequestFactory()
+
+        home_request = factory.get(reverse('users:home'))
+        home_request.user = user
+        home_response = views.UserHomeView.as_view()(home_request)
+
+        detail_request = factory.get(reverse('users:editor_detail',
+            kwargs={'pk': editor.pk}))
+        detail_request.user = user
+        detail_response = views.EditorDetailView.as_view()(detail_request, pk=editor.pk)
+
+        # We can't actually check that EditorDetailView was used by UserHomeView
+        # directly, because its as_view function has already been processed
+        # and all we have access to is a return value. So let's check that the
+        # output of the two pages is the same - the user would have seen the
+        # same thing on either page.
+        self.assertEqual(home_response.status_code, 200)
+        self.assertEqual(home_response.render().content,
+            detail_response.render().content)
+
+
+    @patch('TWLight.users.views.UserDetailView.as_view')
+    def test_user_home_view_non_editor(self, mock_view):
+        """
+        A User who isn't an editor hitting UserHomeView sees UserDetailView.
+        """
+        user = UserFactory(username='not_an_editor')
+        self.assertFalse(hasattr(user, 'editor'))
+
+        factory = RequestFactory()
+
+        request = factory.get(reverse('users:home'))
+        request.user = user
+        _ = views.UserHomeView.as_view()(request)
+
+        # For this we can't even check that the rendered content is the same,
+        # because we don't have a URL allowing us to render UserDetailView
+        # correctly; we'll mock out its as_view function and make sure it got
+        # called.
+        mock_view.assert_called_once_with()
 
 
 
