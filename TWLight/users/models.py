@@ -26,9 +26,10 @@ them to the coordinators group. They can also directly create Django user
 accounts without attached Editors in the admin site, if for some reason it's
 useful to have account holders without attached Wikipedia data.
 """
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import logging
+import urllib2
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -227,6 +228,7 @@ class Editor(models.Model):
             'username': identity['username'],       # wikipedia username
             'sub': identity['sub'],                 # wikipedia ID
             'rights': identity['rights'],           # user rights on-wiki
+            'groups': identity['groups'],           # user groups on-wiki
             'editcount': identity['editcount'],
             'email': identity['email'],
 

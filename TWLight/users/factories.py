@@ -4,12 +4,10 @@ from datetime import datetime
 import factory
 import json
 
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 
 from TWLight.users.helpers.wiki_list import WIKIS
-from TWLight.users.models import Editor, UserProfile, create_user_profile
+from TWLight.users.models import Editor, UserProfile
 
 
 class UserProfileFactory(factory.django.DjangoModelFactory):
@@ -52,6 +50,7 @@ class UserFactory(factory.django.DjangoModelFactory):
         user.userprofile.terms_of_use = True
         user.userprofile.save()
         return user
+
 
 
 class EditorFactory(factory.django.DjangoModelFactory):

@@ -14,11 +14,8 @@
 # do I want/need to save the access token? Do I want to make sure to
 # periodically update people's wikipedia information, not just when they log in?
 
-from datetime import datetime, timedelta
-import json
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken
-import urllib2
 
 from django.conf import settings
 from django.contrib import messages
