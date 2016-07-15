@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
+from mock import patch
 from urlparse import urlparse
 
 from django import forms
-from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.test import TestCase, Client, RequestFactory
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.resources.factories import PartnerFactory
-from TWLight.users.factories import EditorFactory
+from TWLight.users.factories import EditorFactory, UserFactory, UserProfileFactory
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
 from TWLight.users.tests import get_or_create_user
+from TWLight.view_mixins import ToURequired, EditorsOnly
 
 from . import views
 from .helpers import USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS, FIELD_TYPES
@@ -172,17 +173,28 @@ class BaseApplicationViewTest(TestCase):
         cls.client = Client()
 
         # Note: not an Editor.
-        cls.base_user = get_or_create_user('base_user')
+        cls.base_user = UserFactory(username='base_user')
+        cls.base_user.set_password('base_user')
 
-        cls.editor = get_or_create_user('editor')
+        cls.editor = UserFactory(username='editor')
         EditorFactory(user=cls.editor)
+        cls.editor.set_password('editor')
 
-        cls.editor2 = get_or_create_user('editor2')
+        cls.editor2 = UserFactory(username='editor2')
         EditorFactory(user=cls.editor2)
+        cls.editor2.set_password('editor2')
 
-        cls.coordinator = get_or_create_user('coordinator')
+        cls.coordinator = UserFactory(username='coordinator')
+        cls.coordinator.set_password('coordinator')
         coordinators = get_coordinators()
         coordinators.user_set.add(cls.coordinator)
+
+        # We should mock out any call to messages call in the view, since
+        # RequestFactory (unlike Client) doesn't run middleware. If you
+        # actually want to test that messages are displayed, use Client(),
+        # and stop/restart the patcher.
+        cls.message_patcher = patch('TWLight.applications.views.messages')
+        cls.message_patcher.start()
 
 
     @classmethod
@@ -192,6 +204,8 @@ class BaseApplicationViewTest(TestCase):
         cls.editor.delete()
         cls.editor2.delete()
         cls.coordinator.delete()
+
+        cls.message_patcher.stop()
 
 
     def tearDown(self):
@@ -232,28 +246,40 @@ class RequestApplicationTest(BaseApplicationViewTest):
         Only Editors should be able to request access to applications.
         """
         # An anonymous user is prompted to login.
-        response = self.client.get(self.url, follow=True)
+        factory = RequestFactory()
 
-        # The redirect chain should contain the following:
-        # 0) /users/test_permission, which checks for authorization;
-        # 1) /oauth/login;
-        # 2) wikipedia.
-        (expected_url, status) = response.redirect_chain[1]
+        request = factory.get(self.url)
+        request.user = AnonymousUser()
 
-        url_components = urlparse(expected_url)
-        login_url = unicode(settings.LOGIN_URL) # Force evaluation of proxy.
-        self.assertEqual(status, 302)
-        self.assertEqual(url_components.path, login_url)
+        # Make sure there's a session key - otherwise we'll get redirected to
+        # /applications/request before we hit the login test 
+        p1 = PartnerFactory()
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+
+        response = views.RequestApplicationView.as_view()(request)
+
+        # The expected chain of redirects is
+        # applications:request -> users:test_permission
+        # users:test_permission -> oauth_login
+        # oauth_login -> wikipedia.
+        # We'll just check for the first and leave it to the users app to
+        # check that test_permission behaves as expected.
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('users:test_permission'))
 
         # A user who is not a WP editor does not have access.
-        self.client.login(username='base_user', password='base_user')
-        response = self.client.get(self.url, follow=True)
+        request.user = self.base_user
+        response = views.RequestApplicationView.as_view()(request)
 
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('users:test_permission'))
 
         # An editor may see the page.
-        self._login_editor()
-        response = self.client.get(self.url)
+        request.user = self.editor
+        response = views.RequestApplicationView.as_view()(request)
 
         self.assertEqual(response.status_code, 200)
 
@@ -306,10 +332,19 @@ class RequestApplicationTest(BaseApplicationViewTest):
         _ = PartnerFactory()
 
         # Now check our docstring expectations.
-        self._login_editor()
-        response = self.client.post(self.url, data={}, follow=True)
-        self.assertEqual(response.request['PATH_INFO'], self.url)
-        self.assertEqual(self.client.session[views.PARTNERS_SESSION_KEY], [])
+
+        # We need to use the RequestFactory and not the client here because we
+        # need to be able to set a user attribute on the request; otherwise
+        # the view_mixins fail because they all see AnonymousUser, regardless
+        # of the login cookie.
+
+        factory = RequestFactory()
+        request = factory.post(self.url, data={})
+        request.user = self.editor
+        request.session = {}
+        response = views.RequestApplicationView.as_view()(request)
+
+        self.assertEqual(response.url, self.url)
 
 
     def test_valid_form_redirects(self):
@@ -319,29 +354,43 @@ class RequestApplicationTest(BaseApplicationViewTest):
         p1 = PartnerFactory()
         p2 = PartnerFactory()
 
-        self._login_editor()
         data = {
             'partner_{id}'.format(id=p1.id): True,
             'partner_{id}'.format(id=p2.id): False,
         }
-        response = self.client.post(self.url, data=data, follow=True)
-        self.assertEqual(response.request['PATH_INFO'], 
+
+
+        factory = RequestFactory()
+        request = factory.post(self.url, data=data)
+        request.user = self.editor
+        request.session = {}
+        response = views.RequestApplicationView.as_view()(request)
+
+        self.assertEqual(response.url, 
             reverse('applications:apply'))
 
 
-    def test_valid_form_writes_session_key(self):
+    @patch('django.contrib.auth.models.AnonymousUser')
+    def test_valid_form_writes_session_key(self, mock_anon):
         """
         Users who submit a valid form generate a matching session key.
+
+        Why the mock? Well. RequestFactory() lets us add a user to the request,
+        e.g. in order to pass our ToURequired test, but doesn't let us access
+        the session; Client() lets us see the session, but not add a user to the
+        request. We need to pass our access control tests AND see the session.
+        Mocking out AnonymousUser (which is attached to the request by default)
+        apparently sidesteps the access control tests.
         """
         p1 = PartnerFactory()
         p2 = PartnerFactory()
 
-        self._login_editor()
         data = {
             'partner_{id}'.format(id=p1.id): True,
             'partner_{id}'.format(id=p2.id): False,
         }
-        response = self.client.post(self.url, data=data, follow=True)
+
+        _ = self.client.post(self.url, data=data, follow=True)
         self.assertEqual(self.client.session[views.PARTNERS_SESSION_KEY], [p1.id])
 
         data = {
@@ -382,32 +431,44 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
     def test_authorization(self):
         """
-        Only Editors should be able to request access to applications.
+        Only Editors should be able to apply for access.
         """
         # An anonymous user is prompted to login.
-        response = self.client.get(self.url, follow=True)
+        factory = RequestFactory()
 
-        # The redirect chain should contain the following:
-        # 0) /applications/request, the requested url;
-        # 1) /users/test_permission, which checks for authorization;
-        # 2) /oauth/login;
-        # 3) wikipedia.
-        (expected_url, status) = response.redirect_chain[2]
+        request = factory.get(self.url)
+        request.user = AnonymousUser()
 
-        url_components = urlparse(expected_url)
-        login_url = unicode(settings.LOGIN_URL) # Force evaluation of proxy.
-        self.assertEqual(status, 302)
-        self.assertEqual(url_components.path, login_url)
+        # Make sure there's a session key - otherwise we'll get redirected to
+        # /applications/request before we hit the login test 
+        p1 = PartnerFactory()
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+
+        response = views.SubmitApplicationView.as_view()(request)
+
+        # The expected chain of redirects is
+        # applications:apply -> users:test_permission
+        # users:test_permission -> oauth_login.
+        # We'll just check for the first and leave it to the users app to
+        # check that test_permission behaves as expected.
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('users:test_permission'))
 
         # A user who is not a WP editor does not have access.
-        self.client.login(username='base_user', password='base_user')
-        response = self.client.get(self.url, follow=True)
+        factory = RequestFactory()
 
-        self.assertEqual(response.status_code, 403)
+        request.user = self.base_user
+        response = views.SubmitApplicationView.as_view()(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('users:test_permission'))
 
         # An editor may see the page.
-        self._login_editor()
-        response = self.client.get(self.url, follow=True)
+        request.user = self.editor
+        response = views.SubmitApplicationView.as_view()(request)
 
         self.assertEqual(response.status_code, 200)
 
@@ -422,10 +483,11 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         session = self.client.session
         if views.PARTNERS_SESSION_KEY in session.keys():
             del session[views.PARTNERS_SESSION_KEY]
-            session.save()
 
         response = self.client.get(self.url)
-        self.assertRedirects(response, reverse('applications:request'))
+        self.assertEqual(response.status_code, 302)
+        response_path = urlparse(response.url).path
+        self.assertEqual(response_path, reverse('applications:request'))
 
 
     def test_empty_session_key(self):
@@ -433,14 +495,17 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         If the PARTNERS_SESSION_KEY is an empty list, the view should redirect
         to RequestApplicationView.
         """
-        self._login_editor()
+        factory = RequestFactory()
 
-        session = self.client.session
-        session[views.PARTNERS_SESSION_KEY] = []
-        session.save()
+        request = factory.get(self.url)
+        request.user = self.editor
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = []
 
-        response = self.client.get(self.url)
-        self.assertRedirects(response, reverse('applications:request'))
+        response = views.SubmitApplicationView.as_view()(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('applications:request'))
 
 
     def test_invalid_session_data(self):
@@ -450,25 +515,28 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         """
         _ = PartnerFactory()
 
-        self._login_editor()
+        factory = RequestFactory()
+
+        request = factory.get(self.url)
+        request.user = self.editor
+
 
         # Invalid pk: not an integer
-        session = self.client.session
-        session[views.PARTNERS_SESSION_KEY] = ['cats']
-        session.save()
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = ['cats']
+        response = views.SubmitApplicationView.as_view()(request)
 
-        response = self.client.get(self.url)
-        self.assertRedirects(response, reverse('applications:request'))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('applications:request'))
 
         # Invalid pk: no such Partner
         self.assertEqual(Partner.objects.filter(pk=4500).count(), 0)
 
-        session = self.client.session
-        session[views.PARTNERS_SESSION_KEY] = [1, 4500]
-        session.save()
+        request.session[views.PARTNERS_SESSION_KEY] = [1, 4500]
+        response = views.SubmitApplicationView.as_view()(request)
 
-        response = self.client.get(self.url)
-        self.assertRedirects(response, reverse('applications:request'))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('applications:request'))
 
 
     def test_valid_session_data(self):
@@ -478,13 +546,17 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         """
         p1 = PartnerFactory()
 
-        self._login_editor()
+        factory = RequestFactory()
 
-        session = self.client.session
-        session[views.PARTNERS_SESSION_KEY] = [p1.id]
-        session.save()
+        request = factory.get(self.url)
+        request.user = self.editor
 
-        response = self.client.get(self.url)
+        # Make sure there's a session key - otherwise we'll get redirected to
+        # /applications/request before we hit the login test 
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+
+        response = views.SubmitApplicationView.as_view()(request)
         self.assertEqual(response.status_code, 200)
 
 
@@ -708,11 +780,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
     def test_redirection_on_success(self):
         """
         Make sure we redirect to the expected page upon posting a valid form.
-
-        Testing get_success_url in isolation doesn't work here because the
-        view doesn't know about the messages middleware; we need to bring the
-        client into play to get enough apparatus for our add_message call in
-        get_success_url to work.
         """
         p1 = PartnerFactory(
             real_name=True,
@@ -724,11 +791,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             agreement_with_terms_of_use=False
         )
 
-        self._login_editor()
-
-        session = self.client.session
-        session[views.PARTNERS_SESSION_KEY] = [p1.id]
-        session.save()
+        factory = RequestFactory()
 
         data = {
             'real_name': 'Anonymous Coward',
@@ -736,17 +799,21 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             'partner_{id}_comments'.format(id=p1.id): 'None whatsoever',
         }
 
-        response = self.client.post(self.url, data=data)
-        redirect_path = urlparse(response.url).path
+        request = factory.post(self.url, data)
+        request.user = self.editor
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
+
+        response = views.SubmitApplicationView.as_view()(request)
 
         expected_url = reverse('users:editor_detail',
                                 kwargs={'pk': self.editor.pk})
-        self.assertEqual(redirect_path, expected_url)
+        self.assertEqual(response.url, expected_url)
 
 
-    def test_user_profile_updates_on_success(self):
+    def test_user_data_updates_on_success(self):
         """
-        When the form post includes user data, the user profile should update
+        When the form post includes user data, the editor profile should update
         accordingly.
         """
 
@@ -761,8 +828,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             agreement_with_terms_of_use=False
         )
 
-        user = User.objects.create_user(
-            username='local_user', password='local_user')
+        user = UserFactory()
+
         EditorFactory(
             user=user,
             # All 3 of these fields will be required by PartnerFactory.
@@ -770,12 +837,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             country_of_residence='Lithuania',
             occupation='Cat floofer',
         )
-
-        self.client.login(username='local_user', password='local_user')
-
-        session = self.client.session
-        session[views.PARTNERS_SESSION_KEY] = [p1.id]
-        session.save()
 
         data = {
             # Should fill in existing blank field.
@@ -788,10 +849,17 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             'partner_{id}_comments'.format(id=p1.id): 'None whatsoever',
         }
 
-        _ = self.client.post(self.url, data=data, follow=True)
+        factory = RequestFactory()
+
+        request = factory.post(self.url, data)
+        request.user = user
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
+
+        _ = views.SubmitApplicationView.as_view()(request)
 
         # Force reload from database to see updated values. (In Django 1.8 this
-        # can be replaced with user.editor.refresh_from_db().)
+        # can be replaced with user.editor.responsefresh_from_db().)
         editor = Editor.objects.get(pk=user.editor.pk)
 
         self.assertEqual(editor.real_name, 'Anonymous Coward')
@@ -810,7 +878,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # Set up database objects.
         p1 = PartnerFactory(
             real_name=False,
-            country_of_residence=False,
+            country_of_residence=False, 
             specific_title=True,
             specific_stream=False,
             occupation=False,
@@ -837,11 +905,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertEqual(Application.objects.filter(partner=p1).count(), 0)
         self.assertEqual(Application.objects.filter(partner=p2).count(), 0)
 
-        self._login_editor()
-
-        session = self.client.session
-        session[views.PARTNERS_SESSION_KEY] = [p1.id, p2.id]
-        session.save()
+        factory = RequestFactory()
 
         data = {
             'partner_{id}_rationale'.format(id=p1.id): 'Whimsy',
@@ -852,7 +916,12 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             'partner_{id}_specific_stream'.format(id=p2.id): s1.pk,
         }
 
-        _ = self.client.post(self.url, data=data, follow=True)
+        request = factory.post(self.url, data)
+        request.user = self.editor
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.id, p2.id]
+
+        _ = views.SubmitApplicationView.as_view()(request)
 
         # If the application has not been created, these lines will raise
         # DoesNotExist.
@@ -991,86 +1060,103 @@ class ListApplicationsTest(BaseApplicationViewTest):
             app.delete()
 
 
-    def _base_test_authorization(self, url):
+    def _base_test_authorization(self, url, view):
         """
         Only Coordinators and superusers should be able to see application
         lists.
         """
         # An anonymous user is prompted to login.
-        response = self.client.get(url, follow=True)
+        factory = RequestFactory()
 
-        # The redirect chain should contain the following:
-        # 0) /users/test_permission, which checks for authorization;
-        # 1) /oauth/login;
-        # 2) wikipedia.
-        (expected_url, status) = response.redirect_chain[1]
+        request = factory.get(url)
+        request.user = AnonymousUser()
 
-        url_components = urlparse(expected_url)
-        login_url = unicode(settings.LOGIN_URL) # Force evaluation of proxy.
-        self.assertEqual(status, 302)
-        self.assertEqual(url_components.path, login_url)
+        # Make sure there's a session key - otherwise we'll get redirected to
+        # /applications/request before we hit the login test 
+        p1 = PartnerFactory()
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+
+        response = view.as_view()(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('users:test_permission'))
 
         # An editor who is not a coordinator may not see the page.
-        self._login_editor()
-        response = self.client.get(url, follow=True)
+        request.user = self.editor
+        response = view.as_view()(request)
 
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('users:test_permission'))
 
         # A coordinator may see the page.
-        self.client.login(username='coordinator', password='coordinator')
-        response = self.client.get(url)
+        request.user = self.coordinator
+        response = view.as_view()(request)
 
         self.assertEqual(response.status_code, 200)
 
         # A superuser may see the page.
-        self.client.login(username='super', password='super')
-        response = self.client.get(url)
+        superuser = UserFactory()
+        superuser.is_superuser = True
+        superuser.save()
+
+        request.user = superuser
+        response = view.as_view()(request)
 
         self.assertEqual(response.status_code, 200)
 
 
-    def _base_test_object_visibility(self, url, queryset):
-        self.client.login(username='coordinator', password='coordinator')
-        response = self.client.get(url)
+    def _base_test_object_visibility(self, url, view, queryset):
+        factory = RequestFactory()
+
+        request = factory.get(url)
+        request.user = self.coordinator
+        response = view.as_view()(request)
 
         for obj in queryset:
-            self.assertIn(obj.__str__(), response.content)
+            # Unlike Client(), RequestFactory() doesn't render the response;
+            # we'll have to do that before we can check for its content.
+            self.assertIn(obj.__str__(), response.render().content)
 
 
     def test_list_authorization(self):
         url = reverse('applications:list')
-        self._base_test_authorization(url)
+        self._base_test_authorization(url, views.ListApplicationsView)
 
 
     def test_list_object_visibility(self):
         url = reverse('applications:list')
         queryset = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION])
-        self._base_test_object_visibility(url, queryset)
+        self._base_test_object_visibility(url, views.ListApplicationsView, queryset)
 
 
     def test_list_approved_authorization(self):
         url = reverse('applications:list_approved')
-        self._base_test_authorization(url)
+        self._base_test_authorization(url, views.ListApprovedApplicationsView)
 
 
     def test_list_approved_object_visibility(self):
         url = reverse('applications:list_approved')
         queryset = Application.objects.filter(
             status=Application.APPROVED)
-        self._base_test_object_visibility(url, queryset)
+        self._base_test_object_visibility(url,
+            views.ListApprovedApplicationsView, queryset)
 
 
     def test_list_rejected_authorization(self):
         url = reverse('applications:list_rejected')
-        self._base_test_authorization(url)
+        self._base_test_authorization(url, views.ListRejectedApplicationsView)
 
 
     def test_list_rejected_object_visibility(self):
         url = reverse('applications:list_rejected')
         queryset = Application.objects.filter(
             status=Application.NOT_APPROVED)
-        self._base_test_object_visibility(url, queryset)
+        self._base_test_object_visibility(url,
+            views.ListRejectedApplicationsView, queryset)
 
 
     def test_queryset_unfiltered(self):
@@ -1079,12 +1165,16 @@ class ListApplicationsTest(BaseApplicationViewTest):
         when no filters are applied.
         """
         url = reverse('applications:list')
-        self.client.login(username='coordinator', password='coordinator')
-        response = self.client.get(url)
+
+        factory = RequestFactory()
+        request = factory.get(url)
+        request.user = self.coordinator
+
+        response = views.ListApplicationsView.as_view()(request)
 
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION])
-        template_qs = response.context['object_list']
+        template_qs = response.context_data['object_list']
 
         # We can't use assertQuerysetEqual, because the one returned by the view
         # is ordered and this one is not. (Testing order is not important here.)
@@ -1126,12 +1216,16 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         new_editor, _, url = self._test_queryset_filtered_base()
 
-        response = self.client.post(url, data={'editor': new_editor.pk})
+        factory = RequestFactory()
+        request = factory.post(url, {'editor': new_editor.pk})
+        request.user = self.coordinator
+
+        response = views.ListApplicationsView.as_view()(request)
 
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION],
             editor=new_editor)
-        template_qs = response.context['object_list']
+        template_qs = response.context_data['object_list']
 
         self.assertEqual(sorted([item.pk for item in expected_qs]),
                          sorted([item.pk for item in template_qs]))
@@ -1143,12 +1237,16 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         _, new_partner, url = self._test_queryset_filtered_base()
 
-        response = self.client.post(url, data={'partner': new_partner.pk})
+        factory = RequestFactory()
+        request = factory.post(url, {'partner': new_partner.pk})
+        request.user = self.coordinator
+
+        response = views.ListApplicationsView.as_view()(request)
 
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION],
             partner=new_partner)
-        template_qs = response.context['object_list']
+        template_qs = response.context_data['object_list']
 
         self.assertEqual(sorted([item.pk for item in expected_qs]),
                          sorted([item.pk for item in template_qs]))
@@ -1160,25 +1258,21 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         new_editor, new_partner, url = self._test_queryset_filtered_base()
 
-        response = self.client.post(url,
-            data={'editor': new_editor.pk, 'partner': new_partner.pk})
+        factory = RequestFactory()
+        request = factory.post(url,
+            {'editor': new_editor.pk, 'partner': new_partner.pk})
+        request.user = self.coordinator
+
+        response = views.ListApplicationsView.as_view()(request)
 
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION],
             editor=new_editor,
             partner=new_partner)
-        template_qs = response.context['object_list']
+        template_qs = response.context_data['object_list']
 
         self.assertEqual(sorted([item.pk for item in expected_qs]),
                          sorted([item.pk for item in template_qs]))
-
-
-    def test_filters_are_displayed(self):
-        """
-        Make sure that, if users have posted filters, they can see that status
-        reflected.
-        """
-        assert False
 
 
     def test_invalid_editor_post_handling(self):
@@ -1186,9 +1280,12 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         # Check assumption.
         self.assertFalse(Editor.objects.filter(pk=500))
+        request = RequestFactory().post(url,
+            data={'editor': 500})
+        request.user = self.coordinator
+
         with self.assertRaises(Editor.DoesNotExist):
-            response = self.client.post(url,
-                data={'editor': 500})
+            _ = views.ListApplicationsView.as_view()(request)
 
 
     def test_invalid_partner_post_handling(self):
@@ -1196,9 +1293,12 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         # Check assumption.
         self.assertFalse(Partner.objects.filter(pk=500))
+        request = RequestFactory().post(url,
+            data={'partner': 500})
+        request.user = self.coordinator
+
         with self.assertRaises(Partner.DoesNotExist):
-            response = self.client.post(url,
-                data={'partner': 500})
+            _ = views.ListApplicationsView.as_view()(request)
 
 
 # only coordinators can post to batch edit
