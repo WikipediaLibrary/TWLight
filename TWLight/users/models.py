@@ -179,6 +179,40 @@ class Editor(models.Model):
         return json.loads(self.wp_groups)
 
 
+    def _is_user_valid(self, identity):
+        """
+        Check for the eligibility criteria laid out in the terms of service.
+        To wit, users must:
+        * Have >= 500 edits
+        * Be active for >= 6 months
+        * Have Special:Email User enabled
+        * Not be blocked on any projects
+        """
+        try:
+            # Check: >= 500 edits
+            assert int(identity['editcount']) >= 500
+
+            # Check: registered >= 6 months ago
+            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+            assert datetime.today().date() - timedelta(days=182) >= reg_date
+
+            # Check: Special:Email User enabled
+            endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=options'.format(base=identity['iss'])
+            userinfo = json.loads(urllib2.urlopen(endpoint).read())
+            logger.info('user info was {userinfo}'.format(userinfo=userinfo))
+
+            disablemail = userinfo['query']['userinfo']['options']['disablemail']
+            assert int(disablemail) == 0
+
+            # Check: not blocked
+            assert identity['blocked'] == False
+
+            return True
+        except AssertionError:
+            logger.exception('User was not valid.')
+            return False
+
+
     def update_from_wikipedia(self, identity):
         """
         Given the dict returned from the Wikipedia OAuth /identify endpoint,
@@ -222,6 +256,12 @@ class Editor(models.Model):
         self.save()
 
         self.user.email = identity['email']
+
+        valid = self._is_user_valid(identity)
+
+        if not valid:
+            self.user.is_active = False
+
         self.user.save()
 
 

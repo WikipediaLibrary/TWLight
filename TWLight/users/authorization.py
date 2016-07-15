@@ -63,40 +63,6 @@ def rehydrate_token(token):
 
 class OAuthBackend(object):
 
-    def _is_user_valid(self, identity):
-        """
-        Check for the eligibility criteria laid out in the terms of service.
-        To wit, users must:
-        * Have >= 500 edits
-        * Be active for >= 6 months
-        * Have Special:Email User enabled
-        * Not be blocked on any projects
-        """
-        try:
-            # Check: >= 500 edits
-            assert int(identity['editcount']) >= 500
-
-            # Check: registered >= 6 months ago
-            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
-            assert datetime.today().date() - timedelta(days=182) >= reg_date
-
-            # Check: Special:Email User enabled
-            endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=options'.format(base=identity['iss'])
-            userinfo = json.loads(urllib2.urlopen(endpoint).read())
-            logger.info('user info was {userinfo}'.format(userinfo=userinfo))
-
-            disablemail = userinfo['query']['userinfo']['options']['disablemail']
-            assert int(disablemail) == 0
-
-            # Check: not blocked
-            assert identity['blocked'] == False
-
-            return True
-        except AssertionError:
-            logger.exception('User was not valid.')
-            return False
-
-
     def _create_user_and_editor(self, identity):
         logger.info('creating user')
 
@@ -143,12 +109,6 @@ class OAuthBackend(object):
             created = True
 
         editor.update_from_wikipedia(identity)
-
-        valid = self._is_user_valid(identity)
-
-        if not valid:
-            user.is_active = False
-            user.save()
 
         return user, created
 
