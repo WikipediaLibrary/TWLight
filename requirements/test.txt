@@ -1,0 +1,3 @@
+# Only needed to run tests.
+django-nose==1.4.4
+coverage==4.1
