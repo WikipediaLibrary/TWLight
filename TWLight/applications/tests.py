@@ -10,11 +10,9 @@ from django.test import TestCase, Client, RequestFactory
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.resources.factories import PartnerFactory
-from TWLight.users.factories import EditorFactory, UserFactory, UserProfileFactory
+from TWLight.users.factories import EditorFactory, UserFactory
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
-from TWLight.users.tests import get_or_create_user
-from TWLight.view_mixins import ToURequired, EditorsOnly
 
 from . import views
 from .helpers import USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS, FIELD_TYPES
@@ -746,7 +744,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             agreement_with_terms_of_use=False
         )
 
-        user = get_or_create_user('alice')
+        user = UserFactory(username='alice')
         if hasattr(user, 'editor'):
             user.editor.delete()
 
