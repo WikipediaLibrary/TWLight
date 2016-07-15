@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import copy
 from datetime import datetime, timedelta
 import json
 from mock import patch, Mock
@@ -13,10 +14,33 @@ from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 
 from . import views
+from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators
-from .models import UserProfile
+from .models import UserProfile, Editor
+
+
+FAKE_IDENTITY_DATA = {'query': {
+    'userinfo': {
+        'options': {
+            'disablemail': 0
+            }
+        }
+    }
+}
+
+FAKE_IDENTITY = {
+    'editcount': 5000,
+    'registered': '20151106154629', # Well before first commit.
+    'blocked': False,
+    'iss': 'en.wikipedia.org',
+    'sub': 567823,
+    'rights': ['deletion', 'spaceflight'],
+    'groups': ['charismatic megafauna'],
+    'email': 'alice@example.com',
+    'username': 'alice',
+}
 
 class ViewsTestCase(TestCase):
 
@@ -251,11 +275,7 @@ class EditorModelTestCase(TestCase):
         """
         mock_response = Mock()
 
-        data = {}
-        data['query'] = {}
-        data['query']['userinfo'] = {}
-        data['query']['userinfo']['options'] = {}
-        data['query']['userinfo']['options']['disablemail'] = 0
+        data = FAKE_IDENTITY_DATA
 
         # This goes to an iterator; we need to return the expected data
         # enough times to power all the calls to read() in this function.
@@ -263,11 +283,7 @@ class EditorModelTestCase(TestCase):
 
         mock_urllib2.return_value = mock_response
 
-        identity = {}
-        identity['editcount'] = 5000
-        identity['registered'] = '20151106154629' # Well before first commit.
-        identity['blocked'] = False
-        identity['iss'] = 'en.wikipedia.org'
+        identity = FAKE_IDENTITY
 
         # Valid data
         self.assertTrue(self.editor._is_user_valid(identity))
@@ -311,21 +327,14 @@ class EditorModelTestCase(TestCase):
         """
         mock_response = Mock()
 
-        data = {}
-        data['query'] = {}
-        data['query']['userinfo'] = {}
-        data['query']['userinfo']['options'] = {}
+        data = FAKE_IDENTITY_DATA
         data['query']['userinfo']['options']['disablemail'] = 1 # Should fail.
 
         mock_response.read.side_effect = [json.dumps(data)]
         mock_response.read.side_effect = [json.dumps(data)]
         mock_urllib2.return_value = mock_response
 
-        identity = {}
-        identity['editcount'] = 5000
-        identity['registered'] = '20151106154629' # Well before first commit.
-        identity['blocked'] = False
-        identity['iss'] = 'en.wikipedia.org'
+        identity = FAKE_IDENTITY
 
         self.assertFalse(self.editor._is_user_valid(identity))
 
@@ -372,12 +381,97 @@ class EditorModelTestCase(TestCase):
             new_editor.update_from_wikipedia(identity)
 
 
-# TODO write these tests after design review
-# receiving signal from oauth results in creation of editor model
-# site admin status is false
-# editor model contains all expected info (mock out the signal)
 
-# Terms of use
-# After login they should be redirected to agreement page if not agreed
-# Likewise for request-for-application
-# Also for the application page itself
+class AuthorizationTestCase(TestCase):
+
+    @patch('urllib2.urlopen')
+    def test_create_user_and_editor(self, mock_urllib2):
+        """
+        OAuthBackend._create_user_and_editor() should:
+        * create a user
+            * with a suitable username and email
+            * without a password
+        * And a matching editor
+        """
+        oauth_backend = OAuthBackend()
+        data = FAKE_IDENTITY_DATA
+        identity = FAKE_IDENTITY
+
+        mock_response = Mock()
+        mock_response.read.side_effect = [json.dumps(data)] * 7
+        mock_urllib2.return_value = mock_response
+
+        user, editor = oauth_backend._create_user_and_editor(identity)
+
+        self.assertEqual(user.email, 'alice@example.com')
+        self.assertEqual(user.username, 567823)
+        self.assertFalse(user.has_usable_password())
+
+        self.assertEqual(editor.user, user)
+        self.assertEqual(editor.wp_sub, 567823)
+        # We won't test the fields set by update_from_wikipedia, as they are
+        # tested elsewhere.
+
+
+    # We mock out this function for two reasons:
+    # 1) To prevent its call to an external API, which we would have otherwise
+    #    had to mock anyway;
+    # 2) So we can assert that it was called.
+    @patch('TWLight.users.models.Editor.update_from_wikipedia')
+    def test_get_and_update_user_from_identity_existing_user(self, mock_update):
+        """
+        OAuthBackend._get_and_update_user_from_identity() should:
+        * If there is an Editor whose wp_sub = identity['sub']:
+            * Return the user FKed onto that
+            * Return created = False
+        * Call Editor.update_from_wikipedia
+        """
+        existing_user = UserFactory()
+        params = {
+            'user': existing_user,
+            'wp_sub': 567823,
+        }
+
+        _ = EditorFactory(**params)
+
+        oauth_backend = OAuthBackend()
+        user, created = oauth_backend._get_and_update_user_from_identity(
+            FAKE_IDENTITY)
+
+        self.assertFalse(created)
+        self.assertTrue(hasattr(user, 'editor'))
+        self.assertEqual(user, existing_user)
+
+        mock_update.assert_called_once_with(FAKE_IDENTITY)
+
+
+    @patch('TWLight.users.models.Editor.update_from_wikipedia')
+    def test_get_and_update_user_from_identity_new_user(self, mock_update):
+        """
+        OAuthBackend._get_and_update_user_from_identity() should:
+        * Otherwise:
+            * Return a new user
+            * Return created = True
+        * Call Editor.update_from_wikipedia
+        """
+        identity = copy.copy(FAKE_IDENTITY)
+        new_sub = 57381037
+        identity['sub'] = new_sub
+        self.assertFalse(Editor.objects.filter(wp_sub=new_sub).count())
+
+        oauth_backend = OAuthBackend()
+        user, created = oauth_backend._get_and_update_user_from_identity(
+            identity)
+
+        self.assertTrue(created)
+        self.assertTrue(hasattr(user, 'editor'))
+        self.assertEqual(user.editor.wp_sub, new_sub)
+
+        mock_update.assert_called_once_with(identity)
+
+
+    # Mock out the urllib calls!
+    # authenticate - think through this one
+    # OAuthCallbackView - check the error cases
+    # Make sure inactive users don't get logged in (mock call to authenticate)
+    # Make sure users who haven't agreed to the terms get redirected there

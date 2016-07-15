@@ -1,19 +1,3 @@
-# Authorization views...
-
-# Log in...
-# handshaker.initiate
-# save request_token in the session or somewhere
-# and then return a redirect to the mediawiki URL
-
-# they will be redirected back to my callback with a response token
-# callback view needs to parse the response token
-# and then use it and the request token to handshaker.complete() and get an
-# access token
-# I can use the access token to get identify() info
-
-# do I want/need to save the access token? Do I want to make sure to
-# periodically update people's wikipedia information, not just when they log in?
-
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken
 
@@ -101,11 +85,10 @@ class OAuthBackend(object):
             user = editor.user
             created = False
             editor.update_from_wikipedia(identity)
+
         except Editor.DoesNotExist:
             user, editor = self._create_user_and_editor(identity)
             created = True
-
-        editor.update_from_wikipedia(identity)
 
         return user, created
 
