@@ -147,7 +147,7 @@ class OAuthBackend(object):
         valid = self._is_user_valid(identity)
 
         if not valid:
-            user.is_inactive = True
+            user.is_active = False
             user.save()
 
         return user, created
@@ -236,7 +236,7 @@ class OAuthCallbackView(View):
         user = authenticate(request=request, access_token=access_token)
         created = request.session.pop('user_created', False)
 
-        if user.is_inactive:
+        if not user.is_active:
             # Do NOT log in the user.
 
             if created:
