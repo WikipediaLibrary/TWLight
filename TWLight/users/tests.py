@@ -284,9 +284,17 @@ class EditorModelTestCase(TestCase):
 
     def setUp(self):
         for editor in Editor.objects.all():
-            # Somehow the test case succeeds when runs alone but fails when run
+            # The test case succeeds when runs alone but fails when run
             # as part of the whole suite, because it grabs the wrong editor
             # object from the db. Kill them all with fire.
+            # (Why does it do this? Because our queries look for editors by
+            # username or wikipedia sub, not by foreign key - we have to use the
+            # information that we have from the wikipedia API, which knows
+            # nothing about our database. But the test runner doesn't actually
+            # *delete* database objects between runs, for performance reasons;
+            # it simply truncates them by nulling out their foreign keys.
+            # This means that if you are searching for db objects by properties
+            # other than foreign key, you *still find them*.)
             editor.delete()
 
         # Wiki 'aa' is 'aa.wikipedia.org'
