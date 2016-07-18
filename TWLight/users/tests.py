@@ -45,50 +45,49 @@ FAKE_IDENTITY = {
 
 class ViewsTestCase(TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.client = Client()
+    def setUp(self):
+        self.client = Client()
 
         # User 1: regular Editor
-        cls.username1 = 'alice'
-        cls.user_editor = UserFactory(username=cls.username1)
-        cls.editor1 = EditorFactory(user=cls.user_editor)
-        cls.url1 = reverse('users:editor_detail',
-            kwargs={'pk': cls.editor1.pk})
+        self.username1 = 'alice'
+        self.user_editor = UserFactory(username=self.username1)
+        self.editor1 = EditorFactory(user=self.user_editor)
+        self.url1 = reverse('users:editor_detail',
+            kwargs={'pk': self.editor1.pk})
 
 
         # User 2: regular Editor
-        cls.username2 = 'bob'
-        cls.user_editor2 = UserFactory(username=cls.username2)
-        cls.editor2 = EditorFactory(user=cls.user_editor2)
-        cls.url2 = reverse('users:editor_detail',
-            kwargs={'pk': cls.editor2.pk})
+        self.username2 = 'bob'
+        self.user_editor2 = UserFactory(username=self.username2)
+        self.editor2 = EditorFactory(user=self.user_editor2)
+        self.url2 = reverse('users:editor_detail',
+            kwargs={'pk': self.editor2.pk})
 
 
         # User 3: Site administrator
-        cls.username3 = 'carol'
-        cls.user_superuser = UserFactory(username=cls.username3)
-        cls.user_superuser.is_superuser = True
-        cls.user_superuser.save()
-        cls.editor3 = EditorFactory(user=cls.user_superuser)
+        self.username3 = 'carol'
+        self.user_superuser = UserFactory(username=self.username3)
+        self.user_superuser.is_superuser = True
+        self.user_superuser.save()
+        self.editor3 = EditorFactory(user=self.user_superuser)
 
 
         # User 4: Coordinator
-        cls.username4 = 'eve'
-        cls.user_coordinator = UserFactory(username=cls.username4)
-        cls.editor4 = EditorFactory(user=cls.user_coordinator)
-        get_coordinators().user_set.add(cls.user_coordinator)
+        self.username4 = 'eve'
+        self.user_coordinator = UserFactory(username=self.username4)
+        self.editor4 = EditorFactory(user=self.user_coordinator)
+        get_coordinators().user_set.add(self.user_coordinator)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.user_editor.delete()
-        cls.editor1.delete()
-        cls.user_editor2.delete()
-        cls.editor2.delete()
-        cls.user_superuser.delete()
-        cls.editor3.delete()
-        cls.user_coordinator.delete()
-        cls.editor4.delete()
+
+    def tearDown(self):
+        self.user_editor.delete()
+        self.editor1.delete()
+        self.user_editor2.delete()
+        self.editor2.delete()
+        self.user_superuser.delete()
+        self.editor3.delete()
+        self.user_coordinator.delete()
+        self.editor4.delete()
 
 
     def test_editor_detail_url_resolves(self):
@@ -265,6 +264,8 @@ class UserProfileModelTestCase(TestCase):
         # a DoesNotExist and the test will fail, which is what we want.
         UserProfile.objects.get(user=user)
 
+        user.delete()
+
 
     def test_user_profile_has_desired_properties(self):
         # Don't use UserFactory, since it forces the related profile to have
@@ -275,52 +276,58 @@ class UserProfileModelTestCase(TestCase):
         profile = UserProfile.objects.get(user=user)
         self.assertEqual(profile.terms_of_use, False)
 
+        user.delete()
+
 
 
 class EditorModelTestCase(TestCase):
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
+        for editor in Editor.objects.all():
+            # Somehow the test case succeeds when runs alone but fails when run
+            # as part of the whole suite, because it grabs the wrong editor
+            # object from the db. Kill them all with fire.
+            editor.delete()
+
         # Wiki 'aa' is 'aa.wikipedia.org'
-        cls.editor = EditorFactory(home_wiki='aa',
-            wp_username='alice',
+        self.test_editor = EditorFactory(home_wiki='aa',
+            wp_username='editor_model_test',
             wp_rights=json.dumps(['cat floofing', 'the big red button']),
             wp_groups=json.dumps(['sysops', 'bureaucrats']))
 
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.editor.delete()
+    def tearDown(self):
+        self.test_editor.delete()
 
 
     def test_wp_user_page_url(self):
-        expected_url = 'https://aa.wikipedia.org/wiki/User:alice'
-        self.assertEqual(expected_url, self.editor.wp_user_page_url)
+        expected_url = 'https://aa.wikipedia.org/wiki/User:editor_model_test'
+        self.assertEqual(expected_url, self.test_editor.wp_user_page_url)
 
 
     def test_wp_link_edit_count(self):
-        expected_url = 'https://tools.wmflabs.org/xtools-ec/?user=alice&project=aa.wikipedia.org'
-        self.assertEqual(expected_url, self.editor.wp_link_edit_count)
+        expected_url = 'https://tools.wmflabs.org/xtools-ec/?user=editor_model_test&project=aa.wikipedia.org'
+        self.assertEqual(expected_url, self.test_editor.wp_link_edit_count)
 
 
     def test_wp_link_sul_info(self):
-        expected_url = 'https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=alice'
-        self.assertEqual(expected_url, self.editor.wp_link_sul_info)
+        expected_url = 'https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=editor_model_test'
+        self.assertEqual(expected_url, self.test_editor.wp_link_sul_info)
 
 
     def test_wp_link_pages_created(self):
-        expected_url = 'https://tools.wmflabs.org/xtools/pages/index.php?user=alice&project=aa.wikipedia.org&namespace=all&redirects=none'
-        self.assertEqual(expected_url, self.editor.wp_link_pages_created)
+        expected_url = 'https://tools.wmflabs.org/xtools/pages/index.php?user=editor_model_test&project=aa.wikipedia.org&namespace=all&redirects=none'
+        self.assertEqual(expected_url, self.test_editor.wp_link_pages_created)
 
 
     def test_get_wp_rights_display(self):
         expected_text = ['cat floofing', 'the big red button']
-        self.assertEqual(expected_text, self.editor.get_wp_rights_display)
+        self.assertEqual(expected_text, self.test_editor.get_wp_rights_display)
 
 
     def test_get_wp_groups_display(self):
         expected_text = ['sysops', 'bureaucrats']
-        self.assertEqual(expected_text, self.editor.get_wp_groups_display)
+        self.assertEqual(expected_text, self.test_editor.get_wp_groups_display)
 
 
     @patch('urllib2.urlopen')
@@ -350,34 +357,34 @@ class EditorModelTestCase(TestCase):
         identity = FAKE_IDENTITY
 
         # Valid data
-        self.assertTrue(self.editor._is_user_valid(identity))
+        self.assertTrue(self.test_editor._is_user_valid(identity))
 
         # Edge case
         identity['editcount'] = 500
-        self.assertTrue(self.editor._is_user_valid(identity))
+        self.assertTrue(self.test_editor._is_user_valid(identity))
 
         # Too few edits
         identity['editcount'] = 499
-        self.assertFalse(self.editor._is_user_valid(identity))
+        self.assertFalse(self.test_editor._is_user_valid(identity))
 
         # Account created too recently
         identity['editcount'] = 500
         identity['registered'] = datetime.today().strftime('%Y%m%d%H%M%S')
-        self.assertFalse(self.editor._is_user_valid(identity))
+        self.assertFalse(self.test_editor._is_user_valid(identity))
 
         # Edge case: this shouldn't.
         almost_6_months_ago = datetime.today() - timedelta(days=183)
         identity['registered'] = almost_6_months_ago.strftime('%Y%m%d%H%M%S')
-        self.assertTrue(self.editor._is_user_valid(identity))
+        self.assertTrue(self.test_editor._is_user_valid(identity))
 
         # Edge case: this should work.
         almost_6_months_ago = datetime.today() - timedelta(days=182)
         identity['registered'] = almost_6_months_ago.strftime('%Y%m%d%H%M%S')
-        self.assertTrue(self.editor._is_user_valid(identity))
+        self.assertTrue(self.test_editor._is_user_valid(identity))
 
         # Bad editor! No biscuit.
         identity['blocked'] = True
-        self.assertFalse(self.editor._is_user_valid(identity))
+        self.assertFalse(self.test_editor._is_user_valid(identity))
 
 
     @patch('urllib2.urlopen')
@@ -400,7 +407,7 @@ class EditorModelTestCase(TestCase):
 
         identity = FAKE_IDENTITY
 
-        self.assertFalse(self.editor._is_user_valid(identity))
+        self.assertFalse(self.test_editor._is_user_valid(identity))
 
 
     @patch('TWLight.users.models.Editor._is_user_valid')
@@ -409,7 +416,7 @@ class EditorModelTestCase(TestCase):
         # call to Wikipedia that we don't actually want to do in testing.
         mock_validity.return_value = True
 
-        # Don't change cls.editor, or other tests will fail! Make a new one
+        # Don't change self.editor, or other tests will fail! Make a new one
         # to test instead.
         new_editor = EditorFactory()
 
@@ -417,7 +424,7 @@ class EditorModelTestCase(TestCase):
         identity['username'] = 'evil_dr_porkchop'
         # Users' unique WP IDs should not change across API calls, but are
         # needed by update_from_wikipedia.
-        identity['sub'] = self.editor.wp_sub
+        identity['sub'] = self.test_editor.wp_sub
         identity['rights'] = ['deletion', 'spaceflight']
         identity['groups'] = ['charismatic megafauna']
         identity['editcount'] = 960
@@ -441,12 +448,18 @@ class EditorModelTestCase(TestCase):
         # should throw an error as we can no longer verify they're the same
         # editor.
         with self.assertRaises(AssertionError):
-            identity['sub'] = self.editor.wp_sub + 1
+            identity['sub'] = self.test_editor.wp_sub + 1
             new_editor.update_from_wikipedia(identity)
 
 
 
 class AuthorizationTestCase(TestCase):
+
+    def setUp(self):
+        # Prevent failures due to side effects from database artifacts.
+        for editor in Editor.objects.all():
+            editor.delete()
+
 
     @patch('urllib2.urlopen')
     def test_create_user_and_editor(self, mock_urllib2):
@@ -493,7 +506,7 @@ class AuthorizationTestCase(TestCase):
         existing_user = UserFactory()
         params = {
             'user': existing_user,
-            'wp_sub': 567823,
+            'wp_sub': FAKE_IDENTITY['sub']
         }
 
         _ = EditorFactory(**params)

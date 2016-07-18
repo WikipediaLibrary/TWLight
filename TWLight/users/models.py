@@ -127,8 +127,8 @@ class Editor(models.Model):
     @property
     def wp_user_page_url(self):
         if self.get_home_wiki_display():
-            url = 'https://{home_wiki_link}/wiki/User:{user.wp_username}'.format(
-                home_wiki_link=self.get_home_wiki_display(), user=self)
+            url = 'https://{home_wiki_link}/wiki/User:{self.wp_username}'.format(
+                home_wiki_link=self.get_home_wiki_display(), self=self)
         else:
             url = None
         return url
@@ -136,9 +136,9 @@ class Editor(models.Model):
 
     @property
     def wp_link_edit_count(self):
-        url = '{base_url}?user={user.wp_username}&project={home_wiki_link}'.format(
+        url = '{base_url}?user={self.wp_username}&project={home_wiki_link}'.format(
             base_url='https://tools.wmflabs.org/xtools-ec/',
-            user=self,
+            self=self,
             home_wiki_link=self.get_home_wiki_display()
         )
         return url
@@ -146,18 +146,18 @@ class Editor(models.Model):
 
     @property
     def wp_link_sul_info(self):
-        url = '{base_url}?username={user.wp_username}'.format(
+        url = '{base_url}?username={self.wp_username}'.format(
             base_url='https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php',
-            user=self
+            self=self
         )
         return url
 
 
     @property
     def wp_link_pages_created(self):
-        url = '{base_url}?user={user.wp_username}&project={home_wiki_link}&namespace=all&redirects=none'.format(
+        url = '{base_url}?user={self.wp_username}&project={home_wiki_link}&namespace=all&redirects=none'.format(
             base_url='https://tools.wmflabs.org/xtools/pages/index.php',
-            user=self,
+            self=self,
             home_wiki_link=self.get_home_wiki_display()
         )
         return url
