@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
+from django.utils.translation  import ugettext_lazy as _
 
 from durationfield.db.models.fields.duration import DurationField
 
@@ -20,8 +21,8 @@ class Partner(models.Model):
 
 
     company_name = models.CharField(max_length=30,
-        help_text="Partner organization's name (e.g. McFarland). Note: " \
-        "this will be user-visible and *not translated*.")
+        help_text=_("Partner organization's name (e.g. McFarland). Note: "
+        "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
 
 
@@ -29,25 +30,28 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     terms_of_use = models.URLField(blank=True, null=True,
-        help_text="Required if this company requires that users agree to " \
-        "terms of use as a condition of applying for access; optional " \
-        "otherwise.")
+        help_text=_("Required if this company requires that users agree to "
+        "terms of use as a condition of applying for access; optional "
+        "otherwise."))
     description = models.TextField(blank=True, null=True,
-        help_text="Optional description of this partner's offerings.")
+        help_text=_("Optional description of this partner's offerings."))
+    logo_url = models.URLField(blank=True, null=True,
+        help_text=_('Optional URL of an image that can be used to represent '
+                    'this partner.'))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
         default=None,
-        help_text="If True, users can only apply for one Stream at a time from "
-        "this Partner. If False, users can apply for multiple Streams at a "
-        "time. This field must be filled in when Partners have multiple "
-        "Streams, but may be left blank otherwise.")
+        help_text=_("If True, users can only apply for one Stream at a time "
+        "from this Partner. If False, users can apply for multiple Streams at "
+        "a time. This field must be filled in when Partners have multiple "
+        "Streams, but may be left blank otherwise."))
 
     # See comment in save().
     access_grant_term = DurationField(
         blank=True, null=True,
-        help_text="The standard length of an access grant from this Partner. " \
-                  "Enter like '365 days' or '365d' or '1 year'."
+        help_text=_("The standard length of an access grant from this Partner. "
+                    "Enter like '365 days' or '365d' or '1 year'.")
         )
 
 
@@ -58,13 +62,27 @@ class Partner(models.Model):
     # Some fields are only required by some resources. This is where we track
     # whether *this* resource requires those optional fields.
 
-    real_name = models.BooleanField(default=False)
-    country_of_residence = models.BooleanField(default=False)
-    specific_title = models.BooleanField(default=False)
-    specific_stream = models.BooleanField(default=False)
-    occupation = models.BooleanField(default=False)
-    affiliation = models.BooleanField(default=False)
-    agreement_with_terms_of_use = models.BooleanField(default=False)
+    real_name = models.BooleanField(default=False,
+        help_text=_('Mark as true if this partner requires applicants to '
+                    'specify their real names.'))
+    country_of_residence = models.BooleanField(default=False,
+        help_text=_('Mark as true if this partner requires applicants to '
+                    'specify their countries of residence.'))
+    specific_title = models.BooleanField(default=False,
+        help_text=_('Mark as true if this partner requires applicants to '
+                    'specify a particular title they want to access.'))
+    specific_stream = models.BooleanField(default=False,
+        help_text=_('Mark as true if this partner requires applicants to '
+                    'specify a particular database they want to access.'))
+    occupation = models.BooleanField(default=False,
+        help_text=_('Mark as true if this partner requires applicants to '
+                    'specify their occupation.'))
+    affiliation = models.BooleanField(default=False,
+        help_text=_('Mark as true if this partner requires applicants to '
+                    'specify their institutional affiliation.'))
+    agreement_with_terms_of_use = models.BooleanField(default=False,
+        help_text=_("Mark as true if this partner requires applicants to agree "
+                    "with the partner's terms of use."))
 
     # TODO: information about access grant workflows and email templates
 
@@ -117,13 +135,13 @@ class Stream(models.Model):
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
     name = models.CharField(max_length=50,
-        help_text="Name of stream (e.g. 'Health and Behavioral Sciences). "
+        help_text=_("Name of stream (e.g. 'Health and Behavioral Sciences). "
             "Will be user-visible and *not translated*. Do not include the "
             "name of the partner here. If partner name and resource name "
             "need to be presented together, templates are responsible for "
-            "presenting them in a format that can be internationalized.")
+            "presenting them in a format that can be internationalized."))
     description = models.TextField(blank=True, null=True,
-        help_text="Optional description of this stream's contents.")
+        help_text=_("Optional description of this stream's contents."))
 
 
     def __str__(self):
@@ -150,13 +168,13 @@ class Contact(models.Model):
     partner = models.ForeignKey(Partner, db_index=True, related_name="contacts")
 
     title = models.CharField(max_length=30,
-        help_text="Organizational role or job title. This is NOT intended "
-        "to be used for honorofics.")
+        help_text=_("Organizational role or job title. This is NOT intended "
+        "to be used for honorofics."))
     email = models.EmailField()
     full_name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=15,
-        help_text="The form of the contact person's name to use in email " \
-        "greetings (as in 'Hi Jake')")
+        help_text=_("The form of the contact person's name to use in email "
+        "greetings (as in 'Hi Jake')"))
 
 
     def __str__(self):
