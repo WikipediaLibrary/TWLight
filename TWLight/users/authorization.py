@@ -16,10 +16,10 @@ from .models import Editor
 
 logger = logging.getLogger(__name__)
 
-# Construct a "consumer" from the key/secret provided by MediaWiki
+# Construct a "consumer" from the key/secret provided by MediaWiki.
 consumer_token = ConsumerToken(settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
 
-# Construct handshaker with wiki URI and consumer
+# Construct handshaker with wiki URI and consumer.
 handshaker = Handshaker(settings.WP_OAUTH_BASE_URL, consumer_token)
 
 

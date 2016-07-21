@@ -81,6 +81,7 @@ class Editor(models.Model):
         # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
         verbose_name = 'wikipedia editor'
         verbose_name_plural = 'wikipedia editors'
+        unique_together = ('wp_username', 'home_wiki')
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
@@ -113,8 +114,7 @@ class Editor(models.Model):
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     home_wiki = models.CharField(max_length=4, choices=WIKIS,
-        help_text=_("Home wiki, as indicated by user"),
-        blank=True)
+        help_text=_("Home wiki, as indicated by user"))
     contributions = models.TextField(
         help_text=_("Wiki contributions, as entered by user"),
         blank=True)
@@ -274,7 +274,10 @@ class Editor(models.Model):
 
 
     def __str__(self):
-        return self.wp_username
+        # Translators: This is how we display wikipedia editors' names by default. e.g. "ThatAndromeda (en.wikipedia.org)".
+        return _('{wp_username} ({wiki})').format(
+            wp_username=self.wp_username,
+            wiki=self.get_home_wiki_display())
 
 
     def get_absolute_url(self):

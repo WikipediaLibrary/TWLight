@@ -54,17 +54,17 @@ class UserProfileInline(admin.StackedInline):
 class UserAdmin(AuthUserAdmin):
     inlines = [EditorInline, UserProfileInline]
     actions = [deactivate]
-    list_display = ['username', 'get_editor', 'get_wiki', 'is_staff']
+    list_display = ['username', 'get_wp_username', 'get_wiki', 'is_staff']
     list_filter = ['is_staff', 'is_active', 'is_superuser']
     default_filters = ['is_active__exact=1']
 
-
-    def get_editor(self, user):
+    def get_wp_username(self, user):
         if hasattr(user, 'editor'):
             return user.editor.wp_username
         else:
             return ''
-    get_editor.short_description = _('Wikipedia username')
+    get_wp_username.short_description = _('Wikipedia username')
+
 
     def get_wiki(self, user):
         if hasattr(user, 'editor'):
