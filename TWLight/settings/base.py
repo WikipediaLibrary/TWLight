@@ -134,9 +134,12 @@ LANGUAGE_CODE = 'en-us' # Sets site default language.
 # First tuple element should be a standard language code; see
 # https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes .
 # Second is the human-readable form.
+# In the language choice dropdown, languages will appear -in the order listed
+# here-, regardless of how they ought to be alphabetized in the target
+# language.
 LANGUAGES = (
-  ('fr', _('French')),
   ('en', _('English')),
+  ('fr', _('French')),
 )
 
 LOCALE_PATHS = (

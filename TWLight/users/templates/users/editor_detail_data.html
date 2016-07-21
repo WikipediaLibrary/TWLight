@@ -1,6 +1,8 @@
 {% load i18n %}
 
-  {% include 'users/language_form.html' %}
+  {% ifequal request.user.editor editor %} 
+    {% include 'users/language_form.html' %}    
+  {% endifequal %}
 
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
@@ -33,6 +35,23 @@
         <br />
         <a href="{{ editor.wp_link_sul_info }}">({% trans "view Wikipedia SUL info" %})</a>
       {% endif %}
+      <br />
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Contributions" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {% if editor.contributions %}
+        {{ editor.contributions }}
+      {% endif %}
+      {% ifequal editor.user user %}
+        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
+      {% endifequal %}
       <br />
     </div>
   </div>
@@ -102,23 +121,6 @@
     </div>
     <div class="col-xs-12 col-sm-9">
       {{ editor.wp_registered }}
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="row clearfix">
-    <div class="col-xs-12 col-sm-3">
-      <strong>{% trans "Contributions" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-9">
-      {% if editor.contributions %}
-        {{ editor.contributions }}
-      {% endif %}
-      {% ifequal editor.user user %}
-        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
-      {% endifequal %}
-      <br />
     </div>
   </div>
 

@@ -18,16 +18,6 @@
   {% include 'applications/application_list_include.html' %}
 
   <h2>{% trans 'Editor data' %}</h2>
-  {% ifequal editor.user user %} 
-    {% if not editor.home_wiki or not editor.contributions %}
-      <div class="well">
-        <h3>
-          {% trans 'Please complete your profile.' %}
-        </h3>
-        {% crispy form %}
-      </div>
-    {% endif %}    
-  {% endifequal %}
 
   {% include 'users/editor_detail_data.html' %}
 
