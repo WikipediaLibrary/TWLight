@@ -41,6 +41,42 @@
 
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Satisfies terms of use?" %}</strong>
+      <p>
+        {% blocktrans %}
+          At their last login, did this user meet the criteria set forth in the
+          terms of use (at least 500 edits, registered at least 6 months ago,
+          has Special:Email enabled, not blocked)?
+        {% endblocktrans %}
+      </p>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {% if editor.wp_valid %}
+        {% trans "Yes" %}
+      {% else %}
+        <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
+        <p>
+          {% blocktrans with username=editor.wp_username %}
+            {{ username }} may still be eligible for access grants at the
+            coordinators' discretion.
+          {% endblocktrans %}
+        </p>
+        <p>
+          {% blocktrans %}
+            In particular, editors who meet the criteria, but whose activity is
+            spread across multiple wikis, may be erroneously marked as
+            unqualified. The Library Card Platform only checks for home wiki
+            activity.
+          {% endblocktrans %}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
       <strong>{% trans "Wikipedia edit count *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-9">

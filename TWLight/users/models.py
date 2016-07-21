@@ -105,6 +105,10 @@ class Editor(models.Model):
     # Editor.objects.filter(wp_groups__icontains=groupname) or similar.
     wp_groups = models.TextField(help_text=_("Wikipedia groups"))
     wp_rights = models.TextField(help_text=_("Wikipedia user rights"))
+    wp_valid = models.BooleanField(default=False,
+        help_text=_('At their last login, did this '
+        'user meet the criteria set forth in the Wikipedia Library Card '
+        'Platform terms of use?'))
 
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -188,6 +192,12 @@ class Editor(models.Model):
         * Be active for >= 6 months
         * Have Special:Email User enabled
         * Not be blocked on any projects
+
+        Note that we won't prohibit signups or applications on this basis.
+        Coordinators have discretion to approve people who are near the cutoff.
+        Furthermore, editors who are active on multiple wikis may meet this
+        minimum when their account activity is aggregated even if they do not
+        meet it on their home wiki - but we can only check the home wiki.
         """
         try:
             # Check: >= 500 edits
@@ -255,14 +265,10 @@ class Editor(models.Model):
         self.wp_editcount = identity['editcount']
         reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
         self.wp_registered = reg_date
+        self.wp_valid = self._is_user_valid(identity)
         self.save()
 
         self.user.email = identity['email']
-
-        valid = self._is_user_valid(identity)
-
-        if not valid:
-            self.user.is_active = False
 
         self.user.save()
 
