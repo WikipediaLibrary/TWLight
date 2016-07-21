@@ -12,7 +12,7 @@ from .models import Editor, UserProfile
 class EditorUpdateForm(forms.ModelForm):
     class Meta:
         model = Editor
-        fields = ['home_wiki', 'contributions']
+        fields = ['contributions']
 
     def __init__(self, *args, **kwargs):
         """
