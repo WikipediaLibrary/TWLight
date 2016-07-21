@@ -76,6 +76,27 @@ When people create accounts via OAuth, they have Editor status by default. To pr
 * Move _Coordinators_ from _Available groups_ to _Chosen groups_
 * Click _Save_
 
+### Deactivating & reactivating accounts
+
+We do not *delete* accounts, because doing so would delete the application history, which we wish to retain.
+
+We can *deactivate* accounts upon request. To do so:
+* log into the `/admin`
+* select one or more accounts to deactivate
+* from the `Action:` dropdown, select `Deactivate selected accounts` (do NOT select the delete function) and press `Go`
+
+This will perform the following steps:
+* delete the user's email and, if known, their real name, affiliation, occupation, and country of residence
+* set their account to inactive
+
+"Inactive" means the following:
+1) Users will not be able to log in.
+2) You will no longer see them in your normal list of users at `/admin`.
+
+If you want to see them in the admin site, set the `By active` filter in the sidebar to `All` or `No`.
+
+If they want to reactivate their account, you can set the `Active` checkbox back to True and they will be permitted to log in again. We will still not have their real name, etc., although we may re-retrieve their email address from Wikipedia on login.
+
 ## Partners
 https://django-durationfield.readthedocs.org/en/latest/#usage
 TODO
