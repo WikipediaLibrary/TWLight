@@ -165,6 +165,94 @@
       display: block;
       width: 100%;
     }
+
+    /*
+    ----------------------------------------------------------------------------
+    CLEARING COLUMNS
+    --------------------------------------------------------------------------*/
+
+    /* Clear ends of rows to preserve vertical spacing when for-looping through
+       lists of tiles.
+       See http://www.bluthemes.com/blog/3/clearing-bootstrap-3-columns.
+       SO MUCH EASIER than throwing a |divisibleby into the for loop to break
+       and restart the row-fluid div at the end of each row.
+       Probably doesn't work on versions of IE below 8.
+    */
+
+    /*  Tablet  */
+    @media (min-width:767px) {
+
+      /* Column clear fix */
+      .col-lg-1:nth-child(12n+1),
+      .col-lg-2:nth-child(6n+1),
+      .col-lg-3:nth-child(4n+1),
+      .col-lg-4:nth-child(3n+1),
+      .col-lg-6:nth-child(2n+1),
+      .col-md-1:nth-child(12n+1),
+      .col-md-2:nth-child(6n+1),
+      .col-md-3:nth-child(4n+1),
+      .col-md-4:nth-child(3n+1),
+      .col-md-6:nth-child(2n+1){
+        clear: none;
+      }
+      .col-sm-1:nth-child(12n+1),
+      .col-sm-2:nth-child(6n+1),
+      .col-sm-3:nth-child(4n+1),
+      .col-sm-4:nth-child(3n+1),
+      .col-sm-6:nth-child(2n+1){
+        clear: left;
+      }
+    }
+
+    /*  Medium Desktop  */
+    @media (min-width:992px) {
+
+      /* Column clear fix */
+      .col-lg-1:nth-child(12n+1),
+      .col-lg-2:nth-child(6n+1),
+      .col-lg-3:nth-child(4n+1),
+      .col-lg-4:nth-child(3n+1),
+      .col-lg-6:nth-child(2n+1),
+      .col-sm-1:nth-child(12n+1),
+      .col-sm-2:nth-child(6n+1),
+      .col-sm-3:nth-child(4n+1),
+      .col-sm-4:nth-child(3n+1),
+      .col-sm-6:nth-child(2n+1){
+        clear: none;
+      }
+      .col-md-1:nth-child(12n+1),
+      .col-md-2:nth-child(6n+1),
+      .col-md-3:nth-child(4n+1),
+      .col-md-4:nth-child(3n+1),
+      .col-md-6:nth-child(2n+1){
+        clear: left;
+      }
+    }
+
+    /*  Large Desktop  */
+    @media (min-width:1200px) {
+
+      /* Column clear fix */
+      .col-md-1:nth-child(12n+1),
+      .col-md-2:nth-child(6n+1),
+      .col-md-3:nth-child(4n+1),
+      .col-md-4:nth-child(3n+1),
+      .col-md-6:nth-child(2n+1),
+      .col-sm-1:nth-child(12n+1),
+      .col-sm-2:nth-child(6n+1),
+      .col-sm-3:nth-child(4n+1),
+      .col-sm-4:nth-child(3n+1),
+      .col-sm-6:nth-child(2n+1){
+        clear: none;
+      }
+      .col-lg-1:nth-child(12n+1),
+      .col-lg-2:nth-child(6n+1),
+      .col-lg-3:nth-child(4n+1),
+      .col-lg-4:nth-child(3n+1),
+      .col-lg-6:nth-child(2n+1){
+        clear: left;
+      }
+    }
   </style>
 </head>
 <body>

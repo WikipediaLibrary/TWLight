@@ -5,7 +5,7 @@
 {% block content %}
   <h2>{% trans "List of partners" %}</h2>
 
-  <div class="row clear-columns">
+  <div class="row">
     {% for partner in object_list %}
       <div class="col-xs-12 col-sm-4 col-md-3">
         {% include "resources/partner_tile.html" %}        
