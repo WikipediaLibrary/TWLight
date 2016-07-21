@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from datetime import date, timedelta
 from mock import patch
+import reversion
 from urlparse import urlparse
 
 from django import forms
@@ -1298,6 +1300,192 @@ class ListApplicationsTest(BaseApplicationViewTest):
         with self.assertRaises(Partner.DoesNotExist):
             _ = views.ListApplicationsView.as_view()(request)
 
+
+
+class ApplicationModelTest(TestCase):
+
+    def test_approval_sets_date_closed(self):
+        app = ApplicationFactory(status=Application.PENDING)
+        self.assertFalse(app.date_closed)
+
+        app.status = Application.APPROVED
+        app.save()
+
+        self.assertTrue(app.date_closed)
+        self.assertEqual(app.date_closed, date.today())
+
+
+    def test_approval_sets_days_open(self):
+        app = ApplicationFactory(status=Application.PENDING)
+        self.assertEqual(app.days_open, None)
+
+        app.status = Application.APPROVED
+        app.save()
+
+        self.assertEqual(app.days_open, 0)
+
+
+    def test_rejection_sets_date_closed(self):
+        app = ApplicationFactory(status=Application.PENDING)
+        self.assertFalse(app.date_closed)
+
+        app.status = Application.NOT_APPROVED
+        app.save()
+
+        self.assertTrue(app.date_closed)
+        self.assertEqual(app.date_closed, date.today())
+
+
+    def test_rejection_sets_days_open(self):
+        # date_created will be auto set to today
+        app = ApplicationFactory(status=Application.PENDING)
+        self.assertTrue(app.days_open == None)
+
+        app.status = Application.NOT_APPROVED
+        app.save()
+
+        self.assertTrue(app.days_open == 0)
+
+
+    def test_earliest_expiry_date_set_on_save(self):
+        app = ApplicationFactory()
+        self.assertFalse(app.earliest_expiry_date)
+
+        app.date_closed = date.today()
+        app.save()
+
+        term = app.partner.access_grant_term
+        expected_expiry = app.date_created + term
+
+        self.assertEqual(app.earliest_expiry_date, expected_expiry)
+
+
+    def test_bootstrap_class(self):
+        app = ApplicationFactory(status=Application.PENDING)
+        self.assertEqual(app.get_bootstrap_class(), '-primary')
+
+        app.status = Application.QUESTION
+        app.save()
+        self.assertEqual(app.get_bootstrap_class(), '-warning')
+
+        app.status = Application.APPROVED
+        app.save()
+        self.assertEqual(app.get_bootstrap_class(), '-success')
+
+        app.status = Application.NOT_APPROVED
+        app.save()
+        self.assertEqual(app.get_bootstrap_class(), '-danger')
+
+
+    def test_get_version_count(self):
+        app = ApplicationFactory()
+
+        # On creation apps have only one version.
+        self.assertEqual(app.get_version_count(), 1)
+
+        # Make a change to the app and save it - now there should be one
+        # version.
+        app.status = Application.QUESTION
+        app.save()
+        self.assertEqual(app.get_version_count(), 2)
+
+        # What the heck.
+        app.status = Application.APPROVED
+        app.save()
+        self.assertEqual(app.get_version_count(), 3)
+
+        # We're just gonna have to hope this continues inductively.
+
+
+    def test_get_latest_version(self):
+        app = ApplicationFactory(
+            status=Application.PENDING,
+            rationale='for great justice')
+
+        orig_version = app.get_latest_version()
+        self.assertTrue(isinstance(orig_version,
+            reversion.models.Version))
+
+        self.assertEqual(orig_version.field_dict['status'], Application.PENDING)
+        self.assertEqual(orig_version.field_dict['rationale'], 'for great justice')
+
+        app.status = Application.QUESTION
+        app.save()
+
+        new_version = app.get_latest_version()
+        self.assertTrue(isinstance(new_version,
+            reversion.models.Version))
+        self.assertEqual(new_version.field_dict['status'], Application.QUESTION)
+        self.assertEqual(new_version.field_dict['rationale'], 'for great justice')
+
+
+    def test_get_latest_revision(self):
+        app = ApplicationFactory()
+
+        orig_revision = app.get_latest_revision()
+        self.assertTrue(isinstance(orig_revision,
+            reversion.models.Revision))
+
+        app.status = Application.QUESTION
+        app.save()
+
+        new_revision = app.get_latest_revision()
+        self.assertTrue(isinstance(new_revision,
+            reversion.models.Revision))
+        self.assertNotEqual(orig_revision, new_revision)
+
+
+    def test_get_is_probably_expired(self):
+        app = ApplicationFactory()
+
+        # Apps do not have expiry dates when set (as the expiry date is
+        # calculated from the date of approval), so they can't be expired.
+        self.assertFalse(app.is_probably_expired())
+
+        # It should now have an expiration date, but this defaults to a year
+        # in the future, so the access grant should not have expired.
+        app.status = Application.APPROVED
+        app.save()
+        self.assertTrue(app.is_probably_expired is not None)
+        self.assertFalse(app.is_probably_expired())
+
+        app.earliest_expiry_date = date.today() - timedelta(days=1)
+        app.save()
+        self.assertTrue(app.is_probably_expired())
+
+
+    def test_get_num_days_since_expiration(self):
+        app = ApplicationFactory()
+        self.assertTrue(app.get_num_days_since_expiration() is None)
+
+        app.earliest_expiry_date = date.today()
+        app.save()
+        self.assertEqual(app.get_num_days_since_expiration(), 0)
+
+        app.earliest_expiry_date = date.today() + timedelta(days=1)
+        app.save()
+        self.assertTrue(app.get_num_days_since_expiration() is None)
+
+        app.earliest_expiry_date = date.today() - timedelta(days=1)
+        app.save()
+        self.assertEqual(app.get_num_days_since_expiration(), 1)
+
+
+    def test_get_num_days_until_expiration(self):
+        app = ApplicationFactory()
+        self.assertTrue(app.get_num_days_until_expiration() is None)
+
+        app.earliest_expiry_date = date.today()
+        app.save()
+        self.assertTrue(app.get_num_days_until_expiration() is None)
+
+        app.earliest_expiry_date = date.today() + timedelta(days=1)
+        app.save()
+        self.assertTrue(app.get_num_days_until_expiration() is 1)
+
+        app.earliest_expiry_date = date.today() - timedelta(days=1)
+        app.save()
+        self.assertTrue(app.get_num_days_until_expiration() is None)
 
 # only coordinators can post to batch edit
 # posting to batch edit sets status

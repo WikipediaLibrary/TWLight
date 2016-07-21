@@ -252,11 +252,9 @@ CONSUMER_SECRET = os.environ.get('TWLIGHT_CONSUMER_SECRET', None)
 
 # See https://django-reversion.readthedocs.org/ .
 
-# This will ensure that all changes to models registered with reversion are
-# automatically versioned & saved, and that they have request.user attached
-# to their metadata.
-MIDDLEWARE_CLASSES += ('reversion.middleware.RevisionMiddleware',)
-
+# We are NOT using reversion middleware, because that creates revisions when
+# save() is called in the context of some http requests, but not on all database
+# saves. This makes it untestable. Instead we decorate the Application.save().
 
 
 # DURATIONFIELD CONFIGURATION
