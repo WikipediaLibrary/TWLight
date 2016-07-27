@@ -90,7 +90,7 @@ FIELD_LABELS = {
     OCCUPATION: _('Your occupation'),
     AFFILIATION: _('Your institutional affiliation'),
     PARTNER: _('Publisher name'),
-    RATIONALE: _('Why do you want access to this resource?'),
+    RATIONALE: _('Why do you want access to this resource? Note: this may be publicly displayed on the Library Card Platform home page.'),
     SPECIFIC_STREAM: _('Which collection do you want access to?'),
     SPECIFIC_TITLE: _('Which book do you want access to?'),
     COMMENTS: _('Anything else you want to say'),

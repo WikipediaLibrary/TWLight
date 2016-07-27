@@ -26,9 +26,10 @@ them to the coordinators group. They can also directly create Django user
 accounts without attached Editors in the admin site, if for some reason it's
 useful to have account holders without attached Wikipedia data.
 """
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import logging
+import urllib2
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -80,6 +81,7 @@ class Editor(models.Model):
         # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
         verbose_name = 'wikipedia editor'
         verbose_name_plural = 'wikipedia editors'
+        unique_together = ('wp_username', 'home_wiki')
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
@@ -104,12 +106,15 @@ class Editor(models.Model):
     # Editor.objects.filter(wp_groups__icontains=groupname) or similar.
     wp_groups = models.TextField(help_text=_("Wikipedia groups"))
     wp_rights = models.TextField(help_text=_("Wikipedia user rights"))
+    wp_valid = models.BooleanField(default=False,
+        help_text=_('At their last login, did this '
+        'user meet the criteria set forth in the Wikipedia Library Card '
+        'Platform terms of use?'))
 
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     home_wiki = models.CharField(max_length=4, choices=WIKIS,
-        help_text=_("Home wiki, as indicated by user"),
-        blank=True)
+        help_text=_("Home wiki, as indicated by user"))
     contributions = models.TextField(
         help_text=_("Wiki contributions, as entered by user"),
         blank=True)
@@ -126,8 +131,8 @@ class Editor(models.Model):
     @property
     def wp_user_page_url(self):
         if self.get_home_wiki_display():
-            url = 'https://{home_wiki_link}/wiki/User:{user.wp_username}'.format(
-                home_wiki_link=self.get_home_wiki_display(), user=self)
+            url = 'https://{home_wiki_link}/wiki/User:{self.wp_username}'.format(
+                home_wiki_link=self.get_home_wiki_display(), self=self)
         else:
             url = None
         return url
@@ -135,9 +140,9 @@ class Editor(models.Model):
 
     @property
     def wp_link_edit_count(self):
-        url = '{base_url}?user={user.wp_username}&project={home_wiki_link}'.format(
+        url = '{base_url}?user={self.wp_username}&project={home_wiki_link}'.format(
             base_url='https://tools.wmflabs.org/xtools-ec/',
-            user=self,
+            self=self,
             home_wiki_link=self.get_home_wiki_display()
         )
         return url
@@ -145,18 +150,18 @@ class Editor(models.Model):
 
     @property
     def wp_link_sul_info(self):
-        url = '{base_url}?username={user.wp_username}'.format(
+        url = '{base_url}?username={self.wp_username}'.format(
             base_url='https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php',
-            user=self
+            self=self
         )
         return url
 
 
     @property
     def wp_link_pages_created(self):
-        url = '{base_url}?user={user.wp_username}&project={home_wiki_link}&namespace=all&redirects=none'.format(
+        url = '{base_url}?user={self.wp_username}&project={home_wiki_link}&namespace=all&redirects=none'.format(
             base_url='https://tools.wmflabs.org/xtools/pages/index.php',
-            user=self,
+            self=self,
             home_wiki_link=self.get_home_wiki_display()
         )
         return url
@@ -179,6 +184,46 @@ class Editor(models.Model):
         return json.loads(self.wp_groups)
 
 
+    def _is_user_valid(self, identity):
+        """
+        Check for the eligibility criteria laid out in the terms of service.
+        To wit, users must:
+        * Have >= 500 edits
+        * Be active for >= 6 months
+        * Have Special:Email User enabled
+        * Not be blocked on any projects
+
+        Note that we won't prohibit signups or applications on this basis.
+        Coordinators have discretion to approve people who are near the cutoff.
+        Furthermore, editors who are active on multiple wikis may meet this
+        minimum when their account activity is aggregated even if they do not
+        meet it on their home wiki - but we can only check the home wiki.
+        """
+        try:
+            # Check: >= 500 edits
+            assert int(identity['editcount']) >= 500
+
+            # Check: registered >= 6 months ago
+            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+            assert datetime.today().date() - timedelta(days=182) >= reg_date
+
+            # Check: Special:Email User enabled
+            endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=options'.format(base=identity['iss'])
+            userinfo = json.loads(urllib2.urlopen(endpoint).read())
+            logger.info('user info was {userinfo}'.format(userinfo=userinfo))
+
+            disablemail = userinfo['query']['userinfo']['options']['disablemail']
+            assert int(disablemail) == 0
+
+            # Check: not blocked
+            assert identity['blocked'] == False
+
+            return True
+        except AssertionError:
+            logger.exception('User was not valid.')
+            return False
+
+
     def update_from_wikipedia(self, identity):
         """
         Given the dict returned from the Wikipedia OAuth /identify endpoint,
@@ -193,6 +238,7 @@ class Editor(models.Model):
             'username': identity['username'],       # wikipedia username
             'sub': identity['sub'],                 # wikipedia ID
             'rights': identity['rights'],           # user rights on-wiki
+            'groups': identity['groups'],           # user groups on-wiki
             'editcount': identity['editcount'],
             'email': identity['email'],
 
@@ -219,14 +265,19 @@ class Editor(models.Model):
         self.wp_editcount = identity['editcount']
         reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
         self.wp_registered = reg_date
+        self.wp_valid = self._is_user_valid(identity)
         self.save()
 
         self.user.email = identity['email']
+
         self.user.save()
 
 
     def __str__(self):
-        return self.wp_username
+        # Translators: This is how we display wikipedia editors' names by default. e.g. "ThatAndromeda (en.wikipedia.org)".
+        return _('{wp_username} ({wiki})').format(
+            wp_username=self.wp_username,
+            wiki=self.get_home_wiki_display())
 
 
     def get_absolute_url(self):

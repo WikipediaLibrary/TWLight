@@ -40,7 +40,7 @@ logger = logging.getLogger(__name__)
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 
 
-class RequestApplicationView(ToURequired, EditorsOnly, FormView):
+class RequestApplicationView(EditorsOnly, ToURequired, FormView):
     template_name = 'applications/request_for_application.html'
 
     def get_form_class(self):
@@ -84,11 +84,16 @@ class RequestApplicationView(ToURequired, EditorsOnly, FormView):
 
         self.request.session[PARTNERS_SESSION_KEY] = partner_ids
 
-        return HttpResponseRedirect(reverse('applications:apply'))
+        if len(partner_ids):
+            return HttpResponseRedirect(reverse('applications:apply'))
+        else:
+            messages.add_message(self.request, messages.INFO,
+                _('Please select at least one partner.'))
+            return HttpResponseRedirect(reverse('applications:request'))
 
 
 
-class SubmitApplicationView(ToURequired, EditorsOnly, FormView):
+class SubmitApplicationView(EditorsOnly, ToURequired, FormView):
     template_name = 'applications/apply.html'
     form_class = BaseApplicationForm
 
@@ -272,7 +277,7 @@ class SubmitApplicationView(ToURequired, EditorsOnly, FormView):
 
 
 
-class _BaseListApplicationView(ToURequired, CoordinatorsOnly, ListView):
+class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
     """
     Factors out shared functionality for the application list views. Not
     intended to be user-facing. Subclasses should implement get_queryset().
@@ -499,7 +504,7 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
 
 
 
-class EvaluateApplicationView(ToURequired, CoordinatorsOrSelf, UpdateView):
+class EvaluateApplicationView(CoordinatorsOrSelf, ToURequired, UpdateView):
     """
     Allows Coordinators to:
     * view single applications

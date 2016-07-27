@@ -26,7 +26,7 @@
       <div class="timeline-panel">
         <div class="timeline-body">
           {% if object.terms_of_use %}
-            <p><a href="{{ object.terms_of_use }}">terms of use</a></p>
+            <p><a href="{{ object.terms_of_use }}">{% trans "Terms of use" %}</a></p>
           {% else %}
             <p>{% trans "Terms of use not available." %}</p>
           {% endif %}

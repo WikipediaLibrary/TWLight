@@ -58,6 +58,12 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
         context['object_list'] = editor.applications.all().order_by('status')
         context['form'] = EditorUpdateForm(instance=editor)
         context['language_form'] = SetLanguageForm()
+
+        if self.request.user.editor == editor and not editor.contributions:
+            messages.add_message(self.request, messages.WARNING,
+                _('Please indicate your contributions to Wikipedia (below) to '
+                  'help coordinators evaluate your applications.'))
+
         return context
 
 

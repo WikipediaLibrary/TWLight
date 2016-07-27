@@ -101,9 +101,15 @@ class ToURequired(UserPassesTestMixin):
     """
     Restricts visibility to:
     * Users who have agreed with the site's terms of use.
+    * Superusers.
     """
 
     login_url = reverse_lazy('terms')
 
     def test_func(self, user):
-        return user.userprofile.terms_of_use
+        try:
+            return user.is_superuser or user.userprofile.terms_of_use
+        except AttributeError:
+            # AnonymousUser won't have a userprofile...but AnonymousUser hasn't
+            # agreed to the Terms, either, so we can safely deny them.
+            return False

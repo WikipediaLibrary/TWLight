@@ -3,8 +3,6 @@
 # These were scraped from wikistats.wmflabs.org/display.php?t=wp on
 # 24 November 2015.
 
-# TODO _trans: wiki URLs do not need translation; language codes will if you use them
-
 WIKIS = (
     # Machine-readable/human-readable pairs intended as options
     # for the home_wiki element on the user profile.

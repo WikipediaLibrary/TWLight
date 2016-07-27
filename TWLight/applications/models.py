@@ -79,9 +79,20 @@ class Application(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('applications:evaluate', kwargs={'pk': self.pk})
 
+    # Every single save to this model should create a revision.
+    # You can access two models this way: REVISIONS and VERSIONS.
+    # Versions contain the model data at the time, accessible via
+    # version.field_dict['field_name']. Revisions contain metadata about the
+    # version (like when it was saved).
+    # See http://django-reversion.readthedocs.io/en/release-1.8/.
+    # See TWLight/applications/templatetags/version_tags for how to display
+    # version-related information in templates; the API is not always
+    # straightforward so we wrap it there.
+    @reversion.create_revision()
     def save(self, *args, **kwargs):
         version = self.get_latest_version()
-        if version:
+        count = self.get_version_count()
+        if count >= 2:
             orig_status = version.field_dict['status']
             if (orig_status in [self.PENDING, self.QUESTION]
                 and self.status in [self.APPROVED, self.NOT_APPROVED]
@@ -89,6 +100,18 @@ class Application(models.Model):
 
                 self.date_closed = date.today()
                 self.days_open = (date.today() - self.date_created).days
+        else:
+            # If somehow we've created an Application whose status is final
+            # at the moment of creation, set its date-closed-type parameters
+            # too.
+            # Note that this block executes if count == 1 and also if
+            # count == None, and the *latter* is what we expect on first save;
+            # get_version_count will return None for reasons it documents.
+            if (self.status in [self.APPROVED, self.NOT_APPROVED]
+                and not self.date_closed):
+
+                self.date_closed = date.today()
+                self.days_open = 0
 
         if self.date_closed and not self.earliest_expiry_date:
             self.earliest_expiry_date = self.date_closed + self.partner.access_grant_term
@@ -115,13 +138,19 @@ class Application(models.Model):
 
 
     def get_version_count(self):
-        return len(reversion.get_for_object(self))
+        try:
+            return len(reversion.get_for_object(self))
+        except TypeError:
+            # When we call this the *first* time we save an object, it will fail
+            # as the object properties that reversion is looking for are not
+            # yet set.
+            return None
 
 
     def get_latest_version(self):
         try:
             return reversion.get_for_object(self)[0]
-        except TypeError:
+        except (TypeError, IndexError):
             # If no versions yet...
             return None
 

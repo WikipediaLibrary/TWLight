@@ -8,9 +8,9 @@
 
   {% if not user.is_authenticated %}
     <p class="text-center">
-      <button class="btn btn-primary">
+      <a href="{% url 'oauth_login' %}" class="btn btn-primary">
         {% trans "Log in/sign up" %}
-      </button>
+      </a>
     </p>
   {% endif %}
 
@@ -22,7 +22,7 @@
         </div>
         <div class="timeline-panel">
           <div class="timeline-body">
-            <p>{{ event.text }}</p>
+            <p>{{ event.text | safe }}</p>
 
             <p class="small pull-right">
               {{ event.date | localize }}
