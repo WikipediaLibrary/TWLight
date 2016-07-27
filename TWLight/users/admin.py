@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 
-from TWLight.users.models import Editor, Coordinator
+from TWLight.users.models import Editor, UserProfile
 
 class EditorInline(admin.StackedInline):
     model = Editor
@@ -13,8 +13,8 @@ class EditorInline(admin.StackedInline):
 
 
 
-class CoordinatorInline(admin.StackedInline):
-    model = Coordinator
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
     max_num = 1
     extra = 1
     can_delete = False
@@ -23,7 +23,7 @@ class CoordinatorInline(admin.StackedInline):
 
 
 class UserAdmin(AuthUserAdmin):
-    inlines = [EditorInline, CoordinatorInline]
+    inlines = [EditorInline, UserProfileInline]
 
 
 

@@ -1,0 +1,17 @@
+defusedxml==0.4.1
+Django==1.7.7
+django-autocomplete-light==2.3.1
+django-braces==1.4.0
+django-crispy-forms==1.4.0
+django-reversion==1.8.4
+factory_boy==2.4.1
+jsonfield==0.9.13
+oauthlib==0.6.3
+python-dateutil==2.2
+python-openid==2.2.5
+python-social-auth==0.2.1
+PyJWT==0.2.1
+requests==2.4.3
+requests-oauthlib==0.4.0
+six==1.9.0
+wheel==0.24.0

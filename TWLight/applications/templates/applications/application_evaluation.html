@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load l10n %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load comments %}
+{% load version_tags %}
+
+{% block content %}
+  <h1>{% trans 'Evaluate application' %}</h1>
+
+  {% crispy form %}
+
+  <h2>{% trans 'Application' %}</h2>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Date of application' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.date_created | localize }}
+    </div>
+
+    {% if object.get_num_days_open >= 0 %}
+      <div class="col-xs-12 col-sm-4">
+          <strong>{% trans 'Number of days open' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ object.get_num_days_open }}
+      </div>
+    {% else %}
+      <div class="col-xs-12 col-sm-4">
+        <strong>{% trans 'Number of days since application was closed' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ object.get_num_days_open|stringformat:"+d"|slice:"1:" }} {# slice off negative sign #}
+      </div>
+    {% endif %}
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Status' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      <span class="label label{{ object.get_bootstrap_class }} label-lg">{{ object.get_status_display }}
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Partner' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {{ object.partner }}
+    </div>
+
+    {% if object.specific_stream %}
+      <div class="col-xs-12 col-sm-4">
+        <strong>{% trans 'Collection requested' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ object.specific_stream }}
+      </div>
+    {% endif %}
+
+    {% if object.specific_title %}
+      <div class="col-xs-12 col-sm-4">
+        <strong>{% trans 'Title requested' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ object.specific_title }}
+      </div>
+    {% endif %}
+
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Why the editor wants access' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {% if object.rationale %}
+        {{ object.rationale }}
+      {% else %}
+        {% trans 'Not stated' %}
+      {% endif %}
+    </div>
+
+    {% if object.comments %}
+      <div class="col-xs-12 col-sm-4">
+        <strong>{% trans 'Extra comments from the editor' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ object.comments }}
+      </div>
+    {% endif %}    
+  </div>
+
+  <h2>{% trans 'Discussion' %}</h2>
+  {% render_comment_list for object %}
+
+  {% get_comment_form for object as form %}
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-3">
+      <form action="{% comment_form_target %}" method="POST">
+        {% csrf_token %}
+        <label for="{{ form.comment.id }}" class="control-label">
+            {{ form.comment.label|safe }}
+        </label>
+        {% crispy_field form.comment %}
+        {{ form.honeypot }}
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <input type="hidden" name="next" value="{% url 'applications:evaluate' object.pk %}" />
+        <br />
+        <input type="submit" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
+      </form>
+    </div>
+  </div>
+
+  <p>
+    {% blocktrans trimmed %}
+      This page and its comments are visible to all Wikipedia Library
+      coordinators and to the editor who submitted this application.
+    {% endblocktrans %}
+  </p>
+
+  <h2>{% trans 'User' %}</h2>
+
+  {% include 'users/editor_detail_data.html' %}
+
+  <h2>{% trans 'Revision history' %}</h2>
+
+  <form method="POST" action="{% url 'applications:diff' object.pk %}">
+    {% csrf_token %}
+    <ul class="list-unstyled">
+      {% for version in versions %}
+        <li>
+          <div class="row">
+            <div class="col-xs-2">
+              <span class="label label{{ version|get_bootstrap_class_for_version }} pull-right">{{ version|get_status_display_for_version }}</span>
+            </div>
+            {% comment %} # cool function, but the diff page isn't working yet
+              <div class="col-xs-1">
+                <input type="radio" value="{{ version.id }}" name="orig" {% if forloop.first %}class="pull-left"checked{% else %}class="pull-left hidden"{% endif %}>
+                <input type="radio" value="{{ version.id }}" name="diff" {% if forloop.first %}class="pull-right hidden"{% else %}class="pull-right"{% endif %}>
+              </div>
+            {% endcomment %}
+            <div class="col-xs-9">
+              <span class="pull-left">
+                {% if forloop.last %}
+                  {% blocktrans trimmed with user=version.revision.user review_date=version.revision.date_created|localize %}
+                    Submitted by {{ user }} on {{ review_date }}
+                  {% endblocktrans %}
+                {% else %}
+                  {% blocktrans trimmed with user=version.revision.user review_date=version.revision.date_created|localize %}
+                    Reviewed by {{ user }} on {{ review_date }}
+                  {% endblocktrans %}
+                {% endif %}
+              </span>
+            </div>
+        </li>
+      {% empty %}
+        <li>{% trans 'No previous versions.' %}</li>
+      {% endfor %}      
+    </ul>
+    {% comment %} # cool function, but the diff page isn't working yet
+    <div class="row">
+      <div class="col-xs-10 col-xs-push-2">
+        <input type="submit" value="{% trans 'Compare selected revisions' %}" class="btn">
+      </div>
+    </div>
+    {% endcomment %}
+</form>
+{% endblock %}

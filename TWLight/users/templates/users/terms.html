@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    {% crispy form %}
+  {% endif %}
+
+  {# TODO: add terms once finalized #}    
+{% endblock content %}

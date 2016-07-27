@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h1>{{ title }}</h1>
+
+  <p>
+    {{ intro_text | safe }}
+  </p>
+
+  <!-- begin filtering options/info -->
+  <div class="row">
+
+    <div class=" col-xs-12 col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          {% trans "Filter applications by..." %}
+        </div>
+        <div class="panel-body">
+          {% crispy autocomplete_form %}
+        </div>
+      </div>
+    </div>
+
+    <div class=" col-xs-12 col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          {% trans "Current filters" %}
+        </div>
+        <div class="panel-body">
+          {% if filters %}
+            {% for filter in filters %}
+              {% if filter.object %}
+                <strong>{{ filter.label }}</strong> &mdash; {{ filter.object }}<br />
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            {% trans "None" %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end filtering options/info -->
+
+  {% include include_template %}
+{% endblock %}
+
+{% block javascript %}
+  <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  {% include 'autocomplete_light/static.html' %}
+
+  {% comment %}
+    Needed for select/deselect all function on main list page. Can't be included
+    there because, as an included template, it doesn't get to extend this block.
+  {% endcomment %}
+  <script type="text/javascript">
+    $('#select_all').click(function() {
+      $('#batch_edit input[type="checkbox"]').prop('checked', this.checked)
+    });
+  </script>
+{% endblock javascript %}

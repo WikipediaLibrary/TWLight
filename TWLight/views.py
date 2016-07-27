@@ -1,0 +1,95 @@
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import TemplateView
+
+from TWLight.applications.models import Application
+from TWLight.resources.models import Partner
+from TWLight.users.models import Editor
+
+class HomePageView(TemplateView):
+    """
+    At / , people should see recent activity.
+    """
+    template_name = 'home.html'
+
+    def _get_newest(self, queryset):
+        count = queryset.count()
+
+        if count >= 5:
+            objects = queryset.order_by('-date_created')[:5]
+        else:
+            objects = queryset.all()
+
+        return objects
+
+
+    def get_context_data(self, **kwargs):
+        """
+        Provide latest activity data for the front page to display.
+
+        Each tile will need:
+        * an icon
+        * a color
+        * text
+        * a datetime
+        """
+        context = super(HomePageView, self).get_context_data(**kwargs)
+
+        activity = []
+
+        # New account signups!
+        editors = self._get_newest(Editor.objects.all())
+
+        for editor in editors:
+            event = {}
+            event['icon'] = 'fa-users'
+            event['color'] = 'warning' # will be yellow
+            event['text'] = _('{username} signed up for a Wikipedia Library '
+                'Card Platform account').format(username=editor.wp_username)
+            event['date'] = editor.date_created
+            activity.append(event)
+
+        # Newly added partners!
+        partners = self._get_newest(Partner.objects.all())
+
+        for partner in partners:
+            event = {}
+            event['icon'] = 'fa-files-o'
+            event['color'] = 'success' # green
+            event['text'] = _('{partner} joined the Wikipedia Library ').format(
+                partner=partner.company_name)
+            event['date'] = partner.date_created
+            activity.append(event)
+
+
+        # New applications!
+        apps = self._get_newest(Application.objects.all())
+
+        for app in apps:
+            event = {}
+            event['icon'] = 'fa-align-left'
+            event['color'] = '' # grey (default when no color class is applied)
+            event['text'] = _('{username} applied for access to {partner}').format(
+                username=app.editor.wp_username,
+                partner=app.partner.company_name)
+            event['date'] = app.date_created
+            activity.append(event)
+
+        # New access grants!
+        grants = self._get_newest(Application.objects.filter(
+            status=Application.APPROVED))
+
+        for grant in grants:
+            event = {}
+            event['icon'] = 'fa-align-left'
+            event['color'] = 'info' # light blue
+            event['text'] = _('{username} received access to {partner}').format(
+                username=grant.editor.wp_username,
+                partner=grant.partner.company_name)
+            event['date'] = grant.date_closed
+            activity.append(event)
+
+        context['activity'] = sorted(activity,
+            key=lambda x: x['date'],
+            reverse=True)
+
+        return context

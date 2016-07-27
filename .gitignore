@@ -1,7 +1,10 @@
+collectedstatic/
+staticfiles/
 personal/
 id_rsa
 id_rsa.*
 *.sqlite3
+*.dump
 
 # Created by https://www.gitignore.io/api/osx,django,python,sublimetext,vim,emacs
 
@@ -87,10 +90,6 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
-
-# Translations
-*.mo
-*.pot
 
 # Django stuff:
 *.log

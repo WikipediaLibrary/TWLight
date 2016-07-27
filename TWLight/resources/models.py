@@ -1,5 +1,11 @@
+from datetime import timedelta
+
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse_lazy
 from django.db import models
+
+from durationfield.db.models.fields.duration import DurationField
+
 
 class Partner(models.Model):
     """
@@ -8,12 +14,15 @@ class Partner(models.Model):
     information they require on access grant applications.
     """
     class Meta:
-        app_label = 'TWLight.resources'
+        app_label = 'resources'
+        verbose_name = 'partner'
+        verbose_name_plural = 'partners'
 
 
     company_name = models.CharField(max_length=30,
         help_text="Partner organization's name (e.g. McFarland). Note: " \
         "this will be user-visible and *not translated*.")
+    date_created = models.DateField(auto_now_add=True)
 
 
     # Optional resource metadata
@@ -33,6 +42,13 @@ class Partner(models.Model):
         "this Partner. If False, users can apply for multiple Streams at a "
         "time. This field must be filled in when Partners have multiple "
         "Streams, but may be left blank otherwise.")
+
+    # See comment in save().
+    access_grant_term = DurationField(
+        blank=True, null=True,
+        help_text="The standard length of an access grant from this Partner. " \
+                  "Enter like '365 days' or '365d' or '1 year'."
+        )
 
 
     # Non-universal form fields
@@ -58,14 +74,25 @@ class Partner(models.Model):
 
 
     def save(self, *args, **kwargs):
+        if not self.access_grant_term:
+            # We can't declare a default access grant term in the ORM due to a
+            # bug not fixed in Django until 1.8:
+            # https://code.djangoproject.com/ticket/24566
+            # However, code elsewhere expects the access grant term to exist.
+            # So we will make sure it happens on model save.
+            self.access_grant_term = timedelta(days=365)
         if self.agreement_with_terms_of_use and not self.terms_of_use:
             raise ValidationError('When agreement with terms of use is '
                 'required, a link to terms of use must be provided.')
-        if self.streams.count():
+        if self.streams.count() > 1:
             if self.mutually_exclusive is None:
                 raise ValidationError('Since this resource has multiple '
                     'Streams, you must specify a value for mutually_exclusive.')
         super(Partner, self).save(*args, **kwargs)
+
+
+    def get_absolute_url(self):
+        return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
 
 
@@ -83,12 +110,14 @@ class Stream(models.Model):
     distinct contact information, et cetera.
     """
     class Meta:
-        app_label = 'TWLight.resources'
+        app_label = 'resources'
+        verbose_name = 'collection'
+        verbose_name_plural = 'collections'
 
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
     name = models.CharField(max_length=50,
-        help_text="Name of stream (e.g. 'Health and Behavioral Sciences."
+        help_text="Name of stream (e.g. 'Health and Behavioral Sciences). "
             "Will be user-visible and *not translated*. Do not include the "
             "name of the partner here. If partner name and resource name "
             "need to be presented together, templates are responsible for "
@@ -113,7 +142,9 @@ class Contact(models.Model):
     send emails and tell coordinators whom they're dealing with.
     """
     class Meta:
-        app_label = 'TWLight.resources'
+        app_label = 'resources'
+        verbose_name = 'contact person'
+        verbose_name_plural = 'contact people'
 
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="contacts")

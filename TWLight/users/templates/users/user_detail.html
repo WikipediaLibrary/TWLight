@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <p>
+    {% comment %}
+      Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
+    {% endcomment %}
+    {% blocktrans with username=user.username %}
+      Hi, {{ username }}! You don't have a Wikipedia editor profile attached
+      to your account here, so you are probably a site administrator.
+    {% endblocktrans %}
+  </p>
+
+  <p>
+    {% blocktrans %}
+      If you aren't a site administrator, something weird has happened. You
+      won't be able to apply for access to protected resources without a
+      Wikipedia editor profile. Unless you know there's a good reason why your
+      account doesn't have an editor attached (e.g. you are a site
+      administrator), you should log out and create a new account by logging in
+      via OAuth, or contact a site administrator for help.
+    {% endblocktrans %}
+  </p>
+
+  {% include "users/language_form.html" %}
+{% endblock %}

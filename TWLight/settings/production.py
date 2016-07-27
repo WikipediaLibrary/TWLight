@@ -27,3 +27,8 @@ DATABASES['default'] = {
         'HOST': 'localhost',
         'PORT': '3306',
 }
+
+# TODO add production consumer key and secret
+
+EMAIL_BACKEND = 'djmail.backends.celery.EmailBackend'
+DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

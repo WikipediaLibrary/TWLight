@@ -2,11 +2,11 @@
 Base settings for TWLight project.
 
 This is not intended to be used as the live settings file for a project and will
-not work as one. You should instead use production.py, local.py, or another file
-that you write. These files should live in the settings directory; start with
-'from .base import *'; and proceed to add or override settings as appropriate to
-their context. In particular, you will need to set ALLOWED_HOSTS before your app
-will run.
+not work as one. You should instead use production.py, local.py, heroku.py, or
+another file that you write. These files should live in the settings directory;
+start with 'from .base import *'; and proceed to add or override settings as
+appropriate to their context. In particular, you will need to set ALLOWED_HOSTS
+before your app will run.
 
 If you want to use production settings, you are now done.  If not, you will also
 need to set the environment variables indicated in the README.
@@ -19,6 +19,9 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 import os
+
+from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,18 +40,26 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.comments',
+    'django.contrib.sites',         # required by django.contrib.comments
 )
 
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    'crispy_forms',
+    'reversion',
+    'autocomplete_light',
+)
 
 TWLIGHT_APPS = (
     'TWLight.users',
     'TWLight.resources',
     'TWLight.applications',
+    'TWLight.emails',
+    'TWLight.graphs',
 )
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TWLIGHT_APPS
-
+# autocomplete_light must go before django.contrib.admin
+INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 
 
 # MIDDLEWARE CONFIGURATION
@@ -56,6 +67,9 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TWLIGHT_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # LocaleMiddleware must go after Session (and Cache, if used), but before
+    # Common.
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -80,6 +94,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 # WMF sysadmins strongly prefer mysql, so use that.
+# If you're deploying to Heroku, heroku.py will override this.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -106,13 +121,28 @@ ROOT_URLCONF = 'TWLight.urls'
 
 WSGI_APPLICATION = 'TWLight.wsgi.application'
 
+SITE_ID = 1
+
 
 # INTERNATIONALIZATION CONFIGURATION
 # ------------------------------------------------------------------------------
 
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us' # Sets site default language.
+
+# First tuple element should be a standard language code; see
+# https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes .
+# Second is the human-readable form.
+LANGUAGES = (
+  ('fr', _('French')),
+  ('en', _('English')),
+)
+
+LOCALE_PATHS = (
+    # makemessages looks for locale/ in the top level, not the project level.
+    os.path.join(os.path.dirname(BASE_DIR), 'locale'),
+)
 
 TIME_ZONE = 'UTC'
 
@@ -126,21 +156,20 @@ USE_TZ = True
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
+
+# Reiterating the default so we can add to it later.
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+)
 
 
 # STATIC FILE CONFIGURATION
@@ -148,8 +177,9 @@ TEMPLATES = [
 
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
 STATIC_URL = '/static/'
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -191,6 +221,58 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
+# OAUTH CONFIGURATION
+# ------------------------------------------------------------------------------
+
+LOGIN_URL = reverse_lazy('oauth_login')
+LOGIN_REDIRECT_URL = reverse_lazy('users:home')
+
 AUTHENTICATION_BACKENDS = (
+    'TWLight.users.authorization.OAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+WP_OAUTH_BASE_URL = 'https://en.wikipedia.org/w/index.php'
+
+CONSUMER_KEY = os.environ.get('TWLIGHT_CONSUMER_KEY', None)
+CONSUMER_SECRET = os.environ.get('TWLIGHT_CONSUMER_SECRET', None)
+
+
+
+# COMMENTS CONFIGURATION
+# ------------------------------------------------------------------------------
+
+
+
+# REVERSION CONFIGURATION
+# ------------------------------------------------------------------------------
+
+# See https://django-reversion.readthedocs.org/ .
+
+# This will ensure that all changes to models registered with reversion are
+# automatically versioned & saved, and that they have request.user attached
+# to their metadata.
+MIDDLEWARE_CLASSES += ('reversion.middleware.RevisionMiddleware',)
+
+
+
+# DURATIONFIELD CONFIGURATION
+# ------------------------------------------------------------------------------
+
+# See https://django-durationfield.readthedocs.org/en/latest/#usage
+DURATIONFIELD_ALLOW_MONTHS = True
+DURATIONFIELD_ALLOW_YEARS = True
+
+
+
+# DJMAIL CONFIGURATION
+# ------------------------------------------------------------------------------
+
+EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
+
+# This is a dummy backend that will write to stdout. Safe, yet useless.
+DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+INSTALLED_APPS += ('djmail',)

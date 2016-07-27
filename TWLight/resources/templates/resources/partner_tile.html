@@ -1,0 +1,29 @@
+{% load i18n %}
+
+{% comment %}
+  To be used in presenting lists of partners plus key data about them.
+  Provides a tile. Including templates are responsible for laying out these
+  tiles and supplying a `partner` variable (presumed to be an instance of
+  class Partner).
+{% endcomment %}
+
+<div class="panel panel-default full-width">
+  <div class="panel-heading">
+    <a href="{% url 'partners:detail' partner.pk %}"><strong>
+      <span class="panel-title">{{ partner }}</span></strong>
+    </a>
+  </div>
+  <div class="panel-body">
+    <p>
+      {{ partner.description }}
+    </p>
+    <div class="text-center">
+      <a href="{% url 'partners:detail' partner.pk %}">
+        <button class="btn btn-default">{% trans "More info" %}</button>
+      </a>
+    </div>
+    {% for tag in partner.tags %}
+      <span class="label label-primary">{{ tag }}</span>
+    {% endfor %}
+  </div>
+</div>

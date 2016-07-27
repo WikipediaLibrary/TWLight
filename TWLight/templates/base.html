@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load staticfiles %}
+{% load twlight_perms %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,13 +11,264 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <title>
-    TWLight
+    {% trans "The Wikipedia Library Card Platform" %}
   </title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <link href="{% static "css/startbootstrap/sb-admin-2.css" %}" rel="stylesheet">
+  <link href="{% static "css/startbootstrap/timeline.css" %}" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+
+  <style type="text/css">
+    #id_honeypot {
+        display: none;
+    }
+
+    body {
+      background-color: white;
+    }
+
+    .panel-footer {
+      background-color: white;
+    }
+
+    h1, h2, h3 {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      margin-bottom: 20px;
+    }
+
+    h1, h2 {
+      font-weight: bold;
+    }
+
+    p {
+      margin-top: 7px;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 767px) {
+      #main-content {
+        margin: auto 14px;
+      }
+
+      #top-nav, #footer {
+        padding-top: auto;
+        padding-bottom: auto;
+        padding-right: 14px;
+        padding-left: 14px;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 991px) {
+      #main-content {
+        margin: auto 28px;
+      }
+
+      #top-nav, #footer {
+        padding-top: auto;
+        padding-bottom: auto;
+        padding-right: 28px;
+        padding-left: 28px;
+      }
+    }
+    @media (min-width: 992px) {
+      #main-content {
+        margin: auto 56px;
+      }
+
+      #top-nav, #footer {
+        padding-top: auto;
+        padding-bottom: auto;
+        padding-right: 56px;
+        padding-left: 56px;
+      }
+    }
+
+    #top-nav {
+      border-bottom: 1px solid #eee;
+      margin-bottom: 20px;
+    }
+
+    #footer {
+      background-color: #f8f8f8;
+      border-top: 1px solid #eee;
+      margin-top: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .nav-greeting {
+      height: 40px;
+      line-height: 40px;
+      font-style: italic;
+    }
+
+    .text-justify-xs {
+        text-align: left
+    }
+
+    /* Small devices (tablets, 768px and up) */
+    @media (max-width: 767px) {
+      .text-justify-sm {
+          text-align: center;
+      }
+    }
+    @media (min-width: 768px) {
+      .text-justify-sm {
+          text-align: left;
+      }
+    }
+
+    /* Medium devices (desktops, 992px and up) */
+    @media (max-width: 991px) {
+      .text-justify-md {
+          text-align: center;
+      }
+    }
+    @media (min-width: 992px) {
+      .text-justify-md {
+          text-align: left;
+      }
+    }
+
+    /* Large devices (large desktops, 1200px and up) */
+    @media (max-width: 1199px) {
+      .text-justify-lg {
+          text-align: center;
+      }
+    }
+    @media (min-width: 1200px) {
+      .text-justify-lg {
+          text-align: left;
+      }
+    }
+
+    .half-timeline > li > .timeline-badge {
+      left: 0;
+    }
+
+    .half-timeline:before {
+      left: 0;
+    }
+
+    .half-timeline > li.timeline-inverted > .timeline-panel {
+      float: left;
+      margin-left: 50px;
+    }
+
+    .full-width {
+      display: block;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  {% block content %}
-    <h1>{% trans "This is a template" %}</h1>
-  {% endblock %}
+  <nav class="nav navbar-default" id="top-nav">
+    {% if user.is_authenticated %}
+      <span class="nav-greeting">
+        {% url 'users:home' as home_url %}
+        {% if user.editor %}
+          {% blocktrans with username=user.editor.wp_username%}
+            Hi, <a href="{{ home_url }}">{{ username }}</a>!
+          {% endblocktrans %}
+        {% else %}
+          {% blocktrans with username=user.username %}
+            Hi, <a href="{{ home_url }}">{{ username }}</a>!
+          {% endblocktrans %}
+        {% endif %}
+      </span>
+    {% endif %}
+    <ul class="nav nav-pills pull-right">
+      {% if user.editor %}
+        <li role="presentation">
+          <a href="{% url 'applications:request' %}">
+            {% trans "Apply for access" %}
+          </a>
+        </li>
+      {% endif %}
+      {% if user|coordinators_only %}
+        <li role="presentation">
+          <a href="{% url 'applications:list' %}">
+            {% trans "Review applications" %}
+          </a>
+        </li>
+      {% endif %}
+      {# All users get to see metrics, so let them all see the link, too. #}
+      <li role="presentation">
+        <a href="{% url 'dashboard' %}">
+          {% trans "See metrics" %}
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="{% url 'partners:list' %}">
+          {% trans "Browse partners" %}
+        </a>
+      </li>
+      {% if user.is_authenticated %}
+        <li role="presentation">
+          <a href="{% url 'auth_logout' %}">
+            {% trans "Log out" %}
+          </a>
+        </li>
+      {% else %}
+        <li role="presentation">
+          <a href="{% url 'oauth_login' %}">
+            {% trans "Log in/sign up" %}
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+  <header>
+    <div class="row">
+      <a href="{% url 'homepage' %}">
+        <div class="col-xs-12 col-sm-2">
+          <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive center-block">
+        </div>
+      </a>
+      <div class="col-xs-12 col-sm-10">
+        <h1 class="text-justify-sm">{% trans "The Wikipedia Library Card Platform" %}</h1>
+      </div>      
+    </div>
+  </header>
+  <div id="main-content">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    {% block content %}
+      <h1>{% trans "This is a template" %}</h1>
+    {% endblock %}
+    
+  </div>
+  <footer id="footer">
+    <div class="row">
+      <div class="col-xs-12">
+        <p>
+          {% blocktrans trimmed %}
+            The Wikipedia Library Card Platform is a project of 
+            <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library">
+            The Wikipedia Library</a>.              
+          {% endblocktrans %}
+        </p>
+        <hr />
+      </div>
+      <div class="col-xs-12">
+        <ul class="list-unstyled pull-right">
+          <li><a href="{% url 'terms' %}">{% trans "Terms of use" %}</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  {% block javascript %}
+    {# We don't use any JS by default; individual pages that need it can add it here. #}
+  {% endblock javascript %}
 </body>
 </html>

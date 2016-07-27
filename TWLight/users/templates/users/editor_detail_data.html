@@ -1,0 +1,210 @@
+{% load i18n %}
+
+  {% include 'users/language_form.html' %}
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Wikipedia username *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {{ editor.wp_username }}
+      {% if editor.wp_user_page_url %}
+        <br />
+        <a href="{{ editor.wp_user_page_url }}">({% trans "view Wikipedia user page" %})</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Home wiki" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {% if editor.home_wiki %}
+        {{ editor.get_home_wiki_display }}
+      {% endif %}
+      {% ifequal editor.user user %}
+        <br />
+        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
+      {% endifequal %}
+      {% if editor.wp_link_sul_info %}
+        <br />
+        <a href="{{ editor.wp_link_sul_info }}">({% trans "view Wikipedia SUL info" %})</a>
+      {% endif %}
+      <br />
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Wikipedia edit count *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {{ editor.wp_editcount }}
+      {% if editor.wp_link_edit_count %}
+        <br />
+        {# Translators: this links to a Tools page with edit stats for a given wikipedia editor. #}
+        <a href="{{ editor.wp_link_edit_count }}">{% trans "(view latest edit statistics)" %}</a>
+      {% endif %}
+      {% if editor.wp_link_pages_created %}
+        <br />
+        {# Translators: this links to a Tools page which lists all pages created by a given wikipedia editor. #}
+        <a href="{{ editor.wp_link_pages_created }}">{% trans "(view pages created)" %}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Date registered on Wikipedia *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {{ editor.wp_registered }}
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Contributions" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {% if editor.contributions %}
+        {{ editor.contributions }}
+      {% endif %}
+      {% ifequal editor.user user %}
+        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
+      {% endifequal %}
+      <br />
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      {# Translators: The groups will be listed in English even if the site isn't English; we get them directly from Wikipedia. #}
+      <strong>{% trans "Wikipedia groups *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      <ul class="list-unstyled">
+        {% for group in editor.get_wp_groups_display %}
+          <li>{{ group }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      {# Translators: The rights will be listed in English even if the site isn't English; we get them directly from Wikipedia. #}
+      <strong>{% trans "Wikipedia user rights *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      <ul class="list-unstyled">
+        {% for right in editor.get_wp_rights_display %}
+          <li>{{ right }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Wikipedia user ID *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {{ editor.wp_sub }}
+    </div>
+  </div>
+
+  {# The following is personal data and must ONLY be displayed to its owner. #}
+  {% ifequal editor.user user %}
+    <hr />
+
+    <h3>Personal data</h3>
+
+    <p>
+      <span class="glyphicon glyphicon-info-sign"></span>
+      {% blocktrans trimmed %}
+        The following information is visible only to you, site administrators,
+        and (where required) publishing partners. It is not visible to volunteer Wikipedia Library coordinators.
+      {% endblocktrans %}
+    </p>
+
+    <p>
+      {% url 'users:pii_update' as update_url %}
+      {% blocktrans trimmed %}
+        You may <a href="{{ update_url }}">update or delete</a>
+        your data at any time.
+      {% endblocktrans %}
+    </p>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Email *" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.user.email }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Real name" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.real_name }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Country of residence" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.country_of_residence }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Occupation" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.occupation }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Institutional affiliation" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        {{ editor.affiliation }}
+      </div>
+    </div>
+
+    <hr />
+  {% endifequal %}

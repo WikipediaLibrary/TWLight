@@ -1,102 +1,55 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load l10n %}
+{% load crispy_forms_tags %}
+{% load twlight_perms %}
 
 {% block content %}
-  <h1>{% trans "Editor profile information" %}</h1>
+  <h1>{% blocktrans with username=editor.wp_username %}Editor profile information for {{ username }}{% endblocktrans %}</h1>
+
+  <h2>{% trans 'Editor application history' %}</h2>
 
   <p>
-    {% blocktrans with account_created=editor.account_created|localize %}
-      Information with an * was harvested from Wikipedia directly.
-      It was current as of {{ account_created }}.
-      Changes made on Wikipedia since that time have not been reflected here.
-    {% endblocktrans %}
+    <a href="{% url 'applications:request' %}" class="btn btn-primary">
+      {% trans 'Start new application' %}
+    </a>
   </p>
+
+  {% include 'applications/application_list_include.html' %}
+
+  <h2>{% trans 'Editor data' %}</h2>
+  {% ifequal editor.user user %} 
+    {% if not editor.home_wiki or not editor.contributions %}
+      <div class="well">
+        <h3>
+          {% trans 'Please complete your profile.' %}
+        </h3>
+        {% crispy form %}
+      </div>
+    {% endif %}    
+  {% endifequal %}
+
+  {% include 'users/editor_detail_data.html' %}
+
   <p>
-    {% blocktrans with last_updated=editor.last_updated|localize %}
+    {% blocktrans with last_updated_date=editor.last_updated|localize %}
+      Information with an * was retrieved from Wikipedia directly.
       Other information was entered directly by users or site admins,
       in their preferred language.
-      It was last edited on {{ last_updated }}.
+      It was last updated on {{ last_updated_date }}.
     {% endblocktrans %}
   </p>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia username *" %}</strong>
+  {% if editor.user|coordinators_only %}
+    <div class="row">
+      <div class="col-xs-12 col-md-10 col-md-offset-1">
+        <p class="well">
+            {% blocktrans with username=editor.wp_username %}
+              {{ username }} has coordinator privileges on this site.
+            {% endblocktrans %}
+        </p>
+      </div>
     </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_username }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia user ID *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_sub }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Home wiki" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.home_wiki }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia edit count *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_editcount }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Date registered on Wikipedia *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.wp_registered }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia groups *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {% for group in editor.wp_groups %}
-        {{ group }} <br />
-      {% endfor %}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Wikipedia user rights *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {% for right in editor.wp_rights %}
-        {{ right }} <br />
-      {% endfor %}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Contributions" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.contributions }}
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <strong>{% trans "Email" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-8">
-      {{ editor.email }}
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12 col-md-10 col-md-offset-1">
-      <p class="well">
-        {% blocktrans with username=editor.user.username %}
-          {{ username }} has coordinator privileges on this site.
-        {% endblocktrans %}
-      </p>
-    </div>
-  </div>
+  {% endif %}
 
 {% endblock %}
