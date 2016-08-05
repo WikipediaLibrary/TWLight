@@ -15,7 +15,7 @@ from reversion.helpers import generate_patch_html
 from django import forms
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
 from django.views.generic.base import TemplateView, View
 from django.views.generic.list import ListView
@@ -183,7 +183,7 @@ class SubmitApplicationView(EditorsOnly, ToURequired, FormView):
               'it and get back to you. You can check the status of your '
               'applications on this page at any time.'))
         user_home = reverse('users:editor_detail',
-            kwargs={'pk': self.request.user.pk})
+            kwargs={'pk': self.request.user.editor.pk})
         return user_home
 
 
@@ -553,9 +553,10 @@ class BatchEditView(ToURequired, View):
                                    Application.QUESTION,
                                    Application.APPROVED,
                                    Application.NOT_APPROVED]
-        except AssertionError:
+        except (AssertionError, ValueError):
+            # ValueError will be raised if the status cannot be cast to int.
             logger.exception('Did not find valid data for batch editing')
-            raise
+            return HttpResponseBadRequest()
 
 
         for app_pk in request.POST['applications']:
@@ -575,22 +576,6 @@ class BatchEditView(ToURequired, View):
         return HttpResponseRedirect(reverse_lazy('applications:list'))
 
 
-
-# Application evaluation workflow needs...
-# ~~listview: all open applications.~~ filterable by user, status - check milestones/desiderata
-# ~~evaluation view: app details, user details, status-setting form~~
-# add reversion - how should it be displayed? do I want to track who made changes?
-# ~~add status field - what are the options?~~
-# ~~add section to user page where they can see application statuses~~
-# ~~Remove coordinator class,~~ add coordinator group, add access limits
-# do I want any kind of locking on application evaluation, so two people don't
-# review/edit the same app at once? or assignment?
-# Comments - check the scope, and then if at all possible attach comments to
-# app reviews so that whichever reviewer is on it can see the history. and
-# notify people that they have comments (either via email or via wikimedia edit API on the talk page).
-# Be really transparent about who can see which page.
-# make sure people cannot set status on their own apps, even if they are coordinators
-# make sure people CAN see/comment on their apps
 
 class DiffApplicationsView(ToURequired, TemplateView):
     # TODO not sure if I really want this. It may be just the comment thread we
