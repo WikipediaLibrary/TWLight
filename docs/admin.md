@@ -15,7 +15,7 @@ See `locale/README.md`. You will need cooperation from a sysadmin if you do not 
 
 ## Logging in
 
-_If you did not create your account via OAuth_ and did not manually fill in accurate Wikipedia editor profile data after creating your account, you will not be able to use OAuth to log in. Instead, go to `/accounts/login`.
+_If you did not create your account via OAuth_, and/or did not manually fill in accurate Wikipedia editor profile data after creating your account, you will not be able to use OAuth to log in. Instead, go to `/accounts/login`.
 
 ## Users
 ### Account classes
@@ -55,7 +55,7 @@ anyone else with command-line access) can run
 
 This is the one case where you want to manually create a user, rather than going via OAuth, because OAuth-created users won't have the privileges you need to administer the site, and you need to guarantee that someone does.
 
-#### If you do, but want another
+#### If you do, but want another (from a new account)
 If you already have a superuser, you can create another with `createsuperuser`.
 
 Alternately, if you are a superuser (and especially if you don't have
@@ -68,6 +68,14 @@ command-line) access, do the following:
   not work properly for Users without Editors.
 * Save the new user. This will allow you to edit additional properties.
 * Click the superuser status checkbox and save.
+
+#### If you want to promote an existing, OAuth-created account to superuser status
+* Log in at `/admin`.
+* Click on the username.
+* Give them a password (there is a tiny 'this form' link in the password section).
+* Set the `Staff status` checkbox to true (this allows them to log into the admin site; setting superuser status will _not_ allow that).
+* Set the `Superuser status` checkbox to true.
+* Save the user.
 
 ### Making someone a coordinator
 When people create accounts via OAuth, they have Editor status by default. To promote them to Coordinator:
