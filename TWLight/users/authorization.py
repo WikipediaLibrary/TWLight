@@ -1,5 +1,6 @@
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken
+import re
 
 from django.conf import settings
 from django.contrib import messages
@@ -123,6 +124,21 @@ class OAuthBackend(object):
 
         # Get or create the user.
         user, created = self._get_and_update_user_from_identity(identity)
+
+        if created:
+            base_url = re.search(r'\w+.wikipedia.org',
+                                 handshaker.mw_uri).group(0)
+            try:
+                # It's actually a wiki, right?
+                assert base_url in WIKI_DICT.values()
+                user.editor.home_wiki = base_url
+            except AssertionError:
+                # Site functionality mostly works if people don't
+                # declare a homewiki. There are some broken bits, like the SUL
+                # link, but users can set their homewiki, or admins can do it
+                # in the admin interface.
+                pass
+
         request.session['user_created'] = created
 
         # The authenticate() function of a Django auth backend must return
