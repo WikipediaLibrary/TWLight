@@ -9,19 +9,22 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
+from django.views.generic.edit import FormView
 from django.utils.translation import ugettext as _
 
+from .helpers.wiki_list import WIKI_DICT
+from .forms import HomeWikiForm
 from .models import Editor
-
 
 logger = logging.getLogger(__name__)
 
 # Construct a "consumer" from the key/secret provided by MediaWiki.
 consumer_token = ConsumerToken(settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
 
-# Construct handshaker with wiki URI and consumer.
-handshaker = Handshaker(settings.WP_OAUTH_BASE_URL, consumer_token)
-
+# We can't construct the handshaker now, because its base URL will vary
+# depending on the user's home wiki. We will add handshakers to this as needed.
+# Keys will be base URLs; values will be handshaker objects.
+handshakers = {}
 
 def dehydrate_token(token):
     """
@@ -93,8 +96,8 @@ class OAuthBackend(object):
         return user, created
 
 
-    def authenticate(self, request=None, access_token=None):
-        if not request or not access_token:
+    def authenticate(self, request=None, access_token=None, handshaker=None):
+        if not request or not access_token or not handshaker:
             # You must have meant to use a different authentication backend.
             # Returning None will make Django keep going down its list of
             # options.
@@ -135,15 +138,32 @@ class OAuthBackend(object):
 
 
 
-class OAuthInitializeView(View):
+class OAuthInitializeView(FormView):
     """
     Ask Wikipedia for a temporary key/secret for the user, and redirect
-    them to Wikipedia to confirm authorization.
+    them to their home Wikipedia to confirm authorization.
     """
+    template_name = 'users/oauth_login.html'
+    form_class = HomeWikiForm
 
-    def get(self, request, *args, **kwargs):
+    def form_valid(self, form):
+        # The form returns the code for the home wiki (the first element of the
+        # tuple in WIKIS), but we want the URL, so we grab it from WIKI_DICT.
+        home_wiki = WIKI_DICT[form.cleaned_data['home_wiki']]
+        base_url = 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
+
+        try:
+            # Get handshaker matching this base URL from our dict.
+            handshaker = handshakers[base_url]
+        except KeyError:
+            # Whoops, it doesn't exist. Initialize a handshaker and store it
+            # for later.
+            handshaker = Handshaker(base_url, consumer_token)
+            handshakers[base_url] = handshaker
+
         redirect, request_token = handshaker.initiate()
-        request.session['request_token'] = dehydrate_token(request_token)
+        self.request.session['request_token'] = dehydrate_token(request_token)
+        self.request.session['base_url'] = base_url
         # TODO where is the proper, secure place to store this?
         logger.info('request token was %s', request_token)
         return HttpResponseRedirect(redirect)
@@ -157,7 +177,17 @@ class OAuthCallbackView(View):
 
     def get(self, request, *args, **kwargs):
         response_qs = request.META['QUERY_STRING']
-        logger.info('response querystring was %s', response_qs)
+
+        # Get the handshaker. It should have already been constructed by
+        # OAuthInitializeView.
+        base_url = request.session.pop('base_url'), None
+        try:
+            handshaker = handshakers[base_url]
+        except KeyError:
+            logger.exception('Could not find handshaker')
+            raise PermissionDenied
+
+        # Get the request token, placed in session by OAuthInitializeView.
         session_token = request.session.pop('request_token', None)
         request_token = rehydrate_token(session_token)
 
@@ -166,14 +196,16 @@ class OAuthCallbackView(View):
             logger.info('no request token :(')
             raise PermissionDenied
 
+        # See if we can complete the OAuth process.
         try:
             access_token = handshaker.complete(request_token, response_qs)
-            logger.info('access token was %s', access_token)
         except:
-            logger.info('no access token :(')
+            logger.exception('Access token generation failed :(')
             raise PermissionDenied
 
-        user = authenticate(request=request, access_token=access_token)
+        user = authenticate(request=request,
+                            access_token=access_token,
+                            handshaker=handshaker)
         created = request.session.pop('user_created', False)
 
         if not user.is_active:
