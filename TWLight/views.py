@@ -112,3 +112,8 @@ class HomePageView(TemplateView):
             reverse=True)
 
         return context
+
+
+
+class AboutPageView(TemplateView):
+    template_name = 'about.html'

@@ -17,7 +17,7 @@ from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 
-from .views import HomePageView
+from .views import HomePageView, AboutPageView
 
 
 urlpatterns = [
@@ -49,18 +49,8 @@ urlpatterns = [
         auth.OAuthCallbackView.as_view(),
         name='oauth_callback'),
 
-    url(r'^dashboard/$',
-        DashboardView.as_view(),
-        name='dashboard'
-    ),
-
-    url(r'^terms/$',
-        TermsView.as_view(),
-        name='terms'
-    ),
-
-    url(r'^$',
-        HomePageView.as_view(),
-        name='homepage'
-    ),
+    url(r'^dashboard/$', DashboardView.as_view(), name='dashboard'),
+    url(r'^terms/$', TermsView.as_view(), name='terms'),
+    url(r'^$', HomePageView.as_view(), name='homepage'),
+    url(r'^about/$', AboutPageView.as_view(), name='about'),
 ]

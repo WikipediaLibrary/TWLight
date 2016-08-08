@@ -349,8 +349,22 @@
       </div>
       <div class="col-xs-12">
         <ul class="list-inline pull-right">
-          <li><a href="https://wikimediafoundation.org/wiki/Privacy_policy">{% trans "Privacy policy" %}</a></li>
-          <li><a href="{% url 'terms' %}">{% trans "Terms of use" %}</a></li>
+          <li>
+            <a href="{% url 'about' %}">
+              {# Translators: As in "about this site" - a menu link to the about page. #}
+              {% trans "About" %}
+            </a>
+          </li>
+          <li>
+            <a href="https://wikimediafoundation.org/wiki/Privacy_policy">
+              {% trans "Privacy policy" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'terms' %}">
+              {% trans "Terms of use" %}
+            </a>
+          </li>
         </ul>
       </div>
     </div>
