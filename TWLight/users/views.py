@@ -61,7 +61,7 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
 
         if self.request.user.editor == editor and not editor.contributions:
             messages.add_message(self.request, messages.WARNING,
-                _('Please indicate your contributions to Wikipedia (below) to '
+                _('Please update your contributions to Wikipedia (below) to '
                   'help coordinators evaluate your applications.'))
 
         return context
