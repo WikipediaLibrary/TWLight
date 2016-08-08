@@ -76,6 +76,7 @@ command-line) access, do the following:
 * Set the `Staff status` checkbox to true (this allows them to log into the admin site; setting superuser status will _not_ allow that).
 * Set the `Superuser status` checkbox to true.
 * Save the user.
+* Do _not_ change the username (which is a big number), but do make sure the staffer knows it, because that's what's needed for username/password authentication.
 
 ### Making someone a coordinator
 When people create accounts via OAuth, they have Editor status by default. To promote them to Coordinator:

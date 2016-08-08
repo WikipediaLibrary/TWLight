@@ -14,6 +14,7 @@ from reversion.helpers import generate_patch_html
 
 from django import forms
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
@@ -429,8 +430,8 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         context['title'] = _('Approved applications')
 
         context['intro_text'] = _("""This page lists only applications that have
-          been approved. You may also consult <a href="{open_url}">pending or
-          under-discussion</a> and <a href="{rejected_url}">rejected</a>
+          been approved. You may also consult <a href="{open_url}">pending</a>
+          and <a href="{rejected_url}">rejected</a>
           applications.""").format(
                 open_url=context['open_url'],
                 rejected_url=context['rejected_url'])
@@ -453,8 +454,8 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
         context['title'] = _('Rejected applications')
 
         context['intro_text'] = _("""This page lists only applications that have
-          been rejected. You may also consult <a href="{open_url}">pending or
-          under-discussion</a> and <a href="{approved_url}">approved</a>
+          been rejected. You may also consult <a href="{open_url}">pending</a>
+          and <a href="{approved_url}">approved</a>
           applications. """).format(
                 open_url=context['open_url'],
                 approved_url=context['approved_url'])
@@ -486,8 +487,8 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
 
         context['intro_text'] = _("""This page lists approved applications whose
           access grants have probably expired recently or are likely to expire
-          soon. You may also consult <a href="{open_url}">pending or
-          under-discussion</a>, <a href="{rejected_url}">rejected</a>, or
+          soon. You may also consult <a href="{open_url}">pending</a>,
+          <a href="{rejected_url}">rejected</a>, or
           <a href="{approved_url}">all approved</a>
           applications. """).format(
                 open_url=context['open_url'],
@@ -543,7 +544,17 @@ class EvaluateApplicationView(CoordinatorsOrSelf, ToURequired, UpdateView):
 class BatchEditView(ToURequired, View):
     http_method_names = ['post']
 
+    @login_required
+    def dispatch(self, request, *args, **kwargs):
+        # LoginRequiredMixin and ToURequiredMixin don't mix well because they
+        # both set login_url, but we want people to be redirected to different
+        # places if they're AnonymousUsers vs. simply people who haven't agreed
+        # to the terms. So we'll use login_required() to handle anons here.
+        return super(BatchEditView, self).dispatch(request, *args, **kwargs)
+
+
     def post(self, request, *args, **kwargs):
+        print self.login_url
         try:
             assert 'applications' in request.POST
             assert 'batch_status' in request.POST

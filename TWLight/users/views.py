@@ -208,7 +208,8 @@ class EmailChangeView(SelfOnly, UpdateView):
         return reverse_lazy('users:home')
 
 
-class DenyAuthenticatedUsers(View):
+
+class TestPermissionView(View):
     """
     This view is provided for use in view_mixins.py.
 

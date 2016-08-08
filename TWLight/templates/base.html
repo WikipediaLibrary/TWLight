@@ -286,15 +286,15 @@
           </a>
         </li>
       {% endif %}
+      <li role="presentation">
+        <a href="{% url 'partners:list' %}">
+          {% trans "Browse partners" %}
+        </a>
+      </li>
       {# All users get to see metrics, so let them all see the link, too. #}
       <li role="presentation">
         <a href="{% url 'dashboard' %}">
           {% trans "See metrics" %}
-        </a>
-      </li>
-      <li role="presentation">
-        <a href="{% url 'partners:list' %}">
-          {% trans "Browse partners" %}
         </a>
       </li>
       {% if user.is_authenticated %}
@@ -341,7 +341,7 @@
         <p>
           {% blocktrans trimmed %}
             The Wikipedia Library Card Platform is a project of 
-            <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library">
+            <a href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
             The Wikipedia Library</a>.              
           {% endblocktrans %}
         </p>

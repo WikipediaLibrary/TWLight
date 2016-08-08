@@ -193,7 +193,7 @@ class BaseApplicationViewTest(TestCase):
         # RequestFactory (unlike Client) doesn't run middleware. If you
         # actually want to test that messages are displayed, use Client(),
         # and stop/restart the patcher.
-        cls.message_patcher = patch('TWLight.applications.views.messages')
+        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
         cls.message_patcher.start()
 
 
@@ -807,7 +807,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         response = views.SubmitApplicationView.as_view()(request)
 
         expected_url = reverse('users:editor_detail',
-                                kwargs={'pk': self.editor.pk})
+                                kwargs={'pk': self.editor.editor.pk})
         self.assertEqual(response.url, expected_url)
 
 
@@ -1487,6 +1487,146 @@ class ApplicationModelTest(TestCase):
         app.save()
         self.assertTrue(app.get_num_days_until_expiration() is None)
 
-# only coordinators can post to batch edit
+
+
+class BatchEditTest(TestCase):
+    def setUp(self):
+        self.url = reverse('applications:batch_edit')
+        editor = EditorFactory()
+        self.user = editor.user
+
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user)
+
+        self.partner = PartnerFactory()
+
+        self.application = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            partner=self.partner,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        editor2 = EditorFactory()
+        self.unpriv_user = editor2.user
+
+        self.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        self.message_patcher.start()
+
+
+    def tearDown(self):
+        self.message_patcher.stop()
+
+
+    def test_missing_params_raise_http_bad_request(self):
+        # No post data: bad.
+        request = RequestFactory().post(self.url, data={})
+        request.user = self.user
+
+        response = views.BatchEditView.as_view()(request)
+        self.assertEqual(response.status_code, 400)
+
+        # Missing the 'applications' parameter: bad.
+        request = RequestFactory().post(self.url, data={'batch_status': 1})
+        request.user = self.user
+
+        response = views.BatchEditView.as_view()(request)
+        self.assertEqual(response.status_code, 400)
+
+        # Missing the 'batch_status' parameter: bad.
+        request = RequestFactory().post(self.url, data={'applications': 1})
+        request.user = self.user
+
+        response = views.BatchEditView.as_view()(request)
+        self.assertEqual(response.status_code, 400)
+
+        # Has both parameters, but 'batch_status' has an invalid valud: bad.
+        request = RequestFactory().post(self.url,
+            data={'applications': 1, 'batch_status': 6})
+        request.user = self.user
+
+        assert 6 not in [Application.PENDING,
+                         Application.QUESTION,
+                         Application.APPROVED,
+                         Application.NOT_APPROVED]
+
+        response = views.BatchEditView.as_view()(request)
+        self.assertEqual(response.status_code, 400)
+
+
+    def test_bogus_applications_parameter_handled(self):
+        """
+        If the applications parameter doesn't correspond to an existing
+        application, the http request should succeed, but no apps should be
+        changed.
+        """
+
+        # Check status quo ante.
+        self.assertEqual(Application.objects.count(), 1)
+
+        # Make sure that the batch_status value does *not* fail the request - we
+        # want to be clear that we're testing the applications parameter.
+        assert 3 in [Application.PENDING,
+                     Application.QUESTION,
+                     Application.APPROVED,
+                     Application.NOT_APPROVED]
+
+        # Make sure the applications parameter actually is bogus.
+        assert Application.objects.filter(pk=2).count() == 0
+
+        # Issue the request.
+        request = RequestFactory().post(self.url,
+            data={'applications': 2, 'batch_status': 3})
+        request.user = self.user
+
+        response = views.BatchEditView.as_view()(request)
+
+        # Check things! We get redirected to the applications page when done.
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('applications:list'))
+
+        # No new apps created
+        self.assertEqual(Application.objects.count(), 1)
+
+        # Refresh object from db to check for changes (there shouldn't be any).
+        app = Application.objects.get(pk=self.application.pk)
+
+        self.assertEqual(app.editor, self.user.editor)
+        self.assertEqual(app.partner, self.partner)
+        self.assertEqual(app.status, Application.PENDING)
+        self.assertEqual(app.rationale, 'Just because')
+        self.assertEqual(app.agreement_with_terms_of_use, True)
+
+
+    def test_only_coordinators_can_batch_edit(self):
+        # An anonymous user is prompted to login.
+        factory = RequestFactory()
+
+        request = factory.post(self.url,
+            data={'applications': self.application.pk, 'batch_status': 3})
+        request.user = AnonymousUser()
+
+        response = views.BatchEditView.as_view()(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('oauth_login'))
+
+        # A user who is not a coordinator does not have access.
+        request.user = self.unpriv_user
+        response = views.BatchEditView.as_view()(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('users:test_permission'))
+
+        # A coordinator may post to the page.
+        request.user = self.user
+        response = views.BatchEditView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+# what data structure is in request.POST['applications']???
 # posting to batch edit sets status
 # posting to batch edit without app or status fails appropriately?
