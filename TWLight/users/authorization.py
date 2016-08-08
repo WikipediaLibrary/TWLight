@@ -180,7 +180,7 @@ class OAuthCallbackView(View):
 
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
-        base_url = request.session.pop('base_url'), None
+        base_url = request.session.pop('base_url', None)
         try:
             handshaker = handshakers[base_url]
         except KeyError:
