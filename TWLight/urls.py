@@ -8,6 +8,8 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
+
 
 from TWLight.applications.urls import urlpatterns as applications_urls
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
@@ -17,7 +19,7 @@ from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 
-from .views import HomePageView, AboutPageView
+from .views import HomePageView
 
 
 urlpatterns = [
@@ -52,5 +54,7 @@ urlpatterns = [
     url(r'^dashboard/$', DashboardView.as_view(), name='dashboard'),
     url(r'^terms/$', TermsView.as_view(), name='terms'),
     url(r'^$', HomePageView.as_view(), name='homepage'),
-    url(r'^about/$', AboutPageView.as_view(), name='about'),
+    url(r'^about/$',
+        TemplateView.as_view(template_name='about.html'),
+        name='about'),
 ]
