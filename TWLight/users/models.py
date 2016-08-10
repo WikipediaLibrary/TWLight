@@ -267,6 +267,7 @@ class Editor(models.Model):
         self.wp_registered = reg_date
         self.wp_valid = self._is_user_valid(identity)
         self.save()
+        logger.info('identity was {identity}'.format(identity=identity))
 
         self.user.email = identity['email']
 
