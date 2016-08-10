@@ -6,7 +6,11 @@
 {% block content %}
   <h1>{{ object }}</h1>
 
+  <a href="{% url 'applications:apply_single' object.pk %}" class="btn btn-primary text-center visible-xs">{% trans "Apply for access" %}</a>
   <ul class="timeline half-timeline">
+
+    <a href="{% url 'applications:apply_single' object.pk %}" class="btn btn-primary pull-right hidden-xs" >{% trans "Apply for access" %}</a>
+    
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-info"></i>
       </div>
@@ -235,7 +239,7 @@
 
   <script type="text/javascript">
     $(function() {
-      // All applicationss by time
+      // All applications by time
       var signups_time_graph = $("#signups-time-graph");
       var signups_time_data = {{ signups_time_data | safe }};
       var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {

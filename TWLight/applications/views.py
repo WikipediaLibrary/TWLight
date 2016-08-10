@@ -94,33 +94,21 @@ class RequestApplicationView(EditorsOnly, ToURequired, FormView):
 
 
 
-class SubmitApplicationView(EditorsOnly, ToURequired, FormView):
+class _BaseSubmitApplicationView(EditorsOnly, ToURequired, FormView):
+    """
+    People can get to application submission in 2 ways:
+    1) via RequestApplicationView, which lets people select multiple partners;
+    2) via the "apply for access" button on the partner detail page.
+
+    This means there are 2 different ways to tell the SubmitApplicationView
+    which partner(s) it is dealing with, but after that point the logic is the
+    same. We factor the common logic out here, and use subclasses for the two
+    cases.
+    """
     template_name = 'applications/apply.html'
     form_class = BaseApplicationForm
 
     # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
-
-    def dispatch(self, request, *args, **kwargs):
-        fail_msg = _('You must choose at least one resource you want access to before applying for access.')
-        if not PARTNERS_SESSION_KEY in request.session.keys():
-            messages.add_message(request, messages.WARNING, fail_msg)
-            return HttpResponseRedirect(reverse('applications:request'))
-
-        if len(request.session[PARTNERS_SESSION_KEY]) == 0:
-            messages.add_message(request, messages.WARNING, fail_msg)
-            return HttpResponseRedirect(reverse('applications:request'))
-
-        try:
-            partners = self._get_partners()
-            if partners.count() == 0:
-                messages.add_message(request, messages.WARNING, fail_msg)
-                return HttpResponseRedirect(reverse('applications:request'))
-        except:
-            messages.add_message(request, messages.WARNING, fail_msg)
-            return HttpResponseRedirect(reverse('applications:request'))
-
-        return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
-
 
     def get_form(self, form_class):
         """
@@ -167,7 +155,7 @@ class SubmitApplicationView(EditorsOnly, ToURequired, FormView):
         If we already know the user's real name, etc., use that to prefill form
         fields.
         """
-        initial = super(SubmitApplicationView, self).get_initial()
+        initial = super(_BaseSubmitApplicationView, self).get_initial()
         editor = self.request.user.editor
 
         # Our form might not actually have all these fields, but that's OK;
@@ -176,16 +164,6 @@ class SubmitApplicationView(EditorsOnly, ToURequired, FormView):
             initial[field] = getattr(editor, field)
 
         return initial
-
-
-    def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS,
-            _('Your application has been submitted. A coordinator will review '
-              'it and get back to you. You can check the status of your '
-              'applications on this page at any time.'))
-        user_home = reverse('users:editor_detail',
-            kwargs={'pk': self.request.user.editor.pk})
-        return user_home
 
 
     def form_valid(self, form):
@@ -233,21 +211,9 @@ class SubmitApplicationView(EditorsOnly, ToURequired, FormView):
         # And clean up the session so as not to confuse future applications.
         del self.request.session[PARTNERS_SESSION_KEY]
 
-        return super(SubmitApplicationView, self).form_valid(form)
+        return super(_BaseSubmitApplicationView, self).form_valid(form)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-    def _get_partners(self):
-        """
-        Get the queryset of Partners with resources the user wants access to.
-        These partners were specified in RequestApplicationView.
-        """
-        # This key is guaranteed by dispatch() to exist and be nonempty.
-        partner_ids = self.request.session[PARTNERS_SESSION_KEY]
-        partners = Partner.objects.filter(id__in=partner_ids)
-        assert len(partner_ids) == partners.count()
-        return partners
-
 
     def _get_partner_fields(self, partner):
         """
@@ -273,6 +239,100 @@ class SubmitApplicationView(EditorsOnly, ToURequired, FormView):
                 needed_fields.append(field)
 
         return needed_fields
+
+
+
+class SubmitApplicationView(_BaseSubmitApplicationView):
+    """
+    This is the view used after RequestApplicationView, when one or more
+    partners may be in play.
+    """
+
+    # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+        Validate inputs.
+        """
+        fail_msg = _('You must choose at least one resource you want access to before applying for access.')
+        if not PARTNERS_SESSION_KEY in request.session.keys():
+            messages.add_message(request, messages.WARNING, fail_msg)
+            return HttpResponseRedirect(reverse('applications:request'))
+
+        if len(request.session[PARTNERS_SESSION_KEY]) == 0:
+            messages.add_message(request, messages.WARNING, fail_msg)
+            return HttpResponseRedirect(reverse('applications:request'))
+
+        try:
+            partners = self._get_partners()
+            if partners.count() == 0:
+                messages.add_message(request, messages.WARNING, fail_msg)
+                return HttpResponseRedirect(reverse('applications:request'))
+        except:
+            messages.add_message(request, messages.WARNING, fail_msg)
+            return HttpResponseRedirect(reverse('applications:request'))
+
+        return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
+
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS,
+            _('Your application has been submitted. A coordinator will review '
+              'it and get back to you. You can check the status of your '
+              'applications on this page at any time.'))
+        user_home = reverse('users:editor_detail',
+            kwargs={'pk': self.request.user.editor.pk})
+        return user_home
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+    def _get_partners(self):
+        """
+        Get the queryset of Partners with resources the user wants access to.
+        These partners were specified in RequestApplicationView.
+        """
+        # This key is guaranteed by dispatch() to exist and be nonempty.
+        partner_ids = self.request.session[PARTNERS_SESSION_KEY]
+        partners = Partner.objects.filter(id__in=partner_ids)
+        try:
+            assert len(partner_ids) == partners.count()
+        except AssertionError:
+            logger.exception('Number of partners found does not match number '
+                'of IDs provided')
+            raise
+        return partners
+
+
+
+class SubmitSingleApplicationView(_BaseSubmitApplicationView):
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS,
+            _('Your application has been submitted. A coordinator will review '
+              'it and get back to you. You can check the status of your '
+              'applications on your user page page at any time.'))
+        user_home = self._get_partners()[0].get_absolute_url()
+        return user_home
+
+
+    def _get_partners(self):
+        """
+        Get the Partner with resources the user wants access to. There's only
+        one (as specified in the URL parameter), but this is called
+        _get_partners() and returns a queryset so that
+        SubmitSingleApplicationView and SubmitApplicationView have the same
+        behavior, and the shared functionality in _BaseSubmitApplicationView
+        doesn't have to special-case it.
+        """
+        partner_id = self.kwargs['pk']
+        partners = Partner.objects.filter(id=partner_id)
+        try:
+            assert partners.count() == 1
+        except AssertionError:
+            logger.exception('Expected 1 partner, got {count}'.format(
+                count=partners.count()))
+            raise
+
+        return partners
 
 
 

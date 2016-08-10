@@ -135,6 +135,16 @@ header {
   font-style: italic;
 }
 
+nav .divider {
+  border-left: 1px solid #ccc;
+
+}
+
+@media (max-width: 767px) {
+  nav .divider {
+    border-left: none;
+  }
+}
 
 /*
 ----------------------------------------------------------------------------

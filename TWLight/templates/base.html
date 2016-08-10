@@ -61,14 +61,19 @@
           {% trans "Browse partners" %}
         </a>
       </li>
+      <li role="presentation" class="divider">
+        <a href="{% url 'homepage' %}">
+          {% trans "Latest activity" %}
+        </a>
+      </li>
       {# All users get to see metrics, so let them all see the link, too. #}
       <li role="presentation">
         <a href="{% url 'dashboard' %}">
-          {% trans "See metrics" %}
+          {% trans "Metrics" %}
         </a>
       </li>
       {% if user.is_authenticated %}
-        <li role="presentation">
+        <li role="presentation" class="divider">
           <a href="{% url 'auth_logout' %}">
             {% trans "Log out" %}
           </a>
