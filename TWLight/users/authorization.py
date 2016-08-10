@@ -49,7 +49,9 @@ def rehydrate_token(token):
 class OAuthBackend(object):
 
     def _create_user_and_editor(self, identity):
-        logger.info('creating user')
+        # This can't be super informative because we don't want to log
+        # identities.
+        logger.info('Creating user.')
 
         # -------------------------- Create the user ---------------------------
         email = identity['email']
@@ -83,14 +85,16 @@ class OAuthBackend(object):
         Also return a boolean that is True if we created a user during this
         call and False if we did not.
         """
-        logger.info('getting user')
+        logger.info('Attempting to update editor after OAuth login.')
         try:
             editor = Editor.objects.get(wp_sub=identity['sub'])
             user = editor.user
             created = False
             editor.update_from_wikipedia(identity)
+            logger.info('Editor {editor} updated.'.format(editor=editor))
 
         except Editor.DoesNotExist:
+            logger.info("Can't find editor; creating one.")
             user, editor = self._create_user_and_editor(identity)
             created = True
 
@@ -117,10 +121,8 @@ class OAuthBackend(object):
             identity = handshaker.identify(access_token)
         except:
             logger.warning('Someone tried to log in but presented an invalid '
-                'access token')
+                'access token.')
             raise PermissionDenied
-
-        logger.info('identity was %s', identity)
 
         # Get or create the user.
         user, created = self._get_and_update_user_from_identity(identity)
@@ -180,8 +182,6 @@ class OAuthInitializeView(FormView):
         redirect, request_token = handshaker.initiate()
         self.request.session['request_token'] = dehydrate_token(request_token)
         self.request.session['base_url'] = base_url
-        # TODO where is the proper, secure place to store this?
-        logger.info('request token was %s', request_token)
         return HttpResponseRedirect(redirect)
 
 
@@ -207,7 +207,6 @@ class OAuthCallbackView(View):
         session_token = request.session.pop('request_token', None)
         request_token = rehydrate_token(session_token)
 
-        logger.info('request token was %s', request_token)
         if not request_token:
             logger.info('no request token :(')
             raise PermissionDenied

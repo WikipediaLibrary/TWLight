@@ -64,8 +64,6 @@ class SynchronizeFieldsTest(TestCase):
 
     Note: the Django _meta API changes in 1.8 and this code will need
     to be updated accordingly if TWLight is upgraded to 1.8.
-
-    # TODO top-level docs with update instructions for future-us
     """
 
     def test_user_form_fields_reflected_in_partner(self):

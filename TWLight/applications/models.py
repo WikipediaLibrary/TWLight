@@ -14,6 +14,7 @@ class Application(models.Model):
         app_label = 'applications'
         verbose_name = 'application'
         verbose_name_plural = 'applications'
+        ordering = ['-date_created', 'editor', 'partner']
 
 
     PENDING = 0
@@ -217,5 +218,3 @@ class Application(models.Model):
                 return (self.earliest_expiry_date - date.today()).days
 
         return None
-
-    # TODO: order_by

@@ -80,9 +80,6 @@ class BaseApplicationForm(forms.Form):
 
         super(BaseApplicationForm, self).__init__(*args, **kwargs)
 
-        # TODO: form layout for RTL
-        # TODO: figure out how to activate translation & localization for
-        # form error messages
         self.helper = FormHelper(self)
         self._initialize_form_helper()
 

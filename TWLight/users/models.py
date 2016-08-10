@@ -210,7 +210,6 @@ class Editor(models.Model):
             # Check: Special:Email User enabled
             endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=options'.format(base=identity['iss'])
             userinfo = json.loads(urllib2.urlopen(endpoint).read())
-            logger.info('user info was {userinfo}'.format(userinfo=userinfo))
 
             disablemail = userinfo['query']['userinfo']['options']['disablemail']
             assert int(disablemail) == 0
@@ -220,7 +219,8 @@ class Editor(models.Model):
 
             return True
         except AssertionError:
-            logger.exception('User was not valid.')
+            logger.exception('Editor {editor} was not valid.'.format(
+                editor=self))
             return False
 
 

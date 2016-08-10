@@ -229,8 +229,6 @@ class SubmitApplicationView(EditorsOnly, ToURequired, FormView):
                     setattr(app, field, data)
 
             app.save()
-            # TODO test suite should also ensure Application matches our single
-            # source of truth
 
         # And clean up the session so as not to confuse future applications.
         del self.request.session[PARTNERS_SESSION_KEY]
@@ -511,9 +509,6 @@ class EvaluateApplicationView(CoordinatorsOrSelf, ToURequired, UpdateView):
     * view single applications
     * view associated editor metadata
     * assign status
-
-    TODO have internal-only comments (visible to just coordinators)
-    TODO: internationalize form labels
     """
     model = Application
     fields = ['status']
@@ -589,8 +584,6 @@ class BatchEditView(ToURequired, View):
 
 
 class DiffApplicationsView(ToURequired, TemplateView):
-    # TODO not sure if I really want this. It may be just the comment thread we
-    # need to track.
     template_name = "applications/diff.html"
 
     def get_object(self):

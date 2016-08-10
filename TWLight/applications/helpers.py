@@ -3,16 +3,10 @@ from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream
 
-# TODO clean up comments
-
 """
 Lists and characterizes the types of information that partners can require as
 part of access grants. See full comment at end of file.
 """
-# named constants
-# that are also translated
-# so we can use them as form labels, yay!
-# one list per type
 
 """
 Harvestable from user profile:
@@ -110,10 +104,10 @@ Information comes in three types:
 These facts about required/optional status are used to generate application
 forms. In particular, we can generate application forms which impose the
 smallest possible data entry burden on users by:
-* omitting optional fields that aren't required by any of the requested
+* omitting optional fields if they aren't required by any of the requested
   partners;
-* asking for type 2 information only once per application, rather than once per
-  partner.
+* asking for optional information only once per application, rather than once
+  per partner, if it will be the same for all partners.
 
 Facts related to this file are hardcoded in three other places in the database:
 

@@ -107,8 +107,9 @@ If you want to see them in the admin site, set the `By active` filter in the sid
 If they want to reactivate their account, you can set the `Active` checkbox back to True and they will be permitted to log in again. We will still not have their real name, etc., although we may re-retrieve their email address from Wikipedia on login.
 
 ## Partners
-https://django-durationfield.readthedocs.org/en/latest/#usage
-TODO
+Create partners via `/admin` (Partners > Add Partner), following the instructions in the form help text.
+
+The default access grant term defaults to 365 days; you can set other options using natural-ish language. See https://django-durationfield.readthedocs.org/en/latest/#usage for details.
 
 ## Sending emails
 
