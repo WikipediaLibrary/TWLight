@@ -23,8 +23,8 @@
       {{ partner.description }}
     </p>
     <div class="text-center">
-      <a href="{% url 'partners:detail' partner.pk %}">
-        <button class="btn btn-default">{% trans "More info" %}</button>
+      <a href="{% url 'partners:detail' partner.pk %}" class="btn btn-default">
+        {% trans "More info" %}
       </a>
     </div>
     {% for tag in partner.tags %}
