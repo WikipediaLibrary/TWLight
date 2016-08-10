@@ -135,7 +135,10 @@ class Application(models.Model):
         Returns a string like '-default'; the template is responsible for
         prepending 'label' or 'button', etc., as appropriate to the HTML object.
         """
-        return self.LABELMAKER[self.status]
+        try:
+            return self.LABELMAKER[self.status]
+        except KeyError:
+            return None
 
 
     def get_version_count(self):
