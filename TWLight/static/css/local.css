@@ -26,6 +26,9 @@ p {
   margin-top: 7px;
 }
 
+#comments blockquote {
+  font-size: inherit;
+}
 .text-justify-xs {
     text-align: left
 }

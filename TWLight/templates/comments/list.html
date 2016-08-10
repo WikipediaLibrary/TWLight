@@ -1,0 +1,18 @@
+{% comment %}
+  Overrides the default Django comment template to allow us to display Wikipedia usernames in lieu of TWLight usernames.    
+{% endcomment %}
+
+<div id="comments">
+  {% for comment in comment_list %}
+    <label for="c{{ comment.id }}"><strong>
+      {{ comment.submit_date }} &mdash; {% if comment.user.editor %}
+        {{ comment.user.editor.wp_username }}
+      {% else %}
+        {{ comment.user.username }}        
+      {% endif %}
+    </strong></label>
+    <blockquote id="c{{ comment.id }}">
+      {{ comment.comment }}      
+    </blockquote>
+  {% endfor %}
+</div>
