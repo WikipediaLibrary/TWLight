@@ -30,6 +30,15 @@ urlpatterns = [
         auth_views.logout,
         {'next_page': '/'},
         name='auth_logout'),
+    url(r'^password/change/$',
+        auth_views.password_change,
+        {'post_change_redirect': 'users:home'},
+        name='password_change'),
+    url(r'^password/reset/$',
+        auth_views.password_reset,
+        {'post_reset_redirect': 'users:home'},
+        name='password_reset'),
+
     # This makes the set language URL available.
     url(r'^i18n/', include('django.conf.urls.i18n')),
 

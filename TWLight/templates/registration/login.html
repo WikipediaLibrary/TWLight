@@ -18,9 +18,11 @@ here it is, just in case.
     <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
       {% csrf_token %}
       {{ form | crispy }}
-      <input type="submit" value="log in" class="btn pull-right" />
+      <input type="submit" value="log in" class="btn btn-block" />
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
+    <br />
+    <p class="small text-center"><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
   </div>
 </div>
 {% endblock %}

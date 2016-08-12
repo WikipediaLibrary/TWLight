@@ -1,9 +1,5 @@
 {% load i18n %}
 
-  {% ifequal request.user.editor editor %} 
-    {% include 'users/language_form.html' %}    
-  {% endifequal %}
-
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
       <strong>{% trans "Wikipedia username *" %}</strong>

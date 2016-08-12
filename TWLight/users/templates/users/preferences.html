@@ -1,0 +1,34 @@
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+  <h3>Preferences</h3>
+
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Language" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {% include 'users/language_form.html' %}    
+    </div>
+  </div>
+
+  <hr />
+
+  {% if user.has_usable_password %}
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <strong>{% trans "Password" %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        <form method="post" action="{% url 'password_change' %}">
+          {% csrf_token %}
+          {{ password_form | crispy }}    
+          <button class="btn btn-default" type="submit">
+            {% trans "Change password" %}
+          </button>
+        </form>    
+      </div>
+    </div>
+
+    <hr />
+  {% endif %}

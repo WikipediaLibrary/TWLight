@@ -3,6 +3,7 @@ from crispy_forms.layout import Submit
 
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
@@ -35,6 +36,7 @@ class UserDetailView(SelfOnly, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         context['language_form'] = SetLanguageForm()
+        context['password_form'] = PasswordChangeForm(user=self.request.user)
         return context
 
 
@@ -63,6 +65,8 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
             messages.add_message(self.request, messages.WARNING,
                 _('Please update your contributions to Wikipedia (below) to '
                   'help coordinators evaluate your applications.'))
+
+        context['password_form'] = PasswordChangeForm(user=self.request.user)
 
         return context
 
