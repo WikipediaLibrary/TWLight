@@ -596,20 +596,10 @@ class EvaluateApplicationView(CoordinatorsOrSelf, ToURequired, UpdateView):
 
 
 
-class BatchEditView(ToURequired, View):
+class BatchEditView(CoordinatorsOnly, ToURequired, View):
     http_method_names = ['post']
 
-    @login_required
-    def dispatch(self, request, *args, **kwargs):
-        # LoginRequiredMixin and ToURequiredMixin don't mix well because they
-        # both set login_url, but we want people to be redirected to different
-        # places if they're AnonymousUsers vs. simply people who haven't agreed
-        # to the terms. So we'll use login_required() to handle anons here.
-        return super(BatchEditView, self).dispatch(request, *args, **kwargs)
-
-
     def post(self, request, *args, **kwargs):
-        print self.login_url
         try:
             assert 'applications' in request.POST
             assert 'batch_status' in request.POST

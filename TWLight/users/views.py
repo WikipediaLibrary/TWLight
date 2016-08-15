@@ -89,8 +89,9 @@ class UserHomeView(View):
     def as_view(cls):
         def _get_view(request, *args, **kwargs):
             if request.user.is_anonymous():
-                # We can't use the django-braces LoginRequiredMixin here,
-                # because as_view applies at an earlier point in the process.
+                # We can't use something like django-braces LoginRequiredMixin
+                # here, because as_view applies at an earlier point in the
+                # process.
                 return redirect_to_login(request.get_full_path())
             if hasattr(request.user, 'editor'):
                 kwargs.update({'pk': request.user.editor.pk})

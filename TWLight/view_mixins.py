@@ -1,11 +1,17 @@
 """
 Commonly needed custom view mixins.
+
+Note that these do *not* use something like django-braces' UserPassesTestMixin,
+because we may need to use multiple tests in one view (e.g. must be a
+coordinator AND must have agreed to the terms of use). If we used that mixin,
+test functions and login URLs would overwrite each other. Using the dispatch
+function and super() means we can chain as many access tests as we'd like.
 """
 
-from braces.views import UserPassesTestMixin
-
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponseRedirect
 
 from TWLight.users.groups import get_coordinators
 
@@ -13,7 +19,7 @@ from TWLight.users.groups import get_coordinators
 coordinators = get_coordinators()
 
 
-class CoordinatorsOrSelf(UserPassesTestMixin):
+class CoordinatorsOrSelf(object):
     """
     Restricts visibility to:
     * Coordinators; or
@@ -25,9 +31,7 @@ class CoordinatorsOrSelf(UserPassesTestMixin):
     is an instance of User.
     """
 
-    login_url = reverse_lazy('users:test_permission')
-
-    def test_func(self, user):
+    def test_func_coordinators_or_self(self, user):
         try:
             obj = self.get_object()
             if isinstance(obj, User):
@@ -42,21 +46,38 @@ class CoordinatorsOrSelf(UserPassesTestMixin):
                 obj_owner_test)
 
 
-class CoordinatorsOnly(UserPassesTestMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_coordinators_or_self(request.user):
+            return HttpResponseRedirect(reverse_lazy('users:test_permission'))
+
+        return super(CoordinatorsOrSelf, self).dispatch(
+            request, *args, **kwargs)
+
+
+
+class CoordinatorsOnly(object):
     """
     Restricts visibility to:
     * Coordinators; or
     * Superusers.
     """
 
-    login_url = reverse_lazy('users:test_permission')
 
-    def test_func(self, user):
+    def test_func_coordinators_only(self, user):
         return (user.is_superuser or
                 user in coordinators.user_set.all())
 
 
-class EditorsOnly(UserPassesTestMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_coordinators_only(request.user):
+            return HttpResponseRedirect(reverse_lazy('users:test_permission'))
+
+        return super(CoordinatorsOnly, self).dispatch(
+            request, *args, **kwargs)
+
+
+
+class EditorsOnly(object):
     """
     Restricts visibility to:
     * Editors.
@@ -67,13 +88,20 @@ class EditorsOnly(UserPassesTestMixin):
     OAuth.
     """
 
-    login_url = reverse_lazy('users:test_permission')
-
-    def test_func(self, user):
+    def test_func_editors_only(self, user):
         return hasattr(user, 'editor')
 
 
-class SelfOnly(UserPassesTestMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_editors_only(request.user):
+            return HttpResponseRedirect(reverse_lazy('users:test_permission'))
+
+        return super(EditorsOnly, self).dispatch(
+            request, *args, **kwargs)
+
+
+
+class SelfOnly(object):
     """
     Restricts visibility to:
     * The user who owns (or is) the object in question.
@@ -83,9 +111,7 @@ class SelfOnly(UserPassesTestMixin):
     is an instance of User.
     """
 
-    login_url = reverse_lazy('users:test_permission')
-
-    def test_func(self, user):
+    def test_func_self_only(self, user):
         obj_owner_test = False # set default
 
         obj = self.get_object()
@@ -97,19 +123,36 @@ class SelfOnly(UserPassesTestMixin):
         return obj_owner_test
 
 
-class ToURequired(UserPassesTestMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_self_only(request.user):
+            return HttpResponseRedirect(reverse_lazy('users:test_permission'))
+
+        return super(SelfOnly, self).dispatch(
+            request, *args, **kwargs)
+
+
+
+class ToURequired(object):
     """
     Restricts visibility to:
     * Users who have agreed with the site's terms of use.
     * Superusers.
     """
 
-    login_url = reverse_lazy('terms')
-
-    def test_func(self, user):
+    def test_func_tou_required(self, user):
         try:
             return user.is_superuser or user.userprofile.terms_of_use
         except AttributeError:
             # AnonymousUser won't have a userprofile...but AnonymousUser hasn't
             # agreed to the Terms, either, so we can safely deny them.
             return False
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_tou_required(request.user):
+            messages.add_message(request, messages.INFO,
+                'You need to agree to the terms of use before you can do that.')
+            return HttpResponseRedirect(reverse_lazy('terms'))
+
+        return super(ToURequired, self).dispatch(
+            request, *args, **kwargs)
+
