@@ -3,6 +3,17 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
+{% block extra_css %}
+  <style type="text/css">
+    #terms {
+      height: 300px;
+      border:1px solid #ccc;
+      padding:6px;
+      overflow:scroll;
+    }
+  </style>
+{% endblock extra_css %}
+
 {% block content %}
 {# Translators: use the date *when you are translating*, in a language-appropriate format. #}
 <em>{% trans "Last updated 8 August 2016" %}</em>
@@ -13,6 +24,7 @@
 You can also view these TOU on [[Meta]], where they may be translated in other languages. <-- awaiting link on meta
 {% endcomment %}
 
+<div id='terms'>
 <p>
 {% blocktrans trimmed %}
 The Wikipedia Library is an open research hub, through which active Wikipedia editors can gain both access to the vital reliable sources needed for their work and support in using those resources to improve the encyclopedia. We have partnered with publishers around the world to allow users to freely access otherwise paywalled resources. This platform allows users to apply simultaneously for access to multiple publishers, and makes the administration of Wikipedia Library accounts easy and efficient.
@@ -163,6 +175,7 @@ Please note that in the event of any differences in meaning or interpretation be
 <p>
 {% trans "The Wikipedia Library Team" %}
 </p>
+</div>
 
   {% if user.is_authenticated %}
     <p>
