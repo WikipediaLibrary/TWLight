@@ -3,9 +3,9 @@
 So you want to run TWLight! Awesome. Let's get started.
 
 These docs are written for _site administrators_ - people who have login access
-to the /admin section of the web page and can administer user accounts and
-other database objects. They are not written for 1) sysadmins or 2)
-less-privileged TWLight users.
+to the `/admin` section of the web page and can administer user accounts and
+other database objects. They are not written for 1) sysadmins; 2)
+less-privileged TWLight users; or 3) developers.
 
 In general, you will do admin-y things at the `/admin` URL. This gives you a GUI interface to the database. Good times.
 

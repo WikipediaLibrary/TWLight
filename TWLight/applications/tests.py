@@ -1609,9 +1609,11 @@ class BatchEditTest(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(urlparse(response.url).path,
-            reverse('oauth_login'))
+            reverse('users:test_permission'))
 
         # A user who is not a coordinator does not have access.
+        coordinators = get_coordinators()
+        coordinators.user_set.remove(self.unpriv_user) # make sure
         request.user = self.unpriv_user
         response = views.BatchEditView.as_view()(request)
 
@@ -1619,11 +1621,15 @@ class BatchEditTest(TestCase):
         self.assertEqual(urlparse(response.url).path,
             reverse('users:test_permission'))
 
-        # A coordinator may post to the page.
+        # A coordinator may post to the page (on success, it redirects to the
+        # application list page which they likely started on).
         request.user = self.user
+        coordinators.user_set.add(self.user) # make sure
         response = views.BatchEditView.as_view()(request)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            reverse('applications:list'))
 
 # what data structure is in request.POST['applications']???
 # posting to batch edit sets status
