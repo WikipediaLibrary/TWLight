@@ -16,6 +16,7 @@ from django.utils.translation import ugettext as _
 from .helpers.wiki_list import WIKI_DICT
 from .forms import HomeWikiForm
 from .models import Editor
+import handshakers
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +26,7 @@ consumer_token = ConsumerToken(settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
 # We can't construct the handshaker now, because its base URL will vary
 # depending on the user's home wiki. We will add handshakers to this as needed.
 # Keys will be base URLs; values will be handshaker objects.
-handshakers = {}
+#handshakers = {}
 
 def dehydrate_token(token):
     """
@@ -174,18 +175,16 @@ class OAuthInitializeView(FormView):
         logger.warning('base url type is %s' % type(base_url))
         try:
             # Get handshaker matching this base URL from our dict.
-            global handshakers
-            logger.warning('in our try scope, handshakers is {hs}'.format(hs=handshakers))
-            handshaker = handshakers[base_url]
+            logger.warning('in our try scope, handshakers is {hs}'.format(hs=handshakers.handshaker_dict))
+            handshaker = handshakers.handshaker_dict[base_url]
             logger.warning('it was in our handshaker dict')
         except KeyError:
             # Whoops, it doesn't exist. Initialize a handshaker and store it
             # for later.
-            global handshakers
             handshaker = Handshaker(base_url, consumer_token)
-            handshakers[base_url] = handshaker
+            handshakers.handshaker_dict[base_url] = handshaker
             logger.warning('it was not in our handshaker dict')
-            logger.warning('dict is now {hs}'.format(hs=handshakers))
+            logger.warning('dict is now {hs}'.format(hs=handshakers.handshaker_dict))
 
         redirect, request_token = handshaker.initiate()
         self.request.session['request_token'] = dehydrate_token(request_token)
@@ -208,10 +207,9 @@ class OAuthCallbackView(View):
         logger.warning('callback finds base_url of %s' % base_url)
         logger.warning('base_url type is %s' % type(base_url))
         try:
-            global handshakers
-            logger.warning('handshakers dict is {hs}'.format(hs=handshakers))
-            handshaker = handshakers[base_url]
-        except KeyError:
+            logger.warning('handshakers dict is {hs}'.format(hs=handshakers.handshaker_dict))
+            handshaker = handshakers.handshaker_dict[base_url]
+        except AtributeError:
             logger.exception('Could not find handshaker')
             raise PermissionDenied
 
