@@ -172,8 +172,10 @@ class OAuthInitializeView(FormView):
 
         logger.warning('base url is %s' % base_url)
         logger.warning('base url type is %s' % type(base_url))
+        global handshakers
         try:
             # Get handshaker matching this base URL from our dict.
+            logger.warning('in our try scope, handshakers is {hs}'.format(hs=handshakers))
             handshaker = handshakers[base_url]
             logger.warning('it was in our handshaker dict')
         except KeyError:
@@ -202,6 +204,7 @@ class OAuthCallbackView(View):
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
         base_url = request.session.pop('base_url', None)
+        global handshakers
         logger.warning('callback finds base_url of %s' % base_url)
         logger.warning('base_url type is %s' % type(base_url))
         logger.warning('handshakers dict is {hs}'.format(hs=handshakers))
