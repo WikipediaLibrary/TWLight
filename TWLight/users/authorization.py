@@ -172,15 +172,16 @@ class OAuthInitializeView(FormView):
 
         logger.warning('base url is %s' % base_url)
         logger.warning('base url type is %s' % type(base_url))
-        global handshakers
         try:
             # Get handshaker matching this base URL from our dict.
+            global handshakers
             logger.warning('in our try scope, handshakers is {hs}'.format(hs=handshakers))
             handshaker = handshakers[base_url]
             logger.warning('it was in our handshaker dict')
         except KeyError:
             # Whoops, it doesn't exist. Initialize a handshaker and store it
             # for later.
+            global handshakers
             handshaker = Handshaker(base_url, consumer_token)
             handshakers[base_url] = handshaker
             logger.warning('it was not in our handshaker dict')
@@ -204,11 +205,11 @@ class OAuthCallbackView(View):
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
         base_url = request.session.pop('base_url', None)
-        global handshakers
         logger.warning('callback finds base_url of %s' % base_url)
         logger.warning('base_url type is %s' % type(base_url))
-        logger.warning('handshakers dict is {hs}'.format(hs=handshakers))
         try:
+            global handshakers
+            logger.warning('handshakers dict is {hs}'.format(hs=handshakers))
             handshaker = handshakers[base_url]
         except KeyError:
             logger.exception('Could not find handshaker')
