@@ -209,7 +209,7 @@ class OAuthCallbackView(View):
         try:
             logger.warning('handshakers dict is {hs}'.format(hs=handshakers.handshaker_dict))
             handshaker = handshakers.handshaker_dict[base_url]
-        except AtributeError:
+        except AttributeError:
             logger.exception('Could not find handshaker')
             raise PermissionDenied
 
