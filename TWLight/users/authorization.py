@@ -170,14 +170,19 @@ class OAuthInitializeView(FormView):
         home_wiki = WIKI_DICT[form.cleaned_data['home_wiki']]
         base_url = 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
 
+        logger.warning('base url is %s' % base_url)
+        logger.warning('base url type is %s' % type(base_url))
         try:
             # Get handshaker matching this base URL from our dict.
             handshaker = handshakers[base_url]
+            logger.warning('it was in our handshaker dict')
         except KeyError:
             # Whoops, it doesn't exist. Initialize a handshaker and store it
             # for later.
             handshaker = Handshaker(base_url, consumer_token)
             handshakers[base_url] = handshaker
+            logger.warning('it was not in our handshaker dict')
+            logger.warning('dict is now {hs}'.format(hs=handshakers))
 
         redirect, request_token = handshaker.initiate()
         self.request.session['request_token'] = dehydrate_token(request_token)
@@ -197,6 +202,9 @@ class OAuthCallbackView(View):
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
         base_url = request.session.pop('base_url', None)
+        logger.warning('callback finds base_url of %s' % base_url)
+        logger.warning('base_url type is %s' % type(base_url))
+        logger.warning('handshakers dict is {hs}'.format(hs=handshakers))
         try:
             handshaker = handshakers[base_url]
         except KeyError:
