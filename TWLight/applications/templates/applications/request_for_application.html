@@ -2,35 +2,44 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
+{% block extra_css %}
+  <style type="text/css">
+    label {
+      padding-right: 5px;
+    }
+  </style>
+{% endblock extra_css %}
+
 {% block content %}
 
 {% comment %}Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.{% endcomment %}
-<h1>{% trans 'What do you want to access?' %}</h1>
+<h1>{% trans 'Whose resources you want to access?' %}</h1>
 
 <form method="post">
   {% csrf_token %}
-  {% for field in form %}
-    <div class="form-group">
-      {% if field.errors %}
-        {{ field.errors }}
-      {% endif %}
-      <div id="div_id_{{ field.name }}" class="checkbox">
-        <label for="id_{{ field.name }}" class="pull-left">
-          <input class="checkboxinput checkbox" id="id_{{ field.name }}" name="{{ field.name }}" type="checkbox" />
-        </label>
-        <div class="col-xs-12 col-sm-3">
-          {% with field.field.widget.attrs.object as partner %}
-            {% include "resources/partner_tile.html" %}
-          {% endwith %}
+  <ul class="list-unstyled">
+    {% for field in form %}
+      <li class="clearfix">
+        <div class="form-group">
+          {% if field.errors %}
+            {{ field.errors }}
+          {% endif %}
+          <div id="div_id_{{ field.name }}" class="checkbox">
+            <label for="id_{{ field.name }}" class="pull-left">
+              <input class="checkboxinput checkbox" id="id_{{ field.name }}" name="{{ field.name }}" type="checkbox" />
+              {{ field.field.widget.attrs.object }}
+            </label>
+          </div>
+          <a href="{{ field.field.widget.attrs.object.get_absolute_url }}">
+            {% trans "(more info)" %}
+          </a>
         </div>
-        <div class="clearfix hidden-xs"></div>
-      </div>
-    </div>
-  {% empty %}
-    {% trans "No partner data has been added to the database yet." %}
-  {% endfor %}
-  <br />
-  <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+      </li>
+    {% empty %}
+      {% trans "No partner data has been added to the database yet." %}
+    {% endfor %}
+  </ul>
+  <input type="submit" value="{% trans "Apply for access" %}" class="btn btn-primary" />
 </form>
 
 {% endblock %}
