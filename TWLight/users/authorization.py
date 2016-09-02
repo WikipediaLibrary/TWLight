@@ -16,17 +16,19 @@ from django.utils.translation import ugettext as _
 from .helpers.wiki_list import WIKI_DICT
 from .forms import HomeWikiForm
 from .models import Editor
-import handshakers
 
 logger = logging.getLogger(__name__)
 
 # Construct a "consumer" from the key/secret provided by MediaWiki.
 consumer_token = ConsumerToken(settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
 
-# We can't construct the handshaker now, because its base URL will vary
-# depending on the user's home wiki. We will add handshakers to this as needed.
-# Keys will be base URLs; values will be handshaker objects.
-#handshakers = {}
+# Construct all conceivably needed handshakers.
+handshakers = {}
+
+for wiki_base_url in WIKI_DICT.values():
+    url = 'https://{home_wiki}/w/index.php'.format(home_wiki=wiki_base_url)
+    handshakers[url] = Handshaker(url, consumer_token)
+
 
 def dehydrate_token(token):
     """
@@ -171,20 +173,15 @@ class OAuthInitializeView(FormView):
         home_wiki = WIKI_DICT[form.cleaned_data['home_wiki']]
         base_url = 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
 
-        logger.warning('base url is %s' % base_url)
-        logger.warning('base url type is %s' % type(base_url))
         try:
             # Get handshaker matching this base URL from our dict.
-            logger.warning('in our try scope, handshakers is {hs}'.format(hs=handshakers.handshaker_dict))
-            handshaker = handshakers.handshaker_dict[base_url]
-            logger.warning('it was in our handshaker dict')
+            handshaker = handshakers[base_url]
         except KeyError:
-            # Whoops, it doesn't exist. Initialize a handshaker and store it
-            # for later.
-            handshaker = Handshaker(base_url, consumer_token)
-            handshakers.handshaker_dict[base_url] = handshaker
-            logger.warning('it was not in our handshaker dict')
-            logger.warning('dict is now {hs}'.format(hs=handshakers.handshaker_dict))
+            # Whoops, we have no handshaker for this URL. We shouldn't
+            # authenticate them as we don't believe that their wiki exists.
+            logger.exception('Could not find handshaker for {url}'.format(
+                url=base_url))
+            raise
 
         redirect, request_token = handshaker.initiate()
         self.request.session['request_token'] = dehydrate_token(request_token)
@@ -204,12 +201,9 @@ class OAuthCallbackView(View):
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
         base_url = request.session.pop('base_url', None)
-        logger.warning('callback finds base_url of %s' % base_url)
-        logger.warning('base_url type is %s' % type(base_url))
         try:
-            logger.warning('handshakers dict is {hs}'.format(hs=handshakers.handshaker_dict))
-            handshaker = handshakers.handshaker_dict[base_url]
-        except AttributeError:
+            handshaker = handshakers[base_url]
+        except KeyError:
             logger.exception('Could not find handshaker')
             raise PermissionDenied
 
@@ -248,19 +242,19 @@ class OAuthCallbackView(View):
                       'meets the eligibility criteria in the terms of use, so '
                       'you cannot be logged in.'))
 
-            url = reverse_lazy('terms')
+            return_url = reverse_lazy('terms')
 
         else:
             login(request, user)
 
             if created:
                 # Translators: this message is displayed to users with brand new accounts.
-                messages.add_message(request, messages.INFO, _('Welcome! Please '
-                    'agree to the terms of use.'))
-                url = reverse_lazy('terms')
+                messages.add_message(request, messages.INFO, _('Welcome! '
+                    'Please agree to the terms of use.'))
+                return_url = reverse_lazy('terms')
             else:
                 messages.add_message(request, messages.INFO, _('Welcome back!'))
-                url = reverse_lazy('users:editor_detail',
+                return_url = reverse_lazy('users:editor_detail',
                     kwargs={'pk': user.editor.pk})
 
-        return HttpResponseRedirect(url)
+        return HttpResponseRedirect(return_url)
