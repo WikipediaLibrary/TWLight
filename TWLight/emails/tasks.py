@@ -101,4 +101,3 @@ def send_comment_notification_emails(sender, **kwargs):
         email.send(user_email, {'app': app, 'app_url': app_url})
         logger.info('Email queued for {app.editor.user.email} about app #{app.pk}'.format(
             app=app))
-
