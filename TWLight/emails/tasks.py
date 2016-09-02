@@ -54,14 +54,6 @@ def send_comment_notification_emails(sender, **kwargs):
     Any time a comment is posted on an application, this sends email to the
     application owner and anyone else who previously commented.
     """
-    # This import must go here. We cannot import ContentType too early in the
-    # Django startup process, but we have to import this file (or at least this
-    # function) early enough that it can be connected as a signal receiver
-    # (which we do in __init__.py). Importing ContentType at the top level would
-    # therefore result in fail, and we delay it until now.
-    from django.contrib.contenttypes.models import ContentType
-    apptype = ContentType.objects.get(model='Application')
-
     current_comment = kwargs['comment']
     app = current_comment.content_object
     assert isinstance(app, Application)
@@ -89,7 +81,9 @@ def send_comment_notification_emails(sender, **kwargs):
 
     # Send to any previous commenters on the thread, other than the editor and
     # the person who left the comment just now.
-    all_comments = Comment.objects.filter(object_pk=app.pk, content_type=apptype)
+    all_comments = Comment.objects.filter(object_pk=app.pk,
+                        content_type__model='application',
+                        content_type__app_label='applications')
     user_emails = set(
         [comment.user.email for comment in all_comments]
         )
@@ -107,4 +101,3 @@ def send_comment_notification_emails(sender, **kwargs):
         email.send(user_email, {'app': app, 'app_url': app_url})
         logger.info('Email queued for {app.editor.user.email} about app #{app.pk}'.format(
             app=app))
-
