@@ -51,16 +51,22 @@ def rehydrate_token(token):
 
 class OAuthBackend(object):
 
+    def _get_language_code(self, identity):
+        home_wiki_url = identity['iss']
+        extractor = re.match(r'http[s]?://(\w+).wikipedia.org.*', home_wiki_url)
+        language_code = extractor.group(1)
+        assert language_code in WIKI_DICT
+
+        return language_code
+
     def _create_user_and_editor(self, identity):
         # This can't be super informative because we don't want to log
         # identities.
         logger.info('Creating user.')
 
-        # ---------------- Verify assumption before proceeding -----------------
-        home_wiki_url = identity['iss']
-        extractor = re.match(r'http[s]?://(\w+).wikipedia.org.*', home_wiki_url)
-        language_code = extractor.group(1)
-        assert language_code in WIKI_DICT
+        # This will assert that the language code is a real Wikipedia, which
+        # is good - we want to verify that assumption before proceeding.
+        language_code = self._get_language_code(identity)
 
         # -------------------------- Create the user ---------------------------
         email = identity['email']
@@ -97,7 +103,10 @@ class OAuthBackend(object):
         """
         logger.info('Attempting to update editor after OAuth login.')
         try:
-            editor = Editor.objects.get(wp_sub=identity['sub'])
+            language_code = self._get_language_code(identity)
+            editor = Editor.objects.get(
+                wp_sub=identity['sub'],
+                home_wiki=language_code)
             user = editor.user
             created = False
             editor.update_from_wikipedia(identity)
@@ -107,6 +116,10 @@ class OAuthBackend(object):
             logger.info("Can't find editor; creating one.")
             user, editor = self._create_user_and_editor(identity)
             created = True
+
+        except AssertionError:
+            logger.exception('Received bad home wiki information')
+            raise
 
         return user, created
 

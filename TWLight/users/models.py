@@ -81,7 +81,7 @@ class Editor(models.Model):
         # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
         verbose_name = 'wikipedia editor'
         verbose_name_plural = 'wikipedia editors'
-        unique_together = ('wp_username', 'home_wiki')
+        unique_together = ('wp_sub', 'home_wiki')
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
