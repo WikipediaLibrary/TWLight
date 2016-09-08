@@ -44,6 +44,11 @@
       </span>
     {% endif %}
     <ul class="nav nav-pills pull-right">
+      <li role="presentation">
+        <a href="{% url 'partners:list' %}">
+          {% trans "Browse partners" %}
+        </a>
+      </li>
       {% if user.editor %}
         <li role="presentation">
           <a href="{% url 'applications:request' %}">
@@ -58,11 +63,6 @@
           </a>
         </li>
       {% endif %}
-      <li role="presentation">
-        <a href="{% url 'partners:list' %}">
-          {% trans "Browse partners" %}
-        </a>
-      </li>
       <li role="presentation" class="divider">
         <a href="{% url 'homepage' %}">
           {% trans "Latest activity" %}
