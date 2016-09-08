@@ -13,7 +13,7 @@ urlpatterns = [
         views.EditorUpdateView.as_view(),
         name='editor_update'),
     url(r'^test_permission/$',
-        views.DenyAuthenticatedUsers.as_view(),
+        views.TestPermissionView.as_view(),
         name='test_permission'),
     url(r'^email_change/$',
         views.EmailChangeView.as_view(),

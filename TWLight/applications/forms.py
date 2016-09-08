@@ -80,9 +80,6 @@ class BaseApplicationForm(forms.Form):
 
         super(BaseApplicationForm, self).__init__(*args, **kwargs)
 
-        # TODO: form layout for RTL
-        # TODO: figure out how to activate translation & localization for
-        # form error messages
         self.helper = FormHelper(self)
         self._initialize_form_helper()
 
@@ -258,7 +255,7 @@ class ApplicationAutocomplete(autocomplete_light.ModelForm):
         # Internationalize user-visible labels. These will appear inline as
         # placeholders.
         self.fields['editor'].label = _('Wikipedia username')
-        self.fields['partner'].label = _('Company name')
+        self.fields['partner'].label = _('Partner name')
 
 
     def choices_for_request(self):

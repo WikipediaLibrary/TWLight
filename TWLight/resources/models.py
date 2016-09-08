@@ -18,6 +18,7 @@ class Partner(models.Model):
         app_label = 'resources'
         verbose_name = 'partner'
         verbose_name_plural = 'partners'
+        ordering = ['company_name']
 
 
     company_name = models.CharField(max_length=30,
@@ -30,9 +31,9 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     terms_of_use = models.URLField(blank=True, null=True,
-        help_text=_("Required if this company requires that users agree to "
-        "terms of use as a condition of applying for access; optional "
-        "otherwise."))
+        help_text=_("Link to terms of use. Required if this company requires "
+            "that users agree to terms of use as a condition of applying for "
+            "access; optional otherwise."))
     description = models.TextField(blank=True, null=True,
         help_text=_("Optional description of this partner's offerings."))
     logo_url = models.URLField(blank=True, null=True,
@@ -84,8 +85,6 @@ class Partner(models.Model):
         help_text=_("Mark as true if this partner requires applicants to agree "
                     "with the partner's terms of use."))
 
-    # TODO: information about access grant workflows and email templates
-
 
     def __str__(self):
         return self.company_name
@@ -131,6 +130,7 @@ class Stream(models.Model):
         app_label = 'resources'
         verbose_name = 'collection'
         verbose_name_plural = 'collections'
+        ordering = ['partner', 'name']
 
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")

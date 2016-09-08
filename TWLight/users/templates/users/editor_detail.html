@@ -21,6 +21,10 @@
 
   {% include 'users/editor_detail_data.html' %}
 
+  {% ifequal user editor.user  %}
+    {% include "users/preferences.html" %}    
+  {% endifequal %}
+
   <p>
     {% blocktrans with last_updated_date=editor.last_updated|localize %}
       Information with an * was retrieved from Wikipedia directly.

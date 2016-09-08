@@ -3,9 +3,9 @@
 So you want to run TWLight! Awesome. Let's get started.
 
 These docs are written for _site administrators_ - people who have login access
-to the /admin section of the web page and can administer user accounts and
-other database objects. They are not written for 1) sysadmins or 2)
-less-privileged TWLight users.
+to the `/admin` section of the web page and can administer user accounts and
+other database objects. They are not written for 1) sysadmins; 2)
+less-privileged TWLight users; or 3) developers.
 
 In general, you will do admin-y things at the `/admin` URL. This gives you a GUI interface to the database. Good times.
 
@@ -15,7 +15,7 @@ See `locale/README.md`. You will need cooperation from a sysadmin if you do not 
 
 ## Logging in
 
-_If you did not create your account via OAuth_ and did not manually fill in accurate Wikipedia editor profile data after creating your account, you will not be able to use OAuth to log in. Instead, go to `/accounts/login`.
+_If you did not create your account via OAuth_, and/or did not manually fill in accurate Wikipedia editor profile data after creating your account, you will not be able to use OAuth to log in. Instead, go to `/accounts/login`.
 
 ## Users
 ### Account classes
@@ -55,7 +55,7 @@ anyone else with command-line access) can run
 
 This is the one case where you want to manually create a user, rather than going via OAuth, because OAuth-created users won't have the privileges you need to administer the site, and you need to guarantee that someone does.
 
-#### If you do, but want another
+#### If you do, but want another (from a new account)
 If you already have a superuser, you can create another with `createsuperuser`.
 
 Alternately, if you are a superuser (and especially if you don't have
@@ -68,6 +68,15 @@ command-line) access, do the following:
   not work properly for Users without Editors.
 * Save the new user. This will allow you to edit additional properties.
 * Click the superuser status checkbox and save.
+
+#### If you want to promote an existing, OAuth-created account to superuser status
+* Log in at `/admin`.
+* Click on the username.
+* Give them a password (there is a tiny 'this form' link in the password section).
+* Set the `Staff status` checkbox to true (this allows them to log into the admin site; setting superuser status will _not_ allow that).
+* Set the `Superuser status` checkbox to true.
+* Save the user.
+* Do _not_ change the username (which is a big number), but do make sure the staffer knows it, because that's what's needed for username/password authentication.
 
 ### Making someone a coordinator
 When people create accounts via OAuth, they have Editor status by default. To promote them to Coordinator:
@@ -98,8 +107,18 @@ If you want to see them in the admin site, set the `By active` filter in the sid
 If they want to reactivate their account, you can set the `Active` checkbox back to True and they will be permitted to log in again. We will still not have their real name, etc., although we may re-retrieve their email address from Wikipedia on login.
 
 ## Partners
-https://django-durationfield.readthedocs.org/en/latest/#usage
-TODO
+Create partners via `/admin` (Partners > Add Partner), following the instructions in the form help text.
+
+The default access grant term defaults to 365 days; you can set other options using natural-ish language. See https://django-durationfield.readthedocs.org/en/latest/#usage for details.
+
+### Collections
+
+In order to set up a collection (database, stream, etc.) for a partner:
+* Log in at `/admin`
+* Under `Resources`, click on `Collections`
+* Click the `Add collection +` button
+
+The existing partners are available in the dropdown. You can also add a new partner with the green + sign by the dropdown.
 
 ## Sending emails
 

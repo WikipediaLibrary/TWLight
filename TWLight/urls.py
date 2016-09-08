@@ -8,6 +8,8 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
+
 
 from TWLight.applications.urls import urlpatterns as applications_urls
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
@@ -28,6 +30,15 @@ urlpatterns = [
         auth_views.logout,
         {'next_page': '/'},
         name='auth_logout'),
+    url(r'^password/change/$',
+        auth_views.password_change,
+        {'post_change_redirect': 'users:home'},
+        name='password_change'),
+    url(r'^password/reset/$',
+        auth_views.password_reset,
+        {'post_reset_redirect': 'users:home'},
+        name='password_reset'),
+
     # This makes the set language URL available.
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
@@ -49,18 +60,10 @@ urlpatterns = [
         auth.OAuthCallbackView.as_view(),
         name='oauth_callback'),
 
-    url(r'^dashboard/$',
-        DashboardView.as_view(),
-        name='dashboard'
-    ),
-
-    url(r'^terms/$',
-        TermsView.as_view(),
-        name='terms'
-    ),
-
-    url(r'^$',
-        HomePageView.as_view(),
-        name='homepage'
-    ),
+    url(r'^dashboard/$', DashboardView.as_view(), name='dashboard'),
+    url(r'^terms/$', TermsView.as_view(), name='terms'),
+    url(r'^$', HomePageView.as_view(), name='homepage'),
+    url(r'^about/$',
+        TemplateView.as_view(template_name='about.html'),
+        name='about'),
 ]

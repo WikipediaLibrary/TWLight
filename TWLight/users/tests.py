@@ -158,8 +158,9 @@ class ViewsTestCase(TestCase):
 
         content = response.render().content
 
-        # This uses default data from EditorFactory.
-        self.assertIn('wp_alice', content)
+        # This uses default data from EditorFactory, except for the username,
+        # which is randomly generated (hence has no default).
+        self.assertIn(self.editor1.wp_username, content)
         self.assertIn('42', content)
         self.assertIn('some groups', content)           # wp_groups
         self.assertIn('some rights', content)           # wp_rights

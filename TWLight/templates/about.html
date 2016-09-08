@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+  <h2>{% trans "About the Wikipedia Library" %}</h2>
+
+  <p>
+    {% blocktrans trimmed %}
+      The Wikipedia Library provides free access to research materials from a
+      variety of sources, to improve your ability to contribute content to the Wikimedia projects. Partners include a wide range of databases that offer access to books, journals, newspapers, videos, and other useful materials.       
+    {% endblocktrans %}    
+  </p>
+
+  <p>
+    {% blocktrans trimmed %}
+      The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to those partner resources. Here you can see which partnerships are available and what kinds of materials each database provides, and apply for the ones you want. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review applications on a rolling basis, and when enough applications are approved, work with partners to get you your free access. 
+    {% endblocktrans %}    
+  </p>
+
+  <p>
+    {% url 'terms' as terms_url %}
+    {% blocktrans trimmed %}
+      For more information about how application information is stored and reviewed please see our <a href="{{ terms_url }}">terms of use</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them.
+    {% endblocktrans %}    
+  </p>
+
+  <h3>{% trans "Who can receive access?" %}</h3>
+
+  <p>
+    {% blocktrans trimmed %}
+      Any active editor in good standing can receive access.  Applications are reviewed based on the editor’s need for the research materials, and general contributions to the Wikimedia community. If you think you could use access to one of our partner resources and are an active Wikimedia editor in any project supported by the Wikimedia Foundation, please apply.
+    {% endblocktrans %}    
+  </p>
+
+  <p>
+    {% trans "Any editor can apply for access, but there are a few basic requirements:" %}
+    <ul>
+      <li>
+        {% trans "You have your preferences enabled to receive email messages on your home wiki" %}
+      </li>
+      <li>
+        {% trans "You have an account that is a minimum of 6 months old" %}
+      </li>
+      <li>
+        {% trans "You have a minimum of 500 edits to the encyclopedia" %}
+      </li>
+      <li>
+        {% trans "You do not already have access to the resources you’re applying for through another library or institution" %}
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    {% blocktrans trimmed %}
+      If you don't quite meet the experience requirements but think you would still be a strong candidate for access, feel free to apply and you may still be considered.  Note that "home wiki" can mean any Wikipedia you are active on, your native language version &mdash; in any case, simply one where you've chosen to enable email.
+    {% endblocktrans %}    
+  </p>
+
+
+
+  <h3>{% trans "What do I do after I get access?" %}</h3>
+
+  <p>
+    {% blocktrans trimmed %}
+      Once you have access we encourage you to use the databases for both research that creates or improves Wikimedia content and serves your other research needs.  Please research anything you want with your access!
+    {% endblocktrans %}    
+  </p>
+
+  <p>
+    {% blocktrans trimmed %}
+      Please keep in mind, our agreements with partners carry certain expectations. 
+    {% endblocktrans %}    
+  </p>
+
+  <p>
+    {% trans "Approved editors <i>may</i> use their access to:" %}
+    <ul>
+      <li>
+        {% trans "Search, view, retrieve, and display portions of restricted content" %}
+      </li>
+      <li>
+        {% trans "Electronically save portions of restricted content" %}
+      </li>
+      <li>
+        {% trans "Print out single copies of portions of restricted content" %}
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    {% trans "Approved editors <i>should not</i>:" %}
+    <ul>
+      <li>
+        {% trans "Share their account logins or passwords with others, or sell their access to other parties" %}
+      </li>
+      <li>
+        {% trans "Mass scrape or mass download partner content" %}
+      </li>
+      <li>
+        {% trans "Systematically make printed or electronic copies of multiple extracts of restricted content available for any purpose" %}
+      </li>
+      <li>
+        {% trans "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles" %}
+      </li>
+    </ul>
+  </p>
+  
+  <p>
+    {% blocktrans trimmed %}
+      Respecting these agreements allows us to continue growing the number and scope of partnerships available to our entire community.
+    {% endblocktrans %}    
+  </p>
+
+  <h3>Citation practices</h3>
+
+  <p>
+    {% blocktrans trimmed with code='{{subscription required|via=}}'%}
+      Citation practices vary by project and even by article.  Generally, we support editors citing where they found information, in a form that allows others to check it for themselves in whatever way is easiest for them.  That often means providing both original source details as well as a link to the partner database in which the source was found. You can use <code>|via=</code> in templates using CS1 citation format or add <code>{{ code }}</code> to identify the provider.
+    {% endblocktrans %}    
+  </p>
+
+  <p>
+    {% trans "Here is one citation example:" %}
+  </p>
+
+  {% comment %}
+    This section probably does not need to be translated - a look around at a
+    few non-English wikis suggests that titles, journal titles, etc. retain
+    their original language.
+  {% endcomment %}
+  <blockquote>
+    <code>
+      {% verbatim %}
+        {{cite journal|author=Zieger, R|title=Walmart and the broken narrative of US labor history|journal=Labor History|pages=563–569|date=November 2011|volume=52|number=4|doi=10.1080/0023656X.2011.632517}} {{subscription required|via=[[Taylor &amp; Francis]]}}
+      {% endverbatim %}
+    </code>
+
+    <p>
+      Zieger, R (November 2011). "Walmart and the broken narrative of US labor history". Labor History 52 (4): 563–569.doi:10.1080/0023656X.2011.632517. &mdash; via Taylor &amp; Francis (subscription required)    
+    </p>
+  </blockquote>
+
+  
+  <h3>{% trans "Whom do I contact if I have questions, need help, or want to volunteer?" %}</h3>
+
+  <dl>
+    <dt>{% trans "Email:" %}</dt>
+    <dd>
+      <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20Card%20Platform%20questions">
+        wikipedialibrary@wikimedia.org
+      </a>
+    </dd>
+    <dt>{% trans "Talk page:" %}</dt>
+    <dd>
+      <a href="https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library">
+        [[Meta:Talk:The Wikipedia Library]]
+      </a>
+    </dd>
+  </dl>
+
+{% endblock content %}

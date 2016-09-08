@@ -3,6 +3,7 @@ from crispy_forms.layout import Submit
 
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
@@ -35,6 +36,7 @@ class UserDetailView(SelfOnly, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         context['language_form'] = SetLanguageForm()
+        context['password_form'] = PasswordChangeForm(user=self.request.user)
         return context
 
 
@@ -61,8 +63,10 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
 
         if self.request.user.editor == editor and not editor.contributions:
             messages.add_message(self.request, messages.WARNING,
-                _('Please indicate your contributions to Wikipedia (below) to '
+                _('Please update your contributions to Wikipedia (below) to '
                   'help coordinators evaluate your applications.'))
+
+        context['password_form'] = PasswordChangeForm(user=self.request.user)
 
         return context
 
@@ -85,8 +89,9 @@ class UserHomeView(View):
     def as_view(cls):
         def _get_view(request, *args, **kwargs):
             if request.user.is_anonymous():
-                # We can't use the django-braces LoginRequiredMixin here,
-                # because as_view applies at an earlier point in the process.
+                # We can't use something like django-braces LoginRequiredMixin
+                # here, because as_view applies at an earlier point in the
+                # process.
                 return redirect_to_login(request.get_full_path())
             if hasattr(request.user, 'editor'):
                 kwargs.update({'pk': request.user.editor.pk})
@@ -208,7 +213,8 @@ class EmailChangeView(SelfOnly, UpdateView):
         return reverse_lazy('users:home')
 
 
-class DenyAuthenticatedUsers(View):
+
+class TestPermissionView(View):
     """
     This view is provided for use in view_mixins.py.
 

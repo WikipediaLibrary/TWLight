@@ -3,6 +3,8 @@
 from datetime import datetime
 import factory
 import json
+import random
+import string
 
 from django.contrib.auth.models import User
 
@@ -65,7 +67,8 @@ class EditorFactory(factory.django.DjangoModelFactory):
     country_of_residence = 'Elsewhere'
     occupation = 'Cat floofer'
     affiliation = 'Institut Pasteur'
-    wp_username = 'wp_alice'
+    wp_username = factory.LazyAttribute(lambda s: ''.join(
+        random.choice(string.lowercase) for i in range(10)))
     wp_editcount = 42
     wp_registered = datetime.today()
     wp_sub = 318956

@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django import forms
 from django.utils.translation import ugettext as _
 
+from .helpers.wiki_list import WIKIS
 from .models import Editor, UserProfile
 
 
@@ -27,7 +28,13 @@ class EditorUpdateForm(forms.ModelForm):
             css_class='center-block'))
 
         editor = self.instance
-        self.helper.form_action = reverse('users:editor_update', args=[editor.id])
+        self.helper.form_action = reverse(
+            'users:editor_update', args=[editor.id])
+
+        self.fields['contributions'].label = _('Describe your contributions '
+            'to Wikipedia: topics edited, et cetera.')
+        self.fields['contributions'].help_text = None
+
 
 
 
@@ -58,5 +65,22 @@ class TermsForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             'terms_of_use',
-            Submit('submit', 'Submit', css_class='btn btn-default')
+            # Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
+            Submit('submit', _('I accept'), css_class='btn btn-default')
+        )
+
+
+
+
+class HomeWikiForm(forms.Form):
+    home_wiki = forms.ChoiceField(WIKIS)
+
+    def __init__(self, *args, **kwargs):
+        super(HomeWikiForm, self).__init__(*args, **kwargs)
+        self.fields['home_wiki'].label = 'Select your home wiki'
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'home_wiki',
+            Submit('submit', _('Log in'), css_class='btn btn-default btn-block')
         )

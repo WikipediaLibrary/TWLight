@@ -14,6 +14,7 @@ class Application(models.Model):
         app_label = 'applications'
         verbose_name = 'application'
         verbose_name_plural = 'applications'
+        ordering = ['-date_created', 'editor', 'partner']
 
 
     PENDING = 0
@@ -134,7 +135,10 @@ class Application(models.Model):
         Returns a string like '-default'; the template is responsible for
         prepending 'label' or 'button', etc., as appropriate to the HTML object.
         """
-        return self.LABELMAKER[self.status]
+        try:
+            return self.LABELMAKER[self.status]
+        except KeyError:
+            return None
 
 
     def get_version_count(self):
@@ -217,5 +221,3 @@ class Application(models.Model):
                 return (self.earliest_expiry_date - date.today()).days
 
         return None
-
-    # TODO: order_by

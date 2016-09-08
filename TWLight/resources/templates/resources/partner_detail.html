@@ -3,10 +3,23 @@
 {% load static %}
 {% load twlight_perms %}
 
+{% block extra_css %}
+  <style type="text/css">
+    .z-index-100 {
+      z-index: 100;
+      position: relative;
+    }
+  </style>
+{% endblock extra_css %}
+
 {% block content %}
   <h1>{{ object }}</h1>
 
+  <a href="{% url 'applications:apply_single' object.pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply for access" %}</a>
   <ul class="timeline half-timeline">
+
+    <a href="{% url 'applications:apply_single' object.pk %}" class="btn btn-primary pull-right hidden-xs z-index-100" >{% trans "Apply for access" %}</a>
+    
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-info"></i>
       </div>
@@ -196,9 +209,6 @@
   
   <div id="app-distribution-graph" style="width:600px;height:300px"></div>
 
-  {% comment %}
-    TODO: reuse the infographic number idiom here, probably as sidebar
-  {% endcomment %}
   <p>
     {% blocktrans count counter=total_apps_approved %}
       Number of applications approved (all time): {{ total_apps_approved }}
@@ -238,7 +248,7 @@
 
   <script type="text/javascript">
     $(function() {
-      // All applicationss by time
+      // All applications by time
       var signups_time_graph = $("#signups-time-graph");
       var signups_time_data = {{ signups_time_data | safe }};
       var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {

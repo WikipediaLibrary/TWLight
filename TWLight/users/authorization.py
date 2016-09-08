@@ -1,5 +1,6 @@
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken
+import re
 
 from django.conf import settings
 from django.contrib import messages
@@ -9,18 +10,24 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
+from django.views.generic.edit import FormView
 from django.utils.translation import ugettext as _
 
+from .helpers.wiki_list import WIKI_DICT
+from .forms import HomeWikiForm
 from .models import Editor
-
 
 logger = logging.getLogger(__name__)
 
 # Construct a "consumer" from the key/secret provided by MediaWiki.
 consumer_token = ConsumerToken(settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
 
-# Construct handshaker with wiki URI and consumer.
-handshaker = Handshaker(settings.WP_OAUTH_BASE_URL, consumer_token)
+# Construct all conceivably needed handshakers.
+handshakers = {}
+
+for wiki_base_url in WIKI_DICT.values():
+    url = 'https://{home_wiki}/w/index.php'.format(home_wiki=wiki_base_url)
+    handshakers[url] = Handshaker(url, consumer_token)
 
 
 def dehydrate_token(token):
@@ -44,12 +51,26 @@ def rehydrate_token(token):
 
 class OAuthBackend(object):
 
+    def _get_language_code(self, identity):
+        home_wiki_url = identity['iss']
+        extractor = re.match(r'http[s]?://(\w+).wikipedia.org.*', home_wiki_url)
+        language_code = extractor.group(1)
+        assert language_code in WIKI_DICT
+
+        return language_code
+
     def _create_user_and_editor(self, identity):
-        logger.info('creating user')
+        # This can't be super informative because we don't want to log
+        # identities.
+        logger.info('Creating user.')
+
+        # This will assert that the language code is a real Wikipedia, which
+        # is good - we want to verify that assumption before proceeding.
+        language_code = self._get_language_code(identity)
 
         # -------------------------- Create the user ---------------------------
         email = identity['email']
-        username = identity['sub']
+        username = identity['username'] # Globally unique per WMF SUL
 
         # Since we are not providing a password argument, this will call
         # set_unusable_password, which is exactly what we want; users created
@@ -61,6 +82,7 @@ class OAuthBackend(object):
 
         editor.user = user
         editor.wp_sub = identity['sub']
+        editor.home_wiki = language_code
         editor.update_from_wikipedia(identity) # This call also saves the editor
 
         return user, editor
@@ -68,9 +90,10 @@ class OAuthBackend(object):
 
     def _get_and_update_user_from_identity(self, identity):
         """
-        If we have an Editor matching the identity returned by Wikipedia,
-        update it with the identity parameters and return its associated user.
-        If we don't, create an Editor and User, and return that user.
+        If we have an Editor and User matching the identity returned by
+        Wikipedia, update the editor with the identity parameters and return its
+        associated user. If we don't, create an Editor and User, and return that
+        user.
 
         If the wikipedia account does not meet our eligibility criteria, create
         a TWLight account if needed, but set it as inactive. Also deactivate
@@ -79,22 +102,30 @@ class OAuthBackend(object):
         Also return a boolean that is True if we created a user during this
         call and False if we did not.
         """
-        logger.info('getting user')
+        logger.info('Attempting to update editor after OAuth login.')
         try:
-            editor = Editor.objects.get(wp_sub=identity['sub'])
-            user = editor.user
-            created = False
-            editor.update_from_wikipedia(identity)
+            user = User.objects.get(username=identity['username'])
 
-        except Editor.DoesNotExist:
+            # This login path should only be used for accounts created via
+            # Wikipedia login, which all have editor objects.
+            assert hasattr(user, 'editor')
+            editor = user.editor
+
+            editor.update_from_wikipedia(identity)
+            logger.info('Editor {editor} updated.'.format(editor=editor))
+
+            created = False
+
+        except User.DoesNotExist:
+            logger.info("Can't find user; creating one.")
             user, editor = self._create_user_and_editor(identity)
             created = True
 
         return user, created
 
 
-    def authenticate(self, request=None, access_token=None):
-        if not request or not access_token:
+    def authenticate(self, request=None, access_token=None, handshaker=None):
+        if not request or not access_token or not handshaker:
             # You must have meant to use a different authentication backend.
             # Returning None will make Django keep going down its list of
             # options.
@@ -113,13 +144,26 @@ class OAuthBackend(object):
             identity = handshaker.identify(access_token)
         except:
             logger.warning('Someone tried to log in but presented an invalid '
-                'access token')
+                'access token.')
             raise PermissionDenied
-
-        logger.info('identity was %s', identity)
 
         # Get or create the user.
         user, created = self._get_and_update_user_from_identity(identity)
+
+        if created:
+            base_url = re.search(r'\w+.wikipedia.org',
+                                 handshaker.mw_uri).group(0)
+            try:
+                # It's actually a wiki, right?
+                assert base_url in WIKI_DICT.values()
+                user.editor.home_wiki = base_url
+            except AssertionError:
+                # Site functionality mostly works if people don't
+                # declare a homewiki. There are some broken bits, like the SUL
+                # link, but users can set their homewiki, or admins can do it
+                # in the admin interface.
+                pass
+
         request.session['user_created'] = created
 
         # The authenticate() function of a Django auth backend must return
@@ -135,17 +179,33 @@ class OAuthBackend(object):
 
 
 
-class OAuthInitializeView(View):
+class OAuthInitializeView(FormView):
     """
     Ask Wikipedia for a temporary key/secret for the user, and redirect
-    them to Wikipedia to confirm authorization.
+    them to their home Wikipedia to confirm authorization.
     """
+    template_name = 'users/oauth_login.html'
+    form_class = HomeWikiForm
 
-    def get(self, request, *args, **kwargs):
+    def form_valid(self, form):
+        # The form returns the code for the home wiki (the first element of the
+        # tuple in WIKIS), but we want the URL, so we grab it from WIKI_DICT.
+        home_wiki = WIKI_DICT[form.cleaned_data['home_wiki']]
+        base_url = 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
+
+        try:
+            # Get handshaker matching this base URL from our dict.
+            handshaker = handshakers[base_url]
+        except KeyError:
+            # Whoops, we have no handshaker for this URL. We shouldn't
+            # authenticate them as we don't believe that their wiki exists.
+            logger.exception('Could not find handshaker for {url}'.format(
+                url=base_url))
+            raise
+
         redirect, request_token = handshaker.initiate()
-        request.session['request_token'] = dehydrate_token(request_token)
-        # TODO where is the proper, secure place to store this?
-        logger.info('request token was %s', request_token)
+        self.request.session['request_token'] = dehydrate_token(request_token)
+        self.request.session['base_url'] = base_url
         return HttpResponseRedirect(redirect)
 
 
@@ -157,23 +217,34 @@ class OAuthCallbackView(View):
 
     def get(self, request, *args, **kwargs):
         response_qs = request.META['QUERY_STRING']
-        logger.info('response querystring was %s', response_qs)
+
+        # Get the handshaker. It should have already been constructed by
+        # OAuthInitializeView.
+        base_url = request.session.pop('base_url', None)
+        try:
+            handshaker = handshakers[base_url]
+        except KeyError:
+            logger.exception('Could not find handshaker')
+            raise PermissionDenied
+
+        # Get the request token, placed in session by OAuthInitializeView.
         session_token = request.session.pop('request_token', None)
         request_token = rehydrate_token(session_token)
 
-        logger.info('request token was %s', request_token)
         if not request_token:
             logger.info('no request token :(')
             raise PermissionDenied
 
+        # See if we can complete the OAuth process.
         try:
             access_token = handshaker.complete(request_token, response_qs)
-            logger.info('access token was %s', access_token)
         except:
-            logger.info('no access token :(')
+            logger.exception('Access token generation failed :(')
             raise PermissionDenied
 
-        user = authenticate(request=request, access_token=access_token)
+        user = authenticate(request=request,
+                            access_token=access_token,
+                            handshaker=handshaker)
         created = request.session.pop('user_created', False)
 
         if not user.is_active:
@@ -191,19 +262,19 @@ class OAuthCallbackView(View):
                       'meets the eligibility criteria in the terms of use, so '
                       'you cannot be logged in.'))
 
-            url = reverse_lazy('terms')
+            return_url = reverse_lazy('terms')
 
         else:
             login(request, user)
 
             if created:
                 # Translators: this message is displayed to users with brand new accounts.
-                messages.add_message(request, messages.INFO, _('Welcome! Please '
-                    'agree to the terms of use.'))
-                url = reverse_lazy('terms')
+                messages.add_message(request, messages.INFO, _('Welcome! '
+                    'Please agree to the terms of use.'))
+                return_url = reverse_lazy('terms')
             else:
                 messages.add_message(request, messages.INFO, _('Welcome back!'))
-                url = reverse_lazy('users:editor_detail',
+                return_url = reverse_lazy('users:editor_detail',
                     kwargs={'pk': user.editor.pk})
 
-        return HttpResponseRedirect(url)
+        return HttpResponseRedirect(return_url)

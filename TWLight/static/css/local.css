@@ -1,0 +1,273 @@
+/*
+----------------------------------------------------------------------------
+BODY
+--------------------------------------------------------------------------*/
+
+body {
+  background-color: white;
+}
+
+
+/*
+----------------------------------------------------------------------------
+TYPOGRAPHY
+--------------------------------------------------------------------------*/
+
+h1, h2, h3 {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  margin-bottom: 20px;
+}
+
+h1, h2 {
+  font-weight: bold;
+}
+
+p {
+  margin-top: 7px;
+}
+
+#comments blockquote {
+  font-size: inherit;
+}
+.text-justify-xs {
+    text-align: left
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 767px) {
+  .text-justify-sm {
+      text-align: center;
+  }
+}
+@media (min-width: 768px) {
+  .text-justify-sm {
+      text-align: left;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (max-width: 991px) {
+  .text-justify-md {
+      text-align: center;
+  }
+}
+@media (min-width: 992px) {
+  .text-justify-md {
+      text-align: left;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (max-width: 1199px) {
+  .text-justify-lg {
+      text-align: center;
+  }
+}
+@media (min-width: 1200px) {
+  .text-justify-lg {
+      text-align: left;
+  }
+}
+
+
+/*
+----------------------------------------------------------------------------
+HEADER, FOOTER, NAVS
+--------------------------------------------------------------------------*/
+
+header {
+  margin-bottom: 28px;
+}
+
+@media (max-width: 767px) {
+  #main-content {
+    margin: auto 14px;
+  }
+
+  #top-nav, #footer {
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  #main-content {
+    margin: auto 28px;
+  }
+
+  #top-nav, #footer {
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-right: 28px;
+    padding-left: 28px;
+  }
+}
+@media (min-width: 992px) {
+  #main-content {
+    margin: auto 56px;
+  }
+
+  #top-nav, #footer {
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-right: 56px;
+    padding-left: 56px;
+  }
+}
+
+#top-nav {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+#footer {
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.nav-greeting {
+  height: 40px;
+  line-height: 40px;
+  font-style: italic;
+}
+
+nav .divider {
+  border-left: 1px solid #ccc;
+
+}
+
+@media (max-width: 767px) {
+  nav .divider {
+    border-left: none;
+  }
+}
+
+/*
+----------------------------------------------------------------------------
+TIMELINE
+--------------------------------------------------------------------------*/
+
+.half-timeline > li > .timeline-badge {
+  left: 0;
+}
+
+.half-timeline:before {
+  left: 0;
+}
+
+.half-timeline > li.timeline-inverted > .timeline-panel {
+  float: left;
+  margin-left: 50px;
+}
+
+.full-width {
+  display: block;
+  width: 100%;
+}
+
+
+/*
+----------------------------------------------------------------------------
+MISC
+--------------------------------------------------------------------------*/
+
+.panel-footer {
+  background-color: white;
+}
+
+#id_honeypot {
+    display: none;
+}
+
+
+/*
+----------------------------------------------------------------------------
+CLEARING COLUMNS
+--------------------------------------------------------------------------*/
+
+/* Clear ends of rows to preserve vertical spacing when for-looping through
+   lists of tiles.
+   See http://www.bluthemes.com/blog/3/clearing-bootstrap-3-columns.
+   SO MUCH EASIER than throwing a |divisibleby into the for loop to break
+   and restart the row-fluid div at the end of each row.
+   Probably doesn't work on versions of IE below 8.
+*/
+
+/*  Tablet  */
+@media (min-width:767px) {
+
+  /* Column clear fix */
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1),
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+/*  Medium Desktop  */
+@media (min-width:992px) {
+
+  /* Column clear fix */
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1),
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+/*  Large Desktop  */
+@media (min-width:1200px) {
+
+  /* Column clear fix */
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1),
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1){
+    clear: left;
+  }
+}

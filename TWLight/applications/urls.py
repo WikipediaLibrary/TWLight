@@ -11,6 +11,10 @@ urlpatterns = [
         views.SubmitApplicationView.as_view(),
         name='apply'
     ),
+    url(r'^apply/(?P<pk>\d+)/$',
+        views.SubmitSingleApplicationView.as_view(),
+        name='apply_single'
+    ),
     url(r'^evaluate/(?P<pk>\d+)/$',
         views.EvaluateApplicationView.as_view(),
         name='evaluate'
