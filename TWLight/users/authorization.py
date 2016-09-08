@@ -70,7 +70,7 @@ class OAuthBackend(object):
 
         # -------------------------- Create the user ---------------------------
         email = identity['email']
-        username = identity['sub']
+        username = identity['username'] # Globally unique per WMF SUL
 
         # Since we are not providing a password argument, this will call
         # set_unusable_password, which is exactly what we want; users created
@@ -90,9 +90,10 @@ class OAuthBackend(object):
 
     def _get_and_update_user_from_identity(self, identity):
         """
-        If we have an Editor matching the identity returned by Wikipedia,
-        update it with the identity parameters and return its associated user.
-        If we don't, create an Editor and User, and return that user.
+        If we have an Editor and User matching the identity returned by
+        Wikipedia, update the editor with the identity parameters and return its
+        associated user. If we don't, create an Editor and User, and return that
+        user.
 
         If the wikipedia account does not meet our eligibility criteria, create
         a TWLight account if needed, but set it as inactive. Also deactivate
@@ -103,23 +104,20 @@ class OAuthBackend(object):
         """
         logger.info('Attempting to update editor after OAuth login.')
         try:
-            language_code = self._get_language_code(identity)
-            editor = Editor.objects.get(
-                wp_sub=identity['sub'],
-                home_wiki=language_code)
-            user = editor.user
-            created = False
+            user = User.objects.get(username=identity['username'])
+
+            # This login path should only be used for accounts created via
+            # Wikipedia login, which all have editor objects.
+            assert hasattr(user, 'editor')
+            editor = user.editor
+
             editor.update_from_wikipedia(identity)
             logger.info('Editor {editor} updated.'.format(editor=editor))
 
-        except Editor.DoesNotExist:
-            logger.info("Can't find editor; creating one.")
+        except User.DoesNotExist:
+            logger.info("Can't find user; creating one.")
             user, editor = self._create_user_and_editor(identity)
             created = True
-
-        except AssertionError:
-            logger.exception('Received bad home wiki information')
-            raise
 
         return user, created
 
