@@ -114,6 +114,8 @@ class OAuthBackend(object):
             editor.update_from_wikipedia(identity)
             logger.info('Editor {editor} updated.'.format(editor=editor))
 
+            created = False
+
         except User.DoesNotExist:
             logger.info("Can't find user; creating one.")
             user, editor = self._create_user_and_editor(identity)
