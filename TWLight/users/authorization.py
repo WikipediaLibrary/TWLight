@@ -56,6 +56,12 @@ class OAuthBackend(object):
         # identities.
         logger.info('Creating user.')
 
+        # ---------------- Verify assumption before proceeding -----------------
+        home_wiki_url = identity['iss']
+        extractor = re.match(r'http[s]?://(\w+).wikipedia.org.*', home_wiki_url)
+        language_code = extractor.group(1)
+        assert language_code in WIKI_DICT
+
         # -------------------------- Create the user ---------------------------
         email = identity['email']
         username = identity['sub']
@@ -70,6 +76,7 @@ class OAuthBackend(object):
 
         editor.user = user
         editor.wp_sub = identity['sub']
+        editor.home_wiki = language_code
         editor.update_from_wikipedia(identity) # This call also saves the editor
 
         return user, editor
