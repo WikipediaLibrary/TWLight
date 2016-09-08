@@ -28,7 +28,13 @@ class EditorUpdateForm(forms.ModelForm):
             css_class='center-block'))
 
         editor = self.instance
-        self.helper.form_action = reverse('users:editor_update', args=[editor.id])
+        self.helper.form_action = reverse(
+            'users:editor_update', args=[editor.id])
+
+        self.fields['contributions'].label = _('Describe your contributions '
+            'to Wikipedia: topics edited, et cetera.')
+        self.fields['contributions'].help_text = None
+
 
 
 
