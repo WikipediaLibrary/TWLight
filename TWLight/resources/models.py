@@ -18,6 +18,7 @@ class Partner(models.Model):
         app_label = 'resources'
         verbose_name = 'partner'
         verbose_name_plural = 'partners'
+        ordering = ['company_name']
 
 
     company_name = models.CharField(max_length=30,
@@ -129,6 +130,7 @@ class Stream(models.Model):
         app_label = 'resources'
         verbose_name = 'collection'
         verbose_name_plural = 'collections'
+        ordering = ['partner', 'name']
 
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
