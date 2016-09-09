@@ -5,10 +5,13 @@ DJANGODIR=/var/www/html/TWLight/
 SOCKFILE=/var/www/html/TWLight/run/gunicorn.sock
 DJANGO_SETTINGS_MODULE=TWLight.settings.production
 DJANGO_WSGI_MODULE=TWLight.wsgi
+USER=www-data
 # This is configurable: http://docs.gunicorn.org/en/stable/design.html#how-many-workers
 NUM_WORKERS=3
 
 cd $DJANGODIR
+# Find gunicorn in the virtualenv
+source '/home/thatandromeda/.virtualenvs/TWLight/bin/activate'
 export DJANGO_SETTINGS_MODULE='TWLight.settings.production'
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
