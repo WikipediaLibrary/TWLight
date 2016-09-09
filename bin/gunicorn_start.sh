@@ -9,7 +9,7 @@ DJANGO_WSGI_MODULE=TWLight.wsgi
 NUM_WORKERS=3
 
 cd $DJANGODIR
-export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export DJANGO_SETTINGS_MODULE='TWLight.settings.production'
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
 # Create the run directory if it doesn't exist
