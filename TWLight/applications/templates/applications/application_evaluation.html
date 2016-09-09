@@ -5,11 +5,16 @@
 {% load crispy_forms_field %}
 {% load comments %}
 {% load version_tags %}
+{% load twlight_perms %}
 
 {% block content %}
-  <h1>{% trans 'Evaluate application' %}</h1>
+  {% if user|coordinators_only %}
+    <h1>{% trans 'Evaluate application' %}</h1>
 
-  {% crispy form %}
+    {% crispy form %}
+  {% else %}
+    <h1>{% trans 'Application history' %}</h1>  
+  {% endif %}
 
   <h2>{% trans 'Application' %}</h2>
 
