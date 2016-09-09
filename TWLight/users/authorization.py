@@ -69,7 +69,10 @@ class OAuthBackend(object):
         language_code = self._get_language_code(identity)
 
         # -------------------------- Create the user ---------------------------
-        email = identity['email']
+        try:
+            email = identity['email']
+        except KeyError:
+            email = None
         username = identity['username'] # Globally unique per WMF SUL
 
         # Since we are not providing a password argument, this will call
