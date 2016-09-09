@@ -14,7 +14,7 @@ from .base import *
 
 ALLOWED_HOSTS = ['twlight-test.wmflabs.org']
 
-DJANGO_DEBUG = False
+DEBUG = False
 SECRET_KEY = '8s8=)1direp%&imkq@91l)*9ot9^v*x+p@_6asq4z$k9kn&k*8'
 
 # Can be replaced with option files:
