@@ -23,4 +23,4 @@ exec gunicorn ${DJANGO_WSGI_MODULE}:application \
   --workers $NUM_WORKERS \
   --bind=unix:$SOCKFILE \
   --log-level=debug \
-  --log-file=/var/www/html/TWLight/logs/gunicorn.log
+  --log-file=/var/www/html/TWLight/TWLight/logs/gunicorn.log
