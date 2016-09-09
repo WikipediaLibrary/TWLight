@@ -15,7 +15,9 @@ from .production_vars import (SECRET_KEY,
                               CONSUMER_SECRET,
                               MYSQL_PASSWORD)
 
-ALLOWED_HOSTS = ['twlight-test.wmflabs.org', 'twl-test.wmflabs.org']
+ALLOWED_HOSTS = ['twlight-test.wmflabs.org',
+                 'twl-test.wmflabs.org',
+                 'wikipedialibrary.wmflabs.org']
 
 DEBUG = False
 
