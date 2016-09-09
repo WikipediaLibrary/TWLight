@@ -268,7 +268,12 @@ class Editor(models.Model):
         self.wp_valid = self._is_user_valid(identity)
         self.save()
 
-        self.user.email = identity['email']
+        try:
+            self.user.email = identity['email']
+        except KeyError:
+            # Email isn't guaranteed to be present in identity - don't do
+            # anything if we can't find it.
+            pass
 
         self.user.save()
 
