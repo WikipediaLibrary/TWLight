@@ -2,32 +2,27 @@
 Settings file intended for use in production, on WMF servers.  This file:
 
 * overrides anything that needs server-specific values
-* hardcodes things that the base file draws from environment variables (unless
-  their default value is correct in this context)
+* imports things that the base file draws from environment variables from a
+  hardcoded file kept out of version control (unless their default value is
+  correct in this context)
 """
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-import os
-
 from .base import *
+from .production_vars import (SECRET_KEY,
+                              CONSUMER_KEY,
+                              CONSUMER_SECRET,
+                              MYSQL_PASSWORD)
 
-ALLOWED_HOSTS = ['twlight-test.wmflabs.org']
+ALLOWED_HOSTS = ['twlight-test.wmflabs.org', 'twl-test.wmflabs.org']
 
 DEBUG = False
-SECRET_KEY = '8s8=)1direp%&imkq@91l)*9ot9^v*x+p@_6asq4z$k9kn&k*8'
 
 # Can be replaced with option files:
 # https://docs.djangoproject.com/en/1.7/ref/databases/#connecting-to-the-database
-DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'twlight',
-        'USER': 'twlight',
-        'PASSWORD': 'Rf6@(y]@"&7;Dv]G',
-        'HOST': 'localhost',
-        'PORT': '3306',
-}
-
+DATABASES['default']['USER'] = 'twlight'
+DATABASES['default']['PASSWORD'] = MYSQL_PASSWORD
 
 EMAIL_BACKEND = 'djmail.backends.celery.EmailBackend'
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
