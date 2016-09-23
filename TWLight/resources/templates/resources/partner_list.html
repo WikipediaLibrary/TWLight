@@ -11,7 +11,9 @@
         {% include "resources/partner_tile.html" %}        
       </div>
     {% empty %}
-      {% trans "No partner data has been added to the database yet." %}
+      <div class="col-xs-12">
+        {% trans "No partner data has been added to the database yet." %}
+      </div>
     {% endfor %}    
   </div>
 
