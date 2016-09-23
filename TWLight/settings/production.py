@@ -17,7 +17,7 @@ from .production_vars import (SECRET_KEY,
 
 ALLOWED_HOSTS = ['twlight-test.wmflabs.org', 'twl-test.wmflabs.org']
 
-DEBUG = False
+DEBUG =True 
 
 # Can be replaced with option files:
 # https://docs.djangoproject.com/en/1.7/ref/databases/#connecting-to-the-database
