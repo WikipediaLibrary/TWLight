@@ -19,7 +19,7 @@ ALLOWED_HOSTS = ['twlight-test.wmflabs.org',
                  'twl-test.wmflabs.org',
                  'wikipedialibrary.wmflabs.org']
 
-DEBUG =True 
+DEBUG = False 
 
 # Can be replaced with option files:
 # https://docs.djangoproject.com/en/1.7/ref/databases/#connecting-to-the-database
