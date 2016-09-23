@@ -55,3 +55,8 @@ There are a few dependencies that are not available as debian packages, and they
     * _Do not use `manage.py runserver`_: it is not suitable for production
     * `bin/gunicorn_start.sh` to start the gunicorn process that sits between nginx and Django.
     * The `DJANGO_SETTINGS_MODULE` environment variable must be `TWLight.settings.production`.
+
+## Logs
+
+Application log: `/var/www/html/TWLight/logs/twlight.log`
+Gunicorn log: `/var/www/html/TWLight/logs/gunicorn.log`

@@ -62,7 +62,7 @@ class TWLUserCreationForm(UserCreationForm):
     username = forms.RegexField(
         label='Username',
         max_length=30,
-        regex=r'^[\w-\(\)]+$',
+        regex=r'^[()\w-]+$',
         help_text = _('Required. 30 characters or fewer. Alphanumeric '
                       'characters (letters, digits, hyphens and underscores) '
                       'and parentheses only.'),
@@ -77,7 +77,7 @@ class TWLUserChangeForm(UserChangeForm):
     username = forms.RegexField(
         label='Username',
         max_length=30,
-        regex=r'^[\w-\(\)]+$',
+        regex=r'^[()\w-]+$',
         help_text = _('Required. 30 characters or fewer. Alphanumeric '
                       'characters (letters, digits, hyphens and underscores) '
                       'and parentheses only.'),
