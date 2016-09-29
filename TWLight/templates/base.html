@@ -63,6 +63,13 @@
           </a>
         </li>
       {% endif %}
+      {% if user|coordinators_only %}
+        <li role="presentation">
+          <a href="{% url 'applications:send' %}">
+            {% trans "Send to partners" %}
+          </a>
+        </li>
+      {% endif %}
       <li role="presentation" class="divider">
         <a href="{% url 'homepage' %}">
           {% trans "Latest activity" %}

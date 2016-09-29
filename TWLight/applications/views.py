@@ -14,7 +14,6 @@ from reversion.helpers import generate_patch_html
 
 from django import forms
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
@@ -630,6 +629,11 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             _('Batch update successful. Thank you for reviewing today.'))
 
         return HttpResponseRedirect(reverse_lazy('applications:list'))
+
+
+
+class SendApplicationsView(CoordinatorsOnly, View):
+    pass
 
 
 
