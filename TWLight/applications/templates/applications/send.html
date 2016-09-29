@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  <h2>{% trans "Partners with approved, unsent applications" %}</h2>
+
+  {% if object_list %}
+    <ul>
+      {% for partner in object_list %}
+        <li>
+          <a href="{% url 'applications:send' partner.id %}">{{ partner }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>
+      {% trans "There are no partners with applications ready to send at this time." %}
+    </p>
+  {% endif %}
+{% endblock content %}

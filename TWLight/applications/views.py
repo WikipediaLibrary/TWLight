@@ -18,8 +18,9 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
 from django.views.generic.base import TemplateView, View
-from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.list import ListView
 
 from TWLight.view_mixins import (CoordinatorsOrSelf,
                                  CoordinatorsOnly,
@@ -632,7 +633,15 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
 
 
-class SendApplicationsView(CoordinatorsOnly, View):
+class ListReadyApplicationsView(CoordinatorsOnly, ListView):
+    template_name = "applications/send.html"
+
+    def get_queryset(self):
+        return Partner.objects.filter(applications__status=Application.APPROVED)
+
+
+
+class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
     pass
 
 
