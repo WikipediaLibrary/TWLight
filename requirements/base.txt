@@ -2,6 +2,7 @@ defusedxml==0.4.1
 Django==1.7.7
 django-autocomplete-light==2.3.1
 django-crispy-forms==1.4.0
+django-durationfield==0.5.2
 django-reversion==1.8.4
 djmail==0.13.0
 factory_boy==2.4.1
