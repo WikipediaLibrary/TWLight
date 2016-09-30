@@ -17,7 +17,10 @@ from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
 
 from . import views
-from .helpers import USER_FORM_FIELDS, PARTNER_FORM_OPTIONAL_FIELDS, FIELD_TYPES
+from .helpers import (USER_FORM_FIELDS,
+                      PARTNER_FORM_OPTIONAL_FIELDS,
+                      FIELD_TYPES,
+                      get_output_for_application)
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
@@ -161,6 +164,113 @@ class SynchronizeFieldsTest(TestCase):
             formfield = modelfield.formfield()
 
             self.assertEqual(type(formfield), type(FIELD_TYPES[field]))
+
+
+    def test_application_output_1(self):
+        """
+        We also rely on our field names to generate data to send to partners,
+        and need to ensure that get_output_for_application provides all needed
+        data (but no unneeded data).
+
+        Case 1, we'll test an application where a partner requires all of the
+        optional fields.
+        """
+        editor = EditorFactory()
+
+        partner = Partner()
+        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
+            setattr(partner, field, True)
+        partner.save()
+
+        app = ApplicationFactory(status=Application.APPROVED,
+            partner=partner,
+            editor=editor,
+            rationale='just because',
+            comments='nope')
+        app.agreement_with_terms_of_use = True
+        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
+            if field != 'agreement_with_terms_of_use':
+                setattr(app, field, 'blah blah')
+        app.save()
+
+        # Force reload (in 1.8 we can replace this with refresh_from_db)
+        app = Application.objects.get(pk=app.pk)
+
+        output = get_output_for_application(app)
+        self.assertEqual(output['rationale'], 'just because')
+        self.assertEqual(output['comments'], 'nope')
+        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
+            self.assertEqual(output[field], 'blah blah')
+
+
+    def test_application_output_2(self):
+        """
+        Case 2, we'll test an application where a partner requires none of the
+        optional fields.
+        """
+        editor = EditorFactory()
+
+        partner = Partner()
+        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
+            setattr(partner, field, False)
+        partner.save()
+
+        app = ApplicationFactory(status=Application.APPROVED,
+            partner=partner,
+            editor=editor,
+            rationale='just because',
+            comments='nope')
+        app.agreement_with_terms_of_use = False
+        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
+            if field != 'agreement_with_terms_of_use':
+                setattr(app, field, '')
+        app.save()
+
+        # Force reload (in 1.8 we can replace this with refresh_from_db)
+        app = Application.objects.get(pk=app.pk)
+
+        output = get_output_for_application(app)
+        self.assertEqual(output['rationale'], 'just because')
+        self.assertEqual(output['comments'], 'nope')
+        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
+            self.assertFalse(output[field])
+
+
+    def test_application_output_3(self):
+        """
+        Case 2, we'll test an application where a partner requires some but not
+        all of the optional fields.
+        """
+        editor = EditorFactory()
+
+        partner = Partner()
+        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
+            setattr(partner, field, False)
+        partner.save()
+
+        app = ApplicationFactory(status=Application.APPROVED,
+            partner=partner,
+            editor=editor,
+            rationale='just because',
+            comments='nope')
+        app.agreement_with_terms_of_use = False
+        for field in PARTNER_FORM_OPTIONAL_FIELDS:
+            if field != 'agreement_with_terms_of_use':
+                setattr(app, field, '')
+        for field in USER_FORM_FIELDS:
+            setattr(app, field, 'blah blah')
+        app.save()
+
+        # Force reload (in 1.8 we can replace this with refresh_from_db)
+        app = Application.objects.get(pk=app.pk)
+
+        output = get_output_for_application(app)
+        self.assertEqual(output['rationale'], 'just because')
+        self.assertEqual(output['comments'], 'nope')
+        for field in PARTNER_FORM_OPTIONAL_FIELDS:
+            self.assertFalse(output[field])
+        for field in PARTNER_FORM_OPTIONAL_FIELDS:
+            self.assertEqual(output[field], 'blah blah')
 
 
 
