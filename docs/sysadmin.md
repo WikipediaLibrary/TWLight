@@ -15,10 +15,6 @@ For setting this up on Wikimedia Labs, you should install everything in `require
 
 If using a virtualenv, make sure that the user running the webserver process also has access to the files in that virtualenv! By default they are owned by whichever user installed them, but that is probably not your nginx user.
 
-There are a few dependencies that are not available as python packages, and they have been downloaded directly into the top level of the TWLight app. As of this writing, they are:
-* `diff_match_patch`
-* `mwoauth`
-
 ## Settings
 * `settings/production.py` mostly inherits from base.py, but sets a few WMF-specific things. You probably do not need to edit it.
     * An exception: if you have moved the site so that it lives at a different URL, that URL needs to be added to `ALLOWED_HOSTS`. (Other URLs not being used can be safely removed from this list.)

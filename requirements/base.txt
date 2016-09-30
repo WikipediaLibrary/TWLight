@@ -8,6 +8,7 @@ djmail==0.13.0
 factory_boy==2.4.1
 jsonfield==0.9.13
 mock==2.0.0
+mwoauth==0.2.8
 oauthlib==0.6.3
 python-dateutil==2.2
 python-openid==2.2.5
