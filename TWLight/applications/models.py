@@ -21,6 +21,7 @@ class Application(models.Model):
     QUESTION = 1
     APPROVED = 2
     NOT_APPROVED = 3
+    SENT = 4
 
     STATUS_CHOICES = (
         # Translators: This is the status of an application that has not yet been reviewed.
@@ -29,6 +30,7 @@ class Application(models.Model):
         (QUESTION, _('Under discussion')),
         (APPROVED, _('Approved')),
         (NOT_APPROVED, _('Not approved')),
+        (SENT, _('Sent to partner')),
     )
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
