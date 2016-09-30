@@ -660,6 +660,20 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
         return context
 
 
+    def post(self, request, *args, **kwargs):
+        apps = self.get_object().applications.filter(
+            status=Application.APPROVED)
+        for app in apps:
+            app.status = Application.SENT
+            app.save()
+
+        messages.add_message(self.request, messages.SUCCESS,
+            _('All applications have been marked as sent.'))
+
+        return HttpResponseRedirect(reverse(
+            'applications:send_partner', kwargs={'pk': self.get_object().pk}))
+
+
 
 class DiffApplicationsView(ToURequired, TemplateView):
     template_name = "applications/diff.html"

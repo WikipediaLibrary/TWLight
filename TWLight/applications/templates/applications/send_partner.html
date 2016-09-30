@@ -39,21 +39,27 @@
   {% endfor %}
 
   <h3>{% trans "Application data" %}</h3>
+  {% if app_outputs %}
+    <form method="POST">
+      {% csrf_token %}
+      {# Translators: this should be translated the same way that it was earlier in this page. #}
+      <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
+    </form>    
 
-  {% for app, output in app_outputs.items  %}
-    <h4>{{ app }} </h4>
+    {% for app, output in app_outputs.items  %}
+      <h4>{{ app }} </h4>
 
-    <ul class="list-unstyled">
-      {% for label, value in output.items %}
-        <li><strong>{{ label }}</strong> &mdash; {{ value }}</li>
-      {% endfor %}
-    </ul>
-    {% if not forloop.last %}    
-      <hr />
-    {% endif %}
-  {% endfor %}
-
-  {# Translators: this should be translated the same way that it was earlier in this page. #}
-  <button>{% trans "Mark as sent" %}</button>
+      <ul class="list-unstyled">
+        {% for label, value in output.items %}
+          <li><strong>{{ label }}</strong> &mdash; {{ value }}</li>
+        {% endfor %}
+      </ul>
+      {% if not forloop.last %}    
+        <hr />
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% trans "There are no approved, unsent applications at this time." %}
+  {% endif %}
 
 {% endblock content %}
