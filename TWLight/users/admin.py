@@ -1,7 +1,5 @@
-from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
@@ -53,40 +51,6 @@ class UserProfileInline(admin.StackedInline):
 
 
 
-class TWLUserCreationForm(UserCreationForm):
-    """
-    The default form does not allow usernames to have parentheses, but this
-    interacts badly with OAuth-created usernames for WMF staff, as their
-    usernames include '(WMF)'.
-    """
-    username = forms.RegexField(
-        label='Username',
-        max_length=30,
-        regex=r'^[()\w-]+$',
-        help_text = _('Required. 30 characters or fewer. Alphanumeric '
-                      'characters (letters, digits, hyphens and underscores) '
-                      'and parentheses only.'),
-        error_message = _('This value must contain only letters, numbers, '
-                      'hyphens, underscores, and parentheses.')
-        )
-
-
-
-class TWLUserChangeForm(UserChangeForm):
-    """See TWLUserCreationForm docstring."""
-    username = forms.RegexField(
-        label='Username',
-        max_length=30,
-        regex=r'^[()\w-]+$',
-        help_text = _('Required. 30 characters or fewer. Alphanumeric '
-                      'characters (letters, digits, hyphens and underscores) '
-                      'and parentheses only.'),
-        error_message = _('This value must contain only letters, numbers, '
-                      'hyphens, underscores, and parentheses.')
-        )
-
-
-
 class UserAdmin(AuthUserAdmin):
     inlines = [EditorInline, UserProfileInline]
     actions = [deactivate]
@@ -94,8 +58,6 @@ class UserAdmin(AuthUserAdmin):
     list_filter = ['is_staff', 'is_active', 'is_superuser']
     default_filters = ['is_active__exact=1']
     search_fields = ['editor__wp_username', 'username']
-    form = TWLUserChangeForm
-    add_form = TWLUserCreationForm
 
     def get_wp_username(self, user):
         if hasattr(user, 'editor'):

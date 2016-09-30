@@ -73,7 +73,11 @@ class OAuthBackend(object):
             email = identity['email']
         except KeyError:
             email = None
-        username = identity['username'] # Globally unique per WMF SUL
+
+        # The Wikipedia username is globally unique, but it can have characters
+        # that the Django username system rejects. However, wiki + wiki userID
+        # should be unique.
+        username = language_code + identity['sub']
 
         # Since we are not providing a password argument, this will call
         # set_unusable_password, which is exactly what we want; users created
