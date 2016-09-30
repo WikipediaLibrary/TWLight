@@ -1,4 +1,5 @@
 defusedxml==0.4.1
+diff-match-patch==20121119
 Django==1.7.7
 django-autocomplete-light==2.3.1
 django-crispy-forms==1.4.0
