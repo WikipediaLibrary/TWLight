@@ -1,6 +1,7 @@
 from datetime import date
 import reversion
 
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -62,6 +63,9 @@ class Application(models.Model):
         help_text=_('Do not override this field! Its value is set automatically '
                   'when the application is saved, and overriding it may have '
                   'undesirable results.'))
+
+    sent_by = models.ForeignKey(User, blank=True, null=True,
+        help_text=_('The user who sent this application to the partner'))
 
     editor = models.ForeignKey(Editor, related_name='applications')
     partner = models.ForeignKey(Partner, related_name='applications')

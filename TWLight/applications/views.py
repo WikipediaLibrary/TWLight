@@ -665,6 +665,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
             status=Application.APPROVED)
         for app in apps:
             app.status = Application.SENT
+            app.sent_by = request.user
             app.save()
 
         messages.add_message(self.request, messages.SUCCESS,
