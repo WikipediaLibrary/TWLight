@@ -15,11 +15,9 @@ For setting this up on Wikimedia Labs, you should install everything in `require
 
 If using a virtualenv, make sure that the user running the webserver process also has access to the files in that virtualenv! By default they are owned by whichever user installed them, but that is probably not your nginx user.
 
-There are a few dependencies that are not available as debian packages, and they have been downloaded directly into the top level of the TWLight app. As of this writing, they are:
+There are a few dependencies that are not available as python packages, and they have been downloaded directly into the top level of the TWLight app. As of this writing, they are:
 * `diff_match_patch`
-* `durationfield` (This can be removed, modulo updating its import statements, should TWLight be upgraded to Django 1.8, which includes durationfield natively.)
 * `mwoauth`
-* `djmail`
 
 ## Settings
 * `settings/production.py` mostly inherits from base.py, but sets a few WMF-specific things. You probably do not need to edit it.
