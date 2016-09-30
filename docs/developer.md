@@ -28,3 +28,8 @@ All four places referenced there must be updated:
     * Add an entry to FIELD_TYPES specifying the widget to be used to render the field.
     * Add an entry to FIELD_LABELS, which will be used to label the field (don't forget to wrap it in `_()`!)
     * Run the tests. `SynchronizeFieldsTest` will fail if you haven't done all the steps.
+
+## Testing
+`python manage.py test` will run the tests.
+
+You will need to make sure that your database user has adequate privileges on `test_twlight` (the default test database) and `django_migrations`. Notably, this includes CREATE and DROP on `test_twlight`. You will get an `OperationalError` if your user does not have adequate privileges (its error message is usually informative).
