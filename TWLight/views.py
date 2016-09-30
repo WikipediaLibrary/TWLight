@@ -107,8 +107,12 @@ class HomePageView(TemplateView):
             event['date'] = grant.date_closed
             activity.append(event)
 
-        context['activity'] = sorted(activity,
-            key=lambda x: x['date'],
-            reverse=True)
+        try:
+            context['activity'] = sorted(activity,
+                key=lambda x: x['date'],
+                reverse=True)
+        except TypeError:
+            # If we don't have any site activity yet, we'll get an exception.
+            context['activity'] = []
 
         return context

@@ -91,6 +91,25 @@ FIELD_LABELS = {
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use to access their resources"),
 }
 
+def get_output_for_application(app):
+    output = {}
+    output[_('Username')] = app.editor.wp_username
+    output[_('Email')] = app.editor.user.email
+    output[_('Home wiki')] = app.editor.home_wiki
+    # Translators: Why the editor wants access to this resource.
+    output[_("Editor's rationale")] = app.rationale
+
+    if app.comments:
+        # Translator: the editor's comments on the application.
+        output[_("Comments")] = app.comments
+
+    for field in PARTNER_FORM_OPTIONAL_FIELDS + USER_FORM_FIELDS:
+        if getattr(app.partner, field): # Will be True if required by Partner.
+            output[field] = getattr(app, field)
+
+    return output
+
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
 """

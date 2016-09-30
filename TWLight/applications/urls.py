@@ -41,7 +41,7 @@ urlpatterns = [
     ),
     url(r'^send/(?P<pk>\d+)/$',
         views.SendReadyApplicationsView.as_view(),
-        name='send'
+        name='send_partner'
     ),
     url(r'^batch_edit/$',
         views.BatchEditView.as_view(),

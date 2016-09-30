@@ -9,7 +9,7 @@
     <ul>
       {% for partner in object_list %}
         <li>
-          <a href="{% url 'applications:send' partner.id %}">{{ partner }}</a>
+          <a href="{% url 'applications:send_partner' partner.id %}">{{ partner }}</a>
         </li>
       {% endfor %}
     </ul>

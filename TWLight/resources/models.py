@@ -169,7 +169,7 @@ class Contact(models.Model):
 
     title = models.CharField(max_length=30,
         help_text=_("Organizational role or job title. This is NOT intended "
-        "to be used for honorofics."))
+        "to be used for honorifics."))
     email = models.EmailField()
     full_name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=15,

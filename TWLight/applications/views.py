@@ -31,7 +31,8 @@ from TWLight.users.models import Editor
 
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
-                      PARTNER_FORM_BASE_FIELDS)
+                      PARTNER_FORM_BASE_FIELDS,
+                      get_output_for_application)
 from .forms import BaseApplicationForm, ApplicationAutocomplete
 from .models import Application
 
@@ -634,7 +635,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
 
 class ListReadyApplicationsView(CoordinatorsOnly, ListView):
-    template_name = "applications/send.html"
+    template_name = 'applications/send.html'
 
     def get_queryset(self):
         return Partner.objects.filter(applications__status=Application.APPROVED)
@@ -642,7 +643,21 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
 
 
 class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
-    pass
+    model = Partner
+    template_name = 'applications/send_partner.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
+        apps = self.get_object().applications.filter(
+            status=Application.APPROVED)
+        app_outputs = {}
+
+        for app in apps:
+            app_outputs[app] = get_output_for_application(app)
+
+        context['app_outputs'] = app_outputs
+
+        return context
 
 
 
