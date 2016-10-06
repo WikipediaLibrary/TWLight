@@ -26,5 +26,13 @@ DEBUG = False
 DATABASES['default']['USER'] = 'twlight'
 DATABASES['default']['PASSWORD'] = MYSQL_PASSWORD
 
-EMAIL_BACKEND = 'djmail.backends.celery.EmailBackend'
+#EMAIL_BACKEND = 'djmail.backends.celery.EmailBackend'
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'Wikipedia Library Card Platform <noreply@twl-test.wmflabs.org>'
