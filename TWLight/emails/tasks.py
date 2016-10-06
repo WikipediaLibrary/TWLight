@@ -64,17 +64,23 @@ def send_comment_notification_emails(sender, **kwargs):
     if 'request' in kwargs:
         # This is the expected case; the comment_was_posted signal should send
         # this.
+        logger.info('request was in kwargs')
         request = kwargs['request']
         base_url = get_current_site(request).domain
+        logger.info('base_url is %s' % base_url)
         app_url = urljoin(base_url, app.get_absolute_url())
+        logger.info('app_url is %s' % app_url)
     else:
         # Hopefully adequate default (only has path, not base URL)
         app_url = app.get_absolute_url()
+        logger.info('request not in kwargs; app_url is %s' % app_url)
 
     # If the editor who owns this application was not the comment poster, notify
     # them of the new comment.
     if current_comment.user_email != app.editor.user.email:
+        logger.info('we should notify the editor')
         email = CommentNotificationEmailEditors()
+        logger.info('email constructed')
         email.send(app.editor.user.email, {'app': app, 'app_url': app_url})
         logger.info('Email queued for {app.editor.user.email} about app #{app.pk}'.format(
             app=app))
