@@ -53,8 +53,8 @@ class OAuthBackend(object):
 
     def _get_language_code(self, identity):
         home_wiki_url = identity['iss']
-        extractor = re.match(r'http[s]?://(\w+).wikipedia.org.*', home_wiki_url)
-        language_code = extractor.group(1)
+        extractor = re.match(r'(https://)?(\w+).wikipedia.org', home_wiki_url)
+        language_code = extractor.group(2)
         assert language_code in WIKI_DICT
 
         return language_code
@@ -74,10 +74,10 @@ class OAuthBackend(object):
         except KeyError:
             email = None
 
-        # The Wikipedia username is globally unique, but it can have characters
-        # that the Django username system rejects. However, wiki + wiki userID
-        # should be unique.
-        username = language_code + identity['sub']
+        # The Wikipedia username is globally unique, but Wikipedia allows it to
+        # have characters that the Django username system rejects. However,
+        # wiki + wiki userID should be unique, and limited to ASCII.
+        username = '{lang}{sub}'.format(lang=language_code, sub=identity['sub'])
 
         # Since we are not providing a password argument, this will call
         # set_unusable_password, which is exactly what we want; users created
@@ -127,6 +127,12 @@ class OAuthBackend(object):
             logger.info("Can't find user; creating one.")
             user, editor = self._create_user_and_editor(identity)
             created = True
+
+        except AttributeError:
+            logger.warning('User {username} tried using the Wikipedia OAuth '
+                'login path but does not have an attached editor'.format(
+                    username=identity['username']))
+            raise
 
         return user, created
 

@@ -35,7 +35,7 @@ FAKE_IDENTITY = {
     'editcount': 5000,
     'registered': '20151106154629', # Well before first commit.
     'blocked': False,
-    'iss': 'en.wikipedia.org',
+    'iss': 'https://en.wikipedia.org',
     'sub': 567823,
     'rights': ['deletion', 'spaceflight'],
     'groups': ['charismatic megafauna'],
@@ -490,7 +490,7 @@ class AuthorizationTestCase(TestCase):
         user, editor = oauth_backend._create_user_and_editor(identity)
 
         self.assertEqual(user.email, 'alice@example.com')
-        self.assertEqual(user.username, 567823)
+        self.assertEqual(user.username, 'en567823')
         self.assertFalse(user.has_usable_password())
 
         self.assertEqual(editor.user, user)
@@ -542,7 +542,9 @@ class AuthorizationTestCase(TestCase):
         """
         identity = copy.copy(FAKE_IDENTITY)
         new_sub = 57381037
+        new_username = identity['username'] + '53897139075'
         identity['sub'] = new_sub
+        identity['username'] = new_username
         self.assertFalse(Editor.objects.filter(wp_sub=new_sub).count())
 
         oauth_backend = OAuthBackend()
