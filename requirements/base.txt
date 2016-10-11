@@ -12,8 +12,6 @@ mock==2.0.0
 mwoauth==0.2.8
 oauthlib==0.6.3
 python-dateutil==2.2
-python-openid==2.2.5
-python-social-auth==0.2.1
 PyJWT==0.2.1
 requests==2.4.3
 requests-oauthlib==0.4.0
