@@ -433,8 +433,6 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         return self.render_to_response(self.get_context_data(filters=filters))
 
-    # TODO paginate
-
 
 
 class ListApplicationsView(_BaseListApplicationView):
