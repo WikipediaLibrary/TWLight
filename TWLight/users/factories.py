@@ -18,8 +18,8 @@ class UserProfileFactory(factory.django.DjangoModelFactory):
         django_get_or_create = ('user',)
 
     # We haven't defined UserFactory yet so we need to be explicit about the
-    # import path. (If we put UserProfileFactory after user, we'd still have this
-    # same problem in defining the RelatedFactory in UserFactory.)
+    # import path. (If we put UserProfileFactory after user, we'd still have
+    # this same problem in defining the RelatedFactory in UserFactory.)
     user = factory.SubFactory('TWLight.users.factories.UserFactory', profile=None)
     terms_of_use = True
 
@@ -71,7 +71,9 @@ class EditorFactory(factory.django.DjangoModelFactory):
         random.choice(string.lowercase) for i in range(10)))
     wp_editcount = 42
     wp_registered = datetime.today()
-    wp_sub = 318956
+    # Increment counter each time we create an editor so that we don't fail
+    # the wp_sub + home_wiki uniqueness constraint on Editor.
+    wp_sub = factory.Sequence(lambda n: n)
     wp_groups = json.dumps(['some groups'])
     wp_rights = json.dumps(['some rights'])
     home_wiki = WIKIS[0][0]
