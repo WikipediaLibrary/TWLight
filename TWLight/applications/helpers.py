@@ -91,7 +91,15 @@ FIELD_LABELS = {
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use to access their resources"),
 }
 
+
 def get_output_for_application(app):
+    """
+    This collates the data that we need to send to publishers for a given
+    application. Since different publishers require different data and we don't
+    want to share personal data where not required, we construct this function
+    to fetch only the required data rather than displaying all of Application
+    plus Editor in the front end.
+    """
     output = {}
     output[_('Username')] = app.editor.wp_username
     output[_('Email')] = app.editor.user.email
@@ -103,9 +111,13 @@ def get_output_for_application(app):
         # Translator: the editor's comments on the application.
         output[_("Comments")] = app.comments
 
-    for field in PARTNER_FORM_OPTIONAL_FIELDS + USER_FORM_FIELDS:
+    for field in PARTNER_FORM_OPTIONAL_FIELDS:
         if getattr(app.partner, field): # Will be True if required by Partner.
             output[field] = getattr(app, field)
+
+    for field in USER_FORM_FIELDS:
+        if getattr(app.partner, field): # Will be True if required by Partner.
+            output[field] = getattr(app.editor, field)
 
     return output
 

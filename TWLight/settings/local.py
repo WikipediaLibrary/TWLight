@@ -29,9 +29,9 @@ INSTALLED_APPS += (
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = [
-    '--with-coverage',
+    #'--with-coverage',
     '--cover-package=TWLight.applications,TWLight.emails,TWLight.graphs,TWLight.resources, TWLight.users',
     #'--nologcapture',
-    '--cover-html',
-    '--cover-html-dir=htmlcov',
+    #'--cover-html',
+    #'--cover-html-dir=htmlcov',
 ]

@@ -20,6 +20,13 @@ from . import views
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
                       FIELD_TYPES,
+                      SPECIFIC_STREAM,
+                      SPECIFIC_TITLE,
+                      AGREEMENT_WITH_TERMS_OF_USE,
+                      REAL_NAME,
+                      COUNTRY_OF_RESIDENCE,
+                      OCCUPATION,
+                      AFFILIATION,
                       get_output_for_application)
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
@@ -176,31 +183,57 @@ class SynchronizeFieldsTest(TestCase):
         optional fields.
         """
         editor = EditorFactory()
+        setattr(editor, REAL_NAME, 'Alice')
+        setattr(editor, COUNTRY_OF_RESIDENCE, 'Holy Roman Empire')
+        setattr(editor, OCCUPATION, 'Dog surfing instructor')
+        setattr(editor, AFFILIATION, 'The Long Now Foundation')
+        setattr(editor, 'wp_username', 'wp_alice')
+        setattr(editor, 'home_wiki', 'en')
+        setattr(editor, 'email', 'alice@example.com')
+        editor.save()
 
         partner = Partner()
         for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
             setattr(partner, field, True)
+        partner.terms_of_use = 'https://example.com/terms'
         partner.save()
+
+        stream = Stream()
+        stream.partner = partner
+        stream.name = 'Stuff and things'
+        stream.save()
 
         app = ApplicationFactory(status=Application.APPROVED,
             partner=partner,
             editor=editor,
             rationale='just because',
             comments='nope')
-        app.agreement_with_terms_of_use = True
-        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
-            if field != 'agreement_with_terms_of_use':
-                setattr(app, field, 'blah blah')
+        setattr(app, AGREEMENT_WITH_TERMS_OF_USE, True)
+        setattr(app, SPECIFIC_STREAM, stream)
+        setattr(app, SPECIFIC_TITLE, 'Alice in Wonderland')
         app.save()
 
         # Force reload (in 1.8 we can replace this with refresh_from_db)
         app = Application.objects.get(pk=app.pk)
 
         output = get_output_for_application(app)
-        self.assertEqual(output['rationale'], 'just because')
-        self.assertEqual(output['comments'], 'nope')
-        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
-            self.assertEqual(output[field], 'blah blah')
+        self.assertEqual(output["Editor's rationale"], 'just because')
+        self.assertEqual(output['Comments'], 'nope')
+        self.assertEqual(output[REAL_NAME], 'Alice')
+        self.assertEqual(output[COUNTRY_OF_RESIDENCE], 'Holy Roman Empire')
+        self.assertEqual(output[OCCUPATION], 'Dog surfing instructor')
+        self.assertEqual(output[AFFILIATION], 'The Long Now Foundation')
+        self.assertEqual(output[SPECIFIC_STREAM], stream)
+        self.assertEqual(output[SPECIFIC_TITLE], 'Alice in Wonderland')
+        self.assertEqual(output['Email'], 'alice@example.com')
+        self.assertEqual(output['Home wiki'], 'en')
+        self.assertEqual(output['Username'], 'wp_alice')
+        self.assertEqual(output[AGREEMENT_WITH_TERMS_OF_USE], True)
+
+        # Make sure that in enumerating the keys we didn't miss any (e.g. if
+        # the codebase changes).
+        self.assertEqual(12, len(output.keys()))
+
 
 
     def test_application_output_2(self):
@@ -209,6 +242,10 @@ class SynchronizeFieldsTest(TestCase):
         optional fields.
         """
         editor = EditorFactory()
+        setattr(editor, 'wp_username', 'wp_alice')
+        setattr(editor, 'home_wiki', 'en')
+        setattr(editor, 'email', 'alice@example.com')
+        editor.save()
 
         partner = Partner()
         for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
@@ -221,31 +258,43 @@ class SynchronizeFieldsTest(TestCase):
             rationale='just because',
             comments='nope')
         app.agreement_with_terms_of_use = False
-        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
-            if field != 'agreement_with_terms_of_use':
-                setattr(app, field, '')
         app.save()
 
         # Force reload (in 1.8 we can replace this with refresh_from_db)
         app = Application.objects.get(pk=app.pk)
 
         output = get_output_for_application(app)
-        self.assertEqual(output['rationale'], 'just because')
-        self.assertEqual(output['comments'], 'nope')
-        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
-            self.assertFalse(output[field])
+        self.assertEqual(output["Editor's rationale"], 'just because')
+        self.assertEqual(output['Comments'], 'nope')
+        self.assertEqual(output['Email'], 'alice@example.com')
+        self.assertEqual(output['Home wiki'], 'en')
+        self.assertEqual(output['Username'], 'wp_alice')
+
+        # Make sure that in enumerating the keys we didn't miss any (e.g. if
+        # the codebase changes).
+        self.assertEqual(5, len(output.keys()))
 
 
     def test_application_output_3(self):
         """
-        Case 2, we'll test an application where a partner requires some but not
+        Case 3, we'll test an application where a partner requires some but not
         all of the optional fields.
         """
         editor = EditorFactory()
+        setattr(editor, REAL_NAME, 'Alice')
+        setattr(editor, COUNTRY_OF_RESIDENCE, 'Holy Roman Empire')
+        setattr(editor, OCCUPATION, 'Dog surfing instructor')
+        setattr(editor, AFFILIATION, 'The Long Now Foundation')
+        setattr(editor, 'wp_username', 'wp_alice')
+        setattr(editor, 'home_wiki', 'en')
+        setattr(editor, 'email', 'alice@example.com')
+        editor.save()
 
         partner = Partner()
-        for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
+        for field in PARTNER_FORM_OPTIONAL_FIELDS:
             setattr(partner, field, False)
+        for field in USER_FORM_FIELDS:
+            setattr(partner, field, True)
         partner.save()
 
         app = ApplicationFactory(status=Application.APPROVED,
@@ -254,23 +303,25 @@ class SynchronizeFieldsTest(TestCase):
             rationale='just because',
             comments='nope')
         app.agreement_with_terms_of_use = False
-        for field in PARTNER_FORM_OPTIONAL_FIELDS:
-            if field != 'agreement_with_terms_of_use':
-                setattr(app, field, '')
-        for field in USER_FORM_FIELDS:
-            setattr(app, field, 'blah blah')
         app.save()
 
         # Force reload (in 1.8 we can replace this with refresh_from_db)
         app = Application.objects.get(pk=app.pk)
 
         output = get_output_for_application(app)
-        self.assertEqual(output['rationale'], 'just because')
-        self.assertEqual(output['comments'], 'nope')
-        for field in PARTNER_FORM_OPTIONAL_FIELDS:
-            self.assertFalse(output[field])
-        for field in PARTNER_FORM_OPTIONAL_FIELDS:
-            self.assertEqual(output[field], 'blah blah')
+        self.assertEqual(output["Editor's rationale"], 'just because')
+        self.assertEqual(output['Comments'], 'nope')
+        self.assertEqual(output[REAL_NAME], 'Alice')
+        self.assertEqual(output[COUNTRY_OF_RESIDENCE], 'Holy Roman Empire')
+        self.assertEqual(output[OCCUPATION], 'Dog surfing instructor')
+        self.assertEqual(output[AFFILIATION], 'The Long Now Foundation')
+        self.assertEqual(output['Email'], 'alice@example.com')
+        self.assertEqual(output['Home wiki'], 'en')
+        self.assertEqual(output['Username'], 'wp_alice')
+
+        # Make sure that in enumerating the keys we didn't miss any (e.g. if
+        # the codebase changes).
+        self.assertEqual(9, len(output.keys()))
 
 
 
