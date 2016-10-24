@@ -193,8 +193,7 @@ class OAuthBackend(object):
             base_url = re.search(r'(\w+).wikipedia.org',
                                  handshaker.mw_uri).group(1)
             logger.info('Wiki base url is {base_url}'.format(base_url=base_url))
-            logger.info(re.search(r'(\w+).wikipedia.org',
-                                 handshaker.mw_uri).groups())
+
             try:
                 # It's actually a wiki, right?
                 assert base_url in WIKI_DICT
