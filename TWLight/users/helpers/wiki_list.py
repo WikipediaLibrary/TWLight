@@ -594,6 +594,8 @@ WIKI_DICT = {
     'zu': 'zu.wikipedia.org',
 }
 
+REVERSE_WIKI_DICT = {v: k for k, v in WIKI_DICT.iteritems()}
+
 LANGUAGE_CODES = {
     # For providing human-readable language names for the
     # above wikis. Note: exploits Python3 unicode support

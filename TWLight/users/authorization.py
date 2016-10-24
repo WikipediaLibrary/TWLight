@@ -13,7 +13,7 @@ from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django.utils.translation import ugettext as _
 
-from .helpers.wiki_list import WIKI_DICT
+from .helpers.wiki_list import WIKI_DICT, REVERSE_WIKI_DICT
 from .forms import HomeWikiForm
 from .models import Editor
 
@@ -194,8 +194,8 @@ class OAuthBackend(object):
                                  handshaker.mw_uri).group(0)
             try:
                 # It's actually a wiki, right?
-                assert base_url in WIKI_DICT.values()
-                user.editor.home_wiki = base_url
+                assert base_url in REVERSE_WIKI_DICT
+                user.editor.home_wiki = REVERSE_WIKI_DICT[base_url]
                 user.editor.save()
             except AssertionError:
                 # Site functionality mostly works if people don't
