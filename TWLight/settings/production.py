@@ -49,5 +49,5 @@ EMAIL_HOST = 'tools-mail.tools.eqiad.wmflabs'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False # Important, or you will get an SMTPException on wmlabs
 DEFAULT_FROM_EMAIL = 'Wikipedia Library Card Platform <noreply@twl-test.wmflabs.org>'
