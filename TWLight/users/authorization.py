@@ -13,7 +13,7 @@ from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django.utils.translation import ugettext as _
 
-from .helpers.wiki_list import WIKI_DICT, REVERSE_WIKI_DICT
+from .helpers.wiki_list import WIKI_DICT
 from .forms import HomeWikiForm
 from .models import Editor
 
@@ -192,9 +192,12 @@ class OAuthBackend(object):
             logger.info('User {user} has been created.'.format(user=user))
             base_url = re.search(r'(\w+).wikipedia.org',
                                  handshaker.mw_uri).group(1)
+            logger.info('Wiki base url is {base_url}'.format(base_url=base_url))
+            logger.info(re.search(r'(\w+).wikipedia.org',
+                                 handshaker.mw_uri).groups())
             try:
                 # It's actually a wiki, right?
-                assert base_url in WIKI_DICT.values()
+                assert base_url in WIKI_DICT
                 user.editor.home_wiki = base_url
                 user.editor.save()
             except AssertionError:
