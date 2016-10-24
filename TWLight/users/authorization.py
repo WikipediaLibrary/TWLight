@@ -190,12 +190,12 @@ class OAuthBackend(object):
 
         if created:
             logger.info('User {user} has been created.'.format(user=user))
-            base_url = re.search(r'\w+.wikipedia.org',
-                                 handshaker.mw_uri).group(0)
+            base_url = re.search(r'(\w+).wikipedia.org',
+                                 handshaker.mw_uri).group(1)
             try:
                 # It's actually a wiki, right?
-                assert base_url in REVERSE_WIKI_DICT
-                user.editor.home_wiki = REVERSE_WIKI_DICT[base_url]
+                assert base_url in WIKI_DICT.values()
+                user.editor.home_wiki = WIKI_DICT[base_url]
                 user.editor.save()
             except AssertionError:
                 # Site functionality mostly works if people don't

@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='contact',
             name='title',
-            field=models.CharField(help_text='Organizational role or job title. This is NOT intended to be used for honorifics.', max_length=30),
+            field=models.CharField(help_text='Organizational role or job title. This is NOT intended to be used for honorifics like Mr., Ms., Mx., etc.', max_length=30),
             preserve_default=True,
         ),
     ]
