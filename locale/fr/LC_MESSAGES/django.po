@@ -3,238 +3,1566 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR , YEAR.
 #
-#, fuzzy msgid "" msgstr "" "Project-Id-Version: PACKAGE VERSION\n" "Report-Msgid-Bugs-To: \n" "POT-Creation-Date: 2016-06-20 15:01+0000\n" "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n" "Last-Translator: FULL NAME \n" "Language-Team: LANGUAGE \n" "Language: \n" "MIME-Version: 1.0\n" "Content-Type: text/plain; charset=UTF-8\n" "Content-Transfer-Encoding: 8bit\n" "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: TWLight/applications/forms.py:99 msgid "Submit application" msgstr "Soummetre la demande"
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-17 20:28+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME \n"
+"Language-Team: LANGUAGE \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: TWLight/applications/forms.py:101
+msgid "Submit application"
+msgstr "Soummetre la demande"
 #. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:186 msgid "Information about you" msgstr "Vos données personnelles "
-#: TWLight/applications/forms.py:198
-#, python-brace-format msgid "Your application to {partner}" msgstr "Votre demande à {partner}"
-#: TWLight/applications/forms.py:246 TWLight/users/models.py:61 msgid "Wikipedia username" msgstr "Nom d'utilisateur dans Wikipédia"
-#: TWLight/applications/forms.py:247 msgid "Company name" msgstr "Nom de compagnie"
-#: TWLight/applications/helpers.py:88 msgid "Your real name" msgstr "Prénom et nom de famille"
-#: TWLight/applications/helpers.py:89 msgid "Your country of residence" msgstr "Pays de résidence"
-#: TWLight/applications/helpers.py:90 msgid "Your occupation" msgstr "Votre profession"
-#: TWLight/applications/helpers.py:91 msgid "Your institutional affiliation" msgstr "Votre affiliation institutionnelle"
-#: TWLight/applications/helpers.py:92 msgid "Publisher name" msgstr "Nom de ressource"
-#: TWLight/applications/helpers.py:93 msgid "Why do you want access to this resource?" msgstr "Pourquoi voulez-vous accéder à cette ressource?"
-#: TWLight/applications/helpers.py:94 msgid "Which collection do you want access to?" msgstr "Quelle collection voulez-vous accès?"
-#: TWLight/applications/helpers.py:95 msgid "Which book do you want access to?" msgstr "Quel livre voulez-vous accès?"
-#: TWLight/applications/helpers.py:96 msgid "Anything else you want to say" msgstr "Tout ce que vous souhaitez exprimer en plus"
-#: TWLight/applications/helpers.py:97 msgid "Click to agree with the publisher's terms of use" msgstr "Cliquez pour accepter les conditions d'utilisation pour cette ressource"
+#: TWLight/applications/forms.py:188
+msgid "Information about you"
+msgstr "Vos données personnelles"
+#: TWLight/applications/forms.py:201
+#, python-brace-format
+msgid "Your application to {partner}"
+msgstr "Votre demande à {partner}"
+#: TWLight/applications/forms.py:257 TWLight/users/admin.py:67
+#: TWLight/users/models.py:99
+msgid "Wikipedia username"
+msgstr "Nom d'utilisateur dans Wikipédia"
+#: TWLight/applications/forms.py:258
+msgid "Partner name"
+msgstr "Nom du partenaire"
+#: TWLight/applications/helpers.py:82
+msgid "Your real name"
+msgstr "Prénom et nom de famille"
+#: TWLight/applications/helpers.py:83
+msgid "Your country of residence"
+msgstr "Pays de résidence"
+#: TWLight/applications/helpers.py:84
+msgid "Your occupation"
+msgstr "Votre profession"
+#: TWLight/applications/helpers.py:85
+msgid "Your institutional affiliation"
+msgstr "Votre affiliation institutionnelle"
+#: TWLight/applications/helpers.py:86
+msgid "Publisher name"
+msgstr "Nom de ressource"
+#: TWLight/applications/helpers.py:87
+msgid "Why do you want access to this resource?"
+msgstr "Pourquoi voulez-vous accéder à cette ressource?"
+#: TWLight/applications/helpers.py:88
+msgid "Which collection do you want access to?"
+msgstr "Quelle collection voulez-vous accès?"
+#: TWLight/applications/helpers.py:89
+msgid "Which book do you want access to?"
+msgstr "Quel livre voulez-vous accès?"
+#: TWLight/applications/helpers.py:90
+msgid "Anything else you want to say"
+msgstr "Tout ce que vous souhaitez exprimer en plus"
+#: TWLight/applications/helpers.py:91
+msgid ""
+"You must agree with the partner's terms of use to access their resources"
+msgstr "Vous devez accepter les conditions d'utilisation du partenaire pour accéder à leurs ressources"
+#: TWLight/applications/helpers.py:104
+msgid "Username"
+msgstr "Nom d'utilisateur"
+#: TWLight/applications/helpers.py:105
+msgid "Email"
+msgstr "Courriel"
+#: TWLight/applications/helpers.py:106 TWLight/graphs/views.py:165
+#: TWLight/templates/dashboard.html:109 TWLight/users/admin.py:75
+#: TWLight/users/templates/users/editor_detail_data.html:20
+msgid "Home wiki"
+msgstr "Wiki principal"
+#. Translators: Why the editor wants access to this resource.
+#: TWLight/applications/helpers.py:108
+msgid "Editor's rationale"
+msgstr "Justification d'utilisateur"
+#: TWLight/applications/helpers.py:112
+msgid "Comments"
+msgstr "Commentaires"
 #. Translators: This is the status of an application that has not yet been reviewed.
-#: TWLight/applications/models.py:24 msgid "Pending" msgstr "En attente"
+#: TWLight/applications/models.py:29
+msgid "Pending"
+msgstr "En attente"
 #. Translators: This is the status of an application that reviewers have asked questions about.
-#: TWLight/applications/models.py:26 msgid "Under discussion" msgstr "En discussion"
-#: TWLight/applications/models.py:27 msgid "Approved" msgstr "Approuvé"
-#: TWLight/applications/models.py:28 msgid "Not approved" msgstr "Non approuvé"
-#: TWLight/applications/models.py:37 TWLight/applications/models.py:49
-#: TWLight/applications/models.py:57 msgid "" "Do not override this field! Its value is set automatically when the " "application is saved, and overriding it may have undesirable results." msgstr "" "Ne pas remplacer ce champ! Sa valeur est définie automatiquement lorsque " "l'application est enregistrée, et son remplacement pourrait avoir des " "résultats indésirables"
-#: TWLight/applications/templates/applications/application_evaluation.html:10 msgid "Evaluate application" msgstr "Évaluer l'application"
-#: TWLight/applications/templates/applications/application_evaluation.html:14 msgid "Application" msgstr "Application"
-#: TWLight/applications/templates/applications/application_evaluation.html:18 msgid "Date of application" msgstr "Date d'application"
-#: TWLight/applications/templates/applications/application_evaluation.html:26 msgid "Number of days open" msgstr "Nombre de jours depuis l'application"
-#: TWLight/applications/templates/applications/application_evaluation.html:33 msgid "Number of days since application was closed" msgstr "Nombre de jours depuis l'application a été fermée"
-#: TWLight/applications/templates/applications/application_evaluation.html:41
-#: TWLight/graphs/views.py:233 msgid "Status" msgstr "Statut"
-#: TWLight/applications/templates/applications/application_evaluation.html:48 msgid "Partner" msgstr "Partenaire"
-#: TWLight/applications/templates/applications/application_evaluation.html:56 msgid "Collection requested" msgstr "Collection demandé"
-#: TWLight/applications/templates/applications/application_evaluation.html:65 msgid "Title requested" msgstr "Titre demandé"
-#: TWLight/applications/templates/applications/application_evaluation.html:73 msgid "Why the editor wants access" msgstr "Pourquoi l'utilisateur veut l'accès"
-#: TWLight/applications/templates/applications/application_evaluation.html:79 msgid "Not stated" msgstr "Non indiqué"
-#: TWLight/applications/templates/applications/application_evaluation.html:85 msgid "Extra comments from the editor" msgstr "Autres commentaires de l'utilisateur"
-#: TWLight/applications/templates/applications/application_evaluation.html:93 msgid "Discussion" msgstr "Discussion"
-#: TWLight/applications/templates/applications/application_evaluation.html:112 msgid "Add comment" msgstr "Ajouter un commentaire"
-#: TWLight/applications/templates/applications/application_evaluation.html:118
-#, fuzzy msgid "" "This page and its comments are visible to all Wikipedia Library coordinators " "and to the editor who submitted this application." msgstr "" "\n" "Cette page et ses commentaires sont visibles à tous les coordonnateurs la " "Bibliothèque Wikipédia et à l'utilisateur qui a soumis cette demande"
-#: TWLight/applications/templates/applications/application_evaluation.html:124 msgid "User" msgstr "Utilisateur"
-#: TWLight/applications/templates/applications/application_evaluation.html:128 msgid "Revision history" msgstr "Historique des versions"
-#: TWLight/applications/templates/applications/application_evaluation.html:149
-#, fuzzy, python-format msgid "Submitted by%(user)s on %(review_date)s" msgstr "" "\n" "Soumis par %(user)s le %(review_date)s\n"
-#: TWLight/applications/templates/applications/application_evaluation.html:153
-#, fuzzy, python-format msgid "Reviewed by %(user)s on %(review_date)s" msgstr "" "\n" "Evalué par %(user)s le %(review_date)s\n"
-#: TWLight/applications/templates/applications/application_evaluation.html:161 msgid "No previous versions." msgstr "Aucune versions précédentes"
-#: TWLight/applications/templates/applications/application_list.html:19 msgid "Filter applications by..." msgstr "Filtrer par..."
-#: TWLight/applications/templates/applications/application_list.html:30 msgid "Current filters" msgstr "Filtres en cour"
-#: TWLight/applications/templates/applications/application_list.html:40 msgid "None" msgstr "Aucun"
+#: TWLight/applications/models.py:31
+msgid "Under discussion"
+msgstr "En discussion"
+#: TWLight/applications/models.py:32
+msgid "Approved"
+msgstr "Approuvé"
+#: TWLight/applications/models.py:33
+msgid "Not approved"
+msgstr "Non approuvé"
+#: TWLight/applications/models.py:34
+msgid "Sent to partner"
+msgstr "Envoyé au partenaire"
+#: TWLight/applications/models.py:43 TWLight/applications/models.py:55
+#: TWLight/applications/models.py:63
+msgid ""
+"Do not override this field! Its value is set automatically when the "
+"application is saved, and overriding it may have undesirable results."
+msgstr "Ne pas remplacer ce champ! Sa valeur est définie automatiquement lorsque "
+"l'application est enregistrée, et son remplacement pourrait avoir des "
+"résultats indésirables"
+#: TWLight/applications/models.py:68
+msgid "The user who sent this application to the partner"
+msgstr "L'utilisateur qui a envoyé cette demande au partenaire"
+#: TWLight/applications/templates/applications/application_evaluation.html:12
+msgid "Evaluate application"
+msgstr "Évaluer l'application"
+#: TWLight/applications/templates/applications/application_evaluation.html:16
+msgid "Application history"
+msgstr "Historique des demandes"
+#: TWLight/applications/templates/applications/application_evaluation.html:19
+msgid "Application"
+msgstr "Application"
+#: TWLight/applications/templates/applications/application_evaluation.html:23
+msgid "Date of application"
+msgstr "Date d'application"
+#: TWLight/applications/templates/applications/application_evaluation.html:31
+msgid "Number of days open"
+msgstr "Nombre de jours depuis l'application"
+#: TWLight/applications/templates/applications/application_evaluation.html:38
+msgid "Number of days since application was closed"
+msgstr "Nombre de jours depuis l'application a été fermée"
+#: TWLight/applications/templates/applications/application_evaluation.html:46
+#: TWLight/graphs/views.py:232
+msgid "Status"
+msgstr ""
+#: TWLight/applications/templates/applications/application_evaluation.html:53
+msgid "Partner"
+msgstr "Partenaire"
+#: TWLight/applications/templates/applications/application_evaluation.html:61
+msgid "Collection requested"
+msgstr "Collection demandé"
+#: TWLight/applications/templates/applications/application_evaluation.html:70
+msgid "Title requested"
+msgstr "Titre demandé"
+#: TWLight/applications/templates/applications/application_evaluation.html:78
+msgid "Why the editor wants access"
+msgstr "Pourquoi l'utilisateur veut l'accès"
+#: TWLight/applications/templates/applications/application_evaluation.html:84
+msgid "Not stated"
+msgstr "Non indiqué"
+#: TWLight/applications/templates/applications/application_evaluation.html:90
+msgid "Extra comments from the editor"
+msgstr "Autres commentaires de l'utilisateur"
+#: TWLight/applications/templates/applications/application_evaluation.html:98
+msgid "Discussion"
+msgstr "Discussion"
+#: TWLight/applications/templates/applications/application_evaluation.html:117
+msgid "Add comment"
+msgstr "Ajouter un commentaire"
+#: TWLight/applications/templates/applications/application_evaluation.html:123
+msgid ""
+"This page and its comments are visible to all Wikipedia Library coordinators "
+"and to the editor who submitted this application."
+msgstr "Cette page et ses commentaires sont visibles à tous les coordonnateurs la "
+"Bibliothèque Wikipédia et à l'utilisateur qui a soumis cette demande"
+#: TWLight/applications/templates/applications/application_evaluation.html:129
+msgid "User"
+msgstr "Utilisateur"
+#: TWLight/applications/templates/applications/application_evaluation.html:133
+msgid "Revision history"
+msgstr "Historique des versions"
+#: TWLight/applications/templates/applications/application_evaluation.html:157
+#, python-format
+msgid "Submitted by %(submit_user)s on %(review_date)s"
+msgstr "Soumis par %(submit_user)s le %(review_date)s"
+#: TWLight/applications/templates/applications/application_evaluation.html:161
+#, python-format
+msgid "Submitted on %(review_date)s"
+msgstr "Soumis le %(review_date)s"
+#: TWLight/applications/templates/applications/application_evaluation.html:171
+#, python-format
+msgid "Reviewed by %(review_user)s on %(review_date)s"
+msgstr "Evalué par %(review_user)s le %(review_date)s"
+#: TWLight/applications/templates/applications/application_evaluation.html:175
+#, python-format
+msgid "Reviewed on %(review_date)s"
+msgstr "Evalué le %(review_date)s"
+#: TWLight/applications/templates/applications/application_evaluation.html:186
+msgid "No previous versions."
+msgstr "Aucune versions précédentes"
+#: TWLight/applications/templates/applications/application_list.html:19
+msgid "Filter applications by..."
+msgstr "Filtrer par..."
+#: TWLight/applications/templates/applications/application_list.html:30
+msgid "Current filters"
+msgstr "Filtres en cour"
+#: TWLight/applications/templates/applications/application_list.html:40
+msgid "None"
+msgstr "Aucun"
 #: TWLight/applications/templates/applications/application_list_expiring_include.html:10
-#, fuzzy, python-format msgid "Expired %(num_days)s days ago" msgstr "" "\n" "Expiré il y a %(num_days)s jours"
+#, python-format
+msgid "Expired %(num_days)s days ago"
+msgstr "Expiré il y a %(num_days)s jours"
 #: TWLight/applications/templates/applications/application_list_expiring_include.html:18
-#, fuzzy, python-format msgid "Expiring in %(num_days)s days" msgstr "" "\n" "Expirant en %(num_days)s jours"
+#, python-format
+msgid "Expiring in %(num_days)s days"
+msgstr "Expirant en %(num_days)s jours"
 #: TWLight/applications/templates/applications/application_list_expiring_include.html:28
-#, fuzzy, python-format msgid "Approved by %(reviewer)s on %(review_date)s" msgstr "" "\n" "Approuvé par %(reviewer)s le %(review_date)s\n"
+#, python-format
+msgid "Approved by %(reviewer)s on %(review_date)s"
+msgstr "Approuvé par %(reviewer)s le %(review_date)s"
 #: TWLight/applications/templates/applications/application_list_expiring_include.html:33
 #: TWLight/applications/templates/applications/application_list_include.html:23
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:58 msgid "No applications right now." msgstr "Aucune demande en ce moment"
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:58
+msgid "No applications right now."
+msgstr "Aucune demande en ce moment"
 #: TWLight/applications/templates/applications/application_list_include.html:15
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:26
-#, fuzzy, python-format msgid "Last reviewed by %(reviewer)s on %(review_date)s" msgstr "" "\n" "Dernier évalué par %(reviewer)s le %(review_date)s\n"
+#, python-format
+msgid "Last reviewed by %(reviewer)s on %(review_date)s"
+msgstr "Dernier évalué par %(reviewer)s le %(review_date)s"
 #: TWLight/applications/templates/applications/application_list_include.html:19
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:30 msgid "Not yet reviewed." msgstr "Pas encore évalué"
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:12 msgid "Select/deselect all" msgstr "Sélectionner tout / Désélectionner tout"
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:41 msgid "Status for all selected applications" msgstr "Statut pour toutes les applications sélectionnées"
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:54 msgid "Set status" msgstr "Définir le statut"
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:30
+msgid "Not yet reviewed."
+msgstr "Pas encore évalué"
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:12
+msgid "Select/deselect all"
+msgstr "Sélectionner tout / Désélectionner tout"
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:41
+msgid "Status for all selected applications"
+msgstr "Statut pour toutes les applications sélectionnées"
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:54
+msgid "Set status"
+msgstr "Définir le statut"
+#: TWLight/applications/templates/applications/apply.html:13
+#, python-format
+msgid ""
+"Note that the following information may be displayed in the timeline on"
+" the home page:\n"
+"\n"
+"    Your Wikipedia username;\n"
+"    The partners to which you've applied;\n"
+"    Your rationale for applying.\n"
+"\n"
+"Please email us directly (wikipedialibrary@wikimedia.org) if this poses a problem for you."
+""
+msgstr ""
+"Les informations suivantes peuvent être affichées dans la chronologie sur la page d'accueil:\n"
+"   Votre nom d'utilisateur\n"
+"   Les partenaires auxquels vous avez appliqué\n"
+"   Votre justification de l'application\n"
+"Envoyez-nous un courriel (wikipedialibrary@wikimedia.org) si cela pose un problème pour vous."
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
-#: TWLight/applications/templates/applications/request_for_application.html:8 msgid "What do you want to access?" msgstr "Qu'est-ce que vous voulez accéder?"
-#: TWLight/applications/templates/applications/request_for_application.html:14 msgid "Submit" msgstr "Soumettre"
-#: TWLight/applications/views.py:90 msgid "" "You must choose at least one resource you want access to before applying for " "access." msgstr "" "Vous devez choisir au moins une ressource à laquelle vous souhaitez accéder " "avant de demander l'accès"
-#: TWLight/applications/views.py:169 msgid "" "Your application has been submitted. A coordinator will review it and get " "back to you. You can check the status of your applications on this page at " "any time." msgstr "" "Votre demande a été soumise. Un coordonnateur l'examinera et vous répondra. " "Vous pouvez consulter l'état de votre demande sur cette page."
+#: TWLight/applications/templates/applications/request_for_application.html:16
+msgid "Whose resources you want to access?"
+msgstr "Les ressources de quel partenaire voulez-vous accéder?"
+#: TWLight/applications/templates/applications/request_for_application.html:34
+msgid "(more info)"
+msgstr "(plus d'info)"
+#: TWLight/applications/templates/applications/request_for_application.html:39
+#: TWLight/resources/templates/resources/partner_list.html:15
+msgid "No partner data has been added to the database yet."
+msgstr "Aucune donnée n'a encore été ajouté à la base de données pour ce partenaire"
+#: TWLight/applications/templates/applications/request_for_application.html:42
+#: TWLight/resources/templates/resources/partner_detail.html:18
+#: TWLight/resources/templates/resources/partner_detail.html:21
+#: TWLight/templates/base.html:55
+msgid "Apply for access"
+msgstr "Demande d'accès"
+#: TWLight/applications/templates/applications/send.html:6
+msgid "Partners with approved, unsent applications"
+msgstr "Partenaires avec applications approuvés non encore envoyées"
+#: TWLight/applications/templates/applications/send.html:18
+msgid "There are no partners with applications ready to send at this time."
+msgstr "Il n'y a pas de partenaires avec des applications prêtes à envoyer à ce moment"
+#: TWLight/applications/templates/applications/send_partner.html:7
+#, python-format
+msgid "Application data for %(object)s"
+msgstr "Données d'application pour %(object)s"
+#: TWLight/applications/templates/applications/send_partner.html:10
+msgid ""
+"Please copy and paste the application data below into an email to the "
+"following company representative. When you've sent the email, click the "
+"'mark as sent' button so other coordinators don't send the information a "
+"second time."
+msgid_plural ""
+"Please copy and paste the application data below into an email to the "
+"following company representatives. When you've sent the email, click the "
+"'mark as sent' button so other coordinators don't send the information a "
+"second time."
+msgstr[0] "Copier et coller les données d'application ci-dessous dans un courriel au représentant de l'entreprise suivante.  Lorsque vous avez envoyé le courriel, cliquez sur le bouton \"marquer comme envoyé\" pour eviter l'envoie de messages doubles."
+msgstr[1] "Copier et coller les données d'application ci-dessous dans un courriel aux représentants d'entreprise suivante.  Lorsque vous avez envoyé le courriel, cliquez sur le bouton \"marquer comme envoyé\" pour eviter l'envoie de messages doubles."
+#: TWLight/applications/templates/applications/send_partner.html:23
+msgid "Company representative"
+msgid_plural "Company representatives"
+msgstr[0] "Représentant de l'entreprise"
+msgstr[1] "Représentants d'entreprise"
+#: TWLight/applications/templates/applications/send_partner.html:38
+msgid ""
+"Whoops, we don't have any listed contacts for this company. Please notify "
+"Wikipedia Library administrators."
+msgstr "Zut, nous n'avons aucune contacts répertoriés pour cette entreprise. S'il vous plaît aviser "" les administrateurs de La bibliothèque Wikipédia"
+#: TWLight/applications/templates/applications/send_partner.html:41
+msgid "Application data"
+msgstr "Données d'application"
+#. Translators: this should be translated the same way that it was earlier in this page.
+#: TWLight/applications/templates/applications/send_partner.html:46
+msgid "Mark as sent"
+msgstr "Marquer comme envoyé"
+#: TWLight/applications/templates/applications/send_partner.html:62
+msgid "There are no approved, unsent applications at this time."
+msgstr "Il n'y a pas d'applications approuvés non encore envoyées à ce moment"
+#: TWLight/applications/views.py:93
+msgid "Please select at least one partner."
+msgstr "Sélectionner au moins un partenaire"
+#: TWLight/applications/views.py:258
+msgid ""
+"You must choose at least one resource you want access to before applying for "
+"access."
+msgstr "Vous devez choisir au moins une ressource à laquelle vous souhaitez accéder "
+"avant de demander l'accès."
+#: TWLight/applications/views.py:281
+msgid ""
+"Your application has been submitted. A coordinator will review it and get "
+"back to you. You can check the status of your applications on this page at "
+"any time."
+msgstr "Votre demande a été soumise. Un coordonnateur l'examinera et vous répondra. "
+"Vous pouvez consulter l'état de votre demande sur cette page."
+#: TWLight/applications/views.py:311
+msgid ""
+"Your application has been submitted. A coordinator will review it and get "
+"back to you. You can check the status of your applications on your user page "
+"page at any time."
+msgstr "Vos demandes ont été soumises. Un coordonnateur les examinera et vous répondra. "
+"Vous pouvez consulter l'état de vos demandes sur cette page."
 #. Translators: Editor = wikipedia editor, gender unknown.
-#: TWLight/applications/views.py:347 msgid "Editor" msgstr "Utilisateur"
-#: TWLight/applications/views.py:348 msgid "Publisher" msgstr "Maison d'édition"
-#: TWLight/applications/views.py:386 msgid "Queue of applications to review" msgstr "File d'attente des demandes"
-#: TWLight/applications/views.py:388
-#, python-brace-format msgid "" "\n" " This page lists only applications that still need to be reviewed.\n" " You may also consult approved and\n" " rejected applications. \n" " " msgstr "" "\n" "Cette page contient uniquement les applications qui doivent encore être " "examinés. Vous pouvez également consulter les applications approuvés et \n" " non approuvés."
-#: TWLight/applications/views.py:416 msgid "Approved applications" msgstr "Demandes approuvées"
-#: TWLight/applications/views.py:418
-#, fuzzy, python-brace-format msgid "" "This page lists only applications that have\n" " been approved. You may also consult pending " "or\n" " under-discussion and rejected\n" " applications." msgstr "" "\n" "Cette page contient uniquement les applications qui ont été approuvés. Vous " "pouvez également consulter les applications en " "attente ou\n" " en discussion et non approuvé\n"
-#: TWLight/applications/views.py:440 msgid "Rejected applications" msgstr "Demandes non approuvés"
-#: TWLight/applications/views.py:442
-#, fuzzy, python-brace-format msgid "" "This page lists only applications that have\n" " been rejected. You may also consult pending " "or\n" " under-discussion and approved\n" " applications. " msgstr "" "\n" "Cette page contient uniquement les applications qui ont été rejetées. Vous " "pouvez également consulter les applications en " "attente ou\n" " en discussion et approuvés\n" "\n"
+#: TWLight/applications/views.py:420
+msgid "Editor"
+msgstr "Utilisateur"
+#: TWLight/applications/views.py:421
+msgid "Publisher"
+msgstr "Maison d'édition"
+#: TWLight/applications/views.py:457
+msgid "Queue of applications to review"
+msgstr "File d'attente des demandes"
+#: TWLight/applications/views.py:459
+#, python-brace-format
+msgid ""
+"\n"
+" This page lists only applications that still need to be reviewed.\n"
+" You may also consult approved and\n"
+" rejected applications. \n"
+""
+msgstr ""
+"\n"
+"Cette page contient uniquement les applications qui doivent encore être "
+"examinés.\nVous pouvez également consulter les applications approuvés et "
+" non approuvés.\n"
+""
+#: TWLight/applications/views.py:487
+msgid "Approved applications"
+msgstr "Demandes approuvées"
+#: TWLight/applications/views.py:489
+#, python-brace-format
+msgid ""
+"This page lists only applications that have\n"
+" been approved. You may also consult pending\n"
+" and rejected\n"
+" applications."
+msgstr "Cette page contient uniquement les applications qui ont été approuvés. Vous "
+"pouvez également consulter les applications en attente ou"
+" en discussion et non approuvé."
+#: TWLight/applications/views.py:511
+msgid "Rejected applications"
+msgstr "Demandes non approuvés"
+#: TWLight/applications/views.py:513
+#, python-brace-format
+msgid ""
+"This page lists only applications that have\n"
+" been rejected. You may also consult pending\n"
+" and approved\n"
+" applications. "
+msgstr "Cette page contient uniquement les applications qui ont été rejetées. Vous "
+"pouvez également consulter les applications en attente ou\n"
+" en discussion et approuvés"
 #. Translators: these are grants to specific editors whose term limit is about to expire.
-#: TWLight/applications/views.py:472 msgid "Access grants up for renewal" msgstr "Accès à renouveler"
-#: TWLight/applications/views.py:474
-#, fuzzy, python-brace-format msgid "" "This page lists approved applications whose\n" " access grants have probably expired recently or are likely to " "expire\n" " soon. You may also consult pending or\n" " under-discussion, rejected, or\n" " all approved\n" " applications. " msgstr "" "\n" "Cette page contient les applications dont l'accès a probablement expiré " "récemment ou est susceptible d'expirer bientôt. Vous pouvez également " "consulter les applications en attente ou\n" " en discussion, non approuvés, " "ou\n" " approuvés\n" ". \n"
+#: TWLight/applications/views.py:543
+msgid "Access grants up for renewal"
+msgstr "Accès à renouveler"
+#: TWLight/applications/views.py:545
+#, python-brace-format
+msgid ""
+"This page lists approved applications whose\n"
+" access grants have probably expired recently or are likely to "
+"expire\n"
+" soon. You may also consult pending,\n"
+" rejected, or\n"
+" all approved\n"
+" applications. "
+msgstr "Cette page contient les applications dont l'accès a probablement expiré "
+"récemment ou est susceptible d'expirer bientôt. Vous pouvez également "
+"consulter les applications en attente ou\n"
+" en discussion, non approuvés, ou\n"
+" approuvés."
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:523 msgid "Set application status" msgstr "Définir le statut de l'application"
-#: TWLight/applications/views.py:560 msgid "Batch update successful. Thank you for reviewing today." msgstr "Mise à jour par lot réussi. Merci pour votre examen."
+#: TWLight/applications/views.py:591
+msgid "Set application status"
+msgstr "Définir le statut de l'application"
+#: TWLight/applications/views.py:629
+msgid "Batch update successful. Thank you for reviewing today."
+msgstr "Mise à jour par lot réussi. Merci pour votre examen."
+#: TWLight/applications/views.py:670
+msgid "All applications have been marked as sent."
+msgstr "Toutes les demandes ont été marquées comme envoyé"
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:3
-#, fuzzy, python-format msgid "" "There is a new comment on your application to access resources provided by " "%(partner)s. Sometimes this means that a coordinator needs additional " "information from you in order to decide on your application, so please have " "a look. Your application is available at %(app_url)s. Thanks for helping " "make knowledge available to the world!" msgstr "" "\n" "Il y a un nouveau commentaire sur votre demande pour accéder aux ressources " "fournies par %(partner)s. Parfois, cela signifie qu'un coordinateur a besoin " "d'informations de votre part afin de se prononcer sur votre demande, alors " "s'il vous plaît jeter un oeil. Votre demande est disponible sur " "%(app_url)s.\n" " Merci de nous aider à partager les connaissances avec le monde!\n"
-#: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3 msgid "New comment on your Wikipedia Library application" msgstr "Nouveau commentaire sur votre demande de la Bibliothèque Wikipédia"
+#: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
+#, python-format
+msgid ""
+"There is a new comment on your application to access resources provided by "
+"%(partner)s. Sometimes this means that a coordinator needs additional "
+"information from you in order to decide on your application, so please have "
+"a look. Your application is available at %(app_url)s. Thanks for helping "
+"make knowledge available to the world!"
+msgstr ""
+"Il y a un nouveau commentaire sur votre demande pour accéder aux ressources "
+"fournies par %(partner)s. Parfois, cela signifie qu'un coordinateur a besoin "
+"d'informations de votre part afin de se prononcer sur votre demande, alors "
+"s'il vous plaît jeter un oeil. Votre demande est disponible sur "
+"%(app_url)s."
+" Merci de nous aider à partager les connaissances avec le monde!"
+""
+#: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
+msgid "New comment on your Wikipedia Library application"
+msgstr "Nouveau commentaire sur votre demande de la Bibliothèque Wikipédia"
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:3
-#, fuzzy, python-format msgid "" "There is a new comment on a Wikipedia Library application that you also " "commented on. It may be providing an answer to a question you asked. You can " "see it at %(app_url)s. Thanks for helping review Wikipedia Library " "applications!" msgstr "" "\n" "Il y a un nouveau commentaire sur une demande de la Bibliothèque Wikipédia " "que vous avez également commenté. Il pourrait fournir une réponse à une " "question que vous avez posée. Vous pouvez le voir à %(app_url)s.\n" " Merci de nous aider à évaluer les applications!\n"
-#: TWLight/emails/templates/emails/comment_notification_others-subject.html:3 msgid "New comment on a Wikipedia Library application you commented on" msgstr "" "Nouveau commentaire sur une demande de la Bibliothèque Wikipédia que vous " "avez commenté"
-#: TWLight/graphs/views.py:153 TWLight/graphs/views.py:180
-#: TWLight/graphs/views.py:260 TWLight/graphs/views.py:283 msgid "Date" msgstr "Date"
-#: TWLight/graphs/views.py:153 msgid "Number of partners" msgstr "Nombre de partenaires"
-#: TWLight/graphs/views.py:166 TWLight/templates/dashboard.html:110
-#: TWLight/users/templates/users/editor_detail_data.html:23 msgid "Home wiki" msgstr "Wiki principal"
-#: TWLight/graphs/views.py:166 TWLight/graphs/views.py:180
-#: TWLight/templates/dashboard.html:113 msgid "Number of users" msgstr "Nombre d'utilisateurs"
-#: TWLight/graphs/views.py:180 msgid "Wiki" msgstr "Wiki"
+#: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
+#, python-format
+msgid ""
+"There is a new comment on a Wikipedia Library application that you also "
+"commented on. It may be providing an answer to a question you asked. You can "
+"see it at %(app_url)s. Thanks for helping review Wikipedia Library "
+"applications!"
+msgstr "Il y a un nouveau commentaire sur une demande de la Bibliothèque Wikipédia "
+"que vous avez également commenté. Il pourrait fournir une réponse à une "
+"question que vous avez posée. Vous pouvez le voir à %(app_url)s.\n"
+" Merci de nous aider à évaluer les applications!"
+#: TWLight/emails/templates/emails/comment_notification_others-subject.html:3
+msgid "New comment on a Wikipedia Library application you commented on"
+msgstr "Nouveau commentaire sur une demande de la Bibliothèque Wikipédia que vous "
+"avez commenté"
+#: TWLight/graphs/views.py:152 TWLight/graphs/views.py:179
+#: TWLight/graphs/views.py:259 TWLight/graphs/views.py:282
+msgid "Date"
+msgstr "Date"
+#: TWLight/graphs/views.py:152
+msgid "Number of partners"
+msgstr "Nombre de partenaires"
+#: TWLight/graphs/views.py:165 TWLight/graphs/views.py:179
+#: TWLight/templates/dashboard.html:112
+msgid "Number of users"
+msgstr "Nombre d'utilisateurs"
+#: TWLight/graphs/views.py:179
+msgid "Wiki"
+msgstr "Wiki"
 #. Translators: the number of days it took to decide on applications that have already been accepted/rejected.
-#: TWLight/graphs/views.py:200 msgid "Days until decision" msgstr "Délai avant la décision"
-#: TWLight/graphs/views.py:200 TWLight/graphs/views.py:234 msgid "Number of applications" msgstr "Nombre de demandes"
-#: TWLight/graphs/views.py:217 msgid "Month" msgstr "Mois"
-#: TWLight/graphs/views.py:217 msgid "Median days until decision" msgstr "Délai médian en jours avant la décision"
-#: TWLight/graphs/views.py:261
-#, python-brace-format msgid "Number of applications to {partner}" msgstr "Nombre d'applications à {partner}"
-#: TWLight/graphs/views.py:284
-#, python-brace-format msgid "Number of unique users who have applied to {partner}" msgstr "" "Nombre d'utilisateurs uniques qui ont demandé des ressources de {partner}"
-#: TWLight/resources/templates/resources/partner_detail.html:12 msgid "No description available." msgstr "Aucune description disponible"
-#: TWLight/resources/templates/resources/partner_detail.html:19 msgid "Metrics" msgstr "Indicateurs"
+#: TWLight/graphs/views.py:199
+msgid "Days until decision"
+msgstr "Délai avant la décision"
+#: TWLight/graphs/views.py:199 TWLight/graphs/views.py:233
+msgid "Number of applications"
+msgstr "Nombre de demandes"
+#: TWLight/graphs/views.py:216
+msgid "Month"
+msgstr "Mois"
+#: TWLight/graphs/views.py:216
+msgid "Median days until decision"
+msgstr "Délai médian en jours avant la décision"
+#: TWLight/graphs/views.py:260
+#, python-brace-format
+msgid "Number of applications to {partner}"
+msgstr "Nombre d'applications à {partner}"
+#: TWLight/graphs/views.py:283
+#, python-brace-format
+msgid "Number of unique users who have applied to {partner}"
+msgstr "Nombre d'utilisateurs uniques qui ont demandé des ressources de {partner}"
+#: TWLight/resources/models.py:25
+msgid ""
+"Partner organization's name (e.g. McFarland). Note: this will be user-"
+"visible and *not translated*."
+msgstr "Nom de partenaire (eg. McFarland). Attention: ce sera visible à l'utilisateur et *non traduites*"
+#: TWLight/resources/models.py:34
+msgid ""
+"Link to terms of use. Required if this company requires that users agree to "
+"terms of use as a condition of applying for access; optional otherwise."
+msgstr "Lien aux conditions d'utilisation. Requis si ce partenaire exige que les utilisateurs acceptent les "" conditions d'utilisation pour recevoir l'accès; sinon facultatif"
+#: TWLight/resources/models.py:38
+msgid "Optional description of this partner's offerings."
+msgstr "Description facultative des ressources de ce partenaire"
+#: TWLight/resources/models.py:40
+msgid "Optional URL of an image that can be used to represent this partner."
+msgstr "L'URL facultatif d'une image qui peut être utilisé pour représenter ce partenaire"
+#: TWLight/resources/models.py:46
+msgid ""
+"If True, users can only apply for one Stream at a time from this Partner. If "
+"False, users can apply for multiple Streams at a time. This field must be "
+"filled in when Partners have multiple Streams, but may be left blank "
+"otherwise."
+msgstr "Si Vrai, les utilisateurs ne peuvent demander une seule collection à la fois de ce partenaire. Si Faux, les utilisateurs peuvent demander plusieurs collections à la fois. Ce champ doit être "" rempli lorsque les partenaires ont plusieurs collections, mais autrement peut être laissée en blanc."
+#: TWLight/resources/models.py:54
+msgid ""
+"The standard length of an access grant from this Partner. Enter like '365 "
+"days' or '365d' or '1 year'."
+msgstr "La durée normale d'accès de ce partenaire. Entrez comme '365 jours' ou '365d' ou '1 an'."
+#: TWLight/resources/models.py:67
+msgid ""
+"Mark as true if this partner requires applicants to specify their real names."
+msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient leurs noms."
+#: TWLight/resources/models.py:70
+msgid ""
+"Mark as true if this partner requires applicants to specify their countries "
+"of residence."
+msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient leurs pays de résidence."
+#: TWLight/resources/models.py:73
+msgid ""
+"Mark as true if this partner requires applicants to specify a particular "
+"title they want to access."
+msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient le titre qu'ils veulent accéder."
+#: TWLight/resources/models.py:76
+msgid ""
+"Mark as true if this partner requires applicants to specify a particular "
+"database they want to access."
+msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient la collection qu'ils veulent accéder."
+#: TWLight/resources/models.py:79
+msgid ""
+"Mark as true if this partner requires applicants to specify their occupation."
+msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient leur profession."
+#: TWLight/resources/models.py:82
+msgid ""
+"Mark as true if this partner requires applicants to specify their "
+"institutional affiliation."
+msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient leur affiliation institutionnelle."
+#: TWLight/resources/models.py:85
+msgid ""
+"Mark as true if this partner requires applicants to agree with the partner's "
+"terms of use."
+msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs acceptent leur conditions d'utilisation."
+#: TWLight/resources/models.py:138
+msgid ""
+"Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
+"and *not translated*. Do not include the name of the partner here. If "
+"partner name and resource name need to be presented together, templates are "
+"responsible for presenting them in a format that can be internationalized."
+msgstr "Nom de collection (eg. Sciences naturelles). Ce sera visible à l'utilisateur et *non traduites*. Ne pas inclure le nom du partenaire ici. Si le nom du partenaire et de la collection doivent être présentées ensemble, les modèles sont chargés de les présenter dans un format qui peut être internationalisé."
+#: TWLight/resources/models.py:144
+msgid "Optional description of this stream's contents."
+msgstr "Description facultative de cette collection."
+#: TWLight/resources/models.py:171
+msgid ""
+"Organizational role or job title. This is NOT intended to be used for "
+"honorifics."
+msgstr "Rôle organisationnel ou titre d'emploi. Ceci ne doit pas être utilisé pour autre titres"
+#: TWLight/resources/models.py:176
+msgid ""
+"The form of the contact person's name to use in email greetings (as in 'Hi "
+"Jake')"
+msgstr "La forme du nom de la personne de contact à utiliser dans les salutations (eg. \"Bonjour, Jake\")"
 #: TWLight/resources/templates/resources/partner_detail.html:31
-#: TWLight/templates/dashboard.html:61 msgid "Total applications (all time)" msgstr "Demandes totales (tout le temps)"
-#: TWLight/resources/templates/resources/partner_detail.html:46 msgid "Total unique applicants (all time)" msgstr "Nombre d'utilisateurs uniques (tout le temps)"
-#: TWLight/resources/templates/resources/partner_detail.html:61 msgid "Median days from application to decision" msgstr "Délai médian en jours de la demande à la décision"
-#: TWLight/resources/templates/resources/partner_detail.html:69 msgid "Applications by status" msgstr "Demandes par statut"
-#: TWLight/resources/templates/resources/partner_detail.html:69
-#: TWLight/resources/templates/resources/partner_detail.html:95
-#: TWLight/resources/templates/resources/partner_detail.html:99
-#: TWLight/resources/templates/resources/partner_detail.html:103
-#: TWLight/templates/dashboard.html:85 TWLight/templates/dashboard.html:101
-#: TWLight/templates/dashboard.html:132 TWLight/templates/dashboard.html:146
-#: TWLight/templates/dashboard.html:156 TWLight/templates/dashboard.html:165 msgid "download as csv" msgstr "Téléchargez en format CSV"
-#: TWLight/resources/templates/resources/partner_detail.html:78
-#, python-format msgid "" "\n" " Number of applications approved (all time): %(total_apps_approved)s\n" " " msgid_plural "" "\n" " Number of applications approved (all time): %(total_apps_approved)s\n" " " msgstr[0] "" msgstr[1] "Demandes approuvées (tout le temps)"
-#: TWLight/resources/templates/resources/partner_detail.html:86
-#, python-format msgid "" "\n" " Number of unique users with approved applications (all time): " "%(unique_users_approved)s\n" " " msgid_plural "" "\n" " Number of unique users with approved applications (all time): " "%(unique_users_approved)s\n" " " msgstr[0] "" msgstr[1] "" "Nombre d'utilisateurs uniques avec des demandes approuvées (tout le temps)"
-#: TWLight/resources/templates/resources/partner_detail.html:93 msgid "Applications over time" msgstr "Nombre de demandes dans le temps"
-#: TWLight/resources/templates/resources/partner_detail.html:95 msgid "All applications" msgstr "Toutes les demandes"
-#: TWLight/resources/templates/resources/partner_detail.html:99 msgid "Approved applications only" msgstr "Seulement les demandes approuvées"
-#: TWLight/resources/templates/resources/partner_detail.html:103 msgid "Unique users over time" msgstr "Nombre d'utilisateurs uniques dans le temps"
-#: TWLight/resources/templates/resources/partner_detail.html:109 msgid "Special requirements for applicants" msgstr "Exigences particulières pour les demandeurs"
-#: TWLight/resources/templates/resources/partner_detail.html:112 msgid "" "If this publisher has any special requirements for applicants, they are " "listed here." msgstr "" "Si ce partenaire a des exigences particulières pour les demandeurs, ils sont " "énumérés ici"
-#: TWLight/resources/templates/resources/partner_detail.html:117
-#, python-format msgid "" "\n" " %(publisher)s requires that you agree with its terms\n" " of use.\n" " " msgstr "" "\n" "%(publisher)s exige que vous acceptez les conditions\n" " d'utilisation pour cette ressource"
-#: TWLight/resources/templates/resources/partner_detail.html:126
-#, python-format msgid "" "\n" " %(publisher)s requires that you provide your real name.\n" " " msgstr "%(publisher)s exige que vous fournissiez votre nom"
-#: TWLight/resources/templates/resources/partner_detail.html:134
-#, python-format msgid "" "\n" " %(publisher)s requires that you provide your country of residence.\n" " " msgstr "" "\n" "%(publisher)s exige que vous fournissiez votre pays de résidence"
-#: TWLight/resources/templates/resources/partner_detail.html:142
-#, python-format msgid "" "\n" " %(publisher)s requires that you provide your occupation.\n" " " msgstr "" "\n" "%(publisher)s exige que vous fournissiez votre profession"
-#: TWLight/resources/templates/resources/partner_detail.html:150
-#, python-format msgid "" "\n" " %(publisher)s requires that you provide your institutional " "affiliation.\n" " " msgstr "" "\n" "%(publisher)s exige que vous fournissiez votre affiliation institutionnelle"
+msgid "Description not available."
+msgstr "Description non disponible"
+#: TWLight/resources/templates/resources/partner_detail.html:42
+#: TWLight/templates/base.html:149
+msgid "Terms of use"
+msgstr "Conditions d'utilisation"
+#: TWLight/resources/templates/resources/partner_detail.html:44
+msgid "Terms of use not available."
+msgstr "Conditions d'utilisation non disponible"
+#: TWLight/resources/templates/resources/partner_detail.html:54
+msgid "Special requirements for applicants"
+msgstr "Exigences particulières pour les demandeurs"
+#: TWLight/resources/templates/resources/partner_detail.html:58
+msgid ""
+"If this publisher has any special requirements for applicants, they are "
+"listed here."
+msgstr "Si ce partenaire a des exigences particulières pour les demandeurs, ils sont énumérés ici."
+#: TWLight/resources/templates/resources/partner_detail.html:64
+#, python-format
+msgid ""
+"\n"
+" %(publisher)s requires that you agree with its terms\n"
+" of use.\n"
+""
+msgstr "\n%(publisher)s exige que vous acceptez les conditions\n"
+" d'utilisation pour cette ressource.\n"
+#: TWLight/resources/templates/resources/partner_detail.html:73
+#, python-format
+msgid ""
+"\n"
+" %(publisher)s requires that you provide your real name.\n"
+""
+msgstr "\n%(publisher)s exige que vous fournissiez votre nom.\n"
+#: TWLight/resources/templates/resources/partner_detail.html:81
+#, python-format
+msgid ""
+"\n"
+" %(publisher)s requires that you provide your country of "
+"residence.\n"
+""
+msgstr "\n%(publisher)s exige que vous spécifiez votre pays de résidence.\n"
+#: TWLight/resources/templates/resources/partner_detail.html:89
+#, python-format
+msgid ""
+"\n"
+" %(publisher)s requires that you provide your occupation.\n"
+""
+msgstr "\n%(publisher)s exige que vous fournissiez votre profession.\n"
+#: TWLight/resources/templates/resources/partner_detail.html:97
+#, python-format
+msgid ""
+"\n"
+" %(publisher)s requires that you provide your institutional "
+"affiliation.\n"
+""
+msgstr "\n%(publisher)s exige que vous fournissiez votre affiliation institutionnelle\n"
+#: TWLight/resources/templates/resources/partner_detail.html:105
+#, python-format
+msgid ""
+"\n"
+" %(publisher)s requires that you specify a particular title "
+"that you want\n"
+" to access.\n"
+""
+msgstr "\n%(publisher)s exige que vous spécifiez le titre que vous souhaitez accéder\n"
+#: TWLight/resources/templates/resources/partner_detail.html:115
+#, python-format
+msgid ""
+"\n"
+" %(publisher)s requires that you specify a specific "
+"collection that you\n"
+" want to access. You may only apply for access to one "
+"collection at a\n"
+" time.\n"
+""
+msgstr "\n%(publisher)s exige que vous spécifiez la collection que vous souhaitez "
+"accéder. Vous ne pouvez demander l'accès à une collection à la fois.\n"
+#: TWLight/resources/templates/resources/partner_detail.html:121
+#, python-format
+msgid ""
+"\n"
+" %(publisher)s requires that you specify one or more "
+"specific\n"
+" collections that you want to access.\n"
+""
+msgstr "\n%(publisher)s exige que vous spécifiez une ou plusieurs collections que vous "
+"souhaitez accéder.\n"
+#: TWLight/resources/templates/resources/partner_detail.html:139
+msgid "Collections"
+msgstr "Collections"
 #: TWLight/resources/templates/resources/partner_detail.html:158
-#, python-format msgid "" "\n" " %(publisher)s requires that you specify a particular title that you " "want\n" " to access.\n" " " msgstr "" "\n" "%(publisher)s exige que vous spécifiez le titre que vous souhaitez accéder"
-#: TWLight/resources/templates/resources/partner_detail.html:168
-#, python-format msgid "" "\n" " %(publisher)s requires that you specify a specific collection that " "you\n" " want to access. You may only apply for access to one collection at " "a\n" " time.\n" " " msgstr "" "\n" "%(publisher)s exige que vous spécifiez la collection que vous souhaitez " "accéder. Vous ne pouvez demander l'accès à une collection à la fois"
-#: TWLight/resources/templates/resources/partner_detail.html:174
-#, python-format msgid "" "\n" " %(publisher)s requires that you specify one or more specific\n" " collections that you want to access.\n" " " msgstr "" "\n" "%(publisher)s exige que vous spécifiez une ou plusieurs collections que vous " "souhaitez accéder"
-#: TWLight/resources/templates/resources/partner_list.html:5 msgid "List of partners" msgstr "Liste des partenaires"
-#: TWLight/resources/templates/resources/partner_list.html:7 msgid "" "\n" " If you're a coordinator or site administrator, you'll be able to see\n" " per-partner metrics on the partner pages.\n" " " msgstr "" "\n" "Si vous êtes un coordonnateur ou un administrateur de site, vous pouvez " "consulter les statistiques par partenaire sur les pages partenaires."
-#: TWLight/settings/base.py:135 msgid "French" msgstr "Français"
-#: TWLight/settings/base.py:136 msgid "English" msgstr "Anglais"
-#: TWLight/templates/base.html:122 TWLight/templates/base.html.py:126
-#, python-format msgid "" "\n" " Hi, %(username)s!\n" " " msgstr "" "\n" "Bonjour %(username)s!"
-#: TWLight/templates/base.html:135 TWLight/templates/base.html.py:159
-#, fuzzy msgid "The Wikipedia Library" msgstr "La Bibliothèque Wikipédia"
-#: TWLight/templates/base.html:141 msgid "Log out" msgstr "Se déconnecter/Rejoigner"
-#: TWLight/templates/base.html:147 msgid "Log in/sign up" msgstr "Se connecter"
-#: TWLight/templates/base.html:170 msgid "This is a template" msgstr "Ceci est un modèle"
-#: TWLight/templates/dashboard.html:16 msgid "Total partners (all time)" msgstr "Partenaires (tout le temps)"
-#: TWLight/templates/dashboard.html:23 msgid "See all partners" msgstr "Voir tous les partenaires"
-#: TWLight/templates/dashboard.html:39 msgid "Number of editors (all time)" msgstr "Nombre d'utilisateurs (tout le temps)"
-#: TWLight/templates/dashboard.html:45 msgid "Jump to user metrics" msgstr "Aller aux indicateurs d'utilisateurs"
-#: TWLight/templates/dashboard.html:67 msgid "Jump to application metrics" msgstr "Aller aux mesures de demandes"
-#: TWLight/templates/dashboard.html:79 msgid "Partners" msgstr "Partnenaires"
-#: TWLight/templates/dashboard.html:85 msgid "Number of partners over time" msgstr "Nombre de partenaires dans le temps"
-#: TWLight/templates/dashboard.html:94 msgid "Editors" msgstr "Utilisateurs"
-#: TWLight/templates/dashboard.html:101 msgid "Home wiki distribution" msgstr "Distribution par wiki principal"
-#: TWLight/templates/dashboard.html:132 msgid "Home wiki distribution over time" msgstr "Distribution par wiki principal dans le temps"
-#: TWLight/templates/dashboard.html:144 msgid "Applications" msgstr "Demandes"
-#: TWLight/templates/dashboard.html:146 msgid "Applications by number of days until decision" msgstr "Demandes par nombre de jours avant la décision"
-#: TWLight/templates/dashboard.html:148 msgid "" "\n" " The x axis is the number of days to make a final decision (either\n" " approved or denied) on an application. The y axis is the number " "of\n" " applications that have taken exactly that many days to decide.\n" " " msgstr "" "\n" "L'axe x représent le nombre de jours pour prendre une décision finale (soit " "approuver ou refuser) sur une demande. L'axe y représent le nombre de " "demandes qui ont été décidé dans exactement ce nombre de jours"
-#: TWLight/templates/dashboard.html:156 msgid "Median days until application decision, per month" msgstr "Délai médian en jours avant la décision, par mois"
-#: TWLight/templates/dashboard.html:158 msgid "" "\n" " This shows the median number of days to reach a decision on the\n" " applications opened in a given month.\n" " " msgstr "" "\n" "Cela montre le nombre médian de jours pour évaluer les demandes ouvertes " "dans un mois donné"
-#: TWLight/templates/dashboard.html:165 msgid "Current application status distribution" msgstr "Distribution de l'état actuel des demandes "
-#: TWLight/templates/dashboard.html:167 msgid "" "\n" " This graph includes all applications opened ever on this site.\n" " " msgstr "" "\n" "Ce graphe inclut toutes les demandes jamais ouvertes sur ce site"
-#: TWLight/users/authorization.py:197 msgid "Welcome back!" msgstr "Bon retour!"
-#: TWLight/users/forms.py:24 msgid "Update profile" msgstr "Mettre à jour le profil"
-#: TWLight/users/models.py:52 msgid "When this information was last edited" msgstr "Quand cette information a été modifié en dernier"
-#: TWLight/users/models.py:54
-#, fuzzy msgid "When this profile was first created" msgstr "Quand ce profil a été créé"
-#: TWLight/users/models.py:62 msgid "Wikipedia edit count" msgstr "Nombre total de modifications"
-#: TWLight/users/models.py:63 msgid "Date registered at Wikipedia" msgstr "Date d'inscription à Wikipédia"
-#: TWLight/users/models.py:64 msgid "Wikipedia user ID" msgstr "ID utilisateur à Wikipédia"
-#: TWLight/users/models.py:69 msgid "Wikipedia groups" msgstr "Membre des groupes à Wikipédia"
-#: TWLight/users/models.py:70 msgid "Wikipedia user rights" msgstr "Droits d'accès à Wikipédia"
-#: TWLight/users/models.py:75 msgid "Home wiki, as indicated by user" msgstr "Wiki principal, comme indiqué par l'utilisateur"
-#: TWLight/users/models.py:78 msgid "Wiki contributions, as entered by user" msgstr "Contributions, comme indiqué par l'utilisateur"
+#: TWLight/templates/base.html:81
+msgid "Metrics"
+msgstr "Indicateurs"
+#: TWLight/resources/templates/resources/partner_detail.html:170
+#: TWLight/templates/dashboard.html:60
+msgid "Total applications (all time)"
+msgstr "Demandes totales (tout le temps)"
+#: TWLight/resources/templates/resources/partner_detail.html:185
+msgid "Total unique applicants (all time)"
+msgstr "Nombre d'utilisateurs uniques (tout le temps)"
+#: TWLight/resources/templates/resources/partner_detail.html:200
+msgid "Median days from application to decision"
+msgstr "Délai médian en jours de la demande à la décision"
+#: TWLight/resources/templates/resources/partner_detail.html:208
+msgid "Applications by status"
+msgstr "Demandes par statut"
+#: TWLight/resources/templates/resources/partner_detail.html:208
+#: TWLight/resources/templates/resources/partner_detail.html:230
+#: TWLight/resources/templates/resources/partner_detail.html:234
+#: TWLight/resources/templates/resources/partner_detail.html:238
+#: TWLight/templates/dashboard.html:84 TWLight/templates/dashboard.html:100
+#: TWLight/templates/dashboard.html:131 TWLight/templates/dashboard.html:145
+#: TWLight/templates/dashboard.html:155 TWLight/templates/dashboard.html:164
+msgid "download as csv"
+msgstr "Téléchargez en format CSV"
+#: TWLight/resources/templates/resources/partner_detail.html:213
+#, python-format
+msgid ""
+"\n"
+" Number of applications approved (all time): %(total_apps_approved)s\n"
+""
+msgid_plural ""
+"\n"
+" Number of applications approved (all time): %(total_apps_approved)s\n"
+""
+msgstr[0] "\nNombre de demandes approuvées (tout le temps): %(total_apps_approved)s\n"
+msgstr[1] "\nNombre de demandes approuvées (tout le temps): %(total_apps_approved)s\n"
+#: TWLight/resources/templates/resources/partner_detail.html:221
+#, python-format
+msgid ""
+"\n"
+" Number of unique users with approved applications (all time): "
+"%(unique_users_approved)s\n"
+""
+msgid_plural ""
+"\n"
+" Number of unique users with approved applications (all time): "
+"%(unique_users_approved)s\n"
+""
+msgstr[0] "\nNombre d'utilisateurs uniques avec des applications approuvées (tout le temps): "
+"%(unique_users_approved)s\n"
+msgstr[1] "\nNombre d'utilisateurs uniques avec des applications approuvées (tout le temps): "
+"%(unique_users_approved)s\n"
+#: TWLight/resources/templates/resources/partner_detail.html:228
+msgid "Applications over time"
+msgstr "Nombre de demandes dans le temps"
+#: TWLight/resources/templates/resources/partner_detail.html:230
+msgid "All applications"
+msgstr "Toutes les demandes"
+#: TWLight/resources/templates/resources/partner_detail.html:234
+msgid "Approved applications only"
+msgstr "Seulement les demandes approuvées"
+#: TWLight/resources/templates/resources/partner_detail.html:238
+msgid "Unique users over time"
+msgstr "Nombre d'utilisateurs uniques dans le temps"
+#: TWLight/resources/templates/resources/partner_list.html:6
+msgid "List of partners"
+msgstr "Liste des partenaires"
+#: TWLight/resources/templates/resources/partner_list.html:21
+msgid ""
+"\n"
+" You can see per-partner metrics on the partner pages.\n"
+""
+msgstr "\nVous pouvez consulter les statistiques par partenaire sur les pages partenaires.\n"
+#: TWLight/resources/templates/resources/partner_tile.html:27
+msgid "More info"
+msgstr "Plus d'info"
+#: TWLight/settings/base.py:141
+msgid "English"
+msgstr "Anglais"
+#: TWLight/settings/base.py:142
+msgid "French"
+msgstr "Français"
+#: TWLight/templates/about.html:6
+msgid "About the Wikipedia Library"
+msgstr "La Bibliothèque Wikipédia"
+#: TWLight/templates/about.html:9
+msgid ""
+"The Wikipedia Library provides free access to research materials from a "
+"variety of sources, to improve your ability to contribute content to the "
+"Wikimedia projects. Partners include a wide range of databases that offer "
+"access to books, journals, newspapers, videos, and other useful materials."
+msgstr "La Bibliothèque Wikipédia offre accès gratuit aux documents de recherche à partir d'une "" variété de sources, afin d'améliorer votre capacité à contribuer aux "" projets Wikimedia. Les partenaires comprennent un large éventail de maisons d'édition qui offrent "" l'accès à des livres, des revues, des journaux, des vidéos et d'autres matériaux utiles"
+#: TWLight/templates/about.html:16
+msgid ""
+"The Wikipedia Library Card Platform is our central tool for reviewing "
+"applications and providing access to those partner resources. Here you can "
+"see which partnerships are available and what kinds of materials each "
+"database provides, and apply for the ones you want. Volunteer coordinators, "
+"who have signed non-disclosure agreements with the Wikimedia Foundation, "
+"review applications on a rolling basis, and when enough applications are "
+"approved, work with partners to get you your free access."
+msgstr "La carte de bibliothèque Wikipedia est notre outil central pour examiner "" les applications pour l'accès à ces ressources. Ici vous pouvez "" voir quels partenariats sont disponibles et quels types de matériaux chacun fournit, et demander ceux que vous voulez. Les coordonnateurs, qui ont signé des accords de non-divulgation avec la Fondation Wikimedia, évaluent les demandes continuellement, et lorsque suffisamment de demandes sont "" approuvé, ils travail avec des partenaires pour vous obtenir votre accès gratuit."
+#: TWLight/templates/about.html:23
+#, python-format
+msgid ""
+"For more information about how application information is stored and "
+"reviewed please see our terms of use. Accounts "
+"you apply for are also subject to the Terms of Use provided by each "
+"partner’s platform; please review them."
+msgstr "Pour plus d'informations sur la façon dont les applications est stocké et evalué s'il vous plaît voir nos conditions d'utilisation. Les comptes que vous demander sont également soumises aux conditions d'utilisation de chaque partenaire; vous devez les examiner."
+#: TWLight/templates/about.html:28
+msgid "Who can receive access?"
+msgstr "Qui peut avoir accès?"
+#: TWLight/templates/about.html:31
+msgid ""
+"Any active editor in good standing can receive access. Applications are "
+"reviewed based on the editor’s need for the research materials, and general "
+"contributions to the Wikimedia community. If you think you could use access "
+"to one of our partner resources and are an active Wikimedia editor in any "
+"project supported by the Wikimedia Foundation, please apply."
+msgstr "Tout utilisateur actif et en règle peut avoir accès. Demandes sont évaluées en fonction des besoins de l'utilisateur pour la ressource, et les contributions à la communauté Wikimédia. Si vous pensez que vous pouvez utiliser l'accès à l'une de nos ressources et êtes un utilisateur actif dans un projet soutenu par la Wikimedia Foundation, s'il vous plaît soumettre une demande."
+#: TWLight/templates/about.html:37
+msgid ""
+"Any editor can apply for access, but there are a few basic requirements:"
+msgstr "Tout utilisateur peut demander l'accès, mais il y a quelques exigences de base."
+#: TWLight/templates/about.html:40
+msgid ""
+"You have your preferences enabled to receive email messages on your home wiki"
+msgstr "Vous avez défini vos préférences pour recevoir des courriels sur votre wiki principal."
+#: TWLight/templates/about.html:43
+msgid "You have an account that is a minimum of 6 months old"
+msgstr "Vous avez un compte dans les projets Wikimédia pendant au moins 6 mois"
+#: TWLight/templates/about.html:46
+msgid "You have a minimum of 500 edits to the encyclopedia"
+msgstr "Vous avez au moins 500 contributions"
+#: TWLight/templates/about.html:49
+msgid ""
+"You do not already have access to the resources you’re applying for through "
+"another library or institution"
+msgstr "Vous ne l'avez pas déjà accès aux ressources que vous demandez à travers une autre bibliothèque ou institution"
+#: TWLight/templates/about.html:55
+msgid ""
+"If you don't quite meet the experience requirements but think you would "
+"still be a strong candidate for access, feel free to apply and you may still "
+"be considered. Note that \"home wiki\" can mean any Wikipedia you are "
+"active on, your native language version — in any case, simply one "
+"where you've chosen to enable email."
+msgstr "Si vous ne répondez pas tout à fait aux exigences d'expérience, mais pensez que vous êtes encore un bon candidat pour l'accès, soumettre une demande et vous pourriez être considéré. Notez que \"wiki principal\" peut signifier toute Wikipédias sur lequel vous êtes actif - tout simplement un où vous avez donné votre courrier électronique"
+#: TWLight/templates/about.html:62
+msgid "What do I do after I get access?"
+msgstr "Que puis-je faire après je reçois mon accès?"
+#: TWLight/templates/about.html:65
+msgid ""
+"Once you have access we encourage you to use the databases for both research "
+"that creates or improves Wikimedia content and serves your other research "
+"needs. Please research anything you want with your access!"
+msgstr "Une fois que vous avez votre accès, nous vous encourageons à utiliser les ressources pour améliorer le contenu des projets Wikimédia et vos autres besoins. S'il vous plaît recherche tout ce que vous voulez avec votre accès!"
+#: TWLight/templates/about.html:71
+msgid ""
+"Please keep in mind, our agreements with partners carry certain expectations."
+msgstr "S'il vous plaît garder à l'esprit, nos accords avec les partenaires portent certaines attentes."
+#: TWLight/templates/about.html:77
+msgid "Approved editors may use their access to:"
+msgstr "Les utilisateurs peuvent"
+#: TWLight/templates/about.html:80
+msgid "Search, view, retrieve, and display portions of restricted content"
+msgstr "rechercher, voir, récupérer et afficher des portions de contenu à accès restreint"
+#: TWLight/templates/about.html:83
+msgid "Electronically save portions of restricted content"
+msgstr "enregistrer électroniquement des portions de contenu à accès restreint"
+#: TWLight/templates/about.html:86
+msgid "Print out single copies of portions of restricted content"
+msgstr "imprimer un exemplaire des portions de contenu à accès restreint"
+#: TWLight/templates/about.html:92
+msgid "Approved editors should not:"
+msgstr "Les utilisateurs ne peuvent pas"
+#: TWLight/templates/about.html:95
+msgid ""
+"Share their account logins or passwords with others, or sell their access to "
+"other parties"
+msgstr "partager ou vendre leur accès"
+#: TWLight/templates/about.html:98
+msgid "Mass scrape or mass download partner content"
+msgstr "soutirer ou télécharger en masse des portions de contenu à accès restreint"
+#: TWLight/templates/about.html:101
+msgid ""
+"Systematically make printed or electronic copies of multiple extracts of "
+"restricted content available for any purpose"
+msgstr "faire systématiquement des copies imprimées ou électroniques de plusieurs extraits de contenu restreint pour d'autres buts"
+#: TWLight/templates/about.html:104
+msgid ""
+"Datamine metadata without permission, in order, for instance, to use "
+"metadata for auto-created stub articles"
+msgstr "fouiller des métadonnées sans permission, par exemple pour la création automatique d'ébauches"
+#: TWLight/templates/about.html:110
+msgid ""
+"Respecting these agreements allows us to continue growing the number and "
+"scope of partnerships available to our entire community."
+msgstr "Le respect de ces accords nous permet de continuer à augmenter le nombre de partenariats à la disposition de notre communauté."
+#: TWLight/templates/about.html:118
+#, python-format
+msgid ""
+"Citation practices vary by project and even by article. Generally, we "
+"support editors citing where they found information, in a form that allows "
+"others to check it for themselves in whatever way is easiest for them. That "
+"often means providing both original source details as well as a link to the "
+"partner database in which the source was found. You can use |via= in templates using CS1 citation format or add %(code)s to "
+"identify the provider."
+msgstr "Les pratiques de citation varient selon le projet et même par article. En règle générale, citer vos sources sous une forme qui permet aux autres de vérifier par eux-mêmes de quelque manière est plus facile pour eux. Cela signifie souvent fournir les détails originaux de source ainsi qu'un lien vers la ressource dans laquelle la source a été trouvée. Vous pouvez utiliser | via = dans les modèles CS1 ou ajouter %(code)s pour identifier le fournisseur."
+#: TWLight/templates/about.html:124
+msgid "Here is one citation example:"
+msgstr "Voice un exemple de citation"
+#: TWLight/templates/about.html:146
+msgid "Whom do I contact if I have questions, need help, or want to volunteer?"
+msgstr "Qui dois-je contacter si j'ai des questions, besoin d'aide, ou si vous voulez faire du bénévolat?"
+#: TWLight/templates/about.html:149
+msgid "Email:"
+msgstr "Courriel"
+#: TWLight/templates/about.html:155
+msgid "Talk page:"
+msgstr "Discussion"
+#: TWLight/templates/base.html:14 TWLight/templates/base.html.py:107
+msgid "The Wikipedia Library Card Platform"
+msgstr "Carte de bibliothèque Wikipédia"
+#: TWLight/templates/base.html:36 TWLight/templates/base.html.py:40
+#, python-format
+msgid ""
+"\n"
+" Hi, %(username)s!\n"
+""
+msgstr "\nBonjour, %(username)s!\n"
+#: TWLight/templates/base.html:49
+msgid "Browse partners"
+msgstr "Parcourir les partenaires"
+#: TWLight/templates/base.html:62
+msgid "Review applications"
+msgstr "Évaluer les demandes"
+#: TWLight/templates/base.html:69
+msgid "Send data to partners"
+msgstr "Envoyer des données à des partenaires"
+#: TWLight/templates/base.html:75
+msgid "Latest activity"
+msgstr "Modifications récentes"
+#: TWLight/templates/base.html:87
+msgid "Log out"
+msgstr "Se déconnecter"
+#: TWLight/templates/base.html:93 TWLight/templates/home.html:19
+msgid "Log in/sign up"
+msgstr "Se connecter / Créer un compte"
+#: TWLight/templates/base.html:118
+msgid "This is a template"
+msgstr "Ceci est un modèle"
+#: TWLight/templates/base.html:126
+msgid ""
+"The Wikipedia Library Card Platform is a project of The Wikipedia Library."
+msgstr "La carte de bibliothèque Wikipédia est un project de la bibliothèque Wikipédia."
+#. Translators: As in "about this site" - a menu link to the about page.
+#: TWLight/templates/base.html:139
+msgid "About"
+msgstr "A propos"
+#: TWLight/templates/base.html:144
+msgid "Privacy policy"
+msgstr "Politique de confidentialité"
+#: TWLight/templates/base.html:154
+msgid "Feedback"
+msgstr "Rétroaction"
+#: TWLight/templates/dashboard.html:16
+msgid "Total partners (all time)"
+msgstr "Partenaires (tout le temps)"
+#: TWLight/templates/dashboard.html:22
+msgid "See all partners"
+msgstr "Voir tous les partenaires"
+#: TWLight/templates/dashboard.html:38
+msgid "Number of editors (all time)"
+msgstr "Nombre d'utilisateurs (tout le temps)"
+#: TWLight/templates/dashboard.html:44
+msgid "Jump to user metrics"
+msgstr "Aller aux indicateurs d'utilisateurs"
+#: TWLight/templates/dashboard.html:66
+msgid "Jump to application metrics"
+msgstr "Aller aux mesures de demandes"
+#: TWLight/templates/dashboard.html:78
+msgid "Partners"
+msgstr "Partenaires"
+#: TWLight/templates/dashboard.html:84
+msgid "Number of partners over time"
+msgstr "Nombre de partenaires dans le temps"
+#: TWLight/templates/dashboard.html:93
+msgid "Editors"
+msgstr "Utilisateurs"
+#: TWLight/templates/dashboard.html:100
+msgid "Home wiki distribution"
+msgstr "Distribution par wiki principal"
+#: TWLight/templates/dashboard.html:131
+msgid "Home wiki distribution over time"
+msgstr "Distribution par wiki principal dans le temps"
+#: TWLight/templates/dashboard.html:143
+msgid "Applications"
+msgstr "Demandes"
+#: TWLight/templates/dashboard.html:145
+msgid "Applications by number of days until decision"
+msgstr "Demandes par nombre de jours avant la décision"
+#: TWLight/templates/dashboard.html:147
+msgid ""
+"\n"
+" The x axis is the number of days to make a final decision (either\n"
+" approved or denied) on an application. The y axis is the number "
+"of\n"
+" applications that have taken exactly that many days to decide.\n"
+""
+msgstr ""
+"\nL'axe x représent le nombre de jours pour prendre une décision finale (soit "
+"approuver ou refuser) sur une demande. L'axe y représent le nombre de "
+"demandes qui ont été décidé dans exactement ce nombre de jours.\n"
+""
+#: TWLight/templates/dashboard.html:155
+msgid "Median days until application decision, per month"
+msgstr "Délai médian en jours avant la décision, par mois"
+#: TWLight/templates/dashboard.html:157
+msgid ""
+"\n"
+" This shows the median number of days to reach a decision on the\n"
+" applications opened in a given month.\n"
+""
+msgstr ""
+"\nCela montre le nombre médian de jours pour évaluer les demandes ouvertes "
+"dans un mois donné\n"
+""
+#: TWLight/templates/dashboard.html:164
+msgid "Current application status distribution"
+msgstr "Distribution de l'état actuel des demandes"
+#: TWLight/templates/dashboard.html:166
+msgid ""
+"\n"
+" This graph includes all applications opened ever on this site.\n"
+""
+msgstr "\nCe graphe inclut toutes les demandes jamais ouvertes sur ce site\n"
+#: TWLight/templates/home.html:7
+msgid ""
+"\n"
+" Welcome to the Wikipedia Library Card Platform! Here you can apply for "
+"access to dozens of extensive research databases and other resources "
+"available through The Wikipedia Library. \n"
+""
+msgstr "\nBienvenue à la carte de bibliothèque Wikipédia! Ici, vous pouvez demander l'accès à des dizaines de ressources de recherche disponibles de la bibliothèque Wikipédia\n"
+#: TWLight/templates/home.html:15
+msgid "Learn more"
+msgstr "En savoir plus"
+#: TWLight/templates/registration/login.html:15
+msgid "Log in with your Wikipedia account"
+msgstr "Se connecter avec votre compte de Wikipédia"
+#: TWLight/templates/registration/password_change_form.html:10
+#: TWLight/users/templates/users/preferences.html:27
+msgid "Change password"
+msgstr "Modifier votre mot de passe"
+#: TWLight/templates/registration/password_reset_form.html:6
+#: TWLight/templates/registration/password_reset_form.html:14
+msgid "Reset password"
+msgstr "Réinitialiser votre mot de passe"
+#: TWLight/templates/registration/password_reset_form.html:8
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr "Mot de passe oublié? Entrez votre courriel ci-dessous, et nous vous enverrons"
+#: TWLight/users/authorization.py:268
+msgid ""
+"Your Wikipedia account does not meet the eligibility criteria in the terms "
+"of use, so your Wikipedia Library Card Platform account cannot be activated."
+msgstr "Votre compte Wikipédia ne répond pas aux critères d'admissibilité dans les conditions d'utilisation, alors votre carte de bibliothèque Wikipédia ne peut pas être activé."
+#: TWLight/users/authorization.py:273
+msgid ""
+"Either your Wikipedia Library Card Platform account has been deactivated or "
+"your Wikipedia account no longer meets the eligibility criteria in the terms "
+"of use, so you cannot be logged in."
+msgstr "Soit votre carte a été désactivé ou votre compte Wikipédia ne répond plus aux critères d'admissibilité dans les conditions d'utilisation, de sorte que vous ne pouvez pas vous connecter."
+#. Translators: this message is displayed to users with brand new accounts.
+#: TWLight/users/authorization.py:285
+msgid "Welcome! Please agree to the terms of use."
+msgstr "Bienvenue! S'il vous plaît accepter les conditions d'utilisation"
+#: TWLight/users/authorization.py:289
+msgid "Welcome back!"
+msgstr "Bon retour!"
+#: TWLight/users/forms.py:27
+msgid "Update profile"
+msgstr "Mettre à jour le profil"
+#: TWLight/users/forms.py:34
+msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
+msgstr "Décrivez vos contributions à Wikipédia: sujets édités, etc."
+#: TWLight/users/forms.py:60
+msgid "I agree with the terms of use"
+msgstr "Je suis d'accord avec les conditions d'utilisation"
+#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
+#: TWLight/users/forms.py:69
+msgid "I accept"
+msgstr "Je suis d'accord"
+#: TWLight/users/forms.py:85
+msgid "Log in"
+msgstr "Se connecter"
+#: TWLight/users/models.py:60
+msgid "Has this user agreed with the terms of use?"
+msgstr "Est-ce que cet utilisateur est d'accord avec les conditions d'utilisation?"
+#: TWLight/users/models.py:90
+msgid "When this information was last edited"
+msgstr "Quand cette information a été modifié en dernier"
+#: TWLight/users/models.py:92
+msgid "When this profile was first created"
+msgstr "Quand ce profil a été créé"
+#: TWLight/users/models.py:100
+msgid "Wikipedia edit count"
+msgstr "Nombre total de modifications"
+#: TWLight/users/models.py:101
+msgid "Date registered at Wikipedia"
+msgstr "Date d'inscription à Wikipédia"
+#: TWLight/users/models.py:102
+msgid "Wikipedia user ID"
+msgstr "ID utilisateur à Wikipédia"
+#: TWLight/users/models.py:107
+msgid "Wikipedia groups"
+msgstr "Membre des groupes à Wikipédia"
+#: TWLight/users/models.py:108
+msgid "Wikipedia user rights"
+msgstr "Droits d'accès à Wikipédia"
+#: TWLight/users/models.py:110
+msgid ""
+"At their last login, did this user meet the criteria set forth in the "
+"Wikipedia Library Card Platform terms of use?"
+msgstr "Lors de leur dernière connexion, est-ce que cet utilisateur répond aux critères énoncés dans les conditions d'utilisation?"
+#: TWLight/users/models.py:117
+msgid "Home wiki, as indicated by user"
+msgstr "Wiki principal, comme indiqué par l'utilisateur"
+#: TWLight/users/models.py:119
+msgid "Wiki contributions, as entered by user"
+msgstr "Contributions, comme indiqué par l'utilisateur"
+#. Translators: This is how we display wikipedia editors' names by default. e.g. "ThatAndromeda (en.wikipedia.org)".
+#: TWLight/users/models.py:283
+#, python-brace-format
+msgid "{wp_username} ({wiki})"
+msgstr "{wp_username} ({wiki})"
 #: TWLight/users/templates/users/editor_detail.html:8
-#, python-format msgid "Editor profile information for %(username)s" msgstr "Informations de profil pour %(username)s"
-#: TWLight/users/templates/users/editor_detail.html:11
-#, python-format msgid "" "\n" " Information with an * was harvested from Wikipedia directly.\n" " It was current as of %(account_created_date)s.\n" " Changes made on Wikipedia since that time have not been reflected " "here.\n" " " msgstr "" "\n" "Informations avec * a été récolté de Wikipédia directement. Il était à jour " "en date de %(account_created_date)s. Les modifications effectuées sur " "Wikipédia depuis ce temps n'a pas été pris en compte ici."
-#: TWLight/users/templates/users/editor_detail.html:18
-#, python-format msgid "" "\n" " Other information was entered directly by users or site admins,\n" " in their preferred language.\n" " It was last edited on %(last_updated_date)s.\n" " " msgstr "" "\n" "Autres informations a été ajouté directement par les utilisateurs ou les " "administrateurs du site, dans leur langue préférée. Il a été modifié en " "dernier le %(last_updated_date)s."
-#: TWLight/users/templates/users/editor_detail.html:25 msgid "Editor application history" msgstr "Historique des demandes"
-#: TWLight/users/templates/users/editor_detail.html:29 msgid "Start new application" msgstr "Commencer nouvelle demande"
-#: TWLight/users/templates/users/editor_detail.html:35 msgid "Editor data" msgstr "Données d'utilisateur"
-#: TWLight/users/templates/users/editor_detail.html:40 msgid "Please complete your profile." msgstr "S'il vous plaît compléter votre profil"
-#: TWLight/users/templates/users/editor_detail.html:53
-#, python-format msgid "" "\n" " %(username)s has coordinator privileges on this site.\n" " " msgstr "" "\n" "%(username)s a des privilèges de coordinateur sur ce site"
-#: TWLight/users/templates/users/editor_detail_data.html:5 msgid "Wikipedia username *" msgstr "Nom d'utilisateur dans Wikipédia*"
-#: TWLight/users/templates/users/editor_detail_data.html:16 msgid "Wikipedia user ID *" msgstr "ID utilisateur à Wikipédia*"
-#: TWLight/users/templates/users/editor_detail_data.html:36 msgid "Wikipedia edit count *" msgstr "Nombre total de modifications*"
-#: TWLight/users/templates/users/editor_detail_data.html:43 msgid "Date registered on Wikipedia *" msgstr "Date d'inscription à Wikipédia*"
-#: TWLight/users/templates/users/editor_detail_data.html:50 msgid "Contributions" msgstr "Contributions"
+#, python-format
+msgid "Editor profile information for %(username)s"
+msgstr "Informations de profil pour %(username)s"
+#: TWLight/users/templates/users/editor_detail.html:10
+msgid "Editor application history"
+msgstr "Historique des demandes"
+#: TWLight/users/templates/users/editor_detail.html:14
+msgid "Start new application"
+msgstr "Commencer nouvelle demande"
+#: TWLight/users/templates/users/editor_detail.html:20
+msgid "Editor data"
+msgstr "Données d'utilisateur"
+#: TWLight/users/templates/users/editor_detail.html:29
+#, python-format
+msgid ""
+"\n"
+" Information with an * was retrieved from Wikipedia directly.\n"
+" Other information was entered directly by users or site admins,\n"
+" in their preferred language.\n"
+" It was last updated on %(last_updated_date)s.\n"
+""
+msgstr "\nInformations avec * a été récupéré à partir de Wikipédia. Autres informations a été ajouté directement par les utilisateurs ou les "
+"administrateurs du site, dans leur langue préférée. Il a été modifié en "
+"dernier le %(last_updated_date)s.\n"
+#: TWLight/users/templates/users/editor_detail.html:41
+#, python-format
+msgid ""
+"\n"
+" %(username)s has coordinator privileges on this site.\n"
+""
+msgstr "\n%(username)s a des privilèges de coordinateur sur ce site\n"
+#: TWLight/users/templates/users/editor_detail_data.html:5
+msgid "Wikipedia username *"
+msgstr "Nom d'utilisateur dans Wikipédia *"
+#: TWLight/users/templates/users/editor_detail_data.html:11
+msgid "view Wikipedia user page"
+msgstr "Voir le page utilisateur à Wikipédia"
+#: TWLight/users/templates/users/editor_detail_data.html:28
+#: TWLight/users/templates/users/editor_detail_data.html:49
+msgid "(update)"
+msgstr "Actualiser"
+#: TWLight/users/templates/users/editor_detail_data.html:32
+msgid "view Wikipedia SUL info"
+msgstr "Voir l'info SUL"
+#: TWLight/users/templates/users/editor_detail_data.html:42
+msgid "Contributions"
+msgstr "Contributions"
+#: TWLight/users/templates/users/editor_detail_data.html:59
+msgid "Satisfies terms of use?"
+msgstr "Répond aux conditions d'utilisation?"
+#: TWLight/users/templates/users/editor_detail_data.html:61
+msgid ""
+"\n"
+" At their last login, did this user meet the criteria set forth in "
+"the\n"
+" terms of use (at least 500 edits, registered at least 6 months "
+"ago,\n"
+" has Special:Email User enabled, not blocked)?\n"
+""
+msgstr "\nLors de leur dernière connexion, est-ce que cet utilisateur répond aux critères énoncés dans les conditions d'utilisation (au moins 500 modifications, un compte actif depuis au moins 6 mois, Special:EmailUser autorisé, pas bloqué)\n"
+#: TWLight/users/templates/users/editor_detail_data.html:70
+msgid "Yes"
+msgstr "Oui"
+#: TWLight/users/templates/users/editor_detail_data.html:72
+msgid "No"
+msgstr "Non"
+#: TWLight/users/templates/users/editor_detail_data.html:74
+#, python-format
+msgid ""
+"\n"
+" %(username)s may still be eligible for access grants at the\n"
+" coordinators' discretion.\n"
+""
+msgstr "\n%(username)s peut encore être admissible à l'accès à la discrétion des coordonnateurs.\n"
+#: TWLight/users/templates/users/editor_detail_data.html:80
+msgid ""
+"\n"
+" In particular, editors who meet the criteria, but whose activity "
+"is\n"
+" spread across multiple wikis, may be erroneously marked as\n"
+" unqualified. The Library Card Platform only checks for home "
+"wiki\n"
+" activity.\n"
+""
+msgstr "\nEn particulier, les utilisateurs qui répondent aux critères, mais dont l'activité est répartie entre plusieurs wikis, peuvent être faussement marqués comme non qualifiés. Le système vérifie l'activité sur le wiki principal seulement.\n"
+#: TWLight/users/templates/users/editor_detail_data.html:95
+msgid "Wikipedia edit count *"
+msgstr "Nombre total de modifications*"
+#. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
+#: TWLight/users/templates/users/editor_detail_data.html:102
+msgid "(view latest edit statistics)"
+msgstr "(compteur d'éditions)"
+#. Translators: this links to a Tools page which lists all pages created by a given wikipedia editor.
+#: TWLight/users/templates/users/editor_detail_data.html:107
+msgid "(view pages created)"
+msgstr "(articles créés)"
+#: TWLight/users/templates/users/editor_detail_data.html:116
+msgid "Date registered on Wikipedia *"
+msgstr "Date d'inscription à Wikipédia*"
 #. Translators: The groups will be listed in English even if the site isn't English; we get them directly from Wikipedia.
-#: TWLight/users/templates/users/editor_detail_data.html:64 msgid "Wikipedia groups *" msgstr "Membre des groupes à Wikipédia"
+#: TWLight/users/templates/users/editor_detail_data.html:128
+msgid "Wikipedia groups *"
+msgstr "Membre des groupes à Wikipédia*"
 #. Translators: The rights will be listed in English even if the site isn't English; we get them directly from Wikipedia.
-#: TWLight/users/templates/users/editor_detail_data.html:76 msgid "Wikipedia user rights *" msgstr "Droits d'accès à Wikipédia*"
-#: TWLight/users/templates/users/editor_detail_data.html:88 msgid "Email *" msgstr "Courriel*"
-#: TWLight/users/templates/users/editor_detail_data.html:93 msgid "" "\n" " Your email is visible only to you and site administrators, not to\n" " volunteer Wikipedia Library coordinators.\n" " " msgstr "" "\n" "Votre courriel est visible seulement pour vous et les administrateurs du " "site, pas pour les coordonnateurs bénévoles la Bibliothèque Wikipédia"
+#: TWLight/users/templates/users/editor_detail_data.html:144
+msgid "Wikipedia user rights *"
+msgstr "Droits d'accès à Wikipédia*"
+#: TWLight/users/templates/users/editor_detail_data.html:159
+msgid "Wikipedia user ID *"
+msgstr "ID utilisateur à Wikipédia*"
+#: TWLight/users/templates/users/editor_detail_data.html:174
+msgid ""
+"The following information is visible only to you, site administrators, and "
+"(where required) publishing partners. It is not visible to volunteer "
+"Wikipedia Library coordinators."
+msgstr "Cette information est visible seulement pour vous et les administrateurs du "
+"site (et lorsque cela est nécessaire pour des partenaires), pas pour les coordonnateurs bénévoles de la bibliothèque Wikipédia"
+#: TWLight/users/templates/users/editor_detail_data.html:182
+#, python-format
+msgid ""
+"You may update or delete your data at any "
+"time."
+msgstr "Vous pouvez mettre à jour ou supprimer vos données à tout moment"
+#: TWLight/users/templates/users/editor_detail_data.html:192
+msgid "Email *"
+msgstr "Courriel*"
+#: TWLight/users/templates/users/editor_detail_data.html:197
+msgid "This will be automatically updated from Wikipedia."
+msgstr "Ce sera automatiquement mis à jour à partir de Wikipédia"
+#: TWLight/users/templates/users/editor_detail_data.html:206
+msgid "Real name"
+msgstr "Prénom et nom de famille"
+#: TWLight/users/templates/users/editor_detail_data.html:217
+msgid "Country of residence"
+msgstr "Pays de résidence"
+#: TWLight/users/templates/users/editor_detail_data.html:228
+msgid "Occupation"
+msgstr "Profession"
+#: TWLight/users/templates/users/editor_detail_data.html:239
+msgid "Institutional affiliation"
+msgstr "Affiliation institutionnelle"
+#: TWLight/users/templates/users/language_form.html:25
+msgid "Set language"
+msgstr "Régler langue"
+#: TWLight/users/templates/users/preferences.html:8
+msgid "Language"
+msgstr "Langage"
+#: TWLight/users/templates/users/preferences.html:20
+msgid "Password"
+msgstr "Mot de passe"
+#. Translators: use the date *when you are translating*, in a language-appropriate format.
+#: TWLight/users/templates/users/terms.html:19
+msgid "Last updated 8 August 2016"
+msgstr "Dernière mise à jour le 23 octobre 2016"
+#: TWLight/users/templates/users/terms.html:21
+msgid ""
+"Welcome to the Wikipedia Library Card Terms of Use and Privacy Statement!"
+msgstr "Bienvenue aux conditions d'utilisation et politique de confidentialité pour la carte de bibliothèque Wikipédia!"
+#: TWLight/users/templates/users/terms.html:29
+msgid ""
+"The Wikipedia Library is an open research hub, through which active "
+"Wikipedia editors can gain both access to the vital reliable sources needed "
+"for their work and support in using those resources to improve the "
+"encyclopedia. We have partnered with publishers around the world to allow "
+"users to freely access otherwise paywalled resources. This platform allows "
+"users to apply simultaneously for access to multiple publishers, and makes "
+"the administration of Wikipedia Library accounts easy and efficient."
+msgstr "La bibliothèque Wikipédia est un centre de recherche ouvert, à travers laquelle les utilisateurs Wikipédia actifs peuvent accéder aux sources fiables nécessaires pour leur travail et obtenir de l'aide dans l'utilisation de ces ressources pour améliorer l'encyclopédie. Nous avons établi un partenariat avec des organisations du monde entier pour permettre aux utilisateurs d'accéder aux ressources paywalled gratuitement. Ce système permet aux utilisateurs de demander simultanément l'accès aux ressources multiples, et rend l'administration des comptes simple et efficace."
+#: TWLight/users/templates/users/terms.html:35
+msgid ""
+"These terms pertain to your application for access to Wikipedia Library "
+"resources, and your use of those resources. They also describe our handling "
+"of the information you provide to us in order to create and administer your "
+"Wikipedia Library account. The Wikipedia Library system is evolving, and "
+"over time we may update these terms due to changes in the technology. We "
+"recommend that you review the terms from time to time. If we make "
+"substantial changes to the terms, we will send a notification email to "
+"Wikipedia Library users."
+msgstr "Ces termes se rapportent à votre demande d'accès aux ressources disponibles à travers la bibliothèque Wikipédia, et votre utilisation de ces ressources. Ils décrivent également notre façon de traiter les informations que vous nous fournissez afin de créer et de gérer votre compte. Le système est en évolution, et au fil du temps nous pouvons mettre à jour ces termes en raison de changements dans la technologie. Nous vous recommandons d'examiner les conditions de temps à autre. Si nous apportons des modifications substantielles aux termes, nous vous enverrons un courriel de notification."
+#: TWLight/users/templates/users/terms.html:40
+msgid "Requirements for a Wikipedia Library Card Account"
+msgstr "Exigences pour obtenir un compte"
+#: TWLight/users/templates/users/terms.html:43
+msgid ""
+"As a preliminary note, Wikipedia Library accounts are reserved for community "
+"members who have demonstrated their commitment to the Wikimedia projects, "
+"and will use their access to these resources to improve project content. To "
+"that end, in order to be eligible for the Wikipedia Library program, we "
+"require that you be registered for a user account on the projects. We "
+"generally give preference to users with at least 500 edits and six (6) "
+"months of activity, but these are not strict requirements. You must have the "
+"Special:EmailUser feature enabled on at least one version of Wikipedia, and "
+"you will identify that as your \"home\" wiki when you create an account. We "
+"ask that you do not request access to any publishers whose resources you can "
+"already access for free through your local library or university, or another "
+"institution or organization, in order to provide that opportunity to others."
+msgstr "Les comptes disponibles de la bibliothèque Wikipédia sont réservés aux membres de la communauté qui ont démontré leur engagement envers les projets Wikimedia et qui utiliseront leur accès à ces ressources pour améliorer le contenu du projet. À cette fin, afin d'être admissible au programme, nous avons besoin que vous avez un compte utilisateur enregistré sur les projets. Nous donnons généralement la préférence aux utilisateurs avec au moins 500 modifications et six (6) mois d'activité, mais ce ne sont pas des exigences strictes. Vous devez avoir le fonction Special:EmailUser activé sur au moins une version de Wikipédia, et vous identifier cette version comme votre wiki \"principal\" lorsque vous créez un compte dans ce système. Nous demandons que vous ne demandez pas accès à tous les ressources que vous pouvez déjà accéder gratuitement dans votre bibliothèque ou université, ou d'une autre institution ou organisation, afin d'offrir cette possibilité à d'autres."
+#: TWLight/users/templates/users/terms.html:49
+msgid ""
+"Additionally, if you are currently blocked or banned from a Wikimedia "
+"project, you may be rejected when you apply for a Wikipedia Library account. "
+"If you obtain a Wikipedia Library account, but a long-term block or ban is "
+"subsequently instituted against you on one of the projects, you may lose "
+"access to your Wikipedia Library account."
+msgstr "En outre, si vous êtes actuellement bloqué ou banni d'un projet Wikimédia, vous pouvez être rejeté lorsque vous appliquez pour un compte ici. "" Si vous obtenez un compte, mais un bloc à long terme ou bannissement est ensuite intentée contre vous sur l'un des projets, vous risquez de perdre votre accès."
+#: TWLight/users/templates/users/terms.html:55
+msgid ""
+"Wikipedia Library Card accounts do not expire. However, access to an "
+"individual publisher’s resources will generally lapse after one year, after "
+"which you may apply for renewal. We will try to notify you in advance of "
+"your account’s expiration, or may be able auto-renew if accounts are "
+"available."
+msgstr "Votre carte de bibliothèque Wikipédia n'expirent pas. Cependant, l'accès à un ressource individuelle sera généralement fin après un an, après que vous pouvez demander le renouvellement. Nous allons essayer de vous avertir à l'avance de "" expiration de votre accès, ou peut-être le renouveler automatiquement si les comptes sont disponibles."
+#: TWLight/users/templates/users/terms.html:60
+msgid "Applying for Your Wikipedia Library Card Account"
+msgstr "Demander une carte de bibliothèque Wikipédia"
+#: TWLight/users/templates/users/terms.html:63
+msgid ""
+"In order to apply for a Wikipedia Library Card account, you must provide us "
+"with certain information, which we will use to evaluate your application. If "
+"your application is approved, we may transfer the information you have given "
+"us to the publishers whose resources you wish to access. The publisher will "
+"then create a free account for you. In most cases, they will contact you "
+"with the account information directly, although sometimes we will send "
+"access information to you ourselves."
+msgstr "Pour demander une carte de bibliothèque Wikipédia, vous devez nous fournir certaines informations, que nous allons utiliser pour évaluer votre demande. Si votre demande est approuvée, nous pouvons transférer les informations que vous avez donné aux organisations dont les ressources que vous souhaitez accéder. Ils vont créer un compte gratuit pour vous. Dans la plupart des cas, ils vous contacter avec les informations de compte directement, bien que parfois nous envoyer des informations d'accès à vous."
+#: TWLight/users/templates/users/terms.html:70
+#, python-format
+msgid ""
+"Each publisher who is a member of the Wikipedia Library program requires "
+"different specific information in the application. Some publishers may "
+"request only an email address, while others request more detailed data, such "
+"as your name, location, occupation, or institutional affiliation. When you "
+"complete your application, you will only be asked to supply information "
+"required by the publishers you have chosen, and each publisher will only "
+"receive the information they require. Please see our partner information pages to learn what "
+"information is required by each publisher to gain access to their resources."
+msgstr "Chaque partenaire a besoin d'informations différentes. Certains peuvent demander seulement un courriel, tandis que d'autres demandent des données plus détaillées, telles que votre nom, votre pays de résidence, profession, ou l'affiliation institutionnelle. Lorsque vous remplissez votre demande, vous ne serez invité à fournir les informations requises par les partenaires que vous avez choisi, et chaque partenaire ne recevrez les informations dont ils ont besoin. S'il vous plaît voir nos pages d'information partenaires pour apprendre quelle information est requise par chaque partenaire pour avoir accès à leurs ressources."
+#: TWLight/users/templates/users/terms.html:76
+msgid ""
+"In addition to the basic information you provide to us, our system will "
+"retrieve some information directly from the Wikimedia projects: your "
+"username, email address, edit count, registration date, user ID number, "
+"groups to which you belong, and any special user rights. Each time you log "
+"in to the Wikipedia Library Card Platform, this information will be "
+"automatically updated."
+msgstr "Outre les informations de base que vous nous fournissez, notre système permet de récupérer des informations directement des projets Wikimédia: votre nom d'utilisateur, courriel, nombre de modifications, la date d'enregistrement, le numéro ID d'utilisateur, les groupes auxquels vous appartenez, et tous vos droits d'utilisateur. Chaque fois que vous vous connectez au système, cette information sera automatiquement mis à jour."
+#: TWLight/users/templates/users/terms.html:82
+msgid ""
+"The information you provide when creating your account will be visible to "
+"you while on the site but not to other users unless they are approved "
+"Coordinators, WMF Staff, or WMF Contractors under a non-disclosure agreement "
+"(NDA), and who are working with the Wikipedia Library. The following "
+"limited information that you provide is public to all users by default: 1) "
+"when you created a Wikipedia Library Card account; 2) which publishers’ "
+"resources you have applied to access; 3) your brief description of your "
+"rationale for accessing the resources of each partner to which you apply. "
+"Editors who do not wish to make this information public may email the "
+"required information to WMF Staff to request and receive access privately."
+msgstr "Les informations que vous fournissez lors de la création de votre compte sera visible à vous, mais pas à d'autres utilisateurs à moins qu'ils sont les coordonnateurs, le personnel du WMF, ou contracteurs de WMF avec un accord de non-divulgation, et qui travaillent avec la bibliothèque Wikipedia. L'information suivante est publique à tous les utilisateurs par défaut: 1) lorsque vous avez créé une carte de bibliothèque Wikipédia; 2) les ressources auxquelles vous avez demandé l'accès; 3) la description de votre raison d'accéder aux ressources de chaque partenaire pour lequel vous postulez. Editors qui ne souhaitent pas rendre cette information publique peuvent envoyer un courriel contenant les informations nécessaires au personnel du WMF pour demander et recevoir accès."
+#: TWLight/users/templates/users/terms.html:88
+msgid ""
+"We will ask you to identify your home wiki (or any Wikipedia version where "
+"you have enabled email), and finally to provide us with some information "
+"about your history of contributions to the Wikimedia projects. Information "
+"on contribution history is optional, but will greatly assist us in "
+"evaluating your application."
+msgstr "Nous vous demanderons d'identifier votre wiki principale (ou une version de Wikipédia où vous avez activé votre courriel), et enfin de nous fournir des informations au sujet de vos contributions aux projets Wikimedia. Ce dernier est facultatif, mais nous aidera grandement dans l'évaluation de votre application."
+#: TWLight/users/templates/users/terms.html:93
+msgid "Data Retention and Handling"
+msgstr "La conservation et le traitement de l'information "
+#: TWLight/users/templates/users/terms.html:97
+#, python-format
+msgid ""
+"In order to administer the Wikipedia Library program, we will retain the "
+"data we collect indefinitely, unless you delete your account, as described "
+"below. You can log in and go to your profile "
+"page in order to see the information associated with your account. You "
+"may update this information at any time, except for the information that is "
+"automatically retrieved from the projects."
+msgstr "Afin d'administrer le programme, nous conserverons les données que nous recueillons indéfiniment, sauf si vous supprimez votre compte, tel que décrit ci-dessous. Vous pouvez vous connecter et accédez à votre page de profil afin de voir les informations associées à votre compte. Vous pouvez mettre à jour ces informations à tout moment, sauf pour les informations qui sont automatiquement extraites des projets."
+#: TWLight/users/templates/users/terms.html:103
+#, python-format
+msgid ""
+"If you decide to disable your Wikipedia Library account, you may email us at "
+"wikipedialibrary@wikimedia.org in "
+"order to request the deletion of certain personal information associated "
+"with your account. We will delete your real name, occupation, institutional "
+"affiliation, and country of residence. Please note that the system will "
+"retain a record of your username, the publishers to which you applied or had "
+"access, and the dates of that access. If you request the deletion of account "
+"information and later wish to apply for a new account, you will need to "
+"provide the necessary information again."
+msgstr "Si vous décidez de désactiver votre compte, vous pouvez nous envoyer un courriel à wikipedialibrary@wikimedia.org afin de demander la suppression de certaines informations personnelles associées à votre compte. Nous allons supprimer votre nom, profession, affiliation institutionnelle, et pays de résidence. Le système conserve un enregistrement de votre nom d'utilisateur, les ressources que vous demander ou ont eu accès, et les dates de cet accès. Si vous demandez la suppression d'informations de compte et plus tard souhaitez un nouveau compte, vous devrez fournir à nouveau les informations nécessaires."
+#: TWLight/users/templates/users/terms.html:111
+msgid ""
+"The Wikipedia Library is run by Wikimedia Foundation Staff, Contractors, and "
+"approved volunteer Coordinators who may have access to your information. The "
+"data associated with your account will be shared with the Wikimedia staff, "
+"contractors, service providers, and volunteer Coordinators who need to "
+"process the information, and who are subject to non-disclosure obligations. "
+"Otherwise, the Wikimedia Foundation will only share your information with "
+"the publishers whom you specifically select, with the exception of the "
+"circumstances described below."
+msgstr "La bibliothèque Wikipedia est gérée par personnel our contracteurs du WMF, et des coordonnateurs bénévoles qui peuvent avoir accès à vos informations. Vos informations sera partagée avec les personnel, contracteurs et bénévoles qui l'ont besoin et qui ont un accord de non-divulgation avec WMF. Dans le cas contraire, la Wikimedia Foundation ne partager vos informations avec les partenaires que vous sélectionnez spécifiquement, à l'exception des circonstances décrites ci-dessous."
+#: TWLight/users/templates/users/terms.html:117
+msgid ""
+"We may disclose any collected information when required by law, when we have "
+"your permission, when needed to protect our rights, privacy, safety, users, "
+"or the general public, and when necessary to enforce these terms, our "
+"general Terms of Use, or any other Wikimedia policy."
+msgstr "Nous pouvons divulguer vos informations pour obéir à un ordre judiciaire ou administratif, si vous y consentez, pour protéger notre organisation, notre infrastructure, nos employés, nos utilisateurs ou le public, et pour renforcer ou enquêter sur les violations potentielles des politiques de ce site ou la Fondation."
+#: TWLight/users/templates/users/terms.html:123
+msgid ""
+"Please note that these terms do not control the use and handling of your "
+"data by the publishers whose resources you access. Please read their "
+"individual privacy policies for that information."
+msgstr "Ces terms ne contrôlent pas l'utilisation de vos données par les partenaires dont les ressources dont vous avez accès. S'il vous plaît lire leurs politiques de confidentialité individuelles pour cette information."
+#: TWLight/users/templates/users/terms.html:128
+msgid "Your Use of Publisher Resources"
+msgstr "Votre utilisation des ressources de partenaires"
+#: TWLight/users/templates/users/terms.html:131
+msgid ""
+"Please note that in order to access an individual publisher’s resources, you "
+"agree to that publisher’s terms of use and privacy policy. Additionally, "
+"your access to publisher resources through the Wikipedia Library is "
+"accompanied by the following terms."
+msgstr "Pour accéder à des ressources d'un partenaire particulier, vous acceptez les conditions d'utilisation et politique de confidentialité de ce partenaire. En outre, l'accès aux ressources via la bibliothèque Wikipédia est accompagné par les termes suivants."
+#: TWLight/users/templates/users/terms.html:137
+msgid ""
+"Your access allows you to search, view, retrieve and display portions of "
+"restricted content (that is, content that requires an account to access) "
+"from publishers; to electronically save portions of restricted content; and "
+"to print out single copies of portions of restricted content."
+msgstr "Les utilisateurs peuvent rechercher, voir, récupérer et afficher des portions de contenu à accès restreint (contenu qui nécessite un compte d'accès) ; enregistrer électroniquement des portions de contenu à accès restreint; et imprimer un exemplaire des portions de contenu à accès restreint"
+#: TWLight/users/templates/users/terms.html:143
+msgid ""
+"You must agree not to share your usernames and passwords for access to "
+"publisher resources with others."
+msgstr "Vous devez accepter de ne pas partager vos noms d'utilisateur et mots de passe pour l'accès aux ressources des partenaires avec les autres."
+#: TWLight/users/templates/users/terms.html:149
+msgid ""
+"Your access to publisher resources does not allow you to mass scrape or mass "
+"download restricted content from publishers; to systematically make printed "
+"or electronic copies of multiple extracts of restricted content available "
+"for any purpose; to data mine metadata without permission, in order to use "
+"metadata for auto-created stub articles, for example; or to use the access "
+"you receive through the Wikipedia Library for profit by selling access to "
+"your account or resources to which you have through it."
+msgstr "Les utilisateurs ne peuvent pas soutirer ou télécharger en masse des portions de contenu à accès restreint ; faire systématiquement des copies imprimées ou électroniques de plusieurs extraits de contenu restreint pour d'autres buts ; fouiller des métadonnées sans permission, par exemple pour la création automatique d'ébauches; ou vendre leur accès ou les ressources récupérer avec leur accès."
+#: TWLight/users/templates/users/terms.html:158
+msgid ""
+"The Wikimedia Foundation is a nonprofit organization based in San Francisco, "
+"California. The Wikipedia Library program provides access to resources held "
+"by publishers in multiple countries. By applying for a Wikipedia Library "
+"account (whether you are inside or outside of the United States), you agree "
+"to the collection, transfer, storage, processing, disclosure, and other uses "
+"of the collected information in the United States and other places as may be "
+"necessary to carry out the purposes and objectives discussed above. You also "
+"consent to the transfer of your information by us from the U.S. to other "
+"countries, which may have different or less stringent data protection laws "
+"than your country, in connection with providing services to you, including "
+"evaluating your application and securing access to your chosen publishers."
+msgstr "La Wikimedia Foundation est une association à but non lucratif situé à San Francisco, California. La bibliothèque Wikipédia donne accès aux ressources détenues par les organisations dans plusieurs pays. En demandant un compte (si vous êtes à l'intérieur ou à l'extérieur des États-Unis), vous consentez à la collecte, le transfert, le stockage, le traitement, la communication, et d'autres utilisations de l'information recueillie dans les États-Unis et d'autres endroits que peut être nécessaire pour réaliser les buts et objectifs décrits ci-dessus. Vous consentez également au transfert de vos informations par nous des États-Unis à d'autres pays, ce qui peut avoir des lois différentes ou moins strictes de protection des données, dans le cadre de la fourniture de services pour vous, y compris l'évaluation de votre demande et assurer l'accès à votre choix de ressource."
+#: TWLight/users/templates/users/terms.html:166
+msgid ""
+"Please note that in the event of any differences in meaning or "
+"interpretation between the original English version of these terms and a "
+"translation, the original English version takes precedence."
+msgstr "Nous espérons que les traductions des présentes sont exactes, cependant, dans le cas de différences éventuelles entre le sens de la version anglaise originale et sa traduction, la version anglaise originale prévaudra."
+#: TWLight/users/templates/users/terms.html:173
+msgid "Thank you!"
+msgstr "Merci!"
+#: TWLight/users/templates/users/terms.html:176
+msgid "The Wikipedia Library Team"
+msgstr "L'équipe de la bibliothèque Wikipédia"
+#: TWLight/users/templates/users/terms.html:182
+msgid ""
+"By checking this box and clicking “I Accept”, you consent to the above "
+"privacy statement and terms, and agree to adhere to them in your application "
+"to and use of the The Wikipedia Library, and the publishers’ services to "
+"which you gain access through The Wikipedia Library program."
+msgstr "En cochant cette case et cliquant sur \"J'accepte\", vous acceptez les conditions d'utilisation et politique de confidentialité, et vous vous engagez à les respecter dans votre application et l'utilisation de la bibliothèque Wikipedia, et les services des partenaires auxquels vous avez accès par le biais du programme."
 #. Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
 #.
 #: TWLight/users/templates/users/user_detail.html:9
-#, python-format msgid "" "\n" " Hi, %(username)s! You don't have a Wikipedia editor profile attached\n" " to your account here, so you are probably a site administrator.\n" " " msgstr "" "\n" "Bonjour, %(username)s! Vous n'avez pas de compte Wikipédia attaché à votre " "compte ici, alors vous êtes probablement un administrateur du site"
-#: TWLight/users/templates/users/user_detail.html:16 msgid "" "\n" " If you aren't a site administrator, something weird has happened. You\n" " won't be able to apply for access to protected resources without a\n" " Wikipedia editor profile. Unless you know there's a good reason why " "your\n" " account doesn't have an editor attached (e.g. you are a site\n" " administrator), you should log out and create a new account by logging " "in\n" " via OAuth, or contact a site administrator for help.\n" " " msgstr "" "\n" "Si vous n'êtes pas un administrateur du site, quelque chose de bizarre a eu " "lieu. Vous ne serez pas en mesure de demander l'accès aux ressources " "protégées sans un nom d'utilisateur. Sauf si vous savez qu'il y a une bonne " "raison pour laquelle votre compte n'a pas de nom d'utilisateur attaché (par " "exemple, vous êtes un administrateur du site), vous devez vous déconnecter " "et créer un nouveau compte en vous connectant via OAuth, ou contacter un " "administrateur du site pour demander de l'aide"
-#: durationfield/db/models/fields/duration.py:23 msgid "A duration of time" msgstr "une durée de temps"
-#: durationfield/db/models/fields/duration.py:26 msgid "This value must be in \"w d h min s ms us\" format." msgstr "Cette valeur doit être au format \"s j h min s ms us\""
-#: durationfield/db/models/fields/duration.py:27 msgid "The value's type could not be converted" msgstr "Le type de valeur ne peut pas être convertie"
-#: durationfield/forms/fields.py:13 msgid "Enter a valid duration." msgstr "Entrez une durée valide"
-#~ msgid ""
-#~ "\n"
-#~ " Last reviewed by %(reviewer)s on %(review_date)s\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Dernier évalué par %(reviewer)s le %(review_date)s\n" 
+#, python-format
+msgid ""
+"\n"
+" Hi, %(username)s! You don't have a Wikipedia editor profile attached\n"
+" to your account here, so you are probably a site administrator.\n"
+""
+msgstr ""
+"\nBonjour, %(username)s! Vous n'avez pas de compte Wikipédia attaché à votre "
+"compte ici, alors vous êtes probablement un administrateur du site.\n"
+""
+#: TWLight/users/templates/users/user_detail.html:16
+msgid ""
+"\n"
+" If you aren't a site administrator, something weird has happened. You\n"
+" won't be able to apply for access to protected resources without a\n"
+" Wikipedia editor profile. Unless you know there's a good reason why "
+"your\n"
+" account doesn't have an editor attached (e.g. you are a site\n"
+" administrator), you should log out and create a new account by logging "
+"in\n"
+" via OAuth, or contact a site administrator for help.\n"
+""
+msgstr ""
+"\nSi vous n'êtes pas un administrateur du site, quelque chose de bizarre a eu "
+"lieu. Vous ne serez pas en mesure de demander l'accès aux ressources "
+"protégées sans un nom d'utilisateur. Sauf si vous savez qu'il y a une bonne "
+"raison pour laquelle votre compte n'a pas de nom d'utilisateur attaché (par "
+"exemple, vous êtes un administrateur du site), vous devez vous déconnecter "
+"et créer un nouveau compte en vous connectant via OAuth, ou contacter un "
+"administrateur du site pour demander de l'aide\n"
+""
+#: TWLight/users/views.py:66
+msgid ""
+"Please update your contributions to Wikipedia (below) to help coordinators "
+"evaluate your applications."
+msgstr "S'il vous plaît mettre à jour vos contributions (ci-dessous) pour aider les coordonnateurs évaluent votre demande."
+#: TWLight/users/views.py:159
+msgid "Update information"
+msgstr "Mettre à jour"
+#: TWLight/users/views.py:170
+msgid "Your information has been updated."
+msgstr "Vos informations ont été mis à jour."
+#: TWLight/users/views.py:200
+msgid "Update email"
+msgstr "Mettre à jour votre courriel"
+#: TWLight/users/views.py:211
+#, python-brace-format
+msgid "Your email has been changed to {email}."
+msgstr "Votre courriel a été changé à {email}."
+#: TWLight/users/views.py:316
+msgid ""
+"You may explore the site, but you will not be able to apply for access to "
+"materials or evaluate applications unless you agree with the terms of use."
+msgstr "Vous pouvez explorer le site, mais vous ne serez pas en mesure de demander l'accès aux ressources ou évaluer les demandes, sauf si vous êtes d'accord avec les conditions d'utilisation."
+#: TWLight/users/views.py:320
+msgid ""
+"You may explore the site, but you will not be able to apply for access to "
+"materials unless you agree with the terms of use."
+msgstr "Vous pouvez explorer le site, mais vous ne serez pas en mesure de demander l'accès aux ressources, sauf si vous êtes d'accord avec les conditions d'utilisation."
+#: TWLight/views.py:47
+#, python-brace-format
+msgid "{username} signed up for a Wikipedia Library Card Platform account"
+msgstr "{username} a enregistré une carte de bibliothèque Wikipédia"
+#: TWLight/views.py:59
+#, python-brace-format
+msgid "{partner} joined the Wikipedia Library "
+msgstr "{partner} a rejoint la bibliothèque Wikipédia"
+#: TWLight/views.py:73
+#, python-brace-format
+msgid ""
+"{username} applied for access to {partner}\n"
+"\n"
+"   {rationale}\n"
+""
+msgstr "{username} a demandé l'accès à {partner}\n{rationale}\n"
+#: TWLight/views.py:82
+#, python-brace-format
+msgid "{username} applied for access to {partner}"
+msgstr "{username} a demandé l'accès à {partner}"
+#: TWLight/views.py:101
+#, python-brace-format
+msgid "{username} received access to {partner}"
+msgstr "{username} a reçu l'accès à {partner}" 

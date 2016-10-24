@@ -47,8 +47,24 @@ You can fix them manually. You can also improve your code to make them less like
 * Use `blocktrans trimmed`, not just `blocktrans`
 * Format multiline strings in .py files in ways that do not have leading or terminating newlines
 
-You should also ensure your translators know that they need to preserve whitespace (including whitespace-only lines), and that `\n` is a whitespace character.
+You should also ensure your translators know that they need to preserve whitespace (including whitespace-only lines); that `\n` is a newline character; that they DO have to preserve any `\n`s at the beginning and end of the string; that they DON'T have to preserve any of the others - they can use them if the spirit of the original expects carriage returns, but they don't have to.
 
 ### `CommandError: The /path/to/django.po file has a BOM (Byte Order Mark). Django only supports .po files encoded in UTF-8 and without any BOM.` ?
 
 Remove the BOM. Techniques vary. See, e.g., https://stackoverflow.com/questions/1068650/using-awk-to-remove-the-byte-order-mark (command line) or http://blog.toshredsyousay.com/post/27543408832/how-to-add-or-remove-a-byte-order-mark (Sublime Text).
+
+### "keyword $foo unknown" errors?
+Make sure that any quotation marks inside of your msgstrs are escaped (`\"`, not `"`).
+
+### Syntax errors pertaining to a multiline string?
+
+Your multiline strings should be formatted thus:
+
+```""
+"substring 1"
+"substring 2, which has a newline at the end\n"
+"substring 3"
+""
+```
+
+Note the double quotes at the beginning and end, the single quotes around each string, and the `\n` newline character where needed.
