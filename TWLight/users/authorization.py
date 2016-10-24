@@ -52,10 +52,18 @@ def rehydrate_token(token):
 class OAuthBackend(object):
 
     def _get_language_code(self, identity):
+        logger.info('Getting language code...')
         home_wiki_url = identity['iss']
         extractor = re.match(r'(https://)?(\w+).wikipedia.org', home_wiki_url)
         language_code = extractor.group(2)
-        assert language_code in WIKI_DICT
+        try:
+            assert language_code in WIKI_DICT
+        except AssertionError:
+            logger.exception('Could not find code {lang} in WIKI_DICT; '
+                'exiting'.format(lang=language_code))
+            raise
+
+        logger.info('Language code was {lang}.'.format(lang=language_code))
 
         return language_code
 
@@ -88,9 +96,11 @@ class OAuthBackend(object):
         # Since we are not providing a password argument, this will call
         # set_unusable_password, which is exactly what we want; users created
         # via OAuth should only be allowed to log in via OAuth.
+        logger.info('Creating user {username}'.format(username=username))
         user = User.objects.create_user(username=username, email=email)
 
         # ------------------------- Create the editor --------------------------
+        logger.info('Creating editor for {username}'.format(username=username))
         editor = Editor()
 
         editor.user = user
@@ -98,6 +108,7 @@ class OAuthBackend(object):
         editor.home_wiki = language_code
         editor.update_from_wikipedia(identity) # This call also saves the editor
 
+        logger.info('User and editor successfully created.')
         return user, editor
 
 
@@ -141,11 +152,15 @@ class OAuthBackend(object):
                     username=identity['username']))
             raise
 
+        logger.info('User and editor created/updated after OAuth login.')
         return user, created
 
 
     def authenticate(self, request=None, access_token=None, handshaker=None):
+        logger.info('Authenticating user...')
         if not request or not access_token or not handshaker:
+            logger.info('Missing OAuth authentication elements; falling back'
+                'to another authentication method.')
             # You must have meant to use a different authentication backend.
             # Returning None will make Django keep going down its list of
             # options.
@@ -154,12 +169,14 @@ class OAuthBackend(object):
         try:
             assert isinstance(access_token, AccessToken)
         except AssertionError:
+            logger.exception('Did not have a properly formed AccessToken')
             return None
 
         # Get identifying information about the user. This doubles as a way
         # to authenticate the access token, which only Wikimedia can do,
         # and thereby to authenticate the user (which is hard for us to do as
         # we have no password.)
+        logger.info('Identifying user...')
         try:
             identity = handshaker.identify(access_token)
         except:
@@ -168,21 +185,26 @@ class OAuthBackend(object):
             raise PermissionDenied
 
         # Get or create the user.
+        logger.info('User has been identified; getting or creating user.')
         user, created = self._get_and_update_user_from_identity(identity)
 
         if created:
+            logger.info('User {user} has been created.'.format(user=user))
             base_url = re.search(r'\w+.wikipedia.org',
                                  handshaker.mw_uri).group(0)
             try:
                 # It's actually a wiki, right?
                 assert base_url in WIKI_DICT.values()
                 user.editor.home_wiki = base_url
+                user.editor.save()
             except AssertionError:
                 # Site functionality mostly works if people don't
                 # declare a homewiki. There are some broken bits, like the SUL
                 # link, but users can set their homewiki, or admins can do it
                 # in the admin interface.
                 pass
+        else:
+            logger.info('User {user} has been updated.'.format(user=user))
 
         request.session['user_created'] = created
 
