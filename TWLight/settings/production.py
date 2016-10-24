@@ -8,12 +8,27 @@ Settings file intended for use in production, on WMF servers.  This file:
 """
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+from __future__ import print_function
+import sys
 
 from .base import *
-from .production_vars import (SECRET_KEY,
-                              CONSUMER_KEY,
-                              CONSUMER_SECRET,
-                              MYSQL_PASSWORD)
+try:
+    from .production_vars import (SECRET_KEY,
+                                  CONSUMER_KEY,
+                                  CONSUMER_SECRET,
+                                  MYSQL_PASSWORD)
+except ImportError:
+    # If there's no production_vars file on this system (e.g. because it isn't
+    # a production system), this import will fail, which can cause things
+    # to fail (notably makemigrations).
+    print('Cannot import from TWLight/settings/production_vars.py',
+          'This is fine if you are not on a production system, as long as your '
+          'settings file is something other than TWLight/settings/production, '
+          'but it will cause the app to fail if you are trying to use '
+          'production settings.',
+          file=sys.stderr)
+    raise
+
 
 ALLOWED_HOSTS = ['twlight-test.wmflabs.org',
                  'twl-test.wmflabs.org',
