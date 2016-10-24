@@ -64,16 +64,17 @@ def send_comment_notification_emails(sender, **kwargs):
     if 'request' in kwargs:
         # This is the expected case; the comment_was_posted signal should send
         # this.
-        logger.info('request was in kwargs')
         request = kwargs['request']
-        base_url = get_current_site(request).domain
-        logger.info('base_url is %s' % base_url)
-        app_url = urljoin(base_url, app.get_absolute_url())
-        logger.info('app_url is %s' % app_url)
     else:
-        # Hopefully adequate default (only has path, not base URL)
-        app_url = app.get_absolute_url()
-        logger.info('request not in kwargs; app_url is %s' % app_url)
+        # But if there's no request somehow, get_current_site has a sensible
+        # default.
+        request = None
+
+    base_url = get_current_site(request).domain
+    logger.info('Site base_url is {base_url}'.format(base_url=base_url))
+    app_url = 'https://{base}{path}'.format(
+        base=base_url, path=app.get_absolute_url())
+    logger.info('app_url is {app_url'.format(app_url=app_url))
 
     # If the editor who owns this application was not the comment poster, notify
     # them of the new comment.
