@@ -59,6 +59,15 @@ class OAuthBackend(object):
 
         return language_code
 
+
+    def _get_username(self, identity):
+        # The Wikipedia username is globally unique, but Wikipedia allows it to
+        # have characters that the Django username system rejects. However,
+        # wiki + wiki userID should be unique, and limited to ASCII.
+        language_code = self._get_language_code(identity)
+        return '{lang}{sub}'.format(lang=language_code, sub=identity['sub'])
+
+
     def _create_user_and_editor(self, identity):
         # This can't be super informative because we don't want to log
         # identities.
@@ -74,10 +83,7 @@ class OAuthBackend(object):
         except KeyError:
             email = None
 
-        # The Wikipedia username is globally unique, but Wikipedia allows it to
-        # have characters that the Django username system rejects. However,
-        # wiki + wiki userID should be unique, and limited to ASCII.
-        username = '{lang}{sub}'.format(lang=language_code, sub=identity['sub'])
+        username = self._get_username(identity)
 
         # Since we are not providing a password argument, this will call
         # set_unusable_password, which is exactly what we want; users created
@@ -111,7 +117,8 @@ class OAuthBackend(object):
         """
         logger.info('Attempting to update editor after OAuth login.')
         try:
-            user = User.objects.get(username=identity['username'])
+            username = self._get_username(identity)
+            user = User.objects.get(username=username)
 
             # This login path should only be used for accounts created via
             # Wikipedia login, which all have editor objects.
