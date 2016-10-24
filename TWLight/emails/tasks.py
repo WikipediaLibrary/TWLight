@@ -23,7 +23,6 @@ settings.DJMAIL_REAL_BACKEND.
 """
 from djmail import template_mail
 import logging
-from urlparse import urljoin
 
 from django.contrib.comments.models import Comment
 from django.contrib.comments.signals import comment_was_posted
@@ -74,7 +73,7 @@ def send_comment_notification_emails(sender, **kwargs):
     logger.info('Site base_url is {base_url}'.format(base_url=base_url))
     app_url = 'https://{base}{path}'.format(
         base=base_url, path=app.get_absolute_url())
-    logger.info('app_url is {app_url'.format(app_url=app_url))
+    logger.info('app_url is {app_url}'.format(app_url=app_url))
 
     # If the editor who owns this application was not the comment poster, notify
     # them of the new comment.
