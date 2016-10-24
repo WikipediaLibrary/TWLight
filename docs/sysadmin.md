@@ -9,19 +9,16 @@ When full paths are not given, the files are in the project root (`/var/www/html
 
 This assumes you are running on Debian (Jessie).
 
-### Mail
-* `sudo apt-get install mailutils`
-* `sudo apt-get install postfix`
-    * When it asks, set twl-test.wmflabs.org as FQDN
+### Python
+2.7.
 
-This should just work with the default settings.
+### Mail
+Use the default WMF exim install. It should just work with the default settings.
 
 More about Django and mail:
     * TWLight occasionally sends emails. The code is nearly agnostic about its backend, but you do need to set one up.
-    * In `settings/local.py` you can see an example of configuring TWLight to use an SMTP server synchronously for mail sending.
-        * _Do not do this in production._ Synchronous mail sending will block the request/response loop and lead to some really long pageload times (and possibly timeouts).
-    * `settings/production.py` instead configures djmail to expect postfix.
-    * This will be unsustainable if the system finds itself sending a lot of email; you will want to set up a celery task queue allowing mail to be sent asynchronously, and set the djmail backend accordingly.
+    * It's currently configured for synchronous email sending.
+    * This will be unsustainable if the system finds itself sending a lot of email; you will want to set up a celery task queue allowing mail to be sent asynchronously, and set the djmail backend in `TWLight/settings/production.py` accordingly.
 
 ### OAuth
 * Get credentials as a wikimedia OAuth consumer.
@@ -29,10 +26,13 @@ More about Django and mail:
     * This file is `.gitignore`d and should thus be kept out of version control; you can safely add secrets to it.
 
 ### virtualenv
+If you're using a virtualenv...
 * Install virtualenv.
     * You'll need to also `sudo apt-get install libmysqlclient-dev python-dev build-essential` for virtualenv to work.
     * If you see an error, `unable to execute 'x86_64-linux-gnu-gcc': No such file or directory`, you don't have `python-dev` and/or `build-essential`.
 * You can now install django dependencies via `pip install -r requirements/wmf.txt`.
+* Make sure your nginx user owns the virtualenv.
+* Make sure you `workon virtualenv` before running gunicorn.
 
 ### nginx
 * `sudo apt-get install nginx`
@@ -75,6 +75,7 @@ You must do these before the first time you run TWLight.
 
 * `python manage.py migrate` (set up database)
 * `python manage.py createinitialrevisions` (see https://django-reversion.readthedocs.io/en/stable/commands.html#createinitialrevisions ; we use this for version history on the Application model)
+* At `/admin`, make sure that your default Site URL matches your server URL.
 
 ### Starting your Django server
 * _Do not use `manage.py runserver`_: it is not suitable for production
@@ -83,13 +84,14 @@ You must do these before the first time you run TWLight.
     * It's fine not to set this variable; there is a sensible default.
 
 ### Deploying updated code
+* git push your updates from your local development environment to the repo
 * `cd /var/www/html/TWLight`
-* git pull your updates
+* `sudo git pull origin master`
 * `python manage.py migrate`
     * This is only required if there are database schema changes to apply, but will not hurt if there aren't.
 * `python manage.py collectstatic`
     * This is only required if there are stylesheet changes to apply, but will not hurt if there aren't.
-* Kill and restart gunicorn
+* Kill and restart gunicorn: `ps -ef | grep gunicorn`, `sudo kill [process id]`, `sudo bin/gunicorn_start &`
 
 ## Logs
 
