@@ -195,7 +195,7 @@ class OAuthBackend(object):
             try:
                 # It's actually a wiki, right?
                 assert base_url in WIKI_DICT.values()
-                user.editor.home_wiki = WIKI_DICT[base_url]
+                user.editor.home_wiki = base_url
                 user.editor.save()
             except AssertionError:
                 # Site functionality mostly works if people don't
