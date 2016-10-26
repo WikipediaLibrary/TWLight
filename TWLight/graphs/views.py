@@ -64,9 +64,14 @@ class DashboardView(TemplateView):
 
         # The application that has been waiting the longest for a final status
         # determination. -------------------------------------------------------
-        context['longest_open'] = Application.objects.filter(
+        try:
+            app = Application.objects.filter(
                 status__in=[Application.PENDING, Application.QUESTION]
             ).earliest('date_created')
+        except Application.DoesNotExist:
+            app = None
+
+        context['longest_open'] = app
 
         # Average number of days until a final decision gets made on an
         # application. ---------------------------------------------------------

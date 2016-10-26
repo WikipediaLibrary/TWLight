@@ -607,14 +607,14 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             assert int(status) in [Application.PENDING,
                                    Application.QUESTION,
                                    Application.APPROVED,
-                                   Application.NOT_APPROVED]
+                                   Application.NOT_APPROVED,
+                                   Application.SENT]
         except (AssertionError, ValueError):
             # ValueError will be raised if the status cannot be cast to int.
             logger.exception('Did not find valid data for batch editing')
             return HttpResponseBadRequest()
 
-
-        for app_pk in request.POST['applications']:
+        for app_pk in request.POST.getlist('applications'):
             try:
                 app = Application.objects.get(pk=app_pk)
             except Application.DoesNotExist:
@@ -622,6 +622,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                     'continuing through remaining apps'.format(pk=app_pk))
                 continue
 
+            print app
+            print status 
             app.status = status
             app.save()
 
@@ -636,7 +638,8 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
     template_name = 'applications/send.html'
 
     def get_queryset(self):
-        return Partner.objects.filter(applications__status=Application.APPROVED)
+        return Partner.objects.filter(
+            applications__status=Application.APPROVED).distinct()
 
 
 
