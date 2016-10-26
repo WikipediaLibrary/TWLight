@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
+from django.http import Http404
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -30,7 +31,10 @@ class UserDetailView(SelfOnly, TemplateView):
         get_object in order to be able to use the SelfOnly mixin.
         """
         assert 'pk' in self.kwargs.keys()
-        return User.objects.get(pk=self.kwargs['pk'])
+        try:
+            return User.objects.get(pk=self.kwargs['pk'])
+        except User.DoesNotExist:
+            raise Http404
 
 
     def get_context_data(self, **kwargs):

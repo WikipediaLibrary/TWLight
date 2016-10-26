@@ -23,10 +23,6 @@
       {% if editor.home_wiki %}
         {{ editor.get_home_wiki_display }}
       {% endif %}
-      {% ifequal editor.user user %}
-        <br />
-        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
-      {% endifequal %}
       {% if editor.wp_link_sul_info %}
         <br />
         <a href="{{ editor.wp_link_sul_info }}">({% trans "view Wikipedia SUL info" %})</a>

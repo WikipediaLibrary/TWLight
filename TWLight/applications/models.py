@@ -99,7 +99,7 @@ class Application(models.Model):
     def save(self, *args, **kwargs):
         version = self.get_latest_version()
         count = self.get_version_count()
-        if count >= 2:
+        if count >= 1:
             orig_status = version.field_dict['status']
             if (orig_status in [self.PENDING, self.QUESTION]
                 and self.status in [self.APPROVED, self.NOT_APPROVED]

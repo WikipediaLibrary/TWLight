@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
@@ -26,6 +26,9 @@ def deactivate(modeladmin, request, queryset):
         user.email = ''
         user.is_active = False
         user.save()
+
+        messages.add_message(request, messages.SUCCESS,
+            _('User {user} deactivated.').format(user=user))
 
 
 deactivate.short_description = \
