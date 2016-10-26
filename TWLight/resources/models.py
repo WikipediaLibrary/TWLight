@@ -90,6 +90,16 @@ class Partner(models.Model):
         return self.company_name
 
 
+    def clean(self):
+        if self.agreement_with_terms_of_use and not self.terms_of_use:
+            raise ValidationError('When agreement with terms of use is '
+                'required, a link to terms of use must be provided.')
+        if self.streams.count() > 1:
+            if self.mutually_exclusive is None:
+                raise ValidationError('Since this resource has multiple '
+                    'Streams, you must specify a value for mutually_exclusive.')
+
+
     def save(self, *args, **kwargs):
         if not self.access_grant_term:
             # We can't declare a default access grant term in the ORM due to a
@@ -98,13 +108,6 @@ class Partner(models.Model):
             # However, code elsewhere expects the access grant term to exist.
             # So we will make sure it happens on model save.
             self.access_grant_term = timedelta(days=365)
-        if self.agreement_with_terms_of_use and not self.terms_of_use:
-            raise ValidationError('When agreement with terms of use is '
-                'required, a link to terms of use must be provided.')
-        if self.streams.count() > 1:
-            if self.mutually_exclusive is None:
-                raise ValidationError('Since this resource has multiple '
-                    'Streams, you must specify a value for mutually_exclusive.')
         super(Partner, self).save(*args, **kwargs)
 
 
