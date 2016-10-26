@@ -622,8 +622,6 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                     'continuing through remaining apps'.format(pk=app_pk))
                 continue
 
-            print app
-            print status 
             app.status = status
             app.save()
 
