@@ -21,7 +21,7 @@ class Partner(models.Model):
         ordering = ['company_name']
 
 
-    company_name = models.CharField(max_length=30,
+    company_name = models.CharField(max_length=40,
         help_text=_("Partner organization's name (e.g. McFarland). Note: "
         "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
