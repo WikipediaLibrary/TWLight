@@ -16,6 +16,7 @@ from django import forms
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
@@ -574,12 +575,18 @@ class EvaluateApplicationView(CoordinatorsOrSelf, ToURequired, UpdateView):
     template_name_suffix = '_evaluation'
     success_url = reverse_lazy('applications:list')
 
+    def form_valid(self, form):
+        with reversion.create_revision():
+            reversion.set_user(self.request.user)
+            return super(EvaluateApplicationView, self).form_valid(form)
+
 
     def get_context_data(self, **kwargs):
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.editor
         context['versions'] = reversion.get_for_object(self.object)
         return context
+
 
     def get_form(self, form_class):
         form = super(EvaluateApplicationView, self).get_form(form_class)
