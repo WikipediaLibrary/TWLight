@@ -32,7 +32,7 @@ If you're using a virtualenv...
     * If you see an error, `unable to execute 'x86_64-linux-gnu-gcc': No such file or directory`, you don't have `python-dev` and/or `build-essential`.
 * You can now install django dependencies via `pip install -r requirements/wmf.txt`.
 * Make sure your nginx user owns the virtualenv.
-* Make sure you `workon virtualenv` before running gunicorn.
+* Make sure you `workon <virtualenv name>` before running gunicorn.
 
 ### nginx
 * `sudo apt-get install nginx`
@@ -45,6 +45,7 @@ If you're using a virtualenv...
 Install and run a MySQL (or MariaDB) server.
 
 * Create a database named `twlight`
+* Make sure its character set is `'utf8'`
 * Create a user named `twlight` with all permissions on `twlight`
     * If you change these names, make sure to update the `DATABASES` variable in `settings/base.py` and `settings/production.py` accordingly
 

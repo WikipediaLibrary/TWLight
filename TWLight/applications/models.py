@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from datetime import date
 import reversion
 
@@ -85,7 +87,7 @@ class Application(models.Model):
     agreement_with_terms_of_use = models.BooleanField(default=False)
 
 
-    def __str__(self):
+    def __unicode__(self):
         return '{self.editor} - {self.partner}'.format(self=self)
 
 

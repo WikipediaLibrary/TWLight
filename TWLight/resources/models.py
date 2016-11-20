@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from datetime import timedelta
 
 from django.core.exceptions import ValidationError
@@ -86,7 +88,7 @@ class Partner(models.Model):
                     "with the partner's terms of use."))
 
 
-    def __str__(self):
+    def __unicode__(self):
         return self.company_name
 
 
@@ -147,7 +149,7 @@ class Stream(models.Model):
         help_text=_("Optional description of this stream's contents."))
 
 
-    def __str__(self):
+    def __unicode__(self):
         # Do not try to also return the partner name here (e.g.
         # "Partnername: Streamname") because that will be hard to
         # internationalize. Returning the atomic stream name gives us more
@@ -180,6 +182,6 @@ class Contact(models.Model):
         "greetings (as in 'Hi Jake')"))
 
 
-    def __str__(self):
+    def __unicode__(self):
         # As with Stream, do not return the partner name here.
         return self.full_name

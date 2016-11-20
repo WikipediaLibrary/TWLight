@@ -278,7 +278,7 @@ class Editor(models.Model):
         self.user.save()
 
 
-    def __str__(self):
+    def __unicode__(self):
         # Translators: This is how we display wikipedia editors' names by default. e.g. "ThatAndromeda (en.wikipedia.org)".
         return _('{wp_username} ({wiki})').format(
             wp_username=self.wp_username,
