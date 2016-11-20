@@ -111,6 +111,7 @@ class Application(models.Model):
         QUESTION: '-warning',
         APPROVED: '-success',
         NOT_APPROVED: '-danger',
+        SENT: '-success',
     }
 
     def get_bootstrap_class(self):
@@ -181,7 +182,7 @@ class Application(models.Model):
         if self.status in [self.PENDING, self.QUESTION]:
             return (date.today() - self.date_created).days
         else:
-            assert self.status in [self.APPROVED, self.NOT_APPROVED]
+            assert self.status in [self.APPROVED, self.NOT_APPROVED, self.SENT]
             return (self.date_closed - self.date_created).days
 
 
