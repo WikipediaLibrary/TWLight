@@ -12,9 +12,15 @@
         </a>
         &mdash;
         {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
-          {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
-            Last reviewed by {{ reviewer }} on {{ review_date }}
-          {% endblocktrans %}
+          {% if app.get_latest_reviewer %}
+            {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
+              Last reviewed by {{ reviewer }} on {{ review_date }}
+            {% endblocktrans %}
+          {% else %}
+            {% blocktrans trimmed with review_date=app.get_latest_review_date|localize %}
+              Last reviewed on {{ review_date }}
+            {% endblocktrans %}
+          {% endif %}
         {% else %}
           {% trans 'Not yet reviewed.' %}
         {% endif %}
