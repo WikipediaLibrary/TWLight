@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
@@ -44,7 +45,7 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-users'
             event['color'] = 'warning' # will be yellow
-            event['text'] = _('{username} signed up for a Wikipedia Library '
+            event['text'] = _(u'{username} signed up for a Wikipedia Library '
                 'Card Platform account').format(username=editor.wp_username)
             event['date'] = editor.date_created
             activity.append(event)
@@ -56,7 +57,7 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-files-o'
             event['color'] = 'success' # green
-            event['text'] = _('{partner} joined the Wikipedia Library ').format(
+            event['text'] = _(u'{partner} joined the Wikipedia Library ').format(
                 partner=partner.company_name)
             event['date'] = partner.date_created
             activity.append(event)
@@ -70,7 +71,7 @@ class HomePageView(TemplateView):
             event['icon'] = 'fa-align-left'
             event['color'] = '' # grey (default when no color class is applied)
             if app.rationale:
-                text = _('{username} applied for access to ' \
+                text = _(u'{username} applied for access to ' \
                        '<a href="{url}">{partner}</a>' \
                        '<blockquote>{rationale}</blockquote>').format(
                             username=app.editor.wp_username,
@@ -79,7 +80,7 @@ class HomePageView(TemplateView):
                                 kwargs={'pk': app.partner.pk}),
                             rationale=app.rationale)
             else:
-                text = _('{username} applied for access to ' \
+                text = _(u'{username} applied for access to ' \
                        '<a href="{url}">{partner}</a>').format(
                             username=app.editor.wp_username,
                             partner=app.partner.company_name,
@@ -92,13 +93,13 @@ class HomePageView(TemplateView):
 
         # New access grants!
         grants = self._get_newest(Application.objects.filter(
-            status=Application.APPROVED))
+            status=Application.APPROVED, date_closed__isnull=False))
 
         for grant in grants:
             event = {}
             event['icon'] = 'fa-align-left'
             event['color'] = 'info' # light blue
-            event['text'] = _('{username} received access to '
+            event['text'] = _(u'{username} received access to '
                 '<a href="{url}">{partner}</a>').format(
                     username=grant.editor.wp_username,
                     partner=grant.partner.company_name,

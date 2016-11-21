@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 This file holds user profile information. (The base User model is part of
 Django; profiles extend that with locally useful information.)
