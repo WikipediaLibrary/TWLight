@@ -88,7 +88,7 @@ class Application(models.Model):
 
 
     def __unicode__(self):
-        return '{self.editor} - {self.partner}'.format(self=self)
+        return u'{self.editor} - {self.partner}'.format(self=self)
 
 
     def get_absolute_url(self):
