@@ -48,6 +48,7 @@ Install and run a MySQL (or MariaDB) server.
 * Make sure its character set is `'utf8'`
 * Create a user named `twlight` with all permissions on `twlight`
     * If you change these names, make sure to update the `DATABASES` variable in `settings/base.py` and `settings/production.py` accordingly
+* Make sure to load time zone info. (`mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p`, then your password)
 
 
 ## Software dependencies
