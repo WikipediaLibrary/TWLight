@@ -4,11 +4,35 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h1>{{ title }}</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <strong aria-label="button_group">{% trans "View applications which are..." %}
+      <div class="btn-group" role="nav" aria-labelledby="button_group">
+        {# Translators: This describes the status of a group of applications. #}
+        <a href="{{ pending_url }}" type="button" class="btn btn-default {{ pending_class }}">
+          {% trans "Pending review" %}
+        </a>
+        {# Translators: This describes the status of a group of applications. #}
+        <a href="{{ approved_url }}" type="button" class="btn btn-default {{ approved_class }}">
+          {% trans "Approved" %}
+        </a>
+        {# Translators: This describes the status of a group of applications. #}
+        <a href="{{ rejected_url }}" type="button" class="btn btn-default {{ rejected_class }}">
+          {% trans "Rejected" %}
+        </a>
+        {# Translators: This describes the status of a group of applications. #}
+        <a href="{{ sent_url }}" type="button" class="btn btn-default {{ sent_class }}">
+          {% trans "Sent" %}
+        </a>
+        {# Translators: This describes the status of a group of applications. #}
+        <a href="{{ expiring }}" type="button" class="btn btn-default {{ expiring_class }}">
+          {% trans "Up for renewal" %}
+        </a>
+      </div>
+    </div>
+  </div>
 
-  <p>
-    {{ intro_text | safe }}
-  </p>
+  <h1>{{ title }}</h1>
 
   <!-- begin filtering options/info -->
   <div class="row">

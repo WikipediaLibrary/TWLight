@@ -16,7 +16,6 @@ from django import forms
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
-from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
@@ -364,15 +363,18 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
     def get_context_data(self, **kwargs):
         """
-        Subclasses should call super on this and add title, intro_text,
-        include_template (if different from the default), and any other context
-        specific to that subclass.
+        Subclasses should call super on this and add title, include_template (if
+        different from the default), and any other context specific to that
+        subclass. If you add pages, be sure to expand the button menu, and tell
+        the context which page is currently active.
         """
         context = super(_BaseListApplicationView, self).get_context_data(**kwargs)
 
         context['approved_url'] = reverse_lazy('applications:list_approved')
         context['rejected_url'] = reverse_lazy('applications:list_rejected')
-        context['open_url'] = reverse_lazy('applications:list')
+        context['expiring_url'] = reverse_lazy('applications:list_expiring')
+        context['pending_url'] = reverse_lazy('applications:list')
+        context['sent_url'] = reverse_lazy('applications:list_sent')
 
         context['include_template'] = \
             'applications/application_list_include.html'
@@ -457,18 +459,13 @@ class ListApplicationsView(_BaseListApplicationView):
 
         context['title'] = _('Queue of applications to review')
 
-        context['intro_text'] = _("""
-          This page lists only applications that still need to be reviewed.
-          You may also consult <a href="{approved_url}">approved</a> and
-          <a href="{rejected_url}">rejected</a> applications. 
-        """).format(approved_url=context['approved_url'],
-                    rejected_url=context['rejected_url'])
-
         context['include_template'] = \
             'applications/application_list_reviewable_include.html'
 
         # For constructing the dropdown in the batch editing form.
         context['status_choices'] = Application.STATUS_CHOICES
+
+        context['pending_class'] = 'active'
 
         return context
 
@@ -487,12 +484,7 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
 
         context['title'] = _('Approved applications')
 
-        context['intro_text'] = _("""This page lists only applications that have
-          been approved. You may also consult <a href="{open_url}">pending</a>
-          and <a href="{rejected_url}">rejected</a>
-          applications.""").format(
-                open_url=context['open_url'],
-                rejected_url=context['rejected_url'])
+        context['approved_class'] = 'active'
 
         return context
 
@@ -511,12 +503,7 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
         context['title'] = _('Rejected applications')
 
-        context['intro_text'] = _("""This page lists only applications that have
-          been rejected. You may also consult <a href="{open_url}">pending</a>
-          and <a href="{approved_url}">approved</a>
-          applications. """).format(
-                open_url=context['open_url'],
-                approved_url=context['approved_url'])
+        context['rejected_class'] = 'active'
 
         return context
 
@@ -543,21 +530,32 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
         # Translators: these are grants to specific editors whose term limit is about to expire.
         context['title'] = _('Access grants up for renewal')
 
-        context['intro_text'] = _("""This page lists approved applications whose
-          access grants have probably expired recently or are likely to expire
-          soon. You may also consult <a href="{open_url}">pending</a>,
-          <a href="{rejected_url}">rejected</a>, or
-          <a href="{approved_url}">all approved</a>
-          applications. """).format(
-                open_url=context['open_url'],
-                rejected_url=context['rejected_url'],
-                approved_url=context['approved_url'])
-
         # Overrides default. We want different styling for this case to help
         # coordinators prioritize expiring-soon vs. expired-already access
         # grants.
         context['include_template'] = \
             'applications/application_list_expiring_include.html'
+
+        context['expiring_class'] = 'active'
+
+        return context
+
+
+
+class ListSentApplicationsView(_BaseListApplicationView):
+
+    def get_queryset(self):
+        return Application.objects.filter(
+                status=Application.SENT
+             ).order_by('editor', 'partner')
+
+
+    def get_context_data(self, **kwargs):
+        context = super(ListSentApplicationsView, self).get_context_data(**kwargs)
+
+        context['title'] = _('Sent applications')
+
+        context['sent_class'] = 'active'
 
         return context
 

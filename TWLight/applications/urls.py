@@ -35,6 +35,10 @@ urlpatterns = [
         views.ListExpiringApplicationsView.as_view(),
         name='list_expiring'
     ),
+    url(r'^list/sent/$',
+        views.ListSentApplicationsView.as_view(),
+        name='list_sent'
+    ),
     url(r'^send/$',
         views.ListReadyApplicationsView.as_view(),
         name='send'
