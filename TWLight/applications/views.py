@@ -14,6 +14,7 @@ from reversion.helpers import generate_patch_html
 
 from django import forms
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
@@ -368,22 +369,39 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         subclass. If you add pages, be sure to expand the button menu, and tell
         the context which page is currently active.
         """
-        context = super(_BaseListApplicationView, self).get_context_data(**kwargs)
+        context = super(_BaseListApplicationView, self
+            ).get_context_data(**kwargs)
 
+        # Set up pagination.
+        paginator = Paginator(self.get_queryset(), 20)
+        page = self.request.GET.get('page')
+        try:
+            applications = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            applications = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            applications = paginator.page(paginator.num_pages)
+
+        context['object_list'] = applications
+
+        # Set up button group menu.
         context['approved_url'] = reverse_lazy('applications:list_approved')
         context['rejected_url'] = reverse_lazy('applications:list_rejected')
         context['expiring_url'] = reverse_lazy('applications:list_expiring')
         context['pending_url'] = reverse_lazy('applications:list')
         context['sent_url'] = reverse_lazy('applications:list_sent')
 
+        # Check if filters have been applied (i.e. by post()).
+        filters = kwargs.pop('filters', None)
+        context['filters'] = filters
+
+        # Add miscellaneous page contents.
         context['include_template'] = \
             'applications/application_list_include.html'
 
         context['autocomplete_form'] = ApplicationAutocomplete()
-
-        # Check if filters have been applied (i.e. by post()).
-        filters = kwargs.pop('filters', None)
-        context['filters'] = filters
 
         return context
 
