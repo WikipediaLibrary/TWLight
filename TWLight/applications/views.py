@@ -494,7 +494,7 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         return Application.objects.filter(
                 status=Application.APPROVED
-             ).order_by('editor', 'partner')
+             ).order_by('date_closed', 'partner')
 
 
     def get_context_data(self, **kwargs):
@@ -513,7 +513,7 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         return Application.objects.filter(
                 status=Application.NOT_APPROVED
-             ).order_by('editor', 'partner')
+             ).order_by('date_closed', 'partner')
 
 
     def get_context_data(self, **kwargs):
@@ -565,7 +565,7 @@ class ListSentApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         return Application.objects.filter(
                 status=Application.SENT
-             ).order_by('editor', 'partner')
+             ).order_by('date_closed', 'partner')
 
 
     def get_context_data(self, **kwargs):
