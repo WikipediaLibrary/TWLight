@@ -28,6 +28,28 @@ class Partner(models.Model):
         "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
 
+    # Status metadata
+    # --------------------------------------------------------------------------
+    # AVAILABLE partners are displayed to users.
+    # NOT AVAILABLE partners are only accessible through the admin interface.
+    # These may be, e.g., partners TWL used to work with but no longer does
+    # (kept in the database for recordkeeping), or they may be partners TWL
+    # is setting up a relationship with but isn't ready to expose to public
+    # view.
+    # We default to NOT_AVAILABLE to avoid inadvertently exposing Partners to
+    # the application process when they're not ready yet, and to give staff
+    # a chance to build their record incrementally and fix errors.
+    AVAILABLE = 0
+    NOT_AVAILABLE = 1
+
+    STATUS_CHOICES = (
+        # Translators: This is a status for a Partner, denoting that editors can apply for access.
+        (AVAILABLE, _('Available')),
+        # Translators: This is a status for a Partner, denoting that editors cannot apply for access and the Partner will not be displayed to them.
+        (NOT_AVAILABLE, _('Not available')),
+    )
+
+    status = models.IntegerField(choices=STATUS_CHOICES, default=NOT_AVAILABLE)
 
     # Optional resource metadata
     # --------------------------------------------------------------------------
