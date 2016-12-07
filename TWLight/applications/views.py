@@ -460,13 +460,14 @@ class ListApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self, **kwargs):
         """
-        List only the open applications: that makes this page useful as a
-        reviewer queue. Approved and rejected applications should be listed
-        elsewhere: kept around for historical reasons, but kept off the main
-        page to preserve utility (and limit load time).
+        List only the open applications from available partners: that makes this
+        page useful as a reviewer queue. Approved and rejected applications
+        should be listed elsewhere: kept around for historical reasons, but kept
+        off the main page to preserve utility (and limit load time).
         """
         base_qs = Application.objects.filter(
-                status__in=[Application.PENDING, Application.QUESTION]
+                status__in=[Application.PENDING, Application.QUESTION],
+                partner__status=Partner.AVAILABLE,
              ).order_by('status', 'partner')
 
         return base_qs
@@ -529,8 +530,8 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
 class ListExpiringApplicationsView(_BaseListApplicationView):
     """
-    Lists access grants that are probably about to expire, based on a default
-    access grant length of 365 days.
+    Lists access grants that are probably about to expire, for Partners who
+    are presently Available.
     """
 
     def get_queryset(self):
@@ -539,6 +540,7 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
         return Application.objects.filter(
                 status=Application.APPROVED,
                 earliest_expiry_date__lte=two_months_from_now,
+                partner__status=Partner.AVAILABLE,
              ).order_by('earliest_expiry_date')
 
 

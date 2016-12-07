@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
 from django.views.generic import ListView, DetailView
 
 from TWLight.applications.models import Application
@@ -15,10 +17,15 @@ class PartnersListView(ListView):
     model = Partner
 
     def get_queryset(self):
-        # Useful primarily to people familiar with the English alphabet. :/
-        # But coordinators are required to have English proficiency, so this
-        # should cover most page visitors.
-        return Partner.objects.order_by('company_name')
+        # The ordering here is useful primarily to people familiar with the
+        # English alphabet. :/
+        if self.request.user.is_staff:
+            messages.add_message(self.request, messages.INFO,
+                _('Because you are a staff member, this page may include '
+                    'Partners who are not yet available to all users.'))
+            return Partner.even_not_available.order_by('company_name')
+        else:
+            return Partner.objects.order_by('company_name')
 
 
 
@@ -29,6 +36,15 @@ class PartnersDetailView(DetailView):
         context = super(PartnersDetailView, self).get_context_data(**kwargs)
 
         partner = self.get_object()
+
+        if partner.status == Partner.NOT_AVAILABLE:
+            # This should be guaranteed by get_queryset and the manager
+            # definitions.
+            assert self.request.user.is_staff
+            messages.add_message(self.request, messages.WARNING,
+                _("This Partner's status is NOT_AVAILABLE. You can see it "
+                    "because you are a staff member, but it is not visible "
+                    "to non-staff users."))
 
         context['total_apps'] = Application.objects.filter(
             partner=partner).count()
@@ -66,3 +82,10 @@ class PartnersDetailView(DetailView):
         context['users_time_data'] = get_users_by_partner_by_month(partner)
 
         return context
+
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Partner.even_not_available.order_by('company_name')
+        else:
+            return Partner.objects.order_by('company_name')
