@@ -10,6 +10,12 @@ from django.utils.translation  import ugettext_lazy as _
 from durationfield.db.models.fields.duration import DurationField
 
 
+class AvailablePartnerManager(models.Manager):
+    def get_queryset(self):
+        return super(AvailablePartnerManager, self).get_queryset(
+            ).filter(status=Partner.AVAILABLE)
+
+
 class Partner(models.Model):
     """
     A partner organization which provides access grants to paywalled resources.
@@ -22,6 +28,20 @@ class Partner(models.Model):
         verbose_name_plural = 'partners'
         ordering = ['company_name']
 
+    # --------------------------------------------------------------------------
+    # Managers
+    # --------------------------------------------------------------------------
+
+    # Define managers. Note that the basic manager must be first to make
+    # Django internals work as expected, but we define objects as our custom
+    # manager so that we don't inadvertently expose unavailable Partners to
+    # end users.
+    even_not_available = models.Manager()
+    objects = AvailablePartnerManager()
+
+    # --------------------------------------------------------------------------
+    # Attributes
+    # --------------------------------------------------------------------------
 
     company_name = models.CharField(max_length=40,
         help_text=_("Partner organization's name (e.g. McFarland). Note: "
@@ -49,7 +69,10 @@ class Partner(models.Model):
         (NOT_AVAILABLE, _('Not available')),
     )
 
-    status = models.IntegerField(choices=STATUS_CHOICES, default=NOT_AVAILABLE)
+    status = models.IntegerField(choices=STATUS_CHOICES,
+        default=NOT_AVAILABLE,
+        help_text=_('Should this Partner be displayed to end users? Is it '
+                    'open for applications right now?'))
 
     # Optional resource metadata
     # --------------------------------------------------------------------------
