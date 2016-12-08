@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import Partner, Stream, Contact
+from .models import Partner, Stream, Contact, Language
+
+
+class LanguageAdmin(admin.ModelAdmin):
+    search_fields = ('language',)
+    list_display = ('language',)
+
+admin.site.register(Language, LanguageAdmin)
+
 
 
 class PartnerAdmin(admin.ModelAdmin):

@@ -111,6 +111,8 @@ Create partners via `/admin` (Partners > Add Partner), following the instruction
 
 The default access grant term defaults to 365 days; you can set other options using natural-ish language. See https://django-durationfield.readthedocs.org/en/latest/#usage for details.
 
+You can add one or more languages to the Language field. Use the green + to add new languages that don't appear in the list of options.
+
 ### Collections
 
 In order to set up a collection (database, stream, etc.) for a partner:

@@ -2,12 +2,51 @@
 
 from datetime import timedelta
 
+from django.conf.global_settings import LANGUAGES
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 
 from durationfield.db.models.fields.duration import DurationField
+
+
+class Language(models.Model):
+    """
+    We want to be able to indicate the language(s) of resources offered by a
+    Partner or in a Stream.
+
+    While having a standalone model is kind of overkill, it offers the
+    following advantages:
+    * We need to be able to indicate multiple languages for a given Partner or
+      Stream.
+    * We will want to be able to filter Partners and Streams by language (e.g.
+      in order to limit to the user's preferred language); we can't do that
+      efficiently with something like django-multiselect or django-taggit.
+    * In order to be able to filter by language, we also need to use a
+      controlled vocabulary which we can validate; using a model makes this
+      easy.
+        * We default to Django's global LANGUAGES setting, which is extensive
+          and already translated. We can always expand it if we find ourselves
+          needing more languages, though.
+    """
+
+    class Meta:
+        verbose_name = _("Language")
+        verbose_name_plural = _("Languages")
+
+    language = models.CharField(choices=LANGUAGES,
+        max_length=8,
+        error_messages={
+            'invalid_choice': _('You must enter an ISO language code, as in the '
+                'LANGUAGES setting at '
+                'https://github.com/django/django/blob/master/django/conf/global_settings.py'),
+            }
+        )
+
+    def __unicode__(self):
+        return self.get_language_display()
+
 
 
 class AvailablePartnerManager(models.Manager):
@@ -101,6 +140,8 @@ class Partner(models.Model):
         help_text=_("The standard length of an access grant from this Partner. "
                     "Enter like '365 days' or '365d' or '1 year'.")
         )
+
+    languages = models.ManyToManyField(Language, blank=True, null=True)
 
 
     # Non-universal form fields
