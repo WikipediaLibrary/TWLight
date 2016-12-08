@@ -239,6 +239,8 @@ class Stream(models.Model):
     description = models.TextField(blank=True, null=True,
         help_text=_("Optional description of this stream's contents."))
 
+    languages = models.ManyToManyField(Language, blank=True, null=True)
+
 
     def __unicode__(self):
         # Do not try to also return the partner name here (e.g.
@@ -246,6 +248,10 @@ class Stream(models.Model):
         # internationalize. Returning the atomic stream name gives us more
         # options for how this is displayed in templates.
         return self.name
+
+    @property
+    def get_languages(self):
+        return " ".join([p.__unicode__() for p in self.languages.all()])
 
 
 

@@ -20,7 +20,7 @@ admin.site.register(Partner, PartnerAdmin)
 
 class StreamAdmin(admin.ModelAdmin):
     search_fields = ('partner__company_name', 'name',)
-    list_display = ('id', 'partner', 'name', 'description',)
+    list_display = ('id', 'partner', 'name', 'description', 'get_languages')
 
 admin.site.register(Stream, StreamAdmin)
 
