@@ -18,9 +18,22 @@
       <a href="{% url 'partners:detail' partner.pk %}">
         <img src="{{ partner.logo_url }}" class="img-responsive">
       </a>
+      <hr />
     {% endif %}
+
+    {% if partner.description %}
+      <p>
+        {{ partner.description }}
+      </p>
+      <hr />
+    {% endif %}
+
     <p>
-      {{ partner.description }}
+      {% if partner.get_languages %}
+        {{ partner.get_languages }}
+      {% else %}
+        {% trans "Language(s) not known" %}
+      {% endif %}
     </p>
     <div class="text-center">
       <a href="{% url 'partners:detail' partner.pk %}" class="btn btn-default">

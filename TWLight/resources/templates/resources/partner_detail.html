@@ -47,6 +47,25 @@
       </div>      
     </li>
     <li class="timeline-inverted">
+      <div class="timeline-badge"><i class="fa fa-language"></i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          {% if object.get_languages %}
+            <p>
+              {% with object.get_languages as language_list %}
+                {% blocktrans %}
+                  Language(s): {{ language_list }}
+                {% endblocktrans %}
+              {% endwith %}
+            </p>
+          {% else %}
+            <p>{% trans "Languages not available." %}</p>
+          {% endif %}
+        </div>
+      </div>      
+    </li>
+    <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-exclamation"></i>
       </div>
       <div class="timeline-panel">
