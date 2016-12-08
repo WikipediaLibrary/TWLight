@@ -2,7 +2,7 @@
 
 import factory
 
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, Stream
 
 
 class PartnerFactory(factory.django.DjangoModelFactory):
@@ -13,3 +13,14 @@ class PartnerFactory(factory.django.DjangoModelFactory):
 
     company_name = 'Publisher McPubface'
     terms_of_use = 'https://example.com/terms'
+
+
+
+class StreamFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = Stream
+        strategy = factory.CREATE_STRATEGY
+
+    partner = factory.SubFactory(PartnerFactory)
+    name = 'Dancing about Architecture'

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import copy
 from datetime import timedelta
 
 from django.conf.global_settings import LANGUAGES
@@ -9,6 +9,23 @@ from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 
 from durationfield.db.models.fields.duration import DurationField
+
+RESOURCE_LANGUAGES = copy.copy(LANGUAGES)
+
+RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
+
+def validate_language_code(code):
+    """
+    Takes a language code and verifies that it is the first element of a tuple
+    in RESOURCE_LANGUAGES.
+    """
+    if code not in RESOURCE_LANGUAGE_CODES:
+        raise ValidationError(
+            _('%(code)s is not a valid language code. You must enter an ISO '
+                'language code, as in the LANGUAGES setting at '
+                'https://github.com/django/django/blob/master/django/conf/global_settings.py'),
+            params={'code': code},
+        )
 
 
 class Language(models.Model):
@@ -35,14 +52,17 @@ class Language(models.Model):
         verbose_name = _("Language")
         verbose_name_plural = _("Languages")
 
-    language = models.CharField(choices=LANGUAGES,
+    language = models.CharField(choices=RESOURCE_LANGUAGES,
         max_length=8,
-        error_messages={
-            'invalid_choice': _('You must enter an ISO language code, as in the '
-                'LANGUAGES setting at '
-                'https://github.com/django/django/blob/master/django/conf/global_settings.py'),
-            }
+        validators=[validate_language_code],
+        unique=True
         )
+
+    def save(self, *args, **kwargs):
+        """Cause validator to be run."""
+        self.clean_fields()
+        super(Language, self).save(*args, **kwargs)
+
 
     def __unicode__(self):
         return self.get_language_display()
