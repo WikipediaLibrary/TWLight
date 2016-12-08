@@ -203,6 +203,11 @@ class Partner(models.Model):
         return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
 
+    @property
+    def get_languages(self):
+        return " ".join([p.__unicode__() for p in self.languages.all()])
+
+
 
 class Stream(models.Model):
     """
