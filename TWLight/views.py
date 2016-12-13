@@ -50,7 +50,7 @@ class HomePageView(TemplateView):
             event['date'] = editor.date_created
             activity.append(event)
 
-        # Newly added partners!
+        # Newly added partners! (Available partners only.)
         partners = self._get_newest(Partner.objects.all())
 
         for partner in partners:
