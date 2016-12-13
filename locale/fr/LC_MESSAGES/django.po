@@ -860,13 +860,16 @@ msgstr "Le respect de ces accords nous permet de continuer à augmenter le nombr
 #: TWLight/templates/about.html:118
 #, python-format
 msgid ""
-"Citation practices vary by project and even by article. Generally, we "
+"Citation practices vary by project and even by article.  Generally, we "
 "support editors citing where they found information, in a form that allows "
-"others to check it for themselves in whatever way is easiest for them. That "
+"others to check it for themselves in whatever way is easiest for them.  That "
 "often means providing both original source details as well as a link to the "
-"partner database in which the source was found. You can use |via= in templates using CS1 citation format or add %(code)s to "
+"partner database in which the source was found. You can use &lt;code&gt;|"
+"via=&lt;code&gt; in templates using CS1 citation format or add &lt;code&gt;"
+"&lbrace;&lbrace;subscription required|via=&rbrace;&rbrace;&lt;/code&gt; to "
 "identify the provider."
-msgstr "Les pratiques de citation varient selon le projet et même par article. En règle générale, citer vos sources sous une forme qui permet aux autres de vérifier par eux-mêmes de quelque manière est plus facile pour eux. Cela signifie souvent fournir les détails originaux de source ainsi qu'un lien vers la ressource dans laquelle la source a été trouvée. Vous pouvez utiliser | via = dans les modèles CS1 ou ajouter %(code)s pour identifier le fournisseur."
+msgstr "Les pratiques de citation varient selon le projet et même par article. En règle générale, citer vos sources sous une forme qui permet aux autres de vérifier par eux-mêmes de quelque manière est plus facile pour eux. Cela signifie souvent fournir les détails originaux de source ainsi qu'un lien vers la ressource dans laquelle la source a été trouvée. Vous pouvez utiliser | via = dans les modèles CS1 ou ajouter &lt;code&gt;"
+"&lbrace;&lbrace;subscription required|via=&rbrace;&rbrace;&lt;/code&gt; pour identifier le fournisseur."
 #: TWLight/templates/about.html:124
 msgid "Here is one citation example:"
 msgstr "Voice un exemple de citation"

@@ -139,6 +139,7 @@ LANGUAGE_CODE = 'en-us' # Sets site default language.
 # language.
 LANGUAGES = (
   ('en', _('English')),
+  ('fi', _('Finnish')),
   ('fr', _('French')),
 )
 
