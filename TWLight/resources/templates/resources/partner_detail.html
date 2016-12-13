@@ -260,7 +260,10 @@
 {% endblock content %}
 
 {% block javascript %}
-  <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
   <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.js" %}"></script>
   <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.pie.js" %}"></script>
   <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.time.js" %}"></script>
