@@ -358,6 +358,14 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         return base_qs
 
 
+    def _set_object_list(self, filters):
+        # If the view lets users apply filters to the queryset, this is where
+        # the filtered queryset can be set as the object_list for the view.
+        # If the view doesn't have filters, or the user hasn't applied them,
+        # this is a no-op that lets the defaults continue on their merry way.
+        pass
+
+
     def get_queryset(self):
         raise NotImplementedError
 
@@ -369,11 +377,21 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         subclass. If you add pages, be sure to expand the button menu, and tell
         the context which page is currently active.
         """
+        # We need to determine self.object_list *before* we do the call to
+        # super below, because it will expect self.object_list to be defined.
+        # Our object_list varies depending on whether the user has filtered the
+        # queryset.
+        filters = kwargs.pop('filters', None)
+        self._set_object_list(filters)
+
         context = super(_BaseListApplicationView, self
             ).get_context_data(**kwargs)
 
+        context['filters'] = filters
+
+        context['object_list'] = self.object_list
         # Set up pagination.
-        paginator = Paginator(self.get_queryset(), 20)
+        paginator = Paginator(self.object_list, 20)
         page = self.request.GET.get('page')
         try:
             applications = paginator.page(page)
@@ -392,10 +410,6 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         context['expiring_url'] = reverse_lazy('applications:list_expiring')
         context['pending_url'] = reverse_lazy('applications:list')
         context['sent_url'] = reverse_lazy('applications:list_sent')
-
-        # Check if filters have been applied (i.e. by post()).
-        filters = kwargs.pop('filters', None)
-        context['filters'] = filters
 
         # Add miscellaneous page contents.
         context['include_template'] = \
@@ -442,16 +456,6 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
             {'label': _('Publisher'), 'object': partner}
         ]
 
-        # ListView sets self.object_list in get(). That means if we call
-        # render_to_response without having routed through get(), the
-        # get_context_data call will fail when it looks for a self.object_list
-        # and doesn't find one. Therefore we set it here.
-        base_qs = self.get_queryset()
-        filtered_qs = self._filter_queryset(base_qs=base_qs,
-                                            editor=editor,
-                                            partner=partner)
-        self.object_list = filtered_qs
-
         return self.render_to_response(self.get_context_data(filters=filters))
 
 
@@ -487,6 +491,18 @@ class ListApplicationsView(_BaseListApplicationView):
         context['pending_class'] = 'active'
 
         return context
+
+
+    def _set_object_list(self, filters):
+        base_qs = self.get_queryset()
+        if filters:
+            editor = filters[0]['object']
+            partner = filters[1]['object']
+            self.object_list = self._filter_queryset(base_qs=base_qs,
+                                                editor=editor,
+                                                partner=partner)
+        else:
+            self.object_list = base_qs
 
 
 
