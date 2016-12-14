@@ -5,9 +5,13 @@
 
 {% block extra_css %}
   <style type="text/css">
-    .z-index-100 {
-      z-index: 100;
-      position: relative;
+    @media (min-width: 768px) {
+      .timeline-right-overlay {
+        z-index: 100;
+        position: relative;
+        height: 0;
+        overflow: visible;
+      }
     }
   </style>
 {% endblock extra_css %}
@@ -18,8 +22,13 @@
   <a href="{% url 'applications:apply_single' object.pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply for access" %}</a>
   <ul class="timeline half-timeline">
 
-    <a href="{% url 'applications:apply_single' object.pk %}" class="btn btn-primary pull-right hidden-xs z-index-100" >{% trans "Apply for access" %}</a>
-    
+    <div class="col-sm-5 col-md-4 pull-right timeline-right-overlay">
+      <a href="{% url 'applications:apply_single' object.pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply for access" %}</a><br/>
+      {% if object.logo_url %}
+        <img src="{{ object.logo_url }}" class="img-responsive hidden-xs">        
+      {% endif %}
+    </div>
+      
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-info"></i>
       </div>
