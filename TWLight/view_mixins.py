@@ -7,8 +7,11 @@ coordinator AND must have agreed to the terms of use). If we used that mixin,
 test functions and login URLs would overwrite each other. Using the dispatch
 function and super() means we can chain as many access tests as we'd like.
 """
+from urllib import urlencode
+from urlparse import ParseResult
 
 from django.contrib import messages
+from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -151,7 +154,17 @@ class ToURequired(object):
         if not self.test_func_tou_required(request.user):
             messages.add_message(request, messages.INFO,
                 'You need to agree to the terms of use before you can do that.')
-            return HttpResponseRedirect(reverse_lazy('terms'))
+
+            # Remember where they were trying to go, so we can redirect them
+            # back after they agree. There's logic in TermsView to pick up on
+            # this parameter.
+            next_path = request.path
+            next_param = urlencode({REDIRECT_FIELD_NAME: next_path})
+            path = reverse_lazy('terms')
+            new_url = ParseResult(scheme='', netloc='', path=path, params='',
+                query=next_param, fragment='').geturl()            
+            print new_url
+            return HttpResponseRedirect(new_url)
 
         return super(ToURequired, self).dispatch(
             request, *args, **kwargs)
