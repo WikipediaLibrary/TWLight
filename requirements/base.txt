@@ -2,9 +2,10 @@ defusedxml==0.4.1
 diff-match-patch==20121119
 Django==1.8.17
 django-autocomplete-light==2.3.1
+django-contrib-comments==1.7.3
 django-crispy-forms==1.4.0
 django-durationfield==0.5.2
-django-reversion==1.8.4
+django-reversion==2.0.8
 djmail==0.13.0
 factory_boy==2.4.1
 jsonfield==0.9.13

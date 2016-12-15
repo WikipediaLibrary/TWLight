@@ -8,17 +8,17 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from datetime import date, timedelta
 import logging
-import reversion
-from reversion.helpers import generate_patch_html
+from reversion import revisions as reversion
+from reversion.models import Version
 
 
 from django import forms
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
-from django.views.generic.base import TemplateView, View
+from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
 from django.views.generic.list import ListView
@@ -618,7 +618,7 @@ class EvaluateApplicationView(CoordinatorsOrSelf, ToURequired, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.editor
-        context['versions'] = reversion.get_for_object(self.object)
+        context['versions'] = Version.objects.get_for_object(self.object)
         return context
 
 
@@ -713,36 +713,3 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
 
         return HttpResponseRedirect(reverse(
             'applications:send_partner', kwargs={'pk': self.get_object().pk}))
-
-
-
-class DiffApplicationsView(ToURequired, TemplateView):
-    template_name = "applications/diff.html"
-
-    def get_object(self):
-        """
-        Fetch the Application whose revisions are being compared.
-        """
-        return Application.objects.get(pk=self.kwargs['pk'])
-
-
-    def post(self, request, *args, **kwargs):
-        diff_pk = long(request.POST['diff'])
-        orig_pk = long(request.POST['orig'])
-
-        try:
-            app = self.get_object()
-        except Application.DoesNotExist:
-            raise Http404
-
-        orig_revision = reversion.get_for_object(app).get(id=orig_pk)
-        diff_revision = reversion.get_for_object(app).get(id=diff_pk)
-
-        context = self.get_context_data()
-
-        patch_html = generate_patch_html(orig_revision, diff_revision,
-                                         "rationale", cleanup="semantic")
-
-        context['patch_html'] = patch_html
-
-        return self.render_to_response(context)

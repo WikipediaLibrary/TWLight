@@ -1,6 +1,6 @@
-from django.contrib.comments import get_form_target
-from django.contrib.comments.models import Comment
-from django.contrib.comments.signals import comment_was_posted
+from django_comments import get_form_target
+from django_comments.models import Comment
+from django_comments.signals import comment_was_posted
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core import mail
@@ -14,6 +14,7 @@ from TWLight.users.groups import get_coordinators
 class ApplicationCommentTest(TestCase):
 
     def setUp(self):
+        super(ApplicationCommentTest, self).setUp()
         self.editor = EditorFactory(user__email='editor@example.com').user
 
         coordinators = get_coordinators()

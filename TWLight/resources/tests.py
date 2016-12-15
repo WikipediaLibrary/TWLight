@@ -28,6 +28,7 @@ class LanguageModelTests(TestCase):
         truncation that runs between tests isn't sufficient, since it drops the
         primary key but doesn't delete the fields.)
         """
+        super(LanguageModelTests, cls).setUpClass()
         cls.lang_en, _ = Language.objects.get_or_create(language='en')
         cls.lang_fr, _ = Language.objects.get_or_create(language='fr')
 
@@ -60,6 +61,7 @@ class PartnerModelTests(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        super(PartnerModelTests, cls).setUpClass()
         cls.lang_en, _ = Language.objects.get_or_create(language='en')
         cls.lang_fr, _ = Language.objects.get_or_create(language='fr')
 
@@ -80,6 +82,7 @@ class PartnerModelTests(TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        super(PartnerModelTests, cls).tearDownClass()
         cls.message_patcher.stop()
 
 
@@ -241,6 +244,7 @@ class StreamModelTests(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        super(StreamModelTests, cls).setUpClass()
         cls.lang_en, _ = Language.objects.get_or_create(language='en')
         cls.lang_fr, _ = Language.objects.get_or_create(language='fr')
 

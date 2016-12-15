@@ -132,65 +132,49 @@
 
   <h2>{% trans 'Revision history' %}</h2>
 
-  <form method="POST" action="{% url 'applications:diff' object.pk %}">
-    {% csrf_token %}
-    <ul class="list-unstyled">
-      {% for version in versions %}
-        <li>
-          <div class="row">
-            <div class="col-xs-2">
-              <span class="label label{{ version|get_bootstrap_class_for_version }} pull-right">{{ version|get_status_display_for_version }}</span>
-            </div>
-            {% comment %} # cool function, but the diff page isn't working yet
-              <div class="col-xs-1">
-                <input type="radio" value="{{ version.id }}" name="orig" {% if forloop.first %}class="pull-left"checked{% else %}class="pull-left hidden"{% endif %}>
-                <input type="radio" value="{{ version.id }}" name="diff" {% if forloop.first %}class="pull-right hidden"{% else %}class="pull-right"{% endif %}>
-              </div>
-            {% endcomment %}
-            <div class="col-xs-9">
-              <span class="pull-left">
-                {% if forloop.last %}
-                  {% with submit_user=version.revision.user %}
-                    {% with review_date=version.revision.date_created|localize %}
-                      {% if submit_user %}
-                        {% blocktrans trimmed %}
-                          Submitted by {{ submit_user }} on {{ review_date }}
-                        {% endblocktrans %}
-                      {% else %}
-                        {% blocktrans trimmed %}
-                          Submitted on {{ review_date }}
-                        {% endblocktrans %}
-                      {% endif %}
-                    {% endwith %}
+  <ul class="list-unstyled">
+    {% for version in versions %}
+      <li>
+        <div class="row">
+          <div class="col-xs-2">
+            <span class="label label{{ version|get_bootstrap_class_for_version }} pull-right">{{ version|get_status_display_for_version }}</span>
+          </div>
+          <div class="col-xs-9">
+            <span class="pull-left">
+              {% if forloop.last %}
+                {% with submit_user=version.revision.user %}
+                  {% with review_date=version.revision.date_created|localize %}
+                    {% if submit_user %}
+                      {% blocktrans trimmed %}
+                        Submitted by {{ submit_user }} on {{ review_date }}
+                      {% endblocktrans %}
+                    {% else %}
+                      {% blocktrans trimmed %}
+                        Submitted on {{ review_date }}
+                      {% endblocktrans %}
+                    {% endif %}
                   {% endwith %}
-                {% else %}
-                  {% with review_user=version.revision.user %}
-                    {% with review_date=version.revision.date_created|localize %}
-                      {% if review_user %}
-                        {% blocktrans trimmed %}
-                          Reviewed by {{ review_user }} on {{ review_date }}
-                        {% endblocktrans %}
-                      {% else %}
-                        {% blocktrans trimmed %}
-                          Reviewed on {{ review_date }}
-                        {% endblocktrans %}
-                      {% endif %}
-                    {% endwith %}
+                {% endwith %}
+              {% else %}
+                {% with review_user=version.revision.user %}
+                  {% with review_date=version.revision.date_created|localize %}
+                    {% if review_user %}
+                      {% blocktrans trimmed %}
+                        Reviewed by {{ review_user }} on {{ review_date }}
+                      {% endblocktrans %}
+                    {% else %}
+                      {% blocktrans trimmed %}
+                        Reviewed on {{ review_date }}
+                      {% endblocktrans %}
+                    {% endif %}
                   {% endwith %}
-                {% endif %}
-              </span>
-            </div>
-        </li>
-      {% empty %}
-        <li>{% trans 'No previous versions.' %}</li>
-      {% endfor %}      
-    </ul>
-    {% comment %} # cool function, but the diff page isn't working yet
-    <div class="row">
-      <div class="col-xs-10 col-xs-push-2">
-        <input type="submit" value="{% trans 'Compare selected revisions' %}" class="btn">
-      </div>
-    </div>
-    {% endcomment %}
-</form>
+                {% endwith %}
+              {% endif %}
+            </span>
+          </div>
+      </li>
+    {% empty %}
+      <li>{% trans 'No previous versions.' %}</li>
+    {% endfor %}      
+  </ul>
 {% endblock %}

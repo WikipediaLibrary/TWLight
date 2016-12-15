@@ -40,7 +40,6 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.comments',
     'django.contrib.sites',         # required by django.contrib.comments
 )
 
@@ -48,6 +47,7 @@ THIRD_PARTY_APPS = (
     'crispy_forms',
     'reversion',
     'autocomplete_light',
+    'django_comments'
 )
 
 TWLIGHT_APPS = (

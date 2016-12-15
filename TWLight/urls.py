@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # Third-party --------------------------------------------------------------
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include('django_comments.urls')),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
 
     # TWLight apps -------------------------------------------------------------

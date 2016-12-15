@@ -46,6 +46,7 @@ FAKE_IDENTITY = {
 class ViewsTestCase(TestCase):
 
     def setUp(self):
+        super(ViewsTestCase, self).setUp()
         self.client = Client()
 
         # User 1: regular Editor
@@ -80,6 +81,7 @@ class ViewsTestCase(TestCase):
 
 
     def tearDown(self):
+        super(ViewsTestCase, self).tearDown()
         self.user_editor.delete()
         self.editor1.delete()
         self.user_editor2.delete()
@@ -292,6 +294,7 @@ class UserProfileModelTestCase(TestCase):
 class EditorModelTestCase(TestCase):
 
     def setUp(self):
+        super(EditorModelTestCase, self).setUp()
         for editor in Editor.objects.all():
             # The test case succeeds when runs alone but fails when run
             # as part of the whole suite, because it grabs the wrong editor
@@ -314,6 +317,7 @@ class EditorModelTestCase(TestCase):
 
 
     def tearDown(self):
+        super(EditorModelTestCase, self).tearDown()
         self.test_editor.delete()
 
 
@@ -473,6 +477,7 @@ class EditorModelTestCase(TestCase):
 class AuthorizationTestCase(TestCase):
 
     def setUp(self):
+        super(AuthorizationTestCase, self).setUp()
         # Prevent failures due to side effects from database artifacts.
         for editor in Editor.objects.all():
             editor.delete()

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from datetime import date
-import reversion
+from reversion import revisions as reversion
+from reversion.models import Version
 
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -132,7 +133,7 @@ class Application(models.Model):
 
     def get_version_count(self):
         try:
-            return len(reversion.get_for_object(self))
+            return len(Version.objects.get_for_object(self))
         except TypeError:
             # When we call this the *first* time we save an object, it will fail
             # as the object properties that reversion is looking for are not
@@ -142,7 +143,7 @@ class Application(models.Model):
 
     def get_latest_version(self):
         try:
-            return reversion.get_for_object(self)[0]
+            return Version.objects.get_for_object(self)[0]
         except (TypeError, IndexError):
             # If no versions yet...
             return None

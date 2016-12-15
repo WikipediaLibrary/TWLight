@@ -1659,6 +1659,7 @@ class ApplicationModelTest(TestCase):
 
 class BatchEditTest(TestCase):
     def setUp(self):
+        super(BatchEditTest, self).setUp()
         self.url = reverse('applications:batch_edit')
         editor = EditorFactory()
         self.user = editor.user
@@ -1683,6 +1684,7 @@ class BatchEditTest(TestCase):
 
 
     def tearDown(self):
+        super(BatchEditTest, self).tearDown()
         self.message_patcher.stop()
 
 

@@ -24,8 +24,8 @@ settings.DJMAIL_REAL_BACKEND.
 from djmail import template_mail
 import logging
 
-from django.contrib.comments.models import Comment
-from django.contrib.comments.signals import comment_was_posted
+from django_comments.models import Comment
+from django_comments.signals import comment_was_posted
 from django.contrib.sites.models import get_current_site
 from django.dispatch import receiver
 

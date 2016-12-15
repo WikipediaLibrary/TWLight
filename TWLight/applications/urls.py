@@ -51,8 +51,4 @@ urlpatterns = [
         views.BatchEditView.as_view(),
         name='batch_edit'
     ),
-    url(r'^diff/(?P<pk>\d+)/$',
-        views.DiffApplicationsView.as_view(),
-        name='diff'
-    ),
 ]
