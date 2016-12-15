@@ -334,19 +334,27 @@ class BaseApplicationViewTest(TestCase):
         # Note: not an Editor.
         cls.base_user = UserFactory(username='base_user')
         cls.base_user.set_password('base_user')
+        cls.base_user.userprofile.terms_of_use = True
+        cls.base_user.userprofile.save()
 
         cls.editor = UserFactory(username='editor')
         EditorFactory(user=cls.editor)
         cls.editor.set_password('editor')
+        cls.editor.userprofile.terms_of_use = True
+        cls.editor.userprofile.save()
 
         cls.editor2 = UserFactory(username='editor2')
         EditorFactory(user=cls.editor2)
         cls.editor2.set_password('editor2')
+        cls.editor2.userprofile.terms_of_use = True
+        cls.editor2.userprofile.save()
 
         cls.coordinator = UserFactory(username='coordinator')
         cls.coordinator.set_password('coordinator')
         coordinators = get_coordinators()
         coordinators.user_set.add(cls.coordinator)
+        cls.coordinator.userprofile.terms_of_use = True
+        cls.coordinator.userprofile.save()
 
         # We should mock out any call to messages call in the view, since
         # RequestFactory (unlike Client) doesn't run middleware. If you
@@ -964,6 +972,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
 
         response = views.SubmitApplicationView.as_view()(request)
+        print response
 
         expected_url = reverse('users:editor_detail',
                                 kwargs={'pk': self.editor.editor.pk})
@@ -1018,7 +1027,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         _ = views.SubmitApplicationView.as_view()(request)
 
         # Force reload from database to see updated values. (In Django 1.8 this
-        # can be replaced with user.editor.responsefresh_from_db().)
+        # can be replaced with user.editor.refresh_from_db().)
         editor = Editor.objects.get(pk=user.editor.pk)
 
         self.assertEqual(editor.real_name, 'Anonymous Coward')

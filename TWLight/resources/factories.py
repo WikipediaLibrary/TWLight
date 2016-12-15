@@ -13,6 +13,7 @@ class PartnerFactory(factory.django.DjangoModelFactory):
 
     company_name = 'Publisher McPubface'
     terms_of_use = 'https://example.com/terms'
+    status = Partner.AVAILABLE # not the default, but usually wanted in tests
 
 
 

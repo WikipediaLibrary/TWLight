@@ -122,6 +122,14 @@ class ViewsTestCase(TestCase):
         request = factory.get(self.url2)
         request.user = self.user_editor
 
+        # Make sure the editor is not a coordinator, because coordinators *can*
+        # see others' pages!
+        coordinators = get_coordinators()
+        try:
+            assert self.user_editor not in coordinators.user_set.all()
+        except AssertionError:
+            coordinators.user_set.remove(self.user_editor)
+
         response = views.EditorDetailView.as_view()(request, pk=self.editor2.pk)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(urlparse(response.url).path,
@@ -512,7 +520,9 @@ class AuthorizationTestCase(TestCase):
             * Return created = False
         * Call Editor.update_from_wikipedia
         """
-        existing_user = UserFactory()
+        # Make sure the test user has the username anticipated by our backend.
+        username = '{lang}{sub}'.format(lang='en', sub=FAKE_IDENTITY['sub'])
+        existing_user = UserFactory(username=username)
         params = {
             'user': existing_user,
             'wp_sub': FAKE_IDENTITY['sub']
