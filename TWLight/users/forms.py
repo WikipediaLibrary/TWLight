@@ -48,6 +48,7 @@ class SetLanguageForm(forms.Form):
 
 
 
+
 class TermsForm(forms.ModelForm):
     class Meta:
         model = UserProfile

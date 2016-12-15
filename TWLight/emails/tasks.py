@@ -26,7 +26,7 @@ import logging
 
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
-from django.contrib.sites.models import get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 from django.dispatch import receiver
 
 from TWLight.applications.models import Application

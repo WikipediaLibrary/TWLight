@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import date, timedelta
+from itertools import chain
 from mock import patch
 import reversion
 from urlparse import urlparse
@@ -71,10 +72,15 @@ class SynchronizeFieldsTest(TestCase):
     current code, we need to add that information to several places. This test
     ensures that all of those places are kept in sync - that is, that we update
     all the things we need to update, if we update any of them.
-
-    Note: the Django _meta API changes in 1.8 and this code will need
-    to be updated accordingly if TWLight is upgraded to 1.8.
     """
+
+    def _get_all_field_names(self, model):
+        # See https://docs.djangoproject.com/en/1.10/ref/models/meta/#migrating-from-the-old-api.
+        return list(set(chain.from_iterable(
+            (field.name, field.attname) if hasattr(field, 'attname') else (field.name,)
+            for field in model._meta.get_fields()
+            if not (field.many_to_one and field.related_model is None)
+        )))
 
     def test_user_form_fields_reflected_in_partner(self):
         """
@@ -82,7 +88,7 @@ class SynchronizeFieldsTest(TestCase):
         the optional user data.
         """
         for field in USER_FORM_FIELDS:
-            self.assertTrue(field in Partner._meta.get_all_field_names())
+            self.assertTrue(field in self._get_all_field_names(Partner))
 
 
     def test_optional_partner_form_fields_reflected_in_partner(self):
@@ -91,7 +97,7 @@ class SynchronizeFieldsTest(TestCase):
         the optional partner data.
         """
         for field in PARTNER_FORM_OPTIONAL_FIELDS:
-            self.assertTrue(field in Partner._meta.get_all_field_names())
+            self.assertTrue(field in self._get_all_field_names(Partner))
 
 
     def test_partner_optional_fields_are_boolean(self):
@@ -113,7 +119,7 @@ class SynchronizeFieldsTest(TestCase):
         partner data, as needed.
         """
         for field in PARTNER_FORM_OPTIONAL_FIELDS:
-            self.assertTrue(field in Application._meta.get_all_field_names())
+            self.assertTrue(field in self._get_all_field_names(Application))
 
 
     def test_application_optional_fields_match_field_type(self):
@@ -146,7 +152,7 @@ class SynchronizeFieldsTest(TestCase):
         needed.
         """
         for field in USER_FORM_FIELDS:
-            self.assertTrue(field in Editor._meta.get_all_field_names())
+            self.assertTrue(field in self._get_all_field_names(Editor))
 
 
     def test_editor_optional_fields_match_field_type(self):
