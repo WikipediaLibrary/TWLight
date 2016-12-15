@@ -6,4 +6,5 @@ Upgrading to Django!
     * make sure www-data ends up as owner of virtualenv
 * python manage.py migrate django_comments --fake-initial
 * python manage.py migrate
+* python manage.py collectedstatic
 * restart gunicorn
