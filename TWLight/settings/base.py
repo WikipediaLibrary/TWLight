@@ -160,20 +160,26 @@ USE_TZ = True
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'OPTIONS': {
+            # Reiterating the default so we can add to it later.
+            'context_processors': (
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages'
+            )
+        }
+    },
+]
 
-# Reiterating the default so we can add to it later.
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages"
-)
 
 
 # STATIC FILE CONFIGURATION
