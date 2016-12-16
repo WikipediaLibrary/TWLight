@@ -154,11 +154,11 @@ class Partner(models.Model):
         "a time. This field must be filled in when Partners have multiple "
         "Streams, but may be left blank otherwise."))
 
-    # See comment in save().
-    access_grant_term = DurationField(
+    access_grant_term = models.DurationField(
         blank=True, null=True,
+        default=timedelta(days=365),
         help_text=_("The standard length of an access grant from this Partner. "
-                    "Enter like '365 days' or '365d' or '1 year'.")
+            "Entered as <days hours:minutes:seconds>. Defaults to 365 days.")
         )
 
     languages = models.ManyToManyField(Language, blank=True, null=True)
@@ -206,17 +206,6 @@ class Partner(models.Model):
             if self.mutually_exclusive is None:
                 raise ValidationError('Since this resource has multiple '
                     'Streams, you must specify a value for mutually_exclusive.')
-
-
-    def save(self, *args, **kwargs):
-        if not self.access_grant_term:
-            # We can't declare a default access grant term in the ORM due to a
-            # bug not fixed in Django until 1.8:
-            # https://code.djangoproject.com/ticket/24566
-            # However, code elsewhere expects the access grant term to exist.
-            # So we will make sure it happens on model save.
-            self.access_grant_term = timedelta(days=365)
-        super(Partner, self).save(*args, **kwargs)
 
 
     def get_absolute_url(self):
