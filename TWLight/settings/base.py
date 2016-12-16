@@ -272,15 +272,6 @@ CONSUMER_SECRET = os.environ.get('TWLIGHT_CONSUMER_SECRET', None)
 # saves. This makes it untestable. Instead we decorate the Application.save().
 
 
-# DURATIONFIELD CONFIGURATION
-# ------------------------------------------------------------------------------
-
-# See https://django-durationfield.readthedocs.org/en/latest/#usage
-DURATIONFIELD_ALLOW_MONTHS = True
-DURATIONFIELD_ALLOW_YEARS = True
-
-
-
 # DJMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 
