@@ -219,8 +219,7 @@ class SynchronizeFieldsTest(TestCase):
         setattr(app, SPECIFIC_TITLE, 'Alice in Wonderland')
         app.save()
 
-        # Force reload (in 1.8 we can replace this with refresh_from_db)
-        app = Application.objects.get(pk=app.pk)
+        app.refresh_from_db()
 
         output = get_output_for_application(app)
         self.assertEqual(output["Editor's rationale"], 'just because')
@@ -266,8 +265,7 @@ class SynchronizeFieldsTest(TestCase):
         app.agreement_with_terms_of_use = False
         app.save()
 
-        # Force reload (in 1.8 we can replace this with refresh_from_db)
-        app = Application.objects.get(pk=app.pk)
+        app.refresh_from_db()
 
         output = get_output_for_application(app)
         self.assertEqual(output["Editor's rationale"], 'just because')
@@ -311,8 +309,7 @@ class SynchronizeFieldsTest(TestCase):
         app.agreement_with_terms_of_use = False
         app.save()
 
-        # Force reload (in 1.8 we can replace this with refresh_from_db)
-        app = Application.objects.get(pk=app.pk)
+        app.refresh_from_db()
 
         output = get_output_for_application(app)
         self.assertEqual(output["Editor's rationale"], 'just because')
@@ -1031,10 +1028,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
 
         _ = views.SubmitApplicationView.as_view()(request)
-
-        # Force reload from database to see updated values. (In Django 1.8 this
-        # can be replaced with user.editor.refresh_from_db().)
-        editor = Editor.objects.get(pk=user.editor.pk)
+        user.editor.refresh_from_db()
 
         self.assertEqual(editor.real_name, 'Anonymous Coward')
         self.assertEqual(editor.country_of_residence, 'Bolivia')
