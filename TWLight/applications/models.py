@@ -55,11 +55,11 @@ class Application(models.Model):
 
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
-    # In Django 1.8+ we won't need this - we can use F expressions with
-    # annotate/aggregate to get all the metrics we want. But that feature isn't
-    # added until 1.8, and the view code we need to write without it is pretty
-    # messy (and requires us to do lots of stuff in Python rather than in the
-    # database). So we'll precompute here.
+    # We can replace this field with F expressions and annotate/aggregate to get
+    # all the metrics we want. This wasn't an option prior to Django 1.8 (the
+    # code was originally written in 1.7), so we needed to precompute. At this
+    # point the upgrade would be nice to have, but not worth the hassle of
+    # updating all the things that touch this field.
     days_open = models.IntegerField(blank=True, null=True,
         help_text=_('Do not override this field! Its value is set automatically '
                   'when the application is saved, and overriding it may have '

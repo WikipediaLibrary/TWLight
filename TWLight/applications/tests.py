@@ -1028,7 +1028,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
 
         _ = views.SubmitApplicationView.as_view()(request)
-        user.editor.refresh_from_db()
+        editor = user.editor
+        editor.refresh_from_db()
 
         self.assertEqual(editor.real_name, 'Anonymous Coward')
         self.assertEqual(editor.country_of_residence, 'Bolivia')

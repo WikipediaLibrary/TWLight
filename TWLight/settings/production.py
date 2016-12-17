@@ -51,3 +51,15 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False # Important, or you will get an SMTPException on wmlabs
 DEFAULT_FROM_EMAIL = 'Wikipedia Library Card Platform <noreply@twl-test.wmflabs.org>'
+
+# SecurityMiddleware configuration as suggested by
+# python manage.py check --deploy
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
