@@ -141,7 +141,9 @@ class Partner(models.Model):
             "that users agree to terms of use as a condition of applying for "
             "access; optional otherwise."))
     description = models.TextField(blank=True, null=True,
-        help_text=_("Optional description of this partner's offerings."))
+        help_text=_("Optional description of this partner's offerings. You can "
+            "enter HTML and it should render properly - if it does not, the "
+            "developer forgot a | safe filter in the template."))
     logo_url = models.URLField(blank=True, null=True,
         help_text=_('Optional URL of an image that can be used to represent '
                     'this partner.'))
@@ -246,7 +248,9 @@ class Stream(models.Model):
             "need to be presented together, templates are responsible for "
             "presenting them in a format that can be internationalized."))
     description = models.TextField(blank=True, null=True,
-        help_text=_("Optional description of this stream's contents."))
+        help_text=_("Optional description of this stream's contents. You can "
+            "enter HTML and it should render properly - if it does not, the "
+            "developer forgot a | safe filter in the template."))
 
     languages = models.ManyToManyField(Language, blank=True, null=True)
 

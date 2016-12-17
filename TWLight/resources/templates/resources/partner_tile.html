@@ -23,7 +23,7 @@
 
     {% if partner.description %}
       <p>
-        {{ partner.description }}
+        {{ partner.description | safe }}
       </p>
       <hr />
     {% endif %}
