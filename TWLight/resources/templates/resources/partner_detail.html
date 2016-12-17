@@ -35,7 +35,7 @@
       <div class="timeline-panel">
         <div class="timeline-body">
           {% if object.description %}
-            <p>{{ object.description }}</p>
+            <p>{{ object.description | safe }}</p>
           {% else %}
             {% trans "Description not available." %}
           {% endif %}
@@ -169,7 +169,7 @@
           <div class="timeline-body">
             <ul>
               {% for stream in object.streams.all %}
-                <li><b>{{ stream }}</b> {% if stream.description %}&mdash; {{ stream.description }}{% endif %}</li>
+                <li><b>{{ stream }}</b> {% if stream.description %}&mdash; {{ stream.description | safe}}{% endif %}</li>
               {% endfor %}
             </ul>
           </div>
