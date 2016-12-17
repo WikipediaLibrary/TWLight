@@ -11,7 +11,7 @@ In general, you will do admin-y things at the `/admin` URL. This gives you a GUI
 
 ## Translations
 
-See `locale/README.md`. You will need cooperation from a sysadmin if you do not have command-line access.
+See `locale/README.md`. This file contains instructions for translators as well as for TWL developers working with translators. You will need a sysadmin to deploy new or updated translations.
 
 ## Logging in
 

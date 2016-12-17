@@ -50,9 +50,11 @@ Some places the variable syntax is instead `%(variablename)s` - again, just move
 
 There are a few places where two versions of the translation string are provided, plural and singular, and you will need to provide multiple translations accordingly. (If the target language needs more than two singular/plural forms, talk to the developer.)
 
+Use non-gendered language where possible. If not possible, use neutral gender terms as available. If not possible, use both forms separated by a slash, as in Latina/o or Latina/Latino. (TWL's English is written to avoid use of gendered terms, but the Wikipedia Library recognizes that this is not possible in all languages.) 
+
 If this is not the first time a translation has been made in your target language, you may see lines that start with `#| msgid` rather than `msgid`. These lines indicate the English text that the site had whenever the last translation file was generated (`#| msgid`), so that you can compare it to the current version (`msgid`) and see whether updates are needed. You will also see the previous translation, if available, following `msgstr`. You are welcome to leave it alone if it's still correct.
 
-## Translation process (for developers)
+## Translation process (for sysadmins)
 
 Run these commands from the root `TWLight/` directory.
 
@@ -65,7 +67,7 @@ If you are adding a new language to the site, you will also need to add it to th
 
 The contents of the `LANGUAGES` variable will automatically be offered to users as options for site translation on their user profile pages. If they choose a language that doesn't yet have a translation file available, the site will render in the default language specified by LANGUAGE_CODE. (Users may not be able to read this, but the app will not crash.) If the translation file is incomplete, translation strings will be rendered in their original language (probably English).
 
-## Troubleshooting (for developers)
+## Troubleshooting (for sysadmins)
 ### Having trouble setting things up?
 
 The `locale/ `directory must be manually created (but it has been, so this should not be a problem).
@@ -91,9 +93,9 @@ The from setting should match what `file` told you about the file encoding.
 
 ### Getting errors about whitespace (like `msgid` and `msgstr` do not both begin or end with `\n`)?
 
-You can fix them manually. You can also improve your code to make them less likely to recur:
-* Use `blocktrans trimmed`, not just `blocktrans`
-* Format multiline strings in .py files in ways that do not have leading or terminating newlines
+You can fix them manually. You can also improve the code to make them less likely to recur:
+* Use `{% blocktrans trimmed %}` in templates, not just `{% blocktrans %}`
+* Format multiline strings in `.py` files in ways that do not have leading or terminating newlines
 
 You should also ensure your translators know that they need to preserve whitespace (including whitespace-only lines); that `\n` is a newline character; that they DO have to preserve any `\n`s at the beginning and end of the string; that they DON'T have to preserve any of the others - they can use them if the spirit of the original expects carriage returns, but they don't have to.
 
