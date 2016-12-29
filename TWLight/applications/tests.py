@@ -1470,7 +1470,172 @@ class ListApplicationsTest(BaseApplicationViewTest):
             _ = views.ListApplicationsView.as_view()(request)
 
 
+    def test_ensure_object_list_exists_case_1(self):
+        """
+        Case 1 is ListApplicationsView / post.
 
+        If self.object_list does not exist, server errors can result. Since
+        we override the self.object_list setting behavior on our application
+        list views, we should check to ensure we haven't omitted
+        self.object_list.
+
+        We set it in get_context_data, hence the call to that. The Django
+        generic view ensures this function will be called.
+        """
+        url = reverse('applications:list')
+        new_partner = PartnerFactory()
+
+        request = RequestFactory().post(url, {'partner': new_partner.pk})
+        request.user = self.coordinator
+
+        instance = views.ListApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_2(self):
+        """
+        Case 2 is ListApplicationsView / get.
+        """
+        url = reverse('applications:list')
+        request = RequestFactory().get(url)
+        request.user = self.coordinator
+
+        instance = views.ListApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_3(self):
+        """
+        Case 3 is ListApprovedApplicationsView / post.
+        """
+        url = reverse('applications:list_approved')
+        new_partner = PartnerFactory()
+
+        request = RequestFactory().post(url, {'partner': new_partner.pk})
+        request.user = self.coordinator
+
+        instance = views.ListApprovedApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_4(self):
+        """
+        Case 4 is ListApprovedApplicationsView / get.
+        """
+        url = reverse('applications:list_rejected')
+        request = RequestFactory().get(url)
+        request.user = self.coordinator
+
+        instance = views.ListApprovedApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_5(self):
+        """
+        Case 5 is ListRejectedApplicationsView / post.
+        """
+        url = reverse('applications:list_rejected')
+        new_partner = PartnerFactory()
+
+        request = RequestFactory().post(url, {'partner': new_partner.pk})
+        request.user = self.coordinator
+
+        instance = views.ListRejectedApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_6(self):
+        """
+        Case 4 is ListRejectedApplicationsView / get.
+        """
+        url = reverse('applications:list_rejected')
+        request = RequestFactory().get(url)
+        request.user = self.coordinator
+
+        instance = views.ListRejectedApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_7(self):
+        """
+        Case 7 is ListExpiringApplicationsView / post.
+        """
+        url = reverse('applications:list_expiring')
+        new_partner = PartnerFactory()
+
+        request = RequestFactory().post(url, {'partner': new_partner.pk})
+        request.user = self.coordinator
+
+        instance = views.ListExpiringApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_8(self):
+        """
+        Case 8 is ListExpiringApplicationsView / get.
+        """
+        url = reverse('applications:list_expiring')
+        request = RequestFactory().get(url)
+        request.user = self.coordinator
+
+        instance = views.ListExpiringApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_9(self):
+        """
+        Case 9 is ListSentApplicationsView / post.
+        """
+        url = reverse('applications:list_expiring')
+        new_partner = PartnerFactory()
+
+        request = RequestFactory().post(url, {'partner': new_partner.pk})
+        request.user = self.coordinator
+
+        instance = views.ListSentApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
+
+
+    def test_ensure_object_list_exists_case_10(self):
+        """
+        Case 10 is ListSentApplicationsView / get.
+        """
+        url = reverse('applications:list_expiring')
+        request = RequestFactory().get(url)
+        request.user = self.coordinator
+
+        instance = views.ListSentApplicationsView()
+        instance.request = request
+        instance.get_context_data()
+
+        self.assertTrue(hasattr(instance, 'object_list'))
 class ApplicationModelTest(TestCase):
 
     def test_approval_sets_date_closed(self):
