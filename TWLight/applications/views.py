@@ -362,8 +362,16 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         # If the view lets users apply filters to the queryset, this is where
         # the filtered queryset can be set as the object_list for the view.
         # If the view doesn't have filters, or the user hasn't applied them,
-        # this is a no-op that lets the defaults continue on their merry way.
-        pass
+        # this applies default Django behavior.
+        base_qs = self.get_queryset()
+        if filters:
+            editor = filters[0]['object']
+            partner = filters[1]['object']
+            self.object_list = self._filter_queryset(base_qs=base_qs,
+                                                editor=editor,
+                                                partner=partner)
+        else:
+            self.object_list = base_qs
 
 
     def get_queryset(self):
@@ -491,18 +499,6 @@ class ListApplicationsView(_BaseListApplicationView):
         context['pending_class'] = 'active'
 
         return context
-
-
-    def _set_object_list(self, filters):
-        base_qs = self.get_queryset()
-        if filters:
-            editor = filters[0]['object']
-            partner = filters[1]['object']
-            self.object_list = self._filter_queryset(base_qs=base_qs,
-                                                editor=editor,
-                                                partner=partner)
-        else:
-            self.object_list = base_qs
 
 
 
