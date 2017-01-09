@@ -1636,21 +1636,26 @@ class ListApplicationsTest(BaseApplicationViewTest):
         instance.get_context_data()
 
         self.assertTrue(hasattr(instance, 'object_list'))
+
+
+
 class ApplicationModelTest(TestCase):
 
     def test_approval_sets_date_closed(self):
-        app = ApplicationFactory(status=Application.PENDING)
+        app = ApplicationFactory(status=Application.PENDING, date_closed=None)
         self.assertFalse(app.date_closed)
+        print app.date_closed
 
         app.status = Application.APPROVED
         app.save()
 
+        print app.date_closed
         self.assertTrue(app.date_closed)
         self.assertEqual(app.date_closed, date.today())
 
 
     def test_approval_sets_days_open(self):
-        app = ApplicationFactory(status=Application.PENDING)
+        app = ApplicationFactory(status=Application.PENDING, date_closed=None)
         self.assertEqual(app.days_open, None)
 
         app.status = Application.APPROVED
@@ -1660,7 +1665,7 @@ class ApplicationModelTest(TestCase):
 
 
     def test_rejection_sets_date_closed(self):
-        app = ApplicationFactory(status=Application.PENDING)
+        app = ApplicationFactory(status=Application.PENDING, date_closed=None)
         self.assertFalse(app.date_closed)
 
         app.status = Application.NOT_APPROVED
@@ -1672,7 +1677,7 @@ class ApplicationModelTest(TestCase):
 
     def test_rejection_sets_days_open(self):
         # date_created will be auto set to today
-        app = ApplicationFactory(status=Application.PENDING)
+        app = ApplicationFactory(status=Application.PENDING, date_closed=None)
         self.assertTrue(app.days_open == None)
 
         app.status = Application.NOT_APPROVED

@@ -26,7 +26,7 @@ INSTALLED_APPS += (
 )
 
 # Use nose to run all tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+#TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = [
     #'--with-coverage',
