@@ -186,7 +186,6 @@ class Application(models.Model):
             return (date.today() - self.date_created).days
         else:
             assert self.status in [self.APPROVED, self.NOT_APPROVED, self.SENT]
-            print (self.date_closed - self.date_created).days
             return (self.date_closed - self.date_created).days
 
 
