@@ -61,9 +61,13 @@ When full paths are not given, the files are in the project root (`/var/www/html
         * (Note: This file is `.gitignore`d and should therefore be kept out of version control; you can safely add secrets to it.)
     * Edit the list of `ALLOWED_HOSTS` in `/var/www/html/TWLight/TWLight/settings/production.py` (*not* `production_vars.py`) to match your server's URL(s).
 * Rectify permissions
+    * `touch /var/www/html/TWLight/TWLight/logs/twlight.log`
+    * `touch /var/www/html/TWLight/TWLight/logs/gunicorn.log`
     * `sudo chown -vR www /home/www/TWLight`
     * `sudo chown -vR :twlight /var/www/html/TWLight`
     * `sudo chmod -vR g+w /var/www/html/TWLight`
+    * `sudo chmod -vR g+w /var/www/html/TWLight/TWLight/logs/*`
+    * `sudo chmod -vR g+w /var/www/html/TWLight/TWLight/collectedstatic/`
 * Do one-time Django setup steps
     * `cd /var/www/html/TWLight`
     * `sudo python manage.py syncdb`
@@ -71,9 +75,14 @@ When full paths are not given, the files are in the project root (`/var/www/html
     * `sudo python manage.py migrate`
     * `sudo python manage.py createinitialrevisions` (see https://django-reversion.readthedocs.io/en/stable/commands.html#createinitialrevisions)
     * `sudo python manage.py collectstatic`
+    * Through the web interface, at `/admin`, make sure that your default Site URL matches your server URL.
+* Run Django
     * `sudo bin/gunicorn_start.sh`
         * This should probably be run as www, not root, but it crashes; not sure where the permissions problem is.
-    * Through the web interface, at `/admin`, make sure that your default Site URL matches your server URL.
+    * _Do not use `python manage.py runserver`_: it is not suitable for production
+    * You don't need to set the `DJANGO_SETTINGS_MODULE` environment variable; it defaults to `TWLight.settings.production`.
+        * Don't change this unless you know things about deploying Django in production.
+
 
 **TODO**
 oauth....or maybe NOT oauth, as we should disallow account creation outside admin
@@ -82,19 +91,12 @@ update gunicorn_start.sh to use a virtualenv in /home/www, and alter production 
 edit the rest of this doc
 decide what must be checked before you promote code to production
 
-## Running Django
-
-### Starting your Django server
-* _Do not use `python manage.py runserver`_: it is not suitable for production
-* Running `bin/gunicorn_start.sh` (already done in the setup instructions) starts the gunicorn process that sits between nginx and Django.
-    * Make sure to kill and restart it if you make changes.
-* You don't need to set the `DJANGO_SETTINGS_MODULE` environment variable; it defaults to `TWLight.settings.production`.
-    * Don't change this unless you know things about deploying Django in production.
-
-### Deploying updated code
+## To deploy updated code
 Once updates have been git pushed from their local development environment to the repo, ssh into the server and...
 * `cd /var/www/html/TWLight`
 * `sudo git pull origin master`
+* `su - www`; enter your password for user www; `source /home/www/TWLight/bin/activate`; `pip install -r /var/www/html/TWLight/requirements/wmf.txt`; `exit`
+    * This is only required if there are dependency changes to install, but will not hurt if there aren't.
 * `sudo python manage.py migrate`
     * This is only required if there are database schema changes to apply, but will not hurt if there aren't.
 * `sudo python manage.py collectstatic`
@@ -120,6 +122,11 @@ Once updates have been git pushed from their local development environment to th
 ### MySQL server
 * You will see really weird errors if you forgot the time zone step, and some user names will display improperly if you forgot to specify the character set.
 * You can load the time zones at any time, and `ALTER DATABASE` to specify the character set at any time, but no promises about existing data quality.
+
+### Settings and gunicorn
+* Does `settings.ALLOWED_HOSTS` include your server's URL?
+* Does `bin/gunicorn_start.sh` point at a virtualenv located in the correct place?
+* If you used sudo to pip install requirements, gunicorn will fail; sudo will have installed outside the virtualenv and the files won't be available. You need to install as a user who has permissions to your virtualenv.
 
 ## Logs
 
