@@ -106,6 +106,32 @@ class Application(models.Model):
     # straightforward so we wrap it there.
     @reversion.create_revision()
     def save(self, *args, **kwargs):
+        version = self.get_latest_version()
+        count = self.get_version_count()
+        if count >= 1:
+            orig_status = version.field_dict['status']
+            if (orig_status in [self.PENDING, self.QUESTION]
+                and self.status in [self.APPROVED, self.NOT_APPROVED]
+                and not self.date_closed):
+
+                self.date_closed = date.today()
+                self.days_open = (date.today() - self.date_created).days
+        else:
+            # If somehow we've created an Application whose status is final
+            # at the moment of creation, set its date-closed-type parameters
+            # too.
+            # Note that this block executes if count == 1 and also if
+            # count == None, and the *latter* is what we expect on first save;
+            # get_version_count will return None for reasons it documents.
+            if (self.status in [self.APPROVED, self.NOT_APPROVED]
+                and not self.date_closed):
+
+                self.date_closed = date.today()
+                self.days_open = 0
+
+        if self.date_closed and not self.earliest_expiry_date:
+            self.earliest_expiry_date = self.date_closed + self.partner.access_grant_term
+
         super(Application, self).save(*args, **kwargs)
 
 
@@ -186,6 +212,7 @@ class Application(models.Model):
             return (date.today() - self.date_created).days
         else:
             assert self.status in [self.APPROVED, self.NOT_APPROVED, self.SENT]
+            print (self.date_closed - self.date_created).days
             return (self.date_closed - self.date_created).days
 
 
