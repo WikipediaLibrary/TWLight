@@ -260,7 +260,7 @@ class TermsView(UpdateView):
             return None
 
 
-    def get_form(self, form_class=None):
+    def get_form(self, form_class):
         """
         For authenticated users, returns an instance of the form to be used in
         this view. For anonymous users, returns None.

@@ -578,3 +578,23 @@ class AuthorizationTestCase(TestCase):
     # OAuthCallbackView - check the error cases
     # Make sure inactive users don't get logged in (mock call to authenticate)
     # Make sure users who haven't agreed to the terms get redirected there
+
+
+
+
+class TermsTestCase(TestCase):
+
+    def test_terms_page_displays(self):
+        """
+        Terms page should display for authenticated users.
+
+        We had a bug where attempting to view the page caused a 500 error.
+        """
+        _ = User.objects.create_user(username='termstestcase', password='bar')
+        url = reverse('terms')
+
+        c = Client()
+        c.login(username='termstestcase', password='bar')
+        response = c.get(url)
+
+        self.assertEqual(response.status_code, 200)
