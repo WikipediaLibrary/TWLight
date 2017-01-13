@@ -27,6 +27,7 @@ import logging
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 from TWLight.applications.models import Application
@@ -43,8 +44,20 @@ class CommentNotificationEmailEditors(template_mail.TemplateMail):
     name = 'comment_notification_editors'
 
 
+
 class CommentNotificationEmailOthers(template_mail.TemplateMail):
     name = 'comment_notification_others'
+
+
+
+class ApprovalNotification(template_mail.TemplateMail):
+    name = 'approval_notification'
+
+
+
+class RejectionNotification(template_mail.TemplateMail):
+    name = 'rejection_notification'
+
 
 
 @receiver(comment_was_posted)
@@ -109,3 +122,53 @@ def send_comment_notification_emails(sender, **kwargs):
             email.send(user_email, {'app': app, 'app_url': app_url})
             logger.info('Email queued for {app.editor.user.email} about app '
                 '#{app.pk}'.format(app=app))
+
+
+
+def send_approval_notification_email(instance):
+    email = ApprovalNotification()
+    email.send(instance.user.email,
+        {'user': instance.user, 'partner': instance.partner})
+
+
+def send_rejection_notification_email(instance):
+    base_url = get_current_site().domain
+    app_url = 'https://{base}{path}'.format(
+        base=base_url, path=instance.get_absolute_url())
+
+    email = RejectionNotification()
+    email.send(instance.user.email,
+        {'user': instance.user,
+         'partner': instance.partner,
+         'app_url': app_url})
+
+
+@receiver(pre_save, sender=Application)
+def update_app_status_on_save(sender, instance, **kwargs):
+    """
+    If the Application's status has changed in a way that justifies sending
+    email, do so. Otherwise, do nothing.
+    """
+    # Maps application status to the correct email handling function.
+    handlers = {
+        Application.APPROVED: send_approval_notification_email,
+        Application.NOT_APPROVED: send_rejection_notification_email,
+    }
+
+    # Case 1: Application already existed; status has been changed.
+    if instance.id:
+        orig_app = Application.objects.get(pk=instance.id)
+        orig_status = orig_app.status
+
+        if orig_status != instance.status:
+            # Send the email corresponding to its new status.
+            handlers[instance.status](instance)
+
+    # Case 2: Application was just created.
+    else:
+        try:
+            # Send email if it has an email-worthy status.
+            handlers[instance.status](instance)
+        except KeyError:
+            # Or do nothing if the status is uninteresting.
+            pass

@@ -1,10 +1,11 @@
 {% load i18n %}
 
-{% blocktrans trimmed with partner=app.partner %}
-There is a new comment on your application to access resources provided by
-{{ partner }}. Sometimes this means that a coordinator needs additional
-information from you in order to decide on your application, so please have
-a look. Your application is available at {{ app_url }}.
+{% blocktrans trimmed with partner=app.partner user=app.user %}
+Dear {{ user }},
 
-Thanks for helping make knowledge available to the world!
+Thank you for applying for access to {{ partner }} resources through The Wikipedia Library. There are one or more comments on your application that require a response from you. Please reply to these at {{ app_url }} so we can evaluate your application.
+
+Best,
+
+The Wikipedia Library
 {% endblocktrans %}

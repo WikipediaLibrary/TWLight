@@ -52,12 +52,14 @@ class ApplicationCommentTest(TestCase):
 
         return comm
 
+
     def _set_up_email_test_objects(self):
         app = ApplicationFactory(editor=self.editor.editor)
 
         factory = RequestFactory()
         request = factory.post(get_form_target())
         return app, request
+
 
     def test_comment_email_sending_1(self):
         """
@@ -130,24 +132,15 @@ class ApplicationCommentTest(TestCase):
             self.assertEqual(mail.outbox[0].to, [self.editor.email])
 
 
-    @patch('TWLight.emails.tasks.send_comment_notification_emails')
-    def test_commenting_calls_email_function(self, mock_email):
-        app, request = self._set_up_email_test_objects()
-
-        self.assertEqual(len(mail.outbox), 0)
-
-        comment1 = self._create_comment(app, self.coordinator1)
-        comment_was_posted.send(
-            sender=Comment,
-            comment=comment1,
-            request=request
-            )
-
-        self.assertTrue(mock_email.called)
+    # We'd like to mock out send_comment_notification_emails and test that
+    # it is called when comment_was_posted is fired, but we can't; the signal
+    # handler is attached to the real send_comment_notification_emails, not
+    # the mocked one.
 
 
 
 class ApplicationStatusTest(TestCase):
+
     @patch('TWLight.emails.tasks.send_approval_notification_email')
     def test_approval_calls_email_function(self, mock_email):
         app = ApplicationFactory(status=Application.PENDING)
@@ -156,12 +149,61 @@ class ApplicationStatusTest(TestCase):
         self.assertTrue(mock_email.called)
 
 
+    @patch('TWLight.emails.tasks.send_approval_notification_email')
+    def test_reapproval_does_not_call_email_function(self, mock_email):
+        """
+        Saving an Application with APPROVED status, when it already had an
+        APPROVED status, should not re-send the email.
+        """
+        app = ApplicationFactory(status=Application.PENDING)
+        app.status = Application.APPROVED
+        app.save()
+        app.save()
+        self.assertEqual(mock_email.call_count, 1)
+
+
     @patch('TWLight.emails.tasks.send_rejection_notification_email')
     def test_rejection_calls_email_function(self, mock_email):
         app = ApplicationFactory(status=Application.PENDING)
         app.status = Application.NOT_APPROVED
         app.save()
         self.assertTrue(mock_email.called)
+
+
+    @patch('TWLight.emails.tasks.send_rejection_notification_email')
+    def test_rerejection_does_not_call_email_function(self, mock_email):
+        app = ApplicationFactory(status=Application.PENDING)
+        app.status = Application.NOT_APPROVED
+        app.save()
+        app.save()
+        self.assertEqual(mock_email.call_count, 1)
+
+
+    def test_pending_does_not_call_email_function(self):
+        """
+        Applications saved with a PENDING status should not generate email.
+        """
+        orig_outbox = len(mail.outbox)
+        _ = ApplicationFactory(status=Application.PENDING)
+        self.assertEqual(len(mail.outbox), orig_outbox)
+
+
+    def test_question_does_not_call_email_function(self):
+        """
+        Applications saved with a QUESTION status should not generate email.
+        """
+        orig_outbox = len(mail.outbox)
+        _ = ApplicationFactory(status=Application.QUESTION)
+        self.assertEqual(len(mail.outbox), orig_outbox)
+
+
+    def test_sent_does_not_call_email_function(self):
+        """
+        Applications saved with a SENT status should not generate email.
+        """
+        orig_outbox = len(mail.outbox)
+        _ = ApplicationFactory(status=Application.SENT)
+        self.assertEqual(len(mail.outbox), orig_outbox)
 
 
     # Application.WAITLIST is not yet implemented.
