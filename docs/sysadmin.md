@@ -136,4 +136,6 @@ Gunicorn log: `/var/www/html/TWLight/logs/gunicorn.log`
 Postfix and nginx log to their system defaults.
 
 ## Translations
-The TWLight alpha ships with English, French, and Finnish. If you have translation files in a new language to deploy (yay!), or updates to an existing language file, see `locale/README.md`.
+The TWLight alpha ships with English, French, and Finnish. If you have translation files in a new language to deploy (yay!), or updates to an existing language file, see `locale/README.md`. This covers translations of all content in `.html` and `.py` files.
+
+If you would like to translate *model instance content* (for instance, `Partner.description`), this uses the django-modeltranslation app. See https://django-modeltranslation.readthedocs.io/ for documentation; see `TWLight/resources/translation.py` for an example.

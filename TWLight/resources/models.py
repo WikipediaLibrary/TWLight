@@ -141,7 +141,10 @@ class Partner(models.Model):
     description = models.TextField(blank=True, null=True,
         help_text=_("Optional description of this partner's offerings. You can "
             "enter HTML and it should render properly - if it does not, the "
-            "developer forgot a | safe filter in the template."))
+            "developer forgot a | safe filter in the template. Whatever you "
+            "enter here will also be automatically copied over to the "
+            "description field for *your current language*, so you do not "
+            "need to also fill that out."))
     logo_url = models.URLField(blank=True, null=True,
         help_text=_('Optional URL of an image that can be used to represent '
                     'this partner.'))
@@ -161,7 +164,10 @@ class Partner(models.Model):
             "Entered as <days hours:minutes:seconds>. Defaults to 365 days.")
         )
 
-    languages = models.ManyToManyField(Language, blank=True, null=True)
+    languages = models.ManyToManyField(Language, blank=True, null=True,
+        help_text=_("Select all languages in which this partner publishes "
+            "content.")
+        )
 
 
     # Non-universal form fields

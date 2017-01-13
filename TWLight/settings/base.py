@@ -59,7 +59,7 @@ TWLIGHT_APPS = (
     'TWLight.graphs',
 )
 
-# autocomplete_light must go before django.contrib.admin
+# autocomplete_light and modeltranslation must go before django.contrib.admin.
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 
 
