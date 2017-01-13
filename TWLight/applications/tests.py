@@ -222,8 +222,6 @@ class SynchronizeFieldsTest(TestCase):
         app.refresh_from_db()
 
         output = get_output_for_application(app)
-        self.assertEqual(output["Editor's rationale"], 'just because')
-        self.assertEqual(output['Comments'], 'nope')
         self.assertEqual(output[REAL_NAME], 'Alice')
         self.assertEqual(output[COUNTRY_OF_RESIDENCE], 'Holy Roman Empire')
         self.assertEqual(output[OCCUPATION], 'Dog surfing instructor')
@@ -231,13 +229,11 @@ class SynchronizeFieldsTest(TestCase):
         self.assertEqual(output[SPECIFIC_STREAM], stream)
         self.assertEqual(output[SPECIFIC_TITLE], 'Alice in Wonderland')
         self.assertEqual(output['Email'], 'alice@example.com')
-        self.assertEqual(output['Home wiki'], 'en')
-        self.assertEqual(output['Username'], 'wp_alice')
         self.assertEqual(output[AGREEMENT_WITH_TERMS_OF_USE], True)
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(12, len(output.keys()))
+        self.assertEqual(8, len(output.keys()))
 
 
 
@@ -268,15 +264,11 @@ class SynchronizeFieldsTest(TestCase):
         app.refresh_from_db()
 
         output = get_output_for_application(app)
-        self.assertEqual(output["Editor's rationale"], 'just because')
-        self.assertEqual(output['Comments'], 'nope')
         self.assertEqual(output['Email'], 'alice@example.com')
-        self.assertEqual(output['Home wiki'], 'en')
-        self.assertEqual(output['Username'], 'wp_alice')
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(5, len(output.keys()))
+        self.assertEqual(1, len(output.keys()))
 
 
     def test_application_output_3(self):
@@ -312,19 +304,15 @@ class SynchronizeFieldsTest(TestCase):
         app.refresh_from_db()
 
         output = get_output_for_application(app)
-        self.assertEqual(output["Editor's rationale"], 'just because')
-        self.assertEqual(output['Comments'], 'nope')
         self.assertEqual(output[REAL_NAME], 'Alice')
         self.assertEqual(output[COUNTRY_OF_RESIDENCE], 'Holy Roman Empire')
         self.assertEqual(output[OCCUPATION], 'Dog surfing instructor')
         self.assertEqual(output[AFFILIATION], 'The Long Now Foundation')
         self.assertEqual(output['Email'], 'alice@example.com')
-        self.assertEqual(output['Home wiki'], 'en')
-        self.assertEqual(output['Username'], 'wp_alice')
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(9, len(output.keys()))
+        self.assertEqual(5, len(output.keys()))
 
 
 
