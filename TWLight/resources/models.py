@@ -8,8 +8,6 @@ from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 
-from durationfield.db.models.fields.duration import DurationField
-
 RESOURCE_LANGUAGES = copy.copy(LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
