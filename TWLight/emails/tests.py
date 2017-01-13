@@ -1,3 +1,5 @@
+from mock import patch
+
 from django_comments import get_form_target
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
@@ -10,6 +12,13 @@ from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.users.factories import EditorFactory
 from TWLight.users.groups import get_coordinators
+
+# We need to import these in order to register the signal handlers; if we don't,
+# when we test that those handler functions have been called, we will get
+# False even when they work in real life.
+from .tasks import (send_comment_notification_emails,
+                    send_approval_notification_email,
+                    send_rejection_notification_email)
 
 class ApplicationCommentTest(TestCase):
 
@@ -119,3 +128,42 @@ class ApplicationCommentTest(TestCase):
         except AssertionError:
             self.assertEqual(mail.outbox[1].to, [self.coordinator1.email])
             self.assertEqual(mail.outbox[0].to, [self.editor.email])
+
+
+    @patch('TWLight.emails.tasks.send_comment_notification_emails')
+    def test_commenting_calls_email_function(self, mock_email):
+        app, request = self._set_up_email_test_objects()
+
+        self.assertEqual(len(mail.outbox), 0)
+
+        comment1 = self._create_comment(app, self.coordinator1)
+        comment_was_posted.send(
+            sender=Comment,
+            comment=comment1,
+            request=request
+            )
+
+        self.assertTrue(mock_email.called)
+
+
+
+class ApplicationStatusTest(TestCase):
+    @patch('TWLight.emails.tasks.send_approval_notification_email')
+    def test_approval_calls_email_function(self, mock_email):
+        app = ApplicationFactory(status=Application.PENDING)
+        app.status = Application.APPROVED
+        app.save()
+        self.assertTrue(mock_email.called)
+
+
+    @patch('TWLight.emails.tasks.send_rejection_notification_email')
+    def test_rejection_calls_email_function(self, mock_email):
+        app = ApplicationFactory(status=Application.PENDING)
+        app.status = Application.NOT_APPROVED
+        app.save()
+        self.assertTrue(mock_email.called)
+
+
+    # Application.WAITLIST is not yet implemented.
+    # def test_waitlisting_calls_email_function(self):
+    #     assert False
