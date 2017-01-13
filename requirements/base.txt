@@ -4,6 +4,7 @@ django-autocomplete-light==2.3.3
 django-contrib-comments==1.7.3
 django-crispy-forms==1.6.1
 django-durationfield==0.5.2
+django-modeltranslation==0.12
 django-reversion==2.0.8
 djmail==1.0.0
 factory_boy==2.7.0

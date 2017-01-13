@@ -47,7 +47,8 @@ THIRD_PARTY_APPS = (
     'crispy_forms',
     'reversion',
     'autocomplete_light',
-    'django_comments'
+    'django_comments',
+    'modeltranslation'
 )
 
 TWLIGHT_APPS = (
