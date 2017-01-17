@@ -67,5 +67,7 @@ SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # This defaults to http, but in production we use https, so we overwrite the
-# default.
-REQUEST_BASE_URL = 'https://%s' % Site.objects.get_current().domain
+# default. Also, we'd like to use Site.objects.get_current().domain, but we
+# can't import Site into settings - it's not available when Django first uses
+# the settings file, and the site refuses to load.
+REQUEST_BASE_URL = 'https://twl-test.wmflabs.org'
