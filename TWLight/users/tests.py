@@ -37,7 +37,7 @@ FAKE_IDENTITY = {
     'blocked': False,
     'iss': 'https://en.wikipedia.org',
     'sub': 567823,
-    'rights': ['deletion', 'spaceflight'],
+    'rights': ['deletion', 'spaceflight', 'autoconfirmed'],
     'groups': ['charismatic megafauna'],
     'email': 'alice@example.com',
     'username': 'alice',
@@ -512,6 +512,32 @@ class AuthorizationTestCase(TestCase):
         # tested elsewhere.
 
 
+    @patch('urllib2.urlopen')
+    def test_do_not_create_user_without_autoconfirmed(self, mock_urllib2):
+        """
+        OAuthBackend._create_user_and_editor() should not create a user or
+        editor if the user rights don't contain autoconfirmed.
+        """
+        orig_user_count = User.objects.count()
+        orig_editor_count = Editor.objects.count()
+
+        oauth_backend = OAuthBackend()
+        data = FAKE_IDENTITY_DATA
+        identity = FAKE_IDENTITY
+        identity['rights'] = ['no_autoconfirmed_here']
+
+        mock_response = Mock()
+        mock_response.read.side_effect = [json.dumps(data)] * 7
+        mock_urllib2.return_value = mock_response
+
+        user, editor = oauth_backend._create_user_and_editor(identity)
+
+        self.assertEqual(user, None)
+        self.assertEqual(editor, None)
+        self.assertEqual(orig_user_count, User.objects.count())
+        self.assertEqual(orig_editor_count, Editor.objects.count())
+
+
     # We mock out this function for two reasons:
     # 1) To prevent its call to an external API, which we would have otherwise
     #    had to mock anyway;
@@ -571,14 +597,6 @@ class AuthorizationTestCase(TestCase):
         self.assertEqual(user.editor.wp_sub, new_sub)
 
         mock_update.assert_called_once_with(identity)
-
-
-    # Mock out the urllib calls!
-    # authenticate - think through this one
-    # OAuthCallbackView - check the error cases
-    # Make sure inactive users don't get logged in (mock call to authenticate)
-    # Make sure users who haven't agreed to the terms get redirected there
-
 
 
 
