@@ -2,19 +2,28 @@ import csv
 # django-request analytics package, NOT requests URL library!
 from request.models import Request
 
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.test import TestCase, Client
+from django.test import TestCase
+from django.test.client import RequestFactory
 
+from . import views
 
 class GraphsTestCase(TestCase):
 
     @classmethod
     def setUpClass(cls):
         super(GraphsTestCase, cls).setUpClass()
-        cls.client = Client()
+        cls.factory = RequestFactory()
+
         Request(path='/admin/', ip='127.0.0.1').save()
         Request(path='/admin/', ip='127.0.0.1').save()
         Request(path='/admin/login/', ip='127.0.0.1').save()
+
+        user = User.objects.create_user(username='foo', password='bar')
+        user.is_staff = True
+        user.save()
+        cls.staff_user = user
 
 
     def _verify_equal(self, resp, expected_data):
@@ -33,7 +42,13 @@ class GraphsTestCase(TestCase):
 
     def test_csv_page_views(self):
         url = reverse('csv:page_views')
-        resp = self.client.get(url)
+
+        # Page view metrics are limited to staff, so make sure to use
+        # RequestFactory to add a staff user to the request.
+        req = self.factory.get(url)
+        req.user = self.staff_user
+
+        resp = views.CSVPageViews.as_view()(req)
 
         expected_data = [['/admin/', '2'], ['/admin/login/', '1']]
 
@@ -43,7 +58,10 @@ class GraphsTestCase(TestCase):
     def test_csv_page_views_by_path(self):
         # Try one of the paths in our responses.
         url = reverse('csv:page_views_by_path', kwargs={'path': 'admin/login'})
-        resp = self.client.get(url)
+        req = self.factory.get(url)
+        req.user = self.staff_user
+
+        resp = views.CSVPageViewsByPath.as_view()(req, path='admin/login')
 
         expected_data = [['/admin/login/', '1']]
 
@@ -51,7 +69,10 @@ class GraphsTestCase(TestCase):
 
         # Try the other.
         url = reverse('csv:page_views_by_path', kwargs={'path': 'admin'})
-        resp = self.client.get(url)
+        req = self.factory.get(url)
+        req.user = self.staff_user
+
+        resp = views.CSVPageViewsByPath.as_view()(req, path='admin')
 
         expected_data = [['/admin/', '2']]
 
@@ -59,7 +80,10 @@ class GraphsTestCase(TestCase):
 
         # Try a path we haven't hit.
         url = reverse('csv:page_views_by_path', kwargs={'path': 'fake/url'})
-        resp = self.client.get(url)
+        req = self.factory.get(url)
+        req.user = self.staff_user
+
+        resp = views.CSVPageViewsByPath.as_view()(req, path='fake/url')
 
         expected_data = [['/fake/url/', '0']]
 

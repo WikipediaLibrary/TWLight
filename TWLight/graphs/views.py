@@ -1,10 +1,10 @@
-from collections import Counter
 import csv
 # The django-request analytics package, NOT the python URL library requests!
 from request.models import Request
 import logging
 
-from django.db.models import Avg
+from django.core.exceptions import PermissionDenied
+from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
 from django.utils.translation import ugettext as _
@@ -295,22 +295,37 @@ class CSVUserCountByPartner(_CSVDownloadView):
 
 
 
-
 class CSVPageViews(_CSVDownloadView):
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            return super(CSVPageViews, self).dispatch(request, *args, **kwargs)
+        raise PermissionDenied
+
+
     def _write_data(self, response):
-        path_list = Request.objects.values_list('path', flat=True)
-        counter = Counter(path_list)
+        path_list = Request.objects.values('path').annotate(
+            the_count=Count('path')).order_by()
 
         writer = csv.writer(response)
 
         writer.writerow([_('Page URL'),
             _('Number of (non-unique) visitors')])
 
-        for k, v in counter.items():
-            writer.writerow([k, v])
+        for elem in path_list:
+            writer.writerow([elem['path'], elem['the_count']])
+
 
 
 class CSVPageViewsByPath(_CSVDownloadView):
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            return super(CSVPageViewsByPath, self).dispatch(
+                request, *args, **kwargs)
+        raise PermissionDenied
+
+
     def _write_data(self, response):
         path = self.kwargs['path']
 
