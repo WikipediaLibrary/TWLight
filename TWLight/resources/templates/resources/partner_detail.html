@@ -33,21 +33,21 @@
       {% endif %}
       <div class="well margin-top-20 hidden-xs">
         {% if object.coordinator %}
-          {% blocktrans trimmed with coordinator=object.coordinator partner=object.company_name %}
+          {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
             <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
           {% endblocktrans %}
 
           <ul>
-            {% if object.coordinator.get_talk_page_url %}
+            {% if object.coordinator.editor.wp_talk_page_url %}
               <li>
-                <a href="{{ object.coordinator.get_talk_page_url }}">
+                <a href="{{ object.coordinator.editor.wp_talk_page_url }}">
                   {% trans "Talk page" %}
                 </a>
               </li>            
             {% endif %}
-            {% if object.coordinator.get_email_page_url %}
+            {% if object.coordinator.editor.wp_email_page_url %}
               <li>
-                <a href="{{ object.coordinator.get_email_page_url }}">
+                <a href="{{ object.coordinator.editor.wp_email_page_url }}">
                   {% trans "Special:EmailUser page" %}
                 </a>            
               </li>            
