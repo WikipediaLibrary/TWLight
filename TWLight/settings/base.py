@@ -48,7 +48,10 @@ THIRD_PARTY_APPS = (
     'reversion',
     'autocomplete_light',
     'django_comments',
-    'modeltranslation'
+    'modeltranslation',
+    # DO NOT CONFUSE THIS with requests, the Python URL library! This is
+    # django-request, the user analytics package.
+    'request',
 )
 
 TWLIGHT_APPS = (
@@ -282,3 +285,17 @@ EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
 # This is a dummy backend that will write to stdout. Safe, yet useless.
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 INSTALLED_APPS += ('djmail',)
+
+
+# DJANGO_REQUEST CONFIGURATION
+# ------------------------------------------------------------------------------
+
+MIDDLEWARE_CLASSES += ('request.middleware.RequestMiddleware',)
+
+# The following are set for privacy purposes. Note that, if some amount of
+# geographic tracking is desired, there is a REQUEST_ANONYMOUS_IP setting which
+# scrubs the last octet of the IP address, which could be used instead of
+# REQUEST_LOG_IP. There is not a way to get semi-granular user tracking (such
+# as tracking only authenticated vs anonymous users).
+REQUEST_LOG_IP = False
+REQUEST_LOG_USER = False

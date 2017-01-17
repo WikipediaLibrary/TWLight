@@ -11,6 +11,8 @@ Settings file intended for use in production, on WMF servers.  This file:
 from __future__ import print_function
 import sys
 
+from django.contrib.sites.models import Site
+
 from .base import *
 try:
     from .production_vars import (SECRET_KEY,
@@ -63,3 +65,7 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# This defaults to http, but in production we use https, so we overwrite the
+# default.
+REQUEST_BASE_URL = 'https://%s' % Site.objects.get_current().domain
