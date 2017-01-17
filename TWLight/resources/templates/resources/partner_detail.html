@@ -13,6 +13,10 @@
         overflow: visible;
       }
     }
+
+    .margin-top-20 {
+      margin-top: 20px;
+    }
   </style>
 {% endblock extra_css %}
 
@@ -25,10 +29,39 @@
     <div class="col-sm-5 col-md-4 pull-right timeline-right-overlay">
       <a href="{% url 'applications:apply_single' object.pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply for access" %}</a><br/>
       {% if object.logo_url %}
-        <img src="{{ object.logo_url }}" class="img-responsive hidden-xs">        
+        <img src="{{ object.logo_url }}" class="img-responsive hidden-xs center-block">        
       {% endif %}
+      <div class="well margin-top-20 hidden-xs">
+        {% if object.coordinator %}
+          {% blocktrans trimmed with coordinator=object.coordinator partner=object.company_name %}
+            <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
+          {% endblocktrans %}
+
+          <ul>
+            {% if object.coordinator.get_talk_page_url %}
+              <li>
+                <a href="{{ object.coordinator.get_talk_page_url }}">
+                  {% trans "Talk page" %}
+                </a>
+              </li>            
+            {% endif %}
+            {% if object.coordinator.get_email_page_url %}
+              <li>
+                <a href="{{ object.coordinator.get_email_page_url }}">
+                  {% trans "Special:EmailUser page" %}
+                </a>            
+              </li>            
+            {% endif %}
+          </ul>
+        {% else %}
+          {% blocktrans trimmed %}
+            The Wikipedia Library team will process this application. Want to
+            help? <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
+            coordinator.</a>
+          {% endblocktrans %}
+        {% endif %}
+      </div>
     </div>
-      
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-info"></i>
       </div>

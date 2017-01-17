@@ -36,6 +36,7 @@ import urllib2
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from .helpers.wiki_list import WIKIS
@@ -130,27 +131,53 @@ class Editor(models.Model):
     affiliation = models.CharField(max_length=128, blank=True)
 
 
-    @property
+    @cached_property
     def wp_user_page_url(self):
         if self.get_home_wiki_display():
-            url = u'https://{home_wiki_link}/wiki/User:{self.wp_username}'.format(
-                home_wiki_link=self.get_home_wiki_display(), self=self)
+            # This works even if their home wiki isn't English - 'User'
+            # gets localized appropriately.
+            url = u'https://{home_wiki}/wiki/User:{self.wp_username}'.format(
+                home_wiki=self.get_home_wiki_display(), self=self)
         else:
             url = None
         return url
 
 
-    @property
+    @cached_property
+    def wp_talk_page_url(self):
+        if self.get_home_wiki_display():
+            # This works even if their home wiki isn't English - 'User_talk'
+            # gets localized appropriately.
+            url = u'https://{home_wiki}/wiki/User_talk:{self.wp_username}'.format(
+                home_wiki=self.get_home_wiki_display(), self=self)
+        else:
+            url = None
+        return url
+
+
+    @cached_property
+    def wp_email_page_url(self):
+        if self.get_home_wiki_display():
+            # This works even if their home wiki isn't English - 'User_talk'
+            # gets localized appropriately.
+            url = u'https://{home_wiki}/wiki/Special:EmailUser/{self.wp_username}'.format(
+                home_wiki=self.get_home_wiki_display(), self=self)
+        else:
+            url = None
+        return url
+
+
+    @cached_property
     def wp_link_edit_count(self):
-        url = u'{base_url}?user={self.wp_username}&project={home_wiki_link}'.format(
+        url = u'{base_url}?user={self.wp_username}&project={home_wiki}'.format(
             base_url='https://tools.wmflabs.org/xtools-ec/',
             self=self,
-            home_wiki_link=self.get_home_wiki_display()
+            home_wiki=self.get_home_wiki_display()
         )
         return url
 
 
-    @property
+    @cached_property
     def wp_link_sul_info(self):
         url = u'{base_url}?username={self.wp_username}'.format(
             base_url='https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php',
@@ -159,12 +186,12 @@ class Editor(models.Model):
         return url
 
 
-    @property
+    @cached_property
     def wp_link_pages_created(self):
-        url = u'{base_url}?user={self.wp_username}&project={home_wiki_link}&namespace=all&redirects=none'.format(
+        url = u'{base_url}?user={self.wp_username}&project={home_wiki}&namespace=all&redirects=none'.format(
             base_url='https://tools.wmflabs.org/xtools/pages/index.php',
             self=self,
-            home_wiki_link=self.get_home_wiki_display()
+            home_wiki=self.get_home_wiki_display()
         )
         return url
 
