@@ -36,7 +36,21 @@ class DashboardView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
 
-        # Overall data
+        # Pageview data
+        # ----------------------------------------------------------------------
+        top_pages = Request.objects.exclude(path='/favicon.ico'
+                    ).values('path'
+                    ).annotate(the_count=Count('path')
+                    ).order_by('-the_count')[:10]
+        context['top_pages'] = top_pages
+
+        partner_pages = Request.objects.filter(path__startswith='/partners/'
+                    ).values('path'
+                    ).annotate(the_count=Count('path')
+                    ).order_by('-the_count')
+        context['partner_pages'] = partner_pages
+
+        # Overall application-related data
         # ----------------------------------------------------------------------
 
         context['total_apps'] = Application.objects.count()
