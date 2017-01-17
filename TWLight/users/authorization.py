@@ -76,10 +76,33 @@ class OAuthBackend(object):
         return '{lang}{sub}'.format(lang=language_code, sub=identity['sub'])
 
 
+    def _meets_minimum_requirement(self, identity):
+        """
+        This is lower than the minimum account quality requirement in the
+        terms of use, because we don't want to exclude editors who have made
+        contributions across a variety of wikis. For instance, if we had a
+        minimum edit count requirement of 100, a user with 70 edits each on
+        the English and Finnish wikipedias would meet that minimum, but we
+        wouldn't be able to see that fact in the data returned from OAuth.
+        Therefore we are deliberately soft on enforcing requirements
+        computationally, to allow TWL administrators room for judgment. 
+        """
+        if 'autoconfirmed' in identity['rights']:
+            return True
+
+        return False
+
+
     def _create_user_and_editor(self, identity):
         # This can't be super informative because we don't want to log
         # identities.
         logger.info('Creating user.')
+
+        if not self._meets_minimum_requirement(identity):
+            # Don't create a User or Editor if this person does not meet the
+            # minimum account quality requirement.
+            return None, None
+
 
         # This will assert that the language code is a real Wikipedia, which
         # is good - we want to verify that assumption before proceeding.
