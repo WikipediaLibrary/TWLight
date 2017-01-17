@@ -53,4 +53,14 @@ csv_urlpatterns = [
         views.CSVUserCountByPartner.as_view(),
         name='user_count_by_partner'
     ),
+
+    url(r'^page_views/$',
+        views.CSVPageViews.as_view(),
+        name='page_views'
+    ),
+
+    url(r'^page_views/(?P<path>[a-zA-Z0-9_\-/]+)/$',
+        views.CSVPageViewsByPath.as_view(),
+        name='page_views_by_path'
+    ),
 ]

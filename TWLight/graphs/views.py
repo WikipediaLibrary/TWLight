@@ -1,4 +1,7 @@
+from collections import Counter
 import csv
+# The django-request analytics package, NOT the python URL library requests!
+from request.models import Request
 import logging
 
 from django.db.models import Avg
@@ -289,3 +292,39 @@ class CSVUserCountByPartner(_CSVDownloadView):
 
         for row in data:
             writer.writerow(row)
+
+
+
+
+class CSVPageViews(_CSVDownloadView):
+    def _write_data(self, response):
+        path_list = Request.objects.values_list('path', flat=True)
+        counter = Counter(path_list)
+
+        writer = csv.writer(response)
+
+        writer.writerow([_('Page URL'),
+            _('Number of (non-unique) visitors')])
+
+        for k, v in counter.items():
+            writer.writerow([k, v])
+
+
+class CSVPageViewsByPath(_CSVDownloadView):
+    def _write_data(self, response):
+        path = self.kwargs['path']
+
+        # The captured pattern likely won't start or end with /, but the
+        # database stores paths starting and ending with /.
+        if not path.startswith('/'):
+            path = '/' + path
+        if not path.endswith('/'):
+            path = path + '/'
+
+        path_count = Request.objects.filter(path=path).count()
+        writer = csv.writer(response)
+
+        writer.writerow([_('Page URL'),
+            _('Number of (non-unique) visitors')])
+
+        writer.writerow([path, path_count])
