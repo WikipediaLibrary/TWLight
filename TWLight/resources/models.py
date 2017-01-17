@@ -3,6 +3,7 @@ import copy
 from datetime import timedelta
 
 from django.conf.global_settings import LANGUAGES
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
@@ -73,6 +74,7 @@ class AvailablePartnerManager(models.Manager):
             ).filter(status=Partner.AVAILABLE)
 
 
+
 class Partner(models.Model):
     """
     A partner organization which provides access grants to paywalled resources.
@@ -104,6 +106,8 @@ class Partner(models.Model):
         help_text=_("Partner organization's name (e.g. McFarland). Note: "
         "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
+    coordinator = models.ForeignKey(User, blank=True, null=True,
+        help_text=_('The coordinator for this Partner, if any.'))
 
     # Status metadata
     # --------------------------------------------------------------------------
@@ -164,7 +168,7 @@ class Partner(models.Model):
             "Entered as <days hours:minutes:seconds>. Defaults to 365 days.")
         )
 
-    languages = models.ManyToManyField(Language, blank=True, null=True,
+    languages = models.ManyToManyField(Language, blank=True,
         help_text=_("Select all languages in which this partner publishes "
             "content.")
         )
@@ -256,7 +260,7 @@ class Stream(models.Model):
             "enter HTML and it should render properly - if it does not, the "
             "developer forgot a | safe filter in the template."))
 
-    languages = models.ManyToManyField(Language, blank=True, null=True)
+    languages = models.ManyToManyField(Language, blank=True)
 
 
     def __unicode__(self):
