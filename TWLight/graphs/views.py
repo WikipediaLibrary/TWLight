@@ -4,6 +4,7 @@ from request.models import Request
 import logging
 
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import resolve
 from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
@@ -33,6 +34,23 @@ class DashboardView(TemplateView):
     """
     template_name = 'dashboard.html'
 
+    def _get_partner_from_path(self, path):
+        if not path.startswith('/'):
+            path = '/' + path
+        if not path.endswith('/'):
+            path = path + '/'
+
+        try:
+            pk = resolve(path).kwargs['pk']
+        except KeyError:
+            return None
+
+        try:
+            return Partner.even_not_available.get(pk=pk)
+        except Partner.DoesNotExist:
+            return None
+
+
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
 
@@ -48,6 +66,12 @@ class DashboardView(TemplateView):
                     ).values('path'
                     ).annotate(the_count=Count('path')
                     ).order_by('-the_count')
+
+        partner_pages = [dict(
+                            {'partner': self._get_partner_from_path(x['path'])},
+                            **x
+                         ) for x in partner_pages]
+
         context['partner_pages'] = partner_pages
 
         # Overall application-related data
