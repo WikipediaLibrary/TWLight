@@ -105,6 +105,10 @@ Once updates have been git pushed from their local development environment to th
 
 ## Background info & troubleshooting
 
+### After Wikimedia server trouble
+* Check permissions on everything (including the virtualenv) - they may not be what you expect.
+* Make sure gunicorn is running (it does not yet come back automatically after a reboot).
+
 ### Mail
 * TWLight occasionally sends emails. The code is nearly agnostic about its backend, but you do need to set one up.
 * It's currently configured for synchronous email sending.
@@ -127,6 +131,7 @@ Once updates have been git pushed from their local development environment to th
 * Does `settings.ALLOWED_HOSTS` include your server's URL?
 * Does `bin/gunicorn_start.sh` point at a virtualenv located in the correct place?
 * If you used sudo to pip install requirements, gunicorn will fail; sudo will have installed outside the virtualenv and the files won't be available. You need to install as a user who has permissions to your virtualenv.
+* Does `run/gunicorn.sock` exist, and does www-data have permissions on it? (If you get a `HaltServer: Worker failed to boot` error, this may be the cause.)
 
 ## Logs
 
