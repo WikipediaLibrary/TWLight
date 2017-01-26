@@ -122,12 +122,15 @@ class Partner(models.Model):
     # a chance to build their record incrementally and fix errors.
     AVAILABLE = 0
     NOT_AVAILABLE = 1
+    WAITLIST = 2
 
     STATUS_CHOICES = (
         # Translators: This is a status for a Partner, denoting that editors can apply for access.
         (AVAILABLE, _('Available')),
         # Translators: This is a status for a Partner, denoting that editors cannot apply for access and the Partner will not be displayed to them.
         (NOT_AVAILABLE, _('Not available')),
+        # Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
+        (WAITLIST, _('Waitlisted')),
     )
 
     status = models.IntegerField(choices=STATUS_CHOICES,
