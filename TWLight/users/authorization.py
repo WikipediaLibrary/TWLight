@@ -101,7 +101,10 @@ class OAuthBackend(object):
         if not self._meets_minimum_requirement(identity):
             # Don't create a User or Editor if this person does not meet the
             # minimum account quality requirement.
-            return None, None
+            raise PermissionDenied(_("Your Wikipedia account does not meet "
+                "the minimum requirements for Library Card Platform account. "
+                "Once you've made more edits to Wikipedia, please come back "
+                "and try again. Consult the Terms of Use (below) for details."))
 
 
         # This will assert that the language code is a real Wikipedia, which
