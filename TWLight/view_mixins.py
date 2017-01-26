@@ -163,7 +163,6 @@ class ToURequired(object):
             path = reverse_lazy('terms')
             new_url = ParseResult(scheme='', netloc='', path=path, params='',
                 query=next_param, fragment='').geturl()            
-            print new_url
             return HttpResponseRedirect(new_url)
 
         return super(ToURequired, self).dispatch(

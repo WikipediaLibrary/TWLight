@@ -27,6 +27,7 @@ import logging
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.urlresolvers import reverse_lazy
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
@@ -132,9 +133,19 @@ def send_approval_notification_email(instance):
 
 
 def send_rejection_notification_email(instance):
-    base_url = get_current_site().domain
-    app_url = 'https://{base}{path}'.format(
-        base=base_url, path=instance.get_absolute_url())
+    base_url = get_current_site(None).domain
+
+    if instance.pk:
+        app_url = 'https://{base}{path}'.format(
+            base=base_url, path=instance.get_absolute_url())
+    else:
+        # If we are sending an email for a newly created instance, it won't have
+        # a pk, so instance.get_absolute_url() won't return successfully.
+        # This should lead to an imperfect but navigable user experience, given
+        # the text of the email - it won't take them straight to their app, but
+        # it will take them to a page *via which* they can perform the review
+        # steps described in the email template.
+        app_url = reverse_lazy('users:home')
 
     email = RejectionNotification()
     email.send(instance.user.email,
@@ -161,11 +172,15 @@ def update_app_status_on_save(sender, instance, **kwargs):
         orig_status = orig_app.status
 
         if orig_status != instance.status:
-            # Send the email corresponding to its new status.
-            handlers[instance.status](instance)
+            try_send = True
+        else:
+            try_send = False
 
     # Case 2: Application was just created.
     else:
+        try_send = True
+
+    if try_send:
         try:
             # Send email if it has an email-worthy status.
             handlers[instance.status](instance)

@@ -7,6 +7,7 @@ from urlparse import urlparse
 
 from django import forms
 from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.test import TestCase, Client, RequestFactory
@@ -399,6 +400,32 @@ class RequestApplicationTest(BaseApplicationViewTest):
         cls.url = reverse('applications:request')
 
 
+    def _get_request_with_session(self, data):
+        """
+        Why the song-and-dance with middleware? Well. RequestFactory() lets us
+        add a user to the request, e.g. in order to pass our ToURequired test,
+        but doesn't let us access the session by default; Client() lets us see
+        the session, but not add a user to the request. We need to pass our
+        access test *and* see the session, so we need to:
+            * use RequestFactory() to add a user to the request
+            * invoke SessionMiddleware to bring the session into being
+            * actually generate the response, so that form_valid is invoked,
+              since that is where the session key is added
+
+        If you were getting the sense that class-based views are sometimes
+        hostile to unit testing, you were right.
+        """
+
+        request = RequestFactory().post(self.url, data=data, follow=True)
+        request.user = self.editor
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+
+        _ = views.RequestApplicationView.as_view()(request)
+        return request
+
+
     def test_authorization(self):
         """
         Only Editors should be able to request access to applications.
@@ -528,17 +555,9 @@ class RequestApplicationTest(BaseApplicationViewTest):
             reverse('applications:apply'))
 
 
-    @patch('django.contrib.auth.models.AnonymousUser')
-    def test_valid_form_writes_session_key(self, mock_anon):
+    def test_valid_form_writes_session_key(self):
         """
         Users who submit a valid form generate a matching session key.
-
-        Why the mock? Well. RequestFactory() lets us add a user to the request,
-        e.g. in order to pass our ToURequired test, but doesn't let us access
-        the session; Client() lets us see the session, but not add a user to the
-        request. We need to pass our access control tests AND see the session.
-        Mocking out AnonymousUser (which is attached to the request by default)
-        apparently sidesteps the access control tests.
         """
         p1 = PartnerFactory()
         p2 = PartnerFactory()
@@ -547,29 +566,28 @@ class RequestApplicationTest(BaseApplicationViewTest):
             'partner_{id}'.format(id=p1.id): True,
             'partner_{id}'.format(id=p2.id): False,
         }
-
-        _ = self.client.post(self.url, data=data, follow=True)
-        self.assertEqual(self.client.session[views.PARTNERS_SESSION_KEY], [p1.id])
+        request = self._get_request_with_session(data)
+        self.assertEqual(request.session[views.PARTNERS_SESSION_KEY], [p1.id])
 
         data = {
             'partner_{id}'.format(id=p1.id): False,
             'partner_{id}'.format(id=p2.id): True,
         }
-        response = self.client.post(self.url, data=data, follow=True)
-        self.assertEqual(self.client.session[views.PARTNERS_SESSION_KEY], [p2.id])
+        request = self._get_request_with_session(data)
+        self.assertEqual(request.session[views.PARTNERS_SESSION_KEY], [p2.id])
 
         data = {
             'partner_{id}'.format(id=p1.id): True,
             'partner_{id}'.format(id=p2.id): True,
         }
-        response = self.client.post(self.url, data=data, follow=True)
+        request = self._get_request_with_session(data)
 
         # Since we don't care which order the IDs are in, but list comparison
         # is sensitive to order, let's check first that both lists have the
         # same elements, and second that they are of the same length.
-        self.assertEqual(set(self.client.session[views.PARTNERS_SESSION_KEY]),
+        self.assertEqual(set(request.session[views.PARTNERS_SESSION_KEY]),
             set([p2.id, p1.id]))
-        self.assertEqual(len(self.client.session[views.PARTNERS_SESSION_KEY]),
+        self.assertEqual(len(request.session[views.PARTNERS_SESSION_KEY]),
             len([p2.id, p1.id]))
 
 
@@ -963,7 +981,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
 
         response = views.SubmitApplicationView.as_view()(request)
-        print response
 
         expected_url = reverse('users:editor_detail',
                                 kwargs={'pk': self.editor.editor.pk})
@@ -1632,12 +1649,10 @@ class ApplicationModelTest(TestCase):
     def test_approval_sets_date_closed(self):
         app = ApplicationFactory(status=Application.PENDING, date_closed=None)
         self.assertFalse(app.date_closed)
-        print app.date_closed
 
         app.status = Application.APPROVED
         app.save()
 
-        print app.date_closed
         self.assertTrue(app.date_closed)
         self.assertEqual(app.date_closed, date.today())
 
