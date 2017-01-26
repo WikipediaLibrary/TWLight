@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+  {% if exception %}
+    <div class="alert alert-danger" role="alert">{{ exception }}</div>
+  {% endif %}
+
+  <h1>{% trans "Permission denied" %}</h1>
+
+  <p>
+    {% trans "Sorry; you aren't allowed to do that." %}
+  </p>
+
+  <div class="clearfix">
+    <div class="pull-left">
+      <img class="img-responsive img-thumbnail" src={% static "img/sad_critter.jpg" %} alt="sad critter in cage">
+
+      <div class="well">
+        <a href="https://flic.kr/p/6wL7Sc">crunchie needs a little tin cup</a> by <a href="https://www.flickr.com/photos/armydre2008/">frankieleon</a>, on Flickr; CC BY
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
