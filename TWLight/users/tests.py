@@ -7,6 +7,7 @@ from urlparse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
 from django.test import TestCase, Client, RequestFactory
@@ -375,7 +376,7 @@ class EditorModelTestCase(TestCase):
 
         mock_urllib2.return_value = mock_response
 
-        identity = FAKE_IDENTITY
+        identity = copy.copy(FAKE_IDENTITY)
 
         # Valid data
         self.assertTrue(self.test_editor._is_user_valid(identity))
@@ -419,7 +420,7 @@ class EditorModelTestCase(TestCase):
         """
         mock_response = Mock()
 
-        data = FAKE_IDENTITY_DATA
+        data = copy.copy(FAKE_IDENTITY_DATA)
         data['query']['userinfo']['options']['disablemail'] = 1 # Should fail.
 
         mock_response.read.side_effect = [json.dumps(data)]
@@ -523,17 +524,16 @@ class AuthorizationTestCase(TestCase):
 
         oauth_backend = OAuthBackend()
         data = FAKE_IDENTITY_DATA
-        identity = FAKE_IDENTITY
+        identity = copy.copy(FAKE_IDENTITY)
         identity['rights'] = ['no_autoconfirmed_here']
 
         mock_response = Mock()
         mock_response.read.side_effect = [json.dumps(data)] * 7
         mock_urllib2.return_value = mock_response
 
-        user, editor = oauth_backend._create_user_and_editor(identity)
+        with self.assertRaises(PermissionDenied):
+            oauth_backend._create_user_and_editor(identity)
 
-        self.assertEqual(user, None)
-        self.assertEqual(editor, None)
         self.assertEqual(orig_user_count, User.objects.count())
         self.assertEqual(orig_editor_count, Editor.objects.count())
 
