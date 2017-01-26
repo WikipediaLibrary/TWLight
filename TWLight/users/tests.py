@@ -581,14 +581,13 @@ class AuthorizationTestCase(TestCase):
             * Return created = True
         * Call Editor.update_from_wikipedia
         """
+        oauth_backend = OAuthBackend()
         identity = copy.copy(FAKE_IDENTITY)
         new_sub = 57381037
-        new_username = identity['username'] + '53897139075'
+        new_username = oauth_backend._get_username(identity)
         identity['sub'] = new_sub
-        identity['username'] = new_username
         self.assertFalse(Editor.objects.filter(wp_sub=new_sub).count())
 
-        oauth_backend = OAuthBackend()
         user, created = oauth_backend._get_and_update_user_from_identity(
             identity)
 
