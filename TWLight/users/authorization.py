@@ -100,11 +100,11 @@ class OAuthBackend(object):
 
         if not self._meets_minimum_requirement(identity):
             # Don't create a User or Editor if this person does not meet the
-            # minimum account quality requirement.
-            raise PermissionDenied(_("Your Wikipedia account does not meet "
-                "the minimum requirements for Library Card Platform account. "
-                "Once you've made more edits to Wikipedia, please come back "
-                "and try again. Consult the Terms of Use (below) for details."))
+            # minimum account quality requirement. It would be nice to provide
+            # some user feedback here, but we can't; exception messages don't
+            # get passed on as template context in Django 1.8. (They do in
+            # 1.10, so this can be revisited in future.)
+            raise PermissionDenied
 
 
         # This will assert that the language code is a real Wikipedia, which
@@ -302,6 +302,7 @@ class OAuthCallbackView(View):
         request_token = rehydrate_token(session_token)
 
         if not request_token:
+            print 'no req token'
             logger.info('no request token :(')
             raise PermissionDenied
 
