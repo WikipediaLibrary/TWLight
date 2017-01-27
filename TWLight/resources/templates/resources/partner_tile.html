@@ -39,6 +39,12 @@
       <a href="{% url 'partners:detail' partner.pk %}" class="btn btn-default">
         {% trans "More info" %}
       </a>
+      <br />
+      {% if partner.is_waitlisted %}
+        <span class="label label-warning">
+          {% trans "Waitlisted" %}
+        </span>
+      {% endif %}
     </div>
     {% for tag in partner.tags %}
       <span class="label label-primary">{{ tag }}</span>

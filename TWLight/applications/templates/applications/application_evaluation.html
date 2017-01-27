@@ -8,6 +8,12 @@
 {% load twlight_perms %}
 
 {% block content %}
+  {% if object.partner.is_waitlisted %}
+    <div class="alert alert-warning">
+      {% trans "This application is on the waitlist because this partner does not have any access grants available at this time." %}
+    </div>
+  {% endif %}
+
   {% if user|coordinators_only %}
     <h1>{% trans 'Evaluate application' %}</h1>
 

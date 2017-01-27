@@ -71,7 +71,7 @@ class Language(models.Model):
 class AvailablePartnerManager(models.Manager):
     def get_queryset(self):
         return super(AvailablePartnerManager, self).get_queryset(
-            ).filter(status=Partner.AVAILABLE)
+            ).filter(status__in=[Partner.AVAILABLE, Partner.WAITLIST])
 
 
 
@@ -228,6 +228,11 @@ class Partner(models.Model):
     @property
     def get_languages(self):
         return ", ".join([p.__unicode__() for p in self.languages.all()])
+
+
+    @property
+    def is_waitlisted(self):
+        return self.status == self.WAITLIST
 
 
 

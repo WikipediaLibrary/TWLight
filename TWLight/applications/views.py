@@ -46,6 +46,13 @@ PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 class RequestApplicationView(EditorsOnly, ToURequired, FormView):
     template_name = 'applications/request_for_application.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(RequestApplicationView, self).get_context_data(**kwargs)
+        context['any_waitlisted'] = Partner.objects.filter(
+            status=Partner.WAITLIST).exists()
+        return context
+
+
     def get_form_class(self):
         """
         Dynamically construct a form which will have a checkbox for every
@@ -307,6 +314,17 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
 
 
 class SubmitSingleApplicationView(_BaseSubmitApplicationView):
+    def dispatch(self, request, *args, **kwargs):
+        if self._get_partners()[0].status == Partner.WAITLIST:
+            messages.add_message(request, messages.WARNING, _("This partner "
+                "does not have any access grants available at this time. "
+                "You may still apply for access; your application will be "
+                "reviewed when access grants become available."))
+
+        return super(SubmitSingleApplicationView, self).dispatch(
+            request, *args, **kwargs)
+
+
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
             _('Your application has been submitted. A coordinator will review '

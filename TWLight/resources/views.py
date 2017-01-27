@@ -1,13 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.http import Http404, HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 
 from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
                                     get_data_count_by_month,
                                     get_users_by_partner_by_month)
+from TWLight.view_mixins import CoordinatorsOnly
 
 from .models import Partner
 
@@ -89,3 +91,29 @@ class PartnersDetailView(DetailView):
             return Partner.even_not_available.order_by('company_name')
         else:
             return Partner.objects.order_by('company_name')
+
+
+
+class PartnersToggleWaitlistView(CoordinatorsOnly, View):
+    def post(self, request, *args, **kwargs):
+        try:
+            # This only looks at AVAILABLE and WAITLIST partners, which is
+            # good; we only want staff to be able to change the status of
+            # NOT_AVAILABLE partners (using the admin interface).
+            partner = Partner.objects.get(pk=self.kwargs['pk'])
+        except Partner.DoesNotExist:
+            raise Http404
+
+        assert partner.status in [Partner.AVAILABLE, Partner.WAITLIST]
+
+        if partner.status == Partner.AVAILABLE:
+            partner.status = Partner.WAITLIST
+            msg = _('This partner is now waitlisted')
+        else:
+            partner.status = Partner.AVAILABLE
+            msg = _('This partner is now available for applications')
+
+        partner.save()
+
+        messages.add_message(request, messages.SUCCESS, msg)
+        return HttpResponseRedirect(partner.get_absolute_url())

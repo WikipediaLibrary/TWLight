@@ -7,6 +7,10 @@
     label {
       padding-right: 5px;
     }
+
+    form {
+      margin-bottom: 20px;
+    }
   </style>
 {% endblock extra_css %}
 
@@ -33,6 +37,11 @@
           <a href="{{ field.field.widget.attrs.object.get_absolute_url }}">
             {% trans "(more info)" %}
           </a>
+          {% if field.field.widget.attrs.object.is_waitlisted %}
+            <span class="label label-warning">
+              {% trans "Waitlisted" %}
+            </span>
+          {% endif %}
         </div>
       </li>
     {% empty %}
@@ -41,5 +50,15 @@
   </ul>
   <input type="submit" value="{% trans "Apply for access" %}" class="btn btn-primary" />
 </form>
+
+<div class="well well-sm">
+  {% if any_waitlisted %}
+    {# Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did earlier in this file. #}
+    {% blocktrans trimmed %}
+      You can apply to <span class="label label-warning">Waitlisted</span>
+      partners, but they don't have access grants available right now. We will process those applications when access becomes available.
+    {% endblocktrans %}
+  {% endif %}
+</div>
 
 {% endblock %}
