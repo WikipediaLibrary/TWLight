@@ -54,7 +54,7 @@
     <div class="col-xs-12 col-sm-3">
       <strong>{% trans "Satisfies terms of use?" %}</strong>
       <p>
-        {% blocktrans %}
+        {% blocktrans trimmed %}
           At their last login, did this user meet the criteria set forth in the
           terms of use (at least 500 edits, registered at least 6 months ago,
           has Special:Email User enabled, not blocked)?
@@ -67,13 +67,13 @@
       {% else %}
         <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
         <p>
-          {% blocktrans with username=editor.wp_username %}
+          {% blocktrans trimmed with username=editor.wp_username %}
             {{ username }} may still be eligible for access grants at the
             coordinators' discretion.
           {% endblocktrans %}
         </p>
         <p>
-          {% blocktrans %}
+          {% blocktrans trimmed %}
             In particular, editors who meet the criteria, but whose activity is
             spread across multiple wikis, may be erroneously marked as
             unqualified. The Library Card Platform only checks for home wiki

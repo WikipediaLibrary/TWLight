@@ -204,7 +204,7 @@
 
       <h3>{% trans "Applications by number of days until decision" %} <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
-        {% blocktrans %}
+        {% blocktrans trimmed %}
           The x axis is the number of days to make a final decision (either
           approved or denied) on an application. The y axis is the number of
           applications that have taken exactly that many days to decide.
@@ -214,7 +214,7 @@
 
       <h3>{% trans "Median days until application decision, per month" %} <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
-        {% blocktrans %}
+        {% blocktrans trimmed %}
           This shows the median number of days to reach a decision on the
           applications opened in a given month.
         {% endblocktrans %}
@@ -223,7 +223,7 @@
 
       <h3>{% trans "Current application status distribution" %} <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
-        {% blocktrans %}
+        {% blocktrans trimmed %}
           This graph includes all applications opened ever on this site.
         {% endblocktrans %}
       </p>
