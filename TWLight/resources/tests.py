@@ -1,7 +1,7 @@
 from datetime import date, timedelta
 from mock import patch
 
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import Http404
@@ -10,12 +10,13 @@ from django.test import TestCase, RequestFactory
 from TWLight.applications import views as app_views
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
+from TWLight.applications.views import RequestApplicationView
 from TWLight.users.factories import EditorFactory, UserProfileFactory
 from TWLight.users.groups import get_coordinators
 
 from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner
-from .views import PartnersDetailView, PartnersListView
+from .views import PartnersDetailView, PartnersListView, PartnersToggleWaitlistView
 
 class LanguageModelTests(TestCase):
 
@@ -237,6 +238,198 @@ class PartnerModelTests(TestCase):
         response = app_views.ListApprovedApplicationsView.as_view()(request)
 
         self.assertContains(response, partner.company_name)
+
+
+    def test_statuses_exist(self):
+        """
+        AVAILABLE, NOT_AVAILABLE, WAITLIST should be the status choices.
+        """
+
+        assert hasattr(Partner, 'AVAILABLE')
+        assert hasattr(Partner, 'NOT_AVAILABLE')
+        assert hasattr(Partner, 'WAITLIST')
+
+        assert hasattr(Partner, 'STATUS_CHOICES')
+
+        assert len(Partner.STATUS_CHOICES) == 3
+
+        database_statuses = [x[0] for x in Partner.STATUS_CHOICES]
+
+        assert Partner.AVAILABLE in database_statuses
+        assert Partner.NOT_AVAILABLE in database_statuses
+        assert Partner.WAITLIST in database_statuses
+
+
+    def test_is_waitlisted(self):
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+        self.assertFalse(partner.is_waitlisted)
+        partner.delete()
+
+        partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
+        self.assertFalse(partner.is_waitlisted)
+        partner.delete()
+
+        partner = PartnerFactory(status=Partner.WAITLIST)
+        self.assertTrue(partner.is_waitlisted)
+        partner.delete()
+
+
+    def test_default_manager(self):
+        """
+        The default manager should return AVAILABLE and WAITLIST partners, but
+        not NOT_AVAILABLE.
+        """
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+        partner2 = PartnerFactory(status=Partner.NOT_AVAILABLE)
+        partner3 = PartnerFactory(status=Partner.WAITLIST)
+
+        all_partners = Partner.objects.all()
+        assert partner in all_partners
+        assert partner2 not in all_partners
+        assert partner3 in all_partners
+
+        # assertQuerysetEqual compares a queryset to a list of representations.
+        # Sigh.
+        self.assertQuerysetEqual(Partner.objects.all(),
+                                 map(repr, Partner.even_not_available.filter(
+                                    status__in=
+                                    [Partner.WAITLIST, Partner.AVAILABLE])))
+
+
+
+class WaitlistBehaviorTests(TestCase):
+    """
+    Tests of user-visible behavior with respect to waitlist status. We're
+    *not* testing particular HTML messages as those kinds of tests tend to be
+    extremely brittle.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        super(WaitlistBehaviorTests, cls).setUpClass()
+        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        cls.message_patcher.start()
+
+
+    def test_request_application_view_context_1(self):
+        """
+        The any_waitlisted context on RequestApplicationView should True if
+        there are waitlisted Partners.
+        """
+        # Set up request.
+        req_url = reverse('applications:request')
+
+        editor = EditorFactory()
+        request = RequestFactory().get(req_url)
+        request.user = editor.user
+
+        # Ensure there is at least one waitlisted partner.
+        partner = PartnerFactory(status=Partner.WAITLIST)
+
+        # Test response.
+        resp = RequestApplicationView.as_view()(request)
+        self.assertEqual(resp.context_data['any_waitlisted'], True)
+
+
+    def test_request_application_view_context_2(self):
+        """
+        The any_waitlisted context on RequestApplicationView should False if
+        there are not waitlisted Partners.
+        """
+        # Set up request.
+        req_url = reverse('applications:request')
+
+        editor = EditorFactory()
+        request = RequestFactory().get(req_url)
+        request.user = editor.user
+
+        # Ensure there are no waitlisted partners.
+        for partner in Partner.objects.filter(status=Partner.WAITLIST):
+            partner.delete()
+
+        # Test response.
+        resp = RequestApplicationView.as_view()(request)
+        self.assertEqual(resp.context_data['any_waitlisted'], False)
+
+
+    def test_toggle_waitlist_1(self):
+        """
+        Posting to the toggle waitlist view sets an AVAILABLE partner to
+        WAITLIST.
+        """
+        # Create needed objects.
+        editor = EditorFactory()
+        coordinators = get_coordinators()
+        coordinators.user_set.add(editor.user)
+        UserProfileFactory(user=editor.user, terms_of_use=True)
+
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+
+        # Set up request.
+        url = reverse('partners:toggle_waitlist', kwargs={'pk': partner.pk})
+
+        request = RequestFactory().post(url)
+        request.user = editor.user
+
+        _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
+        partner.refresh_from_db()
+        self.assertEqual(partner.status, Partner.WAITLIST)
+
+
+    def test_toggle_waitlist_2(self):
+        """
+        Posting to the toggle waitlist view sets a WAITLIST partner to
+        AVAILABLE.
+        """
+        # Create needed objects.
+        editor = EditorFactory()
+        coordinators = get_coordinators()
+        coordinators.user_set.add(editor.user)
+        UserProfileFactory(user=editor.user, terms_of_use=True)
+
+        partner = PartnerFactory(status=Partner.WAITLIST)
+
+        # Set up request.
+        url = reverse('partners:toggle_waitlist', kwargs={'pk': partner.pk})
+
+        request = RequestFactory().post(url)
+        request.user = editor.user
+
+        _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
+        partner.refresh_from_db()
+        self.assertEqual(partner.status, Partner.AVAILABLE)
+
+
+    def test_toggle_waitlist_access(self):
+        """
+        Only coordinators can post to the toggle waitlist view.
+        """
+        # Create needed objects.
+        editor = EditorFactory()
+        coordinators = get_coordinators()
+        coordinators.user_set.add(editor.user)
+        UserProfileFactory(user=editor.user, terms_of_use=True)
+
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+
+        # Set up request.
+        url = reverse('partners:toggle_waitlist', kwargs={'pk': partner.pk})
+
+        request = RequestFactory().post(url)
+        request.user = editor.user
+
+        # This should work and not throw an error.
+        resp = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
+        print resp.url
+        print resp.status_code
+        print resp.get('location')
+        print dir(resp)
+
+        coordinators.user_set.remove(editor.user)
+        _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
+        print resp.url
+        print resp.status_code
+        print resp.get('location')
 
 
 
