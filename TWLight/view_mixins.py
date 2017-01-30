@@ -13,6 +13,7 @@ from urlparse import ParseResult
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 
@@ -51,7 +52,7 @@ class CoordinatorsOrSelf(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_coordinators_or_self(request.user):
-            return HttpResponseRedirect(reverse_lazy('users:test_permission'))
+            raise PermissionDenied
 
         return super(CoordinatorsOrSelf, self).dispatch(
             request, *args, **kwargs)
@@ -73,7 +74,7 @@ class CoordinatorsOnly(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_coordinators_only(request.user):
-            return HttpResponseRedirect(reverse_lazy('users:test_permission'))
+            raise PermissionDenied
 
         return super(CoordinatorsOnly, self).dispatch(
             request, *args, **kwargs)
@@ -97,7 +98,7 @@ class EditorsOnly(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_editors_only(request.user):
-            return HttpResponseRedirect(reverse_lazy('users:test_permission'))
+            raise PermissionDenied
 
         return super(EditorsOnly, self).dispatch(
             request, *args, **kwargs)
@@ -128,7 +129,7 @@ class SelfOnly(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_self_only(request.user):
-            return HttpResponseRedirect(reverse_lazy('users:test_permission'))
+            raise PermissionDenied
 
         return super(SelfOnly, self).dispatch(
             request, *args, **kwargs)

@@ -102,11 +102,14 @@ class ViewsTestCase(TestCase):
 
     def test_anon_user_cannot_see_editor_details(self):
         """Check that an anonymous user cannot see an editor page."""
-        response_url = self.client.get(self.url1).url
+        resp = self.client.get(self.url1)
+        self.assertEqual(resp.status_code, 403)
 
-        url_components = urlparse(response_url)
-        permission_url = reverse('users:test_permission')
-        self.assertEqual(url_components.path, permission_url)
+        # The following should work, but does not, even though the above works
+        # and print statement inserted in the view mixin confirm that the
+        # relevant code gets executed.
+        #with self.assertRaises(PermissionDenied):
+        #    _ = self.client.get(self.url1)
 
 
     def test_editor_can_see_own_page(self):
@@ -133,10 +136,8 @@ class ViewsTestCase(TestCase):
         except AssertionError:
             coordinators.user_set.remove(self.user_editor)
 
-        response = views.EditorDetailView.as_view()(request, pk=self.editor2.pk)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = views.EditorDetailView.as_view()(request, pk=self.editor2.pk)
 
 
     def test_coordinator_access(self):

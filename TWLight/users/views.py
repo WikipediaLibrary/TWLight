@@ -218,22 +218,6 @@ class EmailChangeView(SelfOnly, UpdateView):
 
 
 
-class TestPermissionView(View):
-    """
-    This view is provided for use in view_mixins.py.
-
-    The default UserPassesTestMixin redirects all users through
-    settings.LOGIN_URL if they fail the test. This isn't the behavior we want;
-    users who are already logged-in but don't pass the test should get
-    PermissionDenied. Only unauthenticated users should be asked to log in.
-    """
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            raise PermissionDenied
-        else:
-            return redirect_to_login(request.get_full_path())
-
-
 
 class TermsView(UpdateView):
     """

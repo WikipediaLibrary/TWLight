@@ -420,16 +420,10 @@ class WaitlistBehaviorTests(TestCase):
 
         # This should work and not throw an error.
         resp = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
-        print resp.url
-        print resp.status_code
-        print resp.get('location')
-        print dir(resp)
 
         coordinators.user_set.remove(editor.user)
-        _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
-        print resp.url
-        print resp.status_code
-        print resp.get('location')
+        with self.assertRaises(PermissionDenied):
+            _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
 
 
 

@@ -302,7 +302,6 @@ class OAuthCallbackView(View):
         request_token = rehydrate_token(session_token)
 
         if not request_token:
-            print 'no req token'
             logger.info('no request token :(')
             raise PermissionDenied
 

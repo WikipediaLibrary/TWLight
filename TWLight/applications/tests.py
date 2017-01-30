@@ -8,6 +8,7 @@ from urlparse import urlparse
 from django import forms
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.test import TestCase, Client, RequestFactory
@@ -442,28 +443,18 @@ class RequestApplicationTest(BaseApplicationViewTest):
         request.session = {}
         request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
 
-        response = views.RequestApplicationView.as_view()(request)
-
-        # The expected chain of redirects is
-        # applications:request -> users:test_permission
-        # users:test_permission -> oauth_login
-        # oauth_login -> wikipedia.
-        # We'll just check for the first and leave it to the users app to
-        # check that test_permission behaves as expected.
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = views.RequestApplicationView.as_view()(request)
 
         # A user who is not a WP editor does not have access.
         request.user = self.base_user
-        response = views.RequestApplicationView.as_view()(request)
-
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = views.RequestApplicationView.as_view()(request)
 
         # An editor may see the page.
         request.user = self.editor
+
+        # Note: No PermissionDenied raised!
         response = views.RequestApplicationView.as_view()(request)
 
         self.assertEqual(response.status_code, 200)
@@ -621,26 +612,15 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         request.session = {}
         request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
 
-        response = views.SubmitApplicationView.as_view()(request)
-
-        # The expected chain of redirects is
-        # applications:apply -> users:test_permission
-        # users:test_permission -> oauth_login.
-        # We'll just check for the first and leave it to the users app to
-        # check that test_permission behaves as expected.
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = views.SubmitApplicationView.as_view()(request)
 
         # A user who is not a WP editor does not have access.
         factory = RequestFactory()
 
         request.user = self.base_user
-        response = views.SubmitApplicationView.as_view()(request)
-
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = views.SubmitApplicationView.as_view()(request)
 
         # An editor may see the page.
         request.user = self.editor
@@ -1251,19 +1231,13 @@ class ListApplicationsTest(BaseApplicationViewTest):
         request.session = {}
         request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
 
-        response = view.as_view()(request)
-
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = view.as_view()(request)
 
         # An editor who is not a coordinator may not see the page.
         request.user = self.editor
-        response = view.as_view()(request)
-
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = view.as_view()(request)
 
         # A coordinator may see the page.
         request.user = self.coordinator
@@ -1951,21 +1925,16 @@ class BatchEditTest(TestCase):
             data={'applications': self.application.pk, 'batch_status': 3})
         request.user = AnonymousUser()
 
-        response = views.BatchEditView.as_view()(request)
-
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = views.BatchEditView.as_view()(request)
 
         # A user who is not a coordinator does not have access.
         coordinators = get_coordinators()
         coordinators.user_set.remove(self.unpriv_user) # make sure
         request.user = self.unpriv_user
-        response = views.BatchEditView.as_view()(request)
 
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(urlparse(response.url).path,
-            reverse('users:test_permission'))
+        with self.assertRaises(PermissionDenied):
+            _ = views.BatchEditView.as_view()(request)
 
         # A coordinator may post to the page (on success, it redirects to the
         # application list page which they likely started on).
