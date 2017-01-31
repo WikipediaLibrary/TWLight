@@ -10,6 +10,8 @@ from django.test import TestCase, RequestFactory
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
+from TWLight.resources.factories import PartnerFactory
+from TWLight.resources.models import Partner
 from TWLight.users.factories import EditorFactory
 from TWLight.users.groups import get_coordinators
 
@@ -206,6 +208,61 @@ class ApplicationStatusTest(TestCase):
         self.assertEqual(len(mail.outbox), orig_outbox)
 
 
-    # Application.WAITLIST is not yet implemented.
-    # def test_waitlisting_calls_email_function(self):
-    #     assert False
+    @patch('TWLight.emails.tasks.send_waitlist_notification_email')
+    def test_waitlist_calls_email_function(self, mock_email):
+        partner = PartnerFactory(status=Partner.WAITLIST)
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        self.assertTrue(mock_email.called)
+
+        partner.delete()
+        app.delete()
+
+
+    @patch('TWLight.emails.tasks.send_waitlist_notification_email')
+    def test_nonwaitlist_does_not_call_email_function(self, mock_email):
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        self.assertFalse(mock_email.called)
+
+        partner.delete()
+        app.delete()
+
+        partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        self.assertFalse(mock_email.called)
+
+        partner.delete()
+        app.delete()
+
+
+    @patch('TWLight.emails.tasks.send_waitlist_notification_email')
+    def test_waitlisting_partner_calls_email_function(self, mock_email):
+        """
+        Switching a Partner to WAITLIST status should call the email function
+        for apps to that partner with open statuses.
+        """
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        self.assertFalse(mock_email.called)
+
+        partner.status = Partner.WAITLIST
+        partner.save()
+        self.assertTrue(mock_email.called)
+        mock_email.assert_called_with(app)
+
+
+    @patch('TWLight.emails.tasks.send_waitlist_notification_email')
+    def test_waitlisting_partner_does_not_call_email_function(self, mock_email):
+        """
+        Switching a Partner to WAITLIST status should NOT call the email
+        function for apps to that partner with closed statuses.
+        """
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+        app = ApplicationFactory(status=Application.APPROVED, partner=partner)
+        app = ApplicationFactory(status=Application.NOT_APPROVED, partner=partner)
+        app = ApplicationFactory(status=Application.SENT, partner=partner)
+        self.assertFalse(mock_email.called)
+
+        partner.status = Partner.WAITLIST
+        partner.save()
+        self.assertFalse(mock_email.called)

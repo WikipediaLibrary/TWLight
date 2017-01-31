@@ -41,7 +41,7 @@ class Application(models.Model):
 
     # This list should contain all statuses that are the end state of an
     # Application - statuses which are not expected to be further modified.
-    FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED]
+    FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED, SENT]
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
     date_created = models.DateField(auto_now_add=True)

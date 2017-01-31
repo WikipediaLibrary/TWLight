@@ -28,10 +28,11 @@ from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse_lazy
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
 from TWLight.applications.models import Application
+from TWLight.resources.models import Partner
 
 
 logger = logging.getLogger(__name__)
@@ -53,6 +54,11 @@ class CommentNotificationEmailOthers(template_mail.TemplateMail):
 
 class ApprovalNotification(template_mail.TemplateMail):
     name = 'approval_notification'
+
+
+
+class WaitlistNotification(template_mail.TemplateMail):
+    name = 'waitlist_notification'
 
 
 
@@ -125,11 +131,18 @@ def send_comment_notification_emails(sender, **kwargs):
                 '#{app.pk}'.format(app=app))
 
 
-
 def send_approval_notification_email(instance):
     email = ApprovalNotification()
     email.send(instance.user.email,
         {'user': instance.user, 'partner': instance.partner})
+
+
+def send_waitlist_notification_email(instance):
+    email = WaitlistNotification()
+    email.send(instance.user.email,
+        {'user': instance.user,
+         'partner': instance.partner,
+         'link': reverse_lazy('partners:list')})
 
 
 def send_rejection_notification_email(instance):
@@ -160,11 +173,19 @@ def update_app_status_on_save(sender, instance, **kwargs):
     If the Application's status has changed in a way that justifies sending
     email, do so. Otherwise, do nothing.
     """
-    # Maps application status to the correct email handling function.
+    # Maps status indicators to the correct email handling function.
     handlers = {
         Application.APPROVED: send_approval_notification_email,
         Application.NOT_APPROVED: send_rejection_notification_email,
+
+        # We can't use Partner.WAITLIST as the key, because that's actually an
+        # integer, and it happens to be the same as Application.APPROVED. If
+        # we're going to have a lot more keys on this list, we're going to have
+        # to start thinking about namespacing them.
+        'waitlist': send_waitlist_notification_email,
     }
+
+    handler_key = None
 
     # Case 1: Application already existed; status has been changed.
     if instance.id:
@@ -172,18 +193,45 @@ def update_app_status_on_save(sender, instance, **kwargs):
         orig_status = orig_app.status
 
         if orig_status != instance.status:
-            try_send = True
-        else:
-            try_send = False
+            handler_key = instance.status
 
     # Case 2: Application was just created.
     else:
-        try_send = True
+        # WAITLIST is a status adhering to Partner, not to Application. So
+        # to email editors when they apply to a waitlisted partner, we need
+        # to check Partner status on app submission.
 
-    if try_send:
+        if instance.partner.status == Partner.WAITLIST:
+            handler_key = 'waitlist'
+        else:
+            handler_key = instance.status
+
+    if handler_key:
         try:
             # Send email if it has an email-worthy status.
-            handlers[instance.status](instance)
+            handlers[handler_key](instance)
         except KeyError:
-            # Or do nothing if the status is uninteresting.
+            # This is probably okay - it probably means we were in case 2 above
+            # and the application was created with PENDING status. We'll only
+            # log the surprising cases.
+            if handler_key != Application.PENDING:
+                logger.exception('Email handler key was set to {handler_key}, '
+                    'but no such handler exists'.format(handler_key=handler_key))
             pass
+
+
+@receiver(pre_save, sender=Partner)
+def notify_applicants_when_waitlisted(sender, instance, **kwargs):
+    """
+    When Partners are switched to WAITLIST status, anyone with open applications
+    should be notified.
+    """
+    if instance.id:
+        orig_partner = Partner.objects.get(pk=instance.id)
+
+        if ((orig_partner.status != instance.status) and 
+            instance.status == Partner.WAITLIST):
+
+            for app in orig_partner.applications.filter(
+                status__in=[Application.PENDING, Application.QUESTION]):
+                send_waitlist_notification_email(app)
