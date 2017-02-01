@@ -1805,6 +1805,96 @@ class ApplicationModelTest(TestCase):
 
 
 
+class EvaluateApplicationTest(TestCase):
+    def setUp(self):
+        super(EvaluateApplicationTest, self).setUp()
+        editor = EditorFactory()
+        self.user = editor.user
+
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user)
+
+        self.partner = PartnerFactory()
+
+        self.application = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            partner=self.partner,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+        self.url = reverse('applications:evaluate',
+            kwargs={'pk': self.application.pk})
+
+        editor2 = EditorFactory()
+        self.unpriv_user = editor2.user
+
+        self.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        self.message_patcher.start()
+
+
+    def tearDown(self):
+        super(EvaluateApplicationTest, self).tearDown()
+        self.message_patcher.stop()
+
+
+    def test_sets_status(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        request = factory.post(self.url,
+            data={'status': Application.APPROVED})
+
+        request.user = self.user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user) # make sure
+        _ = views.EvaluateApplicationView.as_view()(
+            request, pk=self.application.pk)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.APPROVED)
+
+
+    def test_sets_days_open(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.date_created = date.today() - timedelta(days=3)
+        self.application.save()
+
+        request = factory.post(self.url,
+            data={'status': Application.APPROVED})
+
+        request.user = self.user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user) # make sure
+        _ = views.EvaluateApplicationView.as_view()(
+            request, pk=self.application.pk)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.days_open, 3)
+
+
+    def test_sets_date_closed(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.date_created = date.today() - timedelta(days=3)
+        self.application.save()
+
+        request = factory.post(self.url,
+            data={'status': Application.APPROVED})
+
+        request.user = self.user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user) # make sure
+        _ = views.EvaluateApplicationView.as_view()(
+            request, pk=self.application.pk)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.date_closed, date.today())
+
 class BatchEditTest(TestCase):
     def setUp(self):
         super(BatchEditTest, self).setUp()
@@ -1946,9 +2036,66 @@ class BatchEditTest(TestCase):
         self.assertEqual(urlparse(response.url).path,
             reverse('applications:list'))
 
-# posting to batch edit sets status
-# posting to batch edit without app or status fails appropriately?
 
+    def test_sets_status(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        request = factory.post(self.url,
+            data={'applications': self.application.pk,
+                  'batch_status': Application.APPROVED})
+
+        request.user = self.user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user) # make sure
+        _ = views.BatchEditView.as_view()(request)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.APPROVED)
+
+
+    def test_sets_days_open(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.date_created = date.today() - timedelta(days=3)
+        self.application.save()
+
+        request = factory.post(self.url,
+            data={'applications': self.application.pk,
+                  'batch_status': Application.APPROVED})
+
+        request.user = self.user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user) # make sure
+        _ = views.BatchEditView.as_view()(request)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.days_open, 3)
+
+
+    def test_sets_date_closed(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.date_created = date.today() - timedelta(days=3)
+        self.application.save()
+
+        request = factory.post(self.url,
+            data={'applications': self.application.pk,
+                  'batch_status': Application.APPROVED})
+
+        request.user = self.user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user) # make sure
+        _ = views.BatchEditView.as_view()(request)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.date_closed, date.today())
+
+# posting to batch edit without app or status fails appropriately?
 
 
 class MarkSentTest(TestCase):

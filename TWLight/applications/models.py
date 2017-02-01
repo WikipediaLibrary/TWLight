@@ -220,15 +220,22 @@ class Application(models.Model):
         return self.editor.user
 
 
+# IMPORTANT: pre_save is not sent by Queryset.update(), so *none of this
+# behavior will happen on if you update() an Application queryset*.
+# That is sometimes okay (for instance, if you are turning an APPROVED app into
+# a SENT app, since days_open and date_closed were set on approval), but it is
+# not always okay. Errors caused by days_open not existing when expected to
+# exist can show up in weird parts of the application (for example, template
+# rendering failing when get_num_days_open returns None but its output is
+# passed to a template filter that needs an integer).
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):
-    # if vote is being updated, then we must remove previous value first
     if instance.id:
         orig_app = Application.objects.get(pk=instance.id)
         orig_status = orig_app.status
-        if (orig_status not in Application.FINAL_STATUS_LIST
-            and instance.status in Application.FINAL_STATUS_LIST
-            and not instance.date_closed):
+        if all([orig_status not in Application.FINAL_STATUS_LIST,
+                int(instance.status) in Application.FINAL_STATUS_LIST,
+                not bool(instance.date_closed)]):
 
             instance.date_closed = date.today()
             instance.days_open = \

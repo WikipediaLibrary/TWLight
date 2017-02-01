@@ -126,7 +126,10 @@ def get_time_open_histogram(queryset, data_format=JSON):
         if not app.status in [Application.APPROVED, Application.NOT_APPROVED]:
             continue
 
-        if not app.days_open:
+        # Careful! Don't say "if not app.days_open" - that will also fail when
+        # days_open=0 (that is, when the app was closed the same day that
+        # it was submitted).
+        if app.days_open is None:
             logger.warning("Application #{pk} is closed but doesn't have a "
                 "days_open value.".format(pk=app.pk))
         else:

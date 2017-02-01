@@ -669,6 +669,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             logger.exception('Did not find valid data for batch editing')
             return HttpResponseBadRequest()
 
+        # IMPORTANT! It would be tempting to just do QuerySet.update() here,
+        # but that does NOT send the pre_save signal, which is doing some
+        # important work for Applications.
         for app_pk in request.POST.getlist('applications'):
             try:
                 app = Application.objects.get(pk=app_pk)
