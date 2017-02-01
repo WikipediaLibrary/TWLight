@@ -715,6 +715,12 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
 
 
     def post(self, request, *args, **kwargs):
+        try:
+            request.POST['applications']
+        except KeyError:
+            logger.exception('Posted data is missing required parameter')
+            return HttpResponseBadRequest()
+
         # Use getlist, don't just access the POST dictionary value using
         # the 'applications' key! If you just access the dict element you will
         # end up treating it as a string - thus if the pk of 80 has been
@@ -723,8 +729,14 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
         # instead of a string, and then you can use it as desired.
         app_pks = request.POST.getlist('applications')
 
-        Application.objects.filter(pk__in=app_pks).update(
-            status=Application.SENT, sent_by=request.user)
+        try:
+            self.get_object().applications.filter(pk__in=app_pks).update(
+                status=Application.SENT, sent_by=request.user)
+        except ValueError:
+            # This will be raised if something that isn't a number gets posted
+            # as an app pk.
+            logger.exception('Invalid value posted')
+            return HttpResponseBadRequest()
 
         messages.add_message(self.request, messages.SUCCESS,
             _('All selected applications have been marked as sent.'))

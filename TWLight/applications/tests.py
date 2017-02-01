@@ -1858,7 +1858,7 @@ class BatchEditTest(TestCase):
         response = views.BatchEditView.as_view()(request)
         self.assertEqual(response.status_code, 400)
 
-        # Has both parameters, but 'batch_status' has an invalid valud: bad.
+        # Has both parameters, but 'batch_status' has an invalid value: bad.
         request = RequestFactory().post(self.url,
             data={'applications': 1, 'batch_status': 6})
         request.user = self.user
@@ -1946,6 +1946,140 @@ class BatchEditTest(TestCase):
         self.assertEqual(urlparse(response.url).path,
             reverse('applications:list'))
 
-# what data structure is in request.POST['applications']???
 # posting to batch edit sets status
 # posting to batch edit without app or status fails appropriately?
+
+
+
+class MarkSentTest(TestCase):
+    def setUp(self):
+        super(MarkSentTest, self).setUp()
+        editor = EditorFactory()
+        self.user = editor.user
+
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user)
+
+        self.partner = PartnerFactory()
+        self.partner2 = PartnerFactory()
+
+        self.app1 = ApplicationFactory(
+            editor=editor,
+            status=Application.APPROVED,
+            partner=self.partner,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.app2 = ApplicationFactory(
+            editor=editor,
+            status=Application.APPROVED,
+            partner=self.partner2,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        editor2 = EditorFactory()
+        self.unpriv_user = editor2.user
+
+        self.url = reverse('applications:send_partner',
+            kwargs={'pk': self.partner.pk})
+
+        self.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        self.message_patcher.start()
+
+
+    def tearDown(self):
+        super(MarkSentTest, self).tearDown()
+        self.message_patcher.stop()
+
+
+    def test_invalid_params_raise_http_bad_request(self):
+        # No post data: bad.
+        request = RequestFactory().post(self.url, data={})
+        request.user = self.user
+
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+        self.assertEqual(response.status_code, 400)
+
+        # Missing the 'applications' parameter: bad.
+        request = RequestFactory().post(self.url, data={'bogus': 1})
+        request.user = self.user
+
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+        self.assertEqual(response.status_code, 400)
+
+
+    def test_bogus_applications_parameter_handled(self):
+        """
+        If the applications parameter doesn't correspond to an existing
+        application, the http request should succeed, but no apps should be
+        changed.
+        """
+        # Check status quo ante.
+        self.assertEqual(Application.objects.count(), 2)
+        self.assertEqual(Application.objects.filter(
+            status=Application.APPROVED).count(), 2)
+
+        # Post a completely invalid app pk.
+        request = RequestFactory().post(self.url,
+            data={'applications': ['NaN']})
+        request.user = self.user
+
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+        self.assertEqual(response.status_code, 400)
+
+        self.app1.refresh_from_db()
+        self.app2.refresh_from_db()
+        self.assertEqual(self.app1.status, Application.APPROVED)
+        self.assertEqual(self.app2.status, Application.APPROVED)
+
+        # Post a valid app pk that doesn't correspond to the partner. That's
+        # weird, but as long as we don't change anything's status it's fine.
+        request = RequestFactory().post(self.url,
+            data={'applications': [self.app2.pk]})
+        request.user = self.user
+
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, self.url)
+
+        self.app1.refresh_from_db()
+        self.app2.refresh_from_db()
+        self.assertEqual(self.app1.status, Application.APPROVED)
+        self.assertEqual(self.app2.status, Application.APPROVED)
+
+        # Check that we've covered all existing apps with the above statements.
+        self.assertEqual(Application.objects.count(), 2)
+
+
+    def test_only_coordinators_can_mark_sent(self):
+        # An anonymous user is prompted to login.
+        request = RequestFactory().post(self.url,
+            data={'applications': [self.app2.pk]})
+        request.user = AnonymousUser()
+
+        with self.assertRaises(PermissionDenied):
+            _ = views.SendReadyApplicationsView.as_view()(
+                request, pk=self.partner.pk)
+
+        # A user who is not a coordinator does not have access.
+        coordinators = get_coordinators()
+        coordinators.user_set.remove(self.unpriv_user) # make sure
+        request.user = self.unpriv_user
+
+        with self.assertRaises(PermissionDenied):
+            _ = views.SendReadyApplicationsView.as_view()(
+                request, pk=self.partner.pk)
+
+        # A coordinator may post to the page.
+        coordinators.user_set.add(self.user) # make sure
+        request.user = self.user
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        # Expected success condition: redirect back to the original page.
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, self.url)
