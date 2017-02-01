@@ -2,6 +2,34 @@
 
 {% load i18n %}
 
+{% block extra_css %}
+  <style type="text/css">
+    li {
+      padding-left: 5px;
+    }
+    li.outline {
+      border: 1px #ccc solid;
+      border-radius: 5px;
+      float: left;
+      padding: 10px 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    li.outline h4 {
+      margin-bottom: 0;
+    }
+
+    .media-body li {
+      padding-left: 0;
+    }
+
+    li.outline label {
+      margin-bottom: 0;
+      font-weight: inherit;
+    }
+  </style>
+{% endblock extra_css %}
+
 {% block content %}
   <h2>
     {% blocktrans %}Application data for {{ object }}{% endblocktrans %}
@@ -42,24 +70,59 @@
   {% if app_outputs %}
     <form method="POST">
       {% csrf_token %}
+      <div class="form-group">
+        <ul class="list-unstyled">
+          <li>
+            <div class="media">
+              <div class="media-left">
+                <input type="checkbox" id="toggle_all">
+              </div>
+              <div class="media-body">
+                <i>
+                  <label for="toggle_all">{% trans "Select/deselect all" %}</label>
+                </i>
+              </div>
+            </div>
+          </li>
+          {% for app, output in app_outputs.items  %}
+            <li class="outline">
+              <div class="media">
+                <div class="media-left">
+                  <input type="checkbox" name="applications" value="{{ app.pk }}" id="app_{{ app.pk }}">
+                </div>
+                <div class="media-body">
+                <label for="app_{{ app.pk }}">
+                  <h4 class="media-heading">{{ app }}</h4>
+                  <ul class="list-unstyled pull-left">
+                    {% for key, value in output.items %}
+                      <li><strong>{{ key }}</strong> &mdash; {{ value }}</li>
+                    {% endfor %}
+                  </ul>                
+                </label>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
       {# Translators: this should be translated the same way that it was earlier in this page. #}
       <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
-    </form>    
-
-    {% for app, output in app_outputs.items  %}
-      <h4>{{ app }} </h4>
-
-      <ul class="list-unstyled">
-        {% for label, value in output.items %}
-          <li><strong>{{ label }}</strong> &mdash; {{ value }}</li>
-        {% endfor %}
-      </ul>
-      {% if not forloop.last %}    
-        <hr />
-      {% endif %}
-    {% endfor %}
+    </form>
   {% else %}
     {% trans "There are no approved, unsent applications at this time." %}
   {% endif %}
 
 {% endblock content %}
+
+{% block javascript %}
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    $('#toggle_all').click(function() {
+      $('li.outline input[type="checkbox"]').prop('checked', this.checked)
+    });
+  </script>
+{% endblock javascript %}

@@ -715,15 +715,20 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
 
 
     def post(self, request, *args, **kwargs):
-        apps = self.get_object().applications.filter(
-            status=Application.APPROVED)
-        for app in apps:
-            app.status = Application.SENT
-            app.sent_by = request.user
-            app.save()
+        # Use getlist, don't just access the POST dictionary value using
+        # the 'applications' key! If you just access the dict element you will
+        # end up treating it as a string - thus if the pk of 80 has been
+        # submitted, you will end up filtering for pks in [8, 0] and nothing
+        # will be as you expect. getlist will give you back a list of items
+        # instead of a string, and then you can use it as desired.
+        app_pks = request.POST.getlist('applications')
+
+        Application.objects.filter(pk__in=app_pks).update(
+            status=Application.SENT, sent_by=request.user)
 
         messages.add_message(self.request, messages.SUCCESS,
-            _('All applications have been marked as sent.'))
+            _('All selected applications have been marked as sent.'))
 
         return HttpResponseRedirect(reverse(
             'applications:send_partner', kwargs={'pk': self.get_object().pk}))
+
