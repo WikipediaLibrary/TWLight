@@ -15,42 +15,34 @@ When full paths are not given, the files are in the project root (`/var/www/html
 * Get a Wikimedia OAuth consumer key and secret.
 
 ### ssh into your server to do these steps
-* Confirm that you have the following installed on your instance: Python 2.7, /etc/exim4/, git.
-* Create the web user and group
-    * `sudo adduser www`
-    * Generate a password; leave the rest blank
-    * `sudo addgroup twlight`
-    * `sudo adduser www twlight`
-* Install system dependencies
-    * `sudo apt-get install libmysqlclient-dev python-dev build-essential python-pip nginx mariadb-server`
-    * Create and record a root password for the MariaDB server. 
+
+#### Install system dependencies
+* Confirm that you have the following installed on your instance (they should be there by default): Python 2.7, /etc/exim4/, git.
+* `sudo apt-get install libmysqlclient-dev python-dev build-essential python-pip nginx mariadb-server`
+* Create and record a root password for the MariaDB server. 
     * (Note that the MySQL server should automatically be started as a result of this installation; if it's not, you'll need to bring it up manually.)
-* Install the codebase
-    * `cd /var/www/html/`
-    * `sudo git clone https://github.com/thatandromeda/TWLight.git`
-* Configure nginx
-    * `sudo cp /var/www/html/TWLight/nginx.conf.site /etc/nginx/sites-available/twlight`
-    * `sudo ln -s /etc/nginx/sites-available/twlight /etc/nginx/sites-enabled/twlight`
-    * Change the `server_name` in `/etc/nginx/sites-available/twlight` to your server URL.
-    * `sudo systemctl start nginx.service`
-* Install and set up virtualenv
-    * `sudo pip install virtualenv` (note: relies on pip, installed in earlier step)
-    * `cd /home/www/`
-    * `sudo virtualenv TWLight`
-* Install Django dependencies into virtualenv
-    * `source /home/www/TWLight/bin/activate`
-    * `sudo pip install -r /var/www/html/TWLight/requirements/wmf.txt`
-* Set up database
-    * Load time zones:
-        * `mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p` 
-        * Enter the database root password you created earlier when prompted
-    * Create database and user:
-        * `mysql -u root -p`
-        * Enter the database root password you created earlier when prompted
-        * `CREATE DATABASE twlight CHARACTER SET = 'utf8';`
-        * Create and record a password for your database user (which you will use in the next step).
-        * `GRANT ALL PRIVILEGES on twlight.* to twlight@'localhost' IDENTIFIED BY '<password>';`
-        * `\q`
+
+#### Set up database
+* Load time zones:
+    * `mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p` 
+    * Enter the database root password you created earlier when prompted
+* Create database and user:
+    * `mysql -u root -p`
+    * Enter the database root password you created earlier when prompted
+    * `CREATE DATABASE twlight CHARACTER SET = 'utf8';`
+    * Create and record a password for your database user (which you will use in the next step).
+    * `GRANT ALL PRIVILEGES on twlight.* to twlight@'localhost' IDENTIFIED BY '<password>';`
+    * `\q`
+
+
+#### Create the web user
+* `sudo adduser www`
+* Generate a password; leave the rest blank
+
+
+#### Install the codebase
+* `cd /var/www/html/`
+* `sudo git clone https://github.com/thatandromeda/TWLight.git`
 * Set local variables
     * `sudo touch /var/www/html/TWLight/TWLight/settings/production_vars.py`
     * Add the following lines to `production_vars.py`:
@@ -58,50 +50,69 @@ When full paths are not given, the files are in the project root (`/var/www/html
         * `SECRET_KEY='<your Django secret key>'` (Your secret key can be anything, but is generally a 50-character string of letters, numbers, and special characters.)
         * `CONSUMER_KEY='<your wikimedia oauth consumer key>'`
         * `CONSUMER_SECRET='<your wikimedia oauth consumer secret>'`
-        * (Note: This file is `.gitignore`d and should therefore be kept out of version control; you can safely add secrets to it.)
-    * Edit the list of `ALLOWED_HOSTS` in `/var/www/html/TWLight/TWLight/settings/production.py` (*not* `production_vars.py`) to match your server's URL(s).
+        * (Note: This file is `.gitignore`d and will therefore be kept out of version control; you can safely add secrets to it.)
+    * Edit the list of `ALLOWED_HOSTS` in the settings file you will be using to match your server's URL(s).
+    * Edit `bin/gunicorn_start.sh` if you are not using production settings (change the `DJANGO_SETTINGS_MODULE` lines accordingly).
 * Rectify permissions
-    * `touch /var/www/html/TWLight/TWLight/logs/twlight.log`
-    * `touch /var/www/html/TWLight/TWLight/logs/gunicorn.log`
-    * `sudo chown -vR www /home/www/TWLight`
-    * `sudo chown -vR :twlight /var/www/html/TWLight`
-    * `sudo chmod -vR g+w /var/www/html/TWLight`
-    * `sudo chmod -vR g+w /var/www/html/TWLight/TWLight/logs/*`
-    * `sudo chmod -vR g+w /var/www/html/TWLight/TWLight/collectedstatic/`
-* Do one-time Django setup steps
-    * `cd /var/www/html/TWLight`
-    * `sudo python manage.py syncdb`
-        * Do set up a superuser - otherwise you won't be able to log into the admin.
-    * `sudo python manage.py migrate`
-    * `sudo python manage.py createinitialrevisions` (see https://django-reversion.readthedocs.io/en/stable/commands.html#createinitialrevisions)
-    * `sudo python manage.py collectstatic`
-    * Through the web interface, at `/admin`, make sure that your default Site URL matches your server URL.
-* Run Django
-    * `sudo bin/gunicorn_start.sh`
-        * This should probably be run as www, not root, but it crashes; not sure where the permissions problem is.
-    * _Do not use `python manage.py runserver`_: it is not suitable for production
-    * You don't need to set the `DJANGO_SETTINGS_MODULE` environment variable; it defaults to `TWLight.settings.production`.
-        * Don't change this unless you know things about deploying Django in production.
+    * `sudo touch /var/www/html/TWLight/TWLight/logs/twlight.log`
+    * `sudo touch /var/www/html/TWLight/TWLight/logs/gunicorn.log`
+    * `sudo chown -vR www /var/www/html/TWLight`
 
 
-**TODO**
-oauth....or maybe NOT oauth, as we should disallow account creation outside admin
-update gunicorn_start.sh to use a virtualenv in /home/www, and alter production to use permissions properly
-    except I have to figure out how to allow www to start gunicorn first
-edit the rest of this doc
-decide what must be checked before you promote code to production
+#### Configure nginx
+* `sudo cp /var/www/html/TWLight/nginx.conf.site /etc/nginx/sites-available/twlight`
+* `sudo ln -s /etc/nginx/sites-available/twlight /etc/nginx/sites-enabled/twlight`
+* Change the `server_name` in `/etc/nginx/sites-available/twlight` to your server URL.
+* `sudo systemctl start nginx.service`
+
+
+#### Install and set up virtualenv
+* `sudo pip install virtualenv` (note: relies on pip, installed in earlier step)
+* `su - www`; enter password; then as www:
+    * confirm that you are in `/home/www`
+    * `virtualenv TWLight`
+    * Install Django dependencies into virtualenv
+        * `source /home/www/TWLight/bin/activate`
+        * `pip install -r /var/www/html/TWLight/requirements/wmf.txt` 
+
+
+#### Do one-time Django setup steps
+* **Important**: you are still operating as user `www` for these steps.
+* `cd /var/www/html/TWLight`
+* `python manage.py syncdb`
+    * Do set up a superuser - otherwise you won't be able to log into the admin.
+* `python manage.py migrate`
+* `python manage.py createinitialrevisions` (see https://django-reversion.readthedocs.io/en/stable/commands.html#createinitialrevisions)
+* `python manage.py collectstatic`
+
+
+#### Run Django
+* `bin/gunicorn_start.sh &`
+    * *Important**: you are still operating as user `www` and you are still  in `/var/www/html/TWLight/`.
+* Through the web interface, at `/admin`, make sure that your default Site URL matches your server URL.
+* _Do not use `python manage.py runserver`_: it is not suitable for production
+* You don't need to set the `DJANGO_SETTINGS_MODULE` environment variableif you want to use production settings. If you want to use a different settings file, set `DJANGO_SETTINGS_MODULE` accordingly (e.g. `TWLight.settings.staging`).
+    * Don't change this unless you know things about deploying Django in production.
 
 ## To deploy updated code
 Once updates have been git pushed from their local development environment to the repo, ssh into the server and...
 * `cd /var/www/html/TWLight`
 * `sudo git pull origin master`
-* `su - www`; enter your password for user www; `source /home/www/TWLight/bin/activate`; `pip install -r /var/www/html/TWLight/requirements/wmf.txt`; `exit`
-    * This is only required if there are dependency changes to install, but will not hurt if there aren't.
-* `sudo python manage.py migrate`
-    * This is only required if there are database schema changes to apply, but will not hurt if there aren't.
-* `sudo python manage.py collectstatic`
-    * This is only required if there are stylesheet changes to apply, but will not hurt if there aren't.
-* Kill and restart gunicorn: `ps -ef | grep gunicorn`, `sudo kill [process id]`, `sudo bin/gunicorn_start &`
+* `su - www`; enter your password for user www; then as user www:
+    * `source /home/www/TWLight/bin/activate`
+    * `cd /var/www/html/TWLight`
+    * `pip install -r requirements/wmf.txt`
+        * This is only required if there are dependency changes to install, but will not hurt if there aren't.
+    * `python manage.py migrate`
+        * This is only required if there are database schema changes to apply, but will not hurt if there aren't.
+        * If you get errors in this step, make sure you are working as www (or any user with permissions on the virtualenv).
+    * `python manage.py collectstatic`
+        * This is only required if there are stylesheet changes to apply, but will not hurt if there aren't.
+    * Kill and restart gunicorn:
+        * `ps -ef | grep gunicorn`
+        * `kill [process id]`
+        * `bin/gunicorn_start &`
+    * `exit`
 
 ## Background info & troubleshooting
 
