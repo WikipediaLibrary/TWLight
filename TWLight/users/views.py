@@ -65,10 +65,20 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
         context['form'] = EditorUpdateForm(instance=editor)
         context['language_form'] = SetLanguageForm()
 
-        if self.request.user.editor == editor and not editor.contributions:
-            messages.add_message(self.request, messages.WARNING,
-                _('Please update your contributions to Wikipedia (below) to '
-                  'help coordinators evaluate your applications.'))
+        try:
+            if self.request.user.editor == editor and not editor.contributions:
+                messages.add_message(self.request, messages.WARNING,
+                    _('Please update your contributions to Wikipedia (below) to '
+                      'help coordinators evaluate your applications.'))
+        except Editor.DoesNotExist:
+            """
+            If the user viewing the site does not have an attached editor
+            (which can happen for administrative users), this error will be
+            thrown, preventing the user from viewing the site. We don't actually
+            want to have a 500 in this case, though; we just want to not add the
+            message, and move on.
+            """
+            pass
 
         context['password_form'] = PasswordChangeForm(user=self.request.user)
 
