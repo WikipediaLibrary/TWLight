@@ -11,7 +11,7 @@ NUM_WORKERS=3
 
 cd $DJANGODIR
 # Find gunicorn in the virtualenv
-source '/home/thatandromeda/.virtualenvs/TWLight/bin/activate'
+source '/home/www/TWLight/bin/activate'
 export DJANGO_SETTINGS_MODULE='TWLight.settings.production'
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
