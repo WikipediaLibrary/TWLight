@@ -108,6 +108,9 @@ DATABASES = {
         'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD', None),
         'HOST': 'localhost',
         'PORT': '3306',
+        # This is critical for handling Unicode data due to stupid properties
+        # of MySQL; see https://stackoverflow.com/questions/2108824/mysql-incorrect-string-value-error-when-save-unicode-string-in-django .
+        'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
 

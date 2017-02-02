@@ -29,7 +29,7 @@ When full paths are not given, the files are in the project root (`/var/www/html
 * Create database and user:
     * `mysql -u root -p`
     * Enter the database root password you created earlier when prompted
-    * `CREATE DATABASE twlight CHARACTER SET = 'utf8';`
+    * `CREATE DATABASE twlight CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci';`
     * Create and record a password for your database user (which you will use in the next step).
     * `GRANT ALL PRIVILEGES on twlight.* to twlight@'localhost' IDENTIFIED BY '<password>';`
     * `\q`
