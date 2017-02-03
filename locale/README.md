@@ -63,7 +63,12 @@ Run these commands from the root `TWLight/` directory.
 3. Send the .po files to your translator(s) and have them fill in translation strings.
 4. `python manage.py compilemessages` (compile .po files processed by your translators into .mo files usable by the computer)
 
-If you are adding a new language to the site, you will also need to add it to the settings file. Edit the `LANGUAGES` variable in `TWLight/settings/base.py`. It's OK to do this after you get the file from the translator; Django has suitable built-in translations of language names. IN fact, it's considerate to wait until after getting the translation file, because users may be frustrated if they choose a language and the site cannot display in that language.
+When you deploy a new language:
+* Add it to the `LANGUAGES` variable in `TWLight/settings/base.py`.
+    * It's OK to do this after you get the file from the translator; Django has suitable built-in translations of language names. IN fact, it's considerate to wait until after getting the translation file, because users may be frustrated if they choose a language and the site cannot display in that language.
+* Run `python manage.py makemigrations` and `python manage.py migrate`.
+    * Translatable database fields will need to add an additional field for the new language.
+    * You need to do this *on the server* as well as on localhost; the migrations for the translated fields in django-taggit are outside of your codebase's version control since it's a dependency, so the new migrations will not automatically come into being on the server when you deploy the code.
 
 The contents of the `LANGUAGES` variable will automatically be offered to users as options for site translation on their user profile pages. If they choose a language that doesn't yet have a translation file available, the site will render in the default language specified by LANGUAGE_CODE. (Users may not be able to read this, but the app will not crash.) If the translation file is incomplete, translation strings will be rendered in their original language (probably English).
 

@@ -98,20 +98,19 @@ When full paths are not given, the files are in the project root (`/var/www/html
 Once updates have been git pushed from their local development environment to the repo, ssh into the server and...
 * `su - www`; enter password
     * `cd /var/www/html/TWLight`
+    * Kill gunicorn:
+        * `ps -ef | grep gunicorn`
+        * `kill [process id]`
     * `git pull origin master`
     * `source /home/www/TWLight/bin/activate`
-    * `cd /var/www/html/TWLight`
     * `pip install -r requirements/wmf.txt`
         * This is only required if there are dependency changes to install, but will not hurt if there aren't.
     * `python manage.py migrate`
         * This is only required if there are database schema changes to apply, but will not hurt if there aren't.
         * If you get errors in this step, make sure you are working as www (or any user with permissions on the virtualenv).
-    * `python manage.py collectstatic`
+    * `python manage.py collectstatic --noinput`
         * This is only required if there are stylesheet changes to apply, but will not hurt if there aren't.
-    * Kill and restart gunicorn:
-        * `ps -ef | grep gunicorn`
-        * `kill [process id]`
-        * `bin/gunicorn_start &`
+    * Restart gunicorn: `bin/gunicorn_start &`
     * `exit`
 
 ## Background info & troubleshooting
@@ -144,6 +143,9 @@ Once updates have been git pushed from their local development environment to th
 * If you used sudo to pip install requirements, gunicorn will fail; sudo will have installed outside the virtualenv and the files won't be available. You need to install as a user who has permissions to your virtualenv.
 * Does `run/gunicorn.sock` exist, and does www-data have permissions on it? (If you get a `HaltServer: Worker failed to boot` error, this may be the cause.)
 
+### Partner pages or partner admin pages not rendering
+* Did you just add a new language to the site, and forget to run `python manage.py makemigrations` on the server?
+
 ## Logs
 
 Application log: `/var/www/html/TWLight/logs/twlight.log`
@@ -155,3 +157,5 @@ Postfix and nginx log to their system defaults.
 The TWLight alpha ships with English, French, and Finnish. If you have translation files in a new language to deploy (yay!), or updates to an existing language file, see `locale/README.md`. This covers translations of all content in `.html` and `.py` files.
 
 If you would like to translate *model instance content* (for instance, `Partner.description`), this uses the django-modeltranslation app. See https://django-modeltranslation.readthedocs.io/ for documentation; see `TWLight/resources/translation.py` for an example.
+
+When you deploy a new language to TWLight, make sure to run `python manage.py makemigrations` and then `python manage.py migrate` *on the server*; django-taggit needs to make migrations to cover the new field for the new language, but these migrations are outside of version control so they will not be automatically deployed with your new code.
