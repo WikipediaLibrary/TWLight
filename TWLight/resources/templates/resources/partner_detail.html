@@ -108,6 +108,10 @@
           {% else %}
             {% trans "Description not available." %}
           {% endif %}
+
+          {% for tag in object.tags.all %}
+            <span class="label label-default">{{ tag }}</span>    
+          {% endfor %}    
         </div>
       </div>      
     </li>

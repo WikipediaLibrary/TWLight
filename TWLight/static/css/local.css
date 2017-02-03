@@ -183,6 +183,18 @@ MISC
     display: none;
 }
 
+/* Bootstrap default labels are really hard to read. This makes them bigger
+   and opens up them up a bit, while still preventing them from overlapping
+   if there are multiple rows of labels.
+*/
+.label {
+  font-size: 85%;
+  padding: .15em .6em;
+  letter-spacing: 0.25px;
+  font-weight: 500;
+  margin-top: 5px; 
+}
+
 
 /*
 ----------------------------------------------------------------------------

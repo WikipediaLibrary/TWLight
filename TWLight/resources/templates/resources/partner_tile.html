@@ -21,6 +21,15 @@
       <hr />
     {% endif %}
 
+    {% if partner.is_waitlisted %}
+      <span class="label label-warning">
+        {% trans "Waitlisted" %}
+      </span>
+    {% endif %}
+    {% for tag in partner.tags.all %}
+      <span class="label label-default">{{ tag }}</span>
+    {% endfor %}
+
     {% if partner.description %}
       <p>
         {{ partner.description | safe }}
@@ -40,14 +49,6 @@
         {% trans "More info" %}
       </a>
       <br />
-      {% if partner.is_waitlisted %}
-        <span class="label label-warning">
-          {% trans "Waitlisted" %}
-        </span>
-      {% endif %}
     </div>
-    {% for tag in partner.tags %}
-      <span class="label label-primary">{{ tag }}</span>
-    {% endfor %}
   </div>
 </div>
