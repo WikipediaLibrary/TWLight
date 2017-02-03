@@ -2,6 +2,8 @@
 import copy
 from datetime import timedelta
 
+from taggit.managers import TaggableManager
+
 from django.conf.global_settings import LANGUAGES
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -176,6 +178,7 @@ class Partner(models.Model):
             "content.")
         )
 
+    tags = TaggableManager()
 
     # Non-universal form fields
     # --------------------------------------------------------------------------
