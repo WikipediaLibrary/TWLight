@@ -96,9 +96,9 @@ When full paths are not given, the files are in the project root (`/var/www/html
 
 ## To deploy updated code
 Once updates have been git pushed from their local development environment to the repo, ssh into the server and...
-* `cd /var/www/html/TWLight`
-* `sudo git pull origin master`
-* `su - www`; enter your password for user www; then as user www:
+* `su - www`; enter password
+    * `cd /var/www/html/TWLight`
+    * `git pull origin master`
     * `source /home/www/TWLight/bin/activate`
     * `cd /var/www/html/TWLight`
     * `pip install -r requirements/wmf.txt`
