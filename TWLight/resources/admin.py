@@ -19,6 +19,7 @@ class PartnerAdmin(admin.ModelAdmin):
         wikipedia usernames, rather than their cryptic local IDs. It should be
         used only for the coordinator field.
         """
+
         def label_from_instance(self, obj):
             return '{editor.wp_username} ({editor.home_wiki})'.format(
                 editor=obj.editor)
@@ -31,7 +32,8 @@ class PartnerAdmin(admin.ModelAdmin):
         """
         if db_field.name == "coordinator":
             return self.CustomModelChoiceField(
-                queryset=get_coordinators().user_set.all())
+                queryset=get_coordinators().user_set.all(),
+                required=False)
         return super(PartnerAdmin, self).formfield_for_foreignkey(
             db_field, request, **kwargs)
 
