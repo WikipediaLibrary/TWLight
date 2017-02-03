@@ -7,6 +7,7 @@ django-durationfield==0.5.2
 django-modeltranslation==0.12
 django-request==1.5.1
 django-reversion==2.0.8
+django-taggit==0.22.0
 djmail==1.0.0
 factory_boy==2.7.0
 mock==2.0.0
