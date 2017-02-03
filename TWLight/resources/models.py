@@ -178,7 +178,7 @@ class Partner(models.Model):
             "content.")
         )
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     # Non-universal form fields
     # --------------------------------------------------------------------------
