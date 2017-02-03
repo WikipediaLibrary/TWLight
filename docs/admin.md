@@ -11,7 +11,23 @@ In general, you will do admin-y things at the `/admin` URL. This gives you a GUI
 
 ## Translations
 
+There are two types of translatable content:
+1. HTML templates (and content inserted into them by Python code);
+2. Objects in the database.
+
+They use different translation procedures.
+
+### HTML content
 See `locale/README.md`. This file contains instructions for translators as well as for TWL developers working with translators. You will need a sysadmin to deploy new or updated translations.
+
+### Database content
+Objects in the database which can be translated are:
+1. The Description field of Partners;
+2. Tags.
+
+Each of those objects has form fields for each supported language (e.g. description_en, description_fr). Enter whatever translations you have in the appropriate field. It is okay to leave fields blank; they will default to English. You don't have to fill in *both* the main field *and* the field for the language you're working in; they will default to the same thing. (So if your language preference is English, you can just fill in the description field and `description_en` will be set automatically; similarly, if you have the site set to French, `description_fr` will be set automatically from `description`.)
+
+The Partner admin pages only provide the main Tag field; fill this in in English, and then use the Tag section of the admin interface to supply translations. Only fill in the name fields; the slug field will fill automatically, and you should leave the Tagged Items fields alone.
 
 ## Logging in
 
@@ -126,7 +142,7 @@ The existing partners are available in the dropdown. You can also add a new part
 
 Right now TWLight sends one type of email: comment notifications whenever someone comments on an application. Recipients are 1) the editor who owns that application; 2) anyone else who has commented on that application.
 
-To make TWLight send additional emails, you (or your friendly neighborhood developer) will need to write more code. Unfortunately form emails cannot be handled through `/admin`, because database objects are not visible to the translation infrastructure. Storing emails as HTML in the codebase, with the `{% trans %}` or `{% blocktrans %}` tag, means they will automatically be provided to translators via Django's internationalization mechanism.
+To make TWLight send additional emails, you (or your friendly neighborhood developer) will need to write more code. Unfortunately form emails cannot be handled through `/admin`, because database objects are not visible by default to the translation infrastructure. (This could be altered in future, using the modeltranslation app.) Storing emails as HTML in the codebase, with the `{% trans %}` or `{% blocktrans %}` tag, means they will automatically be provided to translators via Django's internationalization mechanism.
 
 The existing `emails/tasks.py` provides a model for how additional emails can be incorporated into the codebase. The steps are:
 
