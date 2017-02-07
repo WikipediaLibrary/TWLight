@@ -51,14 +51,14 @@
   <input type="submit" value="{% trans "Apply for access" %}" class="btn btn-primary" />
 </form>
 
-<div class="well well-sm">
-  {% if any_waitlisted %}
+{% if any_waitlisted %}
+  <div class="well well-sm">
     {# Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did earlier in this file. #}
     {% blocktrans trimmed %}
       You can apply to <span class="label label-warning">Waitlisted</span>
       partners, but they don't have access grants available right now. We will process those applications when access becomes available.
     {% endblocktrans %}
-  {% endif %}
-</div>
+  </div>
+{% endif %}
 
 {% endblock %}

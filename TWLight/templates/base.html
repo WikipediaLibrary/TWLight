@@ -114,8 +114,18 @@
         <div class="alert alert-{{ message.tags }}">{{ message }}</div>
       {% endfor %}
     {% endif %}
+    {% if not user.email %}
+      <div class="alert alert-warning">
+        {% url 'users:email_change' as email_url %}
+        {% blocktrans %}
+          You don't have an email on file. We can't finalize your access to
+          partner resources without an email. Please
+          <a href="{{ email_url }}">update your email</a>.
+        {% endblocktrans %}
+      </div>
+    {% endif %}
+
     {% block content %}
-      <h1>{% trans "This is a template" %}</h1>
     {% endblock %}
     
   </div>

@@ -3,7 +3,6 @@ from django.contrib import admin
 from TWLight.users.groups import get_coordinators
 
 from .models import Partner, Stream, Contact, Language
-from taggit.models import Tag
 
 
 class LanguageAdmin(admin.ModelAdmin):
