@@ -61,6 +61,9 @@ class UserProfile(models.Model):
     # Have they agreed to our terms?
     terms_of_use = models.BooleanField(default=False,
         help_text=_("Has this user agreed with the terms of use?"))
+    use_wp_email = models.BooleanField(default=True, help_text=_('Should we '
+        'automatically update their email from their Wikipedia email when they '
+        'log in? Defaults to True.'))
 
 
 # Create user profiles automatically when users are created.
