@@ -37,7 +37,6 @@ class EditorUpdateForm(forms.ModelForm):
 
 
 
-
 class SetLanguageForm(forms.Form):
     language = forms.ChoiceField(settings.LANGUAGES)
 
@@ -45,7 +44,6 @@ class SetLanguageForm(forms.Form):
         super(SetLanguageForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.label_class = 'sr-only'
-
 
 
 
@@ -72,16 +70,40 @@ class TermsForm(forms.ModelForm):
 
 
 
-
 class HomeWikiForm(forms.Form):
     home_wiki = forms.ChoiceField(WIKIS)
 
     def __init__(self, *args, **kwargs):
         super(HomeWikiForm, self).__init__(*args, **kwargs)
-        self.fields['home_wiki'].label = 'Select your home wiki'
+        self.fields['home_wiki'].label = _('Select your home wiki')
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
             'home_wiki',
             Submit('submit', _('Log in'), css_class='btn btn-default btn-block')
+        )
+
+
+
+class EmailChangeForm(forms.Form):
+    email = forms.EmailField()
+    use_wp_email = forms.BooleanField(required=False)
+
+    def __init__(self, user, *args, **kwargs):
+        super(EmailChangeForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].label = _('Email')
+        self.fields['use_wp_email'].label = _('Use my Wikipedia email address')
+
+        self.fields['email'].initial = user.email
+        self.fields['use_wp_email'].initial = user.userprofile.use_wp_email
+
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-2'
+        self.helper.field_class = 'col-md-8'
+        self.helper.layout = Layout(
+            'email',
+            'use_wp_email',
+            Submit('submit', _('Update email'), css_class='btn btn-default col-md-offset-2')
         )

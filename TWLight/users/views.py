@@ -8,18 +8,39 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, FormView
 from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly, coordinators
 
-from .forms import EditorUpdateForm, SetLanguageForm, TermsForm
+from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm
 from .models import Editor, UserProfile
+
+
+def _is_real_url(url):
+    """
+    Users might have altered the URL parameters. Let's not just blindly
+    redirect; let's actually make sure we can get somewhere first.
+    """
+    try:
+        resolve(url)
+        return True
+    except Resolver404:
+        return False
+
+def _redirect_to_next_param(request):
+    next_param = request.GET.get(REDIRECT_FIELD_NAME, '')
+    if (next_param and
+        is_safe_url(url=next_param, host=request.get_host()) and
+        _is_real_url(next_param)):
+        return next_param
+    else:
+        return reverse_lazy('users:home')
 
 
 class UserDetailView(SelfOnly, TemplateView):
@@ -186,10 +207,27 @@ class PIIUpdateView(SelfOnly, UpdateView):
 
 
 
-class EmailChangeView(SelfOnly, UpdateView):
-    model = User
+class EmailChangeView(SelfOnly, FormView):
+    form_class = EmailChangeForm
     template_name = 'users/editor_update.html'
-    fields = ['email']
+
+    def get_form_kwargs(self):
+        kwargs = super(EmailChangeView, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+    def form_valid(self, form):
+        user = self.request.user
+
+        user.email = form.cleaned_data['email']
+        user.save()
+
+        user.userprofile.use_wp_email = form.cleaned_data['use_wp_email']
+        user.userprofile.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
 
     def get_object(self):
         """
@@ -203,29 +241,18 @@ class EmailChangeView(SelfOnly, UpdateView):
         return self.request.user
 
 
-    def get_form(self, form_class):
-        """
-        Define get_form so that we can apply crispy styling.
-        """
-        form = super(EmailChangeView, self).get_form(form_class)
-        form.helper = FormHelper()
-        form.helper.add_input(Submit(
-            'submit',
-            _('Update email'),
-            css_class='center-block'))
-
-        return form
-
-
     def get_success_url(self):
-        """
-        Define get_success_url so that we can add a success message.
-        """
-        messages.add_message(self.request, messages.SUCCESS,
-            _('Your email has been changed to {email}.').format(
-                email=self.request.user.email))
-        return reverse_lazy('users:home')
-
+        if self.request.user.email:
+            messages.add_message(self.request, messages.SUCCESS,
+                _('Your email has been changed to {email}.').format(
+                    email=self.request.user.email))
+            return _redirect_to_next_param(self.request)
+        else:
+            messages.add_message(self.request, messages.WARNING,
+                _('Your email is blank. You can still explore the site, '
+                  "but you won't be able to apply for access to partner "
+                  'resources without an email.'))
+            return reverse_lazy('users:home')
 
 
 
@@ -279,29 +306,12 @@ class TermsView(UpdateView):
 
 
     def get_success_url(self):
-        def is_real_url(url):
-            """
-            Users might have altered the URL parameters. Let's not just blindly
-            redirect; let's actually make sure we can get somewhere first.
-            """
-            try:
-                resolve(url)
-                return True
-            except Resolver404:
-                return False
-
 
         if self.get_object().terms_of_use:
             # If they agreed with the terms, awesome. Send them where they were
             # trying to go, if there's a meaningful `next` parameter in the URL;
             # if not, send them to their home page as a sensible default.
-            next_param = self.request.GET.get(REDIRECT_FIELD_NAME, '')
-            if (next_param and
-                is_safe_url(url=next_param, host=self.request.get_host()) and
-                is_real_url(next_param)):
-                return next_param
-            else:
-                return reverse_lazy('users:home')
+            return _redirect_to_next_param(self.request)
 
         else:
             # If they didn't agree, that's cool, but we should make sure they

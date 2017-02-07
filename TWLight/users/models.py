@@ -300,12 +300,16 @@ class Editor(models.Model):
         self.wp_valid = self._is_user_valid(identity)
         self.save()
 
-        try:
-            self.user.email = identity['email']
-        except KeyError:
-            # Email isn't guaranteed to be present in identity - don't do
-            # anything if we can't find it.
-            pass
+        # This will be True the first time the user logs in, since use_wp_email
+        # defaults to True. Therefore we will initialize the email field if
+        # they have an email at WP for us to initialize it with.
+        if self.user.userprofile.use_wp_email:
+            try:
+                self.user.email = identity['email']
+            except KeyError:
+                # Email isn't guaranteed to be present in identity - don't do
+                # anything if we can't find it.
+                pass
 
         self.user.save()
 
