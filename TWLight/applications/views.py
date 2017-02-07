@@ -26,7 +26,8 @@ from django.views.generic.list import ListView
 from TWLight.view_mixins import (CoordinatorsOrSelf,
                                  CoordinatorsOnly,
                                  EditorsOnly,
-                                 ToURequired)
+                                 ToURequired,
+                                 EmailRequired)
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
 
@@ -43,7 +44,7 @@ logger = logging.getLogger(__name__)
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 
 
-class RequestApplicationView(EditorsOnly, ToURequired, FormView):
+class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
     template_name = 'applications/request_for_application.html'
 
     def get_context_data(self, **kwargs):
@@ -103,7 +104,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, FormView):
 
 
 
-class _BaseSubmitApplicationView(EditorsOnly, ToURequired, FormView):
+class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
     """
     People can get to application submission in 2 ways:
     1) via RequestApplicationView, which lets people select multiple partners;

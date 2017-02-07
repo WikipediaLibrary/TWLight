@@ -151,6 +151,7 @@ class ToURequired(object):
             # agreed to the Terms, either, so we can safely deny them.
             return False
 
+
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_tou_required(request.user):
             messages.add_message(request, messages.INFO,
@@ -169,3 +170,33 @@ class ToURequired(object):
         return super(ToURequired, self).dispatch(
             request, *args, **kwargs)
 
+
+
+class EmailRequired(object):
+    """
+    Restricts visibility to:
+    * Users who have an email on file.
+    * Superusers.
+    """
+
+    def test_func_email_required(self, user):
+        return bool(user.email) or user.is_superuser
+
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_email_required(request.user):
+            messages.add_message(request, messages.INFO,
+                'You need to have an email address on file before you can do that.')
+
+            # Remember where they were trying to go, so we can redirect them
+            # back after they agree. There's logic in TermsView to pick up on
+            # this parameter.
+            next_path = request.path
+            next_param = urlencode({REDIRECT_FIELD_NAME: next_path})
+            path = reverse_lazy('users:email_change')
+            new_url = ParseResult(scheme='', netloc='', path=path, params='',
+                query=next_param, fragment='').geturl()            
+            return HttpResponseRedirect(new_url)
+
+        return super(EmailRequired, self).dispatch(
+            request, *args, **kwargs)
