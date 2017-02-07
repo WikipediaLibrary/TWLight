@@ -1377,7 +1377,7 @@ msgstr "Siirry hakemustilastoihin"
 
 #: TWLight/templates/dashboard.html:78
 msgid "Partners"
-msgstr "Yhteisyökumppanit"
+msgstr "Yhteistyökumppanit"
 
 #: TWLight/templates/dashboard.html:84
 msgid "Number of partners over time"
