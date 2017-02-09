@@ -36,14 +36,17 @@ class CoordinatorsOrSelf(object):
     """
 
     def test_func_coordinators_or_self(self, user):
+        obj_owner_test = False # Set default.
         try:
             obj = self.get_object()
-            if isinstance(obj, User):
-                obj_owner_test = (obj == user)
-            else:
-                obj_owner_test = (self.get_object().user == user)
+            if obj:
+                if isinstance(obj, User):
+                    obj_owner_test = (obj.pk == user.pk)
+                else:
+                    obj_owner_test = (self.get_object().user.pk == user.pk)
         except AttributeError:
-            obj_owner_test = False
+            # Keep the default.
+            pass
 
         return (user.is_superuser or
                 user in coordinators.user_set.all() or
@@ -119,10 +122,14 @@ class SelfOnly(object):
         obj_owner_test = False # set default
 
         obj = self.get_object()
-        if isinstance(obj, User):
-            obj_owner_test = (obj == user)
-        else:
-            obj_owner_test = (self.get_object().user == user)
+
+        try:
+            if isinstance(obj, User):
+                obj_owner_test = (obj.pk == user.pk)
+            else:
+                obj_owner_test = (self.get_object().user.pk == user.pk)
+        except AttributeError:
+            pass
 
         return obj_owner_test
 

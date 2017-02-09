@@ -280,7 +280,7 @@ class UserProfileModelTestCase(TestCase):
         user.delete()
 
 
-    def test_user_profile_has_desired_properties(self):
+    def test_user_profile_sets_tou_to_false(self):
         # Don't use UserFactory, since it forces the related profile to have
         # agreed to the terms for simplicity in most tests! Use the user
         # creation function that we actually use in production.
@@ -288,6 +288,19 @@ class UserProfileModelTestCase(TestCase):
             email='profiler@example.com')
         profile = UserProfile.objects.get(user=user)
         self.assertEqual(profile.terms_of_use, False)
+
+        user.delete()
+
+
+    def test_user_profile_sets_use_wp_email_to_true(self):
+        """
+        Verify that UserProfile.use_wp_email defaults to True.
+        (Editor.update_from_wikipedia assumes this to be the case.)
+        """
+        user = User.objects.create_user(username='profiler',
+            email='profiler@example.com')
+        profile = UserProfile.objects.get(user=user)
+        self.assertEqual(profile.use_wp_email, True)
 
         user.delete()
 

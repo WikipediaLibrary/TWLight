@@ -460,6 +460,54 @@ class RequestApplicationTest(BaseApplicationViewTest):
         self.assertEqual(response.status_code, 200)
 
 
+    def test_email_required_or_superuser(self):
+        """
+        Only users with emails on file (or superusers) should be allowed to see
+        this view - anyone else should be redirected through the email change
+        page.
+        """
+        # Set up request.
+        factory = RequestFactory()
+        request = factory.get(self.url)
+        p1 = PartnerFactory()
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        user = UserFactory()
+        user.userprofile.terms_of_use = True
+        user.userprofile.save()
+        _ = EditorFactory(user=user)
+        request.user = user
+
+        # Case 1: no email; access should be denied.
+        user.email = ''
+        user.save()
+        response = views.RequestApplicationView.as_view()(request)
+
+        self.assertEqual(response.status_code, 302)
+
+        # Case 2: user has email; access should be allowed.
+        user.email = 'foo@bar.com'
+        user.save()
+        response = views.RequestApplicationView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        # Case 3: user is superuser; access should be allowed.
+        user.is_superuser = True
+        user.save()
+        response = views.RequestApplicationView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        # Case 4: user is still superuser; even without email access should be
+        # allowed.
+        user.email = ''
+        user.save()
+        response = views.RequestApplicationView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+
     def test_form_class(self):
         """
         Ensure that the form created by RequestApplicationView has one
@@ -1894,6 +1942,8 @@ class EvaluateApplicationTest(TestCase):
 
         self.application.refresh_from_db()
         self.assertEqual(self.application.date_closed, date.today())
+
+
 
 class BatchEditTest(TestCase):
     def setUp(self):
