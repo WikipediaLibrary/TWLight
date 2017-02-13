@@ -17,7 +17,7 @@ from TWLight.applications.models import Application
 
 from . import views
 from .authorization import OAuthBackend
-from .helpers.wiki_list import WIKIS
+from .helpers.wiki_list import WIKIS, WIKI_DICT, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators
 from .models import UserProfile, Editor
@@ -629,3 +629,22 @@ class TermsTestCase(TestCase):
         response = c.get(url)
 
         self.assertEqual(response.status_code, 200)
+
+
+
+
+class HelpersTestCase(TestCase):
+    """
+    We list some things in .helpers.wiki_list, but we should test to make
+    sure they are kept in sync.
+
+    Formats:
+        WIKIS:              ('ab', 'ab.wikipedia.org')
+        LANGUAGE_CODES:     'ab': 'Abkhazian'
+    """
+
+    def test_wikis_match_language_codes(self):
+        WIKIS_LANGUAGES = set([wiki[0] for wiki in WIKIS])
+        LANGUAGES = set(LANGUAGE_CODES.keys())
+
+        self.assertEqual(WIKIS_LANGUAGES, LANGUAGES)

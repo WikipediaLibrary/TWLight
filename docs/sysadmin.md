@@ -12,7 +12,10 @@ When full paths are not given, the files are in the project root (`/var/www/html
 * Set up a web proxy for your instance: https://wikitech.wikimedia.org/wiki/Help:Proxy
     * Use port 443 for your proxy.
     * You shouldn't need to do the security management steps as twl should already have port 443 open on the default security group.
-* Get a Wikimedia OAuth consumer key and secret.
+* Get a Wikimedia OAuth consumer key and secret (https://meta.wikimedia.org/wiki/Special:OAuthConsumerRegistration/propose).
+    * Make sure that the domain for this matches the domain at which you intend to host the instance.
+    * If you want to host at multiple domains, you'll need multiple key/secret pairs.
+    * The callback URL format is `https://<domain>/oauth/callback/`.
 
 ### ssh into your server to do these steps
 
@@ -48,10 +51,10 @@ When full paths are not given, the files are in the project root (`/var/www/html
     * Add the following lines to `production_vars.py`:
         * `MYSQL_PASSWORD='<your MySQL user (not root) password>'`
         * `SECRET_KEY='<your Django secret key>'` (Your secret key can be anything, but is generally a 50-character string of letters, numbers, and special characters.)
-        * `CONSUMER_KEY='<your wikimedia oauth consumer key>'`
-        * `CONSUMER_SECRET='<your wikimedia oauth consumer secret>'`
+        * `WP_CREDENTIALS = {<your domain>: {'key': '<your wikimedia oauth consumer key>', 'secret': '<your wikimedia oauth consumer secret>'}}`
+            * Adding multiple domains is fine. You will need a different key/secret pair for each.
         * (Note: This file is `.gitignore`d and will therefore be kept out of version control; you can safely add secrets to it.)
-    * Edit the list of `ALLOWED_HOSTS` in the settings file you will be using to match your server's URL(s).
+    * Edit the list of `ALLOWED_HOSTS` in the settings file you will be using to match your server's domain(s).
     * Edit `bin/gunicorn_start.sh` if you are not using production settings (change the `DJANGO_SETTINGS_MODULE` lines accordingly).
 * Rectify permissions
     * `sudo touch /var/www/html/TWLight/TWLight/logs/twlight.log`
@@ -110,7 +113,7 @@ Once updates have been git pushed from their local development environment to th
         * If you get errors in this step, make sure you are working as www (or any user with permissions on the virtualenv).
     * `python manage.py collectstatic --noinput`
         * This is only required if there are stylesheet changes to apply, but will not hurt if there aren't.
-    * Restart gunicorn: `bin/gunicorn_start &`
+    * Restart gunicorn: `bin/gunicorn_start.sh &`
     * `exit`
 
 ## Background info & troubleshooting
@@ -138,7 +141,7 @@ Once updates have been git pushed from their local development environment to th
 * You can load the time zones at any time, and `ALTER DATABASE` to specify the character set at any time, but no promises about existing data quality.
 
 ### Settings and gunicorn
-* Does `settings.ALLOWED_HOSTS` include your server's URL?
+* Does `settings.ALLOWED_HOSTS` include your server's domain?
 * Does `bin/gunicorn_start.sh` point at a virtualenv located in the correct place?
 * If you used sudo to pip install requirements, gunicorn will fail; sudo will have installed outside the virtualenv and the files won't be available. You need to install as a user who has permissions to your virtualenv.
 * Does `run/gunicorn.sock` exist, and does www-data have permissions on it? (If you get a `HaltServer: Worker failed to boot` error, this may be the cause.)

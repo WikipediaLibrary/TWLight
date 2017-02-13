@@ -114,7 +114,7 @@
         <div class="alert alert-{{ message.tags }}">{{ message }}</div>
       {% endfor %}
     {% endif %}
-    {% if not user.email %}
+    {% if not user.email and not user.is_anonymous %}
       <div class="alert alert-warning">
         {% url 'users:email_change' as email_url %}
         {% blocktrans %}

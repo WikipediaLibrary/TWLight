@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -19,18 +20,55 @@ from .models import Editor
 
 logger = logging.getLogger(__name__)
 
-# Construct a "consumer" from the key/secret provided by MediaWiki.
-consumer_token = ConsumerToken(settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
+ALLOWED_DOMAINS = settings.WP_CREDENTIALS.keys()
 
-# Construct all conceivably needed handshakers.
-handshakers = {}
+# Construct a "consumer" from the key/secret provided by MediaWiki for all
+# available site domains. (Each domain requires a different set of credentials.)
+CONSUMER_TOKENS = {domain: ConsumerToken(creds['key'], creds['secret'])
+                   for domain, creds in settings.WP_CREDENTIALS.items()}
 
-for wiki_base_url in WIKI_DICT.values():
-    url = 'https://{home_wiki}/w/index.php'.format(home_wiki=wiki_base_url)
-    handshakers[url] = Handshaker(url, consumer_token)
+# Construct all conceivably needed handshakers. Will result in a dict like
+# {domain: {wiki url: handshaker}}.
+HANDSHAKERS = {}
+
+WIKI_DOMAINS = WIKI_DICT.values()
+
+for allowed_domain in ALLOWED_DOMAINS:
+    tempdict = {}
+    for home_wiki in WIKI_DOMAINS:
+        tempdict[home_wiki] = Handshaker(
+            home_wiki, CONSUMER_TOKENS[allowed_domain])
+
+    HANDSHAKERS[allowed_domain] = tempdict
 
 
-def dehydrate_token(token):
+def _get_token(domain):
+    try:
+        assert domain in ALLOWED_DOMAINS
+    except AssertionError:
+        logger.exception('Attempted to get a token for an unsupported domain')
+        raise
+
+    return CONSUMER_TOKENS[domain]
+
+
+def _get_handshaker(domain, home_wiki):
+    try:
+        assert domain in ALLOWED_DOMAINS
+    except AssertionError:
+        logger.exception('Attempted to get a handshaker for an unsupported TWL domain')
+        raise
+
+    try:
+        assert home_wiki in WIKI_DOMAINS
+    except AssertionError:
+        logger.exception('Attempted to get a handshaker for an unsupported wiki')
+        raise
+
+    return HANDSHAKERS[domain][home_wiki]
+
+
+def _dehydrate_token(token):
     """
     Convert the request token into a dict suitable for storing in the session.
     """
@@ -40,7 +78,7 @@ def dehydrate_token(token):
     return session_token
 
 
-def rehydrate_token(token):
+def _rehydrate_token(token):
     """
     Convert the stored dict back into a request token that we can use for
     getting an access grant.
@@ -104,6 +142,7 @@ class OAuthBackend(object):
             # some user feedback here, but we can't; exception messages don't
             # get passed on as template context in Django 1.8. (They do in
             # 1.10, so this can be revisited in future.)
+            logger.warning('User did not meet minimum requirements; not created.')
             raise PermissionDenied
 
 
@@ -122,11 +161,10 @@ class OAuthBackend(object):
         # Since we are not providing a password argument, this will call
         # set_unusable_password, which is exactly what we want; users created
         # via OAuth should only be allowed to log in via OAuth.
-        logger.info('Creating user {username}'.format(username=username))
         user = User.objects.create_user(username=username, email=email)
 
         # ------------------------- Create the editor --------------------------
-        logger.info('Creating editor for {username}'.format(username=username))
+        logger.info('Creating editor'.format(username=username))
         editor = Editor()
 
         editor.user = user
@@ -173,7 +211,7 @@ class OAuthBackend(object):
             created = True
 
         except AttributeError:
-            logger.warning('User {username} tried using the Wikipedia OAuth '
+            logger.warning('A user tried using the Wikipedia OAuth '
                 'login path but does not have an attached editor'.format(
                     username=identity['username']))
             raise
@@ -215,15 +253,13 @@ class OAuthBackend(object):
         user, created = self._get_and_update_user_from_identity(identity)
 
         if created:
-            logger.info('User {user} has been created.'.format(user=user))
-            base_url = re.search(r'(\w+).wikipedia.org',
+            home_wiki = re.search(r'(\w+).wikipedia.org',
                                  handshaker.mw_uri).group(1)
-            logger.info('Wiki base url is {base_url}'.format(base_url=base_url))
 
             try:
                 # It's actually a wiki, right?
-                assert base_url in WIKI_DICT
-                user.editor.home_wiki = base_url
+                assert home_wiki in WIKI_DICT
+                user.editor.home_wiki = home_wiki
                 user.editor.save()
             except AssertionError:
                 # Site functionality mostly works if people don't
@@ -232,7 +268,7 @@ class OAuthBackend(object):
                 # in the admin interface.
                 pass
         else:
-            logger.info('User {user} has been updated.'.format(user=user))
+            logger.info('User has been updated.'.format(user=user))
 
         request.session['user_created'] = created
 
@@ -245,6 +281,7 @@ class OAuthBackend(object):
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
+            logger.warning('There is no user {user_id}'.format(user_id=user_id))
             return None
 
 
@@ -261,21 +298,18 @@ class OAuthInitializeView(FormView):
         # The form returns the code for the home wiki (the first element of the
         # tuple in WIKIS), but we want the URL, so we grab it from WIKI_DICT.
         home_wiki = WIKI_DICT[form.cleaned_data['home_wiki']]
-        base_url = 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
+        domain = get_current_site(None).domain
 
-        try:
-            # Get handshaker matching this base URL from our dict.
-            handshaker = handshakers[base_url]
-        except KeyError:
-            # Whoops, we have no handshaker for this URL. We shouldn't
-            # authenticate them as we don't believe that their wiki exists.
-            logger.exception('Could not find handshaker for {url}'.format(
-                url=base_url))
-            raise
+        logger.info('home_wiki was {home_wiki}, domain was {domain}'.format(home_wiki=home_wiki, domain=domain))
+
+        # Get handshaker matching this wiki URL from our dict.
+        handshaker = _get_handshaker(domain, home_wiki)
+        logger.info('handshaker gotten')
 
         redirect, request_token = handshaker.initiate()
-        self.request.session['request_token'] = dehydrate_token(request_token)
-        self.request.session['base_url'] = base_url
+        logger.info('handshaker initiated')
+        self.request.session['request_token'] = _dehydrate_token(request_token)
+        self.request.session['home_wiki'] = home_wiki
         return HttpResponseRedirect(redirect)
 
 
@@ -290,16 +324,19 @@ class OAuthCallbackView(View):
 
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
-        base_url = request.session.pop('base_url', None)
+        domain = get_current_site(None).domain
+        home_wiki = request.session.pop('home_wiki', None)
+
         try:
-            handshaker = handshakers[base_url]
-        except KeyError:
+            handshaker = _get_handshaker(domain, home_wiki)
+        except AssertionError:
+            # get_handshaker will throw AssertionErrors for invalid data.
             logger.exception('Could not find handshaker')
             raise PermissionDenied
 
         # Get the request token, placed in session by OAuthInitializeView.
         session_token = request.session.pop('request_token', None)
-        request_token = rehydrate_token(session_token)
+        request_token = _rehydrate_token(session_token)
 
         if not request_token:
             logger.info('no request token :(')

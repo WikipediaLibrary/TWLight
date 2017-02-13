@@ -14,8 +14,7 @@ import sys
 from .base import *
 try:
     from .production_vars import (SECRET_KEY,
-                                  CONSUMER_KEY,
-                                  CONSUMER_SECRET,
+                                  WP_CREDENTIALS,
                                   MYSQL_PASSWORD)
 except ImportError:
     # If there's no production_vars file on this system (e.g. because it isn't
@@ -29,9 +28,10 @@ except ImportError:
           file=sys.stderr)
     raise
 
-
-ALLOWED_HOSTS = ['twlight-test.wmflabs.org',
-                 'twl-test.wmflabs.org',
+# Important note! If you want people to be able to *log in* under these URLs,
+# there are steps you need to take both in production_vars.py and at Wikipedia.
+# Consult docs/sysadmin.md for details.
+ALLOWED_HOSTS = ['twl-test.wmflabs.org',
                  'wikipedialibrary.wmflabs.org']
 
 DEBUG = False
