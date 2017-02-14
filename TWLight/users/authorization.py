@@ -20,12 +20,21 @@ from .models import Editor
 
 logger = logging.getLogger(__name__)
 
-ALLOWED_DOMAINS = settings.WP_CREDENTIALS.keys()
+try:
+    ALLOWED_DOMAINS = settings.WP_CREDENTIALS.keys()
+    # Construct a "consumer" from the key/secret provided by MediaWiki for all
+    # available site domains. (Each domain requires a different set of
+    # credentials.)
+    CONSUMER_TOKENS = {domain: ConsumerToken(creds['key'], creds['secret'])
+                       for domain, creds in settings.WP_CREDENTIALS.items()}
+except AttributeError:
+    # We'll get an AttributeError if the settings don't contain WP_CREDENTIALS.
+    # This is the expected behavior for systems that don't have Wikipedia
+    # OAuth credentials, like localhost. The system should not crash in that
+    # case - it just shouldn't generate any tokens.
+    ALLOWED_DOMAINS = []
+    CONSUMER_TOKENS = {}
 
-# Construct a "consumer" from the key/secret provided by MediaWiki for all
-# available site domains. (Each domain requires a different set of credentials.)
-CONSUMER_TOKENS = {domain: ConsumerToken(creds['key'], creds['secret'])
-                   for domain, creds in settings.WP_CREDENTIALS.items()}
 
 # Construct all conceivably needed handshakers. Will result in a dict like
 # {domain: {wiki url: handshaker}}.
@@ -35,11 +44,18 @@ WIKI_DOMAINS = WIKI_DICT.values()
 
 for allowed_domain in ALLOWED_DOMAINS:
     tempdict = {}
-    for home_wiki in WIKI_DOMAINS:
-        tempdict[home_wiki] = Handshaker(
-            home_wiki, CONSUMER_TOKENS[allowed_domain])
-
+    for wiki in WIKI_DOMAINS:
+        tempdict[wiki] = Handshaker(
+            _get_full_wiki_url(wiki), CONSUMER_TOKENS[allowed_domain])
     HANDSHAKERS[allowed_domain] = tempdict
+
+
+def _get_full_wiki_url(home_wiki):
+    """
+    Given something like 'en.wikipedia.org', return something like
+    'https://en.wikipedia.org/w/index.php'.
+    """
+    return 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
 
 
 def _get_token(domain):
@@ -306,7 +322,12 @@ class OAuthInitializeView(FormView):
         handshaker = _get_handshaker(domain, home_wiki)
         logger.info('handshaker gotten')
 
-        redirect, request_token = handshaker.initiate()
+        try:
+            redirect, request_token = handshaker.initiate()
+        except:
+            logger.exception('Handshaker not initiated')
+            raise
+
         logger.info('handshaker initiated')
         self.request.session['request_token'] = _dehydrate_token(request_token)
         self.request.session['home_wiki'] = home_wiki
