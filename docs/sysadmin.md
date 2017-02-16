@@ -96,7 +96,7 @@ When full paths are not given, the files are in the project root (`/var/www/html
     * Do set up a superuser - otherwise you won't be able to log into the admin.
 * `python manage.py migrate`
 * `python manage.py createinitialrevisions` (see https://django-reversion.readthedocs.io/en/stable/commands.html#createinitialrevisions)
-* `python manage.py collectstatic`
+* `python manage.py collectstatic --noinput`
 
 
 #### Run Django
@@ -127,6 +127,7 @@ Once updates have been git pushed from their local development environment to th
 
 ### After Wikimedia server trouble
 * Check permissions on everything (including the virtualenv) - they may not be what you expect.
+* If you see `OperationalError: (2006, 'MySQL server has gone away')`, restarting gunicorn may fix this. (You'll see this if there's a timeout error, e.g. because gunicorn comes up before mysql is ready during reboot.)
 
 ### Mail
 * TWLight occasionally sends emails. The code is nearly agnostic about its backend, but you do need to set one up.
@@ -140,7 +141,7 @@ Once updates have been git pushed from their local development environment to th
 
 ### nginx
 * Don't forget to `systemctl reload nginx.service` if you make changes to the conf file.
-* `nginx.conf.site` assumes the default `nginx.conf` file is being used. However, if it seems to not be working, copy `conf/nginx.conf.webserver` from the repo to `/etc/nginx.nginx.conf`.
+* `nginx.conf.site` assumes the default `nginx.conf` file is being used. However, if it seems to not be working, copy `conf/nginx.conf.webserver` from the repo to `/etc/nginx/nginx.conf`.
 
 ### MySQL server
 * You will see really weird errors if you forgot the time zone step, and some user names will display improperly if you forgot to specify the character set.

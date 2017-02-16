@@ -35,6 +35,14 @@ except AttributeError:
     ALLOWED_DOMAINS = []
     CONSUMER_TOKENS = {}
 
+# Must be before handshaker construction
+def _get_full_wiki_url(home_wiki):
+    """
+    Given something like 'en.wikipedia.org', return something like
+    'https://en.wikipedia.org/w/index.php'.
+    """
+    return 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
+
 
 # Construct all conceivably needed handshakers. Will result in a dict like
 # {domain: {wiki url: handshaker}}.
@@ -48,14 +56,6 @@ for allowed_domain in ALLOWED_DOMAINS:
         tempdict[wiki] = Handshaker(
             _get_full_wiki_url(wiki), CONSUMER_TOKENS[allowed_domain])
     HANDSHAKERS[allowed_domain] = tempdict
-
-
-def _get_full_wiki_url(home_wiki):
-    """
-    Given something like 'en.wikipedia.org', return something like
-    'https://en.wikipedia.org/w/index.php'.
-    """
-    return 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
 
 
 def _get_token(domain):
