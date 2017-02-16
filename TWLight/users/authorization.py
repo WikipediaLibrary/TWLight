@@ -6,8 +6,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, DisallowedHost
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
@@ -314,7 +313,17 @@ class OAuthInitializeView(FormView):
         # The form returns the code for the home wiki (the first element of the
         # tuple in WIKIS), but we want the URL, so we grab it from WIKI_DICT.
         home_wiki = WIKI_DICT[form.cleaned_data['home_wiki']]
-        domain = get_current_site(None).domain
+
+        # The site might be running under multiple URLs, so find out the current
+        # one (and make sure it's legit).
+        # The Sites framework was designed for different URLs that correspond to
+        # different databases or functionality - it's not a good fit here.
+        try:
+            domain = self.request.get_host()
+            assert domain in settings.ALLOWED_HOSTS # safety first!
+        except (AssertionError, DisallowedHost):
+            logger.exception()
+            raise PermissionDenied
 
         logger.info('home_wiki was {home_wiki}, domain was {domain}'.format(home_wiki=home_wiki, domain=domain))
 
@@ -345,7 +354,13 @@ class OAuthCallbackView(View):
 
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
-        domain = get_current_site(None).domain
+        try:
+            domain = self.request.get_host()
+            assert domain in settings.ALLOWED_HOSTS
+        except (AssertionError, DisallowedHost):
+            logger.exception()
+            raise PermissionDenied
+
         home_wiki = request.session.pop('home_wiki', None)
 
         try:

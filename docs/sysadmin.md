@@ -152,7 +152,8 @@ Once updates have been git pushed from their local development environment to th
 * Does `bin/gunicorn_start.sh` point at a virtualenv located in the correct place?
 * If you used sudo to pip install requirements, gunicorn will fail; sudo will have installed outside the virtualenv and the files won't be available. You need to install as a user who has permissions to your virtualenv.
 * Does `run/gunicorn.sock` exist, and does www have permissions on it? (If you get a `HaltServer: Worker failed to boot` error, this may be the cause.)
-* Does `/var/www/html/TWLight/TWLight/logs/gunicorn.log` exist, and does www have permissions on it? (If you see an https 500 error, or if `/var/log/gunicorn.log` complains about permissions errors on the TWLight gunicorn log file, this is why.)
+* Does `/var/www/html/TWLight/TWLight/logs/gunicorn.log` exist, and does www have rwx permissions on it? (If you see an https 500 error, or if `/var/log/gunicorn.log` complains about permissions errors on the TWLight gunicorn log file, this is why.)
+* Does your `bin/gunicorn_start.sh` use the appropriate DJANGO_SETTINGS_MODULE ? If it doesn't, you'll see an nginx default `Bad Request (400)`. 
 
 ### Partner pages or partner admin pages not rendering
 * Did you just add a new language to the site, and forget to run `python manage.py makemigrations` on the server?
