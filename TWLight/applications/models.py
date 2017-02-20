@@ -5,10 +5,11 @@ from reversion import revisions as reversion
 from reversion.models import Version
 
 from django.contrib.auth.models import User
-from django.dispatch import receiver
-from django.db.models.signals import pre_save
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.forms.models import model_to_dict
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
@@ -87,6 +88,11 @@ class Application(models.Model):
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
 
+    # If this Application is a renewal, the parent is the original Application
+    # it was copied from.
+    parent = models.ForeignKey('self',
+        on_delete=models.SET_NULL, blank=True, null=True)
+
 
     def __unicode__(self):
         return u'{self.editor} - {self.partner}'.format(self=self)
@@ -107,6 +113,38 @@ class Application(models.Model):
     @reversion.create_revision()
     def save(self, *args, **kwargs):
         super(Application, self).save(*args, **kwargs)
+
+
+    def renew(self):
+        """
+        Create a reviewable clone of this application: that is, a PENDING
+        application dated today with the same user-submitted data (but with
+        data related to application review blanked out). Return the clone if
+        successful and None otherwise.
+        """
+        if not self.is_renewable:
+            return None
+        else:
+            data = model_to_dict(self,
+                    fields=['rationale', 'specific_title', 'specific_stream',
+                    'comments', 'agreement_with_terms_of_use'])
+
+            # Status and parent are explicitly different on the child than
+            # on the parent application. For editor and partner, we need to
+            # pull those directly - model_to_dict will give us the pks of the
+            # referenced objects, but we want the actual objects.
+            data.update({'status': self.PENDING, 
+                         'parent': self,
+                         'editor': self.editor,
+                         'partner': self.partner})
+
+            # Create clone. We can't use the normal approach of setting the
+            # object's pk to None and then saving it, because the object in
+            # this case is 'self', and weird things happen.
+            clone = Application(**data)
+            clone.save()
+
+            return clone
 
 
     LABELMAKER = {
@@ -232,6 +270,16 @@ class Application(models.Model):
         # Needed by CoordinatorsOrSelf mixin, e.g. on the application evaluation
         # view.
         return self.editor.user
+
+
+    @property
+    def is_renewable(self):
+        """
+        Apps are eligible for renewal if they are approved and have not already
+        been renewed. (We presume that SENT apps were at some point APPROVED.)
+        """
+        return all([not bool(Application.objects.filter(parent=self)),
+                    self.status in [self.APPROVED, self.SENT]])
 
 
 # IMPORTANT: pre_save is not sent by Queryset.update(), so *none of this
