@@ -140,6 +140,11 @@ class Partner(models.Model):
         help_text=_('Should this Partner be displayed to end users? Is it '
                     'open for applications right now?'))
 
+    renewals_available = models.BooleanField(default=False,
+        help_text=_('Can access grants to this partner be renewed? If so, '
+            'users will be able to request renewals when their access is close '
+            'to expiring.'))
+
     # Optional resource metadata
     # --------------------------------------------------------------------------
 
