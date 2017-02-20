@@ -74,7 +74,7 @@ When full paths are not given, the files are in the project root (`/var/www/html
 * `sudo chmod 0755 /etc/init.d/gunicorn`
 * Symlink the init script into /etc/rc3.d so it will automatically start on boot:
     * `cd /etc/rc3.d/`
-    * `ln -s ../init.d/gunicorn S05gunicorn`
+    * `sudo ln -s ../init.d/gunicorn S05gunicorn`
     * (We want to start it after all other services; S05 should be bigger than all other numbers in `/etc/rc3.d/`. If it's not, make it bigger.)
 * `sudo /etc/init.d/gunicorn start`
 
