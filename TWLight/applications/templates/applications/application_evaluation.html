@@ -91,6 +91,21 @@
       {% endif %}
     </div>
 
+    <div class="col-xs-12 col-sm-4">
+      <strong>{% trans 'Renewal of existing access grant?' %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {% if object.parent %}
+        {% with object.parent.get_absolute_url as parent_url %}
+          {% blocktrans %}
+            Yes (<a href="{{ parent_url }}">previous application</a>)
+          {% endblocktrans %}
+        {% endwith %}
+      {% else %}
+        {% trans 'No' %}
+      {% endif %}
+    </div>
+
     {% if object.comments %}
       <div class="col-xs-12 col-sm-4">
         <strong>{% trans 'Extra comments from the editor' %}</strong>

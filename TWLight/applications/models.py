@@ -251,7 +251,7 @@ class Application(models.Model):
 
     def get_num_days_since_expiration(self):
         if self.earliest_expiry_date:
-            if self.earliest_expiry_date <= date.today():
+            if self.earliest_expiry_date < date.today():
                 return (date.today() - self.earliest_expiry_date).days
 
         return None
@@ -259,7 +259,7 @@ class Application(models.Model):
 
     def get_num_days_until_expiration(self):
         if self.earliest_expiry_date:
-            if self.earliest_expiry_date > date.today():
+            if self.earliest_expiry_date >= date.today():
                 return (self.earliest_expiry_date - date.today()).days
 
         return None
