@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
+from datetime import date, timedelta
 from reversion import revisions as reversion
 from reversion.models import Version
 
@@ -192,6 +192,20 @@ class Application(models.Model):
     def is_probably_expired(self):
         if self.earliest_expiry_date:
             if self.earliest_expiry_date <= date.today():
+                return True
+
+        return False
+
+
+    def is_expiring_soon(self):
+        """
+        This lets us display a "renew" option to users for applications that are
+        expiring soon.
+        """
+        if self.earliest_expiry_date:
+            if (self.earliest_expiry_date > date.today() and
+                self.earliest_expiry_date <= date.today() + timedelta(days=30)):
+
                 return True
 
         return False

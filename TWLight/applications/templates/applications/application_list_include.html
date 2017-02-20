@@ -1,31 +1,52 @@
 {% load i18n %}
 {% load l10n %}
 
-  <ul class="list-unstyled">
-    {% for app in object_list %}
-      <li>
-        <span class="label label{{ app.get_bootstrap_class }}">
-          {{ app.get_status_display }}
-        </span>&nbsp;
-        <a href="{{ app.get_absolute_url }}">
-          {{ app }}
-        </a>
-        &mdash;
-        {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
-          {% if app.get_latest_reviewer %}
-            {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
-              Last reviewed by {{ reviewer }} on {{ review_date }}
-            {% endblocktrans %}
-          {% else %}
-            {% blocktrans trimmed with review_date=app.get_latest_review_date|localize %}
-              Last reviewed on {{ review_date }}
-            {% endblocktrans %}
-          {% endif %}
+{% for app in object_list %}
+  <div class="row">
+    <div class="col-xs-4 col-sm-2">
+      <span class="label label{{ app.get_bootstrap_class }} pull-right">
+        {{ app.get_status_display }}
+      </span>
+    </div>    
+    <div class="col-xs-8 col-sm-6">
+      <a href="{{ app.get_absolute_url }}">
+        {{ app }}
+      </a>
+      <br />
+      {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
+        {% if app.get_latest_reviewer %}
+          {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
+            Last reviewed by {{ reviewer }} on {{ review_date }}
+          {% endblocktrans %}
         {% else %}
-          {% trans 'Not yet reviewed.' %}
+          {% blocktrans trimmed with review_date=app.get_latest_review_date|localize %}
+            Last reviewed on {{ review_date }}
+          {% endblocktrans %}
         {% endif %}
-      </li>
-    {% empty %}
-      <li>{% trans 'No applications right now.' %}</li>
-    {% endfor %}      
-  </ul>
+      {% else %}
+        {% trans 'Not yet reviewed.' %}
+      {% endif %}
+    </div>
+    {% ifequal app.editor.user.pk user.pk %}
+      <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0">
+        {% if app.partner.renewals_available %}
+          {% if app.is_expiring_soon %}
+            <strong>{% trans "Your access grant is expiring soon" %}</strong> <br /> 
+            <button class="btn btn-default btn-sm">{% trans "Request renewal" %}</button>
+          {% endif %}
+          {% if app.is_probably_expired %}
+            <strong>{% trans "Your access grant has expired" %}</strong> <br />
+            <button class="btn btn-default btn-sm">{% trans "Request renewal" %}</button>
+          {% endif %}        
+        {% endif %}
+      </div>      
+    {% endifequal %}
+    {% if not forloop.last %}
+      <div class="col-sm-10 col-sm-offset-2 col-xs-12">
+        <hr />
+      </div>
+    {% endif %}
+  </div>
+{% empty %}
+  {% trans 'No applications right now.' %}
+{% endfor %}
