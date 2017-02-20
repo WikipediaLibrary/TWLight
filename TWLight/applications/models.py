@@ -279,7 +279,8 @@ class Application(models.Model):
         been renewed. (We presume that SENT apps were at some point APPROVED.)
         """
         return all([not bool(Application.objects.filter(parent=self)),
-                    self.status in [self.APPROVED, self.SENT]])
+                    self.status in [self.APPROVED, self.SENT],
+                    self.partner.renewals_available])
 
 
 # IMPORTANT: pre_save is not sent by Queryset.update(), so *none of this

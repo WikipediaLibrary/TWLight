@@ -29,15 +29,22 @@
     </div>
     {% ifequal app.editor.user.pk user.pk %}
       <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0">
-        {% if app.partner.renewals_available %}
-          {% if app.is_expiring_soon %}
-            <strong>{% trans "Your access grant is expiring soon" %}</strong> <br /> 
+        {% if app.is_expiring_soon %}
+          <strong>{% trans "Your access grant is expiring soon" %}</strong> <br />
+          {% if app.is_renewable %}
             <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
+          {% else %}
+            <em>{% trans "Renewals are not available." %}</em>
           {% endif %}
+        {% else %}
           {% if app.is_probably_expired %}
-            <strong>{% trans "Your access grant has expired" %}</strong> <br />
-            <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
-          {% endif %}        
+              <strong>{% trans "Your access grant has expired" %}</strong> <br />
+            {% if app.is_renewable %}
+              <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
+            {% else %}
+              <em>{% trans "Renewals are not available." %}</em>
+            {% endif %}
+          {% endif %}
         {% endif %}
       </div>      
     {% endifequal %}
