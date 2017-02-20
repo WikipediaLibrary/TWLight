@@ -565,18 +565,18 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
 class ListExpiringApplicationsView(_BaseListApplicationView):
     """
-    Lists access grants that are probably about to expire, for Partners who
-    are presently Available.
+    Lists access grants that users have requested, but not received, renewals
+    for.
     """
 
     def get_queryset(self):
-        two_months_from_now = date.today() + timedelta(days=60)
-
         return Application.objects.filter(
-                status=Application.APPROVED,
-                earliest_expiry_date__lte=two_months_from_now,
-                partner__status=Partner.AVAILABLE,
-             ).order_by('earliest_expiry_date')
+                 status__in=[Application.PENDING, Application.QUESTION],
+               ).exclude(
+                 parent__isnull=True,
+               ).order_by(
+                 'earliest_expiry_date'
+               )
 
 
     def get_context_data(self, **kwargs):
