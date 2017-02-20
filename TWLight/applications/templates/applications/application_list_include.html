@@ -32,11 +32,11 @@
         {% if app.partner.renewals_available %}
           {% if app.is_expiring_soon %}
             <strong>{% trans "Your access grant is expiring soon" %}</strong> <br /> 
-            <button class="btn btn-default btn-sm">{% trans "Request renewal" %}</button>
+            <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
           {% endif %}
           {% if app.is_probably_expired %}
             <strong>{% trans "Your access grant has expired" %}</strong> <br />
-            <button class="btn btn-default btn-sm">{% trans "Request renewal" %}</button>
+            <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
           {% endif %}        
         {% endif %}
       </div>      

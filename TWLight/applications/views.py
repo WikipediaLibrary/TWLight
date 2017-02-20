@@ -10,10 +10,13 @@ from datetime import date, timedelta
 import logging
 from reversion import revisions as reversion
 from reversion.models import Version
+from urlparse import urlparse
 
 
 from django import forms
+from django.conf import settings
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
@@ -27,7 +30,8 @@ from TWLight.view_mixins import (CoordinatorsOrSelf,
                                  CoordinatorsOnly,
                                  EditorsOnly,
                                  ToURequired,
-                                 EmailRequired)
+                                 EmailRequired,
+                                 SelfOnly)
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
 
@@ -748,3 +752,49 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
         return HttpResponseRedirect(reverse(
             'applications:send_partner', kwargs={'pk': self.get_object().pk}))
 
+
+
+class RenewApplicationView(SelfOnly, View):
+    """
+    This view takes an existing Application and creates a clone, with new
+    dates and a FK back to the original application.
+    """
+
+    def get_object(self):
+        app = Application.objects.get(pk=self.kwargs['pk'])
+
+        try:
+            assert app.status == Application.APPROVED
+        except AssertionError:
+            logger.exception('Attempt to renew unapproved app #{pk} has been '
+                'denied'.format(pk=app.pk))
+            raise PermissionDenied
+
+        return app
+
+
+    def get(self, request, *args, **kwargs):
+        # Figure out where users should be returned to.
+        return_url = reverse('users:home') # set default
+
+        referer = request.META['HTTP_REFERER']
+        if referer:
+            domain = urlparse(referer).netloc
+
+            if domain in settings.ALLOWED_HOSTS:
+                return_url = referer
+
+        # Attempt renewal.
+        app = self.get_object()
+        
+        renewal = app.renew()
+
+        if not renewal:
+            messages.add_message(request, messages.WARNING, _('This object '
+                'cannot be renewed. (This probably means that you have already '
+                'requested that it be renewed.)'))
+            return HttpResponseRedirect(return_url)
+
+        messages.add_message(request, messages.INFO, _('Your renewal request '
+            'has been received. A coordinator will review your request.'))
+        return HttpResponseRedirect(return_url)

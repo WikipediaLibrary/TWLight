@@ -51,4 +51,8 @@ urlpatterns = [
         views.BatchEditView.as_view(),
         name='batch_edit'
     ),
+    url(r'^renew/(?P<pk>\d+)/$',
+        views.RenewApplicationView.as_view(),
+        name='renew'
+    ),
 ]
