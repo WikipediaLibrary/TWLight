@@ -14,7 +14,7 @@ from django.db import models
 from django.test import TestCase, Client, RequestFactory
 
 from TWLight.resources.models import Partner, Stream
-from TWLight.resources.factories import PartnerFactory
+from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.users.factories import EditorFactory, UserFactory
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
@@ -1247,11 +1247,18 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.PENDING)
         ApplicationFactory(status=Application.PENDING)
         ApplicationFactory(status=Application.QUESTION)
+        parent = ApplicationFactory(status=Application.APPROVED)
         ApplicationFactory(status=Application.APPROVED)
-        ApplicationFactory(status=Application.APPROVED)
         ApplicationFactory(status=Application.NOT_APPROVED)
         ApplicationFactory(status=Application.NOT_APPROVED)
         ApplicationFactory(status=Application.NOT_APPROVED)
+
+        # Make sure there are some up-for-renewal querysets, too.
+        ApplicationFactory(status=Application.PENDING, parent=parent)
+        ApplicationFactory(status=Application.QUESTION, parent=parent)
+        ApplicationFactory(status=Application.APPROVED, parent=parent)
+        ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
+        ApplicationFactory(status=Application.SENT, parent=parent)
 
 
     @classmethod
@@ -1353,6 +1360,25 @@ class ListApplicationsTest(BaseApplicationViewTest):
             status=Application.NOT_APPROVED)
         self._base_test_object_visibility(url,
             views.ListRejectedApplicationsView, queryset)
+
+
+    def test_list_expiring_queryset(self):
+        url = reverse('applications:list_expiring')
+
+        factory = RequestFactory()
+        request = factory.get(url)
+        request.user = self.coordinator
+
+        response = views.ListExpiringApplicationsView.as_view()(request)
+
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION],
+            parent__isnull=False)
+        template_qs = response.context_data['object_list']
+
+        # See comment on test_queryset_unfiltered.
+        self.assertEqual(sorted([item.pk for item in expected_qs]),
+                         sorted([item.pk for item in template_qs]))
 
 
     def test_queryset_unfiltered(self):
@@ -1666,6 +1692,50 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
 
 
+class RenewApplicationTest(BaseApplicationViewTest):
+    def test_protected_to_self_only(self):
+        partner = PartnerFactory(renewals_available=True)
+        app = ApplicationFactory(partner=partner,
+            status=Application.APPROVED, editor=self.editor.editor)
+
+        request = RequestFactory().get(reverse('applications:renew',
+            kwargs={'pk': app.pk}))
+        request.user = self.editor
+
+        response = views.RenewApplicationView.as_view()(
+            request, pk=app.pk)
+
+        # It redirects to the user's home on success.
+        self.assertEqual(response.status_code, 302)
+
+        user2 = UserFactory()
+        request.user = user2
+
+        with self.assertRaises(PermissionDenied):
+            _ = views.RenewApplicationView.as_view()(
+                request, pk=app.pk)
+
+
+    def test_getting_url_renews_app(self):
+        partner = PartnerFactory(renewals_available=True)
+        app = ApplicationFactory(partner=partner,
+            status=Application.APPROVED, editor=self.editor.editor)
+
+        self.assertTrue(app.is_renewable) # check assumption
+
+        request = RequestFactory().get(reverse('applications:renew',
+            kwargs={'pk': app.pk}))
+        request.user = self.editor
+
+        _ = views.RenewApplicationView.as_view()(
+            request, pk=app.pk)
+
+        app.refresh_from_db()
+        self.assertFalse(app.is_renewable)
+        self.assertTrue(Application.objects.filter(parent=app))
+
+
+
 class ApplicationModelTest(TestCase):
 
     def test_approval_sets_date_closed(self):
@@ -1850,6 +1920,147 @@ class ApplicationModelTest(TestCase):
         app.earliest_expiry_date = date.today() - timedelta(days=1)
         app.save()
         self.assertTrue(app.get_num_days_until_expiration() is None)
+
+
+    def test_is_renewable(self):
+        # Applications which are a parent cannot be renewed, even if other
+        # criteria are OK.
+        partner = PartnerFactory(renewals_available=True)
+        app1 = ApplicationFactory(status=Application.APPROVED, partner=partner)
+        app2 = ApplicationFactory()
+        app2.parent = app1
+        app2.save()
+
+        self.assertFalse(app1.is_renewable)
+
+        # Applications whose status is not APPROVED or SENT cannot be renewed,
+        # even if other criteria are OK.
+        app_pending = ApplicationFactory(status=Application.PENDING,
+            partner=partner)
+        self.assertFalse(app_pending.is_renewable)
+
+        app_question = ApplicationFactory(status=Application.QUESTION,
+            partner=partner)
+        self.assertFalse(app_question.is_renewable)
+
+        app_not_approved = ApplicationFactory(status=Application.NOT_APPROVED,
+            partner=partner)
+        self.assertFalse(app_not_approved.is_renewable)
+
+        # Applications whose partners don't have renewals_available cannot be
+        # renewed.
+        partner2 = PartnerFactory(renewals_available=False)
+        app = ApplicationFactory(partner=partner2, status=Application.APPROVED)
+        self.assertFalse(app.is_renewable)
+
+        # Other applications can be renewed!
+        good_app = ApplicationFactory(partner=partner,
+            status=Application.APPROVED)
+        self.assertTrue(good_app.is_renewable)
+
+        good_app2 = ApplicationFactory(partner=partner,
+            status=Application.SENT)
+        self.assertTrue(good_app.is_renewable)
+
+        delete_me = [app1, app2, app_pending, app_question, app_not_approved,
+                     app, good_app, good_app2]
+
+        for app in delete_me:
+            app.delete()
+
+
+    def test_renew_good_app(self):
+        stream = StreamFactory()
+        editor = EditorFactory()
+        editor2 = EditorFactory()
+        partner = PartnerFactory(renewals_available=True)
+        app = ApplicationFactory(
+                rationale='Because I said so',
+                specific_title='The one with the blue cover',
+                specific_stream=stream,
+                comments='No comment',
+                agreement_with_terms_of_use=True,
+                editor=editor,
+                partner=partner,
+                status=Application.APPROVED,
+                date_closed=date.today() + timedelta(days=1),
+                days_open=1,
+                earliest_expiry_date=date.today() + timedelta(days=366),
+                sent_by=editor2.user
+              )
+
+        app2 = app.renew()
+
+        # Just checking.
+        self.assertTrue(isinstance(app2, Application))
+
+        # Fields that should be copied, were.
+        self.assertEqual(app2.rationale, 'Because I said so')
+        self.assertEqual(app2.specific_title, 'The one with the blue cover')
+        self.assertEqual(app2.specific_stream, stream)
+        self.assertEqual(app2.comments, 'No comment')
+        self.assertEqual(app2.agreement_with_terms_of_use, True)
+        self.assertEqual(app2.editor, editor)
+        self.assertEqual(app2.partner, partner)
+
+        # Fields that should be cleared or reset, were.
+        self.assertEqual(app2.status, Application.PENDING)
+        self.assertFalse(app2.date_closed)
+        self.assertFalse(app2.days_open)
+        self.assertFalse(app2.earliest_expiry_date)
+        self.assertFalse(app2.sent_by)
+        self.assertEqual(app2.parent, app)
+
+
+    def test_renew_bad_app(self):
+        partner = PartnerFactory(renewals_available=False)
+        app = ApplicationFactory(partner=partner)
+        self.assertFalse(app.renew())
+
+
+    def test_is_expiring_soon_1(self):
+        """
+        Returns False if the app has already expired.
+        """
+        app = ApplicationFactory(
+            earliest_expiry_date=date.today() - timedelta(days=1))
+        self.assertFalse(app.is_expiring_soon())
+
+
+    def test_is_expiring_soon_2(self):
+        """
+        Returns False if the app expired today.
+        """
+        app = ApplicationFactory(
+            earliest_expiry_date=date.today())
+        self.assertFalse(app.is_expiring_soon())
+
+
+    def test_is_expiring_soon_3(self):
+        """
+        Returns True if the app expires tomorrow.
+        """
+        app = ApplicationFactory(
+            earliest_expiry_date=date.today() + timedelta(days=1))
+        self.assertTrue(app.is_expiring_soon())
+
+
+    def test_is_expiring_soon_4(self):
+        """
+        Returns True if the app expires in 30 days.
+        """
+        app = ApplicationFactory(
+            earliest_expiry_date=date.today() + timedelta(days=30))
+        self.assertTrue(app.is_expiring_soon())
+
+
+    def test_is_expiring_soon_5(self):
+        """
+        Returns False if the app expires in 31 days.
+        """
+        app = ApplicationFactory(
+            earliest_expiry_date=date.today() + timedelta(days=31))
+        self.assertFalse(app.is_expiring_soon())
 
 
 

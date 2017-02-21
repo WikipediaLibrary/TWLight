@@ -126,17 +126,18 @@ class Application(models.Model):
             return None
         else:
             data = model_to_dict(self,
-                    fields=['rationale', 'specific_title', 'specific_stream',
-                    'comments', 'agreement_with_terms_of_use'])
+                    fields=['rationale', 'specific_title', 'comments',
+                            'agreement_with_terms_of_use'])
 
             # Status and parent are explicitly different on the child than
-            # on the parent application. For editor and partner, we need to
-            # pull those directly - model_to_dict will give us the pks of the
-            # referenced objects, but we want the actual objects.
+            # on the parent application. For editor, partner, and stream, we
+            # need to pull those directly - model_to_dict will give us the pks
+            # of the referenced objects, but we need the actual objects.
             data.update({'status': self.PENDING, 
                          'parent': self,
                          'editor': self.editor,
-                         'partner': self.partner})
+                         'partner': self.partner,
+                         'specific_stream': self.specific_stream})
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in
@@ -251,7 +252,7 @@ class Application(models.Model):
 
     def get_num_days_since_expiration(self):
         if self.earliest_expiry_date:
-            if self.earliest_expiry_date < date.today():
+            if self.earliest_expiry_date <= date.today():
                 return (date.today() - self.earliest_expiry_date).days
 
         return None
@@ -259,7 +260,7 @@ class Application(models.Model):
 
     def get_num_days_until_expiration(self):
         if self.earliest_expiry_date:
-            if self.earliest_expiry_date >= date.today():
+            if self.earliest_expiry_date > date.today():
                 return (self.earliest_expiry_date - date.today()).days
 
         return None

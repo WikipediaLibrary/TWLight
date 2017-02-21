@@ -6,7 +6,6 @@ status.
 """
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from datetime import date, timedelta
 import logging
 from reversion import revisions as reversion
 from reversion.models import Version
@@ -572,8 +571,7 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         return Application.objects.filter(
                  status__in=[Application.PENDING, Application.QUESTION],
-               ).exclude(
-                 parent__isnull=True,
+                 parent__isnull=False
                ).order_by(
                  'earliest_expiry_date'
                )
@@ -777,12 +775,16 @@ class RenewApplicationView(SelfOnly, View):
         # Figure out where users should be returned to.
         return_url = reverse('users:home') # set default
 
-        referer = request.META['HTTP_REFERER']
-        if referer:
-            domain = urlparse(referer).netloc
+        try:
+            referer = request.META['HTTP_REFERER']
+            if referer:
+                domain = urlparse(referer).netloc
 
-            if domain in settings.ALLOWED_HOSTS:
-                return_url = referer
+                if domain in settings.ALLOWED_HOSTS:
+                    return_url = referer
+        except KeyError:
+            # If we don't have an HTTP_REFERER, using the default is fine.
+            pass
 
         # Attempt renewal.
         app = self.get_object()
