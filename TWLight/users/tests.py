@@ -17,7 +17,7 @@ from TWLight.applications.models import Application
 
 from . import views
 from .authorization import OAuthBackend
-from .helpers.wiki_list import WIKIS, WIKI_DICT, LANGUAGE_CODES
+from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators
 from .models import UserProfile, Editor
@@ -324,8 +324,9 @@ class EditorModelTestCase(TestCase):
             # other than foreign key, you *still find them*.)
             editor.delete()
 
-        # Wiki 'aa' is 'aa.wikipedia.org'
-        self.test_editor = EditorFactory(home_wiki='aa',
+        # Wiki 'zh-classical' is 'zh-classical.wikipedia.org'. It's also the
+        # longest wiki name in wiki_list.
+        self.test_editor = EditorFactory(home_wiki='zh-classical',
             wp_username='editor_model_test',
             wp_rights=json.dumps(['cat floofing', 'the big red button']),
             wp_groups=json.dumps(['sysops', 'bureaucrats']))
@@ -337,12 +338,12 @@ class EditorModelTestCase(TestCase):
 
 
     def test_wp_user_page_url(self):
-        expected_url = 'https://aa.wikipedia.org/wiki/User:editor_model_test'
+        expected_url = 'https://zh-classical.wikipedia.org/wiki/User:editor_model_test'
         self.assertEqual(expected_url, self.test_editor.wp_user_page_url)
 
 
     def test_wp_link_edit_count(self):
-        expected_url = 'https://tools.wmflabs.org/xtools-ec/?user=editor_model_test&project=aa.wikipedia.org'
+        expected_url = 'https://tools.wmflabs.org/xtools-ec/?user=editor_model_test&project=zh-classical.wikipedia.org'
         self.assertEqual(expected_url, self.test_editor.wp_link_edit_count)
 
 
@@ -352,7 +353,7 @@ class EditorModelTestCase(TestCase):
 
 
     def test_wp_link_pages_created(self):
-        expected_url = 'https://tools.wmflabs.org/xtools/pages/index.php?user=editor_model_test&project=aa.wikipedia.org&namespace=all&redirects=none'
+        expected_url = 'https://tools.wmflabs.org/xtools/pages/index.php?user=editor_model_test&project=zh-classical.wikipedia.org&namespace=all&redirects=none'
         self.assertEqual(expected_url, self.test_editor.wp_link_pages_created)
 
 
@@ -465,7 +466,7 @@ class EditorModelTestCase(TestCase):
         identity['groups'] = ['charismatic megafauna']
         identity['editcount'] = 960
         identity['email'] = 'porkchop@example.com'
-        identity['iss'] = 'aa.wikipedia.org'
+        identity['iss'] = 'zh-classical.wikipedia.org'
         identity['registered'] = '20130205230142'
 
         new_editor.update_from_wikipedia(identity)
@@ -629,7 +630,6 @@ class TermsTestCase(TestCase):
         response = c.get(url)
 
         self.assertEqual(response.status_code, 200)
-
 
 
 
