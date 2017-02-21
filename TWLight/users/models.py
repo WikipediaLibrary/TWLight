@@ -119,7 +119,7 @@ class Editor(models.Model):
 
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    home_wiki = models.CharField(max_length=4, choices=WIKIS,
+    home_wiki = models.CharField(max_length=15, choices=WIKIS,
         help_text=_("Home wiki, as indicated by user"))
     contributions = models.TextField(
         help_text=_("Wiki contributions, as entered by user"),
