@@ -18,6 +18,11 @@
             <span class="label label{{ app.get_bootstrap_class }}">
               {{ app.get_status_display }}
             </span>&nbsp;
+            {% if app.parent %}
+              <span class="label label-info">
+                {% trans "Renewal" %}
+              </span>&nbsp;
+            {% endif %}
             <a href="{{ app.get_absolute_url }}">
               {{ app }}
             </a>
