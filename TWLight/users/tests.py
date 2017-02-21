@@ -187,19 +187,24 @@ class ViewsTestCase(TestCase):
         app3 = ApplicationFactory(status=Application.APPROVED, editor=self.user_editor.editor)
         app4 = ApplicationFactory(status=Application.NOT_APPROVED, editor=self.user_editor.editor)
 
-        expected_html = render_to_string(
-            'applications/application_list_include.html',
-            {'object_list': [app1, app2, app3, app4]}
-            )
-
         factory = RequestFactory()
         request = factory.get(self.url1)
         request.user = self.user_editor
 
         response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
 
+        self.assertEqual(set(response.context_data['object_list']),
+            set([app1, app2, app3, app4]))
         content = response.render().content
-        self.assertIn(expected_html, content)
+
+        self.assertIn(app1.__str__(), content)
+        self.assertIn(app2.__str__(), content)
+        self.assertIn(app3.__str__(), content)
+        self.assertIn(app4.__str__(), content)
+
+        # We can't use assertTemplateUsed with RequestFactory (only with
+        # Client), and testing that the rendered content is equal to an
+        # expected string is too fragile.
 
 
     def test_user_home_view_anon(self):
