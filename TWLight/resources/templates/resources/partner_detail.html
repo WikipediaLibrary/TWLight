@@ -33,6 +33,7 @@
       {% endblocktrans %}      
     </div>
   {% else %}
+    {% url 'applications:apply_single' object.pk as app_url %}
     <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply for access" %}</a>
   {% endif %}
   {% if user|coordinators_only %}
@@ -45,6 +46,7 @@
 
     <div class="col-sm-5 col-md-4 pull-right timeline-right-overlay">
       {% if object.is_waitlisted %}
+        {% url 'applications:apply_single' object.pk as app_url %}
         <div class="hidden-xs alert alert-warning">
           {% blocktrans trimmed %}
             <strong>Waitlisted</strong> &mdash; There are no access grants available
@@ -53,6 +55,7 @@
           {% endblocktrans %}
         </div>
       {% else %}
+        {% url 'applications:apply_single' object.pk as app_url %}
         <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply for access" %}</a><br/>
       {% endif %}
 
