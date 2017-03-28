@@ -31,6 +31,10 @@ except ImportError:
           file=sys.stderr)
     raise
 
+# Let Django know about external URLs in case they differ from internal
+# Needed to be added for /admin
+USE_X_FORWARDED_HOST = True
+
 # Can be replaced with option files:
 # https://docs.djangoproject.com/en/1.7/ref/databases/#connecting-to-the-database
 DATABASES['default']['USER'] = 'twlight'

@@ -34,6 +34,10 @@ except ImportError:
 ALLOWED_HOSTS = ['twl-test.wmflabs.org',
                  'wikipedialibrary.wmflabs.org']
 
+# Let Django know about external URLs in case they differ from internal
+# Needed to be added for /admin
+USE_X_FORWARDED_HOST = True
+
 DEBUG = False
 
 # Can be replaced with option files:
