@@ -30,6 +30,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse_lazy
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+from django.shortcuts import get_object_or_404
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
@@ -227,7 +228,7 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
     should be notified.
     """
     if instance.id:
-        orig_partner = Partner.objects.get(pk=instance.id)
+        orig_partner = get_object_or_404(Partner, pk=instance.id)
 
         if ((orig_partner.status != instance.status) and 
             instance.status == Partner.WAITLIST):
