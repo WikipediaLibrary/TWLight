@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load twlight_wikicode2html %}
 
 {% comment %}
   To be used in presenting lists of partners plus key data about them.
@@ -32,7 +33,7 @@
 
     {% if partner.description %}
       <p>
-        {{ partner.description | safe }}
+        {{ partner.description | twlight_wikicode2html | safe }}
       </p>
       <hr />
     {% endif %}

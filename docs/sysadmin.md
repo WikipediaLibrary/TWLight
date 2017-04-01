@@ -21,7 +21,7 @@ When full paths are not given, the files are in the project root (`/var/www/html
 
 #### Install system dependencies
 * Confirm that you have the following installed on your instance (they should be there by default): Python 2.7, /etc/exim4/, git.
-* `sudo apt-get install libmysqlclient-dev python-dev build-essential python-pip nginx mariadb-server`
+* `sudo apt-get install libmysqlclient-dev python-dev build-essential pandoc python-pip nginx mariadb-server`
 * Create and record a root password for the MariaDB server. 
     * (Note that the MySQL server should automatically be started as a result of this installation; if it's not, you'll need to bring it up manually.)
 
