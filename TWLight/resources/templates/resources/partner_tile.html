@@ -1,5 +1,8 @@
 {% load i18n %}
+{% load cache %}
 {% load twlight_wikicode2html %}
+
+{% get_current_language as LANGUAGE_CODE %}
 
 {% comment %}
   To be used in presenting lists of partners plus key data about them.
@@ -33,7 +36,9 @@
 
     {% if partner.description %}
       <p>
-        {{ partner.description | twlight_wikicode2html | safe }}
+        {% cache 600 resource_description LANGUAGE_CODE %}
+          {{ partner.description | twlight_wikicode2html | safe }}
+        {% endcache %}
       </p>
       <hr />
     {% endif %}
