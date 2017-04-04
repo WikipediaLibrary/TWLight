@@ -50,3 +50,9 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False # Important, or you will get an SMTPException on wmlabs
 DEFAULT_FROM_EMAIL = '<vagrant@localhost>'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}

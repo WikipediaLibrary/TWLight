@@ -73,3 +73,9 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # can't import Site into settings - it's not available when Django first uses
 # the settings file, and the site refuses to load.
 REQUEST_BASE_URL = 'https://twl-test.wmflabs.org'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
