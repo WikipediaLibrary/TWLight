@@ -112,7 +112,7 @@
         <div class="timeline-body">
           {% if object.description %}
             <p>
-            {% cache 60 resource_description LANGUAGE_CODE object.id object.pk %}
+            {% cache 60 resource_description LANGUAGE_CODE object.pk %}
               {{ object.description | twlight_wikicode2html | safe }}
             {% endcache %}
             </p>
