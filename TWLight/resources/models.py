@@ -6,6 +6,8 @@ from taggit.managers import TaggableManager
 
 from django.conf.global_settings import LANGUAGES
 from django.contrib.auth.models import User
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
@@ -232,6 +234,11 @@ class Partner(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
+    def save(self, *args, **kwargs):
+        """Invalidate the rendered html resource description from cache. currently hardcoded to en."""
+        cache_key = make_template_fragment_key('resource_description', [self.pk, 'en'])
+        cache.delete(cache_key)
+        super(Partner, self).save(*args, **kwargs)
 
     @property
     def get_languages(self):
