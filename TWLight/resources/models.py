@@ -235,10 +235,12 @@ class Partner(models.Model):
         return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
-        """Invalidate the rendered html resource description from cache. currently hardcoded to en."""
-        cache_key = make_template_fragment_key('resource_description', [self.pk, 'en'])
-        cache.delete(cache_key)
+        """Invalidate the rendered html resource description from cache"""
         super(Partner, self).save(*args, **kwargs)
+        langs = ['en', 'fi', 'fr']
+        for lang in langs:
+          cache_key = make_template_fragment_key('resource_description', [lang, self.pk])
+          cache.delete(cache_key)
 
     @property
     def get_languages(self):
