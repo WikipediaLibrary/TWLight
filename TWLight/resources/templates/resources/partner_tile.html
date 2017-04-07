@@ -36,7 +36,7 @@
 
     {% if partner.description %}
       <p>
-        {% cache 600 resource_description LANGUAGE_CODE partner.pk %}
+        {% cache None resource_description LANGUAGE_CODE partner.pk %}
           {{ partner.description | twlight_wikicode2html | safe }}
         {% endcache %}
       </p>
