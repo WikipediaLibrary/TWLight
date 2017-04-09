@@ -43,7 +43,7 @@
           fix is in master, but not release.
           https://code.djangoproject.com/ticket/27882
         {% endcomment %}
-        {% cache 31536000 resource_description LANGUAGE_CODE partner.pk %}
+        {% cache 31536000 partner_description LANGUAGE_CODE partner.pk %}
           {{ partner.description | twlight_wikicode2html | safe }}
         {% endcache %}
       </p>

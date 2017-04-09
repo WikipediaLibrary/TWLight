@@ -156,7 +156,7 @@ class Partner(models.Model):
             "access; optional otherwise."))
     description = models.TextField(blank=True, null=True,
         help_text=_("Optional description of this partner's offerings. You can "
-            "enter HTML and it should render properly - if it does not, the "
+            "enter wikicode and it should render properly - if it does not, the "
             "developer forgot a | safe filter in the template. Whatever you "
             "enter here will also be automatically copied over to the "
             "description field for *your current language*, so you do not "
@@ -235,11 +235,11 @@ class Partner(models.Model):
         return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
-        """Invalidate the rendered html resource description from cache"""
+        """Invalidate the rendered html partner description from cache"""
         super(Partner, self).save(*args, **kwargs)
         langs = ['en', 'fi', 'fr']
         for lang in langs:
-          cache_key = make_template_fragment_key('resource_description', [lang, self.pk])
+          cache_key = make_template_fragment_key('partner_description', [lang, self.pk])
           cache.delete(cache_key)
 
     @property
@@ -282,7 +282,7 @@ class Stream(models.Model):
             "presenting them in a format that can be internationalized."))
     description = models.TextField(blank=True, null=True,
         help_text=_("Optional description of this stream's contents. You can "
-            "enter HTML and it should render properly - if it does not, the "
+            "enter wikicode and it should render properly - if it does not, the "
             "developer forgot a | safe filter in the template."))
 
     languages = models.ManyToManyField(Language, blank=True)
@@ -294,6 +294,14 @@ class Stream(models.Model):
         # internationalize. Returning the atomic stream name gives us more
         # options for how this is displayed in templates.
         return self.name
+
+    def save(self, *args, **kwargs):
+        """Invalidate the rendered html stream description from cache"""
+        super(Stream, self).save(*args, **kwargs)
+        langs = ['en', 'fi', 'fr']
+        for lang in langs:
+          cache_key = make_template_fragment_key('stream_description', [lang, self.pk])
+          cache.delete(cache_key)
 
     @property
     def get_languages(self):
