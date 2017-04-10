@@ -196,6 +196,15 @@ MISC
 }
 
 
+/* Without intervention, code tags will break out of their containers.
+   These can get introduced via rendered wikicode.
+*/
+
+code {
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
 /*
 ----------------------------------------------------------------------------
 CLEARING COLUMNS
