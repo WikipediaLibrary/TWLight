@@ -196,13 +196,16 @@ MISC
 }
 
 
-/* Without intervention, code tags will break out of their containers.
-   These can get introduced via rendered wikicode.
+/* Without intervention, code tags will break out of their timeline containers.
+   These can get introduced via rendered wikicode, which has lots of &nbsp;
 */
 
-code {
-  display: block;
+.timeline-body * code {
   word-wrap: break-word;
+  font-family: sans-serif;
+  font-size: 100%;
+  color: black;
+  background-color: white;
 }
 
 /*
