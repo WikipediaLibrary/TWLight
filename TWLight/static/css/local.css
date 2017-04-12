@@ -201,8 +201,8 @@ MISC
 */
 
 code {
-  white-space: pre-wrap;
-  word-break: keep-all;
+  display: block;
+  word-wrap: break-word;
 }
 
 /*
