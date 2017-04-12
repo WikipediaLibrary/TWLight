@@ -200,7 +200,7 @@ MISC
    These can get introduced via rendered wikicode, which has lots of &nbsp;
 */
 
-.timeline-body * code {
+.timeline-body * code, .panel-body * code {
   word-wrap: break-word;
   font-family: sans-serif;
   font-size: 100%;
