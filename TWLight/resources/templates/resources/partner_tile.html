@@ -1,4 +1,8 @@
 {% load i18n %}
+{% load cache %}
+{% load twlight_wikicode2html %}
+
+{% get_current_language as LANGUAGE_CODE %}
 
 {% comment %}
   To be used in presenting lists of partners plus key data about them.
@@ -32,7 +36,16 @@
 
     {% if partner.description %}
       <p>
-        {{ partner.description | safe }}
+        {% comment %}
+          Cache lifetime should be None, which would be forever since we're
+          invalidating on update. However, as 2017-04-06 a bug in django
+          doesn't allow for None to be passed from here into cache.  The
+          fix is in master, but not release.
+          https://code.djangoproject.com/ticket/27882
+        {% endcomment %}
+        {% cache 31536000 partner_description LANGUAGE_CODE partner.pk %}
+          {{ partner.description | twlight_wikicode2html | safe }}
+        {% endcache %}
       </p>
       <hr />
     {% endif %}
