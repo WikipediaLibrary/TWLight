@@ -323,10 +323,10 @@ class Contact(models.Model):
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="contacts")
 
-    title = models.CharField(max_length=75,
+    title = models.CharField(max_length=75, blank=True,
         help_text=_("Organizational role or job title. This is NOT intended "
         "to be used for honorifics. Think 'Director of Editorial Services', "
-        "not 'Ms.'"))
+        "not 'Ms.' Optional."))
     email = models.EmailField()
     full_name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=15,
