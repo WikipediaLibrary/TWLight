@@ -152,7 +152,7 @@
       <div class="timeline-panel">
         <div class="timeline-body">
           {% if object.get_languages %}
-            <p>
+            <p class="partner-languages">
               {% with object.get_languages as language_list %}
                 {% blocktrans trimmed %}
                   Language(s): {{ language_list }}

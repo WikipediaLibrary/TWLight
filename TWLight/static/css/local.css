@@ -208,6 +208,11 @@ MISC
   background-color: white;
 }
 
+/* Partner language list should stand out a bit.
+*/
+.partner-languages {
+  font-style: italic;
+}
 /*
 ----------------------------------------------------------------------------
 CLEARING COLUMNS
