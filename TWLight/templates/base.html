@@ -13,6 +13,7 @@
   <title>
     {% trans "The Wikipedia Library Card Platform" %}
   </title>
+  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
   <!-- Custom CSS -->
@@ -137,6 +138,16 @@
             The Wikipedia Library Card Platform is a project of 
             <a href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
             The Wikipedia Library</a>.              
+          {% endblocktrans %}
+        </p>
+        <p>
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+        </p>
+        <p>
+          {% blocktrans trimmed %}
+            This work is licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
           {% endblocktrans %}
         </p>
         <hr />

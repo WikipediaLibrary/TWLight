@@ -208,6 +208,30 @@ MISC
   background-color: white;
 }
 
+/* Partner language list should stand out a bit.
+*/
+
+.partner-languages {
+  font-style: italic;
+}
+
+/*
+wiki library team found big text annoying in partner details page.
+https://phabricator.wikimedia.org/T150006
+*/
+
+h4.timeline-title {
+  font-size: inherit;
+}
+
+/*
+A few spots just need padding instead of margin.
+*/
+
+.padding-top-20 {
+  padding-top: 20px;
+}
+
 /*
 ----------------------------------------------------------------------------
 CLEARING COLUMNS
