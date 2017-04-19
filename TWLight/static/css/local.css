@@ -223,6 +223,15 @@ https://phabricator.wikimedia.org/T150006
 h4.timeline-title {
   font-size: inherit;
 }
+
+/*
+A few spots just need padding instead of margin.
+*/
+
+.padding-top-20 {
+  padding-top: 20px;
+}
+
 /*
 ----------------------------------------------------------------------------
 CLEARING COLUMNS

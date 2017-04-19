@@ -74,7 +74,7 @@
         <img src="{{ object.logo_url }}" class="img-responsive hidden-xs center-block margin-top-20">
       {% endif %}
 
-      <div class="well margin-top-20 hidden-xs">
+      <div class="well padding-top-20 hidden-xs">
         {% if object.coordinator %}
           {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
             <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
