@@ -185,7 +185,7 @@ class BaseApplicationForm(forms.Form):
 
         if user_data:
             # Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-            user_data_layout = Fieldset(_('Information about you'))
+            user_data_layout = Fieldset(_('About you'))
             for datum in user_data:
                 self.fields[datum] = FIELD_TYPES[datum]
                 self.fields[datum].label = FIELD_LABELS[datum]

@@ -22,7 +22,7 @@ msgid "Apply"
 msgstr "Soummetre la demande"
 #. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:188
-msgid "Information about you"
+msgid "About you"
 msgstr "Vos données personnelles"
 #: TWLight/applications/forms.py:201
 #, python-brace-format
