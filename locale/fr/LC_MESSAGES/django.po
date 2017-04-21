@@ -103,9 +103,7 @@ msgid "Sent to partner"
 msgstr "Envoyé au partenaire"
 #: TWLight/applications/models.py:43 TWLight/applications/models.py:55
 #: TWLight/applications/models.py:63
-msgid ""
-"Do not override this field! Its value is set automatically when the "
-"application is saved, and overriding it may have undesirable results."
+msgid "Please do not override this field! It is set automatically."
 msgstr "Ne pas remplacer ce champ! Sa valeur est définie automatiquement lorsque "
 "l'application est enregistrée, et son remplacement pourrait avoir des "
 "résultats indésirables"

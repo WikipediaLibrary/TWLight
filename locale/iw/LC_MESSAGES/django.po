@@ -110,9 +110,7 @@ msgstr ""
 
 #: TWLight/applications/models.py:52 TWLight/applications/models.py:64
 #: TWLight/applications/models.py:72
-msgid ""
-"Do not override this field! Its value is set automatically when the "
-"application is saved, and overriding it may have undesirable results."
+msgid "Please do not override this field! It is set automatically."
 msgstr ""
 
 #: TWLight/applications/models.py:77

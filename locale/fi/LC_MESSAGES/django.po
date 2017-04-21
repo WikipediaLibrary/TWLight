@@ -132,9 +132,7 @@ msgstr "Lähetä yhteistyökumppanille"
 
 #: TWLight/applications/models.py:51 TWLight/applications/models.py:63
 #: TWLight/applications/models.py:71
-msgid ""
-"Do not override this field! Its value is set automatically when the "
-"application is saved, and overriding it may have undesirable results."
+msgid "Please do not override this field! It is set automatically."
 msgstr ""
 "Älä muuta tämän kentän arvoa! Arvo asetetaan automaattisesti kun hakemus "
 "tallennetaan, ja sen muuttamisesta voi tulla toivomattomia seurauksia."
