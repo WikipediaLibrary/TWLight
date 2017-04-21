@@ -72,7 +72,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # default. Also, we'd like to use Site.objects.get_current().domain, but we
 # can't import Site into settings - it's not available when Django first uses
 # the settings file, and the site refuses to load.
-REQUEST_BASE_URL = 'https://twl-test.wmflabs.org'
+REQUEST_BASE_URL = 'https://wikipedialibrary.wmflabs.org'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
