@@ -361,7 +361,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:36
 #: TWLight/resources/templates/resources/partner_detail.html:56
 #: TWLight/templates/base.html:55
-msgid "Apply for access"
+msgid "Apply"
 msgstr ""
 
 #. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did earlier in this file.

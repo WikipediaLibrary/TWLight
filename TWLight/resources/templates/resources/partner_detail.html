@@ -38,7 +38,7 @@
     </div>
   {% else %}
     {% url 'applications:apply_single' object.pk as app_url %}
-    <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply for access" %}</a>
+    <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a>
   {% endif %}
   {% if user|coordinators_only %}
     <form action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
@@ -60,7 +60,7 @@
         </div>
       {% else %}
         {% url 'applications:apply_single' object.pk as app_url %}
-        <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply for access" %}</a><br/>
+        <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br/>
       {% endif %}
 
       {% if user|coordinators_only %}

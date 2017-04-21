@@ -385,7 +385,7 @@ msgstr "Yhteistyökumppanin tietoja ei ole lisätty vielä tietokantaan."
 #: TWLight/resources/templates/resources/partner_detail.html:18
 #: TWLight/resources/templates/resources/partner_detail.html:21
 #: TWLight/templates/base.html:55
-msgid "Apply for access"
+msgid "Apply"
 msgstr "Hae käyttöoikeutta"
 
 #: TWLight/applications/templates/applications/send.html:6

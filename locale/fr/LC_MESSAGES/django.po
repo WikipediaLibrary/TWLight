@@ -259,7 +259,7 @@ msgstr "Aucune donnée n'a encore été ajouté à la base de données pour ce p
 #: TWLight/resources/templates/resources/partner_detail.html:18
 #: TWLight/resources/templates/resources/partner_detail.html:21
 #: TWLight/templates/base.html:55
-msgid "Apply for access"
+msgid "Apply"
 msgstr "Demande d'accès"
 #: TWLight/applications/templates/applications/send.html:6
 msgid "Partners with approved, unsent applications"
