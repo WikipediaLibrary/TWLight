@@ -33,7 +33,7 @@ msgstr ""
 
 #: TWLight/applications/forms.py:257 TWLight/users/admin.py:70
 #: TWLight/users/models.py:102
-msgid "Wikipedia username"
+msgid "Username"
 msgstr ""
 
 #: TWLight/applications/forms.py:258
@@ -331,7 +331,7 @@ msgstr ""
 #, python-format
 msgid ""
 "<p> Note that the following information may be displayed in the timeline on "
-"the home page: </p> <ul> <li> Your Wikipedia username; </li> <li> The "
+"the home page: </p> <ul> <li> Your Username; </li> <li> The "
 "partners to which you've applied; </li> <li> Your rationale for applying. </"
 "li> </ul> <p> Please <a href=\"mailto:wikipedialibrary@wikimedia.org?"
 "Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">email us "
@@ -1535,7 +1535,7 @@ msgid ""
 msgstr ""
 
 #: TWLight/users/templates/users/editor_detail_data.html:5
-msgid "Wikipedia username *"
+msgid "Username *"
 msgstr ""
 
 #: TWLight/users/templates/users/editor_detail_data.html:11

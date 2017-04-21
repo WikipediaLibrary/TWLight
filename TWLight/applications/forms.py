@@ -254,7 +254,7 @@ class ApplicationAutocomplete(autocomplete_light.ModelForm):
 
         # Internationalize user-visible labels. These will appear inline as
         # placeholders.
-        self.fields['editor'].label = _('Wikipedia username')
+        self.fields['editor'].label = _('Username')
         self.fields['partner'].label = _('Partner name')
 
 

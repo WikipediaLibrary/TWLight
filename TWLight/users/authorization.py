@@ -122,7 +122,7 @@ class OAuthBackend(object):
 
 
     def _get_username(self, identity):
-        # The Wikipedia username is globally unique, but Wikipedia allows it to
+        # The Username is globally unique, but Wikipedia allows it to
         # have characters that the Django username system rejects. However,
         # wiki + wiki userID should be unique, and limited to ASCII.
         language_code = self._get_language_code(identity)

@@ -30,7 +30,7 @@ msgid "Your application to {partner}"
 msgstr "Votre demande à {partner}"
 #: TWLight/applications/forms.py:257 TWLight/users/admin.py:67
 #: TWLight/users/models.py:99
-msgid "Wikipedia username"
+msgid "Username"
 msgstr "Nom d'utilisateur dans Wikipédia"
 #: TWLight/applications/forms.py:258
 msgid "Partner name"
@@ -239,7 +239,7 @@ msgid ""
 "Note that the following information may be displayed in the timeline on"
 " the home page:\n"
 "\n"
-"    Your Wikipedia username;\n"
+"    Your Username;\n"
 "    The partners to which you've applied;\n"
 "    Your rationale for applying.\n"
 "\n"
@@ -1132,7 +1132,7 @@ msgid ""
 ""
 msgstr "\n%(username)s a des privilèges de coordinateur sur ce site\n"
 #: TWLight/users/templates/users/editor_detail_data.html:5
-msgid "Wikipedia username *"
+msgid "Username *"
 msgstr "Nom d'utilisateur dans Wikipédia *"
 #: TWLight/users/templates/users/editor_detail_data.html:11
 msgid "view Wikipedia user page"
