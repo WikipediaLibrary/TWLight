@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: TWLight/applications/forms.py:101
-msgid "Submit application"
+msgid "Apply"
 msgstr "Tallenna hakemus"
 
 #. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.

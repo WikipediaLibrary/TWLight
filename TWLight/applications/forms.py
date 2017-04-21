@@ -98,7 +98,7 @@ class BaseApplicationForm(forms.Form):
 
         self.helper.add_input(Submit(
             'submit',
-            _('Submit application'),
+            _('Apply'),
             css_class='center-block'))
 
 

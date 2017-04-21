@@ -10,7 +10,7 @@ Translators: what you'll see is a lot of things that look like this:
 
 ```
 #: TWLight/applications/forms.py:101
-msgid "Submit application"
+msgid "Apply"
 msgstr ""
 ```
 

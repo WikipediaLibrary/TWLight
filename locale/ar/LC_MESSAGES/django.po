@@ -20,7 +20,7 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: TWLight/applications/forms.py:101
-msgid "Submit application"
+msgid "Apply"
 msgstr ""
 
 #. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
