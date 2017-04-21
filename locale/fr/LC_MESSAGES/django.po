@@ -57,7 +57,7 @@ msgstr "Pourquoi voulez-vous accéder à cette ressource?"
 msgid "Which collection do you want?"
 msgstr "Quelle collection voulez-vous accès?"
 #: TWLight/applications/helpers.py:89
-msgid "Which book do you want access to?"
+msgid "Which book do you want?"
 msgstr "Quel livre voulez-vous accès?"
 #: TWLight/applications/helpers.py:90
 msgid "Anything else you want to say"
