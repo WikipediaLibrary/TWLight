@@ -336,7 +336,7 @@ msgstr ""
 
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:20
-msgid "Whose resources you want to access?"
+msgid "What resources you want to access?"
 msgstr ""
 
 #: TWLight/applications/templates/applications/request_for_application.html:38
@@ -352,7 +352,7 @@ msgstr ""
 
 #: TWLight/applications/templates/applications/request_for_application.html:48
 #: TWLight/resources/templates/resources/partner_list.html:15
-msgid "No partner data has been added to the database yet."
+msgid "No partner data has been added yet."
 msgstr ""
 
 #: TWLight/applications/templates/applications/request_for_application.html:51

@@ -246,14 +246,14 @@ msgstr ""
 "Envoyez-nous un courriel (wikipedialibrary@wikimedia.org) si cela pose un problème pour vous."
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:16
-msgid "Whose resources you want to access?"
+msgid "What resources you want to access?"
 msgstr "Les ressources de quel partenaire voulez-vous accéder?"
 #: TWLight/applications/templates/applications/request_for_application.html:34
 msgid "(more info)"
 msgstr "(plus d'info)"
 #: TWLight/applications/templates/applications/request_for_application.html:39
 #: TWLight/resources/templates/resources/partner_list.html:15
-msgid "No partner data has been added to the database yet."
+msgid "No partner data has been added yet."
 msgstr "Aucune donnée n'a encore été ajouté à la base de données pour ce partenaire"
 #: TWLight/applications/templates/applications/request_for_application.html:42
 #: TWLight/resources/templates/resources/partner_detail.html:18

@@ -17,7 +17,7 @@
 {% block content %}
 
 {% comment %}Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.{% endcomment %}
-<h1>{% trans 'Whose resources you want to access?' %}</h1>
+<h1>{% trans 'What resources you want to access?' %}</h1>
 
 <form method="post">
   {% csrf_token %}
@@ -45,7 +45,7 @@
         </div>
       </li>
     {% empty %}
-      {% trans "No partner data has been added to the database yet." %}
+      {% trans "No partner data has been added yet." %}
     {% endfor %}
   </ul>
   <input type="submit" value="{% trans "Apply for access" %}" class="btn btn-primary" />
