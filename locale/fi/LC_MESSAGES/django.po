@@ -100,7 +100,7 @@ msgstr "Kotiwiki"
 
 #. Translators: Why the editor wants access to this resource.
 #: TWLight/applications/helpers.py:108
-msgid "Editor's rationale"
+msgid "Rationale"
 msgstr "Muokkaajan perustelut"
 
 #: TWLight/applications/helpers.py:112

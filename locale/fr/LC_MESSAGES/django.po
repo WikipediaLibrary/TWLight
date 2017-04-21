@@ -79,7 +79,7 @@ msgid "Home wiki"
 msgstr "Wiki principal"
 #. Translators: Why the editor wants access to this resource.
 #: TWLight/applications/helpers.py:108
-msgid "Editor's rationale"
+msgid "Rationale"
 msgstr "Justification d'utilisateur"
 #: TWLight/applications/helpers.py:112
 msgid "Comments"
