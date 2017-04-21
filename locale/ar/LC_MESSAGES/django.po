@@ -330,13 +330,10 @@ msgstr ""
 #: TWLight/applications/templates/applications/apply.html:13
 #, python-format
 msgid ""
-"<p> Note that the following information may be displayed in the timeline on "
-"the home page: </p> <ul> <li> Your Username; </li> <li> The "
-"partners to which you've applied; </li> <li> Your rationale for applying. </"
-"li> </ul> <p> Please <a href=\"mailto:wikipedialibrary@wikimedia.org?"
+"<p> Note that your username and reasons for applying may be displayed on "
+"the home page. Please <a href=\"mailto:wikipedialibrary@wikimedia.org?"
 "Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">email us "
-"directly (wikipedialibrary@wikimedia.org)</a> if this poses a problem for "
-"you. </p>"
+"(wikipedialibrary@wikimedia.org)</a> if this is a problem. </p>"
 msgstr ""
 
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
