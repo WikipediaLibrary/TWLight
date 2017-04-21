@@ -158,7 +158,7 @@ msgid "Date of application"
 msgstr "Hakemuksen päivämäärä"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:31
-msgid "Number of days open"
+msgid "Days open"
 msgstr "Kuinka monta päivää hakemus on ollut vireillä"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:38
