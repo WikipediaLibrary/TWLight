@@ -281,7 +281,7 @@ msgstr[0] "Représentant de l'entreprise"
 msgstr[1] "Représentants d'entreprise"
 #: TWLight/applications/templates/applications/send_partner.html:38
 msgid ""
-"Whoops, we don't have any listed contacts for this company. Please notify "
+"Whoops, we don't have any listed contacts. Please notify "
 "Wikipedia Library administrators."
 msgstr "Zut, nous n'avons aucune contacts répertoriés pour cette entreprise. S'il vous plaît aviser "" les administrateurs de La bibliothèque Wikipédia"
 #: TWLight/applications/templates/applications/send_partner.html:41

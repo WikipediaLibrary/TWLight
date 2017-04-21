@@ -395,7 +395,7 @@ msgstr[1] ""
 
 #: TWLight/applications/templates/applications/send_partner.html:38
 msgid ""
-"Whoops, we don't have any listed contacts for this company. Please notify "
+"Whoops, we don't have any listed contacts. Please notify "
 "Wikipedia Library administrators."
 msgstr ""
 
