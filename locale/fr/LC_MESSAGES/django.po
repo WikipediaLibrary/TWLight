@@ -275,8 +275,8 @@ msgstr "Données d'application pour %(object)s"
 msgid "When you've processed the data below, click the 'mark as sent' button."
 msgstr ""
 #: TWLight/applications/templates/applications/send_partner.html:23
-msgid "Company representative"
-msgid_plural "Company representatives"
+msgid "Contact"
+msgid_plural "Contacts"
 msgstr[0] "Représentant de l'entreprise"
 msgstr[1] "Représentants d'entreprise"
 #: TWLight/applications/templates/applications/send_partner.html:38
