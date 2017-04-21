@@ -188,7 +188,7 @@ msgstr "Evalué le %(review_date)s"
 msgid "No previous versions."
 msgstr "Aucune versions précédentes"
 #: TWLight/applications/templates/applications/application_list.html:19
-msgid "Filter applications by..."
+msgid "Filter by..."
 msgstr "Filtrer par..."
 #: TWLight/applications/templates/applications/application_list.html:30
 msgid "Current filters"

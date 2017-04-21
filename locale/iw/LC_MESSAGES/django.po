@@ -244,7 +244,7 @@ msgid "Up for renewal"
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_list.html:43
-msgid "Filter applications by..."
+msgid "Filter by..."
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_list.html:54
