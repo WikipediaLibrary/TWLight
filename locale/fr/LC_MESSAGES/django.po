@@ -292,7 +292,7 @@ msgstr "Données d'application"
 msgid "Mark as sent"
 msgstr "Marquer comme envoyé"
 #: TWLight/applications/templates/applications/send_partner.html:62
-msgid "There are no approved, unsent applications at this time."
+msgid "There are no approved, unsent applications."
 msgstr "Il n'y a pas d'applications approuvés non encore envoyées à ce moment"
 #: TWLight/applications/views.py:93
 msgid "Please select at least one partner."
