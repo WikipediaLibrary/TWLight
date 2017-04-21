@@ -189,7 +189,7 @@ msgstr ""
 
 #: TWLight/applications/templates/applications/application_evaluation.html:129
 msgid ""
-"This page and its comments are visible to all Wikipedia Library coordinators "
+"Comments are visible to all coordinators "
 "and to the editor who submitted this application."
 msgstr ""
 

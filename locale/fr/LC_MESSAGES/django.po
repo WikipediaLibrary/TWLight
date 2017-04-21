@@ -158,7 +158,7 @@ msgid "Add comment"
 msgstr "Ajouter un commentaire"
 #: TWLight/applications/templates/applications/application_evaluation.html:123
 msgid ""
-"This page and its comments are visible to all Wikipedia Library coordinators "
+"Comments are visible to all coordinators "
 "and to the editor who submitted this application."
 msgstr "Cette page et ses commentaires sont visibles à tous les coordonnateurs la "
 "Bibliothèque Wikipédia et à l'utilisateur qui a soumis cette demande"
