@@ -58,7 +58,7 @@ msgid "Your institutional affiliation"
 msgstr "Instituutiosi"
 
 #: TWLight/applications/helpers.py:86
-msgid "Publisher name"
+msgid "Partner name"
 msgstr "Julkaisijan nimi"
 
 #: TWLight/applications/helpers.py:87

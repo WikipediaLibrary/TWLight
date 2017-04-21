@@ -48,7 +48,7 @@ msgstr "Votre profession"
 msgid "Your institutional affiliation"
 msgstr "Votre affiliation institutionnelle"
 #: TWLight/applications/helpers.py:86
-msgid "Publisher name"
+msgid "Partner name"
 msgstr "Nom de ressource"
 #: TWLight/applications/helpers.py:87
 msgid "Why do you want access to this resource?"
