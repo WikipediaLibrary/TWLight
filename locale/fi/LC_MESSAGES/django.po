@@ -191,7 +191,7 @@ msgid "Not stated"
 msgstr "Ei esitetty"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:90
-msgid "Extra comments from the editor"
+msgid "Commnents from the editor"
 msgstr "Lisähuomioita muokkaajalta"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:98

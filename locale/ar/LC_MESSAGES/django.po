@@ -176,7 +176,7 @@ msgid "Not stated"
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_evaluation.html:96
-msgid "Extra comments from the editor"
+msgid "Commnents from the editor"
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_evaluation.html:104

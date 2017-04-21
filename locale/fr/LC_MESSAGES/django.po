@@ -148,7 +148,7 @@ msgstr "Pourquoi l'utilisateur veut l'accès"
 msgid "Not stated"
 msgstr "Non indiqué"
 #: TWLight/applications/templates/applications/application_evaluation.html:90
-msgid "Extra comments from the editor"
+msgid "Commnents from the editor"
 msgstr "Autres commentaires de l'utilisateur"
 #: TWLight/applications/templates/applications/application_evaluation.html:98
 msgid "Discussion"
