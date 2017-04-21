@@ -265,7 +265,7 @@ msgstr "Demande d'accès"
 msgid "Partners with approved, unsent applications"
 msgstr "Partenaires avec applications approuvés non encore envoyées"
 #: TWLight/applications/templates/applications/send.html:18
-msgid "There are no partners with applications ready to send at this time."
+msgid "There are no partners with applications ready to send."
 msgstr "Il n'y a pas de partenaires avec des applications prêtes à envoyer à ce moment"
 #: TWLight/applications/templates/applications/send_partner.html:7
 #, python-format

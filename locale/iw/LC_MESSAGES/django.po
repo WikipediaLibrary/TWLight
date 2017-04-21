@@ -375,7 +375,7 @@ msgid "Partners with approved, unsent applications"
 msgstr ""
 
 #: TWLight/applications/templates/applications/send.html:18
-msgid "There are no partners with applications ready to send at this time."
+msgid "There are no partners with applications ready to send."
 msgstr ""
 
 #: TWLight/applications/templates/applications/send_partner.html:7

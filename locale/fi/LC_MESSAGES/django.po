@@ -394,7 +394,7 @@ msgstr ""
 "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #: TWLight/applications/templates/applications/send.html:18
-msgid "There are no partners with applications ready to send at this time."
+msgid "There are no partners with applications ready to send."
 msgstr ""
 "Tällä hetkellä ei ole yhtään valmista hakemusta lähetettäväksi "
 "yhteistyökumppaneille."
