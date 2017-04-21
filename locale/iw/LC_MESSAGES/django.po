@@ -384,18 +384,8 @@ msgid "Application data for %(object)s"
 msgstr ""
 
 #: TWLight/applications/templates/applications/send_partner.html:10
-msgid ""
-"Please copy and paste the application data below into an email to the "
-"following company representative. When you've sent the email, click the "
-"'mark as sent' button so other coordinators don't send the information a "
-"second time."
-msgid_plural ""
-"Please copy and paste the application data below into an email to the "
-"following company representatives. When you've sent the email, click the "
-"'mark as sent' button so other coordinators don't send the information a "
-"second time."
-msgstr[0] ""
-msgstr[1] ""
+msgid "When you've processed the data below, click the 'mark as sent' button."
+msgstr ""
 
 #: TWLight/applications/templates/applications/send_partner.html:23
 msgid "Company representative"
