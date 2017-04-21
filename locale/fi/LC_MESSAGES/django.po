@@ -441,9 +441,7 @@ msgid "Please select at least one partner."
 msgstr "Valitse vähintään yksi yhteistyökumppani."
 
 #: TWLight/applications/views.py:259
-msgid ""
-"You must choose at least one resource you want access to before applying for "
-"access."
+msgid "Choose at least one resource you want access to."
 msgstr ""
 "Sinun täytyy valita vähintään yksi aineisto käyttöoikeuden hakemiseksi."
 

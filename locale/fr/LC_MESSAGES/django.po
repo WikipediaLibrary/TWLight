@@ -298,9 +298,7 @@ msgstr "Il n'y a pas d'applications approuvés non encore envoyées à ce moment
 msgid "Please select at least one partner."
 msgstr "Sélectionner au moins un partenaire"
 #: TWLight/applications/views.py:258
-msgid ""
-"You must choose at least one resource you want access to before applying for "
-"access."
+msgid "Choose at least one resource you want access to."
 msgstr "Vous devez choisir au moins une ressource à laquelle vous souhaitez accéder "
 "avant de demander l'accès."
 #: TWLight/applications/views.py:281

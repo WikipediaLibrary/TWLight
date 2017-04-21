@@ -267,7 +267,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
         """
         Validate inputs.
         """
-        fail_msg = _('You must choose at least one resource you want access to before applying for access.')
+        fail_msg = _('Choose at least one resource you want access to.')
         if not PARTNERS_SESSION_KEY in request.session.keys():
             messages.add_message(request, messages.WARNING, fail_msg)
             return HttpResponseRedirect(reverse('applications:request'))

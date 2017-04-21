@@ -419,9 +419,7 @@ msgid "Please select at least one partner."
 msgstr ""
 
 #: TWLight/applications/views.py:266
-msgid ""
-"You must choose at least one resource you want access to before applying for "
-"access."
+msgid "Choose at least one resource you want access to."
 msgstr ""
 
 #: TWLight/applications/views.py:289
