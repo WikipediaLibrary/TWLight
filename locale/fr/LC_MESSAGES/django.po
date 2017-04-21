@@ -64,7 +64,7 @@ msgid "Anything else you want to say"
 msgstr "Tout ce que vous souhaitez exprimer en plus"
 #: TWLight/applications/helpers.py:91
 msgid ""
-"You must agree with the partner's terms of use to access their resources"
+"You must agree with the partner's terms of use"
 msgstr "Vous devez accepter les conditions d'utilisation du partenaire pour accéder à leurs ressources"
 #: TWLight/applications/helpers.py:104
 msgid "Username"

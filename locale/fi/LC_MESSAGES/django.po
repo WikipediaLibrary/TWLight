@@ -79,7 +79,7 @@ msgstr "Onko sinulla jotain muuta sanottavaa?"
 
 #: TWLight/applications/helpers.py:91
 msgid ""
-"You must agree with the partner's terms of use to access their resources"
+"You must agree with the partner's terms of use"
 msgstr ""
 "Sinun täytyy hyväksyä yhteistyökumppanin käyttöehdot saadaksesi "
 "käyttöoikeuden aineistoon"

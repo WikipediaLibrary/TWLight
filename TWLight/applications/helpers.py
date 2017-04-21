@@ -88,7 +88,7 @@ FIELD_LABELS = {
     SPECIFIC_STREAM: _('Which collection do you want?'),
     SPECIFIC_TITLE: _('Which book do you want?'),
     COMMENTS: _('Anything else you want to say'),
-    AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use to access their resources"),
+    AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
 }
 
 
