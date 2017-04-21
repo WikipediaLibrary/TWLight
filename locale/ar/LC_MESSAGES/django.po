@@ -67,7 +67,7 @@ msgid "Why do you want access to this resource?"
 msgstr ""
 
 #: TWLight/applications/helpers.py:88
-msgid "Which collection do you want access to?"
+msgid "Which collection do you want?"
 msgstr ""
 
 #: TWLight/applications/helpers.py:89
