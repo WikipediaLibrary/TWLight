@@ -41,7 +41,7 @@
       </div>
     {% else %}
       <div class="col-xs-12 col-sm-4">
-        <strong>{% trans 'Number of days since application was closed' %}</strong>
+        <strong>{% trans 'Days since application was closed' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
         {{ object.get_num_days_open|stringformat:"+d"|slice:"1:" }} {# slice off negative sign #}

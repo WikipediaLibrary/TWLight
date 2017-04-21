@@ -162,7 +162,7 @@ msgid "Days open"
 msgstr "Kuinka monta päivää hakemus on ollut vireillä"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:38
-msgid "Number of days since application was closed"
+msgid "Days since application was closed"
 msgstr "Kuinka monta päivää sitten hakemus käsiteltiin"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:46

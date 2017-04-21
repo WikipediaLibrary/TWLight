@@ -144,7 +144,7 @@ msgid "Days open"
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_evaluation.html:44
-msgid "Number of days since application was closed"
+msgid "Days since application was closed"
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_evaluation.html:52

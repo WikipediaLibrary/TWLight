@@ -126,7 +126,7 @@ msgstr "Date d'application"
 msgid "Days open"
 msgstr "Nombre de jours depuis l'application"
 #: TWLight/applications/templates/applications/application_evaluation.html:38
-msgid "Number of days since application was closed"
+msgid "Days since application was closed"
 msgstr "Nombre de jours depuis l'application a été fermée"
 #: TWLight/applications/templates/applications/application_evaluation.html:46
 #: TWLight/graphs/views.py:232
