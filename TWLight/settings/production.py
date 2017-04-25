@@ -54,7 +54,7 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False # Important, or you will get an SMTPException on wmlabs
-DEFAULT_FROM_EMAIL = 'Wikipedia Library Card Platform <noreply@twl-test.wmflabs.org>'
+DEFAULT_FROM_EMAIL = 'Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>'
 
 # SecurityMiddleware configuration as suggested by
 # python manage.py check --deploy
