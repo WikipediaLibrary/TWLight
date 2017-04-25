@@ -421,7 +421,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         context['object_list'] = self.object_list
         # Set up pagination.
-        paginator = Paginator(self.object_list, 20)
+        paginator = Paginator(self.object_list, 999)
         page = self.request.GET.get('page')
         try:
             applications = paginator.page(page)
