@@ -24,7 +24,7 @@ import re
 from django import forms
 from django.utils.translation import ugettext as _
 
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
 
 from .helpers import (USER_FORM_FIELDS,
@@ -32,6 +32,7 @@ from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_BASE_FIELDS,
                       FIELD_TYPES,
                       FIELD_LABELS,
+                      SPECIFIC_STREAM,
                       AGREEMENT_WITH_TERMS_OF_USE)
 from .models import Application
 
@@ -222,6 +223,12 @@ class BaseApplicationForm(forms.Form):
                     help_text = '<a href="{url}">{url}</a>'.format(
                         url=partner_object.terms_of_use)
                     self.fields[field_name].help_text = help_text
+
+                if datum == SPECIFIC_STREAM:
+                    # Only show streams for this partner
+                    partner_id = int(partner[8:])
+                    specific_stream = forms.ModelChoiceField(queryset=Stream.objects.filter(partner_id=partner_id))
+                    self.fields[field_name] = specific_stream
 
                 partner_layout.append(field_name)
 
