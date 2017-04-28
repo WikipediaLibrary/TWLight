@@ -229,6 +229,7 @@ class BaseApplicationForm(forms.Form):
                     partner_id = int(partner[8:])
                     specific_stream = forms.ModelChoiceField(queryset=Stream.objects.filter(partner_id=partner_id))
                     self.fields[field_name] = specific_stream
+                    self.fields[field_name].label = FIELD_LABELS[datum]
 
                 partner_layout.append(field_name)
 
