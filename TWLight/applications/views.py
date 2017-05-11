@@ -345,9 +345,13 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
         _get_partners() and returns a queryset so that
         SubmitSingleApplicationView and SubmitApplicationView have the same
         behavior, and the shared functionality in _BaseSubmitApplicationView
-        doesn't have to special-case it.
+        doesn't have to special-case it. Store the partner_id in the session so
+        the validator doesn't blow up when we link directly to a partner app..
         """
         partner_id = self.kwargs['pk']
+
+        self.request.session[PARTNERS_SESSION_KEY] = partner_id
+
         partners = Partner.objects.filter(id=partner_id)
         try:
             assert partners.count() == 1
