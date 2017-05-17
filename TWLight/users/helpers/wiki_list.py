@@ -7,6 +7,7 @@ WIKIS = (
     # Machine-readable/human-readable pairs intended as options
     # for the home_wiki element on the user profile.
     #('aa', 'aa.wikipedia.org'), - this exists but has been shut down
+    ('meta', 'meta.wikimedia.org'),
     ('ab', 'ab.wikipedia.org'),
     ('ace', 'ace.wikipedia.org'),
     ('ady', 'ady.wikipedia.org'),
@@ -312,6 +313,7 @@ LANGUAGE_CODES = {
     # above wikis. Note: exploits Python3 unicode support
     # to provide things like 'Bokmål'.
     #'aa': 'Afar',
+    'meta': 'Global',
     'ab': 'Abkhazian',
     'ace': 'Acehnese',
     'ady': 'Adyghe',

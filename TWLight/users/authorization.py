@@ -40,7 +40,7 @@ def _get_full_wiki_url(home_wiki):
     Given something like 'en.wikipedia.org', return something like
     'https://en.wikipedia.org/w/index.php'.
     """
-    return 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
+    return 'https://meta.wikimedia.org/w/index.php'
 
 
 # Construct all conceivably needed handshakers. Will result in a dict like
@@ -124,9 +124,8 @@ class OAuthBackend(object):
     def _get_username(self, identity):
         # The Wikipedia username is globally unique, but Wikipedia allows it to
         # have characters that the Django username system rejects. However,
-        # wiki + wiki userID should be unique, and limited to ASCII.
-        language_code = self._get_language_code(identity)
-        return '{lang}{sub}'.format(lang=language_code, sub=identity['sub'])
+        # wiki userID should be unique, and limited to ASCII.
+        return '{sub}'.format(sub=identity['sub'])
 
 
     def _meets_minimum_requirement(self, identity):
