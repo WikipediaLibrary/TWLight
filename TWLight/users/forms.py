@@ -76,6 +76,8 @@ class HomeWikiForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(HomeWikiForm, self).__init__(*args, **kwargs)
         self.fields['home_wiki'].label = _('Select your home wiki')
+        self.fields['home_wiki'].widget = forms.HiddenInput()
+        self.initial['home_wiki'] = WIKIS[0][0]
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
