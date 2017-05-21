@@ -90,9 +90,11 @@
         </li>
       {% else %}
         <li role="presentation">
-          <a href="{% url 'oauth_login' %}">
-            {% trans "Log in/sign up" %}
-          </a>
+          <form method="post" action="{% url 'oauth_login' %}">
+            {% csrf_token %}
+            <input id="id_home_wiki" name="home_wiki" value="meta" type="hidden">
+            <input name="submit" value="{% trans "Log in/sign up" %}" id="submit-id-submit" type="submit">
+          </form>
         </li>
       {% endif %}
     </ul>
