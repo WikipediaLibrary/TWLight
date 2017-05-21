@@ -183,7 +183,7 @@ class OAuthBackend(object):
         return user, editor
 
 
-    def _get_and_update_user_from_identity(self, identity):
+    def _get_and_update_user_from_identity(self, identity, global_userinfo):
         """
         If we have an Editor and User matching the identity returned by
         Wikipedia, update the editor with the identity parameters and return its
@@ -257,7 +257,8 @@ class OAuthBackend(object):
 
         logger.info('Getting global user info...')
         try:
-            global_userinfo = get_global_userinfo(identity)
+            editor = Editor()
+            global_userinfo = editor.get_global_userinfo(identity)
         except:
             logger.warning('Unable to get global user information.')
             raise

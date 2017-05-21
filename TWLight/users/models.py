@@ -255,7 +255,7 @@ class Editor(models.Model):
                 editor=self))
             return False
 
-    def get_global_userinfo(identity):
+    def get_global_userinfo(self, identity):
         """
         Grab global user information from the API, which we'll use to overlay
         somme local wiki user info returned by OAuth.  Returns a dict like:
@@ -310,15 +310,8 @@ class Editor(models.Model):
                 'the instance. Not updating.')
             raise
 
-        try:
-            assert self.wp_sul == global_userinfo
-        except AssertionError:
-            logger.exception('Was asked to update Editor data, but the '
-                'global userinfo passed in did not match the wp_sul on the '
-                'instance. Not updating.')
-            raise
-        global_userinfo = get_global_userinfo(identity)
-        self.wp_editcount = global_userinfo['query']['globaluserinfo']['editcount']
+        global_userinfo = self.get_global_userinfo(identity)
+        self.wp_editcount = global_userinfo['editcount']
 
         self.wp_username = identity['username']
         self.wp_rights = json.dumps(identity['rights'])
