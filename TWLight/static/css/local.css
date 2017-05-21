@@ -245,7 +245,7 @@ Make the form submit in the nav look like the anchors.
   color: #337ab7;
 }
 
-#submit-id-submit:focus {
+#submit-id-submit:focus, #submit-id-submit:hover {
   background-color: #eee;
   outline-offset: -2px;
   color: #23527c;
