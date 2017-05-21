@@ -128,16 +128,9 @@ class OAuthBackend(object):
         return '{sub}'.format(sub=identity['sub'])
 
 
-    def _meets_minimum_requirement(self, identity):
+    def _meets_minimum_requirement(self, identity, global_userinfo):
         """
-        This is lower than the minimum account quality requirement in the
-        terms of use, because we don't want to exclude editors who have made
-        contributions across a variety of wikis. For instance, if we had a
-        minimum edit count requirement of 100, a user with 70 edits each on
-        the English and Finnish wikipedias would meet that minimum, but we
-        wouldn't be able to see that fact in the data returned from OAuth.
-        Therefore we are deliberately soft on enforcing requirements
-        computationally, to allow TWL administrators room for judgment. 
+        This needs to be reworked to actually check against global_userinfo.
         """
         if 'autoconfirmed' in identity['rights']:
             return True
@@ -145,12 +138,12 @@ class OAuthBackend(object):
         return False
 
 
-    def _create_user_and_editor(self, identity):
+    def _create_user_and_editor(self, identity, global_userinfo):
         # This can't be super informative because we don't want to log
         # identities.
         logger.info('Creating user.')
 
-        if not self._meets_minimum_requirement(identity):
+        if not self._meets_minimum_requirement(identity, global_userinfo):
             # Don't create a User or Editor if this person does not meet the
             # minimum account quality requirement. It would be nice to provide
             # some user feedback here, but we can't; exception messages don't
@@ -184,7 +177,7 @@ class OAuthBackend(object):
         editor.user = user
         editor.wp_sub = identity['sub']
         editor.home_wiki = language_code
-        editor.update_from_wikipedia(identity) # This call also saves the editor
+        editor.update_from_wikipedia(identity, global_userinfo) # This call also saves the editor
 
         logger.info('User and editor successfully created.')
         return user, editor
@@ -214,14 +207,14 @@ class OAuthBackend(object):
             assert hasattr(user, 'editor')
             editor = user.editor
 
-            editor.update_from_wikipedia(identity)
+            editor.update_from_wikipedia(identity, global_userinfo)
             logger.info('Editor {editor} updated.'.format(editor=editor))
 
             created = False
 
         except User.DoesNotExist:
             logger.info("Can't find user; creating one.")
-            user, editor = self._create_user_and_editor(identity)
+            user, editor = self._create_user_and_editor(identity, global_userinfo)
             created = True
 
         except AttributeError:
@@ -262,9 +255,16 @@ class OAuthBackend(object):
                 'access token.')
             raise PermissionDenied
 
+        logger.info('Getting global user info...')
+        try:
+            global_userinfo = get_global_userinfo(identity)
+        except:
+            logger.warning('Unable to get global user information.')
+            raise
+
         # Get or create the user.
         logger.info('User has been identified; getting or creating user.')
-        user, created = self._get_and_update_user_from_identity(identity)
+        user, created = self._get_and_update_user_from_identity(identity, global_userinfo)
 
         if created:
             home_wiki = re.search(r'(\w+).wikipedia.org',

@@ -255,8 +255,27 @@ class Editor(models.Model):
                 editor=self))
             return False
 
+    def get_global_userinfo(identity):
+        """
+        Grab global user information from the API, which we'll use to overlay
+        somme local wiki user info returned by OAuth.  Returns a dict like:
 
-    def update_from_wikipedia(self, identity):
+        global_userinfo:
+          home:         "zhwikisource"
+          id:           27666025
+          registration: "2013-05-05T16:00:09Z"
+          name:         "Example"
+          editcount:    10
+        """
+
+        endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=identity['username'])
+
+        results = json.loads(urllib2.urlopen(endpoint).read())
+        global_userinfo = results['query']['globaluserinfo']
+
+        return global_userinfo
+
+    def update_from_wikipedia(self, identity, global_userinfo):
         """
         Given the dict returned from the Wikipedia OAuth /identify endpoint,
         update the instance accordingly.
@@ -291,10 +310,20 @@ class Editor(models.Model):
                 'the instance. Not updating.')
             raise
 
+        try:
+            assert self.wp_sul == global_userinfo
+        except AssertionError:
+            logger.exception('Was asked to update Editor data, but the '
+                'global userinfo passed in did not match the wp_sul on the '
+                'instance. Not updating.')
+            raise
+        global_userinfo = get_global_userinfo(identity)
+        self.wp_editcount = global_userinfo['query']['globaluserinfo']['editcount']
+
         self.wp_username = identity['username']
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
-        self.wp_editcount = identity['editcount']
+        self.wp_editcount = global_userinfo['editcount']
         reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
         self.wp_registered = reg_date
         self.wp_valid = self._is_user_valid(identity)
