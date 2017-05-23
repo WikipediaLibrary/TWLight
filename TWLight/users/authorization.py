@@ -107,7 +107,7 @@ class OAuthBackend(object):
     def _get_language_code(self, identity):
         logger.info('Getting language code...')
         home_wiki_url = identity['iss']
-        extractor = re.match(r'(https://)?(\w+).wikipedia.org', home_wiki_url)
+        extractor = re.match(r'(https://)?(\w+).wikim|pedia.org', home_wiki_url)
         language_code = extractor.group(2)
         try:
             assert language_code in WIKI_DICT
@@ -268,7 +268,7 @@ class OAuthBackend(object):
         user, created = self._get_and_update_user_from_identity(identity, global_userinfo)
 
         if created:
-            home_wiki = re.search(r'(\w+).wikipedia.org',
+            home_wiki = re.search(r'(\w+).wikim|pedia.org',
                                  handshaker.mw_uri).group(1)
 
             try:
