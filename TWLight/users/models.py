@@ -216,7 +216,7 @@ class Editor(models.Model):
         return json.loads(self.wp_groups)
 
 
-    def _is_user_valid(self, identity):
+    def _is_user_valid(self, identity, userinfo, global_userinfo):
         """
         Check for the eligibility criteria laid out in the terms of service.
         To wit, users must:
@@ -233,17 +233,14 @@ class Editor(models.Model):
         """
         try:
             # Check: >= 500 edits
-            assert int(identity['editcount']) >= 500
+            assert int(global_userinfo['editcount']) >= 500
 
             # Check: registered >= 6 months ago
             reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
             assert datetime.today().date() - timedelta(days=182) >= reg_date
 
             # Check: Special:Email User enabled
-            endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=options'.format(base=identity['iss'])
-            userinfo = json.loads(urllib2.urlopen(endpoint).read())
-
-            disablemail = userinfo['query']['userinfo']['options']['disablemail']
+            disablemail = userinfo['options']['disablemail']
             assert int(disablemail) == 0
 
             # Check: not blocked
@@ -254,6 +251,26 @@ class Editor(models.Model):
             logger.exception('Editor {editor} was not valid.'.format(
                 editor=self))
             return False
+
+    def get_userinfo(self, identity):
+        """
+        Grab local user information from the API, which we'll use to overlay
+        somme local wiki user info returned by OAuth.  Returns a dict like:
+
+        userinfo:
+          id:                 27666025
+          name:               "Example"
+          options:            Lists all preferences the current user has set.
+          email:              "nomail@example.com"
+          emailauthenticated: "1969-12-31T11:59:59Z"
+        """
+
+        endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=email|options'.format(base=identity['iss'])
+
+        results = json.loads(urllib2.urlopen(endpoint).read())
+        userinfo = results['query']['userinfo']
+
+        return userinfo
 
     def get_global_userinfo(self, identity):
         """
@@ -275,7 +292,7 @@ class Editor(models.Model):
 
         return global_userinfo
 
-    def update_from_wikipedia(self, identity, global_userinfo):
+    def update_from_wikipedia(self, identity):
         """
         Given the dict returned from the Wikipedia OAuth /identify endpoint,
         update the instance accordingly.
@@ -311,15 +328,16 @@ class Editor(models.Model):
             raise
 
         global_userinfo = self.get_global_userinfo(identity)
-        self.wp_editcount = global_userinfo['editcount']
+        userinfo = self.get_userinfo(identity)
 
+        self.wp_editcount = global_userinfo['editcount']
         self.wp_username = identity['username']
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
         self.wp_editcount = global_userinfo['editcount']
         reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
         self.wp_registered = reg_date
-        self.wp_valid = self._is_user_valid(identity)
+        self.wp_valid = self._is_user_valid(identity, userinfo, global_userinfo)
         self.save()
 
         # This will be True the first time the user logs in, since use_wp_email
@@ -327,7 +345,7 @@ class Editor(models.Model):
         # they have an email at WP for us to initialize it with.
         if self.user.userprofile.use_wp_email:
             try:
-                self.user.email = identity['email']
+                self.user.email = userinfo['email']
             except KeyError:
                 # Email isn't guaranteed to be present in identity - don't do
                 # anything if we can't find it.
