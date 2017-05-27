@@ -265,10 +265,18 @@ class Editor(models.Model):
           emailauthenticated: "1969-12-31T11:59:59Z"
         """
 
-        endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=email|options'.format(base=identity['iss'])
+        endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=centralids|email|options'.format(base=identity['iss'])
 
         results = json.loads(urllib2.urlopen(endpoint).read())
         userinfo = results['query']['userinfo']
+
+        try:
+            assert userinfo['centralids']['CentralAuth'] == identity['sub']
+        except AssertionError:
+            logger.exception('Was asked to get userinfo, but '
+                'WP sub in the identity passed in did not match the wp_sub on '
+                'in the current API context.')
+            pass
 
         return userinfo
 
@@ -330,7 +338,6 @@ class Editor(models.Model):
         global_userinfo = self.get_global_userinfo(identity)
         userinfo = self.get_userinfo(identity)
 
-        self.wp_editcount = global_userinfo['editcount']
         self.wp_username = identity['username']
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
@@ -345,10 +352,11 @@ class Editor(models.Model):
         # they have an email at WP for us to initialize it with.
         if self.user.userprofile.use_wp_email:
             try:
-                self.user.email = userinfo['email']
+                self.user.email = identity['email']
             except KeyError:
                 # Email isn't guaranteed to be present in identity - don't do
                 # anything if we can't find it.
+                logger.info('Unable to get mail for {username}'.format(username=self.wp_username))
                 pass
 
         self.user.save()
