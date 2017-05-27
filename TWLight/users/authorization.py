@@ -128,7 +128,7 @@ class OAuthBackend(object):
         return '{sub}'.format(sub=identity['sub'])
 
 
-    def _meets_minimum_requirement(self, identity, global_userinfo):
+    def _meets_minimum_requirement(self, identity):
         """
         This needs to be reworked to actually check against global_userinfo.
         """
@@ -138,12 +138,12 @@ class OAuthBackend(object):
         return False
 
 
-    def _create_user_and_editor(self, identity, userinfo, global_userinfo):
+    def _create_user_and_editor(self, identity):
         # This can't be super informative because we don't want to log
         # identities.
         logger.info('Creating user.')
 
-        if not self._meets_minimum_requirement(identity, global_userinfo):
+        if not self._meets_minimum_requirement(identity):
             # Don't create a User or Editor if this person does not meet the
             # minimum account quality requirement. It would be nice to provide
             # some user feedback here, but we can't; exception messages don't
@@ -159,7 +159,7 @@ class OAuthBackend(object):
 
         # -------------------------- Create the user ---------------------------
         try:
-            email = userinfo['email']
+            email = identity['email']
         except KeyError:
             email = None
 
@@ -175,6 +175,7 @@ class OAuthBackend(object):
         editor = Editor()
 
         editor.user = user
+
         editor.wp_sub = identity['sub']
         editor.home_wiki = language_code
         editor.update_from_wikipedia(identity) # This call also saves the editor
@@ -183,7 +184,7 @@ class OAuthBackend(object):
         return user, editor
 
 
-    def _get_and_update_user_from_identity(self, identity, userinfo, global_userinfo):
+    def _get_and_update_user_from_identity(self, identity):
         """
         If we have an Editor and User matching the identity returned by
         Wikipedia, update the editor with the identity parameters and return its
@@ -214,7 +215,7 @@ class OAuthBackend(object):
 
         except User.DoesNotExist:
             logger.info("Can't find user; creating one.")
-            user, editor = self._create_user_and_editor(identity, userinfo, global_userinfo)
+            user, editor = self._create_user_and_editor(identity)
             created = True
 
         except AttributeError:
@@ -255,25 +256,9 @@ class OAuthBackend(object):
                 'access token.')
             raise PermissionDenied
 
-        logger.info('Getting local user info...')
-        try:
-            editor = Editor()
-            userinfo = editor.get_userinfo(identity)
-        except:
-            logger.warning('Unable to get local user information.')
-            raise
-
-        logger.info('Getting global user info...')
-        try:
-            editor = Editor()
-            global_userinfo = editor.get_global_userinfo(identity)
-        except:
-            logger.warning('Unable to get global user information.')
-            raise
-
         # Get or create the user.
         logger.info('User has been identified; getting or creating user.')
-        user, created = self._get_and_update_user_from_identity(identity, userinfo, global_userinfo)
+        user, created = self._get_and_update_user_from_identity(identity)
 
         if created:
             home_wiki = re.search(r'(\w+).wikim|pedia.org',
