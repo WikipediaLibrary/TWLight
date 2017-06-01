@@ -216,7 +216,7 @@ class Editor(models.Model):
         return json.loads(self.wp_groups)
 
 
-    def _is_user_valid(self, identity, userinfo, global_userinfo):
+    def _is_user_valid(self, identity, global_userinfo):
         """
         Check for the eligibility criteria laid out in the terms of service.
         To wit, users must:
@@ -345,7 +345,7 @@ class Editor(models.Model):
         self.wp_editcount = global_userinfo['editcount']
         reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
         self.wp_registered = reg_date
-        self.wp_valid = self._is_user_valid(identity, userinfo, global_userinfo)
+        self.wp_valid = self._is_user_valid(identity, global_userinfo)
         self.save()
 
         # This will be True the first time the user logs in, since use_wp_email
