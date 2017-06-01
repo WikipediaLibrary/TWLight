@@ -240,8 +240,8 @@ class Editor(models.Model):
             assert datetime.today().date() - timedelta(days=182) >= reg_date
 
             # Check: Special:Email User enabled
-            disablemail = userinfo['options']['disablemail']
-            assert int(disablemail) == 0
+            #disablemail = userinfo['options']['disablemail']
+            #assert int(disablemail) == 0
 
             # Check: not blocked
             assert identity['blocked'] == False
@@ -254,6 +254,7 @@ class Editor(models.Model):
 
     def get_userinfo(self, identity):
         """
+        Not currently used, since we're not accessing the API logged in.
         Grab local user information from the API, which we'll use to overlay
         somme local wiki user info returned by OAuth.  Returns a dict like:
 
@@ -336,7 +337,7 @@ class Editor(models.Model):
             raise
 
         global_userinfo = self.get_global_userinfo(identity)
-        userinfo = self.get_userinfo(identity)
+        #userinfo = self.get_userinfo(identity)
 
         self.wp_username = identity['username']
         self.wp_rights = json.dumps(identity['rights'])
