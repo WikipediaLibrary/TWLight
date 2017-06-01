@@ -357,7 +357,7 @@ class Editor(models.Model):
             except KeyError:
                 # Email isn't guaranteed to be present in identity - don't do
                 # anything if we can't find it.
-                logger.info('Unable to get mail for {username}'.format(username=self.wp_username))
+                logger.exception('Unable to get Editor email address from Wikipedia.')
                 pass
 
         self.user.save()
