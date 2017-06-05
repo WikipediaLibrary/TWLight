@@ -15,7 +15,7 @@
         {% trans "Learn more" %}
       </a>      
       {% if not user.is_authenticated %}
-        <form method="post" action="{% url 'oauth_login' %}">
+        <form class= "margin-top-5" method="post" action="{% url 'oauth_login' %}">
           {% csrf_token %}
           <input id="id_home_wiki" name="home_wiki" value="meta" type="hidden">
           <input name="submit" value="{% trans "Log in/sign up" %}" id="submit-id-submit" class="btn btn-primary btn-block" type="submit">
