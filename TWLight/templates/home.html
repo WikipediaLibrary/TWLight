@@ -15,9 +15,11 @@
         {% trans "Learn more" %}
       </a>      
       {% if not user.is_authenticated %}
-        <a href="{% url 'oauth_login' %}" class="btn btn-primary btn-block">
-          {% trans "Log in/sign up" %}
-        </a>
+        <form method="post" action="{% url 'oauth_login' %}">
+          {% csrf_token %}
+          <input id="id_home_wiki" name="home_wiki" value="meta" type="hidden">
+          <input name="submit" value="{% trans "Log in/sign up" %}" id="submit-id-submit" class="btn btn-primary btn-block" type="submit">
+        </form>
       {% endif %}
     </div>
   </div>
