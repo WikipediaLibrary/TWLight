@@ -42,6 +42,29 @@ def _get_full_wiki_url(home_wiki):
     """
     return 'https://meta.wikimedia.org/w/index.php'
 
+def _localize_oauth_redirect(redirect):
+    """
+    Given an appropriate mediawiki oauth handshake url, return one that will
+    present the user with a login page of their preferred language.
+    """
+    redirect_parsed = urlparse.urlparse(redirect)
+    redirect_query = urlparse.parse_qs(redirect_parsed.query)
+
+    localized_redirect = redirect_parsed.scheme
+    localized_redirect += '://'
+    localized_redirect += redirect_parsed.netloc
+    localized_redirect += redirect_parsed.path
+    localized_redirect += '?title=Special:UserLogin&uselang='
+    localized_redirect += get_language()
+    localized_redirect += '&returnto='
+    localized_redirect += str(redirect_query['title'])
+    localized_redirect += '&oauth_consumer_key='
+    localized_redirect += str(redirect_query['oauth_consumer_key'])
+    localized_redirect += '&oauth_token='
+    localized_redirect += str(redirect_query['oauth_token'])
+
+    return localized_redirect
+
 
 # Construct all conceivably needed handshakers. Will result in a dict like
 # {domain: {wiki url: handshaker}}.
@@ -331,10 +354,12 @@ class OAuthInitializeView(FormView):
             logger.exception('Handshaker not initiated')
             raise
 
+        local_redirect = _localize_oauth_redirect(redirect)
+
         logger.info('handshaker initiated')
         self.request.session['request_token'] = _dehydrate_token(request_token)
         self.request.session['home_wiki'] = home_wiki
-        return HttpResponseRedirect(redirect)
+        return HttpResponseRedirect(local_redirect)
 
 
 
