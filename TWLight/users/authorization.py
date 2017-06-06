@@ -144,14 +144,12 @@ class OAuthBackend(object):
         logger.info('Creating user.')
 
         #if not self._meets_minimum_requirement(identity):
-            """
-            This needs to be reworked to actually check against global_userinfo.
-            Don't create a User or Editor if this person does not meet the
-            minimum account quality requirement. It would be nice to provide
-            some user feedback here, but we can't; exception messages don't
-            get passed on as template context in Django 1.8. (They do in
-            1.10, so this can be revisited in future.)
-            """
+            #This needs to be reworked to actually check against global_userinfo.
+            #Don't create a User or Editor if this person does not meet the
+            #minimum account quality requirement. It would be nice to provide
+            #some user feedback here, but we can't; exception messages don't
+            #get passed on as template context in Django 1.8. (They do in
+            #1.10, so this can be revisited in future.)
             #logger.warning('User did not meet minimum requirements; not created.')
             #raise PermissionDenied
 
