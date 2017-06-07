@@ -1,6 +1,7 @@
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken
 import re
+import urlparse
 
 from django.conf import settings
 from django.contrib import messages
@@ -11,6 +12,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
+from django.utils.translation import get_language
 from django.utils.translation import ugettext as _
 
 from .helpers.wiki_list import WIKI_DICT
