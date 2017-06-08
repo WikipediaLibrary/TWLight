@@ -58,11 +58,11 @@ def _localize_oauth_redirect(redirect):
     localized_redirect += redirect_parsed.path
     localized_redirect += '?title='
     localized_redirect += 'Special:UserLogin'
+    localized_redirect += '&uselang='
+    localized_redirect += get_language()
     localized_redirect += '&returnto='
     localized_redirect += str(redirect_query['title'][0])
     localized_redirect += '&returntoquery='
-    localized_redirect += '%26uselang%3D'
-    localized_redirect += get_language()
     localized_redirect += '%26oauth_consumer_key%3D'
     localized_redirect += str(redirect_query['oauth_consumer_key'][0])
     localized_redirect += '%26oauth_token%3D'
