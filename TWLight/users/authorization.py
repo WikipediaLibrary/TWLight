@@ -56,14 +56,17 @@ def _localize_oauth_redirect(redirect):
     localized_redirect += '://'
     localized_redirect += redirect_parsed.netloc
     localized_redirect += redirect_parsed.path
-    localized_redirect += '?title=Special:UserLogin&uselang='
-    localized_redirect += get_language()
+    localized_redirect += '?title='
+    localized_redirect += 'Special:UserLogin'
     localized_redirect += '&returnto='
-    localized_redirect += str(redirect_query['title'])
-    localized_redirect += '&oauth_consumer_key='
-    localized_redirect += str(redirect_query['oauth_consumer_key'])
-    localized_redirect += '&oauth_token='
-    localized_redirect += str(redirect_query['oauth_token'])
+    localized_redirect += str(redirect_query['title'][0])
+    localized_redirect += '&returntoquery='
+    localized_redirect += '%26uselang%3D'
+    localized_redirect += get_language()
+    localized_redirect += '%26oauth_consumer_key%3D'
+    localized_redirect += str(redirect_query['oauth_consumer_key'][0])
+    localized_redirect += '%26oauth_token%3D'
+    localized_redirect += str(redirect_query['oauth_token'][0])
 
     return localized_redirect
 
