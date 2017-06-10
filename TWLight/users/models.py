@@ -171,11 +171,10 @@ class Editor(models.Model):
 
 
     @cached_property
-    def wp_link_edit_count(self):
-        url = u'{base_url}?user={self.wp_username}&project={home_wiki}'.format(
-            base_url='https://tools.wmflabs.org/xtools-ec/',
-            self=self,
-            home_wiki=self.get_home_wiki_display()
+    def wp_link_guc(self):
+        url = u'{base_url}?user={self.wp_username}'.format(
+            base_url='https://tools.wmflabs.org/guc/',
+            self=self
         )
         return url
 
