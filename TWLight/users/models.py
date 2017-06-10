@@ -85,7 +85,6 @@ class Editor(models.Model):
         # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
         verbose_name = 'wikipedia editor'
         verbose_name_plural = 'wikipedia editors'
-        unique_together = ('wp_sub', 'home_wiki')
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
@@ -103,7 +102,8 @@ class Editor(models.Model):
         help_text=_("Wikipedia username"))
     wp_editcount = models.IntegerField(help_text=_("Wikipedia edit count"))
     wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"))
-    wp_sub = models.IntegerField(help_text=_("Wikipedia user ID")) # WP user id.
+    wp_sub = models.IntegerField(unique=True,
+        help_text=_("Wikipedia user ID")) # WP user id.
 
     # Should we want to filter these to check for specific group membership or
     # user rights in future:
