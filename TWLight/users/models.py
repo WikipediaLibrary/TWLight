@@ -39,8 +39,6 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
-from .helpers.wiki_list import WIKIS
-
 
 logger = logging.getLogger(__name__)
 
@@ -119,8 +117,6 @@ class Editor(models.Model):
 
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    home_wiki = models.CharField(max_length=15, choices=WIKIS,
-        help_text=_("Home wiki, as indicated by user"))
     contributions = models.TextField(
         help_text=_("Wiki contributions, as entered by user"),
         blank=True)
@@ -136,37 +132,22 @@ class Editor(models.Model):
 
     @cached_property
     def wp_user_page_url(self):
-        if self.get_home_wiki_display():
-            # This works even if their home wiki isn't English - 'User'
-            # gets localized appropriately.
-            url = u'https://{home_wiki}/wiki/User:{self.wp_username}'.format(
-                home_wiki=self.get_home_wiki_display(), self=self)
-        else:
-            url = None
+        url = u'{base_url}/User:{self.wp_username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
         return url
 
 
     @cached_property
     def wp_talk_page_url(self):
-        if self.get_home_wiki_display():
-            # This works even if their home wiki isn't English - 'User_talk'
-            # gets localized appropriately.
-            url = u'https://{home_wiki}/wiki/User_talk:{self.wp_username}'.format(
-                home_wiki=self.get_home_wiki_display(), self=self)
-        else:
-            url = None
+        url = u'{base_url}/User_talk:{self.wp_username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
         return url
 
 
     @cached_property
     def wp_email_page_url(self):
-        if self.get_home_wiki_display():
-            # This works even if their home wiki isn't English - 'User_talk'
-            # gets localized appropriately.
-            url = u'https://{home_wiki}/wiki/Special:EmailUser/{self.wp_username}'.format(
-                home_wiki=self.get_home_wiki_display(), self=self)
-        else:
-            url = None
+        url = u'{base_url}/Special:EmailUser/{self.wp_username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
         return url
 
 
@@ -184,16 +165,6 @@ class Editor(models.Model):
         url = u'{base_url}?username={self.wp_username}'.format(
             base_url='https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php',
             self=self
-        )
-        return url
-
-
-    @cached_property
-    def wp_link_pages_created(self):
-        url = u'{base_url}?user={self.wp_username}&project={home_wiki}&namespace=all&redirects=none'.format(
-            base_url='https://tools.wmflabs.org/xtools/pages/index.php',
-            self=self,
-            home_wiki=self.get_home_wiki_display()
         )
         return url
 
@@ -363,10 +334,8 @@ class Editor(models.Model):
 
 
     def __unicode__(self):
-        # Translators: This is how we display wikipedia editors' names by default. e.g. "ThatAndromeda (en.wikipedia.org)".
-        return _(u'{wp_username} ({wiki})').format(
-            wp_username=self.wp_username,
-            wiki=self.get_home_wiki_display())
+        return _(u'{wp_username}').format(
+            wp_username=self.wp_username)
 
 
     def get_absolute_url(self):
