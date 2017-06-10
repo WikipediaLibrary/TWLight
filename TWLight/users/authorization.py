@@ -256,21 +256,25 @@ class OAuthInitializeView(View):
             logger.exception()
             raise PermissionDenied
 
-        # Get handshaker for the configured wiki oauth URL.
-        handshaker = _get_handshaker()
-        logger.info('handshaker gotten')
+        # If the user has already logged in, let's not spam the OAuth proider.
+        if self.request.user.is_authenticated():
+            return HttpResponseRedirect('/users/')
+        else:
+            # Get handshaker for the configured wiki oauth URL.
+            handshaker = _get_handshaker()
+            logger.info('handshaker gotten')
 
-        try:
-            redirect, request_token = handshaker.initiate()
-        except:
-            logger.exception('Handshaker not initiated')
-            raise
+            try:
+                redirect, request_token = handshaker.initiate()
+            except:
+                logger.exception('Handshaker not initiated')
+                raise
 
-        local_redirect = _localize_oauth_redirect(redirect)
+            local_redirect = _localize_oauth_redirect(redirect)
 
-        logger.info('handshaker initiated')
-        self.request.session['request_token'] = _dehydrate_token(request_token)
-        return HttpResponseRedirect(local_redirect)
+            logger.info('handshaker initiated')
+            self.request.session['request_token'] = _dehydrate_token(request_token)
+            return HttpResponseRedirect(local_redirect)
 
 
 
