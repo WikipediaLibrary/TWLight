@@ -13,13 +13,11 @@
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5">
       <a href="{% url 'about' %}" class="btn btn-default btn-block">
         {% trans "Learn more" %}
-      </a>      
+      </a>
       {% if not user.is_authenticated %}
-        <form class= "margin-top-5" method="post" action="{% url 'oauth_login' %}">
-          {% csrf_token %}
-          <input id="id_home_wiki" name="home_wiki" value="meta" type="hidden">
-          <input name="submit" value="{% trans "Log in/sign up" %}" id="submit-id-submit" class="btn btn-primary btn-block" type="submit">
-        </form>
+        <a href="{% url 'oauth_login' %}" class="btn btn-primary btn-block">
+          {% trans "Log in/sign up" %}
+        </a>
       {% endif %}
     </div>
   </div>
