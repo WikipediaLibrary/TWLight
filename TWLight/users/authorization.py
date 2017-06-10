@@ -15,7 +15,6 @@ from django.views.generic.edit import FormView
 from django.utils.translation import get_language
 from django.utils.translation import ugettext as _
 
-from .forms import HomeWikiForm
 from .models import Editor
 
 
@@ -239,18 +238,13 @@ class OAuthBackend(object):
 
 
 
-class OAuthInitializeView(FormView):
+class OAuthInitializeView(View):
     """
     Ask Wikipedia for a temporary key/secret for the user, and redirect
     them to their home Wikipedia to confirm authorization.
     """
-    template_name = 'users/oauth_login.html'
-    form_class = HomeWikiForm
 
-    def form_valid(self, form):
-        # The form returns the code for the home wiki (the first element of the
-        # tuple in WIKIS), but we want the URL, so we grab it from WIKI_DICT.
-
+    def get(self, request, *args, **kwargs):
         # The site might be running under multiple URLs, so find out the current
         # one (and make sure it's legit).
         # The Sites framework was designed for different URLs that correspond to
@@ -262,7 +256,7 @@ class OAuthInitializeView(FormView):
             logger.exception()
             raise PermissionDenied
 
-        # Get handshaker matching this wiki URL from our dict.
+        # Get handshaker for the configured wiki oauth URL.
         handshaker = _get_handshaker()
         logger.info('handshaker gotten')
 
