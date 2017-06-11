@@ -64,7 +64,7 @@ class DashboardView(TemplateView):
         # filter by response code to prevent the report itself from hosing.
         # 2xx reposnse codes are all valid, so this was a quick and dirty way
         # to fix the issue.  This view probably needs to be rethought.
-        partner_pages = Request.objects).filter(response__startswith='2'
+        partner_pages = Request.objects.filter(response__startswith='2'
                     ).filter(path__startswith='/partners/'
                     ).values('path'
                     ).annotate(the_count=Count('path')
