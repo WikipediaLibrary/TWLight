@@ -34,21 +34,24 @@ class DashboardView(TemplateView):
     """
     template_name = 'dashboard.html'
 
+    # As written, this tries to use the partner name as the pk, which won't work.
+    # Just returning none for now.
     def _get_partner_from_path(self, path):
-        if not path.startswith('/'):
-            path = '/' + path
-        if not path.endswith('/'):
-            path = path + '/'
+       # if not path.startswith('/'):
+       #     path = '/' + path
+       # if not path.endswith('/'):
+       #     path = path + '/'
 
-        try:
-            pk = resolve(path).kwargs['pk']
-        except KeyError:
-            return None
+       # try:
+       #     pk = resolve(path).kwargs['pk']
+       # except KeyError:
+       #     return None
 
-        try:
-            return Partner.even_not_available.get(pk=pk)
-        except Partner.DoesNotExist:
-            return None
+       # try:
+       #     return Partner.even_not_available.get(pk=pk)
+       # except Partner.DoesNotExist:
+       #     return None
+       return None
 
 
     def get_context_data(self, **kwargs):
