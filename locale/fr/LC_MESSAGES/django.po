@@ -303,16 +303,14 @@ msgstr "Vous devez choisir au moins une ressource à laquelle vous souhaitez acc
 "avant de demander l'accès."
 #: TWLight/applications/views.py:281
 msgid ""
-"Your application has been submitted. A coordinator will review it and get "
-"back to you. You can check the status of your applications on this page at "
-"any time."
+"Your application has been submitted for review. You can check the status of "
+"your applications on this page."
 msgstr "Votre demande a été soumise. Un coordonnateur l'examinera et vous répondra. "
 "Vous pouvez consulter l'état de votre demande sur cette page."
 #: TWLight/applications/views.py:311
 msgid ""
-"Your application has been submitted. A coordinator will review it and get "
-"back to you. You can check the status of your applications on your user page "
-"page at any time."
+"Your application has been submitted for review. You can check the status of "
+"your applications on this page."
 msgstr "Vos demandes ont été soumises. Un coordonnateur les examinera et vous répondra. "
 "Vous pouvez consulter l'état de vos demandes sur cette page."
 #. Translators: Editor = wikipedia editor, gender unknown.

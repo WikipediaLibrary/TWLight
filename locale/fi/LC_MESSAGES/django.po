@@ -447,18 +447,16 @@ msgstr ""
 
 #: TWLight/applications/views.py:282
 msgid ""
-"Your application has been submitted. A coordinator will review it and get "
-"back to you. You can check the status of your applications on this page at "
-"any time."
+"Your application has been submitted for review. You can check the status of "
+"your applications on this page."
 msgstr ""
 "Hakemuksesi on lähetetty. Koordinaattorimme arvioi sen ja ottaa sinuun "
 "yhteyttä. Voit tarkistaa hakemuksesi tilan tällä sivulla milloin tahansa."
 
 #: TWLight/applications/views.py:312
 msgid ""
-"Your application has been submitted. A coordinator will review it and get "
-"back to you. You can check the status of your applications on your user page "
-"page at any time."
+"Your application has been submitted for review. You can check the status of "
+"your applications on this page."
 msgstr ""
 "Hakemuksesi on lähetetty. Koordinaattorimme arvioi sen ja ottaa sinuun "
 "yhteyttä. Voit tarkistaa hakemuksesi tilan käyttäjäsivullasi milloin tahansa."

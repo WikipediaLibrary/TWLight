@@ -422,9 +422,8 @@ msgstr ""
 
 #: TWLight/applications/views.py:289
 msgid ""
-"Your application has been submitted. A coordinator will review it and get "
-"back to you. You can check the status of your applications on this page at "
-"any time."
+"Your application has been submitted for review. You can check the status of "
+"your applications on this page."
 msgstr ""
 
 #: TWLight/applications/views.py:319
@@ -436,9 +435,8 @@ msgstr ""
 
 #: TWLight/applications/views.py:330
 msgid ""
-"Your application has been submitted. A coordinator will review it and get "
-"back to you. You can check the status of your applications on your user page "
-"page at any time."
+"Your application has been submitted for review. You can check the status of "
+"your applications on this page."
 msgstr ""
 
 #. Translators: Editor = wikipedia editor, gender unknown.

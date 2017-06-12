@@ -290,9 +290,8 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
-            _('Your application has been submitted. A coordinator will review '
-              'it and get back to you. You can check the status of your '
-              'applications on this page at any time.'))
+            _('Your application has been submitted for review. '
+              'You can check the status of your applications on this page.'))
         user_home = reverse('users:editor_detail',
             kwargs={'pk': self.request.user.editor.pk})
         return user_home
@@ -331,9 +330,8 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
-            _('Your application has been submitted. A coordinator will review '
-              'it and get back to you. You can check the status of your '
-              'applications on your user page page at any time.'))
+            _('Your application has been submitted for review. '
+              'You can check the status of your applications on this page.'))
         user_home = self._get_partners()[0].get_absolute_url()
         return user_home
 
