@@ -467,7 +467,7 @@ msgid "Editor"
 msgstr "Muokkaaja"
 
 #: TWLight/applications/views.py:442
-msgid "Publisher"
+msgid "Partner"
 msgstr "Julkaisija"
 
 #: TWLight/applications/views.py:479

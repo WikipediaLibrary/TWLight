@@ -485,7 +485,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         filters = [
             # Translators: Editor = wikipedia editor, gender unknown.
             {'label': _('Editor'), 'object': editor},
-            {'label': _('Publisher'), 'object': partner}
+            {'label': _('Partner'), 'object': partner}
         ]
 
         return self.render_to_response(self.get_context_data(filters=filters))

@@ -447,7 +447,7 @@ msgid "Editor"
 msgstr ""
 
 #: TWLight/applications/views.py:482
-msgid "Publisher"
+msgid "Partner"
 msgstr ""
 
 #: TWLight/applications/views.py:509

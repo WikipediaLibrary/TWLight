@@ -318,7 +318,7 @@ msgstr "Vos demandes ont été soumises. Un coordonnateur les examinera et vous 
 msgid "Editor"
 msgstr "Utilisateur"
 #: TWLight/applications/views.py:421
-msgid "Publisher"
+msgid "Partner"
 msgstr "Maison d'édition"
 #: TWLight/applications/views.py:457
 msgid "Queue of applications to review"
