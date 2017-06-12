@@ -321,7 +321,7 @@ msgstr "Utilisateur"
 msgid "Partner"
 msgstr "Maison d'édition"
 #: TWLight/applications/views.py:457
-msgid "Queue of applications to review"
+msgid "Applications to review"
 msgstr "File d'attente des demandes"
 #: TWLight/applications/views.py:459
 #, python-brace-format

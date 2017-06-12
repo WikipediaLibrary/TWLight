@@ -512,7 +512,7 @@ class ListApplicationsView(_BaseListApplicationView):
     def get_context_data(self, **kwargs):
         context = super(ListApplicationsView, self).get_context_data(**kwargs)
 
-        context['title'] = _('Queue of applications to review')
+        context['title'] = _('Applications to review')
 
         context['include_template'] = \
             'applications/application_list_reviewable_include.html'

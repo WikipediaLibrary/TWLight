@@ -471,7 +471,7 @@ msgid "Partner"
 msgstr "Julkaisija"
 
 #: TWLight/applications/views.py:479
-msgid "Queue of applications to review"
+msgid "Applications to review"
 msgstr "Arvioitavien hakemusten määrä"
 
 #: TWLight/applications/views.py:504

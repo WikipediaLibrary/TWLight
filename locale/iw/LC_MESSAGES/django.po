@@ -449,7 +449,7 @@ msgid "Partner"
 msgstr ""
 
 #: TWLight/applications/views.py:509
-msgid "Queue of applications to review"
+msgid "Applications to review"
 msgstr ""
 
 #: TWLight/applications/views.py:534
