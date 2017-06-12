@@ -50,7 +50,6 @@ class DashboardView(TemplateView):
         except Partner.DoesNotExist:
             return None
 
-
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
 
@@ -62,7 +61,11 @@ class DashboardView(TemplateView):
                     ).order_by('-the_count')[:10]
         context['top_pages'] = top_pages
 
-        partner_pages = Request.objects.filter(path__startswith='/partners/'
+        # filter by response code to prevent the report itself from hosing.
+        # 2xx reposnse codes are all valid, so this was a quick and dirty way
+        # to fix the issue.  This view probably needs to be rethought.
+        partner_pages = Request.objects.filter(response__startswith='2'
+                    ).filter(path__startswith='/partners/'
                     ).values('path'
                     ).annotate(the_count=Count('path')
                     ).order_by('-the_count')

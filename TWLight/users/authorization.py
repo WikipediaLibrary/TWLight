@@ -1,6 +1,7 @@
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken
 import re
+import urlparse
 
 from django.conf import settings
 from django.contrib import messages
@@ -11,76 +12,45 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
+from django.utils.translation import get_language
 from django.utils.translation import ugettext as _
 
-from .helpers.wiki_list import WIKI_DICT
-from .forms import HomeWikiForm
 from .models import Editor
+
 
 logger = logging.getLogger(__name__)
 
-try:
-    ALLOWED_DOMAINS = settings.WP_CREDENTIALS.keys()
-    # Construct a "consumer" from the key/secret provided by MediaWiki for all
-    # available site domains. (Each domain requires a different set of
-    # credentials.)
-    CONSUMER_TOKENS = {domain: ConsumerToken(creds['key'], creds['secret'])
-                       for domain, creds in settings.WP_CREDENTIALS.items()}
-except AttributeError:
-    # We'll get an AttributeError if the settings don't contain WP_CREDENTIALS.
-    # This is the expected behavior for systems that don't have Wikipedia
-    # OAuth credentials, like localhost. The system should not crash in that
-    # case - it just shouldn't generate any tokens.
-    ALLOWED_DOMAINS = []
-    CONSUMER_TOKENS = {}
-
-# Must be before handshaker construction
-def _get_full_wiki_url(home_wiki):
+def _localize_oauth_redirect(redirect):
     """
-    Given something like 'en.wikipedia.org', return something like
-    'https://en.wikipedia.org/w/index.php'.
+    Given an appropriate mediawiki oauth handshake url, return one that will
+    present the user with a login page of their preferred language.
     """
-    return 'https://{home_wiki}/w/index.php'.format(home_wiki=home_wiki)
+    redirect_parsed = urlparse.urlparse(redirect)
+    redirect_query = urlparse.parse_qs(redirect_parsed.query)
+
+    localized_redirect = redirect_parsed.scheme
+    localized_redirect += '://'
+    localized_redirect += redirect_parsed.netloc
+    localized_redirect += redirect_parsed.path
+    localized_redirect += '?title='
+    localized_redirect += 'Special:UserLogin'
+    localized_redirect += '&uselang='
+    localized_redirect += get_language()
+    localized_redirect += '&returnto='
+    localized_redirect += str(redirect_query['title'][0])
+    localized_redirect += '&returntoquery='
+    localized_redirect += '%26oauth_consumer_key%3D'
+    localized_redirect += str(redirect_query['oauth_consumer_key'][0])
+    localized_redirect += '%26oauth_token%3D'
+    localized_redirect += str(redirect_query['oauth_token'][0])
+
+    return localized_redirect
 
 
-# Construct all conceivably needed handshakers. Will result in a dict like
-# {domain: {wiki url: handshaker}}.
-HANDSHAKERS = {}
-
-WIKI_DOMAINS = WIKI_DICT.values()
-
-for allowed_domain in ALLOWED_DOMAINS:
-    tempdict = {}
-    for wiki in WIKI_DOMAINS:
-        tempdict[wiki] = Handshaker(
-            _get_full_wiki_url(wiki), CONSUMER_TOKENS[allowed_domain])
-    HANDSHAKERS[allowed_domain] = tempdict
-
-
-def _get_token(domain):
-    try:
-        assert domain in ALLOWED_DOMAINS
-    except AssertionError:
-        logger.exception('Attempted to get a token for an unsupported domain')
-        raise
-
-    return CONSUMER_TOKENS[domain]
-
-
-def _get_handshaker(domain, home_wiki):
-    try:
-        assert domain in ALLOWED_DOMAINS
-    except AssertionError:
-        logger.exception('Attempted to get a handshaker for an unsupported TWL domain')
-        raise
-
-    try:
-        assert home_wiki in WIKI_DOMAINS
-    except AssertionError:
-        logger.exception('Attempted to get a handshaker for an unsupported wiki')
-        raise
-
-    return HANDSHAKERS[domain][home_wiki]
+def _get_handshaker():
+    consumer_token = ConsumerToken(settings.TWLIGHT_OAUTH_CONSUMER_KEY, settings.TWLIGHT_OAUTH_CONSUMER_SECRET)
+    handshaker = Handshaker(settings.TWLIGHT_OAUTH_PROVIDER_URL, consumer_token)
+    return handshaker
 
 
 def _dehydrate_token(token):
@@ -104,41 +74,16 @@ def _rehydrate_token(token):
 
 class OAuthBackend(object):
 
-    def _get_language_code(self, identity):
-        logger.info('Getting language code...')
-        home_wiki_url = identity['iss']
-        extractor = re.match(r'(https://)?(\w+).wikipedia.org', home_wiki_url)
-        language_code = extractor.group(2)
-        try:
-            assert language_code in WIKI_DICT
-        except AssertionError:
-            logger.exception('Could not find code {lang} in WIKI_DICT; '
-                'exiting'.format(lang=language_code))
-            raise
-
-        logger.info('Language code was {lang}.'.format(lang=language_code))
-
-        return language_code
-
-
     def _get_username(self, identity):
         # The Wikipedia username is globally unique, but Wikipedia allows it to
         # have characters that the Django username system rejects. However,
-        # wiki + wiki userID should be unique, and limited to ASCII.
-        language_code = self._get_language_code(identity)
-        return '{lang}{sub}'.format(lang=language_code, sub=identity['sub'])
+        # wiki userID should be unique, and limited to ASCII.
+        return '{sub}'.format(sub=identity['sub'])
 
 
     def _meets_minimum_requirement(self, identity):
         """
-        This is lower than the minimum account quality requirement in the
-        terms of use, because we don't want to exclude editors who have made
-        contributions across a variety of wikis. For instance, if we had a
-        minimum edit count requirement of 100, a user with 70 edits each on
-        the English and Finnish wikipedias would meet that minimum, but we
-        wouldn't be able to see that fact in the data returned from OAuth.
-        Therefore we are deliberately soft on enforcing requirements
-        computationally, to allow TWL administrators room for judgment. 
+        This needs to be reworked to actually check against global_userinfo.
         """
         if 'autoconfirmed' in identity['rights']:
             return True
@@ -151,19 +96,16 @@ class OAuthBackend(object):
         # identities.
         logger.info('Creating user.')
 
-        if not self._meets_minimum_requirement(identity):
-            # Don't create a User or Editor if this person does not meet the
-            # minimum account quality requirement. It would be nice to provide
-            # some user feedback here, but we can't; exception messages don't
-            # get passed on as template context in Django 1.8. (They do in
-            # 1.10, so this can be revisited in future.)
-            logger.warning('User did not meet minimum requirements; not created.')
-            raise PermissionDenied
+        #if not self._meets_minimum_requirement(identity):
+            #This needs to be reworked to actually check against global_userinfo.
+            #Don't create a User or Editor if this person does not meet the
+            #minimum account quality requirement. It would be nice to provide
+            #some user feedback here, but we can't; exception messages don't
+            #get passed on as template context in Django 1.8. (They do in
+            #1.10, so this can be revisited in future.)
+            #logger.warning('User did not meet minimum requirements; not created.')
+            #raise PermissionDenied
 
-
-        # This will assert that the language code is a real Wikipedia, which
-        # is good - we want to verify that assumption before proceeding.
-        language_code = self._get_language_code(identity)
 
         # -------------------------- Create the user ---------------------------
         try:
@@ -183,8 +125,8 @@ class OAuthBackend(object):
         editor = Editor()
 
         editor.user = user
+
         editor.wp_sub = identity['sub']
-        editor.home_wiki = language_code
         editor.update_from_wikipedia(identity) # This call also saves the editor
 
         logger.info('User and editor successfully created.')
@@ -268,13 +210,8 @@ class OAuthBackend(object):
         user, created = self._get_and_update_user_from_identity(identity)
 
         if created:
-            home_wiki = re.search(r'(\w+).wikipedia.org',
-                                 handshaker.mw_uri).group(1)
 
             try:
-                # It's actually a wiki, right?
-                assert home_wiki in WIKI_DICT
-                user.editor.home_wiki = home_wiki
                 user.editor.save()
             except AssertionError:
                 # Site functionality mostly works if people don't
@@ -301,19 +238,13 @@ class OAuthBackend(object):
 
 
 
-class OAuthInitializeView(FormView):
+class OAuthInitializeView(View):
     """
     Ask Wikipedia for a temporary key/secret for the user, and redirect
     them to their home Wikipedia to confirm authorization.
     """
-    template_name = 'users/oauth_login.html'
-    form_class = HomeWikiForm
 
-    def form_valid(self, form):
-        # The form returns the code for the home wiki (the first element of the
-        # tuple in WIKIS), but we want the URL, so we grab it from WIKI_DICT.
-        home_wiki = WIKI_DICT[form.cleaned_data['home_wiki']]
-
+    def get(self, request, *args, **kwargs):
         # The site might be running under multiple URLs, so find out the current
         # one (and make sure it's legit).
         # The Sites framework was designed for different URLs that correspond to
@@ -325,22 +256,25 @@ class OAuthInitializeView(FormView):
             logger.exception()
             raise PermissionDenied
 
-        logger.info('home_wiki was {home_wiki}, domain was {domain}'.format(home_wiki=home_wiki, domain=domain))
+        # If the user has already logged in, let's not spam the OAuth proider.
+        if self.request.user.is_authenticated():
+            return HttpResponseRedirect('/users/')
+        else:
+            # Get handshaker for the configured wiki oauth URL.
+            handshaker = _get_handshaker()
+            logger.info('handshaker gotten')
 
-        # Get handshaker matching this wiki URL from our dict.
-        handshaker = _get_handshaker(domain, home_wiki)
-        logger.info('handshaker gotten')
+            try:
+                redirect, request_token = handshaker.initiate()
+            except:
+                logger.exception('Handshaker not initiated')
+                raise
 
-        try:
-            redirect, request_token = handshaker.initiate()
-        except:
-            logger.exception('Handshaker not initiated')
-            raise
+            local_redirect = _localize_oauth_redirect(redirect)
 
-        logger.info('handshaker initiated')
-        self.request.session['request_token'] = _dehydrate_token(request_token)
-        self.request.session['home_wiki'] = home_wiki
-        return HttpResponseRedirect(redirect)
+            logger.info('handshaker initiated')
+            self.request.session['request_token'] = _dehydrate_token(request_token)
+            return HttpResponseRedirect(local_redirect)
 
 
 
@@ -361,10 +295,9 @@ class OAuthCallbackView(View):
             logger.exception()
             raise PermissionDenied
 
-        home_wiki = request.session.pop('home_wiki', None)
 
         try:
-            handshaker = _get_handshaker(domain, home_wiki)
+            handshaker = _get_handshaker()
         except AssertionError:
             # get_handshaker will throw AssertionErrors for invalid data.
             logger.exception('Could not find handshaker')

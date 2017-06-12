@@ -197,10 +197,10 @@ def get_median_decision_time(queryset, data_format=JSON):
 def get_wiki_distribution_pie_data(data_format=JSON):
     wiki_data = []
 
-    for wiki in WIKIS:
-        editor_count = Editor.objects.filter(home_wiki=wiki[0]).count()
-        if editor_count:
-            wiki_data.append({'label': wiki[1], 'data': editor_count})
+    #for wiki in WIKIS:
+    #    editor_count = Editor.objects.filter(home_wiki=wiki[0]).count()
+    #    if editor_count:
+    #        wiki_data.append({'label': wiki[1], 'data': editor_count})
 
     # The table will make the most sense if it puts the most popular wikis
     # on top.
@@ -219,14 +219,15 @@ def get_wiki_distribution_bar_data(data_format=JSON):
         else:
             timestamp = datestamp
 
-        for wiki in WIKIS:
-            num_editors = Editor.objects.filter(
-                home_wiki=wiki[0], date_created__lte=datestamp).count()
-            data_series[wiki[1]].insert(0, [timestamp, num_editors])
+        #for wiki in WIKIS:
+        #    num_editors = Editor.objects.filter(
+        #        home_wiki=wiki[0], date_created__lte=datestamp).count()
+        #    data_series[wiki[1]].insert(0, [timestamp, num_editors])
 
         return data_series
 
-    data_series = {wiki[1]: [] for wiki in WIKIS}
+    #data_series = {wiki[1]: [] for wiki in WIKIS}
+    data_series = {}
 
     earliest_date = Editor.objects.earliest('date_created').date_created
     month = timezone.now().date()

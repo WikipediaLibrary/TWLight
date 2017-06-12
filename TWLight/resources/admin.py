@@ -22,7 +22,7 @@ class PartnerAdmin(admin.ModelAdmin):
         """
 
         def label_from_instance(self, obj):
-            return '{editor.wp_username} ({editor.home_wiki})'.format(
+            return '{editor.wp_username}'.format(
                 editor=obj.editor)
 
 

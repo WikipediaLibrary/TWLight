@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse
 from django import forms
 from django.utils.translation import ugettext as _
 
-from .helpers.wiki_list import WIKIS
 from .models import Editor, UserProfile
 
 
@@ -66,21 +65,6 @@ class TermsForm(forms.ModelForm):
             'terms_of_use',
             # Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
             Submit('submit', _('I accept'), css_class='btn btn-default')
-        )
-
-
-
-class HomeWikiForm(forms.Form):
-    home_wiki = forms.ChoiceField(WIKIS)
-
-    def __init__(self, *args, **kwargs):
-        super(HomeWikiForm, self).__init__(*args, **kwargs)
-        self.fields['home_wiki'].label = _('Select your home wiki')
-
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            'home_wiki',
-            Submit('submit', _('Log in'), css_class='btn btn-default btn-block')
         )
 
 
