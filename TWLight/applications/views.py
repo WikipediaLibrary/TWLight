@@ -689,7 +689,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             app.save()
 
         messages.add_message(request, messages.SUCCESS,
-            _('Batch update successful. Thank you for reviewing today.'))
+            _('Batch update successful.'))
 
         return HttpResponseRedirect(reverse_lazy('applications:list'))
 

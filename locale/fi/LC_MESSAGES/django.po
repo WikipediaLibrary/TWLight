@@ -499,7 +499,7 @@ msgid "Set application status"
 msgstr "Aseta hakemuksen tila"
 
 #: TWLight/applications/views.py:654
-msgid "Batch update successful. Thank you for reviewing today."
+msgid "Batch update successful."
 msgstr "Joukkopäivitys onnistui. Kiitos tämänpäiväisistä arvioinneistasi."
 
 #: TWLight/applications/views.py:696

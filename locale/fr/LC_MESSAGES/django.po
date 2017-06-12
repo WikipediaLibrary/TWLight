@@ -387,7 +387,7 @@ msgstr "Cette page contient les applications dont l'accès a probablement expir�
 msgid "Set application status"
 msgstr "Définir le statut de l'application"
 #: TWLight/applications/views.py:629
-msgid "Batch update successful. Thank you for reviewing today."
+msgid "Batch update successful."
 msgstr "Mise à jour par lot réussi. Merci pour votre examen."
 #: TWLight/applications/views.py:670
 msgid "All applications have been marked as sent."

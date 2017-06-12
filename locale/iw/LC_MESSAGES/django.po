@@ -475,7 +475,7 @@ msgid "Set application status"
 msgstr ""
 
 #: TWLight/applications/views.py:684
-msgid "Batch update successful. Thank you for reviewing today."
+msgid "Batch update successful."
 msgstr ""
 
 #: TWLight/applications/views.py:726
