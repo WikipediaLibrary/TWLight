@@ -232,6 +232,28 @@ A few spots just need padding instead of margin.
   padding-top: 20px;
 }
 
+.margin-top-5 {
+  margin-top: 5px;
+}
+
+/*
+Make the form submit in the nav look like the anchors.
+*/
+
+#nav-submit-id-submit {
+  border-radius: 4px;
+  border: none;
+  padding: 10px 15px;
+  background-color: #f8f8f8;
+  color: #337ab7;
+}
+
+#nav-submit-id-submit:focus, #nav-submit-id-submit:hover {
+  background-color: #eee;
+  outline-offset: -2px;
+  color: #23527c;
+}
+
 /*
 ----------------------------------------------------------------------------
 CLEARING COLUMNS

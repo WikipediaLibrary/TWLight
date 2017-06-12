@@ -6,28 +6,10 @@
     </div>
     <div class="col-xs-12 col-sm-9">
       {{ editor.wp_username }}
-      {% if editor.wp_user_page_url %}
-        <br />
-        <a href="{{ editor.wp_user_page_url }}">({% trans "view Wikipedia user page" %})</a>
-      {% endif %}
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="row clearfix">
-    <div class="col-xs-12 col-sm-3">
-      <strong>{% trans "Home wiki" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-9">
-      {% if editor.home_wiki %}
-        {{ editor.get_home_wiki_display }}
-      {% endif %}
       {% if editor.wp_link_sul_info %}
         <br />
         <a href="{{ editor.wp_link_sul_info }}">({% trans "view Wikipedia SUL info" %})</a>
       {% endif %}
-      <br />
     </div>
   </div>
 
@@ -88,19 +70,14 @@
 
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
-      <strong>{% trans "Wikipedia edit count *" %}</strong>
+      <strong>{% trans "Global edit count *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-9">
       {{ editor.wp_editcount }}
-      {% if editor.wp_link_edit_count %}
+      {% if editor.wp_link_guc %}
         <br />
         {# Translators: this links to a Tools page with edit stats for a given wikipedia editor. #}
-        <a href="{{ editor.wp_link_edit_count }}">{% trans "(view latest edit statistics)" %}</a>
-      {% endif %}
-      {% if editor.wp_link_pages_created %}
-        <br />
-        {# Translators: this links to a Tools page which lists all pages created by a given wikipedia editor. #}
-        <a href="{{ editor.wp_link_pages_created }}">{% trans "(view pages created)" %}</a>
+        <a href="{{ editor.wp_link_guc }}">{% trans "(view global user contributions)" %}</a>
       {% endif %}
     </div>
   </div>

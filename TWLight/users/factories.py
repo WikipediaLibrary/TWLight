@@ -8,7 +8,6 @@ import string
 
 from django.contrib.auth.models import User
 
-from TWLight.users.helpers.wiki_list import WIKIS
 from TWLight.users.models import Editor, UserProfile
 
 
@@ -76,5 +75,4 @@ class EditorFactory(factory.django.DjangoModelFactory):
     wp_sub = factory.Sequence(lambda n: n)
     wp_groups = json.dumps(['some groups'])
     wp_rights = json.dumps(['some rights'])
-    home_wiki = WIKIS[0][0]
     contributions = 'Cat floofing, telemetry, fermentation'

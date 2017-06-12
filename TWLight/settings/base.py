@@ -259,16 +259,20 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-WP_OAUTH_BASE_URL = 'https://en.wikipedia.org/w/index.php'
+TWLIGHT_OAUTH_PROVIDER_URL = 'https://meta.wikimedia.org/w/index.php'
 
-CONSUMER_KEY = os.environ.get('TWLIGHT_CONSUMER_KEY', None)
-CONSUMER_SECRET = os.environ.get('TWLIGHT_CONSUMER_SECRET', None)
+TWLIGHT_OAUTH_CONSUMER_KEY = os.environ.get('TWLIGHT_OAUTH_CONSUMER_KEY', None)
+TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get('TWLIGHT_OAUTH_CONSUMER_SECRET', None)
 
 
 
 # COMMENTS CONFIGURATION
 # ------------------------------------------------------------------------------
 
+
+# TAGGIT CONFIGURATION
+# ------------------------------------------------------------------------------
+TAGGIT_CASE_INSENSITIVE = True
 
 
 # REVERSION CONFIGURATION

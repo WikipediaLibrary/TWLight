@@ -14,7 +14,8 @@ import sys
 from .base import *
 try:
     from .production_vars import (SECRET_KEY,
-                                  WP_CREDENTIALS,
+                                  TWLIGHT_OAUTH_CONSUMER_KEY,
+                                  TWLIGHT_OAUTH_CONSUMER_SECRET,
                                   MYSQL_PASSWORD)
 except ImportError:
     # If there's no production_vars file on this system (e.g. because it isn't
@@ -54,7 +55,7 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False # Important, or you will get an SMTPException on wmlabs
-DEFAULT_FROM_EMAIL = 'Wikipedia Library Card Platform <noreply@twl-test.wmflabs.org>'
+DEFAULT_FROM_EMAIL = 'Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>'
 
 # SecurityMiddleware configuration as suggested by
 # python manage.py check --deploy
@@ -72,7 +73,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # default. Also, we'd like to use Site.objects.get_current().domain, but we
 # can't import Site into settings - it's not available when Django first uses
 # the settings file, and the site refuses to load.
-REQUEST_BASE_URL = 'https://twl-test.wmflabs.org'
+REQUEST_BASE_URL = 'https://wikipedialibrary.wmflabs.org'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',

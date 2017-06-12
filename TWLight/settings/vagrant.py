@@ -14,7 +14,9 @@ import sys
 from .base import *
 try:
     from .vagrant_vars import (SECRET_KEY,
-                                  WP_CREDENTIALS,
+                                  TWLIGHT_OAUTH_PROVIDER_URL,
+                                  TWLIGHT_OAUTH_CONSUMER_KEY,
+                                  TWLIGHT_OAUTH_CONSUMER_SECRET,
                                   MYSQL_PASSWORD,
                                   ALLOWED_HOSTS,
                                   DEBUG,

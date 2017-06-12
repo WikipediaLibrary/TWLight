@@ -39,8 +39,6 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
-from .helpers.wiki_list import WIKIS
-
 
 logger = logging.getLogger(__name__)
 
@@ -87,7 +85,6 @@ class Editor(models.Model):
         # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
         verbose_name = 'wikipedia editor'
         verbose_name_plural = 'wikipedia editors'
-        unique_together = ('wp_sub', 'home_wiki')
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
@@ -105,7 +102,8 @@ class Editor(models.Model):
         help_text=_("Username"))
     wp_editcount = models.IntegerField(help_text=_("Wikipedia edit count"))
     wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"))
-    wp_sub = models.IntegerField(help_text=_("Wikipedia user ID")) # WP user id.
+    wp_sub = models.IntegerField(unique=True,
+        help_text=_("Wikipedia user ID")) # WP user id.
 
     # Should we want to filter these to check for specific group membership or
     # user rights in future:
@@ -119,8 +117,6 @@ class Editor(models.Model):
 
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    home_wiki = models.CharField(max_length=15, choices=WIKIS,
-        help_text=_("Home wiki, as indicated by user"))
     contributions = models.TextField(
         help_text=_("Wiki contributions, as entered by user"),
         blank=True)
@@ -136,46 +132,30 @@ class Editor(models.Model):
 
     @cached_property
     def wp_user_page_url(self):
-        if self.get_home_wiki_display():
-            # This works even if their home wiki isn't English - 'User'
-            # gets localized appropriately.
-            url = u'https://{home_wiki}/wiki/User:{self.wp_username}'.format(
-                home_wiki=self.get_home_wiki_display(), self=self)
-        else:
-            url = None
+        url = u'{base_url}/User:{self.wp_username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
         return url
 
 
     @cached_property
     def wp_talk_page_url(self):
-        if self.get_home_wiki_display():
-            # This works even if their home wiki isn't English - 'User_talk'
-            # gets localized appropriately.
-            url = u'https://{home_wiki}/wiki/User_talk:{self.wp_username}'.format(
-                home_wiki=self.get_home_wiki_display(), self=self)
-        else:
-            url = None
+        url = u'{base_url}/User_talk:{self.wp_username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
         return url
 
 
     @cached_property
     def wp_email_page_url(self):
-        if self.get_home_wiki_display():
-            # This works even if their home wiki isn't English - 'User_talk'
-            # gets localized appropriately.
-            url = u'https://{home_wiki}/wiki/Special:EmailUser/{self.wp_username}'.format(
-                home_wiki=self.get_home_wiki_display(), self=self)
-        else:
-            url = None
+        url = u'{base_url}/Special:EmailUser/{self.wp_username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
         return url
 
 
     @cached_property
-    def wp_link_edit_count(self):
-        url = u'{base_url}?user={self.wp_username}&project={home_wiki}'.format(
-            base_url='https://tools.wmflabs.org/xtools-ec/',
-            self=self,
-            home_wiki=self.get_home_wiki_display()
+    def wp_link_guc(self):
+        url = u'{base_url}?user={self.wp_username}'.format(
+            base_url='https://tools.wmflabs.org/guc/',
+            self=self
         )
         return url
 
@@ -185,16 +165,6 @@ class Editor(models.Model):
         url = u'{base_url}?username={self.wp_username}'.format(
             base_url='https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php',
             self=self
-        )
-        return url
-
-
-    @cached_property
-    def wp_link_pages_created(self):
-        url = u'{base_url}?user={self.wp_username}&project={home_wiki}&namespace=all&redirects=none'.format(
-            base_url='https://tools.wmflabs.org/xtools/pages/index.php',
-            self=self,
-            home_wiki=self.get_home_wiki_display()
         )
         return url
 
@@ -216,7 +186,7 @@ class Editor(models.Model):
         return json.loads(self.wp_groups)
 
 
-    def _is_user_valid(self, identity):
+    def _is_user_valid(self, identity, global_userinfo):
         """
         Check for the eligibility criteria laid out in the terms of service.
         To wit, users must:
@@ -233,18 +203,15 @@ class Editor(models.Model):
         """
         try:
             # Check: >= 500 edits
-            assert int(identity['editcount']) >= 500
+            assert int(global_userinfo['editcount']) >= 500
 
             # Check: registered >= 6 months ago
             reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
             assert datetime.today().date() - timedelta(days=182) >= reg_date
 
             # Check: Special:Email User enabled
-            endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=options'.format(base=identity['iss'])
-            userinfo = json.loads(urllib2.urlopen(endpoint).read())
-
-            disablemail = userinfo['query']['userinfo']['options']['disablemail']
-            assert int(disablemail) == 0
+            #disablemail = userinfo['options']['disablemail']
+            #assert int(disablemail) == 0
 
             # Check: not blocked
             assert identity['blocked'] == False
@@ -255,6 +222,54 @@ class Editor(models.Model):
                 editor=self))
             return False
 
+    def get_userinfo(self, identity):
+        """
+        Not currently used, since we're not accessing the API logged in.
+        Grab local user information from the API, which we'll use to overlay
+        somme local wiki user info returned by OAuth.  Returns a dict like:
+
+        userinfo:
+          id:                 27666025
+          name:               "Example"
+          options:            Lists all preferences the current user has set.
+          email:              "nomail@example.com"
+          emailauthenticated: "1969-12-31T11:59:59Z"
+        """
+
+        endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=centralids|email|options'.format(base=identity['iss'])
+
+        results = json.loads(urllib2.urlopen(endpoint).read())
+        userinfo = results['query']['userinfo']
+
+        try:
+            assert userinfo['centralids']['CentralAuth'] == identity['sub']
+        except AssertionError:
+            logger.exception('Was asked to get userinfo, but '
+                'WP sub in the identity passed in did not match the wp_sub on '
+                'in the current API context.')
+            pass
+
+        return userinfo
+
+    def get_global_userinfo(self, identity):
+        """
+        Grab global user information from the API, which we'll use to overlay
+        somme local wiki user info returned by OAuth.  Returns a dict like:
+
+        global_userinfo:
+          home:         "zhwikisource"
+          id:           27666025
+          registration: "2013-05-05T16:00:09Z"
+          name:         "Example"
+          editcount:    10
+        """
+
+        endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=identity['username'])
+
+        results = json.loads(urllib2.urlopen(endpoint).read())
+        global_userinfo = results['query']['globaluserinfo']
+
+        return global_userinfo
 
     def update_from_wikipedia(self, identity):
         """
@@ -291,13 +306,16 @@ class Editor(models.Model):
                 'the instance. Not updating.')
             raise
 
+        global_userinfo = self.get_global_userinfo(identity)
+        #userinfo = self.get_userinfo(identity)
+
         self.wp_username = identity['username']
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
-        self.wp_editcount = identity['editcount']
+        self.wp_editcount = global_userinfo['editcount']
         reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
         self.wp_registered = reg_date
-        self.wp_valid = self._is_user_valid(identity)
+        self.wp_valid = self._is_user_valid(identity, global_userinfo)
         self.save()
 
         # This will be True the first time the user logs in, since use_wp_email
@@ -309,16 +327,15 @@ class Editor(models.Model):
             except KeyError:
                 # Email isn't guaranteed to be present in identity - don't do
                 # anything if we can't find it.
+                logger.exception('Unable to get Editor email address from Wikipedia.')
                 pass
 
         self.user.save()
 
 
     def __unicode__(self):
-        # Translators: This is how we display wikipedia editors' names by default. e.g. "ThatAndromeda (en.wikipedia.org)".
-        return _(u'{wp_username} ({wiki})').format(
-            wp_username=self.wp_username,
-            wiki=self.get_home_wiki_display())
+        return _(u'{wp_username}').format(
+            wp_username=self.wp_username)
 
 
     def get_absolute_url(self):
