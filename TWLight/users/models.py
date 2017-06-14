@@ -264,7 +264,7 @@ class Editor(models.Model):
           editcount:    10
         """
 
-        endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=identity['username'])
+        endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=urllib2.quote(identity['username']))
 
         results = json.loads(urllib2.urlopen(endpoint).read())
         global_userinfo = results['query']['globaluserinfo']
