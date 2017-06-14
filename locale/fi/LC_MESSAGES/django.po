@@ -57,10 +57,6 @@ msgstr "Ammattisi"
 msgid "Your institutional affiliation"
 msgstr "Instituutiosi"
 
-#: TWLight/applications/helpers.py:86
-msgid "Partner name"
-msgstr "Julkaisijan nimi"
-
 #: TWLight/applications/helpers.py:87
 msgid "Why do you want access to this resource?"
 msgstr "Miksi haluat käyttöoikeuden tähän aineistoon?"
@@ -83,10 +79,6 @@ msgid ""
 msgstr ""
 "Sinun täytyy hyväksyä yhteistyökumppanin käyttöehdot saadaksesi "
 "käyttöoikeuden aineistoon"
-
-#: TWLight/applications/helpers.py:104
-msgid "Username"
-msgstr "Käyttäjätunnus"
 
 #: TWLight/applications/helpers.py:105
 msgid "Email"
@@ -381,13 +373,6 @@ msgstr "(lisää tietoa)"
 msgid "No partner data has been added yet."
 msgstr "Yhteistyökumppanin tietoja ei ole lisätty vielä tietokantaan."
 
-#: TWLight/applications/templates/applications/request_for_application.html:42
-#: TWLight/resources/templates/resources/partner_detail.html:18
-#: TWLight/resources/templates/resources/partner_detail.html:21
-#: TWLight/templates/base.html:55
-msgid "Apply"
-msgstr "Hae käyttöoikeutta"
-
 #: TWLight/applications/templates/applications/send.html:6
 msgid "Partners with approved, unsent applications"
 msgstr ""
@@ -453,26 +438,10 @@ msgstr ""
 "Hakemuksesi on lähetetty. Koordinaattorimme arvioi sen ja ottaa sinuun "
 "yhteyttä. Voit tarkistaa hakemuksesi tilan tällä sivulla milloin tahansa."
 
-#: TWLight/applications/views.py:312
-msgid ""
-"Your application has been submitted for review. You can check the status of "
-"your applications on this page."
-msgstr ""
-"Hakemuksesi on lähetetty. Koordinaattorimme arvioi sen ja ottaa sinuun "
-"yhteyttä. Voit tarkistaa hakemuksesi tilan käyttäjäsivullasi milloin tahansa."
-
 #. Translators: Editor = wikipedia editor, gender unknown.
 #: TWLight/applications/views.py:441
 msgid "Editor"
 msgstr "Muokkaaja"
-
-#: TWLight/applications/views.py:442
-msgid "Partner"
-msgstr "Julkaisija"
-
-#: TWLight/applications/views.py:479
-msgid "Applications to review"
-msgstr "Arvioitavien hakemusten määrä"
 
 #: TWLight/applications/views.py:504
 msgid "Approved applications"

@@ -58,10 +58,6 @@ msgstr ""
 msgid "Your institutional affiliation"
 msgstr ""
 
-#: TWLight/applications/helpers.py:86
-msgid "Partner name"
-msgstr ""
-
 #: TWLight/applications/helpers.py:87
 msgid "Why do you want access to this resource?"
 msgstr ""
@@ -357,13 +353,6 @@ msgstr ""
 msgid "No partner data has been added yet."
 msgstr ""
 
-#: TWLight/applications/templates/applications/request_for_application.html:51
-#: TWLight/resources/templates/resources/partner_detail.html:36
-#: TWLight/resources/templates/resources/partner_detail.html:56
-#: TWLight/templates/base.html:55
-msgid "Apply"
-msgstr ""
-
 #. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did earlier in this file.
 #: TWLight/applications/templates/applications/request_for_application.html:57
 msgid ""
@@ -435,19 +424,9 @@ msgid ""
 "become available."
 msgstr ""
 
-#: TWLight/applications/views.py:330
-msgid ""
-"Your application has been submitted for review. You can check the status of "
-"your applications on this page."
-msgstr ""
-
 #. Translators: Editor = wikipedia editor, gender unknown.
 #: TWLight/applications/views.py:481
 msgid "Editor"
-msgstr ""
-
-#: TWLight/applications/views.py:482
-msgid "Partner"
 msgstr ""
 
 #: TWLight/applications/views.py:509

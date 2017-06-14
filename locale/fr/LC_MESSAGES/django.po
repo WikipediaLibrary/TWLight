@@ -47,9 +47,6 @@ msgstr "Votre profession"
 #: TWLight/applications/helpers.py:85
 msgid "Your institutional affiliation"
 msgstr "Votre affiliation institutionnelle"
-#: TWLight/applications/helpers.py:86
-msgid "Partner name"
-msgstr "Nom de ressource"
 #: TWLight/applications/helpers.py:87
 msgid "Why do you want access to this resource?"
 msgstr "Pourquoi voulez-vous accéder à cette ressource?"
@@ -66,9 +63,6 @@ msgstr "Tout ce que vous souhaitez exprimer en plus"
 msgid ""
 "You must agree with the partner's terms of use"
 msgstr "Vous devez accepter les conditions d'utilisation du partenaire pour accéder à leurs ressources"
-#: TWLight/applications/helpers.py:104
-msgid "Username"
-msgstr "Nom d'utilisateur"
 #: TWLight/applications/helpers.py:105
 msgid "Email"
 msgstr "Courriel"
@@ -255,12 +249,6 @@ msgstr "(plus d'info)"
 #: TWLight/resources/templates/resources/partner_list.html:15
 msgid "No partner data has been added yet."
 msgstr "Aucune donnée n'a encore été ajouté à la base de données pour ce partenaire"
-#: TWLight/applications/templates/applications/request_for_application.html:42
-#: TWLight/resources/templates/resources/partner_detail.html:18
-#: TWLight/resources/templates/resources/partner_detail.html:21
-#: TWLight/templates/base.html:55
-msgid "Apply"
-msgstr "Demande d'accès"
 #: TWLight/applications/templates/applications/send.html:6
 msgid "Partners with approved, unsent applications"
 msgstr "Partenaires avec applications approuvés non encore envoyées"
@@ -307,19 +295,10 @@ msgid ""
 "your applications on this page."
 msgstr "Votre demande a été soumise. Un coordonnateur l'examinera et vous répondra. "
 "Vous pouvez consulter l'état de votre demande sur cette page."
-#: TWLight/applications/views.py:311
-msgid ""
-"Your application has been submitted for review. You can check the status of "
-"your applications on this page."
-msgstr "Vos demandes ont été soumises. Un coordonnateur les examinera et vous répondra. "
-"Vous pouvez consulter l'état de vos demandes sur cette page."
 #. Translators: Editor = wikipedia editor, gender unknown.
 #: TWLight/applications/views.py:420
 msgid "Editor"
 msgstr "Utilisateur"
-#: TWLight/applications/views.py:421
-msgid "Partner"
-msgstr "Maison d'édition"
 #: TWLight/applications/views.py:457
 msgid "Applications to review"
 msgstr "File d'attente des demandes"
