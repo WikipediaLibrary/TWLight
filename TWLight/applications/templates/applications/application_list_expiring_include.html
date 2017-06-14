@@ -31,13 +31,17 @@
           {{ app }}
         </a>
         &mdash;
-        {% blocktrans trimmed with reviewer=app.parent.get_latest_reviewer review_date=app.parent.get_latest_review_date|localize %}
-          {% if reviewer %}
-            Approved by {{ reviewer }} on {{ review_date }}
+        {% if app.parent.get_latest_review_date %}
+          {% if app.parent.get_latest_reviewer %}
+            {% blocktrans trimmed with reviewer=app.parent.get_latest_reviewer review_date=app.parent.get_latest_review_date|localize %}
+              Approved by {{ reviewer }} on {{ review_date }}
+            {% endblocktrans %}
           {% else %}
-            Approved on {{ review_date }}            
+            {% blocktrans trimmed with review_date=app.parent.get_latest_review_date|localize %}
+              Approved on {{ review_date }}
+            {% endblocktrans %}
           {% endif %}
-        {% endblocktrans %}
+        {% endif %}
       </li>
     {% empty %}
       <li>{% trans 'No applications right now.' %}</li>
