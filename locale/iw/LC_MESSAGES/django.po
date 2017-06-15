@@ -596,7 +596,7 @@ msgstr ""
 
 #: TWLight/resources/models.py:106
 msgid ""
-"Partner organization's name (e.g. McFarland). Note: this will be user-"
+"Partner's name (e.g. McFarland). Note: this will be user-"
 "visible and *not translated*."
 msgstr ""
 

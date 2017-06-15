@@ -107,7 +107,7 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     company_name = models.CharField(max_length=40,
-        help_text=_("Partner organization's name (e.g. McFarland). Note: "
+        help_text=_("Partner's name (e.g. McFarland). Note: "
         "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
     coordinator = models.ForeignKey(User, blank=True, null=True,

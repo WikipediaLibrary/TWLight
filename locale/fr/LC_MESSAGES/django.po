@@ -444,7 +444,7 @@ msgid "Number of unique users who have applied to {partner}"
 msgstr "Nombre d'utilisateurs uniques qui ont demandé des ressources de {partner}"
 #: TWLight/resources/models.py:25
 msgid ""
-"Partner organization's name (e.g. McFarland). Note: this will be user-"
+"Partner's name (e.g. McFarland). Note: this will be user-"
 "visible and *not translated*."
 msgstr "Nom de partenaire (eg. McFarland). Attention: ce sera visible à l'utilisateur et *non traduites*"
 #: TWLight/resources/models.py:34
