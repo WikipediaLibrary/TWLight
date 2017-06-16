@@ -472,21 +472,21 @@ msgid ""
 msgstr "La durée normale d'accès de ce partenaire. Entrez comme '365 jours' ou '365d' ou '1 an'."
 #: TWLight/resources/models.py:67
 msgid ""
-"Mark as true if this partner requires applicants to specify their real names."
+"Mark as true if this partner requires applicant names."
 msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient leurs noms."
 #: TWLight/resources/models.py:70
 msgid ""
-"Mark as true if this partner requires applicants to specify their countries "
+"Mark as true if this partner requires applicant countries "
 "of residence."
 msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient leurs pays de résidence."
 #: TWLight/resources/models.py:73
 msgid ""
-"Mark as true if this partner requires applicants to specify a particular "
+"Mark as true if this partner requires applicants to specify the "
 "title they want to access."
 msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient le titre qu'ils veulent accéder."
 #: TWLight/resources/models.py:76
 msgid ""
-"Mark as true if this partner requires applicants to specify a particular "
+"Mark as true if this partner requires applicants to specify the "
 "database they want to access."
 msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient la collection qu'ils veulent accéder."
 #: TWLight/resources/models.py:79
@@ -584,7 +584,7 @@ msgstr "\n%(publisher)s exige que vous fournissiez votre affiliation institution
 #, python-format
 msgid ""
 "\n"
-" %(publisher)s requires that you specify a particular title "
+" %(publisher)s requires that you specify the title "
 "that you want\n"
 " to access.\n"
 ""

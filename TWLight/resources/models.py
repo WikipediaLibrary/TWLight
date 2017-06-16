@@ -189,17 +189,16 @@ class Partner(models.Model):
     # whether *this* resource requires those optional fields.
 
     real_name = models.BooleanField(default=False,
-        help_text=_('Mark as true if this partner requires applicants to '
-                    'specify their real names.'))
+        help_text=_('Mark as true if this partner requires applicant names.'))
     country_of_residence = models.BooleanField(default=False,
-        help_text=_('Mark as true if this partner requires applicants to '
-                    'specify their countries of residence.'))
+        help_text=_('Mark as true if this partner requires applicant countries '
+                    'of residence.'))
     specific_title = models.BooleanField(default=False,
         help_text=_('Mark as true if this partner requires applicants to '
-                    'specify a particular title they want to access.'))
+                    'specify the title they want to access.'))
     specific_stream = models.BooleanField(default=False,
         help_text=_('Mark as true if this partner requires applicants to '
-                    'specify a particular database they want to access.'))
+                    'specify the database they want to access.'))
     occupation = models.BooleanField(default=False,
         help_text=_('Mark as true if this partner requires applicants to '
                     'specify their occupation.'))

@@ -656,24 +656,24 @@ msgstr ""
 
 #: TWLight/resources/models.py:188
 msgid ""
-"Mark as true if this partner requires applicants to specify their real names."
+"Mark as true if this partner requires applicant names."
 msgstr ""
 
 #: TWLight/resources/models.py:191
 msgid ""
-"Mark as true if this partner requires applicants to specify their countries "
+"Mark as true if this partner requires applicant countries "
 "of residence."
 msgstr ""
 
 #: TWLight/resources/models.py:194
 msgid ""
-"Mark as true if this partner requires applicants to specify a particular "
+"Mark as true if this partner requires applicants to specify the "
 "title they want to access."
 msgstr ""
 
 #: TWLight/resources/models.py:197
 msgid ""
-"Mark as true if this partner requires applicants to specify a particular "
+"Mark as true if this partner requires applicants to specify the "
 "database they want to access."
 msgstr ""
 
@@ -837,7 +837,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                  %(publisher)s requires that you specify a particular title "
+"                  %(publisher)s requires that you specify the title "
 "that you want\n"
 "                  to access.\n"
 "                "

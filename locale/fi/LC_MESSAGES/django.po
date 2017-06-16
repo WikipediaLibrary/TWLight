@@ -643,19 +643,19 @@ msgstr "Standardi käyttöoikeuden kestoaika yhteistyömppanilta. Esim. 1 vuosi.
 
 #: TWLight/resources/models.py:175
 msgid ""
-"Mark as true if this partner requires applicants to specify their real names."
+"Mark as true if this partner requires applicant names."
 msgstr ""
 "Rastita, mikäli yhteistyökumppani vaatii hakijan esittävän oikean nimensä."
 
 #: TWLight/resources/models.py:178
 msgid ""
-"Mark as true if this partner requires applicants to specify their countries "
+"Mark as true if this partner requires applicant countries "
 "of residence."
 msgstr "Rastita, mikäli yhteistyökumppani vaatii hakijan nimeävän asuinmaansa."
 
 #: TWLight/resources/models.py:181
 msgid ""
-"Mark as true if this partner requires applicants to specify a particular "
+"Mark as true if this partner requires applicants to specify the "
 "title they want to access."
 msgstr ""
 "Rastita, mikäli yhteistyökumppani vaatii hakijan määrittelevän tarkasti, "
@@ -663,7 +663,7 @@ msgstr ""
 
 #: TWLight/resources/models.py:184
 msgid ""
-"Mark as true if this partner requires applicants to specify a particular "
+"Mark as true if this partner requires applicants to specify the "
 "database they want to access."
 msgstr ""
 "Rastita, mikäli yhteistyökumppani vaatii hakijan määrittelevän tarkasti, "
@@ -824,7 +824,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                  %(publisher)s requires that you specify a particular title "
+"                  %(publisher)s requires that you specify the title "
 "that you want\n"
 "                  to access.\n"
 "                "
