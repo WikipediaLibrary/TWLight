@@ -449,8 +449,8 @@ msgid ""
 msgstr "Nom de partenaire (eg. McFarland). Attention: ce sera visible à l'utilisateur et *non traduites*"
 #: TWLight/resources/models.py:34
 msgid ""
-"Link to terms of use. Required if this company requires that users agree to "
-"terms of use as a condition of applying for access; optional otherwise."
+"Link to terms of use. Required if users must agree to "
+"terms of use to get access; optional otherwise."
 msgstr "Lien aux conditions d'utilisation. Requis si ce partenaire exige que les utilisateurs acceptent les "" conditions d'utilisation pour recevoir l'accès; sinon facultatif"
 #: TWLight/resources/models.py:38
 msgid "Optional description of this partner's offerings."

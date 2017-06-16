@@ -622,8 +622,8 @@ msgstr ""
 
 #: TWLight/resources/models.py:145
 msgid ""
-"Link to terms of use. Required if this company requires that users agree to "
-"terms of use as a condition of applying for access; optional otherwise."
+"Link to terms of use. Required if users must agree to "
+"terms of use to get access; optional otherwise."
 msgstr ""
 
 #: TWLight/resources/models.py:149

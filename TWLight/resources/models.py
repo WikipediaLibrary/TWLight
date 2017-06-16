@@ -151,9 +151,8 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     terms_of_use = models.URLField(blank=True, null=True,
-        help_text=_("Link to terms of use. Required if this company requires "
-            "that users agree to terms of use as a condition of applying for "
-            "access; optional otherwise."))
+        help_text=_("Link to terms of use. Required if users must agree to "
+            "terms of use to get access; optional otherwise."))
     description = models.TextField(blank=True, null=True,
         help_text=_("Optional description of this partner's offerings. You can "
             "enter wikicode and it should render properly - if it does not, the "
