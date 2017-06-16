@@ -1086,7 +1086,7 @@ msgstr ""
 msgid ""
 "Once you have access we encourage you to use the databases for both research "
 "that creates or improves Wikimedia content and serves your other research "
-"needs.  Please research anything you want with your access!"
+"needs."
 msgstr ""
 
 #: TWLight/templates/about.html:71
