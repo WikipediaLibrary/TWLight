@@ -1495,13 +1495,13 @@ msgid "Your email has been changed to {email}."
 msgstr "Votre courriel a été changé à {email}."
 #: TWLight/users/views.py:316
 msgid ""
-"You may explore the site, but you will not be able to apply for access to "
-"materials or evaluate applications unless you agree with the terms of use."
+"You may explore the site, but you will not be able to apply for access "
+"unless you agree with the terms of use."
 msgstr "Vous pouvez explorer le site, mais vous ne serez pas en mesure de demander l'accès aux ressources ou évaluer les demandes, sauf si vous êtes d'accord avec les conditions d'utilisation."
 #: TWLight/users/views.py:320
 msgid ""
-"You may explore the site, but you will not be able to apply for access to "
-"materials unless you agree with the terms of use."
+"You may explore the site, but you will not be able to apply for access "
+"unless you agree with the terms of use."
 msgstr "Vous pouvez explorer le site, mais vous ne serez pas en mesure de demander l'accès aux ressources, sauf si vous êtes d'accord avec les conditions d'utilisation."
 #: TWLight/views.py:47
 #, python-brace-format

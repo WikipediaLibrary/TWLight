@@ -2227,16 +2227,16 @@ msgstr "Sähköpostiksesi on vaihdettu {email}."
 
 #: TWLight/users/views.py:320
 msgid ""
-"You may explore the site, but you will not be able to apply for access to "
-"materials or evaluate applications unless you agree with the terms of use."
+"You may explore the site, but you will not be able to apply for access "
+"unless you agree with the terms of use."
 msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
 #: TWLight/users/views.py:324
 msgid ""
-"You may explore the site, but you will not be able to apply for access to "
-"materials unless you agree with the terms of use."
+"You may explore the site, but you will not be able to apply for access "
+"unless you agree with the terms of use."
 msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon ennen kuin "
 "hyväksyt käyttöehdot."

@@ -1930,14 +1930,14 @@ msgstr ""
 
 #: TWLight/users/views.py:320
 msgid ""
-"You may explore the site, but you will not be able to apply for access to "
-"materials or evaluate applications unless you agree with the terms of use."
+"You may explore the site, but you will not be able to apply for access "
+"unless you agree with the terms of use."
 msgstr ""
 
 #: TWLight/users/views.py:324
 msgid ""
-"You may explore the site, but you will not be able to apply for access to "
-"materials unless you agree with the terms of use."
+"You may explore the site, but you will not be able to apply for access "
+"unless you agree with the terms of use."
 msgstr ""
 
 #: TWLight/views.py:48
