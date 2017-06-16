@@ -1322,7 +1322,7 @@ msgstr ""
 #: TWLight/templates/home.html:7
 msgid ""
 "Welcome to the Wikipedia Library Card Platform! Here you can apply for "
-"access to dozens of extensive research databases and other resources "
+"access to dozens of extensive research resources "
 "available through The Wikipedia Library."
 msgstr ""
 
