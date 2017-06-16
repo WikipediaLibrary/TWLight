@@ -703,10 +703,10 @@ msgid "About the Wikipedia Library"
 msgstr "La Bibliothèque Wikipédia"
 #: TWLight/templates/about.html:9
 msgid ""
-"The Wikipedia Library provides free access to research materials from a "
-"variety of sources, to improve your ability to contribute content to the "
-"Wikimedia projects. Partners include a wide range of databases that offer "
-"access to books, journals, newspapers, videos, and other useful materials."
+"The Wikipedia Library provides free access to research materials "
+"to improve your ability to contribute content to the Wikimedia projects."
+
+
 msgstr "La Bibliothèque Wikipédia offre accès gratuit aux documents de recherche à partir d'une "" variété de sources, afin d'améliorer votre capacité à contribuer aux "" projets Wikimedia. Les partenaires comprennent un large éventail de maisons d'édition qui offrent "" l'accès à des livres, des revues, des journaux, des vidéos et d'autres matériaux utiles"
 #: TWLight/templates/about.html:16
 msgid ""
