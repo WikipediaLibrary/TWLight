@@ -1394,10 +1394,6 @@ msgstr ""
 msgid "I accept"
 msgstr ""
 
-#: TWLight/users/forms.py:86
-msgid "Log in"
-msgstr ""
-
 #: TWLight/users/models.py:63
 msgid "Has this user agreed with the terms of use?"
 msgstr ""
@@ -1927,12 +1923,6 @@ msgid "Your email has been changed to {email}."
 msgstr ""
 
 #: TWLight/users/views.py:320
-msgid ""
-"You may explore the site, but you will not be able to apply for access "
-"unless you agree with the terms of use."
-msgstr ""
-
-#: TWLight/users/views.py:324
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
