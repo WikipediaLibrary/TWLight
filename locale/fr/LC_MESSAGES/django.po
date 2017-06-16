@@ -1014,9 +1014,6 @@ msgstr "Je suis d'accord avec les conditions d'utilisation"
 #: TWLight/users/forms.py:69
 msgid "I accept"
 msgstr "Je suis d'accord"
-#: TWLight/users/forms.py:85
-msgid "Log in"
-msgstr "Se connecter"
 #: TWLight/users/models.py:60
 msgid "Has this user agreed with the terms of use?"
 msgstr "Est-ce que cet utilisateur est d'accord avec les conditions d'utilisation?"
@@ -1498,11 +1495,6 @@ msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
 msgstr "Vous pouvez explorer le site, mais vous ne serez pas en mesure de demander l'accès aux ressources ou évaluer les demandes, sauf si vous êtes d'accord avec les conditions d'utilisation."
-#: TWLight/users/views.py:320
-msgid ""
-"You may explore the site, but you will not be able to apply for access "
-"unless you agree with the terms of use."
-msgstr "Vous pouvez explorer le site, mais vous ne serez pas en mesure de demander l'accès aux ressources, sauf si vous êtes d'accord avec les conditions d'utilisation."
 #: TWLight/views.py:47
 #, python-brace-format
 msgid "{username} signed up for a Wikipedia Library Card Platform account"
