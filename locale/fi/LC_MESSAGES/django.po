@@ -1109,9 +1109,9 @@ msgstr ""
 msgid ""
 "If you don't quite meet the experience requirements but think you would "
 "still be a strong candidate for access, feel free to apply and you may still "
-"be considered.  Note that \"home wiki\" can mean any Wikipedia you are "
-"active on, your native language version &mdash; in any case, simply one "
-"where you've chosen to enable email."
+"be considered.  Note that \"home wiki\" can mean any Wikipedia you are active on."
+
+
 msgstr ""
 "Vaikka et täyttäisi vaatimuksia, mutta koet että olisit hyvä ehdokas, hae "
 "silti. Arvioimme hakijat tapauskohtaisesti. Huomaathan, että \"kotiwiki\" "

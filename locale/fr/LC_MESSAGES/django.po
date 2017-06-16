@@ -760,9 +760,9 @@ msgstr "Vous ne l'avez pas déjà accès aux ressources que vous demandez à tra
 msgid ""
 "If you don't quite meet the experience requirements but think you would "
 "still be a strong candidate for access, feel free to apply and you may still "
-"be considered. Note that \"home wiki\" can mean any Wikipedia you are "
+"be considered. Note that \"home wiki\" can mean any Wikipedia you are active on."
 "active on, your native language version — in any case, simply one "
-"where you've chosen to enable email."
+
 msgstr "Si vous ne répondez pas tout à fait aux exigences d'expérience, mais pensez que vous êtes encore un bon candidat pour l'accès, soumettre une demande et vous pourriez être considéré. Notez que \"wiki principal\" peut signifier toute Wikipédias sur lequel vous êtes actif - tout simplement un où vous avez donné votre courrier électronique"
 #: TWLight/templates/about.html:62
 msgid "What do I do after I get access?"
