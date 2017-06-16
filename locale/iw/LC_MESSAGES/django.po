@@ -1432,8 +1432,8 @@ msgstr ""
 
 #: TWLight/users/models.py:113
 msgid ""
-"At their last login, did this user meet the criteria set forth in the "
-"Wikipedia Library Card Platform terms of use?"
+"At their last login, did this user meet the criteria in the terms of use?"
+
 msgstr ""
 
 #: TWLight/users/models.py:120
@@ -1512,7 +1512,7 @@ msgstr ""
 
 #: TWLight/users/templates/users/editor_detail_data.html:57
 msgid ""
-"At their last login, did this user meet the criteria set forth in the terms "
+"At their last login, did this user meet the criteria in the terms "
 "of use (at least 500 edits, registered at least 6 months ago, has Special:"
 "Email User enabled, not blocked)?"
 msgstr ""

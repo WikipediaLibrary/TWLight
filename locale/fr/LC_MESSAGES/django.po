@@ -1043,8 +1043,8 @@ msgid "Wikipedia user rights"
 msgstr "Droits d'accès à Wikipédia"
 #: TWLight/users/models.py:110
 msgid ""
-"At their last login, did this user meet the criteria set forth in the "
-"Wikipedia Library Card Platform terms of use?"
+"At their last login, did this user meet the criteria in the terms of use?"
+
 msgstr "Lors de leur dernière connexion, est-ce que cet utilisateur répond aux critères énoncés dans les conditions d'utilisation?"
 #: TWLight/users/models.py:117
 msgid "Home wiki, as indicated by user"

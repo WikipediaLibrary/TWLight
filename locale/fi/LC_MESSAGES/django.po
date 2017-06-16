@@ -1523,8 +1523,8 @@ msgstr "Käyttäjäoikeudet Wikipediassa"
 
 #: TWLight/users/models.py:112
 msgid ""
-"At their last login, did this user meet the criteria set forth in the "
-"Wikipedia Library Card Platform terms of use?"
+"At their last login, did this user meet the criteria in the terms of use?"
+
 msgstr ""
 "Tåyttikö käyttäjä viimeisimmässä kirjautumisessaan Wikipedian Lähdekirjaston "
 "Käyttöoikeustoimiston käyttöehdot?"
