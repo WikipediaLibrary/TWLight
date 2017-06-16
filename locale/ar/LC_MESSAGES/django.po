@@ -1348,7 +1348,7 @@ msgstr ""
 
 #: TWLight/templates/registration/password_reset_form.html:8
 msgid ""
-"Forgotten your password? Enter your email address below, and we'll email "
+"Forgot your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
 

@@ -980,7 +980,7 @@ msgid "Reset password"
 msgstr "Réinitialiser votre mot de passe"
 #: TWLight/templates/registration/password_reset_form.html:8
 msgid ""
-"Forgotten your password? Enter your email address below, and we'll email "
+"Forgot your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr "Mot de passe oublié? Entrez votre courriel ci-dessous, et nous vous enverrons"
 #: TWLight/users/authorization.py:268
