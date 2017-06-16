@@ -812,8 +812,8 @@ msgid ""
 msgstr "fouiller des métadonnées sans permission, par exemple pour la création automatique d'ébauches"
 #: TWLight/templates/about.html:110
 msgid ""
-"Respecting these agreements allows us to continue growing the number and "
-"scope of partnerships available to our entire community."
+"Respecting these agreements allows us to continue growing the "
+"partnerships available to our entire community."
 msgstr "Le respect de ces accords nous permet de continuer à augmenter le nombre de partenariats à la disposition de notre communauté."
 #: TWLight/templates/about.html:118
 #, python-format

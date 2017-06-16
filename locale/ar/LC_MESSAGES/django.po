@@ -1140,8 +1140,8 @@ msgstr ""
 
 #: TWLight/templates/about.html:110
 msgid ""
-"Respecting these agreements allows us to continue growing the number and "
-"scope of partnerships available to our entire community."
+"Respecting these agreements allows us to continue growing the "
+"partnerships available to our entire community."
 msgstr ""
 
 #. Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if you use other tags on your wiki. If you're not sure how to handle this section, take your best guess and give the developer a heads-up.
