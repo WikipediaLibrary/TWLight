@@ -1052,7 +1052,7 @@ msgstr ""
 
 #: TWLight/templates/about.html:40
 msgid ""
-"You have your preferences enabled to receive email messages on your home wiki"
+"You have your preferences enabled to receive email on your home wiki"
 msgstr ""
 
 #: TWLight/templates/about.html:43

@@ -743,7 +743,7 @@ msgid ""
 msgstr "Tout utilisateur peut demander l'accès, mais il y a quelques exigences de base."
 #: TWLight/templates/about.html:40
 msgid ""
-"You have your preferences enabled to receive email messages on your home wiki"
+"You have your preferences enabled to receive email on your home wiki"
 msgstr "Vous avez défini vos préférences pour recevoir des courriels sur votre wiki principal."
 #: TWLight/templates/about.html:43
 msgid "You have an account that is a minimum of 6 months old"
