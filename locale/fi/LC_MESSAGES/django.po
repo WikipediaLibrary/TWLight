@@ -1485,10 +1485,6 @@ msgstr "Hyväksyn käyttöehdot"
 msgid "I accept"
 msgstr "Hyväksyn"
 
-#: TWLight/users/forms.py:85
-msgid "Log in"
-msgstr "Kirjaudu sisään"
-
 #: TWLight/users/models.py:62
 msgid "Has this user agreed with the terms of use?"
 msgstr "Onko tämä käyttäjä hyväksynyt käyttöehdot?"
@@ -2232,14 +2228,6 @@ msgid ""
 msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
-
-#: TWLight/users/views.py:324
-msgid ""
-"You may explore the site, but you will not be able to apply for access "
-"unless you agree with the terms of use."
-msgstr ""
-"Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon ennen kuin "
-"hyväksyt käyttöehdot."
 
 #: TWLight/views.py:48
 #, python-brace-format
