@@ -866,7 +866,7 @@ msgstr "Modifications récentes"
 msgid "Log out"
 msgstr "Se déconnecter"
 #: TWLight/templates/base.html:93 TWLight/templates/home.html:19
-msgid "Log in/sign up"
+msgid "Log in"
 msgstr "Se connecter / Créer un compte"
 #: TWLight/templates/base.html:118
 msgid "This is a template"

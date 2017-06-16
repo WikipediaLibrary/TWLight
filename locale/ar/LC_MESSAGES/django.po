@@ -1206,7 +1206,7 @@ msgid "Log out"
 msgstr ""
 
 #: TWLight/templates/base.html:93 TWLight/templates/home.html:19
-msgid "Log in/sign up"
+msgid "Log in"
 msgstr ""
 
 #: TWLight/templates/base.html:118
