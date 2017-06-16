@@ -749,7 +749,7 @@ msgstr "Vous avez défini vos préférences pour recevoir des courriels sur votr
 msgid "You have an account that is a minimum of 6 months old"
 msgstr "Vous avez un compte dans les projets Wikimédia pendant au moins 6 mois"
 #: TWLight/templates/about.html:46
-msgid "You have a minimum of 500 edits to the encyclopedia"
+msgid "You have a minimum of 500 edits"
 msgstr "Vous avez au moins 500 contributions"
 #: TWLight/templates/about.html:49
 msgid ""

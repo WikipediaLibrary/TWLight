@@ -1094,7 +1094,7 @@ msgid "You have an account that is a minimum of 6 months old"
 msgstr "Sinulla on käyttäjätunnus, joka on vähintään kuusi kuukautta vanha"
 
 #: TWLight/templates/about.html:46
-msgid "You have a minimum of 500 edits to the encyclopedia"
+msgid "You have a minimum of 500 edits"
 msgstr "Sinulla on vähintään 500 muokkausta tietosanakirjassa"
 
 #: TWLight/templates/about.html:49
