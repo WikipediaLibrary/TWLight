@@ -732,9 +732,9 @@ msgstr "Qui peut avoir accès?"
 #: TWLight/templates/about.html:31
 msgid ""
 "Any active editor in good standing can receive access. Applications are "
-"reviewed based on the editor’s need for the research materials, and general "
-"contributions to the Wikimedia community. If you think you could use access "
-"to one of our partner resources and are an active Wikimedia editor in any "
+"reviewed based on the editor’s need and "
+"contributions. If you think you could use access "
+"to one of our partner resources and are an active editor in any "
 "project supported by the Wikimedia Foundation, please apply."
 msgstr "Tout utilisateur actif et en règle peut avoir accès. Demandes sont évaluées en fonction des besoins de l'utilisateur pour la ressource, et les contributions à la communauté Wikimédia. Si vous pensez que vous pouvez utiliser l'accès à l'une de nos ressources et êtes un utilisateur actif dans un projet soutenu par la Wikimedia Foundation, s'il vous plaît soumettre une demande."
 #: TWLight/templates/about.html:37

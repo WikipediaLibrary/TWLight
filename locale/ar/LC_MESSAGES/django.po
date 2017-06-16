@@ -1041,9 +1041,9 @@ msgstr ""
 #: TWLight/templates/about.html:31
 msgid ""
 "Any active editor in good standing can receive access.  Applications are "
-"reviewed based on the editor’s need for the research materials, and general "
-"contributions to the Wikimedia community. If you think you could use access "
-"to one of our partner resources and are an active Wikimedia editor in any "
+"reviewed based on the editor’s need and "
+"contributions. If you think you could use access "
+"to one of our partner resources and are an active editor in any "
 "project supported by the Wikimedia Foundation, please apply."
 msgstr ""
 
