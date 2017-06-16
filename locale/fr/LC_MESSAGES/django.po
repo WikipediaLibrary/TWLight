@@ -781,13 +781,13 @@ msgstr "S'il vous plaît garder à l'esprit, nos accords avec les partenaires po
 msgid "Approved editors may use their access to:"
 msgstr "Les utilisateurs peuvent"
 #: TWLight/templates/about.html:80
-msgid "Search, view, retrieve, and display portions of restricted content"
+msgid "Search, view, retrieve, and display partner content"
 msgstr "rechercher, voir, récupérer et afficher des portions de contenu à accès restreint"
 #: TWLight/templates/about.html:83
-msgid "Electronically save portions of restricted content"
+msgid "Electronically save partner content"
 msgstr "enregistrer électroniquement des portions de contenu à accès restreint"
 #: TWLight/templates/about.html:86
-msgid "Print out single copies of portions of restricted content"
+msgid "Print out single copies of partner content"
 msgstr "imprimer un exemplaire des portions de contenu à accès restreint"
 #: TWLight/templates/about.html:92
 msgid "Approved editors should not:"
@@ -1390,8 +1390,8 @@ msgstr "Pour accéder à des ressources d'un partenaire particulier, vous accept
 msgid ""
 "Your access allows you to search, view, retrieve and display portions of "
 "restricted content (that is, content that requires an account to access) "
-"from publishers; to electronically save portions of restricted content; and "
-"to print out single copies of portions of restricted content."
+"from publishers; to electronically save partner content; and "
+"to print out single copies of partner content."
 msgstr "Les utilisateurs peuvent rechercher, voir, récupérer et afficher des portions de contenu à accès restreint (contenu qui nécessite un compte d'accès) ; enregistrer électroniquement des portions de contenu à accès restreint; et imprimer un exemplaire des portions de contenu à accès restreint"
 #: TWLight/users/templates/users/terms.html:143
 msgid ""

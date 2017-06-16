@@ -1145,17 +1145,17 @@ msgid "Approved editors <i>may</i> use their access to:"
 msgstr "Hyväksytyt muokkaajat <i>saavat</i> käyttää käyttöoikeuttaan:"
 
 #: TWLight/templates/about.html:80
-msgid "Search, view, retrieve, and display portions of restricted content"
+msgid "Search, view, retrieve, and display partner content"
 msgstr ""
 "etsiäkseen, näyttääkseen, tallentaakseen ja esittääkseen osia rajoitetusta "
 "sisällöstä"
 
 #: TWLight/templates/about.html:83
-msgid "Electronically save portions of restricted content"
+msgid "Electronically save partner content"
 msgstr "tallentaa sähköisesti osia rajoitetusta sisällöstä"
 
 #: TWLight/templates/about.html:86
-msgid "Print out single copies of portions of restricted content"
+msgid "Print out single copies of partner content"
 msgstr "tulostaa yksittäisiä kopioita osista rajoitettua sisältöä"
 
 #: TWLight/templates/about.html:92
@@ -2069,8 +2069,8 @@ msgstr ""
 msgid ""
 "Your access allows you to search, view, retrieve and display portions of "
 "restricted content (that is, content that requires an account to access) "
-"from publishers; to electronically save portions of restricted content; and "
-"to print out single copies of portions of restricted content."
+"from publishers; to electronically save partner content; and "
+"to print out single copies of partner content."
 msgstr ""
 "Käyttöoikeutesi avulla voit etsiä, katsella, hakea ja näyttää "
 "osiajulkaisijoiden rajoitetusta sisällöstä (eli sisällön käyttäminen "
