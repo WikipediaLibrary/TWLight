@@ -697,9 +697,9 @@ msgstr ""
 #: TWLight/resources/models.py:261
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
-"and *not translated*. Do not include the name of the partner here. If "
-"partner name and resource name need to be presented together, templates are "
-"responsible for presenting them in a format that can be internationalized."
+"and *not translated*. Do not include the name of the partner here."
+
+
 msgstr ""
 
 #: TWLight/resources/models.py:267

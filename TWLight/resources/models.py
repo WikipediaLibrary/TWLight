@@ -270,9 +270,7 @@ class Stream(models.Model):
     name = models.CharField(max_length=50,
         help_text=_("Name of stream (e.g. 'Health and Behavioral Sciences). "
             "Will be user-visible and *not translated*. Do not include the "
-            "name of the partner here. If partner name and resource name "
-            "need to be presented together, templates are responsible for "
-            "presenting them in a format that can be internationalized."))
+            "name of the partner here."))
     description = models.TextField(blank=True, null=True,
         help_text=_("Optional description of this stream's resources."))
 

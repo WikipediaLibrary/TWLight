@@ -506,9 +506,9 @@ msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs acceptent l
 #: TWLight/resources/models.py:138
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
-"and *not translated*. Do not include the name of the partner here. If "
-"partner name and resource name need to be presented together, templates are "
-"responsible for presenting them in a format that can be internationalized."
+"and *not translated*. Do not include the name of the partner here."
+
+
 msgstr "Nom de collection (eg. Sciences naturelles). Ce sera visible à l'utilisateur et *non traduites*. Ne pas inclure le nom du partenaire ici. Si le nom du partenaire et de la collection doivent être présentées ensemble, les modèles sont chargés de les présenter dans un format qui peut être internationalisé."
 #: TWLight/resources/models.py:144
 msgid "Optional description of this stream's resources."
