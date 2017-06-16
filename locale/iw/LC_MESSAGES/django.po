@@ -1019,8 +1019,8 @@ msgid ""
 "see which partnerships are available and what kinds of materials each "
 "database provides, and apply for the ones you want. Volunteer coordinators, "
 "who have signed non-disclosure agreements with the Wikimedia Foundation, "
-"review applications on a rolling basis, and when enough applications are "
-"approved, work with partners to get you your free access."
+
+"review applications and work with partners to get you your free access."
 msgstr ""
 
 #: TWLight/templates/about.html:23
