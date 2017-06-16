@@ -1190,7 +1190,7 @@ msgid "Browse"
 msgstr ""
 
 #: TWLight/templates/base.html:62
-msgid "Review applications"
+msgid "Review"
 msgstr ""
 
 #: TWLight/templates/base.html:69

@@ -854,7 +854,7 @@ msgstr "\nBonjour, %(username)s!\n"
 msgid "Browse"
 msgstr "Parcourir les partenaires"
 #: TWLight/templates/base.html:62
-msgid "Review applications"
+msgid "Review"
 msgstr "Évaluer les demandes"
 #: TWLight/templates/base.html:69
 msgid "Send data to partners"

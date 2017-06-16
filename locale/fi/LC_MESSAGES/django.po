@@ -1253,7 +1253,7 @@ msgid "Browse"
 msgstr "Selaa yhteistyökumppaneita"
 
 #: TWLight/templates/base.html:62
-msgid "Review applications"
+msgid "Review"
 msgstr "Arvioi hakemukset"
 
 #: TWLight/templates/base.html:69
