@@ -1249,7 +1249,7 @@ msgstr ""
 "          "
 
 #: TWLight/templates/base.html:49
-msgid "Browse partners"
+msgid "Browse"
 msgstr "Selaa yhteistyökumppaneita"
 
 #: TWLight/templates/base.html:62
