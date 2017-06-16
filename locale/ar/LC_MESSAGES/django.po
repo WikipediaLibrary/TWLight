@@ -1898,9 +1898,9 @@ msgstr ""
 #: TWLight/users/templates/users/user_detail.html:16
 msgid ""
 "If you aren't a site administrator, something weird has happened. You won't "
-"be able to apply for access to protected resources without a Wikipedia "
-"editor profile. Unless you know there's a good reason why your account "
-"doesn't have an editor attached (e.g. you are a site administrator), you "
+"be able to apply for access without a Wikipedia editor profile. You "
+
+
 "should log out and create a new account by logging in via OAuth, or contact "
 "a site administrator for help."
 msgstr ""
