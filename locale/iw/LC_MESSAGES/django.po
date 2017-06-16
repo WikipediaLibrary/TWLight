@@ -627,12 +627,7 @@ msgid ""
 msgstr ""
 
 #: TWLight/resources/models.py:149
-msgid ""
-"Optional description of this partner's offerings. You can enter HTML and it "
-"should render properly - if it does not, the developer forgot a | safe "
-"filter in the template. Whatever you enter here will also be automatically "
-"copied over to the description field for *your current language*, so you do "
-"not need to also fill that out."
+msgid "Optional description of this partner's resources."
 msgstr ""
 
 #: TWLight/resources/models.py:156
@@ -706,10 +701,7 @@ msgid ""
 msgstr ""
 
 #: TWLight/resources/models.py:267
-msgid ""
-"Optional description of this stream's contents. You can enter HTML and it "
-"should render properly - if it does not, the developer forgot a | safe "
-"filter in the template."
+msgid "Optional description of this stream's resources."
 msgstr ""
 
 #: TWLight/resources/models.py:302

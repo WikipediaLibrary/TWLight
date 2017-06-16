@@ -614,7 +614,7 @@ msgstr ""
 "käyttöehdot ennen käyttöoikeuden hakemista; vapaavalintainen muuten."
 
 #: TWLight/resources/models.py:144
-msgid "Optional description of this partner's offerings."
+msgid "Optional description of this partner's resources."
 msgstr "Vapaavalintainen kuvaus yhteistyökumppanin lahjoituksesta."
 
 #: TWLight/resources/models.py:146
@@ -703,7 +703,7 @@ msgstr ""
 "hoitavat sen tavalla, joka on helppo muuntaa muille kielille."
 
 #: TWLight/resources/models.py:260
-msgid "Optional description of this stream's contents."
+msgid "Optional description of this stream's resources."
 msgstr "Valinnainen kuvaus syötteen sisällöstä."
 
 #: TWLight/resources/models.py:293

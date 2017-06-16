@@ -453,7 +453,7 @@ msgid ""
 "terms of use to get access; optional otherwise."
 msgstr "Lien aux conditions d'utilisation. Requis si ce partenaire exige que les utilisateurs acceptent les "" conditions d'utilisation pour recevoir l'accès; sinon facultatif"
 #: TWLight/resources/models.py:38
-msgid "Optional description of this partner's offerings."
+msgid "Optional description of this partner's resources."
 msgstr "Description facultative des ressources de ce partenaire"
 #: TWLight/resources/models.py:40
 msgid "Optional URL of an image that can be used to represent this partner."
@@ -511,7 +511,7 @@ msgid ""
 "responsible for presenting them in a format that can be internationalized."
 msgstr "Nom de collection (eg. Sciences naturelles). Ce sera visible à l'utilisateur et *non traduites*. Ne pas inclure le nom du partenaire ici. Si le nom du partenaire et de la collection doivent être présentées ensemble, les modèles sont chargés de les présenter dans un format qui peut être internationalisé."
 #: TWLight/resources/models.py:144
-msgid "Optional description of this stream's contents."
+msgid "Optional description of this stream's resources."
 msgstr "Description facultative de cette collection."
 #: TWLight/resources/models.py:171
 msgid ""

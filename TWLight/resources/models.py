@@ -154,12 +154,7 @@ class Partner(models.Model):
         help_text=_("Link to terms of use. Required if users must agree to "
             "terms of use to get access; optional otherwise."))
     description = models.TextField(blank=True, null=True,
-        help_text=_("Optional description of this partner's offerings. You can "
-            "enter wikicode and it should render properly - if it does not, the "
-            "developer forgot a | safe filter in the template. Whatever you "
-            "enter here will also be automatically copied over to the "
-            "description field for *your current language*, so you do not "
-            "need to also fill that out."))
+        help_text=_("Optional description of this partner's resources."))
     logo_url = models.URLField(blank=True, null=True,
         help_text=_('Optional URL of an image that can be used to represent '
                     'this partner.'))
@@ -280,9 +275,7 @@ class Stream(models.Model):
             "need to be presented together, templates are responsible for "
             "presenting them in a format that can be internationalized."))
     description = models.TextField(blank=True, null=True,
-        help_text=_("Optional description of this stream's contents. You can "
-            "enter wikicode and it should render properly - if it does not, the "
-            "developer forgot a | safe filter in the template."))
+        help_text=_("Optional description of this stream's resources."))
 
     languages = models.ManyToManyField(Language, blank=True)
 
