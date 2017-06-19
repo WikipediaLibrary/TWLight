@@ -99,7 +99,7 @@ class BaseApplicationForm(forms.Form):
 
         self.helper.add_input(Submit(
             'submit',
-            _('Submit application'),
+            _('Apply'),
             css_class='center-block'))
 
 
@@ -186,7 +186,7 @@ class BaseApplicationForm(forms.Form):
 
         if user_data:
             # Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-            user_data_layout = Fieldset(_('Information about you'))
+            user_data_layout = Fieldset(_('About you'))
             for datum in user_data:
                 self.fields[datum] = FIELD_TYPES[datum]
                 self.fields[datum].label = FIELD_LABELS[datum]
@@ -262,7 +262,7 @@ class ApplicationAutocomplete(autocomplete_light.ModelForm):
 
         # Internationalize user-visible labels. These will appear inline as
         # placeholders.
-        self.fields['editor'].label = _('Wikipedia username')
+        self.fields['editor'].label = _('Username')
         self.fields['partner'].label = _('Partner name')
 
 

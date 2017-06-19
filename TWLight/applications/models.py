@@ -50,9 +50,8 @@ class Application(models.Model):
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
     date_closed = models.DateField(blank=True, null=True,
-        help_text=_('Do not override this field! Its value is set automatically '
-                  'when the application is saved, and overriding it may have '
-                  'undesirable results.'))
+        help_text=_('Please do not override this field! Its value is set '
+                  'automatically.'))
 
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
@@ -62,17 +61,15 @@ class Application(models.Model):
     # point the upgrade would be nice to have, but not worth the hassle of
     # updating all the things that touch this field.
     days_open = models.IntegerField(blank=True, null=True,
-        help_text=_('Do not override this field! Its value is set automatically '
-                  'when the application is saved, and overriding it may have '
-                  'undesirable results.'))
+        help_text=_('Please do not override this field! Its value is set '
+                  'automatically.'))
 
     # Will be set on save() based on date_closed and partner access grant
     # lengths. In practice, because access grants are triggered manually
     # after review on TWLight, the real expiry date is likely to be later.
     earliest_expiry_date = models.DateField(blank=True, null=True,
-        help_text=_('Do not override this field! Its value is set automatically '
-                  'when the application is saved, and overriding it may have '
-                  'undesirable results.'))
+        help_text=_('Please do not override this field! Its value is set '
+                  'automatically.'))
 
     sent_by = models.ForeignKey(User, blank=True, null=True,
         help_text=_('The user who sent this application to the partner'))

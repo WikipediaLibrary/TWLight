@@ -75,7 +75,7 @@ def _rehydrate_token(token):
 class OAuthBackend(object):
 
     def _get_username(self, identity):
-        # The Wikipedia username is globally unique, but Wikipedia allows it to
+        # The Username is globally unique, but Wikipedia allows it to
         # have characters that the Django username system rejects. However,
         # wiki userID should be unique, and limited to ASCII.
         return '{sub}'.format(sub=identity['sub'])

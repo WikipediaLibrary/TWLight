@@ -8,6 +8,9 @@ id_rsa.*
 TWLight/settings/production_vars.py
 TWLight/settings/vagrant_vars.py
 
+Let's compile our messages at deploy time
+django.mo
+
 # Created by https://www.gitignore.io/api/osx,django,python,sublimetext,vim,emacs
 
 ### OSX ###

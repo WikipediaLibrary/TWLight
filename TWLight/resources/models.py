@@ -107,7 +107,7 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     company_name = models.CharField(max_length=40,
-        help_text=_("Partner organization's name (e.g. McFarland). Note: "
+        help_text=_("Partner's name (e.g. McFarland). Note: "
         "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
     coordinator = models.ForeignKey(User, blank=True, null=True,
@@ -151,16 +151,10 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     terms_of_use = models.URLField(blank=True, null=True,
-        help_text=_("Link to terms of use. Required if this company requires "
-            "that users agree to terms of use as a condition of applying for "
-            "access; optional otherwise."))
+        help_text=_("Link to terms of use. Required if users must agree to "
+            "terms of use to get access; optional otherwise."))
     description = models.TextField(blank=True, null=True,
-        help_text=_("Optional description of this partner's offerings. You can "
-            "enter wikicode and it should render properly - if it does not, the "
-            "developer forgot a | safe filter in the template. Whatever you "
-            "enter here will also be automatically copied over to the "
-            "description field for *your current language*, so you do not "
-            "need to also fill that out."))
+        help_text=_("Optional description of this partner's resources."))
     logo_url = models.URLField(blank=True, null=True,
         help_text=_('Optional URL of an image that can be used to represent '
                     'this partner.'))
@@ -195,17 +189,16 @@ class Partner(models.Model):
     # whether *this* resource requires those optional fields.
 
     real_name = models.BooleanField(default=False,
-        help_text=_('Mark as true if this partner requires applicants to '
-                    'specify their real names.'))
+        help_text=_('Mark as true if this partner requires applicant names.'))
     country_of_residence = models.BooleanField(default=False,
-        help_text=_('Mark as true if this partner requires applicants to '
-                    'specify their countries of residence.'))
+        help_text=_('Mark as true if this partner requires applicant countries '
+                    'of residence.'))
     specific_title = models.BooleanField(default=False,
         help_text=_('Mark as true if this partner requires applicants to '
-                    'specify a particular title they want to access.'))
+                    'specify the title they want to access.'))
     specific_stream = models.BooleanField(default=False,
         help_text=_('Mark as true if this partner requires applicants to '
-                    'specify a particular database they want to access.'))
+                    'specify the database they want to access.'))
     occupation = models.BooleanField(default=False,
         help_text=_('Mark as true if this partner requires applicants to '
                     'specify their occupation.'))
@@ -277,13 +270,9 @@ class Stream(models.Model):
     name = models.CharField(max_length=50,
         help_text=_("Name of stream (e.g. 'Health and Behavioral Sciences). "
             "Will be user-visible and *not translated*. Do not include the "
-            "name of the partner here. If partner name and resource name "
-            "need to be presented together, templates are responsible for "
-            "presenting them in a format that can be internationalized."))
+            "name of the partner here."))
     description = models.TextField(blank=True, null=True,
-        help_text=_("Optional description of this stream's contents. You can "
-            "enter wikicode and it should render properly - if it does not, the "
-            "developer forgot a | safe filter in the template."))
+        help_text=_("Optional description of this stream's resources."))
 
     languages = models.ManyToManyField(Language, blank=True)
 

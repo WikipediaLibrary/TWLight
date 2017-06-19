@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='application',
             name='date_closed',
-            field=models.DateField(help_text='Do not override this field! Its value is set automatically when the application is saved, and overriding it may have undesirable results.', null=True, blank=True),
+            field=models.DateField(help_text='Please do not override this field! It is set automatically.', null=True, blank=True),
             preserve_default=True,
         ),
     ]

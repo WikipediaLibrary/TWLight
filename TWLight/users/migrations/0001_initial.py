@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('last_updated', models.DateField(help_text='When this information was last edited', auto_now=True)),
                 ('account_created', models.DateField(help_text='When this information was first created', auto_now_add=True)),
-                ('wp_username', models.CharField(help_text='Wikipedia username', max_length=235)),
+                ('wp_username', models.CharField(help_text='Username', max_length=235)),
                 ('wp_editcount', models.IntegerField(help_text='Wikipedia edit count')),
                 ('wp_registered', models.DateField(help_text='Date registered at Wikipedia')),
                 ('wp_sub', models.IntegerField(help_text='Wikipedia user ID')),

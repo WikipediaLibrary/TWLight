@@ -69,7 +69,7 @@ class UserAdmin(AuthUserAdmin):
             return user.editor.wp_username
         else:
             return ''
-    get_wp_username.short_description = _('Wikipedia username')
+    get_wp_username.short_description = _('Username')
 
 
 # Unregister old user admin; register new, improved user admin.

@@ -99,7 +99,7 @@ class Editor(models.Model):
     # Data are current *as of the time of TWLight signup* but may get out of
     # sync thereafter.
     wp_username = models.CharField(max_length=235,
-        help_text=_("Wikipedia username"))
+        help_text=_("Username"))
     wp_editcount = models.IntegerField(help_text=_("Wikipedia edit count"))
     wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"))
     wp_sub = models.IntegerField(unique=True,
@@ -111,9 +111,8 @@ class Editor(models.Model):
     wp_groups = models.TextField(help_text=_("Wikipedia groups"))
     wp_rights = models.TextField(help_text=_("Wikipedia user rights"))
     wp_valid = models.BooleanField(default=False,
-        help_text=_('At their last login, did this '
-        'user meet the criteria set forth in the Wikipedia Library Card '
-        'Platform terms of use?'))
+        help_text=_('At their last login, did this user meet the criteria in '
+        'the terms of use?'))
 
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~

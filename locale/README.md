@@ -10,7 +10,7 @@ Translators: what you'll see is a lot of things that look like this:
 
 ```
 #: TWLight/applications/forms.py:101
-msgid "Submit application"
+msgid "Apply"
 msgstr ""
 ```
 
@@ -27,7 +27,7 @@ Some sections have comments, which are prefaced with `Translators:`, like this:
 ```
 #. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:188
-msgid "Information about you"
+msgid "About you"
 msgstr ""
 ```
 

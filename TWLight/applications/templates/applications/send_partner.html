@@ -36,22 +36,14 @@
   </h2>
 
   {% blocktrans trimmed count counter=object.contacts|length %}
-    Please copy and paste the application data below into an email to the
-    following company representative. When you've sent the email, click the
-    'mark as sent' button so other coordinators don't send the information a
-    second time.
-  {% plural %}
-    Please copy and paste the application data below into an email to the
-    following company representatives. When you've sent the email, click the
-    'mark as sent' button so other coordinators don't send the information a
-    second time.
+    When you've processed the data below, click the 'mark as sent' button.
   {% endblocktrans %}
 
   <h3>
     {% blocktrans trimmed count counter=object.contacts|length %}
-      Company representative
+      Contact
     {% plural %}
-      Company representatives
+      Contacts
     {% endblocktrans %}
   </h3>
 
@@ -63,7 +55,7 @@
       <hr />
     {% endif %}
   {% empty %}
-    {% trans "Whoops, we don't have any listed contacts for this company. Please notify Wikipedia Library administrators." %} 
+    {% trans "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators." %} 
   {% endfor %}
 
   <h3>{% trans "Application data" %}</h3>
@@ -109,7 +101,7 @@
       <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
     </form>
   {% else %}
-    {% trans "There are no approved, unsent applications at this time." %}
+    {% trans "There are no approved, unsent applications." %}
   {% endif %}
 
 {% endblock content %}

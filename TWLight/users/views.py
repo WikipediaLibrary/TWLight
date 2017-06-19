@@ -326,7 +326,7 @@ class TermsView(UpdateView):
                   'applications unless you agree with the terms of use.')
             else:
                 fail_msg = _('You may explore the site, but you will not be '
-                  'able to apply for access to materials unless you agree with '
+                  'able to apply for access unless you agree with '
                   'the terms of use.')
 
             messages.add_message(self.request, messages.WARNING, fail_msg)

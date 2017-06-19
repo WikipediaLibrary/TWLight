@@ -267,7 +267,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
         """
         Validate inputs.
         """
-        fail_msg = _('You must choose at least one resource you want access to before applying for access.')
+        fail_msg = _('Choose at least one resource you want access to.')
         if not PARTNERS_SESSION_KEY in request.session.keys():
             messages.add_message(request, messages.WARNING, fail_msg)
             return HttpResponseRedirect(reverse('applications:request'))
@@ -290,9 +290,8 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
-            _('Your application has been submitted. A coordinator will review '
-              'it and get back to you. You can check the status of your '
-              'applications on this page at any time.'))
+            _('Your application has been submitted for review. '
+              'You can check the status of your applications on this page.'))
         user_home = reverse('users:editor_detail',
             kwargs={'pk': self.request.user.editor.pk})
         return user_home
@@ -331,9 +330,8 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
-            _('Your application has been submitted. A coordinator will review '
-              'it and get back to you. You can check the status of your '
-              'applications on your user page page at any time.'))
+            _('Your application has been submitted for review. '
+              'You can check the status of your applications on this page.'))
         user_home = self._get_partners()[0].get_absolute_url()
         return user_home
 
@@ -487,7 +485,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         filters = [
             # Translators: Editor = wikipedia editor, gender unknown.
             {'label': _('Editor'), 'object': editor},
-            {'label': _('Publisher'), 'object': partner}
+            {'label': _('Partner'), 'object': partner}
         ]
 
         return self.render_to_response(self.get_context_data(filters=filters))
@@ -514,7 +512,7 @@ class ListApplicationsView(_BaseListApplicationView):
     def get_context_data(self, **kwargs):
         context = super(ListApplicationsView, self).get_context_data(**kwargs)
 
-        context['title'] = _('Queue of applications to review')
+        context['title'] = _('Applications to review')
 
         context['include_template'] = \
             'applications/application_list_reviewable_include.html'
@@ -691,7 +689,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             app.save()
 
         messages.add_message(request, messages.SUCCESS,
-            _('Batch update successful. Thank you for reviewing today.'))
+            _('Batch update successful.'))
 
         return HttpResponseRedirect(reverse_lazy('applications:list'))
 

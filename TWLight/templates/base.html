@@ -47,20 +47,20 @@
     <ul class="nav nav-pills pull-right">
       <li role="presentation">
         <a href="{% url 'partners:list' %}">
-          {% trans "Browse partners" %}
+          {% trans "Browse" %}
         </a>
       </li>
       {% if user.editor %}
         <li role="presentation">
           <a href="{% url 'applications:request' %}">
-            {% trans "Apply for access" %}
+            {% trans "Apply" %}
           </a>
         </li>
       {% endif %}
       {% if user|coordinators_only %}
         <li role="presentation">
           <a href="{% url 'applications:list' %}">
-            {% trans "Review applications" %}
+            {% trans "Review" %}
           </a>
         </li>
       {% endif %}
@@ -91,7 +91,7 @@
       {% else %}
         <li role="presentation">
           <a href="{% url 'oauth_login' %}">
-            {% trans "Log in/sign up" %}
+            {% trans "Log in" %}
           </a>
         </li>
       {% endif %}
