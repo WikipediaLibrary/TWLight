@@ -54,12 +54,23 @@ class PartnersDetailView(DetailView):
         context['total_apps_approved'] = Application.objects.filter(
             partner=partner, status=Application.APPROVED).count()
 
+        context['total_apps_sent'] = Application.objects.filter(
+            partner=partner, status=Application.SENT).count()
+
+        context['total_apps_approved_or_sent'] = context['total_apps_approved'] + context['total_apps_sent']
+
         context['unique_users'] = User.objects.filter(
             editor__applications__partner=partner).distinct().count()
 
         context['unique_users_approved'] = User.objects.filter(
             editor__applications__partner=partner,
             editor__applications__status=Application.APPROVED).distinct().count()
+
+        context['unique_users_sent'] = User.objects.filter(
+            editor__applications__partner=partner,
+            editor__applications__status=Application.SENT).distinct().count()
+
+        context['unique_users_approved_or_sent'] = context['unique_users_approved'] + context['unique_users_sent']
 
         partner_app_time = Application.objects.filter(
             partner=partner).values_list('days_open', flat=True)

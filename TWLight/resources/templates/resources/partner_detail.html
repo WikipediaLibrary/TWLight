@@ -342,17 +342,17 @@
 
   <p>
     {% blocktrans count counter=total_apps_approved %}
-      Number of applications approved (all time): {{ total_apps_approved }}
+      Number of applications approved (all time): {{ total_apps_approved_or_sent }}
     {% plural %}
-      Number of applications approved (all time): {{ total_apps_approved }}
+      Number of applications approved (all time): {{ total_apps_approved_or_sent }}
     {% endblocktrans %}
   </p>
 
   <p>
     {% blocktrans count counter=unique_users_approved %}
-      Number of unique users with approved applications (all time): {{ unique_users_approved }}
+      Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
     {% plural %}
-      Number of unique users with approved applications (all time): {{ unique_users_approved }}
+      Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
     {% endblocktrans %}
   </p>
 
