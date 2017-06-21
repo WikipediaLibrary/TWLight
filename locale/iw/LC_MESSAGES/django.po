@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-21 09:17+0000\n"
+"POT-Creation-Date: 2017-06-21 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,447 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: TWLight/applications/forms.py:102
+#: TWLight/applications/templates/applications/request_for_application.html:51
+#: TWLight/resources/templates/resources/partner_detail.html:41
+#: TWLight/resources/templates/resources/partner_detail.html:63
+#: TWLight/templates/base.html:56
+msgid "Apply"
+msgstr ""
+
+#. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
+#: TWLight/applications/forms.py:189
+msgid "About you"
+msgstr ""
+
+#: TWLight/applications/forms.py:202
+#, python-brace-format
+msgid "Your application to {partner}"
+msgstr ""
+
+#: TWLight/applications/forms.py:265 TWLight/users/admin.py:72
+#: TWLight/users/models.py:102
+msgid "Username"
+msgstr ""
+
+#: TWLight/applications/forms.py:266 TWLight/applications/helpers.py:86
+msgid "Partner name"
+msgstr ""
+
+#: TWLight/applications/helpers.py:82
+msgid "Your real name"
+msgstr ""
+
+#: TWLight/applications/helpers.py:83
+msgid "Your country of residence"
+msgstr ""
+
+#: TWLight/applications/helpers.py:84
+msgid "Your occupation"
+msgstr ""
+
+#: TWLight/applications/helpers.py:85
+msgid "Your institutional affiliation"
+msgstr ""
+
+#: TWLight/applications/helpers.py:87
+msgid "Why do you want access to this resource?"
+msgstr ""
+
+#: TWLight/applications/helpers.py:88
+msgid "Which collection do you want?"
+msgstr ""
+
+#: TWLight/applications/helpers.py:89
+msgid "Which book do you want?"
+msgstr ""
+
+#: TWLight/applications/helpers.py:90
+msgid "Anything else you want to say"
+msgstr ""
+
+#: TWLight/applications/helpers.py:91
+msgid "You must agree with the partner's terms of use"
+msgstr ""
+
+#: TWLight/applications/helpers.py:104 TWLight/users/forms.py:79
+msgid "Email"
+msgstr ""
+
+#. Translators: This is the status of an application that has not yet been reviewed.
+#: TWLight/applications/models.py:35
+msgid "Pending"
+msgstr ""
+
+#. Translators: This is the status of an application that reviewers have asked questions about.
+#: TWLight/applications/models.py:37
+msgid "Under discussion"
+msgstr ""
+
+#: TWLight/applications/models.py:38
+#: TWLight/applications/templates/applications/application_list.html:17
+msgid "Approved"
+msgstr ""
+
+#: TWLight/applications/models.py:39
+msgid "Not approved"
+msgstr ""
+
+#: TWLight/applications/models.py:40
+msgid "Sent to partner"
+msgstr ""
+
+#: TWLight/applications/models.py:53 TWLight/applications/models.py:64
+#: TWLight/applications/models.py:71
+msgid "Please do not override this field! Its value is set automatically."
+msgstr ""
+
+#: TWLight/applications/models.py:75
+msgid "The user who sent this application to the partner"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:13
+msgid ""
+"This application is on the waitlist because this partner does not have any "
+"access grants available at this time."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:18
+msgid "Evaluate application"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:22
+msgid "Application history"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:25
+msgid "Application"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:29
+msgid "Date of application"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:37
+msgid "Days open"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:44
+msgid "Days since application was closed"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:52
+#: TWLight/graphs/views.py:281
+msgid "Status"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:59
+#: TWLight/applications/views.py:488 TWLight/templates/dashboard.html:111
+msgid "Partner"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:67
+msgid "Collection requested"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:76
+msgid "Title requested"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:84
+msgid "Why the editor wants access"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:90
+msgid "Not stated"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:95
+msgid "Renewal of existing access grant?"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:100
+#, python-format
+msgid ""
+"\n"
+"            Yes (<a href=\"%(parent_url)s\">previous application</a>)\n"
+"          "
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:105
+#: TWLight/users/templates/users/editor_detail_data.html:49
+msgid "No"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:111
+msgid "Comments from the editor"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:119
+msgid "Discussion"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:138
+msgid "Add comment"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:144
+msgid ""
+"Comments are visible to all coordinators and to the editor who submitted "
+"this application."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:150
+msgid "User"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:154
+msgid "Revision history"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:169
+#, python-format
+msgid "Submitted by %(submit_user)s on %(review_date)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:173
+#, python-format
+msgid "Submitted on %(review_date)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:183
+#, python-format
+msgid "Reviewed by %(review_user)s on %(review_date)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:187
+#, python-format
+msgid "Reviewed on %(review_date)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_evaluation.html:198
+msgid "No previous versions."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:9
+msgid "View applications which are..."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:13
+msgid "Pending review"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:21
+msgid "Rejected"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:25
+msgid "Sent"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:29
+msgid "Up for renewal"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:43
+msgid "Filter by..."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:54
+msgid "Current filters"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:64
+msgid "None"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:75
+msgid "Page navigation"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:79
+#: TWLight/applications/templates/applications/application_list.html:80
+#: TWLight/applications/templates/applications/application_list.html:85
+#: TWLight/applications/templates/applications/application_list.html:86
+msgid "Previous page"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:109
+msgid "Next"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list.html:110
+#: TWLight/applications/templates/applications/application_list.html:115
+#: TWLight/applications/templates/applications/application_list.html:116
+msgid "Next page"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:11
+msgid "Expired today"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:13
+#, python-format
+msgid "Expired %(num_days)s day ago"
+msgid_plural "Expired %(num_days)s days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:23
+#, python-format
+msgid "Expiring in %(num_days)s day"
+msgid_plural "Expiring in %(num_days)s days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:36
+#, python-format
+msgid "Approved by %(reviewer)s on %(review_date)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:40
+#, python-format
+msgid "Approved on %(review_date)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_expiring_include.html:47
+#: TWLight/applications/templates/applications/application_list_include.html:58
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:69
+msgid "No applications right now."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:18
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:32
+#, python-format
+msgid "Last reviewed by %(reviewer)s on %(review_date)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:22
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:36
+#, python-format
+msgid "Last reviewed on %(review_date)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:27
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:41
+msgid "Not yet reviewed."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:33
+msgid "Your access grant is expiring soon"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:35
+#: TWLight/applications/templates/applications/application_list_include.html:43
+msgid "Request renewal"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:37
+#: TWLight/applications/templates/applications/application_list_include.html:45
+msgid "Renewals are not available."
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_include.html:41
+msgid "Your access grant has expired"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:12
+#: TWLight/applications/templates/applications/send_partner.html:74
+msgid "Select/deselect all"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:23
+msgid "Renewal"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:52
+msgid "Status for all selected applications"
+msgstr ""
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:65
+msgid "Set status"
+msgstr ""
+
+#: TWLight/applications/templates/applications/apply.html:13
+#, python-format
+msgid ""
+"<p> Note that your username and reasons for applying may be displayed on the "
+"home page. Please <a href=\"mailto:wikipedialibrary@wikimedia.org?"
+"Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">email us "
+"(wikipedialibrary@wikimedia.org)</a> if this is a problem. </p>"
+msgstr ""
+
+#. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
+#: TWLight/applications/templates/applications/request_for_application.html:20
+msgid "What resources you want to access?"
+msgstr ""
+
+#: TWLight/applications/templates/applications/request_for_application.html:38
+msgid "(more info)"
+msgstr ""
+
+#. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
+#: TWLight/applications/templates/applications/request_for_application.html:42
+#: TWLight/resources/models.py:137
+#: TWLight/resources/templates/resources/partner_tile.html:30
+msgid "Waitlisted"
+msgstr ""
+
+#: TWLight/applications/templates/applications/request_for_application.html:48
+#: TWLight/resources/templates/resources/partner_list.html:15
+msgid "No partner data has been added yet."
+msgstr ""
+
+#. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did earlier in this file.
+#: TWLight/applications/templates/applications/request_for_application.html:57
+msgid ""
+"You can apply to <span class=\"label label-warning\">Waitlisted</span> "
+"partners, but they don't have access grants available right now. We will "
+"process those applications when access becomes available."
+msgstr ""
+
+#: TWLight/applications/templates/applications/send.html:6
+msgid "Partners with approved, unsent applications"
+msgstr ""
+
+#: TWLight/applications/templates/applications/send.html:18
+msgid "There are no partners with applications ready to send."
+msgstr ""
+
+#: TWLight/applications/templates/applications/send_partner.html:35
+#, python-format
+msgid "Application data for %(object)s"
+msgstr ""
+
+#: TWLight/applications/templates/applications/send_partner.html:38
+msgid "When you've processed the data below, click the 'mark as sent' button."
+msgstr ""
+
+#: TWLight/applications/templates/applications/send_partner.html:43
+msgid "Contact"
+msgid_plural "Contacts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: TWLight/applications/templates/applications/send_partner.html:58
+msgid ""
+"Whoops, we don't have any listed contacts. Please notify Wikipedia Library "
+"administrators."
+msgstr ""
+
+#: TWLight/applications/templates/applications/send_partner.html:61
+msgid "Application data"
+msgstr ""
+
+#. Translators: this should be translated the same way that it was earlier in this page.
+#: TWLight/applications/templates/applications/send_partner.html:101
+msgid "Mark as sent"
+msgstr ""
+
+#: TWLight/applications/templates/applications/send_partner.html:104
+msgid "There are no approved, unsent applications."
+msgstr ""
 
 #: TWLight/applications/views.py:105
 msgid "Please select at least one partner."
@@ -41,10 +482,6 @@ msgstr ""
 #. Translators: Editor = wikipedia editor, gender unknown.
 #: TWLight/applications/views.py:487
 msgid "Editor"
-msgstr ""
-
-#: TWLight/applications/views.py:488 TWLight/templates/dashboard.html:111
-msgid "Partner"
 msgstr ""
 
 #: TWLight/applications/views.py:515
@@ -203,10 +640,6 @@ msgstr ""
 msgid "Median days until decision"
 msgstr ""
 
-#: TWLight/graphs/views.py:281
-msgid "Status"
-msgstr ""
-
 #: TWLight/graphs/views.py:309
 #, python-brace-format
 msgid "Number of applications to {partner}"
@@ -261,12 +694,6 @@ msgstr ""
 #. Translators: This is a status for a Partner, denoting that editors cannot apply for access and the Partner will not be displayed to them.
 #: TWLight/resources/models.py:135
 msgid "Not available"
-msgstr ""
-
-#. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
-#: TWLight/resources/models.py:137
-#: TWLight/resources/templates/resources/partner_tile.html:30
-msgid "Waitlisted"
 msgstr ""
 
 #: TWLight/resources/models.py:142
@@ -379,12 +806,6 @@ msgid ""
 "<strong>Waitlisted</strong> &mdash; There are no access grants available for "
 "this partner at this time. You can still <a href=\"%(app_url)s\">apply for "
 "access</a>; applications will be processed when access is available."
-msgstr ""
-
-#: TWLight/resources/templates/resources/partner_detail.html:41
-#: TWLight/resources/templates/resources/partner_detail.html:63
-#: TWLight/templates/base.html:56
-msgid "Apply"
 msgstr ""
 
 #: TWLight/resources/templates/resources/partner_detail.html:46
@@ -607,10 +1028,6 @@ msgstr ""
 msgid "List of partners"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_list.html:15
-msgid "No partner data has been added yet."
-msgstr ""
-
 #: TWLight/resources/templates/resources/partner_list.html:21
 msgid "You can see per-partner metrics on the partner pages."
 msgstr ""
@@ -664,9 +1081,34 @@ msgid "Sorry; you aren't allowed to do that."
 msgstr ""
 
 #: TWLight/templates/403.html:14
+#, python-format
 msgid ""
-"If you think your account should be able to do that, make sure that you "
-"logged in with the correct Wikipedia account and home wiki."
+"If you think your account should be able to do that, please email us about "
+"this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?"
+"Subject=Wikipedia%%20Library%%20Permission%%20denied"
+"\">wikipedialibrary@wikimedia.org</a> or report it to us on <a href="
+"\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
+"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20Permission"
+"%%20denied\">Phabricator</a> (login required)."
+msgstr ""
+
+#: TWLight/templates/404.html:7
+msgid "Not found"
+msgstr ""
+
+#: TWLight/templates/404.html:10
+msgid "Sorry; we can't find that."
+msgstr ""
+
+#: TWLight/templates/404.html:14
+#, python-format
+msgid ""
+"If you are certain that something should be here, please email us about this "
+"error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia"
+"%%20Library%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a> or report "
+"it to us on <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/"
+"form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20Not"
+"%%20found\">Phabricator</a> (login required)."
 msgstr ""
 
 #: TWLight/templates/about.html:6
@@ -1030,10 +1472,6 @@ msgstr ""
 msgid "User {user} deactivated."
 msgstr ""
 
-#: TWLight/users/admin.py:72 TWLight/users/models.py:102
-msgid "Username"
-msgstr ""
-
 #: TWLight/users/authorization.py:331
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
@@ -1071,10 +1509,6 @@ msgstr ""
 #. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
 #: TWLight/users/forms.py:67
 msgid "I accept"
-msgstr ""
-
-#: TWLight/users/forms.py:79
-msgid "Email"
 msgstr ""
 
 #: TWLight/users/forms.py:80
@@ -1201,10 +1635,6 @@ msgstr ""
 
 #: TWLight/users/templates/users/editor_detail_data.html:47
 msgid "Yes"
-msgstr ""
-
-#: TWLight/users/templates/users/editor_detail_data.html:49
-msgid "No"
 msgstr ""
 
 #: TWLight/users/templates/users/editor_detail_data.html:51
