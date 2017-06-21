@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+  <h1>{% trans "Not found" %}</h1>
+
+  <p>
+    {% trans "Sorry; we can't find that." %}
+  </p>
+
+  <div class="clearfix">
+    <div class="pull-left">
+      <img class="img-responsive img-thumbnail" src={% static "img/say_what.jpg" %} alt="quizzical crab">
+
+      <div class="well">
+        <a href="https://flic.kr/p/UHr11n">Say what?</a> by <a href="https://www.flickr.com/photos/armydre2008/">frankieleon</a>, on Flickr; CC BY
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
