@@ -256,9 +256,24 @@ class OAuthInitializeView(View):
             logger.exception()
             raise PermissionDenied
 
+        # Try to capture the user's desired destination
+        try:
+            request.session['next'] = request.GET.get('next')
+        except:
+            pass
+
         # If the user has already logged in, let's not spam the OAuth proider.
         if self.request.user.is_authenticated():
-            return HttpResponseRedirect('/users/')
+            # We're using this twice. Not very DRY.
+            # Send user either to the destination specified in the 'next'
+            # parameter or to their own editor detail page.
+            if request.session['next']:
+                return_url = request.session['next']
+            else:
+                return_url = reverse_lazy('users:editor_detail',
+                    kwargs={'pk': self.request.user.editor.pk})
+
+            return HttpResponseRedirect(return_url)
         else:
             # Get handshaker for the configured wiki oauth URL.
             handshaker = _get_handshaker()
@@ -350,7 +365,13 @@ class OAuthCallbackView(View):
                 return_url = reverse_lazy('terms')
             else:
                 messages.add_message(request, messages.INFO, _('Welcome back!'))
-                return_url = reverse_lazy('users:editor_detail',
-                    kwargs={'pk': user.editor.pk})
+                # We're using this twice. Not very DRY.
+                # Send user either to the destination specified in the 'next'
+                # parameter or to their own editor detail page.
+                if request.session['next']:
+                    return_url = request.session['next']
+                else:
+                    return_url = reverse_lazy('users:editor_detail',
+                        kwargs={'pk': user.editor.pk})
 
         return HttpResponseRedirect(return_url)
