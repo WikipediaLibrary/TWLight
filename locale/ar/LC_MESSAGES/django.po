@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-19 12:19+0000\n"
+"POT-Creation-Date: 2017-06-21 09:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -406,6 +406,7 @@ msgstr ""
 msgid "(more info)"
 msgstr ""
 
+#. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
 #. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
 #: TWLight/applications/templates/applications/request_for_application.html:42
 #: TWLight/resources/models.py:137
@@ -992,29 +993,39 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"      Number of applications approved (all time): %(total_apps_approved)s\n"
+"      Number of applications approved (all time): "
+"%(total_apps_approved_or_sent)s\n"
 "    "
 msgid_plural ""
 "\n"
-"      Number of applications approved (all time): %(total_apps_approved)s\n"
+"      Number of applications approved (all time): "
+"%(total_apps_approved_or_sent)s\n"
 "    "
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #: TWLight/resources/templates/resources/partner_detail.html:354
 #, python-format
 msgid ""
 "\n"
 "      Number of unique users with approved applications (all time): "
-"%(unique_users_approved)s\n"
+"%(unique_users_approved_or_sent)s\n"
 "    "
 msgid_plural ""
 "\n"
 "      Number of unique users with approved applications (all time): "
-"%(unique_users_approved)s\n"
+"%(unique_users_approved_or_sent)s\n"
 "    "
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #: TWLight/resources/templates/resources/partner_detail.html:361
 msgid "Applications over time"
@@ -1060,11 +1071,11 @@ msgid ""
 "staff member, but it is not visible to non-staff users."
 msgstr ""
 
-#: TWLight/resources/views.py:111
+#: TWLight/resources/views.py:122
 msgid "This partner is now waitlisted"
 msgstr ""
 
-#: TWLight/resources/views.py:114
+#: TWLight/resources/views.py:125
 msgid "This partner is now available for applications"
 msgstr ""
 
