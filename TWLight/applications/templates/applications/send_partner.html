@@ -35,12 +35,12 @@
     {% blocktrans %}Application data for {{ object }}{% endblocktrans %}
   </h2>
 
-  {% blocktrans trimmed count counter=object.contacts|length %}
+  {% blocktrans trimmed %}
     When you've processed the data below, click the 'mark as sent' button.
   {% endblocktrans %}
 
   <h3>
-    {% blocktrans trimmed count counter=object.contacts|length %}
+    {% blocktrans trimmed count object.contacts.all|length as counter %}
       Contact
     {% plural %}
       Contacts
