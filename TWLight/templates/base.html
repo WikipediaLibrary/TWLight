@@ -90,7 +90,7 @@
         </li>
       {% else %}
         <li role="presentation">
-          <a href="{% url 'oauth_login' %}">
+          <a href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
             {% trans "Log in" %}
           </a>
         </li>
