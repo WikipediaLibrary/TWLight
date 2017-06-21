@@ -11,7 +11,13 @@
   </p>
 
   <p>
-    {% trans "If you think your account should be able to do that, make sure that you logged in with the correct Wikipedia account and home wiki." %}
+    {% blocktrans trimmed %}
+      If you think your account should be able to do that, please email us about this error at
+      <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20Permission%20denied">wikipedialibrary@wikimedia.org</a>
+      or report it to us on
+      <a href="https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platformi&Wikipedia%20Library%20Permission%20denied">Phabricator</a>
+      (login required).
+    {% endblocktrans %}
   </p>
 
   <div class="clearfix">
