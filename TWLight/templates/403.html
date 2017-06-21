@@ -3,6 +3,7 @@
 {% load i18n %}
 
 {% block content %}
+{% get_current_language as LANGUAGE_CODE %}
 
   <h1>{% trans "Permission denied" %}</h1>
 
@@ -16,8 +17,8 @@
       <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20{{ path }}%20Permission%20denied">wikipedialibrary@wikimedia.org</a>
       or report it to us on
       <a href="https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%20Library%20{{ path }}%20Permission%20denied">Phabricator</a>
-      (login required).
     {% endblocktrans %}
+    (<a href="https://www.mediawiki.org/wiki/Phabricator/Help/{{ LANGUAGE_CODE }}?uselang={{ LANGUAGE_CODE }}">?</a>).
   </p>
 
   <div class="clearfix">
