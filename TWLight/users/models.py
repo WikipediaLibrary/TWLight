@@ -2,7 +2,7 @@
 
 """
 This file holds user profile information. (The base User model is part of
-Django; profiles extend that with locally useful information.)
+Django; profiles extend that with locally useful     information.)
 
 TWLight has three user types:
 * editors
@@ -261,13 +261,18 @@ class Editor(models.Model):
           name:         "Example"
           editcount:    10
         """
+        try:
+            endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=urllib2.quote(identity['username']))
 
-        endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=urllib2.quote(identity['username']))
+            results = json.loads(urllib2.urlopen(endpoint).read())
+            global_userinfo = results['query']['globaluserinfo']
+            logger.info('Fetched global_userinfo for User.')
 
-        results = json.loads(urllib2.urlopen(endpoint).read())
-        global_userinfo = results['query']['globaluserinfo']
-
-        return global_userinfo
+            return global_userinfo
+        except:
+            logger.exception('Couldn not fetch global_userinfo for User.')
+            return None
+            pass
 
     def update_from_wikipedia(self, identity):
         """

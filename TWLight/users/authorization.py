@@ -25,6 +25,8 @@ def _localize_oauth_redirect(redirect):
     Given an appropriate mediawiki oauth handshake url, return one that will
     present the user with a login page of their preferred language.
     """
+    logger.info('Localizing oauth handshake URL.')
+
     redirect_parsed = urlparse.urlparse(redirect)
     redirect_query = urlparse.parse_qs(redirect_parsed.query)
 
@@ -258,7 +260,9 @@ class OAuthInitializeView(View):
         # Try to capture the user's desired destination
         try:
             request.session['next'] = request.GET.get('next')
+            logger.info('Found "next" parameter for post-login redirection.')
         except:
+            logger.warning('No "next" parameter for post-login redirection.')
             pass
 
         # If the user has already logged in, let's not spam the OAuth proider.
@@ -268,25 +272,29 @@ class OAuthInitializeView(View):
             # parameter or to their own editor detail page.
             if request.session['next']:
                 return_url = request.session['next']
+                logger.info('User is already authenticated. Sending them on '
+                    'for post-login redirection per "next" parameter.')
             else:
                 return_url = reverse_lazy('users:editor_detail',
                     kwargs={'pk': self.request.user.editor.pk})
+                logger.warning('User already authenticated. No "next" '
+                    'parameter for post-login redirection.')
 
             return HttpResponseRedirect(return_url)
         else:
             # Get handshaker for the configured wiki oauth URL.
             handshaker = _get_handshaker()
-            logger.info('handshaker gotten')
+            logger.info('handshaker gotten.')
 
             try:
                 redirect, request_token = handshaker.initiate()
             except:
-                logger.exception('Handshaker not initiated')
+                logger.exception('Handshaker not initiated.')
                 raise
 
             local_redirect = _localize_oauth_redirect(redirect)
 
-            logger.info('handshaker initiated')
+            logger.info('handshaker initiated.')
             self.request.session['request_token'] = _dehydrate_token(request_token)
             return HttpResponseRedirect(local_redirect)
 
@@ -369,8 +377,12 @@ class OAuthCallbackView(View):
                 # parameter or to their own editor detail page.
                 if request.session['next']:
                     return_url = request.session['next']
+                    logger.info('User authenticated. Sending them on for '
+                        'post-login redirection per "next" parameter.')
                 else:
                     return_url = reverse_lazy('users:editor_detail',
                         kwargs={'pk': user.editor.pk})
+                    logger.warning('User authenticated. No "next" parameter '
+                        'for post-login redirection.')
 
         return HttpResponseRedirect(return_url)
