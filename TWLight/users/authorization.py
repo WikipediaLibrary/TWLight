@@ -121,7 +121,7 @@ class OAuthBackend(object):
         user = User.objects.create_user(username=username, email=email)
 
         # ------------------------- Create the editor --------------------------
-        logger.info('Creating editor'.format(username=username))
+        logger.info('Creating editor.')
         editor = Editor()
 
         editor.user = user
@@ -158,7 +158,7 @@ class OAuthBackend(object):
             editor = user.editor
 
             editor.update_from_wikipedia(identity)
-            logger.info('Editor {editor} updated.'.format(editor=editor))
+            logger.info('Editor updated.')
 
             created = False
 
@@ -169,8 +169,7 @@ class OAuthBackend(object):
 
         except AttributeError:
             logger.warning('A user tried using the Wikipedia OAuth '
-                'login path but does not have an attached editor'.format(
-                    username=identity['username']))
+                'login path but does not have an attached editor.')
             raise
 
         logger.info('User and editor created/updated after OAuth login.')
@@ -220,7 +219,7 @@ class OAuthBackend(object):
                 # in the admin interface.
                 pass
         else:
-            logger.info('User has been updated.'.format(user=user))
+            logger.info('User has been updated.')
 
         request.session['user_created'] = created
 

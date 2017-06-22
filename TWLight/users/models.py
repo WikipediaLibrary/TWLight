@@ -217,8 +217,7 @@ class Editor(models.Model):
 
             return True
         except AssertionError:
-            logger.exception('Editor {editor} was not valid.'.format(
-                editor=self))
+            logger.exception('Editor was not valid.')
             return False
 
     def get_userinfo(self, identity):
