@@ -270,7 +270,7 @@ class Editor(models.Model):
 
             return global_userinfo
         except:
-            logger.exception('Couldn not fetch global_userinfo for User.')
+            logger.exception('Could not fetch global_userinfo for User.')
             return None
             pass
 
