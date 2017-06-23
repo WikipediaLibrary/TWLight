@@ -106,6 +106,8 @@ class OAuthBackend(object):
             #get passed on as template context in Django 1.8. (They do in
             #1.10, so this can be revisited in future.)
             #logger.warning('User did not meet minimum requirements; not created.')
+            #messages.add_message (request, messages.WARNING,
+                #_('You do not meet the minimum requirements.'))
             #raise PermissionDenied
 
 
@@ -204,6 +206,9 @@ class OAuthBackend(object):
         except:
             logger.warning('Someone tried to log in but presented an invalid '
                 'access token.')
+            messages.add_message (request, messages.WARNING,
+                _('You tried to log in but presented an invalid access '
+                ' token.'))
             raise PermissionDenied
 
         # Get or create the user.
@@ -255,6 +260,8 @@ class OAuthInitializeView(View):
             assert domain in settings.ALLOWED_HOSTS # safety first!
         except (AssertionError, DisallowedHost):
             logger.exception()
+            messages.add_message (request, messages.WARNING,
+                _('{domain} is not an allowed host.').format(domain=domain))
             raise PermissionDenied
 
         # Try to capture the user's desired destination
@@ -315,6 +322,8 @@ class OAuthCallbackView(View):
             assert domain in settings.ALLOWED_HOSTS
         except (AssertionError, DisallowedHost):
             logger.exception()
+            messages.add_message (request, messages.WARNING,
+                _('{domain} is not an allowed host.').format(domain=domain))
             raise PermissionDenied
 
 
@@ -323,6 +332,8 @@ class OAuthCallbackView(View):
         except AssertionError:
             # get_handshaker will throw AssertionErrors for invalid data.
             logger.exception('Could not find handshaker')
+            messages.add_message (request, messages.WARNING,
+                _('Could not find handshaker.'))
             raise PermissionDenied
 
         # Get the request token, placed in session by OAuthInitializeView.
@@ -330,14 +341,18 @@ class OAuthCallbackView(View):
         request_token = _rehydrate_token(session_token)
 
         if not request_token:
-            logger.info('no request token :(')
+            logger.info('No request token.')
+            messages.add_message (request, messages.WARNING,
+                _('No request token.'))
             raise PermissionDenied
 
         # See if we can complete the OAuth process.
         try:
             access_token = handshaker.complete(request_token, response_qs)
         except:
-            logger.exception('Access token generation failed :(')
+            logger.exception('Access token generation failed.')
+            messages.add_message (request, messages.WARNING,
+                _('Access token generation failed.'))
             raise PermissionDenied
 
         user = authenticate(request=request,
