@@ -768,6 +768,8 @@ class RenewApplicationView(SelfOnly, View):
         except AssertionError:
             logger.exception('Attempt to renew unapproved app #{pk} has been '
                 'denied'.format(pk=app.pk))
+            messages.add_message(request, messages.WARNING, 'Attempt to renew '
+                'unapproved app #{pk} has been denied'.format(pk=app.pk))
             raise PermissionDenied
 
         return app
