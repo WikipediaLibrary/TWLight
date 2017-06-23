@@ -25,6 +25,8 @@ def _localize_oauth_redirect(redirect):
     Given an appropriate mediawiki oauth handshake url, return one that will
     present the user with a login page of their preferred language.
     """
+    logger.info('Localizing oauth handshake URL.')
+
     redirect_parsed = urlparse.urlparse(redirect)
     redirect_query = urlparse.parse_qs(redirect_parsed.query)
 
@@ -104,6 +106,8 @@ class OAuthBackend(object):
             #get passed on as template context in Django 1.8. (They do in
             #1.10, so this can be revisited in future.)
             #logger.warning('User did not meet minimum requirements; not created.')
+            #messages.add_message (request, messages.WARNING,
+                #_('You do not meet the minimum requirements.'))
             #raise PermissionDenied
 
 
@@ -121,7 +125,7 @@ class OAuthBackend(object):
         user = User.objects.create_user(username=username, email=email)
 
         # ------------------------- Create the editor --------------------------
-        logger.info('Creating editor'.format(username=username))
+        logger.info('Creating editor.')
         editor = Editor()
 
         editor.user = user
@@ -158,7 +162,7 @@ class OAuthBackend(object):
             editor = user.editor
 
             editor.update_from_wikipedia(identity)
-            logger.info('Editor {editor} updated.'.format(editor=editor))
+            logger.info('Editor updated.')
 
             created = False
 
@@ -169,8 +173,7 @@ class OAuthBackend(object):
 
         except AttributeError:
             logger.warning('A user tried using the Wikipedia OAuth '
-                'login path but does not have an attached editor'.format(
-                    username=identity['username']))
+                'login path but does not have an attached editor.')
             raise
 
         logger.info('User and editor created/updated after OAuth login.')
@@ -203,6 +206,9 @@ class OAuthBackend(object):
         except:
             logger.warning('Someone tried to log in but presented an invalid '
                 'access token.')
+            messages.add_message (request, messages.WARNING,
+                _('You tried to log in but presented an invalid access '
+                ' token.'))
             raise PermissionDenied
 
         # Get or create the user.
@@ -220,7 +226,7 @@ class OAuthBackend(object):
                 # in the admin interface.
                 pass
         else:
-            logger.info('User has been updated.'.format(user=user))
+            logger.info('User has been updated.')
 
         request.session['user_created'] = created
 
@@ -254,25 +260,48 @@ class OAuthInitializeView(View):
             assert domain in settings.ALLOWED_HOSTS # safety first!
         except (AssertionError, DisallowedHost):
             logger.exception()
+            messages.add_message (request, messages.WARNING,
+                _('{domain} is not an allowed host.').format(domain=domain))
             raise PermissionDenied
+
+        # Try to capture the user's desired destination
+        try:
+            request.session['next'] = request.GET.get('next')
+            logger.info('Found "next" parameter for post-login redirection.')
+        except:
+            logger.warning('No "next" parameter for post-login redirection.')
+            pass
 
         # If the user has already logged in, let's not spam the OAuth proider.
         if self.request.user.is_authenticated():
-            return HttpResponseRedirect('/users/')
+            # We're using this twice. Not very DRY.
+            # Send user either to the destination specified in the 'next'
+            # parameter or to their own editor detail page.
+            if request.session['next']:
+                return_url = request.session['next']
+                logger.info('User is already authenticated. Sending them on '
+                    'for post-login redirection per "next" parameter.')
+            else:
+                return_url = reverse_lazy('users:editor_detail',
+                    kwargs={'pk': self.request.user.editor.pk})
+                logger.warning('User already authenticated. No "next" '
+                    'parameter for post-login redirection.')
+
+            return HttpResponseRedirect(return_url)
         else:
             # Get handshaker for the configured wiki oauth URL.
             handshaker = _get_handshaker()
-            logger.info('handshaker gotten')
+            logger.info('handshaker gotten.')
 
             try:
                 redirect, request_token = handshaker.initiate()
             except:
-                logger.exception('Handshaker not initiated')
+                logger.exception('Handshaker not initiated.')
                 raise
 
             local_redirect = _localize_oauth_redirect(redirect)
 
-            logger.info('handshaker initiated')
+            logger.info('handshaker initiated.')
             self.request.session['request_token'] = _dehydrate_token(request_token)
             return HttpResponseRedirect(local_redirect)
 
@@ -293,6 +322,8 @@ class OAuthCallbackView(View):
             assert domain in settings.ALLOWED_HOSTS
         except (AssertionError, DisallowedHost):
             logger.exception()
+            messages.add_message (request, messages.WARNING,
+                _('{domain} is not an allowed host.').format(domain=domain))
             raise PermissionDenied
 
 
@@ -301,6 +332,8 @@ class OAuthCallbackView(View):
         except AssertionError:
             # get_handshaker will throw AssertionErrors for invalid data.
             logger.exception('Could not find handshaker')
+            messages.add_message (request, messages.WARNING,
+                _('Could not find handshaker.'))
             raise PermissionDenied
 
         # Get the request token, placed in session by OAuthInitializeView.
@@ -308,14 +341,18 @@ class OAuthCallbackView(View):
         request_token = _rehydrate_token(session_token)
 
         if not request_token:
-            logger.info('no request token :(')
+            logger.info('No request token.')
+            messages.add_message (request, messages.WARNING,
+                _('No request token.'))
             raise PermissionDenied
 
         # See if we can complete the OAuth process.
         try:
             access_token = handshaker.complete(request_token, response_qs)
         except:
-            logger.exception('Access token generation failed :(')
+            logger.exception('Access token generation failed.')
+            messages.add_message (request, messages.WARNING,
+                _('Access token generation failed.'))
             raise PermissionDenied
 
         user = authenticate(request=request,
@@ -350,7 +387,17 @@ class OAuthCallbackView(View):
                 return_url = reverse_lazy('terms')
             else:
                 messages.add_message(request, messages.INFO, _('Welcome back!'))
-                return_url = reverse_lazy('users:editor_detail',
-                    kwargs={'pk': user.editor.pk})
+                # We're using this twice. Not very DRY.
+                # Send user either to the destination specified in the 'next'
+                # parameter or to their own editor detail page.
+                if request.session['next']:
+                    return_url = request.session['next']
+                    logger.info('User authenticated. Sending them on for '
+                        'post-login redirection per "next" parameter.')
+                else:
+                    return_url = reverse_lazy('users:editor_detail',
+                        kwargs={'pk': user.editor.pk})
+                    logger.warning('User authenticated. No "next" parameter '
+                        'for post-login redirection.')
 
         return HttpResponseRedirect(return_url)

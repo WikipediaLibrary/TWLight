@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 
 from . import views
 
@@ -55,7 +56,7 @@ csv_urlpatterns = [
     ),
 
     url(r'^page_views/$',
-        views.CSVPageViews.as_view(),
+        login_required(views.CSVPageViews.as_view()),
         name='page_views'
     ),
 

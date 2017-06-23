@@ -55,6 +55,8 @@ class CoordinatorsOrSelf(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_coordinators_or_self(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be a '
+                    'coordinator or the owner to do that.')
             raise PermissionDenied
 
         return super(CoordinatorsOrSelf, self).dispatch(
@@ -77,6 +79,8 @@ class CoordinatorsOnly(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_coordinators_only(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be a '
+                    'coordinator to do that.')
             raise PermissionDenied
 
         return super(CoordinatorsOnly, self).dispatch(
@@ -101,6 +105,8 @@ class EditorsOnly(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_editors_only(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be a '
+                    'coordinator or an editor to do that.')
             raise PermissionDenied
 
         return super(EditorsOnly, self).dispatch(
@@ -136,6 +142,8 @@ class SelfOnly(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_self_only(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be the '
+                    'owner to do that.')
             raise PermissionDenied
 
         return super(SelfOnly, self).dispatch(

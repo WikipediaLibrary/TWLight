@@ -5,6 +5,7 @@ import logging
 
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve
+from django.contrib import messages
 from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
@@ -341,7 +342,10 @@ class CSVPageViews(_CSVDownloadView):
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_staff:
             return super(CSVPageViews, self).dispatch(request, *args, **kwargs)
-        raise PermissionDenied
+        else:
+            messages.add_message (request, messages.WARNING,
+                _('You must be staff to do that.'))
+            raise PermissionDenied
 
 
     def _write_data(self, response):
@@ -364,7 +368,10 @@ class CSVPageViewsByPath(_CSVDownloadView):
         if request.user.is_staff:
             return super(CSVPageViewsByPath, self).dispatch(
                 request, *args, **kwargs)
-        raise PermissionDenied
+        else:
+            messages.add_message (request, messages.WARNING,
+                _('You must be staff to do that.'))
+            raise PermissionDenied
 
 
     def _write_data(self, response):
