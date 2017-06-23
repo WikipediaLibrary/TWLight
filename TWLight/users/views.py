@@ -178,6 +178,8 @@ class PIIUpdateView(SelfOnly, UpdateView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
+            messages.add_message (request, messages.WARNING,
+                _('You must be logged in to do that.'))
             raise PermissionDenied
 
         return self.request.user.editor
@@ -236,6 +238,8 @@ class EmailChangeView(SelfOnly, FormView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
+            messages.add_message (request, messages.WARNING,
+                _('You must be logged in to do that.'))
             raise PermissionDenied
 
         return self.request.user
