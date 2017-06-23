@@ -341,7 +341,10 @@ class CSVPageViews(_CSVDownloadView):
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_staff:
             return super(CSVPageViews, self).dispatch(request, *args, **kwargs)
-        raise PermissionDenied
+        else:
+            messages.add_message (request, messages.WARNING,
+                _('You must be staff to do that.'))
+            raise PermissionDenied
 
 
     def _write_data(self, response):
@@ -364,7 +367,10 @@ class CSVPageViewsByPath(_CSVDownloadView):
         if request.user.is_staff:
             return super(CSVPageViewsByPath, self).dispatch(
                 request, *args, **kwargs)
-        raise PermissionDenied
+        else:
+            messages.add_message (request, messages.WARNING,
+                _('You must be staff to do that.'))
+            raise PermissionDenied
 
 
     def _write_data(self, response):
