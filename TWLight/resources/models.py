@@ -230,9 +230,8 @@ class Partner(models.Model):
     def save(self, *args, **kwargs):
         """Invalidate the rendered html partner description from cache"""
         super(Partner, self).save(*args, **kwargs)
-        langs = ['en', 'fi', 'fr']
-        for lang in langs:
-          cache_key = make_template_fragment_key('partner_description', [lang, self.pk])
+        for code in RESOURCE_LANGUAGE_CODES:
+          cache_key = make_template_fragment_key('partner_description', [code, self.pk])
           cache.delete(cache_key)
 
     @property
@@ -287,9 +286,8 @@ class Stream(models.Model):
     def save(self, *args, **kwargs):
         """Invalidate the rendered html stream description from cache"""
         super(Stream, self).save(*args, **kwargs)
-        langs = ['en', 'fi', 'fr']
-        for lang in langs:
-          cache_key = make_template_fragment_key('stream_description', [lang, self.pk])
+        for code in RESOURCE_LANGUAGE_CODES:
+          cache_key = make_template_fragment_key('partner_description', [code, self.pk])
           cache.delete(cache_key)
 
     @property
