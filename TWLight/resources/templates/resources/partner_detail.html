@@ -41,7 +41,7 @@
     <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a>
   {% endif %}
   {% if user|coordinators_only %}
-    <form action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
+    <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
       {% csrf_token %}
       <input type="submit" class="btn btn-default btn-block text-center visible-xs z-index-100" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
     </form>
@@ -74,7 +74,7 @@
         <img src="{{ object.logo_url }}" class="img-responsive hidden-xs center-block partner-logo">
       {% endif %}
 
-      <div class="well padding-top-20 hidden-xs">
+      <div class="well hidden-xs">
         {% if object.coordinator %}
           {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
             <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.

@@ -228,8 +228,8 @@ h4.timeline-title {
 A few spots just need padding instead of margin.
 */
 
-.padding-top-20 {
-  padding-top: 20px;
+.margin-bottom-2em {
+  margin-bottom: 2em;
 }
 
 .margin-top-5 {
@@ -238,6 +238,7 @@ A few spots just need padding instead of margin.
 
 .partner-logo {
   padding: 0 30% 0 30%;
+  margin-bottom: 2em;
 }
 
 /*
