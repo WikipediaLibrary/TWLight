@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-21 11:26+0000\n"
+"POT-Creation-Date: 2017-06-24 21:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,8 +20,8 @@ msgstr ""
 
 #: TWLight/applications/forms.py:102
 #: TWLight/applications/templates/applications/request_for_application.html:51
-#: TWLight/resources/templates/resources/partner_detail.html:41
-#: TWLight/resources/templates/resources/partner_detail.html:63
+#: TWLight/resources/templates/resources/partner_detail.html:37
+#: TWLight/resources/templates/resources/partner_detail.html:59
 #: TWLight/templates/base.html:56
 msgid "Apply"
 msgstr "Tallenna hakemus"
@@ -154,7 +154,7 @@ msgid "Days since application was closed"
 msgstr "Kuinka monta päivää sitten hakemus käsiteltiin"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:52
-#: TWLight/graphs/views.py:281
+#: TWLight/graphs/views.py:282
 msgid "Status"
 msgstr "Tila"
 
@@ -567,13 +567,13 @@ msgstr "Joukkopäivitys onnistui. Kiitos tämänpäiväisistä arvioinneistasi."
 msgid "All selected applications have been marked as sent."
 msgstr "Kaikki hakemukset on merkitty lähetetyiksi."
 
-#: TWLight/applications/views.py:797
+#: TWLight/applications/views.py:799
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr ""
 
-#: TWLight/applications/views.py:802
+#: TWLight/applications/views.py:804
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
@@ -663,63 +663,67 @@ msgstr ""
 "Uusi kommentti Wikipedian Lähdekirjaston hakemuksessa, jota olet "
 "kommentoinut."
 
-#: TWLight/graphs/views.py:201 TWLight/graphs/views.py:228
-#: TWLight/graphs/views.py:308 TWLight/graphs/views.py:331
+#: TWLight/graphs/views.py:202 TWLight/graphs/views.py:229
+#: TWLight/graphs/views.py:309 TWLight/graphs/views.py:332
 msgid "Date"
 msgstr "Päiväys"
 
-#: TWLight/graphs/views.py:201
+#: TWLight/graphs/views.py:202
 msgid "Number of partners"
 msgstr "Yhteistyökumppaneiden lukumäärä"
 
-#: TWLight/graphs/views.py:214 TWLight/templates/dashboard.html:169
+#: TWLight/graphs/views.py:215 TWLight/templates/dashboard.html:169
 msgid "Home wiki"
 msgstr "Kotiwiki"
 
-#: TWLight/graphs/views.py:214 TWLight/graphs/views.py:228
+#: TWLight/graphs/views.py:215 TWLight/graphs/views.py:229
 #: TWLight/templates/dashboard.html:172
 msgid "Number of users"
 msgstr "Käyttäjien lukumäärä"
 
-#: TWLight/graphs/views.py:228
+#: TWLight/graphs/views.py:229
 msgid "Wiki"
 msgstr "Wiki"
 
 #. Translators: the number of days it took to decide on applications that have already been accepted/rejected.
-#: TWLight/graphs/views.py:248
+#: TWLight/graphs/views.py:249
 msgid "Days until decision"
 msgstr "Päiviä päätökseen"
 
-#: TWLight/graphs/views.py:248 TWLight/graphs/views.py:282
+#: TWLight/graphs/views.py:249 TWLight/graphs/views.py:283
 msgid "Number of applications"
 msgstr "Hakijoiden lukumäärä"
 
-#: TWLight/graphs/views.py:265
+#: TWLight/graphs/views.py:266
 msgid "Month"
 msgstr "Kuukausi"
 
-#: TWLight/graphs/views.py:265
+#: TWLight/graphs/views.py:266
 msgid "Median days until decision"
 msgstr "Mediaaniluku päivistä, jotka kuluvat päätöksen tekemiseen"
 
-#: TWLight/graphs/views.py:309
+#: TWLight/graphs/views.py:310
 #, python-brace-format
 msgid "Number of applications to {partner}"
 msgstr "Yhteistyökumppanille {partner} tehtyjen hakemusten määrä"
 
-#: TWLight/graphs/views.py:332
+#: TWLight/graphs/views.py:333
 #, python-brace-format
 msgid "Number of unique users who have applied to {partner}"
 msgstr ""
 "Yhteistyökumppanin {partner} aineistoon käyttöoikeutta hakeneiden "
 "yksittäisten käyttäjien lukumäärä."
 
-#: TWLight/graphs/views.py:353 TWLight/graphs/views.py:383
+#: TWLight/graphs/views.py:347 TWLight/graphs/views.py:373
+msgid "You must be staff to do that."
+msgstr ""
+
+#: TWLight/graphs/views.py:357 TWLight/graphs/views.py:390
 #: TWLight/templates/dashboard.html:88
 msgid "Page URL"
 msgstr ""
 
-#: TWLight/graphs/views.py:354 TWLight/graphs/views.py:384
+#: TWLight/graphs/views.py:358 TWLight/graphs/views.py:391
 #, fuzzy
 #| msgid "Number of users"
 msgid "Number of (non-unique) visitors"
@@ -870,7 +874,7 @@ msgstr ""
 "Rastita, jos yhteistyökumppani vaatii hakijoiden hyväksyvän "
 "yhteistyökumppanin käyttöehdot."
 
-#: TWLight/resources/models.py:271
+#: TWLight/resources/models.py:270
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
@@ -880,11 +884,11 @@ msgstr ""
 "yhteistyökumppanin ja aineiston nimi pitää esittää yhdessä, mallineet "
 "hoitavat sen tavalla, joka on helppo muuntaa muille kielille."
 
-#: TWLight/resources/models.py:275
+#: TWLight/resources/models.py:274
 msgid "Optional description of this stream's resources."
 msgstr "Valinnainen kuvaus syötteen sisällöstä."
 
-#: TWLight/resources/models.py:316
+#: TWLight/resources/models.py:314
 #, fuzzy
 #| msgid ""
 #| "Organizational role or job title. This is NOT intended to be used for "
@@ -894,7 +898,7 @@ msgid ""
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
 msgstr "Rooli järjestössä tai työnimeke. "
 
-#: TWLight/resources/models.py:322
+#: TWLight/resources/models.py:320
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
@@ -902,8 +906,8 @@ msgstr ""
 "Muoto, jossa yhteyshenkilön nimi esitetään sähköpostitervehdyksissä(kuten "
 "'Moi Maija')"
 
-#: TWLight/resources/templates/resources/partner_detail.html:33
-#: TWLight/resources/templates/resources/partner_detail.html:55
+#: TWLight/resources/templates/resources/partner_detail.html:29
+#: TWLight/resources/templates/resources/partner_detail.html:51
 #, python-format
 msgid ""
 "<strong>Waitlisted</strong> &mdash; There are no access grants available for "
@@ -911,32 +915,32 @@ msgid ""
 "access</a>; applications will be processed when access is available."
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:46
-#: TWLight/resources/templates/resources/partner_detail.html:69
+#: TWLight/resources/templates/resources/partner_detail.html:42
+#: TWLight/resources/templates/resources/partner_detail.html:65
 msgid "Remove from waitlist"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:46
-#: TWLight/resources/templates/resources/partner_detail.html:69
+#: TWLight/resources/templates/resources/partner_detail.html:42
+#: TWLight/resources/templates/resources/partner_detail.html:65
 msgid "Set as waitlisted"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:79
+#: TWLight/resources/templates/resources/partner_detail.html:75
 #, python-format
 msgid "<strong>%(coordinator)s</strong> processes applications to %(partner)s."
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:87
+#: TWLight/resources/templates/resources/partner_detail.html:83
 #, fuzzy
 #| msgid "Talk page:"
 msgid "Talk page"
 msgstr "Keskustelusivu"
 
-#: TWLight/resources/templates/resources/partner_detail.html:94
+#: TWLight/resources/templates/resources/partner_detail.html:90
 msgid "Special:EmailUser page"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:100
+#: TWLight/resources/templates/resources/partner_detail.html:96
 #, fuzzy
 #| msgid ""
 #| "The Wikipedia Library Card Platform is a project of <a href=\"https://"
@@ -951,26 +955,26 @@ msgstr ""
 "wikimedia.org/wiki/The_Wikipedia_Library\"> Wikipedian Lähdekirjaston</a> "
 "projekti."
 
-#: TWLight/resources/templates/resources/partner_detail.html:128
+#: TWLight/resources/templates/resources/partner_detail.html:124
 msgid "Description not available."
 msgstr "Ei kuvausta"
 
-#: TWLight/resources/templates/resources/partner_detail.html:145
+#: TWLight/resources/templates/resources/partner_detail.html:141
 #, python-format
 msgid "Language(s): %(language_list)s"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:151
+#: TWLight/resources/templates/resources/partner_detail.html:147
 #, fuzzy
 #| msgid "Description not available."
 msgid "Languages not available."
 msgstr "Ei kuvausta"
 
-#: TWLight/resources/templates/resources/partner_detail.html:162
+#: TWLight/resources/templates/resources/partner_detail.html:158
 msgid "Special requirements for applicants"
 msgstr "Erityisvaatimukset hakijoille"
 
-#: TWLight/resources/templates/resources/partner_detail.html:169
+#: TWLight/resources/templates/resources/partner_detail.html:165
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -990,7 +994,7 @@ msgstr ""
 "\">käyttöehdot</a>.\n"
 "                "
 
-#: TWLight/resources/templates/resources/partner_detail.html:178
+#: TWLight/resources/templates/resources/partner_detail.html:174
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1006,7 +1010,7 @@ msgstr ""
 "                  %(publisher)s vaatii, että annat oikean nimesi.\n"
 "                "
 
-#: TWLight/resources/templates/resources/partner_detail.html:186
+#: TWLight/resources/templates/resources/partner_detail.html:182
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1023,7 +1027,7 @@ msgstr ""
 "                  %(publisher)s vaatii, että nimeät asuinpaikkasi.\n"
 "                "
 
-#: TWLight/resources/templates/resources/partner_detail.html:194
+#: TWLight/resources/templates/resources/partner_detail.html:190
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1040,7 +1044,7 @@ msgstr ""
 "                  %(publisher)s vaatii, että nimeät ammattisi.\n"
 "                "
 
-#: TWLight/resources/templates/resources/partner_detail.html:202
+#: TWLight/resources/templates/resources/partner_detail.html:198
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1058,7 +1062,7 @@ msgstr ""
 "sidoksissa.\n"
 "                "
 
-#: TWLight/resources/templates/resources/partner_detail.html:210
+#: TWLight/resources/templates/resources/partner_detail.html:206
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1079,7 +1083,7 @@ msgstr ""
 "                  käyttöoikeuden.\n"
 "                "
 
-#: TWLight/resources/templates/resources/partner_detail.html:220
+#: TWLight/resources/templates/resources/partner_detail.html:216
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1106,7 +1110,7 @@ msgstr ""
 "                    kerrallaan.\n"
 "                  "
 
-#: TWLight/resources/templates/resources/partner_detail.html:226
+#: TWLight/resources/templates/resources/partner_detail.html:222
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1127,45 +1131,45 @@ msgstr ""
 "                   johon haluat käyttöoikeuden.\n"
 "                  "
 
-#: TWLight/resources/templates/resources/partner_detail.html:245
+#: TWLight/resources/templates/resources/partner_detail.html:241
 msgid "Collections"
 msgstr "Kokoelmat"
 
-#: TWLight/resources/templates/resources/partner_detail.html:277
+#: TWLight/resources/templates/resources/partner_detail.html:273
 #: TWLight/templates/base.html:170
 msgid "Terms of use"
 msgstr "Käyttöehdot"
 
-#: TWLight/resources/templates/resources/partner_detail.html:279
+#: TWLight/resources/templates/resources/partner_detail.html:275
 msgid "Terms of use not available."
 msgstr "Käyttöehdot eivät ole saatavilla"
 
-#: TWLight/resources/templates/resources/partner_detail.html:291
+#: TWLight/resources/templates/resources/partner_detail.html:287
 #: TWLight/templates/base.html:82
 msgid "Metrics"
 msgstr "Tilastot"
 
-#: TWLight/resources/templates/resources/partner_detail.html:303
+#: TWLight/resources/templates/resources/partner_detail.html:299
 #: TWLight/templates/dashboard.html:60
 msgid "Total applications (all time)"
 msgstr "Kaikki hakemukset (kautta aikojen)"
 
-#: TWLight/resources/templates/resources/partner_detail.html:318
+#: TWLight/resources/templates/resources/partner_detail.html:314
 msgid "Total unique applicants (all time)"
 msgstr "Kaikki yksitäiset hakijat (kautta aikojen)"
 
-#: TWLight/resources/templates/resources/partner_detail.html:333
+#: TWLight/resources/templates/resources/partner_detail.html:329
 msgid "Median days from application to decision"
 msgstr "Mediaaniaika päivissä hakemuksen tekemisestä päätöksen antamiseen"
 
-#: TWLight/resources/templates/resources/partner_detail.html:341
+#: TWLight/resources/templates/resources/partner_detail.html:337
 msgid "Applications by status"
 msgstr "Hakemukset tilan mukaan"
 
-#: TWLight/resources/templates/resources/partner_detail.html:341
+#: TWLight/resources/templates/resources/partner_detail.html:337
+#: TWLight/resources/templates/resources/partner_detail.html:359
 #: TWLight/resources/templates/resources/partner_detail.html:363
 #: TWLight/resources/templates/resources/partner_detail.html:367
-#: TWLight/resources/templates/resources/partner_detail.html:371
 #: TWLight/templates/dashboard.html:79 TWLight/templates/dashboard.html:144
 #: TWLight/templates/dashboard.html:160 TWLight/templates/dashboard.html:191
 #: TWLight/templates/dashboard.html:205 TWLight/templates/dashboard.html:215
@@ -1173,7 +1177,7 @@ msgstr "Hakemukset tilan mukaan"
 msgid "download as csv"
 msgstr "lataa csv-tiedostona"
 
-#: TWLight/resources/templates/resources/partner_detail.html:346
+#: TWLight/resources/templates/resources/partner_detail.html:342
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1206,7 +1210,7 @@ msgstr[1] ""
 "%(total_apps_approved)s\n"
 "    "
 
-#: TWLight/resources/templates/resources/partner_detail.html:354
+#: TWLight/resources/templates/resources/partner_detail.html:350
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1239,19 +1243,19 @@ msgstr[1] ""
 "aikojen): %(unique_users_approved)s\n"
 "    "
 
-#: TWLight/resources/templates/resources/partner_detail.html:361
+#: TWLight/resources/templates/resources/partner_detail.html:357
 msgid "Applications over time"
 msgstr "Hakemukset kautta aikojen"
 
-#: TWLight/resources/templates/resources/partner_detail.html:363
+#: TWLight/resources/templates/resources/partner_detail.html:359
 msgid "All applications"
 msgstr "Kaikki hakemukset"
 
-#: TWLight/resources/templates/resources/partner_detail.html:367
+#: TWLight/resources/templates/resources/partner_detail.html:363
 msgid "Approved applications only"
 msgstr "Vain hyväksytyt hakemukset"
 
-#: TWLight/resources/templates/resources/partner_detail.html:371
+#: TWLight/resources/templates/resources/partner_detail.html:367
 msgid "Unique users over time"
 msgstr "Yksittäiset muokkaajat kautta aikojen"
 
@@ -1315,31 +1319,31 @@ msgstr ""
 msgid "French"
 msgstr "Ranska"
 
-#: TWLight/templates/403.html:7
+#: TWLight/templates/403.html:8
 msgid "Permission denied"
 msgstr ""
 
-#: TWLight/templates/403.html:10
+#: TWLight/templates/403.html:11
 msgid "Sorry; you aren't allowed to do that."
 msgstr ""
 
-#: TWLight/templates/403.html:14
+#: TWLight/templates/403.html:15
 #, python-format
 msgid ""
 "If you think your account should be able to do that, please email us about "
 "this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20Permission%%20denied"
+"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
 "\">wikipedialibrary@wikimedia.org</a> or report it to us on <a href="
 "\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
-"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20Permission"
-"%%20denied\">Phabricator</a> (login required)."
+"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
+"%%20Permission%%20denied\">Phabricator</a>"
 msgstr ""
 
-#: TWLight/templates/404.html:7
+#: TWLight/templates/404.html:8
 msgid "Not found"
 msgstr ""
 
-#: TWLight/templates/404.html:10
+#: TWLight/templates/404.html:11
 msgid "Sorry; we can't find that."
 msgstr ""
 
@@ -1348,10 +1352,11 @@ msgstr ""
 msgid ""
 "If you are certain that something should be here, please email us about this "
 "error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia"
-"%%20Library%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a> or report "
-"it to us on <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/"
-"form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20Not"
-"%%20found\">Phabricator</a> (login required)."
+"%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</"
+"a> or report it to us on <a href=\"https://phabricator.wikimedia.org/"
+"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
+"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found"
+"\">Phabricator</a>"
 msgstr ""
 
 #: TWLight/templates/about.html:6
@@ -1647,6 +1652,10 @@ msgstr "Yksityisyydensuojakäytäntö"
 msgid "Feedback"
 msgstr "Palaute"
 
+#: TWLight/templates/base.html:180
+msgid "Phabricator"
+msgstr ""
+
 #: TWLight/templates/dashboard.html:16
 msgid "Total partners (all time)"
 msgstr "Kaikki yhteistyökumppanit (kautta aikojen)"
@@ -1826,7 +1835,28 @@ msgstr ""
 msgid "User {user} deactivated."
 msgstr ""
 
-#: TWLight/users/authorization.py:331
+#: TWLight/users/authorization.py:210
+msgid "You tried to log in but presented an invalid access  token."
+msgstr ""
+
+#: TWLight/users/authorization.py:264 TWLight/users/authorization.py:326
+#, python-brace-format
+msgid "{domain} is not an allowed host."
+msgstr ""
+
+#: TWLight/users/authorization.py:336
+msgid "Could not find handshaker."
+msgstr ""
+
+#: TWLight/users/authorization.py:346
+msgid "No request token."
+msgstr ""
+
+#: TWLight/users/authorization.py:355
+msgid "Access token generation failed."
+msgstr ""
+
+#: TWLight/users/authorization.py:368
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
@@ -1834,7 +1864,7 @@ msgstr ""
 "Wikipedia-käyttäjätunnuksesi ei täytä kelpoisuusehtoja, jotka on esitetty "
 "käyttöehdoissa, joten Käyttöoikeustoimiston tunnustasi ei voida aktivoida."
 
-#: TWLight/users/authorization.py:336
+#: TWLight/users/authorization.py:373
 msgid ""
 "Either your Wikipedia Library Card Platform account has been deactivated or "
 "your Wikipedia account no longer meets the eligibility criteria in the terms "
@@ -1845,11 +1875,11 @@ msgstr ""
 "määriteltyjä kelpoisuusehtoja, joten et voi kirjautua sisään."
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/authorization.py:348
+#: TWLight/users/authorization.py:385
 msgid "Welcome! Please agree to the terms of use."
 msgstr "Tervetuloa! Hyväksythän käyttöehdot."
 
-#: TWLight/users/authorization.py:352
+#: TWLight/users/authorization.py:389
 msgid "Welcome back!"
 msgstr "Tervetuloa takaisin!"
 
@@ -1927,7 +1957,7 @@ msgstr ""
 msgid "Wiki contributions, as entered by user"
 msgstr "Käyttäjän antama muokkausmäärä"
 
-#: TWLight/users/models.py:336
+#: TWLight/users/models.py:340
 #, fuzzy, python-brace-format
 #| msgid "{wp_username} ({wiki})"
 msgid "{wp_username}"
@@ -2599,20 +2629,24 @@ msgstr ""
 "Täydennäthän alle tiedot Wikipedia-muokkauksistasi, jotta koordinaattorit "
 "voivat arvioida hakemuksesi."
 
-#: TWLight/users/views.py:194
+#: TWLight/users/views.py:182 TWLight/users/views.py:242
+msgid "You must be logged in to do that."
+msgstr ""
+
+#: TWLight/users/views.py:196
 msgid "Update information"
 msgstr "Päivitä tiedot"
 
-#: TWLight/users/views.py:205
+#: TWLight/users/views.py:207
 msgid "Your information has been updated."
 msgstr "Tietosi on päivitetty."
 
-#: TWLight/users/views.py:247
+#: TWLight/users/views.py:251
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Sähköpostiksesi on vaihdettu {email}."
 
-#: TWLight/users/views.py:252
+#: TWLight/users/views.py:256
 #, fuzzy
 #| msgid ""
 #| "You may explore the site, but you will not be able to apply for access "
@@ -2624,7 +2658,7 @@ msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
-#: TWLight/users/views.py:324
+#: TWLight/users/views.py:328
 #, fuzzy
 #| msgid ""
 #| "You may explore the site, but you will not be able to apply for access "
@@ -2636,7 +2670,7 @@ msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
-#: TWLight/users/views.py:328
+#: TWLight/users/views.py:332
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
