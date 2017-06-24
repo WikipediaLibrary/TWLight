@@ -237,10 +237,34 @@ A few spots just need padding instead of margin.
   margin-top: 5px;
 }
 
+.row-flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.col-flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .partner-logo {
   padding: 0 30% 0 30%;
   margin: 0 auto 2em auto;
   max-height: 7em;
+}
+
+.panel-partner-description {
+
+}
+
+.panel-partner-info {
+
 }
 
 /*

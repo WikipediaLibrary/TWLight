@@ -35,7 +35,7 @@
     {% endfor %}
 
     {% if partner.description %}
-      <p>
+      <div class="panel-partner-description">
         {% comment %}
           Cache lifetime should be None, which would be forever since we're
           invalidating on update. However, as 2017-04-06 a bug in django
@@ -46,22 +46,23 @@
         {% cache 31536000 partner_description LANGUAGE_CODE partner.pk %}
           {{ partner.description | twlight_wikicode2html | safe }}
         {% endcache %}
-      </p>
+      </div>
       <hr />
     {% endif %}
-
-    <p class="partner-languages">
-      {% if partner.get_languages %}
-        {{ partner.get_languages }}
-      {% else %}
-        {% trans "Language(s) not known" %}
-      {% endif %}
-    </p>
-    <div class="text-center">
-      <a href="{% url 'partners:detail' partner.pk %}" class="btn btn-default">
-        {% trans "More info" %}
-      </a>
-      <br />
+    <div class="panel-partner-info">
+      <p class="partner-languages">
+        {% if partner.get_languages %}
+          {{ partner.get_languages }}
+        {% else %}
+          {% trans "Language(s) not known" %}
+        {% endif %}
+      </p>
+      <div class="text-center">
+        <a href="{% url 'partners:detail' partner.pk %}" class="btn btn-default">
+          {% trans "More info" %}
+        </a>
+        <br />
+      </div>
     </div>
   </div>
 </div>
