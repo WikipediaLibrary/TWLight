@@ -251,6 +251,28 @@ A few spots just need padding instead of margin.
   display: -ms-flexbox;
   display: flex;
 }
+/*
+  Override some of the panel border styling so our flex
+  elements look correct.
+*/
+.panel {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.panel-body {
+  border: solid #ddd;
+  border-width: 0 1px 1px 1px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-heading {
+  border: solid #ddd;
+  border-width: 1px 1px 0 1px;
+}
+
 
 .partner-logo {
   padding: 0 30% 0 30%;
