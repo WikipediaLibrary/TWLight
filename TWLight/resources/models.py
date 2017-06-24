@@ -287,7 +287,7 @@ class Stream(models.Model):
         """Invalidate the rendered html stream description from cache"""
         super(Stream, self).save(*args, **kwargs)
         for code in RESOURCE_LANGUAGE_CODES:
-          cache_key = make_template_fragment_key('partner_description', [code, self.pk])
+          cache_key = make_template_fragment_key('stream_description', [code, self.pk])
           cache.delete(cache_key)
 
     @property
