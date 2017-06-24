@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-21 11:26+0000\n"
+"POT-Creation-Date: 2017-06-24 21:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #: TWLight/applications/forms.py:102
 #: TWLight/applications/templates/applications/request_for_application.html:51
-#: TWLight/resources/templates/resources/partner_detail.html:41
-#: TWLight/resources/templates/resources/partner_detail.html:63
+#: TWLight/resources/templates/resources/partner_detail.html:37
+#: TWLight/resources/templates/resources/partner_detail.html:59
 #: TWLight/templates/base.html:56
 msgid "Apply"
 msgstr ""
@@ -149,7 +149,7 @@ msgid "Days since application was closed"
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_evaluation.html:52
-#: TWLight/graphs/views.py:281
+#: TWLight/graphs/views.py:282
 msgid "Status"
 msgstr ""
 
@@ -528,13 +528,13 @@ msgstr ""
 msgid "All selected applications have been marked as sent."
 msgstr ""
 
-#: TWLight/applications/views.py:797
+#: TWLight/applications/views.py:799
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr ""
 
-#: TWLight/applications/views.py:802
+#: TWLight/applications/views.py:804
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
@@ -611,61 +611,65 @@ msgstr ""
 msgid "Your Wikipedia Library application has been waitlisted"
 msgstr ""
 
-#: TWLight/graphs/views.py:201 TWLight/graphs/views.py:228
-#: TWLight/graphs/views.py:308 TWLight/graphs/views.py:331
+#: TWLight/graphs/views.py:202 TWLight/graphs/views.py:229
+#: TWLight/graphs/views.py:309 TWLight/graphs/views.py:332
 msgid "Date"
 msgstr ""
 
-#: TWLight/graphs/views.py:201
+#: TWLight/graphs/views.py:202
 msgid "Number of partners"
 msgstr ""
 
-#: TWLight/graphs/views.py:214 TWLight/templates/dashboard.html:169
+#: TWLight/graphs/views.py:215 TWLight/templates/dashboard.html:169
 msgid "Home wiki"
 msgstr ""
 
-#: TWLight/graphs/views.py:214 TWLight/graphs/views.py:228
+#: TWLight/graphs/views.py:215 TWLight/graphs/views.py:229
 #: TWLight/templates/dashboard.html:172
 msgid "Number of users"
 msgstr ""
 
-#: TWLight/graphs/views.py:228
+#: TWLight/graphs/views.py:229
 msgid "Wiki"
 msgstr ""
 
 #. Translators: the number of days it took to decide on applications that have already been accepted/rejected.
-#: TWLight/graphs/views.py:248
+#: TWLight/graphs/views.py:249
 msgid "Days until decision"
 msgstr ""
 
-#: TWLight/graphs/views.py:248 TWLight/graphs/views.py:282
+#: TWLight/graphs/views.py:249 TWLight/graphs/views.py:283
 msgid "Number of applications"
 msgstr ""
 
-#: TWLight/graphs/views.py:265
+#: TWLight/graphs/views.py:266
 msgid "Month"
 msgstr ""
 
-#: TWLight/graphs/views.py:265
+#: TWLight/graphs/views.py:266
 msgid "Median days until decision"
 msgstr ""
 
-#: TWLight/graphs/views.py:309
+#: TWLight/graphs/views.py:310
 #, python-brace-format
 msgid "Number of applications to {partner}"
 msgstr ""
 
-#: TWLight/graphs/views.py:332
+#: TWLight/graphs/views.py:333
 #, python-brace-format
 msgid "Number of unique users who have applied to {partner}"
 msgstr ""
 
-#: TWLight/graphs/views.py:353 TWLight/graphs/views.py:383
+#: TWLight/graphs/views.py:347 TWLight/graphs/views.py:373
+msgid "You must be staff to do that."
+msgstr ""
+
+#: TWLight/graphs/views.py:357 TWLight/graphs/views.py:390
 #: TWLight/templates/dashboard.html:88
 msgid "Page URL"
 msgstr ""
 
-#: TWLight/graphs/views.py:354 TWLight/graphs/views.py:384
+#: TWLight/graphs/views.py:358 TWLight/graphs/views.py:391
 msgid "Number of (non-unique) visitors"
 msgstr ""
 
@@ -787,30 +791,30 @@ msgid ""
 "terms of use."
 msgstr ""
 
-#: TWLight/resources/models.py:271
+#: TWLight/resources/models.py:270
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
 msgstr ""
 
-#: TWLight/resources/models.py:275
+#: TWLight/resources/models.py:274
 msgid "Optional description of this stream's resources."
 msgstr ""
 
-#: TWLight/resources/models.py:316
+#: TWLight/resources/models.py:314
 msgid ""
 "Organizational role or job title. This is NOT intended to be used for "
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
 msgstr ""
 
-#: TWLight/resources/models.py:322
+#: TWLight/resources/models.py:320
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:33
-#: TWLight/resources/templates/resources/partner_detail.html:55
+#: TWLight/resources/templates/resources/partner_detail.html:29
+#: TWLight/resources/templates/resources/partner_detail.html:51
 #, python-format
 msgid ""
 "<strong>Waitlisted</strong> &mdash; There are no access grants available for "
@@ -818,54 +822,54 @@ msgid ""
 "access</a>; applications will be processed when access is available."
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:46
-#: TWLight/resources/templates/resources/partner_detail.html:69
+#: TWLight/resources/templates/resources/partner_detail.html:42
+#: TWLight/resources/templates/resources/partner_detail.html:65
 msgid "Remove from waitlist"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:46
-#: TWLight/resources/templates/resources/partner_detail.html:69
+#: TWLight/resources/templates/resources/partner_detail.html:42
+#: TWLight/resources/templates/resources/partner_detail.html:65
 msgid "Set as waitlisted"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:79
+#: TWLight/resources/templates/resources/partner_detail.html:75
 #, python-format
 msgid "<strong>%(coordinator)s</strong> processes applications to %(partner)s."
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:87
+#: TWLight/resources/templates/resources/partner_detail.html:83
 msgid "Talk page"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:94
+#: TWLight/resources/templates/resources/partner_detail.html:90
 msgid "Special:EmailUser page"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:100
+#: TWLight/resources/templates/resources/partner_detail.html:96
 msgid ""
 "The Wikipedia Library team will process this application. Want to help? <a "
 "href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/"
 "Coordinators/Signup\">Sign up as a coordinator.</a>"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:128
+#: TWLight/resources/templates/resources/partner_detail.html:124
 msgid "Description not available."
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:145
+#: TWLight/resources/templates/resources/partner_detail.html:141
 #, python-format
 msgid "Language(s): %(language_list)s"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:151
+#: TWLight/resources/templates/resources/partner_detail.html:147
 msgid "Languages not available."
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:162
+#: TWLight/resources/templates/resources/partner_detail.html:158
 msgid "Special requirements for applicants"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:169
+#: TWLight/resources/templates/resources/partner_detail.html:165
 #, python-format
 msgid ""
 "\n"
@@ -875,7 +879,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:178
+#: TWLight/resources/templates/resources/partner_detail.html:174
 #, python-format
 msgid ""
 "\n"
@@ -883,7 +887,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:186
+#: TWLight/resources/templates/resources/partner_detail.html:182
 #, python-format
 msgid ""
 "\n"
@@ -892,7 +896,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:194
+#: TWLight/resources/templates/resources/partner_detail.html:190
 #, python-format
 msgid ""
 "\n"
@@ -901,7 +905,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:202
+#: TWLight/resources/templates/resources/partner_detail.html:198
 #, python-format
 msgid ""
 "\n"
@@ -910,7 +914,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:210
+#: TWLight/resources/templates/resources/partner_detail.html:206
 #, python-format
 msgid ""
 "\n"
@@ -920,7 +924,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:220
+#: TWLight/resources/templates/resources/partner_detail.html:216
 #, python-format
 msgid ""
 "\n"
@@ -932,7 +936,7 @@ msgid ""
 "                    "
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:226
+#: TWLight/resources/templates/resources/partner_detail.html:222
 #, python-format
 msgid ""
 "\n"
@@ -942,45 +946,45 @@ msgid ""
 "                    "
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:245
+#: TWLight/resources/templates/resources/partner_detail.html:241
 msgid "Collections"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:277
+#: TWLight/resources/templates/resources/partner_detail.html:273
 #: TWLight/templates/base.html:170
 msgid "Terms of use"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:279
+#: TWLight/resources/templates/resources/partner_detail.html:275
 msgid "Terms of use not available."
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:291
+#: TWLight/resources/templates/resources/partner_detail.html:287
 #: TWLight/templates/base.html:82
 msgid "Metrics"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:303
+#: TWLight/resources/templates/resources/partner_detail.html:299
 #: TWLight/templates/dashboard.html:60
 msgid "Total applications (all time)"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:318
+#: TWLight/resources/templates/resources/partner_detail.html:314
 msgid "Total unique applicants (all time)"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:333
+#: TWLight/resources/templates/resources/partner_detail.html:329
 msgid "Median days from application to decision"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:341
+#: TWLight/resources/templates/resources/partner_detail.html:337
 msgid "Applications by status"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:341
+#: TWLight/resources/templates/resources/partner_detail.html:337
+#: TWLight/resources/templates/resources/partner_detail.html:359
 #: TWLight/resources/templates/resources/partner_detail.html:363
 #: TWLight/resources/templates/resources/partner_detail.html:367
-#: TWLight/resources/templates/resources/partner_detail.html:371
 #: TWLight/templates/dashboard.html:79 TWLight/templates/dashboard.html:144
 #: TWLight/templates/dashboard.html:160 TWLight/templates/dashboard.html:191
 #: TWLight/templates/dashboard.html:205 TWLight/templates/dashboard.html:215
@@ -988,7 +992,7 @@ msgstr ""
 msgid "download as csv"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:346
+#: TWLight/resources/templates/resources/partner_detail.html:342
 #, python-format
 msgid ""
 "\n"
@@ -1007,7 +1011,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:354
+#: TWLight/resources/templates/resources/partner_detail.html:350
 #, python-format
 msgid ""
 "\n"
@@ -1026,19 +1030,19 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:361
+#: TWLight/resources/templates/resources/partner_detail.html:357
 msgid "Applications over time"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:363
+#: TWLight/resources/templates/resources/partner_detail.html:359
 msgid "All applications"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:367
+#: TWLight/resources/templates/resources/partner_detail.html:363
 msgid "Approved applications only"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_detail.html:371
+#: TWLight/resources/templates/resources/partner_detail.html:367
 msgid "Unique users over time"
 msgstr ""
 
@@ -1090,31 +1094,31 @@ msgstr ""
 msgid "French"
 msgstr ""
 
-#: TWLight/templates/403.html:7
+#: TWLight/templates/403.html:8
 msgid "Permission denied"
 msgstr ""
 
-#: TWLight/templates/403.html:10
+#: TWLight/templates/403.html:11
 msgid "Sorry; you aren't allowed to do that."
 msgstr ""
 
-#: TWLight/templates/403.html:14
+#: TWLight/templates/403.html:15
 #, python-format
 msgid ""
 "If you think your account should be able to do that, please email us about "
 "this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20Permission%%20denied"
+"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
 "\">wikipedialibrary@wikimedia.org</a> or report it to us on <a href="
 "\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
-"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20Permission"
-"%%20denied\">Phabricator</a> (login required)."
+"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
+"%%20Permission%%20denied\">Phabricator</a>"
 msgstr ""
 
-#: TWLight/templates/404.html:7
+#: TWLight/templates/404.html:8
 msgid "Not found"
 msgstr ""
 
-#: TWLight/templates/404.html:10
+#: TWLight/templates/404.html:11
 msgid "Sorry; we can't find that."
 msgstr ""
 
@@ -1123,10 +1127,11 @@ msgstr ""
 msgid ""
 "If you are certain that something should be here, please email us about this "
 "error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia"
-"%%20Library%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a> or report "
-"it to us on <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/"
-"form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20Not"
-"%%20found\">Phabricator</a> (login required)."
+"%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</"
+"a> or report it to us on <a href=\"https://phabricator.wikimedia.org/"
+"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
+"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found"
+"\">Phabricator</a>"
 msgstr ""
 
 #: TWLight/templates/about.html:6
@@ -1365,6 +1370,10 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
+#: TWLight/templates/base.html:180
+msgid "Phabricator"
+msgstr ""
+
 #: TWLight/templates/dashboard.html:16
 msgid "Total partners (all time)"
 msgstr ""
@@ -1490,13 +1499,34 @@ msgstr ""
 msgid "User {user} deactivated."
 msgstr ""
 
-#: TWLight/users/authorization.py:331
+#: TWLight/users/authorization.py:210
+msgid "You tried to log in but presented an invalid access  token."
+msgstr ""
+
+#: TWLight/users/authorization.py:264 TWLight/users/authorization.py:326
+#, python-brace-format
+msgid "{domain} is not an allowed host."
+msgstr ""
+
+#: TWLight/users/authorization.py:336
+msgid "Could not find handshaker."
+msgstr ""
+
+#: TWLight/users/authorization.py:346
+msgid "No request token."
+msgstr ""
+
+#: TWLight/users/authorization.py:355
+msgid "Access token generation failed."
+msgstr ""
+
+#: TWLight/users/authorization.py:368
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
-#: TWLight/users/authorization.py:336
+#: TWLight/users/authorization.py:373
 msgid ""
 "Either your Wikipedia Library Card Platform account has been deactivated or "
 "your Wikipedia account no longer meets the eligibility criteria in the terms "
@@ -1504,11 +1534,11 @@ msgid ""
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/authorization.py:348
+#: TWLight/users/authorization.py:385
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
-#: TWLight/users/authorization.py:352
+#: TWLight/users/authorization.py:389
 msgid "Welcome back!"
 msgstr ""
 
@@ -1584,7 +1614,7 @@ msgstr ""
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:336
+#: TWLight/users/models.py:340
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
@@ -2032,32 +2062,36 @@ msgid ""
 "evaluate your applications."
 msgstr ""
 
-#: TWLight/users/views.py:194
+#: TWLight/users/views.py:182 TWLight/users/views.py:242
+msgid "You must be logged in to do that."
+msgstr ""
+
+#: TWLight/users/views.py:196
 msgid "Update information"
 msgstr ""
 
-#: TWLight/users/views.py:205
+#: TWLight/users/views.py:207
 msgid "Your information has been updated."
 msgstr ""
 
-#: TWLight/users/views.py:247
+#: TWLight/users/views.py:251
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
-#: TWLight/users/views.py:252
+#: TWLight/users/views.py:256
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
-#: TWLight/users/views.py:324
+#: TWLight/users/views.py:328
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
-#: TWLight/users/views.py:328
+#: TWLight/users/views.py:332
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
