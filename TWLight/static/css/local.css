@@ -167,6 +167,7 @@ TIMELINE
 .full-width {
   display: block;
   width: 100%;
+  min-height: 30em;
 }
 
 
