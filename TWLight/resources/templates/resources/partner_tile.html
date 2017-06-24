@@ -20,7 +20,7 @@
   <div class="panel-body">
     {% if partner.logo_url %}
       <a href="{% url 'partners:detail' partner.pk %}">
-        <img src="{{ partner.logo_url }}" class="img-responsive">
+        <img src="{{ partner.logo_url }}" class="img-responsive partner-logo">
       </a>
       <hr />
     {% endif %}
