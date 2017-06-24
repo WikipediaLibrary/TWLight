@@ -239,6 +239,7 @@ A few spots just need padding instead of margin.
 .partner-logo {
   padding: 0 30% 0 30%;
   margin-bottom: 2em;
+  max-height: 7em;
 }
 
 /*

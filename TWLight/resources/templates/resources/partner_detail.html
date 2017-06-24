@@ -17,10 +17,6 @@
         overflow: visible;
       }
     }
-
-    .margin-top-20 {
-      margin-top: 20px;
-    }
   </style>
 {% endblock extra_css %}
 
@@ -46,7 +42,7 @@
       <input type="submit" class="btn btn-default btn-block text-center visible-xs z-index-100" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
     </form>
   {% endif %}
-  <ul class="timeline half-timeline">
+  <ul class="timeline half-timeline margin-bottom-2em">
 
     <div class="col-sm-5 col-md-4 pull-right timeline-right-overlay">
       {% if object.is_waitlisted %}
@@ -64,7 +60,7 @@
       {% endif %}
 
       {% if user|coordinators_only %}
-        <form action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
+        <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
           {% csrf_token %}
           <input type="submit" class="btn btn-default btn-block text-center hidden-xs" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
         </form>
