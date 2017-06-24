@@ -1,7 +1,7 @@
 from modeltranslation.translator import translator, TranslationOptions
 from taggit.models import Tag
 
-from .models import Partner
+from .models import Partner, Stream
 
 # See https://django-modeltranslation.readthedocs.io/en/latest/registration.html
 class PartnerTranslationOptions(TranslationOptions):
@@ -9,6 +9,10 @@ class PartnerTranslationOptions(TranslationOptions):
 
 translator.register(Partner, PartnerTranslationOptions)
 
+class StreamTranslationOptions(TranslationOptions):
+    fields = ('description',)
+
+translator.register(Stream, StreamTranslationOptions)
 
 
 class MultilingualTagTO(TranslationOptions):
