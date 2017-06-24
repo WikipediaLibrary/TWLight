@@ -2,7 +2,6 @@
 {% load i18n %}
 {% load static %}
 {% load cache %}
-{% load remove_tag %}
 {% load twlight_perms %}
 {% load twlight_wikicode2html %}
 
@@ -117,7 +116,7 @@
               https://code.djangoproject.com/ticket/27882
             {% endcomment %}
             {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
-              {{ object.description | twlight_wikicode2html | remove_tag:"details,summary" | safe }}
+              {{ object.description | twlight_wikicode2html | removetags:"details summary" | safe }}
             {% endcache %}
             </p>
           {% else %}
@@ -253,7 +252,7 @@
                 <li><b>{{ stream }}</b>
                   {% if stream.description %}&mdash; 
                     {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
-                      {{ stream.description | twlight_wikicode2html | remove_tag:"details,summary" | safe }}
+                      {{ stream.description | twlight_wikicode2html | removetags:"details summary" | safe }}
                     {% endcache %}
                   {% endif %}
                 </li>
