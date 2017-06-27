@@ -5,9 +5,9 @@
 {% block content %}
   <h2>{% trans "List of partners" %}</h2>
 
-  <div class="row">
+  <div class="row row-flex">
     {% for partner in object_list %}
-      <div class="col-xs-12 col-sm-4 col-md-3">
+      <div class="col-flex col-xs-12 col-sm-4 col-md-3">
         {% include "resources/partner_tile.html" %}        
       </div>
     {% empty %}

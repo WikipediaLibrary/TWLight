@@ -228,30 +228,64 @@ h4.timeline-title {
 A few spots just need padding instead of margin.
 */
 
-.padding-top-20 {
-  padding-top: 20px;
+.margin-bottom-2em {
+  margin-bottom: 2em;
 }
 
 .margin-top-5 {
   margin-top: 5px;
 }
 
-/*
-Make the form submit in the nav look like the anchors.
-*/
+.row-flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 
-#nav-submit-id-submit {
-  border-radius: 4px;
-  border: none;
-  padding: 10px 15px;
-  background-color: #f8f8f8;
-  color: #337ab7;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
-#nav-submit-id-submit:focus, #nav-submit-id-submit:hover {
-  background-color: #eee;
-  outline-offset: -2px;
-  color: #23527c;
+.col-flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+/*
+  Override some of the panel border styling so our flex
+  elements look correct.
+*/
+.panel {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.panel-body {
+  border: solid #ddd;
+  border-width: 0 1px 1px 1px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-heading {
+  border: solid #ddd;
+  border-width: 1px 1px 0 1px;
+}
+
+
+.partner-logo {
+  padding: 0 30% 0 30%;
+  margin: 0 auto 2em auto;
+  max-height: 7em;
+}
+
+.panel-partner-description {
+
+}
+
+.panel-partner-info {
+
 }
 
 /*
