@@ -35,8 +35,11 @@ class Application(models.Model):
         (PENDING, _('Pending')),
         # Translators: This is the status of an application that reviewers have asked questions about.
         (QUESTION, _('Under discussion')),
+        # Translators: This is the status of an application which has been approved by a reviewer.
         (APPROVED, _('Approved')),
+        # Translators: This is the status of an application which has been denied by a reviewer.
         (NOT_APPROVED, _('Not approved')),
+        # Translators: This is the status of an application that has been sent to a partner.
         (SENT, _('Sent to partner')),
     )
 
@@ -50,6 +53,7 @@ class Application(models.Model):
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
     date_closed = models.DateField(blank=True, null=True,
+        # Translators: Shown in the administrator interface for editing applications directly. Admins should rarely ever have to change this number.
         help_text=_('Please do not override this field! Its value is set '
                   'automatically.'))
 
@@ -72,6 +76,7 @@ class Application(models.Model):
                   'automatically.'))
 
     sent_by = models.ForeignKey(User, blank=True, null=True,
+        # Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
         help_text=_('The user who sent this application to the partner'))
 
     editor = models.ForeignKey(Editor, related_name='applications')
