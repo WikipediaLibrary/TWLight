@@ -9,6 +9,7 @@
         <li>
           <input type="checkbox" id="toggle_all">
           <strong>
+            {% comment %}Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.{% endcomment %}
             {% trans "Select/deselect all" %}            
           </strong>
         </li>
@@ -49,6 +50,7 @@
       <div class="col-xs-12 col-sm-6">
         <div class="form-group">    
           <label for="select_status">
+            {% comment %}Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.{% endcomment %}
             {% trans "Status for all selected applications" %}
           </label>
           
@@ -61,7 +63,8 @@
       </div>
     </div>
 
-    <div class="form-group">    
+    <div class="form-group">
+      {% comment %}Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.{% endcomment %}
       <input type="submit" class="btn btn-default" value="{% trans "Set status" %}" />
     </div>
   </form>
