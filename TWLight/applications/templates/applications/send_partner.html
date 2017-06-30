@@ -32,14 +32,17 @@
 
 {% block content %}
   <h2>
+    {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where {{ object }} will be the name of the partner. Don't translate {{ object }}.{% endcomment %}
     {% blocktrans %}Application data for {{ object }}{% endblocktrans %}
   </h2>
 
+  {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.{% endcomment %}
   {% blocktrans trimmed %}
     When you've processed the data below, click the 'mark as sent' button.
   {% endblocktrans %}
 
   <h3>
+    {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.{% endcomment %}
     {% blocktrans trimmed count object.contacts.all|length as counter %}
       Contact
     {% plural %}
@@ -55,9 +58,11 @@
       <hr />
     {% endif %}
   {% empty %}
+    {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to.{% endcomment %}
     {% trans "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators." %} 
   {% endfor %}
-
+  
+  {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.{% endcomment %}
   <h3>{% trans "Application data" %}</h3>
   {% if app_outputs %}
     <form method="POST">
@@ -97,10 +102,11 @@
           {% endfor %}
         </ul>
       </div>
-      {# Translators: this should be translated the same way that it was earlier in this page. #}
+      {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
       <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
     </form>
   {% else %}
+    {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.{% endcomment %}
     {% trans "There are no approved, unsent applications." %}
   {% endif %}
 
