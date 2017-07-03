@@ -13,12 +13,14 @@
             </div>
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_partners }}</div>
+              {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of available partners. {% endcomment %}
               <div>{% trans 'Total partners (all time)' %}</div>
             </div>
           </div>
         </div>
         <a href="{% url 'partners:list' %}">
           <div class="panel-footer">
+            {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which goes to the full list of available partners. {% endcomment %}
             <span class="pull-left">{% trans 'See all partners' %}</span>
             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
@@ -35,12 +37,14 @@
             </div>
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_editors }}</div>
+              {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of editors (users) who registered. {% endcomment %}
               <div>{% trans 'Number of editors (all time)' %}</div>
             </div>
           </div>
         </div>
         <a href="#users-section">
           <div class="panel-footer">
+            {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which moves the page down to metrics about users. {% endcomment %}
             <span class="pull-left">{% trans 'Jump to user metrics' %}</span>
             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
@@ -63,6 +67,7 @@
         </div>
         <a href="#applications-section">
           <div class="panel-footer">
+            {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which moves the page down to metrics about applications. {% endcomment %}
             <span class="pull-left">{% trans 'Jump to application metrics' %}</span>
             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
@@ -76,11 +81,13 @@
     <!-- begin pageview metrics -->
     <div class="row">
       <div class="col-lg-12">
+        {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.{% endcomment %}
         <h2 class="page-header">{% trans "Page views (staff only)" %} <a href="{% url 'csv:page_views' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-12 col-md-4">
+        {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the most viewed pages on the site.{% endcomment %}
         <h3>{% trans "Most popular pages" %}</h3>
         <table class="table table-striped table-hover">
           <tr>
@@ -88,6 +95,7 @@
               {% trans 'Page URL' %}
             </th>
             <th>
+              {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the column for pageview numbers for each partner page.{% endcomment %}
               {% trans 'Number of views' %}                
             </th>
           </tr>
@@ -104,6 +112,7 @@
         </table>
       </div>
       <div class="col-xs-12 col-md-4">
+        {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the pageview data for each partner page.{% endcomment %}
         <h3>{% trans "Partner pages by popularity" %}</h3>
         <table class="table table-striped table-hover">
           <tr>
@@ -135,12 +144,14 @@
   <!-- begin partner metrics -->
   <div class="row">
     <div class="col-lg-12">
+      {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing the number of available partners over time.{% endcomment %}
       <h2 class="page-header">{% trans "Partners" %}</h2>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-12">
+      {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of available partners over time.{% endcomment %}
       <h3>{% trans "Number of partners over time" %} <a href="{% url 'csv:num_partners' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <div id="partner-time-graph" style="width:600px;height:300px"></div>
     </div>
@@ -150,6 +161,7 @@
   <!-- begin editor metrics -->
   <div class="row">
     <div class="col-lg-12">
+      {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing the number of users from each language Wikipedia.{% endcomment %}
       <h2 class="page-header" id="users-section">{% trans "Editors" %}</h2>
     </div>
   </div>
@@ -157,6 +169,7 @@
   <div class="row">
     <div class="col-lg-12">
       <!-- begin home_wiki distribution -->
+      {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing the number of users from each language Wikipedia.{% endcomment %}
       <h3>{% trans "Home wiki distribution" %} <a href="{% url 'csv:home_wiki_pie' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <div class="row">
         <div class="col-xs-12 col-md-8">
@@ -188,6 +201,7 @@
       <!-- end home_wiki distribution -->
 
       <!-- begin home_wiki distribution over time -->
+      {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of users from each language Wikipedia.{% endcomment %}
       <h3>{% trans "Home wiki distribution over time" %} <a href="{% url 'csv:home_wiki_over_time' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <div id="home-wiki-bar-graph" style="width:600px;height:300px"></div>          
 
@@ -200,8 +214,9 @@
   <!-- begin application metrics -->
   <div class="row">
     <div class="col-lg-12">
+      {% comment %} Translator: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.{% endcomment %}
       <h2 class="page-header" id="applications-section">{% trans 'Applications' %}</h2>
-
+      {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.{% endcomment %}
       <h3>{% trans "Applications by number of days until decision" %} <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
         {% blocktrans trimmed %}
@@ -212,6 +227,7 @@
       </p>
       <div id="app-time-histogram-graph" style="width:600px;height:300px"></div>          
 
+      {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.{% endcomment %}
       <h3>{% trans "Median days until application decision, per month" %} <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
         {% blocktrans trimmed %}
@@ -220,9 +236,10 @@
         {% endblocktrans %}
       </p>
       <div id="app-medians-graph" style="width:600px;height:300px"></div>
-
+      {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
       <h3>{% trans "Current application status distribution" %} <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
+        {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is located above the graph showing the current distribution of applications.{% endcomment %}
         {% blocktrans trimmed %}
           This graph includes all applications opened ever on this site.
         {% endblocktrans %}
