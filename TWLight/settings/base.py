@@ -147,8 +147,11 @@ LANGUAGE_CODE = 'en-us' # Sets site default language.
 # here-, regardless of how they ought to be alphabetized in the target
 # language.
 LANGUAGES = (
+  #Transaltor: Text used for setting language to English
   ('en', _('English')),
+  #Transaltor: Text used for setting language to Finnish
   ('fi', _('Finnish')),
+  #Transaltor: Text used for setting language to French
   ('fr', _('French')),
 )
 
