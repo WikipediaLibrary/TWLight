@@ -4,10 +4,11 @@
 
 {% block content %}
 {% get_current_language as LANGUAGE_CODE %}
-
+  {% comment %} Translator: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. {% endcomment %}
   <h1>{% trans "Permission denied" %}</h1>
 
   <p>
+    {% comment %} Translator: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. {% endcomment %}
     {% trans "Sorry; you aren't allowed to do that." %}
   </p>
 
