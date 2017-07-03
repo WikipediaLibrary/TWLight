@@ -12,6 +12,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5">
       <a href="{% url 'about' %}" class="btn btn-default btn-block">
+        {% comment %} Translator: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
         {% trans "Learn more" %}
       </a>
       {% if not user.is_authenticated %}
