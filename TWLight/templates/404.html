@@ -4,10 +4,11 @@
 
 {% block content %}
 {% get_current_language as LANGUAGE_CODE %}
-
+  {% comment %} Translator: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. {% endcomment %}
   <h1>{% trans "Not found" %}</h1>
 
   <p>
+    {% comment %} Translator: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. {% endcomment %}
     {% trans "Sorry; we can't find that." %}
   </p>
   <p>
