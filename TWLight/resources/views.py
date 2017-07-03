@@ -119,9 +119,11 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
 
         if partner.status == Partner.AVAILABLE:
             partner.status = Partner.WAITLIST
+            # Translator: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
             msg = _('This partner is now waitlisted')
         else:
             partner.status = Partner.AVAILABLE
+            # Translator: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
             msg = _('This partner is now available for applications')
 
         partner.save()
