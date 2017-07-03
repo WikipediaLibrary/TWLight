@@ -207,6 +207,7 @@ class OAuthBackend(object):
             logger.warning('Someone tried to log in but presented an invalid '
                 'access token.')
             messages.add_message (request, messages.WARNING,
+                # Translator: This error message is shown when there's a problem with the authenticated login process.
                 _('You tried to log in but presented an invalid access '
                 ' token.'))
             raise PermissionDenied
@@ -261,6 +262,7 @@ class OAuthInitializeView(View):
         except (AssertionError, DisallowedHost):
             logger.exception()
             messages.add_message (request, messages.WARNING,
+                # Translator: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
                 _('{domain} is not an allowed host.').format(domain=domain))
             raise PermissionDenied
 
@@ -333,6 +335,7 @@ class OAuthCallbackView(View):
             # get_handshaker will throw AssertionErrors for invalid data.
             logger.exception('Could not find handshaker')
             messages.add_message (request, messages.WARNING,
+                # Translator: This message is shown when the OAuth login process fails.
                 _('Could not find handshaker.'))
             raise PermissionDenied
 
@@ -343,6 +346,7 @@ class OAuthCallbackView(View):
         if not request_token:
             logger.info('No request token.')
             messages.add_message (request, messages.WARNING,
+                # Translator: This message is shown when the OAuth login process fails.
                 _('No request token.'))
             raise PermissionDenied
 
@@ -352,6 +356,7 @@ class OAuthCallbackView(View):
         except:
             logger.exception('Access token generation failed.')
             messages.add_message (request, messages.WARNING,
+                # Translator: This message is shown when the OAuth login process fails.
                 _('Access token generation failed.'))
             raise PermissionDenied
 
@@ -386,6 +391,7 @@ class OAuthCallbackView(View):
                     'Please agree to the terms of use.'))
                 return_url = reverse_lazy('terms')
             else:
+                # Translators: This message is shown when a user logs back in to the site after their first time.
                 messages.add_message(request, messages.INFO, _('Welcome back!'))
                 # We're using this twice. Not very DRY.
                 # Send user either to the destination specified in the 'next'
