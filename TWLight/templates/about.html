@@ -2,10 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-
+  {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Library should not be translated. {% endcomment %}
   <h2>{% trans "About the Wikipedia Library" %}</h2>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation and The Wikipedia Library should not be translated. {% endcomment %}
     {% blocktrans trimmed %}
       The Wikipedia Library provides free access to research materials
       to improve your ability to contribute content to the Wikimedia projects.
@@ -13,6 +14,7 @@
   </p>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation and Wikipedia Library Card should not be translated. {% endcomment %}
     {% blocktrans trimmed %}
       The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to those partner resources. Here you can see which partnerships are available and what kinds of materials each database provides, and apply for the ones you want. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review applications and work with partners to get you your free access.
     {% endblocktrans %}    
@@ -20,93 +22,114 @@
 
   <p>
     {% url 'terms' as terms_url %}
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate {{ terms_url }}. {% endcomment %}
     {% blocktrans trimmed %}
       For more information about how application information is stored and reviewed please see our <a href="{{ terms_url }}">terms of use</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them.
     {% endblocktrans %}    
   </p>
 
+  {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
   <h3>{% trans "Who can receive access?" %}</h3>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. {% endcomment %}
     {% blocktrans trimmed %}
       Any active editor in good standing can receive access.  Applications are reviewed based on the editor’s need and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply.
     {% endblocktrans %}    
   </p>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% trans "Any editor can apply for access, but there are a few basic requirements:" %}
     <ul>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "You have your preferences enabled to receive email on your home wiki" %}
       </li>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "You have an account that is a minimum of 6 months old" %}
       </li>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "You have a minimum of 500 edits" %}
       </li>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "You do not already have access to the resources you’re applying for through another library or institution" %}
       </li>
     </ul>
   </p>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% blocktrans trimmed %}
       If you don't quite meet the experience requirements but think you would still be a strong candidate for access, feel free to apply and you may still be considered.  Note that "home wiki" can mean any Wikipedia you are active on.
     {% endblocktrans %}    
   </p>
 
 
-
+  {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
   <h3>{% trans "What do I do after I get access?" %}</h3>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% blocktrans trimmed %}
       Once you have access we encourage you to use the databases for both research that creates or improves Wikimedia content and serves your other research needs.
     {% endblocktrans %}    
   </p>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% blocktrans trimmed %}
       Please keep in mind, our agreements with partners carry certain expectations. 
     {% endblocktrans %}    
   </p>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% trans "Approved editors <i>may</i> use their access to:" %}
     <ul>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "Search, view, retrieve, and display partner content" %}
       </li>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "Electronically save partner content" %}
       </li>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "Print out single copies of partner content" %}
       </li>
     </ul>
   </p>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% trans "Approved editors <i>should not</i>:" %}
     <ul>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "Share their account logins or passwords with others, or sell their access to other parties" %}
       </li>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "Mass scrape or mass download partner content" %}
       </li>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "Systematically make printed or electronic copies of multiple extracts of restricted content available for any purpose" %}
       </li>
       <li>
+        {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language. {% endcomment %}
         {% trans "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles" %}
       </li>
     </ul>
   </p>
   
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% blocktrans trimmed %}
       Respecting these agreements allows us to continue growing the partnerships available to our entire community.
     {% endblocktrans %}    
@@ -115,13 +138,14 @@
   <h3>Citation practices</h3>
 
   <p>
-    {# Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if you use other tags on your wiki. If you're not sure how to handle this section, take your best guess and give the developer a heads-up. #}
+    {# Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if other tags are used for your language Wikipedia. If you're not sure how to handle this section, take your best guess and give the developer a heads-up. #}
     {% blocktrans trimmed %}
       Citation practices vary by project and even by article.  Generally, we support editors citing where they found information, in a form that allows others to check it for themselves.  That often means providing both original source details as well as a link to the partner database in which the source was found. You can use &lt;code&gt;|via=&lt;code&gt; in templates using CS1 citation format or add &lt;code&gt;&lbrace;&lbrace;subscription required|via=&rbrace;&rbrace;&lt;/code&gt; to identify the provider.
     {% endblocktrans %}    
   </p>
 
   <p>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above an example Wikipedia citation. {% endcomment %}
     {% trans "Here is one citation example:" %}
   </p>
 
@@ -142,16 +166,18 @@
     </p>
   </blockquote>
 
-  
+  {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above contact information. {% endcomment %}
   <h3>{% trans "Whom do I contact if I have questions, need help, or want to volunteer?" %}</h3>
 
   <dl>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to the Wikipedia Library email address. {% endcomment %}
     <dt>{% trans "Email:" %}</dt>
     <dd>
       <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20Card%20Platform%20questions">
         wikipedialibrary@wikimedia.org
       </a>
     </dd>
+    {% comment %} Translator: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to a link to the Wikipedia Library discussion page on Wikipedia. Translate 'Talk' to whatever the discussion namespace is called for this language Wikipedia.{% endcomment %}
     <dt>{% trans "Talk page:" %}</dt>
     <dd>
       <a href="https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library">
