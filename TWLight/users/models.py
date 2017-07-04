@@ -58,7 +58,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Have they agreed to our terms?
     terms_of_use = models.BooleanField(default=False,
+        # Translator: Users must agree to the website terms of use.
         help_text=_("Has this user agreed with the terms of use?"))
+    # Translator: An option to set whether users email is copied to their website account from Wikipedia when logging in.
     use_wp_email = models.BooleanField(default=True, help_text=_('Should we '
         'automatically update their email from their Wikipedia email when they '
         'log in? Defaults to True.'))
@@ -90,8 +92,10 @@ class Editor(models.Model):
     # Database recordkeeping.
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     last_updated = models.DateField(auto_now=True,
+        # Translator: The date that this user's information was last changed.
         help_text=_("When this information was last edited"))
     date_created = models.DateField(auto_now_add=True,
+        # Translator: The date the user's profile was created on the website (not on Wikipedia).
         help_text=_("When this profile was first created"))
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
@@ -100,23 +104,30 @@ class Editor(models.Model):
     # sync thereafter.
     wp_username = models.CharField(max_length=235,
         help_text=_("Username"))
+    # Translator: The total number of edits this user has made to all Wikipedia projects
     wp_editcount = models.IntegerField(help_text=_("Wikipedia edit count"))
+    # Translator: The date this user registered their Wikipedia account
     wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"))
     wp_sub = models.IntegerField(unique=True,
+        # Translator: The User ID for this user on Wikipedia
         help_text=_("Wikipedia user ID")) # WP user id.
 
     # Should we want to filter these to check for specific group membership or
     # user rights in future:
     # Editor.objects.filter(wp_groups__icontains=groupname) or similar.
+    # Translator: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
     wp_groups = models.TextField(help_text=_("Wikipedia groups"))
+    # Translator: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
     wp_rights = models.TextField(help_text=_("Wikipedia user rights"))
     wp_valid = models.BooleanField(default=False,
+        # Translator: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
         help_text=_('At their last login, did this user meet the criteria in '
         'the terms of use?'))
 
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     contributions = models.TextField(
+        # Translator: Describes information added by the user to describe their Wikipedia edits.
         help_text=_("Wiki contributions, as entered by user"),
         blank=True)
 
