@@ -23,6 +23,7 @@ class PartnersListView(ListView):
         # English alphabet. :/
         if self.request.user.is_staff:
             messages.add_message(self.request, messages.INFO,
+                # Translator: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
                 _('Because you are a staff member, this page may include '
                     'Partners who are not yet available to all users.'))
             return Partner.even_not_available.order_by('company_name')
