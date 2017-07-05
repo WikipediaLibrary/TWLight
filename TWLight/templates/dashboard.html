@@ -219,6 +219,7 @@
       {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.{% endcomment %}
       <h3>{% trans "Applications by number of days until decision" %} <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
+        {% comment %} Translator: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). {% endcomment %}
         {% blocktrans trimmed %}
           The x axis is the number of days to make a final decision (either
           approved or denied) on an application. The y axis is the number of
@@ -230,6 +231,7 @@
       {% comment %} Translator: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.{% endcomment %}
       <h3>{% trans "Median days until application decision, per month" %} <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
+        {% comment %} Translator: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean. {% endcomment %}
         {% blocktrans trimmed %}
           This shows the median number of days to reach a decision on the
           applications opened in a given month.
