@@ -201,9 +201,12 @@ def update_app_status_on_save(sender, instance, **kwargs):
         # WAITLIST is a status adhering to Partner, not to Application. So
         # to email editors when they apply to a waitlisted partner, we need
         # to check Partner status on app submission.
+        # SENT is a post approval step that we don't need to send emails about.
 
         if instance.partner.status == Partner.WAITLIST:
             handler_key = 'waitlist'
+        elif instance.status == Application.SENT:
+            handler_key = None
         else:
             handler_key = instance.status
 
