@@ -370,10 +370,12 @@ class OAuthCallbackView(View):
 
             if created:
                 messages.add_message(request, messages.WARNING,
+                    #Translator: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
                     _('Your Wikipedia account does not meet the eligibility '
                       'criteria in the terms of use, so your Wikipedia Library '
                       'Card Platform account cannot be activated.'))
             else:
+                #Translator: If the user tries to log in, but their account does not meet certain requirements or has been deactivated, they cannot login.
                 messages.add_message(request, messages.WARNING,
                     _('Either your Wikipedia Library Card Platform account has '
                       'been deactivated or your Wikipedia account no longer '
