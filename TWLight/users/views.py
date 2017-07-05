@@ -89,6 +89,7 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
         try:
             if self.request.user.editor == editor and not editor.contributions:
                 messages.add_message(self.request, messages.WARNING,
+                    # Translator: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
                     _('Please update your contributions to Wikipedia (below) to '
                       'help coordinators evaluate your applications.'))
         except Editor.DoesNotExist:
@@ -179,6 +180,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
             assert self.request.user.is_authenticated()
         except AssertionError:
             messages.add_message (request, messages.WARNING,
+                # Translator: This message is shown to users who attempt to update their personal information without being logged in.
                 _('You must be logged in to do that.'))
             raise PermissionDenied
 
@@ -193,6 +195,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
         form.helper = FormHelper()
         form.helper.add_input(Submit(
             'submit',
+            # Translator: This is the button users click to confirm changes to their personal information.
             _('Update information'),
             css_class='center-block'))
 
@@ -204,6 +207,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
         Define get_success_url so that we can add a success message.
         """
         messages.add_message(self.request, messages.SUCCESS,
+            # Translator: Shown to the user when they successfully modify their personal information.
             _('Your information has been updated.'))
         return reverse_lazy('users:home')
 
@@ -248,11 +252,13 @@ class EmailChangeView(SelfOnly, FormView):
     def get_success_url(self):
         if self.request.user.email:
             messages.add_message(self.request, messages.SUCCESS,
+                # Translator: Shown to users when they successfully modify their email. Don't translate {email}.
                 _('Your email has been changed to {email}.').format(
                     email=self.request.user.email))
             return _redirect_to_next_param(self.request)
         else:
             messages.add_message(self.request, messages.WARNING,
+                # Translator: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
                 _('Your email is blank. You can still explore the site, '
                   "but you won't be able to apply for access to partner "
                   'resources without an email.'))
@@ -325,10 +331,12 @@ class TermsView(UpdateView):
             # they were going, which promptly sends them back to the terms
             # page because they haven't agreed to the terms....
             if self.request.user in coordinators.user_set.all():
+                # Translator: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
                 fail_msg = _('You may explore the site, but you will not be '
                   'able to apply for access to materials or evaluate '
                   'applications unless you agree with the terms of use.')
             else:
+                # Translator: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
                 fail_msg = _('You may explore the site, but you will not be '
                   'able to apply for access unless you agree with '
                   'the terms of use.')
