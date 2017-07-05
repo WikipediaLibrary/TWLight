@@ -173,8 +173,12 @@ class Editor(models.Model):
         """
         This should be used to display wp_rights in a template, or any time
         we need to manipulate the rights as a list rather than a string.
+        Doesn't exist for batch loaded users.
         """
-        return json.loads(self.wp_rights)
+        if self.wp_groups:
+            return json.loads(self.wp_rights)
+        else:
+            return None
 
 
     @property
@@ -182,7 +186,10 @@ class Editor(models.Model):
         """
         As above, but for groups.
         """
-        return json.loads(self.wp_groups)
+        if self.wp_groups:
+            return json.loads(self.wp_groups)
+        else:
+            return None
 
 
     def _is_user_valid(self, identity, global_userinfo):
