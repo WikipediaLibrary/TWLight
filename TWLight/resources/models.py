@@ -24,6 +24,7 @@ def validate_language_code(code):
     """
     if code not in RESOURCE_LANGUAGE_CODES:
         raise ValidationError(
+            # Translator: When staff enter languages, they use ISO language codes. Don't translate ISO, LANGUAGES, or %(code)s.
             _('%(code)s is not a valid language code. You must enter an ISO '
                 'language code, as in the LANGUAGES setting at '
                 'https://github.com/django/django/blob/master/django/conf/global_settings.py'),
@@ -52,7 +53,9 @@ class Language(models.Model):
     """
 
     class Meta:
+        # Translator: Title for a list of languages if there is only one.
         verbose_name = _("Language")
+        # Translator: Title for a list of languages if there is more than one.
         verbose_name_plural = _("Languages")
 
     language = models.CharField(choices=RESOURCE_LANGUAGES,
@@ -107,10 +110,12 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     company_name = models.CharField(max_length=40,
+        # Translator: In the administrator interface, this text is help text for a field where staff can enter the name of the partner. Don't translate McFarland.
         help_text=_("Partner's name (e.g. McFarland). Note: "
         "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
     coordinator = models.ForeignKey(User, blank=True, null=True,
+        # Translator: In the administrator interface, this text is help text for a field where staff can specify the username of the account coordinator for this partner.
         help_text=_('The coordinator for this Partner, if any.'))
 
     # Status metadata
@@ -139,10 +144,12 @@ class Partner(models.Model):
 
     status = models.IntegerField(choices=STATUS_CHOICES,
         default=NOT_AVAILABLE,
+        # Translator: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
         help_text=_('Should this Partner be displayed to end users? Is it '
                     'open for applications right now?'))
 
     renewals_available = models.BooleanField(default=False,
+        # Translator: In the administrator interface, this text is help text for a field where staff specify whether users can request their account be renewed/extended for this partner.
         help_text=_('Can access grants to this partner be renewed? If so, '
             'users will be able to request renewals when their access is close '
             'to expiring.'))
@@ -151,17 +158,21 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     terms_of_use = models.URLField(blank=True, null=True,
+        # Translator: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
         help_text=_("Link to terms of use. Required if users must agree to "
             "terms of use to get access; optional otherwise."))
     description = models.TextField(blank=True, null=True,
+        # Translator: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
         help_text=_("Optional description of this partner's resources."))
     logo_url = models.URLField(blank=True, null=True,
+        # Translator: In the administrator interface, this text is help text for a field where staff can provide the URL of an image to be used as this partner's logo.
         help_text=_('Optional URL of an image that can be used to represent '
                     'this partner.'))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
         default=None,
+        # Translator: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
         help_text=_("If True, users can only apply for one Stream at a time "
         "from this Partner. If False, users can apply for multiple Streams at "
         "a time. This field must be filled in when Partners have multiple "
@@ -170,11 +181,13 @@ class Partner(models.Model):
     access_grant_term = models.DurationField(
         blank=True, null=True,
         default=timedelta(days=365),
+        # Translator: In the administrator interface, this text is help text for a field where staff can specify the standard duration of an account for this partner.
         help_text=_("The standard length of an access grant from this Partner. "
             "Entered as <days hours:minutes:seconds>. Defaults to 365 days.")
         )
 
     languages = models.ManyToManyField(Language, blank=True,
+        # Translator: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
         help_text=_("Select all languages in which this partner publishes "
             "content.")
         )
@@ -189,23 +202,30 @@ class Partner(models.Model):
     # whether *this* resource requires those optional fields.
 
     real_name = models.BooleanField(default=False,
+        # Translator: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their real name when applying
         help_text=_('Mark as true if this partner requires applicant names.'))
     country_of_residence = models.BooleanField(default=False,
+        # Translator: In the administrator interface, this text is help text for a check box where staff can select whether users must specify the country in which they live when applying.
         help_text=_('Mark as true if this partner requires applicant countries '
                     'of residence.'))
     specific_title = models.BooleanField(default=False,
+        # Translator: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a title for the resource they want to access when applying.
         help_text=_('Mark as true if this partner requires applicants to '
                     'specify the title they want to access.'))
     specific_stream = models.BooleanField(default=False,
+        # Translator: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a collection of resources when applying.
         help_text=_('Mark as true if this partner requires applicants to '
                     'specify the database they want to access.'))
     occupation = models.BooleanField(default=False,
+        # Translator: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their occupation when applying.
         help_text=_('Mark as true if this partner requires applicants to '
                     'specify their occupation.'))
     affiliation = models.BooleanField(default=False,
+        # Translator: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their institutional affiliation (e.g. university) when applying.
         help_text=_('Mark as true if this partner requires applicants to '
                     'specify their institutional affiliation.'))
     agreement_with_terms_of_use = models.BooleanField(default=False,
+        # Translator: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
         help_text=_("Mark as true if this partner requires applicants to agree "
                     "with the partner's terms of use."))
 
@@ -267,10 +287,12 @@ class Stream(models.Model):
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
     name = models.CharField(max_length=50,
+        # Translator: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
         help_text=_("Name of stream (e.g. 'Health and Behavioral Sciences). "
             "Will be user-visible and *not translated*. Do not include the "
             "name of the partner here."))
     description = models.TextField(blank=True, null=True,
+        # Translator: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
         help_text=_("Optional description of this stream's resources."))
 
     languages = models.ManyToManyField(Language, blank=True)
@@ -311,12 +333,14 @@ class Contact(models.Model):
     partner = models.ForeignKey(Partner, db_index=True, related_name="contacts")
 
     title = models.CharField(max_length=75, blank=True,
+        # Translator: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
         help_text=_("Organizational role or job title. This is NOT intended "
         "to be used for honorifics. Think 'Director of Editorial Services', "
         "not 'Ms.' Optional."))
     email = models.EmailField()
     full_name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=15,
+        # Translator: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
         help_text=_("The form of the contact person's name to use in email "
         "greetings (as in 'Hi Jake')"))
 
