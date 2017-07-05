@@ -26,6 +26,7 @@
   {% if object.is_waitlisted %}
     <div class="alert alert-warning visible-xs">
       {% url 'applications:apply_single' object.pk as app_url %}
+      {% comment %} Translator: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. Don't translate {{ app_url }}. {% endcomment %}
       {% blocktrans trimmed %}
         <strong>Waitlisted</strong> &mdash; There are no access grants available
         for this partner at this time. You can still <a href="{{ app_url }}">apply for access</a>;
@@ -96,6 +97,7 @@
             {% endif %}
           </ul>
         {% else %}
+          {% comment %} Translator: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. {% endcomment %}
           {% blocktrans trimmed %}
             The Wikipedia Library team will process this application. Want to
             help? <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
@@ -172,6 +174,7 @@
             <ul>
               {% if object.agreement_with_terms_of_use %}
                 <li>
+                  {% comment %} Translator: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate {{ publisher }} or {{ url }}. {% endcomment %}
                   {% blocktrans with publisher=object.company_name url=object.terms_of_use %}
                     {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
                     of use</a>.
@@ -181,6 +184,7 @@
 
               {% if object.real_name %}
                 <li>
+                  {% comment %} Translator: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                   {% blocktrans with publisher=object.company_name %}
                     {{ publisher }} requires that you provide your real name.
                   {% endblocktrans %}
@@ -189,6 +193,7 @@
 
               {% if object.country_of_residence %}
                 <li>
+                  {% comment %} Translator: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                   {% blocktrans with publisher=object.company_name %}
                     {{ publisher }} requires that you provide your country of residence.
                   {% endblocktrans %}
@@ -197,6 +202,7 @@
 
               {% if object.occupation %}
                 <li>
+                  {% comment %} Translator: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                   {% blocktrans with publisher=object.company_name %}
                     {{ publisher }} requires that you provide your occupation.
                   {% endblocktrans %}
@@ -205,6 +211,7 @@
 
               {% if object.affiliation %}
                 <li>
+                  {% comment %} Translator: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                   {% blocktrans with publisher=object.company_name %}
                     {{ publisher }} requires that you provide your institutional affiliation.
                   {% endblocktrans %}
@@ -213,6 +220,7 @@
 
               {% if object.specific_title %}
                 <li>
+                  {% comment %} Translator: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                   {% blocktrans with publisher=object.company_name %}
                     {{ publisher }} requires that you specify a particular title that you want
                     to access.
@@ -223,12 +231,14 @@
               {% if object.specific_stream %}
                 <li>
                   {% if object.mutually_exclusive %}
+                    {% comment %} Translator: If a user must select a specific collection of resources to apply for, they see this message. Don't translate {{ publisher }}. {% endcomment %}
                     {% blocktrans with publisher=object.company_name %}
                       {{ publisher }} requires that you specify a specific collection that you
                       want to access. You may only apply for access to one collection at a
                       time.
                     {% endblocktrans %}
                   {% else %}
+                    {% comment %} Translator: If a user must select one or more collections of resources to apply for, they see this message. Don't translate {{ publisher }}. {% endcomment %}
                     {% blocktrans with publisher=object.company_name %}
                       {{ publisher }} requires that you specify one or more specific
                       collections that you want to access.
