@@ -36,6 +36,7 @@ import urllib2
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.timezone import now
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
@@ -89,9 +90,13 @@ class Editor(models.Model):
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    last_updated = models.DateField(auto_now=True,
+    # Moved from auto_now=True/auto_now_add=True to set the date from import.
+    # Defaults to today and not required in forms.
+    last_updated = models.DateField(default=now, blank=True,
         help_text=_("When this information was last edited"))
-    date_created = models.DateField(auto_now_add=True,
+    # Set as non-editable.
+    date_created = models.DateField(default=now, blank=True,
+        editable=False,
         help_text=_("When this profile was first created"))
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#

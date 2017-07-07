@@ -10,6 +10,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.forms.models import model_to_dict
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
@@ -45,7 +46,9 @@ class Application(models.Model):
     FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED, SENT]
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
-    date_created = models.DateField(auto_now_add=True)
+    # Moved from auto_now_add=True so that we can set the date for import.
+    # Defaults to today, set as non-editable, and not required in forms.
+    date_created = models.DateField(default=now, blank=True, editable=False)
 
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.

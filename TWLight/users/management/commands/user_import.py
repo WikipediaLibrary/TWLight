@@ -29,12 +29,13 @@ class Command(BaseCommand):
                    # block to avoid hitting the API unnecessarily.
                    try:
                        editor = Editor.objects.get(wp_username=wp_username)
-                       logger.info("Editor exists.")
+                       logger.info("Editor exists. Skipping import")
                    except:
                        global_userinfo = self.get_global_userinfo_from_wp_username(wp_username)
                        if global_userinfo:
                            logger.info('{info}.'.format(info=global_userinfo))
                            reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
+
                            try:
                                username = global_userinfo['id']
                                user = User.objects.get(username=username)
@@ -42,17 +43,28 @@ class Command(BaseCommand):
                                logger.info("User exists.")
                            except User.DoesNotExist:
                                logger.info("Can't find user; creating one.")
-                               user = User.objects.create_user(username=global_userinfo['id'], email=row[3])
+                               user = User.objects.create_user(
+                                   username=global_userinfo['id'],
+                                   email=row[3]
+                               )
                                created = True
     
                            if created:
+                               # Inconsistent date format on the input files
+                               try:
+                                   date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M').date()
+                               except:
+                                   date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S').date()
+
                                try:
                                    Editor.objects.get_or_create(
                                        user_id = user.pk,
                                        wp_username = global_userinfo['name'],
                                        wp_sub = global_userinfo['id'],
                                        wp_editcount = global_userinfo['editcount'],
-                                       wp_registered = reg_date
+                                       wp_registered = reg_date,
+                                       date_created = date_created,
+                                       last_updated = date_created
                                    )
                                    logger.info("Can't find editor; creating one.")
                                except:

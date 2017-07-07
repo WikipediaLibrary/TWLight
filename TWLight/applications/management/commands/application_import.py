@@ -1,7 +1,7 @@
 import csv
 import logging
 
-from datetime import datetime
+from datetime import date, datetime
 from django.db import models
 from django.core.management.base import BaseCommand, CommandError
 from ....users.models import Editor
@@ -40,12 +40,16 @@ class Command(BaseCommand):
 
                        specific_stream_id = row[4]
                        stream = Stream.objects.get(pk=specific_stream_id)
+                       import_note = 'Imported on ' + str(date.today()) + '.'
+
                        Application.objects.get_or_create(
                            partner_id = partner_id,
                            date_created = date_created,
                            date_closed = date_created,
                            editor_id = editor_id,
                            specific_stream_id = specific_stream_id,
+                           comments = import_note,
+                           rationale = import_note,
                            status = 4
                        )
                        logger.info("Application created.")
