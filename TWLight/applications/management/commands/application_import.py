@@ -4,6 +4,8 @@ import logging
 from datetime import date, datetime
 from django.db import models
 from django.core.management.base import BaseCommand, CommandError
+from reversion import revisions as reversion
+from reversion.models import Version
 from ....users.models import Editor
 from ....applications.models import Application
 from ....resources.models import Partner, Stream
@@ -30,9 +32,10 @@ class Command(BaseCommand):
 
                        # Inconsistent date format on the input files
                        try:
-                           date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M').date()
+                           datetime_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M')
                        except:
-                           date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S').date()
+                           datetime_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S')
+                       date_created = datetime_created.date()
 
                        wp_username=row[2]
                        editor = Editor.objects.get(wp_username=wp_username)
@@ -42,17 +45,30 @@ class Command(BaseCommand):
                        stream = Stream.objects.get(pk=specific_stream_id)
                        import_note = 'Imported on ' + str(date.today()) + '.'
 
-                       Application.objects.get_or_create(
-                           partner_id = partner_id,
-                           date_created = date_created,
-                           date_closed = date_created,
-                           editor_id = editor_id,
-                           specific_stream_id = specific_stream_id,
-                           comments = import_note,
-                           rationale = import_note,
-                           status = 4
-                       )
-                       logger.info("Application created.")
+                       try:
+                           application = Application.objects.get(
+                               partner_id = partner_id,
+                               date_created = date_created,
+                               date_closed = date_created,
+                               editor_id = editor_id,
+                               specific_stream_id = specific_stream_id,
+                               status = 4
+                           )
+                       except Application.DoesNotExist:
+                           application = Application(
+                               partner_id = partner_id,
+                               date_created = date_created,
+                               date_closed = date_created,
+                               editor_id = editor_id,
+                               specific_stream_id = specific_stream_id,
+                               comments = import_note,
+                               rationale = import_note,
+                               status = 4
+                           )
+                           with reversion.create_revision():
+                               reversion.set_date_created(datetime_created)
+                               application.save()
+                               logger.info("Application created.")
                    except:
                        logger.exception("Unable to create {wp_username}'s application to {partner_id}.".format(wp_username=row[2],partner_id=row[0]))
                        pass
