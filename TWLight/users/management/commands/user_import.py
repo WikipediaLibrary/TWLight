@@ -63,6 +63,7 @@ class Command(BaseCommand):
                                        wp_sub = global_userinfo['id'],
                                        wp_editcount = global_userinfo['editcount'],
                                        wp_registered = reg_date,
+                                       wp_valid = True,
                                        date_created = date_created,
                                        last_updated = date_created
                                    )
