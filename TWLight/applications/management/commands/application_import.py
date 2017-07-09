@@ -63,6 +63,7 @@ class Command(BaseCommand):
                                specific_stream_id = specific_stream_id,
                                comments = import_note,
                                rationale = import_note,
+                               imported = True,
                                status = 4
                            )
                            with reversion.create_revision():

@@ -88,6 +88,9 @@ class Application(models.Model):
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
 
+    # Was this application imported via CLI?
+    imported = models.BooleanField(blank=True, null=True, default=False)
+
     # If this Application is a renewal, the parent is the original Application
     # it was copied from.
     parent = models.ForeignKey('self',
