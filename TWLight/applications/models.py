@@ -48,7 +48,7 @@ class Application(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
     # Moved from auto_now_add=True so that we can set the date for import.
     # Defaults to today, set as non-editable, and not required in forms.
-    date_created = models.DateField(default=now, blank=True, editable=False)
+    date_created = models.DateField(default=now, editable=False)
 
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
@@ -89,7 +89,7 @@ class Application(models.Model):
     agreement_with_terms_of_use = models.BooleanField(default=False)
 
     # Was this application imported via CLI?
-    imported = models.BooleanField(blank=True, null=True, default=False)
+    imported = models.NullBooleanField(default=False)
 
     # If this Application is a renewal, the parent is the original Application
     # it was copied from.

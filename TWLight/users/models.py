@@ -92,10 +92,10 @@ class Editor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Moved from auto_now=True/auto_now_add=True to set the date from import.
     # Defaults to today and not required in forms.
-    last_updated = models.DateField(default=now, blank=True,
+    last_updated = models.DateField(default=now,
         help_text=_("When this information was last edited"))
     # Set as non-editable.
-    date_created = models.DateField(default=now, blank=True,
+    date_created = models.DateField(default=now,
         editable=False,
         help_text=_("When this profile was first created"))
 
