@@ -54,7 +54,10 @@ class Command(BaseCommand):
                                try:
                                    date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M').date()
                                except:
-                                   date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S').date()
+                                   try:
+                                       date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S').date()
+                                   except:
+                                       date_created = None
 
                                try:
                                    Editor.objects.get_or_create(

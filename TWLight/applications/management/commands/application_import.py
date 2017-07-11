@@ -2,6 +2,7 @@ import csv
 import logging
 
 from datetime import date, datetime
+from django.utils.timezone import now
 from django.db import models
 from django.core.management.base import BaseCommand, CommandError
 from reversion import revisions as reversion
@@ -34,7 +35,11 @@ class Command(BaseCommand):
                        try:
                            datetime_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M')
                        except:
-                           datetime_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S')
+                           try:
+                               datetime_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S')
+                           except:
+                               datetime_created = now
+
                        date_created = datetime_created.date()
 
                        wp_username=row[2]
@@ -42,7 +47,12 @@ class Command(BaseCommand):
                        editor_id = editor.pk
 
                        specific_stream_id = row[4]
-                       stream = Stream.objects.get(pk=specific_stream_id)
+                       try:
+                           stream = Stream.objects.get(pk=specific_stream_id)
+                       except:
+                           specific_stream_id = None
+                           stream = None
+
                        import_note = 'Imported on ' + str(date.today()) + '.'
 
                        try:
