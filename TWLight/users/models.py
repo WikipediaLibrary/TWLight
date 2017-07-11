@@ -217,7 +217,11 @@ class Editor(models.Model):
             assert int(global_userinfo['editcount']) >= 500
 
             # Check: registered >= 6 months ago
-            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+            # Try oauth registration date first.  If it's not valid, try the global_userinfo date
+            try:
+                reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+            except:
+                reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
             assert datetime.today().date() - timedelta(days=182) >= reg_date
 
             # Check: Special:Email User enabled
@@ -328,7 +332,11 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
         self.wp_editcount = global_userinfo['editcount']
-        reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+        # Try oauth registration date first.  If it's not valid, try the global_userinfo date
+        try:
+            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+        except:
+            reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
         self.wp_registered = reg_date
         self.wp_valid = self._is_user_valid(identity, global_userinfo)
         self.save()
