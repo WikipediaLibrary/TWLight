@@ -45,7 +45,7 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-users'
             event['color'] = 'warning' # will be yellow
-            # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}.
+            # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
             event['text'] = _(u'{username} signed up for a Wikipedia Library '
                 'Card Platform account').format(username=editor.wp_username)
             event['date'] = editor.date_created
@@ -58,7 +58,7 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-files-o'
             event['color'] = 'success' # green
-            # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}.
+            # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
             event['text'] = _(u'{partner} joined the Wikipedia Library ').format(
                 partner=partner.company_name)
             event['date'] = partner.date_created
