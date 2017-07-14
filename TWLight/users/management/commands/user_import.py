@@ -4,6 +4,7 @@ import logging
 import urllib2
 
 from datetime import datetime
+from django.utils.timezone import now
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
@@ -14,13 +15,31 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
 
+    # Cribbed directly from the docs
+    # https://docs.python.org/2/library/csv.html#csv-examples
+
+    def utf_8_encoder(self, unicode_csv_data):
+        for line in unicode_csv_data:
+            try:
+                yield line.encode('utf-8')
+            except:
+                logger.exception("{line}".format(line=line))
+
+    def unicode_csv_reader(self, unicode_csv_data, dialect=csv.excel, **kwargs):
+        # csv.py doesn't do Unicode; encode temporarily as UTF-8:
+        csv_reader = csv.reader(self.utf_8_encoder(unicode_csv_data),
+                                dialect=dialect, **kwargs)
+        for row in csv_reader:
+            # decode UTF-8 back to Unicode, cell by cell:
+            yield [unicode(cell, 'utf-8') for cell in row]
+
     def add_arguments(self, parser):
         parser.add_argument('file')
 
     def handle(self, *args, **options):
         user = models.OneToOneField(settings.AUTH_USER_MODEL)
         with open(options['file']) as f:
-               reader = csv.reader(f)
+               reader = self.unicode_csv_reader(f)
                # Skip first row, we expect it to be a header.
                next(reader, None)  # skip the headers
                for row in reader:
@@ -57,7 +76,7 @@ class Command(BaseCommand):
                                    try:
                                        date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S').date()
                                    except:
-                                       date_created = None
+                                       date_created = now
 
                                try:
                                    Editor.objects.get_or_create(
