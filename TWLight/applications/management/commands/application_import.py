@@ -15,30 +15,15 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
 
-    # Cribbed directly from the docs
-    # https://docs.python.org/2/library/csv.html#csv-examples
-
-    def utf_8_encoder(self, unicode_csv_data):
-        for line in unicode_csv_data:
-            try:
-                yield line.encode('utf-8')
-            except:
-                logger.exception("{line}".format(line=line))
-
-    def unicode_csv_reader(self, unicode_csv_data, dialect=csv.excel, **kwargs):
-        # csv.py doesn't do Unicode; encode temporarily as UTF-8:
-        csv_reader = csv.reader(self.utf_8_encoder(unicode_csv_data),
-                                dialect=dialect, **kwargs)
-        for row in csv_reader:
-            # decode UTF-8 back to Unicode, cell by cell:
-            yield [unicode(cell, 'utf-8') for cell in row]
+    # Input file really needs to be UTF-8 encoded. We should do some sort of
+    # assertion for that.
 
     def add_arguments(self, parser):
         parser.add_argument('file')
 
     def handle(self, *args, **options):
         with open(options['file']) as f:
-               reader = self.unicode_csv_reader(f)
+               reader = csv.reader(f)
                # Skip first row, we expect it to be a header.
                next(reader, None)  # skip the headers
                for row in reader:
@@ -61,7 +46,8 @@ class Command(BaseCommand):
                                try:
                                    datetime_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S')
                                except:
-                                   datetime_created = now
+                                   #datetime_created = now
+                                   date_created = datetime.strptime('01/01/1971 00:00:01', '%m/%d/%Y %H:%M:%S').date()
 
                            date_created = datetime_created
 
