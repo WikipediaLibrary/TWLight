@@ -55,7 +55,6 @@ class Command(BaseCommand):
                            editor = Editor.objects.get(wp_username=wp_username)
                            editor_id = editor.pk
 
-                           specific_stream_id = row[4]
                            try:
                                stream = Stream.objects.get(pk=specific_stream_id)
                            except:
