@@ -28,82 +28,94 @@ class Command(BaseCommand):
                next(reader, None)  # skip the headers
                for row in reader:
                    try:
-                       # If the collections field is empty, make it an emtpy list
+                       # If the collections field is empty, make it a list containing an empty string.
                        if row[4] in (None, ""):
                            specific_stream_ids = ['']
                        # Otherwise try to split it on comma
                        else:
                            specific_stream_ids = row[4].split(',')
 
+                       # If the title field is empty, make it a list containing an empty string.
+                       if row[5] in (None, ""):
+                           specific_titles = ['']
+                       # Otherwise try to split it on semicolon
+                       else:
+                           specific_titles = row[5].split(';')
+
                        for specific_stream_id in specific_stream_ids:
-                           # Where possible we're fetching the objects attaChed
-                           # to our attributes to verify they already exist.
 
-                           partner_id = row[0]
-                           partner = Partner.objects.get(pk=partner_id)
+                           for specific_title in specific_titles:
 
-                           # Inconsistent date format on the input files
-                           # If the date field is empty, set it to the beginning of (Unix) time.
-                           if row[1] in (None, ""):
-                               datetime_created = datetime.strptime('01/01/1970 00:00:00', '%d/%m/%Y %H:%M:%S')
+                               # Where possible we're fetching the objects attached
+                               # to our attributes to verify they already exist.
 
-                           # If we have a date field
-                           else:
-                               # Try fetching the most precise timestamp
-                               try:
-                                   datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M:%S')
+                               partner_id = row[0]
+                               partner = Partner.objects.get(pk=partner_id)
 
-                               except ValueError:
-                                   # If that doesn't work, try getting a less precise timestamp
+                               # Inconsistent date format on the input files
+                               # If the date field is empty, set it to the beginning of (Unix) time.
+                               if row[1] in (None, ""):
+                                   datetime_created = datetime.strptime('01/01/1970 00:00:00', '%d/%m/%Y %H:%M:%S')
+
+                               # If we have a date field
+                               else:
+                                   # Try fetching the most precise timestamp
                                    try:
-                                       datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M')
+                                       datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M:%S')
 
                                    except ValueError:
-                                       # If that doesn't work, try getting a date
+                                       # If that doesn't work, try getting a less precise timestamp
                                        try:
-                                           datetime_created = datetime.strptime(row[1], '%d/%m/%Y')
-                                       except:
-                                           pass
+                                           datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M')
 
-                           date_created = datetime_created
+                                       except ValueError:
+                                           # If that doesn't work, try getting a date
+                                           try:
+                                               datetime_created = datetime.strptime(row[1], '%d/%m/%Y')
+                                           except:
+                                               pass
 
-                           wp_username = self.normalize_wp_username(row[2])
-                           editor = Editor.objects.get(wp_username=wp_username)
-                           editor_id = editor.pk
+                               date_created = datetime_created
 
-                           try:
-                               stream = Stream.objects.get(pk=specific_stream_id)
-                           except:
-                               specific_stream_id = None
-                               stream = None
+                               wp_username = self.normalize_wp_username(row[2])
+                               editor = Editor.objects.get(wp_username=wp_username)
+                               editor_id = editor.pk
 
-                           import_note = 'Imported on ' + str(date.today()) + '.'
+                               try:
+                                   stream = Stream.objects.get(pk=specific_stream_id)
+                               except:
+                                   specific_stream_id = None
+                                   stream = None
 
-                           try:
-                               application = Application.objects.get(
-                                   partner_id = partner_id,
-                                   date_created = date_created,
-                                   date_closed = date_created,
-                                   editor_id = editor_id,
-                                   specific_stream_id = specific_stream_id,
-                                   status = 4
-                               )
-                           except Application.DoesNotExist:
-                               application = Application(
-                                   partner_id = partner_id,
-                                   date_created = date_created,
-                                   date_closed = date_created,
-                                   editor_id = editor_id,
-                                   specific_stream_id = specific_stream_id,
-                                   comments = import_note,
-                                   rationale = import_note,
-                                   imported = True,
-                                   status = 4
-                               )
-                               with reversion.create_revision():
-                                   reversion.set_date_created(datetime_created)
-                                   application.save()
-                                   logger.info("Application created.")
+                               import_note = 'Imported on ' + str(date.today()) + '.'
+
+                               try:
+                                   application = Application.objects.get(
+                                       partner_id = partner_id,
+                                       date_created = date_created,
+                                       date_closed = date_created,
+                                       editor_id = editor_id,
+                                       specific_stream_id = specific_stream_id,
+                                       specific_title = specific_title,
+                                       status = 4
+                                   )
+                               except Application.DoesNotExist:
+                                   application = Application(
+                                       partner_id = partner_id,
+                                       date_created = date_created,
+                                       date_closed = date_created,
+                                       editor_id = editor_id,
+                                       specific_stream_id = specific_stream_id,
+                                       specific_title = specific_title,
+                                       comments = import_note,
+                                       rationale = import_note,
+                                       imported = True,
+                                       status = 4
+                                   )
+                                   with reversion.create_revision():
+                                       reversion.set_date_created(datetime_created)
+                                       application.save()
+                                       logger.info("Application created.")
                    except:
                        logger.exception("Unable to create {wp_username}'s application to {partner_id}.".format(wp_username=row[2],partner_id=row[0]))
                        pass
