@@ -41,17 +41,17 @@ class Command(BaseCommand):
 
                            # Inconsistent date format on the input files
                            try:
-                               datetime_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M')
+                               datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M')
                            except:
                                try:
-                                   datetime_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S')
+                                   datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M:%S')
                                except:
                                    #datetime_created = now
-                                   date_created = datetime.strptime('01/01/1971 00:00:01', '%m/%d/%Y %H:%M:%S').date()
+                                   date_created = datetime.strptime('01/01/1971 00:00:01', '%d/%m/%Y %H:%M:%S').date()
 
                            date_created = datetime_created
 
-                           wp_username = row[2]
+                           wp_username = self.normalize_wp_username(row[2])
                            editor = Editor.objects.get(wp_username=wp_username)
                            editor_id = editor.pk
 
@@ -92,3 +92,13 @@ class Command(BaseCommand):
                    except:
                        logger.exception("Unable to create {wp_username}'s application to {partner_id}.".format(wp_username=row[2],partner_id=row[0]))
                        pass
+
+    # Cribbed from stack overflow
+    # https://stackoverflow.com/a/32232764
+    # WP Usernames are uppercase and have spaces, not underscores
+    def normalize_wp_username(self, wp_username):
+        wp_username = wp_username.strip()
+        wp_username = wp_username.replace('_', ' ')
+        wp_username = wp_username[0].upper() + wp_username[1:]
+
+        return wp_username

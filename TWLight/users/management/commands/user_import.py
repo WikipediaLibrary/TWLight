@@ -28,7 +28,7 @@ class Command(BaseCommand):
                # Skip first row, we expect it to be a header.
                next(reader, None)  # skip the headers
                for row in reader:
-                   wp_username = row[2]
+                   wp_username = self.normalize_wp_username(row[2])
                    # We're wrapping this whole thing in a redundant-looking try
                    # block to avoid hitting the API unnecessarily.
                    try:
@@ -56,13 +56,13 @@ class Command(BaseCommand):
                            if created:
                                # Inconsistent date format on the input files
                                try:
-                                   date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M').date()
+                                   date_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M').date()
                                except:
                                    try:
-                                       date_created = datetime.strptime(row[1], '%m/%d/%Y %H:%M:%S').date()
+                                       date_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M:%S').date()
                                    except:
                                        #date_created = now
-                                       date_created = datetime.strptime('01/01/1971 00:00:01', '%m/%d/%Y %H:%M:%S').date()
+                                       date_created = datetime.strptime('01/01/1971 00:00:01', '%d/%m/%Y %H:%M:%S').date()
 
                                try:
                                    Editor.objects.get_or_create(
@@ -96,3 +96,13 @@ class Command(BaseCommand):
             logger.exception('could not fetch global_userinfo for {username}.'.format(username=urllib2.quote(wp_username)))
             return None
             pass
+
+    # Cribbed from stack overflow
+    # https://stackoverflow.com/a/32232764
+    # WP Usernames are uppercase and have spaces, not underscores
+    def normalize_wp_username(self, wp_username):
+        wp_username = wp_username.strip()
+        wp_username = wp_username.replace('_', ' ')
+        wp_username = wp_username[0].upper() + wp_username[1:]
+
+        return wp_username
