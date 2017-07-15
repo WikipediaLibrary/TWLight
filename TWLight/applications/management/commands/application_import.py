@@ -97,6 +97,7 @@ class Command(BaseCommand):
                                        editor_id = editor_id,
                                        specific_stream_id = specific_stream_id,
                                        specific_title = specific_title,
+                                       imported = True,
                                        status = 4
                                    )
                                except Application.DoesNotExist:
