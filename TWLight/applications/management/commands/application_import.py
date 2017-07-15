@@ -28,10 +28,13 @@ class Command(BaseCommand):
                next(reader, None)  # skip the headers
                for row in reader:
                    try:
-                       try:
-                           specific_stream_ids = row[4].split(',')
-                       except:
+                       # If the collections field is empty, make it an emtpy list
+                       if row[4] in (None, ""):
                            specific_stream_ids = ['']
+                       # Otherwise try to split it on comma
+                       else:
+                           specific_stream_ids = row[4].split(',')
+
                        for specific_stream_id in specific_stream_ids:
                            # Where possible we're fetching the objects attaChed
                            # to our attributes to verify they already exist.
@@ -40,14 +43,27 @@ class Command(BaseCommand):
                            partner = Partner.objects.get(pk=partner_id)
 
                            # Inconsistent date format on the input files
-                           try:
-                               datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M')
-                           except:
+                           # If the date field is empty, set it to the beginning of (Unix) time.
+                           if row[1] in (None, ""):
+                               datetime_created = datetime.strptime('01/01/1970 00:00:00', '%d/%m/%Y %H:%M:%S')
+
+                           # If we have a date field
+                           else:
+                               # Try fetching the most precise timestamp
                                try:
                                    datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M:%S')
-                               except:
-                                   #datetime_created = now
-                                   date_created = datetime.strptime('01/01/1971 00:00:01', '%d/%m/%Y %H:%M:%S').date()
+
+                               except ValueError:
+                                   # If that doesn't work, try getting a less precise timestamp
+                                   try:
+                                       datetime_created = datetime.strptime(row[1], '%d/%m/%Y %H:%M')
+
+                                   except ValueError:
+                                       # If that doesn't work, try getting a date
+                                       try:
+                                           datetime_created = datetime.strptime(row[1], '%d/%m/%Y')
+                                       except:
+                                           pass
 
                            date_created = datetime_created
 
