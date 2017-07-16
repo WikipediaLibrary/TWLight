@@ -204,7 +204,7 @@ class Application(models.Model):
         revision = self.get_latest_revision()
 
         if revision:
-            return revision.user
+            return revision.user.editor.wp_username
         else:
             return None
 
