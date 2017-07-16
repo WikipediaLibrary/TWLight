@@ -93,7 +93,7 @@ class Command(BaseCommand):
             logger.info('fetched global_userinfo for user')
             return global_userinfo
         except:
-            logger.exception('could not fetch global_userinfo for {username}.'.format(username=urllib2.quote(wp_username)))
+            logger.exception('could not fetch global_userinfo for {username}.'.format(username=wp_username))
             return None
             pass
 

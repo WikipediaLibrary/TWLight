@@ -118,7 +118,7 @@ class Command(BaseCommand):
                                        application.save()
                                        logger.info("Application created.")
                    except:
-                       logger.exception("Unable to create {wp_username}'s application to {partner_id}.".format(wp_username=row[2],partner_id=row[0]))
+                       logger.exception("Unable to create {wp_username}'s application to {partner_id}.".format(wp_username=normalize_wp_username(row[2]),partner_id=row[0]))
                        pass
 
     # Cribbed from stack overflow
