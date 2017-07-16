@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load urlencode %}
 
 {% block content %}
   <div class="row">
@@ -76,7 +77,7 @@
       <ul class="pagination">
         {% if object_list.has_previous %}
           <li>
-            <a href="?page={{ object_list.previous_page_number }}" aria-label="{% trans "Previous page" %}">
+            <a href="?page={{ object_list.previous_page_number }}{% if filters %}{% for filter in filters %}{% if filter.label and filter.object.company_name %}&{{ filter.label|urlencode|safe }}={{ filter.object.company_name|urlencode|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Previous page" %}">
               <span aria-hidden="true">{% trans "Previous page" %}</span>
             </a>
           </li>
@@ -97,7 +98,7 @@
             <li {% ifequal forloop.counter object_list.number %}
                   class="active"
                 {% endifequal %}>
-              <a href="?page={{ forloop.counter }}">
+              <a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if filter.label and filter.object.company_name %}&{{ filter.label|urlencode|safe }}={{ filter.object.company_name|urlencode|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
                 {{ forloop.counter }}
               </a>
             </li>
@@ -105,7 +106,7 @@
         {% endwith %}
         {% if object_list.has_next %}
           <li>
-            <a href="?page={{ object_list.next_page_number }}" aria-label="{% trans "Next" %}">
+            <a href="?page={{ object_list.next_page_number }}{% if filters %}{% for filter in filters %}{% if filter.label and filter.object.company_name %}&{{ filter.label|urlencode|safe }}={{ filter.object.company_name|urlencode|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Next" %}">
               <span aria-hidden="true">{% trans "Next page" %}</span>
             </a>
           </li>
