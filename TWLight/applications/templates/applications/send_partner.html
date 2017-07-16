@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% load i18n %}
+{% load cache %}
+{% load twlight_wikicode2html %}
 
 {% block extra_css %}
   <style type="text/css">
@@ -34,10 +36,24 @@
   <h2>
     {% blocktrans %}Application data for {{ object }}{% endblocktrans %}
   </h2>
-
-  {% blocktrans trimmed %}
-    When you've processed the data below, click the 'mark as sent' button.
-  {% endblocktrans %}
+  <p>
+    {% if object.send_instructions %}
+      {% comment %}
+        Cache lifetime should be None, which would be forever since we're
+        invalidating on update. However, as 2017-04-06 a bug in django
+        doesn't allow for None to be passed from here into cache.  The
+        fix is in master, but not release.
+        https://code.djangoproject.com/ticket/27882
+        We filter out details and summary tags so that we always see
+        the full content on the details page.
+      {% endcomment %}
+      {% cache 31536000 partner_send_instructions LANGUAGE_CODE object.pk %}
+        {{ object.send_instructions | twlight_wikicode2html | safe }}
+      {% endcache %}
+    {% else %}
+      {% trans "When you've processed the data below, click the 'mark as sent' button." %}
+    {% endif %}
+  </p>
 
   <h3>
     {% blocktrans trimmed count object.contacts.all|length as counter %}
