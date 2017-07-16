@@ -141,9 +141,9 @@ class DashboardView(TemplateView):
         context['app_time_histogram_data'] = get_time_open_histogram(closed_apps)
 
         # Median decision time per month ---------------------------------------
-
+        # Exlude imported applications
         context['app_medians_data'] = get_median_decision_time(
-                Application.objects.all()
+                Application.objects.exclude(imported=True)
             )
 
         # Application status pie chart -----------------------------------------
@@ -264,8 +264,9 @@ class CSVAppTimeHistogram(_CSVDownloadView):
 
 class CSVAppMedians(_CSVDownloadView):
     def _write_data(self, response):
+        # Exlude imported applications
         data = get_median_decision_time(
-            Application.objects.all(),
+            Application.objects.exclude(imported=True),
             data_format=PYTHON
         )
 

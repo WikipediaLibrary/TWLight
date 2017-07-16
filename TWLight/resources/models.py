@@ -164,6 +164,9 @@ class Partner(models.Model):
     description = models.TextField(blank=True, null=True,
         # Translator: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
         help_text=_("Optional description of this partner's resources."))
+    send_instructions = models.TextField(blank=True, null=True,
+        help_text=_("Optional instructions for sending application data to "
+            "this partner."))
     logo_url = models.URLField(blank=True, null=True,
         # Translator: In the administrator interface, this text is help text for a field where staff can provide the URL of an image to be used as this partner's logo.
         help_text=_('Optional URL of an image that can be used to represent '
@@ -248,11 +251,17 @@ class Partner(models.Model):
         return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
-        """Invalidate the rendered html partner description from cache"""
+        """Invalidate this partner's pandoc-rendered html from cache"""
         super(Partner, self).save(*args, **kwargs)
         for code in RESOURCE_LANGUAGE_CODES:
-          cache_key = make_template_fragment_key('partner_description', [code, self.pk])
-          cache.delete(cache_key)
+          description_cache_key = make_template_fragment_key(
+              'partner_description', [code, self.pk]
+          )
+          send_instructions_cache_key = make_template_fragment_key(
+              'partner_send_instructions', [code, self.pk]
+          )
+          cache.delete(description_cache_key)
+          cache.delete(send_instructions_cache_key)
 
     @property
     def get_languages(self):

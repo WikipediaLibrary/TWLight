@@ -36,6 +36,7 @@ import urllib2
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.timezone import now
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
@@ -91,10 +92,14 @@ class Editor(models.Model):
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    last_updated = models.DateField(auto_now=True,
+    # Moved from auto_now=True/auto_now_add=True to set the date from import.
+    # Defaults to today and not required in forms.
+    last_updated = models.DateField(default=now,
         # Translator: The date that this user's information was last changed.
         help_text=_("When this information was last edited"))
-    date_created = models.DateField(auto_now_add=True,
+    # Set as non-editable.
+    date_created = models.DateField(default=now,
+        editable=False,
         # Translator: The date the user's profile was created on the website (not on Wikipedia).
         help_text=_("When this profile was first created"))
 
@@ -184,8 +189,12 @@ class Editor(models.Model):
         """
         This should be used to display wp_rights in a template, or any time
         we need to manipulate the rights as a list rather than a string.
+        Doesn't exist for batch loaded users.
         """
-        return json.loads(self.wp_rights)
+        if self.wp_groups:
+            return json.loads(self.wp_rights)
+        else:
+            return None
 
 
     @property
@@ -193,7 +202,10 @@ class Editor(models.Model):
         """
         As above, but for groups.
         """
-        return json.loads(self.wp_groups)
+        if self.wp_groups:
+            return json.loads(self.wp_groups)
+        else:
+            return None
 
 
     def _is_user_valid(self, identity, global_userinfo):
@@ -216,7 +228,11 @@ class Editor(models.Model):
             assert int(global_userinfo['editcount']) >= 500
 
             # Check: registered >= 6 months ago
-            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+            # Try oauth registration date first.  If it's not valid, try the global_userinfo date
+            try:
+                reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+            except:
+                reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
             assert datetime.today().date() - timedelta(days=182) >= reg_date
 
             # Check: Special:Email User enabled
@@ -327,7 +343,11 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
         self.wp_editcount = global_userinfo['editcount']
-        reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+        # Try oauth registration date first.  If it's not valid, try the global_userinfo date
+        try:
+            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
+        except:
+            reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
         self.wp_registered = reg_date
         self.wp_valid = self._is_user_valid(identity, global_userinfo)
         self.save()

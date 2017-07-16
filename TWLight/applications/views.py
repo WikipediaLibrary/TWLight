@@ -4,6 +4,7 @@ Views for managing applications for resource grants go here.
 Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
+import bleach
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import logging
@@ -418,6 +419,34 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         # Our object_list varies depending on whether the user has filtered the
         # queryset.
         filters = kwargs.pop('filters', None)
+
+        # If the POST data didn't have an editor, try the GET data.
+        # The user might be going through paginated data.
+        # There is almost certainly a better way to do this, since we're
+        # recreating a data structure from post.
+        if not filters:
+            try:
+                wp_username = bleach.clean(self.request.GET.get('Editor'))
+                if wp_username:
+                    editor = Editor.objects.get(wp_username=wp_username)
+                else:
+                    editor = ''
+
+                company_name = bleach.clean(self.request.GET.get('Partner'))
+                if company_name:
+                    partner = Partner.objects.get(company_name=company_name)
+                else:
+                    partner = ''
+
+                filters = [
+                    # Translators: Editor = wikipedia editor, gender unknown.
+                    {'label': _('Editor'), 'object': editor},
+                    {'label': _('Partner'), 'object': partner}
+                ]
+            except:
+                logger.info('Unable to set filter from GET data.')
+                pass
+
         self._set_object_list(filters)
 
         context = super(_BaseListApplicationView, self
@@ -427,7 +456,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         context['object_list'] = self.object_list
         # Set up pagination.
-        paginator = Paginator(self.object_list, 999)
+        paginator = Paginator(self.object_list, 20)
         page = self.request.GET.get('page')
         try:
             applications = paginator.page(page)
@@ -467,8 +496,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
             # it exists.
             editor = Editor.objects.get(pk=request.POST['editor'])
         except KeyError:
-            # Better to ask forgiveness than permission; if the POST data didn't
-            # have an editor, the user didn't filter by editor, and that's OK.
+            # The user didn't filter by editor, and that's OK.
             editor = None
         except Editor.DoesNotExist:
             # The format call is guaranteed to work, because if we got here we
@@ -480,6 +508,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         try:
             partner = Partner.objects.get(pk=request.POST['partner'])
         except KeyError:
+            # The user didn't filter by partner, and that's OK.
             partner = None
         except Partner.DoesNotExist:
             logger.exception('Autocomplete requested partner #{pk}, who does '

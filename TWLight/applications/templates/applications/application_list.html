@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load urlencode %}
 
 {% block content %}
   <div class="row">
@@ -86,7 +87,7 @@
       <ul class="pagination">
         {% if object_list.has_previous %}
           <li>
-            <a href="?page={{ object_list.previous_page_number }}" aria-label="{% trans "Previous page" %}">
+            <a href="?page={{ object_list.previous_page_number }}{% if filters %}{% for filter in filters %}{% if filter.label and filter.object.company_name %}&{{ filter.label|urlencode|safe }}={{ filter.object.company_name|urlencode|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Previous page" %}">
               {% comment %}Translators: This is the label for a button which goes to the previous page of applications.{% endcomment %}
               <span aria-hidden="true">{% trans "Previous page" %}</span>
             </a>
@@ -108,7 +109,7 @@
             <li {% ifequal forloop.counter object_list.number %}
                   class="active"
                 {% endifequal %}>
-              <a href="?page={{ forloop.counter }}">
+              <a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if filter.label and filter.object.company_name %}&{{ filter.label|urlencode|safe }}={{ filter.object.company_name|urlencode|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
                 {{ forloop.counter }}
               </a>
             </li>
@@ -117,7 +118,7 @@
         {% if object_list.has_next %}
           <li>
             {% comment %}Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications. {% endcomment %}
-            <a href="?page={{ object_list.next_page_number }}" aria-label="{% trans "Next" %}">
+            <a href="?page={{ object_list.next_page_number }}{% if filters %}{% for filter in filters %}{% if filter.label and filter.object.company_name %}&{{ filter.label|urlencode|safe }}={{ filter.object.company_name|urlencode|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Next" %}">
               {% comment %}Translators: This is the label for a button which goes to the next page of applications.{% endcomment %}
               <span aria-hidden="true">{% trans "Next page" %}</span>
             </a>
