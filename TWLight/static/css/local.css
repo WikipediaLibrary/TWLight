@@ -1,5 +1,136 @@
 /*
 ----------------------------------------------------------------------------
+CUSTOM
+--------------------------------------------------------------------------*/
+
+.site-title {
+	font-family: Palatino; 
+	font-size:1.5em; 
+	font-weight:bold; 
+	margin: -10px 0px 10px 0px; 
+	color:#000000;
+}
+
+.logo {
+	height:70px; 
+	float:left; 
+	padding:0px 20px 0px 0px;
+}
+
+.lead {
+	text-align:center;
+	padding: 20px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:1px 1px 2px #eaeaea;
+	font-size:1.4em;
+}
+
+.border {
+	padding: 10px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:1px 1px 2px #eaeaea;
+	margin:20px 20px 0px 0px;
+	min-height:350px;
+}
+
+
+.read-more {
+	width:200px;
+	margin:auto;
+	text-align:center;
+}
+
+.login .btn {
+	padding:10px 12px;
+	font-size: 18px;
+	margin:10px;
+}
+
+
+/*
+----------------------------------------------------------------------------
+Media Queries
+--------------------------------------------------------------------------*/
+
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+.site-title {
+	font-family: Palatino; 
+	font-size:.9em; 
+	font-weight:bold; 
+	margin: -10px 0px 10px 0px; 
+	color:#000000;
+}
+
+.logo {
+	height:50px; 
+	float:left; 
+	padding:0px 10px 0px 0px;
+}
+
+.nav-greeting {
+	font-size:.9em; 
+}
+
+li.mobile-menu {
+	width:150px;
+	font-size:.9em;	
+}
+ .nav li a {
+	 padding: 5px;
+ }
+ 
+.navbar-left {
+	border-bottom:2px solid #ffffff;
+}
+
+.lead {
+	text-align:center;
+	padding: 20px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:1px 1px 2px #eaeaea;
+	font-size:1em;
+}
+
+.login .btn {
+	padding:10px 12px;
+	font-size: 1em;
+	margin:10px;
+}
+
+}
+
+
+
+/*
+----------------------------------------------------------------------------
 BODY
 --------------------------------------------------------------------------*/
 
@@ -24,6 +155,12 @@ h1, h2 {
 
 p {
   margin-top: 7px;
+  font-size: 1em;
+}
+
+li {
+  margin-top: 2px;
+  font-size: 1em;
 }
 
 #comments blockquote {
@@ -31,6 +168,10 @@ p {
 }
 .text-justify-xs {
     text-align: left
+}
+
+.glyphicon-grey {
+	color:#696969;
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -78,6 +219,7 @@ HEADER, FOOTER, NAVS
 header {
   margin-bottom: 28px;
 }
+
 
 @media (max-width: 767px) {
   #main-content {
@@ -140,10 +282,19 @@ nav .divider {
 
 }
 
+.navbar-left {
+	height:70px;
+}
+
 @media (max-width: 767px) {
   nav .divider {
     border-left: none;
   }
+  
+  li.mobile-menu {
+	font-size:.9em;	
+}
+
 }
 
 /*
@@ -167,6 +318,16 @@ TIMELINE
 .full-width {
   display: block;
   width: 100%;
+}
+
+/* removes li after 5th from homepage */
+
+ul.timeline li:nth-child(-n+5) {
+   display: list-item;
+}
+
+ul.timeline-home li {
+	display:none;
 }
 
 
