@@ -135,13 +135,13 @@ def send_comment_notification_emails(sender, **kwargs):
 def send_approval_notification_email(instance):
     email = ApprovalNotification()
     email.send(instance.user.email,
-        {'user': instance.user, 'partner': instance.partner})
+        {'user': instance.editor.wp_username, 'partner': instance.partner})
 
 
 def send_waitlist_notification_email(instance):
     email = WaitlistNotification()
     email.send(instance.user.email,
-        {'user': instance.user,
+        {'user': instance.editor.wp_username,
          'partner': instance.partner,
          'link': reverse_lazy('partners:list')})
 
@@ -163,7 +163,7 @@ def send_rejection_notification_email(instance):
 
     email = RejectionNotification()
     email.send(instance.user.email,
-        {'user': instance.user,
+        {'user': instance.editor.wp_username,
          'partner': instance.partner,
          'app_url': app_url})
 
