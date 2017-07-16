@@ -9,10 +9,20 @@
       </span>
     </div>    
     <div class="col-xs-8 col-sm-6">
+      <h4>
       <a href="{{ app.get_absolute_url }}">
         {{ app }}
       </a>
+      </h4>
+      {% if app.user.editor %}
+      Editor: <a href="/users/{{ app.user.editor.pk|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
       <br />
+      {% endif %}
+      {% if app.user.email %}
+      Email:
+        <a href="mailto:{{ app.user.email|urlencode|safe }}">{{ app.user.email|safe }}</a>
+      <br />
+      {% endif %}
       {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
         {% if app.get_latest_reviewer %}
           {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
@@ -26,6 +36,12 @@
       {% else %}
         {% trans 'Not yet reviewed.' %}
       {% endif %}
+      <br />
+      {% if app.user.editor %}
+      Filter by editor: <a href="?Editor={{ app.user.editor.wp_username|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
+      &nbsp;&nbsp;&nbsp;
+      {% endif %}
+      Filter by partner: <a href="?Partner={{ app.partner|urlencode|safe }}">{{ app.partner }}</a>
     </div>
     {% ifequal app.editor.user.pk user.pk %}
       <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0">
