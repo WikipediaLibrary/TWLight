@@ -1,4 +1,5 @@
 import csv
+import django.conf
 import logging
 
 from datetime import date, datetime
@@ -14,6 +15,8 @@ from ....resources.models import Partner, Stream
 logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
+    # Let's not send mails about imported stuff.
+    django.conf.settings.EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
     # Input file really needs to be UTF-8 encoded. We should do some sort of
     # assertion for that.
@@ -118,7 +121,7 @@ class Command(BaseCommand):
                                        application.save()
                                        logger.info("Application created.")
                    except:
-                       logger.exception("Unable to create {wp_username}'s application to {partner_id}.".format(wp_username=row[2],partner_id=row[0]))
+                       logger.exception("Unable to create {wp_username}'s application to {partner_id}.".format(wp_username=self.normalize_wp_username(row[2]),partner_id=row[0]))
                        pass
 
     # Cribbed from stack overflow
