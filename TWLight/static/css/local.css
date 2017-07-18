@@ -46,7 +46,7 @@ li {
   .text-justify-sm {
       text-align: center;
   }
-  
+
 }
 
 @media (min-width: 768px) {
@@ -113,7 +113,7 @@ header {
   #main-content {
     margin: auto 56px;
   }
-  
+
   #top-nav, #footer {
     padding-top: auto;
     padding-bottom: auto;
@@ -126,7 +126,7 @@ header {
   #main-content {
     margin: auto 14px;
   }
-  
+
   #top-nav, #footer {
     padding-top: auto;
     padding-bottom: auto;
@@ -139,7 +139,7 @@ header {
   #main-content {
     margin: auto 28px;
   }
-  
+
   #top-nav, #footer {
     padding-top: auto;
     padding-bottom: auto;
@@ -179,7 +179,7 @@ nav .divider {
   nav .divider {
     border-left: none;
   }
-  
+
   li.mobile-menu {
 	font-size:.9em;	
 }
@@ -353,7 +353,7 @@ A few spots just need padding instead of margin.
 }
 
 .panel-partner-info {
-	
+
 }
 
 .lead {
@@ -394,7 +394,7 @@ li.mobile-menu {
  .nav li a {
 	 padding: 5px;
  }
- 
+
 .navbar-left {
 	border-bottom:2px solid #ffffff;
 }
@@ -437,7 +437,7 @@ CLEARING COLUMNS
   .col-md-6:nth-child(2n+1){
     clear: none;
   }
-  
+
   .col-sm-1:nth-child(12n+1),
   .col-sm-2:nth-child(6n+1),
   .col-sm-3:nth-child(4n+1),
@@ -462,7 +462,7 @@ CLEARING COLUMNS
   .col-sm-6:nth-child(2n+1){
     clear: none;
   }
-  
+
   .col-md-1:nth-child(12n+1),
   .col-md-2:nth-child(6n+1),
   .col-md-3:nth-child(4n+1),
@@ -487,7 +487,7 @@ CLEARING COLUMNS
   .col-sm-6:nth-child(2n+1){
     clear: none;
   }
-  
+
   .col-lg-1:nth-child(12n+1),
   .col-lg-2:nth-child(6n+1),
   .col-lg-3:nth-child(4n+1),
