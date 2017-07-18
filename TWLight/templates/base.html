@@ -13,6 +13,8 @@
   <title>
     {% trans "The Wikipedia Library Card Platform" %}
   </title>
+  
+  <!-- Link to bootstrap css -->
   <link rel="shortcut icon" href="{% static 'img/favicon.png' %}"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -22,93 +24,107 @@
 
   <!-- Custom Fonts -->
   <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
-
   <link href="{% static "css/local.css" %}" rel="stylesheet" type="text/css">
 
   {% block extra_css %}    
   {% endblock extra_css %}
 </head>
+
 <body>
-  <nav class="nav navbar-default" id="top-nav">
-    {% if user.is_authenticated %}
-      <span class="nav-greeting">
-        {% url 'users:home' as home_url %}
-        {% if user.editor %}
-          {% blocktrans with username=user.editor.wp_username%}
-            Hi, <a href="{{ home_url }}">{{ username }}</a>!
-          {% endblocktrans %}
-        {% else %}
-          {% blocktrans with username=user.username %}
-            Hi, <a href="{{ home_url }}">{{ username }}</a>!
-          {% endblocktrans %}
-        {% endif %}
-      </span>
-    {% endif %}
-    <ul class="nav nav-pills pull-right">
-      <li role="presentation">
-        <a href="{% url 'partners:list' %}">
-          {% trans "Browse" %}
-        </a>
-      </li>
-      {% if user.editor %}
-        <li role="presentation">
-          <a href="{% url 'applications:request' %}">
-            {% trans "Apply" %}
-          </a>
-        </li>
-      {% endif %}
-      {% if user|coordinators_only %}
-        <li role="presentation">
-          <a href="{% url 'applications:list' %}">
-            {% trans "Review" %}
-          </a>
-        </li>
-      {% endif %}
-      {% if user|coordinators_only %}
-        <li role="presentation">
-          <a href="{% url 'applications:send' %}">
-            {% trans "Send data to partners" %}
-          </a>
-        </li>
-      {% endif %}
-      <li role="presentation" class="divider">
-        <a href="{% url 'homepage' %}">
-          {% trans "Latest activity" %}
-        </a>
-      </li>
-      {# All users get to see metrics, so let them all see the link, too. #}
-      <li role="presentation">
-        <a href="{% url 'dashboard' %}">
-          {% trans "Metrics" %}
-        </a>
-      </li>
-      {% if user.is_authenticated %}
-        <li role="presentation" class="divider">
-          <a href="{% url 'auth_logout' %}">
-            {% trans "Log out" %}
-          </a>
-        </li>
-      {% else %}
-        <li role="presentation">
-          <a href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
-            {% trans "Log in" %}
-          </a>
-        </li>
-      {% endif %}
-    </ul>
-  </nav>
-  <header>
-    <div class="row">
-      <a href="{% url 'homepage' %}">
-        <div class="col-xs-12 col-sm-2">
-          <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive center-block">
-        </div>
-      </a>
-      <div class="col-xs-12 col-sm-10">
-        <h1 class="text-justify-sm">{% trans "The Wikipedia Library Card Platform" %}</h1>
-      </div>      
-    </div>
-  </header>
+ <!-- navbar -->
+  <div class="navbar navbar-default" id="top-nav">
+      <div class="navbar-left">
+			<!-- logo -->
+			<a href="{% url 'homepage' %}">
+				<img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo">
+			</a>
+			
+			<!-- site name -->
+			<a class="site-title" href="{% url 'homepage' %}">{% trans "The Wikipedia Library Card Platform" %}</a>
+			
+			<!-- Welcome Message Logged In User -->
+				{% if user.is_authenticated %}
+					<div class="nav-greeting welcome"> 
+						
+					{% url 'users:home' as home_url %}
+						{% if user.editor %}
+							{% blocktrans with username=user.editor.wp_username%}
+								Hi, <a href="{{ home_url }}">{{ username }}</a>!
+							{% endblocktrans %}
+						{% else %}
+							{% blocktrans with username=user.username %}
+								Hi, <a href="{{ home_url }}">{{ username }}</a>!
+							{% endblocktrans %}						 
+						{% endif %}
+						
+					</div>			
+				{% endif %}
+			
+	 </div>
+      
+        <ul class="nav nav-pills navbar-right">
+			<li role="presentation" class="mobile-menu">
+				<a href="{% url 'partners:list' %}">
+					{% trans "Browse" %}
+				</a>
+			</li>
+		{% if user.editor %}
+			<li role="presentation" class="mobile-menu">
+				<a href="{% url 'applications:request' %}">
+					{% trans "Apply" %}
+				</a>
+			</li>
+		{% endif %}
+			
+		{% if user|coordinators_only %}
+			<li role="presentation" class="mobile-menu">
+				<a href="{% url 'applications:list' %}">
+					{% trans "Review" %}
+				</a>
+			</li>
+		{% endif %}
+      
+		{% if user|coordinators_only %}
+			<li role="presentation" class="mobile-menu">
+				<a href="{% url 'applications:send' %}">
+					{% trans "Send data to partners" %}
+				</a>
+			</li>
+		{% endif %}
+      
+			<li role="presentation" class="divider mobile-menu">
+				<a href="{% url 'activity' %}">
+					{% trans "Latest activity" %}
+				</a>
+			</li>
+		
+		{# All users get to see metrics, so let them all see the link, too. #}
+			<li role="presentation" class="mobile-menu">
+				<a href="{% url 'dashboard' %}">
+					{% trans "Metrics" %}
+				</a>
+			</li>
+      
+		{% if user.is_authenticated %}
+			<li role="presentation" class="divider mobile-menu">
+				<a href="{% url 'auth_logout' %}">
+					{% trans "Log out" %}
+				</a>
+			</li>
+		{% else %}
+      
+			<li role="presentation" class="mobile-menu">
+				<a href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
+					{% trans "Log in" %}
+				</a>
+			</li>
+		{% endif %}
+    
+		</ul>
+     </div>
+
+
+
   <div id="main-content">
     {% if messages %}
       {% for message in messages %}
@@ -129,7 +145,7 @@
     {% block content %}
     {% endblock %}
     
-  </div>
+ </div>
   <footer id="footer">
     <div class="row">
       <div class="col-xs-12">
@@ -142,7 +158,8 @@
         </p>
         <p>
           <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+          <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+		  </a>
         </p>
         <p>
           {% blocktrans trimmed %}
@@ -150,9 +167,11 @@
             <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
           {% endblocktrans %}
         </p>
-        <hr />
-      </div>
-      <div class="col-xs-12">
+        
+		<hr />
+	  </div>
+      
+	  <div class="col-xs-12">
         <ul class="list-inline pull-right">
           <li>
             <a href="{% url 'about' %}">
@@ -190,3 +209,6 @@
   {% endblock javascript %}
 </body>
 </html>
+
+
+

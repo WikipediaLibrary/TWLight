@@ -66,4 +66,7 @@ urlpatterns = [
     url(r'^about/$',
         TemplateView.as_view(template_name='about.html'),
         name='about'),
+	url(r'^activity/$',
+        HomePageView.as_view(template_name='activity.html'),
+        name='activity'),
 ]
