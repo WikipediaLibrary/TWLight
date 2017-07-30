@@ -243,6 +243,13 @@ ul.timeline-home li {
 ----------------------------------------------------------------------------
 MISC
 --------------------------------------------------------------------------*/
+
+/* Quick hack for tos misalignment on applications. */
+.apply-tos {
+  margin-right: 100%;
+  margin-left: -50%;
+}
+
 .panel-footer {
   background-color: white;
 }
