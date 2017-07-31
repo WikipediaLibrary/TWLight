@@ -204,7 +204,10 @@ class Application(models.Model):
         revision = self.get_latest_revision()
 
         if revision:
-            return revision.user.editor.wp_username
+            try:
+                return revision.user.editor.wp_username
+            except AttributeError:
+                return None
         else:
             return None
 
