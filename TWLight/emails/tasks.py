@@ -139,11 +139,15 @@ def send_approval_notification_email(instance):
 
 
 def send_waitlist_notification_email(instance):
+    base_url = get_current_site(None).domain
+    path = reverse_lazy('partners:list')
+    link = 'https://{base}{path}'.format(base=base_url, path=path)
+
     email = WaitlistNotification()
     email.send(instance.user.email,
         {'user': instance.user.editor.wp_username,
          'partner': instance.partner,
-         'link': reverse_lazy('partners:list')})
+         'link': link})
 
 
 def send_rejection_notification_email(instance):
