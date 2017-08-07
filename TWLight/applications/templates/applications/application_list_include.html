@@ -38,10 +38,10 @@
       {% endif %}
       <br />
       {% if app.user.editor %}
-      Filter by editor: <a href="?Editor={{ app.user.editor.wp_username|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
+      Filter by editor: <a href="?Editor={{ app.user.editor.pk|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
       &nbsp;&nbsp;&nbsp;
       {% endif %}
-      Filter by partner: <a href="?Partner={{ app.partner|urlencode|safe }}">{{ app.partner }}</a>
+      Filter by partner: <a href="?Partner={{ app.partner.pk|urlencode|safe }}">{{ app.partner }}</a>
     </div>
     {% ifequal app.editor.user.pk user.pk %}
       <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0">
