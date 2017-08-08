@@ -198,8 +198,10 @@ class CSVNumPartners(_CSVDownloadView):
 
         data = get_data_count_by_month(queryset, data_format=PYTHON)
         writer = csv.writer(response)
-
-        writer.writerow([_('Date'), _('Number of partners')])
+        #Translator: This is the heading of a data file, for a column containing date data.
+        writer.writerow([_('Date'), 
+                         #Translator: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
+                         _('Number of partners')])
 
         for row in data:
             writer.writerow(row)
@@ -211,8 +213,9 @@ class CSVHomeWikiPie(_CSVDownloadView):
         data = get_wiki_distribution_pie_data(data_format=PYTHON)
 
         writer = csv.DictWriter(response, fieldnames=['label', 'data'])
-
-        writer.writerow({'label': _('Home wiki'), 'data': _('Number of users')})
+        #Translator: This is the heading of a data file. Home Wiki refers to the Wikimedia site that a user is most active on.
+        writer.writerow({'label': _('Home wiki'), 
+                         'data': _('Number of users')})
 
         for row in data:
             writer.writerow(row)
@@ -226,7 +229,11 @@ class CSVHomeWikiOverTime(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow(
-            [_('Wiki'), _('Date'), _('Number of users')])
+            #Translator: This is the heading of a data file. 'Wiki' refers to the Wikimedia site that a user is most active on.
+            [_('Wiki'),
+             _('Date'),
+             #Translator: This is the heading of a data file. This labels the number of users who registered from a particular Wikimedia site.
+             _('Number of users')])
 
         for elem in data:
             for point in elem['data']:
@@ -245,8 +252,10 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow(
-            # Translators: the number of days it took to decide on applications that have already been accepted/rejected.
-            [_('Days until decision'), _('Number of applications')])
+            # Translator: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
+            [_('Days until decision'),
+             #Translator: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
+             _('Number of applications')])
 
         for row in data:
             writer.writerow(row)
@@ -264,7 +273,10 @@ class CSVAppMedians(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow(
-            [_('Month'), _('Median days until decision')])
+            #Translator: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
+            [_('Month'), 
+             #Translator: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
+             _('Median days until decision')])
 
         for row in data:
             writer.writerow(row)
@@ -308,6 +320,7 @@ class CSVAppCountByPartner(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow([_('Date'),
+            #Translator: This is the heading of a data file which lists the number of applications to a partner. Don't translate {partner}.
             _('Number of applications to {partner}').format(partner=partner)])
 
         for row in data:
@@ -331,6 +344,7 @@ class CSVUserCountByPartner(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow([_('Date'),
+            #Translator: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner. Don't translate {partner}.
             _('Number of unique users who have applied to {partner}').format(partner=partner)])
 
         for row in data:
@@ -345,6 +359,7 @@ class CSVPageViews(_CSVDownloadView):
             return super(CSVPageViews, self).dispatch(request, *args, **kwargs)
         else:
             messages.add_message (request, messages.WARNING,
+                #Translator: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
                 _('You must be staff to do that.'))
             raise PermissionDenied
 
@@ -354,7 +369,7 @@ class CSVPageViews(_CSVDownloadView):
             the_count=Count('path')).order_by()
 
         writer = csv.writer(response)
-
+        #Translator: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
         writer.writerow([_('Page URL'),
             _('Number of (non-unique) visitors')])
 
@@ -389,6 +404,7 @@ class CSVPageViewsByPath(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow([_('Page URL'),
+            #Translator: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
             _('Number of (non-unique) visitors')])
 
         writer.writerow([path, path_count])

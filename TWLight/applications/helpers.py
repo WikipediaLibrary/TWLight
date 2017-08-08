@@ -79,15 +79,25 @@ FIELD_TYPES = {
 }
 
 FIELD_LABELS = {
+    # Translators: When filling out an application, users may need to specify their name
     REAL_NAME: _('Your real name'),
+    # Translators: When filling out an application, users may need to specify the country in which they currently live
     COUNTRY_OF_RESIDENCE: _('Your country of residence'),
+    # Translators: When filling out an application, users may need to specify their current occupation
     OCCUPATION: _('Your occupation'),
+    # Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
     AFFILIATION: _('Your institutional affiliation'),
+    # Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
     PARTNER: _('Partner name'),
+    # Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
     RATIONALE: _('Why do you want access to this resource?'),
+    # Translators: When filling out an application, users may need to specify a particular collection of resources they want access to
     SPECIFIC_STREAM: _('Which collection do you want?'),
+    # Translators: When filling out an application, users may need to specify a particular book they want access to
     SPECIFIC_TITLE: _('Which book do you want?'),
+    # Translators: When filling out an application, users are given a text box where they can include any extra relevant information
     COMMENTS: _('Anything else you want to say'),
+    # Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
 }
 
@@ -101,6 +111,7 @@ def get_output_for_application(app):
     plus Editor in the front end.
     """
     output = {}
+    # Translators: This labels a user's email address on a form for account coordinators
     output[_('Email')] = app.editor.user.email
 
     for field in PARTNER_FORM_OPTIONAL_FIELDS:

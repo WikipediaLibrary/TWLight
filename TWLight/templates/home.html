@@ -5,14 +5,13 @@
 {% block content %}
    <div class="lead">
 		<p>
+    {% comment %} Translator: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
 		{% blocktrans trimmed %}
 			Apply for access to dozens of research databases and resources available through The Wikipedia Library. 
 		{% endblocktrans %}
 			
 		<a href="{% url 'about' %}">{% trans "Learn more" %}</a>
 		</p>
-	 
-
 
 	  <div class="row">
 		<div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 login">
@@ -41,7 +40,7 @@
 				
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
-				
+				{% comment %} Translator: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
 				<p><a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a></p>
 			</div>
 	</div>

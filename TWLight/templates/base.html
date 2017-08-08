@@ -31,6 +31,7 @@
 </head>
 
 <body>
+  
  <!-- navbar -->
   <div class="navbar navbar-default" id="top-nav">
       <div class="navbar-left">
@@ -50,10 +51,12 @@
 						
 					{% url 'users:home' as home_url %}
 						{% if user.editor %}
+              {% comment %} Translator: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate {{ home_url }} or {{ username }}. {% endcomment %}
 							{% blocktrans with username=user.editor.wp_username%}
 								Hi, <a href="{{ home_url }}">{{ username }}</a>!
 							{% endblocktrans %}
 						{% else %}
+              {% comment %} Translator: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate {{ home_url }} or {{ username }}. {% endcomment %}
 							{% blocktrans with username=user.username %}
 								Hi, <a href="{{ home_url }}">{{ username }}</a>!
 							{% endblocktrans %}						 
@@ -62,17 +65,19 @@
 					</div>			
 				{% endif %}
 			
-	 </div>
+	    </div>
       
         <ul class="nav nav-pills navbar-right">
 			<li role="presentation" class="mobile-menu">
 				<a href="{% url 'partners:list' %}">
+          {% comment %} Translator: Shown in the top bar of almost every page, taking users to the page where they can browse current partners. {% endcomment %}
 					{% trans "Browse" %}
 				</a>
 			</li>
 		{% if user.editor %}
 			<li role="presentation" class="mobile-menu">
 				<a href="{% url 'applications:request' %}">
+          {% comment %} Translator: Shown in the top bar of almost every page, taking users to the page where they apply for access to partner resources. {% endcomment %}
 					{% trans "Apply" %}
 				</a>
 			</li>
@@ -81,6 +86,7 @@
 		{% if user|coordinators_only %}
 			<li role="presentation" class="mobile-menu">
 				<a href="{% url 'applications:list' %}">
+          {% comment %} Translator: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
 					{% trans "Review" %}
 				</a>
 			</li>
@@ -89,6 +95,7 @@
 		{% if user|coordinators_only %}
 			<li role="presentation" class="mobile-menu">
 				<a href="{% url 'applications:send' %}">
+          {% comment %} Translator: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
 					{% trans "Send data to partners" %}
 				</a>
 			</li>
@@ -96,13 +103,14 @@
       
 			<li role="presentation" class="divider mobile-menu">
 				<a href="{% url 'activity' %}">
+          {% comment %} Translator: Shown in the top bar of almost every page, linking to the home page (for the timeline). {% endcomment %}
 					{% trans "Latest activity" %}
 				</a>
 			</li>
 		
-		{# All users get to see metrics, so let them all see the link, too. #}
 			<li role="presentation" class="mobile-menu">
 				<a href="{% url 'dashboard' %}">
+          {% comment %} Translator: Shown in the top bar of almost every page, linking to the statitics for applications. {% endcomment %}
 					{% trans "Metrics" %}
 				</a>
 			</li>
@@ -110,6 +118,7 @@
 		{% if user.is_authenticated %}
 			<li role="presentation" class="divider mobile-menu">
 				<a href="{% url 'auth_logout' %}">
+          {% comment %} Translator: Shown in the top bar of almost every page when the current user is logged in. {% endcomment %}
 					{% trans "Log out" %}
 				</a>
 			</li>
@@ -117,16 +126,15 @@
       
 			<li role="presentation" class="mobile-menu">
 				<a href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
+          {% comment %} Translator: Shown in the top bar of almost every page when the current user is not logged in. {% endcomment %}
 					{% trans "Log in" %}
 				</a>
 			</li>
 		{% endif %}
     
 		</ul>
-     </div>
-
-
-
+  </div>
+ 
   <div id="main-content">
     {% if messages %}
       {% for message in messages %}
@@ -136,6 +144,7 @@
     {% if not user.email and not user.is_anonymous %}
       <div class="alert alert-warning">
         {% url 'users:email_change' as email_url %}
+        {% comment %} Translator: Shown if the current user doesn't have a registered email on their account. Don't translate {{ email_url }}. {% endcomment %}
         {% blocktrans %}
           You don't have an email on file. We can't finalize your access to
           partner resources without an email. Please
@@ -152,6 +161,7 @@
     <div class="row">
       <div class="col-xs-12">
         <p>
+          {% comment %} Translator: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
           {% blocktrans trimmed %}
             The Wikipedia Library Card Platform is a project of 
             <a href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
@@ -164,6 +174,7 @@
 		  </a>
         </p>
         <p>
+          {% comment %} Translator: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International". {% endcomment %}
           {% blocktrans trimmed %}
             This work is licensed under a
             <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
@@ -177,12 +188,13 @@
         <ul class="list-inline pull-right">
           <li>
             <a href="{% url 'about' %}">
-              {# Translators: As in "about this site" - a menu link to the about page. #}
+              {% comment %} Translator: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
               {% trans "About" %}
             </a>
           </li>
           <li>
             <a href="https://wikimediafoundation.org/wiki/Privacy_policy">
+              {% comment %} Translator: This button is at the bottom of every page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). {% endcomment %}
               {% trans "Privacy policy" %}
             </a>
           </li>
@@ -193,6 +205,7 @@
           </li>
           <li>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYp-D5h--5Fnj-9knp_Zj9mhxjk5DJDKNJaJDtS4Z4AXxB6g/viewform">
+              {% comment %} Translator: This button is at the bottom of every page and can be clicked by users to provide feedback through a form. {% endcomment %}
               {% trans "Feedback" %}
             </a>
           </li>
@@ -211,6 +224,3 @@
   {% endblock javascript %}
 </body>
 </html>
-
-
-

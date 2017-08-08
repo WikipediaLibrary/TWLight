@@ -8,8 +8,10 @@
           <span class="label label-danger">
             {% with app.parent.get_num_days_since_expiration as num_days %}
               {% ifequal num_days 0 %} 
+                {% comment %}Translators: On the page which shows a list of applications, this message is shown next to applications which are for an account renewal if their account expired today.{% endcomment %}
                 {% trans "Expired today" %}
               {% else %}
+                {% comment %}Translators: On the page which shows a list of applications, this message is shown next to applications which are for an account renewal, showing how many days ago their account expired. Don't translate {{ num_days }}.{% endcomment %}
                 {% blocktrans trimmed count counter=num_days%}
                   Expired {{ num_days }} day ago
                 {% plural %}
@@ -20,6 +22,7 @@
           </span>&nbsp;
         {% else %}
           <span class="label label-info">
+            {% comment %}Translators: On the page which shows a list of applications, this message is shown next to applications which are for an account renewal, showing how many days there are until the account expires. Don't translate {{ num_days }}.{% endcomment %}
             {% blocktrans trimmed with num_days=app.parent.get_num_days_until_expiration count counter=num_days %}
               Expiring in {{ num_days }} day
             {% plural %}
@@ -34,16 +37,19 @@
         {% if app.parent.get_latest_review_date %}
           {% if app.parent.get_latest_reviewer %}
             {% blocktrans trimmed with reviewer=app.parent.get_latest_reviewer review_date=app.parent.get_latest_review_date|localize %}
+              {% comment %}Translators: On the page which shows a list of applications, this message is shown next to applications which were approved along with the date of approval. Don't translate {{ reviewer}} or {{ review_date }}.{% endcomment %}
               Approved by {{ reviewer }} on {{ review_date }}
             {% endblocktrans %}
           {% else %}
             {% blocktrans trimmed with review_date=app.parent.get_latest_review_date|localize %}
+              {% comment %}Translators: On the page which shows a list of applications, this message is shown next to applications which were approved. Don't translate {{ review_date }}.{% endcomment %}
               Approved on {{ review_date }}
             {% endblocktrans %}
           {% endif %}
         {% endif %}
       </li>
     {% empty %}
+      {% comment %}Translators: On the page which shows a list of applications, this message is shown if no applications exist for a particular category.{% endcomment %}
       <li>{% trans 'No applications right now.' %}</li>
     {% endfor %}      
   </ul>

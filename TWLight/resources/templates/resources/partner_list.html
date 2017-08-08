@@ -3,6 +3,7 @@
 {% load twlight_perms %}
 
 {% block content %}
+  {% comment %} Translator: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
   <h2>{% trans "List of partners" %}</h2>
 
   <div class="row row-flex">
@@ -18,6 +19,7 @@
   </div>
 
   <p>
+    {% comment %} Translator: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is found at the bottom of the page, directing users to the individual partner pages to see metrics about application numbers.{% endcomment %}
     {% blocktrans trimmed %}
       You can see per-partner metrics on the partner pages.
     {% endblocktrans %}      

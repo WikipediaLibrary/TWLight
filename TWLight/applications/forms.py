@@ -99,6 +99,7 @@ class BaseApplicationForm(forms.Form):
 
         self.helper.add_input(Submit(
             'submit',
+            # Translators: Labels the button users click to apply for a partner's resources.
             _('Apply'),
             css_class='center-block'))
 

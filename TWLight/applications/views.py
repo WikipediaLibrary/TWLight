@@ -104,6 +104,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
             return HttpResponseRedirect(reverse('applications:apply'))
         else:
             messages.add_message(self.request, messages.INFO,
+                #Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
                 _('Please select at least one partner.'))
             return HttpResponseRedirect(reverse('applications:request'))
 
@@ -269,6 +270,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
         """
         Validate inputs.
         """
+        # Translator: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
         fail_msg = _('Choose at least one resource you want access to.')
         if not PARTNERS_SESSION_KEY in request.session.keys():
             messages.add_message(request, messages.WARNING, fail_msg)
@@ -292,6 +294,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
+            #Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
             _('Your application has been submitted for review. '
               'You can check the status of your applications on this page.'))
         user_home = reverse('users:editor_detail',
@@ -321,6 +324,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
 class SubmitSingleApplicationView(_BaseSubmitApplicationView):
     def dispatch(self, request, *args, **kwargs):
         if self._get_partners()[0].status == Partner.WAITLIST:
+            #Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
             messages.add_message(request, messages.WARNING, _("This partner "
                 "does not have any access grants available at this time. "
                 "You may still apply for access; your application will be "
@@ -541,7 +545,7 @@ class ListApplicationsView(_BaseListApplicationView):
 
     def get_context_data(self, **kwargs):
         context = super(ListApplicationsView, self).get_context_data(**kwargs)
-
+        #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
         context['title'] = _('Applications to review')
 
         context['include_template'] = \
@@ -566,7 +570,7 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
 
     def get_context_data(self, **kwargs):
         context = super(ListApprovedApplicationsView, self).get_context_data(**kwargs)
-
+        #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
         context['title'] = _('Approved applications')
 
         context['approved_class'] = 'active'
@@ -585,7 +589,7 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
     def get_context_data(self, **kwargs):
         context = super(ListRejectedApplicationsView, self).get_context_data(**kwargs)
-
+        #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
         context['title'] = _('Rejected applications')
 
         context['rejected_class'] = 'active'
@@ -612,7 +616,7 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
     def get_context_data(self, **kwargs):
         context = super(ListExpiringApplicationsView, self).get_context_data(**kwargs)
 
-        # Translators: these are grants to specific editors whose term limit is about to expire.
+        # Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
         context['title'] = _('Access grants up for renewal')
 
         # Overrides default. We want different styling for this case to help
@@ -637,7 +641,7 @@ class ListSentApplicationsView(_BaseListApplicationView):
 
     def get_context_data(self, **kwargs):
         context = super(ListSentApplicationsView, self).get_context_data(**kwargs)
-
+        #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
         context['title'] = _('Sent applications')
 
         context['sent_class'] = 'active'
@@ -717,7 +721,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
             app.status = status
             app.save()
-
+        #Translators: After a coordinator has changed the status of a number of applications, this message appears.
         messages.add_message(request, messages.SUCCESS,
             _('Batch update successful.'))
 
@@ -775,7 +779,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
             # as an app pk.
             logger.exception('Invalid value posted')
             return HttpResponseBadRequest()
-
+        #Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
         messages.add_message(self.request, messages.SUCCESS,
             _('All selected applications have been marked as sent.'))
 
@@ -831,6 +835,7 @@ class RenewApplicationView(SelfOnly, View):
                 'requested that it be renewed.)'))
             return HttpResponseRedirect(return_url)
 
+        # Translator: If a user requests the renewal of their account, this message is shown to them.
         messages.add_message(request, messages.INFO, _('Your renewal request '
             'has been received. A coordinator will review your request.'))
         return HttpResponseRedirect(return_url)

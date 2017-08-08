@@ -10,22 +10,26 @@
 {% block content %}
   {% if object.partner.is_waitlisted %}
     <div class="alert alert-warning">
+      {% comment %}Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.{% endcomment %}
       {% trans "This application is on the waitlist because this partner does not have any access grants available at this time." %}
     </div>
   {% endif %}
 
   {% if user|coordinators_only %}
+    {% comment %}Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.{% endcomment %}
     <h1>{% trans 'Evaluate application' %}</h1>
 
     {% crispy form %}
   {% else %}
+    {% comment %}Translators: This is the title of the application page shown to users who are not a coordinator.{% endcomment %}
     <h1>{% trans 'Application history' %}</h1>  
   {% endif %}
-
+  {% comment %}Translators: This is the title of the section of an application page containing information about the request.{% endcomment %}
   <h2>{% trans 'Application' %}</h2>
 
   <div class="row">
     <div class="col-xs-12 col-sm-4">
+      {% comment %}Translators: This labels the section of an application showing the date the application was submitted.{% endcomment %}
       <strong>{% trans 'Date of application' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
@@ -34,6 +38,7 @@
 
     {% if object.get_num_days_open >= 0 %}
       <div class="col-xs-12 col-sm-4">
+          {% comment %}Translators: This labels the section of an application showing how many days it has been since the application was opened.{% endcomment %}
           <strong>{% trans 'Days open' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
@@ -41,6 +46,7 @@
       </div>
     {% else %}
       <div class="col-xs-12 col-sm-4">
+        {% comment %}Translators: This labels the section of an application showing how many days it has been since the application was closed.{% endcomment %}
         <strong>{% trans 'Days since application was closed' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
@@ -49,6 +55,7 @@
     {% endif %}
 
     <div class="col-xs-12 col-sm-4">
+      {% comment %}Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.){% endcomment %}
       <strong>{% trans 'Status' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
@@ -56,6 +63,7 @@
     </div>
 
     <div class="col-xs-12 col-sm-4">
+      {% comment %}Translators: This labels the section of an application showing which partner the user requested access to.{% endcomment %}
       <strong>{% trans 'Partner' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
@@ -64,6 +72,7 @@
 
     {% if object.specific_stream %}
       <div class="col-xs-12 col-sm-4">
+        {% comment %}Translators: This labels the section of an application showing which collection of resources the user requested access to.{% endcomment %}
         <strong>{% trans 'Collection requested' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
@@ -73,6 +82,7 @@
 
     {% if object.specific_title %}
       <div class="col-xs-12 col-sm-4">
+        {% comment %}Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.{% endcomment %}
         <strong>{% trans 'Title requested' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
@@ -81,31 +91,36 @@
     {% endif %}
 
     <div class="col-xs-12 col-sm-4">
+      {% comment %}Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.{% endcomment %}
       <strong>{% trans 'Why the editor wants access' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
       {% if object.rationale %}
         {{ object.rationale }}
       {% else %}
+        {% comment %}Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.{% endcomment %}
         {% trans 'Not stated' %}
       {% endif %}
     </div>
 
     <div class="col-xs-12 col-sm-4">
+      {% comment %}Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.{% endcomment %}
       <strong>{% trans 'Renewal of existing access grant?' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
       {% if object.parent %}
         {% with object.parent.get_absolute_url as parent_url %}
           {% blocktrans %}
+            {% comment %}Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or {{ parent_url }}.{% endcomment %}
             Yes (<a href="{{ parent_url }}">previous application</a>)
           {% endblocktrans %}
         {% endwith %}
       {% else %}
+        {% comment %}Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.{% endcomment %}
         {% trans 'No' %}
       {% endif %}
     </div>
-
+    {% comment %}Translators: This labels the section of an application containing the additional comments submitted by the user when applying.{% endcomment %}
     {% if object.comments %}
       <div class="col-xs-12 col-sm-4">
         <strong>{% trans 'Comments from the editor' %}</strong>
@@ -115,7 +130,7 @@
       </div>
     {% endif %}    
   </div>
-
+  {% comment %}Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.{% endcomment %}
   <h2>{% trans 'Discussion' %}</h2>
   {% render_comment_list for object %}
 
@@ -135,22 +150,26 @@
         {{ form.security_hash }}
         <input type="hidden" name="next" value="{% url 'applications:evaluate' object.pk %}" />
         <br />
+        {% comment %}Translators: This labels the button which users click to send a typed comment.{% endcomment %}
         <input type="submit" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
       </form>
     </div>
   </div>
 
   <p>
+    {% comment %} Translator: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only. {% endcomment %}
     {% blocktrans trimmed %}
       Comments are visible to all
       coordinators and to the editor who submitted this application.
     {% endblocktrans %}
   </p>
 
+  {% comment %}Translators: This is the title of the section of an application page which lists information about the user who submitted the application. {% endcomment %}
   <h2>{% trans 'User' %}</h2>
 
   {% include 'users/editor_detail_data.html' %}
-
+    
+  {% comment %}Translators: This is the title of the section of an application page which lists the history of status changes. {% endcomment %}
   <h2>{% trans 'Revision history' %}</h2>
 
   <ul class="list-unstyled">
@@ -167,10 +186,12 @@
                   {% with review_date=version.revision.date_created|localize %}
                     {% if submit_user %}
                       {% blocktrans trimmed %}
+                        {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate {{ submit_user }} or {{ review_date }} {% endcomment %}
                         Submitted by {{ submit_user }} on {{ review_date }}
                       {% endblocktrans %}
                     {% else %}
                       {% blocktrans trimmed %}
+                        {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate {{ review_date }} {% endcomment %}
                         Submitted on {{ review_date }}
                       {% endblocktrans %}
                     {% endif %}
@@ -181,10 +202,12 @@
                   {% with review_date=version.revision.date_created|localize %}
                     {% if review_user %}
                       {% blocktrans trimmed %}
+                        {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate {{ review_user }} or {{ review_date }} {% endcomment %}
                         Reviewed by {{ review_user }} on {{ review_date }}
                       {% endblocktrans %}
                     {% else %}
                       {% blocktrans trimmed %}
+                        {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate {{ review_date }} {% endcomment %}
                         Reviewed on {{ review_date }}
                       {% endblocktrans %}
                     {% endif %}
@@ -195,6 +218,7 @@
           </div>
       </li>
     {% empty %}
+      {% comment %}Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.{% endcomment %}
       <li>{% trans 'No previous versions.' %}</li>
     {% endfor %}      
   </ul>

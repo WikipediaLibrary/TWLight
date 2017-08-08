@@ -35,6 +35,7 @@
             </label>
           </div>
           <a href="{{ field.field.widget.attrs.object.get_absolute_url }}">
+            {% comment %}Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.{% endcomment %}
             {% trans "(more info)" %}
           </a>
           {% if field.field.widget.attrs.object.is_waitlisted %}
@@ -53,7 +54,7 @@
 
 {% if any_waitlisted %}
   <div class="well well-sm">
-    {# Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did earlier in this file. #}
+    {# Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file. #}
     {% blocktrans trimmed %}
       You can apply to <span class="label label-warning">Waitlisted</span>
       partners, but they don't have access grants available right now. We will process those applications when access becomes available.

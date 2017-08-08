@@ -1,5 +1,6 @@
 {% load i18n %}
 
+{% comment %} Translator: This email is sent to users when they receive a comment on their application. Don't translate {{ user }}, {{ partner }} or {{ app_url }}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
 {% blocktrans trimmed with partner=app.partner user=app.user %}
 Dear {{ user }},
 
