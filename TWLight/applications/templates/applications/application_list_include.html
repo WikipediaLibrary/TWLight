@@ -25,18 +25,18 @@
       {% endif %}
       {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
         {% if app.get_latest_reviewer %}
-          {% comment %} Translator: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ reviewer }} or {{ review_date }}. {% endcomment %}
+          {% comment %} Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ reviewer }} or {{ review_date }}. {% endcomment %}
           {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
             Last reviewed by {{ reviewer }} on {{ review_date }}
           {% endblocktrans %}
         {% else %}
-          {% comment %} Translator: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ review_date }}. {% endcomment %}
+          {% comment %} Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ review_date }}. {% endcomment %}
           {% blocktrans trimmed with review_date=app.get_latest_review_date|localize %}
             Last reviewed on {{ review_date }}
           {% endblocktrans %}
         {% endif %}
       {% else %}
-        {% comment %} Translator: On the page listing applications, this shows next to an application which has not yet been reviewed. {% endcomment %}
+        {% comment %} Translators: On the page listing applications, this shows next to an application which has not yet been reviewed. {% endcomment %}
         {% trans 'Not yet reviewed.' %}
       {% endif %}
       <br />

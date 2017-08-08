@@ -5,22 +5,22 @@
 {% load twlight_perms %}
 
 {% block content %}
-  {% comment %} Translator: This is the main title for the editor profile page. Don't translate {{ username }}. {% endcomment %}
+  {% comment %} Translators: This is the main title for the editor profile page. Don't translate {{ username }}. {% endcomment %}
   <h1>{% blocktrans with username=editor.wp_username %}Editor profile information for {{ username }}{% endblocktrans %}</h1>
 
-  {% comment %} Translator: This is the title of the section of a user's profile showing their history of applications. {% endcomment %}
+  {% comment %} Translators: This is the title of the section of a user's profile showing their history of applications. {% endcomment %}
   <h2>{% trans 'Editor application history' %}</h2>
 
   <p>
     <a href="{% url 'applications:request' %}" class="btn btn-primary">
-      {% comment %} Translator: Users viewing their own profile can click this button to file an application for access to resources. {% endcomment %}
+      {% comment %} Translators: Users viewing their own profile can click this button to file an application for access to resources. {% endcomment %}
       {% trans 'Start new application' %}
     </a>
   </p>
 
   {% include 'applications/application_list_include.html' %}
 
-  {% comment %} Translator: This is the heading for user information on profile and application pages. {% endcomment %}
+  {% comment %} Translators: This is the heading for user information on profile and application pages. {% endcomment %}
   <h2>{% trans 'Editor data' %}</h2>
 
   {% include 'users/editor_detail_data.html' %}
@@ -30,7 +30,7 @@
   {% endifequal %}
 
   <p>
-    {% comment %} Translator: This is shown on editor profiles, in their profile page or on applications. Don't translate {{ last_updated_date }}. {% endcomment %}
+    {% comment %} Translators: This is shown on editor profiles, in their profile page or on applications. Don't translate {{ last_updated_date }}. {% endcomment %}
     {% blocktrans with last_updated_date=editor.last_updated|localize %}
       Information with an * was retrieved from Wikipedia directly.
       Other information was entered directly by users or site admins,
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-10 col-md-offset-1">
         <p class="well">
-            {% comment %} Translator: This distinguishes users who have been flagged as account coordinators. Don't translate {{ username }}. {% endcomment %}
+            {% comment %} Translators: This distinguishes users who have been flagged as account coordinators. Don't translate {{ username }}. {% endcomment %}
             {% blocktrans with username=editor.wp_username %}
               {{ username }} has coordinator privileges on this site.
             {% endblocktrans %}

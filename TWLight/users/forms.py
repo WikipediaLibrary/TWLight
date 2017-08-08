@@ -23,14 +23,14 @@ class EditorUpdateForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.add_input(Submit(
             'submit',
-            # Translator: This is the label for a button that users click to update their public information.
+            # Translators: This is the label for a button that users click to update their public information.
             _('Update profile'),
             css_class='center-block'))
 
         editor = self.instance
         self.helper.form_action = reverse(
             'users:editor_update', args=[editor.id])
-        # Translator: This labels a field where users can describe their activity on Wikipedia in a small biography.
+        # Translators: This labels a field where users can describe their activity on Wikipedia in a small biography.
         self.fields['contributions'].label = _('Describe your contributions '
             'to Wikipedia: topics edited, et cetera.')
         self.fields['contributions'].help_text = None
@@ -56,7 +56,7 @@ class TermsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(TermsForm, self).__init__(*args, **kwargs)
 
-        # Translator: Users must click this button when registering to agree to the website terms of use.
+        # Translators: Users must click this button when registering to agree to the website terms of use.
         self.fields['terms_of_use'].label = _("I agree with the terms of use")
 
         self.helper = FormHelper()
@@ -79,7 +79,7 @@ class EmailChangeForm(forms.Form):
         super(EmailChangeForm, self).__init__(*args, **kwargs)
 
         self.fields['email'].label = _('Email')
-        # Translator: Users click this button to set their website email address to the one linked to their Wikipedia account.
+        # Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
         self.fields['use_wp_email'].label = _('Use my Wikipedia email address')
 
         self.fields['email'].initial = user.email
@@ -92,6 +92,6 @@ class EmailChangeForm(forms.Form):
         self.helper.layout = Layout(
             'email',
             'use_wp_email',
-            # Translator: This labels a button which users click to change their email.
+            # Translators: This labels a button which users click to change their email.
             Submit('submit', _('Update email'), css_class='btn btn-default col-md-offset-2')
         )

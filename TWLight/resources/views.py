@@ -23,7 +23,7 @@ class PartnersListView(ListView):
         # English alphabet. :/
         if self.request.user.is_staff:
             messages.add_message(self.request, messages.INFO,
-                # Translator: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
+                # Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
                 _('Because you are a staff member, this page may include '
                     'Partners who are not yet available to all users.'))
             return Partner.even_not_available.order_by('company_name')
@@ -120,11 +120,11 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
 
         if partner.status == Partner.AVAILABLE:
             partner.status = Partner.WAITLIST
-            # Translator: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
+            # Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
             msg = _('This partner is now waitlisted')
         else:
             partner.status = Partner.AVAILABLE
-            # Translator: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
+            # Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
             msg = _('This partner is now available for applications')
 
         partner.save()

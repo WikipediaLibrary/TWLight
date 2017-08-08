@@ -45,7 +45,7 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-users'
             event['color'] = 'warning' # will be yellow
-            # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+            # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
             event['text'] = _(u'{username} signed up for a Wikipedia Library '
                 'Card Platform account').format(username=editor.wp_username)
             event['date'] = editor.date_created
@@ -58,7 +58,7 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-files-o'
             event['color'] = 'success' # green
-            # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+            # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
             event['text'] = _(u'{partner} joined the Wikipedia Library ').format(
                 partner=partner.company_name)
             event['date'] = partner.date_created
@@ -73,7 +73,7 @@ class HomePageView(TemplateView):
             event['icon'] = 'fa-align-left'
             event['color'] = '' # grey (default when no color class is applied)
             if app.rationale:
-                # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
+                # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
                 text = _(u'{username} applied for access to ' \
                        '<a href="{url}">{partner}</a>' \
                        '<blockquote>{rationale}</blockquote>').format(
@@ -83,7 +83,7 @@ class HomePageView(TemplateView):
                                 kwargs={'pk': app.partner.pk}),
                             rationale=app.rationale)
             else:
-                # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
+                # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
                 text = _(u'{username} applied for access to ' \
                        '<a href="{url}">{partner}</a>').format(
                             username=app.editor.wp_username,
@@ -103,7 +103,7 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-align-left'
             event['color'] = 'info' # light blue
-            # Translator: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
+            # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
             event['text'] = _(u'{username} received access to '
                 '<a href="{url}">{partner}</a>').format(
                     username=grant.editor.wp_username,

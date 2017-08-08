@@ -270,7 +270,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
         """
         Validate inputs.
         """
-        # Translator: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
+        # Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
         fail_msg = _('Choose at least one resource you want access to.')
         if not PARTNERS_SESSION_KEY in request.session.keys():
             messages.add_message(request, messages.WARNING, fail_msg)
@@ -835,7 +835,7 @@ class RenewApplicationView(SelfOnly, View):
                 'requested that it be renewed.)'))
             return HttpResponseRedirect(return_url)
 
-        # Translator: If a user requests the renewal of their account, this message is shown to them.
+        # Translators: If a user requests the renewal of their account, this message is shown to them.
         messages.add_message(request, messages.INFO, _('Your renewal request '
             'has been received. A coordinator will review your request.'))
         return HttpResponseRedirect(return_url)

@@ -4,15 +4,15 @@
 
 {% block content %}
 {% get_current_language as LANGUAGE_CODE %}
-  {% comment %} Translator: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. {% endcomment %}
+  {% comment %} Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. {% endcomment %}
   <h1>{% trans "Not found" %}</h1>
 
   <p>
-    {% comment %} Translator: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. {% endcomment %}
+    {% comment %} Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. {% endcomment %}
     {% trans "Sorry; we can't find that." %}
   </p>
   <p>
-    {% comment %} Translator: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate {{ path }} or Phabricator. {% endcomment %}
+    {% comment %} Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate {{ path }} or Phabricator. {% endcomment %}
     {% blocktrans trimmed with request.path|urlencode as path %}
       If you are certain that something should be here, please email us about this error at
       <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20{{ path }}%20Not%20found">

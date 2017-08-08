@@ -252,7 +252,7 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow(
-            # Translator: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
+            # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
             [_('Days until decision'),
              #Translator: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
              _('Number of applications')])
