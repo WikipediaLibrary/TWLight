@@ -135,15 +135,19 @@ def send_comment_notification_emails(sender, **kwargs):
 def send_approval_notification_email(instance):
     email = ApprovalNotification()
     email.send(instance.user.email,
-        {'user': instance.user, 'partner': instance.partner})
+        {'user': instance.user.editor.wp_username, 'partner': instance.partner})
 
 
 def send_waitlist_notification_email(instance):
+    base_url = get_current_site(None).domain
+    path = reverse_lazy('partners:list')
+    link = 'https://{base}{path}'.format(base=base_url, path=path)
+
     email = WaitlistNotification()
     email.send(instance.user.email,
-        {'user': instance.user,
+        {'user': instance.user.editor.wp_username,
          'partner': instance.partner,
-         'link': reverse_lazy('partners:list')})
+         'link': link})
 
 
 def send_rejection_notification_email(instance):
@@ -163,7 +167,7 @@ def send_rejection_notification_email(instance):
 
     email = RejectionNotification()
     email.send(instance.user.email,
-        {'user': instance.user,
+        {'user': instance.user.editor.wp_username,
          'partner': instance.partner,
          'app_url': app_url})
 

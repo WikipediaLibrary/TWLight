@@ -182,7 +182,7 @@
           <div class="col-xs-9">
             <span class="pull-left">
               {% if forloop.last %}
-                {% with submit_user=version.revision.user %}
+                {% with submit_user=version.revision.user.editor.wp_username %}
                   {% with review_date=version.revision.date_created|localize %}
                     {% if submit_user %}
                       {% blocktrans trimmed %}
@@ -198,7 +198,7 @@
                   {% endwith %}
                 {% endwith %}
               {% else %}
-                {% with review_user=version.revision.user %}
+                {% with review_user=version.revision.user.editor.wp_username %}
                   {% with review_date=version.revision.date_created|localize %}
                     {% if review_user %}
                       {% blocktrans trimmed %}

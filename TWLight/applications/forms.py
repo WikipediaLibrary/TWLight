@@ -95,7 +95,7 @@ class BaseApplicationForm(forms.Form):
 
         # Make sure to align any checkbox inputs with other field types
         self.helper.filter_by_widget(forms.CheckboxInput).wrap(
-            Div, css_class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3")
+            Div, css_class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 apply-tos")
 
         self.helper.add_input(Submit(
             'submit',

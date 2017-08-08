@@ -5,6 +5,7 @@ Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
 import bleach
+import urllib2
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import logging
@@ -426,15 +427,15 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         # recreating a data structure from post.
         if not filters:
             try:
-                wp_username = bleach.clean(self.request.GET.get('Editor'))
-                if wp_username:
-                    editor = Editor.objects.get(wp_username=wp_username)
+                editor_pk = urllib2.unquote(bleach.clean(self.request.GET.get('Editor')))
+                if editor_pk:
+                    editor = Editor.objects.get(pk=editor_pk)
                 else:
                     editor = ''
 
-                company_name = bleach.clean(self.request.GET.get('Partner'))
-                if company_name:
-                    partner = Partner.objects.get(company_name=company_name)
+                partner_pk = urllib2.unquote(bleach.clean(self.request.GET.get('Partner')))
+                if partner_pk:
+                    partner = Partner.objects.get(pk=partner_pk)
                 else:
                     partner = ''
 

@@ -9,10 +9,20 @@
       </span>
     </div>    
     <div class="col-xs-8 col-sm-6">
+      <h4>
       <a href="{{ app.get_absolute_url }}">
         {{ app }}
       </a>
+      </h4>
+      {% if app.user.editor %}
+      Editor: <a href="/users/{{ app.user.editor.pk|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
       <br />
+      {% endif %}
+      {% if app.user.email %}
+      Email:
+        <a href="mailto:{{ app.user.email|urlencode|safe }}">{{ app.user.email|safe }}</a>
+      <br />
+      {% endif %}
       {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
         {% if app.get_latest_reviewer %}
           {% comment %} Translator: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ reviewer }} or {{ review_date }}. {% endcomment %}
@@ -29,6 +39,12 @@
         {% comment %} Translator: On the page listing applications, this shows next to an application which has not yet been reviewed. {% endcomment %}
         {% trans 'Not yet reviewed.' %}
       {% endif %}
+      <br />
+      {% if app.user.editor %}
+      Filter by editor: <a href="?Editor={{ app.user.editor.pk|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
+      &nbsp;&nbsp;&nbsp;
+      {% endif %}
+      Filter by partner: <a href="?Partner={{ app.partner.pk|urlencode|safe }}">{{ app.partner }}</a>
     </div>
     {% ifequal app.editor.user.pk user.pk %}
       <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0">

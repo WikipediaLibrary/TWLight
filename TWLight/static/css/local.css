@@ -2,17 +2,14 @@
 ----------------------------------------------------------------------------
 BODY
 --------------------------------------------------------------------------*/
-
 body {
   background-color: white;
 }
-
 
 /*
 ----------------------------------------------------------------------------
 TYPOGRAPHY
 --------------------------------------------------------------------------*/
-
 h1, h2, h3 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   margin-bottom: 20px;
@@ -24,13 +21,24 @@ h1, h2 {
 
 p {
   margin-top: 7px;
+  font-size: 1em;
+}
+
+li {
+  margin-top: 2px;
+  font-size: 1em;
 }
 
 #comments blockquote {
   font-size: inherit;
 }
+
 .text-justify-xs {
     text-align: left
+}
+
+.glyphicon-grey {
+	color:#696969;
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -38,7 +46,9 @@ p {
   .text-justify-sm {
       text-align: center;
   }
+
 }
+
 @media (min-width: 768px) {
   .text-justify-sm {
       text-align: left;
@@ -51,6 +61,7 @@ p {
       text-align: center;
   }
 }
+
 @media (min-width: 992px) {
   .text-justify-md {
       text-align: left;
@@ -63,20 +74,52 @@ p {
       text-align: center;
   }
 }
+
 @media (min-width: 1200px) {
   .text-justify-lg {
       text-align: left;
   }
 }
 
-
 /*
 ----------------------------------------------------------------------------
 HEADER, FOOTER, NAVS
 --------------------------------------------------------------------------*/
-
 header {
   margin-bottom: 28px;
+}
+
+.site-title {
+	font-family: Palatino; 
+	font-size:1.5em; 
+	font-weight:bold; 
+	margin: -10px 0px 10px 0px; 
+	color:#000000;
+}
+
+.logo {
+	height:70px; 
+	float:left; 
+	padding:5px 20px 5px 0px;
+}
+
+.login .btn {
+	padding:10px 12px;
+	font-size: 18px;
+	margin:10px;
+}
+
+@media (min-width: 992px) {
+  #main-content {
+    margin: auto 56px;
+  }
+
+  #top-nav, #footer {
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-right: 56px;
+    padding-left: 56px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -91,6 +134,7 @@ header {
     padding-left: 14px;
   }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   #main-content {
     margin: auto 28px;
@@ -101,18 +145,6 @@ header {
     padding-bottom: auto;
     padding-right: 28px;
     padding-left: 28px;
-  }
-}
-@media (min-width: 992px) {
-  #main-content {
-    margin: auto 56px;
-  }
-
-  #top-nav, #footer {
-    padding-top: auto;
-    padding-bottom: auto;
-    padding-right: 56px;
-    padding-left: 56px;
   }
 }
 
@@ -137,20 +169,50 @@ header {
 
 nav .divider {
   border-left: 1px solid #ccc;
+}
 
+.navbar-left {
+	height:78px;
+	padding-top:5px; 
 }
 
 @media (max-width: 767px) {
   nav .divider {
     border-left: none;
   }
+
+  li.mobile-menu {
+	font-size:.9em;	
+}
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+.site-title {
+	font-family: Palatino; 
+	font-size:.9em; 
+	font-weight:bold; 
+	margin: -10px 0px 10px 0px; 
+	color:#000000;
+}
+
+.logo {
+	height:50px; 
+	float:left; 
+	padding:0px 10px 0px 0px;
+}
+
+.login .btn {
+	padding:10px 12px;
+	font-size: 1em;
+	margin:10px;
+}
 }
 
 /*
 ----------------------------------------------------------------------------
 TIMELINE
 --------------------------------------------------------------------------*/
-
 .half-timeline > li > .timeline-badge {
   left: 0;
 }
@@ -169,11 +231,25 @@ TIMELINE
   width: 100%;
 }
 
+/* removes li after 5th from homepage */
+ul.timeline li:nth-child(-n+5) {
+   display: list-item;
+}
+
+ul.timeline-home li {
+	display:none;
+}
 
 /*
 ----------------------------------------------------------------------------
 MISC
 --------------------------------------------------------------------------*/
+
+/* Quick hack for tos misalignment on applications. */
+.apply-tos {
+  margin-right: 100%;
+  margin-left: -50%;
+}
 
 .panel-footer {
   background-color: white;
@@ -187,6 +263,7 @@ MISC
    and opens up them up a bit, while still preventing them from overlapping
    if there are multiple rows of labels.
 */
+
 .label {
   font-size: 85%;
   padding: .15em .6em;
@@ -194,7 +271,6 @@ MISC
   font-weight: 500;
   margin-top: 5px; 
 }
-
 
 /* Without intervention, code tags will break out of their timeline containers.
    These can get introduced via rendered wikicode, which has lots of &nbsp;
@@ -240,7 +316,6 @@ A few spots just need padding instead of margin.
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -251,10 +326,12 @@ A few spots just need padding instead of margin.
   display: -ms-flexbox;
   display: flex;
 }
+
 /*
   Override some of the panel border styling so our flex
   elements look correct.
 */
+
 .panel {
   border: none;
   -webkit-box-shadow: none;
@@ -273,7 +350,6 @@ A few spots just need padding instead of margin.
   border-width: 1px 1px 0 1px;
 }
 
-
 .partner-logo {
   padding: 0 30% 0 30%;
   margin: 0 auto 2em auto;
@@ -288,11 +364,63 @@ A few spots just need padding instead of margin.
 
 }
 
+.lead {
+	text-align:center;
+	padding: 20px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:1px 1px 2px #eaeaea;
+	font-size:1.4em;
+}
+
+.border {
+	padding: 10px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:1px 1px 2px #eaeaea;
+	margin:20px 20px 0px 0px;
+	min-height:350px;
+}
+
+.read-more {
+	width:200px;
+	margin:auto;
+	text-align:center;
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+.nav-greeting {
+	font-size:.9em; 
+}
+
+li.mobile-menu {
+	width:150px;
+	font-size:.9em;	
+}
+
+ .nav li a {
+	 padding: 5px;
+ }
+
+.navbar-left {
+	border-bottom:2px solid #ffffff;
+}
+
+.lead {
+	text-align:center;
+	padding: 20px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:1px 1px 2px #eaeaea;
+	font-size:1em;
+}
+}
+
 /*
 ----------------------------------------------------------------------------
 CLEARING COLUMNS
 --------------------------------------------------------------------------*/
-
 /* Clear ends of rows to preserve vertical spacing when for-looping through
    lists of tiles.
    See http://www.bluthemes.com/blog/3/clearing-bootstrap-3-columns.
@@ -302,8 +430,8 @@ CLEARING COLUMNS
 */
 
 /*  Tablet  */
-@media (min-width:767px) {
 
+@media (min-width:767px) {
   /* Column clear fix */
   .col-lg-1:nth-child(12n+1),
   .col-lg-2:nth-child(6n+1),
@@ -317,6 +445,7 @@ CLEARING COLUMNS
   .col-md-6:nth-child(2n+1){
     clear: none;
   }
+
   .col-sm-1:nth-child(12n+1),
   .col-sm-2:nth-child(6n+1),
   .col-sm-3:nth-child(4n+1),
@@ -328,7 +457,6 @@ CLEARING COLUMNS
 
 /*  Medium Desktop  */
 @media (min-width:992px) {
-
   /* Column clear fix */
   .col-lg-1:nth-child(12n+1),
   .col-lg-2:nth-child(6n+1),
@@ -342,6 +470,7 @@ CLEARING COLUMNS
   .col-sm-6:nth-child(2n+1){
     clear: none;
   }
+
   .col-md-1:nth-child(12n+1),
   .col-md-2:nth-child(6n+1),
   .col-md-3:nth-child(4n+1),
@@ -353,7 +482,6 @@ CLEARING COLUMNS
 
 /*  Large Desktop  */
 @media (min-width:1200px) {
-
   /* Column clear fix */
   .col-md-1:nth-child(12n+1),
   .col-md-2:nth-child(6n+1),
@@ -367,6 +495,7 @@ CLEARING COLUMNS
   .col-sm-6:nth-child(2n+1){
     clear: none;
   }
+
   .col-lg-1:nth-child(12n+1),
   .col-lg-2:nth-child(6n+1),
   .col-lg-3:nth-child(4n+1),

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load l10n %}
+
+{% block content %}
+   
+   
+	<div class="row">
+	<div class="col-md-12">
+		<h1>Latest Activity</h1>
+		<hr>
+			<ul class="timeline">
+		 
+			{% for event in activity %}
+			  <li class="{% cycle 'timeline' 'timeline-inverted' %}">
+				<div class="timeline-badge {{ event.color }}">
+				  <i class="fa {{ event.icon }}"></i>
+				</div>
+				<div class="timeline-panel">
+				  <div class="timeline-body">
+					<p>{{ event.text | safe }}</p>
+
+					<p class="small pull-right">
+					  {{ event.date | localize }}
+					</p>
+				  </div>
+				</div>      
+			  </li>
+			{% endfor %}
+		  </ul>
+	</div>
+	</div>
+  
+{% endblock content %}
