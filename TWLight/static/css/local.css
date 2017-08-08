@@ -100,7 +100,7 @@ header {
 .logo {
 	height:70px; 
 	float:left; 
-	padding:0px 20px 0px 0px;
+	padding:5px 20px 5px 0px;
 }
 
 .login .btn {
@@ -172,7 +172,8 @@ nav .divider {
 }
 
 .navbar-left {
-	height:70px;
+	height:78px;
+	padding-top:5px; 
 }
 
 @media (max-width: 767px) {
