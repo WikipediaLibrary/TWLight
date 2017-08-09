@@ -110,8 +110,8 @@
     <div class="col-xs-12 col-sm-8">
       {% if object.parent %}
         {% with object.parent.get_absolute_url as parent_url %}
+          {% comment %}Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or {{ parent_url }}.{% endcomment %}
           {% blocktrans %}
-            {% comment %}Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or {{ parent_url }}.{% endcomment %}
             Yes (<a href="{{ parent_url }}">previous application</a>)
           {% endblocktrans %}
         {% endwith %}
@@ -185,13 +185,13 @@
                 {% with submit_user=version.revision.user.editor.wp_username %}
                   {% with review_date=version.revision.date_created|localize %}
                     {% if submit_user %}
+                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate {{ submit_user }} or {{ review_date }} {% endcomment %}
                       {% blocktrans trimmed %}
-                        {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate {{ submit_user }} or {{ review_date }} {% endcomment %}
                         Submitted by {{ submit_user }} on {{ review_date }}
                       {% endblocktrans %}
                     {% else %}
+                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate {{ review_date }} {% endcomment %}
                       {% blocktrans trimmed %}
-                        {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate {{ review_date }} {% endcomment %}
                         Submitted on {{ review_date }}
                       {% endblocktrans %}
                     {% endif %}
@@ -201,13 +201,13 @@
                 {% with review_user=version.revision.user.editor.wp_username %}
                   {% with review_date=version.revision.date_created|localize %}
                     {% if review_user %}
+                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate {{ review_user }} or {{ review_date }} {% endcomment %}
                       {% blocktrans trimmed %}
-                        {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate {{ review_user }} or {{ review_date }} {% endcomment %}
                         Reviewed by {{ review_user }} on {{ review_date }}
                       {% endblocktrans %}
                     {% else %}
+                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate {{ review_date }} {% endcomment %}
                       {% blocktrans trimmed %}
-                        {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate {{ review_date }} {% endcomment %}
                         Reviewed on {{ review_date }}
                       {% endblocktrans %}
                     {% endif %}
