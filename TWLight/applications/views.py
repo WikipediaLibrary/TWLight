@@ -798,11 +798,11 @@ class RenewApplicationView(SelfOnly, View):
         app = Application.objects.get(pk=self.kwargs['pk'])
 
         try:
-            assert app.status == Application.APPROVED
+            assert (app.status == Application.APPROVED) or (app.status == Application.SENT)
         except AssertionError:
             logger.exception('Attempt to renew unapproved app #{pk} has been '
                 'denied'.format(pk=app.pk))
-            messages.add_message(request, messages.WARNING, 'Attempt to renew '
+            messages.add_message(self.request, messages.WARNING, 'Attempt to renew '
                 'unapproved app #{pk} has been denied'.format(pk=app.pk))
             raise PermissionDenied
 
