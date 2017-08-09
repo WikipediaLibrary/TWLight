@@ -147,8 +147,8 @@
           {% if object.get_languages %}
             <p class="partner-languages">
               {% with object.get_languages as language_list %}
+                {% comment %} Translators: If a partner has content languages specified, this message is shown in the Languages field on the partner page. Don't translate {{ language_list }}. {% endcomment %}
                 {% blocktrans trimmed %}
-                  {% comment %} Translators: If a partner has content languages specified, this message is shown in the Languages field on the partner page. Don't translate {{ language_list }}. {% endcomment %}
                   Language(s): {{ language_list }}
                 {% endblocktrans %}
               {% endwith %}
