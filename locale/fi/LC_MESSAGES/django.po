@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 21:02+0000\n"
+"POT-Creation-Date: 2017-08-13 22:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,1969 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: TWLight/applications/forms.py:102
-#: TWLight/applications/templates/applications/request_for_application.html:51
-#: TWLight/resources/templates/resources/partner_detail.html:37
-#: TWLight/resources/templates/resources/partner_detail.html:59
-#: TWLight/templates/base.html:56
-msgid "Apply"
-msgstr "Tallenna hakemus"
-
-#. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:189
-msgid "About you"
-msgstr "Tietoa sinusta"
-
-#: TWLight/applications/forms.py:202
-#, python-brace-format
-msgid "Your application to {partner}"
-msgstr "Hakemuksesi yhteistyökumppanille {partner}"
-
-#: TWLight/applications/forms.py:265 TWLight/users/admin.py:72
-#: TWLight/users/models.py:102
-msgid "Username"
-msgstr "Wikipedia-käyttäjätunnuksesi"
-
-#: TWLight/applications/forms.py:266 TWLight/applications/helpers.py:86
-msgid "Partner name"
-msgstr "Yhteistyökumppanin nimi"
-
-#: TWLight/applications/helpers.py:82
-msgid "Your real name"
-msgstr "Oikea nimesi"
-
-#: TWLight/applications/helpers.py:83
-msgid "Your country of residence"
-msgstr "Asuinpaikkasi"
-
-#: TWLight/applications/helpers.py:84
-msgid "Your occupation"
-msgstr "Ammattisi"
-
-#: TWLight/applications/helpers.py:85
-msgid "Your institutional affiliation"
-msgstr "Instituutiosi"
-
-#: TWLight/applications/helpers.py:87
-msgid "Why do you want access to this resource?"
-msgstr "Miksi haluat käyttöoikeuden tähän aineistoon?"
-
-#: TWLight/applications/helpers.py:88
-msgid "Which collection do you want?"
-msgstr "Mihin kokoelmaan haluat käyttöoikeuden?"
-
-#: TWLight/applications/helpers.py:89
-msgid "Which book do you want?"
-msgstr "Mihin kirjaan haluat käyttöoikeuden?"
-
-#: TWLight/applications/helpers.py:90
-msgid "Anything else you want to say"
-msgstr "Onko sinulla jotain muuta sanottavaa?"
-
-#: TWLight/applications/helpers.py:91
-msgid "You must agree with the partner's terms of use"
-msgstr ""
-"Sinun täytyy hyväksyä yhteistyökumppanin käyttöehdot saadaksesi "
-"käyttöoikeuden aineistoon"
-
-#: TWLight/applications/helpers.py:104 TWLight/users/forms.py:79
-msgid "Email"
-msgstr "Sähköposti"
-
-#. Translators: This is the status of an application that has not yet been reviewed.
-#: TWLight/applications/models.py:35
-msgid "Pending"
-msgstr "Odottaa"
-
-#. Translators: This is the status of an application that reviewers have asked questions about.
-#: TWLight/applications/models.py:37
-msgid "Under discussion"
-msgstr "Harkinnassa"
-
-#: TWLight/applications/models.py:38
-#: TWLight/applications/templates/applications/application_list.html:17
-msgid "Approved"
-msgstr "Hyväksytty"
-
-#: TWLight/applications/models.py:39
-msgid "Not approved"
-msgstr "Hylätty"
-
-#: TWLight/applications/models.py:40
-msgid "Sent to partner"
-msgstr "Lähetä yhteistyökumppanille"
-
-#: TWLight/applications/models.py:53 TWLight/applications/models.py:64
-#: TWLight/applications/models.py:71
-#, fuzzy
-#| msgid "Please do not override this field! It is set automatically."
-msgid "Please do not override this field! Its value is set automatically."
-msgstr ""
-"Älä muuta tämän kentän arvoa! Arvo asetetaan automaattisesti kun hakemus "
-"tallennetaan, ja sen muuttamisesta voi tulla toivomattomia seurauksia."
-
-#: TWLight/applications/models.py:75
-msgid "The user who sent this application to the partner"
-msgstr "Käyttäjä, joka lähetti hakemuksen yhteistyökumppanille"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:13
-msgid ""
-"This application is on the waitlist because this partner does not have any "
-"access grants available at this time."
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_evaluation.html:18
-msgid "Evaluate application"
-msgstr "Arvioi hakemus"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:22
-msgid "Application history"
-msgstr "Hakemuksen historia"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:25
-msgid "Application"
-msgstr "Hakemus"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:29
-msgid "Date of application"
-msgstr "Hakemuksen päivämäärä"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:37
-msgid "Days open"
-msgstr "Kuinka monta päivää hakemus on ollut vireillä"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:44
-msgid "Days since application was closed"
-msgstr "Kuinka monta päivää sitten hakemus käsiteltiin"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:52
-#: TWLight/graphs/views.py:282
-msgid "Status"
-msgstr "Tila"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:59
-#: TWLight/applications/views.py:488 TWLight/templates/dashboard.html:111
-msgid "Partner"
-msgstr "Yhteistyökumppani"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:67
-msgid "Collection requested"
-msgstr "Pyydetty kokoelma"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:76
-msgid "Title requested"
-msgstr "Pyydetty nimike"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:84
-msgid "Why the editor wants access"
-msgstr "Miksi muokkaaja haluaa käyttöoikeuden"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:90
-msgid "Not stated"
-msgstr "Ei esitetty"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:95
-msgid "Renewal of existing access grant?"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_evaluation.html:100
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "            Hi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
-#| "          "
-msgid ""
-"\n"
-"            Yes (<a href=\"%(parent_url)s\">previous application</a>)\n"
-"          "
-msgstr ""
-"\n"
-"            Terve, <a href=\"%(home_url)s\">%(username)s</a>!\n"
-"          "
-
-#: TWLight/applications/templates/applications/application_evaluation.html:105
-#: TWLight/users/templates/users/editor_detail_data.html:49
-msgid "No"
-msgstr "Ei"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:111
-msgid "Comments from the editor"
-msgstr "Lisähuomioita muokkaajalta"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:119
-msgid "Discussion"
-msgstr "Keskustelu"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:138
-msgid "Add comment"
-msgstr "Lisää kommentti"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:144
-msgid ""
-"Comments are visible to all coordinators and to the editor who submitted "
-"this application."
-msgstr ""
-"Tämä sivu ja sen sisältämät kommentit ovat nähtävinä kaikille Wikipedian "
-"Lähdekirjaston koordinaattoreille"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:150
-msgid "User"
-msgstr "Käyttäjä"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:154
-msgid "Revision history"
-msgstr "Muutoshistoria"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:169
-#, python-format
-msgid "Submitted by %(submit_user)s on %(review_date)s"
-msgstr "%(submit_user)s lähetti hakemuksen %(review_date)s"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:173
-#, python-format
-msgid "Submitted on %(review_date)s"
-msgstr "Tallennettu %(review_date)s"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:183
-#, python-format
-msgid "Reviewed by %(review_user)s on %(review_date)s"
-msgstr "%(review_user)s arvioi tämän %(review_date)s"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:187
-#, python-format
-msgid "Reviewed on %(review_date)s"
-msgstr "Arvioitu %(review_date)s"
-
-#: TWLight/applications/templates/applications/application_evaluation.html:198
-msgid "No previous versions."
-msgstr "Ei aiempia versioita."
-
-#: TWLight/applications/templates/applications/application_list.html:9
-#, fuzzy
-#| msgid "Filter by..."
-msgid "View applications which are..."
-msgstr "Suodata hakemukset..."
-
-#: TWLight/applications/templates/applications/application_list.html:13
-#, fuzzy
-#| msgid "Pending"
-msgid "Pending review"
-msgstr "Odottaa"
-
-#: TWLight/applications/templates/applications/application_list.html:21
-msgid "Rejected"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list.html:25
-msgid "Sent"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list.html:29
-#, fuzzy
-#| msgid "Access grants up for renewal"
-msgid "Up for renewal"
-msgstr "Uusittavissa olevat käyttöoikeuslahjoitukset"
-
-#: TWLight/applications/templates/applications/application_list.html:43
-msgid "Filter by..."
-msgstr "Suodata hakemukset..."
-
-#: TWLight/applications/templates/applications/application_list.html:54
-msgid "Current filters"
-msgstr "Nykyiset suodattimet"
-
-#: TWLight/applications/templates/applications/application_list.html:64
-msgid "None"
-msgstr "Ei mitään"
-
-#: TWLight/applications/templates/applications/application_list.html:75
-msgid "Page navigation"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list.html:79
-#: TWLight/applications/templates/applications/application_list.html:80
-#: TWLight/applications/templates/applications/application_list.html:85
-#: TWLight/applications/templates/applications/application_list.html:86
-msgid "Previous page"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list.html:109
-msgid "Next"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list.html:110
-#: TWLight/applications/templates/applications/application_list.html:115
-#: TWLight/applications/templates/applications/application_list.html:116
-msgid "Next page"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list_expiring_include.html:11
-msgid "Expired today"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list_expiring_include.html:13
-#, fuzzy, python-format
-#| msgid "Expired %(num_days)s days ago"
-msgid "Expired %(num_days)s day ago"
-msgid_plural "Expired %(num_days)s days ago"
-msgstr[0] "Vanhentui %(num_days)s päivää sitten"
-msgstr[1] "Vanhentui %(num_days)s päivää sitten"
-
-#: TWLight/applications/templates/applications/application_list_expiring_include.html:23
-#, fuzzy, python-format
-#| msgid "Expiring in %(num_days)s days"
-msgid "Expiring in %(num_days)s day"
-msgid_plural "Expiring in %(num_days)s days"
-msgstr[0] "Vanhenemisaika: %(num_days)s pv"
-msgstr[1] "Vanhenemisaika: %(num_days)s pv"
-
-#: TWLight/applications/templates/applications/application_list_expiring_include.html:36
-#, python-format
-msgid "Approved by %(reviewer)s on %(review_date)s"
-msgstr "%(reviewer)s hyväksyi hakemuksen %(review_date)s"
-
-#: TWLight/applications/templates/applications/application_list_expiring_include.html:40
-#, fuzzy, python-format
-#| msgid "Reviewed on %(review_date)s"
-msgid "Approved on %(review_date)s"
-msgstr "Arvioitu %(review_date)s"
-
-#: TWLight/applications/templates/applications/application_list_expiring_include.html:47
-#: TWLight/applications/templates/applications/application_list_include.html:58
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:69
-msgid "No applications right now."
-msgstr "Ei hakemuksia tällä hetkellä."
-
-#: TWLight/applications/templates/applications/application_list_include.html:18
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:32
-#, python-format
-msgid "Last reviewed by %(reviewer)s on %(review_date)s"
-msgstr "Viimeksi %(review_date)s %(reviewer)s arvioi tämän"
-
-#: TWLight/applications/templates/applications/application_list_include.html:22
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:36
-#, fuzzy, python-format
-#| msgid "Reviewed on %(review_date)s"
-msgid "Last reviewed on %(review_date)s"
-msgstr "Arvioitu %(review_date)s"
-
-#: TWLight/applications/templates/applications/application_list_include.html:27
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:41
-msgid "Not yet reviewed."
-msgstr "Ei vielä arvioitu."
-
-#: TWLight/applications/templates/applications/application_list_include.html:33
-msgid "Your access grant is expiring soon"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list_include.html:35
-#: TWLight/applications/templates/applications/application_list_include.html:43
-msgid "Request renewal"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list_include.html:37
-#: TWLight/applications/templates/applications/application_list_include.html:45
-#, fuzzy
-#| msgid "Description not available."
-msgid "Renewals are not available."
-msgstr "Ei kuvausta"
-
-#: TWLight/applications/templates/applications/application_list_include.html:41
-msgid "Your access grant has expired"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:12
-#: TWLight/applications/templates/applications/send_partner.html:74
-msgid "Select/deselect all"
-msgstr "Valitse/poista kaikki valinnat"
-
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:23
-msgid "Renewal"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:52
-msgid "Status for all selected applications"
-msgstr "Kaikkien valittujen hakemusten tila"
-
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:65
-msgid "Set status"
-msgstr "Aseta tila"
-
-#: TWLight/applications/templates/applications/apply.html:13
-#, python-format
-msgid ""
-"<p> Note that your username and reasons for applying may be displayed on the "
-"home page. Please <a href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">email us "
-"(wikipedialibrary@wikimedia.org)</a> if this is a problem. </p>"
-msgstr ""
-"<p> Huomioi, että seuraavat tiedot voidaan esittää kotisivun aikajanalla: </"
-"p> <ul> <li> Wikipedia-käyttäjätunnuksesi; </li> <li> yhteistyökumppanit, "
-"joiden aineistoihin hait käyttöoikeutta; </li> <li> hakemusperustelusi. </"
-"li> </ul> <p> Voit <a href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">lähettää "
-"meille sähköpostia  (wikipedialibrary@wikimedia.org)</a> jos sinulla on "
-"ongelmia tämänkanssa  </p>"
-
-#. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
-#: TWLight/applications/templates/applications/request_for_application.html:20
-msgid "What resources you want to access?"
-msgstr "Kenen aineistoon haluat käyttöoikeuden?"
-
-#: TWLight/applications/templates/applications/request_for_application.html:38
-msgid "(more info)"
-msgstr "(lisää tietoa)"
-
-#. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
-#: TWLight/applications/templates/applications/request_for_application.html:42
-#: TWLight/resources/models.py:137
-#: TWLight/resources/templates/resources/partner_tile.html:30
-msgid "Waitlisted"
-msgstr ""
-
-#: TWLight/applications/templates/applications/request_for_application.html:48
-#: TWLight/resources/templates/resources/partner_list.html:15
-msgid "No partner data has been added yet."
-msgstr "Yhteistyökumppanin tietoja ei ole lisätty vielä tietokantaan."
-
-#. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did earlier in this file.
-#: TWLight/applications/templates/applications/request_for_application.html:57
-msgid ""
-"You can apply to <span class=\"label label-warning\">Waitlisted</span> "
-"partners, but they don't have access grants available right now. We will "
-"process those applications when access becomes available."
-msgstr ""
-
-#: TWLight/applications/templates/applications/send.html:6
-msgid "Partners with approved, unsent applications"
-msgstr ""
-"Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
-
-#: TWLight/applications/templates/applications/send.html:18
-msgid "There are no partners with applications ready to send."
-msgstr ""
-"Tällä hetkellä ei ole yhtään valmista hakemusta lähetettäväksi "
-"yhteistyökumppaneille."
-
-#: TWLight/applications/templates/applications/send_partner.html:35
-#, python-format
-msgid "Application data for %(object)s"
-msgstr "Hakemustiedot kohteelle %(object)s"
-
-#: TWLight/applications/templates/applications/send_partner.html:38
-msgid "When you've processed the data below, click the 'mark as sent' button."
-msgstr ""
-
-#: TWLight/applications/templates/applications/send_partner.html:43
-msgid "Contact"
-msgid_plural "Contacts"
-msgstr[0] "Yrityksen edustaja"
-msgstr[1] "Yrityksen edustajat"
-
-#: TWLight/applications/templates/applications/send_partner.html:58
-msgid ""
-"Whoops, we don't have any listed contacts. Please notify Wikipedia Library "
-"administrators."
-msgstr ""
-"Meillä ei ole yhteyshenkilöitä tähän yritykseen. Ole hyvä ja kerroasiasta "
-"Wikipedian Lähdekirjaston ylläpitäjille."
-
-#: TWLight/applications/templates/applications/send_partner.html:61
-msgid "Application data"
-msgstr "Hakemuksen tiedot"
-
-#. Translators: this should be translated the same way that it was earlier in this page.
-#: TWLight/applications/templates/applications/send_partner.html:101
-msgid "Mark as sent"
-msgstr "Merkitse lähetetyksi"
-
-#: TWLight/applications/templates/applications/send_partner.html:104
-msgid "There are no approved, unsent applications."
-msgstr "Tällä hetkellä ei ole lähettämättömiä hyväksyttyjä hakemuksia."
-
-#: TWLight/applications/views.py:105
-msgid "Please select at least one partner."
-msgstr "Valitse vähintään yksi yhteistyökumppani."
-
-#: TWLight/applications/views.py:270
-msgid "Choose at least one resource you want access to."
-msgstr ""
-"Sinun täytyy valita vähintään yksi aineisto käyttöoikeuden hakemiseksi."
-
-#: TWLight/applications/views.py:293 TWLight/applications/views.py:333
-msgid ""
-"Your application has been submitted for review. You can check the status of "
-"your applications on this page."
-msgstr ""
-"Hakemuksesi on lähetetty. Koordinaattorimme arvioi sen ja ottaa sinuun "
-"yhteyttä. Voit tarkistaa hakemuksesi tilan tällä sivulla milloin tahansa."
-
-#: TWLight/applications/views.py:322
-msgid ""
-"This partner does not have any access grants available at this time. You may "
-"still apply for access; your application will be reviewed when access grants "
-"become available."
-msgstr ""
-
-#. Translators: Editor = wikipedia editor, gender unknown.
-#: TWLight/applications/views.py:487
-msgid "Editor"
-msgstr "Muokkaaja"
-
-#: TWLight/applications/views.py:515
-#, fuzzy
-#| msgid "Applications over time"
-msgid "Applications to review"
-msgstr "Hakemukset kautta aikojen"
-
-#: TWLight/applications/views.py:540
-msgid "Approved applications"
-msgstr "Hyväksytyn hakemukset"
-
-#: TWLight/applications/views.py:559
-msgid "Rejected applications"
-msgstr "Hylätyt hakemukset"
-
-#. Translators: these are grants to specific editors whose term limit is about to expire.
-#: TWLight/applications/views.py:586
-msgid "Access grants up for renewal"
-msgstr "Uusittavissa olevat käyttöoikeuslahjoitukset"
-
-#: TWLight/applications/views.py:611
-#, fuzzy
-#| msgid "Set application status"
-msgid "Sent applications"
-msgstr "Aseta hakemuksen tila"
-
-#. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:651
-msgid "Set application status"
-msgstr "Aseta hakemuksen tila"
-
-#: TWLight/applications/views.py:692
-msgid "Batch update successful."
-msgstr "Joukkopäivitys onnistui. Kiitos tämänpäiväisistä arvioinneistasi."
-
-#: TWLight/applications/views.py:750
-#, fuzzy
-#| msgid "All applications have been marked as sent."
-msgid "All selected applications have been marked as sent."
-msgstr "Kaikki hakemukset on merkitty lähetetyiksi."
-
-#: TWLight/applications/views.py:799
-msgid ""
-"This object cannot be renewed. (This probably means that you have already "
-"requested that it be renewed.)"
-msgstr ""
-
-#: TWLight/applications/views.py:804
-msgid ""
-"Your renewal request has been received. A coordinator will review your "
-"request."
-msgstr ""
-
-#: TWLight/emails/templates/emails/approval_notification-body-html.html:3
-#: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, python-format
-msgid ""
-"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
-"through The Wikipedia Library. We are happy to inform you that your "
-"application has been approved. You can expect to receive details about how "
-"to access this source within a week or two. Cheers! The Wikipedia Library"
-msgstr ""
-
-#: TWLight/emails/templates/emails/approval_notification-subject.html:3
-#, fuzzy
-#| msgid "New comment on your Wikipedia Library application"
-msgid "Your Wikipedia Library application has been approved"
-msgstr "Wikipedian Lähdekirjaston hakemukseesi on jätetty uusi kommentti"
-
-#: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:3
-#: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
-#, python-format
-msgid ""
-"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
-"through The Wikipedia Library. There are one or more comments on your "
-"application that require a response from you. Please reply to these at "
-"%(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
-msgstr ""
-
-#: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
-msgid "New comment on your Wikipedia Library application"
-msgstr "Wikipedian Lähdekirjaston hakemukseesi on jätetty uusi kommentti"
-
-#: TWLight/emails/templates/emails/comment_notification_others-body-html.html:3
-#: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
-#, python-format
-msgid ""
-"There is a new comment on a Wikipedia Library application that you also "
-"commented on. It may be providing an answer to a question you asked. You can "
-"see it at %(app_url)s. Thanks for helping review Wikipedia Library "
-"applications!"
-msgstr ""
-"Kommentoimassasi Wikipedian Lähdekirjaston hakemuksessa on uusi kommentti Se "
-"voi olla vastaus esittämääsi kysymykseen.katso kommentti tästä: %(app_url)s. "
-"Kiitos kun arvioit Wikipedian Lähdekirjaston hakemuksia!"
-
-#: TWLight/emails/templates/emails/comment_notification_others-subject.html:3
-msgid "New comment on a Wikipedia Library application you commented on"
-msgstr ""
-"Uusi kommentti Wikipedian Lähdekirjaston hakemuksessa, jota olet "
-"kommentoinut."
-
-#: TWLight/emails/templates/emails/rejection_notification-body-html.html:3
-#: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
-#, python-format
-msgid ""
-"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
-"through The Wikipedia Library. Unfortunately at this time your application "
-"has not been approved. You can view your application and review comments at "
-"%(app_url)s. Best, The Wikipedia Library"
-msgstr ""
-
-#: TWLight/emails/templates/emails/rejection_notification-subject.html:3
-#, fuzzy
-#| msgid "New comment on your Wikipedia Library application"
-msgid "Your Wikipedia Library application has been denied"
-msgstr "Wikipedian Lähdekirjaston hakemukseesi on jätetty uusi kommentti"
-
-#: TWLight/emails/templates/emails/waitlist_notification-body-html.html:3
-#: TWLight/emails/templates/emails/waitlist_notification-text-html.html:3
-#, python-format
-msgid ""
-"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
-"through The Wikipedia Library. There are no accounts currently available so "
-"your application has been waitlisted. Your application will be evaluated if/"
-"when more accounts become available. You can see all available resources at "
-"%(link)s. Best, The Wikipedia Library"
-msgstr ""
-
-#: TWLight/emails/templates/emails/waitlist_notification-subject.html:3
-#, fuzzy
-#| msgid "New comment on a Wikipedia Library application you commented on"
-msgid "Your Wikipedia Library application has been waitlisted"
-msgstr ""
-"Uusi kommentti Wikipedian Lähdekirjaston hakemuksessa, jota olet "
-"kommentoinut."
-
-#: TWLight/graphs/views.py:202 TWLight/graphs/views.py:229
-#: TWLight/graphs/views.py:309 TWLight/graphs/views.py:332
-msgid "Date"
-msgstr "Päiväys"
-
-#: TWLight/graphs/views.py:202
-msgid "Number of partners"
-msgstr "Yhteistyökumppaneiden lukumäärä"
-
-#: TWLight/graphs/views.py:215 TWLight/templates/dashboard.html:169
-msgid "Home wiki"
-msgstr "Kotiwiki"
-
-#: TWLight/graphs/views.py:215 TWLight/graphs/views.py:229
-#: TWLight/templates/dashboard.html:172
-msgid "Number of users"
-msgstr "Käyttäjien lukumäärä"
-
-#: TWLight/graphs/views.py:229
-msgid "Wiki"
-msgstr "Wiki"
-
-#. Translators: the number of days it took to decide on applications that have already been accepted/rejected.
-#: TWLight/graphs/views.py:249
-msgid "Days until decision"
-msgstr "Päiviä päätökseen"
-
-#: TWLight/graphs/views.py:249 TWLight/graphs/views.py:283
-msgid "Number of applications"
-msgstr "Hakijoiden lukumäärä"
-
-#: TWLight/graphs/views.py:266
-msgid "Month"
-msgstr "Kuukausi"
-
-#: TWLight/graphs/views.py:266
-msgid "Median days until decision"
-msgstr "Mediaaniluku päivistä, jotka kuluvat päätöksen tekemiseen"
-
-#: TWLight/graphs/views.py:310
-#, python-brace-format
-msgid "Number of applications to {partner}"
-msgstr "Yhteistyökumppanille {partner} tehtyjen hakemusten määrä"
-
-#: TWLight/graphs/views.py:333
-#, python-brace-format
-msgid "Number of unique users who have applied to {partner}"
-msgstr ""
-"Yhteistyökumppanin {partner} aineistoon käyttöoikeutta hakeneiden "
-"yksittäisten käyttäjien lukumäärä."
-
-#: TWLight/graphs/views.py:347 TWLight/graphs/views.py:373
-msgid "You must be staff to do that."
-msgstr ""
-
-#: TWLight/graphs/views.py:357 TWLight/graphs/views.py:390
-#: TWLight/templates/dashboard.html:88
-msgid "Page URL"
-msgstr ""
-
-#: TWLight/graphs/views.py:358 TWLight/graphs/views.py:391
-#, fuzzy
-#| msgid "Number of users"
-msgid "Number of (non-unique) visitors"
-msgstr "Käyttäjien lukumäärä"
-
-#: TWLight/resources/models.py:27
-#, python-format
-msgid ""
-"%(code)s is not a valid language code. You must enter an ISO language code, "
-"as in the LANGUAGES setting at https://github.com/django/django/blob/master/"
-"django/conf/global_settings.py"
-msgstr ""
-
-#: TWLight/resources/models.py:55
-#: TWLight/users/templates/users/preferences.html:8
-msgid "Language"
-msgstr "Kieli"
-
-#: TWLight/resources/models.py:56
-#, fuzzy
-#| msgid "Language"
-msgid "Languages"
-msgstr "Kieli"
-
-#: TWLight/resources/models.py:110
-msgid ""
-"Partner's name (e.g. McFarland). Note: this will be user-visible and *not "
-"translated*."
-msgstr ""
-"Yhteistyökumppaniyrityksen nimi (esim. Suomalaisen Kirjallisuuden Seura). "
-"Huom: tämä on nähtävissä käyttäjilleeikä sitä *käännetä*."
-
-#: TWLight/resources/models.py:114
-msgid "The coordinator for this Partner, if any."
-msgstr ""
-
-#. Translators: This is a status for a Partner, denoting that editors can apply for access.
-#: TWLight/resources/models.py:133
-msgid "Available"
-msgstr ""
-
-#. Translators: This is a status for a Partner, denoting that editors cannot apply for access and the Partner will not be displayed to them.
-#: TWLight/resources/models.py:135
-#, fuzzy
-#| msgid "Description not available."
-msgid "Not available"
-msgstr "Ei kuvausta"
-
-#: TWLight/resources/models.py:142
-msgid ""
-"Should this Partner be displayed to end users? Is it open for applications "
-"right now?"
-msgstr ""
-
-#: TWLight/resources/models.py:146
-msgid ""
-"Can access grants to this partner be renewed? If so, users will be able to "
-"request renewals when their access is close to expiring."
-msgstr ""
-
-#: TWLight/resources/models.py:154
-msgid ""
-"Link to terms of use. Required if users must agree to terms of use to get "
-"access; optional otherwise."
-msgstr ""
-"Linkki käyttöehtoihin. Vaaditaan, jos yritys vaatii käyttäjien hyväksyvän "
-"käyttöehdot ennen käyttöoikeuden hakemista; vapaavalintainen muuten."
-
-#: TWLight/resources/models.py:157
-msgid "Optional description of this partner's resources."
-msgstr "Vapaavalintainen kuvaus yhteistyökumppanin lahjoituksesta."
-
-#: TWLight/resources/models.py:159
-msgid "Optional URL of an image that can be used to represent this partner."
-msgstr ""
-"Vapaavalintainen URL kuvasta, jota voi käyttää yhteistyökumppanin esittelyyn."
-
-#: TWLight/resources/models.py:165
-msgid ""
-"If True, users can only apply for one Stream at a time from this Partner. If "
-"False, users can apply for multiple Streams at a time. This field must be "
-"filled in when Partners have multiple Streams, but may be left blank "
-"otherwise."
-msgstr ""
-"Jos rastittuna, käyttäjät voivat hakea käyttöoikeutta vain yhteen "
-"syötteeseen tältä yhteistyökumppanilta. Jos ei rastittuna, käyttäjät voivat "
-"hakea käyttöoikeutta useampaan syötteeseen. Kenttä pitää täyttää, mikäli "
-"yhteistyökumppanilla on useita syötteitä, mutta muuten sen voi jättää "
-"tyhjäksi. "
-
-#: TWLight/resources/models.py:173
-#, fuzzy
-#| msgid ""
-#| "The standard length of an access grant from this Partner. Enter like '365 "
-#| "days' or '365d' or '1 year'."
-msgid ""
-"The standard length of an access grant from this Partner. Entered as <days "
-"hours:minutes:seconds>. Defaults to 365 days."
-msgstr "Standardi käyttöoikeuden kestoaika yhteistyömppanilta. Esim. 1 vuosi."
-
-#: TWLight/resources/models.py:178
-msgid "Select all languages in which this partner publishes content."
-msgstr ""
-
-#: TWLight/resources/models.py:192
-msgid "Mark as true if this partner requires applicant names."
-msgstr ""
-"Rastita, mikäli yhteistyökumppani vaatii hakijan esittävän oikean nimensä."
-
-#: TWLight/resources/models.py:194
-msgid "Mark as true if this partner requires applicant countries of residence."
-msgstr "Rastita, mikäli yhteistyökumppani vaatii hakijan nimeävän asuinmaansa."
-
-#: TWLight/resources/models.py:197
-msgid ""
-"Mark as true if this partner requires applicants to specify the title they "
-"want to access."
-msgstr ""
-"Rastita, mikäli yhteistyökumppani vaatii hakijan määrittelevän tarkasti, "
-"mihin nimekkeeseen hän haluaa käyttöoikeuden."
-
-#: TWLight/resources/models.py:200
-msgid ""
-"Mark as true if this partner requires applicants to specify the database "
-"they want to access."
-msgstr ""
-"Rastita, mikäli yhteistyökumppani vaatii hakijan määrittelevän tarkasti, "
-"mihin tietokantaan hän haluaa käyttöoikeuden."
-
-#: TWLight/resources/models.py:203
-msgid ""
-"Mark as true if this partner requires applicants to specify their occupation."
-msgstr "Rastita, mikäli yhteistyökumppani vaatii hakijan nimeävän ammattinsa."
-
-#: TWLight/resources/models.py:206
-msgid ""
-"Mark as true if this partner requires applicants to specify their "
-"institutional affiliation."
-msgstr ""
-"Rastita, mikäli yhteistyökumppani vaatii hakijoiden nimeävän heidän "
-"sidoksensa instituutioihin"
-
-#: TWLight/resources/models.py:209
-msgid ""
-"Mark as true if this partner requires applicants to agree with the partner's "
-"terms of use."
-msgstr ""
-"Rastita, jos yhteistyökumppani vaatii hakijoiden hyväksyvän "
-"yhteistyökumppanin käyttöehdot."
-
-#: TWLight/resources/models.py:270
-msgid ""
-"Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
-"and *not translated*. Do not include the name of the partner here."
-msgstr ""
-"Syötteen nimi (esim. käyttäytymistieteet). On näkyvissä käyttäjälle *eikä "
-"sitä käännetä*. Älä laita yhteistyökumppanin nimeä tähän. Jos "
-"yhteistyökumppanin ja aineiston nimi pitää esittää yhdessä, mallineet "
-"hoitavat sen tavalla, joka on helppo muuntaa muille kielille."
-
-#: TWLight/resources/models.py:274
-msgid "Optional description of this stream's resources."
-msgstr "Valinnainen kuvaus syötteen sisällöstä."
-
-#: TWLight/resources/models.py:314
-#, fuzzy
-#| msgid ""
-#| "Organizational role or job title. This is NOT intended to be used for "
-#| "honorifics."
-msgid ""
-"Organizational role or job title. This is NOT intended to be used for "
-"honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
-msgstr "Rooli järjestössä tai työnimeke. "
-
-#: TWLight/resources/models.py:320
-msgid ""
-"The form of the contact person's name to use in email greetings (as in 'Hi "
-"Jake')"
-msgstr ""
-"Muoto, jossa yhteyshenkilön nimi esitetään sähköpostitervehdyksissä(kuten "
-"'Moi Maija')"
-
-#: TWLight/resources/templates/resources/partner_detail.html:29
-#: TWLight/resources/templates/resources/partner_detail.html:51
-#, python-format
-msgid ""
-"<strong>Waitlisted</strong> &mdash; There are no access grants available for "
-"this partner at this time. You can still <a href=\"%(app_url)s\">apply for "
-"access</a>; applications will be processed when access is available."
-msgstr ""
-
-#: TWLight/resources/templates/resources/partner_detail.html:42
-#: TWLight/resources/templates/resources/partner_detail.html:65
-msgid "Remove from waitlist"
-msgstr ""
-
-#: TWLight/resources/templates/resources/partner_detail.html:42
-#: TWLight/resources/templates/resources/partner_detail.html:65
-msgid "Set as waitlisted"
-msgstr ""
-
-#: TWLight/resources/templates/resources/partner_detail.html:75
-#, python-format
-msgid "<strong>%(coordinator)s</strong> processes applications to %(partner)s."
-msgstr ""
-
-#: TWLight/resources/templates/resources/partner_detail.html:83
-#, fuzzy
-#| msgid "Talk page:"
-msgid "Talk page"
-msgstr "Keskustelusivu"
-
-#: TWLight/resources/templates/resources/partner_detail.html:90
-msgid "Special:EmailUser page"
-msgstr ""
-
-#: TWLight/resources/templates/resources/partner_detail.html:96
-#, fuzzy
-#| msgid ""
-#| "The Wikipedia Library Card Platform is a project of <a href=\"https://"
-#| "meta.wikimedia.org/wiki/The_Wikipedia_Library\"> The Wikipedia Library</"
-#| "a>."
-msgid ""
-"The Wikipedia Library team will process this application. Want to help? <a "
-"href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/"
-"Coordinators/Signup\">Sign up as a coordinator.</a>"
-msgstr ""
-"Wikipedian Lähdekirjaston Käyttöoikeustoimisto on <a href=\"https://meta."
-"wikimedia.org/wiki/The_Wikipedia_Library\"> Wikipedian Lähdekirjaston</a> "
-"projekti."
-
-#: TWLight/resources/templates/resources/partner_detail.html:124
-msgid "Description not available."
-msgstr "Ei kuvausta"
-
-#: TWLight/resources/templates/resources/partner_detail.html:141
-#, python-format
-msgid "Language(s): %(language_list)s"
-msgstr ""
-
-#: TWLight/resources/templates/resources/partner_detail.html:147
-#, fuzzy
-#| msgid "Description not available."
-msgid "Languages not available."
-msgstr "Ei kuvausta"
-
-#: TWLight/resources/templates/resources/partner_detail.html:158
-msgid "Special requirements for applicants"
-msgstr "Erityisvaatimukset hakijoille"
-
-#: TWLight/resources/templates/resources/partner_detail.html:165
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                  %(publisher)s requires that you agree with its <a href="
-#| "\"%(url)s\">terms\n"
-#| "                  of use</a>.\n"
-#| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you agree with its <a href="
-"\"%(url)s\">terms\n"
-"                    of use</a>.\n"
-"                  "
-msgstr ""
-"\n"
-"                  %(publisher)s vaatii, että hyväksyt <a href=\"%(url)s"
-"\">käyttöehdot</a>.\n"
-"                "
-
-#: TWLight/resources/templates/resources/partner_detail.html:174
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                  %(publisher)s requires that you provide your real "
-#| "name.\n"
-#| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your real name.\n"
-"                  "
-msgstr ""
-"\n"
-"                  %(publisher)s vaatii, että annat oikean nimesi.\n"
-"                "
-
-#: TWLight/resources/templates/resources/partner_detail.html:182
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                  %(publisher)s requires that you provide your country of "
-#| "residence.\n"
-#| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your country of "
-"residence.\n"
-"                  "
-msgstr ""
-"\n"
-"                  %(publisher)s vaatii, että nimeät asuinpaikkasi.\n"
-"                "
-
-#: TWLight/resources/templates/resources/partner_detail.html:190
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                  %(publisher)s requires that you provide your "
-#| "occupation.\n"
-#| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your "
-"occupation.\n"
-"                  "
-msgstr ""
-"\n"
-"                  %(publisher)s vaatii, että nimeät ammattisi.\n"
-"                "
-
-#: TWLight/resources/templates/resources/partner_detail.html:198
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                  %(publisher)s requires that you provide your "
-#| "institutional affiliation.\n"
-#| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your "
-"institutional affiliation.\n"
-"                  "
-msgstr ""
-"\n"
-"                  %(publisher)s vaatii, että nimeät instituution, johon olet "
-"sidoksissa.\n"
-"                "
-
-#: TWLight/resources/templates/resources/partner_detail.html:206
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                  %(publisher)s requires that you specify the title that "
-#| "you want\n"
-#| "                  to access.\n"
-#| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you specify a particular "
-"title that you want\n"
-"                    to access.\n"
-"                  "
-msgstr ""
-"\n"
-"                  %(publisher)s vaatii, että määrittelet nimikkeen, johon "
-"haluat\n"
-"                  käyttöoikeuden.\n"
-"                "
-
-#: TWLight/resources/templates/resources/partner_detail.html:216
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(publisher)s requires that you specify a specific "
-#| "collection that you\n"
-#| "                    want to access. You may only apply for access to one "
-#| "collection at a\n"
-#| "                    time.\n"
-#| "                  "
-msgid ""
-"\n"
-"                      %(publisher)s requires that you specify a specific "
-"collection that you\n"
-"                      want to access. You may only apply for access to one "
-"collection at a\n"
-"                      time.\n"
-"                    "
-msgstr ""
-"\n"
-"                    %(publisher)s vaatii, että määrittelet kokoelman johon "
-"haluat\n"
-"                    käyttöoikeuden. Voit hakea käyttöoikeutta yhteen "
-"kokoelmaan\n"
-"                    kerrallaan.\n"
-"                  "
-
-#: TWLight/resources/templates/resources/partner_detail.html:222
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(publisher)s requires that you specify one or more "
-#| "specific\n"
-#| "                    collections that you want to access.\n"
-#| "                  "
-msgid ""
-"\n"
-"                      %(publisher)s requires that you specify one or more "
-"specific\n"
-"                      collections that you want to access.\n"
-"                    "
-msgstr ""
-"\n"
-"                    %(publisher)s vaatii, että määrittelet yhden taiuseamman "
-"kokoelman\n"
-"                   johon haluat käyttöoikeuden.\n"
-"                  "
-
-#: TWLight/resources/templates/resources/partner_detail.html:241
-msgid "Collections"
-msgstr "Kokoelmat"
-
-#: TWLight/resources/templates/resources/partner_detail.html:273
-#: TWLight/templates/base.html:170
-msgid "Terms of use"
-msgstr "Käyttöehdot"
-
-#: TWLight/resources/templates/resources/partner_detail.html:275
-msgid "Terms of use not available."
-msgstr "Käyttöehdot eivät ole saatavilla"
-
-#: TWLight/resources/templates/resources/partner_detail.html:287
-#: TWLight/templates/base.html:82
-msgid "Metrics"
-msgstr "Tilastot"
-
-#: TWLight/resources/templates/resources/partner_detail.html:299
-#: TWLight/templates/dashboard.html:60
-msgid "Total applications (all time)"
-msgstr "Kaikki hakemukset (kautta aikojen)"
-
-#: TWLight/resources/templates/resources/partner_detail.html:314
-msgid "Total unique applicants (all time)"
-msgstr "Kaikki yksitäiset hakijat (kautta aikojen)"
-
-#: TWLight/resources/templates/resources/partner_detail.html:329
-msgid "Median days from application to decision"
-msgstr "Mediaaniaika päivissä hakemuksen tekemisestä päätöksen antamiseen"
-
-#: TWLight/resources/templates/resources/partner_detail.html:337
-msgid "Applications by status"
-msgstr "Hakemukset tilan mukaan"
-
-#: TWLight/resources/templates/resources/partner_detail.html:337
-#: TWLight/resources/templates/resources/partner_detail.html:359
-#: TWLight/resources/templates/resources/partner_detail.html:363
-#: TWLight/resources/templates/resources/partner_detail.html:367
-#: TWLight/templates/dashboard.html:79 TWLight/templates/dashboard.html:144
-#: TWLight/templates/dashboard.html:160 TWLight/templates/dashboard.html:191
-#: TWLight/templates/dashboard.html:205 TWLight/templates/dashboard.html:215
-#: TWLight/templates/dashboard.html:224
-msgid "download as csv"
-msgstr "lataa csv-tiedostona"
-
-#: TWLight/resources/templates/resources/partner_detail.html:342
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Number of applications approved (all time): "
-#| "%(total_apps_approved)s\n"
-#| "    "
-#| msgid_plural ""
-#| "\n"
-#| "      Number of applications approved (all time): "
-#| "%(total_apps_approved)s\n"
-#| "    "
-msgid ""
-"\n"
-"      Number of applications approved (all time): "
-"%(total_apps_approved_or_sent)s\n"
-"    "
-msgid_plural ""
-"\n"
-"      Number of applications approved (all time): "
-"%(total_apps_approved_or_sent)s\n"
-"    "
-msgstr[0] ""
-"\n"
-"      Hyväksyttyjen hakemusten määrä (kautta aikojen): "
-"%(total_apps_approved)s\n"
-"    "
-msgstr[1] ""
-"\n"
-"      Hyväksyttyjen hakemusten määrä (kautta aikojen): "
-"%(total_apps_approved)s\n"
-"    "
-
-#: TWLight/resources/templates/resources/partner_detail.html:350
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Number of unique users with approved applications (all time): "
-#| "%(unique_users_approved)s\n"
-#| "    "
-#| msgid_plural ""
-#| "\n"
-#| "      Number of unique users with approved applications (all time): "
-#| "%(unique_users_approved)s\n"
-#| "    "
-msgid ""
-"\n"
-"      Number of unique users with approved applications (all time): "
-"%(unique_users_approved_or_sent)s\n"
-"    "
-msgid_plural ""
-"\n"
-"      Number of unique users with approved applications (all time): "
-"%(unique_users_approved_or_sent)s\n"
-"    "
-msgstr[0] ""
-"\n"
-"      Yksittäiset muokkaajat, joiden hakemukset on hyväksytty (kautta "
-"aikojen): %(unique_users_approved)s\n"
-"    "
-msgstr[1] ""
-"\n"
-"      Yksittäiset muokkaajat, joiden hakemukset on hyväksytty (kautta "
-"aikojen): %(unique_users_approved)s\n"
-"    "
-
-#: TWLight/resources/templates/resources/partner_detail.html:357
-msgid "Applications over time"
-msgstr "Hakemukset kautta aikojen"
-
-#: TWLight/resources/templates/resources/partner_detail.html:359
-msgid "All applications"
-msgstr "Kaikki hakemukset"
-
-#: TWLight/resources/templates/resources/partner_detail.html:363
-msgid "Approved applications only"
-msgstr "Vain hyväksytyt hakemukset"
-
-#: TWLight/resources/templates/resources/partner_detail.html:367
-msgid "Unique users over time"
-msgstr "Yksittäiset muokkaajat kautta aikojen"
-
-#: TWLight/resources/templates/resources/partner_list.html:6
-msgid "List of partners"
-msgstr "Yhteistyökumppanit"
-
-#: TWLight/resources/templates/resources/partner_list.html:21
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "      You can see per-partner metrics on the partner pages.\n"
-#| "    "
-msgid "You can see per-partner metrics on the partner pages."
-msgstr ""
-"\n"
-"      Voit nähdä yhteistyökumppanikohtaiset tilastot yhteistyökumppanien "
-"sivuilla.\n"
-"    "
-
-#: TWLight/resources/templates/resources/partner_tile.html:58
-msgid "Language(s) not known"
-msgstr ""
-
-#: TWLight/resources/templates/resources/partner_tile.html:63
-msgid "More info"
-msgstr "Lisää tietoa"
-
-#: TWLight/resources/views.py:26
-msgid ""
-"Because you are a staff member, this page may include Partners who are not "
-"yet available to all users."
-msgstr ""
-
-#: TWLight/resources/views.py:47
-msgid ""
-"This Partner's status is NOT_AVAILABLE. You can see it because you are a "
-"staff member, but it is not visible to non-staff users."
-msgstr ""
-
-#: TWLight/resources/views.py:122
-msgid "This partner is now waitlisted"
-msgstr ""
-
-#: TWLight/resources/views.py:125
-#, fuzzy
-#| msgid "Partners with approved, unsent applications"
-msgid "This partner is now available for applications"
-msgstr ""
-"Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
-
-#: TWLight/settings/base.py:150
-msgid "English"
-msgstr "Englanti"
-
-#: TWLight/settings/base.py:151
-msgid "Finnish"
-msgstr ""
-
-#: TWLight/settings/base.py:152
-msgid "French"
-msgstr "Ranska"
-
-#: TWLight/templates/403.html:8
-msgid "Permission denied"
-msgstr ""
-
-#: TWLight/templates/403.html:11
-msgid "Sorry; you aren't allowed to do that."
-msgstr ""
-
-#: TWLight/templates/403.html:15
-#, python-format
-msgid ""
-"If you think your account should be able to do that, please email us about "
-"this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
-"\">wikipedialibrary@wikimedia.org</a> or report it to us on <a href="
-"\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
-"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
-"%%20Permission%%20denied\">Phabricator</a>"
-msgstr ""
-
-#: TWLight/templates/404.html:8
-msgid "Not found"
-msgstr ""
-
-#: TWLight/templates/404.html:11
-msgid "Sorry; we can't find that."
-msgstr ""
-
-#: TWLight/templates/404.html:14
-#, python-format
-msgid ""
-"If you are certain that something should be here, please email us about this "
-"error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia"
-"%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</"
-"a> or report it to us on <a href=\"https://phabricator.wikimedia.org/"
-"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
-"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found"
-"\">Phabricator</a>"
-msgstr ""
-
-#: TWLight/templates/about.html:6
-msgid "About the Wikipedia Library"
-msgstr "Tietoa Wikipedian Lähdekirjastosta"
-
-#: TWLight/templates/about.html:9
-msgid ""
-"The Wikipedia Library provides free access to research materials to improve "
-"your ability to contribute content to the Wikimedia projects."
-msgstr ""
-"Wikipedian Lähdekirjasto tarjoaa ilmaisen pääsyn lukuisiin lähteisiin, joita "
-"voi käyttää tutkimuksen apuna Wikimedia-projektien sisältöjen kehittämiseksi "
-"Yhteistyökumppaneihin lukeutuu lukuisia tietokantoja, jota tarjoavat "
-"käyttöoikeuksia kirjoihin, julkaisuihin, sanomalehtiin, videoihin, ja muihin "
-"hyödyllisiin materiaaleihin."
-
-#: TWLight/templates/about.html:16
-msgid ""
-"The Wikipedia Library Card Platform is our central tool for reviewing "
-"applications and providing access to those partner resources. Here you can "
-"see which partnerships are available and what kinds of materials each "
-"database provides, and apply for the ones you want. Volunteer coordinators, "
-"who have signed non-disclosure agreements with the Wikimedia Foundation, "
-"review applications and work with partners to get you your free access."
-msgstr ""
-"Wikipedian Lähdekirjaston Käyttöoikeustoimisto on keskeinen välineemme "
-"hakemusten arviointiin ja käyttöoikeuksien jakamiseen. Täällä voit nähdä "
-"mitkä yhteistökumppanuudet ovat käytettävissä ja millaisia aineistoja "
-"jokainen tietokanta tarjoaa, ja hakea käyttöoikeutta mihin haluat. "
-"Vapaaehtoiset koordinaattorit, jotka ovat allekirjoittaneet "
-"salassapitosopimuksen Wikimedia-säätiln kanssa, arvioivat hakemuksia "
-"säännöllisesti, ja kun tarpeeksi hakemuksia on hyväksytty, työskentelevät "
-"julkaisijan kanssa, jotta saisit käyttöoikeutesi."
-
-#: TWLight/templates/about.html:23
-#, python-format
-msgid ""
-"For more information about how application information is stored and "
-"reviewed please see our <a href=\"%(terms_url)s\">terms of use</a>. Accounts "
-"you apply for are also subject to the Terms of Use provided by each "
-"partner’s platform; please review them."
-msgstr ""
-
-#: TWLight/templates/about.html:28
-msgid "Who can receive access?"
-msgstr "Kuka voi saada käyttöoikeuden?"
-
-#: TWLight/templates/about.html:31
-msgid ""
-"Any active editor in good standing can receive access.  Applications are "
-"reviewed based on the editor’s need and contributions. If you think you "
-"could use access to one of our partner resources and are an active editor in "
-"any project supported by the Wikimedia Foundation, please apply."
-msgstr ""
-"Kuka tahansa aktiivinen ja hyvämaineinen muokkaaja voi saada käyttöoikeuden. "
-"Hakemukset arvioidaan muokkaajan tarpeen ja yleisten Wikimedia-muokkausten "
-"perusteella. Jos koet tarvitsevasi käyttöoikeutta johonkin "
-"yhteistyökumppanimme aineistoon ja olet aktiivinen Wikimedian muokkaaja "
-"missä tahansa Wikimedia-säätiön projektissa, hae toki!"
-
-#: TWLight/templates/about.html:37
-msgid ""
-"Any editor can apply for access, but there are a few basic requirements:"
-msgstr ""
-"Kuka tahansa muokkaaja voi hakea käyttöoikeutta, mutta tiettujen ehtojen "
-"pitää täyttyä:"
-
-#: TWLight/templates/about.html:40
-msgid "You have your preferences enabled to receive email on your home wiki"
-msgstr ""
-"Sinulla on asetuksissasi mahdollistettu sähköpostin lähettäminen "
-"kotiwikissäsi"
-
-#: TWLight/templates/about.html:43
-msgid "You have an account that is a minimum of 6 months old"
-msgstr "Sinulla on käyttäjätunnus, joka on vähintään kuusi kuukautta vanha"
-
-#: TWLight/templates/about.html:46
-msgid "You have a minimum of 500 edits"
-msgstr "Sinulla on vähintään 500 muokkausta tietosanakirjassa"
-
-#: TWLight/templates/about.html:49
-msgid ""
-"You do not already have access to the resources you’re applying for through "
-"another library or institution"
-msgstr ""
-"Sinulla ei ole käyttöoikeutta hakemaasi aineistoon toisen kirjaston tai "
-"instituution kautta"
-
-#: TWLight/templates/about.html:55
-msgid ""
-"If you don't quite meet the experience requirements but think you would "
-"still be a strong candidate for access, feel free to apply and you may still "
-"be considered.  Note that \"home wiki\" can mean any Wikipedia you are "
-"active on."
-msgstr ""
-"Vaikka et täyttäisi vaatimuksia, mutta koet että olisit hyvä ehdokas, hae "
-"silti. Arvioimme hakijat tapauskohtaisesti. Huomaathan, että \"kotiwiki\" "
-"voi tarkoittaa mitä tahansa Wikipediaa, jossa olet aktiivinen; tärkeintä "
-"on , että kyseisessä Wikipediassa olet laittanut sähköpostin päälle "
-"asetuksista."
-
-#: TWLight/templates/about.html:62
-msgid "What do I do after I get access?"
-msgstr "Mitä teen kun olen saanut käyttöoikeuden?"
-
-#: TWLight/templates/about.html:65
-msgid ""
-"Once you have access we encourage you to use the databases for both research "
-"that creates or improves Wikimedia content and serves your other research "
-"needs."
-msgstr ""
-"Kun olet saanut käyttöoikeuden, kannustamme sinua käyttämään tietokantoja "
-"tutkimukseen, jolla voit luoda tai parantaa Wikimedian sisältöjä.Tutki mitä "
-"tahansa käyttöoikeutesi avulla!"
-
-#: TWLight/templates/about.html:71
-msgid ""
-"Please keep in mind, our agreements with partners carry certain expectations."
-msgstr ""
-"Huomioithan, että sopimuksemme yhteistyökumppanien kanssa sisältävät "
-"tiettyjä odotuksia."
-
-#: TWLight/templates/about.html:77
-msgid "Approved editors <i>may</i> use their access to:"
-msgstr "Hyväksytyt muokkaajat <i>saavat</i> käyttää käyttöoikeuttaan:"
-
-#: TWLight/templates/about.html:80
-msgid "Search, view, retrieve, and display partner content"
-msgstr ""
-"etsiäkseen, näyttääkseen, tallentaakseen ja esittääkseen osia rajoitetusta "
-"sisällöstä"
-
-#: TWLight/templates/about.html:83
-msgid "Electronically save partner content"
-msgstr "tallentaa sähköisesti osia rajoitetusta sisällöstä"
-
-#: TWLight/templates/about.html:86
-msgid "Print out single copies of partner content"
-msgstr "tulostaa yksittäisiä kopioita osista rajoitettua sisältöä"
-
-#: TWLight/templates/about.html:92
-msgid "Approved editors <i>should not</i>:"
-msgstr "Hyväksytyt muokkaajat <i>eivät saa</i>:"
-
-#: TWLight/templates/about.html:95
-msgid ""
-"Share their account logins or passwords with others, or sell their access to "
-"other parties"
-msgstr ""
-"Jakaa tunnuksiaan tai salasanojaan muiden kanssa tai myydä "
-"niitäulkopuolisille tahoille"
-
-#: TWLight/templates/about.html:98
-msgid "Mass scrape or mass download partner content"
-msgstr "Massaladata yhteistyökumppanin sisältöjä"
-
-#: TWLight/templates/about.html:101
-msgid ""
-"Systematically make printed or electronic copies of multiple extracts of "
-"restricted content available for any purpose"
-msgstr ""
-"Järjestelmällisesti tehdä tulostettuja ja sähköisiä kopioita lukuisista "
-"rajoitetuista sisällöistä, oli tarkoitus mikä tahansa"
-
-#: TWLight/templates/about.html:104
-msgid ""
-"Datamine metadata without permission, in order, for instance, to use "
-"metadata for auto-created stub articles"
-msgstr ""
-"Louhia metadataa ilman lupaa esimerkiksi automaattisesti luotavia "
-"tynkäartikkeleita varten."
-
-#: TWLight/templates/about.html:110
-msgid ""
-"Respecting these agreements allows us to continue growing the partnerships "
-"available to our entire community."
-msgstr ""
-"Sopimusten noudattaminen mahdollistaa uusien yhteistyökumppanien ja "
-"aineistojen hankkimisen yhteisöllemme."
-
-#. Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if you use other tags on your wiki. If you're not sure how to handle this section, take your best guess and give the developer a heads-up.
-#: TWLight/templates/about.html:119
-msgid ""
-"Citation practices vary by project and even by article.  Generally, we "
-"support editors citing where they found information, in a form that allows "
-"others to check it for themselves.  That often means providing both original "
-"source details as well as a link to the partner database in which the source "
-"was found. You can use &lt;code&gt;|via=&lt;code&gt; in templates using CS1 "
-"citation format or add &lt;code&gt;&lbrace;&lbrace;subscription required|"
-"via=&rbrace;&rbrace;&lt;/code&gt; to identify the provider."
-msgstr ""
-"Viittauskäytännöt vaihtelevat projekteittain ja jopa artikkeleittain. "
-"Yleisesti ottaen suosittelemme muokkaajia viittaamaan lähteeseen, josta he "
-"löysivät tiedon, muodossa joka sallii muiden tarkistaa tiedon itse "
-"haluamallaan tavalla.  Se tarkoittaa alkuperäisen lähteen tietojen "
-"merkitsemistä ja linkittämistä yhteistyökumppanin tietokantaan. "
-
-#: TWLight/templates/about.html:125
-msgid "Here is one citation example:"
-msgstr "Tässä yksi viite esimerkiksi:"
-
-#: TWLight/templates/about.html:147
-msgid "Whom do I contact if I have questions, need help, or want to volunteer?"
-msgstr ""
-"Kehen otan yhteyttä, jos tarvitsen apua tai haluan ilmoittautua "
-"vapaaehtoiseksi?"
-
-#: TWLight/templates/about.html:150
-msgid "Email:"
-msgstr "Sähköposti:"
-
-#: TWLight/templates/about.html:156
-msgid "Talk page:"
-msgstr "Keskustelusivu"
-
-#: TWLight/templates/base.html:14 TWLight/templates/base.html.py:108
-msgid "The Wikipedia Library Card Platform"
-msgstr "Wikipedian Lähdekirjaston Käyttöoikeustoimisto"
-
-#: TWLight/templates/base.html:37 TWLight/templates/base.html.py:41
-#, python-format
-msgid ""
-"\n"
-"            Hi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
-"          "
-msgstr ""
-"\n"
-"            Terve, <a href=\"%(home_url)s\">%(username)s</a>!\n"
-"          "
-
-#: TWLight/templates/base.html:50
-msgid "Browse"
-msgstr "Selaa yhteistyökumppaneita"
-
-#: TWLight/templates/base.html:63
-msgid "Review"
-msgstr "Arvioi hakemukset"
-
-#: TWLight/templates/base.html:70
-msgid "Send data to partners"
-msgstr "Lähetä tiedot yhteistyökumppanille"
-
-#: TWLight/templates/base.html:76
-msgid "Latest activity"
-msgstr "Viimeisin toiminta"
-
-#: TWLight/templates/base.html:88
-msgid "Log out"
-msgstr "Kirjaudu ulos"
-
-#: TWLight/templates/base.html:94 TWLight/templates/home.html:19
-msgid "Log in"
-msgstr "Kirjaudu sisään/luo tunnus"
-
-#: TWLight/templates/base.html:121
-#, python-format
-msgid ""
-"\n"
-"          You don't have an email on file. We can't finalize your access to\n"
-"          partner resources without an email. Please\n"
-"          <a href=\"%(email_url)s\">update your email</a>.\n"
-"        "
-msgstr ""
-
-#: TWLight/templates/base.html:137
-msgid ""
-"The Wikipedia Library Card Platform is a project of <a href=\"https://meta."
-"wikimedia.org/wiki/The_Wikipedia_Library\"> The Wikipedia Library</a>."
-msgstr ""
-"Wikipedian Lähdekirjaston Käyttöoikeustoimisto on <a href=\"https://meta."
-"wikimedia.org/wiki/The_Wikipedia_Library\"> Wikipedian Lähdekirjaston</a> "
-"projekti."
-
-#: TWLight/templates/base.html:148
-msgid ""
-"This work is licensed under a <a rel=\"license\" href=\"http://"
-"creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
-"ShareAlike 4.0 International License</a>."
-msgstr ""
-
-#. Translators: As in "about this site" - a menu link to the about page.
-#: TWLight/templates/base.html:160
-msgid "About"
-msgstr "Tietoa"
-
-#: TWLight/templates/base.html:165
-msgid "Privacy policy"
-msgstr "Yksityisyydensuojakäytäntö"
-
-#: TWLight/templates/base.html:175
-msgid "Feedback"
-msgstr "Palaute"
-
-#: TWLight/templates/base.html:180
-msgid "Phabricator"
-msgstr ""
-
-#: TWLight/templates/dashboard.html:16
-msgid "Total partners (all time)"
-msgstr "Kaikki yhteistyökumppanit (kautta aikojen)"
-
-#: TWLight/templates/dashboard.html:22
-msgid "See all partners"
-msgstr "Näytä kaikki yhteistyökumppanit"
-
-#: TWLight/templates/dashboard.html:38
-msgid "Number of editors (all time)"
-msgstr "Muokkaajien määrä (kautta aikojen)"
-
-#: TWLight/templates/dashboard.html:44
-msgid "Jump to user metrics"
-msgstr "Siirry käyttäjätilastoihin"
-
-#: TWLight/templates/dashboard.html:66
-msgid "Jump to application metrics"
-msgstr "Siirry hakemustilastoihin"
-
-#: TWLight/templates/dashboard.html:79
-msgid "Page views (staff only)"
-msgstr ""
-
-#: TWLight/templates/dashboard.html:84
-msgid "Most popular pages"
-msgstr ""
-
-#: TWLight/templates/dashboard.html:91 TWLight/templates/dashboard.html:114
-#, fuzzy
-#| msgid "Number of users"
-msgid "Number of views"
-msgstr "Käyttäjien lukumäärä"
-
-#: TWLight/templates/dashboard.html:107
-msgid "Partner pages by popularity"
-msgstr ""
-
-#: TWLight/templates/dashboard.html:138
-msgid "Partners"
-msgstr "Yhteistyökumppanit"
-
-#: TWLight/templates/dashboard.html:144
-msgid "Number of partners over time"
-msgstr "Yhteistyökumppanit kautta aikojen"
-
-#: TWLight/templates/dashboard.html:153
-msgid "Editors"
-msgstr "Muokkaajat"
-
-#: TWLight/templates/dashboard.html:160
-msgid "Home wiki distribution"
-msgstr "Kotiwikeittäin"
-
-#: TWLight/templates/dashboard.html:191
-msgid "Home wiki distribution over time"
-msgstr "Muokkaajat kotiwikeittäin kautta aikojen"
-
-#: TWLight/templates/dashboard.html:203
-msgid "Applications"
-msgstr "Hakemukset"
-
-#: TWLight/templates/dashboard.html:205
-msgid "Applications by number of days until decision"
-msgstr ""
-"Hakemukset jaoteltuna sen mukaan, kuinka monta päivää päätöksen tekemisessä "
-"kesti"
-
-#: TWLight/templates/dashboard.html:207
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "          The x axis is the number of days to make a final decision "
-#| "(either\n"
-#| "          approved or denied) on an application. The y axis is the number "
-#| "of\n"
-#| "          applications that have taken exactly that many days to decide.\n"
-#| "        "
-msgid ""
-"The x axis is the number of days to make a final decision (either approved "
-"or denied) on an application. The y axis is the number of applications that "
-"have taken exactly that many days to decide."
-msgstr ""
-"\n"
-"          X-asteikko kuvaa, kuinka monta päivää hakemuksesta päätöksen "
-"tekemiseen on mennyt (joko hylättyyn\n"
-"          tai hyväksyttyyn). Y-asteikko kuvaa          kuinka monen "
-"hakemuksen suhteen on tehty päätös kussakin ajanjaksossa.\n"
-"        "
-
-#: TWLight/templates/dashboard.html:215
-msgid "Median days until application decision, per month"
-msgstr "Mediaanipäivät hakemuksesta päätökseen, per kuukausi"
-
-#: TWLight/templates/dashboard.html:217
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "          This shows the median number of days to reach a decision on "
-#| "the\n"
-#| "          applications opened in a given month.\n"
-#| "        "
-msgid ""
-"This shows the median number of days to reach a decision on the applications "
-"opened in a given month."
-msgstr ""
-"\n"
-"          Tämä kuvaa päätöksen tekemiseen kuluvien päivien mediaanilukua \n"
-"           tiettynä kuukautena.\n"
-"        "
-
-#: TWLight/templates/dashboard.html:224
-msgid "Current application status distribution"
-msgstr "Tämänhetkiset tilat hakemuksissa"
-
-#: TWLight/templates/dashboard.html:226
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "          This graph includes all applications opened ever on this site.\n"
-#| "        "
-msgid "This graph includes all applications opened ever on this site."
-msgstr ""
-"\n"
-"          Tämä kaavio sisältää kaikki hakemukset, jotka ikinä on avattu "
-"tällä sivulla.\n"
-"        "
-
-#: TWLight/templates/home.html:7
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "      Welcome to the Wikipedia Library Card Platform! Here you can apply "
-#| "for access to dozens of extensive research resources available through "
-#| "The Wikipedia Library.        \n"
-#| "    "
-msgid ""
-"Welcome to the Wikipedia Library Card Platform! Here you can apply for "
-"access to dozens of extensive research resources available through The "
-"Wikipedia Library."
-msgstr ""
-"\n"
-"      Tervetuloa Wikipedian Lähdekirjaston Käyttöoikeustoimistoon! Täällä "
-"voit hakea käyttöoikeutta lukuisiin kattaviin tutkimustietokantoihin ja "
-"muihin aineistoihin,jotka ovat saatavilla Wikipedian Lähdekirjaston "
-"kautta.        \n"
-"    "
-
-#: TWLight/templates/home.html:15
-msgid "Learn more"
-msgstr "Lue lisää"
-
-#: TWLight/templates/registration/login.html:15
-msgid "Log in with your Wikipedia account"
-msgstr "Kirjaudu sisään Wikipedia-tunnuksellasi"
-
-#: TWLight/templates/registration/password_change_form.html:10
-#: TWLight/users/templates/users/preferences.html:27
-msgid "Change password"
-msgstr "Vaihda salasana"
-
-#: TWLight/templates/registration/password_reset_form.html:6
-#: TWLight/templates/registration/password_reset_form.html:14
-msgid "Reset password"
-msgstr "Nollaa salasana"
-
-#: TWLight/templates/registration/password_reset_form.html:8
-msgid ""
-"Forgot your password? Enter your email address below, and we'll email "
-"instructions for setting a new one."
-msgstr ""
-"Unohditko salasanasi? Anna sähköpostiosoitteesi, niin lähetämme sinulle "
-"ohjeet uuden salasanan luomiseksi."
-
-#: TWLight/users/admin.py:33
-#, python-brace-format
-msgid "User {user} deactivated."
-msgstr ""
-
-#: TWLight/users/authorization.py:210
-msgid "You tried to log in but presented an invalid access  token."
-msgstr ""
-
-#: TWLight/users/authorization.py:264 TWLight/users/authorization.py:326
-#, python-brace-format
-msgid "{domain} is not an allowed host."
-msgstr ""
-
-#: TWLight/users/authorization.py:336
-msgid "Could not find handshaker."
-msgstr ""
-
-#: TWLight/users/authorization.py:346
-msgid "No request token."
-msgstr ""
-
-#: TWLight/users/authorization.py:355
-msgid "Access token generation failed."
-msgstr ""
-
-#: TWLight/users/authorization.py:368
-msgid ""
-"Your Wikipedia account does not meet the eligibility criteria in the terms "
-"of use, so your Wikipedia Library Card Platform account cannot be activated."
-msgstr ""
-"Wikipedia-käyttäjätunnuksesi ei täytä kelpoisuusehtoja, jotka on esitetty "
-"käyttöehdoissa, joten Käyttöoikeustoimiston tunnustasi ei voida aktivoida."
-
-#: TWLight/users/authorization.py:373
-msgid ""
-"Either your Wikipedia Library Card Platform account has been deactivated or "
-"your Wikipedia account no longer meets the eligibility criteria in the terms "
-"of use, so you cannot be logged in."
-msgstr ""
-"Joko Wikipedian Lähdekirjaston Käyttöoikeustoimiston tunnus on poistettu "
-"käytöstä tai Wikipedian käyttäjätunnuksesi ei täytä käyttöehdoissa "
-"määriteltyjä kelpoisuusehtoja, joten et voi kirjautua sisään."
-
-#. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/authorization.py:385
-msgid "Welcome! Please agree to the terms of use."
-msgstr "Tervetuloa! Hyväksythän käyttöehdot."
-
-#: TWLight/users/authorization.py:389
-msgid "Welcome back!"
-msgstr "Tervetuloa takaisin!"
-
-#: TWLight/users/forms.py:26
-msgid "Update profile"
-msgstr "Päivitä profiili"
-
-#: TWLight/users/forms.py:33
-msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
-msgstr "Kuvaile muokkauksiasi Wikipediassa: mitä aiheita olet muokannut jne."
-
-#: TWLight/users/forms.py:58
-msgid "I agree with the terms of use"
-msgstr "Hyväksyn käyttöehdot"
-
-#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:67
-msgid "I accept"
-msgstr "Hyväksyn"
-
-#: TWLight/users/forms.py:80
-msgid "Use my Wikipedia email address"
-msgstr ""
-
-#: TWLight/users/forms.py:92
-msgid "Update email"
-msgstr "Päivitä sähköposti"
-
-#: TWLight/users/models.py:61
-msgid "Has this user agreed with the terms of use?"
-msgstr "Onko tämä käyttäjä hyväksynyt käyttöehdot?"
-
-#: TWLight/users/models.py:62
-msgid ""
-"Should we automatically update their email from their Wikipedia email when "
-"they log in? Defaults to True."
-msgstr ""
-
-#: TWLight/users/models.py:93
-msgid "When this information was last edited"
-msgstr "Milloin tätä tietoa viimeksi muokattiin"
-
-#: TWLight/users/models.py:95
-msgid "When this profile was first created"
-msgstr "Milloin tämä profiili luotiin"
-
-#: TWLight/users/models.py:103
-msgid "Wikipedia edit count"
-msgstr "Muokkausmäärä Wikipediassa"
-
-#: TWLight/users/models.py:104
-msgid "Date registered at Wikipedia"
-msgstr "Käyttäjätunnuksen luomispäivämäärä Wikipediassa"
-
-#: TWLight/users/models.py:106
-msgid "Wikipedia user ID"
-msgstr "Wikipedian käyttäjätunnuksen ID"
-
-#: TWLight/users/models.py:111
-msgid "Wikipedia groups"
-msgstr "Käyttäjäryhmät Wikipediassa"
-
-#: TWLight/users/models.py:112
-msgid "Wikipedia user rights"
-msgstr "Käyttäjäoikeudet Wikipediassa"
-
-#: TWLight/users/models.py:114
-msgid ""
-"At their last login, did this user meet the criteria in the terms of use?"
-msgstr ""
-"Tåyttikö käyttäjä viimeisimmässä kirjautumisessaan Wikipedian Lähdekirjaston "
-"Käyttöoikeustoimiston käyttöehdot?"
-
-#: TWLight/users/models.py:120
-msgid "Wiki contributions, as entered by user"
-msgstr "Käyttäjän antama muokkausmäärä"
-
-#: TWLight/users/models.py:340
-#, fuzzy, python-brace-format
-#| msgid "{wp_username} ({wiki})"
-msgid "{wp_username}"
-msgstr "{wp_username} ({wiki})"
-
-#: TWLight/users/templates/users/editor_detail.html:8
+#. Translators: This is the main title for the editor profile page. Don't translate username.
+#: TWLight/users/templates/users/editor_detail.html:9
 #, python-format
 msgid "Editor profile information for %(username)s"
 msgstr "Muokkaajan %(username)s profiilitiedot"
 
-#: TWLight/users/templates/users/editor_detail.html:10
+#. Translators: This is the title of the section of a user's profile showing their history of applications.
+#: TWLight/users/templates/users/editor_detail.html:12
 msgid "Editor application history"
 msgstr "Muokkaajan hakemushistoria"
 
-#: TWLight/users/templates/users/editor_detail.html:14
+#. Translators: Users viewing their own profile can click this button to file an application for access to resources.
+#: TWLight/users/templates/users/editor_detail.html:17
 msgid "Start new application"
 msgstr "Aloita uusi hakemus"
 
-#: TWLight/users/templates/users/editor_detail.html:20
+#. Translators: This is the heading for user information on profile and application pages.
+#: TWLight/users/templates/users/editor_detail.html:24
 msgid "Editor data"
 msgstr "Muokkaajan tiedot"
 
-#: TWLight/users/templates/users/editor_detail.html:29
+#. Translators: This is shown on editor profiles, in their profile page or on applications. Don't translate last_updated_date.
+#: TWLight/users/templates/users/editor_detail.html:34
 #, python-format
 msgid ""
 "\n"
@@ -1997,7 +57,8 @@ msgstr ""
 "      Viimeksi päivitetty %(last_updated_date)s.\n"
 "    "
 
-#: TWLight/users/templates/users/editor_detail.html:41
+#. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
+#: TWLight/users/templates/users/editor_detail.html:47
 #, python-format
 msgid ""
 "\n"
@@ -2009,27 +70,33 @@ msgstr ""
 "sivulla.\n"
 "            "
 
-#: TWLight/users/templates/users/editor_detail_data.html:5
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
+#: TWLight/users/templates/users/editor_detail_data.html:6
 msgid "Username *"
 msgstr "käyttäjätunnus Wikipediassa"
 
-#: TWLight/users/templates/users/editor_detail_data.html:11
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's SUL info through an external tool. (e.g. https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=Samwalton9%20(WMF))
+#: TWLight/users/templates/users/editor_detail_data.html:13
 msgid "view Wikipedia SUL info"
 msgstr "näytä Wikipedian yhdistetty käyttäjätunnus -tiedot"
 
-#: TWLight/users/templates/users/editor_detail_data.html:20
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's description of their Wikipedia edits.
+#: TWLight/users/templates/users/editor_detail_data.html:23
 msgid "Contributions"
 msgstr "Muokkaukset"
 
-#: TWLight/users/templates/users/editor_detail_data.html:27
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
+#: TWLight/users/templates/users/editor_detail_data.html:31
 msgid "(update)"
 msgstr "(päivitä)"
 
-#: TWLight/users/templates/users/editor_detail_data.html:37
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
+#: TWLight/users/templates/users/editor_detail_data.html:42
 msgid "Satisfies terms of use?"
 msgstr "Vastaa käyttöehtoja?"
 
-#: TWLight/users/templates/users/editor_detail_data.html:39
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
+#: TWLight/users/templates/users/editor_detail_data.html:45
 #, fuzzy
 #| msgid ""
 #| "At their last login, did this user meet the criteria in the terms of use?"
@@ -2040,11 +107,17 @@ msgstr ""
 "Tåyttikö käyttäjä viimeisimmässä kirjautumisessaan Wikipedian Lähdekirjaston "
 "Käyttöoikeustoimiston käyttöehdot?"
 
-#: TWLight/users/templates/users/editor_detail_data.html:47
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
+#: TWLight/users/templates/users/editor_detail_data.html:54
 msgid "Yes"
 msgstr "Kyllä"
 
-#: TWLight/users/templates/users/editor_detail_data.html:51
+#: TWLight/users/templates/users/editor_detail_data.html:56
+msgid "No"
+msgstr "Ei"
+
+#. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
+#: TWLight/users/templates/users/editor_detail_data.html:59
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -2060,7 +133,7 @@ msgstr ""
 "            koordinaattorien harkinnan mukaisesti.\n"
 "          "
 
-#: TWLight/users/templates/users/editor_detail_data.html:57
+#: TWLight/users/templates/users/editor_detail_data.html:65
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -2082,36 +155,40 @@ msgstr ""
 "epäkelpoisiksi. Kirjastokorttipalvelu tarkistaa ainoastaan aktiivisuuden "
 "kotiwikissä."
 
-#: TWLight/users/templates/users/editor_detail_data.html:72
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
+#: TWLight/users/templates/users/editor_detail_data.html:81
 #, fuzzy
 #| msgid "Wikipedia edit count *"
 msgid "Global edit count *"
 msgstr "Muokkausmäärä Wikipediassa"
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
-#: TWLight/users/templates/users/editor_detail_data.html:79
+#: TWLight/users/templates/users/editor_detail_data.html:88
 msgid "(view global user contributions)"
 msgstr ""
 
-#: TWLight/users/templates/users/editor_detail_data.html:88
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Wikipedia account. Don't remove the *
+#: TWLight/users/templates/users/editor_detail_data.html:98
 msgid "Date registered on Wikipedia *"
 msgstr "Wikipediaan rekisteröity päivämäärä *"
 
 #. Translators: The groups will be listed in English even if the site isn't English; we get them directly from Wikipedia.
-#: TWLight/users/templates/users/editor_detail_data.html:100
+#: TWLight/users/templates/users/editor_detail_data.html:110
 msgid "Wikipedia groups *"
 msgstr "Wikipedian käyttäjäryhmät"
 
 #. Translators: The rights will be listed in English even if the site isn't English; we get them directly from Wikipedia.
-#: TWLight/users/templates/users/editor_detail_data.html:116
+#: TWLight/users/templates/users/editor_detail_data.html:126
 msgid "Wikipedia user rights *"
 msgstr "Wikipedian käyttöoikeudet"
 
-#: TWLight/users/templates/users/editor_detail_data.html:131
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
+#: TWLight/users/templates/users/editor_detail_data.html:142
 msgid "Wikipedia user ID *"
 msgstr "Wikipedian käyttäjätunnuksen ID"
 
-#: TWLight/users/templates/users/editor_detail_data.html:146
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/editor_detail_data.html:158
 msgid ""
 "The following information is visible only to you, site administrators, and "
 "(where required) publishing partners. It is not visible to volunteer "
@@ -2121,7 +198,8 @@ msgstr ""
 "(tarvittaessa) yhteistyökumppaneille. Sitä ei näytetä vapaaehtoisille "
 "Wikipedian Lähdekirjaston koordinaattoreille."
 
-#: TWLight/users/templates/users/editor_detail_data.html:154
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
+#: TWLight/users/templates/users/editor_detail_data.html:167
 #, python-format
 msgid ""
 "You may <a href=\"%(update_url)s\">update or delete</a> your data at any "
@@ -2130,51 +208,69 @@ msgstr ""
 "Voit <a href=\"%(update_url)s\">päivittää tai poistaa</a> tietojasi milloin "
 "tahansa."
 
-#: TWLight/users/templates/users/editor_detail_data.html:164
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
+#: TWLight/users/templates/users/editor_detail_data.html:178
 msgid "Email *"
 msgstr "Sähköposti"
 
-#: TWLight/users/templates/users/editor_detail_data.html:169
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is under the email if their email is automatically updated from their Wikipedia account.
+#: TWLight/users/templates/users/editor_detail_data.html:184
 msgid "This will be automatically updated from Wikipedia."
 msgstr "Tämä päivittyy automaattisesti Wikipedian kautta"
 
-#: TWLight/users/templates/users/editor_detail_data.html:178
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
+#: TWLight/users/templates/users/editor_detail_data.html:194
 msgid "Real name"
 msgstr "Oikea nimi"
 
-#: TWLight/users/templates/users/editor_detail_data.html:189
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
+#: TWLight/users/templates/users/editor_detail_data.html:206
 msgid "Country of residence"
 msgstr "Asuinmaa"
 
-#: TWLight/users/templates/users/editor_detail_data.html:200
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
+#: TWLight/users/templates/users/editor_detail_data.html:218
 msgid "Occupation"
 msgstr "Ammatti"
 
-#: TWLight/users/templates/users/editor_detail_data.html:211
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
+#: TWLight/users/templates/users/editor_detail_data.html:230
 msgid "Institutional affiliation"
 msgstr "Instituutio"
 
-#: TWLight/users/templates/users/language_form.html:25
+#. Translators: Users click this button to set their interface language.
+#: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
 msgstr "Aseta kieli"
 
-#: TWLight/users/templates/users/preferences.html:20
+#: TWLight/users/templates/users/preferences.html:8
+msgid "Language"
+msgstr "Kieli"
+
+#. Translators: This is the heading of the section of a user's profile where they can change their password.
+#: TWLight/users/templates/users/preferences.html:21
 msgid "Password"
 msgstr "Salasana"
+
+#: TWLight/users/templates/users/preferences.html:28
+msgid "Change password"
+msgstr "Vaihda salasana"
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:19
 msgid "Last updated 8 August 2016"
 msgstr "Viimeksi päivitetty 8. elokuuta 2016"
 
-#: TWLight/users/templates/users/terms.html:21
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:22
 msgid ""
 "Welcome to the Wikipedia Library Card Terms of Use and Privacy Statement!"
 msgstr ""
 "Tervetuloa Wikipedian Lähdekirjaston Käyttöoikeustoimiston käyttöehtoihin ja "
 "yksityisyydensuojakäytäntöön!"
 
-#: TWLight/users/templates/users/terms.html:29
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:31
 msgid ""
 "The Wikipedia Library is an open research hub, through which active "
 "Wikipedia editors can gain both access to the vital reliable sources needed "
@@ -2193,7 +289,8 @@ msgstr ""
 "käyttöoikeutta useilta eri julkaisijoilta, ja samalla Wikipedian "
 "Lähdekirjaston hallinnointi helpottuu."
 
-#: TWLight/users/templates/users/terms.html:35
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:38
 msgid ""
 "These terms pertain to your application for access to Wikipedia Library "
 "resources, and your use of those resources. They also describe our handling "
@@ -2213,11 +310,13 @@ msgstr ""
 "merkittäviä muutoksia ehtoihin, lähetämme ilmoituksen sähköpostitse "
 "Wikipedian Lähdekirjaston käyttäjille."
 
-#: TWLight/users/templates/users/terms.html:40
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:44
 msgid "Requirements for a Wikipedia Library Card Account"
 msgstr "Vaatimukset Wikipedian Lähdekirjaston tunnukselle"
 
-#: TWLight/users/templates/users/terms.html:43
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Special:EmailUser should be translated to this language's title for https://en.wikipedia.org/wiki/Special:EmailUser.
+#: TWLight/users/templates/users/terms.html:48
 msgid ""
 "As a preliminary note, Wikipedia Library accounts are reserved for community "
 "members who have demonstrated their commitment to the Wikimedia projects, "
@@ -2245,7 +344,8 @@ msgstr ""
 "johon sinulla on jo käyttöoikeus jotain toista kautta, jotta käyttöoikeus "
 "jäisi jonkun sitä enemmän tarvitsevan saataville."
 
-#: TWLight/users/templates/users/terms.html:49
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:55
 msgid ""
 "Additionally, if you are currently blocked or banned from a Wikimedia "
 "project, you may be rejected when you apply for a Wikipedia Library account. "
@@ -2257,7 +357,8 @@ msgstr ""
 "voidaan hylätä. Tunnuksesi voidaan myös poistaa käytöstä, mikäli saat eston "
 "jossain Wikimedia-projektissa."
 
-#: TWLight/users/templates/users/terms.html:55
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:62
 msgid ""
 "Wikipedia Library Card accounts do not expire. However, access to an "
 "individual publisher’s resources will generally lapse after one year, after "
@@ -2271,11 +372,13 @@ msgstr ""
 "huomauttamaan sinua etukäteen tunnuksen vanhentumisesta, tai voimme jopa "
 "uusia sen automaattisesti, jos käyttöoikeuksia on jäljellä."
 
-#: TWLight/users/templates/users/terms.html:60
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:68
 msgid "Applying for Your Wikipedia Library Card Account"
 msgstr "Wikipedian Lähdekirjaston Käyttöoikeustoimiston tunnuksen hakeminen"
 
-#: TWLight/users/templates/users/terms.html:63
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:72
 msgid ""
 "In order to apply for a Wikipedia Library Card account, you must provide us "
 "with certain information, which we will use to evaluate your application. If "
@@ -2293,7 +396,8 @@ msgstr ""
 "tapauksissa julkaisijat ottavat sinuun suoraan yhteyttä, mutta toisinaan me "
 "lähetämme tiedot itse."
 
-#: TWLight/users/templates/users/terms.html:70
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). partners_page should not be translated.
+#: TWLight/users/templates/users/terms.html:80
 #, python-format
 msgid ""
 "Each publisher who is a member of the Wikipedia Library program requires "
@@ -2316,7 +420,8 @@ msgstr ""
 "sivuun</a> saadaksesi lisää tietoa siitä, mitä tietoja julkaisijat vaativat "
 "käyttöoikeuden myöntämiseksi."
 
-#: TWLight/users/templates/users/terms.html:76
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:87
 msgid ""
 "In addition to the basic information you provide to us, our system will "
 "retrieve some information directly from the Wikimedia projects: your "
@@ -2331,7 +436,8 @@ msgstr ""
 "oikeudet. Joka kerta kun kirjaudut sisään Wikipedian Lähdekirjaston "
 "Käyttöoikeustoimistoon, tiedot päivitetään automaattisesti."
 
-#: TWLight/users/templates/users/terms.html:82
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:94
 msgid ""
 "The information you provide when creating your account will be visible to "
 "you while on the site but not to other users unless they are approved "
@@ -2356,7 +462,8 @@ msgstr ""
 "julkisiksi, voivat lähettää Wikimedia-säätiön työntekijöille sähköpostia ja "
 "pyytää mahdollisuutta hakea käyttöoikeutta yksityisesti."
 
-#: TWLight/users/templates/users/terms.html:88
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:101
 msgid ""
 "We will ask you to identify your home wiki (or any Wikipedia version where "
 "you have enabled email), and finally to provide us with some information "
@@ -2370,11 +477,13 @@ msgstr ""
 "historiastasi ja muokkauksistasi Wikimedia-projekteissa. Muokkaushistoriasta "
 "kertominen on vapaaehtoisia, mutta se helpotaa hakemusten arviointia."
 
-#: TWLight/users/templates/users/terms.html:93
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:107
 msgid "Data Retention and Handling"
 msgstr "Tietojen säilytys ja käsittely"
 
-#: TWLight/users/templates/users/terms.html:97
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). user_home_url should not be translated.
+#: TWLight/users/templates/users/terms.html:112
 #, python-format
 msgid ""
 "In order to administer the Wikipedia Library program, we will retain the "
@@ -2391,7 +500,8 @@ msgstr ""
 "tahansa, lukuun ottamatta tietoja, jotka noudetaan automaattisesti "
 "projekteista."
 
-#: TWLight/users/templates/users/terms.html:103
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:119
 #, python-format
 msgid ""
 "If you decide to disable your Wikipedia Library account, you may email us at "
@@ -2417,7 +527,8 @@ msgstr ""
 "haluat myöhemmin luoda uuden tunnuksen, joudut täyttämään tarvittavat tiedot "
 "uudestaan."
 
-#: TWLight/users/templates/users/terms.html:111
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:128
 msgid ""
 "The Wikipedia Library is run by Wikimedia Foundation Staff, Contractors, and "
 "approved volunteer Coordinators who may have access to your information. The "
@@ -2436,7 +547,8 @@ msgstr ""
 "Muussa tapauksessa Wikimedia-säätiö jakaa tietojasi vain valitsemasi "
 "julkaisijan kanssa, lukuun ottamatta alla esiteltäviä poikkeustapauksia."
 
-#: TWLight/users/templates/users/terms.html:117
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:135
 msgid ""
 "We may disclose any collected information when required by law, when we have "
 "your permission, when needed to protect our rights, privacy, safety, users, "
@@ -2449,7 +561,8 @@ msgstr ""
 "tarpeellista valvoa palvelun käyttöehtojen, yleisten käyttöehtojemme tai "
 "jonkin muun Wikimedia-käytännön noudattamista."
 
-#: TWLight/users/templates/users/terms.html:123
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:142
 msgid ""
 "Please note that these terms do not control the use and handling of your "
 "data by the publishers whose resources you access. Please read their "
@@ -2459,11 +572,13 @@ msgstr ""
 "tietojasi. Lue yksittäisten julkaisijoiden yksityisyydensuojakäytännöt "
 "erikseen."
 
-#: TWLight/users/templates/users/terms.html:128
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:148
 msgid "Your Use of Publisher Resources"
 msgstr "Julkaisijan aineiston käyttö"
 
-#: TWLight/users/templates/users/terms.html:131
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:152
 msgid ""
 "Please note that in order to access an individual publisher’s resources, you "
 "agree to that publisher’s terms of use and privacy policy. Additionally, "
@@ -2475,7 +590,8 @@ msgstr ""
 "Lisäksikäyttöoikeuteesi julkaisijan aineistoon Wikipedia Lähdekirjaston "
 "kautta liittyvät seuraavat ehdot."
 
-#: TWLight/users/templates/users/terms.html:137
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:159
 #, fuzzy
 #| msgid ""
 #| "Your access allows you to search, view, retrieve and display portions of "
@@ -2493,7 +609,8 @@ msgstr ""
 "edellyttää käyttäjätunnusta); tallentaa sähköisesti osia rajoitetusta "
 "sisällöstä; jatulostaa yksittäisiä kopioita rajoitetusta sisällöstä."
 
-#: TWLight/users/templates/users/terms.html:143
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:166
 msgid ""
 "You must agree not to share your usernames and passwords for access to "
 "publisher resources with others."
@@ -2501,7 +618,8 @@ msgstr ""
 "Et saa jakaa muille käyttäjätunnustasi ja salasanaasi yhteistyökumppanin "
 "aineistoon."
 
-#: TWLight/users/templates/users/terms.html:149
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:173
 msgid ""
 "Your access to publisher resources does not allow you to mass scrape or mass "
 "download restricted content from publishers; to systematically make printed "
@@ -2518,7 +636,8 @@ msgstr ""
 "luomiseksi; tai myydä käyttöoikeuttasi tai aineistoja, joihin pääset käsiksi "
 "käyttöoikeuden myötä."
 
-#: TWLight/users/templates/users/terms.html:158
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:183
 msgid ""
 "The Wikimedia Foundation is a nonprofit organization based in San Francisco, "
 "California. The Wikipedia Library program provides access to resources held "
@@ -2545,7 +664,8 @@ msgstr ""
 "hakemuksesi arvioiminen ja käyttöoikeuden hankkiminen valitsemasi "
 "yhteistyökumppanin aineistoon."
 
-#: TWLight/users/templates/users/terms.html:166
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:192
 msgid ""
 "Please note that in the event of any differences in meaning or "
 "interpretation between the original English version of these terms and a "
@@ -2556,15 +676,18 @@ msgstr ""
 "käännettyjen käyttöehtojen välillä, englanninkieliset käyttöehdot ovat "
 "ensisijaiset."
 
-#: TWLight/users/templates/users/terms.html:173
+#. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:200
 msgid "Thank you!"
 msgstr "Kiitos!"
 
-#: TWLight/users/templates/users/terms.html:176
+#. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:204
 msgid "The Wikipedia Library Team"
 msgstr "Wikipedian Lähdekirjaston tiimi"
 
-#: TWLight/users/templates/users/terms.html:182
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:211
 msgid ""
 "By checking this box and clicking “I Accept”, you consent to the above "
 "privacy statement and terms, and agree to adhere to them in your application "
@@ -2592,7 +715,8 @@ msgstr ""
 "     , joten olet luultavasti sivuston ylläpitäjä.\n"
 "    "
 
-#: TWLight/users/templates/users/user_detail.html:16
+#. Translators: In the unlikely scenario that someone is able to register an account without using OAuth (thus leaving us without some of the information required for applications), users will see this message, encouraging them to re-register.
+#: TWLight/users/templates/users/user_detail.html:17
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -2621,7 +745,8 @@ msgstr ""
 "      OAuthin kautta, tai ottaa yhteyttä ylläpitäjään.\n"
 "    "
 
-#: TWLight/users/views.py:92
+#. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
+#: TWLight/users/views.py:93
 msgid ""
 "Please update your contributions to Wikipedia (below) to help coordinators "
 "evaluate your applications."
@@ -2629,24 +754,29 @@ msgstr ""
 "Täydennäthän alle tiedot Wikipedia-muokkauksistasi, jotta koordinaattorit "
 "voivat arvioida hakemuksesi."
 
-#: TWLight/users/views.py:182 TWLight/users/views.py:242
+#. Translators: This message is shown to users who attempt to update their personal information without being logged in.
+#: TWLight/users/views.py:184 TWLight/users/views.py:246
 msgid "You must be logged in to do that."
 msgstr ""
 
-#: TWLight/users/views.py:196
+#. Translators: This is the button users click to confirm changes to their personal information.
+#: TWLight/users/views.py:199
 msgid "Update information"
 msgstr "Päivitä tiedot"
 
-#: TWLight/users/views.py:207
+#. Translators: Shown to the user when they successfully modify their personal information.
+#: TWLight/users/views.py:211
 msgid "Your information has been updated."
 msgstr "Tietosi on päivitetty."
 
-#: TWLight/users/views.py:251
+#. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
+#: TWLight/users/views.py:256
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Sähköpostiksesi on vaihdettu {email}."
 
-#: TWLight/users/views.py:256
+#. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
+#: TWLight/users/views.py:262
 #, fuzzy
 #| msgid ""
 #| "You may explore the site, but you will not be able to apply for access "
@@ -2658,7 +788,8 @@ msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
-#: TWLight/users/views.py:328
+#. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
+#: TWLight/users/views.py:335
 #, fuzzy
 #| msgid ""
 #| "You may explore the site, but you will not be able to apply for access "
@@ -2670,7 +801,8 @@ msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
-#: TWLight/users/views.py:332
+#. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
+#: TWLight/users/views.py:340
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
@@ -2678,18 +810,21 @@ msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
-#: TWLight/views.py:48
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/views.py:49
 #, python-brace-format
 msgid "{username} signed up for a Wikipedia Library Card Platform account"
 msgstr ""
 "{username} loi tunnuksen Wikipedian Lähdekirjaston Käyttöoikeustoimistoon"
 
-#: TWLight/views.py:60
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/views.py:62
 #, python-brace-format
 msgid "{partner} joined the Wikipedia Library "
 msgstr "{partner} liittyi Wikipedian Lähdekirjastoon"
 
-#: TWLight/views.py:74
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
+#: TWLight/views.py:77
 #, python-brace-format
 msgid ""
 "{username} applied for access to <a href=\"{url}\">{partner}</"
@@ -2698,17 +833,1333 @@ msgstr ""
 "{username} haki käyttöoikeutta yhteistyökumppanin <a href="
 "\"{url}\">{partner} aineistoon</a><blockquote>{rationale}</blockquote>"
 
-#: TWLight/views.py:83
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
+#: TWLight/views.py:87
 #, python-brace-format
 msgid "{username} applied for access to <a href=\"{url}\">{partner}</a>"
 msgstr ""
 "{username} haki käyttöoikeutta aineistoon <a href=\"{url}\">{partner}</a>"
 
-#: TWLight/views.py:102
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
+#: TWLight/views.py:107
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr ""
 "{username} sai käyttöoikeuden aineistoon <a href=\"{url}\">{partner}</a>"
+
+#~ msgid "Please select at least one partner."
+#~ msgstr "Valitse vähintään yksi yhteistyökumppani."
+
+#~ msgid "Choose at least one resource you want access to."
+#~ msgstr ""
+#~ "Sinun täytyy valita vähintään yksi aineisto käyttöoikeuden hakemiseksi."
+
+#~ msgid ""
+#~ "Your application has been submitted for review. You can check the status "
+#~ "of your applications on this page."
+#~ msgstr ""
+#~ "Hakemuksesi on lähetetty. Koordinaattorimme arvioi sen ja ottaa sinuun "
+#~ "yhteyttä. Voit tarkistaa hakemuksesi tilan tällä sivulla milloin tahansa."
+
+#~ msgid "Editor"
+#~ msgstr "Muokkaaja"
+
+#~ msgid "Partner"
+#~ msgstr "Yhteistyökumppani"
+
+#, fuzzy
+#~| msgid "Applications over time"
+#~ msgid "Applications to review"
+#~ msgstr "Hakemukset kautta aikojen"
+
+#~ msgid "Approved applications"
+#~ msgstr "Hyväksytyn hakemukset"
+
+#~ msgid "Rejected applications"
+#~ msgstr "Hylätyt hakemukset"
+
+#~ msgid "Access grants up for renewal"
+#~ msgstr "Uusittavissa olevat käyttöoikeuslahjoitukset"
+
+#, fuzzy
+#~| msgid "Set application status"
+#~ msgid "Sent applications"
+#~ msgstr "Aseta hakemuksen tila"
+
+#~ msgid "Set application status"
+#~ msgstr "Aseta hakemuksen tila"
+
+#~ msgid "Batch update successful."
+#~ msgstr "Joukkopäivitys onnistui. Kiitos tämänpäiväisistä arvioinneistasi."
+
+#, fuzzy
+#~| msgid "All applications have been marked as sent."
+#~ msgid "All selected applications have been marked as sent."
+#~ msgstr "Kaikki hakemukset on merkitty lähetetyiksi."
+
+#~ msgid "Apply"
+#~ msgstr "Tallenna hakemus"
+
+#~ msgid "About you"
+#~ msgstr "Tietoa sinusta"
+
+#~ msgid "Your application to {partner}"
+#~ msgstr "Hakemuksesi yhteistyökumppanille {partner}"
+
+#~ msgid "Username"
+#~ msgstr "Wikipedia-käyttäjätunnuksesi"
+
+#~ msgid "Partner name"
+#~ msgstr "Yhteistyökumppanin nimi"
+
+#~ msgid "Your real name"
+#~ msgstr "Oikea nimesi"
+
+#~ msgid "Your country of residence"
+#~ msgstr "Asuinpaikkasi"
+
+#~ msgid "Your occupation"
+#~ msgstr "Ammattisi"
+
+#~ msgid "Your institutional affiliation"
+#~ msgstr "Instituutiosi"
+
+#~ msgid "Why do you want access to this resource?"
+#~ msgstr "Miksi haluat käyttöoikeuden tähän aineistoon?"
+
+#~ msgid "Which collection do you want?"
+#~ msgstr "Mihin kokoelmaan haluat käyttöoikeuden?"
+
+#~ msgid "Which book do you want?"
+#~ msgstr "Mihin kirjaan haluat käyttöoikeuden?"
+
+#~ msgid "Anything else you want to say"
+#~ msgstr "Onko sinulla jotain muuta sanottavaa?"
+
+#~ msgid "You must agree with the partner's terms of use"
+#~ msgstr ""
+#~ "Sinun täytyy hyväksyä yhteistyökumppanin käyttöehdot saadaksesi "
+#~ "käyttöoikeuden aineistoon"
+
+#~ msgid "Email"
+#~ msgstr "Sähköposti"
+
+#, fuzzy
+#~| msgid "New comment on your Wikipedia Library application"
+#~ msgid "Your Wikipedia Library application has been approved"
+#~ msgstr "Wikipedian Lähdekirjaston hakemukseesi on jätetty uusi kommentti"
+
+#~ msgid "New comment on your Wikipedia Library application"
+#~ msgstr "Wikipedian Lähdekirjaston hakemukseesi on jätetty uusi kommentti"
+
+#~ msgid ""
+#~ "There is a new comment on a Wikipedia Library application that you also "
+#~ "commented on. It may be providing an answer to a question you asked. You "
+#~ "can see it at %(app_url)s. Thanks for helping review Wikipedia Library "
+#~ "applications!"
+#~ msgstr ""
+#~ "Kommentoimassasi Wikipedian Lähdekirjaston hakemuksessa on uusi kommentti "
+#~ "Se voi olla vastaus esittämääsi kysymykseen.katso kommentti tästä: "
+#~ "%(app_url)s. Kiitos kun arvioit Wikipedian Lähdekirjaston hakemuksia!"
+
+#~ msgid "New comment on a Wikipedia Library application you commented on"
+#~ msgstr ""
+#~ "Uusi kommentti Wikipedian Lähdekirjaston hakemuksessa, jota olet "
+#~ "kommentoinut."
+
+#, fuzzy
+#~| msgid "New comment on your Wikipedia Library application"
+#~ msgid "Your Wikipedia Library application has been denied"
+#~ msgstr "Wikipedian Lähdekirjaston hakemukseesi on jätetty uusi kommentti"
+
+#, fuzzy
+#~| msgid "New comment on a Wikipedia Library application you commented on"
+#~ msgid "Your Wikipedia Library application has been waitlisted"
+#~ msgstr ""
+#~ "Uusi kommentti Wikipedian Lähdekirjaston hakemuksessa, jota olet "
+#~ "kommentoinut."
+
+#~ msgid "Pending"
+#~ msgstr "Odottaa"
+
+#~ msgid "Under discussion"
+#~ msgstr "Harkinnassa"
+
+#~ msgid "Approved"
+#~ msgstr "Hyväksytty"
+
+#~ msgid "Not approved"
+#~ msgstr "Hylätty"
+
+#~ msgid "Sent to partner"
+#~ msgstr "Lähetä yhteistyökumppanille"
+
+#, fuzzy
+#~| msgid "Please do not override this field! It is set automatically."
+#~ msgid "Please do not override this field! Its value is set automatically."
+#~ msgstr ""
+#~ "Älä muuta tämän kentän arvoa! Arvo asetetaan automaattisesti kun hakemus "
+#~ "tallennetaan, ja sen muuttamisesta voi tulla toivomattomia seurauksia."
+
+#~ msgid "The user who sent this application to the partner"
+#~ msgstr "Käyttäjä, joka lähetti hakemuksen yhteistyökumppanille"
+
+#~ msgid "Evaluate application"
+#~ msgstr "Arvioi hakemus"
+
+#~ msgid "Application history"
+#~ msgstr "Hakemuksen historia"
+
+#~ msgid "Application"
+#~ msgstr "Hakemus"
+
+#~ msgid "Date of application"
+#~ msgstr "Hakemuksen päivämäärä"
+
+#~ msgid "Days open"
+#~ msgstr "Kuinka monta päivää hakemus on ollut vireillä"
+
+#~ msgid "Days since application was closed"
+#~ msgstr "Kuinka monta päivää sitten hakemus käsiteltiin"
+
+#~ msgid "Status"
+#~ msgstr "Tila"
+
+#~ msgid "Collection requested"
+#~ msgstr "Pyydetty kokoelma"
+
+#~ msgid "Title requested"
+#~ msgstr "Pyydetty nimike"
+
+#~ msgid "Why the editor wants access"
+#~ msgstr "Miksi muokkaaja haluaa käyttöoikeuden"
+
+#~ msgid "Not stated"
+#~ msgstr "Ei esitetty"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "            Hi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
+#~| "          "
+#~ msgid ""
+#~ "\n"
+#~ "            Yes (<a href=\"%(parent_url)s\">previous application</a>)\n"
+#~ "          "
+#~ msgstr ""
+#~ "\n"
+#~ "            Terve, <a href=\"%(home_url)s\">%(username)s</a>!\n"
+#~ "          "
+
+#~ msgid "Comments from the editor"
+#~ msgstr "Lisähuomioita muokkaajalta"
+
+#~ msgid "Discussion"
+#~ msgstr "Keskustelu"
+
+#~ msgid "Add comment"
+#~ msgstr "Lisää kommentti"
+
+#~ msgid ""
+#~ "Comments are visible to all coordinators and to the editor who submitted "
+#~ "this application."
+#~ msgstr ""
+#~ "Tämä sivu ja sen sisältämät kommentit ovat nähtävinä kaikille Wikipedian "
+#~ "Lähdekirjaston koordinaattoreille"
+
+#~ msgid "User"
+#~ msgstr "Käyttäjä"
+
+#~ msgid "Revision history"
+#~ msgstr "Muutoshistoria"
+
+#~ msgid "Submitted by %(submit_user)s on %(review_date)s"
+#~ msgstr "%(submit_user)s lähetti hakemuksen %(review_date)s"
+
+#~ msgid "Submitted on %(review_date)s"
+#~ msgstr "Tallennettu %(review_date)s"
+
+#~ msgid "Reviewed by %(review_user)s on %(review_date)s"
+#~ msgstr "%(review_user)s arvioi tämän %(review_date)s"
+
+#~ msgid "Reviewed on %(review_date)s"
+#~ msgstr "Arvioitu %(review_date)s"
+
+#~ msgid "No previous versions."
+#~ msgstr "Ei aiempia versioita."
+
+#, fuzzy
+#~| msgid "Filter by..."
+#~ msgid "View applications which are..."
+#~ msgstr "Suodata hakemukset..."
+
+#, fuzzy
+#~| msgid "Pending"
+#~ msgid "Pending review"
+#~ msgstr "Odottaa"
+
+#, fuzzy
+#~| msgid "Access grants up for renewal"
+#~ msgid "Up for renewal"
+#~ msgstr "Uusittavissa olevat käyttöoikeuslahjoitukset"
+
+#~ msgid "Filter by..."
+#~ msgstr "Suodata hakemukset..."
+
+#~ msgid "Current filters"
+#~ msgstr "Nykyiset suodattimet"
+
+#~ msgid "None"
+#~ msgstr "Ei mitään"
+
+#~ msgid "Date"
+#~ msgstr "Päiväys"
+
+#~ msgid "Number of partners"
+#~ msgstr "Yhteistyökumppaneiden lukumäärä"
+
+#~ msgid "Home wiki"
+#~ msgstr "Kotiwiki"
+
+#~ msgid "Number of users"
+#~ msgstr "Käyttäjien lukumäärä"
+
+#~ msgid "Wiki"
+#~ msgstr "Wiki"
+
+#~ msgid "Days until decision"
+#~ msgstr "Päiviä päätökseen"
+
+#~ msgid "Number of applications"
+#~ msgstr "Hakijoiden lukumäärä"
+
+#~ msgid "Month"
+#~ msgstr "Kuukausi"
+
+#~ msgid "Median days until decision"
+#~ msgstr "Mediaaniluku päivistä, jotka kuluvat päätöksen tekemiseen"
+
+#~ msgid "Number of applications to {partner}"
+#~ msgstr "Yhteistyökumppanille {partner} tehtyjen hakemusten määrä"
+
+#~ msgid "Number of unique users who have applied to {partner}"
+#~ msgstr ""
+#~ "Yhteistyökumppanin {partner} aineistoon käyttöoikeutta hakeneiden "
+#~ "yksittäisten käyttäjien lukumäärä."
+
+#, fuzzy
+#~| msgid "Number of users"
+#~ msgid "Number of (non-unique) visitors"
+#~ msgstr "Käyttäjien lukumäärä"
+
+#, fuzzy
+#~| msgid "Expired %(num_days)s days ago"
+#~ msgid "Expired %(num_days)s day ago"
+#~ msgid_plural "Expired %(num_days)s days ago"
+#~ msgstr[0] "Vanhentui %(num_days)s päivää sitten"
+#~ msgstr[1] "Vanhentui %(num_days)s päivää sitten"
+
+#, fuzzy
+#~| msgid "Expiring in %(num_days)s days"
+#~ msgid "Expiring in %(num_days)s day"
+#~ msgid_plural "Expiring in %(num_days)s days"
+#~ msgstr[0] "Vanhenemisaika: %(num_days)s pv"
+#~ msgstr[1] "Vanhenemisaika: %(num_days)s pv"
+
+#~ msgid "Approved by %(reviewer)s on %(review_date)s"
+#~ msgstr "%(reviewer)s hyväksyi hakemuksen %(review_date)s"
+
+#, fuzzy
+#~| msgid "Reviewed on %(review_date)s"
+#~ msgid "Approved on %(review_date)s"
+#~ msgstr "Arvioitu %(review_date)s"
+
+#~ msgid "No applications right now."
+#~ msgstr "Ei hakemuksia tällä hetkellä."
+
+#~ msgid "Last reviewed by %(reviewer)s on %(review_date)s"
+#~ msgstr "Viimeksi %(review_date)s %(reviewer)s arvioi tämän"
+
+#, fuzzy
+#~| msgid "Reviewed on %(review_date)s"
+#~ msgid "Last reviewed on %(review_date)s"
+#~ msgstr "Arvioitu %(review_date)s"
+
+#~ msgid "Not yet reviewed."
+#~ msgstr "Ei vielä arvioitu."
+
+#, fuzzy
+#~| msgid "Description not available."
+#~ msgid "Renewals are not available."
+#~ msgstr "Ei kuvausta"
+
+#~ msgid "Select/deselect all"
+#~ msgstr "Valitse/poista kaikki valinnat"
+
+#~ msgid "Status for all selected applications"
+#~ msgstr "Kaikkien valittujen hakemusten tila"
+
+#~ msgid "Set status"
+#~ msgstr "Aseta tila"
+
+#~ msgid ""
+#~ "<p> Note that your username and reasons for applying may be displayed on "
+#~ "the home page. Please <a href=\"mailto:wikipedialibrary@wikimedia.org?"
+#~ "Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">email "
+#~ "us (wikipedialibrary@wikimedia.org)</a> if this is a problem. </p>"
+#~ msgstr ""
+#~ "<p> Huomioi, että seuraavat tiedot voidaan esittää kotisivun aikajanalla: "
+#~ "</p> <ul> <li> Wikipedia-käyttäjätunnuksesi; </li> <li> "
+#~ "yhteistyökumppanit, joiden aineistoihin hait käyttöoikeutta; </li> <li> "
+#~ "hakemusperustelusi. </li> </ul> <p> Voit <a href=\"mailto:"
+#~ "wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%"
+#~ "%20account%%20deactivation\">lähettää meille sähköpostia  "
+#~ "(wikipedialibrary@wikimedia.org)</a> jos sinulla on ongelmia tämänkanssa  "
+#~ "</p>"
+
+#, fuzzy
+#~| msgid "What resources you want to access?"
+#~ msgid "What resources do you want to access?"
+#~ msgstr "Kenen aineistoon haluat käyttöoikeuden?"
+
+#~ msgid "(more info)"
+#~ msgstr "(lisää tietoa)"
+
+#~ msgid "No partner data has been added yet."
+#~ msgstr "Yhteistyökumppanin tietoja ei ole lisätty vielä tietokantaan."
+
+#~ msgid "Partners with approved, unsent applications"
+#~ msgstr ""
+#~ "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä "
+#~ "hakemuksia."
+
+#~ msgid "There are no partners with applications ready to send."
+#~ msgstr ""
+#~ "Tällä hetkellä ei ole yhtään valmista hakemusta lähetettäväksi "
+#~ "yhteistyökumppaneille."
+
+#~ msgid "Application data for %(object)s"
+#~ msgstr "Hakemustiedot kohteelle %(object)s"
+
+#~ msgid "Contact"
+#~ msgid_plural "Contacts"
+#~ msgstr[0] "Yrityksen edustaja"
+#~ msgstr[1] "Yrityksen edustajat"
+
+#~ msgid ""
+#~ "Whoops, we don't have any listed contacts. Please notify Wikipedia "
+#~ "Library administrators."
+#~ msgstr ""
+#~ "Meillä ei ole yhteyshenkilöitä tähän yritykseen. Ole hyvä ja kerroasiasta "
+#~ "Wikipedian Lähdekirjaston ylläpitäjille."
+
+#~ msgid "Application data"
+#~ msgstr "Hakemuksen tiedot"
+
+#~ msgid "Mark as sent"
+#~ msgstr "Merkitse lähetetyksi"
+
+#~ msgid "There are no approved, unsent applications."
+#~ msgstr "Tällä hetkellä ei ole lähettämättömiä hyväksyttyjä hakemuksia."
+
+#, fuzzy
+#~| msgid "Language"
+#~ msgid "Languages"
+#~ msgstr "Kieli"
+
+#~ msgid ""
+#~ "Partner's name (e.g. McFarland). Note: this will be user-visible and *not "
+#~ "translated*."
+#~ msgstr ""
+#~ "Yhteistyökumppaniyrityksen nimi (esim. Suomalaisen Kirjallisuuden Seura). "
+#~ "Huom: tämä on nähtävissä käyttäjilleeikä sitä *käännetä*."
+
+#, fuzzy
+#~| msgid "Description not available."
+#~ msgid "Not available"
+#~ msgstr "Ei kuvausta"
+
+#~ msgid ""
+#~ "Link to terms of use. Required if users must agree to terms of use to get "
+#~ "access; optional otherwise."
+#~ msgstr ""
+#~ "Linkki käyttöehtoihin. Vaaditaan, jos yritys vaatii käyttäjien hyväksyvän "
+#~ "käyttöehdot ennen käyttöoikeuden hakemista; vapaavalintainen muuten."
+
+#~ msgid "Optional description of this partner's resources."
+#~ msgstr "Vapaavalintainen kuvaus yhteistyökumppanin lahjoituksesta."
+
+#, fuzzy
+#~| msgid "The user who sent this application to the partner"
+#~ msgid "Optional instructions for sending application data to this partner."
+#~ msgstr "Käyttäjä, joka lähetti hakemuksen yhteistyökumppanille"
+
+#~ msgid "Optional URL of an image that can be used to represent this partner."
+#~ msgstr ""
+#~ "Vapaavalintainen URL kuvasta, jota voi käyttää yhteistyökumppanin "
+#~ "esittelyyn."
+
+#~ msgid ""
+#~ "If True, users can only apply for one Stream at a time from this Partner. "
+#~ "If False, users can apply for multiple Streams at a time. This field must "
+#~ "be filled in when Partners have multiple Streams, but may be left blank "
+#~ "otherwise."
+#~ msgstr ""
+#~ "Jos rastittuna, käyttäjät voivat hakea käyttöoikeutta vain yhteen "
+#~ "syötteeseen tältä yhteistyökumppanilta. Jos ei rastittuna, käyttäjät "
+#~ "voivat hakea käyttöoikeutta useampaan syötteeseen. Kenttä pitää täyttää, "
+#~ "mikäli yhteistyökumppanilla on useita syötteitä, mutta muuten sen voi "
+#~ "jättää tyhjäksi. "
+
+#, fuzzy
+#~| msgid ""
+#~| "The standard length of an access grant from this Partner. Enter like "
+#~| "'365 days' or '365d' or '1 year'."
+#~ msgid ""
+#~ "The standard length of an access grant from this Partner. Entered as "
+#~ "<days hours:minutes:seconds>. Defaults to 365 days."
+#~ msgstr ""
+#~ "Standardi käyttöoikeuden kestoaika yhteistyömppanilta. Esim. 1 vuosi."
+
+#~ msgid "Mark as true if this partner requires applicant names."
+#~ msgstr ""
+#~ "Rastita, mikäli yhteistyökumppani vaatii hakijan esittävän oikean nimensä."
+
+#~ msgid ""
+#~ "Mark as true if this partner requires applicant countries of residence."
+#~ msgstr ""
+#~ "Rastita, mikäli yhteistyökumppani vaatii hakijan nimeävän asuinmaansa."
+
+#~ msgid ""
+#~ "Mark as true if this partner requires applicants to specify the title "
+#~ "they want to access."
+#~ msgstr ""
+#~ "Rastita, mikäli yhteistyökumppani vaatii hakijan määrittelevän tarkasti, "
+#~ "mihin nimekkeeseen hän haluaa käyttöoikeuden."
+
+#~ msgid ""
+#~ "Mark as true if this partner requires applicants to specify the database "
+#~ "they want to access."
+#~ msgstr ""
+#~ "Rastita, mikäli yhteistyökumppani vaatii hakijan määrittelevän tarkasti, "
+#~ "mihin tietokantaan hän haluaa käyttöoikeuden."
+
+#~ msgid ""
+#~ "Mark as true if this partner requires applicants to specify their "
+#~ "occupation."
+#~ msgstr ""
+#~ "Rastita, mikäli yhteistyökumppani vaatii hakijan nimeävän ammattinsa."
+
+#~ msgid ""
+#~ "Mark as true if this partner requires applicants to specify their "
+#~ "institutional affiliation."
+#~ msgstr ""
+#~ "Rastita, mikäli yhteistyökumppani vaatii hakijoiden nimeävän heidän "
+#~ "sidoksensa instituutioihin"
+
+#~ msgid ""
+#~ "Mark as true if this partner requires applicants to agree with the "
+#~ "partner's terms of use."
+#~ msgstr ""
+#~ "Rastita, jos yhteistyökumppani vaatii hakijoiden hyväksyvän "
+#~ "yhteistyökumppanin käyttöehdot."
+
+#~ msgid ""
+#~ "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-"
+#~ "visible and *not translated*. Do not include the name of the partner here."
+#~ msgstr ""
+#~ "Syötteen nimi (esim. käyttäytymistieteet). On näkyvissä käyttäjälle *eikä "
+#~ "sitä käännetä*. Älä laita yhteistyökumppanin nimeä tähän. Jos "
+#~ "yhteistyökumppanin ja aineiston nimi pitää esittää yhdessä, mallineet "
+#~ "hoitavat sen tavalla, joka on helppo muuntaa muille kielille."
+
+#~ msgid "Optional description of this stream's resources."
+#~ msgstr "Valinnainen kuvaus syötteen sisällöstä."
+
+#, fuzzy
+#~| msgid ""
+#~| "Organizational role or job title. This is NOT intended to be used for "
+#~| "honorifics."
+#~ msgid ""
+#~ "Organizational role or job title. This is NOT intended to be used for "
+#~ "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
+#~ msgstr "Rooli järjestössä tai työnimeke. "
+
+#~ msgid ""
+#~ "The form of the contact person's name to use in email greetings (as in "
+#~ "'Hi Jake')"
+#~ msgstr ""
+#~ "Muoto, jossa yhteyshenkilön nimi esitetään sähköpostitervehdyksissä(kuten "
+#~ "'Moi Maija')"
+
+#, fuzzy
+#~| msgid "Talk page:"
+#~ msgid "Talk page"
+#~ msgstr "Keskustelusivu"
+
+#, fuzzy
+#~| msgid ""
+#~| "The Wikipedia Library Card Platform is a project of <a href=\"https://"
+#~| "meta.wikimedia.org/wiki/The_Wikipedia_Library\"> The Wikipedia Library</"
+#~| "a>."
+#~ msgid ""
+#~ "The Wikipedia Library team will process this application. Want to help? "
+#~ "<a href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/"
+#~ "Coordinators/Signup\">Sign up as a coordinator.</a>"
+#~ msgstr ""
+#~ "Wikipedian Lähdekirjaston Käyttöoikeustoimisto on <a href=\"https://meta."
+#~ "wikimedia.org/wiki/The_Wikipedia_Library\"> Wikipedian Lähdekirjaston</a> "
+#~ "projekti."
+
+#~ msgid "Description not available."
+#~ msgstr "Ei kuvausta"
+
+#, fuzzy
+#~| msgid "Description not available."
+#~ msgid "Languages not available."
+#~ msgstr "Ei kuvausta"
+
+#~ msgid "Special requirements for applicants"
+#~ msgstr "Erityisvaatimukset hakijoille"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(publisher)s requires that you agree with its <a href="
+#~| "\"%(url)s\">terms\n"
+#~| "                  of use</a>.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(publisher)s requires that you agree with its <a "
+#~ "href=\"%(url)s\">terms\n"
+#~ "                    of use</a>.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                  %(publisher)s vaatii, että hyväksyt <a href=\"%(url)s"
+#~ "\">käyttöehdot</a>.\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(publisher)s requires that you provide your real "
+#~| "name.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(publisher)s requires that you provide your real "
+#~ "name.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                  %(publisher)s vaatii, että annat oikean nimesi.\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(publisher)s requires that you provide your country "
+#~| "of residence.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(publisher)s requires that you provide your country "
+#~ "of residence.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                  %(publisher)s vaatii, että nimeät asuinpaikkasi.\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(publisher)s requires that you provide your "
+#~| "occupation.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(publisher)s requires that you provide your "
+#~ "occupation.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                  %(publisher)s vaatii, että nimeät ammattisi.\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(publisher)s requires that you provide your "
+#~| "institutional affiliation.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(publisher)s requires that you provide your "
+#~ "institutional affiliation.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                  %(publisher)s vaatii, että nimeät instituution, johon "
+#~ "olet sidoksissa.\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(publisher)s requires that you specify the title that "
+#~| "you want\n"
+#~| "                  to access.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(publisher)s requires that you specify a particular "
+#~ "title that you want\n"
+#~ "                    to access.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                  %(publisher)s vaatii, että määrittelet nimikkeen, johon "
+#~ "haluat\n"
+#~ "                  käyttöoikeuden.\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(publisher)s requires that you specify a specific "
+#~| "collection that you\n"
+#~| "                    want to access. You may only apply for access to one "
+#~| "collection at a\n"
+#~| "                    time.\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                      %(publisher)s requires that you specify a specific "
+#~ "collection that you\n"
+#~ "                      want to access. You may only apply for access to "
+#~ "one collection at a\n"
+#~ "                      time.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                    %(publisher)s vaatii, että määrittelet kokoelman "
+#~ "johon haluat\n"
+#~ "                    käyttöoikeuden. Voit hakea käyttöoikeutta yhteen "
+#~ "kokoelmaan\n"
+#~ "                    kerrallaan.\n"
+#~ "                  "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(publisher)s requires that you specify one or more "
+#~| "specific\n"
+#~| "                    collections that you want to access.\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                      %(publisher)s requires that you specify one or more "
+#~ "specific\n"
+#~ "                      collections that you want to access.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                    %(publisher)s vaatii, että määrittelet yhden "
+#~ "taiuseamman kokoelman\n"
+#~ "                   johon haluat käyttöoikeuden.\n"
+#~ "                  "
+
+#~ msgid "Collections"
+#~ msgstr "Kokoelmat"
+
+#~ msgid "Terms of use"
+#~ msgstr "Käyttöehdot"
+
+#~ msgid "Terms of use not available."
+#~ msgstr "Käyttöehdot eivät ole saatavilla"
+
+#~ msgid "Metrics"
+#~ msgstr "Tilastot"
+
+#~ msgid "Total applications (all time)"
+#~ msgstr "Kaikki hakemukset (kautta aikojen)"
+
+#~ msgid "Total unique applicants (all time)"
+#~ msgstr "Kaikki yksitäiset hakijat (kautta aikojen)"
+
+#~ msgid "Median days from application to decision"
+#~ msgstr "Mediaaniaika päivissä hakemuksen tekemisestä päätöksen antamiseen"
+
+#~ msgid "Applications by status"
+#~ msgstr "Hakemukset tilan mukaan"
+
+#~ msgid "download as csv"
+#~ msgstr "lataa csv-tiedostona"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "      Number of applications approved (all time): "
+#~| "%(total_apps_approved)s\n"
+#~| "    "
+#~| msgid_plural ""
+#~| "\n"
+#~| "      Number of applications approved (all time): "
+#~| "%(total_apps_approved)s\n"
+#~| "    "
+#~ msgid ""
+#~ "\n"
+#~ "      Number of applications approved (all time): "
+#~ "%(total_apps_approved_or_sent)s\n"
+#~ "    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "      Number of applications approved (all time): "
+#~ "%(total_apps_approved_or_sent)s\n"
+#~ "    "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "      Hyväksyttyjen hakemusten määrä (kautta aikojen): "
+#~ "%(total_apps_approved)s\n"
+#~ "    "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "      Hyväksyttyjen hakemusten määrä (kautta aikojen): "
+#~ "%(total_apps_approved)s\n"
+#~ "    "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "      Number of unique users with approved applications (all time): "
+#~| "%(unique_users_approved)s\n"
+#~| "    "
+#~| msgid_plural ""
+#~| "\n"
+#~| "      Number of unique users with approved applications (all time): "
+#~| "%(unique_users_approved)s\n"
+#~| "    "
+#~ msgid ""
+#~ "\n"
+#~ "      Number of unique users with approved applications (all time): "
+#~ "%(unique_users_approved_or_sent)s\n"
+#~ "    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "      Number of unique users with approved applications (all time): "
+#~ "%(unique_users_approved_or_sent)s\n"
+#~ "    "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "      Yksittäiset muokkaajat, joiden hakemukset on hyväksytty (kautta "
+#~ "aikojen): %(unique_users_approved)s\n"
+#~ "    "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "      Yksittäiset muokkaajat, joiden hakemukset on hyväksytty (kautta "
+#~ "aikojen): %(unique_users_approved)s\n"
+#~ "    "
+
+#~ msgid "Applications over time"
+#~ msgstr "Hakemukset kautta aikojen"
+
+#~ msgid "All applications"
+#~ msgstr "Kaikki hakemukset"
+
+#~ msgid "Approved applications only"
+#~ msgstr "Vain hyväksytyt hakemukset"
+
+#~ msgid "Unique users over time"
+#~ msgstr "Yksittäiset muokkaajat kautta aikojen"
+
+#~ msgid "List of partners"
+#~ msgstr "Yhteistyökumppanit"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "      You can see per-partner metrics on the partner pages.\n"
+#~| "    "
+#~ msgid "You can see per-partner metrics on the partner pages."
+#~ msgstr ""
+#~ "\n"
+#~ "      Voit nähdä yhteistyökumppanikohtaiset tilastot yhteistyökumppanien "
+#~ "sivuilla.\n"
+#~ "    "
+
+#~ msgid "More info"
+#~ msgstr "Lisää tietoa"
+
+#, fuzzy
+#~| msgid "Partners with approved, unsent applications"
+#~ msgid "This partner is now available for applications"
+#~ msgstr ""
+#~ "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä "
+#~ "hakemuksia."
+
+#~ msgid "English"
+#~ msgstr "Englanti"
+
+#~ msgid "French"
+#~ msgstr "Ranska"
+
+#~ msgid "About the Wikipedia Library"
+#~ msgstr "Tietoa Wikipedian Lähdekirjastosta"
+
+#~ msgid ""
+#~ "The Wikipedia Library provides free access to research materials to "
+#~ "improve your ability to contribute content to the Wikimedia projects."
+#~ msgstr ""
+#~ "Wikipedian Lähdekirjasto tarjoaa ilmaisen pääsyn lukuisiin lähteisiin, "
+#~ "joita voi käyttää tutkimuksen apuna Wikimedia-projektien sisältöjen "
+#~ "kehittämiseksi Yhteistyökumppaneihin lukeutuu lukuisia tietokantoja, jota "
+#~ "tarjoavat käyttöoikeuksia kirjoihin, julkaisuihin, sanomalehtiin, "
+#~ "videoihin, ja muihin hyödyllisiin materiaaleihin."
+
+#~ msgid ""
+#~ "The Wikipedia Library Card Platform is our central tool for reviewing "
+#~ "applications and providing access to those partner resources. Here you "
+#~ "can see which partnerships are available and what kinds of materials each "
+#~ "database provides, and apply for the ones you want. Volunteer "
+#~ "coordinators, who have signed non-disclosure agreements with the "
+#~ "Wikimedia Foundation, review applications and work with partners to get "
+#~ "you your free access."
+#~ msgstr ""
+#~ "Wikipedian Lähdekirjaston Käyttöoikeustoimisto on keskeinen välineemme "
+#~ "hakemusten arviointiin ja käyttöoikeuksien jakamiseen. Täällä voit nähdä "
+#~ "mitkä yhteistökumppanuudet ovat käytettävissä ja millaisia aineistoja "
+#~ "jokainen tietokanta tarjoaa, ja hakea käyttöoikeutta mihin haluat. "
+#~ "Vapaaehtoiset koordinaattorit, jotka ovat allekirjoittaneet "
+#~ "salassapitosopimuksen Wikimedia-säätiln kanssa, arvioivat hakemuksia "
+#~ "säännöllisesti, ja kun tarpeeksi hakemuksia on hyväksytty, työskentelevät "
+#~ "julkaisijan kanssa, jotta saisit käyttöoikeutesi."
+
+#~ msgid "Who can receive access?"
+#~ msgstr "Kuka voi saada käyttöoikeuden?"
+
+#~ msgid ""
+#~ "Any active editor in good standing can receive access.  Applications are "
+#~ "reviewed based on the editor’s need and contributions. If you think you "
+#~ "could use access to one of our partner resources and are an active editor "
+#~ "in any project supported by the Wikimedia Foundation, please apply."
+#~ msgstr ""
+#~ "Kuka tahansa aktiivinen ja hyvämaineinen muokkaaja voi saada "
+#~ "käyttöoikeuden. Hakemukset arvioidaan muokkaajan tarpeen ja yleisten "
+#~ "Wikimedia-muokkausten perusteella. Jos koet tarvitsevasi käyttöoikeutta "
+#~ "johonkin yhteistyökumppanimme aineistoon ja olet aktiivinen Wikimedian "
+#~ "muokkaaja missä tahansa Wikimedia-säätiön projektissa, hae toki!"
+
+#~ msgid ""
+#~ "Any editor can apply for access, but there are a few basic requirements:"
+#~ msgstr ""
+#~ "Kuka tahansa muokkaaja voi hakea käyttöoikeutta, mutta tiettujen ehtojen "
+#~ "pitää täyttyä:"
+
+#~ msgid "You have your preferences enabled to receive email on your home wiki"
+#~ msgstr ""
+#~ "Sinulla on asetuksissasi mahdollistettu sähköpostin lähettäminen "
+#~ "kotiwikissäsi"
+
+#~ msgid "You have an account that is a minimum of 6 months old"
+#~ msgstr "Sinulla on käyttäjätunnus, joka on vähintään kuusi kuukautta vanha"
+
+#~ msgid "You have a minimum of 500 edits"
+#~ msgstr "Sinulla on vähintään 500 muokkausta tietosanakirjassa"
+
+#~ msgid ""
+#~ "You do not already have access to the resources you’re applying for "
+#~ "through another library or institution"
+#~ msgstr ""
+#~ "Sinulla ei ole käyttöoikeutta hakemaasi aineistoon toisen kirjaston tai "
+#~ "instituution kautta"
+
+#~ msgid ""
+#~ "If you don't quite meet the experience requirements but think you would "
+#~ "still be a strong candidate for access, feel free to apply and you may "
+#~ "still be considered.  Note that \"home wiki\" can mean any Wikipedia you "
+#~ "are active on."
+#~ msgstr ""
+#~ "Vaikka et täyttäisi vaatimuksia, mutta koet että olisit hyvä ehdokas, hae "
+#~ "silti. Arvioimme hakijat tapauskohtaisesti. Huomaathan, että \"kotiwiki\" "
+#~ "voi tarkoittaa mitä tahansa Wikipediaa, jossa olet aktiivinen; tärkeintä "
+#~ "on , että kyseisessä Wikipediassa olet laittanut sähköpostin päälle "
+#~ "asetuksista."
+
+#~ msgid "What do I do after I get access?"
+#~ msgstr "Mitä teen kun olen saanut käyttöoikeuden?"
+
+#~ msgid ""
+#~ "Once you have access we encourage you to use the databases for both "
+#~ "research that creates or improves Wikimedia content and serves your other "
+#~ "research needs."
+#~ msgstr ""
+#~ "Kun olet saanut käyttöoikeuden, kannustamme sinua käyttämään tietokantoja "
+#~ "tutkimukseen, jolla voit luoda tai parantaa Wikimedian sisältöjä.Tutki "
+#~ "mitä tahansa käyttöoikeutesi avulla!"
+
+#~ msgid ""
+#~ "Please keep in mind, our agreements with partners carry certain "
+#~ "expectations."
+#~ msgstr ""
+#~ "Huomioithan, että sopimuksemme yhteistyökumppanien kanssa sisältävät "
+#~ "tiettyjä odotuksia."
+
+#~ msgid "Approved editors <i>may</i> use their access to:"
+#~ msgstr "Hyväksytyt muokkaajat <i>saavat</i> käyttää käyttöoikeuttaan:"
+
+#~ msgid "Search, view, retrieve, and display partner content"
+#~ msgstr ""
+#~ "etsiäkseen, näyttääkseen, tallentaakseen ja esittääkseen osia "
+#~ "rajoitetusta sisällöstä"
+
+#~ msgid "Electronically save partner content"
+#~ msgstr "tallentaa sähköisesti osia rajoitetusta sisällöstä"
+
+#~ msgid "Print out single copies of partner content"
+#~ msgstr "tulostaa yksittäisiä kopioita osista rajoitettua sisältöä"
+
+#~ msgid "Approved editors <i>should not</i>:"
+#~ msgstr "Hyväksytyt muokkaajat <i>eivät saa</i>:"
+
+#~ msgid ""
+#~ "Share their account logins or passwords with others, or sell their access "
+#~ "to other parties"
+#~ msgstr ""
+#~ "Jakaa tunnuksiaan tai salasanojaan muiden kanssa tai myydä "
+#~ "niitäulkopuolisille tahoille"
+
+#~ msgid "Mass scrape or mass download partner content"
+#~ msgstr "Massaladata yhteistyökumppanin sisältöjä"
+
+#~ msgid ""
+#~ "Systematically make printed or electronic copies of multiple extracts of "
+#~ "restricted content available for any purpose"
+#~ msgstr ""
+#~ "Järjestelmällisesti tehdä tulostettuja ja sähköisiä kopioita lukuisista "
+#~ "rajoitetuista sisällöistä, oli tarkoitus mikä tahansa"
+
+#~ msgid ""
+#~ "Datamine metadata without permission, in order, for instance, to use "
+#~ "metadata for auto-created stub articles"
+#~ msgstr ""
+#~ "Louhia metadataa ilman lupaa esimerkiksi automaattisesti luotavia "
+#~ "tynkäartikkeleita varten."
+
+#~ msgid ""
+#~ "Respecting these agreements allows us to continue growing the "
+#~ "partnerships available to our entire community."
+#~ msgstr ""
+#~ "Sopimusten noudattaminen mahdollistaa uusien yhteistyökumppanien ja "
+#~ "aineistojen hankkimisen yhteisöllemme."
+
+#~ msgid ""
+#~ "Citation practices vary by project and even by article.  Generally, we "
+#~ "support editors citing where they found information, in a form that "
+#~ "allows others to check it for themselves.  That often means providing "
+#~ "both original source details as well as a link to the partner database in "
+#~ "which the source was found. You can use &lt;code&gt;|via=&lt;code&gt; in "
+#~ "templates using CS1 citation format or add &lt;code&gt;&lbrace;&lbrace;"
+#~ "subscription required|via=&rbrace;&rbrace;&lt;/code&gt; to identify the "
+#~ "provider."
+#~ msgstr ""
+#~ "Viittauskäytännöt vaihtelevat projekteittain ja jopa artikkeleittain. "
+#~ "Yleisesti ottaen suosittelemme muokkaajia viittaamaan lähteeseen, josta "
+#~ "he löysivät tiedon, muodossa joka sallii muiden tarkistaa tiedon itse "
+#~ "haluamallaan tavalla.  Se tarkoittaa alkuperäisen lähteen tietojen "
+#~ "merkitsemistä ja linkittämistä yhteistyökumppanin tietokantaan. "
+
+#~ msgid "Here is one citation example:"
+#~ msgstr "Tässä yksi viite esimerkiksi:"
+
+#~ msgid ""
+#~ "Whom do I contact if I have questions, need help, or want to volunteer?"
+#~ msgstr ""
+#~ "Kehen otan yhteyttä, jos tarvitsen apua tai haluan ilmoittautua "
+#~ "vapaaehtoiseksi?"
+
+#~ msgid "Email:"
+#~ msgstr "Sähköposti:"
+
+#~ msgid "Talk page:"
+#~ msgstr "Keskustelusivu"
+
+#~ msgid "The Wikipedia Library Card Platform"
+#~ msgstr "Wikipedian Lähdekirjaston Käyttöoikeustoimisto"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "            Hi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
+#~| "          "
+#~ msgid ""
+#~ "\n"
+#~ "\t\t\t\t\t\t\t\tHi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
+#~ "\t\t\t\t\t\t\t"
+#~ msgstr ""
+#~ "\n"
+#~ "            Terve, <a href=\"%(home_url)s\">%(username)s</a>!\n"
+#~ "          "
+
+#~ msgid "Browse"
+#~ msgstr "Selaa yhteistyökumppaneita"
+
+#~ msgid "Review"
+#~ msgstr "Arvioi hakemukset"
+
+#~ msgid "Send data to partners"
+#~ msgstr "Lähetä tiedot yhteistyökumppanille"
+
+#~ msgid "Latest activity"
+#~ msgstr "Viimeisin toiminta"
+
+#~ msgid "Log out"
+#~ msgstr "Kirjaudu ulos"
+
+#~ msgid "Log in"
+#~ msgstr "Kirjaudu sisään/luo tunnus"
+
+#~ msgid "About"
+#~ msgstr "Tietoa"
+
+#~ msgid "Privacy policy"
+#~ msgstr "Yksityisyydensuojakäytäntö"
+
+#~ msgid "Feedback"
+#~ msgstr "Palaute"
+
+#~ msgid "Total partners (all time)"
+#~ msgstr "Kaikki yhteistyökumppanit (kautta aikojen)"
+
+#~ msgid "See all partners"
+#~ msgstr "Näytä kaikki yhteistyökumppanit"
+
+#~ msgid "Number of editors (all time)"
+#~ msgstr "Muokkaajien määrä (kautta aikojen)"
+
+#~ msgid "Jump to user metrics"
+#~ msgstr "Siirry käyttäjätilastoihin"
+
+#~ msgid "Jump to application metrics"
+#~ msgstr "Siirry hakemustilastoihin"
+
+#, fuzzy
+#~| msgid "Number of users"
+#~ msgid "Number of views"
+#~ msgstr "Käyttäjien lukumäärä"
+
+#~ msgid "Partners"
+#~ msgstr "Yhteistyökumppanit"
+
+#~ msgid "Number of partners over time"
+#~ msgstr "Yhteistyökumppanit kautta aikojen"
+
+#~ msgid "Editors"
+#~ msgstr "Muokkaajat"
+
+#~ msgid "Home wiki distribution"
+#~ msgstr "Kotiwikeittäin"
+
+#~ msgid "Home wiki distribution over time"
+#~ msgstr "Muokkaajat kotiwikeittäin kautta aikojen"
+
+#~ msgid "Applications"
+#~ msgstr "Hakemukset"
+
+#~ msgid "Applications by number of days until decision"
+#~ msgstr ""
+#~ "Hakemukset jaoteltuna sen mukaan, kuinka monta päivää päätöksen "
+#~ "tekemisessä kesti"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "          The x axis is the number of days to make a final decision "
+#~| "(either\n"
+#~| "          approved or denied) on an application. The y axis is the "
+#~| "number of\n"
+#~| "          applications that have taken exactly that many days to "
+#~| "decide.\n"
+#~| "        "
+#~ msgid ""
+#~ "The x axis is the number of days to make a final decision (either "
+#~ "approved or denied) on an application. The y axis is the number of "
+#~ "applications that have taken exactly that many days to decide."
+#~ msgstr ""
+#~ "\n"
+#~ "          X-asteikko kuvaa, kuinka monta päivää hakemuksesta päätöksen "
+#~ "tekemiseen on mennyt (joko hylättyyn\n"
+#~ "          tai hyväksyttyyn). Y-asteikko kuvaa          kuinka monen "
+#~ "hakemuksen suhteen on tehty päätös kussakin ajanjaksossa.\n"
+#~ "        "
+
+#~ msgid "Median days until application decision, per month"
+#~ msgstr "Mediaanipäivät hakemuksesta päätökseen, per kuukausi"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "          This shows the median number of days to reach a decision on "
+#~| "the\n"
+#~| "          applications opened in a given month.\n"
+#~| "        "
+#~ msgid ""
+#~ "This shows the median number of days to reach a decision on the "
+#~ "applications opened in a given month."
+#~ msgstr ""
+#~ "\n"
+#~ "          Tämä kuvaa päätöksen tekemiseen kuluvien päivien "
+#~ "mediaanilukua \n"
+#~ "           tiettynä kuukautena.\n"
+#~ "        "
+
+#~ msgid "Current application status distribution"
+#~ msgstr "Tämänhetkiset tilat hakemuksissa"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "          This graph includes all applications opened ever on this "
+#~| "site.\n"
+#~| "        "
+#~ msgid "This graph includes all applications opened ever on this site."
+#~ msgstr ""
+#~ "\n"
+#~ "          Tämä kaavio sisältää kaikki hakemukset, jotka ikinä on avattu "
+#~ "tällä sivulla.\n"
+#~ "        "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "      Welcome to the Wikipedia Library Card Platform! Here you can apply "
+#~| "for access to dozens of extensive research resources available through "
+#~| "The Wikipedia Library.        \n"
+#~| "    "
+#~ msgid ""
+#~ "Apply for access to dozens of research databases and resources available "
+#~ "through The Wikipedia Library."
+#~ msgstr ""
+#~ "\n"
+#~ "      Tervetuloa Wikipedian Lähdekirjaston Käyttöoikeustoimistoon! Täällä "
+#~ "voit hakea käyttöoikeutta lukuisiin kattaviin tutkimustietokantoihin ja "
+#~ "muihin aineistoihin,jotka ovat saatavilla Wikipedian Lähdekirjaston "
+#~ "kautta.        \n"
+#~ "    "
+
+#~ msgid "Learn more"
+#~ msgstr "Lue lisää"
+
+#, fuzzy
+#~| msgid "See all partners"
+#~ msgid "Browse all partners"
+#~ msgstr "Näytä kaikki yhteistyökumppanit"
+
+#, fuzzy
+#~| msgid "Latest activity"
+#~ msgid "More Activity"
+#~ msgstr "Viimeisin toiminta"
+
+#~ msgid "Log in with your Wikipedia account"
+#~ msgstr "Kirjaudu sisään Wikipedia-tunnuksellasi"
+
+#~ msgid "Reset password"
+#~ msgstr "Nollaa salasana"
+
+#~ msgid ""
+#~ "Forgot your password? Enter your email address below, and we'll email "
+#~ "instructions for setting a new one."
+#~ msgstr ""
+#~ "Unohditko salasanasi? Anna sähköpostiosoitteesi, niin lähetämme sinulle "
+#~ "ohjeet uuden salasanan luomiseksi."
+
+#~ msgid ""
+#~ "Your Wikipedia account does not meet the eligibility criteria in the "
+#~ "terms of use, so your Wikipedia Library Card Platform account cannot be "
+#~ "activated."
+#~ msgstr ""
+#~ "Wikipedia-käyttäjätunnuksesi ei täytä kelpoisuusehtoja, jotka on esitetty "
+#~ "käyttöehdoissa, joten Käyttöoikeustoimiston tunnustasi ei voida aktivoida."
+
+#~ msgid ""
+#~ "Either your Wikipedia Library Card Platform account has been deactivated "
+#~ "or your Wikipedia account no longer meets the eligibility criteria in the "
+#~ "terms of use, so you cannot be logged in."
+#~ msgstr ""
+#~ "Joko Wikipedian Lähdekirjaston Käyttöoikeustoimiston tunnus on poistettu "
+#~ "käytöstä tai Wikipedian käyttäjätunnuksesi ei täytä käyttöehdoissa "
+#~ "määriteltyjä kelpoisuusehtoja, joten et voi kirjautua sisään."
+
+#~ msgid "Welcome! Please agree to the terms of use."
+#~ msgstr "Tervetuloa! Hyväksythän käyttöehdot."
+
+#~ msgid "Welcome back!"
+#~ msgstr "Tervetuloa takaisin!"
+
+#~ msgid "Update profile"
+#~ msgstr "Päivitä profiili"
+
+#~ msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
+#~ msgstr ""
+#~ "Kuvaile muokkauksiasi Wikipediassa: mitä aiheita olet muokannut jne."
+
+#~ msgid "I agree with the terms of use"
+#~ msgstr "Hyväksyn käyttöehdot"
+
+#~ msgid "I accept"
+#~ msgstr "Hyväksyn"
+
+#~ msgid "Update email"
+#~ msgstr "Päivitä sähköposti"
+
+#~ msgid "Has this user agreed with the terms of use?"
+#~ msgstr "Onko tämä käyttäjä hyväksynyt käyttöehdot?"
+
+#~ msgid "When this information was last edited"
+#~ msgstr "Milloin tätä tietoa viimeksi muokattiin"
+
+#~ msgid "When this profile was first created"
+#~ msgstr "Milloin tämä profiili luotiin"
+
+#~ msgid "Wikipedia edit count"
+#~ msgstr "Muokkausmäärä Wikipediassa"
+
+#~ msgid "Date registered at Wikipedia"
+#~ msgstr "Käyttäjätunnuksen luomispäivämäärä Wikipediassa"
+
+#~ msgid "Wikipedia user ID"
+#~ msgstr "Wikipedian käyttäjätunnuksen ID"
+
+#~ msgid "Wikipedia groups"
+#~ msgstr "Käyttäjäryhmät Wikipediassa"
+
+#~ msgid "Wikipedia user rights"
+#~ msgstr "Käyttäjäoikeudet Wikipediassa"
+
+#~ msgid ""
+#~ "At their last login, did this user meet the criteria in the terms of use?"
+#~ msgstr ""
+#~ "Tåyttikö käyttäjä viimeisimmässä kirjautumisessaan Wikipedian "
+#~ "Lähdekirjaston Käyttöoikeustoimiston käyttöehdot?"
+
+#~ msgid "Wiki contributions, as entered by user"
+#~ msgstr "Käyttäjän antama muokkausmäärä"
+
+#, fuzzy
+#~| msgid "{wp_username} ({wiki})"
+#~ msgid "{wp_username}"
+#~ msgstr "{wp_username} ({wiki})"
+
+#~ msgid ""
+#~ "The Wikipedia Library Card Platform is a project of <a href=\"https://"
+#~ "meta.wikimedia.org/wiki/The_Wikipedia_Library\"> The Wikipedia Library</"
+#~ "a>."
+#~ msgstr ""
+#~ "Wikipedian Lähdekirjaston Käyttöoikeustoimisto on <a href=\"https://meta."
+#~ "wikimedia.org/wiki/The_Wikipedia_Library\"> Wikipedian Lähdekirjaston</a> "
+#~ "projekti."
 
 #~ msgid "Rationale"
 #~ msgstr "Muokkaajan perustelut"
