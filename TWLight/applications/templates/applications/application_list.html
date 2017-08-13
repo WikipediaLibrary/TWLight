@@ -12,23 +12,23 @@
       <strong aria-label="button_group">{% trans "View applications which are..." %}</strong>
       <div class="btn-group" role="nav" aria-labelledby="button_group">
         {# Translators: This describes the status of a group of applications. #}
-        <a href="{{ pending_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ pending_class }}" type="button" class="btn btn-default {{ pending_class }}">
+        <a href="{{ pending_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ pending_class }}">
           {% trans "Pending review" %}
         </a>
         {# Translators: This describes the status of a group of applications. #}
-        <a href="{{ approved_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ pending_class }}" type="button" class="btn btn-default {{ approved_class }}">
+        <a href="{{ approved_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ approved_class }}">
           {% trans "Approved" %}
         </a>
         {# Translators: This describes the status of a group of applications. #}
-        <a href="{{ rejected_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ pending_class }}" type="button" class="btn btn-default {{ rejected_class }}">
+        <a href="{{ rejected_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ rejected_class }}">
           {% trans "Rejected" %}
         </a>
         {# Translators: This describes the status of a group of applications. #}
-        <a href="{{ sent_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" class="btn btn-default {{ pending_class }}" type="button" class="btn btn-default {{ sent_class }}">
+        <a href="{{ sent_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ sent_class }}">
           {% trans "Sent" %}
         </a>
         {# Translators: This describes the status of a group of applications. #}
-        <a href="{{ expiring_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ pending_class }}" type="button" class="btn btn-default {{ expiring_class }}">
+        <a href="{{ expiring_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ expiring_class }}">
           {% trans "Up for renewal" %}
         </a>
       </div>
