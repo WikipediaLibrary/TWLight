@@ -34,7 +34,7 @@ class Command(BaseCommand):
 
     def get_global_userinfo(self, user):
         try:
-            endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={name}&format=json&formatversion=2'.format(base='https://meta.wikimedia.org',name=urllib2.quote(user.editor.wp_username))
+            endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={name}&format=json&formatversion=2'.format(base='https://meta.wikimedia.org',name=urllib2.quote(user.editor.wp_username.encode('utf-8')))
 
             results = json.loads(urllib2.urlopen(endpoint).read())
             global_userinfo = results['query']['globaluserinfo']
@@ -43,6 +43,6 @@ class Command(BaseCommand):
             assert 'missing' not in global_userinfo
             return global_userinfo
         except:
-            self.stdout.write(u'{username}: could not fetch global_userinfo.'.format(username=str(user.username)))
+            self.stdout.write(u'{username}:{wp_username}: could not fetch global_userinfo.'.format(username=str(user.username,wp_username=user.editor.wp_username.encode('utf-8'))))
             return None
             pass
