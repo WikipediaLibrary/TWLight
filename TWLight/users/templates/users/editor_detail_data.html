@@ -94,43 +94,11 @@
 
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Wikipedia account. Don't remove the * {% endcomment %}
-      <strong>{% trans "Date registered on Wikipedia *" %}</strong>
+      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the * {% endcomment %}
+      <strong>{% trans "Meta-Wiki registration or SUL merge date *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-9">
       {{ editor.wp_registered }}
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="row clearfix">
-    <div class="col-xs-12 col-sm-3">
-      {# Translators: The groups will be listed in English even if the site isn't English; we get them directly from Wikipedia. #}
-      <strong>{% trans "Wikipedia groups *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-9">
-      <ul class="list-unstyled">
-        {% for group in editor.get_wp_groups_display %}
-          <li>{{ group }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="row clearfix">
-    <div class="col-xs-12 col-sm-3">
-      {# Translators: The rights will be listed in English even if the site isn't English; we get them directly from Wikipedia. #}
-      <strong>{% trans "Wikipedia user rights *" %}</strong>
-    </div>
-    <div class="col-xs-12 col-sm-9">
-      <ul class="list-unstyled">
-        {% for right in editor.get_wp_rights_display %}
-          <li>{{ right }}</li>
-        {% endfor %}
-      </ul>
     </div>
   </div>
 
