@@ -105,7 +105,7 @@
             <li {% ifequal forloop.counter object_list.number %}
                   class="active"
                 {% endifequal %}>
-              <a href="?page={{ forloop.counter }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+              <a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
                 {{ forloop.counter }}
               </a>
             </li>
@@ -114,7 +114,7 @@
         {% if object_list.has_next %}
           <li>
             {% comment %}Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications. {% endcomment %}
-            <a href="?page={{ object_list.next_page_number }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Next" %}">
+            <a href="?page={{ object_list.next_page_number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Next" %}">
               {% comment %}Translators: This is the label for a button which goes to the next page of applications.{% endcomment %}
               <span aria-hidden="true">{% trans "Next page" %}</span>
             </a>
