@@ -121,9 +121,11 @@ class Editor(models.Model):
     # user rights in future:
     # Editor.objects.filter(wp_groups__icontains=groupname) or similar.
     # Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-    wp_groups = models.TextField(help_text=_("Wikipedia groups"))
+    wp_groups = models.TextField(help_text=_("Wikipedia groups"),
+        blank=True)
     # Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-    wp_rights = models.TextField(help_text=_("Wikipedia user rights"))
+    wp_rights = models.TextField(help_text=_("Wikipedia user rights"),
+        blank=True)
     wp_valid = models.BooleanField(default=False,
         # Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
         help_text=_('At their last login, did this user meet the criteria in '
