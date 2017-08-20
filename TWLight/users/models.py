@@ -110,9 +110,11 @@ class Editor(models.Model):
     wp_username = models.CharField(max_length=235,
         help_text=_("Username"))
     # Translators: The total number of edits this user has made to all Wikipedia projects
-    wp_editcount = models.IntegerField(help_text=_("Wikipedia edit count"))
+    wp_editcount = models.IntegerField(help_text=_("Wikipedia edit count"),
+        blank=True, null=True)
     # Translators: The date this user registered their Wikipedia account
-    wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"))
+    wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"),
+        blank=True, null=True)
     wp_sub = models.IntegerField(unique=True,
         # Translators: The User ID for this user on Wikipedia
         help_text=_("Wikipedia user ID")) # WP user id.
@@ -245,38 +247,11 @@ class Editor(models.Model):
             assert identity['blocked'] == False
 
             return True
-        except AssertionError:
+        # Was assertion error, now we're catching any error in case we have
+        # an API communication or data problem.
+        except:
             logger.exception('Editor was not valid.')
             return False
-
-    def get_userinfo(self, identity):
-        """
-        Not currently used, since we're not accessing the API logged in.
-        Grab local user information from the API, which we'll use to overlay
-        somme local wiki user info returned by OAuth.  Returns a dict like:
-
-        userinfo:
-          id:                 27666025
-          name:               "Example"
-          options:            Lists all preferences the current user has set.
-          email:              "nomail@example.com"
-          emailauthenticated: "1969-12-31T11:59:59Z"
-        """
-
-        endpoint = '{base}/w/api.php?action=query&format=json&meta=userinfo&uiprop=centralids|email|options'.format(base=identity['iss'])
-
-        results = json.loads(urllib2.urlopen(endpoint).read())
-        userinfo = results['query']['userinfo']
-
-        try:
-            assert userinfo['centralids']['CentralAuth'] == identity['sub']
-        except AssertionError:
-            logger.exception('Was asked to get userinfo, but '
-                'WP sub in the identity passed in did not match the wp_sub on '
-                'in the current API context.')
-            pass
-
-        return userinfo
 
     def get_global_userinfo(self, identity):
         """
@@ -339,17 +314,22 @@ class Editor(models.Model):
             raise
 
         global_userinfo = self.get_global_userinfo(identity)
-        #userinfo = self.get_userinfo(identity)
 
         self.wp_username = identity['username']
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
-        self.wp_editcount = global_userinfo['editcount']
+        if global_userinfo:
+            self.wp_editcount = global_userinfo['editcount']
         # Try oauth registration date first.  If it's not valid, try the global_userinfo date
         try:
             reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
-        except:
-            reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
+        except ValueError:
+            try:
+                reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
+            except ValueError:
+                reg_date = None
+                pass
+
         self.wp_registered = reg_date
         self.wp_valid = self._is_user_valid(identity, global_userinfo)
         self.save()
