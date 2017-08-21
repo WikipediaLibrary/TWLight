@@ -270,9 +270,16 @@ class Editor(models.Model):
 
             results = json.loads(urllib2.urlopen(endpoint).read())
             global_userinfo = results['query']['globaluserinfo']
-            logger.info('Fetched global_userinfo for User.')
 
-            return global_userinfo
+            try:
+                assert 'missing' not in global_userinfo
+                logger.info('Fetched global_userinfo for User.')
+                return global_userinfo
+            except AssertionError:
+                logger.exception('Could not fetch global_userinfo for User.')
+                return None
+                pass
+
         except:
             logger.exception('Could not fetch global_userinfo for User.')
             return None
