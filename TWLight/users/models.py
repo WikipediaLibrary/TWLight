@@ -358,6 +358,7 @@ class Editor(models.Model):
 
     def __unicode__(self):
         return _(u'{wp_username}').format(
+            # Translators: Do not translate.
             wp_username=self.wp_username)
 
 
