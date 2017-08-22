@@ -40,7 +40,14 @@
   {% if user|coordinators_only %}
     <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
       {% csrf_token %}
-      <input type="submit" class="btn btn-default btn-block text-center visible-xs z-index-100" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
+      <input type="submit" class="btn btn-default btn-block text-center visible-xs z-index-100"
+      {% if object.is_waitlisted %}
+        {% comment %} Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist. { endcomment %}
+        value="{% trans "Remove from waitlist" %}"
+      {% else %}
+        {% comment %} Translators: If a partner is not currently waitlisted, this button allows coordinators to add the partner to the waitlist. { endcomment %}
+        value="{% trans "Set as waitlisted" %}"
+      {% endif %}"/>
     </form>
   {% endif %}
   <ul class="timeline half-timeline margin-bottom-2em">

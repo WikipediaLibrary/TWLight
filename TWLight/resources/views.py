@@ -44,6 +44,7 @@ class PartnersDetailView(DetailView):
             # This should be guaranteed by get_queryset and the manager
             # definitions.
             assert self.request.user.is_staff
+            # Translators: Staff members can view partner pages which are hidden from other users. This message appears on those specific partner resource pages.
             messages.add_message(self.request, messages.WARNING,
                 _("This Partner is not available. You can see it because you "
                     "are a staff member, but it is not visible to non-staff "
