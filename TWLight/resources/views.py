@@ -46,7 +46,7 @@ class PartnersDetailView(DetailView):
             assert self.request.user.is_staff
             messages.add_message(self.request, messages.WARNING,
                 _("This Partner is not available. You can see it because you "
-                    "are a staff member, but it is not visible to non-staff 
+                    "are a staff member, but it is not visible to non-staff "
                     "users."))
 
         context['total_apps'] = Application.objects.filter(
