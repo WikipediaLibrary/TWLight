@@ -30,7 +30,7 @@ def deactivate(modeladmin, request, queryset):
         user.save()
 
         messages.add_message(request, messages.SUCCESS,
-            #Translator: Shown when an administrator deletes a user's account. Don't translate {user}.
+            # Translators: Shown when an administrator deletes a user's account. Don't translate {user}.
             _('User {user} deactivated.').format(user=user))
 
 
