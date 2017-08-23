@@ -199,8 +199,8 @@ class BaseApplicationForm(forms.Form):
     def _add_partner_data_subform(self, partner):
         partner_data = self.field_params[partner]
         partner_object = self._get_partner_object(partner)
-        # Translators: This goes into a form legend that acts as the title of a form or fieldset for a partner application. It lets the user know which partner application they are entering data for.
         partner_layout = Fieldset(
+            # Translators: This goes into a form legend that acts as the title of a form or fieldset for a partner application. It lets the user know which partner application they are entering data for.
             _('Your application to {partner}').format(partner=partner_object))
 
         self._validate_partner_data(partner_data)
