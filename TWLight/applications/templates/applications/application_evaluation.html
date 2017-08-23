@@ -120,9 +120,9 @@
         {% trans 'No' %}
       {% endif %}
     </div>
-    {% comment %}Translators: This labels the section of an application containing the additional comments submitted by the user when applying.{% endcomment %}
     {% if object.comments %}
       <div class="col-xs-12 col-sm-4">
+        {% comment %} Translators: This labels the section of an application containing the additional comments submitted by the user when applying.{% endcomment %}
         <strong>{% trans 'Comments from the editor' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
