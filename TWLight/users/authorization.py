@@ -315,7 +315,25 @@ class OAuthCallbackView(View):
     """
 
     def get(self, request, *args, **kwargs):
-        response_qs = request.META['QUERY_STRING']
+        request_meta_qs = request.META['QUERY_STRING']
+        request_get = request.GET
+
+        if request_meta_qs:
+            response_qs = request_meta_qs
+        elif 'oauth_token' in request_get and 'oauth_verifier' in request_get:
+            response_qs = response_get.urlencode()
+        else:
+            response_qs = None
+
+        try:
+            response_qs_parsed = urlparse.parse_qs(response_qs)
+            assert 'oauth_token' in response_qs_parsed
+            assert 'oauth_verifier' in response_qs_parsed
+        except (AssertionError, TypeError):
+            logger.exception('Did not receive a valid oauth response.')
+            messages.add_message (request, messages.WARNING,
+                _('Did not receive a valid oauth response.'))
+            raise PermissionDenied
 
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
@@ -323,7 +341,7 @@ class OAuthCallbackView(View):
             domain = self.request.get_host()
             assert domain in settings.ALLOWED_HOSTS
         except (AssertionError, DisallowedHost):
-            logger.exception()
+            logger.exception('Domain is not an allowed host')
             messages.add_message (request, messages.WARNING,
                 _('{domain} is not an allowed host.').format(domain=domain))
             raise PermissionDenied
