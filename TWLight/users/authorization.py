@@ -317,13 +317,12 @@ class OAuthCallbackView(View):
     def get(self, request, *args, **kwargs):
         request_meta_qs = request.META['QUERY_STRING']
         request_get = request.GET
+        response_qs = None
 
         if request_meta_qs:
             response_qs = request_meta_qs
         elif 'oauth_token' in request_get and 'oauth_verifier' in request_get:
-            response_qs = response_get.urlencode()
-        else:
-            response_qs = None
+            response_qs = request_get.urlencode()
 
         try:
             response_qs_parsed = urlparse.parse_qs(response_qs)
