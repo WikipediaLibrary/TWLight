@@ -79,11 +79,12 @@
       {% endif %}
 
       <div class="well hidden-xs">
-        {% if object.coordinator %}
+        {% if object.coordinator.editor.wp_username %}
           {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}
           {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
             <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
           {% endblocktrans %}
+        {% endif %}
 
           <ul>
             {% if object.coordinator.editor.wp_talk_page_url %}
