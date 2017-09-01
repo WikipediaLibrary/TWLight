@@ -330,10 +330,10 @@ class Editor(models.Model):
         # Try oauth registration date first.  If it's not valid, try the global_userinfo date
         try:
             reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
-        except ValueError:
+        except TypeError, ValueError:
             try:
                 reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
-            except ValueError:
+            except TypeError, ValueError:
                 reg_date = None
                 pass
 
