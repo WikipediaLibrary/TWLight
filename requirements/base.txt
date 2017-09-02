@@ -10,7 +10,7 @@ django-request==1.5.1
 django-reversion==2.0.8
 django-taggit==0.22.0
 djmail==1.0.0
-factory_boy==2.7.0
+factory_boy==2.9.2
 mock==2.0.0
 mwoauth==0.2.8
 oauthlib==0.6.3
