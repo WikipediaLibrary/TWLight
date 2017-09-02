@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from reversion import revisions as reversion
 from reversion.models import Version
 
@@ -314,7 +314,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
 
             instance.date_closed = date.today()
             instance.days_open = \
-                (date.today() - instance.date_created).days
+                (now() - instance.date_created).days
 
     else:
         # If somehow we've created an Application whose status is final

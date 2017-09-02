@@ -1791,7 +1791,7 @@ class ApplicationModelTest(TestCase):
         term = app.partner.access_grant_term
         expected_expiry = app.date_created + term
 
-        self.assertEqual(app.earliest_expiry_date, expected_expiry)
+        self.assertEqual(app.earliest_expiry_date, expected_expiry.date())
 
 
     def test_bootstrap_class(self):
