@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import Http404
-from django.test import TestCase, RequestFactory
+from django.test import Client, TestCase, RequestFactory
 
 from TWLight.applications import views as app_views
 from TWLight.applications.factories import ApplicationFactory
@@ -317,18 +317,36 @@ class WaitlistBehaviorTests(TestCase):
         there are waitlisted Partners.
         """
         # Set up request.
+        terms_url = '/terms/'
         req_url = reverse('applications:request')
 
         editor = EditorFactory()
-        request = RequestFactory().get(req_url)
-        request.user = editor.user
+        UserProfileFactory(user=editor.user, terms_of_use=True)
+
+        editor.user.set_password('editor')
+        editor.user.save()
 
         # Ensure there is at least one waitlisted partner.
         partner = PartnerFactory(status=Partner.WAITLIST)
 
+        # Log user in
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=editor.user.username, password='editor')
+        session.save()
+
+        # Agree to terms of use in Client
+        terms = self.client.get(terms_url, follow=True)
+        terms_form = terms.context['form']
+        data = terms_form.initial
+        data['terms_of_use'] = True
+        data['submit'] = 'I accept'
+        agree = self.client.post(terms_url, data)
+        session.save()
+
         # Test response.
-        resp = RequestApplicationView.as_view()(request)
-        self.assertEqual(resp.context_data['any_waitlisted'], True)
+        resp = self.client.get(req_url, follow=True)
+        self.assertEqual(resp.context['any_waitlisted'], True)
 
 
     def test_request_application_view_context_2(self):
