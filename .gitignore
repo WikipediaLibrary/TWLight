@@ -1,7 +1,4 @@
 # bin files now created by puppet module
-# https://forge.puppet.com/jsnshrmn/twlight
-
-bin/
 collectedstatic/
 staticfiles/
 personal/
