@@ -320,9 +320,8 @@ class WaitlistBehaviorTests(TestCase):
         terms_url = '/terms/'
         req_url = reverse('applications:request')
 
+        # Create and editor and set a password
         editor = EditorFactory()
-        UserProfileFactory(user=editor.user, terms_of_use=True)
-
         editor.user.set_password('editor')
         editor.user.save()
 
@@ -340,7 +339,7 @@ class WaitlistBehaviorTests(TestCase):
         terms_form = terms.context['form']
         data = terms_form.initial
         data['terms_of_use'] = True
-        data['submit'] = 'I accept'
+        data['submit'] = True
         agree = self.client.post(terms_url, data)
         session.save()
 
