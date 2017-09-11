@@ -18,6 +18,35 @@ from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner
 from .views import PartnersDetailView, PartnersListView, PartnersToggleWaitlistView
 
+def EditorCraftRoom(self, Terms=False):
+    """
+    The use of the @login_required decorator on many views precludes the use of
+    factories for many tests. This method creates an Editor logged into a test
+    client session.
+    """
+    terms_url = reverse('terms')
+
+    # Create and editor and set a password
+    editor = EditorFactory()
+    editor.user.set_password('editor')
+    editor.user.save()
+
+    # Log user in
+    self.client = Client()
+    session = self.client.session
+    self.client.login(username=editor.user.username, password='editor')
+    session.save()
+
+    # Agree to terms of use in Client (or not).
+    terms = self.client.get(terms_url, follow=True)
+    terms_form = terms.context['form']
+    data = terms_form.initial
+    data['terms_of_use'] = Terms
+    data['submit'] = True
+    agree = self.client.post(terms_url, data)
+    session.save()
+
+
 class LanguageModelTests(TestCase):
 
     @classmethod
@@ -310,38 +339,19 @@ class WaitlistBehaviorTests(TestCase):
         cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
         cls.message_patcher.start()
 
-
     def test_request_application_view_context_1(self):
         """
         The any_waitlisted context on RequestApplicationView should True if
         there are waitlisted Partners.
         """
         # Set up request.
-        terms_url = reverse('terms')
         req_url = reverse('applications:request')
 
-        # Create and editor and set a password
-        editor = EditorFactory()
-        editor.user.set_password('editor')
-        editor.user.save()
+        # Create an editor with a test client session
+        editor = EditorCraftRoom(self, Terms=True)
 
         # Ensure there is at least one waitlisted partner.
         partner = PartnerFactory(status=Partner.WAITLIST)
-
-        # Log user in
-        self.client = Client()
-        session = self.client.session
-        self.client.login(username=editor.user.username, password='editor')
-        session.save()
-
-        # Agree to terms of use in Client
-        terms = self.client.get(terms_url, follow=True)
-        terms_form = terms.context['form']
-        data = terms_form.initial
-        data['terms_of_use'] = True
-        data['submit'] = True
-        agree = self.client.post(terms_url, data)
-        session.save()
 
         # Test response.
         resp = self.client.get(req_url, follow=True)
