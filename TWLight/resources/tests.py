@@ -317,7 +317,7 @@ class WaitlistBehaviorTests(TestCase):
         there are waitlisted Partners.
         """
         # Set up request.
-        terms_url = '/terms/'
+        terms_url = reverse('terms')
         req_url = reverse('applications:request')
 
         # Create and editor and set a password
