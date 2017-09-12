@@ -18,7 +18,7 @@ from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner
 from .views import PartnersDetailView, PartnersListView, PartnersToggleWaitlistView
 
-def EditorCraftRoom(self, Terms=False):
+def EditorCraftRoom(self, Terms=False, Coordinator=False):
     """
     The use of the @login_required decorator on many views precludes the use of
     factories for many tests. This method creates an Editor logged into a test
@@ -45,6 +45,10 @@ def EditorCraftRoom(self, Terms=False):
     data['submit'] = True
     agree = self.client.post(terms_url, data)
     session.save()
+
+    if Coordinator:
+        coordinators = get_coordinators()
+        coordinators.user_set.add(editor.user)
 
 
 class LanguageModelTests(TestCase):
@@ -209,10 +213,11 @@ class PartnerModelTests(TestCase):
 
         url = reverse('applications:list')
 
-        request = RequestFactory().get(url)
-        request.user = self.coordinator
-        response = app_views.ListApplicationsView.as_view()(request)
+        # Create a coordinator with a test client session
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
+        # Test response.
+        response = self.client.get(url, follow=True)
         self.assertNotContains(response, partner.company_name)
 
 
@@ -226,10 +231,11 @@ class PartnerModelTests(TestCase):
             earliest_expiry_date=tomorrow)
         url = reverse('applications:list_expiring')
 
-        request = RequestFactory().get(url)
-        request.user = self.coordinator
-        response = app_views.ListExpiringApplicationsView.as_view()(request)
+        # Create a coordinator with a test client session
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
+        # Test response.
+        response = self.client.get(url, follow=True)
         self.assertNotContains(response, partner.company_name)
 
 
@@ -238,10 +244,11 @@ class PartnerModelTests(TestCase):
         _ = ApplicationFactory(partner=partner, status=Application.SENT)
         url = reverse('applications:list_sent')
 
-        request = RequestFactory().get(url)
-        request.user = self.coordinator
-        response = app_views.ListSentApplicationsView.as_view()(request)
+        # Create a coordinator with a test client session
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
+        # Test response.
+        response = self.client.get(url, follow=True)
         self.assertContains(response, partner.company_name)
 
 
@@ -250,10 +257,11 @@ class PartnerModelTests(TestCase):
         _ = ApplicationFactory(partner=partner, status=Application.NOT_APPROVED)
         url = reverse('applications:list_rejected')
 
-        request = RequestFactory().get(url)
-        request.user = self.coordinator
-        response = app_views.ListRejectedApplicationsView.as_view()(request)
+        # Create a coordinator with a test client session
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
+        # Test response.
+        response = self.client.get(url, follow=True)
         self.assertContains(response, partner.company_name)
 
 
@@ -262,10 +270,11 @@ class PartnerModelTests(TestCase):
         _ = ApplicationFactory(partner=partner, status=Application.APPROVED)
         url = reverse('applications:list_approved')
 
-        request = RequestFactory().get(url)
-        request.user = self.coordinator
-        response = app_views.ListApprovedApplicationsView.as_view()(request)
+        # Create a coordinator with a test client session
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
+        # Test response.
+        response = self.client.get(url, follow=True)
         self.assertContains(response, partner.company_name)
 
 
@@ -354,8 +363,8 @@ class WaitlistBehaviorTests(TestCase):
         partner = PartnerFactory(status=Partner.WAITLIST)
 
         # Test response.
-        resp = self.client.get(req_url, follow=True)
-        self.assertEqual(resp.context['any_waitlisted'], True)
+        response = self.client.get(req_url, follow=True)
+        self.assertEqual(response.context['any_waitlisted'], True)
 
 
     def test_request_application_view_context_2(self):
@@ -366,17 +375,16 @@ class WaitlistBehaviorTests(TestCase):
         # Set up request.
         req_url = reverse('applications:request')
 
-        editor = EditorFactory()
-        request = RequestFactory().get(req_url)
-        request.user = editor.user
+        # Create an editor with a test client session
+        editor = EditorCraftRoom(self, Terms=True)
 
         # Ensure there are no waitlisted partners.
         for partner in Partner.objects.filter(status=Partner.WAITLIST):
             partner.delete()
 
         # Test response.
-        resp = RequestApplicationView.as_view()(request)
-        self.assertEqual(resp.context_data['any_waitlisted'], False)
+        response = self.client.get(req_url, follow=True)
+        self.assertEqual(response.context['any_waitlisted'], False)
 
 
     def test_toggle_waitlist_1(self):
