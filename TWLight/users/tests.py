@@ -109,15 +109,13 @@ class ViewsTestCase(TestCase):
 
 
     def test_anon_user_cannot_see_editor_details(self):
-        """Check that an anonymous user cannot see an editor page."""
-        resp = self.client.get(self.url1)
-        self.assertEqual(resp.status_code, 403)
-
-        # The following should work, but does not, even though the above works
-        # and print statement inserted in the view mixin confirm that the
-        # relevant code gets executed.
-        #with self.assertRaises(PermissionDenied):
-        #    _ = self.client.get(self.url1)
+        """
+        If an AnonymousUser hits an editor page, they are redirected to login.
+        """
+        response = self.client.get(self.url1)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            settings.LOGIN_URL)
 
 
     def test_editor_can_see_own_page(self):
@@ -402,15 +400,15 @@ class EditorModelTestCase(TestCase):
         self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Edge case
-        identity['editcount'] = 500
+        global_userinfo['editcount'] = 500
         self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Too few edits
-        identity['editcount'] = 499
+        global_userinfo['editcount'] = 499
         self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Account created too recently
-        identity['editcount'] = 500
+        global_userinfo['editcount'] = 500
         identity['registered'] = datetime.today().strftime('%Y%m%d%H%M%S')
         self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
 
