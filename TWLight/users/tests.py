@@ -44,6 +44,14 @@ FAKE_IDENTITY = {
     'username': 'alice',
 }
 
+FAKE_GLOBAL_USERINFO = {
+    'home': 'enwiki',
+    'id': 567823,
+    'registration': '2015-11-06T15:46:29Z', # Well before first commit.
+    'name': 'alice',
+    'editcount': 5000,
+}
+
 class ViewsTestCase(TestCase):
 
     def setUp(self):
@@ -161,7 +169,7 @@ class ViewsTestCase(TestCase):
 
 
     def test_editor_page_has_editor_data(self):
-        """Expected editor personal data is in their page."""
+        """Expected editor personal oauth_data is in their page."""
         factory = RequestFactory()
         request = factory.get(self.url1)
         request.user = self.user_editor
@@ -170,7 +178,7 @@ class ViewsTestCase(TestCase):
 
         content = response.render().content
 
-        # This uses default data from EditorFactory, except for the username,
+        # This uses default oauth_data from EditorFactory, except for the username,
         # which is randomly generated (hence has no default).
         self.assertIn(self.editor1.wp_username, content)
         self.assertIn('42', content)
@@ -181,7 +189,7 @@ class ViewsTestCase(TestCase):
 
 
     def test_editor_page_has_application_history(self):
-        """Expected editor application data is in their page."""
+        """Expected editor application oauth_data is in their page."""
         app1 = ApplicationFactory(status=Application.PENDING, editor=self.user_editor.editor)
         app2 = ApplicationFactory(status=Application.QUESTION, editor=self.user_editor.editor)
         app3 = ApplicationFactory(status=Application.APPROVED, editor=self.user_editor.editor)
@@ -331,8 +339,7 @@ class EditorModelTestCase(TestCase):
 
         # Wiki 'zh-classical' is 'zh-classical.wikipedia.org'. It's also the
         # longest wiki name in wiki_list.
-        self.test_editor = EditorFactory(home_wiki='zh-classical',
-            wp_username='editor_model_test',
+        self.test_editor = EditorFactory(wp_username='editor_model_test',
             wp_rights=json.dumps(['cat floofing', 'the big red button']),
             wp_groups=json.dumps(['sysops', 'bureaucrats']))
 
@@ -347,19 +354,9 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(expected_url, self.test_editor.wp_user_page_url)
 
 
-    def test_wp_link_edit_count(self):
-        expected_url = 'https://tools.wmflabs.org/xtools-ec/?user=editor_model_test&project=zh-classical.wikipedia.org'
-        self.assertEqual(expected_url, self.test_editor.wp_link_edit_count)
-
-
     def test_wp_link_sul_info(self):
         expected_url = 'https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=editor_model_test'
         self.assertEqual(expected_url, self.test_editor.wp_link_sul_info)
-
-
-    def test_wp_link_pages_created(self):
-        expected_url = 'https://tools.wmflabs.org/xtools/pages/index.php?user=editor_model_test&project=zh-classical.wikipedia.org&namespace=all&redirects=none'
-        self.assertEqual(expected_url, self.test_editor.wp_link_pages_created)
 
 
     def test_get_wp_rights_display(self):
@@ -388,45 +385,48 @@ class EditorModelTestCase(TestCase):
         """
         mock_response = Mock()
 
-        data = FAKE_IDENTITY_DATA
+        oauth_data = FAKE_IDENTITY_DATA
+
+        global_userinfo_data = FAKE_GLOBAL_USERINFO
 
         # This goes to an iterator; we need to return the expected data
         # enough times to power all the calls to read() in this function.
-        mock_response.read.side_effect = [json.dumps(data)] * 7
+        mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
 
         mock_urllib2.return_value = mock_response
 
         identity = copy.copy(FAKE_IDENTITY)
+        global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
 
         # Valid data
-        self.assertTrue(self.test_editor._is_user_valid(identity))
+        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Edge case
         identity['editcount'] = 500
-        self.assertTrue(self.test_editor._is_user_valid(identity))
+        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Too few edits
         identity['editcount'] = 499
-        self.assertFalse(self.test_editor._is_user_valid(identity))
+        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Account created too recently
         identity['editcount'] = 500
         identity['registered'] = datetime.today().strftime('%Y%m%d%H%M%S')
-        self.assertFalse(self.test_editor._is_user_valid(identity))
+        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Edge case: this shouldn't.
         almost_6_months_ago = datetime.today() - timedelta(days=183)
         identity['registered'] = almost_6_months_ago.strftime('%Y%m%d%H%M%S')
-        self.assertTrue(self.test_editor._is_user_valid(identity))
+        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Edge case: this should work.
         almost_6_months_ago = datetime.today() - timedelta(days=182)
         identity['registered'] = almost_6_months_ago.strftime('%Y%m%d%H%M%S')
-        self.assertTrue(self.test_editor._is_user_valid(identity))
+        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
 
         # Bad editor! No biscuit.
         identity['blocked'] = True
-        self.assertFalse(self.test_editor._is_user_valid(identity))
+        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
 
 
     @patch('urllib2.urlopen')
@@ -440,16 +440,18 @@ class EditorModelTestCase(TestCase):
         """
         mock_response = Mock()
 
-        data = copy.copy(FAKE_IDENTITY_DATA)
-        data['query']['userinfo']['options']['disablemail'] = 1 # Should fail.
+        oauth_data = copy.copy(FAKE_IDENTITY_DATA)
+        global_userinfo_data = copy.copy(FAKE_GLOBAL_USERINFO)
+        oauth_data['query']['userinfo']['options']['disablemail'] = 1 # Should fail.
 
-        mock_response.read.side_effect = [json.dumps(data)]
-        mock_response.read.side_effect = [json.dumps(data)]
+        mock_response.read.side_effect = [json.dumps(oauth_data)]
+        mock_response.read.side_effect = [json.dumps(oauth_data)]
         mock_urllib2.return_value = mock_response
 
         identity = FAKE_IDENTITY
+        global_userinfo = FAKE_GLOBAL_USERINFO
 
-        self.assertFalse(self.test_editor._is_user_valid(identity))
+        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
 
 
     @patch('TWLight.users.models.Editor._is_user_valid')
@@ -473,6 +475,13 @@ class EditorModelTestCase(TestCase):
         identity['email'] = 'porkchop@example.com'
         identity['iss'] = 'zh-classical.wikipedia.org'
         identity['registered'] = '20130205230142'
+
+        global_userinfo = {}
+        global_userinfo['home'] = 'zh_classicalwiki'
+        global_userinfo['id'] = identity['sub']
+        global_userinfo['registration'] = '2013-02-05T23:01:42Z'
+        global_userinfo['name'] = identity['username']
+        global_userinfo['editcount'] = identity['editcount']
 
         new_editor.update_from_wikipedia(identity)
 
@@ -514,17 +523,17 @@ class AuthorizationTestCase(TestCase):
         * And a matching editor
         """
         oauth_backend = OAuthBackend()
-        data = FAKE_IDENTITY_DATA
+        oauth_data = FAKE_IDENTITY_DATA
         identity = FAKE_IDENTITY
 
         mock_response = Mock()
-        mock_response.read.side_effect = [json.dumps(data)] * 7
+        mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
         mock_urllib2.return_value = mock_response
 
         user, editor = oauth_backend._create_user_and_editor(identity)
 
         self.assertEqual(user.email, 'alice@example.com')
-        self.assertEqual(user.username, 'en567823')
+        self.assertEqual(user.username, '567823')
         self.assertFalse(user.has_usable_password())
 
         self.assertEqual(editor.user, user)
@@ -543,12 +552,12 @@ class AuthorizationTestCase(TestCase):
         orig_editor_count = Editor.objects.count()
 
         oauth_backend = OAuthBackend()
-        data = FAKE_IDENTITY_DATA
+        oauth_data = FAKE_IDENTITY_DATA
         identity = copy.copy(FAKE_IDENTITY)
         identity['rights'] = ['no_autoconfirmed_here']
 
         mock_response = Mock()
-        mock_response.read.side_effect = [json.dumps(data)] * 7
+        mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
         mock_urllib2.return_value = mock_response
 
         with self.assertRaises(PermissionDenied):
@@ -572,7 +581,7 @@ class AuthorizationTestCase(TestCase):
         * Call Editor.update_from_wikipedia
         """
         # Make sure the test user has the username anticipated by our backend.
-        username = '{lang}{sub}'.format(lang='en', sub=FAKE_IDENTITY['sub'])
+        username = FAKE_IDENTITY['sub']
         existing_user = UserFactory(username=username)
         params = {
             'user': existing_user,
