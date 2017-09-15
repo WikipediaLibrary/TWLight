@@ -36,7 +36,7 @@ FAKE_IDENTITY = {
     'editcount': 5000,
     'registered': '20151106154629', # Well before first commit.
     'blocked': False,
-    'iss': 'https://en.wikipedia.org',
+    'iss': urlparse(settings.TWLIGHT_OAUTH_PROVIDER_URL).scheme + urlparse(settings.TWLIGHT_OAUTH_PROVIDER_URL).netloc,
     'sub': 567823,
     'rights': ['deletion', 'spaceflight', 'autoconfirmed'],
     'groups': ['charismatic megafauna'],
@@ -167,7 +167,7 @@ class ViewsTestCase(TestCase):
 
 
     def test_editor_page_has_editor_data(self):
-        """Expected editor personal oauth_data is in their page."""
+        """Expected editor personal data is in their page."""
         factory = RequestFactory()
         request = factory.get(self.url1)
         request.user = self.user_editor
@@ -176,13 +176,10 @@ class ViewsTestCase(TestCase):
 
         content = response.render().content
 
-        # This uses default oauth_data from EditorFactory, except for the username,
+        # This uses default data from EditorFactory, except for the username,
         # which is randomly generated (hence has no default).
         self.assertIn(self.editor1.wp_username, content)
         self.assertIn('42', content)
-        self.assertIn('some groups', content)           # wp_groups
-        self.assertIn('some rights', content)           # wp_rights
-        self.assertIn(WIKIS[0][0], content)             # home wiki
         self.assertIn('Cat floofing, telemetry, fermentation', content)
 
 
@@ -348,7 +345,7 @@ class EditorModelTestCase(TestCase):
 
 
     def test_wp_user_page_url(self):
-        expected_url = 'https://zh-classical.wikipedia.org/wiki/User:editor_model_test'
+        expected_url = settings.TWLIGHT_OAUTH_PROVIDER_URL + '/User:editor_model_test'
         self.assertEqual(expected_url, self.test_editor.wp_user_page_url)
 
 
@@ -538,31 +535,6 @@ class AuthorizationTestCase(TestCase):
         self.assertEqual(editor.wp_sub, 567823)
         # We won't test the fields set by update_from_wikipedia, as they are
         # tested elsewhere.
-
-
-    @patch('urllib2.urlopen')
-    def test_do_not_create_user_without_autoconfirmed(self, mock_urllib2):
-        """
-        OAuthBackend._create_user_and_editor() should not create a user or
-        editor if the user rights don't contain autoconfirmed.
-        """
-        orig_user_count = User.objects.count()
-        orig_editor_count = Editor.objects.count()
-
-        oauth_backend = OAuthBackend()
-        oauth_data = FAKE_IDENTITY_DATA
-        identity = copy.copy(FAKE_IDENTITY)
-        identity['rights'] = ['no_autoconfirmed_here']
-
-        mock_response = Mock()
-        mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
-        mock_urllib2.return_value = mock_response
-
-        with self.assertRaises(PermissionDenied):
-            oauth_backend._create_user_and_editor(identity)
-
-        self.assertEqual(orig_user_count, User.objects.count())
-        self.assertEqual(orig_editor_count, Editor.objects.count())
 
 
     # We mock out this function for two reasons:
