@@ -424,40 +424,12 @@ class EditorModelTestCase(TestCase):
         self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
 
 
-    @patch('urllib2.urlopen')
-    def test_is_user_valid_2(self, mock_urllib2):
-        """
-        Users must:
-        * Have >= 500 edits
-        * Be active for >= 6 months
-        * Have Special:Email User enabled
-        * Not be blocked on any projects
-        """
-        mock_response = Mock()
-
-        oauth_data = copy.copy(FAKE_IDENTITY_DATA)
-        global_userinfo_data = copy.copy(FAKE_GLOBAL_USERINFO)
-        oauth_data['query']['userinfo']['options']['disablemail'] = 1 # Should fail.
-
-        mock_response.read.side_effect = [json.dumps(oauth_data)]
-        mock_response.read.side_effect = [json.dumps(oauth_data)]
-        mock_urllib2.return_value = mock_response
-
-        identity = FAKE_IDENTITY
-        global_userinfo = FAKE_GLOBAL_USERINFO
-
-        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
-
-
-    @patch('TWLight.users.models.Editor._is_user_valid')
-    def test_update_from_wikipedia(self, mock_validity):
+    @patch.object(Editor, 'get_global_userinfo')
+    @patch.object(Editor, '_is_user_valid')
+    def test_update_from_wikipedia(self, mock_validity, mock_global_userinfo):
         # update_from_wikipedia calls _is_user_valid, which generates an API
         # call to Wikipedia that we don't actually want to do in testing.
         mock_validity.return_value = True
-
-        # Don't change self.editor, or other tests will fail! Make a new one
-        # to test instead.
-        new_editor = EditorFactory()
 
         identity = {}
         identity['username'] = 'evil_dr_porkchop'
@@ -466,7 +438,8 @@ class EditorModelTestCase(TestCase):
         identity['sub'] = self.test_editor.wp_sub
         identity['rights'] = ['deletion', 'spaceflight']
         identity['groups'] = ['charismatic megafauna']
-        identity['editcount'] = 960
+        # We should now be ignoring the oauth editcount
+        identity['editcount'] = 42
         identity['email'] = 'porkchop@example.com'
         identity['iss'] = 'zh-classical.wikipedia.org'
         identity['registered'] = '20130205230142'
@@ -476,7 +449,16 @@ class EditorModelTestCase(TestCase):
         global_userinfo['id'] = identity['sub']
         global_userinfo['registration'] = '2013-02-05T23:01:42Z'
         global_userinfo['name'] = identity['username']
-        global_userinfo['editcount'] = identity['editcount']
+        # We should now be using the global_userinfo editcount
+        global_userinfo['editcount'] = 960
+
+        # update_from_wikipedia calls get_global_userinfo, which generates an
+        # API call to Wikipedia that we don't actually want to do in testing.
+        mock_global_userinfo.return_value = global_userinfo
+
+        # Don't change self.editor, or other tests will fail! Make a new one
+        # to test instead.
+        new_editor = EditorFactory()
 
         new_editor.update_from_wikipedia(identity)
 

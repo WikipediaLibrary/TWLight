@@ -239,10 +239,6 @@ class Editor(models.Model):
                 reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
             assert datetime.today().date() - timedelta(days=182) >= reg_date
 
-            # Check: Special:Email User enabled
-            #disablemail = userinfo['options']['disablemail']
-            #assert int(disablemail) == 0
-
             # Check: not blocked
             assert identity['blocked'] == False
 
