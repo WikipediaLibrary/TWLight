@@ -6,6 +6,7 @@ import reversion
 from urlparse import urlparse
 
 from django import forms
+from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import PermissionDenied
@@ -15,6 +16,7 @@ from django.test import TestCase, Client, RequestFactory
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.resources.factories import PartnerFactory, StreamFactory
+from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.factories import EditorFactory, UserFactory
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
@@ -1791,7 +1793,7 @@ class ApplicationModelTest(TestCase):
         term = app.partner.access_grant_term
         expected_expiry = app.date_created + term
 
-        self.assertEqual(app.earliest_expiry_date, expected_expiry.date())
+        self.assertEqual(app.earliest_expiry_date, expected_expiry)
 
 
     def test_bootstrap_class(self):
@@ -2188,38 +2190,30 @@ class BatchEditTest(TestCase):
 
 
     def test_missing_params_raise_http_bad_request(self):
-        # No post data: bad.
-        request = RequestFactory().post(self.url, data={})
-        request.user = self.user
+        # Create an editor with a test client session
+        editor = EditorCraftRoom(self, Terms=True)
 
-        response = views.BatchEditView.as_view()(request)
+        # No post data: bad.
+        response = self.client.post(self.url, data={}, follow=True)
         self.assertEqual(response.status_code, 400)
 
         # Missing the 'applications' parameter: bad.
-        request = RequestFactory().post(self.url, data={'batch_status': 1})
-        request.user = self.user
-
-        response = views.BatchEditView.as_view()(request)
+        response = self.client.post(self.url, data={'batch_status': 1}, follow=True)
         self.assertEqual(response.status_code, 400)
 
         # Missing the 'batch_status' parameter: bad.
-        request = RequestFactory().post(self.url, data={'applications': 1})
-        request.user = self.user
-
-        response = views.BatchEditView.as_view()(request)
+        response = self.client.post(self.url, data={'applications': 1}, follow=True)
         self.assertEqual(response.status_code, 400)
 
         # Has both parameters, but 'batch_status' has an invalid value: bad.
-        request = RequestFactory().post(self.url,
-            data={'applications': 1, 'batch_status': 6})
-        request.user = self.user
 
         assert 6 not in [Application.PENDING,
                          Application.QUESTION,
                          Application.APPROVED,
                          Application.NOT_APPROVED]
 
-        response = views.BatchEditView.as_view()(request)
+        response = self.client.post(self.url,
+            data={'applications': 1, 'batch_status': 6}, follow=True)
         self.assertEqual(response.status_code, 400)
 
 
@@ -2243,12 +2237,12 @@ class BatchEditTest(TestCase):
         # Make sure the applications parameter actually is bogus.
         assert Application.objects.filter(pk=2).count() == 0
 
-        # Issue the request.
-        request = RequestFactory().post(self.url,
-            data={'applications': 2, 'batch_status': 3})
-        request.user = self.user
+        # Create an editor with a test client session
+        editor = EditorCraftRoom(self, Terms=True)
 
-        response = views.BatchEditView.as_view()(request)
+        # Issue the request. Don't follow redirects from here.
+        response = self.client.post(self.url,
+            data={'applications': 2, 'batch_status': 3}, follow=False)
 
         # Check things! We get redirected to the applications page when done.
         self.assertEqual(response.status_code, 302)
@@ -2270,22 +2264,25 @@ class BatchEditTest(TestCase):
 
     def test_only_coordinators_can_batch_edit(self):
         # An anonymous user is prompted to login.
-        factory = RequestFactory()
+        response = self.client.post(self.url,
+            data={'applications': self.application.pk, 'batch_status': 3},
+            folllow=False)
 
-        request = factory.post(self.url,
-            data={'applications': self.application.pk, 'batch_status': 3})
-        request.user = AnonymousUser()
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(urlparse(response.url).path,
+            settings.LOGIN_URL)
 
-        with self.assertRaises(PermissionDenied):
-            _ = views.BatchEditView.as_view()(request)
+        # Create an editor with a test client session
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
 
         # A user who is not a coordinator does not have access.
         coordinators = get_coordinators()
-        coordinators.user_set.remove(self.unpriv_user) # make sure
-        request.user = self.unpriv_user
+        coordinators.user_set.remove(editor) # make sure
+        response = self.client.post(self.url,
+            data={'applications': self.application.pk, 'batch_status': 3},
+            folllow=False)
 
-        with self.assertRaises(PermissionDenied):
-            _ = views.BatchEditView.as_view()(request)
+        self.assertEqual(response.status_code, 403)
 
         # A coordinator may post to the page (on success, it redirects to the
         # application list page which they likely started on).
