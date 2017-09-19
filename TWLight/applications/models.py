@@ -10,7 +10,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.forms.models import model_to_dict
-from django.utils.timezone import now
+from django.utils.timezone import localtime, now
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
@@ -305,6 +305,15 @@ class Application(models.Model):
 # passed to a template filter that needs an integer).
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):
+
+    # Make sure not using a mix of dates and dateimes
+    if instance.date_created and isinstance(instance.date_created, datetime):
+        instance.date_created = instance.date_created.date()
+
+    # Make sure not using a mix of dates and dateimes
+    if instance.date_closed and isinstance(instance.date_closed, datetime):
+        instance.date_closed = instance.date_closed.date()
+
     if instance.id:
         orig_app = Application.objects.get(pk=instance.id)
         orig_status = orig_app.status
@@ -312,9 +321,9 @@ def update_app_status_on_save(sender, instance, **kwargs):
                 int(instance.status) in Application.FINAL_STATUS_LIST,
                 not bool(instance.date_closed)]):
 
-            instance.date_closed = date.today()
+            instance.date_closed = localtime(now()).date()
             instance.days_open = \
-                (now() - instance.date_created).days
+                (instance.date_closed - instance.date_created).days
 
     else:
         # If somehow we've created an Application whose status is final
@@ -323,7 +332,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
         if (instance.status in Application.FINAL_STATUS_LIST
             and not instance.date_closed):
 
-            instance.date_closed = date.today()
+            instance.date_closed = localtime(now()).date()
             instance.days_open = 0
 
     if instance.date_closed and not instance.earliest_expiry_date:
