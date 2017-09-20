@@ -2124,15 +2124,15 @@ class EvaluateApplicationTest(TestCase):
         self.application.date_created = date.today() - timedelta(days=3)
         self.application.save()
 
-        request = factory.post(self.url,
-            data={'status': Application.APPROVED})
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        request.user = self.user
-        coordinators = get_coordinators()
-        coordinators.user_set.add(self.user) # make sure
-        _ = views.EvaluateApplicationView.as_view()(
-            request, pk=self.application.pk)
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
 
+        # Verify days open
         self.application.refresh_from_db()
         self.assertEqual(self.application.days_open, 3)
 
@@ -2144,15 +2144,15 @@ class EvaluateApplicationTest(TestCase):
         self.application.date_created = date.today() - timedelta(days=3)
         self.application.save()
 
-        request = factory.post(self.url,
-            data={'status': Application.APPROVED})
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        request.user = self.user
-        coordinators = get_coordinators()
-        coordinators.user_set.add(self.user) # make sure
-        _ = views.EvaluateApplicationView.as_view()(
-            request, pk=self.application.pk)
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
 
+        # Verify date closed
         self.application.refresh_from_db()
         self.assertEqual(self.application.date_closed, date.today())
 
@@ -2321,15 +2321,16 @@ class BatchEditTest(TestCase):
         self.application.date_created = date.today() - timedelta(days=3)
         self.application.save()
 
-        request = factory.post(self.url,
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        # Approve the application
+        response = self.client.post(self.url,
             data={'applications': self.application.pk,
-                  'batch_status': Application.APPROVED})
+                  'batch_status': Application.APPROVED},
+            follow=True)
 
-        request.user = self.user
-        coordinators = get_coordinators()
-        coordinators.user_set.add(self.user) # make sure
-        _ = views.BatchEditView.as_view()(request)
-
+        # Verify days open
         self.application.refresh_from_db()
         self.assertEqual(self.application.days_open, 3)
 
@@ -2341,15 +2342,16 @@ class BatchEditTest(TestCase):
         self.application.date_created = date.today() - timedelta(days=3)
         self.application.save()
 
-        request = factory.post(self.url,
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        # Approve the application
+        response = self.client.post(self.url,
             data={'applications': self.application.pk,
-                  'batch_status': Application.APPROVED})
+                  'batch_status': Application.APPROVED},
+            follow=True)
 
-        request.user = self.user
-        coordinators = get_coordinators()
-        coordinators.user_set.add(self.user) # make sure
-        _ = views.BatchEditView.as_view()(request)
-
+        # Verify date closed
         self.application.refresh_from_db()
         self.assertEqual(self.application.date_closed, date.today())
 
