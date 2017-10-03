@@ -391,11 +391,6 @@ class BaseApplicationViewTest(TestCase):
         return view
 
 
-    def _login_editor(self):
-        self.client.login(username='editor', password='editor')
-
-
-
 class RequestApplicationTest(BaseApplicationViewTest):
     @classmethod
     def setUpClass(cls):
@@ -684,7 +679,9 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         If the PARTNERS_SESSION_KEY is missing, the view should redirect to
         RequestApplicationView.
         """
-        self._login_editor()
+
+        # Create an editor with a test client session
+        editor = EditorCraftRoom(self, Terms=True)
 
         session = self.client.session
         if views.PARTNERS_SESSION_KEY in session.keys():
