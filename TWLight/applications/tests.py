@@ -2101,14 +2101,13 @@ class EvaluateApplicationTest(TestCase):
         self.application.status = Application.PENDING
         self.application.save()
 
-        request = factory.post(self.url,
-            data={'status': Application.APPROVED})
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        request.user = self.user
-        coordinators = get_coordinators()
-        coordinators.user_set.add(self.user) # make sure
-        _ = views.EvaluateApplicationView.as_view()(
-            request, pk=self.application.pk)
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
 
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)
