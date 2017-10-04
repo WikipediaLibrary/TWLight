@@ -2186,8 +2186,8 @@ class BatchEditTest(TestCase):
 
 
     def test_missing_params_raise_http_bad_request(self):
-        # Create an editor with a test client session
-        editor = EditorCraftRoom(self, Terms=True)
+        # Create a coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
         # No post data: bad.
         response = self.client.post(self.url, data={}, follow=True)
@@ -2233,8 +2233,8 @@ class BatchEditTest(TestCase):
         # Make sure the applications parameter actually is bogus.
         assert Application.objects.filter(pk=2).count() == 0
 
-        # Create an editor with a test client session
-        editor = EditorCraftRoom(self, Terms=True)
+        # Create a coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
         # Issue the request. Don't follow redirects from here.
         response = self.client.post(self.url,
@@ -2262,7 +2262,7 @@ class BatchEditTest(TestCase):
         # An anonymous user is prompted to login.
         response = self.client.post(self.url,
             data={'applications': self.application.pk, 'batch_status': 3},
-            folllow=False)
+            follow=False)
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(urlparse(response.url).path,
@@ -2271,21 +2271,22 @@ class BatchEditTest(TestCase):
         # Create an editor with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
 
-        # A user who is not a coordinator does not have access.
-        coordinators = get_coordinators()
-        coordinators.user_set.remove(editor) # make sure
         response = self.client.post(self.url,
             data={'applications': self.application.pk, 'batch_status': 3},
-            folllow=False)
+            follow=False)
 
+        # An editor may not post to the page.
         self.assertEqual(response.status_code, 403)
+
+        # Create a coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        response = self.client.post(self.url,
+            data={'applications': self.application.pk, 'batch_status': 3},
+            follow=False)
 
         # A coordinator may post to the page (on success, it redirects to the
         # application list page which they likely started on).
-        request.user = self.user
-        coordinators.user_set.add(self.user) # make sure
-        response = views.BatchEditView.as_view()(request)
-
         self.assertEqual(response.status_code, 302)
         self.assertEqual(urlparse(response.url).path,
             reverse('applications:list'))
@@ -2297,14 +2298,13 @@ class BatchEditTest(TestCase):
         self.application.status = Application.PENDING
         self.application.save()
 
-        request = factory.post(self.url,
-            data={'applications': self.application.pk,
-                  'batch_status': Application.APPROVED})
+        # Create a coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        request.user = self.user
-        coordinators = get_coordinators()
-        coordinators.user_set.add(self.user) # make sure
-        _ = views.BatchEditView.as_view()(request)
+        # Approve the application.
+        response = self.client.post(self.url,
+            data={'applications': self.application.pk, 'batch_status': 2},
+            follow=False)
 
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)

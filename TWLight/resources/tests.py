@@ -38,17 +38,22 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False):
     session.save()
 
     # Agree to terms of use in Client (or not).
-    terms = self.client.get(terms_url, follow=True)
-    terms_form = terms.context['form']
-    data = terms_form.initial
-    data['terms_of_use'] = Terms
-    data['submit'] = True
-    agree = self.client.post(terms_url, data)
-    session.save()
+    if Terms:
+        terms = self.client.get(terms_url, follow=True)
+        terms_form = terms.context['form']
+        data = terms_form.initial
+        data['terms_of_use'] = True
+        data['submit'] = True
+        agree = self.client.post(terms_url, data)
+        session.save()
+
+    # Add or remove editor from Coordinators as required
+    coordinators = get_coordinators()
 
     if Coordinator:
-        coordinators = get_coordinators()
         coordinators.user_set.add(editor.user)
+    else:
+        coordinators.user_set.remove(editor.user)
 
 
 class LanguageModelTests(TestCase):
