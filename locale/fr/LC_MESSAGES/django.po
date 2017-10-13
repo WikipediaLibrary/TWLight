@@ -674,9 +674,9 @@ msgid ""
 "through The Wikipedia Library. We are happy to inform you that your "
 "application has been approved. You can expect to receive details about how "
 "to access this source within a week or two. Cheers! The Wikipedia Library"
-msgstr "Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner). 
-Nous sommes heureux de vous informer que votre demande a été approuvée. Vous devriez 
-recevoir des détails sur l'accès à cette ressource dans une semaine ou deux. À votre santé! La bibliothèque Wikipedia"
+msgstr "Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner). "
+"Nous sommes heureux de vous informer que votre demande a été approuvée. Vous devriez "
+"recevoir des détails sur l'accès à cette ressource dans une semaine ou deux. À votre santé! La bibliothèque Wikipedia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
