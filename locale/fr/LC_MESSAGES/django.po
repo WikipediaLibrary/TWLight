@@ -1482,7 +1482,7 @@ msgid ""
 "This Partner is not available. You can see it because you are a staff "
 "member, but it is not visible to non-staff users."
 msgstr "Ce partenaire n'est pas disponible. Vous pouvez le voir parce que vous êtes un membre du personnel, "
-mais ce n'est pas visible pour les autres utilisateurs."
+"mais ce n'est pas visible pour les autres utilisateurs."
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
 #: TWLight/resources/views.py:125
