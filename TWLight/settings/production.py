@@ -17,7 +17,9 @@ try:
                                   TWLIGHT_OAUTH_PROVIDER_URL,
                                   TWLIGHT_OAUTH_CONSUMER_KEY,
                                   TWLIGHT_OAUTH_CONSUMER_SECRET,
-                                  MYSQL_PASSWORD)
+                                  MYSQL_PASSWORD,
+                                  ALLOWED_HOSTS,
+                                  REQUEST_BASE_URL)
 except ImportError:
     # If there's no production_vars file on this system (e.g. because it isn't
     # a production system), this import will fail, which can cause things
@@ -30,15 +32,11 @@ except ImportError:
           file=sys.stderr)
     raise
 
-# Important note! If you want people to be able to *log in* under these URLs,
-# there are steps you need to take both in production_vars.py and at Wikipedia.
-# Consult docs/sysadmin.md for details.
-ALLOWED_HOSTS = ['wikipedialibrary.wmflabs.org']
-
 # Let Django know about external URLs in case they differ from internal
 # Needed to be added for /admin
 USE_X_FORWARDED_HOST = True
 
+# Never debug in prod
 DEBUG = False
 
 # Can be replaced with option files:
@@ -69,11 +67,7 @@ SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-# This defaults to http, but in production we use https, so we overwrite the
-# default. Also, we'd like to use Site.objects.get_current().domain, but we
-# can't import Site into settings - it's not available when Django first uses
-# the settings file, and the site refuses to load.
-REQUEST_BASE_URL = 'https://wikipedialibrary.wmflabs.org/'
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
