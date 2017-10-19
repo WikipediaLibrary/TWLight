@@ -690,10 +690,10 @@ msgstr "Votre demande de la Bibliothèque Wikipédia a été approuvée"
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
 #, python-format
 msgid ""
-"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
+"Dear %%(user)s, Thank you for applying for access to %%(partner)s resources "
 "through The Wikipedia Library. There are one or more comments on your "
 "application that require a response from you. Please reply to these at "
-"%(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
+"%%(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
 msgstr "Bonjour %%(user)s, Merci d'avoir demandé l'accès aux ressources de %%(partner)."
 "Il y a un ou plusieurs commentaires sur votre application qui nécessitent une réponse de votre part." 
 "Veuillez répondre à ceux-ci à "
