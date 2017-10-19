@@ -1111,8 +1111,7 @@ msgid ""
 "The Wikipedia Library team will process this application. Want to help? <a "
 "href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/"
 "Coordinators/Signup\">Sign up as a coordinator.</a>"
-msgstr "L'équipe de la Bibliothèque Wikipedia traitera cette application. Vouloir aider? <a href = \" https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/ "
-"Coordinateurs / Inscription\"> Inscrivez-vous.</a>"
+msgstr "L'équipe de la Bibliothèque Wikipedia traitera cette application. Vouloir aider? <a href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinateurs / Inscription\"> Inscrivez-vous.</a>"
 
 #. Translators: If a partner has no description written, this message is shown in the Description field on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:141
