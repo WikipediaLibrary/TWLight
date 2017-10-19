@@ -1,22 +1,63 @@
-import os
+"""
+Settings file intended for use in local, on WMF servers.  This file:
+
+* overrides anything that needs server-specific values
+* imports things that the base file draws from environment variables from a
+  hardcoded file kept out of version control (unless their default value is
+  correct in this context)
+"""
+
+# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+from __future__ import print_function
+import sys
+
 from .base import *
+try:
+    from .local_vars import (SECRET_KEY,
+                                  TWLIGHT_OAUTH_PROVIDER_URL,
+                                  TWLIGHT_OAUTH_CONSUMER_KEY,
+                                  TWLIGHT_OAUTH_CONSUMER_SECRET,
+                                  MYSQL_PASSWORD,
+                                  ALLOWED_HOSTS,
+                                  DEBUG,
+                                  REQUEST_BASE_URL)
+except ImportError:
+    # If there's no local_vars file on this system (e.g. because it isn't
+    # a local system), this import will fail, which can cause things
+    # to fail (notably makemigrations).
+    print('Cannot import from TWLight/settings/local_vars.py',
+          'This is fine if you are not on a local system, as long as your '
+          'settings file is something other than TWLight/settings/local, '
+          'but it will cause the app to fail if you are trying to use '
+          'local settings.',
+          file=sys.stderr)
+    raise
 
-# This is a totally insecure setting that should never be used in production,
-# but it simplifies things for local development.
-ALLOWED_HOSTS = ['*']
+# Let Django know about external URLs in case they differ from internal
+# Needed to be added for /admin
+USE_X_FORWARDED_HOST = True
 
-# DJMAIL CONFIGURATION
-# ------------------------------------------------------------------------------
+# Can be replaced with option files:
+# https://docs.djangoproject.com/en/1.7/ref/databases/#connecting-to-the-database
+DATABASES['default']['USER'] = 'twlight'
+DATABASES['default']['PASSWORD'] = MYSQL_PASSWORD
 
-# Allows for sending actual email, for testing purposes.
+#EMAIL_BACKEND = 'djmail.backends.celery.EmailBackend'
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL')
-EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_SENDING_OKAY = True
+EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False # Important, or you will get an SMTPException on wmlabs
+DEFAULT_FROM_EMAIL = '<twlight.local@localhost>'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
 
 # TEST CONFIGURATION
 # ------------------------------------------------------------------------------

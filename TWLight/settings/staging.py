@@ -51,7 +51,7 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False # Important, or you will get an SMTPException on wmlabs
-DEFAULT_FROM_EMAIL = '<staging@localhost>'
+DEFAULT_FROM_EMAIL = '<twlight.staging@localhost>'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
