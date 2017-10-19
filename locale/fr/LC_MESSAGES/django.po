@@ -1863,6 +1863,7 @@ msgstr ""
 "          Nous ne pouvons finalement pas finaliser\n"
 "          votre accès aux ressources partenaires Veuillez\n"
 "          <a href=\"%(email_url)s\">mettre à jour votre addresse de courriel</a>.\n"
+"        "
 
 #. Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
 #. blocktrans trimmed
