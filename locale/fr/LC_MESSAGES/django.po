@@ -694,10 +694,10 @@ msgid ""
 "through The Wikipedia Library. There are one or more comments on your "
 "application that require a response from you. Please reply to these at "
 "%(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
-msgstr "Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)."
+msgstr "Bonjour %%(user)s, Merci d'avoir demandé l'accès aux ressources de %%(partner)."
 "Il y a un ou plusieurs commentaires sur votre application qui nécessitent une réponse de votre part." 
 "Veuillez répondre à ceux-ci à "
-"%(app_url)s afin que nous puissions évaluer votre application. Meilleur, la bibliothèque Wikipedia"
+"%%(app_url)s afin que nous puissions évaluer votre application. Meilleur, la bibliothèque Wikipedia"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
