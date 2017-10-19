@@ -225,7 +225,10 @@ msgid ""
 "\n"
 "            Yes (<a href=\"%(parent_url)s\">previous application</a>)\n"
 "          "
-msgstr "Oui (<a href=\"%(parent_url)s\">demande précédente</a>)\n"
+msgstr ""
+"\n"
+"            Oui (<a href=\"%(parent_url)s\">demande précédente</a>)\n"
+"          "
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
 #: TWLight/applications/templates/applications/application_evaluation.html:120
@@ -690,14 +693,14 @@ msgstr "Votre demande de la Bibliothèque Wikipédia a été approuvée"
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
 #, python-format
 msgid ""
-"Dear %%(user)s, Thank you for applying for access to %%(partner)s resources "
+"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
 "through The Wikipedia Library. There are one or more comments on your "
 "application that require a response from you. Please reply to these at "
-"%%(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
-msgstr "Bonjour %%(user)s, Merci d'avoir demandé l'accès aux ressources de %%(partner)."
+"%(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
+msgstr "Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)."
 "Il y a un ou plusieurs commentaires sur votre application qui nécessitent une réponse de votre part." 
 "Veuillez répondre à ceux-ci à "
-"%%(app_url)s afin que nous puissions évaluer votre application. Meilleur, la bibliothèque Wikipedia"
+"%(app_url)s afin que nous puissions évaluer votre application. Meilleur, la bibliothèque Wikipedia"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
