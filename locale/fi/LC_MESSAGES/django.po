@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-12 12:30+0000\n"
+"POT-Creation-Date: 2017-10-19 16:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -746,7 +746,9 @@ msgid "Your Wikipedia Library application has been denied"
 msgstr "Wikipedian Lähdekirjaston hakemukseesi on jätetty uusi kommentti"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:4
+#: TWLight/emails/templates/emails/waitlist_notification-body-text.html:4
 #: TWLight/emails/templates/emails/waitlist_notification-text-html.html:3
 #, python-format
 msgid ""
