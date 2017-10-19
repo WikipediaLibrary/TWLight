@@ -1511,7 +1511,7 @@ msgstr "Si vous êtes certain que quelque chose devrait être ici, veuillez nous
 "\">wikipedialibrary@wikimedia.org</a> ou nous le signaler sur <a href="
 "\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
 "projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
-"%%20Permission%%20denied\">Phabricator</a>""
+"%%20Permission%%20denied\">Phabricator</a>"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:6
