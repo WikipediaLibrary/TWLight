@@ -5,7 +5,7 @@
 {% block content %}
    <div class="lead">
 		<p>
-    {% comment %} Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+                {% comment %} Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
 		{% blocktrans trimmed %}
 			Apply for access to dozens of research databases and resources available through The Wikipedia Library. 
 		{% endblocktrans %}
@@ -28,27 +28,32 @@
   
   <div class="row">
 	<div class="col-md-6">
-		<h2><span class="glyphicon glyphicon-grey glyphicon-heart-empty"></span> Benefits</h2>
+                {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the header for that section.{% endcomment %}
+		<h2><span class="glyphicon glyphicon-grey glyphicon-heart-empty"></span>{% trans "Benefits" %}</h2>
 		
-			<div class="border">
+		<div class="border">
+                {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.{% endcomment %}
+		{% blocktrans trimmed %}
 				<p>The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects. </p>
 
 				<p>Through the Library Card you can apply for access to 66 leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p>
 
 		
-				<p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, <a href="{% url 'applications:request' %}">{% trans "please apply" %}</a>.</p>
-				
+				<p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, <a href="/applications/request/">please apply</a>.</p>
+		{% endblocktrans %}
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				{% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
 				<p><a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a></p>
-			</div>
+		</div>
 	</div>
 	
 	<div class="col-md-6">
-		<h2><span class="glyphicon glyphicon-grey glyphicon-user"></span> Partners</h2>
+                {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.{% endcomment %}
+		<h2><span class="glyphicon glyphicon-grey glyphicon-user"></span>{% trans "Partners" %}</h2>
 			<div class="border">
-				<p>Below are a few of our featured partners:</p>
+                                {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the introductory text to that list.{% endcomment %}
+				<p>{% trans "Below are a few of our featured partners:" %}</p>
 					<ul>
 					    <li><a href="/partners/24/">AAAS</a></li>
 						<li><a href="/partners/46/">Cairn</a></li>

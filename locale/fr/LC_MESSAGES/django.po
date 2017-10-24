@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-19 16:54+0000\n"
+"POT-Creation-Date: 2017-10-24 12:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME \n"
 "Language-Team: LANGUAGE \n"
@@ -713,10 +713,11 @@ msgid ""
 "application that require a response from you. Please reply to these at "
 "%(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
 msgstr ""
-"Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)s."
-"Il y a un ou plusieurs commentaires sur votre application qui nécessitent "
-"une réponse de votre part.Veuillez répondre à ceux-ci à %(app_url)s afin que "
-"nous puissions évaluer votre application. Meilleur, la bibliothèque Wikipedia"
+"Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de "
+"%(partner)s.Il y a un ou plusieurs commentaires sur votre application qui "
+"nécessitent une réponse de votre part.Veuillez répondre à ceux-ci à "
+"%(app_url)s afin que nous puissions évaluer votre application. Meilleur, la "
+"bibliothèque Wikipedia"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
@@ -755,10 +756,10 @@ msgid ""
 "has not been approved. You can view your application and review comments at "
 "%(app_url)s. Best, The Wikipedia Library"
 msgstr ""
-"Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)s."
-"Malheureusement, à ce moment, votre demande n'a pas été approuvée. Vous "
-"pouvez voir votre application et les commentaires à %(app_url)s. Meilleur, "
-"la bibliothèque Wikipedia"
+"Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de "
+"%(partner)s.Malheureusement, à ce moment, votre demande n'a pas été "
+"approuvée. Vous pouvez voir votre application et les commentaires à "
+"%(app_url)s. Meilleur, la bibliothèque Wikipedia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
@@ -780,11 +781,11 @@ msgid ""
 "when more accounts become available. You can see all available resources at "
 "%(link)s. Best, The Wikipedia Library"
 msgstr ""
-"Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)s."
-"Il n'y a pas de comptes disponibles donc votre demande a été mis sur une "
-"liste d'attente.Votre demande sera évaluée si / lorsque d'autres comptes "
-"sont disponibles. Vous pouvez voir toutes les ressources disponibles en "
-"%(link)s. Meilleur, la bibliothèque Wikipedia"
+"Bonjour %(user)s, Merci d'avoir demandé l'accès aux ressources de "
+"%(partner)s.Il n'y a pas de comptes disponibles donc votre demande a été mis "
+"sur une liste d'attente.Votre demande sera évaluée si / lorsque d'autres "
+"comptes sont disponibles. Vous pouvez voir toutes les ressources disponibles "
+"en %(link)s. Meilleur, la bibliothèque Wikipedia"
 
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
@@ -2007,7 +2008,8 @@ msgid "Partner pages by popularity"
 msgstr "Pages partenaires par popularité"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing the number of available partners over time.
-#: TWLight/templates/dashboard.html:148
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
+#: TWLight/templates/dashboard.html:148 TWLight/templates/home.html:53
 msgid "Partners"
 msgstr "Partenaires"
 
@@ -2113,21 +2115,41 @@ msgstr ""
 "bibliothèque Wikipédia\n"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
-#: TWLight/templates/home.html:13 TWLight/templates/home.html.py:44
+#: TWLight/templates/home.html:13 TWLight/templates/home.html.py:47
 msgid "Learn more"
 msgstr "En savoir plus"
 
-#: TWLight/templates/home.html:39
-msgid "please apply"
-msgstr "Veuillez appliquer"
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the header for that section.
+#: TWLight/templates/home.html:32
+msgid "Benefits"
+msgstr ""
 
-#: TWLight/templates/home.html:65
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
+#: TWLight/templates/home.html:36
+msgid ""
+"<p>The Wikipedia Library provides free access to research materials to "
+"improve your ability to contribute content to Wikimedia projects. </p> "
+"<p>Through the Library Card you can apply for access to 66 leading "
+"publishers of reliable sources including 80,000 unique journals that would "
+"otherwise be paywalled. Use just your Wikipedia login to sign up. Coming "
+"soon... direct access to resources using only your Wikipedia login!</p> "
+"<p>If you think you could use access to one of our partner resources and are "
+"an active editor in any project supported by the Wikimedia Foundation, <a "
+"href=\"/applications/request/\">please apply</a>.</p>"
+msgstr ""
+
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the introductory text to that list.
+#: TWLight/templates/home.html:56
+msgid "Below are a few of our featured partners:"
+msgstr ""
+
+#: TWLight/templates/home.html:70
 #, fuzzy
 #| msgid "See all partners"
 msgid "Browse all partners"
 msgstr "Voir tous les partenaires"
 
-#: TWLight/templates/home.html:98
+#: TWLight/templates/home.html:103
 #, fuzzy
 #| msgid "Latest activity"
 msgid "More Activity"
@@ -3159,6 +3181,9 @@ msgstr "{username} a demandé l'accès à {partner}"
 #| msgid "{username} received access to {partner}"
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr "{username} a reçu l'accès à {partner}"
+
+#~ msgid "please apply"
+#~ msgstr "Veuillez appliquer"
 
 #, fuzzy
 #~| msgid ""
