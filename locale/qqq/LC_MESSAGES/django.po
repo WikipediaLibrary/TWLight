@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-19 16:54+0000\n"
+"POT-Creation-Date: 2017-10-24 12:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1647,7 +1647,8 @@ msgid "Partner pages by popularity"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing the number of available partners over time.
-#: TWLight/templates/dashboard.html:148
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
+#: TWLight/templates/dashboard.html:148 TWLight/templates/home.html:53
 msgid "Partners"
 msgstr ""
 
@@ -1719,19 +1720,39 @@ msgid ""
 msgstr ""
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
-#: TWLight/templates/home.html:13 TWLight/templates/home.html.py:44
+#: TWLight/templates/home.html:13 TWLight/templates/home.html.py:47
 msgid "Learn more"
 msgstr ""
 
-#: TWLight/templates/home.html:39
-msgid "please apply"
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the header for that section.
+#: TWLight/templates/home.html:32
+msgid "Benefits"
 msgstr ""
 
-#: TWLight/templates/home.html:65
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
+#: TWLight/templates/home.html:36
+msgid ""
+"<p>The Wikipedia Library provides free access to research materials to "
+"improve your ability to contribute content to Wikimedia projects. </p> "
+"<p>Through the Library Card you can apply for access to 66 leading "
+"publishers of reliable sources including 80,000 unique journals that would "
+"otherwise be paywalled. Use just your Wikipedia login to sign up. Coming "
+"soon... direct access to resources using only your Wikipedia login!</p> "
+"<p>If you think you could use access to one of our partner resources and are "
+"an active editor in any project supported by the Wikimedia Foundation, <a "
+"href=\"/applications/request/\">please apply</a>.</p>"
+msgstr ""
+
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the introductory text to that list.
+#: TWLight/templates/home.html:56
+msgid "Below are a few of our featured partners:"
+msgstr ""
+
+#: TWLight/templates/home.html:70
 msgid "Browse all partners"
 msgstr ""
 
-#: TWLight/templates/home.html:98
+#: TWLight/templates/home.html:103
 msgid "More Activity"
 msgstr ""
 
