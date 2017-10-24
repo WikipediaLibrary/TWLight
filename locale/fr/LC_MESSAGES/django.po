@@ -306,7 +306,7 @@ msgstr "Aucune versions précédentes"
 #, fuzzy
 #| msgid "No applications right now."
 msgid "View applications which are..."
-msgstr "Aucune demande en ce moment"
+msgstr "Voir les applications qui sont ..."
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:18
@@ -1088,7 +1088,7 @@ msgid ""
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
 msgstr ""
 "Rôle organisationnel ou titre d'emploi. Ceci ne doit pas être utilisé pour "
-"autre titres"
+"autre titres. Facultatif."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
 #: TWLight/resources/models.py:353
@@ -1117,13 +1117,13 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:46
 #: TWLight/resources/templates/resources/partner_detail.html:73
 msgid "Remove from waitlist"
-msgstr ""
+msgstr "Retirer de la liste d'attente"
 
 #. Translators: If a partner is not currently waitlisted, this button allows coordinators to add the partner to the waitlist.
 #: TWLight/resources/templates/resources/partner_detail.html:49
 #: TWLight/resources/templates/resources/partner_detail.html:73
 msgid "Set as waitlisted"
-msgstr ""
+msgstr "Définir comme en liste d'attente"
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail.html:84
@@ -1152,8 +1152,8 @@ msgid ""
 "Coordinators/Signup\">Sign up as a coordinator.</a>"
 msgstr ""
 "L'équipe de la Bibliothèque Wikipedia traitera cette application. Vouloir "
-"aider? <a href=\"https://en.wikipedia.org/wiki/Wikipedia:"
-"The_Wikipedia_Library/Coordinateurs/Inscription\"> Inscrivez-vous.</a>"
+"aider? <a href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/"
+"Coordinators/Signup\"> Inscrivez-vous.</a>"
 
 #. Translators: If a partner has no description written, this message is shown in the Description field on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:141
@@ -1486,7 +1486,7 @@ msgstr "Ce partenaire est maintenant en attente"
 #, fuzzy
 #| msgid "Partners with approved, unsent applications"
 msgid "This partner is now available for applications"
-msgstr "Partenaires avec applications approuvés non encore envoyées"
+msgstr "Ce partenaire est maintenant disponible pour les applications"
 
 #: TWLight/settings/base.py:151
 msgid "English"
@@ -1704,8 +1704,7 @@ msgstr ""
 "Si vous ne répondez pas tout à fait aux exigences d'expérience, mais pensez "
 "que vous êtes encore un bon candidat pour l'accès, soumettre une demande et "
 "vous pourriez être considéré. Notez que \"wiki principal\" peut signifier "
-"toute Wikipédias sur lequel vous êtes actif - tout simplement un où vous "
-"avez donné votre courrier électronique"
+"toute Wikipédias sur lequel vous êtes actif."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:81
@@ -1726,7 +1725,7 @@ msgid ""
 msgstr ""
 "Une fois que vous avez votre accès, nous vous encourageons à utiliser les "
 "ressources pour améliorer le contenu des projets Wikimédia et vos autres "
-"besoins. S'il vous plaît recherche tout ce que vous voulez avec votre accès!"
+"besoins."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:92
@@ -1741,7 +1740,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Approved editors may use their access to:"
 msgid "Approved editors <i>may</i> use their access to:"
-msgstr "Les utilisateurs peuvent"
+msgstr "Les utilisateurs <i>peuvent</i>"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:103
@@ -1765,7 +1764,7 @@ msgstr "imprimer un exemplaire des portions de contenu à accès restreint"
 #, fuzzy
 #| msgid "Approved editors should not:"
 msgid "Approved editors <i>should not</i>:"
-msgstr "Les utilisateurs ne peuvent pas"
+msgstr "Les utilisateurs <i>ne peuvent pas</i>"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:122
@@ -1958,7 +1957,7 @@ msgstr "Rétroaction"
 #| msgid "Contact"
 #| msgid_plural "Contacts"
 msgid "Contact us"
-msgstr "Représentant de l'entreprise"
+msgstr "Contactez nous"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of available partners.
 #: TWLight/templates/dashboard.html:17
@@ -2000,7 +1999,7 @@ msgstr "Pages les plus populaires"
 #, fuzzy
 #| msgid "Number of users"
 msgid "Number of views"
-msgstr "Nombre d'utilisateurs"
+msgstr "Nombre de vues"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the pageview data for each partner page.
 #: TWLight/templates/dashboard.html:116
@@ -2110,9 +2109,8 @@ msgid ""
 "through The Wikipedia Library."
 msgstr ""
 "\n"
-"Bienvenue à la carte de bibliothèque Wikipédia! Ici, vous pouvez demander "
-"l'accès à des dizaines de ressources de recherche disponibles de la "
-"bibliothèque Wikipédia\n"
+"Demander l'accès à des dizaines de bases de données de recherche et de ressources disponibles "
+"à travers la bibliothèque de Wikipedia."
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
 #: TWLight/templates/home.html:13 TWLight/templates/home.html.py:47
@@ -2122,7 +2120,7 @@ msgstr "En savoir plus"
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the header for that section.
 #: TWLight/templates/home.html:32
 msgid "Benefits"
-msgstr ""
+msgstr "Avantages"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
 #: TWLight/templates/home.html:36
@@ -2137,23 +2135,32 @@ msgid ""
 "an active editor in any project supported by the Wikimedia Foundation, <a "
 "href=\"/applications/request/\">please apply</a>.</p>"
 msgstr ""
+"<p>La bibliothèque Wikipédia offre un accès gratuit au matériel de recherche pour"
+"améliorez votre capacité à contribuer aux projets Wikimedia.</p>"
+"<p> Grâce à la carte de bibliothèque, vous pouvez demander l'accès aux ressources de 66"
+"éditeurs majeurs de sources fiables, y compris plus que 80 000 revues uniques qui seraient"
+"autrement payants. Utilisez votre login Wikipedia pour vous inscrire.
+"Bientôt ... accès direct aux ressources en utilisant uniquement votre compte Wikipedia!" </p> "
+"<p> Si vous pensez pouvoir utiliser l'accès à l'une de nos ressources partenaires et vous êtes"
+"un contributeur actif dans un projet soutenu par la Wikimedia Foundation, <a"
+"href=\"/applications/request/\">veuillez appliquer</a>.</p>"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the introductory text to that list.
 #: TWLight/templates/home.html:56
 msgid "Below are a few of our featured partners:"
-msgstr ""
+msgstr "Voici quelques-uns de nos partenaires:"
 
 #: TWLight/templates/home.html:70
 #, fuzzy
 #| msgid "See all partners"
 msgid "Browse all partners"
-msgstr "Voir tous les partenaires"
+msgstr "Parcourir tous les partenaires"
 
 #: TWLight/templates/home.html:103
 #, fuzzy
 #| msgid "Latest activity"
 msgid "More Activity"
-msgstr "Modifications récentes"
+msgstr "Plus d'activité"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16
@@ -2200,7 +2207,7 @@ msgstr "{domain} n'est pas un serveur autorisé"
 
 #: TWLight/users/authorization.py:334
 msgid "Did not receive a valid oauth response."
-msgstr ""
+msgstr "N'a pas reçu une réponse oauth valide"
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/authorization.py:356
@@ -2344,7 +2351,7 @@ msgstr "Contributions, comme indiqué par l'utilisateur"
 #, fuzzy, python-brace-format
 #| msgid "{wp_username} ({wiki})"
 msgid "{wp_username}"
-msgstr "{wp_username} ({wiki})"
+msgstr "{wp_username}"
 
 #. Translators: This is the main title for the editor profile page. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:9
@@ -2385,10 +2392,10 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"Informations avec * a été récupéré à partir de Wikipédia. Autres "
-"informations a été ajouté directement par les utilisateurs ou les "
-"administrateurs du site, dans leur langue préférée. Il a été modifié en "
-"dernier le %(last_updated_date)s.\n"
+"Informations avec * a été récupéré à partir de Wikipédia.\n
+"Autres informations a été ajouté directement par les utilisateurs ou les\n "
+"administrateurs du site, dans leur langue préférée.\n"
+"Il a été modifié en dernier le %(last_updated_date)s.\n"
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:47
@@ -2402,7 +2409,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"%(username)s a des privilèges de coordinateur sur ce site\n"
+"%(username)s a des privilèges de coordinateur sur ce site.\n"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
 #: TWLight/users/templates/users/editor_detail_data.html:6
@@ -2422,7 +2429,7 @@ msgstr "Contributions"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #: TWLight/users/templates/users/editor_detail_data.html:31
 msgid "(update)"
-msgstr "Actualiser"
+msgstr "(Actualiser)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:42
@@ -3068,9 +3075,7 @@ msgstr ""
 "\n"
 "Si vous n'êtes pas un administrateur du site, quelque chose de bizarre a eu "
 "lieu. Vous ne serez pas en mesure de demander l'accès aux ressources "
-"protégées sans un nom d'utilisateur. Sauf si vous savez qu'il y a une bonne "
-"raison pour laquelle votre compte n'a pas de nom d'utilisateur attaché (par "
-"exemple, vous êtes un administrateur du site), vous devez vous déconnecter "
+"protégées sans un nom d'utilisateur. Vous devez vous déconnecter "
 "et créer un nouveau compte en vous connectant via OAuth, ou contacter un "
 "administrateur du site pour demander de l'aide\n"
 
@@ -3086,7 +3091,7 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #: TWLight/users/views.py:184 TWLight/users/views.py:246
 msgid "You must be logged in to do that."
-msgstr ""
+msgstr "Vous devez être connecté pour faire cela"
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/views.py:199
@@ -3114,9 +3119,8 @@ msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
-"Vous pouvez explorer le site, mais vous ne serez pas en mesure de demander "
-"l'accès aux ressources ou évaluer les demandes, sauf si vous êtes d'accord "
-"avec les conditions d'utilisation."
+"Votre courriel est vide. Vous pouvez toujours explorer le site, mais vous ne pourrez pas"
+"demander l'accès aux ressources des partenaires sans courriel."
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
 #: TWLight/users/views.py:335
@@ -3165,22 +3169,22 @@ msgid ""
 "{username} applied for access to <a href=\"{url}\">{partner}</"
 "a><blockquote>{rationale}</blockquote>"
 msgstr ""
-"{username} a demandé l'accès à {partner}\n"
-"{rationale}\n"
+"{username} a demandé l'accès à <a href=\"{url}\">{partner}</"
+"a><blockquote>{rationale}</blockquote>"
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
 #: TWLight/views.py:87
 #, fuzzy, python-brace-format
 #| msgid "{username} applied for access to {partner}"
 msgid "{username} applied for access to <a href=\"{url}\">{partner}</a>"
-msgstr "{username} a demandé l'accès à {partner}"
+msgstr "{username} a demandé l'accès à <a href=\"{url}\">{partner}</a>"
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
 #: TWLight/views.py:107
 #, fuzzy, python-brace-format
 #| msgid "{username} received access to {partner}"
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
-msgstr "{username} a reçu l'accès à {partner}"
+msgstr "{username} a reçu l'accès à <a href=\"{url}\">{partner}"
 
 #~ msgid "please apply"
 #~ msgstr "Veuillez appliquer"
@@ -3191,9 +3195,8 @@ msgstr "{username} a reçu l'accès à {partner}"
 #~| " You can see per-partner metrics on the partner pages.\n"
 #~ msgid "You can see per-partner metrics on the partner pages."
 #~ msgstr ""
-#~ "\n"
 #~ "Vous pouvez consulter les statistiques par partenaire sur les pages "
-#~ "partenaires.\n"
+#~ "partenaires."
 
 #, fuzzy
 #~| msgid ""
@@ -3231,8 +3234,9 @@ msgstr "{username} a reçu l'accès à {partner}"
 #~ "meta.wikimedia.org/wiki/The_Wikipedia_Library\"> The Wikipedia Library</"
 #~ "a>."
 #~ msgstr ""
-#~ "La carte de bibliothèque Wikipédia est un project de la bibliothèque "
-#~ "Wikipédia."
+#~ "La carte de bibliothèque Wikipédia est un project de <a href=\"https://"
+#~ "meta.wikimedia.org/wiki/The_Wikipedia_Library\"> la bibliothèque "
+#~ "Wikipédia</a>."
 
 #~ msgid "Rationale"
 #~ msgstr "Justification d'utilisateur"
