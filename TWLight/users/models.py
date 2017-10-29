@@ -65,6 +65,10 @@ class UserProfile(models.Model):
     use_wp_email = models.BooleanField(default=True, help_text=_('Should we '
         'automatically update their email from their Wikipedia email when they '
         'log in? Defaults to True.'))
+    lang = models.CharField(max_length=128, null=True, blank=True,
+        choices=settings.LANGUAGES,
+        # Translators: Users' detected or selected language.
+        help_text=_("Language"))
 
 
 # Create user profiles automatically when users are created.
@@ -281,7 +285,7 @@ class Editor(models.Model):
             return None
             pass
 
-    def update_from_wikipedia(self, identity):
+    def update_from_wikipedia(self, identity, lang):
         """
         Given the dict returned from the Wikipedia OAuth /identify endpoint,
         update the instance accordingly.
@@ -350,6 +354,11 @@ class Editor(models.Model):
                 pass
 
         self.user.save()
+
+        # Add language if the user hasn't selected one
+        if not self.user.userprofile.lang:
+            self.user.userprofile.lang = lang
+            self.user.userprofile.save()
 
 
     def __unicode__(self):
