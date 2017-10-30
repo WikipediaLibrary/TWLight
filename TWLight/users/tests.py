@@ -479,7 +479,7 @@ class EditorModelTestCase(TestCase):
         # editor.
         with self.assertRaises(AssertionError):
             identity['sub'] = self.test_editor.wp_sub + 1
-            new_editor.update_from_wikipedia(identity)
+            new_editor.update_from_wikipedia(identity, lang) # This call also saves the edito
 
 
 
