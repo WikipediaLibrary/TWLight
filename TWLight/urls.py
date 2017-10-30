@@ -11,6 +11,8 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
 
+import TWLight.i18n.views
+import TWLight.i18n.urls
 from TWLight.applications.urls import urlpatterns as applications_urls
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
 from TWLight.graphs.views import DashboardView
@@ -39,14 +41,13 @@ urlpatterns = [
         {'post_reset_redirect': 'users:home'},
         name='password_reset'),
 
-    # This makes the set language URL available.
-    url(r'^i18n/', include('django.conf.urls.i18n')),
-
     # Third-party --------------------------------------------------------------
     url(r'^comments/', include('django_comments.urls')),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
 
     # TWLight apps -------------------------------------------------------------
+    # This makes our custom set language form  available.
+    url(r'^i18n/', include('TWLight.i18n.urls')),
     url(r'^users/', include(users_urls, namespace="users")),
     url(r'^applications/', include(applications_urls, namespace="applications")),
     url(r'^partners/', include(partners_urls, namespace="partners")),
