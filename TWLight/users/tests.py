@@ -11,6 +11,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
 from django.test import TestCase, Client, RequestFactory
+from django.utils.translation import get_language
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
@@ -460,7 +461,8 @@ class EditorModelTestCase(TestCase):
         # to test instead.
         new_editor = EditorFactory()
 
-        new_editor.update_from_wikipedia(identity)
+        lang = get_language()
+        new_editor.update_from_wikipedia(identity, lang) # This call also saves the edito
 
         self.assertEqual(new_editor.wp_username, 'evil_dr_porkchop')
         self.assertEqual(new_editor.wp_rights,
