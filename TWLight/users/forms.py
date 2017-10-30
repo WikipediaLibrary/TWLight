@@ -40,8 +40,9 @@ class EditorUpdateForm(forms.ModelForm):
 class SetLanguageForm(forms.Form):
     language = forms.ChoiceField(settings.LANGUAGES)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(SetLanguageForm, self).__init__(*args, **kwargs)
+        self.fields['language'].initial = user.userprofile.lang
         self.helper = FormHelper()
         self.helper.label_class = 'sr-only'
 
