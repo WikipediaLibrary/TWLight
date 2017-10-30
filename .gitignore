@@ -6,6 +6,7 @@ id_rsa
 id_rsa.*
 *.sqlite3
 *.dump
+TWLight/settings/local_vars.py
 TWLight/settings/production_vars.py
 TWLight/settings/staging_vars.py
 TWLight/settings/vagrant_vars.py
