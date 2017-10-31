@@ -12,8 +12,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
-from django.utils.translation import get_language
-from django.utils.translation import ugettext as _
+from django.utils.translation import get_language, ugettext as _
 
 from .models import Editor
 
@@ -131,7 +130,8 @@ class OAuthBackend(object):
         editor.user = user
 
         editor.wp_sub = identity['sub']
-        editor.update_from_wikipedia(identity) # This call also saves the editor
+        lang = get_language()
+        editor.update_from_wikipedia(identity, lang) # This call also saves the editor
 
         logger.info('User and editor successfully created.')
         return user, editor
@@ -161,7 +161,8 @@ class OAuthBackend(object):
             assert hasattr(user, 'editor')
             editor = user.editor
 
-            editor.update_from_wikipedia(identity)
+            lang = get_language()
+            editor.update_from_wikipedia(identity, lang) # This call also saves the editor
             logger.info('Editor updated.')
 
             created = False

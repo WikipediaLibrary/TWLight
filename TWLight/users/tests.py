@@ -11,6 +11,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
 from django.test import TestCase, Client, RequestFactory
+from django.utils.translation import get_language
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
@@ -460,7 +461,8 @@ class EditorModelTestCase(TestCase):
         # to test instead.
         new_editor = EditorFactory()
 
-        new_editor.update_from_wikipedia(identity)
+        lang = get_language()
+        new_editor.update_from_wikipedia(identity, lang) # This call also saves the edito
 
         self.assertEqual(new_editor.wp_username, 'evil_dr_porkchop')
         self.assertEqual(new_editor.wp_rights,
@@ -477,7 +479,7 @@ class EditorModelTestCase(TestCase):
         # editor.
         with self.assertRaises(AssertionError):
             identity['sub'] = self.test_editor.wp_sub + 1
-            new_editor.update_from_wikipedia(identity)
+            new_editor.update_from_wikipedia(identity, lang) # This call also saves the edito
 
 
 
@@ -532,8 +534,9 @@ class AuthorizationTestCase(TestCase):
             * Return created = False
         * Call Editor.update_from_wikipedia
         """
-        # Make sure the test user has the username anticipated by our backend.
+        # Make sure the test user has the username and language anticipated by our backend.
         username = FAKE_IDENTITY['sub']
+        lang = get_language()
         existing_user = UserFactory(username=username)
         params = {
             'user': existing_user,
@@ -550,7 +553,7 @@ class AuthorizationTestCase(TestCase):
         self.assertTrue(hasattr(user, 'editor'))
         self.assertEqual(user, existing_user)
 
-        mock_update.assert_called_once_with(FAKE_IDENTITY)
+        mock_update.assert_called_once_with(FAKE_IDENTITY, lang)
 
 
     @patch('TWLight.users.models.Editor.update_from_wikipedia')
@@ -564,6 +567,7 @@ class AuthorizationTestCase(TestCase):
         """
         oauth_backend = OAuthBackend()
         identity = copy.copy(FAKE_IDENTITY)
+        lang = get_language()
         new_sub = 57381037
         new_username = oauth_backend._get_username(identity)
         identity['sub'] = new_sub
@@ -576,7 +580,7 @@ class AuthorizationTestCase(TestCase):
         self.assertTrue(hasattr(user, 'editor'))
         self.assertEqual(user.editor.wp_sub, new_sub)
 
-        mock_update.assert_called_once_with(identity)
+        mock_update.assert_called_once_with(identity, lang)
 
 
 

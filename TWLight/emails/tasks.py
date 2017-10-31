@@ -103,7 +103,11 @@ def send_comment_notification_emails(sender, **kwargs):
             logger.info('we should notify the editor')
             email = CommentNotificationEmailEditors()
             logger.info('email constructed')
-            email.send(app.editor.user.email, {'app': app, 'app_url': app_url})
+            email.send(app.editor.user.email,
+                {'user': app.editor.wp_username,
+                 'lang': app.editor.user.userprofile.lang,
+                 'app': app,
+                 'app_url': app_url})
             logger.info('Email queued for {app.editor.user.email} about '
                 'app #{app.pk}'.format(app=app))
 
@@ -112,22 +116,26 @@ def send_comment_notification_emails(sender, **kwargs):
     all_comments = Comment.objects.filter(object_pk=app.pk,
                         content_type__model='application',
                         content_type__app_label='applications')
-    user_emails = set(
-        [comment.user.email for comment in all_comments]
+    users = set(
+        [comment.user for comment in all_comments]
         )
 
-    user_emails.remove(current_comment.user_email)
+    users.remove(current_comment.user)
     try:
-        user_emails.remove(app.editor.user.email)
+        users.remove(app.editor.user)
     except KeyError:
         # If the editor is not among the prior commenters, that's fine; no
         # reason they should be.
         pass
 
-    for user_email in user_emails:
-        if user_email:
+    for user in users:
+        if user:
             email = CommentNotificationEmailOthers()
-            email.send(user_email, {'app': app, 'app_url': app_url})
+            email.send(user.email,
+                {'user': user.editor.wp_username,
+                 'lang': user.userprofile.lang,
+                 'app': app,
+                 'app_url': app_url})
             logger.info('Email queued for {app.editor.user.email} about app '
                 '#{app.pk}'.format(app=app))
 
@@ -135,7 +143,9 @@ def send_comment_notification_emails(sender, **kwargs):
 def send_approval_notification_email(instance):
     email = ApprovalNotification()
     email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username, 'partner': instance.partner})
+        {'user': instance.user.editor.wp_username,
+         'lang': instance.user.userprofile.lang,
+         'partner': instance.partner})
 
 
 def send_waitlist_notification_email(instance):
@@ -146,6 +156,7 @@ def send_waitlist_notification_email(instance):
     email = WaitlistNotification()
     email.send(instance.user.email,
         {'user': instance.user.editor.wp_username,
+         'lang': instance.user.userprofile.lang,
          'partner': instance.partner,
          'link': link})
 
@@ -168,6 +179,7 @@ def send_rejection_notification_email(instance):
     email = RejectionNotification()
     email.send(instance.user.email,
         {'user': instance.user.editor.wp_username,
+         'lang': instance.user.userprofile.lang,
          'partner': instance.partner,
          'app_url': app_url})
 

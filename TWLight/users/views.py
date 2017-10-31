@@ -60,7 +60,7 @@ class UserDetailView(SelfOnly, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context['language_form'] = SetLanguageForm()
+        context['language_form'] = SetLanguageForm(user=self.request.user)
         context['password_form'] = PasswordChangeForm(user=self.request.user)
         return context
 
@@ -84,7 +84,7 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
         context['editor'] = editor # allow for more semantic templates
         context['object_list'] = editor.applications.all().order_by('status', 'earliest_expiry_date')
         context['form'] = EditorUpdateForm(instance=editor)
-        context['language_form'] = SetLanguageForm()
+        context['language_form'] = SetLanguageForm(user=self.request.user)
 
         try:
             if self.request.user.editor == editor and not editor.contributions:
