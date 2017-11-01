@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-24 12:29+0000\n"
+"POT-Creation-Date: 2017-11-01 11:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgid "Your application to {partner}"
 msgstr ""
 
 #: TWLight/applications/forms.py:267 TWLight/users/admin.py:73
-#: TWLight/users/models.py:111
+#: TWLight/users/models.py:115
 msgid "Username"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgid "You must agree with the partner's terms of use"
 msgstr ""
 
 #. Translators: This labels a user's email address on a form for account coordinators
-#: TWLight/applications/helpers.py:115 TWLight/users/forms.py:81
+#: TWLight/applications/helpers.py:115 TWLight/users/forms.py:82
 msgid "Email"
 msgstr ""
 
@@ -789,7 +789,8 @@ msgid ""
 msgstr ""
 
 #. Translators: Title for a list of languages if there is only one.
-#: TWLight/resources/models.py:57
+#. Translators: Users' detected or selected language.
+#: TWLight/resources/models.py:57 TWLight/users/models.py:71
 #: TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr ""
@@ -1245,15 +1246,15 @@ msgstr ""
 msgid "This partner is now available for applications"
 msgstr ""
 
-#: TWLight/settings/base.py:151
+#: TWLight/settings/base.py:152
 msgid "English"
 msgstr ""
 
-#: TWLight/settings/base.py:153
+#: TWLight/settings/base.py:154
 msgid "Finnish"
 msgstr ""
 
-#: TWLight/settings/base.py:155
+#: TWLight/settings/base.py:156
 msgid "French"
 msgstr ""
 
@@ -1787,43 +1788,43 @@ msgid "User {user} deactivated."
 msgstr ""
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
-#: TWLight/users/authorization.py:211
+#: TWLight/users/authorization.py:212
 msgid "You tried to log in but presented an invalid access  token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/authorization.py:266 TWLight/users/authorization.py:345
+#: TWLight/users/authorization.py:267 TWLight/users/authorization.py:346
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr ""
 
-#: TWLight/users/authorization.py:334
+#: TWLight/users/authorization.py:335
 msgid "Did not receive a valid oauth response."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:356
+#: TWLight/users/authorization.py:357
 msgid "Could not find handshaker."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:367
+#: TWLight/users/authorization.py:368
 msgid "No request token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:377
+#: TWLight/users/authorization.py:378
 msgid "Access token generation failed."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/authorization.py:391
+#: TWLight/users/authorization.py:392
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
-#: TWLight/users/authorization.py:397
+#: TWLight/users/authorization.py:398
 msgid ""
 "Either your Wikipedia Library Card Platform account has been deactivated or "
 "your Wikipedia account no longer meets the eligibility criteria in the terms "
@@ -1831,12 +1832,12 @@ msgid ""
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/authorization.py:409
+#: TWLight/users/authorization.py:410
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
 #. Translators: This message is shown when a user logs back in to the site after their first time.
-#: TWLight/users/authorization.py:414
+#: TWLight/users/authorization.py:415
 msgid "Welcome back!"
 msgstr ""
 
@@ -1851,22 +1852,22 @@ msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
 msgstr ""
 
 #. Translators: Users must click this button when registering to agree to the website terms of use.
-#: TWLight/users/forms.py:60
+#: TWLight/users/forms.py:61
 msgid "I agree with the terms of use"
 msgstr ""
 
 #. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:69
+#: TWLight/users/forms.py:70
 msgid "I accept"
 msgstr ""
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
-#: TWLight/users/forms.py:83
+#: TWLight/users/forms.py:84
 msgid "Use my Wikipedia email address"
 msgstr ""
 
 #. Translators: This labels a button which users click to change their email.
-#: TWLight/users/forms.py:96
+#: TWLight/users/forms.py:97
 msgid "Update email"
 msgstr ""
 
@@ -1883,52 +1884,52 @@ msgid ""
 msgstr ""
 
 #. Translators: The date that this user's information was last changed.
-#: TWLight/users/models.py:99
+#: TWLight/users/models.py:103
 msgid "When this information was last edited"
 msgstr ""
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:104
+#: TWLight/users/models.py:108
 msgid "When this profile was first created"
 msgstr ""
 
 #. Translators: The total number of edits this user has made to all Wikipedia projects
-#: TWLight/users/models.py:113
+#: TWLight/users/models.py:117
 msgid "Wikipedia edit count"
 msgstr ""
 
 #. Translators: The date this user registered their Wikipedia account
-#: TWLight/users/models.py:116
+#: TWLight/users/models.py:120
 msgid "Date registered at Wikipedia"
 msgstr ""
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:120
+#: TWLight/users/models.py:124
 msgid "Wikipedia user ID"
 msgstr ""
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:126
+#: TWLight/users/models.py:130
 msgid "Wikipedia groups"
 msgstr ""
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:129
+#: TWLight/users/models.py:133
 msgid "Wikipedia user rights"
 msgstr ""
 
 #. Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-#: TWLight/users/models.py:133
+#: TWLight/users/models.py:137
 msgid ""
 "At their last login, did this user meet the criteria in the terms of use?"
 msgstr ""
 
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:140
+#: TWLight/users/models.py:144
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:356
+#: TWLight/users/models.py:365
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
