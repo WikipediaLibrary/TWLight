@@ -107,6 +107,7 @@ header {
 	padding:10px 12px;
 	font-size: 18px;
 	margin:10px;
+        display: inline;
 }
 
 @media (min-width: 992px) {
