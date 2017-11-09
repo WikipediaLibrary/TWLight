@@ -8,7 +8,7 @@ body {
 
 /*
 ----------------------------------------------------------------------------
-TYPOGRAPHY
+TYPOGRAPHY & IMAGES
 --------------------------------------------------------------------------*/
 h1, h2, h3 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -39,6 +39,10 @@ li {
 
 .glyphicon-grey {
 	color:#696969;
+}
+
+img.icons {
+   margin: -6px 6px 0px 0px;
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -107,7 +111,6 @@ header {
 	padding:10px 12px;
 	font-size: 18px;
 	margin:10px;
-        display: inline;
 }
 
 @media (min-width: 992px) {
@@ -484,6 +487,7 @@ CLEARING COLUMNS
 /*  Large Desktop  */
 @media (min-width:1200px) {
   /* Column clear fix */
+
   .col-md-1:nth-child(12n+1),
   .col-md-2:nth-child(6n+1),
   .col-md-3:nth-child(4n+1),
