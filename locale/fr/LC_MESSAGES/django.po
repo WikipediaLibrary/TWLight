@@ -2393,10 +2393,11 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"Informations avec * a été récupéré à partir de Wikipédia.\n
-"Autres informations a été ajouté directement par les utilisateurs ou les\n "
-"administrateurs du site, dans leur langue préférée.\n"
-"Il a été modifié en dernier le %(last_updated_date)s.\n"
+"      Informations avec * a été récupéré à partir de Wikipédia.\n"
+"      Autres informations a été ajouté directement par les utilisateurs ou les\n"
+"      administrateurs du site, dans leur langue préférée.\n"
+"      Il a été modifié en dernier le %(last_updated_date)s.\n"
+"    "
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:47
