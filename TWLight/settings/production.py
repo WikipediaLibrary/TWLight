@@ -47,7 +47,7 @@ DATABASES['default']['PASSWORD'] = MYSQL_PASSWORD
 #EMAIL_BACKEND = 'djmail.backends.celery.EmailBackend'
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
+EMAIL_BACKEND = 'djmail.backends.async.EmailBackend'
 EMAIL_HOST = 'tools-mail.tools.eqiad.wmflabs'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
