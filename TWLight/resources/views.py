@@ -87,10 +87,10 @@ class PartnersDetailView(DetailView):
                 Application.objects.filter(partner=partner)
             )
 
-        context['approved_signups_time_data'] = get_data_count_by_month(
+        context['sent_signups_time_data'] = get_data_count_by_month(
                 Application.objects.filter(
                     partner=partner,
-                    status=Application.APPROVED
+                    status=Application.SENT
                 )
             )
 

@@ -314,6 +314,8 @@ class CSVAppCountByPartner(_CSVDownloadView):
 
         if 'approved' in self.kwargs:
             queryset = queryset.filter(status=Application.APPROVED)
+        if 'sent' in self.kwargs:
+            queryset = queryset.filter(status=Application.SENT)
 
         data = get_data_count_by_month(queryset, data_format=PYTHON)
 
