@@ -357,7 +357,7 @@ A few spots just need padding instead of margin.
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  height: 600px !important;
+  /* height: 600px !important; */
 }
 
 .panel-body {
@@ -365,7 +365,7 @@ A few spots just need padding instead of margin.
   border-width: 0 1px 1px 1px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  height:750px;
+  /* height:500px; */
 }
 
 .panel-heading {
@@ -373,6 +373,7 @@ A few spots just need padding instead of margin.
   border-width: 1px 1px 0 1px;
   height:70px;
   padding:20px 30px 0px 10px !important;
+  background-color:red;
   }
 
 
@@ -430,6 +431,12 @@ A few spots just need padding instead of margin.
   .panel-heading {
     height: 90px !important;
    }
+}
+
+@media (max-width: 814px) and (min-width: 767px) {
+   .panel-heading {
+    height: 100px; !important
+}
 }
 
 /* Portrait phones and smaller */
