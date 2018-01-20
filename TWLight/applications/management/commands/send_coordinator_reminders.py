@@ -1,14 +1,12 @@
 import logging
-import django.dispatch
 from django.core.management.base import BaseCommand, CommandError
+from TWLight.applications.signals import Reminder
 
 logger = logging.getLogger(__name__)
-send_coordinator_reminders = django.dispatch.Signal(providing_args=['app_status'])
 
 class Command(BaseCommand):
-
     def add_arguments(self, parser):
-       parser.add_argument('app_status', nargs='+', type=str)
+       parser.add_argument('--app_status', type=str, required=True)
 
     def handle(self, *args, **options):
-       send_coordinator_reminders.send(sender=self, app_status=options['app_status']) 
+       Reminder.coordinator_reminder.send(sender=self.__class__, app_status=options['app_status'])

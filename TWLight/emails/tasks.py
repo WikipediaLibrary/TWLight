@@ -35,6 +35,7 @@ from django.shortcuts import get_object_or_404
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 
+from ..applications.signals import Reminder
 
 logger = logging.getLogger(__name__)
 
@@ -66,7 +67,17 @@ class WaitlistNotification(template_mail.TemplateMail):
 class RejectionNotification(template_mail.TemplateMail):
     name = 'rejection_notification'
 
+@receiver(Reminder.coordinator_reminder)
+def send_coordinator_reminder_emails(sender, **kwargs):
+    """
+    Any time the related managment command is run, this sends email to the
+    to the designated coordinator for each partner, reminding them to login
+    to the site if there are pending applications.
+    """
+    app_status = kwargs['app_status']
 
+    logger.info('Received coordinator reminder signal; preparing to send '
+                'reminder emails.')
 
 @receiver(comment_was_posted)
 def send_comment_notification_emails(sender, **kwargs):
