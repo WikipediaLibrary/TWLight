@@ -33,9 +33,9 @@ from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
 
 from TWLight.applications.models import Application
+from TWLight.applications.signals import Reminder
 from TWLight.resources.models import Partner
 
-from ..applications.signals import Reminder
 
 logger = logging.getLogger(__name__)
 
@@ -74,10 +74,10 @@ def send_coordinator_reminder_emails(sender, **kwargs):
     to the designated coordinator for each partner, reminding them to login
     to the site if there are pending applications.
     """
-    app_status = kwargs['app_status']
+    app = kwargs['app']
 
-    logger.info('Received coordinator reminder signal; preparing to send '
-                'reminder emails.')
+    logger.info('Received coordinator reminder signal on app number {app.pk}; '
+                'preparing to send reminder emails.'.format(app=app))
 
 @receiver(comment_was_posted)
 def send_comment_notification_emails(sender, **kwargs):
