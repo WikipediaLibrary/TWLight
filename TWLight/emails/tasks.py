@@ -32,6 +32,7 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
 
+
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import Partner
@@ -48,36 +49,51 @@ class CommentNotificationEmailEditors(template_mail.TemplateMail):
     name = 'comment_notification_editors'
 
 
-
 class CommentNotificationEmailOthers(template_mail.TemplateMail):
     name = 'comment_notification_others'
-
 
 
 class ApprovalNotification(template_mail.TemplateMail):
     name = 'approval_notification'
 
 
-
 class WaitlistNotification(template_mail.TemplateMail):
     name = 'waitlist_notification'
-
 
 
 class RejectionNotification(template_mail.TemplateMail):
     name = 'rejection_notification'
 
+
+class CoordinatorReminderNotification(template_mail.TemplateMail):
+    name = 'coordinator_reminder_notification'
+
+
 @receiver(Reminder.coordinator_reminder)
 def send_coordinator_reminder_emails(sender, **kwargs):
     """
     Any time the related managment command is run, this sends email to the
-    to the designated coordinator for each partner, reminding them to login
+    to designated coordinators, reminding them to login
     to the site if there are pending applications.
     """
-    app = kwargs['app']
-
-    logger.info('Received coordinator reminder signal on app number {app.pk}; '
-                'preparing to send reminder emails.'.format(app=app))
+    app_status = kwargs['app_status']
+    app_count = kwargs['app_count']
+    coordinator_wp_username = kwargs['coordinator_wp_username']
+    coordinator_email = kwargs['coordinator_email']
+    coordinator_lang = kwargs['coordinator_lang']
+    logger.info(u'Received coordinator reminder signal for {coordinator_wp_username}; '
+        'preparing to send reminder email to {coordinator_email}.'.format(coordinator_wp_username=coordinator_wp_username, coordinator_email=coordinator_email))
+    if coordinator_email:
+        logger.info('we should notify the coordinator')
+        email = CoordinatorReminderNotification()
+        logger.info('email constructed')
+        email.send(coordinator_email,
+            {'user': coordinator_wp_username,
+             'lang': coordinator_lang,
+             'app_status': app_status,
+             'app_count': app_count})
+        logger.info(u'Email queued for {coordinator_email} about '
+        '{app_count} {app_status} apps.'.format(coordinator_email=coordinator_email, app_count=app_count,app_status=app_status))
 
 @receiver(comment_was_posted)
 def send_comment_notification_emails(sender, **kwargs):

@@ -1,4 +1,5 @@
 import logging
+from collections import Counter
 from django.core.management.base import BaseCommand, CommandError
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
@@ -12,6 +13,22 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
        if options['app_status'] == 'PENDING':
-           pending_app_list = ListApplicationsView().get_queryset()
-           for app in pending_app_list:
-               Reminder.coordinator_reminder.send(sender=self.__class__, app=app)
+           pending_apps = ListApplicationsView().get_queryset()
+
+           # A deduplicated dict of coordinators from the pending app queryset, along
+           # with a count of how many total pending apps they have
+           coordinators = Counter(pending_apps.values_list(
+               'partner__coordinator__editor__wp_username',
+               'partner__coordinator__email',
+               'partner__coordinator__editor__user__userprofile__lang'
+           ))
+
+           for coordinator, count in coordinators.items():
+               Reminder.coordinator_reminder.send(
+                   sender=self.__class__,
+                   app_status=options['app_status'],
+                   app_count=count,
+                   coordinator_wp_username=coordinator[0],
+                   coordinator_email=coordinator[1],
+                   coordinator_lang=coordinator[2]
+               )
