@@ -81,6 +81,10 @@ def send_coordinator_reminder_emails(sender, **kwargs):
     coordinator_wp_username = kwargs['coordinator_wp_username']
     coordinator_email = kwargs['coordinator_email']
     coordinator_lang = kwargs['coordinator_lang']
+    base_url = get_current_site(None).domain
+    path = reverse_lazy('applications:list')
+    link = 'https://{base}{path}'.format(base=base_url, path=path)
+
     logger.info(u'Received coordinator reminder signal for {coordinator_wp_username}; '
         'preparing to send reminder email to {coordinator_email}.'.format(coordinator_wp_username=coordinator_wp_username, coordinator_email=coordinator_email))
     if coordinator_email:
@@ -91,7 +95,8 @@ def send_coordinator_reminder_emails(sender, **kwargs):
             {'user': coordinator_wp_username,
              'lang': coordinator_lang,
              'app_status': app_status,
-             'app_count': app_count})
+             'app_count': app_count,
+             'link': link})
         logger.info(u'Email queued for {coordinator_email} about '
         '{app_count} {app_status} apps.'.format(coordinator_email=coordinator_email, app_count=app_count,app_status=app_status))
 

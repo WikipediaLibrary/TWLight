@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% comment %} Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate email adresses or items in curly braces.{% endcomment %}
+
+{% blocktrans trimmed %}
+Our records indicate that you are the designated coordinator for partners that 
+have a total of {{ app_count }} applications with a status of {{ app_status }}.
+This is a gentle reminder that you may review applications at {{ link }}.
+
+If you received this message in error, drop us a line at
+wikipedialibrary@wikimedia.org.
+
+Thanks for helping review Wikipedia Library applications!
+{% endblocktrans %}
