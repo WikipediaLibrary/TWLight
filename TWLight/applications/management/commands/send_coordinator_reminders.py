@@ -13,6 +13,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
        if options['app_status'] == 'PENDING':
+           # Per this view, we're actually getting apps with a status of
+           # PENDING or QUESTION for partners with a status of AVAILABLE or
+           # WAITLIST.
            pending_apps = ListApplicationsView().get_queryset()
 
            # A deduplicated dict of coordinators from the pending app queryset, along

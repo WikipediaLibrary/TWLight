@@ -87,18 +87,15 @@ def send_coordinator_reminder_emails(sender, **kwargs):
 
     logger.info(u'Received coordinator reminder signal for {coordinator_wp_username}; '
         'preparing to send reminder email to {coordinator_email}.'.format(coordinator_wp_username=coordinator_wp_username, coordinator_email=coordinator_email))
-    if coordinator_email:
-        logger.info('we should notify the coordinator')
-        email = CoordinatorReminderNotification()
-        logger.info('email constructed')
-        email.send(coordinator_email,
-            {'user': coordinator_wp_username,
-             'lang': coordinator_lang,
-             'app_status': app_status,
-             'app_count': app_count,
-             'link': link})
-        logger.info(u'Email queued for {coordinator_email} about '
-        '{app_count} {app_status} apps.'.format(coordinator_email=coordinator_email, app_count=app_count,app_status=app_status))
+    email = CoordinatorReminderNotification()
+    logger.info('Email constructed.')
+    email.send(coordinator_email,
+        {'user': coordinator_wp_username,
+         'lang': coordinator_lang,
+         'app_status': app_status,
+         'app_count': app_count,
+         'link': link})
+    logger.info(u'Email queued.')
 
 @receiver(comment_was_posted)
 def send_comment_notification_emails(sender, **kwargs):
