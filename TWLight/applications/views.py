@@ -710,7 +710,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
         # IMPORTANT! It would be tempting to just do QuerySet.update() here,
         # but that does NOT send the pre_save signal, which is doing some
-        # important work for Applications.
+        # important work for Applications. This includes handling the closing
+        # dates for applications and sending email notifications to editors
+        # about their applications.
         for app_pk in request.POST.getlist('applications'):
             try:
                 app = Application.objects.get(pk=app_pk)
