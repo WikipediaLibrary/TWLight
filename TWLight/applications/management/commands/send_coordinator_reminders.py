@@ -24,11 +24,13 @@ class Command(BaseCommand):
            ))
 
            for coordinator, count in coordinators.items():
-               Reminder.coordinator_reminder.send(
-                   sender=self.__class__,
-                   app_status=options['app_status'],
-                   app_count=count,
-                   coordinator_wp_username=coordinator[0],
-                   coordinator_email=coordinator[1],
-                   coordinator_lang=coordinator[2]
-               )
+               # Only bother with the signal if we have a coordinator email.
+               if coordinator[1]:
+                   Reminder.coordinator_reminder.send(
+                       sender=self.__class__,
+                       app_status=options['app_status'],
+                       app_count=count,
+                       coordinator_wp_username=coordinator[0],
+                       coordinator_email=coordinator[1],
+                       coordinator_lang=coordinator[2]
+                   )
