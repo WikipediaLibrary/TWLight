@@ -89,6 +89,14 @@ class ViewsTestCase(TestCase):
         self.editor4 = EditorFactory(user=self.user_coordinator)
         get_coordinators().user_set.add(self.user_coordinator)
 
+        # We should mock out any call to messages call in the view, since
+        # RequestFactory (unlike Client) doesn't run middleware. If you
+        # actually want to test that messages are displayed, use Client(),
+        # and stop/restart the patcher.
+        self.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        self.message_patcher.start()
+
+
 
     def tearDown(self):
         super(ViewsTestCase, self).tearDown()
@@ -100,6 +108,7 @@ class ViewsTestCase(TestCase):
         self.editor3.delete()
         self.user_coordinator.delete()
         self.editor4.delete()
+        self.message_patcher.stop()
 
 
     def test_editor_detail_url_resolves(self):
