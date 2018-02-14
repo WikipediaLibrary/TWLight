@@ -1,16 +1,15 @@
 {% load i18n %}
-
-{% comment %} Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate email adresses or items in curly braces.{% endcomment %}
-
+<html>
+<body>
+				{% comment %} Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like {{ user }} or {{ partner }}; don't translate email addresses or html tags either.{% endcomment %}
 {% blocktrans trimmed %}
-Dear {{ user }},
-
-Our records indicate that you are the designated coordinator for partners that 
-have a total of {{ app_count }} applications with a status of {{ app_status }}.
-This is a gentle reminder that you may review applications at {{ link }}.
-
-If you received this message in error, drop us a line at
-wikipedialibrary@wikimedia.org.
-
-Thanks for helping review Wikipedia Library applications!
+  <p>Dear {{ user }},</p>
+  <p>Our records indicate that you are the designated coordinator for partners that
+     have a total of {{ app_count }} applications with a status of {{ app_status }}.</p>
+	<p>This is a gentle reminder that you may review applications at <a href="{{ link }}">{{ link }}</a>.</p>
+  <p>If you received this message in error, drop us a line at
+     wikipedialibrary@wikimedia.org.</p>
+  <p>Thanks for helping review Wikipedia Library applications!</p>
 {% endblocktrans %}
+</body>
+</html>
