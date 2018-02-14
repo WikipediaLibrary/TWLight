@@ -1,9 +1,9 @@
 {% load i18n %}
-
-{% blocktrans trimmed %}
+{% comment %} Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like {{ app_url }}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+{% blocktrans %}
 There is a new comment on a Wikipedia Library application that you also
-commented on. It may be providing an answer to a question you asked. You can
-see it at {{ app_url }}.
+commented on. It may be providing an answer to a question you asked. See it at:
+{{ app_url }}
 
 Thanks for helping review Wikipedia Library applications!
 {% endblocktrans %}
