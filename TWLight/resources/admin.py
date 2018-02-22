@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from TWLight.users.groups import get_coordinators
 
-from .models import Partner, Stream, Contact, Language
+from .models import Partner, PartnerLogo, Stream, Contact, Language
 
 
 class LanguageAdmin(admin.ModelAdmin):
@@ -11,6 +11,9 @@ class LanguageAdmin(admin.ModelAdmin):
 
 admin.site.register(Language, LanguageAdmin)
 
+
+class PartnerLogoInline(admin.TabularInline):
+    model = PartnerLogo
 
 
 class PartnerAdmin(admin.ModelAdmin):
@@ -41,6 +44,7 @@ class PartnerAdmin(admin.ModelAdmin):
 
     search_fields = ('company_name',)
     list_display = ('company_name', 'description', 'id', 'get_languages')
+    inlines = [PartnerLogoInline]
 
 admin.site.register(Partner, PartnerAdmin)
 

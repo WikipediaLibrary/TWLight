@@ -24,7 +24,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 
 # ------------------------------------------------------------------------------
 # ------------------------> core django configurations <------------------------
