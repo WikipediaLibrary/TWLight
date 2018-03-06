@@ -46,8 +46,8 @@ csv_urlpatterns = [
 
     url(r'^app_count/approved/(?P<pk>\d+)/$',
         views.CSVAppCountByPartner.as_view(),
-        kwargs={'approved': True},
-        name='approved_app_count_by_partner'
+        kwargs={'approved_or_sent': True},
+        name='approved_or_sent_app_count_by_partner'
     ),
 
     url(r'^user_count/(?P<pk>\d+)/$',
