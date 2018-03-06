@@ -122,16 +122,16 @@
 				</a>
 			</li>
 			
-		{% if user.is_staff %}
-			<li role="presentation" class="mobile-menu">
-				<a href="{% url 'admin:index' %}">
-          {% comment %} Translators: Shown in the top bar of almost every page when the current user is staff, linking to the administrator interface. {% endcomment %}
-					{% trans "Admin" %}
-				</a>
-			</li>
-		{% endif %}
-			
-		{% if user.is_authenticated %}
+		{% if user.is_authenticated %}			
+			{% if user.is_staff %}
+				<li role="presentation" class="mobile-menu">
+					<a href="{% url 'admin:index' %}">
+			  {% comment %} Translators: Shown in the top bar of almost every page when the current user is staff, linking to the administrator interface. {% endcomment %}
+						{% trans "Admin" %}
+					</a>
+				</li>
+			{% endif %}
+
 			<li role="presentation" class="divider mobile-menu">
 				<a href="{% url 'auth_logout' %}">
           {% comment %} Translators: Shown in the top bar of almost every page when the current user is logged in. {% endcomment %}
