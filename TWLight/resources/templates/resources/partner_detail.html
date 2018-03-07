@@ -410,10 +410,10 @@
   
   {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time. {% endcomment %}
   <h4>{% trans "Approved applications only" %}
-    <a href="{% url 'csv:approved_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
+    <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
   </a></h4>
   
-  <div id="approved-signups-time-graph" style="width:600px;height:300px"></div>
+  <div id="approved-or-sent-signups-time-graph" style="width:600px;height:300px"></div>
   
   {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time. {% endcomment %}
   <h3>{% trans "Unique users over time" %}
@@ -451,9 +451,9 @@
       });
 
       // Approved applications by time
-      var approved_signups_time_graph = $("#approved-signups-time-graph");
-      var approved_signups_time_data = {{ approved_signups_time_data | safe }};
-      var approved_signups_time_plot = $.plot(approved_signups_time_graph, [approved_signups_time_data], {
+      var approved_or_sent_signups_time_graph = $("#approved-or-sent-signups-time-graph");
+      var approved_or_sent_signups_time_data = {{ approved_or_sent_signups_time_data | safe }};
+      var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
         xaxis: {
           mode: "time",
           tickSize: [1, 'month'],
