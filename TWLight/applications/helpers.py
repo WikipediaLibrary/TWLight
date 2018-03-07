@@ -75,7 +75,7 @@ FIELD_TYPES = {
     SPECIFIC_STREAM: forms.ModelChoiceField(queryset=Stream.objects.all()),
     SPECIFIC_TITLE: forms.CharField(max_length=128),
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
-    AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(required=False),
+    AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(),
 }
 
 FIELD_LABELS = {
