@@ -33,7 +33,8 @@ from .helpers import (USER_FORM_FIELDS,
                       FIELD_TYPES,
                       FIELD_LABELS,
                       SPECIFIC_STREAM,
-                      AGREEMENT_WITH_TERMS_OF_USE)
+                      AGREEMENT_WITH_TERMS_OF_USE,
+                      ALREADY_SIGNED_UP)
 from .models import Application
 
 
@@ -219,11 +220,15 @@ class BaseApplicationForm(forms.Form):
                 self.fields[field_name] = FIELD_TYPES[datum]
                 self.fields[field_name].label = FIELD_LABELS[datum]
 
-                if datum == AGREEMENT_WITH_TERMS_OF_USE:
+                if datum == AGREEMENT_WITH_TERMS_OF_USE or datum == ALREADY_SIGNED_UP:
                     # Make sure that, if the partner requires agreement with
-                    # terms of use, that link is provided inline.
+                    # terms of use or previous signup, that link is provided inline.
+                    if datum == AGREEMENT_WITH_TERMS_OF_USE:
+                        partner_url = partner_object.terms_of_use
+                    if datum == ALREADY_SIGNED_UP:
+                        partner_url = partner_object.sign_up_link
                     help_text = '<a href="{url}">{url}</a>'.format(
-                        url=partner_object.terms_of_use)
+                        url=partner_url)
                     self.fields[field_name].help_text = help_text
 
                 if datum == SPECIFIC_STREAM:

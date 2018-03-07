@@ -171,6 +171,10 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can provide the URL of an image to be used as this partner's logo.
         help_text=_('Optional URL of an image that can be used to represent '
                     'this partner.'))
+    sign_up_link = models.URLField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's signup page.
+        help_text=_("Link to signup page. Required if users must register "
+            "an account before applying for access; optional otherwise."))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
@@ -231,6 +235,10 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
         help_text=_("Mark as true if this partner requires applicants to agree "
                     "with the partner's terms of use."))
+    already_signed_up = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must sign up before applying.
+        help_text=_("Mark as true if this partner requires applicants to sign "
+                    "up on the partner's website before applying."))
 
 
     def __unicode__(self):
@@ -241,6 +249,9 @@ class Partner(models.Model):
         if self.agreement_with_terms_of_use and not self.terms_of_use:
             raise ValidationError('When agreement with terms of use is '
                 'required, a link to terms of use must be provided.')
+        if self.already_signed_up and not self.sign_up_link:
+            raise ValidationError('When prior signup is required, '
+                'a link to the signup page must be provided.')
         if self.streams.count() > 1:
             if self.mutually_exclusive is None:
                 raise ValidationError('Since this resource has multiple '
