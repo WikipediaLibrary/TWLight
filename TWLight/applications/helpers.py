@@ -47,6 +47,7 @@ SPECIFIC_STREAM = 'specific_stream'
 SPECIFIC_TITLE = 'specific_title'
 COMMENTS = 'comments'
 AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
+ALREADY_SIGNED_UP = 'already_signed_up'
 
 
 # ~~~~ Basic field names ~~~~ #
@@ -59,7 +60,7 @@ PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS]
 # These fields are displayed only when a specific partner requires that
 # information.
 PARTNER_FORM_OPTIONAL_FIELDS = [SPECIFIC_STREAM, SPECIFIC_TITLE,
-                                AGREEMENT_WITH_TERMS_OF_USE]
+                                AGREEMENT_WITH_TERMS_OF_USE, ALREADY_SIGNED_UP]
 
 
 # ~~~~ Field information ~~~~ #
@@ -76,6 +77,7 @@ FIELD_TYPES = {
     SPECIFIC_TITLE: forms.CharField(max_length=128),
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
     AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(required=False),
+    ALREADY_SIGNED_UP: forms.BooleanField()
 }
 
 FIELD_LABELS = {
@@ -99,6 +101,8 @@ FIELD_LABELS = {
     COMMENTS: _('Anything else you want to say'),
     # Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
+    # Translators: When filling out an application, users may be required to check a box to confirm that they have signed up for an account already
+    ALREADY_SIGNED_UP: _("You must sign up for an account before making a request"),
 }
 
 

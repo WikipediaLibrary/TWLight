@@ -92,6 +92,7 @@ class Application(models.Model):
                             blank=True, null=True)
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
+    already_signed_up = models.BooleanField(default=False)
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
