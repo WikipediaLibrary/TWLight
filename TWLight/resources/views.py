@@ -75,7 +75,7 @@ class PartnersDetailView(DetailView):
         context['unique_users_approved_or_sent'] = context['unique_users_approved'] + context['unique_users_sent']
 
         partner_app_time = Application.objects.filter(
-            partner=partner).values_list('days_open', flat=True)
+            partner=partner).exclude(days_open=None).values_list('days_open', flat=True)
 
         context['median_days'] = get_median(list(partner_app_time))
 
