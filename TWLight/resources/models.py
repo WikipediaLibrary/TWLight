@@ -167,10 +167,6 @@ class Partner(models.Model):
     send_instructions = models.TextField(blank=True, null=True,
         help_text=_("Optional instructions for sending application data to "
             "this partner."))
-    logo_url = models.URLField(blank=True, null=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can provide the URL of an image to be used as this partner's logo.
-        help_text=_('Optional URL of an image that can be used to represent '
-                    'this partner.'))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
@@ -271,6 +267,15 @@ class Partner(models.Model):
     @property
     def is_waitlisted(self):
         return self.status == self.WAITLIST
+
+
+
+class PartnerLogo(models.Model):
+    partner = models.OneToOneField('Partner', related_name='logos')
+    logo = models.ImageField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
+        help_text=_('Optional image file that can be used to represent this '
+        'partner.'))
 
 
 

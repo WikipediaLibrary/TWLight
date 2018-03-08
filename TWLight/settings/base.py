@@ -25,7 +25,6 @@ from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # ------------------------------------------------------------------------------
 # ------------------------> core django configurations <------------------------
 # ------------------------------------------------------------------------------
@@ -208,6 +207,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+# MEDIA FILE CONFIGURATION
+# ------------------------------------------------------------------------------
+
+# https://docs.djangoproject.com/en/1.8/topics/files/
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+MEDIA_URL = '/media/'
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------

@@ -73,9 +73,8 @@
           <input type="submit" class="btn btn-default btn-block text-center hidden-xs" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
         </form>
       {% endif %}
-
-      {% if object.logo_url %}
-        <img src="{{ object.logo_url }}" class="img-responsive hidden-xs center-block partner-logo">
+      {% if object.logos.logo.url %}
+        <img src="{{ object.logos.logo.url }}" class="img-responsive hidden-xs center-block partner-logo">
       {% endif %}
 
       <div class="well hidden-xs">

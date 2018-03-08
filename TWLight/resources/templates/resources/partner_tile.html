@@ -18,9 +18,9 @@
     </a>
   </div>
   <div class="panel-body">
-    {% if partner.logo_url %}
+    {% if partner.logos.logo.url %}
       <a href="{% url 'partners:detail' partner.pk %}">
-        <img src="{{ partner.logo_url }}" class="img-responsive partner-logo">
+        <img src="{{ partner.logos.logo.url }}" class="img-responsive partner-logo">
       </a>
       <hr />
     {% endif %}
