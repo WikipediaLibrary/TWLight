@@ -15,7 +15,7 @@ form that takes a dict of required fields, and constructs the form accordingly.
 (See the docstring of BaseApplicationForm for the expected dict format.)
 """
 
-import autocomplete_light
+import autocomplete_light.shortcuts as autocomplete_light
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput, Div
 import logging

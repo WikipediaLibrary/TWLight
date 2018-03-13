@@ -7,9 +7,10 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.admindocs import urls as admindocs
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
-
+import django
 
 import TWLight.i18n.views
 import TWLight.i18n.urls
@@ -25,7 +26,8 @@ from .views import HomePageView
 
 
 urlpatterns = [
-	# Built-in -----------------------------------------------------------------
+    # Built-in -----------------------------------------------------------------
+    url(r'^admin/doc', include(admindocs)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/', auth_views.login, name='auth_login'),
     url(r'^accounts/logout/',

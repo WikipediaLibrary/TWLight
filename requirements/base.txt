@@ -1,15 +1,16 @@
 bleach==2.0.0
 defusedxml==0.4.1
-Django==1.8.17
-django-autocomplete-light==2.3.3
+Django==1.9
+django-autocomplete-light>=2.0,<3.0
 django-contrib-comments==1.7.3
 django-crispy-forms==1.6.1
 django-durationfield==0.5.2
 django-modeltranslation==0.12
 django-request==1.5.1
-django-reversion==2.0.8
+django-reversion==2.0.13
 django-taggit==0.22.0
 djmail==1.0.0
+docutils==0.14
 factory_boy==2.9.2
 futures==3.1.1
 mock==2.0.0
@@ -23,4 +24,4 @@ pytz==2016.10
 requests==2.12.4
 requests-oauthlib==0.4.0
 six==1.10.0
-wheel==0.29.0
+wheel==0.30.0
