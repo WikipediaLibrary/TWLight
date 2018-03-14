@@ -11,4 +11,4 @@ def get_coordinators():
     # that query will fail as Group won't exist yet.
     # The actual Coordinators group is established by a migration, so it is
     # guaranteed to exist at runtime.
-    return Group.objects.get(name=COORDINATOR_GROUP_NAME)
+    return Group.objects.get_or_create(name=COORDINATOR_GROUP_NAME)
