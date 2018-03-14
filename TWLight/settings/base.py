@@ -60,7 +60,7 @@ TWLIGHT_APPS = (
     'TWLight.users',
     'TWLight.resources',
     'TWLight.applications',
-#    'TWLight.emails',
+    'TWLight.emails',
     'TWLight.graphs',
 )
 
