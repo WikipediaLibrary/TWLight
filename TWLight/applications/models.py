@@ -321,7 +321,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
                 int(instance.status) in Application.FINAL_STATUS_LIST,
                 not bool(instance.date_closed)]):
 
-            instance.date_closed = localtime(now()).date()
+            instance.date_closed = localtime(now).date()
             instance.days_open = \
                 (instance.date_closed - instance.date_created).days
 
@@ -332,7 +332,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
         if (instance.status in Application.FINAL_STATUS_LIST
             and not instance.date_closed):
 
-            instance.date_closed = localtime(now()).date()
+            instance.date_closed = localtime(now).date()
             instance.days_open = 0
 
     if instance.date_closed and not instance.earliest_expiry_date:
