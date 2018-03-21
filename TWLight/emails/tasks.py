@@ -136,7 +136,8 @@ def send_comment_notification_emails(sender, **kwargs):
                 {'user': app.editor.wp_username,
                  'lang': app.editor.user.userprofile.lang,
                  'app': app,
-                 'app_url': app_url})
+                 'app_url': app_url,
+                 'partner': app.partner})
             logger.info('Email queued for {app.editor.user.email} about '
                 'app #{app.pk}'.format(app=app))
 
@@ -164,7 +165,8 @@ def send_comment_notification_emails(sender, **kwargs):
                 {'user': user.editor.wp_username,
                  'lang': user.userprofile.lang,
                  'app': app,
-                 'app_url': app_url})
+                 'app_url': app_url,
+                 'partner': app.partner})
             logger.info('Email queued for {app.editor.user.email} about app '
                 '#{app.pk}'.format(app=app))
 
