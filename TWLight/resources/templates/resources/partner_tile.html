@@ -31,7 +31,7 @@
       </span>
     {% endif %}
     {% for tag in partner.tags.all %}
-      <span class="label label-default">{{ tag }}</span>
+      <a class="label label-default" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
     {% endfor %}
 
     {% if partner.description %}
@@ -52,7 +52,9 @@
     <div class="panel-partner-info">
       <p class="partner-languages">
         {% if partner.get_languages %}
-          {{ partner.get_languages }}
+          {% for language in partner.get_languages %}
+            <a href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+          {% endfor %}
         {% else %}
           {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show. {% endcomment %}
           {% trans "Language(s) not known" %}

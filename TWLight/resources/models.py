@@ -261,7 +261,8 @@ class Partner(models.Model):
 
     @property
     def get_languages(self):
-        return ", ".join([p.__unicode__() for p in self.languages.all()])
+        #return ", ".join([p.__unicode__() for p in self.languages.all()])
+        return self.languages.all()
 
 
     @property
