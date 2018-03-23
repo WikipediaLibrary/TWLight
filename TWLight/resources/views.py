@@ -81,7 +81,7 @@ class PartnersDetailView(DetailView):
         if len(partner_app_time) > 0:
             context['median_days'] = get_median(list(partner_app_time))
         else:
-            context['median_days'] = "-"
+            context['median_days'] = None
 
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.filter(partner=partner)
