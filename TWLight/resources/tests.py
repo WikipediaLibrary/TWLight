@@ -132,12 +132,13 @@ class PartnerModelTests(TestCase):
         self.assertFalse(partner.languages.all())
 
         partner.languages.add(self.lang_en)
-        self.assertEqual(partner.get_languages, u'English')
+        self.assertEqual(list(partner.get_languages), [Language.objects.get(language='en')])
 
-        # Order isn't important.
         partner.languages.add(self.lang_fr)
-        self.assertIn(partner.get_languages,
-            [u'English, French', u'French, English'])
+        self.assertIn(
+            Language.objects.get(language='fr'),
+            list(partner.get_languages)
+        )
 
 
     def test_visibility_of_not_available_1(self):
