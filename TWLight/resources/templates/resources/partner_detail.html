@@ -140,7 +140,7 @@
           {% endif %}
 
           {% for tag in object.tags.all %}
-            <span class="label label-default">{{ tag }}</span>    
+            <a class="label label-default" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
           {% endfor %}    
         </div>
       </div>      
@@ -152,12 +152,11 @@
         <div class="timeline-body">
           {% if object.get_languages %}
             <p class="partner-languages">
-              {% with object.get_languages as language_list %}
-                {% comment %} Translators: If a partner has content languages specified, this message is shown in the Languages field on the partner page. Don't translate {{ language_list }}. {% endcomment %}
-                {% blocktrans trimmed %}
-                  Language(s): {{ language_list }}
-                {% endblocktrans %}
-              {% endwith %}
+                {% comment %} Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
+                {% trans 'Language(s)' %}:
+                {% for language in partner.get_languages %}
+                    <a href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+                {% endfor %}
             </p>
           {% else %}
             {% comment %} Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page. {% endcomment %}
