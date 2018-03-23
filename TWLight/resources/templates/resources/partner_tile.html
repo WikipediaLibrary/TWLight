@@ -12,16 +12,18 @@
 {% endcomment %}
 
 <div class="panel panel-default full-width">
-  <div class="panel-heading">
+  <div class="panel-heading{% if partner.bundle %} banner-flag{% endif %}">
     <a href="{% url 'partners:detail' partner.pk %}"><strong>
       <span class="panel-title">{{ partner }}</span></strong>
     </a>
   </div>
   <div class="panel-body">
     {% if partner.logos.logo.url %}
+    <div class="partner-logo-container">
       <a href="{% url 'partners:detail' partner.pk %}">
         <img src="{{ partner.logos.logo.url }}" class="img-responsive partner-logo">
       </a>
+    </div>
       <hr />
     {% endif %}
 
@@ -30,10 +32,24 @@
         {% trans "Waitlisted" %}
       </span>
     {% endif %}
+      <div class="label-subject">
     {% for tag in partner.tags.all %}
-      <a class="label label-default" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
+      <a class="label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a> <span class="pipe">|</span>
     {% endfor %}
-
+      </div>
+      
+      <div class="label-languages">
+      	<span class="label">
+          {% for languages in partner.get_languages %}
+          {% if partner.get_languages %}        
+             {{ languages }}
+          {% else %}
+            {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show. {% endcomment %}
+            {% trans "Language(s) not known" %}
+          {% endif %}
+          {% endfor %}
+        </span>
+      </div>
     {% if partner.description %}
       <div class="panel-partner-description">
         {% comment %}
@@ -53,7 +69,7 @@
       <p class="partner-languages">
         {% if partner.get_languages %}
           {% for language in partner.get_languages %}
-            <a href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+            <a href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a> <span class="pipe">|</span>
           {% endfor %}
         {% else %}
           {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show. {% endcomment %}

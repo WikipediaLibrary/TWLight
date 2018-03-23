@@ -269,13 +269,30 @@ MISC
 */
 
 .label {
-  font-size: 85%;
-  padding: .15em .6em;
-  letter-spacing: 0.25px;
-  font-weight: 500;
-  margin-top: 5px; 
+  font-size: 98%;
+  letter-spacing: 0.35px;
+  margin: 0px -10px 0px 0px;
+  color:#337ab7;
+  text-decoration: underline; 
 }
 
+.label-subject {
+  background-image: url("../img/bullet-subject.png");
+  background-repeat: no-repeat;
+  /* height:24px; */
+  padding: 4px 0px 0px 25px;
+}
+
+.label-languages {
+  background-image: url("../img/bullet-language.png");
+  background-repeat: no-repeat;
+  height:24px;
+  padding: 4px 0px 0px 25px;
+}
+
+.pipe {
+  margin: 0px -5px 0px 4px;
+}
 /* Without intervention, code tags will break out of their timeline containers.
    These can get introduced via rendered wikicode, which has lots of &nbsp;
 */
@@ -340,6 +357,7 @@ A few spots just need padding instead of margin.
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  /* height: 600px !important; */
 }
 
 .panel-body {
@@ -347,21 +365,37 @@ A few spots just need padding instead of margin.
   border-width: 0 1px 1px 1px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  /* height:500px; */
 }
 
 .panel-heading {
   border: solid #ddd;
   border-width: 1px 1px 0 1px;
+  height:70px;
+  padding:20px 30px 0px 10px !important;
+  background-color:red;
+  }
+
+
+.banner-flag {
+  background-image: url("../img/banner.png"); 
+  background-repeat: no-repeat;
+  background-position: right top;  
 }
 
 .partner-logo {
-  padding: 0 30% 0 30%;
+  padding: 0 10% 0 10%;
   margin: 0 auto 2em auto;
   max-height: 7em;
+  min-height: 3em;
 }
 
 .panel-partner-description {
+  padding:15px 0px 0px 0px;
+}
 
+.partner-logo-container {
+   height: 6em;
 }
 
 .panel-partner-info {
@@ -390,6 +424,19 @@ A few spots just need padding instead of margin.
 	width:200px;
 	margin:auto;
 	text-align:center;
+}
+
+/* Custom page break for long titles */
+@media (max-width: 1127px) and (min-width: 992px) {
+  .panel-heading {
+    height: 90px !important;
+   }
+}
+
+@media (max-width: 814px) and (min-width: 767px) {
+   .panel-heading {
+    height: 100px; !important
+}
 }
 
 /* Portrait phones and smaller */
