@@ -473,7 +473,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         # Set up button group menu.
         context['approved_url'] = reverse_lazy('applications:list_approved')
         context['rejected_url'] = reverse_lazy('applications:list_rejected')
-        context['expiring_url'] = reverse_lazy('applications:list_expiring')
+        context['renewal_url'] = reverse_lazy('applications:list_renewal')
         context['pending_url'] = reverse_lazy('applications:list')
         context['sent_url'] = reverse_lazy('applications:list_sent')
 
@@ -598,7 +598,7 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
 
 
-class ListExpiringApplicationsView(_BaseListApplicationView):
+class ListRenewalApplicationsView(_BaseListApplicationView):
     """
     Lists access grants that users have requested, but not received, renewals
     for.
@@ -609,23 +609,17 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
                  status__in=[Application.PENDING, Application.QUESTION],
                  parent__isnull=False
                ).order_by(
-                 'earliest_expiry_date'
+                 '-date_created'
                )
 
 
     def get_context_data(self, **kwargs):
-        context = super(ListExpiringApplicationsView, self).get_context_data(**kwargs)
+        context = super(ListRenewalApplicationsView, self).get_context_data(**kwargs)
 
         # Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
         context['title'] = _('Access grants up for renewal')
 
-        # Overrides default. We want different styling for this case to help
-        # coordinators prioritize expiring-soon vs. expired-already access
-        # grants.
-        context['include_template'] = \
-            'applications/application_list_expiring_include.html'
-
-        context['expiring_class'] = 'active'
+        context['renewal_class'] = 'active'
 
         return context
 

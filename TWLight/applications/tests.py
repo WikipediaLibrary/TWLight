@@ -1361,14 +1361,14 @@ class ListApplicationsTest(BaseApplicationViewTest):
             views.ListRejectedApplicationsView, queryset)
 
 
-    def test_list_expiring_queryset(self):
-        url = reverse('applications:list_expiring')
+    def test_list_renewal_queryset(self):
+        url = reverse('applications:list_renewal')
 
         factory = RequestFactory()
         request = factory.get(url)
         request.user = self.coordinator
 
-        response = views.ListExpiringApplicationsView.as_view()(request)
+        response = views.ListRenewalApplicationsView.as_view()(request)
 
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION],
@@ -1628,15 +1628,15 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_ensure_object_list_exists_case_7(self):
         """
-        Case 7 is ListExpiringApplicationsView / post.
+        Case 7 is ListRenewalApplicationsView / post.
         """
-        url = reverse('applications:list_expiring')
+        url = reverse('applications:list_renewal')
         new_partner = PartnerFactory()
 
         request = RequestFactory().post(url, {'partner': new_partner.pk})
         request.user = self.coordinator
 
-        instance = views.ListExpiringApplicationsView()
+        instance = views.ListRenewalApplicationsView()
         instance.request = request
         instance.get_context_data()
 
@@ -1645,13 +1645,13 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_ensure_object_list_exists_case_8(self):
         """
-        Case 8 is ListExpiringApplicationsView / get.
+        Case 8 is ListRenewalApplicationsView / get.
         """
-        url = reverse('applications:list_expiring')
+        url = reverse('applications:list_renewal')
         request = RequestFactory().get(url)
         request.user = self.coordinator
 
-        instance = views.ListExpiringApplicationsView()
+        instance = views.ListRenewalApplicationsView()
         instance.request = request
         instance.get_context_data()
 
@@ -1662,7 +1662,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         Case 9 is ListSentApplicationsView / post.
         """
-        url = reverse('applications:list_expiring')
+        url = reverse('applications:list_renewal')
         new_partner = PartnerFactory()
 
         request = RequestFactory().post(url, {'partner': new_partner.pk})
@@ -1679,7 +1679,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         Case 10 is ListSentApplicationsView / get.
         """
-        url = reverse('applications:list_expiring')
+        url = reverse('applications:list_renewal')
         request = RequestFactory().get(url)
         request.user = self.coordinator
 
@@ -1780,19 +1780,6 @@ class ApplicationModelTest(TestCase):
         self.assertTrue(app.days_open == 0)
 
 
-    def test_earliest_expiry_date_set_on_save(self):
-        app = ApplicationFactory()
-        self.assertFalse(app.earliest_expiry_date)
-
-        app.date_closed = date.today()
-        app.save()
-
-        term = app.partner.access_grant_term
-        expected_expiry = app.date_created + term
-
-        self.assertEqual(app.earliest_expiry_date, expected_expiry)
-
-
     def test_bootstrap_class(self):
         app = ApplicationFactory(status=Application.PENDING)
         self.assertEqual(app.get_bootstrap_class(), '-primary')
@@ -1868,59 +1855,6 @@ class ApplicationModelTest(TestCase):
         self.assertNotEqual(orig_revision, new_revision)
 
 
-    def test_get_is_probably_expired(self):
-        app = ApplicationFactory()
-
-        # Apps do not have expiry dates when set (as the expiry date is
-        # calculated from the date of approval), so they can't be expired.
-        self.assertFalse(app.is_probably_expired())
-
-        # It should now have an expiration date, but this defaults to a year
-        # in the future, so the access grant should not have expired.
-        app.status = Application.APPROVED
-        app.save()
-        self.assertTrue(app.is_probably_expired is not None)
-        self.assertFalse(app.is_probably_expired())
-
-        app.earliest_expiry_date = date.today() - timedelta(days=1)
-        app.save()
-        self.assertTrue(app.is_probably_expired())
-
-
-    def test_get_num_days_since_expiration(self):
-        app = ApplicationFactory()
-        self.assertTrue(app.get_num_days_since_expiration() is None)
-
-        app.earliest_expiry_date = date.today()
-        app.save()
-        self.assertEqual(app.get_num_days_since_expiration(), 0)
-
-        app.earliest_expiry_date = date.today() + timedelta(days=1)
-        app.save()
-        self.assertTrue(app.get_num_days_since_expiration() is None)
-
-        app.earliest_expiry_date = date.today() - timedelta(days=1)
-        app.save()
-        self.assertEqual(app.get_num_days_since_expiration(), 1)
-
-
-    def test_get_num_days_until_expiration(self):
-        app = ApplicationFactory()
-        self.assertTrue(app.get_num_days_until_expiration() is None)
-
-        app.earliest_expiry_date = date.today()
-        app.save()
-        self.assertTrue(app.get_num_days_until_expiration() is None)
-
-        app.earliest_expiry_date = date.today() + timedelta(days=1)
-        app.save()
-        self.assertTrue(app.get_num_days_until_expiration() is 1)
-
-        app.earliest_expiry_date = date.today() - timedelta(days=1)
-        app.save()
-        self.assertTrue(app.get_num_days_until_expiration() is None)
-
-
     def test_is_renewable(self):
         # Applications which are a parent cannot be renewed, even if other
         # criteria are OK.
@@ -1984,7 +1918,6 @@ class ApplicationModelTest(TestCase):
                 status=Application.APPROVED,
                 date_closed=date.today() + timedelta(days=1),
                 days_open=1,
-                earliest_expiry_date=date.today() + timedelta(days=366),
                 sent_by=editor2.user
               )
 
@@ -2006,7 +1939,6 @@ class ApplicationModelTest(TestCase):
         self.assertEqual(app2.status, Application.PENDING)
         self.assertFalse(app2.date_closed)
         self.assertFalse(app2.days_open)
-        self.assertFalse(app2.earliest_expiry_date)
         self.assertFalse(app2.sent_by)
         self.assertEqual(app2.parent, app)
 
@@ -2015,51 +1947,6 @@ class ApplicationModelTest(TestCase):
         partner = PartnerFactory(renewals_available=False)
         app = ApplicationFactory(partner=partner)
         self.assertFalse(app.renew())
-
-
-    def test_is_expiring_soon_1(self):
-        """
-        Returns False if the app has already expired.
-        """
-        app = ApplicationFactory(
-            earliest_expiry_date=date.today() - timedelta(days=1))
-        self.assertFalse(app.is_expiring_soon())
-
-
-    def test_is_expiring_soon_2(self):
-        """
-        Returns False if the app expired today.
-        """
-        app = ApplicationFactory(
-            earliest_expiry_date=date.today())
-        self.assertFalse(app.is_expiring_soon())
-
-
-    def test_is_expiring_soon_3(self):
-        """
-        Returns True if the app expires tomorrow.
-        """
-        app = ApplicationFactory(
-            earliest_expiry_date=date.today() + timedelta(days=1))
-        self.assertTrue(app.is_expiring_soon())
-
-
-    def test_is_expiring_soon_4(self):
-        """
-        Returns True if the app expires in 30 days.
-        """
-        app = ApplicationFactory(
-            earliest_expiry_date=date.today() + timedelta(days=30))
-        self.assertTrue(app.is_expiring_soon())
-
-
-    def test_is_expiring_soon_5(self):
-        """
-        Returns False if the app expires in 31 days.
-        """
-        app = ApplicationFactory(
-            earliest_expiry_date=date.today() + timedelta(days=31))
-        self.assertFalse(app.is_expiring_soon())
 
 
 
