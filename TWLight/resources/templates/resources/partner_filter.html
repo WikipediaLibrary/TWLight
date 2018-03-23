@@ -5,7 +5,12 @@
 {% block content %}
   {% comment %} Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
   <h2>{% trans "List of partners" %}</h2>
-
+  <!-- waiting on ux decisions.
+  <form action="" method="get">
+    {{ filter.form.as_p }}
+    <input type="submit" />
+  </form>
+  -->
   <div class="row row-flex">
     {% for partner in object_list %}
       <div class="col-flex col-xs-12 col-sm-4 col-md-3">

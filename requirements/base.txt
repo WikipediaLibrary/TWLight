@@ -5,6 +5,7 @@ django-autocomplete-light==2.3.3
 django-contrib-comments==1.7.3
 django-crispy-forms==1.6.1
 django-durationfield==0.5.2
+django-filter
 django-modeltranslation==0.12
 django-request==1.5.1
 django-reversion==2.0.8
@@ -15,6 +16,7 @@ futures==3.1.1
 mock==2.0.0
 mwoauth==0.2.8
 oauthlib==0.6.3
+pillow==5.0.0
 pypandoc==1.4
 python-dateutil==2.6.0
 PyJWT==1.0.1

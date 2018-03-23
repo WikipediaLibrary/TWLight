@@ -69,7 +69,7 @@
       
         <ul class="nav nav-pills navbar-right">
 			<li role="presentation" class="mobile-menu">
-				<a href="{% url 'partners:list' %}">
+				<a href="{% url 'partners:filter' %}">
           {% comment %} Translators: Shown in the top bar of almost every page, taking users to the page where they can browse current partners. {% endcomment %}
 					{% trans "Browse" %}
 				</a>
@@ -114,8 +114,17 @@
 					{% trans "Metrics" %}
 				</a>
 			</li>
-      
-		{% if user.is_authenticated %}
+			
+		{% if user.is_authenticated %}			
+			{% if user.is_staff %}
+				<li role="presentation" class="mobile-menu">
+					<a href="{% url 'admin:index' %}">
+			  {% comment %} Translators: Shown in the top bar of almost every page when the current user is staff, linking to the administrator interface. {% endcomment %}
+						{% trans "Admin" %}
+					</a>
+				</li>
+			{% endif %}
+
 			<li role="presentation" class="divider mobile-menu">
 				<a href="{% url 'auth_logout' %}">
           {% comment %} Translators: Shown in the top bar of almost every page when the current user is logged in. {% endcomment %}
@@ -211,6 +220,9 @@
           </li>
           <li>
             <a href="https://phabricator.wikimedia.org/project/view/2765/">Phabricator</a>
+          </li>
+          <li>
+            <a href="https://github.com/wikipedialibrary/twlight">Github</a>
           </li>
           <li>
             <a href="mailto:wikipedialibrary@wikimedia.org">

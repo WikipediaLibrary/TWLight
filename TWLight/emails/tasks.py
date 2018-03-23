@@ -32,7 +32,9 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
 
+
 from TWLight.applications.models import Application
+from TWLight.applications.signals import Reminder
 from TWLight.resources.models import Partner
 
 
@@ -47,26 +49,53 @@ class CommentNotificationEmailEditors(template_mail.TemplateMail):
     name = 'comment_notification_editors'
 
 
-
 class CommentNotificationEmailOthers(template_mail.TemplateMail):
     name = 'comment_notification_others'
-
 
 
 class ApprovalNotification(template_mail.TemplateMail):
     name = 'approval_notification'
 
 
-
 class WaitlistNotification(template_mail.TemplateMail):
     name = 'waitlist_notification'
-
 
 
 class RejectionNotification(template_mail.TemplateMail):
     name = 'rejection_notification'
 
 
+class CoordinatorReminderNotification(template_mail.TemplateMail):
+    name = 'coordinator_reminder_notification'
+
+
+@receiver(Reminder.coordinator_reminder)
+def send_coordinator_reminder_emails(sender, **kwargs):
+    """
+    Any time the related managment command is run, this sends email to the
+    to designated coordinators, reminding them to login
+    to the site if there are pending applications.
+    """
+    app_status = kwargs['app_status']
+    app_count = kwargs['app_count']
+    coordinator_wp_username = kwargs['coordinator_wp_username']
+    coordinator_email = kwargs['coordinator_email']
+    coordinator_lang = kwargs['coordinator_lang']
+    base_url = get_current_site(None).domain
+    path = reverse_lazy('applications:list')
+    link = 'https://{base}{path}'.format(base=base_url, path=path)
+
+    logger.info(u'Received coordinator reminder signal for {coordinator_wp_username}; '
+        'preparing to send reminder email to {coordinator_email}.'.format(coordinator_wp_username=coordinator_wp_username, coordinator_email=coordinator_email))
+    email = CoordinatorReminderNotification()
+    logger.info('Email constructed.')
+    email.send(coordinator_email,
+        {'user': coordinator_wp_username,
+         'lang': coordinator_lang,
+         'app_status': app_status,
+         'app_count': app_count,
+         'link': link})
+    logger.info(u'Email queued.')
 
 @receiver(comment_was_posted)
 def send_comment_notification_emails(sender, **kwargs):
@@ -107,7 +136,8 @@ def send_comment_notification_emails(sender, **kwargs):
                 {'user': app.editor.wp_username,
                  'lang': app.editor.user.userprofile.lang,
                  'app': app,
-                 'app_url': app_url})
+                 'app_url': app_url,
+                 'partner': app.partner})
             logger.info('Email queued for {app.editor.user.email} about '
                 'app #{app.pk}'.format(app=app))
 
@@ -135,7 +165,8 @@ def send_comment_notification_emails(sender, **kwargs):
                 {'user': user.editor.wp_username,
                  'lang': user.userprofile.lang,
                  'app': app,
-                 'app_url': app_url})
+                 'app_url': app_url,
+                 'partner': app.partner})
             logger.info('Email queued for {app.editor.user.email} about app '
                 '#{app.pk}'.format(app=app))
 

@@ -16,7 +16,8 @@ from TWLight.users.groups import get_coordinators
 
 from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner
-from .views import PartnersDetailView, PartnersListView, PartnersToggleWaitlistView
+from .views import PartnersDetailView, PartnersFilterView, PartnersToggleWaitlistView
+from .filters import PartnerFilter
 
 def EditorCraftRoom(self, Terms=False, Coordinator=False):
     """
@@ -132,12 +133,13 @@ class PartnerModelTests(TestCase):
         self.assertFalse(partner.languages.all())
 
         partner.languages.add(self.lang_en)
-        self.assertEqual(partner.get_languages, u'English')
+        self.assertEqual(list(partner.get_languages), [Language.objects.get(language='en')])
 
-        # Order isn't important.
         partner.languages.add(self.lang_fr)
-        self.assertIn(partner.get_languages,
-            [u'English, French', u'French, English'])
+        self.assertIn(
+            Language.objects.get(language='fr'),
+            list(partner.get_languages)
+        )
 
 
     def test_visibility_of_not_available_1(self):
@@ -161,13 +163,13 @@ class PartnerModelTests(TestCase):
         listview.
         """
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
-        list_url = reverse('partners:list')
+        filter_url = reverse('partners:filter')
 
         editor = EditorFactory()
 
-        request = RequestFactory().get(list_url)
+        request = RequestFactory().get(filter_url)
         request.user = editor.user
-        response = PartnersListView.as_view()(request)
+        response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
 
         self.assertNotContains(response, partner.get_absolute_url())
 
@@ -199,15 +201,15 @@ class PartnerModelTests(TestCase):
         Staff users *should* see NOT_AVAILABLE partner pages in the list view.
         """
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
-        list_url = reverse('partners:list')
+        filter_url = reverse('partners:filter')
 
         editor = EditorFactory()
         editor.user.is_staff = True
         editor.user.save()
 
-        request = RequestFactory().get(list_url)
+        request = RequestFactory().get(filter_url)
         request.user = editor.user
-        response = PartnersListView.as_view()(request)
+        response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
 
         self.assertContains(response, partner.get_absolute_url())
 

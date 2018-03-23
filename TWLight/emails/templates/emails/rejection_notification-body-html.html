@@ -1,12 +1,14 @@
 {% load i18n %}
-
-{% comment %} Translators: This email is sent to users when their application is rejected. Don't translate {{ user }} or {{ partner }}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+<html>
+<body>
+{% comment %} Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like {{ user }} or {{ partner }}; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
 {% blocktrans trimmed %}
-Dear {{ user }},
-
-Thank you for applying for access to {{ partner }} resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at {{ app_url }}.
-
-Best,
-
-The Wikipedia Library
+  <p>Dear {{ user }},</p>
+  <p>Thank you for applying for access to {{ partner }} resources through The Wikipedia Library.
+	   Unfortunately at this time your application has not been approved.
+		 You can view your application and review comments at <a href="{{ app_url }}">{{ app_url }}</a>.</p>
+	<p>Best,</p>
+	<p>The Wikipedia Library</p>
 {% endblocktrans %}
+</body>
+</html>
