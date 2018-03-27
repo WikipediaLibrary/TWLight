@@ -360,7 +360,7 @@ class EditorModelTestCase(TestCase):
 
 
     def test_wp_link_centralauth(self):
-        expected_url = 'https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=editor_model_test'
+        expected_url = 'https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth&target=editor_model_test'
         self.assertEqual(expected_url, self.test_editor.wp_link_centralauth)
 
 
