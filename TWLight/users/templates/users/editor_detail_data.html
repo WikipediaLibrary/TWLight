@@ -7,10 +7,10 @@
     </div>
     <div class="col-xs-12 col-sm-9">
       {{ editor.wp_username }}
-      {% if editor.wp_link_sul_info %}
+      {% if editor.wp_link_centralauth %}
         <br />
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's SUL info through an external tool. (e.g. https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=Samwalton9%20(WMF)) {% endcomment %}
-        <a href="{{ editor.wp_link_sul_info }}">({% trans "view Wikipedia SUL info" %})</a>
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's CentralAuth page (e.g. https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth&target=Samwalton9) {% endcomment %}
+        <a href="{{ editor.wp_link_centralauth }}">({% trans "view CentralAuth" %})</a>
       {% endif %}
     </div>
   </div>
