@@ -35,7 +35,11 @@
     </div>
   {% else %}
     {% url 'applications:apply_single' object.pk as app_url %}
-    <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a>
+    {% if user_sent_apps %}
+        <a href="{% url 'applications:renew' latest_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
+    {% else %}
+        <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a>
+    {% endif %}
   {% endif %}
   {% if user|coordinators_only %}
     <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
@@ -64,7 +68,11 @@
         </div>
       {% else %}
         {% url 'applications:apply_single' object.pk as app_url %}
-        <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br/>
+        {% if user_sent_apps %}
+            <a href="{% url 'applications:renew' latest_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
+        {% else %}
+            <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a>
+        {% endif %}
       {% endif %}
 
       {% if user|coordinators_only %}
