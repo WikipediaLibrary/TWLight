@@ -96,6 +96,14 @@ class PartnersDetailView(DetailView):
 
         context['users_time_data'] = get_users_by_partner_by_month(partner)
 
+        sent_apps = Application.objects.filter(
+                                    editor=self.request.user.editor,
+                                    status=Application.SENT
+                                 ).order_by('date_closed')
+
+        context['latest_app_pk'] = sent_apps[0].pk
+        context['user_sent_apps'] = sent_apps.count()
+
         return context
 
 
