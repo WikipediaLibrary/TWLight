@@ -285,8 +285,22 @@ class CSVAppMedians(_CSVDownloadView):
 
 class CSVAppDistribution(_CSVDownloadView):
     def _write_data(self, response):
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+            try:
+                partner = Partner.objects.get(pk=pk)
+            except Partner.DoesNotExist:
+                logger.exception('Tried to access data for partner #{pk}, who '
+                                 'does not exist'.format(pk=pk))
+                raise
+
+            csv_queryset = Application.objects.filter(partner=partner)
+
+        else:
+            csv_queryset = Application.objects.all()
+
         data = get_application_status_data(
-            Application.objects.all(),
+            csv_queryset,
             data_format=PYTHON
         )
 
