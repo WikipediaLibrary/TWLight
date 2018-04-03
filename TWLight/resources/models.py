@@ -151,8 +151,7 @@ class Partner(models.Model):
     renewals_available = models.BooleanField(default=False,
         # Translators: In the administrator interface, this text is help text for a field where staff specify whether users can request their account be renewed/extended for this partner.
         help_text=_('Can access grants to this partner be renewed? If so, '
-            'users will be able to request renewals when their access is close '
-            'to expiring.'))
+            'users will be able to request renewals at any time.'))
 
     # Optional resource metadata
     # --------------------------------------------------------------------------
@@ -183,14 +182,6 @@ class Partner(models.Model):
         "from this Partner. If False, users can apply for multiple Streams at "
         "a time. This field must be filled in when Partners have multiple "
         "Streams, but may be left blank otherwise."))
-
-    access_grant_term = models.DurationField(
-        blank=True, null=True,
-        default=timedelta(days=365),
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of an account for this partner.
-        help_text=_("The standard length of an access grant from this Partner. "
-            "Entered as <days hours:minutes:seconds>. Defaults to 365 days.")
-        )
 
     languages = models.ManyToManyField(Language, blank=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.

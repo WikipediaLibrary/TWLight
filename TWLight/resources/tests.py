@@ -231,12 +231,10 @@ class PartnerModelTests(TestCase):
     def test_renew_app_page_excludes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
 
-        # This application expires soon.
         tomorrow = date.today() + timedelta(days=1)
         _ = ApplicationFactory(partner=partner,
-            status=Application.SENT,
-            earliest_expiry_date=tomorrow)
-        url = reverse('applications:list_expiring')
+            status=Application.SENT)
+        url = reverse('applications:list_renewal')
 
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
