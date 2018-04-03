@@ -365,7 +365,13 @@
               <i class="fa fa-clock-o fa-5x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge">{{ median_days }}</div>
+              <div class="huge">
+                {% if median_days %}
+                    {{ median_days }}
+                {% else %}
+                    -
+                {% endif %}
+              </div>
               {% comment %} Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
               <div>{% trans 'Median days from application to decision' %}</div>
             </div>

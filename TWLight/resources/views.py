@@ -89,10 +89,14 @@ class PartnersDetailView(DetailView):
 
         context['unique_users_approved_or_sent'] = context['unique_users_approved'] + context['unique_users_sent']
 
+        application_end_states = [Application.APPROVED, Application.NOT_APPROVED, Application.SENT]
         partner_app_time = Application.objects.filter(
-            partner=partner).values_list('days_open', flat=True)
+            partner=partner, status__in=application_end_states).exclude(imported=True).values_list('days_open', flat=True)
 
-        context['median_days'] = get_median(list(partner_app_time))
+        if len(partner_app_time) > 0:
+            context['median_days'] = get_median(list(partner_app_time))
+        else:
+            context['median_days'] = None
 
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.filter(partner=partner)
