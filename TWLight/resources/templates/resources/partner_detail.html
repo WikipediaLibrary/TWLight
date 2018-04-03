@@ -26,15 +26,16 @@
   <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a>
   
   {% if object.is_waitlisted %}
-    <div class="alert alert-warning visible-xs">
-      {% url 'applications:apply_single' object.pk as app_url %}
-      {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. Don't translate {{ app_url }}. {% endcomment %}
-      {% blocktrans trimmed %}
-        <strong>Waitlisted</strong> &mdash; There are no access grants available
-        for this partner at this time. You can still apply for access;
-        applications will be processed when access is available.
-      {% endblocktrans %}      
-    </div>
+    <div class="alert alert-warning visible-xs resource-label-warning">
+       <span class="resource-label">{% trans "Waitlisted" %}</span>
+       <p>
+       {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
+       {% blocktrans trimmed %}
+       There are no access grants available for this partner
+       at this time. You can still apply for access; applications will
+       be processed when access is available.
+       {% endblocktrans %}
+       </p>
   {% endif %}
   {% if user|coordinators_only %}
     <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
@@ -56,12 +57,16 @@
       <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br/>
       {% if object.is_waitlisted %}
         {% url 'applications:apply_single' object.pk as app_url %}
-        <div class="hidden-xs alert alert-warning">
-          {% blocktrans trimmed %}
-            <strong>Waitlisted</strong> &mdash; There are no access grants available
-            for this partner at this time. You can still apply for access;
-            applications will be processed when access is available.
-          {% endblocktrans %}
+        <div class="hidden-xs alert alert-warning resource-label-warning">
+            <span class="resource-label">{% trans "Waitlisted" %}</span>
+            <p>
+            {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
+            {% blocktrans trimmed %}
+            There are no access grants available for this partner
+            at this time. You can still apply for access; applications will
+            be processed when access is available.
+            {% endblocktrans %}
+            </p>
         </div>
       {% endif %}
 
