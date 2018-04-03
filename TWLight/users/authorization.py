@@ -398,7 +398,9 @@ class OAuthCallbackView(View):
                     _('Either your Wikipedia Library Card Platform account has '
                       'been deactivated or your Wikipedia account no longer '
                       'meets the eligibility criteria in the terms of use, so '
-                      'you cannot be logged in.'))
+                      'you cannot be logged in. If you think you should be '
+                      'able to log in, please email '
+                      'wikipedialibrary@wikimedia.org.'))
 
             return_url = reverse_lazy('terms')
 
