@@ -258,6 +258,12 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   margin-left: .7em;
 }
 
+#resource-filter-panel-body {
+  border: none;
+  box-shadow: none;
+  margin-top: .7em;
+}
+
 /* Quick hack for tos misalignment on applications. */
 .apply-tos {
   margin-right: 100%;
@@ -328,7 +334,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
 }
 
 .resource-label-warning .resource-label {
-  color: #23527c;
+  color: #8a6d3b;
 }
 
 .pipe {

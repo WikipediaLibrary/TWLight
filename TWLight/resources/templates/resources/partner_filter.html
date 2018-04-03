@@ -4,16 +4,14 @@
 
 {% block content %}
   {% comment %} Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
-  <h2>{% trans "Browse Partners" %}</h2>
   <!-- begin filtering options/info -->
   <div class="row">
-    <div class=" col-xs-12 col-sm-6">
+    <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+      <h2>{% trans "Browse Partners" %}</h2>
+    </div>
+    <div class="col-flex col-xs-12 col-sm-6">
       <div class="panel panel-default">
-        <div class="panel-heading">
-          {% comment %}Translators: Users can filter the page which shows a list of partner resources. This is the heading for the box where filters are selected.{% endcomment %}
-          {% trans "Filter by..." %}
-        </div>
-        <div class="panel-body">
+        <div class="panel-body" id="resource-filter-panel-body">
           <form class="form-inline" action="" method="get">
             {{ filter.form }}
             <input name="submit" value="Filter" class="btn btn-default" id="submit-id-submit" type="submit">
@@ -30,7 +28,7 @@
       </div>
     {% empty %}
       <div class="col-xs-12">
-        {% trans "No partner data has been added yet." %}
+        {% trans "No partners meet the specified criteria." %}
       </div>
     {% endfor %}    
   </div>
