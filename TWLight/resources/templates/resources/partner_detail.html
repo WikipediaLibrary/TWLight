@@ -139,9 +139,9 @@
             {% trans "Description not available." %}
           {% endif %}
           {% if object.tags %}
-            <div class="label-subject">
+            <div class="resource-label-subject">
             {% for tag in object.tags.all %}
-              <a class="label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
+              <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
               {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
             {% endfor %}
             </div>
@@ -158,9 +158,9 @@
             <p class="partner-languages">
                 {% comment %} Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
                 {% trans 'Language(s)' %}:
-                <div class="label-languages">
+                <div class="resource-label-languages">
                 {% for language in partner.get_languages %}
-                    <a class="label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+                    <a class="resource-label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
                     {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
                 {% endfor %}
                 </div>

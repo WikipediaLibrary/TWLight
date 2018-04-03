@@ -26,23 +26,25 @@
     </div>
       <hr />
     {% endif %}
-
+    <div class="resource-label-container">
     {% if partner.is_waitlisted %}
-      <span class="label label-warning">
-        {% trans "Waitlisted" %}
-      </span>
+      <div class="resource-label-warning">
+        <span class="resource-label">{% trans "Waitlisted" %}</span>
+      </div>
     {% endif %}
-      <div class="label-subject">
+    {% if partner.tags.all %}
+      <div class="resource-label-subject">
     {% for tag in partner.tags.all %}
-      <a class="label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
+      <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
       {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
     {% endfor %}
       </div>
+    {% endif %}
       
-      <div class="label-languages">
+      <div class="resource-label-languages">
           {% if partner.get_languages %}        
             {% for language in partner.get_languages %}
-              <a class="label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+              <a class="resource-label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
               {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
             {% endfor %}
           {% else %}
@@ -50,6 +52,8 @@
             {% trans "Language(s) not known" %}
           {% endif %}
       </div>
+    </div>
+    <hr />
     {% if partner.description %}
       <div class="panel-partner-description">
         {% comment %}
