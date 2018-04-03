@@ -138,10 +138,14 @@
             {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
             {% trans "Description not available." %}
           {% endif %}
-
-          {% for tag in object.tags.all %}
-            <span class="label label-default">{{ tag }}</span>    
-          {% endfor %}    
+          {% if object.tags %}
+            <div class="resource-label-subject">
+            {% for tag in object.tags.all %}
+              <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
+              {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
+            {% endfor %}
+            </div>
+          {% endif %}
         </div>
       </div>      
     </li>
@@ -152,12 +156,14 @@
         <div class="timeline-body">
           {% if object.get_languages %}
             <p class="partner-languages">
-              {% with object.get_languages as language_list %}
-                {% comment %} Translators: If a partner has content languages specified, this message is shown in the Languages field on the partner page. Don't translate {{ language_list }}. {% endcomment %}
-                {% blocktrans trimmed %}
-                  Language(s): {{ language_list }}
-                {% endblocktrans %}
-              {% endwith %}
+                {% comment %} Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
+                {% trans 'Language(s)' %}:
+                <div class="resource-label-languages">
+                {% for language in partner.get_languages %}
+                    <a class="resource-label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+                    {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
+                {% endfor %}
+                </div>
             </p>
           {% else %}
             {% comment %} Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page. {% endcomment %}

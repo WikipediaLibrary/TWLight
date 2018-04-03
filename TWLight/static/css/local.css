@@ -13,6 +13,7 @@ TYPOGRAPHY & IMAGES
 h1, h2, h3 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   margin-bottom: 20px;
+  min-height: 2em
 }
 
 h1, h2 {
@@ -249,6 +250,14 @@ ul.timeline-home li {
 MISC
 --------------------------------------------------------------------------*/
 
+div.panel-body form.form-inline label, div.panel-body form.form-inline select {
+  padding: .2em .7em;
+}
+
+div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
+  margin-left: .7em;
+}
+
 /* Quick hack for tos misalignment on applications. */
 .apply-tos {
   margin-right: 100%;
@@ -268,12 +277,62 @@ MISC
    if there are multiple rows of labels.
 */
 
+/*
+.label {
+  font-size: inherit;
+  letter-spacing: 0.35px;
+  padding: .2em .4em .3em;
+  font-weight: inherit;
+}
+*/
+
 .label {
   font-size: 85%;
   padding: .15em .6em;
   letter-spacing: 0.25px;
   font-weight: 500;
   margin-top: 5px; 
+}
+
+.resource-label {
+  #margin: 0px -10px 0px 0px;
+  #color:#337ab7;
+  #padding: .2em .6em .3em;
+  padding: .2em 0 .2em .7em;
+}
+
+.resource-label-subject {
+  background-image: url("../img/bullet-subject.png");
+  background-repeat: no-repeat;
+  min-height: 2em;
+  padding: 6px 0px 0px 25px;
+}
+
+.resource-label-languages {
+  background-image: url("../img/bullet-language.png");
+  background-repeat: no-repeat;
+  min-height: 2em;
+  padding: 6px 0px 0px 25px;
+}
+
+.resource-label-warning {
+  background-image: url("../img/bullet-warning.png");
+  background-repeat: no-repeat;
+  min-height: 2em;
+  padding: 6px 0px 0px 25px;
+}
+
+.resource-label-subject a:focus, .resource-label-subject a:hover, .resource-label-languages a:focus, .resource-label-languages a:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+.resource-label-warning .resource-label {
+  color: #23527c;
+}
+
+.pipe {
+  margin: 0px -5px 0px 4px;
 }
 
 /* Without intervention, code tags will break out of their timeline containers.
@@ -352,17 +411,32 @@ A few spots just need padding instead of margin.
 .panel-heading {
   border: solid #ddd;
   border-width: 1px 1px 0 1px;
+  background-color:red;
+  font-weight: 700;
+  }
+
+
+.banner-flag {
+  background-image: url("../img/banner.png"); 
+  background-repeat: no-repeat;
+  background-position: right top;  
 }
 
 .partner-logo {
-  padding: 0 30% 0 30%;
+  padding: 0 10% 0 10%;
   margin: 0 auto 2em auto;
   max-height: 7em;
+  min-height: 3em;
 }
 
-.panel-partner-description {
-
+.partner-logo-container {
+  height: 6em;
 }
+
+.resource-label-container {
+  height: 100%;
+}
+
 
 .panel-partner-info {
 
@@ -391,6 +465,21 @@ A few spots just need padding instead of margin.
 	margin:auto;
 	text-align:center;
 }
+
+/* Custom page break for long titles */
+/*
+@media (max-width: 1127px) and (min-width: 992px) {
+  .panel-heading {
+    height: 90px !important;
+   }
+}
+
+@media (max-width: 814px) and (min-width: 767px) {
+   .panel-heading {
+    height: 100px; !important
+}
+}
+*/
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {

@@ -161,12 +161,19 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
         help_text=_("Link to terms of use. Required if users must agree to "
             "terms of use to get access; optional otherwise."))
+
     description = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
         help_text=_("Optional description of this partner's resources."))
+
     send_instructions = models.TextField(blank=True, null=True,
         help_text=_("Optional instructions for sending application data to "
             "this partner."))
+
+    bundle = models.NullBooleanField(
+        blank=True, null=True, default=False,
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can access this as part of the Bundle.
+        help_text=_("Is this partner a part of the Bundle?"))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
@@ -261,7 +268,7 @@ class Partner(models.Model):
 
     @property
     def get_languages(self):
-        return ", ".join([p.__unicode__() for p in self.languages.all()])
+        return self.languages.all()
 
 
     @property
