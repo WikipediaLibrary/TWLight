@@ -36,6 +36,7 @@
        be processed when access is available.
        {% endblocktrans %}
        </p>
+    </div>
   {% endif %}
   {% if user|coordinators_only %}
     <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
