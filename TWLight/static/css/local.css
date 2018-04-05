@@ -341,11 +341,12 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   margin: 0px -5px 0px 4px;
 }
 
-/* Without intervention, code tags will break out of their timeline containers.
+/* Without intervention, some tags will break out of their timeline containers.
    These can get introduced via rendered wikicode, which has lots of &nbsp;
 */
 
-.timeline-body * code, .panel-body * code {
+.timeline-body * code, .panel-body .panel-partner-description, .panel-body * code {
+  overflow-wrap: break-word;
   word-wrap: break-word;
   font-family: sans-serif;
   font-size: 100%;
