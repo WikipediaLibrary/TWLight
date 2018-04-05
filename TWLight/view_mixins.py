@@ -23,10 +23,10 @@ from TWLight.users.groups import get_coordinators
 coordinators = get_coordinators()
 
 
-class CoordinatorsOrSelf(object):
+class CoordinatorOrSelf(object):
     """
     Restricts visibility to:
-    * Coordinators; or
+    * The designated Coordinator for partner related to the object; or
     * The Editor who owns (or is) the object in the view; or
     * Superusers.
 
@@ -35,7 +35,7 @@ class CoordinatorsOrSelf(object):
     is an instance of User.
     """
 
-    def test_func_coordinators_or_self(self, user):
+    def test_func_coordinator_or_self(self, user):
         obj_owner_test = False # Set default.
         try:
             obj = self.get_object()
@@ -48,18 +48,27 @@ class CoordinatorsOrSelf(object):
             # Keep the default.
             pass
 
+        obj_coordinator_test = False # Set default.
+        try:
+            obj = self.get_object()
+            if obj:
+                    obj_coordinator_test = (self.get_object().partner.coordinator.editor.user.pk == user.pk)
+        except AttributeError:
+            # Keep the default.
+            pass
+
         return (user.is_superuser or
-                user in coordinators.user_set.all() or
+                obj_coordinator_test or
                 obj_owner_test)
 
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_coordinators_or_self(request.user):
-            messages.add_message(request, messages.WARNING, 'You must be a '
-                    'coordinator or the owner to do that.')
+        if not self.test_func_coordinator_or_self(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be the '
+                    'designated coordinator or the owner to do that.')
             raise PermissionDenied
 
-        return super(CoordinatorsOrSelf, self).dispatch(
+        return super(CoordinatorOrSelf, self).dispatch(
             request, *args, **kwargs)
 
 

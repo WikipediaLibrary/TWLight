@@ -27,7 +27,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
 from django.views.generic.list import ListView
 
-from TWLight.view_mixins import (CoordinatorsOrSelf,
+from django_filters.views import FilterView
+
+from TWLight.view_mixins import (CoordinatorOrSelf,
                                  CoordinatorsOnly,
                                  EditorsOnly,
                                  ToURequired,
@@ -644,7 +646,7 @@ class ListSentApplicationsView(_BaseListApplicationView):
 
 
 
-class EvaluateApplicationView(CoordinatorsOrSelf, ToURequired, UpdateView):
+class EvaluateApplicationView(CoordinatorOrSelf, ToURequired, UpdateView):
     """
     Allows Coordinators to:
     * view single applications
