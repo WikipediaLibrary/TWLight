@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import DetailView, View
 from django_filters.views import FilterView
 
 from TWLight.applications.models import Application
@@ -16,21 +16,6 @@ from .models import Partner
 
 
 class PartnersFilterView(FilterView):
-    model = Partner
-
-    def get_queryset(self):
-        # The ordering here is useful primarily to people familiar with the
-        # English alphabet. :/
-        if self.request.user.is_staff:
-            messages.add_message(self.request, messages.INFO,
-                # Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
-                _('Because you are a staff member, this page may include '
-                    'Partners who are not yet available to all users.'))
-            return Partner.even_not_available.order_by('company_name')
-        else:
-            return Partner.objects.order_by('company_name')
-
-class PartnersListView(ListView):
     model = Partner
 
     def get_queryset(self):
