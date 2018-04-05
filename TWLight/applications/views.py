@@ -535,11 +535,18 @@ class ListApplicationsView(_BaseListApplicationView):
         should be listed elsewhere: kept around for historical reasons, but kept
         off the main page to preserve utility (and limit load time).
         """
-        base_qs = Application.objects.filter(
-                status__in=[Application.PENDING, Application.QUESTION],
-                partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
-                partner__coordinator__editor__user__pk=self.request.user.pk,
-             ).order_by('status', 'partner')
+        if self.request.user.is_superuser:
+            base_qs = Application.objects.filter(
+                    status__in=[Application.PENDING, Application.QUESTION],
+                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST]
+                ).order_by('status', 'partner')
+
+        else:
+            base_qs = Application.objects.filter(
+                    status__in=[Application.PENDING, Application.QUESTION],
+                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                    partner__coordinator__editor__user__pk=self.request.user.pk
+                ).order_by('status', 'partner')
 
         return base_qs
 
@@ -564,11 +571,15 @@ class ListApplicationsView(_BaseListApplicationView):
 class ListApprovedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
-        return Application.objects.filter(
-                status=Application.APPROVED,
-                partner__coordinator__editor__user__pk=self.request.user.pk
-             ).order_by('date_closed', 'partner')
-
+        if self.request.user.is_superuser:
+            return Application.objects.filter(
+                    status=Application.APPROVED,
+                ).order_by('date_closed', 'partner')
+        else:
+            return Application.objects.filter(
+                    status=Application.APPROVED,
+                    partner__coordinator__editor__user__pk=self.request.user.pk
+                ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListApprovedApplicationsView, self).get_context_data(**kwargs)
@@ -584,11 +595,15 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
 class ListRejectedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
-        return Application.objects.filter(
-                status=Application.NOT_APPROVED,
-                partner__coordinator__editor__user__pk=self.request.user.pk
-             ).order_by('date_closed', 'partner')
-
+        if self.request.user.is_superuser:
+            return Application.objects.filter(
+                    status=Application.NOT_APPROVED
+                ).order_by('date_closed', 'partner')
+        else:
+            return Application.objects.filter(
+                    status=Application.NOT_APPROVED,
+                    partner__coordinator__editor__user__pk=self.request.user.pk
+                ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListRejectedApplicationsView, self).get_context_data(**kwargs)
@@ -608,14 +623,17 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
     """
 
     def get_queryset(self):
-        return Application.objects.filter(
-                 status__in=[Application.PENDING, Application.QUESTION],
-                 partner__coordinator__editor__user__pk=self.request.user.pk,
-                 parent__isnull=False
-               ).order_by(
-                 '-date_created'
-               )
-
+        if self.request.user.is_superuser:
+            return Application.objects.filter(
+                     status__in=[Application.PENDING, Application.QUESTION],
+                     parent__isnull=False
+                ).order_by('-date_created')
+        else:
+            return Application.objects.filter(
+                     status__in=[Application.PENDING, Application.QUESTION],
+                     partner__coordinator__editor__user__pk=self.request.user.pk,
+                     parent__isnull=False
+                ).order_by('-date_created')
 
     def get_context_data(self, **kwargs):
         context = super(ListRenewalApplicationsView, self).get_context_data(**kwargs)
@@ -632,11 +650,15 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
 class ListSentApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
-        return Application.objects.filter(
-                status=Application.SENT,
-                partner__coordinator__editor__user__pk=self.request.user.pk
-             ).order_by('date_closed', 'partner')
-
+        if self.request.user.is_superuser:
+            return Application.objects.filter(
+                    status=Application.SENT
+                ).order_by('date_closed', 'partner')
+        else:
+            return Application.objects.filter(
+                    status=Application.SENT,
+                    partner__coordinaeor__editor_nuser__pk=self.request.user.pk
+                ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListSentApplicationsView, self).get_context_data(**kwargs)
@@ -741,11 +763,15 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
     template_name = 'applications/send.html'
 
     def get_queryset(self):
-        return Partner.objects.filter(
-                applications__status=Application.APPROVED,
-                self__request__user__pk=Partner__coordinator__editor__user__pk
-            ).distinct()
-
+        if self.request.user.is_superuser:
+            return Partner.objects.filter(
+                    applications__status=Application.APPROVED
+                ).distinct()
+        else:
+            return Partner.objects.filter(
+                    applications__status=Application.APPROVED,
+                    self__request__user__pk=Partner__coordinator__editor__user__pk
+                ).distinct()
 
 
 class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
