@@ -181,7 +181,7 @@ def send_approval_notification_email(instance):
 
 def send_waitlist_notification_email(instance):
     base_url = get_current_site(None).domain
-    path = reverse_lazy('partners:list')
+    path = reverse_lazy('partners:filter')
     link = 'https://{base}{path}'.format(base=base_url, path=path)
 
     email = WaitlistNotification()
