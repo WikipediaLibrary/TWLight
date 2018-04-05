@@ -9,16 +9,6 @@ csv_urlpatterns = [
         name='num_partners'
     ),
 
-    url(r'^home_wiki_pie/$',
-        views.CSVHomeWikiPie.as_view(),
-        name='home_wiki_pie'
-    ),
-
-    url(r'^home_wiki_over_time/$',
-        views.CSVHomeWikiOverTime.as_view(),
-        name='home_wiki_over_time'
-    ),
-
     url(r'^app_time_histogram/$',
         views.CSVAppTimeHistogram.as_view(),
         name='app_time_histogram'

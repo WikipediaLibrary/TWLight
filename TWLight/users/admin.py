@@ -10,10 +10,8 @@ from TWLight.users.models import Editor, UserProfile
 def deactivate(modeladmin, request, queryset):
     for user in queryset:
         if hasattr(user, 'editor'):
-            # Delete all optional info on Editor - except homewiki, which we'll
-            # keep in order to be able to log them in should they ever
-            # reactivate.
-            # We can't delete the editor isntance entirely because that would
+            # Delete all optional info on Editor
+            # We can't delete the editor instance entirely because that would
             # delete associated Applications, which we wish to preserve.
             user.editor.contributions = ''
             user.editor.real_name = ''
