@@ -115,6 +115,32 @@ class PartnersDetailView(DetailView):
 
         context['users_time_data'] = get_users_by_partner_by_month(partner)
 
+        # Find out if current user has applications and change the Apply
+        # button behaviour accordingly
+        if self.request.user.is_authenticated() and not partner.bundle:
+            sent_apps = Application.objects.filter(
+                                        editor=self.request.user.editor,
+                                        status=Application.SENT,
+                                        partner=partner
+                                     ).order_by('date_closed')
+            open_apps = Application.objects.filter(
+                                        editor=self.request.user.editor,
+                                        status__in=(Application.PENDING, Application.QUESTION, Application.APPROVED),
+                                        partner=partner
+                                     )
+            context['user_sent_apps'] = False
+            context['user_open_apps'] = False
+            if sent_apps.count() > 0:
+                context['latest_sent_app_pk'] = sent_apps[0].pk
+                context['user_sent_apps'] = True
+            elif open_apps.count() > 0:
+                context['user_open_apps'] = True
+                if open_apps.count() > 1:
+                    context['multiple_open_apps'] = True
+                else:
+                    context['multiple_open_apps'] = False
+                    context['open_app_pk'] = open_apps[0].pk
+
         return context
 
 
