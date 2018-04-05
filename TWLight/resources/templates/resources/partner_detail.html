@@ -46,7 +46,7 @@
               <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View application" %}</a>
           {% endif %}
       {% else %}
-          <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a>
+          <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a><br />
       {% endif %}
     {% endif %}
     {% if user|coordinators_only %}
@@ -89,7 +89,7 @@
         <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View application" %}</a>
       {% endif %}
       {% else %}
-        <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a>
+        <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br />
       {% endif %}
     {% endif %}
 
