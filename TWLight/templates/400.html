@@ -4,21 +4,21 @@
 
 {% block content %}
 {% get_current_language as LANGUAGE_CODE %}
-  {% comment %} Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. {% endcomment %}
-  <h1>{% trans "Permission denied" %}</h1>
+  {% comment %} Translators: Shown on the website's 400 page, when a user sends a bad request.{% endcomment %}
+  <h1>{% trans "Bad Request" %}</h1>
 
   <p>
-    {% comment %} Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. {% endcomment %}
-    {% trans "Sorry; you aren't allowed to do that." %}
+    {% comment %} Translators: Shown on the website's 400 page, when a user sends a bad request. {% endcomment %}
+    {% trans "Sorry; we don't know what to do with that." %}
   </p>
 
   <p>
-    {% comment %} Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate {{ path }} or Phabricator. {% endcomment %}
+    {% comment %} Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate {{ path }} or Phabricator. {% endcomment %}
     {% blocktrans trimmed with request.path|urlencode as path %}
-      If you think your account should be able to do that, please email us about this error at
+      If you think we should know what to do with that, please email us about this error at
       <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20{{ path }}%20Permission%20denied">wikipedialibrary@wikimedia.org</a>
       or report it to us on
-      <a href="https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%20Library%20{{ path }}%20Permission%20denied">Phabricator</a>
+      <a href="https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%20Library%20{{ path }}%20Bad%20Request">Phabricator</a>
     {% endblocktrans %}
     (<a href="https://www.mediawiki.org/wiki/Phabricator/Help/{{ LANGUAGE_CODE }}?uselang={{ LANGUAGE_CODE }}">?</a>).
   </p>
