@@ -198,7 +198,6 @@ class SynchronizeFieldsTest(TestCase):
         setattr(editor, OCCUPATION, 'Dog surfing instructor')
         setattr(editor, AFFILIATION, 'The Long Now Foundation')
         setattr(editor, 'wp_username', 'wp_alice')
-        setattr(editor, 'home_wiki', 'en')
         setattr(editor, 'email', 'alice@example.com')
         editor.save()
 
@@ -248,7 +247,6 @@ class SynchronizeFieldsTest(TestCase):
         """
         editor = EditorFactory()
         setattr(editor, 'wp_username', 'wp_alice')
-        setattr(editor, 'home_wiki', 'en')
         setattr(editor, 'email', 'alice@example.com')
         editor.save()
 
@@ -286,7 +284,6 @@ class SynchronizeFieldsTest(TestCase):
         setattr(editor, OCCUPATION, 'Dog surfing instructor')
         setattr(editor, AFFILIATION, 'The Long Now Foundation')
         setattr(editor, 'wp_username', 'wp_alice')
-        setattr(editor, 'home_wiki', 'en')
         setattr(editor, 'email', 'alice@example.com')
         editor.save()
 

@@ -19,8 +19,6 @@ from .helpers import (get_application_status_data,
                       get_data_count_by_month,
                       get_users_by_partner_by_month,
                       get_js_timestamp,
-                      get_wiki_distribution_pie_data,
-                      get_wiki_distribution_bar_data,
                       get_time_open_histogram,
                       get_median_decision_time,
                       PYTHON)
@@ -91,18 +89,6 @@ class DashboardView(TemplateView):
         context['partner_time_data'] = get_data_count_by_month(
                 Partner.objects.all()
             )
-
-        # Editor data
-        # ----------------------------------------------------------------------
-
-        # Although normally we'd want JSON for graphs, the pie chart can consume
-        # a normal dict, and the for loop to create the table requires a dict,
-        # not JSON.
-        context['home_wiki_pie_data'] = get_wiki_distribution_pie_data(
-            data_format=PYTHON)
-
-        context['home_wiki_bar_data'] = get_wiki_distribution_bar_data()
-
 
         # Application data
         # ----------------------------------------------------------------------
@@ -205,40 +191,6 @@ class CSVNumPartners(_CSVDownloadView):
 
         for row in data:
             writer.writerow(row)
-
-
-
-class CSVHomeWikiPie(_CSVDownloadView):
-    def _write_data(self, response):
-        data = get_wiki_distribution_pie_data(data_format=PYTHON)
-
-        writer = csv.DictWriter(response, fieldnames=['label', 'data'])
-        # Translators: This is the heading of a data file. Home Wiki refers to the Wikimedia site that a user is most active on.
-        writer.writerow({'label': _('Home wiki'), 
-                         'data': _('Number of users')})
-
-        for row in data:
-            writer.writerow(row)
-
-
-
-class CSVHomeWikiOverTime(_CSVDownloadView):
-    def _write_data(self, response):
-        data = get_wiki_distribution_bar_data(data_format=PYTHON)
-
-        writer = csv.writer(response)
-
-        writer.writerow(
-            # Translators: This is the heading of a data file. 'Wiki' refers to the Wikimedia site that a user is most active on.
-            [_('Wiki'),
-             _('Date'),
-             # Translators: This is the heading of a data file. This labels the number of users who registered from a particular Wikimedia site.
-             _('Number of users')])
-
-        for elem in data:
-            for point in elem['data']:
-                writer.writerow([elem['label'], point[0], point[1]])
-
 
 
 class CSVAppTimeHistogram(_CSVDownloadView):
