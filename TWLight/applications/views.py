@@ -103,7 +103,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         if len(partner_ids):
             return HttpResponseRedirect(reverse('applications:apply'))
         else:
-            messages.add_message(self.request, messages.INFO,
+            messages.add_message(self.request, messages.WARNING,
                 #Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
                 _('Please select at least one partner.'))
             return HttpResponseRedirect(reverse('applications:request'))
@@ -704,7 +704,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         try:
             assert 'applications' in request.POST
         except AssertionError:
-            messages.add_message(self.request, messages.INFO,
+            messages.add_message(self.request, messages.WARNING,
                 #Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
                 _('Please select at least one application.'))
             return HttpResponseRedirect(reverse('applications:list'))
