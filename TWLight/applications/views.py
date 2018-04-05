@@ -27,8 +27,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
 from django.views.generic.list import ListView
 
-from django_filters.views import FilterView
-
 from TWLight.view_mixins import (CoordinatorOrSelf,
                                  CoordinatorsOnly,
                                  EditorsOnly,
@@ -540,6 +538,7 @@ class ListApplicationsView(_BaseListApplicationView):
         base_qs = Application.objects.filter(
                 status__in=[Application.PENDING, Application.QUESTION],
                 partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                partner__coordinator__editor__user__pk=self.request.user.pk,
              ).order_by('status', 'partner')
 
         return base_qs
@@ -566,7 +565,8 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         return Application.objects.filter(
-                status=Application.APPROVED
+                status=Application.APPROVED,
+                partner__coordinator__editor__user__pk=self.request.user.pk
              ).order_by('date_closed', 'partner')
 
 
@@ -585,7 +585,8 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         return Application.objects.filter(
-                status=Application.NOT_APPROVED
+                status=Application.NOT_APPROVED,
+                partner__coordinator__editor__user__pk=self.request.user.pk
              ).order_by('date_closed', 'partner')
 
 
@@ -609,6 +610,7 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         return Application.objects.filter(
                  status__in=[Application.PENDING, Application.QUESTION],
+                 partner__coordinator__editor__user__pk=self.request.user.pk,
                  parent__isnull=False
                ).order_by(
                  '-date_created'
@@ -631,7 +633,8 @@ class ListSentApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         return Application.objects.filter(
-                status=Application.SENT
+                status=Application.SENT,
+                partner__coordinator__editor__user__pk=self.request.user.pk
              ).order_by('date_closed', 'partner')
 
 
@@ -739,7 +742,9 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
 
     def get_queryset(self):
         return Partner.objects.filter(
-            applications__status=Application.APPROVED).distinct()
+                applications__status=Application.APPROVED,
+                self__request__user__pk=Partner__coordinator__editor__user__pk
+            ).distinct()
 
 
 
