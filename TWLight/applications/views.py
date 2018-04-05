@@ -688,7 +688,6 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
     def post(self, request, *args, **kwargs):
         try:
-            assert 'applications' in request.POST
             assert 'batch_status' in request.POST
 
             status = request.POST['batch_status']
@@ -701,6 +700,14 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             # ValueError will be raised if the status cannot be cast to int.
             logger.exception('Did not find valid data for batch editing')
             return HttpResponseBadRequest()
+
+        try:
+            assert 'applications' in request.POST
+        except AssertionError:
+            messages.add_message(self.request, messages.INFO,
+                #Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
+                _('Please select at least one application.'))
+            return HttpResponseRedirect(reverse('applications:list'))
 
         # IMPORTANT! It would be tempting to just do QuerySet.update() here,
         # but that does NOT send the pre_save signal, which is doing some

@@ -2080,10 +2080,6 @@ class BatchEditTest(TestCase):
         response = self.client.post(self.url, data={}, follow=True)
         self.assertEqual(response.status_code, 400)
 
-        # Missing the 'applications' parameter: bad.
-        response = self.client.post(self.url, data={'batch_status': 1}, follow=True)
-        self.assertEqual(response.status_code, 400)
-
         # Missing the 'batch_status' parameter: bad.
         response = self.client.post(self.url, data={'applications': 1}, follow=True)
         self.assertEqual(response.status_code, 400)
