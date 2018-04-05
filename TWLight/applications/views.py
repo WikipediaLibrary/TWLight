@@ -657,7 +657,7 @@ class ListSentApplicationsView(_BaseListApplicationView):
         else:
             return Application.objects.filter(
                     status=Application.SENT,
-                    partner__coordinaeor__editor_nuser__pk=self.request.user.pk
+                    partner__coordinator__editor__user__pk=self.request.user.pk
                 ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
