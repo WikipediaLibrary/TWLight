@@ -12,7 +12,7 @@ from TWLight.graphs.helpers import (get_median,
                                     get_users_by_partner_by_month)
 from TWLight.view_mixins import CoordinatorsOnly
 
-from .models import Partner
+from .models import Partner, Stream
 
 
 class PartnersFilterView(FilterView):
@@ -125,6 +125,18 @@ class PartnersDetailView(DetailView):
                 else:
                     context['multiple_open_apps'] = False
                     context['open_app_pk'] = open_apps[0].pk
+
+        partner_streams = Stream.objects.filter(partner=partner)
+        if partner_streams.count() > 0:
+            context['stream_unique_accepted'] = {}
+            for stream in Stream.objects.filter(partner=partner):
+                stream_unique_accepted = User.objects.filter(
+                                      editor__applications__partner=partner,
+                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                      editor__applications__specific_stream=stream).distinct().count()
+                context['stream_unique_accepted'][stream.name] = stream_unique_accepted
+        else:
+            context['stream_unique_accepted'] = None
 
         return context
 

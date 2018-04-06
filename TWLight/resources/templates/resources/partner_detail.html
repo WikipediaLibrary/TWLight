@@ -437,6 +437,14 @@
     {% endblocktrans %}
   </p>
   
+  {% if stream_unique_accepted %}
+    <ul>
+    {% for stream_name, num_apps in stream_unique_accepted.items %}
+      <li>{{ stream_name }}: {{ num_apps }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
   {% comment %} Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
   <h3>{% trans "Applications over time" %}</h3>
   
