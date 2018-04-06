@@ -129,7 +129,7 @@ class PartnersDetailView(DetailView):
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
             context['stream_unique_accepted'] = {}
-            for stream in Stream.objects.filter(partner=partner):
+            for stream in partner_streams:
                 stream_unique_accepted = User.objects.filter(
                                       editor__applications__partner=partner,
                                       editor__applications__status__in=(Application.APPROVED, Application.SENT),
