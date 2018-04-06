@@ -169,9 +169,9 @@
       {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
       <h3>{% trans "Current application status distribution" %} <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <p>
-        {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is located above the graph showing the current distribution of applications.{% endcomment %}
+        {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is located above the graph showing the current distribution of open applications.{% endcomment %}
         {% blocktrans trimmed %}
-          This graph includes all applications opened ever on this site.
+          This graph shows all open applicattion (i.e. not those sent or denied).
         {% endblocktrans %}
       </p>
       <div id="app-distribution-graph" style="width:600px;height:300px"></div>

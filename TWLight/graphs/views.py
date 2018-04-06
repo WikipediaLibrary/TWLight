@@ -128,7 +128,8 @@ class DashboardView(TemplateView):
         # Application status pie chart -----------------------------------------
 
         context['app_distribution_data'] = get_application_status_data(
-                Application.objects.all()
+                Application.objects.exclude(
+                    status__in=(Application.SENT, Application.NOT_APPROVED))
             )
 
         return context

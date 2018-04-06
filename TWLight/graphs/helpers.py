@@ -93,7 +93,7 @@ def get_application_status_data(queryset, data_format=JSON):
     """
     status_data = []
 
-    for status in Application.STATUS_CHOICES:
+    for status in Application.STATUS_CHOICES[0:3]:
         status_count = queryset.filter(status=status[0]).count()
         # We have to force unicode here because we used ugettext_lazy, not
         # ugettext, to internationalize the status labels in
