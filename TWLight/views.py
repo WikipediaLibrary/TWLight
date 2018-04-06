@@ -73,7 +73,7 @@ class HomePageView(TemplateView):
             event['icon'] = 'fa-align-left'
             event['color'] = '' # grey (default when no color class is applied)
             if app.parent:
-                # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
+                # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
                 text = _(u'{username} applied for renewal of their ' \
                        '<a href="{url}">{partner}</a> access').format(
                             username=app.editor.wp_username,
