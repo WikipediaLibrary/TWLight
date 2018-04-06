@@ -139,24 +139,6 @@
 
   {% endif %}
 
-  <!-- begin partner metrics -->
-  <div class="row">
-    <div class="col-lg-12">
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing the number of available partners over time.{% endcomment %}
-      <h2 class="page-header">{% trans "Partners" %}</h2>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of available partners over time.{% endcomment %}
-      <h3>{% trans "Number of partners over time" %} <a href="{% url 'csv:num_partners' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-      <div id="partner-time-graph" style="width:600px;height:300px"></div>
-    </div>
-  </div>
-  <!-- end partner metrics -->
-
-
   <!-- begin application metrics -->
   <div class="row">
     <div class="col-lg-12">
@@ -213,20 +195,6 @@
 
   <script type="text/javascript">
     $(function() {
-      // Partners over time
-      var partner_time_graph = $("#partner-time-graph");
-      var partner_time_data = {{ partner_time_data }};
-      var partner_time_plot = $.plot(partner_time_graph, [partner_time_data], {
-        xaxis: {
-          mode: "time",
-        },
-        yaxis: {
-          min: 0,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        colors: ['#5cb85c'],
-      });
 
       // Application time-to-decision (histogram)
       var app_time_histogram_graph = $("#app-time-histogram-graph");
