@@ -16,6 +16,9 @@ from django.utils.translation import get_language
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 
+from TWLight.resources.factories import PartnerFactory
+from TWLight.resources.models import Partner
+
 from . import views
 from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
@@ -161,6 +164,10 @@ class ViewsTestCase(TestCase):
         factory = RequestFactory()
         request = factory.get(self.url1)
         request.user = self.user_coordinator
+
+        partner = PartnerFactory()
+        partner.coordinator = request.user
+        app1 = ApplicationFactory(status=Application.PENDING, editor=self.editor1)
 
         response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
         self.assertEqual(response.status_code, 200)
