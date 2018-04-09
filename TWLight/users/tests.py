@@ -18,6 +18,7 @@ from TWLight.applications.models import Application
 
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
+from TWLight.resources.tests import EditorCraftRoom
 
 from . import views
 from .authorization import OAuthBackend
@@ -161,15 +162,33 @@ class ViewsTestCase(TestCase):
 
     def test_coordinator_access(self):
         """Coordinators can see someone else's page."""
-        factory = RequestFactory()
-        request = factory.get(self.url1)
-        request.user = self.user_coordinator
 
+        # Create an editor
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        self.client.logout()
+
+        # Create a coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        # Create a partner and designate our new coordinator
         partner = PartnerFactory()
-        partner.coordinator = request.user
-        app1 = ApplicationFactory(status=Application.PENDING, editor=self.editor1)
+        partner.coordinator = coordinator.user
 
-        response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
+        # url in question is editor profile page.
+        url = reverse('users:editor_detail',
+            kwargs={'pk': editor.pk})
+
+        # Test response. Should be denied since editor hasn't applied to
+        # relevant partner.
+        response = self.client.get(url, follow=True)
+        self.assertEqual(response.status_code, 403)
+
+        # Editor applies for access to the partner
+        app = ApplicationFactory(status=Application.PENDING, editor=editor, partner=partner)
+
+        # Test response. Should be allowed now that editor has applied to
+        # relevant partner.
+        response = self.client.get(url, follow=True)
         self.assertEqual(response.status_code, 200)
 
 

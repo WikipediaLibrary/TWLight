@@ -56,6 +56,8 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False):
     else:
         coordinators.user_set.remove(editor.user)
 
+    return editor
+
 
 class LanguageModelTests(TestCase):
 
