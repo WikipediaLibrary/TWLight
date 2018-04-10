@@ -545,7 +545,7 @@ class ListApplicationsView(_BaseListApplicationView):
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
-                    partner__coordinator__editor__user__pk=self.request.user.pk
+                    partner__coordinator__pk=self.request.user.pk
                 ).order_by('status', 'partner')
 
         return base_qs
@@ -578,7 +578,7 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         else:
             return Application.objects.filter(
                     status=Application.APPROVED,
-                    partner__coordinator__editor__user__pk=self.request.user.pk
+                    partner__coordinator__pk=self.request.user.pk
                 ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
@@ -602,7 +602,7 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
         else:
             return Application.objects.filter(
                     status=Application.NOT_APPROVED,
-                    partner__coordinator__editor__user__pk=self.request.user.pk
+                    partner__coordinator__pk=self.request.user.pk
                 ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
@@ -631,7 +631,7 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
         else:
             return Application.objects.filter(
                      status__in=[Application.PENDING, Application.QUESTION],
-                     partner__coordinator__editor__user__pk=self.request.user.pk,
+                     partner__coordinator__pk=self.request.user.pk,
                      parent__isnull=False
                 ).order_by('-date_created')
 
@@ -657,7 +657,7 @@ class ListSentApplicationsView(_BaseListApplicationView):
         else:
             return Application.objects.filter(
                     status=Application.SENT,
-                    partner__coordinator__editor__user__pk=self.request.user.pk
+                    partner__coordinator__pk=self.request.user.pk
                 ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
