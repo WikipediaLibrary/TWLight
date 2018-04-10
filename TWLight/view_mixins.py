@@ -17,6 +17,8 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 
+from TWLight.applications.models import Application
+from TWLight.users.models import Editor
 from TWLight.users.groups import get_coordinators
 
 
@@ -37,13 +39,14 @@ class CoordinatorOrSelf(object):
 
     def test_func_coordinator_or_self(self, user):
         obj_owner_test = False # Set default.
+
         try:
             obj = self.get_object()
             if obj:
                 if isinstance(obj, User):
                     obj_owner_test = (obj.pk == user.pk)
                 else:
-                    obj_owner_test = (self.get_object().user.pk == user.pk)
+                    obj_owner_test = (obj.user.pk == user.pk)
         except AttributeError:
             # Keep the default.
             pass
@@ -52,7 +55,10 @@ class CoordinatorOrSelf(object):
         try:
             obj = self.get_object()
             if obj:
-                    obj_coordinator_test = (self.get_object().partner.coordinator.editor.user.pk == user.pk)
+                    if isinstance(obj, Editor):
+                        obj_coordinator_test = (obj.applications.filter(partner__coordinator__pk=user.pk).exists())
+                    elif isinstance(obj, Application):
+                        obj_coordinator_test = (obj.partner.coordinator.pk == user.pk)
         except AttributeError:
             # Keep the default.
             pass
