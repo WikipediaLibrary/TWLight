@@ -56,17 +56,9 @@
                                 {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the introductory text to that list.{% endcomment %}
 				<p>{% trans "Below are a few of our featured partners:" %}</p>
 					<ul>
-					    <li><a href="/partners/24/">AAAS</a></li>
-						<li><a href="/partners/46/">Cairn</a></li>
-						<li><a href="/partners/15/">Cochrane</a></li>
-						<li><a href="/partners/57/">EBSCO</a></li>
-						<li><a href="/partners/23/">Elsevier</a></li>
-						<li><a href="/partners/55/">Gale</a></li>
-						<li><a href="/partners/54/">JSTOR</a></li>
-						<li><a href="/partners/26/">Newspapers.com</a></li>
-						<li><a href="/partners/52/">Oxford University Press</a></li>
-						<li><a href="/partners/10/">Taylor & Francis</a></li>
-						
+						{% for partner in featured_partners %}
+							<li><a href={% url 'partners:detail' partner.pk %}>{{ partner }}</a></li>
+						{% endfor %}
 					</ul>
 				<p><a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more"> {% trans "Browse all partners" %}</a>
 			
