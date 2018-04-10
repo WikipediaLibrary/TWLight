@@ -1279,6 +1279,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # Make sure there's a session key - otherwise we'll get redirected to
         # /applications/request before we hit the login test 
         p1 = PartnerFactory()
+        p1.coordinator = self.coordinator
         request.session = {}
         request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
 
@@ -1312,12 +1313,28 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         request = factory.get(url)
         request.user = self.coordinator
-        response = view.as_view()(request)
+
+        # reponse for view when user isn't the designated coordinator
+        denyResponse = view.as_view()(request)
+
+        # Designate the coordinator
+        for obj in queryset:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        # reponse for view when user is the designated coordinator
+        allowResponse = view.as_view()(request)
 
         for obj in queryset:
             # Unlike Client(), RequestFactory() doesn't render the response;
             # we'll have to do that before we can check for its content.
-            self.assertIn(obj.__str__(), response.render().content)
+
+            # Applications should not be visible to just any coordinator
+            self.assertNotIn(obj.__str__(), denyResponse.render().content)
+
+            # Applications should be visible to the designated coordinator
+            self.assertIn(obj.__str__(), allowResponse.render().content)
 
 
     def test_list_authorization(self):
@@ -1359,6 +1376,16 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
 
     def test_list_renewal_queryset(self):
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION],
+            parent__isnull=False)
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
         url = reverse('applications:list_renewal')
 
         factory = RequestFactory()
@@ -1367,9 +1394,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         response = views.ListRenewalApplicationsView.as_view()(request)
 
-        expected_qs = Application.objects.filter(
-            status__in=[Application.PENDING, Application.QUESTION],
-            parent__isnull=False)
         template_qs = response.context_data['object_list']
 
         # See comment on test_queryset_unfiltered.
@@ -1382,6 +1406,15 @@ class ListApplicationsTest(BaseApplicationViewTest):
         Make sure that ListApplicationsView has the correct queryset in context
         when no filters are applied.
         """
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION])
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
         url = reverse('applications:list')
 
         factory = RequestFactory()
@@ -1390,8 +1423,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         response = views.ListApplicationsView.as_view()(request)
 
-        expected_qs = Application.objects.filter(
-            status__in=[Application.PENDING, Application.QUESTION])
         template_qs = response.context_data['object_list']
 
         # We can't use assertQuerysetEqual, because the one returned by the view
@@ -1434,15 +1465,22 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         new_editor, _, url = self._test_queryset_filtered_base()
 
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION],
+            editor=new_editor)
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
         factory = RequestFactory()
         request = factory.post(url, {'editor': new_editor.pk})
         request.user = self.coordinator
 
         response = views.ListApplicationsView.as_view()(request)
 
-        expected_qs = Application.objects.filter(
-            status__in=[Application.PENDING, Application.QUESTION],
-            editor=new_editor)
         template_qs = response.context_data['object_list']
 
         self.assertEqual(sorted([item.pk for item in expected_qs]),
@@ -1455,15 +1493,22 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         _, new_partner, url = self._test_queryset_filtered_base()
 
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION],
+            partner=new_partner)
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
         factory = RequestFactory()
         request = factory.post(url, {'partner': new_partner.pk})
         request.user = self.coordinator
 
         response = views.ListApplicationsView.as_view()(request)
 
-        expected_qs = Application.objects.filter(
-            status__in=[Application.PENDING, Application.QUESTION],
-            partner=new_partner)
         template_qs = response.context_data['object_list']
 
         self.assertEqual(sorted([item.pk for item in expected_qs]),
@@ -1476,6 +1521,17 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         new_editor, new_partner, url = self._test_queryset_filtered_base()
 
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION],
+            editor=new_editor,
+            partner=new_partner)
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
         factory = RequestFactory()
         request = factory.post(url,
             {'editor': new_editor.pk, 'partner': new_partner.pk})
@@ -1483,10 +1539,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         response = views.ListApplicationsView.as_view()(request)
 
-        expected_qs = Application.objects.filter(
-            status__in=[Application.PENDING, Application.QUESTION],
-            editor=new_editor,
-            partner=new_partner)
         template_qs = response.context_data['object_list']
 
         self.assertEqual(sorted([item.pk for item in expected_qs]),
