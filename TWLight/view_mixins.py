@@ -52,16 +52,29 @@ class CoordinatorOrSelf(object):
             pass
 
         obj_coordinator_test = False # Set default.
-        try:
-            obj = self.get_object()
-            if obj:
-                    if isinstance(obj, Editor):
-                        obj_coordinator_test = (obj.applications.filter(partner__coordinator__pk=user.pk).exists())
-                    elif isinstance(obj, Application):
-                        obj_coordinator_test = (obj.partner.coordinator.pk == user.pk)
-        except AttributeError:
-            # Keep the default.
-            pass
+
+        # If the user is a coordinator run more tests
+        if user in coordinators.user_set.all():
+            try:
+                obj = self.get_object()
+                if obj:
+                        # Return true if the object is an editor and has
+                        # at least one application to a partner for whom
+                        # the user is a designated coordinator.
+                        if isinstance(obj, Editor):
+                            obj_coordinator_test = (Application.objects.filter(
+                                editor__pk=obj.pk,
+                                partner__coordinator__pk=user.pk
+                            ).exists())
+                        # Return true if the object is an application to a
+                        # partner for whom the user is a designated coordinator
+                        elif isinstance(obj, Application):
+                            obj_coordinator_test = (
+                                obj.partner.coordinator.pk == user.pk
+                            )
+            except AttributeError:
+                # Keep the default.
+                pass
 
         return (user.is_superuser or
                 obj_coordinator_test or
