@@ -13,7 +13,7 @@ from django.utils.translation import ugettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
-from TWLight.users.models import Editor
+from TWLight.users.models import UserProfile, Editor
 
 from .helpers import (get_application_status_data,
                       get_data_count_by_month,
@@ -21,6 +21,7 @@ from .helpers import (get_application_status_data,
                       get_js_timestamp,
                       get_time_open_histogram,
                       get_median_decision_time,
+                      get_user_language_data,
                       PYTHON)
 
 
@@ -143,6 +144,11 @@ class DashboardView(TemplateView):
                 Application.objects.exclude(
                     status__in=(Application.SENT, Application.NOT_APPROVED))
             )
+
+        # User language pie chart ----------------------------------------------
+
+        context['user_language_data'] = get_user_language_data(
+            UserProfile.objects.all())
 
         return context
 
@@ -369,3 +375,20 @@ class CSVPageViewsByPath(_CSVDownloadView):
             _('Number of (non-unique) visitors')])
 
         writer.writerow([path, path_count])
+
+class CSVUserLanguage(_CSVDownloadView):
+    def _write_data(self, response):
+        csv_queryset = UserProfile.objects.all()
+
+        data = get_user_language_data(
+            csv_queryset,
+            data_format=PYTHON
+        )
+
+        writer = csv.DictWriter(response, fieldnames=['label', 'data'])
+
+        writer.writerow({'label': _('Language'),
+                         'data': _('Number of users')})
+
+        for row in data:
+            writer.writerow(row)

@@ -178,6 +178,19 @@
   </div>
   <!-- end application metrics -->
 
+  <!-- begin user metrics -->
+  <div class="row">
+    <div class="col-lg-12">
+      {% comment %} Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.{% endcomment %}
+      <h2 class="page-header" id="applications-section">{% trans 'Users' %}</h2>
+
+      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
+      <h3>{% trans "User language distribution" %} <a href="{% url 'csv:user_language' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+      <div id="user-language-graph" style="width:600px;height:300px"></div>
+    </div>
+  </div>
+  <!-- end user metrics -->
+
 {% endblock content %}
 
 {% block javascript %}
@@ -264,6 +277,16 @@
         },
       });
 
+      // User language distribution (pie chart)
+      var user_language_graph = $("#user-language-graph");
+      var user_language_data = {{ user_language_data | safe }};
+      var user_language_plot = $.plot(user_language_graph, user_language_data, {
+        series: {
+          pie: {
+            show: true
+          }
+        },
+      });
     });
   </script>
 {% endblock javascript %}}
