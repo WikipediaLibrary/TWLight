@@ -38,7 +38,7 @@
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_editors }}</div>
               {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of editors (users) who registered. {% endcomment %}
-              <div>{% trans 'Number of editors' %}</div>
+              <div>{% trans 'Total unique editors receiving access' %}</div>
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_apps }}</div>
-              <div>{% trans 'Total applications' %}</div>
+              <div>{% trans 'Total accounts distributed' %}</div>
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@
       {% comment %} Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.{% endcomment %}
       <h2 class="page-header" id="applications-section">{% trans 'Applications' %}</h2>
       {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time. {% endcomment %}
-      <h3>{% trans "Number of accounts distributed over time" %}</h3>
+      <h3>{% trans "Number of accounts distributed over time" %}</h3> <a href="{% url 'csv:num_applications' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <div id="application-time-graph" style="width:600px;height:300px"></div>
 
       {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.{% endcomment %}

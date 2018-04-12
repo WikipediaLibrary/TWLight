@@ -79,8 +79,14 @@ class DashboardView(TemplateView):
         # Overall application-related data
         # ----------------------------------------------------------------------
 
-        context['total_apps'] = Application.objects.count()
-        context['total_editors'] = Editor.objects.count()
+        # Total number of approved applications
+        context['total_apps'] = Application.objects.filter(
+            status__in=[Application.APPROVED, Application.SENT]).count()
+        # Total number of unique editors with approved applications
+        context['total_editors'] = Application.objects.filter(
+            status__in=[Application.APPROVED, Application.SENT]).values(
+                "editor").distinct().count()
+
         context['total_partners'] = Partner.objects.count()
 
         # Application data
