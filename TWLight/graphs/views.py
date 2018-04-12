@@ -96,6 +96,12 @@ class DashboardView(TemplateView):
             app = None
 
         context['longest_open'] = app
+        
+        # Total number of approved applications over time ----------------------
+        context['application_time_data'] = get_data_count_by_month(
+                Application.objects.filter(
+                    status__in=[Application.APPROVED, Application.SENT])
+            )
 
         # Average number of days until a final decision gets made on an
         # application. ---------------------------------------------------------
@@ -180,6 +186,21 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         for row in data:
             writer.writerow(row)
 
+            
+class CSVNumApprovedApplications(_CSVDownloadView):
+    def _write_data(self, response):
+        queryset = Application.objects.filter(
+                        status__in=[Application.APPROVED, Application.SENT])
+
+        data = get_data_count_by_month(queryset, data_format=PYTHON)
+        writer = csv.writer(response)
+        # Translators: This is the heading of a data file, for a column containing date data.
+        writer.writerow([_('Date'), 
+                         # Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
+                         _('Number of approved applications')])
+
+        for row in data:
+            writer.writerow(row)
 
 
 class CSVAppMedians(_CSVDownloadView):
