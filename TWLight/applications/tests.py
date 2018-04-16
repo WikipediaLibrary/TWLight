@@ -225,14 +225,14 @@ class SynchronizeFieldsTest(TestCase):
         app.refresh_from_db()
 
         output = get_output_for_application(app)
-        self.assertEqual(output[REAL_NAME], 'Alice')
-        self.assertEqual(output[COUNTRY_OF_RESIDENCE], 'Holy Roman Empire')
-        self.assertEqual(output[OCCUPATION], 'Dog surfing instructor')
-        self.assertEqual(output[AFFILIATION], 'The Long Now Foundation')
-        self.assertEqual(output[SPECIFIC_STREAM], stream)
-        self.assertEqual(output[SPECIFIC_TITLE], 'Alice in Wonderland')
-        self.assertEqual(output['Email'], 'alice@example.com')
-        self.assertEqual(output[AGREEMENT_WITH_TERMS_OF_USE], True)
+        self.assertEqual(output[REAL_NAME]['data'], 'Alice')
+        self.assertEqual(output[COUNTRY_OF_RESIDENCE]['data'], 'Holy Roman Empire')
+        self.assertEqual(output[OCCUPATION]['data'], 'Dog surfing instructor')
+        self.assertEqual(output[AFFILIATION]['data'], 'The Long Now Foundation')
+        self.assertEqual(output[SPECIFIC_STREAM]['data'], stream)
+        self.assertEqual(output[SPECIFIC_TITLE]['data'], 'Alice in Wonderland')
+        self.assertEqual(output['Email']['data'], 'alice@example.com')
+        self.assertEqual(output[AGREEMENT_WITH_TERMS_OF_USE]['data'], True)
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
@@ -266,7 +266,7 @@ class SynchronizeFieldsTest(TestCase):
         app.refresh_from_db()
 
         output = get_output_for_application(app)
-        self.assertEqual(output['Email'], 'alice@example.com')
+        self.assertEqual(output['Email']['data'], 'alice@example.com')
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
@@ -305,11 +305,11 @@ class SynchronizeFieldsTest(TestCase):
         app.refresh_from_db()
 
         output = get_output_for_application(app)
-        self.assertEqual(output[REAL_NAME], 'Alice')
-        self.assertEqual(output[COUNTRY_OF_RESIDENCE], 'Holy Roman Empire')
-        self.assertEqual(output[OCCUPATION], 'Dog surfing instructor')
-        self.assertEqual(output[AFFILIATION], 'The Long Now Foundation')
-        self.assertEqual(output['Email'], 'alice@example.com')
+        self.assertEqual(output[REAL_NAME]['data'], 'Alice')
+        self.assertEqual(output[COUNTRY_OF_RESIDENCE]['data'], 'Holy Roman Empire')
+        self.assertEqual(output[OCCUPATION]['data'], 'Dog surfing instructor')
+        self.assertEqual(output[AFFILIATION]['data'], 'The Long Now Foundation')
+        self.assertEqual(output['Email']['data'], 'alice@example.com')
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
