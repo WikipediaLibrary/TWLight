@@ -36,18 +36,17 @@
        {% endblocktrans %}
        </p>
     </div>
+    {% endif %}
+    {% if user_sent_apps %}
+        <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
+    {% elif user_open_apps %}
+        {% if multiple_open_apps %}
+            <a href="{% url 'users:home' %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View applications" %}</a>
+        {% else %}
+            <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View application" %}</a>
+        {% endif %}
     {% else %}
-      {% if user_sent_apps %}
-          <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
-      {% elif user_open_apps %}
-          {% if multiple_open_apps %}
-              <a href="{% url 'users:home' %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View applications" %}</a>
-          {% else %}
-              <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View application" %}</a>
-          {% endif %}
-      {% else %}
-          <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a><br />
-      {% endif %}
+        <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a><br />
     {% endif %}
     {% if user|coordinators_only %}
     <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
@@ -79,18 +78,17 @@
       {% endblocktrans %}
       </p>
     </div>
-    {% else %}
+    {% endif %}
     {% if user_sent_apps %}
         <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
     {% elif user_open_apps %}
-      {% if multiple_open_apps %}
-        <a href="{% url 'users:home' %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View applications" %}</a>
-      {% else %}
-        <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View application" %}</a>
-      {% endif %}
-      {% else %}
-        <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br />
-      {% endif %}
+    {% if multiple_open_apps %}
+      <a href="{% url 'users:home' %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View applications" %}</a>
+    {% else %}
+      <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View application" %}</a>
+    {% endif %}
+    {% else %}
+      <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br />
     {% endif %}
 
     {% if user|coordinators_only %}
