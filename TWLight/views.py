@@ -129,4 +129,10 @@ class HomePageView(TemplateView):
             # If we don't have any site activity yet, we'll get an exception.
             context['activity'] = []
 
+        # Featured partners
+        # -----------------------------------------------------
+
+        context['featured_partners'] = Partner.objects.filter(
+            featured=True).order_by('company_name')
+
         return context
