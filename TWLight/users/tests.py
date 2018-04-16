@@ -165,10 +165,13 @@ class ViewsTestCase(TestCase):
         request = factory.get(self.url1)
         request.user = self.user_coordinator
 
+        # Define a partner
         partner = PartnerFactory()
 
+        # Editor applies to the partner
         app = ApplicationFactory(
             status=Application.PENDING, editor=self.editor1, partner=partner)
+        app.save()
 
         # Editor details should not be visible to just any coordinator
         try:
@@ -178,8 +181,8 @@ class ViewsTestCase(TestCase):
             pass
 
         # Designate the coordinator
-        partner.coordinator = self.user_coordinator
-        partner.save
+        partner.coordinator = request.user
+        partner.save()
 
         # Editor details should be visible to the designated coordinator
         response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
