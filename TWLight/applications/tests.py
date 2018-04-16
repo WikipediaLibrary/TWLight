@@ -1279,6 +1279,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # Make sure there's a session key - otherwise we'll get redirected to
         # /applications/request before we hit the login test 
         p1 = PartnerFactory()
+        p1.coordinator = self.coordinator
         request.session = {}
         request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
 
@@ -1312,12 +1313,28 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         request = factory.get(url)
         request.user = self.coordinator
-        response = view.as_view()(request)
+
+        # reponse for view when user isn't the designated coordinator
+        denyResponse = view.as_view()(request)
+
+        # Designate the coordinator
+        for obj in queryset:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        # reponse for view when user is the designated coordinator
+        allowResponse = view.as_view()(request)
 
         for obj in queryset:
             # Unlike Client(), RequestFactory() doesn't render the response;
             # we'll have to do that before we can check for its content.
-            self.assertIn(obj.__str__(), response.render().content)
+
+            # Applications should not be visible to just any coordinator
+            self.assertNotIn(obj.__str__(), denyResponse.render().content)
+
+            # Applications should be visible to the designated coordinator
+            self.assertIn(obj.__str__(), allowResponse.render().content)
 
 
     def test_list_authorization(self):
@@ -1365,16 +1382,31 @@ class ListApplicationsTest(BaseApplicationViewTest):
         request = factory.get(url)
         request.user = self.coordinator
 
-        response = views.ListRenewalApplicationsView.as_view()(request)
-
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION],
             parent__isnull=False)
-        template_qs = response.context_data['object_list']
 
-        # See comment on test_queryset_unfiltered.
+        # reponse for view when user isn't the designated coordinator
+        response = views.ListRenewalApplicationsView.as_view()(request)
+        deny_qs = response.context_data['object_list']
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        # reponse for view when user is the designated coordinator
+        response = views.ListRenewalApplicationsView.as_view()(request)
+        allow_qs = response.context_data['object_list']
+
+        # Applications should not be visible to just any coordinator
+        self.assertFalse(deny_qs)
+
+        # Applications should be visible to the designated coordinator
+        # See comment on test_queryset_unfiltered about this data structure.
         self.assertEqual(sorted([item.pk for item in expected_qs]),
-                         sorted([item.pk for item in template_qs]))
+                         sorted([item.pk for item in allow_qs]))
 
 
     def test_queryset_unfiltered(self):
@@ -1388,12 +1420,27 @@ class ListApplicationsTest(BaseApplicationViewTest):
         request = factory.get(url)
         request.user = self.coordinator
 
-        response = views.ListApplicationsView.as_view()(request)
-
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION])
-        template_qs = response.context_data['object_list']
 
+        # reponse for view when user isn't the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        deny_qs = response.context_data['object_list']
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        # reponse for view when user is the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        allow_qs = response.context_data['object_list']
+
+        # Applications should not be visible to just any coordinator
+        self.assertFalse(deny_qs)
+
+        # Applications should be visible to the designated coordinator
         # We can't use assertQuerysetEqual, because the one returned by the view
         # is ordered and this one is not. (Testing order is not important here.)
         # And simply using sorted() (or sorted(list())) on the querysets is
@@ -1401,7 +1448,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # sort them, and compare *those*. This is equivalent, semantically, to
         # what we actually want ('are the same items in both querysets').
         self.assertEqual(sorted([item.pk for item in expected_qs]),
-                         sorted([item.pk for item in template_qs]))
+                         sorted([item.pk for item in allow_qs]))
 
 
     def _test_queryset_filtered_base(self):
@@ -1438,15 +1485,30 @@ class ListApplicationsTest(BaseApplicationViewTest):
         request = factory.post(url, {'editor': new_editor.pk})
         request.user = self.coordinator
 
-        response = views.ListApplicationsView.as_view()(request)
-
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION],
             editor=new_editor)
-        template_qs = response.context_data['object_list']
 
+        # reponse for view when user isn't the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        deny_qs = response.context_data['object_list']
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        # reponse for view when user is the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        allow_qs = response.context_data['object_list']
+
+        # Applications should not be visible to just any coordinator
+        self.assertFalse(deny_qs)
+
+        # Applications should be visible to the designated coordinator
         self.assertEqual(sorted([item.pk for item in expected_qs]),
-                         sorted([item.pk for item in template_qs]))
+                         sorted([item.pk for item in allow_qs]))
 
 
     def test_queryset_filtered_case_2(self):
@@ -1459,15 +1521,30 @@ class ListApplicationsTest(BaseApplicationViewTest):
         request = factory.post(url, {'partner': new_partner.pk})
         request.user = self.coordinator
 
-        response = views.ListApplicationsView.as_view()(request)
-
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION],
             partner=new_partner)
-        template_qs = response.context_data['object_list']
 
+        # reponse for view when user isn't the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        deny_qs = response.context_data['object_list']
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        # reponse for view when user is the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        allow_qs = response.context_data['object_list']
+
+        # Applications should not be visible to just any coordinator
+        self.assertFalse(deny_qs)
+
+        # Applications should be visible to the designated coordinator
         self.assertEqual(sorted([item.pk for item in expected_qs]),
-                         sorted([item.pk for item in template_qs]))
+                         sorted([item.pk for item in allow_qs]))
 
 
     def test_queryset_filtered_case_3(self):
@@ -1481,16 +1558,31 @@ class ListApplicationsTest(BaseApplicationViewTest):
             {'editor': new_editor.pk, 'partner': new_partner.pk})
         request.user = self.coordinator
 
-        response = views.ListApplicationsView.as_view()(request)
-
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION],
             editor=new_editor,
             partner=new_partner)
-        template_qs = response.context_data['object_list']
 
+        # reponse for view when user isn't the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        deny_qs = response.context_data['object_list']
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        # reponse for view when user is the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        allow_qs = response.context_data['object_list']
+
+        # Applications should not be visible to just any coordinator
+        self.assertFalse(deny_qs)
+
+        # Applications should be visible to the designated coordinator
         self.assertEqual(sorted([item.pk for item in expected_qs]),
-                         sorted([item.pk for item in template_qs]))
+                         sorted([item.pk for item in allow_qs]))
 
 
     def test_invalid_editor_post_handling(self):

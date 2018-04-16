@@ -17,16 +17,18 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 
+from TWLight.applications.models import Application
+from TWLight.users.models import Editor
 from TWLight.users.groups import get_coordinators
 
 
 coordinators = get_coordinators()
 
 
-class CoordinatorsOrSelf(object):
+class CoordinatorOrSelf(object):
     """
     Restricts visibility to:
-    * Coordinators; or
+    * The designated Coordinator for partner related to the object; or
     * The Editor who owns (or is) the object in the view; or
     * Superusers.
 
@@ -35,31 +37,57 @@ class CoordinatorsOrSelf(object):
     is an instance of User.
     """
 
-    def test_func_coordinators_or_self(self, user):
+    def test_func_coordinator_or_self(self, user):
         obj_owner_test = False # Set default.
+
         try:
             obj = self.get_object()
             if obj:
                 if isinstance(obj, User):
                     obj_owner_test = (obj.pk == user.pk)
                 else:
-                    obj_owner_test = (self.get_object().user.pk == user.pk)
+                    obj_owner_test = (obj.user.pk == user.pk)
         except AttributeError:
             # Keep the default.
             pass
 
+        obj_coordinator_test = False # Set default.
+
+        # If the user is a coordinator run more tests
+        if user in coordinators.user_set.all():
+            try:
+                obj = self.get_object()
+                if obj:
+                        # Return true if the object is an editor and has
+                        # at least one application to a partner for whom
+                        # the user is a designated coordinator.
+                        if isinstance(obj, Editor):
+                            obj_coordinator_test = (Application.objects.filter(
+                                editor__pk=obj.pk,
+                                partner__coordinator__pk=user.pk
+                            ).exists())
+                        # Return true if the object is an application to a
+                        # partner for whom the user is a designated coordinator
+                        elif isinstance(obj, Application):
+                            obj_coordinator_test = (
+                                obj.partner.coordinator.pk == user.pk
+                            )
+            except AttributeError:
+                # Keep the default.
+                pass
+
         return (user.is_superuser or
-                user in coordinators.user_set.all() or
+                obj_coordinator_test or
                 obj_owner_test)
 
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_coordinators_or_self(request.user):
-            messages.add_message(request, messages.WARNING, 'You must be a '
-                    'coordinator or the owner to do that.')
+        if not self.test_func_coordinator_or_self(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be the '
+                    'designated coordinator or the owner to do that.')
             raise PermissionDenied
 
-        return super(CoordinatorsOrSelf, self).dispatch(
+        return super(CoordinatorOrSelf, self).dispatch(
             request, *args, **kwargs)
 
 

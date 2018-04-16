@@ -56,6 +56,8 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False):
     else:
         coordinators.user_set.remove(editor.user)
 
+    return editor
+
 
 class LanguageModelTests(TestCase):
 
@@ -252,9 +254,21 @@ class PartnerModelTests(TestCase):
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        # Test response.
-        response = self.client.get(url, follow=True)
-        self.assertContains(response, partner.company_name)
+        # reponse for view when user isn't the designated coordinator
+        denyResponse = self.client.get(url, follow=True)
+
+        # Designate the coordinator
+        partner.coordinator = editor.user
+        partner.save()
+
+        # reponse for view when user is the designated coordinator
+        allowResponse = self.client.get(url, follow=True)
+
+        # Applications should not be visible to just any coordinator
+        self.assertNotContains(denyResponse, partner.company_name)
+
+	# Applications should be visible to the designated coordinator
+	self.assertContains(allowResponse, partner.company_name)
 
 
     def test_rejected_app_page_includes_not_available(self):
@@ -265,9 +279,21 @@ class PartnerModelTests(TestCase):
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        # Test response.
-        response = self.client.get(url, follow=True)
-        self.assertContains(response, partner.company_name)
+        # reponse for view when user isn't the designated coordinator
+        denyResponse = self.client.get(url, follow=True)
+
+        # Designate the coordinator
+        partner.coordinator = editor.user
+        partner.save()
+
+        # reponse for view when user is the designated coordinator
+        allowResponse = self.client.get(url, follow=True)
+
+        # Applications should not be visible to just any coordinator
+        self.assertNotContains(denyResponse, partner.company_name)
+
+	# Applications should be visible to the designated coordinator
+	self.assertContains(allowResponse, partner.company_name)
 
 
     def test_approved_app_page_includes_not_available(self):
@@ -278,10 +304,21 @@ class PartnerModelTests(TestCase):
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        # Test response.
-        response = self.client.get(url, follow=True)
-        self.assertContains(response, partner.company_name)
+        # reponse for view when user isn't the designated coordinator
+        denyResponse = self.client.get(url, follow=True)
 
+        # Designate the coordinator
+        partner.coordinator = editor.user
+        partner.save()
+
+        # reponse for view when user is the designated coordinator
+        allowResponse = self.client.get(url, follow=True)
+
+        # Applications should not be visible to just any coordinator
+        self.assertNotContains(denyResponse, partner.company_name)
+
+	# Applications should be visible to the designated coordinator
+	self.assertContains(allowResponse, partner.company_name)
 
     def test_statuses_exist(self):
         """
