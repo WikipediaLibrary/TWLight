@@ -83,13 +83,6 @@ class DashboardView(TemplateView):
         context['total_editors'] = Editor.objects.count()
         context['total_partners'] = Partner.objects.count()
 
-        # Partnership data
-        # ----------------------------------------------------------------------
-
-        context['partner_time_data'] = get_data_count_by_month(
-                Partner.objects.all()
-            )
-
         # Application data
         # ----------------------------------------------------------------------
 
@@ -135,7 +128,8 @@ class DashboardView(TemplateView):
         # Application status pie chart -----------------------------------------
 
         context['app_distribution_data'] = get_application_status_data(
-                Application.objects.all()
+                Application.objects.exclude(
+                    status__in=(Application.SENT, Application.NOT_APPROVED))
             )
 
         return context
@@ -165,32 +159,6 @@ class _CSVDownloadView(View):
     def _write_data(self, response):
         raise NotImplementedError
 
-
-
-class CSVNumPartners(_CSVDownloadView):
-    def _write_data(self, response):
-        if 'pk' in self.kwargs:
-            pk = self.kwargs['pk']
-
-            try:
-                queryset = Partner.objects.get(pk=pk)
-            except Partner.DoesNotExist:
-                logger.exception('Tried to access data for partner #{pk}, who '
-                                 'does not exist'.format(pk=pk))
-                raise
-
-        else:
-            queryset =Partner.objects.all()
-
-        data = get_data_count_by_month(queryset, data_format=PYTHON)
-        writer = csv.writer(response)
-        # Translators: This is the heading of a data file, for a column containing date data.
-        writer.writerow([_('Date'), 
-                         # Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-                         _('Number of partners')])
-
-        for row in data:
-            writer.writerow(row)
 
 
 class CSVAppTimeHistogram(_CSVDownloadView):

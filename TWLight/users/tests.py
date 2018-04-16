@@ -16,6 +16,9 @@ from django.utils.translation import get_language
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 
+from TWLight.resources.factories import PartnerFactory
+from TWLight.resources.models import Partner
+
 from . import views
 from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
@@ -162,6 +165,26 @@ class ViewsTestCase(TestCase):
         request = factory.get(self.url1)
         request.user = self.user_coordinator
 
+        # Define a partner
+        partner = PartnerFactory()
+
+        # Editor applies to the partner
+        app = ApplicationFactory(
+            status=Application.PENDING, editor=self.editor1, partner=partner)
+        app.save()
+
+        # Editor details should not be visible to just any coordinator
+        try:
+            response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
+            self.fail("Editor details should not be visible to just any coordinator.")
+        except PermissionDenied:
+            pass
+
+        # Designate the coordinator
+        partner.coordinator = request.user
+        partner.save()
+
+        # Editor details should be visible to the designated coordinator
         response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
         self.assertEqual(response.status_code, 200)
 

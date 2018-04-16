@@ -14,7 +14,7 @@
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_partners }}</div>
               {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of available partners. {% endcomment %}
-              <div>{% trans 'Total partners (all time)' %}</div>
+              <div>{% trans 'Total partners' %}</div>
             </div>
           </div>
         </div>
@@ -38,15 +38,13 @@
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_editors }}</div>
               {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of editors (users) who registered. {% endcomment %}
-              <div>{% trans 'Number of editors (all time)' %}</div>
+              <div>{% trans 'Number of editors' %}</div>
             </div>
           </div>
         </div>
         <a href="#users-section">
           <div class="panel-footer">
             {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which moves the page down to metrics about users. {% endcomment %}
-            <span class="pull-left">{% trans 'Jump to user metrics' %}</span>
-            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
           </div>
         </a>
@@ -61,7 +59,7 @@
             </div>
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_apps }}</div>
-              <div>{% trans 'Total applications (all time)' %}</div>
+              <div>{% trans 'Total applications' %}</div>
             </div>
           </div>
         </div>
@@ -141,24 +139,6 @@
 
   {% endif %}
 
-  <!-- begin partner metrics -->
-  <div class="row">
-    <div class="col-lg-12">
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing the number of available partners over time.{% endcomment %}
-      <h2 class="page-header">{% trans "Partners" %}</h2>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of available partners over time.{% endcomment %}
-      <h3>{% trans "Number of partners over time" %} <a href="{% url 'csv:num_partners' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-      <div id="partner-time-graph" style="width:600px;height:300px"></div>
-    </div>
-  </div>
-  <!-- end partner metrics -->
-
-
   <!-- begin application metrics -->
   <div class="row">
     <div class="col-lg-12">
@@ -187,13 +167,7 @@
       </p>
       <div id="app-medians-graph" style="width:600px;height:300px"></div>
       {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
-      <h3>{% trans "Current application status distribution" %} <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-      <p>
-        {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is located above the graph showing the current distribution of applications.{% endcomment %}
-        {% blocktrans trimmed %}
-          This graph includes all applications opened ever on this site.
-        {% endblocktrans %}
-      </p>
+      <h3>{% trans "Open application status distribution" %} <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
       <div id="app-distribution-graph" style="width:600px;height:300px"></div>
 
     </div>
@@ -215,20 +189,6 @@
 
   <script type="text/javascript">
     $(function() {
-      // Partners over time
-      var partner_time_graph = $("#partner-time-graph");
-      var partner_time_data = {{ partner_time_data }};
-      var partner_time_plot = $.plot(partner_time_graph, [partner_time_data], {
-        xaxis: {
-          mode: "time",
-        },
-        yaxis: {
-          min: 0,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        colors: ['#5cb85c'],
-      });
 
       // Application time-to-decision (histogram)
       var app_time_histogram_graph = $("#app-time-histogram-graph");

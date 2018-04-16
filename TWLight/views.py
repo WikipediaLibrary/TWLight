@@ -72,7 +72,15 @@ class HomePageView(TemplateView):
             event = {}
             event['icon'] = 'fa-align-left'
             event['color'] = '' # grey (default when no color class is applied)
-            if app.rationale:
+            if app.parent:
+                # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
+                text = _(u'{username} applied for renewal of their ' \
+                       '<a href="{url}">{partner}</a> access').format(
+                            username=app.editor.wp_username,
+                            partner=app.partner.company_name,
+                            url=reverse_lazy('partners:detail',
+                                kwargs={'pk': app.partner.pk}))
+            elif app.rationale:
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
                 text = _(u'{username} applied for access to ' \
                        '<a href="{url}">{partner}</a>' \
@@ -120,5 +128,11 @@ class HomePageView(TemplateView):
         except TypeError:
             # If we don't have any site activity yet, we'll get an exception.
             context['activity'] = []
+
+        # Featured partners
+        # -----------------------------------------------------
+
+        context['featured_partners'] = Partner.objects.filter(
+            featured=True).order_by('company_name')
 
         return context

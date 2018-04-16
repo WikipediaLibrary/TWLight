@@ -16,7 +16,7 @@ from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 
-from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly, coordinators
+from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm
 from .models import Editor, UserProfile
@@ -66,7 +66,7 @@ class UserDetailView(SelfOnly, TemplateView):
 
 
 
-class EditorDetailView(CoordinatorsOrSelf, DetailView):
+class EditorDetailView(CoordinatorOrSelf, DetailView):
     """
     User profile data page for users who are Editors. Uses the Editor model,
     because:

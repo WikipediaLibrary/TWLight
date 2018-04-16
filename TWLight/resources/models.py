@@ -118,6 +118,10 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the account coordinator for this partner.
         help_text=_('The coordinator for this Partner, if any.'))
 
+    featured = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether a publisher will be featured on the website's front page.
+        help_text=_("Mark as true to feature this partner on the front page."))
+
     # Status metadata
     # --------------------------------------------------------------------------
     # AVAILABLE partners are displayed to users.
