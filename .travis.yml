@@ -20,16 +20,7 @@ before_script:
   - mysql -e "GRANT ALL PRIVILEGES on twlight.* to twlight@'%' IDENTIFIED BY 'twlight';"
   - mysql -e "CREATE DATABASE test_twlight;"
   - mysql -e "GRANT ALL PRIVILEGES on test_twlight.* to twlight@'%' IDENTIFIED BY 'twlight';"
-  - cat >TWLight/settings/local_vars.py <<EOL
-    MYSQL_PASSWORD='vagrant'
-    SECRET_KEY='vagrant'
-    TWLIGHT_OAUTH_PROVIDER_URL='https://meta.wikimedia.org/w/index.php'
-    TWLIGHT_OAUTH_CONSUMER_KEY='null'
-    TWLIGHT_OAUTH_CONSUMER_SECRET='null'
-    ALLOWED_HOSTS = ['twlight.travis-ci.localdomain']
-    REQUEST_BASE_URL = 'http://twlight.travis-ci.localdomain/'
-    DEBUG = True
-    EOL
+  - cp TWLight/settings/travis_vars.py TWLight/settings/local_vars.py
 
 # Create revisions, make migrations, migrate, test.
 script:
