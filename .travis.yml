@@ -1,0 +1,29 @@
+language: python
+
+python:
+  - 2.7
+
+services:
+  - mysql
+
+before_install:
+  - export DJANGO_SETTINGS_MODULE=TWLight.settings.local
+  - export PIP_USE_MIRRORS=true
+
+# Install the dependencies.
+install:
+  - pip install -r requirements/wmf.txt
+
+# Create databases.
+before_script:
+  - mysql -e "CREATE DATABASE twlight;"
+  - mysql -e "GRANT ALL PRIVILEGES on twlight.* to twlight@'%' IDENTIFIED BY 'twlight';"
+  - mysql -e "CREATE DATABASE test_twlight;"
+  - mysql -e "GRANT ALL PRIVILEGES on test_twlight.* to twlight@'%' IDENTIFIED BY 'twlight';"
+
+# Create revisions, make migrations, migrate, test.
+script:
+  - python manage.py createinitialrevisions
+  - python manage.py makemigrations
+  - python manage.py migrate
+  - python manage.py test --noinput
