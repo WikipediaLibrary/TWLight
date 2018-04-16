@@ -539,14 +539,14 @@ class ListApplicationsView(_BaseListApplicationView):
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST]
-                ).order_by('status', 'partner')
+                ).order_by('status', 'partner', 'date_created')
 
         else:
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
                     partner__coordinator__pk=self.request.user.pk
-                ).order_by('status', 'partner')
+                ).order_by('status', 'partner', 'date_created')
 
         return base_qs
 
