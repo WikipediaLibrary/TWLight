@@ -18,14 +18,12 @@ install:
 before_script:
   - mysql -e "CREATE DATABASE twlight;"
   - mysql -e "GRANT ALL PRIVILEGES on twlight.* to twlight@'%' IDENTIFIED BY 'twlight';"
-  - mysql -e "CREATE DATABASE test_twlight;"
   - mysql -e "GRANT ALL PRIVILEGES on test_twlight.* to twlight@'%' IDENTIFIED BY 'twlight';"
   - cp TWLight/settings/travis_vars.py TWLight/settings/local_vars.py
   - mkdir -p TWLight/collectedstatic
 
-# Create revisions, make migrations, migrate, collect static test.
+# Create revisions, make migrations, migrate, collect static, test.
 script:
-  - python manage.py createinitialrevisions
   - python manage.py makemigrations
   - python manage.py migrate
   - python manage.py collectstatic --noinput --clear
