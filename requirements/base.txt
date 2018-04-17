@@ -1,6 +1,6 @@
 bleach==2.0.0
 defusedxml==0.4.1
-Django==1.9
+Django==1.10
 django-autocomplete-light>=2.3.6,<3.0
 django-contrib-comments==1.7.3
 django-crispy-forms==1.6.1
