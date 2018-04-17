@@ -117,10 +117,13 @@ class Partner(models.Model):
     coordinator = models.ForeignKey(User, blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the account coordinator for this partner.
         help_text=_('The coordinator for this Partner, if any.'))
-
     featured = models.BooleanField(default=False,
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether a publisher will be featured on the website's front page.
         help_text=_("Mark as true to feature this partner on the front page."))
+    company_location = models.CharField(max_length=50, blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can enter the name of the partner.
+        help_text=_("Partner's primary location (e.g. "
+        "'United Kingdom')."))
 
     # Status metadata
     # --------------------------------------------------------------------------
