@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='application',
             name='account_email',
-            field=models.CharField(max_length=64, blank=True),
+            field=models.CharField(max_length=64, null=True, blank=True),
         ),
     ]
