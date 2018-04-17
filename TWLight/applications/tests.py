@@ -32,6 +32,7 @@ from .helpers import (USER_FORM_FIELDS,
                       COUNTRY_OF_RESIDENCE,
                       OCCUPATION,
                       AFFILIATION,
+                      ACCOUNT_EMAIL,
                       get_output_for_application)
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
@@ -205,6 +206,7 @@ class SynchronizeFieldsTest(TestCase):
         for field in USER_FORM_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS:
             setattr(partner, field, True)
         partner.terms_of_use = 'https://example.com/terms'
+        partner.registration_url = 'https://example.com/register'
         partner.save()
 
         stream = Stream()
@@ -218,6 +220,7 @@ class SynchronizeFieldsTest(TestCase):
             rationale='just because',
             comments='nope')
         setattr(app, AGREEMENT_WITH_TERMS_OF_USE, True)
+        setattr(app, ACCOUNT_EMAIL, 'alice@example.com')
         setattr(app, SPECIFIC_STREAM, stream)
         setattr(app, SPECIFIC_TITLE, 'Alice in Wonderland')
         app.save()
@@ -233,10 +236,11 @@ class SynchronizeFieldsTest(TestCase):
         self.assertEqual(output[SPECIFIC_TITLE]['data'], 'Alice in Wonderland')
         self.assertEqual(output['Email']['data'], 'alice@example.com')
         self.assertEqual(output[AGREEMENT_WITH_TERMS_OF_USE]['data'], True)
+        self.assertEqual(output[ACCOUNT_EMAIL]['data'], 'alice@example.com')
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(8, len(output.keys()))
+        self.assertEqual(9, len(output.keys()))
 
 
 
@@ -772,7 +776,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=False,
             occupation=False,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         view = self._get_isolated_view(views.SubmitApplicationView)
@@ -793,6 +798,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             id=p1.id), form.fields)
         self.assertNotIn('partner_{id}_agreement_with_terms_of_use'.format(
             id=p1.id), form.fields)
+        self.assertNotIn('partner_{id}_account_email'.format(
+            id=p1.id), form.fields)
         self.assertIn('partner_{id}_rationale'.format(
             id=p1.id), form.fields)
         self.assertIn('partner_{id}_comments'.format(
@@ -811,7 +818,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=False,
             occupation=False,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         # This has identical conditions to p1; a form encompassing both
@@ -824,7 +832,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=False,
             occupation=False,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         # Test just p1.
@@ -846,6 +855,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             id=p1.id), form.fields)
         self.assertNotIn('partner_{id}_agreement_with_terms_of_use'.format(
             id=p1.id), form.fields)
+        self.assertNotIn('partner_{id}_account_email'.format(
+            id=p1.id), form.fields)
         self.assertIn('partner_{id}_rationale'.format(
             id=p1.id), form.fields)
         self.assertIn('partner_{id}_comments'.format(
@@ -857,6 +868,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertNotIn('partner_{id}_specific_title'.format(
             id=p2.id), form.fields)
         self.assertNotIn('partner_{id}_agreement_with_terms_of_use'.format(
+            id=p2.id), form.fields)
+        self.assertNotIn('partner_{id}_account_email'.format(
             id=p2.id), form.fields)
         self.assertIn('partner_{id}_rationale'.format(
             id=p2.id), form.fields)
@@ -879,7 +892,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=False,
             occupation=False,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         # This has different conditions than p1; a form encompassing both
@@ -892,7 +906,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=False,
             occupation=True,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         view = self._get_isolated_view(views.SubmitApplicationView)
@@ -913,6 +928,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             id=p1.id), form.fields)
         self.assertNotIn('partner_{id}_agreement_with_terms_of_use'.format(
             id=p1.id), form.fields)
+        self.assertNotIn('partner_{id}_account_email'.format(
+            id=p1.id), form.fields)
         self.assertIn('partner_{id}_rationale'.format(
             id=p1.id), form.fields)
         self.assertIn('partner_{id}_comments'.format(
@@ -924,6 +941,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertIn('partner_{id}_specific_title'.format(
             id=p2.id), form.fields)
         self.assertNotIn('partner_{id}_agreement_with_terms_of_use'.format(
+            id=p2.id), form.fields)
+        self.assertNotIn('partner_{id}_account_email'.format(
             id=p2.id), form.fields)
         self.assertIn('partner_{id}_rationale'.format(
             id=p2.id), form.fields)
@@ -943,7 +962,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=False,
             occupation=True,
             affiliation=True,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         user = UserFactory(username='alice')
@@ -1025,7 +1045,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=False,
             occupation=True,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         user = UserFactory()
@@ -1081,7 +1102,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=False,
             occupation=False,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
         p2 = PartnerFactory(
             real_name=False,
@@ -1090,7 +1112,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=True,
             occupation=False,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         s1 = Stream()
@@ -1134,6 +1157,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertEqual(app1.specific_title, 'Open Access for n00bs')
         self.assertEqual(app1.specific_stream, None)
         self.assertEqual(app1.agreement_with_terms_of_use, False)
+        self.assertEqual(app1.account_email, None)
 
         self.assertEqual(app2.status, Application.PENDING)
         self.assertEqual(app2.rationale, 'Saving the world')
@@ -1141,6 +1165,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertEqual(app2.specific_title, '')
         self.assertEqual(app2.specific_stream, s1)
         self.assertEqual(app2.agreement_with_terms_of_use, False)
+        self.assertEqual(app2.account_email, None)
 
 
     def test_get_partners(self):
@@ -1177,6 +1202,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=True,
+            account_email=False
         )
         p2 = PartnerFactory(
             real_name=False,
@@ -1185,7 +1211,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=True,
             occupation=False,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         view = self._get_isolated_view(views.SubmitApplicationView)
@@ -1209,6 +1236,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             occupation=True,
             affiliation=True,
             agreement_with_terms_of_use=True,
+            account_email=False
         )
         p2 = PartnerFactory(
             real_name=True,
@@ -1217,7 +1245,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             specific_stream=True,
             occupation=True,
             affiliation=False,
-            agreement_with_terms_of_use=False
+            agreement_with_terms_of_use=False,
+            account_email=False
         )
 
         view = self._get_isolated_view(views.SubmitApplicationView)
@@ -2002,6 +2031,7 @@ class ApplicationModelTest(TestCase):
                 specific_stream=stream,
                 comments='No comment',
                 agreement_with_terms_of_use=True,
+                account_email='bob@example.com',
                 editor=editor,
                 partner=partner,
                 status=Application.APPROVED,
@@ -2021,6 +2051,7 @@ class ApplicationModelTest(TestCase):
         self.assertEqual(app2.specific_stream, stream)
         self.assertEqual(app2.comments, 'No comment')
         self.assertEqual(app2.agreement_with_terms_of_use, True)
+        self.assertEqual(app2.account_email, 'bob@example.com')
         self.assertEqual(app2.editor, editor)
         self.assertEqual(app2.partner, partner)
 

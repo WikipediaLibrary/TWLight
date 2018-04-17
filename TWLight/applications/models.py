@@ -85,6 +85,7 @@ class Application(models.Model):
                             blank=True, null=True)
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
+    account_email = models.CharField(max_length=64, blank=True, null=True)
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
@@ -128,7 +129,7 @@ class Application(models.Model):
         else:
             data = model_to_dict(self,
                     fields=['rationale', 'specific_title', 'comments',
-                            'agreement_with_terms_of_use'])
+                            'agreement_with_terms_of_use', 'account_email'])
 
             # Status and parent are explicitly different on the child than
             # on the parent application. For editor, partner, and stream, we
@@ -138,7 +139,8 @@ class Application(models.Model):
                          'parent': self,
                          'editor': self.editor,
                          'partner': self.partner,
-                         'specific_stream': self.specific_stream})
+                         'specific_stream': self.specific_stream,
+                         'account_email': self.account_email})
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in
