@@ -233,10 +233,10 @@ class ViewsTestCase(TestCase):
             set([app1, app2, app3, app4]))
         content = response.render().content
 
-        self.assertIn(app1.__str__(), content)
-        self.assertIn(app2.__str__(), content)
-        self.assertIn(app3.__str__(), content)
-        self.assertIn(app4.__str__(), content)
+        self.assertIn(app1.partner.company_name, content)
+        self.assertIn(app2.partner.company_name, content)
+        self.assertIn(app3.partner.company_name, content)
+        self.assertIn(app4.partner.company_name, content)
 
         # We can't use assertTemplateUsed with RequestFactory (only with
         # Client), and testing that the rendered content is equal to an
