@@ -26,6 +26,7 @@ before_script:
 
 # Create revisions, make migrations, migrate, collect static, test.
 script:
+  - python manage.py createinitialrevisions || true
   - python manage.py makemigrations
   - python manage.py migrate
   - python manage.py collectstatic --noinput --clear
