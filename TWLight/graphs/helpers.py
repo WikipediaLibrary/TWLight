@@ -3,6 +3,7 @@ import json
 import logging
 from numbers import Number
 import time
+import datetime
 
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -58,7 +59,11 @@ def get_data_count_by_month(queryset, data_format=JSON):
     data_series = []
 
     if queryset:
-        earliest_date = queryset.earliest('date_created').date_created
+        # Some imported applications had no date and were given
+        # creation dates of Jan 1, 1970. This screws up the graphs.
+        earliest_date = queryset.exclude(
+            date_created=datetime.date(1970,1,1)).earliest(
+                'date_created').date_created
 
         current_date = timezone.now().date()
 
@@ -88,7 +93,7 @@ def get_application_status_data(queryset, data_format=JSON):
     """
     status_data = []
 
-    for status in Application.STATUS_CHOICES:
+    for status in Application.STATUS_CHOICES[0:3]:
         status_count = queryset.filter(status=status[0]).count()
         # We have to force unicode here because we used ugettext_lazy, not
         # ugettext, to internationalize the status labels in
@@ -193,75 +198,6 @@ def get_median_decision_time(queryset, data_format=JSON):
         return data_series
 
 
-# User stats ------------------------------------------------------------
-def get_wiki_distribution_pie_data(data_format=JSON):
-    wiki_data = []
-
-    #for wiki in WIKIS:
-    #    editor_count = Editor.objects.filter(home_wiki=wiki[0]).count()
-    #    if editor_count:
-    #        wiki_data.append({'label': wiki[1], 'data': editor_count})
-
-    # The table will make the most sense if it puts the most popular wikis
-    # on top.
-    output = sorted(wiki_data, key=lambda x: x['data'], reverse=True)
-
-    if data_format == JSON:
-        return json.dumps(output)
-    else:
-        return output
-
-
-def get_wiki_distribution_bar_data(data_format=JSON):
-    def _add_home_wiki_bar_chart_point(data_series, datestamp):
-        if data_format == JSON:
-            timestamp = get_js_timestamp(datestamp)
-        else:
-            timestamp = datestamp
-
-        #for wiki in WIKIS:
-        #    num_editors = Editor.objects.filter(
-        #        home_wiki=wiki[0], date_created__lte=datestamp).count()
-        #    data_series[wiki[1]].insert(0, [timestamp, num_editors])
-
-        return data_series
-
-    #data_series = {wiki[1]: [] for wiki in WIKIS}
-    data_series = {}
-
-    earliest_date = Editor.objects.earliest('date_created').date_created
-    month = timezone.now().date()
-
-    while month >= earliest_date:
-        # We're going to go backwards from today rather than forward
-        # from the beginning of time because we want to include today, but
-        # the bar graph will look nicest if all the intervals are even -
-        # if we started at the earliest_date and added a month each time,
-        # today's data would be appended at some probably-not-month-long
-        # interval.
-        data_series = _add_home_wiki_bar_chart_point(data_series, month)
-
-        month -= relativedelta.relativedelta(months=1)
-
-    # Here we reformat our data_series (which has been a dict, for ease of
-    # manipulation in Python) into the list of {label, data} dicts expected
-    # by flot.js.
-    # While we're at it, we remove any home wikis with zero editors, as
-    # they'd just clutter up the graph without adding information.
-    # Because the number of editors per wiki strictly increases over time
-    # (as accounts are added), we can do this by simply looking at the
-    # editor count in the last data point for any given wiki and seeing if
-    # it is nonzero.
-    output = [{'label': wiki, 'data': data_series[wiki]}
-            for wiki in data_series
-            if data_series[wiki][-1][1]]
-
-    if data_format == JSON:
-        return json.dumps(output)
-    else:
-        return output
-
-
 def get_users_by_partner_by_month(partner, data_format=JSON):
     """
     Given a partner, return a data series for number of unique users who have
@@ -272,7 +208,10 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
     partner_apps = Application.objects.filter(partner=partner)
 
     if partner_apps:
-        earliest_date = partner_apps.earliest('date_created').date_created
+        # Again removing undated (Jan 1 1970) applications
+        earliest_date = partner_apps.exclude(
+            date_created=datetime.date(1970,1,1)).earliest(
+                'date_created').date_created
 
         current_date = timezone.now().date()
 

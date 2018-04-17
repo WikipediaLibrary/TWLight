@@ -33,8 +33,8 @@ urlpatterns = [
         name='list_rejected'
     ),
     url(r'^list/expiring/$',
-        login_required(views.ListExpiringApplicationsView.as_view()),
-        name='list_expiring'
+        login_required(views.ListRenewalApplicationsView.as_view()),
+        name='list_renewal'
     ),
     url(r'^list/sent/$',
         login_required(views.ListSentApplicationsView.as_view()),

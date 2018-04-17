@@ -29,7 +29,7 @@
           {% comment %} Translators: This describes the status of a group of applications. {% endcomment %}
           {% trans "Sent" %}
         </a>
-        <a href="{{ expiring_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ expiring_class }}">
+        <a href="{{ renewal_url }}{% if filters %}?page=1{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" type="button" class="btn btn-default {{ renewal_class }}">
           {% comment %} Translators: This describes the status of a group of applications. {% endcomment %}
           {% trans "Up for renewal" %}
         </a>

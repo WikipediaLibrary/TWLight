@@ -108,8 +108,8 @@
                 <label for="app_{{ app.pk }}">
                   <h4 class="media-heading">{{ app }}</h4>
                   <ul class="list-unstyled pull-left">
-                    {% for key, value in output.items %}
-                      <li><strong>{{ key }}</strong> &mdash; {{ value }}</li>
+                    {% for key, send_data in output.items %}
+                      <li><strong>{{ send_data.label }}</strong> &mdash; {{ send_data.data }}</li>
                     {% endfor %}
                   </ul>                
                 </label>

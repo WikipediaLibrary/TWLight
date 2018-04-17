@@ -47,6 +47,7 @@ SPECIFIC_STREAM = 'specific_stream'
 SPECIFIC_TITLE = 'specific_title'
 COMMENTS = 'comments'
 AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
+ACCOUNT_EMAIL = 'account_email'
 
 
 # ~~~~ Basic field names ~~~~ #
@@ -59,7 +60,7 @@ PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS]
 # These fields are displayed only when a specific partner requires that
 # information.
 PARTNER_FORM_OPTIONAL_FIELDS = [SPECIFIC_STREAM, SPECIFIC_TITLE,
-                                AGREEMENT_WITH_TERMS_OF_USE]
+                                AGREEMENT_WITH_TERMS_OF_USE, ACCOUNT_EMAIL]
 
 
 # ~~~~ Field information ~~~~ #
@@ -75,7 +76,8 @@ FIELD_TYPES = {
     SPECIFIC_STREAM: forms.ModelChoiceField(queryset=Stream.objects.all()),
     SPECIFIC_TITLE: forms.CharField(max_length=128),
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
-    AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(required=False),
+    AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(),
+    ACCOUNT_EMAIL: forms.CharField(max_length=64),
 }
 
 FIELD_LABELS = {
@@ -99,6 +101,27 @@ FIELD_LABELS = {
     COMMENTS: _('Anything else you want to say'),
     # Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
+    # Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
+    ACCOUNT_EMAIL: _("The email for your account on the partner's website"),
+}
+
+SEND_DATA_FIELD_LABELS = {
+    # Translators: When sending application data to partners, this is the text labelling a user's real name
+    REAL_NAME: _('Real name'),
+    # Translators: When sending application data to partners, this is the text labelling a user's country of residence
+    COUNTRY_OF_RESIDENCE: _('Country of residence'),
+    # Translators: When sending application data to partners, this is the text labelling a user's occupation
+    OCCUPATION: _('Occupation'),
+    # Translators: When sending application data to partners, this is the text labelling a user's affiliation
+    AFFILIATION: _('Affiliation'),
+    # Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
+    SPECIFIC_STREAM: _('Stream requested'),
+    # Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
+    SPECIFIC_TITLE: _('Title requested'),
+    # Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
+    AGREEMENT_WITH_TERMS_OF_USE: _('Agreed with terms of use'),
+    # Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
+    ACCOUNT_EMAIL: _('Account email'),
 }
 
 
@@ -112,15 +135,17 @@ def get_output_for_application(app):
     """
     output = {}
     # Translators: This labels a user's email address on a form for account coordinators
-    output[_('Email')] = app.editor.user.email
+    output[_('Email')] = {'label': 'Email', 'data': app.editor.user.email}
 
     for field in PARTNER_FORM_OPTIONAL_FIELDS:
         if getattr(app.partner, field): # Will be True if required by Partner.
-            output[field] = getattr(app, field)
+            field_label = SEND_DATA_FIELD_LABELS[field]
+            output[field] = {'label': field_label, 'data': getattr(app, field)}
 
     for field in USER_FORM_FIELDS:
         if getattr(app.partner, field): # Will be True if required by Partner.
-            output[field] = getattr(app.editor, field)
+            field_label = SEND_DATA_FIELD_LABELS[field]
+            output[field] = {'label': field_label, 'data': getattr(app.editor, field)}
 
     return output
 

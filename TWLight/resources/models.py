@@ -118,6 +118,10 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the account coordinator for this partner.
         help_text=_('The coordinator for this Partner, if any.'))
 
+    featured = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether a publisher will be featured on the website's front page.
+        help_text=_("Mark as true to feature this partner on the front page."))
+
     # Status metadata
     # --------------------------------------------------------------------------
     # AVAILABLE partners are displayed to users.
@@ -151,8 +155,7 @@ class Partner(models.Model):
     renewals_available = models.BooleanField(default=False,
         # Translators: In the administrator interface, this text is help text for a field where staff specify whether users can request their account be renewed/extended for this partner.
         help_text=_('Can access grants to this partner be renewed? If so, '
-            'users will be able to request renewals when their access is close '
-            'to expiring.'))
+            'users will be able to request renewals at any time.'))
 
     # Optional resource metadata
     # --------------------------------------------------------------------------
@@ -161,12 +164,19 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
         help_text=_("Link to terms of use. Required if users must agree to "
             "terms of use to get access; optional otherwise."))
+
     description = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
         help_text=_("Optional description of this partner's resources."))
+
     send_instructions = models.TextField(blank=True, null=True,
         help_text=_("Optional instructions for sending application data to "
             "this partner."))
+
+    bundle = models.NullBooleanField(
+        blank=True, null=True, default=False,
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can access this as part of the Bundle.
+        help_text=_("Is this partner a part of the Bundle?"))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
@@ -176,14 +186,6 @@ class Partner(models.Model):
         "from this Partner. If False, users can apply for multiple Streams at "
         "a time. This field must be filled in when Partners have multiple "
         "Streams, but may be left blank otherwise."))
-
-    access_grant_term = models.DurationField(
-        blank=True, null=True,
-        default=timedelta(days=365),
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of an account for this partner.
-        help_text=_("The standard length of an access grant from this Partner. "
-            "Entered as <days hours:minutes:seconds>. Defaults to 365 days.")
-        )
 
     languages = models.ManyToManyField(Language, blank=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
@@ -200,6 +202,10 @@ class Partner(models.Model):
     # Some fields are only required by some resources. This is where we track
     # whether *this* resource requires those optional fields.
 
+    registration_url = models.URLField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
+        help_text=_("Link to registration page. Required if users must sign up "
+            "on the partner's website in advance; optional otherwise."))
     real_name = models.BooleanField(default=False,
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their real name when applying
         help_text=_('Mark as true if this partner requires applicant names.'))
@@ -227,6 +233,10 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
         help_text=_("Mark as true if this partner requires applicants to agree "
                     "with the partner's terms of use."))
+    account_email = models.BooleanField(default=False,
+        # Translators: TODO
+        help_text=_("Mark as true if this partner requires applicants to have "
+                    "already signed up at the partner website."))
 
 
     def __unicode__(self):
@@ -241,6 +251,9 @@ class Partner(models.Model):
             if self.mutually_exclusive is None:
                 raise ValidationError('Since this resource has multiple '
                     'Streams, you must specify a value for mutually_exclusive.')
+        if self.account_email and not self.registration_url:
+            raise ValidationError('When pre-registration is required, '
+                'a link to the registration page must be provided.')
 
 
     def get_absolute_url(self):
@@ -261,7 +274,7 @@ class Partner(models.Model):
 
     @property
     def get_languages(self):
-        return ", ".join([p.__unicode__() for p in self.languages.all()])
+        return self.languages.all()
 
 
     @property

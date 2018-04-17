@@ -27,7 +27,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
 from django.views.generic.list import ListView
 
-from TWLight.view_mixins import (CoordinatorsOrSelf,
+from TWLight.view_mixins import (CoordinatorOrSelf,
                                  CoordinatorsOnly,
                                  EditorsOnly,
                                  ToURequired,
@@ -103,7 +103,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         if len(partner_ids):
             return HttpResponseRedirect(reverse('applications:apply'))
         else:
-            messages.add_message(self.request, messages.INFO,
+            messages.add_message(self.request, messages.WARNING,
                 #Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
                 _('Please select at least one partner.'))
             return HttpResponseRedirect(reverse('applications:request'))
@@ -473,7 +473,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         # Set up button group menu.
         context['approved_url'] = reverse_lazy('applications:list_approved')
         context['rejected_url'] = reverse_lazy('applications:list_rejected')
-        context['expiring_url'] = reverse_lazy('applications:list_expiring')
+        context['renewal_url'] = reverse_lazy('applications:list_renewal')
         context['pending_url'] = reverse_lazy('applications:list')
         context['sent_url'] = reverse_lazy('applications:list_sent')
 
@@ -535,10 +535,18 @@ class ListApplicationsView(_BaseListApplicationView):
         should be listed elsewhere: kept around for historical reasons, but kept
         off the main page to preserve utility (and limit load time).
         """
-        base_qs = Application.objects.filter(
-                status__in=[Application.PENDING, Application.QUESTION],
-                partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
-             ).order_by('status', 'partner')
+        if self.request.user.is_superuser:
+            base_qs = Application.objects.filter(
+                    status__in=[Application.PENDING, Application.QUESTION],
+                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST]
+                ).order_by('status', 'partner', 'date_created')
+
+        else:
+            base_qs = Application.objects.filter(
+                    status__in=[Application.PENDING, Application.QUESTION],
+                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                    partner__coordinator__pk=self.request.user.pk
+                ).order_by('status', 'partner', 'date_created')
 
         return base_qs
 
@@ -563,10 +571,15 @@ class ListApplicationsView(_BaseListApplicationView):
 class ListApprovedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
-        return Application.objects.filter(
-                status=Application.APPROVED
-             ).order_by('date_closed', 'partner')
-
+        if self.request.user.is_superuser:
+            return Application.objects.filter(
+                    status=Application.APPROVED,
+                ).order_by('date_closed', 'partner')
+        else:
+            return Application.objects.filter(
+                    status=Application.APPROVED,
+                    partner__coordinator__pk=self.request.user.pk
+                ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListApprovedApplicationsView, self).get_context_data(**kwargs)
@@ -582,10 +595,15 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
 class ListRejectedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
-        return Application.objects.filter(
-                status=Application.NOT_APPROVED
-             ).order_by('date_closed', 'partner')
-
+        if self.request.user.is_superuser:
+            return Application.objects.filter(
+                    status=Application.NOT_APPROVED
+                ).order_by('date_closed', 'partner')
+        else:
+            return Application.objects.filter(
+                    status=Application.NOT_APPROVED,
+                    partner__coordinator__pk=self.request.user.pk
+                ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListRejectedApplicationsView, self).get_context_data(**kwargs)
@@ -598,34 +616,32 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
 
 
-class ListExpiringApplicationsView(_BaseListApplicationView):
+class ListRenewalApplicationsView(_BaseListApplicationView):
     """
     Lists access grants that users have requested, but not received, renewals
     for.
     """
 
     def get_queryset(self):
-        return Application.objects.filter(
-                 status__in=[Application.PENDING, Application.QUESTION],
-                 parent__isnull=False
-               ).order_by(
-                 'earliest_expiry_date'
-               )
-
+        if self.request.user.is_superuser:
+            return Application.objects.filter(
+                     status__in=[Application.PENDING, Application.QUESTION],
+                     parent__isnull=False
+                ).order_by('-date_created')
+        else:
+            return Application.objects.filter(
+                     status__in=[Application.PENDING, Application.QUESTION],
+                     partner__coordinator__pk=self.request.user.pk,
+                     parent__isnull=False
+                ).order_by('-date_created')
 
     def get_context_data(self, **kwargs):
-        context = super(ListExpiringApplicationsView, self).get_context_data(**kwargs)
+        context = super(ListRenewalApplicationsView, self).get_context_data(**kwargs)
 
         # Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
         context['title'] = _('Access grants up for renewal')
 
-        # Overrides default. We want different styling for this case to help
-        # coordinators prioritize expiring-soon vs. expired-already access
-        # grants.
-        context['include_template'] = \
-            'applications/application_list_expiring_include.html'
-
-        context['expiring_class'] = 'active'
+        context['renewal_class'] = 'active'
 
         return context
 
@@ -634,10 +650,15 @@ class ListExpiringApplicationsView(_BaseListApplicationView):
 class ListSentApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
-        return Application.objects.filter(
-                status=Application.SENT
-             ).order_by('date_closed', 'partner')
-
+        if self.request.user.is_superuser:
+            return Application.objects.filter(
+                    status=Application.SENT
+                ).order_by('date_closed', 'partner')
+        else:
+            return Application.objects.filter(
+                    status=Application.SENT,
+                    partner__coordinator__pk=self.request.user.pk
+                ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListSentApplicationsView, self).get_context_data(**kwargs)
@@ -650,7 +671,7 @@ class ListSentApplicationsView(_BaseListApplicationView):
 
 
 
-class EvaluateApplicationView(CoordinatorsOrSelf, ToURequired, UpdateView):
+class EvaluateApplicationView(CoordinatorOrSelf, ToURequired, UpdateView):
     """
     Allows Coordinators to:
     * view single applications
@@ -694,7 +715,6 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
     def post(self, request, *args, **kwargs):
         try:
-            assert 'applications' in request.POST
             assert 'batch_status' in request.POST
 
             status = request.POST['batch_status']
@@ -707,6 +727,14 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             # ValueError will be raised if the status cannot be cast to int.
             logger.exception('Did not find valid data for batch editing')
             return HttpResponseBadRequest()
+
+        try:
+            assert 'applications' in request.POST
+        except AssertionError:
+            messages.add_message(self.request, messages.WARNING,
+                #Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
+                _('Please select at least one application.'))
+            return HttpResponseRedirect(reverse('applications:list'))
 
         # IMPORTANT! It would be tempting to just do QuerySet.update() here,
         # but that does NOT send the pre_save signal, which is doing some
@@ -735,9 +763,15 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
     template_name = 'applications/send.html'
 
     def get_queryset(self):
-        return Partner.objects.filter(
-            applications__status=Application.APPROVED).distinct()
-
+        if self.request.user.is_superuser:
+            return Partner.objects.filter(
+                    applications__status=Application.APPROVED
+                ).distinct()
+        else:
+            return Partner.objects.filter(
+                    applications__status=Application.APPROVED,
+                    self__request__user__pk=Partner__coordinator__editor__user__pk
+                ).distinct()
 
 
 class SendReadyApplicationsView(CoordinatorsOnly, DetailView):

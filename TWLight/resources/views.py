@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import DetailView, View
+from django_filters.views import FilterView
 
 from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
@@ -11,11 +12,10 @@ from TWLight.graphs.helpers import (get_median,
                                     get_users_by_partner_by_month)
 from TWLight.view_mixins import CoordinatorsOnly
 
-from .models import Partner
+from .models import Partner, Stream
 
 
-
-class PartnersListView(ListView):
+class PartnersFilterView(FilterView):
     model = Partner
 
     def get_queryset(self):
@@ -74,10 +74,14 @@ class PartnersDetailView(DetailView):
 
         context['unique_users_approved_or_sent'] = context['unique_users_approved'] + context['unique_users_sent']
 
+        application_end_states = [Application.APPROVED, Application.NOT_APPROVED, Application.SENT]
         partner_app_time = Application.objects.filter(
-            partner=partner).values_list('days_open', flat=True)
+            partner=partner, status__in=application_end_states).exclude(imported=True).values_list('days_open', flat=True)
 
-        context['median_days'] = get_median(list(partner_app_time))
+        if len(partner_app_time) > 0:
+            context['median_days'] = get_median(list(partner_app_time))
+        else:
+            context['median_days'] = None
 
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.filter(partner=partner)
@@ -95,6 +99,44 @@ class PartnersDetailView(DetailView):
             )
 
         context['users_time_data'] = get_users_by_partner_by_month(partner)
+
+        # Find out if current user has applications and change the Apply
+        # button behaviour accordingly
+        if self.request.user.is_authenticated() and not partner.bundle:
+            sent_apps = Application.objects.filter(
+                                        editor=self.request.user.editor,
+                                        status=Application.SENT,
+                                        partner=partner
+                                     ).order_by('date_closed')
+            open_apps = Application.objects.filter(
+                                        editor=self.request.user.editor,
+                                        status__in=(Application.PENDING, Application.QUESTION, Application.APPROVED),
+                                        partner=partner
+                                     )
+            context['user_sent_apps'] = False
+            context['user_open_apps'] = False
+            if sent_apps.count() > 0:
+                context['latest_sent_app_pk'] = sent_apps[0].pk
+                context['user_sent_apps'] = True
+            elif open_apps.count() > 0:
+                context['user_open_apps'] = True
+                if open_apps.count() > 1:
+                    context['multiple_open_apps'] = True
+                else:
+                    context['multiple_open_apps'] = False
+                    context['open_app_pk'] = open_apps[0].pk
+
+        partner_streams = Stream.objects.filter(partner=partner)
+        if partner_streams.count() > 0:
+            context['stream_unique_accepted'] = {}
+            for stream in partner_streams:
+                stream_unique_accepted = User.objects.filter(
+                                      editor__applications__partner=partner,
+                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                      editor__applications__specific_stream=stream).distinct().count()
+                context['stream_unique_accepted'][stream.name] = stream_unique_accepted
+        else:
+            context['stream_unique_accepted'] = None
 
         return context
 

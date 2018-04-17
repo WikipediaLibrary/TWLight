@@ -23,7 +23,10 @@
         <a href="mailto:{{ app.user.email|urlencode|safe }}">{{ app.user.email|safe }}</a>
       <br />
       {% endif %}
-      {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
+      {% if app.imported %}
+        {% comment %} Translators: On the page listing applications, this shows next to an application which was imported to the website. {% endcomment %}
+        {% trans 'Imported application' %}
+      {% elif app.get_version_count > 1 %} {# first version is original submission, not later review #}
         {% if app.get_latest_reviewer %}
           {% comment %} Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ reviewer }} or {{ review_date }}. {% endcomment %}
           {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
@@ -48,23 +51,12 @@
     </div>
     {% ifequal app.editor.user.pk user.pk %}
       <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0">
-        {% if app.is_expiring_soon %}
-          <strong>{% trans "Your access grant is expiring soon" %}</strong> <br />
+          <strong>{% trans "Has your account expired?" %}</strong> <br />
           {% if app.is_renewable %}
             <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
           {% else %}
-            <em>{% trans "Renewals are not available." %}</em>
+            <em>{% trans "Unfortunately renewals are not available right now or you have already requested a renewal." %}</em>
           {% endif %}
-        {% else %}
-          {% if app.is_probably_expired %}
-              <strong>{% trans "Your access grant has expired" %}</strong> <br />
-            {% if app.is_renewable %}
-              <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
-            {% else %}
-              <em>{% trans "Renewals are not available." %}</em>
-            {% endif %}
-          {% endif %}
-        {% endif %}
       </div>      
     {% endifequal %}
     {% if not forloop.last %}

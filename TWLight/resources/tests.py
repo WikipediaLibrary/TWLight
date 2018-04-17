@@ -16,7 +16,8 @@ from TWLight.users.groups import get_coordinators
 
 from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner
-from .views import PartnersDetailView, PartnersListView, PartnersToggleWaitlistView
+from .views import PartnersDetailView, PartnersFilterView, PartnersToggleWaitlistView
+from .filters import PartnerFilter
 
 def EditorCraftRoom(self, Terms=False, Coordinator=False):
     """
@@ -54,6 +55,8 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False):
         coordinators.user_set.add(editor.user)
     else:
         coordinators.user_set.remove(editor.user)
+
+    return editor
 
 
 class LanguageModelTests(TestCase):
@@ -132,12 +135,13 @@ class PartnerModelTests(TestCase):
         self.assertFalse(partner.languages.all())
 
         partner.languages.add(self.lang_en)
-        self.assertEqual(partner.get_languages, u'English')
+        self.assertEqual(list(partner.get_languages), [Language.objects.get(language='en')])
 
-        # Order isn't important.
         partner.languages.add(self.lang_fr)
-        self.assertIn(partner.get_languages,
-            [u'English, French', u'French, English'])
+        self.assertIn(
+            Language.objects.get(language='fr'),
+            list(partner.get_languages)
+        )
 
 
     def test_visibility_of_not_available_1(self):
@@ -161,13 +165,13 @@ class PartnerModelTests(TestCase):
         listview.
         """
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
-        list_url = reverse('partners:list')
+        filter_url = reverse('partners:filter')
 
         editor = EditorFactory()
 
-        request = RequestFactory().get(list_url)
+        request = RequestFactory().get(filter_url)
         request.user = editor.user
-        response = PartnersListView.as_view()(request)
+        response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
 
         self.assertNotContains(response, partner.get_absolute_url())
 
@@ -199,15 +203,15 @@ class PartnerModelTests(TestCase):
         Staff users *should* see NOT_AVAILABLE partner pages in the list view.
         """
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
-        list_url = reverse('partners:list')
+        filter_url = reverse('partners:filter')
 
         editor = EditorFactory()
         editor.user.is_staff = True
         editor.user.save()
 
-        request = RequestFactory().get(list_url)
+        request = RequestFactory().get(filter_url)
         request.user = editor.user
-        response = PartnersListView.as_view()(request)
+        response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
 
         self.assertContains(response, partner.get_absolute_url())
 
@@ -229,12 +233,10 @@ class PartnerModelTests(TestCase):
     def test_renew_app_page_excludes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
 
-        # This application expires soon.
         tomorrow = date.today() + timedelta(days=1)
         _ = ApplicationFactory(partner=partner,
-            status=Application.SENT,
-            earliest_expiry_date=tomorrow)
-        url = reverse('applications:list_expiring')
+            status=Application.SENT)
+        url = reverse('applications:list_renewal')
 
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -252,9 +254,21 @@ class PartnerModelTests(TestCase):
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        # Test response.
-        response = self.client.get(url, follow=True)
-        self.assertContains(response, partner.company_name)
+        # reponse for view when user isn't the designated coordinator
+        denyResponse = self.client.get(url, follow=True)
+
+        # Designate the coordinator
+        partner.coordinator = editor.user
+        partner.save()
+
+        # reponse for view when user is the designated coordinator
+        allowResponse = self.client.get(url, follow=True)
+
+        # Applications should not be visible to just any coordinator
+        self.assertNotContains(denyResponse, partner.company_name)
+
+	# Applications should be visible to the designated coordinator
+	self.assertContains(allowResponse, partner.company_name)
 
 
     def test_rejected_app_page_includes_not_available(self):
@@ -265,9 +279,21 @@ class PartnerModelTests(TestCase):
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        # Test response.
-        response = self.client.get(url, follow=True)
-        self.assertContains(response, partner.company_name)
+        # reponse for view when user isn't the designated coordinator
+        denyResponse = self.client.get(url, follow=True)
+
+        # Designate the coordinator
+        partner.coordinator = editor.user
+        partner.save()
+
+        # reponse for view when user is the designated coordinator
+        allowResponse = self.client.get(url, follow=True)
+
+        # Applications should not be visible to just any coordinator
+        self.assertNotContains(denyResponse, partner.company_name)
+
+	# Applications should be visible to the designated coordinator
+	self.assertContains(allowResponse, partner.company_name)
 
 
     def test_approved_app_page_includes_not_available(self):
@@ -278,10 +304,21 @@ class PartnerModelTests(TestCase):
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
-        # Test response.
-        response = self.client.get(url, follow=True)
-        self.assertContains(response, partner.company_name)
+        # reponse for view when user isn't the designated coordinator
+        denyResponse = self.client.get(url, follow=True)
 
+        # Designate the coordinator
+        partner.coordinator = editor.user
+        partner.save()
+
+        # reponse for view when user is the designated coordinator
+        allowResponse = self.client.get(url, follow=True)
+
+        # Applications should not be visible to just any coordinator
+        self.assertNotContains(denyResponse, partner.company_name)
+
+	# Applications should be visible to the designated coordinator
+	self.assertContains(allowResponse, partner.company_name)
 
     def test_statuses_exist(self):
         """

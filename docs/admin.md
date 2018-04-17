@@ -125,8 +125,6 @@ If they want to reactivate their account, you can set the `Active` checkbox back
 ## Partners
 Create partners via `/admin` (Partners > Add Partner), following the instructions in the form help text.
 
-The access grant term defaults to 365 days; you can set other options using the format `days hours:minutes:seconds`.
-
 You can add one or more languages to the Language field. Use the green + to add new languages that don't appear in the list of options.
 
 ### Collections

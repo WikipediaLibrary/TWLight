@@ -19,8 +19,6 @@ from .helpers import (get_application_status_data,
                       get_data_count_by_month,
                       get_users_by_partner_by_month,
                       get_js_timestamp,
-                      get_wiki_distribution_pie_data,
-                      get_wiki_distribution_bar_data,
                       get_time_open_histogram,
                       get_median_decision_time,
                       PYTHON)
@@ -85,25 +83,6 @@ class DashboardView(TemplateView):
         context['total_editors'] = Editor.objects.count()
         context['total_partners'] = Partner.objects.count()
 
-        # Partnership data
-        # ----------------------------------------------------------------------
-
-        context['partner_time_data'] = get_data_count_by_month(
-                Partner.objects.all()
-            )
-
-        # Editor data
-        # ----------------------------------------------------------------------
-
-        # Although normally we'd want JSON for graphs, the pie chart can consume
-        # a normal dict, and the for loop to create the table requires a dict,
-        # not JSON.
-        context['home_wiki_pie_data'] = get_wiki_distribution_pie_data(
-            data_format=PYTHON)
-
-        context['home_wiki_bar_data'] = get_wiki_distribution_bar_data()
-
-
         # Application data
         # ----------------------------------------------------------------------
 
@@ -149,7 +128,8 @@ class DashboardView(TemplateView):
         # Application status pie chart -----------------------------------------
 
         context['app_distribution_data'] = get_application_status_data(
-                Application.objects.all()
+                Application.objects.exclude(
+                    status__in=(Application.SENT, Application.NOT_APPROVED))
             )
 
         return context
@@ -178,66 +158,6 @@ class _CSVDownloadView(View):
 
     def _write_data(self, response):
         raise NotImplementedError
-
-
-
-class CSVNumPartners(_CSVDownloadView):
-    def _write_data(self, response):
-        if 'pk' in self.kwargs:
-            pk = self.kwargs['pk']
-
-            try:
-                queryset = Partner.objects.get(pk=pk)
-            except Partner.DoesNotExist:
-                logger.exception('Tried to access data for partner #{pk}, who '
-                                 'does not exist'.format(pk=pk))
-                raise
-
-        else:
-            queryset =Partner.objects.all()
-
-        data = get_data_count_by_month(queryset, data_format=PYTHON)
-        writer = csv.writer(response)
-        # Translators: This is the heading of a data file, for a column containing date data.
-        writer.writerow([_('Date'), 
-                         # Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-                         _('Number of partners')])
-
-        for row in data:
-            writer.writerow(row)
-
-
-
-class CSVHomeWikiPie(_CSVDownloadView):
-    def _write_data(self, response):
-        data = get_wiki_distribution_pie_data(data_format=PYTHON)
-
-        writer = csv.DictWriter(response, fieldnames=['label', 'data'])
-        # Translators: This is the heading of a data file. Home Wiki refers to the Wikimedia site that a user is most active on.
-        writer.writerow({'label': _('Home wiki'), 
-                         'data': _('Number of users')})
-
-        for row in data:
-            writer.writerow(row)
-
-
-
-class CSVHomeWikiOverTime(_CSVDownloadView):
-    def _write_data(self, response):
-        data = get_wiki_distribution_bar_data(data_format=PYTHON)
-
-        writer = csv.writer(response)
-
-        writer.writerow(
-            # Translators: This is the heading of a data file. 'Wiki' refers to the Wikimedia site that a user is most active on.
-            [_('Wiki'),
-             _('Date'),
-             # Translators: This is the heading of a data file. This labels the number of users who registered from a particular Wikimedia site.
-             _('Number of users')])
-
-        for elem in data:
-            for point in elem['data']:
-                writer.writerow([elem['label'], point[0], point[1]])
 
 
 
@@ -285,8 +205,22 @@ class CSVAppMedians(_CSVDownloadView):
 
 class CSVAppDistribution(_CSVDownloadView):
     def _write_data(self, response):
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+            try:
+                partner = Partner.objects.get(pk=pk)
+            except Partner.DoesNotExist:
+                logger.exception('Tried to access data for partner #{pk}, who '
+                                 'does not exist'.format(pk=pk))
+                raise
+
+            csv_queryset = Application.objects.filter(partner=partner)
+
+        else:
+            csv_queryset = Application.objects.all()
+
         data = get_application_status_data(
-            Application.objects.all(),
+            csv_queryset,
             data_format=PYTHON
         )
 

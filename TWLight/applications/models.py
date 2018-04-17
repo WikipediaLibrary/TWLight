@@ -71,13 +71,6 @@ class Application(models.Model):
         help_text=_('Please do not override this field! Its value is set '
                   'automatically.'))
 
-    # Will be set on save() based on date_closed and partner access grant
-    # lengths. In practice, because access grants are triggered manually
-    # after review on TWLight, the real expiry date is likely to be later.
-    earliest_expiry_date = models.DateField(blank=True, null=True,
-        help_text=_('Please do not override this field! Its value is set '
-                  'automatically.'))
-
     sent_by = models.ForeignKey(User, blank=True, null=True,
         # Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
         help_text=_('The user who sent this application to the partner'))
@@ -92,6 +85,7 @@ class Application(models.Model):
                             blank=True, null=True)
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
+    account_email = models.CharField(max_length=64, blank=True, null=True)
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
@@ -135,7 +129,7 @@ class Application(models.Model):
         else:
             data = model_to_dict(self,
                     fields=['rationale', 'specific_title', 'comments',
-                            'agreement_with_terms_of_use'])
+                            'agreement_with_terms_of_use', 'account_email'])
 
             # Status and parent are explicitly different on the child than
             # on the parent application. For editor, partner, and stream, we
@@ -145,7 +139,8 @@ class Application(models.Model):
                          'parent': self,
                          'editor': self.editor,
                          'partner': self.partner,
-                         'specific_stream': self.specific_stream})
+                         'specific_stream': self.specific_stream,
+                         'account_email': self.account_email})
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in
@@ -239,47 +234,9 @@ class Application(models.Model):
             return (self.date_closed - self.date_created).days
 
 
-    def is_probably_expired(self):
-        if self.earliest_expiry_date:
-            if self.earliest_expiry_date <= date.today():
-                return True
-
-        return False
-
-
-    def is_expiring_soon(self):
-        """
-        This lets us display a "renew" option to users for applications that are
-        expiring soon.
-        """
-        if self.earliest_expiry_date:
-            if (self.earliest_expiry_date > date.today() and
-                self.earliest_expiry_date <= date.today() + timedelta(days=30)):
-
-                return True
-
-        return False
-
-
-    def get_num_days_since_expiration(self):
-        if self.earliest_expiry_date:
-            if self.earliest_expiry_date <= date.today():
-                return (date.today() - self.earliest_expiry_date).days
-
-        return None
-
-
-    def get_num_days_until_expiration(self):
-        if self.earliest_expiry_date:
-            if self.earliest_expiry_date > date.today():
-                return (self.earliest_expiry_date - date.today()).days
-
-        return None
-
-
     @property
     def user(self):
-        # Needed by CoordinatorsOrSelf mixin, e.g. on the application evaluation
+        # Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation
         # view.
         return self.editor.user
 
@@ -334,7 +291,3 @@ def update_app_status_on_save(sender, instance, **kwargs):
 
             instance.date_closed = localtime(now).date()
             instance.days_open = 0
-
-    if instance.date_closed and not instance.earliest_expiry_date:
-        instance.earliest_expiry_date = \
-            instance.date_closed + instance.partner.access_grant_term

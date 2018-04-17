@@ -222,10 +222,8 @@ class OAuthBackend(object):
             try:
                 user.editor.save()
             except AssertionError:
-                # Site functionality mostly works if people don't
-                # declare a homewiki. There are some broken bits, like the SUL
-                # link, but users can set their homewiki, or admins can do it
-                # in the admin interface.
+                # This was used to handle users not setting a home wiki
+                # but that information is no longer collected
                 pass
         else:
             logger.info('User has been updated.')
@@ -398,7 +396,9 @@ class OAuthCallbackView(View):
                     _('Either your Wikipedia Library Card Platform account has '
                       'been deactivated or your Wikipedia account no longer '
                       'meets the eligibility criteria in the terms of use, so '
-                      'you cannot be logged in.'))
+                      'you cannot be logged in. If you think you should be '
+                      'able to log in, please email '
+                      'wikipedialibrary@wikimedia.org.'))
 
             return_url = reverse_lazy('terms')
 

@@ -5,6 +5,7 @@ django-autocomplete-light>=2.0,<3.0
 django-contrib-comments==1.7.3
 django-crispy-forms==1.6.1
 django-durationfield==0.5.2
+django-filter
 django-modeltranslation==0.12
 django-request==1.5.1
 django-reversion==2.0.13

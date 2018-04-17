@@ -1,6 +1,3 @@
-# media files uploaded by users
-media/
-
 # bin files now created by puppet module
 collectedstatic/
 staticfiles/

@@ -16,7 +16,7 @@ from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 
-from TWLight.view_mixins import CoordinatorsOrSelf, SelfOnly, coordinators
+from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm
 from .models import Editor, UserProfile
@@ -66,7 +66,7 @@ class UserDetailView(SelfOnly, TemplateView):
 
 
 
-class EditorDetailView(CoordinatorsOrSelf, DetailView):
+class EditorDetailView(CoordinatorOrSelf, DetailView):
     """
     User profile data page for users who are Editors. Uses the Editor model,
     because:
@@ -82,7 +82,7 @@ class EditorDetailView(CoordinatorsOrSelf, DetailView):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         editor = self.get_object()
         context['editor'] = editor # allow for more semantic templates
-        context['object_list'] = editor.applications.all().order_by('status', 'earliest_expiry_date')
+        context['object_list'] = editor.applications.all().order_by('status', '-date_closed')
         context['form'] = EditorUpdateForm(instance=editor)
         context['language_form'] = SetLanguageForm(user=self.request.user)
 
