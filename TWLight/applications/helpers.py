@@ -120,6 +120,8 @@ SEND_DATA_FIELD_LABELS = {
     SPECIFIC_TITLE: _('Title requested'),
     # Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
     AGREEMENT_WITH_TERMS_OF_USE: _('Agreed with terms of use'),
+    # Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
+    ACCOUNT_EMAIL: _('Account email'),
 }
 
 
