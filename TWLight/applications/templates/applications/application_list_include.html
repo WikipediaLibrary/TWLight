@@ -49,16 +49,6 @@
       {% endif %}
       Filter by partner: <a href="?Partner={{ app.partner.pk|urlencode|safe }}">{{ app.partner }}</a>
     </div>
-    {% ifequal app.editor.user.pk user.pk %}
-      <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0">
-          <strong>{% trans "Has your account expired?" %}</strong> <br />
-          {% if app.is_renewable %}
-            <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
-          {% else %}
-            <em>{% trans "Unfortunately renewals are not available right now or you have already requested a renewal." %}</em>
-          {% endif %}
-      </div>      
-    {% endifequal %}
     {% if not forloop.last %}
       <div class="col-sm-10 col-sm-offset-2 col-xs-12">
         <hr />
