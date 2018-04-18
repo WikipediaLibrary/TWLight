@@ -770,7 +770,7 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
         else:
             return Partner.objects.filter(
                     applications__status=Application.APPROVED,
-                    self__request__user__pk=Partner__coordinator__editor__user__pk
+                    coordinator__pk=self.request.user.pk
                 ).distinct()
 
 
