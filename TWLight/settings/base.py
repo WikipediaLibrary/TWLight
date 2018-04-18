@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = (
     'reversion',
     'autocomplete_light',
     'django_comments',
+    'django_filters',
     'modeltranslation',
     'taggit',
     # DO NOT CONFUSE THIS with requests, the Python URL library! This is
