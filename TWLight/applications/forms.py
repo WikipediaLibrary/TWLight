@@ -14,7 +14,7 @@ dynamically; we cannot hardcode it here. What we have here instead is a base
 form that takes a dict of required fields, and constructs the form accordingly.
 (See the docstring of BaseApplicationForm for the expected dict format.)
 """
-from autocomplete_light import shortcuts as autocomplete_light
+from dal import autocomplete
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput, Div
 import logging
@@ -247,7 +247,7 @@ class BaseApplicationForm(forms.Form):
 
 
 
-class ApplicationAutocomplete(autocomplete_light.ModelForm):
+class ApplicationAutocomplete(forms.ModelForm):
     class Meta:
         model = Application
         fields = ['editor', 'partner']
@@ -285,5 +285,3 @@ class ApplicationAutocomplete(autocomplete_light.ModelForm):
             self.choices = []
 
         return super(ApplicationAutocomplete, self).choices_for_request()
-
-autocomplete_light.register(ApplicationAutocomplete)

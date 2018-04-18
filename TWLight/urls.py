@@ -45,7 +45,6 @@ urlpatterns = [
 
     # Third-party --------------------------------------------------------------
     url(r'^comments/', include('django_comments.urls')),
-    url(r'^autocomplete/', include('autocomplete_light.urls')),
 
     # TWLight apps -------------------------------------------------------------
     # This makes our custom set language form  available.

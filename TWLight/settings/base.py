@@ -46,7 +46,8 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'crispy_forms',
     'reversion',
-    'autocomplete_light',
+    'dal',
+    'dal_select2',
     'django_comments',
     'django_filters',
     'modeltranslation',
@@ -65,7 +66,7 @@ TWLIGHT_APPS = (
     'TWLight.graphs',
 )
 
-# autocomplete_light and modeltranslation must go before django.contrib.admin.
+# dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 
 
