@@ -126,7 +126,7 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormVi
 
     # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         """
         We will dynamically construct a form which harvests exactly the
         information needed for editors to request access to their desired set of
@@ -147,6 +147,8 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormVi
         The goal is to reduce the user's data entry burden to the minimum
         amount necessary for applications to be reviewed.
         """
+        if form_class is None:
+            form_class = self.form_class
 
         kwargs = self.get_form_kwargs()
 
@@ -696,7 +698,9 @@ class EvaluateApplicationView(CoordinatorOrSelf, ToURequired, UpdateView):
         return context
 
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.form_class
         form = super(EvaluateApplicationView, self).get_form(form_class)
 
         form.helper = FormHelper()

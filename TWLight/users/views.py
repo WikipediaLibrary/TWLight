@@ -187,10 +187,12 @@ class PIIUpdateView(SelfOnly, UpdateView):
         return self.request.user.editor
 
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         """
         Define get_form so that we can apply crispy styling.
         """
+        if form_class is None:
+            form_class = self.form_class
         form = super(PIIUpdateView, self).get_form(form_class)
         form.helper = FormHelper()
         form.helper.add_input(Submit(
@@ -291,11 +293,13 @@ class TermsView(UpdateView):
             return None
 
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         """
         For authenticated users, returns an instance of the form to be used in
         this view. For anonymous users, returns None.
         """
+        if form_class is None:
+            form_class = self.form_class
         kwargs = self.get_form_kwargs()
 
         if 'instance' not in kwargs:
