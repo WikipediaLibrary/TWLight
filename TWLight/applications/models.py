@@ -11,7 +11,6 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.forms.models import model_to_dict
 from django.utils.timezone import localtime, now
-import django.utils.timezone
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
@@ -52,7 +51,7 @@ class Application(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
     # Moved from auto_now_add=True so that we can set the date for import.
     # Defaults to today, set as non-editable, and not required in forms.
-    date_created = models.DateField(default=django.utils.timezone.now, editable=False)
+    date_created = models.DateField(default=now, editable=False)
 
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
@@ -86,6 +85,7 @@ class Application(models.Model):
                             blank=True, null=True)
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
+    account_email = models.CharField(max_length=64, blank=True, null=True)
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
@@ -129,7 +129,7 @@ class Application(models.Model):
         else:
             data = model_to_dict(self,
                     fields=['rationale', 'specific_title', 'comments',
-                            'agreement_with_terms_of_use'])
+                            'agreement_with_terms_of_use', 'account_email'])
 
             # Status and parent are explicitly different on the child than
             # on the parent application. For editor, partner, and stream, we
@@ -139,7 +139,8 @@ class Application(models.Model):
                          'parent': self,
                          'editor': self.editor,
                          'partner': self.partner,
-                         'specific_stream': self.specific_stream})
+                         'specific_stream': self.specific_stream,
+                         'account_email': self.account_email})
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in
