@@ -51,7 +51,7 @@ class Application(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
     # Moved from auto_now_add=True so that we can set the date for import.
     # Defaults to today, set as non-editable, and not required in forms.
-    date_created = models.DateField(default=now, editable=False)
+    date_created = models.DateField(default=now(), editable=False)
 
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
@@ -278,7 +278,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
                 int(instance.status) in Application.FINAL_STATUS_LIST,
                 not bool(instance.date_closed)]):
 
-            instance.date_closed = localtime(now).date()
+            instance.date_closed = localtime(now()).date()
             instance.days_open = \
                 (instance.date_closed - instance.date_created).days
 
@@ -289,5 +289,5 @@ def update_app_status_on_save(sender, instance, **kwargs):
         if (instance.status in Application.FINAL_STATUS_LIST
             and not instance.date_closed):
 
-            instance.date_closed = localtime(now).date()
+            instance.date_closed = localtime(now()).date()
             instance.days_open = 0
