@@ -498,7 +498,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
             # request.POST['editor'] will be the pk of an Editor instance, if
             # it exists.
             editor = Editor.objects.get(pk=request.POST['editor'])
-        except KeyError:
+        except (KeyError, ValueError):
             # The user didn't filter by editor, and that's OK.
             editor = None
         except Editor.DoesNotExist:
@@ -510,7 +510,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         try:
             partner = Partner.objects.get(pk=request.POST['partner'])
-        except KeyError:
+        except (KeyError, ValueError):
             # The user didn't filter by partner, and that's OK.
             partner = None
         except Partner.DoesNotExist:
