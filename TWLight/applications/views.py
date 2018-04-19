@@ -9,6 +9,7 @@ import urllib2
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import logging
+from dal import autocomplete
 from reversion import revisions as reversion
 from reversion.models import Version
 from urlparse import urlparse
@@ -34,6 +35,7 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  EmailRequired,
                                  SelfOnly)
 from TWLight.resources.models import Partner
+from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
 
 from .helpers import (USER_FORM_FIELDS,
@@ -46,8 +48,34 @@ from .models import Application
 
 logger = logging.getLogger(__name__)
 
+coordinators = get_coordinators()
+
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 
+
+class EditorAutocompleteView(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Make sure that we aren't leaking info via our form choices.
+        if self.request.user.is_superuser:
+            return Editor.objects.all().order_by('wp_username')
+        elif coordinators in self.request.user.groups.all():
+            return Editor.objects.filter(
+                     applications__partner__coordinator__pk=self.request.user.pk
+                ).order_by('wp_username')
+        else:
+            return Editor.objects.none()
+
+class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Make sure that we aren't leaking info via our form choices.
+        if self.request.user.is_superuser:
+            return Partner.objects.all().order_by('company_name')
+        elif coordinators in self.request.user.groups.all():
+            return Partner.objects.filter(
+                    coordinator__pk=self.request.user.pk
+                ).order_by('company_name')
+        else:
+            return Partner.objects.none()
 
 class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
     template_name = 'applications/request_for_application.html'

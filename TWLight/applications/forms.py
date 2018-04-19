@@ -249,9 +249,22 @@ class BaseApplicationForm(forms.Form):
 
 
 class ApplicationAutocomplete(forms.ModelForm):
+    #editor = forms.ModelChoiceField(
+    #    queryset=Editor.objects.all(),
+    #    widget=autocomplete.ModelSelect2(url='applications:editor_autocomplete')
+    #)
+    #partner = forms.ModelChoiceField(
+    #    queryset=Partner.objects.all(),
+    #    widget=autocomplete.ModelSelect2(url='applications:partner_autocomplete')
+    #)
+
     class Meta:
         model = Application
         fields = ['editor', 'partner']
+        widgets = {
+            'editor': autocomplete.ModelSelect2(url='applications:editor_autocomplete'),
+            'partner': autocomplete.ModelSelect2(url='applications:partner_autocomplete')
+        }
 
     def __init__(self, user=None, *args, **kwargs):
         super(ApplicationAutocomplete, self).__init__(*args, **kwargs)
