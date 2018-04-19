@@ -308,7 +308,8 @@ class CSVPageViews(_CSVDownloadView):
             _('Number of (non-unique) visitors')])
 
         for elem in path_list:
-            writer.writerow([elem['path'], elem['the_count']])
+            row = [elem['path'].encode('utf-8'), elem['the_count']]
+            writer.writerow(row)
 
 
 
@@ -341,4 +342,5 @@ class CSVPageViewsByPath(_CSVDownloadView):
             # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
             _('Number of (non-unique) visitors')])
 
-        writer.writerow([path, path_count])
+        row = [path.encode('utf-8'), path_count]
+        writer.writerow(row)
