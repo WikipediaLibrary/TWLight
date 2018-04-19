@@ -12,7 +12,7 @@ django-reversion==2.0.13
 django-taggit==0.22.2
 djmail==1.0.0
 docutils==0.14
-factory_boy==2.9.2
+factory_boy>=2.10.0,<3.0
 futures==3.1.1
 mock==2.0.0
 mwoauth==0.2.8
