@@ -25,6 +25,7 @@ from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
+from TWLight.users.models import Editor
 
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
@@ -252,8 +253,25 @@ class ApplicationAutocomplete(forms.ModelForm):
         model = Application
         fields = ['editor', 'partner']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user=None, *args, **kwargs):
         super(ApplicationAutocomplete, self).__init__(*args, **kwargs)
+
+        # Make sure that we aren't leaking info via our form choices.
+        if user.is_superuser:
+            self.fields['editor'].queryset = Editor.objects.all(
+                ).order_by('wp_username')
+
+            self.fields['partner'].queryset = Partner.objects.all(
+                ).order_by('company_name')
+
+        elif coordinators in user.groups.all():
+            self.fields['editor'].queryset = Editor.objects.filter(
+                     applications__partner__coordinator__pk=user.pk
+                ).order_by('wp_username')
+
+            self.fields['partner'].queryset = Partner.objects.filter(
+                    coordinator__pk=user.pk
+                ).order_by('company_name')
 
         # Prettify.
         self.helper = FormHelper()
@@ -274,14 +292,3 @@ class ApplicationAutocomplete(forms.ModelForm):
         # placeholders.
         self.fields['editor'].label = _('Username')
         self.fields['partner'].label = _('Partner name')
-
-
-    def choices_for_request(self):
-        # Make sure we're not leaking info via the autocomplete view; the view
-        # that uses autocompletes is CoordinatorsOnly, so the autocomplete
-        # should be too.
-        if not (self.request.user.is_superuser or
-                coordinators in self.request.user.groups.all()):
-            self.choices = []
-
-        return super(ApplicationAutocomplete, self).choices_for_request()

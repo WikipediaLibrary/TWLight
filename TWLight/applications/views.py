@@ -483,7 +483,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         context['include_template'] = \
             'applications/application_list_include.html'
 
-        context['autocomplete_form'] = ApplicationAutocomplete()
+        context['autocomplete_form'] = ApplicationAutocomplete(user=self.request.user)
 
         return context
 
