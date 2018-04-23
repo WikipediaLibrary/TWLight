@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
 
-DJANGO_APPS = (
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',
@@ -41,9 +41,9 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',         # required by django.contrib.comments
-)
+]
 
-THIRD_PARTY_APPS = (
+THIRD_PARTY_APPS = [
     'crispy_forms',
     'reversion',
     'dal',
@@ -55,16 +55,16 @@ THIRD_PARTY_APPS = (
     # DO NOT CONFUSE THIS with requests, the Python URL library! This is
     # django-request, the user analytics package.
     'request',
-)
+]
 
-TWLIGHT_APPS = (
+TWLIGHT_APPS = [
     'TWLight.i18n',
     'TWLight.users',
     'TWLight.resources',
     'TWLight.applications',
     'TWLight.emails',
     'TWLight.graphs',
-)
+]
 
 # dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
@@ -73,7 +73,7 @@ INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     # LocaleMiddleware must go after Session (and Cache, if used), but before
     # Common.
@@ -86,7 +86,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-)
+]
 
 
 # DEBUG
@@ -150,19 +150,19 @@ LANGUAGE_CODE = 'en-us' # Sets site default language.
 # In the language choice dropdown, languages will appear -in the order listed
 # here-, regardless of how they ought to be alphabetized in the target
 # language.
-LANGUAGES = (
+LANGUAGES = [
   #Transaltor: Text used for setting language to English
   ('en', _('English')),
   #Transaltor: Text used for setting language to Finnish
   ('fi', _('Finnish')),
   #Transaltor: Text used for setting language to French
   ('fr', _('French')),
-)
+]
 
-LOCALE_PATHS = (
+LOCALE_PATHS = [
     # makemessages looks for locale/ in the top level, not the project level.
     os.path.join(os.path.dirname(BASE_DIR), 'locale'),
-)
+]
 
 TIME_ZONE = 'UTC'
 
@@ -269,10 +269,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 LOGIN_URL = reverse_lazy('oauth_login')
 LOGIN_REDIRECT_URL = reverse_lazy('users:home')
 
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     'TWLight.users.authorization.OAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
-)
+]
 
 TWLIGHT_OAUTH_PROVIDER_URL = 'https://meta.wikimedia.org/w/index.php'
 
@@ -307,13 +307,13 @@ EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
 
 # This is a dummy backend that will write to stdout. Safe, yet useless.
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-INSTALLED_APPS += ('djmail',)
+INSTALLED_APPS += ['djmail',]
 
 
 # DJANGO_REQUEST CONFIGURATION
 # ------------------------------------------------------------------------------
 
-MIDDLEWARE_CLASSES += ('request.middleware.RequestMiddleware',)
+MIDDLEWARE_CLASSES += ['request.middleware.RequestMiddleware',]
 
 # The following are set for privacy purposes. Note that, if some amount of
 # geographic tracking is desired, there is a REQUEST_ANONYMOUS_IP setting which
