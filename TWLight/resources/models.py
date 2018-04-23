@@ -3,6 +3,7 @@ import copy
 from datetime import timedelta
 
 from taggit.managers import TaggableManager
+from taggit.models import TagBase, GenericTaggedItemBase
 
 from django.conf.global_settings import LANGUAGES
 from django.contrib.auth.models import User
@@ -16,6 +17,25 @@ from django.utils.translation  import ugettext_lazy as _
 RESOURCE_LANGUAGES = copy.copy(LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
+
+class NoIndexTag(TagBase):
+    name = models.CharField(verbose_name=_('Name'), unique=True, max_length=100, db_index=False)
+    slug = models.SlugField(verbose_name=_('Slug'), unique=True, max_length=100, db_index=False)
+
+    class Meta:
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
+
+
+class NoIndexTagged(GenericTaggedItemBase):
+    # NoIndexTagged can also extend TaggedItemBase or a combination of
+    # both TaggedItemBase and GenericTaggedItemBase. GenericTaggedItemBase
+    # allows using the same tag for different kinds of objects.
+
+    # Here is where you provide your custom Tag class.
+    tag = models.ForeignKey(NoIndexTag, blank=True,
+                            related_name="%(app_label)s_%(class)s_items")
+
 
 def validate_language_code(code):
     """
@@ -165,11 +185,11 @@ class Partner(models.Model):
         help_text=_("Link to terms of use. Required if users must agree to "
             "terms of use to get access; optional otherwise."))
 
-    description = models.TextField(blank=True, null=True,
+    description = models.TextField(blank=True, null=True, db_index=False,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
         help_text=_("Optional description of this partner's resources."))
 
-    send_instructions = models.TextField(blank=True, null=True,
+    send_instructions = models.TextField(blank=True, null=True, db_index=False,
         help_text=_("Optional instructions for sending application data to "
             "this partner."))
 
@@ -193,7 +213,7 @@ class Partner(models.Model):
             "content.")
         )
 
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(through=NoIndexTagged)
 
     # Non-universal form fields
     # --------------------------------------------------------------------------
