@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import admin
+from modeltranslation.admin import TabbedDjangoJqueryTranslationAdmin
 from TWLight.users.groups import get_coordinators
 
 from .models import Partner, PartnerLogo, Stream, Contact, Language
@@ -16,7 +17,7 @@ class PartnerLogoInline(admin.TabularInline):
     model = PartnerLogo
 
 
-class PartnerAdmin(admin.ModelAdmin):
+class PartnerAdmin(TabbedDjangoJqueryTranslationAdmin):
     class CustomModelChoiceField(forms.ModelChoiceField):
         """
         This lets us relabel the users in the dropdown with their recognizable

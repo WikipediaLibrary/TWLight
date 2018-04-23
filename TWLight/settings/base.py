@@ -144,21 +144,6 @@ SITE_ID = 1
 
 LANGUAGE_CODE = 'en-us' # Sets site default language.
 
-# First tuple element should be a standard language code; see
-# https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes .
-# Second is the human-readable form.
-# In the language choice dropdown, languages will appear -in the order listed
-# here-, regardless of how they ought to be alphabetized in the target
-# language.
-LANGUAGES = [
-  #Transaltor: Text used for setting language to English
-  ('en', _('English')),
-  #Transaltor: Text used for setting language to Finnish
-  ('fi', _('Finnish')),
-  #Transaltor: Text used for setting language to French
-  ('fr', _('French')),
-]
-
 LOCALE_PATHS = [
     # makemessages looks for locale/ in the top level, not the project level.
     os.path.join(os.path.dirname(BASE_DIR), 'locale'),
