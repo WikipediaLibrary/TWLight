@@ -115,7 +115,7 @@ DATABASES = {
         'PORT': '3306',
         # This is critical for handling Unicode data due to stupid properties
         # of MySQL; see https://stackoverflow.com/questions/2108824/mysql-incorrect-string-value-error-when-save-unicode-string-in-django .
-        'OPTIONS': {'charset': 'utf8mb4', 'init_command': "SET sql_mode='STRICT_ALL_TABLES'"},
+        'OPTIONS': {'charset': 'utf8mb4', 'init_command': "SET sql_mode='STRICT_ALL_TABLES'; SET storage_engine='INNODB';"},
     }
 }
 
