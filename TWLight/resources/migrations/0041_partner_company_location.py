@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+import django_countries.fields
 
 
 class Migration(migrations.Migration):
@@ -14,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='partner',
             name='company_location',
-            field=models.CharField(help_text="Partner's primary location (e.g. 'United Kingdom'.", max_length=50, null=True, blank=True),
+            field=django_countries.fields.CountryField(help_text="Partner's primary location.", max_length=2, null=True),
         ),
     ]
