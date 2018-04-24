@@ -8,7 +8,7 @@ import django_countries.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('resources', '0040_partner_featured'),
+        ('resources', '0041_auto_20180417_1055'),
     ]
 
     operations = [
