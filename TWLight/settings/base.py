@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = (
     # DO NOT CONFUSE THIS with requests, the Python URL library! This is
     # django-request, the user analytics package.
     'request',
+    'django_countries',
 )
 
 TWLIGHT_APPS = (
