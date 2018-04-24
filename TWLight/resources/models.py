@@ -122,9 +122,8 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether a publisher will be featured on the website's front page.
         help_text=_("Mark as true to feature this partner on the front page."))
     company_location = CountryField(null=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can enter the name of the partner.
-        help_text=_("Partner's primary location (e.g. "
-        "'United Kingdom')."))
+        # Translators: In the administrator interface, this text is help text for a field where staff can enter the partner organisation's country.
+        help_text=_("Partner's primary location."))
 
     # Status metadata
     # --------------------------------------------------------------------------
