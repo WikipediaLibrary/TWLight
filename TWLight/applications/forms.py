@@ -33,7 +33,8 @@ from .helpers import (USER_FORM_FIELDS,
                       FIELD_TYPES,
                       FIELD_LABELS,
                       SPECIFIC_STREAM,
-                      AGREEMENT_WITH_TERMS_OF_USE)
+                      AGREEMENT_WITH_TERMS_OF_USE,
+                      ACCOUNT_EMAIL)
 from .models import Application
 
 
@@ -232,6 +233,14 @@ class BaseApplicationForm(forms.Form):
                     specific_stream = forms.ModelChoiceField(queryset=Stream.objects.filter(partner_id=partner_id))
                     self.fields[field_name] = specific_stream
                     self.fields[field_name].label = FIELD_LABELS[datum]
+                    
+                if datum == ACCOUNT_EMAIL:
+                    # If partner requires pre-registration, make sure users
+                    # get a link where they can sign up.
+                    help_text = ('You must register at <a href="{url}">{url}</a> '
+                                 'before applying.').format(
+                                    url=partner_object.registration_url)
+                    self.fields[field_name].help_text = help_text
 
                 partner_layout.append(field_name)
 
