@@ -57,25 +57,39 @@ class EditorAutocompleteView(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Make sure that we aren't leaking info via our form choices.
         if self.request.user.is_superuser:
-            return Editor.objects.all().order_by('wp_username')
+            editor_qs = Editor.objects.all().order_by('wp_username')
+            # Query by wikimedia username
+            if self.q:
+                editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by('wp_username')
         elif coordinators in self.request.user.groups.all():
-            return Editor.objects.filter(
+            editor_qs = Editor.objects.filter(
                      applications__partner__coordinator__pk=self.request.user.pk
                 ).order_by('wp_username')
+            # Query by wikimedia username
+            if self.q:
+                editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by('wp_username')
         else:
-            return Editor.objects.none()
+            editor_qs = Editor.objects.none()
+        return editor_qs
 
 class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Make sure that we aren't leaking info via our form choices.
         if self.request.user.is_superuser:
-            return Partner.objects.all().order_by('company_name')
+            partner_qs = Partner.objects.all().order_by('company_name')
+            # Query by partner name
+            if self.q:
+                partner_qs = partner_qs.filter(company_name__istartswith=self.q).order_by('company_name')
         elif coordinators in self.request.user.groups.all():
-            return Partner.objects.filter(
+            partner_qs =  Partner.objects.filter(
                     coordinator__pk=self.request.user.pk
                 ).order_by('company_name')
+            # Query by partner name
+            if self.q:
+                partner_qs = partner_qs.filter(company_name__istartswith=self.q).order_by('company_name')
         else:
-            return Partner.objects.none()
+            partner_qs = Partner.objects.none()
+        return partner_qs
 
 class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
     template_name = 'applications/request_for_application.html'
