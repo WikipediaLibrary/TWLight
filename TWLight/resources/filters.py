@@ -1,16 +1,19 @@
 import django_filters
-from django.db import connection
 
-from taggit.managers import TaggableManager
 from .models import Language,Partner
 
+# The combination of taggit and filters caused a bootstrapping problem.
+# This code can run before the taggit migrations have run, meaning the tables
+# don't yet exist;, so it needs to be a function.
+def get_partner_tags():
+    try:
+        return Partner.tags.all()
+    except:
+        pass
+
 class PartnerFilter(django_filters.FilterSet):
-    # The combination of taggit and filters caused a bootstrapping problem.
-    # This code depends on the django_content_type table which doesn't exist at
-    # migration time for new builds, so it's wrapped in a check for the table.
-    if 'django_content_type' in connection.introspection.table_names():
-        tags = django_filters.ModelChoiceFilter(queryset=Partner.tags.all())
-        languages = django_filters.ModelChoiceFilter(queryset=Language.objects.all())
-        class Meta:
-            model = Partner
-            fields = ['languages', 'tags']
+    tags = django_filters.ModelChoiceFilter(queryset=get_partner_tags())
+    languages = django_filters.ModelChoiceFilter(queryset=Language.objects.all())
+    class Meta:
+        model = Partner
+        fields = ['languages', 'tags']
