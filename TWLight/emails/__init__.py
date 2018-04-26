@@ -1,5 +1,5 @@
-# We have to import signal receivers into __init__.py or they won't be
-# registered at the proper time by Django, and then the signals will not be
-# received, and emails won't get sent, and there will be nothing but a lone
-# and level field of yaks stretching far away.
-import tasks
+# Moved from importing recievers in __init__.py to AppConfig when upgrading to
+# Django 1.9. The old way called the app registry before it finished loading.
+# That is no longer supported in Django 1.9.
+
+default_app_config = 'TWLight.emails.apps.EmailConfig'

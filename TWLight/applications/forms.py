@@ -14,8 +14,7 @@ dynamically; we cannot hardcode it here. What we have here instead is a base
 form that takes a dict of required fields, and constructs the form accordingly.
 (See the docstring of BaseApplicationForm for the expected dict format.)
 """
-
-import autocomplete_light
+from dal import autocomplete
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput, Div
 import logging
@@ -26,6 +25,7 @@ from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
+from TWLight.users.models import Editor
 
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
@@ -248,13 +248,43 @@ class BaseApplicationForm(forms.Form):
 
 
 
-class ApplicationAutocomplete(autocomplete_light.ModelForm):
+class ApplicationAutocomplete(forms.ModelForm):
+    #editor = forms.ModelChoiceField(
+    #    queryset=Editor.objects.all(),
+    #    widget=autocomplete.ModelSelect2(url='applications:editor_autocomplete')
+    #)
+    #partner = forms.ModelChoiceField(
+    #    queryset=Partner.objects.all(),
+    #    widget=autocomplete.ModelSelect2(url='applications:partner_autocomplete')
+    #)
+
     class Meta:
         model = Application
         fields = ['editor', 'partner']
+        widgets = {
+            'editor': autocomplete.ModelSelect2(url='applications:editor_autocomplete'),
+            'partner': autocomplete.ModelSelect2(url='applications:partner_autocomplete')
+        }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user=None, *args, **kwargs):
         super(ApplicationAutocomplete, self).__init__(*args, **kwargs)
+
+        # Make sure that we aren't leaking info via our form choices.
+        if user.is_superuser:
+            self.fields['editor'].queryset = Editor.objects.all(
+                ).order_by('wp_username')
+
+            self.fields['partner'].queryset = Partner.objects.all(
+                ).order_by('company_name')
+
+        elif coordinators in user.groups.all():
+            self.fields['editor'].queryset = Editor.objects.filter(
+                     applications__partner__coordinator__pk=user.pk
+                ).order_by('wp_username')
+
+            self.fields['partner'].queryset = Partner.objects.filter(
+                    coordinator__pk=user.pk
+                ).order_by('company_name')
 
         # Prettify.
         self.helper = FormHelper()
@@ -275,16 +305,3 @@ class ApplicationAutocomplete(autocomplete_light.ModelForm):
         # placeholders.
         self.fields['editor'].label = _('Username')
         self.fields['partner'].label = _('Partner name')
-
-
-    def choices_for_request(self):
-        # Make sure we're not leaking info via the autocomplete view; the view
-        # that uses autocompletes is CoordinatorsOnly, so the autocomplete
-        # should be too.
-        if not (self.request.user.is_superuser or
-                coordinators in self.request.user.groups.all()):
-            self.choices = []
-
-        return super(ApplicationAutocomplete, self).choices_for_request()
-
-autocomplete_light.register(ApplicationAutocomplete)

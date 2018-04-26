@@ -53,9 +53,9 @@ CACHES = {
 # TEST CONFIGURATION
 # ------------------------------------------------------------------------------
 
-INSTALLED_APPS += (
+INSTALLED_APPS += [
     'django_nose',
-)
+]
 
 # Use nose to run all tests
 #TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
