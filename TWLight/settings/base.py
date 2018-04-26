@@ -20,10 +20,25 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 import os
 
+# Importing global settings is typically not recommended, and un-Django-like,
+# but we're doing something interesting with the LANGUAGES setting.
+from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Get the language codes from the locale directories, and return the
+# corresponding list of tuples from the global language settting.
+def get_languages_from_locale_subdirectories(dir):
+    EXISTING_LANGUAGES = []
+    for locale_dir in os.listdir(dir):
+        if os.path.isdir(os.path.join(dir, locale_dir)):
+            for i, (lang_code, lang_name) in enumerate(GLOBAL_LANGUAGES):
+                if locale_dir == lang_code:
+                    EXISTING_LANGUAGES += [(lang_code, lang_name)]
+    return sorted(set(EXISTING_LANGUAGES))
+
 
 # ------------------------------------------------------------------------------
 # ------------------------> core django configurations <------------------------
@@ -68,7 +83,6 @@ TWLIGHT_APPS = [
 
 # dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
-
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -142,12 +156,18 @@ SITE_ID = 1
 
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us' # Sets site default language.
+LANGUAGE_CODE = 'en' # Sets site default language.
 
 LOCALE_PATHS = [
     # makemessages looks for locale/ in the top level, not the project level.
     os.path.join(os.path.dirname(BASE_DIR), 'locale'),
 ]
+
+# We're letting the file-based translation contributions dictate the languages
+# available to the system. This keeps our column and index count for db-stored
+# translations as low as possible while allowing translatewiki contributions to
+# be used without reconfiguring the site.
+LANGUAGES = get_languages_from_locale_subdirectories(LOCALE_PATHS[0])
 
 TIME_ZONE = 'UTC'
 
