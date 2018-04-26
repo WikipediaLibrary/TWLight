@@ -21,6 +21,8 @@ from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm
 from .models import Editor, UserProfile
 
+import datetime
+
 
 def _is_real_url(url):
     """
@@ -321,6 +323,10 @@ class TermsView(UpdateView):
             # If they agreed with the terms, awesome. Send them where they were
             # trying to go, if there's a meaningful `next` parameter in the URL;
             # if not, send them to their home page as a sensible default.
+            # Also log the date they agreed.
+            self.get_object().terms_of_use_date = datetime.date.today()
+            self.get_object().save()
+
             return _redirect_to_next_param(self.request)
 
         else:
@@ -330,6 +336,10 @@ class TermsView(UpdateView):
             # put them in an obnoxious redirect loop - send them to where
             # they were going, which promptly sends them back to the terms
             # page because they haven't agreed to the terms....
+            # Also clear the ToU date field in case a user un-agrees
+            self.get_object().terms_of_use_date = None
+            self.get_object().save()
+
             if self.request.user in coordinators.user_set.all():
                 # Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
                 fail_msg = _('You may explore the site, but you will not be '
