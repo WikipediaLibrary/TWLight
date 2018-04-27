@@ -51,7 +51,7 @@ admin.site.register(Partner, PartnerAdmin)
 
 
 
-class StreamAdmin(admin.ModelAdmin):
+class StreamAdmin(TabbedExternalJqueryTranslationAdmin):
     search_fields = ('partner__company_name', 'name',)
     list_display = ('id', 'partner', 'name', 'description', 'get_languages')
 
