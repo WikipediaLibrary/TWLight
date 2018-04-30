@@ -5,6 +5,13 @@
 {% load urlencode %}
 
 
+{% block head_javascript %}
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+{% endblock head_javascript %}
+
 {% block content %}
   <div class="row">
     <div class="col-xs-12">
@@ -139,7 +146,6 @@
     src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
     crossorigin="anonymous"></script>
-  {% include 'autocomplete_light/static.html' %}
 
   {% comment %}
     Needed for select/deselect all function on main list page. Can't be included

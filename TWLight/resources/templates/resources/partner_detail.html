@@ -3,6 +3,7 @@
 {% load static %}
 {% load cache %}
 {% load twlight_perms %}
+{% load twlight_removetags %}
 {% load twlight_wikicode2html %}
 
 {% get_current_language as LANGUAGE_CODE %}
@@ -154,7 +155,7 @@
               We filter out details and summary tags so that we always see
               the full content on the details page.
             {% endcomment %}
-            {% filter removetags:"details summary" %}
+            {% filter twlight_removetags:"details summary" %}
               {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
                 {{ object.description | twlight_wikicode2html | safe }}
               {% endcache %}
@@ -323,7 +324,7 @@
               {% endcomment %}
                 <li><b>{{ stream }}</b>
                   {% if stream.description %}&mdash; 
-                    {% filter removetags:"details summary" %}
+                    {% filter twlight_removetags:"details summary" %}
                       {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
                         {{ stream.description | twlight_wikicode2html | safe }}
                       {% endcache %}

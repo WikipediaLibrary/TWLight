@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import admin
+from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 from TWLight.users.groups import get_coordinators
 
 from .models import Partner, PartnerLogo, Stream, Contact, Language
@@ -16,7 +17,7 @@ class PartnerLogoInline(admin.TabularInline):
     model = PartnerLogo
 
 
-class PartnerAdmin(admin.ModelAdmin):
+class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
     class CustomModelChoiceField(forms.ModelChoiceField):
         """
         This lets us relabel the users in the dropdown with their recognizable
@@ -50,7 +51,7 @@ admin.site.register(Partner, PartnerAdmin)
 
 
 
-class StreamAdmin(admin.ModelAdmin):
+class StreamAdmin(TabbedExternalJqueryTranslationAdmin):
     search_fields = ('partner__company_name', 'name',)
     list_display = ('id', 'partner', 'name', 'description', 'get_languages')
 

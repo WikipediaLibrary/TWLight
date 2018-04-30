@@ -9,6 +9,7 @@ import urllib2
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import logging
+from dal import autocomplete
 from reversion import revisions as reversion
 from reversion.models import Version
 from urlparse import urlparse
@@ -34,6 +35,7 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  EmailRequired,
                                  SelfOnly)
 from TWLight.resources.models import Partner
+from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
 
 from .helpers import (USER_FORM_FIELDS,
@@ -46,8 +48,48 @@ from .models import Application
 
 logger = logging.getLogger(__name__)
 
+coordinators = get_coordinators()
+
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 
+
+class EditorAutocompleteView(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Make sure that we aren't leaking info via our form choices.
+        if self.request.user.is_superuser:
+            editor_qs = Editor.objects.all().order_by('wp_username')
+            # Query by wikimedia username
+            if self.q:
+                editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by('wp_username')
+        elif coordinators in self.request.user.groups.all():
+            editor_qs = Editor.objects.filter(
+                     applications__partner__coordinator__pk=self.request.user.pk
+                ).order_by('wp_username')
+            # Query by wikimedia username
+            if self.q:
+                editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by('wp_username')
+        else:
+            editor_qs = Editor.objects.none()
+        return editor_qs
+
+class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Make sure that we aren't leaking info via our form choices.
+        if self.request.user.is_superuser:
+            partner_qs = Partner.objects.all().order_by('company_name')
+            # Query by partner name
+            if self.q:
+                partner_qs = partner_qs.filter(company_name__istartswith=self.q).order_by('company_name')
+        elif coordinators in self.request.user.groups.all():
+            partner_qs =  Partner.objects.filter(
+                    coordinator__pk=self.request.user.pk
+                ).order_by('company_name')
+            # Query by partner name
+            if self.q:
+                partner_qs = partner_qs.filter(company_name__istartswith=self.q).order_by('company_name')
+        else:
+            partner_qs = Partner.objects.none()
+        return partner_qs
 
 class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
     template_name = 'applications/request_for_application.html'
@@ -126,7 +168,7 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormVi
 
     # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         """
         We will dynamically construct a form which harvests exactly the
         information needed for editors to request access to their desired set of
@@ -147,6 +189,8 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormVi
         The goal is to reduce the user's data entry burden to the minimum
         amount necessary for applications to be reviewed.
         """
+        if form_class is None:
+            form_class = self.form_class
 
         kwargs = self.get_form_kwargs()
 
@@ -481,7 +525,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         context['include_template'] = \
             'applications/application_list_include.html'
 
-        context['autocomplete_form'] = ApplicationAutocomplete()
+        context['autocomplete_form'] = ApplicationAutocomplete(user=self.request.user)
 
         return context
 
@@ -496,7 +540,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
             # request.POST['editor'] will be the pk of an Editor instance, if
             # it exists.
             editor = Editor.objects.get(pk=request.POST['editor'])
-        except KeyError:
+        except (KeyError, ValueError):
             # The user didn't filter by editor, and that's OK.
             editor = None
         except Editor.DoesNotExist:
@@ -508,7 +552,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         try:
             partner = Partner.objects.get(pk=request.POST['partner'])
-        except KeyError:
+        except (KeyError, ValueError):
             # The user didn't filter by partner, and that's OK.
             partner = None
         except Partner.DoesNotExist:
@@ -696,7 +740,9 @@ class EvaluateApplicationView(CoordinatorOrSelf, ToURequired, UpdateView):
         return context
 
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.form_class
         form = super(EvaluateApplicationView, self).get_form(form_class)
 
         form.helper = FormHelper()

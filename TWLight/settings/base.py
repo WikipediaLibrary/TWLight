@@ -20,10 +20,25 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 import os
 
+# Importing global settings is typically not recommended, and un-Django-like,
+# but we're doing something interesting with the LANGUAGES setting.
+from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Get the language codes from the locale directories, and return the
+# corresponding list of tuples from the global language settting.
+def get_languages_from_locale_subdirectories(dir):
+    EXISTING_LANGUAGES = []
+    for locale_dir in os.listdir(dir):
+        if os.path.isdir(os.path.join(dir, locale_dir)):
+            for i, (lang_code, lang_name) in enumerate(GLOBAL_LANGUAGES):
+                if locale_dir == lang_code:
+                    EXISTING_LANGUAGES += [(lang_code, lang_name)]
+    return sorted(set(EXISTING_LANGUAGES))
+
 
 # ------------------------------------------------------------------------------
 # ------------------------> core django configurations <------------------------
@@ -32,58 +47,61 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
 
-DJANGO_APPS = (
+DJANGO_APPS = [
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',         # required by django.contrib.comments
-)
+]
 
-THIRD_PARTY_APPS = (
+THIRD_PARTY_APPS = [
     'crispy_forms',
     'reversion',
-    'autocomplete_light',
+    'dal',
+    'dal_select2',
     'django_comments',
+    'django_filters',
     'modeltranslation',
     'taggit',
     # DO NOT CONFUSE THIS with requests, the Python URL library! This is
     # django-request, the user analytics package.
     'request',
     'django_countries',
-)
+]
 
-TWLIGHT_APPS = (
+TWLIGHT_APPS = [
     'TWLight.i18n',
     'TWLight.users',
     'TWLight.resources',
     'TWLight.applications',
     'TWLight.emails',
     'TWLight.graphs',
-)
+]
 
-# autocomplete_light and modeltranslation must go before django.contrib.admin.
+# dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
-
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     # LocaleMiddleware must go after Session (and Cache, if used), but before
     # Common.
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-)
+]
 
 
 # DEBUG
@@ -112,7 +130,7 @@ DATABASES = {
         'PORT': '3306',
         # This is critical for handling Unicode data due to stupid properties
         # of MySQL; see https://stackoverflow.com/questions/2108824/mysql-incorrect-string-value-error-when-save-unicode-string-in-django .
-        'OPTIONS': {'charset': 'utf8mb4'},
+        'OPTIONS': {'charset': 'utf8mb4', 'init_command': "SET sql_mode='STRICT_ALL_TABLES'; SET storage_engine='INNODB';"},
     }
 }
 
@@ -139,27 +157,18 @@ SITE_ID = 1
 
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us' # Sets site default language.
+LANGUAGE_CODE = 'en' # Sets site default language.
 
-# First tuple element should be a standard language code; see
-# https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes .
-# Second is the human-readable form.
-# In the language choice dropdown, languages will appear -in the order listed
-# here-, regardless of how they ought to be alphabetized in the target
-# language.
-LANGUAGES = (
-  #Transaltor: Text used for setting language to English
-  ('en', _('English')),
-  #Transaltor: Text used for setting language to Finnish
-  ('fi', _('Finnish')),
-  #Transaltor: Text used for setting language to French
-  ('fr', _('French')),
-)
-
-LOCALE_PATHS = (
+LOCALE_PATHS = [
     # makemessages looks for locale/ in the top level, not the project level.
     os.path.join(os.path.dirname(BASE_DIR), 'locale'),
-)
+]
+
+# We're letting the file-based translation contributions dictate the languages
+# available to the system. This keeps our column and index count for db-stored
+# translations as low as possible while allowing translatewiki contributions to
+# be used without reconfiguring the site.
+LANGUAGES = get_languages_from_locale_subdirectories(LOCALE_PATHS[0])
 
 TIME_ZONE = 'UTC'
 
@@ -266,10 +275,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 LOGIN_URL = reverse_lazy('oauth_login')
 LOGIN_REDIRECT_URL = reverse_lazy('users:home')
 
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     'TWLight.users.authorization.OAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
-)
+]
 
 TWLIGHT_OAUTH_PROVIDER_URL = 'https://meta.wikimedia.org/w/index.php'
 
@@ -304,13 +313,13 @@ EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
 
 # This is a dummy backend that will write to stdout. Safe, yet useless.
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-INSTALLED_APPS += ('djmail',)
+INSTALLED_APPS += ['djmail',]
 
 
 # DJANGO_REQUEST CONFIGURATION
 # ------------------------------------------------------------------------------
 
-MIDDLEWARE_CLASSES += ('request.middleware.RequestMiddleware',)
+MIDDLEWARE_CLASSES += ['request.middleware.RequestMiddleware',]
 
 # The following are set for privacy purposes. Note that, if some amount of
 # geographic tracking is desired, there is a REQUEST_ANONYMOUS_IP setting which

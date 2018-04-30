@@ -2,6 +2,7 @@
 import copy
 from datetime import datetime, timedelta
 import json
+import re
 from mock import patch, Mock
 from urlparse import urlparse
 
@@ -55,6 +56,12 @@ FAKE_GLOBAL_USERINFO = {
     'name': 'alice',
     'editcount': 5000,
 }
+
+# CSRF middleware is helpful for site security, but not helpful for testing
+# the rendered output of a page.
+def remove_csrfmiddlewaretoken(rendered_html):
+    csrfmiddlewaretoken_pattern = r"<input type='hidden' name='csrfmiddlewaretoken' value='.+' />"
+    return re.sub(csrfmiddlewaretoken_pattern, '', rendered_html)
 
 class ViewsTestCase(TestCase):
 
@@ -281,8 +288,9 @@ class ViewsTestCase(TestCase):
         # output of the two pages is the same - the user would have seen the
         # same thing on either page.
         self.assertEqual(home_response.status_code, 200)
-        self.assertEqual(home_response.render().content,
-            detail_response.render().content)
+        self.assertEqual(
+            remove_csrfmiddlewaretoken(home_response.render().content),
+            remove_csrfmiddlewaretoken(detail_response.render().content))
 
 
     @patch('TWLight.users.views.UserDetailView.as_view')
