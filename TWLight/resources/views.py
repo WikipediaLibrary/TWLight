@@ -115,6 +115,7 @@ class PartnersDetailView(DetailView):
                                      )
             context['user_sent_apps'] = False
             context['user_open_apps'] = False
+            context['data_restricted'] = False
             if sent_apps.count() > 0:
                 context['latest_sent_app_pk'] = sent_apps[0].pk
                 context['user_sent_apps'] = True
@@ -125,6 +126,9 @@ class PartnersDetailView(DetailView):
                 else:
                     context['multiple_open_apps'] = False
                     context['open_app_pk'] = open_apps[0].pk
+
+            if self.request.user.userprofile.data_restricted:
+                context['data_restricted'] = True
 
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:

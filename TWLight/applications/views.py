@@ -33,7 +33,8 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  EditorsOnly,
                                  ToURequired,
                                  EmailRequired,
-                                 SelfOnly)
+                                 SelfOnly,
+                                 DataProcessingRequired)
 from TWLight.resources.models import Partner
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
@@ -98,6 +99,9 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         context = super(RequestApplicationView, self).get_context_data(**kwargs)
         context['any_waitlisted'] = Partner.objects.filter(
             status=Partner.WAITLIST).exists()
+        context['data_restricted'] = False
+        if self.request.user.userprofile.data_restricted:
+            context['data_restricted'] = True
         return context
 
 
@@ -152,7 +156,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
 
 
 
-class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
+class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataProcessingRequired, FormView):
     """
     People can get to application submission in 2 ways:
     1) via RequestApplicationView, which lets people select multiple partners;
@@ -870,7 +874,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
 
 
 
-class RenewApplicationView(SelfOnly, View):
+class RenewApplicationView(SelfOnly, DataProcessingRequired, View):
     """
     This view takes an existing Application and creates a clone, with new
     dates and a FK back to the original application.

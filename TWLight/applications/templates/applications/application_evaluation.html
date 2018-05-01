@@ -150,8 +150,12 @@
         {{ form.security_hash }}
         <input type="hidden" name="next" value="{% url 'applications:evaluate' object.pk %}" />
         <br />
-        {% comment %}Translators: This labels the button which users click to send a typed comment.{% endcomment %}
-        <input type="submit" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
+        {% if user.userprofile.data_restricted %}
+          {% comment %} Translators: This labels the button which users click to send a typed comment.{% endcomment %}
+          <button type="button" class="btn btn-block btn-default" disabled>{% trans 'Add comment' %}</button>
+        {% else %}
+          <input type="submit" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
+        {% endif %}
       </form>
     </div>
   </div>

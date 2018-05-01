@@ -21,6 +21,8 @@ from TWLight.applications.models import Application
 from TWLight.users.models import Editor
 from TWLight.users.groups import get_coordinators
 
+import logging
+logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
 
@@ -242,4 +244,24 @@ class EmailRequired(object):
             return HttpResponseRedirect(new_url)
 
         return super(EmailRequired, self).dispatch(
+            request, *args, **kwargs)
+
+
+
+class DataProcessingRequired(object):
+    """
+    Used to restrict views from users with data processing restricted.
+    """
+
+    def test_func_data_processing_required(self, user):
+        return user.userprofile.data_restricted
+
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.test_func_data_processing_required(request.user):
+            # No need to give the user a message because they will already
+            # have the generic data processing notice.
+            raise PermissionDenied
+
+        return super(DataProcessingRequired, self).dispatch(
             request, *args, **kwargs)

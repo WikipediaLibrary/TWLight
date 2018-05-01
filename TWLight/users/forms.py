@@ -48,6 +48,30 @@ class SetLanguageForm(forms.Form):
 
 
 
+class RestrictDataForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['data_restricted']
+
+    def __init__(self, *args, **kwargs):
+        super(RestrictDataForm, self).__init__(*args, **kwargs)
+
+        # Translators: Labels the button users click to request a restriction on the processing of their data.
+        self.fields['data_restricted'].label = _("Restrict my data")
+
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-inline'
+        self.helper.field_template = 'bootstrap3/layout/inline_field.html'
+        self.fields['data_restricted'].help_text = None
+
+        self.helper.layout = Layout(
+            'data_restricted',
+            # Translators: Users click this button to request a restriction on the processing of their data.
+            Submit('submit', _('Restrict'), css_class='btn btn-default')
+        )
+
+
+
 class TermsForm(forms.ModelForm):
     class Meta:
         model = UserProfile

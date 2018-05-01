@@ -17,9 +17,12 @@ from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
+from TWLight.users.groups import get_coordinators
 
-from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm
+from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm
 from .models import Editor, UserProfile
+
+coordinators = get_coordinators()
 
 
 def _is_real_url(url):
@@ -265,6 +268,52 @@ class EmailChangeView(SelfOnly, FormView):
                   "but you won't be able to apply for access to partner "
                   'resources without an email.'))
             return reverse_lazy('users:home')
+
+
+
+class RestrictDataView(SelfOnly, UpdateView):
+    """
+    Self-only view that allows users to set their data processing as
+    restricted. Implemented as a separate page because this impacts their
+    ability to interact with the website. We want to make sure they
+    definitely mean to do this.
+    """
+    model = UserProfile
+    template_name = 'users/restrict_data.html'
+    form_class = RestrictDataForm
+
+    def get_object(self, queryset=None):
+        try:
+            assert self.request.user.is_authenticated()
+        except AssertionError:
+            messages.add_message (request, messages.WARNING,
+                # Translators: This message is shown to users who attempt to update their data processing without being logged in.
+                _('You must be logged in to do that.'))
+            raise PermissionDenied
+
+        return self.request.user.userprofile
+
+
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.form_class
+        form = super(RestrictDataView, self).get_form(form_class)
+        form.helper = FormHelper()
+        form.helper.add_input(Submit(
+            'submit',
+            # Translators: This is the button users click to confirm changes to their personal information.
+            _('Restrict'),
+            css_class='center-block'))
+
+        return form
+
+    def get_success_url(self):
+        # If a coordinator requests we stop processing their data, we
+        # shouldn't allow them to continue being one.
+        if coordinators in self.request.user.groups.all():
+            self.request.user.groups.remove(coordinators)
+
+        return reverse_lazy('users:home')
 
 
 

@@ -49,7 +49,11 @@
       {% trans "No partner data has been added yet." %}
     {% endfor %}
   </ul>
-  <input type="submit" value="{% trans "Apply" %}" class="btn btn-primary" />
+  {% if data_restricted %}
+    <button type="button" class="btn btn-primary" disabled>{% trans "Apply" %}</button>
+  {% else %}
+    <input type="submit" value="{% trans "Apply" %}" class="btn btn-primary" />
+  {% endif %}
 </form>
 
 {% if any_waitlisted %}

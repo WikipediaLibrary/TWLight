@@ -69,6 +69,10 @@ class UserProfile(models.Model):
         choices=settings.LANGUAGES,
         # Translators: Users' detected or selected language.
         help_text=_("Language"))
+    data_restricted = models.BooleanField(default=False,
+        # Translators: The description of a field where users can request their data stop being processed (but not deleted) by us.
+        help_text = _("Has this user requested a restriction "
+        "on the processing of their data?"))
 
 
 # Create user profiles automatically when users are created.
