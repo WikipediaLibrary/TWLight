@@ -85,7 +85,7 @@ def get_data_count_by_month(queryset, data_format=JSON):
 
 
 # Application stats ------------------------------------------------------------
-def get_application_status_data(queryset, data_format=JSON):
+def get_application_status_data(queryset, statuses=Application.STATUS_CHOICES, data_format=JSON):
     """
     Returns data about the status of Applications in a queryset. By default,
     returns json in a format suitable for display as a flot.js pie chart; can
@@ -93,7 +93,7 @@ def get_application_status_data(queryset, data_format=JSON):
     """
     status_data = []
 
-    for status in Application.STATUS_CHOICES[0:3]:
+    for status in statuses:
         status_count = queryset.filter(status=status[0]).count()
         # We have to force unicode here because we used ugettext_lazy, not
         # ugettext, to internationalize the status labels in

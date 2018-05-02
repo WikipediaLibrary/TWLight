@@ -129,7 +129,8 @@ class DashboardView(TemplateView):
 
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.exclude(
-                    status__in=(Application.SENT, Application.NOT_APPROVED))
+                    status__in=(Application.NOT_APPROVED, Application.SENT)),
+                    statuses=Application.STATUS_CHOICES[0:3]
             )
 
         return context
