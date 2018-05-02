@@ -61,6 +61,9 @@ class UserProfile(models.Model):
     terms_of_use = models.BooleanField(default=False,
         # Translators: Users must agree to the website terms of use.
         help_text=_("Has this user agreed with the terms of use?"))
+    terms_of_use_date = models.DateField(blank=True, null=True,
+        #Translators: This field records the date the user agreed to the website terms of use.
+        help_text=_("The date this user agreed to the terms of use."))
     # Translators: An option to set whether users email is copied to their website account from Wikipedia when logging in.
     use_wp_email = models.BooleanField(default=True, help_text=_('Should we '
         'automatically update their email from their Wikipedia email when they '
