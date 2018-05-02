@@ -19,7 +19,7 @@ from django.http import HttpResponseRedirect
 
 from TWLight.applications.models import Application
 from TWLight.users.models import Editor
-from TWLight.users.groups import get_coordinators
+from TWLight.users.groups import get_coordinators, get_restricted
 
 import logging
 logger = logging.getLogger(__name__)
@@ -254,7 +254,8 @@ class DataProcessingRequired(object):
     """
 
     def test_func_data_processing_required(self, user):
-        return user.userprofile.data_restricted
+        restricted = get_restricted()
+        return user in restricted.user_set.all()
 
 
     def dispatch(self, request, *args, **kwargs):

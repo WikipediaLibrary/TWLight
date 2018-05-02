@@ -99,9 +99,6 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         context = super(RequestApplicationView, self).get_context_data(**kwargs)
         context['any_waitlisted'] = Partner.objects.filter(
             status=Partner.WAITLIST).exists()
-        context['data_restricted'] = False
-        if self.request.user.userprofile.data_restricted:
-            context['data_restricted'] = True
         return context
 
 

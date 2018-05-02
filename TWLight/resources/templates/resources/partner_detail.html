@@ -39,7 +39,7 @@
     </div>
     {% endif %}
     {% if user_sent_apps %}
-        {% if data_restricted %}
+        {% if user|restricted %}
           <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled">{% trans "Renew" %}</button><br />
         {% else %}
           <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
@@ -51,7 +51,7 @@
             <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View application" %}</a>
         {% endif %}
     {% else %}
-        {% if data_restricted %}
+        {% if user|restricted %}
           <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
         {% else %}
           <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a><br />
@@ -89,7 +89,7 @@
     </div>
     {% endif %}
     {% if user_sent_apps %}
-      {% if data_restricted %}
+      {% if user|restricted %}
         <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Renew" %}</button><br />
       {% else %}
         <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
@@ -101,7 +101,7 @@
       <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View application" %}</a>
     {% endif %}
     {% else %}
-      {% if data_restricted %}
+      {% if user|restricted %}
         <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
       {% else %}
         <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br />

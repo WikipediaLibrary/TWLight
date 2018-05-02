@@ -173,7 +173,7 @@
         {% endblocktrans %}
       </div>
     {% endif %}
-    {% if user.userprofile.data_restricted %}
+    {% if user|restricted %}
       <div class="alert alert-warning">
         {% url 'users:restrict_data' as restrict_url %}
         {% comment %} Translators: Shown if the current user has requested the processing of their data should be restricted. {% endcomment %}

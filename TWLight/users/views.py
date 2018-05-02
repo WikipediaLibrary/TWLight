@@ -17,12 +17,13 @@ from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
-from TWLight.users.groups import get_coordinators
+from TWLight.users.groups import get_coordinators, get_restricted
 
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm
 from .models import Editor, UserProfile
 
 coordinators = get_coordinators()
+restricted = get_restricted()
 
 
 def _is_real_url(url):
@@ -271,16 +272,20 @@ class EmailChangeView(SelfOnly, FormView):
 
 
 
-class RestrictDataView(SelfOnly, UpdateView):
+class RestrictDataView(SelfOnly, FormView):
     """
     Self-only view that allows users to set their data processing as
     restricted. Implemented as a separate page because this impacts their
     ability to interact with the website. We want to make sure they
     definitely mean to do this.
     """
-    model = UserProfile
     template_name = 'users/restrict_data.html'
     form_class = RestrictDataForm
+
+    def get_form_kwargs(self):
+        kwargs = super(RestrictDataView, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
     def get_object(self, queryset=None):
         try:
@@ -307,12 +312,20 @@ class RestrictDataView(SelfOnly, UpdateView):
 
         return form
 
-    def get_success_url(self):
-        # If a coordinator requests we stop processing their data, we
-        # shouldn't allow them to continue being one.
-        if coordinators in self.request.user.groups.all():
-            self.request.user.groups.remove(coordinators)
+    def form_valid(self, form):
+        if form.cleaned_data['restricted']:
+            self.request.user.groups.add(restricted)
 
+            # If a coordinator requests we stop processing their data, we
+            # shouldn't allow them to continue being one.
+            if coordinators in self.request.user.groups.all():
+                self.request.user.groups.remove(coordinators)
+        else:
+            self.request.user.groups.remove(restricted)
+
+        return HttpResponseRedirect(self.get_success_url())
+    
+    def get_success_url(self):
         return reverse_lazy('users:home')
 
 
