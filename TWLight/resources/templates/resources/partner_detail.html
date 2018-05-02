@@ -342,6 +342,10 @@
       </div>
       <div class="timeline-panel">
         <div class="timeline-body">
+          {% if object.company_location %}
+            {% comment %} Translators: If a partner has their location listed, this message is a label for that location {% endcomment %}
+            <p>{% trans "Location" %}: {{ object.company_location.name }}</p>
+          {% endif %}
           {% if object.terms_of_use %}
             {% comment %} Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
             <p><a href="{{ object.terms_of_use }}">{% trans "Terms of use" %}</a></p>
