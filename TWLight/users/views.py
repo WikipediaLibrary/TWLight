@@ -1,3 +1,5 @@
+import datetime
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -21,7 +23,6 @@ from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm
 from .models import Editor, UserProfile
 
-
 def _is_real_url(url):
     """
     Users might have altered the URL parameters. Let's not just blindly
@@ -41,6 +42,12 @@ def _redirect_to_next_param(request):
         return next_param
     else:
         return reverse_lazy('users:home')
+
+
+def _update_last_updated(editor):
+    # When users update their data, make sure to update last_updated
+    editor.last_updated = datetime.date.today()
+    editor.save()
 
 
 class UserDetailView(SelfOnly, TemplateView):
@@ -157,6 +164,14 @@ class EditorUpdateView(SelfOnly, UpdateView):
     form_class = EditorUpdateForm
 
 
+    def form_valid(self, form):
+        editor = self.request.user.editor
+
+        _update_last_updated(editor)
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
 
 class PIIUpdateView(SelfOnly, UpdateView):
     """
@@ -204,6 +219,14 @@ class PIIUpdateView(SelfOnly, UpdateView):
         return form
 
 
+    def form_valid(self, form):
+        editor = self.request.user.editor
+
+        _update_last_updated(editor)
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
     def get_success_url(self):
         """
         Define get_success_url so that we can add a success message.
@@ -233,6 +256,8 @@ class EmailChangeView(SelfOnly, FormView):
 
         user.userprofile.use_wp_email = form.cleaned_data['use_wp_email']
         user.userprofile.save()
+
+        _update_last_updated(user.editor)
 
         return HttpResponseRedirect(self.get_success_url())
 
