@@ -21,7 +21,10 @@
     {% if partner.logos.logo.url %}
     <div class="partner-logo-container">
       <a href="{% url 'partners:detail' partner.pk %}">
-        <img src="{{ partner.logos.logo.url }}" class="img-responsive partner-logo" alt="Link to {{ partner }} signup page">
+        <img src="{{ partner.logos.logo.url }}" class="img-responsive partner-logo" alt="
+        {% comment %} Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate {{ partner }}. {% endcomment %}
+        {% trans "Link to {{ partner }} signup page" %}
+        ">
       </a>
     </div>
       <hr />
