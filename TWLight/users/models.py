@@ -99,11 +99,6 @@ class Editor(models.Model):
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    # Moved from auto_now=True/auto_now_add=True to set the date from import.
-    # Defaults to today and not required in forms.
-    last_updated = models.DateField(default=now,
-        # Translators: The date that this user's information was last changed.
-        help_text=_("When this information was last edited"))
     # Set as non-editable.
     date_created = models.DateField(default=now,
         editable=False,

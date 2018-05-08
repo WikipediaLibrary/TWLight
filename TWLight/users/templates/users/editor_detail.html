@@ -30,12 +30,11 @@
   {% endifequal %}
 
   <p>
-    {% comment %} Translators: This is shown on editor profiles, in their profile page or on applications. Don't translate {{ last_updated_date }}. {% endcomment %}
-    {% blocktrans with last_updated_date=editor.last_updated|localize %}
+    {% comment %} Translators: This is shown on editor profiles, in their profile page or on applications. {% endcomment %}
+    {% blocktrans %}
       Information with an * was retrieved from Wikipedia directly.
       Other information was entered directly by users or site admins,
       in their preferred language.
-      It was last updated on {{ last_updated_date }}.
     {% endblocktrans %}
   </p>
 
