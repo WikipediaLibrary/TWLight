@@ -67,12 +67,6 @@ class RestrictDataForm(forms.Form):
         self.helper.form_class = 'form-inline'
         self.helper.field_template = 'bootstrap3/layout/inline_field.html'
 
-        self.helper.layout = Layout(
-            'data_restricted',
-            # Translators: Users click this button to request a restriction on the processing of their data.
-            Submit('submit', _('Restrict'), css_class='btn btn-default')
-        )
-
 
 
 class TermsForm(forms.ModelForm):

@@ -21,6 +21,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.db.models import IntegerField, Case, When, Count, Q
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
@@ -810,13 +811,23 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
     template_name = 'applications/send.html'
 
     def get_queryset(self):
+        # The annotate and filter functions filter out any partners who only
+        # have applications from users with an active data restriction.
+        base_queryset = Partner.objects.filter(
+                            applications__status=Application.APPROVED
+                            ).annotate(
+                                not_restricted_count = Count(
+                                    Case(When(~Q(applications__editor__user__groups__name='restricted'), then=1),
+                                        output_field=IntegerField(),
+                                    )
+                                )
+                            ).filter(
+                                not_restricted_count__gt=0
+                            )
         if self.request.user.is_superuser:
-            return Partner.objects.filter(
-                    applications__status=Application.APPROVED
-                ).distinct()
+            return base_queryset.distinct()
         else:
-            return Partner.objects.filter(
-                    applications__status=Application.APPROVED,
+            return base_queryset.filter(
                     coordinator__pk=self.request.user.pk
                 ).distinct()
 
@@ -828,7 +839,9 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
         apps = self.get_object().applications.filter(
-            status=Application.APPROVED)
+            status=Application.APPROVED).exclude(
+                editor__user__groups__name='restricted'
+                )
         app_outputs = {}
 
         for app in apps:

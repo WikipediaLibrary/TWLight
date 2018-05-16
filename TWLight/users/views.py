@@ -307,7 +307,7 @@ class RestrictDataView(SelfOnly, FormView):
         form.helper.add_input(Submit(
             'submit',
             # Translators: This is the button users click to confirm changes to their personal information.
-            _('Restrict'),
+            _('Confirm'),
             css_class='center-block'))
 
         return form
