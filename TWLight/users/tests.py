@@ -19,12 +19,13 @@ from TWLight.applications.models import Application
 
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
+from TWLight.resources.tests import EditorCraftRoom
 
 from . import views
 from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
-from .groups import get_coordinators
+from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor
 
 
@@ -313,6 +314,34 @@ class ViewsTestCase(TestCase):
         # called.
         mock_view.assert_called_once_with()
 
+    def test_coordinator_restricted(self):
+        # If a coordinator restricts their data processing
+        # they should stop being a coordinator.
+        restrict_url = reverse('users:restrict_data')
+
+        coordinators = get_coordinators()
+        restricted = get_restricted()
+
+        #Double check that the coordinator still has the relevant group
+        assert self.user_coordinator in coordinators.user_set.all()
+
+        # Need a password so we can login
+        self.user_coordinator.set_password('editor')
+        self.user_coordinator.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username4, password='editor')
+        restrict = self.client.get(restrict_url, follow=True)
+        restrict_form = restrict.context['form']
+        data = restrict_form.initial
+        data['restricted'] = True
+        data['submit'] = True
+        agree = self.client.post(restrict_url, data)
+
+        assert self.user_coordinator not in coordinators.user_set.all()
+        assert self.user_coordinator in restricted.user_set.all()
+
 
 
 class UserProfileModelTestCase(TestCase):
@@ -500,9 +529,11 @@ class EditorModelTestCase(TestCase):
         # Don't change self.editor, or other tests will fail! Make a new one
         # to test instead.
         new_editor = EditorFactory()
+        new_identity = dict(identity)
+        new_identity['sub'] = new_editor.wp_sub
 
         lang = get_language()
-        new_editor.update_from_wikipedia(identity, lang) # This call also saves the edito
+        new_editor.update_from_wikipedia(new_identity, lang) # This call also saves the editor
 
         self.assertEqual(new_editor.wp_username, 'evil_dr_porkchop')
         self.assertEqual(new_editor.wp_rights,
@@ -518,8 +549,8 @@ class EditorModelTestCase(TestCase):
         # should throw an error as we can no longer verify they're the same
         # editor.
         with self.assertRaises(AssertionError):
-            identity['sub'] = self.test_editor.wp_sub + 1
-            new_editor.update_from_wikipedia(identity, lang) # This call also saves the edito
+            new_identity['sub'] = new_editor.wp_sub + 1
+            new_editor.update_from_wikipedia(new_identity, lang) # This call also saves the editor
 
 
 
