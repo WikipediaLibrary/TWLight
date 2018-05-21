@@ -49,7 +49,10 @@
       <div class="navbar-left">
 			<!-- logo -->
 			<a href="{% url 'homepage' %}">
-				<img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="Library Card Platform home">
+				<img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
+        {% comment %} Translators: Alt text for the Wikipedia Library shown in the top left of all pages. {% endcomment %}
+        {% trans "Library Card Platform home" %}
+        ">
 			</a>
 			
 			<!-- site name -->
