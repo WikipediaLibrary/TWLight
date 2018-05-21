@@ -159,7 +159,7 @@
   <div id="main-content">
     {% if messages %}
       {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        <div class="alert alert-{{ message.tags }}">{{ message|safe }}</div>
       {% endfor %}
     {% endif %}
     {% if not user.email and not user.is_anonymous %}

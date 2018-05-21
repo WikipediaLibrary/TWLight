@@ -92,8 +92,11 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             if self.request.user.editor == editor and not editor.contributions:
                 messages.add_message(self.request, messages.WARNING,
                     # Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-                    _('Please update your contributions to Wikipedia (below) to '
-                      'help coordinators evaluate your applications.'))
+                    _('Please <a href="{}">update your contributions</a> '
+                      'to Wikipedia to help coordinators evaluate your '
+                      'applications.'.format(
+                        reverse_lazy('users:editor_update',
+                                     kwargs={'pk': editor.pk}))))
         except Editor.DoesNotExist:
             """
             If the user viewing the site does not have an attached editor

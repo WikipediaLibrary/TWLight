@@ -1,5 +1,16 @@
 {% load i18n %}
 
+  <p>
+    {% comment %} Translators: This is shown on editor profiles, under the heading for Wikipedia editor data. {% endcomment %}
+    {% blocktrans %}
+      This information is updated automatically from your Wikimedia account 
+      each time you log in, except for the Contributions field, where you 
+      can describe your Wikimedia editing history.
+    {% endblocktrans %}
+  </p>
+
+  <hr />
+
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
       {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username. {% endcomment %}
@@ -28,7 +39,7 @@
       {% endif %}
       {% ifequal editor.user user %}
         {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself. {% endcomment %}
-        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
+        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "Update" %}</a>
       {% endifequal %}
       <br />
     </div>
