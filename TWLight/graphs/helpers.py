@@ -120,6 +120,25 @@ def get_application_status_data(queryset, statuses=Application.STATUS_CHOICES, d
         return json.dumps(status_data)
 
 
+# User stats ------------------------------------------------------------
+def get_user_language_data(queryset, data_format=JSON):
+    """
+    Returns data about the language settings of users in a queryset. By default,
+    returns json in a format suitable for display as a flot.js pie chart; can
+    also return CSV.
+    """
+    language_data = []
+
+    for language in queryset.exclude(lang=None).values("lang").distinct():
+        language_count = queryset.filter(lang=language['lang']).count()
+        language_data.append({'label': force_unicode(language['lang']), 'data': language_count})
+
+    if data_format == PYTHON:
+        return language_data
+    else:
+        return json.dumps(language_data)
+
+
 def get_time_open_histogram(queryset, data_format=JSON):
     """
     Expects a queryset of closed Applications; returns data suitable for

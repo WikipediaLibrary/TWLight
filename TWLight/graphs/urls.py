@@ -49,4 +49,14 @@ csv_urlpatterns = [
         views.CSVPageViewsByPath.as_view(),
         name='page_views_by_path'
     ),
+    
+    url(r'^num_applications/$',
+        views.CSVNumApprovedApplications.as_view(),
+        name='num_applications'
+    ),
+
+    url(r'^user_language/$',
+        views.CSVUserLanguage.as_view(),
+        name='user_language'
+    ),
 ]
