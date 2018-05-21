@@ -165,7 +165,7 @@
             {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
             {% trans "Description not available." %}
           {% endif %}
-          {% if object.tags %}
+          {% if object.tags.count > 0 %}
             <div class="resource-label-subject">
             {% for tag in object.tags.all %}
               <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
