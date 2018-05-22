@@ -5,23 +5,24 @@
 {% load twlight_perms %}
 
 {% block content %}
-  {% comment %} Translators: This is the main title for the editor profile page. Don't translate {{ username }}. {% endcomment %}
-  <h1>{% blocktrans with username=editor.wp_username %}Editor profile information for {{ username }}{% endblocktrans %}</h1>
-
-  {% comment %} Translators: This is the title of the section of a user's profile showing their history of applications. {% endcomment %}
-  <h2>{% trans 'Editor application history' %}</h2>
+  <h1>{{ editor.wp_username }}</h1>
 
   <p>
-    <a href="{% url 'applications:request' %}" class="btn btn-primary">
-      {% comment %} Translators: Users viewing their own profile can click this button to file an application for access to resources. {% endcomment %}
+    <a href="{% url 'partners:filter' %}" class="btn btn-primary">
+      {% comment %} Translators: Users viewing their own profile can click this button to go to the browse partners page. {% endcomment %}
       {% trans 'Start new application' %}
     </a>
   </p>
 
-  {% include 'applications/application_list_include.html' %}
+  {% comment %} Translators: This is the title of the section of a user's profile showing their history of applications. {% endcomment %}
+  <h2>{% trans 'Application history' %}</h2>
+
+  {% include 'applications/application_list_user_include.html' %}
 
   {% comment %} Translators: This is the heading for user information on profile and application pages. {% endcomment %}
-  <h2>{% trans 'Editor data' %}</h2>
+  <h2>{% trans 'User information' %}
+  {% comment %} Translators: This is the heading for Wikipedia account information on profile and application pages. {% endcomment %}
+  <h3>{% trans 'Editor data' %}</h3>
 
   {% include 'users/editor_detail_data.html' %}
 
@@ -30,12 +31,11 @@
   {% endifequal %}
 
   <p>
-    {% comment %} Translators: This is shown on editor profiles, in their profile page or on applications. Don't translate {{ last_updated_date }}. {% endcomment %}
-    {% blocktrans with last_updated_date=editor.last_updated|localize %}
+    {% comment %} Translators: This is shown on editor profiles, in their profile page or on applications. {% endcomment %}
+    {% blocktrans %}
       Information with an * was retrieved from Wikipedia directly.
       Other information was entered directly by users or site admins,
       in their preferred language.
-      It was last updated on {{ last_updated_date }}.
     {% endblocktrans %}
   </p>
 

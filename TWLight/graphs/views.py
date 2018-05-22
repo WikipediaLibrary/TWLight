@@ -13,7 +13,7 @@ from django.utils.translation import ugettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
-from TWLight.users.models import Editor
+from TWLight.users.models import UserProfile, Editor
 
 from .helpers import (get_application_status_data,
                       get_data_count_by_month,
@@ -21,6 +21,7 @@ from .helpers import (get_application_status_data,
                       get_js_timestamp,
                       get_time_open_histogram,
                       get_median_decision_time,
+                      get_user_language_data,
                       PYTHON)
 
 
@@ -79,8 +80,14 @@ class DashboardView(TemplateView):
         # Overall application-related data
         # ----------------------------------------------------------------------
 
-        context['total_apps'] = Application.objects.count()
-        context['total_editors'] = Editor.objects.count()
+        # Total number of approved applications
+        context['total_apps'] = Application.objects.filter(
+            status__in=[Application.APPROVED, Application.SENT]).count()
+        # Total number of unique editors with approved applications
+        context['total_editors'] = Application.objects.filter(
+            status__in=[Application.APPROVED, Application.SENT]).values(
+                "editor").distinct().count()
+
         context['total_partners'] = Partner.objects.count()
 
         # Application data
@@ -96,6 +103,12 @@ class DashboardView(TemplateView):
             app = None
 
         context['longest_open'] = app
+        
+        # Total number of approved applications over time ----------------------
+        context['application_time_data'] = get_data_count_by_month(
+                Application.objects.filter(
+                    status__in=[Application.APPROVED, Application.SENT])
+            )
 
         # Average number of days until a final decision gets made on an
         # application. ---------------------------------------------------------
@@ -129,8 +142,14 @@ class DashboardView(TemplateView):
 
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.exclude(
-                    status__in=(Application.SENT, Application.NOT_APPROVED))
+                    status__in=(Application.NOT_APPROVED, Application.SENT)),
+                    statuses=Application.STATUS_CHOICES[0:3]
             )
+
+        # User language pie chart ----------------------------------------------
+
+        context['user_language_data'] = get_user_language_data(
+            UserProfile.objects.all())
 
         return context
 
@@ -180,6 +199,21 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         for row in data:
             writer.writerow(row)
 
+            
+class CSVNumApprovedApplications(_CSVDownloadView):
+    def _write_data(self, response):
+        queryset = Application.objects.filter(
+                        status__in=[Application.APPROVED, Application.SENT])
+
+        data = get_data_count_by_month(queryset, data_format=PYTHON)
+        writer = csv.writer(response)
+        # Translators: This is the heading of a data file, for a column containing date data.
+        writer.writerow([_('Date'), 
+                         # Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
+                         _('Number of approved applications')])
+
+        for row in data:
+            writer.writerow(row)
 
 
 class CSVAppMedians(_CSVDownloadView):
@@ -344,3 +378,20 @@ class CSVPageViewsByPath(_CSVDownloadView):
 
         row = [path.encode('utf-8'), path_count]
         writer.writerow(row)
+
+class CSVUserLanguage(_CSVDownloadView):
+    def _write_data(self, response):
+        csv_queryset = UserProfile.objects.all()
+
+        data = get_user_language_data(
+            csv_queryset,
+            data_format=PYTHON
+        )
+
+        writer = csv.DictWriter(response, fieldnames=['label', 'data'])
+
+        writer.writerow({'label': _('Language'),
+                         'data': _('Number of users')})
+
+        for row in data:
+            writer.writerow(row)

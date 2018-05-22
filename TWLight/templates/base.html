@@ -49,7 +49,10 @@
       <div class="navbar-left">
 			<!-- logo -->
 			<a href="{% url 'homepage' %}">
-				<img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="Library Card Platform home">
+				<img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
+        {% comment %} Translators: Alt text for the Wikipedia Library shown in the top left of all pages. {% endcomment %}
+        {% trans "Library Card Platform home" %}
+        ">
 			</a>
 			
 			<!-- site name -->
@@ -159,7 +162,7 @@
   <div id="main-content">
     {% if messages %}
       {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        <div class="alert alert-{{ message.tags }}">{{ message|safe }}</div>
       {% endfor %}
     {% endif %}
     {% if not user.email and not user.is_anonymous %}
@@ -225,14 +228,9 @@
             </a>
           </li>
           <li>
-            <a href="https://wikimediafoundation.org/wiki/Privacy_policy">
-              {% comment %} Translators: This button is at the bottom of every page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). {% endcomment %}
-              {% trans "Privacy policy" %}
-            </a>
-          </li>
-          <li>
             <a href="{% url 'terms' %}">
-              {% trans "Terms of use" %}
+              {% comment %} Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page. {% endcomment %}
+              {% trans "Terms of use and privacy policy" %}
             </a>
           </li>
           <li>

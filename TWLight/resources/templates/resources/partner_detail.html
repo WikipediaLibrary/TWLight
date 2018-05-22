@@ -181,7 +181,7 @@
             {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
             {% trans "Description not available." %}
           {% endif %}
-          {% if object.tags %}
+          {% if object.tags.count > 0 %}
             <div class="resource-label-subject">
             {% for tag in object.tags.all %}
               <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
@@ -358,6 +358,10 @@
       </div>
       <div class="timeline-panel">
         <div class="timeline-body">
+          {% if object.company_location %}
+            {% comment %} Translators: If a partner has their location listed, this message is a label for that location {% endcomment %}
+            <p>{% trans "Location" %}: {{ object.company_location.name }}</p>
+          {% endif %}
           {% if object.terms_of_use %}
             {% comment %} Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
             <p><a href="{{ object.terms_of_use }}">{% trans "Terms of use" %}</a></p>

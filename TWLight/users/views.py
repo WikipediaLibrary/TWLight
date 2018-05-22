@@ -22,6 +22,8 @@ from TWLight.users.groups import get_coordinators, get_restricted
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm
 from .models import Editor, UserProfile
 
+import datetime
+
 coordinators = get_coordinators()
 restricted = get_restricted()
 
@@ -94,8 +96,11 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             if self.request.user.editor == editor and not editor.contributions:
                 messages.add_message(self.request, messages.WARNING,
                     # Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-                    _('Please update your contributions to Wikipedia (below) to '
-                      'help coordinators evaluate your applications.'))
+                    _('Please <a href="{url}">update your contributions</a> '
+                      'to Wikipedia to help coordinators evaluate your '
+                      'applications.'.format(
+                        url=reverse_lazy('users:editor_update',
+                            kwargs={'pk': editor.pk}))))
         except Editor.DoesNotExist:
             """
             If the user viewing the site does not have an attached editor
@@ -387,6 +392,10 @@ class TermsView(UpdateView):
             # If they agreed with the terms, awesome. Send them where they were
             # trying to go, if there's a meaningful `next` parameter in the URL;
             # if not, send them to their home page as a sensible default.
+            # Also log the date they agreed.
+            self.get_object().terms_of_use_date = datetime.date.today()
+            self.get_object().save()
+
             return _redirect_to_next_param(self.request)
 
         else:
@@ -396,6 +405,10 @@ class TermsView(UpdateView):
             # put them in an obnoxious redirect loop - send them to where
             # they were going, which promptly sends them back to the terms
             # page because they haven't agreed to the terms....
+            # Also clear the ToU date field in case a user un-agrees
+            self.get_object().terms_of_use_date = None
+            self.get_object().save()
+
             if self.request.user in coordinators.user_set.all():
                 # Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
                 fail_msg = _('You may explore the site, but you will not be '

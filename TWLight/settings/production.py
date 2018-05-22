@@ -35,6 +35,9 @@ except ImportError:
 # Let Django know about external URLs in case they differ from internal
 # Needed to be added for /admin
 USE_X_FORWARDED_HOST = True
+# Let Django know that allowed hosts are trusted for CSRF.
+# Needed to be added for /admin
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
 # Never debug in prod
 DEBUG = False
