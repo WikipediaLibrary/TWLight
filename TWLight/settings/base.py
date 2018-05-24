@@ -19,26 +19,29 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 import os
+import json
 
-# Importing global settings is typically not recommended, and un-Django-like,
-# but we're doing something interesting with the LANGUAGES setting.
-from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# An atypical way of setting django languages for TranslateWiki integration:
+# https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
 # Get the language codes from the locale directories, and return the
-# corresponding list of tuples from the global language settting.
+# corresponding list of tuples from the Wikimedia CLDR-based language data.
+# https://github.com/wikimedia/language-data
 def get_languages_from_locale_subdirectories(dir):
-    EXISTING_LANGUAGES = []
+    current_languages = []
+    language_data_json = open(os.path.join(dir, "language-data.json"))
+    languages = json.loads(language_data_json.read())['languages']
     for locale_dir in os.listdir(dir):
         if os.path.isdir(os.path.join(dir, locale_dir)):
-            for i, (lang_code, lang_name) in enumerate(GLOBAL_LANGUAGES):
+            for lang_code, lang_data in languages.iteritems():
+                autonym = lang_data[-1]
                 if locale_dir == lang_code:
-                    EXISTING_LANGUAGES += [(lang_code, lang_name)]
-    return sorted(set(EXISTING_LANGUAGES))
-
+                    current_languages += [(lang_code, autonym)]
+    return sorted(set(current_languages))
 
 # ------------------------------------------------------------------------------
 # ------------------------> core django configurations <------------------------
