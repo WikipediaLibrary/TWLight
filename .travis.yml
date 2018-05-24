@@ -5,6 +5,9 @@ cache: pip
 python:
   - 2.7
 
+addons:
+  mariadb: '10.2'
+
 services:
   - mysql
 
