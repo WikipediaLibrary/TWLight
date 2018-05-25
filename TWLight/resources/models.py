@@ -3,6 +3,7 @@ import copy
 from datetime import timedelta
 
 from taggit.managers import TaggableManager
+from taggit.models import TagBase, GenericTaggedItemBase
 
 from django.conf.global_settings import LANGUAGES
 from django.contrib.auth.models import User
@@ -32,6 +33,17 @@ def validate_language_code(code):
             params={'code': code},
         )
 
+class TextFieldTag(TagBase):
+    name = models.CharField(verbose_name=_('Name'), unique=True, max_length=100)
+    slug = models.SlugField(verbose_name=_('Slug'), unique=True, max_length=100)
+
+    class Meta:
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
+
+class TaggedTextField(GenericTaggedItemBase):
+    tag = models.ForeignKey(TextFieldTag,
+                            related_name="%(app_label)s_%(class)s_items")
 
 class Language(models.Model):
     """
@@ -196,7 +208,7 @@ class Partner(models.Model):
             "content.")
         )
 
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(through=TaggedTextField, blank=True)
 
     # Non-universal form fields
     # --------------------------------------------------------------------------

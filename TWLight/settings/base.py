@@ -21,6 +21,10 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import json
 
+# Importing global settings is typically not recommended, and un-Django-like,
+# but we're doing something interesting with the LANGUAGES setting.
+from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
+
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
@@ -35,12 +39,13 @@ def get_languages_from_locale_subdirectories(dir):
     current_languages = []
     language_data_json = open(os.path.join(dir, "language-data.json"))
     languages = json.loads(language_data_json.read())['languages']
-    for locale_dir in os.listdir(dir):
-        if os.path.isdir(os.path.join(dir, locale_dir)):
-            for lang_code, lang_data in languages.iteritems():
+    #for locale_dir in os.listdir(dir):
+        #if os.path.isdir(os.path.join(dir, locale_dir)):
+    for lang_code, lang_data in languages.iteritems():
+        for i, (djlang_code, djlang_name) in enumerate(GLOBAL_LANGUAGES):
+            if lang_code == djlang_code:
                 autonym = lang_data[-1]
-                if locale_dir == lang_code:
-                    current_languages += [(lang_code, autonym)]
+                current_languages += [(lang_code, autonym)]
     return sorted(set(current_languages))
 
 # ------------------------------------------------------------------------------
