@@ -31,8 +31,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     # Multiple users with the same username can cause issues with group
     # checks.
-    username = factory.LazyAttribute(lambda s: ''.join(
-        random.choice(string.lowercase) for i in range(10)))
+    username = factory.Faker('name')
     email = 'alice@example.com'
 
     profile = factory.RelatedFactory(UserProfileFactory, 'user')

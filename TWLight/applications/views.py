@@ -811,23 +811,33 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
     template_name = 'applications/send.html'
 
     def get_queryset(self):
-        # The annotate and filter functions filter out any partners who only
-        # have applications from users with an active data restriction.
+        # Base queryset of partners with approved applications
         base_queryset = Partner.objects.filter(
                             applications__status=Application.APPROVED
-                            ).annotate(
+                            )
+
+        # For each partner in the queryset, count how many applications are
+        # from users with data restriction turned on
+        annotated_queryset = base_queryset.annotate(
                                 not_restricted_count = Count(
                                     Case(When(~Q(applications__editor__user__groups__name='restricted'), then=1),
                                         output_field=IntegerField(),
                                     )
                                 )
-                            ).filter(
+                            )
+
+        # For each partner in the queryset, return the ones with more
+        # than 1 application from an unrestricted user.
+        filtered_queryset = annotated_queryset.filter(
                                 not_restricted_count__gt=0
                             )
+
+        # Superusers can see all unrestricted applications, otherwise
+        # limit to ones from the current coordinator
         if self.request.user.is_superuser:
-            return base_queryset.distinct()
+            return filtered_queryset.distinct()
         else:
-            return base_queryset.filter(
+            return filtered_queryset.filter(
                     coordinator__pk=self.request.user.pk
                 ).distinct()
 
