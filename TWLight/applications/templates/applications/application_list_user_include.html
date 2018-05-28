@@ -45,7 +45,7 @@
             {% if app.is_renewable %}
               <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
             {% else %}
-              <em>{% trans "Unfortunately renewals are not available right now or you have already requested a renewal." %}</em>
+              <em>{% trans "Renewals are either not required, not available right now, or you have already requested a renewal." %}</em>
             {% endif %}
         </div>
       {% endif %}
