@@ -29,7 +29,9 @@ class UserFactory(factory.django.DjangoModelFactory):
         model = User
         django_get_or_create = ('username',)
 
-    username = 'alice'
+    # Multiple users with the same username can cause issues with group
+    # checks.
+    username = factory.Faker('name')
     email = 'alice@example.com'
 
     profile = factory.RelatedFactory(UserProfileFactory, 'user')

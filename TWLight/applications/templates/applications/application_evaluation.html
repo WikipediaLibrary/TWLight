@@ -18,8 +18,12 @@
   {% if user|coordinators_only %}
     {% comment %}Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.{% endcomment %}
     <h1>{% trans 'Evaluate application' %}</h1>
-
-    {% crispy form %}
+    {% if object.user|restricted %}
+      {% comment %}Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.{% endcomment %}
+      {% trans 'This user has requested a restriction on the processing of their data, so you cannot change the status of their application.' %}
+    {% else %}
+      {% crispy form %}
+    {% endif %}
   {% else %}
     {% comment %}Translators: This is the title of the application page shown to users who are not a coordinator.{% endcomment %}
     <h1>{% trans 'Application history' %}</h1>  
@@ -134,27 +138,29 @@
   <h2>{% trans 'Discussion' %}</h2>
   {% render_comment_list for object %}
 
-  {% get_comment_form for object as form %}
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-3">
-      <form action="{% comment_form_target %}" method="POST">
-        {% csrf_token %}
-        <label for="{{ form.comment.id }}" class="control-label">
-            {{ form.comment.label|safe }}
-        </label>
-        {% crispy_field form.comment %}
-        {{ form.honeypot }}
-        {{ form.content_type }}
-        {{ form.object_pk }}
-        {{ form.timestamp }}
-        {{ form.security_hash }}
-        <input type="hidden" name="next" value="{% url 'applications:evaluate' object.pk %}" />
-        <br />
-        {% comment %}Translators: This labels the button which users click to send a typed comment.{% endcomment %}
-        <input type="submit" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
-      </form>
+  {% if not object.user|restricted %}
+    {% get_comment_form for object as form %}
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <form action="{% comment_form_target %}" method="POST">
+          {% csrf_token %}
+          <label for="{{ form.comment.id }}" class="control-label">
+              {{ form.comment.label|safe }}
+          </label>
+          {% crispy_field form.comment %}
+          {{ form.honeypot }}
+          {{ form.content_type }}
+          {{ form.object_pk }}
+          {{ form.timestamp }}
+          {{ form.security_hash }}
+          <input type="hidden" name="next" value="{% url 'applications:evaluate' object.pk %}" />
+          <br />
+          {% comment %} Translators: This labels the button which users click to send a typed comment.{% endcomment %}
+          <input type="submit" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
+        </form>
+      </div>
     </div>
-  </div>
+  {% endif %}
 
   <p>
     {% comment %} Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only. {% endcomment %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load twlight_perms %}
+
+{% block content %}
+  <h1>{% trans 'Restrict data processing' %}</h1>
+
+  <p>
+  {% comment %} Translators: This message is displayed on the page where users can request we stop processing their data. {% endcomment %}
+  {% blocktrans trimmed %}
+      Checking this box and clicking “Restrict” will pause all processing of 
+      the data you have entered into this website. You will not be able to apply 
+      for access to resources, your applications will not be further processed, 
+      and none of your data will be altered, until you return to this page and 
+      uncheck the box. This is not the same as deleting your data.
+  {% endblocktrans %}
+  </p>
+  {% if user|coordinators_only %}
+    <p>
+    {% comment %} Translators: This warning message is shown to coordinators who view the data restriction page. {% endcomment %}
+    {% blocktrans trimmed %}
+      You are a coordinator on this site. If you restrict the processing of 
+      your data, your coordinator flag will be removed.
+    {% endblocktrans %}
+    </p>
+  {% endif %}
+  {% crispy form %}
+{% endblock content %}

@@ -7,6 +7,7 @@ from django import forms
 from django.utils.translation import ugettext as _
 
 from .models import Editor, UserProfile
+from .groups import get_restricted
 
 
 class EditorUpdateForm(forms.ModelForm):
@@ -45,6 +46,26 @@ class SetLanguageForm(forms.Form):
         self.fields['language'].initial = user.userprofile.lang
         self.helper = FormHelper()
         self.helper.label_class = 'sr-only'
+
+
+
+class RestrictDataForm(forms.Form):
+    restricted = forms.BooleanField(required= False)
+
+    def __init__(self, user, *args, **kwargs):
+        super(RestrictDataForm, self).__init__(*args, **kwargs)
+
+        # Translators: Labels the button users click to request a restriction on the processing of their data.
+        self.fields['restricted'].label = _("Restrict my data")
+
+        restricted = get_restricted()
+        user_is_restricted = user in restricted.user_set.all()
+
+        self.fields['restricted'].initial = user_is_restricted
+
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-inline'
+        self.helper.field_template = 'bootstrap3/layout/inline_field.html'
 
 
 

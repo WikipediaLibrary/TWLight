@@ -18,7 +18,7 @@ from TWLight.resources.models import Partner, Stream
 from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.factories import EditorFactory, UserFactory
-from TWLight.users.groups import get_coordinators
+from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Editor
 
 from . import views
@@ -673,6 +673,31 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         response = views.SubmitApplicationView.as_view()(request)
 
         self.assertEqual(response.status_code, 200)
+
+
+    def test_data_processing_required(self):
+        """
+        If users have requested a restriction on the processing of
+        their data, they should not be allowed to apply for access.
+        """
+        # Set up request.
+        factory = RequestFactory()
+        request = factory.get(self.url)
+        p1 = PartnerFactory()
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        user = UserFactory()
+        user.userprofile.terms_of_use = True
+        user.userprofile.save()
+        _ = EditorFactory(user=user)
+        request.user = user
+
+        restricted = get_restricted()
+        user.groups.add(restricted)
+        user.save()
+
+        with self.assertRaises(PermissionDenied):
+            _ = views.SubmitApplicationView.as_view()(request)
 
 
     def test_missing_session_key(self):
@@ -1852,6 +1877,24 @@ class RenewApplicationTest(BaseApplicationViewTest):
         self.assertTrue(Application.objects.filter(parent=app))
 
 
+    def test_restricted_renewal(self):
+        # Users with restricted processing shouldn't be able to renew
+        # an application.
+        partner = PartnerFactory(renewals_available=True)
+        app = ApplicationFactory(partner=partner,
+            status=Application.APPROVED, editor=self.editor.editor)
+
+        restricted = get_restricted()
+        self.editor.groups.add(restricted)
+
+        request = RequestFactory().get(reverse('applications:renew',
+            kwargs={'pk': app.pk}))
+        request.user = self.editor
+
+        with self.assertRaises(PermissionDenied):
+            _ = views.RenewApplicationView.as_view()(
+                request, pk=app.pk)
+
 
 class ApplicationModelTest(TestCase):
 
@@ -2076,9 +2119,6 @@ class EvaluateApplicationTest(TestCase):
         editor = EditorFactory()
         self.user = editor.user
 
-        coordinators = get_coordinators()
-        coordinators.user_set.add(self.user)
-
         self.partner = PartnerFactory()
 
         self.application = ApplicationFactory(
@@ -2091,7 +2131,24 @@ class EvaluateApplicationTest(TestCase):
             kwargs={'pk': self.application.pk})
 
         editor2 = EditorFactory()
-        self.unpriv_user = editor2.user
+        self.user_restricted = editor2.user
+        get_restricted().user_set.add(self.user_restricted)
+
+        self.restricted_application = ApplicationFactory(
+            editor=editor2,
+            status=Application.PENDING,
+            partner=self.partner,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+        self.url_restricted = reverse('applications:evaluate',
+            kwargs={'pk': self.restricted_application.pk})
+
+        self.coordinator = UserFactory(username='coordinator')
+        self.coordinator.set_password('coordinator')
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+        self.coordinator.userprofile.terms_of_use = True
+        self.coordinator.userprofile.save()
 
         self.message_patcher = patch('TWLight.applications.views.messages.add_message')
         self.message_patcher.start()
@@ -2111,6 +2168,9 @@ class EvaluateApplicationTest(TestCase):
         # Create an coordinator with a test client session
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+
         # Approve the application
         response = self.client.post(self.url,
             data={'status': Application.APPROVED},
@@ -2129,6 +2189,9 @@ class EvaluateApplicationTest(TestCase):
 
         # Create an coordinator with a test client session
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
 
         # Approve the application
         response = self.client.post(self.url,
@@ -2150,6 +2213,9 @@ class EvaluateApplicationTest(TestCase):
         # Create an coordinator with a test client session
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+
         # Approve the application
         response = self.client.post(self.url,
             data={'status': Application.APPROVED},
@@ -2159,6 +2225,35 @@ class EvaluateApplicationTest(TestCase):
         self.application.refresh_from_db()
         self.assertEqual(self.application.date_closed, date.today())
 
+
+    def test_form_present_not_restricted(self):
+        factory = RequestFactory()
+
+        # Coordinator needs to be linked to the partner
+        # so we don't get a 302
+        self.partner.coordinator = self.coordinator
+        self.partner.save()
+
+        request = factory.get(self.url)
+        request.user = self.coordinator
+
+        response = views.EvaluateApplicationView.as_view()(request, pk=self.application.pk)
+        self.assertIn('<form', response.render().content)
+
+
+    def test_form_not_present_restricted(self):
+        factory = RequestFactory()
+
+        # Coordinator needs to be linked to the partner
+        # so we don't get a 302
+        self.partner.coordinator = self.coordinator
+        self.partner.save()
+
+        request = factory.get(self.url_restricted)
+        request.user = self.coordinator
+
+        response = views.EvaluateApplicationView.as_view()(request, pk=self.restricted_application.pk)
+        self.assertNotIn('<form', response.render().content)
 
 
 class BatchEditTest(TestCase):
@@ -2489,3 +2584,71 @@ class MarkSentTest(TestCase):
         # Expected success condition: redirect back to the original page.
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, self.url)
+
+    def test_restricted_applications_sent(self):
+        # If a partner *only* has restricted applications, it shouldn't be
+        # listed on the Send page. If a partner has at least one
+        # non-restricted application, it should be there.
+        request = RequestFactory().get(reverse('applications:send'))
+        request.user = self.user
+
+        editor_restricted = EditorFactory()
+        self.restricted_user = editor_restricted.user
+        restricted = get_restricted()
+        self.restricted_user.groups.add(restricted)
+        self.restricted_user.save()
+
+        self.app_restricted = ApplicationFactory(
+            editor=editor_restricted,
+            status=Application.APPROVED,
+            partner=self.partner2,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        partner3 = PartnerFactory(coordinator=self.user)
+
+        app_restricted2 = ApplicationFactory(
+            editor=editor_restricted,
+            status=Application.APPROVED,
+            partner=partner3,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.partner2.coordinator = self.user
+        self.partner2.save()
+
+        response = views.ListReadyApplicationsView.as_view()(
+            request)
+        content = response.render().content
+        self.assertIn(self.partner2.company_name, content)
+        self.assertNotIn(partner3.company_name, content)
+
+    def test_restricted_applications_mark_sent(self):
+        # Applications from restricted users shouldn't be listed
+        # on the send page.
+        request = RequestFactory().get(reverse('applications:send_partner',
+            kwargs={'pk': self.partner2.pk}))
+        request.user = self.user
+
+        editor_restricted = EditorFactory()
+        self.restricted_user = editor_restricted.user
+        restricted = get_restricted()
+        self.restricted_user.groups.add(restricted)
+        self.restricted_user.save()
+
+        app_restricted = ApplicationFactory(
+            editor=editor_restricted,
+            status=Application.APPROVED,
+            partner=self.partner2,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.partner2.coordinator = self.user
+        self.partner2.save()
+
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk= self.partner2.pk)
+        content = response.render().content
+
+        self.assertIn(self.app2.editor.wp_username, content)
+        self.assertNotIn(app_restricted.editor.wp_username, content)

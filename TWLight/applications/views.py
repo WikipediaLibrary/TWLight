@@ -21,6 +21,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.db.models import IntegerField, Case, When, Count, Q
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
@@ -33,7 +34,8 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  EditorsOnly,
                                  ToURequired,
                                  EmailRequired,
-                                 SelfOnly)
+                                 SelfOnly,
+                                 DataProcessingRequired)
 from TWLight.resources.models import Partner
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
@@ -152,7 +154,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
 
 
 
-class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
+class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataProcessingRequired, FormView):
     """
     People can get to application submission in 2 ways:
     1) via RequestApplicationView, which lets people select multiple partners;
@@ -809,15 +811,25 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
     template_name = 'applications/send.html'
 
     def get_queryset(self):
+        # Find all approved applications, then list the relevant partners.
+        # Don't include applications from restricted users when generating
+        # this list.
+        base_queryset = Application.objects.filter(
+                            status=Application.APPROVED
+                            ).exclude(
+                                editor__user__groups__name = 'restricted')
+
+        partner_list = Partner.objects.filter(
+            applications__in=base_queryset).distinct()
+
+        # Superusers can see all unrestricted applications, otherwise
+        # limit to ones from the current coordinator
         if self.request.user.is_superuser:
-            return Partner.objects.filter(
-                    applications__status=Application.APPROVED
-                ).distinct()
+            return partner_list
         else:
-            return Partner.objects.filter(
-                    applications__status=Application.APPROVED,
+            return partner_list.filter(
                     coordinator__pk=self.request.user.pk
-                ).distinct()
+                )
 
 
 class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
@@ -827,7 +839,9 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
         apps = self.get_object().applications.filter(
-            status=Application.APPROVED)
+            status=Application.APPROVED).exclude(
+                editor__user__groups__name='restricted'
+                )
         app_outputs = {}
 
         for app in apps:
@@ -870,7 +884,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
 
 
 
-class RenewApplicationView(SelfOnly, View):
+class RenewApplicationView(SelfOnly, DataProcessingRequired, View):
     """
     This view takes an existing Application and creates a clone, with new
     dates and a FK back to the original application.
