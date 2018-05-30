@@ -19,14 +19,19 @@ from django.utils.translation import ugettext_lazy as _
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 from TWLight.users.groups import get_coordinators, get_restricted
 
+from reversion.models import Version
+
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm
 from .models import Editor, UserProfile
+from TWLight.applications.models import Application
 
 import datetime
 
 coordinators = get_coordinators()
 restricted = get_restricted()
 
+import logging
+logger = logging.getLogger(__name__)
 
 def _is_real_url(url):
     """
@@ -356,6 +361,12 @@ class DeleteDataView(SelfOnly, DeleteView):
             user_app.comments = "[deleted]"
 
             user_app.save()
+
+            # Delete the app's version history
+            app_versions = Version.objects.get_for_object_reference(
+                Application, user_app.pk)
+            for app_version in app_versions:
+                app_version.delete()
 
         user.delete()
 
