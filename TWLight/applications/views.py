@@ -816,18 +816,25 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
                             applications__status=Application.APPROVED
                             )
 
-        # For each partner in the queryset, count how many applications are
-        # from users with data restriction turned on
+        # Find the applications for this partner with editors
+        # who don't have the restricted user group. When() result of
+        # 1 will allow us to easily count the result.
+        unrestricted_apps = ~Q(applications__editor__user__groups__name='restricted')
+        when_unrestricted = When(unrestricted_apps, then=1)
+
+        # Annotating allows us to keep track of how many
+        # unrestricted applications each partner has
         annotated_queryset = base_queryset.annotate(
                                 not_restricted_count = Count(
-                                    Case(When(~Q(applications__editor__user__groups__name='restricted'), then=1),
-                                        output_field=IntegerField(),
-                                    )
+                                    # Case can accept many When()s, but is still
+                                    # needed even with just one.
+                                    Case(when_unrestricted,
+                                        output_field=IntegerField())
                                 )
                             )
 
-        # For each partner in the queryset, return the ones with more
-        # than 1 application from an unrestricted user.
+        # For each partner in the queryset, return the ones with at least
+        # one application from an unrestricted user.
         filtered_queryset = annotated_queryset.filter(
                                 not_restricted_count__gt=0
                             )
