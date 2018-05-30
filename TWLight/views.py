@@ -66,7 +66,7 @@ class HomePageView(TemplateView):
 
 
         # New applications!
-        apps = self._get_newest(Application.objects.all())
+        apps = self._get_newest(Application.objects.exclude(editor=None))
 
         for app in apps:
             event = {}

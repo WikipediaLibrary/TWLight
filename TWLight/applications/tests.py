@@ -38,7 +38,6 @@ from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
 
-
 class SynchronizeFieldsTest(TestCase):
     """
     There are four distinct places we record facts about what types of extra
@@ -2111,6 +2110,45 @@ class ApplicationModelTest(TestCase):
         app = ApplicationFactory(partner=partner)
         self.assertFalse(app.renew())
 
+    def test_deleted_user_app_blanked(self):
+        """
+        Test that applications from users who have deleted their data
+        have their data wiped correctly.
+        """
+        user = UserFactory(username='editor')
+        editor = EditorFactory(user=user)
+        partner = PartnerFactory()
+        app = ApplicationFactory(
+                rationale='Because I said so',
+                comments='No comment',
+                agreement_with_terms_of_use=True,
+                account_email='bob@example.com',
+                editor=editor,
+                partner=partner,
+                status=Application.APPROVED,
+                date_closed=date.today() + timedelta(days=1),
+                days_open=1,
+                sent_by=user
+              )
+
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': user.pk})
+
+        # Need a password so we can login
+        user.set_password('editor')
+        user.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=user.username, password='editor')
+
+        submit = self.client.post(delete_url)
+        app.refresh_from_db()
+
+        assert (app.editor == None and
+                app.rationale == "[deleted]" and
+                app.account_email == "[deleted]" and
+                app.comments == "[deleted]")
 
 
 class EvaluateApplicationTest(TestCase):
