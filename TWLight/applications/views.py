@@ -811,42 +811,25 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
     template_name = 'applications/send.html'
 
     def get_queryset(self):
-        # Base queryset of partners with approved applications
-        base_queryset = Partner.objects.filter(
-                            applications__status=Application.APPROVED
-                            )
+        # Find all approved applications, then list the relevant partners.
+        # Don't include applications from restricted users when generating
+        # this list.
+        base_queryset = Application.objects.filter(
+                            status=Application.APPROVED
+                            ).exclude(
+                                editor__user__groups__name = 'restricted')
 
-        # Find the applications for this partner with editors
-        # who don't have the restricted user group. When() result of
-        # 1 will allow us to easily count the result.
-        unrestricted_apps = ~Q(applications__editor__user__groups__name='restricted')
-        when_unrestricted = When(unrestricted_apps, then=1)
-
-        # Annotating allows us to keep track of how many
-        # unrestricted applications each partner has
-        annotated_queryset = base_queryset.annotate(
-                                not_restricted_count = Count(
-                                    # Case can accept many When()s, but is still
-                                    # needed even with just one.
-                                    Case(when_unrestricted,
-                                        output_field=IntegerField())
-                                )
-                            )
-
-        # For each partner in the queryset, return the ones with at least
-        # one application from an unrestricted user.
-        filtered_queryset = annotated_queryset.filter(
-                                not_restricted_count__gt=0
-                            )
+        partner_list = Partner.objects.filter(
+            applications__in=base_queryset).distinct()
 
         # Superusers can see all unrestricted applications, otherwise
         # limit to ones from the current coordinator
         if self.request.user.is_superuser:
-            return filtered_queryset.distinct()
+            return partner_list
         else:
-            return filtered_queryset.filter(
+            return partner_list.filter(
                     coordinator__pk=self.request.user.pk
-                ).distinct()
+                )
 
 
 class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
