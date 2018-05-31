@@ -816,9 +816,10 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
         # Don't include applications from restricted users when generating
         # this list.
         base_queryset = Application.objects.filter(
-                            status=Application.APPROVED
+                            status=Application.APPROVED,
+                            editor__isnull=False
                             ).exclude(
-                                editor__user__groups__name = 'restricted')
+                                editor__user__groups__name='restricted')
 
         partner_list = Partner.objects.filter(
             applications__in=base_queryset).distinct()
@@ -840,7 +841,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
         apps = self.get_object().applications.filter(
-            status=Application.APPROVED).exclude(
+            status=Application.APPROVED, editor__isnull=False).exclude(
                 editor__user__groups__name='restricted'
                 )
         app_outputs = {}

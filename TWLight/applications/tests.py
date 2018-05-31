@@ -1309,6 +1309,12 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
         ApplicationFactory(status=Application.SENT, parent=parent)
 
+        # And some applications from users who deleted their account.
+        ApplicationFactory(status=Application.PENDING, editor=None)
+        ApplicationFactory(status=Application.QUESTION, editor=None)
+        ApplicationFactory(status=Application.APPROVED, editor=None)
+        ApplicationFactory(status=Application.NOT_APPROVED, editor=None)
+        ApplicationFactory(status=Application.SENT, editor=None)
 
     @classmethod
     def tearDownClass(cls):
@@ -1370,8 +1376,12 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # reponse for view when user isn't the designated coordinator
         denyResponse = view.as_view()(request)
 
+        # We made some apps that shouldn't ever show up, which are
+        # tested later, not here.
+        queryset_ex_deleted = queryset.exclude(editor=None)
+
         # Designate the coordinator
-        for obj in queryset:
+        for obj in queryset_ex_deleted:
             partner = Partner.objects.get(pk=obj.partner.pk)
             partner.coordinator = self.coordinator
             partner.save()
@@ -1379,7 +1389,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # reponse for view when user is the designated coordinator
         allowResponse = view.as_view()(request)
 
-        for obj in queryset:
+        for obj in queryset_ex_deleted:
             # Unlike Client(), RequestFactory() doesn't render the response;
             # we'll have to do that before we can check for its content.
 
@@ -1425,6 +1435,56 @@ class ListApplicationsTest(BaseApplicationViewTest):
         queryset = Application.objects.filter(
             status=Application.NOT_APPROVED)
         self._base_test_object_visibility(url,
+            views.ListRejectedApplicationsView, queryset)
+
+
+    def _base_test_deleted_object_visibility(self, url, view, queryset):
+        factory = RequestFactory()
+
+        request = factory.get(url)
+        request.user = self.coordinator
+
+        # Only testing the apps from deleted users
+        queryset_deleted = queryset.filter(editor=None)
+
+        # Designate the coordinator
+        for obj in queryset_deleted:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        response = view.as_view()(request)
+
+        for obj in queryset_deleted:
+            # Unlike Client(), RequestFactory() doesn't render the response;
+            # we'll have to do that before we can check for its content.
+
+            # Deleted applications should not be visible to anyone, even the
+            # assigned coordinator.
+            self.assertNotIn(obj.__str__(), response.render().content)
+
+
+    def test_list_object_visibility(self):
+        url = reverse('applications:list')
+        queryset = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION])
+        self._base_test_deleted_object_visibility(url,
+            views.ListApplicationsView, queryset)
+
+
+    def test_list_approved_object_visibility(self):
+        url = reverse('applications:list_approved')
+        queryset = Application.objects.filter(
+            status=Application.APPROVED)
+        self._base_test_deleted_object_visibility(url,
+            views.ListApprovedApplicationsView, queryset)
+
+
+    def test_list_rejected_object_visibility(self):
+        url = reverse('applications:list_rejected')
+        queryset = Application.objects.filter(
+            status=Application.NOT_APPROVED)
+        self._base_test_deleted_object_visibility(url,
             views.ListRejectedApplicationsView, queryset)
 
 
@@ -1474,7 +1534,8 @@ class ListApplicationsTest(BaseApplicationViewTest):
         request.user = self.coordinator
 
         expected_qs = Application.objects.filter(
-            status__in=[Application.PENDING, Application.QUESTION])
+            status__in=[Application.PENDING, Application.QUESTION]).exclude(
+                editor=None)
 
         # reponse for view when user isn't the designated coordinator
         response = views.ListApplicationsView.as_view()(request)

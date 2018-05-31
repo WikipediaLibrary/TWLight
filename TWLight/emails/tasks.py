@@ -173,10 +173,14 @@ def send_comment_notification_emails(sender, **kwargs):
 
 def send_approval_notification_email(instance):
     email = ApprovalNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner})
+
+    # If, for some reason, we're trying to send an email to a user
+    # who deleted their account, stop doing that.
+    if instance.editor:
+        email.send(instance.user.email,
+            {'user': instance.user.editor.wp_username,
+             'lang': instance.user.userprofile.lang,
+             'partner': instance.partner})
 
 
 def send_waitlist_notification_email(instance):
@@ -185,11 +189,12 @@ def send_waitlist_notification_email(instance):
     link = 'https://{base}{path}'.format(base=base_url, path=path)
 
     email = WaitlistNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner,
-         'link': link})
+    if instance.editor:
+        email.send(instance.user.email,
+            {'user': instance.user.editor.wp_username,
+             'lang': instance.user.userprofile.lang,
+             'partner': instance.partner,
+             'link': link})
 
 
 def send_rejection_notification_email(instance):
@@ -208,11 +213,12 @@ def send_rejection_notification_email(instance):
         app_url = reverse_lazy('users:home')
 
     email = RejectionNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner,
-         'app_url': app_url})
+    if instance.editor:
+        email.send(instance.user.email,
+            {'user': instance.user.editor.wp_username,
+             'lang': instance.user.userprofile.lang,
+             'partner': instance.partner,
+             'app_url': app_url})
 
 
 @receiver(pre_save, sender=Application)
