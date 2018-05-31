@@ -192,6 +192,11 @@ class BaseApplicationForm(forms.Form):
             for datum in user_data:
                 self.fields[datum] = FIELD_TYPES[datum]
                 self.fields[datum].label = FIELD_LABELS[datum]
+                # Show which partner wants which personal data if applying
+                # for more than one.
+                if len(self.field_params) > 1:
+                    self.fields[datum].help_text = "Requested by: {partner_list}".format(
+                        partner_list= ", ".join(user_data[datum]))
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)
