@@ -18,6 +18,16 @@ class TextFieldTagAdmin(TabbedExternalJqueryTranslationAdmin):
     search_fields = ('name',)
     list_display = ('name', 'slug')
 
+    def has_add_permission(self, request):
+        """
+        Adding tags directly through the Resources > Tags admin screen exposes
+        the fact that tag model has name unique == False, allowing admins to
+        create tags with duplicate names, but different slugs. Adding them from
+        the resources > Partner/Stream screen does not have this problem. Thus,
+        this hack.
+        """
+        return False
+
 admin.site.register(TextFieldTag, TextFieldTagAdmin)
 
 
