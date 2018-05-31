@@ -12,6 +12,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.http import Http404
 from django.test import TestCase, Client, RequestFactory
 
 from TWLight.resources.models import Partner, Stream
@@ -2242,6 +2243,15 @@ class EvaluateApplicationTest(TestCase):
         self.url_restricted = reverse('applications:evaluate',
             kwargs={'pk': self.restricted_application.pk})
 
+        self.deleted_user_application = ApplicationFactory(
+            editor=None,
+            status=Application.PENDING,
+            partner=self.partner,
+            rationale='lol jk',
+            agreement_with_terms_of_use=True)
+        self.url_deleted = reverse('applications:evaluate',
+            kwargs={'pk': self.deleted_user_application.pk})
+
         self.coordinator = UserFactory(username='coordinator')
         self.coordinator.set_password('coordinator')
         coordinators = get_coordinators()
@@ -2336,7 +2346,8 @@ class EvaluateApplicationTest(TestCase):
         request = factory.get(self.url)
         request.user = self.coordinator
 
-        response = views.EvaluateApplicationView.as_view()(request, pk=self.application.pk)
+        response = views.EvaluateApplicationView.as_view()(request,
+            pk=self.application.pk)
         self.assertIn('<form', response.render().content)
 
 
@@ -2351,8 +2362,25 @@ class EvaluateApplicationTest(TestCase):
         request = factory.get(self.url_restricted)
         request.user = self.coordinator
 
-        response = views.EvaluateApplicationView.as_view()(request, pk=self.restricted_application.pk)
+        response = views.EvaluateApplicationView.as_view()(request,
+            pk=self.restricted_application.pk)
         self.assertNotIn('<form', response.render().content)
+
+
+    def test_deleted_user_app_visibility(self):
+        # If a user deleted their data, any blanked applications
+        # they had should no longer be visible, even to coordinator.
+        factory = RequestFactory()
+
+        request = factory.get(self.url_deleted)
+        request.user = self.coordinator
+
+        self.partner.coordinator = self.coordinator
+        self.partner.save()
+
+        with self.assertRaises(Http404):
+            _ = views.EvaluateApplicationView.as_view()(request,
+                pk=self.deleted_user_application.pk)
 
 
 class BatchEditTest(TestCase):
