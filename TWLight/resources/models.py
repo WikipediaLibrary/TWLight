@@ -34,7 +34,17 @@ def validate_language_code(code):
         )
 
 class TextFieldTag(TagBase):
-    name = models.CharField(verbose_name=_('Name'), unique=True, max_length=100)
+    """
+    We're defining a custom tag here the following reasons:
+    * Without doing so, the migrations that define our tags end up in the taggit
+      apps migration folder instead of ours, making version control difficult.
+    * So we can use a non-unique Text field for the tag name. This is done to
+      prevent indexing, because translations can cause the number of indexes to
+      exceed the limits of any storage engine available to MySQL/MariaDB.
+      Avoiding indexes has consequences.
+    Docs here: https://django-taggit.readthedocs.io/en/latest/custom_tagging.html#using-a-custom-tag-or-through-model
+    """
+    name = models.TextField(verbose_name=_('Name'), unique=False, max_length=100)
     slug = models.SlugField(verbose_name=_('Slug'), unique=True, max_length=100)
 
     class Meta:
