@@ -34,7 +34,8 @@ from .helpers import (USER_FORM_FIELDS,
                       FIELD_LABELS,
                       SPECIFIC_STREAM,
                       AGREEMENT_WITH_TERMS_OF_USE,
-                      ACCOUNT_EMAIL)
+                      ACCOUNT_EMAIL,
+                      HIDDEN)
 from .models import Application
 
 

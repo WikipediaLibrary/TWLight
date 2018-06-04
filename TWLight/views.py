@@ -65,8 +65,9 @@ class HomePageView(TemplateView):
             activity.append(event)
 
 
-        # New applications!
-        apps = self._get_newest(Application.objects.all())
+        # New applications! Except for the ones where the user requested
+        # it be hidden.
+        apps = self._get_newest(Application.objects.exclude(hidden=True))
 
         for app in apps:
             event = {}
