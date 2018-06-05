@@ -15,6 +15,7 @@ from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
+from django_comments.models import Comment
 
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 from TWLight.users.groups import get_coordinators, get_restricted
@@ -367,6 +368,14 @@ class DeleteDataView(SelfOnly, DeleteView):
                 Application, user_app.pk)
             for app_version in app_versions:
                 app_version.delete()
+
+        # Also blank any comments left by this user, including their
+        # username and email, which is duplicated in the comment object.
+        for user_comment in Comment.objects.filter(user=user):
+            user_comment.user_name = ""
+            user_comment.user_email = ""
+            user_comment.comment = "[deleted]"
+            user_comment.save()
 
         user.delete()
 
