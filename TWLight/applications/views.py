@@ -288,17 +288,20 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataPr
 
     def _get_user_fields(self, partners=None):
         """
-        Return a list of user-specific data fields required by at least one
-        Partner to whom the user is requesting access.
+        Return a dict of user-specific data fields required by at least one
+        Partner to whom the user is requesting access, with a list of
+        partners requesting that data.
         """
         if not partners:
             return None
 
-        needed_fields = []
+        needed_fields = {}
         for field in USER_FORM_FIELDS:
             query = {'{field}'.format(field=field): True}
-            if partners.filter(**query).count():
-                needed_fields.append(field)
+            partners_queried = partners.filter(**query)
+            if partners_queried.count():
+                requesting_partners = partners_queried.distinct()
+                needed_fields[field] = [x.__str__() for x in partners_queried]
 
         return needed_fields
 
