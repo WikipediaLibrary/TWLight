@@ -181,6 +181,9 @@ def send_approval_notification_email(instance):
             {'user': instance.user.editor.wp_username,
              'lang': instance.user.userprofile.lang,
              'partner': instance.partner})
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 
 def send_waitlist_notification_email(instance):
@@ -195,7 +198,9 @@ def send_waitlist_notification_email(instance):
              'lang': instance.user.userprofile.lang,
              'partner': instance.partner,
              'link': link})
-
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 def send_rejection_notification_email(instance):
     base_url = get_current_site(None).domain
@@ -219,7 +224,9 @@ def send_rejection_notification_email(instance):
              'lang': instance.user.userprofile.lang,
              'partner': instance.partner,
              'app_url': app_url})
-
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):
