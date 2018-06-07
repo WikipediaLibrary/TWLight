@@ -7,36 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from TWLight.users.models import Editor, UserProfile
 
-def deactivate(modeladmin, request, queryset):
-    for user in queryset:
-        if hasattr(user, 'editor'):
-            # Delete all optional info on Editor
-            # We can't delete the editor instance entirely because that would
-            # delete associated Applications, which we wish to preserve.
-            user.editor.contributions = ''
-            user.editor.real_name = ''
-            user.editor.country_of_residence = ''
-            user.editor.occupation = ''
-            user.editor.affiliation = ''
-            user.editor.save()
-
-        user.userprofile.terms_of_use = False
-        user.userprofile.save()
-
-        user.email = ''
-        user.is_active = False
-        user.save()
-
-        messages.add_message(request, messages.SUCCESS,
-            # Translators: Shown when an administrator deletes a user's account. Don't translate {user}.
-            _('User {user} deactivated.').format(user=user))
-
-
-deactivate.short_description = \
-    "Deactivate selected accounts"
-
-
-
 class EditorInline(admin.StackedInline):
     model = Editor
     max_num = 1
@@ -57,7 +27,6 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(AuthUserAdmin):
     inlines = [EditorInline, UserProfileInline]
-    actions = [deactivate]
     list_display = ['username', 'get_wp_username', 'is_staff']
     list_filter = ['is_staff', 'is_active', 'is_superuser']
     default_filters = ['is_active__exact=1']
