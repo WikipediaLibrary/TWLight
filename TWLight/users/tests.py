@@ -343,7 +343,7 @@ class ViewsTestCase(TestCase):
 
     def test_user_delete(self):
         """
-        Test that users who delete their data have their user object deleted.
+        Verify that deleted users have no user object.
         """
         delete_url = reverse('users:delete_data',
             kwargs={'pk': self.user_editor.pk})
