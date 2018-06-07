@@ -4,6 +4,7 @@ from itertools import chain
 from mock import patch
 import reversion
 from urlparse import urlparse
+from faker import Faker
 
 from django import forms
 from django.conf import settings
@@ -1379,10 +1380,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         # We made some apps that shouldn't ever show up, which are
         # tested later, not here.
-        queryset_ex_deleted = queryset.exclude(editor=None)
+        queryset_exclude_deleted = queryset.exclude(editor=None)
 
         # Designate the coordinator
-        for obj in queryset_ex_deleted:
+        for obj in queryset_exclude_deleted:
             partner = Partner.objects.get(pk=obj.partner.pk)
             partner.coordinator = self.coordinator
             partner.save()
@@ -1390,7 +1391,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # reponse for view when user is the designated coordinator
         allowResponse = view.as_view()(request)
 
-        for obj in queryset_ex_deleted:
+        for obj in queryset_exclude_deleted:
             # Unlike Client(), RequestFactory() doesn't render the response;
             # we'll have to do that before we can check for its content.
 
@@ -2215,6 +2216,8 @@ class ApplicationModelTest(TestCase):
 
 class EvaluateApplicationTest(TestCase):
     def setUp(self):
+        fake = Faker()
+
         super(EvaluateApplicationTest, self).setUp()
         editor = EditorFactory()
         self.user = editor.user
@@ -2247,7 +2250,7 @@ class EvaluateApplicationTest(TestCase):
             editor=None,
             status=Application.PENDING,
             partner=self.partner,
-            rationale='lol jk',
+            rationale=fake.sentence(nb_words=10),
             agreement_with_terms_of_use=True)
         self.url_deleted = reverse('applications:evaluate',
             kwargs={'pk': self.deleted_user_application.pk})
