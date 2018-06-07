@@ -266,6 +266,11 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataPr
                     # data we'll write into the Application.
                     data = None
 
+                if data == "[deleted]":
+                    fail_msg = _('This field consists only of restricted text.')
+                    form.add_error(label, fail_msg)
+                    return self.form_invalid(form)
+
                 if data:
                     setattr(app, field, data)
 
