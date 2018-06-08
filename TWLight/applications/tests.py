@@ -1284,6 +1284,46 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             set(['real_name', 'occupation', 'affiliation']))
 
 
+    def test_deleted_field_invalid(self):
+        """
+        When users delete their data, their applications are blanked and
+        hidden. The blanking process sets text fields to "[deleted]". To
+        avoid confusion, trying to submit a form with a field containing
+        *only* "[deleted]" should be invalid.
+        """
+        p1 = PartnerFactory(
+            real_name=True,
+            country_of_residence=False,
+            specific_title=False,
+            specific_stream=False,
+            occupation=False,
+            affiliation=False,
+            agreement_with_terms_of_use=False
+        )
+
+        data = {
+            'real_name': 'Anonymous Coward',
+            'partner_{id}_rationale'.format(id=p1.id): '[deleted]',
+            'partner_{id}_comments'.format(id=p1.id): 'None whatsoever',
+        }
+
+        self.editor.set_password('editor')
+        self.editor.save()
+
+        client = Client()
+        session = client.session
+        client.login(username=self.editor, password='editor')
+
+        form_url = reverse('applications:apply_single',
+            kwargs={'pk': p1.pk})
+
+        response = client.post(form_url, data)
+
+        self.assertFormError(response, 'form',
+            'partner_{id}_rationale'.format(id=p1.id),
+            'This field consists only of restricted text.')
+
+
 
 class ListApplicationsTest(BaseApplicationViewTest):
 
