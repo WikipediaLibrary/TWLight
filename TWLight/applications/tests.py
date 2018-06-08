@@ -1311,12 +1311,29 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
         ApplicationFactory(status=Application.SENT, parent=parent)
 
-        # And some applications from users who deleted their account.
-        ApplicationFactory(status=Application.PENDING, editor=None)
-        ApplicationFactory(status=Application.QUESTION, editor=None)
-        ApplicationFactory(status=Application.APPROVED, editor=None)
-        ApplicationFactory(status=Application.NOT_APPROVED, editor=None)
-        ApplicationFactory(status=Application.SENT, editor=None)
+        user = UserFactory(username='editor')
+        editor = EditorFactory(user=user)
+
+        # And some applications from a user who will delete their account.
+        ApplicationFactory(status=Application.PENDING, editor=editor)
+        ApplicationFactory(status=Application.QUESTION, editor=editor)
+        ApplicationFactory(status=Application.APPROVED, editor=editor)
+        ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
+        ApplicationFactory(status=Application.SENT, editor=editor)
+
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': user.pk})
+
+        # Need a password so we can login
+        user.set_password('editor')
+        user.save()
+
+        client = Client()
+        session = client.session
+        client.login(username=user.username, password='editor')
+
+        submit = client.post(delete_url)
+
 
     @classmethod
     def tearDownClass(cls):
@@ -1458,9 +1475,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         response = view.as_view()(request)
 
         for obj in queryset_deleted:
-            # Unlike Client(), RequestFactory() doesn't render the response;
-            # we'll have to do that before we can check for its content.
-
             # Deleted applications should not be visible to anyone, even the
             # assigned coordinator.
             self.assertNotIn(obj.__str__(), response.render().content)
@@ -2214,6 +2228,40 @@ class ApplicationModelTest(TestCase):
                 app.comments == "[deleted]")
 
 
+
+    def test_coordinator_delete(self):
+        """
+        We came across a bug where editors were being removed from
+        applications where the sent_by user deleted their data.
+        This test verifies that's not still happening.
+        """
+        user = UserFactory()
+        editor = EditorFactory(user=user)
+        coordinator = UserFactory()
+        coordinator_editor = EditorFactory(user=coordinator)
+        get_coordinators().user_set.add(coordinator)
+
+        application = ApplicationFactory(editor=editor,
+            sent_by=coordinator)
+
+        # Need a password so we can login
+        coordinator.set_password('editor')
+        coordinator.save()
+
+        client = Client()
+        session = client.session
+        client.login(username=coordinator.username,
+            password='editor')
+
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': coordinator.pk})
+        submit = client.post(delete_url)
+
+        application.refresh_from_db()
+        assert application.editor == editor
+
+
+
 class EvaluateApplicationTest(TestCase):
     def setUp(self):
         fake = Faker()
@@ -2245,15 +2293,6 @@ class EvaluateApplicationTest(TestCase):
             agreement_with_terms_of_use=True)
         self.url_restricted = reverse('applications:evaluate',
             kwargs={'pk': self.restricted_application.pk})
-
-        self.deleted_user_application = ApplicationFactory(
-            editor=None,
-            status=Application.PENDING,
-            partner=self.partner,
-            rationale=fake.sentence(nb_words=10),
-            agreement_with_terms_of_use=True)
-        self.url_deleted = reverse('applications:evaluate',
-            kwargs={'pk': self.deleted_user_application.pk})
 
         self.coordinator = UserFactory(username='coordinator')
         self.coordinator.set_password('coordinator')
@@ -2371,11 +2410,23 @@ class EvaluateApplicationTest(TestCase):
 
 
     def test_deleted_user_app_visibility(self):
-        # If a user deleted their data, any blanked applications
-        # they had should no longer be visible, even to coordinator.
+        # If a user deletes their data, any applications
+        # they had should return a 404, even for coordinators.
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': self.user.pk})
+
+        # Need a password so we can login
+        self.user.set_password('editor')
+        self.user.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.user.username, password='editor')
+
+        submit = self.client.post(delete_url)
         factory = RequestFactory()
 
-        request = factory.get(self.url_deleted)
+        request = factory.get(self.url)
         request.user = self.coordinator
 
         self.partner.coordinator = self.coordinator
@@ -2383,7 +2434,7 @@ class EvaluateApplicationTest(TestCase):
 
         with self.assertRaises(Http404):
             _ = views.EvaluateApplicationView.as_view()(request,
-                pk=self.deleted_user_application.pk)
+                pk=self.application.pk)
 
 
 class BatchEditTest(TestCase):
