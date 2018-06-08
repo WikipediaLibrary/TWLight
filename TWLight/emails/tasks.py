@@ -36,6 +36,7 @@ from django.shortcuts import get_object_or_404
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import Partner
+from TWLight.users.groups import get_restricted
 
 
 logger = logging.getLogger(__name__)
@@ -191,13 +192,21 @@ def send_waitlist_notification_email(instance):
     path = reverse_lazy('partners:filter')
     link = 'https://{base}{path}'.format(base=base_url, path=path)
 
+    restricted = get_restricted()
+
     email = WaitlistNotification()
     if instance.editor:
-        email.send(instance.user.email,
-            {'user': instance.user.editor.wp_username,
-             'lang': instance.user.userprofile.lang,
-             'partner': instance.partner,
-             'link': link})
+        if restricted not in instance.editor.user.groups.all():
+            email.send(instance.user.email,
+                {'user': instance.user.editor.wp_username,
+                 'lang': instance.user.userprofile.lang,
+                 'partner': instance.partner,
+                 'link': link})
+        else:
+            logger.info("Skipped user {username} when sending "
+                "waitlist notification email because user has "
+                "restricted data processing.".format(
+                    username=instance.editor.wp_username))
     else:
         logger.error("Tried to send an email to an editor that doesn't "
             "exist, perhaps because their account is deleted.")
