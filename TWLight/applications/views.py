@@ -590,15 +590,19 @@ class ListApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
-                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST]
-                ).exclude(editor=None).order_by('status', 'partner', 'date_created')
+                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
         else:
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
-                    partner__coordinator__pk=self.request.user.pk
-                ).exclude(editor=None).order_by('status', 'partner', 'date_created')
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
         return base_qs
 
@@ -626,12 +630,16 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             return Application.objects.filter(
                     status=Application.APPROVED,
-                ).exclude(editor=None).order_by('date_closed', 'partner')
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
         else:
             return Application.objects.filter(
                     status=Application.APPROVED,
-                    partner__coordinator__pk=self.request.user.pk
-                ).exclude(editor=None).order_by('date_closed', 'partner')
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
     def get_context_data(self, **kwargs):
         context = super(ListApprovedApplicationsView, self).get_context_data(**kwargs)
@@ -649,13 +657,15 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                    status=Application.NOT_APPROVED
-                ).exclude(editor=None).order_by('date_closed', 'partner')
+                    status=Application.NOT_APPROVED,
+                    editor__isnull=False
+                ).order_by('date_closed', 'partner')
         else:
             return Application.objects.filter(
                     status=Application.NOT_APPROVED,
-                    partner__coordinator__pk=self.request.user.pk
-                ).exclude(editor=None).order_by('date_closed', 'partner')
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
+                ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListRejectedApplicationsView, self).get_context_data(**kwargs)
@@ -678,14 +688,16 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             return Application.objects.filter(
                      status__in=[Application.PENDING, Application.QUESTION],
-                     parent__isnull=False
-                ).exclude(editor=None).order_by('-date_created')
+                     parent__isnull=False,
+                     editor__isnull=False
+                ).order_by('-date_created')
         else:
             return Application.objects.filter(
                      status__in=[Application.PENDING, Application.QUESTION],
                      partner__coordinator__pk=self.request.user.pk,
-                     parent__isnull=False
-                ).exclude(editor=None).order_by('-date_created')
+                     parent__isnull=False,
+                     editor__isnull=False
+                ).order_by('-date_created')
 
     def get_context_data(self, **kwargs):
         context = super(ListRenewalApplicationsView, self).get_context_data(**kwargs)
@@ -704,13 +716,15 @@ class ListSentApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                    status=Application.SENT
-                ).exclude(editor=None).order_by('date_closed', 'partner')
+                    status=Application.SENT,
+                    editor__isnull=False
+                ).order_by('date_closed', 'partner')
         else:
             return Application.objects.filter(
                     status=Application.SENT,
-                    partner__coordinator__pk=self.request.user.pk
-                ).exclude(editor=None).order_by('date_closed', 'partner')
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
+                ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListSentApplicationsView, self).get_context_data(**kwargs)
