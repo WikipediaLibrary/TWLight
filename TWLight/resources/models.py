@@ -219,6 +219,7 @@ class Partner(models.Model):
         )
 
     tags = TaggableManager(through=TaggedTextField, blank=True)
+    old_tags = TaggableManager(through=None, blank=True)
 
     # Non-universal form fields
     # --------------------------------------------------------------------------

@@ -9,25 +9,39 @@ from django.core import serializers
 from TWLight.resources.models import TextFieldTag, Partner
 from taggit.models import Tag, TaggedItem
 
-def migrate_tags(apps, schema_editor):
-    for oldtag in Tag.objects.all():
-       newtag = TextFieldTag()
-       newtag.name = oldtag.name
-       newtag.slug = oldtag.slug
-       newtag.save()
+# Migrate the existing tag objects to the model that lives in resources.
+def copy_tags(apps, schema_editor):
+    for old_tag in Tag.objects.all():
+       new_tag = TextFieldTag()
+       new_tag.name = old_tag.name
+       new_tag.slug = old_tag.slug
+       new_tag.save()
 
-# Needs to be worked out
-#def migrate_tagged_items(apps, schema_editor):
-#    for tagged_item in TaggedItem.objects.all():
+# Apply data from old tag field to the new tag field
+def retag_partners(apps, schema_editor):
+    for partner in Partner.objects.all():
+        Partner.tags.set(partner.old_tags.all(), clear=True)
+        Partner.save()
+
+# Delete the old tag data
+def delete_old_tags(apps, schema_editor):
+    for old_tag in Tag.objects.all():
+       old_tag.delete()
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('taggit', '0002_auto_20150616_2121'),
         ('resources', '0044_auto_20180612_0201'),
     ]
 
     operations = [
-        migrations.RunPython(migrate_tags),
-# needs to be worked out
-#        migrations.RunPython(migrate_tagged_items),
+        migrations.AddField(
+            model_name='partner',
+            name='old_tags',
+            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags'),
+        ),
+        migrations.RunPython(copy_tags),
+        migrations.RunPython(retag_partners),
+        migrations.RunPython(delete_old_tags),
     ]
