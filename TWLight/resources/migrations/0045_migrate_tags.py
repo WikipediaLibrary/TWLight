@@ -22,8 +22,9 @@ def copy_tags(apps, schema_editor):
 def retag_partners(apps, schema_editor):
     for partner in Partner.objects.all():
         old_tags = partner.old_tags.all()
-        partner.tags.set(old_tags, clear=True)
-        partner.save()
+        for old_tag in old_tags:
+            partner.tags.add(old_tag.name)
+            partner.save()
 
 # Delete the old tag data
 def delete_old_tags(apps, schema_editor):
