@@ -438,65 +438,69 @@
     </div>
   </div>
 
-  <h3>
-    {% comment %} Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    {% trans "Applications by status" %}
-    <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">
-    {% comment %} Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    {% trans "download as csv" %}
-  </a></h3>
-  
-  <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+  {% if total_apps > 0 %}
+    <h3>
+      {% comment %} Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+      {% trans "Applications by status" %}
+      <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">
+      {% comment %} Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+      {% trans "download as csv" %}
+    </a></h3>
+    
+    <div id="app-distribution-graph" style="width:600px;height:300px"></div>
 
-  <p>
-    {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    {% blocktrans count counter=total_apps_approved %}
-      Number of applications approved (all time): {{ total_apps_approved_or_sent }}
-    {% plural %}
-      Number of applications approved (all time): {{ total_apps_approved_or_sent }}
-    {% endblocktrans %}
-  </p>
+    <p>
+      {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+      {% blocktrans count counter=total_apps_approved %}
+        Number of applications approved (all time): {{ total_apps_approved_or_sent }}
+      {% plural %}
+        Number of applications approved (all time): {{ total_apps_approved_or_sent }}
+      {% endblocktrans %}
+    </p>
 
-  <p>
-    {% comment %} Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    {% blocktrans count counter=unique_users_approved %}
-      Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
-    {% plural %}
-      Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
-    {% endblocktrans %}
-  </p>
-  
-  {% if stream_unique_accepted %}
-    <ul>
-    {% for stream_name, num_apps in stream_unique_accepted.items %}
-      <li>{{ stream_name }}: {{ num_apps }}</li>
-    {% endfor %}
-    </ul>
+    <p>
+      {% comment %} Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+      {% blocktrans count counter=unique_users_approved %}
+        Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
+      {% plural %}
+        Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
+      {% endblocktrans %}
+    </p>
+    
+    {% if stream_unique_accepted %}
+      <ul>
+      {% for stream_name, num_apps in stream_unique_accepted.items %}
+        <li>{{ stream_name }}: {{ num_apps }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% comment %} Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+    <h3>{% trans "Applications over time" %}</h3>
+    
+    {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time. {% endcomment %}
+    <h4>{% trans "All applications" %}
+      <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
+    </a></h4>
+    
+    <div id="signups-time-graph" style="width:600px;height:300px"></div>
+
+    {% if total_apps_approved > 0 %}
+      {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time. {% endcomment %}
+      <h4>{% trans "Approved applications only" %}
+        <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
+      </a></h4>
+    
+      <div id="approved-or-sent-signups-time-graph" style="width:600px;height:300px"></div>
+    {% endif %}
+    
+    {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time. {% endcomment %}
+    <h3>{% trans "Unique users over time" %}
+      <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
+    </a></h3>
+
+    <div id="users-time-graph" style="width:600px;height:300px"></div>
   {% endif %}
-
-  {% comment %} Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-  <h3>{% trans "Applications over time" %}</h3>
-  
-  {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time. {% endcomment %}
-  <h4>{% trans "All applications" %}
-    <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-  </a></h4>
-  
-  <div id="signups-time-graph" style="width:600px;height:300px"></div>
-  
-  {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time. {% endcomment %}
-  <h4>{% trans "Approved applications only" %}
-    <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-  </a></h4>
-  
-  <div id="approved-or-sent-signups-time-graph" style="width:600px;height:300px"></div>
-  
-  {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time. {% endcomment %}
-  <h3>{% trans "Unique users over time" %}
-    <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-  </a></h3>
-
-  <div id="users-time-graph" style="width:600px;height:300px"></div>
 {% endblock content %}
 
 {% block javascript %}
@@ -527,20 +531,22 @@
       });
 
       // Approved applications by time
-      var approved_or_sent_signups_time_graph = $("#approved-or-sent-signups-time-graph");
-      var approved_or_sent_signups_time_data = {{ approved_or_sent_signups_time_data | safe }};
-      var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
-        xaxis: {
-          mode: "time",
-          tickSize: [1, 'month'],
-        },
-        yaxis: {
-          min: 0,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        colors: ['#5cb85c'],
-      });
+      if ({{ total_apps_approved }} > 0) {
+        var approved_or_sent_signups_time_graph = $("#approved-or-sent-signups-time-graph");
+        var approved_or_sent_signups_time_data = {{ approved_or_sent_signups_time_data | safe }};
+        var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
+          xaxis: {
+            mode: "time",
+            tickSize: [1, 'month'],
+          },
+          yaxis: {
+            min: 0,
+            minTickSize: 1,
+            tickDecimals: 0,
+          },
+          colors: ['#5cb85c'],
+        });
+      }
 
       // Unique users by time
       var users_time_graph = $("#users-time-graph");
