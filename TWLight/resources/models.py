@@ -5,7 +5,7 @@ from datetime import timedelta
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 
-from django.conf.global_settings import LANGUAGES
+from ..settings.base import *
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
@@ -15,7 +15,7 @@ from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 from django_countries.fields import CountryField
 
-RESOURCE_LANGUAGES = copy.copy(LANGUAGES)
+RESOURCE_LANGUAGES = copy.copy(get_django_cldr_languages_intersection(LOCALE_PATHS[0]))
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
 
