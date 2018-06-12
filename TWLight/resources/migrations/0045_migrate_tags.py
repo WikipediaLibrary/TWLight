@@ -47,5 +47,4 @@ class Migration(migrations.Migration):
         migrations.RunPython(copy_tags),
         migrations.RunPython(retag_partners),
         migrations.RunPython(delete_old_tags),
-        migrations.RemoveField(model_name='partner',name='old_tags'),
     ]
