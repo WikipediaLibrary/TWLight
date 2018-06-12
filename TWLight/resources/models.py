@@ -5,7 +5,7 @@ from datetime import timedelta
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 
-from ..settings.base import *
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
@@ -15,7 +15,7 @@ from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 from django_countries.fields import CountryField
 
-RESOURCE_LANGUAGES = copy.copy(get_django_cldr_languages_intersection(LOCALE_PATHS[0]))
+RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
 
@@ -28,8 +28,8 @@ def validate_language_code(code):
         raise ValidationError(
             # Translators: When staff enter languages, they use ISO language codes. Don't translate ISO, LANGUAGES, or %(code)s.
             _('%(code)s is not a valid language code. You must enter an ISO '
-                'language code, as in the LANGUAGES setting at '
-                'https://github.com/django/django/blob/master/django/conf/global_settings.py'),
+                'language code, as in the INTERSECTIONAL_LANGUAGES setting at '
+                'https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py'),
             params={'code': code},
         )
 

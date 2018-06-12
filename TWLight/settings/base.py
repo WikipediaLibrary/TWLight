@@ -52,7 +52,7 @@ def get_django_cldr_languages_intersection(dir):
 # Use langauge autonyms from Wikimedia.
 def get_languages_from_locale_subdirectories(dir):
     current_languages = []
-    languages_intersection = get_django_cldr_languages_intersection(dir)
+    languages_intersection = INTERSECTIONAL_LANGUAGES
     for locale_dir in os.listdir(dir):
         if os.path.isdir(os.path.join(dir, locale_dir)):
             for i, (lang_code, autonym) in enumerate(languages_intersection):
@@ -189,6 +189,7 @@ LOCALE_PATHS = [
 # available to the system. This keeps our column and index count for db-stored
 # translations as low as possible while allowing translatewiki contributions to
 # be used without reconfiguring the site.
+INTERSECTIONAL_LANGUAGES = get_django_cldr_languages_intersection(LOCALE_PATHS[0])
 LANGUAGES = get_languages_from_locale_subdirectories(LOCALE_PATHS[0])
 
 TIME_ZONE = 'UTC'
