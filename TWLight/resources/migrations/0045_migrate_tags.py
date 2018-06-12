@@ -8,6 +8,7 @@ from django.core import serializers
 
 from TWLight.resources.models import TextFieldTag, Partner
 from taggit.models import Tag, TaggedItem
+import taggit.managers
 
 # Migrate the existing tag objects to the model that lives in resources.
 def copy_tags(apps, schema_editor):
