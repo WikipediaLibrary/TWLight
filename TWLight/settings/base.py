@@ -32,21 +32,34 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # An atypical way of setting django languages for TranslateWiki integration:
 # https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
-# Get the language codes from the locale directories, and return the
-# corresponding list of tuples from the Wikimedia CLDR-based language data.
+
+# Returns the intersectional language codes between Django and Wikimedia CLDR
+# along with the language autonyms from Wikimedia CLDR.
 # https://github.com/wikimedia/language-data
-def get_languages_from_locale_subdirectories(dir):
-    current_languages = []
+def get_django_cldr_languages_intersection(dir):
+    languages_intersection = []
     language_data_json = open(os.path.join(dir, "language-data.json"))
     languages = json.loads(language_data_json.read())['languages']
-    #for locale_dir in os.listdir(dir):
-        #if os.path.isdir(os.path.join(dir, locale_dir)):
     for lang_code, lang_data in languages.iteritems():
         for i, (djlang_code, djlang_name) in enumerate(GLOBAL_LANGUAGES):
             if lang_code == djlang_code:
                 autonym = lang_data[-1]
-                current_languages += [(lang_code, autonym)]
+                languages_intersection += [(lang_code, autonym)]
+    return sorted(set(languages_intersection))
+
+# Get the language codes from the locale directories, and compare them to the
+# intersecting set of languages between Django and Wikimedia CLDR.
+# Use langauge autonyms from Wikimedia.
+def get_languages_from_locale_subdirectories(dir):
+    current_languages = []
+    languages_intersection = get_django_cldr_languages_intersection(dir)
+    for locale_dir in os.listdir(dir):
+        if os.path.isdir(os.path.join(dir, locale_dir)):
+            for i, (lang_code, autonym) in enumerate(languages_intersection):
+                if locale_dir == lang_code:
+                    current_languages += [(lang_code, autonym)]
     return sorted(set(current_languages))
+
 
 # ------------------------------------------------------------------------------
 # ------------------------> core django configurations <------------------------
