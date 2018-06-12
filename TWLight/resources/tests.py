@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import date, timedelta
 from mock import patch
 
@@ -523,4 +524,4 @@ class StreamModelTests(TestCase):
         # Order isn't important.
         stream.languages.add(self.lang_fr)
         self.assertIn(stream.get_languages,
-            [u'English, French', u'French, English'])
+            [u'English, français', u'français, English'])
