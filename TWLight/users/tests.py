@@ -424,6 +424,10 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(expected_url, self.test_editor.wp_link_sul_info)
 
 
+    def test_wp_link_central_auth(self):
+        expected_url = 'https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth&target=editor_model_test'
+        self.assertEqual(expected_url, self.test_editor.wp_link_central_auth)
+
     def test_get_wp_rights_display(self):
         expected_text = ['cat floofing', 'the big red button']
         self.assertEqual(expected_text, self.test_editor.get_wp_rights_display)
