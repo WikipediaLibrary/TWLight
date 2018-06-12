@@ -8,7 +8,7 @@ from django.core import serializers
 
 from TWLight.resources.models import TextFieldTag, Partner
 from taggit.models import Tag, TaggedItem
-import taggit.managers
+from taggit.managers import TaggableManager
 
 # Migrate the existing tag objects to the model that lives in resources.
 def copy_tags(apps, schema_editor):
@@ -21,8 +21,9 @@ def copy_tags(apps, schema_editor):
 # Apply data from old tag field to the new tag field
 def retag_partners(apps, schema_editor):
     for partner in Partner.objects.all():
-        Partner.tags.set(partner.old_tags.all(), clear=True)
-        Partner.save()
+        old_tags = partner.old_tags.all()
+        partner.tags.set(old_tags, clear=True)
+        partner.save()
 
 # Delete the old tag data
 def delete_old_tags(apps, schema_editor):
@@ -40,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='partner',
             name='old_tags',
-            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags'),
+            field=TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Old Tags'),
         ),
         migrations.RunPython(copy_tags),
         migrations.RunPython(retag_partners),
