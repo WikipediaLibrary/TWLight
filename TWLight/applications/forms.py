@@ -16,11 +16,12 @@ form that takes a dict of required fields, and constructs the form accordingly.
 """
 from dal import autocomplete
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput, Div
+from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput, Div, HTML
 import logging
 import re
 
 from django import forms
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream
@@ -201,6 +202,10 @@ class BaseApplicationForm(forms.Form):
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)
+            self.helper.layout.append(HTML('<p><small><i>Your personal data '
+                'will be processed according to our <a href="{terms_url}">'
+                'privacy policy</a>.</i></small></p>'.format(
+                    terms_url=reverse('terms'))))
 
 
     def _add_partner_data_subform(self, partner):
