@@ -6,9 +6,14 @@ import reversion
 from urlparse import urlparse
 
 from django import forms
+from django_comments import get_form_target
+from django_comments.models import Comment
+from django_comments.signals import comment_was_posted
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.contrib.sites.models import Site
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -2254,6 +2259,41 @@ class EvaluateApplicationTest(TestCase):
 
         response = views.EvaluateApplicationView.as_view()(request, pk=self.restricted_application.pk)
         self.assertNotIn('<form', response.render().content)
+
+
+    def test_under_discussion_signal(self):
+        """
+        Test comment signal fires correctly, updating Pending
+        applications to Under Discussion
+        """
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        factory = RequestFactory()
+        request = factory.post(get_form_target())
+
+        CT = ContentType.objects.get_for_model
+
+        comm = Comment.objects.create(
+            content_type=CT(Application),
+            object_pk=self.application.pk,
+            user=self.coordinator,
+            user_name=self.coordinator.username,
+            user_email=self.coordinator.email,
+            comment="A comment",
+            site=Site.objects.get_current(),
+        )
+        comm.save()
+
+        comment_was_posted.send(
+            sender=Comment,
+            comment=comm,
+            request=request
+            )
+
+        self.application.refresh_from_db()
+
+        self.assertEqual(self.application.status, Application.QUESTION)
 
 
 class BatchEditTest(TestCase):

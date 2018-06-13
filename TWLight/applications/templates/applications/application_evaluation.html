@@ -160,7 +160,7 @@
           <input type="hidden" name="next" value="{% url 'applications:evaluate' object.pk %}" />
           <br />
           {% comment %} Translators: This labels the button which users click to send a typed comment.{% endcomment %}
-          <input type="submit" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
+          <input type="submit" name="submit_comment" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
         </form>
       </div>
     </div>
