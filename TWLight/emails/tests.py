@@ -6,12 +6,14 @@ from django_comments.signals import comment_was_posted
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core import mail
+from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
+from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.factories import EditorFactory
 from TWLight.users.groups import get_coordinators
 
@@ -37,6 +39,8 @@ class ApplicationCommentTest(TestCase):
         coordinators.user_set.add(self.coordinator1)
         coordinators.user_set.add(self.coordinator2)
 
+        self.partner = PartnerFactory()
+
 
     def _create_comment(self, app, user):
         CT = ContentType.objects.get_for_model
@@ -56,7 +60,8 @@ class ApplicationCommentTest(TestCase):
 
 
     def _set_up_email_test_objects(self):
-        app = ApplicationFactory(editor=self.editor.editor)
+        app = ApplicationFactory(editor=self.editor.editor,
+                                 partner=self.partner)
 
         factory = RequestFactory()
         request = factory.post(get_form_target())
@@ -133,6 +138,57 @@ class ApplicationCommentTest(TestCase):
             self.assertEqual(mail.outbox[1].to, [self.coordinator1.email])
             self.assertEqual(mail.outbox[0].to, [self.editor.email])
 
+
+    def test_comment_email_sending_4(self):
+        """
+        A comment made on an application that's any further along the process
+        than PENDING (i.e. a coordinator has taken some action on it) should
+        fire an email to the coordinator who took the last action on it.
+        """
+        app, request = self._set_up_email_test_objects()
+        self.assertEqual(len(mail.outbox), 0)
+
+        # Create a coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+
+        # Approve the application
+        url = reverse('applications:evaluate',
+            kwargs={'pk': app.pk})
+        response = self.client.post(url,
+            data={'status': Application.QUESTION},
+            follow=True)
+
+        comment4 = self._create_comment(app, self.editor)
+        comment_was_posted.send(
+            sender=Comment,
+            comment=comment4,
+            request=request
+            )
+
+        self.assertEqual(len(mail.outbox), 1)
+
+        self.assertEqual(mail.outbox[0].to, [coordinator.user.email])
+
+
+    def test_comment_email_sending_5(self):
+        """
+        A comment made on an application that has had no actions taken on it
+        and no existing comments should not fire an email to anyone.
+        """
+        app, request = self._set_up_email_test_objects()
+        self.assertEqual(len(mail.outbox), 0)
+
+        comment5 = self._create_comment(app, self.editor)
+        comment_was_posted.send(
+            sender=Comment,
+            comment=comment5,
+            request=request
+            )
+
+        self.assertEqual(len(mail.outbox), 0)
 
     # We'd like to mock out send_comment_notification_emails and test that
     # it is called when comment_was_posted is fired, but we can't; the signal

@@ -23,6 +23,7 @@ settings.DJMAIL_REAL_BACKEND.
 """
 from djmail import template_mail
 import logging
+from reversion.models import Version
 
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
@@ -47,6 +48,10 @@ logger = logging.getLogger(__name__)
 
 class CommentNotificationEmailEditors(template_mail.TemplateMail):
     name = 'comment_notification_editors'
+
+
+class CommentNotificationCoordinators(template_mail.TemplateMail):
+    name = 'comment_notification_coordinator'
 
 
 class CommentNotificationEmailOthers(template_mail.TemplateMail):
@@ -141,8 +146,25 @@ def send_comment_notification_emails(sender, **kwargs):
             logger.info('Email queued for {app.editor.user.email} about '
                 'app #{app.pk}'.format(app=app))
 
-    # Send to any previous commenters on the thread, other than the editor and
-    # the person who left the comment just now.
+    # Send emails to the last coordinator to make a status change to this
+    # application.
+    app_versions = Version.objects.get_for_object(app)
+
+    # 'First' app version is the most recent
+    recent_app_coordinator = app_versions.first().revision.user
+    if recent_app_coordinator:
+        email = CommentNotificationCoordinators()
+        email.send(recent_app_coordinator.email,
+            {'user': recent_app_coordinator.editor.wp_username,
+             'lang': recent_app_coordinator.userprofile.lang,
+             'app': app,
+             'app_url': app_url,
+             'partner': app.partner})
+        logger.info('Coordinator email queued for {app.editor.user.email} about app '
+            '#{app.pk}'.format(app=app))
+
+    # Send to any previous commenters on the thread, other than the editor,
+    # the person who left the comment just now, and the last coordinator.
     all_comments = Comment.objects.filter(object_pk=app.pk,
                         content_type__model='application',
                         content_type__app_label='applications')
@@ -157,6 +179,12 @@ def send_comment_notification_emails(sender, **kwargs):
         # If the editor is not among the prior commenters, that's fine; no
         # reason they should be.
         pass
+    if recent_app_coordinator:
+        try:
+            users.remove(recent_app_coordinator)
+        except KeyError:
+            # Likewise, coordinator might not have commented.
+            pass
 
     for user in users:
         if user:
