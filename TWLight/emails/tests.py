@@ -175,8 +175,9 @@ class ApplicationCommentTest(TestCase):
 
     def test_comment_email_sending_5(self):
         """
-        A comment made on an application that has had no actions taken on it
-        and no existing comments should not fire an email to anyone.
+        A comment from the applying editor made on an application that
+        has had no actions taken on it and no existing comments should
+        not fire an email to anyone.
         """
         app, request = self._set_up_email_test_objects()
         self.assertEqual(len(mail.outbox), 0)
