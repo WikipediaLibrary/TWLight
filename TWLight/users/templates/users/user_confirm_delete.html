@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load twlight_perms %}
+
+{% block content %}
+  <h1>{% trans 'Delete all data' %}</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      {% comment %} Translators: This message is displayed on the page where users can request the deletion of their data. {% endcomment %}
+      {% blocktrans trimmed %}
+          <b>Warning:</b> Performing this action will delete your Wikipedia 
+          Library Card user account and all associated applications. This 
+          process is not reversible. You may lose any partner accounts 
+          you were granted, and will not be able to renew those 
+          accounts or apply for new ones.
+      {% endblocktrans %}
+    </p>
+    <center>
+      <input type="submit" value="Confirm" class="btn btn-danger"/>
+    </center>
+  </form>
+{% endblock content %}

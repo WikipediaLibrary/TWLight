@@ -4,6 +4,7 @@ from itertools import chain
 from mock import patch
 import reversion
 from urlparse import urlparse
+from faker import Faker
 
 from django import forms
 from django.conf import settings
@@ -12,6 +13,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.http import Http404
 from django.test import TestCase, Client, RequestFactory
 
 from TWLight.resources.models import Partner, Stream
@@ -37,7 +39,6 @@ from .helpers import (USER_FORM_FIELDS,
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
-
 
 class SynchronizeFieldsTest(TestCase):
     """
@@ -1283,6 +1284,46 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             set(['real_name', 'occupation', 'affiliation']))
 
 
+    def test_deleted_field_invalid(self):
+        """
+        When users delete their data, their applications are blanked and
+        hidden. The blanking process sets text fields to "[deleted]". To
+        avoid confusion, trying to submit a form with a field containing
+        *only* "[deleted]" should be invalid.
+        """
+        p1 = PartnerFactory(
+            real_name=True,
+            country_of_residence=False,
+            specific_title=False,
+            specific_stream=False,
+            occupation=False,
+            affiliation=False,
+            agreement_with_terms_of_use=False
+        )
+
+        data = {
+            'real_name': 'Anonymous Coward',
+            'partner_{id}_rationale'.format(id=p1.id): '[deleted]',
+            'partner_{id}_comments'.format(id=p1.id): 'None whatsoever',
+        }
+
+        self.editor.set_password('editor')
+        self.editor.save()
+
+        client = Client()
+        session = client.session
+        client.login(username=self.editor, password='editor')
+
+        form_url = reverse('applications:apply_single',
+            kwargs={'pk': p1.pk})
+
+        response = client.post(form_url, data)
+
+        self.assertFormError(response, 'form',
+            'partner_{id}_rationale'.format(id=p1.id),
+            'This field consists only of restricted text.')
+
+
 
 class ListApplicationsTest(BaseApplicationViewTest):
 
@@ -1309,6 +1350,29 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.APPROVED, parent=parent)
         ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
         ApplicationFactory(status=Application.SENT, parent=parent)
+
+        user = UserFactory(username='editor')
+        editor = EditorFactory(user=user)
+
+        # And some applications from a user who will delete their account.
+        ApplicationFactory(status=Application.PENDING, editor=editor)
+        ApplicationFactory(status=Application.QUESTION, editor=editor)
+        ApplicationFactory(status=Application.APPROVED, editor=editor)
+        ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
+        ApplicationFactory(status=Application.SENT, editor=editor)
+
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': user.pk})
+
+        # Need a password so we can login
+        user.set_password('editor')
+        user.save()
+
+        client = Client()
+        session = client.session
+        client.login(username=user.username, password='editor')
+
+        submit = client.post(delete_url)
 
 
     @classmethod
@@ -1371,8 +1435,12 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # reponse for view when user isn't the designated coordinator
         denyResponse = view.as_view()(request)
 
+        # We made some apps that shouldn't ever show up, which are
+        # tested later, not here.
+        queryset_exclude_deleted = queryset.exclude(editor=None)
+
         # Designate the coordinator
-        for obj in queryset:
+        for obj in queryset_exclude_deleted:
             partner = Partner.objects.get(pk=obj.partner.pk)
             partner.coordinator = self.coordinator
             partner.save()
@@ -1380,7 +1448,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # reponse for view when user is the designated coordinator
         allowResponse = view.as_view()(request)
 
-        for obj in queryset:
+        for obj in queryset_exclude_deleted:
             # Unlike Client(), RequestFactory() doesn't render the response;
             # we'll have to do that before we can check for its content.
 
@@ -1426,6 +1494,53 @@ class ListApplicationsTest(BaseApplicationViewTest):
         queryset = Application.objects.filter(
             status=Application.NOT_APPROVED)
         self._base_test_object_visibility(url,
+            views.ListRejectedApplicationsView, queryset)
+
+
+    def _base_test_deleted_object_visibility(self, url, view, queryset):
+        factory = RequestFactory()
+
+        request = factory.get(url)
+        request.user = self.coordinator
+
+        # Only testing the apps from deleted users
+        queryset_deleted = queryset.filter(editor=None)
+
+        # Designate the coordinator
+        for obj in queryset_deleted:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        response = view.as_view()(request)
+
+        for obj in queryset_deleted:
+            # Deleted applications should not be visible to anyone, even the
+            # assigned coordinator.
+            self.assertNotIn(obj.__str__(), response.render().content)
+
+
+    def test_list_object_visibility(self):
+        url = reverse('applications:list')
+        queryset = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION])
+        self._base_test_deleted_object_visibility(url,
+            views.ListApplicationsView, queryset)
+
+
+    def test_list_approved_object_visibility(self):
+        url = reverse('applications:list_approved')
+        queryset = Application.objects.filter(
+            status=Application.APPROVED)
+        self._base_test_deleted_object_visibility(url,
+            views.ListApprovedApplicationsView, queryset)
+
+
+    def test_list_rejected_object_visibility(self):
+        url = reverse('applications:list_rejected')
+        queryset = Application.objects.filter(
+            status=Application.NOT_APPROVED)
+        self._base_test_deleted_object_visibility(url,
             views.ListRejectedApplicationsView, queryset)
 
 
@@ -1475,7 +1590,8 @@ class ListApplicationsTest(BaseApplicationViewTest):
         request.user = self.coordinator
 
         expected_qs = Application.objects.filter(
-            status__in=[Application.PENDING, Application.QUESTION])
+            status__in=[Application.PENDING, Application.QUESTION]).exclude(
+                editor=None)
 
         # reponse for view when user isn't the designated coordinator
         response = views.ListApplicationsView.as_view()(request)
@@ -2111,10 +2227,85 @@ class ApplicationModelTest(TestCase):
         app = ApplicationFactory(partner=partner)
         self.assertFalse(app.renew())
 
+    def test_deleted_user_app_blanked(self):
+        """
+        Test that applications from users who have deleted their data
+        have their data wiped correctly.
+        """
+        user = UserFactory(username='editor')
+        editor = EditorFactory(user=user)
+        partner = PartnerFactory()
+        app = ApplicationFactory(
+                rationale='Because I said so',
+                comments='No comment',
+                agreement_with_terms_of_use=True,
+                account_email='bob@example.com',
+                editor=editor,
+                partner=partner,
+                status=Application.APPROVED,
+                date_closed=date.today() + timedelta(days=1),
+                days_open=1,
+                sent_by=user
+              )
+
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': user.pk})
+
+        # Need a password so we can login
+        user.set_password('editor')
+        user.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=user.username, password='editor')
+
+        submit = self.client.post(delete_url)
+        app.refresh_from_db()
+
+        assert (app.editor == None and
+                app.rationale == "[deleted]" and
+                app.account_email == "[deleted]" and
+                app.comments == "[deleted]")
+
+
+
+    def test_coordinator_delete(self):
+        """
+        We came across a bug where editors were being removed from
+        applications where the sent_by user deleted their data.
+        This test verifies that's not still happening.
+        """
+        user = UserFactory()
+        editor = EditorFactory(user=user)
+        coordinator = UserFactory()
+        coordinator_editor = EditorFactory(user=coordinator)
+        get_coordinators().user_set.add(coordinator)
+
+        application = ApplicationFactory(editor=editor,
+            sent_by=coordinator)
+
+        # Need a password so we can login
+        coordinator.set_password('editor')
+        coordinator.save()
+
+        client = Client()
+        session = client.session
+        client.login(username=coordinator.username,
+            password='editor')
+
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': coordinator.pk})
+        submit = client.post(delete_url)
+
+        application.refresh_from_db()
+        assert application.editor == editor
+
 
 
 class EvaluateApplicationTest(TestCase):
     def setUp(self):
+        fake = Faker()
+
         super(EvaluateApplicationTest, self).setUp()
         editor = EditorFactory()
         self.user = editor.user
@@ -2237,7 +2428,8 @@ class EvaluateApplicationTest(TestCase):
         request = factory.get(self.url)
         request.user = self.coordinator
 
-        response = views.EvaluateApplicationView.as_view()(request, pk=self.application.pk)
+        response = views.EvaluateApplicationView.as_view()(request,
+            pk=self.application.pk)
         self.assertIn('<form', response.render().content)
 
 
@@ -2252,8 +2444,37 @@ class EvaluateApplicationTest(TestCase):
         request = factory.get(self.url_restricted)
         request.user = self.coordinator
 
-        response = views.EvaluateApplicationView.as_view()(request, pk=self.restricted_application.pk)
+        response = views.EvaluateApplicationView.as_view()(request,
+            pk=self.restricted_application.pk)
         self.assertNotIn('<form', response.render().content)
+
+
+    def test_deleted_user_app_visibility(self):
+        # If a user deletes their data, any applications
+        # they had should return a 404, even for coordinators.
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': self.user.pk})
+
+        # Need a password so we can login
+        self.user.set_password('editor')
+        self.user.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.user.username, password='editor')
+
+        submit = self.client.post(delete_url)
+        factory = RequestFactory()
+
+        request = factory.get(self.url)
+        request.user = self.coordinator
+
+        self.partner.coordinator = self.coordinator
+        self.partner.save()
+
+        with self.assertRaises(Http404):
+            _ = views.EvaluateApplicationView.as_view()(request,
+                pk=self.application.pk)
 
 
 class BatchEditTest(TestCase):

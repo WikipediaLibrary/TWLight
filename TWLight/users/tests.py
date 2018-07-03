@@ -28,7 +28,6 @@ from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor
 
-
 FAKE_IDENTITY_DATA = {'query': {
     'userinfo': {
         'options': {
@@ -341,6 +340,27 @@ class ViewsTestCase(TestCase):
 
         assert self.user_coordinator not in coordinators.user_set.all()
         assert self.user_coordinator in restricted.user_set.all()
+
+    def test_user_delete(self):
+        """
+        Verify that deleted users have no user object.
+        """
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': self.user_editor.pk})
+
+        # Need a password so we can login
+        self.user_editor.set_password('editor')
+        self.user_editor.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username1, password='editor')
+
+        submit = self.client.post(delete_url)
+
+        assert not User.objects.filter(username=self.username1).exists()
+        # Check that the associated Editor also got deleted.
+        assert not Editor.objects.filter(user=self.user_editor).exists()
 
 
 

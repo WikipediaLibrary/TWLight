@@ -15,7 +15,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 
 from TWLight.applications.models import Application
 from TWLight.users.models import Editor
@@ -265,4 +265,22 @@ class DataProcessingRequired(object):
             raise PermissionDenied
 
         return super(DataProcessingRequired, self).dispatch(
+            request, *args, **kwargs)
+
+class NotDeleted(object):
+    """
+    Used to check that the submitting user hasn't deleted their account.
+    Without this, users hit a Server Error if trying to navigate directly
+    to an app from a deleted user.
+    """
+
+    def test_func_not_deleted(self, object):
+        obj = self.get_object()
+        return obj.editor is None
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.test_func_not_deleted(object):
+            raise Http404
+
+        return super(NotDeleted, self).dispatch(
             request, *args, **kwargs)

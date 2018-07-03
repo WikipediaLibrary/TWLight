@@ -11,22 +11,28 @@ from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
 from django.http import Http404, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import UpdateView, FormView
+from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
+from django_comments.models import Comment
 
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 from TWLight.users.groups import get_coordinators, get_restricted
 
+from reversion.models import Version
+
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm
 from .models import Editor, UserProfile
+from TWLight.applications.models import Application
 
 import datetime
 
 coordinators = get_coordinators()
 restricted = get_restricted()
 
+import logging
+logger = logging.getLogger(__name__)
 
 def _is_real_url(url):
     """
@@ -334,6 +340,49 @@ class RestrictDataView(SelfOnly, FormView):
         return reverse_lazy('users:home')
 
 
+
+class DeleteDataView(SelfOnly, DeleteView):
+    model = User
+    template_name = 'users/user_confirm_delete.html'
+    success_url = reverse_lazy('homepage')
+
+    def get_object(self, queryset=None):
+        return User.objects.get(pk=self.kwargs['pk'])
+
+    # We want to blank applications too, not just delete the user
+    # object, so we need to overwrite delete()
+    def delete(self, request, *args, **kwargs):
+        user = self.get_object()
+
+        user_applications = user.editor.applications.all()
+        for user_app in user_applications:
+            # Blank any user data from this app
+            user_app.rationale = "[deleted]"
+            user_app.account_email = "[deleted]"
+            user_app.comments = "[deleted]"
+
+            user_app.save()
+
+            # Delete the app's version history
+            app_versions = Version.objects.get_for_object_reference(
+                Application, user_app.pk)
+            for app_version in app_versions:
+                app_version.delete()
+
+        # Also blank any comments left by this user, including their
+        # username and email, which is duplicated in the comment object.
+        for user_comment in Comment.objects.filter(user=user):
+            user_comment.user_name = ""
+            user_comment.user_email = ""
+            user_comment.comment = "[deleted]"
+            user_comment.save()
+
+        user.delete()
+
+        return HttpResponseRedirect(self.success_url)
+
+    def post(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
 class TermsView(UpdateView):
     """
