@@ -138,6 +138,7 @@ class Partner(models.Model):
         "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
     coordinator = models.ForeignKey(User, blank=True, null=True,
+        on_delete=models.SET_NULL,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the account coordinator for this partner.
         help_text=_('The coordinator for this Partner, if any.'))
     featured = models.BooleanField(default=False,

@@ -391,10 +391,9 @@ class OAuthCallbackView(View):
                       'criteria in the terms of use, so your Wikipedia Library '
                       'Card Platform account cannot be activated.'))
             else:
-                # Translators: If the user tries to log in, but their account does not meet certain requirements or has been deactivated, they cannot login. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+                # Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
                 messages.add_message(request, messages.WARNING,
-                    _('Either your Wikipedia Library Card Platform account has '
-                      'been deactivated or your Wikipedia account no longer '
+                    _('Your Wikipedia account no longer '
                       'meets the eligibility criteria in the terms of use, so '
                       'you cannot be logged in. If you think you should be '
                       'able to log in, please email '

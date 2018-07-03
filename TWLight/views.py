@@ -66,7 +66,7 @@ class HomePageView(TemplateView):
 
 
         # New applications!
-        apps = self._get_newest(Application.objects.all())
+        apps = self._get_newest(Application.objects.exclude(editor=None))
 
         for app in apps:
             event = {}
@@ -105,7 +105,8 @@ class HomePageView(TemplateView):
 
         # New access grants!
         grants = self._get_newest(Application.objects.filter(
-            status=Application.APPROVED, date_closed__isnull=False))
+            status=Application.APPROVED, date_closed__isnull=False).exclude(
+                editor=None))
 
         for grant in grants:
             event = {}
