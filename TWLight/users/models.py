@@ -190,6 +190,14 @@ class Editor(models.Model):
         return url
 
 
+    @cached_property
+    def wp_link_central_auth(self):
+        url = u'{base_url}&target={self.wp_username}'.format(
+            base_url='https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth',
+            self=self
+        )
+        return url
+
     @property
     def get_wp_rights_display(self):
         """
