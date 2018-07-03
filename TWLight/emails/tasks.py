@@ -36,6 +36,7 @@ from django.shortcuts import get_object_or_404
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import Partner
+from TWLight.users.groups import get_restricted
 
 
 logger = logging.getLogger(__name__)
@@ -173,10 +174,17 @@ def send_comment_notification_emails(sender, **kwargs):
 
 def send_approval_notification_email(instance):
     email = ApprovalNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner})
+
+    # If, for some reason, we're trying to send an email to a user
+    # who deleted their account, stop doing that.
+    if instance.editor:
+        email.send(instance.user.email,
+            {'user': instance.user.editor.wp_username,
+             'lang': instance.user.userprofile.lang,
+             'partner': instance.partner})
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 
 def send_waitlist_notification_email(instance):
@@ -184,13 +192,24 @@ def send_waitlist_notification_email(instance):
     path = reverse_lazy('partners:filter')
     link = 'https://{base}{path}'.format(base=base_url, path=path)
 
-    email = WaitlistNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner,
-         'link': link})
+    restricted = get_restricted()
 
+    email = WaitlistNotification()
+    if instance.editor:
+        if restricted not in instance.editor.user.groups.all():
+            email.send(instance.user.email,
+                {'user': instance.user.editor.wp_username,
+                 'lang': instance.user.userprofile.lang,
+                 'partner': instance.partner,
+                 'link': link})
+        else:
+            logger.info("Skipped user {username} when sending "
+                "waitlist notification email because user has "
+                "restricted data processing.".format(
+                    username=instance.editor.wp_username))
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 def send_rejection_notification_email(instance):
     base_url = get_current_site(None).domain
@@ -208,12 +227,15 @@ def send_rejection_notification_email(instance):
         app_url = reverse_lazy('users:home')
 
     email = RejectionNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner,
-         'app_url': app_url})
-
+    if instance.editor:
+        email.send(instance.user.email,
+            {'user': instance.user.editor.wp_username,
+             'lang': instance.user.userprofile.lang,
+             'partner': instance.partner,
+             'app_url': app_url})
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):

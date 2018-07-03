@@ -47,116 +47,116 @@
  <!-- navbar -->
   <div class="navbar navbar-default" id="top-nav">
       <div class="navbar-left">
-			<!-- logo -->
-			<a href="{% url 'homepage' %}">
-				<img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
+      <!-- logo -->
+      <a href="{% url 'homepage' %}">
+        <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
         {% comment %} Translators: Alt text for the Wikipedia Library shown in the top left of all pages. {% endcomment %}
         {% trans "Library Card Platform home" %}
         ">
-			</a>
-			
-			<!-- site name -->
-	
-			<a class="site-title" href="{% url 'homepage' %}">{% trans "The Wikipedia Library Card Platform" %}</a>
-			
-			
-			<!-- Welcome Message Logged In User -->
-				{% if user.is_authenticated %}
-					<div class="nav-greeting welcome"> 
-						
-					{% url 'users:home' as home_url %}
-						{% if user.editor %}
+      </a>
+      
+      <!-- site name -->
+  
+      <a class="site-title" href="{% url 'homepage' %}">{% trans "The Wikipedia Library Card Platform" %}</a>
+      
+      
+      <!-- Welcome Message Logged In User -->
+        {% if user.is_authenticated %}
+          <div class="nav-greeting welcome"> 
+            
+          {% url 'users:home' as home_url %}
+            {% if user.editor %}
               {% comment %} Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate {{ home_url }} or {{ username }}. {% endcomment %}
-							{% blocktrans with username=user.editor.wp_username%}
-								Hi, <a href="{{ home_url }}">{{ username }}</a>!
-							{% endblocktrans %}
-						{% else %}
+              {% blocktrans with username=user.editor.wp_username%}
+                Hi, <a href="{{ home_url }}">{{ username }}</a>!
+              {% endblocktrans %}
+            {% else %}
               {% comment %} Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate {{ home_url }} or {{ username }}. {% endcomment %}
-							{% blocktrans with username=user.username %}
-								Hi, <a href="{{ home_url }}">{{ username }}</a>!
-							{% endblocktrans %}						 
-						{% endif %}
-						
-					</div>			
-				{% endif %}
-			
-	    </div>
+              {% blocktrans with username=user.username %}
+                Hi, <a href="{{ home_url }}">{{ username }}</a>!
+              {% endblocktrans %}            
+            {% endif %}
+            
+          </div>      
+        {% endif %}
+      
+      </div>
       
         <ul class="nav nav-pills navbar-right">
-			<li role="presentation" class="mobile-menu">
-				<a href="{% url 'partners:filter' %}">
+      <li role="presentation" class="mobile-menu">
+        <a href="{% url 'partners:filter' %}">
           {% comment %} Translators: Shown in the top bar of almost every page, taking users to the page where they can browse current partners. {% endcomment %}
-					{% trans "Browse" %}
-				</a>
-			</li>
-		{% if user.editor %}
-			<li role="presentation" class="mobile-menu">
-				<a href="{% url 'applications:request' %}">
+          {% trans "Browse" %}
+        </a>
+      </li>
+    {% if user.editor %}
+      <li role="presentation" class="mobile-menu">
+        <a href="{% url 'applications:request' %}">
           {% comment %} Translators: Shown in the top bar of almost every page, taking users to the page where they apply for access to partner resources. {% endcomment %}
-					{% trans "Apply" %}
-				</a>
-			</li>
-		{% endif %}
-			
-		{% if user|coordinators_only %}
-			<li role="presentation" class="mobile-menu">
-				<a href="{% url 'applications:list' %}">
+          {% trans "Apply" %}
+        </a>
+      </li>
+    {% endif %}
+      
+    {% if user|coordinators_only %}
+      <li role="presentation" class="mobile-menu">
+        <a href="{% url 'applications:list' %}">
           {% comment %} Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
-					{% trans "Review" %}
-				</a>
-			</li>
-		{% endif %}
+          {% trans "Review" %}
+        </a>
+      </li>
+    {% endif %}
       
-		{% if user|coordinators_only %}
-			<li role="presentation" class="mobile-menu">
-				<a href="{% url 'applications:send' %}">
+    {% if user|coordinators_only %}
+      <li role="presentation" class="mobile-menu">
+        <a href="{% url 'applications:send' %}">
           {% comment %} Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
-					{% trans "Send data to partners" %}
-				</a>
-			</li>
-		{% endif %}
+          {% trans "Send data to partners" %}
+        </a>
+      </li>
+    {% endif %}
       
-			<li role="presentation" class="divider mobile-menu">
-				<a href="{% url 'activity' %}">
-          {% comment %} Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline). {% endcomment %}
-					{% trans "Latest activity" %}
-				</a>
-			</li>
+    <li role="presentation" class="divider mobile-menu">
+      <a href="{% url 'activity' %}">
+        {% comment %} Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline). {% endcomment %}
+        {% trans "Latest activity" %}
+      </a>
+    </li>
 
-		{% if user.is_authenticated %}
-			{% if user.is_staff %}
-			<li role="presentation" class="mobile-menu">
-				<a href="{% url 'dashboard' %}">
-          {% comment %} Translators: Shown in the top bar of almost every page, linking to the statitics for applications. {% endcomment %}
-					{% trans "Metrics" %}
-				</a>
-			</li>
+    <li role="presentation" class="mobile-menu">
+      <a href="{% url 'dashboard' %}">
+        {% comment %} Translators: Shown in the top bar of almost every page, linking to the statitics for applications. {% endcomment %}
+        {% trans "Metrics" %}
+      </a>
+    </li>
 
-				<li role="presentation" class="mobile-menu">
-					<a href="{% url 'admin:index' %}">
-			  {% comment %} Translators: Shown in the top bar of almost every page when the current user is staff, linking to the administrator interface. {% endcomment %}
-						{% trans "Admin" %}
-					</a>
-				</li>
-			{% endif %}
+    {% if user.is_staff %}
+      <li role="presentation" class="mobile-menu">
+        <a href="{% url 'admin:index' %}">
+      {% comment %} Translators: Shown in the top bar of almost every page when the current user is staff, linking to the administrator interface. {% endcomment %}
+          {% trans "Admin" %}
+        </a>
+      </li>
+    {% endif %}
 
-			<li role="presentation" class="divider mobile-menu">
-				<a href="{% url 'auth_logout' %}">
+    {% if user.is_authenticated %}
+      <li role="presentation" class="divider mobile-menu">
+        <a href="{% url 'auth_logout' %}">
           {% comment %} Translators: Shown in the top bar of almost every page when the current user is logged in. {% endcomment %}
-					{% trans "Log out" %}
-				</a>
-			</li>
-		{% else %}
+          {% trans "Log out" %}
+        </a>
+      </li>
+    {% else %}
       
-			<li role="presentation" class="mobile-menu">
-				<a href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
+      <li role="presentation" class="mobile-menu">
+        <a href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
           {% comment %} Translators: Shown in the top bar of almost every page when the current user is not logged in. {% endcomment %}
-					{% trans "Log in" %}
-				</a>
-			</li>
-		{% endif %}
+          {% trans "Log in" %}
+        </a>
+      </li>
+    {% endif %}
     
-		</ul>
+    </ul>
   </div>
  
   <div id="main-content">
@@ -206,7 +206,7 @@
         <p>
           <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
           <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
-		  </a>
+      </a>
         </p>
         <p>
           {% comment %} Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International". {% endcomment %}
@@ -216,10 +216,10 @@
           {% endblocktrans %}
         </p>
         
-		<hr />
-	  </div>
+    <hr />
+    </div>
       
-	  <div class="col-xs-12">
+    <div class="col-xs-12">
         <ul class="list-inline pull-right">
           <li>
             <a href="{% url 'about' %}">

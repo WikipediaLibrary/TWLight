@@ -16,6 +16,10 @@
   {% endif %}
 
   {% if user|coordinators_only %}
+    <div class="alert alert-info">
+      {% comment %} Translators: This message is shown on pages where coordinators can see personal information about applicants. {% endcomment %}
+      {% trans 'Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential.' %}
+    </div>
     {% comment %}Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.{% endcomment %}
     <h1>{% trans 'Evaluate application' %}</h1>
     {% if object.user|restricted %}

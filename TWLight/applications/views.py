@@ -35,7 +35,8 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  ToURequired,
                                  EmailRequired,
                                  SelfOnly,
-                                 DataProcessingRequired)
+                                 DataProcessingRequired,
+                                 NotDeleted)
 from TWLight.resources.models import Partner
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
@@ -265,6 +266,11 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataPr
                     # data we'll write into the Application.
                     data = None
 
+                if data == "[deleted]":
+                    fail_msg = _('This field consists only of restricted text.')
+                    form.add_error(label, fail_msg)
+                    return self.form_invalid(form)
+
                 if data:
                     setattr(app, field, data)
 
@@ -288,17 +294,20 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataPr
 
     def _get_user_fields(self, partners=None):
         """
-        Return a list of user-specific data fields required by at least one
-        Partner to whom the user is requesting access.
+        Return a dict of user-specific data fields required by at least one
+        Partner to whom the user is requesting access, with a list of
+        partners requesting that data.
         """
         if not partners:
             return None
 
-        needed_fields = []
+        needed_fields = {}
         for field in USER_FORM_FIELDS:
             query = {'{field}'.format(field=field): True}
-            if partners.filter(**query).count():
-                needed_fields.append(field)
+            partners_queried = partners.filter(**query)
+            if partners_queried.count():
+                requesting_partners = partners_queried.distinct()
+                needed_fields[field] = [x.__str__() for x in partners_queried]
 
         return needed_fields
 
@@ -584,15 +593,19 @@ class ListApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
-                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST]
-                ).order_by('status', 'partner', 'date_created')
+                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
         else:
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
-                    partner__coordinator__pk=self.request.user.pk
-                ).order_by('status', 'partner', 'date_created')
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
         return base_qs
 
@@ -620,12 +633,16 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             return Application.objects.filter(
                     status=Application.APPROVED,
-                ).order_by('date_closed', 'partner')
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
         else:
             return Application.objects.filter(
                     status=Application.APPROVED,
-                    partner__coordinator__pk=self.request.user.pk
-                ).order_by('date_closed', 'partner')
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
     def get_context_data(self, **kwargs):
         context = super(ListApprovedApplicationsView, self).get_context_data(**kwargs)
@@ -643,12 +660,14 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                    status=Application.NOT_APPROVED
+                    status=Application.NOT_APPROVED,
+                    editor__isnull=False
                 ).order_by('date_closed', 'partner')
         else:
             return Application.objects.filter(
                     status=Application.NOT_APPROVED,
-                    partner__coordinator__pk=self.request.user.pk
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
                 ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
@@ -672,13 +691,15 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             return Application.objects.filter(
                      status__in=[Application.PENDING, Application.QUESTION],
-                     parent__isnull=False
+                     parent__isnull=False,
+                     editor__isnull=False
                 ).order_by('-date_created')
         else:
             return Application.objects.filter(
                      status__in=[Application.PENDING, Application.QUESTION],
                      partner__coordinator__pk=self.request.user.pk,
-                     parent__isnull=False
+                     parent__isnull=False,
+                     editor__isnull=False
                 ).order_by('-date_created')
 
     def get_context_data(self, **kwargs):
@@ -698,12 +719,14 @@ class ListSentApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                    status=Application.SENT
+                    status=Application.SENT,
+                    editor__isnull=False
                 ).order_by('date_closed', 'partner')
         else:
             return Application.objects.filter(
                     status=Application.SENT,
-                    partner__coordinator__pk=self.request.user.pk
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
                 ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
@@ -717,7 +740,7 @@ class ListSentApplicationsView(_BaseListApplicationView):
 
 
 
-class EvaluateApplicationView(CoordinatorOrSelf, ToURequired, UpdateView):
+class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, UpdateView):
     """
     Allows Coordinators to:
     * view single applications
@@ -815,9 +838,10 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
         # Don't include applications from restricted users when generating
         # this list.
         base_queryset = Application.objects.filter(
-                            status=Application.APPROVED
+                            status=Application.APPROVED,
+                            editor__isnull=False
                             ).exclude(
-                                editor__user__groups__name = 'restricted')
+                                editor__user__groups__name='restricted')
 
         partner_list = Partner.objects.filter(
             applications__in=base_queryset).distinct()
@@ -839,7 +863,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
         apps = self.get_object().applications.filter(
-            status=Application.APPROVED).exclude(
+            status=Application.APPROVED, editor__isnull=False).exclude(
                 editor__user__groups__name='restricted'
                 )
         app_outputs = {}
