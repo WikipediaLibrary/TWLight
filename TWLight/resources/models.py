@@ -3,8 +3,9 @@ import copy
 from datetime import timedelta
 
 from taggit.managers import TaggableManager
+from taggit.models import TagBase, GenericTaggedItemBase
 
-from django.conf.global_settings import LANGUAGES
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
@@ -14,7 +15,7 @@ from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 from django_countries.fields import CountryField
 
-RESOURCE_LANGUAGES = copy.copy(LANGUAGES)
+RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
 
@@ -27,11 +28,32 @@ def validate_language_code(code):
         raise ValidationError(
             # Translators: When staff enter languages, they use ISO language codes. Don't translate ISO, LANGUAGES, or %(code)s.
             _('%(code)s is not a valid language code. You must enter an ISO '
-                'language code, as in the LANGUAGES setting at '
-                'https://github.com/django/django/blob/master/django/conf/global_settings.py'),
+                'language code, as in the INTERSECTIONAL_LANGUAGES setting at '
+                'https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py'),
             params={'code': code},
         )
 
+class TextFieldTag(TagBase):
+    """
+    We're defining a custom tag here the following reasons:
+    * Without doing so, the migrations that define our tags end up in the taggit
+      apps migration folder instead of ours, making version control difficult.
+    * So we can use a non-unique Text field for the tag name. This is done to
+      prevent indexing, because translations can cause the number of indexes to
+      exceed the limits of any storage engine available to MySQL/MariaDB.
+      Avoiding indexes has consequences.
+    Docs here: https://django-taggit.readthedocs.io/en/latest/custom_tagging.html#using-a-custom-tag-or-through-model
+    """
+    name = models.TextField(verbose_name=_('Name'), unique=False, max_length=100)
+    slug = models.SlugField(verbose_name=_('Slug'), unique=True, max_length=100)
+
+    class Meta:
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
+
+class TaggedTextField(GenericTaggedItemBase):
+    tag = models.ForeignKey(TextFieldTag,
+                            related_name="%(app_label)s_%(class)s_items")
 
 class Language(models.Model):
     """
@@ -116,6 +138,7 @@ class Partner(models.Model):
         "this will be user-visible and *not translated*."))
     date_created = models.DateField(auto_now_add=True)
     coordinator = models.ForeignKey(User, blank=True, null=True,
+        on_delete=models.SET_NULL,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the account coordinator for this partner.
         help_text=_('The coordinator for this Partner, if any.'))
     featured = models.BooleanField(default=False,
@@ -196,7 +219,10 @@ class Partner(models.Model):
             "content.")
         )
 
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(through=TaggedTextField, blank=True)
+
+    # This field has to stick around until all servers are using the new tags.
+    old_tags = TaggableManager(through=None, blank=True, verbose_name=_('Old Tags'))
 
     # Non-universal form fields
     # --------------------------------------------------------------------------

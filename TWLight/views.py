@@ -65,8 +65,13 @@ class HomePageView(TemplateView):
             activity.append(event)
 
 
-        # New applications!
-        apps = self._get_newest(Application.objects.all())
+
+        # New applications! Except for the ones where the user requested
+        # it be hidden.
+        apps = self._get_newest(
+            Application.objects.exclude(hidden=True).exclude(editor=None)
+        )
+
 
         for app in apps:
             event = {}
@@ -105,7 +110,8 @@ class HomePageView(TemplateView):
 
         # New access grants!
         grants = self._get_newest(Application.objects.filter(
-            status=Application.APPROVED, date_closed__isnull=False))
+            status=Application.APPROVED, date_closed__isnull=False).exclude(
+                editor=None))
 
         for grant in grants:
             event = {}
@@ -139,4 +145,5 @@ class HomePageView(TemplateView):
         # -----------------------------------------------------
 
         context['partner_count'] = Partner.objects.all().count()
+        
         return context

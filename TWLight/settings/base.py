@@ -19,25 +19,46 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 import os
+import json
 
 # Importing global settings is typically not recommended, and un-Django-like,
 # but we're doing something interesting with the LANGUAGES setting.
 from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
+
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Get the language codes from the locale directories, and return the
-# corresponding list of tuples from the global language settting.
+# An atypical way of setting django languages for TranslateWiki integration:
+# https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
+
+# Returns the intersectional language codes between Django and Wikimedia CLDR
+# along with the language autonyms from Wikimedia CLDR.
+# https://github.com/wikimedia/language-data
+def get_django_cldr_languages_intersection(dir):
+    languages_intersection = []
+    language_data_json = open(os.path.join(dir, "language-data.json"))
+    languages = json.loads(language_data_json.read())['languages']
+    for lang_code, lang_data in languages.iteritems():
+        for i, (djlang_code, djlang_name) in enumerate(GLOBAL_LANGUAGES):
+            if lang_code == djlang_code:
+                autonym = lang_data[-1]
+                languages_intersection += [(lang_code, autonym)]
+    return sorted(set(languages_intersection))
+
+# Get the language codes from the locale directories, and compare them to the
+# intersecting set of languages between Django and Wikimedia CLDR.
+# Use langauge autonyms from Wikimedia.
 def get_languages_from_locale_subdirectories(dir):
-    EXISTING_LANGUAGES = []
+    current_languages = []
+    languages_intersection = INTERSECTIONAL_LANGUAGES
     for locale_dir in os.listdir(dir):
         if os.path.isdir(os.path.join(dir, locale_dir)):
-            for i, (lang_code, lang_name) in enumerate(GLOBAL_LANGUAGES):
+            for i, (lang_code, autonym) in enumerate(languages_intersection):
                 if locale_dir == lang_code:
-                    EXISTING_LANGUAGES += [(lang_code, lang_name)]
-    return sorted(set(EXISTING_LANGUAGES))
+                    current_languages += [(lang_code, autonym)]
+    return sorted(set(current_languages))
 
 
 # ------------------------------------------------------------------------------
@@ -168,6 +189,7 @@ LOCALE_PATHS = [
 # available to the system. This keeps our column and index count for db-stored
 # translations as low as possible while allowing translatewiki contributions to
 # be used without reconfiguring the site.
+INTERSECTIONAL_LANGUAGES = get_django_cldr_languages_intersection(LOCALE_PATHS[0])
 LANGUAGES = get_languages_from_locale_subdirectories(LOCALE_PATHS[0])
 
 TIME_ZONE = 'UTC'

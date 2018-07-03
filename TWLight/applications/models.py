@@ -71,11 +71,12 @@ class Application(models.Model):
         help_text=_('Please do not override this field! Its value is set '
                   'automatically.'))
 
-    sent_by = models.ForeignKey(User, blank=True, null=True,
+    sent_by = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL,
         # Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
         help_text=_('The user who sent this application to the partner'))
 
-    editor = models.ForeignKey(Editor, related_name='applications')
+    editor = models.ForeignKey(Editor, related_name='applications', null=True,
+        on_delete=models.SET_NULL)
     partner = models.ForeignKey(Partner, related_name='applications')
 
     rationale = models.TextField(blank=True)
@@ -95,6 +96,7 @@ class Application(models.Model):
     parent = models.ForeignKey('self',
         on_delete=models.SET_NULL, blank=True, null=True)
 
+    hidden = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'{self.editor} - {self.partner}'.format(self=self)

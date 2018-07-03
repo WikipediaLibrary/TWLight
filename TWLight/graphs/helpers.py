@@ -147,7 +147,7 @@ def get_time_open_histogram(queryset, data_format=JSON):
     data_series = {}
 
     for app in queryset:
-        if not app.status in [Application.APPROVED, Application.NOT_APPROVED]:
+        if not app.status in Application.FINAL_STATUS_LIST:
             continue
 
         # Careful! Don't say "if not app.days_open" - that will also fail when
@@ -194,9 +194,11 @@ def get_median_decision_time(queryset, data_format=JSON):
         while this_month_start <= timezone.now().date():
             days_to_close = list(
                 Application.objects.filter(
-                    status__in=[Application.APPROVED, Application.NOT_APPROVED],
+                    status__in=Application.FINAL_STATUS_LIST,
                     date_created__gte=this_month_start,
                     date_created__lt=next_month_start
+                ).exclude(
+                    days_open=None
                 ).values_list('days_open', flat=True)
             )
 

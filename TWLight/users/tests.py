@@ -28,7 +28,6 @@ from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor
 
-
 FAKE_IDENTITY_DATA = {'query': {
     'userinfo': {
         'options': {
@@ -241,10 +240,10 @@ class ViewsTestCase(TestCase):
             set([app1, app2, app3, app4]))
         content = response.render().content
 
-        self.assertIn(app1.partner.company_name, content)
-        self.assertIn(app2.partner.company_name, content)
-        self.assertIn(app3.partner.company_name, content)
-        self.assertIn(app4.partner.company_name, content)
+        self.assertIn(app1.partner.company_name, content.decode("utf-8"))
+        self.assertIn(app2.partner.company_name, content.decode("utf-8"))
+        self.assertIn(app3.partner.company_name, content.decode("utf-8"))
+        self.assertIn(app4.partner.company_name, content.decode("utf-8"))
 
         # We can't use assertTemplateUsed with RequestFactory (only with
         # Client), and testing that the rendered content is equal to an
@@ -342,6 +341,27 @@ class ViewsTestCase(TestCase):
         assert self.user_coordinator not in coordinators.user_set.all()
         assert self.user_coordinator in restricted.user_set.all()
 
+    def test_user_delete(self):
+        """
+        Verify that deleted users have no user object.
+        """
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': self.user_editor.pk})
+
+        # Need a password so we can login
+        self.user_editor.set_password('editor')
+        self.user_editor.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username1, password='editor')
+
+        submit = self.client.post(delete_url)
+
+        assert not User.objects.filter(username=self.username1).exists()
+        # Check that the associated Editor also got deleted.
+        assert not Editor.objects.filter(user=self.user_editor).exists()
+
 
 
 class UserProfileModelTestCase(TestCase):
@@ -423,6 +443,10 @@ class EditorModelTestCase(TestCase):
         expected_url = 'https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=editor_model_test'
         self.assertEqual(expected_url, self.test_editor.wp_link_sul_info)
 
+
+    def test_wp_link_central_auth(self):
+        expected_url = 'https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth&target=editor_model_test'
+        self.assertEqual(expected_url, self.test_editor.wp_link_central_auth)
 
     def test_get_wp_rights_display(self):
         expected_text = ['cat floofing', 'the big red button']

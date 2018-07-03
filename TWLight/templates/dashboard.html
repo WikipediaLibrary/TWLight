@@ -138,35 +138,37 @@
     <div class="col-lg-12">
       {% comment %} Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.{% endcomment %}
       <h2 class="page-header" id="applications-section">{% trans 'Applications' %}</h2>
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time. {% endcomment %}
-      <h3>{% trans "Number of accounts distributed over time" %}</h3> <a href="{% url 'csv:num_applications' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-      <div id="application-time-graph" style="width:600px;height:300px"></div>
+      {% if total_apps > 0 %}
+        {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time. {% endcomment %}
+        <h3>{% trans "Number of accounts distributed over time" %}</h3> <a href="{% url 'csv:num_applications' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+        <div id="application-time-graph" style="width:600px;height:300px"></div>
 
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.{% endcomment %}
-      <h3>{% trans "Applications by number of days until decision" %} <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-      <p>
-        {% comment %} Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). {% endcomment %}
-        {% blocktrans trimmed %}
-          The x axis is the number of days to make a final decision (either
-          approved or denied) on an application. The y axis is the number of
-          applications that have taken exactly that many days to decide.
-        {% endblocktrans %}
-      </p>
-      <div id="app-time-histogram-graph" style="width:600px;height:300px"></div>          
+        {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.{% endcomment %}
+        <h3>{% trans "Applications by number of days until decision" %} <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+        <p>
+          {% comment %} Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). {% endcomment %}
+          {% blocktrans trimmed %}
+            The x axis is the number of days to make a final decision (either
+            approved or denied) on an application. The y axis is the number of
+            applications that have taken exactly that many days to decide.
+          {% endblocktrans %}
+        </p>
+        <div id="app-time-histogram-graph" style="width:600px;height:300px"></div>          
 
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.{% endcomment %}
-      <h3>{% trans "Median days until application decision, per month" %} <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-      <p>
-        {% comment %} Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean. {% endcomment %}
-        {% blocktrans trimmed %}
-          This shows the median number of days to reach a decision on the
-          applications opened in a given month.
-        {% endblocktrans %}
-      </p>
-      <div id="app-medians-graph" style="width:600px;height:300px"></div>
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
-      <h3>{% trans "Open application status distribution" %} <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-      <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+        {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.{% endcomment %}
+        <h3>{% trans "Median days until application decision, per month" %} <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+        <p>
+          {% comment %} Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean. {% endcomment %}
+          {% blocktrans trimmed %}
+            This shows the median number of days to reach a decision on the
+            applications opened in a given month.
+          {% endblocktrans %}
+        </p>
+        <div id="app-medians-graph" style="width:600px;height:300px"></div>
+        {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
+        <h3>{% trans "Open application status distribution" %} <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+        <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+      {% endif %}
 
     </div>
   </div>
@@ -178,9 +180,11 @@
       {% comment %} Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.{% endcomment %}
       <h2 class="page-header" id="applications-section">{% trans 'Users' %}</h2>
 
-      {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
-      <h3>{% trans "User language distribution" %} <a href="{% url 'csv:user_language' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-      <div id="user-language-graph" style="width:600px;height:300px"></div>
+      {% if user_count > 0 %}
+        {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
+        <h3>{% trans "User language distribution" %} <a href="{% url 'csv:user_language' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+        <div id="user-language-graph" style="width:600px;height:300px"></div>
+      {% endif %}
     </div>
   </div>
   <!-- end user metrics -->
@@ -201,86 +205,90 @@
   <script type="text/javascript">
     $(function() {
 
-      // Application time-to-decision (histogram)
-      var app_time_histogram_graph = $("#app-time-histogram-graph");
-      var app_time_histogram_data = [{
-        'data': {{ app_time_histogram_data | safe }},
-        'label': ''
-      }];
-      var app_time_histogram_plot = $.plot(app_time_histogram_graph, app_time_histogram_data, {
-        yaxis: {
-          min: 0,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        xaxis: {
-          min: 0,
-        },
-        bars: {
-          show: true,
-          barWidth: 1,
-        }
-      });
-
-      // Applications over time
-      var application_time_graph = $("#application-time-graph");
-      var application_time_data = {{ application_time_data }};
-      var application_time_plot = $.plot(application_time_graph, [application_time_data], {
-        xaxis: {
-          mode: "time",
-        },
-        yaxis: {
-          min: 0,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        colors: ['#5cb85c'],
-      });
-
-      // Median time-to-decision per month
-      var app_medians_graph = $("#app-medians-graph");
-      var app_medians_data = [{
-        'data': {{ app_medians_data | safe }},
-        'label': ''
-      }];
-      var app_medians_plot = $.plot(app_medians_graph, app_medians_data, {
-        yaxis: {
-          min: 0.01,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        xaxis: {
-          mode: 'time',
-          tickSize: [1, 'month'],
-        },
-        bars: {
-          show: true,
-          barWidth: 15*24*60*60*1000, // About half a month in milliseconds
-          align: 'center',
-        }
-      });
-
-      // Application status distribution (pie chart)
-      var app_distribution_graph = $("#app-distribution-graph");
-      var app_distribution_data = {{ app_distribution_data | safe }};
-      var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
-        series: {
-          pie: { 
-            show: true
+      if ({{ total_apps }} > 0) {
+        // Application time-to-decision (histogram)
+        var app_time_histogram_graph = $("#app-time-histogram-graph");
+        var app_time_histogram_data = [{
+          'data': {{ app_time_histogram_data | safe }},
+          'label': ''
+        }];
+        var app_time_histogram_plot = $.plot(app_time_histogram_graph, app_time_histogram_data, {
+          yaxis: {
+            min: 0,
+            minTickSize: 1,
+            tickDecimals: 0,
+          },
+          xaxis: {
+            min: 0,
+          },
+          bars: {
+            show: true,
+            barWidth: 1,
           }
-        },
-      });
+        });
 
-      // User language distribution (pie chart)
-      var user_language_graph = $("#user-language-graph");
-      var user_language_data = {{ user_language_data | safe }};
-      var user_language_plot = $.plot(user_language_graph, user_language_data, {
-        series: {
-          pie: {
-            show: true
+        // Applications over time
+        var application_time_graph = $("#application-time-graph");
+        var application_time_data = {{ application_time_data }};
+        var application_time_plot = $.plot(application_time_graph, [application_time_data], {
+          xaxis: {
+            mode: "time",
+          },
+          yaxis: {
+            min: 0,
+            minTickSize: 1,
+            tickDecimals: 0,
+          },
+          colors: ['#5cb85c'],
+        });
+
+        // Median time-to-decision per month
+        var app_medians_graph = $("#app-medians-graph");
+        var app_medians_data = [{
+          'data': {{ app_medians_data | safe }},
+          'label': ''
+        }];
+        var app_medians_plot = $.plot(app_medians_graph, app_medians_data, {
+          yaxis: {
+            min: 0.01,
+            minTickSize: 1,
+            tickDecimals: 0,
+          },
+          xaxis: {
+            mode: 'time',
+            tickSize: [1, 'month'],
+          },
+          bars: {
+            show: true,
+            barWidth: 15*24*60*60*1000, // About half a month in milliseconds
+            align: 'center',
           }
-        },
-      });
+        });
+
+        // Application status distribution (pie chart)
+        var app_distribution_graph = $("#app-distribution-graph");
+        var app_distribution_data = {{ app_distribution_data | safe }};
+        var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
+          series: {
+            pie: { 
+              show: true
+            }
+          },
+        });
+      }
+
+      if ({{ user_count }} > 0) {
+        // User language distribution (pie chart)
+        var user_language_graph = $("#user-language-graph");
+        var user_language_data = {{ user_language_data | safe }};
+        var user_language_plot = $.plot(user_language_graph, user_language_data, {
+          series: {
+            pie: {
+              show: true
+            }
+          },
+        });
+      }
     });
   </script>
 {% endblock javascript %}}
