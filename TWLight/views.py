@@ -141,4 +141,9 @@ class HomePageView(TemplateView):
         context['featured_partners'] = Partner.objects.filter(
             featured=True).order_by('company_name')
 
+        # Partner count
+        # -----------------------------------------------------
+
+        context['partner_count'] = Partner.objects.all().count()
+        
         return context
