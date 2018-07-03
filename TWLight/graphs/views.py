@@ -148,6 +148,8 @@ class DashboardView(TemplateView):
 
         # User language pie chart ----------------------------------------------
 
+        context['user_count'] = UserProfile.objects.all().count()
+
         context['user_language_data'] = get_user_language_data(
             UserProfile.objects.all())
 
