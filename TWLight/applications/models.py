@@ -96,6 +96,7 @@ class Application(models.Model):
     parent = models.ForeignKey('self',
         on_delete=models.SET_NULL, blank=True, null=True)
 
+    hidden = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'{self.editor} - {self.partner}'.format(self=self)

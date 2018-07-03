@@ -8,16 +8,4 @@
       {% crispy form %}      
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      {% comment %}Translators: When a user fills out an application form, this text is shown at the bottom, giving them a more private application option. Don't translate anything in the HTML tag except "email us".{% endcomment %}
-      {% blocktrans trimmed %}
-        <p>
-          Note that your username and reasons for applying may be displayed on
-          the home page. Please <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation">email us (wikipedialibrary@wikimedia.org)</a>
-          if this is a problem.
-        </p>
-      {% endblocktrans %}
-    </div>
-  </div>
 {% endblock content %}
