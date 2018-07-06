@@ -36,10 +36,17 @@
 
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
-      {% comment %} Translators: This is the heading of the section of a user's profile where they can change their data preferences. {% endcomment %}
+      {% comment %} Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data. {% endcomment %}
       <strong>{% trans "Data" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-9">
+      <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Download" name="download" class="btn btn-default"/>
+      </form>
+    </div>
+    <div class="col-xs-12 col-sm-3"></div>
+    <div class="col-xs-12 col-sm-9" style="padding-top: 10px">
       <a href="{% url 'users:restrict_data' %}" class="btn btn-default">Restrict</a>
     </div>
     <div class="col-xs-12 col-sm-3"></div>
