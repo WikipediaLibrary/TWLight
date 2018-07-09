@@ -148,12 +148,12 @@ def send_comment_notification_emails(sender, **kwargs):
                 'app #{app.pk}'.format(app=app))
 
     # Send emails to the last coordinator to make a status change to this
-    # application.
+    # application, as long as they aren't the ones leaving the comment.
     app_versions = Version.objects.get_for_object(app)
 
     # 'First' app version is the most recent
     recent_app_coordinator = app_versions.first().revision.user
-    if recent_app_coordinator:
+    if recent_app_coordinator and recent_app_coordinator != current_comment.user:
         email = CommentNotificationCoordinators()
         email.send(recent_app_coordinator.email,
             {'user': recent_app_coordinator.editor.wp_username,
