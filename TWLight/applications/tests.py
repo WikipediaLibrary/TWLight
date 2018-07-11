@@ -17,6 +17,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.sites.models import Site
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.core.management import call_command
 from django.db import models
 from django.http import Http404
 from django.test import TestCase, Client, RequestFactory
@@ -44,6 +45,18 @@ from .helpers import (USER_FORM_FIELDS,
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
+
+
+class SendCoordinatorRemindersTest(TestCase):
+    """
+    Stub of a test for the send_coordinator_reminders command.
+    Currently we're not actually checking for any desiured/undesired behavior,
+    we're just verifying that the command can be executed without throwing an
+    error. 
+    """
+    def test_command_output(self):
+        call_command('send_coordinator_reminders', '--app_status=PENDING')
+
 
 class SynchronizeFieldsTest(TestCase):
     """
