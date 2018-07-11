@@ -362,6 +362,24 @@ class ViewsTestCase(TestCase):
         # Check that the associated Editor also got deleted.
         assert not Editor.objects.filter(user=self.user_editor).exists()
 
+    def test_user_data_download(self):
+        """
+        Verify that if users try to download their personal data they
+        are actually sent a file.
+        """
+        # Need a password so we can login
+        self.user_editor2.set_password('editor')
+        self.user_editor2.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username2, password='editor')
+
+        response = self.client.post(self.url2, {'download': 'Download'})
+
+        self.assertEqual(response.get('Content-Disposition'),
+            'attachment; filename=user_data.json')
+
 
 
 class UserProfileModelTestCase(TestCase):

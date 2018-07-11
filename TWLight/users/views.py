@@ -1,3 +1,5 @@
+import json
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -6,9 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
+from django.core import serializers
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
@@ -120,6 +123,45 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
         context['password_form'] = PasswordChangeForm(user=self.request.user)
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        editor = self.get_object()
+        if "download" in request.POST:
+            # When users click the Download button in the Data section of
+            # their user page, provide a json with any personal information
+            # they submitted to the site.
+
+            user_json = {}
+            editor_data = Editor.objects.get(pk=editor.pk)
+
+            user_json['user_data'] = {}
+            user_field_list = ['wp_username', 'contributions', 'real_name',
+                'country_of_residence', 'occupation', 'affiliation']
+            for field in user_field_list:
+                field_data = getattr(editor_data, field)
+                if field_data:
+                    user_json['user_data'][field] = field_data
+
+            user_apps = Application.objects.filter(editor=editor)
+            user_json['applications'] = {}
+            for app in user_apps:
+                user_json['applications'][app.id] = {}
+                for field in ['rationale', 'comments', 'account_email']:
+                    field_data = getattr(app, field)
+                    if field_data:
+                        user_json['applications'][app.id][field] = field_data
+
+            user_comments = Comment.objects.filter(user_id=editor.user.id)
+            user_json['comments'] = []
+            for comment in user_comments:
+                user_json['comments'].append(comment.comment)
+
+            json_data = json.dumps(user_json, indent=2)
+            response = HttpResponse(json_data, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename=user_data.json'
+            return response
+
+        return HttpResponseRedirect(reverse_lazy('users:home'))
 
 
 
