@@ -29,7 +29,6 @@ before_script:
 
 # Create revisions, make migrations, migrate, sync translations, collect static, test.
 script:
-  - python manage.py sync_translation_fields --noinput
   - python manage.py makemigrations
   - python manage.py migrate || bash -c "python manage.py sync_translation_fields --noinput && python manage.py migrate"
   - python manage.py collectstatic --noinput --clear
