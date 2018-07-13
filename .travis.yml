@@ -31,7 +31,6 @@ before_script:
 script:
   - python manage.py sync_translation_fields --noinput
   - python manage.py makemigrations
-  - python manage.py migrate
-  - python manage.py sync_translation_fields --noinput
+  - python manage.py migrate || bash -c "python manage.py sync_translation_fields --noinput && python manage.py migrate"
   - python manage.py collectstatic --noinput --clear
   - python manage.py test --noinput
