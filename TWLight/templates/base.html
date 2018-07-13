@@ -43,8 +43,11 @@
     {# We don't use any JS by default; individual pages that need it can add it here. #}
   {% endblock head_javascript %}
 </head>
-
-<body>
+{% if LANGUAGE_BIDI %}
+  <body dir="rtl">
+{% else %}
+  <body>
+{% endif %}
   
  <!-- navbar -->
   <div class="navbar navbar-default" id="top-nav">

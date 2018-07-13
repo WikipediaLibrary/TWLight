@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-13 15:10+0000\n"
+"POT-Creation-Date: 2018-07-13 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:57
 #: TWLight/resources/templates/resources/partner_detail.html:105
 #: TWLight/resources/templates/resources/partner_detail.html:107
-#: TWLight/templates/base.html:96
+#: TWLight/templates/base.html:98
 msgid "Apply"
 msgstr ""
 
@@ -1376,7 +1376,7 @@ msgstr ""
 #. Translators: This is the heading for the section of a partner page showing data about applications to that partner.
 #. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
 #: TWLight/resources/templates/resources/partner_detail.html:384
-#: TWLight/templates/base.html:129
+#: TWLight/templates/base.html:131
 msgid "Metrics"
 msgstr ""
 
@@ -1792,17 +1792,17 @@ msgstr ""
 msgid "Talk page:"
 msgstr ""
 
-#: TWLight/templates/base.html:14 TWLight/templates/base.html:60
+#: TWLight/templates/base.html:14 TWLight/templates/base.html:62
 msgid "The Wikipedia Library Card Platform"
 msgstr ""
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
-#: TWLight/templates/base.html:54
+#: TWLight/templates/base.html:56
 msgid "Library Card Platform home"
 msgstr ""
 
 #. Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate home_url or username.
-#: TWLight/templates/base.html:70 TWLight/templates/base.html:75
+#: TWLight/templates/base.html:72 TWLight/templates/base.html:77
 #, python-format
 msgid ""
 "\n"
@@ -1811,42 +1811,42 @@ msgid ""
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page, taking users to the page where they can browse current partners.
-#: TWLight/templates/base.html:89
+#: TWLight/templates/base.html:91
 msgid "Browse"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/base.html:105
+#: TWLight/templates/base.html:107
 msgid "Review"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/base.html:114
+#: TWLight/templates/base.html:116
 msgid "Send data to partners"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline).
-#: TWLight/templates/base.html:122
+#: TWLight/templates/base.html:124
 msgid "Latest activity"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is staff, linking to the administrator interface.
-#: TWLight/templates/base.html:137
+#: TWLight/templates/base.html:139
 msgid "Admin"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is logged in.
-#: TWLight/templates/base.html:146
+#: TWLight/templates/base.html:148
 msgid "Log out"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
-#: TWLight/templates/base.html:154 TWLight/templates/home.html:22
+#: TWLight/templates/base.html:156 TWLight/templates/home.html:22
 msgid "Log in"
 msgstr ""
 
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate email_url.
-#: TWLight/templates/base.html:172
+#: TWLight/templates/base.html:174
 #, python-format
 msgid ""
 "\n"
@@ -1857,7 +1857,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
-#: TWLight/templates/base.html:183
+#: TWLight/templates/base.html:185
 #, python-format
 msgid ""
 "\n"
@@ -1881,7 +1881,7 @@ msgstr ""
 #. </p>
 #. <p>
 #. comment Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:213
+#: TWLight/templates/base.html:215
 msgid ""
 "This work is licensed under a <a rel=\"license\" href=\"http://"
 "creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
@@ -1889,22 +1889,22 @@ msgid ""
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:227
+#: TWLight/templates/base.html:229
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:233
+#: TWLight/templates/base.html:235
 msgid "Terms of use and privacy policy"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:239
+#: TWLight/templates/base.html:241
 msgid "Feedback"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
-#: TWLight/templates/base.html:251
+#: TWLight/templates/base.html:253
 msgid "Contact us"
 msgstr ""
 
