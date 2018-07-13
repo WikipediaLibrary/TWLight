@@ -9,14 +9,14 @@
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). {% endcomment %}
     {% blocktrans trimmed %}
       The Wikipedia Library provides free access to research materials
-      to improve your ability to contribute content to the Wikimedia projects.
+      to improve your ability to contribute content to Wikimedia projects.
     {% endblocktrans %}    
   </p>
 
   <p>
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). {% endcomment %}
     {% blocktrans trimmed %}
-      The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to those partner resources. Here you can see which partnerships are available and what kinds of materials each database provides, and apply for the ones you want. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review applications and work with partners to get you your free access.
+      The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to those partner resources. Here you can see which partnerships are available, what kinds of materials each database provides, and apply for the ones you want. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review applications and work with partners to get you your free access.
     {% endblocktrans %}    
   </p>
 
@@ -24,7 +24,7 @@
     {% url 'terms' as terms_url %}
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate {{ terms_url }}. {% endcomment %}
     {% blocktrans trimmed %}
-      For more information about how application information is stored and reviewed please see our <a href="{{ terms_url }}">terms of use</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them.
+      For more information about how application information is stored and reviewed please see our <a href="{{ terms_url }}">terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them.
     {% endblocktrans %}    
   </p>
 
@@ -42,10 +42,6 @@
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% trans "Any editor can apply for access, but there are a few basic requirements:" %}
     <ul>
-      <li>
-        {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-        {% trans "You have your preferences enabled to receive email on your home wiki" %}
-      </li>
       <li>
         {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
         {% trans "You have an account that is a minimum of 6 months old" %}
@@ -72,7 +68,7 @@
   <p>
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% blocktrans trimmed %}
-      If you don't quite meet the experience requirements but think you would still be a strong candidate for access, feel free to apply and you may still be considered.  Note that "home wiki" can mean any Wikipedia you are active on.
+      If you don't quite meet the experience requirements but think you would still be a strong candidate for access, feel free to apply and you may still be considered.
     {% endblocktrans %}    
   </p>
 
@@ -148,7 +144,7 @@
   <p>
     {# Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if other tags are used for your language Wikipedia. If you're not sure how to handle this section, take your best guess and give the developer a heads-up. #}
     {% blocktrans trimmed %}
-      Citation practices vary by project and even by article.  Generally, we support editors citing where they found information, in a form that allows others to check it for themselves.  That often means providing both original source details as well as a link to the partner database in which the source was found. You can use &lt;code&gt;|via=&lt;code&gt; in templates using CS1 citation format or add &lt;code&gt;&lbrace;&lbrace;subscription required|via=&rbrace;&rbrace;&lt;/code&gt; to identify the provider.
+      Citation practices vary by project and even by article.  Generally, we support editors citing where they found information, in a form that allows others to check it for themselves.  That often means providing both original source details as well as a link to the partner database in which the source was found.
     {% endblocktrans %}    
   </p>
 
@@ -165,12 +161,12 @@
   <blockquote>
     <code>
       {% verbatim %}
-        {{cite journal|author=Zieger, R|title=Walmart and the broken narrative of US labor history|journal=Labor History|pages=563–569|date=November 2011|volume=52|number=4|doi=10.1080/0023656X.2011.632517}} {{subscription required|via=[[Taylor &amp; Francis]]}}
+        {{cite journal |last1=Bearman |first1=Robert |title=Shakespeare's Purchase of New Place |journal=[[Shakespeare Quarterly]] |volume=63 |issue=4 |date=2012 |pages=465–486 |location=Washington, DC |publisher=[[Folger Shakespeare Library]] |issn=0037-3222 |eissn=1538-3555 |url= https://www.jstor.org/stable/41819765 |subscription=yes |via=[[JSTOR]]}}
       {% endverbatim %}
     </code>
 
     <p>
-      Zieger, R (November 2011). "Walmart and the broken narrative of US labor history". Labor History 52 (4): 563–569.doi:10.1080/0023656X.2011.632517. &mdash; via Taylor &amp; Francis (subscription required)    
+      Bearman, Robert (2012). "Shakespeare's Purchase of New Place". Shakespeare Quarterly. Washington, DC: Folger Shakespeare Library. 63 (4): 465–486. eISSN 1538-3555. ISSN 0037-3222 &mdash; via JSTOR. (Subscription required)
     </p>
   </blockquote>
 
