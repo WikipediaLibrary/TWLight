@@ -310,6 +310,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
 .resource-label-subject {
   background-image: url("../img/bullet-subject.png");
   background-repeat: no-repeat;
+  background-position: top left; /* Must set explicitly for CSS Janus. */
   min-height: 2em;
   padding: 6px 0px 0px 25px;
 }
@@ -317,6 +318,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
 .resource-label-languages {
   background-image: url("../img/bullet-language.png");
   background-repeat: no-repeat;
+  background-position: top left; /* Must set explicitly for CSS Janus. */
   min-height: 2em;
   padding: 6px 0px 0px 25px;
 }
@@ -324,6 +326,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
 .resource-label-warning {
   background-image: url("../img/bullet-warning.png");
   background-repeat: no-repeat;
+  background-position: top left; /* Must set explicitly for CSS Janus. */
   min-height: 2em;
   padding: 6px 0px 0px 25px;
 }
