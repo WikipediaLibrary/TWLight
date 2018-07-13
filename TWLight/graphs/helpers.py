@@ -85,7 +85,7 @@ def get_data_count_by_month(queryset, data_format=JSON):
 
 
 # Application stats ------------------------------------------------------------
-def get_application_status_data(queryset, data_format=JSON):
+def get_application_status_data(queryset, statuses=Application.STATUS_CHOICES, data_format=JSON):
     """
     Returns data about the status of Applications in a queryset. By default,
     returns json in a format suitable for display as a flot.js pie chart; can
@@ -93,7 +93,7 @@ def get_application_status_data(queryset, data_format=JSON):
     """
     status_data = []
 
-    for status in Application.STATUS_CHOICES[0:3]:
+    for status in statuses:
         status_count = queryset.filter(status=status[0]).count()
         # We have to force unicode here because we used ugettext_lazy, not
         # ugettext, to internationalize the status labels in
@@ -120,6 +120,25 @@ def get_application_status_data(queryset, data_format=JSON):
         return json.dumps(status_data)
 
 
+# User stats ------------------------------------------------------------
+def get_user_language_data(queryset, data_format=JSON):
+    """
+    Returns data about the language settings of users in a queryset. By default,
+    returns json in a format suitable for display as a flot.js pie chart; can
+    also return CSV.
+    """
+    language_data = []
+
+    for language in queryset.exclude(lang=None).values("lang").distinct():
+        language_count = queryset.filter(lang=language['lang']).count()
+        language_data.append({'label': force_unicode(language['lang']), 'data': language_count})
+
+    if data_format == PYTHON:
+        return language_data
+    else:
+        return json.dumps(language_data)
+
+
 def get_time_open_histogram(queryset, data_format=JSON):
     """
     Expects a queryset of closed Applications; returns data suitable for
@@ -128,7 +147,7 @@ def get_time_open_histogram(queryset, data_format=JSON):
     data_series = {}
 
     for app in queryset:
-        if not app.status in [Application.APPROVED, Application.NOT_APPROVED]:
+        if not app.status in Application.FINAL_STATUS_LIST:
             continue
 
         # Careful! Don't say "if not app.days_open" - that will also fail when
@@ -175,9 +194,11 @@ def get_median_decision_time(queryset, data_format=JSON):
         while this_month_start <= timezone.now().date():
             days_to_close = list(
                 Application.objects.filter(
-                    status__in=[Application.APPROVED, Application.NOT_APPROVED],
+                    status__in=Application.FINAL_STATUS_LIST,
                     date_created__gte=this_month_start,
                     date_created__lt=next_month_start
+                ).exclude(
+                    days_open=None
                 ).values_list('days_open', flat=True)
             )
 

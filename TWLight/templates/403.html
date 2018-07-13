@@ -25,7 +25,10 @@
 
   <div class="clearfix">
     <div class="pull-left">
-      <img class="img-responsive img-thumbnail" src={% static "img/sad_critter.jpg" %} alt="sad critter in cage">
+      <img class="img-responsive img-thumbnail" src={% static "img/sad_critter.jpg" %} alt="
+      {% comment %} Translators: Alt text for an image shown on the 403 error page. {% endcomment %}
+      {% trans "Sad hamster in a cage" %}
+      ">
 
       <div class="well">
         <a href="https://flic.kr/p/6wL7Sc">crunchie needs a little tin cup</a> by <a href="https://www.flickr.com/photos/armydre2008/">frankieleon</a>, on Flickr; CC BY

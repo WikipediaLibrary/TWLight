@@ -71,11 +71,12 @@ class Application(models.Model):
         help_text=_('Please do not override this field! Its value is set '
                   'automatically.'))
 
-    sent_by = models.ForeignKey(User, blank=True, null=True,
+    sent_by = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL,
         # Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
         help_text=_('The user who sent this application to the partner'))
 
-    editor = models.ForeignKey(Editor, related_name='applications')
+    editor = models.ForeignKey(Editor, related_name='applications', null=True,
+        on_delete=models.SET_NULL)
     partner = models.ForeignKey(Partner, related_name='applications')
 
     rationale = models.TextField(blank=True)
@@ -85,6 +86,7 @@ class Application(models.Model):
                             blank=True, null=True)
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
+    account_email = models.CharField(max_length=64, blank=True, null=True)
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
@@ -94,6 +96,7 @@ class Application(models.Model):
     parent = models.ForeignKey('self',
         on_delete=models.SET_NULL, blank=True, null=True)
 
+    hidden = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'{self.editor} - {self.partner}'.format(self=self)
@@ -128,7 +131,7 @@ class Application(models.Model):
         else:
             data = model_to_dict(self,
                     fields=['rationale', 'specific_title', 'comments',
-                            'agreement_with_terms_of_use'])
+                            'agreement_with_terms_of_use', 'account_email'])
 
             # Status and parent are explicitly different on the child than
             # on the parent application. For editor, partner, and stream, we
@@ -138,7 +141,8 @@ class Application(models.Model):
                          'parent': self,
                          'editor': self.editor,
                          'partner': self.partner,
-                         'specific_stream': self.specific_stream})
+                         'specific_stream': self.specific_stream,
+                         'account_email': self.account_email})
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in

@@ -47,6 +47,8 @@ SPECIFIC_STREAM = 'specific_stream'
 SPECIFIC_TITLE = 'specific_title'
 COMMENTS = 'comments'
 AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
+ACCOUNT_EMAIL = 'account_email'
+HIDDEN = 'hidden'
 
 
 # ~~~~ Basic field names ~~~~ #
@@ -54,12 +56,12 @@ USER_FORM_FIELDS = [REAL_NAME, COUNTRY_OF_RESIDENCE, OCCUPATION,
                     AFFILIATION]
 
 # These fields are displayed for all partners.
-PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS]
+PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS, HIDDEN]
 
 # These fields are displayed only when a specific partner requires that
 # information.
 PARTNER_FORM_OPTIONAL_FIELDS = [SPECIFIC_STREAM, SPECIFIC_TITLE,
-                                AGREEMENT_WITH_TERMS_OF_USE]
+                                AGREEMENT_WITH_TERMS_OF_USE, ACCOUNT_EMAIL]
 
 
 # ~~~~ Field information ~~~~ #
@@ -76,6 +78,8 @@ FIELD_TYPES = {
     SPECIFIC_TITLE: forms.CharField(max_length=128),
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
     AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(),
+    ACCOUNT_EMAIL: forms.CharField(max_length=64),
+    HIDDEN: forms.BooleanField(required=False)
 }
 
 FIELD_LABELS = {
@@ -99,6 +103,10 @@ FIELD_LABELS = {
     COMMENTS: _('Anything else you want to say'),
     # Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
+    # Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
+    ACCOUNT_EMAIL: _("The email for your account on the partner's website"),
+    # Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
+    HIDDEN: _("Check this box if you would prefer to hide your application from the 'latest activity' timeline.")
 }
 
 SEND_DATA_FIELD_LABELS = {
@@ -116,6 +124,8 @@ SEND_DATA_FIELD_LABELS = {
     SPECIFIC_TITLE: _('Title requested'),
     # Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
     AGREEMENT_WITH_TERMS_OF_USE: _('Agreed with terms of use'),
+    # Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
+    ACCOUNT_EMAIL: _('Account email'),
 }
 
 

@@ -15,12 +15,14 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 
 from TWLight.applications.models import Application
 from TWLight.users.models import Editor
-from TWLight.users.groups import get_coordinators
+from TWLight.users.groups import get_coordinators, get_restricted
 
+import logging
+logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
 
@@ -242,4 +244,43 @@ class EmailRequired(object):
             return HttpResponseRedirect(new_url)
 
         return super(EmailRequired, self).dispatch(
+            request, *args, **kwargs)
+
+
+
+class DataProcessingRequired(object):
+    """
+    Used to restrict views from users with data processing restricted.
+    """
+
+    def test_func_data_processing_required(self, user):
+        restricted = get_restricted()
+        return user in restricted.user_set.all()
+
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.test_func_data_processing_required(request.user):
+            # No need to give the user a message because they will already
+            # have the generic data processing notice.
+            raise PermissionDenied
+
+        return super(DataProcessingRequired, self).dispatch(
+            request, *args, **kwargs)
+
+class NotDeleted(object):
+    """
+    Used to check that the submitting user hasn't deleted their account.
+    Without this, users hit a Server Error if trying to navigate directly
+    to an app from a deleted user.
+    """
+
+    def test_func_not_deleted(self, object):
+        obj = self.get_object()
+        return obj.editor is None
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.test_func_not_deleted(object):
+            raise Http404
+
+        return super(NotDeleted, self).dispatch(
             request, *args, **kwargs)

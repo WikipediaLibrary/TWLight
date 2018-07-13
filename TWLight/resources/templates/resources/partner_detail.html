@@ -3,6 +3,7 @@
 {% load static %}
 {% load cache %}
 {% load twlight_perms %}
+{% load twlight_removetags %}
 {% load twlight_wikicode2html %}
 
 {% get_current_language as LANGUAGE_CODE %}
@@ -38,7 +39,11 @@
     </div>
     {% endif %}
     {% if user_sent_apps %}
-        <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
+        {% if user|restricted %}
+          <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled">{% trans "Renew" %}</button><br />
+        {% else %}
+          <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
+        {% endif %}
     {% elif user_open_apps %}
         {% if multiple_open_apps %}
             <a href="{% url 'users:home' %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View applications" %}</a>
@@ -46,7 +51,11 @@
             <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View application" %}</a>
         {% endif %}
     {% else %}
-        <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a><br />
+        {% if user|restricted %}
+          <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
+        {% else %}
+          <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a><br />
+        {% endif %}
     {% endif %}
     {% if user|coordinators_only %}
     <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
@@ -80,7 +89,11 @@
     </div>
     {% endif %}
     {% if user_sent_apps %}
+      {% if user|restricted %}
+        <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Renew" %}</button><br />
+      {% else %}
         <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
+      {% endif %}
     {% elif user_open_apps %}
     {% if multiple_open_apps %}
       <a href="{% url 'users:home' %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View applications" %}</a>
@@ -88,7 +101,11 @@
       <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View application" %}</a>
     {% endif %}
     {% else %}
-      <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br />
+      {% if user|restricted %}
+        <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
+      {% else %}
+        <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br />
+      {% endif %}
     {% endif %}
 
     {% if user|coordinators_only %}
@@ -154,7 +171,7 @@
               We filter out details and summary tags so that we always see
               the full content on the details page.
             {% endcomment %}
-            {% filter removetags:"details summary" %}
+            {% filter twlight_removetags:"details summary" %}
               {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
                 {{ object.description | twlight_wikicode2html | safe }}
               {% endcache %}
@@ -164,7 +181,7 @@
             {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
             {% trans "Description not available." %}
           {% endif %}
-          {% if object.tags %}
+          {% if object.tags.count > 0 %}
             <div class="resource-label-subject">
             {% for tag in object.tags.all %}
               <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
@@ -198,7 +215,7 @@
         </div>
       </div>      
     </li>
-    {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.specific_stream %}
+    {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.specific_stream or object.account_email %}
       <li class="timeline-inverted">
         <div class="timeline-badge"><i class="fa fa-exclamation"></i>
         </div>
@@ -284,6 +301,16 @@
                   {% endif %}
                 </li>
               {% endif %}
+
+              {% if object.account_email %}
+                <li>
+                  {% comment %} Translators: If a user must register on the partner website before applying, they see this message. Don't translate {{ partner }}. {% endcomment %}
+                  {% blocktrans with publisher=object.company_name %}
+                    {{ publisher }} requires that you sign up for an account before applying
+                    for access.
+                  {% endblocktrans %}
+                </li>
+              {% endif %}
             </ul>
 
           </div>
@@ -313,7 +340,7 @@
               {% endcomment %}
                 <li><b>{{ stream }}</b>
                   {% if stream.description %}&mdash; 
-                    {% filter removetags:"details summary" %}
+                    {% filter twlight_removetags:"details summary" %}
                       {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
                         {{ stream.description | twlight_wikicode2html | safe }}
                       {% endcache %}
@@ -331,6 +358,10 @@
       </div>
       <div class="timeline-panel">
         <div class="timeline-body">
+          {% if object.company_location %}
+            {% comment %} Translators: If a partner has their location listed, this message is a label for that location {% endcomment %}
+            <p>{% trans "Location" %}: {{ object.company_location.name }}</p>
+          {% endif %}
           {% if object.terms_of_use %}
             {% comment %} Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
             <p><a href="{{ object.terms_of_use }}">{% trans "Terms of use" %}</a></p>
@@ -407,65 +438,69 @@
     </div>
   </div>
 
-  <h3>
-    {% comment %} Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    {% trans "Applications by status" %}
-    <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">
-    {% comment %} Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    {% trans "download as csv" %}
-  </a></h3>
-  
-  <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+  {% if total_apps > 0 %}
+    <h3>
+      {% comment %} Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+      {% trans "Applications by status" %}
+      <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">
+      {% comment %} Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+      {% trans "download as csv" %}
+    </a></h3>
+    
+    <div id="app-distribution-graph" style="width:600px;height:300px"></div>
 
-  <p>
-    {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    {% blocktrans count counter=total_apps_approved %}
-      Number of applications approved (all time): {{ total_apps_approved_or_sent }}
-    {% plural %}
-      Number of applications approved (all time): {{ total_apps_approved_or_sent }}
-    {% endblocktrans %}
-  </p>
+    <p>
+      {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+      {% blocktrans count counter=total_apps_approved %}
+        Number of applications approved (all time): {{ total_apps_approved_or_sent }}
+      {% plural %}
+        Number of applications approved (all time): {{ total_apps_approved_or_sent }}
+      {% endblocktrans %}
+    </p>
 
-  <p>
-    {% comment %} Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    {% blocktrans count counter=unique_users_approved %}
-      Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
-    {% plural %}
-      Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
-    {% endblocktrans %}
-  </p>
-  
-  {% if stream_unique_accepted %}
-    <ul>
-    {% for stream_name, num_apps in stream_unique_accepted.items %}
-      <li>{{ stream_name }}: {{ num_apps }}</li>
-    {% endfor %}
-    </ul>
+    <p>
+      {% comment %} Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+      {% blocktrans count counter=unique_users_approved %}
+        Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
+      {% plural %}
+        Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
+      {% endblocktrans %}
+    </p>
+    
+    {% if stream_unique_accepted %}
+      <ul>
+      {% for stream_name, num_apps in stream_unique_accepted.items %}
+        <li>{{ stream_name }}: {{ num_apps }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% comment %} Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+    <h3>{% trans "Applications over time" %}</h3>
+    
+    {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time. {% endcomment %}
+    <h4>{% trans "All applications" %}
+      <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
+    </a></h4>
+    
+    <div id="signups-time-graph" style="width:600px;height:300px"></div>
+
+    {% if total_apps_approved > 0 %}
+      {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time. {% endcomment %}
+      <h4>{% trans "Approved applications only" %}
+        <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
+      </a></h4>
+    
+      <div id="approved-or-sent-signups-time-graph" style="width:600px;height:300px"></div>
+    {% endif %}
+    
+    {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time. {% endcomment %}
+    <h3>{% trans "Unique users over time" %}
+      <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
+    </a></h3>
+
+    <div id="users-time-graph" style="width:600px;height:300px"></div>
   {% endif %}
-
-  {% comment %} Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-  <h3>{% trans "Applications over time" %}</h3>
-  
-  {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time. {% endcomment %}
-  <h4>{% trans "All applications" %}
-    <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-  </a></h4>
-  
-  <div id="signups-time-graph" style="width:600px;height:300px"></div>
-  
-  {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time. {% endcomment %}
-  <h4>{% trans "Approved applications only" %}
-    <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-  </a></h4>
-  
-  <div id="approved-or-sent-signups-time-graph" style="width:600px;height:300px"></div>
-  
-  {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time. {% endcomment %}
-  <h3>{% trans "Unique users over time" %}
-    <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-  </a></h3>
-
-  <div id="users-time-graph" style="width:600px;height:300px"></div>
 {% endblock content %}
 
 {% block javascript %}
@@ -496,20 +531,22 @@
       });
 
       // Approved applications by time
-      var approved_or_sent_signups_time_graph = $("#approved-or-sent-signups-time-graph");
-      var approved_or_sent_signups_time_data = {{ approved_or_sent_signups_time_data | safe }};
-      var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
-        xaxis: {
-          mode: "time",
-          tickSize: [1, 'month'],
-        },
-        yaxis: {
-          min: 0,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        colors: ['#5cb85c'],
-      });
+      if ({{ total_apps_approved }} > 0) {
+        var approved_or_sent_signups_time_graph = $("#approved-or-sent-signups-time-graph");
+        var approved_or_sent_signups_time_data = {{ approved_or_sent_signups_time_data | safe }};
+        var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
+          xaxis: {
+            mode: "time",
+            tickSize: [1, 'month'],
+          },
+          yaxis: {
+            min: 0,
+            minTickSize: 1,
+            tickDecimals: 0,
+          },
+          colors: ['#5cb85c'],
+        });
+      }
 
       // Unique users by time
       var users_time_graph = $("#users-time-graph");

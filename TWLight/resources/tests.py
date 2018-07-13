@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import date, timedelta
 from mock import patch
 
@@ -36,7 +37,6 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False):
     self.client = Client()
     session = self.client.session
     self.client.login(username=editor.user.username, password='editor')
-    session.save()
 
     # Agree to terms of use in Client (or not).
     if Terms:
@@ -46,7 +46,6 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False):
         data['terms_of_use'] = True
         data['submit'] = True
         agree = self.client.post(terms_url, data)
-        session.save()
 
     # Add or remove editor from Coordinators as required
     coordinators = get_coordinators()
@@ -525,4 +524,4 @@ class StreamModelTests(TestCase):
         # Order isn't important.
         stream.languages.add(self.lang_fr)
         self.assertIn(stream.get_languages,
-            [u'English, French', u'French, English'])
+            [u'English, français', u'français, English'])

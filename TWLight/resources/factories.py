@@ -11,8 +11,8 @@ class PartnerFactory(factory.django.DjangoModelFactory):
         model = Partner
         strategy = factory.CREATE_STRATEGY
 
-    company_name = 'Publisher McPubface'
-    terms_of_use = 'https://example.com/terms'
+    company_name = factory.Faker('company')
+    terms_of_use = factory.Faker('uri')
     status = Partner.AVAILABLE # not the default, but usually wanted in tests
 
 
@@ -24,4 +24,4 @@ class StreamFactory(factory.django.DjangoModelFactory):
         strategy = factory.CREATE_STRATEGY
 
     partner = factory.SubFactory(PartnerFactory)
-    name = 'Dancing about Architecture'
+    name = factory.Faker('bs')

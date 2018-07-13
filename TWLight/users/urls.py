@@ -19,4 +19,10 @@ urlpatterns = [
     url(r'^update/$',
        login_required(views.PIIUpdateView.as_view()),
         name='pii_update'),
+    url(r'^restrict_data/$',
+       login_required(views.RestrictDataView.as_view()),
+        name='restrict_data'),
+    url(r'^delete_data/(?P<pk>\d+)/$',
+       login_required(views.DeleteDataView.as_view()),
+        name='delete_data'),
 ]

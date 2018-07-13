@@ -1,5 +1,16 @@
 {% load i18n %}
 
+  <p>
+    {% comment %} Translators: This is shown on editor profiles, under the heading for Wikipedia editor data. {% endcomment %}
+    {% blocktrans %}
+      This information is updated automatically from your Wikimedia account 
+      each time you log in, except for the Contributions field, where you 
+      can describe your Wikimedia editing history.
+    {% endblocktrans %}
+  </p>
+
+  <hr />
+
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
       {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username. {% endcomment %}
@@ -10,7 +21,12 @@
       {% if editor.wp_link_sul_info %}
         <br />
         {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's SUL info through an external tool. (e.g. https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=Samwalton9%20(WMF)) {% endcomment %}
-        <a href="{{ editor.wp_link_sul_info }}">({% trans "view Wikipedia SUL info" %})</a>
+        <a href="{{ editor.wp_link_sul_info }}">({% trans "SUL info" %})</a>
+      {% endif %}
+      {% if editor.wp_link_central_auth %}
+        <br />
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/) {% endcomment %}
+        <a href="{{ editor.wp_link_central_auth }}">({% trans "CentralAuth" %})</a>
       {% endif %}
     </div>
   </div>
@@ -28,7 +44,7 @@
       {% endif %}
       {% ifequal editor.user user %}
         {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself. {% endcomment %}
-        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
+        <a href="{% url 'users:editor_update' editor.pk %}">{% trans "Update" %}</a>
       {% endifequal %}
       <br />
     </div>

@@ -1,9 +1,20 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
+from dal import autocomplete
 
 from TWLight.applications import views
+from TWLight.users.models import Editor
+from TWLight.resources.models import Partner
 
 urlpatterns = [
+    url(r'^editor/autocomplete/$',
+        views.EditorAutocompleteView.as_view(model=Editor),
+        name='editor_autocomplete',
+    ),
+    url(r'^partner/autocomplete/$',
+        views.PartnerAutocompleteView.as_view(model=Partner),
+        name='partner_autocomplete',
+    ),
     url(r'^request/$',
         login_required(views.RequestApplicationView.as_view()),
         name='request'

@@ -2,6 +2,7 @@
 import copy
 from datetime import datetime, timedelta
 import json
+import re
 from mock import patch, Mock
 from urlparse import urlparse
 
@@ -18,14 +19,14 @@ from TWLight.applications.models import Application
 
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
+from TWLight.resources.tests import EditorCraftRoom
 
 from . import views
 from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
-from .groups import get_coordinators
+from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor
-
 
 FAKE_IDENTITY_DATA = {'query': {
     'userinfo': {
@@ -55,6 +56,12 @@ FAKE_GLOBAL_USERINFO = {
     'name': 'alice',
     'editcount': 5000,
 }
+
+# CSRF middleware is helpful for site security, but not helpful for testing
+# the rendered output of a page.
+def remove_csrfmiddlewaretoken(rendered_html):
+    csrfmiddlewaretoken_pattern = r"<input type='hidden' name='csrfmiddlewaretoken' value='.+' />"
+    return re.sub(csrfmiddlewaretoken_pattern, '', rendered_html)
 
 class ViewsTestCase(TestCase):
 
@@ -233,10 +240,10 @@ class ViewsTestCase(TestCase):
             set([app1, app2, app3, app4]))
         content = response.render().content
 
-        self.assertIn(app1.__str__(), content)
-        self.assertIn(app2.__str__(), content)
-        self.assertIn(app3.__str__(), content)
-        self.assertIn(app4.__str__(), content)
+        self.assertIn(app1.partner.company_name, content.decode("utf-8"))
+        self.assertIn(app2.partner.company_name, content.decode("utf-8"))
+        self.assertIn(app3.partner.company_name, content.decode("utf-8"))
+        self.assertIn(app4.partner.company_name, content.decode("utf-8"))
 
         # We can't use assertTemplateUsed with RequestFactory (only with
         # Client), and testing that the rendered content is equal to an
@@ -281,8 +288,9 @@ class ViewsTestCase(TestCase):
         # output of the two pages is the same - the user would have seen the
         # same thing on either page.
         self.assertEqual(home_response.status_code, 200)
-        self.assertEqual(home_response.render().content,
-            detail_response.render().content)
+        self.assertEqual(
+            remove_csrfmiddlewaretoken(home_response.render().content),
+            remove_csrfmiddlewaretoken(detail_response.render().content))
 
 
     @patch('TWLight.users.views.UserDetailView.as_view')
@@ -304,6 +312,73 @@ class ViewsTestCase(TestCase):
         # correctly; we'll mock out its as_view function and make sure it got
         # called.
         mock_view.assert_called_once_with()
+
+    def test_coordinator_restricted(self):
+        # If a coordinator restricts their data processing
+        # they should stop being a coordinator.
+        restrict_url = reverse('users:restrict_data')
+
+        coordinators = get_coordinators()
+        restricted = get_restricted()
+
+        #Double check that the coordinator still has the relevant group
+        assert self.user_coordinator in coordinators.user_set.all()
+
+        # Need a password so we can login
+        self.user_coordinator.set_password('editor')
+        self.user_coordinator.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username4, password='editor')
+        restrict = self.client.get(restrict_url, follow=True)
+        restrict_form = restrict.context['form']
+        data = restrict_form.initial
+        data['restricted'] = True
+        data['submit'] = True
+        agree = self.client.post(restrict_url, data)
+
+        assert self.user_coordinator not in coordinators.user_set.all()
+        assert self.user_coordinator in restricted.user_set.all()
+
+    def test_user_delete(self):
+        """
+        Verify that deleted users have no user object.
+        """
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': self.user_editor.pk})
+
+        # Need a password so we can login
+        self.user_editor.set_password('editor')
+        self.user_editor.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username1, password='editor')
+
+        submit = self.client.post(delete_url)
+
+        assert not User.objects.filter(username=self.username1).exists()
+        # Check that the associated Editor also got deleted.
+        assert not Editor.objects.filter(user=self.user_editor).exists()
+
+    def test_user_data_download(self):
+        """
+        Verify that if users try to download their personal data they
+        are actually sent a file.
+        """
+        # Need a password so we can login
+        self.user_editor2.set_password('editor')
+        self.user_editor2.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username2, password='editor')
+
+        response = self.client.post(self.url2, {'download': 'Download'})
+
+        self.assertEqual(response.get('Content-Disposition'),
+            'attachment; filename=user_data.json')
 
 
 
@@ -386,6 +461,10 @@ class EditorModelTestCase(TestCase):
         expected_url = 'https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=editor_model_test'
         self.assertEqual(expected_url, self.test_editor.wp_link_sul_info)
 
+
+    def test_wp_link_central_auth(self):
+        expected_url = 'https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth&target=editor_model_test'
+        self.assertEqual(expected_url, self.test_editor.wp_link_central_auth)
 
     def test_get_wp_rights_display(self):
         expected_text = ['cat floofing', 'the big red button']
@@ -492,9 +571,11 @@ class EditorModelTestCase(TestCase):
         # Don't change self.editor, or other tests will fail! Make a new one
         # to test instead.
         new_editor = EditorFactory()
+        new_identity = dict(identity)
+        new_identity['sub'] = new_editor.wp_sub
 
         lang = get_language()
-        new_editor.update_from_wikipedia(identity, lang) # This call also saves the edito
+        new_editor.update_from_wikipedia(new_identity, lang) # This call also saves the editor
 
         self.assertEqual(new_editor.wp_username, 'evil_dr_porkchop')
         self.assertEqual(new_editor.wp_rights,
@@ -510,8 +591,8 @@ class EditorModelTestCase(TestCase):
         # should throw an error as we can no longer verify they're the same
         # editor.
         with self.assertRaises(AssertionError):
-            identity['sub'] = self.test_editor.wp_sub + 1
-            new_editor.update_from_wikipedia(identity, lang) # This call also saves the edito
+            new_identity['sub'] = new_editor.wp_sub + 1
+            new_editor.update_from_wikipedia(new_identity, lang) # This call also saves the editor
 
 
 

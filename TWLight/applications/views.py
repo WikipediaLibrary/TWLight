@@ -9,6 +9,7 @@ import urllib2
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import logging
+from dal import autocomplete
 from reversion import revisions as reversion
 from reversion.models import Version
 from urlparse import urlparse
@@ -20,6 +21,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.db.models import IntegerField, Case, When, Count, Q
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
@@ -32,8 +34,11 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  EditorsOnly,
                                  ToURequired,
                                  EmailRequired,
-                                 SelfOnly)
+                                 SelfOnly,
+                                 DataProcessingRequired,
+                                 NotDeleted)
 from TWLight.resources.models import Partner
+from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
 
 from .helpers import (USER_FORM_FIELDS,
@@ -46,8 +51,48 @@ from .models import Application
 
 logger = logging.getLogger(__name__)
 
+coordinators = get_coordinators()
+
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
 
+
+class EditorAutocompleteView(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Make sure that we aren't leaking info via our form choices.
+        if self.request.user.is_superuser:
+            editor_qs = Editor.objects.all().order_by('wp_username')
+            # Query by wikimedia username
+            if self.q:
+                editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by('wp_username')
+        elif coordinators in self.request.user.groups.all():
+            editor_qs = Editor.objects.filter(
+                     applications__partner__coordinator__pk=self.request.user.pk
+                ).order_by('wp_username')
+            # Query by wikimedia username
+            if self.q:
+                editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by('wp_username')
+        else:
+            editor_qs = Editor.objects.none()
+        return editor_qs
+
+class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Make sure that we aren't leaking info via our form choices.
+        if self.request.user.is_superuser:
+            partner_qs = Partner.objects.all().order_by('company_name')
+            # Query by partner name
+            if self.q:
+                partner_qs = partner_qs.filter(company_name__istartswith=self.q).order_by('company_name')
+        elif coordinators in self.request.user.groups.all():
+            partner_qs =  Partner.objects.filter(
+                    coordinator__pk=self.request.user.pk
+                ).order_by('company_name')
+            # Query by partner name
+            if self.q:
+                partner_qs = partner_qs.filter(company_name__istartswith=self.q).order_by('company_name')
+        else:
+            partner_qs = Partner.objects.none()
+        return partner_qs
 
 class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
     template_name = 'applications/request_for_application.html'
@@ -110,7 +155,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
 
 
 
-class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
+class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataProcessingRequired, FormView):
     """
     People can get to application submission in 2 ways:
     1) via RequestApplicationView, which lets people select multiple partners;
@@ -126,7 +171,7 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormVi
 
     # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         """
         We will dynamically construct a form which harvests exactly the
         information needed for editors to request access to their desired set of
@@ -147,6 +192,8 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormVi
         The goal is to reduce the user's data entry burden to the minimum
         amount necessary for applications to be reviewed.
         """
+        if form_class is None:
+            form_class = self.form_class
 
         kwargs = self.get_form_kwargs()
 
@@ -219,6 +266,11 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormVi
                     # data we'll write into the Application.
                     data = None
 
+                if data == "[deleted]":
+                    fail_msg = _('This field consists only of restricted text.')
+                    form.add_error(label, fail_msg)
+                    return self.form_invalid(form)
+
                 if data:
                     setattr(app, field, data)
 
@@ -242,17 +294,20 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, FormVi
 
     def _get_user_fields(self, partners=None):
         """
-        Return a list of user-specific data fields required by at least one
-        Partner to whom the user is requesting access.
+        Return a dict of user-specific data fields required by at least one
+        Partner to whom the user is requesting access, with a list of
+        partners requesting that data.
         """
         if not partners:
             return None
 
-        needed_fields = []
+        needed_fields = {}
         for field in USER_FORM_FIELDS:
             query = {'{field}'.format(field=field): True}
-            if partners.filter(**query).count():
-                needed_fields.append(field)
+            partners_queried = partners.filter(**query)
+            if partners_queried.count():
+                requesting_partners = partners_queried.distinct()
+                needed_fields[field] = [x.__str__() for x in partners_queried]
 
         return needed_fields
 
@@ -481,7 +536,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         context['include_template'] = \
             'applications/application_list_include.html'
 
-        context['autocomplete_form'] = ApplicationAutocomplete()
+        context['autocomplete_form'] = ApplicationAutocomplete(user=self.request.user)
 
         return context
 
@@ -496,7 +551,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
             # request.POST['editor'] will be the pk of an Editor instance, if
             # it exists.
             editor = Editor.objects.get(pk=request.POST['editor'])
-        except KeyError:
+        except (KeyError, ValueError):
             # The user didn't filter by editor, and that's OK.
             editor = None
         except Editor.DoesNotExist:
@@ -508,7 +563,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         try:
             partner = Partner.objects.get(pk=request.POST['partner'])
-        except KeyError:
+        except (KeyError, ValueError):
             # The user didn't filter by partner, and that's OK.
             partner = None
         except Partner.DoesNotExist:
@@ -538,15 +593,19 @@ class ListApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
-                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST]
-                ).order_by('status', 'partner', 'date_created')
+                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
         else:
             base_qs = Application.objects.filter(
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
-                    partner__coordinator__pk=self.request.user.pk
-                ).order_by('status', 'partner', 'date_created')
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
         return base_qs
 
@@ -574,12 +633,16 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             return Application.objects.filter(
                     status=Application.APPROVED,
-                ).order_by('date_closed', 'partner')
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
         else:
             return Application.objects.filter(
                     status=Application.APPROVED,
-                    partner__coordinator__pk=self.request.user.pk
-                ).order_by('date_closed', 'partner')
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
+                ).exclude(editor__user__groups__name='restricted').order_by(
+                    'status', 'partner', 'date_created')
 
     def get_context_data(self, **kwargs):
         context = super(ListApprovedApplicationsView, self).get_context_data(**kwargs)
@@ -597,12 +660,14 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                    status=Application.NOT_APPROVED
+                    status=Application.NOT_APPROVED,
+                    editor__isnull=False
                 ).order_by('date_closed', 'partner')
         else:
             return Application.objects.filter(
                     status=Application.NOT_APPROVED,
-                    partner__coordinator__pk=self.request.user.pk
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
                 ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
@@ -626,13 +691,15 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             return Application.objects.filter(
                      status__in=[Application.PENDING, Application.QUESTION],
-                     parent__isnull=False
+                     parent__isnull=False,
+                     editor__isnull=False
                 ).order_by('-date_created')
         else:
             return Application.objects.filter(
                      status__in=[Application.PENDING, Application.QUESTION],
                      partner__coordinator__pk=self.request.user.pk,
-                     parent__isnull=False
+                     parent__isnull=False,
+                     editor__isnull=False
                 ).order_by('-date_created')
 
     def get_context_data(self, **kwargs):
@@ -652,12 +719,14 @@ class ListSentApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                    status=Application.SENT
+                    status=Application.SENT,
+                    editor__isnull=False
                 ).order_by('date_closed', 'partner')
         else:
             return Application.objects.filter(
                     status=Application.SENT,
-                    partner__coordinator__pk=self.request.user.pk
+                    partner__coordinator__pk=self.request.user.pk,
+                    editor__isnull=False
                 ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
@@ -671,7 +740,7 @@ class ListSentApplicationsView(_BaseListApplicationView):
 
 
 
-class EvaluateApplicationView(CoordinatorOrSelf, ToURequired, UpdateView):
+class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, UpdateView):
     """
     Allows Coordinators to:
     * view single applications
@@ -696,7 +765,9 @@ class EvaluateApplicationView(CoordinatorOrSelf, ToURequired, UpdateView):
         return context
 
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.form_class
         form = super(EvaluateApplicationView, self).get_form(form_class)
 
         form.helper = FormHelper()
@@ -763,15 +834,26 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
     template_name = 'applications/send.html'
 
     def get_queryset(self):
+        # Find all approved applications, then list the relevant partners.
+        # Don't include applications from restricted users when generating
+        # this list.
+        base_queryset = Application.objects.filter(
+                            status=Application.APPROVED,
+                            editor__isnull=False
+                            ).exclude(
+                                editor__user__groups__name='restricted')
+
+        partner_list = Partner.objects.filter(
+            applications__in=base_queryset).distinct()
+
+        # Superusers can see all unrestricted applications, otherwise
+        # limit to ones from the current coordinator
         if self.request.user.is_superuser:
-            return Partner.objects.filter(
-                    applications__status=Application.APPROVED
-                ).distinct()
+            return partner_list
         else:
-            return Partner.objects.filter(
-                    applications__status=Application.APPROVED,
-                    self__request__user__pk=Partner__coordinator__editor__user__pk
-                ).distinct()
+            return partner_list.filter(
+                    coordinator__pk=self.request.user.pk
+                )
 
 
 class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
@@ -781,7 +863,9 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
         apps = self.get_object().applications.filter(
-            status=Application.APPROVED)
+            status=Application.APPROVED, editor__isnull=False).exclude(
+                editor__user__groups__name='restricted'
+                )
         app_outputs = {}
 
         for app in apps:
@@ -824,7 +908,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
 
 
 
-class RenewApplicationView(SelfOnly, View):
+class RenewApplicationView(SelfOnly, DataProcessingRequired, View):
     """
     This view takes an existing Application and creates a clone, with new
     dates and a FK back to the original application.

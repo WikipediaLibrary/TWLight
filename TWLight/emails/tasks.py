@@ -23,6 +23,7 @@ settings.DJMAIL_REAL_BACKEND.
 """
 from djmail import template_mail
 import logging
+from reversion.models import Version
 
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
@@ -36,6 +37,7 @@ from django.shortcuts import get_object_or_404
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import Partner
+from TWLight.users.groups import get_restricted
 
 
 logger = logging.getLogger(__name__)
@@ -47,6 +49,10 @@ logger = logging.getLogger(__name__)
 
 class CommentNotificationEmailEditors(template_mail.TemplateMail):
     name = 'comment_notification_editors'
+
+
+class CommentNotificationCoordinators(template_mail.TemplateMail):
+    name = 'comment_notification_coordinator'
 
 
 class CommentNotificationEmailOthers(template_mail.TemplateMail):
@@ -141,8 +147,25 @@ def send_comment_notification_emails(sender, **kwargs):
             logger.info('Email queued for {app.editor.user.email} about '
                 'app #{app.pk}'.format(app=app))
 
-    # Send to any previous commenters on the thread, other than the editor and
-    # the person who left the comment just now.
+    # Send emails to the last coordinator to make a status change to this
+    # application, as long as they aren't the ones leaving the comment.
+    app_versions = Version.objects.get_for_object(app)
+
+    # 'First' app version is the most recent
+    recent_app_coordinator = app_versions.first().revision.user
+    if recent_app_coordinator and recent_app_coordinator != current_comment.user:
+        email = CommentNotificationCoordinators()
+        email.send(recent_app_coordinator.email,
+            {'user': recent_app_coordinator.editor.wp_username,
+             'lang': recent_app_coordinator.userprofile.lang,
+             'app': app,
+             'app_url': app_url,
+             'partner': app.partner})
+        logger.info('Coordinator email queued for {app.editor.user.email} about app '
+            '#{app.pk}'.format(app=app))
+
+    # Send to any previous commenters on the thread, other than the editor,
+    # the person who left the comment just now, and the last coordinator.
     all_comments = Comment.objects.filter(object_pk=app.pk,
                         content_type__model='application',
                         content_type__app_label='applications')
@@ -157,6 +180,12 @@ def send_comment_notification_emails(sender, **kwargs):
         # If the editor is not among the prior commenters, that's fine; no
         # reason they should be.
         pass
+    if recent_app_coordinator:
+        try:
+            users.remove(recent_app_coordinator)
+        except KeyError:
+            # Likewise, coordinator might not have commented.
+            pass
 
     for user in users:
         if user:
@@ -173,10 +202,17 @@ def send_comment_notification_emails(sender, **kwargs):
 
 def send_approval_notification_email(instance):
     email = ApprovalNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner})
+
+    # If, for some reason, we're trying to send an email to a user
+    # who deleted their account, stop doing that.
+    if instance.editor:
+        email.send(instance.user.email,
+            {'user': instance.user.editor.wp_username,
+             'lang': instance.user.userprofile.lang,
+             'partner': instance.partner})
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 
 def send_waitlist_notification_email(instance):
@@ -184,13 +220,24 @@ def send_waitlist_notification_email(instance):
     path = reverse_lazy('partners:filter')
     link = 'https://{base}{path}'.format(base=base_url, path=path)
 
-    email = WaitlistNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner,
-         'link': link})
+    restricted = get_restricted()
 
+    email = WaitlistNotification()
+    if instance.editor:
+        if restricted not in instance.editor.user.groups.all():
+            email.send(instance.user.email,
+                {'user': instance.user.editor.wp_username,
+                 'lang': instance.user.userprofile.lang,
+                 'partner': instance.partner,
+                 'link': link})
+        else:
+            logger.info("Skipped user {username} when sending "
+                "waitlist notification email because user has "
+                "restricted data processing.".format(
+                    username=instance.editor.wp_username))
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 def send_rejection_notification_email(instance):
     base_url = get_current_site(None).domain
@@ -208,12 +255,15 @@ def send_rejection_notification_email(instance):
         app_url = reverse_lazy('users:home')
 
     email = RejectionNotification()
-    email.send(instance.user.email,
-        {'user': instance.user.editor.wp_username,
-         'lang': instance.user.userprofile.lang,
-         'partner': instance.partner,
-         'app_url': app_url})
-
+    if instance.editor:
+        email.send(instance.user.email,
+            {'user': instance.user.editor.wp_username,
+             'lang': instance.user.userprofile.lang,
+             'partner': instance.partner,
+             'app_url': app_url})
+    else:
+        logger.error("Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted.")
 
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):

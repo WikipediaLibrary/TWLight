@@ -5,6 +5,13 @@
 {% load urlencode %}
 
 
+{% block head_javascript %}
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+{% endblock head_javascript %}
+
 {% block content %}
   <div class="row">
     <div class="col-xs-12">
@@ -102,17 +109,58 @@
           Magic allowing us to loop a specific number of times.
           See https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates.
         {% endcomment %}
-        {% with ''|center:object_list.paginator.num_pages  as range %}
-          {% for _ in range %}
-            <li {% ifequal forloop.counter object_list.number %}
+        {% with ''|center:object_list.paginator.num_pages as range %}
+		  {% if object_list.paginator.num_pages <= 10 %}
+		    {% for _ in range %}
+				<li {% ifequal forloop.counter object_list.number %}
                   class="active"
+                {% endifequal %}>
+				<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+                {{ forloop.counter }}
+				</a>
+				</li>
+			{% endfor %}
+		  {% elif object_list.number >= 10 %}		
+			{% for _ in range|slice:"3" %}
+				<li>
+					<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+						{{ forloop.counter }}
+					</a>
+				</li>
+            {% endfor %}
+			<li>
+				<a>
+					...
+				</a>
+			</li>
+			<li>
+              <a href="?page={{ object_list.previous_page_number}}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+				{{ object_list.previous_page_number }}
+              </a>
+            </li>
+            <li class="active">
+              <a href="?page={{ object_list.number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+				{{ object_list.number }}
+              </a>
+            </li>
+			{% if object_list.has_next %}
+				<li>
+					<a href="?page={{ object_list.next_page_number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+						{{ object_list.next_page_number }}
+					</a>
+				</li>		
+			{% endif %}
+		  {% else %}
+			{% for _ in range|slice:":10" %}
+			  <li {% ifequal forloop.counter object_list.number %}
+					class="active"
                 {% endifequal %}>
               <a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
                 {{ forloop.counter }}
               </a>
             </li>
           {% endfor %}
-        {% endwith %}
+		  {% endif %}
         {% if object_list.has_next %}
           <li>
             {% comment %}Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications. {% endcomment %}
@@ -121,13 +169,30 @@
               <span aria-hidden="true">{% trans "Next page" %}</span>
             </a>
           </li>
+		  <li>
+			{% for _ in range %}
+				{% if forloop.last %}
+					{% comment %}Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications. {% endcomment %}
+						<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Last" %}">
+						{% comment %}Translators: This is the label for a button which goes to the last page of applications.{% endcomment %}
+							<span aria-hidden="true">{% trans "Last page" %}</span>
+						</a>
+				{% endif %}
+			{% endfor %}
+		  </li>
         {% else %}
           <li class="disabled">
             <a href="#" aria-label="{% trans "Next page" %}">
               <span aria-hidden="true">{% trans "Next page" %}</span>
             </a>
           </li>
+		  <li class="disabled">
+            <a href="#" aria-label="{% trans "Last page" %}">
+              <span aria-hidden="true">{% trans "Last page" %}</span>
+            </a>
+          </li>
         {% endif %}
+		{% endwith %}
       </ul>
     </nav>    
   {% endif %}
@@ -139,7 +204,6 @@
     src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
     crossorigin="anonymous"></script>
-  {% include 'autocomplete_light/static.html' %}
 
   {% comment %}
     Needed for select/deselect all function on main list page. Can't be included

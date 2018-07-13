@@ -5,6 +5,9 @@ cache: pip
 python:
   - 2.7
 
+addons:
+  mariadb: '10.2'
+
 services:
   - mysql
 
@@ -24,9 +27,10 @@ before_script:
   - cp TWLight/settings/travis_vars.py TWLight/settings/local_vars.py
   - mkdir -p TWLight/collectedstatic
 
-# Create revisions, make migrations, migrate, collect static, test.
+# Create revisions, make migrations, migrate, sync translations, collect static, test.
 script:
   - python manage.py makemigrations
   - python manage.py migrate
+  - python manage.py sync_translation_fields --noinput
   - python manage.py collectstatic --noinput --clear
   - python manage.py test --noinput

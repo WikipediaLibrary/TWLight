@@ -61,6 +61,9 @@ class UserProfile(models.Model):
     terms_of_use = models.BooleanField(default=False,
         # Translators: Users must agree to the website terms of use.
         help_text=_("Has this user agreed with the terms of use?"))
+    terms_of_use_date = models.DateField(blank=True, null=True,
+        #Translators: This field records the date the user agreed to the website terms of use.
+        help_text=_("The date this user agreed to the terms of use."))
     # Translators: An option to set whether users email is copied to their website account from Wikipedia when logging in.
     use_wp_email = models.BooleanField(default=True, help_text=_('Should we '
         'automatically update their email from their Wikipedia email when they '
@@ -96,11 +99,6 @@ class Editor(models.Model):
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    # Moved from auto_now=True/auto_now_add=True to set the date from import.
-    # Defaults to today and not required in forms.
-    last_updated = models.DateField(default=now,
-        # Translators: The date that this user's information was last changed.
-        help_text=_("When this information was last edited"))
     # Set as non-editable.
     date_created = models.DateField(default=now,
         editable=False,
@@ -191,6 +189,14 @@ class Editor(models.Model):
         )
         return url
 
+
+    @cached_property
+    def wp_link_central_auth(self):
+        url = u'{base_url}&target={self.wp_username}'.format(
+            base_url='https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth',
+            self=self
+        )
+        return url
 
     @property
     def get_wp_rights_display(self):

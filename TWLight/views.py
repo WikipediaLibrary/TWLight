@@ -1,11 +1,29 @@
 # -*- coding: utf-8 -*-
+import json
+
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
+from django.views import View
+from django.conf import settings
+from django.http import HttpResponse
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
+
+class LanguageWhiteListView(View):
+    """
+    JSON dump of current intersection between CLDR and Django languages.
+    For translatewiki.net. Cache set via decorator in urls.py.
+    """
+    def get(self, request):
+        whitelist_dict = {}
+        for i, (lang_code, autonym) in enumerate(settings.INTERSECTIONAL_LANGUAGES):
+            whitelist_dict[lang_code] = autonym
+        
+        whitelist_json = json.dumps(whitelist_dict, ensure_ascii=False, sort_keys=True, indent=4)
+        return HttpResponse(whitelist_json, content_type='application/json')
 
 class HomePageView(TemplateView):
     """
@@ -65,8 +83,13 @@ class HomePageView(TemplateView):
             activity.append(event)
 
 
-        # New applications!
-        apps = self._get_newest(Application.objects.all())
+
+        # New applications! Except for the ones where the user requested
+        # it be hidden.
+        apps = self._get_newest(
+            Application.objects.exclude(hidden=True).exclude(editor=None)
+        )
+
 
         for app in apps:
             event = {}
@@ -105,7 +128,8 @@ class HomePageView(TemplateView):
 
         # New access grants!
         grants = self._get_newest(Application.objects.filter(
-            status=Application.APPROVED, date_closed__isnull=False))
+            status=Application.APPROVED, date_closed__isnull=False).exclude(
+                editor=None))
 
         for grant in grants:
             event = {}
@@ -135,4 +159,9 @@ class HomePageView(TemplateView):
         context['featured_partners'] = Partner.objects.filter(
             featured=True).order_by('company_name')
 
+        # Partner count
+        # -----------------------------------------------------
+
+        context['partner_count'] = Partner.objects.all().count()
+        
         return context

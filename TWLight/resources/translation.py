@@ -1,7 +1,6 @@
 from modeltranslation.translator import translator, TranslationOptions
-from taggit.models import Tag
 
-from .models import Partner, Stream
+from .models import Partner, Stream, TextFieldTag
 
 # See https://django-modeltranslation.readthedocs.io/en/latest/registration.html
 class PartnerTranslationOptions(TranslationOptions):
@@ -24,4 +23,4 @@ class MultilingualTagTO(TranslationOptions):
     # tag without full translations we will be sad.
     empty_values = {'name': None}
 
-translator.register(Tag, MultilingualTagTO)
+translator.register(TextFieldTag, MultilingualTagTO)

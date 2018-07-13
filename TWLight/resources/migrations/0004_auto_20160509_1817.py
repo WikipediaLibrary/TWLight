@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import durationfield.db.models.fields.duration
 
 
 class Migration(migrations.Migration):
@@ -15,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='partner',
             name='access_grant_term',
-            field=durationfield.db.models.fields.duration.DurationField(help_text=b"The standard length of an access grant from this Partner. Enter like '365 days' or '365d' or '1 year'.", null=True, blank=True),
+            field=models.DurationField(help_text=b"The standard length of an access grant from this Partner. Enter like '365 days' or '365d' or '1 year'.", null=True, blank=True),
             preserve_default=True,
         ),
     ]
