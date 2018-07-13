@@ -180,6 +180,10 @@ SITE_ID = 1
 
 LANGUAGE_CODE = 'en' # Sets site default language.
 
+# https://django-modeltranslation.readthedocs.io/en/latest/installation.html#advanced-settings
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = LANGUAGE_CODE # sets the modeltranslation default language.
+
 LOCALE_PATHS = [
     # makemessages looks for locale/ in the top level, not the project level.
     os.path.join(os.path.dirname(BASE_DIR), 'locale'),
