@@ -18,13 +18,20 @@ def copy_tags(apps, schema_editor):
        new_tag.slug = old_tag.slug
        new_tag.save()
 
-# Apply data from old tag field to the new tag field
+# Opportunistically apply data from old tag field to the new tag field.
 def retag_partners(apps, schema_editor):
-    for partner in Partner.objects.all():
-        old_tags = partner.old_tags.all()
-        for old_tag in old_tags:
-            partner.tags.add(old_tag.name)
-            partner.save()
+    # Wrapped in try because languages that have been added after this
+    # migration will be a dependency of the Partner objects. This is a
+    # One-shot data migration, so it's fine if we skip it forever once all
+    # servers have run it at least once.
+    try:
+        for partner in Partner.objects.all():
+            old_tags = partner.old_tags.all()
+            for old_tag in old_tags:
+                partner.tags.add(old_tag.name)
+                partner.save()
+    except:
+        pass
 
 # Delete the old tag data
 def delete_old_tags(apps, schema_editor):
