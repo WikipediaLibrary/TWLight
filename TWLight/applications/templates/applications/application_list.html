@@ -114,7 +114,7 @@
 		    {% for _ in range %}
 				<li {% ifequal forloop.counter object_list.number %}
                   class="active"
-                {% endifequal %}>
+				{% endifequal %}>
 					<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
 						{{ forloop.counter }}
 					</a>
@@ -149,16 +149,46 @@
 						{{ object_list.next_page_number }}
 					</a>
 				</li>		
-			{% endif %}
+			{% endif %}			
+			{% with object_list.number as current_page %}
+			{% if object_list.number|add:'10' < object_list.paginator.num_pages %}
+				<li>
+					<a>
+						...
+					</a>
+				</li>
+				{% if object_list.paginator.num_pages >= current_page|add:'9' %}
+					<li>
+						<a href="?page={{ current_page | add:"9" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+							{{ current_page | add:"9" }}
+						</a>
+					</li>
+				{% endif %}
+				{% if object_list.paginator.num_pages >= current_page|add:'10' %}
+				<li>
+					<a href="?page={{ current_page | add:"10" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+						{{ current_page | add:"10" }}
+					</a>
+				</li>
+				{% endif %}
+				{% if object_list.paginator.num_pages >= current_page|add:'11' %}
+				<li>
+					<a href="?page={{ current_page | add:"11" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+						{{ current_page | add:"11" }}
+					</a>
+				</li>
+				{% endif %}			
+			{% endif %}	
+			{% endwith %}
 		  {% else %}
 			{% for _ in range|slice:":10" %}
-			  <li {% ifequal forloop.counter object_list.number %}
+				<li {% ifequal forloop.counter object_list.number %}
 					class="active"
-			  {% endifequal %}>
-				<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-					{{ forloop.counter }}
-				</a>
-			  </li>
+                {% endifequal %}>
+					<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+						{{ forloop.counter }}
+					</a>
+				</li>
 			{% endfor %}
 		  {% endif %}
         {% if object_list.has_next %}
