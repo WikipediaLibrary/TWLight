@@ -18,4 +18,8 @@ urlpatterns = [
         views.PartnersToggleWaitlistView.as_view(),
         name='toggle_waitlist'
     ),
+    url(r'^(?P<pk>\d+)/users/$',
+        views.PartnerUsers.as_view(),
+        name='users'
+    ),
 ]

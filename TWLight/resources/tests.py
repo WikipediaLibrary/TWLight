@@ -2,6 +2,7 @@
 from datetime import date, timedelta
 from mock import patch
 
+from django.contrib.auth.models import User, AnonymousUser
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
@@ -12,13 +13,15 @@ from TWLight.applications import views as app_views
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.applications.views import RequestApplicationView
-from TWLight.users.factories import EditorFactory, UserProfileFactory
+from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFactory
 from TWLight.users.groups import get_coordinators
 
 from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner
 from .views import PartnersDetailView, PartnersFilterView, PartnersToggleWaitlistView
 from .filters import PartnerFilter
+
+from . import views
 
 def EditorCraftRoom(self, Terms=False, Coordinator=False):
     """
@@ -525,3 +528,57 @@ class StreamModelTests(TestCase):
         stream.languages.add(self.lang_fr)
         self.assertIn(stream.get_languages,
             [u'English, français', u'français, English'])
+
+
+
+class PartnerViewTests(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(PartnerViewTests, cls).setUpClass()
+
+        cls.partner = PartnerFactory()
+        cls.coordinator = UserFactory()
+        cls.coordinator2 = UserFactory()
+
+        coordinators = get_coordinators()
+        coordinators.user_set.add(cls.coordinator)
+        coordinators.user_set.add(cls.coordinator2)
+
+        cls.partner.coordinator = cls.coordinator
+        cls.partner.save()
+
+        cls.editor = UserFactory()
+
+        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        cls.message_patcher.start()
+
+    def test_users_view(self):
+        users_url = reverse('partners:users', kwargs={'pk': self.partner.pk})
+
+        factory = RequestFactory()
+        request = factory.get(users_url)
+        request.user = AnonymousUser()
+
+        # Anonymous users can't view the user list
+        print("anonymous")
+        with self.assertRaises(PermissionDenied):
+            _ = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
+
+        request.user = self.editor
+        # Non-coordinators can't view the user list
+        print("non-coord")
+        with self.assertRaises(PermissionDenied):
+            _ = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
+
+        request.user = self.coordinator2
+        print("unassigned")
+        # Unassigned coordinators can't view the user list
+        with self.assertRaises(PermissionDenied):
+            _ = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
+
+        request.user = self.coordinator
+        print("coord")
+        # The assigned coordinator can see the user list!
+        response = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
+        self.assertEqual(response.status_code, 200)

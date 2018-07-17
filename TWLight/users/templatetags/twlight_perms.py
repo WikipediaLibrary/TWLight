@@ -12,6 +12,13 @@ def coordinators_only(user):
             user.is_superuser)
 
 @register.filter
+def partner_coordinator_only(user):
+    """Return True if user is the coordinator for a partner"""
+    coordinators = get_coordinators()
+    return (coordinators in user.groups.all() or
+            user.is_superuser)
+
+@register.filter
 def restricted(user):
     """Return True if user is in the restricted group, else False"""
     restricted = get_restricted()

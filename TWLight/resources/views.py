@@ -10,7 +10,7 @@ from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
                                     get_data_count_by_month,
                                     get_users_by_partner_by_month)
-from TWLight.view_mixins import CoordinatorsOnly
+from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOnly
 
 from .models import Partner, Stream
 
@@ -174,3 +174,32 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
 
         messages.add_message(request, messages.SUCCESS, msg)
         return HttpResponseRedirect(partner.get_absolute_url())
+
+
+
+class PartnerUsers(PartnerCoordinatorOnly, DetailView):
+    model = Partner
+    template_name_suffix = '_users'
+
+    def get_context_data(self, **kwargs):
+        context = super(PartnerUsers, self).get_context_data(**kwargs)
+
+        partner = self.get_object()
+
+        partner_applications = Application.objects.filter(
+            partner=partner)
+
+        context['approved_applications'] = partner_applications.filter(
+            status=Application.APPROVED).order_by(
+                '-date_closed', 'specific_stream')
+
+        context['sent_applications'] = partner_applications.filter(
+            status=Application.SENT).order_by(
+                '-date_closed', 'specific_stream')
+
+        if Stream.objects.filter(partner=partner).count() > 0:
+            context['partner_streams'] = True
+        else:
+            context['partner_streams'] = False
+
+        return context
