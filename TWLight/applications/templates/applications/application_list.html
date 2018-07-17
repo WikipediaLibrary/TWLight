@@ -148,15 +148,17 @@
 					<a href="?page={{ object_list.next_page_number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
 						{{ object_list.next_page_number }}
 					</a>
-				</li>		
+				</li>
+				{% if object_list.number|add:'1' != object_list.paginator.num_pages %}				
+					<li>
+						<a>
+							...
+						</a>
+					</li>
+				{% endif %}
 			{% endif %}			
 			{% with object_list.number as current_page %}
 			{% if object_list.number|add:'10' < object_list.paginator.num_pages %}
-				<li>
-					<a>
-						...
-					</a>
-				</li>
 				{% if object_list.paginator.num_pages >= current_page|add:'9' %}
 					<li>
 						<a href="?page={{ current_page | add:"9" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
@@ -165,18 +167,25 @@
 					</li>
 				{% endif %}
 				{% if object_list.paginator.num_pages >= current_page|add:'10' %}
-				<li>
-					<a href="?page={{ current_page | add:"10" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-						{{ current_page | add:"10" }}
-					</a>
-				</li>
+					<li>
+						<a href="?page={{ current_page | add:"10" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+							{{ current_page | add:"10" }}
+						</a>
+					</li>
 				{% endif %}
 				{% if object_list.paginator.num_pages >= current_page|add:'11' %}
-				<li>
-					<a href="?page={{ current_page | add:"11" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-						{{ current_page | add:"11" }}
-					</a>
-				</li>
+					<li>
+						<a href="?page={{ current_page | add:"11" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+							{{ current_page | add:"11" }}
+						</a>
+					</li>
+					{% if object_list.paginator.num_pages != current_page|add:'11' %}
+						<li>
+							<a>
+								...
+							</a>
+						</li>
+					{% endif %}					
 				{% endif %}			
 			{% endif %}	
 			{% endwith %}
@@ -190,6 +199,11 @@
 					</a>
 				</li>
 			{% endfor %}
+			<li>
+				<a>
+					...
+				</a>
+			</li>			
 		  {% endif %}
         {% if object_list.has_next %}
           <li>
