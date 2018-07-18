@@ -14,11 +14,11 @@
     {% trans "The Wikipedia Library Card Platform" %}
   </title>
   
-  <!-- Link to bootstrap css -->
   <link rel="shortcut icon" href="{% static 'img/favicon.png' %}"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <!-- Custom CSS -->
   {% if LANGUAGE_BIDI %}
+    <!-- RTL Bootstrap CSS -->
+    <link href="{% static "css/bootstrap.min-rtl.css" %}" rel="stylesheet">
     <!-- RTL Custom CSS -->
     <link href="{% static "css/startbootstrap/sb-admin-2-rtl.css" %}" rel="stylesheet">
     <link href="{% static "css/startbootstrap/timeline-rtl.css" %}" rel="stylesheet">
@@ -26,6 +26,8 @@
     <link href="{% static "css/font-awesome.min-rtl.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "css/local-rtl.css" %}" rel="stylesheet" type="text/css">
   {% else %}
+    <!-- LTR Bootstrap CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <!-- LTR Custom CSS -->
     <link href="{% static "css/startbootstrap/sb-admin-2.css" %}" rel="stylesheet">
     <link href="{% static "css/startbootstrap/timeline.css" %}" rel="stylesheet">
@@ -41,8 +43,11 @@
     {# We don't use any JS by default; individual pages that need it can add it here. #}
   {% endblock head_javascript %}
 </head>
-
-<body>
+{% if LANGUAGE_BIDI %}
+  <body dir="rtl">
+{% else %}
+  <body>
+{% endif %}
   
  <!-- navbar -->
   <div class="navbar navbar-default" id="top-nav">
