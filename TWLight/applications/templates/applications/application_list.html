@@ -90,7 +90,7 @@
     {% comment %}Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons. {% endcomment %}
     <nav aria-label="{% trans "Page navigation" %}">
       <ul class="pagination">
-        {% if object_list.has_previous %}
+				{% if object_list.has_previous %}
           <li>
             <a href="?page={{ object_list.previous_page_number }}{% if filters %}{% for filter in filters %}{% if filter.label and filter.object.pk %}&{{ filter.label|urlencode|safe }}={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Previous page" %}">
               {% comment %}Translators: This is the label for a button which goes to the previous page of applications.{% endcomment %}
@@ -109,102 +109,86 @@
           Magic allowing us to loop a specific number of times.
           See https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates.
         {% endcomment %}
-        {% with ''|center:object_list.paginator.num_pages as range %}
-		  {% if object_list.paginator.num_pages <= 10 %}
-		    {% for _ in range %}
-				<li {% ifequal forloop.counter object_list.number %}
+				
+				{% with ''|center:object_list.paginator.num_pages as range %}
+				{% comment %}If there are less than 10 number of pages, display the pages in order. No modification requried.{% endcomment %}
+				{% if object_list.paginator.num_pages <= 10 %}
+					{% for _ in range %}
+						<li {% ifequal forloop.counter object_list.number %}
                   class="active"
-				{% endifequal %}>
-					<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-						{{ forloop.counter }}
-					</a>
-				</li>
-			{% endfor %}
-		  {% elif object_list.number >= 10 %}		
-			{% for _ in range|slice:"3" %}
-				<li>
-					<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-						{{ forloop.counter }}
-					</a>
-				</li>
-            {% endfor %}
-			<li>
-				<a>
-					...
-				</a>
-			</li>
-			<li>
-              <a href="?page={{ object_list.previous_page_number}}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-				{{ object_list.previous_page_number }}
-              </a>
-            </li>
-            <li class="active">
-              <a href="?page={{ object_list.number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-				{{ object_list.number }}
-              </a>
-            </li>
-			{% if object_list.has_next %}
-				<li>
-					<a href="?page={{ object_list.next_page_number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-						{{ object_list.next_page_number }}
-					</a>
-				</li>
-				{% if object_list.number|add:'1' != object_list.paginator.num_pages %}				
-					<li>
-						<a>
-							...
-						</a>
-					</li>
-				{% endif %}
-			{% endif %}			
-			{% with object_list.number as current_page %}
-			{% if object_list.number|add:'10' < object_list.paginator.num_pages %}
-				{% if object_list.paginator.num_pages >= current_page|add:'9' %}
-					<li>
-						<a href="?page={{ current_page | add:"9" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-							{{ current_page | add:"9" }}
-						</a>
-					</li>
-				{% endif %}
-				{% if object_list.paginator.num_pages >= current_page|add:'10' %}
-					<li>
-						<a href="?page={{ current_page | add:"10" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-							{{ current_page | add:"10" }}
-						</a>
-					</li>
-				{% endif %}
-				{% if object_list.paginator.num_pages >= current_page|add:'11' %}
-					<li>
-						<a href="?page={{ current_page | add:"11" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-							{{ current_page | add:"11" }}
-						</a>
-					</li>
-					{% if object_list.paginator.num_pages != current_page|add:'11' %}
-						<li>
-							<a>
-								...
+								{% endifequal %}>
+							<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+								{{ forloop.counter }}
 							</a>
 						</li>
-					{% endif %}					
-				{% endif %}			
-			{% endif %}	
-			{% endwith %}
-		  {% else %}
-			{% for _ in range|slice:":10" %}
-				<li {% ifequal forloop.counter object_list.number %}
-					class="active"
+					{% endfor %}
+					
+				{% comment %}When the current page is greater than 10, display first three pages followed by the previous, and the current focussed page.{% endcomment %}	
+				{% elif object_list.number >= 10 %}		
+					{% for _ in range|slice:"3" %}
+						<li><a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+									{{ forloop.counter }}
+								</a></li>
+          {% endfor %}
+					<li><a>...</a></li>
+					<li><a href="?page={{ object_list.previous_page_number}}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+							{{ object_list.previous_page_number }}
+							</a></li>
+          <li class="active">
+            <a href="?page={{ object_list.number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+							{{ object_list.number }}
+            </a>
+          </li>
+					{% comment %}Display next page.{% endcomment %}
+					{% if object_list.has_next %}
+						<li><a href="?page={{ object_list.next_page_number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+								{{ object_list.next_page_number }}
+								</a></li>
+						{% comment %}Decide based on the total number of pages, if a '...' is needed or not.{% endcomment %}
+						{% if object_list.number|add:'1' != object_list.paginator.num_pages %}				
+							<li><a>...</a></li>
+						{% endif %}
+					{% endif %}		
+					
+					{% with object_list.number as current_page %}
+					{% comment %}Block to enable jumping 9 to 10 pages at a time from the focussed page.{% endcomment %}
+					{% if object_list.number|add:'10' < object_list.paginator.num_pages %}
+						{% if object_list.paginator.num_pages >= current_page|add:'9' %}
+							<li><a href="?page={{ current_page | add:"9" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+									{{ current_page | add:"9" }}
+									</a></li>
+						{% endif %}
+						{% if object_list.paginator.num_pages >= current_page|add:'10' %}
+							<li><a href="?page={{ current_page | add:"10" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+									{{ current_page | add:"10" }}
+								</a></li>
+						{% endif %}
+						{% if object_list.paginator.num_pages >= current_page|add:'11' %}
+							<li><a href="?page={{ current_page | add:"11" }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+									{{ current_page | add:"11" }}
+								</a></li>
+							{% comment %}Indicate there are more pages.{% endcomment %}
+							{% if object_list.paginator.num_pages != current_page|add:'11' %}
+								<li><a>...</a></li>
+							{% endif %}					
+						{% endif %}
+					{% endif %}	
+					{% endwith %}
+					
+				{% comment %}There are more than 10 pages, but initially display only 10 and indicate there's more at the end.{% endcomment %}
+				{% else %}
+					{% for _ in range|slice:":10" %}
+						<li {% ifequal forloop.counter object_list.number %}
+							class="active"
                 {% endifequal %}>
-					<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
-						{{ forloop.counter }}
-					</a>
-				</li>
-			{% endfor %}
-			<li>
-				<a>
-					...
-				</a>
-			</li>			
-		  {% endif %}
+							<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+								{{ forloop.counter }}
+							</a>
+						</li>
+					{% endfor %}
+					<li><a>...</a></li>			
+				{% endif %}
+				
         {% if object_list.has_next %}
           <li>
             {% comment %}Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications. {% endcomment %}
@@ -213,30 +197,30 @@
               <span aria-hidden="true">{% trans "Next page" %}</span>
             </a>
           </li>
-		  <li>
-			{% for _ in range %}
-				{% if forloop.last %}
-					{% comment %}Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications. {% endcomment %}
-						<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Last" %}">
-						{% comment %}Translators: This is the label for a button which goes to the last page of applications.{% endcomment %}
-							<span aria-hidden="true">{% trans "Last page" %}</span>
-						</a>
-				{% endif %}
-			{% endfor %}
-		  </li>
+					<li>
+						{% for _ in range %}
+							{% if forloop.last %}
+								{% comment %}Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications. {% endcomment %}
+								<a href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}" aria-label="{% trans "Last" %}">
+								{% comment %}Translators: This is the label for a button which goes to the last page of applications.{% endcomment %}
+									<span aria-hidden="true">{% trans "Last page" %}</span>
+								</a>
+							{% endif %}
+						{% endfor %}
+					</li>
         {% else %}
           <li class="disabled">
             <a href="#" aria-label="{% trans "Next page" %}">
               <span aria-hidden="true">{% trans "Next page" %}</span>
             </a>
           </li>
-		  <li class="disabled">
+					<li class="disabled">
             <a href="#" aria-label="{% trans "Last page" %}">
               <span aria-hidden="true">{% trans "Last page" %}</span>
             </a>
           </li>
         {% endif %}
-		{% endwith %}
+				{% endwith %}
       </ul>
     </nav>    
   {% endif %}
