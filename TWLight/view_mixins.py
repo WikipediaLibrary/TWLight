@@ -27,7 +27,6 @@ logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
 
-
 class CoordinatorOrSelf(object):
     """
     Restricts visibility to:
@@ -75,6 +74,10 @@ class CoordinatorOrSelf(object):
                             obj_coordinator_test = (
                                 obj.partner.coordinator.pk == user.pk
                             )
+                        elif isinstance(obj, Partner):
+                            obj_coordinator_test = (
+                                obj.coordinator.pk == user.pk
+                            )
             except AttributeError:
                 # Keep the default.
                 pass
@@ -115,46 +118,6 @@ class CoordinatorsOnly(object):
             raise PermissionDenied
 
         return super(CoordinatorsOnly, self).dispatch(
-            request, *args, **kwargs)
-
-
-
-class PartnerCoordinatorOnly(object):
-    """
-    Restricts visibility to:
-    * Coordinators for the partner denoted by object; or
-    * Superusers.
-    """
-
-    def test_func_partner_coordinator(self, user):
-        obj_coordinator_test = False # Set default.
-
-        # If the user is a coordinator run more tests
-        if user in coordinators.user_set.all():
-            try:
-                obj = self.get_object()
-                if obj:
-                    # Return true if the object is a partner for whom
-                    # the user is a designated coordinator
-                    if isinstance(obj, Partner):
-                        obj_coordinator_test = (
-                            obj.coordinator.pk == user.pk
-                        )
-            except AttributeError as e:
-                # Keep the default.
-                pass
-
-        return (user.is_superuser or
-                obj_coordinator_test)
-
-
-    def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_partner_coordinator(request.user):
-            messages.add_message(request, messages.WARNING, 'You must be the '
-                    'designated coordinator to do that.')
-            raise PermissionDenied
-
-        return super(PartnerCoordinatorOnly, self).dispatch(
             request, *args, **kwargs)
 
 

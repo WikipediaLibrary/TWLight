@@ -561,24 +561,20 @@ class PartnerViewTests(TestCase):
         request.user = AnonymousUser()
 
         # Anonymous users can't view the user list
-        print("anonymous")
         with self.assertRaises(PermissionDenied):
             _ = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
 
         request.user = self.editor
         # Non-coordinators can't view the user list
-        print("non-coord")
         with self.assertRaises(PermissionDenied):
             _ = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
 
         request.user = self.coordinator2
-        print("unassigned")
         # Unassigned coordinators can't view the user list
         with self.assertRaises(PermissionDenied):
             _ = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
 
         request.user = self.coordinator
-        print("coord")
         # The assigned coordinator can see the user list!
         response = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
         self.assertEqual(response.status_code, 200)

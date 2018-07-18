@@ -10,7 +10,7 @@ from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
                                     get_data_count_by_month,
                                     get_users_by_partner_by_month)
-from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOnly
+from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf
 
 from .models import Partner, Stream
 
@@ -177,7 +177,7 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
 
 
 
-class PartnerUsers(PartnerCoordinatorOnly, DetailView):
+class PartnerUsers(CoordinatorOrSelf, DetailView):
     model = Partner
     template_name_suffix = '_users'
 
