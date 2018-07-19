@@ -538,6 +538,8 @@ class PartnerViewTests(TestCase):
         super(PartnerViewTests, cls).setUpClass()
 
         cls.partner = PartnerFactory()
+        editor = EditorFactory()
+        cls.user = UserFactory(editor=editor)
         cls.coordinator = UserFactory()
         cls.coordinator2 = UserFactory()
 
@@ -545,10 +547,13 @@ class PartnerViewTests(TestCase):
         coordinators.user_set.add(cls.coordinator)
         coordinators.user_set.add(cls.coordinator2)
 
+        application = ApplicationFactory(
+            partner=cls.partner,
+            editor=editor,
+            status=Application.SENT)
+
         cls.partner.coordinator = cls.coordinator
         cls.partner.save()
-
-        cls.editor = UserFactory()
 
         cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
         cls.message_patcher.start()
@@ -564,8 +569,9 @@ class PartnerViewTests(TestCase):
         with self.assertRaises(PermissionDenied):
             _ = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
 
-        request.user = self.editor
-        # Non-coordinators can't view the user list
+        request.user = self.user
+        # Non-coordinators can't view the user list, even if they have
+        # an application for the partner.
         with self.assertRaises(PermissionDenied):
             _ = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
 
