@@ -18,6 +18,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 
 from TWLight.applications.models import Application
+from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
 from TWLight.users.groups import get_coordinators, get_restricted
 
@@ -25,7 +26,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
-
 
 class CoordinatorOrSelf(object):
     """
@@ -73,6 +73,10 @@ class CoordinatorOrSelf(object):
                         elif isinstance(obj, Application):
                             obj_coordinator_test = (
                                 obj.partner.coordinator.pk == user.pk
+                            )
+                        elif isinstance(obj, Partner):
+                            obj_coordinator_test = (
+                                obj.coordinator.pk == user.pk
                             )
             except AttributeError:
                 # Keep the default.

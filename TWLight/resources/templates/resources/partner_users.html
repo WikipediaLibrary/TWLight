@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  {% comment %} Translators: This is the heading of a page listing editors who have applications for this partner ({{ object }}). {% endcomment %}
+  <h1>
+  {% blocktrans with partner=object.company_name %}
+  {{ object }} approved users
+  {% endblocktrans %}
+  </h1>
+
+  <div class="alert alert-info">
+    {% comment %} Translators: This message is shown on pages where coordinators can see personal information about applicants. {% endcomment %}
+    {% trans 'Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential.' %}
+  </div>
+
+  {% if approved_applications|length > 0 %}
+    {% comment %} Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status {% endcomment %}
+    <h2>{% trans "Approved applications" %}</h2>
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username. {% endcomment %}
+            <th>{% trans "User" %}</th>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address. {% endcomment %}
+            <th>{% trans "Email" %}</th>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was made. {% endcomment %}
+            <th>{% trans "Application date" %}</th>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was approved by a coordinator. {% endcomment %}
+            <th>{% trans "Application approved" %}</th>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal. {% endcomment %}
+            <th>{% trans "Renewal?" %}</th>
+            {% if partner_streams %}
+              {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for. {% endcomment %}
+              <th>{% trans "Stream" %}</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for application in approved_applications %}
+          <tr>
+            <td><a href="https://meta.wikimedia.org/wiki/User:{{ application.editor.wp_username }}">
+              {{ application.editor.wp_username }}
+            </a></td>
+            <td>{{ application.editor.user.email }}</td>
+            <td><a href="{% url 'applications:evaluate' pk=application.pk %}">
+              {% comment %} Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched. {% endcomment %}
+              {% if application.imported %}<i>{% trans "Imported" %}</i>{% else %}{{ application.date_created }}{% endif %}
+            </a></td>
+            <td>{{ application.date_closed }}</td>
+            {% comment %} Translators: Denotes whether an application was a renewal request for a previous application. {% endcomment %}
+            <td>{% if application.parent %}<i>{% trans "Renewal" %}</i>{% endif %}</td>
+            {% if application.specific_stream %}<td>{{ application.specific_stream }}</td>{% endif %}
+          </tr>      
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {% if sent_applications|length > 0 %}
+    {% comment %} Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status {% endcomment %}
+    <h2>{% trans "Sent applications" %}</h2>
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username. {% endcomment %}
+            <th>{% trans "User" %}</th>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address. {% endcomment %}
+            <th>{% trans "Email" %}</th>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was made. {% endcomment %}
+            <th>{% trans "Application date" %}</th>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was approved by a coordinator. {% endcomment %}
+            <th>{% trans "Application approved" %}</th>
+            {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal. {% endcomment %}
+            <th>{% trans "Renewal?" %}</th>
+            {% if partner_streams %}
+              {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for. {% endcomment %}
+              <th>{% trans "Stream" %}</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for application in sent_applications %}
+          <tr>
+            <td><a href="https://meta.wikimedia.org/wiki/User:{{ application.editor.wp_username }}">
+              {{ application.editor.wp_username }}
+            </a></td>
+            <td>{{ application.editor.user.email }}</td>
+            <td><a href="{% url 'applications:evaluate' pk=application.pk %}">
+              {% comment %} Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched. {% endcomment %}
+              {% if application.imported %}<i>{% trans "Imported" %}</i>{% else %}{{ application.date_created }}{% endif %}
+            </a></td>
+            <td>{{ application.date_closed }}</td>
+            {% comment %} Translators: Denotes whether an application was a renewal request for a previous application. {% endcomment %}
+            <td>{% if application.parent %}<i>{% trans "Renewal" %}</i>{% endif %}</td>
+            {% if application.specific_stream %}<td>{{ application.specific_stream }}</td>{% endif %}
+          </tr>      
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endblock content %}

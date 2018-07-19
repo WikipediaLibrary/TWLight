@@ -153,6 +153,10 @@
           {% endblocktrans %}
         {% endif %}
       </div>
+      {% if object.coordinator == user or user.is_staff %}
+        {% comment %} Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
+        <a href="{% url 'partners:users' pk=object.pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "List applications" %}</a>
+      {% endif %}
     {% endif %}
     </div>
     <li class="timeline-inverted">
