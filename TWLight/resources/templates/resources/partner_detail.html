@@ -446,12 +446,13 @@
     <h3>
       {% comment %} Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
       {% trans "Applications by status" %}
-      <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">
+    </h3>
+    <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">
       {% comment %} Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
       {% trans "download as csv" %}
-    </a></h3>
-    
-    <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+    </a>
+    <div style="clear:both;"></div>
+    <div id="app-distribution-graph" style="width:80%;height:300px"></div>
 
     <p>
       {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
@@ -483,27 +484,21 @@
     <h3>{% trans "Applications over time" %}</h3>
     
     {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time. {% endcomment %}
-    <h4>{% trans "All applications" %}
-      <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-    </a></h4>
-    
-    <div id="signups-time-graph" style="width:600px;height:300px"></div>
+    <h4>{% trans "All applications" %}</h4> <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+    <div style="clear:both;"></div>
+    <div id="signups-time-graph" style="width:90%;height:300px"></div>
 
     {% if total_apps_approved > 0 %}
       {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time. {% endcomment %}
-      <h4>{% trans "Approved applications only" %}
-        <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-      </a></h4>
-    
-      <div id="approved-or-sent-signups-time-graph" style="width:600px;height:300px"></div>
+      <h4>{% trans "Approved applications only" %}</h4> <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+      <div style="clear:both;"></div>
+      <div id="approved-or-sent-signups-time-graph" style="width:90%;height:300px"></div>
     {% endif %}
     
     {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time. {% endcomment %}
-    <h3>{% trans "Unique users over time" %}
-      <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}
-    </a></h3>
-
-    <div id="users-time-graph" style="width:600px;height:300px"></div>
+    <h3>{% trans "Unique users over time" %}</h3> <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+    <div style="clear:both;"></div>
+    <div id="users-time-graph" style="width:90%;height:300px"></div>
   {% endif %}
 {% endblock content %}
 
@@ -550,6 +545,21 @@
           },
           colors: ['#5cb85c'],
         });
+        // Redraw on browser resize
+        window.addEventListener("resize", function() {
+          $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
+            xaxis: {
+              mode: "time",
+              tickSize: [1, 'month'],
+            },
+            yaxis: {
+              min: 0,
+              minTickSize: 1,
+              tickDecimals: 0,
+            },
+            colors: ['#5cb85c'],
+          });
+        });          
       }
 
       // Unique users by time
@@ -578,6 +588,44 @@
           }
         },
       });
+        
+        // Attach a listener to redraw the graphs everytime the user resizes the browser window
+        window.addEventListener("resize", function() {
+        
+          $.plot(signups_time_graph, [signups_time_data], {
+            xaxis: {
+              mode: "time",
+              tickSize: [1, 'month'],
+            },
+            yaxis: {
+              min: 0,
+              minTickSize: 1,
+              tickDecimals: 0,
+            },
+            colors: ['#5cb85c'],
+          });
+          
+          $.plot(users_time_graph, [users_time_data], {
+            xaxis: {
+              mode: "time",
+              tickSize: [1, 'month'],
+            },
+            yaxis: {
+              min: 0,
+              minTickSize: 1,
+              tickDecimals: 0,
+            },
+            colors: ['#f0ad4e'],
+          });
+          
+          $.plot(app_distribution_graph, app_distribution_data, {
+            series: {
+              pie: { 
+                show: true,
+              }
+            },
+          });
+        });
     });
   </script>
 {% endblock javascript %}

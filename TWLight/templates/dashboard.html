@@ -74,7 +74,7 @@
     <div class="row">
       <div class="col-lg-12">
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.{% endcomment %}
-        <h2 class="page-header">{% trans "Page views (staff only)" %} <a href="{% url 'csv:page_views' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h2>
+        <h2 class="page-header">{% trans "Page views (staff only)" %}</h2> <a href="{% url 'csv:page_views' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
       </div>
     </div>
     <div class="row">
@@ -140,11 +140,12 @@
       <h2 class="page-header" id="applications-section">{% trans 'Applications' %}</h2>
       {% if total_apps > 0 %}
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time. {% endcomment %}
-        <h3>{% trans "Number of accounts distributed over time" %}</h3> <a href="{% url 'csv:num_applications' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-        <div id="application-time-graph" style="width:600px;height:300px"></div>
+        <h3>{% trans "Number of accounts distributed over time" %}</h3> <a href="{% url 'csv:num_applications' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+        <div style="clear:both;"></div>
+        <div id="application-time-graph" style="width:80%;height:300px"></div>
 
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.{% endcomment %}
-        <h3>{% trans "Applications by number of days until decision" %} <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+        <h3>{% trans "Applications by number of days until decision" %}</h3> <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
         <p>
           {% comment %} Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). {% endcomment %}
           {% blocktrans trimmed %}
@@ -153,10 +154,10 @@
             applications that have taken exactly that many days to decide.
           {% endblocktrans %}
         </p>
-        <div id="app-time-histogram-graph" style="width:600px;height:300px"></div>          
+        <div id="app-time-histogram-graph" style="width:80%;height:300px"></div>          
 
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.{% endcomment %}
-        <h3>{% trans "Median days until application decision, per month" %} <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
+        <h3>{% trans "Median days until application decision, per month" %}</h3> <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
         <p>
           {% comment %} Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean. {% endcomment %}
           {% blocktrans trimmed %}
@@ -164,10 +165,10 @@
             applications opened in a given month.
           {% endblocktrans %}
         </p>
-        <div id="app-medians-graph" style="width:600px;height:300px"></div>
+        <div id="app-medians-graph" style="width:80%;height:300px"></div>
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
-        <h3>{% trans "Open application status distribution" %} <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-        <div id="app-distribution-graph" style="width:600px;height:300px"></div>
+        <h3>{% trans "Open application status distribution" %}</h3> <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+        <div id="app-distribution-graph" style="width:50%;height:300px"></div>
       {% endif %}
 
     </div>
@@ -182,8 +183,8 @@
 
       {% if user_count > 0 %}
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
-        <h3>{% trans "User language distribution" %} <a href="{% url 'csv:user_language' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a></h3>
-        <div id="user-language-graph" style="width:600px;height:300px"></div>
+        <h3>{% trans "User language distribution" %}</h3> <a href="{% url 'csv:user_language' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+        <div id="user-language-graph" style="width:50%;height:300px"></div>
       {% endif %}
     </div>
   </div>
@@ -225,7 +226,7 @@
             show: true,
             barWidth: 1,
           }
-        });
+        });       
 
         // Applications over time
         var application_time_graph = $("#application-time-graph");
@@ -264,7 +265,7 @@
             align: 'center',
           }
         });
-
+          
         // Application status distribution (pie chart)
         var app_distribution_graph = $("#app-distribution-graph");
         var app_distribution_data = {{ app_distribution_data | safe }};
@@ -274,6 +275,62 @@
               show: true
             }
           },
+        });
+        
+        // Attach a listener to redraw the graphs everytime the user resizes the browser window
+        window.addEventListener("resize", function() {
+        
+          $.plot(app_medians_graph, app_medians_data, {
+            yaxis: {
+              min: 0.01,
+              minTickSize: 1,
+              tickDecimals: 0,
+            },
+            xaxis: {
+              mode: 'time',
+              tickSize: [1, 'month'],
+            },
+            bars: {
+              show: true,
+              barWidth: 15*24*60*60*1000, // About half a month in milliseconds
+              align: 'center',
+            }
+          });
+          
+          $.plot(app_time_histogram_graph, app_time_histogram_data, {
+            yaxis: {
+              min: 0,
+              minTickSize: 1,
+              tickDecimals: 0,
+            },
+            xaxis: {
+              min: 0,
+            },
+            bars: {
+              show: true,
+              barWidth: 1,
+            }
+          });
+          
+          $.plot(application_time_graph, [application_time_data], {
+            xaxis: {
+              mode: "time",
+            },
+            yaxis: {
+              min: 0,
+              minTickSize: 1,
+              tickDecimals: 0,
+            },
+            colors: ['#5cb85c'],
+          });
+          
+          $.plot(app_distribution_graph, app_distribution_data, {
+            series: {
+              pie: { 
+                show: true
+              }
+            },
+          });
         });
       }
 
@@ -287,6 +344,17 @@
               show: true
             }
           },
+        });
+        
+        // Redraw on browser resize
+        window.addEventListener("resize", function() {
+          $.plot(user_language_graph, user_language_data, {
+            series: {
+              pie: {
+                show: true
+              }
+            },
+          });
         });
       }
     });
