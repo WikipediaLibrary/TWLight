@@ -51,6 +51,7 @@ class UserFactory(factory.django.DjangoModelFactory):
         """
         user = super(UserFactory, cls)._generate(create, attrs)
         user.userprofile.terms_of_use = True
+        user.userprofile.terms_of_use_date = datetime.today()
         user.userprofile.save()
         return user
 
