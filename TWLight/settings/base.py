@@ -334,7 +334,7 @@ TAGGIT_CASE_INSENSITIVE = True
 EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
 
 # This is a dummy backend that will write to a file.
-DJMAIL_REAL_BACKEND =  = 'django.core.mail.backends.filebased.EmailBackend'
+DJMAIL_REAL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'logs', 'emails.log')
 
 INSTALLED_APPS += ['djmail',]
