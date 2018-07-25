@@ -20,9 +20,10 @@ class Command(BaseCommand):
 
         existing_users = User.objects.all()
 
+        # Superuser the only user, per twlight_vagrant README instructions.
         if existing_users.count() == 0:
             raise CommandError('No users present to Superuser. '
-                'Please login first.') # Then need to catch this in the .sh script.
+                'Please login first.')
         elif existing_users.count() > 1:
             raise CommandError('More than one user present. '
                 'Please ensure that only one user is present.')

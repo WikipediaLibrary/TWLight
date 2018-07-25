@@ -20,7 +20,8 @@ class Command(BaseCommand):
         fake = Faker()
 
         available_partners = Partner.objects.all()
-        users = User.objects.exclude(editor=None) # Avoid users with no editor
+        # Don't fire any applications from the superuser.
+        all_users = User.objects.exclude(is_superuser=True)
 
         for _ in range(num_applications):
             random_user = random.choice(users)
@@ -32,6 +33,7 @@ class Command(BaseCommand):
                 hidden = self.chance(True, False, 10)
                 )
 
+            # Make sure partner-specific information is filled.
             if random_partner.specific_stream:
                 app.specific_stream = random.choice(
                     Stream.objects.filter(partner=random_partner))
