@@ -24,7 +24,7 @@ class Command(BaseCommand):
         all_users = User.objects.exclude(is_superuser=True)
 
         for _ in range(num_applications):
-            random_user = random.choice(users)
+            random_user = random.choice(all_users)
             random_partner = random.choice(available_partners)
 
             app = ApplicationFactory(
