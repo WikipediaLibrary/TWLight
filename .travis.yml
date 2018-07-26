@@ -21,7 +21,7 @@ install:
 
 # Initalize the app and test it.
 script:
-  - ./travis/./init.sh
+  - .travis/./init.sh
   - python manage.py test --noinput
 
 # Push to production if the conditions are met.
