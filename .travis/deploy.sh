@@ -6,7 +6,7 @@ echo "TRAVIS_TAG: ${TRAVIS_TAG}"
 echo "TRAVIS_BRANCH: ${TRAVIS_BRANCH}"
 
 # Only act if this is build was fired from a push to master.
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_token+isset}" ]
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ]
 then
     # Configure git.
     git_config() {
@@ -24,7 +24,7 @@ then
     # Push to remote production branch.
     git_push() {
         git remote rm origin
-        git remote add origin https://WikipediaLibraryBot:${gh_bot_token}@github.com/WikipediaLibrary/TWLight.git > /dev/null 2>&1
+        git remote add origin https://${gh_bot_username}:${gh_bot_token}@github.com/${TRAVIS_REPO_SLUG}.git > /dev/null 2>&1
         git push --quiet --set-upstream origin production && echo "Build pushed to production."
     }
 
