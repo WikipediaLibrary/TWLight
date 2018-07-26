@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# Print Travis environment variables.
+echo "TRAVIS_PULL_REQUEST: ${TRAVIS_PULL_REQUEST}."
+echo "TRAVIS_TAG: ${TRAVIS_TAG}."
+echo "TRAVIS_BRANCH: ${TRAVIS_BRANCH}."
+
 # Only act if this is build was fired from a push to master.
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_TAG}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ]
 then
