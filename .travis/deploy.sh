@@ -2,7 +2,7 @@
 set -e
 
 # Only act if this is build was fired from a push to master.
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_TAG}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_token+isset}" ]
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_TAG}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ]
 then
     # Configure git user.
     setup_git() {
