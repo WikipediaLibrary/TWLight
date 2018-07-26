@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-26 16:54+0000\n"
+"POT-Creation-Date: 2018-07-26 23:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: Shown in the top bar of almost every page, taking users to the page where they apply for access to partner resources.
-#: TWLight/applications/forms.py:105
+#: TWLight/applications/forms.py:106
 #: TWLight/applications/templates/applications/request_for_application.html:54
 #: TWLight/applications/templates/applications/request_for_application.html:56
 #: TWLight/resources/templates/resources/partner_detail.html:55
@@ -31,23 +31,31 @@ msgid "Apply"
 msgstr ""
 
 #. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:192
+#: TWLight/applications/forms.py:193
 msgid "About you"
 msgstr ""
 
+#. Translators: This this note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
+#: TWLight/applications/forms.py:206
+#, python-brace-format
+msgid ""
+"<p><small><i>Your personal data will be processed according to our <a href="
+"\"{terms_url}\">privacy policy</a>.</i></small></p>"
+msgstr ""
+
 #. Translators: This goes into a form legend that acts as the title of a form or fieldset for a partner application. It lets the user know which partner application they are entering data for.
-#: TWLight/applications/forms.py:211
+#: TWLight/applications/forms.py:217
 #, python-brace-format
 msgid "Your application to {partner}"
 msgstr ""
 
-#: TWLight/applications/forms.py:312 TWLight/users/admin.py:40
+#: TWLight/applications/forms.py:318 TWLight/users/admin.py:40
 #: TWLight/users/models.py:113
 msgid "Username"
 msgstr ""
 
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:313 TWLight/applications/helpers.py:95
+#: TWLight/applications/forms.py:319 TWLight/applications/helpers.py:95
 msgid "Partner name"
 msgstr ""
 
@@ -157,7 +165,11 @@ msgid "Account email"
 msgstr ""
 
 #. Translators: This labels a user's email address on a form for account coordinators
-#: TWLight/applications/helpers.py:142 TWLight/users/forms.py:103
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
+#: TWLight/applications/helpers.py:142
+#: TWLight/resources/templates/resources/partner_users.html:27
+#: TWLight/resources/templates/resources/partner_users.html:72
+#: TWLight/users/forms.py:103
 msgid "Email"
 msgstr ""
 
@@ -209,6 +221,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_evaluation.html:21
 #: TWLight/applications/templates/applications/application_list_include.html:6
 #: TWLight/applications/templates/applications/send_partner.html:43
+#: TWLight/resources/templates/resources/partner_users.html:14
 msgid ""
 "Coordinators: This page may contain personal information such as real names "
 "and email addresses. Please remember that this information is confidential."
@@ -324,7 +337,10 @@ msgid ""
 msgstr ""
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
 #: TWLight/applications/templates/applications/application_evaluation.html:178
+#: TWLight/resources/templates/resources/partner_users.html:25
+#: TWLight/resources/templates/resources/partner_users.html:70
 msgid "User"
 msgstr ""
 
@@ -416,15 +432,27 @@ msgid "Previous page"
 msgstr ""
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
-#: TWLight/applications/templates/applications/application_list.html:127
+#: TWLight/applications/templates/applications/application_list.html:203
 msgid "Next"
 msgstr ""
 
 #. Translators: This is the label for a button which goes to the next page of applications.
-#: TWLight/applications/templates/applications/application_list.html:129
-#: TWLight/applications/templates/applications/application_list.html:134
-#: TWLight/applications/templates/applications/application_list.html:135
+#: TWLight/applications/templates/applications/application_list.html:205
+#: TWLight/applications/templates/applications/application_list.html:221
+#: TWLight/applications/templates/applications/application_list.html:222
 msgid "Next page"
+msgstr ""
+
+#. Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications.
+#: TWLight/applications/templates/applications/application_list.html:212
+msgid "Last"
+msgstr ""
+
+#. Translators: This is the label for a button which goes to the last page of applications.
+#: TWLight/applications/templates/applications/application_list.html:214
+#: TWLight/applications/templates/applications/application_list.html:226
+#: TWLight/applications/templates/applications/application_list.html:227
+msgid "Last page"
 msgstr ""
 
 #. Translators: On the page listing applications, this shows next to an application which was imported to the website.
@@ -468,7 +496,10 @@ msgstr ""
 msgid "Select/deselect all"
 msgstr ""
 
+#. Translators: Denotes whether an application was a renewal request for a previous application.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:24
+#: TWLight/resources/templates/resources/partner_users.html:53
+#: TWLight/resources/templates/resources/partner_users.html:98
 msgid "Renewal"
 msgstr ""
 
@@ -617,7 +648,9 @@ msgid "Applications to review"
 msgstr ""
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
+#. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
 #: TWLight/applications/views.py:650
+#: TWLight/resources/templates/resources/partner_users.html:19
 msgid "Approved applications"
 msgstr ""
 
@@ -632,7 +665,9 @@ msgid "Access grants up for renewal"
 msgstr ""
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
+#. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
 #: TWLight/applications/views.py:735
+#: TWLight/resources/templates/resources/partner_users.html:64
 msgid "Sent applications"
 msgstr ""
 
@@ -1237,28 +1272,33 @@ msgid ""
 "Coordinators/Signup\">Sign up as a coordinator.</a>"
 msgstr ""
 
+#. Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner
+#: TWLight/resources/templates/resources/partner_detail.html:158
+msgid "List applications"
+msgstr ""
+
 #. Translators: If a partner has no description written, this message is shown in the Description field on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:183
+#: TWLight/resources/templates/resources/partner_detail.html:187
 msgid "Description not available."
 msgstr ""
 
 #. Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:204
+#: TWLight/resources/templates/resources/partner_detail.html:208
 msgid "Language(s)"
 msgstr ""
 
 #. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:214
+#: TWLight/resources/templates/resources/partner_detail.html:218
 msgid "Languages not available."
 msgstr ""
 
 #. Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
-#: TWLight/resources/templates/resources/partner_detail.html:226
+#: TWLight/resources/templates/resources/partner_detail.html:230
 msgid "Special requirements for applicants"
 msgstr ""
 
 #. Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate publisher or url.
-#: TWLight/resources/templates/resources/partner_detail.html:234
+#: TWLight/resources/templates/resources/partner_detail.html:238
 #, python-format
 msgid ""
 "\n"
@@ -1269,7 +1309,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:244
+#: TWLight/resources/templates/resources/partner_detail.html:248
 #, python-format
 msgid ""
 "\n"
@@ -1278,7 +1318,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:253
+#: TWLight/resources/templates/resources/partner_detail.html:257
 #, python-format
 msgid ""
 "\n"
@@ -1288,7 +1328,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:262
+#: TWLight/resources/templates/resources/partner_detail.html:266
 #, python-format
 msgid ""
 "\n"
@@ -1298,7 +1338,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:271
+#: TWLight/resources/templates/resources/partner_detail.html:275
 #, python-format
 msgid ""
 "\n"
@@ -1308,7 +1348,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:280
+#: TWLight/resources/templates/resources/partner_detail.html:284
 #, python-format
 msgid ""
 "\n"
@@ -1319,7 +1359,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must select a specific collection of resources to apply for, they see this message. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:291
+#: TWLight/resources/templates/resources/partner_detail.html:295
 #, python-format
 msgid ""
 "\n"
@@ -1332,7 +1372,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must select one or more collections of resources to apply for, they see this message. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:298
+#: TWLight/resources/templates/resources/partner_detail.html:302
 #, python-format
 msgid ""
 "\n"
@@ -1343,7 +1383,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must register on the partner website before applying, they see this message. Don't translate partner.
-#: TWLight/resources/templates/resources/partner_detail.html:309
+#: TWLight/resources/templates/resources/partner_detail.html:313
 #, python-format
 msgid ""
 "\n"
@@ -1354,65 +1394,65 @@ msgid ""
 msgstr ""
 
 #. Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
-#: TWLight/resources/templates/resources/partner_detail.html:328
+#: TWLight/resources/templates/resources/partner_detail.html:332
 msgid "Collections"
 msgstr ""
 
 #. Translators: If a partner has their location listed, this message is a label for that location
-#: TWLight/resources/templates/resources/partner_detail.html:365
+#: TWLight/resources/templates/resources/partner_detail.html:369
 msgid "Location"
 msgstr ""
 
 #. Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:369
+#: TWLight/resources/templates/resources/partner_detail.html:373
 msgid "Terms of use"
 msgstr ""
 
 #. Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/).
-#: TWLight/resources/templates/resources/partner_detail.html:372
+#: TWLight/resources/templates/resources/partner_detail.html:376
 msgid "Terms of use not available."
 msgstr ""
 
 #. Translators: This is the heading for the section of a partner page showing data about applications to that partner.
 #. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
-#: TWLight/resources/templates/resources/partner_detail.html:384
+#: TWLight/resources/templates/resources/partner_detail.html:388
 #: TWLight/templates/base.html:134
 msgid "Metrics"
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total number of aplications submitted for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:397
+#: TWLight/resources/templates/resources/partner_detail.html:401
 msgid "Total applications (all time)"
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total number of unique (not counting duplicates) users who have applied for access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:413
+#: TWLight/resources/templates/resources/partner_detail.html:417
 msgid "Total unique applicants (all time)"
 msgstr ""
 
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:435
+#: TWLight/resources/templates/resources/partner_detail.html:439
 msgid "Median days from application to decision"
 msgstr ""
 
 #. Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:446
+#: TWLight/resources/templates/resources/partner_detail.html:450
 msgid "Applications by status"
 msgstr ""
 
 #. Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:449
-#: TWLight/resources/templates/resources/partner_detail.html:485
-#: TWLight/resources/templates/resources/partner_detail.html:493
+#: TWLight/resources/templates/resources/partner_detail.html:454
+#: TWLight/resources/templates/resources/partner_detail.html:489
+#: TWLight/resources/templates/resources/partner_detail.html:495
 #: TWLight/resources/templates/resources/partner_detail.html:501
 #: TWLight/templates/dashboard.html:77 TWLight/templates/dashboard.html:143
-#: TWLight/templates/dashboard.html:147 TWLight/templates/dashboard.html:159
-#: TWLight/templates/dashboard.html:169 TWLight/templates/dashboard.html:185
+#: TWLight/templates/dashboard.html:148 TWLight/templates/dashboard.html:160
+#: TWLight/templates/dashboard.html:170 TWLight/templates/dashboard.html:186
 msgid "download as csv"
 msgstr ""
 
 #. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:456
+#: TWLight/resources/templates/resources/partner_detail.html:461
 #, python-format
 msgid ""
 "\n"
@@ -1428,7 +1468,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:465
+#: TWLight/resources/templates/resources/partner_detail.html:470
 #, python-format
 msgid ""
 "\n"
@@ -1444,22 +1484,22 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:481
+#: TWLight/resources/templates/resources/partner_detail.html:486
 msgid "Applications over time"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:484
+#: TWLight/resources/templates/resources/partner_detail.html:489
 msgid "All applications"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:492
+#: TWLight/resources/templates/resources/partner_detail.html:495
 msgid "Approved applications only"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time.
-#: TWLight/resources/templates/resources/partner_detail.html:500
+#: TWLight/resources/templates/resources/partner_detail.html:501
 msgid "Unique users over time"
 msgstr ""
 
@@ -1484,6 +1524,44 @@ msgstr ""
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where more details can be found.
 #: TWLight/resources/templates/resources/partner_tile.html:80
 msgid "More info"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_users.html:7
+#, python-format
+msgid ""
+"\n"
+"  %(object)s approved users\n"
+"  "
+msgstr ""
+
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was made.
+#: TWLight/resources/templates/resources/partner_users.html:29
+#: TWLight/resources/templates/resources/partner_users.html:74
+msgid "Application date"
+msgstr ""
+
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was approved by a coordinator.
+#: TWLight/resources/templates/resources/partner_users.html:31
+#: TWLight/resources/templates/resources/partner_users.html:76
+msgid "Application approved"
+msgstr ""
+
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal.
+#: TWLight/resources/templates/resources/partner_users.html:33
+#: TWLight/resources/templates/resources/partner_users.html:78
+msgid "Renewal?"
+msgstr ""
+
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for.
+#: TWLight/resources/templates/resources/partner_users.html:36
+#: TWLight/resources/templates/resources/partner_users.html:81
+msgid "Stream"
+msgstr ""
+
+#. Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched.
+#: TWLight/resources/templates/resources/partner_users.html:49
+#: TWLight/resources/templates/resources/partner_users.html:94
+msgid "Imported"
 msgstr ""
 
 #. Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
@@ -1598,7 +1676,7 @@ msgstr ""
 #: TWLight/templates/about.html:10
 msgid ""
 "The Wikipedia Library provides free access to research materials to improve "
-"your ability to contribute content to the Wikimedia projects."
+"your ability to contribute content to Wikimedia projects."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1606,10 +1684,10 @@ msgstr ""
 msgid ""
 "The Wikipedia Library Card Platform is our central tool for reviewing "
 "applications and providing access to those partner resources. Here you can "
-"see which partnerships are available and what kinds of materials each "
-"database provides, and apply for the ones you want. Volunteer coordinators, "
-"who have signed non-disclosure agreements with the Wikimedia Foundation, "
-"review applications and work with partners to get you your free access."
+"see which partnerships are available, what kinds of materials each database "
+"provides, and apply for the ones you want. Volunteer coordinators, who have "
+"signed non-disclosure agreements with the Wikimedia Foundation, review "
+"applications and work with partners to get you your free access."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
@@ -1617,9 +1695,9 @@ msgstr ""
 #, python-format
 msgid ""
 "For more information about how application information is stored and "
-"reviewed please see our <a href=\"%(terms_url)s\">terms of use</a>. Accounts "
-"you apply for are also subject to the Terms of Use provided by each "
-"partner’s platform; please review them."
+"reviewed please see our <a href=\"%(terms_url)s\">terms of use and privacy "
+"policy</a>. Accounts you apply for are also subject to the Terms of Use "
+"provided by each partner’s platform; please review them."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
@@ -1644,52 +1722,46 @@ msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:47
-msgid "You have your preferences enabled to receive email on your home wiki"
-msgstr ""
-
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:51
 msgid "You have an account that is a minimum of 6 months old"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:55
+#: TWLight/templates/about.html:51
 msgid "You have a minimum of 500 edits"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:59
+#: TWLight/templates/about.html:55
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:63
+#: TWLight/templates/about.html:59
 msgid "You are not currently blocked from editing Wikipedia"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:67
+#: TWLight/templates/about.html:63
 msgid ""
 "You do not already have access to the resources you’re applying for through "
 "another library or institution"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:74
+#: TWLight/templates/about.html:70
 msgid ""
 "If you don't quite meet the experience requirements but think you would "
 "still be a strong candidate for access, feel free to apply and you may still "
-"be considered.  Note that \"home wiki\" can mean any Wikipedia you are "
-"active on."
+"be considered."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:81
+#: TWLight/templates/about.html:77
 msgid "What do I do after I get access?"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:85
+#: TWLight/templates/about.html:81
 msgid ""
 "Once you have access we encourage you to use the databases for both research "
 "that creates or improves Wikimedia content and serves your other research "
@@ -1697,98 +1769,96 @@ msgid ""
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:92
+#: TWLight/templates/about.html:88
 msgid ""
 "Please keep in mind, our agreements with partners carry certain expectations."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:99
+#: TWLight/templates/about.html:95
 msgid "Approved editors <i>may</i> use their access to:"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:103
+#: TWLight/templates/about.html:99
 msgid "Search, view, retrieve, and display partner content"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:107
+#: TWLight/templates/about.html:103
 msgid "Electronically save partner content"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:111
+#: TWLight/templates/about.html:107
 msgid "Print out single copies of partner content"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:118
+#: TWLight/templates/about.html:114
 msgid "Approved editors <i>should not</i>:"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:122
+#: TWLight/templates/about.html:118
 msgid ""
 "Share their account logins or passwords with others, or sell their access to "
 "other parties"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:126
+#: TWLight/templates/about.html:122
 msgid "Mass scrape or mass download partner content"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:130
+#: TWLight/templates/about.html:126
 msgid ""
 "Systematically make printed or electronic copies of multiple extracts of "
 "restricted content available for any purpose"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
-#: TWLight/templates/about.html:134
+#: TWLight/templates/about.html:130
 msgid ""
 "Datamine metadata without permission, in order, for instance, to use "
 "metadata for auto-created stub articles"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:141
+#: TWLight/templates/about.html:137
 msgid ""
 "Respecting these agreements allows us to continue growing the partnerships "
 "available to our entire community."
 msgstr ""
 
 #. Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if other tags are used for your language Wikipedia. If you're not sure how to handle this section, take your best guess and give the developer a heads-up.
-#: TWLight/templates/about.html:150
+#: TWLight/templates/about.html:146
 msgid ""
 "Citation practices vary by project and even by article.  Generally, we "
 "support editors citing where they found information, in a form that allows "
 "others to check it for themselves.  That often means providing both original "
 "source details as well as a link to the partner database in which the source "
-"was found. You can use &lt;code&gt;|via=&lt;code&gt; in templates using CS1 "
-"citation format or add &lt;code&gt;&lbrace;&lbrace;subscription required|"
-"via=&rbrace;&rbrace;&lt;/code&gt; to identify the provider."
+"was found."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above an example Wikipedia citation.
-#: TWLight/templates/about.html:157
+#: TWLight/templates/about.html:153
 msgid "Here is one citation example:"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above contact information.
-#: TWLight/templates/about.html:179
+#: TWLight/templates/about.html:175
 msgid "Whom do I contact if I have questions, need help, or want to volunteer?"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to the Wikipedia Library email address.
-#: TWLight/templates/about.html:183
+#: TWLight/templates/about.html:179
 msgid "Email:"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to a link to the Wikipedia Library discussion page on Wikipedia. Translate 'Talk' to whatever the discussion namespace is called for this language Wikipedia.
-#: TWLight/templates/about.html:190
+#: TWLight/templates/about.html:186
 msgid "Talk page:"
 msgstr ""
 
@@ -1963,12 +2033,12 @@ msgid "Number of accounts distributed over time"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.
-#: TWLight/templates/dashboard.html:147
+#: TWLight/templates/dashboard.html:148
 msgid "Applications by number of days until decision"
 msgstr ""
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/).
-#: TWLight/templates/dashboard.html:150
+#: TWLight/templates/dashboard.html:151
 msgid ""
 "The x axis is the number of days to make a final decision (either approved "
 "or denied) on an application. The y axis is the number of applications that "
@@ -1976,29 +2046,29 @@ msgid ""
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.
-#: TWLight/templates/dashboard.html:159
+#: TWLight/templates/dashboard.html:160
 msgid "Median days until application decision, per month"
 msgstr ""
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean.
-#: TWLight/templates/dashboard.html:162
+#: TWLight/templates/dashboard.html:163
 msgid ""
 "This shows the median number of days to reach a decision on the applications "
 "opened in a given month."
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
-#: TWLight/templates/dashboard.html:169
+#: TWLight/templates/dashboard.html:170
 msgid "Open application status distribution"
 msgstr ""
 
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.
-#: TWLight/templates/dashboard.html:181
+#: TWLight/templates/dashboard.html:182
 msgid "Users"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
-#: TWLight/templates/dashboard.html:185
+#: TWLight/templates/dashboard.html:186
 msgid "User language distribution"
 msgstr ""
 
