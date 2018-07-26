@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Print Travis environment variables.
 echo "TRAVIS_PULL_REQUEST: ${TRAVIS_PULL_REQUEST}"
