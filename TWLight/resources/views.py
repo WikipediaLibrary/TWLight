@@ -72,7 +72,9 @@ class PartnersDetailView(DetailView):
             editor__applications__partner=partner,
             editor__applications__status=Application.SENT).distinct().count()
 
-        context['unique_users_approved_or_sent'] = context['unique_users_approved'] + context['unique_users_sent']
+        context['unique_users_approved_or_sent'] = User.objects.filter(
+            editor__applications__partner=partner,
+            editor__applications__status=(Application.APPROVED, Application.SENT)).distinct().count()
 
         application_end_states = [Application.APPROVED, Application.NOT_APPROVED, Application.SENT]
         partner_app_time = Application.objects.filter(
