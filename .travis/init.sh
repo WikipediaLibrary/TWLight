@@ -4,7 +4,7 @@
 mysql < .travis/init_db.sql
 
 # Write config file.
-cp TWLight/settings/travis_vars.py TWLight/settings/local_vars.py
+cp .travis/local_vars.py TWLight/settings/local_vars.py
 
 # Initialize Django app: make migrations, migrate, sync translations, collect static.
 python manage.py makemigrations
