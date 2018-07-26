@@ -19,13 +19,13 @@ then
     commit_all_files() {
         git checkout -b production
         git add -A
-        git commit --message "Travis Build: ${TRAVIS_BUILD_NUMBER}"
+        git commit --message "Travis Build: ${TRAVIS_BUILD_NUMBER}" || :
     }
     
     # Push changes to remote production branch.
     push_files() {
         git remote add origin https://${gh_bot_token}@github.com/WikipediaLibrary/TWLight.git > /dev/null 2>&1
-        git push --quiet origin production
+        git push --quiet --set-upstream origin production
     }
 
     setup_git
