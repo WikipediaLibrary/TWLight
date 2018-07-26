@@ -25,7 +25,7 @@ then
     # Push changes to remote production branch.
     push_files() {
         git remote add origin https://${gh_bot_token}@github.com/WikipediaLibrary/TWLight.git > /dev/null 2>&1
-        git push --quiet --set-upstream-to origin/production
+        git push --quiet origin production
     }
 
     setup_git
