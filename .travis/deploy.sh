@@ -23,6 +23,7 @@ then
     
     # Push changes to remote production branch.
     push_files() {
+        git remote rm origin
         git remote add origin https://WikipediaLibraryBot:${gh_bot_token}@github.com/WikipediaLibrary/TWLight.git > /dev/null 2>&1
         git push --quiet --set-upstream origin production && echo "Build pushed to production."
     }
