@@ -119,7 +119,7 @@
       {% if object.parent %}
         {% with object.parent.get_absolute_url as parent_url %}
           {% comment %}Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or {{ parent_url }}.{% endcomment %}
-          {% blocktrans %}
+          {% blocktrans trimmed %}
             Yes (<a href="{{ parent_url }}">previous application</a>)
           {% endblocktrans %}
         {% endwith %}

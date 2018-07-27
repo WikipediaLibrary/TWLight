@@ -189,7 +189,7 @@ class BaseApplicationForm(forms.Form):
         self._validate_user_data(user_data)
 
         if user_data:
-            # Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
+            # Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
             user_data_layout = Fieldset(_('About you'))
             for datum in user_data:
                 self.fields[datum] = FIELD_TYPES[datum]
@@ -197,8 +197,9 @@ class BaseApplicationForm(forms.Form):
                 # Show which partner wants which personal data if applying
                 # for more than one.
                 if len(self.field_params) > 1:
-                    self.fields[datum].help_text = "Requested by: {partner_list}".format(
-                        partner_list= ", ".join(user_data[datum]))
+                    # Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
+                    self.fields[datum].help_text = _("Requested by: {partner_list}".format(
+                        partner_list= ", ".join(user_data[datum])))
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)
@@ -213,7 +214,7 @@ class BaseApplicationForm(forms.Form):
         partner_data = self.field_params[partner]
         partner_object = self._get_partner_object(partner)
         partner_layout = Fieldset(
-            # Translators: This goes into a form legend that acts as the title of a form or fieldset for a partner application. It lets the user know which partner application they are entering data for.
+            # Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
             _('Your application to {partner}').format(partner=partner_object))
 
         self._validate_partner_data(partner_data)
@@ -249,7 +250,8 @@ class BaseApplicationForm(forms.Form):
                 if datum == ACCOUNT_EMAIL:
                     # If partner requires pre-registration, make sure users
                     # get a link where they can sign up.
-                    help_text = ('You must register at <a href="{url}">{url}</a> '
+                    # Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering.
+                    help_text = _('You must register at <a href="{url}">{url}</a> '
                                  'before applying.').format(
                                     url=partner_object.registration_url)
                     self.fields[field_name].help_text = help_text
