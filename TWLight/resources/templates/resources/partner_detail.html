@@ -476,21 +476,23 @@
   {% comment %}
     Display # of accounts available
   {% endcomment %}
-  {% if total_apps_approved_or_sent_stream %}
-    <h3>
-      {% comment %} Translators: This is the section header for accounts availability numbers for the available stream(s). (e.g. https://wikipedialibrary.wmflabs.org/partners/52/). {% endcomment %}
-      {% trans "Accounts availability" %}
-    </h3>
-    {% for stream_name, total_accounts in total_accounts_available_current.items %}
-      <p>{{ stream_name }}: {{ total_accounts }}</p>
-    {% endfor %}
-  {% else %}
-    <h3>
-      {% comment %} Translators: This is the label and the number which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). Don't translate {{ accounts_available }}. {% endcomment %}
-      {% blocktrans with object.accounts_available|add:negation_total_apps_approved_or_sent as accounts_available %}
-        Accounts available: {{ accounts_available }}
-      {% endblocktrans %}
-    </h3>
+  {% if object.coordinator == user or user.is_staff %}
+    {% if total_apps_approved_or_sent_stream %}
+      <h3>
+        {% comment %} Translators: This is the section header for accounts availability numbers for the available stream(s). (e.g. https://wikipedialibrary.wmflabs.org/partners/52/). {% endcomment %}
+        {% trans "Accounts availability" %}
+      </h3>
+      {% for stream_name, total_accounts in total_accounts_available_current.items %}
+        <p>{{ stream_name }}: {{ total_accounts }}</p>
+      {% endfor %}
+    {% else %}
+      <h3>
+        {% comment %} Translators: This is the label and the number which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). Don't translate {{ accounts_available }}. {% endcomment %}
+        {% blocktrans with object.accounts_available|add:negation_total_apps_approved_or_sent as accounts_available %}
+          Accounts available: {{ accounts_available }}
+        {% endblocktrans %}
+      </h3>
+    {% endif %}
   {% endif %}
   
   {% if total_apps > 0 %}
