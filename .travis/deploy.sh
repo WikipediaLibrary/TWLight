@@ -10,9 +10,14 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAV
 then
     # Configure git.
     git_config() {
+        # Configure user.
         git config --global user.email "deploy@travis-ci.org"
         git config --global user.name "Deployment Bot"
+
+        # Remove the anonymous origin.
         git remote rm origin
+
+        # Add our authenticated origin using encrypted travis environment variables.
         git remote add origin https://${gh_bot_username}:${gh_bot_token}@github.com/${TRAVIS_REPO_SLUG}.git > /dev/null 2>&1
     }
     
@@ -31,7 +36,11 @@ then
     
     # Push to remote production branch.
     git_push() {
-        git pull origin production --quiet
+        # Fetch and merge before the push. If there's a conflict, use ours.
+        # https://git-scm.com/docs/merge-strategies#merge-strategies-ours
+        git pull origin production -X ours --quiet
+
+        # Push to remote production branch.
         git push origin production --quiet
         echo "Build pushed to production."
     }
