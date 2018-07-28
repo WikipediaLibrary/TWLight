@@ -18,8 +18,13 @@ then
     
     # Commit any changes to local production branch.
     git_commit() {
-        git rm --cached
+        # Clean out untracked files and directories.
+        git clean -d -x -f .
+
+        # Checkout production branch
         git checkout -b production
+
+        # Add and commit.
         git add -A
         git commit --message "Travis Build: ${TRAVIS_BUILD_NUMBER}" || :
     }
