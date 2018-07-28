@@ -1,4 +1,5 @@
 # bin files now created by puppet module
+collectedstatic/
 staticfiles/
 personal/
 id_rsa
