@@ -42,6 +42,28 @@
     {% comment %} Translators: This message is shown on pages where coordinators can see personal information about applicants. {% endcomment %}
     {% trans 'Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential.' %}
   </div>
+  
+  {% comment %} This block warns coordinators if the number of applications they are about to send exceeds the number of accounts available. {% endcomment %}
+  {% if unavailable_streams %}
+    <div class="well hidden-xs">
+      {% for app_stream_name in unavailable_streams %}
+        {% comment %} Translators: This message is shown when applications exceed the number of accounts available for each stream(s). {% endcomment %}
+        {% if forloop.first %}{% trans "Application(s) for " %}{% endif %}<strong>{{ app_stream_name }}</strong>,{% if forloop.last %}{% trans " if sent, will exceed the total available accounts for the stream(s). Please proceed at your own discretion." %}{% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for app, output in app_outputs.items  %}
+      {% if forloop.last %}
+        {% if object.accounts_available < forloop.counter|add:total_apps_approved_or_sent %}
+          <div class="well hidden-xs">
+            {% comment %} Translators: This message is shown when applications exceed the number of accounts available. {% endcomment %}
+            {% blocktrans %}Application(s) for {{ object }}, if sent, will exceed the total available accounts for the partner. Please proceed at your own discretion.{% endblocktrans %}
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
 
   <p>
     {% if object.send_instructions %}
