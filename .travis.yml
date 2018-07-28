@@ -1,3 +1,10 @@
+---
+
+# Changes only get pushed to production after a successful Travis test.
+branches:
+  except:
+  - production
+
 language: python
 
 cache: pip
