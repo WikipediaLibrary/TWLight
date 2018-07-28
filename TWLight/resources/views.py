@@ -77,9 +77,7 @@ class PartnersDetailView(DetailView):
         else:
             context['total_apps_approved_or_sent_stream'] = None
 
-            context['total_accounts_available'] = Partner.objects.filter(id=partner).values_list('accounts_available', flat=True)
-
-            context['total_accounts_available_current'] = context['total_accounts_available'] - context['total_apps_approved_or_sent']
+            context['negation_total_apps_approved_or_sent'] = - context['total_apps_approved_or_sent']
 
         context['unique_users'] = User.objects.filter(
             editor__applications__partner=partner).distinct().count()
