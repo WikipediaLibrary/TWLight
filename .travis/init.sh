@@ -6,6 +6,9 @@ mysql < .travis/init_db.sql
 # Write config file.
 cp .travis/local_vars.py TWLight/settings/local_vars.py
 
+# Ensure static dir exists.
+mkdir -p TWLight/collectedstatic
+
 # Initialize Django app:
 # make migrations
 python manage.py makemigrations
