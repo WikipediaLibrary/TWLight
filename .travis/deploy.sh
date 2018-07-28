@@ -36,18 +36,18 @@ then
     
     # Push to remote production branch.
     git_push() {
-        # Fetch and merge before the push. If there's a conflict, use ours.
+        # Fetch and merge before the push.
         # https://git-scm.com/docs/merge-strategies#merge-strategies-ours
-        git pull origin production -X ours --quiet
+        git fetch origin production --quiet
+
+        # We really don't care what was in the production branch before.
+        git merge --strategy ours origin/production --quiet
 
         # Push to remote production branch.
         git push origin production --quiet
-        echo "Build pushed to production."
     }
 
-    git_config
-    git_commit
-    git_push
+    git_config && git_commit && git_push && echo "Build pushed to production."
 else
     echo "Doesn't meet conditions for deployment. Skipping push to production."
 fi
