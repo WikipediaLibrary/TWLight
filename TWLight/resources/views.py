@@ -61,6 +61,7 @@ class PartnersDetailView(DetailView):
 
         context['total_apps_approved_or_sent'] = context['total_apps_approved'] + context['total_apps_sent']
         
+        # This if else block supports the template with the number of accounts available 
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
             context['total_accounts_available_current'] = {}
