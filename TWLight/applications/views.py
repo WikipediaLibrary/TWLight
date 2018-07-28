@@ -869,7 +869,8 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
                 )
         app_outputs = {}
         stream_outputs = []
-
+        unavailable_streams = []
+        
         for app in apps:
             app_outputs[app] = get_output_for_application(app)
             stream_outputs.append(app.specific_stream)
@@ -890,7 +891,6 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
         
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
-            unavailable_streams = []
             
             for stream in partner_streams:
                 total_apps_approved_or_sent_stream = User.objects.filter(
@@ -898,8 +898,6 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
                                       editor__applications__status__in=(Application.APPROVED, Application.SENT),
                                       editor__applications__specific_stream=stream).count()
                 after_distribution = stream.accounts_available - total_apps_approved_or_sent_stream - stream_outputs.count(stream)
-                
-                context['total_apps_approved_or_sent_stream'] = total_apps_approved_or_sent_stream
 
                 if after_distribution < 0 and (stream in stream_outputs):
                     unavailable_streams.append(stream.name)
@@ -907,7 +905,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
             context['unavailable_streams'] = unavailable_streams
                 
         else:
-            context['total_apps_approved_or_sent_stream'] = None
+            context['unavailable_streams'] = None
 
         return context
 
