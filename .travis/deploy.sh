@@ -31,7 +31,7 @@ then
 
         # Add and commit.
         git add -A
-        git commit --message "Travis build \#${TRAVIS_BUILD_NUMBER} changes." || :
+        git commit --message "Travis build #${TRAVIS_BUILD_NUMBER} changes." || :
     }
     
     # Push to remote production branch.
@@ -41,7 +41,7 @@ then
         git fetch origin production --quiet
 
         # We really don't care what was in the production branch before.
-        git merge --strategy ours origin/production --message "Travis build \#${TRAVIS_BUILD_NUMBER} merge." --quiet
+        git merge --strategy ours origin/production --message "Travis build #${TRAVIS_BUILD_NUMBER} deployed." --quiet
 
         # Push to remote production branch.
         git push origin production --quiet
