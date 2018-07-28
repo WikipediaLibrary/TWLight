@@ -25,8 +25,10 @@ then
     git_push() {
         git remote rm origin
         git remote add origin https://${gh_bot_username}:${gh_bot_token}@github.com/${TRAVIS_REPO_SLUG}.git > /dev/null 2>&1
-        git push --quiet --set-upstream origin master:production && echo "Pre-build state pushed to production."
-        git push --quiet && echo "Build pushed to production."
+        git branch --quiet --set-upstream-to origin/production
+        git pull --quiet
+        git push --quiet
+        echo "Build pushed to production."
     }
 
     git_config
