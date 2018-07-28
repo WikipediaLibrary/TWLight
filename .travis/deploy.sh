@@ -47,7 +47,9 @@ then
         git push origin production --quiet
     }
 
-    git_config && git_commit && git_push && echo "Build pushed to production."
+    git_config
+    git_commit
+    git_push && echo "Build pushed to production."
 else
     echo "Doesn't meet conditions for deployment. Skipping push to production."
 fi
