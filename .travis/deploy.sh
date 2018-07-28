@@ -18,6 +18,7 @@ then
     
     # Commit any changes to local production branch.
     git_commit() {
+        git rm --cached
         git checkout -b production
         git add -A
         git commit --message "Travis Build: ${TRAVIS_BUILD_NUMBER}" || :
