@@ -1,4 +1,5 @@
 import datetime
+from dateutil.relativedelta import relativedelta
 from faker import Faker
 import random
 
@@ -73,16 +74,16 @@ class Command(BaseCommand):
                     app.sent_by = random_partner.coordinator
                     app.date_closed = fake.date_time_between(
                         start_date = app.date_created,
-                        end_date = "now",
+                        end_date = app.date_created + relativedelta(years=1),
                         tzinfo=None)
                 else:
                     app.date_closed = import_date
 
             app.save()
 
-        # Renew a selection of apps.
-        all_apps = Application.objects.all()
-        num_to_renew = int(num_applications*0.3)
+        # Renew a selection of sent apps.
+        all_apps = Application.objects.filter(status=Application.SENT)
+        num_to_renew = int(all_apps.count()*0.5)
         for app_to_renew in random.sample(all_apps, num_to_renew):
             app_to_renew.renew()
 
