@@ -51,6 +51,8 @@ from .models import Application
 
 logger = logging.getLogger(__name__)
 
+personal_data_logger = logging.getLogger('personal_logger')
+
 coordinators = get_coordinators()
 
 PARTNERS_SESSION_KEY = 'applications_request__partner_ids'
@@ -525,6 +527,13 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         context['object_list'] = applications
 
+        # Log personal data access
+        for app in applications:
+            personal_data_logger.info('{user} accessed personal data of '
+                '{user2} when listing applications.'.format(
+                    user=self.request.user.editor,
+                    user2=app.editor))
+
         # Set up button group menu.
         context['approved_url'] = reverse_lazy('applications:list_approved')
         context['rejected_url'] = reverse_lazy('applications:list_rejected')
@@ -752,6 +761,19 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     template_name_suffix = '_evaluation'
     success_url = reverse_lazy('applications:list')
 
+    def dispatch(self, request, *args, **kwargs):
+        application = self.get_object()
+
+        # Log personal data access
+        personal_data_logger.info('{user} accessed personal data of '
+            '{user2} in application {app_pk}.'.format(
+                user=request.user.editor,
+                user2=application.editor,
+                app_pk=application.pk))
+
+        return super(EvaluateApplicationView, self).dispatch(
+            request, *args, **kwargs)
+
     def form_valid(self, form):
         with reversion.create_revision():
             reversion.set_user(self.request.user)
@@ -870,6 +892,14 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
 
         for app in apps:
             app_outputs[app] = get_output_for_application(app)
+
+            # Log personal data access
+            personal_data_logger.info('{user} accessed personal data of '
+                '{user2} when sending data for partner '
+                '{partner_name}.'.format(
+                    user=self.request.user.editor,
+                    user2=app.editor,
+                    partner_name=self.get_object()))
 
         context['app_outputs'] = app_outputs
 
