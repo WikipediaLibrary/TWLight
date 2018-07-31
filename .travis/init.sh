@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Install cssjanus.
+npm install cssjanus
+
 # Create databases.
 mysql < .travis/db.sql
 
