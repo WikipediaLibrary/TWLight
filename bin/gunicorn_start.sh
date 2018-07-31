@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Environment variables may not be loaded under all conditions.
+if [ -z "${TWLIGHT_HOME}" ]
+then
+    source /etc/environment
+fi
+
 NAME="twlight"
 SOCKFILE=${TWLIGHT_HOME}/run/gunicorn.sock
 DJANGO_WSGI_MODULE=TWLight.wsgi
