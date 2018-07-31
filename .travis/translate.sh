@@ -3,8 +3,8 @@
 # Count the number of files searched by makemessages
 # that were changed in the last commit.
 # https://docs.djangoproject.com/en/1.11/ref/django-admin/
-message_files_changed=$(git diff --name-only HEAD~1..HEAD -- '*.html' '*.txt' '*.py' | wc -l)
-translation_files_changed=$(git diff --name-only HEAD~1..HEAD -- '*.po' | wc -l)
+message_files_changed=$(git diff --name-only HEAD~1..HEAD -- '*.html' '*.txt' '*.py' --porcelain | wc -l)
+translation_files_changed=$(git diff --name-only HEAD~1..HEAD -- '*.po' --porcelain | wc -l)
 
 # If any relevant files changed but no translation files changed,
 # update translations.
