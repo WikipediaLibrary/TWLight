@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Environment variables may not be loaded in all environments.
-# Try to grab them.
+# Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
 then
     source /etc/environment

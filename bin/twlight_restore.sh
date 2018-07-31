@@ -4,6 +4,12 @@ if [  -z "$1" ]; then
     exit 1;
 fi
 
+# Environment variables may not be loaded under all conditions.
+if [ -z "${TWLIGHT_HOME}" ]
+then
+    source /etc/environment
+fi
+
 PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 
 restore_file=${1}

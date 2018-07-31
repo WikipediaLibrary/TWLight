@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Environment variables may not be loaded under all conditions.
+if [ -z "${TWLIGHT_HOME}" ]
+then
+    source /etc/environment
+fi
+
 PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 
 dom=$(date -d "$D" '+%d')
