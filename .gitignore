@@ -11,13 +11,6 @@ TWLight/settings/production_vars.py
 TWLight/settings/staging_vars.py
 TWLight/settings/vagrant_vars.py
 
-# compile messages at deploy time
-django.mo
-
-# generate rtl stylesheets at deploy time
-TWLight/static/css/*-rtl.css
-TWLight/static/css/*/*-rtl.css
-
 # Created by https://www.gitignore.io/api/osx,django,python,sublimetext,vim,emacs
 
 ### OSX ###
