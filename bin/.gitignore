@@ -7,6 +7,9 @@
 # this file
 !.gitignore
 
+# the Green Unicorn wrapper script
+!gunicorn_start.sh
+
 # the virtualenv activation script
 !virtualenv_activate.sh
 
