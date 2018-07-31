@@ -6,6 +6,9 @@ then
     source /etc/environment
 fi
 
+# Check the remote status.
+git fetch
+
 # Only do stuff if we're behind the remote. Cribbed from stackoverflow:
 # https://stackoverflow.com/a/3278427
 upstream=${1:-'@{u}'}
