@@ -7,6 +7,7 @@ then
 fi
 
 # Check the remote status.
+cd ${TWLIGHT_HOME}
 git fetch
 
 # Only do stuff if we're behind the remote. Cribbed from stackoverflow:
