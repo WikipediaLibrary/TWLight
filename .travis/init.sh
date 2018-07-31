@@ -16,6 +16,9 @@ mkdir -p TWLight/collectedstatic
 # Generate right to left css
 node bin/twlight_cssjanus.js
 
+# Collect static assets
+python manage.py collectstatic --noinput --clear
+
 # Initialize Django app:
 # make migrations
 python manage.py makemigrations
@@ -25,6 +28,3 @@ python manage.py migrate || bash -c "python manage.py sync_translation_fields --
 
 # Compile translations. Slightly involved due to this being a Wikimedia project.
 .travis/./translate.sh
-
-# Collect static assets
-python manage.py collectstatic --noinput --clear
