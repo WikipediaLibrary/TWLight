@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Fetch latest code from master.
+# Fetch latest code from ${TWLIGHT_GIT_REVISION}.
 cd ${TWLIGHT_HOME}
 git checkout .
-git pull origin master
+git pull origin ${TWLIGHT_GIT_REVISION}
 
 # Update pip dependencies.
 bash ${TWLIGHT_HOME}/bin/virtualenv_pip_update.sh || exit 1
