@@ -26,6 +26,9 @@ then
         # Clean out untracked files and directories.
         git clean -d -x -f .
 
+        # Capture collectedstatic for deployment.
+        sed -i '/^collectedstatic\/$/d' ./.gitignore
+
         # Checkout production branch
         git checkout -b production
 
