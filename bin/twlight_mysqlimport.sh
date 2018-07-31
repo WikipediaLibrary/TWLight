@@ -21,7 +21,7 @@ mysqlpass=$(cat ${TWLIGHT_HOME}/TWLight/settings/${TWLIGHT_ENV}_vars.py | grep ^
 echo "Importing TWLight database"
 
 ## Drop existing DB.
-bash -c "mysql  -h '${mysqlhost}' -u '${mysqluser}' -p'${mysqlpass}' -D '${mysqldb}' -e 'DROP DATABASE ${mysqldb};'" | :
+bash -c "mysql  -h '${mysqlhost}' -u '${mysqluser}' -p'${mysqlpass}' -D '${mysqldb}' -e 'DROP DATABASE ${mysqldb}; CREATE DATABASE ${mysqldb};'" | :
 
 ## Perform mysql import
 bash -c "mysql  -h '${mysqlhost}' -u '${mysqluser}' -p'${mysqlpass}' -D '${mysqldb}' < '${mysqlimport_file}'"
