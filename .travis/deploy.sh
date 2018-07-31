@@ -23,9 +23,6 @@ then
     
     # Commit any changes to local production branch.
     git_commit() {
-        # Clean out untracked files and directories.
-        git clean -d -x -f .
-
         # Capture collectedstatic for deployment.
         sed -i '/^collectedstatic\/$/d' ./.gitignore
 
