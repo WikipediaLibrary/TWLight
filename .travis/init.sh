@@ -16,8 +16,9 @@ mkdir -p TWLight/collectedstatic
 # Generate right to left css
 node bin/twlight_cssjanus.js
 
-# Collect static assets. Dump the output because it's so noisy.
-python manage.py collectstatic --noinput --clear > /dev/null 2>&1
+# Collect static assets. Dump stdout because it's so noisy.
+echo "python manage.py collectstatic --noinput --clear"
+python manage.py collectstatic --noinput --clear > /dev/null
 
 # Initialize Django app:
 # make migrations
