@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Environment variables may not be loaded under all conditions.
+if [ -z "${TWLIGHT_HOME}" ]
+then
+    source /etc/environment
+fi
+
 # Fetch latest code from ${TWLIGHT_GIT_REVISION}.
 cd ${TWLIGHT_HOME}
 git checkout .
