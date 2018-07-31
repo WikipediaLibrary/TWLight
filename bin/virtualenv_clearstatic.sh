@@ -10,7 +10,7 @@ fi
 if [ "${TWLIGHT_GIT_REVISION}" != "production" ] && [ "${TWLIGHT_ENV}" != "production" ]
 then
     # Generate right to left css
-    node ${TWLIGHT_HOME}/bin/twlight_cssjanus.js || exit 1
+    cd ${TWLIGHT_HOME} && node ${TWLIGHT_HOME}/bin/twlight_cssjanus.js || exit 1
 
     # Load virtual environment
     source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
