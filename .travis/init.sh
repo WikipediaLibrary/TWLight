@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Install cssjanus.
-npm install cssjanus
+mkdir -p ~/node_modules
+npm install --prefix ~ cssjanus
 
 # Create databases.
 mysql < .travis/db.sql
