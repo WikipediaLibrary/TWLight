@@ -10,7 +10,7 @@ virtualenv TWLight 2>/dev/null
 source TWLight/bin/activate
 
 # Grab TWLight global environment variables.
-source /etc/profile.d/twlight_global_env.sh
+source /etc/environment
 
 # Move to the project root.
 cd $TWLIGHT_HOME
