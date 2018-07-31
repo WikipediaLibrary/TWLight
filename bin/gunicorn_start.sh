@@ -25,4 +25,4 @@ exec gunicorn ${DJANGO_WSGI_MODULE}:application \
   --timeout $TIMEOUT \
   --bind=unix:$SOCKFILE \
   --log-level=debug \
-  --log-file=/var/www/html/TWLight/TWLight/logs/gunicorn.log
+  --log-file=${TWLIGHT_HOME}/TWLight/logs/gunicorn.log
