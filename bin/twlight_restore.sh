@@ -13,7 +13,6 @@ fi
 PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 
 restore_file=${1}
-dom=$(date -d "$D" '+%d')
 
 ## Extract tarball
 tar -xvzf  "${restore_file}" -C "${TWLIGHT_HOME}" --no-overwrite-dir
