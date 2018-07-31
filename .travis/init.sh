@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Create databases.
-mysql < .travis/init_db.sql
+mysql < .travis/db.sql
 
 # Write config file.
 cp .travis/local_vars.py TWLight/settings/local_vars.py
@@ -18,6 +18,9 @@ python manage.py migrate || bash -c "python manage.py sync_translation_fields --
 
 # Compile translations. Slightly involved due to this being a Wikimedia project.
 .travis/./translate.sh
+
+# Generate right to left css
+node bin/twlight_cssjanus.js
 
 # Collect static assets
 python manage.py collectstatic --noinput --clear
