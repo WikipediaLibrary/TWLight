@@ -9,8 +9,8 @@ virtualenv TWLight 2>/dev/null
 # Activate Django virtualenv.
 source TWLight/bin/activate
 
-# Grab non-sensitive environment variables.
-source /etc/profile.d/twlight.sh
+# Grab TWLight global environment variables.
+source /etc/profile.d/twlight_global_env.sh
 
 # Move to the project root.
 cd $TWLIGHT_HOME
