@@ -1,6 +1,14 @@
-# bin files now created by puppet module
+# Many bin files now created by puppet module
 # https://forge.puppet.com/jsnshrmn/twlight
 # Ignore everything in this directory
 *
-# Except this file
+# Except:
+
+# this file
 !.gitignore
+
+# the virtualenv activation script
+!virtualenv_activate.sh
+
+# the weekly cron script
+!twlight_weekly.sh
