@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# Environment variables may not be loaded in all environments.
+# Try to grab them.
+if [ -z "${TWLIGHT_HOME}" ]
+then
+    source /etc/environment
+fi
+
 venv_update_cmd="${TWLIGHT_HOME}/bin/./virtualenv_update.sh >>${TWLIGHT_HOME}/TWLight/logs/update.log 2>&1"
 venv_test_cmd="${TWLIGHT_HOME}/bin/./virtualenv_test.sh >>${TWLIGHT_HOME}/TWLight/logs/test.log 2>&1"
 

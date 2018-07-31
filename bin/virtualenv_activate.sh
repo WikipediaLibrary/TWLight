@@ -9,8 +9,12 @@ virtualenv TWLight 2>/dev/null
 # Activate Django virtualenv.
 source TWLight/bin/activate
 
-# Grab TWLight global environment variables.
-source /etc/environment
+# Environment variables may not be loaded in all environments.
+# Try to grab them.
+if [ -z "${TWLIGHT_HOME}" ]
+then
+    source /etc/environment
+fi
 
 # Move to the project root.
 cd $TWLIGHT_HOME
