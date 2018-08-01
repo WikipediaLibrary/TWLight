@@ -6,6 +6,12 @@ then
     source /etc/environment
 fi
 
+if [ "${USER}" != "${TWLIGHT_UNIXNAME}" ]
+then
+    echo "virtualenv must be run as ${TWLIGHT_UNIXNAME}!"
+    exit 1
+fi
+
 # Start in TWLight user's home dir.
 cd /home/${TWLIGHT_UNIXNAME}
 
