@@ -277,10 +277,22 @@ LOGGING = {
             'backupCount': 5,
             'formatter': 'brief',
         },
+        'personal_logfile': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'personaldata.log'),
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter': 'brief',
+        },
     },
     'loggers': {
         '': {
             'handlers': ['file'],
+            'level': 'INFO',
+        },
+        'personal_logger': {
+            'handlers': ['personal_logfile'],
             'level': 'INFO',
         }
     }
