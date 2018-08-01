@@ -9,4 +9,4 @@ fi
 source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 
 echo "test --noinput"
-python manage.py test --noinput
+DJANGO_SETTINGS_MODULE=TWLight.settings.local python manage.py test --noinput
