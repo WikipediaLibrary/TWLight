@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-source <%= @root_dir %>/bin/virtualenv_activate.sh
+# Environment variables may not be loaded under all conditions.
+if [ -z "${TWLIGHT_HOME}" ]
+then
+    source /etc/environment
+fi
+
+source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 
 echo "Creating user data"
 python manage.py user_example_data 200 || exit
