@@ -2,10 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-  {% comment %} Translators: This is the heading of a page listing editors who have applications for this partner ({{ object }}). {% endcomment %}
+  {% comment %} Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate {{ partner }}. {% endcomment %}
   <h1>
-  {% blocktrans with partner=object.company_name %}
-  {{ object }} approved users
+  {% blocktrans trimmed with partner=object.company_name %}
+  {{ partner }} approved users
   {% endblocktrans %}
   </h1>
 
