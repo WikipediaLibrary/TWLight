@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponseRedirect
@@ -14,6 +16,7 @@ from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf
 
 from .models import Partner, Stream
 
+personal_data_logger = logging.getLogger('personal_logger')
 
 class PartnersFilterView(FilterView):
     model = Partner
@@ -188,6 +191,14 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
 
         partner_applications = Application.objects.filter(
             partner=partner)
+
+        # Log personal data access
+        for app in partner_applications:
+            personal_data_logger.info('{user} accessed personal data of '
+                '{user2} in application list for {partner_name}.'.format(
+                    user=self.request.user.editor,
+                    user2=app.editor,
+                    partner_name=partner))
 
         context['approved_applications'] = partner_applications.filter(
             status=Application.APPROVED).order_by(
