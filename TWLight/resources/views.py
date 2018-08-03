@@ -196,7 +196,7 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
         for app in partner_applications:
             personal_data_logger.info('{user} accessed personal data of '
                 '{user2} in application list for {partner_name}.'.format(
-                    user=self.request.user.editor,
+                    user=self.request.user,
                     user2=app.editor,
                     partner_name=partner))
 

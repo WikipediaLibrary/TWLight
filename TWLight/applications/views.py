@@ -531,7 +531,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         for app in applications:
             personal_data_logger.info('{user} accessed personal data of '
                 '{user2} when listing applications.'.format(
-                    user=self.request.user.editor,
+                    user=self.request.user,
                     user2=app.editor))
 
         # Set up button group menu.
@@ -761,19 +761,6 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     template_name_suffix = '_evaluation'
     success_url = reverse_lazy('applications:list')
 
-    def dispatch(self, request, *args, **kwargs):
-        application = self.get_object()
-
-        # Log personal data access
-        personal_data_logger.info('{user} accessed personal data of '
-            '{user2} in application {app_pk}.'.format(
-                user=request.user.editor,
-                user2=application.editor,
-                app_pk=application.pk))
-
-        return super(EvaluateApplicationView, self).dispatch(
-            request, *args, **kwargs)
-
     def form_valid(self, form):
         with reversion.create_revision():
             reversion.set_user(self.request.user)
@@ -781,6 +768,15 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
 
 
     def get_context_data(self, **kwargs):
+        application = self.get_object()
+
+        # Log personal data access
+        personal_data_logger.info('{user} accessed personal data of '
+            '{user2} in application {app_pk}.'.format(
+                user=self.request.user,
+                user2=application.editor,
+                app_pk=application.pk))
+
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.editor
         context['versions'] = Version.objects.get_for_object(self.object)
@@ -897,7 +893,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
             personal_data_logger.info('{user} accessed personal data of '
                 '{user2} when sending data for partner '
                 '{partner_name}.'.format(
-                    user=self.request.user.editor,
+                    user=self.request.user,
                     user2=app.editor,
                     partner_name=self.get_object()))
 
