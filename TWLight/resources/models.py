@@ -175,7 +175,7 @@ class Partner(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES,
         default=NOT_AVAILABLE,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
-        help_text=_('Should this Partner be displayed to end users? Is it '
+        help_text=_('Should this Partner be displayed to users? Is it '
                     'open for applications right now?'))
 
     renewals_available = models.BooleanField(default=False,
@@ -196,6 +196,7 @@ class Partner(models.Model):
         help_text=_("Optional description of this partner's resources."))
 
     send_instructions = models.TextField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
         help_text=_("Optional instructions for sending application data to "
             "this partner."))
 
@@ -263,7 +264,7 @@ class Partner(models.Model):
         help_text=_("Mark as true if this partner requires applicants to agree "
                     "with the partner's terms of use."))
     account_email = models.BooleanField(default=False,
-        # Translators: TODO
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
         help_text=_("Mark as true if this partner requires applicants to have "
                     "already signed up at the partner website."))
 

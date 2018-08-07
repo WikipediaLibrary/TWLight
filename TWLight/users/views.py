@@ -255,7 +255,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
         form.helper.add_input(Submit(
             'submit',
             # Translators: This is the button users click to confirm changes to their personal information.
-            _('Update information'),
+            _('Update'),
             css_class='center-block'))
 
         return form
@@ -302,6 +302,7 @@ class EmailChangeView(SelfOnly, FormView):
             assert self.request.user.is_authenticated()
         except AssertionError:
             messages.add_message (request, messages.WARNING,
+                # Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
                 _('You must be logged in to do that.'))
             raise PermissionDenied
 

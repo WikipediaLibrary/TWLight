@@ -19,7 +19,7 @@ class MultilingualTagTO(TranslationOptions):
     # This setting lets name be nullable in the database. This is important
     # because unique=True for name, and an empty CharField is normally not
     # nullable so it is stored as ''; this means two empty CharFields violate
-    # the uniqueness constraint, which means if we try to save more than on
+    # the uniqueness constraint, which means if we try to save more than one
     # tag without full translations we will be sad.
     empty_values = {'name': None}
 

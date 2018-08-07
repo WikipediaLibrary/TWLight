@@ -1,3 +1,5 @@
+---
+
 language: python
 
 cache: pip
@@ -19,17 +21,11 @@ before_install:
 install:
   - pip install -r requirements/wmf.txt
 
-# Create databases. Write config file. Ensure static dir exists
-before_script:
-  - mysql -e "CREATE DATABASE twlight;"
-  - mysql -e "GRANT ALL PRIVILEGES on twlight.* to twlight@'%' IDENTIFIED BY 'twlight';"
-  - mysql -e "GRANT ALL PRIVILEGES on test_twlight.* to twlight@'%' IDENTIFIED BY 'twlight';"
-  - cp TWLight/settings/travis_vars.py TWLight/settings/local_vars.py
-  - mkdir -p TWLight/collectedstatic
-
-# Create revisions, make migrations, migrate, sync translations, collect static, test.
+# Initalize the app and test it.
 script:
-  - python manage.py makemigrations
-  - python manage.py migrate || bash -c "python manage.py sync_translation_fields --noinput && python manage.py migrate"
-  - python manage.py collectstatic --noinput --clear
+  - .travis/./init.sh
   - python manage.py test --noinput
+
+# Push to production if the conditions are met.
+after_success:
+  - .travis/./deploy.sh

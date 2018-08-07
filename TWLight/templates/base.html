@@ -72,12 +72,12 @@
           {% url 'users:home' as home_url %}
             {% if user.editor %}
               {% comment %} Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate {{ home_url }} or {{ username }}. {% endcomment %}
-              {% blocktrans with username=user.editor.wp_username%}
+              {% blocktrans trimmed with username=user.editor.wp_username%}
                 Hi, <a href="{{ home_url }}">{{ username }}</a>!
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate {{ home_url }} or {{ username }}. {% endcomment %}
-              {% blocktrans with username=user.username %}
+              {% blocktrans trimmed with username=user.username %}
                 Hi, <a href="{{ home_url }}">{{ username }}</a>!
               {% endblocktrans %}            
             {% endif %}
