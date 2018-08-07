@@ -194,7 +194,11 @@ class Partner(models.Model):
     description = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
         help_text=_("Optional description of this partner's resources."))
-
+        
+    additional_resources = models.TextField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide additonal help resources (if any) for a partner.
+        help_text=_("Optional help resources for this partner."))
+        
     send_instructions = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
         help_text=_("Optional instructions for sending application data to "
@@ -299,6 +303,10 @@ class Partner(models.Model):
           send_instructions_cache_key = make_template_fragment_key(
               'partner_send_instructions', [code, self.pk]
           )
+          additional_resources_cache_key = make_template_fragment_key(
+              'partner_additional_resources', [code, self.pk]
+          )
+          cache.delete(additional_resources_cache_key)
           cache.delete(description_cache_key)
           cache.delete(send_instructions_cache_key)
 
