@@ -12,6 +12,7 @@ from django.core.cache.utils import make_template_fragment_key
 from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 from django_countries.fields import CountryField
@@ -184,7 +185,7 @@ class Partner(models.Model):
         help_text=_('Can access grants to this partner be renewed? If so, '
             'users will be able to request renewals at any time.'))
             
-    accounts_available = models.PositiveSmallIntegerField(default=0, 
+    accounts_available = models.PositiveSmallIntegerField(default=None, blank=True, null=True, 
         # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
         help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
     
@@ -372,7 +373,7 @@ class Stream(models.Model):
             "Will be user-visible and *not translated*. Do not include the "
             "name of the partner here."))
             
-    accounts_available = models.PositiveSmallIntegerField(default=0, 
+    accounts_available = models.PositiveSmallIntegerField(default=None, blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
         help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
         
