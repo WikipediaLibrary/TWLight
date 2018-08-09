@@ -869,7 +869,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
                 )
         app_outputs = {}
         stream_outputs = []
-        unavailable_streams = []
+        list_unavailable_streams = []
         
         for app in apps:
             app_outputs[app] = get_output_for_application(app)
@@ -881,31 +881,40 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
         # Additionally, supports send_partner template with total approved/sent applications.
         partner = self.get_object()
 
-        context['total_apps_approved'] = Application.objects.filter(
+        total_apps_approved = Application.objects.filter(
             partner=partner, status=Application.APPROVED).count()
 
-        context['total_apps_sent'] = Application.objects.filter(
+        total_apps_sent = Application.objects.filter(
             partner=partner, status=Application.SENT).count()
 
-        context['total_apps_approved_or_sent'] = context['total_apps_approved'] + context['total_apps_sent']
+        total_apps_approved_or_sent = total_apps_approved + total_apps_sent
         
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
             
             for stream in partner_streams:
-                total_apps_approved_or_sent_stream = User.objects.filter(
-                                      editor__applications__partner=partner,
-                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
-                                      editor__applications__specific_stream=stream).count()
-                after_distribution = stream.accounts_available - total_apps_approved_or_sent_stream - stream_outputs.count(stream)
+                if stream.accounts_available is not None:
+                    total_apps_approved_or_sent_stream = User.objects.filter(
+                                          editor__applications__partner=partner,
+                                          editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                          editor__applications__specific_stream=stream).count()
+                    after_distribution = stream.accounts_available - total_apps_approved_or_sent_stream - stream_outputs.count(stream)
 
-                if after_distribution < 0 and (stream in stream_outputs):
-                    unavailable_streams.append(stream.name)
-                    
-            context['unavailable_streams'] = unavailable_streams
+                    if after_distribution < 0 and (stream in stream_outputs):
+                        list_unavailable_streams.append(stream.name)
+                        
+            if list_unavailable_streams:
+                unavailable_streams = ", ".join(list_unavailable_streams)
+                context['unavailable_streams'] = unavailable_streams
                 
         else:
             context['unavailable_streams'] = None
+            
+            if partner.accounts_available is not None:
+                context['total_apps_approved_or_sent_or_ready_to_send'] = apps.filter(partner=partner).count() + total_apps_approved_or_sent
+                
+            else:
+                context['total_apps_approved_or_sent_or_ready_to_send'] = None
 
         return context
 
