@@ -225,14 +225,29 @@
         <div class="timeline-badge"><i class="fa fa-files-o" aria-hidden="true"></i>
         </div>
         <div class="timeline-panel">
+          <div class="timeline-heading">
+            {% comment %} Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field. {% endcomment %}
+            <h4 class="timeline-title">{% trans "Excerpt limit" %}</h4>
+          </div>        
           <div class="timeline-body">
-            {% comment %} Translators: If a partner has specified the excerpt limit, this message will display the number of words or percentage limit on the partner page. {% endcomment %}
-            <p><em>{%trans "Excerpt limit: " %}</em></p>
-            {{object}}{% trans " allows a maximum of " %}
-              {% if excerpt_limit %}{{ excerpt_limit }}{% trans " words" %}{% endif %}
-              {% if excerpt_limit and excerpt_limit_percentage %}{% trans " and (or)" %}{% endif %}
-              {% if excerpt_limit_percentage %}{{ excerpt_limit_percentage }}{% trans "% of an article" %}{% endif %}
-              {% trans " be excerpted into a Wikipedia article." %}
+            <ul>
+              {% if excerpt_limit %}
+                <li>
+                  {% comment %} Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
+                  {% blocktrans trimmed %}
+                    {{ object }} allows a maximum of {{ excerpt_limit }} words be excerpted into a Wikipedia article.
+                  {% endblocktrans %}
+                </li>
+              {% endif %}
+              {% if excerpt_limit_percentage %}
+                <li>
+                  {% comment %} Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page. {% endcomment %}
+                  {% blocktrans trimmed %}
+                    {{ object }} allows a maximum of {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
+                  {% endblocktrans %}
+                </li>
+              {% endif %}
+            </p>
           </div>
         </div>
       </li>
