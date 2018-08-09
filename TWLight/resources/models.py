@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
+from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
@@ -199,7 +200,15 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
         help_text=_("Optional instructions for sending application data to "
             "this partner."))
+    
+    excerpt_limit = models.PositiveSmallIntegerField(blank=True, null=True,
+          # Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
+          help_text=_("Optional excerpt limit in terms of number of words per article. Leave empty if no limit."))
 
+    excerpt_limit_percentage   = models.PositiveSmallIntegerField(blank=True, null=True, validators = [MaxValueValidator(100)],
+          # Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
+          help_text=_("Optional excerpt limit in terms of percentage (%) of an article. Leave empty if no limit."))
+          
     bundle = models.NullBooleanField(
         blank=True, null=True, default=False,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can access this as part of the Bundle.
