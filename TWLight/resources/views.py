@@ -66,18 +66,19 @@ class PartnersDetailView(DetailView):
         context['partner_streams'] = partner_streams
         
         if partner_streams.count() > 0:
-            context['total_accounts_available_current'] = {}
+            context['total_accounts_available_stream'] = {}
             context['stream_unique_accepted'] = {}
             
             for stream in partner_streams:
-                total_apps_approved_or_sent_stream = User.objects.filter(
-                                      editor__applications__partner=partner,
-                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
-                                      editor__applications__specific_stream=stream).count()
-                
-                total_accounts_available = stream.accounts_available
-                
-                context['total_accounts_available_current'][stream.name] = total_accounts_available - total_apps_approved_or_sent_stream
+                if stream.accounts_available is not None:
+                    total_apps_approved_or_sent_stream = User.objects.filter(
+                                          editor__applications__partner=partner,
+                                          editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                          editor__applications__specific_stream=stream).count()
+                    
+                    total_accounts_available = stream.accounts_available
+                    
+                    context['total_accounts_available_stream'][stream.name] = total_accounts_available - total_apps_approved_or_sent_stream
                 
                 stream_unique_accepted = User.objects.filter(
                                       editor__applications__partner=partner,
@@ -86,13 +87,15 @@ class PartnersDetailView(DetailView):
                 context['stream_unique_accepted'][stream.name] = stream_unique_accepted
                 
         else:
-            context['partner_streams'] = None
-            
+            context['total_accounts_available_stream'] = None
             context['stream_unique_accepted'] = None
-
-            context['total_accounts_available'] = partner.accounts_available
             
-            context['total_accounts_available_current'] = context['total_accounts_available'] - context['total_apps_approved_or_sent']
+            if partner.accounts_available is not None:
+                context['total_accounts_available'] = partner.accounts_available
+                context['total_accounts_available_partner'] = context['total_accounts_available'] - context['total_apps_approved_or_sent']
+            
+            else:
+                context['total_accounts_available_partner'] = None
 
         context['unique_users'] = User.objects.filter(
             editor__applications__partner=partner).distinct().count()
