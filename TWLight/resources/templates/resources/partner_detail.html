@@ -482,19 +482,12 @@
         {% comment %} Translators: This is the section header for accounts availability numbers for the available stream(s). (e.g. https://wikipedialibrary.wmflabs.org/partners/52/). {% endcomment %}
         {% trans "Accounts availability" %}
       </h3>
-<<<<<<< HEAD
       <ul>
         {% for stream_name, total_accounts in total_accounts_available_stream.items %}
           <li>{{ stream_name }}: {{ total_accounts }}</li>
         {% endfor %}
       </ul>
     {% elif object.accounts_available %}
-=======
-      {% for stream_name, total_accounts in total_accounts_available_stream.items %}
-        <p>{{ stream_name }}: {{ total_accounts }}</p>
-      {% endfor %}
-    {% elif total_accounts_available_partner %}
->>>>>>> 95f61a64734cada5ae4cf04a06c143f0f3688b34
       <h3>
         {% comment %} Translators: This is the label and the number which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). Don't translate {{ accounts_available }}. {% endcomment %}
         {% blocktrans trimmed %}

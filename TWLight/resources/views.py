@@ -91,15 +91,7 @@ class PartnersDetailView(DetailView):
             context['stream_unique_accepted'] = None
             
             if partner.accounts_available is not None:
-<<<<<<< HEAD
                 context['total_accounts_available_partner'] = partner.accounts_available - context['total_apps_approved_or_sent']
-=======
-                context['total_accounts_available'] = partner.accounts_available
-                context['total_accounts_available_partner'] = context['total_accounts_available'] - context['total_apps_approved_or_sent']
-            
-            else:
-                context['total_accounts_available_partner'] = None
->>>>>>> 95f61a64734cada5ae4cf04a06c143f0f3688b34
 
         context['unique_users'] = User.objects.filter(
             editor__applications__partner=partner).distinct().count()
