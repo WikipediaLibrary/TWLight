@@ -191,10 +191,16 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
         help_text=_("Link to terms of use. Required if users must agree to "
             "terms of use to get access; optional otherwise."))
-
-    description = models.TextField(blank=True, null=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
-        help_text=_("Optional description of this partner's resources."))
+            
+    short_description = models.TextField(max_length=1000, blank=True, 
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide a short description of a partner's available resources.
+        help_text=_("Optional short description of this partner's resources."))
+            
+    description = models.TextField("long description", blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide a long description of a partner's available resources.
+        help_text=_("Optional detailed description in addition to the short "
+        "description such as collections, instructions, notes, special "
+        "requirements, alternate access options, unique features, citations notes."))
 
     send_instructions = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
@@ -302,12 +308,16 @@ class Partner(models.Model):
         """Invalidate this partner's pandoc-rendered html from cache"""
         super(Partner, self).save(*args, **kwargs)
         for code in RESOURCE_LANGUAGE_CODES:
+          short_description_cache_key = make_template_fragment_key(
+              'partner_short_description', [code, self.pk]
+          )        
           description_cache_key = make_template_fragment_key(
               'partner_description', [code, self.pk]
           )
           send_instructions_cache_key = make_template_fragment_key(
               'partner_send_instructions', [code, self.pk]
           )
+          cache.delete(short_description_cache_key)
           cache.delete(description_cache_key)
           cache.delete(send_instructions_cache_key)
 
