@@ -57,7 +57,7 @@
       </div>
     </div>
     <hr />
-    {% if partner.description %}
+    {% if partner.short_description %}
       <div class="panel-partner-description">
         {% comment %}
           Cache lifetime should be None, which would be forever since we're
@@ -66,8 +66,8 @@
           fix is in master, but not release.
           https://code.djangoproject.com/ticket/27882
         {% endcomment %}
-        {% cache 31536000 partner_description LANGUAGE_CODE partner.pk %}
-          {{ partner.description | twlight_wikicode2html | safe }}
+        {% cache 31536000 partner_short_description LANGUAGE_CODE partner.pk %}
+          {{ partner.short_description | twlight_wikicode2html | safe }}
         {% endcache %}
       </div>
       <hr />
