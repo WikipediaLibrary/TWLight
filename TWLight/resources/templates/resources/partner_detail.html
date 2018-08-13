@@ -231,15 +231,21 @@
           </div>        
           <div class="timeline-body">
             <ul>
-              {% if excerpt_limit %}
+              {% if excerpt_limit_percentage and excerpt_limit %}
+                <li>
+                  {% comment %} Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page. {% endcomment %}
+                  {% blocktrans trimmed %}
+                    {{ object }} allows a maximum of {{ excerpt_limit }} words and (or) {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
+                  {% endblocktrans %}
+                </li>            
+              {% elif excerpt_limit %}
                 <li>
                   {% comment %} Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
                   {% blocktrans trimmed %}
                     {{ object }} allows a maximum of {{ excerpt_limit }} words be excerpted into a Wikipedia article.
                   {% endblocktrans %}
                 </li>
-              {% endif %}
-              {% if excerpt_limit_percentage %}
+              {% elif excerpt_limit_percentage %}
                 <li>
                   {% comment %} Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page. {% endcomment %}
                   {% blocktrans trimmed %}
