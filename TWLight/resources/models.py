@@ -191,17 +191,17 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
         help_text=_("Link to terms of use. Required if users must agree to "
             "terms of use to get access; optional otherwise."))
-            
-    short_description = models.TextField(max_length=1000, blank=True, 
-        # Translators: In the administrator interface, this text is help text for a field where staff can provide a short description of a partner's available resources.
+
+    short_description = models.TextField(max_length=1000, blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
         help_text=_("Optional short description of this partner's resources."))
-            
-    description = models.TextField("long description", blank=True, null=True,
+
+    description = models.TextField("long description", blank=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide a long description of a partner's available resources.
         help_text=_("Optional detailed description in addition to the short "
         "description such as collections, instructions, notes, special "
         "requirements, alternate access options, unique features, citations notes."))
-
+        
     send_instructions = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
         help_text=_("Optional instructions for sending application data to "
