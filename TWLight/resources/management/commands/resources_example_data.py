@@ -38,6 +38,7 @@ class Command(BaseCommand):
                 occupation = self.chance(True, False, 10),
                 affiliation = self.chance(True, False, 10),
                 agreement_with_terms_of_use = self.chance(True, False, 10),
+                mutually_exclusive = False
                 )
 
             # ManyToMany relationships can't be set until the partner object has

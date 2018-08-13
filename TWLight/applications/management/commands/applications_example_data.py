@@ -1,4 +1,5 @@
 import datetime
+from dateutil.relativedelta import relativedelta
 from faker import Faker
 import random
 
@@ -22,6 +23,8 @@ class Command(BaseCommand):
         available_partners = Partner.objects.all()
         # Don't fire any applications from the superuser.
         all_users = User.objects.exclude(is_superuser=True)
+
+        import_date = datetime.datetime(2017, 7, 17, 0, 0, 0)
 
         for _ in range(num_applications):
             random_user = random.choice(all_users)
@@ -50,7 +53,6 @@ class Command(BaseCommand):
             # Imported applications have very specific information, and were
             # all imported on the same date.
             imported = self.chance(True, False, 50)
-            import_date = datetime.datetime(2017, 7, 17, 0, 0, 0)
 
             if imported:
                 app.status = Application.SENT
@@ -58,6 +60,7 @@ class Command(BaseCommand):
                 app.date_closed = import_date
                 app.rationale = "Imported on 2017-07-17"
                 app.comments = "Imported on 2017-07-17"
+                app.imported = True
             else:
                 app.status = random.choice(Application.STATUS_CHOICES)[0]
                 app.date_created = fake.date_time_between(
@@ -67,22 +70,25 @@ class Command(BaseCommand):
                 app.rationale = fake.paragraph(nb_sentences=3)
                 app.comments = fake.paragraph(nb_sentences=2)
 
+            # For closed applications, assign date_closed and date_open
+            if app.status in Application.FINAL_STATUS_LIST:
+                if not imported:
+                    app.date_closed = fake.date_time_between(
+                        start_date = app.date_created,
+                        end_date = app.date_created + relativedelta(years=1),
+                        tzinfo=None)
+                    app.days_open = (app.date_closed - app.date_created).days
+
             # Assign sent_by if this is a non-imported sent applications
             if app.status == Application.SENT:
                 if not imported:
                     app.sent_by = random_partner.coordinator
-                    app.date_closed = fake.date_time_between(
-                        start_date = app.date_created,
-                        end_date = "now",
-                        tzinfo=None)
-                else:
-                    app.date_closed = import_date
 
             app.save()
 
-        # Renew a selection of apps.
-        all_apps = Application.objects.all()
-        num_to_renew = int(num_applications*0.3)
+        # Renew a selection of sent apps.
+        all_apps = Application.objects.filter(status=Application.SENT)
+        num_to_renew = int(all_apps.count()*0.5)
         for app_to_renew in random.sample(all_apps, num_to_renew):
             app_to_renew.renew()
 
