@@ -49,8 +49,8 @@
       {% comment %} Translators: This message is shown when applications exceed the number of accounts available for each stream(s). {% endcomment %}
       {% blocktrans %}Application(s) for <strong>{{ unavailable_streams }}</strong> if sent, will exceed the total available accounts for the stream(s). Please proceed at your own discretion.{% endblocktrans %}
     </div>
-  {% elif total_apps_approved_or_sent_or_ready_to_send %}
-        {% if object.accounts_available < total_apps_approved_or_sent_or_ready_to_send %}
+  {% elif total_apps_approved_or_sent %}
+        {% if object.accounts_available < total_apps_approved_or_sent %}
           <div class="well hidden-xs">
             {% comment %} Translators: This message is shown when applications exceed the number of accounts available. {% endcomment %}
             {% blocktrans %}Application(s) for {{ object }}, if sent, will exceed the total available accounts for the partner. Please proceed at your own discretion.{% endblocktrans %}
