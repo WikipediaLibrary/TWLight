@@ -71,7 +71,23 @@ class Command(BaseCommand):
         for unavailable_partner in random.sample(all_partners, 5):
             unavailable_partner.status = Partner.NOT_AVAILABLE
             unavailable_partner.save()
-
+            
+        # Set 5% random partners to have excerpt limit in words
+        for words in random.sample(all_partners, 10):
+            words.excerpt_limit = random.randint(100, 250)
+            words.save()
+            
+        # Set 5% random partners to have excerpt limit in words
+        for percentage in random.sample(all_partners, 10):
+            percentage.excerpt_limit_percentage = random.randint(5, 50)
+            percentage.save()
+            
+        # Set 1 random partner to have excerpt limits both in words and percentage
+        for percentage_words in random.sample(all_partners, 1):
+            percentage_words.excerpt_limit_percentage = random.randint(5, 50)
+            percentage_words.excerpt_limit = random.randint(100, 250)
+            percentage_words.save()
+            
         available_partners = all_partners.exclude(status= Partner.NOT_AVAILABLE)
 
         # Set 10 random available partners to be waitlisted
