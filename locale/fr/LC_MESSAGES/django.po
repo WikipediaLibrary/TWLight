@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 18:41+0000\n"
+"POT-Creation-Date: 2018-08-13 10:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME \n"
 "Language-Team: LANGUAGE \n"
@@ -31,32 +31,44 @@ msgstr ""
 msgid "Apply"
 msgstr "Soummetre la demande"
 
-#. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
+#. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:193
 msgid "About you"
 msgstr "Vos données personnelles"
 
+#. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
+#: TWLight/applications/forms.py:201
+#, python-brace-format
+msgid "Requested by: {partner_list}"
+msgstr ""
+
 #. Translators: This this note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:206
+#: TWLight/applications/forms.py:207
 #, python-brace-format
 msgid ""
 "<p><small><i>Your personal data will be processed according to our <a href="
 "\"{terms_url}\">privacy policy</a>.</i></small></p>"
 msgstr ""
 
-#. Translators: This goes into a form legend that acts as the title of a form or fieldset for a partner application. It lets the user know which partner application they are entering data for.
-#: TWLight/applications/forms.py:217
+#. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
+#: TWLight/applications/forms.py:218
 #, python-brace-format
 msgid "Your application to {partner}"
 msgstr "Votre demande à {partner}"
 
-#: TWLight/applications/forms.py:318 TWLight/users/admin.py:40
+#. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering.
+#: TWLight/applications/forms.py:254
+#, python-brace-format
+msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
+msgstr ""
+
+#: TWLight/applications/forms.py:320 TWLight/users/admin.py:40
 #: TWLight/users/models.py:113
 msgid "Username"
 msgstr "Nom d'utilisateur dans Wikipédia"
 
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:319 TWLight/applications/helpers.py:95
+#: TWLight/applications/forms.py:321 TWLight/applications/helpers.py:95
 msgid "Partner name"
 msgstr "Nom du partenaire"
 
@@ -199,7 +211,7 @@ msgstr "En discussion"
 msgid "Approved"
 msgstr "Approuvé"
 
-#. Translators: This is the status of an application which has been denied by a reviewer.
+#. Translators: This is the status of an application which has been declined by a reviewer.
 #: TWLight/applications/models.py:42
 msgid "Not approved"
 msgstr "Non approuvé"
@@ -209,7 +221,7 @@ msgstr "Non approuvé"
 msgid "Sent to partner"
 msgstr "Envoyé au partenaire"
 
-#. Translators: Shown in the administrator interface for editing applications directly. Admins should rarely ever have to change this number.
+#. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
 #: TWLight/applications/models.py:60 TWLight/applications/models.py:71
 #, fuzzy
 #| msgid "Please do not override this field! It is set automatically."
@@ -316,11 +328,12 @@ msgstr "Renouvellement?"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
 #: TWLight/applications/templates/applications/application_evaluation.html:122
-#, python-format
-msgid ""
-"\n"
-"            Yes (<a href=\"%(parent_url)s\">previous application</a>)\n"
-"          "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "            Yes (<a href=\"%(parent_url)s\">previous application</a>)\n"
+#| "          "
+msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
 msgstr ""
 "\n"
 "            Oui (<a href=\"%(parent_url)s\">demande précédente</a>)\n"
@@ -1290,9 +1303,13 @@ msgstr "Non disponible"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
 #: TWLight/resources/models.py:178
+#, fuzzy
+#| msgid ""
+#| "Should this Partner be displayed to end users? Is it open for "
+#| "applications right now?"
 msgid ""
-"Should this Partner be displayed to end users? Is it open for applications "
-"right now?"
+"Should this Partner be displayed to users? Is it open for applications right "
+"now?"
 msgstr ""
 "Ce partenaire devrait-il être affiché aux utilisateurs? Est-ce ouvert pour "
 "les applications en ce moment?"
@@ -1326,19 +1343,20 @@ msgstr ""
 msgid "Optional description of this partner's resources."
 msgstr "Description facultative des ressources de ce partenaire"
 
-#: TWLight/resources/models.py:199
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
+#: TWLight/resources/models.py:200
 #, fuzzy
 #| msgid "The user who sent this application to the partner"
 msgid "Optional instructions for sending application data to this partner."
 msgstr "Instructions facultatives pour l'envoi de données à ce partenaire"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can access this as part of the Bundle.
-#: TWLight/resources/models.py:205
+#: TWLight/resources/models.py:206
 msgid "Is this partner a part of the Bundle?"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
-#: TWLight/resources/models.py:211
+#: TWLight/resources/models.py:212
 msgid ""
 "If True, users can only apply for one Stream at a time from this Partner. If "
 "False, users can apply for multiple Streams at a time. This field must be "
@@ -1351,18 +1369,18 @@ msgstr ""
 "ont plusieurs collections, mais autrement peut être laissée en blanc."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
-#: TWLight/resources/models.py:218
+#: TWLight/resources/models.py:219
 msgid "Select all languages in which this partner publishes content."
 msgstr ""
 "Sélectionnez toutes les langues dans lesquelles ce partenaire publie du "
 "contenu."
 
-#: TWLight/resources/models.py:225
+#: TWLight/resources/models.py:226
 msgid "Old Tags"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
-#: TWLight/resources/models.py:236
+#: TWLight/resources/models.py:237
 #, fuzzy
 #| msgid ""
 #| "Link to terms of use. Required if users must agree to terms of use to get "
@@ -1376,21 +1394,21 @@ msgstr ""
 "sinon facultatif"
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their real name when applying
-#: TWLight/resources/models.py:240
+#: TWLight/resources/models.py:241
 msgid "Mark as true if this partner requires applicant names."
 msgstr ""
 "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient "
 "leurs noms."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify the country in which they live when applying.
-#: TWLight/resources/models.py:243
+#: TWLight/resources/models.py:244
 msgid "Mark as true if this partner requires applicant countries of residence."
 msgstr ""
 "Marquer comme vrai si ce partenaire exige que les demandeurs spécifient "
 "leurs pays de résidence."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a title for the resource they want to access when applying.
-#: TWLight/resources/models.py:247
+#: TWLight/resources/models.py:248
 msgid ""
 "Mark as true if this partner requires applicants to specify the title they "
 "want to access."
@@ -1399,7 +1417,7 @@ msgstr ""
 "titre qu'ils veulent accéder."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a collection of resources when applying.
-#: TWLight/resources/models.py:251
+#: TWLight/resources/models.py:252
 msgid ""
 "Mark as true if this partner requires applicants to specify the database "
 "they want to access."
@@ -1408,7 +1426,7 @@ msgstr ""
 "collection qu'ils veulent accéder."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their occupation when applying.
-#: TWLight/resources/models.py:255
+#: TWLight/resources/models.py:256
 msgid ""
 "Mark as true if this partner requires applicants to specify their occupation."
 msgstr ""
@@ -1416,7 +1434,7 @@ msgstr ""
 "profession."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their institutional affiliation (e.g. university) when applying.
-#: TWLight/resources/models.py:259
+#: TWLight/resources/models.py:260
 msgid ""
 "Mark as true if this partner requires applicants to specify their "
 "institutional affiliation."
@@ -1425,7 +1443,7 @@ msgstr ""
 "affiliation institutionnelle."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
-#: TWLight/resources/models.py:263
+#: TWLight/resources/models.py:264
 msgid ""
 "Mark as true if this partner requires applicants to agree with the partner's "
 "terms of use."
@@ -1433,8 +1451,8 @@ msgstr ""
 "Marquer comme vrai si ce partenaire exige que les demandeurs acceptent leur "
 "conditions d'utilisation."
 
-#. Translators: TODO
-#: TWLight/resources/models.py:267
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
+#: TWLight/resources/models.py:268
 #, fuzzy
 #| msgid ""
 #| "Mark as true if this partner requires applicants to agree with the "
@@ -1447,7 +1465,7 @@ msgstr ""
 "conditions d'utilisation."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:319
+#: TWLight/resources/models.py:320
 #, fuzzy
 #| msgid "Optional URL of an image that can be used to represent this partner."
 msgid "Optional image file that can be used to represent this partner."
@@ -1456,7 +1474,7 @@ msgstr ""
 "partenaire"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:347
+#: TWLight/resources/models.py:348
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
@@ -1467,12 +1485,12 @@ msgstr ""
 "sont chargés de les présenter dans un format qui peut être internationalisé."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:352
+#: TWLight/resources/models.py:353
 msgid "Optional description of this stream's resources."
 msgstr "Description facultative de cette collection."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:393
+#: TWLight/resources/models.py:394
 #, fuzzy
 #| msgid ""
 #| "Organizational role or job title. This is NOT intended to be used for "
@@ -1485,7 +1503,7 @@ msgstr ""
 "autre titres. Facultatif."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:400
+#: TWLight/resources/models.py:401
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
@@ -1616,11 +1634,8 @@ msgstr "Exigences particulières pour les demandeurs"
 #| " %(publisher)s requires that you agree with its terms\n"
 #| " of use.\n"
 msgid ""
-"\n"
-"                    %(publisher)s requires that you agree with its <a href="
-"\"%(url)s\">terms\n"
-"                    of use</a>.\n"
-"                  "
+"%(publisher)s requires that you agree with its <a href=\"%(url)s\">terms of "
+"use</a>."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous acceptez les conditions\n"
@@ -1632,10 +1647,7 @@ msgstr ""
 #| msgid ""
 #| "\n"
 #| " %(publisher)s requires that you provide your real name.\n"
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your real name.\n"
-"                  "
+msgid "%(publisher)s requires that you provide your real name."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous fournissiez votre nom.\n"
@@ -1646,11 +1658,7 @@ msgstr ""
 #| msgid ""
 #| "\n"
 #| " %(publisher)s requires that you provide your country of residence.\n"
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your country of "
-"residence.\n"
-"                  "
+msgid "%(publisher)s requires that you provide your country of residence."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous spécifiez votre pays de résidence.\n"
@@ -1661,11 +1669,7 @@ msgstr ""
 #| msgid ""
 #| "\n"
 #| " %(publisher)s requires that you provide your occupation.\n"
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your "
-"occupation.\n"
-"                  "
+msgid "%(publisher)s requires that you provide your occupation."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous fournissiez votre profession.\n"
@@ -1676,11 +1680,7 @@ msgstr ""
 #| msgid ""
 #| "\n"
 #| " %(publisher)s requires that you provide your institutional affiliation.\n"
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your "
-"institutional affiliation.\n"
-"                  "
+msgid "%(publisher)s requires that you provide your institutional affiliation."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous fournissiez votre affiliation institutionnelle\n"
@@ -1693,11 +1693,8 @@ msgstr ""
 #| " %(publisher)s requires that you specify the title that you want\n"
 #| " to access.\n"
 msgid ""
-"\n"
-"                    %(publisher)s requires that you specify a particular "
-"title that you want\n"
-"                    to access.\n"
-"                  "
+"%(publisher)s requires that you specify a particular title that you want to "
+"access."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous spécifiez le titre que vous souhaitez accéder\n"
@@ -1711,13 +1708,8 @@ msgstr ""
 #| " want to access. You may only apply for access to one collection at a\n"
 #| " time.\n"
 msgid ""
-"\n"
-"                      %(publisher)s requires that you specify a specific "
-"collection that you\n"
-"                      want to access. You may only apply for access to one "
-"collection at a\n"
-"                      time.\n"
-"                    "
+"%(publisher)s requires that you specify a specific collection that you want "
+"to access. You may only apply for access to one collection at a time."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous spécifiez la collection que vous souhaitez "
@@ -1731,11 +1723,8 @@ msgstr ""
 #| " %(publisher)s requires that you specify one or more specific\n"
 #| " collections that you want to access.\n"
 msgid ""
-"\n"
-"                      %(publisher)s requires that you specify one or more "
-"specific\n"
-"                      collections that you want to access.\n"
-"                    "
+"%(publisher)s requires that you specify one or more specific collections "
+"that you want to access."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous spécifiez une ou plusieurs collections que vous "
@@ -1749,11 +1738,8 @@ msgstr ""
 #| " %(publisher)s requires that you specify the title that you want\n"
 #| " to access.\n"
 msgid ""
-"\n"
-"                    %(publisher)s requires that you sign up for an account "
-"before applying\n"
-"                    for access.\n"
-"                  "
+"%(publisher)s requires that you sign up for an account before applying for "
+"access."
 msgstr ""
 "\n"
 "%(publisher)s exige que vous spécifiez le titre que vous souhaitez accéder\n"
@@ -1920,12 +1906,10 @@ msgid "More info"
 msgstr "Plus d'info"
 
 #: TWLight/resources/templates/resources/partner_users.html:7
-#, python-format
-msgid ""
-"\n"
-"  %(object)s approved users\n"
-"  "
-msgstr ""
+#, fuzzy, python-format
+#| msgid "Partners with approved, unsent applications"
+msgid "%(partner)s approved users"
+msgstr "Partenaires avec applications approuvés non encore envoyées"
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was made.
 #: TWLight/resources/templates/resources/partner_users.html:29
@@ -1973,8 +1957,12 @@ msgstr ""
 "partenaires qui ne sont pas encore disponibles pour tous les utilisateurs."
 
 #: TWLight/resources/views.py:49
+#, fuzzy
+#| msgid ""
+#| "This Partner is not available. You can see it because you are a staff "
+#| "member, but it is not visible to non-staff users."
 msgid ""
-"This Partner is not available. You can see it because you are a staff "
+"This partner is not available. You can see it because you are a staff "
 "member, but it is not visible to non-staff users."
 msgstr ""
 "Ce partenaire n'est pas disponible. Vous pouvez le voir parce que vous êtes "
@@ -1982,12 +1970,12 @@ msgstr ""
 "utilisateurs."
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:167
+#: TWLight/resources/views.py:169
 msgid "This partner is now waitlisted"
 msgstr "Ce partenaire est maintenant en attente"
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:171
+#: TWLight/resources/views.py:173
 #, fuzzy
 #| msgid "Partners with approved, unsent applications"
 msgid "This partner is now available for applications"
@@ -2423,10 +2411,7 @@ msgstr "Carte de bibliothèque Wikipédia"
 #| "\n"
 #| "\t\t\t\t\t\t\t\tHi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
 #| "\t\t\t\t\t\t\t"
-msgid ""
-"\n"
-"                Hi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
-"              "
+msgid "Hi, <a href=\"%(home_url)s\">%(username)s</a>!"
 msgstr ""
 "\n"
 "\t\t\t\t\t\t\t\tBonjour, <a href=\"%(home_url)s\">%(username)s</a>!\n"
@@ -2977,11 +2962,9 @@ msgstr "Données d'utilisateur"
 #| " in their preferred language.\n"
 #| " It was last updated on %(last_updated_date)s.\n"
 msgid ""
-"\n"
-"      Information with an * was retrieved from Wikipedia directly.\n"
-"      Other information was entered directly by users or site admins,\n"
-"      in their preferred language.\n"
-"    "
+"Information with an * was retrieved from Wikipedia directly. Other "
+"information was entered directly by users or site admins, in their preferred "
+"language."
 msgstr ""
 "\n"
 "      Informations avec * a été récupéré à partir de Wikipédia.\n"
@@ -2997,10 +2980,7 @@ msgstr ""
 #| msgid ""
 #| "\n"
 #| " %(username)s has coordinator privileges on this site.\n"
-msgid ""
-"\n"
-"              %(username)s has coordinator privileges on this site.\n"
-"            "
+msgid "%(username)s has coordinator privileges on this site."
 msgstr ""
 "\n"
 "%(username)s a des privilèges de coordinateur sur ce site.\n"
@@ -3037,7 +3017,9 @@ msgid "Contributions"
 msgstr "Contributions"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
+#. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/editor_detail_data.html:47
+#: TWLight/users/views.py:258
 #, fuzzy
 #| msgid "(update)"
 msgid "Update"
@@ -3699,10 +3681,8 @@ msgstr ""
 #| " Hi, %(username)s! You don't have a Wikipedia editor profile attached\n"
 #| " to your account here, so you are probably a site administrator.\n"
 msgid ""
-"\n"
-"      Hi, %(username)s! You don't have a Wikipedia editor profile attached\n"
-"      to your account here, so you are probably a site administrator.\n"
-"    "
+"Hi, %(username)s! You don't have a Wikipedia editor profile attached to your "
+"account here, so you are probably a site administrator."
 msgstr ""
 "\n"
 "Bonjour, %(username)s! Vous n'avez pas de compte Wikipédia attaché à votre "
@@ -3747,16 +3727,12 @@ msgstr ""
 "coordonnateurs évaluent votre demande."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
+#. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:241 TWLight/users/views.py:305
-#: TWLight/users/views.py:349
+#: TWLight/users/views.py:241 TWLight/users/views.py:306
+#: TWLight/users/views.py:350
 msgid "You must be logged in to do that."
 msgstr "Vous devez être connecté pour faire cela"
-
-#. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/views.py:258
-msgid "Update information"
-msgstr "Mettre à jour"
 
 #. Translators: Shown to the user when they successfully modify their personal information.
 #: TWLight/users/views.py:270
@@ -3764,13 +3740,13 @@ msgid "Your information has been updated."
 msgstr "Vos informations ont été mis à jour."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:315
+#: TWLight/users/views.py:316
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Votre courriel a été changé à {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:321
+#: TWLight/users/views.py:322
 #, fuzzy
 #| msgid ""
 #| "You may explore the site, but you will not be able to apply for access "
@@ -3783,12 +3759,12 @@ msgstr ""
 "pourrez pasdemander l'accès aux ressources des partenaires sans courriel."
 
 #. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/views.py:363
+#: TWLight/users/views.py:364
 msgid "Confirm"
 msgstr ""
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:505
+#: TWLight/users/views.py:506
 #, fuzzy
 #| msgid ""
 #| "You may explore the site, but you will not be able to apply for access "
@@ -3802,7 +3778,7 @@ msgstr ""
 "avec les conditions d'utilisation."
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:510
+#: TWLight/users/views.py:511
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
@@ -3859,6 +3835,9 @@ msgstr "{username} a demandé l'accès à <a href=\"{url}\">{partner}</a>"
 #| msgid "{username} received access to {partner}"
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr "{username} a reçu l'accès à <a href=\"{url}\">{partner}"
+
+#~ msgid "Update information"
+#~ msgstr "Mettre à jour"
 
 #~ msgid "You have your preferences enabled to receive email on your home wiki"
 #~ msgstr ""
