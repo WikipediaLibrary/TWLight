@@ -172,15 +172,13 @@
               doesn't allow for None to be passed from here into cache.  The
               fix is in master, but not release.
               https://code.djangoproject.com/ticket/27882
-              We filter out details and summary tags so that we always see
-              the full content on the details page.
             {% endcomment %}
             {% cache 31536000 partner_short_description LANGUAGE_CODE object.pk %}
               {{ object.short_description | twlight_wikicode2html | safe }}
             {% endcache %}
             </p>
           {% else %}
-            {% comment %} Translators: If a partner has no short_description written, this message is shown in the Description field on the partner page. {% endcomment %}
+            {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
             {% trans "Description not available." %}
           {% endif %}
           {% if object.tags.count > 0 %}
@@ -211,14 +209,10 @@
               doesn't allow for None to be passed from here into cache.  The
               fix is in master, but not release.
               https://code.djangoproject.com/ticket/27882
-              We filter out details and summary tags so that we always see
-              the full content on the details page.
             {% endcomment %}
-            {% filter twlight_removetags:"details summary" %}
-              {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
-                {{ object.description | twlight_wikicode2html | safe }}
-              {% endcache %}
-            {% endfilter %}
+            {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
+              {{ object.description | twlight_wikicode2html | safe }}
+            {% endcache %}
             </p>
           </div>
         </div>
