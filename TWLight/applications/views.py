@@ -898,7 +898,7 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
                                           editor__applications__partner=partner,
                                           editor__applications__status__in=(Application.APPROVED, Application.SENT),
                                           editor__applications__specific_stream=stream).count()
-                    after_distribution = stream.accounts_available - total_apps_approved_or_sent_stream - stream_outputs.count(stream)
+                    after_distribution = stream.accounts_available - total_apps_approved_or_sent_stream
 
                     if after_distribution < 0 and (stream in stream_outputs):
                         list_unavailable_streams.append(stream.name)
@@ -910,11 +910,12 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
         else:
             context['unavailable_streams'] = None
             
+            #Provide context to template only if accounts_available field is set
             if partner.accounts_available is not None:
-                context['total_apps_approved_or_sent_or_ready_to_send'] = apps.filter(partner=partner).count() + total_apps_approved_or_sent
+                context['total_apps_approved_or_sent'] = total_apps_approved_or_sent
                 
             else:
-                context['total_apps_approved_or_sent_or_ready_to_send'] = None
+                context['total_apps_approved_or_sent'] = None
 
         return context
 
