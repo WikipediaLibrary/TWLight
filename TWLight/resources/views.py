@@ -10,7 +10,7 @@ from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
                                     get_data_count_by_month,
                                     get_users_by_partner_by_month)
-from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf
+from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .models import Partner, Stream
 
@@ -240,3 +240,11 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
             context['partner_streams'] = False
 
         return context
+
+
+
+class PartnerSuggestView(EditorsOnly, DetailView):
+    model = Partner
+    
+    def get_context_data(self, **kwargs):
+      return context
