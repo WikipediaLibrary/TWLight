@@ -19,6 +19,7 @@ from TWLight.applications.urls import urlpatterns as applications_urls
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
 from TWLight.graphs.views import DashboardView
 from TWLight.resources.urls import urlpatterns as partners_urls
+from TWLight.resources.views import PartnerSuggestView
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
@@ -65,6 +66,9 @@ urlpatterns = [
 
     url(r'^dashboard/$', DashboardView.as_view(), name='dashboard'),
     url(r'^terms/$', TermsView.as_view(), name='terms'),
+    url(r'^suggest/$',
+        PartnerSuggestView.as_view(),
+        name='suggest'),
     # Cached for 24 hours.
     url(r'^i18n-whitelist$', cache_page(86400)(LanguageWhiteListView.as_view()), name='i18n_whitelist'),
     url(r'^$', HomePageView.as_view(), name='homepage'),
