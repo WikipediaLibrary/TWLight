@@ -112,6 +112,7 @@ class Command(BaseCommand):
         # If we happened to not create any partners with streams,
         # create one deliberately.
         if stream_partners.count() == 0:
+            stream_partners = random.sample(all_partners, 1)
             stream_partners[0].specific_stream = True
             stream_partners[0].save()
 
