@@ -189,19 +189,7 @@
             {% endfor %}
             </div>
           {% endif %}
-        </div>
-      </div>      
-    </li>
-    {% comment %} 
-      Additional info such as collections, instructions, notes, specialrequirements, 
-      alternate access options, unique features, citations notes for a particular partner. 
-    {% endcomment %}
-    {% if object.description %}
-      <li class="timeline-inverted">
-        <div class="timeline-badge"><i class="fa fa-database" aria-hidden="true"></i>
-        </div>
-        <div class="timeline-panel">
-          <div class="timeline-body">
+          {% if object.description %}
             <p>
             {% comment %}
               Cache lifetime should be None, which would be forever since we're
@@ -214,10 +202,10 @@
               {{ object.description | twlight_wikicode2html | safe }}
             {% endcache %}
             </p>
-          </div>
+          {% endif %}
         </div>
-      </li>
-    {% endif %}
+      </div>      
+    </li>
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-language"></i>
       </div>
