@@ -60,8 +60,12 @@ class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
         return super(PartnerAdmin, self).formfield_for_foreignkey(
             db_field, request, **kwargs)
 
+    def language_strings(self, object):
+        return [str(lang) for lang in object.languages.all()]
+    language_strings.short_description = "Languages"
+
     search_fields = ('company_name',)
-    list_display = ('company_name', 'short_description', 'id', 'get_languages')
+    list_display = ('company_name', 'short_description', 'id', 'language_strings')
     inlines = [PartnerLogoInline]
 
 admin.site.register(Partner, PartnerAdmin)
