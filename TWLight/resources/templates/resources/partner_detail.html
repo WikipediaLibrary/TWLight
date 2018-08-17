@@ -269,7 +269,7 @@
       </li>
     {% endif %}
     {% endwith %}
-    {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.specific_stream or object.account_email %}
+    {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.account_email %}
       <li class="timeline-inverted">
         <div class="timeline-badge"><i class="fa fa-exclamation"></i>
         </div>
@@ -334,25 +334,6 @@
                     {{ publisher }} requires that you specify a particular title that you want
                     to access.
                   {% endblocktrans %}
-                </li>
-              {% endif %}
-
-              {% if object.specific_stream %}
-                <li>
-                  {% if object.mutually_exclusive %}
-                    {% comment %} Translators: If a user must select a specific collection of resources to apply for, they see this message. Don't translate {{ publisher }}. {% endcomment %}
-                    {% blocktrans trimmed with publisher=object.company_name %}
-                      {{ publisher }} requires that you specify a specific collection that you
-                      want to access. You may only apply for access to one collection at a
-                      time.
-                    {% endblocktrans %}
-                  {% else %}
-                    {% comment %} Translators: If a user must select one or more collections of resources to apply for, they see this message. Don't translate {{ publisher }}. {% endcomment %}
-                    {% blocktrans trimmed with publisher=object.company_name %}
-                      {{ publisher }} requires that you specify one or more specific
-                      collections that you want to access.
-                    {% endblocktrans %}
-                  {% endif %}
                 </li>
               {% endif %}
 
