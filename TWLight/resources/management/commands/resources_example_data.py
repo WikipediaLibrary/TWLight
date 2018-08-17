@@ -27,7 +27,7 @@ class Command(BaseCommand):
             partner = PartnerFactory(
                 company_location = random.choice(list(countries)),
                 renewals_available = random.choice([True, False]),
-                description = fake.paragraph(nb_sentences=4),
+                short_description = fake.paragraph(nb_sentences=4),
                 send_instructions = fake.paragraph(nb_sentences=2),
                 coordinator = self.chance(
                     random.choice(coordinators), None, 20),
@@ -96,6 +96,11 @@ class Command(BaseCommand):
             waitlisted_partner.status = Partner.WAITLIST
             waitlisted_partner.save()
 
+        # Set 25 random partners to have a long description
+        for long_description in random.sample(all_partners, 25):
+            long_description.description = fake.paragraph(nb_sentences = 10)
+            long_description.save()
+
         # Set 10 random available partners to be featured
         for featured_partner in random.sample(available_partners, 10):
             featured_partner.featured = True
@@ -107,6 +112,7 @@ class Command(BaseCommand):
         # If we happened to not create any partners with streams,
         # create one deliberately.
         if stream_partners.count() == 0:
+            stream_partners = random.sample(all_partners, 1)
             stream_partners[0].specific_stream = True
             stream_partners[0].save()
 

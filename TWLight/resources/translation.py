@@ -4,7 +4,7 @@ from .models import Partner, Stream, TextFieldTag
 
 # See https://django-modeltranslation.readthedocs.io/en/latest/registration.html
 class PartnerTranslationOptions(TranslationOptions):
-    fields = ('description', 'send_instructions')
+    fields = ('short_description', 'description', 'send_instructions')
 
 translator.register(Partner, PartnerTranslationOptions)
 

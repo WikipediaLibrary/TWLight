@@ -164,7 +164,7 @@
       </div>
       <div class="timeline-panel">
         <div class="timeline-body">
-          {% if object.description %}
+          {% if object.short_description %}
             <p>
             {% comment %}
               Cache lifetime should be None, which would be forever since we're
@@ -172,14 +172,10 @@
               doesn't allow for None to be passed from here into cache.  The
               fix is in master, but not release.
               https://code.djangoproject.com/ticket/27882
-              We filter out details and summary tags so that we always see
-              the full content on the details page.
             {% endcomment %}
-            {% filter twlight_removetags:"details summary" %}
-              {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
-                {{ object.description | twlight_wikicode2html | safe }}
-              {% endcache %}
-            {% endfilter %}
+            {% cache 31536000 partner_short_description LANGUAGE_CODE object.pk %}
+              {{ object.short_description | twlight_wikicode2html | safe }}
+            {% endcache %}
             </p>
           {% else %}
             {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
@@ -192,6 +188,20 @@
               {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
             {% endfor %}
             </div>
+          {% endif %}
+          {% if object.description %}
+            <p>
+            {% comment %}
+              Cache lifetime should be None, which would be forever since we're
+              invalidating on update. However, as 2017-04-06 a bug in django
+              doesn't allow for None to be passed from here into cache.  The
+              fix is in master, but not release.
+              https://code.djangoproject.com/ticket/27882
+            {% endcomment %}
+            {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
+              {{ object.description | twlight_wikicode2html | safe }}
+            {% endcache %}
+            </p>
           {% endif %}
         </div>
       </div>      
