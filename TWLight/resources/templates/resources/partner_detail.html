@@ -216,7 +216,7 @@
         </div>
       </div>      
     </li>
-    {% if object.additional_resources %}    
+    {% if object.additional_resources %}
       <li class="timeline-inverted">
         <div class="timeline-badge"><i class="fa fa-file"></i>
         </div>
@@ -229,14 +229,10 @@
               doesn't allow for None to be passed from here into cache.  The
               fix is in master, but not release.
               https://code.djangoproject.com/ticket/27882
-              We filter out details and summary tags so that we always see
-              the full content on the details page.
             {% endcomment %}
-            {% filter twlight_removetags:"details summary" %}
               {% cache 31536000 partner_additional_resources LANGUAGE_CODE object.pk %}
                 {{ object.additional_resources | twlight_wikicode2html | safe }}
               {% endcache %}
-            {% endfilter %}
             </p>
           </div>
         </div>
