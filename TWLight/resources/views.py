@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponseRedirect
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, View
 from django_filters.views import FilterView
@@ -9,7 +10,8 @@ from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
                                     get_data_count_by_month,
-                                    get_users_by_partner_by_month)
+                                    get_users_by_partner_by_month,
+                                    get_earliest_creation_date)
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf
 
 from .models import Partner, Stream
@@ -88,6 +90,23 @@ class PartnersDetailView(DetailView):
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.filter(partner=partner)
             )
+
+        earliest_date = get_earliest_creation_date(
+                Application.objects.filter(partner=partner)
+            )
+        if earliest_date:
+            current_date = timezone.now().date()
+            days_since_earliest_application = (current_date - earliest_date).days
+
+            if days_since_earliest_application < 60:
+                # Less than 2 months of data
+                context['group_by'] = 'day'
+            elif days_since_earliest_application < 1095:
+                # Less than 3 years of data
+                context['group_by'] = 'month'
+            else:
+                # More than 3 years of data
+                context['group_by'] = 'year'
 
         context['signups_time_data'] = get_data_count_by_month(
                 Application.objects.filter(partner=partner)

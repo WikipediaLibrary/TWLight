@@ -519,7 +519,7 @@
     <div style="clear:both;"></div>
     <div id="signups-time-graph" style="width:90%;height:300px"></div>
 
-    {% if total_apps_approved > 0 %}
+    {% if total_apps_approved_or_sent > 0 %}
       {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time. {% endcomment %}
       <h4>{% trans "Approved applications only" %}</h4> <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
       <div style="clear:both;"></div>
@@ -550,7 +550,7 @@
       var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {
         xaxis: {
           mode: "time",
-          tickSize: [1, 'month'],
+          tickSize: [1, '{{ group_by }}'],
         },
         yaxis: {
           min: 0,
@@ -567,7 +567,7 @@
         var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
           xaxis: {
             mode: "time",
-            tickSize: [1, 'month'],
+            tickSize: [1, '{{ group_by }}'],
           },
           yaxis: {
             min: 0,
@@ -581,7 +581,7 @@
           $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
             xaxis: {
               mode: "time",
-              tickSize: [1, 'month'],
+              tickSize: [1, '{{ group_by }}'],
             },
             yaxis: {
               min: 0,
@@ -599,7 +599,7 @@
       var users_time_plot = $.plot(users_time_graph, [users_time_data], {
         xaxis: {
           mode: "time",
-          tickSize: [1, 'month'],
+          tickSize: [1, '{{ group_by }}'],
         },
         yaxis: {
           min: 0,
@@ -626,7 +626,7 @@
           $.plot(signups_time_graph, [signups_time_data], {
             xaxis: {
               mode: "time",
-              tickSize: [1, 'month'],
+              tickSize: [1, '{{ group_by }}'],
             },
             yaxis: {
               min: 0,
@@ -639,7 +639,7 @@
           $.plot(users_time_graph, [users_time_data], {
             xaxis: {
               mode: "time",
-              tickSize: [1, 'month'],
+              tickSize: [1, '{{ group_by }}'],
             },
             yaxis: {
               min: 0,
