@@ -101,6 +101,11 @@ class Command(BaseCommand):
             long_description.description = fake.paragraph(nb_sentences = 10)
             long_description.save()
 
+        # Set 15 random partners to have an additional_resource
+        for tutorial in random.sample(all_partners, 25):
+            tutorial.additional_resources = fake.paragraph(nb_sentences = 10)
+            tutorial.save()
+            
         # Set 10 random available partners to be featured
         for featured_partner in random.sample(available_partners, 10):
             featured_partner.featured = True
