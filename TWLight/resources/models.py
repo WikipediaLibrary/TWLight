@@ -16,6 +16,8 @@ from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 from django_countries.fields import CountryField
 
+from TWLight.users.models import Editor
+
 RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
@@ -436,7 +438,6 @@ class Contact(models.Model):
 
 
 
-
 class Video(models.Model):
 
     class Meta:
@@ -451,3 +452,32 @@ class Video(models.Model):
     tutorial_video_url = models.URLField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
         help_text=_("URL of a video tutorial."))
+
+
+
+class AccessCode(models.Model):
+    """
+    Some partners distribute access via access codes which TWL staff hold.
+    This model holds each access code, assigning them to a partner and later
+    a user.
+    """
+    class Meta:
+        app_label = 'resources'
+        verbose_name = 'access code'
+        verbose_name_plural = 'access codes'
+
+
+    partner = models.ForeignKey(Partner, db_index=True, related_name="accesscodes")
+
+    code = models.CharField(max_length=30,
+        # Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
+        help_text=_("An access code for this partner."))
+
+    editor = models.ForeignKey(Editor, related_name='accesscodes', null=True,
+        on_delete=models.SET_NULL)
+
+    # We can't get away with simply having an editor field which is either null
+    # or an editor, because an editor might delete their account. In this case
+    # we still need a way of denoting that this access code has been used even_not_available
+    # though editor has returned to null.
+    granted = models.BooleanField(default=False)
