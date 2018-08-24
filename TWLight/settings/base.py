@@ -24,6 +24,7 @@ import json
 # Importing global settings is typically not recommended, and un-Django-like,
 # but we're doing something interesting with the LANGUAGES setting.
 from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
+from django.contrib import messages
 
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -171,6 +172,11 @@ ROOT_URLCONF = 'TWLight.urls'
 WSGI_APPLICATION = 'TWLight.wsgi.application'
 
 SITE_ID = 1
+
+# Overwrite messages.ERROR to use danger instead, to play nice with bootstrap
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
 
 
 # INTERNATIONALIZATION CONFIGURATION

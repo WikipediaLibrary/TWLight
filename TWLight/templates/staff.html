@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  {% comment %} Translators: This is the title of the page from which staff have information and options for interacting with the site. {% endcomment %}
+  <h2>{% trans "Staff dashboard" %}</h2>
+  {% comment %} Translators: This is the subtitle of the section of the staff dashboard where staff can upload lists of access codes. {% endcomment %}
+  <h3>{% trans "Upload access codes" %}</h3>
+  <form action="{% url 'staff' %}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+  {% csrf_token %}
+  <div class="form-group">
+    {% comment %} Translators: This labels a form where staff upload a file containing access codes. {% endcomment %}
+    <label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label">File: </label>
+    <div class="col-md-8">
+      <input type="file" name="access_code_csv" id="access_code_csv" required="True" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+      {% comment %} Translators: This labels a button for uploading files containing lists of access codes. {% endcomment %}
+      <button class="btn btn-primary">{% trans "Upload" %}</button>
+    </div> 
+  </div>
+  </form>
+{% endblock content %}
