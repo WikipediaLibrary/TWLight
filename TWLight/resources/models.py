@@ -490,5 +490,5 @@ class AccessCode(models.Model):
 
     # This syntax is required for the ForeignKey to avoid a circular
     # import between the applicatons and resources models
-    application = models.ForeignKey('applications.Application', related_name='accesscodes',
+    application = models.OneToOneField('applications.Application', related_name='accesscodes',
         null=True, blank=True)

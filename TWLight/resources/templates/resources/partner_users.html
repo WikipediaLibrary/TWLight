@@ -35,6 +35,10 @@
               {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for. {% endcomment %}
               <th>{% trans "Stream" %}</th>
             {% endif %}
+            {% if object.distribution_type == object.CODES %}
+              {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the access code this user was assigned. {% endcomment %}
+              <th>{% trans "Access code" %}</th>
+            {% endif %}
           </tr>
         </thead>
         <tbody>
@@ -51,8 +55,21 @@
             <td>{{ application.date_closed }}</td>
             {% comment %} Translators: Denotes whether an application was a renewal request for a previous application. {% endcomment %}
             <td>{% if application.parent %}<i>{% trans "Renewal" %}</i>{% endif %}</td>
-            {% if application.specific_stream %}<td>{{ application.specific_stream }}</td>{% endif %}
-          </tr>      
+            {% if partner_streams %}
+              <td>
+              {% if application.specific_stream %}
+                {{ application.specific_stream }}
+              {% endif %}
+              </td>
+            {% endif %}
+            {% if object.distribution_type == object.CODES %}
+              <td>
+              {% if application.accesscodes %}
+                {{ application.accesscodes.code }}
+              {% endif %}
+              </td>
+            {% endif %}
+          </tr>
         {% endfor %}
         </tbody>
       </table>
@@ -80,6 +97,10 @@
               {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for. {% endcomment %}
               <th>{% trans "Stream" %}</th>
             {% endif %}
+            {% if object.distribution_type == object.CODES %}
+              {% comment %} Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the access code this user was assigned. {% endcomment %}
+              <th>{% trans "Access code" %}</th>
+            {% endif %}
           </tr>
         </thead>
         <tbody>
@@ -96,7 +117,20 @@
             <td>{{ application.date_closed }}</td>
             {% comment %} Translators: Denotes whether an application was a renewal request for a previous application. {% endcomment %}
             <td>{% if application.parent %}<i>{% trans "Renewal" %}</i>{% endif %}</td>
-            {% if application.specific_stream %}<td>{{ application.specific_stream }}</td>{% endif %}
+            {% if partner_streams %}
+              <td>
+              {% if application.specific_stream %}
+                {{ application.specific_stream }}
+              {% endif %}
+              </td>
+            {% endif %}
+            {% if object.distribution_type == object.CODES %}
+              <td>
+              {% if application.accesscodes %}
+                {{ application.accesscodes.code }}
+              {% endif %}
+              </td>
+            {% endif %}
           </tr>      
         {% endfor %}
         </tbody>
