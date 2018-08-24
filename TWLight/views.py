@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
 import json
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
-from django.http import HttpResponse
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
+from TWLight.resources.models import AccessCode
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 class LanguageWhiteListView(View):
     """
@@ -165,3 +173,74 @@ class HomePageView(TemplateView):
         context['partner_count'] = Partner.objects.all().count()
         
         return context
+
+class StaffDashboardView(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'staff.html')
+
+    def post(self, request, *args, **kwargs):
+        # This code was based on the guide at
+        # https://www.pythoncircle.com/post/30/how-to-upload-and-process-the-csv-file-in-django/
+        uploaded_csv = request.FILES['access_code_csv']
+        staff_url = reverse_lazy('staff')
+
+        if not uploaded_csv.name.endswith('.csv'):
+            # Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
+            messages.error(request, _('File must be a csv'))
+            return HttpResponseRedirect(staff_url)
+
+        # Check against the maximum upload size (2.5mb by default)
+        if uploaded_csv.multiple_chunks():
+            # Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
+            messages.error(request, _("Uploaded file is too large."))
+            return HttpResponseRedirect(staff_url)
+
+        file_data = uploaded_csv.read().decode('utf-8')
+
+        lines = file_data.split("\n")
+        num_codes = len(lines)
+
+        # Validate the entire file before trying to save any of it
+        for line_num, line in enumerate(lines):
+            fields = line.split(",")
+            num_columns = len(fields)
+            if num_columns > 2:
+                # Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
+                messages.error(request, _("Line {line_num} has {num_columns} columns. "
+                               "Expected 2.".format(line_num=line_num+1,
+                                    num_columns=num_columns)))
+                return HttpResponseRedirect(staff_url)
+
+            access_code = fields[0]
+            partner_pk = fields[1]
+            try:
+                check_partner = Partner.even_not_available.get(pk=partner_pk)
+            except ObjectDoesNotExist:
+                # Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
+                messages.error(request, _("File contains reference to invalid "
+                    "partner ID on line {line_num}".format(line_num=line_num+1)))
+                return HttpResponseRedirect(staff_url)
+
+            access_code_partner_check = AccessCode.objects.filter(code=access_code,
+                partner=partner_pk).count()
+            if access_code_partner_check != 0:
+                # Translators: When staff upload a file containing access codes, they receive this message if a code in the file is already present in the database.
+                messages.error(request, _("Code on line {line_num} appears to "
+                    "already be uploaded".format(line_num=line_num+1)))
+                return HttpResponseRedirect(staff_url)
+
+        for line in lines:
+            fields = line.split(",")
+            access_code = fields[0].strip()
+            partner_pk = fields[1].strip()
+
+            new_access_code = AccessCode()
+            new_access_code.code = access_code
+            new_access_code.partner = Partner.even_not_available.get(pk=partner_pk)
+            new_access_code.save()
+
+        # Translators: When staff successfully upload a file containing access codes, they receive this message.
+        messages.info(request, _("{num_codes} access codes successfully "
+            "uploaded!".format(num_codes=num_codes)))
+        return HttpResponseRedirect(staff_url)
