@@ -88,7 +88,7 @@ admin.site.register(Contact, ContactAdmin)
 
 
 class AccessCodeAdmin(admin.ModelAdmin):
-    search_fields = ('code', 'partner', 'editor',)
-    list_display = ('code', 'partner', 'editor',)
+    search_fields = ('code', 'partner', 'application',)
+    list_display = ('code', 'partner', 'application',)
 
 admin.site.register(AccessCode, AccessCodeAdmin)
