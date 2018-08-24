@@ -104,7 +104,7 @@ class PartnersDetailView(DetailView):
 
         # Find out if current user has applications and change the Apply
         # button behaviour accordingly
-        if self.request.user.is_authenticated() and not partner.bundle:
+        if self.request.user.is_authenticated() and not partner.distribution_type == partner.BUNDLE:
             sent_apps = Application.objects.filter(
                                         editor=self.request.user.editor,
                                         status=Application.SENT,

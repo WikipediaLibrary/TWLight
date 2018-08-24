@@ -12,7 +12,7 @@
 {% endcomment %}
 
 <div class="panel panel-default full-width">
-  <div class="panel-heading{% if partner.bundle %} banner-flag{% endif %}">
+  <div class="panel-heading{% if partner.distribution_type == partner.BUNDLE %} banner-flag{% endif %}">
     <a href="{% url 'partners:detail' partner.pk %}"><strong>
       <span class="panel-title">{{ partner }}</span></strong>
     </a>

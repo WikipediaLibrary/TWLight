@@ -175,6 +175,22 @@ class Partner(models.Model):
         (WAITLIST, _('Waitlisted')),
     )
 
+    EMAIL = 0
+    CODES = 1
+    PROXY = 2
+    BUNDLE = 3
+
+    DISTRIBUTION_CHOICES = (
+        # Translators: This is the name of the distribution method whereby user accounts are set up by email.
+        (EMAIL, _('Email')),
+        # Translators: This is the name of the distribution method whereby user accounts are set up via an access code.
+        (CODES, _('Access codes')),
+        # Translators: This is the name of the distribution method whereby users access resources via an IP proxy.
+        (PROXY, _('Proxy')),
+        # Translators: This is the name of the distribution method whereby users access resources automatically via the library bundle.
+        (BUNDLE, _('Library Bundle')),
+    )
+
     status = models.IntegerField(choices=STATUS_CHOICES,
         default=NOT_AVAILABLE,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
@@ -216,11 +232,12 @@ class Partner(models.Model):
     excerpt_limit_percentage   = models.PositiveSmallIntegerField(blank=True, null=True, validators = [MaxValueValidator(100)],
           # Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
           help_text=_("Optional excerpt limit in terms of percentage (%) of an article. Leave empty if no limit."))
-          
-    bundle = models.NullBooleanField(
-        blank=True, null=True, default=False,
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can access this as part of the Bundle.
-        help_text=_("Is this partner a part of the Bundle?"))
+
+    distribution_type = models.IntegerField(choices=DISTRIBUTION_CHOICES,
+        default=EMAIL,
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
+        help_text=_("Which distribution method does this partner use? "
+            "Default to Email if unknown."))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
