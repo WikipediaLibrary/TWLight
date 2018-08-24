@@ -462,8 +462,8 @@ class AccessCode(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
         help_text=_("An access code for this partner."))
 
-    editor = models.ForeignKey(Editor, related_name='accesscodes', null=True,
-        on_delete=models.SET_NULL)
+    editor = models.ForeignKey(Editor, related_name='accesscodes',
+        null=True, blank=True, on_delete=models.SET_NULL)
 
     # We can't get away with simply having an editor field which is either null
     # or an editor, because an editor might delete their account. In this case
