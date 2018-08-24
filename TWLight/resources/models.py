@@ -16,8 +16,6 @@ from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 from django_countries.fields import CountryField
 
-from TWLight.users.models import Editor
-
 RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
@@ -490,11 +488,7 @@ class AccessCode(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
         help_text=_("An access code for this partner."))
 
-    editor = models.ForeignKey(Editor, related_name='accesscodes',
-        null=True, blank=True, on_delete=models.SET_NULL)
-
-    # We can't get away with simply having an editor field which is either null
-    # or an editor, because an editor might delete their account. In this case
-    # we still need a way of denoting that this access code has been used even_not_available
-    # though editor has returned to null.
-    granted = models.BooleanField(default=False)
+    # This syntax is required for the ForeignKey to avoid a circular
+    # import between the applicatons and resources models
+    application = models.ForeignKey('applications.Application', related_name='accesscodes',
+        null=True, blank=True)

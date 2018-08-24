@@ -928,7 +928,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
         available_access_codes = AccessCode.objects.filter(
             partner=self.get_object(),
-            granted=False)
+            application__isnull=True)
         context['available_access_codes'] = available_access_codes
 
         return context
@@ -980,8 +980,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 code_object = AccessCode.objects.get(code=app_code,
                     partner=application.partner)
 
-                code_object.editor = Editor.objects.get(pk=application.editor.pk)
-                code_object.granted = True
+                code_object.application = Application.objects.get(pk=application.pk)
                 code_object.save()
 
                 application.status = Application.SENT
