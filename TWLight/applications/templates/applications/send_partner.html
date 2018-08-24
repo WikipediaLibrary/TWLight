@@ -78,71 +78,114 @@
       {% trans "When you've processed the data below, click the 'mark as sent' button." %}
     {% endif %}
   </p>
+  {% if object.distribution_type == object.EMAIL %}
+    <h3>
+      {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.{% endcomment %}
+      {% blocktrans trimmed count object.contacts.all|length as counter %}
+        Contact
+      {% plural %}
+        Contacts
+      {% endblocktrans %}
+    </h3>
 
-  <h3>
-    {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.{% endcomment %}
-    {% blocktrans trimmed count object.contacts.all|length as counter %}
-      Contact
-    {% plural %}
-      Contacts
-    {% endblocktrans %}
-  </h3>
+    {% for contact in object.contacts.all %}
+      <h4>{{ contact.full_name }} ({{ contact.short_name}})</h4>
+      {{ contact.title }}<br />
+      {{ contact.email }}<br />
+      {% if not forloop.last %}
+        <hr />
+      {% endif %}
+    {% empty %}
+      {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+      {% trans "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators." %} 
+    {% endfor %}
+  {% endif %}
 
-  {% for contact in object.contacts.all %}
-    <h4>{{ contact.full_name }} ({{ contact.short_name}})</h4>
-    {{ contact.title }}<br />
-    {{ contact.email }}<br />
-    {% if not forloop.last %}    
-      <hr />
-    {% endif %}
-  {% empty %}
-    {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-    {% trans "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators." %} 
-  {% endfor %}
-  
   {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.{% endcomment %}
   <h3>{% trans "Application data" %}</h3>
   {% if app_outputs %}
-    <form method="POST">
-      {% csrf_token %}
-      <div class="form-group">
-        <ul class="list-unstyled">
-          <li>
-            <div class="media">
-              <div class="media-left">
-                <input type="checkbox" id="toggle_all">
-              </div>
-              <div class="media-body">
-                <i>
-                  <label for="toggle_all">{% trans "Select/deselect all" %}</label>
-                </i>
-              </div>
-            </div>
-          </li>
-          {% for app, output in app_outputs.items  %}
-            <li class="outline">
+    {% if object.distribution_type == object.EMAIL %}
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <ul class="list-unstyled">
+            <li>
               <div class="media">
                 <div class="media-left">
-                  <input type="checkbox" name="applications" value="{{ app.pk }}" id="app_{{ app.pk }}">
+                  <input type="checkbox" id="toggle_all">
                 </div>
                 <div class="media-body">
-                <label for="app_{{ app.pk }}">
-                  <h4 class="media-heading">{{ app }}</h4>
-                  <ul class="list-unstyled pull-left">
-                    {% for key, send_data in output.items %}
-                      <li><strong>{{ send_data.label }}</strong> &mdash; {{ send_data.data }}</li>
-                    {% endfor %}
-                  </ul>                
-                </label>
+                  <i>
+                    <label for="toggle_all">{% trans "Select/deselect all" %}</label>
+                  </i>
                 </div>
               </div>
             </li>
+            {% for app, output in app_outputs.items  %}
+              <li class="outline">
+                <div class="media">
+                  <div class="media-left">
+                    <input type="checkbox" name="applications" value="{{ app.pk }}" id="app_{{ app.pk }}">
+                  </div>
+                  <div class="media-body">
+                  <label for="app_{{ app.pk }}">
+                    <h4 class="media-heading">{{ app }}</h4>
+                    <ul class="list-unstyled pull-left">
+                      {% for key, send_data in output.items %}
+                        <li><strong>{{ send_data.label }}</strong> &mdash; {{ send_data.data }}</li>
+                      {% endfor %}
+                    </ul>
+                  </label>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
+        <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
+      </form>
+    {% elif object.distribution_type == object.CODES %}
+      {% comment %} Translators: This text guides coordinators in using the code sending interface for approved applications. {% endcomment %}
+      {% blocktrans trimmed %}
+        Use the dropdown menus to denote which editor will receive each code.
+        Make sure to send each code before clicking 'Mark as sent'.
+      {% endblocktrans %}
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          {% for app, output in app_outputs.items  %}
+            <div class="media">
+              <div class="media-body">
+              <label for="app_{{ app.pk }}">
+                <h4 class="media-heading">{{ app }}</h4>
+                <ul class="list-unstyled pull-left">
+                  {% for key, send_data in output.items %}
+                    <li><strong>{{ send_data.label }}</strong> &mdash; {{ send_data.data }}</li>
+                  {% endfor %}
+                </ul>
+              </label>
+              <div class="pull-right">
+                {% comment %} Translators: This labels a drop-down selection where staff can assign an access code to a user. {% endcomment %}
+                <label for="accesscode-select">{% trans "Select code:" %}</label>
+                <select name="accesscode" class="form-control" id="accesscode-select">
+                  <option value="default">-</option>
+                  {% for access_code in available_access_codes %}
+                    <option value="{{ app.pk }}_{{ access_code.code }}">{{ access_code.code }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              </div>
+            </div>
+            <hr/>
           {% endfor %}
-        </ul>
-      </div>
-      {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
-      <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
-    </form>
+        </div>
+        {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
+        <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
+      </form>
+    {% else %}
+      This partner's distribution type has been set to proxy or bundle, but these features aren't supported yet.
+    {% endif %}
   {% else %}
     {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.{% endcomment %}
     {% trans "There are no approved, unsent applications." %}
