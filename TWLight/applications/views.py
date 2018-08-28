@@ -980,15 +980,15 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 code_object = AccessCode.objects.get(code=app_code,
                     partner=application.partner)
 
-                code_object.application = Application.objects.get(pk=application.pk)
+                code_object.application = application
                 code_object.save()
 
                 application.status = Application.SENT
                 application.sent_by = request.user
                 application.save()
 
-        #Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
         messages.add_message(self.request, messages.SUCCESS,
+            # Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
             _('All selected applications have been marked as sent.'))
 
         return HttpResponseRedirect(reverse(
