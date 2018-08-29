@@ -1,5 +1,6 @@
 import csv
 from mock import patch
+import os
 
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
@@ -506,6 +507,10 @@ class StaffDashboardTest(TestCase):
         super(StaffDashboardTest, cls).tearDownClass()
         cls.staff_user.delete()
         cls.user.delete()
+
+        # If one of the tests made a csv, delete it.
+        if os.path.exists('accesscodes.csv'):
+            os.remove('accesscodes.csv')
 
         cls.message_patcher.stop()
 
