@@ -15,6 +15,7 @@ from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
 from TWLight.resources.models import AccessCode
+from TWLight.view_mixins import StaffOnly
 
 import logging
 
@@ -174,7 +175,7 @@ class HomePageView(TemplateView):
         
         return context
 
-class StaffDashboardView(View):
+class StaffDashboardView(StaffOnly, View):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'staff.html')
@@ -214,6 +215,14 @@ class StaffDashboardView(View):
 
             access_code = fields[0]
             partner_pk = fields[1]
+            try:
+                partner_pk = int(partner_pk)
+            except ValueError:
+                messages.error(request, _("Second column should only contain "
+                    "numbers. Error on line {line_num}.".format(
+                        line_num=line_num+1)))
+                return HttpResponseRedirect(staff_url)
+
             try:
                 check_partner = Partner.even_not_available.get(pk=partner_pk)
             except ObjectDoesNotExist:

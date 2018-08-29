@@ -179,6 +179,29 @@ class PartnerCoordinatorOnly(object):
 
 
 
+class StaffOnly(object):
+    """
+    Restricts visibility to:
+    * Staff; or
+    * Superusers.
+    """
+
+
+    def test_func_staff_only(self, user):
+        return (user.is_superuser or user.is_staff)
+
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_staff_only(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be '
+                'staff to do that.')
+            raise PermissionDenied
+
+        return super(StaffOnly, self).dispatch(
+            request, *args, **kwargs)
+
+
+
 class EditorsOnly(object):
     """
     Restricts visibility to:
