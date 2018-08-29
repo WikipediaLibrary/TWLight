@@ -507,10 +507,6 @@ class StaffDashboardTest(TestCase):
         cls.staff_user.delete()
         cls.user.delete()
 
-        # If any access code objects have been created, delete them
-        #access_codes = AccessCode.objects.all()
-        #access_codes.delete()
-
         cls.message_patcher.stop()
 
 
