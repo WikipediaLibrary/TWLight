@@ -200,12 +200,16 @@ class StaffDashboardView(StaffOnly, View):
         file_data = uploaded_csv.read().decode('utf-8')
 
         lines = file_data.split("\n")
-        num_codes = len(lines)
 
+        skipped_codes = 0
+        num_codes = 0
         # Validate the entire file before trying to save any of it
         for line_num, line in enumerate(lines):
             fields = line.split(",")
             num_columns = len(fields)
+            # Skip any blank lines. Not an error, can just be ignored.
+            if line == '':
+                continue
             if num_columns != 2:
                 # Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
                 messages.error(request, _("Line {line_num} has {num_columns} columns. "
@@ -213,9 +217,9 @@ class StaffDashboardView(StaffOnly, View):
                                     num_columns=num_columns)))
                 return HttpResponseRedirect(staff_url)
 
-            access_code = fields[0]
+            access_code = fields[0].strip()
             try:
-                partner_pk = int(fields[1])
+                partner_pk = int(fields[1].strip())
             except ValueError:
                 messages.error(request, _("Second column should only contain "
                     "numbers. Error on line {line_num}.".format(
@@ -230,25 +234,25 @@ class StaffDashboardView(StaffOnly, View):
                     "partner ID on line {line_num}".format(line_num=line_num+1)))
                 return HttpResponseRedirect(staff_url)
 
+            # Only upload this code if it doesn't already exist. If it does,
+            # increment a counter so we can report that.
             access_code_partner_check = AccessCode.objects.filter(code=access_code,
                 partner=partner_pk).count()
             if access_code_partner_check != 0:
-                # Translators: When staff upload a file containing access codes, they receive this message if a code in the file is already present in the database.
-                messages.error(request, _("Code on line {line_num} appears to "
-                    "already be uploaded".format(line_num=line_num+1)))
-                return HttpResponseRedirect(staff_url)
+                skipped_codes += 1
+            else:
+                new_access_code = AccessCode()
+                new_access_code.code = access_code
+                new_access_code.partner = Partner.even_not_available.get(pk=partner_pk)
+                new_access_code.save()
+                num_codes += 1
 
-        for line in lines:
-            fields = line.split(",")
-            access_code = fields[0].strip()
-            partner_pk = fields[1].strip()
-
-            new_access_code = AccessCode()
-            new_access_code.code = access_code
-            new_access_code.partner = Partner.even_not_available.get(pk=partner_pk)
-            new_access_code.save()
-
-        # Translators: When staff successfully upload a file containing access codes, they receive this message.
-        messages.info(request, _("{num_codes} access codes successfully "
-            "uploaded!".format(num_codes=num_codes)))
+        if num_codes > 0:
+            # Translators: When staff successfully upload a file containing access codes, they receive this message.
+            messages.info(request, _("{num_codes} access codes successfully "
+                "uploaded!".format(num_codes=num_codes)))
+        if skipped_codes > 0:
+            # Translators: When staff upload a file containing access codes, they receive this message if any were duplicates.
+            messages.info(request, _("{num_duplicates} access codes ignored "
+                "as duplicates.".format(num_duplicates=skipped_codes)))
         return HttpResponseRedirect(staff_url)
