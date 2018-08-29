@@ -206,7 +206,7 @@ class StaffDashboardView(StaffOnly, View):
         for line_num, line in enumerate(lines):
             fields = line.split(",")
             num_columns = len(fields)
-            if num_columns > 2:
+            if num_columns != 2:
                 # Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
                 messages.error(request, _("Line {line_num} has {num_columns} columns. "
                                "Expected 2.".format(line_num=line_num+1,
@@ -214,9 +214,8 @@ class StaffDashboardView(StaffOnly, View):
                 return HttpResponseRedirect(staff_url)
 
             access_code = fields[0]
-            partner_pk = fields[1]
             try:
-                partner_pk = int(partner_pk)
+                partner_pk = int(fields[1])
             except ValueError:
                 messages.error(request, _("Second column should only contain "
                     "numbers. Error on line {line_num}.".format(
