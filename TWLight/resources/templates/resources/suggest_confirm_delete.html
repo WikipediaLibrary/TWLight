@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      {% comment %} Translators: This message is displayed on the page where coordinators can request the deletion of a suggestion. {% endcomment %}
+      {% blocktrans trimmed %}
+        Are you sure you want to delete <b>{{ object }}</b>?
+      {% endblocktrans %}
+    </p>
+    <input type="submit" value="Confirm" class="btn btn-danger"/>
+  </form>
+{% endblock content %}
