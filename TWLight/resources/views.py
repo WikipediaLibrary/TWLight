@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, View
+from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
 
 from TWLight.applications.models import Application
@@ -12,7 +14,8 @@ from TWLight.graphs.helpers import (get_median,
                                     get_users_by_partner_by_month)
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
-from .models import Partner, Stream
+from .forms import SuggestForm
+from .models import Partner, Stream, Suggest
 
 import logging
 
@@ -243,8 +246,50 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
 
 
 
-class PartnerSuggestView(EditorsOnly, DetailView):
-    model = Partner
+class PartnerSuggestView(EditorsOnly, FormView):
+    model=Suggest
+    template_name = 'resources/suggest.html'
+    form_class = SuggestForm
     
+    def get_queryset(self):
+            return Suggest.objects.order_by('suggested_company_name')
+    
+    def form_valid(self, form):
+        suggest = Suggest()
+        
+        suggest.suggested_company_name = form.cleaned_data['suggested_company_name']
+        suggest.description = form.cleaned_data['description']
+        suggest.company_url = form.cleaned_data['company_url']
+        suggest.save()
+        suggest.plus_ones.add(self.request.user)
+        messages.add_message(self.request, messages.SUCCESS,
+        # Translators: Shown to users when they successfully add a new partner suggestion.
+        _('Your suggestion has been added.'))
+        return HttpResponseRedirect(reverse('suggest'))
+        
     def get_context_data(self, **kwargs):
-      return context
+        context = super(PartnerSuggestView, self).get_context_data(**kwargs)
+        
+        all_suggestions = Suggest.objects.all()
+        if all_suggestions.count() > 0:
+            context['all_suggestions'] = all_suggestions
+        
+        else:
+            context['all_suggestions'] = None
+        
+        return context
+
+
+
+class SuggestDeleteView(CoordinatorsOnly, DeleteView):
+    model=Suggest
+    form_class = SuggestForm
+    success_url = reverse_lazy('suggest')
+            
+    def delete(self, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        messages.add_message(self.request, messages.SUCCESS,
+        # Translators: Shown to coordinators when they successfully delete a partner suggestion
+        _('Suggestion has been deleted.'))
+        return HttpResponseRedirect(self.success_url)
