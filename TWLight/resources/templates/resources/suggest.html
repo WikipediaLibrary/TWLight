@@ -25,11 +25,13 @@
             <div class="panel-heading">
               <div class="panel-title pull-left"><span class="panel-title">{{ suggest.suggested_company_name }}</span></div>
               {% if user|coordinators_only %}
+                {% comment %} Translators: This button is at the partner suggestions page for coordinators to delete suggestions. {% endcomment %}
                 <a href="{% url 'suggest-delete' suggest.id %}" class="btn btn-outline-danger pull-right">{% trans 'Delete' %} <i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
               {% endif %}
               <div class="clearfix"></div>
             </div>
             <div class="panel-body">
+              {% comment %} Translators: This is the text that appears before the description of every partner suggestion. {% endcomment %}
               <p>
                 <strong>{% trans 'Description' %}: </strong>
                 {% comment %}
@@ -43,6 +45,7 @@
                   {{ suggest.description | safe }}
                 {% endcache %}
               </p>
+              {% comment %} Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
               <p><strong>{% trans 'URL' %}:</strong> <a href>{{ suggest.company_url }}</a></p>
           </div><br />
         {% endfor %}
