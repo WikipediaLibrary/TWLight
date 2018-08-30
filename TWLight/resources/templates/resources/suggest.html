@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load cache %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load twlight_perms %}
+
+{% block content %}
+  <div class="panel panel-default full-width">
+    <div class="panel-heading">
+      {% comment %} Translators: This is the title of the form where users can submit partner suggestions {% endcomment %}
+      <strong><span class="panel-title">{% trans 'Suggest partners' %}</span></strong>
+    </div>
+    <div class="panel-body">
+      {% crispy form %}
+    </div>
+    <br />
+    {% if all_suggestions %}
+      <div class="panel-heading">
+        {% comment %} Translators: This is the title of the panel where user suggestions are displayed {% endcomment %}
+        <strong><span class="panel-title">{% trans 'Browse and support suggestions' %}</span></strong>
+      </div>
+      <div class="panel-body">
+        {% for suggest in all_suggestions %}
+          <div class="panel panel-default full-width">
+            <div class="panel-heading">
+              <div class="panel-title pull-left"><span class="panel-title">{{ suggest.suggested_company_name }}</span></div>
+              {% if user|coordinators_only %}
+                <a href="{% url 'suggest-delete' suggest.id %}" class="btn btn-outline-danger pull-right">{% trans 'Delete' %} <i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
+              {% endif %}
+              <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+              <p>
+                <strong>{% trans 'Description' %}: </strong>
+                {% comment %}
+                  Cache lifetime should be None, which would be forever since we're
+                  invalidating on update. However, as 2017-04-06 a bug in django
+                  doesn't allow for None to be passed from here into cache.  The
+                  fix is in master, but not release.
+                  https://code.djangoproject.com/ticket/27882
+                {% endcomment %}
+                {% cache 31536000 suggested_partner_description suggest.pk %} 
+                  {{ suggest.description | safe }}
+                {% endcache %}
+              </p>
+              <p><strong>{% trans 'URL' %}:</strong> <a href>{{ suggest.company_url }}</a></p>
+          </div><br />
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock content %}
