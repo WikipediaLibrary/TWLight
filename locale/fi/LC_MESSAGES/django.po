@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 18:41+0000\n"
+"POT-Creation-Date: 2018-08-31 11:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,32 +31,44 @@ msgstr ""
 msgid "Apply"
 msgstr "Tallenna hakemus"
 
-#. Translators: This labels a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
+#. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:193
 msgid "About you"
 msgstr "Tietoa sinusta"
 
+#. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
+#: TWLight/applications/forms.py:201
+#, python-brace-format
+msgid "Requested by: {partner_list}"
+msgstr ""
+
 #. Translators: This this note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:206
+#: TWLight/applications/forms.py:207
 #, python-brace-format
 msgid ""
 "<p><small><i>Your personal data will be processed according to our <a href="
 "\"{terms_url}\">privacy policy</a>.</i></small></p>"
 msgstr ""
 
-#. Translators: This goes into a form legend that acts as the title of a form or fieldset for a partner application. It lets the user know which partner application they are entering data for.
-#: TWLight/applications/forms.py:217
+#. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
+#: TWLight/applications/forms.py:218
 #, python-brace-format
 msgid "Your application to {partner}"
 msgstr "Hakemuksesi yhteistyökumppanille {partner}"
 
-#: TWLight/applications/forms.py:318 TWLight/users/admin.py:40
+#. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering.
+#: TWLight/applications/forms.py:254
+#, python-brace-format
+msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
+msgstr ""
+
+#: TWLight/applications/forms.py:320 TWLight/users/admin.py:40
 #: TWLight/users/models.py:113
 msgid "Username"
 msgstr "Wikipedia-käyttäjätunnuksesi"
 
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:319 TWLight/applications/helpers.py:95
+#: TWLight/applications/forms.py:321 TWLight/applications/helpers.py:95
 msgid "Partner name"
 msgstr "Yhteistyökumppanin nimi"
 
@@ -199,7 +211,7 @@ msgstr "Harkinnassa"
 msgid "Approved"
 msgstr "Hyväksytty"
 
-#. Translators: This is the status of an application which has been denied by a reviewer.
+#. Translators: This is the status of an application which has been declined by a reviewer.
 #: TWLight/applications/models.py:42
 msgid "Not approved"
 msgstr "Hylätty"
@@ -209,7 +221,7 @@ msgstr "Hylätty"
 msgid "Sent to partner"
 msgstr "Lähetä yhteistyökumppanille"
 
-#. Translators: Shown in the administrator interface for editing applications directly. Admins should rarely ever have to change this number.
+#. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
 #: TWLight/applications/models.py:60 TWLight/applications/models.py:71
 #, fuzzy
 #| msgid "Please do not override this field! It is set automatically."
@@ -319,10 +331,7 @@ msgstr ""
 #| "\n"
 #| "            Hi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
 #| "          "
-msgid ""
-"\n"
-"            Yes (<a href=\"%(parent_url)s\">previous application</a>)\n"
-"          "
+msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
 msgstr ""
 "\n"
 "            Terve, <a href=\"%(home_url)s\">%(username)s</a>!\n"
@@ -574,7 +583,7 @@ msgstr "(lisää tietoa)"
 
 #. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
 #: TWLight/applications/templates/applications/request_for_application.html:44
-#: TWLight/resources/models.py:172
+#: TWLight/resources/models.py:173
 #: TWLight/resources/templates/resources/partner_detail.html:30
 #: TWLight/resources/templates/resources/partner_detail.html:80
 #: TWLight/resources/templates/resources/partner_tile.html:35
@@ -1086,7 +1095,7 @@ msgstr "Käyttäjien lukumäärä"
 
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
-#: TWLight/graphs/views.py:395 TWLight/resources/models.py:80
+#: TWLight/graphs/views.py:395 TWLight/resources/models.py:81
 #: TWLight/users/models.py:74 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr "Kieli"
@@ -1096,7 +1105,7 @@ msgid "Number of users"
 msgstr "Käyttäjien lukumäärä"
 
 #. Translators: When staff enter languages, they use ISO language codes. Don't translate ISO, LANGUAGES, or %(code)s.
-#: TWLight/resources/models.py:30
+#: TWLight/resources/models.py:31
 #, python-format
 msgid ""
 "%(code)s is not a valid language code. You must enter an ISO language code, "
@@ -1104,31 +1113,31 @@ msgid ""
 "WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py"
 msgstr ""
 
-#: TWLight/resources/models.py:47
+#: TWLight/resources/models.py:48
 msgid "Name"
 msgstr ""
 
-#: TWLight/resources/models.py:48
+#: TWLight/resources/models.py:49
 msgid "Slug"
 msgstr ""
 
-#: TWLight/resources/models.py:51
+#: TWLight/resources/models.py:52
 msgid "Tag"
 msgstr ""
 
-#: TWLight/resources/models.py:52
+#: TWLight/resources/models.py:53
 msgid "Tags"
 msgstr ""
 
 #. Translators: Title for a list of languages if there is more than one.
-#: TWLight/resources/models.py:82
+#: TWLight/resources/models.py:83
 #, fuzzy
 #| msgid "Language"
 msgid "Languages"
 msgstr "Kieli"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can enter the name of the partner. Don't translate McFarland.
-#: TWLight/resources/models.py:137
+#: TWLight/resources/models.py:138
 msgid ""
 "Partner's name (e.g. McFarland). Note: this will be user-visible and *not "
 "translated*."
@@ -1137,12 +1146,12 @@ msgstr ""
 "Huom: tämä on nähtävissä käyttäjilleeikä sitä *käännetä*."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the account coordinator for this partner.
-#: TWLight/resources/models.py:143
+#: TWLight/resources/models.py:144
 msgid "The coordinator for this Partner, if any."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether a publisher will be featured on the website's front page.
-#: TWLight/resources/models.py:146
+#: TWLight/resources/models.py:147
 #, fuzzy
 #| msgid "Mark as true if this partner requires applicant names."
 msgid "Mark as true to feature this partner on the front page."
@@ -1150,40 +1159,40 @@ msgstr ""
 "Rastita, mikäli yhteistyökumppani vaatii hakijan esittävän oikean nimensä."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can enter the partner organisation's country.
-#: TWLight/resources/models.py:149
+#: TWLight/resources/models.py:150
 msgid "Partner's primary location."
 msgstr ""
 
 #. Translators: This is a status for a Partner, denoting that editors can apply for access.
-#: TWLight/resources/models.py:168
+#: TWLight/resources/models.py:169
 #, fuzzy
 #| msgid "Description not available."
 msgid "Available"
 msgstr "Ei kuvausta"
 
 #. Translators: This is a status for a Partner, denoting that editors cannot apply for access and the Partner will not be displayed to them.
-#: TWLight/resources/models.py:170
+#: TWLight/resources/models.py:171
 #, fuzzy
 #| msgid "Description not available."
 msgid "Not available"
 msgstr "Ei kuvausta"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
-#: TWLight/resources/models.py:178
+#: TWLight/resources/models.py:179
 msgid ""
-"Should this Partner be displayed to end users? Is it open for applications "
-"right now?"
+"Should this Partner be displayed to users? Is it open for applications right "
+"now?"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify whether users can request their account be renewed/extended for this partner.
-#: TWLight/resources/models.py:183
+#: TWLight/resources/models.py:184
 msgid ""
 "Can access grants to this partner be renewed? If so, users will be able to "
 "request renewals at any time."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
-#: TWLight/resources/models.py:191
+#: TWLight/resources/models.py:192
 msgid ""
 "Link to terms of use. Required if users must agree to terms of use to get "
 "access; optional otherwise."
@@ -1192,23 +1201,48 @@ msgstr ""
 "käyttöehdot ennen käyttöoikeuden hakemista; vapaavalintainen muuten."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
-#: TWLight/resources/models.py:196
-msgid "Optional description of this partner's resources."
+#: TWLight/resources/models.py:197
+#, fuzzy
+#| msgid "Optional description of this partner's resources."
+msgid "Optional short description of this partner's resources."
 msgstr "Vapaavalintainen kuvaus yhteistyökumppanin lahjoituksesta."
 
-#: TWLight/resources/models.py:199
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide a long description of a partner's available resources.
+#: TWLight/resources/models.py:201
+msgid ""
+"Optional detailed description in addition to the short description such as "
+"collections, instructions, notes, special requirements, alternate access "
+"options, unique features, citations notes."
+msgstr ""
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
+#: TWLight/resources/models.py:207
 #, fuzzy
 #| msgid "The user who sent this application to the partner"
 msgid "Optional instructions for sending application data to this partner."
 msgstr "Käyttäjä, joka lähetti hakemuksen yhteistyökumppanille"
 
+#. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
+#: TWLight/resources/models.py:212
+msgid ""
+"Optional excerpt limit in terms of number of words per article. Leave empty "
+"if no limit."
+msgstr ""
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
+#: TWLight/resources/models.py:216
+msgid ""
+"Optional excerpt limit in terms of percentage (%) of an article. Leave empty "
+"if no limit."
+msgstr ""
+
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can access this as part of the Bundle.
-#: TWLight/resources/models.py:205
+#: TWLight/resources/models.py:221
 msgid "Is this partner a part of the Bundle?"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
-#: TWLight/resources/models.py:211
+#: TWLight/resources/models.py:227
 msgid ""
 "If True, users can only apply for one Stream at a time from this Partner. If "
 "False, users can apply for multiple Streams at a time. This field must be "
@@ -1222,16 +1256,16 @@ msgstr ""
 "tyhjäksi. "
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
-#: TWLight/resources/models.py:218
+#: TWLight/resources/models.py:234
 msgid "Select all languages in which this partner publishes content."
 msgstr ""
 
-#: TWLight/resources/models.py:225
+#: TWLight/resources/models.py:241
 msgid "Old Tags"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
-#: TWLight/resources/models.py:236
+#: TWLight/resources/models.py:252
 #, fuzzy
 #| msgid ""
 #| "Link to terms of use. Required if users must agree to terms of use to get "
@@ -1244,18 +1278,18 @@ msgstr ""
 "käyttöehdot ennen käyttöoikeuden hakemista; vapaavalintainen muuten."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their real name when applying
-#: TWLight/resources/models.py:240
+#: TWLight/resources/models.py:256
 msgid "Mark as true if this partner requires applicant names."
 msgstr ""
 "Rastita, mikäli yhteistyökumppani vaatii hakijan esittävän oikean nimensä."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify the country in which they live when applying.
-#: TWLight/resources/models.py:243
+#: TWLight/resources/models.py:259
 msgid "Mark as true if this partner requires applicant countries of residence."
 msgstr "Rastita, mikäli yhteistyökumppani vaatii hakijan nimeävän asuinmaansa."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a title for the resource they want to access when applying.
-#: TWLight/resources/models.py:247
+#: TWLight/resources/models.py:263
 msgid ""
 "Mark as true if this partner requires applicants to specify the title they "
 "want to access."
@@ -1264,7 +1298,7 @@ msgstr ""
 "mihin nimekkeeseen hän haluaa käyttöoikeuden."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a collection of resources when applying.
-#: TWLight/resources/models.py:251
+#: TWLight/resources/models.py:267
 msgid ""
 "Mark as true if this partner requires applicants to specify the database "
 "they want to access."
@@ -1273,13 +1307,13 @@ msgstr ""
 "mihin tietokantaan hän haluaa käyttöoikeuden."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their occupation when applying.
-#: TWLight/resources/models.py:255
+#: TWLight/resources/models.py:271
 msgid ""
 "Mark as true if this partner requires applicants to specify their occupation."
 msgstr "Rastita, mikäli yhteistyökumppani vaatii hakijan nimeävän ammattinsa."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their institutional affiliation (e.g. university) when applying.
-#: TWLight/resources/models.py:259
+#: TWLight/resources/models.py:275
 msgid ""
 "Mark as true if this partner requires applicants to specify their "
 "institutional affiliation."
@@ -1288,7 +1322,7 @@ msgstr ""
 "sidoksensa instituutioihin"
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
-#: TWLight/resources/models.py:263
+#: TWLight/resources/models.py:279
 msgid ""
 "Mark as true if this partner requires applicants to agree with the partner's "
 "terms of use."
@@ -1296,8 +1330,8 @@ msgstr ""
 "Rastita, jos yhteistyökumppani vaatii hakijoiden hyväksyvän "
 "yhteistyökumppanin käyttöehdot."
 
-#. Translators: TODO
-#: TWLight/resources/models.py:267
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
+#: TWLight/resources/models.py:283
 #, fuzzy
 #| msgid ""
 #| "Mark as true if this partner requires applicants to agree with the "
@@ -1310,7 +1344,7 @@ msgstr ""
 "yhteistyökumppanin käyttöehdot."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:319
+#: TWLight/resources/models.py:339
 #, fuzzy
 #| msgid "Optional URL of an image that can be used to represent this partner."
 msgid "Optional image file that can be used to represent this partner."
@@ -1318,7 +1352,7 @@ msgstr ""
 "Vapaavalintainen URL kuvasta, jota voi käyttää yhteistyökumppanin esittelyyn."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:347
+#: TWLight/resources/models.py:367
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
@@ -1329,12 +1363,12 @@ msgstr ""
 "hoitavat sen tavalla, joka on helppo muuntaa muille kielille."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:352
+#: TWLight/resources/models.py:372
 msgid "Optional description of this stream's resources."
 msgstr "Valinnainen kuvaus syötteen sisällöstä."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:393
+#: TWLight/resources/models.py:413
 #, fuzzy
 #| msgid ""
 #| "Organizational role or job title. This is NOT intended to be used for "
@@ -1345,7 +1379,7 @@ msgid ""
 msgstr "Rooli järjestössä tai työnimeke. "
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:400
+#: TWLight/resources/models.py:420
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
@@ -1437,31 +1471,61 @@ msgid "List applications"
 msgstr "Aseta hakemuksen tila"
 
 #. Translators: If a partner has no description written, this message is shown in the Description field on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:187
+#: TWLight/resources/templates/resources/partner_detail.html:183
 msgid "Description not available."
 msgstr "Ei kuvausta"
 
 #. Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:208
+#: TWLight/resources/templates/resources/partner_detail.html:219
 #, fuzzy
 #| msgid "Language"
 msgid "Language(s)"
 msgstr "Kieli"
 
 #. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:218
+#: TWLight/resources/templates/resources/partner_detail.html:229
 #, fuzzy
 #| msgid "Description not available."
 msgid "Languages not available."
 msgstr "Ei kuvausta"
 
+#. Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field.
+#: TWLight/resources/templates/resources/partner_detail.html:242
+msgid "Excerpt limit"
+msgstr ""
+
+#. Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:249
+#, python-format
+msgid ""
+"%(object)s allows a maximum of %(excerpt_limit)s words or "
+"%(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia "
+"article."
+msgstr ""
+
+#. Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:256
+#, python-format
+msgid ""
+"%(object)s allows a maximum of %(excerpt_limit)s words be excerpted into a "
+"Wikipedia article."
+msgstr ""
+
+#. Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:263
+#, python-format
+msgid ""
+"%(object)s allows a maximum of %(excerpt_limit_percentage)s%% of an article "
+"be excerpted into a Wikipedia article."
+msgstr ""
+
 #. Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
-#: TWLight/resources/templates/resources/partner_detail.html:230
+#: TWLight/resources/templates/resources/partner_detail.html:281
 msgid "Special requirements for applicants"
 msgstr "Erityisvaatimukset hakijoille"
 
 #. Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate publisher or url.
-#: TWLight/resources/templates/resources/partner_detail.html:238
+#: TWLight/resources/templates/resources/partner_detail.html:289
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1470,11 +1534,8 @@ msgstr "Erityisvaatimukset hakijoille"
 #| "                  of use</a>.\n"
 #| "                "
 msgid ""
-"\n"
-"                    %(publisher)s requires that you agree with its <a href="
-"\"%(url)s\">terms\n"
-"                    of use</a>.\n"
-"                  "
+"%(publisher)s requires that you agree with its <a href=\"%(url)s\">terms of "
+"use</a>."
 msgstr ""
 "\n"
 "                  %(publisher)s vaatii, että hyväksyt <a href=\"%(url)s"
@@ -1482,71 +1543,56 @@ msgstr ""
 "                "
 
 #. Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:248
+#: TWLight/resources/templates/resources/partner_detail.html:299
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
 #| "                  %(publisher)s requires that you provide your real "
 #| "name.\n"
 #| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your real name.\n"
-"                  "
+msgid "%(publisher)s requires that you provide your real name."
 msgstr ""
 "\n"
 "                  %(publisher)s vaatii, että annat oikean nimesi.\n"
 "                "
 
 #. Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:257
+#: TWLight/resources/templates/resources/partner_detail.html:308
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
 #| "                  %(publisher)s requires that you provide your country of "
 #| "residence.\n"
 #| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your country of "
-"residence.\n"
-"                  "
+msgid "%(publisher)s requires that you provide your country of residence."
 msgstr ""
 "\n"
 "                  %(publisher)s vaatii, että nimeät asuinpaikkasi.\n"
 "                "
 
 #. Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:266
+#: TWLight/resources/templates/resources/partner_detail.html:317
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
 #| "                  %(publisher)s requires that you provide your "
 #| "occupation.\n"
 #| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your "
-"occupation.\n"
-"                  "
+msgid "%(publisher)s requires that you provide your occupation."
 msgstr ""
 "\n"
 "                  %(publisher)s vaatii, että nimeät ammattisi.\n"
 "                "
 
 #. Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:275
+#: TWLight/resources/templates/resources/partner_detail.html:326
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
 #| "                  %(publisher)s requires that you provide your "
 #| "institutional affiliation.\n"
 #| "                "
-msgid ""
-"\n"
-"                    %(publisher)s requires that you provide your "
-"institutional affiliation.\n"
-"                  "
+msgid "%(publisher)s requires that you provide your institutional affiliation."
 msgstr ""
 "\n"
 "                  %(publisher)s vaatii, että nimeät instituution, johon olet "
@@ -1554,7 +1600,7 @@ msgstr ""
 "                "
 
 #. Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:284
+#: TWLight/resources/templates/resources/partner_detail.html:335
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1563,11 +1609,8 @@ msgstr ""
 #| "                  to access.\n"
 #| "                "
 msgid ""
-"\n"
-"                    %(publisher)s requires that you specify a particular "
-"title that you want\n"
-"                    to access.\n"
-"                  "
+"%(publisher)s requires that you specify a particular title that you want to "
+"access."
 msgstr ""
 "\n"
 "                  %(publisher)s vaatii, että määrittelet nimikkeen, johon "
@@ -1575,58 +1618,8 @@ msgstr ""
 "                  käyttöoikeuden.\n"
 "                "
 
-#. Translators: If a user must select a specific collection of resources to apply for, they see this message. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:295
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(publisher)s requires that you specify a specific "
-#| "collection that you\n"
-#| "                    want to access. You may only apply for access to one "
-#| "collection at a\n"
-#| "                    time.\n"
-#| "                  "
-msgid ""
-"\n"
-"                      %(publisher)s requires that you specify a specific "
-"collection that you\n"
-"                      want to access. You may only apply for access to one "
-"collection at a\n"
-"                      time.\n"
-"                    "
-msgstr ""
-"\n"
-"                    %(publisher)s vaatii, että määrittelet kokoelman johon "
-"haluat\n"
-"                    käyttöoikeuden. Voit hakea käyttöoikeutta yhteen "
-"kokoelmaan\n"
-"                    kerrallaan.\n"
-"                  "
-
-#. Translators: If a user must select one or more collections of resources to apply for, they see this message. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:302
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(publisher)s requires that you specify one or more "
-#| "specific\n"
-#| "                    collections that you want to access.\n"
-#| "                  "
-msgid ""
-"\n"
-"                      %(publisher)s requires that you specify one or more "
-"specific\n"
-"                      collections that you want to access.\n"
-"                    "
-msgstr ""
-"\n"
-"                    %(publisher)s vaatii, että määrittelet yhden taiuseamman "
-"kokoelman\n"
-"                   johon haluat käyttöoikeuden.\n"
-"                  "
-
 #. Translators: If a user must register on the partner website before applying, they see this message. Don't translate partner.
-#: TWLight/resources/templates/resources/partner_detail.html:313
+#: TWLight/resources/templates/resources/partner_detail.html:345
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1635,11 +1628,8 @@ msgstr ""
 #| "                  to access.\n"
 #| "                "
 msgid ""
-"\n"
-"                    %(publisher)s requires that you sign up for an account "
-"before applying\n"
-"                    for access.\n"
-"                  "
+"%(publisher)s requires that you sign up for an account before applying for "
+"access."
 msgstr ""
 "\n"
 "                  %(publisher)s vaatii, että määrittelet nimikkeen, johon "
@@ -1648,59 +1638,59 @@ msgstr ""
 "                "
 
 #. Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
-#: TWLight/resources/templates/resources/partner_detail.html:332
+#: TWLight/resources/templates/resources/partner_detail.html:364
 msgid "Collections"
 msgstr "Kokoelmat"
 
 #. Translators: If a partner has their location listed, this message is a label for that location
-#: TWLight/resources/templates/resources/partner_detail.html:369
+#: TWLight/resources/templates/resources/partner_detail.html:401
 #, fuzzy
 #| msgid "Occupation"
 msgid "Location"
 msgstr "Ammatti"
 
 #. Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:373
+#: TWLight/resources/templates/resources/partner_detail.html:405
 msgid "Terms of use"
 msgstr "Käyttöehdot"
 
 #. Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/).
-#: TWLight/resources/templates/resources/partner_detail.html:376
+#: TWLight/resources/templates/resources/partner_detail.html:408
 msgid "Terms of use not available."
 msgstr "Käyttöehdot eivät ole saatavilla"
 
 #. Translators: This is the heading for the section of a partner page showing data about applications to that partner.
 #. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
-#: TWLight/resources/templates/resources/partner_detail.html:388
+#: TWLight/resources/templates/resources/partner_detail.html:420
 #: TWLight/templates/base.html:134
 msgid "Metrics"
 msgstr "Tilastot"
 
 #. Translators: This is the label for a number which shows the total number of aplications submitted for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:401
+#: TWLight/resources/templates/resources/partner_detail.html:433
 msgid "Total applications (all time)"
 msgstr "Kaikki hakemukset (kautta aikojen)"
 
 #. Translators: This is the label for a number which shows the total number of unique (not counting duplicates) users who have applied for access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:417
+#: TWLight/resources/templates/resources/partner_detail.html:449
 msgid "Total unique applicants (all time)"
 msgstr "Kaikki yksitäiset hakijat (kautta aikojen)"
 
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:439
+#: TWLight/resources/templates/resources/partner_detail.html:471
 msgid "Median days from application to decision"
 msgstr "Mediaaniaika päivissä hakemuksen tekemisestä päätöksen antamiseen"
 
 #. Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:450
+#: TWLight/resources/templates/resources/partner_detail.html:482
 msgid "Applications by status"
 msgstr "Hakemukset tilan mukaan"
 
 #. Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:454
-#: TWLight/resources/templates/resources/partner_detail.html:489
-#: TWLight/resources/templates/resources/partner_detail.html:495
-#: TWLight/resources/templates/resources/partner_detail.html:501
+#: TWLight/resources/templates/resources/partner_detail.html:486
+#: TWLight/resources/templates/resources/partner_detail.html:521
+#: TWLight/resources/templates/resources/partner_detail.html:527
+#: TWLight/resources/templates/resources/partner_detail.html:533
 #: TWLight/templates/dashboard.html:77 TWLight/templates/dashboard.html:143
 #: TWLight/templates/dashboard.html:148 TWLight/templates/dashboard.html:160
 #: TWLight/templates/dashboard.html:170 TWLight/templates/dashboard.html:186
@@ -1708,7 +1698,7 @@ msgid "download as csv"
 msgstr "lataa csv-tiedostona"
 
 #. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:461
+#: TWLight/resources/templates/resources/partner_detail.html:493
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1721,15 +1711,9 @@ msgstr "lataa csv-tiedostona"
 #| "%(total_apps_approved)s\n"
 #| "    "
 msgid ""
-"\n"
-"        Number of applications approved (all time): "
-"%(total_apps_approved_or_sent)s\n"
-"      "
+"Number of applications approved (all time): %(total_apps_approved_or_sent)s"
 msgid_plural ""
-"\n"
-"        Number of applications approved (all time): "
-"%(total_apps_approved_or_sent)s\n"
-"      "
+"Number of applications approved (all time): %(total_apps_approved_or_sent)s"
 msgstr[0] ""
 "\n"
 "      Hyväksyttyjen hakemusten määrä (kautta aikojen): "
@@ -1742,7 +1726,7 @@ msgstr[1] ""
 "    "
 
 #. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:470
+#: TWLight/resources/templates/resources/partner_detail.html:502
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1755,15 +1739,11 @@ msgstr[1] ""
 #| "%(unique_users_approved)s\n"
 #| "    "
 msgid ""
-"\n"
-"        Number of unique users with approved applications (all time): "
-"%(unique_users_approved_or_sent)s\n"
-"      "
+"Number of unique users with approved applications (all time): "
+"%(unique_users_approved_or_sent)s"
 msgid_plural ""
-"\n"
-"        Number of unique users with approved applications (all time): "
-"%(unique_users_approved_or_sent)s\n"
-"      "
+"Number of unique users with approved applications (all time): "
+"%(unique_users_approved_or_sent)s"
 msgstr[0] ""
 "\n"
 "      Yksittäiset muokkaajat, joiden hakemukset on hyväksytty (kautta "
@@ -1776,22 +1756,22 @@ msgstr[1] ""
 "    "
 
 #. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:486
+#: TWLight/resources/templates/resources/partner_detail.html:518
 msgid "Applications over time"
 msgstr "Hakemukset kautta aikojen"
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:489
+#: TWLight/resources/templates/resources/partner_detail.html:521
 msgid "All applications"
 msgstr "Kaikki hakemukset"
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:495
+#: TWLight/resources/templates/resources/partner_detail.html:527
 msgid "Approved applications only"
 msgstr "Vain hyväksytyt hakemukset"
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time.
-#: TWLight/resources/templates/resources/partner_detail.html:501
+#: TWLight/resources/templates/resources/partner_detail.html:533
 msgid "Unique users over time"
 msgstr "Yksittäiset muokkaajat kautta aikojen"
 
@@ -1823,12 +1803,11 @@ msgid "More info"
 msgstr "Lisää tietoa"
 
 #: TWLight/resources/templates/resources/partner_users.html:7
-#, python-format
-msgid ""
-"\n"
-"  %(object)s approved users\n"
-"  "
+#, fuzzy, python-format
+#| msgid "Partners with approved, unsent applications"
+msgid "%(partner)s approved users"
 msgstr ""
+"Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was made.
 #: TWLight/resources/templates/resources/partner_users.html:29
@@ -1873,12 +1852,12 @@ msgstr ""
 
 #: TWLight/resources/views.py:49
 msgid ""
-"This Partner is not available. You can see it because you are a staff "
+"This partner is not available. You can see it because you are a staff "
 "member, but it is not visible to non-staff users."
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:167
+#: TWLight/resources/views.py:169
 #, fuzzy
 #| msgid "Partners with approved, unsent applications"
 msgid "This partner is now waitlisted"
@@ -1886,7 +1865,7 @@ msgstr ""
 "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:171
+#: TWLight/resources/views.py:173
 #, fuzzy
 #| msgid "Partners with approved, unsent applications"
 msgid "This partner is now available for applications"
@@ -2264,10 +2243,7 @@ msgstr "Wikipedian Lähdekirjaston Käyttöoikeustoimisto"
 #| "\n"
 #| "            Hi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
 #| "          "
-msgid ""
-"\n"
-"                Hi, <a href=\"%(home_url)s\">%(username)s</a>!\n"
-"              "
+msgid "Hi, <a href=\"%(home_url)s\">%(username)s</a>!"
 msgstr ""
 "\n"
 "            Terve, <a href=\"%(home_url)s\">%(username)s</a>!\n"
@@ -2312,22 +2288,18 @@ msgstr "Kirjaudu sisään/luo tunnus"
 #: TWLight/templates/base.html:177
 #, python-format
 msgid ""
-"\n"
-"          You don't have an email on file. We can't finalize your access to\n"
-"          partner resources without an email. Please\n"
-"          <a href=\"%(email_url)s\">update your email</a>.\n"
-"        "
+"You don't have an email on file. We can't finalize your access to partner "
+"resources without an email. Please <a href=\"%(email_url)s\">update your "
+"email</a>."
 msgstr ""
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
 #: TWLight/templates/base.html:188
 #, python-format
 msgid ""
-"\n"
-"          You have requested a restriction on the processing of your data.\n"
-"          Most site functionality will not be available to you until you\n"
-"          <a href=\"%(restrict_url)s\">lift this restriction</a>.\n"
-"        "
+"You have requested a restriction on the processing of your data. Most site "
+"functionality will not be available to you until you <a href="
+"\"%(restrict_url)s\">lift this restriction</a>."
 msgstr ""
 
 #. Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
@@ -2798,11 +2770,9 @@ msgstr "Muokkaajan tiedot"
 #| "      It was last updated on %(last_updated_date)s.\n"
 #| "    "
 msgid ""
-"\n"
-"      Information with an * was retrieved from Wikipedia directly.\n"
-"      Other information was entered directly by users or site admins,\n"
-"      in their preferred language.\n"
-"    "
+"Information with an * was retrieved from Wikipedia directly. Other "
+"information was entered directly by users or site admins, in their preferred "
+"language."
 msgstr ""
 "\n"
 "      Tiedot, jotka on merkitty *, on haettu suoraan Wikipediasta.\n"
@@ -2813,11 +2783,12 @@ msgstr ""
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:47
-#, python-format
-msgid ""
-"\n"
-"              %(username)s has coordinator privileges on this site.\n"
-"            "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "              %(username)s has coordinator privileges on this site.\n"
+#| "            "
+msgid "%(username)s has coordinator privileges on this site."
 msgstr ""
 "\n"
 "              Käyttäjällä %(username)s on koordinaattorin oikeudet tällä "
@@ -2827,12 +2798,9 @@ msgstr ""
 #. Translators: This is shown on editor profiles, under the heading for Wikipedia editor data.
 #: TWLight/users/templates/users/editor_detail_data.html:5
 msgid ""
-"\n"
-"      This information is updated automatically from your Wikimedia "
-"account \n"
-"      each time you log in, except for the Contributions field, where you \n"
-"      can describe your Wikimedia editing history.\n"
-"    "
+"This information is updated automatically from your Wikimedia account each "
+"time you log in, except for the Contributions field, where you can describe "
+"your Wikimedia editing history."
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
@@ -2856,7 +2824,9 @@ msgid "Contributions"
 msgstr "Muokkaukset"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
+#. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/editor_detail_data.html:47
+#: TWLight/users/views.py:258
 #, fuzzy
 #| msgid "(update)"
 msgid "Update"
@@ -3472,12 +3442,16 @@ msgstr ""
 #. Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
 #.
 #: TWLight/users/templates/users/user_detail.html:9
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Hi, %(username)s! You don't have a Wikipedia editor profile "
+#| "attached\n"
+#| "      to your account here, so you are probably a site administrator.\n"
+#| "    "
 msgid ""
-"\n"
-"      Hi, %(username)s! You don't have a Wikipedia editor profile attached\n"
-"      to your account here, so you are probably a site administrator.\n"
-"    "
+"Hi, %(username)s! You don't have a Wikipedia editor profile attached to your "
+"account here, so you are probably a site administrator."
 msgstr ""
 "\n"
 "      Terve, %(username)s! Tunnukseesi ei ole liitetty Wikipedian "
@@ -3529,16 +3503,12 @@ msgstr ""
 "voivat arvioida hakemuksesi."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
+#. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:241 TWLight/users/views.py:305
-#: TWLight/users/views.py:349
+#: TWLight/users/views.py:241 TWLight/users/views.py:306
+#: TWLight/users/views.py:350
 msgid "You must be logged in to do that."
 msgstr ""
-
-#. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/views.py:258
-msgid "Update information"
-msgstr "Päivitä tiedot"
 
 #. Translators: Shown to the user when they successfully modify their personal information.
 #: TWLight/users/views.py:270
@@ -3546,13 +3516,13 @@ msgid "Your information has been updated."
 msgstr "Tietosi on päivitetty."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:315
+#: TWLight/users/views.py:316
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Sähköpostiksesi on vaihdettu {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:321
+#: TWLight/users/views.py:322
 #, fuzzy
 #| msgid ""
 #| "You may explore the site, but you will not be able to apply for access "
@@ -3565,12 +3535,12 @@ msgstr ""
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
 #. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/views.py:363
+#: TWLight/users/views.py:364
 msgid "Confirm"
 msgstr ""
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:505
+#: TWLight/users/views.py:506
 #, fuzzy
 #| msgid ""
 #| "You may explore the site, but you will not be able to apply for access "
@@ -3583,7 +3553,7 @@ msgstr ""
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:510
+#: TWLight/users/views.py:511
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
@@ -3637,6 +3607,55 @@ msgstr ""
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr ""
 "{username} sai käyttöoikeuden aineistoon <a href=\"{url}\">{partner}</a>"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(publisher)s requires that you specify a specific "
+#~| "collection that you\n"
+#~| "                    want to access. You may only apply for access to one "
+#~| "collection at a\n"
+#~| "                    time.\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                      %(publisher)s requires that you specify a specific "
+#~ "collection that you\n"
+#~ "                      want to access. You may only apply for access to "
+#~ "one collection at a\n"
+#~ "                      time.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                    %(publisher)s vaatii, että määrittelet kokoelman "
+#~ "johon haluat\n"
+#~ "                    käyttöoikeuden. Voit hakea käyttöoikeutta yhteen "
+#~ "kokoelmaan\n"
+#~ "                    kerrallaan.\n"
+#~ "                  "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(publisher)s requires that you specify one or more "
+#~| "specific\n"
+#~| "                    collections that you want to access.\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                      %(publisher)s requires that you specify one or more "
+#~ "specific\n"
+#~ "                      collections that you want to access.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                    %(publisher)s vaatii, että määrittelet yhden "
+#~ "taiuseamman kokoelman\n"
+#~ "                   johon haluat käyttöoikeuden.\n"
+#~ "                  "
+
+#~ msgid "Update information"
+#~ msgstr "Päivitä tiedot"
 
 #~ msgid "You have your preferences enabled to receive email on your home wiki"
 #~ msgstr ""
