@@ -31,6 +31,7 @@ from django.views.generic.list import ListView
 
 from TWLight.view_mixins import (CoordinatorOrSelf,
                                  CoordinatorsOnly,
+                                 PartnerCoordinatorOnly,
                                  EditorsOnly,
                                  ToURequired,
                                  EmailRequired,
@@ -856,7 +857,7 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
                 )
 
 
-class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
+class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
     model = Partner
     template_name = 'applications/send_partner.html'
 
