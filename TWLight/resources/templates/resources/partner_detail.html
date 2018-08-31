@@ -487,7 +487,7 @@
 
     <p>
       {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% blocktrans count counter=total_apps_approved %}
+      {% blocktrans trimmed count counter=total_apps_approved %}
         Number of applications approved (all time): {{ total_apps_approved_or_sent }}
       {% plural %}
         Number of applications approved (all time): {{ total_apps_approved_or_sent }}
@@ -496,7 +496,7 @@
 
     <p>
       {% comment %} Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% blocktrans count counter=unique_users_approved %}
+      {% blocktrans trimmed count counter=unique_users_approved %}
         Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
       {% plural %}
         Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}

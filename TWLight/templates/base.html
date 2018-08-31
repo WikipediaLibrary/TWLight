@@ -174,7 +174,7 @@
       <div class="alert alert-warning">
         {% url 'users:email_change' as email_url %}
         {% comment %} Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ email_url }}. {% endcomment %}
-        {% blocktrans %}
+        {% blocktrans trimmed %}
           You don't have an email on file. We can't finalize your access to
           partner resources without an email. Please
           <a href="{{ email_url }}">update your email</a>.
@@ -185,7 +185,7 @@
       <div class="alert alert-warning">
         {% url 'users:restrict_data' as restrict_url %}
         {% comment %} Translators: Shown if the current user has requested the processing of their data should be restricted. {% endcomment %}
-        {% blocktrans %}
+        {% blocktrans trimmed %}
           You have requested a restriction on the processing of your data.
           Most site functionality will not be available to you until you
           <a href="{{ restrict_url }}">lift this restriction</a>.
