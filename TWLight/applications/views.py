@@ -763,6 +763,14 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.editor
         context['versions'] = Version.objects.get_for_object(self.object)
+
+        # Check if the person viewing this application is actually this
+        # partner's coordinator, and not *a* coordinator who happens to
+        # have applied, or a superuser.
+        partner_coordinator = self.request.user == self.object.partner.coordinator
+        superuser = self.request.user.is_superuser
+        context['partner_coordinator'] = partner_coordinator or superuser
+
         return context
 
 
