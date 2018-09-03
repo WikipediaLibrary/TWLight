@@ -2,12 +2,13 @@ import copy
 from django_countries import countries
 from faker import Faker
 import random
+import string
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
 from TWLight.resources.factories import PartnerFactory, StreamFactory, VideoFactory
-from TWLight.resources.models import Language, Partner, Stream
+from TWLight.resources.models import Language, Partner, Stream, AccessCode
 
 class Command(BaseCommand):
     help = "Adds a number of example resources, streams, and tags."
@@ -144,6 +145,18 @@ class Command(BaseCommand):
             each_stream.accounts_available = random.randint(10, 100)
             each_stream.save()
 
+
+        # Set 5 partners use the access code distribution type,
+        # and generate a bunch of codes for each.
+        for partner in random.sample(available_partners, 5):
+            partner.distribution_type = Partner.CODES
+            partner.save()
+
+            for i in range(25):
+                new_access_code = AccessCode()
+                new_access_code.code = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+                new_access_code.partner = partner
+                new_access_code.save()
 
     def chance(self, selected, default, chance):
         # A percentage chance to select something, otherwise selects
