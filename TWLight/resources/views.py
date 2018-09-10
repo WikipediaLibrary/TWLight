@@ -3,9 +3,10 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.views.generic import DetailView, View
+from django.views.generic import DetailView, View, RedirectView
 from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
+from django.shortcuts import get_object_or_404
 
 from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
@@ -260,6 +261,7 @@ class PartnerSuggestView(EditorsOnly, FormView):
         suggest.suggested_company_name = form.cleaned_data['suggested_company_name']
         suggest.description = form.cleaned_data['description']
         suggest.company_url = form.cleaned_data['company_url']
+        suggest.author = self.request.user
         suggest.save()
         suggest.plus_ones.add(self.request.user)
         messages.add_message(self.request, messages.SUCCESS,
@@ -293,3 +295,19 @@ class SuggestDeleteView(CoordinatorsOnly, DeleteView):
         # Translators: Shown to coordinators when they successfully delete a partner suggestion
         _('Suggestion has been deleted.'))
         return HttpResponseRedirect(self.success_url)
+
+
+
+class SuggestUpvoteView(EditorsOnly, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        obj = get_object_or_404(Suggest, id=id)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.plus_ones.all():
+                obj.plus_ones.remove(user)
+            else:
+                obj.plus_ones.add(user)
+        return url_
