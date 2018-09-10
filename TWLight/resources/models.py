@@ -11,7 +11,7 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 from django_countries.fields import CountryField
@@ -455,13 +455,24 @@ class Suggest(models.Model):
     company_url = models.URLField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
         help_text=_("Link to the potential partner's website."))
-                    
-    plus_ones = models.ManyToManyField(User,
-        # Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion.
+    
+    author = models.ForeignKey(User, related_name='suggest_author', blank=True, null=True, on_delete=models.SET_NULL,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
+        help_text=_("User who authored this suggestion."))
+    
+    plus_ones = models.ManyToManyField(User, related_name='suggest_likes', blank=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
         help_text=_("Users who support this suggestion."))
-        
+    
     def __unicode__(self):
         return self.suggested_company_name
+        
+    def get_absolute_url(self):
+        return reverse('suggest')
+    
+    def get_upvote_url(self):
+        return reverse('upvote', kwargs={'pk': self.pk})
+    
     
     def save(self, *args, **kwargs):
         """Invalidate this suggestions's pandoc-rendered html from cache"""
