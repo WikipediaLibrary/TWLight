@@ -13,8 +13,9 @@
     <div class="panel-body">
       {% crispy form %}
     </div>
-    <br />
-    {% if all_suggestions %}
+  </div>
+  {% if all_suggestions %}
+    <div class="panel panel-default full-width">
       <div class="panel-heading">
         {% comment %} Translators: This is the title of the panel where user suggestions are displayed {% endcomment %}
         <strong><span class="panel-title">{% trans 'Browse and support suggestions' %}</span></strong>
@@ -26,30 +27,63 @@
               <div class="panel-title pull-left"><span class="panel-title">{{ suggest.suggested_company_name }}</span></div>
               {% if user|coordinators_only %}
                 {% comment %} Translators: This button is at the partner suggestions page for coordinators to delete suggestions. {% endcomment %}
-                <a href="{% url 'suggest-delete' suggest.id %}" class="btn btn-outline-danger pull-right">{% trans 'Delete' %} <i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
+                <a href="{% url 'suggest-delete' suggest.id %}" class="btn btn-outline-danger pull-right">{% trans 'Delete' %} <i class="fa fa-trash-o" aria-hidden="true"></i></a>
               {% endif %}
               <div class="clearfix"></div>
             </div>
-            <div class="panel-body">
-              {% comment %} Translators: This is the text that appears before the description of every partner suggestion. {% endcomment %}
-              <p>
-                <strong>{% trans 'Description' %}: </strong>
-                {% comment %}
-                  Cache lifetime should be None, which would be forever since we're
-                  invalidating on update. However, as 2017-04-06 a bug in django
-                  doesn't allow for None to be passed from here into cache.  The
-                  fix is in master, but not release.
-                  https://code.djangoproject.com/ticket/27882
-                {% endcomment %}
-                {% cache 31536000 suggested_partner_description suggest.pk %} 
-                  {{ suggest.description | safe }}
-                {% endcache %}
-              </p>
-              {% comment %} Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
-              <p><strong>{% trans 'URL' %}:</strong> <a href>{{ suggest.company_url }}</a></p>
-          </div><br />
+            <div class="panel-body ">
+              <div class="col-md-10">
+                {% comment %} Translators: This is the text that appears before the description of every partner suggestion. {% endcomment %}
+                <p>
+                  <strong>{% trans 'Description' %}: </strong>
+                  {% comment %}
+                    Cache lifetime should be None, which would be forever since we're
+                    invalidating on update. However, as 2017-04-06 a bug in django
+                    doesn't allow for None to be passed from here into cache.  The
+                    fix is in master, but not release.
+                    https://code.djangoproject.com/ticket/27882
+                  {% endcomment %}
+                  {% cache 31536000 suggested_partner_description suggest.pk %} 
+                    {{ suggest.description | safe }}
+                  {% endcache %}
+                </p>
+                {% comment %} Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
+                <p><strong>{% trans 'URL' %}:</strong> <a href>{{ suggest.company_url }}</a></p>
+              </div>
+              <div class="col-md-1 pull-right">
+                <a class="btn upvote{% if user in suggest.plus_ones.all %} btn-success{% else %} btn-default{% endif %}" data-href="{{ suggest.get_upvote_url }}" href="">
+                <span class="utext">{% if user in suggest.plus_ones.all %}{% trans 'Upvoted' %} {% else %}{% trans 'Upvote' %} {% endif %}</span><span class="count badge">{{ suggest.plus_ones.count }}</span>
+                </a>
+              </div>
+            </div>
+          </div>
         {% endfor %}
-      </div>
-    {% endif %}
-  </div>
+      </div>  
+    </div>
+  {% endif %}
 {% endblock content %}
+{% block javascript %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>
+    $('.upvote').click(function(e){
+      e.preventDefault();
+      var count = parseInt($(this).children('.count').text());
+      $(this).children('.utext').text($(this).children('.utext').text() == 'Upvoted ' ? 'Upvote ' : 'Upvoted ');
+      if($(this).hasClass('btn-success')){
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-default');
+        count--;
+        $(this).children('.count').text(count);
+      }
+      else{
+        $(this).addClass('btn-success');
+        $(this).removeClass('btn-default');
+        count++;
+        $(this).children('.count').text(count);
+      }
+      var this_ = $(this);
+      var upvoteURL = this_.attr("data-href");
+      $.get(upvoteURL);
+    });
+  </script>
+{% endblock javascript %}
