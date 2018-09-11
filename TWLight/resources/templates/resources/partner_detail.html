@@ -27,6 +27,7 @@
     {% url 'applications:apply_single' object.pk as app_url %}
     {% if object.is_waitlisted %}
     <div class="alert alert-warning visible-xs resource-label-warning">
+       {% comment %} Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
        <span class="resource-label">{% trans "Waitlisted" %}</span>
        <p>
        {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
@@ -39,21 +40,28 @@
     </div>
     {% endif %}
     {% if user_sent_apps %}
+      {% if object.renewals_available %}
         {% if user|restricted %}
+          {% comment %} Translators: This text labels a button which users can click to renew a previously approved application. {% endcomment %}
           <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled">{% trans "Renew" %}</button><br />
         {% else %}
           <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
         {% endif %}
+      {% endif %}
     {% elif user_open_apps %}
         {% if multiple_open_apps %}
+            {% comment %} Translators: This text labels a button which users can click to view previously submitted applications. {% endcomment %}
             <a href="{% url 'users:home' %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View applications" %}</a>
         {% else %}
+            {% comment %} Translators: This text labels a button which users can click to view a previously submitted application. {% endcomment %}
             <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View application" %}</a>
         {% endif %}
     {% else %}
         {% if user|restricted %}
+          {% comment %} Translators: This text labels a button which users can click to submit an application. {% endcomment %}
           <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
         {% else %}
+          {% comment %} Translators: This text labels a button which users can click to submit an application. {% endcomment %}
           <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a><br />
         {% endif %}
     {% endif %}
@@ -89,10 +97,12 @@
     </div>
     {% endif %}
     {% if user_sent_apps %}
-      {% if user|restricted %}
-        <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Renew" %}</button><br />
-      {% else %}
-        <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
+      {% if object.renewals_available %}
+        {% if user|restricted %}
+          <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Renew" %}</button><br />
+        {% else %}
+          <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
+        {% endif %}
       {% endif %}
     {% elif user_open_apps %}
     {% if multiple_open_apps %}
@@ -509,7 +519,7 @@
 
     <p>
       {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% blocktrans count counter=total_apps_approved %}
+      {% blocktrans trimmed count counter=total_apps_approved %}
         Number of applications approved (all time): {{ total_apps_approved_or_sent }}
       {% plural %}
         Number of applications approved (all time): {{ total_apps_approved_or_sent }}
@@ -518,7 +528,7 @@
 
     <p>
       {% comment %} Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% blocktrans count counter=unique_users_approved %}
+      {% blocktrans trimmed count counter=unique_users_approved %}
         Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
       {% plural %}
         Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}

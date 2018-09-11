@@ -14,6 +14,9 @@ from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf
 
 from .models import Partner, Stream
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 class PartnersFilterView(FilterView):
     model = Partner
@@ -141,7 +144,7 @@ class PartnersDetailView(DetailView):
                                         editor=self.request.user.editor,
                                         status=Application.SENT,
                                         partner=partner
-                                     ).order_by('date_closed')
+                                     ).order_by('-date_closed')
             open_apps = Application.objects.filter(
                                         editor=self.request.user.editor,
                                         status__in=(Application.PENDING, Application.QUESTION, Application.APPROVED),
@@ -149,17 +152,29 @@ class PartnersDetailView(DetailView):
                                      )
             context['user_sent_apps'] = False
             context['user_open_apps'] = False
-            if sent_apps.count() > 0:
-                context['latest_sent_app_pk'] = sent_apps[0].pk
-                context['user_sent_apps'] = True
-            elif open_apps.count() > 0:
+            if open_apps.count() > 0:
                 context['user_open_apps'] = True
                 if open_apps.count() > 1:
                     context['multiple_open_apps'] = True
                 else:
                     context['multiple_open_apps'] = False
                     context['open_app_pk'] = open_apps[0].pk
-                    
+            elif sent_apps.count() > 0:
+                context['latest_sent_app_pk'] = sent_apps[0].pk
+                context['user_sent_apps'] = True
+
+        partner_streams = Stream.objects.filter(partner=partner)
+        if partner_streams.count() > 0:
+            context['stream_unique_accepted'] = {}
+            for stream in partner_streams:
+                stream_unique_accepted = User.objects.filter(
+                                      editor__applications__partner=partner,
+                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                      editor__applications__specific_stream=stream).distinct().count()
+                context['stream_unique_accepted'][stream.name] = stream_unique_accepted
+        else:
+            context['stream_unique_accepted'] = None
+            
         return context
 
 
