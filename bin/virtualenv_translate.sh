@@ -38,6 +38,13 @@ message_files_changed=$(git diff --name-only ${refs} '*.html' '*.txt' '*.py' | w
 # Count the number of translation files changed.
 translation_files_changed=$(git diff --name-only ${refs} '*.po' | wc -l)
 
+# Just hacked in here, but sometimes, you just want the stuff to execute.
+if [ "${1}" = "force" ]
+then
+    message_files_changed=999
+    translation_files_changed=0
+fi
+
 # If message files changed but no translations changed, make messages.
 if [ "${message_files_changed}" -gt 0 ] && [ "${translation_files_changed}" -eq 0 ]
 then
