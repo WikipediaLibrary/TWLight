@@ -2,7 +2,8 @@
 
 env:
   global:
-    - TWLIGHT_HOME="$(pwd)"
+    - DJANGO_SETTINGS_MODULE=TWLight.settings.local
+    - PIP_USE_MIRRORS=true
     - TWLIGHT_USERNAME=travis
 
 language: python
@@ -19,8 +20,6 @@ services:
   - mysql
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=TWLight.settings.local
-  - export PIP_USE_MIRRORS=true
 
 # Install the dependencies.
 install:

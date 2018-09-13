@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Create symlink from travis virtualenv to TWLight
-ln -s ~/TWLight ~/virtualenv/python2.7
+export TWLIGHT_HOME=$(pwd)
 
 # Install cssjanus.
 mkdir -p ~/node_modules
