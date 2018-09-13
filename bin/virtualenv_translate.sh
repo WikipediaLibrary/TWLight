@@ -25,7 +25,7 @@ makemessages() {
       python manage.py makemessages --locale=${locale} || exit 1
       # Search and replace meaningless boilerplate information from headers.
       sed -i "s/# SOME DESCRIPTIVE TITLE./# TWLlight ${locale} translation./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
-      sed -i "s/"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"/#/" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      sed -i 's/"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
       # @TODO do this with Python instead of Perl to avoid extra dependencies.
       # multiline text munging is just so handy in Perl.
       perl -i -0pe 's/# FIRST AUTHOR \<EMAIL\@ADDRESS\>, YEAR.\n#\n#, fuzzy/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
