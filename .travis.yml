@@ -1,8 +1,9 @@
 ---
 
 env:
-  - TWLIGHT_HOME=$(pwd)
-  - TWLIGHT_USERNAME=travis
+  global:
+    - TWLIGHT_HOME="$(pwd)"
+    - TWLIGHT_USERNAME=travis
 
 language: python
 
