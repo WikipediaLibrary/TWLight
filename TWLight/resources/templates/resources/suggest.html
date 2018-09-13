@@ -4,6 +4,13 @@
 {% load i18n %}
 {% load twlight_perms %}
 
+{% block head_javascript %}
+ <script
+   src="https://code.jquery.com/jquery-2.2.4.min.js"
+   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+   crossorigin="anonymous"></script>
+{% endblock head_javascript %}
+
 {% block content %}
   <div class="panel panel-default full-width">
     <div class="panel-heading">
@@ -63,12 +70,11 @@
   {% endif %}
 {% endblock content %}
 {% block javascript %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script>
     $('.upvote').click(function(e){
       e.preventDefault();
       var count = parseInt($(this).children('.count').text());
-      $(this).children('.utext').text($(this).children('.utext').text() == 'Upvoted ' ? 'Upvote ' : 'Upvoted ');
+      $(this).children('.utext').text($(this).children('.utext').text() == '{% trans 'Upvoted' %} ' ? '{% trans 'Upvote' %} ' : '{% trans 'Upvoted' %} ');
       if($(this).hasClass('btn-success')){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-default');
