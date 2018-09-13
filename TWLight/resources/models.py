@@ -183,7 +183,11 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff specify whether users can request their account be renewed/extended for this partner.
         help_text=_('Can access grants to this partner be renewed? If so, '
             'users will be able to request renewals at any time.'))
-
+            
+    accounts_available = models.PositiveSmallIntegerField(blank=True, null=True, 
+        # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
+        help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
+    
     # Optional resource metadata
     # --------------------------------------------------------------------------
 
@@ -367,6 +371,11 @@ class Stream(models.Model):
         help_text=_("Name of stream (e.g. 'Health and Behavioral Sciences). "
             "Will be user-visible and *not translated*. Do not include the "
             "name of the partner here."))
+            
+    accounts_available = models.PositiveSmallIntegerField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
+        help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
+        
     description = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
         help_text=_("Optional description of this stream's resources."))

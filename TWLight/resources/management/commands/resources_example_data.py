@@ -108,14 +108,20 @@ class Command(BaseCommand):
 
         # Give any specific_stream flagged partners streams.
         stream_partners = all_partners.filter(specific_stream=True)
-
+        
+        # Random number of accounts available for all partners without streams
+        for accounts in all_partners:
+            if not accounts.specific_stream:
+                accounts.accounts_available = random.randint(10, 550)
+                accounts.save()
+            
         # If we happened to not create any partners with streams,
         # create one deliberately.
         if stream_partners.count() == 0:
             stream_partners = random.sample(all_partners, 1)
             stream_partners[0].specific_stream = True
             stream_partners[0].save()
-
+        
         for partner in stream_partners:
             for _ in range(3):
                 stream = StreamFactory(
@@ -123,6 +129,13 @@ class Command(BaseCommand):
                     name= fake.sentence(nb_words= 3)[:-1], # [:-1] removes full stop
                     description= fake.paragraph(nb_sentences=2)
                     )
+
+        # Random number of accounts available for all streams
+        all_streams = Stream.objects.all()
+        for each_stream in all_streams:
+            each_stream.accounts_available = random.randint(10, 100)
+            each_stream.save()
+
 
     def chance(self, selected, default, chance):
         # A percentage chance to select something, otherwise selects
