@@ -6,6 +6,13 @@ then
     source /etc/environment
 fi
 
+# By default we'll check unstaged changes, as this makes sense in development.
+# But we also need to be able to check the most recent commit for CICD.
+if [ "${1}" = "last-commit" ]
+then
+  refs='HEAD~..HEAD'
+fi
+
 source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 
 makemessages() {
@@ -25,9 +32,9 @@ makemessages() {
 # Count the number of files searched by makemessages
 # that have unstaged changes.
 # https://docs.djangoproject.com/en/1.11/ref/django-admin/
-message_files_changed=$(git diff-files --name-only -- '*.html' '*.txt' '*.py' --porcelain | wc -l)
+message_files_changed=$(git diff-files --name-only -- ${refs} '*.html' '*.txt' '*.py' --porcelain | wc -l)
 # Count the number of translation files changed.
-translation_files_changed=$(git diff-files --name-only -- '*.po' --porcelain | wc -l)
+translation_files_changed=$(git diff-files --name-only -- ${refs} '*.po' --porcelain | wc -l)
 
 # If message files changed but no translations changed, make messages.
 if [ "${message_files_changed}" -gt 0 ] && [ "${translation_files_changed}" -eq 0 ]
