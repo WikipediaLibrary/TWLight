@@ -1,5 +1,9 @@
 ---
 
+env:
+  - TWLIGHT_HOME=$(pwd)
+  - TWLIGHT_USERNAME=travis
+
 language: python
 
 cache: pip
@@ -16,8 +20,6 @@ services:
 before_install:
   - export DJANGO_SETTINGS_MODULE=TWLight.settings.local
   - export PIP_USE_MIRRORS=true
-  - export TWLIGHT_HOME=$(pwd)
-  - export TWLIGHT_USERNAME=travis
 
 # Install the dependencies.
 install:
