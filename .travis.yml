@@ -16,7 +16,7 @@ services:
 before_install:
   - export DJANGO_SETTINGS_MODULE=TWLight.settings.local
   - export PIP_USE_MIRRORS=true
-  - export TWLIGHT_HOME=.
+  - export TWLIGHT_HOME=~
   - export TWLIGHT_USERNAME=travis
 
 # Install the dependencies.
