@@ -4,7 +4,7 @@ env:
   global:
     - DJANGO_SETTINGS_MODULE=TWLight.settings.local
     - PIP_USE_MIRRORS=true
-    - TWLIGHT_USERNAME=travis
+    - TWLIGHT_UNIXNAME=travis
 
 language: python
 
