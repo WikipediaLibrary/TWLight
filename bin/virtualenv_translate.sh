@@ -34,7 +34,12 @@ makemessages() {
       # https://github.com/wikimedia/mediawiki-extensions-Translate/blob/master/ffs/GettextFFS.php#L108
       if [ "${locale}" != "en" ]
       then
-          sed -i 's/"#, fuzzy"/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+	  # If fuzzy is in the header, remove the first instance of it.
+	  if [ "$(head -5 ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po | grep '#, fuzzy')"  ]
+          then
+	      fuzzy='#, fuzzy'
+              sed -i "0,/${fuzzy}/s//#/" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+          fi
       fi
     done
 }
