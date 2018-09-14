@@ -24,10 +24,12 @@ makemessages() {
     for locale in "${langs[@]}"; do
       python manage.py makemessages --locale=${locale} || exit 1
       # Search and replace meaningless boilerplate information from headers.
-      sed -i "s/# SOME DESCRIPTIVE TITLE./# TWLlight ${locale} translation./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      sed -i "s/# SOME DESCRIPTIVE TITLE./# TWLight ${locale} translation./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
       sed -i "s/# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER/# Copyright (C) 2017 Wikimedia Foundation, Inc./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
-      sed -i 's/"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      sed -i "s/# This file is distributed under the same license as the PACKAGE package./# This file is distributed under the same license as the TWLight package./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
       sed -i 's/# FIRST AUTHOR \<EMAIL\@ADDRESS\>, YEAR./#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      sed -i 's/# FIRST AUTHOR , YEAR./#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      sed -i 's/"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
       # Remove fuzzy header on non-english po files. This is a wikimedia-specific thing:
       # https://github.com/wikimedia/mediawiki-extensions-Translate/blob/master/ffs/GettextFFS.php#L108
       if [ "${locale}" != "en" ]

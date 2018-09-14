@@ -1,14 +1,14 @@
-# TWLlight fr translation.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR , YEAR.
+# TWLight fr translation.
+# Copyright (C) 2017 Wikimedia Foundation, Inc.
+# This file is distributed under the same license as the TWLight package.
+#
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2018-09-13 22:20+0000\n"
+"POT-Creation-Date: 2018-09-14 16:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME \n"
 "Language-Team: LANGUAGE \n"
