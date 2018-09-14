@@ -25,10 +25,15 @@ makemessages() {
       python manage.py makemessages --locale=${locale} || exit 1
       # Search and replace meaningless boilerplate information from headers.
       sed -i "s/# SOME DESCRIPTIVE TITLE./# TWLlight ${locale} translation./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      sed -i "s/# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER/# Copyright (C) 2017 Wikimedia Foundation, Inc./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
       sed -i 's/"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
-      # @TODO do this with Python instead of Perl to avoid extra dependencies.
-      # multiline text munging is just so handy in Perl.
-      perl -i -0pe 's/# FIRST AUTHOR \<EMAIL\@ADDRESS\>, YEAR.\n#\n#, fuzzy/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      sed -i 's/# FIRST AUTHOR \<EMAIL\@ADDRESS\>, YEAR./#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      # Remove fuzzy header on non-english po files. This is a wikimedia-specific thing:
+      # https://github.com/wikimedia/mediawiki-extensions-Translate/blob/master/ffs/GettextFFS.php#L108
+      if [ "${locale}" != "en" ]
+      then
+          sed -i 's/"#, fuzzy"/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+      fi
     done
 }
 
