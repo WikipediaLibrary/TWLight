@@ -12,19 +12,29 @@
 {% endblock head_javascript %}
 
 {% block content %}
-  <div class="panel panel-default full-width">
-    <div class="panel-heading">
-      {% comment %} Translators: This is the title of the form where users can submit partner suggestions {% endcomment %}
-      <strong><span class="panel-title">{% trans 'Suggest partners' %}</span></strong>
+  {% if user.is_authenticated %}
+    <div class="panel panel-default full-width">
+      <div class="panel-heading">
+        {% comment %} Translators: This is the title of the form where users can submit partner suggestions. {% endcomment %}
+        <strong><span class="panel-title">{% trans 'Suggest partners' %}</span></strong>
+      </div>
+      <div class="panel-body">
+        {% crispy form %}
+      </div>
     </div>
-    <div class="panel-body">
-      {% crispy form %}
+  {% else %}
+    <div class="alert alert-warning">
+      {% url 'oauth_login' as the_url %}
+      {% comment %} Translators: This message is shown to users who visit the suggestions page and are not logged in. {% endcomment %}
+      {% blocktrans trimmed with request.path|urlencode as requested_path%}
+        To suggest partners, you should <strong><a href="{{ the_url }}?next={{ requested_path }}">log in</a></strong>.
+      {% endblocktrans %}
     </div>
-  </div>
+  {% endif %}
   {% if all_suggestions %}
     <div class="panel panel-default full-width">
       <div class="panel-heading">
-        {% comment %} Translators: This is the title of the panel where user suggestions are displayed {% endcomment %}
+        {% comment %} Translators: This is the title of the panel where user suggestions are displayed. {% endcomment %}
         <strong><span class="panel-title">{% trans 'Browse and support suggestions' %}</span></strong>
       </div>
       <div class="panel-body">
