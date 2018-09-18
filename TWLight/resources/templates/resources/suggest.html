@@ -67,11 +67,13 @@
                 {% comment %} Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
                 <p><strong>{% trans 'URL' %}:</strong> <a href>{{ suggest.company_url }}</a></p>
               </div>
-              <div class="col-md-2 pull-right" style="text-align: right;">
-                <a class="btn upvote{% if user in suggest.plus_ones.all %} btn-success{% else %} btn-default{% endif %}" data-href="{{ suggest.get_upvote_url }}" href="">
-                  <span class="utext">{% if user in suggest.plus_ones.all %}{% trans 'Upvoted' %} {% else %}{% trans 'Upvote' %} {% endif %}</span><span class="count badge">{{ suggest.plus_ones.count }}</span>
-                </a>
-              </div>
+              {% if user.is_authenticated %}
+                <div class="col-md-2 pull-right" style="text-align: right;">
+                  <a class="btn upvote{% if user in suggest.plus_ones.all %} btn-success{% else %} btn-default{% endif %}" data-href="{{ suggest.get_upvote_url }}" href="">
+                    <span class="utext">{% if user in suggest.plus_ones.all %}{% trans 'Upvoted' %} {% else %}{% trans 'Upvote' %} {% endif %}</span><span class="count badge">{{ suggest.plus_ones.count }}</span>
+                  </a>
+                </div>
+              {% endif %}
             </div>
           </div>
         {% endfor %}
