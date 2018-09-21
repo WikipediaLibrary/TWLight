@@ -331,6 +331,14 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   padding: 6px 0px 0px 25px;
 }
 
+.resource-label-danger {
+  background-image: url("../img/bullet-danger.png");
+  background-repeat: no-repeat;
+  background-position: top left; /* Must set explicitly for CSS Janus. */
+  min-height: 2em;
+  padding: 6px 0px 0px 25px;
+}
+
 .resource-label-subject a:focus, .resource-label-subject a:hover, .resource-label-languages a:focus, .resource-label-languages a:hover {
   color: #23527c;
   text-decoration: underline;
@@ -338,6 +346,10 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
 
 .resource-label-warning .resource-label {
   color: #8a6d3b;
+}
+
+.resource-label-danger .resource-label {
+  color: #ba5d5d;
 }
 
 .pipe {

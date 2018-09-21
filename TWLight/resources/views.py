@@ -1,18 +1,23 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.views.generic import DetailView, View
+from django.views.generic import DetailView, View, RedirectView
+from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
+from django.shortcuts import get_object_or_404
 
 from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
                                     get_data_count_by_month,
                                     get_users_by_partner_by_month)
-from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf
+from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
-from .models import Partner, Stream
+from .forms import SuggestForm
+from .models import Partner, Stream, Suggest
 
 import logging
 
@@ -240,3 +245,81 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
             context['partner_streams'] = False
 
         return context
+
+
+
+class PartnerSuggestView(FormView):
+    model=Suggest
+    template_name = 'resources/suggest.html'
+    form_class = SuggestForm
+    
+    def get_queryset(self):
+            return Suggest.objects.order_by('suggested_company_name')
+    
+    def form_valid(self, form):
+        # Right now, we only hide the suggestion form on the template.
+        # Adding an extra check to ensure the user is looged in
+        # so as to not break things.
+        try:
+            assert self.request.user.is_authenticated()
+            suggest = Suggest()
+            suggest.suggested_company_name = form.cleaned_data['suggested_company_name']
+            suggest.description = form.cleaned_data['description']
+            suggest.company_url = form.cleaned_data['company_url']
+            suggest.author = self.request.user
+            suggest.save()
+            suggest.plus_ones.add(self.request.user)
+            messages.add_message(self.request, messages.SUCCESS,
+            # Translators: Shown to users when they successfully add a new partner suggestion.
+            _('Your suggestion has been added.'))
+            return HttpResponseRedirect(reverse('suggest'))
+        except AssertionError:
+            messages.add_message (request, messages.WARNING,
+                # Translators: This message is shown to users who attempt to post data to suggestion form without logging in
+                _('You must be logged in to do that.'))
+            raise PermissionDenied
+
+        return self.request.user.editor
+        
+    def get_context_data(self, **kwargs):
+        context = super(PartnerSuggestView, self).get_context_data(**kwargs)
+        
+        all_suggestions = Suggest.objects.all()
+        if all_suggestions.count() > 0:
+            context['all_suggestions'] = all_suggestions
+        
+        else:
+            context['all_suggestions'] = None
+        
+        return context
+
+
+
+class SuggestDeleteView(CoordinatorsOnly, DeleteView):
+    model=Suggest
+    form_class = SuggestForm
+    success_url = reverse_lazy('suggest')
+            
+    def delete(self, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        messages.add_message(self.request, messages.SUCCESS,
+        # Translators: Shown to coordinators when they successfully delete a partner suggestion
+        _('Suggestion has been deleted.'))
+        return HttpResponseRedirect(self.success_url)
+
+
+
+class SuggestUpvoteView(EditorsOnly, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        obj = get_object_or_404(Suggest, id=id)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.plus_ones.all():
+                obj.plus_ones.remove(user)
+            else:
+                obj.plus_ones.add(user)
+        return url_

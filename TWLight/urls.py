@@ -18,7 +18,9 @@ import TWLight.i18n.urls
 from TWLight.applications.urls import urlpatterns as applications_urls
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
 from TWLight.graphs.views import DashboardView
+from TWLight.resources.models import Suggest
 from TWLight.resources.urls import urlpatterns as partners_urls
+from TWLight.resources.views import PartnerSuggestView, SuggestDeleteView, SuggestUpvoteView
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
@@ -65,13 +67,25 @@ urlpatterns = [
 
     url(r'^dashboard/$', DashboardView.as_view(), name='dashboard'),
     url(r'^terms/$', TermsView.as_view(), name='terms'),
+    
+    # For partner suggestions
+    url(r'^suggest/$',
+        PartnerSuggestView.as_view(),
+        name='suggest'),
+    url(r'^suggest/(?P<pk>[0-9]+)/delete/$',
+        SuggestDeleteView.as_view(),
+        name='suggest-delete'),
+    url(r'^suggest/(?P<pk>[0-9]+)/upvote/$',
+        SuggestUpvoteView.as_view(),
+        name='upvote'),
+        
     # Cached for 24 hours.
     url(r'^i18n-whitelist$', cache_page(86400)(LanguageWhiteListView.as_view()), name='i18n_whitelist'),
     url(r'^$', HomePageView.as_view(), name='homepage'),
     url(r'^about/$',
         TemplateView.as_view(template_name='about.html'),
         name='about'),
-	url(r'^activity/$',
+    url(r'^activity/$',
         HomePageView.as_view(template_name='activity.html'),
         name='activity'),
 ]
