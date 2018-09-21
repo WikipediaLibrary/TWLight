@@ -335,6 +335,12 @@ class Partner(models.Model):
         return self.status == self.WAITLIST
 
 
+    @property
+    def is_not_available(self):
+        return self.status == self.NOT_AVAILABLE
+
+
+
 
 class PartnerLogo(models.Model):
     partner = models.OneToOneField('Partner', related_name='logos')
