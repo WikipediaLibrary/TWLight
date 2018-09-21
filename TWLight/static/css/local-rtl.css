@@ -334,7 +334,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
 .resource-label-danger {
   background-image: url("../img/bullet-danger.png");
   background-repeat: no-repeat;
-  background-position: top left; /* Must set explicitly for CSS Janus. */
+  background-position: top right; /* Must set explicitly for CSS Janus. */
   min-height: 2em;
   padding: 6px 0px 0px 25px;
 }
