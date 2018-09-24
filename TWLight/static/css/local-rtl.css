@@ -264,6 +264,12 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   margin-top: .7em;
 }
 
+.browse-suggest {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  justify-content: flex-end;
+}
+
 /* Quick hack for tos misalignment on applications. */
 .apply-tos {
   margin-left: 100%;
