@@ -7,7 +7,7 @@ from crispy_forms.layout import Submit, Layout
 class SuggestForm(forms.Form):
     suggested_company_name = forms.CharField(max_length = 40,)
     description = forms.CharField(widget = forms.Textarea, max_length = 500,)
-    company_url = forms.URLField()
+    company_url = forms.URLField(initial = 'http://')
     
     def __init__(self, *args, **kwargs):
         super(SuggestForm, self).__init__(*args, **kwargs)
