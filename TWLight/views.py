@@ -178,7 +178,12 @@ class HomePageView(TemplateView):
 class StaffDashboardView(StaffOnly, View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'staff.html')
+        context = {}
+
+        context['accesscode_partners'] = Partner.objects.filter(
+            distribution_type=Partner.CODES)
+
+        return render(request, 'staff.html', context)
 
     def post(self, request, *args, **kwargs):
         # This code was based on the guide at

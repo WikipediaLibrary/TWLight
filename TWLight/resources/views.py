@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, View
@@ -12,7 +13,7 @@ from TWLight.graphs.helpers import (get_median,
                                     get_users_by_partner_by_month)
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf
 
-from .models import Partner, Stream
+from .models import Partner, Stream, AccessCode
 
 import logging
 
@@ -240,3 +241,17 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
             context['partner_streams'] = False
 
         return context
+
+
+
+class PartnerUnassignCode(CoordinatorOrSelf, DetailView):
+    model = AccessCode
+    template_name = 'resources/partner_unassign_code.html'
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object()
+
+        object.application = None
+        object.save()
+
+        return HttpResponseRedirect(reverse('partners:users', kwargs={'pk':object.partner.pk}))
