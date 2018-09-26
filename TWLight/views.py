@@ -222,10 +222,20 @@ class StaffDashboardView(StaffOnly, View):
                                     num_columns=num_columns)))
                 return HttpResponseRedirect(staff_url)
 
+
             access_code = fields[0].strip()
+
+            if len(access_code) > 60:
+                # Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
+                messages.error(request, _("Access code on line {line_num} is "
+                    "too long for the database field.".format(
+                        line_num=line_num+1)))
+                return HttpResponseRedirect(staff_url)
+
             try:
                 partner_pk = int(fields[1].strip())
             except ValueError:
+                # Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
                 messages.error(request, _("Second column should only contain "
                     "numbers. Error on line {line_num}.".format(
                         line_num=line_num+1)))
