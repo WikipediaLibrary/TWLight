@@ -456,7 +456,7 @@ class AccessCode(models.Model):
 
     partner = models.ForeignKey(Partner, db_index=True, related_name="accesscodes")
 
-    code = models.CharField(max_length=30,
+    code = models.CharField(max_length=60,
         # Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
         help_text=_("An access code for this partner."))
 
