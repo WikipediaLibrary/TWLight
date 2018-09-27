@@ -130,11 +130,13 @@
         <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
       </form>
     {% elif object.distribution_type == object.CODES %}
+      <p>
       {% comment %} Translators: This text guides coordinators in using the code sending interface for approved applications. {% endcomment %}
       {% blocktrans trimmed %}
         Use the dropdown menus to denote which editor will receive each code.
-        Make sure to send each code before clicking 'Mark as sent'.
+        Make sure to send each code via email before clicking 'Mark as sent'.
       {% endblocktrans %}
+      </p>
       <form method="POST">
         {% csrf_token %}
         <div class="form-group">
