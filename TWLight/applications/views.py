@@ -972,6 +972,17 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             send_outputs = [(output.split("_")[0], output.split("_")[1])
                 for output in select_outputs if output != "default"]
 
+            # Make sure the coordinator hasn't selected the same code
+            # multiple times.
+            all_codes = [output[1] for output in send_outputs]
+            if len(all_codes) > len(set(all_codes)):
+                messages.add_message(self.request, messages.ERROR,
+                    # Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
+                    _('Error: Code used multiple times.'))
+                return HttpResponseRedirect(reverse(
+                    'applications:send_partner', kwargs={
+                        'pk': self.get_object().pk}))
+
             for send_output in send_outputs:
                 app_pk = send_output[0]
                 app_code = send_output[1]
