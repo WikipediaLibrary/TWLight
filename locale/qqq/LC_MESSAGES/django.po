@@ -1,13 +1,14 @@
 # Translation of Wikipedia Library Card Platform to Message documentation (Message documentation)
 # Exported from translatewiki.net
 #
+# Author: Robby
 msgid ""
 msgstr ""
 ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2018-09-14 20:14+0000\n"
-"PO-Revision-Date: 2018-09-20 09:23:24+0000\n"
+"PO-Revision-Date: 2018-10-03 20:25:55+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -313,7 +314,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_evaluation.html:128
 #: TWLight/users/templates/users/editor_detail_data.html:72
 msgid "No"
-msgstr ""
+msgstr "{{Identical|No}}"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
@@ -882,7 +883,7 @@ msgstr ""
 #: TWLight/graphs/views.py:395 TWLight/resources/models.py:81
 #: TWLight/users/models.py:74 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
-msgstr ""
+msgstr "{{Identical|Sprooch}}"
 
 #: TWLight/graphs/views.py:396
 msgid "Number of users"
@@ -896,7 +897,7 @@ msgstr ""
 
 #: TWLight/resources/models.py:48
 msgid "Name"
-msgstr ""
+msgstr "{{Identical|Name}}"
 
 #: TWLight/resources/models.py:49
 msgid "Slug"
@@ -2152,7 +2153,7 @@ msgstr ""
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
 #: TWLight/users/templates/users/preferences.html:21
 msgid "Password"
-msgstr ""
+msgstr "{{Identical|Password}}"
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
 #: TWLight/users/templates/users/preferences.html:40

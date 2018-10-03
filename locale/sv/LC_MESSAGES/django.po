@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-09-20 09:23:22+0000\n"
+"PO-Revision-Date: 2018-10-03 20:25:53+0000\n"
 "X-POT-Import-Date: 2018-09-17 15:27:35+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2122,7 +2122,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail_data.html:144
 #, python-format
 msgid "You may <a href=\"%(update_url)s\">update or delete</a> your data at any time."
-msgstr ""
+msgstr "Du kan <a href=\"%(update_url)s\">uppdatera eller radera</a> din data när som helst."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
 #: TWLight/users/templates/users/editor_detail_data.html:155
