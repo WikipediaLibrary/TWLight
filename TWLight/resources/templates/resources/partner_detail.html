@@ -229,7 +229,7 @@
             <ul>
               {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
               {% for each_tutorial in video_tutorials %}
-                <li><a href={{ each_tutorial | safe }}>{% blocktrans with forloop.counter as count %}Video {{ count }}{% endblocktrans %}</a></li>
+                <li><a href={{ each_tutorial | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
               {% endfor %}
             </ul>
           </div>
