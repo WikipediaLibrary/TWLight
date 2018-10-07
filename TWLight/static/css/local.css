@@ -95,16 +95,16 @@ header {
 }
 
 .site-title {
-	font-family: Palatino; 
-	font-size:1.5em; 
-	font-weight:bold; 
-	margin: -10px 0px 10px 0px; 
+	font-family: Palatino;
+	font-size:1.5em;
+	font-weight:bold;
+	margin: -10px 0px 10px 0px;
 	color:#000000;
 }
 
 .logo {
-	height:70px; 
-	float:left; 
+	height:70px;
+	float:left;
 	padding:5px 20px 5px 0px;
 }
 
@@ -178,7 +178,7 @@ nav .divider {
 
 .navbar-left {
 	height:78px;
-	padding-top:5px; 
+	padding-top:5px;
 }
 
 @media (max-width: 767px) {
@@ -187,23 +187,23 @@ nav .divider {
   }
 
   li.mobile-menu {
-	font-size:.9em;	
+	font-size:.9em;
 }
 }
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
 .site-title {
-	font-family: Palatino; 
-	font-size:.9em; 
-	font-weight:bold; 
-	margin: -10px 0px 10px 0px; 
+	font-family: Palatino;
+	font-size:.9em;
+	font-weight:bold;
+	margin: -10px 0px 10px 0px;
 	color:#000000;
 }
 
 .logo {
-	height:50px; 
-	float:left; 
+	height:50px;
+	float:left;
 	padding:0px 10px 0px 0px;
 }
 
@@ -297,7 +297,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   padding: .15em .6em;
   letter-spacing: 0.25px;
   font-weight: 500;
-  margin-top: 5px; 
+  margin-top: 5px;
 }
 
 .resource-label {
@@ -427,9 +427,9 @@ A few spots just need padding instead of margin.
 
 
 .banner-flag {
-  background-image: url("../img/banner.png"); 
+  background-image: url("../img/banner.png");
   background-repeat: no-repeat;
-  background-position: right top;  
+  background-position: right top;
 }
 
 .partner-logo {
@@ -494,12 +494,12 @@ A few spots just need padding instead of margin.
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
 .nav-greeting {
-	font-size:.9em; 
+	font-size:.9em;
 }
 
 li.mobile-menu {
 	width:150px;
-	font-size:.9em;	
+	font-size:.9em;
 }
 
  .nav li a {
@@ -518,6 +518,96 @@ li.mobile-menu {
 	box-shadow:1px 1px 2px #eaeaea;
 	font-size:1em;
 }
+}
+
+/*Terms of Service page styles*/
+.tos{
+  overflow: hidden;
+}
+.tos-header{
+  width: 100%;
+  margin-bottom: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+.tos-header h2{
+  min-height: 0;
+}
+.tos-meta{
+  font-size: 12px;
+  font-style: italic;
+}
+.tos-meta span{
+  display: inline-block;
+}
+.tos-meta span:after{
+  content: " | "
+}
+.tos-meta span:last-child:after{
+  content: "";
+}
+.tos-nav{
+  padding: 20px 0;
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+  columns: 2;
+}
+@media screen and (min-width:767px){
+  .tos-nav{
+    float: left;
+    width: 200px;
+    columns: 1;
+  }
+}
+.tos-nav-items{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tos-nav-item{
+  margin-bottom: 10px;
+}
+input[type=checkbox].agreement-check{
+  margin-right: 8px;
+}
+.agreement:before{
+  content: '\2714'; /*heavy checkmark*/
+  display: inline-block;
+  margin-right: 8px;
+}
+.tos-terms{
+  padding-top: 20px;
+}
+@media screen and (min-width:767px){
+  .tos-terms{
+    float: left;
+    width: calc(100% - 240px);
+    margin-left: 40px;
+  }
+}
+.tos-section{
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #000;
+}
+@media screen and (min-width: 900px){
+  .tos-section{
+    width: 60%;
+  }
+}
+.tos-section:last-child{
+  border-bottom: 0;
+}
+.tos-section h3{
+  margin-top: 7px;
+}
+.tos-section .form-control{
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+.tos-disabled{
+  color: #aaa;
 }
 
 /*

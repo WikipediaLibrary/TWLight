@@ -58,6 +58,36 @@ class UserProfile(models.Model):
     # Related name for backwards queries defaults to "userprofile".
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Have they agreed to our terms?
+    tos_intro = models.BooleanField(
+        default=False,
+        #Translators: User must agree to the intro section of the terms of use.
+        help_text=_("I agree")
+    )
+    tos_requirements = models.BooleanField(
+        default=False,
+        #Translators: User must agree to the requirements section of the terms of use.
+        help_text=_("I agree")
+    )
+    tos_applying = models.BooleanField(
+        default=False,
+        #Translators: User must agree to the applying section of the terms of use.
+        help_text=_("I agree")
+    )
+    tos_data_retention = models.BooleanField(
+        default=False,
+        #Translators: User must agree to the data retention section of the terms of use.
+        help_text=_("I agree")
+    )
+    tos_publisher_resources = models.BooleanField(
+        default=False,
+        #Translators: User must agree to the publisher resources section of the terms of use.
+        help_text=_("I agree")
+    )
+    tos_important_note = models.BooleanField(
+        default=False,
+        #Translators: User must agree to the important note section of the terms of use.
+        help_text=_("I agree")
+    )
     terms_of_use = models.BooleanField(default=False,
         # Translators: Users must agree to the website terms of use.
         help_text=_("Has this user agreed with the terms of use?"))

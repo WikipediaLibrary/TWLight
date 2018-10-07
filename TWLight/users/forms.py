@@ -72,7 +72,15 @@ class RestrictDataForm(forms.Form):
 class TermsForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['terms_of_use']
+        fields = ['tos_intro', 'tos_applying', 'tos_data_retention', 'tos_requirements', 'tos_publisher_resources', 'tos_important_note', 'terms_of_use']
+        widgets = {
+            'tos_intro': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'intro'}),
+            'tos_applying': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'applying'}),
+            'tos_data_retention': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'data-retention'}),
+            'tos_requirements': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'requirements'}),
+            'tos_publisher_resources': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'publisher-resources'}),
+            'tos_important_note': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'important-note'}),            
+        }
 
 
     def __init__(self, *args, **kwargs):
