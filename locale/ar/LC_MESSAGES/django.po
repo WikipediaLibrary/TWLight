@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Meno25
+# Author: Nikkimaria
 # Author: ديفيد
 msgid ""
 msgstr ""
@@ -9,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2018-09-14 20:14+0000\n"
-"PO-Revision-Date: 2018-10-03 20:25:52+0000\n"
+"PO-Revision-Date: 2018-10-09 08:35:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -735,9 +736,9 @@ msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخو�
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. We are happy to inform you that your application has\nbeen approved. You can expect to receive access details within a week or \ntwo once it has been processed.\n\nCheers!\n\nThe Wikipedia Library\n"
-msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s. يسعدنا إعلامك أن طلبك قد تم قبوله. سوف نسعى خلال الأسبوعين القادمين لتسليمك البيانات المطلوبة حتى يتسنى لك الدخول لهذا المصدر. هنيئا! مكتبة ويكيبيديا"
+msgstr "\nعزيزي %(user)s، شكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s. يسعدنا إعلامك أن طلبك قد تم قبوله. سوف نسعى خلال الأسبوعين القادمين لتسليمك البيانات المطلوبة حتى يتسنى لك الدخول لهذا المصدر. هنيئا! مكتبة ويكيبيديا"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -752,9 +753,9 @@ msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخو�
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "\nDear %(user)s,\n\nThank you for coordinating %(partner)s resources through\nThe Wikipedia Library. There are one or more comments on an application that\nrequire a response from you. Please reply to these at:\n%(app_url)s\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s. يسعدنا إعلامك أن طلبك قد تم قبوله. سوف نسعى خلال الأسبوعين القادمين لتسليمك البيانات المطلوبة حتى يتسنى لك الدخول لهذا المصدر. هنيئا! مكتبة ويكيبيديا"
+msgstr "\nعزيزي %(user)s،\n\nشكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s من خلال مكتبة ويكيبيديا. هناك تعليق واحد أو أكثر على طلب يتطلب ردا منك. من فضلك رد عليه في:\n%(app_url)s\n\nتحية،\n\nمكتبة ويكيبيديا\n"
 
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
 #: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
@@ -770,9 +771,9 @@ msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخو�
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. There are one or more comments on your application that\nrequire a response from you. Please reply to these at:\n%(app_url)s\nso we can evaluate your application.\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s. يسعدنا إعلامك أن طلبك قد تم قبوله. سوف نسعى خلال الأسبوعين القادمين لتسليمك البيانات المطلوبة حتى يتسنى لك الدخول لهذا المصدر. هنيئا! مكتبة ويكيبيديا"
+msgstr "\nعزيزي %(user)s،\n\nشكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s من خلال مكتبة ويكيبيديا. هناك تعليق واحد أو أكثر على طلب يتطلب ردا منك. من فضلك رد عليه في:\n%(app_url)s\nحتى يمكننا تقييم طلبك.\n\nتحية،\n\nمكتبة ويكيبيديا\n"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
@@ -806,7 +807,7 @@ msgstr "<p>عزيزي%(user)s،</p> <p>تشير سجلاتنا إلى أنك ا�
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
 #, python-format
 msgid "\nDear %(user)s,\n\nOur records indicate that you are the designated coordinator for partners that \nhave a total of %(app_count)s applications with a status of %(app_status)s.\nThis is a gentle reminder that you may review applications at:\n%(link)s\n\nIf you received this message in error, drop us a line at:\nwikipedialibrary@wikimedia.org\n\nThanks for helping review Wikipedia Library applications!\n"
-msgstr "عزيزي%(user)s،\n\nتشير سجلاتنا إلى أنك المنسق المعين للشركاء الذين  \nلديهم إجمالي %(app_count)s طلبات بحالة %(app_status)s.\nهذا تذكير لطيف بأنك قد تراجع الطلبات على: \n%(link)s\n\nإذا تلقيت هذه الرسالة بالخطأ، أرسل لنا سطرا في\nwikipedialibrary@wikimedia.org\n\nشكرا على المساعدة في مراجعة طلبات مكتبة ويكيبيديا!\n"
+msgstr "\nعزيزي%(user)s،\n\nتشير سجلاتنا إلى أنك المنسق المعين للشركاء الذين  \nلديهم إجمالي %(app_count)s طلبات بحالة %(app_status)s.\nهذا تذكير لطيف بأنك قد تراجع الطلبات على: \n%(link)s\n\nإذا تلقيت هذه الرسالة بالخطأ، أرسل لنا سطرا في\nwikipedialibrary@wikimedia.org\n\nشكرا على المساعدة في مراجعة طلبات مكتبة ويكيبيديا!\n"
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
@@ -822,9 +823,9 @@ msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخو�
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. Unfortunately at this time your application has not been\napproved. You can view your application and review comments at:\n%(app_url)s\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s. يسعدنا إعلامك أن طلبك قد تم قبوله. سوف نسعى خلال الأسبوعين القادمين لتسليمك البيانات المطلوبة حتى يتسنى لك الدخول لهذا المصدر. هنيئا! مكتبة ويكيبيديا"
+msgstr "\nعزيزي %(user)s،\n\nشكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s من خلال مكتبة ويكيبيديا. لسوء الحظ فطلبك لم يتم قبوله. يمكنك مراجعة طلبك ومراجعة التعليقات في:\n%(app_url)s\n\nتحية،\n\nمكتبة ويكيبيديا\n"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
@@ -839,9 +840,9 @@ msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخو�
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. There are no accounts currently available so your\napplication has been waitlisted. Your application will be evaluated if/when\nmore accounts become available. You can see all available resources at:\n%(link)s\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr "عزيزي %(user)s، شكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s. يسعدنا إعلامك أن طلبك قد تم قبوله. سوف نسعى خلال الأسبوعين القادمين لتسليمك البيانات المطلوبة حتى يتسنى لك الدخول لهذا المصدر. هنيئا! مكتبة ويكيبيديا"
+msgstr "\nعزيزي %(user)s،\n\nشكرا على تقديم طلب حق الدخول إلى مراجع %(partner)s من خلال مكتبة ويكيبيديا. لا توجد حسابات متوفرة حاليا لذا فطلبك تمت إضافته لقائمة الانتظار. طلبك سيتم تقييمه لو/عندما تكون هناك حسابات أخرى متوفرة. يمكنك رؤية كل الموارد المتوفرة في:\n%(link)s\n\nتحية،\n\nمكتبة ويكيبيديا\n"
 
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
