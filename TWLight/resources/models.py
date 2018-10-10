@@ -325,9 +325,9 @@ class Partner(models.Model):
           send_instructions_cache_key = make_template_fragment_key(
               'partner_send_instructions', [code, self.pk]
           )
+          cache.delete(short_description_cache_key)
           cache.delete(description_cache_key)
           cache.delete(send_instructions_cache_key)
-          cache.delete(short_description_cache_key)
 
     @property
     def get_languages(self):
