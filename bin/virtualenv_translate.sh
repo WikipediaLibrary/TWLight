@@ -47,9 +47,9 @@ makemessages() {
 # Count the number of files searched by makemessages
 # that have unstaged changes.
 # https://docs.djangoproject.com/en/1.11/ref/django-admin/
-message_files_changed=$(git diff --name-only ${refs} '*.html' '*.txt' '*.py' | wc -l)
+message_files_changed=$(git diff --name-only ${refs} 'TWLight/*.html' 'TWLight/*.txt' 'TWLight/*.py' | wc -l)
 # Count the number of translation files changed.
-translation_files_changed=$(git diff --name-only ${refs} '*.po' | wc -l)
+translation_files_changed=$(git diff --name-only ${refs} 'locale/*.po' | wc -l)
 
 # Just hacked in here, but sometimes, you just want the stuff to execute.
 if [ "${1}" = "force" ]
