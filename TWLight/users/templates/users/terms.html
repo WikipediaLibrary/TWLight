@@ -262,9 +262,9 @@
             {% if user.is_authenticated %}
               <div class="form-control">
                 <label>{{ form.tos_publisher_resources }} {{ form.tos_publisher_resources.help_text }}</label>
-                {% if form.tos_publisher.errors %}
+                {% if form.tos_publisher_resources.errors %}
                   <ul class="errorlist">
-                    {% for error in form.tos_publisher.errors %}
+                    {% for error in form.tos_publisher_resources.errors %}
                       <li class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{{ error }}</li>
                     {% endfor %}
                   </ul>

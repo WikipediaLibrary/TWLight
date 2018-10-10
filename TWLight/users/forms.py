@@ -104,7 +104,8 @@ class TermsForm(forms.ModelForm):
 
         for key in cleaned_data.keys():
             if key[:4] == 'tos_':
-                self.add_error(key, 'You did not agree to this section of the TOS!')
+                if cleaned_data[key] != True:
+                    self.add_error(key, 'You did not agree to this section of the TOS!')
 
 
 
