@@ -206,7 +206,7 @@ class Partner(models.Model):
         "description such as collections, instructions, notes, special "
         "requirements, alternate access options, unique features, citations notes."))
         
-    additional_resources = models.TextField('video tutorials', blank=True,
+    tutorial_video_urls = models.TextField(blank=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide additonal help videos (if any) for a partner.
         help_text=_("Comma separated list of video tutorials (URLs)."))
         
