@@ -6,8 +6,8 @@ import random
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
-from TWLight.resources.factories import PartnerFactory, StreamFactory, SuggestFactory
-from TWLight.resources.models import Language, Partner, Stream, Suggest
+from TWLight.resources.factories import PartnerFactory, StreamFactory, SuggestionFactory
+from TWLight.resources.models import Language, Partner, Stream, Suggestion
 
 class Command(BaseCommand):
     help = "Adds a number of example resources, streams, suggestions, and tags."
@@ -140,14 +140,14 @@ class Command(BaseCommand):
         all_users = User.objects.exclude(is_superuser=True)
         author_user = random.choice(all_users)
         for _ in range(random.randint(3, 10)):
-            suggest = SuggestFactory(
+            suggestion = SuggestionFactory(
                   description = fake.paragraph(nb_sentences=10),
                   author = author_user
                   )
-            suggest.save()
-            suggest.plus_ones.add(author_user)
+            suggestion.save()
+            suggestion.upvoted_users.add(author_user)
             random_users = random.sample(all_users, random.randint(1, 10))
-            suggest.plus_ones.add(*random_users)
+            suggestion.upvoted_users.add(*random_users)
 
 
     def chance(self, selected, default, chance):

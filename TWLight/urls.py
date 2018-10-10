@@ -18,9 +18,8 @@ import TWLight.i18n.urls
 from TWLight.applications.urls import urlpatterns as applications_urls
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
 from TWLight.graphs.views import DashboardView
-from TWLight.resources.models import Suggest
 from TWLight.resources.urls import urlpatterns as partners_urls
-from TWLight.resources.views import PartnerSuggestView, SuggestDeleteView, SuggestUpvoteView
+from TWLight.resources.views import PartnerSuggestionView, SuggestionDeleteView, SuggestionUpvoteView
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
@@ -70,13 +69,13 @@ urlpatterns = [
     
     # For partner suggestions
     url(r'^suggest/$',
-        PartnerSuggestView.as_view(),
+        PartnerSuggestionView.as_view(),
         name='suggest'),
     url(r'^suggest/(?P<pk>[0-9]+)/delete/$',
-        SuggestDeleteView.as_view(),
+        SuggestionDeleteView.as_view(),
         name='suggest-delete'),
     url(r'^suggest/(?P<pk>[0-9]+)/upvote/$',
-        SuggestUpvoteView.as_view(),
+        SuggestionUpvoteView.as_view(),
         name='upvote'),
         
     # Cached for 24 hours.

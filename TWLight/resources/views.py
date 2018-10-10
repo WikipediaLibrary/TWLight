@@ -16,8 +16,8 @@ from TWLight.graphs.helpers import (get_median,
                                     get_users_by_partner_by_month)
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
-from .forms import SuggestForm
-from .models import Partner, Stream, Suggest
+from .forms import SuggestionForm
+from .models import Partner, Stream, Suggestion
 
 import logging
 
@@ -248,13 +248,13 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
 
 
 
-class PartnerSuggestView(FormView):
-    model=Suggest
+class PartnerSuggestionView(FormView):
+    model=Suggestion
     template_name = 'resources/suggest.html'
-    form_class = SuggestForm
+    form_class = SuggestionForm
     
     def get_queryset(self):
-            return Suggest.objects.order_by('suggested_company_name')
+            return Suggestion.objects.order_by('suggested_company_name')
     
     def form_valid(self, form):
         # Right now, we only hide the suggestion form on the template.
@@ -262,13 +262,13 @@ class PartnerSuggestView(FormView):
         # so as to not break things.
         try:
             assert self.request.user.is_authenticated()
-            suggest = Suggest()
-            suggest.suggested_company_name = form.cleaned_data['suggested_company_name']
-            suggest.description = form.cleaned_data['description']
-            suggest.company_url = form.cleaned_data['company_url']
-            suggest.author = self.request.user
-            suggest.save()
-            suggest.plus_ones.add(self.request.user)
+            suggestion = Suggestion()
+            suggestion.suggested_company_name = form.cleaned_data['suggested_company_name']
+            suggestion.description = form.cleaned_data['description']
+            suggestion.company_url = form.cleaned_data['company_url']
+            suggestion.author = self.request.user
+            suggestion.save()
+            suggestion.plus_ones.add(self.request.user)
             messages.add_message(self.request, messages.SUCCESS,
             # Translators: Shown to users when they successfully add a new partner suggestion.
             _('Your suggestion has been added.'))
@@ -282,9 +282,9 @@ class PartnerSuggestView(FormView):
         return self.request.user.editor
         
     def get_context_data(self, **kwargs):
-        context = super(PartnerSuggestView, self).get_context_data(**kwargs)
+        context = super(PartnerSuggestionView, self).get_context_data(**kwargs)
         
-        all_suggestions = Suggest.objects.all()
+        all_suggestions = Suggestion.objects.all()
         if all_suggestions.count() > 0:
             context['all_suggestions'] = all_suggestions
         
@@ -295,9 +295,9 @@ class PartnerSuggestView(FormView):
 
 
 
-class SuggestDeleteView(CoordinatorsOnly, DeleteView):
-    model=Suggest
-    form_class = SuggestForm
+class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
+    model=Suggestion
+    form_class = SuggestionForm
     success_url = reverse_lazy('suggest')
             
     def delete(self, *args, **kwargs):
@@ -310,16 +310,16 @@ class SuggestDeleteView(CoordinatorsOnly, DeleteView):
 
 
 
-class SuggestUpvoteView(EditorsOnly, RedirectView):
+class SuggestionUpvoteView(EditorsOnly, RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         id = self.kwargs.get('pk')
-        obj = get_object_or_404(Suggest, id=id)
+        obj = get_object_or_404(Suggestion, id=id)
         url_ = obj.get_absolute_url()
         user = self.request.user
         if user.is_authenticated():
-            if user in obj.plus_ones.all():
-                obj.plus_ones.remove(user)
+            if user in obj.upvoted_users.all():
+                obj.upvoted_users.remove(user)
             else:
-                obj.plus_ones.add(user)
+                obj.upvoted_users.add(user)
         return url_

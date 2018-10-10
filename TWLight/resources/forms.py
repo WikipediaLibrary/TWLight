@@ -4,14 +4,14 @@ from django.utils.translation  import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
 
-class SuggestForm(forms.Form):
+class SuggestionForm(forms.Form):
     suggested_company_name = forms.CharField(max_length = 40,)
     description = forms.CharField(widget = forms.Textarea, max_length = 500,)
     company_url = forms.URLField(initial = 'http://')
     
     def __init__(self, *args, **kwargs):
-        super(SuggestForm, self).__init__(*args, **kwargs)
-        
+        super(SuggestionForm, self).__init__(*args, **kwargs)
+        # Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
         self.fields['suggested_company_name'].label = _('Name of the potential partner')
         self.fields['description'].label = _('Description')
         self.fields['company_url'].label = _('Website')

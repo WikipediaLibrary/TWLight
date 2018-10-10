@@ -436,7 +436,7 @@ class Contact(models.Model):
 
 
 
-class Suggest(models.Model):
+class Suggestion(models.Model):
 
     class Meta:
         app_label = 'resources'
@@ -456,13 +456,13 @@ class Suggest(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
         help_text=_("Link to the potential partner's website."))
     
-    author = models.ForeignKey(User, related_name='suggest_author', blank=True, null=True, on_delete=models.SET_NULL,
+    author = models.ForeignKey(User, related_name='suggestion_author', blank=True, null=True, on_delete=models.SET_NULL,
         # Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
         help_text=_("User who authored this suggestion."))
     
-    plus_ones = models.ManyToManyField(User, related_name='suggest_likes', blank=True,
+    upvoted_users = models.ManyToManyField(User, blank=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-        help_text=_("Users who support this suggestion."))
+        help_text=_("Users who have upvoted this suggestion."))
     
     def __unicode__(self):
         return self.suggested_company_name
@@ -472,12 +472,3 @@ class Suggest(models.Model):
     
     def get_upvote_url(self):
         return reverse('upvote', kwargs={'pk': self.pk})
-    
-    
-    def save(self, *args, **kwargs):
-        """Invalidate this suggestions's pandoc-rendered html from cache"""
-        super(Suggest, self).save(*args, **kwargs)
-        
-        description_cache_key = make_template_fragment_key(
-            'suggested_partner_description', [self.pk])
-        cache.delete(description_cache_key)
