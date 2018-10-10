@@ -43,9 +43,11 @@
         </ul>
       </nav>
       <section class="tos-terms">
+        yo
       {% if user.is_authenticated %}
         <form method="post">
           {% csrf_token %}
+          {{ form.non_field_errors }}
       {% endif %}
           <section class="tos-section intro" id="intro">
             <p>
@@ -65,7 +67,13 @@
             {% if user.is_authenticated %}
               <div class="form-control">
                 <label>{{ form.tos_intro }} {{ form.tos_intro.help_text }}</label>
-                {% if form.tos_intro.errors %}<p class="alert alert-danger" role="alert">{{ form.tos_intro.errors }}</p>{% endif %}
+                {% if form.tos_intro.errors %}
+                  <ul class="errorlist">
+                    {% for error in form.tos_intro.errors %}
+                      <li class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
             {% endif %}
           </section>
@@ -98,7 +106,13 @@
             {% if user.is_authenticated %}
               <div class="form-control">
                 <label>{{ form.tos_requirements }} {{ form.tos_requirements.help_text }}</label>
-                {% if form.tos_requirements.errors %}<p class="alert alert-danger" role="alert">{{ form.tos_requirements.errors }}</p>{% endif %}
+                {% if form.tos_requirements.errors %}
+                  <ul class="errorlist">
+                    {% for error in form.tos_requirements.errors %}
+                      <li class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
             {% endif %}
           </section>
@@ -146,7 +160,13 @@
             {% if user.is_authenticated %}
               <div class="form-control">
                 <label>{{ form.tos_applying }} {{ form.tos_applying.help_text }}</label>
-                {% if form.tos_applying.errors %}<p class="alert alert-danger" role="alert">{{ form.tos_applying.errors }}</p>{% endif %}
+                {% if form.tos_applying.errors %}
+                  <ul class="errorlist">
+                    {% for error in form.tos_applying.errors %}
+                      <li class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
             {% endif %}
           </section>
@@ -196,7 +216,13 @@
             {% if user.is_authenticated %}
               <div class="form-control">
                 <label>{{ form.tos_data_retention }} {{ form.tos_data_retention.help_text }}</label>
-                {% if form.tos_data_retention.errors %}<p class="alert alert-danger" role="alert">{{ form.tos_data_retention.errors }}</p>{% endif %}
+                {% if form.tos_data_retention.errors %}
+                  <ul class="errorlist">
+                    {% for error in form.tos_data_retention.errors %}
+                      <li class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
             {% endif %}
           </section>
@@ -236,7 +262,13 @@
             {% if user.is_authenticated %}
               <div class="form-control">
                 <label>{{ form.tos_publisher_resources }} {{ form.tos_publisher_resources.help_text }}</label>
-                {% if form.tos_publisher_resources.errors %}<p class="alert alert-danger" role="alert">{{ form.tos_publisher_resources.errors }}</p>{% endif %}
+                {% if form.tos_publisher.errors %}
+                  <ul class="errorlist">
+                    {% for error in form.tos_publisher.errors %}
+                      <li class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
             {% endif %}
           </section>
@@ -265,6 +297,13 @@
             {% if user.is_authenticated %}
               <div class="form-control">
                 <label>{{ form.tos_important_note }} {{ form.tos_important_note.help_text }}</label>
+                {% if form.tos_important_note.errors %}
+                  <ul class="errorlist">
+                    {% for error in form.tos_important_note.errors %}
+                      <li class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
             {% endif %}
           </section>
@@ -287,6 +326,13 @@
               </p>
               <div class="form-control">
                 <label>{{ form.terms_of_use }} {{ form.terms_of_use.label }}</label>
+                {% if form.terms_of_use.errors %}
+                  <ul class="errorlist">
+                    {% for error in form.terms_of_use.errors %}
+                      <li class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
               <div class="form-control">
                 <button type="submit" class="btn btn-primary" id="tos-submit">I accept</button>

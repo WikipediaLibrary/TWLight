@@ -79,7 +79,7 @@ class TermsForm(forms.ModelForm):
             'tos_data_retention': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'data-retention'}),
             'tos_requirements': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'requirements'}),
             'tos_publisher_resources': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'publisher-resources'}),
-            'tos_important_note': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'important-note'}),            
+            'tos_important_note': forms.CheckboxInput(attrs={'class': 'agreement-check', 'data-agreement': 'important-note'}),
         }
 
 
@@ -98,6 +98,13 @@ class TermsForm(forms.ModelForm):
             # Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
             Submit('submit', _('I accept'), css_class='btn btn-default')
         )
+
+    def clean(self):
+        cleaned_data = super(TermsForm, self).clean()
+
+        for key in cleaned_data.keys():
+            if key[:4] == 'tos_':
+                self.add_error(key, 'You did not agree to this section of the TOS!')
 
 
 

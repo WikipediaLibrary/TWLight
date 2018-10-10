@@ -609,6 +609,18 @@ input[type=checkbox].agreement-check{
 .tos-disabled{
   color: #aaa;
 }
+.tos .errorlist{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tos .errorlist .glyphicon{
+  margin-right: 6px;
+}
+
+.tos .errorlist li:not(:first-child){
+  margin-bottom: .5rem;
+}
 
 /*
 ----------------------------------------------------------------------------
