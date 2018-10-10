@@ -11,7 +11,7 @@ TemplateMail subclass.
 
 Email templates are normal Django templates. This means two important things:
 1) They can be rendered with context;
-2) They can use {% trans %} and {% blocktrans %}. In fact, they _should_, to
+2) They can use {% trans %} and {% blocktrans trimmed %}. In fact, they _should_, to
    support internationalization.
 
 Add a 'lang' attribute to the context passed into TemplateMail in order to
