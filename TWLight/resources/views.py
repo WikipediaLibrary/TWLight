@@ -268,7 +268,7 @@ class PartnerSuggestionView(FormView):
             suggestion.company_url = form.cleaned_data['company_url']
             suggestion.author = self.request.user
             suggestion.save()
-            suggestion.plus_ones.add(self.request.user)
+            suggestion.upvoted_users.add(self.request.user)
             messages.add_message(self.request, messages.SUCCESS,
             # Translators: Shown to users when they successfully add a new partner suggestion.
             _('Your suggestion has been added.'))
