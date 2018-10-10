@@ -56,7 +56,7 @@
                   {{ each_suggestion.description | safe }}
                 </p>
                 {% comment %} Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
-                <p><strong>{% trans 'URL' %}:</strong> <a href>{{ each_suggestion.company_url }}</a></p>
+                <p><strong>{% trans 'URL' %}:</strong> <a href="{{ each_suggestion.company_url }}">{{ each_suggestion.company_url }}</a></p>
               </div>
               {% if user.is_authenticated %}
                 <div class="col-md-2 pull-right" style="text-align: right;">
