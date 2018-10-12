@@ -24,6 +24,10 @@ then
     
     # Commit any changes to local master branch.
     git_commit() {
+
+        # Checkout master branch
+        git checkout master
+
         # Add and commit.
         git add 'TWLight/*/migrations/*.py'
         git commit --message "Travis build #${TRAVIS_BUILD_NUMBER} migrations." || :
