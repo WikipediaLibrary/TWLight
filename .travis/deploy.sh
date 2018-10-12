@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-# Print Travis environment variables.
+# Search for missing migrations and count them.
+missing_migrations_count=$(git ls-files --others --exclude-standard 'TWLight/*/migrations/*.py' | wc -l)
+
+# Print Travis environment variables and migration count.
 echo "TRAVIS_PULL_REQUEST: ${TRAVIS_PULL_REQUEST}"
 echo "TRAVIS_TAG: ${TRAVIS_TAG}"
 echo "TRAVIS_BRANCH: ${TRAVIS_BRANCH}"
+echo "missing_migrations_count: ${missing_migrations_count}"
 
-# Only act if this is build was fired from a push to master.
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ]
+# Only act if this is build was fired from a push to master and there are no missing migrations.
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ] && [ "${missing_migrations_count}" -eq 0 ]
 then
     # Configure git.
     git_config() {

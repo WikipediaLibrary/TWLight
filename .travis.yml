@@ -32,4 +32,5 @@ script:
 
 # Push to production if the conditions are met.
 after_success:
+  - .travis/./migrations.sh
   - .travis/./deploy.sh
