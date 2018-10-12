@@ -12,11 +12,11 @@ echo "TWLIGHT_MISSING_MIGRATIONS: ${TWLIGHT_MISSING_MIGRATIONS}"
 # Sync back to master if is build was fired from a push to master and there are missing migrations.
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -gt 0 ]
 then
-   TWLIGHT_MISSING_MIGRATIONS=${TWLIGHT_MISSING_MIGRATIONS} ./migrations.sh
+   TWLIGHT_MISSING_MIGRATIONS=${TWLIGHT_MISSING_MIGRATIONS} .travis/./migrations.sh
 fi
 
 # Deploy to production if is build was fired from a push to master and there are no missing migrations.
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -eq 0 ]
 then
-   TWLIGHT_MISSING_MIGRATIONS=${TWLIGHT_MISSING_MIGRATIONS} ./production.sh
+   TWLIGHT_MISSING_MIGRATIONS=${TWLIGHT_MISSING_MIGRATIONS} .travis/./production.sh
 fi
