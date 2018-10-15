@@ -2,11 +2,12 @@
 # Exported from translatewiki.net
 #
 # Author: Aue Nai
+# Author: Htawmonzel
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-10-03 20:25:53+0000\n"
-"X-POT-Import-Date: 2018-09-17 15:27:35+0000\n"
+"PO-Revision-Date: 2018-10-15 07:42:22+0000\n"
+"X-POT-Import-Date: 2018-10-12 19:05:35+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: mnw\n"
@@ -133,7 +134,7 @@ msgstr "ယၟုဍာံ:"
 #: TWLight/applications/helpers.py:116
 #: TWLight/users/templates/users/editor_detail_data.html:183
 msgid "Country of residence"
-msgstr "ကၟိုန်ဍုၚ်ဒဒှ်မပဒ္တဴ"
+msgstr "ကၟိုန်ဍုၚ်မပဒတဴ"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
@@ -145,7 +146,7 @@ msgstr "ကမၠောန်"
 #. Translators: When sending application data to partners, this is the text labelling a user's affiliation
 #: TWLight/applications/helpers.py:120
 msgid "Affiliation"
-msgstr "ဆက်စၠောံ"
+msgstr "ဆက်စၠောအ်"
 
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
 #: TWLight/applications/helpers.py:122
@@ -208,17 +209,17 @@ msgstr "ပြၚ်ဗစိုပ် သ္ကအ်"
 #. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
 #: TWLight/applications/models.py:60 TWLight/applications/models.py:71
 msgid "Please do not override this field! Its value is set automatically."
-msgstr ""
+msgstr "ပဂုန်တုဲ လ္ပသရုင်ထောအ် ဒၞာဲဏအ်ညိ! ၚုဟ်မးဍေဟ်ဂှ် လုပ်အာ အလဵုအလဵုရောၚ်၊၊"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
 #: TWLight/applications/models.py:76
 msgid "The user who sent this application to the partner"
-msgstr ""
+msgstr "မၞိဟ်လွပ် ညးမပြင် လိက်ဂရၚ်ပတီ ဇရေင်သကအ်"
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
 msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
-msgstr ""
+msgstr "လိက်ဂရၚ်ပတီဝွံ သှ်ေဒၟံၚ် ပ္ဍဲဒၞာဲစရင်မမၚ် ဟိုတ်နူ သကအ်ညး ဟွံကလိဂွံအခေါၚ် မသၟဟ်အစောံဏီ ပ္ဍဲအခိၚ်လၟုဟ်၊၊"
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:21
@@ -226,7 +227,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/send_partner.html:43
 #: TWLight/resources/templates/resources/partner_users.html:14
 msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
-msgstr ""
+msgstr "ညးမဆက်စၠောအ်ဂမၠိုၚ် - မုက်လိက်ဏအ် နွံဒၟံၚ် ကုပရိုၚ်တၚ်ဂၞၚ်ပူဂိုလ် မပ္တံ ကု ယၟုညး ကေုာံ အဳမေလ် ညးတအ်ဇေတ်တ် ဒှ်မာန်ရ၊၊ ဟိုတ်ဂှ်ရ ပရိုၚ်တၚ်ဂၞၚ်တအ်ဂှ် ဒှ် အရာမဒးပၞုက်လဝ်ရောင်၊၊"
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:24
@@ -236,7 +237,7 @@ msgstr "စၚ်ခြၚ်ၜတ်ကၞာတ်မံၚ် ပွမဂ�
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:27
 msgid "This user has requested a restriction on the processing of their data, so you cannot change the status of their application."
-msgstr ""
+msgstr "မၞိဟ်လွပ်တအ်ဏအ်ဝွံ မဒးဒုၚ် စၟတ်သမ္တီလဝ် နဒဒှ် မၞုံအခေါၚ်အပိုၚ်အခြာ မစပ်ကဵု မပတိုန် တၚ်ဂၞင်ညးတအ်ရ၊ ဟိုတ်ဂှ်ရ မၞးပလေဝ်ထောအ် ဒတန်ကဆံၚ် လိက်ဂရၚ််ပတီညးတအ် ဟွံဂွံ၊၊"
 
 #. Translators: This is the title of the application page shown to users who are not a coordinator.
 #. Translators: This is the title of the section of a user's profile showing their history of applications.
@@ -281,7 +282,7 @@ msgstr "မၞိဟ်ပံၚ်ကၠောန်မွဲစွံ"
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:84
 msgid "Collection requested"
-msgstr ""
+msgstr "အရာမပကောံပကေဝ် အာတ်မိက်ဒၟံၚ်"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:103
@@ -296,7 +297,7 @@ msgstr "ဟွံ ထမံက်ဟီုလဝ်"
 #. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
 #: TWLight/applications/templates/applications/application_evaluation.html:116
 msgid "Renewal of existing access grant?"
-msgstr ""
+msgstr "ကလေၚ်တၟိပတိုန် အခေါင်အရာ မၞုံဒၟံၚ်ဟာ？"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
 #: TWLight/applications/templates/applications/application_evaluation.html:122
@@ -328,7 +329,7 @@ msgstr "စုတ် ဂလာန်ဗကန်"
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
 #: TWLight/applications/templates/applications/application_evaluation.html:171
 msgid "Comments are visible to all coordinators and to the editor who submitted this application."
-msgstr ""
+msgstr "ကမ္မောန်မပတိုန်လဝ်တအ်ဂှ် ညးမဆက်စၠောအ်တအ် သီုဖအိုတ် ဂွံဆဵုကေတ်မာန် တုဲပၠန် ညးမပလေဝ်ဒါန်တအ်လေဝ် ပလေဝ်ဒါန် ဂရၚ်ပတီဏအ်ဂွံရ၊၊"
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
@@ -375,7 +376,7 @@ msgstr "မူ တြေံဂမၠိုၚ် ဟွံမွဲ."
 #. Translators: On the page which shows a list of applications, coordinators must select which applications they wish to view. This string is found next to the selection buttons, and leads on to options such as "Under review", "Approved", or "Sent.
 #: TWLight/applications/templates/applications/application_list.html:20
 msgid "View applications which are..."
-msgstr ""
+msgstr "ဗဵု လိက်ဂရင်ပတီ နကဵု"
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:25
@@ -395,7 +396,7 @@ msgstr "ပြၚ်လဝ်"
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:41
 msgid "Up for renewal"
-msgstr ""
+msgstr "သၠုၚ်ပတိုန် သွက် ဂွံကလေၚ်တၟိပတိုန်"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:56
@@ -500,16 +501,16 @@ msgstr "ဆက်စပ်မကလၚ်ကၠောန်တၟိ"
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:56
 msgid "Status for all selected applications"
-msgstr ""
+msgstr "ကဆံၚ်ဒၞာဲ လိက်ဂရၚ်ပတီ မရုဲစှ်လဝ် သီုဖအိုတ်"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:70
 msgid "Set status"
-msgstr ""
+msgstr "ဖျေဟ် ဒၞာဲကဆံၚ်"
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:44
 msgid "Has your account expired?"
-msgstr ""
+msgstr "အကံက် မၞး ဂွံဆဵုဟာ？"
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:46
 msgid "Request renewal"
@@ -517,7 +518,7 @@ msgstr "အာတ်အခေါၚ်မဆက်စပ်မကလေၚ်က
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:48
 msgid "Renewals are either not required, not available right now, or you have already requested a renewal."
-msgstr ""
+msgstr "မကလေင်တၟိပတိုန်ဂှ် ဟွံဂွံဂရၚ်ပတီဏီ ဟွံသၟဟ်အစောံဏီ ပြဟ်ဟ်ဏအ်၊ သာ်ဂှ်ဟွံသေင် မၞးဂရၚ်ပတီလဝ် သွက်ဂွံ ကလေၚ်တၟိပတိုန်ပၠန် တုဲတုဲလေဝ် ဒှ်မာန်၊၊"
 
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:21
@@ -537,26 +538,26 @@ msgstr "(တၚ်ဂၞၚ်ပရိုၚ် တၞဟ်ဂမၠိုၚ�
 #: TWLight/resources/templates/resources/partner_detail.html:88
 #: TWLight/resources/templates/resources/partner_tile.html:35
 msgid "Waitlisted"
-msgstr "စရၚ်မမၚ်မွဲလဝ်"
+msgstr "စရၚ်မမၚ်ဒၟံင်"
 
 #: TWLight/applications/templates/applications/request_for_application.html:50
 msgid "No partner data has been added yet."
-msgstr ""
+msgstr "တၚ်ဂၞၚ် သကအ်လဵုလေဝ် ဟွံဂွံ စုတ်ဏီ၊၊"
 
 #. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file.
 #: TWLight/applications/templates/applications/request_for_application.html:63
 msgid "You can apply to <span class=\"label label-warning\">Waitlisted</span> partners, but they don't have access grants available right now. We will process those applications when access becomes available."
-msgstr ""
+msgstr "မၞး ဂရင်အာတ်ကေတ် ဇရေင် <span class=\"label label-warning\">စရင်မမင်ဒၟံင်</span> သကအ်ဂမၠိုင်ဂွံရ၊၊ ဆဂး ညးတအ် ဟွံကလိဂွံ အခေါင်မသၟဟ်အစောံဏီ ပြဟ်ဟ်ဏအ်၊၊ လိက်ဂရၚ်ပတီဏအ် ပိုဲပၠောပ်ကဵုရောင် ကာလမပၠောပ် သၟဟ်အစောံမ္ဂး၊၊"
 
 #. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when there are applications ready to be processed.
 #: TWLight/applications/templates/applications/send.html:7
 msgid "Partners with approved, unsent applications"
-msgstr ""
+msgstr "သကအ် နကဵု မဒုင်လဝ်တဲ၊ ဟွံဂွံပလံၚ် လိက်ဂရၚ်ပတီဏီ"
 
 #. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when no such applications exist or all have already been sent.
 #: TWLight/applications/templates/applications/send.html:20
 msgid "There are no partners with applications ready to send."
-msgstr ""
+msgstr "သကအ် နကဵု လိက်ဂရၚ်ပတီ သွက်ဂွံပလံၚ်ဂှ် ဟွံမဲ၊၊"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where object will be the name of the partner. Don't translate object.
 #: TWLight/applications/templates/applications/send_partner.html:38
@@ -703,7 +704,7 @@ msgstr ""
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. We are happy to inform you that your application has\nbeen approved. You can expect to receive access details within a week or \ntwo once it has been processed.\n\nCheers!\n\nThe Wikipedia Library\n"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. You can expect to receive access details within a week or two once it has been processed. Cheers! The Wikipedia Library"
 msgstr ""
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -720,7 +721,7 @@ msgstr ""
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for coordinating %(partner)s resources through\nThe Wikipedia Library. There are one or more comments on an application that\nrequire a response from you. Please reply to these at:\n%(app_url)s\n\nBest,\n\nThe Wikipedia Library\n"
+msgid "Dear %(user)s, Thank you for coordinating %(partner)s resources through The Wikipedia Library. There are one or more comments on an application that require a response from you. Please reply to these at: %(app_url)s Best, The Wikipedia Library"
 msgstr ""
 
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
@@ -737,7 +738,7 @@ msgstr ""
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. There are one or more comments on your application that\nrequire a response from you. Please reply to these at:\n%(app_url)s\nso we can evaluate your application.\n\nBest,\n\nThe Wikipedia Library\n"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are one or more comments on your application that require a response from you. Please reply to these at: %(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
 msgstr ""
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -754,7 +755,7 @@ msgstr ""
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
 #, python-format
-msgid "\nThere is a new comment on a Wikipedia Library application that you also\ncommented on. It may be providing an answer to a question you asked. See it at:\n%(app_url)s\n\nThanks for helping review Wikipedia Library applications!\n"
+msgid "There is a new comment on a Wikipedia Library application that you also commented on. It may be providing an answer to a question you asked. See it at: %(app_url)s Thanks for helping review Wikipedia Library applications!"
 msgstr ""
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -771,7 +772,7 @@ msgstr ""
 #. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate email adresses or items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nOur records indicate that you are the designated coordinator for partners that \nhave a total of %(app_count)s applications with a status of %(app_status)s.\nThis is a gentle reminder that you may review applications at:\n%(link)s\n\nIf you received this message in error, drop us a line at:\nwikipedialibrary@wikimedia.org\n\nThanks for helping review Wikipedia Library applications!\n"
+msgid "Dear %(user)s, Our records indicate that you are the designated coordinator for partners that have a total of %(app_count)s applications with a status of %(app_status)s. This is a gentle reminder that you may review applications at: %(link)s If you received this message in error, drop us a line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library applications!"
 msgstr ""
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
@@ -788,7 +789,7 @@ msgstr ""
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. Unfortunately at this time your application has not been\napproved. You can view your application and review comments at:\n%(app_url)s\n\nBest,\n\nThe Wikipedia Library\n"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at: %(app_url)s Best, The Wikipedia Library"
 msgstr ""
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -805,7 +806,7 @@ msgstr ""
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. There are no accounts currently available so your\napplication has been waitlisted. Your application will be evaluated if/when\nmore accounts become available. You can see all available resources at:\n%(link)s\n\nBest,\n\nThe Wikipedia Library\n"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at: %(link)s Best, The Wikipedia Library"
 msgstr ""
 
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1110,7 +1111,7 @@ msgstr "ပတိတ်  နူ စရၚ်မမၚ်မွဲ"
 #: TWLight/resources/templates/resources/partner_detail.html:77
 #: TWLight/resources/templates/resources/partner_detail.html:124
 msgid "Set as waitlisted"
-msgstr "ဖျေအ်ဒၞဲါ နဒဒှ် စရၚ်မမၚ်မဲလဝ်"
+msgstr "ဖျေဟ်ဒၞဲါ နဒဒှ် စရၚ်မမၚ်မဲလဝ်"
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail.html:135
@@ -1290,7 +1291,7 @@ msgstr "ပွမဂရၚ်အာတ်မိက်ဂမၠိုၚ် န�
 #: TWLight/templates/dashboard.html:148 TWLight/templates/dashboard.html:160
 #: TWLight/templates/dashboard.html:170 TWLight/templates/dashboard.html:186
 msgid "download as csv"
-msgstr "ဂြဲဖျေအ် နဒဒှ် csv"
+msgstr "ဂြဲဖျေဟ် နဒဒှ် csv"
 
 #. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:526
@@ -1408,12 +1409,12 @@ msgstr ""
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:8
 msgid "Bad Request"
-msgstr "အာတ်မိက်မပရေံ"
+msgstr "မပတိုန်ထ္ၜး ပရေအ်"
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:12
 msgid "Sorry; we don't know what to do with that."
-msgstr ""
+msgstr "သၠးအခေါၚ် - အရာဏအ် မုဂွံပဂှ် ပိုဲဟွံတီ၊၊"
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate path or Phabricator.
 #: TWLight/templates/400.html:17
