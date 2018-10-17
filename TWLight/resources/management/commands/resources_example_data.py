@@ -130,7 +130,7 @@ class Command(BaseCommand):
                     description= fake.paragraph(nb_sentences=2)
                     )
         
-        #Set 15 partners to have somewhere between 1 and 5 video tutorial URLs
+        # Set 15 partners to have somewhere between 1 and 5 video tutorial URLs
         for partner in random.sample(all_partners, 15):
             for _ in range(random.randint(1, 5)):
                 VideoFactory(
