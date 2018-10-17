@@ -206,10 +206,6 @@ class Partner(models.Model):
         "description such as collections, instructions, notes, special "
         "requirements, alternate access options, unique features, citations notes."))
         
-    tutorial_video_urls = models.TextField(blank=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can provide additonal help videos (if any) for a partner.
-        help_text=_("Comma separated list of video tutorials (URLs)."))
-        
     send_instructions = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
         help_text=_("Optional instructions for sending application data to "
@@ -437,3 +433,21 @@ class Contact(models.Model):
     def __unicode__(self):
         # As with Stream, do not return the partner name here.
         return self.full_name
+
+
+
+
+class Video(models.Model):
+
+    class Meta:
+        app_label = 'resources'
+        verbose_name = 'video tutorial'
+        verbose_name_plural = 'video tutorials'
+        ordering = ['partner']
+
+
+    partner = models.ForeignKey(Partner, db_index=True, related_name="videos")
+    
+    tutorial_video_url = models.URLField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
+        help_text=_("URL of a video tutorial."))
