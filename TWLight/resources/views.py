@@ -175,12 +175,6 @@ class PartnersDetailView(DetailView):
         else:
             context['stream_unique_accepted'] = None
 
-
-        if partner.tutorial_video_urls:
-            context['video_tutorials'] = partner.tutorial_video_urls.split(",")
-        else:
-            context['video_tutorials'] = None
-
         return context
 
 
