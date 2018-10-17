@@ -216,7 +216,7 @@
         </div>
       </div>      
     </li>
-    {% if video_tutorials %}
+    {% if object.videos.all %}
       <li class="timeline-inverted">
         <div class="timeline-badge"><i class="fa fa-file"></i>
         </div>
@@ -228,8 +228,8 @@
             </h4>
             <ul>
               {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
-              {% for each_tutorial in video_tutorials %}
-                <li><a href={{ each_tutorial | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
+              {% for each_tutorial in object.videos.all %}
+                <li><a href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
               {% endfor %}
             </ul>
           </div>
