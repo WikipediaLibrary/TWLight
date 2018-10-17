@@ -6,7 +6,7 @@ import random
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
-from TWLight.resources.factories import PartnerFactory, StreamFactory
+from TWLight.resources.factories import PartnerFactory, StreamFactory, VideoFactory
 from TWLight.resources.models import Language, Partner, Stream
 
 class Command(BaseCommand):
@@ -101,15 +101,6 @@ class Command(BaseCommand):
             long_description.description = fake.paragraph(nb_sentences = 10)
             long_description.save()
 
-        # Set 15 random partners to have additional_resources (video tutorials)
-        for tutorial in random.sample(all_partners, 25):
-            fake_videos_list = []
-            for _ in range(random.randint(1, 5)):
-                fake_videos_list.append(fake.url())
-            fake_videos = ", ".join(fake_videos_list)
-            tutorial.additional_resources = fake_videos
-            tutorial.save()
-            
         # Set 10 random available partners to be featured
         for featured_partner in random.sample(available_partners, 10):
             featured_partner.featured = True
@@ -138,7 +129,15 @@ class Command(BaseCommand):
                     name= fake.sentence(nb_words= 3)[:-1], # [:-1] removes full stop
                     description= fake.paragraph(nb_sentences=2)
                     )
-
+        
+        #Set 15 partners to have somewhere between 1 and 5 video tutorial URLs
+        for partner in random.sample(all_partners, 15):
+            for _ in range(random.randint(1, 5)):
+                VideoFactory(
+                    partner = partner,
+                    tutorial_video_url = fake.url()
+                    )
+                    
         # Random number of accounts available for all streams
         all_streams = Stream.objects.all()
         for each_stream in all_streams:
