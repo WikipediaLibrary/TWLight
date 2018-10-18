@@ -3,12 +3,13 @@
 #
 # Author: Hedda
 # Author: TmY e12
+# Author: UY Scuti
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2018-10-12 16:16+0000\n"
-"PO-Revision-Date: 2018-10-15 07:42:22+0000\n"
+"PO-Revision-Date: 2018-10-18 06:33:33+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +29,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:117
 #: TWLight/templates/base.html:101
 msgid "Apply"
-msgstr "Uygula"
+msgstr "Başvur"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:193
@@ -1164,7 +1165,7 @@ msgstr "Alıntı sınırı"
 #: TWLight/resources/templates/resources/partner_detail.html:259
 #, python-format
 msgid "%(object)s allows a maximum of %(excerpt_limit)s words or %(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia article."
-msgstr "%(object)s, bir Vikipedi maddesine en fazla %(excerpt_limit)s kelime ya da bir makalenin %%(excerpt_limit_percentage)s oranında alıntı yapılmasını izin vermektedir."
+msgstr "%(object)s, bir Vikipedi maddesine en fazla %(excerpt_limit)s kelime ya da bir makalenin %(excerpt_limit_percentage)s%% oranında alıntı yapılmasını izin vermektedir."
 
 #. Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:266
@@ -1176,7 +1177,7 @@ msgstr "%(object)s, bir Vikipedi maddesine en fazla %(excerpt_limit)s kelime ola
 #: TWLight/resources/templates/resources/partner_detail.html:273
 #, python-format
 msgid "%(object)s allows a maximum of %(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia article."
-msgstr "%(object)s, bir Vikipedi maddesine makalenin en fazla %%(excerpt_limit_percentage)s oranında alıntı yapılmasına izin vermektedir."
+msgstr "%(object)s, bir Vikipedi maddesine makalenin en fazla %(excerpt_limit_percentage)s%% oranında alıntı yapılmasına izin vermektedir."
 
 #. Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
 #: TWLight/resources/templates/resources/partner_detail.html:291
@@ -1733,7 +1734,7 @@ msgstr "Tüm iş ortaklarını gör"
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of editors (users) who registered.
 #: TWLight/templates/dashboard.html:41
 msgid "Total unique editors receiving access"
-msgstr "Erişim hakkına sahip toplam benzersiz editörler"
+msgstr "Erişim hakkına sahip toplam benzersiz editör"
 
 #: TWLight/templates/dashboard.html:56
 msgid "Total accounts distributed"
@@ -1742,7 +1743,7 @@ msgstr ""
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which moves the page down to metrics about applications.
 #: TWLight/templates/dashboard.html:63
 msgid "Jump to application metrics"
-msgstr ""
+msgstr "Başvuru bilgilerine git"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
 #: TWLight/templates/dashboard.html:77
@@ -1787,17 +1788,17 @@ msgstr "X ekseni bir başvuruda nihai kararı (onaylanmış veya reddedilmiş) y
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.
 #: TWLight/templates/dashboard.html:160
 msgid "Median days until application decision, per month"
-msgstr ""
+msgstr "Başvuru kararına kadar geçen ortalama gün, ay başına"
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean.
 #: TWLight/templates/dashboard.html:163
 msgid "This shows the median number of days to reach a decision on the applications opened in a given month."
-msgstr ""
+msgstr "Bu, belirli bir ayda açılan başvurularla ilgili bir karara varmak için geçen ortalama gün sayısını gösterir."
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
 #: TWLight/templates/dashboard.html:170
 msgid "Open application status distribution"
-msgstr ""
+msgstr "Açık başvuru durum dağılımı"
 
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.
 #: TWLight/templates/dashboard.html:182
@@ -1822,13 +1823,13 @@ msgstr "Daha fazla bilgi edinin"
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the header for that section.
 #: TWLight/templates/home.html:33
 msgid "Benefits"
-msgstr "Çıkarlar"
+msgstr "Faydalar"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
 #: TWLight/templates/home.html:37
 #, python-format
 msgid "<p>The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects. </p> <p>Through the Library Card you can apply for access to %(partner_count)s leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p> <p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, <a href=\"/applications/request/\">please apply</a>.</p>"
-msgstr ""
+msgstr "<p>Vikipedi Kütüphanesi, Wikimedia projelerine içerik katma yeteneğinizi geliştirmek için araştırma materyallerine ücretsiz erişim sağlar. </p> <p>Kütüphane Kartı ile 80 bin benzersiz dergi dahil olmak üzere %(partner_count)s önde gelen güvenilir yayıncıya erişim için başvuruda bulunabilirsiniz; aksi takdirde ödeme duvarı açılacaktır. Üye olmak için sadece Vikipedi giriş bilgilerinizi kullanın. Sadece Vikipedi girişinizi kullanarak kaynaklara doğrudan erişim... Çok yakında!</p> <p>İş ortağı kaynaklarımızdan birine erişim sağlayabileceğinizi düşünüyorsanız ve Wikimedia Vakfı tarafından desteklenen herhangi bir projede aktif bir editör olarak yer alıyorsanız <a href=\"/applications/request/\">lütfen başvurun</a>.</p>"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
 #: TWLight/templates/home.html:54
@@ -2324,7 +2325,7 @@ msgstr "Vikipedi Kütüphanesi Takımı"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/terms.html:216
 msgid "By checking this box and clicking “I Accept”, you consent to the above privacy statement and terms, and agree to adhere to them in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
-msgstr ""
+msgstr "Bu kutuyu işaretleyerek ve \"Kabul ediyorum\"u tıklayarak başvurunuzda, Vikipedi Kütüphanesi ve Vikipedi Kütüphanesi programı aracılığıyla erişim hakkı kazandığınız yayıncıların hizmetlerini kullanmaya ve bunlara uymayı kabul etmiş olursunuz."
 
 #: TWLight/users/templates/users/user_confirm_delete.html:7
 msgid "Delete all data"

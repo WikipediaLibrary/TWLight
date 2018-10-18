@@ -2,13 +2,14 @@
 # Exported from translatewiki.net
 #
 # Author: Nike
+# Author: Stryn
 msgid ""
 msgstr ""
 ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2018-10-12 16:16+0000\n"
-"PO-Revision-Date: 2018-10-15 07:42:21+0000\n"
+"PO-Revision-Date: 2018-10-18 06:33:32+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -436,24 +437,24 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list.html:102
 #: TWLight/applications/templates/applications/application_list.html:103
 msgid "Previous page"
-msgstr ""
+msgstr "Edellinen sivu"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
 #: TWLight/applications/templates/applications/application_list.html:203
 msgid "Next"
-msgstr ""
+msgstr "Seuraava"
 
 #. Translators: This is the label for a button which goes to the next page of applications.
 #: TWLight/applications/templates/applications/application_list.html:205
 #: TWLight/applications/templates/applications/application_list.html:221
 #: TWLight/applications/templates/applications/application_list.html:222
 msgid "Next page"
-msgstr ""
+msgstr "Seuraava sivu"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications.
 #: TWLight/applications/templates/applications/application_list.html:212
 msgid "Last"
-msgstr ""
+msgstr "Viimeinen"
 
 #. Translators: This is the label for a button which goes to the last page of applications.
 #: TWLight/applications/templates/applications/application_list.html:214
@@ -2056,7 +2057,7 @@ msgstr "Käyttäjätunnuksen luomispäivämäärä Wikipediassa"
 #. Translators: The User ID for this user on Wikipedia
 #: TWLight/users/models.py:122
 msgid "Wikipedia user ID"
-msgstr "Wikipedian käyttäjätunnuksen ID"
+msgstr "Wikipedian käyttäjätunnuksen tunniste"
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
 #: TWLight/users/models.py:128
@@ -2090,9 +2091,8 @@ msgstr "Aloita uusi hakemus"
 
 #. Translators: This is the heading for user information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:23
-#, fuzzy
 msgid "User information"
-msgstr "Päivitä tiedot"
+msgstr "Käyttäjätiedot"
 
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:25
@@ -2119,7 +2119,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
 #: TWLight/users/templates/users/editor_detail_data.html:17
 msgid "Username *"
-msgstr "käyttäjätunnus Wikipediassa"
+msgstr "Käyttäjätunnus *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's SUL info through an external tool. (e.g. https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=Samwalton9%20(WMF))
 #: TWLight/users/templates/users/editor_detail_data.html:24
@@ -2168,9 +2168,8 @@ msgstr "\n            %(username)s voi silti olla kelpoinen käyttöoikeuteen \n
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:89
-#, fuzzy
 msgid "Global edit count *"
-msgstr "Muokkausmäärä Wikipediassa"
+msgstr "Järjestelmänlaajuisten muokkausten määrä *"
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
 #: TWLight/users/templates/users/editor_detail_data.html:96
@@ -2180,12 +2179,12 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:106
 msgid "Meta-Wiki registration or SUL merge date *"
-msgstr ""
+msgstr "Meta-Wikiin rekisteröitymispäivä tai yhdistetyn tunnuksen yhdistämispäivä *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:118
 msgid "Wikipedia user ID *"
-msgstr "Wikipedian käyttäjätunnuksen ID"
+msgstr "Wikipedian käyttäjätunnuksen tunniste *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:134
@@ -2415,15 +2414,14 @@ msgstr ""
 
 #. Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
 #: TWLight/users/templates/users/user_detail.html:9
-#, fuzzy, python-format
+#, python-format
 msgid "Hi, %(username)s! You don't have a Wikipedia editor profile attached to your account here, so you are probably a site administrator."
-msgstr "\n      Terve, %(username)s! Tunnukseesi ei ole liitetty Wikipedian käyttäjätunnusta\n     , joten olet luultavasti sivuston ylläpitäjä.\n    "
+msgstr "Terve, %(username)s! Tunnukseesi ei ole liitetty Wikipedian käyttäjätunnusta, joten olet luultavasti sivuston ylläpitäjä."
 
 #. Translators: In the unlikely scenario that someone is able to register an account without using OAuth (thus leaving us without some of the information required for applications), users will see this message, encouraging them to re-register.
 #: TWLight/users/templates/users/user_detail.html:17
-#, fuzzy
 msgid "If you aren't a site administrator, something weird has happened. You won't be able to apply for access without a Wikipedia editor profile. You should log out and create a new account by logging in via OAuth, or contact a site administrator for help."
-msgstr "\n      Jos et ole sivuston ylläpitäjä, jotain outoa tapahtui. Sinä\n      et voi hakea käyttöoikeutta suojattuihin aineistoihin ilman\n      Wikipedian käyttäjätunnusta. Jos sinulla ei ole syytä sille, miksi tunnukseesi\n      ei ole liitetty Wikipedian käyttäjätunnusta (esim. olet sivuston\n      ylläpitäjä), sinun tulisi kirjautua ulos ja luoda uusi tunnus kirjautumalla sisään\n      OAuthin kautta, tai ottaa yhteyttä ylläpitäjään.\n    "
+msgstr "Jos et ole sivuston ylläpitäjä, jotain outoa tapahtui. Sinä et voi hakea käyttöoikeutta suojattuihin aineistoihin ilman Wikipedian käyttäjätunnusta. Jos sinulla ei ole syytä sille, miksi tunnukseesi ei ole liitetty Wikipedian käyttäjätunnusta (esim. olet sivuston ylläpitäjä), sinun tulisi kirjautua ulos ja luoda uusi tunnus kirjautumalla sisään OAuthin kautta, tai ottaa yhteyttä ylläpitäjään."
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
 #: TWLight/users/views.py:108
