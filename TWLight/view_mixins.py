@@ -122,6 +122,63 @@ class CoordinatorsOnly(object):
 
 
 
+class PartnerCoordinatorOnly(object):
+    """
+    Restricts visibility to:
+    * The designated Coordinator for partner related to the object; or
+    * Superusers.
+
+    This mixin assumes that the decorated view has a get_object method, and that
+    the object in question has a ForeignKey, 'user', to the User model, or else
+    is an instance of User.
+    """
+
+    def test_func_coordinator_or_self(self, user):
+
+        obj_coordinator_test = False # Set default.
+
+        # If the user is a coordinator run more tests
+        if user in coordinators.user_set.all():
+            try:
+                obj = self.get_object()
+                if obj:
+                        # Return true if the object is an editor and has
+                        # at least one application to a partner for whom
+                        # the user is a designated coordinator.
+                        if isinstance(obj, Editor):
+                            obj_coordinator_test = (Application.objects.filter(
+                                editor__pk=obj.pk,
+                                partner__coordinator__pk=user.pk
+                            ).exists())
+                        # Return true if the object is an application to a
+                        # partner for whom the user is a designated coordinator
+                        elif isinstance(obj, Application):
+                            obj_coordinator_test = (
+                                obj.partner.coordinator.pk == user.pk
+                            )
+                        elif isinstance(obj, Partner):
+                            obj_coordinator_test = (
+                                obj.coordinator.pk == user.pk
+                            )
+            except AttributeError:
+                # Keep the default.
+                pass
+
+        return (user.is_superuser or
+                obj_coordinator_test)
+
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_coordinator_or_self(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be the '
+                    'designated coordinator or the owner to do that.')
+            raise PermissionDenied
+
+        return super(PartnerCoordinatorOnly, self).dispatch(
+            request, *args, **kwargs)
+
+
+
 class EditorsOnly(object):
     """
     Restricts visibility to:
