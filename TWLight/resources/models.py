@@ -433,3 +433,21 @@ class Contact(models.Model):
     def __unicode__(self):
         # As with Stream, do not return the partner name here.
         return self.full_name
+
+
+
+
+class Video(models.Model):
+
+    class Meta:
+        app_label = 'resources'
+        verbose_name = 'video tutorial'
+        verbose_name_plural = 'video tutorials'
+        ordering = ['partner']
+
+
+    partner = models.ForeignKey(Partner, db_index=True, related_name="videos")
+    
+    tutorial_video_url = models.URLField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
+        help_text=_("URL of a video tutorial."))

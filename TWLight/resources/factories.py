@@ -2,7 +2,7 @@
 
 import factory
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner, Stream, Video
 
 
 class PartnerFactory(factory.django.DjangoModelFactory):
@@ -25,3 +25,13 @@ class StreamFactory(factory.django.DjangoModelFactory):
 
     partner = factory.SubFactory(PartnerFactory)
     name = factory.Faker('bs')
+
+
+
+class VideoFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = Video
+        strategy = factory.CREATE_STRATEGY
+
+    partner = factory.SubFactory(PartnerFactory)
