@@ -216,6 +216,26 @@
         </div>
       </div>      
     </li>
+    {% if object.videos.all %}
+      <li class="timeline-inverted">
+        <div class="timeline-badge"><i class="fa fa-file"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-body">
+            <h4 class="timeline-title">
+              {% comment %} Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
+              {% trans "Video tutorials" %}
+            </h4>
+            <ul>
+              {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
+              {% for each_tutorial in object.videos.all %}
+                <li><a href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </li>
+    {% endif %}
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-language"></i>
       </div>

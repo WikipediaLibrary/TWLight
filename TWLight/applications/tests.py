@@ -2736,7 +2736,13 @@ class MarkSentTest(TestCase):
         coordinators = get_coordinators()
         coordinators.user_set.add(self.user)
 
-        self.partner = PartnerFactory()
+        editor2 = EditorFactory()
+        self.user2 = editor2.user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.user)
+
+        self.partner = PartnerFactory(coordinator=self.user)
+
         self.partner2 = PartnerFactory()
 
         self.app1 = ApplicationFactory(
@@ -2830,6 +2836,24 @@ class MarkSentTest(TestCase):
         # Check that we've covered all existing apps with the above statements.
         self.assertEqual(Application.objects.count(), 2)
 
+
+    def test_only_partner_coordinator_can_view(self):
+        # Only the coordinator assigned to a specific partner should
+        # be able to view that partner's send page.
+        request = RequestFactory().get(self.url)
+
+        # A coordinator who isn't assigned to this partner shouldn't be
+        # able to view the page.
+        request.user = self.user2
+        with self.assertRaises(PermissionDenied):
+            _ = views.SendReadyApplicationsView.as_view()(
+                request, pk=self.partner.pk)
+
+        # Whereas this partner's coordinator should.
+        request.user = self.user
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+        self.assertEqual(response.status_code, 200)
 
     def test_only_coordinators_can_mark_sent(self):
         # An anonymous user is prompted to login.
