@@ -6,7 +6,7 @@ import random
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
-from TWLight.resources.factories import PartnerFactory, StreamFactory, SuggestionFactory
+from TWLight.resources.factories import PartnerFactory, StreamFactory, VideoFactory, SuggestionFactory
 from TWLight.resources.models import Language, Partner, Stream, Suggestion
 
 class Command(BaseCommand):
@@ -129,7 +129,15 @@ class Command(BaseCommand):
                     name= fake.sentence(nb_words= 3)[:-1], # [:-1] removes full stop
                     description= fake.paragraph(nb_sentences=2)
                     )
-
+        
+        # Set 15 partners to have somewhere between 1 and 5 video tutorial URLs
+        for partner in random.sample(all_partners, 15):
+            for _ in range(random.randint(1, 5)):
+                VideoFactory(
+                    partner = partner,
+                    tutorial_video_url = fake.url()
+                    )
+                    
         # Random number of accounts available for all streams
         all_streams = Stream.objects.all()
         for each_stream in all_streams:

@@ -10,8 +10,8 @@ msgstr ""
 ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2018-09-14 20:14+0000\n"
-"PO-Revision-Date: 2018-10-09 08:35:41+0000\n"
+"POT-Creation-Date: 2018-10-12 16:16+0000\n"
+"PO-Revision-Date: 2018-10-15 07:42:21+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-POT-Import-Date: 2018-09-17 15:27:35+0000\n"
+"X-POT-Import-Date: 2018-10-12 19:05:35+0000\n"
 "X-Generator: MediaWiki 1.32.0-alpha; Translate 2018-07-10\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -711,8 +711,8 @@ msgstr "<p>Cher %(user)s,</p> <p>Merci d'avoir demandé l'accès aux ressources 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. We are happy to inform you that your application has\nbeen approved. You can expect to receive access details within a week or \ntwo once it has been processed.\n\nCheers!\n\nThe Wikipedia Library\n"
-msgstr "\nBonjour %(user)s, \n\nMerci d'avoir demandé l'accès aux ressources de %(partner)s au travers de la Bibliothèque Wikipedia. Nous sommes heureux de vous informer que votre demande a été approuvée. Vous devriez recevoir des détails sur l'accès dans une semaine ou deux, le temps que votre demande soit traitée. \n\nÀ votre santé! \n\nLa Bibliothèque Wikipedia\n"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. You can expect to receive access details within a week or two once it has been processed. Cheers! The Wikipedia Library"
+msgstr "Cher %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)s au travers de la bibliothèque Wikipedia. Nous sommes heureux de vous informer que votre demande a été approuvée. Vous devriez recevoir les détails sur l'accès dans une semaine ou deux, le temps que votre demande soit traitée. À votre santé! la bibliothèque Wikipedia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -728,8 +728,8 @@ msgstr "<p>Cher %(user)s,</p> <p>Merci d'avoir harmonisé les ressources de %(pa
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for coordinating %(partner)s resources through\nThe Wikipedia Library. There are one or more comments on an application that\nrequire a response from you. Please reply to these at:\n%(app_url)s\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr "\nBonjour %(user)s, \n\nMerci de coordonner les ressources de %(partner)s via la bibliothèque Wikipédia.\nIl y a un ou plusieurs commentaires sur une demande qui nécessite une réponse de votre part. \nVeuillez y répondre sur :\n%(app_url)s \n\nAmicalement, \n\nLa bibliothèque Wikipedia\n"
+msgid "Dear %(user)s, Thank you for coordinating %(partner)s resources through The Wikipedia Library. There are one or more comments on an application that require a response from you. Please reply to these at: %(app_url)s Best, The Wikipedia Library"
+msgstr "Cher %(user)s, Merci de coordonner les ressources de %(partner)s via la bibliothèque Wikipédia. Il y a un ou plusieurs commentaires sur une demande qui nécessite une réponse de votre part. Veuillez y répondre sur : %(app_url)s . Amicalement, la bibliothèque Wikipedia"
 
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
 #: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
@@ -745,8 +745,8 @@ msgstr "<p>Bonjour %(user)s,</p> <p>Merci d'avoir demandé l'accès aux ressourc
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. There are one or more comments on your application that\nrequire a response from you. Please reply to these at:\n%(app_url)s\nso we can evaluate your application.\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr "\nCher %(user)s,\n\nMerci d'avoir demandé l'accès aux ressources de %(partner)s via la Bibliothèque Wikipédia. Il y a un ou plusieurs commentaires sur votre application qui nécessitent une réponse de votre part. Veuillez répondre à ceux-ci à :\n%(app_url)s\nafin que nous puissions évaluer votre demande.\n\nAmicalement,\n\nLa Bibliothèque Wikipédia\n"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are one or more comments on your application that require a response from you. Please reply to these at: %(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
+msgstr "Cher %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)s via la bibliothèque Wikipédia. Il y a un ou plusieurs commentaires sur votre demande qui nécessitent une réponse de votre part. Veuillez répondre à ceux-ci sur : %(app_url)s\nafin que nous puissions évaluer votre demande. Amicalement, la bibliothèque Wikipédia"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
@@ -762,8 +762,8 @@ msgstr "Il y a un nouveau commentaire sur une demande de la Bibliothèque Wikip�
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
 #, python-format
-msgid "\nThere is a new comment on a Wikipedia Library application that you also\ncommented on. It may be providing an answer to a question you asked. See it at:\n%(app_url)s\n\nThanks for helping review Wikipedia Library applications!\n"
-msgstr "\nIl y a un nouveau commentaire sur une demande à la Bibliothèque Wikipédia que vous avez également commentée. Il pourrait fournir une réponse à une question que vous avez posée. Vous pouvez le voir à %(app_url)s\n\nMerci de nous aider à évaluer les demandes pour la bibliothèque Wikipédia !\n"
+msgid "There is a new comment on a Wikipedia Library application that you also commented on. It may be providing an answer to a question you asked. See it at: %(app_url)s Thanks for helping review Wikipedia Library applications!"
+msgstr "Il y a un nouveau commentaire sur une demande à la bibliothèque Wikipédia que vous avez également commentée. Il pourrait fournir une réponse à une question que vous avez posée. Vous pouvez le voir sur %(app_url)s . Merci de nous aider à évaluer les demandes pour la bibliothèque Wikipédia !"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-subject.html:4
@@ -779,8 +779,8 @@ msgstr "<p>Cher %(user)s,</p> <p>Nos archives indiquent que vous êtes le coordi
 #. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate email adresses or items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nOur records indicate that you are the designated coordinator for partners that \nhave a total of %(app_count)s applications with a status of %(app_status)s.\nThis is a gentle reminder that you may review applications at:\n%(link)s\n\nIf you received this message in error, drop us a line at:\nwikipedialibrary@wikimedia.org\n\nThanks for helping review Wikipedia Library applications!\n"
-msgstr "\nCher %(user)s,\n\nNos archives indiquent que vous êtes le coordinateur désigné pour les partenaires qui ont un total de %(app_count)s applications avec un état de %(app_status)s.\nCeci est un rappel doux que vous pouvez examiner les applications à:\n%(link)s\n\nSi vous avez reçu ce message par erreur, contactez-nous à:\nwikipedialibrary@wikimedia.org\n\nMerci d'avoir aidé à revoir les applications de la Bibliothèque Wikipedia!\n"
+msgid "Dear %(user)s, Our records indicate that you are the designated coordinator for partners that have a total of %(app_count)s applications with a status of %(app_status)s. This is a gentle reminder that you may review applications at: %(link)s If you received this message in error, drop us a line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library applications!"
+msgstr "Cher %(user)s, Nos archives indiquent que vous êtes le coordinateur désigné pour les partenaires qui ont un total de %(app_count)s demandes avec un état de %(app_status)s. Ceci est un rappel amical pour que vous examiniez les demandes sur : %(link)s . Si vous avez reçu ce message par erreur, contactez-nous à:\nwikipedialibrary@wikimedia.org . Merci de nous aider à évaluer les demandes de la bibliothèque Wikipedia!"
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
@@ -796,8 +796,8 @@ msgstr "<p>Cher %(user)s,</p> <p>Merci d'avoir demandé l'accès aux ressources 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. Unfortunately at this time your application has not been\napproved. You can view your application and review comments at:\n%(app_url)s\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr "\nBonjour %(user)s, \n\nMerci d'avoir demandé l'accès aux ressources de %(partner)s via la Bibliothèque Wikipédia. Malheureusement, actuellement votre demande n'a pas été approuvée. Vous pouvez voir votre demande et les commentaires: \n%(app_url)s. \n\nCordialement,\n\nLa bibliothèque Wikipédia."
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at: %(app_url)s Best, The Wikipedia Library"
+msgstr "Cher %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)s via la Bibliothèque Wikipédia. Malheureusement, actuellement votre demande n'a pas été approuvée. Vous pouvez voir votre demande et les commentaires sur : %(app_url)s. Cordialement, la bibliothèque Wikipédia."
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
@@ -813,8 +813,8 @@ msgstr "<p>Cher %(user)s,</p> <p>Merci d'avoir demandé l'accès aux ressources 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3
 #, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. There are no accounts currently available so your\napplication has been waitlisted. Your application will be evaluated if/when\nmore accounts become available. You can see all available resources at:\n%(link)s\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr "\nCher %(user)s,\n\nMerci d'avoir demandé l'accès aux ressources de %(partner)s via la Bibliothèque Wikipédia. Il n'y a actuellement pas de compte disponible, donc votre demande a été mise en liste d'attente.Votre demande sera évaluée si/lorsque d'autres comptes deviendront disponibles. Vous pouvez voir toutes les ressources disponibles:\n%(link)s.\n\nAmicalement,\n\nLa Bibliothèque Wikipédia\n"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at: %(link)s Best, The Wikipedia Library"
+msgstr "Cher %(user)s, Merci d'avoir demandé l'accès aux ressources de %(partner)s via la bibliothèque Wikipédia. Il n'y a actuellement pas de compte disponible, donc votre demande a été mise en liste d'attente.Votre demande sera évaluée si/lorsque d'autres comptes deviendront disponibles. Vous pouvez voir toutes les ressources disponibles sur: %(link)s. \nAmicalement, la bibliothèque Wikipédia"
 
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4

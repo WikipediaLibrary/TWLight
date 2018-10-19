@@ -17,11 +17,14 @@ fi
 
 source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 
+# Get a list of languages, and add the reserved code for translation documentation.
+langs=($(python manage.py diffsettings | grep '^LANGUAGES =' | grep -o "(u'[^']*'" | grep -o "'[^']*'"  | xargs))
+langs+=('qqq')
+
 makemessages() {
-    echo "makemessages"
-    langs=($(python manage.py diffsettings | grep '^LANGUAGES =' | grep -o "(u'[^']*'" | grep -o "'[^']*'"  | xargs))
-    langs+=('qqq')
-    for locale in "${langs[@]}"; do
+    echo "makemessages:"
+    for locale in "${langs[@]}"
+    do
       python manage.py makemessages --locale=${locale} || exit 1
       # Search and replace meaningless boilerplate information from headers.
       sed -i "s/# SOME DESCRIPTIVE TITLE./# TWLight ${locale} translation./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
@@ -71,8 +74,15 @@ fi
 # If translations changed, recompile messages.
 if [ "${translation_files_changed}" -gt 0 ]
 then
-    echo "compilemessages"
-    python manage.py compilemessages || exit 1
+    echo "compilemessages:"
+    # As of 2018-10-11, every commit from translatewiki.net contained an error
+    # in at least one translation that prevented sucessful compliation. This
+    # stalled out our deployment pipeline. Now we opportunistically build what
+    # we can and silently pass over the rest.
+    for locale in "${langs[@]}"
+    do
+      python manage.py compilemessages --locale=${locale} || :
+    done
 else
    echo "No translations changed."
 fi

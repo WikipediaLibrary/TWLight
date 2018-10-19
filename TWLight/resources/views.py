@@ -179,7 +179,7 @@ class PartnersDetailView(DetailView):
                 context['stream_unique_accepted'][stream.name] = stream_unique_accepted
         else:
             context['stream_unique_accepted'] = None
-            
+
         return context
 
 

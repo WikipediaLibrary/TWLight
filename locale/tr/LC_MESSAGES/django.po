@@ -3,14 +3,17 @@
 #
 # Author: Hedda
 # Author: TmY e12
+# Author: UY Scuti
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-10-09 08:35:42+0000\n"
-"X-POT-Import-Date: 2018-09-17 15:27:35+0000\n"
+"Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
+"POT-Creation-Date: 2018-10-12 16:16+0000\n"
+"PO-Revision-Date: 2018-10-18 06:33:33+0000\n"
+"Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
+"X-POT-Import-Date: 2018-10-12 19:05:35+0000\n"
 "X-Generator: MediaWiki 1.32.0-alpha; Translate 2018-07-10\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -26,7 +29,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:117
 #: TWLight/templates/base.html:101
 msgid "Apply"
-msgstr "Uygula"
+msgstr "Başvur"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:193
@@ -584,9 +587,10 @@ msgstr "Aşağıdaki verileri işlediğinizde 'Gönderildi olarak işaretle' but
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
 #: TWLight/applications/templates/applications/send_partner.html:86
+#, fuzzy
 msgid "Contact"
 msgid_plural "Contacts"
-msgstr[0] "Contact"
+msgstr[0] "İletişim"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/applications/templates/applications/send_partner.html:102
@@ -701,8 +705,8 @@ msgstr "<p>Sevgili %(user)s,</p> <p> Vikipedi Kütüphanesi aracılığıyla %(p
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. We are happy to inform you that your application has\nbeen approved. You can expect to receive access details within a week or \ntwo once it has been processed.\n\nCheers!\n\nThe Wikipedia Library\n"
+#, fuzzy, python-format
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. You can expect to receive access details within a week or two once it has been processed. Cheers! The Wikipedia Library"
 msgstr "\nSevgili %(user)s,\n\nVikipedi Kütüphanesi aracılığıyla %(partner)s kaynaklarına erişim amacıyla yaptığınız başvuru için teşekkür ederiz. Başvurunuzun onaylandığını bildirmekten mutluluk duyarız. Erişim ayrıntılarını onayınız işlendikten sonra bir veya iki hafta içinde alabilirsiniz.\n\nHoşça kal!\n\nVikipedi Kütüphanesi\n"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -718,8 +722,8 @@ msgstr "<p>Sevgili %(user)s,</p> <p>Vikipedi kütüphanesi aracılığıyla %(pa
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
-#, python-format
-msgid "\nDear %(user)s,\n\nThank you for coordinating %(partner)s resources through\nThe Wikipedia Library. There are one or more comments on an application that\nrequire a response from you. Please reply to these at:\n%(app_url)s\n\nBest,\n\nThe Wikipedia Library\n"
+#, fuzzy, python-format
+msgid "Dear %(user)s, Thank you for coordinating %(partner)s resources through The Wikipedia Library. There are one or more comments on an application that require a response from you. Please reply to these at: %(app_url)s Best, The Wikipedia Library"
 msgstr "\nSevgili %(user)s,\n\nVikipedi kütüphanesi aracılığıyla %(partner)s kaynağını koordine ettiğiniz için teşekkür ederiz. Bir başvuruda sizden yanıt bekleyen bir veya daha fazla yorum var. Lütfen şu adreste yanıt verin:\n\n%(app_url)s\n\nSaygılarımızla,\n\nVikipedi Kütüphanesi\n"
 
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
@@ -735,8 +739,8 @@ msgstr "<p>Sevgili %(user)s,</p> <p>Vikipedi Kütüphanesi aracılığıyla %(pa
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
-#, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. There are one or more comments on your application that\nrequire a response from you. Please reply to these at:\n%(app_url)s\nso we can evaluate your application.\n\nBest,\n\nThe Wikipedia Library\n"
+#, fuzzy, python-format
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are one or more comments on your application that require a response from you. Please reply to these at: %(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
 msgstr "\nSevgili %(user)s,\n\nVikipedi Kütüphanesi aracılığıyla %(partner)s kaynaklarına erişim başvurusu yaptığınız için teşekkür ederiz. Başvurunuzda sizden yanıt bekleyen bir veya birden fazla yorum var. Lütfen başvurunuzu değerlendirebilmemiz şu adreste yanıtlayın:\n%(app_url)s\nbiz de böylece başvurunuzu değerlendirebiliriz.\n\nSaygılarımızla,\n\nVikipedi Kütüphanesi\n"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -752,8 +756,8 @@ msgstr "Yorum da yaptığınız bir Vikipedi Kütüphanesi başvurunuzda yeni bi
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
-#, python-format
-msgid "\nThere is a new comment on a Wikipedia Library application that you also\ncommented on. It may be providing an answer to a question you asked. See it at:\n%(app_url)s\n\nThanks for helping review Wikipedia Library applications!\n"
+#, fuzzy, python-format
+msgid "There is a new comment on a Wikipedia Library application that you also commented on. It may be providing an answer to a question you asked. See it at: %(app_url)s Thanks for helping review Wikipedia Library applications!"
 msgstr "\nYorum da yaptığınız bir Vikipedi Kütüphanesi başvurunuzda yeni bir yorum mevcut.\nBu, sorduğunuz bir soruya verilmiş bir cevap da olabilir. Görmek için şu adrese gidiniz:\n%(app_url)s\n\nVikipedi Kütüphanesi başvurularını gözden geçirdiğiniz için teşekkürler!\n\n"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -765,13 +769,13 @@ msgstr "Yorum yaptığınız bir Vikipedi Kütüphanesi başvurusuna yeni bir yo
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated coordinator for partners that have a total of %(app_count)s applications with a status of %(app_status)s.</p> <p>This is a gentle reminder that you may review applications at <a href=\"%(link)s\">%(link)s</a>.</p> <p>If you received this message in error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for helping review Wikipedia Library applications!</p>"
-msgstr ""
+msgstr "<p>Sevgili %(user)s,</p> <p> Kayıtlarımız, %(app_status)s durumdaki toplam %(app_count)s başvuruya sahip iş ortakları için belirlenmiş koordinatör olduğunuzu gösterir.</p> <p>Bu, <a href=\"%(link)s\">%(link)s</a> adresindeki başvuruları inceleyebileceğinizle ilgili kibar bir hatırlatmadır.</p> <p>Bu mesajı yanlışlıkla aldıysanız, wikipedialibrary@wikimedia.org adresinden bize yazın.</p> <p>Vikipedi Kütüphanesi başvurularını gözden geçirdiğiniz için teşekkürler!</p>"
 
 #. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate email adresses or items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
-#, python-format
-msgid "\nDear %(user)s,\n\nOur records indicate that you are the designated coordinator for partners that \nhave a total of %(app_count)s applications with a status of %(app_status)s.\nThis is a gentle reminder that you may review applications at:\n%(link)s\n\nIf you received this message in error, drop us a line at:\nwikipedialibrary@wikimedia.org\n\nThanks for helping review Wikipedia Library applications!\n"
-msgstr ""
+#, fuzzy, python-format
+msgid "Dear %(user)s, Our records indicate that you are the designated coordinator for partners that have a total of %(app_count)s applications with a status of %(app_status)s. This is a gentle reminder that you may review applications at: %(link)s If you received this message in error, drop us a line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library applications!"
+msgstr "\nSevgili %(user)s,\n\nKayıtlarımız, %(app_status)s durumdaki toplam %(app_count)s başvuruya sahip iş ortakları için belirlenmiş koordinatör olduğunuzu gösterir.\nBu, aşağıdaki adreste başvuruları inceleyebileceğiniz nazik bir hatırlatmadır:\n%(link)s\n\nBu mesajı yanlışlıkla aldıysanız, bize yazın:\nwikipedialibrary@wikimedia.org\n\nVikipedi Kütüphanesi başvurularını gözden geçirdiğiniz için teşekkürler!\n"
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
@@ -782,13 +786,13 @@ msgstr "Vikipedi Kütüphanesi başvuruları değerlendirmenizi bekliyor"
 #: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at <a href=\"%(app_url)s\">%(app_url)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p>Sevgili %(user)s,</p> <p>Vikipedi Kütüphanesi aracılığıyla %(partner)s erişim başvurusu yaptığınız için teşekkür ederiz. Maalesef şu anda başvurunuz onaylanmadı. Başvurunuzu görüntüleyebilir ve yorumları <a href=\"%(app_url)s\">%(app_url)s</a> adresinden inceleyebilirsiniz.</p> <p>Sevgilerle,</p> <p>Vikipedi Kütüphanesi</p>"
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
-#, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. Unfortunately at this time your application has not been\napproved. You can view your application and review comments at:\n%(app_url)s\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr ""
+#, fuzzy, python-format
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at: %(app_url)s Best, The Wikipedia Library"
+msgstr "\nSevgili %(user)s,\n\nVikipedi Kütüphanesi aracılığıyla %(partner)s erişim başvurusu yaptığınız için teşekkür ederiz. Maalesef şu anda başvurunuz onaylanmadı. Başvurunuzu ve yorumları şu adreste görüntüleyebilirsiniz:\n%(app_url)s\n\nSevgilerle,\n\nVikipedi Kütüphanesi\n"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
@@ -799,13 +803,13 @@ msgstr "Vikipedi Kütüphanesi başvurunuz reddedildi"
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at <a href=\"%(link)s\">%(link)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p>Sevgili %(user)s,</p> <p>Vikipedi Kütüphanesi aracılığıyla %(partner)s erişim başvurusu yaptığınız için teşekkür ederiz. Şu anda kullanılabilir bir hesap mevcut olmadığı için başvurunuz beklemede. Kullanılabilir daha fazla hesap mevcut olduğunda başvurunuz değerlendirilecektir. Tüm kaynakları <a href=\"%(link)s\">%(link)s</a> adresinde görebilirsiniz.</p> <p>Sevgilerle,</p> <p>Vikipedi Kütüphanesi</p>"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3
-#, python-format
-msgid "\nDear %(user)s,\n\nThank you for applying for access to %(partner)s resources through\nThe Wikipedia Library. There are no accounts currently available so your\napplication has been waitlisted. Your application will be evaluated if/when\nmore accounts become available. You can see all available resources at:\n%(link)s\n\nBest,\n\nThe Wikipedia Library\n"
-msgstr ""
+#, fuzzy, python-format
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at: %(link)s Best, The Wikipedia Library"
+msgstr "\nSevgili %(user)s,\n\nVikipedi Kütüphanesi aracılığıyla %(partner)s erişim başvurusu yaptığınız için teşekkür ederiz. Şu anda kullanılabilir bir hesap mevcut olmadığı için başvurunuz beklemede. Kullanılabilir daha fazla hesap mevcut olduğunda başvurunuz değerlendirilecektir. Tüm kaynakları şu adreste görebilirsiniz:\n%(link)s\n\nSevgilerle,\n\nVikipedi Kütüphanesi\n"
 
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
@@ -947,7 +951,7 @@ msgstr "Bu İş Ortağı kullanıcılara gösterilecek mi? Şu anda başvurular 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify whether users can request their account be renewed/extended for this partner.
 #: TWLight/resources/models.py:184
 msgid "Can access grants to this partner be renewed? If so, users will be able to request renewals at any time."
-msgstr ""
+msgstr "Bu iş ortağına erişim yenilenebilir mi? Öyleyse kullanıcılar istedikleri zaman yenileme talebinde bulunabilir."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
 #: TWLight/resources/models.py:189 TWLight/resources/models.py:377
@@ -992,7 +996,7 @@ msgstr "Bu iş ortağı Bundle'ın bir parçası mı?"
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
 #: TWLight/resources/models.py:231
 msgid "If True, users can only apply for one Stream at a time from this Partner. If False, users can apply for multiple Streams at a time. This field must be filled in when Partners have multiple Streams, but may be left blank otherwise."
-msgstr ""
+msgstr "Eğer Doğru ise kullanıcılar bu iş ortağından tek seferlik bir akış için başvuru yapabilirler. Eğer Yanlış ise kullanıcılar tek seferlik birden çok akış için başvuru yapabilirler. Bu alan, iş ortakları birden fazla akışa sahip olduğunda doldurulmalıdır aksi halde boş bırakılabilir."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
 #: TWLight/resources/models.py:238
@@ -1161,19 +1165,19 @@ msgstr "Alıntı sınırı"
 #: TWLight/resources/templates/resources/partner_detail.html:259
 #, python-format
 msgid "%(object)s allows a maximum of %(excerpt_limit)s words or %(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia article."
-msgstr ""
+msgstr "%(object)s, bir Vikipedi maddesine en fazla %(excerpt_limit)s kelime ya da bir makalenin %(excerpt_limit_percentage)s%% oranında alıntı yapılmasını izin vermektedir."
 
 #. Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:266
 #, python-format
 msgid "%(object)s allows a maximum of %(excerpt_limit)s words be excerpted into a Wikipedia article."
-msgstr ""
+msgstr "%(object)s, bir Vikipedi maddesine en fazla %(excerpt_limit)s kelime olacak şekilde alıntı yapılmasına izin vermektedir."
 
 #. Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:273
 #, python-format
 msgid "%(object)s allows a maximum of %(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia article."
-msgstr ""
+msgstr "%(object)s, bir Vikipedi maddesine makalenin en fazla %(excerpt_limit_percentage)s%% oranında alıntı yapılmasına izin vermektedir."
 
 #. Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
 #: TWLight/resources/templates/resources/partner_detail.html:291
@@ -1184,7 +1188,7 @@ msgstr "Başvuru sahipleri için özel şartlar"
 #: TWLight/resources/templates/resources/partner_detail.html:299
 #, python-format
 msgid "%(publisher)s requires that you agree with its <a href=\"%(url)s\">terms of use</a>."
-msgstr ""
+msgstr "%(publisher)s, <a href=\"%(url)s\">kullanım şartlarını</a> kabul etmenizi istiyor."
 
 #. Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
 #: TWLight/resources/templates/resources/partner_detail.html:309
@@ -1730,7 +1734,7 @@ msgstr "Tüm iş ortaklarını gör"
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of editors (users) who registered.
 #: TWLight/templates/dashboard.html:41
 msgid "Total unique editors receiving access"
-msgstr "Erişim hakkına sahip toplam benzersiz editörler"
+msgstr "Erişim hakkına sahip toplam benzersiz editör"
 
 #: TWLight/templates/dashboard.html:56
 msgid "Total accounts distributed"
@@ -1739,7 +1743,7 @@ msgstr ""
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which moves the page down to metrics about applications.
 #: TWLight/templates/dashboard.html:63
 msgid "Jump to application metrics"
-msgstr ""
+msgstr "Başvuru bilgilerine git"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
 #: TWLight/templates/dashboard.html:77
@@ -1784,17 +1788,17 @@ msgstr "X ekseni bir başvuruda nihai kararı (onaylanmış veya reddedilmiş) y
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.
 #: TWLight/templates/dashboard.html:160
 msgid "Median days until application decision, per month"
-msgstr ""
+msgstr "Başvuru kararına kadar geçen ortalama gün, ay başına"
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean.
 #: TWLight/templates/dashboard.html:163
 msgid "This shows the median number of days to reach a decision on the applications opened in a given month."
-msgstr ""
+msgstr "Bu, belirli bir ayda açılan başvurularla ilgili bir karara varmak için geçen ortalama gün sayısını gösterir."
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
 #: TWLight/templates/dashboard.html:170
 msgid "Open application status distribution"
-msgstr ""
+msgstr "Açık başvuru durum dağılımı"
 
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.
 #: TWLight/templates/dashboard.html:182
@@ -1819,13 +1823,13 @@ msgstr "Daha fazla bilgi edinin"
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the header for that section.
 #: TWLight/templates/home.html:33
 msgid "Benefits"
-msgstr "Çıkarlar"
+msgstr "Faydalar"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
 #: TWLight/templates/home.html:37
 #, python-format
 msgid "<p>The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects. </p> <p>Through the Library Card you can apply for access to %(partner_count)s leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p> <p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, <a href=\"/applications/request/\">please apply</a>.</p>"
-msgstr ""
+msgstr "<p>Vikipedi Kütüphanesi, Wikimedia projelerine içerik katma yeteneğinizi geliştirmek için araştırma materyallerine ücretsiz erişim sağlar. </p> <p>Kütüphane Kartı ile 80 bin benzersiz dergi dahil olmak üzere %(partner_count)s önde gelen güvenilir yayıncıya erişim için başvuruda bulunabilirsiniz; aksi takdirde ödeme duvarı açılacaktır. Üye olmak için sadece Vikipedi giriş bilgilerinizi kullanın. Sadece Vikipedi girişinizi kullanarak kaynaklara doğrudan erişim... Çok yakında!</p> <p>İş ortağı kaynaklarımızdan birine erişim sağlayabileceğinizi düşünüyorsanız ve Wikimedia Vakfı tarafından desteklenen herhangi bir projede aktif bir editör olarak yer alıyorsanız <a href=\"/applications/request/\">lütfen başvurun</a>.</p>"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
 #: TWLight/templates/home.html:54
@@ -2321,7 +2325,7 @@ msgstr "Vikipedi Kütüphanesi Takımı"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/terms.html:216
 msgid "By checking this box and clicking “I Accept”, you consent to the above privacy statement and terms, and agree to adhere to them in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
-msgstr ""
+msgstr "Bu kutuyu işaretleyerek ve \"Kabul ediyorum\"u tıklayarak başvurunuzda, Vikipedi Kütüphanesi ve Vikipedi Kütüphanesi programı aracılığıyla erişim hakkı kazandığınız yayıncıların hizmetlerini kullanmaya ve bunlara uymayı kabul etmiş olursunuz."
 
 #: TWLight/users/templates/users/user_confirm_delete.html:7
 msgid "Delete all data"

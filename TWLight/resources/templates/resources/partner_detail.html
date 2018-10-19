@@ -25,6 +25,8 @@
   <h1>{{ object }}</h1>
   {% if not object.bundle %}
     {% url 'applications:apply_single' object.pk as app_url %}
+    {% url 'about' as about %}
+    {% url 'terms' as terms %}
     {% if object.is_waitlisted %}
     <div class="alert alert-warning visible-xs resource-label-warning">
        {% comment %} Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
@@ -57,6 +59,16 @@
             <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View application" %}</a>
         {% endif %}
     {% else %}
+      <div class="alert alert-info visible-xs">
+        <p>
+          {% comment %} Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
+          {% blocktrans trimmed %}
+            Before applying, please review the 
+            <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
+            and our <strong><a href="{{ terms }}">terms of use</a></strong>.
+          {% endblocktrans %}
+        </p>
+      </div>
         {% if user|restricted %}
           {% comment %} Translators: This text labels a button which users can click to submit an application. {% endcomment %}
           <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
@@ -111,6 +123,16 @@
       <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View application" %}</a>
     {% endif %}
     {% else %}
+      <div class="alert alert-info hidden-xs">
+        <p>
+          {% comment %} Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
+          {% blocktrans trimmed %}
+            Before applying, please review the 
+            <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
+            and our <strong><a href="{{ terms }}">terms of use</a></strong>.
+          {% endblocktrans %}
+        </p>
+      </div>
       {% if user|restricted %}
         <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
       {% else %}
@@ -216,6 +238,26 @@
         </div>
       </div>      
     </li>
+    {% if object.videos.all %}
+      <li class="timeline-inverted">
+        <div class="timeline-badge"><i class="fa fa-file"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-body">
+            <h4 class="timeline-title">
+              {% comment %} Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
+              {% trans "Video tutorials" %}
+            </h4>
+            <ul>
+              {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
+              {% for each_tutorial in object.videos.all %}
+                <li><a href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </li>
+    {% endif %}
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-language"></i>
       </div>
