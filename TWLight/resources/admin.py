@@ -30,6 +30,9 @@ class TextFieldTagAdmin(TabbedExternalJqueryTranslationAdmin):
 
 admin.site.register(TextFieldTag, TextFieldTagAdmin)
 
+class ContactInline(admin.TabularInline):
+    model = Contact
+
 class VideoInline(admin.TabularInline):
     model = Video
 
@@ -68,7 +71,7 @@ class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
 
     search_fields = ('company_name',)
     list_display = ('company_name', 'short_description', 'id', 'language_strings')
-    inlines = [VideoInline, PartnerLogoInline]
+    inlines = [ContactInline, VideoInline, PartnerLogoInline]
 
 admin.site.register(Partner, PartnerAdmin)
 
@@ -79,11 +82,3 @@ class StreamAdmin(TabbedExternalJqueryTranslationAdmin):
     list_display = ('id', 'partner', 'name', 'description', 'get_languages')
 
 admin.site.register(Stream, StreamAdmin)
-
-
-
-class ContactAdmin(admin.ModelAdmin):
-    search_fields = ('partner__company_name', 'full_name', 'short_name',)
-    list_display = ('id', 'title', 'full_name', 'partner', 'email',)
-
-admin.site.register(Contact, ContactAdmin)
