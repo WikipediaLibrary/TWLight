@@ -4,7 +4,6 @@ from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 from TWLight.users.groups import get_coordinators
 
 from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, Video, AccessCode
-from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, AccessCode
 
 
 class LanguageAdmin(admin.ModelAdmin):
