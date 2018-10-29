@@ -23,7 +23,7 @@ pypandoc==1.4
 python-dateutil==2.6.0
 PyJWT==1.0.1
 pytz==2016.10
-requests==2.12.4
+requests==2.20.0
 requests-oauthlib==0.4.0
 six==1.10.0
 wheel==0.30.0
