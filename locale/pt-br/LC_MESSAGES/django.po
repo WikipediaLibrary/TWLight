@@ -7,12 +7,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2018-10-19 17:28+0000\n"
-"PO-Revision-Date: 2018-10-29 07:18:31+0000\n"
+"PO-Revision-Date: 2018-11-01 07:25:38+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2018-10-22 11:24:17+0000\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-07-10\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-10-26\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -703,9 +703,9 @@ msgstr "<p>Caro %(user)s,</p> <p>Obrigado por solicitar acesso aos recursos do %
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. You can expect to receive access details within a week or two once it has been processed. Cheers! The Wikipedia Library"
-msgstr "\nCaro %(user)s,\n\nObrigado por solicitar acesso aos recursos do  %(partner)s através de\nA Biblioteca da Wikipédia. Estamos felizes em informar que sua inscrição tem\naprovado. Você pode esperar receber detalhes de acesso em uma semana ou\ndois depois de processado.\n\nObrigado!\n\nA Biblioteca da Wikipedia"
+msgstr "Caro(a) %(user)s, Agradecemos o seu pedido de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Temos o prazer de informar que a sua candidatura foi aprovada. Irá receber os detalhes de acesso uma ou duas semanas após o respetivo processamento. Cumprimentos! A Biblioteca da Wikipédia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -737,9 +737,9 @@ msgstr "<p>Caro %(user)s,</p> <p>Obrigado por solicitar acesso a recursos de %(p
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are one or more comments on your application that require a response from you. Please reply to these at: %(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
-msgstr "\nCaro %(user)s,\n\nObrigado por solicitar acesso aos recursos do %(partner)s através de\nA Biblioteca da Wikipédia. Há um ou mais comentários em seu aplicativo que\nexigir uma resposta sua. Por favor, responda a estas em:\n%(app_url)s\npara que possamos avaliar sua aplicação.\n\nObrigado,\n\nA Biblioteca da Wikipedia\n"
+msgstr "Caro(a) %(user)s, Agradecemos a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Há um ou mais comentários sobre a sua candidatura que necessitam de uma resposta sua. Para podermos avaliar a sua candidatura, responda, por favor, em: %(app_url)s. Melhores cumprimentos, A Biblioteca da Wikipédia"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
@@ -805,9 +805,9 @@ msgstr "<p>Caro %(user)s,</p> <p>Obrigado por solicitar acesso a recurso do %(pa
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at: %(link)s Best, The Wikipedia Library"
-msgstr "\nCaro %(user)s,\n\nObrigado por solicitar acesso aos recursos do %(partner)s através de\nA Biblioteca da Wikipédia. Não há contas disponíveis no momento para que seu\naplicativo foi colocado na lista de espera. Sua inscrição será avaliada se / quando\nmais contas ficam disponíveis. Você pode ver todos os recursos disponíveis em:\n%(link)s\n\nObrigado,\n\nA Biblioteca da Wikipedia\n"
+msgstr "Caro(a) %(user)s, Agradecemos a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Neste momento não há nenhuma conta disponível, por isso a sua candidatura foi colocada em lista de espera. A candidatura será avaliada quando houverem contas disponíveis. Pode ver todos os recursos disponíveis em: %(link)s Cumprimentos, A Biblioteca da Wikipédia"
 
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4

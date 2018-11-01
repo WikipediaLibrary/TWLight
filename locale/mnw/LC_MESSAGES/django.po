@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-10-29 07:18:30+0000\n"
+"PO-Revision-Date: 2018-11-01 07:25:37+0000\n"
 "X-POT-Import-Date: 2018-10-22 11:24:17+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: mnw\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-07-10\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-10-26\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
