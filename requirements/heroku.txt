@@ -1,5 +1,5 @@
 -r base.txt
 dj-database-url==0.4.0
-gunicorn==19.4.5
+gunicorn==19.9.0
 psycopg2==2.7.5
 whitenoise
