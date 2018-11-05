@@ -199,7 +199,11 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff specify whether users can request their account be renewed/extended for this partner.
         help_text=_('Can access grants to this partner be renewed? If so, '
             'users will be able to request renewals at any time.'))
-
+            
+    accounts_available = models.PositiveSmallIntegerField(blank=True, null=True, 
+        # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
+        help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
+    
     # Optional resource metadata
     # --------------------------------------------------------------------------
 
@@ -384,6 +388,11 @@ class Stream(models.Model):
         help_text=_("Name of stream (e.g. 'Health and Behavioral Sciences). "
             "Will be user-visible and *not translated*. Do not include the "
             "name of the partner here."))
+            
+    accounts_available = models.PositiveSmallIntegerField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
+        help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
+        
     description = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
         help_text=_("Optional description of this stream's resources."))
@@ -441,6 +450,25 @@ class Contact(models.Model):
     def __unicode__(self):
         # As with Stream, do not return the partner name here.
         return self.full_name
+
+
+
+class Video(models.Model):
+
+    class Meta:
+        app_label = 'resources'
+        verbose_name = 'video tutorial'
+        verbose_name_plural = 'video tutorials'
+        ordering = ['partner']
+
+
+    partner = models.ForeignKey(Partner, db_index=True, related_name="videos")
+    
+    tutorial_video_url = models.URLField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
+        help_text=_("URL of a video tutorial."))
+
+
 
 class AccessCode(models.Model):
     """

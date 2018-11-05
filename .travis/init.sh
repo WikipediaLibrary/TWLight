@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# By the time travis fires this script, we're in the correct dir.
+# We just need to set this for compatibility with existing bash ops.
+export TWLIGHT_HOME=$(pwd)
+
 # Install cssjanus.
 mkdir -p ~/node_modules
 npm install --prefix ~ cssjanus
@@ -28,4 +32,4 @@ python manage.py makemigrations
 python manage.py migrate || bash -c "python manage.py sync_translation_fields --noinput && python manage.py migrate"
 
 # Compile translations. Slightly involved due to this being a Wikimedia project.
-.travis/./translate.sh
+bin/./virtualenv_translate.sh last-commit

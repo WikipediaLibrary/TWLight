@@ -25,8 +25,11 @@
   <h1>{{ object }}</h1>
   {% if not object.distribution_type == object.BUNDLE %}
     {% url 'applications:apply_single' object.pk as app_url %}
+    {% url 'about' as about %}
+    {% url 'terms' as terms %}
     {% if object.is_waitlisted %}
     <div class="alert alert-warning visible-xs resource-label-warning">
+       {% comment %} Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
        <span class="resource-label">{% trans "Waitlisted" %}</span>
        <p>
        {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
@@ -39,21 +42,38 @@
     </div>
     {% endif %}
     {% if user_sent_apps %}
+      {% if object.renewals_available %}
         {% if user|restricted %}
+          {% comment %} Translators: This text labels a button which users can click to renew a previously approved application. {% endcomment %}
           <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled">{% trans "Renew" %}</button><br />
         {% else %}
           <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
         {% endif %}
+      {% endif %}
     {% elif user_open_apps %}
         {% if multiple_open_apps %}
+            {% comment %} Translators: This text labels a button which users can click to view previously submitted applications. {% endcomment %}
             <a href="{% url 'users:home' %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View applications" %}</a>
         {% else %}
+            {% comment %} Translators: This text labels a button which users can click to view a previously submitted application. {% endcomment %}
             <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "View application" %}</a>
         {% endif %}
     {% else %}
+      <div class="alert alert-info visible-xs">
+        <p>
+          {% comment %} Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
+          {% blocktrans trimmed %}
+            Before applying, please review the 
+            <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
+            and our <strong><a href="{{ terms }}">terms of use</a></strong>.
+          {% endblocktrans %}
+        </p>
+      </div>
         {% if user|restricted %}
+          {% comment %} Translators: This text labels a button which users can click to submit an application. {% endcomment %}
           <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
         {% else %}
+          {% comment %} Translators: This text labels a button which users can click to submit an application. {% endcomment %}
           <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Apply" %}</a><br />
         {% endif %}
     {% endif %}
@@ -89,10 +109,12 @@
     </div>
     {% endif %}
     {% if user_sent_apps %}
-      {% if user|restricted %}
-        <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Renew" %}</button><br />
-      {% else %}
-        <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
+      {% if object.renewals_available %}
+        {% if user|restricted %}
+          <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Renew" %}</button><br />
+        {% else %}
+          <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
+        {% endif %}
       {% endif %}
     {% elif user_open_apps %}
     {% if multiple_open_apps %}
@@ -101,6 +123,16 @@
       <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View application" %}</a>
     {% endif %}
     {% else %}
+      <div class="alert alert-info hidden-xs">
+        <p>
+          {% comment %} Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
+          {% blocktrans trimmed %}
+            Before applying, please review the 
+            <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
+            and our <strong><a href="{{ terms }}">terms of use</a></strong>.
+          {% endblocktrans %}
+        </p>
+      </div>
       {% if user|restricted %}
         <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
       {% else %}
@@ -206,6 +238,26 @@
         </div>
       </div>      
     </li>
+    {% if object.videos.all %}
+      <li class="timeline-inverted">
+        <div class="timeline-badge"><i class="fa fa-file"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-body">
+            <h4 class="timeline-title">
+              {% comment %} Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
+              {% trans "Video tutorials" %}
+            </h4>
+            <ul>
+              {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
+              {% for each_tutorial in object.videos.all %}
+                <li><a href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </li>
+    {% endif %}
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-language"></i>
       </div>
@@ -472,7 +524,29 @@
       </div>
     </div>
   </div>
-
+  
+  {% comment %}
+    Display # of accounts available
+  {% endcomment %}
+  {% if total_accounts_available_stream %}
+    <h3>
+      {% comment %} Translators: This is the section header for accounts availability numbers for the available stream(s). (e.g. https://wikipedialibrary.wmflabs.org/partners/52/). {% endcomment %}
+      {% trans "Accounts availability" %}
+    </h3>
+    <ul>
+      {% for stream_name, total_accounts in total_accounts_available_stream.items %}
+        <li>{{ stream_name }}: {{ total_accounts }}</li>
+      {% endfor %}
+    </ul>
+  {% elif object.accounts_available %}
+    <h3>
+      {% comment %} Translators: This is the label and the number which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). Don't translate {{ accounts_available }}. {% endcomment %}
+      {% blocktrans trimmed %}
+        Accounts available: {{ total_accounts_available_partner }}
+      {% endblocktrans %}
+    </h3>
+  {% endif %}
+  
   {% if total_apps > 0 %}
     <h3>
       {% comment %} Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
@@ -487,7 +561,7 @@
 
     <p>
       {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% blocktrans count counter=total_apps_approved %}
+      {% blocktrans trimmed count counter=total_apps_approved %}
         Number of applications approved (all time): {{ total_apps_approved_or_sent }}
       {% plural %}
         Number of applications approved (all time): {{ total_apps_approved_or_sent }}
@@ -496,7 +570,7 @@
 
     <p>
       {% comment %} Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% blocktrans count counter=unique_users_approved %}
+      {% blocktrans trimmed count counter=unique_users_approved %}
         Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
       {% plural %}
         Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}

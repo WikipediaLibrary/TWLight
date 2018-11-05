@@ -18,6 +18,7 @@ from urlparse import urlparse
 from django import forms
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -31,13 +32,14 @@ from django.views.generic.list import ListView
 
 from TWLight.view_mixins import (CoordinatorOrSelf,
                                  CoordinatorsOnly,
+                                 PartnerCoordinatorOnly,
                                  EditorsOnly,
                                  ToURequired,
                                  EmailRequired,
                                  SelfOnly,
                                  DataProcessingRequired,
                                  NotDeleted)
-from TWLight.resources.models import Partner, AccessCode
+from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
 
@@ -762,6 +764,14 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.editor
         context['versions'] = Version.objects.get_for_object(self.object)
+
+        # Check if the person viewing this application is actually this
+        # partner's coordinator, and not *a* coordinator who happens to
+        # have applied, or a superuser.
+        partner_coordinator = self.request.user == self.object.partner.coordinator
+        superuser = self.request.user.is_superuser
+        context['partner_coordinator'] = partner_coordinator or superuser
+
         return context
 
 
@@ -856,7 +866,7 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
                 )
 
 
-class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
+class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
     model = Partner
     template_name = 'applications/send_partner.html'
 
@@ -867,11 +877,59 @@ class SendReadyApplicationsView(CoordinatorsOnly, DetailView):
                 editor__user__groups__name='restricted'
                 )
         app_outputs = {}
-
+        stream_outputs = []
+        list_unavailable_streams = []
+        
         for app in apps:
             app_outputs[app] = get_output_for_application(app)
-
+            stream_outputs.append(app.specific_stream)
+        
         context['app_outputs'] = app_outputs
+        
+        # This part checks to see if there are applications from stream(s) with no accounts available.
+        # Additionally, supports send_partner template with total approved/sent applications.
+        partner = self.get_object()
+
+        total_apps_approved = Application.objects.filter(
+            partner=partner, status=Application.APPROVED).count()
+
+        total_apps_sent = Application.objects.filter(
+            partner=partner, status=Application.SENT).count()
+
+        total_apps_approved_or_sent = total_apps_approved + total_apps_sent
+        
+        partner_streams = Stream.objects.filter(partner=partner)
+        if partner_streams.count() > 0:
+            
+            for stream in partner_streams:
+                if stream.accounts_available is not None:
+                    total_apps_approved_or_sent_stream = User.objects.filter(
+                                          editor__applications__partner=partner,
+                                          editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                          editor__applications__specific_stream=stream).count()
+                    after_distribution = stream.accounts_available - total_apps_approved_or_sent_stream
+
+                    if after_distribution < 0 and (stream in stream_outputs):
+                        list_unavailable_streams.append(stream.name)
+                        
+            if list_unavailable_streams:
+                unavailable_streams = ", ".join(list_unavailable_streams)
+                context['unavailable_streams'] = unavailable_streams
+                
+        else:
+            context['unavailable_streams'] = None
+            
+            #Provide context to template only if accounts_available field is set
+            if partner.accounts_available is not None:
+                context['total_apps_approved_or_sent'] = total_apps_approved_or_sent
+                
+            else:
+                context['total_apps_approved_or_sent'] = None
+
+        available_access_codes = AccessCode.objects.filter(
+            partner=self.get_object(),
+            application__isnull=True)
+        context['available_access_codes'] = available_access_codes
 
         available_access_codes = AccessCode.objects.filter(
             partner=self.get_object(),
