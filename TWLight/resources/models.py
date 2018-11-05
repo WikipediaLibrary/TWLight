@@ -470,6 +470,37 @@ class Video(models.Model):
 
 
 
+class Authorization(models.Model):
+    """
+    Authorizations track editor access to partner resources. The approval or
+    sending of an application triggers the creation of an authorization for the
+    relevant editor to access the approved resource. Authorizations may be
+    created manually for testing.
+    """
+    class Meta:
+        app_label = 'resources'
+        verbose_name = 'authorization'
+        verbose_name_plural = 'authorizations'
+
+    authorized_editor = models.ForeignKey(User, blank=True, null=True,
+        on_delete=models.SET_NULL, related_name="authorized_editors",
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
+        help_text=_('The authorized editor.'))
+
+    authorizer = models.ForeignKey(User, blank=True, null=True,
+        on_delete=models.SET_NULL, related_name="authorizers",
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
+        help_text=_('The authorizing coordinator.'))
+
+    date_authorized = models.DateField(auto_now_add=True)
+
+    partner = models.ForeignKey(Partner, blank=True, null=True,
+        on_delete=models.SET_NULL,
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
+        help_text=_('The partner for which the editor is authorized.'))
+
+
+
 class AccessCode(models.Model):
     """
     Some partners distribute access via access codes which TWL staff hold.
