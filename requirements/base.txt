@@ -10,7 +10,7 @@ django-filter>=1.1.0,<2.0
 django-modeltranslation==0.12
 django-request==1.5.4
 django-reversion==2.0.13
-django-taggit==0.22.2
+django-taggit==0.23.0
 djmail==1.0.0
 docutils==0.14
 factory_boy>=2.10.0,<3.0
