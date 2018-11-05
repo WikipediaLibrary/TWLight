@@ -146,10 +146,10 @@ class Command(BaseCommand):
             each_stream.save()
 
 
-        # Set 5 partners use the access code distribution type,
+        # Set 5 partners use the access code authorization method,
         # and generate a bunch of codes for each.
         for partner in random.sample(available_partners, 5):
-            partner.distribution_type = Partner.CODES
+            partner.authorization_method = Partner.CODES
             partner.save()
 
             for i in range(25):
@@ -158,10 +158,10 @@ class Command(BaseCommand):
                 new_access_code.partner = partner
                 new_access_code.save()
 
-        # Set 5 partners use the access code distribution type,
+        # Set 5 partners use the access code authorization method,
         # and generate a bunch of codes for each.
         for partner in random.sample(available_partners, 5):
-            partner.distribution_type = Partner.CODES
+            partner.authorization_method = Partner.CODES
             partner.save()
 
             for i in range(25):

@@ -940,7 +940,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
 
     def post(self, request, *args, **kwargs):
-        if self.get_object().distribution_type == Partner.EMAIL:
+        if self.get_object().authorization_method == Partner.EMAIL:
             try:
                 request.POST['applications']
             except KeyError:
@@ -964,7 +964,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 logger.exception('Invalid value posted')
                 return HttpResponseBadRequest()
 
-        elif self.get_object().distribution_type == Partner.CODES:
+        elif self.get_object().authorization_method == Partner.CODES:
             try:
                 request.POST['accesscode']
             except KeyError:

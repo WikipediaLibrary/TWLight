@@ -86,7 +86,7 @@ class Command(BaseCommand):
 
                 # If this partner has access codes, assign a code to
                 # this sent application.
-                if random_partner.distribution_type == Partner.CODES:
+                if random_partner.authorization_method == Partner.CODES:
                     this_partner_access_codes = AccessCode.objects.filter(
                         partner=random_partner,
                         application__isnull=True)

@@ -2962,7 +2962,7 @@ class MarkSentTest(TestCase):
         access_code.partner = self.partner
         access_code.save()
 
-        self.partner.distribution_type = Partner.CODES
+        self.partner.authorization_method = Partner.CODES
         self.partner.save()
 
         request = RequestFactory().post(self.url,

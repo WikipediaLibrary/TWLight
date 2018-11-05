@@ -178,14 +178,14 @@ class Partner(models.Model):
     PROXY = 2
     BUNDLE = 3
 
-    DISTRIBUTION_CHOICES = (
-        # Translators: This is the name of the distribution method whereby user accounts are set up by email.
+    AUTHORIZATION_METHODS = (
+        # Translators: This is the name of the authorization method whereby user accounts are set up by email.
         (EMAIL, _('Email')),
-        # Translators: This is the name of the distribution method whereby user accounts are set up via an access code.
+        # Translators: This is the name of the authorization method whereby user accounts are set up via an access code.
         (CODES, _('Access codes')),
-        # Translators: This is the name of the distribution method whereby users access resources via an IP proxy.
+        # Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
         (PROXY, _('Proxy')),
-        # Translators: This is the name of the distribution method whereby users access resources automatically via the library bundle.
+        # Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
         (BUNDLE, _('Library Bundle')),
     )
 
@@ -235,10 +235,10 @@ class Partner(models.Model):
           # Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
           help_text=_("Optional excerpt limit in terms of percentage (%) of an article. Leave empty if no limit."))
 
-    distribution_type = models.IntegerField(choices=DISTRIBUTION_CHOICES,
+    authorization_method = models.IntegerField(choices=AUTHORIZATION_METHODS,
         default=EMAIL,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
-        help_text=_("Which distribution method does this partner use? "
+        help_text=_("Which authorization method does this partner use? "
             "Default to Email if unknown."))
 
     mutually_exclusive = models.NullBooleanField(

@@ -78,7 +78,7 @@
       {% trans "When you've processed the data below, click the 'mark as sent' button." %}
     {% endif %}
   </p>
-  {% if object.distribution_type == object.EMAIL %}
+  {% if object.authorization_method == object.EMAIL %}
     <h3>
       {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.{% endcomment %}
       {% blocktrans trimmed count object.contacts.all|length as counter %}
@@ -104,7 +104,7 @@
   {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.{% endcomment %}
   <h3>{% trans "Application data" %}</h3>
   {% if app_outputs %}
-    {% if object.distribution_type == object.EMAIL %}
+    {% if object.authorization_method == object.EMAIL %}
       <form method="POST">
         {% csrf_token %}
         <div class="form-group">
@@ -145,7 +145,7 @@
         {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
         <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
       </form>
-    {% elif object.distribution_type == object.CODES %}
+    {% elif object.authorization_method == object.CODES %}
       <p>
       {% comment %} Translators: This text guides coordinators in using the code sending interface for approved applications. {% endcomment %}
       {% blocktrans trimmed %}
@@ -186,7 +186,7 @@
         <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
       </form>
     {% else %}
-      This partner's distribution type has been set to proxy or bundle, but these features aren't supported yet.
+      This partner's authorization method has been set to proxy or bundle, but these features aren't supported yet.
     {% endif %}
   {% else %}
     {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.{% endcomment %}

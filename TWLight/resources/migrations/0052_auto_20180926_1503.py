@@ -32,8 +32,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='partner',
-            name='distribution_type',
-            field=models.IntegerField(choices=[(0, 'Email'), (1, 'Access codes'), (2, 'Proxy'), (3, 'Library Bundle')], default=0, help_text='Which distribution method does this partner use? Default to Email if unknown.'),
+            name='authorization_method',
+            field=models.IntegerField(choices=[(0, 'Email'), (1, 'Access codes'), (2, 'Proxy'), (3, 'Library Bundle')], default=0, help_text='Which authorization method does this partner use? Default to Email if unknown.'),
         ),
         migrations.AddField(
             model_name='accesscode',

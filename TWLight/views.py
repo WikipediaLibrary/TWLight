@@ -181,7 +181,7 @@ class StaffDashboardView(StaffOnly, View):
         context = {}
 
         context['accesscode_partners'] = Partner.objects.filter(
-            distribution_type=Partner.CODES)
+            authorization_method=Partner.CODES)
 
         return render(request, 'staff.html', context)
 
