@@ -192,7 +192,7 @@ class StaffOnly(object):
 
 
     def test_func_staff_only(self, user):
-        return (user.is_superuser or user.is_staff)
+        return user.is_staff
 
 
     def dispatch(self, request, *args, **kwargs):
