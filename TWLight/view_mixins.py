@@ -18,7 +18,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 
 from TWLight.applications.models import Application
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, AccessCode
 from TWLight.users.models import Editor
 from TWLight.users.groups import get_coordinators, get_restricted
 
@@ -77,6 +77,10 @@ class CoordinatorOrSelf(object):
                         elif isinstance(obj, Partner):
                             obj_coordinator_test = (
                                 obj.coordinator.pk == user.pk
+                            )
+                        elif isinstance(obj, AccessCode):
+                            obj_coordinator_test = (
+                                obj.partner.coordinator.pk == user.pk
                             )
             except AttributeError:
                 # Keep the default.
@@ -175,6 +179,29 @@ class PartnerCoordinatorOnly(object):
             raise PermissionDenied
 
         return super(PartnerCoordinatorOnly, self).dispatch(
+            request, *args, **kwargs)
+
+
+
+class StaffOnly(object):
+    """
+    Restricts visibility to:
+    * Staff; or
+    * Superusers.
+    """
+
+
+    def test_func_staff_only(self, user):
+        return (user.is_superuser or user.is_staff)
+
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func_staff_only(request.user):
+            messages.add_message(request, messages.WARNING, 'You must be '
+                'staff to do that.')
+            raise PermissionDenied
+
+        return super(StaffOnly, self).dispatch(
             request, *args, **kwargs)
 
 

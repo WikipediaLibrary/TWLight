@@ -37,6 +37,10 @@
         {% trans 'Not yet reviewed.' %}
       {% endif %}
       <br />
+      {% if app.accesscodes %}
+        {{ app.accesscodes.code }}
+        <br />
+      {% endif %}
     </div>
     {% ifequal app.editor.user.pk user.pk %}
       {% if app.status == app.SENT %}

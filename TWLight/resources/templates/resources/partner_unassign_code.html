@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load twlight_perms %}
+
+{% block content %}
+  {% comment %} Translators: On the page listing approved users, staff can unassign a code from a user. This is the title of the page which confirms the code removal. {% endcomment %}
+  <h1>{% trans 'Unassign code?' %}</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      {% comment %} Translators: This message is displayed on the page where staff can unassign codes from users. {% endcomment %}
+      {% blocktrans trimmed with code=object.code editor=object.application.editor %}
+        Unassign access code <code>{{ code }}</code> from {{ editor }}?
+      {% endblocktrans %}
+    </p>
+    <center>
+      <input type="submit" value="Confirm" class="btn btn-info"/>
+    </center>
+  </form>
+{% endblock content %}

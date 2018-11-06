@@ -1,16 +1,25 @@
 # -*- coding: utf-8 -*-
 import json
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
-from django.http import HttpResponse
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
+from TWLight.resources.models import AccessCode
+from TWLight.view_mixins import StaffOnly
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 class LanguageWhiteListView(View):
     """
@@ -165,3 +174,100 @@ class HomePageView(TemplateView):
         context['partner_count'] = Partner.objects.all().count()
         
         return context
+
+class StaffDashboardView(StaffOnly, View):
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+
+        context['accesscode_partners'] = Partner.objects.filter(
+            authorization_method=Partner.CODES)
+
+        return render(request, 'staff.html', context)
+
+    def post(self, request, *args, **kwargs):
+        # This code was based on the guide at
+        # https://www.pythoncircle.com/post/30/how-to-upload-and-process-the-csv-file-in-django/
+        uploaded_csv = request.FILES['access_code_csv']
+        staff_url = reverse_lazy('staff')
+
+        if not uploaded_csv.name.endswith('.csv'):
+            # Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
+            messages.error(request, _('File must be a csv'))
+            return HttpResponseRedirect(staff_url)
+
+        # Check against the maximum upload size (2.5mb by default)
+        if uploaded_csv.multiple_chunks():
+            # Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
+            messages.error(request, _("Uploaded file is too large."))
+            return HttpResponseRedirect(staff_url)
+
+        file_data = uploaded_csv.read().decode('utf-8')
+
+        lines = file_data.split("\n")
+
+        skipped_codes = 0
+        num_codes = 0
+        # Validate the entire file before trying to save any of it
+        for line_num, line in enumerate(lines):
+            fields = line.split(",")
+            num_columns = len(fields)
+            # Skip any blank lines. Not an error, can just be ignored.
+            if line == '':
+                continue
+            if num_columns != 2:
+                # Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
+                messages.error(request, _("Line {line_num} has {num_columns} columns. "
+                               "Expected 2.".format(line_num=line_num+1,
+                                    num_columns=num_columns)))
+                return HttpResponseRedirect(staff_url)
+
+
+            access_code = fields[0].strip()
+
+            if len(access_code) > 60:
+                # Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
+                messages.error(request, _("Access code on line {line_num} is "
+                    "too long for the database field.".format(
+                        line_num=line_num+1)))
+                return HttpResponseRedirect(staff_url)
+
+            try:
+                partner_pk = int(fields[1].strip())
+            except ValueError:
+                # Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
+                messages.error(request, _("Second column should only contain "
+                    "numbers. Error on line {line_num}.".format(
+                        line_num=line_num+1)))
+                return HttpResponseRedirect(staff_url)
+
+            try:
+                check_partner = Partner.even_not_available.get(pk=partner_pk)
+            except ObjectDoesNotExist:
+                # Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
+                messages.error(request, _("File contains reference to invalid "
+                    "partner ID on line {line_num}".format(line_num=line_num+1)))
+                return HttpResponseRedirect(staff_url)
+
+            # Only upload this code if it doesn't already exist. If it does,
+            # increment a counter so we can report that.
+            access_code_partner_check = AccessCode.objects.filter(code=access_code,
+                partner=partner_pk).count()
+            if access_code_partner_check != 0:
+                skipped_codes += 1
+            else:
+                new_access_code = AccessCode()
+                new_access_code.code = access_code
+                new_access_code.partner = Partner.even_not_available.get(pk=partner_pk)
+                new_access_code.save()
+                num_codes += 1
+
+        if num_codes > 0:
+            # Translators: When staff successfully upload a file containing access codes, they receive this message.
+            messages.info(request, _("{num_codes} access codes successfully "
+                "uploaded!".format(num_codes=num_codes)))
+        if skipped_codes > 0:
+            # Translators: When staff upload a file containing access codes, they receive this message if any were duplicates.
+            messages.info(request, _("{num_duplicates} access codes ignored "
+                "as duplicates.".format(num_duplicates=skipped_codes)))
+        return HttpResponseRedirect(staff_url)
