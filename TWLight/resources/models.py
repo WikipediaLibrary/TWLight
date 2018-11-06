@@ -239,7 +239,10 @@ class Partner(models.Model):
         default=EMAIL,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
         help_text=_("Which authorization method does this partner use? "
-            "Default to Email if unknown."))
+            "'Email' means the accounts are set up via email, and is the default. "
+            "Select 'Access Codes' if we send individual, or group, login details "
+            "or access codes. 'Proxy' means access delivered directly via EZProxy, "
+            "and Library Bundle is automated proxy-based access."))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
