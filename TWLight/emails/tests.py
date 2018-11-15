@@ -14,7 +14,7 @@ from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
-from TWLight.users.factories import EditorFactory
+from TWLight.users.factories import EditorFactory, UserFactory
 from TWLight.users.groups import get_coordinators
 
 # We need to import these in order to register the signal handlers; if we don't,
@@ -74,6 +74,7 @@ class ApplicationCommentTest(TestCase):
         is send to that Editor. An email is not sent to the coordinator.
         """
         app, request = self._set_up_email_test_objects()
+        request.user = UserFactory()
 
         self.assertEqual(len(mail.outbox), 0)
 
@@ -95,6 +96,7 @@ class ApplicationCommentTest(TestCase):
         comment. An email is not sent to the editor.
         """
         app, request = self._set_up_email_test_objects()
+        request.user = UserFactory()
         self.assertEqual(len(mail.outbox), 0)
 
         _ = self._create_comment(app, self.coordinator1)
@@ -117,6 +119,7 @@ class ApplicationCommentTest(TestCase):
         and a distinct email is sent to the editor.
         """
         app, request = self._set_up_email_test_objects()
+        request.user = UserFactory()
         self.assertEqual(len(mail.outbox), 0)
 
         _ = self._create_comment(app, self.coordinator1)
@@ -146,6 +149,7 @@ class ApplicationCommentTest(TestCase):
         fire an email to the coordinator who took the last action on it.
         """
         app, request = self._set_up_email_test_objects()
+        request.user = UserFactory()
         self.assertEqual(len(mail.outbox), 0)
 
         # Create a coordinator with a test client session
@@ -180,6 +184,7 @@ class ApplicationCommentTest(TestCase):
         not fire an email to anyone.
         """
         app, request = self._set_up_email_test_objects()
+        request.user = UserFactory()
         self.assertEqual(len(mail.outbox), 0)
 
         comment5 = self._create_comment(app, self.editor)
