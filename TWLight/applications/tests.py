@@ -2505,6 +2505,7 @@ class EvaluateApplicationTest(TestCase):
 
         factory = RequestFactory()
         request = factory.post(get_form_target())
+        request.user = UserFactory()
 
         CT = ContentType.objects.get_for_model
 
