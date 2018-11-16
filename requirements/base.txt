@@ -26,4 +26,4 @@ pytz==2016.10
 requests==2.20.0
 requests-oauthlib==1.0.0
 six==1.10.0
-wheel==0.30.0
+wheel==0.32.2
