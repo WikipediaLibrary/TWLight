@@ -22,7 +22,7 @@ pillow==5.0.0
 pypandoc==1.4
 python-dateutil==2.7.5
 PyJWT==1.6.4
-pytz==2016.10
+pytz==2018.7
 requests==2.20.1
 requests-oauthlib==1.0.0
 six==1.11.0
