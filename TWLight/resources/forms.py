@@ -8,6 +8,7 @@ class SuggestionForm(forms.Form):
     suggested_company_name = forms.CharField(max_length = 40,)
     description = forms.CharField(widget = forms.Textarea, max_length = 500,)
     company_url = forms.URLField(initial = 'http://')
+    next = forms.CharField(widget = forms.HiddenInput, max_length = 40,)
     
     def __init__(self, *args, **kwargs):
         super(SuggestionForm, self).__init__(*args, **kwargs)
@@ -17,6 +18,7 @@ class SuggestionForm(forms.Form):
         self.fields['company_url'].label = _('Website')
         
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-7'
@@ -24,6 +26,7 @@ class SuggestionForm(forms.Form):
             'suggested_company_name',
             'description',
             'company_url',
+            'next',
             # Translators: This labels a button which users click to submit their suggestion.
             Submit('submit', _('Submit'), css_class='center-block'),
         )

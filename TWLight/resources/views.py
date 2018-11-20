@@ -256,6 +256,26 @@ class PartnerSuggestionView(FormView):
     form_class = SuggestionForm
     success_url = reverse_lazy('suggest')
 
+    def get_initial(self):
+        initial = super(PartnerSuggestionView, self).get_initial()
+        if ('suggested_company_name' in self.request.GET):
+            initial.update({
+                 'suggested_company_name': self.request.GET['suggested_company_name'],
+            })
+        if ('description' in self.request.GET):
+            initial.update({
+                 'description': self.request.GET['description'],
+            })
+        if ('company_url' in self.request.GET):
+            initial.update({
+                 'company_url': self.request.GET['company_url'],
+            })
+
+        initial.update({
+            'next': reverse_lazy('suggest'),
+        })
+
+        return initial
 
     def get_queryset(self):
             return Suggestion.objects.order_by('suggested_company_name')

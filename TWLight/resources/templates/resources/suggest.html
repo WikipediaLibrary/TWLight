@@ -18,7 +18,15 @@
         <strong><span class="panel-title">{% trans 'Suggest partners' %}</span></strong>
       </div>
       <div class="panel-body">
+        <form class="form-horizontal"
+        {% if user.is_authenticated %}
+        method="post"
+        {% else %}
+        method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}"
+        {% endif %}
+        >
         {% crispy form %}
+        </form>
       </div>
     </div>
   {% if all_suggestions %}
