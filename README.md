@@ -9,4 +9,4 @@ See [twlight_puppet](https://github.com/WikipediaLibrary/twlight_puppet) if you 
 
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=WikipediaLibrary/TWLight)](https://dependabot.com)
 
-[![Coverage Status](https://coveralls.io/repos/github/WikipediaLibrary/TWLight/badge.svg)](https://coveralls.io/github/WikipediaLibrary/TWLight)
+[![Coverage Status](https://coveralls.io/repos/github/WikipediaLibrary/TWLight/badge.svg?branch=master)](https://coveralls.io/github/WikipediaLibrary/TWLight?branch=master) - master branch
