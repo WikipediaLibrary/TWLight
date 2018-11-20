@@ -9,6 +9,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 import django
@@ -71,11 +72,13 @@ urlpatterns = [
     url(r'^suggest/$',
         PartnerSuggestionView.as_view(),
         name='suggest'),
-    url(r'^suggest/(?P<pk>[0-9]+)/delete/$',
-        SuggestionDeleteView.as_view(),
+    url(
+        r'^suggest/(?P<pk>[0-9]+)/delete/$',
+        login_required(SuggestionDeleteView.as_view()),
         name='suggest-delete'),
-    url(r'^suggest/(?P<pk>[0-9]+)/upvote/$',
-        SuggestionUpvoteView.as_view(),
+    url(
+        r'^suggest/(?P<pk>[0-9]+)/upvote/$',
+        login_required(SuggestionUpvoteView.as_view()),
         name='upvote'),
         
     # Cached for 24 hours.

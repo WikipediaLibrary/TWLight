@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, View, RedirectView
 from django.views.generic.edit import FormView, DeleteView
@@ -247,41 +249,18 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
         return context
 
 
-
+@method_decorator(login_required, name='post')
 class PartnerSuggestionView(FormView):
     model=Suggestion
     template_name = 'resources/suggest.html'
     form_class = SuggestionForm
-    
+
+
     def get_queryset(self):
             return Suggestion.objects.order_by('suggested_company_name')
-    
-    def form_valid(self, form):
-        # Right now, we only hide the suggestion form on the template.
-        # Adding an extra check to ensure the user is looged in
-        # so as to not break things.
-        try:
-            assert self.request.user.is_authenticated()
-            suggestion = Suggestion()
-            suggestion.suggested_company_name = form.cleaned_data['suggested_company_name']
-            suggestion.description = form.cleaned_data['description']
-            suggestion.company_url = form.cleaned_data['company_url']
-            suggestion.author = self.request.user
-            suggestion.save()
-            suggestion.upvoted_users.add(self.request.user)
-            messages.add_message(self.request, messages.SUCCESS,
-            # Translators: Shown to users when they successfully add a new partner suggestion.
-            _('Your suggestion has been added.'))
-            return HttpResponseRedirect(reverse('suggest'))
-        except AssertionError:
-            messages.add_message (request, messages.WARNING,
-                # Translators: This message is shown to users who attempt to post data to suggestion form without logging in
-                _('You must be logged in to do that.'))
-            raise PermissionDenied
 
-        return self.request.user.editor
-        
     def get_context_data(self, **kwargs):
+
         context = super(PartnerSuggestionView, self).get_context_data(**kwargs)
         
         all_suggestions = Suggestion.objects.all()
@@ -292,7 +271,6 @@ class PartnerSuggestionView(FormView):
             context['all_suggestions'] = None
         
         return context
-
 
 
 class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
