@@ -254,6 +254,7 @@ class PartnerSuggestionView(FormView):
     model=Suggestion
     template_name = 'resources/suggest.html'
     form_class = SuggestionForm
+    success_url = reverse_lazy('suggest')
 
 
     def get_queryset(self):
@@ -271,6 +272,29 @@ class PartnerSuggestionView(FormView):
             context['all_suggestions'] = None
         
         return context
+
+    def form_valid(self, form):
+        # Adding an extra check to ensure the user is logged in
+        # so as to not break things.
+        try:
+            assert self.request.user.is_authenticated()
+            suggestion = Suggestion()
+            suggestion.suggested_company_name = form.cleaned_data['suggested_company_name']
+            suggestion.description = form.cleaned_data['description']
+            suggestion.company_url = form.cleaned_data['company_url']
+            suggestion.author = self.request.user
+            suggestion.save()
+            suggestion.upvoted_users.add(self.request.user)
+            messages.add_message(self.request, messages.SUCCESS,
+            # Translators: Shown to users when they successfully add a new partner suggestion.
+            _('Your suggestion has been added.'))
+            return HttpResponseRedirect(reverse('suggest'))
+        except AssertionError:
+            messages.add_message (self.request, messages.WARNING,
+                # Translators: This message is shown to users who attempt to post data to suggestion form without logging in
+                _('You must be logged in to do that.'))
+            raise PermissionDenied
+        return self.request.user.editor
 
 
 class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
