@@ -154,7 +154,11 @@
     {% else %}
       
       <li role="presentation" class="mobile-menu">
+        {% if request.GET %}
+        <a href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}&{{ request.GET.urlencode }}">
+        {% else %}
         <a href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
+        {% endif %}
           {% comment %} Translators: Shown in the top bar of almost every page when the current user is not logged in. {% endcomment %}
           {% trans "Log in" %}
         </a>
