@@ -10,9 +10,12 @@ from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied, DisallowedHost
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.http.request import QueryDict
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django.utils.translation import get_language, ugettext as _
+
+from urllib import urlencode
 
 from .models import Editor
 
@@ -265,12 +268,12 @@ class OAuthInitializeView(View):
                 _('{domain} is not an allowed host.').format(domain=domain))
             raise PermissionDenied
 
-        # Try to capture the user's desired destination
+        # Try to capture the relevant page state, including desired destination
         try:
-            request.session['next'] = request.GET.get('next')
-            logger.info('Found "next" parameter for post-login redirection.')
+            request.session['get'] = request.GET
+            logger.info('Found get parameters for post-login redirection.')
         except:
-            logger.warning('No "next" parameter for post-login redirection.')
+            logger.warning('No get parameters for post-login redirection.')
             pass
 
         # If the user has already logged in, let's not spam the OAuth proider.
@@ -278,8 +281,19 @@ class OAuthInitializeView(View):
             # We're using this twice. Not very DRY.
             # Send user either to the destination specified in the 'next'
             # parameter or to their own editor detail page.
-            if request.session['next']:
-                return_url = request.session['next']
+            if request.session['get']['next']:
+                # Create a QueryDict from the 'get' session dict.
+                query_dict = QueryDict(urlencode(request.session['get']), mutable=True)
+                # Pop the 'next' parameter out of the QueryDict.
+                next = query_dict.pop('next')
+                # Set the return url to the value of 'next'. Basic.
+                return_url = next[0].encode('ascii','ignore')
+                # If there is anything left in the QueryDict after popping
+                # 'next', append it to the return url. This preserves state
+                # for filtered lists and redirected form submissions like
+                # the partner suggestion form.
+                if query_dict:
+                    return_url += '?' + urlencode(query_dict)
                 logger.info('User is already authenticated. Sending them on '
                     'for post-login redirection per "next" parameter.')
             else:
@@ -415,8 +429,19 @@ class OAuthCallbackView(View):
                 # We're using this twice. Not very DRY.
                 # Send user either to the destination specified in the 'next'
                 # parameter or to their own editor detail page.
-                if request.session['next']:
-                    return_url = request.session['next']
+                if request.session['get']['next']:
+                    # Create a QueryDict from the 'get' session dict.
+                    query_dict = QueryDict(urlencode(request.session['get']), mutable=True)
+                    # Pop the 'next' parameter out of the QueryDict.
+                    next = query_dict.pop('next')
+                    # Set the return url to the value of 'next'. Basic.
+                    return_url = next[0].encode('ascii','ignore')
+                    # If there is anything left in the QueryDict after popping
+                    # 'next', append it to the return url. This preserves state
+                    # for filtered lists and redirected form submissions like
+                    # the partner suggestion form.
+                    if query_dict:
+                        return_url += '?' + urlencode(query_dict)
                     logger.info('User authenticated. Sending them on for '
                         'post-login redirection per "next" parameter.')
                 else:
