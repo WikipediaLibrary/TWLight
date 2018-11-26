@@ -22,7 +22,7 @@
         {% if user.is_authenticated %}
         method="post"
         {% elif request.GET %}
-        method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}&{{ request.GET.urlencode|urlencode }}"
+        method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}&{{ request.GET.urlencode }}"
         {% else %}
         method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}"
         {% endif %}
