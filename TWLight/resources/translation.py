@@ -24,3 +24,12 @@ class MultilingualTagTO(TranslationOptions):
     empty_values = {'name': None}
 
 translator.register(TextFieldTag, MultilingualTagTO)
+
+
+# Temporary fix for a bug in modeltranslation. See
+# https://github.com/deschler/django-modeltranslation/issues/455
+# Should be removed as soon as bug is resolved
+
+Partner._meta.base_manager_name = None
+Stream._meta.base_manager_name = None
+TextFieldTag._meta.base_manager_name = None
