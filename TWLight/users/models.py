@@ -182,15 +182,6 @@ class Editor(models.Model):
 
 
     @cached_property
-    def wp_link_sul_info(self):
-        url = u'{base_url}?username={self.wp_username}'.format(
-            base_url='https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php',
-            self=self
-        )
-        return url
-
-
-    @cached_property
     def wp_link_central_auth(self):
         url = u'{base_url}&target={self.wp_username}'.format(
             base_url='https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth',
