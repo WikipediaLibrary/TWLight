@@ -3,7 +3,7 @@ from django.contrib import admin
 from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 from TWLight.users.groups import get_coordinators
 
-from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, Video
+from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, Video, Suggestion
 
 
 class LanguageAdmin(admin.ModelAdmin):
@@ -82,3 +82,11 @@ class StreamAdmin(TabbedExternalJqueryTranslationAdmin):
     list_display = ('id', 'partner', 'name', 'description', 'get_languages')
 
 admin.site.register(Stream, StreamAdmin)
+
+
+
+class SuggestionAdmin(admin.ModelAdmin):
+    search_fields = ('suggested_company_name',)
+    list_display = ('suggested_company_name', 'description', 'id',)
+    
+admin.site.register(Suggestion, SuggestionAdmin)

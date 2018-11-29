@@ -11,7 +11,7 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.db import models
 from django.utils.translation  import ugettext_lazy as _
 from django_countries.fields import CountryField
@@ -442,6 +442,42 @@ class Contact(models.Model):
 
 
 
+class Suggestion(models.Model):
+
+    class Meta:
+        app_label = 'resources'
+        verbose_name = 'suggestion'
+        verbose_name_plural = 'suggestions'
+        ordering = ['suggested_company_name']
+        
+    suggested_company_name = models.CharField(max_length=40,
+        # Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
+        help_text=_("Potential partner's name (e.g. McFarland)."))
+
+    description = models.TextField(blank=True, max_length=1000,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
+        help_text=_("Optional description of this potential partner."))
+
+    company_url = models.URLField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
+        help_text=_("Link to the potential partner's website."))
+    
+    author = models.ForeignKey(User, related_name='suggestion_author', blank=True, null=True, on_delete=models.SET_NULL,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
+        help_text=_("User who authored this suggestion."))
+    
+    upvoted_users = models.ManyToManyField(User, blank=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
+        help_text=_("Users who have upvoted this suggestion."))
+    
+    def __unicode__(self):
+        return self.suggested_company_name
+        
+    def get_absolute_url(self):
+        return reverse('suggest')
+    
+    def get_upvote_url(self):
+        return reverse('upvote', kwargs={'pk': self.pk})
 
 class Video(models.Model):
 

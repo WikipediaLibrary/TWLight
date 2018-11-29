@@ -1,18 +1,25 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
-from django.views.generic import DetailView, View
+from django.views.generic import DetailView, View, RedirectView
+from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
+from django.shortcuts import get_object_or_404
 
 from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
                                     get_data_count_by_month,
                                     get_users_by_partner_by_month)
-from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf
+from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
-from .models import Partner, Stream
+from .forms import SuggestionForm
+from .models import Partner, Stream, Suggestion
 
 import logging
 
@@ -240,3 +247,102 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
             context['partner_streams'] = False
 
         return context
+
+
+@method_decorator(login_required, name='post')
+class PartnerSuggestionView(FormView):
+    model=Suggestion
+    template_name = 'resources/suggest.html'
+    form_class = SuggestionForm
+    success_url = reverse_lazy('suggest')
+
+    def get_initial(self):
+        initial = super(PartnerSuggestionView, self).get_initial()
+        # @TODO: This sort of gets repeated in SuggestionForm.
+        # We could probably be factored out to a common place for DRYness.
+        if ('suggested_company_name' in self.request.GET):
+            initial.update({
+                 'suggested_company_name': self.request.GET['suggested_company_name'],
+            })
+        if ('description' in self.request.GET):
+            initial.update({
+                 'description': self.request.GET['description'],
+            })
+        if ('company_url' in self.request.GET):
+            initial.update({
+                 'company_url': self.request.GET['company_url'],
+            })
+
+        initial.update({
+            'next': reverse_lazy('suggest'),
+        })
+
+        return initial
+
+    def get_queryset(self):
+            return Suggestion.objects.order_by('suggested_company_name')
+
+    def get_context_data(self, **kwargs):
+
+        context = super(PartnerSuggestionView, self).get_context_data(**kwargs)
+        
+        all_suggestions = Suggestion.objects.all()
+        if all_suggestions.count() > 0:
+            context['all_suggestions'] = all_suggestions
+        
+        else:
+            context['all_suggestions'] = None
+        
+        return context
+
+    def form_valid(self, form):
+        # Adding an extra check to ensure the user is a wikipedia editor.
+        try:
+            assert self.request.user.editor
+            suggestion = Suggestion()
+            suggestion.suggested_company_name = form.cleaned_data['suggested_company_name']
+            suggestion.description = form.cleaned_data['description']
+            suggestion.company_url = form.cleaned_data['company_url']
+            suggestion.author = self.request.user
+            suggestion.save()
+            suggestion.upvoted_users.add(self.request.user)
+            messages.add_message(self.request, messages.SUCCESS,
+            # Translators: Shown to users when they successfully add a new partner suggestion.
+            _('Your suggestion has been added.'))
+            return HttpResponseRedirect(reverse('suggest'))
+        except (AssertionError, AttributeError) as e:
+            messages.add_message (self.request, messages.WARNING,
+                # Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
+                _('You must be a Wikipedia editor to do that.'))
+            raise PermissionDenied
+        return self.request.user.editor
+
+
+class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
+    model=Suggestion
+    form_class = SuggestionForm
+    success_url = reverse_lazy('suggest')
+            
+    def delete(self, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        messages.add_message(self.request, messages.SUCCESS,
+        # Translators: Shown to coordinators when they successfully delete a partner suggestion
+        _('Suggestion has been deleted.'))
+        return HttpResponseRedirect(self.success_url)
+
+
+
+class SuggestionUpvoteView(EditorsOnly, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        obj = get_object_or_404(Suggestion, id=id)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.upvoted_users.all():
+                obj.upvoted_users.remove(user)
+            else:
+                obj.upvoted_users.add(user)
+        return url_

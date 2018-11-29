@@ -6,11 +6,11 @@ import random
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
-from TWLight.resources.factories import PartnerFactory, StreamFactory, VideoFactory
-from TWLight.resources.models import Language, Partner, Stream
+from TWLight.resources.factories import PartnerFactory, StreamFactory, VideoFactory, SuggestionFactory
+from TWLight.resources.models import Language, Partner, Stream, Suggestion
 
 class Command(BaseCommand):
-    help = "Adds a number of example resources, streams, and tags."
+    help = "Adds a number of example resources, streams, suggestions, and tags."
 
     def add_arguments(self, parser):
         parser.add_argument('num', nargs='+', type=int)
@@ -143,6 +143,19 @@ class Command(BaseCommand):
         for each_stream in all_streams:
             each_stream.accounts_available = random.randint(10, 100)
             each_stream.save()
+        
+        #Generate a few number of suggestions with upvotes
+        all_users = User.objects.exclude(is_superuser=True)
+        author_user = random.choice(all_users)
+        for _ in range(random.randint(3, 10)):
+            suggestion = SuggestionFactory(
+                  description = fake.paragraph(nb_sentences=10),
+                  author = author_user
+                  )
+            suggestion.save()
+            suggestion.upvoted_users.add(author_user)
+            random_users = random.sample(all_users, random.randint(1, 10))
+            suggestion.upvoted_users.add(*random_users)
 
 
     def chance(self, selected, default, chance):
