@@ -16,7 +16,8 @@ class SuggestionForm(forms.Form):
         self.fields['suggested_company_name'].label = _('Name of the potential partner')
         self.fields['description'].label = _('Description')
         self.fields['company_url'].label = _('Website')
-        
+        # @TODO: This sort of gets repeated in PartnerSuggestionView.
+        # We could probably be factored out to a common place for DRYness.
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.form_class = 'form-horizontal'
