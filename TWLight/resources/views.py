@@ -258,6 +258,8 @@ class PartnerSuggestionView(FormView):
 
     def get_initial(self):
         initial = super(PartnerSuggestionView, self).get_initial()
+        # @TODO: This sort of gets repeated in SuggestionForm.
+        # We could probably be factored out to a common place for DRYness.
         if ('suggested_company_name' in self.request.GET):
             initial.update({
                  'suggested_company_name': self.request.GET['suggested_company_name'],
