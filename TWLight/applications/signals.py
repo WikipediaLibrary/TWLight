@@ -10,11 +10,11 @@ class Reminder(object):
 @django.dispatch.receiver(comment_was_posted)
 def under_discussion(sender, comment, request, **kwargs):
     """
-    When users send a comment on an application which currently has the
+    When coordinators post a comment on an application which currently has the
     PENDING status, automatically set it to 'Under discussion' (QUESTION).
     """
     application_object = Application.objects.get(pk=comment.object_pk)
 
-    if application_object.status == Application.PENDING:
+    if application_object.status == Application.PENDING and application_object.editor.user.username != request.user.username:
         application_object.status = Application.QUESTION
         application_object.save()

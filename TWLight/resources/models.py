@@ -335,6 +335,12 @@ class Partner(models.Model):
         return self.status == self.WAITLIST
 
 
+    @property
+    def is_not_available(self):
+        return self.status == self.NOT_AVAILABLE
+
+
+
 
 class PartnerLogo(models.Model):
     partner = models.OneToOneField('Partner', related_name='logos')
@@ -487,4 +493,3 @@ class Video(models.Model):
     tutorial_video_url = models.URLField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
         help_text=_("URL of a video tutorial."))
-

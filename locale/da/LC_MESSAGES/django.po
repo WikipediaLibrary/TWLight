@@ -1,18 +1,19 @@
 # Translation of Wikipedia Library Card Platform to Danish (dansk)
 # Exported from translatewiki.net
 #
+# Author: InsaneHacker
 # Author: Saederup92
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2018-10-12 16:16+0000\n"
-"PO-Revision-Date: 2018-10-15 07:42:21+0000\n"
+"POT-Creation-Date: 2018-11-16 21:36+0000\n"
+"PO-Revision-Date: 2018-11-26 07:09:11+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2018-10-12 19:05:35+0000\n"
-"X-Generator: MediaWiki 1.32.0-alpha; Translate 2018-07-10\n"
+"X-POT-Import-Date: 2018-11-19 09:34:54+0000\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -159,7 +160,7 @@ msgstr ""
 #: TWLight/applications/helpers.py:124
 #: TWLight/applications/templates/applications/application_evaluation.html:94
 msgid "Title requested"
-msgstr ""
+msgstr "Anmodet titel"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:126
@@ -183,12 +184,12 @@ msgstr "E-mail"
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:36
 msgid "Pending"
-msgstr ""
+msgstr "Afventer"
 
 #. Translators: This is the status of an application that reviewers have asked questions about.
 #: TWLight/applications/models.py:38
 msgid "Under discussion"
-msgstr ""
+msgstr "Diskuteres"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #. Translators: This describes the status of a group of applications.
@@ -233,7 +234,7 @@ msgstr ""
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:24
 msgid "Evaluate application"
-msgstr ""
+msgstr "Evaluer ansøgning"
 
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:27
@@ -265,7 +266,7 @@ msgstr "Dage åbne"
 #. Translators: This labels the section of an application showing how many days it has been since the application was closed.
 #: TWLight/applications/templates/applications/application_evaluation.html:58
 msgid "Days since application was closed"
-msgstr ""
+msgstr "Dage siden ansøgning blev lukket"
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67
@@ -304,7 +305,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_evaluation.html:122
 #, python-format
 msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
-msgstr ""
+msgstr "Ja (<a href=\"%(parent_url)s\">tidligere ansøgning</a>)"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
 #: TWLight/applications/templates/applications/application_evaluation.html:128
@@ -372,7 +373,7 @@ msgstr ""
 #. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
 #: TWLight/applications/templates/applications/application_evaluation.html:232
 msgid "No previous versions."
-msgstr ""
+msgstr "Ingen tidligere versioner."
 
 #. Translators: On the page which shows a list of applications, coordinators must select which applications they wish to view. This string is found next to the selection buttons, and leads on to options such as "Under review", "Approved", or "Sent.
 #: TWLight/applications/templates/applications/application_list.html:20
@@ -382,7 +383,7 @@ msgstr ""
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:25
 msgid "Pending review"
-msgstr ""
+msgstr "Afventer gennemgang"
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:33
@@ -402,12 +403,12 @@ msgstr ""
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:56
 msgid "Filter by..."
-msgstr ""
+msgstr "Filtrer efter..."
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
 #: TWLight/applications/templates/applications/application_list.html:68
 msgid "Current filters"
-msgstr ""
+msgstr "Nuværende filtre"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
 #: TWLight/applications/templates/applications/application_list.html:79
@@ -417,7 +418,7 @@ msgstr "Ingen"
 #. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
 #: TWLight/applications/templates/applications/application_list.html:91
 msgid "Page navigation"
-msgstr ""
+msgstr "Side navigation"
 
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:95
@@ -484,7 +485,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:74
 #: TWLight/applications/templates/applications/application_list_user_include.html:60
 msgid "No applications right now."
-msgstr ""
+msgstr "Ingen ansøgninger lige nu."
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
@@ -524,7 +525,7 @@ msgstr ""
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:21
 msgid "What resources do you want to access?"
-msgstr ""
+msgstr "Hvilke ressource kunne du tænke dig at tilgå?"
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:40
@@ -642,7 +643,7 @@ msgstr "Skribent"
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
 #: TWLight/applications/views.py:617
 msgid "Applications to review"
-msgstr ""
+msgstr "Ansøgninger at gennemgå"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
@@ -744,7 +745,7 @@ msgstr ""
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
 msgid "New comment on your Wikipedia Library application"
-msgstr ""
+msgstr "Ny kommentar på din Wikipedia bibliotek ansøgning"
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:5
@@ -812,7 +813,7 @@ msgstr ""
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
 msgid "Your Wikipedia Library application has been waitlisted"
-msgstr ""
+msgstr "Din ansøgning på Wikipedia biblioteket er blevet sat på ventelisten"
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
 #: TWLight/graphs/views.py:197
@@ -833,7 +834,7 @@ msgstr "Dato"
 #. Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
 #: TWLight/graphs/views.py:215
 msgid "Number of approved applications"
-msgstr ""
+msgstr "Antal godkendte ansøgninger"
 
 #. Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
 #: TWLight/graphs/views.py:233
@@ -843,24 +844,24 @@ msgstr "Måned"
 #. Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
 #: TWLight/graphs/views.py:235
 msgid "Median days until decision"
-msgstr ""
+msgstr "Median dage til beslutning"
 
 #. Translators: This is the heading of a data file which lists the number of applications to a partner. Don't translate {partner}.
 #: TWLight/graphs/views.py:294
 #, python-brace-format
 msgid "Number of applications to {partner}"
-msgstr ""
+msgstr "Antal ansøgninger til {partner}"
 
 #. Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner. Don't translate {partner}.
 #: TWLight/graphs/views.py:318
 #, python-brace-format
 msgid "Number of unique users who have applied to {partner}"
-msgstr ""
+msgstr "Antal unikke brugere der har ansøgt til {partner}"
 
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
 #: TWLight/graphs/views.py:333 TWLight/graphs/views.py:360
 msgid "You must be staff to do that."
-msgstr ""
+msgstr "Du må være personale for at gøre dette."
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
 #: TWLight/graphs/views.py:343 TWLight/graphs/views.py:377
@@ -871,7 +872,7 @@ msgstr ""
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
 #: TWLight/graphs/views.py:344 TWLight/graphs/views.py:379
 msgid "Number of (non-unique) visitors"
-msgstr ""
+msgstr "Antal (ikke-unikke) besøgende"
 
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
@@ -999,7 +1000,7 @@ msgstr ""
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
 #: TWLight/resources/models.py:238
 msgid "Select all languages in which this partner publishes content."
-msgstr ""
+msgstr "Vælg alle sprog som denne partner udgiver indhold i."
 
 #: TWLight/resources/models.py:245
 msgid "Old Tags"
@@ -1180,7 +1181,7 @@ msgstr ""
 #. Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
 #: TWLight/resources/templates/resources/partner_detail.html:291
 msgid "Special requirements for applicants"
-msgstr ""
+msgstr "Specielle krav for ansøgere"
 
 #. Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate publisher or url.
 #: TWLight/resources/templates/resources/partner_detail.html:299
@@ -1232,17 +1233,17 @@ msgstr "Samlinger"
 #. Translators: If a partner has their location listed, this message is a label for that location
 #: TWLight/resources/templates/resources/partner_detail.html:411
 msgid "Location"
-msgstr ""
+msgstr "Placering"
 
 #. Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:415
 msgid "Terms of use"
-msgstr ""
+msgstr "Vilkår for anvendelse"
 
 #. Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/).
 #: TWLight/resources/templates/resources/partner_detail.html:418
 msgid "Terms of use not available."
-msgstr ""
+msgstr "Vilkår for anvendelse ikke tilgængelige."
 
 #. Translators: This is the heading for the section of a partner page showing data about applications to that partner.
 #. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
@@ -1280,7 +1281,7 @@ msgstr ""
 #. Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:515
 msgid "Applications by status"
-msgstr ""
+msgstr "Ansøgninger efter status"
 
 #. Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:519
@@ -1312,7 +1313,7 @@ msgstr[1] ""
 #. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:551
 msgid "Applications over time"
-msgstr ""
+msgstr "Ansøgninger over tid"
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
 #: TWLight/resources/templates/resources/partner_detail.html:554
@@ -1327,7 +1328,7 @@ msgstr "Kun godkendte ansøgninger"
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time.
 #: TWLight/resources/templates/resources/partner_detail.html:566
 msgid "Unique users over time"
-msgstr ""
+msgstr "Unikke brugere over tid"
 
 #: TWLight/resources/templates/resources/partner_filter.html:10
 msgid "Browse Partners"
@@ -1367,7 +1368,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_users.html:31
 #: TWLight/resources/templates/resources/partner_users.html:76
 msgid "Application approved"
-msgstr ""
+msgstr "Ansøgning godkendt"
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal.
 #: TWLight/resources/templates/resources/partner_users.html:33
@@ -1404,7 +1405,7 @@ msgstr "Denne partner er nu på ventelisten"
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
 #: TWLight/resources/views.py:208
 msgid "This partner is now available for applications"
-msgstr ""
+msgstr "Denne partner er nu tilgængelig for ansøgninger"
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:8
@@ -1414,7 +1415,7 @@ msgstr ""
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:12
 msgid "Sorry; we don't know what to do with that."
-msgstr ""
+msgstr "Beklager; vi aner ikke hvad vi skal gøre med dette."
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate path or Phabricator.
 #: TWLight/templates/400.html:17
@@ -1431,12 +1432,12 @@ msgstr "Trist hamster i et bur"
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:8
 msgid "Permission denied"
-msgstr ""
+msgstr "Adgang nægtet"
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:12
 msgid "Sorry; you aren't allowed to do that."
-msgstr ""
+msgstr "Beklager; du har ikke tilladelse til at gøre dette."
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate path or Phabricator.
 #: TWLight/templates/403.html:17
@@ -1463,7 +1464,7 @@ msgstr ""
 #. Translators: Alt text for an image shown on the 404 error page.
 #: TWLight/templates/404.html:29
 msgid "A crab on a beach looking towards the camera"
-msgstr ""
+msgstr "En krabbe på stranden der kigger mod kameraet"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:6
@@ -1489,7 +1490,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:32
 msgid "Who can receive access?"
-msgstr ""
+msgstr "Hvem kan få adgang?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:36
@@ -1499,27 +1500,27 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:43
 msgid "Any editor can apply for access, but there are a few basic requirements:"
-msgstr ""
+msgstr "Enhver skribent kan ansøge om adgang, men der er nogle få grundlæggende krav:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:47
 msgid "You have an account that is a minimum of 6 months old"
-msgstr ""
+msgstr "Du har en konto der er mindst 6 måneder gammel"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:51
 msgid "You have a minimum of 500 edits"
-msgstr "Du har mindst 500 redigeringer"
+msgstr "Du har lavet mindst 500 redigeringer"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:55
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr ""
+msgstr "Du har udført mindst 10 redigeringer til Wikimedia projekter den seneste måned"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:59
 msgid "You are not currently blocked from editing Wikipedia"
-msgstr ""
+msgstr "Du er på nuværende tidspunkt ikke blokeret fra et redigere Wikipedia"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
@@ -1534,7 +1535,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:77
 msgid "What do I do after I get access?"
-msgstr ""
+msgstr "Hvad gør jeg efter at have fået adgang?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:81
@@ -1569,7 +1570,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:114
 msgid "Approved editors <i>should not</i>:"
-msgstr ""
+msgstr "Godkendte skribenter <i>bør ikke</i>:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:118
@@ -1614,7 +1615,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to the Wikipedia Library email address.
 #: TWLight/templates/about.html:179
 msgid "Email:"
-msgstr "Email:"
+msgstr "E-mail:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to a link to the Wikipedia Library discussion page on Wikipedia. Translate 'Talk' to whatever the discussion namespace is called for this language Wikipedia.
 #: TWLight/templates/about.html:186
@@ -1623,12 +1624,12 @@ msgstr "Diskussionsside:"
 
 #: TWLight/templates/base.html:14 TWLight/templates/base.html:65
 msgid "The Wikipedia Library Card Platform"
-msgstr ""
+msgstr "Wikipedia bibliotekskort platformen"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/base.html:59
 msgid "Library Card Platform home"
-msgstr ""
+msgstr "Wikipedia bibliotekskort platformen hjem"
 
 #. Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate home_url or username.
 #: TWLight/templates/base.html:75 TWLight/templates/base.html:80
@@ -1644,12 +1645,12 @@ msgstr "Gennemse"
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
 #: TWLight/templates/base.html:110
 msgid "Review"
-msgstr ""
+msgstr "Gennemgå"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
 #: TWLight/templates/base.html:119
 msgid "Send data to partners"
-msgstr ""
+msgstr "Send data til partnere"
 
 #. Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline).
 #: TWLight/templates/base.html:127
@@ -1659,7 +1660,7 @@ msgstr "Seneste aktivitet"
 #. Translators: Shown in the top bar of almost every page when the current user is staff, linking to the administrator interface.
 #: TWLight/templates/base.html:142
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 #. Translators: Shown in the top bar of almost every page when the current user is logged in.
 #: TWLight/templates/base.html:151
@@ -1808,7 +1809,7 @@ msgstr "Brugere"
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
 #: TWLight/templates/dashboard.html:186
 msgid "User language distribution"
-msgstr ""
+msgstr "Brugere fordelt over sprog"
 
 #. Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/home.html:9
@@ -1847,7 +1848,7 @@ msgstr "Gennemse alle partnere"
 
 #: TWLight/templates/home.html:96
 msgid "More Activity"
-msgstr "Mere"
+msgstr "Mere aktivitet"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16
@@ -1948,7 +1949,7 @@ msgstr "Jeg accepterer"
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:105
 msgid "Use my Wikipedia email address"
-msgstr ""
+msgstr "Brug min Wikipedia e-mail adresse"
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:118
@@ -1978,17 +1979,17 @@ msgstr ""
 #. Translators: The total number of edits this user has made to all Wikipedia projects
 #: TWLight/users/models.py:115
 msgid "Wikipedia edit count"
-msgstr ""
+msgstr "Antal Wikipedia redigeringer"
 
 #. Translators: The date this user registered their Wikipedia account
 #: TWLight/users/models.py:118
 msgid "Date registered at Wikipedia"
-msgstr ""
+msgstr "Registreringsdato på Wikipedia"
 
 #. Translators: The User ID for this user on Wikipedia
 #: TWLight/users/models.py:122
 msgid "Wikipedia user ID"
-msgstr ""
+msgstr "Wikipedia bruger-ID"
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
 #: TWLight/users/models.py:128
@@ -1998,7 +1999,7 @@ msgstr "Wikipedia grupper"
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
 #: TWLight/users/models.py:131
 msgid "Wikipedia user rights"
-msgstr ""
+msgstr "Wikipedia brugerrettigheder"
 
 #. Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
 #: TWLight/users/models.py:135
@@ -2033,13 +2034,13 @@ msgstr ""
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
 #: TWLight/users/templates/users/editor_detail.html:35
 msgid "Information with an * was retrieved from Wikipedia directly. Other information was entered directly by users or site admins, in their preferred language."
-msgstr ""
+msgstr "Information med en * blev hentet direkte fra Wikipedia. Anden information blev indtastet manuelt af brugere eller administratorer på deres foretrukne sprog."
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:47
 #, python-format
 msgid "%(username)s has coordinator privileges on this site."
-msgstr ""
+msgstr "%(username)s har koordinator-privilegier på dette site."
 
 #. Translators: This is shown on editor profiles, under the heading for Wikipedia editor data.
 #: TWLight/users/templates/users/editor_detail_data.html:5
@@ -2076,7 +2077,7 @@ msgstr "Opdater"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:58
 msgid "Satisfies terms of use?"
-msgstr ""
+msgstr "Opfylder vilkårene for anvendelse?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
 #: TWLight/users/templates/users/editor_detail_data.html:61
@@ -2112,7 +2113,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:118
 msgid "Wikipedia user ID *"
-msgstr ""
+msgstr "Wikipedia bruger-ID *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:134
@@ -2197,7 +2198,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/terms.html:49
 msgid "Requirements for a Wikipedia Library Card Account"
-msgstr ""
+msgstr "Krav for en Wikipedia bibliotekskort konto"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Special:EmailUser should be translated to this language's title for https://en.wikipedia.org/wiki/Special:EmailUser.
 #: TWLight/users/templates/users/terms.html:53
@@ -2320,7 +2321,7 @@ msgstr "Tak!"
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/terms.html:209
 msgid "The Wikipedia Library Team"
-msgstr ""
+msgstr "Wikipedia bibliotek teamet"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/terms.html:216
@@ -2375,7 +2376,7 @@ msgstr "Din email adresse er blevet ændret til {email}."
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
 #: TWLight/users/views.py:322
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
-msgstr ""
+msgstr "E-mailadressefeltet er tomt. Du har stadigvæk mulighed for at gennemse sitet, men du vil ikke have mulighed for at ansøge om adgang til partner-ressourcer uden en e-mailadresse."
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/views.py:364
@@ -2396,35 +2397,35 @@ msgstr ""
 #: TWLight/views.py:67
 #, python-brace-format
 msgid "{username} signed up for a Wikipedia Library Card Platform account"
-msgstr ""
+msgstr "{username} oprettede en konto på Wikipedia bibliotekskort platformen"
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/views.py:80
 #, python-brace-format
 msgid "{partner} joined the Wikipedia Library "
-msgstr ""
+msgstr "{partner} tilsluttede sig Wikipedia biblioteket "
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
 #: TWLight/views.py:100
 #, python-brace-format
 msgid "{username} applied for renewal of their <a href=\"{url}\">{partner}</a> access"
-msgstr ""
+msgstr "{username} ansøgte om fornyelse af sin adgang til <a href=\"{url}\">{partner}</a>"
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
 #: TWLight/views.py:108
 #, python-brace-format
 msgid "{username} applied for access to <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
-msgstr ""
+msgstr "{username} ansøgte om adgang til <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
 #: TWLight/views.py:118
 #, python-brace-format
 msgid "{username} applied for access to <a href=\"{url}\">{partner}</a>"
-msgstr ""
+msgstr "{username} ansøgte om adgang til <a href=\"{url}\">{partner}</a>"
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
 #: TWLight/views.py:139
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
-msgstr ""
+msgstr "{username} modtog adgang til <a href=\"{url}\">{partner}</a>"
 
