@@ -20,7 +20,10 @@ try:
                                   MYSQL_PASSWORD,
                                   ALLOWED_HOSTS,
                                   DEBUG,
-                                  REQUEST_BASE_URL)
+                                  REQUEST_BASE_URL,
+                                  MATOMO_SITE_ID,
+                                  MATOMO_HOSTNAME,
+)
 except ImportError:
     # If there's no local_vars file on this system (e.g. because it isn't
     # a local system), this import will fail, which can cause things
