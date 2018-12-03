@@ -95,6 +95,7 @@ THIRD_PARTY_APPS = [
 ]
 
 TWLIGHT_APPS = [
+    'TWLight.common',
     'TWLight.i18n',
     'TWLight.users',
     'TWLight.resources',
