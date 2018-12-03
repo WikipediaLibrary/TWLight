@@ -30,10 +30,11 @@ This script automatically loads the appropriate .yaml configuration file from `/
 
 Once the script has finished running you should now be able to access the tool at the hostname you set up for the web proxy!
 
-## To deploy updated code
-TODO: Overview of Travis CI process, automatic updates, code update script.
+## Deploying updated code
 
-Once updates have been git pushed from their local development environment to the repo, ssh into the server and 
+Code deployment works on a mostly automated basis. New commits in the repository master branch are run through Travis CI (scripts [here](https://github.com/WikipediaLibrary/TWLight/tree/master/.travis)) to run tests and check that it builds successfully. Travis will also check for any necessary migrations and translation updates and commit these back to the master branch if necessary (see, for example, [this commit](https://github.com/WikipediaLibrary/TWLight/commit/cac6b36b6f94c4a186360409fb7fa829650f541a)).
+
+Once Travis is happy with the build, the code is pushed to the [production](https://github.com/WikipediaLibrary/TWLight/tree/production) branch. The production server then checks for new code hourly and deploys it via [this script](https://github.com/WikipediaLibrary/TWLight/blob/production/bin/virtualenv_update.sh).
 
 ## Background info & troubleshooting
 
@@ -52,19 +53,19 @@ Once updates have been git pushed from their local development environment to th
 * Does `run/gunicorn.sock` exist, and does www have permissions on it? (If you get a `HaltServer: Worker failed to boot` error, this may be the cause.)
 * Does `/var/www/html/TWLight/TWLight/logs/gunicorn.log` exist, and does www have rwx permissions on it? (If you see an https 500 error, or if `/var/log/gunicorn.log` complains about permissions errors on the TWLight gunicorn log file, this is why.)
 * Does your `bin/gunicorn_start.sh` use the appropriate DJANGO_SETTINGS_MODULE ? If it doesn't, you'll see an nginx default `Bad Request (400)`. 
-
-### Partner pages or partner admin pages not rendering
-* Did you just add a new language to the site, and forget to run `python manage.py makemigrations` on the server?
+* Does doing `sudo systemctl restart gunicorn` fix your issue?
 
 ## Logs
 
-TODO: Update
+Application log: `/var/www/html/TWLight/logs/twlight.log` (or e.g. `twlight.log.1`)
 
-Application log: `/var/www/html/TWLight/logs/twlight.log`
 Gunicorn log: `/var/www/html/TWLight/logs/gunicorn.log`
     * Note that this is the log *for the gunicorn process*, as distinct from *the service that starts gunicorn*.
 
 Postfix, nginx, and the service that starts gunicorn on boot log to their system defaults in `/var/log`.
 
 ## Translations
-TODO: Rewrite
+
+Translations for the platform's interface elements (i.e. everything that lives in this repository) are handled via [translatewiki.net](https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform), where volunteer contributors add translations. These are synced twice a week - on Mondays and Thursdays.
+
+Translations for database content such as partner descriptions, tags, and send instructions, are not currently handled by translatewiki. We [plan](https://phabricator.wikimedia.org/T171874) to create translatable pages on Meta for translating this content. For now, new translations can be added in the administrator interface.
