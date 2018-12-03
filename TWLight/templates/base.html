@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load twlight_perms %}
+{% load twlight_matomo %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +40,10 @@
   {% block extra_css %}    
   {% endblock extra_css %}
 
-  {% block head_javascript %}
-    {# We don't use any JS by default; individual pages that need it can add it here. #}
-  {% endblock head_javascript %}
+  {% twlight_matomo_tracking %}
+
+  {% block extra_javascript %}
+  {% endblock extra_javascript %}
 </head>
 {% if LANGUAGE_BIDI %}
   <body dir="rtl">
