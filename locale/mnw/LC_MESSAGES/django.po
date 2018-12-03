@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-29 17:08:03+0000\n"
-"X-POT-Import-Date: 2018-11-26 15:30:31+0000\n"
+"PO-Revision-Date: 2018-12-03 06:56:56+0000\n"
+"X-POT-Import-Date: 2018-11-30 11:29:25+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: mnw\n"
@@ -125,21 +125,21 @@ msgstr ""
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
 #: TWLight/applications/helpers.py:114
-#: TWLight/users/templates/users/editor_detail_data.html:171
+#: TWLight/users/templates/users/editor_detail_data.html:166
 msgid "Real name"
 msgstr "ယၟုဍာံ:"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
 #: TWLight/applications/helpers.py:116
-#: TWLight/users/templates/users/editor_detail_data.html:183
+#: TWLight/users/templates/users/editor_detail_data.html:178
 msgid "Country of residence"
 msgstr "ကၟိုန်ဍုၚ်မပဒတဴ"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
 #: TWLight/applications/helpers.py:118
-#: TWLight/users/templates/users/editor_detail_data.html:195
+#: TWLight/users/templates/users/editor_detail_data.html:190
 msgid "Occupation"
 msgstr "ကမၠောန်"
 
@@ -307,7 +307,7 @@ msgstr "ယွံ (<a href=\"%(parent_url)s\">ပွမဂရၚ်အာတ်�
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
 #: TWLight/applications/templates/applications/application_evaluation.html:128
-#: TWLight/users/templates/users/editor_detail_data.html:72
+#: TWLight/users/templates/users/editor_detail_data.html:67
 msgid "No"
 msgstr "ဟအှ်ေ"
 
@@ -884,6 +884,25 @@ msgstr "အရေဝ်ဘာသာ"
 msgid "Number of users"
 msgstr "လၟိဟ် ညးလွပ်ဂမၠိုၚ်"
 
+#. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
+#: TWLight/resources/forms.py:16
+msgid "Name of the potential partner"
+msgstr ""
+
+#: TWLight/resources/forms.py:17
+#: TWLight/resources/templates/resources/suggest.html:55
+msgid "Description"
+msgstr ""
+
+#: TWLight/resources/forms.py:18
+msgid "Website"
+msgstr ""
+
+#. Translators: This labels a button which users click to submit their suggestion.
+#: TWLight/resources/forms.py:32
+msgid "Submit"
+msgstr ""
+
 #. Translators: When staff enter languages, they use ISO language codes. Don't translate ISO, LANGUAGES, or %(code)s.
 #: TWLight/resources/models.py:31
 #, python-format
@@ -1076,8 +1095,33 @@ msgstr ""
 msgid "The form of the contact person's name to use in email greetings (as in 'Hi Jake')"
 msgstr ""
 
-#. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
+#. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
+#: TWLight/resources/models.py:455
+msgid "Potential partner's name (e.g. McFarland)."
+msgstr ""
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
 #: TWLight/resources/models.py:459
+msgid "Optional description of this potential partner."
+msgstr ""
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
+#: TWLight/resources/models.py:463
+msgid "Link to the potential partner's website."
+msgstr ""
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
+#: TWLight/resources/models.py:467
+msgid "User who authored this suggestion."
+msgstr ""
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
+#: TWLight/resources/models.py:471
+msgid "Users who have upvoted this suggestion."
+msgstr ""
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
+#: TWLight/resources/models.py:495
 msgid "URL of a video tutorial."
 msgstr ""
 
@@ -1355,7 +1399,14 @@ msgstr ""
 msgid "Browse Partners"
 msgstr ""
 
-#: TWLight/resources/templates/resources/partner_filter.html:31
+#. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
+#. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
+#: TWLight/resources/templates/resources/partner_filter.html:24
+#: TWLight/templates/base.html:248
+msgid "Suggest a partner"
+msgstr ""
+
+#: TWLight/resources/templates/resources/partner_filter.html:35
 msgid "No partners meet the specified criteria."
 msgstr ""
 
@@ -1409,23 +1460,80 @@ msgstr "လ္ဂောဝ်"
 msgid "Imported"
 msgstr "ပၠောပ်စုတ်လဝ်"
 
+#. Translators: This is the title of the form where users can submit partner suggestions.
+#: TWLight/resources/templates/resources/suggest.html:18
+msgid "Suggest partners"
+msgstr ""
+
+#. Translators: This is the title of the panel where user suggestions are displayed.
+#: TWLight/resources/templates/resources/suggest.html:38
+msgid "Browse and support suggestions"
+msgstr ""
+
+#. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
+#: TWLight/resources/templates/resources/suggest.html:47
+msgid "Delete"
+msgstr ""
+
+#. Translators: This is the text that appears before the URL of every partner suggestion.
+#: TWLight/resources/templates/resources/suggest.html:59
+msgid "URL"
+msgstr ""
+
+#: TWLight/resources/templates/resources/suggest.html:64
+#: TWLight/resources/templates/resources/suggest.html:80
+msgid "Upvoted"
+msgstr ""
+
+#: TWLight/resources/templates/resources/suggest.html:64
+#: TWLight/resources/templates/resources/suggest.html:80
+msgid "Upvote"
+msgstr ""
+
+#. Translators: This message is displayed on the page where coordinators can request the deletion of a suggestion.
+#: TWLight/resources/templates/resources/suggestion_confirm_delete.html:9
+#, python-format
+msgid "Are you sure you want to delete <b>%(object)s</b>?"
+msgstr ""
+
+#. Translators: This is the button users click to confirm changes to their personal information.
+#: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
+#: TWLight/users/views.py:364
+msgid "Confirm"
+msgstr "သ္ပဒတန်"
+
 #. Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
-#: TWLight/resources/views.py:30
+#: TWLight/resources/views.py:37
 msgid "Because you are a staff member, this page may include Partners who are not yet available to all users."
 msgstr ""
 
-#: TWLight/resources/views.py:52
+#: TWLight/resources/views.py:59
 msgid "This partner is not available. You can see it because you are a staff member, but it is not visible to non-staff users."
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:204
+#: TWLight/resources/views.py:211
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:208
+#: TWLight/resources/views.py:215
 msgid "This partner is now available for applications"
+msgstr ""
+
+#. Translators: Shown to users when they successfully add a new partner suggestion.
+#: TWLight/resources/views.py:311
+msgid "Your suggestion has been added."
+msgstr ""
+
+#. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
+#: TWLight/resources/views.py:316
+msgid "You must be a Wikipedia editor to do that."
+msgstr ""
+
+#. Translators: Shown to coordinators when they successfully delete a partner suggestion
+#: TWLight/resources/views.py:331
+msgid "Suggestion has been deleted."
 msgstr ""
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
@@ -1689,18 +1797,18 @@ msgid "Log out"
 msgstr "တိတ်"
 
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
-#: TWLight/templates/base.html:159 TWLight/templates/home.html:22
+#: TWLight/templates/base.html:163 TWLight/templates/home.html:22
 msgid "Log in"
 msgstr "လုပ်လံက်အေန်"
 
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate email_url.
-#: TWLight/templates/base.html:177
+#: TWLight/templates/base.html:181
 #, python-format
 msgid "You don't have an email on file. We can't finalize your access to partner resources without an email. Please <a href=\"%(email_url)s\">update your email</a>."
 msgstr ""
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
-#: TWLight/templates/base.html:188
+#: TWLight/templates/base.html:192
 #, python-format
 msgid "You have requested a restriction on the processing of your data. Most site functionality will not be available to you until you <a href=\"%(restrict_url)s\">lift this restriction</a>."
 msgstr ""
@@ -1719,27 +1827,27 @@ msgstr ""
 #. </p>
 #. <p>
 #. comment Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:218
+#: TWLight/templates/base.html:222
 msgid "This work is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 International License</a>."
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:232
+#: TWLight/templates/base.html:236
 msgid "About"
 msgstr "ပရူ"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:238
+#: TWLight/templates/base.html:242
 msgid "Terms of use and privacy policy"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:244
+#: TWLight/templates/base.html:254
 msgid "Feedback"
 msgstr "ကဵုကသပ်"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
-#: TWLight/templates/base.html:256
+#: TWLight/templates/base.html:266
 msgid "Contact us"
 msgstr "ကေတ်အဆက်ကု ပိုယ်"
 
@@ -1894,51 +2002,51 @@ msgid "Forgot your password? Enter your email address below, and we'll email ins
 msgstr ""
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
-#: TWLight/users/authorization.py:212
+#: TWLight/users/authorization.py:215
 msgid "You tried to log in but presented an invalid access  token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/authorization.py:265 TWLight/users/authorization.py:344
+#: TWLight/users/authorization.py:268 TWLight/users/authorization.py:358
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr ""
 
-#: TWLight/users/authorization.py:333
+#: TWLight/users/authorization.py:347
 msgid "Did not receive a valid oauth response."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:355
+#: TWLight/users/authorization.py:369
 msgid "Could not find handshaker."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:366
+#: TWLight/users/authorization.py:380
 msgid "No request token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:376
+#: TWLight/users/authorization.py:390
 msgid "Access token generation failed."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/authorization.py:390
+#: TWLight/users/authorization.py:404
 msgid "Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
-#: TWLight/users/authorization.py:396
+#: TWLight/users/authorization.py:410
 msgid "Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/authorization.py:409
+#: TWLight/users/authorization.py:423
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
 #. Translators: This message is shown when a user logs back in to the site after their first time.
-#: TWLight/users/authorization.py:414
+#: TWLight/users/authorization.py:428
 msgid "Welcome back!"
 msgstr ""
 
@@ -2032,7 +2140,7 @@ msgstr ""
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:371
+#: TWLight/users/models.py:362
 #, python-brace-format
 msgid "{wp_username}"
 msgstr "{wp_username}"
@@ -2073,92 +2181,87 @@ msgstr ""
 msgid "Username *"
 msgstr "ယၟုညးလွပ် *"
 
-#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's SUL info through an external tool. (e.g. https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=Samwalton9%20(WMF))
-#: TWLight/users/templates/users/editor_detail_data.html:24
-msgid "SUL info"
-msgstr "တၚ်ဂၞၚ် SUL"
-
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/)
-#: TWLight/users/templates/users/editor_detail_data.html:29
+#: TWLight/users/templates/users/editor_detail_data.html:24
 msgid "CentralAuth"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's description of their Wikipedia edits.
-#: TWLight/users/templates/users/editor_detail_data.html:39
+#: TWLight/users/templates/users/editor_detail_data.html:34
 msgid "Contributions"
 msgstr "ညးမရီုဗင်ဂမၠိုင်"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/templates/users/editor_detail_data.html:47
+#: TWLight/users/templates/users/editor_detail_data.html:42
 #: TWLight/users/views.py:258
 msgid "Update"
 msgstr "ပခိုဟ်လဟဵု"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
-#: TWLight/users/templates/users/editor_detail_data.html:58
+#: TWLight/users/templates/users/editor_detail_data.html:53
 msgid "Satisfies terms of use?"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
-#: TWLight/users/templates/users/editor_detail_data.html:61
+#: TWLight/users/templates/users/editor_detail_data.html:56
 msgid "At their last login, did this user meet the criteria set forth in the terms of use?"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
-#: TWLight/users/templates/users/editor_detail_data.html:70
+#: TWLight/users/templates/users/editor_detail_data.html:65
 msgid "Yes"
 msgstr "ယွံ"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
-#: TWLight/users/templates/users/editor_detail_data.html:75
+#: TWLight/users/templates/users/editor_detail_data.html:70
 #, python-format
 msgid "%(username)s may still be eligible for access grants at the coordinators' discretion."
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:89
+#: TWLight/users/templates/users/editor_detail_data.html:84
 msgid "Global edit count *"
 msgstr ""
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
-#: TWLight/users/templates/users/editor_detail_data.html:96
+#: TWLight/users/templates/users/editor_detail_data.html:91
 msgid "(view global user contributions)"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:106
+#: TWLight/users/templates/users/editor_detail_data.html:101
 msgid "Meta-Wiki registration or SUL merge date *"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:118
+#: TWLight/users/templates/users/editor_detail_data.html:113
 msgid "Wikipedia user ID *"
 msgstr "ID ညးလွပ် ဝဳကဳပဳဒဳယာ *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/editor_detail_data.html:134
+#: TWLight/users/templates/users/editor_detail_data.html:129
 msgid "The following information is visible only to you, site administrators, publishing partners (where required), and volunteer Wikipedia Library coordinators (who have signed a Non-Disclosure Agreement)."
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
-#: TWLight/users/templates/users/editor_detail_data.html:144
+#: TWLight/users/templates/users/editor_detail_data.html:139
 #, python-format
 msgid "You may <a href=\"%(update_url)s\">update or delete</a> your data at any time."
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
-#: TWLight/users/templates/users/editor_detail_data.html:155
+#: TWLight/users/templates/users/editor_detail_data.html:150
 msgid "Email *"
 msgstr "အဳမေလ်*"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is under the email if their email is automatically updated from their Wikipedia account.
-#: TWLight/users/templates/users/editor_detail_data.html:161
+#: TWLight/users/templates/users/editor_detail_data.html:156
 msgid "This will be automatically updated from Wikipedia."
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
-#: TWLight/users/templates/users/editor_detail_data.html:207
+#: TWLight/users/templates/users/editor_detail_data.html:202
 msgid "Institutional affiliation"
 msgstr ""
 
@@ -2398,11 +2501,6 @@ msgstr ""
 #: TWLight/users/views.py:322
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
 msgstr ""
-
-#. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/views.py:364
-msgid "Confirm"
-msgstr "သ္ပဒတန်"
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
 #: TWLight/users/views.py:506
