@@ -20,8 +20,6 @@ try:
                                   MYSQL_PASSWORD,
                                   ALLOWED_HOSTS,
                                   REQUEST_BASE_URL,
-                                  MATOMO_SITE_ID,
-                                  MATOMO_HOSTNAME,
     )
 except ImportError:
     # If there's no production_vars file on this system (e.g. because it isn't
@@ -34,6 +32,10 @@ except ImportError:
           'production settings.',
           file=sys.stderr)
     raise
+
+# Matomo configuration for Production.
+MATOMO_HOSTNAME = 'wikipedialibrarytracker.wmflabs.org'
+MATOMO_SITE_ID = 2
 
 # Let Django know about external URLs in case they differ from internal
 # Needed to be added for /admin
