@@ -21,8 +21,6 @@ try:
                                   ALLOWED_HOSTS,
                                   DEBUG,
                                   REQUEST_BASE_URL,
-                                  MATOMO_SITE_ID,
-                                  MATOMO_HOSTNAME,
     )
 except ImportError:
     # If there's no staging_vars file on this system (e.g. because it isn't
@@ -35,6 +33,10 @@ except ImportError:
           'staging settings.',
           file=sys.stderr)
     raise
+
+# Matomo configuration for staging.
+MATOMO_HOSTNAME = 'wikipedialibrarytracker.wmflabs.org'
+MATOMO_SITE_ID = 1
 
 # Let Django know about external URLs in case they differ from internal
 # Needed to be added for /admin
