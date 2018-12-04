@@ -281,7 +281,7 @@ class OAuthInitializeView(View):
             # We're using this twice. Not very DRY.
             # Send user either to the destination specified in the 'next'
             # parameter or to their own editor detail page.
-            if request.session['get']['next']:
+            try:
                 # Create a QueryDict from the 'get' session dict.
                 query_dict = QueryDict(urlencode(request.session['get']), mutable=True)
                 # Pop the 'next' parameter out of the QueryDict.
@@ -296,7 +296,7 @@ class OAuthInitializeView(View):
                     return_url += '?' + urlencode(query_dict)
                 logger.info('User is already authenticated. Sending them on '
                     'for post-login redirection per "next" parameter.')
-            else:
+            except KeyError:
                 return_url = reverse_lazy('users:editor_detail',
                     kwargs={'pk': self.request.user.editor.pk})
                 logger.warning('User already authenticated. No "next" '
@@ -429,7 +429,7 @@ class OAuthCallbackView(View):
                 # We're using this twice. Not very DRY.
                 # Send user either to the destination specified in the 'next'
                 # parameter or to their own editor detail page.
-                if request.session['get']['next']:
+                try:
                     # Create a QueryDict from the 'get' session dict.
                     query_dict = QueryDict(urlencode(request.session['get']), mutable=True)
                     # Pop the 'next' parameter out of the QueryDict.
@@ -444,7 +444,7 @@ class OAuthCallbackView(View):
                         return_url += '?' + urlencode(query_dict)
                     logger.info('User authenticated. Sending them on for '
                         'post-login redirection per "next" parameter.')
-                else:
+                except KeyError:
                     return_url = reverse_lazy('users:editor_detail',
                         kwargs={'pk': user.editor.pk})
                     logger.warning('User authenticated. No "next" parameter '
