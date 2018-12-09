@@ -135,14 +135,14 @@ class DashboardView(TemplateView):
         # Median decision time per month ---------------------------------------
         # Exlude imported applications
         context['app_medians_data'] = get_median_decision_time(
-                Application.objects.exclude(imported=True)
+                Application.objects.exclude(imported=True).exclude(status=Application.INVALID)
             )
 
         # Application status pie chart -----------------------------------------
 
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.exclude(
-                    status__in=(Application.NOT_APPROVED, Application.SENT)),
+                    status__in=(Application.NOT_APPROVED, Application.SENT, Application.INVALID)),
                     statuses=Application.STATUS_CHOICES[0:3]
             )
 
@@ -222,7 +222,7 @@ class CSVAppMedians(_CSVDownloadView):
     def _write_data(self, response):
         # Exlude imported applications
         data = get_median_decision_time(
-            Application.objects.exclude(imported=True),
+            Application.objects.exclude(imported=True).exclude(status=Application.INVALID),
             data_format=PYTHON
         )
 
@@ -250,10 +250,10 @@ class CSVAppDistribution(_CSVDownloadView):
                                  'does not exist'.format(pk=pk))
                 raise
 
-            csv_queryset = Application.objects.filter(partner=partner)
+            csv_queryset = Application.objects.filter(partner=partner).exclude(status=Application.INVALID)
 
         else:
-            csv_queryset = Application.objects.all()
+            csv_queryset = Application.objects.all().exclude(status=Application.INVALID)
 
         data = get_application_status_data(
             csv_queryset,
@@ -280,7 +280,7 @@ class CSVAppCountByPartner(_CSVDownloadView):
                              'does not exist'.format(pk=pk))
             raise
 
-        queryset = Application.objects.filter(partner=partner)
+        queryset = Application.objects.filter(partner=partner).exclude(status=Application.INVALID)
 
         if 'approved_or_sent' in self.kwargs:
             queryset = queryset.filter(status__in=(Application.APPROVED, Application.SENT))

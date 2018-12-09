@@ -61,7 +61,7 @@ class PartnersDetailView(DetailView):
                     "users."))
 
         context['total_apps'] = Application.objects.filter(
-            partner=partner).count()
+            partner=partner).exclude(status=Application.INVALID).count()
 
         context['total_apps_approved'] = Application.objects.filter(
             partner=partner, status=Application.APPROVED).count()
@@ -120,7 +120,7 @@ class PartnersDetailView(DetailView):
 
         application_end_states = [Application.APPROVED, Application.NOT_APPROVED, Application.SENT]
         partner_app_time = Application.objects.filter(
-            partner=partner, status__in=application_end_states).exclude(imported=True).values_list('days_open', flat=True)
+            partner=partner, status__in=application_end_states).exclude(imported=True).exclude(status=Application.INVALID).values_list('days_open', flat=True)
 
         if len(partner_app_time) > 0:
             context['median_days'] = get_median(list(partner_app_time))
@@ -128,11 +128,11 @@ class PartnersDetailView(DetailView):
             context['median_days'] = None
 
         context['app_distribution_data'] = get_application_status_data(
-                Application.objects.filter(partner=partner)
+                Application.objects.filter(partner=partner).exclude(status=Application.INVALID)
             )
 
         context['signups_time_data'] = get_data_count_by_month(
-                Application.objects.filter(partner=partner)
+                Application.objects.filter(partner=partner).exclude(status=Application.INVALID)
             )
 
         context['approved_or_sent_signups_time_data'] = get_data_count_by_month(
@@ -231,7 +231,7 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
         partner = self.get_object()
 
         partner_applications = Application.objects.filter(
-            partner=partner)
+            partner=partner).exclude(status=Application.INVALID)
 
         context['approved_applications'] = partner_applications.filter(
             status=Application.APPROVED).order_by(

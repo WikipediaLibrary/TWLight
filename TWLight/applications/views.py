@@ -803,7 +803,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                                    Application.QUESTION,
                                    Application.APPROVED,
                                    Application.NOT_APPROVED,
-                                   Application.SENT]
+                                   Application.SENT,
+                                   Application.INVALID]
         except (AssertionError, ValueError):
             # ValueError will be raised if the status cannot be cast to int.
             logger.exception('Did not find valid data for batch editing')

@@ -199,6 +199,8 @@ def get_median_decision_time(queryset, data_format=JSON):
                     date_created__lt=next_month_start
                 ).exclude(
                     days_open=None
+                ).exclude(
+                    status=Application.INVALID
                 ).values_list('days_open', flat=True)
             )
 
@@ -226,7 +228,7 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
     """
 
     data_series = []
-    partner_apps = Application.objects.filter(partner=partner)
+    partner_apps = Application.objects.filter(partner=partner).exclude(status=Application.INVALID)
 
     if partner_apps:
         # Again removing undated (Jan 1 1970) applications
@@ -244,7 +246,9 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
 
             apps_to_date = Application.objects.filter(
                 partner=partner,
-                date_created__lte=current_date)
+                date_created__lte=current_date).exclude(
+                status=Application.INVALID
+                )
 
             unique_users = User.objects.filter(
                 editor__applications__in=apps_to_date).distinct().count()

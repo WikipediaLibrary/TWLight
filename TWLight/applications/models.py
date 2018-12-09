@@ -30,6 +30,7 @@ class Application(models.Model):
     APPROVED = 2
     NOT_APPROVED = 3
     SENT = 4
+    INVALID = 5
 
     STATUS_CHOICES = (
         # Translators: This is the status of an application that has not yet been reviewed.
@@ -42,11 +43,13 @@ class Application(models.Model):
         (NOT_APPROVED, _('Not approved')),
         # Translators: This is the status of an application that has been sent to a partner.
         (SENT, _('Sent to partner')),
+        # Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
+        (INVALID, _('Invalid')),
     )
 
     # This list should contain all statuses that are the end state of an
     # Application - statuses which are not expected to be further modified.
-    FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED, SENT]
+    FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED, SENT, INVALID]
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
     # Moved from auto_now_add=True so that we can set the date for import.
@@ -155,6 +158,7 @@ class Application(models.Model):
 
     LABELMAKER = {
         PENDING: '-primary',
+        INVALID: '-secondary',
         QUESTION: '-warning',
         APPROVED: '-success',
         NOT_APPROVED: '-danger',
@@ -232,7 +236,7 @@ class Application(models.Model):
         if self.status in [self.PENDING, self.QUESTION]:
             return (date.today() - self.date_created).days
         else:
-            assert self.status in [self.APPROVED, self.NOT_APPROVED, self.SENT]
+            assert self.status in [self.APPROVED, self.NOT_APPROVED, self.SENT, self.INVALID]
             return (self.date_closed - self.date_created).days
 
 
