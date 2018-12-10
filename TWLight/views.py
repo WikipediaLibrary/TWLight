@@ -87,7 +87,7 @@ class HomePageView(TemplateView):
         # New applications! Except for the ones where the user requested
         # it be hidden.
         apps = self._get_newest(
-            Application.objects.exclude(hidden=True).exclude(editor=None).exclude(status=Application.INVALID)
+            Application.objects.exclude(hidden=True).exclude(editor=None)
         )
 
 

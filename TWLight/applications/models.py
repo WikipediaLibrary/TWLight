@@ -16,6 +16,10 @@ from django.utils.translation import ugettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Editor
 
+class ValidApplicationsManager(models.Manager):
+    def get_queryset(self):
+        return super(ValidApplicationsManager, self).get_queryset(
+            ).exclude(status=Application.INVALID)
 
 class Application(models.Model):
     class Meta:
@@ -24,6 +28,9 @@ class Application(models.Model):
         verbose_name_plural = 'applications'
         ordering = ['-date_created', 'editor', 'partner']
 
+    # Managers defined here
+    include_invalid = models.Manager()
+    objects = ValidApplicationsManager()
 
     PENDING = 0
     QUESTION = 1

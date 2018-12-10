@@ -1361,6 +1361,8 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.NOT_APPROVED)
         ApplicationFactory(status=Application.NOT_APPROVED)
         ApplicationFactory(status=Application.NOT_APPROVED)
+        ApplicationFactory(status=Application.INVALID)
+        ApplicationFactory(status=Application.INVALID)
 
         # Make sure there are some up-for-renewal querysets, too.
         ApplicationFactory(status=Application.PENDING, parent=parent)
@@ -1510,7 +1512,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
     def test_list_rejected_object_visibility(self):
         url = reverse('applications:list_rejected')
         queryset = Application.objects.filter(
-            status=Application.NOT_APPROVED)
+            status__in=[Application.NOT_APPROVED, Application.INVALID])
         self._base_test_object_visibility(url,
             views.ListRejectedApplicationsView, queryset)
 
@@ -1557,7 +1559,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
     def test_list_rejected_object_visibility(self):
         url = reverse('applications:list_rejected')
         queryset = Application.objects.filter(
-            status=Application.NOT_APPROVED)
+            status__in=[Application.NOT_APPROVED, Application.INVALID])
         self._base_test_deleted_object_visibility(url,
             views.ListRejectedApplicationsView, queryset)
 
@@ -2580,7 +2582,8 @@ class BatchEditTest(TestCase):
         assert 6 not in [Application.PENDING,
                          Application.QUESTION,
                          Application.APPROVED,
-                         Application.NOT_APPROVED]
+                         Application.NOT_APPROVED,
+                         Application.INVALID]
 
         response = self.client.post(self.url,
             data={'applications': 1, 'batch_status': 6}, follow=True)
@@ -2602,7 +2605,8 @@ class BatchEditTest(TestCase):
         assert 3 in [Application.PENDING,
                      Application.QUESTION,
                      Application.APPROVED,
-                     Application.NOT_APPROVED]
+                     Application.NOT_APPROVED,
+                     Application.INVALID]
 
         # Make sure the applications parameter actually is bogus.
         assert Application.objects.filter(pk=2).count() == 0
