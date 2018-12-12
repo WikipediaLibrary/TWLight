@@ -137,7 +137,7 @@ class AccessCodeAdmin(admin.ModelAdmin):
             skipped_codes = 0
             num_codes = 0
 
-            for line_num, line in enumerate(lines): #TODO: Currently if we error part-way through we upload some but provide no message. Confusing.
+            for line_num, line in enumerate(lines):
                 fields = line.split(",")
                 num_columns = len(fields)
                 # Skip any blank lines. Not an error, can just be ignored.
@@ -176,6 +176,15 @@ class AccessCodeAdmin(admin.ModelAdmin):
                     messages.error(request, _("File contains reference to invalid "
                         "partner ID on line {line_num}".format(line_num=line_num+1)))
                     return return_url
+
+            # Now that we've verified all access codes are valid, let's try to
+            # actually upload them.
+            for line in lines:
+                if line == '':
+                    continue
+                fields = line.split(",")
+                access_code = fields[0].strip()
+                partner_pk = int(fields[1].strip())
 
                 # Only upload this code if it doesn't already exist. If it does,
                 # increment a counter so we can report that.
