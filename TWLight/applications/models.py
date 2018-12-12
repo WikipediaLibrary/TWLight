@@ -165,7 +165,7 @@ class Application(models.Model):
 
     LABELMAKER = {
         PENDING: '-primary',
-        INVALID: '-secondary',
+        INVALID: '-danger',
         QUESTION: '-warning',
         APPROVED: '-success',
         NOT_APPROVED: '-danger',
