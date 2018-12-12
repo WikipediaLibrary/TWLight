@@ -23,7 +23,7 @@ from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 
-from .views import LanguageWhiteListView, HomePageView, StaffDashboardView
+from .views import LanguageWhiteListView, HomePageView
 
 
 urlpatterns = [
@@ -74,7 +74,4 @@ urlpatterns = [
 	url(r'^activity/$',
         HomePageView.as_view(template_name='activity.html'),
         name='activity'),
-    url(r'^staff/$',
-        StaffDashboardView.as_view(),
-        name='staff'),
 ]

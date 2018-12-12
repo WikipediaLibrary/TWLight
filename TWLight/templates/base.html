@@ -135,15 +135,6 @@
       </a>
     </li>
 
-    {% if user.is_staff %}
-      <li role="presentation" class="mobile-menu">
-        <a href="{% url 'staff' %}">
-      {% comment %} Translators: Shown in the top bar of almost every page when the current user is staff, linking to the staff dashboard. {% endcomment %}
-          {% trans "Staff" %}
-        </a>
-      </li>
-    {% endif %}
-
     {% if user.is_superuser %}
       <li role="presentation" class="mobile-menu">
         <a href="{% url 'admin:index' %}">

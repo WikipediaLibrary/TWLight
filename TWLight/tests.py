@@ -1,6 +1,4 @@
-import csv
 from mock import patch
-import os
 
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
@@ -18,7 +16,6 @@ from . import views
 
 from .view_mixins import (CoordinatorOrSelf,
                           CoordinatorsOnly,
-                          StaffOnly,
                           EditorsOnly,
                           SelfOnly,
                           ToURequired,
@@ -61,11 +58,6 @@ class TestCoordinatorOrSelf(CoordinatorOrSelf, ObjGet, DispatchProvider):
 
 
 class TestCoordinatorsOnly(CoordinatorsOnly, DispatchProvider):
-    pass
-
-
-
-class TestStaffOnly(StaffOnly, DispatchProvider):
     pass
 
 
@@ -229,29 +221,6 @@ class ViewMixinTests(TestCase):
         req.user = user
 
         test = TestCoordinatorsOnly()
-
-        with self.assertRaises(PermissionDenied):
-            test.dispatch(req)
-
-
-    def test_staff_only_1(self):
-        user = UserFactory(is_staff=True)
-
-        req = RequestFactory()
-        req.user = user
-
-        test = TestStaffOnly()
-
-        test.dispatch(req)
-
-
-    def test_staff_only_2(self):
-        user = UserFactory(is_staff=False)
-
-        req = RequestFactory()
-        req.user = user
-
-        test = TestStaffOnly()
 
         with self.assertRaises(PermissionDenied):
             test.dispatch(req)
@@ -472,132 +441,3 @@ class ExampleApplicationsDataTest(TestCase):
         call_command('user_example_data', '200')
         call_command('resources_example_data', '50')
         call_command('applications_example_data', '300')
-
-
-
-class StaffDashboardTest(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super(StaffDashboardTest, cls).setUpClass()
-
-        cls.staff_user = UserFactory(username='staff_user', is_staff=True)
-        cls.staff_user.set_password('staff')
-        cls.staff_user.save()
-        cls.user = UserFactory()
-
-        cls.partner1 = PartnerFactory()
-        cls.partner1_pk = cls.partner1.pk
-        cls.partner2 = PartnerFactory()
-        cls.partner2_pk = cls.partner2.pk
-        cls.partner3 = PartnerFactory()
-        cls.partner3_pk = cls.partner3.pk
-
-        cls.url = reverse('staff')
-
-        # We should mock out any call to messages call in the view, since
-        # RequestFactory (unlike Client) doesn't run middleware. If you
-        # actually want to test that messages are displayed, use Client(),
-        # and stop/restart the patcher.
-        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
-        cls.message_patcher.start()
-
-
-    @classmethod
-    def tearDownClass(cls):
-        super(StaffDashboardTest, cls).tearDownClass()
-        cls.staff_user.delete()
-        cls.user.delete()
-
-        # If one of the tests made a csv, delete it.
-        if os.path.exists('accesscodes.csv'):
-            os.remove('accesscodes.csv')
-
-        cls.message_patcher.stop()
-
-
-    def test_staff_dashboard_staff(self):
-        factory = RequestFactory()
-
-        request = factory.get(self.url)
-        request.user = self.user
-
-        with self.assertRaises(PermissionDenied):
-            _ = views.StaffDashboardView.as_view()(request)
-
-
-    def test_staff_dashboard_non_staff(self):
-        factory = RequestFactory()
-
-        request = factory.get(self.url)
-        request.user = self.staff_user
-
-        response = views.StaffDashboardView.as_view()(request)
-        self.assertEqual(response.status_code, 200)
-
-
-    def test_staff_dashboard_upload(self):
-        """
-        A csv file with unique codes for multiple partners should
-        upload successfully and create the relevant objects.
-        """
-        test_file = open('accesscodes.csv', 'wb')
-        csv_writer = csv.writer(test_file, lineterminator='\n')
-        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
-        csv_writer.writerow(('BBCD-EFGH-IJKL', str(self.partner1_pk)))
-        csv_writer.writerow(('CBCD-EFGH-IJKL', str(self.partner2_pk)))
-        test_file.close()
-
-        client = Client()
-        session = client.session
-        client.login(username=self.staff_user.username, password='staff')
-
-        with open('accesscodes.csv', 'r') as csv_file:
-            response = client.post(self.url, {'access_code_csv': csv_file})
-
-        access_codes = AccessCode.objects.all()
-        self.assertEqual(access_codes.count(), 3)
-
-
-    def test_staff_dashboard_duplicate(self):
-        """
-        A csv file with non-unique codes for multiple partners should
-        only upload the unique ones.
-        """
-        test_file = open('accesscodes.csv', 'wb')
-        csv_writer = csv.writer(test_file, lineterminator='\n')
-        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
-        csv_writer.writerow(('BBCD-EFGH-IJKL', str(self.partner1_pk)))
-        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
-        test_file.close()
-
-        client = Client()
-        session = client.session
-        client.login(username=self.staff_user.username, password='staff')
-
-        with open('accesscodes.csv', 'r') as csv_file:
-            response = client.post(self.url, {'access_code_csv': csv_file})
-
-        access_codes = AccessCode.objects.all()
-        self.assertEqual(access_codes.count(), 2)
-
-
-    def test_staff_dashboard_formatting(self):
-        """
-        An incorrectly formatted csv shouldn't upload anything.
-        """
-        test_file = open('accesscodes.csv', 'wb')
-        csv_writer = csv.writer(test_file, lineterminator='\n')
-        csv_writer.writerow(('ABCD-EFGH-IJKL', 'EBSCO'))
-        csv_writer.writerow(('BBCD-EFGH-IJKL', 'JSTOR'))
-        csv_writer.writerow(('ABCD-EFGH-IJKL', 'BMJ'))
-        test_file.close()
-
-        client = Client()
-        session = client.session
-        client.login(username=self.staff_user.username, password='staff')
-
-        with open('accesscodes.csv', 'r') as csv_file:
-            response = client.post(self.url, {'access_code_csv': csv_file})
-
-        access_codes = AccessCode.objects.all()
-        self.assertEqual(access_codes.count(), 0)
