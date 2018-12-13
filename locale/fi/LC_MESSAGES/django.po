@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2018-12-04 19:34+0000\n"
-"PO-Revision-Date: 2018-12-10 07:26:11+0000\n"
+"PO-Revision-Date: 2018-12-13 08:23:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -62,7 +62,7 @@ msgstr "Hakemuksesi yhteistyökumppanille {partner}"
 #: TWLight/applications/forms.py:254
 #, python-brace-format
 msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
-msgstr ""
+msgstr "Sinun täytyy rekisteröityä sivustolla <a href=\"{url}\">{url}</a> ennen hakemista."
 
 #: TWLight/applications/forms.py:320 TWLight/users/admin.py:40
 #: TWLight/users/models.py:113
@@ -178,7 +178,7 @@ msgstr "Hyväksyn käyttöehdot"
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:128
 msgid "Account email"
-msgstr ""
+msgstr "Tilin sähköposti"
 
 #. Translators: This labels a user's email address on a form for account coordinators
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
@@ -399,7 +399,7 @@ msgstr "Odottaa"
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:33
 msgid "Rejected"
-msgstr ""
+msgstr "Hylätty"
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:37
@@ -945,11 +945,11 @@ msgstr ""
 
 #: TWLight/resources/models.py:52
 msgid "Tag"
-msgstr ""
+msgstr "Tagi"
 
 #: TWLight/resources/models.py:53
 msgid "Tags"
-msgstr ""
+msgstr "Tagit"
 
 #. Translators: Title for a list of languages if there is more than one.
 #: TWLight/resources/models.py:83
@@ -1054,7 +1054,7 @@ msgstr ""
 
 #: TWLight/resources/models.py:245
 msgid "Old Tags"
-msgstr ""
+msgstr "Vanhat tagit"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
 #: TWLight/resources/models.py:256
@@ -1244,7 +1244,7 @@ msgstr "Ei kuvausta"
 #. Translators: If a partner has video tutorials, this text shows as the title for that information field.
 #: TWLight/resources/templates/resources/partner_detail.html:251
 msgid "Video tutorials"
-msgstr ""
+msgstr "Video-oppaat"
 
 #: TWLight/resources/templates/resources/partner_detail.html:256
 msgid "Video"
@@ -1252,9 +1252,8 @@ msgstr "Video"
 
 #. Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:271
-#, fuzzy
 msgid "Language(s)"
-msgstr "Kieli"
+msgstr "Kielet"
 
 #. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:281
@@ -1627,7 +1626,7 @@ msgstr ""
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:8
 msgid "Not found"
-msgstr ""
+msgstr "Ei löytynyt"
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:12
@@ -1652,9 +1651,8 @@ msgstr "Tietoja Wikipedian Lähdekirjastosta"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:10
-#, fuzzy
 msgid "The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects."
-msgstr "Wikipedian Lähdekirjasto tarjoaa ilmaisen pääsyn lukuisiin lähteisiin, joita voi käyttää tutkimuksen apuna Wikimedia-projektien sisältöjen kehittämiseksi Yhteistyökumppaneihin lukeutuu lukuisia tietokantoja, jota tarjoavat käyttöoikeuksia kirjoihin, julkaisuihin, sanomalehtiin, videoihin, ja muihin hyödyllisiin materiaaleihin."
+msgstr "Wikipedian Lähdekirjasto tarjoaa ilmaisen pääsyn lukuisiin lähteisiin, joita voi käyttää tutkimuksen apuna Wikimedia-projektien sisältöjen kehittämiseksi."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:18
@@ -1700,7 +1698,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:59
 msgid "You are not currently blocked from editing Wikipedia"
-msgstr ""
+msgstr "Et ole tällä hetkellä estetty muokkaamasta Wikipediaa"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
@@ -2001,9 +1999,8 @@ msgstr "Kotiwikeittäin"
 
 #. Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/home.html:9
-#, fuzzy
 msgid "Sign up for free access to dozens of research databases and resources available through The Wikipedia Library."
-msgstr "\n      Tervetuloa Wikipedian Lähdekirjaston Käyttöoikeustoimistoon! Täällä voit hakea käyttöoikeutta lukuisiin kattaviin tutkimustietokantoihin ja muihin aineistoihin,jotka ovat saatavilla Wikipedian Lähdekirjaston kautta.        \n    "
+msgstr "Rekisteröidy saadaksesi Wikipedian Lähdekirjaston kautta vapaan pääsyn kymmeniin tutkimustietokantoihin ja resursseihin."
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
 #: TWLight/templates/home.html:13 TWLight/templates/home.html:48
@@ -2037,7 +2034,7 @@ msgstr "Selaa kaikkia kumppaneita"
 
 #: TWLight/templates/home.html:96
 msgid "More Activity"
-msgstr "Enemmän toimintaa"
+msgstr "Lisää toimintaa"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16
@@ -2070,7 +2067,7 @@ msgstr ""
 #: TWLight/users/authorization.py:268 TWLight/users/authorization.py:358
 #, python-brace-format
 msgid "{domain} is not an allowed host."
-msgstr ""
+msgstr "{domain} ei ole sallittu osoite."
 
 #: TWLight/users/authorization.py:347
 msgid "Did not receive a valid oauth response."
@@ -2391,7 +2388,7 @@ msgstr "Vaatimukset Wikipedian Lähdekirjaston tunnukselle"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Special:EmailUser should be translated to this language's title for https://en.wikipedia.org/wiki/Special:EmailUser.
 #: TWLight/users/templates/users/terms.html:53
 msgid "As a preliminary note, Wikipedia Library accounts are reserved for community members who have demonstrated their commitment to the Wikimedia projects, and will use their access to these resources to improve project content. To that end, in order to be eligible for the Wikipedia Library program, we require that you be registered for a user account on the projects. We generally give preference to users with at least 500 edits and six (6) months of activity, but these are not strict requirements. You must have the Special:EmailUser feature enabled on at least one version of Wikipedia, and you will identify that as your \"home\" wiki when you create an account. We ask that you do not request access to any publishers whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
-msgstr "Wikipedian Lähdekirjaston tunnukset on varattu yhteisön jäsenille, jotka ovat osoittaneet sitoutumisensa Wikimedia-projekteihin ja jotka käyttävät käyttöoikeuttaan aineistoihin projektien sisältöjen parantamiseen. Ollaksesi oikeutettu Wikipedian Lähdekirjaston ohjelmaan, edellyttämme että olet rekisteröinyt käyttäjätunnuksen Wikimedian projekteihin. Yleensä etusijalle laitetaan käyttäjät, joilla on vähintään 500 muokkausta ja kuusi (6) kuukautta muokkaushistoriaa, mutta nämä eivät ole ehdottomia vaatimuksia. Sinulla täytyy olla asetuksissasi Toiminnot: Lähetä sähköpostia käytössä ainakin yhdessä Wikipedian kieliversiossa ja nimettynä oma \" koti\"wiki, kun luot tunnuksen. Pyydämme, että et hakisi käyttöoikeutta aineistoon, johon sinulla on jo käyttöoikeus jotain toista kautta, jotta käyttöoikeus jäisi jonkun sitä enemmän tarvitsevan saataville."
+msgstr "Wikipedian Lähdekirjaston tunnukset on varattu yhteisön jäsenille, jotka ovat osoittaneet sitoutumisensa Wikimedia-projekteihin ja jotka käyttävät käyttöoikeuttaan aineistoihin projektien sisältöjen parantamiseen. Ollaksesi oikeutettu Wikipedian Lähdekirjaston ohjelmaan, edellyttämme että olet rekisteröinyt käyttäjätunnuksen Wikimedian projekteihin. Yleensä etusijalle laitetaan käyttäjät, joilla on vähintään 500 muokkausta ja kuusi (6) kuukautta muokkaushistoriaa, mutta nämä eivät ole ehdottomia vaatimuksia. Sinulla täytyy olla asetuksissasi Toiminnot:Lähetä sähköpostia käytössä ainakin yhdessä Wikipedian kieliversiossa ja nimettynä oma \"koti\" wiki, kun luot tunnuksen. Pyydämme, että et hakisi käyttöoikeutta aineistoon, johon sinulla on jo käyttöoikeus jotain toista kautta, jotta käyttöoikeus jäisi jonkun sitä enemmän tarvitsevan saataville."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/terms.html:60
