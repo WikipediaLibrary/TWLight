@@ -2,7 +2,48 @@
 
 The intended audience for this document is future developers of TWLight. Hi!
 
-## Changing the data collected on application forms
+To get set up with TWLight locally you can [twlight_vagrant](https://github.com/WikipediaLibrary/twlight_vagrant).
+
+## Shell scripts
+
+A suite of shell scripts for performing various functions can be found in the /bin folder.
+
+Scripts starting with `virtualenv_` should be run as `www` (e.g. `sudo su www virtualenv_migrate.sh`).
+
+### Virtual environment
+
+To activate the Python virtual environment for the project, run:
+
+`sudo su www`
+
+`source /var/www/html/TWLight/bin/virtualenv_activate.sh`
+
+### Migrating
+
+The script `virtualenv_migrate.sh` will, for each TWLight app, run:
+
+- `python manage.py createinitialrevisions`
+- `python manage.py makemigrations`
+- `python manage.py migrate`
+- `python manage.py sync_translation_fields`
+
+See the [official documentation](https://docs.djangoproject.com/en/1.11/topics/migrations/) for more on what each of these commands does.
+
+### Testing
+
+To test the tool, simply run the `virtualenv_test.sh` script. This script more or less only runs `python manage.py test`.
+
+### Example data
+
+When working on TWLight locally you may want example data reflecting the live tool. The script `virtualenv_example_data.sh` will generate 200 users, 50 resources, and 1000 applications, with pre-filled data and relations that broadly reflect the real data.
+
+This script can only be generated with an empty database, after you have logged in to an account you want to be made a superuser (the script looks for a single account in the database and makes it a Django superuser).
+
+## Specific code changes
+
+Some bits and pieces of advice and guidance on changing specific areas of the codebase.
+
+### Changing the data collected on application forms
 
 Application forms are constructed at runtime, based on the requirements of the Partners that an Editor has selected. They are designed to have the minimum number of fields needed to collect that data. This means that TWLight needs to have a lot of information that it can use to construct those forms, and that information has to be consistent with itself.
 
@@ -22,8 +63,3 @@ All four places referenced there must be updated:
     * Add an entry to FIELD_TYPES specifying the widget to be used to render the field.
     * Add an entry to FIELD_LABELS, which will be used to label the field (don't forget to wrap it in `_()`!)
     * Run the tests. `SynchronizeFieldsTest` will fail if you haven't done all the steps.
-
-## Testing
-`python manage.py test` will run the tests.
-
-You will need to make sure that your database user has adequate privileges on `test_twlight` (the default test database) and `django_migrations`. Notably, this includes CREATE and DROP on `test_twlight`. You will get an `OperationalError` if your user does not have adequate privileges (its error message is usually informative).
