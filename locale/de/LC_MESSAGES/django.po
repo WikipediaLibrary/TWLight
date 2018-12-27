@@ -10,7 +10,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2018-12-04 19:34+0000\n"
-"PO-Revision-Date: 2018-12-10 07:26:11+0000\n"
+"PO-Revision-Date: 2018-12-27 10:05:18+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -590,8 +590,8 @@ msgstr "Wenn du die unten stehenden Daten versendet hast, klicke auf \"Als gesen
 #: TWLight/applications/templates/applications/send_partner.html:86
 msgid "Contact"
 msgid_plural "Contacts"
-msgstr[0] "Contact"
-msgstr[1] "Contacts"
+msgstr[0] "Kontakt"
+msgstr[1] "Kontakte"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/applications/templates/applications/send_partner.html:102

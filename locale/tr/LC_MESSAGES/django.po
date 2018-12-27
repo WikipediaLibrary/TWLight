@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2018-12-04 19:34+0000\n"
-"PO-Revision-Date: 2018-12-10 07:26:12+0000\n"
+"PO-Revision-Date: 2018-12-27 10:05:20+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -587,7 +587,6 @@ msgstr "Aşağıdaki verileri işlediğinizde 'Gönderildi olarak işaretle' but
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
 #: TWLight/applications/templates/applications/send_partner.html:86
-#, fuzzy
 msgid "Contact"
 msgid_plural "Contacts"
 msgstr[0] "İletişim"
