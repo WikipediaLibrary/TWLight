@@ -39,6 +39,14 @@ When working on TWLight locally you may want example data reflecting the live to
 
 This script can only be generated with an empty database, after you have logged in to an account you want to be made a superuser (the script looks for a single account in the database and makes it a Django superuser).
 
+## Translation
+
+[Translations](https://github.com/wikipedialibrary/TWLight/blob/master/docs/sysadmin.md#translations) are supported in the platform. Please make sure to correctly comment new or updated strings with guidance for translators - to do so, write a comment to the line preceding the string which starts `# Translators:` in python files or `{% comment %}Translators:` in HTML.
+
+In HTML files, make sure to wrap multiline strings with `{% blocktrans trimmed %}`, not just `{% blocktrans %}`, to avoid whitespace and indentation formatting issues.
+
+Where possible, try to keep code and HTML tags outside of strings (i.e. `<p>{% trans "Text" %}</p>` rather than `{% trans "<p>Text</p>" %}` to avoid confusion for translators.
+
 ## Pushing changes
 
 When filing Pull Requests for code changes, you should _not_ include translation updates and are not _required_ to include migration files. When changes are merged into the Master branch, Travis CI runs checks on the build and if it passes, pushes the changes through to the Production branch, which is then pulled to the live tool. This will run migration and string localization processes automatically.
