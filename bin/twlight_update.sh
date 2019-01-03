@@ -26,8 +26,8 @@ fi
         git checkout .
         git pull origin ${TWLIGHT_GIT_REVISION}
 
-        # Make sure ${TWLIGHT_UNIXNAME} owns the .git tree
-        chown -R ${TWLIGHT_UNIXNAME}:${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/.git
+        # Make sure ${TWLIGHT_UNIXNAME} owns everything.
+        chown -R ${TWLIGHT_UNIXNAME}:${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}
     else
         exit 1
     fi
