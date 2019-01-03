@@ -6,6 +6,10 @@ then
     source /etc/environment
 fi
 
-source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
-
-python manage.py send_coordinator_reminders --app_status PENDING
+# Load virtual environment
+if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
+then
+    python manage.py send_coordinator_reminders --app_status PENDING
+else
+    exit 1
+fi

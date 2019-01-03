@@ -6,7 +6,11 @@ then
     source /etc/environment
 fi
 
-source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
-
-echo "test --noinput"
-DJANGO_SETTINGS_MODULE=TWLight.settings.local python manage.py test --noinput
+# Load virtual environment
+if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
+then
+    echo "test --noinput"
+    DJANGO_SETTINGS_MODULE=TWLight.settings.local python manage.py test --noinput
+else
+    exit 1
+fi
