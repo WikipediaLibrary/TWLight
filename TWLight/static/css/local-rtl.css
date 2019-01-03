@@ -273,7 +273,6 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
 /* Quick hack for tos misalignment on applications. */
 .apply-tos {
   margin-left: 100%;
-  margin-right: -50%;
 }
 
 .panel-footer {
@@ -342,7 +341,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   background-repeat: no-repeat;
   background-position: top right; /* Must set explicitly for CSS Janus. */
   min-height: 2em;
-  padding: 6px 0px 0px 25px;
+  padding: 6px 25px 0px 0px;
 }
 
 .resource-label-subject a:focus, .resource-label-subject a:hover, .resource-label-languages a:focus, .resource-label-languages a:hover {
