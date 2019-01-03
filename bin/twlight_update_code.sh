@@ -23,7 +23,7 @@ update() {
     # If that succeeds, run the test suite
     # If that succeeds, restart Green Unicorn
 
-    if bash -c "${venv_update_cmd}"; then
+    if sudo bash -c "${venv_update_cmd}"; then
         if sudo su ${TWLIGHT_UNIXNAME} bash -c "${venv_test_cmd}"; then
             systemctl restart gunicorn || exit 1
         else
