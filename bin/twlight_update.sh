@@ -33,14 +33,14 @@ fi
     fi
 
     # Update pip dependencies.
-    sudo su ${TWLIGHT_UNIXNAME} bash ${TWLIGHT_HOME}/bin/virtualenv_pip_update.sh
+    sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_pip_update.sh
 
     # Process static assets.
-    sudo su ${TWLIGHT_UNIXNAME} bash ${TWLIGHT_HOME}/bin/virtualenv_clearstatic.sh
+    sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_clearstatic.sh
 
     # Run migrations.
-    sudo su ${TWLIGHT_UNIXNAME} bash ${TWLIGHT_HOME}/bin/virtualenv_migrate.sh
+    sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_migrate.sh
 
     # Compile translations.
-    sudo su ${TWLIGHT_UNIXNAME} bash ${TWLIGHT_HOME}/bin/virtualenv_translate.sh
+    sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_translate.sh
 } 2>&1 | tee -a ${TWLIGHT_HOME}/TWLight/logs/update.log
