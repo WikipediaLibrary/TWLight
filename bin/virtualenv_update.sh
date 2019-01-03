@@ -11,10 +11,10 @@ fi
 if groups | grep &>/dev/null "\b${TWLIGHT_UNIXNAME}\b"
 then
     # Verify that the unix user can talk to the remote.
+    cd ${TWLIGHT_HOME}
     if git fetch --dry-run
     then
         # Fetch latest code from ${TWLIGHT_GIT_REVISION}.
-        cd ${TWLIGHT_HOME}
         git checkout .
         git pull origin ${TWLIGHT_GIT_REVISION}
     else
