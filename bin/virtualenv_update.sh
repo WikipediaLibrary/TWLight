@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Runs a pip update, and Django collecstatic, migration, and translation scripts.
 
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]

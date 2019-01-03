@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Activates the Django virtual environment
 
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]

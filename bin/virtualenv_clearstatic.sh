@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Runs the Django collectstatic process (https://docs.djangoproject.com/en/1.11/ref/contrib/staticfiles/)
 
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# If we have new string translations, runs Django translation processes
 
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
