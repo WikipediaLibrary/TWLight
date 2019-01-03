@@ -13,8 +13,8 @@ fi
 
 cd ${TWLIGHT_HOME}
 update() {
-    venv_update_cmd="${TWLIGHT_HOME}/bin/./virtualenv_update.sh >>${TWLIGHT_HOME}/TWLight/logs/update.log 2>&1"
-    venv_test_cmd="${TWLIGHT_HOME}/bin/./virtualenv_test.sh >>${TWLIGHT_HOME}/TWLight/logs/test.log 2>&1"
+    venv_update_cmd="${TWLIGHT_HOME}/bin/./twlight_update.sh"
+    venv_test_cmd="${TWLIGHT_HOME}/bin/./virtualenv_test.sh"
 
     # Make sure ${TWLIGHT_UNIXNAME} owns the .git tree
     chown -R ${TWLIGHT_UNIXNAME}:${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/.git
@@ -23,7 +23,7 @@ update() {
     # If that succeeds, run the test suite
     # If that succeeds, restart Green Unicorn
 
-    if sudo su ${TWLIGHT_UNIXNAME} bash -c "${venv_update_cmd}"; then
+    if bash -c "${venv_update_cmd}"; then
         if sudo su ${TWLIGHT_UNIXNAME} bash -c "${venv_test_cmd}"; then
             systemctl restart gunicorn || exit 1
         else
