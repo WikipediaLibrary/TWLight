@@ -92,12 +92,17 @@ fi
         sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_test.sh
     }
 
+    # Verify that we can pull.
     if git_check
     then
-       git_pull
-       virtualenv_update
+        # Pull.
+        git_pull
+        # Update virtual environment and run django managment commands.
+        virtualenv_update
+        # Restart services to pick up changes.
+        systemctl restart gunicorn
     else
         exit 1
     fi
 
-} 2>&1 | tee -a ${TWLIGHT_HOME}/TWLight/logs/update.log
+} 2>&1 | tee -a ${TWLIGHT_HOME}/TWLight/logs/deploy.log
