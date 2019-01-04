@@ -6,8 +6,9 @@ then
     source /etc/environment
 fi
 
-update_cmd="${TWLIGHT_HOME}/bin/./twlight_update_code.sh"
-failure_cmd="${TWLIGHT_HOME}/bin/./twlight_failure.sh"
+update="${TWLIGHT_HOME}/bin/./twlight_update_code.sh"
 
-# Apply the latest code from ${TWLIGHT_GIT_REVISION}
-${update_cmd} || ${failure_cmd} ${update_cmd}
+if failure=$( ! ${update} ) && [ -n "${TWLIGHT_ERROR_MAILTO+isset}" ]
+then
+    echo ${failure} | mail -s "${update} failed for $(hostname -f)" ${TWLIGHT_ERROR_MAILTO}
+fi
