@@ -108,4 +108,4 @@ fi
         exit 1
     fi
 
-} 2>&1 | tee -a ${TWLIGHT_HOME}/TWLight/logs/deploy.log
+} 2>&1 | tee -a ${TWLIGHT_HOME}/TWLight/logs/update.log
