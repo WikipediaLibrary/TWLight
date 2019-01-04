@@ -31,31 +31,32 @@ fi
         if git fetch --dry-run
         then
 
-        # Check the remote status.
-        git fetch
+            # Check the remote status.
+            git fetch
 
-        # Only do stuff if we're behind the remote. Cribbed from stackoverflow:
-        # https://stackoverflow.com/a/3278427
-        upstream=${1:-'@{u}'}
-        local=$(git rev-parse @)
-        remote=$(git rev-parse "$upstream")
-        base=$(git merge-base @ "$upstream")
+            # Only do stuff if we're behind the remote. Cribbed from stackoverflow:
+            # https://stackoverflow.com/a/3278427
+            upstream=${1:-'@{u}'}
+            local=$(git rev-parse @)
+            remote=$(git rev-parse "$upstream")
+            base=$(git merge-base @ "$upstream")
 
-        if [ "${local}" = "${remote}" ]
-        then
-            echo "Up-to-date"
-            exit 0
-        elif [ "${local}" = "${base}" ]
-        then
-            echo "Need to pull"
-            return 0
-        elif [ "${remote}" = "${base}" ]
-        then
-            echo "Need to push"
-            return 1
-        else
-            echo "Diverged"
-            return 1
+            if [ "${local}" = "${remote}" ]
+            then
+                echo "Up-to-date"
+                exit 0
+            elif [ "${local}" = "${base}" ]
+            then
+                echo "Need to pull"
+                return 0
+            elif [ "${remote}" = "${base}" ]
+            then
+                echo "Need to push"
+                return 1
+            else
+                echo "Diverged"
+                return 1
+            fi
         fi
     }
 
