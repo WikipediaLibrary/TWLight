@@ -60,7 +60,14 @@ fi
     }
 
     git_pull() {
-        # Fetch latest code from ${TWLIGHT_GIT_REVISION}.
+
+        # Backup production before making changes.
+        if [ "${TWLIGHT_ENV}" = "production" ]
+        then
+            ${TWLIGHT_HOME}/bin/./twlight_backup.sh
+        fi
+
+        # Pull latest code from ${TWLIGHT_GIT_REVISION}.
         cd ${TWLIGHT_HOME}
         git pull ${TWLIGHT_GIT_REVISION}
 
