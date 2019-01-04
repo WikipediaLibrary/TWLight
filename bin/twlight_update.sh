@@ -87,6 +87,9 @@ fi
 
         # Compile translations.
         sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_translate.sh
+
+        # Run test suite.
+        sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_test.sh
     }
 
     if git_check
