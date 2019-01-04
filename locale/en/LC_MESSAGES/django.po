@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2018-12-27 10:11+0000\n"
+"POT-Creation-Date: 2019-01-04 19:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,39 +187,44 @@ msgid "Email"
 msgstr ""
 
 #. Translators: This is the status of an application that has not yet been reviewed.
-#: TWLight/applications/models.py:36
+#: TWLight/applications/models.py:44
 msgid "Pending"
 msgstr ""
 
 #. Translators: This is the status of an application that reviewers have asked questions about.
-#: TWLight/applications/models.py:38
+#: TWLight/applications/models.py:46
 msgid "Under discussion"
 msgstr ""
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #. Translators: This describes the status of a group of applications.
-#: TWLight/applications/models.py:40
+#: TWLight/applications/models.py:48
 #: TWLight/applications/templates/applications/application_list.html:29
 msgid "Approved"
 msgstr ""
 
 #. Translators: This is the status of an application which has been declined by a reviewer.
-#: TWLight/applications/models.py:42
+#: TWLight/applications/models.py:50
 msgid "Not approved"
 msgstr ""
 
 #. Translators: This is the status of an application that has been sent to a partner.
-#: TWLight/applications/models.py:44
+#: TWLight/applications/models.py:52
 msgid "Sent to partner"
 msgstr ""
 
+#. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
+#: TWLight/applications/models.py:54
+msgid "Invalid"
+msgstr ""
+
 #. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
-#: TWLight/applications/models.py:60 TWLight/applications/models.py:71
+#: TWLight/applications/models.py:70 TWLight/applications/models.py:81
 msgid "Please do not override this field! Its value is set automatically."
 msgstr ""
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
-#: TWLight/applications/models.py:76
+#: TWLight/applications/models.py:86
 msgid "The user who sent this application to the partner"
 msgstr ""
 
@@ -705,26 +710,26 @@ msgid "Set application status"
 msgstr ""
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:817
+#: TWLight/applications/views.py:818
 msgid "Please select at least one application."
 msgstr ""
 
-#: TWLight/applications/views.py:837
+#: TWLight/applications/views.py:838
 msgid "Batch update successful."
 msgstr ""
 
-#: TWLight/applications/views.py:957
+#: TWLight/applications/views.py:958
 msgid "All selected applications have been marked as sent."
 msgstr ""
 
-#: TWLight/applications/views.py:1006
+#: TWLight/applications/views.py:1007
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr ""
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1012
+#: TWLight/applications/views.py:1013
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
