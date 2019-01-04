@@ -8,7 +8,7 @@ fi
 
 if [ "${USER}" != "${TWLIGHT_UNIXNAME}" ]
 then
-    echo "virtualenv must be run as ${TWLIGHT_UNIXNAME}!"
+    echo "virtualenv must be run as ${TWLIGHT_UNIXNAME}; was run as ${USER}!"
     return 1
 fi
 

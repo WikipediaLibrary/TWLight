@@ -15,7 +15,7 @@ fi
     # Must run as root.
     if [ "${USER}" != "root" ]
     then
-        echo "twlight_update_code.sh must be run as root!"
+        echo "twlight_update_code.sh must be run as root; was run as ${USER}!"
         exit 1
     fi
 
