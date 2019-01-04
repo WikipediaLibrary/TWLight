@@ -13,9 +13,11 @@ fi
     echo [$(date)]
 
     # Must run as root.
-    if [ "${USER}" != "root" ]
+    # $USER env may not be set if run from puppet, so we check with whoami.
+    user=$(whoami)
+    if [ "${user}" != "root" ]
     then
-        echo "twlight_update_code.sh must be run as root; was run as ${USER}!"
+        echo "twlight_update_code.sh must be run as root; was run as ${user}!"
         exit 1
     fi
 
