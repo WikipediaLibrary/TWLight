@@ -73,9 +73,14 @@ class Command(BaseCommand):
             # For closed applications, assign date_closed and date_open
             if app.status in Application.FINAL_STATUS_LIST:
                 if not imported:
+                    potential_end_date = app.date_created + relativedelta(years=1)
+                    if potential_end_date > datetime.datetime.now():
+                        end_date = "now"
+                    else:
+                        end_date = potential_end_date
                     app.date_closed = fake.date_time_between(
                         start_date = app.date_created,
-                        end_date = app.date_created + relativedelta(years=1),
+                        end_date = end_date,
                         tzinfo=None)
                     app.days_open = (app.date_closed - app.date_created).days
 
