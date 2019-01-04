@@ -16,6 +16,10 @@ from django.utils.translation import ugettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Editor
 
+class ValidApplicationsManager(models.Manager):
+    def get_queryset(self):
+        return super(ValidApplicationsManager, self).get_queryset(
+            ).exclude(status=Application.INVALID)
 
 class Application(models.Model):
     class Meta:
@@ -24,12 +28,16 @@ class Application(models.Model):
         verbose_name_plural = 'applications'
         ordering = ['-date_created', 'editor', 'partner']
 
+    # Managers defined here
+    include_invalid = models.Manager()
+    objects = ValidApplicationsManager()
 
     PENDING = 0
     QUESTION = 1
     APPROVED = 2
     NOT_APPROVED = 3
     SENT = 4
+    INVALID = 5
 
     STATUS_CHOICES = (
         # Translators: This is the status of an application that has not yet been reviewed.
@@ -42,11 +50,13 @@ class Application(models.Model):
         (NOT_APPROVED, _('Not approved')),
         # Translators: This is the status of an application that has been sent to a partner.
         (SENT, _('Sent to partner')),
+        # Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
+        (INVALID, _('Invalid')),
     )
 
     # This list should contain all statuses that are the end state of an
     # Application - statuses which are not expected to be further modified.
-    FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED, SENT]
+    FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED, SENT, INVALID]
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
     # Moved from auto_now_add=True so that we can set the date for import.
@@ -155,6 +165,7 @@ class Application(models.Model):
 
     LABELMAKER = {
         PENDING: '-primary',
+        INVALID: '-danger',
         QUESTION: '-warning',
         APPROVED: '-success',
         NOT_APPROVED: '-danger',
@@ -232,7 +243,7 @@ class Application(models.Model):
         if self.status in [self.PENDING, self.QUESTION]:
             return (date.today() - self.date_created).days
         else:
-            assert self.status in [self.APPROVED, self.NOT_APPROVED, self.SENT]
+            assert self.status in [self.APPROVED, self.NOT_APPROVED, self.SENT, self.INVALID]
             return (self.date_closed - self.date_created).days
 
 
