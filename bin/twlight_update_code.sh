@@ -17,9 +17,6 @@ fi
 
 venv_test_cmd="${TWLIGHT_HOME}/bin/./virtualenv_test.sh"
 
-# Make sure ${TWLIGHT_UNIXNAME} owns the .git tree
-chown -R ${TWLIGHT_UNIXNAME}:${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/.git
-
 # Pull latest git, apply changes to Django
 # If that succeeds, run the test suite
 # If that succeeds, restart Green Unicorn
