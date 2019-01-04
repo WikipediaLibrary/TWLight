@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Generates example data for local development of TWLight. Log in to an account you want to be a superuser first.
 
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
