@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
+# Activates the Django virtual environment
+
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
 then
     source /etc/environment
 fi
 
+# Virtualenv scripts need to be run as www
 if [ "${USER}" != "${TWLIGHT_UNIXNAME}" ]
 then
-    echo "virtualenv must be run as ${TWLIGHT_UNIXNAME}; was run as ${USER}!"
+    echo "virtualenv must be run as ${TWLIGHT_UNIXNAME}, but was run as ${USER}: Try \"sudo su ${TWLIGHT_UNIXNAME}\""
     return 1
 fi
 

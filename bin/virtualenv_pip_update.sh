@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Update Python packages via pip
 
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
