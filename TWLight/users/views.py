@@ -97,7 +97,9 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         editor = self.get_object()
         context['editor'] = editor # allow for more semantic templates
-        context['object_list'] = editor.applications.model.include_invalid.all().order_by('status', '-date_closed')
+        # Hotfix a production break.
+        # context['object_list'] = editor.applications.model.include_invalid.all().order_by('status', '-date_closed')
+        context['object_list'] = editor.applications.all().order_by('status', '-date_closed')
         context['form'] = EditorUpdateForm(instance=editor)
         context['language_form'] = SetLanguageForm(user=self.request.user)
 
