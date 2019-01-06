@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-04 19:53+0000\n"
+"POT-Creation-Date: 2019-01-06 02:08+0000\n"
 "PO-Revision-Date: 2018-12-31 17:10:46+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1677,7 +1677,7 @@ msgstr ""
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
-#: TWLight/users/views.py:364
+#: TWLight/users/views.py:366
 msgid "Confirm"
 msgstr "Bekræft"
 
@@ -2485,7 +2485,7 @@ msgstr "Bidrag"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/editor_detail_data.html:42
-#: TWLight/users/views.py:258
+#: TWLight/users/views.py:260
 msgid "Update"
 msgstr "Opdater"
 
@@ -2930,7 +2930,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:108
+#: TWLight/users/views.py:110
 #, python-brace-format
 msgid ""
 "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help "
@@ -2940,24 +2940,24 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:241 TWLight/users/views.py:306
-#: TWLight/users/views.py:350
+#: TWLight/users/views.py:243 TWLight/users/views.py:308
+#: TWLight/users/views.py:352
 msgid "You must be logged in to do that."
 msgstr "Det skal du være logget ind for at gøre."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:270
+#: TWLight/users/views.py:272
 msgid "Your information has been updated."
 msgstr "Din information er blevet opdateret."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:316
+#: TWLight/users/views.py:318
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Din email adresse er blevet ændret til {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:322
+#: TWLight/users/views.py:324
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -2967,14 +2967,14 @@ msgstr ""
 "ressourcer uden en e-mailadresse."
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:506
+#: TWLight/users/views.py:508
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:511
+#: TWLight/users/views.py:513
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
