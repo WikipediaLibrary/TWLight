@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-07 09:32+0000\n"
+"POT-Creation-Date: 2019-01-07 13:37+0000\n"
 "PO-Revision-Date: 2019-01-07 09:25:29+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -1892,7 +1892,7 @@ msgstr "Etes vous sûr de vouloir supprimer <b>%(object)s</b>?"
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
-#: TWLight/users/views.py:366
+#: TWLight/users/views.py:364
 msgid "Confirm"
 msgstr "Confirmer"
 
@@ -2819,7 +2819,7 @@ msgstr "Contributions"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/editor_detail_data.html:42
-#: TWLight/users/views.py:260
+#: TWLight/users/views.py:258
 msgid "Update"
 msgstr "Actualiser"
 
@@ -3444,7 +3444,7 @@ msgstr ""
 "pour demander de l'aide."
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:110
+#: TWLight/users/views.py:108
 #, python-brace-format
 msgid ""
 "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help "
@@ -3456,24 +3456,24 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:243 TWLight/users/views.py:308
-#: TWLight/users/views.py:352
+#: TWLight/users/views.py:241 TWLight/users/views.py:306
+#: TWLight/users/views.py:350
 msgid "You must be logged in to do that."
 msgstr "Vous devez être connecté pour faire cela"
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:272
+#: TWLight/users/views.py:270
 msgid "Your information has been updated."
 msgstr "Vos informations ont été mises à jour."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:318
+#: TWLight/users/views.py:316
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Votre courriel a été changé en {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:324
+#: TWLight/users/views.py:322
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -3483,7 +3483,7 @@ msgstr ""
 "sans adresse courriel."
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:508
+#: TWLight/users/views.py:506
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
@@ -3493,7 +3493,7 @@ msgstr ""
 "avec les conditions d'utilisation."
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:513
+#: TWLight/users/views.py:511
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
