@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-12-03 06:56:56+0000\n"
-"X-POT-Import-Date: 2018-11-30 11:29:25+0000\n"
+"PO-Revision-Date: 2019-01-07 09:25:29+0000\n"
+"X-POT-Import-Date: 2019-01-04 21:30:33+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: mnw\n"
@@ -180,39 +180,44 @@ msgid "Email"
 msgstr "အဳမေလ်"
 
 #. Translators: This is the status of an application that has not yet been reviewed.
-#: TWLight/applications/models.py:36
+#: TWLight/applications/models.py:44
 msgid "Pending"
 msgstr "စၚ်လဝ်"
 
 #. Translators: This is the status of an application that reviewers have asked questions about.
-#: TWLight/applications/models.py:38
+#: TWLight/applications/models.py:46
 msgid "Under discussion"
 msgstr "သၟဝ် မသဳကၠဳ"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #. Translators: This describes the status of a group of applications.
-#: TWLight/applications/models.py:40
+#: TWLight/applications/models.py:48
 #: TWLight/applications/templates/applications/application_list.html:29
 msgid "Approved"
 msgstr "သ္ပကဵုဒတန်"
 
 #. Translators: This is the status of an application which has been declined by a reviewer.
-#: TWLight/applications/models.py:42
+#: TWLight/applications/models.py:50
 msgid "Not approved"
 msgstr "ဟွံ သ္ပဒတန်လဝ်"
 
 #. Translators: This is the status of an application that has been sent to a partner.
-#: TWLight/applications/models.py:44
+#: TWLight/applications/models.py:52
 msgid "Sent to partner"
 msgstr "ပြၚ်ဗစိုပ် သ္ကအ်"
 
+#. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
+#: TWLight/applications/models.py:54
+msgid "Invalid"
+msgstr ""
+
 #. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
-#: TWLight/applications/models.py:60 TWLight/applications/models.py:71
+#: TWLight/applications/models.py:70 TWLight/applications/models.py:81
 msgid "Please do not override this field! Its value is set automatically."
 msgstr "ပဂုန်တုဲ လ္ပသရုင်ထောအ် ဒၞာဲဏအ်ညိ! ၚုဟ်မးဍေဟ်ဂှ် လုပ်အာ အလဵုအလဵုရောၚ်၊၊"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
-#: TWLight/applications/models.py:76
+#: TWLight/applications/models.py:86
 msgid "The user who sent this application to the partner"
 msgstr "မၞိဟ်လွပ် ညးမပြင် လိက်ဂရၚ်ပတီ ဇရေင်သကအ်"
 
@@ -674,24 +679,24 @@ msgid "Set application status"
 msgstr "ဖျေအ်ဒၞဲါကဆံၚ်မဂရၚ်အာတ်မိက်ဂမၠိုၚ်"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:817
+#: TWLight/applications/views.py:818
 msgid "Please select at least one application."
 msgstr "သ္ပဂုဏ်တုဲ အောန်အိုတ်ဒးရုဲကေတ် ပွမဂရၚ်အာတ်မိက်မွဲ."
 
-#: TWLight/applications/views.py:837
+#: TWLight/applications/views.py:838
 msgid "Batch update successful."
 msgstr ""
 
-#: TWLight/applications/views.py:957
+#: TWLight/applications/views.py:958
 msgid "All selected applications have been marked as sent."
 msgstr ""
 
-#: TWLight/applications/views.py:1006
+#: TWLight/applications/views.py:1007
 msgid "This object cannot be renewed. (This probably means that you have already requested that it be renewed.)"
 msgstr ""
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1012
+#: TWLight/applications/views.py:1013
 msgid "Your renewal request has been received. A coordinator will review your request."
 msgstr ""
 
@@ -1498,7 +1503,7 @@ msgstr ""
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
-#: TWLight/users/views.py:364
+#: TWLight/users/views.py:366
 msgid "Confirm"
 msgstr "သ္ပဒတန်"
 
@@ -2194,7 +2199,7 @@ msgstr "ညးမရီုဗင်ဂမၠိုင်"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/editor_detail_data.html:42
-#: TWLight/users/views.py:258
+#: TWLight/users/views.py:260
 msgid "Update"
 msgstr "ပခိုဟ်လဟဵု"
 
@@ -2473,7 +2478,7 @@ msgid "If you aren't a site administrator, something weird has happened. You won
 msgstr ""
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:108
+#: TWLight/users/views.py:110
 #, python-brace-format
 msgid "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help coordinators evaluate your applications."
 msgstr ""
@@ -2481,34 +2486,34 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:241 TWLight/users/views.py:306
-#: TWLight/users/views.py:350
+#: TWLight/users/views.py:243 TWLight/users/views.py:308
+#: TWLight/users/views.py:352
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:270
+#: TWLight/users/views.py:272
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:316
+#: TWLight/users/views.py:318
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:322
+#: TWLight/users/views.py:324
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:506
+#: TWLight/users/views.py:508
 msgid "You may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:511
+#: TWLight/users/views.py:513
 msgid "You may explore the site, but you will not be able to apply for access unless you agree with the terms of use."
 msgstr ""
 
