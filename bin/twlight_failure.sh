@@ -13,4 +13,4 @@ then
 fi
 
 # Report failed command via email.
-echo "$failed_cmd failed. Please check the logs." | mail -s "task failed for $(hostname -f)" ${TWLIGHT_ERROR_MAILTO}
+echo "$failed_cmd failed. Please check the logs." | mail -a "From: Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>" -s "task failed for $(hostname -f)" ${TWLIGHT_ERROR_MAILTO}
