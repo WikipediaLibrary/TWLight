@@ -30,7 +30,7 @@ install:
 # Initalize the app and test it.
 script:
   - .travis/./init.sh
-  - coverage run manage.py test
+  - coverage run --source TWLight manage.py test
 
 # Report on test coverage and push to production if the conditions are met.
 after_success:
