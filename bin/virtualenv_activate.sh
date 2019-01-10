@@ -11,7 +11,7 @@ fi
 # Virtualenv scripts need to be run as www
 if [ "${USER}" != "${TWLIGHT_UNIXNAME}" ]
 then
-    echo "virtualenv must be run as ${TWLIGHT_UNIXNAME}! Try \"sudo su ${TWLIGHT_UNIXNAME}\""
+    echo "virtualenv must be run as ${TWLIGHT_UNIXNAME}, but was run as ${USER}: Try \"sudo su ${TWLIGHT_UNIXNAME}\""
     return 1
 fi
 

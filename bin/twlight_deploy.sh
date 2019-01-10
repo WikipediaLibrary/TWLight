@@ -6,12 +6,9 @@ then
     source /etc/environment
 fi
 
-backup_cmd="${TWLIGHT_HOME}/bin/./twlight_backup.sh"
-update_cmd="${TWLIGHT_HOME}/bin/./twlight_update_code.sh"
-failure_cmd="${TWLIGHT_HOME}/bin/./twlight_failure.sh"
+update="${TWLIGHT_HOME}/bin/./twlight_update_code.sh"
 
-# Backup database and media files. Leave the rest to version control
-${backup_cmd} || ${failure_cmd} ${backup_cmd}
-
-# Apply the latest code from ${TWLIGHT_GIT_REVISION}
-${update_cmd} || ${failure_cmd} ${update_cmd}
+if failure=$( ! ${update} ) && [ -n "${TWLIGHT_ERROR_MAILTO+isset}" ]
+then
+    echo ${failure} | mail -a "From: Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>" -s "${update} failed for $(hostname -f)" ${TWLIGHT_ERROR_MAILTO}
+fi

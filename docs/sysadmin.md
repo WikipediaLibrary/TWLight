@@ -34,7 +34,7 @@ Once the script has finished running you should now be able to access the tool a
 
 Code deployment works on a mostly automated basis. New commits in the repository master branch are run through Travis CI (scripts [here](https://github.com/WikipediaLibrary/TWLight/tree/master/.travis)) to run tests and check that it builds successfully. Travis will also check for any necessary migrations and translation updates and commit these back to the master branch if necessary (see, for example, [this commit](https://github.com/WikipediaLibrary/TWLight/commit/cac6b36b6f94c4a186360409fb7fa829650f541a)).
 
-Once Travis is happy with the build, the code is pushed to the [production](https://github.com/WikipediaLibrary/TWLight/tree/production) branch. The production server then checks for new code hourly and deploys it via [this script](https://github.com/WikipediaLibrary/TWLight/blob/production/bin/twlight_update.sh).
+Once Travis is happy with the build, the code is pushed to the [production](https://github.com/WikipediaLibrary/TWLight/tree/production) branch. The production server then checks for new code hourly and deploys it via [this script](https://github.com/WikipediaLibrary/TWLight/blob/production/bin/twlight_update_code.sh).
 
 ## Background info & troubleshooting
 
