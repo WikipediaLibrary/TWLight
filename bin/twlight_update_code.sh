@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+# Use a lockfile to prevent overruns.
+self=$(basename ${0})
+exec {lockfile}>/var/lock/${self}
+flock -n ${lockfile}
+
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
 then

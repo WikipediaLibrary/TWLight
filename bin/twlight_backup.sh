@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
+# Use a lockfile to prevent overruns.
+self=$(basename ${0})
+exec {lockfile}>/var/lock/${self}
+flock -n ${lockfile}
+
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
 then
@@ -11,14 +18,15 @@ PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 date=$(date +'%d.%H')
 
 ## Dump DB
-source ${TWLIGHT_HOME}/bin/twlight_mysqldump.sh || exit 1
+
+source ${TWLIGHT_HOME}/bin/twlight_mysqldump.sh
 
 echo "Backing up database and media"
 
 ## Perform backup
-tar -czf "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" -C "${TWLIGHT_MYSQLDUMP_DIR}" "./twlight.sql" -C "${TWLIGHT_HOME}" "./media" || exit 1
+tar -czf "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" -C "${TWLIGHT_MYSQLDUMP_DIR}" "./twlight.sql" -C "${TWLIGHT_HOME}" "./media"
 
 ## Root only
-chmod 0600 "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" || exit 1
+chmod 0600 "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz"
 
 echo "Finished TWLight backup."
