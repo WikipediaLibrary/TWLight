@@ -48,7 +48,11 @@ fi
             remote=$(git rev-parse "$upstream")
             base=$(git merge-base @ "$upstream")
 
-            if [ "${local}" = "${remote}" ]
+            if [ "${init}" = "true" ]
+            then
+                echo "Forced to pull"
+                return 0
+            elif [ "${local}" = "${remote}" ]
             then
                 echo "Up-to-date"
                 exit 0
@@ -77,7 +81,7 @@ fi
 
         # Pull latest code from ${TWLIGHT_GIT_REVISION}.
         cd ${TWLIGHT_HOME}
-        git pull ${TWLIGHT_GIT_REVISION}
+        git pull
 
         # Make sure ${TWLIGHT_UNIXNAME} owns everything.
         chown -R ${TWLIGHT_UNIXNAME}:${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}
