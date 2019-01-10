@@ -28,6 +28,8 @@ from reversion.models import Version
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm
 from .models import Editor, UserProfile
 from TWLight.applications.models import Application
+from TWLight.users.models import Contact
+from TWLight.users.forms import ContactUsForm
 
 import datetime
 
@@ -521,3 +523,11 @@ class TermsView(UpdateView):
 
             messages.add_message(self.request, messages.WARNING, fail_msg)
             return reverse_lazy('users:home')
+
+
+
+class ContactUsView(FormView):
+    model=Contact
+    template_name = 'users/contact.html'
+    form_class = ContactUsForm
+    success_url = reverse_lazy('contact')
