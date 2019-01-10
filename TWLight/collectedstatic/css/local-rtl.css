@@ -1,0 +1,627 @@
+/*
+----------------------------------------------------------------------------
+BODY
+--------------------------------------------------------------------------*/
+body {
+  background-color: white;
+}
+
+/*
+----------------------------------------------------------------------------
+TYPOGRAPHY & IMAGES
+--------------------------------------------------------------------------*/
+h1, h2, h3 {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  margin-bottom: 20px;
+  min-height: 2em
+}
+
+h1, h2 {
+  font-weight: bold;
+}
+
+p {
+  margin-top: 7px;
+  font-size: 1em;
+}
+
+li {
+  margin-top: 2px;
+  font-size: 1em;
+}
+
+#comments blockquote {
+  font-size: inherit;
+}
+
+.text-justify-xs {
+    text-align: right
+}
+
+.glyphicon-grey {
+	color:#696969;
+}
+
+img.icons {
+   margin: -6px 0px 0px 6px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 767px) {
+  .text-justify-sm {
+      text-align: center;
+  }
+
+}
+
+@media (min-width: 768px) {
+  .text-justify-sm {
+      text-align: right;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (max-width: 991px) {
+  .text-justify-md {
+      text-align: center;
+  }
+}
+
+@media (min-width: 992px) {
+  .text-justify-md {
+      text-align: right;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (max-width: 1199px) {
+  .text-justify-lg {
+      text-align: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .text-justify-lg {
+      text-align: right;
+  }
+}
+
+/*
+----------------------------------------------------------------------------
+HEADER, FOOTER, NAVS
+--------------------------------------------------------------------------*/
+header {
+  margin-bottom: 28px;
+}
+
+.site-title {
+	font-family: Palatino; 
+	font-size:1.5em; 
+	font-weight:bold; 
+	margin: -10px 0px 10px 0px; 
+	color:#000000;
+}
+
+.logo {
+	height:70px; 
+	float:right; 
+	padding:5px 0px 5px 20px;
+}
+
+.login .btn {
+	padding:10px 12px;
+	font-size: 18px;
+	margin:10px;
+}
+
+@media (min-width: 992px) {
+  #main-content {
+    margin: auto 56px;
+  }
+
+  #top-nav, #footer {
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+}
+
+@media (max-width: 767px) {
+  #main-content {
+    margin: auto 14px;
+  }
+
+  #top-nav, #footer {
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #main-content {
+    margin: auto 28px;
+  }
+
+  #top-nav, #footer {
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+}
+
+#top-nav {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+#footer {
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.nav-greeting {
+  height: 40px;
+  line-height: 40px;
+  font-style: italic;
+}
+
+nav .divider {
+  border-right: 1px solid #ccc;
+}
+
+.navbar-left {
+	height:78px;
+	padding-top:5px; 
+}
+
+@media (max-width: 767px) {
+  nav .divider {
+    border-right: none;
+  }
+
+  li.mobile-menu {
+	font-size:.9em;	
+}
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+.site-title {
+	font-family: Palatino; 
+	font-size:.9em; 
+	font-weight:bold; 
+	margin: -10px 0px 10px 0px; 
+	color:#000000;
+}
+
+.logo {
+	height:50px; 
+	float:right; 
+	padding:0px 0px 0px 10px;
+}
+
+.login .btn {
+	padding:10px 12px;
+	font-size: 1em;
+	margin:10px;
+}
+}
+
+/*
+----------------------------------------------------------------------------
+TIMELINE
+--------------------------------------------------------------------------*/
+.half-timeline > li > .timeline-badge {
+  right: 0;
+}
+
+.half-timeline:before {
+  right: 0;
+}
+
+.half-timeline > li.timeline-inverted > .timeline-panel {
+  float: right;
+  margin-right: 50px;
+}
+
+.full-width {
+  display: block;
+  width: 100%;
+}
+
+/* removes li after 5th from homepage */
+ul.timeline li:nth-child(-n+5) {
+   display: list-item;
+}
+
+ul.timeline-home li {
+	display:none;
+}
+
+/*
+----------------------------------------------------------------------------
+MISC
+--------------------------------------------------------------------------*/
+
+div.panel-body form.form-inline label, div.panel-body form.form-inline select {
+  padding: .2em .7em;
+}
+
+div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
+  margin-right: .7em;
+}
+
+#resource-filter-panel-body {
+  border: none;
+  box-shadow: none;
+  margin-top: .7em;
+}
+
+.browse-suggest {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  justify-content: flex-end;
+}
+
+/* Quick hack for tos misalignment on applications. */
+.apply-tos {
+  margin-left: 100%;
+}
+
+.panel-footer {
+  background-color: white;
+}
+
+#id_honeypot {
+    display: none;
+}
+
+/* Bootstrap default labels are really hard to read. This makes them bigger
+   and opens up them up a bit, while still preventing them from overlapping
+   if there are multiple rows of labels.
+*/
+
+/*
+.label {
+  font-size: inherit;
+  letter-spacing: 0.35px;
+  padding: .2em .4em .3em;
+  font-weight: inherit;
+}
+*/
+
+.label {
+  font-size: 85%;
+  padding: .15em .6em;
+  letter-spacing: 0.25px;
+  font-weight: 500;
+  margin-top: 5px; 
+}
+
+.resource-label {
+  #margin: 0px 0px 0px -10px;
+  #color:#337ab7;
+  #padding: .2em .6em .3em;
+  padding: .2em .7em .2em 0;
+}
+
+.resource-label-subject {
+  background-image: url("../img/bullet-subject.png");
+  background-repeat: no-repeat;
+  background-position: top right; /* Must set explicitly for CSS Janus. */
+  min-height: 2em;
+  padding: 6px 25px 0px 0px;
+}
+
+.resource-label-languages {
+  background-image: url("../img/bullet-language.png");
+  background-repeat: no-repeat;
+  background-position: top right; /* Must set explicitly for CSS Janus. */
+  min-height: 2em;
+  padding: 6px 25px 0px 0px;
+}
+
+.resource-label-warning {
+  background-image: url("../img/bullet-warning.png");
+  background-repeat: no-repeat;
+  background-position: top right; /* Must set explicitly for CSS Janus. */
+  min-height: 2em;
+  padding: 6px 25px 0px 0px;
+}
+
+.resource-label-danger {
+  background-image: url("../img/bullet-danger.png");
+  background-repeat: no-repeat;
+  background-position: top right; /* Must set explicitly for CSS Janus. */
+  min-height: 2em;
+  padding: 6px 25px 0px 0px;
+}
+
+.resource-label-subject a:focus, .resource-label-subject a:hover, .resource-label-languages a:focus, .resource-label-languages a:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+.resource-label-warning .resource-label {
+  color: #8a6d3b;
+}
+
+.resource-label-danger .resource-label {
+  color: #ba5d5d;
+}
+
+.pipe {
+  margin: 0px 4px 0px -5px;
+}
+
+/* Without intervention, some tags will break out of their timeline containers.
+   These can get introduced via rendered wikicode, which has lots of &nbsp;
+*/
+
+.timeline-body * code, .panel-body .panel-partner-description, .panel-body * code {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-family: sans-serif;
+  font-size: 100%;
+  color: black;
+  background-color: white;
+}
+
+/* Partner language list should stand out a bit.
+*/
+
+.partner-languages {
+  font-style: italic;
+}
+
+/*
+wiki library team found big text annoying in partner details page.
+https://phabricator.wikimedia.org/T150006
+*/
+
+h4.timeline-title {
+  font-size: inherit;
+}
+
+/*
+A few spots just need padding instead of margin.
+*/
+
+.margin-bottom-2em {
+  margin-bottom: 2em;
+}
+
+.margin-top-5 {
+  margin-top: 5px;
+}
+
+.row-flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.col-flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/*
+  Override some of the panel border styling so our flex
+  elements look correct.
+*/
+
+.panel {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.panel-body {
+  border: solid #ddd;
+  border-width: 0 1px 1px 1px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-heading {
+  border: solid #ddd;
+  border-width: 1px 1px 0 1px;
+  background-color:red;
+  font-weight: 700;
+  }
+
+
+.banner-flag {
+  background-image: url("../img/banner.png"); 
+  background-repeat: no-repeat;
+  background-position: left top;  
+}
+
+.partner-logo {
+  padding: 0 10% 0 10%;
+  margin: 0 auto 2em auto;
+  max-height: 7em;
+  min-height: 3em;
+}
+
+.partner-logo-container {
+  height: 6em;
+}
+
+.resource-label-container {
+  height: 100%;
+}
+
+
+.panel-partner-info {
+
+}
+
+.lead {
+	text-align:center;
+	padding: 20px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:-1px 1px 2px #eaeaea;
+	font-size:1.4em;
+}
+
+.border {
+	padding: 10px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:-1px 1px 2px #eaeaea;
+	margin:20px 0px 0px 20px;
+	min-height:350px;
+}
+
+.read-more {
+	width:200px;
+	margin:auto;
+	text-align:center;
+}
+
+/* Custom page break for long titles */
+/*
+@media (max-width: 1127px) and (min-width: 992px) {
+  .panel-heading {
+    height: 90px !important;
+   }
+}
+
+@media (max-width: 814px) and (min-width: 767px) {
+   .panel-heading {
+    height: 100px; !important
+}
+}
+*/
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+.nav-greeting {
+	font-size:.9em; 
+}
+
+li.mobile-menu {
+	width:150px;
+	font-size:.9em;	
+}
+
+ .nav li a {
+	 padding: 5px;
+ }
+
+.navbar-left {
+	border-bottom:2px solid #ffffff;
+}
+
+.lead {
+	text-align:center;
+	padding: 20px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:-1px 1px 2px #eaeaea;
+	font-size:1em;
+}
+}
+
+/*
+----------------------------------------------------------------------------
+CLEARING COLUMNS
+--------------------------------------------------------------------------*/
+/* Clear ends of rows to preserve vertical spacing when for-looping through
+   lists of tiles.
+   See http://www.bluthemes.com/blog/3/clearing-bootstrap-3-columns.
+   SO MUCH EASIER than throwing a |divisibleby into the for loop to break
+   and restart the row-fluid div at the end of each row.
+   Probably doesn't work on versions of IE below 8.
+*/
+
+/*  Tablet  */
+
+@media (min-width:767px) {
+  /* Column clear fix */
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1),
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1){
+    clear: none;
+  }
+
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: right;
+  }
+}
+
+/*  Medium Desktop  */
+@media (min-width:992px) {
+  /* Column clear fix */
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1),
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
+
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1){
+    clear: right;
+  }
+}
+
+/*  Large Desktop  */
+@media (min-width:1200px) {
+  /* Column clear fix */
+
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1),
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
+
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1){
+    clear: right;
+  }
+}
