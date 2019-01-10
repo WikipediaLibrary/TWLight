@@ -16,14 +16,10 @@ docutils==0.14
 factory_boy>=2.10.0,<3.0
 futures==3.2.0
 mock==2.0.0
-mwoauth==0.3.2
-oauthlib==2.1.0
+git+https://github.com/WikipediaLibrary/python-mwoauth.git@update-dependencies
 pillow==5.4.1
 pypandoc==1.4
 python-dateutil==2.7.5
-PyJWT==1.7.1
 pytz==2018.9
-requests==2.21.0
-requests-oauthlib==1.0.0
 six==1.12.0
 wheel==0.32.3
