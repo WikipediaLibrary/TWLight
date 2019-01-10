@@ -117,3 +117,29 @@ class EmailChangeForm(forms.Form):
             # Translators: This labels a button which users click to change their email.
             Submit('submit', _('Update email'), css_class='btn btn-default col-md-offset-2')
         )
+
+
+class ContactUsForm(forms.Form):
+    email = forms.EmailField()
+    message = forms.CharField(widget = forms.Textarea, max_length = 1000,)
+    
+    def __init__(self, *args, **kwargs):
+        super(ContactUsForm, self).__init__(*args, **kwargs)
+        # Translators: This labels a textfield where users can enter the -----
+        self.fields['email'].label = _('Your email')
+        self.fields['message'].label = _('Message')
+
+        # @TODO: This sort of gets repeated in PartnerSuggestionView.
+        # We could probably be factored out to a common place for DRYness.
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-3'
+        self.helper.field_class = 'col-sm-7'
+        self.helper.layout = Layout(
+            'email',
+            'message',
+
+            # Translators: This labels a button which users click to submit their suggestion.
+            Submit('submit', _('Submit'), css_class='center-block'),
+        )
