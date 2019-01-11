@@ -8,6 +8,8 @@ from django.utils.translation import ugettext as _
 from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
 from TWLight.users.groups import get_coordinators
+from TWLight.users.models import Authorization
+
 from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, Video, AccessCode
 
 
@@ -102,8 +104,8 @@ admin.site.register(Video, VideoAdmin)
 
 
 class AccessCodeAdmin(admin.ModelAdmin):
-    search_fields = ('code', 'partner', 'application',)
-    list_display = ('code', 'partner', 'application',)
+    search_fields = ('code', 'partner', 'authorization',)
+    list_display = ('code', 'partner', 'authorization',)
 
     change_list_template = 'accesscode_changelist.html'
 

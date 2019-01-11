@@ -39,7 +39,8 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
-
+from TWLight.resources.models import Partner, Stream
+from TWLight.users.groups import get_coordinators
 
 logger = logging.getLogger(__name__)
 
@@ -375,3 +376,73 @@ class Editor(models.Model):
 
     def get_absolute_url(self):
         return reverse('users:editor_detail', kwargs={'pk': self.pk})
+
+class Authorization(models.Model):
+    """
+    Authorizations track editor access to partner resources. The approval or
+    sending of an application triggers the creation of an authorization for the
+    relevant editor to access the approved resource. Authorizations may be
+    created manually for testing.
+    """
+    class Meta:
+        app_label = 'users'
+        verbose_name = 'authorization'
+        verbose_name_plural = 'authorizations'
+        unique_together = ('authorized_user', 'partner', 'stream', 'date_authorized')
+
+    coordinators = get_coordinators()
+
+    # Users may have multiple authorizations.
+    authorized_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
+        on_delete=models.SET_NULL,
+        related_name="authorized_users",
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
+        help_text=_('The authorized user.'))
+
+    authorizer = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
+        on_delete=models.SET_NULL,
+        related_name="authorizers",
+        # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
+        limit_choices_to=(models.Q(is_superuser=True) | models.Q(groups__name='coordinators')),
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
+        help_text=_('The authorizing user.'))
+
+    date_authorized = models.DateField(auto_now_add=True)
+
+    date_expires = models.DateField(blank=True, null=True,
+        #Translators: This field records the date the authorization expires.
+        help_text=_("The date this authorization expires."))
+
+    partner = models.ForeignKey(Partner, blank=True, null=True,
+        on_delete=models.SET_NULL,
+        # Limit to available partners.
+        limit_choices_to=(models.Q(status=0)),
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
+        help_text=_('The partner for which the editor is authorized.'))
+
+    stream = models.ForeignKey(Stream, blank=True, null=True,
+        on_delete=models.SET_NULL,
+        # Limit to available partners.
+        limit_choices_to=(models.Q(partner__status=0)),
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
+        help_text=_('The stream for which the editor is authorized.'))
+
+    # Try to return a useful object name, if fields were set appropriately.
+    def __unicode__(self):
+        if self.stream:
+            stream_name = self.stream.name
+        else:
+            stream_name = None
+
+        if self.partner:
+            company_name = self.partner.company_name
+        else:
+            stream_name = None
+
+        return u'authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}'.format(
+            authorized_user=self.authorized_user.editor.wp_username,
+            authorizer=self.authorizer.editor.wp_username,
+            date_authorized=self.date_authorized,
+            company_name=company_name,
+            stream_name=stream_name,
+        )

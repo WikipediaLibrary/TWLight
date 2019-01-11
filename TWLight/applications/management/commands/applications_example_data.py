@@ -89,9 +89,9 @@ class Command(BaseCommand):
                 if random_partner.authorization_method == Partner.CODES:
                     this_partner_access_codes = AccessCode.objects.filter(
                         partner=random_partner,
-                        application__isnull=True)
+                        authorization__isnull=True)
                     app_code = random.choice(this_partner_access_codes)
-                    app_code.application = app
+                    #app_code.application = app
                     app_code.save()
             app.save()
 

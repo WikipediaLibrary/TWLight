@@ -23,6 +23,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import IntegerField, Case, When, Count, Q
+from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
@@ -757,7 +758,13 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     def form_valid(self, form):
         with reversion.create_revision():
             reversion.set_user(self.request.user)
-            return super(EvaluateApplicationView, self).form_valid(form)
+            try:
+                return super(EvaluateApplicationView, self).form_valid(form)
+            except IntegrityError:
+                messages.add_message (self.request, messages.WARNING,
+                # Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
+                _('You attempted to create a duplicate authorization.'))
+                raise PermissionDenied
 
 
     def get_context_data(self, **kwargs):
@@ -928,12 +935,12 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
         available_access_codes = AccessCode.objects.filter(
             partner=self.get_object(),
-            application__isnull=True)
+            authorization__isnull=True)
         context['available_access_codes'] = available_access_codes
 
         available_access_codes = AccessCode.objects.filter(
             partner=self.get_object(),
-            application__isnull=True)
+            authorization__isnull=True)
         context['available_access_codes'] = available_access_codes
 
         return context

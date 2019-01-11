@@ -3,18 +3,19 @@
 from datetime import date, datetime, timedelta
 from reversion import revisions as reversion
 from reversion.models import Version
+from reversion.signals import post_revision_commit
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.forms.models import model_to_dict
 from django.utils.timezone import localtime, now
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
-from TWLight.users.models import Editor
+from TWLight.users.models import Editor, Authorization
 
 
 class Application(models.Model):
@@ -244,6 +245,19 @@ class Application(models.Model):
 
 
     @property
+    def latest_reviewer(self):
+        revision = self.get_latest_revision()
+
+        if revision:
+            try:
+                return revision.user
+            except AttributeError:
+                return None
+        else:
+            return None
+
+
+    @property
     def is_renewable(self):
         """
         Apps are eligible for renewal if they are approved and have not already
@@ -293,3 +307,24 @@ def update_app_status_on_save(sender, instance, **kwargs):
 
             instance.date_closed = localtime(now()).date()
             instance.days_open = 0
+
+# Authorize editor to access resource after an application is saved as approved
+# or sent. We need to use post_revision_commit from django-reversion to get the
+# **current** revision user. Just listening to the post_save signal will grab
+# the user from the previously saved version.
+@receiver(post_save, sender=Application)
+def post_revision_commit(sender, instance, **kwargs):
+    if reversion.is_active() and (instance.status == 2 or instance.status == 4) and not instance.imported:
+
+        authorized_user = instance.user
+        authorizer = reversion.get_user()
+
+        authorization = Authorization()
+
+        if instance.specific_stream:
+            authorization.stream = instance.specific_stream
+
+        authorization.authorized_user = authorized_user
+        authorization.authorizer = authorizer
+        authorization.partner = instance.partner
+        authorization.save()
