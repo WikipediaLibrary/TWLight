@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform to Tamil (தமிழ்)
 # Exported from translatewiki.net
 #
+# Author: Fahimrazick
 # Author: Thamizhpparithi Maari
 # Author: UY Scuti
 msgid ""
@@ -8,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-01-08 15:16+0000\n"
-"PO-Revision-Date: 2019-01-10 08:02:50+0000\n"
+"PO-Revision-Date: 2019-01-14 08:48:12+0000\n"
 "Language: ta\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -211,7 +212,7 @@ msgstr "பங்குதாரருக்கு அனுப்பு"
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
 #: TWLight/applications/models.py:54
 msgid "Invalid"
-msgstr "செல்லாது"
+msgstr "செல்லுபடியாகாத"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
 #: TWLight/applications/models.py:70 TWLight/applications/models.py:81
@@ -461,7 +462,7 @@ msgstr "கடைசி பக்கம்"
 #: TWLight/applications/templates/applications/application_list_include.html:33
 #: TWLight/applications/templates/applications/application_list_user_include.html:22
 msgid "Imported application"
-msgstr "இறக்குமதி செய்யப்பெற்ற விண்ணப்பம்"
+msgstr "தரவிறக்கப்பட்ட விண்ணப்பம்"
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:37
@@ -484,7 +485,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:42
 #: TWLight/applications/templates/applications/application_list_user_include.html:37
 msgid "Not yet reviewed."
-msgstr "முகமையானப் பயன்பாடு"
+msgstr "இன்னமும் மீளாய்வு செய்யப்படவில்லை."
 
 #: TWLight/applications/templates/applications/application_list_include.html:64
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:74
@@ -496,7 +497,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
 #: TWLight/applications/templates/applications/send_partner.html:119
 msgid "Select/deselect all"
-msgstr "தெரிவு செய்/ எதையும் தெரிவு செய்யாதே"
+msgstr "யாவையும் தெரிவாக்கு/தெரிவகற்று"
 
 #. Translators: Denotes whether an application was a renewal request for a previous application.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:24
@@ -517,11 +518,11 @@ msgstr ""
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:44
 msgid "Has your account expired?"
-msgstr "தங்களின் கணக்கு தற்போது இல்லையா?"
+msgstr "உங்களது கணக்கு காலாவதியாகி விட்டதா?"
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:46
 msgid "Request renewal"
-msgstr "புதுப்பித்தலுக்கு வேண்டுகோள் விடுக்கவும்"
+msgstr "புதுப்பித்தலை வேண்டுக"
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:48
 msgid "Renewals are either not required, not available right now, or you have already requested a renewal."
@@ -535,7 +536,7 @@ msgstr ""
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:40
 msgid "(more info)"
-msgstr "(அதிக குறிப்புகள்)"
+msgstr "(அதிக தகவல்கள்)"
 
 #. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
 #. Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access
@@ -605,7 +606,7 @@ msgstr ""
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.
 #: TWLight/applications/templates/applications/send_partner.html:106
 msgid "Application data"
-msgstr "விண்ணப்பத்தரவு"
+msgstr "விண்ணப்பத் தரவு"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.
 #: TWLight/applications/templates/applications/send_partner.html:146
@@ -661,7 +662,7 @@ msgstr ""
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
 #: TWLight/applications/views.py:678
 msgid "Rejected applications"
-msgstr "மறுக்கப்பட்ட பயன்பாடுகள்"
+msgstr "மறுக்கப்பட்ட விண்ணப்பங்கள்"
 
 #. Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
 #: TWLight/applications/views.py:711
@@ -889,7 +890,7 @@ msgstr "மொழி"
 
 #: TWLight/graphs/views.py:396
 msgid "Number of users"
-msgstr "பயனர்களின் எண்ணிக்கை"
+msgstr "பயனர் எண்ணிக்கை"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:16
@@ -899,7 +900,7 @@ msgstr ""
 #: TWLight/resources/forms.py:17
 #: TWLight/resources/templates/resources/suggest.html:55
 msgid "Description"
-msgstr "விளங்கங்கள்"
+msgstr "விபரங்கள்"
 
 #: TWLight/resources/forms.py:18
 msgid "Website"
@@ -935,7 +936,7 @@ msgstr ""
 #. Translators: Title for a list of languages if there is more than one.
 #: TWLight/resources/models.py:83
 msgid "Languages"
-msgstr "மொழி"
+msgstr "மொழிகள்"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can enter the name of the partner. Don't translate McFarland.
 #: TWLight/resources/models.py:138
@@ -960,13 +961,13 @@ msgstr ""
 #. Translators: This is a status for a Partner, denoting that editors can apply for access.
 #: TWLight/resources/models.py:169
 msgid "Available"
-msgstr "கிடைக்கக்கூடிய"
+msgstr "கிடைக்கப் பெறுகிறது"
 
 #. Translators: This is a status for a Partner, denoting that editors cannot apply for access and the Partner will not be displayed to them.
 #: TWLight/resources/models.py:171
 #: TWLight/resources/templates/resources/partner_tile.html:35
 msgid "Not available"
-msgstr "இப்போது கிடைக்கவில்லை"
+msgstr "கிடைக்கப் பெறுவதில்லை"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
 #: TWLight/resources/models.py:179
@@ -1030,7 +1031,7 @@ msgstr ""
 
 #: TWLight/resources/models.py:245
 msgid "Old Tags"
-msgstr "பழைய பகுப்புகள்"
+msgstr "பழைய சிட்டைகள்"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
 #: TWLight/resources/models.py:256
@@ -1156,7 +1157,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:59
 #: TWLight/resources/templates/resources/partner_detail.html:123
 msgid "View application"
-msgstr "விண்ணப்பத்தினைக் காண்க"
+msgstr "விண்ணப்பத்தைக் காண்க"
 
 #. Translators: This text links to the minimum user requirements and terms of use on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:65
@@ -1186,7 +1187,7 @@ msgstr ""
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to.
 #: TWLight/resources/templates/resources/partner_detail.html:166
 msgid "Talk page"
-msgstr "உரையாடல் பக்கம்"
+msgstr "உரையாடற் பக்கம்"
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to.
 #: TWLight/resources/templates/resources/partner_detail.html:174
@@ -1215,17 +1216,17 @@ msgstr ""
 
 #: TWLight/resources/templates/resources/partner_detail.html:256
 msgid "Video"
-msgstr "காண்பொலி"
+msgstr "காணொளி"
 
 #. Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:271
 msgid "Language(s)"
-msgstr "மொழிகள்"
+msgstr "மொழி(கள்)"
 
 #. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:281
 msgid "Languages not available."
-msgstr "இல்லாத மொழிகள்"
+msgstr "கிடைக்கப் பெறாத மொழிகள்"
 
 #. Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field.
 #: TWLight/resources/templates/resources/partner_detail.html:294
@@ -1305,7 +1306,7 @@ msgstr ""
 #. Translators: If a partner has their location listed, this message is a label for that location
 #: TWLight/resources/templates/resources/partner_detail.html:453
 msgid "Location"
-msgstr "இருப்பிடம்"
+msgstr "அமைவிடம்"
 
 #. Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:457
@@ -1390,7 +1391,7 @@ msgstr ""
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
 #: TWLight/resources/templates/resources/partner_detail.html:596
 msgid "All applications"
-msgstr "அனைத்துப் பயன்பாடுகளும்"
+msgstr "விண்ணப்பங்கள் யாவும்"
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time.
 #: TWLight/resources/templates/resources/partner_detail.html:602
@@ -1430,7 +1431,7 @@ msgstr ""
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where more details can be found.
 #: TWLight/resources/templates/resources/partner_tile.html:84
 msgid "More info"
-msgstr "கூடுதல் குறிப்புகள்"
+msgstr "கூடுதலான குறிப்புகள்"
 
 #: TWLight/resources/templates/resources/partner_users.html:7
 #, python-format
@@ -1453,7 +1454,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_users.html:33
 #: TWLight/resources/templates/resources/partner_users.html:78
 msgid "Renewal?"
-msgstr "புதுப்பிப்பு?"
+msgstr "புதுப்பிக்கவா?"
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for.
 #: TWLight/resources/templates/resources/partner_users.html:36
@@ -1605,7 +1606,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:6
 msgid "About the Wikipedia Library"
-msgstr "விக்கிப்பீடியா நூலகம் குறித்து"
+msgstr "விக்கிப்பீடியா நூலகத்தைப் பற்றி"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:10
@@ -1741,7 +1742,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above an example Wikipedia citation.
 #: TWLight/templates/about.html:153
 msgid "Here is one citation example:"
-msgstr "இங்கே ஒரு சான்றளிப்பின் எடுத்துக்காட்டு:"
+msgstr "ஓர் உசாத்துணையின் எடுத்துக்காட்டு இதோ:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above contact information.
 #: TWLight/templates/about.html:175
@@ -1756,7 +1757,7 @@ msgstr "மின்னஞ்சல்:"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to a link to the Wikipedia Library discussion page on Wikipedia. Translate 'Talk' to whatever the discussion namespace is called for this language Wikipedia.
 #: TWLight/templates/about.html:186
 msgid "Talk page:"
-msgstr "உரையாடல் பக்கம்"
+msgstr "உரையாடல் பக்கம்:"
 
 #: TWLight/templates/base.html:14 TWLight/templates/base.html:65
 msgid "The Wikipedia Library Card Platform"
@@ -1905,7 +1906,7 @@ msgstr ""
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
 #: TWLight/templates/dashboard.html:140
 msgid "Applications"
-msgstr "பயன்பாடுகள்"
+msgstr "விண்ணப்பங்கள்"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time.
 #: TWLight/templates/dashboard.html:143
@@ -1940,7 +1941,7 @@ msgstr ""
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.
 #: TWLight/templates/dashboard.html:182
 msgid "Users"
-msgstr "பயனர்கள்"
+msgstr "பயனர்"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
 #: TWLight/templates/dashboard.html:186
@@ -2496,7 +2497,7 @@ msgstr ""
 #. Translators: Shown to the user when they successfully modify their personal information.
 #: TWLight/users/views.py:270
 msgid "Your information has been updated."
-msgstr "தங்களின் குறிப்புகள் புதுப்பிக்கப்பட்டுள்ளன."
+msgstr "உங்களது குறிப்புகள் புதுப்பிக்கப்பட்டுள்ளன."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
 #: TWLight/users/views.py:316
