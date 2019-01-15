@@ -24,6 +24,10 @@
     {% endfor %}
     {% comment %} Translators: Users click this button to set their interface language. {% endcomment %}
     <input type="submit" name="submit" value="{% trans "Set language" %}" class="btn btn-default" />
-  </form>
+  </form> <br />
+  {% comment %} Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page. {% endcomment %}
+  {% blocktrans trimmed%}
+    You can help translate the tool at <a href="https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform">TranslateWiki</a>.
+  {% endblocktrans %}
   <br />
 </div>
