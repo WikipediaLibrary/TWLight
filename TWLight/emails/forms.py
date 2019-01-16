@@ -1,10 +1,8 @@
+from django import forms
+from django.utils.translation import ugettext_lazy as _
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
-
-from django import forms
-from django.utils.translation import ugettext as _
-
-
 
 class ContactUsForm(forms.Form):
     email = forms.EmailField()
