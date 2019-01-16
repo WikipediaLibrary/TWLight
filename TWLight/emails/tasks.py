@@ -36,6 +36,7 @@ from django.shortcuts import get_object_or_404
 
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
+from TWLight.emails.signals import ContactUs
 from TWLight.resources.models import Partner
 from TWLight.users.groups import get_restricted
 
@@ -73,6 +74,10 @@ class RejectionNotification(template_mail.TemplateMail):
 
 class CoordinatorReminderNotification(template_mail.TemplateMail):
     name = 'coordinator_reminder_notification'
+
+
+class ContactUsEmail(template_mail.TemplateMail):
+    name = 'contact_us_email'
 
 
 @receiver(Reminder.coordinator_reminder)
@@ -336,3 +341,20 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
             for app in orig_partner.applications.filter(
                 status__in=[Application.PENDING, Application.QUESTION]):
                 send_waitlist_notification_email(app)
+
+
+@receiver(ContactUs.new_email)
+def contact_us_emails(sender, **kwargs):
+    user_email = kwargs['user_email']
+    editor_wp_username = kwargs['editor_wp_username']
+    body = kwargs['body']
+
+    logger.info(u'Received contact us form submit signal for {editor_wp_username}; '
+        'preparing to send email to wikipedialibrary@wikimedia.org.'.format(editor_wp_username=editor_wp_username))
+    email = ContactUsEmail()
+    logger.info('Email constructed.')
+    email.send('wikipedialibrary@wikimedia.org',
+        {'user_email': user_email,
+         'editor_wp_username': editor_wp_username,
+         'body': body})
+    logger.info(u'Email queued.')
