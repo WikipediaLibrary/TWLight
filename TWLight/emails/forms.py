@@ -11,11 +11,12 @@ class ContactUsForm(forms.Form):
     
     def __init__(self, *args, **kwargs):
         super(ContactUsForm, self).__init__(*args, **kwargs)
-        # Translators: This labels a textfield where users can enter the -----
+        # Translators: This labels a textfield where users can enter their email ID.
         self.fields['email'].label = _('Your email')
+        # Translators: This labels a textfield where users can enter their email message.
         self.fields['message'].label = _('Message')
 
-        # @TODO: This sort of gets repeated in PartnerSuggestionView.
+        # @TODO: This sort of gets repeated in ContactUsView.
         # We could probably be factored out to a common place for DRYness.
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -26,6 +27,6 @@ class ContactUsForm(forms.Form):
             'email',
             'message',
             'next',
-            # Translators: This labels a button which users click to submit their suggestion.
+            # Translators: This labels a button which users click to submit their email message.
             Submit('submit', _('Submit'), css_class='center-block'),
         )

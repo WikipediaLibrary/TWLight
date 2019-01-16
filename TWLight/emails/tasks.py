@@ -345,6 +345,11 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
 
 @receiver(ContactUs.new_email)
 def contact_us_emails(sender, **kwargs):
+    """
+    Whenever a user submits a message using the contact us form
+    this forwards the message to wikipedialibrary@wikimedia.org
+    with some additional data.
+    """
     user_email = kwargs['user_email']
     editor_wp_username = kwargs['editor_wp_username']
     body = kwargs['body']

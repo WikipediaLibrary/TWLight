@@ -54,12 +54,12 @@ class ContactUsView(FormView):
                 body=message
             )
             messages.add_message(self.request, messages.SUCCESS,
-            # Translators: Shown to users when they successfully add a new partner suggestion.
+            # Translators: Shown to users when they successfully submit a new message using the contact us form.
             _('Your message has been sent. We\'ll get back to you soon!'))
             return HttpResponseRedirect(reverse('contact'))
         except (AssertionError, AttributeError) as e:
             messages.add_message (self.request, messages.WARNING,
-                # Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
+                # Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
                 _('You must be a Wikipedia editor to do that.'))
             raise PermissionDenied
         return self.request.user.editor
