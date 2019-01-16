@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from TWLight.users.models import Editor, UserProfile, Contact
+from TWLight.users.models import Editor, UserProfile
 
 class EditorInline(admin.StackedInline):
     model = Editor
@@ -43,11 +43,3 @@ class UserAdmin(AuthUserAdmin):
 # Unregister old user admin; register new, improved user admin.
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
-
-
-
-class ContactAdmin(admin.ModelAdmin):
-    search_fields = ('message',)
-    list_display = ('author', 'message', 'id',)
-    
-admin.site.register(Contact, ContactAdmin)

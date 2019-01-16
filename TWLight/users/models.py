@@ -367,23 +367,3 @@ class Editor(models.Model):
 
     def get_absolute_url(self):
         return reverse('users:editor_detail', kwargs={'pk': self.pk})
-
-
-
-class Contact(models.Model):
-    class Meta:
-        app_label = 'users'
-        verbose_name = 'contact'
-        verbose_name_plural = 'contacts'
-
-    author = models.ForeignKey(User, related_name='contacts_author', blank=True, null=True, on_delete=models.SET_NULL,
-        # Translators: In the administrator interface, this text is help text for a field where 
-        help_text=_("User who authored this query."))
-        
-    email = models.EmailField(max_length=50,
-        # Translators: In the administrator interface, this text is help text for a field where 
-        help_text=_("Author's email address"))
-        
-    message = models.TextField(blank=True, max_length=1000,
-        # Translators: In the administrator interface, this text is help text for a field where staff
-        help_text=_("Message from the author."))

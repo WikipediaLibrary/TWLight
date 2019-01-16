@@ -17,13 +17,14 @@ import django
 import TWLight.i18n.views
 import TWLight.i18n.urls
 from TWLight.applications.urls import urlpatterns as applications_urls
+from TWLight.emails.views import ContactUsView
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
 from TWLight.graphs.views import DashboardView
 from TWLight.resources.urls import urlpatterns as partners_urls
 from TWLight.resources.views import PartnerSuggestionView, SuggestionDeleteView, SuggestionUpvoteView
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
-from TWLight.users.views import TermsView, ContactUsView
+from TWLight.users.views import TermsView
 
 from .views import LanguageWhiteListView, HomePageView
 
