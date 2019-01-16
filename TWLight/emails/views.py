@@ -1,6 +1,7 @@
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
@@ -21,10 +22,11 @@ class ContactUsView(FormView):
         initial = super(ContactUsView, self).get_initial()
         # @TODO: This sort of gets repeated in ContactUsForm.
         # We could probably be factored out to a common place for DRYness.
-        if self.request.user.userprofile.use_wp_email:
-            initial.update({
-                 'email': self.request.user.userprofile.use_wp_email,
-            })
+        if self.request.user.is_authenticated():
+            if self.request.user.userprofile.use_wp_email:
+                initial.update({
+                     'email': self.request.user.email,
+                })
         elif ('email' in self.request.GET):
             initial.update({
                  'email': self.request.GET['email'],
@@ -47,13 +49,13 @@ class ContactUsView(FormView):
             message = form.cleaned_data['message']
             ContactUs.new_email.send(
                 sender=self.__class__,
-                user_email=email
-                editor_wp_username=self.request.editor.wp_username
+                user_email=email,
+                editor_wp_username=self.request.user.editor.wp_username,
                 body=message
             )
             messages.add_message(self.request, messages.SUCCESS,
             # Translators: Shown to users when they successfully add a new partner suggestion.
-            _('Your message has been sent. We''ll get back to you soon!'))
+            _('Your message has been sent. We\'ll get back to you soon!'))
             return HttpResponseRedirect(reverse('contact'))
         except (AssertionError, AttributeError) as e:
             messages.add_message (self.request, messages.WARNING,
