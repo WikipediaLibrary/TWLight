@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import FormView
 
 from TWLight.emails.forms import ContactUsForm
+from TWLight.emails.signals import ContactUs
 
 @method_decorator(login_required, name='post')
 class ContactUsView(FormView):
@@ -18,9 +19,13 @@ class ContactUsView(FormView):
 
     def get_initial(self):
         initial = super(ContactUsView, self).get_initial()
-        # @TODO: This sort of gets repeated in SuggestionForm.
+        # @TODO: This sort of gets repeated in ContactUsForm.
         # We could probably be factored out to a common place for DRYness.
-        if ('email' in self.request.GET):
+        if self.request.user.userprofile.use_wp_email:
+            initial.update({
+                 'email': self.request.user.userprofile.use_wp_email,
+            })
+        elif ('email' in self.request.GET):
             initial.update({
                  'email': self.request.GET['email'],
             })
@@ -40,10 +45,12 @@ class ContactUsView(FormView):
             assert self.request.user.editor
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
-            try:
-                send_mail('Aww', message, email, ['aaronvasanth66@gmail.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
+            ContactUs.new_email.send(
+                sender=self.__class__,
+                user_email=email
+                editor_wp_username=self.request.editor.wp_username
+                body=message
+            )
             messages.add_message(self.request, messages.SUCCESS,
             # Translators: Shown to users when they successfully add a new partner suggestion.
             _('Your message has been sent. We''ll get back to you soon!'))
