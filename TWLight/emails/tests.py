@@ -22,7 +22,9 @@ from TWLight.users.groups import get_coordinators
 # False even when they work in real life.
 from .tasks import (send_comment_notification_emails,
                     send_approval_notification_email,
-                    send_rejection_notification_email)
+                    send_rejection_notification_email,
+                    contact_us_emails)
+from .tasks import ContactUsEmail
 
 class ApplicationCommentTest(TestCase):
 
@@ -328,3 +330,27 @@ class ApplicationStatusTest(TestCase):
         partner.status = Partner.WAITLIST
         partner.save()
         self.assertFalse(mock_email.called)
+
+
+class ContactUsTest(TestCase):
+
+    def setUp(self):
+        super(ContactUsTest, self).setUp()
+        self.editor = EditorFactory(user__email='editor@example.com').user
+
+    @patch('TWLight.emails.tasks.contact_us_emails')
+    def test_contact_us_emails(self, mock_email):
+        factory = RequestFactory()
+        request = factory.post(get_form_target())
+        request.user = UserFactory()
+        editor = EditorFactory()
+
+        self.assertEqual(len(mail.outbox), 0)
+
+        email = ContactUsEmail() 
+        email.send('wikipedialibrary@wikimedia.org',
+            {'user_email': self.editor.email,
+             'editor_wp_username': editor.wp_username,
+             'body': 'This is a test email'})
+
+        self.assertEqual(len(mail.outbox), 1)
