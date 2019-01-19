@@ -357,7 +357,7 @@ class ContactUsTest(TestCase):
 
 
     def test_user_submit_comtact_us_emails(self):
-        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        EditorCraftRoom(self, Terms=True, Coordinator=False)
         
         self.assertEqual(len(mail.outbox), 0)
         
