@@ -354,3 +354,20 @@ class ContactUsTest(TestCase):
              'body': 'This is a test email'})
 
         self.assertEqual(len(mail.outbox), 1)
+
+
+    def test_user_submit_comtact_us_emails(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        
+        self.assertEqual(len(mail.outbox), 0)
+        
+        contact_us_url = reverse('contact')
+        contact_us = self.client.get(contact_us_url, follow=True)
+        contact_us_form = contact_us.context['form']
+        data  = contact_us_form.initial
+        data['email'] = 'editor@example.com'
+        data['message'] = 'This is a test'
+        data['submit'] = True
+        self.client.post(contact_us_url, data)
+        
+        self.assertEqual(len(mail.outbox), 1)
