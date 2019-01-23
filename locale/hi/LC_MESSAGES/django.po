@@ -1,0 +1,2556 @@
+# Translation of Wikipedia Library Card Platform to Hindi (हिन्दी)
+# Exported from translatewiki.net
+#
+# Author: Gopalindians
+# Author: Shypoetess
+msgid ""
+msgstr ""
+""
+"Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
+"POT-Creation-Date: 2019-01-17 10:13+0000\n"
+"PO-Revision-Date: 2019-01-21 09:13:12+0000\n"
+"Language: hi\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-POT-Import-Date: 2019-01-04 21:30:33+0000\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Translators: Labels the button users click to apply for a partner's resources.
+#. Translators: This text labels a button which users can click to submit an application.
+#. Translators: Shown in the top bar of almost every page, taking users to the page where they apply for access to partner resources.
+#: TWLight/applications/forms.py:106
+#: TWLight/applications/templates/applications/request_for_application.html:54
+#: TWLight/applications/templates/applications/request_for_application.html:56
+#: TWLight/resources/templates/resources/partner_detail.html:74
+#: TWLight/resources/templates/resources/partner_detail.html:77
+#: TWLight/resources/templates/resources/partner_detail.html:137
+#: TWLight/resources/templates/resources/partner_detail.html:139
+#: TWLight/templates/base.html:101
+msgid "Apply"
+msgstr "आवेदन करें"
+
+#. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
+#: TWLight/applications/forms.py:193
+msgid "About you"
+msgstr "आपके बारे में"
+
+#. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
+#: TWLight/applications/forms.py:201
+#, python-brace-format
+msgid "Requested by: {partner_list}"
+msgstr "द्वारा अनुरोधित:{partner_list}"
+
+#. Translators: This this note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
+#: TWLight/applications/forms.py:207
+#, python-brace-format
+msgid "<p><small><i>Your personal data will be processed according to our <a href=\"{terms_url}\">privacy policy</a>.</i></small></p>"
+msgstr "<p><small><i>आपके व्यक्तिगत डेटा को हमारी <a href=\"{terms_url}\">गोपनीयता नीति के अनुसार संसाधित किया जाएगा</a>.</i></small></p>"
+
+#. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
+#: TWLight/applications/forms.py:218
+#, python-brace-format
+msgid "Your application to {partner}"
+msgstr "{partner} के लिए आपका आवेदन"
+
+#. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering.
+#: TWLight/applications/forms.py:254
+#, python-brace-format
+msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
+msgstr "आवेदन करने से पहले आपको <a href=\"{url}>{url}</a> पर पंजीकरण करना आवश्यक है।"
+
+#: TWLight/applications/forms.py:320 TWLight/users/admin.py:40
+#: TWLight/users/models.py:113
+msgid "Username"
+msgstr "सदस्यनाम"
+
+#. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
+#: TWLight/applications/forms.py:321 TWLight/applications/helpers.py:95
+msgid "Partner name"
+msgstr "भागीदार का नाम"
+
+#. Translators: When filling out an application, users may need to specify their name
+#: TWLight/applications/helpers.py:87
+msgid "Your real name"
+msgstr "आपका असली नाम"
+
+#. Translators: When filling out an application, users may need to specify the country in which they currently live
+#: TWLight/applications/helpers.py:89
+msgid "Your country of residence"
+msgstr "आप किस देश में रहते हैं"
+
+#. Translators: When filling out an application, users may need to specify their current occupation
+#: TWLight/applications/helpers.py:91
+msgid "Your occupation"
+msgstr "आपका व्यवसाय"
+
+#. Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
+#: TWLight/applications/helpers.py:93
+msgid "Your institutional affiliation"
+msgstr "आपकी संस्थागत संबद्धता"
+
+#. Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
+#: TWLight/applications/helpers.py:97
+msgid "Why do you want access to this resource?"
+msgstr "आप इस संसाधन तक पहुँच क्यों चाहते हैं?"
+
+#. Translators: When filling out an application, users may need to specify a particular collection of resources they want access to
+#: TWLight/applications/helpers.py:99
+msgid "Which collection do you want?"
+msgstr "आप कौन सा संग्रह चाहते हैं?"
+
+#. Translators: When filling out an application, users may need to specify a particular book they want access to
+#: TWLight/applications/helpers.py:101
+msgid "Which book do you want?"
+msgstr "आपको कौन सी किताब चाहिए?"
+
+#. Translators: When filling out an application, users are given a text box where they can include any extra relevant information
+#: TWLight/applications/helpers.py:103
+msgid "Anything else you want to say"
+msgstr "आप और भी कुछ कहना चाहते हैं"
+
+#. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
+#: TWLight/applications/helpers.py:105
+msgid "You must agree with the partner's terms of use"
+msgstr "आपको भागीदार की उपयोग की शर्तों से सहमत होना होगा"
+
+#. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
+#: TWLight/applications/helpers.py:107
+msgid "The email for your account on the partner's website"
+msgstr "भागीदार की वेबसाइट पर आपके खाते का ईमेल"
+
+#. Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
+#: TWLight/applications/helpers.py:109
+msgid "Check this box if you would prefer to hide your application from the 'latest activity' timeline."
+msgstr "यदि आप 'नवीनतम गतिविधि' समयरेखा से अपने आवेदन को छिपाना पसंद करेंगे तो इस बॉक्स को चिन्हित करें।"
+
+#. Translators: When sending application data to partners, this is the text labelling a user's real name
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
+#: TWLight/applications/helpers.py:114
+#: TWLight/users/templates/users/editor_detail_data.html:166
+msgid "Real name"
+msgstr "वास्तविक नाम"
+
+#. Translators: When sending application data to partners, this is the text labelling a user's country of residence
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
+#: TWLight/applications/helpers.py:116
+#: TWLight/users/templates/users/editor_detail_data.html:178
+msgid "Country of residence"
+msgstr "आपका निवास देश"
+
+#. Translators: When sending application data to partners, this is the text labelling a user's occupation
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
+#: TWLight/applications/helpers.py:118
+#: TWLight/users/templates/users/editor_detail_data.html:190
+msgid "Occupation"
+msgstr "व्यवसाय"
+
+#. Translators: When sending application data to partners, this is the text labelling a user's affiliation
+#: TWLight/applications/helpers.py:120
+msgid "Affiliation"
+msgstr "संबद्धता"
+
+#. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
+#: TWLight/applications/helpers.py:122
+msgid "Stream requested"
+msgstr "स्रोत जिसका अनुरोध किया गया है"
+
+#. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
+#. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
+#: TWLight/applications/helpers.py:124
+#: TWLight/applications/templates/applications/application_evaluation.html:94
+msgid "Title requested"
+msgstr "अनुरोधित शीर्षक"
+
+#. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
+#: TWLight/applications/helpers.py:126
+msgid "Agreed with terms of use"
+msgstr "उपयोग की शर्तों से सहमत हैं"
+
+#. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
+#: TWLight/applications/helpers.py:128
+msgid "Account email"
+msgstr "खाता ईमेल"
+
+#. Translators: This labels a user's email address on a form for account coordinators
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
+#: TWLight/applications/helpers.py:142
+#: TWLight/resources/templates/resources/partner_users.html:27
+#: TWLight/resources/templates/resources/partner_users.html:72
+#: TWLight/users/forms.py:103
+msgid "Email"
+msgstr "ईमेल"
+
+#. Translators: This is the status of an application that has not yet been reviewed.
+#: TWLight/applications/models.py:44
+msgid "Pending"
+msgstr "अपूर्ण"
+
+#. Translators: This is the status of an application that reviewers have asked questions about.
+#: TWLight/applications/models.py:46
+msgid "Under discussion"
+msgstr "चर्चाधीन"
+
+#. Translators: This is the status of an application which has been approved by a reviewer.
+#. Translators: This describes the status of a group of applications.
+#: TWLight/applications/models.py:48
+#: TWLight/applications/templates/applications/application_list.html:29
+msgid "Approved"
+msgstr "स्वीकृत"
+
+#. Translators: This is the status of an application which has been declined by a reviewer.
+#: TWLight/applications/models.py:50
+msgid "Not approved"
+msgstr "अस्वीकृत"
+
+#. Translators: This is the status of an application that has been sent to a partner.
+#: TWLight/applications/models.py:52
+msgid "Sent to partner"
+msgstr "भागीदार को भेजी गई"
+
+#. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
+#: TWLight/applications/models.py:54
+msgid "Invalid"
+msgstr "अमान्य"
+
+#. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
+#: TWLight/applications/models.py:70 TWLight/applications/models.py:81
+msgid "Please do not override this field! Its value is set automatically."
+msgstr "कृपया इस क्षेत्र को रद्द न करें! इसका मूल्य स्वचालित रूप से सेट होता है।"
+
+#. Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
+#: TWLight/applications/models.py:86
+msgid "The user who sent this application to the partner"
+msgstr "उपयोगकर्ता जिसने भागीदार को यह आवेदन भेजा है"
+
+#. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
+#: TWLight/applications/templates/applications/application_evaluation.html:14
+msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
+msgstr "यह आवेदन प्रतीक्षा सूची में है क्योंकि इस भागीदार के पास इस समय कोई पहुँच अनुदान उपलब्ध नहीं है।"
+
+#. Translators: This message is shown on pages where coordinators can see personal information about applicants.
+#: TWLight/applications/templates/applications/application_evaluation.html:21
+#: TWLight/applications/templates/applications/application_list_include.html:6
+#: TWLight/applications/templates/applications/send_partner.html:43
+#: TWLight/resources/templates/resources/partner_users.html:14
+msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
+msgstr "समन्वयक: इस पृष्ठ में वास्तविक नाम और ईमेल पते जैसी व्यक्तिगत जानकारी हो सकती है। कृपया याद रखें कि यह जानकारी गोपनीय है।"
+
+#. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
+#: TWLight/applications/templates/applications/application_evaluation.html:24
+msgid "Evaluate application"
+msgstr "आवेदन का मूल्यांकन करें"
+
+#. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
+#: TWLight/applications/templates/applications/application_evaluation.html:27
+msgid "This user has requested a restriction on the processing of their data, so you cannot change the status of their application."
+msgstr "इस उपयोगकर्ता ने अपने डेटा के प्रसंस्करण पर प्रतिबंध का अनुरोध किया है, इसलिए आप उनके आवेदन की स्थिति नहीं बदल सकते।"
+
+#. Translators: This is the title of the application page shown to users who are not a coordinator.
+#. Translators: This is the title of the section of a user's profile showing their history of applications.
+#: TWLight/applications/templates/applications/application_evaluation.html:33
+#: TWLight/users/templates/users/editor_detail.html:18
+msgid "Application history"
+msgstr "आवेदन का इतिहास"
+
+#. Translators: This is the title of the section of an application page containing information about the request.
+#: TWLight/applications/templates/applications/application_evaluation.html:36
+msgid "Application"
+msgstr "आवेदन"
+
+#. Translators: This labels the section of an application showing the date the application was submitted.
+#: TWLight/applications/templates/applications/application_evaluation.html:41
+msgid "Date of application"
+msgstr "आवेदन की तिथि"
+
+#. Translators: This labels the section of an application showing how many days it has been since the application was opened.
+#: TWLight/applications/templates/applications/application_evaluation.html:50
+msgid "Days open"
+msgstr "आवेदन खुले रहने के दिन"
+
+#. Translators: This labels the section of an application showing how many days it has been since the application was closed.
+#: TWLight/applications/templates/applications/application_evaluation.html:58
+msgid "Days since application was closed"
+msgstr "आवेदन बंद होने के बाद से दिन"
+
+#. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
+#: TWLight/applications/templates/applications/application_evaluation.html:67
+#: TWLight/graphs/views.py:265
+msgid "Status"
+msgstr "स्थिति"
+
+#. Translators: This labels the section of an application showing which partner the user requested access to.
+#: TWLight/applications/templates/applications/application_evaluation.html:75
+#: TWLight/applications/views.py:502 TWLight/applications/views.py:579
+#: TWLight/templates/dashboard.html:112
+msgid "Partner"
+msgstr "भागीदार"
+
+#. Translators: This labels the section of an application showing which collection of resources the user requested access to.
+#: TWLight/applications/templates/applications/application_evaluation.html:84
+msgid "Collection requested"
+msgstr "अनुरोधित संग्रह"
+
+#. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
+#: TWLight/applications/templates/applications/application_evaluation.html:103
+msgid "Why the editor wants access"
+msgstr "संपादक पहुँच क्यों चाहता है"
+
+#. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
+#: TWLight/applications/templates/applications/application_evaluation.html:110
+msgid "Not stated"
+msgstr "नहीं बताया हुआ"
+
+#. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
+#: TWLight/applications/templates/applications/application_evaluation.html:116
+msgid "Renewal of existing access grant?"
+msgstr "मौजूदा पहुँच अनुदान का नवीनीकरण?"
+
+#. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
+#: TWLight/applications/templates/applications/application_evaluation.html:122
+#, python-format
+msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
+msgstr "हाँ (<a href=\"%(parent_url)s\">पिछला आवेदन</a>)"
+
+#. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
+#: TWLight/applications/templates/applications/application_evaluation.html:128
+#: TWLight/users/templates/users/editor_detail_data.html:67
+msgid "No"
+msgstr "नहीं"
+
+#. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
+#: TWLight/applications/templates/applications/application_evaluation.html:134
+msgid "Comments from the editor"
+msgstr "पिछला आवेदन"
+
+#. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
+#: TWLight/applications/templates/applications/application_evaluation.html:142
+msgid "Discussion"
+msgstr "चर्चा"
+
+#. Translators: This labels the button which users click to send a typed comment.
+#: TWLight/applications/templates/applications/application_evaluation.html:163
+msgid "Add comment"
+msgstr "टिप्पणी छोड़ें"
+
+#. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
+#: TWLight/applications/templates/applications/application_evaluation.html:171
+msgid "Comments are visible to all coordinators and to the editor who submitted this application."
+msgstr "टिप्पणियाँ सभी समन्वयकों और आवेदन करने वाले संपादक को दिखाई देती हैं।"
+
+#. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
+#: TWLight/applications/templates/applications/application_evaluation.html:178
+#: TWLight/resources/templates/resources/partner_users.html:25
+#: TWLight/resources/templates/resources/partner_users.html:70
+msgid "User"
+msgstr "उपयोगकर्ता"
+
+#. Translators: This is the title of the section of an application page which lists the history of status changes.
+#: TWLight/applications/templates/applications/application_evaluation.html:183
+msgid "Revision history"
+msgstr "अवतरण इतिहास"
+
+#. Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate submit_user or review_date
+#: TWLight/applications/templates/applications/application_evaluation.html:199
+#, python-format
+msgid "Submitted by %(submit_user)s on %(review_date)s"
+msgstr "%(review_date)s को %(submit_user)s द्वारा प्रस्तुत किया गया"
+
+#. Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate review_date
+#: TWLight/applications/templates/applications/application_evaluation.html:204
+#, python-format
+msgid "Submitted on %(review_date)s"
+msgstr "प्रस्तुतिकरण तिथि %(review_date)s"
+
+#. Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate review_user or review_date
+#: TWLight/applications/templates/applications/application_evaluation.html:215
+#, python-format
+msgid "Reviewed by %(review_user)s on %(review_date)s"
+msgstr "%(review_date)s को %(review_user)s द्वारा समीक्षित किया गया"
+
+#. Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate review_date
+#: TWLight/applications/templates/applications/application_evaluation.html:220
+#, python-format
+msgid "Reviewed on %(review_date)s"
+msgstr "%(review_date)s को समीक्षित किया गया"
+
+#. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
+#: TWLight/applications/templates/applications/application_evaluation.html:232
+msgid "No previous versions."
+msgstr "कोई पिछला संस्करण नहीं।"
+
+#. Translators: On the page which shows a list of applications, coordinators must select which applications they wish to view. This string is found next to the selection buttons, and leads on to options such as "Under review", "Approved", or "Sent.
+#: TWLight/applications/templates/applications/application_list.html:20
+msgid "View applications which are..."
+msgstr "वे आवेदन देखें जो..."
+
+#. Translators: This describes the status of a group of applications.
+#: TWLight/applications/templates/applications/application_list.html:25
+msgid "Pending review"
+msgstr "समीक्षा लंबित"
+
+#. Translators: This describes the status of a group of applications.
+#: TWLight/applications/templates/applications/application_list.html:33
+msgid "Rejected"
+msgstr "रद्द"
+
+#. Translators: This describes the status of a group of applications.
+#: TWLight/applications/templates/applications/application_list.html:37
+msgid "Sent"
+msgstr "भेज दिया"
+
+#. Translators: This describes the status of a group of applications.
+#: TWLight/applications/templates/applications/application_list.html:41
+msgid "Up for renewal"
+msgstr "नवीनीकरण के लिए"
+
+#. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
+#: TWLight/applications/templates/applications/application_list.html:56
+msgid "Filter by..."
+msgstr "फ़िल्टर करें"
+
+#. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
+#: TWLight/applications/templates/applications/application_list.html:68
+msgid "Current filters"
+msgstr "वर्तमान फ़िल्टर"
+
+#. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
+#: TWLight/applications/templates/applications/application_list.html:79
+msgid "None"
+msgstr "कोई भी नहीं"
+
+#. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
+#: TWLight/applications/templates/applications/application_list.html:91
+msgid "Page navigation"
+msgstr "पृष्ठ नेविगेशन"
+
+#. Translators: This is the label for a button which goes to the previous page of applications.
+#: TWLight/applications/templates/applications/application_list.html:95
+#: TWLight/applications/templates/applications/application_list.html:97
+#: TWLight/applications/templates/applications/application_list.html:102
+#: TWLight/applications/templates/applications/application_list.html:103
+msgid "Previous page"
+msgstr "पिछला पृष्ठ"
+
+#. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
+#: TWLight/applications/templates/applications/application_list.html:203
+msgid "Next"
+msgstr "अगला"
+
+#. Translators: This is the label for a button which goes to the next page of applications.
+#: TWLight/applications/templates/applications/application_list.html:205
+#: TWLight/applications/templates/applications/application_list.html:221
+#: TWLight/applications/templates/applications/application_list.html:222
+msgid "Next page"
+msgstr "अगला पृष्ठ"
+
+#. Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications.
+#: TWLight/applications/templates/applications/application_list.html:212
+msgid "Last"
+msgstr "अंतिम"
+
+#. Translators: This is the label for a button which goes to the last page of applications.
+#: TWLight/applications/templates/applications/application_list.html:214
+#: TWLight/applications/templates/applications/application_list.html:226
+#: TWLight/applications/templates/applications/application_list.html:227
+msgid "Last page"
+msgstr "अंतिम पृष्ठ"
+
+#. Translators: On the page listing applications, this shows next to an application which was imported to the website.
+#: TWLight/applications/templates/applications/application_list_include.html:33
+#: TWLight/applications/templates/applications/application_list_user_include.html:22
+msgid "Imported application"
+msgstr "आयातित आवेदन"
+
+#. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
+#: TWLight/applications/templates/applications/application_list_include.html:37
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:33
+#: TWLight/applications/templates/applications/application_list_user_include.html:26
+#, python-format
+msgid "Last reviewed by %(reviewer)s on %(review_date)s"
+msgstr "%(reviewer)s द्वारा अंतिम समीक्षा %(review_date)s को की गई"
+
+#. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate review_date.
+#: TWLight/applications/templates/applications/application_list_include.html:42
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:37
+#: TWLight/applications/templates/applications/application_list_user_include.html:31
+#, python-format
+msgid "Last reviewed on %(review_date)s"
+msgstr "अंतिम समीक्षा %(review_date)s को की गई"
+
+#. Translators: On the page listing applications, this shows next to an application which has not yet been reviewed.
+#: TWLight/applications/templates/applications/application_list_include.html:48
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:42
+#: TWLight/applications/templates/applications/application_list_user_include.html:37
+msgid "Not yet reviewed."
+msgstr "अभी तक समीक्षा नहीं की गयी।"
+
+#: TWLight/applications/templates/applications/application_list_include.html:64
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:74
+#: TWLight/applications/templates/applications/application_list_user_include.html:60
+msgid "No applications right now."
+msgstr "अभी कोई आवेदन नहीं आया है।"
+
+#. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
+#: TWLight/applications/templates/applications/send_partner.html:119
+msgid "Select/deselect all"
+msgstr "सभी का चयन / चयन रद्द करें"
+
+#. Translators: Denotes whether an application was a renewal request for a previous application.
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:24
+#: TWLight/resources/templates/resources/partner_users.html:53
+#: TWLight/resources/templates/resources/partner_users.html:98
+msgid "Renewal"
+msgstr "नवीनीकरण"
+
+#. Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:56
+msgid "Status for all selected applications"
+msgstr "सभी चयनित आवेदनों की स्थिति"
+
+#. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:70
+msgid "Set status"
+msgstr "स्थिति सेट करें"
+
+#: TWLight/applications/templates/applications/application_list_user_include.html:44
+msgid "Has your account expired?"
+msgstr "क्या आपका खाता समाप्त हो गया है?"
+
+#: TWLight/applications/templates/applications/application_list_user_include.html:46
+msgid "Request renewal"
+msgstr "नवीनीकरण का अनुरोध करें"
+
+#: TWLight/applications/templates/applications/application_list_user_include.html:48
+msgid "Renewals are either not required, not available right now, or you have already requested a renewal."
+msgstr "नवीनीकरण की आवश्यकता नहीं है, अभी उपलब्ध नहीं है, या आपने पहले ही नवीनीकरण का अनुरोध किया है।"
+
+#. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
+#: TWLight/applications/templates/applications/request_for_application.html:21
+msgid "What resources do you want to access?"
+msgstr "आप किन संसाधनों का उपयोग करना चाहते हैं?"
+
+#. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
+#: TWLight/applications/templates/applications/request_for_application.html:40
+msgid "(more info)"
+msgstr "(अधिक जानकारी)"
+
+#. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
+#. Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access
+#: TWLight/applications/templates/applications/request_for_application.html:44
+#: TWLight/resources/models.py:173
+#: TWLight/resources/templates/resources/partner_detail.html:33
+#: TWLight/resources/templates/resources/partner_detail.html:100
+#: TWLight/resources/templates/resources/partner_tile.html:39
+msgid "Waitlisted"
+msgstr "आप प्रतीक्षा सूची में हैं"
+
+#: TWLight/applications/templates/applications/request_for_application.html:50
+msgid "No partner data has been added yet."
+msgstr "अभी तक कोई भागीदार डेटा नहीं जोड़ा गया है।"
+
+#. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file.
+#: TWLight/applications/templates/applications/request_for_application.html:63
+msgid "You can apply to <span class=\"label label-warning\">Waitlisted</span> partners, but they don't have access grants available right now. We will process those applications when access becomes available."
+msgstr "आप <span class=\"label label-warning\"> प्रतीक्षा सूची वाले </span> भागीदारों के लिए आवेदन कर सकते हैं, लेकिन उनके पास अभी पहुँच अनुदान उपलब्ध नहीं है। हम उन आवेदनों पर कार्रवाई तब करेंगे जब पहुँच उपलब्ध हो जाती है।"
+
+#. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when there are applications ready to be processed.
+#: TWLight/applications/templates/applications/send.html:7
+msgid "Partners with approved, unsent applications"
+msgstr "स्वीकृत, अप्रेषित आवेदनों वाले भागीदार"
+
+#. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when no such applications exist or all have already been sent.
+#: TWLight/applications/templates/applications/send.html:20
+msgid "There are no partners with applications ready to send."
+msgstr "भेजने के लिए तैयार आवेदनों वाला कोई भागीदार नहीं हैं।"
+
+#. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where object will be the name of the partner. Don't translate object.
+#: TWLight/applications/templates/applications/send_partner.html:38
+#, python-format
+msgid "Application data for %(object)s"
+msgstr "%(object)s के लिए आवेदन डेटा"
+
+#. Translators: This message is shown when applications exceed the number of accounts available for each stream(s).
+#: TWLight/applications/templates/applications/send_partner.html:51
+#, python-format
+msgid "Application(s) for <strong>%(unavailable_streams)s</strong> if sent, will exceed the total available accounts for the stream(s). Please proceed at your own discretion."
+msgstr "यदि <strong>%(unavailable_streams)s</strong> के लिए आवेदन भेजे जाते  हैं, तो उस/उन स्ट्रीम(स) के लिए आवेदन कुल उपलब्ध खातों से अधिक हो जाएँगे। कृपया अपने विवेक से आगे बढ़ें।"
+
+#. Translators: This message is shown when applications exceed the number of accounts available.
+#: TWLight/applications/templates/applications/send_partner.html:57
+#, python-format
+msgid "Application(s) for %(object)s, if sent, will exceed the total available accounts for the partner. Please proceed at your own discretion."
+msgstr "यदि %(object)s के लिए आवेदन भेजा तो वह भागीदार के कुल उपलब्ध खातों से अधिक हो जायेगा। कृपया अपने विवेक से आगे बढ़ें।"
+
+#. Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.
+#: TWLight/applications/templates/applications/send_partner.html:80
+msgid "When you've processed the data below, click the 'mark as sent' button."
+msgstr "जब आप नीचे दिए गए डेटा को संसाधित कर लेते हैं, तो 'प्रेषित चिन्हित करें' बटन पर क्लिक करें।"
+
+#. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
+#: TWLight/applications/templates/applications/send_partner.html:86
+msgid "Contact"
+msgid_plural "Contacts"
+msgstr[0] "Contact"
+msgstr[1] "संपर्क"
+
+#. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/applications/templates/applications/send_partner.html:102
+msgid "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators."
+msgstr "ओह, हमारे पास कोई सूचीबद्ध संपर्क नहीं है। कृपया विकिपीडिया पुस्तकालय प्रबंधकों को सूचित करें।"
+
+#. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.
+#: TWLight/applications/templates/applications/send_partner.html:106
+msgid "Application data"
+msgstr "आवेदन डेटा"
+
+#. Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.
+#: TWLight/applications/templates/applications/send_partner.html:146
+msgid "Mark as sent"
+msgstr "प्रेषित चिह्नित करें"
+
+#. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
+#: TWLight/applications/templates/applications/send_partner.html:150
+msgid "There are no approved, unsent applications."
+msgstr "कोई स्वीकृत, अप्रेषित आवेदन नहीं हैं।"
+
+#. Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
+#: TWLight/applications/views.py:155
+msgid "Please select at least one partner."
+msgstr "कृपया कम से कम एक भागीदार का चयन करें।"
+
+#: TWLight/applications/views.py:272
+msgid "This field consists only of restricted text."
+msgstr "इस क्षेत्र में केवल प्रतिबंधित पाठ हैं।"
+
+#. Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
+#: TWLight/applications/views.py:331
+msgid "Choose at least one resource you want access to."
+msgstr "कम से कम एक संसाधन चुनें जिसे आप एक्सेस करना चाहते हैं।"
+
+#. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
+#: TWLight/applications/views.py:355 TWLight/applications/views.py:396
+msgid "Your application has been submitted for review. You can check the status of your applications on this page."
+msgstr "आपका आवेदन समीक्षा के लिए प्रस्तुत किया गया है। आप इस पृष्ठ पर अपने आवेदनों की स्थिति देख सकते हैं।"
+
+#. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
+#: TWLight/applications/views.py:385
+msgid "This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."
+msgstr "इस भागीदार के पास इस समय कोई एक्सेस अनुदान उपलब्ध नहीं है। आप अभी भी पहुंच के लिए आवेदन कर सकते हैं; जब अनुदान उपलब्ध हो जाएगा तो आपके आवेदन की समीक्षा की जाएगी।"
+
+#. Translators: Editor = wikipedia editor, gender unknown.
+#: TWLight/applications/views.py:501 TWLight/applications/views.py:578
+msgid "Editor"
+msgstr "सम्पादक"
+
+#. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
+#: TWLight/applications/views.py:618
+msgid "Applications to review"
+msgstr "समीक्षा के लिए आवेदन"
+
+#. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
+#. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
+#: TWLight/applications/views.py:652
+#: TWLight/resources/templates/resources/partner_users.html:19
+msgid "Approved applications"
+msgstr "स्वीकृत आवेदन"
+
+#. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
+#: TWLight/applications/views.py:678
+msgid "Rejected applications"
+msgstr "अस्वीकृत आवेदन"
+
+#. Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
+#: TWLight/applications/views.py:711
+msgid "Access grants up for renewal"
+msgstr "नवीनीकरण के लिए पहुँच अनुदान"
+
+#. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
+#. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
+#: TWLight/applications/views.py:737
+#: TWLight/resources/templates/resources/partner_users.html:64
+msgid "Sent applications"
+msgstr "प्रेषित आवेदन"
+
+#. Translators: this lets a reviewer set the status of a single application.
+#: TWLight/applications/views.py:787
+msgid "Set application status"
+msgstr "आवेदन की स्थिति निर्धारित करें"
+
+#. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
+#: TWLight/applications/views.py:818
+msgid "Please select at least one application."
+msgstr "कम से कम एक आवेदन का चयन करें।"
+
+#: TWLight/applications/views.py:838
+msgid "Batch update successful."
+msgstr "बैच अद्यतन सफल।"
+
+#: TWLight/applications/views.py:958
+msgid "All selected applications have been marked as sent."
+msgstr "सभी चयनित आवेदनों को प्रेषित चिन्हित किया गया है।"
+
+#: TWLight/applications/views.py:1007
+msgid "This object cannot be renewed. (This probably means that you have already requested that it be renewed.)"
+msgstr "इस वस्तु को नवीनीकृत नहीं किया जा सकता है। (इसका संभवतः अर्थ है कि आपने पहले ही इसे नवीनीकृत करने का अनुरोध किया है।)"
+
+#. Translators: If a user requests the renewal of their account, this message is shown to them.
+#: TWLight/applications/views.py:1013
+msgid "Your renewal request has been received. A coordinator will review your request."
+msgstr "आपका नवीनीकरण अनुरोध प्राप्त हो गया है। एक समन्वयक आपके अनुरोध की समीक्षा करेगा।"
+
+#. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/approval_notification-body-html.html:5
+#, python-format
+msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. You can expect to receive access details within a week or two once it has been processed.</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
+msgstr "<p>प्रिय %(user)s, </p> <p>विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। हमें आपको यह बताते हुए खुशी हो रही है कि आपका आवेदन स्वीकृत हो गया है। संसाधित होने के बाद आप एक या दो सप्ताह के भीतर पहुँच विवरण प्राप्त कर सकते हैं। </p> <p>शुभकामनाएँ! </p> <p> विकिपीडिया पुस्तकालय</p>"
+
+#. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/approval_notification-body-text.html:3
+#, python-format
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. You can expect to receive access details within a week or two once it has been processed. Cheers! The Wikipedia Library"
+msgstr "प्रिय %(user)s, विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। हमें आपको यह बताते हुए खुशी हो रही है कि आपका आवेदन स्वीकृत हो गया है। संसाधित होने के बाद आप एक या दो सप्ताह के भीतर पहुँच विवरण प्राप्त कर सकते हैं। शुभकामनाएँ! विकिपीडिया पुस्तकालय"
+
+#. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/approval_notification-subject.html:4
+msgid "Your Wikipedia Library application has been approved"
+msgstr "आपका विकिपीडिया पुस्तकालय आवेदन स्वीकृत हो गया है"
+
+#. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/comment_notification_coordinator-body-html.html:5
+#, python-format
+msgid "<p>Dear %(user)s,</p> <p>Thank you for coordinating %(partner)s resources through The Wikipedia Library. There are one or more comments on an application that require a response from you. Please reply to these at: %(app_url)s</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+msgstr "<p>प्रिय %(user)s,</p> <p>विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों के समन्वय के लिए धन्यवाद। एक आवेदन पर एक या एक से अधिक टिप्पणियाँ हैं, जिन पर आपसे प्रतिक्रिया की आवश्यकता है। कृपया इन पर उत्तर दें: %(app_url)s</p> <p>शुभकामनाएँ,</p> <p>विकिपीडिया पुस्तकालय</p>"
+
+#. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
+#, python-format
+msgid "Dear %(user)s, Thank you for coordinating %(partner)s resources through The Wikipedia Library. There are one or more comments on an application that require a response from you. Please reply to these at: %(app_url)s Best, The Wikipedia Library"
+msgstr "प्रिय %(user)s, विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों के समन्वय के लिए धन्यवाद। एक आवेदन पर एक या एक से अधिक टिप्पणियाँ हैं, जिन पर आपसे प्रतिक्रिया की आवश्यकता है। कृपया इन पर उत्तर दें: %(app_url)s  शुभकामनाएँ, विकिपीडिया पुस्तकालय"
+
+#. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
+#: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
+msgid "New comment on a Wikipedia Library application you processed"
+msgstr "आपके द्वारा संसाधित किये गए विकिपीडिया पुस्तकालय आवेदन पर नई टिप्पणी"
+
+#. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
+#, python-format
+msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are one or more comments on your application that require a response from you. Please reply to these at %(app_url)s so we can evaluate your application.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+msgstr "<p>प्रिय %(user)s,</p> <p> विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। आपके आवेदन पर एक या एक से अधिक टिप्पणियाँ हैं, जिन पर आपसे प्रतिक्रिया की आवश्यकता है। कृपया इन पर यहाँ उत्तर दें %(app_url)s ताकि हम आपके आवेदन का मूल्यांकन कर सकें।</p> <p>शुभकामनाएँ,</p> <p>विकिपीडिया पुस्तकालय</p>"
+
+#. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
+#, python-format
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are one or more comments on your application that require a response from you. Please reply to these at: %(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
+msgstr "प्रिय %(user)s, विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। आपके आवेदन पर एक या एक से अधिक टिप्पणियाँ हैं, जिन पर आपसे प्रतिक्रिया की आवश्यकता है। कृपया इन पर यहाँ उत्तर दें %(app_url)s ताकि हम आपके आवेदन का मूल्यांकन कर सकें। शुभकामनाएँ, विकिपीडिया पुस्तकालय"
+
+#. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
+msgid "New comment on your Wikipedia Library application"
+msgstr "आपके विकिपीडिया पुस्तकालय आवेदन पर नई टिप्पणी"
+
+#. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/comment_notification_others-body-html.html:5
+#, python-format
+msgid "There is a new comment on a Wikipedia Library application that you also commented on. It may be providing an answer to a question you asked. See it at <a href=\"%(app_url)s\">%(app_url)s</a>. Thanks for helping review Wikipedia Library applications!"
+msgstr "विकिपीडिया पुस्तकालय आवेदन, जिस पर आपने भी टिप्पणी की है, पर एक नई टिप्पणी है। यह आपके द्वारा पूछे गए प्रश्न का उत्तर प्रदान कर सकता है। इसे <a href=\"%(app_url)s\">%(app_url)s</a> पर देखें। विकिपीडिया पुस्तकालय आवेदनों की समीक्षा में सहायता करने के लिए धन्यवाद!"
+
+#. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
+#, python-format
+msgid "There is a new comment on a Wikipedia Library application that you also commented on. It may be providing an answer to a question you asked. See it at: %(app_url)s Thanks for helping review Wikipedia Library applications!"
+msgstr "विकिपीडिया पुस्तकालय आवेदन, जिस पर आपने भी टिप्पणी की है, पर एक नई टिप्पणी है। यह आपके द्वारा पूछे गए प्रश्न का उत्तर प्रदान कर सकता है। इसे %(app_url)s पर देखें। विकिपीडिया पुस्तकालय आवेदनों की समीक्षा में सहायता करने के लिए धन्यवाद!"
+
+#. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/comment_notification_others-subject.html:4
+msgid "New comment on a Wikipedia Library application you commented on"
+msgstr "आपके द्वारा टिप्पणी किये गए विकिपीडिया पुस्तकालय आवेदन पर नई टिप्पणी"
+
+#. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like user or partner; don't translate email addresses or html tags either.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
+#, python-format
+msgid "<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated coordinator for partners that have a total of %(app_count)s applications with a status of %(app_status)s.</p> <p>This is a gentle reminder that you may review applications at <a href=\"%(link)s\">%(link)s</a>.</p> <p>If you received this message in error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for helping review Wikipedia Library applications!</p>"
+msgstr "<p>प्रिय %(user)s,</p> <p>हमारे रिकॉर्ड बताते हैं कि आप ऐसे भागीदारों के लिए नामित समन्वयक हैं जिनके पास %(app_status)s की स्थिति वाले %(app_count)s आवेदन हैं। यह एक सौम्य अनुस्मारक है कि आप यहाँ दिए गए आवेदनों की समीक्षा कर सकते हैं:<a href=\"%(link)s\">%(link)s</a>।</p> <p>यदि आपको यह संदेश त्रुटी में मिला है, तो हमें यहाँ एक पंक्ति छोड़ें: wikipedialibrary@wikimedia.org।</p> <p> विकिपीडिया पुस्तकालय आवेदनों की समीक्षा में सहायता करने के लिए धन्यवाद!</p>"
+
+#. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate email adresses or items in curly braces.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
+#, python-format
+msgid "Dear %(user)s, Our records indicate that you are the designated coordinator for partners that have a total of %(app_count)s applications with a status of %(app_status)s. This is a gentle reminder that you may review applications at: %(link)s If you received this message in error, drop us a line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library applications!"
+msgstr "प्रिय %(user)s, हमारे रिकॉर्ड बताते हैं कि आप ऐसे भागीदारों के लिए नामित समन्वयक हैं जिनके पास %(app_status)s की स्थिति वाले %(app_count)s आवेदन हैं। यह एक सौम्य अनुस्मारक है कि आप यहाँ दिए गए आवेदनों की समीक्षा कर सकते हैं:%(link)s। यदि आपको यह संदेश त्रुटी में मिला है, तो हमें यहाँ एक पंक्ति छोड़ें: wikipedialibrary@wikimedia.org। विकिपीडिया पुस्तकालय आवेदनों की समीक्षा में सहायता करने के लिए धन्यवाद!"
+
+#. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
+msgid "Wikipedia Library applications await your review"
+msgstr "विकिपीडिया पुस्तकालय आवेदनों को आपकी समीक्षा का इंतजार है"
+
+#. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
+#, python-format
+msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at <a href=\"%(app_url)s\">%(app_url)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+msgstr "<p>प्रिय% %(user)s,</p> <p>विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। दुर्भाग्य से इस समय आपका आवेदन स्वीकृत नहीं हुआ है। आप अपने आवेदन और समीक्षा टिप्पणियों पर देख सकते हैं:<a href=\"%(app_url)s\">%(app_url)s</a>।</p> <p>शुभकामनाएँ!</p> <p>विकिपीडिया पुस्तकालय</p>"
+
+#. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
+#, python-format
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at: %(app_url)s Best, The Wikipedia Library"
+msgstr "प्रिय% %(user)s, विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। दुर्भाग्य से इस समय आपका आवेदन स्वीकृत नहीं हुआ है। आप अपने आवेदन और समीक्षा टिप्पणियों पर देख सकते हैं:%(app_url)s। शुभकामनाएँ! विकिपीडिया पुस्तकालय"
+
+#. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/rejection_notification-subject.html:4
+msgid "Your Wikipedia Library application has been denied"
+msgstr "आपका विकिपीडिया पुस्तकालय आवेदन अस्वीकृत कर दिया गया है"
+
+#. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
+#, python-format
+msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at <a href=\"%(link)s\">%(link)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+msgstr "<p>प्रिय %(user)s,</p> <p>विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। वर्तमान में कोई खाते उपलब्ध नहीं हैं इसलिए आपके आवेदन को प्रतीक्षा सूची में डाल दिया गया है। आपके आवेदन का मूल्यांकन तब किया जाएगा अगर/जब अधिक खाते उपलब्ध हो जाएंगे। आप सभी उपलब्ध संसाधनों को <a href=\"%(link)s\">%(link)s</a> पर देख सकते हैं।</p> <p>शुभकामनाएँ,</p> <p>विकिपीडिया पुस्तकालय</p>"
+
+#. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3
+#, python-format
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at: %(link)s Best, The Wikipedia Library"
+msgstr "प्रिय %(user)s, विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। वर्तमान में कोई खाते उपलब्ध नहीं हैं इसलिए आपके आवेदन को प्रतीक्षा सूची में डाल दिया गया है। आपके आवेदन का मूल्यांकन तब किया जाएगा अगर/जब अधिक खाते उपलब्ध हो जाएंगे। आप सभी उपलब्ध संसाधनों को %(link)s पर देख सकते हैं। शुभकामनाएँ, विकिपीडिया पुस्तकालय"
+
+#. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
+msgid "Your Wikipedia Library application has been waitlisted"
+msgstr "आपके विकिपीडिया पुस्तकालय आवेदन को प्रतीक्षा सूची में डाल दिया गया है"
+
+#. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
+#: TWLight/graphs/views.py:197
+msgid "Days until decision"
+msgstr "निर्णय तक दिन"
+
+#. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
+#: TWLight/graphs/views.py:199 TWLight/graphs/views.py:266
+msgid "Number of applications"
+msgstr "आवेदनों की संख्या"
+
+#. Translators: This is the heading of a data file, for a column containing date data.
+#: TWLight/graphs/views.py:213 TWLight/graphs/views.py:292
+#: TWLight/graphs/views.py:316
+msgid "Date"
+msgstr "दिनांक"
+
+#. Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
+#: TWLight/graphs/views.py:215
+msgid "Number of approved applications"
+msgstr "स्वीकृत आवेदनों की संख्या"
+
+#. Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
+#: TWLight/graphs/views.py:233
+msgid "Month"
+msgstr "महीना"
+
+#. Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
+#: TWLight/graphs/views.py:235
+msgid "Median days until decision"
+msgstr "निर्णय तक मध्यिका दिन"
+
+#. Translators: This is the heading of a data file which lists the number of applications to a partner. Don't translate {partner}.
+#: TWLight/graphs/views.py:294
+#, python-brace-format
+msgid "Number of applications to {partner}"
+msgstr "{partner} को आवेदनों की संख्या"
+
+#. Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner. Don't translate {partner}.
+#: TWLight/graphs/views.py:318
+#, python-brace-format
+msgid "Number of unique users who have applied to {partner}"
+msgstr "अद्वितीय उपयोगकर्ताओं की संख्या जिन्होंने {partner} के लिए आवेदन किया है"
+
+#. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
+#: TWLight/graphs/views.py:333 TWLight/graphs/views.py:360
+msgid "You must be staff to do that."
+msgstr "आपको  ऐसा करने के लिए कर्मचारी होना चाहिए।"
+
+#. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
+#: TWLight/graphs/views.py:343 TWLight/graphs/views.py:377
+#: TWLight/templates/dashboard.html:87
+msgid "Page URL"
+msgstr "पृष्ठ यूआरएल"
+
+#. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
+#: TWLight/graphs/views.py:344 TWLight/graphs/views.py:379
+msgid "Number of (non-unique) visitors"
+msgstr "आगंतुकों (गैर-अद्वितीय) की संख्या"
+
+#. Translators: Title for a list of languages if there is only one.
+#. Translators: Users' detected or selected language.
+#: TWLight/graphs/views.py:395 TWLight/resources/models.py:81
+#: TWLight/users/models.py:74 TWLight/users/templates/users/preferences.html:8
+msgid "Language"
+msgstr "भाषा"
+
+#: TWLight/graphs/views.py:396
+msgid "Number of users"
+msgstr "उपयोगकर्ताओं की संख्या"
+
+#. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
+#: TWLight/resources/forms.py:16
+msgid "Name of the potential partner"
+msgstr "संभावित भागीदार का नाम"
+
+#: TWLight/resources/forms.py:17
+#: TWLight/resources/templates/resources/suggest.html:55
+msgid "Description"
+msgstr "विवरण"
+
+#: TWLight/resources/forms.py:18
+msgid "Website"
+msgstr "वेबसाइट"
+
+#. Translators: This labels a button which users click to submit their suggestion.
+#: TWLight/resources/forms.py:32
+msgid "Submit"
+msgstr "जमा करें"
+
+#. Translators: When staff enter languages, they use ISO language codes. Don't translate ISO, LANGUAGES, or %(code)s.
+#: TWLight/resources/models.py:31
+#, python-format
+msgid "%(code)s is not a valid language code. You must enter an ISO language code, as in the INTERSECTIONAL_LANGUAGES setting at https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py"
+msgstr "%(code)s एक मान्य भाषा कोड नहीं है। आपको \nएक ISO भाषा कोड दर्ज करना होगा, जैसे कि INTERSECTIONAL_LANGUAGES सेटिंग में https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py"
+
+#: TWLight/resources/models.py:48
+msgid "Name"
+msgstr "नाम"
+
+#: TWLight/resources/models.py:49
+msgid "Slug"
+msgstr "काउंटर"
+
+#: TWLight/resources/models.py:52
+msgid "Tag"
+msgstr "चिप्पी"
+
+#: TWLight/resources/models.py:53
+msgid "Tags"
+msgstr "चिप्पियाँ"
+
+#. Translators: Title for a list of languages if there is more than one.
+#: TWLight/resources/models.py:83
+msgid "Languages"
+msgstr "भाषाएँ"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can enter the name of the partner. Don't translate McFarland.
+#: TWLight/resources/models.py:138
+msgid "Partner's name (e.g. McFarland). Note: this will be user-visible and *not translated*."
+msgstr "भागीदार का नाम (उदाहरण: McFarland)। नोट: यह उपयोगकर्ता-दृश्यमान होगा और *अनुवादित नहीं*।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the account coordinator for this partner.
+#: TWLight/resources/models.py:144
+msgid "The coordinator for this Partner, if any."
+msgstr "इस भागीदार के लिए समन्वयक, यदि कोई हो।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether a publisher will be featured on the website's front page.
+#: TWLight/resources/models.py:147
+msgid "Mark as true to feature this partner on the front page."
+msgstr "इस भागीदार को मुख्या पृष्ठ पर दिखाने के लिए सही के रूप में चिह्नित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can enter the partner organisation's country.
+#: TWLight/resources/models.py:150
+msgid "Partner's primary location."
+msgstr "भागीदार का प्राथमिक स्थान।"
+
+#. Translators: This is a status for a Partner, denoting that editors can apply for access.
+#: TWLight/resources/models.py:169
+msgid "Available"
+msgstr "उपलब्ध है"
+
+#. Translators: This is a status for a Partner, denoting that editors cannot apply for access and the Partner will not be displayed to them.
+#: TWLight/resources/models.py:171
+#: TWLight/resources/templates/resources/partner_tile.html:35
+msgid "Not available"
+msgstr "उपलब्ध नहीं है"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
+#: TWLight/resources/models.py:179
+msgid "Should this Partner be displayed to users? Is it open for applications right now?"
+msgstr "क्या इस भागीदार को उपयोगकर्ताओं को प्रदर्शित किया जाना चाहिए? क्या यह अभी आवेदनों के लिए खुला है?"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff specify whether users can request their account be renewed/extended for this partner.
+#: TWLight/resources/models.py:184
+msgid "Can access grants to this partner be renewed? If so, users will be able to request renewals at any time."
+msgstr "क्या इस भागीदार को पहुँच अनुदान का नवीनीकरण किया जा सकता है? यदि हाँ, तो उपयोगकर्ता किसी भी समय नवीनीकरण का अनुरोध कर सकेंगे।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
+#: TWLight/resources/models.py:189 TWLight/resources/models.py:383
+msgid "Add number of new accounts to the existing value, not by reseting it to zero."
+msgstr "नए खातों की संख्या मौजूदा मूल्य में जोड़ें, शून्य पर रीसेट करके नहीं।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
+#: TWLight/resources/models.py:196
+msgid "Link to terms of use. Required if users must agree to terms of use to get access; optional otherwise."
+msgstr "उपयोग की शर्तों की कड़ी। आवश्यक है अगर उपयोगकर्ताओं को पहुँच प्राप्त करने के लिए उपयोग की शर्तों से सहमत होना चाहिए; अन्यथा वैकल्पिक।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
+#: TWLight/resources/models.py:201
+msgid "Optional short description of this partner's resources."
+msgstr "इस भागीदार के संसाधनों का वैकल्पिक संक्षिप्त विवरण।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide a long description of a partner's available resources.
+#: TWLight/resources/models.py:205
+msgid "Optional detailed description in addition to the short description such as collections, instructions, notes, special requirements, alternate access options, unique features, citations notes."
+msgstr "संक्षिप्त विवरण जैसे संग्रह, निर्देश, टिप्पणियाँ, विशेष आवश्यकताएँ, वैकल्पिक पहुँच विकल्प, अनूठी विशेषताएँ, उद्धरण टिप्पणियाँ, के अलावा वैकल्पिक विस्तृत विवरण।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
+#: TWLight/resources/models.py:211
+msgid "Optional instructions for sending application data to this partner."
+msgstr "इस भागीदार को आवेदन डेटा भेजने के लिए वैकल्पिक निर्देश।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
+#: TWLight/resources/models.py:216
+msgid "Optional excerpt limit in terms of number of words per article. Leave empty if no limit."
+msgstr "प्रति लेख शब्दों की संख्या के संदर्भ में वैकल्पिक अंश सीमा। कोई सीमा नहीं होने पर खाली छोड़ दें।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
+#: TWLight/resources/models.py:220
+msgid "Optional excerpt limit in terms of percentage (%) of an article. Leave empty if no limit."
+msgstr "किसी लेख के प्रतिशत (%) के संदर्भ में वैकल्पिक अंश सीमा। कोई सीमा नहीं होने पर खाली छोड़ दें।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can access this as part of the Bundle.
+#: TWLight/resources/models.py:225
+msgid "Is this partner a part of the Bundle?"
+msgstr "क्या यह भागीदार समूह का हिस्सा है?"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
+#: TWLight/resources/models.py:231
+msgid "If True, users can only apply for one Stream at a time from this Partner. If False, users can apply for multiple Streams at a time. This field must be filled in when Partners have multiple Streams, but may be left blank otherwise."
+msgstr "यदि सही है, तो उपयोगकर्ता इस भागीदार से एक समय में केवल एक स्ट्रीम के लिए आवेदन कर सकते हैं। यदि गलत है, तो उपयोगकर्ता एक बार में कई स्ट्रीम के लिए आवेदन कर सकते हैं। जब भागीदारों के पास कई स्ट्रीम्स हों तब यह क्षेत्र अवश्य भरा  जाना चाहिए , अन्यथा खाली छोड़ा जा सकता है।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
+#: TWLight/resources/models.py:238
+msgid "Select all languages in which this partner publishes content."
+msgstr "उन सभी भाषाओं का चयन करें जिनमें यह भागीदार सामग्री प्रकाशित करता है।"
+
+#: TWLight/resources/models.py:245
+msgid "Old Tags"
+msgstr "पुरानी चिप्पी"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
+#: TWLight/resources/models.py:256
+msgid "Link to registration page. Required if users must sign up on the partner's website in advance; optional otherwise."
+msgstr "पंजीकरण पृष्ठ की कड़ी। आवश्यक, यदि उपयोगकर्ताओं को भागीदार की वेबसाइट पर अग्रिम रूप से पंजीकरण करना हो; अन्यथा वैकल्पिक।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their real name when applying
+#: TWLight/resources/models.py:260
+msgid "Mark as true if this partner requires applicant names."
+msgstr "यदि यह भागीदार आवेदक नाम मांगता है, तो इसे सही चिन्हित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify the country in which they live when applying.
+#: TWLight/resources/models.py:263
+msgid "Mark as true if this partner requires applicant countries of residence."
+msgstr "यदि यह भागीदार आवेदक के निवास देशों की जानकारी मांगता है, तो इसे सही चिन्हित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a title for the resource they want to access when applying.
+#: TWLight/resources/models.py:267
+msgid "Mark as true if this partner requires applicants to specify the title they want to access."
+msgstr "यदि यह भागीदार चाहता है कि आवेदक वो शीर्षक निर्दिष्ट करें जिसकी वह पहुँच चाहता है, तो इसे सही चिन्हित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a collection of resources when applying.
+#: TWLight/resources/models.py:271
+msgid "Mark as true if this partner requires applicants to specify the database they want to access."
+msgstr "यदि यह भागीदार चाहता है कि आवेदक वो डेटाबेस निर्दिष्ट करें जिसकी वह पहुँच चाहता है, तो इसे सही चिन्हित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their occupation when applying.
+#: TWLight/resources/models.py:275
+msgid "Mark as true if this partner requires applicants to specify their occupation."
+msgstr "यदि यह भागीदार चाहता है कि आवेदक अपना व्यवसाय निर्दिष्ट करें, तो इसे सही चिन्हित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their institutional affiliation (e.g. university) when applying.
+#: TWLight/resources/models.py:279
+msgid "Mark as true if this partner requires applicants to specify their institutional affiliation."
+msgstr "यदि यह भागीदार चाहता है कि आवेदक अपनी संस्थागत संबद्धता निर्दिष्ट करें, तो इसे सही चिन्हित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
+#: TWLight/resources/models.py:283
+msgid "Mark as true if this partner requires applicants to agree with the partner's terms of use."
+msgstr "यदि यह भागीदार चाहता है कि आवेदक भागीदार की उपयोग की शर्तों से सहमत हो, तो इसे सही चिन्हित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
+#: TWLight/resources/models.py:287
+msgid "Mark as true if this partner requires applicants to have already signed up at the partner website."
+msgstr "यदि यह भागीदार चाहता है कि आवेदक भागीदार की वेबसाइट पर अग्रिम रूप से पंजीकरण करे, तो इसे सही चिन्हित करें।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
+#: TWLight/resources/models.py:349
+msgid "Optional image file that can be used to represent this partner."
+msgstr "वैकल्पिक छवि फ़ाइल जिसका उपयोग इस भागीदार का प्रतिनिधित्व करने के लिए किया जा सकता है।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
+#: TWLight/resources/models.py:377
+msgid "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible and *not translated*. Do not include the name of the partner here."
+msgstr "स्ट्रीम का नाम (उदाहरण: Health and Behavioral Sciences)। उपयोगकर्ता-दृश्यमान होगा और *अनुवादित नहीं*। यहाँ भागीदार का नाम शामिल न करें।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
+#: TWLight/resources/models.py:387
+msgid "Optional description of this stream's resources."
+msgstr "इस स्ट्रीम के संसाधनों का वैकल्पिक विवरण।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
+#: TWLight/resources/models.py:428
+msgid "Organizational role or job title. This is NOT intended to be used for honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
+msgstr "संगठनात्मक भूमिका या नौकरी का शीर्षक। इसका उपयोग माननीयों के लिए करने का इरादा नहीं है। 'संपादकीय सेवाओं के निदेशक' के बारे में सोचें, न कि 'सुश्री' वैकल्पिक।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
+#: TWLight/resources/models.py:435
+msgid "The form of the contact person's name to use in email greetings (as in 'Hi Jake')"
+msgstr "ईमेल अभिवादन में उपयोग करने के लिए संपर्क व्यक्ति के नाम का रूप ( जैसे कि 'नमस्ते रवि')"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
+#: TWLight/resources/models.py:455
+msgid "Potential partner's name (e.g. McFarland)."
+msgstr "संभावित भागीदार का नाम (उदाहरण: McFarland)।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
+#: TWLight/resources/models.py:459
+msgid "Optional description of this potential partner."
+msgstr "इस संभावित भागीदार का वैकल्पिक विवरण।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
+#: TWLight/resources/models.py:463
+msgid "Link to the potential partner's website."
+msgstr "संभावित भागीदार की वेबसाइट की कड़ी।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
+#: TWLight/resources/models.py:467
+msgid "User who authored this suggestion."
+msgstr "इस सुझाव को लिखने वाले उपयोगकर्ता।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
+#: TWLight/resources/models.py:471
+msgid "Users who have upvoted this suggestion."
+msgstr "जिन उपयोगकर्ताओं ने इस सुझाव को समर्थन दिया है।"
+
+#. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
+#: TWLight/resources/models.py:495
+msgid "URL of a video tutorial."
+msgstr "वीडियो ट्यूटोरियल का यूआरएल।"
+
+#. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
+#: TWLight/resources/templates/resources/partner_detail.html:36
+#: TWLight/resources/templates/resources/partner_detail.html:103
+msgid "There are no access grants available for this partner at this time. You can still apply for access; applications will be processed when access is available."
+msgstr "इस समय इस भागीदार के लिए कोई पहुँच अनुदान उपलब्ध नहीं हैं। आप अभी भी पहुंच के लिए आवेदन कर सकते हैं; पहुँच उपलब्ध होने पर आवेदनों पर कार्रवाई की जाएगी।"
+
+#. Translators: This text labels a button which users can click to renew a previously approved application.
+#: TWLight/resources/templates/resources/partner_detail.html:48
+#: TWLight/resources/templates/resources/partner_detail.html:50
+#: TWLight/resources/templates/resources/partner_detail.html:114
+#: TWLight/resources/templates/resources/partner_detail.html:116
+msgid "Renew"
+msgstr "नवीनीकरण"
+
+#. Translators: This text labels a button which users can click to view previously submitted applications.
+#: TWLight/resources/templates/resources/partner_detail.html:56
+#: TWLight/resources/templates/resources/partner_detail.html:121
+msgid "View applications"
+msgstr "आवेदन देखें"
+
+#. Translators: This text labels a button which users can click to view a previously submitted application.
+#: TWLight/resources/templates/resources/partner_detail.html:59
+#: TWLight/resources/templates/resources/partner_detail.html:123
+msgid "View application"
+msgstr "आवेदन देखें"
+
+#. Translators: This text links to the minimum user requirements and terms of use on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:65
+#: TWLight/resources/templates/resources/partner_detail.html:129
+#, python-format
+msgid "Before applying, please review the <strong><a href=\"%(about)s#req\">minimum requirements</a></strong> for access and our <strong><a href=\"%(terms)s\">terms of use</a></strong>."
+msgstr "आवेदन करने से पहले, कृपया पहुँच के लिए <strong><a href=\"%(about)s#req\"> न्यूनतम आवश्यकताओं </a></strong>  और हमारी <strong><a href=\"%(terms)s\">उपयोग की शर्तों</a> </strong> की समीक्षा करें ।"
+
+#. Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist.
+#: TWLight/resources/templates/resources/partner_detail.html:86
+#: TWLight/resources/templates/resources/partner_detail.html:146
+msgid "Remove from waitlist"
+msgstr "प्रतीक्षासूची से हटाएँ"
+
+#. Translators: If a partner is not currently waitlisted, this button allows coordinators to add the partner to the waitlist.
+#: TWLight/resources/templates/resources/partner_detail.html:89
+#: TWLight/resources/templates/resources/partner_detail.html:146
+msgid "Set as waitlisted"
+msgstr "प्रतीक्षासूची में डाला के रूप में सेट करें"
+
+#. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
+#: TWLight/resources/templates/resources/partner_detail.html:157
+#, python-format
+msgid "<strong>%(coordinator)s</strong> processes applications to %(partner)s."
+msgstr "<strong>%(coordinator)s</strong> %(partner)s के लिए आवेदनों को संसाधित करता है।"
+
+#. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to.
+#: TWLight/resources/templates/resources/partner_detail.html:166
+msgid "Talk page"
+msgstr "वार्ता पृष्ठ"
+
+#. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to.
+#: TWLight/resources/templates/resources/partner_detail.html:174
+msgid "Special:EmailUser page"
+msgstr "विशेष:ईमेल_करें पृष्ठ"
+
+#. Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/resources/templates/resources/partner_detail.html:181
+msgid "The Wikipedia Library team will process this application. Want to help? <a href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup\">Sign up as a coordinator.</a>"
+msgstr "विकिपीडिया लाइब्रेरी टीम इस आवेदन पर कार्रवाई करेंगे। सहायता  करना चाहते हैं? <a href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup\"> समन्वयक के रूप में पंजीकरण करें। </a>"
+
+#. Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner
+#: TWLight/resources/templates/resources/partner_detail.html:190
+msgid "List applications"
+msgstr "आवेदनों की सूची"
+
+#. Translators: If a partner has no description written, this message is shown in the Description field on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:215
+msgid "Description not available."
+msgstr "विवरण उपलब्ध नहीं है।"
+
+#. Translators: If a partner has video tutorials, this text shows as the title for that information field.
+#: TWLight/resources/templates/resources/partner_detail.html:251
+msgid "Video tutorials"
+msgstr "वीडियो शिक्षण"
+
+#: TWLight/resources/templates/resources/partner_detail.html:256
+msgid "Video"
+msgstr "विडियो"
+
+#. Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:271
+msgid "Language(s)"
+msgstr "भाषा(एँ)"
+
+#. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:281
+msgid "Languages not available."
+msgstr "भाषाएँ उपलब्ध नहीं है।"
+
+#. Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field.
+#: TWLight/resources/templates/resources/partner_detail.html:294
+msgid "Excerpt limit"
+msgstr "अंश सीमा"
+
+#. Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:301
+#, python-format
+msgid "%(object)s allows a maximum of %(excerpt_limit)s words or %(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia article."
+msgstr "%(object)s के किसी लेख के अधिकतम %(excerpt_limit)s शब्दों या %(excerpt_limit_percentage)s%% को एक विकिपीडिया लेख में प्रस्तुत किया जा सकता है।"
+
+#. Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:308
+#, python-format
+msgid "%(object)s allows a maximum of %(excerpt_limit)s words be excerpted into a Wikipedia article."
+msgstr "%(object)s के किसी लेख के अधिकतम %(excerpt_limit)s शब्दों को एक विकिपीडिया लेख में प्रस्तुत किया जा सकता है।"
+
+#. Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page.
+#: TWLight/resources/templates/resources/partner_detail.html:315
+#, python-format
+msgid "%(object)s allows a maximum of %(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia article."
+msgstr "%(object)s के किसी लेख के अधिकतम %(excerpt_limit_percentage)s%% को एक विकिपीडिया लेख में प्रस्तुत किया जा सकता है।"
+
+#. Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
+#: TWLight/resources/templates/resources/partner_detail.html:333
+msgid "Special requirements for applicants"
+msgstr "आवेदकों के लिए विशेष आवश्यकताएँ"
+
+#. Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate publisher or url.
+#: TWLight/resources/templates/resources/partner_detail.html:341
+#, python-format
+msgid "%(publisher)s requires that you agree with its <a href=\"%(url)s\">terms of use</a>."
+msgstr "%(publisher)s के लिए आवश्यक है कि आप इसकी <a href=\"%(url)s\">उपयोग की शर्तों</a>से सहमत हों।"
+
+#. Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
+#: TWLight/resources/templates/resources/partner_detail.html:351
+#, python-format
+msgid "%(publisher)s requires that you provide your real name."
+msgstr "%(publisher)s के लिए आवश्यक है कि आप अपना वास्तविक नाम प्रदान करें।"
+
+#. Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
+#: TWLight/resources/templates/resources/partner_detail.html:360
+#, python-format
+msgid "%(publisher)s requires that you provide your country of residence."
+msgstr "%(publisher)s के लिए आवश्यक है कि आप अपना देश प्रदान करें।"
+
+#. Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
+#: TWLight/resources/templates/resources/partner_detail.html:369
+#, python-format
+msgid "%(publisher)s requires that you provide your occupation."
+msgstr "%(publisher)s के लिए आवश्यक है कि आप अपना व्यवसाय प्रदान करें।"
+
+#. Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
+#: TWLight/resources/templates/resources/partner_detail.html:378
+#, python-format
+msgid "%(publisher)s requires that you provide your institutional affiliation."
+msgstr "%(publisher)s के लिए आवश्यक है कि आप अपनि संस्थागत संबद्धता प्रदान करें।"
+
+#. Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate publisher.
+#: TWLight/resources/templates/resources/partner_detail.html:387
+#, python-format
+msgid "%(publisher)s requires that you specify a particular title that you want to access."
+msgstr "%(publisher)s के लिए आवश्यक है कि आप एक विशेष शीर्षक निर्दिष्ट करें जिस तक आप पहुँच प्राप्त करना चाहते हैं।"
+
+#. Translators: If a user must register on the partner website before applying, they see this message. Don't translate partner.
+#: TWLight/resources/templates/resources/partner_detail.html:397
+#, python-format
+msgid "%(publisher)s requires that you sign up for an account before applying for access."
+msgstr "%(publisher)s के लिए आवश्यक है कि आप पहुँच के लिए आवेदन करने से पहले एक खाते के लिए पंजीकरण करें।"
+
+#. Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
+#: TWLight/resources/templates/resources/partner_detail.html:416
+msgid "Collections"
+msgstr "संग्रह"
+
+#. Translators: If a partner has their location listed, this message is a label for that location
+#: TWLight/resources/templates/resources/partner_detail.html:453
+msgid "Location"
+msgstr "स्थान"
+
+#. Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:457
+msgid "Terms of use"
+msgstr "उपयोग की शर्तें"
+
+#. Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/).
+#: TWLight/resources/templates/resources/partner_detail.html:460
+msgid "Terms of use not available."
+msgstr "उपयोग की शर्तें उपलब्ध नहीं है।"
+
+#. Translators: This is the heading for the section of a partner page showing data about applications to that partner.
+#. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
+#: TWLight/resources/templates/resources/partner_detail.html:472
+#: TWLight/templates/base.html:134
+msgid "Metrics"
+msgstr "मैट्रिक्स"
+
+#. Translators: This is the label for a number which shows the total number of aplications submitted for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:485
+msgid "Total applications (all time)"
+msgstr "कुल आवेदन (सारे समय में)"
+
+#. Translators: This is the label for a number which shows the total number of unique (not counting duplicates) users who have applied for access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:501
+msgid "Total unique applicants (all time)"
+msgstr "कुल अद्वितीय आवेदक (सरे समय में)"
+
+#. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:523
+msgid "Median days from application to decision"
+msgstr "आवेदन करने से लेकर निर्णय लेने तक के दिनों के माध्यिका दिन"
+
+#. Translators: This is the section header for accounts availability numbers for the available stream(s). (e.g. https://wikipedialibrary.wmflabs.org/partners/52/).
+#: TWLight/resources/templates/resources/partner_detail.html:538
+msgid "Accounts availability"
+msgstr "खातों की उपलब्धता"
+
+#. Translators: This is the label and the number which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). Don't translate accounts_available.
+#: TWLight/resources/templates/resources/partner_detail.html:548
+#, python-format
+msgid "Accounts available: %(total_accounts_available_partner)s"
+msgstr "उपलब्ध खाते: %(total_accounts_available_partner)s"
+
+#. Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:557
+msgid "Applications by status"
+msgstr "स्थिति के आधार पर आवेदन"
+
+#. Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:561
+#: TWLight/resources/templates/resources/partner_detail.html:596
+#: TWLight/resources/templates/resources/partner_detail.html:602
+#: TWLight/resources/templates/resources/partner_detail.html:608
+#: TWLight/templates/dashboard.html:77 TWLight/templates/dashboard.html:143
+#: TWLight/templates/dashboard.html:148 TWLight/templates/dashboard.html:160
+#: TWLight/templates/dashboard.html:170 TWLight/templates/dashboard.html:186
+msgid "download as csv"
+msgstr "सीएसवी के रूप में डाउनलोड करें"
+
+#. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:568
+#, python-format
+msgid "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
+msgid_plural "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
+msgstr[0] "स्वीकृत आवेदनों की संख्या (अब तक): %(total_apps_approved_or_sent)s"
+msgstr[1] "स्वीकृत आवेदनों की संख्या (अब तक): %(total_apps_approved_or_sent)s"
+
+#. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:577
+#, python-format
+msgid "Number of unique users with approved applications (all time): %(unique_users_approved_or_sent)s"
+msgid_plural "Number of unique users with approved applications (all time): %(unique_users_approved_or_sent)s"
+msgstr[0] "स्वीकृत आवेदनों वाले अद्वितीय उपयोगकर्ताओं की संख्या  (अब तक):%(unique_users_approved_or_sent)s"
+msgstr[1] "स्वीकृत आवेदनों वाले अद्वितीय उपयोगकर्ताओं की संख्या  (अब तक):%(unique_users_approved_or_sent)s"
+
+#. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:593
+msgid "Applications over time"
+msgstr "अब तक के आवेदन"
+
+#. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
+#: TWLight/resources/templates/resources/partner_detail.html:596
+msgid "All applications"
+msgstr "सभी आवेदन"
+
+#. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time.
+#: TWLight/resources/templates/resources/partner_detail.html:602
+msgid "Approved applications only"
+msgstr "केवल स्वीकृत आवेदन"
+
+#. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time.
+#: TWLight/resources/templates/resources/partner_detail.html:608
+msgid "Unique users over time"
+msgstr "अब तक के अद्वितीय उपयोगकर्ता"
+
+#: TWLight/resources/templates/resources/partner_filter.html:10
+msgid "Browse Partners"
+msgstr "भागीदार ब्राउज़ करें"
+
+#. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
+#. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
+#: TWLight/resources/templates/resources/partner_filter.html:24
+#: TWLight/templates/base.html:248
+msgid "Suggest a partner"
+msgstr "भागीदार का सुझाव दें"
+
+#: TWLight/resources/templates/resources/partner_filter.html:35
+msgid "No partners meet the specified criteria."
+msgstr "कोई भी भागीदार निर्दिष्ट मानदंडों को पूरा नहीं करता है।"
+
+#. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
+#: TWLight/resources/templates/resources/partner_tile.html:26
+msgid "Link to {{ partner }} signup page"
+msgstr "{{ partner }} पंजीकरण पृष्ठ की कड़ी"
+
+#. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
+#: TWLight/resources/templates/resources/partner_tile.html:59
+msgid "Language(s) not known"
+msgstr "भाषा(एँ) ज्ञात नहीं"
+
+#. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where more details can be found.
+#: TWLight/resources/templates/resources/partner_tile.html:84
+msgid "More info"
+msgstr "अधिक जानकारी"
+
+#: TWLight/resources/templates/resources/partner_users.html:7
+#, python-format
+msgid "%(partner)s approved users"
+msgstr "%(partner)s ने  उपयोगकर्ता को स्वीकृति दी"
+
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was made.
+#: TWLight/resources/templates/resources/partner_users.html:29
+#: TWLight/resources/templates/resources/partner_users.html:74
+msgid "Application date"
+msgstr "आवेदन दिनांक"
+
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was approved by a coordinator.
+#: TWLight/resources/templates/resources/partner_users.html:31
+#: TWLight/resources/templates/resources/partner_users.html:76
+msgid "Application approved"
+msgstr "आवेदन स्वीकृत"
+
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal.
+#: TWLight/resources/templates/resources/partner_users.html:33
+#: TWLight/resources/templates/resources/partner_users.html:78
+msgid "Renewal?"
+msgstr "नवीनीकरण?"
+
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for.
+#: TWLight/resources/templates/resources/partner_users.html:36
+#: TWLight/resources/templates/resources/partner_users.html:81
+msgid "Stream"
+msgstr "स्ट्रीम"
+
+#. Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched.
+#: TWLight/resources/templates/resources/partner_users.html:49
+#: TWLight/resources/templates/resources/partner_users.html:94
+msgid "Imported"
+msgstr "आयातित"
+
+#. Translators: This is the title of the form where users can submit partner suggestions.
+#: TWLight/resources/templates/resources/suggest.html:18
+msgid "Suggest partners"
+msgstr "भागीदारों का सुझाव दें"
+
+#. Translators: This is the title of the panel where user suggestions are displayed.
+#: TWLight/resources/templates/resources/suggest.html:38
+msgid "Browse and support suggestions"
+msgstr "ब्राउज़ करें और सुझावों का समर्थन करें"
+
+#. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
+#: TWLight/resources/templates/resources/suggest.html:47
+msgid "Delete"
+msgstr "हटाएँ"
+
+#. Translators: This is the text that appears before the URL of every partner suggestion.
+#: TWLight/resources/templates/resources/suggest.html:59
+msgid "URL"
+msgstr "यूआरएल"
+
+#: TWLight/resources/templates/resources/suggest.html:64
+#: TWLight/resources/templates/resources/suggest.html:80
+msgid "Upvoted"
+msgstr "वोट दिया"
+
+#: TWLight/resources/templates/resources/suggest.html:64
+#: TWLight/resources/templates/resources/suggest.html:80
+msgid "Upvote"
+msgstr "वोट दें"
+
+#. Translators: This message is displayed on the page where coordinators can request the deletion of a suggestion.
+#: TWLight/resources/templates/resources/suggestion_confirm_delete.html:9
+#, python-format
+msgid "Are you sure you want to delete <b>%(object)s</b>?"
+msgstr "क्या आप वाकई <b>%(object)s</b> हटाना चाहते हैं?"
+
+#. Translators: This is the button users click to confirm changes to their personal information.
+#: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
+#: TWLight/users/views.py:364
+msgid "Confirm"
+msgstr "पुष्टि करें"
+
+#. Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
+#: TWLight/resources/views.py:37
+msgid "Because you are a staff member, this page may include Partners who are not yet available to all users."
+msgstr "क्योंकि आप एक कर्मचारी सदस्य हैं, इसलिए इस पृष्ठ में वे भागीदार शामिल हो सकते हैं जो अभी तक सभी उपयोगकर्ताओं के लिए उपलब्ध नहीं हैं।"
+
+#: TWLight/resources/views.py:59
+msgid "This partner is not available. You can see it because you are a staff member, but it is not visible to non-staff users."
+msgstr "यह भागीदार उपलब्ध नहीं है। आप इसे देख सकते हैं क्योंकि आप एक कर्मचारी सदस्य हैं, लेकिन यह गैर-कर्मचारी उपयोगकर्ताओं को दिखाई नहीं देता है।"
+
+#. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
+#: TWLight/resources/views.py:211
+msgid "This partner is now waitlisted"
+msgstr "यह भागीदार अब प्रतीक्षा सूची में है"
+
+#. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
+#: TWLight/resources/views.py:215
+msgid "This partner is now available for applications"
+msgstr "यह भागीदार अब आवेदनों के लिए उपलब्ध है"
+
+#. Translators: Shown to users when they successfully add a new partner suggestion.
+#: TWLight/resources/views.py:311
+msgid "Your suggestion has been added."
+msgstr "आपका सुझाव जोड़ दिया गया है।"
+
+#. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
+#: TWLight/resources/views.py:316
+msgid "You must be a Wikipedia editor to do that."
+msgstr "ऐसा करने के लिए आपको एक विकिपीडिया संपादक होना चाहिए।"
+
+#. Translators: Shown to coordinators when they successfully delete a partner suggestion
+#: TWLight/resources/views.py:331
+msgid "Suggestion has been deleted."
+msgstr "सुझाव हटा दिया गया है।"
+
+#. Translators: Shown on the website's 400 page, when a user sends a bad request.
+#: TWLight/templates/400.html:8
+msgid "Bad Request"
+msgstr "खराब अनुरोध"
+
+#. Translators: Shown on the website's 400 page, when a user sends a bad request.
+#: TWLight/templates/400.html:12
+msgid "Sorry; we don't know what to do with that."
+msgstr "क्षमा करें, हम नहीं जानते कि उसके साथ क्या करना है।"
+
+#. Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate path or Phabricator.
+#: TWLight/templates/400.html:17
+#, python-format
+msgid "If you think we should know what to do with that, please email us about this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> or report it to us on <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Bad%%20Request\">Phabricator</a>"
+msgstr "अगर आपको लगता है कि हमें पता होना चाहिए कि हमें क्या करना है, तो कृपया हमें इस त्रुटि के बारे में यहाँ पर ईमेल करें <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> या फिर यहाँ पर हमें इसकी रिपोर्ट करें <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Bad%%20Request\">Phabricator</a>"
+
+#. Translators: Alt text for an image shown on the 400 error page.
+#. Translators: Alt text for an image shown on the 403 error page.
+#: TWLight/templates/400.html:30 TWLight/templates/403.html:30
+msgid "Sad hamster in a cage"
+msgstr "पिंजरे में उदास हैम्स्टर"
+
+#. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
+#: TWLight/templates/403.html:8
+msgid "Permission denied"
+msgstr "अनुमति नहीं मिली"
+
+#. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
+#: TWLight/templates/403.html:12
+msgid "Sorry; you aren't allowed to do that."
+msgstr "क्षमा करें, आपको ऐसा करने की अनुमति नहीं है।"
+
+#. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate path or Phabricator.
+#: TWLight/templates/403.html:17
+#, python-format
+msgid "If you think your account should be able to do that, please email us about this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> or report it to us on <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">Phabricator</a>"
+msgstr "यदि आपको लगता है कि आपका खाता ऐसा करने में सक्षम होना चाहिए, तो कृपया हमें इस त्रुटि के बारे में यहाँ पर ईमेल करें? <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> या फिर यहाँ पर हमें इसकी रिपोर्ट करें <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">Phabricator</a>"
+
+#. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
+#: TWLight/templates/404.html:8
+msgid "Not found"
+msgstr "नहीं मिला"
+
+#. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
+#: TWLight/templates/404.html:12
+msgid "Sorry; we can't find that."
+msgstr "क्षमा करें, हमें वह नहीं मिल रहा है।"
+
+#. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate path or Phabricator.
+#: TWLight/templates/404.html:16
+#, python-format
+msgid "If you are certain that something should be here, please email us about this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a> or report it to us on <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\">Phabricator</a>"
+msgstr "यदि आप निश्चित हैं कि कुछ यहाँ होना चाहिए, तो कृपया हमें इस त्रुटि के बारे में यहाँ ईमेल करें <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a> या इस पर हमें यहाँ रिपोर्ट करें <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\">Phabricator</a>"
+
+#. Translators: Alt text for an image shown on the 404 error page.
+#: TWLight/templates/404.html:29
+msgid "A crab on a beach looking towards the camera"
+msgstr "समुद्र तट पर एक केकड़ा कैमरे की ओर देख रहा है"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/templates/about.html:6
+msgid "About the Wikipedia Library"
+msgstr "विकिपीडिया पुस्तकालय के बारे में"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/templates/about.html:10
+msgid "The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects."
+msgstr "विकिपीडिया पुस्तकालय विकिमीडिया परियोजनाओं में सामग्री योगदान करने की आपकी क्षमता में सुधार करने के लिए अनुसंधान सामग्री तक मुफ्त पहुँच प्रदान करता है।"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/templates/about.html:18
+msgid "The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to those partner resources. Here you can see which partnerships are available, what kinds of materials each database provides, and apply for the ones you want. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review applications and work with partners to get you your free access."
+msgstr "विकिपीडिया पुस्तकालय कार्ड मंच आवेदनों की समीक्षा करने और उन भागीदार संसाधनों तक पहुँच प्रदान करने के लिए हमारा केंद्रीय उपकरण है। यहां आप देख सकते हैं कि कौन सी भागीदारियाँ उपलब्ध हैं, प्रत्येक डेटाबेस किस प्रकार की सामग्री प्रदान करता है, और जो आप चाहते हैं उसके लिए आवेदन करें। स्वयंसेवी समन्वयक, जिन्होंने विकिमीडिया फ़ाउंडेशन के साथ गैर-प्रकटीकरण समझौतों पर हस्ताक्षर किए हैं, आवेदनों की समीक्षा करते हैं और आपको मुफ्त एक्सेस दिलाने के लिए भागीदारों के साथ काम करते हैं।"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
+#: TWLight/templates/about.html:26
+#, python-format
+msgid "For more information about how application information is stored and reviewed please see our <a href=\"%(terms_url)s\">terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them."
+msgstr "आवेदन की जानकारी कैसे संग्रहीत और समीक्षा की जाती है, इस बारे में अधिक जानकारी के लिए कृपया हमारी <a href=\"%(terms_url)s\"> उपयोग की शर्तें और गोपनीयता नीति </a> देखें। आपके द्वारा आवेदन किए गए खाते प्रत्येक भागीदार के मंच द्वारा प्रदान की गई उपयोग की शर्तों के अधीन हैं; कृपया उनकी समीक्षा करें।"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:32
+msgid "Who can receive access?"
+msgstr "एक्सेस कौन प्राप्त कर सकते हैं?"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
+#: TWLight/templates/about.html:36
+msgid "Any active editor in good standing can receive access.  Applications are reviewed based on the editor’s need and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply."
+msgstr "अच्छी स्थिति में कोई भी सक्रिय संपादक पहुंच प्राप्त कर सकता है। संपादक की आवश्यकता और योगदान के आधार पर आवेदनों की समीक्षा की जाती है। अगर आपको लगता है कि आप हमारे किसी भागीदार संसाधन तक पहुंच का उपयोग कर सकते हैं और विकिमीडिया फाउंडेशन द्वारा समर्थित किसी भी परियोजना में एक सक्रिय संपादक हैं, तो कृपया आवेदन करें।"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:43
+msgid "Any editor can apply for access, but there are a few basic requirements:"
+msgstr "कोई भी संपादक पहुंच के लिए आवेदन कर सकता है, लेकिन कुछ बुनियादी आवश्यकताएँ हैं:"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:47
+msgid "You have an account that is a minimum of 6 months old"
+msgstr "आपके पास एक खाता है जो न्यूनतम 6 महीने का है"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:51
+msgid "You have a minimum of 500 edits"
+msgstr "आपके पास न्यूनतम 500 संपादन हैं"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:55
+msgid "You have made at least 10 edits to Wikimedia projects in the last month"
+msgstr "आपने पिछले महीने विकिमीडिया परियोजनाओं में कम से कम 10 संपादन किए हैं"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:59
+msgid "You are not currently blocked from editing Wikipedia"
+msgstr "आप वर्तमान में विकिपीडिया के संपादन से अवरुद्ध नहीं हैं"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:63
+msgid "You do not already have access to the resources you’re applying for through another library or institution"
+msgstr "आप पहले से ही किसी और पुस्तकालय या संस्था के माध्यम से उन संसाधनों की पहुँच नहीं है जिनके लिए आप आवेदन कर रहे हैं"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:70
+msgid "If you don't quite meet the experience requirements but think you would still be a strong candidate for access, feel free to apply and you may still be considered."
+msgstr "यदि आप अनुभव की आवश्यकताओं को पूरा नहीं करते हैं, लेकिन लगता है कि आप अभी भी एक्सेस के लिए एक मजबूत उम्मीदवार होंगे, तो आवेदन करने में संकोच न करें और आपके बारे में अभी भी विचार किया  जा सकता है।"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:77
+msgid "What do I do after I get access?"
+msgstr "पहुँच प्राप्त करने के बाद मैं क्या करूँ?"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:81
+msgid "Once you have access we encourage you to use the databases for both research that creates or improves Wikimedia content and serves your other research needs."
+msgstr "एक बार जब आप उपयोग कर सकते है तो हम आपको डेटाबेस का उपयोग दोनों प्रकार के अनुसंधान करने के लिए प्रोत्साहित करते हैं जो कि विकिमीडिया सामग्री को बनाता है या बेहतर बनाता है और आपके अन्य अनुसंधान की आवश्यकता पूरी करता है।"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:88
+msgid "Please keep in mind, our agreements with partners carry certain expectations."
+msgstr "कृपया ध्यान रखें, भागीदारों के साथ हमारे समझौते के साथ कुछ उम्मीदें जुडी हैं।"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:95
+msgid "Approved editors <i>may</i> use their access to:"
+msgstr "स्वीकृत संपादक उनकी पहुंच का उपयोग कर <i>सकते</i> हैं:"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:99
+msgid "Search, view, retrieve, and display partner content"
+msgstr "भागीदार सामग्री खोजें, देखें, पुनर्प्राप्त करें और प्रदर्शित करें"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:103
+msgid "Electronically save partner content"
+msgstr "भागीदार सामग्री को इलेक्ट्रॉनिक रूप से सहेजें"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:107
+msgid "Print out single copies of partner content"
+msgstr "भागीदार सामग्री की एकल प्रतियाँ प्रिंट करें"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:114
+msgid "Approved editors <i>should not</i>:"
+msgstr "स्वीकृत संपादक  को <i>नहीं करना चाहिए</i>:"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:118
+msgid "Share their account logins or passwords with others, or sell their access to other parties"
+msgstr "अपना खाता लॉगिन या पासवर्ड दूसरों के साथ साँझा करें, या अपनी पहुँच अन्य दलों को बेच दें"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:122
+msgid "Mass scrape or mass download partner content"
+msgstr "भागीदार सामग्री के साथ बड़े पैमाने पर छेड़-छड या बड़े पैमाने पर डाउनलोड"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:126
+msgid "Systematically make printed or electronic copies of multiple extracts of restricted content available for any purpose"
+msgstr "व्यवस्थित रूप से किसी भी उद्देश्य के लिए उपलब्ध प्रतिबंधित सामग्री के कई अंशों की मुद्रित या इलेक्ट्रॉनिक प्रतियाँ बनान"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
+#: TWLight/templates/about.html:130
+msgid "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles"
+msgstr "बिना अनुमति के मेटाडेटा को डेटामाइन करना, उदाहरण के लिए, ऑटो-निर्मित आधार लेखों के लिए मेटाडेटा का उपयोग करने के लिए"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:137
+msgid "Respecting these agreements allows us to continue growing the partnerships available to our entire community."
+msgstr "इन समझौतों का सम्मान करने से हम अपने पूरे समुदाय के लिए उपलब्ध भागीदारियों को बढ़ाना जारी रख सकते हैं।"
+
+#. Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if other tags are used for your language Wikipedia. If you're not sure how to handle this section, take your best guess and give the developer a heads-up.
+#: TWLight/templates/about.html:146
+msgid "Citation practices vary by project and even by article.  Generally, we support editors citing where they found information, in a form that allows others to check it for themselves.  That often means providing both original source details as well as a link to the partner database in which the source was found."
+msgstr "उद्धरण प्रथा परियोजना और लेख के अनुसार बदलती रहती हैं। आम तौर पर, हम  समर्थन करते हैं की संपादक जहां उन्हें जानकारी मिलती है उसका उद्धरण एक ऐसे रूप में करें जो दूसरों को खुद के लिए इसे जांचने की अनुमति देता है। प्राय: इसका मतलब दोनों मूल स्रोत का विवरण और साथ-साथ भागीदार डेटाबेस जिसमें स्रोत पाया गया था की एक कड़ी प्रदान करन होता है।"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above an example Wikipedia citation.
+#: TWLight/templates/about.html:153
+msgid "Here is one citation example:"
+msgstr "यहाँ एक उद्धरण उदाहरण है:"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above contact information.
+#: TWLight/templates/about.html:175
+msgid "Whom do I contact if I have questions, need help, or want to volunteer?"
+msgstr "यदि मैं प्रश्न पूछना चाहता हूँ, सहायता की आवश्यकता है, या स्वयंसेवक बनना चाहता हूँ तो इसके लिए मुझे  किससे संपर्क करना चाहिए?"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to the Wikipedia Library email address.
+#: TWLight/templates/about.html:179
+msgid "Email:"
+msgstr "ईमेल:"
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to a link to the Wikipedia Library discussion page on Wikipedia. Translate 'Talk' to whatever the discussion namespace is called for this language Wikipedia.
+#: TWLight/templates/about.html:186
+msgid "Talk page:"
+msgstr "वार्ता पृष्ठ:"
+
+#: TWLight/templates/base.html:14 TWLight/templates/base.html:65
+msgid "The Wikipedia Library Card Platform"
+msgstr "विकिपीडिया पुस्तकालय कार्ड मंच"
+
+#. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
+#: TWLight/templates/base.html:59
+msgid "Library Card Platform home"
+msgstr "पुस्तकालय कार्ड मंच घर"
+
+#. Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate home_url or username.
+#: TWLight/templates/base.html:75 TWLight/templates/base.html:80
+#, python-format
+msgid "Hi, <a href=\"%(home_url)s\">%(username)s</a>!"
+msgstr "नमस्ते,<a href=\"%(home_url)s\">%(username)s</a>!"
+
+#. Translators: Shown in the top bar of almost every page, taking users to the page where they can browse current partners.
+#: TWLight/templates/base.html:94
+msgid "Browse"
+msgstr "ब्राउज़ करें"
+
+#. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
+#: TWLight/templates/base.html:110
+msgid "Review"
+msgstr "समीक्षा"
+
+#. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
+#: TWLight/templates/base.html:119
+msgid "Send data to partners"
+msgstr "भागीदारों को डेटा भेजें"
+
+#. Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline).
+#: TWLight/templates/base.html:127
+msgid "Latest activity"
+msgstr "अन्तिम गतिविधि"
+
+#. Translators: Shown in the top bar of almost every page when the current user is staff, linking to the administrator interface.
+#: TWLight/templates/base.html:142
+msgid "Admin"
+msgstr "प्रबन्धक"
+
+#. Translators: Shown in the top bar of almost every page when the current user is logged in.
+#: TWLight/templates/base.html:151
+msgid "Log out"
+msgstr "लॉगआउट"
+
+#. Translators: Shown in the top bar of almost every page when the current user is not logged in.
+#: TWLight/templates/base.html:163 TWLight/templates/home.html:22
+msgid "Log in"
+msgstr "लॉगिन करें"
+
+#. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate email_url.
+#: TWLight/templates/base.html:181
+#, python-format
+msgid "You don't have an email on file. We can't finalize your access to partner resources without an email. Please <a href=\"%(email_url)s\">update your email</a>."
+msgstr "आपके पास फ़ाइल पर ईमेल नहीं है। हम बिना ईमेल के भागीदार संसाधनों तक आपकी पहुँच को अंतिम रूप नहीं दे सकते। कृपया <a href=\"%(email_url)s\">अपना ईमेल अपडेट करें</a>।"
+
+#. Translators: Shown if the current user has requested the processing of their data should be restricted.
+#: TWLight/templates/base.html:192
+#, python-format
+msgid "You have requested a restriction on the processing of your data. Most site functionality will not be available to you until you <a href=\"%(restrict_url)s\">lift this restriction</a>."
+msgstr "आपने अपने डेटा के प्रसंस्करण पर प्रतिबंध का अनुरोध किया है। जब तक आप <a href=\"%(restrict_url)s\">इस प्रतिबंध को नहीं उठाते हैं</a> तब तक अधिकांश साइट कार्यक्षमता आपके लिए उपलब्ध नहीं होगी।"
+
+#. Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
+#. blocktrans trimmed
+#. The Wikipedia Library Card Platform is a project of
+#. <a href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
+#. The Wikipedia Library</a>.
+#. endblocktrans
+#. </p>
+#. <p>
+#. <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+#. <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+#. </a>
+#. </p>
+#. <p>
+#. comment Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
+#: TWLight/templates/base.html:222
+msgid "This work is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 International License</a>."
+msgstr "यह कार्य एक <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\"> क्रिएटिव कॉमन्स एट्रिब्यूशन-शेयरएलाई 4.0 इंटरनेशनल लाइसेंस </a> के तहत लाइसेंस प्राप्त है।"
+
+#. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
+#: TWLight/templates/base.html:236
+msgid "About"
+msgstr "के बारे में"
+
+#. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
+#: TWLight/templates/base.html:242
+msgid "Terms of use and privacy policy"
+msgstr "उपयोग की शर्तें और गोपनीयता नीति"
+
+#. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
+#: TWLight/templates/base.html:254
+msgid "Feedback"
+msgstr "प्रतिक्रिया"
+
+#. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
+#: TWLight/templates/base.html:266
+msgid "Contact us"
+msgstr "हमें संपर्क करें"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of available partners.
+#: TWLight/templates/dashboard.html:17
+msgid "Total partners"
+msgstr "कुल भागीदार"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which goes to the full list of available partners.
+#: TWLight/templates/dashboard.html:24
+msgid "See all partners"
+msgstr "सभी भागीदार देखें"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of editors (users) who registered.
+#: TWLight/templates/dashboard.html:41
+msgid "Total unique editors receiving access"
+msgstr "कुल अद्वितीय पहुँच प्राप्त संपादकों"
+
+#: TWLight/templates/dashboard.html:56
+msgid "Total accounts distributed"
+msgstr "कुल खाते वितरित किए गए"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which moves the page down to metrics about applications.
+#: TWLight/templates/dashboard.html:63
+msgid "Jump to application metrics"
+msgstr "आवेदन मैट्रिक्स पर जाएँ"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
+#: TWLight/templates/dashboard.html:77
+msgid "Page views (staff only)"
+msgstr "पृष्ठ दृश्य (केवल कर्मचारी)"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the most viewed pages on the site.
+#: TWLight/templates/dashboard.html:83
+msgid "Most popular pages"
+msgstr "सबसे लोकप्रिय पृष्ठ"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the column for pageview numbers for each partner page.
+#: TWLight/templates/dashboard.html:91 TWLight/templates/dashboard.html:115
+msgid "Number of views"
+msgstr "दृश्यों की संख्या"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the pageview data for each partner page.
+#: TWLight/templates/dashboard.html:108
+msgid "Partner pages by popularity"
+msgstr "लोकप्रियता के अनुसार भागीदार पृष्ठ"
+
+#. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
+#: TWLight/templates/dashboard.html:140
+msgid "Applications"
+msgstr "आवेदन"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time.
+#: TWLight/templates/dashboard.html:143
+msgid "Number of accounts distributed over time"
+msgstr "अब तक वितरित खातों की संख्या"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.
+#: TWLight/templates/dashboard.html:148
+msgid "Applications by number of days until decision"
+msgstr "निर्णय होने तक दिनों की संख्या के अनुसार आवेदन"
+
+#. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/).
+#: TWLight/templates/dashboard.html:151
+msgid "The x axis is the number of days to make a final decision (either approved or denied) on an application. The y axis is the number of applications that have taken exactly that many days to decide."
+msgstr "x अक्ष किसी आवेदन पर अंतिम निर्णय (या तो स्वीकृत या अस्वीकृत) करने के लिए दिनों की संख्या है। y अक्ष उन अनुप्रयोगों की संख्या है जिन्हें तय करने में सही उतने ही दिन लग गए हैं।"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.
+#: TWLight/templates/dashboard.html:160
+msgid "Median days until application decision, per month"
+msgstr "आवेदन के निर्णय तक प्रति माह माध्यक दिन"
+
+#. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean.
+#: TWLight/templates/dashboard.html:163
+msgid "This shows the median number of days to reach a decision on the applications opened in a given month."
+msgstr "यह किसी दिए गए महीने में खोले गए आवेदनों पर निर्णय लेने के लिए दिनों की माध्यिक संख्या को दर्शाता है।"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
+#: TWLight/templates/dashboard.html:170
+msgid "Open application status distribution"
+msgstr "आवेदन स्थिति वितरण खोलें"
+
+#. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.
+#: TWLight/templates/dashboard.html:182
+msgid "Users"
+msgstr "सदस्य"
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
+#: TWLight/templates/dashboard.html:186
+msgid "User language distribution"
+msgstr "उपयोगकर्ता भाषा वितरण"
+
+#. Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/templates/home.html:9
+msgid "Sign up for free access to dozens of research databases and resources available through The Wikipedia Library."
+msgstr "विकिपीडिया पुस्तकालय के माध्यम से उपलब्ध दर्जनों शोध डेटाबेस और संसाधनों तक मुफ्त पहुंच के लिए पंजीकरण करें।"
+
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
+#: TWLight/templates/home.html:13 TWLight/templates/home.html:48
+msgid "Learn more"
+msgstr "अधिक जानिए"
+
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the header for that section.
+#: TWLight/templates/home.html:33
+msgid "Benefits"
+msgstr "लाभ"
+
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
+#: TWLight/templates/home.html:37
+#, python-format
+msgid "<p>The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects. </p> <p>Through the Library Card you can apply for access to %(partner_count)s leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p> <p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, <a href=\"/applications/request/\">please apply</a>.</p>"
+msgstr "<p>विकिपीडिया पुस्तकालय विकिमीडिया परियोजनाओं में सामग्री योगदान करने की आपकी क्षमता में सुधार करने के लिए अनुसंधान सामग्री तक मुफ्त पहुँच प्रदान करती है।</p><p>पुस्तकालय कार्ड के माध्यम से आप 80,000 अद्वितीय पत्रिकाओं सहित विश्वसनीय स्रोतों के प्रमुख प्रकाशकों के %(partner_count)s तक पहुँच के लिए आवेदन कर सकते हैं जिन्के लिए अन्यथा भुगतान किया जाएगा। पंजीकरण करने के लिए बस अपने विकिपीडिया लॉगिन का उपयोग करें। जल्द ही आ रहा है ... केवल अपने विकिपीडिया लॉगिन का उपयोग कर संसाधनों तक सीधी पहुँच!</p><p>यदि आपको लगता है कि आप हमारे किसी भागीदार संसाधन तक पहुँच का उपयोग कर सकते हैं और विकिमीडिया फाउंडेशन द्वारा समर्थित किसी भी परियोजना में एक सक्रिय संपादक हैं, <a href=\"/applications/request/\"> तो कृपया आवेदन करें </a>।</p>"
+
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
+#: TWLight/templates/home.html:54
+msgid "Partners"
+msgstr "भागीदार"
+
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the introductory text to that list.
+#: TWLight/templates/home.html:57
+msgid "Below are a few of our featured partners:"
+msgstr "नीचे हमारे खास भागीदारों में से कुछ  दिए हैं:"
+
+#: TWLight/templates/home.html:63
+msgid "Browse all partners"
+msgstr "सभी भागीदारों को ब्राउज़ करें"
+
+#: TWLight/templates/home.html:96
+msgid "More Activity"
+msgstr "अधिक गतिविधि"
+
+#. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
+#: TWLight/templates/registration/login.html:16
+msgid "Log in with your Wikipedia account"
+msgstr "अपने विकिपीडिया खाते से लॉग इन करें"
+
+#. Translators: Found on the password reset page.
+#: TWLight/templates/registration/password_change_form.html:11
+#: TWLight/users/templates/users/preferences.html:28
+msgid "Change password"
+msgstr "कूटशब्द बदलें"
+
+#. Translators: Found on the page for resetting your password.
+#: TWLight/templates/registration/password_reset_form.html:7
+#: TWLight/templates/registration/password_reset_form.html:16
+msgid "Reset password"
+msgstr "कूटशब्द पुनःस्थापित करें"
+
+#. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
+#: TWLight/templates/registration/password_reset_form.html:10
+msgid "Forgot your password? Enter your email address below, and we'll email instructions for setting a new one."
+msgstr "अपना कूटशब्द भूल गए? नीचे अपना ईमेल पता दर्ज करें, और हम एक नया सेट करने के लिए निर्देश ईमेल करेंगे।"
+
+#. Translators: This error message is shown when there's a problem with the authenticated login process.
+#: TWLight/users/authorization.py:215
+msgid "You tried to log in but presented an invalid access  token."
+msgstr "आपने लॉग इन करने का प्रयास किया, लेकिन एक अमान्य एक्सेस टोकन प्रस्तुत किया।"
+
+#. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
+#: TWLight/users/authorization.py:268 TWLight/users/authorization.py:358
+#, python-brace-format
+msgid "{domain} is not an allowed host."
+msgstr "{domain} एक स्वीकृत होस्ट नहीं है।"
+
+#: TWLight/users/authorization.py:347
+msgid "Did not receive a valid oauth response."
+msgstr "मान्य ओउथ प्रतिक्रिया नहीं मिली।"
+
+#. Translators: This message is shown when the OAuth login process fails.
+#: TWLight/users/authorization.py:369
+msgid "Could not find handshaker."
+msgstr "हैंडशेकर नहीं मिल सका।"
+
+#. Translators: This message is shown when the OAuth login process fails.
+#: TWLight/users/authorization.py:380
+msgid "No request token."
+msgstr "कोई अनुरोध टोकन नहीं।"
+
+#. Translators: This message is shown when the OAuth login process fails.
+#: TWLight/users/authorization.py:390
+msgid "Access token generation failed."
+msgstr "पहुंच टोकन उत्पादन विफल।"
+
+#. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
+#: TWLight/users/authorization.py:404
+msgid "Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."
+msgstr "आपका विकिपीडिया खाता उपयोग की शर्तों में पात्रता मानदंडों को पूरा नहीं करता है, इसलिए आपका विकिपीडिया पुस्तकालय कार्ड मंच खाता सक्रिय नहीं किया जा सकता है।"
+
+#: TWLight/users/authorization.py:410
+msgid "Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."
+msgstr "आपका विकिपीडिया खाता अब उपयोग की शर्तों में पात्रता मानदंडों को पूरा नहीं करता है, इसलिए आपको लॉग इन नहीं किया जा सकता। अगर आपको लगता है कि आपको लॉग इन करने में सक्षम होना चाहिए, तो कृपया wikipedialibrary@wikimedia.org पर ईमेल करें।"
+
+#. Translators: this message is displayed to users with brand new accounts.
+#: TWLight/users/authorization.py:423
+msgid "Welcome! Please agree to the terms of use."
+msgstr "आपका स्वागत है! कृपया उपयोग की शर्तों से सहमत हों।"
+
+#. Translators: This message is shown when a user logs back in to the site after their first time.
+#: TWLight/users/authorization.py:428
+msgid "Welcome back!"
+msgstr "वापसी पर स्वागत है!"
+
+#. Translators: This is the label for a button that users click to update their public information.
+#: TWLight/users/forms.py:28
+msgid "Update profile"
+msgstr "प्रोफ़ाइल अपडेट करें"
+
+#. Translators: This labels a field where users can describe their activity on Wikipedia in a small biography.
+#: TWLight/users/forms.py:35
+msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
+msgstr "विकिपीडिया में आपके योगदान का वर्णन करें: संपादित किए गए विषय, इत्यादि।"
+
+#. Translators: Labels the button users click to request a restriction on the processing of their data.
+#: TWLight/users/forms.py:59
+msgid "Restrict my data"
+msgstr "मेरे डेटा को प्रतिबंधित करें"
+
+#. Translators: Users must click this button when registering to agree to the website terms of use.
+#: TWLight/users/forms.py:82
+msgid "I agree with the terms of use"
+msgstr "मैं उपयोग की शर्तों से सहमत हूँ"
+
+#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
+#: TWLight/users/forms.py:91
+msgid "I accept"
+msgstr "मुझे स्वीकार है"
+
+#. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
+#: TWLight/users/forms.py:105
+msgid "Use my Wikipedia email address"
+msgstr "मेरे विकिपीडिया ईमेल पते का उपयोग करें"
+
+#. Translators: This labels a button which users click to change their email.
+#: TWLight/users/forms.py:118
+msgid "Update email"
+msgstr "ईमेल अपडेट करें"
+
+#. Translators: Users must agree to the website terms of use.
+#: TWLight/users/models.py:63
+msgid "Has this user agreed with the terms of use?"
+msgstr "क्या यह उपयोगकर्ता उपयोग की शर्तों से सहमत है?"
+
+#. Translators: This field records the date the user agreed to the website terms of use.
+#: TWLight/users/models.py:66
+msgid "The date this user agreed to the terms of use."
+msgstr "इस उपयोगकर्ता के उपयोग की शर्तों से सहमत होने की तिथि।"
+
+#. Translators: An option to set whether users email is copied to their website account from Wikipedia when logging in.
+#: TWLight/users/models.py:68
+msgid "Should we automatically update their email from their Wikipedia email when they log in? Defaults to True."
+msgstr "क्या हमें उनके लॉग इन करने पर उनके विकिपीडिया ईमेल से स्वचालित रूप से उनके ईमेल को अपडेट करना चाहिए? अभाव में सत्य।"
+
+#. Translators: The date the user's profile was created on the website (not on Wikipedia).
+#: TWLight/users/models.py:106
+msgid "When this profile was first created"
+msgstr "जब यह प्रोफाइल पहली बार बनाई गई थी"
+
+#. Translators: The total number of edits this user has made to all Wikipedia projects
+#: TWLight/users/models.py:115
+msgid "Wikipedia edit count"
+msgstr "विकिपीडिया संपादित गणना"
+
+#. Translators: The date this user registered their Wikipedia account
+#: TWLight/users/models.py:118
+msgid "Date registered at Wikipedia"
+msgstr "विकिपीडिया में पंजीकरण की तिथि"
+
+#. Translators: The User ID for this user on Wikipedia
+#: TWLight/users/models.py:122
+msgid "Wikipedia user ID"
+msgstr "विकिपीडिया उपयोगकर्ता आईडी"
+
+#. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
+#: TWLight/users/models.py:128
+msgid "Wikipedia groups"
+msgstr "विकिपीडिया समूह"
+
+#. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
+#: TWLight/users/models.py:131
+msgid "Wikipedia user rights"
+msgstr "विकिपीडिया उपयोगकर्ता अधिकार"
+
+#. Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
+#: TWLight/users/models.py:135
+msgid "At their last login, did this user meet the criteria in the terms of use?"
+msgstr "उनके अंतिम लॉगिन पर, क्या यह उपयोगकर्ता उपयोग की शर्तों में मानदंडों को पूरा करता था?"
+
+#. Translators: Describes information added by the user to describe their Wikipedia edits.
+#: TWLight/users/models.py:142
+msgid "Wiki contributions, as entered by user"
+msgstr "उपयोगकर्ता द्वारा दर्ज किए गए विकि योगदान"
+
+#: TWLight/users/models.py:362
+#, python-brace-format
+msgid "{wp_username}"
+msgstr "\n{wp_username}"
+
+#. Translators: Users viewing their own profile can click this button to go to the browse partners page.
+#: TWLight/users/templates/users/editor_detail.html:13
+msgid "Start new application"
+msgstr "नया आवेदन आरम्भ करें"
+
+#. Translators: This is the heading for user information on profile and application pages.
+#: TWLight/users/templates/users/editor_detail.html:23
+msgid "User information"
+msgstr "उपयोगकर्ता जानकारी"
+
+#. Translators: This is the heading for Wikipedia account information on profile and application pages.
+#: TWLight/users/templates/users/editor_detail.html:25
+msgid "Editor data"
+msgstr "संपादक डेटा"
+
+#. Translators: This is shown on editor profiles, in their profile page or on applications.
+#: TWLight/users/templates/users/editor_detail.html:35
+msgid "Information with an * was retrieved from Wikipedia directly. Other information was entered directly by users or site admins, in their preferred language."
+msgstr "* वाली सूचना  सीधे विकिपीडिया से प्राप्त की गई थी। अन्य जानकारी सीधे उपयोगकर्ताओं या साइट प्रबंधकों द्वारा उनकी पसंदीदा भाषा में डाली गई थी।"
+
+#. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
+#: TWLight/users/templates/users/editor_detail.html:47
+#, python-format
+msgid "%(username)s has coordinator privileges on this site."
+msgstr "%(username)s को इस साइट पर समन्वयक विशेषाधिकार हैं।"
+
+#. Translators: This is shown on editor profiles, under the heading for Wikipedia editor data.
+#: TWLight/users/templates/users/editor_detail_data.html:5
+msgid "This information is updated automatically from your Wikimedia account each time you log in, except for the Contributions field, where you can describe your Wikimedia editing history."
+msgstr "यह जानकारी आपके विकिमीडिया खाते से हर बार आपके द्वारा लॉग इन करने पर अपने आप अपडेट हो जाती है, योगदान क्षेत्र को छोड़कर, जहाँ आप अपने विकिपीडिया संपादन इतिहास का वर्णन कर सकते हैं।"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
+#: TWLight/users/templates/users/editor_detail_data.html:17
+msgid "Username *"
+msgstr "सदस्यनाम *"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/)
+#: TWLight/users/templates/users/editor_detail_data.html:24
+msgid "CentralAuth"
+msgstr "केंद्रीय_प्रमाणीकरण"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's description of their Wikipedia edits.
+#: TWLight/users/templates/users/editor_detail_data.html:34
+msgid "Contributions"
+msgstr "योगदान"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
+#. Translators: This is the button users click to confirm changes to their personal information.
+#: TWLight/users/templates/users/editor_detail_data.html:42
+#: TWLight/users/views.py:258
+msgid "Update"
+msgstr "अद्यतन"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
+#: TWLight/users/templates/users/editor_detail_data.html:53
+msgid "Satisfies terms of use?"
+msgstr "उपयोग की शर्तें संतुष्ट करते हैं?"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
+#: TWLight/users/templates/users/editor_detail_data.html:56
+msgid "At their last login, did this user meet the criteria set forth in the terms of use?"
+msgstr "उनके अंतिम लॉगिन पर, क्या यह उपयोगकर्ता उपयोग की शर्तों में निर्धारित मानदंडों को पूरा करता है?"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
+#: TWLight/users/templates/users/editor_detail_data.html:65
+msgid "Yes"
+msgstr "हाँ"
+
+#. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
+#: TWLight/users/templates/users/editor_detail_data.html:70
+#, python-format
+msgid "%(username)s may still be eligible for access grants at the coordinators' discretion."
+msgstr "%(username)s अभी भी समन्वयकों के विवेक पर पहुँच अनुदान के लिए योग्य हो सकता है।"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
+#: TWLight/users/templates/users/editor_detail_data.html:84
+msgid "Global edit count *"
+msgstr "वैश्विक संपादन गिनती *"
+
+#. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
+#: TWLight/users/templates/users/editor_detail_data.html:91
+msgid "(view global user contributions)"
+msgstr "(वैश्विक उपयोगकर्ता योगदान देखें)"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
+#: TWLight/users/templates/users/editor_detail_data.html:101
+msgid "Meta-Wiki registration or SUL merge date *"
+msgstr "मेटा-विकी पंजीकरण या SUL विलय की तारीख *"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
+#: TWLight/users/templates/users/editor_detail_data.html:113
+msgid "Wikipedia user ID *"
+msgstr "विकिपीडिया उपयोगकर्ता आईडी *"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/editor_detail_data.html:129
+msgid "The following information is visible only to you, site administrators, publishing partners (where required), and volunteer Wikipedia Library coordinators (who have signed a Non-Disclosure Agreement)."
+msgstr "निम्नलिखित जानकारी केवल आपको, साइट प्रबंधक, प्रकाशन भागीदार (जहाँ आवश्यक हो), और स्वयंसेवक विकिपीडिया पुस्तकालय समन्वयक (जिन्होंने गैर-प्रकटीकरण समझौते पर हस्ताक्षर किए हैं)को दिखाई देती है।"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
+#: TWLight/users/templates/users/editor_detail_data.html:139
+#, python-format
+msgid "You may <a href=\"%(update_url)s\">update or delete</a> your data at any time."
+msgstr "आप किसी भी समय अपना डेटा <a href=\"%(update_url)s\">अपडेट या हटा</a> कर सकते हैं।"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
+#: TWLight/users/templates/users/editor_detail_data.html:150
+msgid "Email *"
+msgstr "ईमेल *"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is under the email if their email is automatically updated from their Wikipedia account.
+#: TWLight/users/templates/users/editor_detail_data.html:156
+msgid "This will be automatically updated from Wikipedia."
+msgstr "यह स्वचालित रूप से विकिपीडिया से अद्यतन किया जाएगा।"
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
+#: TWLight/users/templates/users/editor_detail_data.html:202
+msgid "Institutional affiliation"
+msgstr "संस्थागत संबद्धता"
+
+#. Translators: Users click this button to set their interface language.
+#: TWLight/users/templates/users/language_form.html:26
+msgid "Set language"
+msgstr "भाषा चुनें"
+
+#. Translators: This is the heading of the section of a user's profile where they can change their password.
+#: TWLight/users/templates/users/preferences.html:21
+msgid "Password"
+msgstr "कूटशब्द"
+
+#. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
+#: TWLight/users/templates/users/preferences.html:40
+msgid "Data"
+msgstr "डेटा"
+
+#: TWLight/users/templates/users/restrict_data.html:7
+msgid "Restrict data processing"
+msgstr "डेटा प्रोसेसिंग प्रतिबंधित करें"
+
+#. Translators: This message is displayed on the page where users can request we stop processing their data.
+#: TWLight/users/templates/users/restrict_data.html:11
+msgid "Checking this box and clicking “Restrict” will pause all processing of the data you have entered into this website. You will not be able to apply for access to resources, your applications will not be further processed, and none of your data will be altered, until you return to this page and uncheck the box. This is not the same as deleting your data."
+msgstr "इस बॉक्स को चेक करना और \"प्रतिबंधित\" पर क्लिक करना इस वेबसाइट में आपके द्वारा दर्ज किए गए डेटा के सभी प्रसंस्करण को रोक देगा। आप संसाधनों तक पहुंच के लिए आवेदन नहीं कर पाएंगे, आपके आवेदनों को आगे संसाधित नहीं किया जाएगा, और जब तक आप इस पृष्ठ पर लौट कर बॉक्स को अनचेक नहीं करते हैं, तब तक आपका कोई भी डेटा परिवर्तित नहीं किया जाएगा। यह आपके डेटा को हटाने के समान नहीं है।"
+
+#. Translators: This warning message is shown to coordinators who view the data restriction page.
+#: TWLight/users/templates/users/restrict_data.html:22
+msgid "You are a coordinator on this site. If you restrict the processing of your data, your coordinator flag will be removed."
+msgstr "आप इस साइट पर एक समन्वयक हैं। यदि आप अपने डेटा के प्रसंस्करण को प्रतिबंधित करते हैं, तो आपका समन्वयक ध्वज हटा दिया जाएगा।"
+
+#. Translators: use the date *when you are translating*, in a language-appropriate format.
+#: TWLight/users/templates/users/terms.html:19
+msgid "Last updated 8 August 2016"
+msgstr "अंतिम बार १९ जनवरी २०१६ को अपडेट किया गया"
+
+#. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy).
+#: TWLight/users/templates/users/terms.html:23
+msgid "Wikimedia Foundation privacy policy"
+msgstr "विकिमीडिया फाउंडेशन गोपनीयता नीति"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:27
+msgid "Wikipedia Library Card Terms of Use and Privacy Statement"
+msgstr "विकिपीडिया पुस्तकालय कार्ड उपयोग की शर्तें और गोपनीयता कथन"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:36
+msgid "The Wikipedia Library is an open research hub, through which active Wikipedia editors can gain both access to the vital reliable sources needed for their work and support in using those resources to improve the encyclopedia. We have partnered with publishers around the world to allow users to freely access otherwise paywalled resources. This platform allows users to apply simultaneously for access to multiple publishers, and makes the administration of Wikipedia Library accounts easy and efficient."
+msgstr "विकिपीडिया पुस्तकालय एक खुला शोध केंद्र है, जिसके माध्यम से सक्रिय विकिपीडिया संपादक अपने काम के लिए आवश्यक महत्वपूर्ण विश्वसनीय स्रोतों तक पहुँच प्राप्त कर सकते हैं और विश्वकोश को बेहतर बनाने के लिए उन संसाधनों का उपयोग करने में सहायता कर सकते हैं। हमने दुनिया भर के प्रकाशकों के साथ भागीदारी की है ताकि उपयोगकर्ताओं को स्वतंत्र रूप से अन्यथा भुगतान किए गए संसाधनों का उपयोग करने की अनुमति मिल सके। यह प्लेटफ़ॉर्म उपयोगकर्ताओं को एक साथ कई प्रकाशकों तक पहुँच के लिए आवेदन करने की अनुमति देता है, और विकिपीडिया पुस्तकालय खातों के प्रबंधन को आसान और कुशल बनाता है।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:43
+msgid "These terms pertain to your application for access to Wikipedia Library resources, and your use of those resources. They also describe our handling of the information you provide to us in order to create and administer your Wikipedia Library account. The Wikipedia Library system is evolving, and over time we may update these terms due to changes in the technology. We recommend that you review the terms from time to time. If we make substantial changes to the terms, we will send a notification email to Wikipedia Library users."
+msgstr "ये शर्तें विकिपीडिया पुस्तकालय संसाधनों तक पहुँच के लिए आपके आवेदन और उन संसाधनों के आपके उपयोग से संबंधित हैं। ये आपके विकिपीडिया पुस्तकालय खाते को बनाने और प्रबंधित करने के लिए आपको हमारे द्वारा प्रदान की जाने वाली जानकारी के बारे में भी बताती हैं। विकिपीडिया पुस्तकालय प्रणाली विकसित हो रही है, और समय के साथ हम प्रौद्योगिकी में बदलाव के कारण इन शर्तों को अद्यतन कर सकते हैं। हम अनुशंसा करते हैं कि आप समय-समय पर शर्तों की समीक्षा करें। यदि हम शर्तों में पर्याप्त बदलाव करते हैं, तो हम विकिपीडिया पुस्तकालय उपयोगकर्ताओं को एक सूचना ईमेल भेजेंगे।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:49
+msgid "Requirements for a Wikipedia Library Card Account"
+msgstr "विकिपीडिया पुस्तकालय कार्ड खाते के लिए आवश्यकताएँ"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Special:EmailUser should be translated to this language's title for https://en.wikipedia.org/wiki/Special:EmailUser.
+#: TWLight/users/templates/users/terms.html:53
+msgid "As a preliminary note, Wikipedia Library accounts are reserved for community members who have demonstrated their commitment to the Wikimedia projects, and will use their access to these resources to improve project content. To that end, in order to be eligible for the Wikipedia Library program, we require that you be registered for a user account on the projects. We generally give preference to users with at least 500 edits and six (6) months of activity, but these are not strict requirements. You must have the Special:EmailUser feature enabled on at least one version of Wikipedia, and you will identify that as your \"home\" wiki when you create an account. We ask that you do not request access to any publishers whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
+msgstr "प्रारंभिक नोट के रूप में, विकिपीडिया पुस्तकालय खाते  समुदाय के उन सदस्यों के लिए आरक्षित हैं, जिन्होंने विकिमीडिया परियोजनाओं के लिए अपनी प्रतिबद्धता का प्रदर्शन किया है, और परियोजना की सामग्री में सुधार के लिए इन संसाधनों तक अपनी पहुँच का उपयोग करेंगे। फलतः विकिपीडिया पुस्तकालय कार्यक्रम के लिए पात्र होने के लिए, हमें चाहिए कि आप परियोजनाओं पर एक उपयोगकर्ता खाते के लिए पंजीकृत हों। हम आम तौर पर कम से कम 500 संपादन और छह (6) महीने की गतिविधि वाले उपयोगकर्ताओं को वरीयता देते हैं, लेकिन ये सख्त आवश्यकताएं नहीं हैं। आपके पास विकिपीडिया के कम से कम एक संस्करण पर विशेष:ईमेल_करें सुविधा सक्षम होनी चाहिए, और जब आप एक खाता बनाते हैं, तो आप उसे \"घर\" विकी के रूप में निश्चित करेंगे। हम पूछते हैं कि आप उन प्रकाशकों तक पहुँच का अनुरोध नहीं करते जिनके संसाधन आप पहले से ही अपने स्थानीय पुस्तकालय या विश्वविद्यालय, या किसी अन्य संस्था या संगठन के माध्यम से मुफ्त में उपयोग कर सकते हैं, ताकि दूसरों को वह अवसर प्रदान किया जा सके।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:60
+msgid "Additionally, if you are currently blocked or banned from a Wikimedia project, you may be rejected when you apply for a Wikipedia Library account. If you obtain a Wikipedia Library account, but a long-term block or ban is subsequently instituted against you on one of the projects, you may lose access to your Wikipedia Library account."
+msgstr "इसके अतिरिक्त, यदि आप वर्तमान में किसी विकिमीडिया परियोजना से अवरुद्ध या प्रतिबंधित हैं, तो विकिपीडिया पुस्तकालय खाते के लिए आवेदन करने पर आपको अस्वीकार किया जा सकता है। यदि आप एक विकिपीडिया पुस्तकालय खाता प्राप्त करते हैं, लेकिन बाद में आप को  किसी परियोजना पर एक लंबी अवधि के लिए ब्लॉक या प्रतिबंधित किया जाता है, तो आप अपने विकिपीडिया पुस्तकालय खाते तक पहुँच खो सकते हैं।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:67
+msgid "Wikipedia Library Card accounts do not expire. However, access to an individual publisher’s resources will generally lapse after one year, after which you will either need to apply for renewal or your account will automatically be renewed."
+msgstr "विकिपीडिया पुस्तकालय कार्ड खाते समाप्त नहीं होते हैं। हालांकि, एक व्यक्तिगत प्रकाशक के संसाधनों तक पहुंच आम तौर पर एक वर्ष के बाद समाप्त हो जाएगी, जिसके बाद आपको या तो नवीकरण के लिए आवेदन करना होगा या आपका खाता स्वचालित रूप से नवीनीकृत हो जाएगा।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:73
+msgid "Applying for Your Wikipedia Library Card Account"
+msgstr "अपने विकिपीडिया पुस्तकालय कार्ड खाते के लिए आवेदन करना"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:77
+msgid "In order to apply for a Wikipedia Library Card account, you must provide us with certain information, which we will use to evaluate your application. If your application is approved, we may transfer the information you have given us to the publishers whose resources you wish to access. The publisher will then create a free account for you. In most cases, they will contact you with the account information directly, although sometimes we will send access information to you ourselves."
+msgstr "विकिपीडिया पुस्तकालय कार्ड खाते के लिए आवेदन करने के लिए, आपको हमें कुछ जानकारी प्रदान करनी होगी, जिसका उपयोग हम आपके आवेदन का मूल्यांकन करने के लिए करेंगे। यदि आपका आवेदन स्वीकृत हो जाता है, तो हम आपकी दी गई जानकारी को उन प्रकाशकों को हस्तांतरित कर सकते हैं, जिनके संसाधन आप एक्सेस करना चाहते हैं।  तब प्रकाशक आपके लिए एक निशुल्क खाता बनाएगा। ज्यादातर मामलों में, वे आपसे सीधे खाता जानकारी के साथ संपर्क करेंगे, हालांकि कभी-कभी हम आपको स्वयं भी जानकारी भेज देंगे।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). partners_page should not be translated.
+#: TWLight/users/templates/users/terms.html:85
+#, python-format
+msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require. Please see our <a href=\"%(partners_page)s\">partner information pages</a> to learn what information is required by each publisher to gain access to their resources."
+msgstr "प्रत्येक प्रकाशक, जो विकिपीडिया पुस्तकालय कार्यक्रम का सदस्य है, को आवेदन में विभिन्न विशिष्ट जानकारी की आवश्यकता होती है। कुछ प्रकाशक केवल एक ईमेल पते का अनुरोध कर सकते हैं, जबकि अन्य अधिक विस्तृत डेटा का अनुरोध करते हैं, जैसे कि आपका नाम, स्थान, व्यवसाय या संस्थागत संबद्धता। जब आप अपना आवेदन पूरा करते हैं, तो आपको केवल आपके द्वारा चुने गए प्रकाशकों द्वारा आवश्यक जानकारी की आपूर्ति करने के लिए कहा जाएगा, और प्रत्येक प्रकाशक को केवल वे सूचनाएँ दी जाएँगी जिनकी उन्हें आवश्यकता है। प्रत्येक प्रकाशक द्वारा अपने संसाधनों तक पहुँच प्राप्त करने के लिए क्या जानकारी आवश्यक है, यह जानने के लिए कृपया हमारे <a href=\"%(partners_page)s\"> भागीदार जानकारी पृष्ठ </a> देखें।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:92
+msgid "In addition to the basic information you provide to us, our system will retrieve some information directly from the Wikimedia projects: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights. Each time you log in to the Wikipedia Library Card Platform, this information will be automatically updated."
+msgstr "आपके द्वारा हमें प्रदान की जाने वाली मूल जानकारी के अलावा, हमारी प्रणाली विकिमीडिया परियोजनाओं से सीधे कुछ जानकारी प्राप्त करेगी: आपका उपयोगकर्ता नाम, ईमेल पता, संपादन संख्या, पंजीकरण तिथि, उपयोगकर्ता आईडी संख्या, समूह जिनसे आप संबंधित हैं, और कोई विशेष उपयोगकर्ता अधिकार। जितनी बार आप विकिपीडिया पुस्तकालय  कार्ड मंच पर लॉग इन करेंगे, यह जानकारी स्वतः अपडेट हो जाएगी।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:99
+msgid "The information you provide when creating your account will be visible to you while on the site but not to other users unless they are approved Coordinators, WMF Staff, or WMF Contractors under a non-disclosure agreement (NDA), and who are working with the Wikipedia Library.  The following limited information that you provide is public to all users by default: 1) when you created a Wikipedia Library Card account; 2) which publishers’ resources you have applied to access; 3) your brief description of your rationale for accessing the resources of each partner to which you apply.  Editors who do not wish to make this information public may email the required information to WMF Staff to request and receive access privately."
+msgstr "आपके खाते को बनाते समय आपके द्वारा दी गई जानकारी आपको साइट पर दिखाई देगी, लेकिन अन्य उपयोगकर्ताओं को नहीं जब तक कि वे उन्हें एक गैर-प्रकटीकरण समझौते (NDA) के तहत स्वीकृत समन्वयक, WMF कर्मचारी, या WMF ठेकेदार न हों, और जो  विकिपीडिया पुस्तकालय के साथ काम कर रहे हों। आपके द्वारा प्रदान की जाने वाली निम्न सीमित जानकारी डिफ़ॉल्ट रूप से सभी उपयोगकर्ताओं के लिए सार्वजनिक है: 1) जब आपने विकिपीडिया पुस्तकालय कार्ड खाता बनाया था; 2) जिन प्रकाशकों के संसाधनों को आपने एक्सेस करने के लिए आवेदन किया है; 3) प्रत्येक भागीदार के संसाधनों तक पहुँचने के लिए आप आवेदन करते हैं के लिए आपके तर्क का संक्षिप्त विवरण। संपादक जो इस जानकारी को सार्वजनिक नहीं करना चाहते हैं, वे WMF कर्मचारियों को निजी रूप से पहुंच का अनुरोध करने और प्राप्त करने के लिए आवश्यक जानकारी ईमेल कर सकते हैं।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:106
+msgid "We will ask you to identify your home wiki (or any Wikipedia version where you have enabled email), and finally to provide us with some information about your history of contributions to the Wikimedia projects. Information on contribution history is optional, but will greatly assist us in evaluating your application."
+msgstr "हम आपको अपने घर की विकी (या किसी भी विकिपीडिया संस्करण जहाँ आपने ईमेल को सक्षम किया है) की पहचान करने, और अंत में विकिमीडिया परियोजनाओं में आपके योगदान के इतिहास के बारे में कुछ जानकारी प्रदान करने के लिए कहेंगे। योगदान इतिहास की जानकारी वैकल्पिक है, लेकिन आपके आवेदन के मूल्यांकन में हमारी बहुत सहायता करेगी।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:112
+msgid "Data Retention and Handling"
+msgstr "डेटा प्रतिधारण और संचालन"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). user_home_url should not be translated.
+#: TWLight/users/templates/users/terms.html:117
+#, python-format
+msgid "In order to administer the Wikipedia Library program, we will retain the data we collect indefinitely, unless you delete your account, as described below. You can log in and go to your <a href=\"%(user_home_url)s\">profile page</a> in order to see the information associated with your account. You may update this information at any time, except for the information that is automatically retrieved from the projects."
+msgstr "विकिपीडिया पुस्तकालय कार्यक्रम को प्रबंधित करने के लिए, हम डेटा को अनिश्चित काल के लिए एकत्र रखेंगे, जब तक कि आप अपना खाता नहीं हटाते, जैसा कि नीचे वर्णित है। अपने खाते से जुड़ी जानकारी देखने के लिए आप लॉग इन कर सकते हैं और अपने <a href=\"%(user_home_url)s\"> प्रोफ़ाइल पृष्ठ </a> पर जा सकते हैं। आप इस जानकारी को किसी भी समय अपडेट कर सकते हैं, केवल उन सूचनाओं को छोड़कर जो परियोजनाओं से स्वचालित रूप से पुनर्प्राप्त की जाती हैं।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:124
+#, python-format
+msgid "If you decide to disable your Wikipedia Library account, you may email us at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a> in order to request the deletion of certain personal information associated with your account. We will delete your real name, occupation, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
+msgstr "यदि आप अपने विकिपीडिया पुस्तकालय खाते को निष्क्रिय करने का निर्णय लेते हैं, तो आप हमें आपके खाते से जुड़ी कुछ व्यक्तिगत जानकारी को हटाने का अनुरोध करने के लिए<a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20accint%%20deactivation\"> wikipedialibrary@wikimedia.org </a> पर ईमेल कर सकते हैं। हम आपके वास्तविक नाम, व्यवसाय, संस्थागत संबद्धता और निवास स्थान को हटा देंगे। कृपया ध्यान दें कि प्रणाली आपके उपयोगकर्ता नाम, आपके द्वारा आवेदन किए गए या उपयोग किए गए प्रकाशकों और उस पहुँच की तारीखों का एक रिकॉर्ड रखेगा। यदि आप खाते की जानकारी को हटाने का अनुरोध करते हैं और बाद में नए खाते के लिए आवेदन करना चाहते हैं, तो आपको फिर से आवश्यक जानकारी प्रदान करनी होगी।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:133
+msgid "The Wikipedia Library is run by Wikimedia Foundation Staff, Contractors, and approved volunteer Coordinators who may have access to your information. The data associated with your account will be shared with the Wikimedia staff, contractors, service providers, and volunteer Coordinators who need to process the information, and who are subject to non-disclosure obligations. Otherwise, the Wikimedia Foundation will only share your information with the publishers whom you specifically select, with the exception of the circumstances described below."
+msgstr "विकिपीडिया पुस्तकालय विकिमीडिया फ़ाउंडेशन के कर्मचारियों, ठेकेदारों, और स्वीकृत स्वयंसेवक समन्वयकों द्वारा संचालित की जाती है, जिनकी आपकी जानकारी तक पहुँच हो सकती है। आपके खाते से जुड़े डेटा को विकिमीडिया कर्मचारियों, ठेकेदारों, सेवा प्रदाताओं और स्वयंसेवक समन्वयकों के साथ साँझा किया जाएगा जिन्हें जानकारी को संसाधित करने की आवश्यकता है, और जो गैर-प्रकटीकरण दायित्वों के अधीन हैं। अन्यथा, विकिमीडिया फ़ाउंडेशन आपकी जानकारी केवल उन प्रकाशकों के साथ साँझा करेगी जिन्हें आप विशेष रूप से चुनते हैं, नीचे वर्णित परिस्थितियां इसके अपवाद हैं।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:140
+msgid "We may disclose any collected information when required by law, when we have your permission, when needed to protect our rights, privacy, safety, users, or the general public, and when necessary to enforce these terms, our general Terms of Use, or any other Wikimedia policy."
+msgstr "हम कानून द्वारा आवश्यक होने पर, जब हमारे पास आपकी अनुमति हो, जब हमारे अधिकारों, गोपनीयता, सुरक्षा, उपयोगकर्ताओं या आम जनता की रक्षा के लिए आवश्यक हो, और जब इन शर्तों, हमारी सामान्य उपयोग की शर्तों, या कोई अन्य विकिमीडिया नीति को लागू करने के लिए आवश्यक हो, तो किसी भी एकत्रित जानकारी का खुलासा कर सकते हैं।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:147
+msgid "Please note that these terms do not control the use and handling of your data by the publishers whose resources you access. Please read their individual privacy policies for that information."
+msgstr "कृपया ध्यान दें कि ये शर्तें उन प्रकाशकों द्वारा आपके डेटा के उपयोग और संचालन करने को नियंत्रित नहीं करते हैं जिनके संसाधन आप एक्सेस करते हैं। कृपया उस जानकारी के लिए उनकी व्यक्तिगत गोपनीयता नीतियाँ पढ़ें।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:153
+msgid "Your Use of Publisher Resources"
+msgstr "प्रकाशक संसाधनों का आपका उपयोग"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:157
+msgid "Please note that in order to access an individual publisher’s resources, you agree to that publisher’s terms of use and privacy policy. Additionally, your access to publisher resources through the Wikipedia Library is accompanied by the following terms."
+msgstr "कृपया ध्यान दें कि किसी व्यक्तिगत प्रकाशक के संसाधनों तक पहुँचने के लिए, आप उस प्रकाशक की उपयोग की शर्तों और गोपनीयता नीति से सहमत होते हैं। इसके अतिरिक्त, विकिपीडिया पुस्तकालय के माध्यम से प्रकाशक संसाधनों तक आपकी पहुँच निम्नलिखित शर्तों के साथ है।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:164
+msgid "Your access allows you to search, view, retrieve and display partner content (that is, content that requires an account to access) from publishers; to electronically save partner content; and to print out single copies of partner content."
+msgstr "आपकी पहुंच आपको प्रकाशकों से भागीदार सामग्री (यानी, ऐसी सामग्री जिसे खोज करने के लिए एक खाते की आवश्यकता होती है) को खोजने, देखने, पुनर्प्राप्त करने और प्रदर्शित करने की, भागीदार सामग्री को इलेक्ट्रॉनिक रूप से सहेजने के लिए; और भागीदार सामग्री की एकल प्रतियों को प्रिंट करने के लिएअनुमति देता है।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:171
+msgid "You must agree not to share your usernames and passwords for access to publisher resources with others."
+msgstr "आपको प्रकाशक संसाधनों तक पहुँच के लिए अपने उपयोगकर्ता नाम और कूटशब्द दूसरों के साथ साँझा नहीं करने के लिए सहमत होना आवश्यक है।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:178
+msgid "Your access to publisher resources does not allow you to mass scrape or mass download restricted content from publishers; to systematically make printed or electronic copies of multiple extracts of restricted content available for any purpose; to data mine metadata without permission, in order to use metadata for auto-created stub articles, for example; or to use the access you receive through the Wikipedia Library for profit by selling access to your account or resources to which you have through it."
+msgstr "प्रकाशक संसाधनों तक आपकी पहुँच आपको प्रकाशकों की प्रतिबंधित सामग्री के सामूहिक परिमार्जन या सामूहिक डाउनलोड; व्यवस्थित रूप से किसी भी उद्देश्य के लिए उपलब्ध प्रतिबंधित सामग्री के कई अंश की मुद्रित या इलेक्ट्रॉनिक प्रतियाँ करने;  बिना अनुमति के मेटाडेटा की डेटामाइनिंग करने, उदाहरण के लिए, स्वतः-निर्मित आधार लेखों के लिए मेटाडेटा का उपयोग करने के लिए; या विकिपीडिया पुस्तकालय के माध्यम से प्राप्त होने वाली पहुंच का उपयोग आपके द्वारा अपने खाते या संसाधनों तक पहुंच बेचकर लाभ के लिए करने की अनुमति नहीं देती है।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:188
+msgid "The Wikimedia Foundation is a nonprofit organization based in San Francisco, California. The Wikipedia Library program provides access to resources held by publishers in multiple countries. By applying for a Wikipedia Library account (whether you are inside or outside of the United States), you agree to the collection, transfer, storage, processing, disclosure, and other uses of the collected information in the United States and other places as may be necessary to carry out the purposes and objectives discussed above. You also consent to the transfer of your information by us from the U.S. to other countries, which may have different or less stringent data protection laws than your country, in connection with providing services to you, including evaluating your application and securing access to your chosen publishers."
+msgstr "विकिमीडिया फाउंडेशन सैन फ्रांसिस्को, कैलिफोर्निया में स्थित एक गैर-लाभकारी संगठन है। विकिपीडिया पुस्तकालय कार्यक्रम कई देशों में प्रकाशकों द्वारा रखे गए संसाधनों तक पहुँच प्रदान करता है। विकिपीडिया पुस्तकालय खाते (चाहे आप अमेरिका के अंदर या बाहर हों) के लिए आवेदन करके, आप संयुक्त राज्य अमेरिका और अन्य स्थानों में संग्रहित सूचना के संग्रह, हस्तांतरण, भंडारण, प्रसंस्करण, प्रकटीकरण, और ऊपर चर्चा किए गए उद्देश्यों और उद्देश्यों को पूरा करने के लिए आवश्यक अन्य उपयोगों के लिए सहमती देते हैं। आपके आवेदन का मूल्यांकन करने और अपने चुने हुए प्रकाशकों तक पहुंच प्राप्त करने के लिए सेवाएँ प्रदान करने के लिए आप अमेरिका से दूसरे देशों में आपकी जानकारी के हस्तांतरण की सहमति भी देते हैं, जिसमें आपके देश के अलग-अलग या कम कड़े डेटा संरक्षण कानून हो सकते हैं।"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:197
+msgid "Please note that in the event of any differences in meaning or interpretation between the original English version of these terms and a translation, the original English version takes precedence."
+msgstr "कृपया ध्यान दें कि इन शर्तों के मूल अंग्रेजी संस्करण और अनुवाद के बीच अर्थ या व्याख्या में कोई अंतर होने की स्थिति में, मूल अंग्रेजी संस्करण को प्राथमिकता मिलती है।"
+
+#. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:205
+msgid "Thank you!"
+msgstr "धन्यवाद!"
+
+#. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:209
+msgid "The Wikipedia Library Team"
+msgstr "विकिपीडिया पुस्तकालय दल"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/users/templates/users/terms.html:216
+msgid "By checking this box and clicking “I Accept”, you consent to the above privacy statement and terms, and agree to adhere to them in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
+msgstr "इस बॉक्स को चेक करके और \"सहमत हूँ\" पर क्लिक करके, आप उपरोक्त गोपनीयता कथन और शर्तों पर सहमति देते हैं, और विकिपीडिया पुस्तकालय और प्रकाशक की सेवाओं के उपयोग और उपयोग के लिए अपने आवेदन में उनका पालन करने के लिए सहमत होते हैं। विकिपीडिया पुस्तकालय कार्यक्रम।"
+
+#: TWLight/users/templates/users/user_confirm_delete.html:7
+msgid "Delete all data"
+msgstr "सभी डेटा हटाएँ"
+
+#. Translators: This message is displayed on the page where users can request the deletion of their data.
+#: TWLight/users/templates/users/user_confirm_delete.html:13
+msgid "<b>Warning:</b> Performing this action will delete your Wikipedia Library Card user account and all associated applications. This process is not reversible. You may lose any partner accounts you were granted, and will not be able to renew those accounts or apply for new ones."
+msgstr "<b>चेतावनी:</b> इस क्रिया को करने से आपका विकिपीडिया पुस्तकालय कार्ड उपयोगकर्ता खाता और सभी संबद्ध आवेदन नष्ट हो जाएंगे। यह प्रक्रिया प्रतिवर्ती नहीं है। आप अपने द्वारा दिए गए किसी भी भागीदार खाते को खो सकते हैं, और उन खातों को नवीनीकृत नहीं कर पाएंगे या नए के लिए आवेदन नहीं कर पाएंगे।"
+
+#. Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
+#: TWLight/users/templates/users/user_detail.html:9
+#, python-format
+msgid "Hi, %(username)s! You don't have a Wikipedia editor profile attached to your account here, so you are probably a site administrator."
+msgstr "नमस्ते, %(username)s! आपके पास अपने खाते में एक विकिपीडिया संपादक प्रोफ़ाइल संलग्न नहीं है, इसलिए आप शायद साइट प्रबंधक हैं।"
+
+#. Translators: In the unlikely scenario that someone is able to register an account without using OAuth (thus leaving us without some of the information required for applications), users will see this message, encouraging them to re-register.
+#: TWLight/users/templates/users/user_detail.html:17
+msgid "If you aren't a site administrator, something weird has happened. You won't be able to apply for access without a Wikipedia editor profile. You should log out and create a new account by logging in via OAuth, or contact a site administrator for help."
+msgstr "यदि आप एक साइट प्रबंधक नहीं हैं, तो कुछ अजीब हुआ है। आप विकिपीडिया संपादक प्रोफ़ाइल के बिना उपयोग के लिए आवेदन नहीं कर पाएंगे। आपको लॉग आउट करके OAuth के माध्यम से  एक नया खाता बनाना चाहिए, या सहायता के लिए किसी साइट प्रबंधक से संपर्क करना चाहिए।"
+
+#. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
+#: TWLight/users/views.py:108
+#, python-brace-format
+msgid "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help coordinators evaluate your applications."
+msgstr "समन्वयकों को आपके आवेदन का मूल्यांकन करने में सहायता करने के लिए कृपया विकिपीडिया पर <a href=\"{url}\"> अपने योगदान अपडेट करें </a>।"
+
+#. Translators: This message is shown to users who attempt to update their personal information without being logged in.
+#. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
+#. Translators: This message is shown to users who attempt to update their data processing without being logged in.
+#: TWLight/users/views.py:241 TWLight/users/views.py:306
+#: TWLight/users/views.py:350
+msgid "You must be logged in to do that."
+msgstr "ऐसा करने के लिए आपको लॉग इन करना होगा।"
+
+#. Translators: Shown to the user when they successfully modify their personal information.
+#: TWLight/users/views.py:270
+msgid "Your information has been updated."
+msgstr "आपकी जानकारी अपडेट कर दी गई है।"
+
+#. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
+#: TWLight/users/views.py:316
+#, python-brace-format
+msgid "Your email has been changed to {email}."
+msgstr "आपका ईमेल {email} में बदल दिया गया है।"
+
+#. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
+#: TWLight/users/views.py:322
+msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
+msgstr "आपका ईमेल रिक्त है। आप अभी भी साइट को देख सकते हैं, लेकिन आप बिना ईमेल के भागीदार संसाधनों तक पहुंच के लिए आवेदन नहीं कर पाएंगे।"
+
+#. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
+#: TWLight/users/views.py:506
+msgid "You may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
+msgstr "आप साइट को देख सकते हैं, लेकिन जब तक आप उपयोग की शर्तों से सहमत नहीं होते हैं तब तक आप सामग्री तक पहुंच के लिए आवेदन नहीं कर सकते हैं या आवेदनों का मूल्यांकन नहीं कर सकते हैं।"
+
+#. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
+#: TWLight/users/views.py:511
+msgid "You may explore the site, but you will not be able to apply for access unless you agree with the terms of use."
+msgstr "आप साइट को देख सकते हैं, लेकिन जब तक आप उपयोग की शर्तों से सहमत नहीं होंगे तब तक आप पहुँच के लिए आवेदन नहीं कर पाएंगे।"
+
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/views.py:67
+#, python-brace-format
+msgid "{username} signed up for a Wikipedia Library Card Platform account"
+msgstr "{username} ने विकिपीडिया पुस्तकालय कार्ड मंच खाते के लिए पंजीकरण किया गया"
+
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/views.py:80
+#, python-brace-format
+msgid "{partner} joined the Wikipedia Library "
+msgstr "{partner} विकिपीडिया पुस्तकालय से जुड़ गया"
+
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
+#: TWLight/views.py:100
+#, python-brace-format
+msgid "{username} applied for renewal of their <a href=\"{url}\">{partner}</a> access"
+msgstr "{username} ने अपने <a href=\"{url}\">{partner}</a> के नवीनीकरण के लिए आवेदन किया"
+
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
+#: TWLight/views.py:108
+#, python-brace-format
+msgid "{username} applied for access to <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
+msgstr "{username} ने <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote> की पहुँच के लिए आवेदन किया है।"
+
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
+#: TWLight/views.py:118
+#, python-brace-format
+msgid "{username} applied for access to <a href=\"{url}\">{partner}</a>"
+msgstr "\n{username} ने <a href=\"{url}\">{partner}</a>\nकी पहुँच के लिए आवेदन किया"
+
+#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
+#: TWLight/views.py:139
+#, python-brace-format
+msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
+msgstr "\n{username} ने <a href=\"{url}\">{partner}</a> तक पहुँच प्राप्त की"
+

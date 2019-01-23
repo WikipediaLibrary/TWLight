@@ -2,7 +2,8 @@
 
 import factory
 
-from TWLight.resources.models import Partner, Stream, Video
+from TWLight.resources.models import Partner, Stream, Video, Suggestion
+
 
 
 class PartnerFactory(factory.django.DjangoModelFactory):
@@ -27,7 +28,18 @@ class StreamFactory(factory.django.DjangoModelFactory):
     name = factory.Faker('bs')
 
 
+    
+class SuggestionFactory(factory.django.DjangoModelFactory):
 
+    class Meta:
+        model = Suggestion
+        strategy = factory.CREATE_STRATEGY
+
+    suggested_company_name = factory.Faker('company')
+    company_url = factory.Faker('url')
+
+
+    
 class VideoFactory(factory.django.DjangoModelFactory):
 
     class Meta:

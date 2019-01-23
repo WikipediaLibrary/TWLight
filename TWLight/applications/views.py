@@ -662,13 +662,13 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-            return Application.objects.filter(
-                    status=Application.NOT_APPROVED,
+            return Application.include_invalid.filter(
+                    status__in=[Application.NOT_APPROVED, Application.INVALID],
                     editor__isnull=False
                 ).order_by('date_closed', 'partner')
         else:
-            return Application.objects.filter(
-                    status=Application.NOT_APPROVED,
+            return Application.include_invalid.filter(
+                    status__in=[Application.NOT_APPROVED, Application.INVALID],
                     partner__coordinator__pk=self.request.user.pk,
                     editor__isnull=False
                 ).order_by('date_closed', 'partner')
@@ -810,7 +810,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                                    Application.QUESTION,
                                    Application.APPROVED,
                                    Application.NOT_APPROVED,
-                                   Application.SENT]
+                                   Application.SENT,
+                                   Application.INVALID]
         except (AssertionError, ValueError):
             # ValueError will be raised if the status cannot be cast to int.
             logger.exception('Did not find valid data for batch editing')

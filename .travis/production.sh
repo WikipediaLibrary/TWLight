@@ -5,9 +5,10 @@ echo "TRAVIS_PULL_REQUEST: ${TRAVIS_PULL_REQUEST}"
 echo "TRAVIS_TAG: ${TRAVIS_TAG}"
 echo "TRAVIS_BRANCH: ${TRAVIS_BRANCH}"
 echo "TWLIGHT_MISSING_MIGRATIONS: ${TWLIGHT_MISSING_MIGRATIONS}"
+echo "TWLIGHT_TRANSLATION_FILES_CHANGED: ${TWLIGHT_TRANSLATION_FILES_CHANGED}"
 
-# Only act if this is build was fired from a push to master and there are no missing migrations.
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ]  && [ "${TWLIGHT_MISSING_MIGRATIONS}" -eq 0 ]
+# Only act if this is build was fired from a push to master and there are no missing migrations or changed translations.
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ]  && [ "${TWLIGHT_MISSING_MIGRATIONS}" -eq 0 ] && [ "${TWLIGHT_TRANSLATION_FILES_CHANGED}" -eq 0 ]
 then
     # Configure git.
     git_config() {

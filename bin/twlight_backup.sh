@@ -1,24 +1,34 @@
 #!/usr/bin/env bash
 
-# Environment variables may not be loaded under all conditions.
-if [ -z "${TWLIGHT_HOME}" ]
-then
-    source /etc/environment
-fi
+set -eo pipefail
 
-PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
+# Use a lockfile to prevent overruns.
+self=$(basename ${0})
+exec {lockfile}>/var/lock/${self}
+flock -n ${lockfile}
+{
 
-date=$(date +'%d.%H')
+    # Environment variables may not be loaded under all conditions.
+    if [ -z "${TWLIGHT_HOME}" ]
+    then
+        source /etc/environment
+    fi
 
-## Dump DB
-source ${TWLIGHT_HOME}/bin/twlight_mysqldump.sh || exit 1
+    PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 
-echo "Backing up database and media"
+    date=$(date +'%d.%H')
 
-## Perform backup
-tar -czf "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" -C "${TWLIGHT_MYSQLDUMP_DIR}" "./twlight.sql" -C "${TWLIGHT_HOME}" "./media" || exit 1
+    ## Dump DB
 
-## Root only
-chmod 0600 "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" || exit 1
+    source ${TWLIGHT_HOME}/bin/twlight_mysqldump.sh
 
-echo "Finished TWLight backup."
+    echo "Backing up database and media"
+
+    ## Perform backup
+    tar -czf "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" -C "${TWLIGHT_MYSQLDUMP_DIR}" "./twlight.sql" -C "${TWLIGHT_HOME}" "./media"
+
+    ## Root only
+    chmod 0600 "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz"
+
+    echo "Finished TWLight backup."
+} {lockfile}>&-

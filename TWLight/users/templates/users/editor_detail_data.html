@@ -18,11 +18,6 @@
     </div>
     <div class="col-xs-12 col-sm-9">
       {{ editor.wp_username }}
-      {% if editor.wp_link_sul_info %}
-        <br />
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's SUL info through an external tool. (e.g. https://tools.wmflabs.org/quentinv57-tools/tools/sulinfo.php?username=Samwalton9%20(WMF)) {% endcomment %}
-        <a href="{{ editor.wp_link_sul_info }}">({% trans "SUL info" %})</a>
-      {% endif %}
       {% if editor.wp_link_central_auth %}
         <br />
         {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/) {% endcomment %}

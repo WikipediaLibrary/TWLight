@@ -39,7 +39,7 @@ then
         # https://git-scm.com/docs/merge-strategies#merge-strategies-theirs
         git fetch origin master --quiet
 
-        # We should only be adding missing files, so if their's a conflict, keep the version from the remote.
+        # We should only be adding missing files, so if there is a conflict, keep the version from the remote.
         git merge --strategy recursive -X theirs origin/master --message "Travis build #${TRAVIS_BUILD_NUMBER} merged." --quiet
 
         # Push to remote master branch.

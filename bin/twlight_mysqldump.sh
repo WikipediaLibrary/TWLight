@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
 then

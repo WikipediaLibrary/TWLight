@@ -25,12 +25,14 @@ before_install:
 # Install the dependencies.
 install:
   - pip install -r requirements/wmf.txt
+  - pip install coveralls
 
 # Initalize the app and test it.
 script:
   - .travis/./init.sh
-  - python manage.py test --noinput
+  - coverage run --source TWLight manage.py test
 
-# Push to production if the conditions are met.
+# Report on test coverage and push to production if the conditions are met.
 after_success:
+  - coveralls
   - .travis/./deploy.sh

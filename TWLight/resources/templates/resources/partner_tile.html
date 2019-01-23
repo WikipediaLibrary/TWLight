@@ -30,7 +30,11 @@
       <hr />
     {% endif %}
     <div class="resource-label-container">
-    {% if partner.is_waitlisted %}
+    {% if partner.is_not_available %}
+      <div class="resource-label-danger">
+        <span class="resource-label">{% trans "Not available" %}</span>
+      </div>
+    {% elif partner.is_waitlisted %}
       <div class="resource-label-warning">
         <span class="resource-label">{% trans "Waitlisted" %}</span>
       </div>
@@ -45,7 +49,7 @@
     {% endif %}
       
       <div class="resource-label-languages">
-          {% if partner.get_languages %}        
+          {% if partner.get_languages %}
             {% for language in partner.get_languages %}
               <a class="resource-label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
               {% if not forloop.last %} <span class="pipe">|</span> {% endif %}

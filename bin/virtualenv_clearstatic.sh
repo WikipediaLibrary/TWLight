@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Runs the Django collectstatic process (https://docs.djangoproject.com/en/1.11/ref/contrib/staticfiles/)
 
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
@@ -13,12 +15,15 @@ then
     cd ${TWLIGHT_HOME} && node ${TWLIGHT_HOME}/bin/twlight_cssjanus.js || exit 1
 
     # Load virtual environment
-    source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
+    if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
+    then
+        # Ensure collectedstatic dir exists
+        mkdir -p ${TWLIGHT_HOME}/TWLight/collectedstatic || exit 1
 
-    # Ensure collectedstatic dir exists
-    mkdir -p ${TWLIGHT_HOME}/TWLight/collectedstatic || exit 1
-
-    # Clear and collect css
-    echo "collectstatic --noinput --clear"
-    python manage.py collectstatic --noinput --clear || exit 1
+        # Clear and collect css
+        echo "collectstatic --noinput --clear"
+        python manage.py collectstatic --noinput --clear || exit 1
+    else
+        exit 1
+    fi
 fi

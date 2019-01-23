@@ -10,7 +10,7 @@ from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization
 
-from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, Video, AccessCode
+from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, Video, Suggestion, AccessCode
 
 
 class LanguageAdmin(admin.ModelAdmin):
@@ -37,6 +37,11 @@ class TextFieldTagAdmin(TabbedExternalJqueryTranslationAdmin):
 
 admin.site.register(TextFieldTag, TextFieldTagAdmin)
 
+class ContactInline(admin.TabularInline):
+    model = Contact
+
+class VideoInline(admin.TabularInline):
+    model = Video
 
 class PartnerLogoInline(admin.TabularInline):
     model = PartnerLogo
@@ -73,7 +78,7 @@ class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
 
     search_fields = ('company_name',)
     list_display = ('company_name', 'short_description', 'id', 'language_strings')
-    inlines = [PartnerLogoInline]
+    inlines = [ContactInline, VideoInline, PartnerLogoInline]
 
 admin.site.register(Partner, PartnerAdmin)
 
@@ -86,7 +91,6 @@ class StreamAdmin(TabbedExternalJqueryTranslationAdmin):
 admin.site.register(Stream, StreamAdmin)
 
 
-
 class ContactAdmin(admin.ModelAdmin):
     search_fields = ('partner__company_name', 'full_name', 'short_name',)
     list_display = ('id', 'title', 'full_name', 'partner', 'email',)
@@ -94,13 +98,11 @@ class ContactAdmin(admin.ModelAdmin):
 admin.site.register(Contact, ContactAdmin)
 
 
-
 class VideoAdmin(admin.ModelAdmin):
     search_fields = ('partner__company_name', 'tutorial_video_url',)
     list_display = ('partner', 'tutorial_video_url', 'id',)
 
 admin.site.register(Video, VideoAdmin)
-
 
 
 class AccessCodeAdmin(admin.ModelAdmin):
@@ -213,3 +215,10 @@ class AccessCodeAdmin(admin.ModelAdmin):
         return render(request, 'resources/csv_form.html')
 
 admin.site.register(AccessCode, AccessCodeAdmin)
+
+
+class SuggestionAdmin(admin.ModelAdmin):
+    search_fields = ('suggested_company_name',)
+    list_display = ('suggested_company_name', 'description', 'id',)
+    
+admin.site.register(Suggestion, SuggestionAdmin)

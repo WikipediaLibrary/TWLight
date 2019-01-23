@@ -9,6 +9,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 import django
@@ -19,6 +20,7 @@ from TWLight.applications.urls import urlpatterns as applications_urls
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
 from TWLight.graphs.views import DashboardView
 from TWLight.resources.urls import urlpatterns as partners_urls
+from TWLight.resources.views import PartnerSuggestionView, SuggestionDeleteView, SuggestionUpvoteView
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
@@ -65,13 +67,27 @@ urlpatterns = [
 
     url(r'^dashboard/$', DashboardView.as_view(), name='dashboard'),
     url(r'^terms/$', TermsView.as_view(), name='terms'),
+    
+    # For partner suggestions
+    url(r'^suggest/$',
+        PartnerSuggestionView.as_view(),
+        name='suggest'),
+    url(
+        r'^suggest/(?P<pk>[0-9]+)/delete/$',
+        login_required(SuggestionDeleteView.as_view()),
+        name='suggest-delete'),
+    url(
+        r'^suggest/(?P<pk>[0-9]+)/upvote/$',
+        login_required(SuggestionUpvoteView.as_view()),
+        name='upvote'),
+        
     # Cached for 24 hours.
     url(r'^i18n-whitelist$', cache_page(86400)(LanguageWhiteListView.as_view()), name='i18n_whitelist'),
     url(r'^$', HomePageView.as_view(), name='homepage'),
     url(r'^about/$',
         TemplateView.as_view(template_name='about.html'),
         name='about'),
-	url(r'^activity/$',
+    url(r'^activity/$',
         HomePageView.as_view(template_name='activity.html'),
         name='activity'),
 ]
