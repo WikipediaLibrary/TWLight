@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-17 10:13+0000\n"
+"POT-Creation-Date: 2019-01-23 16:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2096,7 +2096,7 @@ msgid "Feedback"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
-#: TWLight/templates/base.html:266
+#: TWLight/templates/base.html:269
 msgid "Contact us"
 msgstr ""
 
@@ -2558,6 +2558,13 @@ msgstr ""
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
+msgstr ""
+
+#. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
+#: TWLight/users/templates/users/language_form.html:29
+msgid ""
+"You can help translate the tool at <a href=\"https://translatewiki.net/wiki/"
+"Translating:Wikipedia_Library_Card_Platform\">TranslateWiki</a>."
 msgstr ""
 
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
