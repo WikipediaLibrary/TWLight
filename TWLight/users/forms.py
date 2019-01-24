@@ -3,6 +3,10 @@ from crispy_forms.layout import Submit, Layout
 
 from django.conf import settings
 from django.contrib.auth.models import User
+
+from django.contrib import admin
+from django.contrib.admin.widgets import ForeignKeyRawIdWidget
+
 from django.core.urlresolvers import reverse
 from django import forms
 from django.db import models
@@ -52,7 +56,7 @@ class AuthorizationUserChoiceForm(forms.ModelChoiceField):
 
 class AuthorizationForm(forms.ModelForm):
     authorizer = AuthorizationUserChoiceForm(User.objects.filter(models.Q(is_superuser=True) | models.Q(groups__name='coordinators')))
-    authorized_user = AuthorizationUserChoiceForm(queryset=User.objects.all())
+    authorized_user = AuthorizationUserChoiceForm(queryset=User.objects.all(), widget=ForeignKeyRawIdWidget(Authorization._meta.get_field("authorized_user").rel,admin.site))
 
 
 

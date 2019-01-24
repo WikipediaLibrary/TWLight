@@ -9,6 +9,7 @@ from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization
+from TWLight.users.forms import AuthorizationForm
 
 from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, Video, Suggestion, AccessCode
 
@@ -46,6 +47,12 @@ class VideoInline(admin.TabularInline):
 class PartnerLogoInline(admin.TabularInline):
     model = PartnerLogo
 
+class AuthorizationInline(admin.StackedInline):
+    form = AuthorizationForm
+    model = Authorization
+    fk_name='partner'
+    extra = 0
+
 
 class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
     class CustomModelChoiceField(forms.ModelChoiceField):
@@ -78,7 +85,7 @@ class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
 
     search_fields = ('company_name',)
     list_display = ('company_name', 'short_description', 'id', 'language_strings')
-    inlines = [ContactInline, VideoInline, PartnerLogoInline]
+    inlines = [ContactInline, VideoInline, PartnerLogoInline, AuthorizationInline]
 
 admin.site.register(Partner, PartnerAdmin)
 
