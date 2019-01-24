@@ -547,7 +547,7 @@
     </h3>
   {% endif %}
   
-  {% if total_apps > 0 %}
+  {% if total_apps > 0 and insufficient_data == False %}
     <h3>
       {% comment %} Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
       {% trans "Applications by status" %}
@@ -618,44 +618,13 @@
 
   <script type="text/javascript">
     $(function() {
-      // All applications by time
-      var signups_time_graph = $("#signups-time-graph");
-      var signups_time_data = {{ signups_time_data | safe }};
-      var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {
-        xaxis: {
-          mode: "time",
-          tickSize: [1, 'month'],
-        },
-        yaxis: {
-          min: 0,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        colors: ['#5cb85c'],
-      });
-
-      // Approved applications by time
-      if ({{ total_apps_approved }} > 0) {
-        var approved_or_sent_signups_time_graph = $("#approved-or-sent-signups-time-graph");
-        var approved_or_sent_signups_time_data = {{ approved_or_sent_signups_time_data | safe }};
-        var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
-          xaxis: {
-            mode: "time",
-            tickSize: [1, 'month'],
-          },
-          yaxis: {
-            min: 0,
-            minTickSize: 1,
-            tickDecimals: 0,
-          },
-          colors: ['#5cb85c'],
-        });
-        // Redraw on browser resize
-        window.addEventListener("resize", function() {
-          $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
+        if ({{ insufficient_data|yesno:"true,false" }} == false ) {
+          // All applications by time
+          var signups_time_graph = $("#signups-time-graph");
+          var signups_time_data = {{ signups_time_data | safe }};
+          var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {
             xaxis: {
               mode: "time",
-              tickSize: [1, 'month'],
             },
             yaxis: {
               min: 0,
@@ -664,56 +633,44 @@
             },
             colors: ['#5cb85c'],
           });
-        });          
-      }
 
-      // Unique users by time
-      var users_time_graph = $("#users-time-graph");
-      var users_time_data = {{ users_time_data | safe }};
-      var users_time_plot = $.plot(users_time_graph, [users_time_data], {
-        xaxis: {
-          mode: "time",
-          tickSize: [1, 'month'],
-        },
-        yaxis: {
-          min: 0,
-          minTickSize: 1,
-          tickDecimals: 0,
-        },
-        colors: ['#f0ad4e'],
-      });
-
-      // Application status distribution (pie chart)
-      var app_distribution_graph = $("#app-distribution-graph");
-      var app_distribution_data = {{ app_distribution_data | safe }};
-      var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
-        series: {
-          pie: { 
-            show: true,
+          // Approved applications by time
+          if ({{ total_apps_approved }} > 0) {
+            var approved_or_sent_signups_time_graph = $("#approved-or-sent-signups-time-graph");
+            var approved_or_sent_signups_time_data = {{ approved_or_sent_signups_time_data | safe }};
+            var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
+              xaxis: {
+                mode: "time",
+              },
+              yaxis: {
+                min: 0,
+                minTickSize: 1,
+                tickDecimals: 0,
+              },
+              colors: ['#5cb85c'],
+            });
+            // Redraw on browser resize
+            window.addEventListener("resize", function() {
+              $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
+                xaxis: {
+                  mode: "time",
+                },
+                yaxis: {
+                  min: 0,
+                  minTickSize: 1,
+                  tickDecimals: 0,
+                },
+                colors: ['#5cb85c'],
+              });
+            });          
           }
-        },
-      });
-        
-        // Attach a listener to redraw the graphs everytime the user resizes the browser window
-        window.addEventListener("resize", function() {
-        
-          $.plot(signups_time_graph, [signups_time_data], {
+
+          // Unique users by time
+          var users_time_graph = $("#users-time-graph");
+          var users_time_data = {{ users_time_data | safe }};
+          var users_time_plot = $.plot(users_time_graph, [users_time_data], {
             xaxis: {
               mode: "time",
-              tickSize: [1, 'month'],
-            },
-            yaxis: {
-              min: 0,
-              minTickSize: 1,
-              tickDecimals: 0,
-            },
-            colors: ['#5cb85c'],
-          });
-          
-          $.plot(users_time_graph, [users_time_data], {
-            xaxis: {
-              mode: "time",
-              tickSize: [1, 'month'],
             },
             yaxis: {
               min: 0,
@@ -722,15 +679,54 @@
             },
             colors: ['#f0ad4e'],
           });
-          
-          $.plot(app_distribution_graph, app_distribution_data, {
+
+          // Application status distribution (pie chart)
+          var app_distribution_graph = $("#app-distribution-graph");
+          var app_distribution_data = {{ app_distribution_data | safe }};
+          var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
             series: {
               pie: { 
                 show: true,
               }
             },
           });
-        });
+            
+            // Attach a listener to redraw the graphs everytime the user resizes the browser window
+          window.addEventListener("resize", function() {
+          
+            $.plot(signups_time_graph, [signups_time_data], {
+              xaxis: {
+                mode: "time",
+              },
+              yaxis: {
+                min: 0,
+                minTickSize: 1,
+                tickDecimals: 0,
+              },
+              colors: ['#5cb85c'],
+            });
+            
+            $.plot(users_time_graph, [users_time_data], {
+              xaxis: {
+                mode: "time",
+              },
+              yaxis: {
+                min: 0,
+                minTickSize: 1,
+                tickDecimals: 0,
+              },
+              colors: ['#f0ad4e'],
+            });
+            
+            $.plot(app_distribution_graph, app_distribution_data, {
+              series: {
+                pie: { 
+                  show: true,
+                }
+              },
+            });
+          });
+      }
     });
   </script>
 {% endblock javascript %}

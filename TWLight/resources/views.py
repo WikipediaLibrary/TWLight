@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, View, RedirectView
@@ -15,7 +16,8 @@ from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
                                     get_data_count_by_month,
-                                    get_users_by_partner_by_month)
+                                    get_users_by_partner_by_month,
+                                    get_earliest_creation_date)
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
@@ -130,6 +132,20 @@ class PartnersDetailView(DetailView):
         context['app_distribution_data'] = get_application_status_data(
                 Application.objects.filter(partner=partner)
             )
+
+        # To restrict the graph from rendering, if there's only a week's worth of data
+        earliest_date = get_earliest_creation_date(
+                Application.objects.filter(partner=partner)
+            )
+        
+        context['insufficient_data'] = False
+        if earliest_date:
+            current_date = timezone.now().date()
+            days_since_earliest_application = (current_date - earliest_date).days
+
+            if days_since_earliest_application < 7:
+                # Less than a week's of data
+                context['insufficient_data'] = True
 
         context['signups_time_data'] = get_data_count_by_month(
                 Application.objects.filter(partner=partner)
