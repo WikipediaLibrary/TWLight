@@ -2,11 +2,13 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django import forms
+from django.db import models
 from django.utils.translation import ugettext as _
 
-from .models import Editor, UserProfile
+from .models import Editor, UserProfile, Authorization
 from .groups import get_restricted
 
 
@@ -35,6 +37,22 @@ class EditorUpdateForm(forms.ModelForm):
         self.fields['contributions'].label = _('Describe your contributions '
             'to Wikipedia: topics edited, et cetera.')
         self.fields['contributions'].help_text = None
+
+
+
+class AuthorizationUserChoiceForm(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+            user = obj
+            if hasattr(user, 'editor'):
+                return user.editor.wp_username
+            else:
+                return obj.username
+
+
+
+class AuthorizationForm(forms.ModelForm):
+    authorizer = AuthorizationUserChoiceForm(User.objects.filter(models.Q(is_superuser=True) | models.Q(groups__name='coordinators')))
+    authorized_user = AuthorizationUserChoiceForm(queryset=User.objects.all())
 
 
 

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.users.models import Editor, UserProfile, Authorization
+from TWLight.users.forms import AuthorizationForm
 
 class EditorInline(admin.StackedInline):
     model = Editor
@@ -26,8 +27,10 @@ class UserProfileInline(admin.StackedInline):
 
 
 class AuthorizationInline(admin.StackedInline):
+    form = AuthorizationForm
     model = Authorization
     fk_name="authorized_user"
+    extra = 0
 
 
 
@@ -53,8 +56,6 @@ class AuthorizationAdmin(admin.ModelAdmin):
             return ''
 
     get_authorizer_wp_username.short_description = _('authorizer')
-
-admin.site.register(Authorization, AuthorizationAdmin)
 
 
 
