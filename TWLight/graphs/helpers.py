@@ -49,6 +49,20 @@ def get_median(values_list):
     return median
 
 
+def get_earliest_creation_date(queryset):
+    # Some imported applications had no date and were given
+    # creation dates of Jan 1, 1970. This screws up the graphs.
+    if queryset:
+        earliest_date = queryset.exclude(
+            date_created=datetime.date(1970,1,1)).earliest(
+                'date_created').date_created
+    else:
+        earliest_date = None
+
+    return earliest_date
+
+
+
 def get_data_count_by_month(queryset, data_format=JSON):
     """
     Given a queryset, return a data series for number of queryset members over
@@ -59,11 +73,7 @@ def get_data_count_by_month(queryset, data_format=JSON):
     data_series = []
 
     if queryset:
-        # Some imported applications had no date and were given
-        # creation dates of Jan 1, 1970. This screws up the graphs.
-        earliest_date = queryset.exclude(
-            date_created=datetime.date(1970,1,1)).earliest(
-                'date_created').date_created
+        earliest_date = get_earliest_creation_date(queryset)
 
         current_date = timezone.now().date()
 
