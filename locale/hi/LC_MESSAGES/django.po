@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-23 16:00+0000\n"
+"POT-Creation-Date: 2019-01-24 14:21+0000\n"
 "PO-Revision-Date: 2019-01-21 09:13:12+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2821,7 +2821,7 @@ msgstr "भाषा चुनें"
 #: TWLight/users/templates/users/language_form.html:29
 msgid ""
 "You can help translate the tool at <a href=\"https://translatewiki.net/wiki/"
-"Translating:Wikipedia_Library_Card_Platform\">TranslateWiki</a>."
+"Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
 msgstr ""
 
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
