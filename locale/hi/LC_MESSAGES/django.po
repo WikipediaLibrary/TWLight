@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-24 14:21+0000\n"
+"POT-Creation-Date: 2019-01-24 14:37+0000\n"
 "PO-Revision-Date: 2019-01-21 09:13:12+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1829,7 +1829,7 @@ msgid "Confirm"
 msgstr "पुष्टि करें"
 
 #. Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
-#: TWLight/resources/views.py:37
+#: TWLight/resources/views.py:39
 msgid ""
 "Because you are a staff member, this page may include Partners who are not "
 "yet available to all users."
@@ -1837,7 +1837,7 @@ msgstr ""
 "क्योंकि आप एक कर्मचारी सदस्य हैं, इसलिए इस पृष्ठ में वे भागीदार शामिल हो सकते हैं जो अभी "
 "तक सभी उपयोगकर्ताओं के लिए उपलब्ध नहीं हैं।"
 
-#: TWLight/resources/views.py:59
+#: TWLight/resources/views.py:61
 msgid ""
 "This partner is not available. You can see it because you are a staff "
 "member, but it is not visible to non-staff users."
@@ -1846,27 +1846,27 @@ msgstr ""
 "गैर-कर्मचारी उपयोगकर्ताओं को दिखाई नहीं देता है।"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:211
+#: TWLight/resources/views.py:227
 msgid "This partner is now waitlisted"
 msgstr "यह भागीदार अब प्रतीक्षा सूची में है"
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:215
+#: TWLight/resources/views.py:231
 msgid "This partner is now available for applications"
 msgstr "यह भागीदार अब आवेदनों के लिए उपलब्ध है"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:311
+#: TWLight/resources/views.py:327
 msgid "Your suggestion has been added."
 msgstr "आपका सुझाव जोड़ दिया गया है।"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/resources/views.py:316
+#: TWLight/resources/views.py:332
 msgid "You must be a Wikipedia editor to do that."
 msgstr "ऐसा करने के लिए आपको एक विकिपीडिया संपादक होना चाहिए।"
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:331
+#: TWLight/resources/views.py:347
 msgid "Suggestion has been deleted."
 msgstr "सुझाव हटा दिया गया है।"
 

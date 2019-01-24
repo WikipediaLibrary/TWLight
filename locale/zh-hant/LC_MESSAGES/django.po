@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-24 14:21+0000\n"
+"POT-Creation-Date: 2019-01-24 14:37+0000\n"
 "PO-Revision-Date: 2019-01-21 09:13:15+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1761,13 +1761,13 @@ msgid "Confirm"
 msgstr "確認"
 
 #. Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
-#: TWLight/resources/views.py:37
+#: TWLight/resources/views.py:39
 msgid ""
 "Because you are a staff member, this page may include Partners who are not "
 "yet available to all users."
 msgstr "因為您不是機構成員，此頁面可能包含尚未對於所有使用者可用的合作夥伴。"
 
-#: TWLight/resources/views.py:59
+#: TWLight/resources/views.py:61
 msgid ""
 "This partner is not available. You can see it because you are a staff "
 "member, but it is not visible to non-staff users."
@@ -1776,27 +1776,27 @@ msgstr ""
 "的。"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:211
+#: TWLight/resources/views.py:227
 msgid "This partner is now waitlisted"
 msgstr "此合作夥伴目前為候補"
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:215
+#: TWLight/resources/views.py:231
 msgid "This partner is now available for applications"
 msgstr "此合作夥伴目前可用於申請程序"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:311
+#: TWLight/resources/views.py:327
 msgid "Your suggestion has been added."
 msgstr "您的建議已添加。"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/resources/views.py:316
+#: TWLight/resources/views.py:332
 msgid "You must be a Wikipedia editor to do that."
 msgstr "您必須要是維基百科上的編輯者才能做出。"
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:331
+#: TWLight/resources/views.py:347
 msgid "Suggestion has been deleted."
 msgstr "建議已刪除。"
 
