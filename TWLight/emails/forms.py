@@ -5,12 +5,15 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
 
 class ContactUsForm(forms.Form):
-    email = forms.EmailField()
+    email = forms.CharField()
     message = forms.CharField(widget = forms.Textarea, max_length = 1000,)
     next = forms.CharField(widget = forms.HiddenInput, max_length = 40,)
     
     def __init__(self, *args, **kwargs):
         super(ContactUsForm, self).__init__(*args, **kwargs)
+        widget = self.fields['email'].widget
+        widget.attrs['readonly'] = widget.attrs['disabled'] = widget.disabled = True
+        
         # Translators: This labels a textfield where users can enter their email ID.
         self.fields['email'].label = _('Your email')
         # Translators: This labels a textfield where users can enter their email message.
@@ -30,3 +33,7 @@ class ContactUsForm(forms.Form):
             # Translators: This labels a button which users click to submit their email message.
             Submit('submit', _('Submit'), css_class='center-block'),
         )
+
+
+    def clean_email_field(self):
+        return self.instance.email
