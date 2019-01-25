@@ -1,21 +1,20 @@
 from django import forms
+from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
 
 class ContactUsForm(forms.Form):
-    email = forms.CharField()
+    email = forms.EmailField(disabled = True,)
     message = forms.CharField(widget = forms.Textarea, max_length = 1000,)
     next = forms.CharField(widget = forms.HiddenInput, max_length = 40,)
     
     def __init__(self, *args, **kwargs):
         super(ContactUsForm, self).__init__(*args, **kwargs)
-        widget = self.fields['email'].widget
-        widget.attrs['readonly'] = widget.attrs['disabled'] = widget.disabled = True
-        
         # Translators: This labels a textfield where users can enter their email ID.
         self.fields['email'].label = _('Your email')
+        self.fields['email'].help_text =  _('This field is automatically updated with the email from your <a href="{}">user profile</a>.'.format(reverse_lazy('users:home')))
         # Translators: This labels a textfield where users can enter their email message.
         self.fields['message'].label = _('Message')
 
@@ -33,7 +32,3 @@ class ContactUsForm(forms.Form):
             # Translators: This labels a button which users click to submit their email message.
             Submit('submit', _('Submit'), css_class='center-block'),
         )
-
-
-    def clean_email_field(self):
-        return self.instance.email
