@@ -371,3 +371,18 @@ class ContactUsTest(TestCase):
         self.client.post(contact_us_url, data)
         
         self.assertEqual(len(mail.outbox), 1)
+
+
+    def test_not_logged_in_user_submit_contact_us_emails(self):
+        self.assertEqual(len(mail.outbox), 0)
+        
+        contact_us_url = reverse('contact')
+        contact_us = self.client.get(contact_us_url, follow=True)
+        contact_us_form = contact_us.context['form']
+        data  = contact_us_form.initial
+        data['email'] = 'editor@example.com'
+        data['message'] = 'This is a test'
+        data['submit'] = True
+        self.client.post(contact_us_url, data)
+        
+        self.assertEqual(len(mail.outbox), 0)
