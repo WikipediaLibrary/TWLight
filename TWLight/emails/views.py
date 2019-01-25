@@ -27,10 +27,6 @@ class ContactUsView(FormView):
                 initial.update({
                      'email': self.request.user.email,
                 })
-        elif ('email' in self.request.GET):
-            initial.update({
-                 'email': self.request.GET['email'],
-            })
         if ('message' in self.request.GET):
             initial.update({
                  'message': self.request.GET['message'],
