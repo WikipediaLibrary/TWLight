@@ -178,7 +178,7 @@
       <div class="alert alert-warning">
         {% url 'users:email_change' as email_url %}
         {% url 'contact' as contact_us_url %}
-        {% comment %} Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ email_url }}. {% endcomment %}
+        {% comment %} Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ contact_us_url }} or {{ email_url }}. {% endcomment %}
         {% blocktrans trimmed %}
           You don't have an email on file. We can't finalize your access to
           partner resources, and you won't be able to <a href="{{ contact_us_url }}">contact us</a> without an email. Please
