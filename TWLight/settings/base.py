@@ -101,6 +101,7 @@ TWLIGHT_APPS = [
     'TWLight.applications',
     'TWLight.emails',
     'TWLight.graphs',
+    'TWLight.comments',
 ]
 
 # dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
@@ -315,7 +316,7 @@ TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get('TWLIGHT_OAUTH_CONSUMER_SECRET', 
 
 # COMMENTS CONFIGURATION
 # ------------------------------------------------------------------------------
-
+COMMENTS_APP = 'TWLight.comments'
 
 # TAGGIT CONFIGURATION
 # ------------------------------------------------------------------------------
