@@ -12,7 +12,7 @@
           {% comment %} Translators: This is the title of the form where users can send messages to the Wikipedia Library team. {% endcomment %}
           <strong><span class="panel-title">{% trans 'Contact us' %}</span></strong>
         </div>
-        <div class="panel-body fixed-panel">
+        <div class="panel-body">
           <form class="form-horizontal"
           {% if user.is_authenticated %}
           method="post"
@@ -38,7 +38,7 @@
           {% comment %} Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team. {% endcomment %}
           <strong><span class="panel-title">{% trans 'Contact info' %}</span></strong>
         </div>
-        <div class="panel-body fixed-panel">
+        <div class="panel-body transparent-panel">
           <p>{% comment %} Translators: On the contact us page, this labels the link to the Wikipedia Library meta page. {% endcomment %}
             <strong>{% trans 'Meta page' %}: </strong>
             {% comment %} Translators: On the contact us page, this text links to the Wikipedia Library meta page. {% endcomment %}
@@ -56,7 +56,7 @@
             <strong>{% trans 'IRC' %}: </strong>
             <a href="https://kiwiirc.com/client/irc.freenode.net/#wikipedia-library">#wikipedia-library (Freenode)</a>
           </p>
-          <div class="clearfix"></div>
+          <div class="clearfix"></div><hr />
           <p>
             <a href="https://www.facebook.com/TheWikiLibrary">
               <img src="{% static 'img/facebook-logo.png' %}" class="img-responsive logo" alt="

@@ -435,8 +435,8 @@ A few spots just need padding instead of margin.
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 
-.fixed-panel {
-  height: 405px;
+.transparent-panel {
+  border-color: transparent;
 }
 .panel-heading {
   border: solid #ddd;
