@@ -284,14 +284,21 @@ class EmailChangeView(SelfOnly, FormView):
 
     def form_valid(self, form):
         user = self.request.user
-
-        user.email = form.cleaned_data['email']
-        user.save()
-
-        user.userprofile.use_wp_email = form.cleaned_data['use_wp_email']
-        user.userprofile.save()
-
-        return HttpResponseRedirect(self.get_success_url())
+        
+        email = self.request.POST.get('email', False)
+        
+        if email or self.request.POST.get('use_wp_email'):
+            user.email = form.cleaned_data['email']
+            user.save()
+                
+            user.userprofile.use_wp_email = form.cleaned_data['use_wp_email']
+            user.userprofile.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            messages.add_message(self.request, messages.WARNING,
+                # Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
+                _('Both the values cannot be blank. Either enter a email or check the box.'))
+            return HttpResponseRedirect(reverse_lazy('users:email_change'))
 
 
     def get_object(self):
