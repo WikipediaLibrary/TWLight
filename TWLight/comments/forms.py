@@ -8,7 +8,7 @@ from django.conf import settings
 
 class CommentWithoutEmail(CommentForm):
     def get_comment_create_data(self):
-        # Overide the default comment form behaviour, with two left out fields
+        # Override the default comment form behaviour, with two left out fields
         return dict(
             content_type = ContentType.objects.get_for_model(self.target_object),
             object_pk    = force_unicode(self.target_object._get_pk_val()),
