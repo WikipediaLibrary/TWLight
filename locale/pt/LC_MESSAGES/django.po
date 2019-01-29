@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-24 14:37+0000\n"
+"POT-Creation-Date: 2019-01-29 12:19+0000\n"
 "PO-Revision-Date: 2019-01-21 09:13:13+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -135,21 +135,21 @@ msgstr ""
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
 #: TWLight/applications/helpers.py:114
-#: TWLight/users/templates/users/editor_detail_data.html:166
+#: TWLight/users/templates/users/editor_detail_data.html:164
 msgid "Real name"
 msgstr "Nome verdadeiro"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
 #: TWLight/applications/helpers.py:116
-#: TWLight/users/templates/users/editor_detail_data.html:178
+#: TWLight/users/templates/users/editor_detail_data.html:176
 msgid "Country of residence"
 msgstr "País de residência"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
 #: TWLight/applications/helpers.py:118
-#: TWLight/users/templates/users/editor_detail_data.html:190
+#: TWLight/users/templates/users/editor_detail_data.html:188
 msgid "Occupation"
 msgstr "Profissão"
 
@@ -337,7 +337,7 @@ msgstr "Sim (<a href=\"%(parent_url)s\">candidatura anterior</a>)"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
 #: TWLight/applications/templates/applications/application_evaluation.html:128
-#: TWLight/users/templates/users/editor_detail_data.html:67
+#: TWLight/users/templates/users/editor_detail_data.html:68
 msgid "No"
 msgstr "Não"
 
@@ -1880,7 +1880,7 @@ msgstr "Tem a certeza de que quer eliminar <b>%(object)s</b>?"
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
-#: TWLight/users/views.py:364
+#: TWLight/users/views.py:371
 msgid "Confirm"
 msgstr "Confirmar"
 
@@ -2668,8 +2668,9 @@ msgstr "Aceito"
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:105
-msgid "Use my Wikipedia email address"
-msgstr "Usar o meu endereço de correio eletrónico da Wikipédia"
+msgid ""
+"Use my Wikipedia email address(will be updated the next time you login)."
+msgstr ""
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:118
@@ -2804,19 +2805,20 @@ msgid "Contributions"
 msgstr "Contribuições"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
-#. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/templates/users/editor_detail_data.html:42
-#: TWLight/users/views.py:258
-msgid "Update"
+#: TWLight/users/templates/users/editor_detail_data.html:43
+#: TWLight/users/templates/users/editor_detail_data.html:155
+#, fuzzy
+#| msgid "Update"
+msgid "(update)"
 msgstr "Atualizar"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
-#: TWLight/users/templates/users/editor_detail_data.html:53
+#: TWLight/users/templates/users/editor_detail_data.html:54
 msgid "Satisfies terms of use?"
 msgstr "Satisfaz as condições de utilização?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
-#: TWLight/users/templates/users/editor_detail_data.html:56
+#: TWLight/users/templates/users/editor_detail_data.html:57
 msgid ""
 "At their last login, did this user meet the criteria set forth in the terms "
 "of use?"
@@ -2825,12 +2827,12 @@ msgstr ""
 "especificados nas condições de utilização?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
-#: TWLight/users/templates/users/editor_detail_data.html:65
+#: TWLight/users/templates/users/editor_detail_data.html:66
 msgid "Yes"
 msgstr "Sim"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
-#: TWLight/users/templates/users/editor_detail_data.html:70
+#: TWLight/users/templates/users/editor_detail_data.html:71
 #, python-format
 msgid ""
 "%(username)s may still be eligible for access grants at the coordinators' "
@@ -2840,27 +2842,27 @@ msgstr ""
 "discrição do coordenador."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:84
+#: TWLight/users/templates/users/editor_detail_data.html:85
 msgid "Global edit count *"
 msgstr "Contagem global de edições *"
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
-#: TWLight/users/templates/users/editor_detail_data.html:91
+#: TWLight/users/templates/users/editor_detail_data.html:92
 msgid "(view global user contributions)"
 msgstr "(ver contribuições globais do utilizador)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:101
+#: TWLight/users/templates/users/editor_detail_data.html:102
 msgid "Meta-Wiki registration or SUL merge date *"
 msgstr "Data de registo na wiki Meta ou de fusão da autenticação unificada *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:113
+#: TWLight/users/templates/users/editor_detail_data.html:114
 msgid "Wikipedia user ID *"
 msgstr "Identificador do utilizador na Wikipédia *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/editor_detail_data.html:129
+#: TWLight/users/templates/users/editor_detail_data.html:130
 msgid ""
 "The following information is visible only to you, site administrators, "
 "publishing partners (where required), and volunteer Wikipedia Library "
@@ -2872,7 +2874,7 @@ msgstr ""
 "confidencialidade)."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
-#: TWLight/users/templates/users/editor_detail_data.html:139
+#: TWLight/users/templates/users/editor_detail_data.html:140
 #, python-format
 msgid ""
 "You may <a href=\"%(update_url)s\">update or delete</a> your data at any "
@@ -2882,17 +2884,12 @@ msgstr ""
 "qualquer altura."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
-#: TWLight/users/templates/users/editor_detail_data.html:150
+#: TWLight/users/templates/users/editor_detail_data.html:151
 msgid "Email *"
 msgstr "Correio eletrónico *"
 
-#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is under the email if their email is automatically updated from their Wikipedia account.
-#: TWLight/users/templates/users/editor_detail_data.html:156
-msgid "This will be automatically updated from Wikipedia."
-msgstr "Este será atualizado automaticamente da Wikipédia."
-
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
-#: TWLight/users/templates/users/editor_detail_data.html:202
+#: TWLight/users/templates/users/editor_detail_data.html:200
 msgid "Institutional affiliation"
 msgstr "Filiação em instituições"
 
@@ -3449,24 +3446,34 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:241 TWLight/users/views.py:306
-#: TWLight/users/views.py:350
+#: TWLight/users/views.py:241 TWLight/users/views.py:313
+#: TWLight/users/views.py:357
 msgid "You must be logged in to do that."
 msgstr "Para realizar essa operação tem de ter uma sessão iniciada."
+
+#. Translators: This is the button users click to confirm changes to their personal information.
+#: TWLight/users/views.py:258
+msgid "Update"
+msgstr "Atualizar"
 
 #. Translators: Shown to the user when they successfully modify their personal information.
 #: TWLight/users/views.py:270
 msgid "Your information has been updated."
 msgstr "A sua informação foi atualizada."
 
+#. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
+#: TWLight/users/views.py:300
+msgid "Both the values cannot be blank. Either enter a email or check the box."
+msgstr ""
+
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:316
+#: TWLight/users/views.py:323
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "O seu correio eletrónico foi alterado para {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:322
+#: TWLight/users/views.py:329
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -3476,7 +3483,7 @@ msgstr ""
 "um correio eletrónico."
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:506
+#: TWLight/users/views.py:513
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
@@ -3485,7 +3492,7 @@ msgstr ""
 "candidaturas a não ser que concorde com as condições de utilização."
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:511
+#: TWLight/users/views.py:518
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
@@ -3539,3 +3546,9 @@ msgstr ""
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr "{username} recebeu acesso ao parceiro <a href=\"{url}\">{partner}</a>"
+
+#~ msgid "Use my Wikipedia email address"
+#~ msgstr "Usar o meu endereço de correio eletrónico da Wikipédia"
+
+#~ msgid "This will be automatically updated from Wikipedia."
+#~ msgstr "Este será atualizado automaticamente da Wikipédia."
