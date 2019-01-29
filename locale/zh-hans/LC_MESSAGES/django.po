@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-29 15:30+0000\n"
+"POT-Creation-Date: 2019-01-29 16:08+0000\n"
 "PO-Revision-Date: 2019-01-21 09:13:15+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -784,12 +784,18 @@ msgstr "您的维基百科书斋应用程序已被批准"
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-html.html:5
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>Dear %(user)s,</p> <p>Thank you for coordinating %(partner)s resources "
+#| "through The Wikipedia Library. There are one or more comments on an "
+#| "application that require a response from you. Please reply to these at: "
+#| "%(app_url)s</p> <p>Best,</p> <p>The Wikipedia Library</p>"
 msgid ""
 "<p>Dear %(user)s,</p> <p>Thank you for coordinating %(partner)s resources "
 "through The Wikipedia Library. There are one or more comments on an "
-"application that require a response from you. Please reply to these at: "
-"%(app_url)s</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+"application that require a response from you. Please reply to these at: <a "
+"href=\"%(app_url)s\">%(app_url)s</a></p> <p>Best,</p> <p>The Wikipedia "
+"Library</p>"
 msgstr ""
 "<p>亲爱的%(user)s：</p><p>谢谢通过维基百科库协调%(partner)s的资源。对需要响应"
 "的应用程序有一个或多个注释。请回复如下：%(app_url)s</p> <p>顺祝安琪</p><p>维"
@@ -819,13 +825,19 @@ msgstr "对您处理的维基百科库应用程序的新评论"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
+#| "resources through The Wikipedia Library. There are one or more comments "
+#| "on your application that require a response from you. Please reply to "
+#| "these at %(app_url)s so we can evaluate your application.</p> <p>Best,</"
+#| "p> <p>The Wikipedia Library</p>"
 msgid ""
 "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
 "resources through The Wikipedia Library. There are one or more comments on "
 "your application that require a response from you. Please reply to these at "
-"%(app_url)s so we can evaluate your application.</p> <p>Best,</p> <p>The "
-"Wikipedia Library</p>"
+"<a href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application."
+"</p> <p>Best,</p> <p>The Wikipedia Library</p>"
 msgstr ""
 "<p>亲爱的%(user)s，</p><p>谢谢您通过维基百科库申请访问%(partner)s的资源。在您"
 "的应用程序中有一个或多个注释需要您的响应。请在%(app_url)s回复这些，这样我们就"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-29 15:29+0000\n"
+"POT-Creation-Date: 2019-01-29 16:08+0000\n"
 "PO-Revision-Date: 2019-01-21 09:13:12+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -799,12 +799,18 @@ msgstr "आपका विकिपीडिया पुस्तकालय 
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-html.html:5
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>Dear %(user)s,</p> <p>Thank you for coordinating %(partner)s resources "
+#| "through The Wikipedia Library. There are one or more comments on an "
+#| "application that require a response from you. Please reply to these at: "
+#| "%(app_url)s</p> <p>Best,</p> <p>The Wikipedia Library</p>"
 msgid ""
 "<p>Dear %(user)s,</p> <p>Thank you for coordinating %(partner)s resources "
 "through The Wikipedia Library. There are one or more comments on an "
-"application that require a response from you. Please reply to these at: "
-"%(app_url)s</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+"application that require a response from you. Please reply to these at: <a "
+"href=\"%(app_url)s\">%(app_url)s</a></p> <p>Best,</p> <p>The Wikipedia "
+"Library</p>"
 msgstr ""
 "<p>प्रिय %(user)s,</p> <p>विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों के "
 "समन्वय के लिए धन्यवाद। एक आवेदन पर एक या एक से अधिक टिप्पणियाँ हैं, जिन पर आपसे "
@@ -831,13 +837,19 @@ msgstr "आपके द्वारा संसाधित किये ग�
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
+#| "resources through The Wikipedia Library. There are one or more comments "
+#| "on your application that require a response from you. Please reply to "
+#| "these at %(app_url)s so we can evaluate your application.</p> <p>Best,</"
+#| "p> <p>The Wikipedia Library</p>"
 msgid ""
 "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
 "resources through The Wikipedia Library. There are one or more comments on "
 "your application that require a response from you. Please reply to these at "
-"%(app_url)s so we can evaluate your application.</p> <p>Best,</p> <p>The "
-"Wikipedia Library</p>"
+"<a href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application."
+"</p> <p>Best,</p> <p>The Wikipedia Library</p>"
 msgstr ""
 "<p>प्रिय %(user)s,</p> <p> विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक "
 "पहुँच के लिए आवेदन करने के लिए धन्यवाद। आपके आवेदन पर एक या एक से अधिक टिप्पणियाँ हैं, जिन "
