@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-01-29 12:19+0000\n"
+"POT-Creation-Date: 2019-01-29 15:29+0000\n"
 "PO-Revision-Date: 2019-01-21 09:13:13+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1529,22 +1529,29 @@ msgstr ""
 msgid "Accounts availability"
 msgstr ""
 
-#. Translators: This is the label and the number which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). Don't translate accounts_available.
+#. Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed.
 #: TWLight/resources/templates/resources/partner_detail.html:548
-#, python-format
-msgid "Accounts available: %(total_accounts_available_partner)s"
+#: TWLight/resources/templates/resources/partner_detail.html:564
+msgid "Actual negative number visible to coordinators and superusers only"
 msgstr ""
 
+#. Translators: This is the label which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:559
+#, fuzzy
+#| msgid "Not available"
+msgid "Accounts available:"
+msgstr "Недостапно"
+
 #. Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:557
+#: TWLight/resources/templates/resources/partner_detail.html:575
 msgid "Applications by status"
 msgstr "Барања по состојба"
 
 #. Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:561
-#: TWLight/resources/templates/resources/partner_detail.html:596
-#: TWLight/resources/templates/resources/partner_detail.html:602
-#: TWLight/resources/templates/resources/partner_detail.html:608
+#: TWLight/resources/templates/resources/partner_detail.html:579
+#: TWLight/resources/templates/resources/partner_detail.html:614
+#: TWLight/resources/templates/resources/partner_detail.html:620
+#: TWLight/resources/templates/resources/partner_detail.html:626
 #: TWLight/templates/dashboard.html:77 TWLight/templates/dashboard.html:143
 #: TWLight/templates/dashboard.html:148 TWLight/templates/dashboard.html:160
 #: TWLight/templates/dashboard.html:170 TWLight/templates/dashboard.html:186
@@ -1552,7 +1559,7 @@ msgid "download as csv"
 msgstr "преземи како CSV"
 
 #. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:568
+#: TWLight/resources/templates/resources/partner_detail.html:586
 #, python-format
 msgid ""
 "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
@@ -1562,7 +1569,7 @@ msgstr[0] "Број на одобрени барања (севкупно): %(tot
 msgstr[1] "Број на одобрени барања (севкупно): %(total_apps_approved_or_sent)s"
 
 #. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:577
+#: TWLight/resources/templates/resources/partner_detail.html:595
 #, python-format
 msgid ""
 "Number of unique users with approved applications (all time): "
@@ -1574,22 +1581,22 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:593
+#: TWLight/resources/templates/resources/partner_detail.html:611
 msgid "Applications over time"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:596
+#: TWLight/resources/templates/resources/partner_detail.html:614
 msgid "All applications"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:602
+#: TWLight/resources/templates/resources/partner_detail.html:620
 msgid "Approved applications only"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time.
-#: TWLight/resources/templates/resources/partner_detail.html:608
+#: TWLight/resources/templates/resources/partner_detail.html:626
 msgid "Unique users over time"
 msgstr ""
 
