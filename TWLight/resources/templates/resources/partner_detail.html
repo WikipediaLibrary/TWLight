@@ -535,29 +535,33 @@
     </h3>
     <ul>
       {% for stream_name, total_accounts in total_accounts_available_stream.items %}
-        <li>{{ stream_name }}: {% if total_accounts < 0 %}
-                                  0
-                                  {% if user|coordinators_only %}
-                                    {% comment %} Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed. {% endcomment %}
-                                    <span title="{% trans "Actual negative number visible to coordinators and superusers only" %}">({{ total_accounts }})</span>
-                                  {% endif %}
-                               {% else %}
-                                  {{ total_accounts }}
-                               {% endif %}</li>
+        <li>
+          {{ stream_name }}:
+          {% if total_accounts < 0 %}
+              0
+            {% if user|coordinators_only %}
+              {% comment %} Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed. {% endcomment %}
+              <span title="{% trans "Actual negative number visible to coordinators and superusers only" %}">({{ total_accounts }})</span>
+            {% endif %}
+          {% else %}
+            {{ total_accounts }}
+          {% endif %}
+        </li>
       {% endfor %}
     </ul>
   {% elif object.accounts_available %}
     <h3>
       {% comment %} Translators: This is the label which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% trans "Accounts available:" %} {% if total_accounts_available_partner < 0 %}
-                            0
-                              {% if user|coordinators_only %}
-                                {% comment %} Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed. {% endcomment %}
-                                <span title="{% trans "Actual negative number visible to coordinators and superusers only" %}">({{ total_accounts_available_partner }})</span>
-                              {% endif %}
-                           {% else %}
-                              {{ total_accounts_available_partner }}
-                           {% endif %}
+      {% trans "Accounts available:" %}
+      {% if total_accounts_available_partner < 0 %}
+        0
+        {% if user|coordinators_only %}
+          {% comment %} Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed. {% endcomment %}
+          <span title="{% trans "Actual negative number visible to coordinators and superusers only" %}">({{ total_accounts_available_partner }})</span>
+        {% endif %}
+      {% else %}
+          {{ total_accounts_available_partner }}
+      {% endif %}
     </h3>
   {% endif %}
   
