@@ -9,6 +9,7 @@ from django.conf import settings
 class CommentWithoutEmail(CommentForm):
     def get_comment_create_data(self):
         # Override the default comment form behaviour, with two left out fields
+        # From Stack Overflow https://stackoverflow.com/questions/1456267/django-comments-want-to-remove-user-url-not-expand-the-model-how-to/4766543#4766543
         return dict(
             content_type = ContentType.objects.get_for_model(self.target_object),
             object_pk    = force_unicode(self.target_object._get_pk_val()),
