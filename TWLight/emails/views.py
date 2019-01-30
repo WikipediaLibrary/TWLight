@@ -44,7 +44,7 @@ class ContactUsView(FormView):
             assert self.request.user.editor
             
             email = form.cleaned_data['email']
-            # Additional validation on the email
+            # Additional validation on the email field data
             # Regex from https://www.pythoncentral.io/how-to-validate-an-email-address-using-python/
             if re.match("^.+@([?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email) != None:
                 message = form.cleaned_data['message']
