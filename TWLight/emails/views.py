@@ -24,7 +24,7 @@ class ContactUsView(FormView):
         # @TODO: This sort of gets repeated in ContactUsForm.
         # We could probably be factored out to a common place for DRYness.
         if self.request.user.is_authenticated():
-            if self.request.user.userprofile.use_wp_email:
+            if self.request.user.email:
                 initial.update({
                      'email': self.request.user.email,
                 })
@@ -46,7 +46,7 @@ class ContactUsView(FormView):
             email = form.cleaned_data['email']
             # Additional validation on the email field data
             # Regex from https://www.pythoncentral.io/how-to-validate-an-email-address-using-python/
-            if re.match("^.+@([?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email) != None:
+            if re.match("^.+@(\[?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email) != None:
                 message = form.cleaned_data['message']
                 ContactUs.new_email.send(
                     sender=self.__class__,
