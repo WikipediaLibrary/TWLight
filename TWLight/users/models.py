@@ -430,9 +430,19 @@ class Authorization(models.Model):
         else:
             stream_name = None
 
+        try:
+            authorized_user = self.authorized_user.editor.wp_username
+        except:
+            authorized_user = self.authorized_user.username
+
+        try:
+            authorizer = self.authorizer.editor.wp_username
+        except:
+            authorizer = self.authorizer.username
+
         return u'authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}'.format(
-            authorized_user=self.authorized_user.editor.wp_username,
-            authorizer=self.authorizer.editor.wp_username,
+            authorized_user=authorized_user,
+            authorizer=authorizer,
             date_authorized=self.date_authorized,
             company_name=company_name,
             stream_name=stream_name,
