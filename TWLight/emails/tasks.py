@@ -22,6 +22,7 @@ whether to send synchronously or asynchronously based on the value of
 settings.DJMAIL_REAL_BACKEND.
 """
 from djmail import template_mail
+from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 import logging
 from reversion.models import Version
 
@@ -74,10 +75,6 @@ class RejectionNotification(template_mail.TemplateMail):
 
 class CoordinatorReminderNotification(template_mail.TemplateMail):
     name = 'coordinator_reminder_notification'
-
-
-class ContactUsEmail(template_mail.TemplateMail):
-    name = 'contact_us_email'
 
 
 @receiver(Reminder.coordinator_reminder)
@@ -350,16 +347,25 @@ def contact_us_emails(sender, **kwargs):
     this forwards the message to wikipedialibrary@wikimedia.org
     with some additional data.
     """
+    reply_to = []
+    cc = []
     user_email = kwargs['user_email']
     editor_wp_username = kwargs['editor_wp_username']
     body = kwargs['body']
-
+    reply_to.append(user_email)
+    
     logger.info(u'Received contact us form submit signal for {editor_wp_username}; '
         'preparing to send email to wikipedialibrary@wikimedia.org.'.format(editor_wp_username=editor_wp_username))
-    email = ContactUsEmail()
-    logger.info('Email constructed.')
-    email.send('wikipedialibrary@wikimedia.org',
-        {'user_email': user_email,
-         'editor_wp_username': editor_wp_username,
+        
+    mail_instance = MagicMailBuilder(template_mail_cls=InlineCSSTemplateMail)
+    email = mail_instance.contact_us_email('wikipedialibrary@wikimedia.org', 
+        {'editor_wp_username': editor_wp_username,
          'body': body})
+    email.extra_headers["Reply-To"] = ", ".join(reply_to)
+    if kwargs['cc']:
+        cc.append(user_email)
+        email.extra_headers["Cc"] = ", ".join(cc)
+        
+    logger.info('Email constructed.')
+    email.send()
     logger.info(u'Email queued.')
