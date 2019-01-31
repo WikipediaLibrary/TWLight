@@ -339,7 +339,7 @@ class ContactUsTest(TestCase):
         self.editor = EditorFactory(user__email='editor@example.com').user
 
     @patch('TWLight.emails.tasks.contact_us_emails')
-    def test_contact_us_emails(self, mock_email, **kwargs):
+    def test_contact_us_emails(self, mock_email):
         factory = RequestFactory()
         request = factory.post(get_form_target())
         request.user = UserFactory()
