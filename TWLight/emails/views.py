@@ -42,9 +42,11 @@ class ContactUsView(FormView):
             assert self.request.user.editor
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
+            carbon_copy = form.cleaned_data['cc']
             ContactUs.new_email.send(
                 sender=self.__class__,
                 user_email=email,
+                cc=carbon_copy,
                 editor_wp_username=self.request.user.editor.wp_username,
                 body=message
             )
