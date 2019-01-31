@@ -9,8 +9,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core import serializers
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
+from django.core.validators import EmailValidator
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
@@ -288,9 +289,17 @@ class EmailChangeView(SelfOnly, FormView):
         email = self.request.POST.get('email', False)
         
         if email or self.request.POST.get('use_wp_email'):
-            user.email = form.cleaned_data['email']
-            user.save()
-                
+            if email:
+                validate_email = EmailValidator()
+                try:
+                    validate_email(email)
+                    user.email = form.cleaned_data['email']
+                    user.save()
+                except ValidationError:
+                    messages.add_message(self.request, messages.WARNING,
+                    # Translators: If a user tries to save the 'email change form' with an invalid email, this message is presented.
+                    _('Please enter a valid email.'))
+                    return HttpResponseRedirect(reverse_lazy('users:email_change'))
             user.userprofile.use_wp_email = form.cleaned_data['use_wp_email']
             user.userprofile.save()
             return HttpResponseRedirect(self.get_success_url())
