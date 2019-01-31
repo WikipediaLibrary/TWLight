@@ -1,3 +1,4 @@
+from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 from mock import patch
 
 from django_comments import get_form_target
@@ -24,7 +25,6 @@ from .tasks import (send_comment_notification_emails,
                     send_approval_notification_email,
                     send_rejection_notification_email,
                     contact_us_emails)
-from .tasks import ContactUsEmail
 
 class ApplicationCommentTest(TestCase):
 
@@ -339,20 +339,24 @@ class ContactUsTest(TestCase):
         self.editor = EditorFactory(user__email='editor@example.com').user
 
     @patch('TWLight.emails.tasks.contact_us_emails')
-    def test_contact_us_emails(self, mock_email):
+    def test_contact_us_emails(self, mock_email, **kwargs):
         factory = RequestFactory()
         request = factory.post(get_form_target())
         request.user = UserFactory()
         editor = EditorFactory()
-
+        reply_to = ['editor@example.com']
+        cc = ['editor@example.com']
+        
         self.assertEqual(len(mail.outbox), 0)
-
-        email = ContactUsEmail() 
-        email.send('wikipedialibrary@wikimedia.org',
-            {'user_email': self.editor.email,
-             'editor_wp_username': editor.wp_username,
+        
+        mail_instance = MagicMailBuilder(template_mail_cls=InlineCSSTemplateMail)
+        email = mail_instance.contact_us_email('wikipedialibrary@wikimedia.org', 
+            {'editor_wp_username': editor.wp_username,
              'body': 'This is a test email'})
-
+        email.extra_headers["Reply-To"] = ", ".join(reply_to)
+        email.extra_headers["Cc"] = ", ".join(cc)
+        email.send()
+        
         self.assertEqual(len(mail.outbox), 1)
 
 
@@ -367,6 +371,7 @@ class ContactUsTest(TestCase):
         data  = contact_us_form.initial
         data['email'] = 'editor@example.com'
         data['message'] = 'This is a test'
+        data['cc'] = True
         data['submit'] = True
         self.client.post(contact_us_url, data)
         
@@ -383,6 +388,7 @@ class ContactUsTest(TestCase):
         data['email'] = 'editor@example.com'
         data['message'] = 'This is a test'
         data['submit'] = True
+        data['cc'] = True
         self.client.post(contact_us_url, data)
         
         self.assertEqual(len(mail.outbox), 0)
