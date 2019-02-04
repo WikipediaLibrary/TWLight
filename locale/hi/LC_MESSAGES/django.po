@@ -10,7 +10,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-01-30 21:27+0000\n"
-"PO-Revision-Date: 2019-01-30 22:59:36+0000\n"
+"PO-Revision-Date: 2019-02-04 08:15:04+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -798,7 +798,7 @@ msgstr "<p>प्रिय %(user)s,</p> <p>विकिपीडिया प�
 #: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at: %(app_url)s Best, The Wikipedia Library"
-msgstr "प्रिय %(user)s, विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। दुर्भाग्य से इस समय आपका आवेदन स्वीकृत नहीं हुआ है। आप अपने आवेदन और समीक्षा टिप्पणियों पर देख सकते हैं:%(app_url)s। शुभकामनाएँ! विकिपीडिया पुस्तकालय"
+msgstr "प्रिय %(user)s, विकिपीडिया पुस्तकालय के माध्यम से %(partner)s संसाधनों तक पहुँच के लिए आवेदन करने के लिए धन्यवाद। दुर्भाग्य से इस समय आपका आवेदन स्वीकृत नहीं हुआ है। आप अपने आवेदन और समीक्षा टिप्पणियाँ यहाँ पर देख सकते हैं:%(app_url)s। शुभकामनाएँ! विकिपीडिया पुस्तकालय"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
@@ -1349,7 +1349,7 @@ msgstr "खातों की उपलब्धता"
 #: TWLight/resources/templates/resources/partner_detail.html:548
 #: TWLight/resources/templates/resources/partner_detail.html:564
 msgid "Actual negative number visible to coordinators and superusers only"
-msgstr ""
+msgstr "समन्वयक और सुपरउपयोगकर्ता को दिखाई देने वाली वास्तविक नकारात्मक संख्या"
 
 #. Translators: This is the label which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:559
@@ -2092,7 +2092,7 @@ msgstr "मुझे स्वीकार है"
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:105
 msgid "Use my Wikipedia email address(will be updated the next time you login)."
-msgstr ""
+msgstr "मेरे विकिपीडिया ईमेल पते का उपयोग करें (अगली बार जब आप लॉगिन करेंगे तो उसे अपडेट कर दिया जाएगा)।"
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:118
@@ -2208,9 +2208,8 @@ msgstr "योगदान"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #: TWLight/users/templates/users/editor_detail_data.html:43
 #: TWLight/users/templates/users/editor_detail_data.html:155
-#, fuzzy
 msgid "(update)"
-msgstr "अद्यतन"
+msgstr "(अद्यतन)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:54
@@ -2282,7 +2281,7 @@ msgstr "भाषा चुनें"
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:29
 msgid "You can help translate the tool at <a href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
-msgstr ""
+msgstr "आप <a href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a> पर  टूल का अनुवाद करने में सहायता कर सकते हैं।"
 
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
 #: TWLight/users/templates/users/preferences.html:21
@@ -2513,7 +2512,7 @@ msgstr "आपकी जानकारी अपडेट कर दी गई 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
 #: TWLight/users/views.py:300
 msgid "Both the values cannot be blank. Either enter a email or check the box."
-msgstr ""
+msgstr "दोनों मान रिक्त नहीं हो सकते। या तो एक ईमेल दर्ज करें या बॉक्स को चिन्हित करें।"
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
 #: TWLight/users/views.py:323

@@ -7,7 +7,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-01-30 21:27+0000\n"
-"PO-Revision-Date: 2019-01-30 22:59:36+0000\n"
+"PO-Revision-Date: 2019-02-04 08:15:05+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1350,9 +1350,8 @@ msgstr ""
 
 #. Translators: This is the label which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:559
-#, fuzzy
 msgid "Accounts available:"
-msgstr "사용할 수 없음"
+msgstr "사용 가능한 계정:"
 
 #. Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:575
@@ -2087,7 +2086,7 @@ msgstr "동의합니다"
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:105
 msgid "Use my Wikipedia email address(will be updated the next time you login)."
-msgstr ""
+msgstr "내 위키백과 이메일 주소를 사용합니다. (다음에 로그인할 때 반영됩니다)"
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:118
@@ -2203,9 +2202,8 @@ msgstr "기여"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #: TWLight/users/templates/users/editor_detail_data.html:43
 #: TWLight/users/templates/users/editor_detail_data.html:155
-#, fuzzy
 msgid "(update)"
-msgstr "업데이트"
+msgstr "(업데이트)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:54

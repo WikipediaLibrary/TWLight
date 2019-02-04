@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform to Russian (русский)
 # Exported from translatewiki.net
 #
+# Author: Athena Atterdag
 # Author: Infovarius
 # Author: Nk88
 # Author: Okras
@@ -11,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-01-30 21:27+0000\n"
-"PO-Revision-Date: 2019-01-30 22:59:37+0000\n"
+"PO-Revision-Date: 2019-02-04 08:15:06+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2096,7 +2097,7 @@ msgstr ""
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:105
 msgid "Use my Wikipedia email address(will be updated the next time you login)."
-msgstr ""
+msgstr "Использовать мой адрес электронной почты в Википедии (будет обновлено при следующем входе в аккаунт)."
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:118
@@ -2285,7 +2286,7 @@ msgstr ""
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:29
 msgid "You can help translate the tool at <a href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
-msgstr ""
+msgstr "Вы можете помочь перевести этот инструмент на <a href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
 
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
 #: TWLight/users/templates/users/preferences.html:21
