@@ -6,6 +6,11 @@ then
     source /etc/environment
 fi
 
+if [ "$TWLIGHT_ENV" == "local" ]
+then
+    localopts="--reload"
+fi
+
 NAME="twlight"
 SOCKFILE=${TWLIGHT_HOME}/run/gunicorn.sock
 DJANGO_WSGI_MODULE=TWLight.wsgi
@@ -30,5 +35,5 @@ exec gunicorn ${DJANGO_WSGI_MODULE}:application \
   --workers $NUM_WORKERS \
   --timeout $TIMEOUT \
   --bind=unix:$SOCKFILE \
-  --log-level=debug \
+  ${localopts} \
   --log-file=${TWLIGHT_HOME}/TWLight/logs/gunicorn.log
