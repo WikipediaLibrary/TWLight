@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-02-06 20:39+0000\n"
+"POT-Creation-Date: 2019-02-07 16:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -178,8 +178,10 @@ msgid "Account email"
 msgstr ""
 
 #. Translators: This labels a user's email address on a form for account coordinators
+#. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #: TWLight/applications/helpers.py:142
+#: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/templates/resources/partner_users.html:27
 #: TWLight/resources/templates/resources/partner_users.html:72
 #: TWLight/users/forms.py:103
@@ -735,6 +737,34 @@ msgid ""
 "request."
 msgstr ""
 
+#. Translators: This labels a textfield where users can enter their email ID.
+#: TWLight/emails/forms.py:17
+msgid "Your email"
+msgstr ""
+
+#. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
+#: TWLight/emails/forms.py:19
+msgid ""
+"This field is automatically updated with the email from your <a href="
+"\"{}\">user profile</a>."
+msgstr ""
+
+#. Translators: This labels a textfield where users can enter their email message.
+#: TWLight/emails/forms.py:21
+msgid "Message"
+msgstr ""
+
+#. Translators: Users click this button to receive a copy of the message sent via the contact us form
+#: TWLight/emails/forms.py:23
+msgid "Receive a copy of this message"
+msgstr ""
+
+#. Translators: This labels a button which users click to submit their email message.
+#. Translators: This labels a button which users click to submit their suggestion.
+#: TWLight/emails/forms.py:38 TWLight/resources/forms.py:32
+msgid "Submit"
+msgstr ""
+
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
 #, python-format
@@ -838,6 +868,61 @@ msgstr ""
 msgid "New comment on a Wikipedia Library application you commented on"
 msgstr ""
 
+#. Translators: This is the title of the form where users can send messages to the Wikipedia Library team.
+#. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
+#: TWLight/emails/templates/emails/contact.html:13
+#: TWLight/templates/base.html:270
+msgid "Contact us"
+msgstr ""
+
+#: TWLight/emails/templates/emails/contact.html:30
+#, python-format
+msgid ""
+"(If you would like to suggest a partner, <a href=\"%(suggest)s\"><strong>go "
+"here</strong></a>.)"
+msgstr ""
+
+#. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
+#: TWLight/emails/templates/emails/contact.html:39
+msgid "Contact info"
+msgstr ""
+
+#. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
+#: TWLight/emails/templates/emails/contact.html:43
+msgid "Meta page"
+msgstr ""
+
+#. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
+#: TWLight/emails/templates/emails/contact.html:45
+msgid "The Wikipedia Library"
+msgstr ""
+
+#. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
+#: TWLight/emails/templates/emails/contact.html:52
+msgid "Mailing list"
+msgstr ""
+
+#. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
+#: TWLight/emails/templates/emails/contact.html:56
+msgid "IRC"
+msgstr ""
+
+#. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
+#: TWLight/emails/templates/emails/contact.html:64
+msgid "Wikipedia Library Facebook page"
+msgstr ""
+
+#. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
+#: TWLight/emails/templates/emails/contact.html:70
+msgid "Wikipedia Library Twitter page"
+msgstr ""
+
+#. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
+#: TWLight/emails/templates/emails/contact_us_email-subject.html:3
+#, python-format
+msgid "Wikipedia Library Card Platform message from %(editor_wp_username)s"
+msgstr ""
+
 #. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like user or partner; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
 #, python-format
@@ -919,6 +1004,17 @@ msgstr ""
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
 msgid "Your Wikipedia Library application has been waitlisted"
+msgstr ""
+
+#. Translators: Shown to users when they successfully submit a new message using the contact us form.
+#: TWLight/emails/views.py:55
+msgid "Your message has been sent. We'll get back to you soon!"
+msgstr ""
+
+#. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
+#. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
+#: TWLight/emails/views.py:60 TWLight/resources/views.py:332
+msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
@@ -1003,11 +1099,6 @@ msgstr ""
 
 #: TWLight/resources/forms.py:18
 msgid "Website"
-msgstr ""
-
-#. Translators: This labels a button which users click to submit their suggestion.
-#: TWLight/resources/forms.py:32
-msgid "Submit"
 msgstr ""
 
 #. Translators: When staff enter languages, they use ISO language codes. Don't translate ISO, LANGUAGES, or %(code)s.
@@ -1584,7 +1675,7 @@ msgstr ""
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_filter.html:24
-#: TWLight/templates/base.html:248
+#: TWLight/templates/base.html:249
 msgid "Suggest a partner"
 msgstr ""
 
@@ -1710,11 +1801,6 @@ msgstr ""
 #. Translators: Shown to users when they successfully add a new partner suggestion.
 #: TWLight/resources/views.py:327
 msgid "Your suggestion has been added."
-msgstr ""
-
-#. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/resources/views.py:332
-msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
@@ -2047,17 +2133,18 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate email_url.
-#: TWLight/templates/base.html:181
+#. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
+#: TWLight/templates/base.html:182
 #, python-format
 msgid ""
 "You don't have an email on file. We can't finalize your access to partner "
-"resources without an email. Please <a href=\"%(email_url)s\">update your "
-"email</a>."
+"resources, and you won't be able to <a href=\"%(contact_us_url)s\">contact "
+"us</a> without an email. Please <a href=\"%(email_url)s\">update your email</"
+"a>."
 msgstr ""
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
-#: TWLight/templates/base.html:192
+#: TWLight/templates/base.html:193
 #, python-format
 msgid ""
 "You have requested a restriction on the processing of your data. Most site "
@@ -2079,7 +2166,7 @@ msgstr ""
 #. </p>
 #. <p>
 #. comment Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:222
+#: TWLight/templates/base.html:223
 msgid ""
 "This work is licensed under a <a rel=\"license\" href=\"http://"
 "creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
@@ -2087,23 +2174,18 @@ msgid ""
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:236
+#: TWLight/templates/base.html:237
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:242
+#: TWLight/templates/base.html:243
 msgid "Terms of use and privacy policy"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:254
+#: TWLight/templates/base.html:255
 msgid "Feedback"
-msgstr ""
-
-#. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
-#: TWLight/templates/base.html:269
-msgid "Contact us"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of available partners.
@@ -2356,7 +2438,7 @@ msgstr ""
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:105
 msgid ""
-"Use my Wikipedia email address(will be updated the next time you login)."
+"Use my Wikipedia email address (will be updated the next time you login)."
 msgstr ""
 
 #. Translators: This labels a button which users click to change their email.
