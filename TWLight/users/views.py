@@ -290,7 +290,7 @@ class EmailChangeView(SelfOnly, FormView):
         if email or self.request.POST.get('use_wp_email'):
             user.email = form.cleaned_data['email']
             user.save()
-                
+            
             user.userprofile.use_wp_email = form.cleaned_data['use_wp_email']
             user.userprofile.save()
             return HttpResponseRedirect(self.get_success_url())

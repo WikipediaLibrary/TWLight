@@ -177,10 +177,11 @@
     {% if not user.email and not user.is_anonymous %}
       <div class="alert alert-warning">
         {% url 'users:email_change' as email_url %}
-        {% comment %} Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ email_url }}. {% endcomment %}
+        {% url 'contact' as contact_us_url %}
+        {% comment %} Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ contact_us_url }} or {{ email_url }}. {% endcomment %}
         {% blocktrans trimmed %}
           You don't have an email on file. We can't finalize your access to
-          partner resources without an email. Please
+          partner resources, and you won't be able to <a href="{{ contact_us_url }}">contact us</a> without an email. Please
           <a href="{{ email_url }}">update your email</a>.
         {% endblocktrans %}
       </div>
@@ -209,7 +210,7 @@
           {% blocktrans trimmed %}
             The Wikipedia Library Card Platform is a project of 
             <a href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
-            The Wikipedia Library</a>.              
+            The Wikipedia Library</a>.
           {% endblocktrans %}
         </p>
         <p>
@@ -264,7 +265,7 @@
             <a href="https://github.com/wikipedialibrary/twlight">Github</a>
           </li>
           <li>
-            <a href="mailto:wikipedialibrary@wikimedia.org">
+            <a href="{% url 'contact' %}">
               {% comment %} Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team. {% endcomment %}
               {% trans "Contact us" %}
             </a>

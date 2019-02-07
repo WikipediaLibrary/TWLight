@@ -102,7 +102,7 @@ class EmailChangeForm(forms.Form):
 
         self.fields['email'].label = _('Email')
         # Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
-        self.fields['use_wp_email'].label = _('Use my Wikipedia email address(will be updated the next time you login).')
+        self.fields['use_wp_email'].label = _('Use my Wikipedia email address (will be updated the next time you login).')
 
         self.fields['email'].initial = user.email
         self.fields['use_wp_email'].initial = user.userprofile.use_wp_email
