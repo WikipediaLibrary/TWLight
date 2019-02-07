@@ -29,13 +29,11 @@ class Command(BaseCommand):
             if 'error' in language_data:
                 print 'No short_description for partner {}.'.format(each_partner)
             else:
-                translated_language_codes =[]
                 messagegroupstats = language_data.get('query').get('messagegroupstats')
                 
                 for every_messagegroupstat in messagegroupstats:
-                    if every_messagegroupstat.get('translated') == 1:
-                      translated_language_codes.append(every_messagegroupstat.get('code'))
-                      
+                    if every_messagegroupstat.get('translated') > 0 and every_messagegroupstat.get('code') in languages_on_revision_field:
+                      print every_messagegroupstat.get('code')
                       response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/{language_code}&prop=wikitext|revid'.format(partner_pk=each_partner.id, language_code=every_messagegroupstat.get('code')))
                       short_desc_json = response.json()
                       if 'error' in short_desc_json:
