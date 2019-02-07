@@ -250,6 +250,10 @@ ul.timeline-home li {
 MISC
 --------------------------------------------------------------------------*/
 
+div.checkbox#div_id_cc {
+  display: none;
+}
+
 div.panel-body form.form-inline label, div.panel-body form.form-inline select {
   padding: .2em .7em;
 }
