@@ -1,6 +1,13 @@
+import ast
+import requests
+
+from bs4 import BeautifulSoup
+
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
@@ -61,7 +68,46 @@ class PartnersDetailView(DetailView):
                 _("This partner is not available. You can see it because you "
                     "are a staff member, but it is not visible to non-staff "
                     "users."))
+        
+        user_language = self.request.LANGUAGE_CODE
+        languages_on_revision_field = {}
+        
+        if partner.short_description_last_revision_ids is not None:
+            languages_on_revision_field = ast.literal_eval(partner.short_description_last_revision_ids)
+        if user_language not in languages_on_revision_field:
+            languages_on_revision_field[user_language] = None
+            partner.short_description_last_revision_ids = languages_on_revision_field
+            partner.save()
 
+        response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/{language_code}&prop=wikitext|revid'.format(partner_pk=partner.pk, language_code=user_language))
+        short_desc_json = response.json()
+        requested_language = True
+        if 'error' in short_desc_json and user_language == 'en':
+            context['short_description'] = False
+        elif 'error' in short_desc_json:
+            response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/en&prop=wikitext|revid'.format(partner_pk=partner.pk))
+            short_desc_json = response.json()
+            requested_language = False
+        if 'error' not in short_desc_json:
+            revision_id = int(short_desc_json.get('parse').get('revid'))
+            last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
+            
+            if last_revision_id is None or int(last_revision_id) != revision_id:
+                short_description_cache_key = make_template_fragment_key(
+                    'partner_short_description', [user_language, partner.pk]
+                )
+                cache.delete(short_description_cache_key)
+                
+                languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
+                partner.short_description_last_revision_ids = languages_on_revision_field
+                partner.save()
+            
+            short_desc_html = short_desc_json.get('parse').get('wikitext').get('*')
+            unicode_short_desc = BeautifulSoup(short_desc_html, 'lxml')
+            context['short_description'] = unicode_short_desc.find('div').get_text()
+        else:
+            context['short_description'] = False
+        
         context['total_apps'] = Application.objects.filter(
             partner=partner).count()
 

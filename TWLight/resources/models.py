@@ -314,16 +314,12 @@ class Partner(models.Model):
         """Invalidate this partner's pandoc-rendered html from cache"""
         super(Partner, self).save(*args, **kwargs)
         for code in RESOURCE_LANGUAGE_CODES:
-          short_description_cache_key = make_template_fragment_key(
-              'partner_short_description', [code, self.pk]
-          )        
           description_cache_key = make_template_fragment_key(
               'partner_description', [code, self.pk]
           )
           send_instructions_cache_key = make_template_fragment_key(
               'partner_send_instructions', [code, self.pk]
           )
-          cache.delete(short_description_cache_key)
           cache.delete(description_cache_key)
           cache.delete(send_instructions_cache_key)
 

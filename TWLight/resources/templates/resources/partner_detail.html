@@ -196,7 +196,7 @@
       </div>
       <div class="timeline-panel">
         <div class="timeline-body">
-          {% if object.short_description %}
+          {% if short_description %}
             <p>
             {% comment %}
               Cache lifetime should be None, which would be forever since we're
@@ -206,7 +206,7 @@
               https://code.djangoproject.com/ticket/27882
             {% endcomment %}
             {% cache 31536000 partner_short_description LANGUAGE_CODE object.pk %}
-              {{ object.short_description | twlight_wikicode2html | safe }}
+              {{ short_description | twlight_wikicode2html | safe }}
             {% endcache %}
             </p>
           {% else %}
