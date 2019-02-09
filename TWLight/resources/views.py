@@ -6,8 +6,6 @@ from bs4 import BeautifulSoup
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.core.cache import cache
-from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
@@ -29,7 +27,7 @@ from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
 from .models import Partner, Stream, Suggestion
-
+from .tasks import invalidate_cache
 import logging
 
 logger = logging.getLogger(__name__)
@@ -48,6 +46,55 @@ class PartnersFilterView(FilterView):
             return Partner.even_not_available.order_by('company_name')
         else:
             return Partner.objects.order_by('company_name')
+
+    def get_context_data(self, **kwargs):
+        context = super(PartnersFilterView, self).get_context_data(**kwargs)
+        
+        if self.request.user.is_staff:
+            partners_list = Partner.even_not_available.order_by('company_name')
+        else:
+            partners_list = Partner.objects.order_by('company_name')
+        
+        user_language = self.request.LANGUAGE_CODE
+        languages_on_revision_field = {}
+        context['short_description'] = {}
+        
+        for every_partner in partners_list:
+            if every_partner.short_description_last_revision_ids is not None:
+                languages_on_revision_field = ast.literal_eval(every_partner.short_description_last_revision_ids)
+            if user_language not in languages_on_revision_field:
+                languages_on_revision_field[user_language] = None
+                every_partner.short_description_last_revision_ids = languages_on_revision_field
+                every_partner.save()
+
+            response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/{language_code}&prop=wikitext|revid'.format(partner_pk=every_partner.pk, language_code=user_language))
+            short_desc_json = response.json()
+            requested_language = True
+            
+            if 'error' in short_desc_json and user_language == 'en':
+                context['short_description'][every_partner.pk] = None
+            
+            elif 'error' in short_desc_json:
+                response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/en&prop=wikitext|revid'.format(partner_pk=every_partner.pk))
+                short_desc_json = response.json()
+                requested_language = False
+            
+            if 'error' not in short_desc_json:
+                revision_id = int(short_desc_json.get('parse').get('revid'))
+                last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
+                
+                if last_revision_id is None or int(last_revision_id) == revision_id:
+                    invalidate_cache.delay(user_language=user_language, partner_pk=every_partner.pk)
+                    languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
+                    every_partner.short_description_last_revision_ids = languages_on_revision_field
+                    every_partner.save()
+                
+                short_desc_html = short_desc_json.get('parse').get('wikitext').get('*')
+                unicode_short_desc = BeautifulSoup(short_desc_html, 'lxml')
+                context['short_description'][every_partner.pk] = unicode_short_desc.find('div').get_text()
+            else:
+                context['short_description'][every_partner.pk] = None
+        return context
 
 
 
@@ -82,22 +129,21 @@ class PartnersDetailView(DetailView):
         response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/{language_code}&prop=wikitext|revid'.format(partner_pk=partner.pk, language_code=user_language))
         short_desc_json = response.json()
         requested_language = True
+        
         if 'error' in short_desc_json and user_language == 'en':
             context['short_description'] = False
+        
         elif 'error' in short_desc_json:
             response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/en&prop=wikitext|revid'.format(partner_pk=partner.pk))
             short_desc_json = response.json()
             requested_language = False
+        
         if 'error' not in short_desc_json:
             revision_id = int(short_desc_json.get('parse').get('revid'))
             last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
             
-            if last_revision_id is None or int(last_revision_id) != revision_id:
-                short_description_cache_key = make_template_fragment_key(
-                    'partner_short_description', [user_language, partner.pk]
-                )
-                cache.delete(short_description_cache_key)
-                
+            if last_revision_id is None or int(last_revision_id) == revision_id:
+                invalidate_cache.delay(user_language=user_language, partner_pk=partner.pk)
                 languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
                 partner.short_description_last_revision_ids = languages_on_revision_field
                 partner.save()
