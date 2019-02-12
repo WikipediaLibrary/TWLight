@@ -173,6 +173,7 @@ class PartnerModelTests(TestCase):
 
         request = RequestFactory().get(filter_url)
         request.user = editor.user
+        request.LANGUAGE_CODE = 'en'
         response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
 
         self.assertNotContains(response, partner.get_absolute_url())
@@ -194,7 +195,8 @@ class PartnerModelTests(TestCase):
 
         request = RequestFactory().get(detail_url)
         request.user = editor.user
-
+        request.LANGUAGE_CODE = 'fr'
+        
         # This should not raise Http404.
         response = PartnersDetailView.as_view()(request, pk=partner.pk)
         self.assertEqual(response.status_code, 200)
@@ -213,6 +215,7 @@ class PartnerModelTests(TestCase):
 
         request = RequestFactory().get(filter_url)
         request.user = editor.user
+        request.LANGUAGE_CODE = 'ar'
         response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
 
         self.assertContains(response, partner.get_absolute_url())
