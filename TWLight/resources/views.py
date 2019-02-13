@@ -84,7 +84,7 @@ class PartnersFilterView(FilterView):
                 last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
                 
                 if last_revision_id is None or int(last_revision_id) == revision_id:
-                    invalidate_cache.delay(user_language=user_language, partner_pk=every_partner.pk)
+                    invalidate_cache(user_language=user_language, partner_pk=every_partner.pk)
                     languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
                     every_partner.short_description_last_revision_ids = languages_on_revision_field
                     every_partner.save()
@@ -143,7 +143,7 @@ class PartnersDetailView(DetailView):
             last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
             
             if last_revision_id is None or int(last_revision_id) == revision_id:
-                invalidate_cache.delay(user_language=user_language, partner_pk=partner.pk)
+                invalidate_cache(user_language=user_language, partner_pk=partner.pk)
                 languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
                 partner.short_description_last_revision_ids = languages_on_revision_field
                 partner.save()
