@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-02-07 16:22+0000\n"
+"POT-Creation-Date: 2019-02-13 20:23+0000\n"
 "PO-Revision-Date: 2019-02-07 15:14:38+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -304,7 +304,7 @@ msgstr "स्थिति"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:75
-#: TWLight/applications/views.py:502 TWLight/applications/views.py:579
+#: TWLight/applications/views.py:510 TWLight/applications/views.py:587
 #: TWLight/templates/dashboard.html:112
 msgid "Partner"
 msgstr "भागीदार"
@@ -666,21 +666,21 @@ msgid "There are no approved, unsent applications."
 msgstr "कोई स्वीकृत, अप्रेषित आवेदन नहीं हैं।"
 
 #. Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
-#: TWLight/applications/views.py:155
+#: TWLight/applications/views.py:163
 msgid "Please select at least one partner."
 msgstr "कृपया कम से कम एक भागीदार का चयन करें।"
 
-#: TWLight/applications/views.py:272
+#: TWLight/applications/views.py:280
 msgid "This field consists only of restricted text."
 msgstr "इस क्षेत्र में केवल प्रतिबंधित पाठ हैं।"
 
 #. Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
-#: TWLight/applications/views.py:331
+#: TWLight/applications/views.py:339
 msgid "Choose at least one resource you want access to."
 msgstr "कम से कम एक संसाधन चुनें जिसे आप एक्सेस करना चाहते हैं।"
 
 #. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
-#: TWLight/applications/views.py:355 TWLight/applications/views.py:396
+#: TWLight/applications/views.py:363 TWLight/applications/views.py:404
 msgid ""
 "Your application has been submitted for review. You can check the status of "
 "your applications on this page."
@@ -689,7 +689,7 @@ msgstr ""
 "सकते हैं।"
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
-#: TWLight/applications/views.py:385
+#: TWLight/applications/views.py:393
 msgid ""
 "This partner does not have any access grants available at this time. You may "
 "still apply for access; your application will be reviewed when access grants "
@@ -699,58 +699,58 @@ msgstr ""
 "कर सकते हैं; जब अनुदान उपलब्ध हो जाएगा तो आपके आवेदन की समीक्षा की जाएगी।"
 
 #. Translators: Editor = wikipedia editor, gender unknown.
-#: TWLight/applications/views.py:501 TWLight/applications/views.py:578
+#: TWLight/applications/views.py:509 TWLight/applications/views.py:586
 msgid "Editor"
 msgstr "सम्पादक"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
-#: TWLight/applications/views.py:618
+#: TWLight/applications/views.py:626
 msgid "Applications to review"
 msgstr "समीक्षा के लिए आवेदन"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
-#: TWLight/applications/views.py:652
+#: TWLight/applications/views.py:660
 #: TWLight/resources/templates/resources/partner_users.html:19
 msgid "Approved applications"
 msgstr "स्वीकृत आवेदन"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
-#: TWLight/applications/views.py:678
+#: TWLight/applications/views.py:686
 msgid "Rejected applications"
 msgstr "अस्वीकृत आवेदन"
 
 #. Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
-#: TWLight/applications/views.py:711
+#: TWLight/applications/views.py:719
 msgid "Access grants up for renewal"
 msgstr "नवीनीकरण के लिए पहुँच अनुदान"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
-#: TWLight/applications/views.py:737
+#: TWLight/applications/views.py:745
 #: TWLight/resources/templates/resources/partner_users.html:64
 msgid "Sent applications"
 msgstr "प्रेषित आवेदन"
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:787
+#: TWLight/applications/views.py:795
 msgid "Set application status"
 msgstr "आवेदन की स्थिति निर्धारित करें"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:818
+#: TWLight/applications/views.py:826
 msgid "Please select at least one application."
 msgstr "कम से कम एक आवेदन का चयन करें।"
 
-#: TWLight/applications/views.py:838
+#: TWLight/applications/views.py:846
 msgid "Batch update successful."
 msgstr "बैच अद्यतन सफल।"
 
-#: TWLight/applications/views.py:958
+#: TWLight/applications/views.py:966
 msgid "All selected applications have been marked as sent."
 msgstr "सभी चयनित आवेदनों को प्रेषित चिन्हित किया गया है।"
 
-#: TWLight/applications/views.py:1007
+#: TWLight/applications/views.py:1015
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
@@ -759,7 +759,7 @@ msgstr ""
 "नवीनीकृत करने का अनुरोध किया है।)"
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1013
+#: TWLight/applications/views.py:1021
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
