@@ -7,6 +7,11 @@ coordinator AND must have agreed to the terms of use). If we used that mixin,
 test functions and login URLs would overwrite each other. Using the dispatch
 function and super() means we can chain as many access tests as we'd like.
 """
+import ast
+import requests
+
+from bs4 import BeautifulSoup
+
 from urllib import urlencode
 from urlparse import ParseResult
 
@@ -328,6 +333,8 @@ class DataProcessingRequired(object):
         return super(DataProcessingRequired, self).dispatch(
             request, *args, **kwargs)
 
+
+
 class NotDeleted(object):
     """
     Used to check that the submitting user hasn't deleted their account.
@@ -345,3 +352,36 @@ class NotDeleted(object):
 
         return super(NotDeleted, self).dispatch(
             request, *args, **kwargs)
+
+
+
+class APIPartnerDescriptions(object):
+    """
+    Make MediaWiki API calls to get partner short, long, and collection descriptions,
+    and process the data before being consumed by views
+    """
+
+    def get_partner_short_description_api(self, user_language, **kwargs):
+        response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/{language_code}&prop=wikitext|revid'.format(partner_pk=kwargs['pk'], language_code=user_language))
+        short_desc_json = response.json()
+        requested_language = True
+        
+        if 'error' in short_desc_json and user_language == 'en':
+            short_description = False
+        elif 'error' in short_desc_json:
+            response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/en&prop=wikitext|revid'.format(partner_pk=kwargs['pk']))
+            short_desc_json = response.json()
+            requested_language = False
+        if 'error' not in short_desc_json:
+            revision_id = int(short_desc_json.get('parse').get('revid'))
+            return self.parse_json_to_wikitext(short_desc_json), requested_language, revision_id
+        else:
+            revision_id = None
+            short_description = None
+            return short_description, requested_language, revision_id
+
+    def parse_json_to_wikitext(self, short_desc_json):
+        short_desc_html = short_desc_json.get('parse').get('wikitext').get('*')
+        unicode_short_desc = BeautifulSoup(short_desc_html, 'lxml')
+        short_description = unicode_short_desc.find('div').get_text()
+        return short_description
