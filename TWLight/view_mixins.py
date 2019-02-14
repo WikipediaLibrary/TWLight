@@ -361,27 +361,27 @@ class APIPartnerDescriptions(object):
     and process the data before being consumed by views
     """
 
-    def get_partner_short_description_api(self, user_language, **kwargs):
-        response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/{language_code}&prop=wikitext|revid'.format(partner_pk=kwargs['pk'], language_code=user_language))
-        short_desc_json = response.json()
+    def get_partner_and_stream_descriptions_api(self, user_language, type, **kwargs):
+        response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2F{desc_type}_description%2F{partner_pk}/{language_code}&prop=wikitext|revid'.format(desc_type=type, partner_pk=kwargs['pk'], language_code=user_language))
+        desc_json = response.json()
         requested_language = True
         
-        if 'error' in short_desc_json and user_language == 'en':
-            short_description = False
-        elif 'error' in short_desc_json:
-            response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F{partner_pk}/en&prop=wikitext|revid'.format(partner_pk=kwargs['pk']))
-            short_desc_json = response.json()
+        if 'error' in desc_json and user_language == 'en':
+            pass
+        elif 'error' in desc_json:
+            response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2F{desc_type}_description%2F{partner_pk}/en&prop=wikitext|revid'.format(desc_type=type, partner_pk=kwargs['pk']))
+            desc_json = response.json()
             requested_language = False
-        if 'error' not in short_desc_json:
-            revision_id = int(short_desc_json.get('parse').get('revid'))
-            return self.parse_json_to_wikitext(short_desc_json), requested_language, revision_id
+        if 'error' not in desc_json:
+            revision_id = int(desc_json.get('parse').get('revid'))
+            return self.parse_json_to_wikitext(desc_json), requested_language, revision_id
         else:
             revision_id = None
-            short_description = None
-            return short_description, requested_language, revision_id
+            description = None
+            return description, requested_language, revision_id
 
-    def parse_json_to_wikitext(self, short_desc_json):
-        short_desc_html = short_desc_json.get('parse').get('wikitext').get('*')
-        unicode_short_desc = BeautifulSoup(short_desc_html, 'lxml')
-        short_description = unicode_short_desc.find('div').get_text()
-        return short_description
+    def parse_json_to_wikitext(self, desc_json):
+        desc_html = desc_json.get('parse').get('wikitext').get('*')
+        unicode_desc = BeautifulSoup(desc_html, 'lxml')
+        description = unicode_desc.find('div').get_text()
+        return description

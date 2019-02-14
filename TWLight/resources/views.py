@@ -27,7 +27,8 @@ from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
 from .models import Partner, Stream, Suggestion
-from .tasks import invalidate_cache
+from .tasks import (invalidate_short_description_cache,
+                    invalidate_long_description_cache)
 import logging
 
 logger = logging.getLogger(__name__)
@@ -55,27 +56,28 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
         else:
             partners_list = Partner.objects.order_by('company_name')
         
+        # Retrieves the short descriptions of all partners from Meta
         user_language = self.request.LANGUAGE_CODE
-        languages_on_revision_field = {}
+        languages_on_revision_field_short_desc = {}
         context['short_description'] = {}
         
         for every_partner in partners_list:
             if every_partner.short_description_last_revision_ids is not None:
-                languages_on_revision_field = ast.literal_eval(every_partner.short_description_last_revision_ids)
-            if user_language not in languages_on_revision_field:
-                languages_on_revision_field[user_language] = None
-                every_partner.short_description_last_revision_ids = languages_on_revision_field
+                languages_on_revision_field_short_desc = ast.literal_eval(every_partner.short_description_last_revision_ids)
+            if user_language not in languages_on_revision_field_short_desc:
+                languages_on_revision_field_short_desc[user_language] = None
+                every_partner.short_description_last_revision_ids = languages_on_revision_field_short_desc
                 every_partner.save()
             
-            short_description, requested_language, revision_id = self.get_partner_short_description_api(user_language, pk=every_partner.pk)
+            short_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Short', pk=every_partner.pk)
             
             if short_description:
-                last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
+                last_revision_id = languages_on_revision_field_short_desc.get(user_language if requested_language else 'en')
                 
                 if last_revision_id is None or int(last_revision_id) != revision_id:
-                    invalidate_cache(user_language=user_language, partner_pk=every_partner.pk)
-                    languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
-                    every_partner.short_description_last_revision_ids = languages_on_revision_field
+                    invalidate_short_description_cache(user_language=user_language if requested_language else 'en', partner_pk=every_partner.pk)
+                    languages_on_revision_field_short_desc[user_language if requested_language else 'en'] = revision_id
+                    every_partner.short_description_last_revision_ids = languages_on_revision_field_short_desc
                     every_partner.save()
                 
                 context['short_description'][every_partner.pk] = short_description
@@ -103,30 +105,91 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                     "are a staff member, but it is not visible to non-staff "
                     "users."))
         
+        # Retrieves the short description of this partner from Meta
         user_language = self.request.LANGUAGE_CODE
-        languages_on_revision_field = {}
+        languages_on_revision_field_short_desc = {}
         
         if partner.short_description_last_revision_ids is not None:
-            languages_on_revision_field = ast.literal_eval(partner.short_description_last_revision_ids)
-        if user_language not in languages_on_revision_field:
-            languages_on_revision_field[user_language] = None
-            partner.short_description_last_revision_ids = languages_on_revision_field
+            languages_on_revision_field_short_desc = ast.literal_eval(partner.short_description_last_revision_ids)
+        if user_language not in languages_on_revision_field_short_desc:
+            languages_on_revision_field_short_desc[user_language] = None
+            partner.short_description_last_revision_ids = languages_on_revision_field_short_desc
             partner.save()
         
-        short_description, requested_language, revision_id = self.get_partner_short_description_api(user_language, pk=partner.pk)
+        short_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Short', pk=partner.pk)
         
         if short_description:
-            last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
+            last_revision_id = languages_on_revision_field_short_desc.get(user_language if requested_language else 'en')
             
             if last_revision_id is None or int(last_revision_id) != revision_id:
-                invalidate_cache(user_language=user_language, partner_pk=partner.pk)
-                languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
-                partner.short_description_last_revision_ids = languages_on_revision_field
+                invalidate_short_description_cache(user_language=user_language if requested_language else 'en', partner_pk=partner.pk)
+                languages_on_revision_field_short_desc[user_language if requested_language else 'en'] = revision_id
+                partner.short_description_last_revision_ids = languages_on_revision_field_short_desc
                 partner.save()
             
             context['short_description'] = short_description
         else:
             context['short_description'] = None
+        
+        # Retrieves the long description of this partner from Meta (if available)
+        if partner.long_description_available:
+            languages_on_revision_field_long_desc = {}
+        
+            if partner.long_description_last_revision_ids is not None:
+                languages_on_revision_field_long_desc = ast.literal_eval(partner.long_description_last_revision_ids)
+            if user_language not in languages_on_revision_field_long_desc:
+                languages_on_revision_field_long_desc[user_language] = None
+                partner.long_description_last_revision_ids = languages_on_revision_field_long_desc
+                partner.save()
+            
+            long_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Long', pk=partner.pk)
+            
+            if long_description:
+                last_revision_id = languages_on_revision_field_long_desc.get(user_language if requested_language else 'en')
+                
+                if last_revision_id is None or int(last_revision_id) != revision_id:
+                    invalidate_long_description_cache(user_language=user_language if requested_language else 'en', partner_pk=partner.pk)
+                    languages_on_revision_field_long_desc[user_language if requested_language else 'en'] = revision_id
+                    partner.long_description_last_revision_ids = languages_on_revision_field_long_desc
+                    partner.save()
+                
+                context['long_description'] = long_description
+            else:
+                context['long_description'] = None
+        else:
+            context['long_description'] = None
+        
+        partner_streams = Stream.objects.filter(partner=partner)
+        
+        # Retrieves the collection descriptions of this partner from Meta (if available)
+        languages_on_revision_field_stream_desc = {}
+        context['stream_description'] = {}
+        
+        for each_stream in partner_streams:
+            if each_stream.description_available:
+                if each_stream.description_last_revision_ids is not None:
+                    languages_on_revision_field_stream_desc = ast.literal_eval(each_stream.description_last_revision_ids)
+                if user_language not in languages_on_revision_field_stream_desc:
+                    languages_on_revision_field_stream_desc[user_language] = None
+                    each_stream.description_last_revision_ids = languages_on_revision_field_stream_desc
+                    each_stream.save()
+                
+                stream_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Collection', pk=each_stream.pk)
+                
+                if stream_description:
+                    last_revision_id = languages_on_revision_field_stream_desc.get(user_language if requested_language else 'en')
+                    
+                    if last_revision_id is None or int(last_revision_id) != revision_id:
+                        invalidate_short_description_cache(user_language=user_language if requested_language else 'en', partner_pk=each_stream.pk)
+                        languages_on_revision_field_stream_desc[user_language if requested_language else 'en'] = revision_id
+                        each_stream.description_last_revision_ids = languages_on_revision_field_stream_desc
+                        each_stream.save()
+                    
+                    context['stream_description'][each_stream.pk] = stream_description
+                else:
+                    context['stream_description'][each_stream.pk] = None
+            else:
+                context['stream_description'][each_stream.pk] = None
         
         context['total_apps'] = Application.objects.filter(
             partner=partner).count()
@@ -140,7 +203,6 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         context['total_apps_approved_or_sent'] = context['total_apps_approved'] + context['total_apps_sent']
         
         # This if else block supports the template with the number of accounts available 
-        partner_streams = Stream.objects.filter(partner=partner)
         context['partner_streams'] = partner_streams
         
         if partner_streams.count() > 0:
