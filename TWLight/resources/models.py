@@ -207,7 +207,11 @@ class Partner(models.Model):
         help_text=_("Optional detailed description in addition to the short "
         "description such as collections, instructions, notes, special "
         "requirements, alternate access options, unique features, citations notes."))
-        
+    
+    long_description_available = models.BooleanField(default=False)
+    
+    long_description_last_revision_ids = models.TextField(blank=True, null=True, editable=False)
+    
     send_instructions = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
         help_text=_("Optional instructions for sending application data to "
@@ -314,13 +318,9 @@ class Partner(models.Model):
         """Invalidate this partner's pandoc-rendered html from cache"""
         super(Partner, self).save(*args, **kwargs)
         for code in RESOURCE_LANGUAGE_CODES:
-          description_cache_key = make_template_fragment_key(
-              'partner_description', [code, self.pk]
-          )
           send_instructions_cache_key = make_template_fragment_key(
               'partner_send_instructions', [code, self.pk]
           )
-          cache.delete(description_cache_key)
           cache.delete(send_instructions_cache_key)
 
     @property
@@ -384,6 +384,10 @@ class Stream(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
         help_text=_("Optional description of this stream's resources."))
 
+    description_available = models.BooleanField(default=False)
+
+    description_last_revision_ids = models.TextField(blank=True, null=True, editable=False)
+
     languages = models.ManyToManyField(Language, blank=True)
 
 
@@ -393,13 +397,6 @@ class Stream(models.Model):
         # internationalize. Returning the atomic stream name gives us more
         # options for how this is displayed in templates.
         return self.name
-
-    def save(self, *args, **kwargs):
-        """Invalidate the rendered html stream description from cache"""
-        super(Stream, self).save(*args, **kwargs)
-        for code in RESOURCE_LANGUAGE_CODES:
-          cache_key = make_template_fragment_key('stream_description', [code, self.pk])
-          cache.delete(cache_key)
 
     @property
     def get_languages(self):
