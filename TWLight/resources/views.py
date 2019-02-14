@@ -1,8 +1,3 @@
-import ast
-import requests
-
-from bs4 import BeautifulSoup
-
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -28,7 +23,8 @@ from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 from .forms import SuggestionForm
 from .models import Partner, Stream, Suggestion
 from .tasks import (invalidate_short_description_cache,
-                    invalidate_long_description_cache)
+                    invalidate_long_description_cache,
+                    invalidate_stream_description_cache)
 import logging
 
 logger = logging.getLogger(__name__)
@@ -180,7 +176,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                     last_revision_id = languages_on_revision_field_stream_desc.get(user_language if requested_language else 'en')
                     
                     if last_revision_id is None or int(last_revision_id) != revision_id:
-                        invalidate_short_description_cache(user_language=user_language if requested_language else 'en', partner_pk=each_stream.pk)
+                        invalidate_stream_description_cache(user_language=user_language if requested_language else 'en', partner_pk=each_stream.pk)
                         languages_on_revision_field_stream_desc[user_language if requested_language else 'en'] = revision_id
                         each_stream.description_last_revision_ids = languages_on_revision_field_stream_desc
                         each_stream.save()
