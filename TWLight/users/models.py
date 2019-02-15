@@ -386,13 +386,13 @@ class Authorization(models.Model):
     # Users may have multiple authorizations.
     authorized_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
         on_delete=models.SET_NULL,
-        related_name='authorized_user',
+        related_name="+",
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
         help_text=_('The authorized user.'))
 
+    # Authorizers may authorize many users.
     authorizer = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
         on_delete=models.SET_NULL,
-        related_name="authorizers",
         # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
         limit_choices_to=(models.Q(is_superuser=True) | models.Q(groups__name='coordinators')),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
@@ -435,10 +435,16 @@ class Authorization(models.Model):
         except:
             authorized_user = self.authorized_user.username
 
-        try:
-            authorizer = self.authorizer.editor.wp_username
-        except:
-            authorizer = self.authorizer.username
+        # In reality, we should always have an authorizer,
+        # but we need to enhance the sample data commands so they don't
+        # break the admin site in dev.
+        if self.authorizer:
+            try:
+                authorizer = self.authorizer.editor.wp_username
+            except:
+                authorizer = self.authorizer.username
+        else:
+            authorizer = None
 
         return u'authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}'.format(
             authorized_user=authorized_user,
