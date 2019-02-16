@@ -196,21 +196,11 @@ class Partner(models.Model):
         help_text=_("Link to terms of use. Required if users must agree to "
             "terms of use to get access; optional otherwise."))
 
-    short_description = models.TextField(max_length=1000, blank=True, null=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
-        help_text=_("Optional short description of this partner's resources."))
-
-    short_description_last_revision_ids = models.TextField(blank=True, null=True, editable=False)
-
-    description = models.TextField("long description", blank=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can provide a long description of a partner's available resources.
-        help_text=_("Optional detailed description in addition to the short "
-        "description such as collections, instructions, notes, special "
-        "requirements, alternate access options, unique features, citations notes."))
+    short_description_last_revision_id = models.TextField(blank=True, null=True, editable=False)
     
     long_description_available = models.BooleanField(default=False)
     
-    long_description_last_revision_ids = models.TextField(blank=True, null=True, editable=False)
+    long_description_last_revision_id = models.TextField(blank=True, null=True, editable=False)
     
     send_instructions = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
@@ -379,14 +369,10 @@ class Stream(models.Model):
     accounts_available = models.PositiveSmallIntegerField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
         help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
-        
-    description = models.TextField(blank=True, null=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-        help_text=_("Optional description of this stream's resources."))
 
     description_available = models.BooleanField(default=False)
 
-    description_last_revision_ids = models.TextField(blank=True, null=True, editable=False)
+    description_last_revision_id = models.TextField(blank=True, null=True, editable=False)
 
     languages = models.ManyToManyField(Language, blank=True)
 

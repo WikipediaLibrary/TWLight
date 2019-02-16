@@ -70,16 +70,16 @@ class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
     language_strings.short_description = "Languages"
 
     search_fields = ('company_name',)
-    list_display = ('company_name', 'short_description', 'id', 'language_strings')
+    list_display = ('company_name', 'id', 'language_strings')
     inlines = [ContactInline, VideoInline, PartnerLogoInline]
 
 admin.site.register(Partner, PartnerAdmin)
 
 
 
-class StreamAdmin(TabbedExternalJqueryTranslationAdmin):
+class StreamAdmin(admin.ModelAdmin):
     search_fields = ('partner__company_name', 'name',)
-    list_display = ('id', 'partner', 'name', 'description', 'get_languages')
+    list_display = ('id', 'partner', 'name', 'get_languages')
 
 admin.site.register(Stream, StreamAdmin)
 

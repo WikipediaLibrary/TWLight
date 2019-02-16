@@ -427,7 +427,7 @@
                 <li><b>{{ stream }}</b>
                   {% if stream.description_available %}&mdash; 
                     {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
-                      {{ stream_description|get_desc:stream.pk | twlight_wikicode2html | safe }}
+                      {{ stream_description | get_desc:stream.pk | twlight_wikicode2html | safe }}
                     {% endcache %}
                   {% endif %}
                 </li>

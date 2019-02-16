@@ -71,7 +71,7 @@
           https://code.djangoproject.com/ticket/27882
         {% endcomment %}
         {% cache 31536000 partner_short_description LANGUAGE_CODE partner.pk %}
-          {{ short_description|get_desc:partner.pk | twlight_wikicode2html | safe }}
+          {{ short_description | get_desc:partner.pk | twlight_wikicode2html | safe }}
         {% endcache %}
       </div>
       <hr />

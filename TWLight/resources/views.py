@@ -60,11 +60,11 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
         context['short_description'] = {}
         
         for every_partner in partners_list:
-            if every_partner.short_description_last_revision_ids is not None:
-                languages_on_revision_field_short_desc = ast.literal_eval(every_partner.short_description_last_revision_ids)
+            if every_partner.short_description_last_revision_id is not None:
+                languages_on_revision_field_short_desc = ast.literal_eval(every_partner.short_description_last_revision_id)
             if user_language not in languages_on_revision_field_short_desc:
                 languages_on_revision_field_short_desc[user_language] = None
-                every_partner.short_description_last_revision_ids = languages_on_revision_field_short_desc
+                every_partner.short_description_last_revision_id = languages_on_revision_field_short_desc
                 every_partner.save()
             
             short_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Short', pk=every_partner.pk)
@@ -75,7 +75,7 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
                 if last_revision_id is None or int(last_revision_id) != revision_id:
                     invalidate_short_description_cache(user_language=user_language if requested_language else 'en', partner_pk=every_partner.pk)
                     languages_on_revision_field_short_desc[user_language if requested_language else 'en'] = revision_id
-                    every_partner.short_description_last_revision_ids = languages_on_revision_field_short_desc
+                    every_partner.short_description_last_revision_id = languages_on_revision_field_short_desc
                     every_partner.save()
                 
                 context['short_description'][every_partner.pk] = short_description
@@ -107,11 +107,11 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         user_language = self.request.LANGUAGE_CODE
         languages_on_revision_field_short_desc = {}
         
-        if partner.short_description_last_revision_ids is not None:
-            languages_on_revision_field_short_desc = ast.literal_eval(partner.short_description_last_revision_ids)
+        if partner.short_description_last_revision_id is not None:
+            languages_on_revision_field_short_desc = ast.literal_eval(partner.short_description_last_revision_id)
         if user_language not in languages_on_revision_field_short_desc:
             languages_on_revision_field_short_desc[user_language] = None
-            partner.short_description_last_revision_ids = languages_on_revision_field_short_desc
+            partner.short_description_last_revision_id = languages_on_revision_field_short_desc
             partner.save()
         
         short_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Short', pk=partner.pk)
@@ -122,7 +122,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
             if last_revision_id is None or int(last_revision_id) != revision_id:
                 invalidate_short_description_cache(user_language=user_language if requested_language else 'en', partner_pk=partner.pk)
                 languages_on_revision_field_short_desc[user_language if requested_language else 'en'] = revision_id
-                partner.short_description_last_revision_ids = languages_on_revision_field_short_desc
+                partner.short_description_last_revision_id = languages_on_revision_field_short_desc
                 partner.save()
             
             context['short_description'] = short_description
@@ -133,11 +133,11 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         if partner.long_description_available:
             languages_on_revision_field_long_desc = {}
         
-            if partner.long_description_last_revision_ids is not None:
-                languages_on_revision_field_long_desc = ast.literal_eval(partner.long_description_last_revision_ids)
+            if partner.long_description_last_revision_id is not None:
+                languages_on_revision_field_long_desc = ast.literal_eval(partner.long_description_last_revision_id)
             if user_language not in languages_on_revision_field_long_desc:
                 languages_on_revision_field_long_desc[user_language] = None
-                partner.long_description_last_revision_ids = languages_on_revision_field_long_desc
+                partner.long_description_last_revision_id = languages_on_revision_field_long_desc
                 partner.save()
             
             long_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Long', pk=partner.pk)
@@ -148,7 +148,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                 if last_revision_id is None or int(last_revision_id) != revision_id:
                     invalidate_long_description_cache(user_language=user_language if requested_language else 'en', partner_pk=partner.pk)
                     languages_on_revision_field_long_desc[user_language if requested_language else 'en'] = revision_id
-                    partner.long_description_last_revision_ids = languages_on_revision_field_long_desc
+                    partner.long_description_last_revision_id = languages_on_revision_field_long_desc
                     partner.save()
                 
                 context['long_description'] = long_description
@@ -165,11 +165,11 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         
         for each_stream in partner_streams:
             if each_stream.description_available:
-                if each_stream.description_last_revision_ids is not None:
-                    languages_on_revision_field_stream_desc = ast.literal_eval(each_stream.description_last_revision_ids)
+                if each_stream.description_last_revision_id is not None:
+                    languages_on_revision_field_stream_desc = ast.literal_eval(each_stream.description_last_revision_id)
                 if user_language not in languages_on_revision_field_stream_desc:
                     languages_on_revision_field_stream_desc[user_language] = None
-                    each_stream.description_last_revision_ids = languages_on_revision_field_stream_desc
+                    each_stream.description_last_revision_id = languages_on_revision_field_stream_desc
                     each_stream.save()
                 
                 stream_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Collection', pk=each_stream.pk)
@@ -180,7 +180,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                     if last_revision_id is None or int(last_revision_id) != revision_id:
                         invalidate_stream_description_cache(user_language=user_language if requested_language else 'en', partner_pk=each_stream.pk)
                         languages_on_revision_field_stream_desc[user_language if requested_language else 'en'] = revision_id
-                        each_stream.description_last_revision_ids = languages_on_revision_field_stream_desc
+                        each_stream.description_last_revision_id = languages_on_revision_field_stream_desc
                         each_stream.save()
                     
                     context['stream_description'][each_stream.pk] = stream_description

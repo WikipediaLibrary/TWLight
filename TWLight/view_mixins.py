@@ -7,7 +7,6 @@ coordinator AND must have agreed to the terms of use). If we used that mixin,
 test functions and login URLs would overwrite each other. Using the dispatch
 function and super() means we can chain as many access tests as we'd like.
 """
-import ast
 import requests
 
 from bs4 import BeautifulSoup
