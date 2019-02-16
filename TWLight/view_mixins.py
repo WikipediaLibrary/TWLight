@@ -7,6 +7,7 @@ coordinator AND must have agreed to the terms of use). If we used that mixin,
 test functions and login URLs would overwrite each other. Using the dispatch
 function and super() means we can chain as many access tests as we'd like.
 """
+import ast
 import requests
 
 from bs4 import BeautifulSoup
@@ -361,26 +362,30 @@ class APIPartnerDescriptions(object):
     """
 
     def get_partner_and_stream_descriptions_api(self, user_language, type, **kwargs):
-        response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2F{desc_type}_description%2F{partner_pk}/{language_code}&prop=wikitext|revid'.format(desc_type=type, partner_pk=kwargs['pk'], language_code=user_language))
+        response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2F{desc_type}_description%2F{partner_pk}/{language_code}&prop=text|revid&disablelimitreport=true&contentformat=text/plain'.format(desc_type=type, partner_pk=kwargs['pk'], language_code=user_language))
         desc_json = response.json()
         requested_language = True
         
         if 'error' in desc_json and user_language == 'en':
             pass
         elif 'error' in desc_json:
-            response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2F{desc_type}_description%2F{partner_pk}/en&prop=wikitext|revid'.format(desc_type=type, partner_pk=kwargs['pk']))
+            response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2F{desc_type}_description%2F{partner_pk}/en&prop=text|revid&disablelimitreport=true&contentformat=text/plain'.format(desc_type=type, partner_pk=kwargs['pk']))
             desc_json = response.json()
             requested_language = False
         if 'error' not in desc_json:
             revision_id = int(desc_json.get('parse').get('revid'))
-            return self.parse_json_to_wikitext(desc_json), requested_language, revision_id
+            return self.parse_json_to_html(desc_json), requested_language, revision_id
         else:
             revision_id = None
             description = None
             return description, requested_language, revision_id
 
-    def parse_json_to_wikitext(self, desc_json):
-        desc_html = desc_json.get('parse').get('wikitext').get('*')
-        unicode_desc = BeautifulSoup(desc_html, 'lxml')
-        description = unicode_desc.find('div').get_text()
-        return description
+
+    def parse_json_to_html(self, desc_json):
+        desc_html = desc_json.get('parse').get('text').get('*')
+        description = BeautifulSoup(desc_html, 'lxml')
+        # Strip out the translation-related markup from the input.
+        # It's metadata that is out of context for our users.
+        for div in description.findAll('div', 'mw-pt-languages'):
+            div.extract()
+        return description.prettify()

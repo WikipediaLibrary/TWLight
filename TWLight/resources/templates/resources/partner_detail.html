@@ -3,7 +3,10 @@
 {% load static %}
 {% load cache %}
 {% load twlight_perms %}
+<<<<<<< HEAD
 {% load twlight_wikicode2html %}
+=======
+>>>>>>> 7ebb02c4370b8c8f9e75b9a8f23cec043fee9569
 
 {% get_current_language as LANGUAGE_CODE %}
 
@@ -205,7 +208,7 @@
               https://code.djangoproject.com/ticket/27882
             {% endcomment %}
             {% cache 31536000 partner_short_description LANGUAGE_CODE object.pk %}
-              {{ short_description | twlight_wikicode2html | safe }}
+              {{ short_description | safe }}
             {% endcache %}
             </p>
           {% else %}
@@ -230,7 +233,7 @@
               https://code.djangoproject.com/ticket/27882
             {% endcomment %}
             {% cache 31536000 partner_long_description LANGUAGE_CODE object.pk %}
-              {{ long_description | twlight_wikicode2html | safe }}
+              {{ long_description | safe }}
             {% endcache %}
             </p>
           {% endif %}
@@ -427,7 +430,7 @@
                 <li><b>{{ stream }}</b>
                   {% if stream.description_available %}&mdash; 
                     {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
-                      {{ stream_description | get_desc:stream.pk | twlight_wikicode2html | safe }}
+                      {{ stream_description | get_desc:stream.pk | safe }}
                     {% endcache %}
                   {% endif %}
                 </li>

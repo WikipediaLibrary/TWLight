@@ -374,6 +374,10 @@ class Stream(models.Model):
 
     description_last_revision_id = models.TextField(blank=True, null=True, editable=False)
 
+    description_available = models.BooleanField(default=False)
+
+    description_last_revision_ids = models.TextField(blank=True, null=True, editable=False)
+
     languages = models.ManyToManyField(Language, blank=True)
 
 
