@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load cache %}
-{% load twlight_wikicode2html %}
 
 {% get_current_language as LANGUAGE_CODE %}
 
@@ -71,7 +70,7 @@
           https://code.djangoproject.com/ticket/27882
         {% endcomment %}
         {% cache 31536000 partner_short_description LANGUAGE_CODE partner.pk %}
-          {{ short_description|get_desc:partner.pk | twlight_wikicode2html | safe }}
+          {{ short_description | get_desc:partner.pk  | safe }}
         {% endcache %}
       </div>
       <hr />
