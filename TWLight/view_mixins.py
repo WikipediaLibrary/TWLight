@@ -361,6 +361,25 @@ class APIPartnerDescriptions(object):
     and process the data before being consumed by views
     """
 
+
+    def get_and_set_revision_ids(self, user_language, type, description_metadata, **kwargs):
+        languages_on_revision_field = {}
+        if description_metadata is not None:
+            languages_on_revision_field = ast.literal_eval(description_metadata)
+        if user_language not in languages_on_revision_field:
+            languages_on_revision_field[user_language] = None
+        
+        description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type, pk=kwargs['pk'])
+        
+        if description:
+            last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
+            if last_revision_id is None or int(last_revision_id) != revision_id:
+                languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
+        
+        return description, languages_on_revision_field
+
+
+
     def get_partner_and_stream_descriptions_api(self, user_language, type, **kwargs):
         response = requests.get('https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2F{desc_type}_description%2F{partner_pk}/{language_code}&prop=text|revid&disablelimitreport=true&contentformat=text/plain'.format(desc_type=type, partner_pk=kwargs['pk'], language_code=user_language))
         desc_json = response.json()
