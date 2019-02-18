@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-02-13 20:23+0000\n"
-"PO-Revision-Date: 2019-02-14 08:31:33+0000\n"
+"PO-Revision-Date: 2019-02-18 07:20:02+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -717,12 +717,12 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:21
 msgid "Message"
-msgstr ""
+msgstr "Meddelande"
 
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
 msgid "Receive a copy of this message"
-msgstr ""
+msgstr "Få en kopia av detta meddelande"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
@@ -909,7 +909,7 @@ msgstr "Din ansökning på Wikipediabiblioteket är i väntelistan"
 #. Translators: Shown to users when they successfully submit a new message using the contact us form.
 #: TWLight/emails/views.py:55
 msgid "Your message has been sent. We'll get back to you soon!"
-msgstr ""
+msgstr "Ditt meddelande har skickats. Vi hör snart av oss till dig!"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
@@ -2173,7 +2173,7 @@ msgstr "Jag accepterar"
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:105
 msgid "Use my Wikipedia email address (will be updated the next time you login)."
-msgstr ""
+msgstr "Använd min e-postadress för Wikipedia (kommer att uppdateras nästa gång du loggar in)."
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:118
