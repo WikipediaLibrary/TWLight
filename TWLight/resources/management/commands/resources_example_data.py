@@ -27,7 +27,6 @@ class Command(BaseCommand):
             partner = PartnerFactory(
                 company_location = random.choice(list(countries)),
                 renewals_available = random.choice([True, False]),
-                short_description = fake.paragraph(nb_sentences=4),
                 send_instructions = fake.paragraph(nb_sentences=2),
                 coordinator = self.chance(
                     random.choice(coordinators), None, 20),
@@ -96,11 +95,6 @@ class Command(BaseCommand):
             waitlisted_partner.status = Partner.WAITLIST
             waitlisted_partner.save()
 
-        # Set 25 random partners to have a long description
-        for long_description in random.sample(all_partners, 25):
-            long_description.description = fake.paragraph(nb_sentences = 10)
-            long_description.save()
-
         # Set 10 random available partners to be featured
         for featured_partner in random.sample(available_partners, 10):
             featured_partner.featured = True
@@ -126,8 +120,7 @@ class Command(BaseCommand):
             for _ in range(3):
                 stream = StreamFactory(
                     partner= partner,
-                    name= fake.sentence(nb_words= 3)[:-1], # [:-1] removes full stop
-                    description= fake.paragraph(nb_sentences=2)
+                    name= fake.sentence(nb_words= 3)[:-1] # [:-1] removes full stop
                     )
         
         # Set 15 partners to have somewhere between 1 and 5 video tutorial URLs

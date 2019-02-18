@@ -62,16 +62,7 @@
     <hr />
     {% if short_description|get_desc:partner.pk %}
       <div class="panel-partner-description">
-        {% comment %}
-          Cache lifetime should be None, which would be forever since we're
-          invalidating on update. However, as 2017-04-06 a bug in django
-          doesn't allow for None to be passed from here into cache.  The
-          fix is in master, but not release.
-          https://code.djangoproject.com/ticket/27882
-        {% endcomment %}
-        {% cache 31536000 partner_short_description LANGUAGE_CODE partner.pk %}
-          {{ short_description | get_desc:partner.pk | twlight_wikicode2html | safe }}
-        {% endcache %}
+        {{ short_description | get_desc:partner.pk | safe }}
       </div>
       <hr />
     {% endif %}

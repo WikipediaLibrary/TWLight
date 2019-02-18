@@ -3,6 +3,7 @@ import ast
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
@@ -60,27 +61,32 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
         context['short_description'] = {}
         
         for every_partner in partners_list:
-            if every_partner.short_description_last_revision_id is not None:
-                languages_on_revision_field_short_desc = ast.literal_eval(every_partner.short_description_last_revision_id)
-            if user_language not in languages_on_revision_field_short_desc:
-                languages_on_revision_field_short_desc[user_language] = None
-                every_partner.short_description_last_revision_id = languages_on_revision_field_short_desc
-                every_partner.save()
-            
-            short_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Short', pk=every_partner.pk)
-            
-            if short_description:
-                last_revision_id = languages_on_revision_field_short_desc.get(user_language if requested_language else 'en')
-                
-                if last_revision_id is None or int(last_revision_id) != revision_id:
-                    invalidate_short_description_cache(user_language=user_language if requested_language else 'en', partner_pk=every_partner.pk)
-                    languages_on_revision_field_short_desc[user_language if requested_language else 'en'] = revision_id
+            short_description_cache = cache.get(every_partner.company_name)
+            if short_description_cache is None:
+                if every_partner.short_description_last_revision_id is not None:
+                    languages_on_revision_field_short_desc = ast.literal_eval(every_partner.short_description_last_revision_id)
+                if user_language not in languages_on_revision_field_short_desc:
+                    languages_on_revision_field_short_desc[user_language] = None
                     every_partner.short_description_last_revision_id = languages_on_revision_field_short_desc
                     every_partner.save()
                 
-                context['short_description'][every_partner.pk] = short_description
+                short_description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type='Short', pk=every_partner.pk)
+                
+                if short_description:
+                    last_revision_id = languages_on_revision_field_short_desc.get(user_language if requested_language else 'en')
+                    
+                    if last_revision_id is None or int(last_revision_id) != revision_id:
+                        # invalidate_short_description_cache(user_language=user_language if requested_language else 'en', partner_pk=every_partner.pk)
+                        languages_on_revision_field_short_desc[user_language if requested_language else 'en'] = revision_id
+                        every_partner.short_description_last_revision_id = languages_on_revision_field_short_desc
+                        every_partner.save()
+                    
+                    context['short_description'][every_partner.pk] = short_description
+                    cache.set(every_partner.company_name, short_description, None)
+                else:
+                    context['short_description'][every_partner.pk] = None
             else:
-                context['short_description'][every_partner.pk] = None
+              context['short_description'][every_partner.pk] = short_description_cache
         return context
 
 
