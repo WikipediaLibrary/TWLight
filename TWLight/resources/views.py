@@ -28,7 +28,7 @@ from .models import Partner, Stream, Suggestion
 import logging
 
 
-executor = ThreadPoolExecutor(max_workers=5)
+executor = ThreadPoolExecutor(max_workers=2)
 
 logger = logging.getLogger(__name__)
 
