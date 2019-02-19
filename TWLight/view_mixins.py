@@ -385,8 +385,9 @@ class APIPartnerDescriptions(object):
         description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type, pk=partner.pk)
         
         if description:
-            last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en').get('revision_id')
+            last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en', {}).get('revision_id')
             if last_revision_id is None or int(last_revision_id) != revision_id:
+                languages_on_revision_field[user_language if requested_language else 'en'] = {}
                 languages_on_revision_field[user_language if requested_language else 'en']['revision_id'] = revision_id
                 languages_on_revision_field[user_language if requested_language else 'en']['timestamp'] = time.time()
                 if type == 'Short':
