@@ -1,12 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
-{% load cache %}
 {% load twlight_perms %}
-<<<<<<< HEAD
-{% load twlight_wikicode2html %}
-=======
->>>>>>> 7ebb02c4370b8c8f9e75b9a8f23cec043fee9569
 
 {% get_current_language as LANGUAGE_CODE %}
 
@@ -200,16 +195,7 @@
         <div class="timeline-body">
           {% if short_description %}
             <p>
-            {% comment %}
-              Cache lifetime should be None, which would be forever since we're
-              invalidating on update. However, as 2017-04-06 a bug in django
-              doesn't allow for None to be passed from here into cache.  The
-              fix is in master, but not release.
-              https://code.djangoproject.com/ticket/27882
-            {% endcomment %}
-            {% cache 31536000 partner_short_description LANGUAGE_CODE object.pk %}
-              {{ short_description | safe }}
-            {% endcache %}
+              {{ short_description | get_desc:partner.pk | safe }}
             </p>
           {% else %}
             {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
@@ -225,16 +211,7 @@
           {% endif %}
           {% if long_description %}
             <p>
-            {% comment %}
-              Cache lifetime should be None, which would be forever since we're
-              invalidating on update. However, as 2017-04-06 a bug in django
-              doesn't allow for None to be passed from here into cache.  The
-              fix is in master, but not release.
-              https://code.djangoproject.com/ticket/27882
-            {% endcomment %}
-            {% cache 31536000 partner_long_description LANGUAGE_CODE object.pk %}
               {{ long_description | safe }}
-            {% endcache %}
             </p>
           {% endif %}
         </div>
@@ -418,20 +395,9 @@
           <div class="timeline-body">
             <ul>
               {% for stream in object.streams.all %}
-              {% comment %}
-                Cache lifetime should be None, which would be forever since we're
-                invalidating on update. However, as 2017-04-06 a bug in django
-                doesn't allow for None to be passed from here into cache.  The
-                fix is in master, but not release.
-                https://code.djangoproject.com/ticket/27882
-                We filter out details and summary tags so that we always see
-                the full content on the details page.
-              {% endcomment %}
-                <li><b>{{ stream }}</b>
-                  {% if stream.description_available %}&mdash; 
-                    {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
-                      {{ stream_description | get_desc:stream.pk | safe }}
-                    {% endcache %}
+                <li>
+                  {% if stream.description_available %}
+                    {{ stream_description | get_desc:stream.pk | safe }}
                   {% endif %}
                 </li>
               {% endfor %}

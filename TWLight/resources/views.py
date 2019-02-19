@@ -1,3 +1,5 @@
+from concurrent.futures import Future, ThreadPoolExecutor
+
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -24,6 +26,9 @@ from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 from .forms import SuggestionForm
 from .models import Partner, Stream, Suggestion
 import logging
+
+
+executor = ThreadPoolExecutor(max_workers=5)
 
 logger = logging.getLogger(__name__)
 
@@ -56,19 +61,14 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
         context['short_description'] = {}
         
         for each_partner in partners_list:
-            requested_language_cache_is_stale = False
-            default_language_cache_is_stale = False
+            cache_is_stale = False
             
             short_description_metadata = each_partner.short_description_last_revision_id
-            short_description_cache = cache.get(each_partner.company_name + 'short_description' + user_language)
+            short_description_cache = cache.get(each_partner.company_name + 'short_description')
             if short_description_cache is None:
-                short_description_cache = cache.get(each_partner.company_name + 'short_description' + 'en')
-                if short_description_cache is None:
-                    pass
-                else:
-                    default_language_cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
+                pass
             else:
-                requested_language_cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
+                cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
             
             if short_description_cache is None:
                 short_description = self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner)
@@ -79,10 +79,8 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
                     context['short_description'][each_partner.pk] = None
             else:
                 context['short_description'][each_partner.pk] = short_description_cache
-            if requested_language_cache_is_stale:
-                self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, requested_language_cache=user_language)
-            elif default_language_cache_is_stale:
-                self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, requested_language_cache='en')
+            if cache_is_stale:
+                executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, cache_is_stale=True)
         return context
 
 
@@ -107,45 +105,51 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         
         # Retrieves the short description of this partner from Meta
         user_language = self.request.LANGUAGE_CODE
+        cache_is_stale = False
+        context['short_description'] = {}
         
+        short_description_metadata = partner.short_description_last_revision_id
         short_description_cache = cache.get(partner.company_name + 'short_description')
         if short_description_cache is None:
-            short_description_metadata = partner.short_description_last_revision_id
-
-            short_description, languages_on_revision_field_short_desc = self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, pk=partner.pk)
+            pass
+        else:
+            cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
+        
+        if short_description_cache is None:
+            short_description = self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=partner)
             
             if short_description:
-                partner.short_description_last_revision_id = languages_on_revision_field_short_desc
-                partner.save()
-                
-                context['short_description'] = short_description
-                cache.set(partner.company_name + 'short_description', short_description, None)
+                context['short_description'][partner.pk] = short_description
             else:
-                context['short_description'] = None
+                context['short_description'][partner.pk] = None
         else:
-            context['short_description'] = short_description_cache
-        
+            context['short_description'][partner.pk] = short_description_cache
+        if cache_is_stale:
+            executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=partner, cache_is_stale=True)
         
         # Retrieves the long description of this partner from Meta (if available)
         if partner.long_description_available:
+            context['long_description'] = {}
+            cache_is_stale = False
+            
+            long_description_metadata = partner.long_description_last_revision_id
             long_description_cache = cache.get(partner.company_name + 'long_description')
             if long_description_cache is None:
-                long_description_metadata = partner.long_description_last_revision_id
+                pass
+            else:
+                cache_is_stale = self.check_cache_state(user_language, description_metadata=long_description_metadata)
             
-                long_description, languages_on_revision_field_long_desc = self.get_and_set_revision_ids(user_language, type='Long', description_metadata=long_description_metadata, pk=partner.pk)
+            if long_description_cache is None:
+                long_description = self.get_and_set_revision_ids(user_language, type='Long', description_metadata=long_description_metadata, partner=partner)
                 
                 if long_description:
-                    partner.long_description_last_revision_id = languages_on_revision_field_long_desc
-                    partner.save()
-                    
                     context['long_description'] = long_description
-                    cache.set(partner.company_name + 'long_description', long_description, None)
                 else:
                     context['long_description'] = None
             else:
                 context['long_description'] = long_description_cache
-        else:
-            context['long_description'] = None
+            if cache_is_stale:
+                executor.submit(self.get_and_set_revision_ids, user_language, type='Long', description_metadata=long_description_metadata, partner=partner, cache_is_stale=True)
         
         partner_streams = Stream.objects.filter(partner=partner)
         
@@ -154,25 +158,27 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         
         for each_stream in partner_streams:
             if each_stream.description_available:
+                context['stream_description'] = {}
+                cache_is_stale = False
+                
+                stream_description_metadata = each_stream.description_last_revision_id
                 stream_description_cache = cache.get(each_stream.name + 'stream_description')
                 if stream_description_cache is None:
-                    stream_description_metadata = each_stream.description_last_revision_id
-
-                    stream_description, languages_on_revision_field_stream_desc = self.get_and_set_revision_ids(user_language, type='Collection', description_metadata=stream_description_metadata, pk=each_stream.pk)
+                    pass
+                else:
+                    requested_language_cache_is_stale = self.check_cache_state(user_language, description_metadata=stream_description_metadata)
+                
+                if stream_description_cache is None:
+                    stream_description = self.get_and_set_revision_ids(user_language, type='Collection', description_metadata=stream_description_metadata, partner=each_stream)
                     
                     if stream_description:
-                        each_stream.description_last_revision_id = languages_on_revision_field_stream_desc
-                        each_stream.save()
-                        
                         context['stream_description'][each_stream.pk] = stream_description
-                        cache.set(each_stream.name + 'stream_description', stream_description, None)
                     else:
                         context['stream_description'][each_stream.pk] = None
                 else:
                     context['stream_description'][each_stream.pk] = stream_description_cache
-            else:
-                context['stream_description'][each_stream.pk] = None
-        
+                if cache_is_stale:
+                    executor.submit(self.get_and_set_revision_ids, user_language, type='Collection', description_metadata=stream_description_metadata, partner=each_stream, cache_is_stale=True)
         
         context['total_apps'] = Application.objects.filter(
             partner=partner).count()

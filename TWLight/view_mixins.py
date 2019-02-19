@@ -13,8 +13,6 @@ import time
 
 from bs4 import BeautifulSoup
 
-from concurrent.futures import Future, ThreadPoolExecutor
-
 from urllib import urlencode
 from urlparse import ParseResult
 
@@ -35,8 +33,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
-
-executor = ThreadPoolExecutor(max_workers=1)
 
 class CoordinatorOrSelf(object):
     """
@@ -377,7 +373,7 @@ class APIPartnerDescriptions(object):
             return False
 
 
-    def get_and_set_revision_ids(self, user_language, type, description_metadata, partner, requested_language_cache=None):
+    def get_and_set_revision_ids(self, user_language, type, description_metadata, partner, cache_is_stale=None):
         languages_on_revision_field = {}
         if description_metadata is not None:
             languages_on_revision_field = ast.literal_eval(description_metadata)
@@ -396,15 +392,21 @@ class APIPartnerDescriptions(object):
                 if type == 'Short':
                     partner.short_description_last_revision_id = languages_on_revision_field
                     partner.save()
-                    if requested_language_cache == 'en' and requested_language:
-                        pass
-                    elif requested_language_cache == 'en' and not requested_language:
-                        cache.delete(partner.company_name + 'short_description' + 'en', description, None)
-                    elif requested_language_cache == user_language and requested_language:
-                        cache.delete(partner.company_name + 'short_description' + user_language, description, None)
-                    elif requested_language_cache == user_language and not requested_language:
-                        cache.delete(partner.company_name + 'short_description' + 'en', description, None)
-                    cache.set(partner.company_name + 'short_description' + user_language if requested_language else 'en', description, None)
+                    if cache_is_stale:
+                        cache.delete(partner.company_name + 'short_description')
+                    cache.set(partner.company_name + 'short_description', description, None)
+                elif type == 'Long':
+                    partner.long_description_last_revision_id = languages_on_revision_field
+                    partner.save()
+                    if cache_is_stale:
+                        cache.delete(partner.company_name + 'long_description')
+                    cache.set(partner.company_name + 'long_description', description, None)
+                else:
+                    partner.description_last_revision_id = languages_on_revision_field
+                    partner.save()
+                    if cache_is_stale:
+                        cache.delete(partner.name + 'stream_description')
+                    cache.set(partner.name + 'stream_description', description, None)
             return description
         else:
             return False
