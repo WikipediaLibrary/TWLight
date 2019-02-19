@@ -9,8 +9,11 @@ function and super() means we can chain as many access tests as we'd like.
 """
 import ast
 import requests
+import time
 
 from bs4 import BeautifulSoup
+
+from concurrent.futures import Future, ThreadPoolExecutor
 
 from urllib import urlencode
 from urlparse import ParseResult
@@ -18,6 +21,7 @@ from urlparse import ParseResult
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
@@ -31,6 +35,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
+
+executor = ThreadPoolExecutor(max_workers=1)
 
 class CoordinatorOrSelf(object):
     """
@@ -360,23 +366,48 @@ class APIPartnerDescriptions(object):
     Make MediaWiki API calls to get partner short, long, and collection descriptions,
     and process the data before being consumed by views
     """
+    def check_cache_state(self, user_language, description_metadata):
+        languages_on_revision_field = {}
+        languages_on_revision_field = ast.literal_eval(description_metadata)
+        current_time = time.time()
+        revision_id_stored_time = languages_on_revision_field[user_language]['timestamp']
+        if current_time - revision_id_stored_time > 1800: 
+            return True
+        else:
+            return False
 
 
-    def get_and_set_revision_ids(self, user_language, type, description_metadata, **kwargs):
+    def get_and_set_revision_ids(self, user_language, type, description_metadata, partner, requested_language_cache=None):
         languages_on_revision_field = {}
         if description_metadata is not None:
             languages_on_revision_field = ast.literal_eval(description_metadata)
         if user_language not in languages_on_revision_field:
-            languages_on_revision_field[user_language] = None
+            languages_on_revision_field[user_language] = {}
+            languages_on_revision_field[user_language]['revision_id'] = None
+            languages_on_revision_field[user_language]['timestamp'] = None
         
-        description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type, pk=kwargs['pk'])
+        description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type, pk=partner.pk)
         
         if description:
-            last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en')
+            last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en').get('revision_id')
             if last_revision_id is None or int(last_revision_id) != revision_id:
-                languages_on_revision_field[user_language if requested_language else 'en'] = revision_id
-        
-        return description, languages_on_revision_field
+                languages_on_revision_field[user_language if requested_language else 'en']['revision_id'] = revision_id
+                languages_on_revision_field[user_language if requested_language else 'en']['timestamp'] = time.time()
+                if type == 'Short':
+                    partner.short_description_last_revision_id = languages_on_revision_field
+                    partner.save()
+                    if requested_language_cache == 'en' and requested_language:
+                        pass
+                    elif requested_language_cache == 'en' and not requested_language:
+                        cache.delete(partner.company_name + 'short_description' + 'en', description, None)
+                    elif requested_language_cache == user_language and requested_language:
+                        cache.delete(partner.company_name + 'short_description' + user_language, description, None)
+                    elif requested_language_cache == user_language and not requested_language:
+                        cache.delete(partner.company_name + 'short_description' + 'en', description, None)
+                    cache.set(partner.company_name + 'short_description' + user_language if requested_language else 'en', description, None)
+            return description
+        else:
+            return False
 
 
 

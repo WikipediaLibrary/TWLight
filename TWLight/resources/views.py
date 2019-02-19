@@ -55,23 +55,34 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
 
         context['short_description'] = {}
         
-        for every_partner in partners_list:
-            short_description_cache = cache.get(every_partner.company_name + 'short_description')
+        for each_partner in partners_list:
+            requested_language_cache_is_stale = False
+            default_language_cache_is_stale = False
+            
+            short_description_metadata = each_partner.short_description_last_revision_id
+            short_description_cache = cache.get(each_partner.company_name + 'short_description' + user_language)
             if short_description_cache is None:
-                short_description_metadata = every_partner.short_description_last_revision_id
-
-                short_description, languages_on_revision_field_short_desc = self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, pk=every_partner.pk)
+                short_description_cache = cache.get(each_partner.company_name + 'short_description' + 'en')
+                if short_description_cache is None:
+                    pass
+                else:
+                    default_language_cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
+            else:
+                requested_language_cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
+            
+            if short_description_cache is None:
+                short_description = self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner)
                 
                 if short_description:
-                    every_partner.short_description_last_revision_id = languages_on_revision_field_short_desc
-                    every_partner.save()
-                    
-                    context['short_description'][every_partner.pk] = short_description
-                    cache.set(every_partner.company_name + 'short_description', short_description, None)
+                    context['short_description'][each_partner.pk] = short_description
                 else:
-                    context['short_description'][every_partner.pk] = None
+                    context['short_description'][each_partner.pk] = None
             else:
-                context['short_description'][every_partner.pk] = short_description_cache
+                context['short_description'][each_partner.pk] = short_description_cache
+            if requested_language_cache_is_stale:
+                self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, requested_language_cache=user_language)
+            elif default_language_cache_is_stale:
+                self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, requested_language_cache='en')
         return context
 
 
