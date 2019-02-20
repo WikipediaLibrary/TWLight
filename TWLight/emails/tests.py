@@ -1,3 +1,4 @@
+from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 from mock import patch
 
 from django_comments import get_form_target
@@ -22,7 +23,8 @@ from TWLight.users.groups import get_coordinators
 # False even when they work in real life.
 from .tasks import (send_comment_notification_emails,
                     send_approval_notification_email,
-                    send_rejection_notification_email)
+                    send_rejection_notification_email,
+                    contact_us_emails)
 
 class ApplicationCommentTest(TestCase):
 
@@ -328,3 +330,65 @@ class ApplicationStatusTest(TestCase):
         partner.status = Partner.WAITLIST
         partner.save()
         self.assertFalse(mock_email.called)
+
+
+class ContactUsTest(TestCase):
+
+    def setUp(self):
+        super(ContactUsTest, self).setUp()
+        self.editor = EditorFactory(user__email='editor@example.com').user
+
+    @patch('TWLight.emails.tasks.contact_us_emails')
+    def test_contact_us_emails(self, mock_email):
+        factory = RequestFactory()
+        request = factory.post(get_form_target())
+        request.user = UserFactory()
+        editor = EditorFactory()
+        reply_to = ['editor@example.com']
+        cc = ['editor@example.com']
+        
+        self.assertEqual(len(mail.outbox), 0)
+        
+        mail_instance = MagicMailBuilder(template_mail_cls=InlineCSSTemplateMail)
+        email = mail_instance.contact_us_email('wikipedialibrary@wikimedia.org', 
+            {'editor_wp_username': editor.wp_username,
+             'body': 'This is a test email'})
+        email.extra_headers["Reply-To"] = ", ".join(reply_to)
+        email.extra_headers["Cc"] = ", ".join(cc)
+        email.send()
+        
+        self.assertEqual(len(mail.outbox), 1)
+
+
+    def test_user_submit_contact_us_emails(self):
+        EditorCraftRoom(self, Terms=True, Coordinator=False)
+        
+        self.assertEqual(len(mail.outbox), 0)
+        
+        contact_us_url = reverse('contact')
+        contact_us = self.client.get(contact_us_url, follow=True)
+        contact_us_form = contact_us.context['form']
+        data  = contact_us_form.initial
+        data['email'] = 'editor@example.com'
+        data['message'] = 'This is a test'
+        data['cc'] = True
+        data['submit'] = True
+        self.client.post(contact_us_url, data)
+        
+        self.assertEqual(len(mail.outbox), 1)
+
+
+    def test_not_logged_in_user_submit_contact_us_emails(self):
+        self.assertEqual(len(mail.outbox), 0)
+        
+        contact_us_url = reverse('contact')
+        contact_us = self.client.get(contact_us_url, follow=True)
+        contact_us_form = contact_us.context['form']
+        data  = contact_us_form.initial
+        data['email'] = 'editor@example.com'
+        data['message'] = 'This is a test'
+        data['submit'] = True
+        data['cc'] = True
+        self.client.post(contact_us_url, data)
+        
+        self.assertEqual(len(mail.outbox), 0)

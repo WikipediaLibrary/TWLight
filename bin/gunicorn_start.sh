@@ -6,12 +6,17 @@ then
     source /etc/environment
 fi
 
-NAME="twlight"
-SOCKFILE=${TWLIGHT_HOME}/run/gunicorn.sock
-DJANGO_WSGI_MODULE=TWLight.wsgi
+if [ "$TWLIGHT_ENV" == "local" ]
+then
+    localopts="--reload --log-level=debug"
+fi
+
+name="twlight"
+sockfile=${TWLIGHT_HOME}/run/gunicorn.sock
+django_wsgi_module=TWLight.wsgi
 # This is configurable: http://docs.gunicorn.org/en/stable/design.html#how-many-workers
-NUM_WORKERS=3
-TIMEOUT=300
+num_workers=3
+timeout=300
 
 cd $TWLIGHT_HOME
 # Find gunicorn in the virtualenv
@@ -19,16 +24,16 @@ source "/home/${TWLIGHT_UNIXNAME}/TWLight/bin/activate"
 export PYTHONPATH=$TWLIGHT_HOME:$PYTHONPATH
 
 # Create the run directory if it doesn't exist
-RUNDIR=$(dirname $SOCKFILE)
-test -d $RUNDIR || mkdir -p $RUNDIR
+rundir=$(dirname $sockfile)
+test -d $rundir || mkdir -p $rundir
 
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-exec gunicorn ${DJANGO_WSGI_MODULE}:application \
-  --name $NAME \
+exec gunicorn ${django_wsgi_module}:application \
+  --name $name \
   --user $TWLIGHT_UNIXNAME \
-  --workers $NUM_WORKERS \
-  --timeout $TIMEOUT \
-  --bind=unix:$SOCKFILE \
-  --log-level=debug \
+  --workers $num_workers \
+  --timeout $timeout \
+  --bind=unix:$sockfile \
+  ${localopts} \
   --log-file=${TWLIGHT_HOME}/TWLight/logs/gunicorn.log

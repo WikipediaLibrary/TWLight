@@ -102,6 +102,7 @@ TWLIGHT_APPS = [
     'TWLight.applications',
     'TWLight.emails',
     'TWLight.graphs',
+    'TWLight.comments',
 ]
 
 # dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
@@ -230,6 +231,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages'
             ),
+            # We cache templates by default.
             'loaders': [
                 ('django.template.loaders.cached.Loader', [
                     'django.template.loaders.filesystem.Loader',
@@ -321,7 +323,7 @@ TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get('TWLIGHT_OAUTH_CONSUMER_SECRET', 
 
 # COMMENTS CONFIGURATION
 # ------------------------------------------------------------------------------
-
+COMMENTS_APP = 'TWLight.comments'
 
 # TAGGIT CONFIGURATION
 # ------------------------------------------------------------------------------

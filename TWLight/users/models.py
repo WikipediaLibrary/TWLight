@@ -368,6 +368,7 @@ class Editor(models.Model):
     def get_absolute_url(self):
         return reverse('users:editor_detail', kwargs={'pk': self.pk})
 
+
 class Authorization(models.Model):
     """
     Authorizations track editor access to partner resources. The approval or

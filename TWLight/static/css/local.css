@@ -250,6 +250,10 @@ ul.timeline-home li {
 MISC
 --------------------------------------------------------------------------*/
 
+div.checkbox#div_id_cc {
+  display: none;
+}
+
 div.panel-body form.form-inline label, div.panel-body form.form-inline select {
   padding: .2em .7em;
 }
@@ -435,6 +439,9 @@ A few spots just need padding instead of margin.
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 
+.transparent-panel {
+  border-color: transparent;
+}
 .panel-heading {
   border: solid #ddd;
   border-width: 1px 1px 0 1px;

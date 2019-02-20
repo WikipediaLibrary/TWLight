@@ -17,6 +17,7 @@ import django
 import TWLight.i18n.views
 import TWLight.i18n.urls
 from TWLight.applications.urls import urlpatterns as applications_urls
+from TWLight.emails.views import ContactUsView
 from TWLight.graphs.urls import csv_urlpatterns as csv_urls
 from TWLight.graphs.views import DashboardView
 from TWLight.resources.urls import urlpatterns as partners_urls
@@ -80,7 +81,12 @@ urlpatterns = [
         r'^suggest/(?P<pk>[0-9]+)/upvote/$',
         login_required(SuggestionUpvoteView.as_view()),
         name='upvote'),
-        
+    
+    # For contact us form
+    url(r'^contact/$',
+        ContactUsView.as_view(),
+        name='contact'),
+    
     # Cached for 24 hours.
     url(r'^i18n-whitelist$', cache_page(86400)(LanguageWhiteListView.as_view()), name='i18n_whitelist'),
     url(r'^$', HomePageView.as_view(), name='homepage'),

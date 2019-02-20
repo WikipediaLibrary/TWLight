@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load twlight_perms %}
+{% load static %}
+
+{% block content %}
+  <div class="row row-flex">
+    <div class="col-flex col-xs-12 col-sm-7 col-md-9">
+      <div class="panel panel-default full-width">
+        <div class="panel-heading">
+          {% comment %} Translators: This is the title of the form where users can send messages to the Wikipedia Library team. {% endcomment %}
+          <strong><span class="panel-title">{% trans 'Contact us' %}</span></strong>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal"
+          {% if user.is_authenticated %}
+          method="post"
+          {% elif request.GET %}
+          method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}&{{ request.GET.urlencode }}"
+          {% else %}
+          method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}"
+          {% endif %}
+          >
+          {% crispy form %}
+          </form>
+          <div class="pull-right">
+            {% comment %} Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form. {% endcomment %}
+            {% url 'suggest' as suggest %}
+            {% blocktrans trimmed %}(If you would like to suggest a partner, <a href="{{ suggest }}"><strong>go here</strong></a>.){% endblocktrans %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-flex col-xs-12 col-sm-5 col-md-3">
+      <div class="panel panel-info full-width">
+        <div class="panel-heading">
+          {% comment %} Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team. {% endcomment %}
+          <strong><span class="panel-title">{% trans 'Contact info' %}</span></strong>
+        </div>
+        <div class="panel-body transparent-panel">
+          <p>{% comment %} Translators: On the contact us page, this labels the link to the Wikipedia Library meta page. {% endcomment %}
+            <strong>{% trans 'Meta page' %}: </strong>
+            {% comment %} Translators: On the contact us page, this text links to the Wikipedia Library meta page. {% endcomment %}
+            <a href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">{% trans 'The Wikipedia Library' %}</a>
+          </p>
+          <p>{% comment %} Translators: On the contact us page, this labels the link to the Wikipedia Library email address. {% endcomment %}
+            <strong>{% trans 'Email' %}: </strong>
+            <a href="mailto:wikipedialibrary@wikimedia.org">wikipedialibrary@wikimedia.org</a>
+          </p>
+          <p>{% comment %} Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list. {% endcomment %}
+            <strong>{% trans 'Mailing list' %}: </strong> <br />
+            &emsp;<a href="https://lists.wikimedia.org/mailman/listinfo/wikipedia-library">wikipedia-library@lists.wikimedia.org</a>
+          </p>
+          <p>{% comment %} Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel. {% endcomment %}
+            <strong>{% trans 'IRC' %}: </strong>
+            <a href="https://kiwiirc.com/client/irc.freenode.net/#wikipedia-library">#wikipedia-library (Freenode)</a>
+          </p>
+          <div class="clearfix"></div><hr />
+          <p>
+            <a href="https://www.facebook.com/TheWikiLibrary">
+              <img src="{% static 'img/facebook-logo.png' %}" class="img-responsive logo" alt="
+              {% comment %} Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page. {% endcomment %}
+              {% trans "Wikipedia Library Facebook page" %}
+              " style="width:50px; height:40px;">
+            </a>
+            <a href="https://twitter.com/Wikilibrary">
+              <img src="{% static 'img/twitter-logo.png' %}" class="img-responsive logo" alt="
+              {% comment %} Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page. {% endcomment %}
+              {% trans "Wikipedia Library Twitter page" %}
+              " style="width:50px; height:40px;">
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
