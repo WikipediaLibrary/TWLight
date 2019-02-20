@@ -2,12 +2,13 @@ import copy
 from django_countries import countries
 from faker import Faker
 import random
+import string
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
 from TWLight.resources.factories import PartnerFactory, StreamFactory, VideoFactory, SuggestionFactory
-from TWLight.resources.models import Language, Partner, Stream, Suggestion
+from TWLight.resources.models import Language, Partner, Stream, Suggestion, AccessCode
 
 class Command(BaseCommand):
     help = "Adds a number of example resources, streams, suggestions, and tags."
@@ -157,6 +158,30 @@ class Command(BaseCommand):
             random_users = random.sample(all_users, random.randint(1, 10))
             suggestion.upvoted_users.add(*random_users)
 
+
+        # Set 5 partners use the access code authorization method,
+        # and generate a bunch of codes for each.
+        for partner in random.sample(available_partners, 5):
+            partner.authorization_method = Partner.CODES
+            partner.save()
+
+            for i in range(25):
+                new_access_code = AccessCode()
+                new_access_code.code = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+                new_access_code.partner = partner
+                new_access_code.save()
+
+        # Set 5 partners use the access code authorization method,
+        # and generate a bunch of codes for each.
+        for partner in random.sample(available_partners, 5):
+            partner.authorization_method = Partner.CODES
+            partner.save()
+
+            for i in range(25):
+                new_access_code = AccessCode()
+                new_access_code.code = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+                new_access_code.partner = partner
+                new_access_code.save()
 
     def chance(self, selected, default, chance):
         # A percentage chance to select something, otherwise selects

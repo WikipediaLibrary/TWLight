@@ -22,7 +22,7 @@ from django.db import models
 from django.http import Http404
 from django.test import TestCase, Client, RequestFactory
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.factories import EditorFactory, UserFactory
@@ -2956,3 +2956,29 @@ class MarkSentTest(TestCase):
 
         self.assertIn(self.app2.editor.wp_username, content)
         self.assertNotIn(app_restricted.editor.wp_username, content)
+
+    def test_access_codes_sent(self):
+        # For access code partners, coordinators assign a code to an
+        # application rather than simply marking it sent.
+
+        # Set up an access code to distribute
+        access_code = AccessCode()
+        access_code.code = 'ABCD-EFGH-IJKL'
+        access_code.partner = self.partner
+        access_code.save()
+
+        self.partner.authorization_method = Partner.CODES
+        self.partner.save()
+
+        request = RequestFactory().post(self.url,
+            data={'accesscode': ["{app_pk}_{code}".format(
+                app_pk=self.app1.pk,
+                code=access_code.code)]})
+        request.user = self.user
+
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        # Expected success condition: redirect back to the original page.
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, self.url)

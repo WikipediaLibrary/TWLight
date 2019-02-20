@@ -22,4 +22,8 @@ urlpatterns = [
         views.PartnerUsers.as_view(),
         name='users'
     ),
+    url(r'^code/(?P<pk>\d+)/$',
+        views.PartnerUnassignCode.as_view(),
+        name='unassign_code'
+    ),
 ]

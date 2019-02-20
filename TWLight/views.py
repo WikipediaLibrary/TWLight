@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
 import json
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
-from django.http import HttpResponse
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
+from TWLight.resources.models import AccessCode
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 class LanguageWhiteListView(View):
     """

@@ -8,7 +8,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner, Stream, AccessCode
 
 class Command(BaseCommand):
     help = "Adds a number of example applications."
@@ -84,11 +84,20 @@ class Command(BaseCommand):
                         tzinfo=None)
                     app.days_open = (app.date_closed - app.date_created).days
 
-            # Assign sent_by if this is a non-imported sent applications
             if app.status == Application.SENT:
+                # Assign sent_by if this is a non-imported sent applications
                 if not imported:
                     app.sent_by = random_partner.coordinator
 
+                # If this partner has access codes, assign a code to
+                # this sent application.
+                if random_partner.authorization_method == Partner.CODES:
+                    this_partner_access_codes = AccessCode.objects.filter(
+                        partner=random_partner,
+                        authorization__isnull=True)
+                    app_code = random.choice(this_partner_access_codes)
+                    #app_code.application = app
+                    app_code.save()
             app.save()
 
         # Renew a selection of sent apps.

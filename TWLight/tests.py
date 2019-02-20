@@ -3,11 +3,16 @@ from mock import patch
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.management import call_command
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, Client
 
+from TWLight.resources.factories import PartnerFactory
+from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.factories import UserFactory, EditorFactory
 from TWLight.users.groups import get_coordinators
+
+from . import views
 
 from .view_mixins import (CoordinatorOrSelf,
                           CoordinatorsOnly,
@@ -422,6 +427,7 @@ class ViewMixinTests(TestCase):
         resp = test.dispatch(req)
         # This test doesn't deny permission; it asks people to add their email.
         self.assertTrue(isinstance(resp, HttpResponseRedirect))
+
 
 
 class ExampleApplicationsDataTest(TestCase):

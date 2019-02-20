@@ -173,6 +173,22 @@ class Partner(models.Model):
         (WAITLIST, _('Waitlisted')),
     )
 
+    EMAIL = 0
+    CODES = 1
+    PROXY = 2
+    BUNDLE = 3
+
+    AUTHORIZATION_METHODS = (
+        # Translators: This is the name of the authorization method whereby user accounts are set up by email.
+        (EMAIL, _('Email')),
+        # Translators: This is the name of the authorization method whereby user accounts are set up via an access code.
+        (CODES, _('Access codes')),
+        # Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
+        (PROXY, _('Proxy')),
+        # Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
+        (BUNDLE, _('Library Bundle')),
+    )
+
     status = models.IntegerField(choices=STATUS_CHOICES,
         default=NOT_AVAILABLE,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
@@ -218,11 +234,15 @@ class Partner(models.Model):
     excerpt_limit_percentage   = models.PositiveSmallIntegerField(blank=True, null=True, validators = [MaxValueValidator(100)],
           # Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
           help_text=_("Optional excerpt limit in terms of percentage (%) of an article. Leave empty if no limit."))
-          
-    bundle = models.NullBooleanField(
-        blank=True, null=True, default=False,
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can access this as part of the Bundle.
-        help_text=_("Is this partner a part of the Bundle?"))
+
+    authorization_method = models.IntegerField(choices=AUTHORIZATION_METHODS,
+        default=EMAIL,
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
+        help_text=_("Which authorization method does this partner use? "
+            "'Email' means the accounts are set up via email, and is the default. "
+            "Select 'Access Codes' if we send individual, or group, login details "
+            "or access codes. 'Proxy' means access delivered directly via EZProxy, "
+            "and Library Bundle is automated proxy-based access."))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
@@ -441,7 +461,6 @@ class Contact(models.Model):
         return self.full_name
 
 
-
 class Suggestion(models.Model):
 
     class Meta:
@@ -479,6 +498,7 @@ class Suggestion(models.Model):
     def get_upvote_url(self):
         return reverse('upvote', kwargs={'pk': self.pk})
 
+
 class Video(models.Model):
 
     class Meta:
@@ -493,3 +513,31 @@ class Video(models.Model):
     tutorial_video_url = models.URLField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
         help_text=_("URL of a video tutorial."))
+
+
+class AccessCode(models.Model):
+    """
+    Some partners distribute access via access codes which TWL staff hold.
+    This model holds each access code, assigning them to a partner and later
+    a user.
+    """
+    class Meta:
+        app_label = 'resources'
+        verbose_name = 'access code'
+        verbose_name_plural = 'access codes'
+
+
+    partner = models.ForeignKey(Partner, db_index=True, related_name="accesscodes",
+        limit_choices_to=(models.Q(authorization_method=1)),
+    )
+
+    code = models.CharField(max_length=60,
+        # Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
+        help_text=_("An access code for this partner."))
+
+    # This syntax is required for the ForeignKey to avoid a circular
+    # import between the authorizations and resources models
+    authorization = models.OneToOneField(
+        'users.Authorization', related_name='accesscodes',
+        null=True, blank=True,
+    )

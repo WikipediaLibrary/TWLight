@@ -23,6 +23,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import IntegerField, Case, When, Count, Q
+from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
@@ -39,7 +40,7 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  SelfOnly,
                                  DataProcessingRequired,
                                  NotDeleted)
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor
 
@@ -765,7 +766,13 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     def form_valid(self, form):
         with reversion.create_revision():
             reversion.set_user(self.request.user)
-            return super(EvaluateApplicationView, self).form_valid(form)
+            try:
+                return super(EvaluateApplicationView, self).form_valid(form)
+            except IntegrityError:
+                messages.add_message (self.request, messages.WARNING,
+                # Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
+                _('You attempted to create a duplicate authorization.'))
+                raise PermissionDenied
 
 
     def get_context_data(self, **kwargs):
@@ -935,34 +942,85 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             else:
                 context['total_apps_approved_or_sent'] = None
 
+        available_access_codes = AccessCode.objects.filter(
+            partner=self.get_object(),
+            authorization__isnull=True)
+        context['available_access_codes'] = available_access_codes
+
+        available_access_codes = AccessCode.objects.filter(
+            partner=self.get_object(),
+            authorization__isnull=True)
+        context['available_access_codes'] = available_access_codes
+
         return context
 
 
     def post(self, request, *args, **kwargs):
-        try:
-            request.POST['applications']
-        except KeyError:
-            logger.exception('Posted data is missing required parameter')
-            return HttpResponseBadRequest()
+        if self.get_object().authorization_method == Partner.EMAIL:
+            try:
+                request.POST['applications']
+            except KeyError:
+                logger.exception('Posted data is missing required parameter')
+                return HttpResponseBadRequest()
 
-        # Use getlist, don't just access the POST dictionary value using
-        # the 'applications' key! If you just access the dict element you will
-        # end up treating it as a string - thus if the pk of 80 has been
-        # submitted, you will end up filtering for pks in [8, 0] and nothing
-        # will be as you expect. getlist will give you back a list of items
-        # instead of a string, and then you can use it as desired.
-        app_pks = request.POST.getlist('applications')
+            # Use getlist, don't just access the POST dictionary value using
+            # the 'applications' key! If you just access the dict element you will
+            # end up treating it as a string - thus if the pk of 80 has been
+            # submitted, you will end up filtering for pks in [8, 0] and nothing
+            # will be as you expect. getlist will give you back a list of items
+            # instead of a string, and then you can use it as desired.
+            app_pks = request.POST.getlist('applications')
 
-        try:
-            self.get_object().applications.filter(pk__in=app_pks).update(
-                status=Application.SENT, sent_by=request.user)
-        except ValueError:
-            # This will be raised if something that isn't a number gets posted
-            # as an app pk.
-            logger.exception('Invalid value posted')
-            return HttpResponseBadRequest()
-        #Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
+            try:
+                self.get_object().applications.filter(pk__in=app_pks).update(
+                    status=Application.SENT, sent_by=request.user)
+            except ValueError:
+                # This will be raised if something that isn't a number gets posted
+                # as an app pk.
+                logger.exception('Invalid value posted')
+                return HttpResponseBadRequest()
+
+        elif self.get_object().authorization_method == Partner.CODES:
+            try:
+                request.POST['accesscode']
+            except KeyError:
+                logger.exception('Posted data is missing required parameter')
+                return HttpResponseBadRequest()
+
+            select_outputs = request.POST.getlist('accesscode')
+            # The form returns "{{ app_pk }}_{{ access_code }}" for every selected
+            # application so that we can associate each code with its application.
+            send_outputs = [(output.split("_")[0], output.split("_")[1])
+                for output in select_outputs if output != "default"]
+
+            # Make sure the coordinator hasn't selected the same code
+            # multiple times.
+            all_codes = [output[1] for output in send_outputs]
+            if len(all_codes) > len(set(all_codes)):
+                messages.add_message(self.request, messages.ERROR,
+                    # Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
+                    _('Error: Code used multiple times.'))
+                return HttpResponseRedirect(reverse(
+                    'applications:send_partner', kwargs={
+                        'pk': self.get_object().pk}))
+
+            for send_output in send_outputs:
+                app_pk = send_output[0]
+                app_code = send_output[1]
+
+                application = Application.objects.get(pk=app_pk)
+                code_object = AccessCode.objects.get(code=app_code,
+                    partner=application.partner)
+
+                code_object.application = application
+                code_object.save()
+
+                application.status = Application.SENT
+                application.sent_by = request.user
+                application.save()
+
         messages.add_message(self.request, messages.SUCCESS,
+            # Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
             _('All selected applications have been marked as sent.'))
 
         return HttpResponseRedirect(reverse(
