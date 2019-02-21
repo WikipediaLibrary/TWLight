@@ -72,7 +72,7 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
                 cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
             
             if short_description_cache is None:
-                executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner)
+                executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, cache_is_stale=True)
                 '''
                 if short_description:
                     context['short_description'][each_partner.pk] = short_description
@@ -174,7 +174,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                 
                 cache_key_stream_desc = each_stream.name + 'stream_description'
                 stream_description_metadata = each_stream.description_last_revision_id
-                stream_description_cache = cache.get(cache_key_stream_desc = each_stream.name + 'stream_description')
+                stream_description_cache = cache.get(cache_key_stream_desc)
                 if stream_description_cache is None:
                     pass
                 else:
