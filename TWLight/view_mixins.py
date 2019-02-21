@@ -369,7 +369,7 @@ class APIPartnerDescriptions(object):
         if user_language not in languages_on_revision_field:
             languages_on_revision_field[user_language] = {}
             languages_on_revision_field[user_language]['revision_id'] = None
-            languages_on_revision_field[user_language]['timestamp'] = None
+            languages_on_revision_field[user_language]['timestamp'] = 0
         revision_id_stored_time = languages_on_revision_field[user_language]['timestamp']
         if current_time - revision_id_stored_time > 1800: 
             return True
