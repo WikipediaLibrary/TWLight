@@ -63,20 +63,23 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
         for each_partner in partners_list:
             cache_is_stale = False
             
+            cache_key_short_desc = each_partner.company_name + 'short_description'
             short_description_metadata = each_partner.short_description_last_revision_id
-            short_description_cache = cache.get(each_partner.company_name + 'short_description')
+            short_description_cache = cache.get(cache_key_short_desc)
             if short_description_cache is None:
                 pass
             else:
                 cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
             
             if short_description_cache is None:
-                short_description = self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner)
-                
+                executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner)
+                '''
                 if short_description:
                     context['short_description'][each_partner.pk] = short_description
                 else:
                     context['short_description'][each_partner.pk] = None
+                '''
+                context['short_description'][each_partner.pk] = 'Fetching content, please reload'
             else:
                 context['short_description'][each_partner.pk] = short_description_cache
             if cache_is_stale:
@@ -109,19 +112,24 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         context['short_description'] = {}
         
         short_description_metadata = partner.short_description_last_revision_id
-        short_description_cache = cache.get(partner.company_name + 'short_description')
+        cache_key_short_desc = partner.company_name + 'short_description'
+        short_description_cache = cache.get(cache_key_short_desc)
         if short_description_cache is None:
             pass
         else:
             cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
         
+        logger.info(short_description_cache)
+        
         if short_description_cache is None:
-            short_description = self.get_and_set_revision_ids(user_language, type='Short', description_metadata=short_description_metadata, partner=partner)
-            
+            executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=partner, cache_is_stale=True)
+            '''
             if short_description:
                 context['short_description'][partner.pk] = short_description
             else:
                 context['short_description'][partner.pk] = None
+            '''
+            context['short_description'][partner.pk] = 'Fetching content, please reload'
         else:
             context['short_description'][partner.pk] = short_description_cache
         if cache_is_stale:
@@ -132,20 +140,23 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
             context['long_description'] = {}
             cache_is_stale = False
             
+            cache_key_long_desc = partner.company_name + 'long_description'
             long_description_metadata = partner.long_description_last_revision_id
-            long_description_cache = cache.get(partner.company_name + 'long_description')
+            long_description_cache = cache.get(cache_key_long_desc)
             if long_description_cache is None:
                 pass
             else:
                 cache_is_stale = self.check_cache_state(user_language, description_metadata=long_description_metadata)
             
             if long_description_cache is None:
-                long_description = self.get_and_set_revision_ids(user_language, type='Long', description_metadata=long_description_metadata, partner=partner)
-                
+                executor.submit(self.get_and_set_revision_ids, user_language, type='Long', description_metadata=long_description_metadata, partner=partner)
+                '''
                 if long_description:
                     context['long_description'] = long_description
                 else:
                     context['long_description'] = None
+                '''
+                context['long_description'] = 'Fetching content, please reload'
             else:
                 context['long_description'] = long_description_cache
             if cache_is_stale:
@@ -161,20 +172,23 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                 context['stream_description'] = {}
                 cache_is_stale = False
                 
+                cache_key_stream_desc = each_stream.name + 'stream_description'
                 stream_description_metadata = each_stream.description_last_revision_id
-                stream_description_cache = cache.get(each_stream.name + 'stream_description')
+                stream_description_cache = cache.get(cache_key_stream_desc = each_stream.name + 'stream_description')
                 if stream_description_cache is None:
                     pass
                 else:
                     requested_language_cache_is_stale = self.check_cache_state(user_language, description_metadata=stream_description_metadata)
                 
                 if stream_description_cache is None:
-                    stream_description = self.get_and_set_revision_ids(user_language, type='Collection', description_metadata=stream_description_metadata, partner=each_stream)
-                    
+                    executor.submit(self.get_and_set_revision_ids, user_language, type='Collection', description_metadata=stream_description_metadata, partner=each_stream)
+                    '''
                     if stream_description:
                         context['stream_description'][each_stream.pk] = stream_description
                     else:
                         context['stream_description'][each_stream.pk] = None
+                    '''
+                    context['stream_description'][each_stream.pk] = 'Fetching content, please reload'
                 else:
                     context['stream_description'][each_stream.pk] = stream_description_cache
                 if cache_is_stale:

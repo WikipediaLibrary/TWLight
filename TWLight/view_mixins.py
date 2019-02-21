@@ -371,6 +371,8 @@ class APIPartnerDescriptions(object):
             languages_on_revision_field[user_language]['revision_id'] = None
             languages_on_revision_field[user_language]['timestamp'] = 0
         revision_id_stored_time = languages_on_revision_field[user_language]['timestamp']
+        if revision_id_stored_time is None:
+            revision_id_stored_time = 0
         if current_time - revision_id_stored_time > 1800: 
             return True
         else:
@@ -384,34 +386,39 @@ class APIPartnerDescriptions(object):
         if user_language not in languages_on_revision_field:
             languages_on_revision_field[user_language] = {}
             languages_on_revision_field[user_language]['revision_id'] = None
-            languages_on_revision_field[user_language]['timestamp'] = None
+            languages_on_revision_field[user_language]['timestamp'] = 0
         
         description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type, pk=partner.pk)
         
         if description:
             last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en', {}).get('revision_id')
-            if last_revision_id is None or int(last_revision_id) != revision_id:
+            if last_revision_id is None or int(last_revision_id) != revision_id or cache_is_stale:
                 languages_on_revision_field[user_language if requested_language else 'en'] = {}
                 languages_on_revision_field[user_language if requested_language else 'en']['revision_id'] = revision_id
                 languages_on_revision_field[user_language if requested_language else 'en']['timestamp'] = time.time()
                 if type == 'Short':
                     partner.short_description_last_revision_id = languages_on_revision_field
                     partner.save()
+                    cache_key = partner.company_name + 'short_description'
                     if cache_is_stale:
-                        cache.delete(partner.company_name + 'short_description')
-                    cache.set(partner.company_name + 'short_description', description, None)
+                        cache.delete(cache_key)
+                        logger.info(u'cache_is_deleted')
+                    cache.set(cache_key, description, None)
+                    logger.info(u'cache_is_set')
                 elif type == 'Long':
                     partner.long_description_last_revision_id = languages_on_revision_field
                     partner.save()
+                    cache_key = partner.company_name + 'long_description'
                     if cache_is_stale:
-                        cache.delete(partner.company_name + 'long_description')
-                    cache.set(partner.company_name + 'long_description', description, None)
+                        cache.delete(cache_key)
+                    cache.set(cache_key, description, None)
                 else:
                     partner.description_last_revision_id = languages_on_revision_field
                     partner.save()
+                    cache_key = partner.name + 'stream_description'
                     if cache_is_stale:
-                        cache.delete(partner.name + 'stream_description')
-                    cache.set(partner.name + 'stream_description', description, None)
+                        cache.delete(cache_key)
+                    cache.set(cache_key, description, None)
             return description
         else:
             return False
