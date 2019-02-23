@@ -72,7 +72,7 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
                 cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
             
             if short_description_cache is None:
-                executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, cache_is_stale=True)
+                executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, no_cache=True)
                 '''
                 if short_description:
                     context['short_description'][each_partner.pk] = short_description
@@ -83,7 +83,7 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
             else:
                 context['short_description'][each_partner.pk] = short_description_cache
             if cache_is_stale:
-                executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, cache_is_stale=True)
+                executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Short', description_metadata=short_description_metadata, partner=each_partner, cache_is_stale=True)
         return context
 
 
@@ -119,10 +119,8 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         else:
             cache_is_stale = self.check_cache_state(user_language, description_metadata=short_description_metadata)
         
-        logger.info(short_description_cache)
-        
         if short_description_cache is None:
-            executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=partner, cache_is_stale=True)
+            executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Short', description_metadata=short_description_metadata, partner=partner, no_cache=True)
             '''
             if short_description:
                 context['short_description'][partner.pk] = short_description
@@ -133,7 +131,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         else:
             context['short_description'][partner.pk] = short_description_cache
         if cache_is_stale:
-            executor.submit(self.get_and_set_revision_ids, user_language, type='Short', description_metadata=short_description_metadata, partner=partner, cache_is_stale=True)
+            executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Short', description_metadata=short_description_metadata, partner=partner, cache_is_stale=True)
         
         # Retrieves the long description of this partner from Meta (if available)
         if partner.long_description_available:
@@ -149,7 +147,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                 cache_is_stale = self.check_cache_state(user_language, description_metadata=long_description_metadata)
             
             if long_description_cache is None:
-                executor.submit(self.get_and_set_revision_ids, user_language, type='Long', description_metadata=long_description_metadata, partner=partner)
+                executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Long', description_metadata=long_description_metadata, partner=partner)
                 '''
                 if long_description:
                     context['long_description'] = long_description
@@ -160,7 +158,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
             else:
                 context['long_description'] = long_description_cache
             if cache_is_stale:
-                executor.submit(self.get_and_set_revision_ids, user_language, type='Long', description_metadata=long_description_metadata, partner=partner, cache_is_stale=True)
+                executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Long', description_metadata=long_description_metadata, partner=partner, no_cache=True)
         
         partner_streams = Stream.objects.filter(partner=partner)
         
@@ -169,7 +167,6 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         
         for each_stream in partner_streams:
             if each_stream.description_available:
-                context['stream_description'] = {}
                 cache_is_stale = False
                 
                 cache_key_stream_desc = each_stream.name + 'stream_description'
@@ -181,7 +178,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                     requested_language_cache_is_stale = self.check_cache_state(user_language, description_metadata=stream_description_metadata)
                 
                 if stream_description_cache is None:
-                    executor.submit(self.get_and_set_revision_ids, user_language, type='Collection', description_metadata=stream_description_metadata, partner=each_stream)
+                    executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Collection', description_metadata=stream_description_metadata, partner=each_stream, no_cache=True)
                     '''
                     if stream_description:
                         context['stream_description'][each_stream.pk] = stream_description
@@ -192,7 +189,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                 else:
                     context['stream_description'][each_stream.pk] = stream_description_cache
                 if cache_is_stale:
-                    executor.submit(self.get_and_set_revision_ids, user_language, type='Collection', description_metadata=stream_description_metadata, partner=each_stream, cache_is_stale=True)
+                    executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Collection', description_metadata=stream_description_metadata, partner=each_stream, cache_is_stale=True)
         
         context['total_apps'] = Application.objects.filter(
             partner=partner).count()
