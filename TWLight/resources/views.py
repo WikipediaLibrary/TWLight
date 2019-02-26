@@ -147,7 +147,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                 cache_is_stale = self.check_cache_state(user_language, description_metadata=long_description_metadata)
             
             if long_description_cache is None:
-                executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Long', description_metadata=long_description_metadata, partner=partner)
+                executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Long', description_metadata=long_description_metadata, partner=partner, no_cache=True)
                 '''
                 if long_description:
                     context['long_description'] = long_description
