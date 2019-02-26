@@ -79,7 +79,8 @@ class PartnersFilterView(APIPartnerDescriptions, FilterView):
                 else:
                     context['short_description'][each_partner.pk] = None
                 '''
-                context['short_description'][each_partner.pk] = 'Fetching content, please reload'
+                # Translators: This text is shown to users when descriptions (short or long or collection) for the partner aren't yet generated from the API
+                context['short_description'][each_partner.pk] = _('Fetching content, please reload.')
             else:
                 context['short_description'][each_partner.pk] = short_description_cache
             if cache_is_stale:
@@ -127,7 +128,8 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
             else:
                 context['short_description'][partner.pk] = None
             '''
-            context['short_description'][partner.pk] = 'Fetching content, please reload'
+            # Translators: This text is shown to users when descriptions (short or long or collection) for the partner aren't yet generated from the API
+            context['short_description'][partner.pk] = _('Fetching content, please reload')
         else:
             context['short_description'][partner.pk] = short_description_cache
         if cache_is_stale:
@@ -154,7 +156,8 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                 else:
                     context['long_description'] = None
                 '''
-                context['long_description'] = 'Fetching content, please reload'
+                # Translators: This text is shown to users when descriptions (short or long or collection) for the partner aren't yet generated from the API
+                context['long_description'] = _('Fetching content, please reload')
             else:
                 context['long_description'] = long_description_cache
             if cache_is_stale:
@@ -185,7 +188,8 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
                     else:
                         context['stream_description'][each_stream.pk] = None
                     '''
-                    context['stream_description'][each_stream.pk] = 'Fetching content, please reload'
+                    # Translators: This text is shown to users when descriptions (short or long or collection) for the partner aren't yet generated from the API
+                    context['stream_description'][each_stream.pk] = _('Fetching content, please reload')
                 else:
                     context['stream_description'][each_stream.pk] = stream_description_cache
                 if cache_is_stale:

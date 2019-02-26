@@ -23,6 +23,7 @@ from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
+from django.utils.translation import ugettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
@@ -382,43 +383,55 @@ class APIPartnerDescriptions(object):
             languages_on_revision_field = ast.literal_eval(description_metadata)
         if user_language not in languages_on_revision_field:
             languages_on_revision_field[user_language] = {}
-            languages_on_revision_field[user_language]['revision_id'] = None
+            languages_on_revision_field[user_language]['revision_id'] = 0
             languages_on_revision_field[user_language]['timestamp'] = 0
         
         description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type, pk=partner.pk)
-        if description:
-            last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en', {}).get('revision_id')
-            if last_revision_id is None or int(last_revision_id) != revision_id or cache_is_stale or no_cache:
-                languages_on_revision_field[user_language if requested_language else 'en'] = {}
-                languages_on_revision_field[user_language if requested_language else 'en']['revision_id'] = revision_id
-                languages_on_revision_field[user_language if requested_language else 'en']['timestamp'] = time.time()
-                if type == 'Short':
-                    partner.short_description_last_revision_id = languages_on_revision_field
-                    partner.save()
-                    cache_key = partner.company_name + 'short_description'
-                    if cache_is_stale:
-                        cache.delete(cache_key)
-                        logger.info(partner.company_name + u' short description cache is deleted')
+        
+        last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en', {}).get('revision_id')
+        if int(last_revision_id) == 0 or int(last_revision_id) != revision_id or cache_is_stale or no_cache:
+            languages_on_revision_field[user_language if requested_language else 'en'] = {}
+            languages_on_revision_field[user_language if requested_language else 'en']['revision_id'] = revision_id
+            languages_on_revision_field[user_language if requested_language else 'en']['timestamp'] = time.time()
+            if type == 'Short':
+                partner.short_description_last_revision_id = languages_on_revision_field
+                partner.save()
+                cache_key = partner.company_name + 'short_description'
+                if cache_is_stale:
+                    cache.delete(cache_key)
+                    logger.info(partner.company_name + u' short description cache is deleted')
+                if description:
                     cache.set(cache_key, description, None)
-                    logger.info(partner.company_name + u' short description cache is set')
-                elif type == 'Long':
-                    partner.long_description_last_revision_id = languages_on_revision_field
-                    partner.save()
-                    cache_key = partner.company_name + 'long_description'
-                    if cache_is_stale:
-                        cache.delete(cache_key)
-                        logger.info(partner.company_name + u' long description cache is deleted')
-                    cache.set(cache_key, description, None)
-                    logger.info(partner.company_name + u' long description cache is set')
                 else:
-                    partner.description_last_revision_id = languages_on_revision_field
-                    partner.save()
-                    cache_key = partner.name + 'stream_description'
-                    if cache_is_stale:
-                        cache.delete(cache_key)
-                        logger.info(partner.company_name + u' stream description cache is deleted')
+                    cache.set(cache_key,
+                        _('Short description not available for this partner.'), None)
+                logger.info(partner.company_name + u' short description cache is set')
+            elif type == 'Long':
+                partner.long_description_last_revision_id = languages_on_revision_field
+                partner.save()
+                cache_key = partner.company_name + 'long_description'
+                if cache_is_stale:
+                    cache.delete(cache_key)
+                    logger.info(partner.company_name + u' long description cache is deleted')
+                if description:
                     cache.set(cache_key, description, None)
-                    logger.info(partner.company_name + u' stream description cache is set')
+                else:
+                    cache.set(cache_key,
+                        _('Long description not available for this partner.'), None)
+                logger.info(partner.company_name + u' long description cache is set')
+            else:
+                partner.description_last_revision_id = languages_on_revision_field
+                partner.save()
+                cache_key = partner.name + 'stream_description'
+                if cache_is_stale:
+                    cache.delete(cache_key)
+                    logger.info(partner.company_name + u' stream description cache is deleted')
+                if description:
+                    cache.set(cache_key, description, None)
+                else:
+                    cache.set(cache_key,
+                      _('Collection description not available for this collection'), None)
+                logger.info(partner.company_name + u' stream description cache is set')
 
 
 
@@ -437,7 +450,7 @@ class APIPartnerDescriptions(object):
             revision_id = int(desc_json.get('parse').get('revid'))
             return self.parse_json_to_html(desc_json), requested_language, revision_id
         else:
-            revision_id = None
+            revision_id = 0
             description = None
             return description, requested_language, revision_id
 
