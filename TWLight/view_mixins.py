@@ -376,7 +376,7 @@ class APIPartnerDescriptions(object):
                 return False
 
 
-    def cache_and_revision_field_manipulation(self, user_language, type, description_metadata, partner, no_cache = False, cache_is_stale=False):
+    def cache_and_revision_field_manipulation(self, user_language, type, description_metadata, partner, no_cache=False, cache_is_stale=False):
         languages_on_revision_field = {}
         if description_metadata is not None:
             languages_on_revision_field = ast.literal_eval(description_metadata)

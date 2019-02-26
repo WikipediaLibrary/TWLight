@@ -158,7 +158,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
             else:
                 context['long_description'] = long_description_cache
             if cache_is_stale:
-                executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Long', description_metadata=long_description_metadata, partner=partner, no_cache=True)
+                executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Long', description_metadata=long_description_metadata, partner=partner, cache_is_stale=True)
         
         partner_streams = Stream.objects.filter(partner=partner)
         
