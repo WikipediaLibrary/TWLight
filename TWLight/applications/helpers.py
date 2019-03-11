@@ -78,7 +78,7 @@ FIELD_TYPES = {
     SPECIFIC_TITLE: forms.CharField(max_length=128),
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
     AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(),
-    ACCOUNT_EMAIL: forms.CharField(max_length=64),
+    ACCOUNT_EMAIL: forms.EmailField(),
     HIDDEN: forms.BooleanField(required=False)
 }
 
