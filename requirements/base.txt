@@ -24,4 +24,5 @@ python-dateutil==2.8.0
 beautifulsoup4
 pytz==2018.9
 six==1.12.0
+vcrpy
 wheel==0.33.0

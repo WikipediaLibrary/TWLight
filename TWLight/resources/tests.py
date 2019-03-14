@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+import vcr
+import requests
+
 from datetime import date, timedelta
 from mock import patch
 
+from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.urlresolvers import reverse
@@ -587,3 +591,19 @@ class PartnerViewTests(TestCase):
         # The assigned coordinator can see the user list!
         response = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
         self.assertEqual(response.status_code, 200)
+
+
+
+class PartnerDescriptionAPITests(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(PartnerDescriptionAPITests, cls).setUpClass()
+        cls.lang_en, _ = Language.objects.get_or_create(language='en')
+
+
+    @vcr.use_cassette('TWLight/resources/fixtures/vcr_cassettes/short_description_61.yml')
+    def test_mediawiki_action_api(self):
+        api_endpoint = settings.DESCRIPTION_API_REQUEST_URL.format(desc_type='Short', partner_pk=61, language_code='en')
+        api_response = requests.get(api_endpoint)
+        json_response = api_response.json()

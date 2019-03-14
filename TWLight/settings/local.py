@@ -28,7 +28,7 @@ except ImportError:
     print('Cannot import from TWLight/settings/local_vars.py',
           'This is fine if you are not on a local system, as long as your '
           'settings file is something other than TWLight/settings/local, '
-          'but it will cause the app to fail if you are trying to use '
+          'but it will cause the app to fail if you are trying to use ' 
           'local settings.',
           file=sys.stderr)
     raise
@@ -46,6 +46,8 @@ DEFAULT_FROM_EMAIL = '<twlight.local@localhost.localdomain>'
 
 # TEST CONFIGURATION
 # ------------------------------------------------------------------------------
+
+DESCRIPTION_API_REQUEST_URL = 'https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2F{desc_type}_description%2F{partner_pk}/{language_code}&prop=text|revid&disablelimitreport=true&contentformat=text/plain'
 
 INSTALLED_APPS += [
     'django_nose',

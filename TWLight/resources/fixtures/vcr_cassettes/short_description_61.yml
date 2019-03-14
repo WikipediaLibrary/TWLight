@@ -1,0 +1,55 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F61/en&prop=text%7Crevid&disablelimitreport=true&contentformat=text/plain
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6VS72vbMBD9Vw7D6DbiKIHRZCHLh+7Hp0ELK/RLIJwtxRaRJXGS64XS/30n2+nW
+        ldFBPliW3p307t69h8wjBZWtHrKoo+FN9l0XhHSEz0gSvMG4d9SIW0Ib+KCdFTdI0SoK4kftKIJU
+        oSTt+9DlXCibTfjVSmmZreazxWI+v1xMMlL3PbBcLhYflx8mWVQ/Y+J9z5xrqe+hNBjCp23WdHlf
+        FOWujb6N22zzIh5zg7ZqmSWAdZ605TRIGCcoy3upibcm0ivXeVcow0nXsVYET/hqLfjWK1d1iIBt
+        dPbYJBqEmtSeE0WnD1qMSu6Skrv/UHL3XElu4l/ErYYB8uQqUiH8dczz0jXeqKj4kX6w/MiZg4W3
+        89nsDcQxX8l3zxXffLUVC1KvBW5G7fp1a9fjz2/WRRKJlOE71u2dMa77o012hCKLBpI3GB/VrGP0
+        KyG6rpsWxrkmFC0dp9yhYNarJwRu2iIVoG011FBsQAdAuCIdGQc/xHnKbs9wp6UC7qZS6SwxYoGB
+        /YRWconBtVSqMIXbmh/xozK19sAis5VTYlkm6aOD85pqD13tAn+nnu5qdxGA19TH5MzXJWGDzhpt
+        lRkccKL5kiJw3YfOYgovprNHlsrZUln2i+kJWTbZljGIQlGVjwn5WFIaJMPwbYBh9OpQVRrIeRp0
+        tY544PmhadBiefit9BC4CIlqyiYVPln15Nz+nz0+Pv4Ctuc65SkFAAA=
+    headers:
+      accept-ranges: [bytes]
+      age: ['0']
+      backend-timing: [D=334488 t=1552544886027114]
+      cache-control: ['private, must-revalidate, max-age=0']
+      connection: [keep-alive]
+      content-disposition: [inline; filename=api-result.json]
+      content-encoding: [gzip]
+      content-length: ['554']
+      content-type: [application/json; charset=utf-8]
+      date: ['Thu, 14 Mar 2019 06:28:06 GMT']
+      p3p: ['CP="This is not a P3P policy! See https://meta.wikimedia.org/wiki/Special:CentralAutoLogin/P3P
+          for more info."']
+      server: [mw1222.eqiad.wmnet]
+      server-timing: [cache;desc="pass"]
+      set-cookie: ['WMF-Last-Access=14-Mar-2019;Path=/;HttpOnly;secure;Expires=Mon,
+          15 Apr 2019 00:00:00 GMT', 'GeoIP=IN:TN:Nagercoil:8.19:77.43:v4; Path=/;
+          secure; Domain=.wikimedia.org']
+      strict-transport-security: [max-age=106384710; includeSubDomains; preload]
+      vary: ['Accept-Encoding,Treat-as-Untrusted,X-Forwarded-Proto,Cookie,Authorization,X-Seven']
+      via: ['1.1 varnish (Varnish/5.1), 1.1 varnish (Varnish/5.1), 1.1 varnish (Varnish/5.1),
+          1.1 varnish (Varnish/5.1)']
+      x-analytics: [ns=-1;special=Badtitle;https=1;nocookies=1]
+      x-cache: ['cp1087 pass, cp2012 pass, cp5009 pass, cp5007 pass']
+      x-cache-status: [pass]
+      x-client-ip: [45.119.172.39]
+      x-content-type-options: [nosniff]
+      x-frame-options: [DENY]
+      x-powered-by: [HHVM/3.18.6-dev]
+      x-varnish: ['943347507, 187513865, 171078501, 277804515']
+    status: {code: 200, message: OK}
+version: 1
