@@ -1,0 +1,5 @@
+- model: resources.partner
+  pk: 8
+  fields:
+    company_name: Foreign Affairs
+    company_location: United States of America

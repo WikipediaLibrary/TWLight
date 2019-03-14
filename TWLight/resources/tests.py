@@ -595,6 +595,7 @@ class PartnerViewTests(TestCase):
 
 
 class PartnerDescriptionAPITests(TestCase):
+    fixtures = ['8.yaml']
 
     @classmethod
     def setUpClass(cls):
