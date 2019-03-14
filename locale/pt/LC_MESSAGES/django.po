@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-02-20 16:39+0000\n"
-"PO-Revision-Date: 2019-02-25 10:00:42+0000\n"
+"PO-Revision-Date: 2019-03-14 12:21:34+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -619,12 +619,12 @@ msgstr "Marcar como enviada"
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:153
 msgid "Use the dropdown menus to denote which editor will receive each code. Make sure to send each code via email before clicking 'Mark as sent'."
-msgstr ""
+msgstr "Use os menus descendentes para indicar o editor que receberá cada código. Certifique-se de que cada código foi enviado por correio eletrónico antes de clicar em 'Marcar como enviada'."
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:174
 msgid "Select code:"
-msgstr ""
+msgstr "Selecionar código:"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:195
@@ -692,7 +692,7 @@ msgstr "Candidaturas enviadas"
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
 #: TWLight/applications/views.py:774
 msgid "You attempted to create a duplicate authorization."
-msgstr ""
+msgstr "Você tentou criar uma autorização duplicada."
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:802
@@ -711,7 +711,7 @@ msgstr "Atualização em segundo plano realizada."
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1002
 msgid "Error: Code used multiple times."
-msgstr ""
+msgstr "Erro: código usado mais do que uma vez."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
 #: TWLight/applications/views.py:1024
@@ -1015,48 +1015,48 @@ msgstr "Número de utilizadores"
 #. Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
 #: TWLight/resources/admin.py:135
 msgid "File must be a csv"
-msgstr ""
+msgstr "O ficheiro tem de ser um CSV"
 
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
 #: TWLight/resources/admin.py:141
 msgid "Uploaded file is too large."
-msgstr ""
+msgstr "O ficheiro carregado é demasiado grande."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
 #: TWLight/resources/admin.py:159
 #, python-brace-format
 msgid "Line {line_num} has {num_columns} columns. Expected 2."
-msgstr ""
+msgstr "A linha {line_num} tem {num_columns} colunas. São esperadas 2."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
 #: TWLight/resources/admin.py:169
 #, python-brace-format
 msgid "Access code on line {line_num} is too long for the database field."
-msgstr ""
+msgstr "O código de acesso na linha {line_num} é demasiado comprido para o campo da base de dados."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
 #: TWLight/resources/admin.py:178
 #, python-brace-format
 msgid "Second column should only contain numbers. Error on line {line_num}."
-msgstr ""
+msgstr "A segunda coluna só deve conter números. Erro na linha {line_num}."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
 #: TWLight/resources/admin.py:187
 #, python-brace-format
 msgid "File contains reference to invalid partner ID on line {line_num}"
-msgstr ""
+msgstr "O ficheiro contém uma referência a um identificador de parceiro inválido, na linha {line_num}"
 
 #. Translators: When staff successfully upload a file containing access codes, they receive this message.
 #: TWLight/resources/admin.py:215
 #, python-brace-format
 msgid "{num_codes} access codes successfully uploaded!"
-msgstr ""
+msgstr "Foram carregados {num_codes} códigos de acesso!"
 
 #. Translators: When staff upload a file containing access codes, they receive this message if any were duplicates.
 #: TWLight/resources/admin.py:219
 #, python-brace-format
 msgid "{num_duplicates} access codes ignored as duplicates."
-msgstr ""
+msgstr "Foram ignorados por serem duplicados {num_duplicates} códigos de acesso."
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:16
@@ -1133,17 +1133,17 @@ msgstr "Indisponível"
 #. Translators: This is the name of the authorization method whereby user accounts are set up via an access code.
 #: TWLight/resources/models.py:185
 msgid "Access codes"
-msgstr ""
+msgstr "Códigos de acesso"
 
 #. Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
 #: TWLight/resources/models.py:187
 msgid "Proxy"
-msgstr ""
+msgstr "''Proxy''"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #: TWLight/resources/models.py:189
 msgid "Library Bundle"
-msgstr ""
+msgstr "Pacote da biblioteca"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
 #: TWLight/resources/models.py:195
@@ -1193,7 +1193,7 @@ msgstr "Limite facultativo para excertos, expresso em termos da percentagem (%) 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
 #: TWLight/resources/models.py:241
 msgid "Which authorization method does this partner use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access."
-msgstr ""
+msgstr "Qual é o método de autorização deste parceiro? 'Correio eletrónico' significa que as contas são criadas por correio eletrónico, o método padrão. Selecionar 'Códigos de acesso' se enviarmos detalhes para início de sessão ou códigos de acesso, individuais ou de grupo. 'Proxy' significa acesso entregado diretamente via EZProxy, e o pacote da biblioteca é o acesso por ''proxy'' automatizado."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
 #: TWLight/resources/models.py:251
@@ -1318,12 +1318,12 @@ msgstr "O coordenador deste parceiro, se existir."
 #. Translators: This text is shown to staff who are uploading access codes, instructing them on the format the file should take.
 #: TWLight/resources/templates/resources/csv_form.html:6
 msgid "To upload access codes, create a .csv file containing two columns: The first containing the access codes, and the second the ID of the partner the code should be linked to."
-msgstr ""
+msgstr "Para carregar códigos de acesso, crie um ficheiro .csv que contenha duas colunas. A primeira deve ter os códigos de acesso e a segunda o identificador do parceiro ao qual esse código deve ser associado."
 
 #. Translators: This labels a button for uploading files containing lists of access codes.
 #: TWLight/resources/templates/resources/csv_form.html:23
 msgid "Upload"
-msgstr ""
+msgstr "Carregar"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:36
@@ -1633,13 +1633,13 @@ msgstr "Mais informações"
 #. Translators: On the page listing approved users, staff can unassign a code from a user. This is the title of the page which confirms the code removal.
 #: TWLight/resources/templates/resources/partner_unassign_code.html:8
 msgid "Unassign code?"
-msgstr ""
+msgstr "Remover código?"
 
 #. Translators: This message is displayed on the page where staff can unassign codes from users.
 #: TWLight/resources/templates/resources/partner_unassign_code.html:14
 #, python-format
 msgid "Unassign access code <code>%(code)s</code> from %(editor)s?"
-msgstr ""
+msgstr "Remover o código de acesso <code>%(code)s</code> do utilizador %(editor)s?"
 
 #: TWLight/resources/templates/resources/partner_users.html:7
 #, python-format
@@ -1674,7 +1674,7 @@ msgstr "Conjunto de recursos"
 #: TWLight/resources/templates/resources/partner_users.html:40
 #: TWLight/resources/templates/resources/partner_users.html:102
 msgid "Access code"
-msgstr ""
+msgstr "Código de acesso"
 
 #. Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched.
 #: TWLight/resources/templates/resources/partner_users.html:53
@@ -1686,7 +1686,7 @@ msgstr "Importada"
 #: TWLight/resources/templates/resources/partner_users.html:68
 #: TWLight/resources/templates/resources/partner_users.html:131
 msgid "Unassign"
-msgstr ""
+msgstr "Remover"
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
 #: TWLight/resources/templates/resources/suggest.html:18
@@ -2221,11 +2221,11 @@ msgstr "Esqueceu-se da palavra-passe? Introduza abaixo o seu endereço de correi
 
 #: TWLight/users/admin.py:48
 msgid "authorized_user"
-msgstr ""
+msgstr "utilizador_autorizado"
 
 #: TWLight/users/admin.py:58
 msgid "authorizer"
-msgstr ""
+msgstr "autorizador"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/authorization.py:215
@@ -2375,27 +2375,27 @@ msgstr "{wp_username}"
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
 #: TWLight/users/models.py:392
 msgid "The authorized user."
-msgstr ""
+msgstr "O utilizador autorizado."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
 #: TWLight/users/models.py:400
 msgid "The authorizing user."
-msgstr ""
+msgstr "O utilizador que autorizou."
 
 #. Translators: This field records the date the authorization expires.
 #: TWLight/users/models.py:406
 msgid "The date this authorization expires."
-msgstr ""
+msgstr "A data de expiração desta autorização."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
 #: TWLight/users/models.py:413
 msgid "The partner for which the editor is authorized."
-msgstr ""
+msgstr "O parceiro para o qual o editor foi autorizado."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
 #: TWLight/users/models.py:420
 msgid "The stream for which the editor is authorized."
-msgstr ""
+msgstr "O conjunto de recursos para o qual o editor foi autorizado."
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:13
