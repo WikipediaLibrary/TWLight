@@ -90,18 +90,10 @@
         <ul class="nav nav-pills navbar-right">
       <li role="presentation" class="mobile-menu">
         <a href="{% url 'partners:filter' %}">
-          {% comment %} Translators: Shown in the top bar of almost every page, taking users to the page where they can browse current partners. {% endcomment %}
-          {% trans "Browse" %}
-        </a>
-      </li>
-    {% if user.editor %}
-      <li role="presentation" class="mobile-menu">
-        <a href="{% url 'applications:request' %}">
-          {% comment %} Translators: Shown in the top bar of almost every page, taking users to the page where they apply for access to partner resources. {% endcomment %}
+          {% comment %} Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners. {% endcomment %}
           {% trans "Apply" %}
         </a>
       </li>
-    {% endif %}
       
     {% if user|coordinators_only %}
       <li role="presentation" class="mobile-menu">
