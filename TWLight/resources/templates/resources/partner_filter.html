@@ -24,6 +24,12 @@
         <a class="btn btn-primary" href="{% url 'suggest' %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Suggest a partner" %}</a>
     </div>
   </div>
+  <div class="row" style="padding-bottom:10px">
+    <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+      {% comment %} Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/) {% endcomment %}
+      <a class="btn btn-default" href="{% url 'applications:request' %}"> {% trans "Apply to multiple partners" %}</a>
+    </div>
+  </div>
   <!-- end filtering options/info -->
   <div class="row row-flex">
     {% for partner in object_list %}
