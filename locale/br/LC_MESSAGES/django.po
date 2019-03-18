@@ -7,7 +7,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-02-20 16:39+0000\n"
-"PO-Revision-Date: 2019-03-07 15:30:31+0000\n"
+"PO-Revision-Date: 2019-03-18 08:04:30+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -297,7 +297,7 @@ msgstr "Dastumad goulennet"
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:103
 msgid "Why the editor wants access"
-msgstr ""
+msgstr "Perak en deus c'hoant an implijer da vonet"
 
 #. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
 #: TWLight/applications/templates/applications/application_evaluation.html:110
@@ -623,7 +623,7 @@ msgstr ""
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:174
 msgid "Select code:"
-msgstr ""
+msgstr "Dizuañ ur c'hod"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:195
@@ -686,12 +686,12 @@ msgstr ""
 #: TWLight/applications/views.py:746
 #: TWLight/resources/templates/resources/partner_users.html:81
 msgid "Sent applications"
-msgstr ""
+msgstr "Goulennoù kaset"
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
 #: TWLight/applications/views.py:774
 msgid "You attempted to create a duplicate authorization."
-msgstr ""
+msgstr "Klasket ho peus krouiñ un aotre eildet"
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:802
@@ -710,12 +710,12 @@ msgstr ""
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1002
 msgid "Error: Code used multiple times."
-msgstr ""
+msgstr "Fazi : Kod impljet meur a wech."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
 #: TWLight/applications/views.py:1024
 msgid "All selected applications have been marked as sent."
-msgstr ""
+msgstr "Merket eo bet an holl c'houlennoù diuzet evel kaset."
 
 #: TWLight/applications/views.py:1073
 msgid "This object cannot be renewed. (This probably means that you have already requested that it be renewed.)"
@@ -757,13 +757,13 @@ msgstr "Kas"
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. You can expect to receive access details within a week or two once it has been processed.</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p>%(user)s ker</p> <p> Trugarez da vezañ goulennet ar gwir da dizhout pourvezioù %(partner)s dre al levraoueg Wikipedia. Laouen omp o kelaouiñ ac'hanoc'h eo bet aprouet ho koulenn. Rankout a rafec'h resev munudoù diwar-benn ar moned d'ar pourvez-se a-benn ur sizhun pe ziv, ur wech ma vo bet graet graet war e dro.</p><p> Trugarez deoc'h !</p><p>Al Levraoueg Wikipedia</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, python-format
+#, fuzzy, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. You can expect to receive access details within a week or two once it has been processed. Cheers! The Wikipedia Library"
-msgstr ""
+msgstr "%(user)s ker, Trugarez da vezañ goulennet ar gwir da dizhout ar pouvezioù dre al levraoueg Wikipedia. Laouen omp o kelaouiñ ac'hanoc'h eo bet aprouet ho koulenn. Rankout a rafec'h resev ar munudoù diwar-benn ar moned a-benn ur sizhun pe ziv, amzer deomp d'ober war-dro ho koulenn. Turgarez vras. Al levraoueg Wikipedia."
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -854,7 +854,7 @@ msgstr "Diwar-benn Levraoueg Wikipedia"
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/emails/templates/emails/contact.html:52
 msgid "Mailing list"
-msgstr ""
+msgstr "Roll skignañ"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
 #: TWLight/emails/templates/emails/contact.html:56
@@ -1014,30 +1014,30 @@ msgstr "Niver a implijerien"
 #. Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
 #: TWLight/resources/admin.py:135
 msgid "File must be a csv"
-msgstr ""
+msgstr "Ar restr a rank bezañ ur csv"
 
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
 #: TWLight/resources/admin.py:141
 msgid "Uploaded file is too large."
-msgstr ""
+msgstr "Re vras eo ar restr pellgarget."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
 #: TWLight/resources/admin.py:159
 #, python-brace-format
 msgid "Line {line_num} has {num_columns} columns. Expected 2."
-msgstr ""
+msgstr "Al linenn {line_num} he deus {num_columns} bann. Gortozet : 2."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
 #: TWLight/resources/admin.py:169
 #, python-brace-format
 msgid "Access code on line {line_num} is too long for the database field."
-msgstr ""
+msgstr "Re hir eo ar c'hod moned war al linenn {line_num} evit maeziennoù an diaz roadennoù."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
 #: TWLight/resources/admin.py:178
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Second column should only contain numbers. Error on line {line_num}."
-msgstr ""
+msgstr "Niverennoù hekpen a rank bezañ en eil bann."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
 #: TWLight/resources/admin.py:187
@@ -1060,7 +1060,7 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:16
 msgid "Name of the potential partner"
-msgstr ""
+msgstr "Anv an danvez keveler"
 
 #: TWLight/resources/forms.py:17
 #: TWLight/resources/templates/resources/suggest.html:55
@@ -1075,7 +1075,7 @@ msgstr "Lec'hienn Genrouedad"
 #: TWLight/resources/models.py:31
 #, python-format
 msgid "%(code)s is not a valid language code. You must enter an ISO language code, as in the INTERSECTIONAL_LANGUAGES setting at https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py"
-msgstr ""
+msgstr "%(code)s n'eo ket ur c'hod yezh reizh. Rankout a rit ebarzhiñ ur kod  yezh ISO, evel en arventenn INTERSECTIONAL_LANGUAGES e https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py"
 
 #: TWLight/resources/models.py:48
 msgid "Name"
@@ -1111,12 +1111,12 @@ msgstr "Ar c'henurzhier evit ar c'heveler-mañ, ma'z eus unan."
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether a publisher will be featured on the website's front page.
 #: TWLight/resources/models.py:147
 msgid "Mark as true to feature this partner on the front page."
-msgstr ""
+msgstr "Merkañ evel gwir evit lakaat ar c'heveler-mañ war wel war ar bajenn bennañ."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can enter the partner organisation's country.
 #: TWLight/resources/models.py:150
 msgid "Partner's primary location."
-msgstr ""
+msgstr "Lec'hiadur pennañ ar c'heveler."
 
 #. Translators: This is a status for a Partner, denoting that editors can apply for access.
 #: TWLight/resources/models.py:169
@@ -1132,12 +1132,12 @@ msgstr "N'eo ket hegerz"
 #. Translators: This is the name of the authorization method whereby user accounts are set up via an access code.
 #: TWLight/resources/models.py:185
 msgid "Access codes"
-msgstr ""
+msgstr "Kodoù moned"
 
 #. Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
 #: TWLight/resources/models.py:187
 msgid "Proxy"
-msgstr ""
+msgstr "Proksi"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #: TWLight/resources/models.py:189
@@ -1322,7 +1322,7 @@ msgstr ""
 #. Translators: This labels a button for uploading files containing lists of access codes.
 #: TWLight/resources/templates/resources/csv_form.html:23
 msgid "Upload"
-msgstr ""
+msgstr "Ezporzhiañ"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:36
@@ -1562,23 +1562,23 @@ msgstr ""
 #: TWLight/templates/dashboard.html:148 TWLight/templates/dashboard.html:160
 #: TWLight/templates/dashboard.html:170 TWLight/templates/dashboard.html:186
 msgid "download as csv"
-msgstr ""
+msgstr "Pellgargañ er furmad csv"
 
 #. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:586
-#, invalid-plural, python-format
+#, python-format
 msgid "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
 msgid_plural "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Niver a c'houlennoù aprouet (a-hed an amzer): %(total_apps_approved_or_sent)s"
+msgstr[1] "Niver a c'houlennoù aprouet(a-hed an amzer): %(total_apps_approved_or_sent)s"
 
 #. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:595
-#, invalid-plural, python-format
+#, python-format
 msgid "Number of unique users with approved applications (all time): %(unique_users_approved_or_sent)s"
 msgid_plural "Number of unique users with approved applications (all time): %(unique_users_approved_or_sent)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Niver a impljerien dibar gant goulennoù aprouet (a-hed an amzer) :\n%(unique_users_approved_or_sent)s"
+msgstr[1] "Niver a implijerien dibar gant goulennoù aprouet (a-hed an amzer): %(unique_users_approved_or_sent)s"
 
 #. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:611
@@ -1588,12 +1588,12 @@ msgstr ""
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
 #: TWLight/resources/templates/resources/partner_detail.html:614
 msgid "All applications"
-msgstr ""
+msgstr "An holl c'houlennoù"
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time.
 #: TWLight/resources/templates/resources/partner_detail.html:620
 msgid "Approved applications only"
-msgstr ""
+msgstr "Ar goulennoù aprouet hepken"
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time.
 #: TWLight/resources/templates/resources/partner_detail.html:626
