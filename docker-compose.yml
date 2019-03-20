@@ -1,0 +1,38 @@
+---
+
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=twlight
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=twlight
+
+  twlight:
+    build: .
+    volumes:
+      - backup:/mnt/backup:rw
+    ports:
+      - "80:80"
+    depends_on:
+      - 'db'
+    environment:
+      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+      - DJANGO_DB_HOST=${DJANGO_DB_HOST}
+      - TWLIGHT_HOME=${TWLIGHT_HOME}
+      - TWLIGHT_GIT_REVISION=${TWLIGHT_GIT_REVISION}
+      - TWLIGHT_DUMP_DIR=${TWLIGHT_DUMP_DIR}
+      - TWLIGHT_MYSQLDUMP_DIR=${TWLIGHT_MYSQLDUMP_DIR}
+      - TWLIGHT_BACKUP_DIR=${TWLIGHT_BACKUP_DIR}
+      - TWLIGHT_ENV=${TWLIGHT_ENV}
+      - TWLIGHT_UNIXNAME=${TWLIGHT_UNIXNAME}
+      - TWLIGHT_ERROR_MAILTO=${TWLIGHT_ERROR_MAILTO}
+      - USER=${TWLIGHT_UNIXNAME}
+
+volumes:
+  backup:

@@ -20,8 +20,9 @@ fi
 ACTIVATED=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 if [ "${ACTIVATED}" -eq 0 ]
 then
+
     # Start in TWLight user's home dir.
-    cd /home/${TWLIGHT_UNIXNAME}
+    cd ~
 
     # Suppress a non-useful warning message that occurs when gunicorn is running.
     virtualenv TWLight 2>/dev/null
