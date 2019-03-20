@@ -14,7 +14,7 @@ from reversion import revisions as reversion
 from reversion.models import Version
 from urlparse import urlparse
 
-from django.shortcuts import get_list_or_404
+
 from django import forms
 from django.conf import settings
 from django.contrib import messages
@@ -24,7 +24,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import IntegerField, Case, When, Count, Q
 from django.db import IntegrityError
-from django.http import HttpResponseRedirect, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
@@ -422,7 +422,9 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
 
         self.request.session[PARTNERS_SESSION_KEY] = partner_id
 
-        partners = get_list_or_404(Partner, id=partner_id)
+        partners = Partner.objects.filter(id=partner_id)
+        if not partners:
+            raise Http404('No partner matches the given query.')
         try:
             assert partners.count() == 1
         except AssertionError:
