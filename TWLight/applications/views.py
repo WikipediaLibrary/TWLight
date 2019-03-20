@@ -947,11 +947,6 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             authorization__isnull=True)
         context['available_access_codes'] = available_access_codes
 
-        available_access_codes = AccessCode.objects.filter(
-            partner=self.get_object(),
-            authorization__isnull=True)
-        context['available_access_codes'] = available_access_codes
-
         return context
 
 
