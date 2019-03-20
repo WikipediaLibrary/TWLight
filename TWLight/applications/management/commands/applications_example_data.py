@@ -63,8 +63,12 @@ class Command(BaseCommand):
                 app.imported = True
             else:
                 app.status = random.choice(Application.STATUS_CHOICES)[0]
+                if random_user.editor.wp_registered < import_date:
+                    start_date = import_date
+                else:
+                    start_date = random_user.editor.wp_registered
                 app.date_created = fake.date_time_between(
-                    start_date = random_user.editor.wp_registered,
+                    start_date = start_date,
                     end_date = "now",
                     tzinfo=None)
                 app.rationale = fake.paragraph(nb_sentences=3)
