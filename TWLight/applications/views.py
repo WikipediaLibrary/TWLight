@@ -42,7 +42,7 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  NotDeleted)
 from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Editor
+from TWLight.users.models import Authorization, Editor
 
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
@@ -1007,12 +1007,24 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 code_object = AccessCode.objects.get(code=app_code,
                     partner=application.partner)
 
-                code_object.application = application
-                code_object.save()
-
                 application.status = Application.SENT
                 application.sent_by = request.user
                 application.save()
+
+                # Access code object needs to be updated after the application
+                # to ensure that the authorization object has been created.
+                # This filtering should only ever find one object. There will
+                # always be a user and partner, and sometimes a stream.
+                if application.specific_stream:
+                    code_object.authorization = Authorization.objects.get(
+                        authorized_user=application.user,
+                        partner=application.partner,
+                        stream=application.stream)
+                else:
+                    code_object.authorization = Authorization.objects.get(
+                        authorized_user=application.user,
+                        partner=application.partner)
+                code_object.save()
 
         messages.add_message(self.request, messages.SUCCESS,
             # Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
