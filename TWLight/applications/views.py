@@ -14,7 +14,7 @@ from reversion import revisions as reversion
 from reversion.models import Version
 from urlparse import urlparse
 
-
+from django.shortcuts import get_object_or_404
 from django import forms
 from django.conf import settings
 from django.contrib import messages
@@ -422,7 +422,7 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
 
         self.request.session[PARTNERS_SESSION_KEY] = partner_id
 
-        partners = Partner.objects.filter(id=partner_id)
+        partners = get_object_or_404(Partner, id=partner_id)
         try:
             assert partners.count() == 1
         except AssertionError:
