@@ -5,12 +5,13 @@
 # Author: Mirzali
 # Author: TmY e12
 # Author: UY Scuti
+# Author: Ömer faruk çakmak
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-02-20 16:39+0000\n"
-"PO-Revision-Date: 2019-02-25 10:00:43+0000\n"
+"PO-Revision-Date: 2019-03-21 10:08:23+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -272,7 +273,7 @@ msgstr "Başvuru tarihi"
 #. Translators: This labels the section of an application showing how many days it has been since the application was opened.
 #: TWLight/applications/templates/applications/application_evaluation.html:50
 msgid "Days open"
-msgstr ""
+msgstr "Açık olduğu günler"
 
 #. Translators: This labels the section of an application showing how many days it has been since the application was closed.
 #: TWLight/applications/templates/applications/application_evaluation.html:58
@@ -742,7 +743,7 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:21
 msgid "Message"
-msgstr ""
+msgstr "Mesaj"
 
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
@@ -861,7 +862,7 @@ msgstr ""
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
 #: TWLight/emails/templates/emails/contact.html:56
 msgid "IRC"
-msgstr ""
+msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:64
