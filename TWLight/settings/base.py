@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Base settings for TWLight project.
 
@@ -112,18 +113,23 @@ INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 # ------------------------------------------------------------------------------
 
 MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    # WhiteNoise should be loaded before everything but security.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # LocaleMiddleware must go after Session (and Cache, if used), but before
     # Common.
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # The default storage backend relies on sessions.
+    # That’s why SessionMiddleware must be enabled and appear before
+    # MessageMiddleware.
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 ]
 
 
@@ -250,7 +256,7 @@ TEMPLATES = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # MEDIA FILE CONFIGURATION
 # ------------------------------------------------------------------------------
