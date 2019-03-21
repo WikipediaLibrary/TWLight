@@ -6,6 +6,7 @@ env:
     - PIP_USE_MIRRORS=true
     - TWLIGHT_UNIXNAME=travis
     - TWLIGHT_MISSING_MIGRATIONS=$(git ls-files --others --exclude-standard 'TWLight/*/migrations/*.py' | wc -l)
+    - DJANGO_DB_HOST=127.0.0.1
 
 language: python
 
