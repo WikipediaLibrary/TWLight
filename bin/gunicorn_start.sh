@@ -19,7 +19,7 @@ timeout=300
 
 cd $TWLIGHT_HOME
 # Find gunicorn in the virtualenv
-source "/app/bin/virtualenv_activate.sh"
+source "bin/virtualenv_activate.sh"
 export PYTHONPATH=$TWLIGHT_HOME:$PYTHONPATH
 export PATH=${PATH}:/opt/pandoc-2.7.1/bin
 
@@ -36,4 +36,4 @@ exec gunicorn ${django_wsgi_module}:application \
   --timeout $timeout \
   --bind=-0.0.0.0:80 \
   ${localopts} \
-#  --log-file=${TWLIGHT_HOME}/TWLight/logs/gunicorn.log
+
