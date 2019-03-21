@@ -2,6 +2,17 @@
 
 The Wikipedia Library Card Platform app, available at http://wikipedialibrary.wmflabs.org.
 
+## Installation
+
+- Get Docker and Docker Compose
+- copy [twlight config](conf/local.twlight.env) to `./twlight.env` and edit as necessary.
+- copy [db config](conf/local.db.env) to `./db.env` and edit as necessary.
+
+
+## Management
+
+- fire up an empty TWLight instance `docker-compose build && docker-compose up`
+- run migrations `docker-compose exec twlight /app/bin/virtualenv_migrate.sh`
 
 See [twlight_puppet](https://github.com/WikipediaLibrary/twlight_puppet) if you want to set things up on WMF servers, and [twlight_vagrant](https://github.com/WikipediaLibrary/twlight_vagrant) if you want to change things.
 
