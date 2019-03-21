@@ -5,17 +5,15 @@ The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
 """
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import include, static, url
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
-from django.views.static import serve
 import django
 
-import os
 
 import TWLight.i18n.views
 import TWLight.i18n.urls
@@ -99,12 +97,5 @@ urlpatterns = [
     url(r'^activity/$',
         HomePageView.as_view(template_name='activity.html'),
         name='activity'),
-]
-
-# Use inefficient but convenient method for serving media in local environments.
-if os.environ.get('DJANGO_SETTINGS_MODULE') == 'TWLight.settings.local':
-    urlpatterns += [
-        url(r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'),
-            serve, {'document_root': settings.MEDIA_ROOT}),
-    ]
+] + static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
