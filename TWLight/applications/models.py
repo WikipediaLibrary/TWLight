@@ -299,7 +299,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
         instance.date_closed = instance.date_closed.date()
 
     if instance.id:
-        orig_app = Application.objects.get(pk=instance.id)
+        orig_app = Application.include_invalid.get(pk=instance.id)
         orig_status = orig_app.status
         if all([orig_status not in Application.FINAL_STATUS_LIST,
                 int(instance.status) in Application.FINAL_STATUS_LIST,
