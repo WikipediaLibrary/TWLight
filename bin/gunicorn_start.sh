@@ -12,7 +12,6 @@ then
 fi
 
 name="twlight"
-sockfile=${TWLIGHT_HOME}/run/gunicorn.sock
 django_wsgi_module=TWLight.wsgi
 # This is configurable: http://docs.gunicorn.org/en/stable/design.html#how-many-workers
 num_workers=3
@@ -20,8 +19,9 @@ timeout=300
 
 cd $TWLIGHT_HOME
 # Find gunicorn in the virtualenv
-source "/home/${TWLIGHT_UNIXNAME}/TWLight/bin/activate"
+source "/app/bin/virtualenv_activate.sh"
 export PYTHONPATH=$TWLIGHT_HOME:$PYTHONPATH
+export PATH=${PATH}:/opt/pandoc-2.7.1/bin
 
 # Create the run directory if it doesn't exist
 rundir=$(dirname $sockfile)
@@ -34,6 +34,6 @@ exec gunicorn ${django_wsgi_module}:application \
   --user $TWLIGHT_UNIXNAME \
   --workers $num_workers \
   --timeout $timeout \
-  --bind=unix:$sockfile \
+  --bind=-0.0.0.0:80 \
   ${localopts} \
-  --log-file=${TWLIGHT_HOME}/TWLight/logs/gunicorn.log
+#  --log-file=${TWLIGHT_HOME}/TWLight/logs/gunicorn.log

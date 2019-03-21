@@ -4,25 +4,41 @@ ENV PYTHONUNBUFFERED 1
 ENV TWLIGHT_HOME=/app
 
 WORKDIR /root/
-COPY bin/apk.sh /app/apk.sh
+
+# System dependencies.
+COPY bin/alpine_dependencies.sh /app/alpine_dependencies.sh
+
+# Pip dependencies.
+COPY requirements /app/requirements
+
+# Gunicorn shell wrapper.
+COPY bin/gunicorn_start.sh /app/bin/gunicorn_start.sh
+
+# Utility scripts.
+COPY bin/twlight_backup.sh /app/bin/twlight_backup.sh
+COPY bin/twlight_mysqldump.sh /app/bin/twlight_mysqldump.sh
+COPY bin/twlight_mysqlimport.sh /app/bin/twlight_mysqlimport.sh
+COPY bin/twlight_restore.sh /app/bin/twlight_restore.sh
+
+# Utility scripts that run in the virtual environment.
 COPY bin/virtualenv_activate.sh /app/bin/virtualenv_activate.sh
 COPY bin/virtualenv_migrate.sh /app/bin/virtualenv_migrate.sh
 COPY bin/virtualenv_pip_update.sh /app/bin/virtualenv_pip_update.sh
-COPY requirements /app/requirements
+
+# i18n.
+COPY bin/twlight_cssjanus.js /app/bin/twlight_cssjanus.js
 COPY locale /app/locale
 
-RUN /app/apk.sh
+RUN /app/alpine_dependencies.sh
 
 WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
 
-RUN echo "export PYTHONPATH=\"/usr/lib/python2.7\"; export PYTHONPATH=\"\${PYTHONPATH}:${TWLIGHT_HOME}\"" > /etc/profile.d/pypath.sh && \
-    /app/bin/virtualenv_pip_update.sh
+RUN /app/bin/virtualenv_pip_update.sh
 
 COPY TWLight /app/TWLight
-COPY local_vars.py /app/TWLight/settings/local_vars.py
 
 EXPOSE 80
 
-CMD ["/root/TWLight/bin/gunicorn", "TWLight.wsgi", "--name", "twlight", "--bind", "0.0.0.0:80", "--workers", "3"]
+CMD ["/app/bin/gunicorn_start.sh"]

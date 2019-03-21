@@ -13,10 +13,10 @@ fi
 PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 
 mysqlimport_file=${1}
-mysqlhost=localhost
+mysqlhost=${DJANGO_DB_HOST}
 mysqldb=twlight
 mysqluser=twlight
-mysqlpass=$(cat ${TWLIGHT_HOME}/TWLight/settings/${TWLIGHT_ENV}_vars.py | grep ^MYSQL_PASSWORD | cut -d "=" -f 2 | xargs)
+mysqlpass=${MYSQL_PASSWORD}
 
 echo "Importing TWLight database"
 
