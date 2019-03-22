@@ -1019,7 +1019,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                     code_object.authorization = Authorization.objects.get(
                         authorized_user=application.user,
                         partner=application.partner,
-                        stream=application.stream)
+                        stream=application.specific_stream)
                 else:
                     code_object.authorization = Authorization.objects.get(
                         authorized_user=application.user,
