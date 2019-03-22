@@ -2,21 +2,22 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from faker import Faker
 import random
+from mock import patch
 
-from django.test import Client
+from django.test import Client, RequestFactory
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
+from TWLight.applications.views import SendReadyApplicationsView
 from TWLight.resources.models import Partner, Stream, AccessCode
 
 def logged_in_example_coordinator(client, coordinator):
     """
-    The use of the @login_required decorator on many views precludes the use of
-    factories for many tests. This method creates an Editor logged into a test
-    client session.
+    Creates a logged in coordinator user. Compacted version of EditorCraftRoom
+    used in tests.
     """
     terms_url = reverse('terms')
 
@@ -24,16 +25,11 @@ def logged_in_example_coordinator(client, coordinator):
     coordinator.save()
 
     # Log user in
-    client = Client()
+    client = Client(SERVER_NAME='twlight.vagrant.localdomain')
     session = client.session
     client.login(username=coordinator.username, password='editor')
 
-    terms = client.get(terms_url, follow=True)
-    terms_form = terms.context['form']
-    data = terms_form.initial
-    data['terms_of_use'] = True
-    data['submit'] = True
-    agree = client.post(terms_url, data)
+    coordinator.terms_of_use = True
 
     return coordinator
 
@@ -60,7 +56,11 @@ class Command(BaseCommand):
 
         for _ in range(num_applications):
             random_user = random.choice(all_users)
-            random_partner = random.choice(available_partners)
+            # Limit to partners this user hasn't already applied to.
+            not_applied_partners = available_partners.exclude(
+                applications__editor=random_user.editor
+                )
+            random_partner = random.choice(not_applied_partners)
 
             app = ApplicationFactory(
                 editor = random_user.editor,
@@ -94,10 +94,10 @@ class Command(BaseCommand):
                 app.comments = "Imported on 2017-07-17"
                 app.imported = True
             else:
-                app.status = random.choice(valid_choices)[0]
+                app.status = random.choice(valid_choices)
 
                 # Figure out earliest valid date for this app
-                if random_user.editor.wp_registered < import_date:
+                if random_user.editor.wp_registered < import_date.date():
                     start_date = import_date
                 else:
                     start_date = random_user.editor.wp_registered
@@ -129,10 +129,14 @@ class Command(BaseCommand):
         # than 3 weeks ago as Sent.
         old_approved_apps = Application.objects.filter(
             status=Application.APPROVED,
-            date_created__lte=datetime.now() - relativedelta(weeks=3)
+            date_created__lte=datetime.datetime.now() - relativedelta(weeks=3)
             )
+
+        # We need to be able to handle messages
+        message_patcher = patch('TWLight.applications.views.messages.add_message')
+        message_patcher.start()
         for approved_app in old_approved_apps:
-            client = Client()
+            client = Client(SERVER_NAME='twlight.vagrant.localdomain')
             coordinator = logged_in_example_coordinator(client, approved_app.partner.coordinator)
             this_partner_access_codes = AccessCode.objects.filter(
                                 partner=approved_app.partner,
@@ -156,7 +160,7 @@ class Command(BaseCommand):
 
             request.user = coordinator
 
-            response = views.SendReadyApplicationsView.as_view()(
+            response = SendReadyApplicationsView.as_view()(
                 request, pk=approved_app.partner.pk)
 
         # Renew a selection of sent apps.
