@@ -325,7 +325,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
 # the user from the previously saved version.
 @receiver(post_save, sender=Application)
 def post_revision_commit(sender, instance, **kwargs):
-    if reversion.is_active() and (instance.status == 2 or instance.status == 4) and not instance.imported:
+    if reversion.is_active() and instance.status == Application.SENT and not instance.imported:
 
         authorized_user = instance.user
         authorizer = reversion.get_user()
