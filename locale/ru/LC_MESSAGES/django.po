@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Athena Atterdag
+# Author: Diralik
 # Author: Infovarius
 # Author: Nk88
 # Author: Okras
@@ -12,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-02-20 16:39+0000\n"
-"PO-Revision-Date: 2019-02-25 10:00:43+0000\n"
+"PO-Revision-Date: 2019-03-25 18:12:14+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -492,7 +493,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:42
 #: TWLight/applications/templates/applications/application_list_user_include.html:37
 msgid "Not yet reviewed."
-msgstr "Еще не проверено."
+msgstr "Ещё не проверено."
 
 #: TWLight/applications/templates/applications/application_list_include.html:64
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:74
