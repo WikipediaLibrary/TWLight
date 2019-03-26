@@ -11,6 +11,7 @@ services:
       - db.env
 
   twlight:
+    image: twlight:latest
     build: .
     volumes:
       - type: bind
