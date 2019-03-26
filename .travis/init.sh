@@ -11,9 +11,6 @@ npm install --prefix ~ cssjanus
 # Create databases.
 mysql < .travis/db.sql
 
-# Write config file.
-cp .travis/local_vars.py TWLight/settings/local_vars.py
-
 # Ensure static dir exists.
 mkdir -p TWLight/collectedstatic
 
