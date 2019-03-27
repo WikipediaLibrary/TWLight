@@ -27,7 +27,7 @@ from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.factories import EditorFactory, UserFactory
 from TWLight.users.groups import get_coordinators, get_restricted
-from TWLight.users.models import Editor
+from TWLight.users.models import Authorization, Editor
 
 from . import views
 from .helpers import (USER_FORM_FIELDS,
@@ -2770,6 +2770,13 @@ class MarkSentTest(TestCase):
         self.url = reverse('applications:send_partner',
             kwargs={'pk': self.partner.pk})
 
+        # Set up an access code to distribute
+        self.access_code = AccessCode(
+            code='ABCD-EFGH-IJKL',
+            partner=self.partner
+        )
+        self.access_code.save()
+
         self.message_patcher = patch('TWLight.applications.views.messages.add_message')
         self.message_patcher.start()
 
@@ -2961,19 +2968,13 @@ class MarkSentTest(TestCase):
         # For access code partners, coordinators assign a code to an
         # application rather than simply marking it sent.
 
-        # Set up an access code to distribute
-        access_code = AccessCode()
-        access_code.code = 'ABCD-EFGH-IJKL'
-        access_code.partner = self.partner
-        access_code.save()
-
         self.partner.authorization_method = Partner.CODES
         self.partner.save()
 
         request = RequestFactory().post(self.url,
             data={'accesscode': ["{app_pk}_{code}".format(
                 app_pk=self.app1.pk,
-                code=access_code.code)]})
+                code=self.access_code.code)]})
         request.user = self.user
 
         response = views.SendReadyApplicationsView.as_view()(
@@ -2982,3 +2983,77 @@ class MarkSentTest(TestCase):
         # Expected success condition: redirect back to the original page.
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, self.url)
+
+    def test_access_code_object(self):
+        # After a coordinator sends an access code via the send interface,
+        # make sure the resulting access code object has the correct
+        # properties.
+
+        self.partner.authorization_method = Partner.CODES
+        self.partner.save()
+
+        request = RequestFactory().post(self.url,
+            data={'accesscode': ["{app_pk}_{code}".format(
+                app_pk=self.app1.pk,
+                code=self.access_code.code)]})
+        request.user = self.user
+
+        _ = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        self.access_code.refresh_from_db()
+
+        # Get what should be the only authorization for this user-partner
+        # combination.
+        authorization = Authorization.objects.get(
+            authorized_user = self.app1.user,
+            partner = self.app1.partner)
+
+        # Check that the code has been linked to the authorization
+        self.assertEqual(self.access_code.authorization, authorization)
+
+    def test_authorizations_email(self):
+        # In the distribution_method == EMAIL case, make sure that
+        # an authorization object with the correct information is
+        # created after a coordinator marks an application as sent.
+
+        self.partner.authorization_method = Partner.EMAIL
+        self.partner.save()
+
+        request = RequestFactory().post(self.url,
+            data={'applications': [self.app1.pk]})
+        request.user = self.user
+
+        _ = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        authorization_object_exists = Authorization.objects.filter(
+            authorized_user = self.app1.user,
+            partner = self.app1.partner,
+        ).exists()
+
+        self.assertTrue(authorization_object_exists)
+
+    def test_authorizations_codes(self):
+        # In the distribution_method == CODES case, make sure that
+        # an authorization object with the correct information is
+        # created after a coordinator marks an application as sent.
+
+        self.partner.authorization_method = Partner.CODES
+        self.partner.save()
+
+        request = RequestFactory().post(self.url,
+            data={'accesscode': ["{app_pk}_{code}".format(
+                app_pk=self.app1.pk,
+                code=self.access_code.code)]})
+        request.user = self.user
+
+        _ = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        authorization_object_exists = Authorization.objects.filter(
+            authorized_user = self.app1.user,
+            partner = self.app1.partner,
+        ).exists()
+
+        self.assertTrue(authorization_object_exists)
