@@ -272,34 +272,19 @@ MEDIA_URL = '/media/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'formatters': {
-        'brief': {
-            'format': '%(asctime)s %(levelname)s %(name)s[%(funcName)s]: %(message)s',
-        },
-    },
     'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'twlight.log'),
-            'maxBytes': 1024*1024*5, # 5 MB
-            'backupCount': 5,
-            'formatter': 'brief',
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
+    # Catch all loggers and stream them to STDOUT/STDERR
     'loggers': {
         '': {
-            'handlers': ['file'],
-            'level': 'INFO',
-        }
-    }
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
 }
-
 
 # ------------------------------------------------------------------------------
 # -----------------> third-party and TWLight configurations <-------------------
