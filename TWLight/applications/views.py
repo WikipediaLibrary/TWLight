@@ -19,7 +19,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import IntegerField, Case, When, Count, Q
@@ -966,14 +966,21 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             # instead of a string, and then you can use it as desired.
             app_pks = request.POST.getlist('applications')
 
-            try:
-                self.get_object().applications.filter(pk__in=app_pks).update(
-                    status=Application.SENT, sent_by=request.user)
-            except ValueError:
-                # This will be raised if something that isn't a number gets posted
-                # as an app pk.
-                logger.exception('Invalid value posted')
-                return HttpResponseBadRequest()
+            for app_pk in app_pks:
+                try:
+                    application = self.get_object().applications.get(pk=app_pk)
+                    application.status = Application.SENT
+                    application.sent_by = request.user
+                    application.save()
+                except ValueError:
+                    # This will be raised if something that isn't a number gets posted
+                    # as an app pk.
+                    logger.exception('Invalid value posted')
+                    return HttpResponseBadRequest()
+                except ObjectDoesNotExist:
+                    # It would be odd that this situation should arise outside
+                    # of tests, but we should handle it there at least.
+                    continue
 
         elif self.get_object().authorization_method == Partner.CODES:
             try:
