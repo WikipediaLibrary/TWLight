@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-03-27 12:16+0000\n"
+"POT-Creation-Date: 2019-03-27 12:22+0000\n"
 "PO-Revision-Date: 2019-02-25 10:00:43+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -297,7 +297,7 @@ msgstr "Status"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:75
-#: TWLight/applications/views.py:511 TWLight/applications/views.py:588
+#: TWLight/applications/views.py:514 TWLight/applications/views.py:591
 #: TWLight/templates/dashboard.html:112
 msgid "Partner"
 msgstr "Partner"
@@ -695,76 +695,76 @@ msgid ""
 msgstr ""
 
 #. Translators: Editor = wikipedia editor, gender unknown.
-#: TWLight/applications/views.py:510 TWLight/applications/views.py:587
+#: TWLight/applications/views.py:513 TWLight/applications/views.py:590
 msgid "Editor"
 msgstr "Redigerare"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
-#: TWLight/applications/views.py:627
+#: TWLight/applications/views.py:630
 msgid "Applications to review"
 msgstr "Ansökningar att granska"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
-#: TWLight/applications/views.py:661
+#: TWLight/applications/views.py:664
 #: TWLight/resources/templates/resources/partner_users.html:19
 msgid "Approved applications"
 msgstr "Godkända ansökningar"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
-#: TWLight/applications/views.py:687
+#: TWLight/applications/views.py:690
 msgid "Rejected applications"
 msgstr "Avvisade ansökningar"
 
 #. Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
-#: TWLight/applications/views.py:720
+#: TWLight/applications/views.py:723
 msgid "Access grants up for renewal"
 msgstr ""
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
-#: TWLight/applications/views.py:746
+#: TWLight/applications/views.py:749
 #: TWLight/resources/templates/resources/partner_users.html:81
 msgid "Sent applications"
 msgstr "Skickade ansökningar"
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
-#: TWLight/applications/views.py:774
+#: TWLight/applications/views.py:777
 msgid "You attempted to create a duplicate authorization."
 msgstr ""
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:802
+#: TWLight/applications/views.py:805
 msgid "Set application status"
 msgstr "Ändra ansökningsstatus"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:833
+#: TWLight/applications/views.py:836
 msgid "Please select at least one application."
 msgstr "Välj minst en ansökning"
 
-#: TWLight/applications/views.py:853
+#: TWLight/applications/views.py:856
 msgid "Batch update successful."
 msgstr ""
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1002
+#: TWLight/applications/views.py:1005
 msgid "Error: Code used multiple times."
 msgstr ""
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1024
+#: TWLight/applications/views.py:1027
 msgid "All selected applications have been marked as sent."
 msgstr "Alla markerade ansökningar har markerats som skickade."
 
-#: TWLight/applications/views.py:1073
+#: TWLight/applications/views.py:1076
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr ""
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1079
+#: TWLight/applications/views.py:1082
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
