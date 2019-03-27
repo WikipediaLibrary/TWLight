@@ -1,27 +1,40 @@
 FROM library/alpine:latest
 
 ENV PYTHONUNBUFFERED 1
+
 ENV TWLIGHT_HOME=/app
 
 WORKDIR /root/
 
 # System dependencies.
-COPY bin/alpine_dependencies.sh /app/alpine_dependencies.sh
-RUN /app/alpine_dependencies.sh
+RUN apk add --update \
+    bash \
+    build-base \
+    gcc \
+    jpeg-dev zlib-dev \
+    libxml2-dev libxslt-dev \
+    musl-dev \
+    mariadb-client \
+    mariadb-dev \
+    python python-dev py-pip \
+    py-psycopg2 \
+    tar ;\
+    # Python setup.
+    pip install virtualenv ;\
+    echo "export PYTHONPATH=\"/usr/lib/python2.7\"; export PYTHONPATH=\"\${PYTHONPATH}:${TWLIGHT_HOME}\"" > /etc/profile.d/pypath.sh ; \
+    # Pandoc is used for rendering wikicode resource descriptions into html for display. \
+    wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-linux.tar.gz -P /tmp ; \
+    tar -xf /tmp/pandoc-2.7.1-linux.tar.gz --directory /opt ; \
+    echo "export PATH=\"\${PATH}:/opt/pandoc-2.7.1/bin\"" > /etc/profile.d/pandocpath.sh ; \
+    echo "\
+    . /etc/profile\
+    " >> /root/.profile
 
 # Pip dependencies.
 COPY requirements /app/requirements
 
-# Utility scripts.
-COPY bin/twlight_backup.sh /app/bin/twlight_backup.sh
-COPY bin/twlight_mysqldump.sh /app/bin/twlight_mysqldump.sh
-COPY bin/twlight_mysqlimport.sh /app/bin/twlight_mysqlimport.sh
-COPY bin/twlight_restore.sh /app/bin/twlight_restore.sh
-
 # Utility scripts that run in the virtual environment.
-COPY bin/virtualenv_activate.sh /app/bin/virtualenv_activate.sh
-COPY bin/virtualenv_migrate.sh /app/bin/virtualenv_migrate.sh
-COPY bin/virtualenv_pip_update.sh /app/bin/virtualenv_pip_update.sh
+COPY bin/virtualenv_* /app/bin/
 
 # i18n.
 COPY bin/twlight_cssjanus.js /app/bin/twlight_cssjanus.js
@@ -30,7 +43,5 @@ COPY locale /app/locale
 WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
-
 RUN /app/bin/virtualenv_pip_update.sh
-
 EXPOSE 80
