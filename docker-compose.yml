@@ -13,6 +13,7 @@ services:
   twlight:
     image: twlight:latest
     build: .
+    command: bash -c "source /root/TWLight/bin/activate && cd /app && /root/TWLight/bin/gunicorn TWLight.wsgi"
     volumes:
       - type: bind
         source: ./backup
@@ -20,6 +21,12 @@ services:
       - type: bind
         source: ./media
         target: /app/media
+      - type: bind
+        source: ./TWLight
+        target: /app/TWLight
+      - type: bind
+        source: ./logs
+        target: /app/logs
     ports:
       - "80:80"
     depends_on:

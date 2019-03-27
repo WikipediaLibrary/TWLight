@@ -7,12 +7,10 @@ WORKDIR /root/
 
 # System dependencies.
 COPY bin/alpine_dependencies.sh /app/alpine_dependencies.sh
+RUN /app/alpine_dependencies.sh
 
 # Pip dependencies.
 COPY requirements /app/requirements
-
-# Gunicorn shell wrapper.
-COPY bin/gunicorn_start.sh /app/bin/gunicorn_start.sh
 
 # Utility scripts.
 COPY bin/twlight_backup.sh /app/bin/twlight_backup.sh
@@ -29,16 +27,10 @@ COPY bin/virtualenv_pip_update.sh /app/bin/virtualenv_pip_update.sh
 COPY bin/twlight_cssjanus.js /app/bin/twlight_cssjanus.js
 COPY locale /app/locale
 
-RUN /app/alpine_dependencies.sh
-
 WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
 
 RUN /app/bin/virtualenv_pip_update.sh
 
-COPY TWLight /app/TWLight
-
 EXPOSE 80
-
-CMD ["/app/bin/gunicorn_start.sh"]
