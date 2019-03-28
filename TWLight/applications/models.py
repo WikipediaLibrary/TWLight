@@ -332,7 +332,7 @@ def post_revision_commit(sender, instance, **kwargs):
             authorized_user=instance.user,
             partner=instance.partner).exists()
 
-    if instance.status == Application.SENT and not instance.imported: #This work is so close to being done. Final hurdle is that revisions don't get saved with coordinator user when marking sent anymore.
+    if instance.status == Application.SENT and not instance.imported:
 
         authorized_user = instance.user
         authorizer = instance.sent_by

@@ -268,32 +268,6 @@ def send_rejection_notification_email(instance):
         logger.error("Tried to send an email to an editor that doesn't "
             "exist, perhaps because their account is deleted.")
 
-def send_access_code_email(instance):
-    base_url = get_current_site(None).domain
-    authorization_object = Authorization.objects.get(pk=instance.pk)
-    print(type(instance), instance)
-    print(type(authorization_object), authorization_object)
-    print(AccessCode.objects.all().values_list('authorization'))
-
-    try:
-        access_code = AccessCode.objects.get(authorization=authorization_object)
-    except AccessCode.DoesNotExist:
-        logger.error("Tried to send an access code email but couldn't find "
-            "access code object for {authorization}.".format(
-            authorization=instance))
-        return
-
-    access_code_instructions = instance.partner.access_code_instructions
-    mail_instance = MagicMailBuilder()
-
-    email = mail_instance.access_code_email(instance.authorized_user.email,
-        {'editor_wp_username': instance.authorized_user.editor.wp_username,
-         'access_code': access_code.code,
-         'body': access_code_instructions
-         })
-    print("Did we get here at least?")
-    email.send()
-
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):
     """
@@ -350,28 +324,33 @@ def update_app_status_on_save(sender, instance, **kwargs):
                     'but no such handler exists'.format(handler_key=handler_key))
             pass
 
-@receiver(post_save, sender=Authorization)
-def send_authorization_emails(sender, instance, created, **kwargs):
+@receiver(pre_save, sender=AccessCode)
+def send_authorization_emails(sender, instance, **kwargs):
     """
-    When authorization objects are updated, see if we need to
-    send any emails, such as to send access instructions. Unlike
-    application status, this needs to happen after saving so that we
-    have the necessary information to send.
+    When access code objects are updated, check if they should trigger
+    an email to a user.
     """
-    # We'll start mapping options to functions for future use
-    handlers = {
-        'send_access_codes': send_access_code_email,
-    }
 
-    handler_key = None
+    # The AccessCode should already exist, don't trigger on code creation.
+    if instance.id:
+        orig_code = AccessCode.objects.get(pk=instance.id)
+        # If this code is having an authorization added where it didn't
+        # have one before, we've probably just finalised an application
+        # and therefore want to send an email.
+        if not orig_code.authorization and instance.authorization:
 
-    # New authorization
-    if created:
-        if instance.partner.authorization_method == Partner.CODES:
-            handler_key = 'send_access_codes'
+            base_url = get_current_site(None).domain
 
-    if handler_key:
-        handlers[handler_key](instance)
+            access_code_instructions = instance.partner.access_code_instructions
+            mail_instance = MagicMailBuilder()
+
+            email = mail_instance.access_code_email(instance.authorization.authorized_user.email,
+                {'editor_wp_username': instance.authorization.authorized_user.editor.wp_username,
+                 'partner': instance.partner,
+                 'access_code': instance.code,
+                 'body': access_code_instructions
+                 })
+            email.send()
 
 @receiver(pre_save, sender=Partner)
 def notify_applicants_when_waitlisted(sender, instance, **kwargs):

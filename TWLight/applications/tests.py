@@ -3066,7 +3066,6 @@ class MarkSentTest(TestCase):
         # outbox has two emails in by default, from creating two approved
         # applications during setup. So let's empty it for clarity.
         mail.outbox = []
-        print("Testing email")
 
         self.partner.authorization_method = Partner.CODES
         self.partner.save()
@@ -3080,7 +3079,8 @@ class MarkSentTest(TestCase):
         response = views.SendReadyApplicationsView.as_view()(
             request, pk=self.partner.pk)
 
-        self.access_code.refresh_from_db()
-        print(self.access_code.authorization)
         # We expect that one email should now be sent.
         self.assertEqual(len(mail.outbox), 1)
+
+        # The email should contain the assigned access code.
+        self.assertTrue(self.access_code.code in mail.outbox[0].body)
