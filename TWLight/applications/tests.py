@@ -15,6 +15,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.sites.models import Site
+from django.core import mail
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
@@ -3057,3 +3058,29 @@ class MarkSentTest(TestCase):
         ).exists()
 
         self.assertTrue(authorization_object_exists)
+
+    def test_access_codes_email(self):
+        # For access code partners, when applications are marked sent,
+        # access codes should be sent automatically via email.
+
+        # outbox has two emails in by default, from creating two approved
+        # applications during setup. So let's empty it for clarity.
+        mail.outbox = []
+        print("Testing email")
+
+        self.partner.authorization_method = Partner.CODES
+        self.partner.save()
+
+        request = RequestFactory().post(self.url,
+            data={'accesscode': ["{app_pk}_{code}".format(
+                app_pk=self.app1.pk,
+                code=self.access_code.code)]})
+        request.user = self.user
+
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        self.access_code.refresh_from_db()
+        print(self.access_code.authorization)
+        # We expect that one email should now be sent.
+        self.assertEqual(len(mail.outbox), 1)
