@@ -9,7 +9,6 @@ services:
       - "3306:3306"
     env_file:
       - db.env
-
   twlight:
     image: twlight:latest
     build: .
@@ -27,9 +26,23 @@ services:
       - type: bind
         source: ./logs
         target: /app/logs
-    ports:
-      - "80:80"
     depends_on:
       - 'db'
     env_file:
       - twlight.env
+  web:
+    image: nginx:latest
+    volumes:
+      - type: bind
+        source: ./conf/${TWLIGHT_ENV}.nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+      - type: bind
+        source: ./media
+        target: /app/media
+      - type: bind
+        source: ./TWLight/templates/500
+        target: /app/500
+    ports:
+      - "80:80"
+    depends_on:
+      - 'twlight'

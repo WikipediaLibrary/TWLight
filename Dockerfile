@@ -1,8 +1,9 @@
 FROM library/alpine:latest
 
-ENV PYTHONUNBUFFERED 1
-
+ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin"
 ENV TWLIGHT_HOME=/app
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python2.7:${TWLIGHT_HOME}"
 
 WORKDIR /root/
 
@@ -16,25 +17,27 @@ RUN apk add --update \
     musl-dev \
     mariadb-client \
     mariadb-dev \
+    nodejs \
+    npm \
     python python-dev py-pip \
     py-psycopg2 \
     tar ;\
+    # Node.js setup.
+    npm install cssjanus ; \
     # Python setup.
-    pip install virtualenv ;\
-    echo "export PYTHONPATH=\"/usr/lib/python2.7\"; export PYTHONPATH=\"\${PYTHONPATH}:${TWLIGHT_HOME}\"" > /etc/profile.d/pypath.sh ; \
-    # Pandoc is used for rendering wikicode resource descriptions into html for display. \
+    pip install virtualenv ; \
+    # Pandoc is used for rendering wikicode resource descriptions into html for display.
     wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-linux.tar.gz -P /tmp ; \
-    tar -xf /tmp/pandoc-2.7.1-linux.tar.gz --directory /opt ; \
-    echo "export PATH=\"\${PATH}:/opt/pandoc-2.7.1/bin\"" > /etc/profile.d/pandocpath.sh ; \
-    echo "\
-    . /etc/profile\
-    " >> /root/.profile
+    tar -xf /tmp/pandoc-2.7.1-linux.tar.gz --directory /opt
 
 # Pip dependencies.
 COPY requirements /app/requirements
 
 # Utility scripts that run in the virtual environment.
-COPY bin/virtualenv_* /app/bin/
+COPY bin/virtualenv_*.sh /app/bin/
+
+# Other utility scripts.
+COPY bin/twlight_*.sh /app/bin/
 
 # i18n.
 COPY bin/twlight_cssjanus.js /app/bin/twlight_cssjanus.js

@@ -92,8 +92,8 @@ flock -n ${lockfile}
             # Update pip dependencies.
             sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_pip_update.sh
 
-            # Process static assets.
-            sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_clearstatic.sh
+            # Generate RTL CSS.
+            sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/twlight_cssjanus.sh
 
             # Run migrations.
             sudo su ${TWLIGHT_UNIXNAME} ${TWLIGHT_HOME}/bin/virtualenv_migrate.sh

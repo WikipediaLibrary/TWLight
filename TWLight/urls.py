@@ -97,5 +97,5 @@ urlpatterns = [
     url(r'^activity/$',
         HomePageView.as_view(template_name='activity.html'),
         name='activity'),
-] + static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 

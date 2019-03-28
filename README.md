@@ -7,6 +7,7 @@ The Wikipedia Library Card Platform app, available at http://wikipedialibrary.wm
 - Get Docker and Docker Compose
 - copy [twlight config](conf/local.twlight.env) to `./twlight.env` and edit as necessary.
 - copy [db config](conf/local.db.env) to `./db.env` and edit as necessary.
+- copy [host .env](conf/local..env) to `./.env`.
 - configure your browser to use the [twlight proxy configuration file](conf/local.twlight.pac). If your browser expects a proxy configuration URL, you can enter a file url like: `file:///C:/<username>/TWLight/conf/local.twlight.pac`
 
 
