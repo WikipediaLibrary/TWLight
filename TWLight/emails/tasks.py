@@ -135,7 +135,7 @@ def send_comment_notification_emails(sender, **kwargs):
 
     # If the editor who owns this application was not the comment poster, notify
     # them of the new comment.
-    if current_comment.user_email != app.editor.user.email:
+    if current_comment.user != app.editor.user:
         if app.editor.user.email:
             logger.info('we should notify the editor')
             email = CommentNotificationEmailEditors()
