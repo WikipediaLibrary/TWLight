@@ -30,8 +30,7 @@ class Command(BaseCommand):
                 renewals_available = random.choice([True, False]),
                 short_description = fake.paragraph(nb_sentences=4),
                 send_instructions = fake.paragraph(nb_sentences=2),
-                coordinator = self.chance(
-                    random.choice(coordinators), None, 20),
+                coordinator = random.choice(coordinators),
                 real_name = self.chance(True, False, 40),
                 country_of_residence = self.chance(True, False, 20),
                 specific_title = self.chance(True, False, 10),

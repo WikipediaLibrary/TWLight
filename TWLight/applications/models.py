@@ -281,20 +281,19 @@ class Application(models.Model):
 
 # IMPORTANT: pre_save is not sent by Queryset.update(), so *none of this
 # behavior will happen on if you update() an Application queryset*.
-# That is sometimes okay (for instance, if you are turning an APPROVED app into
-# a SENT app, since days_open and date_closed were set on approval), but it is
-# not always okay. Errors caused by days_open not existing when expected to
+# That is sometimes okay, but it is not always okay.
+# Errors caused by days_open not existing when expected to
 # exist can show up in weird parts of the application (for example, template
 # rendering failing when get_num_days_open returns None but its output is
 # passed to a template filter that needs an integer).
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):
 
-    # Make sure not using a mix of dates and dateimes
+    # Make sure not using a mix of dates and datetimes
     if instance.date_created and isinstance(instance.date_created, datetime):
         instance.date_created = instance.date_created.date()
 
-    # Make sure not using a mix of dates and dateimes
+    # Make sure not using a mix of dates and datetimes
     if instance.date_closed and isinstance(instance.date_closed, datetime):
         instance.date_closed = instance.date_closed.date()
 
@@ -319,16 +318,24 @@ def update_app_status_on_save(sender, instance, **kwargs):
             instance.date_closed = localtime(now()).date()
             instance.days_open = 0
 
-# Authorize editor to access resource after an application is saved as approved
-# or sent. We need to use post_revision_commit from django-reversion to get the
-# **current** revision user. Just listening to the post_save signal will grab
-# the user from the previously saved version.
+# Authorize editor to access resource after an application is saved as sent.
 @receiver(post_save, sender=Application)
 def post_revision_commit(sender, instance, **kwargs):
-    if reversion.is_active() and (instance.status == 2 or instance.status == 4) and not instance.imported:
+    # Check if an authorization already exists.
+    if instance.specific_stream:
+        existing_authorization = Authorization.objects.filter(
+            authorized_user=instance.user,
+            partner=instance.partner,
+            stream=instance.specific_stream).exists()
+    else:
+        existing_authorization = Authorization.objects.filter(
+            authorized_user=instance.user,
+            partner=instance.partner).exists()
+
+    if instance.status == Application.SENT and not instance.imported: #This work is so close to being done. Final hurdle is that revisions don't get saved with coordinator user when marking sent anymore.
 
         authorized_user = instance.user
-        authorizer = reversion.get_user()
+        authorizer = instance.sent_by
 
         authorization = Authorization()
 

@@ -19,7 +19,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import IntegerField, Case, When, Count, Q
@@ -42,7 +42,7 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  NotDeleted)
 from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Editor
+from TWLight.users.models import Authorization, Editor
 
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
@@ -950,11 +950,6 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             authorization__isnull=True)
         context['available_access_codes'] = available_access_codes
 
-        available_access_codes = AccessCode.objects.filter(
-            partner=self.get_object(),
-            authorization__isnull=True)
-        context['available_access_codes'] = available_access_codes
-
         return context
 
 
@@ -974,14 +969,21 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             # instead of a string, and then you can use it as desired.
             app_pks = request.POST.getlist('applications')
 
-            try:
-                self.get_object().applications.filter(pk__in=app_pks).update(
-                    status=Application.SENT, sent_by=request.user)
-            except ValueError:
-                # This will be raised if something that isn't a number gets posted
-                # as an app pk.
-                logger.exception('Invalid value posted')
-                return HttpResponseBadRequest()
+            for app_pk in app_pks:
+                try:
+                    application = self.get_object().applications.get(pk=app_pk)
+                    application.status = Application.SENT
+                    application.sent_by = request.user
+                    application.save()
+                except ValueError:
+                    # This will be raised if something that isn't a number gets posted
+                    # as an app pk.
+                    logger.exception('Invalid value posted')
+                    return HttpResponseBadRequest()
+                except ObjectDoesNotExist:
+                    # It would be odd that this situation should arise outside
+                    # of tests, but we should handle it there at least.
+                    continue
 
         elif self.get_object().authorization_method == Partner.CODES:
             try:
@@ -1015,12 +1017,24 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 code_object = AccessCode.objects.get(code=app_code,
                     partner=application.partner)
 
-                code_object.application = application
-                code_object.save()
-
                 application.status = Application.SENT
                 application.sent_by = request.user
                 application.save()
+
+                # Access code object needs to be updated after the application
+                # to ensure that the authorization object has been created.
+                # This filtering should only ever find one object. There will
+                # always be a user and partner, and sometimes a stream.
+                if application.specific_stream:
+                    code_object.authorization = Authorization.objects.get(
+                        authorized_user=application.user,
+                        partner=application.partner,
+                        stream=application.specific_stream)
+                else:
+                    code_object.authorization = Authorization.objects.get(
+                        authorized_user=application.user,
+                        partner=application.partner)
+                code_object.save()
 
         messages.add_message(self.request, messages.SUCCESS,
             # Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
