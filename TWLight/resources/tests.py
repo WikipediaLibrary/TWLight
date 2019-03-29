@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 import vcr
 import requests
+import time
 
 from datetime import date, timedelta
 from mock import patch
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
+from django.core.cache import cache
+from django.core.management import call_command
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
@@ -19,6 +22,7 @@ from TWLight.applications.models import Application
 from TWLight.applications.views import RequestApplicationView
 from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFactory
 from TWLight.users.groups import get_coordinators
+from TWLight.view_mixins import APIPartnerDescriptions
 
 from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner
@@ -594,8 +598,8 @@ class PartnerViewTests(TestCase):
 
 
 
-class PartnerDescriptionAPITests(TestCase):
-    fixtures = ['8.yaml']
+class PartnerDescriptionAPITests(APIPartnerDescriptions, TestCase):
+    fixtures = ['TWLight/resources/fixtures/resources_partners.yaml']
 
     @classmethod
     def setUpClass(cls):
@@ -603,8 +607,27 @@ class PartnerDescriptionAPITests(TestCase):
         cls.lang_en, _ = Language.objects.get_or_create(language='en')
 
 
-    @vcr.use_cassette('TWLight/resources/fixtures/vcr_cassettes/short_description_61.yml')
+    @vcr.use_cassette('TWLight/resources/fixtures/vcr_cassettes/short_description_8.yml')
     def test_mediawiki_action_api(self):
-        api_endpoint = settings.DESCRIPTION_API_REQUEST_URL.format(desc_type='Short', partner_pk=61, language_code='en')
-        api_response = requests.get(api_endpoint)
-        json_response = api_response.json()
+        self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'en'})
+        partner = Partner.objects.get(pk=8)
+        cache_key = partner.company_name + 'short_description'
+        if cache.get(cache_key) is None:
+            cache.set(cache_key, 'This is a test description')
+        partner_detail_url = reverse('partners:detail', kwargs={'pk':8})
+        # request = RequestFactory().get(partner_detail_url)
+        # editor =  EditorFactory()
+        # request.user = editor.user
+        # request.LANGUAGE_CODE = 'en'
+        _ = self.client.get(partner_detail_url)
+        # partner_detail = PartnersDetailView.as_view()(request, pk=8)
+        self.assertEqual(_.status_code, 200)
+        self.assertEqual(''.join(dict.values(_.context['short_description'])), 'This is a test description')
+        n = 0
+        time.sleep(5)
+        print cache.get(cache_key) 
+        _ = self.client.get(partner_detail_url)
+        self.assertNotEqual(cache.get(cache_key), 'This is a test description')
+        self.assertNotEqual(''.join(dict.values(_.context['short_description'])), 'This is a test description')
+        # partner_detail = self.client.get(partner_detail_url)
+        # print(partner_detail)

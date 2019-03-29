@@ -7,9 +7,10 @@ coordinator AND must have agreed to the terms of use). If we used that mixin,
 test functions and login URLs would overwrite each other. Using the dispatch
 function and super() means we can chain as many access tests as we'd like.
 """
-import ast
 import requests
 import time
+
+import ast
 
 from bs4 import BeautifulSoup
 
@@ -367,7 +368,7 @@ class APIPartnerDescriptions(object):
         languages_on_revision_field = {}
         languages_on_revision_field = ast.literal_eval(description_metadata)
         current_time = time.time()
-        if user_language not in languages_on_revision_field:
+        if languages_on_revision_field is None or user_language not in languages_on_revision_field:
             return True
         else:
             revision_id_stored_time = languages_on_revision_field[user_language]['timestamp']
@@ -381,13 +382,18 @@ class APIPartnerDescriptions(object):
         languages_on_revision_field = {}
         if description_metadata is not None:
             languages_on_revision_field = ast.literal_eval(description_metadata)
+        else:
+            languages_on_revision_field = {'en': 
+                {'timestamp': 0,
+                  'revision_id': 0
+                }}
+            logger.info(languages_on_revision_field)
         if user_language not in languages_on_revision_field:
             languages_on_revision_field[user_language] = {}
             languages_on_revision_field[user_language]['revision_id'] = 0
             languages_on_revision_field[user_language]['timestamp'] = 0
-        
         description, requested_language, revision_id = self.get_partner_and_stream_descriptions_api(user_language, type, pk=partner.pk)
-        
+        logger.info(partner.company_name)
         last_revision_id = languages_on_revision_field.get(user_language if requested_language else 'en', {}).get('revision_id')
         if int(last_revision_id) == 0 or int(last_revision_id) != revision_id or cache_is_stale or no_cache:
             languages_on_revision_field[user_language if requested_language else 'en'] = {}
@@ -432,7 +438,6 @@ class APIPartnerDescriptions(object):
                     cache.set(cache_key,
                       _('Collection description not available for this collection'), None)
                 logger.info(partner.company_name + u' stream description cache is set')
-
 
 
     def get_partner_and_stream_descriptions_api(self, user_language, type, **kwargs):

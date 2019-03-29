@@ -1,3 +1,5 @@
+import time
+
 from concurrent.futures import Future, ThreadPoolExecutor
 
 from django.contrib import messages
@@ -28,7 +30,7 @@ from .models import Partner, Stream, Suggestion
 import logging
 
 
-executor = ThreadPoolExecutor(max_workers=2)
+executor = ThreadPoolExecutor(max_workers=20)
 
 logger = logging.getLogger(__name__)
 
@@ -111,10 +113,10 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
         user_language = self.request.LANGUAGE_CODE
         cache_is_stale = False
         context['short_description'] = {}
-        
         short_description_metadata = partner.short_description_last_revision_id
         cache_key_short_desc = partner.company_name + 'short_description'
         short_description_cache = cache.get(cache_key_short_desc)
+        logger.info('-------------------------')
         if short_description_cache is None:
             pass
         else:
@@ -131,8 +133,10 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
             # Translators: This text is shown to users when descriptions (short or long or collection) for the partner aren't yet generated from the API
             context['short_description'][partner.pk] = _('Fetching content, please reload')
         else:
+            print('Serving from cache')
             context['short_description'][partner.pk] = short_description_cache
         if cache_is_stale:
+            print('Cache is stale for partner pk: ' + str(partner.pk))
             executor.submit(self.cache_and_revision_field_manipulation, user_language, type='Short', description_metadata=short_description_metadata, partner=partner, cache_is_stale=True)
         
         # Retrieves the long description of this partner from Meta (if available)

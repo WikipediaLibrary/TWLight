@@ -11,27 +11,26 @@ interactions:
       User-Agent:
       - python-requests/2.21.0
     method: GET
-    uri: https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F61/en&prop=text%7Crevid&disablelimitreport=true&contentformat=text/plain
+    uri: https://meta.wikimedia.org/w/api.php?action=parse&format=json&page=Library_Card_platform%2FTranslation%2FPartners%2FShort_description%2F8/en&prop=text%7Crevid&disablelimitreport=true&contentformat=text/plain
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6VS72vbMBD9Vw7B6DbiKIHRZCHLh+7Hp0ELK+xLIJxtxRaRJXGS64WS/30n2+3a
-        ldFBPsSR3p3u3b1798IjBSVW9yLqaPggvuuckI7wGakEbzDuHTXyltAGvmhn5Q1StIqC/FE7ilCq
-        UJD2fehyLpUVE65aKV2K1Xy2WMznl4uJIHXXA8vlYvFx+WEiovoVE+975lyX+g4KgyF82oqmy/qm
-        KHNt9G3cis2LeMwM2qpllgDWedKW0yBhnKAsn0tNfDSRXnnOp1wZTrqOtSJ4xFdrya9eeapDBGyj
-        s8cm0SDUpPacKDt90HJUcpeU3P2HkrvnSvIQ/yJuNQyQJ1eRCuGva5YVrvFGRcVF+sVykTMXC2/n
-        s9kbiGO+Kt89V3zz1VYsSL2WuBm1679bux7//GadJ5FIGX5j3d4Z47onY7IjFFk0kLzB+KhmHaNf
-        Sdl13TQ3zjUhb+k45Qkls149InDT5qkBbauhh3wDOgDCFenIOPghzlt2e4Y7XSrgaSqV7iVGzDGw
-        n9CW3GJwLRUqTOG25iJ+VKbWHlhktnJKLIokfXRw3lDtoatd4N/DTD9rdxGAv2mOyZnVS8IGnTXa
-        KjM44IHmS4rAdR86iym82M4eWSpnC2XZL6YnZNnKtohB5oqqbEzIxpbSIhmGbwMMo1eHrtJCztOg
-        q3XEA+8PTYMWi8MfpYfARUhUUzap9MmqT/wrTqfTb+kZ458nBQAA
+        H4sIAAAAAAAAA6VTbYvUMBD+K0NB8GW36SG6L9SCin4SFE6/LSxpO23jpUmYpFvXY//7Tbr1uBfk
+        BL+0k2denpknk+vESfKYbK+ToIJmI/miSpJ0hI+SanBahsZSL76TNJ4PyhrxTVIwSF5cdpYC1Ogr
+        Um5yrQWaZMFFW1R1sr3IVm83qzevFwnhYQLW61W2WTMQ8FeItC+ZMq/VASotvX+3S/pxOfVESzsE
+        N4RdUjzyh6WWph2YxYOxjpThMIgYB6Bhu1bEpg70RDpbJWoO+ho6JLjFt7ngrCdSlQ8gh2DNsY80
+        EjrChgPFqK6UmIXcRyH3/yDk/p6QPMPfeAcFZ8iRbQm9f3BcLivbO40Buch0rVzk/64Vnl9k2TMI
+        czjWL+7rXXwyLcvR5UIWs3LTd2fy+eeKvIwSEWrOMbaxWtvxzpS8D0hGaoibwfisZReC81shxnFM
+        uWVUrZFNIxX5lKcUvWzlb2V40uLz2Qvvz+5zK2UByoNktEdSFRs/7TDR2AZ4bSJlHJEB7mwyY3gN
+        P9LLFGZCcFar6pjCAwqQhMCq82or00JDiOCH8lY3v4BWHaJLVlW8p2CB1+xRmT9DLAA/WHvFabGD
+        GLnJXsER+TnEdiVVnTqgT1lO4aKod5ROTqfTDeZkL6/OAwAA
     headers:
       accept-ranges:
       - bytes
       age:
       - '0'
       backend-timing:
-      - D=285751 t=1553319990242225
+      - D=378770 t=1553793175808932
       cache-control:
       - private, must-revalidate, max-age=0
       connection:
@@ -41,21 +40,21 @@ interactions:
       content-encoding:
       - gzip
       content-length:
-      - '552'
+      - '492'
       content-type:
       - application/json; charset=utf-8
       date:
-      - Sat, 23 Mar 2019 05:46:30 GMT
+      - Thu, 28 Mar 2019 17:12:56 GMT
       p3p:
       - CP="This is not a P3P policy! See https://meta.wikimedia.org/wiki/Special:CentralAutoLogin/P3P
         for more info."
       server:
-      - mw1276.eqiad.wmnet
+      - mw1281.eqiad.wmnet
       server-timing:
       - cache;desc="pass"
       set-cookie:
-      - WMF-Last-Access=23-Mar-2019;Path=/;HttpOnly;secure;Expires=Wed, 24 Apr 2019
-        00:00:00 GMT
+      - WMF-Last-Access=28-Mar-2019;Path=/;HttpOnly;secure;Expires=Mon, 29 Apr 2019
+        12:00:00 GMT
       - GeoIP=IN:TN:Nagercoil:8.19:77.43:v4; Path=/; secure; Domain=.wikimedia.org
       strict-transport-security:
       - max-age=106384710; includeSubDomains; preload
@@ -67,11 +66,11 @@ interactions:
       x-analytics:
       - ns=-1;special=Badtitle;https=1;nocookies=1
       x-cache:
-      - cp1087 pass, cp2006 pass, cp5012 pass, cp5007 pass
+      - cp1083 pass, cp2004 pass, cp5012 pass, cp5008 pass
       x-cache-status:
       - pass
       x-client-ip:
-      - 59.99.221.251
+      - 117.213.36.179
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -79,7 +78,7 @@ interactions:
       x-powered-by:
       - HHVM/3.18.6-dev
       x-varnish:
-      - 520312112, 71010250, 429540543, 854534930
+      - 44424944, 752515430, 243355662, 105861013
     status:
       code: 200
       message: OK

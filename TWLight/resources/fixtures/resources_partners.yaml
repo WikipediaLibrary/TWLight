@@ -1,0 +1,8 @@
+- model: resources.partner
+  pk: 8
+  fields:
+    company_name: Foreign Affairs
+    company_location: US
+    date_created: 2019-03-20
+    status: 0
+    short_description_last_revision_id: {'en': {'timestamp': 0, 'revision_id': 0}}
