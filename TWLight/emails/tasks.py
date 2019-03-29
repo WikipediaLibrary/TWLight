@@ -329,6 +329,10 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
     When Partners are switched to WAITLIST status, anyone with open applications
     should be notified.
     """
+    # If this is a fixture being loaded, don't continue processing the signal.
+    if kwargs.get('raw'):
+        return
+
     if instance.id:
         orig_partner = get_object_or_404(Partner, pk=instance.id)
 
