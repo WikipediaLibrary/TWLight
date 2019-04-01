@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-03-28 18:47:23+0000\n"
+"PO-Revision-Date: 2019-04-01 18:59:58+0000\n"
 "X-POT-Import-Date: 2019-02-20 19:43:32+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -708,21 +708,21 @@ msgid "Batch update successful."
 msgstr ""
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1005
+#: TWLight/applications/views.py:1007
 msgid "Error: Code used multiple times."
 msgstr ""
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1027
+#: TWLight/applications/views.py:1041
 msgid "All selected applications have been marked as sent."
 msgstr ""
 
-#: TWLight/applications/views.py:1076
+#: TWLight/applications/views.py:1090
 msgid "This object cannot be renewed. (This probably means that you have already requested that it be renewed.)"
 msgstr ""
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1082
+#: TWLight/applications/views.py:1096
 msgid "Your renewal request has been received. A coordinator will review your request."
 msgstr ""
 
