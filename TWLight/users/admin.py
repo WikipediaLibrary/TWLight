@@ -36,6 +36,7 @@ class AuthorizationInline(admin.StackedInline):
 
 class AuthorizationAdmin(admin.ModelAdmin):
     list_display = ('id', 'partner', 'stream', 'get_authorizer_wp_username', 'get_authorized_user_wp_username')
+    search_fields = ['partner__company_name', 'stream__name', 'authorizer__editor__wp_username', 'authorized_user__editor__wp_username']
 
     def get_authorized_user_wp_username(self, authorization):
         if authorization.authorized_user:
@@ -57,6 +58,7 @@ class AuthorizationAdmin(admin.ModelAdmin):
 
     get_authorizer_wp_username.short_description = _('authorizer')
 
+admin.site.register(Authorization, AuthorizationAdmin)
 
 
 class UserAdmin(AuthUserAdmin):
