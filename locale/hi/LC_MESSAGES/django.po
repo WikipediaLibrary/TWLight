@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-04-02 20:56+0000\n"
+"POT-Creation-Date: 2019-04-02 21:32+0000\n"
 "PO-Revision-Date: 2019-04-01 18:59:57+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,8 @@ msgstr ""
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: This text labels a button which users can click to submit an application.
-#. Translators: Shown in the top bar of almost every page, taking users to the page where they apply for access to partner resources.
+#. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and the apply button.
+#. Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners.
 #: TWLight/applications/forms.py:106
 #: TWLight/applications/templates/applications/request_for_application.html:54
 #: TWLight/applications/templates/applications/request_for_application.html:56
@@ -28,7 +29,8 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:77
 #: TWLight/resources/templates/resources/partner_detail.html:137
 #: TWLight/resources/templates/resources/partner_detail.html:139
-#: TWLight/templates/base.html:101
+#: TWLight/resources/templates/resources/partner_tile.html:84
+#: TWLight/templates/base.html:94 TWLight/templates/home.html:49
 msgid "Apply"
 msgstr "आवेदन करें"
 
@@ -964,7 +966,7 @@ msgstr "आपके द्वारा टिप्पणी किये ग�
 #. Translators: This is the title of the form where users can send messages to the Wikipedia Library team.
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/base.html:270
+#: TWLight/templates/base.html:262
 msgid "Contact us"
 msgstr "हमें संपर्क करें"
 
@@ -1851,7 +1853,7 @@ msgstr "उपयोग की शर्तें उपलब्ध नही�
 #. Translators: This is the heading for the section of a partner page showing data about applications to that partner.
 #. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
 #: TWLight/resources/templates/resources/partner_detail.html:472
-#: TWLight/templates/base.html:134
+#: TWLight/templates/base.html:126
 msgid "Metrics"
 msgstr "मैट्रिक्स"
 
@@ -1956,11 +1958,18 @@ msgstr "भागीदार ब्राउज़ करें"
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_filter.html:24
-#: TWLight/templates/base.html:249
+#: TWLight/templates/base.html:241
 msgid "Suggest a partner"
 msgstr "भागीदार का सुझाव दें"
 
-#: TWLight/resources/templates/resources/partner_filter.html:35
+#. Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/)
+#: TWLight/resources/templates/resources/partner_filter.html:30
+#, fuzzy
+#| msgid "Total partners"
+msgid "Apply to multiple partners"
+msgstr "कुल भागीदार"
+
+#: TWLight/resources/templates/resources/partner_filter.html:41
 msgid "No partners meet the specified criteria."
 msgstr "कोई भी भागीदार निर्दिष्ट मानदंडों को पूरा नहीं करता है।"
 
@@ -1973,11 +1982,6 @@ msgstr "{{ partner }} पंजीकरण पृष्ठ की कड़ी"
 #: TWLight/resources/templates/resources/partner_tile.html:59
 msgid "Language(s) not known"
 msgstr "भाषा(एँ) ज्ञात नहीं"
-
-#. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where more details can be found.
-#: TWLight/resources/templates/resources/partner_tile.html:84
-msgid "More info"
-msgstr "अधिक जानकारी"
 
 #. Translators: On the page listing approved users, staff can unassign a code from a user. This is the title of the page which confirms the code removal.
 #: TWLight/resources/templates/resources/partner_unassign_code.html:8
@@ -2463,43 +2467,38 @@ msgstr "पुस्तकालय कार्ड मंच घर"
 msgid "Hi, <a href=\"%(home_url)s\">%(username)s</a>!"
 msgstr "नमस्ते, <a href=\"%(home_url)s\">%(username)s</a>!"
 
-#. Translators: Shown in the top bar of almost every page, taking users to the page where they can browse current partners.
-#: TWLight/templates/base.html:94
-msgid "Browse"
-msgstr "ब्राउज़ करें"
-
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/base.html:110
+#: TWLight/templates/base.html:102
 msgid "Review"
 msgstr "समीक्षा"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/base.html:119
+#: TWLight/templates/base.html:111
 msgid "Send data to partners"
 msgstr "भागीदारों को डेटा भेजें"
 
 #. Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline).
-#: TWLight/templates/base.html:127
+#: TWLight/templates/base.html:119
 msgid "Latest activity"
 msgstr "अन्तिम गतिविधि"
 
 #. Translators: Shown in the top bar of almost every page when the current user is a superuser, linking to the administrator interface.
-#: TWLight/templates/base.html:142
+#: TWLight/templates/base.html:134
 msgid "Admin"
 msgstr "प्रबन्धक"
 
 #. Translators: Shown in the top bar of almost every page when the current user is logged in.
-#: TWLight/templates/base.html:151
+#: TWLight/templates/base.html:143
 msgid "Log out"
 msgstr "लॉगआउट"
 
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
-#: TWLight/templates/base.html:163 TWLight/templates/home.html:22
+#: TWLight/templates/base.html:155 TWLight/templates/home.html:22
 msgid "Log in"
 msgstr "लॉगिन करें"
 
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
-#: TWLight/templates/base.html:182
+#: TWLight/templates/base.html:174
 #, fuzzy, python-format
 msgid ""
 "You don't have an email on file. We can't finalize your access to partner "
@@ -2511,7 +2510,7 @@ msgstr ""
 "रूप नहीं दे सकते। कृपया <a href=\"%(email_url)s\">अपना ईमेल अपडेट करें</a>।"
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
-#: TWLight/templates/base.html:193
+#: TWLight/templates/base.html:185
 #, python-format
 msgid ""
 "You have requested a restriction on the processing of your data. Most site "
@@ -2536,7 +2535,7 @@ msgstr ""
 #. </p>
 #. <p>
 #. comment Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:223
+#: TWLight/templates/base.html:215
 msgid ""
 "This work is licensed under a <a rel=\"license\" href=\"http://"
 "creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
@@ -2547,17 +2546,17 @@ msgstr ""
 "प्राप्त है।"
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:237
+#: TWLight/templates/base.html:229
 msgid "About"
 msgstr "के बारे में"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:243
+#: TWLight/templates/base.html:235
 msgid "Terms of use and privacy policy"
 msgstr "उपयोग की शर्तें और गोपनीयता नीति"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:255
+#: TWLight/templates/base.html:247
 msgid "Feedback"
 msgstr "प्रतिक्रिया"
 
@@ -2668,8 +2667,7 @@ msgstr ""
 "विकिपीडिया पुस्तकालय के माध्यम से उपलब्ध दर्जनों शोध डेटाबेस और संसाधनों तक मुफ्त पहुंच के "
 "लिए पंजीकरण करें।"
 
-#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
-#: TWLight/templates/home.html:13 TWLight/templates/home.html:48
+#: TWLight/templates/home.html:13 TWLight/templates/home.html:50
 msgid "Learn more"
 msgstr "अधिक जानिए"
 
@@ -2680,7 +2678,18 @@ msgstr "लाभ"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
 #: TWLight/templates/home.html:37
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>The Wikipedia Library provides free access to research materials to "
+#| "improve your ability to contribute content to Wikimedia projects. </p> "
+#| "<p>Through the Library Card you can apply for access to %(partner_count)s "
+#| "leading publishers of reliable sources including 80,000 unique journals "
+#| "that would otherwise be paywalled. Use just your Wikipedia login to sign "
+#| "up. Coming soon... direct access to resources using only your Wikipedia "
+#| "login!</p> <p>If you think you could use access to one of our partner "
+#| "resources and are an active editor in any project supported by the "
+#| "Wikimedia Foundation, <a href=\"/applications/request/\">please apply</a>."
+#| "</p>"
 msgid ""
 "<p>The Wikipedia Library provides free access to research materials to "
 "improve your ability to contribute content to Wikimedia projects. </p> "
@@ -2690,7 +2699,7 @@ msgid ""
 "Coming soon... direct access to resources using only your Wikipedia login!</"
 "p> <p>If you think you could use access to one of our partner resources and "
 "are an active editor in any project supported by the Wikimedia Foundation, "
-"<a href=\"/applications/request/\">please apply</a>.</p>"
+"please apply.</p>"
 msgstr ""
 "<p>विकिपीडिया पुस्तकालय विकिमीडिया परियोजनाओं में सामग्री योगदान करने की आपकी क्षमता "
 "में सुधार करने के लिए अनुसंधान सामग्री तक मुफ्त पहुँच प्रदान करती है।</p><p>पुस्तकालय कार्ड के "
@@ -2703,20 +2712,20 @@ msgstr ""
 "\"/applications/request/\"> तो कृपया आवेदन करें </a>।</p>"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
-#: TWLight/templates/home.html:54
+#: TWLight/templates/home.html:57
 msgid "Partners"
 msgstr "भागीदार"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the introductory text to that list.
-#: TWLight/templates/home.html:57
+#: TWLight/templates/home.html:60
 msgid "Below are a few of our featured partners:"
 msgstr "नीचे हमारे विशेष भागीदारों में से कुछ दिए हैं:"
 
-#: TWLight/templates/home.html:63
+#: TWLight/templates/home.html:66
 msgid "Browse all partners"
 msgstr "सभी भागीदारों को ब्राउज़ करें"
 
-#: TWLight/templates/home.html:96
+#: TWLight/templates/home.html:99
 msgid "More Activity"
 msgstr "अधिक गतिविधि"
 
@@ -3710,6 +3719,12 @@ msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr ""
 "\n"
 "{username} ने <a href=\"{url}\">{partner}</a> तक पहुँच प्राप्त की"
+
+#~ msgid "More info"
+#~ msgstr "अधिक जानकारी"
+
+#~ msgid "Browse"
+#~ msgstr "ब्राउज़ करें"
 
 #~ msgid "Number of applications to {partner}"
 #~ msgstr "{partner} को आवेदनों की संख्या"
