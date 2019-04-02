@@ -40,12 +40,15 @@
 				<p>Through the Library Card you can apply for access to {{partner_count}} leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p>
 
 		
-				<p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, <a href="/applications/request/">please apply</a>.</p>
+				<p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply.</p>
 		{% endblocktrans %}
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				{% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
-				<p><a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a></p>
+				<p>
+          <a href="{% url 'partners:filter' %}" class="btn btn-primary btn-block read-more">{% trans "Apply" %} </a>
+          <a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a>
+        </p>
 		</div>
 	</div>
 	
