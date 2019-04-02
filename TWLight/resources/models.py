@@ -228,8 +228,9 @@ class Partner(models.Model):
             "this partner."))
 
     access_code_instructions = models.TextField(blank=True, null=True,
-        # Translators: TODO
-        help_text=_("TODO"))
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for using an access code to access a partner resource.
+        help_text=_("Optional instructions for editors to use access codes "
+            "for this partner. Sent via email upon access code assignment."))
 
     excerpt_limit = models.PositiveSmallIntegerField(blank=True, null=True,
           # Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
