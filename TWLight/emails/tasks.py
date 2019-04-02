@@ -348,7 +348,7 @@ def send_authorization_emails(sender, instance, **kwargs):
                 {'editor_wp_username': instance.authorization.authorized_user.editor.wp_username,
                  'partner': instance.partner,
                  'access_code': instance.code,
-                 'body': access_code_instructions
+                 'access_code_instructions': access_code_instructions
                  })
             email.send()
 
