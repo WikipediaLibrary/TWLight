@@ -48,6 +48,7 @@ class GraphsTestCase(TestCase):
         reader_list = csv.reader(resp.content.splitlines())
         reader_list.next() # Skip header row
         for row in reader_list:
+            print(row)
             assert row in expected_data
 
         # The total number of lines in our CSV should be one more than the
@@ -225,7 +226,7 @@ class GraphsTestCase(TestCase):
         response = views.CSVAppCountByPartner.as_view()(request,
             pk=self.partner.pk)
 
-        expected_data = [[str(date.today().replace(day=1)), '1']]
+        expected_data = [[str(date.today()), '1']]
 
         self._verify_equal(response, expected_data)
 
@@ -234,6 +235,7 @@ class GraphsTestCase(TestCase):
         """
         Test that the CSVUserCountByPartner csv download works
         """
+        print("a")
         request = self.factory.get(reverse('csv:user_count_by_partner',
             kwargs={'pk': self.partner.pk}))
         request.user = self.user
@@ -241,7 +243,7 @@ class GraphsTestCase(TestCase):
         response = views.CSVUserCountByPartner.as_view()(request,
             pk=self.partner.pk)
 
-        expected_data = [[str(date.today().replace(day=1)), '1']]
+        expected_data = [[str(date.today()), '1']]
 
         self._verify_equal(response, expected_data)
 
@@ -250,6 +252,7 @@ class GraphsTestCase(TestCase):
         """
         Test that the CSVAppDistribution csv download works
         """
+        print("b")
         for app_status in [Application.PENDING, Application.APPROVED, Application.QUESTION]:
             app = ApplicationFactory(partner=self.partner)
             app.status = app_status
