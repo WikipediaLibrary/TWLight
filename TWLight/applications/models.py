@@ -326,18 +326,29 @@ def post_revision_commit(sender, instance, **kwargs):
         existing_authorization = Authorization.objects.filter(
             authorized_user=instance.user,
             partner=instance.partner,
-            stream=instance.specific_stream).exists()
+            stream=instance.specific_stream)
     else:
         existing_authorization = Authorization.objects.filter(
             authorized_user=instance.user,
-            partner=instance.partner).exists()
+            partner=instance.partner)
 
-    if instance.status == Application.SENT and not instance.imported: #This work is so close to being done. Final hurdle is that revisions don't get saved with coordinator user when marking sent anymore.
+    if instance.status == Application.SENT and not instance.imported:
 
         authorized_user = instance.user
         authorizer = instance.sent_by
 
-        authorization = Authorization()
+        # In the case that there is no existing authorization, create a new one
+        if existing_authorization.count() == 0:
+            authorization = Authorization()
+        # If an authorization already existed (such as in the case of a
+        # renewal), we'll simply update that one.
+        elif existing_authorization.count() == 1:
+            authorization = existing_authorization[0]
+        else:
+            logger.error("Found more than one authorization object for "
+                         "{user} - {partner}".format(user=instance.user,
+                                                     partner=instance.partner))
+            return
 
         if instance.specific_stream:
             authorization.stream = instance.specific_stream
@@ -345,4 +356,11 @@ def post_revision_commit(sender, instance, **kwargs):
         authorization.authorized_user = authorized_user
         authorization.authorizer = authorizer
         authorization.partner = instance.partner
+
+        # If this is a proxy partner, set (or reset) the expiry date
+        # to one year from now
+        if instance.partner.authorization_method == Partner.PROXY:
+            one_year_from_now = datetime.date.today() + timedelta(years=1)
+            authorization.date_expires = one_year_from_now
+
         authorization.save()
