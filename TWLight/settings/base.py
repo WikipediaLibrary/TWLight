@@ -139,7 +139,7 @@ MIDDLEWARE_CLASSES = [
 # By setting this an an environment variable, it is easy to switch debug on in
 # servers to do a quick test.
 # DEBUG SHOULD BE FALSE ON PRODUCTION for security reasons.
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = bool(os.environ.get('DEBUG', False))
 
 
 # DATABASE CONFIGURATION
@@ -168,11 +168,17 @@ DATABASES = {
 # ------------------------------------------------------------------------------
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # In production, this list should contain the URL of the server and nothing
 # else, for security reasons. For local testing '*' is OK.
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', None).split(' ')
+
+# Let Django know about external URLs in case they differ from internal
+# Needed to be added for /admin
+USE_X_FORWARDED_HOST = True
+
+REQUEST_BASE_URL = os.environ.get('REQUEST_BASE_URL', None)
 
 ROOT_URLCONF = 'TWLight.urls'
 
@@ -305,11 +311,10 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-TWLIGHT_OAUTH_PROVIDER_URL = 'https://meta.wikimedia.org/w/index.php'
+TWLIGHT_OAUTH_PROVIDER_URL = os.environ.get('TWLIGHT_OAUTH_PROVIDER_URL', None)
 
 TWLIGHT_OAUTH_CONSUMER_KEY = os.environ.get('TWLIGHT_OAUTH_CONSUMER_KEY', None)
 TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get('TWLIGHT_OAUTH_CONSUMER_SECRET', None)
-
 
 
 # COMMENTS CONFIGURATION

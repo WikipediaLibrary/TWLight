@@ -34,8 +34,8 @@ services:
     env_file:
       - ./conf/${TWLIGHT_ENV}.twlight.env
     environment:
-      - MYSQL_USER
-      - MYSQL_PASSWORD
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
       - SECRET_KEY
       - TWLIGHT_GIT_REVISION
       - TWLIGHT_OAUTH_CONSUMER_KEY

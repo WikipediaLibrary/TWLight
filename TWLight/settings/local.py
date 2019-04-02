@@ -1,10 +1,7 @@
 """
 Settings file intended for use in local, on WMF servers.  This file:
 
-* overrides anything that needs server-specific values
-* imports things that the base file draws from environment variables from a
-  hardcoded file kept out of version control (unless their default value is
-  correct in this context)
+* overrides anything that needs environment-specific values
 """
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -12,25 +9,6 @@ from __future__ import print_function
 import sys
 
 from .base import *
-
-SECRET_KEY = os.environ.get('SECRET_KEY', None)
-TWLIGHT_OAUTH_PROVIDER_URL = os.environ.get('TWLIGHT_OAUTH_PROVIDER_URL', None)
-TWLIGHT_OAUTH_CONSUMER_KEY = os.environ.get('TWLIGHT_OAUTH_CONSUMER_KEY', None)
-TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get('TWLIGHT_OAUTH_CONSUMER_SECRET', None)
-MYSQL_USER = os.environ.get('MYSQL_USER', None)
-MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', None)
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', None).split(' ')
-DEBUG = os.environ.get('DEBUG', False)
-REQUEST_BASE_URL = os.environ.get('REQUEST_BASE_URL', None)
-
-# Let Django know about external URLs in case they differ from internal
-# Needed to be added for /admin
-USE_X_FORWARDED_HOST = True
-
-# Can be replaced with option files:
-# https://docs.djangoproject.com/en/1.7/ref/databases/#connecting-to-the-database
-DATABASES['default']['USER'] = MYSQL_USER
-DATABASES['default']['PASSWORD'] = MYSQL_PASSWORD
 
 DEFAULT_FROM_EMAIL = '<twlight.local@localhost.localdomain>'
 
