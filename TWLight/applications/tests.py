@@ -2744,8 +2744,11 @@ class MarkSentTest(TestCase):
 
         editor2 = EditorFactory()
         self.user2 = editor2.user
+        editor3 = EditorFactory()
+        self.user3 = editor3.user
         coordinators = get_coordinators()
         coordinators.user_set.add(self.user)
+        coordinators.user_set.add(self.user3)
 
         self.partner = PartnerFactory(coordinator=self.user)
 
@@ -3058,6 +3061,56 @@ class MarkSentTest(TestCase):
         ).exists()
 
         self.assertTrue(authorization_object_exists)
+
+    def test_updating_existing_authorization(self):
+        """
+        In the case that an authorization already exists for a user,
+        and they apply for renewal, their authorization object should
+        be updated with any new information (e.g. authorizer).
+        """
+        # Make sure we're using the expected auth method
+        self.partner.authorization_method = Partner.EMAIL
+        self.partner.save()
+
+        # Send the existing approved application, creating an authorization
+        # object in the process.
+        request = RequestFactory().post(self.url,
+            data={'applications': [self.app1.pk]})
+        request.user = self.user
+
+        _ = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.app1.partner.pk)
+
+        authorization_object = Authorization.objects.get(
+            authorized_user=self.app1.user,
+            partner=self.app1.partner,
+        )
+        # Check that we assigned the right user in the first place
+        self.assertEqual(authorization_object.authorizer, self.user)
+
+        # Create a new application to the same partner (in reality this
+        # is most likely to be a renewal)
+        new_application = ApplicationFactory(
+            editor=self.app1.user.editor,
+            partner=self.app1.partner
+        )
+        new_application.status = Application.APPROVED
+        new_application.save()
+
+        # Assign a new coordinator to this partner
+        new_application.partner.coordinator = self.user3
+        new_application.partner.save()
+
+        # And mark this one as sent, but by a different user.
+        request = RequestFactory().post(self.url,
+            data={'applications': [new_application.pk]})
+        request.user = self.user3
+
+        _ = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        authorization_object.refresh_from_db()
+        self.assertEqual(authorization_object.authorizer, self.user3)
 
     def test_access_codes_email(self):
         # For access code partners, when applications are marked sent,
