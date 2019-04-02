@@ -1,0 +1,1 @@
+For full SB Admin 2 files and info, see http://startbootstrap.com/template-overviews/sb-admin-2/ .
