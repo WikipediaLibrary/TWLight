@@ -18,7 +18,7 @@ factory_boy>=2.10.0,<3.0
 futures==3.2.0
 mock==2.0.0
 mwoauth==0.3.3
-pillow==5.4.1
+pillow==6.0.0
 pypandoc==1.4
 python-dateutil==2.8.0
 pytz==2018.9
