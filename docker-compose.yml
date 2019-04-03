@@ -5,13 +5,20 @@ version: '3.2'
 services:
   db:
     image: mariadb:10
+    volumes:
+      - type: bind
+        source: ./bin/twlight_mysql_init.sh
+        target: /docker-entrypoint-initdb.d/twlight_mysql_init.sh
     ports:
       - "3306:3306"
-    env_file:
-      - ./conf/${TWLIGHT_ENV}.db.env
     environment:
       - MYSQL_USER
       - MYSQL_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_ROOT_PASSWORD
+      - DJANGO_DB_NAME
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
   twlight:
     image: twlight:latest
     build: .
@@ -34,6 +41,7 @@ services:
     env_file:
       - ./conf/${TWLIGHT_ENV}.twlight.env
     environment:
+      - DJANGO_DB_NAME
       - DJANGO_DB_USER
       - DJANGO_DB_PASSWORD
       - SECRET_KEY

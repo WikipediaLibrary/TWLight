@@ -152,7 +152,7 @@ DEBUG = bool(os.environ.get('DEBUG', False))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'twlight',
+        'NAME': os.environ.get('DJANGO_DB_NAME', None),
         'USER': os.environ.get('DJANGO_DB_USER', None),
         'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD', None),
         'HOST': os.environ.get('DJANGO_DB_HOST', None),
