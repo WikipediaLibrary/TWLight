@@ -48,7 +48,6 @@ class GraphsTestCase(TestCase):
         reader_list = csv.reader(resp.content.splitlines())
         reader_list.next() # Skip header row
         for row in reader_list:
-            print(row)
             assert row in expected_data
 
         # The total number of lines in our CSV should be one more than the
