@@ -1,3 +1,30 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
 
 * text eol=lf
+
+# Text files we definitely want with unix line endings.
+*.css text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.po text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.svg text eol=lf
+*.txt text eol=lf
+*.yaml text eol=lf
+*.yaml text eol=lf
+
+# Don't munge binaries.
+*.eot binary
+*.jpg binary
+*.jpeg binary
+*.mo binary
+*.PNG binary
+*.png binary
+*.ttf binary
+*.woff binary
+*.png binary
+*.png binary
+
