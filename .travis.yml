@@ -39,7 +39,7 @@ install:
 # Initalize the app and test it.
 script:
   - .travis/./init.sh
-  - DJANGO_SETTINGS_MODULE=TWLight.settings.test coverage run --source TWLight manage.py test --keepdb --noinput
+  - DJANGO_SETTINGS_MODULE=TWLight.settings.test coverage run --source TWLight manage.py test --keepdb
 
 # Report on test coverage and push to production if the conditions are met.
 after_success:
