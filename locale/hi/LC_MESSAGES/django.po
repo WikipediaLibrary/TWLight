@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-04-02 21:32+0000\n"
+"POT-Creation-Date: 2019-04-04 00:21+0000\n"
 "PO-Revision-Date: 2019-04-01 18:59:57+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +67,7 @@ msgstr "{partner} के लिए आपका आवेदन"
 msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
 msgstr "आवेदन करने से पहले आपको <a href=\"{url}>{url}</a> पर पंजीकरण करना आवश्यक है।"
 
-#: TWLight/applications/forms.py:320 TWLight/users/admin.py:74
+#: TWLight/applications/forms.py:320 TWLight/users/admin.py:76
 #: TWLight/users/models.py:114
 msgid "Username"
 msgstr "सदस्यनाम"
@@ -2755,11 +2755,11 @@ msgstr ""
 "अपना कूटशब्द भूल गए? नीचे अपना ईमेल पता दर्ज करें, और हम एक नया सेट करने के लिए निर्देश "
 "ईमेल करेंगे।"
 
-#: TWLight/users/admin.py:48
+#: TWLight/users/admin.py:49
 msgid "authorized_user"
 msgstr ""
 
-#: TWLight/users/admin.py:58
+#: TWLight/users/admin.py:59
 msgid "authorizer"
 msgstr ""
 

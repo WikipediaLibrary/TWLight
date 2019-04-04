@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-04-02 21:32+0000\n"
+"POT-Creation-Date: 2019-04-04 00:21+0000\n"
 "PO-Revision-Date: 2019-04-01 18:59:58+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +64,7 @@ msgstr "Sua candidatura para {partner}"
 msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
 msgstr "Você deve se registrar em <a href=\"{url}\">{url}</a>antes de aplicar."
 
-#: TWLight/applications/forms.py:320 TWLight/users/admin.py:74
+#: TWLight/applications/forms.py:320 TWLight/users/admin.py:76
 #: TWLight/users/models.py:114
 msgid "Username"
 msgstr "Nome de usuário"
@@ -2825,11 +2825,11 @@ msgstr ""
 "Esqueceu sua senha? Digite seu endereço de e-mail abaixo e enviaremos "
 "instruções por e-mail para configurar um novo."
 
-#: TWLight/users/admin.py:48
+#: TWLight/users/admin.py:49
 msgid "authorized_user"
 msgstr "usuário_autorizado"
 
-#: TWLight/users/admin.py:58
+#: TWLight/users/admin.py:59
 msgid "authorizer"
 msgstr "autorizar"
 

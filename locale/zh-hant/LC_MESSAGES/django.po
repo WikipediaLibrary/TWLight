@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-04-02 21:32+0000\n"
+"POT-Creation-Date: 2019-04-04 00:21+0000\n"
 "PO-Revision-Date: 2019-04-01 18:59:59+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,7 @@ msgstr "您對 {partner} 的申請程序"
 msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
 msgstr "申請前您必須要在 <a href=\"{url}\">{url}</a> 註冊。"
 
-#: TWLight/applications/forms.py:320 TWLight/users/admin.py:74
+#: TWLight/applications/forms.py:320 TWLight/users/admin.py:76
 #: TWLight/users/models.py:114
 msgid "Username"
 msgstr "使用者名稱"
@@ -2665,11 +2665,11 @@ msgstr ""
 "忘記您的密碼了嗎？請在下方輸入您的電子郵件地址，我們將會寄送一封用來說明設定"
 "新密碼的電子郵件。"
 
-#: TWLight/users/admin.py:48
+#: TWLight/users/admin.py:49
 msgid "authorized_user"
 msgstr "authorized_user"
 
-#: TWLight/users/admin.py:58
+#: TWLight/users/admin.py:59
 msgid "authorizer"
 msgstr "授權"
 

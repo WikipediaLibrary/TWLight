@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-04-02 21:32+0000\n"
+"POT-Creation-Date: 2019-04-04 00:21+0000\n"
 "PO-Revision-Date: 2019-04-01 18:59:56+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,7 @@ msgstr ""
 "Rankout a reot enrollañ ac'hanoc'h war <a href=\"{url}\">{url}</a> a-raok "
 "ober ar goulenn."
 
-#: TWLight/applications/forms.py:320 TWLight/users/admin.py:74
+#: TWLight/applications/forms.py:320 TWLight/users/admin.py:76
 #: TWLight/users/models.py:114
 msgid "Username"
 msgstr "Anv implijer"
@@ -2555,11 +2555,11 @@ msgstr ""
 "Ger tremen ankounac'haet? Bizskrivit ho chomlec'h postel amañ dindan ha kas "
 "a raimp ar c'hemennadoù deoc'h evit krouiñ unan nevez."
 
-#: TWLight/users/admin.py:48
+#: TWLight/users/admin.py:49
 msgid "authorized_user"
 msgstr ""
 
-#: TWLight/users/admin.py:58
+#: TWLight/users/admin.py:59
 msgid "authorizer"
 msgstr ""
 
