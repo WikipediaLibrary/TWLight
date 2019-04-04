@@ -22,7 +22,7 @@ services:
   twlight:
     image: twlight:latest
     build: .
-    command: bash -c "/app/bin/virtualenv_migrate.sh && source /root/TWLight/bin/activate && cd /app && /root/TWLight/bin/gunicorn TWLight.wsgi"
+    command: bash -c "source /root/TWLight/bin/activate && cd /app && /root/TWLight/bin/gunicorn TWLight.wsgi"
     volumes:
       - type: bind
         source: ./backup
