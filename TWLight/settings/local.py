@@ -58,3 +58,10 @@ TEMPLATES = [
         }
     },
 ]
+
+# STATIC FILE CONFIGURATION
+# ------------------------------------------------------------------------------
+# Identical to base settings other than making Whitenoise happy in dev and test.
+
+WHITENOISE_AUTOREFRESH=True
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'

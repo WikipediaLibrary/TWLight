@@ -77,6 +77,7 @@ DJANGO_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic', # Not a django app; replaces staticfiles
     'django.contrib.staticfiles',
     'django.contrib.sites',         # required by django.contrib.comments
 ]
