@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-04-04 00:21+0000\n"
+"POT-Creation-Date: 2019-04-04 01:33+0000\n"
 "PO-Revision-Date: 2019-04-01 18:59:58+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -184,7 +184,7 @@ msgstr "계정 이메일"
 #: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/models.py:183
 #: TWLight/resources/templates/resources/partner_users.html:27
-#: TWLight/resources/templates/resources/partner_users.html:89
+#: TWLight/resources/templates/resources/partner_users.html:78
 #: TWLight/users/forms.py:125
 msgid "Email"
 msgstr "이메일"
@@ -358,7 +358,7 @@ msgstr ""
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
 #: TWLight/applications/templates/applications/application_evaluation.html:178
 #: TWLight/resources/templates/resources/partner_users.html:25
-#: TWLight/resources/templates/resources/partner_users.html:87
+#: TWLight/resources/templates/resources/partner_users.html:76
 msgid "User"
 msgstr "사용자"
 
@@ -504,7 +504,7 @@ msgstr "아직 검토되지 않았습니다."
 
 #: TWLight/applications/templates/applications/application_list_include.html:64
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:74
-#: TWLight/applications/templates/applications/application_list_user_include.html:64
+#: TWLight/applications/templates/applications/application_list_user_include.html:60
 msgid "No applications right now."
 msgstr ""
 
@@ -516,8 +516,8 @@ msgstr "모두 선택/선택 해제"
 
 #. Translators: Denotes whether an application was a renewal request for a previous application.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:24
-#: TWLight/resources/templates/resources/partner_users.html:57
-#: TWLight/resources/templates/resources/partner_users.html:119
+#: TWLight/resources/templates/resources/partner_users.html:53
+#: TWLight/resources/templates/resources/partner_users.html:104
 msgid "Renewal"
 msgstr ""
 
@@ -531,15 +531,15 @@ msgstr ""
 msgid "Set status"
 msgstr "상태 설정"
 
-#: TWLight/applications/templates/applications/application_list_user_include.html:48
+#: TWLight/applications/templates/applications/application_list_user_include.html:44
 msgid "Has your account expired?"
 msgstr "계정이 만기되었습니까?"
 
-#: TWLight/applications/templates/applications/application_list_user_include.html:50
+#: TWLight/applications/templates/applications/application_list_user_include.html:46
 msgid "Request renewal"
 msgstr ""
 
-#: TWLight/applications/templates/applications/application_list_user_include.html:52
+#: TWLight/applications/templates/applications/application_list_user_include.html:48
 msgid ""
 "Renewals are either not required, not available right now, or you have "
 "already requested a renewal."
@@ -716,7 +716,7 @@ msgstr ""
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
 #: TWLight/applications/views.py:749
-#: TWLight/resources/templates/resources/partner_users.html:81
+#: TWLight/resources/templates/resources/partner_users.html:70
 msgid "Sent applications"
 msgstr ""
 
@@ -1837,45 +1837,33 @@ msgstr ""
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was made.
 #: TWLight/resources/templates/resources/partner_users.html:29
-#: TWLight/resources/templates/resources/partner_users.html:91
+#: TWLight/resources/templates/resources/partner_users.html:80
 msgid "Application date"
 msgstr ""
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was approved by a coordinator.
 #: TWLight/resources/templates/resources/partner_users.html:31
-#: TWLight/resources/templates/resources/partner_users.html:93
+#: TWLight/resources/templates/resources/partner_users.html:82
 msgid "Application approved"
 msgstr ""
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal.
 #: TWLight/resources/templates/resources/partner_users.html:33
-#: TWLight/resources/templates/resources/partner_users.html:95
+#: TWLight/resources/templates/resources/partner_users.html:84
 msgid "Renewal?"
 msgstr ""
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for.
 #: TWLight/resources/templates/resources/partner_users.html:36
-#: TWLight/resources/templates/resources/partner_users.html:98
+#: TWLight/resources/templates/resources/partner_users.html:87
 msgid "Stream"
 msgstr "스트림"
 
-#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the access code this user was assigned.
-#: TWLight/resources/templates/resources/partner_users.html:40
-#: TWLight/resources/templates/resources/partner_users.html:102
-msgid "Access code"
-msgstr "접속 코드"
-
 #. Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched.
-#: TWLight/resources/templates/resources/partner_users.html:53
-#: TWLight/resources/templates/resources/partner_users.html:115
+#: TWLight/resources/templates/resources/partner_users.html:49
+#: TWLight/resources/templates/resources/partner_users.html:100
 msgid "Imported"
 msgstr ""
-
-#. Translators: On the page listing approved users, this is hover text for a button staff can click to unassign (remove) an access code from a user.
-#: TWLight/resources/templates/resources/partner_users.html:68
-#: TWLight/resources/templates/resources/partner_users.html:131
-msgid "Unassign"
-msgstr "할당 해제"
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
 #: TWLight/resources/templates/resources/suggest.html:18
@@ -3286,6 +3274,12 @@ msgstr ""
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr ""
+
+#~ msgid "Access code"
+#~ msgstr "접속 코드"
+
+#~ msgid "Unassign"
+#~ msgstr "할당 해제"
 
 #~ msgid "More info"
 #~ msgstr "자세한 정보"
