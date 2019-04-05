@@ -41,7 +41,7 @@ install:
 # Initalize the app and test it.
 script:
   - .travis/./init.sh
-  - TWLIGHT_HOME=$(pwd) coverage run --source TWLight bin/./virtualenv_test.sh
+  - TWLIGHT_HOME=$(pwd) bin/./virtualenv_test.sh
 
 # Report on test coverage and push to production if the conditions are met.
 after_success:
