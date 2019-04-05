@@ -1,0 +1,13 @@
+{% load i18n %}
+<html>
+<body>
+{% comment %} Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like {{ partner_name }} or {{ partner_link }}; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+{% blocktrans trimmed %}
+  <p>Dear {{ user }},</p>
+	<p>According to our records, your access to {{ partner_name }} will soon expire and you may lose access.
+   If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at {{ partner_link }}.</p>
+	<p>Best,</p>
+	<p>The Wikipedia Library</p>
+{% endblocktrans %}
+</body>
+</html>

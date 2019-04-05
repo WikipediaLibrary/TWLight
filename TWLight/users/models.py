@@ -419,6 +419,10 @@ class Authorization(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
         help_text=_('The stream for which the editor is authorized.'))
 
+    reminder_email_sent = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
+        help_text=_("Have we sent a reminder email about this authorization?"))
+
     # Try to return a useful object name, if fields were set appropriately.
     def __unicode__(self):
         if self.stream:
