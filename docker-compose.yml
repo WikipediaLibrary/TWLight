@@ -12,9 +12,6 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_USER
-      - MYSQL_PASSWORD
-      - MYSQL_DATABASE
       - MYSQL_ROOT_PASSWORD
       - DJANGO_DB_NAME
       - DJANGO_DB_USER

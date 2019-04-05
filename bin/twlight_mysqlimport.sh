@@ -13,17 +13,13 @@ fi
 PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 
 mysqlimport_file=${1}
-mysqlhost=${DJANGO_DB_HOST}
-mysqldb=twlight
-mysqluser=twlight
-mysqlpass=${MYSQL_PASSWORD}
 
 echo "Importing TWLight database"
 
 ## Drop existing DB.
-bash -c "mysql  -h '${mysqlhost}' -u '${mysqluser}' -p'${mysqlpass}' -D '${mysqldb}' -e 'DROP DATABASE ${mysqldb}; CREATE DATABASE ${mysqldb};'" | :
+bash -c "mysql -h '${DJANGO_DB_HOST}' -u '${DJANGO_DB_USER}' -p'${DJANGO_DB_PASSWORD}' -D '${DJANGO_DB_NAME}' -e 'DROP DATABASE ${DJANGO_DB_NAME}; CREATE DATABASE ${DJANGO_DB_NAME};'" | :
 
 ## Perform mysql import
-bash -c "mysql  -h '${mysqlhost}' -u '${mysqluser}' -p'${mysqlpass}' -D '${mysqldb}' < '${mysqlimport_file}'"
+bash -c "mysql -h '${DJANGO_DB_HOST}' -u '${DJANGO_DB_USER}' -p'${DJANGO_DB_PASSWORD}' -D '${DJANGO_DB_NAME}' < '${mysqlimport_file}'"
 
 echo "Finished importing TWLight database."

@@ -10,15 +10,10 @@ fi
 
 PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 
-mysqlhost=localhost
-mysqldb=twlight
-mysqluser=twlight
-mysqlpass=$(cat ${TWLIGHT_HOME}/TWLight/settings/${TWLIGHT_ENV}_vars.py | grep ^MYSQL_PASSWORD | cut -d "=" -f 2 | xargs)
-
 echo "Dumping TWLight database"
 
 ## Perform sql-dump
-bash -c "mysqldump -h '${mysqlhost}' -u '${mysqluser}' -p'${mysqlpass}' '${mysqldb}' > '${TWLIGHT_MYSQLDUMP_DIR}/twlight.sql'"
+bash -c "mysqldump -h '${DJANGO_DB_HOST}' -u '${DJANGO_DB_USER}' -p'${DJANGO_DB_PASSWORD}' '${DJANGO_DB_NAME}' > '${TWLIGHT_MYSQLDUMP_DIR}/twlight.sql'"
 
 ## Root only
 chmod 0600 "${TWLIGHT_MYSQLDUMP_DIR}/twlight.sql"
