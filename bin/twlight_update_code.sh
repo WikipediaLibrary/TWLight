@@ -118,5 +118,5 @@ flock -n ${lockfile}
             exit 1
         fi
 
-    } 2>&1 | tee -a ${TWLIGHT_HOME}/TWLight/logs/update.log
+    } 2>&1
 } {lockfile}>&-

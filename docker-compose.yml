@@ -30,9 +30,6 @@ services:
       - type: bind
         source: ./TWLight
         target: /app/TWLight
-      - type: bind
-        source: ./logs
-        target: /app/logs
     depends_on:
       - 'db'
     env_file:

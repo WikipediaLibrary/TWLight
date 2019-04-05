@@ -20,4 +20,4 @@ fi
     else
         exit 1
     fi
-} 2>&1 | tee -a ${TWLIGHT_HOME}/TWLight/logs/test.log
+} 2>&1
