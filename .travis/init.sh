@@ -9,7 +9,8 @@ mkdir -p ~/node_modules
 npm install --prefix ~ cssjanus
 
 # Create databases.
-mysql < .travis/db.sql
+unset MYSQL_ROOT_PASSWORD
+bin/./twlight/twlight_mysql_init.sh
 
 # Ensure static dir exists.
 mkdir -p TWLight/collectedstatic
