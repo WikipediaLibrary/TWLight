@@ -140,8 +140,8 @@ MIDDLEWARE_CLASSES = [
 # By setting this an an environment variable, it is easy to switch debug on in
 # servers to do a quick test.
 # DEBUG SHOULD BE FALSE ON PRODUCTION for security reasons.
-DEBUG = bool(os.environ.get('DEBUG', False))
 
+DEBUG = bool(os.environ.get('DEBUG', False).lower() == 'true')
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
