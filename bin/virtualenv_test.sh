@@ -15,7 +15,7 @@ fi
     # Load virtual environment
     if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
     then
-        DJANGO_SETTINGS_MODULE=TWLight.settings.test coverage run --source TWLight manage.py test --keepdb --parallel --noinput
+        DJANGO_SETTINGS_MODULE=TWLight.settings.test coverage run --source TWLight manage.py test --keepdb --noinput
     else
         exit 1
     fi
