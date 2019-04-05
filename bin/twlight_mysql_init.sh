@@ -4,7 +4,7 @@ if  [ -n "${MYSQL_ROOT_PASSWORD+isset}" ]
 then
     mysql_cmd="mysql -u root -p${MYSQL_ROOT_PASSWORD}"
 else
-    mysql_cmd="mysql -u root"
+    mysql_cmd="mysql"
 fi
 
 ${mysql_cmd} <<EOF
