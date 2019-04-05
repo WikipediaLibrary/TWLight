@@ -10,7 +10,7 @@ npm install --prefix ~ cssjanus
 
 # Create databases.
 unset MYSQL_ROOT_PASSWORD
-bin/./twlight/twlight_mysql_init.sh
+bin/./twlight_mysql_init.sh
 
 # Ensure static dir exists.
 mkdir -p TWLight/collectedstatic
