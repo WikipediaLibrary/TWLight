@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 from mock import patch
 
@@ -7,6 +8,7 @@ from django_comments.signals import comment_was_posted
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core import mail
+from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 
@@ -17,6 +19,7 @@ from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.factories import EditorFactory, UserFactory
 from TWLight.users.groups import get_coordinators
+from TWLight.users.models import Authorization
 
 # We need to import these in order to register the signal handlers; if we don't,
 # when we test that those handler functions have been called, we will get
@@ -24,6 +27,7 @@ from TWLight.users.groups import get_coordinators
 from .tasks import (send_comment_notification_emails,
                     send_approval_notification_email,
                     send_rejection_notification_email,
+                    send_user_renewal_notice_emails,
                     contact_us_emails)
 
 class ApplicationCommentTest(TestCase):
@@ -391,3 +395,92 @@ class ContactUsTest(TestCase):
         self.client.post(contact_us_url, data)
         
         self.assertEqual(len(mail.outbox), 0)
+
+class UserRenewalNoticeTest(TestCase):
+
+    def setUp(self):
+        super(UserRenewalNoticeTest, self).setUp()
+        editor = EditorFactory(user__email='editor@example.com')
+        self.user = editor.user
+
+        self.coordinator = EditorFactory().user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+
+        self.partner = PartnerFactory()
+
+        self.authorization = Authorization()
+        self.authorization.authorized_user = self.user
+        self.authorization.authorizer = self.coordinator
+        self.authorization.partner = self.partner
+        self.authorization.date_expires = datetime.today() + timedelta(weeks=2)
+        self.authorization.save()
+
+    def test_single_user_renewal_notice(self):
+        """
+        Given one authorization that expires in two weeks, ensure
+        that our email task sends an email to that user.
+        """
+        call_command('user_renewal_notice')
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [self.user.email])
+
+    def test_user_renewal_notice_doesnt_duplicate(self):
+        """
+        If we run the command a second time, the same user shouldn't receive
+        a second email.
+        """
+        call_command('user_renewal_notice')
+        self.assertEqual(len(mail.outbox), 1)
+
+        call_command('user_renewal_notice')
+        self.assertEqual(len(mail.outbox), 1)
+
+    def test_user_renewal_notice_past_date(self):
+        """
+        If the authorization expired before today, the user shouldn't
+        receive a notice.
+        """
+        self.authorization.date_expires = datetime.today() - timedelta(weeks=1)
+        self.authorization.save()
+        call_command('user_renewal_notice')
+
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_user_renewal_notice_future_date(self):
+        """
+        If the authorization doesn't expire for months, the user
+        shouldn't receive a notice.
+        """
+        self.authorization.date_expires = datetime.today() + timedelta(weeks=8)
+        self.authorization.save()
+        call_command('user_renewal_notice')
+
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_user_renewal_notice_future_date(self):
+        """
+        If we have multiple authorizations to send emails for, let's make
+        sure we send distinct emails to the right places.
+        """
+        editor2 = EditorFactory(user__email='editor2@example.com')
+
+        authorization2 = Authorization()
+        authorization2.authorized_user = editor2.user
+        authorization2.authorizer = self.coordinator
+        authorization2.partner = self.partner
+        authorization2.date_expires = datetime.today() + timedelta(weeks=1)
+        authorization2.save()
+
+        call_command('user_renewal_notice')
+
+        self.assertEqual(len(mail.outbox), 2)
+
+        # Make sure that the two emails went to the two expected
+        # email addresses.
+        # This looks a little complicated because mail.outbox[0].to is a
+        # (one element) list, and we need to compare sets to ensure we've
+        # got 1 of each email.
+        self.assertEqual(set([mail.outbox[0].to[0],mail.outbox[1].to[0]]),
+            set(['editor@example.com', 'editor2@example.com']))
