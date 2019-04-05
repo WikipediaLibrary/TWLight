@@ -8,6 +8,7 @@ env:
     - TWLIGHT_MISSING_MIGRATIONS=$(git ls-files --others --exclude-standard 'TWLight/*/migrations/*.py' | wc -l)
     - DJANGO_DB_HOST=127.0.0.1
     - DJANGO_DB_NAME=twlight
+    - DJANGO_DB_PASSWORD=twlight
     - MYSQL_USER=twlight
     - MYSQL_PASSWORD=twlight
     - ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
