@@ -279,17 +279,38 @@ MEDIA_URL = '/media/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        }
+    },
     'handlers': {
         'console': {
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'class': 'logging.StreamHandler',
+            'filters': ['require_debug_false'],
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
         },
     },
-    # Catch all loggers and stream them to STDOUT/STDERR
     'loggers': {
-        '': {
+        # Stream messages to console.
+        'django': {
             'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': True,
         },
+        # Email page errors.
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'TWLight': {
+            'handlers': ['console', 'mail_admins'],
+        }
     },
 }
 
@@ -340,11 +361,15 @@ TAGGIT_CASE_INSENSITIVE = True
 # DJMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 
-EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
+# This is a dummy backend that will write to a console.
+DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.emailbackend'
 
-# This is a dummy backend that will write to a file.
-DJMAIL_REAL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'logs', 'emails.log')
+EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
 
 INSTALLED_APPS += ['djmail',]
 

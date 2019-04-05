@@ -17,7 +17,6 @@ CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 # Never debug in prod
 DEBUG = False
 
-#EMAIL_BACKEND = 'djmail.backends.celery.EmailBackend'
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_BACKEND = 'djmail.backends.async.EmailBackend'
