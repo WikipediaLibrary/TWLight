@@ -6,13 +6,13 @@ The Wikipedia Library Card Platform app, available at http://wikipedialibrary.wm
 
 - Get Docker and Docker Compose
 - Copy the [example environment variables](conf/example.env) to `./.env`. This file contains settings you may wish to change.
-- Configure your browser to use the [twlight proxy configuration file](conf/local.twlight.pac). If your browser expects a proxy configuration URL, you can enter a file url like: `file:///C:/<username>/TWLight/conf/local.twlight.pac`
 
 
 ## Management
 
 - Fire up an empty TWLight instance `docker-compose build && docker-compose up`
 - Run migrations `docker-compose exec twlight /app/bin/virtualenv_migrate.sh`
+- See the thing running on [localhost](http://localhost/)
 
 See [twlight_puppet](https://github.com/WikipediaLibrary/twlight_puppet) if you want to set things up on WMF servers, and [twlight_vagrant](https://github.com/WikipediaLibrary/twlight_vagrant) if you want to change things.
 
