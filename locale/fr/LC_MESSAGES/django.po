@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-04 01:33+0000\n"
-"PO-Revision-Date: 2019-04-04 18:32:30+0000\n"
+"PO-Revision-Date: 2019-04-08 15:16:08+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -763,9 +763,8 @@ msgstr "Soumettre"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
-#, fuzzy
 msgid "Your Wikipedia Library access code"
-msgstr "L'équipe de la Bibliothèque Wikipédia"
+msgstr "Votre code d'accès à la Bibliothèque Wikipédia"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
@@ -987,9 +986,8 @@ msgstr "Délai médian en jours avant la décision"
 
 #. Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
 #: TWLight/graphs/views.py:318
-#, fuzzy
 msgid "Number of unique users who applied"
-msgstr "Nombre d'utilisateurs uniques qui ont demandé l'accès à {partner}"
+msgstr "Nombre d'utilisateurs uniques qui ont demandé l'accès"
 
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
 #: TWLight/graphs/views.py:333 TWLight/graphs/views.py:360
@@ -1189,7 +1187,7 @@ msgstr "Instructions facultatives pour l'envoi à ce partenaire, des données de
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for using an access code to access a partner resource.
 #: TWLight/resources/models.py:232
 msgid "Optional instructions for editors to use access codes for this partner. Sent via email upon access code assignment."
-msgstr ""
+msgstr "Instructions facultatives pour que les contributeurs puissent utiliser les codes d'accès pour ce partenaire. Envoyées par courriel lors de l'ssignation du code d'accès."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
 #: TWLight/resources/models.py:237
@@ -1623,9 +1621,8 @@ msgstr "Suggérer un partenaire"
 
 #. Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/)
 #: TWLight/resources/templates/resources/partner_filter.html:30
-#, fuzzy
 msgid "Apply to multiple partners"
-msgstr "Tous les partenaires"
+msgstr "Appliquer à tous les partenaires"
 
 #: TWLight/resources/templates/resources/partner_filter.html:41
 msgid "No partners meet the specified criteria."
@@ -2168,9 +2165,9 @@ msgstr "Avantages"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
 #: TWLight/templates/home.html:37
-#, fuzzy, python-format
+#, python-format
 msgid "<p>The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects. </p> <p>Through the Library Card you can apply for access to %(partner_count)s leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p> <p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply.</p>"
-msgstr "<p>La bibliothèque Wikipédia offre un accès gratuit au matériel de recherche pour améliorez votre capacité à contribuer aux projets Wikimedia.</p> <p> Grâce à la Carte de Bibliothèque, vous pouvez demander l'accès à %(partner_count)s ressources, soit plus que 80 000 revues uniques qui seraient autrement avec accès payant. Utilisez votre login Wikipedia pour vous inscrire. Bientôt ... l'accès direct aux ressources en utilisant uniquement votre compte Wikipedia! </p> <p> Si vous pensez pouvoir utiliser l'accès à l'une de nos ressources partenaires et vous êtes un contributeur actif dans un projet quelconque soutenu par la Fondation Wikimedia, alors <a href=\"/applications/request/\">veuillez vous abonner</a>.</p>"
+msgstr "<p>La bibliothèque Wikipedia offre un accès gratuit au matériel de recherche pour améliorez votre capacité à contribuer aux projets Wikimedia.</p> <p> Grâce à votre carte de bibliothèque, vous pouvez demander l'accès à %(partner_count)s éditeurs importants de ressources fiables, y compris 80 000 revues uniques qui seraient autrement en accès payant. Utilisez simplement votre login Wikipedia pour vous inscrire. Et bientôt ... l'accès direct aux ressources en utilisant uniquement votre compte Wikipedia! </p> <p> Si vous pensez avoir à utiliser l'accès à une ressource de nos partenaires et que vous êtes un contributeur actif d'un projet quelconque soutenu par la Fondation Wikimedia, alors veuillez faire la demande."
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
 #: TWLight/templates/home.html:57

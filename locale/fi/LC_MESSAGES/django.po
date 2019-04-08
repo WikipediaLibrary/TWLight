@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-04 01:33+0000\n"
-"PO-Revision-Date: 2019-04-04 18:32:30+0000\n"
+"PO-Revision-Date: 2019-04-08 15:16:07+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -762,7 +762,7 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:21
 msgid "Message"
-msgstr ""
+msgstr "Viesti"
 
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
@@ -1830,7 +1830,7 @@ msgstr ""
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:8
 msgid "Permission denied"
-msgstr ""
+msgstr "Pääsy estetty"
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:12

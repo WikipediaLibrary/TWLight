@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-04 01:33+0000\n"
-"PO-Revision-Date: 2019-04-04 18:32:29+0000\n"
+"PO-Revision-Date: 2019-04-08 15:16:06+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -1222,7 +1222,7 @@ msgstr "خطوات اختيارية لإرسال بيانات استمارة ا�
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for using an access code to access a partner resource.
 #: TWLight/resources/models.py:232
 msgid "Optional instructions for editors to use access codes for this partner. Sent via email upon access code assignment."
-msgstr ""
+msgstr "تعليمات اختيارية للمحررين لاستخدام كودات الوصول لهذا الشريك. يتم إرسالها بواسطة البريد الإلكتروني عند حجز كود الوصول."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
 #: TWLight/resources/models.py:237
