@@ -380,6 +380,74 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.get('Content-Disposition'),
             'attachment; filename=user_data.json')
 
+    def test_user_email_form(self):
+        """
+        Users have a form available on their user pages which enables them to
+        control which emails they receive. Verify that they can post this form
+        without error.
+        """
+        # Need a password so we can login
+        self.user_editor2.set_password('editor')
+        self.user_editor2.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username2, password='editor')
+
+        response = self.client.post(self.url2,
+            {'update_email_settings': ['Update']})
+
+        # Should be successfully redirected back to the user page.
+        self.assertEqual(response.status_code, 302)
+
+    def test_user_email_disable_renewal_update(self):
+        """
+        Verify that users can disable renewal notices in the email form.
+        """
+        # Need a password so we can login
+        self.user_editor2.set_password('editor')
+        self.user_editor2.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username2, password='editor')
+
+        response = self.client.post(self.url2,
+            {'update_email_settings': ['Update']})
+
+        # Should be successfully redirected back to the user page.
+        self.assertEqual(response.status_code, 302)
+
+        self.user_editor2.userprofile.refresh_from_db()
+
+        # We didn't send send_renewal_notices in POST to simulate an
+        # unchecked box.
+        self.assertEqual(self.user_editor2.userprofile.send_renewal_notices, False)
+
+    def test_user_email_enable_renewal_update(self):
+        """
+        Verify that users can enable renewal notices in the email form.
+        """
+        # Need a password so we can login
+        self.user_editor2.set_password('editor')
+        self.user_editor2.userprofile.send_renewal_notices = False
+        self.user_editor2.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username2, password='editor')
+
+        response = self.client.post(self.url2,
+            {'update_email_settings': ['Update'],
+             'send_renewal_notices': ['on']})
+
+        # Should be successfully redirected back to the user page.
+        self.assertEqual(response.status_code, 302)
+
+        self.user_editor2.userprofile.refresh_from_db()
+
+        self.assertEqual(self.user_editor2.userprofile.send_renewal_notices, True)
+
 
 
 class UserProfileModelTestCase(TestCase):

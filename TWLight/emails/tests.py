@@ -426,6 +426,18 @@ class UserRenewalNoticeTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.user.email])
 
+    def test_user_renewal_notice_disabled(self):
+        """
+        Users have the option to disable renewal notices. If users have
+        disabled emails, we shouldn't send them one.
+        """
+        self.user.userprofile.send_renewal_notices = False
+        self.user.userprofile.save()
+
+        call_command('user_renewal_notice')
+
+        self.assertEqual(len(mail.outbox), 0)
+
     def test_user_renewal_notice_doesnt_duplicate(self):
         """
         If we run the command a second time, the same user shouldn't receive
@@ -484,3 +496,14 @@ class UserRenewalNoticeTest(TestCase):
         # got 1 of each email.
         self.assertEqual(set([mail.outbox[0].to[0],mail.outbox[1].to[0]]),
             set(['editor@example.com', 'editor2@example.com']))
+
+    def test_user_renewal_notice_emails_disabled(self):
+        """
+        If the user has disabled these emails in their user preferences
+        we shouldn't be sending anything to them.
+        """
+        self.user.userprofile.send_renewal_notices = False
+        self.user.userprofile.save()
+        call_command('user_renewal_notice')
+
+        self.assertEqual(len(mail.outbox), 0)

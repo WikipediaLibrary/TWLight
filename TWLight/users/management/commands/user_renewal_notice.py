@@ -10,12 +10,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Get all authorization objects with an expiry date in the next
-        # two weeks, for which we haven't yet sent a reminder email.
+        # two weeks, for which we haven't yet sent a reminder email, and
+        # exclude users who disabled these emails.
         expiring_authorizations = Authorization.objects.filter(
             date_expires__lt=datetime.today()+timedelta(weeks=4),
             date_expires__gte=datetime.today(),
             reminder_email_sent=False
-            )
+            ).exclude(
+                authorized_user__userprofile__send_renewal_notices=False
+                )
 
         for authorization_object in expiring_authorizations:
             Notice.user_renewal_notice.send(

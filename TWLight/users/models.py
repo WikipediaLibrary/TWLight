@@ -73,6 +73,9 @@ class UserProfile(models.Model):
         choices=settings.LANGUAGES,
         # Translators: Users' detected or selected language.
         help_text=_("Language"))
+    send_renewal_notices = models.BooleanField(default=True,
+        # Translators: Description of the option users have to enable or disable reminder emails for renewals
+        help_text=_("Does this user want renewal reminder notices?"))
 
 
 # Create user profiles automatically when users are created.
