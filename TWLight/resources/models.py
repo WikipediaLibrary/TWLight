@@ -177,6 +177,7 @@ class Partner(models.Model):
     CODES = 1
     PROXY = 2
     BUNDLE = 3
+    LINK = 4
 
     AUTHORIZATION_METHODS = (
         # Translators: This is the name of the authorization method whereby user accounts are set up by email.
@@ -187,6 +188,8 @@ class Partner(models.Model):
         (PROXY, _('Proxy')),
         # Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
         (BUNDLE, _('Library Bundle')),
+        # Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
+        (LINK, _('Link')),
     )
 
     status = models.IntegerField(choices=STATUS_CHOICES,
@@ -247,7 +250,8 @@ class Partner(models.Model):
             "'Email' means the accounts are set up via email, and is the default. "
             "Select 'Access Codes' if we send individual, or group, login details "
             "or access codes. 'Proxy' means access delivered directly via EZProxy, "
-            "and Library Bundle is automated proxy-based access."))
+            "and Library Bundle is automated proxy-based access. 'Link' is if we "
+            "send users a URL to use to create an account."))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
