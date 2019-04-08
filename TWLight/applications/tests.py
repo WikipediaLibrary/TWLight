@@ -2533,6 +2533,31 @@ class EvaluateApplicationTest(TestCase):
 
         self.assertEqual(self.application.status, Application.QUESTION)
 
+    def test_immediately_sent(self):
+        """
+        Given a partner with the Partner.LINK authorization method,
+        an application flagged as APPROVED should update to SENT.
+        """
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        self.partner.coordinator = coordinator.user
+        self.partner.authorization_method = Partner.LINK
+        self.partner.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        # Verify status
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.SENT)
 
 
 class BatchEditTest(TestCase):

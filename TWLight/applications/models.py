@@ -318,21 +318,33 @@ def update_app_status_on_save(sender, instance, **kwargs):
             instance.date_closed = localtime(now()).date()
             instance.days_open = 0
 
-# Authorize editor to access resource after an application is saved as sent.
 @receiver(post_save, sender=Application)
 def post_revision_commit(sender, instance, **kwargs):
-    # Check if an authorization already exists.
-    if instance.specific_stream:
-        existing_authorization = Authorization.objects.filter(
-            authorized_user=instance.user,
-            partner=instance.partner,
-            stream=instance.specific_stream)
-    else:
-        existing_authorization = Authorization.objects.filter(
-            authorized_user=instance.user,
-            partner=instance.partner)
+
+    # For some authorization methods, we can skip the manual Approved->Sent
+    # step and just immediately take an Approved application and give it
+    # a finalised status.
+
+    skip_approved_authorization_methods = [Partner.PROXY, Partner.LINK]
+    skip_approved = (instance.status == Application.APPROVED and
+        instance.partner.authorization_method in skip_approved_authorization_methods)
+    if skip_approved:
+        instance.status = Application.SENT
+        instance.save()
+
+    # Authorize editor to access resource after an application is saved as sent.
 
     if instance.status == Application.SENT and not instance.imported:
+        # Check if an authorization already exists.
+        if instance.specific_stream:
+            existing_authorization = Authorization.objects.filter(
+                authorized_user=instance.user,
+                partner=instance.partner,
+                stream=instance.specific_stream)
+        else:
+            existing_authorization = Authorization.objects.filter(
+                authorized_user=instance.user,
+                partner=instance.partner)
 
         authorized_user = instance.user
         authorizer = instance.sent_by
