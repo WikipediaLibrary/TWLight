@@ -2619,7 +2619,7 @@ class EvaluateApplicationTest(TestCase):
         # The email should contain user_instructions
         self.assertTrue(self.partner.user_instructions in mail.outbox[0].body)
 
-    def test_user_instructions_email(self):
+    def test_user_instructions_email_collection(self):
         """
         For a collection with the Partner.LINK authorization method,
         approving an application should send an email containing
