@@ -248,6 +248,38 @@ class Application(models.Model):
             return (self.date_closed - self.date_created).days
 
 
+    def get_user_instructions(self):
+        """
+        This application will either be to a partner or collection. If the
+        former, this function returns the partner user instructions. Otherwise,
+        it gets the user instructions for this collection.
+        """
+        if self.specific_stream:
+            return self.specific_stream.user_instructions
+        else:
+            return self.partner.user_instructions
+
+
+    def is_instantly_finalized(self):
+        """
+        Check if this application is to a partner or collection for which
+        we will instantly mark it as finalized and provide access.
+        """
+        instantly_finalised_authorization_methods = [Partner.PROXY, Partner.LINK]
+
+        # Authorization methods are defined at both the partner and collection level,
+        # so we need to know which one to check.
+        if self.specific_stream:
+            authorization_method = self.specific_stream.authorization_method
+        else:
+            authorization_method = self.partner.authorization_method
+
+        if authorization_method in instantly_finalised_authorization_methods:
+            return True
+        else:
+            return False
+
+
     @property
     def user(self):
         # Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation
@@ -324,10 +356,9 @@ def post_revision_commit(sender, instance, **kwargs):
     # For some authorization methods, we can skip the manual Approved->Sent
     # step and just immediately take an Approved application and give it
     # a finalised status.
-
-    skip_approved_authorization_methods = [Partner.PROXY, Partner.LINK]
     skip_approved = (instance.status == Application.APPROVED and
-        instance.partner.authorization_method in skip_approved_authorization_methods)
+        instance.is_instantly_finalized())
+
     if skip_approved:
         instance.status = Application.SENT
         instance.save()
