@@ -2533,9 +2533,9 @@ class EvaluateApplicationTest(TestCase):
 
         self.assertEqual(self.application.status, Application.QUESTION)
 
-    def test_immediately_sent(self):
+    def test_immediately_sent_collection(self):
         """
-        Given a partner with the Partner.LINK authorization method,
+        Given a collection with the Partner.LINK authorization method,
         an application flagged as APPROVED should update to SENT.
         """
         factory = RequestFactory()
@@ -2566,9 +2566,9 @@ class EvaluateApplicationTest(TestCase):
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.SENT)
 
-    def test_immediately_sent_collection(self):
+    def test_immediately_sent(self):
         """
-        Given a collection with Partner.LINK authorization method,
+        Given a partner with the Partner.LINK authorization method,
         an application flagged as APPROVED should update to SENT.
         """
         factory = RequestFactory()
