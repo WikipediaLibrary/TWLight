@@ -33,7 +33,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
-
+from django.utils.translation import ugettext_lazy as _
 
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
