@@ -2,10 +2,16 @@
 
 # Activates the Django virtual environment
 
-# Environment variables may not be loaded under all conditions.
+# Environment variables should be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
 then
-    source /etc/environment
+    exit 1
+fi
+
+# Get secrets.
+if [ -z "${DJANGO_DB_PASSWORD}" ]
+then
+    source /app/bin/twlight_docker_secrets.sh
 fi
 
 # Virtualenv scripts need to be run as www

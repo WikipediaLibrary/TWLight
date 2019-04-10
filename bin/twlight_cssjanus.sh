@@ -2,10 +2,10 @@
 #
 # Runs the LTR -> RTL CSS conversion script.
 
-# Environment variables may not be loaded under all conditions.
+# Environment variables should be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
 then
-    source /etc/environment
+    exit 1
 fi
 
 # The production branch should already have updated updated assets from travis.

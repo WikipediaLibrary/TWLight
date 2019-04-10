@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
 
+if  [ ! -n "${DJANGO_DB_NAME+isset}" ]
+then
+    DJANGO_DB_NAME=$(cat /run/secrets/DJANGO_DB_NAME)
+fi
+
+if  [ ! -n "${DJANGO_DB_USER+isset}" ]
+then
+    DJANGO_DB_USER=$(cat /run/secrets/DJANGO_DB_USER)
+fi
+
+if  [ ! -n "${DJANGO_DB_PASSWORD+isset}" ]
+then
+    DJANGO_DB_PASSWORD=$(cat /run/secrets/DJANGO_DB_PASSWORD)
+fi
+
+if  [ ! -n "${MYSQL_ROOT_PASSWORD+isset}" ]
+then
+    MYSQL_ROOT_PASSWORD=$(cat /run/secrets/MYSQL_ROOT_PASSWORD)
+fi
+
 if  [ -n "${MYSQL_ROOT_PASSWORD+isset}" ]
 then
     mysql_cmd="mysql -u root -p${MYSQL_ROOT_PASSWORD}"

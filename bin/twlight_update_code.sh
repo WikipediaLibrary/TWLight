@@ -7,10 +7,10 @@ exec {lockfile}>/var/lock/${self}
 flock -n ${lockfile}
 {
 
-    # Environment variables may not be loaded under all conditions.
+    # Environment variables should be loaded under all conditions.
     if [ -z "${TWLIGHT_HOME}" ]
     then
-        source /etc/environment
+        exit 1
     fi
 
     {

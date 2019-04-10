@@ -2,12 +2,6 @@
 #
 # Runs Django tests (https://docs.djangoproject.com/en/1.11/topics/testing/)
 
-# Environment variables may not be loaded under all conditions.
-if [ -z "${TWLIGHT_HOME}" ]
-then
-    source /etc/environment
-fi
-
 {
     # print the date for logging purposes
     echo [$(date)]

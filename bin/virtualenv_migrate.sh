@@ -2,12 +2,6 @@
 #
 # Runs the full Django migration process (https://docs.djangoproject.com/en/1.11/topics/migrations/)
 
-# Environment variables may not be loaded under all conditions.
-if [ -z "${TWLIGHT_HOME}" ]
-then
-    source /etc/environment
-fi
-
 # Load virtual environment
 if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 then
