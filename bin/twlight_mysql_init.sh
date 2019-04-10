@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
-if  [ ! -n "${DJANGO_DB_NAME+isset}" ]
+if  [ -f /run/secrets/DJANGO_DB_NAME ]
 then
     DJANGO_DB_NAME=$(cat /run/secrets/DJANGO_DB_NAME)
 fi
 
-if  [ ! -n "${DJANGO_DB_USER+isset}" ]
+if  [ -f /run/secrets/DJANGO_DB_USER ]
 then
     DJANGO_DB_USER=$(cat /run/secrets/DJANGO_DB_USER)
 fi
 
-if  [ ! -n "${DJANGO_DB_PASSWORD+isset}" ]
+if  [ -f /run/secrets/DJANGO_DB_PASSWORD ]
 then
     DJANGO_DB_PASSWORD=$(cat /run/secrets/DJANGO_DB_PASSWORD)
 fi
 
-if  [ ! -n "${MYSQL_ROOT_PASSWORD+isset}" ]
+if  [ -f /run/secrets/MYSQL_ROOT_PASSWORD ]
 then
     MYSQL_ROOT_PASSWORD=$(cat /run/secrets/MYSQL_ROOT_PASSWORD)
 fi
