@@ -25,6 +25,9 @@ services:
       - type: bind
         source: ./bin/twlight_mysql_init.sh
         target: /docker-entrypoint-initdb.d/twlight_mysql_init.sh
+      - type: bind
+        source: ${HOST_DB_DIR}/conf/${TWLIGHT_ENV}.d
+        target: /etc/mysql/conf.d
     ports:
       - "3306:3306"
     environment:
