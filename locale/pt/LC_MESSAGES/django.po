@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-04 01:33+0000\n"
-"PO-Revision-Date: 2019-04-04 18:32:31+0000\n"
+"PO-Revision-Date: 2019-04-11 16:21:33+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1187,7 +1187,7 @@ msgstr "Instruções facultativas para o envio dos dados de candidatura a este p
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for using an access code to access a partner resource.
 #: TWLight/resources/models.py:232
 msgid "Optional instructions for editors to use access codes for this partner. Sent via email upon access code assignment."
-msgstr ""
+msgstr "Instruções facultativas para os editores usarem códigos de acesso para este parceiro. Enviadas por correio eletrónico após a atribuição do código de acesso."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
 #: TWLight/resources/models.py:237
