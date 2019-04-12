@@ -9,7 +9,7 @@ then
 fi
 
 # Get secrets.
-if [ -z "${DJANGO_DB_PASSWORD}" ]
+if  [ ! -n "${SECRET_KEY+isset}" ]
 then
     source /app/bin/twlight_docker_secrets.sh
 fi
@@ -27,20 +27,8 @@ ACTIVATED=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") els
 if [ "${ACTIVATED}" -eq 0 ]
 then
 
-    # Start in TWLight user's home dir.
-    cd ~
-
-    # Suppress a non-useful warning message that occurs when gunicorn is running.
-    virtualenv TWLight 2>/dev/null
-
     # Activate Django virtualenv.
-    source TWLight/bin/activate
-fi
-
-# Environment variables may not be loaded under all conditions.
-if [ -z "${TWLIGHT_HOME}" ]
-then
-    source /etc/environment
+    source /venv/bin/activate
 fi
 
 # Move to the project root.

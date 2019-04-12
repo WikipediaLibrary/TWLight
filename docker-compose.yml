@@ -37,20 +37,35 @@ services:
       - DJANGO_DB_USER
       - DJANGO_DB_PASSWORD
       - MYSQL_ROOT_PASSWORD
+  twlight_base:
+    image: twlight_base:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.twlight.base
+  twlight_build:
+    image: twlight_build:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.twlight.build
+    volumes:
+      - venv:/venv
+    depends_on:
+      - 'twlight_base'
   twlight:
     image: twlight:latest
-    build: .
-    command: bash -c "source /app/bin/twlight_docker_secrets.sh && source /root/TWLight/bin/activate && cd /app && /root/TWLight/bin/gunicorn TWLight.wsgi"
+    build:
+      context: .
     volumes:
+      - venv:/venv
       - type: bind
         source: ${HOST_BACKUP_DIR}
         target: /app/backup
       - type: bind
         source: ${HOST_MEDIA_DIR}
         target: /app/media
-      - type: bind
-        source: ./TWLight
-        target: /app/TWLight
+      #- type: bind
+      #  source: ./TWLight
+      #  target: /app/TWLight
     depends_on:
       - 'db'
     env_file:
@@ -80,3 +95,6 @@ services:
       - "80:80"
     depends_on:
       - 'twlight'
+
+volumes:
+  venv:

@@ -1,50 +1,37 @@
-FROM library/alpine:latest
+FROM twlight_base
 
-ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin"
-ENV TWLIGHT_HOME=/app
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python2.7:${TWLIGHT_HOME}"
+ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="${PYTHONPATH}:/usr/lib/python2.7:${TWLIGHT_HOME}"
 
-WORKDIR /root/
-
-# System dependencies.
 RUN apk add --update \
+    # Refactoring shell code could remove this dependency
     bash \
-    build-base \
-    gcc \
-    jpeg-dev zlib-dev \
-    libxml2-dev libxslt-dev \
-    musl-dev \
+    # Not needed by the running app, but by the backup/restore shell scripts.
     mariadb-client \
-    mariadb-dev \
+    # Node stuff for rtl support. This and subsequent node things
+    # should all be moved out of the running container
+    # since we just use it to generate a css file.
     nodejs \
     npm \
-    python python-dev py-pip \
-    py-psycopg2 \
     tar ;\
-    # Node.js setup.
-    npm install cssjanus ; \
-    # Python setup.
-    pip install virtualenv ; \
-    # Pandoc is used for rendering wikicode resource descriptions into html for display.
-    wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-linux.tar.gz -P /tmp ; \
+    # CSS Janus is the thing actually used to generate the rtl css.
+    npm install cssjanus ;\
+    # Pandoc is used for rendering wikicode resource descriptions
+    # into html for display. We do need this on the live image.
+    wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-linux.tar.gz -P /tmp ;\
     tar -xf /tmp/pandoc-2.7.1-linux.tar.gz --directory /opt
 
-# Pip dependencies.
-COPY requirements /app/requirements
-
 # Utility scripts that run in the virtual environment.
-COPY bin/virtualenv_*.sh /app/bin/
-
-# Other utility scripts.
-COPY bin/twlight_*.sh /app/bin/
+COPY bin /app/bin/
 
 # i18n.
-COPY bin/twlight_cssjanus.js /app/bin/twlight_cssjanus.js
 COPY locale /app/locale
+
+COPY TWLight /app/TWLight
 
 WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
-RUN /app/bin/virtualenv_pip_update.sh
+
 EXPOSE 80
+
+ENTRYPOINT ["/bin/bash", "-c", "source /app/bin/virtualenv_activate.sh && /venv/bin/gunicorn TWLight.wsgi"]

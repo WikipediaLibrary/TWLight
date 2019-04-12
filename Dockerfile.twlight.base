@@ -1,0 +1,7 @@
+FROM library/alpine:latest
+
+RUN apk add --update \
+    mariadb-dev \
+    # Python, duh.
+    python py-pip ;\
+    pip install virtualenv
