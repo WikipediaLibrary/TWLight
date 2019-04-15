@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-04 01:33+0000\n"
-"PO-Revision-Date: 2019-04-08 15:16:07+0000\n"
+"PO-Revision-Date: 2019-04-15 16:10:08+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -1872,7 +1872,7 @@ msgstr "Tietoja Wikipedian Lähdekirjastosta"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:10
 msgid "The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects."
-msgstr "Wikipedian Lähdekirjasto tarjoaa ilmaisen pääsyn lukuisiin lähteisiin, joita voi käyttää tutkimuksen apuna Wikimedia-projektien sisältöjen kehittämiseksi."
+msgstr "Wikipedian Lähdekirjasto tarjoaa ilmaisen pääsyn lukuisiin lähteisiin, joita voi käyttää tutkimuksen apuna Wikimedia-hankkeiden sisältöjen kehittämiseksi."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:18
