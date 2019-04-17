@@ -290,8 +290,8 @@ class CSVAppCountByPartner(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow([_('Date'),
-            # Translators: This is the heading of a data file which lists the number of applications to a partner. Don't translate {partner}.
-            _('Number of applications to {partner}').format(partner=partner)])
+            # Translators: This is the heading of a data file which lists the number of applications to a partner.
+            _('Number of applications')])
 
         for row in data:
             writer.writerow(row)
@@ -314,8 +314,8 @@ class CSVUserCountByPartner(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow([_('Date'),
-            # Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner. Don't translate {partner}.
-            _('Number of unique users who have applied to {partner}').format(partner=partner)])
+            # Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
+            _('Number of unique users who applied')])
 
         for row in data:
             writer.writerow(row)

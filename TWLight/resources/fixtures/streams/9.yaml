@@ -1,0 +1,10 @@
+- model: resources.stream
+  pk: 9
+  fields:
+    partner: 23
+    name: Social & Behavioral
+    accounts_available: 20
+    description_last_revision_id: null
+    description_available: false
+    description_last_revision_ids: null
+    languages: []

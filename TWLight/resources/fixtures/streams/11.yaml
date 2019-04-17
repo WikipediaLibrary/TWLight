@@ -1,0 +1,11 @@
+- model: resources.stream
+  pk: 11
+  fields:
+    partner: 52
+    name: Journals
+    accounts_available: 100
+    description_last_revision_id: null
+    description_available: false
+    description_last_revision_ids: null
+    languages:
+    - 1

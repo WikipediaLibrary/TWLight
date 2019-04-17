@@ -27,7 +27,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.utils.translation import ugettext as _
 
 from TWLight.applications.models import Application
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, AccessCode
 from TWLight.users.models import Editor
 from TWLight.users.groups import get_coordinators, get_restricted
 
@@ -86,6 +86,10 @@ class CoordinatorOrSelf(object):
                         elif isinstance(obj, Partner):
                             obj_coordinator_test = (
                                 obj.coordinator.pk == user.pk
+                            )
+                        elif isinstance(obj, AccessCode):
+                            obj_coordinator_test = (
+                                obj.partner.coordinator.pk == user.pk
                             )
             except AttributeError:
                 # Keep the default.

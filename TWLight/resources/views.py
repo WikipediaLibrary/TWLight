@@ -26,7 +26,8 @@ from TWLight.graphs.helpers import (get_median,
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly, APIPartnerDescriptions
 
 from .forms import SuggestionForm
-from .models import Partner, Stream, Suggestion
+from .models import Partner, Stream, Suggestion, AccessCode
+
 import logging
 
 
@@ -298,7 +299,7 @@ class PartnersDetailView(APIPartnerDescriptions, DetailView):
 
         # Find out if current user has applications and change the Apply
         # button behaviour accordingly
-        if self.request.user.is_authenticated() and not partner.bundle:
+        if self.request.user.is_authenticated() and not partner.authorization_method == partner.BUNDLE:
             sent_apps = Application.objects.filter(
                                         editor=self.request.user.editor,
                                         status=Application.SENT,
@@ -399,6 +400,19 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
             context['partner_streams'] = False
 
         return context
+
+
+class PartnerUnassignCode(CoordinatorOrSelf, DetailView):
+    model = AccessCode
+    template_name = 'resources/partner_unassign_code.html'
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object()
+
+        object.application = None
+        object.save()
+
+        return HttpResponseRedirect(reverse('partners:users', kwargs={'pk':object.partner.pk}))
 
 
 @method_decorator(login_required, name='post')

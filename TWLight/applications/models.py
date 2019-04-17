@@ -3,18 +3,19 @@
 from datetime import date, datetime, timedelta
 from reversion import revisions as reversion
 from reversion.models import Version
+from reversion.signals import post_revision_commit
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.forms.models import model_to_dict
 from django.utils.timezone import localtime, now
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
-from TWLight.users.models import Editor
+from TWLight.users.models import Editor, Authorization
 
 class ValidApplicationsManager(models.Manager):
     def get_queryset(self):
@@ -96,7 +97,7 @@ class Application(models.Model):
                             blank=True, null=True)
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
-    account_email = models.CharField(max_length=64, blank=True, null=True)
+    account_email = models.EmailField(blank=True, null=True)
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
@@ -255,6 +256,19 @@ class Application(models.Model):
 
 
     @property
+    def latest_reviewer(self):
+        revision = self.get_latest_revision()
+
+        if revision:
+            try:
+                return revision.user
+            except AttributeError:
+                return None
+        else:
+            return None
+
+
+    @property
     def is_renewable(self):
         """
         Apps are eligible for renewal if they are approved and have not already
@@ -267,25 +281,24 @@ class Application(models.Model):
 
 # IMPORTANT: pre_save is not sent by Queryset.update(), so *none of this
 # behavior will happen on if you update() an Application queryset*.
-# That is sometimes okay (for instance, if you are turning an APPROVED app into
-# a SENT app, since days_open and date_closed were set on approval), but it is
-# not always okay. Errors caused by days_open not existing when expected to
+# That is sometimes okay, but it is not always okay.
+# Errors caused by days_open not existing when expected to
 # exist can show up in weird parts of the application (for example, template
 # rendering failing when get_num_days_open returns None but its output is
 # passed to a template filter that needs an integer).
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):
 
-    # Make sure not using a mix of dates and dateimes
+    # Make sure not using a mix of dates and datetimes
     if instance.date_created and isinstance(instance.date_created, datetime):
         instance.date_created = instance.date_created.date()
 
-    # Make sure not using a mix of dates and dateimes
+    # Make sure not using a mix of dates and datetimes
     if instance.date_closed and isinstance(instance.date_closed, datetime):
         instance.date_closed = instance.date_closed.date()
 
     if instance.id:
-        orig_app = Application.objects.get(pk=instance.id)
+        orig_app = Application.include_invalid.get(pk=instance.id)
         orig_status = orig_app.status
         if all([orig_status not in Application.FINAL_STATUS_LIST,
                 int(instance.status) in Application.FINAL_STATUS_LIST,
@@ -304,3 +317,50 @@ def update_app_status_on_save(sender, instance, **kwargs):
 
             instance.date_closed = localtime(now()).date()
             instance.days_open = 0
+
+# Authorize editor to access resource after an application is saved as sent.
+@receiver(post_save, sender=Application)
+def post_revision_commit(sender, instance, **kwargs):
+    # Check if an authorization already exists.
+    if instance.specific_stream:
+        existing_authorization = Authorization.objects.filter(
+            authorized_user=instance.user,
+            partner=instance.partner,
+            stream=instance.specific_stream)
+    else:
+        existing_authorization = Authorization.objects.filter(
+            authorized_user=instance.user,
+            partner=instance.partner)
+
+    if instance.status == Application.SENT and not instance.imported:
+
+        authorized_user = instance.user
+        authorizer = instance.sent_by
+
+        # In the case that there is no existing authorization, create a new one
+        if existing_authorization.count() == 0:
+            authorization = Authorization()
+        # If an authorization already existed (such as in the case of a
+        # renewal), we'll simply update that one.
+        elif existing_authorization.count() == 1:
+            authorization = existing_authorization[0]
+        else:
+            logger.error("Found more than one authorization object for "
+                         "{user} - {partner}".format(user=instance.user,
+                                                     partner=instance.partner))
+            return
+
+        if instance.specific_stream:
+            authorization.stream = instance.specific_stream
+
+        authorization.authorized_user = authorized_user
+        authorization.authorizer = authorizer
+        authorization.partner = instance.partner
+
+        # If this is a proxy partner, set (or reset) the expiry date
+        # to one year from now
+        if instance.partner.authorization_method == Partner.PROXY:
+            one_year_from_now = datetime.date.today() + timedelta(years=1)
+            authorization.date_expires = one_year_from_now
+
+        authorization.save()

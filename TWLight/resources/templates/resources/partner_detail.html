@@ -20,7 +20,7 @@
 
 {% block content %}
   <h1>{{ object }}</h1>
-  {% if not object.bundle %}
+  {% if not object.authorization_method == object.BUNDLE %}
     {% url 'applications:apply_single' object.pk as app_url %}
     {% url 'about' as about %}
     {% url 'terms' as terms %}
@@ -91,7 +91,7 @@
     <ul class="timeline half-timeline margin-bottom-2em">
 
     <div class="col-sm-5 col-md-4 pull-right timeline-right-overlay">
-  {% if not object.bundle %}
+  {% if not object.authorization_method == object.BUNDLE %}
     {% if object.is_waitlisted %}
     <div class="hidden-xs alert alert-warning resource-label-warning">
       <span class="resource-label">{% trans "Waitlisted" %}</span>
@@ -147,7 +147,7 @@
       {% if object.logos.logo.url %}
         <img src="{{ object.logos.logo.url }}" class="img-responsive hidden-xs center-block partner-logo">
       {% endif %}
-  {% if not object.bundle %}
+  {% if not object.authorization_method == object.BUNDLE %}
       <div class="well hidden-xs">
         {% if object.coordinator.editor.wp_username %}
           {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}

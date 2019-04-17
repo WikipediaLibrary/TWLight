@@ -15,7 +15,9 @@ then
     python manage.py user_example_data 200 || exit
 
     echo "Creating resource data"
-    python manage.py resources_example_data 50 || exit
+    python manage.py loaddata TWLight/resources/fixtures/partners/*.yaml
+    python manage.py loaddata TWLight/resources/fixtures/streams/*.yaml
+    python manage.py resources_example_data || exit
 
     echo "Creating applications data"
     python manage.py applications_example_data 1000 || exit

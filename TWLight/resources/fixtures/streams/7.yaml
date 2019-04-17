@@ -1,0 +1,10 @@
+- model: resources.stream
+  pk: 7
+  fields:
+    partner: 23
+    name: Health & Life Sciences
+    accounts_available: 60
+    description_last_revision_id: null
+    description_available: false
+    description_last_revision_ids: null
+    languages: []

@@ -52,7 +52,6 @@ class ApplicationCommentTest(TestCase):
             object_pk=app.pk,
             user=user,
             user_name=user.username,
-            user_email=user.email,
             comment="Content!",
             site=Site.objects.get_current(),
         )

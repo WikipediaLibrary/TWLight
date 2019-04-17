@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+
+import csv
 import vcr
 import requests
 import time
 
 from datetime import date, timedelta
 from mock import patch
+import os
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
@@ -25,7 +28,7 @@ from TWLight.users.groups import get_coordinators
 from TWLight.view_mixins import APIPartnerDescriptions
 
 from .factories import PartnerFactory, StreamFactory
-from .models import Language, RESOURCE_LANGUAGES, Partner
+from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode
 from .views import PartnersDetailView, PartnersFilterView, PartnersToggleWaitlistView
 from .filters import PartnerFilter
 
@@ -597,7 +600,6 @@ class PartnerViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-
 class PartnerDescriptionAPITests(APIPartnerDescriptions, TestCase):
     fixtures = ['TWLight/resources/fixtures/resources_partners.yaml']
 
@@ -631,3 +633,114 @@ class PartnerDescriptionAPITests(APIPartnerDescriptions, TestCase):
         self.assertNotEqual(''.join(dict.values(_.context['short_description'])), 'This is a test description')
         # partner_detail = self.client.get(partner_detail_url)
         # print(partner_detail)
+
+
+
+class CSVUploadTest(TestCase): # Migrated from staff dashboard test
+    @classmethod
+    def setUpClass(cls):
+        super(CSVUploadTest, cls).setUpClass()
+
+        cls.staff_user = UserFactory(username='staff_user', is_staff=True)
+        cls.staff_user.set_password('staff')
+        cls.staff_user.save()
+        cls.user = UserFactory()
+
+        cls.partner1 = PartnerFactory()
+        cls.partner1_pk = cls.partner1.pk
+        cls.partner2 = PartnerFactory()
+        cls.partner2_pk = cls.partner2.pk
+        cls.partner3 = PartnerFactory()
+        cls.partner3_pk = cls.partner3.pk
+
+        cls.url = reverse('admin:resources_accesscode_changelist')
+        # import url is added inside admin.py so just manually add it here.
+        cls.url = cls.url + 'import/'
+
+        # We should mock out any call to messages call in the view, since
+        # RequestFactory (unlike Client) doesn't run middleware. If you
+        # actually want to test that messages are displayed, use Client(),
+        # and stop/restart the patcher.
+        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        cls.message_patcher.start()
+
+
+    @classmethod
+    def tearDownClass(cls):
+        super(CSVUploadTest, cls).tearDownClass()
+        cls.staff_user.delete()
+        cls.user.delete()
+
+        # If one of the tests made a csv, delete it.
+        if os.path.exists('accesscodes.csv'):
+            os.remove('accesscodes.csv')
+
+        cls.message_patcher.stop()
+
+
+    def test_csv_upload(self):
+        """
+        A csv file with unique codes for multiple partners should
+        upload successfully and create the relevant objects.
+        """
+        test_file = open('accesscodes.csv', 'wb')
+        csv_writer = csv.writer(test_file, lineterminator='\n')
+        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
+        csv_writer.writerow(('BBCD-EFGH-IJKL', str(self.partner1_pk)))
+        csv_writer.writerow(('CBCD-EFGH-IJKL', str(self.partner2_pk)))
+        test_file.close()
+
+        client = Client()
+        session = client.session
+        client.login(username=self.staff_user.username, password='staff')
+
+        with open('accesscodes.csv', 'r') as csv_file:
+            response = client.post(self.url, {'access_code_csv': csv_file})
+
+        access_codes = AccessCode.objects.all()
+        self.assertEqual(access_codes.count(), 3)
+
+
+    def test_csv_duplicate(self):
+        """
+        A csv file with non-unique codes for multiple partners should
+        only upload the unique ones.
+        """
+        test_file = open('accesscodes.csv', 'wb')
+        csv_writer = csv.writer(test_file, lineterminator='\n')
+        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
+        csv_writer.writerow(('BBCD-EFGH-IJKL', str(self.partner1_pk)))
+        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
+        test_file.close()
+
+        client = Client()
+        session = client.session
+        client.login(username=self.staff_user.username, password='staff')
+
+        with open('accesscodes.csv', 'r') as csv_file:
+            response = client.post(self.url, {'access_code_csv': csv_file})
+
+        access_codes = AccessCode.objects.all()
+        self.assertEqual(access_codes.count(), 2)
+
+
+    def test_csv_formatting(self):
+        """
+        An incorrectly formatted csv shouldn't upload anything.
+        """
+        test_file = open('accesscodes.csv', 'wb')
+        csv_writer = csv.writer(test_file, lineterminator='\n')
+        csv_writer.writerow(('ABCD-EFGH-IJKL', 'EBSCO'))
+        csv_writer.writerow(('BBCD-EFGH-IJKL', 'JSTOR'))
+        csv_writer.writerow(('ABCD-EFGH-IJKL', 'BMJ'))
+        test_file.close()
+
+        client = Client()
+        session = client.session
+        client.login(username=self.staff_user.username, password='staff')
+
+        with open('accesscodes.csv', 'r') as csv_file:
+            response = client.post(self.url, {'access_code_csv': csv_file})
+
+        access_codes = AccessCode.objects.all()
+        self.assertEqual(access_codes.count(), 0)

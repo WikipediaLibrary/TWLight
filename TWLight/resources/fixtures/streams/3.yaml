@@ -1,0 +1,11 @@
+- model: resources.stream
+  pk: 3
+  fields:
+    partner: 10
+    name: Strategic, Defence & Security Studies
+    accounts_available: 50
+    description_last_revision_id: null
+    description_available: false
+    description_last_revision_ids: null
+    languages:
+    - 1

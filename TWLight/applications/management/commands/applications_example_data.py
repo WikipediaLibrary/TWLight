@@ -2,13 +2,36 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from faker import Faker
 import random
+from mock import patch
 
+from django.test import Client, RequestFactory
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
+from django.core.urlresolvers import reverse
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
-from TWLight.resources.models import Partner, Stream
+from TWLight.applications.views import SendReadyApplicationsView
+from TWLight.resources.models import Partner, Stream, AccessCode
+
+def logged_in_example_coordinator(client, coordinator):
+    """
+    Creates a logged in coordinator user. Compacted version of EditorCraftRoom
+    used in tests.
+    """
+    terms_url = reverse('terms')
+
+    coordinator.set_password('editor')
+    coordinator.save()
+
+    # Log user in
+    client = Client(SERVER_NAME='twlight.vagrant.localdomain')
+    session = client.session
+    client.login(username=coordinator.username, password='editor')
+
+    coordinator.terms_of_use = True
+
+    return coordinator
 
 class Command(BaseCommand):
     help = "Adds a number of example applications."
@@ -26,9 +49,18 @@ class Command(BaseCommand):
 
         import_date = datetime.datetime(2017, 7, 17, 0, 0, 0)
 
+        # We want to flag applications as SENT via a client later, so let's only
+        # automatically give applications non-Sent statuses.
+        valid_choices = [Application.PENDING, Application.QUESTION,
+            Application.APPROVED, Application.NOT_APPROVED, Application.INVALID]
+
         for _ in range(num_applications):
             random_user = random.choice(all_users)
-            random_partner = random.choice(available_partners)
+            # Limit to partners this user hasn't already applied to.
+            not_applied_partners = available_partners.exclude(
+                applications__editor=random_user.editor
+                )
+            random_partner = random.choice(not_applied_partners)
 
             app = ApplicationFactory(
                 editor = random_user.editor,
@@ -62,9 +94,16 @@ class Command(BaseCommand):
                 app.comments = "Imported on 2017-07-17"
                 app.imported = True
             else:
-                app.status = random.choice(Application.STATUS_CHOICES)[0]
+                app.status = random.choice(valid_choices)
+
+                # Figure out earliest valid date for this app
+                if random_user.editor.wp_registered < import_date.date():
+                    start_date = import_date
+                else:
+                    start_date = random_user.editor.wp_registered
+
                 app.date_created = fake.date_time_between(
-                    start_date = random_user.editor.wp_registered,
+                    start_date = start_date,
                     end_date = "now",
                     tzinfo=None)
                 app.rationale = fake.paragraph(nb_sentences=3)
@@ -84,12 +123,46 @@ class Command(BaseCommand):
                         tzinfo=None)
                     app.days_open = (app.date_closed - app.date_created).days
 
-            # Assign sent_by if this is a non-imported sent applications
-            if app.status == Application.SENT:
-                if not imported:
-                    app.sent_by = random_partner.coordinator
-
             app.save()
+
+        # Let's mark all Approved applications that were approved more
+        # than 3 weeks ago as Sent.
+        old_approved_apps = Application.objects.filter(
+            status=Application.APPROVED,
+            date_created__lte=datetime.datetime.now() - relativedelta(weeks=3)
+            )
+
+        # We need to be able to handle messages
+        message_patcher = patch('TWLight.applications.views.messages.add_message')
+        message_patcher.start()
+        for approved_app in old_approved_apps:
+            client = Client(SERVER_NAME='twlight.vagrant.localdomain')
+            coordinator = logged_in_example_coordinator(client, approved_app.partner.coordinator)
+
+            this_partner_access_codes = AccessCode.objects.filter(
+                                partner=approved_app.partner,
+                                authorization__isnull=True)
+
+            url = reverse('applications:send_partner',
+                kwargs={'pk': approved_app.partner.pk})
+
+            if approved_app.partner.authorization_method == Partner.EMAIL:
+                request = RequestFactory().post(url,
+                    data={'applications': [approved_app.pk]})
+
+            # If this partner has access codes, assign a code to
+            # this sent application.
+            elif approved_app.partner.authorization_method == Partner.CODES:
+                access_code = random.choice(this_partner_access_codes)
+                request = RequestFactory().post(url,
+                            data={'accesscode': ["{app_pk}_{code}".format(
+                                app_pk=approved_app.pk,
+                                code=access_code.code)]})
+
+            request.user = coordinator
+
+            response = SendReadyApplicationsView.as_view()(
+                request, pk=approved_app.partner.pk)
 
         # Renew a selection of sent apps.
         all_apps = Application.objects.filter(status=Application.SENT)

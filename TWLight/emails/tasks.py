@@ -38,7 +38,8 @@ from django.shortcuts import get_object_or_404
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.emails.signals import ContactUs
-from TWLight.resources.models import Partner
+from TWLight.resources.models import AccessCode, Partner
+from TWLight.users.models import Authorization
 from TWLight.users.groups import get_restricted
 
 
@@ -135,7 +136,7 @@ def send_comment_notification_emails(sender, **kwargs):
 
     # If the editor who owns this application was not the comment poster, notify
     # them of the new comment.
-    if current_comment.user_email != app.editor.user.email:
+    if current_comment.user != app.editor.user:
         if app.editor.user.email:
             logger.info('we should notify the editor')
             email = CommentNotificationEmailEditors()
@@ -300,7 +301,8 @@ def update_app_status_on_save(sender, instance, **kwargs):
         # WAITLIST is a status adhering to Partner, not to Application. So
         # to email editors when they apply to a waitlisted partner, we need
         # to check Partner status on app submission.
-        # SENT is a post approval step that we don't need to send emails about.
+        # SENT is a post approval step that shouldn't be a possible status on
+        # app creation under normal circumstances.
 
         if instance.partner.status == Partner.WAITLIST:
             handler_key = 'waitlist'
@@ -322,6 +324,33 @@ def update_app_status_on_save(sender, instance, **kwargs):
                     'but no such handler exists'.format(handler_key=handler_key))
             pass
 
+@receiver(pre_save, sender=AccessCode)
+def send_authorization_emails(sender, instance, **kwargs):
+    """
+    When access code objects are updated, check if they should trigger
+    an email to a user.
+    """
+
+    # The AccessCode should already exist, don't trigger on code creation.
+    if instance.id:
+        orig_code = AccessCode.objects.get(pk=instance.id)
+        # If this code is having an authorization added where it didn't
+        # have one before, we've probably just finalised an application
+        # and therefore want to send an email.
+        if not orig_code.authorization and instance.authorization:
+
+            base_url = get_current_site(None).domain
+
+            access_code_instructions = instance.partner.access_code_instructions
+            mail_instance = MagicMailBuilder()
+
+            email = mail_instance.access_code_email(instance.authorization.authorized_user.email,
+                {'editor_wp_username': instance.authorization.authorized_user.editor.wp_username,
+                 'partner': instance.partner,
+                 'access_code': instance.code,
+                 'access_code_instructions': access_code_instructions
+                 })
+            email.send()
 
 @receiver(pre_save, sender=Partner)
 def notify_applicants_when_waitlisted(sender, instance, **kwargs):

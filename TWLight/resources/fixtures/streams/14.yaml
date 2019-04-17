@@ -1,0 +1,10 @@
+- model: resources.stream
+  pk: 14
+  fields:
+    partner: 61
+    name: Drama Online
+    accounts_available: 25
+    description_last_revision_id: null
+    description_available: false
+    description_last_revision_ids: null
+    languages: []

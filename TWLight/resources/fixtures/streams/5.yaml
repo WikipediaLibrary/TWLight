@@ -1,0 +1,11 @@
+- model: resources.stream
+  pk: 5
+  fields:
+    partner: 20
+    name: Physical sciences
+    accounts_available: null
+    description_last_revision_id: null
+    description_available: false
+    description_last_revision_ids: null
+    languages:
+    - 1
