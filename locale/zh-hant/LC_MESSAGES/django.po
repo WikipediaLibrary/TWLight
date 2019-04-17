@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-04 01:33+0000\n"
-"PO-Revision-Date: 2019-04-04 18:32:32+0000\n"
+"PO-Revision-Date: 2019-04-08 15:16:10+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1181,7 +1181,7 @@ msgstr "發送申請程序資料給合作夥伴的選用說明。"
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for using an access code to access a partner resource.
 #: TWLight/resources/models.py:232
 msgid "Optional instructions for editors to use access codes for this partner. Sent via email upon access code assignment."
-msgstr ""
+msgstr "向編輯者使用對於此合作夥伴存取代碼的選用說明。透過電子郵件發送存取代碼分配。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
 #: TWLight/resources/models.py:237

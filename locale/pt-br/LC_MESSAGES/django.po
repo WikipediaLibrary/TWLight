@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-04 01:33+0000\n"
-"PO-Revision-Date: 2019-04-04 18:32:32+0000\n"
+"PO-Revision-Date: 2019-04-08 15:16:09+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1183,7 +1183,7 @@ msgstr "Instruções opcionais para enviar dados de candidatura para esse parcei
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for using an access code to access a partner resource.
 #: TWLight/resources/models.py:232
 msgid "Optional instructions for editors to use access codes for this partner. Sent via email upon access code assignment."
-msgstr ""
+msgstr "Instruções opcionais para editores usar códigos de acesso para este parceiro. Enviado por email após a atribuição do código de acesso."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
 #: TWLight/resources/models.py:237
@@ -2164,9 +2164,9 @@ msgstr "Benefícios"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.
 #: TWLight/templates/home.html:37
-#, fuzzy, python-format
+#, python-format
 msgid "<p>The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects. </p> <p>Through the Library Card you can apply for access to %(partner_count)s leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p> <p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply.</p>"
-msgstr "<p>A Biblioteca da Wikipédia oferece acesso gratuito a materiais de pesquisa para melhorar sua capacidade de contribuir com conteúdo para os projetos da Wikimedia. </p> <p>Através do cartão da biblioteca, você pode solicitar acesso a editoras líderes %(partner_count)s de fontes confiáveis, incluindo 80.000 periódicos exclusivos que, de outra forma, seriam pagos. Use apenas seu login na Wikipedia para se inscrever. Em breve ... acesso direto aos recursos usando apenas o login da Wikipedia!</p> <p>Se você acha que poderia usar o acesso a um de nossos recursos de parceiro e é um editor ativo em qualquer projeto apoiado pela Fundação Wikimedia, <a href=\"/applications/request/\">por favor aplique</a>.</p>"
+msgstr "<p>A Biblioteca da Wikipédia oferece acesso gratuito a materiais de pesquisa para melhorar sua capacidade de contribuir com conteúdo para os projetos da Wikimedia. </p> <p>Através do cartão da biblioteca, você pode solicitar acesso a editoras líderes %(partner_count)s de fontes confiáveis, incluindo 80.000 periódicos exclusivos que, de outra forma, seriam pagos. Use apenas seu login na Wikipedia para se inscrever. Em breve ... acesso direto aos recursos usando apenas o login da Wikipedia!</p> <p>Se você acha que poderia usar o acesso a um de nossos recursos de parceiro e é um editor ativo em qualquer projeto apoiado pela Fundação Wikimedia.</p>"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
 #: TWLight/templates/home.html:57

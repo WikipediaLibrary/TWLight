@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-04 01:33+0000\n"
-"PO-Revision-Date: 2019-04-04 18:32:30+0000\n"
+"PO-Revision-Date: 2019-04-08 15:16:07+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -758,9 +758,8 @@ msgstr "Indsend"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
-#, fuzzy
 msgid "Your Wikipedia Library access code"
-msgstr "Wikipedia bibliotek teamet"
+msgstr "Din adgangskode til Wikipedia biblioteket"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
@@ -985,9 +984,8 @@ msgstr "Median dage til beslutning"
 
 #. Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
 #: TWLight/graphs/views.py:318
-#, fuzzy
 msgid "Number of unique users who applied"
-msgstr "Antal unikke brugere der har ansøgt til {partner}"
+msgstr "Antal unikke brugere der har ansøgt"
 
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
 #: TWLight/graphs/views.py:333 TWLight/graphs/views.py:360
@@ -1623,9 +1621,8 @@ msgstr "Forslå en partner"
 
 #. Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/)
 #: TWLight/resources/templates/resources/partner_filter.html:30
-#, fuzzy
 msgid "Apply to multiple partners"
-msgstr "Samlet antal partnere"
+msgstr "Ansøg til adskillige partnere"
 
 #: TWLight/resources/templates/resources/partner_filter.html:41
 msgid "No partners meet the specified criteria."
