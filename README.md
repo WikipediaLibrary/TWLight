@@ -13,6 +13,7 @@ The Wikipedia Library Card Platform app, available at http://wikipedialibrary.wm
 - Fire up an empty TWLight instance `docker-compose build && docker-compose up`
 - Run migrations `docker-compose exec twlight /app/bin/virtualenv_migrate.sh`
 - See the thing running on [localhost](http://localhost/)
+- Get an interactive shell `docker-compose exec twlight /app/bin/virtualenv_activate.sh bash`
 
 See [twlight_puppet](https://github.com/WikipediaLibrary/twlight_puppet) if you want to set things up on WMF servers, and [twlight_vagrant](https://github.com/WikipediaLibrary/twlight_vagrant) if you want to change things.
 

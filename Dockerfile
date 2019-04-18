@@ -1,6 +1,31 @@
-FROM twlight_base
+FROM library/alpine:latest as twlight_base
+RUN apk add --update \
+    libjpeg-turbo \
+    mariadb-dev \
+    # Python, duh.
+    python py-pip ;\
+    pip install virtualenv
 
-ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="${PYTHONPATH}:/usr/lib/python2.7:${TWLIGHT_HOME}"
+FROM twlight_base as twlight_build
+# Build dependencies.
+RUN apk add --update \
+    build-base \
+    gcc \
+    libjpeg-turbo-dev \
+    libxml2-dev libxslt-dev \
+    musl-dev \
+    python-dev \
+    zlib-dev
+
+# Pip dependencies.
+COPY requirements /requirements
+RUN virtualenv /venv ;\
+    source /venv/bin/activate ;\
+    pip install -r /requirements/wmf.txt
+
+FROM twlight_base
+COPY --from=twlight_build /venv /venv
+ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv/lib/python2.7:/usr/lib/python2.7"
 
 RUN apk add --update \
     # Refactoring shell code could remove this dependency
@@ -34,4 +59,4 @@ COPY manage.py /app/manage.py
 
 EXPOSE 80
 
-ENTRYPOINT ["/bin/bash", "-c", "source /app/bin/virtualenv_activate.sh && /venv/bin/gunicorn TWLight.wsgi"]
+ENTRYPOINT ["/app/bin/virtualenv_activate.sh"]

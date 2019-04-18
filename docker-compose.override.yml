@@ -1,0 +1,20 @@
+---
+
+version: '3.2'
+
+services:
+# Local environment should mount things from the code directory
+  twlight:
+    volumes:
+      - type: bind
+        source: ./bin
+        target: /app/bin
+      - type: bind
+        source: ./locale
+        target: /app/locale
+      - type: bind
+        source: ./requirements
+        target: /app/requirements
+      - type: bind
+        source: ./TWLight
+        target: /app/TWLight

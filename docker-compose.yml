@@ -16,7 +16,7 @@ secrets:
   TWLIGHT_OAUTH_CONSUMER_KEY:
     file: ./secrets/${TWLIGHT_ENV}.twlight_oauth_consumer_key
   TWLIGHT_OAUTH_CONSUMER_SECRET:
-    file: ./secrets/${TWLIGHT_ENV}.twlight_oauth_consumer_key
+    file: ./secrets/${TWLIGHT_ENV}.twlight_oauth_consumer_secret
 
 services:
   db:
@@ -37,41 +37,21 @@ services:
       - DJANGO_DB_USER
       - DJANGO_DB_PASSWORD
       - MYSQL_ROOT_PASSWORD
-  twlight_base:
-    image: twlight_base:latest
-    build:
-      context: .
-      dockerfile: Dockerfile.twlight.base
-  twlight_build:
-    image: twlight_build:latest
-    build:
-      context: .
-      dockerfile: Dockerfile.twlight.build
-    volumes:
-      - venv:/venv
-    depends_on:
-      - 'twlight_base'
   twlight:
     image: twlight:latest
-    build:
-      context: .
+    build: .
+    command: /venv/bin/gunicorn TWLight.wsgi
     volumes:
-      - venv:/venv
       - type: bind
         source: ${HOST_BACKUP_DIR}
         target: /app/backup
       - type: bind
         source: ${HOST_MEDIA_DIR}
         target: /app/media
-      #- type: bind
-      #  source: ./TWLight
-      #  target: /app/TWLight
     depends_on:
       - 'db'
     env_file:
       - ./conf/${TWLIGHT_ENV}.twlight.env
-    environment:
-      - TWLIGHT_GIT_REVISION
     secrets:
       - DJANGO_DB_NAME
       - DJANGO_DB_USER
@@ -95,6 +75,3 @@ services:
       - "80:80"
     depends_on:
       - 'twlight'
-
-volumes:
-  venv:
