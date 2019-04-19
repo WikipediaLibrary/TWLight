@@ -80,7 +80,7 @@ flock -n ${lockfile}
                 ${TWLIGHT_HOME}/bin/./twlight_backup.sh
             fi
 
-            # Pull latest code from ${TWLIGHT_GIT_REVISION}.
+            # Pull latest code.
             cd ${TWLIGHT_HOME}
             git pull
 
