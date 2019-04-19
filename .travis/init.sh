@@ -30,4 +30,4 @@ python manage.py makemigrations
 python manage.py migrate || bash -c "python manage.py sync_translation_fields --noinput && python manage.py migrate"
 
 # Compile translations. Slightly involved due to this being a Wikimedia project.
-bin/./virtualenv_translate.sh last-commit
+bin/./virtualenv_activate.sh bin/./virtualenv_translate.sh last-commit
