@@ -145,7 +145,7 @@
                 {{ object_list.next_page_number }}
                 </a></li>
             {% comment %}Decide based on the total number of pages, if a '...' is needed or not.{% endcomment %}
-            {% if object_list.number|add:'1' != object_list.paginator.num_pages %}				
+            {% if object_list.number|add:'1' != object_list.paginator.num_pages %}
               <li><a>...</a></li>
             {% endif %}
           {% endif %}

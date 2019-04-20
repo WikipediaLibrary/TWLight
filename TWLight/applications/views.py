@@ -841,6 +841,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # important work for Applications. This includes handling the closing
         # dates for applications and sending email notifications to editors
         # about their applications.
+        batch_update_failed = []
+        batch_update_success = []
         for app_pk in request.POST.getlist('applications'):
             try:
                 app = Application.objects.get(pk=app_pk)
@@ -848,12 +850,29 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 logger.exception('Could not find app with posted pk {pk}; '
                     'continuing through remaining apps'.format(pk=app_pk))
                 continue
-
-            app.status = status
-            app.save()
-        #Translators: After a coordinator has changed the status of a number of applications, this message appears.
-        messages.add_message(request, messages.SUCCESS,
-            _('Batch update successful.'))
+            if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
+                try:
+                    assert app.partner.status != Partner.WAITLIST
+                    batch_update_success.append(app_pk)
+                    app.status = status
+                    app.save()
+                except AssertionError:
+                    batch_update_failed.append(app_pk)
+            else:
+                batch_update_success.append(app_pk)
+                app.status = status
+                app.save()
+        
+        if batch_update_success:
+            success_apps = ', '.join(map(str, batch_update_success))
+            #Translators: After a coordinator has changed the status of a number of applications, this message appears.
+            messages.add_message(request, messages.SUCCESS,
+                _('Batch update of application(s) {} successful.'.format(success_apps)))
+        if batch_update_failed:
+            failed_apps = ', '.join(map(str, batch_update_failed))
+            #Translators: After a coordinator has changed the status of a number of applications, if the partner(s) is/are waitlisted, this message appears.
+            messages.add_message(request, messages.ERROR,
+                _('Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted.'.format(failed_apps)))
 
         return HttpResponseRedirect(reverse_lazy('applications:list'))
 
