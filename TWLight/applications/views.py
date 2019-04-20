@@ -850,14 +850,30 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 logger.exception('Could not find app with posted pk {pk}; '
                     'continuing through remaining apps'.format(pk=app_pk))
                 continue
-            if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
-                try:
-                    assert app.partner.status != Partner.WAITLIST
-                    batch_update_success.append(app_pk)
-                    app.status = status
-                    app.save()
-                except AssertionError:
-                    batch_update_failed.append(app_pk)
+            if app.partner.authorization_method == Partner.PROXY:
+                if app.specific_stream is not None:
+                    if app.specific_stream.accounts_available is not None:
+                        total_apps_approved_or_sent = User.objects.filter(
+                                              editor__applications__partner=app.partner,
+                                              editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                              editor__applications__specific_stream=app.specific_stream).count()
+                        total_accounts_available = app.specific_stream.accounts_available
+                        total_accounts_available_for_distribution = total_accounts_available - total_apps_approved_or_sent
+                elif app.partner.accounts_available is not None:
+                    total_apps_approved_or_sent = User.objects.filter(
+                                          editor__applications__partner=app.partner,
+                                          editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                          editor__applications__specific_stream=None).count()
+                    total_accounts_available_for_distribution = app.partner.accounts_available - total_apps_approved_or_sent
+
+                if int(status) == Application.APPROVED:
+                    try:
+                        assert app.partner.status != Partner.WAITLIST and total_accounts_available_for_distribution > 0
+                        batch_update_success.append(app_pk)
+                        app.status = status
+                        app.save()
+                    except AssertionError:
+                        batch_update_failed.append(app_pk)
             else:
                 batch_update_success.append(app_pk)
                 app.status = status
@@ -870,9 +886,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 _('Batch update of application(s) {} successful.'.format(success_apps)))
         if batch_update_failed:
             failed_apps = ', '.join(map(str, batch_update_failed))
-            #Translators: After a coordinator has changed the status of a number of applications, if the partner(s) is/are waitlisted, this message appears.
+            #Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
             messages.add_message(request, messages.ERROR,
-                _('Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted.'.format(failed_apps)))
+                _('Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have zero accounts available for distribution.'.format(failed_apps)))
 
         return HttpResponseRedirect(reverse_lazy('applications:list'))
 
@@ -957,7 +973,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
         else:
             context['unavailable_streams'] = None
             
-            #Provide context to template only if accounts_available field is set
+            # Provide context to template only if accounts_available field is set
             if partner.accounts_available is not None:
                 context['total_apps_approved_or_sent'] = total_apps_approved_or_sent
                 
