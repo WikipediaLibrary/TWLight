@@ -34,4 +34,3 @@ fi
 # Move to the project root.
 cd $TWLIGHT_HOME
 
-exec "$@"
