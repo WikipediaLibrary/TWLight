@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-04-04 01:33+0000\n"
+"POT-Creation-Date: 2019-04-23 09:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,7 +65,7 @@ msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
 msgstr ""
 
 #: TWLight/applications/forms.py:320 TWLight/users/admin.py:76
-#: TWLight/users/models.py:114
+#: TWLight/users/models.py:117
 msgid "Username"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 #: TWLight/resources/models.py:183
 #: TWLight/resources/templates/resources/partner_users.html:27
 #: TWLight/resources/templates/resources/partner_users.html:78
-#: TWLight/users/forms.py:125
+#: TWLight/users/forms.py:134
 msgid "Email"
 msgstr ""
 
@@ -1011,6 +1011,35 @@ msgstr ""
 msgid "Your Wikipedia Library application has been denied"
 msgstr ""
 
+#. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
+#, python-format
+msgid ""
+"<p>Dear %(user)s,</p> <p>According to our records, your access to "
+"%(partner_name)s will soon expire and you may lose access. If you want to "
+"continue making use of your free account, you can request renewal of your "
+"account by clicking the Renew button at %(partner_link)s.</p> <p>Best,</p> "
+"<p>The Wikipedia Library</p> <p>You can disable these emails in your user "
+"page preferences: https://wikipedialibrary.wmflabs.org/users/</p>"
+msgstr ""
+
+#. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
+#, python-format
+msgid ""
+"Dear %(user)s, According to our records, your access to %(partner_name)s "
+"will soon expire and you may lose access. If you want to continue making use "
+"of your free account, you can request renewal of your account by clicking "
+"the Renew button at %(partner_link)s. Best, The Wikipedia Library You can "
+"disable these emails in your user page preferences: https://wikipedialibrary."
+"wmflabs.org/users/"
+msgstr ""
+
+#. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
+msgid "Your Wikipedia Library access may soon expire"
+msgstr ""
+
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
 #, python-format
@@ -1268,7 +1297,7 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-#: TWLight/resources/models.py:205 TWLight/resources/models.py:408
+#: TWLight/resources/models.py:205 TWLight/resources/models.py:416
 msgid ""
 "Add number of new accounts to the existing value, not by reseting it to zero."
 msgstr ""
@@ -1343,131 +1372,138 @@ msgstr ""
 msgid "Select all languages in which this partner publishes content."
 msgstr ""
 
+#. Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
 #: TWLight/resources/models.py:270
+msgid ""
+"The standard length of an access grant from this Partner. Entered as <days "
+"hours:minutes:seconds>."
+msgstr ""
+
+#: TWLight/resources/models.py:278
 msgid "Old Tags"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
-#: TWLight/resources/models.py:281
+#: TWLight/resources/models.py:289
 msgid ""
 "Link to registration page. Required if users must sign up on the partner's "
 "website in advance; optional otherwise."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their real name when applying
-#: TWLight/resources/models.py:285
+#: TWLight/resources/models.py:293
 msgid "Mark as true if this partner requires applicant names."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify the country in which they live when applying.
-#: TWLight/resources/models.py:288
+#: TWLight/resources/models.py:296
 msgid "Mark as true if this partner requires applicant countries of residence."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a title for the resource they want to access when applying.
-#: TWLight/resources/models.py:292
+#: TWLight/resources/models.py:300
 msgid ""
 "Mark as true if this partner requires applicants to specify the title they "
 "want to access."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a collection of resources when applying.
-#: TWLight/resources/models.py:296
+#: TWLight/resources/models.py:304
 msgid ""
 "Mark as true if this partner requires applicants to specify the database "
 "they want to access."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their occupation when applying.
-#: TWLight/resources/models.py:300
+#: TWLight/resources/models.py:308
 msgid ""
 "Mark as true if this partner requires applicants to specify their occupation."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their institutional affiliation (e.g. university) when applying.
-#: TWLight/resources/models.py:304
+#: TWLight/resources/models.py:312
 msgid ""
 "Mark as true if this partner requires applicants to specify their "
 "institutional affiliation."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
-#: TWLight/resources/models.py:308
+#: TWLight/resources/models.py:316
 msgid ""
 "Mark as true if this partner requires applicants to agree with the partner's "
 "terms of use."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
-#: TWLight/resources/models.py:312
+#: TWLight/resources/models.py:320
 msgid ""
 "Mark as true if this partner requires applicants to have already signed up "
 "at the partner website."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:374
+#: TWLight/resources/models.py:382
 msgid "Optional image file that can be used to represent this partner."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:402
+#: TWLight/resources/models.py:410
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:412
+#: TWLight/resources/models.py:420
 msgid "Optional description of this stream's resources."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:453
+#: TWLight/resources/models.py:461
 msgid ""
 "Organizational role or job title. This is NOT intended to be used for "
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:460
+#: TWLight/resources/models.py:468
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
-#: TWLight/resources/models.py:479
+#: TWLight/resources/models.py:487
 msgid "Potential partner's name (e.g. McFarland)."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
-#: TWLight/resources/models.py:483
+#: TWLight/resources/models.py:491
 msgid "Optional description of this potential partner."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
-#: TWLight/resources/models.py:487
+#: TWLight/resources/models.py:495
 msgid "Link to the potential partner's website."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
-#: TWLight/resources/models.py:491
+#: TWLight/resources/models.py:499
 msgid "User who authored this suggestion."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-#: TWLight/resources/models.py:495
+#: TWLight/resources/models.py:503
 msgid "Users who have upvoted this suggestion."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
-#: TWLight/resources/models.py:520
+#: TWLight/resources/models.py:528
 msgid "URL of a video tutorial."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
-#: TWLight/resources/models.py:541
+#: TWLight/resources/models.py:549
 msgid "An access code for this partner."
 msgstr ""
 
@@ -1901,7 +1937,7 @@ msgstr ""
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
-#: TWLight/users/views.py:371
+#: TWLight/users/views.py:383
 msgid "Confirm"
 msgstr ""
 
@@ -2463,7 +2499,7 @@ msgstr ""
 
 #. Translators: Found on the password reset page.
 #: TWLight/templates/registration/password_change_form.html:11
-#: TWLight/users/templates/users/preferences.html:28
+#: TWLight/users/templates/users/preferences.html:39
 msgid "Change password"
 msgstr ""
 
@@ -2553,28 +2589,28 @@ msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
 msgstr ""
 
 #. Translators: Labels the button users click to request a restriction on the processing of their data.
-#: TWLight/users/forms.py:81
+#: TWLight/users/forms.py:90
 msgid "Restrict my data"
 msgstr ""
 
 #. Translators: Users must click this button when registering to agree to the website terms of use.
-#: TWLight/users/forms.py:104
+#: TWLight/users/forms.py:113
 msgid "I agree with the terms of use"
 msgstr ""
 
 #. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:113
+#: TWLight/users/forms.py:122
 msgid "I accept"
 msgstr ""
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
-#: TWLight/users/forms.py:127
+#: TWLight/users/forms.py:136
 msgid ""
 "Use my Wikipedia email address (will be updated the next time you login)."
 msgstr ""
 
 #. Translators: This labels a button which users click to change their email.
-#: TWLight/users/forms.py:140
+#: TWLight/users/forms.py:149
 msgid "Update email"
 msgstr ""
 
@@ -2595,75 +2631,85 @@ msgid ""
 "they log in? Defaults to True."
 msgstr ""
 
+#. Translators: Description of the option users have to enable or disable reminder emails for renewals
+#: TWLight/users/models.py:78
+msgid "Does this user want renewal reminder notices?"
+msgstr ""
+
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:107
+#: TWLight/users/models.py:110
 msgid "When this profile was first created"
 msgstr ""
 
 #. Translators: The total number of edits this user has made to all Wikipedia projects
-#: TWLight/users/models.py:116
+#: TWLight/users/models.py:119
 msgid "Wikipedia edit count"
 msgstr ""
 
 #. Translators: The date this user registered their Wikipedia account
-#: TWLight/users/models.py:119
+#: TWLight/users/models.py:122
 msgid "Date registered at Wikipedia"
 msgstr ""
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:123
+#: TWLight/users/models.py:126
 msgid "Wikipedia user ID"
 msgstr ""
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:129
+#: TWLight/users/models.py:132
 msgid "Wikipedia groups"
 msgstr ""
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:132
+#: TWLight/users/models.py:135
 msgid "Wikipedia user rights"
 msgstr ""
 
 #. Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-#: TWLight/users/models.py:136
+#: TWLight/users/models.py:139
 msgid ""
 "At their last login, did this user meet the criteria in the terms of use?"
 msgstr ""
 
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:143
+#: TWLight/users/models.py:146
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:363
+#: TWLight/users/models.py:366
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:392
+#: TWLight/users/models.py:395
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:400
+#: TWLight/users/models.py:403
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:406
+#: TWLight/users/models.py:409
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:413
+#: TWLight/users/models.py:416
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:420
+#: TWLight/users/models.py:423
 msgid "The stream for which the editor is authorized."
+msgstr ""
+
+#. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
+#: TWLight/users/models.py:427
+msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
@@ -2807,13 +2853,17 @@ msgid ""
 "Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
 msgstr ""
 
+#: TWLight/users/templates/users/preferences.html:19
+msgid "Emails"
+msgstr ""
+
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
-#: TWLight/users/templates/users/preferences.html:21
+#: TWLight/users/templates/users/preferences.html:32
 msgid "Password"
 msgstr ""
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
-#: TWLight/users/templates/users/preferences.html:40
+#: TWLight/users/templates/users/preferences.html:51
 msgid "Data"
 msgstr ""
 
@@ -3166,8 +3216,15 @@ msgid ""
 "administrator for help."
 msgstr ""
 
+#. Translators: This is a button which updates user preference settings
+#. Translators: This is the button users click to confirm changes to their personal information.
+#: TWLight/users/templates/users/user_email_preferences.html:13
+#: TWLight/users/views.py:270
+msgid "Update"
+msgstr ""
+
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:108
+#: TWLight/users/views.py:109
 #, python-brace-format
 msgid ""
 "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help "
@@ -3177,48 +3234,43 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:241 TWLight/users/views.py:313
-#: TWLight/users/views.py:357
+#: TWLight/users/views.py:253 TWLight/users/views.py:325
+#: TWLight/users/views.py:369
 msgid "You must be logged in to do that."
 msgstr ""
 
-#. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/views.py:258
-msgid "Update"
-msgstr ""
-
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:270
+#: TWLight/users/views.py:282
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:300
+#: TWLight/users/views.py:312
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:323
+#: TWLight/users/views.py:335
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:329
+#: TWLight/users/views.py:341
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:513
+#: TWLight/users/views.py:525
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:518
+#: TWLight/users/views.py:530
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
