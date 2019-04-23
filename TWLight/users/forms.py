@@ -71,6 +71,15 @@ class SetLanguageForm(forms.Form):
 
 
 
+class UserEmailForm(forms.Form):
+    send_renewal_notices = forms.BooleanField(required=False)
+
+    def __init__(self, user, *args, **kwargs):
+        super(UserEmailForm, self).__init__(*args, **kwargs)
+        self.fields['send_renewal_notices'].initial = user.userprofile.send_renewal_notices
+
+
+
 class RestrictDataForm(forms.Form):
     restricted = forms.BooleanField(required= False)
 

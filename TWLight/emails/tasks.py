@@ -41,6 +41,7 @@ from TWLight.emails.signals import ContactUs
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.models import Authorization
 from TWLight.users.groups import get_restricted
+from TWLight.users.signals import Notice
 
 
 logger = logging.getLogger(__name__)
@@ -78,6 +79,9 @@ class CoordinatorReminderNotification(template_mail.TemplateMail):
     name = 'coordinator_reminder_notification'
 
 
+class UserRenewalNotice(template_mail.TemplateMail):
+    name = 'user_renewal_notice'
+
 @receiver(Reminder.coordinator_reminder)
 def send_coordinator_reminder_emails(sender, **kwargs):
     """
@@ -105,6 +109,29 @@ def send_coordinator_reminder_emails(sender, **kwargs):
          'app_count': app_count,
          'link': link})
     logger.info(u'Email queued.')
+
+@receiver(Notice.user_renewal_notice)
+def send_user_renewal_notice_emails(sender, **kwargs):
+    """
+    Any time the related managment command is run, this sends email to
+    users who have authorizations that are soon to expire.
+    """
+    user_wp_username = kwargs['user_wp_username']
+    user_email = kwargs['user_email']
+    user_lang = kwargs['user_lang']
+    partner_name = kwargs['partner_name']
+    path = kwargs['partner_link']
+
+    base_url = get_current_site(None).domain
+    partner_link = 'https://{base}{path}'.format(base=base_url, path=path)
+
+    email = UserRenewalNotice()
+
+    email.send(user_email,
+        {'user': user_wp_username,
+         'lang': user_lang,
+         'partner_name': partner_name,
+         'partner_link': partner_link})
 
 @receiver(comment_was_posted)
 def send_comment_notification_emails(sender, **kwargs):

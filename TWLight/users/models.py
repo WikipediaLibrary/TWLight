@@ -73,6 +73,9 @@ class UserProfile(models.Model):
         choices=settings.LANGUAGES,
         # Translators: Users' detected or selected language.
         help_text=_("Language"))
+    send_renewal_notices = models.BooleanField(default=True,
+        # Translators: Description of the option users have to enable or disable reminder emails for renewals
+        help_text=_("Does this user want renewal reminder notices?"))
 
 
 # Create user profiles automatically when users are created.
@@ -418,6 +421,10 @@ class Authorization(models.Model):
         limit_choices_to=(models.Q(partner__status=0)),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
         help_text=_('The stream for which the editor is authorized.'))
+
+    reminder_email_sent = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
+        help_text=_("Have we sent a reminder email about this authorization?"))
 
     # Try to return a useful object name, if fields were set appropriately.
     def __unicode__(self):

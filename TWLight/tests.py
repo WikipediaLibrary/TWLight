@@ -441,3 +441,10 @@ class ExampleApplicationsDataTest(TestCase):
         call_command('user_example_data', '200')
         call_command('resources_example_data', '50')
         call_command('applications_example_data', '300')
+
+class UserRenewalNoticeTest(TestCase):
+    """
+    Test the user renewal notice management command
+    """
+    def test_command_output(self):
+        call_command('user_renewal_notice')

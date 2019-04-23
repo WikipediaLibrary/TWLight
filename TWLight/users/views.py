@@ -25,7 +25,7 @@ from TWLight.users.groups import get_coordinators, get_restricted
 
 from reversion.models import Version
 
-from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm
+from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm, UserEmailForm
 from .models import Editor, UserProfile
 from TWLight.applications.models import Application
 
@@ -100,6 +100,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
         context['object_list'] = editor.applications.model.include_invalid.filter(editor=editor).order_by('status', '-date_closed')
         context['form'] = EditorUpdateForm(instance=editor)
         context['language_form'] = SetLanguageForm(user=self.request.user)
+        context['email_form'] = UserEmailForm(user=self.request.user)
 
         try:
             if self.request.user.editor == editor and not editor.contributions:
@@ -160,6 +161,17 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             response = HttpResponse(json_data, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename=user_data.json'
             return response
+
+        if "update_email_settings" in request.POST:
+            logger.info(request.POST)
+            # Unchecked checkboxes just don't send POST data
+            if "send_renewal_notices" in request.POST:
+                send_renewal_notices = True
+            else:
+                send_renewal_notices = False
+
+            editor.user.userprofile.send_renewal_notices = send_renewal_notices
+            editor.user.userprofile.save()
 
         return HttpResponseRedirect(reverse_lazy('users:home'))
 

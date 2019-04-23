@@ -234,7 +234,6 @@ class GraphsTestCase(TestCase):
         """
         Test that the CSVUserCountByPartner csv download works
         """
-        print("a")
         request = self.factory.get(reverse('csv:user_count_by_partner',
             kwargs={'pk': self.partner.pk}))
         request.user = self.user
@@ -251,7 +250,6 @@ class GraphsTestCase(TestCase):
         """
         Test that the CSVAppDistribution csv download works
         """
-        print("b")
         for app_status in [Application.PENDING, Application.APPROVED, Application.QUESTION]:
             app = ApplicationFactory(partner=self.partner)
             app.status = app_status

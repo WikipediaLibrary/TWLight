@@ -14,6 +14,17 @@
 
   <hr />
 
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+      <strong>{% trans "Emails" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      {% include 'users/user_email_preferences.html' %}    
+    </div>
+  </div>
+  
+  <hr />
+
   {% if user.has_usable_password %}
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-3">

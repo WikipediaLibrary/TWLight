@@ -362,5 +362,10 @@ def post_revision_commit(sender, instance, **kwargs):
         if instance.partner.authorization_method == Partner.PROXY:
             one_year_from_now = datetime.date.today() + timedelta(years=1)
             authorization.date_expires = one_year_from_now
+        # Alternatively, if this partner has a specified account_length,
+        # we'll use that to set the expiry.
+        elif instance.partner.account_length:
+            # account_length should be a timedelta
+            authorization.date_expires = datetime.date.today() + instance.partner.account_length
 
         authorization.save()
