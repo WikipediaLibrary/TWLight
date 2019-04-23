@@ -767,6 +767,34 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     success_url = reverse_lazy('applications:list')
 
     def form_valid(self, form):
+        app = self.object
+        status = form.cleaned_data['status']
+        if app.partner.authorization_method == Partner.PROXY:
+            total_accounts_available_for_distribution = None
+            if app.specific_stream is not None:
+                if app.specific_stream.accounts_available is not None:
+                    total_apps_approved_or_sent = User.objects.filter(
+                                          editor__applications__partner=app.partner,
+                                          editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                          editor__applications__specific_stream=app.specific_stream).count()
+                    total_accounts_available = app.specific_stream.accounts_available
+                    total_accounts_available_for_distribution = total_accounts_available - total_apps_approved_or_sent
+            elif app.partner.accounts_available is not None:
+                total_apps_approved_or_sent = User.objects.filter(
+                                      editor__applications__partner=app.partner,
+                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                      editor__applications__specific_stream=None).count()
+                total_accounts_available_for_distribution = app.partner.accounts_available - total_apps_approved_or_sent
+
+            if int(status) == Application.APPROVED:
+                try:
+                    assert app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution else True)
+                except AssertionError:
+                    #Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted or has no accounts for distribution, this message appears.
+                    messages.add_message(self.request, messages.ERROR,
+                        _('Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution.'))
+                    return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
+
         with reversion.create_revision():
             reversion.set_user(self.request.user)
             try:
@@ -782,6 +810,23 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.editor
         context['versions'] = Version.objects.get_for_object(self.object)
+
+        app = self.object
+        context['total_accounts_available_for_distribution'] = None
+        if app.specific_stream is not None:
+            if app.specific_stream.accounts_available is not None:
+                total_apps_approved_or_sent = User.objects.filter(
+                                      editor__applications__partner=app.partner,
+                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                      editor__applications__specific_stream=app.specific_stream).count()
+                total_accounts_available = app.specific_stream.accounts_available
+                context['total_accounts_available_for_distribution'] = total_accounts_available - total_apps_approved_or_sent
+        elif app.partner.accounts_available is not None:
+            total_apps_approved_or_sent = User.objects.filter(
+                                  editor__applications__partner=app.partner,
+                                  editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                                  editor__applications__specific_stream=None).count()
+            context['total_accounts_available_for_distribution'] = app.partner.accounts_available - total_apps_approved_or_sent
 
         # Check if the person viewing this application is actually this
         # partner's coordinator, and not *a* coordinator who happens to
@@ -851,6 +896,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                     'continuing through remaining apps'.format(pk=app_pk))
                 continue
             if app.partner.authorization_method == Partner.PROXY:
+                total_accounts_available_for_distribution = None
                 if app.specific_stream is not None:
                     if app.specific_stream.accounts_available is not None:
                         total_apps_approved_or_sent = User.objects.filter(
@@ -868,7 +914,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
                 if int(status) == Application.APPROVED:
                     try:
-                        assert app.partner.status != Partner.WAITLIST and total_accounts_available_for_distribution > 0
+                        assert app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution else True)
                         batch_update_success.append(app_pk)
                         app.status = status
                         app.save()
