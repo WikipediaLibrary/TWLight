@@ -207,7 +207,7 @@ class Partner(models.Model):
             
     accounts_available = models.PositiveSmallIntegerField(blank=True, null=True, 
         # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-        help_text=_('Add number of new accounts to the existing value, not by reseting it to zero. If \'specific stream\' is true, change accounts availability at collection level.'))
+        help_text=_('Add the number of new accounts to the existing value, not by resetting it to zero. If \'specific stream\' is true, change accounts availability at the collection level.'))
     
     # Optional resource metadata
     # --------------------------------------------------------------------------
