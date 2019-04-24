@@ -783,7 +783,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             try:
                 assert app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution is not None else True)
             except AssertionError:
-                #Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted or has no accounts for distribution, this message appears.
+                # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted or has no accounts for distribution, this message appears.
                 messages.add_message(self.request, messages.ERROR,
                     _('Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution.'))
                 return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
@@ -875,37 +875,74 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # about their applications.
         batch_update_failed = []
         batch_update_success = []
-        accounts_available_partner = {}
-        accounts_available_stream = {}
-              
-        for app_pk in request.POST.getlist('applications'):
+        streams_distribution_flag = {}
+        partners_distribution_flag = {}
+        
+        applications_per_partner = {}
+        applications_per_stream = {}
+        all_apps = request.POST.getlist('applications')
+        for each_app_pk in all_apps:
             try:
-                app = Application.objects.get(pk=app_pk)
+                each_app = Application.objects.get(pk=each_app_pk)
             except Application.DoesNotExist:
                 logger.exception('Could not find app with posted pk {pk}; '
-                    'continuing through remaining apps'.format(pk=app_pk))
+                    'continuing through remaining apps'.format(pk=each_app_pk))
                 continue
-            if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
-                total_accounts_available_for_distribution = None
-                if app.specific_stream is not None:
-                    if app.specific_stream.accounts_available is not None:
-                        total_accounts_available_for_distribution = accounts_available_stream.get(app.specific_stream)
-                        if total_accounts_available_for_distribution is None:
-                            active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
-                            total_accounts_available = app.specific_stream.accounts_available
-                            total_accounts_available_for_distribution = total_accounts_available - active_authorizations
-                            accounts_available_stream[app.specific_stream] = total_accounts_available_for_distribution
-                elif app.partner.accounts_available is not None and app.partner not in accounts_available_partner:
-                    total_accounts_available_for_distribution = accounts_available_partner.get(app.partner)
-                    if total_accounts_available_for_distribution is None:
-                        active_authorizations = get_active_authorizations(app.partner)
-                        total_accounts_available_for_distribution = app.partner.accounts_available - active_authorizations
-                        accounts_available_partner[app.partner] = total_accounts_available_for_distribution
+            if each_app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
+                if each_app.specific_stream is not None:
+                    app_count = applications_per_stream.get(each_app.specific_stream)
+                    if app_count is None:
+                        applications_per_stream[each_app.specific_stream.pk] = {
+                            'partner_pk' : each_app.partner,
+                            'app_count'  : 1
+                        }
+                    else:
+                        applications_per_stream[each_app.specific_stream.pk]['app_count'] += 1
+                else:
+                    app_count = applications_per_partner.get(each_app.partner)
+                    if app_count is None:
+                        applications_per_partner[each_app.partner.pk] = 1
+                    else:
+                        applications_per_partner[each_app.partner.pk] += 1
+        
+        for stream_pk, info in applications_per_stream.iteritems():
+            total_accounts_available = Stream.objects.filter(pk=stream_pk).values('accounts_available')
+            if total_accounts_available is not None:
+                active_authorizations = get_active_authorizations(info['partner_pk'], stream_pk)
+                total_accounts_available_for_distribution = total_accounts_available - active_authorizations
+                if info['app_count'] > total_accounts_available_for_distribution:
+                    streams_distribution_flag[stream_pk] = False
+                else:
+                  streams_distribution_flag[stream_pk] = True
+            else:
+                streams_distribution_flag[stream_pk] = True
+        
+        for partner_pk, app_count in applications_per_partner.iteritems():
+            total_accounts_available = Partner.objects.filter(pk=partner_pk).values('accounts_available')[0]['accounts_available']
+            if total_accounts_available is not None:
+                active_authorizations = get_active_authorizations(partner_pk)
+                total_accounts_available_for_distribution = total_accounts_available - active_authorizations
+                if app_count > total_accounts_available_for_distribution:
+                    partners_distribution_flag[partner_pk] = False
+                else:
+                    partners_distribution_flag[partner_pk] = True
+            else:
+                partners_distribution_flag[partner_pk] = True
 
-                if app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution is not None else True):
-                    batch_update_success.append(app_pk)
-                    app.status = status
-                    app.save()
+        for app_pk in all_apps:
+            app = Application.objects.get(pk=app_pk)
+            if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
+                if app.partner.status != Partner.WAITLIST:
+                    if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
+                        batch_update_success.append(app_pk)
+                        app.status = status
+                        app.save()
+                    elif partners_distribution_flag[app.partner.pk] is True:
+                        batch_update_success.append(app_pk)
+                        app.status = status
+                        app.save()
+                    else:
+                        batch_update_failed.append(app_pk)
                 else:
                     batch_update_failed.append(app_pk)
             else:
@@ -915,14 +952,14 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         
         if batch_update_success:
             success_apps = ', '.join(map(str, batch_update_success))
-            #Translators: After a coordinator has changed the status of a number of applications, this message appears.
+            # Translators: After a coordinator has changed the status of a number of applications, this message appears.
             messages.add_message(request, messages.SUCCESS,
                 _('Batch update of application(s) {} successful.'.format(success_apps)))
         if batch_update_failed:
             failed_apps = ', '.join(map(str, batch_update_failed))
-            #Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
+            # Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
             messages.add_message(request, messages.ERROR,
-                _('Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have zero accounts available for distribution.'.format(failed_apps)))
+                _('Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available.'.format(failed_apps)))
 
         return HttpResponseRedirect(reverse_lazy('applications:list'))
 
