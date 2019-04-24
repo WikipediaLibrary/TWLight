@@ -1,7 +1,10 @@
+import datetime
+
 from django import forms
 from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream
+from TWLight.users.models import Authorization
 
 """
 Lists and characterizes the types of information that partners can require as
@@ -152,6 +155,18 @@ def get_output_for_application(app):
             output[field] = {'label': field_label, 'data': getattr(app.editor, field)}
 
     return output
+
+
+def get_active_authorizations(partner_pk, stream_pk=None):
+    today= datetime.date.today()
+    try:
+        active_authorizations = Authorization.objects.filter(
+                            date_expires__gt=today,
+                            partner=partner_pk,
+                            stream=stream_pk).count()
+        return active_authorizations
+    except Authorization.DoesNotExist:
+        return 0
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
