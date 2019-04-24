@@ -930,7 +930,10 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 partners_distribution_flag[partner_pk] = True
 
         for app_pk in all_apps:
-            app = Application.objects.get(pk=app_pk)
+            try:
+                app = Application.objects.get(pk=each_app_pk)
+            except Application.DoesNotExist:
+                continue
             if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
                 if app.partner.status != Partner.WAITLIST:
                     if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
