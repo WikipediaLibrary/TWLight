@@ -5,7 +5,6 @@ Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
 import bleach
-import datetime
 import urllib2
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -771,7 +770,6 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     def form_valid(self, form):
         app = self.object
         status = form.cleaned_data['status']
-        today= datetime.date.today()
         if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
             total_accounts_available_for_distribution = None
             if app.specific_stream is not None:
@@ -807,7 +805,6 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         context['versions'] = Version.objects.get_for_object(self.object)
 
         app = self.object
-        today= datetime.date.today()
         context['total_accounts_available_for_distribution'] = None
         if app.specific_stream is not None:
             if app.specific_stream.accounts_available is not None:
@@ -846,7 +843,6 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
 
 class BatchEditView(CoordinatorsOnly, ToURequired, View):
     http_method_names = ['post']
-    today= datetime.date.today()
 
     def post(self, request, *args, **kwargs):
         try:
