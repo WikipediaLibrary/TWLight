@@ -48,6 +48,9 @@ RUN apk add --update \
 # Utility scripts that run in the virtual environment.
 COPY bin /app/bin/
 
+# Bash config
+COPY conf/bashrc /root/.bashrc
+
 # i18n.
 COPY locale /app/locale
 
