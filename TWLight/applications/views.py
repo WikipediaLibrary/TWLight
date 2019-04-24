@@ -781,7 +781,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                 total_accounts_available_for_distribution = app.partner.accounts_available - active_authorizations
 
             try:
-                assert app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution else True)
+                assert app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution is not None else True)
             except AssertionError:
                 #Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted or has no accounts for distribution, this message appears.
                 messages.add_message(self.request, messages.ERROR,
@@ -864,7 +864,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             assert 'applications' in request.POST
         except AssertionError:
             messages.add_message(self.request, messages.WARNING,
-                #Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
+                # Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
                 _('Please select at least one application.'))
             return HttpResponseRedirect(reverse('applications:list'))
 
@@ -875,6 +875,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # about their applications.
         batch_update_failed = []
         batch_update_success = []
+        accounts_available_partner = {}
+        accounts_available_stream = {}
+              
         for app_pk in request.POST.getlist('applications'):
             try:
                 app = Application.objects.get(pk=app_pk)
@@ -886,14 +889,20 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 total_accounts_available_for_distribution = None
                 if app.specific_stream is not None:
                     if app.specific_stream.accounts_available is not None:
-                        active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
-                        total_accounts_available = app.specific_stream.accounts_available
-                        total_accounts_available_for_distribution = total_accounts_available - active_authorizations
-                elif app.partner.accounts_available is not None:
-                    active_authorizations = get_active_authorizations(app.partner)
-                    total_accounts_available_for_distribution = app.partner.accounts_available - active_authorizations
+                        total_accounts_available_for_distribution = accounts_available_stream.get(app.specific_stream)
+                        if total_accounts_available_for_distribution is None:
+                            active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
+                            total_accounts_available = app.specific_stream.accounts_available
+                            total_accounts_available_for_distribution = total_accounts_available - active_authorizations
+                            accounts_available_stream[app.specific_stream] = total_accounts_available_for_distribution
+                elif app.partner.accounts_available is not None and app.partner not in accounts_available_partner:
+                    total_accounts_available_for_distribution = accounts_available_partner.get(app.partner)
+                    if total_accounts_available_for_distribution is None:
+                        active_authorizations = get_active_authorizations(app.partner)
+                        total_accounts_available_for_distribution = app.partner.accounts_available - active_authorizations
+                        accounts_available_partner[app.partner] = total_accounts_available_for_distribution
 
-                if app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution else True):
+                if app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution is not None else True):
                     batch_update_success.append(app_pk)
                     app.status = status
                     app.save()
