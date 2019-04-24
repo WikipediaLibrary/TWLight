@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 if [  -z "$1" ]; then
-    exit 1;
+    echo "Please specify a backup file."
+    exit 1
 fi
 
 # Environment variables should be loaded under all conditions.
