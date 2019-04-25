@@ -60,6 +60,10 @@ WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
 
+# Create RTL Stylesheet
+RUN source /app/bin/virtualenv_activate.sh ;\
+    /app/bin/twlight_cssjanus.sh
+
 EXPOSE 80
 
 ENTRYPOINT ["/app/bin/twlight_docker_entrypoint.sh"]

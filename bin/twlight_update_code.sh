@@ -69,8 +69,6 @@ flock -n ${lockfile}
         }
 
         virtualenv_update() {
-            # Generate RTL CSS.
-            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/twlight_cssjanus.sh
 
             # Run migrations.
             docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/virtualenv_migrate.sh
