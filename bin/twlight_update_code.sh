@@ -69,9 +69,6 @@ flock -n ${lockfile}
         }
 
         virtualenv_update() {
-            # Update pip dependencies.
-            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/virtualenv_pip_update.sh
-
             # Generate RTL CSS.
             docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/twlight_cssjanus.sh
 
