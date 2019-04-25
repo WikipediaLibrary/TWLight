@@ -775,6 +775,11 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             if app.specific_stream is not None:
                 if app.specific_stream.accounts_available is not None:
                     active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
+                    total_accounts_available = app.specific_stream.accounts_available
+                    total_accounts_available_for_distribution = total_accounts_available - active_authorizations
+                elif app.partner.accounts_available is not None:
+                    active_authorizations = get_active_authorizations(app.partner)
+                    total_accounts_available = app.partner.accounts_available
                     total_accounts_available_for_distribution = total_accounts_available - active_authorizations
             elif app.partner.accounts_available is not None:
                 active_authorizations = get_active_authorizations(app.partner)
@@ -810,6 +815,10 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             if app.specific_stream.accounts_available is not None:
                 active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
                 total_accounts_available = app.specific_stream.accounts_available
+                context['total_accounts_available_for_distribution'] = total_accounts_available - active_authorizations
+            elif app.partner.accounts_available is not None:
+                active_authorizations = get_active_authorizations(app.partner)
+                total_accounts_available = app.partner.accounts_available
                 context['total_accounts_available_for_distribution'] = total_accounts_available - active_authorizations
         elif app.partner.accounts_available is not None:
             active_authorizations = get_active_authorizations(app.partner)
@@ -904,19 +913,27 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                         applications_per_partner[each_app.partner.pk] = 1
                     else:
                         applications_per_partner[each_app.partner.pk] += 1
-        
+
         for stream_pk, info in applications_per_stream.iteritems():
-            total_accounts_available = Stream.objects.filter(pk=stream_pk).values('accounts_available')
+            total_accounts_available_per_stream = Stream.objects.filter(pk=stream_pk).values('accounts_available')
+            total_accounts_available_per_partner= Partner.objects.filter(pk=stream_pk).values('accounts_available')
             if total_accounts_available is not None:
                 active_authorizations = get_active_authorizations(info['partner_pk'], stream_pk)
-                total_accounts_available_for_distribution = total_accounts_available - active_authorizations
+                total_accounts_available_for_distribution = total_accounts_available_per_stream - active_authorizations
+                if info['app_count'] > total_accounts_available_for_distribution:
+                    streams_distribution_flag[stream_pk] = False
+                else:
+                  streams_distribution_flag[stream_pk] = True
+            elif total_accounts_available_per_partner is not None:
+                active_authorizations = get_active_authorizations(info['partner_pk'])
+                total_accounts_available_for_distribution = total_accounts_available_per_partner - active_authorizations
                 if info['app_count'] > total_accounts_available_for_distribution:
                     streams_distribution_flag[stream_pk] = False
                 else:
                   streams_distribution_flag[stream_pk] = True
             else:
                 streams_distribution_flag[stream_pk] = True
-        
+
         for partner_pk, app_count in applications_per_partner.iteritems():
             total_accounts_available = Partner.objects.filter(pk=partner_pk).values('accounts_available')[0]['accounts_available']
             if total_accounts_available is not None:

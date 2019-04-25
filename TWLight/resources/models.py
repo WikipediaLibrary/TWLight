@@ -351,8 +351,6 @@ class Partner(models.Model):
         return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
-        if self.specific_stream == True and self.accounts_available is not None:
-            return
         super(Partner, self).save(*args, **kwargs)
         """Invalidate this partner's pandoc-rendered html from cache"""
         for code in RESOURCE_LANGUAGE_CODES:

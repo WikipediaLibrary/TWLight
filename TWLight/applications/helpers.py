@@ -159,11 +159,9 @@ def get_output_for_application(app):
 
 def get_active_authorizations(partner_pk, stream_pk=None):
     today= datetime.date.today()
+    filter_dict = {'date_expires__gt': today, 'partner': partner_pk} if stream_pk is None else {'date_expires__gt': today, 'partner': partner_pk, 'stream': stream_pk}
     try:
-        active_authorizations = Authorization.objects.filter(
-                            date_expires__gt=today,
-                            partner=partner_pk,
-                            stream=stream_pk).count()
+        active_authorizations = Authorization.objects.filter(**filter_dict).count()
         return active_authorizations
     except Authorization.DoesNotExist:
         return 0
