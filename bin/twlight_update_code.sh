@@ -71,13 +71,13 @@ flock -n ${lockfile}
         virtualenv_update() {
 
             # Run migrations.
-            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/virtualenv_migrate.sh
+            docker exec -it $(docker ps -q  -f name=twlight_stack_twlight) bin/virtualenv_migrate.sh
 
             # Compile translations.
-            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/virtualenv_translate.sh
+            docker exec -it $(docker ps -q  -f name=twlight_stack_twlight) bin/virtualenv_translate.sh
 
             # Run test suite.
-            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) /bin/virtualenv_test.sh
+            docker exec -it $(docker ps -q  -f name=twlight_stack_twlight) /bin/virtualenv_test.sh
         }
 
         # Verify that we can pull.

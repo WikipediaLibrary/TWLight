@@ -33,9 +33,9 @@ printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
 - @FIXME docker stack deploy doesn't support .env in the same way that compose does. I temporarily copied .env over and added exports. Should just put that config in override files probably.
 - build for your environment, here's staging `docker-compose -f docker-compose.yml -f docker-compose.staging.yml build`
 - deploy for your environment, here's staging `docker stack deploy -c docker-compose.yml -c docker-compose.staging.yml twlight_stack`
-- Restore state from a backup `docker exec -t $(docker ps -a -q  -f name=twlight_stack_twlight) /app/bin/virtualenv_restore.sh /app/backup/dd.hh.tar.gz`
-- Run migrations `docker exec -t $(docker ps -a -q  -f name=twlight_stack_twlight) /app/bin/virtualenv_migrate.sh`
-- Get an interactive shell `docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bash`
+- Restore state from a backup `docker exec -t $(docker ps -q -f name=twlight_stack_twlight) /app/bin/virtualenv_restore.sh /app/backup/dd.hh.tar.gz`
+- Run migrations `docker exec -t $(docker ps -q -f name=twlight_stack_twlight) /app/bin/virtualenv_migrate.sh`
+- Get an interactive shell `docker exec -it $(docker ps -q -f name=twlight_stack_twlight) bash`
 
 
 See [twlight_puppet](https://github.com/WikipediaLibrary/twlight_puppet) if you want to set things up on WMF servers, and [twlight_vagrant](https://github.com/WikipediaLibrary/twlight_vagrant) if you want to change things.
