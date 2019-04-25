@@ -2,6 +2,22 @@
 
 version: '3.2'
 
+secrets:
+  DJANGO_DB_NAME:
+    external: true
+  DJANGO_DB_USER:
+    external: true
+  DJANGO_DB_PASSWORD:
+    external: true
+  MYSQL_ROOT_PASSWORD:
+    external: true
+  SECRET_KEY:
+    external: true
+  TWLIGHT_OAUTH_CONSUMER_KEY:
+    external: true
+  TWLIGHT_OAUTH_CONSUMER_SECRET:
+    external: true
+
 services:
   db:
     volumes:

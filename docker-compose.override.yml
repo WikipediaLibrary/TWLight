@@ -2,6 +2,23 @@
 
 version: '3.2'
 
+secrets:
+# Local environment should mount files as secrets
+  DJANGO_DB_NAME:
+    file: ./secrets/${TWLIGHT_ENV}.django_db_name
+  DJANGO_DB_USER:
+    file: ./secrets/${TWLIGHT_ENV}.django_db_user
+  DJANGO_DB_PASSWORD:
+    file: ./secrets/${TWLIGHT_ENV}.django_db_password
+  MYSQL_ROOT_PASSWORD:
+    file: ./secrets/${TWLIGHT_ENV}.mysql_root_password
+  SECRET_KEY:
+    file: ./secrets/${TWLIGHT_ENV}.secret_key
+  TWLIGHT_OAUTH_CONSUMER_KEY:
+    file: ./secrets/${TWLIGHT_ENV}.twlight_oauth_consumer_key
+  TWLIGHT_OAUTH_CONSUMER_SECRET:
+    file: ./secrets/${TWLIGHT_ENV}.twlight_oauth_consumer_secret
+
 services:
 # Local environment should mount things from the code directory
   twlight:
