@@ -70,19 +70,19 @@ flock -n ${lockfile}
 
         virtualenv_update() {
             # Update pip dependencies.
-            docker-compose exec twlight bin/virtualenv_pip_update.sh
+            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/virtualenv_pip_update.sh
 
             # Generate RTL CSS.
-            docker-compose exec twlight bin/twlight_cssjanus.sh
+            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/twlight_cssjanus.sh
 
             # Run migrations.
-            docker-compose exec twlight bin/virtualenv_migrate.sh
+            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/virtualenv_migrate.sh
 
             # Compile translations.
-            docker-compose exec twlight bin/virtualenv_translate.sh
+            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) bin/virtualenv_translate.sh
 
             # Run test suite.
-            docker-compose exec twlight /bin/virtualenv_test.sh
+            docker exec -it $(docker ps -a -q  -f name=twlight_stack_twlight) /bin/virtualenv_test.sh
         }
 
         # Verify that we can pull.
@@ -93,7 +93,8 @@ flock -n ${lockfile}
             # Update virtual environment and run django managment commands.
             virtualenv_update
             # Rebuild to pick up changes.
-            docker-compose build && docker-compose up
+            docker-compose -f docker-compose.yml -f docker-compose.${TWLIGHT_ENV}.yml build  && \
+            docker stack deploy -c docker-compose.yml -c docker-compose.${TWLIGHT_ENV}.yml twlight_stack
         else
             exit 1
         fi
