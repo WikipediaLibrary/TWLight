@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Base settings for TWLight project.
+Base settings for twlight project.
 
 This is not intended to be used as the live settings file for a project and will
 not work as one. You should instead use production.py, local.py, heroku.py, or
@@ -31,6 +31,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+TWLIGHT_HOME = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(os.path.abspath(__file__), os.pardir))))
 
 # An atypical way of setting django languages for TranslateWiki integration:
 # https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
@@ -88,6 +90,7 @@ THIRD_PARTY_APPS = [
     'dal',
     'dal_select2',
     'django_comments',
+    'django_cron',
     'django_filters',
     'modeltranslation',
     'taggit',
@@ -109,6 +112,13 @@ TWLIGHT_APPS = [
 
 # dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
+
+# CRON CONFIGURATION
+# ------------------------------------------------------------------------------
+CRON_CLASSES = [
+    'TWLight.crons.BackupCronJob',
+    'TWLight.crons.SendCoordinatorRemindersCronJob',
+]
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -362,7 +372,7 @@ TAGGIT_CASE_INSENSITIVE = True
 # ------------------------------------------------------------------------------
 
 # This is a dummy backend that will write to a console.
-DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.emailbackend'
+DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
 EMAIL_HOST = 'localhost'
