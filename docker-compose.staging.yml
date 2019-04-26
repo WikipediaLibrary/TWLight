@@ -19,11 +19,12 @@ secrets:
     external: true
 
 services:
-  db:
-    volumes:
-      - type: bind
-        source: ./db/data
-        target: /var/lib/mysql
+  #db:
+  #  # Only do this if you are prepared to manage the file permissions on the host.
+  #  volumes:
+  #    - type: bind
+  #      source: ./db/data
+  #      target: /var/lib/mysql
   twlight:
     env_file:
       - ./conf/staging.twlight.env
