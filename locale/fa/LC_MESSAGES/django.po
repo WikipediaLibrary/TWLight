@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-23 09:54+0000\n"
-"PO-Revision-Date: 2019-04-25 18:49:15+0000\n"
+"PO-Revision-Date: 2019-04-29 16:06:13+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2543,9 +2543,8 @@ msgid "You can help translate the tool at <a href=\"https://translatewiki.net/wi
 msgstr ""
 
 #: TWLight/users/templates/users/preferences.html:19
-#, fuzzy
 msgid "Emails"
-msgstr "ایمیل"
+msgstr "ایمیل‌ها"
 
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
 #: TWLight/users/templates/users/preferences.html:32

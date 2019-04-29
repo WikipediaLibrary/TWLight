@@ -7,7 +7,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-23 09:54+0000\n"
-"PO-Revision-Date: 2019-04-25 18:49:16+0000\n"
+"PO-Revision-Date: 2019-04-29 16:06:13+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -756,9 +756,8 @@ msgstr "제출"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
-#, fuzzy
 msgid "Your Wikipedia Library access code"
-msgstr "위키백과 도서관 페이스북 페이지"
+msgstr "위키백과 도서관 접근 코드"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
@@ -929,9 +928,8 @@ msgstr ""
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
-#, fuzzy
 msgid "Your Wikipedia Library access may soon expire"
-msgstr "위키백과 도서관 페이스북 페이지"
+msgstr "위키백과 도서관 접근 권한이 곧 만료됩니다"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5

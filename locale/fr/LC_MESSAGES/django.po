@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-23 09:54+0000\n"
-"PO-Revision-Date: 2019-04-25 18:49:15+0000\n"
+"PO-Revision-Date: 2019-04-29 16:06:13+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -927,13 +927,13 @@ msgstr "Votre demande à la Bibliothèque Wikipédia a été refusée"
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s.</p> <p>Best,</p> <p>The Wikipedia Library</p> <p>You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/</p>"
-msgstr "<p>Cher %(user)s,</p> <p>Selon nos informations, votre accès à %(partner_name)s expirera bientôt et vous pourriez perdre l’accès. Si vous voulez continuer à utiliser votre compte libre, vous pouvez en demander le renouvellement en cliquant sur le bouton Renouveler à %(partner_link)s.</p> <p>Mieux,</p> <p>La Bibliothèque Wikipédia</p> <p>Vouspouvez désactiveer ces courriels dans votre page de préférences utilisateur : https://wikipedialibrary.wmflabs.org/users/</p>"
+msgstr "<p>Cher %(user)s,</p> <p>Selon nos informations, votre accès à %(partner_name)s expirera bientôt et vous pourriez perdre l’accès. Si vous voulez continuer à utiliser votre compte libre, vous pouvez en demander le renouvellement en cliquant sur le bouton  « Renouveler » à %(partner_link)s.</p> <p>Sincères salutations,</p> <p>La Bibliothèque Wikipédia</p> <p>Vous pouvez désactiver ces courriels dans votre page de préférences utilisateur : https://wikipedialibrary.wmflabs.org/users/</p>"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s. Best, The Wikipedia Library You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/"
-msgstr "Cher %(user)s, Selon nos informations, votre accès à %(partner_name)s expirera bientôt et vous pourriez perdre l’accès. Si vous voulez continuer à utiliser votre compte libre, vous pouvez demander son renouvellement en cliquant sur le bouton Renouveler à %(partner_link)s. Mieux, la Bibliothèque Wikipédia. Vous pouvez désactiver ces courriels dans votre page de préférences utilisateur : https://wikipedialibrary.wmflabs.org/users/"
+msgstr "Cher %(user)s, Selon nos informations, votre accès à %(partner_name)s expirera bientôt et vous pourriez perdre l’accès. Si vous voulez continuer à utiliser votre compte libre, vous pouvez demander son renouvellement en cliquant sur le bouton  « Renouveler » à %(partner_link)s. Sincères salutations, la Bibliothèque Wikipédia. Vous pouvez désactiver ces courriels dans votre page de préférences utilisateur : https://wikipedialibrary.wmflabs.org/users/"
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4

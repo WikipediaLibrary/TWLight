@@ -4,6 +4,7 @@
 # Author: Athena Atterdag
 # Author: Diralik
 # Author: Infovarius
+# Author: Movses
 # Author: Nk88
 # Author: Okras
 # Author: Vlad5250
@@ -13,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-23 09:54+0000\n"
-"PO-Revision-Date: 2019-04-25 18:49:17+0000\n"
+"PO-Revision-Date: 2019-04-29 16:06:15+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -250,7 +251,7 @@ msgstr ""
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:24
 msgid "Evaluate application"
-msgstr "Оценить приложение"
+msgstr "Оценить заявку"
 
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:27
@@ -282,7 +283,7 @@ msgstr ""
 #. Translators: This labels the section of an application showing how many days it has been since the application was closed.
 #: TWLight/applications/templates/applications/application_evaluation.html:58
 msgid "Days since application was closed"
-msgstr ""
+msgstr "Прошло дней после закрытия заявки"
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67
@@ -394,7 +395,7 @@ msgstr ""
 #. Translators: On the page which shows a list of applications, coordinators must select which applications they wish to view. This string is found next to the selection buttons, and leads on to options such as "Under review", "Approved", or "Sent.
 #: TWLight/applications/templates/applications/application_list.html:20
 msgid "View applications which are..."
-msgstr "Просмотр приложений, которые ..."
+msgstr "Просмотр заявок, которые ..."
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:25
@@ -472,7 +473,7 @@ msgstr "Последняя страница"
 #: TWLight/applications/templates/applications/application_list_include.html:33
 #: TWLight/applications/templates/applications/application_list_user_include.html:22
 msgid "Imported application"
-msgstr "\nИмпортированное приложение"
+msgstr "\nИмпортированная заявка"
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:37
@@ -519,7 +520,7 @@ msgstr "Обновление"
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:56
 msgid "Status for all selected applications"
-msgstr "Статус всех выбранных приложений"
+msgstr "Статус всех выбранных заявок"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:70
