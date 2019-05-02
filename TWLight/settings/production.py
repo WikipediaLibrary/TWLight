@@ -17,13 +17,6 @@ CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 # Never debug in prod
 DEBUG = False
 
-DJMAIL_REAL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = 'mx-out01.wmflabs.org'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False # Important, or you will get an SMTPException on wmlabs
 DEFAULT_FROM_EMAIL = 'Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>'
 
 # SecurityMiddleware configuration as suggested by

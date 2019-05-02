@@ -21,10 +21,14 @@ secrets:
 services:
   migrate:
     image: twlight:latest
-    command: bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
+    command: /app/bin/twlight_docker_entrypoint.sh "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
     restart: on-failure
     env_file:
       - ./conf/staging.twlight.env
+    volumes:
+      - type: bind
+        source: /data/project/staging
+        target: /app/backup
     depends_on:
       - 'db'
     secrets:
@@ -35,7 +39,7 @@ services:
       - TWLIGHT_OAUTH_CONSUMER_KEY
       - TWLIGHT_OAUTH_CONSUMER_SECRET
   twlight:
-    command: bash -c "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
+    command: /app/bin/twlight_docker_entrypoint.sh "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
     env_file:
       - ./conf/staging.twlight.env
     volumes:
