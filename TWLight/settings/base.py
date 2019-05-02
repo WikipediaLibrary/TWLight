@@ -30,6 +30,9 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
+# We're going to replace Django's default logging config.
+import logging.config
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TWLIGHT_HOME = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(os.path.abspath(__file__), os.pardir))))
@@ -283,46 +286,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 MEDIA_URL = '/media/'
 
-# LOGGING CONFIGURATION
-# ------------------------------------------------------------------------------
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        }
-    },
-    'handlers': {
-        'console': {
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-            'class': 'logging.StreamHandler',
-            'filters': ['require_debug_false'],
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
-        },
-    },
-    'loggers': {
-        # Stream messages to console.
-        'django': {
-            'handlers': ['console'],
-            'propagate': True,
-        },
-        # Email page errors.
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'TWLight': {
-            'handlers': ['console', 'mail_admins'],
-        }
-    },
-}
 
 # ------------------------------------------------------------------------------
 # -----------------> third-party and TWLight configurations <-------------------
@@ -373,7 +337,6 @@ TAGGIT_CASE_INSENSITIVE = True
 
 # This is a dummy backend that will write to a console.
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
@@ -396,3 +359,64 @@ MIDDLEWARE_CLASSES += ['request.middleware.RequestMiddleware',]
 # as tracking only authenticated vs anonymous users).
 REQUEST_LOG_IP = False
 REQUEST_LOG_USER = False
+
+# LOGGING CONFIGURATION
+# ------------------------------------------------------------------------------
+# We're replacing the default logging config to get better control of the
+# mail_admins behavior.
+
+ADMINS = [('TWLight Developers', 'librarycard-dev@lists.wikimedia.org')]
+
+LOGGING_CONFIG = None
+
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s',
+        }
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'email_backend': DJMAIL_REAL_BACKEND,
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+        },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    }
+})
