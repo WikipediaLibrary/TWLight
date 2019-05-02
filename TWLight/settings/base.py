@@ -335,9 +335,8 @@ TAGGIT_CASE_INSENSITIVE = True
 # DJMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 
-# This is a dummy backend that will write to a console.
-DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
+DJMAIL_REAL_BACKEND = os.environ.get('DJANGO_EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_BACKEND = 'djmail.backends.async.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = ''

@@ -19,7 +19,6 @@ DEBUG = False
 
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_BACKEND = 'djmail.backends.async.EmailBackend'
 EMAIL_HOST = 'mx-out01.wmflabs.org'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
