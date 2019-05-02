@@ -19,19 +19,31 @@ secrets:
     external: true
 
 services:
-  #db:
-  #  # Only do this if you are prepared to manage the file permissions on the host.
-  #  volumes:
-  #    - type: bind
-  #      source: ./db/data
-  #      target: /var/lib/mysql
+  migrate:
+    image: twlight:latest
+    command: bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
+    restart: on-failure
+    env_file:
+      - ./conf/staging.twlight.env
+    depends_on:
+      - 'db'
+    secrets:
+      - DJANGO_DB_NAME
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
+      - SECRET_KEY
+      - TWLIGHT_OAUTH_CONSUMER_KEY
+      - TWLIGHT_OAUTH_CONSUMER_SECRET
   twlight:
+    command: bash -c "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
     env_file:
       - ./conf/staging.twlight.env
     volumes:
       - type: bind
         source: /data/project/staging
         target: /app/backup
+    depends_on:
+      - 'migrate'
   web:
     volumes:
       - type: bind

@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-
-source /app/bin/virtualenv_activate.sh && exec "${@}"
+set -euo pipefail
+source /app/bin/virtualenv_activate.sh
+exec "${@}"
