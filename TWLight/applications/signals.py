@@ -42,6 +42,6 @@ def set_partner_status(sender, **kwargs):
         partner.save()
     except Partner.DoesNotExist:
         logger.info('set_partner_status signal received, but'
-            ' partner {pk} does not exist – unable to set'
+            ' partner {pk} does not exist - unable to set'
             ' partner status'.format(pk=partner_pk))
             
