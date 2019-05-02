@@ -14,7 +14,6 @@ from reversion import revisions as reversion
 from reversion.models import Version
 from urlparse import urlparse
 
-
 from django import forms
 from django.conf import settings
 from django.contrib import messages
@@ -40,6 +39,7 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  SelfOnly,
                                  DataProcessingRequired,
                                  NotDeleted)
+from TWLight.applications.signals import no_more_accounts
 from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization, Editor
@@ -51,7 +51,6 @@ from .helpers import (USER_FORM_FIELDS,
                       get_active_authorizations)
 from .forms import BaseApplicationForm, ApplicationAutocomplete
 from .models import Application
-
 
 logger = logging.getLogger(__name__)
 
@@ -754,7 +753,6 @@ class ListSentApplicationsView(_BaseListApplicationView):
         return context
 
 
-
 class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, UpdateView):
     """
     Allows Coordinators to:
@@ -771,6 +769,14 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         app = self.object
         status = form.cleaned_data['status']
         if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
+            try:
+                assert app.partner.status != Partner.WAITLIST
+            except AssertionError:
+                # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
+                messages.add_message(self.request, messages.ERROR,
+                    _('Cannot approve application as partner with proxy authorization method is waitlisted.'))
+                return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
+            
             total_accounts_available_for_distribution = None
             if app.specific_stream is not None:
                 if app.specific_stream.accounts_available is not None:
@@ -784,11 +790,14 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             elif app.partner.accounts_available is not None:
                 active_authorizations = get_active_authorizations(app.partner)
                 total_accounts_available_for_distribution = app.partner.accounts_available - active_authorizations
-
-            try:
-                assert app.partner.status != Partner.WAITLIST and (total_accounts_available_for_distribution > 0 if total_accounts_available_for_distribution is not None else True)
-            except AssertionError:
-                # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted or has no accounts for distribution, this message appears.
+            
+            if total_accounts_available_for_distribution is None:
+                pass
+            elif total_accounts_available_for_distribution > 0:
+                if total_accounts_available_for_distribution == 1 and app.specific_stream is None:
+                    no_more_accounts.send(sender=self.__class__, partner_pk=app.partner.pk)
+            else:
+                # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
                 messages.add_message(self.request, messages.ERROR,
                     _('Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution.'))
                 return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
