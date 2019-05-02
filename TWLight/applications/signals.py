@@ -1,3 +1,5 @@
+import logging
+
 from django.dispatch import receiver, Signal
 
 from django_comments.signals import comment_was_posted
@@ -39,4 +41,7 @@ def set_partner_status(sender, **kwargs):
         partner.status = Partner.WAITLIST
         partner.save()
     except Partner.DoesNotExist:
-        pass
+        logger.info('set_partner_status signal received, but'
+            ' partner {pk} does not exist – unable to set'
+            ' partner status'.format(pk=partner_pk))
+            
