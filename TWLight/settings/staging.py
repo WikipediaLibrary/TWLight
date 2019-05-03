@@ -14,7 +14,9 @@ from .base import *
 # Needed to be added for /admin
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
-DEFAULT_FROM_EMAIL = '<twlight.staging@localhost.localdomain>'
+SERVER_EMAIL = 'Wikipedia Library Card Staging <noreply@twlight-staging.wmflabs.org>'
+DEFAULT_FROM_EMAIL = SERVER_EMAIL
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',

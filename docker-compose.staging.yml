@@ -21,7 +21,7 @@ secrets:
 services:
   migrate:
     image: twlight:latest
-    command: /app/bin/twlight_docker_entrypoint.sh "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
+    command: bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
     restart: on-failure
     env_file:
       - ./conf/staging.twlight.env
