@@ -417,5 +417,9 @@ logging.config.dictConfig({
             'level': 'INFO',
             'propagate': False,
         },
+        'TWLight': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+        },
     }
 })
