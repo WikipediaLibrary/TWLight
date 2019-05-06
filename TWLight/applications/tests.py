@@ -3,6 +3,7 @@ from datetime import date, timedelta
 from itertools import chain
 from mock import patch
 import reversion
+import random
 from urlparse import urlparse
 from faker import Faker
 
@@ -247,7 +248,7 @@ class SynchronizeFieldsTest(TestCase):
 
         app.refresh_from_db()
 
-        output = get_output_for_application(app)
+        output =  (app)
         self.assertEqual(output[REAL_NAME]['data'], 'Alice')
         self.assertEqual(output[COUNTRY_OF_RESIDENCE]['data'], 'Holy Roman Empire')
         self.assertEqual(output[OCCUPATION]['data'], 'Dog surfing instructor')
@@ -2362,6 +2363,22 @@ class EvaluateApplicationTest(TestCase):
         self.coordinator.userprofile.terms_of_use = True
         self.coordinator.userprofile.save()
 
+        for _ in range(random.randint(1, 5)):
+            Authorization.objects.create(
+                authorized_user=self.user,
+                authorizer=self.coordinator,
+                date_expires=date.today(),
+                partner=self.partner
+            )
+
+        for _ in range(2):
+            Authorization.objects.create(
+                authorized_user=self.user,
+                authorizer=self.coordinator,
+                date_expires=date.today() + timedelta(days=random.randint(1, 5)),
+                partner=self.partner
+            )
+
         self.message_patcher = patch('TWLight.applications.views.messages.add_message')
         self.message_patcher.start()
 
@@ -2390,6 +2407,71 @@ class EvaluateApplicationTest(TestCase):
 
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)
+
+
+    def test_sets_status_approved_for_proxy_partner(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        self.partner.authorization_method = Partner.PROXY
+        # Approval won't work if proxy partner is not available/waitlisted
+        self.partner.status = Partner.AVAILABLE
+        self.partner.save()
+
+        self.partner.coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True).user
+        self.partner.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.APPROVED)
+
+
+    def test_sets_status_approved_for_proxy_partner_with_authorizations(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        self.partner.authorization_method = Partner.PROXY
+        # Approval won't work if proxy partner is not available/waitlisted
+        self.partner.status = Partner.AVAILABLE
+        # To trigger the code that crunches the numbers to allow approvals
+        self.partner.accounts_available = 10
+        self.partner.save()
+
+        self.partner.coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True).user
+        self.partner.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.APPROVED)
+
+        # Reset application status
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        # To trigger the code that crunches the numbers to stop approvals
+        self.partner.accounts_available = 2
+        self.partner.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.PENDING)
+
 
 
     def test_sets_days_open(self):
