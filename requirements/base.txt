@@ -16,7 +16,7 @@ djmail==1.1.0
 docutils==0.14
 factory_boy>=2.10.0,<3.0
 futures==3.2.0
-mock==2.0.0
+mock==3.0.4
 mwoauth==0.3.3
 pillow==5.4.1
 pypandoc==1.4
