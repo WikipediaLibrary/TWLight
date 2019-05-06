@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-04-23 09:54+0000\n"
-"PO-Revision-Date: 2019-04-25 18:49:17+0000\n"
+"PO-Revision-Date: 2019-05-06 15:27:07+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -920,19 +920,18 @@ msgstr "您的維基百科申請程序已被拒絕"
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s.</p> <p>Best,</p> <p>The Wikipedia Library</p> <p>You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/</p>"
-msgstr ""
+msgstr "<p>致 %(user)s：</p><p>根據我們的紀錄，您向 %(partner_name)s 的取用即將逾期，到時您會無法取用。若您想繼續利用您的免費帳號，您可以透過點擊在 %(partner_link)s 的續辦按鈕來請求續辦。</p><p>在此獻上最好的祝福，</p><p>維基百科圖書館。</p><p>您可以在您的使用者頁面偏好設定來停用這些電子郵件：https://wikipedialibrary.wmflabs.org/users/</p>"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s. Best, The Wikipedia Library You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/"
-msgstr ""
+msgstr "致 %(user)s：根據我們的紀錄，您向 %(partner_name)s 的取用即將逾期，到時您會無法取用。若您想繼續利用您的免費帳號，您可以透過點擊在 %(partner_link)s 的續辦按鈕來請求續辦。在此獻上最好的祝福，維基百科圖書館。您可以在您的使用者頁面偏好設定來停用這些電子郵件：https://wikipedialibrary.wmflabs.org/users/"
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
-#, fuzzy
 msgid "Your Wikipedia Library access may soon expire"
-msgstr "維基百科圖書館臉書頁面"
+msgstr "您的維基百科圖書館取用將逾期"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
@@ -1229,7 +1228,7 @@ msgstr "選擇此合作夥伴出版方內容的所有語言。"
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
 #: TWLight/resources/models.py:270
 msgid "The standard length of an access grant from this Partner. Entered as <days hours:minutes:seconds>."
-msgstr ""
+msgstr "來自此合作夥伴的取用授予標準長度。請輸入成<days hours:minutes:seconds>。"
 
 #: TWLight/resources/models.py:278
 msgid "Old Tags"
@@ -2338,7 +2337,7 @@ msgstr "當他們登入時，我們應該自動從他們的維基百科電子郵
 #. Translators: Description of the option users have to enable or disable reminder emails for renewals
 #: TWLight/users/models.py:78
 msgid "Does this user want renewal reminder notices?"
-msgstr ""
+msgstr "此使用者有意續辦提醒通知嗎？"
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
 #: TWLight/users/models.py:110
@@ -2413,7 +2412,7 @@ msgstr "授權編輯者的串流。"
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
 #: TWLight/users/models.py:427
 msgid "Have we sent a reminder email about this authorization?"
-msgstr ""
+msgstr "我們有發送關於此授權的提醒電子郵件嗎？"
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:13
