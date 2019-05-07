@@ -2498,10 +2498,10 @@ class EvaluateApplicationTest(TestCase):
             follow=True)
 
         self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.APPROVED)
+        self.assertEqual(self.application.status, Application.PENDING)
 
         self.partner.refresh_from_db()
-        self.assertEqual(self.partner.status, Partner.APPROVED)
+        self.assertEqual(self.partner.status, Partner.WAITLIST)
 
 
     def test_sets_days_open(self):
