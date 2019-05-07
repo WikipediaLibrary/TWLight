@@ -898,6 +898,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         
         applications_per_partner = {}
         applications_per_stream = {}
+        waitlist_dict = {}
         all_apps = request.POST.getlist('applications')
         for each_app_pk in all_apps:
             try:
@@ -917,7 +918,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                     else:
                         applications_per_stream[each_app.specific_stream.pk]['app_count'] += 1
                 else:
-                    app_count = applications_per_partner.get(each_app.partner)
+                    app_count = applications_per_partner.get(each_app.partner.pk)
                     if app_count is None:
                         applications_per_partner[each_app.partner.pk] = 1
                     else:
@@ -950,6 +951,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 total_accounts_available_for_distribution = total_accounts_available - active_authorizations
                 if app_count > total_accounts_available_for_distribution:
                     partners_distribution_flag[partner_pk] = False
+                elif app_count == total_accounts_available_for_distribution:
+                    waitlist_dict[partner_pk] = True
+                    partners_distribution_flag[partner_pk] = True
                 else:
                     partners_distribution_flag[partner_pk] = True
             else:
@@ -957,7 +961,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
         for app_pk in all_apps:
             try:
-                app = Application.objects.get(pk=each_app_pk)
+                app = Application.objects.get(pk=app_pk)
             except Application.DoesNotExist:
                 continue
             if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
@@ -978,7 +982,12 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 batch_update_success.append(app_pk)
                 app.status = status
                 app.save()
-        
+
+        for partner_pk in waitlist_dict:
+            partner = Partner.objects.get(pk=partner_pk)
+            partner.status = Partner.WAITLIST
+            partner.save()
+
         if batch_update_success:
             success_apps = ', '.join(map(str, batch_update_success))
             # Translators: After a coordinator has changed the status of a number of applications, this message appears.

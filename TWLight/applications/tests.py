@@ -248,7 +248,7 @@ class SynchronizeFieldsTest(TestCase):
 
         app.refresh_from_db()
 
-        output =  (app)
+        output = get_output_for_application(app)
         self.assertEqual(output[REAL_NAME]['data'], 'Alice')
         self.assertEqual(output[COUNTRY_OF_RESIDENCE]['data'], 'Holy Roman Empire')
         self.assertEqual(output[OCCUPATION]['data'], 'Dog surfing instructor')
@@ -2435,6 +2435,7 @@ class EvaluateApplicationTest(TestCase):
     def test_sets_status_approved_for_proxy_partner_with_authorizations(self):
         factory = RequestFactory()
 
+        # Accounts are available, at least one inactive authorization, not waitlisted - approval works
         self.application.status = Application.PENDING
         self.application.save()
 
@@ -2456,6 +2457,22 @@ class EvaluateApplicationTest(TestCase):
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)
 
+        # Partner is waitlisted - approvals disallowed
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        self.partner.status = Partner.WAITLIST
+        self.partner.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.PENDING)
+
+        # Partner has not enough accounts available - approvals disallowed
         # Reset application status
         self.application.status = Application.PENDING
         self.application.save()
@@ -2741,12 +2758,15 @@ class BatchEditTest(TestCase):
         super(BatchEditTest, self).setUp()
         self.url = reverse('applications:batch_edit')
         editor = EditorFactory()
+        editor1 = EditorFactory()
         self.user = editor.user
+        self.user1 = editor1.user
 
         coordinators = get_coordinators()
         coordinators.user_set.add(self.user)
 
         self.partner = PartnerFactory()
+        self.partner1 = PartnerFactory()
 
         self.application = ApplicationFactory(
             editor=editor,
@@ -2754,6 +2774,50 @@ class BatchEditTest(TestCase):
             partner=self.partner,
             rationale='Just because',
             agreement_with_terms_of_use=True)
+
+        self.application1 = ApplicationFactory(
+            editor=editor1,
+            status=Application.PENDING,
+            partner=self.partner,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.application2 = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            partner=self.partner1,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.application3 = ApplicationFactory(
+            editor=editor1,
+            status=Application.PENDING,
+            partner=self.partner1,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.coordinator = UserFactory(username='coordinator')
+        self.coordinator.set_password('coordinator')
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+        self.coordinator.userprofile.terms_of_use = True
+        self.coordinator.userprofile.save()
+
+        for _ in range(2):
+            Authorization.objects.create(
+                authorized_user=self.user,
+                authorizer=self.coordinator,
+                date_expires=date.today(),
+                partner=self.partner
+            )
+
+        for _ in range(2):
+            Authorization.objects.create(
+                authorized_user=self.user,
+                authorizer=self.coordinator,
+                date_expires=date.today() + timedelta(days=random.randint(1, 5)),
+                partner=self.partner
+            )
 
         editor2 = EditorFactory()
         self.unpriv_user = editor2.user
@@ -2800,7 +2864,7 @@ class BatchEditTest(TestCase):
         """
 
         # Check status quo ante.
-        self.assertEqual(Application.objects.count(), 1)
+        self.assertEqual(Application.objects.count(), 4)
 
         # Make sure that the batch_status value does *not* fail the request - we
         # want to be clear that we're testing the applications parameter.
@@ -2811,7 +2875,7 @@ class BatchEditTest(TestCase):
                      Application.INVALID]
 
         # Make sure the applications parameter actually is bogus.
-        assert Application.objects.filter(pk=2).count() == 0
+        assert Application.objects.filter(pk=5).count() == 0
 
         # Create a coordinator with a test client session
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -2826,7 +2890,7 @@ class BatchEditTest(TestCase):
             reverse('applications:list'))
 
         # No new apps created
-        self.assertEqual(Application.objects.count(), 1)
+        self.assertEqual(Application.objects.count(), 4)
 
         # Refresh object from db to check for changes (there shouldn't be any).
         app = Application.objects.get(pk=self.application.pk)
@@ -2888,6 +2952,59 @@ class BatchEditTest(TestCase):
 
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)
+
+
+    def test_sets_status_approved_for_variety_partners(self):
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        self.partner.authorization_method = Partner.PROXY
+        # Approval won't work if proxy partner is not available/waitlisted
+        self.partner.status = Partner.AVAILABLE
+        self.partner.accounts_available = 10
+        self.partner.save()
+
+        self.partner.coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True).user
+        self.partner.save()
+        self.partner1.coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True).user
+        self.partner1.save()
+
+        # Approve the applications
+        response = self.client.post(self.url,
+            data={'applications': [self.application.pk, self.application1.pk, self.application2.pk, self.application3.pk], 'batch_status': 2},
+            follow=False)
+
+        # Two proxy partners
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.APPROVED)
+        self.application1.refresh_from_db()
+        self.assertEqual(self.application1.status, Application.APPROVED)
+        self.application2.refresh_from_db()
+        # Two non-proxy partners
+        self.assertEqual(self.application2.status, Application.APPROVED)
+        self.application3.refresh_from_db()
+        self.assertEqual(self.application3.status, Application.APPROVED)
+
+        # Testing auto-waitlisting once we run out of accounts for proxy partners
+        self.partner.accounts_available = 4
+        self.partner.save()
+
+        self.application.status = Application.PENDING
+        self.application.save()
+        self.application1.status = Application.PENDING
+        self.application1.save()
+
+        self.assertEqual(self.partner.status, Partner.AVAILABLE)
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'applications': [self.application.pk, self.application1.pk], 'batch_status': 2},
+            follow=False)
+
+        self.partner.refresh_from_db()
+        self.assertEqual(self.partner.status, Partner.WAITLIST)
 
 
     def test_sets_days_open(self):
