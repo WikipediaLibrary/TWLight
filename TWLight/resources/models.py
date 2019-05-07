@@ -20,6 +20,7 @@ RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
 
+
 def validate_language_code(code):
     """
     Takes a language code and verifies that it is the first element of a tuple
@@ -173,10 +174,12 @@ class Partner(models.Model):
         (WAITLIST, _('Waitlisted')),
     )
 
+    # Authorization methods, used in both Partner and Stream
     EMAIL = 0
     CODES = 1
     PROXY = 2
     BUNDLE = 3
+    LINK = 4
 
     AUTHORIZATION_METHODS = (
         # Translators: This is the name of the authorization method whereby user accounts are set up by email.
@@ -187,6 +190,8 @@ class Partner(models.Model):
         (PROXY, _('Proxy')),
         # Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
         (BUNDLE, _('Library Bundle')),
+        # Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
+        (LINK, _('Link')),
     )
 
     status = models.IntegerField(choices=STATUS_CHOICES,
@@ -227,10 +232,13 @@ class Partner(models.Model):
         help_text=_("Optional instructions for sending application data to "
             "this partner."))
 
-    access_code_instructions = models.TextField(blank=True, null=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for using an access code to access a partner resource.
+    user_instructions = models.TextField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a partner resource.
         help_text=_("Optional instructions for editors to use access codes "
-            "for this partner. Sent via email upon access code assignment."))
+            "or free signup URLs for this partner. Sent via email upon "
+            "application approval (for links) or access code assignment. "
+            "If this partner has collections, fill out user instructions "
+            "on each collection instead."))
 
     excerpt_limit = models.PositiveSmallIntegerField(blank=True, null=True,
           # Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
@@ -247,7 +255,8 @@ class Partner(models.Model):
             "'Email' means the accounts are set up via email, and is the default. "
             "Select 'Access Codes' if we send individual, or group, login details "
             "or access codes. 'Proxy' means access delivered directly via EZProxy, "
-            "and Library Bundle is automated proxy-based access."))
+            "and Library Bundle is automated proxy-based access. 'Link' is if we "
+            "send users a URL to use to create an account."))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
@@ -420,6 +429,22 @@ class Stream(models.Model):
         help_text=_("Optional description of this stream's resources."))
 
     languages = models.ManyToManyField(Language, blank=True)
+
+    authorization_method = models.IntegerField(choices=Partner.AUTHORIZATION_METHODS,
+        default=Partner.EMAIL,
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
+        help_text=_("Which authorization method does this collection use? "
+            "'Email' means the accounts are set up via email, and is the default. "
+            "Select 'Access Codes' if we send individual, or group, login details "
+            "or access codes. 'Proxy' means access delivered directly via EZProxy, "
+            "and Library Bundle is automated proxy-based access. 'Link' is if we "
+            "send users a URL to use to create an account."))
+
+    user_instructions = models.TextField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
+        help_text=_("Optional instructions for editors to use access codes "
+            "or free signup URLs for this collection. Sent via email upon "
+            "application approval (for links) or access code assignment."))
 
 
     def __unicode__(self):

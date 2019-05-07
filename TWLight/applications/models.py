@@ -248,6 +248,38 @@ class Application(models.Model):
             return (self.date_closed - self.date_created).days
 
 
+    def get_user_instructions(self):
+        """
+        This application will either be to a partner or collection. If the
+        former, this function returns the partner user instructions. Otherwise,
+        it gets the user instructions for this collection.
+        """
+        if self.specific_stream:
+            return self.specific_stream.user_instructions
+        else:
+            return self.partner.user_instructions
+
+
+    def is_instantly_finalized(self):
+        """
+        Check if this application is to a partner or collection for which
+        we will instantly mark it as finalized and provide access.
+        """
+        instantly_finalised_authorization_methods = [Partner.PROXY, Partner.LINK]
+
+        # Authorization methods are defined at both the partner and collection level,
+        # so we need to know which one to check.
+        if self.specific_stream:
+            authorization_method = self.specific_stream.authorization_method
+        else:
+            authorization_method = self.partner.authorization_method
+
+        if authorization_method in instantly_finalised_authorization_methods:
+            return True
+        else:
+            return False
+
+
     @property
     def user(self):
         # Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation
@@ -318,21 +350,32 @@ def update_app_status_on_save(sender, instance, **kwargs):
             instance.date_closed = localtime(now()).date()
             instance.days_open = 0
 
-# Authorize editor to access resource after an application is saved as sent.
 @receiver(post_save, sender=Application)
 def post_revision_commit(sender, instance, **kwargs):
-    # Check if an authorization already exists.
-    if instance.specific_stream:
-        existing_authorization = Authorization.objects.filter(
-            authorized_user=instance.user,
-            partner=instance.partner,
-            stream=instance.specific_stream)
-    else:
-        existing_authorization = Authorization.objects.filter(
-            authorized_user=instance.user,
-            partner=instance.partner)
+
+    # For some authorization methods, we can skip the manual Approved->Sent
+    # step and just immediately take an Approved application and give it
+    # a finalised status.
+    skip_approved = (instance.status == Application.APPROVED and
+        instance.is_instantly_finalized())
+
+    if skip_approved:
+        instance.status = Application.SENT
+        instance.save()
+
+    # Authorize editor to access resource after an application is saved as sent.
 
     if instance.status == Application.SENT and not instance.imported:
+        # Check if an authorization already exists.
+        if instance.specific_stream:
+            existing_authorization = Authorization.objects.filter(
+                authorized_user=instance.user,
+                partner=instance.partner,
+                stream=instance.specific_stream)
+        else:
+            existing_authorization = Authorization.objects.filter(
+                authorized_user=instance.user,
+                partner=instance.partner)
 
         authorized_user = instance.user
         authorizer = instance.sent_by
