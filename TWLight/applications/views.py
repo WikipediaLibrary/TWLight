@@ -912,7 +912,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                     app_count = applications_per_stream.get(each_app.specific_stream)
                     if app_count is None:
                         applications_per_stream[each_app.specific_stream.pk] = {
-                            'partner_pk' : each_app.partner,
+                            'partner_pk' : each_app.partner.pk,
                             'app_count'  : 1
                         }
                     else:
@@ -925,9 +925,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                         applications_per_partner[each_app.partner.pk] += 1
 
         for stream_pk, info in applications_per_stream.iteritems():
-            total_accounts_available_per_stream = Stream.objects.filter(pk=stream_pk).values('accounts_available')
-            total_accounts_available_per_partner= Partner.objects.filter(pk=stream_pk).values('accounts_available')
-            if total_accounts_available is not None:
+            total_accounts_available_per_stream = Stream.objects.filter(pk=stream_pk).values('accounts_available')[0]['accounts_available']
+            total_accounts_available_per_partner= Partner.objects.filter(pk=info['partner_pk']).values('accounts_available')[0]['accounts_available']
+            if total_accounts_available_per_stream is not None:
                 active_authorizations = get_active_authorizations(info['partner_pk'], stream_pk)
                 total_accounts_available_for_distribution = total_accounts_available_per_stream - active_authorizations
                 if info['app_count'] > total_accounts_available_for_distribution:
