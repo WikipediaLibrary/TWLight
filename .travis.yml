@@ -10,6 +10,7 @@ env:
     - DJANGO_DB_NAME=twlight
     - DJANGO_DB_USER=twlight
     - DJANGO_DB_PASSWORD=twlight
+    - DJANGO_EMAIL_ADMINS_BACKEND=django.core.mail.backends.dummy.EmailBackend
     - ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
     - REQUEST_BASE_URL=http://localhost/
     - TWLIGHT_OAUTH_PROVIDER_URL=https://meta.wikimedia.org/w/index.php
