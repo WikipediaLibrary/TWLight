@@ -365,6 +365,7 @@ REQUEST_LOG_USER = False
 # mail_admins behavior.
 
 ADMINS = [('TWLight Developers', 'librarycard-dev@lists.wikimedia.org')]
+DJANGO_EMAIL_ADMINS_BACKEND = os.environ.get('DJANGO_EMAIL_ADMINS_BACKEND', 'django.core.mail.backends.console.EmailBackend')
 
 LOGGING_CONFIG = None
 
@@ -404,7 +405,7 @@ logging.config.dictConfig({
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
-            'email_backend': DJMAIL_REAL_BACKEND,
+            'email_backend': DJANGO_EMAIL_ADMINS_BACKEND,
         }
     },
     'loggers': {
