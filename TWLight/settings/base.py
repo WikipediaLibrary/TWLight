@@ -387,11 +387,12 @@ logging.config.dictConfig({
         }
     },
     'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
+        'nodebug_console': {
+            'level': 'WARNING',
+            'filters': ['require_debug_false'],
+            'class': 'logging.StreamHandler',
         },
-        'console': {
+        'debug_console': {
             'level': 'INFO',
             'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
@@ -410,7 +411,7 @@ logging.config.dictConfig({
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'mail_admins'],
+            'handlers': ['nodebug_console', 'debug_console', 'mail_admins'],
             'level': 'INFO',
         },
         'django.server': {
@@ -419,7 +420,7 @@ logging.config.dictConfig({
             'propagate': False,
         },
         'TWLight': {
-            'handlers': ['console', 'mail_admins'],
+            'handlers': ['nodebug_console', 'debug_console', 'mail_admins'],
             'level': 'INFO',
         },
     }
