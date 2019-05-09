@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-05-09 13:44+0000\n"
+"POT-Creation-Date: 2019-05-09 13:58+0000\n"
 "PO-Revision-Date: 2019-04-25 18:49:15+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -195,44 +195,44 @@ msgid "Email"
 msgstr "E-mail"
 
 #. Translators: This is the status of an application that has not yet been reviewed.
-#: TWLight/applications/models.py:45
+#: TWLight/applications/models.py:48
 msgid "Pending"
 msgstr "Afventer"
 
 #. Translators: This is the status of an application that reviewers have asked questions about.
-#: TWLight/applications/models.py:47
+#: TWLight/applications/models.py:50
 msgid "Under discussion"
 msgstr "Diskuteres"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #. Translators: This describes the status of a group of applications.
-#: TWLight/applications/models.py:49
+#: TWLight/applications/models.py:52
 #: TWLight/applications/templates/applications/application_list.html:29
 msgid "Approved"
 msgstr "Godkendt"
 
 #. Translators: This is the status of an application which has been declined by a reviewer.
-#: TWLight/applications/models.py:51
+#: TWLight/applications/models.py:54
 msgid "Not approved"
 msgstr "Ikke godkendt"
 
 #. Translators: This is the status of an application that has been sent to a partner.
-#: TWLight/applications/models.py:53
+#: TWLight/applications/models.py:56
 msgid "Sent to partner"
 msgstr "Sendt til partner"
 
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
-#: TWLight/applications/models.py:55
+#: TWLight/applications/models.py:58
 msgid "Invalid"
 msgstr "Ugyldig"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
-#: TWLight/applications/models.py:71 TWLight/applications/models.py:82
+#: TWLight/applications/models.py:74 TWLight/applications/models.py:85
 msgid "Please do not override this field! Its value is set automatically."
 msgstr ""
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
-#: TWLight/applications/models.py:87
+#: TWLight/applications/models.py:90
 msgid "The user who sent this application to the partner"
 msgstr "Brugeren der sendte denne ansøgning til partneren"
 
