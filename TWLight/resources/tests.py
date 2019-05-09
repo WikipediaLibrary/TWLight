@@ -761,7 +761,7 @@ class AutoWaitlistDisableTest(TestCase):
         self.message_patcher.stop()
 
 
-    def auto_disable_waitlist_command(self):
+    def test_auto_disable_waitlist_command(self):
         self.assertEqual(self.partner.status, Partner.WAITLIST)
         self.assertEqual(self.partner1.status, Partner.WAITLIST)
 
