@@ -2409,7 +2409,7 @@ class EvaluateApplicationTest(TestCase):
         self.assertEqual(self.application.status, Application.APPROVED)
 
 
-    def test_sets_status_approved_for_proxy_partner(self):
+    def test_sets_status_sent_for_proxy_partner(self):
         factory = RequestFactory()
 
         self.application.status = Application.PENDING
@@ -2428,8 +2428,9 @@ class EvaluateApplicationTest(TestCase):
             data={'status': Application.APPROVED},
             follow=True)
 
+        # Approved applications are treated as sent for proxy partners
         self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.APPROVED)
+        self.assertEqual(self.application.status, Application.SENT)
 
 
     def test_sets_status_approved_for_proxy_partner_with_authorizations(self):
@@ -2454,8 +2455,9 @@ class EvaluateApplicationTest(TestCase):
             data={'status': Application.APPROVED},
             follow=True)
 
+        # Approved applications are treated as sent for proxy partners
         self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.APPROVED)
+        self.assertEqual(self.application.status, Application.SENT)
 
         # Partner is waitlisted - approvals disallowed
         self.application.status = Application.PENDING
@@ -2988,8 +2990,9 @@ class BatchEditTest(TestCase):
             data={'applications': self.application.pk, 'batch_status': 2},
             follow=False)
 
+        # Approved applications are treated as sent for proxy partners
         self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.APPROVED)
+        self.assertEqual(self.application.status, Application.SENT)
 
 
     def test_sets_status_approved_for_variety_partners(self):
@@ -3015,10 +3018,11 @@ class BatchEditTest(TestCase):
             follow=False)
 
         # Two proxy partners
+        # Approved applications are treated as sent for proxy partners
         self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.APPROVED)
+        self.assertEqual(self.application.status, Application.SENT)
         self.application1.refresh_from_db()
-        self.assertEqual(self.application1.status, Application.APPROVED)
+        self.assertEqual(self.application1.status, Application.SENT)
         self.application2.refresh_from_db()
         # Two non-proxy partners
         self.assertEqual(self.application2.status, Application.APPROVED)
@@ -3062,9 +3066,12 @@ class BatchEditTest(TestCase):
             data={'applications': self.application4.pk, 'batch_status': 2},
             follow=False)
 
+        # Approved applications are treated as sent for proxy partners
         self.application4.refresh_from_db()
-        self.assertEqual(self.application4.status, Application.APPROVED)
+        self.assertEqual(self.application4.status, Application.SENT)
 
+        # Our current setup allows either or workflow for accounts_available field,
+        # and our code should be able to handle that
         self.partner2.accounts_available = None
         self.partner2.save()
         self.stream.accounts_available = 2
@@ -3079,7 +3086,7 @@ class BatchEditTest(TestCase):
             follow=False)
 
         self.application4.refresh_from_db()
-        self.assertEqual(self.application4.status, Application.APPROVED)
+        self.assertEqual(self.application4.status, Application.SENT)
 
         self.partner2.status = Partner.WAITLIST
         self.partner2.save()
