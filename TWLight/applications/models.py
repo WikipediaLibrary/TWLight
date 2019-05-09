@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import date, datetime, timedelta
+import logging
 from reversion import revisions as reversion
 from reversion.models import Version
 from reversion.signals import post_revision_commit
@@ -16,6 +17,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Editor, Authorization
+
+logger = logging.getLogger(__name__)
 
 class ValidApplicationsManager(models.Manager):
     def get_queryset(self):
