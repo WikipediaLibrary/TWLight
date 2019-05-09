@@ -2647,125 +2647,6 @@ class EvaluateApplicationTest(TestCase):
 
         self.assertEqual(self.application.status, Application.QUESTION)
 
-    def test_immediately_sent_collection(self):
-        """
-        Given a collection with the Partner.LINK authorization method,
-        an application flagged as APPROVED should update to SENT.
-        """
-        factory = RequestFactory()
-
-        self.partner.specific_stream = True
-        self.partner.save()
-        stream = StreamFactory(partner=self.partner)
-        stream.authorization_method = Partner.LINK
-        stream.save()
-
-        self.application.status = Application.PENDING
-        self.application.specific_stream = stream
-        self.application.save()
-
-        # Create an coordinator with a test client session
-        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
-
-        self.partner.coordinator = coordinator.user
-        self.partner.authorization_method = Partner.LINK
-        self.partner.save()
-
-        # Approve the application
-        response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
-
-        # Verify status
-        self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.SENT)
-
-    def test_immediately_sent(self):
-        """
-        Given a partner with the Partner.LINK authorization method,
-        an application flagged as APPROVED should update to SENT.
-        """
-        factory = RequestFactory()
-
-        self.application.status = Application.PENDING
-        self.application.save()
-
-        # Create an coordinator with a test client session
-        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
-
-        self.partner.coordinator = coordinator.user
-        self.partner.authorization_method = Partner.LINK
-        self.partner.save()
-
-        # Approve the application
-        response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
-
-        # Verify status
-        self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.SENT)
-
-    def test_user_instructions_email(self):
-        """
-        For a partner with the Partner.LINK authorization method,
-        approving an application should send an email containing
-        user_instructions.
-        """
-        factory = RequestFactory()
-
-        # Create an coordinator with a test client session
-        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
-
-        self.partner.authorization_method = Partner.LINK
-        self.partner.user_instructions = "Instructions for account setup."
-        self.partner.coordinator = coordinator.user
-        self.partner.save()
-
-        # Approve the application
-        response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
-
-        # We expect that one email should now be sent.
-        self.assertEqual(len(mail.outbox), 1)
-
-        # The email should contain user_instructions
-        self.assertTrue(self.partner.user_instructions in mail.outbox[0].body)
-
-    def test_user_instructions_email_collection(self):
-        """
-        For a collection with the Partner.LINK authorization method,
-        approving an application should send an email containing
-        user_instructions.
-        """
-        factory = RequestFactory()
-
-        # Create an coordinator with a test client session
-        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
-
-        self.partner.specific_stream = True
-        self.partner.coordinator = coordinator.user
-        self.partner.save()
-
-        stream = StreamFactory(partner=self.partner)
-        stream.authorization_method = Partner.LINK
-        stream.user_instructions = "Instructions for account setup."
-        stream.save()
-
-        self.application.specific_stream = stream
-        self.application.save()
-
-        # Approve the application
-        response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
-
-        # We expect that one email should now be sent.
-        self.assertEqual(len(mail.outbox), 1)
-
-        # The email should contain user_instructions
-        self.assertTrue(stream.user_instructions in mail.outbox[0].body)
 
 
 class BatchEditTest(TestCase):
@@ -2990,9 +2871,8 @@ class BatchEditTest(TestCase):
             data={'applications': self.application.pk, 'batch_status': 2},
             follow=False)
 
-        # Approved applications are treated as sent for proxy partners
         self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.SENT)
+        self.assertEqual(self.application.status, Application.APPROVED)
 
 
     def test_sets_status_approved_for_variety_partners(self):
