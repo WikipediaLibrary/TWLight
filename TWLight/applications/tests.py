@@ -3256,3 +3256,42 @@ class MarkSentTest(TestCase):
 
         # The email should contain the assigned access code.
         self.assertTrue(self.access_code.code in mail.outbox[0].body)
+
+    def test_authorization_expiry_date(self):
+        # For a partner with a set account length we should set the expiry
+        # date correctly for its authorizations.
+        self.partner.account_length = timedelta(days=180)
+        self.partner.save()
+
+        request = RequestFactory().post(self.url,
+            data={'applications': [self.app1.pk]})
+        request.user = self.user
+
+        _ = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        authorization_object = Authorization.objects.get(
+            authorized_user=self.app1.user,
+            partner=self.app1.partner,
+        )
+
+        expected_expiry = date.today() + self.partner.account_length
+        self.assertEqual(authorization_object.date_expires, expected_expiry)
+
+    def test_authorization_expiry_date_proxy(self):
+        # For a proxy partner we should set the expiry
+        # date correctly for its authorizations.
+        self.partner.authorization_method = Partner.PROXY
+        self.partner.save()
+
+        self.app1.status = Application.SENT
+        self.app1.save()
+
+        authorization_object = Authorization.objects.get(
+            authorized_user=self.app1.user,
+            partner=self.app1.partner,
+        )
+
+        expected_expiry = date.today() + timedelta(days=365)
+        self.assertEqual(authorization_object.date_expires, expected_expiry)
+
