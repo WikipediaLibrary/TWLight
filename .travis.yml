@@ -30,6 +30,7 @@ addons:
   mariadb: '10.2'
 
 services:
+  - docker
   - mysql
 
 before_install:
@@ -48,3 +49,5 @@ script:
 after_success:
   - coveralls
   - .travis/./deploy.sh
+  - .travis/./docker_build.sh
+  - .travis/./docker_push.sh

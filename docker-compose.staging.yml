@@ -20,7 +20,7 @@ secrets:
 
 services:
   migrate:
-    image: twlight:latest
+    image: wikipedialibrary/twlight:latest
     command: bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
     restart: on-failure
     env_file:
