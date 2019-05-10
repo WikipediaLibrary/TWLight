@@ -27,6 +27,7 @@ services:
         source: ./conf/db/local.d
         target: /etc/mysql/conf.d
   twlight:
+    image: wikipedialibrary/twlight:local
     env_file:
       - ./conf/local.twlight.env
     # Local environment should mount things from the code directory
