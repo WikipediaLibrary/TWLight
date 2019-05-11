@@ -1,0 +1,54 @@
+---
+
+version: '3.2'
+
+# Local environment should mount plaintext files as secrets
+secrets:
+  DJANGO_DB_NAME:
+    file: ./secrets/local.django_db_name
+  DJANGO_DB_USER:
+    file: ./secrets/local.django_db_user
+  DJANGO_DB_PASSWORD:
+    file: ./secrets/local.django_db_password
+  MYSQL_ROOT_PASSWORD:
+    file: ./secrets/local.mysql_root_password
+  SECRET_KEY:
+    file: ./secrets/local.secret_key
+  TWLIGHT_OAUTH_CONSUMER_KEY:
+    file: ./secrets/local.twlight_oauth_consumer_key
+  TWLIGHT_OAUTH_CONSUMER_SECRET:
+    file: ./secrets/local.twlight_oauth_consumer_secret
+
+services:
+  db:
+    # Local environment should accomodate a variety of host OSes
+    volumes:
+      - type: bind
+        source: ./conf/db/local.d
+        target: /etc/mysql/conf.d
+  twlight:
+    image: wikipedialibrary/twlight:${TRAVIS_BRANCH}
+    env_file:
+      - ./conf/travis.twlight.env
+    # Local environment should mount things from the code directory
+    volumes:
+      - type: bind
+        source: ./backup
+        target: /app/backup
+      - type: bind
+        source: ./bin
+        target: /app/bin
+      - type: bind
+        source: ./locale
+        target: /app/locale
+      - type: bind
+        source: ./requirements
+        target: /app/requirements
+      - type: bind
+        source: ./TWLight
+        target: /app/TWLight
+  web:
+    volumes:
+      - type: bind
+        source: ./conf/local.nginx.conf
+        target: /etc/nginx/conf.d/default.conf

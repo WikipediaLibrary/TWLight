@@ -1,24 +1,5 @@
 ---
 
-env:
-  global:
-    - DJANGO_SETTINGS_MODULE=TWLight.settings.local
-    - PIP_USE_MIRRORS=true
-    - TWLIGHT_UNIXNAME=travis
-    - TWLIGHT_MISSING_MIGRATIONS=$(git ls-files --others --exclude-standard 'TWLight/*/migrations/*.py' | wc -l)
-    - DJANGO_DB_HOST=127.0.0.1
-    - DJANGO_DB_NAME=twlight
-    - DJANGO_DB_USER=twlight
-    - DJANGO_DB_PASSWORD=twlight
-    - DJANGO_EMAIL_ADMINS_BACKEND=django.core.mail.backends.dummy.EmailBackend
-    - ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
-    - REQUEST_BASE_URL=http://localhost/
-    - TWLIGHT_OAUTH_PROVIDER_URL=https://meta.wikimedia.org/w/index.php
-    - TWLIGHT_OAUTH_CONSUMER_KEY=null
-    - TWLIGHT_OAUTH_CONSUMER_SECRET=null
-    - DEBUG=False
-    - SECRET_KEY=twlight
-
 language: python
 
 cache: pip
@@ -26,24 +7,20 @@ cache: pip
 python:
   - 2.7
 
-addons:
-  mariadb: '10.2'
-
 services:
   - docker
-  - mysql
 
 before_install:
 
-# Install the dependencies.
 install:
-  - pip install -r requirements/wmf.txt
   - pip install coveralls
+  - docker-compose up
 
 # Initalize the app and test it.
 script:
-  - .travis/./init.sh
-  - TWLIGHT_HOME=$(pwd) bin/./virtualenv_test.sh
+  - docker-compose exec twlight /app/bin/virtualenv_migrate.sh
+  - docker-compose exec twlight /app/bin/virtualenv_translate.sh last-commit
+  - docker-compose exec twlight /app/bin/virtualenv_test.sh
 
 # Report on test coverage and push to production if the conditions are met.
 after_success:
