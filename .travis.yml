@@ -31,7 +31,6 @@ install:
 
 # Initalize the app and test it.
 script:
-  - docker-compose exec twlight /app/bin/bin/virtualenv_wait_for_db.sh
   - docker-compose exec twlight /app/bin/virtualenv_migrate.sh
   - docker-compose exec twlight /app/bin/virtualenv_translate.sh last-commit
   - docker-compose exec twlight /app/bin/virtualenv_test.sh

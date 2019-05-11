@@ -2,8 +2,8 @@
 #
 # Runs the full Django migration process (https://docs.djangoproject.com/en/1.11/topics/migrations/)
 
-# Load virtual environment
-if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
+# Load virtual environment and wait for db to come up.
+if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh && ${TWLIGHT_HOME}/bin/virtualenv_wait_for_db.sh
 then
     # Run migrations
     echo "migrate"
