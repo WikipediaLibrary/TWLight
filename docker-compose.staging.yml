@@ -38,6 +38,9 @@ services:
       - SECRET_KEY
       - TWLIGHT_OAUTH_CONSUMER_KEY
       - TWLIGHT_OAUTH_CONSUMER_SECRET
+  db:
+    ports:
+      - "3306:3306"
   twlight:
     image: wikipedialibrary/twlight:docker
     command: /app/bin/twlight_docker_entrypoint.sh "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
@@ -54,3 +57,5 @@ services:
       - type: bind
         source: ./conf/staging.nginx.conf
         target: /etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"

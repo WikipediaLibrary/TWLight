@@ -9,8 +9,6 @@ services:
       - type: bind
         source: ./bin/twlight_mysql_init.sh
         target: /docker-entrypoint-initdb.d/twlight_mysql_init.sh
-    ports:
-      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/MYSQL_ROOT_PASSWORD
     secrets:
@@ -43,7 +41,5 @@ services:
       - type: bind
         source: ./TWLight/templates/500
         target: /app/500
-    ports:
-      - "80:80"
     depends_on:
       - 'twlight'
