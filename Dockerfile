@@ -1,6 +1,7 @@
 FROM library/alpine:latest as twlight_base
 RUN apk add --update \
     libjpeg-turbo \
+    libxslt-dev \
     mariadb-dev \
     # Python, duh.
     python py-pip ;\
@@ -12,7 +13,7 @@ RUN apk add --update \
     build-base \
     gcc \
     libjpeg-turbo-dev \
-    libxml2-dev libxslt-dev \
+    libxml2-dev \
     musl-dev \
     python-dev \
     zlib-dev
