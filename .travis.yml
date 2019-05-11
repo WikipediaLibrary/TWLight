@@ -14,7 +14,7 @@ before_install:
 
 install:
   - pip install coveralls
-  - docker-compose up
+  - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up
 
 # Initalize the app and test it.
 script:
