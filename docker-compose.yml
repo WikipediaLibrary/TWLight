@@ -17,7 +17,8 @@ services:
       - DJANGO_DB_PASSWORD
       - MYSQL_ROOT_PASSWORD
   twlight:
-    build: .
+    build:
+      context: .
     command: /venv/bin/gunicorn TWLight.wsgi
     volumes:
       - type: bind

@@ -28,6 +28,9 @@ services:
         target: /etc/mysql/conf.d
   twlight:
     image: wikipedialibrary/twlight:${TRAVIS_BRANCH}
+    build:
+      cache_from:
+        - wikipedialibrary/twlight:${TRAVIS_BRANCH}
     env_file:
       - ./conf/travis.twlight.env
     # Local environment should mount things from the code directory
