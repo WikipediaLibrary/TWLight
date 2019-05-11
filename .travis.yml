@@ -15,7 +15,7 @@ services:
 
 before_install:
   # Try to pull an existing image to warm the local build cache.
-  - docker pull wikipedialibrary/twlight:${TRAVIS_BRANCH} || :
+  - .travis/./docker_pull.sh
 
 install:
   - pip install coveralls
