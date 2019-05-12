@@ -1,13 +1,13 @@
 ---
 
-env:
-  global:
-    - TWLIGHT_SECRETS_DIR=secrets
+#env:
+#  global:
+#    - TWLIGHT_SECRETS_DIR=secrets
 
 language: python
 
-addons:
-  mariadb: '10.2'
+#addons:
+#  mariadb: '10.2'
 
 cache:
   directories:
@@ -19,20 +19,20 @@ python:
 
 services:
   - docker
-  - mysql
+#  - mysql
 
 #before_install:
 
 install:
-  - mysqladmin -u root password $(cat secrets/MYSQL_ROOT_PASSWORD)
-  - bin/./twlight_mysql_init.sh
+#  - mysqladmin -u root password $(cat secrets/MYSQL_ROOT_PASSWORD)
+#  - bin/./twlight_mysql_init.sh
   - pip install coveralls
-  - .travis/./docker_build.sh
+  #- .travis/./docker_build.sh
   #- gzip -dc "docker/twlight_base.${TRAVIS_BRANCH}.tar.gz" | docker load || true
   #- gzip -dc "docker/twlight_build.${TRAVIS_BRANCH}.tar.gz" | docker load || true
   #- docker build --target twlight_base -t twlight_base .
   #- docker build --target twlight_build -t twlight_build .
-  - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d twlight
+  - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d db twlight
   #- docker ps -a
   #- docker save twlight_base | gzip > "docker/twlight_base.${TRAVIS_BRANCH}.tar.gz"
   #- docker save twlight_build | gzip > "docker/twlight_build.${TRAVIS_BRANCH}.tar.gz"
