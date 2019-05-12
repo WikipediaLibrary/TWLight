@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -n ${TWLIGHT_SECRETS_DIR}+isset]
+if [ -n "${TWLIGHT_SECRETS_DIR+isset}" ]
 then
   SECRETS_DIR=TWLIGHT_SECRETS_DIR
 else
