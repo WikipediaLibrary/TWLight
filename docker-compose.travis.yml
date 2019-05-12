@@ -50,6 +50,9 @@ services:
       - type: bind
         source: ./TWLight
         target: /app/TWLight
+      - type: bind
+        source: ${HOME}/.cache/pip
+        target: /root/.cache/pip
   web:
     volumes:
       - type: bind
