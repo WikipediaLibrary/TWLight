@@ -1,21 +1,28 @@
 #!/usr/bin/env bash
 
-if  [ -f /run/secrets/DJANGO_DB_NAME ]
+if [ -n ${TWLIGHT_SECRETS_DIR}+isset]
+then
+  SECRETS_DIR=TWLIGHT_SECRETS_DIR
+else
+  SECRETS_DIR=/run/secrets
+fi
+
+if  [ -f ${SECRETS_DIR}/DJANGO_DB_NAME ]
 then
     DJANGO_DB_NAME=$(cat /run/secrets/DJANGO_DB_NAME)
 fi
 
-if  [ -f /run/secrets/DJANGO_DB_USER ]
+if  [ -f ${SECRETS_DIR}/DJANGO_DB_USER ]
 then
     DJANGO_DB_USER=$(cat /run/secrets/DJANGO_DB_USER)
 fi
 
-if  [ -f /run/secrets/DJANGO_DB_PASSWORD ]
+if  [ -f ${SECRETS_DIR}/DJANGO_DB_PASSWORD ]
 then
     DJANGO_DB_PASSWORD=$(cat /run/secrets/DJANGO_DB_PASSWORD)
 fi
 
-if  [ -f /run/secrets/MYSQL_ROOT_PASSWORD ]
+if  [ -f ${SECRETS_DIR}/MYSQL_ROOT_PASSWORD ]
 then
     MYSQL_ROOT_PASSWORD=$(cat /run/secrets/MYSQL_ROOT_PASSWORD)
 fi

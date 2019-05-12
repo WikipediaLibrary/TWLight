@@ -1,5 +1,9 @@
 ---
 
+env:
+  global:
+    - TWLIGHT_SECRETS_DIR=secrets
+
 language: python
 
 addons:
