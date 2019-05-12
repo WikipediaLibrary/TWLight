@@ -1,8 +1,5 @@
 ---
 
-#env:
-# - DOCKER_COMPOSE_VERSION=1.23.2
-
 language: python
 
 cache: pip
