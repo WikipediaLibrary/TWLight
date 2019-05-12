@@ -19,7 +19,7 @@ install:
   - pip install coveralls
   # Try to pull an existing image to warm the local build cache.
   #- docker pull "wikipedialibrary/twlight:${TRAVIS_BRANCH}"
-  - gzip -dc docker/twlight_build.tar.gz | docker load || :
+  - gzip -dc docker/twlight_build.tar.gz | docker load || true
   - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up --build -d
   - docker save twlight_build | gzip > docker/twlight_build.tar.gz
 
