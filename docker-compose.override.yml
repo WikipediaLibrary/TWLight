@@ -35,20 +35,8 @@ services:
     # Local environment should mount things from the code directory
     volumes:
       - type: bind
-        source: ./backup
-        target: /app/backup
-      - type: bind
-        source: ./bin
-        target: /app/bin
-      - type: bind
-        source: ./locale
-        target: /app/locale
-      - type: bind
-        source: ./requirements
-        target: /app/requirements
-      - type: bind
-        source: ./TWLight
-        target: /app/TWLight
+        source: .
+        target: /app
   web:
     volumes:
       - type: bind
