@@ -50,6 +50,7 @@ services:
       - type: bind
         source: ./TWLight
         target: /app/TWLight
+      # Attempt to cache pip downloads. Can't really work because pip downloads happen before this mounts.
       - type: bind
         source: ${HOME}/.cache/pip
         target: /root/.cache/pip
