@@ -11,7 +11,8 @@ then
     until echo 'exit' | python ${TWLIGHT_HOME}/manage.py dbshell 2>/dev/null || [ $db_init_wait -eq $db_init_timeout ]
     do
         >&2 echo "Waiting for DB."
-        sleep $(( db_init_wait++ ))
+        sleep 1
+        db_init_wait=$(( ++db_init_wait ))
     done
 
     if [ $db_init_wait -lt $db_init_timeout ]
