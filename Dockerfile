@@ -31,6 +31,7 @@ ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PY
 RUN apk add --update \
     # Refactoring shell code could remove this dependency
     bash \
+    git \
     # Not needed by the running app, but by the backup/restore shell scripts.
     mariadb-client \
     # Node stuff for rtl support. This and subsequent node things
