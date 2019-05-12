@@ -24,6 +24,7 @@ services:
 #before_install:
 
 install:
+  - mysqladmin -u root password $(cat secrets/MYSQL_ROOT_PASSWORD)
   - bin/./twlight_mysql_init.sh
   - pip install coveralls
   - .travis/./docker_build.sh
