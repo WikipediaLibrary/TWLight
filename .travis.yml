@@ -13,7 +13,7 @@ cache:
 # fix permissions before uploading cached docker images.
 before_cache:
   - sudo service docker stop
-  - sudo chown -R travis docker
+  - sudo chown -R travis ${HOME}/docker
 
 python:
   - 2.7
