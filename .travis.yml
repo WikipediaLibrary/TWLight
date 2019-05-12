@@ -19,12 +19,14 @@ install:
   - pip install coveralls
   # Try to pull an existing image to warm the local build cache.
   #- docker pull "wikipedialibrary/twlight:${TRAVIS_BRANCH}"
-  - gzip -dc "docker/twlight_base.${TWLIGHT_BRANCH}.tar.gz" | docker load || true
-  - gzip -dc "docker/twlight_build.${TWLIGHT_BRANCH}.tar.gz" | docker load || true
+  - gzip -dc "docker/twlight_base.${TRAVIS_BRANCH}.tar.gz" | docker load || true
+  - gzip -dc "docker/twlight_build.${TRAVIS_BRANCH}.tar.gz" | docker load || true
+  - docker build --target twlight_base -t twlight_base .
+  - docker build --target twlight_build -t twlight_build .
   - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up --build -d
   - docker ps -a
-  - docker save twlight_base | gzip > "docker/twlight_base.${TWLIGHT_BRANCH}.tar.gz"
-  - docker save twlight_build | gzip > "docker/twlight_build.${TWLIGHT_BRANCH}.tar.gz"
+  - docker save twlight_base | gzip > "docker/twlight_base.${TRAVIS_BRANCH}.tar.gz"
+  - docker save twlight_build | gzip > "docker/twlight_build.${TRAVIS_BRANCH}.tar.gz"
 
 # Initalize the app and test it.
 script:
