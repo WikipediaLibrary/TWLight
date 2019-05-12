@@ -5,19 +5,19 @@ version: '3.2'
 # Local environment should mount plaintext files as secrets
 secrets:
   DJANGO_DB_NAME:
-    file: ./secrets/local.django_db_name
+    file: ./secrets/DJANGO_DB_NAME
   DJANGO_DB_USER:
-    file: ./secrets/local.django_db_user
+    file: ./secrets/DJANGO_DB_USER
   DJANGO_DB_PASSWORD:
-    file: ./secrets/local.django_db_password
+    file: ./secrets/DJANGO_DB_PASSWORD
   MYSQL_ROOT_PASSWORD:
-    file: ./secrets/local.mysql_root_password
+    file: ./secrets/MYSQL_ROOT_PASSWORD
   SECRET_KEY:
-    file: ./secrets/local.secret_key
+    file: ./secrets/SECRET_KEY
   TWLIGHT_OAUTH_CONSUMER_KEY:
-    file: ./secrets/local.twlight_oauth_consumer_key
+    file: ./secrets/TWLIGHT_OAUTH_CONSUMER_KEY
   TWLIGHT_OAUTH_CONSUMER_SECRET:
-    file: ./secrets/local.twlight_oauth_consumer_secret
+    file: ./secrets/TWLIGHT_OAUTH_CONSUMER_SECRET
 
 services:
   db:
