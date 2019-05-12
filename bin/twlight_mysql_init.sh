@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Temporary for troubleshooting travis issues.
+set -euxo pipefail
 
 if [ -n "${TWLIGHT_SECRETS_DIR+isset}" ]
 then
