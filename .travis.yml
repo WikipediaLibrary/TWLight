@@ -16,7 +16,7 @@ install:
   - pip install coveralls
   # Try to pull an existing image to warm the local build cache.
   #- .travis/./docker_pull.sh || :
-  - docker "pull wikipedialibrary/twlight:docker"
+  - docker pull "wikipedialibrary/twlight:docker"
   - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up --build -d
 
 # Initalize the app and test it.
