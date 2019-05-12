@@ -4,7 +4,7 @@ set -euxo pipefail
 
 if [ -n "${TWLIGHT_SECRETS_DIR+isset}" ]
 then
-  SECRETS_DIR=TWLIGHT_SECRETS_DIR
+  SECRETS_DIR=${TWLIGHT_SECRETS_DIR}
 else
   SECRETS_DIR=/run/secrets
 fi
