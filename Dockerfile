@@ -64,8 +64,7 @@ WORKDIR $TWLIGHT_HOME
 COPY manage.py /app/manage.py
 
 # Configure static assets.
-RUN source /app/bin/virtualenv_activate.sh ;\
-    SECRET_KEY=twlight /app/bin/twlight_static.sh
+RUN SECRET_KEY=twlight /app/bin/twlight_static.sh
 
 EXPOSE 80
 
