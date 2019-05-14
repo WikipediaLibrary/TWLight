@@ -2363,22 +2363,6 @@ class EvaluateApplicationTest(TestCase):
         self.coordinator.userprofile.terms_of_use = True
         self.coordinator.userprofile.save()
 
-        for _ in range(2):
-            Authorization.objects.create(
-                authorized_user=self.user,
-                authorizer=self.coordinator,
-                date_expires=date.today(),
-                partner=self.partner
-            )
-
-        for _ in range(2):
-            Authorization.objects.create(
-                authorized_user=self.user,
-                authorizer=self.coordinator,
-                date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-                partner=self.partner
-            )
-
         self.message_patcher = patch('TWLight.applications.views.messages.add_message')
         self.message_patcher.start()
 
@@ -2664,7 +2648,8 @@ class BatchEditTest(TestCase):
         self.partner = PartnerFactory()
         self.partner1 = PartnerFactory()
         self.partner2 = PartnerFactory()
-        self.stream = StreamFactory(accounts_available=None)
+        self.stream = StreamFactory(accounts_available=None,
+            partner=self.partner2)
 
         self.application = ApplicationFactory(
             editor=editor,
@@ -2708,37 +2693,6 @@ class BatchEditTest(TestCase):
         coordinators.user_set.add(self.coordinator)
         self.coordinator.userprofile.terms_of_use = True
         self.coordinator.userprofile.save()
-
-        for _ in range(2):
-            Authorization.objects.create(
-                authorized_user=self.user,
-                authorizer=self.coordinator,
-                date_expires=date.today(),
-                partner=self.partner
-            )
-
-        for _ in range(2):
-            Authorization.objects.create(
-                authorized_user=self.user,
-                authorizer=self.coordinator,
-                date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-                partner=self.partner
-            )
-
-        Authorization.objects.create(
-            authorized_user=self.user,
-            authorizer=self.coordinator,
-            date_expires=date.today(),
-            partner=self.partner2,
-            stream=self.stream
-        )
-        Authorization.objects.create(
-            authorized_user=self.user1,
-            authorizer=self.coordinator,
-            date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-            partner=self.partner2,
-            stream=self.stream
-        )
 
         editor2 = EditorFactory()
         self.unpriv_user = editor2.user
@@ -2932,7 +2886,9 @@ class BatchEditTest(TestCase):
     def test_sets_status_approved_for_proxy_partners_with_streams(self):
         factory = RequestFactory()
 
-        self.partner2.authorization_method = Partner.PROXY
+        # For partners with collections we only care about the collection authorization method
+        self.stream.authorization_method = Partner.PROXY
+        self.stream.save()
         # Approval won't work if proxy partner is not available/waitlisted
         self.partner2.status = Partner.AVAILABLE
         self.partner2.accounts_available = 10

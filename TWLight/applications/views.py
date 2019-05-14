@@ -768,7 +768,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     def form_valid(self, form):
         app = self.object
         status = form.cleaned_data['status']
-        if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
+        if (app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False)) and int(status) == Application.APPROVED:
             try:
                 assert app.partner.status != Partner.WAITLIST
             except AssertionError:
@@ -820,18 +820,19 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
 
         app = self.object
         context['total_accounts_available_for_distribution'] = None
-        if app.specific_stream is not None:
-            if app.specific_stream.accounts_available is not None:
-                active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
-                total_accounts_available = app.specific_stream.accounts_available
-                context['total_accounts_available_for_distribution'] = total_accounts_available - active_authorizations
+        if app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False):
+            if app.specific_stream is not None:
+                if app.specific_stream.accounts_available is not None:
+                    active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
+                    total_accounts_available = app.specific_stream.accounts_available
+                    context['total_accounts_available_for_distribution'] = total_accounts_available - active_authorizations
+                elif app.partner.accounts_available is not None:
+                    active_authorizations = get_active_authorizations(app.partner)
+                    total_accounts_available = app.partner.accounts_available
+                    context['total_accounts_available_for_distribution'] = total_accounts_available - active_authorizations
             elif app.partner.accounts_available is not None:
                 active_authorizations = get_active_authorizations(app.partner)
-                total_accounts_available = app.partner.accounts_available
-                context['total_accounts_available_for_distribution'] = total_accounts_available - active_authorizations
-        elif app.partner.accounts_available is not None:
-            active_authorizations = get_active_authorizations(app.partner)
-            context['total_accounts_available_for_distribution'] = app.partner.accounts_available - active_authorizations
+                context['total_accounts_available_for_distribution'] = app.partner.accounts_available - active_authorizations
 
         # Check if the person viewing this application is actually this
         # partner's coordinator, and not *a* coordinator who happens to
@@ -907,7 +908,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 logger.exception('Could not find app with posted pk {pk}; '
                     'continuing through remaining apps'.format(pk=each_app_pk))
                 continue
-            if each_app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
+            if (each_app.partner.authorization_method == Partner.PROXY or (each_app.specific_stream.authorization_method == Partner.PROXY if each_app.specific_stream else False)) and int(status) == Application.APPROVED:
                 if each_app.specific_stream is not None:
                     app_count = applications_per_stream.get(each_app.specific_stream)
                     if app_count is None:
@@ -964,15 +965,15 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 app = Application.objects.get(pk=app_pk)
             except Application.DoesNotExist:
                 continue
-            if app.partner.authorization_method == Partner.PROXY and int(status) == Application.APPROVED:
+            if (app.partner.authorization_method == Partner.PROXY or (each_app.specific_stream.authorization_method == Partner.PROXY if each_app.specific_stream else False)) and int(status) == Application.APPROVED:
                 if app.partner.status != Partner.WAITLIST:
                     if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
                         batch_update_success.append(app_pk)
-                        app.status = status
+                        app.status = int(status)
                         app.save()
                     elif partners_distribution_flag[app.partner.pk] is True:
                         batch_update_success.append(app_pk)
-                        app.status = status
+                        app.status = int(status)
                         app.save()
                     else:
                         batch_update_failed.append(app_pk)
