@@ -154,7 +154,7 @@ MIDDLEWARE_CLASSES = [
 # servers to do a quick test.
 # DEBUG SHOULD BE FALSE ON PRODUCTION for security reasons.
 
-DEBUG = bool(os.environ.get('DEBUG', False).lower() == 'true')
+DEBUG = bool(os.environ.get('DEBUG', 'False').lower() == 'true')
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # In production, this list should contain the URL of the server and nothing
 # else, for security reasons. For local testing '*' is OK.
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', None).split(' ')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 [::1]').split(' ')
 
 # Let Django know about external URLs in case they differ from internal
 # Needed to be added for /admin

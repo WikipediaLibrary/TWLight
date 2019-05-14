@@ -63,9 +63,9 @@ WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
 
-# Create RTL Stylesheet
+# Configure static assets.
 RUN source /app/bin/virtualenv_activate.sh ;\
-    /app/bin/twlight_cssjanus.sh
+    SECRET_KEY=twlight /app/bin/twlight_static.sh
 
 EXPOSE 80
 
