@@ -43,4 +43,5 @@ script:
 after_success:
   - coveralls
   - .travis/./deploy.sh
+  - sudo service docker start
   - .travis/./docker_push.sh
