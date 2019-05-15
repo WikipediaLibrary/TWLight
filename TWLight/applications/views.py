@@ -48,7 +48,9 @@ from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
                       PARTNER_FORM_BASE_FIELDS,
                       get_output_for_application,
-                      get_active_authorizations)
+                      get_active_authorizations,
+                      get_accounts_available,
+                      is_proxy_and_application_approved)
 from .forms import BaseApplicationForm, ApplicationAutocomplete
 from .models import Application
 
@@ -770,31 +772,15 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         status = form.cleaned_data['status']
         
         # The logic below hard limits coordinators from approving applications when a particular proxy partner has run out of accounts.
-        if (app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False)) and int(status) == Application.APPROVED:
-            try:
-                assert app.partner.status != Partner.WAITLIST
-            except AssertionError:
+        if is_proxy_and_application_approved(status, app):
+            if app.partner.status == Partner.WAITLIST:
                 # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
                 messages.add_message(self.request, messages.ERROR,
                     _('Cannot approve application as partner with proxy authorization method is waitlisted.'))
                 return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
             
             total_accounts_available_for_distribution = None
-            if app.specific_stream is not None:
-                # Because we allow number of accounts available on either the partner level or the collection level,
-                # we base our calculations on either the collection level (default) or the partner level.
-                if app.specific_stream.accounts_available is not None:
-                    active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
-                    total_accounts_available = app.specific_stream.accounts_available
-                    total_accounts_available_for_distribution = total_accounts_available - active_authorizations
-                elif app.partner.accounts_available is not None:
-                    active_authorizations = get_active_authorizations(app.partner)
-                    total_accounts_available = app.partner.accounts_available
-                    total_accounts_available_for_distribution = total_accounts_available - active_authorizations
-            elif app.partner.accounts_available is not None:
-                active_authorizations = get_active_authorizations(app.partner)
-                total_accounts_available_for_distribution = app.partner.accounts_available - active_authorizations
-            
+            total_accounts_available_for_distribution = get_accounts_available(app)
             if total_accounts_available_for_distribution is None:
                 pass
             elif total_accounts_available_for_distribution > 0:
@@ -829,18 +815,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         context['total_accounts_available_for_distribution'] = None
         # We show accounts available for proxy partners/collections in the evaluation page
         if app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False):
-            if app.specific_stream is not None:
-                if app.specific_stream.accounts_available is not None:
-                    active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
-                    total_accounts_available = app.specific_stream.accounts_available
-                    context['total_accounts_available_for_distribution'] = total_accounts_available - active_authorizations
-                elif app.partner.accounts_available is not None:
-                    active_authorizations = get_active_authorizations(app.partner)
-                    total_accounts_available = app.partner.accounts_available
-                    context['total_accounts_available_for_distribution'] = total_accounts_available - active_authorizations
-            elif app.partner.accounts_available is not None:
-                active_authorizations = get_active_authorizations(app.partner)
-                context['total_accounts_available_for_distribution'] = app.partner.accounts_available - active_authorizations
+            context['total_accounts_available_for_distribution'] = get_accounts_available(app)
 
         # Check if the person viewing this application is actually this
         # partner's coordinator, and not *a* coordinator who happens to
@@ -923,7 +898,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             # We loop through the list of applications (only proxy) counting the number of applications that
             # are to be approved for a particular partner or collection. The counts are then updated in
             # applications_per_partner or applications_per_stream dictionaries depending on the application type.
-            if (each_app.partner.authorization_method == Partner.PROXY or (each_app.specific_stream.authorization_method == Partner.PROXY if each_app.specific_stream else False)) and int(status) == Application.APPROVED:
+            if is_proxy_and_application_approved(status, app=each_app):
                 if each_app.specific_stream is not None:
                     app_count = applications_per_stream.get(each_app.specific_stream)
                     if app_count is None:
@@ -946,22 +921,22 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         for stream_pk, info in applications_per_stream.iteritems():
             total_accounts_available_per_stream = Stream.objects.filter(pk=stream_pk).values('accounts_available')[0]['accounts_available']
             total_accounts_available_per_partner= Partner.objects.filter(pk=info['partner_pk']).values('accounts_available')[0]['accounts_available']
+
+            total_accounts_available_for_distribution = None
             if total_accounts_available_per_stream is not None:
                 active_authorizations = get_active_authorizations(info['partner_pk'], stream_pk)
                 total_accounts_available_for_distribution = total_accounts_available_per_stream - active_authorizations
-                if info['app_count'] > total_accounts_available_for_distribution:
-                    streams_distribution_flag[stream_pk] = False
-                else:
-                  streams_distribution_flag[stream_pk] = True
             elif total_accounts_available_per_partner is not None:
                 active_authorizations = get_active_authorizations(info['partner_pk'])
                 total_accounts_available_for_distribution = total_accounts_available_per_partner - active_authorizations
+
+            if total_accounts_available_for_distribution is None:
+                streams_distribution_flag[stream_pk] = True
+            else:
                 if info['app_count'] > total_accounts_available_for_distribution:
                     streams_distribution_flag[stream_pk] = False
                 else:
                   streams_distribution_flag[stream_pk] = True
-            else:
-                streams_distribution_flag[stream_pk] = True
 
         # For applications that are for partners, we get the number of accounts available based
         # on their active authorizations to ensure we have enough accounts available and set the
@@ -990,7 +965,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 continue
             # Based on the distribution flags, we either mark applications as approved and update the batch_update_success
             # list with the application id or do nothing and update the batch_update_failed list. 
-            if (app.partner.authorization_method == Partner.PROXY or (each_app.specific_stream.authorization_method == Partner.PROXY if each_app.specific_stream else False)) and int(status) == Application.APPROVED:
+            if is_proxy_and_application_approved(status, app):
                 if app.partner.status != Partner.WAITLIST:
                     if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
                         batch_update_success.append(app_pk)

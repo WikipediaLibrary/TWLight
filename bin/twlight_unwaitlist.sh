@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Un-waitlists proxy partners having atleast one inactive authorization. Doesn't work for partners with streams.
+# Un-waitlists proxy partners having atleast one available account. Doesn't work for partners with streams.
 
 # Environment variables may not be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]

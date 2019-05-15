@@ -2394,6 +2394,10 @@ class EvaluateApplicationTest(TestCase):
 
 
     def test_sets_status_sent_for_proxy_partner(self):
+        '''
+        In here we test if we correctly mark approved applications
+        for proxy partners as sent.
+        '''
         factory = RequestFactory()
 
         self.application.status = Application.PENDING
@@ -2418,6 +2422,10 @@ class EvaluateApplicationTest(TestCase):
 
 
     def test_sets_status_approved_for_proxy_partner_with_authorizations(self):
+        '''
+        We test different behaviours of applications/partners when we approve
+        applications for proxy partners by tweaking various parameters.
+        '''
         factory = RequestFactory()
 
         # Accounts are available, at least one inactive authorization, not waitlisted - approval works
@@ -2630,6 +2638,127 @@ class EvaluateApplicationTest(TestCase):
         self.application.refresh_from_db()
 
         self.assertEqual(self.application.status, Application.QUESTION)
+
+
+    def test_immediately_sent_collection(self):
+        """
+        Given a collection with the Partner.LINK authorization method,
+        an application flagged as APPROVED should update to SENT.
+        """
+        factory = RequestFactory()
+
+        self.partner.specific_stream = True
+        self.partner.save()
+        stream = StreamFactory(partner=self.partner)
+        stream.authorization_method = Partner.LINK
+        stream.save()
+
+        self.application.status = Application.PENDING
+        self.application.specific_stream = stream
+        self.application.save()
+
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        self.partner.coordinator = coordinator.user
+        self.partner.authorization_method = Partner.LINK
+        self.partner.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        # Verify status
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.SENT)
+
+    def test_immediately_sent(self):
+        """
+        Given a partner with the Partner.LINK authorization method,
+        an application flagged as APPROVED should update to SENT.
+        """
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        self.partner.coordinator = coordinator.user
+        self.partner.authorization_method = Partner.LINK
+        self.partner.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        # Verify status
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.SENT)
+
+    def test_user_instructions_email(self):
+        """
+        For a partner with the Partner.LINK authorization method,
+        approving an application should send an email containing
+        user_instructions.
+        """
+        factory = RequestFactory()
+
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        self.partner.authorization_method = Partner.LINK
+        self.partner.user_instructions = "Instructions for account setup."
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        # We expect that one email should now be sent.
+        self.assertEqual(len(mail.outbox), 1)
+
+        # The email should contain user_instructions
+        self.assertTrue(self.partner.user_instructions in mail.outbox[0].body)
+
+    def test_user_instructions_email_collection(self):
+        """
+        For a collection with the Partner.LINK authorization method,
+        approving an application should send an email containing
+        user_instructions.
+        """
+        factory = RequestFactory()
+
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        self.partner.specific_stream = True
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+
+        stream = StreamFactory(partner=self.partner)
+        stream.authorization_method = Partner.LINK
+        stream.user_instructions = "Instructions for account setup."
+        stream.save()
+
+        self.application.specific_stream = stream
+        self.application.save()
+
+        # Approve the application
+        response = self.client.post(self.url,
+            data={'status': Application.APPROVED},
+            follow=True)
+
+        # We expect that one email should now be sent.
+        self.assertEqual(len(mail.outbox), 1)
+
+        # The email should contain user_instructions
+        self.assertTrue(stream.user_instructions in mail.outbox[0].body)
 
 
 
@@ -3387,42 +3516,3 @@ class MarkSentTest(TestCase):
 
         # The email should contain the assigned access code.
         self.assertTrue(self.access_code.code in mail.outbox[0].body)
-
-    def test_authorization_expiry_date(self):
-        # For a partner with a set account length we should set the expiry
-        # date correctly for its authorizations.
-        self.partner.account_length = timedelta(days=180)
-        self.partner.save()
-
-        request = RequestFactory().post(self.url,
-            data={'applications': [self.app1.pk]})
-        request.user = self.user
-
-        _ = views.SendReadyApplicationsView.as_view()(
-            request, pk=self.partner.pk)
-
-        authorization_object = Authorization.objects.get(
-            authorized_user=self.app1.user,
-            partner=self.app1.partner,
-        )
-
-        expected_expiry = date.today() + self.partner.account_length
-        self.assertEqual(authorization_object.date_expires, expected_expiry)
-
-    def test_authorization_expiry_date_proxy(self):
-        # For a proxy partner we should set the expiry
-        # date correctly for its authorizations.
-        self.partner.authorization_method = Partner.PROXY
-        self.partner.save()
-
-        self.app1.status = Application.SENT
-        self.app1.save()
-
-        authorization_object = Authorization.objects.get(
-            authorized_user=self.app1.user,
-            partner=self.app1.partner,
-        )
-
-        expected_expiry = date.today() + timedelta(days=365)
-        self.assertEqual(authorization_object.date_expires, expected_expiry)
-
