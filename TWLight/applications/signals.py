@@ -1,11 +1,9 @@
 import logging
 
 from django.dispatch import receiver, Signal
-
 from django_comments.signals import comment_was_posted
 
 from TWLight.resources.models import Partner
-
 from .models import Application
 
 no_more_accounts = Signal(providing_args=['partner_pk'])
@@ -33,7 +31,7 @@ def set_partner_status(sender, **kwargs):
     """
     Whenever an application is approved (except for in BatchEditView)
     we do some calculations to see if we've run out of accounts. If 
-    we have, we mark the partner as waitlisted, if not continue.
+    we have, we mark the partner as waitlisted if not, continue.
     """
     partner_pk = kwargs['partner_pk']
     try:

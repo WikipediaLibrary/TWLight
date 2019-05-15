@@ -768,6 +768,8 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     def form_valid(self, form):
         app = self.object
         status = form.cleaned_data['status']
+        
+        # The logic below hard limits coordinators from approving applications when a particular proxy partner has run out of accounts.
         if (app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False)) and int(status) == Application.APPROVED:
             try:
                 assert app.partner.status != Partner.WAITLIST
@@ -779,6 +781,8 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             
             total_accounts_available_for_distribution = None
             if app.specific_stream is not None:
+                # Because we allow number of accounts available on either the partner level or the collection level,
+                # we base our calculations on either the collection level (default) or the partner level.
                 if app.specific_stream.accounts_available is not None:
                     active_authorizations = get_active_authorizations(app.partner, app.specific_stream)
                     total_accounts_available = app.specific_stream.accounts_available
@@ -794,6 +798,9 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             if total_accounts_available_for_distribution is None:
                 pass
             elif total_accounts_available_for_distribution > 0:
+                # We manually send a signal to waitlist the concerned partner if we've only one account available.
+                # This could be tweaked in the future to also waitlist partners with collections. We don't do that
+                # now since it's possible we have accounts left for distribution on other collections.
                 if total_accounts_available_for_distribution == 1 and app.specific_stream is None:
                     no_more_accounts.send(sender=self.__class__, partner_pk=app.partner.pk)
             else:
@@ -820,6 +827,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
 
         app = self.object
         context['total_accounts_available_for_distribution'] = None
+        # We show accounts available for proxy partners/collections in the evaluation page
         if app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False):
             if app.specific_stream is not None:
                 if app.specific_stream.accounts_available is not None:
@@ -892,6 +900,10 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # important work for Applications. This includes handling the closing
         # dates for applications and sending email notifications to editors
         # about their applications.
+        
+        # This might seem a tad complicated/overkill, but we need this in order to
+        # stop batch approvals of applications for proxy partners when accounts for
+        # approval are greater than the number of accounts available.
         batch_update_failed = []
         batch_update_success = []
         streams_distribution_flag = {}
@@ -908,6 +920,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 logger.exception('Could not find app with posted pk {pk}; '
                     'continuing through remaining apps'.format(pk=each_app_pk))
                 continue
+            # We loop through the list of applications (only proxy) counting the number of applications that
+            # are to be approved for a particular partner or collection. The counts are then updated in
+            # applications_per_partner or applications_per_stream dictionaries depending on the application type.
             if (each_app.partner.authorization_method == Partner.PROXY or (each_app.specific_stream.authorization_method == Partner.PROXY if each_app.specific_stream else False)) and int(status) == Application.APPROVED:
                 if each_app.specific_stream is not None:
                     app_count = applications_per_stream.get(each_app.specific_stream)
@@ -925,6 +940,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                     else:
                         applications_per_partner[each_app.partner.pk] += 1
 
+        # For applications that are for collections, we get the number of accounts available based
+        # on their active authorizations to ensure we have enough accounts available and set the
+        # boolean value for the corresponding stream_pk in the streams_distribution_flag dictionary.
         for stream_pk, info in applications_per_stream.iteritems():
             total_accounts_available_per_stream = Stream.objects.filter(pk=stream_pk).values('accounts_available')[0]['accounts_available']
             total_accounts_available_per_partner= Partner.objects.filter(pk=info['partner_pk']).values('accounts_available')[0]['accounts_available']
@@ -945,6 +963,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             else:
                 streams_distribution_flag[stream_pk] = True
 
+        # For applications that are for partners, we get the number of accounts available based
+        # on their active authorizations to ensure we have enough accounts available and set the
+        # boolean value for the corresponding partner_pk in the partners_distribution_flag dictionary.
         for partner_pk, app_count in applications_per_partner.iteritems():
             total_accounts_available = Partner.objects.filter(pk=partner_pk).values('accounts_available')[0]['accounts_available']
             if total_accounts_available is not None:
@@ -953,6 +974,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 if app_count > total_accounts_available_for_distribution:
                     partners_distribution_flag[partner_pk] = False
                 elif app_count == total_accounts_available_for_distribution:
+                    # The waitlist_dict keeps track of partners that'll 
+                    # run out of accounts once we approve all the applications.
                     waitlist_dict[partner_pk] = True
                     partners_distribution_flag[partner_pk] = True
                 else:
@@ -965,6 +988,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 app = Application.objects.get(pk=app_pk)
             except Application.DoesNotExist:
                 continue
+            # Based on the distribution flags, we either mark applications as approved and update the batch_update_success
+            # list with the application id or do nothing and update the batch_update_failed list. 
             if (app.partner.authorization_method == Partner.PROXY or (each_app.specific_stream.authorization_method == Partner.PROXY if each_app.specific_stream else False)) and int(status) == Application.APPROVED:
                 if app.partner.status != Partner.WAITLIST:
                     if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
@@ -984,10 +1009,11 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 app.status = status
                 app.save()
 
+        # We manually send the signals to waitlist the partners with corresponding 'True' values.
+        # This could be tweaked in the future to also waitlist partners with collections. We don't do that
+        # now since it's possible we have accounts left for distribution on other collections.
         for partner_pk in waitlist_dict:
-            partner = Partner.objects.get(pk=partner_pk)
-            partner.status = Partner.WAITLIST
-            partner.save()
+            no_more_accounts.send(sender=self.__class__, partner_pk=partner_pk)
 
         if batch_update_success:
             success_apps = ', '.join(map(str, batch_update_success))
