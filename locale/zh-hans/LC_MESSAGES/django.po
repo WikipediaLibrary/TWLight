@@ -7,17 +7,18 @@
 # Author: Liuxinyu970226
 # Author: Nikkimaria
 # Author: Phenolla
+# Author: 科劳
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-05-09 15:51+0000\n"
-"PO-Revision-Date: 2019-05-13 13:23:43+0000\n"
+"PO-Revision-Date: 2019-05-17 10:54:12+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-05-09 10:11:46+0000\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -763,7 +764,7 @@ msgstr "发布"
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/emails/tasks.py:243
 msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr ""
+msgstr "我们正在处理您的账号，大约一两周后，您会收到一封恢复邮件，您可以通过其中的链接重新登录账号。"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1179,7 +1180,7 @@ msgstr ""
 #. Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
 #: TWLight/resources/models.py:194
 msgid "Link"
-msgstr ""
+msgstr "通过链接"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
 #: TWLight/resources/models.py:200
