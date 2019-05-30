@@ -110,7 +110,7 @@ FIELD_LABELS = {
     # Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
     ACCOUNT_EMAIL: _("The email for your account on the partner's website"),
     # Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-    PROXY_ACCOUNT_LENGTH: _("The number of months you wish to have this access for before renewal is required"),
+    PROXY_ACCOUNT_LENGTH: _("The number of months you wish to have this access for"),
     # Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
     HIDDEN: _("Check this box if you would prefer to hide your application from the 'latest activity' timeline.")
 }
