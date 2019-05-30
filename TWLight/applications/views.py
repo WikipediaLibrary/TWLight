@@ -25,6 +25,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import IntegerField, Case, When, Count, Q
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
+from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
@@ -48,7 +49,7 @@ from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
                       PARTNER_FORM_BASE_FIELDS,
                       get_output_for_application)
-from .forms import BaseApplicationForm, ApplicationAutocomplete
+from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .models import Application
 
 
@@ -1045,11 +1046,14 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
 
 
-class RenewApplicationView(SelfOnly, DataProcessingRequired, View):
+class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
     """
     This view takes an existing Application and creates a clone, with new
     dates and a FK back to the original application.
     """
+    model=Application
+    template_name = 'applications/confirm_renewal.html'
+    form_class = RenewalForm
 
     def get_object(self):
         app = Application.objects.get(pk=self.kwargs['pk'])
@@ -1065,34 +1069,69 @@ class RenewApplicationView(SelfOnly, DataProcessingRequired, View):
 
         return app
 
-
+    '''
     def get(self, request, *args, **kwargs):
         # Figure out where users should be returned to.
         return_url = reverse('users:home') # set default
-
         try:
             referer = request.META['HTTP_REFERER']
             if referer:
                 domain = urlparse(referer).netloc
-
                 if domain in settings.ALLOWED_HOSTS:
                     return_url = referer
         except KeyError:
             # If we don't have an HTTP_REFERER, using the default is fine.
             pass
+        return render(request, self.template_name, {'return_url': return_url})
+    '''
 
-        # Attempt renewal.
-        app = self.get_object()
-        
-        renewal = app.renew()
 
-        if not renewal:
-            messages.add_message(request, messages.WARNING, _('This object '
-                'cannot be renewed. (This probably means that you have already '
-                'requested that it be renewed.)'))
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.form_class
+
+        kwargs = self.get_form_kwargs()
+
+        field_params = []
+        partner = self.get_object().partner
+        if partner.account_email:
+            field_params.append('account_email')
+        elif partner.proxy_account_length:
+            field_params.append('proxy_account_length')
+
+        kwargs['field_params'] = field_params
+
+        return form_class(**kwargs)
+
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if request.method == "POST" and form.is_valid():
+            # Figure out where users should be returned to.
+            return_url = reverse('users:home') # set default
+            try:
+                referer = request.META['HTTP_REFERER']
+                if referer:
+                    domain = urlparse(referer).netloc
+                    if domain in settings.ALLOWED_HOSTS:
+                        return_url = referer
+            except KeyError:
+                # If we don't have an HTTP_REFERER, using the default is fine.
+                pass
+            application = self.get_object()
+            logger.info(application)
+            application.proxy_account_length = form.cleaned_data['proxy_account_length']
+            logger.info(application.proxy_account_length)
+            application.account_email = form.cleaned_data['account_email']
+            renewal = application.renew()
+            
+            if not renewal:
+                messages.add_message(request, messages.WARNING, _('This object '
+                    'cannot be renewed. (This probably means that you have already '
+                    'requested that it be renewed.)'))
+                return HttpResponseRedirect(return_url)
+
+            # Translators: If a user requests the renewal of their account, this message is shown to them.
+            messages.add_message(request, messages.INFO, _('Your renewal request '
+                'has been received. A coordinator will review your request.'))
             return HttpResponseRedirect(return_url)
-
-        # Translators: If a user requests the renewal of their account, this message is shown to them.
-        messages.add_message(request, messages.INFO, _('Your renewal request '
-            'has been received. A coordinator will review your request.'))
-        return HttpResponseRedirect(return_url)

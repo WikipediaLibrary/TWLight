@@ -319,3 +319,38 @@ class ApplicationAutocomplete(forms.ModelForm):
         # placeholders.
         self.fields['editor'].label = _('Username')
         self.fields['partner'].label = _('Partner name')
+
+
+class RenewalForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        try:
+            field_params = kwargs['field_params']
+        except KeyError:
+            logger.exception('Tried to instantiate a RenewalForm but '
+                'did not have field_params')
+            raise
+        self.field_params = kwargs.pop('field_params')
+        super(RenewalForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.layout = Layout()
+        # add translator comment
+        fieldset = Fieldset(_('Renewal confirmation'))
+        if 'account_email' in self.field_params:
+            self.fields['account_email'] = forms.EmailField()
+            self.fields['account_email'].label = _('The email for your account on the partner\'s website')
+            fieldset.append('account_email')
+        if 'proxy_account_length' in self.field_params:
+            self.fields['proxy_account_length'] = forms.ChoiceField(choices=Application.PROXY_ACCOUNT_LENGTH_CHOICES,)
+            self.fields['proxy_account_length'].label = _('The number of months you wish to have this access for')
+            fieldset.append('proxy_account_length')
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-3'
+        self.helper.field_class = 'col-lg-4'
+        self.helper.layout.append(fieldset)
+        self.helper.add_input(Submit(
+            'submit',
+            # Translators: This labels a button which users click to confirm their renewal.
+            _('Confirm'),
+            css_class='center-block'))

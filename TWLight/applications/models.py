@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+import logging
 
 from datetime import date, datetime, timedelta
-import logging
+from dateutil.relativedelta import relativedelta
 from reversion import revisions as reversion
 from reversion.models import Version
 from reversion.signals import post_revision_commit
@@ -102,6 +103,13 @@ class Application(models.Model):
     agreement_with_terms_of_use = models.BooleanField(default=False)
     account_email = models.EmailField(blank=True, null=True)
 
+    PROXY_ACCOUNT_LENGTH_CHOICES = ((1, '1 month'), (3, '3 months'), (6, '6 months'), (12, '12 months'))
+
+    proxy_account_length = models.IntegerField(choices=PROXY_ACCOUNT_LENGTH_CHOICES, blank=True, null=True,
+        # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
+        help_text=_('User selection of when they\'d like their account to expire (in months). '
+                  'Only relevant if the applied partner/collection has authorization_method as \'proxy\'.'))
+
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
 
@@ -141,6 +149,7 @@ class Application(models.Model):
         successful and None otherwise.
         """
         if not self.is_renewable:
+            logger.info('None')
             return None
         else:
             data = model_to_dict(self,
@@ -156,7 +165,8 @@ class Application(models.Model):
                          'editor': self.editor,
                          'partner': self.partner,
                          'specific_stream': self.specific_stream,
-                         'account_email': self.account_email})
+                         'account_email': self.account_email,
+                         'proxy_account_length': self.proxy_account_length})
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in
@@ -309,6 +319,7 @@ class Application(models.Model):
         Apps are eligible for renewal if they are approved and have not already
         been renewed. (We presume that SENT apps were at some point APPROVED.)
         """
+        logger.info("hello")
         return all([not bool(Application.objects.filter(parent=self)),
                     self.status in [self.APPROVED, self.SENT],
                     self.partner.renewals_available])
@@ -403,11 +414,18 @@ def post_revision_commit(sender, instance, **kwargs):
         authorization.authorizer = authorizer
         authorization.partner = instance.partner
 
-        # If this is a proxy partner, set (or reset) the expiry date
+        # If this is a proxy partner, and the proxy_account_length
+        # field is set to false, set (or reset) the expiry date
         # to one year from now
-        if instance.partner.authorization_method == Partner.PROXY:
+        if instance.partner.authorization_method == Partner.PROXY and (instance.partner.proxy_account_length is False or instance.proxy_account_length is None):
             one_year_from_now = date.today() + timedelta(days=365)
             authorization.date_expires = one_year_from_now
+        # If this is a proxy partner, and the proxy_account_length
+        # field is set to true, set (or reset) the expiry date
+        # to 1, 3, 6 or 12 months from today based on user input
+        elif instance.partner.authorization_method == Partner.PROXY and instance.partner.proxy_account_length is True:
+            custom_expiry_date = date.today() + relativedelta(months=+instance.proxy_account_length)
+            authorization.date_expires = custom_expiry_date
         # Alternatively, if this partner has a specified account_length,
         # we'll use that to set the expiry.
         elif instance.partner.account_length:

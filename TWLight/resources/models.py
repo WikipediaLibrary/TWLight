@@ -328,6 +328,10 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
         help_text=_("Mark as true if this partner requires applicants to have "
                     "already signed up at the partner website."))
+    proxy_account_length = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners.
+        help_text=_("Mark as true if the authorization method of this partner is proxy "
+                    "and requires the length of the account (expiry) be specified."))
 
 
     def __unicode__(self):
