@@ -332,7 +332,6 @@ class RenewalForm(forms.Form):
         self.field_params = kwargs.pop('field_params')
         super(RenewalForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-        self.helper.layout = Layout()
         # add translator comment
         fieldset = Fieldset(_('Renewal confirmation'))
         if 'account_email' in self.field_params:
@@ -348,6 +347,7 @@ class RenewalForm(forms.Form):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-4'
+        self.helper.layout = Layout()
         self.helper.layout.append(fieldset)
         self.helper.add_input(Submit(
             'submit',
