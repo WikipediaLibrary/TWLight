@@ -1069,69 +1069,67 @@ class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
 
         return app
 
-    '''
-    def get(self, request, *args, **kwargs):
-        # Figure out where users should be returned to.
-        return_url = reverse('users:home') # set default
-        try:
-            referer = request.META['HTTP_REFERER']
-            if referer:
-                domain = urlparse(referer).netloc
-                if domain in settings.ALLOWED_HOSTS:
-                    return_url = referer
-        except KeyError:
-            # If we don't have an HTTP_REFERER, using the default is fine.
-            pass
-        return render(request, self.template_name, {'return_url': return_url})
-    '''
+
+    def get_context_data(self, **kwargs):
+        context = super(RenewApplicationView, self).get_context_data(**kwargs)
+        context['partner'] = self.get_object().partner
+        return context
 
 
     def get_form(self, form_class=None):
+        # Figure out where users should be returned to.
+        return_url = reverse('users:home') # set default
+        try:
+            return_url = self.request.META['HTTP_REFERER']
+        except KeyError:
+            # If we don't have an HTTP_REFERER, we'll use the default.
+            pass
+
         if form_class is None:
             form_class = self.form_class
 
         kwargs = self.get_form_kwargs()
 
-        field_params = []
-        partner = self.get_object().partner
+        # In order to dynamically set the fields, we'll have to
+        # send the fields we require via kwargs as field_params
+        field_params = {}
+        application = self.get_object()
+        partner = application.partner
         if partner.account_email:
-            field_params.append('account_email')
-        elif partner.proxy_account_length:
-            field_params.append('proxy_account_length')
+            field_params['account_email'] = application.account_email
+        if partner.proxy_account_length:
+            field_params['proxy_account_length'] = None
+        field_params['return_url'] = return_url
 
         kwargs['field_params'] = field_params
 
         return form_class(**kwargs)
 
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if request.method == "POST" and form.is_valid():
-            # Figure out where users should be returned to.
-            return_url = reverse('users:home') # set default
-            try:
-                referer = request.META['HTTP_REFERER']
-                if referer:
-                    domain = urlparse(referer).netloc
-                    if domain in settings.ALLOWED_HOSTS:
-                        return_url = referer
-            except KeyError:
-                # If we don't have an HTTP_REFERER, using the default is fine.
-                pass
-            application = self.get_object()
-            logger.info(application)
-            application.proxy_account_length = form.cleaned_data['proxy_account_length']
-            logger.info(application.proxy_account_length)
-            application.account_email = form.cleaned_data['account_email']
-            renewal = application.renew()
-            
-            if not renewal:
-                messages.add_message(request, messages.WARNING, _('This object '
-                    'cannot be renewed. (This probably means that you have already '
-                    'requested that it be renewed.)'))
-                return HttpResponseRedirect(return_url)
+    def form_valid(self, form):
+        # We'll validate the return_url set in the previous method
+        return_url = reverse('users:home') # default
+        referer = form.cleaned_data['return_url']
+        domain = urlparse(referer).netloc
+        if domain in settings.ALLOWED_HOSTS:
+            return_url = referer
 
-            # Translators: If a user requests the renewal of their account, this message is shown to them.
-            messages.add_message(request, messages.INFO, _('Your renewal request '
-                'has been received. A coordinator will review your request.'))
+        application = self.get_object()
+        partner = application.partner
+        if partner.account_email:
+            application.account_email = form.cleaned_data['account_email']
+        if partner.proxy_account_length:
+            application.proxy_account_length = form.cleaned_data['proxy_account_length']
+
+        renewal = application.renew()
+        
+        if not renewal:
+            messages.add_message(self.request, messages.WARNING, _('This object '
+                'cannot be renewed. (This probably means that you have already '
+                'requested that it be renewed.)'))
             return HttpResponseRedirect(return_url)
+
+        # Translators: If a user requests the renewal of their account, this message is shown to them.
+        messages.add_message(self.request, messages.INFO, _('Your renewal request '
+            'has been received. A coordinator will review your request.'))
+        return HttpResponseRedirect(return_url)

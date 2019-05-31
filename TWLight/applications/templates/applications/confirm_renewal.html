@@ -5,9 +5,19 @@
 {% block content %}
   <div>
     <form class="form-horizontal" method="post">
-      <!--<input type="hidden" name="return_url" value="{{ return_url }}" />-->
       {% csrf_token %}
       {% crispy form %}
+      {% comment %} Translators: This message is displayed on the page where users can confirm their renewal. {% endcomment %}
+      <div class="form-group">
+        <label class="control-label col-lg-3">
+          {% blocktrans trimmed %}
+            Are you sure you want to renew your application for {{ partner }}?
+          {% endblocktrans %}
+        </label>
+        <div class="col-lg-offset-1 col-lg-1 controls">
+          <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-primary"/>
+        </div>
+      </div>
     </form>
   </div>
 {% endblock content %}

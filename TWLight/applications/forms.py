@@ -331,26 +331,39 @@ class RenewalForm(forms.Form):
             raise
         self.field_params = kwargs.pop('field_params')
         super(RenewalForm, self).__init__(*args, **kwargs)
+
         self.helper = FormHelper(self)
-        # add translator comment
+        # Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
         fieldset = Fieldset(_('Renewal confirmation'))
-        if 'account_email' in self.field_params:
+
+        account_email = False
+        if 'account_email' in self.field_params and self.field_params['account_email'] is not None:
+            self.fields['account_email'] = forms.EmailField(initial=self.field_params['account_email'])
+            account_email = True
+        elif 'account_email' in self.field_params:
             self.fields['account_email'] = forms.EmailField()
+            account_email = True
+        if account_email:
+            # Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
             self.fields['account_email'].label = _('The email for your account on the partner\'s website')
             fieldset.append('account_email')
+
+
         if 'proxy_account_length' in self.field_params:
             self.fields['proxy_account_length'] = forms.ChoiceField(choices=Application.PROXY_ACCOUNT_LENGTH_CHOICES,)
-            self.fields['proxy_account_length'].label = _('The number of months you wish to have this access for')
+            # Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
+            self.fields['proxy_account_length'].label = _('The number of months you wish to have this access for before renewal is required')
             fieldset.append('proxy_account_length')
+
+        self.fields['return_url'] = forms.CharField(widget = forms.HiddenInput, max_length = 70,)
+        self.fields['return_url'].initial = self.field_params['return_url']
+        fieldset.append('return_url')
+
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-4'
+
         self.helper.layout = Layout()
         self.helper.layout.append(fieldset)
-        self.helper.add_input(Submit(
-            'submit',
-            # Translators: This labels a button which users click to confirm their renewal.
-            _('Confirm'),
-            css_class='center-block'))

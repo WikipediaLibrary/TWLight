@@ -47,6 +47,9 @@
           {% comment %} Translators: This text labels a button which users can click to renew a previously approved application. {% endcomment %}
           <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled">{% trans "Renew" %}</button><br />
         {% else %}
+          {{ all_apps }} 
+          ---
+          {{ latest_sent_app_pk }}
           <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary text-center visible-xs z-index-100">{% trans "Renew" %}</a>
         {% endif %}
       {% endif %}

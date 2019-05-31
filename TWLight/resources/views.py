@@ -183,6 +183,9 @@ class PartnersDetailView(DetailView):
                     context['multiple_open_apps'] = False
                     context['open_app_pk'] = open_apps[0].pk
             elif sent_apps.count() > 0:
+                context['all_apps'] = []
+                for each_app in sent_apps:
+                    context['all_apps'].append(each_app.pk)
                 context['latest_sent_app_pk'] = sent_apps[0].pk
                 context['user_sent_apps'] = True
 

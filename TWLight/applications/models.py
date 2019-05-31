@@ -103,7 +103,7 @@ class Application(models.Model):
     agreement_with_terms_of_use = models.BooleanField(default=False)
     account_email = models.EmailField(blank=True, null=True)
 
-    PROXY_ACCOUNT_LENGTH_CHOICES = ((1, '1 month'), (3, '3 months'), (6, '6 months'), (12, '12 months'))
+    PROXY_ACCOUNT_LENGTH_CHOICES = ((12, '12 months'), (6, '6 months'), (3, '3 months'), (1, '1 month'))
 
     proxy_account_length = models.IntegerField(choices=PROXY_ACCOUNT_LENGTH_CHOICES, blank=True, null=True,
         # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
@@ -319,7 +319,6 @@ class Application(models.Model):
         Apps are eligible for renewal if they are approved and have not already
         been renewed. (We presume that SENT apps were at some point APPROVED.)
         """
-        logger.info("hello")
         return all([not bool(Application.objects.filter(parent=self)),
                     self.status in [self.APPROVED, self.SENT],
                     self.partner.renewals_available])
