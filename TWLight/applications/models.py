@@ -103,7 +103,7 @@ class Application(models.Model):
     agreement_with_terms_of_use = models.BooleanField(default=False)
     account_email = models.EmailField(blank=True, null=True)
 
-    PROXY_ACCOUNT_LENGTH_CHOICES = ((12, _('12 months')), (6, _('6 months')), (3, _('3 months')), (1, _('1 month')))
+    PROXY_ACCOUNT_LENGTH_CHOICES = ((12, '12 months'), (6, '6 months'), (3, '3 months'), (1, '1 month'))
 
     proxy_account_length = models.IntegerField(choices=PROXY_ACCOUNT_LENGTH_CHOICES, blank=True, null=True,
         # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
@@ -149,6 +149,7 @@ class Application(models.Model):
         successful and None otherwise.
         """
         if not self.is_renewable:
+            logger.info('None')
             return None
         else:
             data = model_to_dict(self,
@@ -415,7 +416,7 @@ def post_revision_commit(sender, instance, **kwargs):
         # If this is a proxy partner, and the proxy_account_length
         # field is set to false, set (or reset) the expiry date
         # to one year from now
-        if instance.partner.authorization_method == Partner.PROXY and instance.proxy_account_length is None:
+        if instance.partner.authorization_method == Partner.PROXY and (instance.partner.proxy_account_length is False or instance.proxy_account_length is None):
             one_year_from_now = date.today() + timedelta(days=365)
             authorization.date_expires = one_year_from_now
         # If this is a proxy partner, and the proxy_account_length
