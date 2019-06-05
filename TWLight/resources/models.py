@@ -349,6 +349,9 @@ class Partner(models.Model):
         if self.account_email and not self.registration_url:
             raise ValidationError('When pre-registration is required, '
                 'a link to the registration page must be provided.')
+        if self.authorization_method == self.PROXY and not self.proxy_account_length:
+            raise ValidationError({'proxy_account_length': ['When authorization method is proxy, '
+                'proxy account length field must be checked.',]})
 
 
     def get_absolute_url(self):

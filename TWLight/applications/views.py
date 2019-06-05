@@ -1049,7 +1049,10 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
     """
     This view takes an existing Application and creates a clone, with new
-    dates and a FK back to the original application.
+    dates and a FK back to the original application. If the application is
+    made to a proxy partner, and (or) if the account_email field is true,
+    tries to get the account length preference and (or) the email from the
+    user respectively. If not, just adds an additional confirmation step.
     """
     model=Application
     template_name = 'applications/confirm_renewal.html'
