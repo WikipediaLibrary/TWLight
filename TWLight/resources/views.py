@@ -183,8 +183,13 @@ class PartnersDetailView(DetailView):
                     context['multiple_open_apps'] = False
                     context['open_app_pk'] = open_apps[0].pk
             elif sent_apps.count() > 0:
-                context['latest_sent_app_pk'] = sent_apps[0].pk
-                context['user_sent_apps'] = True
+            # Because using sent_apps[0] may not always hold the latest application,
+            # particularly when multiple applications where made on the same day
+                for every_app in sent_apps:
+                    if every_app.is_renewable:
+                        context['latest_sent_app_pk'] = every_app.pk
+                        context['user_sent_apps'] = True
+                        break
 
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
