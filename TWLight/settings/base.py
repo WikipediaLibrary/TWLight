@@ -366,7 +366,6 @@ REQUEST_LOG_USER = False
 
 ADMINS = [('TWLight Developers', 'librarycard-dev@lists.wikimedia.org')]
 DJANGO_EMAIL_ADMINS_BACKEND = os.environ.get('DJANGO_EMAIL_ADMINS_BACKEND', 'django.core.mail.backends.console.EmailBackend')
-
 LOGGING_CONFIG = None
 
 logging.config.dictConfig({
@@ -412,16 +411,16 @@ logging.config.dictConfig({
     'loggers': {
         'django': {
             'handlers': ['nodebug_console', 'debug_console', 'mail_admins'],
-            'level': 'INFO',
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
         },
         'django.server': {
             'handlers': ['django.server'],
-            'level': 'INFO',
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': False,
         },
         'TWLight': {
             'handlers': ['nodebug_console', 'debug_console', 'mail_admins'],
-            'level': 'INFO',
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
         },
     }
 })
