@@ -12,6 +12,7 @@ FROM twlight_base as twlight_build
 RUN apk add --update \
     build-base \
     gcc \
+    libffi-dev \
     libjpeg-turbo-dev \
     libxml2-dev \
     musl-dev \

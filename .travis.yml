@@ -29,7 +29,6 @@ before_install:
   - sudo service docker start
 
 install:
-  - pip install coveralls
   - docker build --tag "wikipedialibrary/twlight:${TRAVIS_BRANCH}" .
   - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d db twlight
 
@@ -41,7 +40,7 @@ script:
 
 # Report on test coverage and push to production if the conditions are met.
 after_success:
-  - coveralls
+  - docker-compose exec twlight bash -c "TRAVIS_JOB_ID=$TRAVIS_JOB_ID TRAVIS_BRANCH=$TRAVIS_BRANCH COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN /venv/bin/coveralls"
   - .travis/./deploy.sh
   - sudo service docker start
   - .travis/./docker_push.sh
