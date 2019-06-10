@@ -32,7 +32,7 @@ services:
 install:
 #  - docker build --tag "wikipedialibrary/twlight:${TRAVIS_BRANCH}" .
 #  - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d db twlight
-  - .travis/./docker_compose.sh
+  - sudo .travis/./docker_compose.sh
 
 # Initalize the app and test it.
 script:
