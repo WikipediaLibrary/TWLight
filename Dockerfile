@@ -1,24 +1,16 @@
-#FROM library/alpine:latest as twlight_base
-#RUN apk add --update \
-#    libjpeg-turbo \
-#    libxslt-dev \
-#    mariadb-dev \
-#    # Python, duh.
-#    python py-pip ;\
-#    pip install virtualenv
-
-FROM library/alpine:latest as twlight_build
-#FROM twlight_base as twlight_build
+FROM library/alpine:latest as twlight_base
+# Base dependencies.
 RUN apk add --update \
-# Base dependencies
     libjpeg-turbo \
     libxslt-dev \
     mariadb-dev \
     # Python, duh.
     python py-pip ;\
-    pip install virtualenv ;\
-    apk add --update \
+    pip install virtualenv
+
+FROM twlight_base as twlight_build
 # Build dependencies.
+RUN apk add --update \
     build-base \
     gcc \
     libffi-dev \
@@ -34,20 +26,12 @@ RUN virtualenv /venv ;\
     source /venv/bin/activate ;\
     pip install -r /requirements/wmf.txt
 
-FROM library/alpine:latest
-#FROM twlight_base
+FROM twlight_base
 COPY --from=twlight_build /venv /venv
 ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/usr/lib/python2.7"
 
-RUN apk add --update \
-# Base dependencies
-    libjpeg-turbo \
-    libxslt-dev \
-    mariadb-dev \
-    # Python, duh.
-    python py-pip ;\
-    pip install virtualenv
 # Runtime dependencies.
+RUN apk add --update \
     # Refactoring shell code could remove this dependency
     bash \
     gettext \
