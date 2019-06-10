@@ -9,8 +9,11 @@ RUN apk add --update \
     pip install virtualenv
 
 FROM twlight_base as twlight_build
+# Copy pip requirements.
+COPY requirements /requirements
+
 # Build dependencies.
-RUN apk add --update \
+RUN apk add \
     build-base \
     gcc \
     libffi-dev \
@@ -21,7 +24,6 @@ RUN apk add --update \
     zlib-dev
 
 # Pip dependencies.
-COPY requirements /requirements
 RUN virtualenv /venv ;\
     source /venv/bin/activate ;\
     pip install -r /requirements/wmf.txt
