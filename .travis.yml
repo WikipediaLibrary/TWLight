@@ -4,7 +4,7 @@ env:
   global:
     - TWLIGHT_MISSING_MIGRATIONS=$(git ls-files --others --exclude-standard 'TWLight/*/migrations/*.py' | wc -l)
 
-#language: python
+language: minimal
 
 #cache:
 #  directories:
