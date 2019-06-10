@@ -6,15 +6,15 @@ env:
 
 language: python
 
-cache:
-  directories:
-    - ${HOME}/.cache/pip
-    - ${HOME}/docker
-# fix permissions before uploading cached docker images.
-before_cache:
-  - sudo service docker stop
-  - sudo chown -R travis ${HOME}/docker
-  - sudo service docker start
+#cache:
+#  directories:
+#    - ${HOME}/.cache/pip
+#    - ${HOME}/docker
+## fix permissions before uploading cached docker images.
+#before_cache:
+#  - sudo service docker stop
+#  - sudo chown -R travis ${HOME}/docker
+#  - sudo service docker start
 
 python:
   - 2.7
@@ -30,8 +30,9 @@ before_install:
   - sudo service docker start
 
 install:
-  - docker build --tag "wikipedialibrary/twlight:${TRAVIS_BRANCH}" .
-  - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d db twlight
+#  - docker build --tag "wikipedialibrary/twlight:${TRAVIS_BRANCH}" .
+#  - docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d db twlight
+  - .travis/./docker_compose.sh
 
 # Initalize the app and test it.
 script:
