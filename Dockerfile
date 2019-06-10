@@ -16,7 +16,8 @@ RUN apk add --update \
     mariadb-dev \
     # Python, duh.
     python py-pip ;\
-    pip install virtualenv
+    pip install virtualenv ;\
+    apk add --update \
 # Build dependencies.
     build-base \
     gcc \
