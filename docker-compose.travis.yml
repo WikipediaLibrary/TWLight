@@ -30,6 +30,8 @@ services:
     image: wikipedialibrary/twlight:branch_${TRAVIS_BRANCH}
     build:
       cache_from:
+        - wikipedialibrary/twlight_base:branch_${TRAVIS_BRANCH}
+        - wikipedialibrary/twlight_build:branch_${TRAVIS_BRANCH}
         - wikipedialibrary/twlight:branch_${TRAVIS_BRANCH}
     env_file:
       - ./conf/travis.twlight.env
