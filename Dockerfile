@@ -21,10 +21,8 @@ RUN apk add \
     libxml2-dev \
     musl-dev \
     python-dev \
-    zlib-dev
-
-# Pip dependencies.
-RUN virtualenv /venv ;\
+    zlib-dev ;\
+    virtualenv /venv ;\
     source /venv/bin/activate ;\
     pip install -r /requirements/wmf.txt
 
