@@ -20,7 +20,7 @@ secrets:
 
 services:
   migrate:
-    image: wikipedialibrary/twlight:docker
+    image: wikipedialibrary/twlight:branch_docker
     command: bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
     restart: on-failure
     env_file:
@@ -42,7 +42,7 @@ services:
     ports:
       - "3306:3306"
   twlight:
-    image: wikipedialibrary/twlight:docker
+    image: wikipedialibrary/twlight:branch_docker
     command: /app/bin/twlight_docker_entrypoint.sh "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
     env_file:
       - ./conf/staging.twlight.env
