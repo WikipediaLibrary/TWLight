@@ -25,9 +25,6 @@ then
     
     # Commit any changes to local production branch.
     git_commit() {
-        # Capture collectedstatic for deployment.
-        sed -i '/^collectedstatic\/$/d' ./.gitignore
-
         # Checkout production branch
         git checkout -b production
 
