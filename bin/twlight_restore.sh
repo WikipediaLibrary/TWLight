@@ -28,4 +28,7 @@ rm -f "${TWLIGHT_HOME}/twlight.sql"
 chown -R ${TWLIGHT_UNIXNAME} "${TWLIGHT_HOME}"
 find "${TWLIGHT_HOME}/media" -type f | xargs chmod 644
 
+## Run any necessary DB operations.
+${TWLIGHT_HOME}/bin/virtualenv_migrate.sh
+
 echo "Finished TWLight restore."
