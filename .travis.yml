@@ -21,7 +21,6 @@ script:
 # Report test coverage.
   - docker-compose exec twlight /venv/bin/coveralls
 
-# Push to production if the conditions are met.
+# Deploy changes if the conditions are met.
 after_success:
   - .travis/./deploy.sh
-  - .travis/./docker_push.sh

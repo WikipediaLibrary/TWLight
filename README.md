@@ -27,10 +27,8 @@ printf "This is a secret" | docker secret create SECRET_KEY -
 printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_KEY -
 printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
 ```
-- build for your environment, here's staging `docker-compose -f docker-compose.yml -f docker-compose.staging.yml build`
 - deploy for your environment, here's staging `docker stack deploy -c docker-compose.yml -c docker-compose.staging.yml twlight_staging`
 - Restore state from a backup `docker exec -t $(docker ps -q -f name=twlight_staging_twlight) /app/bin/virtualenv_restore.sh /app/backup/dd.hh.tar.gz`
-- Run migrations `docker exec -t $(docker ps -q -f name=twlight_staging_twlight) /app/bin/virtualenv_migrate.sh`
 - Get an interactive shell `docker exec -it $(docker ps -q -f name=twlight_staging_twlight) bash`
 
 
