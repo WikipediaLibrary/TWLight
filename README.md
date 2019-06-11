@@ -36,8 +36,8 @@ printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
 > crontab -e
 # Run django_cron tasks.
 */5 * * * *  docker exec -t $(docker ps -q -f name=twlight_staging_twlight) /app/bin/twlight_docker_entrypoint.sh python manage.py runcrons
-# Update the running TWLight service if there is a new image.
-*/5 * * * *  docker service update --image wikipedialibrary/twlight:branch_staging twlight_staging_twlight
+# Update the running TWLight service if there is a new image. The initial pull is just to verify that the image is valid. Otherwise an inaccessible image could break the service.
+*/5 * * * *  docker pull wikipedialibrary/twlight:branch_staging >/dev/null && docker service update --image wikipedialibrary/twlight:branch_staging twlight_staging_twlight
 ```
 
 
