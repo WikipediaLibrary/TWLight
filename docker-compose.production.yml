@@ -1,0 +1,10 @@
+---
+
+version: '3.2'
+
+services:
+  db:
+    volumes:
+      - type: bind
+        source: ${HOST_DB_DIR}/data
+        target: /var/lib/mysql

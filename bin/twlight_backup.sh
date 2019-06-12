@@ -8,10 +8,10 @@ exec {lockfile}>/var/lock/${self}
 flock -n ${lockfile}
 {
 
-    # Environment variables may not be loaded under all conditions.
+    # Environment variables should be loaded under all conditions.
     if [ -z "${TWLIGHT_HOME}" ]
     then
-        source /etc/environment
+        exit 1
     fi
 
     PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
@@ -25,7 +25,7 @@ flock -n ${lockfile}
     echo "Backing up database and media"
 
     ## Perform backup
-    tar -czf "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" -C "${TWLIGHT_MYSQLDUMP_DIR}" "./twlight.sql" -C "${TWLIGHT_HOME}" "./media"
+    tar -czf "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" -C "${TWLIGHT_MYSQLDUMP_DIR}" "./twlight.sql" -C "${TWLIGHT_HOME}" "../media"
 
     ## Root only
     chmod 0600 "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz"

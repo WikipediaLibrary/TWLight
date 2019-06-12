@@ -1,0 +1,61 @@
+---
+
+version: '3.2'
+
+secrets:
+  DJANGO_DB_NAME:
+    external: true
+  DJANGO_DB_USER:
+    external: true
+  DJANGO_DB_PASSWORD:
+    external: true
+  MYSQL_ROOT_PASSWORD:
+    external: true
+  SECRET_KEY:
+    external: true
+  TWLIGHT_OAUTH_CONSUMER_KEY:
+    external: true
+  TWLIGHT_OAUTH_CONSUMER_SECRET:
+    external: true
+
+services:
+  migrate:
+    image: wikipedialibrary/twlight:branch_docker
+    command: bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
+    restart: on-failure
+    env_file:
+      - ./conf/staging.twlight.env
+    volumes:
+      - type: bind
+        source: /data/project/staging
+        target: /app/backup
+    depends_on:
+      - 'db'
+    secrets:
+      - DJANGO_DB_NAME
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
+      - SECRET_KEY
+      - TWLIGHT_OAUTH_CONSUMER_KEY
+      - TWLIGHT_OAUTH_CONSUMER_SECRET
+  db:
+    ports:
+      - "3306:3306"
+  twlight:
+    image: wikipedialibrary/twlight:branch_docker
+    command: /app/bin/twlight_docker_entrypoint.sh "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
+    env_file:
+      - ./conf/staging.twlight.env
+    volumes:
+      - type: bind
+        source: /data/project/staging
+        target: /app/backup
+    depends_on:
+      - 'migrate'
+  web:
+    volumes:
+      - type: bind
+        source: ./conf/staging.nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"

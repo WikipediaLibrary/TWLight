@@ -2,10 +2,16 @@
 
 # Activates the Django virtual environment
 
-# Environment variables may not be loaded under all conditions.
+# Environment variables should be loaded under all conditions.
 if [ -z "${TWLIGHT_HOME}" ]
 then
-    source /etc/environment
+    exit 1
+fi
+
+# Get secrets.
+if  [ ! -n "${SECRET_KEY+isset}" ]
+then
+    source /app/bin/twlight_docker_secrets.sh
 fi
 
 # Virtualenv scripts need to be run as www
@@ -20,21 +26,11 @@ fi
 ACTIVATED=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 if [ "${ACTIVATED}" -eq 0 ]
 then
-    # Start in TWLight user's home dir.
-    cd /home/${TWLIGHT_UNIXNAME}
-
-    # Suppress a non-useful warning message that occurs when gunicorn is running.
-    virtualenv TWLight 2>/dev/null
 
     # Activate Django virtualenv.
-    source TWLight/bin/activate
-fi
-
-# Environment variables may not be loaded under all conditions.
-if [ -z "${TWLIGHT_HOME}" ]
-then
-    source /etc/environment
+    source /venv/bin/activate
 fi
 
 # Move to the project root.
 cd $TWLIGHT_HOME
+

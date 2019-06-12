@@ -1,3 +1,9 @@
+# Environment file
+.env
+
+# IDE stuff.
+.idea/
+
 # bin files now created by puppet module
 collectedstatic/
 staticfiles/
