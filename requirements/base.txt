@@ -24,5 +24,5 @@ pypandoc==1.4
 python-dateutil==2.8.0
 pytz==2018.9
 six==1.12.0
-wheel==0.33.1
+wheel==0.33.4
 whitenoise==4.1.2
