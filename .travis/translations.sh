@@ -24,6 +24,8 @@ then
 
     # Commit any changes to local branch.
     git_commit() {
+        # Checkout branch
+        git checkout -b ${TRAVIS_BRANCH}
 
         # Add and commit.
         git add 'locale/*/LC_MESSAGES/*.po'
