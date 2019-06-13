@@ -2,7 +2,7 @@
 
 The intended audience for this document is future developers of TWLight. Hi!
 
-To get set up with TWLight locally you can [twlight_vagrant](https://github.com/WikipediaLibrary/twlight_vagrant).
+To get set up with TWLight locally you will need [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
 
 ## Shell scripts
 
@@ -94,5 +94,5 @@ This project can be set up via PyCharm using its support for Docker. Wikimedia d
 - Compose file(s) should again be set to both `docker-compose.yml` and `docker-compose.override.yml`
 - Check the `--build` option
 - Click Apply, then Run
-7. You should see the three containers - `twlight_db_1`, `twlight_app_1`, and `twlight_web_1` start up correctly.
+7. You should see the three containers - `twlight_docker_db_1`, `twlight_docker_twlight_1`, and `twlight_docker_web_1` start up correctly.
 8. Whenever you want to start the Docker containers again, you can simply click the green arrows, then 'Docker'.
