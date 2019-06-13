@@ -75,3 +75,24 @@ All four places referenced there must be updated:
     * Add an entry to FIELD_TYPES specifying the widget to be used to render the field.
     * Add an entry to FIELD_LABELS, which will be used to label the field (don't forget to wrap it in `_()`!)
     * Run the tests. `SynchronizeFieldsTest` will fail if you haven't done all the steps.
+
+## PyCharm setup
+
+This project can be set up via PyCharm using its support for Docker. Wikimedia developers can get free access to PyCharm Professional (required for Docker support) - please contact The Wikipedia Library for instructions.
+
+### Process
+
+1. After installing Docker, ensure it's using Linux Containers, and in settings, enable the 'Expose daemon on tcp://localhost:2375 without TLS' option in settings.
+2. In PyCharm, open the repository folder, and navigate to Project Settings (File > Settings)
+3. Under Build, Execution, Deployment > Docker, click the + symbol and check the TCP socket option is selected.
+4. Navigate to Project > Project Interpreter, click the cog icon, then Add... and select the Docker Compose tab
+- Configuration file(s) should be set to both `docker-compose.yml` and `docker-compose.override.yml`
+- Service should be set to `twlight`.
+- Set Python interpreter path to /venv/bin/python
+5. It may take some time for the interpreter to finish adding. If successful, you should see a long list of python packages including Django.
+6. Open the Docker tab in PyCharm's bottom bar. With the Docker entry highlighted, click the icon with three green arrows, then `Create docker-compose deployment...`
+- Compose file(s) should again be set to both `docker-compose.yml` and `docker-compose.override.yml`
+- Check the `--build` option
+- Click Apply, then Run
+7. You should see the three containers - `twlight_db_1`, `twlight_app_1`, and `twlight_web_1` start up correctly.
+8. Whenever you want to start the Docker containers again, you can simply click the green arrows, then 'Docker'.
