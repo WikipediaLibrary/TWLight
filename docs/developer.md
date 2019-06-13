@@ -8,15 +8,13 @@ To get set up with TWLight locally you will need [Docker](https://www.docker.com
 
 A suite of shell scripts for performing various functions can be found in the /bin folder.
 
-Scripts starting with `virtualenv_` should be run as `www` (e.g. `sudo su www virtualenv_migrate.sh`).
+These scripts can be run with, for example `docker exec twlight virtualenv_migrate.sh`.
 
 ### Virtual environment
 
 To activate the Python virtual environment for the project, run:
 
-`sudo su www`
-
-`source /var/www/html/TWLight/bin/virtualenv_activate.sh`
+`/app/bin/virtualenv_activate.sh`
 
 ### Migrating
 
