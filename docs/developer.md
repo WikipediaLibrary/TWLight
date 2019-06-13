@@ -82,8 +82,8 @@ This project can be set up via PyCharm using its support for Docker. Wikimedia d
 
 1. After installing Docker, ensure it's using Linux Containers, and in settings, enable the 'Expose daemon on tcp://localhost:2375 without TLS' option in settings.
 2. In PyCharm, open the repository folder, and navigate to Project Settings (File > Settings)
-3. Under Build, Execution, Deployment > Docker, click the + symbol and check the TCP socket option is selected.
-4. Navigate to Project > Project Interpreter, click the cog icon, then Add... and select the Docker Compose tab
+3. Under Build, Execution, Deployment > Docker, click the + symbol and check the TCP socket option is selected. The value should be `tcp://localhost:2375`.
+4. Navigate to Project > Project Interpreter, click the cog/gear icon in the top right, then Add... and select the Docker Compose tab
 - Configuration file(s) should be set to both `docker-compose.yml` and `docker-compose.override.yml`
 - Service should be set to `twlight`.
 - Set Python interpreter path to /venv/bin/python
@@ -92,5 +92,11 @@ This project can be set up via PyCharm using its support for Docker. Wikimedia d
 - Compose file(s) should again be set to both `docker-compose.yml` and `docker-compose.override.yml`
 - Check the `--build` option
 - Click Apply, then Run
-7. You should see the three containers - `twlight_docker_db_1`, `twlight_docker_twlight_1`, and `twlight_docker_web_1` start up correctly.
+7. You should see the three containers - `twlight_docker_db_1`, `twlight_docker_twlight_1`, and `twlight_docker_web_1` start up correctly, and you should see the platform at `localhost`.
 8. Whenever you want to start the Docker containers again, you can simply click the green arrows, then 'Docker'.
+
+### Potential issues
+- `Cannot start service db: driver failed programming external connectivity on endpoint...`: Occassional problem which stops docker containers from starting. To solve, simply restart the docker service.
+- 'Unauthorised' when retrieving alpine: This error is a result of signing into Docker with an ID rather than your email. Simply log out and then back in using your full email address.
+- SDK name error: Clear out your PyCharm interpreters by following the top response at https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000306410-Cannot-use-system-interpreter-in-PyCharm-Pro-2018-1
+- `Drive has not been shared`. This error occurs if Docker can't access the relevant folder. On Windows it can be solved by going to Properties > Sharing > Share > Share.
