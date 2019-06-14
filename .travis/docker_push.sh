@@ -13,15 +13,15 @@ echo "TWLIGHT_TRANSLATION_FILES_CHANGED: ${TWLIGHT_TRANSLATION_FILES_CHANGED}"
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ -n "${DOCKER_USERNAME+isset}" ] && [ -n "${DOCKER_PASSWORD+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -eq 0 ] && [ "${TWLIGHT_TRANSLATION_FILES_CHANGED}" -eq 0 ]
 then
   echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  docker push wikipedialibrary/twlight_base:commit_${TRAVIS_COMMIT}
-  docker push wikipedialibrary/twlight_base:branch_${TRAVIS_BRANCH}
-  docker push wikipedialibrary/twlight_base:build_${TRAVIS_BUILD_NUMBER}
+  docker push wikipedialibrary/twlight_base:${COMMIT_TAG}
+  docker push wikipedialibrary/twlight_base:${BRANCH_TAG}
+  docker push wikipedialibrary/twlight_base:${BUILD_TAG}
 
-  docker push wikipedialibrary/twlight_build:commit_${TRAVIS_COMMIT}
-  docker push wikipedialibrary/twlight_build:branch_${TRAVIS_BRANCH}
-  docker push wikipedialibrary/twlight_build:build_${TRAVIS_BUILD_NUMBER}
+  docker push wikipedialibrary/twlight_build:${COMMIT_TAG}
+  docker push wikipedialibrary/twlight_build:${BRANCH_TAG}
+  docker push wikipedialibrary/twlight_build:${BUILD_TAG}
 
-  docker push wikipedialibrary/twlight:commit_${TRAVIS_COMMIT}
-  docker push wikipedialibrary/twlight:branch_${TRAVIS_BRANCH}
-  docker push wikipedialibrary/twlight:build_${TRAVIS_BUILD_NUMBER}
+  docker push wikipedialibrary/twlight:${COMMIT_TAG}
+  docker push wikipedialibrary/twlight:${BRANCH_TAG}
+  docker push wikipedialibrary/twlight:${BUILD_TAG}
 fi
