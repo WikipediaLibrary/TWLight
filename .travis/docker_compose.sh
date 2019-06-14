@@ -27,4 +27,7 @@ docker build --cache-from "wikipedialibrary/twlight_base:${BRANCH_TAG}" \
              --tag "wikipedialibrary/twlight:${BUILD_TAG}" \
              .
 
+TRAVIS_BRANCH=${TRAVIS_BRANCH} \
+TRAVIS_JOB_ID=${TRAVIS_JOB_ID} \
+TRAVIS_REPO_TOKEN=${TRAVIS_REPO_TOKEN} \
 docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d db twlight
