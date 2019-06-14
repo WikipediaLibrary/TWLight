@@ -18,8 +18,6 @@ script:
   - docker-compose exec twlight /app/bin/virtualenv_migrate.sh
   - docker-compose exec twlight /app/bin/virtualenv_translate.sh last-commit
   - docker-compose exec twlight /app/bin/virtualenv_test.sh
-# Report test coverage.
-  - docker-compose exec twlight /venv/bin/coveralls
 
 # Deploy changes if the conditions are met.
 after_success:
