@@ -15,7 +15,7 @@
         exit 1
     fi
     # Submit coverage report to coveralls if we are running in the WikipediaLibrary Travis CI environment.
-    if [ -n "${TRAVIS_BRANCH+isset}" ] && [ -n "${TRAVIS_JOB_ID+isset}" ] && [ -n "${TRAVIS_REPO_TOKEN+isset}" ]
+    if [ -n "${TRAVIS_BRANCH+isset}" ] && [ -n "${TRAVIS_JOB_ID+isset}" ] && [ -n "${COVERALLS_REPO_TOKEN+isset}" ]
     then
       coveralls
     fi
