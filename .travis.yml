@@ -3,9 +3,9 @@
 env:
   global:
     - TWLIGHT_MISSING_MIGRATIONS=$(git ls-files --others --exclude-standard 'TWLight/*/migrations/*.py' | wc -l)
-    - BRANCH_TAG=$(branch_${TRAVIS_BRANCH//\//_})
-    - COMMIT_TAG=$(commit_${TRAVIS_COMMIT})
-    - BUILD_TAG=$(build_${TRAVIS_BUILD_NUMBER})
+    - BRANCH_TAG=branch_${TRAVIS_BRANCH//\//_}
+    - COMMIT_TAG=commit_${TRAVIS_COMMIT}
+    - BUILD_TAG=build_${TRAVIS_BUILD_NUMBER}
 
 language: minimal
 
