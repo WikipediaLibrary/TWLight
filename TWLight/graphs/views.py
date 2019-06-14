@@ -244,7 +244,7 @@ class CSVAppDistribution(_CSVDownloadView):
         if 'pk' in self.kwargs:
             pk = self.kwargs['pk']
             try:
-                partner = Partner.objects.get(pk=pk)
+                partner = Partner.even_not_available.get(pk=pk)
             except Partner.DoesNotExist:
                 logger.exception('Tried to access data for partner #{pk}, who '
                                  'does not exist'.format(pk=pk))
@@ -274,7 +274,7 @@ class CSVAppCountByPartner(_CSVDownloadView):
     def _write_data(self, response):
         pk = self.kwargs['pk']
         try:
-            partner = Partner.objects.get(pk=pk)
+            partner = Partner.even_not_available.get(pk=pk)
         except Partner.DoesNotExist:
             logger.exception('Tried to access data for partner #{pk}, who '
                              'does not exist'.format(pk=pk))
@@ -303,7 +303,7 @@ class CSVUserCountByPartner(_CSVDownloadView):
         pk = self.kwargs['pk']
 
         try:
-            partner = Partner.objects.get(pk=pk)
+            partner = Partner.even_not_available.get(pk=pk)
         except Partner.DoesNotExist:
             logger.exception('Tried to access data for partner #{pk}, who '
                              'does not exist'.format(pk=pk))

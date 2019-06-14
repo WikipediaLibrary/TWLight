@@ -11,6 +11,7 @@ from django.test.client import RequestFactory
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
+from TWLight.resources.models import Partner
 from TWLight.resources.factories import PartnerFactory
 from TWLight.users.factories import UserFactory
 
@@ -234,6 +235,25 @@ class GraphsTestCase(TestCase):
         """
         Test that the CSVUserCountByPartner csv download works
         """
+        request = self.factory.get(reverse('csv:user_count_by_partner',
+            kwargs={'pk': self.partner.pk}))
+        request.user = self.user
+
+        response = views.CSVUserCountByPartner.as_view()(request,
+            pk=self.partner.pk)
+
+        expected_data = [[str(date.today()), '1']]
+
+        self._verify_equal(response, expected_data)
+
+
+    def test_user_count_by_not_available_partner_csv(self):
+        """
+        Test that the CSVUserCountByPartner csv download works, even for
+        a partner marked as not available.
+        """
+        self.partner.status = Partner.NOT_AVAILABLE
+        self.partner.save()
         request = self.factory.get(reverse('csv:user_count_by_partner',
             kwargs={'pk': self.partner.pk}))
         request.user = self.user
