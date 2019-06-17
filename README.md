@@ -10,7 +10,7 @@ The Wikipedia Library Card Platform app, available at http://wikipedialibrary.wm
 - See the thing running on [localhost](http://localhost/)
 - Get an interactive shell `docker-compose exec twlight bash`
 
-Further guidance for developers, including a guide to setting the project up with PyCharm, can be found at [docs/developer.md](https://github.com/WikipediaLibrary/TWLight/blob/Docker-README/docs/developer.md).
+Further guidance for developers, including a guide to setting the project up with PyCharm, can be found at [docs/developer.md](docs/developer.md).
 
 ## Quick setup notes for Debian Servers
 The staging environment is used in the following examples.
