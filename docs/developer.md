@@ -10,12 +10,6 @@ A suite of shell scripts for performing various functions can be found in the /b
 
 These scripts can be run with, for example `docker exec twlight virtualenv_migrate.sh`.
 
-### Virtual environment
-
-To activate the Python virtual environment for the project, run:
-
-`/app/bin/virtualenv_activate.sh`
-
 ### Migrating
 
 The script `virtualenv_migrate.sh` will, for each TWLight app, run:
