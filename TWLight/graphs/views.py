@@ -7,18 +7,17 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve
 from django.contrib import messages
 from django.db.models import Avg, Count
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.views.generic import TemplateView, View
 from django.utils.translation import ugettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
-from TWLight.users.models import UserProfile, Editor
+from TWLight.users.models import UserProfile
 
 from .helpers import (get_application_status_data,
                       get_data_count_by_month,
                       get_users_by_partner_by_month,
-                      get_js_timestamp,
                       get_time_open_histogram,
                       get_median_decision_time,
                       get_user_language_data,
@@ -248,7 +247,9 @@ class CSVAppDistribution(_CSVDownloadView):
             except Partner.DoesNotExist:
                 logger.exception('Tried to access data for partner #{pk}, who '
                                  'does not exist'.format(pk=pk))
-                raise
+                # We could use get_object_or_404 except that we're using
+                # a custom model manager (even_not_available).
+                raise Http404("Partner does not exist.")
 
             csv_queryset = Application.objects.filter(partner=partner)
 
@@ -278,7 +279,7 @@ class CSVAppCountByPartner(_CSVDownloadView):
         except Partner.DoesNotExist:
             logger.exception('Tried to access data for partner #{pk}, who '
                              'does not exist'.format(pk=pk))
-            raise
+            raise Http404("Partner does not exist.")
 
         queryset = Application.objects.filter(partner=partner)
 
@@ -307,7 +308,7 @@ class CSVUserCountByPartner(_CSVDownloadView):
         except Partner.DoesNotExist:
             logger.exception('Tried to access data for partner #{pk}, who '
                              'does not exist'.format(pk=pk))
-            raise
+            raise Http404("Partner does not exist.")
 
         data = get_users_by_partner_by_month(partner, data_format=PYTHON)
 
