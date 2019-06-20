@@ -45,11 +45,11 @@ class EZProxyTicket(object):
     if not secret:
       raise SuspiciousOperation('EZProxy Configuration Error: shared secret cannot be empty.')
 
-    packet = 'u' + repr(timegm(gmtime()))
+    packet = '$u' + repr(timegm(gmtime()))
     if groups:
-      packet +=  'g' + groups
+      packet +=  '$g' + groups
 
-    packet += 'e'
+    packet += '$e'
     ticket = hashlib.sha512(secret + user + packet).hexdigest() + packet
     self.starting_point_url = ezproxy_url + "/login?user=" +  user + "&ticket=" + ticket
 
