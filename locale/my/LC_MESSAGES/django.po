@@ -7,7 +7,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-05-30 18:02+0000\n"
-"PO-Revision-Date: 2019-06-13 18:43:11+0000\n"
+"PO-Revision-Date: 2019-06-20 20:08:16+0000\n"
 "Language: my\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -403,7 +403,7 @@ msgstr "ငြင်းပယ်ခဲ့သည်"
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:37
 msgid "Sent"
-msgstr ""
+msgstr "ပို့ပြီး"
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:41
@@ -748,7 +748,7 @@ msgstr "မက်ဆေ့"
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
 msgid "Receive a copy of this message"
-msgstr ""
+msgstr "ဤမက်ဆေ့၏မိတ္တူကို လက်ခံမည်"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.

@@ -10,7 +10,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-05-30 18:02+0000\n"
-"PO-Revision-Date: 2019-06-13 18:43:10+0000\n"
+"PO-Revision-Date: 2019-06-20 20:08:15+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -709,7 +709,7 @@ msgstr "لطفا دستکم یک درخواست را انتخاب کنید"
 
 #: TWLight/applications/views.py:856
 msgid "Batch update successful."
-msgstr "روزامدسازی جمعی با موفقیت انجام شد"
+msgstr "روزآمدسازی جمعی با موفقیت انجام شد"
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1007
