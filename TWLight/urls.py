@@ -27,6 +27,7 @@ from TWLight.resources.views import PartnerSuggestionView, SuggestionDeleteView,
 from TWLight.users import authorization as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
+from TWLight.ezproxy.urls import urlpatterns as ezproxy_urls
 
 from .views import LanguageWhiteListView, HomePageView
 
@@ -60,6 +61,7 @@ urlpatterns = [
     url(r'^applications/', include(applications_urls, namespace="applications")),
     url(r'^partners/', include(partners_urls, namespace="partners")),
     url(r'^csv/', include(csv_urls, namespace="csv")),
+    url(r'^ezproxy/', include(ezproxy_urls, namespace="ezproxy")),
 
     # Other TWLight views
     url(r'^oauth/login/$',

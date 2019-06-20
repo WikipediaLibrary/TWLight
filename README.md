@@ -29,6 +29,7 @@ printf "This is a secret" | docker secret create MYSQL_ROOT_PASSWORD -
 printf "This is a secret" | docker secret create SECRET_KEY -
 printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_KEY -
 printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
+printf "This is a secret" | docker secret create TWLIGHT_EZPROXY_SECRET -
 ```
 - deploy for your environment `docker stack deploy -c docker-compose.yml -c docker-compose.staging.yml twlight_staging`
 - Restore state from a backup `docker exec -t $(docker ps -q -f name=twlight_staging_twlight) /app/bin/virtualenv_restore.sh /app/backup/dd.hh.tar.gz`

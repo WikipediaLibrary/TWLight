@@ -29,3 +29,8 @@ if  [ ! -n "${TWLIGHT_OAUTH_CONSUMER_SECRET+isset}" ]
 then
     export TWLIGHT_OAUTH_CONSUMER_SECRET=$(cat /run/secrets/TWLIGHT_OAUTH_CONSUMER_SECRET 2>/dev/null)
 fi
+
+if  [ ! -n "${TWLIGHT_EZPROXY_SECRET+isset}" ]
+then
+    export TWLIGHT_EZPROXY_SECRET=$(cat /run/secrets/TWLIGHT_EZPROXY_SECRET 2>/dev/null)
+fi
