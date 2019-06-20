@@ -540,6 +540,7 @@ class PartnerViewTests(TestCase):
         super(PartnerViewTests, cls).setUpClass()
 
         cls.partner = PartnerFactory()
+        cls.application = ApplicationFactory()
         editor = EditorFactory()
         cls.user = UserFactory(editor=editor)
         cls.coordinator = UserFactory()
@@ -598,12 +599,12 @@ class PartnerViewTests(TestCase):
         # Sent apps get sorted by date_closed which is a date field. If we
         # renew all these apps at the same time, they have the same
         # date_closed and the view picks the wrong app.
-        self.application.date_closed = date(2019,1,2)
+        self.application.date_closed = date(2019, 1, 2)
         self.application.save()
 
         application2 = self.application.renew()
         application2.status = Application.SENT
-        application2.date_closed = date(2019,3,3)
+        application2.date_closed = date(2019, 3, 3)
         application2.save()
 
         application3 = application2.renew()

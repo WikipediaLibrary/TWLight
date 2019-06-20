@@ -14,7 +14,6 @@ from reversion import revisions as reversion
 from reversion.models import Version
 from urlparse import urlparse
 
-
 from django import forms
 from django.conf import settings
 from django.contrib import messages
@@ -52,7 +51,6 @@ from .helpers import (USER_FORM_FIELDS,
 from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .models import Application
 
-
 logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
@@ -70,14 +68,15 @@ class EditorAutocompleteView(autocomplete.Select2QuerySetView):
                 editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by('wp_username')
         elif coordinators in self.request.user.groups.all():
             editor_qs = Editor.objects.filter(
-                     applications__partner__coordinator__pk=self.request.user.pk
-                ).order_by('wp_username')
+                applications__partner__coordinator__pk=self.request.user.pk
+            ).order_by('wp_username')
             # Query by wikimedia username
             if self.q:
                 editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by('wp_username')
         else:
             editor_qs = Editor.objects.none()
         return editor_qs
+
 
 class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -88,15 +87,16 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
             if self.q:
                 partner_qs = partner_qs.filter(company_name__istartswith=self.q).order_by('company_name')
         elif coordinators in self.request.user.groups.all():
-            partner_qs =  Partner.objects.filter(
-                    coordinator__pk=self.request.user.pk
-                ).order_by('company_name')
+            partner_qs = Partner.objects.filter(
+                coordinator__pk=self.request.user.pk
+            ).order_by('company_name')
             # Query by partner name
             if self.q:
                 partner_qs = partner_qs.filter(company_name__istartswith=self.q).order_by('company_name')
         else:
             partner_qs = Partner.objects.none()
         return partner_qs
+
 
 class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
     template_name = 'applications/request_for_application.html'
@@ -107,7 +107,6 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
             status=Partner.WAITLIST).exists()
         return context
 
-
     def get_form_class(self):
         """
         Dynamically construct a form which will have a checkbox for every
@@ -115,18 +114,18 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         """
         fields = {}
         field_order = []
-	open_apps = Application.objects.filter(
-		editor = self.request.user.editor,
-		status__in = (Application.SENT, Application.QUESTION, Application.PENDING, Application.APPROVED)
-	)
-	open_apps_partners = []
-	for i in open_apps:
-	   open_apps_partners.append(i.partner.company_name)
+        open_apps = Application.objects.filter(
+            editor=self.request.user.editor,
+            status__in=(Application.SENT, Application.QUESTION, Application.PENDING, Application.APPROVED)
+        )
+        open_apps_partners = []
+        for i in open_apps:
+            open_apps_partners.append(i.partner.company_name)
         for partner in Partner.objects.all().order_by('company_name'):
             # We cannot just use the partner ID as the field name; Django won't
             # be able to find the resultant data.
             # http://stackoverflow.com/a/8289048
-	    if partner.company_name not in open_apps_partners:
+            if partner.company_name not in open_apps_partners:
                 field_name = 'partner_{id}'.format(id=partner.id)
                 fields[field_name] = forms.BooleanField(
                     label=partner.company_name,
@@ -140,7 +139,6 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         form_class = type('RfAForm', (forms.Form,), fields)
         form_class.field_order = field_order
         return form_class
-
 
     def form_valid(self, form):
         """
@@ -161,10 +159,9 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
             return HttpResponseRedirect(reverse('applications:apply'))
         else:
             messages.add_message(self.request, messages.WARNING,
-                #Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
-                _('Please select at least one partner.'))
+                                 # Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
+                                 _('Please select at least one partner.'))
             return HttpResponseRedirect(reverse('applications:request'))
-
 
 
 class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataProcessingRequired, FormView):
@@ -224,7 +221,6 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataPr
 
         return form_class(**kwargs)
 
-
     def get_initial(self):
         """
         If we already know the user's real name, etc., use that to prefill form
@@ -239,7 +235,6 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataPr
             initial[field] = getattr(editor, field)
 
         return initial
-
 
     def form_valid(self, form):
         # Add user data to user profile.
@@ -303,7 +298,6 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataPr
         return [field for field in PARTNER_FORM_OPTIONAL_FIELDS
                 if getattr(partner, field)]
 
-
     def _get_user_fields(self, partners=None):
         """
         Return a dict of user-specific data fields required by at least one
@@ -322,7 +316,6 @@ class _BaseSubmitApplicationView(EditorsOnly, ToURequired, EmailRequired, DataPr
                 needed_fields[field] = [x.__str__() for x in partners_queried]
 
         return needed_fields
-
 
 
 class SubmitApplicationView(_BaseSubmitApplicationView):
@@ -358,14 +351,13 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
 
         return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
 
-
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
-            #Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
-            _('Your application has been submitted for review. '
-              'You can check the status of your applications on this page.'))
+                             # Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
+                             _('Your application has been submitted for review. '
+                               'You can check the status of your applications on this page.'))
         user_home = reverse('users:editor_detail',
-            kwargs={'pk': self.request.user.editor.pk})
+                            kwargs={'pk': self.request.user.editor.pk})
         return user_home
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -382,32 +374,29 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
             assert len(partner_ids) == partners.count()
         except AssertionError:
             logger.exception('Number of partners found does not match number '
-                'of IDs provided')
+                             'of IDs provided')
             raise
         return partners
-
 
 
 class SubmitSingleApplicationView(_BaseSubmitApplicationView):
     def dispatch(self, request, *args, **kwargs):
         if self._get_partners()[0].status == Partner.WAITLIST:
-            #Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
+            # Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
             messages.add_message(request, messages.WARNING, _("This partner "
-                "does not have any access grants available at this time. "
-                "You may still apply for access; your application will be "
-                "reviewed when access grants become available."))
+                                                              "does not have any access grants available at this time. "
+                                                              "You may still apply for access; your application will be "
+                                                              "reviewed when access grants become available."))
 
         return super(SubmitSingleApplicationView, self).dispatch(
             request, *args, **kwargs)
 
-
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS,
-            _('Your application has been submitted for review. '
-              'You can check the status of your applications on this page.'))
+                             _('Your application has been submitted for review. '
+                               'You can check the status of your applications on this page.'))
         user_home = self._get_partners()[0].get_absolute_url()
         return user_home
-
 
     def _get_partners(self):
         """
@@ -437,7 +426,6 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
         return partners
 
 
-
 class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
     """
     Factors out shared functionality for the application list views. Not
@@ -457,7 +445,6 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         return base_qs
 
-
     def _set_object_list(self, filters):
         # If the view lets users apply filters to the queryset, this is where
         # the filtered queryset can be set as the object_list for the view.
@@ -468,15 +455,13 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
             editor = filters[0]['object']
             partner = filters[1]['object']
             self.object_list = self._filter_queryset(base_qs=base_qs,
-                                                editor=editor,
-                                                partner=partner)
+                                                     editor=editor,
+                                                     partner=partner)
         else:
             self.object_list = base_qs
 
-
     def get_queryset(self):
         raise NotImplementedError
-
 
     def get_context_data(self, **kwargs):
         """
@@ -521,7 +506,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         self._set_object_list(filters)
 
         context = super(_BaseListApplicationView, self
-            ).get_context_data(**kwargs)
+                        ).get_context_data(**kwargs)
 
         context['filters'] = filters
 
@@ -555,7 +540,6 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
 
         return context
 
-
     def post(self, request, *args, **kwargs):
         """
         Handles filters applied by the autocomplete form, limiting the queryset
@@ -573,7 +557,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
             # The format call is guaranteed to work, because if we got here we
             # *don't* have a KeyError.
             logger.exception('Autocomplete requested editor #{pk}, who does '
-                'not exist'.format(pk=request.POST['editor']))
+                             'not exist'.format(pk=request.POST['editor']))
             raise
 
         try:
@@ -583,7 +567,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
             partner = None
         except Partner.DoesNotExist:
             logger.exception('Autocomplete requested partner #{pk}, who does '
-                'not exist'.format(pk=request.POST['partner']))
+                             'not exist'.format(pk=request.POST['partner']))
             raise
 
         filters = [
@@ -593,7 +577,6 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         ]
 
         return self.render_to_response(self.get_context_data(filters=filters))
-
 
 
 class ListApplicationsView(_BaseListApplicationView):
@@ -607,27 +590,26 @@ class ListApplicationsView(_BaseListApplicationView):
         """
         if self.request.user.is_superuser:
             base_qs = Application.objects.filter(
-                    status__in=[Application.PENDING, Application.QUESTION],
-                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
-                    editor__isnull=False
-                ).exclude(editor__user__groups__name='restricted').order_by(
-                    'status', 'partner', 'date_created')
+                status__in=[Application.PENDING, Application.QUESTION],
+                partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                editor__isnull=False
+            ).exclude(editor__user__groups__name='restricted').order_by(
+                'status', 'partner', 'date_created')
 
         else:
             base_qs = Application.objects.filter(
-                    status__in=[Application.PENDING, Application.QUESTION],
-                    partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
-                    partner__coordinator__pk=self.request.user.pk,
-                    editor__isnull=False
-                ).exclude(editor__user__groups__name='restricted').order_by(
-                    'status', 'partner', 'date_created')
+                status__in=[Application.PENDING, Application.QUESTION],
+                partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                partner__coordinator__pk=self.request.user.pk,
+                editor__isnull=False
+            ).exclude(editor__user__groups__name='restricted').order_by(
+                'status', 'partner', 'date_created')
 
         return base_qs
 
-
     def get_context_data(self, **kwargs):
         context = super(ListApplicationsView, self).get_context_data(**kwargs)
-        #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
+        # Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
         context['title'] = _('Applications to review')
 
         context['include_template'] = \
@@ -641,27 +623,26 @@ class ListApplicationsView(_BaseListApplicationView):
         return context
 
 
-
 class ListApprovedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                    status=Application.APPROVED,
-                    editor__isnull=False
-                ).exclude(editor__user__groups__name='restricted').order_by(
-                    'status', 'partner', 'date_created')
+                status=Application.APPROVED,
+                editor__isnull=False
+            ).exclude(editor__user__groups__name='restricted').order_by(
+                'status', 'partner', 'date_created')
         else:
             return Application.objects.filter(
-                    status=Application.APPROVED,
-                    partner__coordinator__pk=self.request.user.pk,
-                    editor__isnull=False
-                ).exclude(editor__user__groups__name='restricted').order_by(
-                    'status', 'partner', 'date_created')
+                status=Application.APPROVED,
+                partner__coordinator__pk=self.request.user.pk,
+                editor__isnull=False
+            ).exclude(editor__user__groups__name='restricted').order_by(
+                'status', 'partner', 'date_created')
 
     def get_context_data(self, **kwargs):
         context = super(ListApprovedApplicationsView, self).get_context_data(**kwargs)
-        #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
+        # Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
         context['title'] = _('Approved applications')
 
         context['approved_class'] = 'active'
@@ -669,31 +650,29 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         return context
 
 
-
 class ListRejectedApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.include_invalid.filter(
-                    status__in=[Application.NOT_APPROVED, Application.INVALID],
-                    editor__isnull=False
-                ).order_by('date_closed', 'partner')
+                status__in=[Application.NOT_APPROVED, Application.INVALID],
+                editor__isnull=False
+            ).order_by('date_closed', 'partner')
         else:
             return Application.include_invalid.filter(
-                    status__in=[Application.NOT_APPROVED, Application.INVALID],
-                    partner__coordinator__pk=self.request.user.pk,
-                    editor__isnull=False
-                ).order_by('date_closed', 'partner')
+                status__in=[Application.NOT_APPROVED, Application.INVALID],
+                partner__coordinator__pk=self.request.user.pk,
+                editor__isnull=False
+            ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListRejectedApplicationsView, self).get_context_data(**kwargs)
-        #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
+        # Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
         context['title'] = _('Rejected applications')
 
         context['rejected_class'] = 'active'
 
         return context
-
 
 
 class ListRenewalApplicationsView(_BaseListApplicationView):
@@ -705,17 +684,17 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                     status__in=[Application.PENDING, Application.QUESTION],
-                     parent__isnull=False,
-                     editor__isnull=False
-                ).order_by('-date_created')
+                status__in=[Application.PENDING, Application.QUESTION],
+                parent__isnull=False,
+                editor__isnull=False
+            ).order_by('-date_created')
         else:
             return Application.objects.filter(
-                     status__in=[Application.PENDING, Application.QUESTION],
-                     partner__coordinator__pk=self.request.user.pk,
-                     parent__isnull=False,
-                     editor__isnull=False
-                ).order_by('-date_created')
+                status__in=[Application.PENDING, Application.QUESTION],
+                partner__coordinator__pk=self.request.user.pk,
+                parent__isnull=False,
+                editor__isnull=False
+            ).order_by('-date_created')
 
     def get_context_data(self, **kwargs):
         context = super(ListRenewalApplicationsView, self).get_context_data(**kwargs)
@@ -728,31 +707,29 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
         return context
 
 
-
 class ListSentApplicationsView(_BaseListApplicationView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                    status=Application.SENT,
-                    editor__isnull=False
-                ).order_by('date_closed', 'partner')
+                status=Application.SENT,
+                editor__isnull=False
+            ).order_by('date_closed', 'partner')
         else:
             return Application.objects.filter(
-                    status=Application.SENT,
-                    partner__coordinator__pk=self.request.user.pk,
-                    editor__isnull=False
-                ).order_by('date_closed', 'partner')
+                status=Application.SENT,
+                partner__coordinator__pk=self.request.user.pk,
+                editor__isnull=False
+            ).order_by('date_closed', 'partner')
 
     def get_context_data(self, **kwargs):
         context = super(ListSentApplicationsView, self).get_context_data(**kwargs)
-        #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
+        # Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
         context['title'] = _('Sent applications')
 
         context['sent_class'] = 'active'
 
         return context
-
 
 
 class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, UpdateView):
@@ -773,11 +750,10 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             try:
                 return super(EvaluateApplicationView, self).form_valid(form)
             except IntegrityError:
-                messages.add_message (self.request, messages.WARNING,
-                # Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
-                _('You attempted to create a duplicate authorization.'))
+                messages.add_message(self.request, messages.WARNING,
+                                     # Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
+                                     _('You attempted to create a duplicate authorization.'))
                 raise PermissionDenied
-
 
     def get_context_data(self, **kwargs):
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
@@ -793,7 +769,6 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
 
         return context
 
-
     def get_form(self, form_class=None):
         if form_class is None:
             form_class = self.form_class
@@ -807,7 +782,6 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             css_class='center-block'))
 
         return form
-
 
 
 class BatchEditView(CoordinatorsOnly, ToURequired, View):
@@ -833,8 +807,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             assert 'applications' in request.POST
         except AssertionError:
             messages.add_message(self.request, messages.WARNING,
-                #Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-                _('Please select at least one application.'))
+                                 # Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
+                                 _('Please select at least one application.'))
             return HttpResponseRedirect(reverse('applications:list'))
 
         # IMPORTANT! It would be tempting to just do QuerySet.update() here,
@@ -847,17 +821,16 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 app = Application.objects.get(pk=app_pk)
             except Application.DoesNotExist:
                 logger.exception('Could not find app with posted pk {pk}; '
-                    'continuing through remaining apps'.format(pk=app_pk))
+                                 'continuing through remaining apps'.format(pk=app_pk))
                 continue
 
             app.status = status
             app.save()
-        #Translators: After a coordinator has changed the status of a number of applications, this message appears.
+        # Translators: After a coordinator has changed the status of a number of applications, this message appears.
         messages.add_message(request, messages.SUCCESS,
-            _('Batch update successful.'))
+                             _('Batch update successful.'))
 
         return HttpResponseRedirect(reverse_lazy('applications:list'))
-
 
 
 class ListReadyApplicationsView(CoordinatorsOnly, ListView):
@@ -868,10 +841,10 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
         # Don't include applications from restricted users when generating
         # this list.
         base_queryset = Application.objects.filter(
-                            status=Application.APPROVED,
-                            editor__isnull=False
-                            ).exclude(
-                                editor__user__groups__name='restricted')
+            status=Application.APPROVED,
+            editor__isnull=False
+        ).exclude(
+            editor__user__groups__name='restricted')
 
         partner_list = Partner.objects.filter(
             applications__in=base_queryset).distinct()
@@ -882,8 +855,8 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
             return partner_list
         else:
             return partner_list.filter(
-                    coordinator__pk=self.request.user.pk
-                )
+                coordinator__pk=self.request.user.pk
+            )
 
 
 class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
@@ -894,18 +867,18 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
         apps = self.get_object().applications.filter(
             status=Application.APPROVED, editor__isnull=False).exclude(
-                editor__user__groups__name='restricted'
-                )
+            editor__user__groups__name='restricted'
+        )
         app_outputs = {}
         stream_outputs = []
         list_unavailable_streams = []
-        
+
         for app in apps:
             app_outputs[app] = get_output_for_application(app)
             stream_outputs.append(app.specific_stream)
-        
+
         context['app_outputs'] = app_outputs
-        
+
         # This part checks to see if there are applications from stream(s) with no accounts available.
         # Additionally, supports send_partner template with total approved/sent applications.
         partner = self.get_object()
@@ -917,32 +890,32 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             partner=partner, status=Application.SENT).count()
 
         total_apps_approved_or_sent = total_apps_approved + total_apps_sent
-        
+
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
-            
+
             for stream in partner_streams:
                 if stream.accounts_available is not None:
                     total_apps_approved_or_sent_stream = User.objects.filter(
-                                          editor__applications__partner=partner,
-                                          editor__applications__status__in=(Application.APPROVED, Application.SENT),
-                                          editor__applications__specific_stream=stream).count()
+                        editor__applications__partner=partner,
+                        editor__applications__status__in=(Application.APPROVED, Application.SENT),
+                        editor__applications__specific_stream=stream).count()
                     after_distribution = stream.accounts_available - total_apps_approved_or_sent_stream
 
                     if after_distribution < 0 and (stream in stream_outputs):
                         list_unavailable_streams.append(stream.name)
-                        
+
             if list_unavailable_streams:
                 unavailable_streams = ", ".join(list_unavailable_streams)
                 context['unavailable_streams'] = unavailable_streams
-                
+
         else:
             context['unavailable_streams'] = None
-            
-            #Provide context to template only if accounts_available field is set
+
+            # Provide context to template only if accounts_available field is set
             if partner.accounts_available is not None:
                 context['total_apps_approved_or_sent'] = total_apps_approved_or_sent
-                
+
             else:
                 context['total_apps_approved_or_sent'] = None
 
@@ -952,7 +925,6 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
         context['available_access_codes'] = available_access_codes
 
         return context
-
 
     def post(self, request, *args, **kwargs):
         if self.get_object().authorization_method == Partner.EMAIL:
@@ -997,15 +969,15 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             # The form returns "{{ app_pk }}_{{ access_code }}" for every selected
             # application so that we can associate each code with its application.
             send_outputs = [(output.split("_")[0], output.split("_")[1])
-                for output in select_outputs if output != "default"]
+                            for output in select_outputs if output != "default"]
 
             # Make sure the coordinator hasn't selected the same code
             # multiple times.
             all_codes = [output[1] for output in send_outputs]
             if len(all_codes) > len(set(all_codes)):
                 messages.add_message(self.request, messages.ERROR,
-                    # Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-                    _('Error: Code used multiple times.'))
+                                     # Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
+                                     _('Error: Code used multiple times.'))
                 return HttpResponseRedirect(reverse(
                     'applications:send_partner', kwargs={
                         'pk': self.get_object().pk}))
@@ -1016,7 +988,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
                 application = Application.objects.get(pk=app_pk)
                 code_object = AccessCode.objects.get(code=app_code,
-                    partner=application.partner)
+                                                     partner=application.partner)
 
                 application.status = Application.SENT
                 application.sent_by = request.user
@@ -1038,12 +1010,11 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 code_object.save()
 
         messages.add_message(self.request, messages.SUCCESS,
-            # Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-            _('All selected applications have been marked as sent.'))
+                             # Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
+                             _('All selected applications have been marked as sent.'))
 
         return HttpResponseRedirect(reverse(
             'applications:send_partner', kwargs={'pk': self.get_object().pk}))
-
 
 
 class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
@@ -1054,7 +1025,7 @@ class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
     tries to get the account length preference and (or) the email from the
     user respectively. If not, just adds an additional confirmation step.
     """
-    model=Application
+    model = Application
     template_name = 'applications/confirm_renewal.html'
     form_class = RenewalForm
 
@@ -1065,23 +1036,21 @@ class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
             assert (app.status == Application.APPROVED) or (app.status == Application.SENT)
         except AssertionError:
             logger.exception('Attempt to renew unapproved app #{pk} has been '
-                'denied'.format(pk=app.pk))
-            messages.add_message(self.request, messages.WARNING, 'Attempt to renew '
-                'unapproved app #{pk} has been denied'.format(pk=app.pk))
+                             'denied'.format(pk=app.pk))
+            messages.add_message(self.request, messages.WARNING,
+                                 _('Attempt to renew unapproved app #{pk} has been denied').format(pk=app.pk))
             raise PermissionDenied
 
         return app
-
 
     def get_context_data(self, **kwargs):
         context = super(RenewApplicationView, self).get_context_data(**kwargs)
         context['partner'] = self.get_object().partner
         return context
 
-
     def get_form(self, form_class=None):
         # Figure out where users should be returned to.
-        return_url = reverse('users:home') # set default
+        return_url = reverse('users:home')  # set default
         try:
             return_url = self.request.META['HTTP_REFERER']
         except KeyError:
@@ -1108,10 +1077,9 @@ class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
 
         return form_class(**kwargs)
 
-
     def form_valid(self, form):
         # We'll validate the return_url set in the previous method
-        return_url = reverse('users:home') # default
+        return_url = reverse('users:home')  # default
         referer = form.cleaned_data['return_url']
         domain = urlparse(referer).netloc
         if domain in settings.ALLOWED_HOSTS:
@@ -1125,14 +1093,14 @@ class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
             application.proxy_account_length = form.cleaned_data['proxy_account_length']
 
         renewal = application.renew()
-        
+
         if not renewal:
-            messages.add_message(self.request, messages.WARNING, _('This object '
-                'cannot be renewed. (This probably means that you have already '
-                'requested that it be renewed.)'))
+            messages.add_message(self.request, messages.WARNING,
+                                 _('This object cannot be renewed. (This probably means that you have already '
+                                   'requested that it be renewed.)'))
             return HttpResponseRedirect(return_url)
 
         # Translators: If a user requests the renewal of their account, this message is shown to them.
-        messages.add_message(self.request, messages.INFO, _('Your renewal request '
-            'has been received. A coordinator will review your request.'))
+        messages.add_message(self.request, messages.INFO,
+                             _('Your renewal request has been received. A coordinator will review your request.'))
         return HttpResponseRedirect(return_url)
