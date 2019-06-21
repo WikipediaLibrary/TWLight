@@ -25,6 +25,8 @@ See the [official documentation](https://docs.djangoproject.com/en/1.11/topics/m
 
 To test the tool, simply run the `virtualenv_test.sh` script. This script more or less only runs `python manage.py test`.
 
+You can run a specific test using the `virtualenv_testcase.sh` script, providing a single argument for the test case to run, e.g. `virtualenv_testcase.sh TWLight.resources.tests`.
+
 ### Example data
 
 When working on TWLight locally you may want example data reflecting the live tool. The script `virtualenv_example_data.sh` will generate 200 users, 50 resources, and 1000 applications, with pre-filled data and relations that broadly reflect the real data.
