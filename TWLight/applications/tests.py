@@ -55,6 +55,7 @@ class SendCoordinatorRemindersTest(TestCase):
     we're just verifying that the command can be executed without throwing an
     error. 
     """
+
     def test_command_output(self):
         call_command('send_coordinator_reminders', '--app_status=PENDING')
 
@@ -115,7 +116,6 @@ class SynchronizeFieldsTest(TestCase):
         for field in USER_FORM_FIELDS:
             self.assertTrue(field in self._get_all_field_names(Partner))
 
-
     def test_optional_partner_form_fields_reflected_in_partner(self):
         """
         The Partner model should let each instance indicate whether it requires
@@ -123,7 +123,6 @@ class SynchronizeFieldsTest(TestCase):
         """
         for field in PARTNER_FORM_OPTIONAL_FIELDS:
             self.assertTrue(field in self._get_all_field_names(Partner))
-
 
     def test_partner_optional_fields_are_boolean(self):
         """
@@ -135,8 +134,7 @@ class SynchronizeFieldsTest(TestCase):
         for field in optional_fields:
             self.assertTrue(
                 isinstance(Partner._meta.get_field(field),
-                    models.BooleanField))
-
+                           models.BooleanField))
 
     def test_optional_partner_form_fields_reflected_in_application(self):
         """
@@ -145,7 +143,6 @@ class SynchronizeFieldsTest(TestCase):
         """
         for field in PARTNER_FORM_OPTIONAL_FIELDS:
             self.assertTrue(field in self._get_all_field_names(Application))
-
 
     def test_application_optional_fields_match_field_type(self):
         """
@@ -158,7 +155,7 @@ class SynchronizeFieldsTest(TestCase):
         for field in PARTNER_FORM_OPTIONAL_FIELDS:
             # Ensure Application fields allow for empty data.
             if not isinstance(Application._meta.get_field(field),
-                    models.BooleanField):
+                              models.BooleanField):
                 self.assertTrue(Application._meta.get_field(field).blank)
             else:
                 self.assertFalse(Application._meta.get_field(field).default)
@@ -170,7 +167,6 @@ class SynchronizeFieldsTest(TestCase):
 
             self.assertEqual(type(formfield), type(FIELD_TYPES[field]))
 
-
     def test_user_form_fields_reflected_in_editor(self):
         """
         The Editor model should let each instance record the user data, as
@@ -178,7 +174,6 @@ class SynchronizeFieldsTest(TestCase):
         """
         for field in USER_FORM_FIELDS:
             self.assertTrue(field in self._get_all_field_names(Editor))
-
 
     def test_editor_optional_fields_match_field_type(self):
         """
@@ -191,7 +186,7 @@ class SynchronizeFieldsTest(TestCase):
         for field in USER_FORM_FIELDS:
             # Ensure Editor fields allow for empty data.
             if not isinstance(Editor._meta.get_field(field),
-                    models.BooleanField):
+                              models.BooleanField):
                 self.assertTrue(Editor._meta.get_field(field).blank)
             else:
                 self.assertFalse(Editor._meta.get_field(field).default)
@@ -202,7 +197,6 @@ class SynchronizeFieldsTest(TestCase):
             formfield = modelfield.formfield()
 
             self.assertEqual(type(formfield), type(FIELD_TYPES[field]))
-
 
     def test_application_output_1(self):
         """
@@ -235,10 +229,10 @@ class SynchronizeFieldsTest(TestCase):
         stream.save()
 
         app = ApplicationFactory(status=Application.APPROVED,
-            partner=partner,
-            editor=editor,
-            rationale='just because',
-            comments='nope')
+                                 partner=partner,
+                                 editor=editor,
+                                 rationale='just because',
+                                 comments='nope')
         setattr(app, AGREEMENT_WITH_TERMS_OF_USE, True)
         setattr(app, ACCOUNT_EMAIL, 'alice@example.com')
         setattr(app, SPECIFIC_STREAM, stream)
@@ -262,8 +256,6 @@ class SynchronizeFieldsTest(TestCase):
         # the codebase changes).
         self.assertEqual(9, len(output.keys()))
 
-
-
     def test_application_output_2(self):
         """
         Case 2, we'll test an application where a partner requires none of the
@@ -280,10 +272,10 @@ class SynchronizeFieldsTest(TestCase):
         partner.save()
 
         app = ApplicationFactory(status=Application.APPROVED,
-            partner=partner,
-            editor=editor,
-            rationale='just because',
-            comments='nope')
+                                 partner=partner,
+                                 editor=editor,
+                                 rationale='just because',
+                                 comments='nope')
         app.agreement_with_terms_of_use = False
         app.save()
 
@@ -295,7 +287,6 @@ class SynchronizeFieldsTest(TestCase):
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
         self.assertEqual(1, len(output.keys()))
-
 
     def test_application_output_3(self):
         """
@@ -319,10 +310,10 @@ class SynchronizeFieldsTest(TestCase):
         partner.save()
 
         app = ApplicationFactory(status=Application.APPROVED,
-            partner=partner,
-            editor=editor,
-            rationale='just because',
-            comments='nope')
+                                 partner=partner,
+                                 editor=editor,
+                                 rationale='just because',
+                                 comments='nope')
         app.agreement_with_terms_of_use = False
         app.save()
 
@@ -338,7 +329,6 @@ class SynchronizeFieldsTest(TestCase):
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
         self.assertEqual(5, len(output.keys()))
-
 
 
 class BaseApplicationViewTest(TestCase):
@@ -379,7 +369,6 @@ class BaseApplicationViewTest(TestCase):
         cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
         cls.message_patcher.start()
 
-
     @classmethod
     def tearDownClass(cls):
         super(BaseApplicationViewTest, cls).tearDownClass()
@@ -390,12 +379,10 @@ class BaseApplicationViewTest(TestCase):
 
         cls.message_patcher.stop()
 
-
     def tearDown(self):
         super(BaseApplicationViewTest, self).tearDown()
         for partner in Partner.objects.all():
             partner.delete()
-
 
     def _get_isolated_view(self, view_class, user=None):
         """
@@ -417,7 +404,6 @@ class RequestApplicationTest(BaseApplicationViewTest):
     def setUpClass(cls):
         super(RequestApplicationTest, cls).setUpClass()
         cls.url = reverse('applications:request')
-
 
     def _get_request_with_session(self, data):
         """
@@ -443,7 +429,6 @@ class RequestApplicationTest(BaseApplicationViewTest):
 
         _ = views.RequestApplicationView.as_view()(request)
         return request
-
 
     def test_authorization(self):
         """
@@ -476,7 +461,6 @@ class RequestApplicationTest(BaseApplicationViewTest):
         response = views.RequestApplicationView.as_view()(request)
 
         self.assertEqual(response.status_code, 200)
-
 
     def test_email_required_or_superuser(self):
         """
@@ -525,7 +509,6 @@ class RequestApplicationTest(BaseApplicationViewTest):
 
         self.assertEqual(response.status_code, 200)
 
-
     def test_form_class(self):
         """
         Ensure that the form created by RequestApplicationView has one
@@ -561,7 +544,6 @@ class RequestApplicationTest(BaseApplicationViewTest):
         form = form_class()
         self.assertEqual(len(form.fields), 4)
 
-
     def test_empty_post(self):
         """
         Ensure that, if users don't select any Partners:
@@ -588,7 +570,6 @@ class RequestApplicationTest(BaseApplicationViewTest):
 
         self.assertEqual(response.url, self.url)
 
-
     def test_valid_form_redirects(self):
         """
         Users who submit a valid form end up on the application page.
@@ -601,16 +582,14 @@ class RequestApplicationTest(BaseApplicationViewTest):
             'partner_{id}'.format(id=p2.id): False,
         }
 
-
         factory = RequestFactory()
         request = factory.post(self.url, data=data)
         request.user = self.editor
         request.session = {}
         response = views.RequestApplicationView.as_view()(request)
 
-        self.assertEqual(response.url, 
-            reverse('applications:apply'))
-
+        self.assertEqual(response.url,
+                         reverse('applications:apply'))
 
     def test_valid_form_writes_session_key(self):
         """
@@ -643,10 +622,9 @@ class RequestApplicationTest(BaseApplicationViewTest):
         # is sensitive to order, let's check first that both lists have the
         # same elements, and second that they are of the same length.
         self.assertEqual(set(request.session[views.PARTNERS_SESSION_KEY]),
-            set([p2.id, p1.id]))
+                         set([p2.id, p1.id]))
         self.assertEqual(len(request.session[views.PARTNERS_SESSION_KEY]),
-            len([p2.id, p1.id]))
-
+                         len([p2.id, p1.id]))
 
 
 class SubmitApplicationTest(BaseApplicationViewTest):
@@ -655,12 +633,10 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         super(SubmitApplicationTest, cls).setUpClass()
         cls.url = reverse('applications:apply')
 
-
     def tearDown(self):
         super(SubmitApplicationTest, self).tearDown()
         for partner in Partner.objects.all():
             partner.delete()
-
 
     def test_authorization(self):
         """
@@ -694,7 +670,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         self.assertEqual(response.status_code, 200)
 
-
     def test_data_processing_required(self):
         """
         If users have requested a restriction on the processing of
@@ -719,7 +694,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         with self.assertRaises(PermissionDenied):
             _ = views.SubmitApplicationView.as_view()(request)
 
-
     def test_missing_session_key(self):
         """
         If the PARTNERS_SESSION_KEY is missing, the view should redirect to
@@ -738,7 +712,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         response_path = urlparse(response.url).path
         self.assertEqual(response_path, reverse('applications:request'))
 
-
     def test_empty_session_key(self):
         """
         If the PARTNERS_SESSION_KEY is an empty list, the view should redirect
@@ -756,7 +729,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('applications:request'))
 
-
     def test_invalid_session_data(self):
         """
         If the PARTNERS_SESSION_KEY is not a list of valid pks of Partners, the
@@ -768,7 +740,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.get(self.url)
         request.user = self.editor
-
 
         # Invalid pk: not an integer
         request.session = {}
@@ -786,7 +757,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('applications:request'))
-
 
     def test_valid_session_data(self):
         """
@@ -807,7 +777,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         response = views.SubmitApplicationView.as_view()(request)
         self.assertEqual(response.status_code, 200)
-
 
     def test_form_fields_match_session_keys_one_partner(self):
         """
@@ -849,7 +818,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             id=p1.id), form.fields)
         self.assertIn('partner_{id}_comments'.format(
             id=p1.id), form.fields)
-
 
     def test_form_fields_match_session_keys_two_identical_partners(self):
         """
@@ -924,7 +892,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # Test p1 + p3: should be the more user data than above and also extra
         # partner data fields (one per partner).
 
-
     def test_form_fields_match_session_keys_two_different_partners(self):
         """
         The fields in the constructed form should exactly match the data
@@ -994,7 +961,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertIn('partner_{id}_comments'.format(
             id=p2.id), form.fields)
 
-
     def test_form_initial_data(self):
         """
         Make sure that the form prefills with user data matching whatever we
@@ -1020,14 +986,14 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             # Same as the factory defaults, but repeated here because explicit
             # is better than implicit - let's make it obvious that our
             # assertEquals ought to be true.
-            real_name = 'Alice Crypto',
-            occupation = 'Cat floofer',
+            real_name='Alice Crypto',
+            occupation='Cat floofer',
             # This is different from the default, because we should make sure to
             # check an empty string.
-            affiliation = '',
+            affiliation='',
             # This is different from the default, because we should make sure to
             # check something Unicodey.
-            country_of_residence = 'Ümláuttøwñ',
+            country_of_residence='Ümláuttøwñ',
         )
 
         view = self._get_isolated_view(views.SubmitApplicationView, user)
@@ -1040,7 +1006,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertEqual(initial['affiliation'], '')
 
         user.delete()
-
 
     def test_redirection_on_success(self):
         """
@@ -1072,9 +1037,8 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         response = views.SubmitApplicationView.as_view()(request)
 
         expected_url = reverse('users:editor_detail',
-                                kwargs={'pk': self.editor.editor.pk})
+                               kwargs={'pk': self.editor.editor.pk})
         self.assertEqual(response.url, expected_url)
-
 
     def test_user_data_updates_on_success(self):
         """
@@ -1132,7 +1096,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         user.delete()
 
-
     def test_applications_created_on_success(self):
         """
         When the form posts successfully, Partner-specific Applications should
@@ -1142,7 +1105,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # Set up database objects.
         p1 = PartnerFactory(
             real_name=False,
-            country_of_residence=False, 
+            country_of_residence=False,
             specific_title=True,
             specific_stream=False,
             occupation=False,
@@ -1212,7 +1175,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertEqual(app2.agreement_with_terms_of_use, False)
         self.assertEqual(app2.account_email, None)
 
-
     def test_get_partners(self):
         p1 = PartnerFactory()
         p2 = PartnerFactory()
@@ -1224,18 +1186,17 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         view = self._get_isolated_view(views.SubmitApplicationView)
         view.request.session = {views.PARTNERS_SESSION_KEY: [p1.id]}
         self.assertListEqual(list(view._get_partners()),
-            list(Partner.objects.filter(pk=p1.id)))
+                             list(Partner.objects.filter(pk=p1.id)))
 
         view = self._get_isolated_view(views.SubmitApplicationView)
         view.request.session = {views.PARTNERS_SESSION_KEY: [p2.id]}
         self.assertListEqual(list(view._get_partners()),
-            list(Partner.objects.filter(pk=p2.id)))
+                             list(Partner.objects.filter(pk=p2.id)))
 
         view = self._get_isolated_view(views.SubmitApplicationView)
         view.request.session = {views.PARTNERS_SESSION_KEY: [p1.id, p2.id]}
         self.assertListEqual(list(view._get_partners()),
-            list(Partner.objects.filter(pk__in=[p1.id, p2.id])))
-
+                             list(Partner.objects.filter(pk__in=[p1.id, p2.id])))
 
     def test_get_partner_fields(self):
 
@@ -1265,11 +1226,10 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         # Use set(), because order is unimportant.
         self.assertEqual(set(view._get_partner_fields(p1)),
-            set(['specific_title', 'agreement_with_terms_of_use']))
+                         set(['specific_title', 'agreement_with_terms_of_use']))
 
         self.assertEqual(set(view._get_partner_fields(p2)),
-            set(['specific_stream']))
-
+                         set(['specific_stream']))
 
     def test_get_user_fields(self):
 
@@ -1300,8 +1260,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         partners = Partner.objects.filter(pk__in=[p1.pk, p2.pk])
 
         self.assertEqual(set(view._get_user_fields(partners)),
-            set(['real_name', 'occupation', 'affiliation']))
-
+                         set(['real_name', 'occupation', 'affiliation']))
 
     def test_deleted_field_invalid(self):
         """
@@ -1334,14 +1293,13 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         client.login(username=self.editor, password='editor')
 
         form_url = reverse('applications:apply_single',
-            kwargs={'pk': p1.pk})
+                           kwargs={'pk': p1.pk})
 
         response = client.post(form_url, data)
 
         self.assertFormError(response, 'form',
-            'partner_{id}_rationale'.format(id=p1.id),
-            'This field consists only of restricted text.')
-
+                             'partner_{id}_rationale'.format(id=p1.id),
+                             'This field consists only of restricted text.')
 
 
 class ListApplicationsTest(BaseApplicationViewTest):
@@ -1383,7 +1341,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.SENT, editor=editor)
 
         delete_url = reverse('users:delete_data',
-            kwargs={'pk': user.pk})
+                             kwargs={'pk': user.pk})
 
         # Need a password so we can login
         user.set_password('editor')
@@ -1395,14 +1353,12 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         submit = client.post(delete_url)
 
-
     @classmethod
     def tearDownClass(cls):
         super(ListApplicationsTest, cls).tearDownClass()
         cls.superuser.delete()
         for app in Application.objects.all():
             app.delete()
-
 
     def _base_test_authorization(self, url, view):
         """
@@ -1446,7 +1402,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         self.assertEqual(response.status_code, 200)
 
-
     def _base_test_object_visibility(self, url, view, queryset):
         factory = RequestFactory()
 
@@ -1479,11 +1434,9 @@ class ListApplicationsTest(BaseApplicationViewTest):
             # Applications should be visible to the designated coordinator
             self.assertIn(obj.__str__(), allowResponse.render().content)
 
-
     def test_list_authorization(self):
         url = reverse('applications:list')
         self._base_test_authorization(url, views.ListApplicationsView)
-
 
     def test_list_object_visibility(self):
         url = reverse('applications:list')
@@ -1491,32 +1444,27 @@ class ListApplicationsTest(BaseApplicationViewTest):
             status__in=[Application.PENDING, Application.QUESTION])
         self._base_test_object_visibility(url, views.ListApplicationsView, queryset)
 
-
     def test_list_approved_authorization(self):
         url = reverse('applications:list_approved')
         self._base_test_authorization(url, views.ListApprovedApplicationsView)
-
 
     def test_list_approved_object_visibility(self):
         url = reverse('applications:list_approved')
         queryset = Application.objects.filter(
             status=Application.APPROVED)
         self._base_test_object_visibility(url,
-            views.ListApprovedApplicationsView, queryset)
-
+                                          views.ListApprovedApplicationsView, queryset)
 
     def test_list_rejected_authorization(self):
         url = reverse('applications:list_rejected')
         self._base_test_authorization(url, views.ListRejectedApplicationsView)
-
 
     def test_list_rejected_object_visibility(self):
         url = reverse('applications:list_rejected')
         queryset = Application.objects.filter(
             status__in=[Application.NOT_APPROVED, Application.INVALID])
         self._base_test_object_visibility(url,
-            views.ListRejectedApplicationsView, queryset)
-
+                                          views.ListRejectedApplicationsView, queryset)
 
     def _base_test_deleted_object_visibility(self, url, view, queryset):
         factory = RequestFactory()
@@ -1540,30 +1488,26 @@ class ListApplicationsTest(BaseApplicationViewTest):
             # assigned coordinator.
             self.assertNotIn(obj.__str__(), response.render().content)
 
-
     def test_list_object_visibility(self):
         url = reverse('applications:list')
         queryset = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION])
         self._base_test_deleted_object_visibility(url,
-            views.ListApplicationsView, queryset)
-
+                                                  views.ListApplicationsView, queryset)
 
     def test_list_approved_object_visibility(self):
         url = reverse('applications:list_approved')
         queryset = Application.objects.filter(
             status=Application.APPROVED)
         self._base_test_deleted_object_visibility(url,
-            views.ListApprovedApplicationsView, queryset)
-
+                                                  views.ListApprovedApplicationsView, queryset)
 
     def test_list_rejected_object_visibility(self):
         url = reverse('applications:list_rejected')
         queryset = Application.objects.filter(
             status__in=[Application.NOT_APPROVED, Application.INVALID])
         self._base_test_deleted_object_visibility(url,
-            views.ListRejectedApplicationsView, queryset)
-
+                                                  views.ListRejectedApplicationsView, queryset)
 
     def test_list_renewal_queryset(self):
         url = reverse('applications:list_renewal')
@@ -1598,7 +1542,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.assertEqual(sorted([item.pk for item in expected_qs]),
                          sorted([item.pk for item in allow_qs]))
 
-
     def test_queryset_unfiltered(self):
         """
         Make sure that ListApplicationsView has the correct queryset in context
@@ -1612,7 +1555,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         expected_qs = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION]).exclude(
-                editor=None)
+            editor=None)
 
         # reponse for view when user isn't the designated coordinator
         response = views.ListApplicationsView.as_view()(request)
@@ -1641,7 +1584,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.assertEqual(sorted([item.pk for item in expected_qs]),
                          sorted([item.pk for item in allow_qs]))
 
-
     def _test_queryset_filtered_base(self):
         """
         Contains shared functionality for cases that make sure that
@@ -1664,7 +1606,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.client.login(username='coordinator', password='coordinator')
 
         return new_editor, new_partner, url
-
 
     def test_queryset_filtered_case_1(self):
         """
@@ -1701,7 +1642,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.assertEqual(sorted([item.pk for item in expected_qs]),
                          sorted([item.pk for item in allow_qs]))
 
-
     def test_queryset_filtered_case_2(self):
         """
         List is filtered by a partner.
@@ -1737,7 +1677,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.assertEqual(sorted([item.pk for item in expected_qs]),
                          sorted([item.pk for item in allow_qs]))
 
-
     def test_queryset_filtered_case_3(self):
         """
         List is filtered by both editor and partner.
@@ -1746,7 +1685,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         factory = RequestFactory()
         request = factory.post(url,
-            {'editor': new_editor.pk, 'partner': new_partner.pk})
+                               {'editor': new_editor.pk, 'partner': new_partner.pk})
         request.user = self.coordinator
 
         expected_qs = Application.objects.filter(
@@ -1775,19 +1714,17 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.assertEqual(sorted([item.pk for item in expected_qs]),
                          sorted([item.pk for item in allow_qs]))
 
-
     def test_invalid_editor_post_handling(self):
         _, _, url = self._test_queryset_filtered_base()
 
         # Check assumption.
         self.assertFalse(Editor.objects.filter(pk=500))
         request = RequestFactory().post(url,
-            data={'editor': 500})
+                                        data={'editor': 500})
         request.user = self.coordinator
 
         with self.assertRaises(Editor.DoesNotExist):
             _ = views.ListApplicationsView.as_view()(request)
-
 
     def test_invalid_partner_post_handling(self):
         _, _, url = self._test_queryset_filtered_base()
@@ -1795,12 +1732,11 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # Check assumption.
         self.assertFalse(Partner.objects.filter(pk=500))
         request = RequestFactory().post(url,
-            data={'partner': 500})
+                                        data={'partner': 500})
         request.user = self.coordinator
 
         with self.assertRaises(Partner.DoesNotExist):
             _ = views.ListApplicationsView.as_view()(request)
-
 
     def test_ensure_object_list_exists_case_1(self):
         """
@@ -1826,7 +1762,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         self.assertTrue(hasattr(instance, 'object_list'))
 
-
     def test_ensure_object_list_exists_case_2(self):
         """
         Case 2 is ListApplicationsView / get.
@@ -1840,7 +1775,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         instance.get_context_data()
 
         self.assertTrue(hasattr(instance, 'object_list'))
-
 
     def test_ensure_object_list_exists_case_3(self):
         """
@@ -1858,7 +1792,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         self.assertTrue(hasattr(instance, 'object_list'))
 
-
     def test_ensure_object_list_exists_case_4(self):
         """
         Case 4 is ListApprovedApplicationsView / get.
@@ -1872,7 +1805,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         instance.get_context_data()
 
         self.assertTrue(hasattr(instance, 'object_list'))
-
 
     def test_ensure_object_list_exists_case_5(self):
         """
@@ -1890,7 +1822,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         self.assertTrue(hasattr(instance, 'object_list'))
 
-
     def test_ensure_object_list_exists_case_6(self):
         """
         Case 4 is ListRejectedApplicationsView / get.
@@ -1904,7 +1835,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         instance.get_context_data()
 
         self.assertTrue(hasattr(instance, 'object_list'))
-
 
     def test_ensure_object_list_exists_case_7(self):
         """
@@ -1922,7 +1852,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         self.assertTrue(hasattr(instance, 'object_list'))
 
-
     def test_ensure_object_list_exists_case_8(self):
         """
         Case 8 is ListRenewalApplicationsView / get.
@@ -1936,7 +1865,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
         instance.get_context_data()
 
         self.assertTrue(hasattr(instance, 'object_list'))
-
 
     def test_ensure_object_list_exists_case_9(self):
         """
@@ -1954,7 +1882,6 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         self.assertTrue(hasattr(instance, 'object_list'))
 
-
     def test_ensure_object_list_exists_case_10(self):
         """
         Case 10 is ListSentApplicationsView / get.
@@ -1970,22 +1897,20 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.assertTrue(hasattr(instance, 'object_list'))
 
 
-
 class RenewApplicationTest(BaseApplicationViewTest):
     def test_protected_to_self_only(self):
         partner = PartnerFactory(renewals_available=True)
         app = ApplicationFactory(partner=partner,
-            status=Application.APPROVED, editor=self.editor.editor)
+                                 status=Application.APPROVED, editor=self.editor.editor)
 
         request = RequestFactory().get(reverse('applications:renew',
-            kwargs={'pk': app.pk}))
+                                               kwargs={'pk': app.pk}))
         request.user = self.editor
 
         response = views.RenewApplicationView.as_view()(
             request, pk=app.pk)
 
-        # It redirects to the user's home on success.
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
         user2 = UserFactory()
         request.user = user2
@@ -1994,43 +1919,58 @@ class RenewApplicationTest(BaseApplicationViewTest):
             _ = views.RenewApplicationView.as_view()(
                 request, pk=app.pk)
 
-
-    def test_getting_url_renews_app(self):
+    def test_getting_url_does_not_renew_app(self):
         partner = PartnerFactory(renewals_available=True)
         app = ApplicationFactory(partner=partner,
-            status=Application.APPROVED, editor=self.editor.editor)
+                                 status=Application.APPROVED, editor=self.editor.editor)
 
-        self.assertTrue(app.is_renewable) # check assumption
+        self.assertTrue(app.is_renewable)  # check assumption
 
         request = RequestFactory().get(reverse('applications:renew',
-            kwargs={'pk': app.pk}))
+                                               kwargs={'pk': app.pk}))
         request.user = self.editor
 
         _ = views.RenewApplicationView.as_view()(
             request, pk=app.pk)
 
         app.refresh_from_db()
-        self.assertFalse(app.is_renewable)
-        self.assertTrue(Application.objects.filter(parent=app))
-
+        self.assertTrue(app.is_renewable)
+        self.assertFalse(Application.objects.filter(parent=app))
 
     def test_restricted_renewal(self):
         # Users with restricted processing shouldn't be able to renew
         # an application.
-        partner = PartnerFactory(renewals_available=True)
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False, Restricted=True)
+        partner = PartnerFactory(renewals_available=True,
+                                 authorization_method=Partner.EMAIL,
+                                 account_email=False,
+                                 proxy_account_length=False)
         app = ApplicationFactory(partner=partner,
-            status=Application.APPROVED, editor=self.editor.editor)
+                                 status=Application.APPROVED,
+                                 editor=editor)
 
-        restricted = get_restricted()
-        self.editor.groups.add(restricted)
+        renewal_url = reverse('applications:renew',
+                              kwargs={'pk': app.pk})
 
-        request = RequestFactory().get(reverse('applications:renew',
-            kwargs={'pk': app.pk}))
-        request.user = self.editor
+        response = self.client.get(renewal_url, follow=True)
+        self.assertEqual(response.status_code, 403)
 
-        with self.assertRaises(PermissionDenied):
-            _ = views.RenewApplicationView.as_view()(
-                request, pk=app.pk)
+    def test_renewal_with_different_required_fields(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(renewals_available=True,
+                                 authorization_method=Partner.EMAIL,
+                                 account_email=False,
+                                 proxy_account_length=False)
+        app = ApplicationFactory(partner=partner,
+                                 status=Application.APPROVED,
+                                 editor=editor)
+
+        renewal_url = reverse('applications:renew',
+                              kwargs={'pk': app.pk})
+        response = self.client.get(renewal_url, follow=True)
+        renewal_form = response.context['form']
+        self.assertTrue(renewal_form['return_url'])
+        self.assertContains(renewal_form['return_url'], '/users/')
 
 
 class ApplicationModelTest(TestCase):
@@ -2045,7 +1985,6 @@ class ApplicationModelTest(TestCase):
         self.assertTrue(app.date_closed)
         self.assertEqual(app.date_closed, date.today())
 
-
     def test_approval_sets_days_open(self):
         app = ApplicationFactory(status=Application.PENDING, date_closed=None)
         self.assertEqual(app.days_open, None)
@@ -2054,7 +1993,6 @@ class ApplicationModelTest(TestCase):
         app.save()
 
         self.assertEqual(app.days_open, 0)
-
 
     def test_rejection_sets_date_closed(self):
         app = ApplicationFactory(status=Application.PENDING, date_closed=None)
@@ -2066,7 +2004,6 @@ class ApplicationModelTest(TestCase):
         self.assertTrue(app.date_closed)
         self.assertEqual(app.date_closed, date.today())
 
-
     def test_rejection_sets_days_open(self):
         # date_created will be auto set to today
         app = ApplicationFactory(status=Application.PENDING, date_closed=None)
@@ -2076,7 +2013,6 @@ class ApplicationModelTest(TestCase):
         app.save()
 
         self.assertTrue(app.days_open == 0)
-
 
     def test_bootstrap_class(self):
         app = ApplicationFactory(status=Application.PENDING)
@@ -2093,7 +2029,6 @@ class ApplicationModelTest(TestCase):
         app.status = Application.NOT_APPROVED
         app.save()
         self.assertEqual(app.get_bootstrap_class(), '-danger')
-
 
     def test_get_version_count(self):
         app = ApplicationFactory()
@@ -2114,7 +2049,6 @@ class ApplicationModelTest(TestCase):
 
         # We're just gonna have to hope this continues inductively.
 
-
     def test_get_latest_version(self):
         app = ApplicationFactory(
             status=Application.PENDING,
@@ -2122,7 +2056,7 @@ class ApplicationModelTest(TestCase):
 
         orig_version = app.get_latest_version()
         self.assertTrue(isinstance(orig_version,
-            reversion.models.Version))
+                                   reversion.models.Version))
 
         self.assertEqual(orig_version.field_dict['status'], Application.PENDING)
         self.assertEqual(orig_version.field_dict['rationale'], 'for great justice')
@@ -2132,26 +2066,24 @@ class ApplicationModelTest(TestCase):
 
         new_version = app.get_latest_version()
         self.assertTrue(isinstance(new_version,
-            reversion.models.Version))
+                                   reversion.models.Version))
         self.assertEqual(new_version.field_dict['status'], Application.QUESTION)
         self.assertEqual(new_version.field_dict['rationale'], 'for great justice')
-
 
     def test_get_latest_revision(self):
         app = ApplicationFactory()
 
         orig_revision = app.get_latest_revision()
         self.assertTrue(isinstance(orig_revision,
-            reversion.models.Revision))
+                                   reversion.models.Revision))
 
         app.status = Application.QUESTION
         app.save()
 
         new_revision = app.get_latest_revision()
         self.assertTrue(isinstance(new_revision,
-            reversion.models.Revision))
+                                   reversion.models.Revision))
         self.assertNotEqual(orig_revision, new_revision)
-
 
     def test_is_renewable(self):
         # Applications which are a parent cannot be renewed, even if other
@@ -2167,15 +2099,15 @@ class ApplicationModelTest(TestCase):
         # Applications whose status is not APPROVED or SENT cannot be renewed,
         # even if other criteria are OK.
         app_pending = ApplicationFactory(status=Application.PENDING,
-            partner=partner)
+                                         partner=partner)
         self.assertFalse(app_pending.is_renewable)
 
         app_question = ApplicationFactory(status=Application.QUESTION,
-            partner=partner)
+                                          partner=partner)
         self.assertFalse(app_question.is_renewable)
 
         app_not_approved = ApplicationFactory(status=Application.NOT_APPROVED,
-            partner=partner)
+                                              partner=partner)
         self.assertFalse(app_not_approved.is_renewable)
 
         # Applications whose partners don't have renewals_available cannot be
@@ -2186,11 +2118,11 @@ class ApplicationModelTest(TestCase):
 
         # Other applications can be renewed!
         good_app = ApplicationFactory(partner=partner,
-            status=Application.APPROVED)
+                                      status=Application.APPROVED)
         self.assertTrue(good_app.is_renewable)
 
         good_app2 = ApplicationFactory(partner=partner,
-            status=Application.SENT)
+                                       status=Application.SENT)
         self.assertTrue(good_app.is_renewable)
 
         delete_me = [app1, app2, app_pending, app_question, app_not_approved,
@@ -2199,26 +2131,25 @@ class ApplicationModelTest(TestCase):
         for app in delete_me:
             app.delete()
 
-
     def test_renew_good_app(self):
         stream = StreamFactory()
         editor = EditorFactory()
         editor2 = EditorFactory()
         partner = PartnerFactory(renewals_available=True)
         app = ApplicationFactory(
-                rationale='Because I said so',
-                specific_title='The one with the blue cover',
-                specific_stream=stream,
-                comments='No comment',
-                agreement_with_terms_of_use=True,
-                account_email='bob@example.com',
-                editor=editor,
-                partner=partner,
-                status=Application.APPROVED,
-                date_closed=date.today() + timedelta(days=1),
-                days_open=1,
-                sent_by=editor2.user
-              )
+            rationale='Because I said so',
+            specific_title='The one with the blue cover',
+            specific_stream=stream,
+            comments='No comment',
+            agreement_with_terms_of_use=True,
+            account_email='bob@example.com',
+            editor=editor,
+            partner=partner,
+            status=Application.APPROVED,
+            date_closed=date.today() + timedelta(days=1),
+            days_open=1,
+            sent_by=editor2.user
+        )
 
         app2 = app.renew()
 
@@ -2242,7 +2173,6 @@ class ApplicationModelTest(TestCase):
         self.assertFalse(app2.sent_by)
         self.assertEqual(app2.parent, app)
 
-
     def test_renew_bad_app(self):
         partner = PartnerFactory(renewals_available=False)
         app = ApplicationFactory(partner=partner)
@@ -2257,20 +2187,20 @@ class ApplicationModelTest(TestCase):
         editor = EditorFactory(user=user)
         partner = PartnerFactory()
         app = ApplicationFactory(
-                rationale='Because I said so',
-                comments='No comment',
-                agreement_with_terms_of_use=True,
-                account_email='bob@example.com',
-                editor=editor,
-                partner=partner,
-                status=Application.APPROVED,
-                date_closed=date.today() + timedelta(days=1),
-                days_open=1,
-                sent_by=user
-              )
+            rationale='Because I said so',
+            comments='No comment',
+            agreement_with_terms_of_use=True,
+            account_email='bob@example.com',
+            editor=editor,
+            partner=partner,
+            status=Application.APPROVED,
+            date_closed=date.today() + timedelta(days=1),
+            days_open=1,
+            sent_by=user
+        )
 
         delete_url = reverse('users:delete_data',
-            kwargs={'pk': user.pk})
+                             kwargs={'pk': user.pk})
 
         # Need a password so we can login
         user.set_password('editor')
@@ -2288,8 +2218,6 @@ class ApplicationModelTest(TestCase):
                 app.account_email == "[deleted]" and
                 app.comments == "[deleted]")
 
-
-
     def test_coordinator_delete(self):
         """
         We came across a bug where editors were being removed from
@@ -2303,7 +2231,7 @@ class ApplicationModelTest(TestCase):
         get_coordinators().user_set.add(coordinator)
 
         application = ApplicationFactory(editor=editor,
-            sent_by=coordinator)
+                                         sent_by=coordinator)
 
         # Need a password so we can login
         coordinator.set_password('editor')
@@ -2312,15 +2240,14 @@ class ApplicationModelTest(TestCase):
         client = Client()
         session = client.session
         client.login(username=coordinator.username,
-            password='editor')
+                     password='editor')
 
         delete_url = reverse('users:delete_data',
-            kwargs={'pk': coordinator.pk})
+                             kwargs={'pk': coordinator.pk})
         submit = client.post(delete_url)
 
         application.refresh_from_db()
         assert application.editor == editor
-
 
 
 class EvaluateApplicationTest(TestCase):
@@ -2340,7 +2267,7 @@ class EvaluateApplicationTest(TestCase):
             rationale='Just because',
             agreement_with_terms_of_use=True)
         self.url = reverse('applications:evaluate',
-            kwargs={'pk': self.application.pk})
+                           kwargs={'pk': self.application.pk})
 
         editor2 = EditorFactory()
         self.user_restricted = editor2.user
@@ -2353,7 +2280,7 @@ class EvaluateApplicationTest(TestCase):
             rationale='Just because',
             agreement_with_terms_of_use=True)
         self.url_restricted = reverse('applications:evaluate',
-            kwargs={'pk': self.restricted_application.pk})
+                                      kwargs={'pk': self.restricted_application.pk})
 
         self.coordinator = UserFactory(username='coordinator')
         self.coordinator.set_password('coordinator')
@@ -2365,11 +2292,9 @@ class EvaluateApplicationTest(TestCase):
         self.message_patcher = patch('TWLight.applications.views.messages.add_message')
         self.message_patcher.start()
 
-
     def tearDown(self):
         super(EvaluateApplicationTest, self).tearDown()
         self.message_patcher.stop()
-
 
     def test_sets_status(self):
         factory = RequestFactory()
@@ -2385,12 +2310,11 @@ class EvaluateApplicationTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
+                                    data={'status': Application.APPROVED},
+                                    follow=True)
 
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)
-
 
     def test_sets_days_open(self):
         factory = RequestFactory()
@@ -2407,13 +2331,12 @@ class EvaluateApplicationTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
+                                    data={'status': Application.APPROVED},
+                                    follow=True)
 
         # Verify days open
         self.application.refresh_from_db()
         self.assertEqual(self.application.days_open, 3)
-
 
     def test_sets_date_closed(self):
         factory = RequestFactory()
@@ -2430,13 +2353,12 @@ class EvaluateApplicationTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
+                                    data={'status': Application.APPROVED},
+                                    follow=True)
 
         # Verify date closed
         self.application.refresh_from_db()
         self.assertEqual(self.application.date_closed, date.today())
-
 
     def test_form_present_not_restricted(self):
         factory = RequestFactory()
@@ -2450,9 +2372,8 @@ class EvaluateApplicationTest(TestCase):
         request.user = self.coordinator
 
         response = views.EvaluateApplicationView.as_view()(request,
-            pk=self.application.pk)
+                                                           pk=self.application.pk)
         self.assertIn('<form', response.render().content)
-
 
     def test_form_not_present_restricted(self):
         factory = RequestFactory()
@@ -2466,15 +2387,14 @@ class EvaluateApplicationTest(TestCase):
         request.user = self.coordinator
 
         response = views.EvaluateApplicationView.as_view()(request,
-            pk=self.restricted_application.pk)
+                                                           pk=self.restricted_application.pk)
         self.assertNotIn('<form', response.render().content)
-
 
     def test_deleted_user_app_visibility(self):
         # If a user deletes their data, any applications
         # they had should return a 404, even for coordinators.
         delete_url = reverse('users:delete_data',
-            kwargs={'pk': self.user.pk})
+                             kwargs={'pk': self.user.pk})
 
         # Need a password so we can login
         self.user.set_password('editor')
@@ -2495,8 +2415,7 @@ class EvaluateApplicationTest(TestCase):
 
         with self.assertRaises(Http404):
             _ = views.EvaluateApplicationView.as_view()(request,
-                pk=self.application.pk)
-
+                                                        pk=self.application.pk)
 
     def test_under_discussion_signal(self):
         """
@@ -2527,7 +2446,7 @@ class EvaluateApplicationTest(TestCase):
             sender=Comment,
             comment=comm,
             request=request
-            )
+        )
 
         self.application.refresh_from_db()
 
@@ -2559,8 +2478,8 @@ class EvaluateApplicationTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
+                                    data={'status': Application.APPROVED},
+                                    follow=True)
 
         # Verify status
         self.application.refresh_from_db()
@@ -2585,8 +2504,8 @@ class EvaluateApplicationTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
+                                    data={'status': Application.APPROVED},
+                                    follow=True)
 
         # Verify status
         self.application.refresh_from_db()
@@ -2610,8 +2529,8 @@ class EvaluateApplicationTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
+                                    data={'status': Application.APPROVED},
+                                    follow=True)
 
         # We expect that one email should now be sent.
         self.assertEqual(len(mail.outbox), 1)
@@ -2644,8 +2563,8 @@ class EvaluateApplicationTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'status': Application.APPROVED},
-            follow=True)
+                                    data={'status': Application.APPROVED},
+                                    follow=True)
 
         # We expect that one email should now be sent.
         self.assertEqual(len(mail.outbox), 1)
@@ -2679,11 +2598,9 @@ class BatchEditTest(TestCase):
         self.message_patcher = patch('TWLight.applications.views.messages.add_message')
         self.message_patcher.start()
 
-
     def tearDown(self):
         super(BatchEditTest, self).tearDown()
         self.message_patcher.stop()
-
 
     def test_missing_params_raise_http_bad_request(self):
         # Create a coordinator with a test client session
@@ -2706,9 +2623,8 @@ class BatchEditTest(TestCase):
                          Application.INVALID]
 
         response = self.client.post(self.url,
-            data={'applications': 1, 'batch_status': 6}, follow=True)
+                                    data={'applications': 1, 'batch_status': 6}, follow=True)
         self.assertEqual(response.status_code, 400)
-
 
     def test_bogus_applications_parameter_handled(self):
         """
@@ -2736,12 +2652,12 @@ class BatchEditTest(TestCase):
 
         # Issue the request. Don't follow redirects from here.
         response = self.client.post(self.url,
-            data={'applications': 2, 'batch_status': 3}, follow=False)
+                                    data={'applications': 2, 'batch_status': 3}, follow=False)
 
         # Check things! We get redirected to the applications page when done.
         self.assertEqual(response.status_code, 302)
         self.assertEqual(urlparse(response.url).path,
-            reverse('applications:list'))
+                         reverse('applications:list'))
 
         # No new apps created
         self.assertEqual(Application.objects.count(), 1)
@@ -2755,23 +2671,22 @@ class BatchEditTest(TestCase):
         self.assertEqual(app.rationale, 'Just because')
         self.assertEqual(app.agreement_with_terms_of_use, True)
 
-
     def test_only_coordinators_can_batch_edit(self):
         # An anonymous user is prompted to login.
         response = self.client.post(self.url,
-            data={'applications': self.application.pk, 'batch_status': 3},
-            follow=False)
+                                    data={'applications': self.application.pk, 'batch_status': 3},
+                                    follow=False)
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(urlparse(response.url).path,
-            settings.LOGIN_URL)
+                         settings.LOGIN_URL)
 
         # Create an editor with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
 
         response = self.client.post(self.url,
-            data={'applications': self.application.pk, 'batch_status': 3},
-            follow=False)
+                                    data={'applications': self.application.pk, 'batch_status': 3},
+                                    follow=False)
 
         # An editor may not post to the page.
         self.assertEqual(response.status_code, 403)
@@ -2780,15 +2695,14 @@ class BatchEditTest(TestCase):
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
 
         response = self.client.post(self.url,
-            data={'applications': self.application.pk, 'batch_status': 3},
-            follow=False)
+                                    data={'applications': self.application.pk, 'batch_status': 3},
+                                    follow=False)
 
         # A coordinator may post to the page (on success, it redirects to the
         # application list page which they likely started on).
         self.assertEqual(response.status_code, 302)
         self.assertEqual(urlparse(response.url).path,
-            reverse('applications:list'))
-
+                         reverse('applications:list'))
 
     def test_sets_status(self):
         factory = RequestFactory()
@@ -2801,12 +2715,11 @@ class BatchEditTest(TestCase):
 
         # Approve the application.
         response = self.client.post(self.url,
-            data={'applications': self.application.pk, 'batch_status': 2},
-            follow=False)
+                                    data={'applications': self.application.pk, 'batch_status': 2},
+                                    follow=False)
 
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)
-
 
     def test_sets_days_open(self):
         factory = RequestFactory()
@@ -2820,14 +2733,13 @@ class BatchEditTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'applications': self.application.pk,
-                  'batch_status': Application.APPROVED},
-            follow=True)
+                                    data={'applications': self.application.pk,
+                                          'batch_status': Application.APPROVED},
+                                    follow=True)
 
         # Verify days open
         self.application.refresh_from_db()
         self.assertEqual(self.application.days_open, 3)
-
 
     def test_sets_date_closed(self):
         factory = RequestFactory()
@@ -2841,13 +2753,14 @@ class BatchEditTest(TestCase):
 
         # Approve the application
         response = self.client.post(self.url,
-            data={'applications': self.application.pk,
-                  'batch_status': Application.APPROVED},
-            follow=True)
+                                    data={'applications': self.application.pk,
+                                          'batch_status': Application.APPROVED},
+                                    follow=True)
 
         # Verify date closed
         self.application.refresh_from_db()
         self.assertEqual(self.application.date_closed, date.today())
+
 
 # posting to batch edit without app or status fails appropriately?
 
@@ -2891,7 +2804,7 @@ class MarkSentTest(TestCase):
         self.unpriv_user = editor2.user
 
         self.url = reverse('applications:send_partner',
-            kwargs={'pk': self.partner.pk})
+                           kwargs={'pk': self.partner.pk})
 
         # Set up an access code to distribute
         self.access_code = AccessCode(
@@ -2903,11 +2816,9 @@ class MarkSentTest(TestCase):
         self.message_patcher = patch('TWLight.applications.views.messages.add_message')
         self.message_patcher.start()
 
-
     def tearDown(self):
         super(MarkSentTest, self).tearDown()
         self.message_patcher.stop()
-
 
     def test_invalid_params_raise_http_bad_request(self):
         # No post data: bad.
@@ -2926,7 +2837,6 @@ class MarkSentTest(TestCase):
             request, pk=self.partner.pk)
         self.assertEqual(response.status_code, 400)
 
-
     def test_bogus_applications_parameter_handled(self):
         """
         If the applications parameter doesn't correspond to an existing
@@ -2940,7 +2850,7 @@ class MarkSentTest(TestCase):
 
         # Post a completely invalid app pk.
         request = RequestFactory().post(self.url,
-            data={'applications': ['NaN']})
+                                        data={'applications': ['NaN']})
         request.user = self.user
 
         response = views.SendReadyApplicationsView.as_view()(
@@ -2955,7 +2865,7 @@ class MarkSentTest(TestCase):
         # Post a valid app pk that doesn't correspond to the partner. That's
         # weird, but as long as we don't change anything's status it's fine.
         request = RequestFactory().post(self.url,
-            data={'applications': [self.app2.pk]})
+                                        data={'applications': [self.app2.pk]})
         request.user = self.user
 
         response = views.SendReadyApplicationsView.as_view()(
@@ -2970,7 +2880,6 @@ class MarkSentTest(TestCase):
 
         # Check that we've covered all existing apps with the above statements.
         self.assertEqual(Application.objects.count(), 2)
-
 
     def test_only_partner_coordinator_can_view(self):
         # Only the coordinator assigned to a specific partner should
@@ -2993,7 +2902,7 @@ class MarkSentTest(TestCase):
     def test_only_coordinators_can_mark_sent(self):
         # An anonymous user is prompted to login.
         request = RequestFactory().post(self.url,
-            data={'applications': [self.app2.pk]})
+                                        data={'applications': [self.app2.pk]})
         request.user = AnonymousUser()
 
         with self.assertRaises(PermissionDenied):
@@ -3002,7 +2911,7 @@ class MarkSentTest(TestCase):
 
         # A user who is not a coordinator does not have access.
         coordinators = get_coordinators()
-        coordinators.user_set.remove(self.unpriv_user) # make sure
+        coordinators.user_set.remove(self.unpriv_user)  # make sure
         request.user = self.unpriv_user
 
         with self.assertRaises(PermissionDenied):
@@ -3010,7 +2919,7 @@ class MarkSentTest(TestCase):
                 request, pk=self.partner.pk)
 
         # A coordinator may post to the page.
-        coordinators.user_set.add(self.user) # make sure
+        coordinators.user_set.add(self.user)  # make sure
         request.user = self.user
         response = views.SendReadyApplicationsView.as_view()(
             request, pk=self.partner.pk)
@@ -3061,7 +2970,7 @@ class MarkSentTest(TestCase):
         # Applications from restricted users shouldn't be listed
         # on the send page.
         request = RequestFactory().get(reverse('applications:send_partner',
-            kwargs={'pk': self.partner2.pk}))
+                                               kwargs={'pk': self.partner2.pk}))
         request.user = self.user
 
         editor_restricted = EditorFactory()
@@ -3081,7 +2990,7 @@ class MarkSentTest(TestCase):
         self.partner2.save()
 
         response = views.SendReadyApplicationsView.as_view()(
-            request, pk= self.partner2.pk)
+            request, pk=self.partner2.pk)
         content = response.render().content
 
         self.assertIn(self.app2.editor.wp_username, content)
@@ -3095,9 +3004,9 @@ class MarkSentTest(TestCase):
         self.partner.save()
 
         request = RequestFactory().post(self.url,
-            data={'accesscode': ["{app_pk}_{code}".format(
-                app_pk=self.app1.pk,
-                code=self.access_code.code)]})
+                                        data={'accesscode': ["{app_pk}_{code}".format(
+                                            app_pk=self.app1.pk,
+                                            code=self.access_code.code)]})
         request.user = self.user
 
         response = views.SendReadyApplicationsView.as_view()(
@@ -3116,9 +3025,9 @@ class MarkSentTest(TestCase):
         self.partner.save()
 
         request = RequestFactory().post(self.url,
-            data={'accesscode': ["{app_pk}_{code}".format(
-                app_pk=self.app1.pk,
-                code=self.access_code.code)]})
+                                        data={'accesscode': ["{app_pk}_{code}".format(
+                                            app_pk=self.app1.pk,
+                                            code=self.access_code.code)]})
         request.user = self.user
 
         _ = views.SendReadyApplicationsView.as_view()(
@@ -3129,8 +3038,8 @@ class MarkSentTest(TestCase):
         # Get what should be the only authorization for this user-partner
         # combination.
         authorization = Authorization.objects.get(
-            authorized_user = self.app1.user,
-            partner = self.app1.partner)
+            authorized_user=self.app1.user,
+            partner=self.app1.partner)
 
         # Check that the code has been linked to the authorization
         self.assertEqual(self.access_code.authorization, authorization)
@@ -3144,15 +3053,15 @@ class MarkSentTest(TestCase):
         self.partner.save()
 
         request = RequestFactory().post(self.url,
-            data={'applications': [self.app1.pk]})
+                                        data={'applications': [self.app1.pk]})
         request.user = self.user
 
         _ = views.SendReadyApplicationsView.as_view()(
             request, pk=self.partner.pk)
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user = self.app1.user,
-            partner = self.app1.partner,
+            authorized_user=self.app1.user,
+            partner=self.app1.partner,
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -3166,17 +3075,17 @@ class MarkSentTest(TestCase):
         self.partner.save()
 
         request = RequestFactory().post(self.url,
-            data={'accesscode': ["{app_pk}_{code}".format(
-                app_pk=self.app1.pk,
-                code=self.access_code.code)]})
+                                        data={'accesscode': ["{app_pk}_{code}".format(
+                                            app_pk=self.app1.pk,
+                                            code=self.access_code.code)]})
         request.user = self.user
 
         _ = views.SendReadyApplicationsView.as_view()(
             request, pk=self.partner.pk)
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user = self.app1.user,
-            partner = self.app1.partner,
+            authorized_user=self.app1.user,
+            partner=self.app1.partner,
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -3194,7 +3103,7 @@ class MarkSentTest(TestCase):
         # Send the existing approved application, creating an authorization
         # object in the process.
         request = RequestFactory().post(self.url,
-            data={'applications': [self.app1.pk]})
+                                        data={'applications': [self.app1.pk]})
         request.user = self.user
 
         _ = views.SendReadyApplicationsView.as_view()(
@@ -3222,7 +3131,7 @@ class MarkSentTest(TestCase):
 
         # And mark this one as sent, but by a different user.
         request = RequestFactory().post(self.url,
-            data={'applications': [new_application.pk]})
+                                        data={'applications': [new_application.pk]})
         request.user = self.user3
 
         _ = views.SendReadyApplicationsView.as_view()(
@@ -3243,9 +3152,9 @@ class MarkSentTest(TestCase):
         self.partner.save()
 
         request = RequestFactory().post(self.url,
-            data={'accesscode': ["{app_pk}_{code}".format(
-                app_pk=self.app1.pk,
-                code=self.access_code.code)]})
+                                        data={'accesscode': ["{app_pk}_{code}".format(
+                                            app_pk=self.app1.pk,
+                                            code=self.access_code.code)]})
         request.user = self.user
 
         response = views.SendReadyApplicationsView.as_view()(
@@ -3264,7 +3173,7 @@ class MarkSentTest(TestCase):
         self.partner.save()
 
         request = RequestFactory().post(self.url,
-            data={'applications': [self.app1.pk]})
+                                        data={'applications': [self.app1.pk]})
         request.user = self.user
 
         _ = views.SendReadyApplicationsView.as_view()(
@@ -3294,4 +3203,3 @@ class MarkSentTest(TestCase):
 
         expected_expiry = date.today() + timedelta(days=365)
         self.assertEqual(authorization_object.date_expires, expected_expiry)
-

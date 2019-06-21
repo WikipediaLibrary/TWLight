@@ -16,7 +16,7 @@ from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.applications.views import RequestApplicationView
 from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFactory
-from TWLight.users.groups import get_coordinators
+from TWLight.users.groups import get_coordinators, get_restricted
 
 from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode
@@ -25,7 +25,8 @@ from .filters import PartnerFilter
 
 from . import views
 
-def EditorCraftRoom(self, Terms=False, Coordinator=False):
+
+def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False):
     """
     The use of the @login_required decorator on many views precludes the use of
     factories for many tests. This method creates an Editor logged into a test
@@ -55,10 +56,17 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False):
     # Add or remove editor from Coordinators as required
     coordinators = get_coordinators()
 
+    # Add or remove editor from Restricted as required
+    restricted = get_restricted()
+
     if Coordinator:
         coordinators.user_set.add(editor.user)
     else:
         coordinators.user_set.remove(editor.user)
+    if Restricted:
+        restricted.user_set.add(editor.user)
+    else:
+        restricted.user_set.remove(editor.user)
 
     return editor
 

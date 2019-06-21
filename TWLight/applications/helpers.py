@@ -143,17 +143,22 @@ def get_output_for_application(app):
     to fetch only the required data rather than displaying all of Application
     plus Editor in the front end.
     """
-    output = {}
+    output = {_('Email'): {'label': 'Email', 'data': app.editor.user.email}}
     # Translators: This labels a user's email address on a form for account coordinators
-    output[_('Email')] = {'label': 'Email', 'data': app.editor.user.email}
 
     for field in PARTNER_FORM_OPTIONAL_FIELDS:
-        if getattr(app.partner, field): # Will be True if required by Partner.
+        # Since we directly mark applications made to proxy partners as 'sent', this function wouldn't be invoked.
+        # But for tests, and in the off chance we stumble into this function for when proxy_account_length is true and
+        # the partner isn't proxy, we don't want the data to be sent to partners, which is why it's not part
+        # of the SEND_DATA_FIELD_LABELS.
+        if field == 'proxy_account_length':
+            break
+        if getattr(app.partner, field):  # Will be True if required by Partner.
             field_label = SEND_DATA_FIELD_LABELS[field]
             output[field] = {'label': field_label, 'data': getattr(app, field)}
 
     for field in USER_FORM_FIELDS:
-        if getattr(app.partner, field): # Will be True if required by Partner.
+        if getattr(app.partner, field):  # Will be True if required by Partner.
             field_label = SEND_DATA_FIELD_LABELS[field]
             output[field] = {'label': field_label, 'data': getattr(app.editor, field)}
 
