@@ -17,6 +17,8 @@ secrets:
     external: true
   TWLIGHT_OAUTH_CONSUMER_SECRET:
     external: true
+  TWLIGHT_EZPROXY_SECRET:
+    external: true
 
 services:
   migrate:
