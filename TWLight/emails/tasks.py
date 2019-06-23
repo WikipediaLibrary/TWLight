@@ -341,8 +341,6 @@ def update_app_status_on_save(sender, instance, **kwargs):
 
         if instance.partner.status == Partner.WAITLIST:
             handler_key = 'waitlist'
-        elif instance.status == Application.SENT:
-            handler_key = None
         else:
             handler_key = instance.status
 
@@ -351,12 +349,8 @@ def update_app_status_on_save(sender, instance, **kwargs):
             # Send email if it has an email-worthy status.
             handlers[handler_key](instance)
         except KeyError:
-            # This is probably okay - it probably means we were in case 2 above
-            # and the application was created with PENDING status. We'll only
-            # log the surprising cases.
-            if handler_key != Application.PENDING:
-                logger.exception('Email handler key was set to {handler_key}, '
-                    'but no such handler exists'.format(handler_key=handler_key))
+            # This is fine - we only send emails for a few of the range of
+            # possible statuses, so just continue.
             pass
 
 @receiver(pre_save, sender=AccessCode)
