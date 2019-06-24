@@ -1955,7 +1955,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
         response = self.client.get(renewal_url, follow=True)
         self.assertEqual(response.status_code, 403)
 
-    def test_renewal_with_different_required_fields(self):
+    def test_renewal_with_no_field_required(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
         partner = PartnerFactory(renewals_available=True,
                                  authorization_method=Partner.EMAIL,
@@ -1969,8 +1969,65 @@ class RenewApplicationTest(BaseApplicationViewTest):
                               kwargs={'pk': app.pk})
         response = self.client.get(renewal_url, follow=True)
         renewal_form = response.context['form']
+
         self.assertTrue(renewal_form['return_url'])
-        self.assertContains(renewal_form['return_url'], '/users/')
+        self.assertEqual(renewal_form['return_url'].value(), '/users/')
+
+        self.client.post(renewal_url, {'return_url': renewal_form['return_url'].value()})
+        app.refresh_from_db()
+        self.assertFalse(app.is_renewable)
+        self.assertTrue(Application.objects.filter(parent=app))
+
+    def test_renewal_with_different_fields_required(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(renewals_available=True,
+                                 authorization_method=Partner.EMAIL,
+                                 account_email=True,  # require account_email on renewal
+                                 proxy_account_length=False)
+        app = ApplicationFactory(partner=partner,
+                                 status=Application.APPROVED,
+                                 editor=editor)
+
+        renewal_url = reverse('applications:renew',
+                              kwargs={'pk': app.pk})
+        response = self.client.get(renewal_url, follow=True)
+        renewal_form = response.context['form']
+        self.assertTrue(renewal_form['account_email'])
+
+        data = renewal_form.initial
+        data['account_email'] = "test@example.com"
+        data['return_url'] = renewal_form['return_url'].value()
+
+        self.client.post(renewal_url, data)
+        app.refresh_from_db()
+        self.assertFalse(app.is_renewable)
+        self.assertTrue(Application.objects.filter(parent=app))
+
+        partner.authorization_method = Partner.PROXY
+        partner.proxy_account_length = True  # require proxy account length
+        partner.save()
+
+        editor1 = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        app1 = ApplicationFactory(partner=partner,
+                                  status=Application.SENT,  # proxy applications are directly marked SENT
+                                  editor=editor1)
+
+        renewal_url = reverse('applications:renew',
+                              kwargs={'pk': app1.pk})
+        response = self.client.get(renewal_url, follow=True)
+        renewal_form = response.context['form']
+        self.assertTrue(renewal_form['account_email'])
+        self.assertTrue(renewal_form['proxy_account_length'])
+
+        data = renewal_form.initial
+        data['account_email'] = "test@example.com"
+        data['return_url'] = renewal_form['return_url'].value()
+        data['proxy_account_length'] = 6
+
+        self.client.post(renewal_url, data)
+        app1.refresh_from_db()
+        self.assertFalse(app1.is_renewable)
+        self.assertTrue(Application.objects.filter(parent=app1))
 
 
 class ApplicationModelTest(TestCase):

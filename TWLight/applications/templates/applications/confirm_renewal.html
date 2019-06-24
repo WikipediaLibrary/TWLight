@@ -5,7 +5,6 @@
 {% block content %}
   <div>
     <form class="form-horizontal" method="post">
-      <!--<input type="hidden" name="return_url" value="{{ return_url }}" />-->
       {% csrf_token %}
       {% crispy form %}
       {% comment %} Translators: This message is displayed on the page where users can confirm their renewal. {% endcomment %}
