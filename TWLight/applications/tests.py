@@ -165,6 +165,13 @@ class SynchronizeFieldsTest(TestCase):
             modelfield = Application._meta.get_field(field)
             formfield = modelfield.formfield()
 
+            # While we simply use the ChoiceField for proxy_account_length field in the form, the model makes use
+            # of the TypedChoiceField, triggering a mismatch. We'll get around that by separately testing the fields.
+            if field == 'proxy_account_length':
+                self.assertEqual(type(formfield), forms.TypedChoiceField)
+                self.assertEqual(type(FIELD_TYPES[field]), forms.ChoiceField)
+                break
+
             self.assertEqual(type(formfield), type(FIELD_TYPES[field]))
 
     def test_user_form_fields_reflected_in_editor(self):
