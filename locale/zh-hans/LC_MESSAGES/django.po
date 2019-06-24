@@ -7,13 +7,14 @@
 # Author: Liuxinyu970226
 # Author: Nikkimaria
 # Author: Phenolla
+# Author: 神樂坂秀吉
 # Author: 科劳
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-05-30 18:02+0000\n"
-"PO-Revision-Date: 2019-06-06 16:33:19+0000\n"
+"PO-Revision-Date: 2019-06-24 15:22:59+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -222,7 +223,7 @@ msgstr "发送至合作伙伴"
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
 #: TWLight/applications/models.py:58
 msgid "Invalid"
-msgstr ""
+msgstr "无效"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
 #: TWLight/applications/models.py:74 TWLight/applications/models.py:85
@@ -748,7 +749,7 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:21
 msgid "Message"
-msgstr ""
+msgstr "消息"
 
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
@@ -873,12 +874,12 @@ msgstr "维基百科书斋运营团队"
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/emails/templates/emails/contact.html:52
 msgid "Mailing list"
-msgstr ""
+msgstr "邮件列表"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
 #: TWLight/emails/templates/emails/contact.html:56
 msgid "IRC"
-msgstr ""
+msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:64
@@ -1052,7 +1053,7 @@ msgstr ""
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
 #: TWLight/resources/admin.py:141
 msgid "Uploaded file is too large."
-msgstr ""
+msgstr "上传的文件太大。"
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
 #: TWLight/resources/admin.py:159
