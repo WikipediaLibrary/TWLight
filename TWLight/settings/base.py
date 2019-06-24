@@ -121,6 +121,7 @@ INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 CRON_CLASSES = [
     'TWLight.crons.BackupCronJob',
     'TWLight.crons.SendCoordinatorRemindersCronJob',
+    'TWLight.crons.UserRenewalNoticeCronJob',
 ]
 
 # MIDDLEWARE CONFIGURATION
