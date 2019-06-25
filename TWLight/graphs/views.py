@@ -13,7 +13,7 @@ from django.utils.translation import ugettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
-from TWLight.users.models import UserProfile
+from TWLight.users.models import UserProfile, Authorization
 
 from .helpers import (get_application_status_data,
                       get_data_count_by_month,
@@ -88,6 +88,20 @@ class DashboardView(TemplateView):
                 "editor").distinct().count()
 
         context['total_partners'] = Partner.objects.count()
+
+        # Average authorizations per user, for users with at least one.
+        all_authorizations = Authorization.objects.all()
+        authorizations_count = all_authorizations.count()
+        authorized_users_count = all_authorizations.values(
+            'authorized_user').distinct().count()
+
+        # If we haven't authorized anyone yet, just show 0
+        if authorized_users_count:
+            # Have to add float so we don't return an int
+            context['average_authorizations'] = authorizations_count/float(
+                authorized_users_count)
+        else:
+            context['average_authorizations'] = 0
 
         # Application data
         # ----------------------------------------------------------------------
