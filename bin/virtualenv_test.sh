@@ -2,6 +2,8 @@
 #
 # Runs Django tests (https://docs.djangoproject.com/en/1.11/topics/testing/)
 
+set -euo pipefail
+
 {
     # print the date for logging purposes
     echo [$(date)]
