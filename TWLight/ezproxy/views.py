@@ -14,9 +14,8 @@ from django.views import View
 
 class EZProxyAuth(View):
 
-  def get(self, request):
+  def get(self, request, url):
       username = request.user.editor.wp_username
-      url = request.GET.get('url', '')
 
       if not url:
         raise SuspiciousOperation('Missing EZProxy target URL.')
