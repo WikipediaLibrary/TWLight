@@ -8,7 +8,7 @@ urlpatterns = [
         login_required(views.EZProxyAuth.as_view()),
         name='ezproxy_auth_u'
         ),
-    url(r'^r/(?P<token>(ezp\.[a-zA-Z]|[0-9]|[$-_@.&+])+)$',
+    url(r'^r/(?P<token>ezp\.([a-zA-Z]|[0-9]|[$-_@.&+])+)$',
         login_required(views.EZProxyAuth.as_view()),
         name='ezproxy_auth_r'
         ),
