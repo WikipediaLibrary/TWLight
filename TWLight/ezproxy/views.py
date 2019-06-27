@@ -49,7 +49,7 @@ class EZProxyAuth(View):
       else:
           raise SuspiciousOperation('Missing EZProxy target URL.')
 
-      return HttpResponseRedirect(EZProxyTicket(username).url(url), groups)
+      return HttpResponseRedirect(EZProxyTicket(username, groups).url(url))
 
 
 class EZProxyTicket(object):
