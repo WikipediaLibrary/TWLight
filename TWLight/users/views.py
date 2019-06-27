@@ -1,3 +1,4 @@
+from datetime import date
 import json
 
 from crispy_forms.helper import FormHelper
@@ -8,7 +9,6 @@ from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
-from django.core import serializers
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -20,13 +20,20 @@ from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 from django_comments.models import Comment
 
+from TWLight.resources.models import Partner
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 from TWLight.users.groups import get_coordinators, get_restricted
 
+from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from reversion.models import Version
 
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm, UserEmailForm
 from .models import Editor, UserProfile
+from .serializers import UserSerializer
 from TWLight.applications.models import Application
 
 import datetime
@@ -35,7 +42,7 @@ coordinators = get_coordinators()
 restricted = get_restricted()
 
 import logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django')
 
 def _is_real_url(url):
     """
@@ -533,3 +540,34 @@ class TermsView(UpdateView):
 
             messages.add_message(self.request, messages.WARNING, fail_msg)
             return reverse_lazy('users:home')
+
+
+class AuthorizedUsers(APIView):
+    """
+    API endpoint returning the list of users authorized to access a specific
+    partner. For proxy partners, uses the list of Authorizations. For others,
+    uses the full list of sent applications.
+    """
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, pk, format=None):
+        try:
+            partner = Partner.even_not_available.get(pk=pk)
+        except Partner.DoesNotExist:
+            message = "Couldn't find a partner with this ID."
+            return Response(message, status=status.HTTP_404_NOT_FOUND)
+
+        if partner.authorization_method == Partner.PROXY:
+            users = User.objects.filter(
+                authorizations__partner=partner,
+                authorizations__date_expires__gte=date.today()
+            ).distinct()
+        else:
+            users = User.objects.filter(
+                editor__applications__status=Application.SENT,
+                editor__applications__partner=partner
+            ).distinct()
+
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)

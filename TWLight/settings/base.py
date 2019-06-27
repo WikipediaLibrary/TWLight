@@ -101,6 +101,8 @@ THIRD_PARTY_APPS = [
     # django-request, the user analytics package.
     'request',
     'django_countries',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 TWLIGHT_APPS = [

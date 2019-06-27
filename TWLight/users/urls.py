@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^delete_data/(?P<pk>\d+)/$',
        login_required(views.DeleteDataView.as_view()),
         name='delete_data'),
+    url(r'^authorized_users/(?P<pk>\d+)/$',
+        views.AuthorizedUsers.as_view())
 ]

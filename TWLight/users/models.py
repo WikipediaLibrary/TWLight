@@ -393,7 +393,7 @@ class Authorization(models.Model):
     # Users may have multiple authorizations.
     authorized_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
         on_delete=models.SET_NULL,
-        related_name="+",
+        related_name="authorizations",
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
         help_text=_('The authorized user.'))
 
