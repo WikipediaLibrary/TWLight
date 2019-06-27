@@ -5,20 +5,37 @@ import hashlib
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
-from django.core.exceptions import SuspiciousOperation, ValidationError
+from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation, ValidationError
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
-
+from TWLight.users.models import Authorization
 
 
 class EZProxyAuth(View):
 
   def get(self, request, url=None, token=None):
       username = request.user.editor.wp_username
+      groups = []
 
       if not username:
           raise SuspiciousOperation('Missing Editor username.')
+
+      try:
+          authorizations = Authorization.objects.filter(authorized_user=request.user)
+          for authorization in authorizations:
+              partner_id = authorization.partner_id
+              stream_id = authorization.stream_id
+              group = ''
+              if partner_id:
+                  group = 'partner_' +  repr(partner_id)
+                  if stream_id:
+                      group += '_stream_' + repr(stream_id)
+              if group:
+                  groups.append(group)
+      except ObjectDoesNotExist:
+          pass
+
 
       if url:
           try:
@@ -31,14 +48,14 @@ class EZProxyAuth(View):
       else:
           raise SuspiciousOperation('Missing EZProxy target URL.')
 
-      return HttpResponseRedirect(EZProxyTicket(username).url(url))
+      return HttpResponseRedirect(EZProxyTicket(username).url(url), groups)
 
 
 class EZProxyTicket(object):
 
   starting_point_url = None
 
-  def __init__(self, user, groups=''):
+  def __init__(self, user, groups=None):
 
     ezproxy_url = settings.TWLIGHT_EZPROXY_URL
     secret = settings.TWLIGHT_EZPROXY_SECRET
@@ -48,7 +65,7 @@ class EZProxyTicket(object):
 
     packet = '$u' + repr(timegm(gmtime()))
     if groups:
-      packet +=  '$g' + groups
+      packet +=  '$g' + '+'.join(groups)
 
     packet += '$e'
     ticket = hashlib.sha512(secret + user + packet).hexdigest() + packet
