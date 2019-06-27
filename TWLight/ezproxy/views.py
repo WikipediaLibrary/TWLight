@@ -14,7 +14,8 @@ from TWLight.users.models import Authorization
 
 class EZProxyAuth(View):
 
-  def get(self, request, url=None, token=None):
+  @staticmethod
+  def get(request, url=None, token=None):
       username = request.user.editor.wp_username
       groups = []
 
