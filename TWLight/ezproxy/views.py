@@ -14,20 +14,22 @@ from django.views import View
 
 class EZProxyAuth(View):
 
-  def get(self, request, url):
+  def get(self, request, url=None, token=None):
       username = request.user.editor.wp_username
-
-      if not url:
-        raise SuspiciousOperation('Missing EZProxy target URL.')
 
       if not username:
           raise SuspiciousOperation('Missing Editor username.')
 
-      try:
-          validate = URLValidator(schemes=('http', 'https'))
-          validate(url)
-      except ValidationError:
-          raise SuspiciousOperation('Invalid EZProxy target URL.')
+      if url:
+          try:
+              validate = URLValidator(schemes=('http', 'https'))
+              validate(url)
+          except ValidationError:
+              raise SuspiciousOperation('Invalid EZProxy target URL.')
+      elif token:
+          url = token
+      else:
+          raise SuspiciousOperation('Missing EZProxy target URL.')
 
       return HttpResponseRedirect(EZProxyTicket(username).url(url))
 
