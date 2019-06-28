@@ -13,6 +13,7 @@ from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.resources.factories import PartnerFactory
+from TWLight.users.models import Authorization
 from TWLight.users.factories import UserFactory
 
 from . import views
@@ -69,6 +70,52 @@ class GraphsTestCase(TestCase):
 
         response = views.DashboardView.as_view()(request)
         self.assertEqual(response.status_code, 200)
+
+    def test_average_accounts_per_user(self):
+        """
+        Test that the 'Average accounts per user' statistic returns the correct
+        number.
+        """
+        # Create 3 users
+        user1 = UserFactory()
+        user2 = UserFactory()
+        _ = UserFactory()
+
+        # Three partners
+        partner1 = PartnerFactory()
+        partner2 = PartnerFactory()
+        partner3 = PartnerFactory()
+
+        # Four Authorizations
+        auth1 = Authorization(
+            authorized_user=user1,
+            partner=partner1
+        )
+        auth1.save()
+        auth2 = Authorization(
+            authorized_user=user2,
+            partner=partner1
+        )
+        auth2.save()
+        auth3 = Authorization(
+            authorized_user=user2,
+            partner=partner2
+        )
+        auth3.save()
+        auth4 = Authorization(
+            authorized_user=user2,
+            partner=partner3
+        )
+        auth4.save()
+
+        request = self.factory.get(self.dashboard_url)
+        request.user = self.user
+
+        response = views.DashboardView.as_view()(request)
+        average_authorizations = response.context_data['average_authorizations']
+
+        # We expect 2 authorizations (one user has 1, one has 3, average is 2)
+        self.assertEqual(average_authorizations, 2)
 
 
     def test_app_time_histogram_csv(self):
