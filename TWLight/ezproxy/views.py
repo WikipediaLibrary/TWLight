@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import hashlib
+import urllib
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
@@ -69,7 +70,7 @@ class EZProxyTicket(object):
       packet +=  '$g' + '+'.join(groups)
 
     packet += '$e'
-    ticket = hashlib.sha512(secret + user + packet).hexdigest() + packet
+    ticket = urllib.quote(hashlib.sha512(secret + user + packet).hexdigest() + packet)
     self.starting_point_url = ezproxy_url + "/login?user=" +  user + "&ticket=" + ticket
 
   def url(self, url):
