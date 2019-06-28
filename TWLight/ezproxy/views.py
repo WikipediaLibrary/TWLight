@@ -18,7 +18,7 @@ class EZProxyAuth(View):
   @staticmethod
   def get(request, url=None, token=None):
       username = request.user.editor.wp_username
-      groups = []
+      groups = ['Default']
 
       if not username:
           raise SuspiciousOperation('Missing Editor username.')
