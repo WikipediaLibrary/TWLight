@@ -29,9 +29,9 @@ class EZProxyAuth(View):
               stream_id = authorization.stream_id
               group = ''
               if partner_id:
-                  group = 'partner_' +  repr(partner_id)
+                  group = 'P' +  repr(partner_id)
                   if stream_id:
-                      group += '_stream_' + repr(stream_id)
+                      group += 'S' + repr(stream_id)
               if group:
                   groups.append(group)
       except ObjectDoesNotExist:
