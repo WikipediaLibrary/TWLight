@@ -820,7 +820,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         Test that, if no credentials are supplied, the API returns no data.
         """
         factory = APIRequestFactory()
-        request = factory.get('/api/v1/users/authorizations/partner/1')
+        request = factory.get('/api/v0/users/authorizations/partner/1')
 
         response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
 
@@ -831,7 +831,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         Test that, if credentials are supplied, the API returns a 200 status code.
         """
         factory = APIRequestFactory()
-        request = factory.get('/api/v1/users/authorizations/partner/1')
+        request = factory.get('/api/v0/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
         response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
@@ -860,7 +860,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         )
 
         factory = APIRequestFactory()
-        request = factory.get('/api/v1/users/authorizations/partner/1')
+        request = factory.get('/api/v0/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
         response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
@@ -891,7 +891,7 @@ class AuthorizedUsersAPITestCase(TestCase):
             status=Application.PENDING
         )
         factory = APIRequestFactory()
-        request = factory.get('/api/v1/users/authorizations/partner/1')
+        request = factory.get('/api/v0/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
         response = views.AuthorizedUsers.as_view()(request, self.partner2.pk)
