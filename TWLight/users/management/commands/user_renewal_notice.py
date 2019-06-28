@@ -1,16 +1,17 @@
 from datetime import datetime, timedelta
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from TWLight.users.signals import Notice
 from TWLight.users.models import Authorization
+
 
 class Command(BaseCommand):
     help = "Sends advance notice to users with expiring authorizations, prompting them to apply for renewal."
 
     def handle(self, *args, **options):
         # Get all authorization objects with an expiry date in the next
-        # two weeks, for which we haven't yet sent a reminder email, and
+        # four weeks, for which we haven't yet sent a reminder email, and
         # exclude users who disabled these emails.
         expiring_authorizations = Authorization.objects.filter(
             date_expires__lt=datetime.today()+timedelta(weeks=4),
