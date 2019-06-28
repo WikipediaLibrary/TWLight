@@ -1,4 +1,5 @@
 import csv
+from datetime import date
 # The django-request analytics package, NOT the python URL library requests!
 from request.models import Request
 import logging
@@ -89,8 +90,10 @@ class DashboardView(TemplateView):
 
         context['total_partners'] = Partner.objects.count()
 
-        # Average authorizations per user, for users with at least one.
-        all_authorizations = Authorization.objects.all()
+        # Average active authorizations per user, for users with at least one.
+        all_authorizations = Authorization.objects.exclude(
+            date_expires__lte=date.today()
+        )
         authorizations_count = all_authorizations.count()
         authorized_users_count = all_authorizations.values(
             'authorized_user').distinct().count()
