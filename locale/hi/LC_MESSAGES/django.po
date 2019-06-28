@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-06-28 13:18+0000\n"
+"POT-Creation-Date: 2019-06-28 15:52+0000\n"
 "PO-Revision-Date: 2019-06-06 16:33:17+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2132,7 +2132,7 @@ msgstr "क्या आप वाकई <b>%(object)s</b> हटाना च�
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
-#: TWLight/users/views.py:383
+#: TWLight/users/views.py:390
 msgid "Confirm"
 msgstr "पुष्टि करें"
 
@@ -3670,12 +3670,12 @@ msgstr ""
 #. Translators: This is a button which updates user preference settings
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/user_email_preferences.html:13
-#: TWLight/users/views.py:270
+#: TWLight/users/views.py:277
 msgid "Update"
 msgstr "अद्यतन"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:109
+#: TWLight/users/views.py:116
 #, python-brace-format
 msgid ""
 "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help "
@@ -3687,29 +3687,29 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:253 TWLight/users/views.py:325
-#: TWLight/users/views.py:369
+#: TWLight/users/views.py:260 TWLight/users/views.py:332
+#: TWLight/users/views.py:376
 msgid "You must be logged in to do that."
 msgstr "ऐसा करने के लिए आपको लॉग इन करना होगा।"
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:282
+#: TWLight/users/views.py:289
 msgid "Your information has been updated."
 msgstr "आपकी जानकारी अपडेट कर दी गई है।"
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:312
+#: TWLight/users/views.py:319
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr "दोनों मान रिक्त नहीं हो सकते। या तो एक ईमेल दर्ज करें या बॉक्स को चिन्हित करें।"
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:335
+#: TWLight/users/views.py:342
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "आपका ईमेल {email} में बदल दिया गया है।"
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:341
+#: TWLight/users/views.py:348
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -3718,7 +3718,7 @@ msgstr ""
 "संसाधनों तक पहुंच के लिए आवेदन नहीं कर पाएंगे।"
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:525
+#: TWLight/users/views.py:532
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
@@ -3727,7 +3727,7 @@ msgstr ""
 "सामग्री तक पहुंच के लिए आवेदन नहीं कर सकते हैं या आवेदनों का मूल्यांकन नहीं कर सकते हैं।"
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:530
+#: TWLight/users/views.py:537
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
