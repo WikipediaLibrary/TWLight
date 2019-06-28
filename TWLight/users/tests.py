@@ -815,14 +815,12 @@ class AuthorizedUsersAPITestCase(TestCase):
         self.editor3 = EditorFactory()
         self.editor4 = EditorFactory()
 
-        self.base_api_url = "https://localhost/users/authorized_users"
-
     def test_authorized_users_api_denied(self):
         """
         Test that, if no credentials are supplied, the API returns no data.
         """
         factory = APIRequestFactory()
-        request = factory.get('/users/authorized_users/1')
+        request = factory.get('/api/v1/users/authorizations/partner/1')
 
         response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
 
@@ -833,7 +831,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         Test that, if credentials are supplied, the API returns a 200 status code.
         """
         factory = APIRequestFactory()
-        request = factory.get('/users/authorized_users/1')
+        request = factory.get('/api/v1/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
         response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
@@ -862,7 +860,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         )
 
         factory = APIRequestFactory()
-        request = factory.get('/users/authorized_users/1')
+        request = factory.get('/api/v1/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
         response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
@@ -893,7 +891,7 @@ class AuthorizedUsersAPITestCase(TestCase):
             status=Application.PENDING
         )
         factory = APIRequestFactory()
-        request = factory.get('/users/authorized_users/1')
+        request = factory.get('/api/v1/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
         response = views.AuthorizedUsers.as_view()(request, self.partner2.pk)

@@ -113,6 +113,7 @@ TWLIGHT_APPS = [
     'TWLight.emails',
     'TWLight.graphs',
     'TWLight.comments',
+    'TWLight.api',
 ]
 
 # dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
@@ -124,6 +125,12 @@ CRON_CLASSES = [
     'TWLight.crons.BackupCronJob',
     'TWLight.crons.SendCoordinatorRemindersCronJob',
 ]
+
+# REST FRAMEWORK CONFIG
+# ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+}
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------

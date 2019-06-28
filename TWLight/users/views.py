@@ -42,7 +42,7 @@ coordinators = get_coordinators()
 restricted = get_restricted()
 
 import logging
-logger = logging.getLogger('django')
+logger = logging.getLogger(__name__)
 
 def _is_real_url(url):
     """
@@ -549,6 +549,7 @@ class AuthorizedUsers(APIView):
     uses the full list of sent applications.
     """
     authentication_classes = (TokenAuthentication,)
+    # TODO: We might want to set up more granular permissions for future APIs.
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk, format=None):
