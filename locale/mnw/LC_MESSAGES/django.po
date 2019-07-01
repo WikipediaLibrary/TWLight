@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-06-06 16:33:18+0000\n"
-"X-POT-Import-Date: 2019-05-09 10:11:46+0000\n"
+"PO-Revision-Date: 2019-07-01 08:03:50+0000\n"
+"X-POT-Import-Date: 2019-06-28 14:30:53+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: mnw\n"
@@ -279,14 +279,14 @@ msgstr "နူတ္ၚဲ မကၟာတ်ထောံ ပွမဂရၚ်�
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67
-#: TWLight/graphs/views.py:265
+#: TWLight/graphs/views.py:283
 msgid "Status"
 msgstr "ကဆံၚ်"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:75
 #: TWLight/applications/views.py:514 TWLight/applications/views.py:591
-#: TWLight/templates/dashboard.html:112
+#: TWLight/templates/dashboard.html:127
 msgid "Partner"
 msgstr "မၞိဟ်ပံၚ်ကၠောန်မွဲစွံ"
 
@@ -965,67 +965,67 @@ msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
-#: TWLight/graphs/views.py:197
+#: TWLight/graphs/views.py:213
 msgid "Days until decision"
 msgstr "တ္ၚဲ စဵုကဵု ဖျေအ်သ္ဂုတ်သွာတ်"
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
 #. Translators: This is the heading of a data file which lists the number of applications to a partner.
-#: TWLight/graphs/views.py:199 TWLight/graphs/views.py:266
-#: TWLight/graphs/views.py:294
+#: TWLight/graphs/views.py:215 TWLight/graphs/views.py:284
+#: TWLight/graphs/views.py:312
 msgid "Number of applications"
 msgstr "လၟိုဟ် မဂရၚ်အာတ်မိက်ဂမၠိုၚ်"
 
 #. Translators: This is the heading of a data file, for a column containing date data.
-#: TWLight/graphs/views.py:213 TWLight/graphs/views.py:292
-#: TWLight/graphs/views.py:316
+#: TWLight/graphs/views.py:229 TWLight/graphs/views.py:310
+#: TWLight/graphs/views.py:334
 msgid "Date"
 msgstr "စၟတ်တ္ၚဲ"
 
 #. Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-#: TWLight/graphs/views.py:215
+#: TWLight/graphs/views.py:231
 msgid "Number of approved applications"
 msgstr "လၟိုဟ် ဂရၚ်အာတ်မိက်မဒဒ္တန်တုဲဂမၠိုၚ်"
 
 #. Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
-#: TWLight/graphs/views.py:233
+#: TWLight/graphs/views.py:249
 msgid "Month"
 msgstr "ဂိတု"
 
 #. Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
-#: TWLight/graphs/views.py:235
+#: TWLight/graphs/views.py:251
 msgid "Median days until decision"
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
-#: TWLight/graphs/views.py:318
+#: TWLight/graphs/views.py:336
 msgid "Number of unique users who applied"
 msgstr ""
 
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
-#: TWLight/graphs/views.py:333 TWLight/graphs/views.py:360
+#: TWLight/graphs/views.py:351 TWLight/graphs/views.py:378
 msgid "You must be staff to do that."
 msgstr ""
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
-#: TWLight/graphs/views.py:343 TWLight/graphs/views.py:377
-#: TWLight/templates/dashboard.html:87
+#: TWLight/graphs/views.py:361 TWLight/graphs/views.py:395
+#: TWLight/templates/dashboard.html:102
 msgid "Page URL"
 msgstr "URL မုက်လိက်"
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
-#: TWLight/graphs/views.py:344 TWLight/graphs/views.py:379
+#: TWLight/graphs/views.py:362 TWLight/graphs/views.py:397
 msgid "Number of (non-unique) visitors"
 msgstr ""
 
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
-#: TWLight/graphs/views.py:395 TWLight/resources/models.py:82
+#: TWLight/graphs/views.py:413 TWLight/resources/models.py:82
 #: TWLight/users/models.py:75 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr "အရေဝ်ဘာသာ"
 
-#: TWLight/graphs/views.py:396
+#: TWLight/graphs/views.py:414
 msgid "Number of users"
 msgstr "လၟိဟ် ညးလွပ်ဂမၠိုၚ်"
 
@@ -1599,9 +1599,9 @@ msgstr "ပွမဂရၚ်အာတ်မိက်ဂမၠိုၚ် န�
 #: TWLight/resources/templates/resources/partner_detail.html:614
 #: TWLight/resources/templates/resources/partner_detail.html:620
 #: TWLight/resources/templates/resources/partner_detail.html:626
-#: TWLight/templates/dashboard.html:77 TWLight/templates/dashboard.html:143
-#: TWLight/templates/dashboard.html:148 TWLight/templates/dashboard.html:160
-#: TWLight/templates/dashboard.html:170 TWLight/templates/dashboard.html:186
+#: TWLight/templates/dashboard.html:92 TWLight/templates/dashboard.html:158
+#: TWLight/templates/dashboard.html:163 TWLight/templates/dashboard.html:175
+#: TWLight/templates/dashboard.html:185 TWLight/templates/dashboard.html:201
 msgid "download as csv"
 msgstr "ဂြဲဖျေဟ် နဒဒှ် csv"
 
@@ -1755,7 +1755,7 @@ msgstr ""
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
-#: TWLight/users/views.py:383
+#: TWLight/users/views.py:390
 msgid "Confirm"
 msgstr "သ္ပဒတန်"
 
@@ -2117,68 +2117,72 @@ msgstr ""
 msgid "Jump to application metrics"
 msgstr ""
 
+#: TWLight/templates/dashboard.html:79
+msgid "Average accounts per user"
+msgstr ""
+
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
-#: TWLight/templates/dashboard.html:77
+#: TWLight/templates/dashboard.html:92
 msgid "Page views (staff only)"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the most viewed pages on the site.
-#: TWLight/templates/dashboard.html:83
+#: TWLight/templates/dashboard.html:98
 msgid "Most popular pages"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the column for pageview numbers for each partner page.
-#: TWLight/templates/dashboard.html:91 TWLight/templates/dashboard.html:115
+#: TWLight/templates/dashboard.html:106 TWLight/templates/dashboard.html:130
 msgid "Number of views"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the pageview data for each partner page.
-#: TWLight/templates/dashboard.html:108
+#: TWLight/templates/dashboard.html:123
 msgid "Partner pages by popularity"
 msgstr ""
 
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
-#: TWLight/templates/dashboard.html:140
+#: TWLight/templates/dashboard.html:155
 msgid "Applications"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time.
-#: TWLight/templates/dashboard.html:143
+#: TWLight/templates/dashboard.html:158
 msgid "Number of accounts distributed over time"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.
-#: TWLight/templates/dashboard.html:148
+#: TWLight/templates/dashboard.html:163
 msgid "Applications by number of days until decision"
 msgstr ""
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/).
-#: TWLight/templates/dashboard.html:151
+#: TWLight/templates/dashboard.html:166
 msgid "The x axis is the number of days to make a final decision (either approved or denied) on an application. The y axis is the number of applications that have taken exactly that many days to decide."
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.
-#: TWLight/templates/dashboard.html:160
+#: TWLight/templates/dashboard.html:175
 msgid "Median days until application decision, per month"
 msgstr ""
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean.
-#: TWLight/templates/dashboard.html:163
+#: TWLight/templates/dashboard.html:178
 msgid "This shows the median number of days to reach a decision on the applications opened in a given month."
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
-#: TWLight/templates/dashboard.html:170
+#: TWLight/templates/dashboard.html:185
 msgid "Open application status distribution"
 msgstr ""
 
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.
-#: TWLight/templates/dashboard.html:182
+#: TWLight/templates/dashboard.html:197
 msgid "Users"
 msgstr "ညးလွပ်ဂမၠိုၚ်"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
-#: TWLight/templates/dashboard.html:186
+#: TWLight/templates/dashboard.html:201
 msgid "User language distribution"
 msgstr ""
 
@@ -2394,38 +2398,38 @@ msgstr ""
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:366
+#: TWLight/users/models.py:369
 #, python-brace-format
 msgid "{wp_username}"
 msgstr "{wp_username}"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:395
+#: TWLight/users/models.py:398
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:403
+#: TWLight/users/models.py:406
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:409
+#: TWLight/users/models.py:412
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:416
+#: TWLight/users/models.py:419
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:423
+#: TWLight/users/models.py:426
 msgid "The stream for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:427
+#: TWLight/users/models.py:430
 msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
@@ -2762,12 +2766,12 @@ msgstr ""
 #. Translators: This is a button which updates user preference settings
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/user_email_preferences.html:13
-#: TWLight/users/views.py:270
+#: TWLight/users/views.py:277
 msgid "Update"
 msgstr "ပခိုဟ်လဟဵု"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:109
+#: TWLight/users/views.py:116
 #, python-brace-format
 msgid "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help coordinators evaluate your applications."
 msgstr ""
@@ -2775,39 +2779,39 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:253 TWLight/users/views.py:325
-#: TWLight/users/views.py:369
+#: TWLight/users/views.py:260 TWLight/users/views.py:332
+#: TWLight/users/views.py:376
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:282
+#: TWLight/users/views.py:289
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:312
+#: TWLight/users/views.py:319
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:335
+#: TWLight/users/views.py:342
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:341
+#: TWLight/users/views.py:348
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:525
+#: TWLight/users/views.py:532
 msgid "You may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:530
+#: TWLight/users/views.py:537
 msgid "You may explore the site, but you will not be able to apply for access unless you agree with the terms of use."
 msgstr ""
 
