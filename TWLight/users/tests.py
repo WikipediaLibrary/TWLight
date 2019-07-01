@@ -822,7 +822,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         factory = APIRequestFactory()
         request = factory.get('/api/v0/users/authorizations/partner/1')
 
-        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
+        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
 
         self.assertEqual(response.status_code, 401)
 
@@ -834,7 +834,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         request = factory.get('/api/v0/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
-        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
+        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
 
         self.assertEqual(response.status_code, 200)
 
@@ -863,7 +863,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         request = factory.get('/api/v0/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
-        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk)
+        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
 
         expected_json = [{"username": self.editor1.user.username},
                          {"username": self.editor3.user.username}]
@@ -894,7 +894,7 @@ class AuthorizedUsersAPITestCase(TestCase):
         request = factory.get('/api/v0/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
 
-        response = views.AuthorizedUsers.as_view()(request, self.partner2.pk)
+        response = views.AuthorizedUsers.as_view()(request, self.partner2.pk, 0)
 
         expected_json = [{"username": self.editor1.user.username},
                          {"username": self.editor2.user.username}]
