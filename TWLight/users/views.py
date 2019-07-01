@@ -552,7 +552,7 @@ class AuthorizedUsers(APIView):
     # TODO: We might want to set up more granular permissions for future APIs.
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, pk, format=None):
+    def get(self, request, pk, version, format=None):
         try:
             partner = Partner.even_not_available.get(pk=pk)
         except Partner.DoesNotExist:
