@@ -865,8 +865,8 @@ class AuthorizedUsersAPITestCase(TestCase):
 
         response = views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
 
-        expected_json = [{"username": self.editor1.user.username},
-                         {"username": self.editor3.user.username}]
+        expected_json = [{"wp_username": self.editor1.user.editor.wp_username},
+                         {"wp_username": self.editor3.user.editor.wp_username}]
 
         self.assertEqual(response.data, expected_json)
 
@@ -896,7 +896,7 @@ class AuthorizedUsersAPITestCase(TestCase):
 
         response = views.AuthorizedUsers.as_view()(request, self.partner2.pk, 0)
 
-        expected_json = [{"username": self.editor1.user.username},
-                         {"username": self.editor2.user.username}]
+        expected_json = [{"wp_username": self.editor1.user.editor.wp_username},
+                         {"wp_username": self.editor2.user.editor.wp_username}]
 
         self.assertEqual(response.data, expected_json)
