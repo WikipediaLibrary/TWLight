@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-07-01 14:00+0000\n"
+"POT-Creation-Date: 2019-07-11 13:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -292,7 +292,7 @@ msgstr ""
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67
-#: TWLight/graphs/views.py:283
+#: TWLight/graphs/views.py:277
 msgid "Status"
 msgstr ""
 
@@ -1085,67 +1085,67 @@ msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
-#: TWLight/graphs/views.py:213
+#: TWLight/graphs/views.py:214
 msgid "Days until decision"
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
 #. Translators: This is the heading of a data file which lists the number of applications to a partner.
-#: TWLight/graphs/views.py:215 TWLight/graphs/views.py:284
-#: TWLight/graphs/views.py:312
+#: TWLight/graphs/views.py:216 TWLight/graphs/views.py:278
+#: TWLight/graphs/views.py:301
 msgid "Number of applications"
 msgstr ""
 
 #. Translators: This is the heading of a data file, for a column containing date data.
-#: TWLight/graphs/views.py:229 TWLight/graphs/views.py:310
-#: TWLight/graphs/views.py:334
+#: TWLight/graphs/views.py:230 TWLight/graphs/views.py:299
+#: TWLight/graphs/views.py:318
 msgid "Date"
 msgstr ""
 
 #. Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-#: TWLight/graphs/views.py:231
+#: TWLight/graphs/views.py:232
 msgid "Number of approved applications"
 msgstr ""
 
 #. Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
-#: TWLight/graphs/views.py:249
+#: TWLight/graphs/views.py:250
 msgid "Month"
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
-#: TWLight/graphs/views.py:251
+#: TWLight/graphs/views.py:252
 msgid "Median days until decision"
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
-#: TWLight/graphs/views.py:336
+#: TWLight/graphs/views.py:320
 msgid "Number of unique users who applied"
 msgstr ""
 
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
-#: TWLight/graphs/views.py:351 TWLight/graphs/views.py:378
+#: TWLight/graphs/views.py:335 TWLight/graphs/views.py:362
 msgid "You must be staff to do that."
 msgstr ""
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
-#: TWLight/graphs/views.py:361 TWLight/graphs/views.py:395
+#: TWLight/graphs/views.py:345 TWLight/graphs/views.py:379
 #: TWLight/templates/dashboard.html:102
 msgid "Page URL"
 msgstr ""
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
-#: TWLight/graphs/views.py:362 TWLight/graphs/views.py:397
+#: TWLight/graphs/views.py:346 TWLight/graphs/views.py:381
 msgid "Number of (non-unique) visitors"
 msgstr ""
 
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
-#: TWLight/graphs/views.py:413 TWLight/resources/models.py:82
+#: TWLight/graphs/views.py:397 TWLight/resources/models.py:82
 #: TWLight/users/models.py:75 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr ""
 
-#: TWLight/graphs/views.py:414
+#: TWLight/graphs/views.py:398
 msgid "Number of users"
 msgstr ""
 
