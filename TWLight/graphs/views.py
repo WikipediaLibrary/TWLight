@@ -8,7 +8,8 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve
 from django.contrib import messages
 from django.db.models import Avg, Count
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, View
 from django.utils.translation import ugettext as _
 
@@ -259,14 +260,7 @@ class CSVAppDistribution(_CSVDownloadView):
     def _write_data(self, response):
         if 'pk' in self.kwargs:
             pk = self.kwargs['pk']
-            try:
-                partner = Partner.even_not_available.get(pk=pk)
-            except Partner.DoesNotExist:
-                logger.exception('Tried to access data for partner #{pk}, who '
-                                 'does not exist'.format(pk=pk))
-                # We could use get_object_or_404 except that we're using
-                # a custom model manager (even_not_available).
-                raise Http404("Partner does not exist.")
+            partner = get_object_or_404(Partner.even_not_available, pk=pk)
 
             csv_queryset = Application.objects.filter(partner=partner)
 
@@ -291,12 +285,7 @@ class CSVAppDistribution(_CSVDownloadView):
 class CSVAppCountByPartner(_CSVDownloadView):
     def _write_data(self, response):
         pk = self.kwargs['pk']
-        try:
-            partner = Partner.even_not_available.get(pk=pk)
-        except Partner.DoesNotExist:
-            logger.exception('Tried to access data for partner #{pk}, who '
-                             'does not exist'.format(pk=pk))
-            raise Http404("Partner does not exist.")
+        partner = get_object_or_404(Partner.even_not_available, pk=pk)
 
         queryset = Application.objects.filter(partner=partner)
 
@@ -320,12 +309,7 @@ class CSVUserCountByPartner(_CSVDownloadView):
     def _write_data(self, response):
         pk = self.kwargs['pk']
 
-        try:
-            partner = Partner.even_not_available.get(pk=pk)
-        except Partner.DoesNotExist:
-            logger.exception('Tried to access data for partner #{pk}, who '
-                             'does not exist'.format(pk=pk))
-            raise Http404("Partner does not exist.")
+        partner = get_object_or_404(Partner.even_not_available, pk=pk)
 
         data = get_users_by_partner_by_month(partner, data_format=PYTHON)
 
