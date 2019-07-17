@@ -277,7 +277,7 @@ class Partner(models.Model):
         blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
         help_text=_("The standard length of an access grant from this Partner. "
-            "Entered as <days hours:minutes:seconds>."
+            "Entered as " + "&lt" + "days hours:minutes:seconds" + "&gt."
             )
         )
 
