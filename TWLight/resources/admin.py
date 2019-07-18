@@ -84,7 +84,7 @@ class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
     language_strings.short_description = "Languages"
 
     search_fields = ('company_name',)
-    list_display = ('company_name', 'short_description', 'id', 'language_strings')
+    list_display = ('company_name', 'short_description', 'id', 'language_strings', 'company_location')
     inlines = [ContactInline, VideoInline, PartnerLogoInline, AuthorizationInline]
 
 admin.site.register(Partner, PartnerAdmin)
