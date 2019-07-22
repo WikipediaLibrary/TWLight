@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-07-11 13:41+0000\n"
+"POT-Creation-Date: 2019-07-22 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1387,8 +1387,8 @@ msgstr ""
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
 #: TWLight/resources/models.py:279
 msgid ""
-"The standard length of an access grant from this Partner. Entered as <days "
-"hours:minutes:seconds>."
+"The standard length of an access grant from this Partner. Entered as &ltdays "
+"hours:minutes:seconds&gt."
 msgstr ""
 
 #: TWLight/resources/models.py:287
