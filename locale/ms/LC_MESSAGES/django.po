@@ -1,12 +1,13 @@
 # Translation of Wikipedia Library Card Platform to Malay (Bahasa Melayu)
 # Exported from translatewiki.net
 #
+# Author: Abijeet Patro
 # Author: Zulfadli51
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-07-11 15:59:16+0000\n"
-"X-POT-Import-Date: 2019-06-28 14:30:53+0000\n"
+"PO-Revision-Date: 2019-07-25 08:47:16+0000\n"
+"X-POT-Import-Date: 2019-07-22 22:30:51+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ms\n"
@@ -1231,7 +1232,7 @@ msgstr "Pilih semua bahasa yang mana rakan kongsi ini menerbitkan kandungan."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
 #: TWLight/resources/models.py:279
-msgid "The standard length of an access grant from this Partner. Entered as <days hours:minutes:seconds>."
+msgid "The standard length of an access grant from this Partner. Entered as &ltdays hours:minutes:seconds&gt."
 msgstr "Panjang lazim kebenaran akses dari Rakan Kongsi ini. Dimasukkan sebagai <hari jam:minit:saat>."
 
 #: TWLight/resources/models.py:287
