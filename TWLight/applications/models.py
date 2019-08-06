@@ -103,12 +103,12 @@ class Application(models.Model):
     agreement_with_terms_of_use = models.BooleanField(default=False)
     account_email = models.EmailField(blank=True, null=True)
 
-    PROXY_ACCOUNT_LENGTH_CHOICES = ((12, _('12 months')), (6, _('6 months')), (3, _('3 months')), (1, _('1 month')))
+    REQUESTED_ACCESS_DURATION_CHOICES = ((12, _('12 months')), (6, _('6 months')), (3, _('3 months')), (1, _('1 month')))
 
-    proxy_account_length = models.IntegerField(choices=PROXY_ACCOUNT_LENGTH_CHOICES, blank=True, null=True,
-        # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
-        help_text=_('User selection of when they\'d like their account to expire (in months). '
-                  'Only relevant if the applied partner/collection has authorization_method as \'proxy\'.'))
+    requested_access_duration = models.IntegerField(choices=REQUESTED_ACCESS_DURATION_CHOICES, blank=True, null=True,
+                                                    # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
+                                                    help_text=_('User selection of when they\'d like their account to expire (in months). '
+                                                                'Only relevant if the applied partner/collection has authorization_method as \'proxy\'.'))
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
@@ -165,7 +165,7 @@ class Application(models.Model):
                          'partner': self.partner,
                          'specific_stream': self.specific_stream,
                          'account_email': self.account_email,
-                         'proxy_account_length': self.proxy_account_length})
+                         'requested_access_duration': self.requested_access_duration})
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in
@@ -412,17 +412,17 @@ def post_revision_commit(sender, instance, **kwargs):
         authorization.authorizer = authorizer
         authorization.partner = instance.partner
 
-        # If this is a proxy partner, and the proxy_account_length
+        # If this is a proxy partner, and the requested_access_duration
         # field is set to false, set (or reset) the expiry date
         # to one year from now
-        if instance.partner.authorization_method == Partner.PROXY and instance.proxy_account_length is None:
+        if instance.partner.authorization_method == Partner.PROXY and instance.requested_access_duration is None:
             one_year_from_now = date.today() + timedelta(days=365)
             authorization.date_expires = one_year_from_now
-        # If this is a proxy partner, and the proxy_account_length
+        # If this is a proxy partner, and the requested_access_duration
         # field is set to true, set (or reset) the expiry date
         # to 1, 3, 6 or 12 months from today based on user input
-        elif instance.partner.authorization_method == Partner.PROXY and instance.partner.proxy_account_length is True:
-            custom_expiry_date = date.today() + relativedelta(months=+instance.proxy_account_length)
+        elif instance.partner.authorization_method == Partner.PROXY and instance.partner.requested_access_duration is True:
+            custom_expiry_date = date.today() + relativedelta(months=+instance.requested_access_duration)
             authorization.date_expires = custom_expiry_date
         # Alternatively, if this partner has a specified account_length,
         # we'll use that to set the expiry.

@@ -50,7 +50,7 @@ SPECIFIC_TITLE = 'specific_title'
 COMMENTS = 'comments'
 AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
 ACCOUNT_EMAIL = 'account_email'
-PROXY_ACCOUNT_LENGTH = 'proxy_account_length'
+REQUESTED_ACCESS_DURATION = 'requested_access_duration'
 HIDDEN = 'hidden'
 
 
@@ -64,7 +64,7 @@ PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS, HIDDEN]
 # These fields are displayed only when a specific partner requires that
 # information.
 PARTNER_FORM_OPTIONAL_FIELDS = [SPECIFIC_STREAM, SPECIFIC_TITLE,
-                                AGREEMENT_WITH_TERMS_OF_USE, ACCOUNT_EMAIL, PROXY_ACCOUNT_LENGTH]
+                                AGREEMENT_WITH_TERMS_OF_USE, ACCOUNT_EMAIL, REQUESTED_ACCESS_DURATION]
 
 
 # ~~~~ Field information ~~~~ #
@@ -82,7 +82,7 @@ FIELD_TYPES = {
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
     AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(),
     ACCOUNT_EMAIL: forms.EmailField(),
-    PROXY_ACCOUNT_LENGTH: forms.ChoiceField(choices=Application.PROXY_ACCOUNT_LENGTH_CHOICES),
+    REQUESTED_ACCESS_DURATION: forms.ChoiceField(choices=Application.REQUESTED_ACCESS_DURATION_CHOICES),
     HIDDEN: forms.BooleanField(required=False)
 }
 
@@ -110,7 +110,7 @@ FIELD_LABELS = {
     # Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
     ACCOUNT_EMAIL: _("The email for your account on the partner's website"),
     # Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-    PROXY_ACCOUNT_LENGTH: _("The number of months you wish to have this access for before renewal is required"),
+    REQUESTED_ACCESS_DURATION: _("The number of months you wish to have this access for before renewal is required"),
     # Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
     HIDDEN: _("Check this box if you would prefer to hide your application from the 'latest activity' timeline.")
 }
@@ -148,10 +148,10 @@ def get_output_for_application(app):
 
     for field in PARTNER_FORM_OPTIONAL_FIELDS:
         # Since we directly mark applications made to proxy partners as 'sent', this function wouldn't be invoked.
-        # But for tests, and in the off chance we stumble into this function for when proxy_account_length is true and
-        # the partner isn't proxy, we don't want the data to be sent to partners, which is why it's not part
+        # But for tests, and in the off chance we stumble into this function for when requested_access_duration is true
+        # and the partner isn't proxy, we don't want the data to be sent to partners, which is why it's not part
         # of the SEND_DATA_FIELD_LABELS.
-        if field == 'proxy_account_length':
+        if field == 'requested_access_duration':
             break
         if getattr(app.partner, field):  # Will be True if required by Partner.
             field_label = SEND_DATA_FIELD_LABELS[field]

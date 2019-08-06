@@ -165,9 +165,9 @@ class SynchronizeFieldsTest(TestCase):
             modelfield = Application._meta.get_field(field)
             formfield = modelfield.formfield()
 
-            # While we simply use the ChoiceField for proxy_account_length field in the form, the model makes use
-            # of the TypedChoiceField, triggering a mismatch. We'll get around that by separately testing the fields.
-            if field == 'proxy_account_length':
+            # While we simply use the ChoiceField for requested_access_duration field in the form, the model makes use
+            # of the TypedChoiceField, triggering a mismatch. We'll get around this by separately testing the fields.
+            if field == 'requested_access_duration':
                 self.assertEqual(type(formfield), forms.TypedChoiceField)
                 self.assertEqual(type(FIELD_TYPES[field]), forms.ChoiceField)
                 break
@@ -1951,7 +1951,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
         partner = PartnerFactory(renewals_available=True,
                                  authorization_method=Partner.EMAIL,
                                  account_email=False,
-                                 proxy_account_length=False)
+                                 requested_access_duration=False)
         app = ApplicationFactory(partner=partner,
                                  status=Application.APPROVED,
                                  editor=editor)
@@ -1967,7 +1967,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
         partner = PartnerFactory(renewals_available=True,
                                  authorization_method=Partner.EMAIL,
                                  account_email=False,
-                                 proxy_account_length=False)
+                                 requested_access_duration=False)
         app = ApplicationFactory(partner=partner,
                                  status=Application.APPROVED,
                                  editor=editor)
@@ -1990,7 +1990,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
         partner = PartnerFactory(renewals_available=True,
                                  authorization_method=Partner.EMAIL,
                                  account_email=True,  # require account_email on renewal
-                                 proxy_account_length=False)
+                                 requested_access_duration=False)
         app = ApplicationFactory(partner=partner,
                                  status=Application.APPROVED,
                                  editor=editor)
@@ -2011,7 +2011,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
         self.assertTrue(Application.objects.filter(parent=app))
 
         partner.authorization_method = Partner.PROXY
-        partner.proxy_account_length = True  # require proxy account length
+        partner.requested_access_duration = True  # require duration of access required
         partner.save()
 
         editor1 = EditorCraftRoom(self, Terms=True, Coordinator=False)
@@ -2024,12 +2024,12 @@ class RenewApplicationTest(BaseApplicationViewTest):
         response = self.client.get(renewal_url, follow=True)
         renewal_form = response.context['form']
         self.assertTrue(renewal_form['account_email'])
-        self.assertTrue(renewal_form['proxy_account_length'])
+        self.assertTrue(renewal_form['requested_access_duration'])
 
         data = renewal_form.initial
         data['account_email'] = "test@example.com"
         data['return_url'] = renewal_form['return_url'].value()
-        data['proxy_account_length'] = 6
+        data['requested_access_duration'] = 6
 
         self.client.post(renewal_url, data)
         app1.refresh_from_db()

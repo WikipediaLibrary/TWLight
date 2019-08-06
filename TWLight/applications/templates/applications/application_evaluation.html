@@ -70,13 +70,13 @@
       <span class="label label{{ object.get_bootstrap_class }} label-lg">{{ object.get_status_display }}
     </div>
 
-    {% if object.proxy_account_length %}
+    {% if object.requested_access_duration %}
       <div class="col-xs-12 col-sm-4">
         {% comment %} Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.{% endcomment %}
-        <strong>{% trans 'Account length' %}</strong>
+        <strong>{% trans 'Access duration' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
-        {{ object.proxy_account_length }}
+        {{ object.requested_access_duration }}
         {% comment %} Translators: This adds the word 'month(s)' next to the actual number of months.{% endcomment %}
         {% trans 'month(s)' %}
       </div>

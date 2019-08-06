@@ -21,10 +21,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.db.models import IntegerField, Case, When, Count, Q
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
-from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
@@ -1069,8 +1067,8 @@ class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
         partner = application.partner
         if partner.account_email:
             field_params['account_email'] = application.account_email
-        if partner.proxy_account_length:
-            field_params['proxy_account_length'] = None
+        if partner.requested_access_duration:
+            field_params['requested_access_duration'] = None
         field_params['return_url'] = return_url
 
         kwargs['field_params'] = field_params
@@ -1089,8 +1087,8 @@ class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
         partner = application.partner
         if partner.account_email:
             application.account_email = form.cleaned_data['account_email']
-        if partner.proxy_account_length:
-            application.proxy_account_length = form.cleaned_data['proxy_account_length']
+        if partner.requested_access_duration:
+            application.requested_access_duration = form.cleaned_data['requested_access_duration']
 
         renewal = application.renew()
 

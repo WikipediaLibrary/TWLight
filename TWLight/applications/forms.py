@@ -35,8 +35,7 @@ from .helpers import (USER_FORM_FIELDS,
                       FIELD_LABELS,
                       SPECIFIC_STREAM,
                       AGREEMENT_WITH_TERMS_OF_USE,
-                      ACCOUNT_EMAIL,
-                      HIDDEN)
+                      ACCOUNT_EMAIL)
 from .models import Application
 
 logger = logging.getLogger(__name__)
@@ -337,12 +336,12 @@ class RenewalForm(forms.Form):
             self.fields['account_email'].label = _('The email for your account on the partner\'s website')
             fieldset.append('account_email')
 
-        if 'proxy_account_length' in self.field_params:
-            self.fields['proxy_account_length'] = forms.ChoiceField(choices=Application.PROXY_ACCOUNT_LENGTH_CHOICES, )
+        if 'requested_access_duration' in self.field_params:
+            self.fields['requested_access_duration'] = forms.ChoiceField(choices=Application.REQUESTED_ACCESS_DURATION_CHOICES, )
             # Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
-            self.fields['proxy_account_length'].label = _('The number of months you wish to have this access'
-                                                          ' for before renewal is required')
-            fieldset.append('proxy_account_length')
+            self.fields['requested_access_duration'].label = _('The number of months you wish to have this access'
+                                                               ' for before renewal is required')
+            fieldset.append('requested_access_duration')
 
         self.fields['return_url'] = forms.CharField(widget=forms.HiddenInput, max_length=70, )
         self.fields['return_url'].initial = self.field_params['return_url']
