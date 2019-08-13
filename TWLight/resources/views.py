@@ -1,3 +1,4 @@
+import datetime
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -18,6 +19,7 @@ from TWLight.graphs.helpers import (get_median,
                                     get_data_count_by_month,
                                     get_users_by_partner_by_month,
                                     get_earliest_creation_date)
+from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
@@ -246,16 +248,21 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
 
         partner = self.get_object()
 
-        partner_applications = Application.objects.filter(
-            partner=partner)
+        if partner.authorization_method == Partner.PROXY or partner.account_length:
+            today = datetime.date.today()
+            context['active_authorizations'] = Authorization.objects.filter(date_expires__gte=today, partner=partner.pk)
+            context['inactive_authorizations'] = Authorization.objects.filter(date_expires__lt=today, partner=partner.pk)
+        else:
+            partner_applications = Application.objects.filter(
+                partner=partner)
 
-        context['approved_applications'] = partner_applications.filter(
-            status=Application.APPROVED).order_by(
-                '-date_closed', 'specific_stream')
+            context['approved_applications'] = partner_applications.filter(
+                status=Application.APPROVED).order_by(
+                    '-date_closed', 'specific_stream')
 
-        context['sent_applications'] = partner_applications.filter(
-            status=Application.SENT).order_by(
-                '-date_closed', 'specific_stream')
+            context['sent_applications'] = partner_applications.filter(
+                status=Application.SENT).order_by(
+                    '-date_closed', 'specific_stream')
 
         if Stream.objects.filter(partner=partner).count() > 0:
             context['partner_streams'] = True
