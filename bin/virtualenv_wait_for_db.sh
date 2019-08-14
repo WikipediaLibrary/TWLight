@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Runs the full Django migration process (https://docs.djangoproject.com/en/1.11/topics/migrations/)
+# Waits for the database to come up.
 
 # Load virtual environment
 if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
