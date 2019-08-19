@@ -9,7 +9,7 @@ services:
   db:
     image: mariadb:10
     volumes:
-      - mysql: /var/lib/mysql
+      - mysql:/var/lib/mysql
       - type: bind
         source: ./conf/db.cnf
         target: /etc/mysql/conf.d/db.cnf
