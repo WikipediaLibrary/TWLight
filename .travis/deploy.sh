@@ -32,8 +32,8 @@ then
    TWLIGHT_TRANSLATION_FILES_CHANGED=${TWLIGHT_TRANSLATION_FILES_CHANGED} .travis/./translations.sh
 fi
 
-# Push docker image if is build was fired from a push to masteror staging and there are no missing migrations or changed translations.
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] || [ "${TRAVIS_BRANCH}" = "staging" ] && [ -n "${DOCKER_USERNAME+isset}" ] && [ -n "${DOCKER_PASSWORD+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -eq 0 ] && [ "${TWLIGHT_TRANSLATION_FILES_CHANGED}" -eq 0 ]
+# Push docker image if is build was fired from a push to master, staging, or production and there are no missing migrations or changed translations.
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ "${TRAVIS_BRANCH}" = "master" ] || [ "${TRAVIS_BRANCH}" = "staging" ] || [ "${TRAVIS_BRANCH}" = "production" ] && [ -n "${DOCKER_USERNAME+isset}" ] && [ -n "${DOCKER_PASSWORD+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -eq 0 ] && [ "${TWLIGHT_TRANSLATION_FILES_CHANGED}" -eq 0 ]
 then
    TWLIGHT_MISSING_MIGRATIONS=${TWLIGHT_MISSING_MIGRATIONS} TWLIGHT_TRANSLATION_FILES_CHANGED=${TWLIGHT_TRANSLATION_FILES_CHANGED} .travis/./docker_push.sh
 fi
