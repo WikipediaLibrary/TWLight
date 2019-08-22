@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied, DisallowedHost, ObjectDoesNotExist
+from django.core.exceptions import PermissionDenied, DisallowedHost
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
