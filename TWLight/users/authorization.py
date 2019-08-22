@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied, DisallowedHost
+from django.core.exceptions import PermissionDenied, DisallowedHost, ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
@@ -95,7 +95,7 @@ class OAuthBackend(object):
         return False
 
 
-    def _create_user_and_editor(self, identity):
+    def _create_user(self, identity):
         # This can't be super informative because we don't want to log
         # identities.
         logger.info('Creating user.')
@@ -125,7 +125,10 @@ class OAuthBackend(object):
         # set_unusable_password, which is exactly what we want; users created
         # via OAuth should only be allowed to log in via OAuth.
         user = User.objects.create_user(username=username, email=email)
+        logger.info('User user successfully created.')
+        return user
 
+    def _create_editor(self, user, identity):
         # ------------------------- Create the editor --------------------------
         logger.info('Creating editor.')
         editor = Editor()
@@ -136,7 +139,13 @@ class OAuthBackend(object):
         lang = get_language()
         editor.update_from_wikipedia(identity, lang) # This call also saves the editor
 
-        logger.info('User and editor successfully created.')
+        logger.info('Editor successfully created.')
+        return editor
+
+
+    def _create_user_and_editor(self, identity):
+        user = self._create_user(identity)
+        editor = self._create_editor(user, identity)
         return user, editor
 
 
@@ -161,26 +170,27 @@ class OAuthBackend(object):
 
             # This login path should only be used for accounts created via
             # Wikipedia login, which all have editor objects.
-            assert hasattr(user, 'editor')
-            editor = user.editor
+            if hasattr(user, 'editor'):
+                editor = user.editor
 
-            lang = get_language()
-            editor.update_from_wikipedia(identity, lang) # This call also saves the editor
-            logger.info('Editor updated.')
+                lang = get_language()
+                editor.update_from_wikipedia(identity, lang) # This call also saves the editor
+                logger.info('Editor updated.')
 
-            created = False
+                created = False
+            else:
+                try:
+                    logger.warning('A user tried using the Wikipedia OAuth '
+                                   'login path but does not have an attached editor.')
+                    editor = self._create_editor(user, identity)
+                    created = True
+                except:
+                    raise PermissionDenied
 
         except User.DoesNotExist:
             logger.info("Can't find user; creating one.")
             user, editor = self._create_user_and_editor(identity)
             created = True
-
-        except AttributeError:
-            logger.warning('A user tried using the Wikipedia OAuth '
-                'login path but does not have an attached editor.')
-            raise
-
-        logger.info('User and editor created/updated after OAuth login.')
         return user, created
 
 
