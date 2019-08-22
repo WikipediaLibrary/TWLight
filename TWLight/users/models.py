@@ -326,7 +326,7 @@ class Editor(models.Model):
 
         global_userinfo = self.get_global_userinfo(identity)
 
-        self.wp_username = identity['username']
+        self.wp_username = identity['username'].encode('utf8')
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
         if global_userinfo:
