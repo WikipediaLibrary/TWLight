@@ -211,9 +211,9 @@ class CSVAppTimeHistogram(_CSVDownloadView):
 
         writer.writerow(
             # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
-            [_('Days until decision'),
+            [_('Days until decision').encode('utf-8'),
              # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
-             _('Number of applications')])
+             _('Number of applications').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -227,9 +227,9 @@ class CSVNumApprovedApplications(_CSVDownloadView):
         data = get_data_count_by_month(queryset, data_format=PYTHON)
         writer = csv.writer(response)
         # Translators: This is the heading of a data file, for a column containing date data.
-        writer.writerow([_('Date'), 
+        writer.writerow([_('Date').encode('utf-8'),
                          # Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-                         _('Number of approved applications')])
+                         _('Number of approved applications').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -247,9 +247,9 @@ class CSVAppMedians(_CSVDownloadView):
 
         writer.writerow(
             # Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
-            [_('Month'), 
+            [_('Month').encode('utf-8'),
              # Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
-             _('Median days until decision')])
+             _('Median days until decision').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -274,8 +274,8 @@ class CSVAppDistribution(_CSVDownloadView):
 
         writer = csv.DictWriter(response, fieldnames=['label', 'data'])
 
-        writer.writerow({'label': _('Status'),
-                         'data': _('Number of applications')})
+        writer.writerow({'label': _('Status').encode('utf-8'),
+                         'data': _('Number of applications').encode('utf-8')})
 
         for row in data:
             writer.writerow(row)
@@ -296,9 +296,9 @@ class CSVAppCountByPartner(_CSVDownloadView):
 
         writer = csv.writer(response)
 
-        writer.writerow([_('Date'),
+        writer.writerow([_('Date').encode('utf-8'),
             # Translators: This is the heading of a data file which lists the number of applications to a partner.
-            _('Number of applications')])
+            _('Number of applications').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -315,9 +315,9 @@ class CSVUserCountByPartner(_CSVDownloadView):
 
         writer = csv.writer(response)
 
-        writer.writerow([_('Date'),
+        writer.writerow([_('Date').encode('utf-8'),
             # Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
-            _('Number of unique users who applied')])
+            _('Number of unique users who applied').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -342,8 +342,8 @@ class CSVPageViews(_CSVDownloadView):
 
         writer = csv.writer(response)
         # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
-        writer.writerow([_('Page URL'),
-            _('Number of (non-unique) visitors')])
+        writer.writerow([_('Page URL').encode('utf-8'),
+            _('Number of (non-unique) visitors').encode('utf-8')])
 
         for elem in path_list:
             row = [elem['path'].encode('utf-8'), elem['the_count']]
@@ -376,9 +376,9 @@ class CSVPageViewsByPath(_CSVDownloadView):
         path_count = Request.objects.filter(path=path).count()
         writer = csv.writer(response)
 
-        writer.writerow([_('Page URL'),
+        writer.writerow([_('Page URL').encode('utf-8'),
             # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
-            _('Number of (non-unique) visitors')])
+            _('Number of (non-unique) visitors').encode('utf-8')])
 
         row = [path.encode('utf-8'), path_count]
         writer.writerow(row)
@@ -394,8 +394,8 @@ class CSVUserLanguage(_CSVDownloadView):
 
         writer = csv.DictWriter(response, fieldnames=['label', 'data'])
 
-        writer.writerow({'label': _('Language'),
-                         'data': _('Number of users')})
+        writer.writerow({'label': _('Language').encode('utf-8'),
+                         'data': _('Number of users').encode('utf-8')})
 
         for row in data:
             writer.writerow(row)
