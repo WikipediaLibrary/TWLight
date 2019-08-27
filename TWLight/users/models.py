@@ -270,7 +270,7 @@ class Editor(models.Model):
           editcount:    10
         """
         try:
-            endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=urllib2.quote(identity['username'].encode('utf8')))
+            endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=urllib2.quote(identity['username'].encode('utf-8')))
 
             results = json.loads(urllib2.urlopen(endpoint).read())
             global_userinfo = results['query']['globaluserinfo']
@@ -326,7 +326,7 @@ class Editor(models.Model):
 
         global_userinfo = self.get_global_userinfo(identity)
 
-        self.wp_username = identity['username'].encode('utf8')
+        self.wp_username = identity['username'].encode('utf-8')
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
         if global_userinfo:
