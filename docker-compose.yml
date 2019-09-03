@@ -2,10 +2,17 @@
 
 version: '3.2'
 
+volumes:
+  mysql:
+
 services:
   db:
     image: mariadb:10
     volumes:
+      - mysql:/var/lib/mysql
+      - type: bind
+        source: ./conf/db.cnf
+        target: /etc/mysql/conf.d/db.cnf
       - type: bind
         source: ./bin/twlight_mysql_init.sh
         target: /docker-entrypoint-initdb.d/twlight_mysql_init.sh

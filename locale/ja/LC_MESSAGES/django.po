@@ -1,22 +1,20 @@
-# Translation of Wikipedia Library Card Platform to Message documentation (Message documentation)
+# Translation of Wikipedia Library Card Platform to Japanese (日本語)
 # Exported from translatewiki.net
 #
-# Author: Robby
+# Author: Omotecho
+# Author: Otokoume
+# Author: Shirayuki
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-09-03 17:04+0000\n"
-"PO-Revision-Date: 2019-08-29 18:49:06+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: qqq\n"
-"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2019-08-29 18:48:47+0000\n"
+"Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-07-22 22:30:51+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: This text labels a button which users can click to submit an application.
@@ -32,18 +30,18 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_tile.html:84
 #: TWLight/templates/base.html:94 TWLight/templates/home.html:49
 msgid "Apply"
-msgstr ""
+msgstr "申請する"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:193
 msgid "About you"
-msgstr ""
+msgstr "利用者情報"
 
 #. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
 #: TWLight/applications/forms.py:201
 #, python-brace-format
 msgid "Requested by: {partner_list}"
-msgstr ""
+msgstr "申請者: {partner_list}"
 
 #. Translators: This this note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:207
@@ -52,78 +50,83 @@ msgid ""
 "<p><small><i>Your personal data will be processed according to our <a href="
 "\"{terms_url}\">privacy policy</a>.</i></small></p>"
 msgstr ""
+"<p><small><i>利用者の個人情報は\n"
+"当方の<a href=\"{terms_url}\">個人情報保護の方針</a>に従って扱います。</i></"
+"small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:218
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr ""
+msgstr "{partner} に対する申請手続き"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering.
 #: TWLight/applications/forms.py:254
 #, python-brace-format
 msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
 msgstr ""
+"手続きを進める前に必ず<a href=\"{url}\">{url}</a> において登録をお済ませくだ"
+"さい。"
 
 #: TWLight/applications/forms.py:320 TWLight/users/admin.py:76
 #: TWLight/users/models.py:117
 msgid "Username"
-msgstr ""
+msgstr "利用者名"
 
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
 #: TWLight/applications/forms.py:321 TWLight/applications/helpers.py:95
 msgid "Partner name"
-msgstr ""
+msgstr "提携組織名"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:87
 msgid "Your real name"
-msgstr ""
+msgstr "利用者の実名"
 
 #. Translators: When filling out an application, users may need to specify the country in which they currently live
 #: TWLight/applications/helpers.py:89
 msgid "Your country of residence"
-msgstr ""
+msgstr "利用者の居住国"
 
 #. Translators: When filling out an application, users may need to specify their current occupation
 #: TWLight/applications/helpers.py:91
 msgid "Your occupation"
-msgstr ""
+msgstr "利用者の職業"
 
 #. Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
 #: TWLight/applications/helpers.py:93
 msgid "Your institutional affiliation"
-msgstr ""
+msgstr "利用者の所属"
 
 #. Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
 #: TWLight/applications/helpers.py:97
 msgid "Why do you want access to this resource?"
-msgstr ""
+msgstr "この情報源を利用する目的は何ですか？"
 
 #. Translators: When filling out an application, users may need to specify a particular collection of resources they want access to
 #: TWLight/applications/helpers.py:99
 msgid "Which collection do you want?"
-msgstr ""
+msgstr "どのコレクション・資料集をご希望ですか？"
 
 #. Translators: When filling out an application, users may need to specify a particular book they want access to
 #: TWLight/applications/helpers.py:101
 msgid "Which book do you want?"
-msgstr ""
+msgstr "どの書籍をご希望ですか？"
 
 #. Translators: When filling out an application, users are given a text box where they can include any extra relevant information
 #: TWLight/applications/helpers.py:103
 msgid "Anything else you want to say"
-msgstr ""
+msgstr "特記事項"
 
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
 #: TWLight/applications/helpers.py:105
 msgid "You must agree with the partner's terms of use"
-msgstr ""
+msgstr "利用に当たり、必ず提携組織の定める使用規約に同意していただきます。"
 
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
 #: TWLight/applications/helpers.py:107
 msgid "The email for your account on the partner's website"
-msgstr ""
+msgstr "提携組織に登録したメールアドレス"
 
 #. Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
 #: TWLight/applications/helpers.py:109
@@ -131,54 +134,56 @@ msgid ""
 "Check this box if you would prefer to hide your application from the 'latest "
 "activity' timeline."
 msgstr ""
+"申請したことは「最近の操作内容」タイムラインに自動で表示されます。非表示にす"
+"るには、この欄にチェックマークを入れてください。"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
 #: TWLight/applications/helpers.py:114
 #: TWLight/users/templates/users/editor_detail_data.html:164
 msgid "Real name"
-msgstr ""
+msgstr "実名"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
 #: TWLight/applications/helpers.py:116
 #: TWLight/users/templates/users/editor_detail_data.html:176
 msgid "Country of residence"
-msgstr ""
+msgstr "居住国"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
 #: TWLight/applications/helpers.py:118
 #: TWLight/users/templates/users/editor_detail_data.html:188
 msgid "Occupation"
-msgstr ""
+msgstr "職業"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's affiliation
 #: TWLight/applications/helpers.py:120
 msgid "Affiliation"
-msgstr ""
+msgstr "所属"
 
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
 #: TWLight/applications/helpers.py:122
 msgid "Stream requested"
-msgstr ""
+msgstr "ストリーム請求中"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
 #: TWLight/applications/helpers.py:124
 #: TWLight/applications/templates/applications/application_evaluation.html:94
 msgid "Title requested"
-msgstr ""
+msgstr "申請した標題"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:126
 msgid "Agreed with terms of use"
-msgstr ""
+msgstr "使用規約に同意済み"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:128
 msgid "Account email"
-msgstr ""
+msgstr "登録メールアカウント"
 
 #. Translators: This labels a user's email address on a form for account coordinators
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
@@ -191,49 +196,49 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_users.html:78
 #: TWLight/users/forms.py:134
 msgid "Email"
-msgstr ""
+msgstr "メール"
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:48
 msgid "Pending"
-msgstr ""
+msgstr "保留中"
 
 #. Translators: This is the status of an application that reviewers have asked questions about.
 #: TWLight/applications/models.py:50
 msgid "Under discussion"
-msgstr ""
+msgstr "協議中"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/models.py:52
 #: TWLight/applications/templates/applications/application_list.html:29
 msgid "Approved"
-msgstr ""
+msgstr "承認済"
 
 #. Translators: This is the status of an application which has been declined by a reviewer.
 #: TWLight/applications/models.py:54
 msgid "Not approved"
-msgstr ""
+msgstr "却下"
 
 #. Translators: This is the status of an application that has been sent to a partner.
 #: TWLight/applications/models.py:56
 msgid "Sent to partner"
-msgstr ""
+msgstr "提携組織に送付済み"
 
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
 #: TWLight/applications/models.py:58
 msgid "Invalid"
-msgstr ""
+msgstr "無効"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
 #: TWLight/applications/models.py:74 TWLight/applications/models.py:85
 msgid "Please do not override this field! Its value is set automatically."
-msgstr ""
+msgstr "この欄は自動処理されます。表示内容を変更しないでください。"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
 #: TWLight/applications/models.py:90
 msgid "The user who sent this application to the partner"
-msgstr ""
+msgstr "提携組織に対してこの申請を送付した利用者"
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -241,6 +246,8 @@ msgid ""
 "This application is on the waitlist because this partner does not have any "
 "access grants available at this time."
 msgstr ""
+"現在、この申請は保留されています。提携組織においてアクセス経費が確保できませ"
+"んでした。"
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:21
@@ -251,11 +258,13 @@ msgid ""
 "Coordinators: This page may contain personal information such as real names "
 "and email addresses. Please remember that this information is confidential."
 msgstr ""
+"調整役の皆さんへ: このページには本名やメールアドレスなど個人情報が含まれてい"
+"る可能性があります。これらは秘匿すべき情報であることをご注意しておきます。"
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:24
 msgid "Evaluate application"
-msgstr ""
+msgstr "申請を評価してください"
 
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:27
@@ -263,93 +272,95 @@ msgid ""
 "This user has requested a restriction on the processing of their data, so "
 "you cannot change the status of their application."
 msgstr ""
+"この利用者からデータの扱いに制限をかけるように要請を受けたため、申請の状態を"
+"変更することはできません。"
 
 #. Translators: This is the title of the application page shown to users who are not a coordinator.
 #. Translators: This is the title of the section of a user's profile showing their history of applications.
 #: TWLight/applications/templates/applications/application_evaluation.html:33
 #: TWLight/users/templates/users/editor_detail.html:18
 msgid "Application history"
-msgstr ""
+msgstr "申請履歴"
 
 #. Translators: This is the title of the section of an application page containing information about the request.
 #: TWLight/applications/templates/applications/application_evaluation.html:36
 msgid "Application"
-msgstr ""
+msgstr "申請手続き"
 
 #. Translators: This labels the section of an application showing the date the application was submitted.
 #: TWLight/applications/templates/applications/application_evaluation.html:41
 msgid "Date of application"
-msgstr ""
+msgstr "申請日"
 
 #. Translators: This labels the section of an application showing how many days it has been since the application was opened.
 #: TWLight/applications/templates/applications/application_evaluation.html:50
 msgid "Days open"
-msgstr ""
+msgstr "申請受付開始後の日数"
 
 #. Translators: This labels the section of an application showing how many days it has been since the application was closed.
 #: TWLight/applications/templates/applications/application_evaluation.html:58
 msgid "Days since application was closed"
-msgstr ""
+msgstr "申請期間終了後の日数"
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67
 #: TWLight/graphs/views.py:277
 msgid "Status"
-msgstr ""
+msgstr "状態"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:75
 #: TWLight/applications/views.py:514 TWLight/applications/views.py:591
 #: TWLight/templates/dashboard.html:127
 msgid "Partner"
-msgstr ""
+msgstr "提携組織"
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:84
 msgid "Collection requested"
-msgstr ""
+msgstr "申請したコレクション・資料集"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:103
 msgid "Why the editor wants access"
-msgstr ""
+msgstr "編集者の申請の理由"
 
 #. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
 #: TWLight/applications/templates/applications/application_evaluation.html:110
 msgid "Not stated"
-msgstr ""
+msgstr "無記入"
 
 #. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
 #: TWLight/applications/templates/applications/application_evaluation.html:116
 msgid "Renewal of existing access grant?"
-msgstr ""
+msgstr "現在の利用権助成金を更新しますか？"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
 #: TWLight/applications/templates/applications/application_evaluation.html:122
 #, python-format
 msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
-msgstr ""
+msgstr "はい (<a href=\"%(parent_url)s\">前回の申請を更新します</a>)"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
 #: TWLight/applications/templates/applications/application_evaluation.html:128
 #: TWLight/users/templates/users/editor_detail_data.html:68
 msgid "No"
-msgstr "{{Identical|No}}"
+msgstr "いいえ"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
 msgid "Comments from the editor"
-msgstr ""
+msgstr "編集者の特記事項"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:142
 msgid "Discussion"
-msgstr ""
+msgstr "協議"
 
 #. Translators: This labels the button which users click to send a typed comment.
 #: TWLight/applications/templates/applications/application_evaluation.html:163
 msgid "Add comment"
-msgstr ""
+msgstr "コメントを追加します。"
 
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
 #: TWLight/applications/templates/applications/application_evaluation.html:171
@@ -357,6 +368,7 @@ msgid ""
 "Comments are visible to all coordinators and to the editor who submitted "
 "this application."
 msgstr ""
+"ここに記入されたコメントは申請した編集者と調整役の皆さん全員に表示されます。"
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
@@ -364,86 +376,86 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_users.html:25
 #: TWLight/resources/templates/resources/partner_users.html:76
 msgid "User"
-msgstr ""
+msgstr "利用者"
 
 #. Translators: This is the title of the section of an application page which lists the history of status changes.
 #: TWLight/applications/templates/applications/application_evaluation.html:183
 msgid "Revision history"
-msgstr ""
+msgstr "変更履歴"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate submit_user or review_date
 #: TWLight/applications/templates/applications/application_evaluation.html:199
 #, python-format
 msgid "Submitted by %(submit_user)s on %(review_date)s"
-msgstr ""
+msgstr "申請者%(submit_user)sによって%(review_date)sに提出されました"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate review_date
 #: TWLight/applications/templates/applications/application_evaluation.html:204
 #, python-format
 msgid "Submitted on %(review_date)s"
-msgstr ""
+msgstr "%(review_date)sに提出されました"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate review_user or review_date
 #: TWLight/applications/templates/applications/application_evaluation.html:215
 #, python-format
 msgid "Reviewed by %(review_user)s on %(review_date)s"
-msgstr ""
+msgstr "%(review_user)sによって%(review_date)sに審査されました"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate review_date
 #: TWLight/applications/templates/applications/application_evaluation.html:220
 #, python-format
 msgid "Reviewed on %(review_date)s"
-msgstr ""
+msgstr "審査日：%(review_date)s"
 
 #. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
 #: TWLight/applications/templates/applications/application_evaluation.html:232
 msgid "No previous versions."
-msgstr ""
+msgstr "これ以前の版はありません。"
 
 #. Translators: On the page which shows a list of applications, coordinators must select which applications they wish to view. This string is found next to the selection buttons, and leads on to options such as "Under review", "Approved", or "Sent.
 #: TWLight/applications/templates/applications/application_list.html:20
 msgid "View applications which are..."
-msgstr ""
+msgstr "審査対象の申請を選んでください..."
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:25
 msgid "Pending review"
-msgstr ""
+msgstr "審査待ち"
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:33
 msgid "Rejected"
-msgstr ""
+msgstr "却下"
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:37
 msgid "Sent"
-msgstr ""
+msgstr "送信済み"
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:41
 msgid "Up for renewal"
-msgstr ""
+msgstr "更新が必要"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:56
 msgid "Filter by..."
-msgstr ""
+msgstr "絞りこみ条件を選んでください..."
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
 #: TWLight/applications/templates/applications/application_list.html:68
 msgid "Current filters"
-msgstr ""
+msgstr "現在の絞りこみ条件"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
 #: TWLight/applications/templates/applications/application_list.html:79
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 #. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
 #: TWLight/applications/templates/applications/application_list.html:91
 msgid "Page navigation"
-msgstr ""
+msgstr "ページのナビゲーション"
 
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:95
@@ -451,37 +463,37 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list.html:102
 #: TWLight/applications/templates/applications/application_list.html:103
 msgid "Previous page"
-msgstr ""
+msgstr "前のページ"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
 #: TWLight/applications/templates/applications/application_list.html:203
 msgid "Next"
-msgstr ""
+msgstr "次へ"
 
 #. Translators: This is the label for a button which goes to the next page of applications.
 #: TWLight/applications/templates/applications/application_list.html:205
 #: TWLight/applications/templates/applications/application_list.html:221
 #: TWLight/applications/templates/applications/application_list.html:222
 msgid "Next page"
-msgstr ""
+msgstr "次のページ"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications.
 #: TWLight/applications/templates/applications/application_list.html:212
 msgid "Last"
-msgstr ""
+msgstr "最後のページ"
 
 #. Translators: This is the label for a button which goes to the last page of applications.
 #: TWLight/applications/templates/applications/application_list.html:214
 #: TWLight/applications/templates/applications/application_list.html:226
 #: TWLight/applications/templates/applications/application_list.html:227
 msgid "Last page"
-msgstr ""
+msgstr "最終ページ"
 
 #. Translators: On the page listing applications, this shows next to an application which was imported to the website.
 #: TWLight/applications/templates/applications/application_list_include.html:33
 #: TWLight/applications/templates/applications/application_list_user_include.html:22
 msgid "Imported application"
-msgstr ""
+msgstr "インポートしたアプリケーション"
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:37
@@ -489,7 +501,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_user_include.html:26
 #, python-format
 msgid "Last reviewed by %(reviewer)s on %(review_date)s"
-msgstr ""
+msgstr "直近は%(review_date)sに%(reviewer)sさんが審査されました"
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:42
@@ -497,67 +509,67 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_user_include.html:31
 #, python-format
 msgid "Last reviewed on %(review_date)s"
-msgstr ""
+msgstr "直近の審査日：%(review_date)s"
 
 #. Translators: On the page listing applications, this shows next to an application which has not yet been reviewed.
 #: TWLight/applications/templates/applications/application_list_include.html:48
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:42
 #: TWLight/applications/templates/applications/application_list_user_include.html:37
 msgid "Not yet reviewed."
-msgstr ""
+msgstr "まだ審査を受けていません。"
 
 #: TWLight/applications/templates/applications/application_list_include.html:64
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:74
 #: TWLight/applications/templates/applications/application_list_user_include.html:60
 msgid "No applications right now."
-msgstr ""
+msgstr "現在はまだ審査を受けていません。"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
 #: TWLight/applications/templates/applications/send_partner.html:121
 msgid "Select/deselect all"
-msgstr ""
+msgstr "すべてを選択／選択解除"
 
 #. Translators: Denotes whether an application was a renewal request for a previous application.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:24
 #: TWLight/resources/templates/resources/partner_users.html:53
 #: TWLight/resources/templates/resources/partner_users.html:104
 msgid "Renewal"
-msgstr ""
+msgstr "再申請"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:56
 msgid "Status for all selected applications"
-msgstr ""
+msgstr "選択したすべての申請の状態"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:70
 msgid "Set status"
-msgstr ""
+msgstr "状態を設定"
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:44
 msgid "Has your account expired?"
-msgstr ""
+msgstr "アカウントが期限切れではありませんか？"
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:46
 msgid "Request renewal"
-msgstr ""
+msgstr "更新を申請"
 
 #: TWLight/applications/templates/applications/application_list_user_include.html:48
 msgid ""
 "Renewals are either not required, not available right now, or you have "
 "already requested a renewal."
-msgstr ""
+msgstr "現在、更新が不要か申請できないか、すでに申請をしてあるかに該当します。"
 
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:21
 msgid "What resources do you want to access?"
-msgstr ""
+msgstr "どのリソースのアクセス権をご希望ですか？"
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:40
 msgid "(more info)"
-msgstr ""
+msgstr "(詳細情報)"
 
 #. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
 #. Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access
@@ -567,7 +579,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:100
 #: TWLight/resources/templates/resources/partner_tile.html:39
 msgid "Waitlisted"
-msgstr ""
+msgstr "受付保留中"
 
 #: TWLight/applications/templates/applications/request_for_application.html:50
 msgid "No partner data has been added yet."
@@ -580,22 +592,25 @@ msgid ""
 "partners, but they don't have access grants available right now. We will "
 "process those applications when access becomes available."
 msgstr ""
+"提携先が<span class=\"label label-warning\">受付保留中</span>でも申請は可能で"
+"すが、その場合、先方にはアクセス権の資金がない状態です。これらの申請はアクセ"
+"スが可能になった時点で処理します。"
 
 #. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when there are applications ready to be processed.
 #: TWLight/applications/templates/applications/send.html:7
 msgid "Partners with approved, unsent applications"
-msgstr ""
+msgstr "審査を通過し送信待ちの申請がある提携先"
 
 #. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when no such applications exist or all have already been sent.
 #: TWLight/applications/templates/applications/send.html:20
 msgid "There are no partners with applications ready to send."
-msgstr ""
+msgstr "審査を通過し送信できる提携先はありません。"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where object will be the name of the partner. Don't translate object.
 #: TWLight/applications/templates/applications/send_partner.html:38
 #, python-format
 msgid "Application data for %(object)s"
-msgstr ""
+msgstr "%(object)sに対する申請データ"
 
 #. Translators: This message is shown when applications exceed the number of accounts available for each stream(s).
 #: TWLight/applications/templates/applications/send_partner.html:51
@@ -605,6 +620,8 @@ msgid ""
 "exceed the total available accounts for the stream(s). Please proceed at "
 "your own discretion."
 msgstr ""
+"<strong>%(unavailable_streams)s</strong>対象の申請が送信された場合、ストリー"
+"ムで利用可能なアカウント総数を超えます。ご自身の判断で進めてください。"
 
 #. Translators: This message is shown when applications exceed the number of accounts available.
 #: TWLight/applications/templates/applications/send_partner.html:57
@@ -613,18 +630,21 @@ msgid ""
 "Application(s) for %(object)s, if sent, will exceed the total available "
 "accounts for the partner. Please proceed at your own discretion."
 msgstr ""
+"%(object)s対象の申請が送信された場合、提携いただいているアカウント総数を超え"
+"ます。ご自身の判断で進めてください。"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.
 #: TWLight/applications/templates/applications/send_partner.html:80
 msgid "When you've processed the data below, click the 'mark as sent' button."
 msgstr ""
+"下記のデータを処理したら、「送信済みとしてマーク」ボタンをクリックしてくださ"
+"い。"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
 #: TWLight/applications/templates/applications/send_partner.html:86
 msgid "Contact"
 msgid_plural "Contacts"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "連絡先"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/applications/templates/applications/send_partner.html:102
@@ -632,17 +652,19 @@ msgid ""
 "Whoops, we don't have any listed contacts. Please notify Wikipedia Library "
 "administrators."
 msgstr ""
+"どうやら連絡先が未登録のようです。ウィキペディア図書館の管理者に知らせてくだ"
+"さい。"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.
 #: TWLight/applications/templates/applications/send_partner.html:107
 msgid "Application data"
-msgstr ""
+msgstr "申請者名"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.
 #: TWLight/applications/templates/applications/send_partner.html:148
 #: TWLight/applications/templates/applications/send_partner.html:188
 msgid "Mark as sent"
-msgstr ""
+msgstr "送信済みにする"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:153
@@ -654,7 +676,7 @@ msgstr ""
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:174
 msgid "Select code:"
-msgstr ""
+msgstr "コードの選択:"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:195
@@ -664,7 +686,7 @@ msgstr ""
 #. Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
 #: TWLight/applications/views.py:164
 msgid "Please select at least one partner."
-msgstr ""
+msgstr "少なくとも提携先を1件選択してください。"
 
 #: TWLight/applications/views.py:281
 msgid "This field consists only of restricted text."
@@ -673,7 +695,7 @@ msgstr ""
 #. Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
 #: TWLight/applications/views.py:340
 msgid "Choose at least one resource you want access to."
-msgstr ""
+msgstr "アクセスしたいリソースを最低1件選択してください。"
 
 #. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
 #: TWLight/applications/views.py:364 TWLight/applications/views.py:405
@@ -693,24 +715,24 @@ msgstr ""
 #. Translators: Editor = wikipedia editor, gender unknown.
 #: TWLight/applications/views.py:513 TWLight/applications/views.py:590
 msgid "Editor"
-msgstr ""
+msgstr "編集者"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
 #: TWLight/applications/views.py:630
 msgid "Applications to review"
-msgstr ""
+msgstr "審査前の申請"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
 #: TWLight/applications/views.py:664
 #: TWLight/resources/templates/resources/partner_users.html:19
 msgid "Approved applications"
-msgstr ""
+msgstr "承認された申請"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
 #: TWLight/applications/views.py:690
 msgid "Rejected applications"
-msgstr ""
+msgstr "却下された申請"
 
 #. Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
 #: TWLight/applications/views.py:723
@@ -722,7 +744,7 @@ msgstr ""
 #: TWLight/applications/views.py:749
 #: TWLight/resources/templates/resources/partner_users.html:70
 msgid "Sent applications"
-msgstr ""
+msgstr "申請を送付"
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
 #: TWLight/applications/views.py:780
@@ -737,16 +759,16 @@ msgstr ""
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
 #: TWLight/applications/views.py:839
 msgid "Please select at least one application."
-msgstr ""
+msgstr "申請を最低1件、選択してください。"
 
 #: TWLight/applications/views.py:859
 msgid "Batch update successful."
-msgstr ""
+msgstr "一括更新に成功しました。"
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1010
 msgid "Error: Code used multiple times."
-msgstr ""
+msgstr "エラー: コードが複数回、使用されました。"
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
 #: TWLight/applications/views.py:1044
@@ -781,7 +803,7 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:21
 msgid "Message"
-msgstr ""
+msgstr "メッセージ"
 
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
@@ -792,7 +814,7 @@ msgstr ""
 #. Translators: This labels a button which users click to submit their suggestion.
 #: TWLight/emails/forms.py:38 TWLight/resources/forms.py:32
 msgid "Submit"
-msgstr ""
+msgstr "提出"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/emails/tasks.py:243
@@ -804,7 +826,7 @@ msgstr ""
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
 msgid "Your Wikipedia Library access code"
-msgstr ""
+msgstr "ウィキペディア図書館のアクセスコード"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
@@ -855,7 +877,7 @@ msgstr ""
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
 #: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
 msgid "New comment on a Wikipedia Library application you processed"
-msgstr ""
+msgstr "自分が申請手続きをしたウィキペディア図書館に関する新規のコメント"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
@@ -924,43 +946,45 @@ msgstr ""
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:39
 msgid "Contact info"
-msgstr ""
+msgstr "連絡先"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:43
 msgid "Meta page"
-msgstr ""
+msgstr "Metaページ"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:45
 msgid "The Wikipedia Library"
-msgstr ""
+msgstr "ウィキペディア図書館"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/emails/templates/emails/contact.html:52
 msgid "Mailing list"
-msgstr ""
+msgstr "メーリングリスト"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
 #: TWLight/emails/templates/emails/contact.html:56
 msgid "IRC"
-msgstr ""
+msgstr "チャットルーム"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:64
 msgid "Wikipedia Library Facebook page"
-msgstr ""
+msgstr "ウィキペディア図書館の Facebook ページ"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:70
 msgid "Wikipedia Library Twitter page"
-msgstr ""
+msgstr "ウィキペディア図書館 Twitter ページ"
 
 #. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
 #: TWLight/emails/templates/emails/contact_us_email-subject.html:3
 #, python-format
 msgid "Wikipedia Library Card Platform message from %(editor_wp_username)s"
 msgstr ""
+"ウィキペディア図書館カードのプラットフォームに%(editor_wp_username)s件のメッ"
+"セージがあります"
 
 #. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like user or partner; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
@@ -989,7 +1013,7 @@ msgstr ""
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
 msgid "Wikipedia Library applications await your review"
-msgstr ""
+msgstr "ウィキペディア図書館アプリでは査読をお待ちしています"
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
@@ -1015,7 +1039,7 @@ msgstr ""
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
 msgid "Your Wikipedia Library application has been denied"
-msgstr ""
+msgstr "ウィキペディア図書館の申請が却下されました"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1044,7 +1068,7 @@ msgstr ""
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
 msgid "Your Wikipedia Library access may soon expire"
-msgstr ""
+msgstr "ウィキペディア図書館のアクセスがまもなく期限切れになります"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
@@ -1072,93 +1096,93 @@ msgstr ""
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
 msgid "Your Wikipedia Library application has been waitlisted"
-msgstr ""
+msgstr "ウィキペディア図書館の申請が受付待ちになりました"
 
 #. Translators: Shown to users when they successfully submit a new message using the contact us form.
 #: TWLight/emails/views.py:55
 msgid "Your message has been sent. We'll get back to you soon!"
-msgstr ""
+msgstr "メッセージを送信しました。返答までしばらくお待ちください。"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
 #: TWLight/emails/views.py:60 TWLight/resources/views.py:345
 msgid "You must be a Wikipedia editor to do that."
-msgstr ""
+msgstr "手続きはウィキペディアの編集者に限定されます。"
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
 #: TWLight/graphs/views.py:214
 msgid "Days until decision"
-msgstr ""
+msgstr "決定までの日数"
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
 #. Translators: This is the heading of a data file which lists the number of applications to a partner.
 #: TWLight/graphs/views.py:216 TWLight/graphs/views.py:278
 #: TWLight/graphs/views.py:301
 msgid "Number of applications"
-msgstr ""
+msgstr "申請件数"
 
 #. Translators: This is the heading of a data file, for a column containing date data.
 #: TWLight/graphs/views.py:230 TWLight/graphs/views.py:299
 #: TWLight/graphs/views.py:318
 msgid "Date"
-msgstr ""
+msgstr "日付"
 
 #. Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
 #: TWLight/graphs/views.py:232
 msgid "Number of approved applications"
-msgstr ""
+msgstr "承認済み申請件数"
 
 #. Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
 #: TWLight/graphs/views.py:250
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 #. Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
 #: TWLight/graphs/views.py:252
 msgid "Median days until decision"
-msgstr ""
+msgstr "決定までの平均日数"
 
 #. Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
 #: TWLight/graphs/views.py:320
 msgid "Number of unique users who applied"
-msgstr ""
+msgstr "申請者の人数"
 
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
 #: TWLight/graphs/views.py:335 TWLight/graphs/views.py:362
 msgid "You must be staff to do that."
-msgstr ""
+msgstr "処理は職員に限定されています。"
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
 #: TWLight/graphs/views.py:345 TWLight/graphs/views.py:379
 #: TWLight/templates/dashboard.html:102
 msgid "Page URL"
-msgstr ""
+msgstr "ページのURL"
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
 #: TWLight/graphs/views.py:346 TWLight/graphs/views.py:381
 msgid "Number of (non-unique) visitors"
-msgstr ""
+msgstr "訪問者の (のべ) 人数"
 
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
 #: TWLight/graphs/views.py:397 TWLight/resources/models.py:82
 #: TWLight/users/models.py:75 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
-msgstr "{{Identical|Sprooch}}"
+msgstr "言語"
 
 #: TWLight/graphs/views.py:398
 msgid "Number of users"
-msgstr ""
+msgstr "利用者数"
 
 #. Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
 #: TWLight/resources/admin.py:135
 msgid "File must be a csv"
-msgstr ""
+msgstr "指定されたファイル形式はcsvです"
 
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
 #: TWLight/resources/admin.py:141
 msgid "Uploaded file is too large."
-msgstr ""
+msgstr "アップロードしたファイルは大きすぎます"
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
 #: TWLight/resources/admin.py:159
@@ -1204,7 +1228,7 @@ msgstr ""
 #: TWLight/resources/forms.py:17
 #: TWLight/resources/templates/resources/suggest.html:55
 msgid "Description"
-msgstr "{{Identical|Description}}"
+msgstr ""
 
 #: TWLight/resources/forms.py:18
 msgid "Website"
@@ -1221,7 +1245,7 @@ msgstr ""
 
 #: TWLight/resources/models.py:49
 msgid "Name"
-msgstr "{{Identical|Name}}"
+msgstr ""
 
 #: TWLight/resources/models.py:50
 msgid "Slug"
@@ -1229,16 +1253,16 @@ msgstr ""
 
 #: TWLight/resources/models.py:53
 msgid "Tag"
-msgstr ""
+msgstr "タグ"
 
 #: TWLight/resources/models.py:54
 msgid "Tags"
-msgstr ""
+msgstr "タグ"
 
 #. Translators: Title for a list of languages if there is more than one.
 #: TWLight/resources/models.py:84
 msgid "Languages"
-msgstr ""
+msgstr "言語"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can enter the name of the partner. Don't translate McFarland.
 #: TWLight/resources/models.py:139
@@ -1291,7 +1315,7 @@ msgstr ""
 #. Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
 #: TWLight/resources/models.py:194
 msgid "Link"
-msgstr ""
+msgstr "リンク"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
 #: TWLight/resources/models.py:200
@@ -1319,6 +1343,8 @@ msgid ""
 "Link to terms of use. Required if users must agree to terms of use to get "
 "access; optional otherwise."
 msgstr ""
+"使用規約へのリンク。アクセスの条件として利用者が使用規約に合意する場合に必"
+"要。その他はオプション。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
 #: TWLight/resources/models.py:222
@@ -1549,7 +1575,7 @@ msgstr ""
 #. Translators: This labels a button for uploading files containing lists of access codes.
 #: TWLight/resources/templates/resources/csv_form.html:23
 msgid "Upload"
-msgstr ""
+msgstr "アップロード"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:36
@@ -1643,7 +1669,7 @@ msgstr ""
 
 #: TWLight/resources/templates/resources/partner_detail.html:256
 msgid "Video"
-msgstr ""
+msgstr "動画"
 
 #. Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:271
@@ -1820,7 +1846,6 @@ msgid ""
 msgid_plural ""
 "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
 msgstr[0] ""
-msgstr[1] ""
 
 #. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:595
@@ -1832,7 +1857,6 @@ msgid_plural ""
 "Number of unique users with approved applications (all time): "
 "%(unique_users_approved_or_sent)s"
 msgstr[0] ""
-msgstr[1] ""
 
 #. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:611
@@ -1863,7 +1887,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_filter.html:24
 #: TWLight/templates/base.html:241
 msgid "Suggest a partner"
-msgstr ""
+msgstr "パートナーを提案"
 
 #. Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/)
 #: TWLight/resources/templates/resources/partner_filter.html:30
@@ -1933,7 +1957,7 @@ msgstr ""
 #. Translators: This is the title of the form where users can submit partner suggestions.
 #: TWLight/resources/templates/resources/suggest.html:18
 msgid "Suggest partners"
-msgstr ""
+msgstr "パートナーを提案"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:38
@@ -1943,12 +1967,12 @@ msgstr ""
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #: TWLight/resources/templates/resources/suggest.html:47
 msgid "Delete"
-msgstr "{{Identical|Delete}}"
+msgstr ""
 
 #. Translators: This is the text that appears before the URL of every partner suggestion.
 #: TWLight/resources/templates/resources/suggest.html:59
 msgid "URL"
-msgstr "{{Identical|URL}}"
+msgstr ""
 
 #: TWLight/resources/templates/resources/suggest.html:64
 #: TWLight/resources/templates/resources/suggest.html:80
@@ -2273,7 +2297,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to the Wikipedia Library email address.
 #: TWLight/templates/about.html:179
 msgid "Email:"
-msgstr ""
+msgstr "メール:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to a link to the Wikipedia Library discussion page on Wikipedia. Translate 'Talk' to whatever the discussion namespace is called for this language Wikipedia.
 #: TWLight/templates/about.html:186
@@ -2318,12 +2342,12 @@ msgstr ""
 #. Translators: Shown in the top bar of almost every page when the current user is logged in.
 #: TWLight/templates/base.html:143
 msgid "Log out"
-msgstr ""
+msgstr "ログアウト"
 
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
 #: TWLight/templates/base.html:155 TWLight/templates/home.html:22
 msgid "Log in"
-msgstr ""
+msgstr "ログイン"
 
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
 #: TWLight/templates/base.html:174
@@ -2616,7 +2640,7 @@ msgstr ""
 #. Translators: This is the label for a button that users click to update their public information.
 #: TWLight/users/forms.py:34
 msgid "Update profile"
-msgstr ""
+msgstr "プロフィールを更新"
 
 #. Translators: This labels a field where users can describe their activity on Wikipedia in a small biography.
 #: TWLight/users/forms.py:41
@@ -2689,7 +2713,7 @@ msgstr ""
 #. Translators: The User ID for this user on Wikipedia
 #: TWLight/users/models.py:126
 msgid "Wikipedia user ID"
-msgstr ""
+msgstr "ウィキペディア利用者 ID"
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
 #: TWLight/users/models.py:132
@@ -2755,7 +2779,7 @@ msgstr ""
 #. Translators: This is the heading for user information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:23
 msgid "User information"
-msgstr ""
+msgstr "利用者情報"
 
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:25
@@ -2787,7 +2811,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
 #: TWLight/users/templates/users/editor_detail_data.html:17
 msgid "Username *"
-msgstr ""
+msgstr "利用者名 *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/)
 #: TWLight/users/templates/users/editor_detail_data.html:24
@@ -2820,7 +2844,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
 #: TWLight/users/templates/users/editor_detail_data.html:66
 msgid "Yes"
-msgstr ""
+msgstr "はい"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
 #: TWLight/users/templates/users/editor_detail_data.html:71
@@ -2833,7 +2857,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:85
 msgid "Global edit count *"
-msgstr ""
+msgstr "グローバル編集回数 *"
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
 #: TWLight/users/templates/users/editor_detail_data.html:92
@@ -2848,7 +2872,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:114
 msgid "Wikipedia user ID *"
-msgstr ""
+msgstr "ウィキペディア利用者 ID *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:130
@@ -2869,7 +2893,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
 #: TWLight/users/templates/users/editor_detail_data.html:151
 msgid "Email *"
-msgstr ""
+msgstr "メール *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:200
@@ -2879,7 +2903,7 @@ msgstr ""
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
-msgstr ""
+msgstr "言語を設定"
 
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:29
@@ -2895,12 +2919,12 @@ msgstr ""
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
 #: TWLight/users/templates/users/preferences.html:32
 msgid "Password"
-msgstr "{{Identical|Password}}"
+msgstr ""
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
 #: TWLight/users/templates/users/preferences.html:51
 msgid "Data"
-msgstr ""
+msgstr "データ"
 
 #: TWLight/users/templates/users/restrict_data.html:7
 msgid "Restrict data processing"
@@ -3256,7 +3280,7 @@ msgstr ""
 #: TWLight/users/templates/users/user_email_preferences.html:13
 #: TWLight/users/views.py:277
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
 #: TWLight/users/views.py:116

@@ -25,7 +25,7 @@ flock -n ${lockfile}
     echo "Backing up database and media"
 
     ## Perform backup
-    tar -czf "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" -C "${TWLIGHT_MYSQLDUMP_DIR}" "./twlight.sql" -C "${TWLIGHT_HOME}" "../media"
+    tar -czf "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz" -C "${TWLIGHT_MYSQLDUMP_DIR}" "./twlight.sql" -C "${TWLIGHT_HOME}" "./media"
 
     ## Root only
     chmod 0600 "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz"

@@ -190,7 +190,7 @@ class BaseApplicationForm(forms.Form):
                 if len(self.field_params) > 1:
                     # Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
                     self.fields[datum].help_text = _("Requested by: {partner_list}".format(
-                        partner_list=", ".join(user_data[datum])))
+                        partner_list= ", ".join(user_data[datum])).decode('utf-8'))
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)

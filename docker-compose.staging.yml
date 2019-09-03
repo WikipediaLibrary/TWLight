@@ -29,6 +29,9 @@ services:
       - type: bind
         source: /data/project/staging
         target: /app/backup
+      - type: bind
+        source: ./media
+        target: /app/media
     depends_on:
       - 'db'
     secrets:

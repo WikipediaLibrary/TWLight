@@ -20,6 +20,9 @@ TWLight/settings/vagrant_vars.py
 # Should a db dump be left lying around
 twlight.sql
 
+# directory created by Docker bind mount for db config
+conf/db/
+
 # Created by https://www.gitignore.io/api/osx,django,python,sublimetext,vim,emacs
 
 ### OSX ###
