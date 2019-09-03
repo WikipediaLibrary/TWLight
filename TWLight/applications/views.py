@@ -767,6 +767,9 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     success_url = reverse_lazy('applications:list')
 
     def form_valid(self, form):
+        if self.object.status == Application.SENT:
+            self.object.sent_by = self.request.user
+            self.object.save()
         with reversion.create_revision():
             reversion.set_user(self.request.user)
             try:
