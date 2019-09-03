@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-03 16:52+0000\n"
+"POT-Creation-Date: 2019-09-03 17:04+0000\n"
 "PO-Revision-Date: 2019-08-29 18:48:49+0000\n"
 "Language: ta\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -741,42 +741,42 @@ msgid "Sent applications"
 msgstr "அனுப்பிய விண்ணப்பங்கள்"
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
-#: TWLight/applications/views.py:777
+#: TWLight/applications/views.py:780
 msgid "You attempted to create a duplicate authorization."
 msgstr ""
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:805
+#: TWLight/applications/views.py:808
 msgid "Set application status"
 msgstr ""
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:836
+#: TWLight/applications/views.py:839
 msgid "Please select at least one application."
 msgstr ""
 
-#: TWLight/applications/views.py:856
+#: TWLight/applications/views.py:859
 msgid "Batch update successful."
 msgstr ""
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1007
+#: TWLight/applications/views.py:1010
 msgid "Error: Code used multiple times."
 msgstr ""
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1041
+#: TWLight/applications/views.py:1044
 msgid "All selected applications have been marked as sent."
 msgstr ""
 
-#: TWLight/applications/views.py:1090
+#: TWLight/applications/views.py:1093
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr ""
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1096
+#: TWLight/applications/views.py:1099
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
