@@ -5,5 +5,5 @@ innodb_default_row_format = DYNAMIC
 innodb_compression_default = 1
 innodb_page_size = 64k
 collation-server = utf8mb4_unicode_ci
-init-connect = SET NAMES utf8mb4
+init-connect = SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci
 character-set-server = utf8mb4
