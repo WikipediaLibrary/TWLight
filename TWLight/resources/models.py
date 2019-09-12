@@ -149,6 +149,9 @@ class Partner(models.Model):
     company_location = CountryField(null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can enter the partner organisation's country.
         help_text=_("Partner's primary location."))
+    proxy_enabled = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether a publisher's links will be routed through EZProxy. Don't translate EZProxy.
+        help_text=_("Mark as true to route Partner URL through EZProxy."))
 
     # Status metadata
     # --------------------------------------------------------------------------
@@ -438,6 +441,10 @@ class Stream(models.Model):
         help_text=_("Optional description of this stream's resources."))
 
     languages = models.ManyToManyField(Language, blank=True)
+
+    proxy_enabled = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether the link to a collection of resources will be routed through EZProxy. Don't translate EZProxy.
+        help_text=_("Mark as true to route stream URL through EZProxy."))
 
     authorization_method = models.IntegerField(choices=Partner.AUTHORIZATION_METHODS,
         default=Partner.EMAIL,
