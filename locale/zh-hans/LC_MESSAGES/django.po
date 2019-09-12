@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-09-03 17:04+0000\n"
-"PO-Revision-Date: 2019-09-09 17:39:01+0000\n"
+"PO-Revision-Date: 2019-09-12 14:23:27+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1178,7 +1178,7 @@ msgstr "代理"
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #: TWLight/resources/models.py:192
 msgid "Library Bundle"
-msgstr ""
+msgstr "图书馆捆绑包"
 
 #. Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
 #: TWLight/resources/models.py:194
