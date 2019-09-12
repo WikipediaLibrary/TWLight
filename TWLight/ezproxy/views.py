@@ -28,17 +28,18 @@ class EZProxyAuth(View):
             raise SuspiciousOperation("Missing Editor username.")
 
         try:
-            authorizations = Authorization.objects.filter(authorized_user=request.user, is_valid=True)
+            authorizations = Authorization.objects.filter(authorized_user=request.user)
             for authorization in authorizations:
-                partner = Partner.objects.get(authorization_method=Partner.PROXY, pk=authorization.partner_id)
-                group = ""
-                if partner and partner.proxy_enabled:
-                    group = "P" + repr(partner.pk)
-                    stream = Stream.objects.get(authorization_method=Partner.PROXY, pk=authorization.stream_id)
-                    if stream and stream.proxy_enabled:
-                        group += "S" + repr(stream.pk)
-                if group:
-                    groups.append(group)
+                if authorization.is_valid:
+                  partner = Partner.objects.get(authorization_method=Partner.PROXY, pk=authorization.partner_id)
+                  group = ""
+                  if partner and partner.proxy_enabled:
+                      group = "P" + repr(partner.pk)
+                      stream = Stream.objects.get(authorization_method=Partner.PROXY, pk=authorization.stream_id)
+                      if stream and stream.proxy_enabled:
+                          group += "S" + repr(stream.pk)
+                  if group:
+                      groups.append(group)
         except ObjectDoesNotExist:
             pass
 
