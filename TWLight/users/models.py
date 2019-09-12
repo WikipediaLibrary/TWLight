@@ -436,12 +436,15 @@ class Authorization(models.Model):
         """
         # We assume the authorization is invalid unless we know better.
         valid = False
-        # If we have valid authorization and expiration dates, and we're in between them, we're valid/
-        if self.date_authorized and self.date_authorized.__le__(now) and self.date_expires and self.date_expires.__gt__(now):
-            valid = True
-        # If we have a valid authorization date that is now or in the past, but no expiration date, we're valid.
-        elif self.date_authorized and self.date_authorized.__le__(now) and not self.date_expires:
-            valid = True
+        if (
+            # Valid authorizations always have an authorizer, and authorized_user and a partner_id.
+            self.authorizer and self.authorized_user and self.partner_id
+            # and a valid authorization date that is now or in the past
+            and self.date_authorized and self.date_authorized.__le__(now)
+            # and an expiration date in the future (or no expiration date).
+            and ((self.date_expires and self.date_expires.__gt__(now)) or not self.date_expires)
+        ):
+              valid = True
         return valid
 
 
