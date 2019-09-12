@@ -14,6 +14,7 @@ from django.core.exceptions import (
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
+from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Authorization
 
 
@@ -27,15 +28,15 @@ class EZProxyAuth(View):
             raise SuspiciousOperation("Missing Editor username.")
 
         try:
-            authorizations = Authorization.objects.filter(authorized_user=request.user)
+            authorizations = Authorization.objects.filter(authorized_user=request.user, is_valid=True)
             for authorization in authorizations:
-                partner_id = authorization.partner_id
-                stream_id = authorization.stream_id
+                partner = Partner.objects.get(authorization_method=Partner.PROXY, pk=authorization.partner_id)
                 group = ""
-                if partner_id:
-                    group = "P" + repr(partner_id)
-                    if stream_id:
-                        group += "S" + repr(stream_id)
+                if partner and partner.proxy_enabled:
+                    group = "P" + repr(partner.pk)
+                    stream = Stream.objects.get(authorization_method=Partner.PROXY, pk=authorization.stream_id)
+                    if stream and stream.proxy_enabled:
+                        group += "S" + repr(stream.pk)
                 if group:
                     groups.append(group)
         except ObjectDoesNotExist:
@@ -56,7 +57,6 @@ class EZProxyAuth(View):
 
 
 class EZProxyTicket(object):
-
     starting_point_url = None
 
     def __init__(self, user, groups=None):
@@ -78,7 +78,7 @@ class EZProxyTicket(object):
             hashlib.sha512(secret + user + packet).hexdigest() + packet
         )
         self.starting_point_url = (
-            ezproxy_url + "/login?user=" + user + "&ticket=" + ticket
+                ezproxy_url + "/login?user=" + user + "&ticket=" + ticket
         )
 
     def url(self, url):
