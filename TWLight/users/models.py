@@ -436,7 +436,7 @@ class Authorization(models.Model):
         """
         # We assume the authorization is invalid unless we know better.
         valid = False
-        today = datetime.date.today()
+        today = datetime.today().date()
         if (
             # Valid authorizations always have an authorizer, and authorized_user and a partner_id.
             self.authorizer and self.authorized_user and self.partner_id
