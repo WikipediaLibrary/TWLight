@@ -33,10 +33,10 @@ class EZProxyAuth(View):
                 if authorization.is_valid:
                   partner = Partner.objects.get(authorization_method=Partner.PROXY, pk=authorization.partner_id)
                   group = ""
-                  if partner and partner.proxy_enabled:
+                  if partner:
                       group = "P" + repr(partner.pk)
                       stream = Stream.objects.get(authorization_method=Partner.PROXY, pk=authorization.stream_id)
-                      if stream and stream.proxy_enabled:
+                      if stream:
                           group += "S" + repr(stream.pk)
                   if group:
                       groups.append(group)
