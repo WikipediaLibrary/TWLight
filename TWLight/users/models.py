@@ -436,13 +436,14 @@ class Authorization(models.Model):
         """
         # We assume the authorization is invalid unless we know better.
         valid = False
+        today = datetime.date.today()
         if (
             # Valid authorizations always have an authorizer, and authorized_user and a partner_id.
             self.authorizer and self.authorized_user and self.partner_id
             # and a valid authorization date that is now or in the past
-            and self.date_authorized and self.date_authorized.__le__(now)
+            and self.date_authorized and self.date_authorized <= today
             # and an expiration date in the future (or no expiration date).
-            and ((self.date_expires and self.date_expires.__gt__(now)) or not self.date_expires)
+            and ((self.date_expires and self.date_expires > today) or not self.date_expires)
         ):
               valid = True
         return valid
