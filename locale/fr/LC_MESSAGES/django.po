@@ -3,6 +3,7 @@
 #
 # Author: Gomoko
 # Author: Nikkimaria
+# Author: Urhixidur
 # Author: Wladek92
 # Author: Zarisi
 msgid ""
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-09-03 17:03+0000\n"
-"PO-Revision-Date: 2019-09-06 05:23:20+0000\n"
+"PO-Revision-Date: 2019-09-16 17:16:41+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -1738,7 +1739,7 @@ msgstr "Suggérer des partenaires"
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:38
 msgid "Browse and support suggestions"
-msgstr "Afficher et supporter les suggestions"
+msgstr "Afficher et appuyer les suggestions"
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #: TWLight/resources/templates/resources/suggest.html:47
