@@ -1,0 +1,47 @@
+{% load i18n %}
+{% load cache %}
+{% load static %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% comment %}
+  To be used in presenting lists of partners plus key data about them.
+  Provides a tile. Including templates are responsible for laying out these
+  tiles and supplying a `partner` variable (presumed to be an instance of
+  class Partner).
+{% endcomment %}
+
+<div class="panel panel-default full-width">
+  <div class="panel-body top-border {% if each_authorization.about_to_expire %}expiry-warning{% endif %}">
+    {% if each_authorization.partner.logos.logo.url %}
+    <div class="partner-logo-container">
+      {% if each_authorization.partner.authorization_method == each_authorization.partner.BUNDLE or each_authorization.partner.authorization_method == each_authorization.partner.PROXY %}
+        <i class="fa fa-external-link pull-right no-padding" title="Links to an external website" aria-hidden="true"></i>
+      {% endif %}
+      {% if each_authorization.partner.authorization_method == each_authorization.partner.BUNDLE %}
+        <img src="{% static 'img/LibraryBundle_old.png' %}" class="img-responsive logo no-padding" style="width:47px; height:40px;" title="Library Bundle" alt="
+        {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+        {% trans "Library bundle access" %}
+        ">
+      {% endif %}
+      <a href=#>
+        <img src="{{ each_authorization.partner.logos.logo.url }}" class="img-responsive partner-logo" alt="
+        {% comment %} Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate {{ partner }}. {% endcomment %}
+        {% trans "Link to {{ each_authorization.partner }} signup page" %}
+        ">
+      </a>
+    </div>
+    {% endif %}
+    <hr>
+      <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i> <strong><a href="{% url 'partners:detail' each_authorization.partner.pk %}">{{ each_authorization.partner }}</a></strong>
+      {% if each_authorization.date_expires and not each_authorization.is_expired %}
+        {% if each_authorization.about_to_expire and each_authorization.latest_app.pk %}
+          <a href="{% url 'applications:renew' each_authorization.latest_app.pk %}" class="btn btn-primary pull-right" role="button">Renew</a><div class="clearfix"></div>
+        {% endif %}
+        <span class="pull-right"><small>Expires on: {{ each_authorization.date_expires }}</small></span>
+      {% endif %}
+    {%  if each_authorization.is_expired and each_authorization.latest_app.pk %}
+      <a href="{% url 'applications:renew' each_authorization.latest_app.pk %}" class="btn btn-primary pull-right" role="button">Renew</a>
+    {% endif %}
+  </div>
+</div>

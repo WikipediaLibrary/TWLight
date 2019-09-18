@@ -40,7 +40,14 @@
   {% endblock extra_css %}
 
   {% block head_javascript %}
-    {# We don't use any JS by default; individual pages that need it can add it here. #}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+            integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+            integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw"
+            crossorigin="anonymous">
+    </script>
   {% endblock head_javascript %}
 </head>
 {% if LANGUAGE_BIDI %}
@@ -52,39 +59,71 @@
  <!-- navbar -->
   <div class="navbar navbar-default" id="top-nav">
       <div class="navbar-left">
-      <!-- logo -->
-      <a href="{% url 'homepage' %}">
-        <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
-        {% comment %} Translators: Alt text for the Wikipedia Library shown in the top left of all pages. {% endcomment %}
-        {% trans "Library Card Platform home" %}
-        ">
-      </a>
-      
-      <!-- site name -->
-  
-      <a class="site-title" href="{% url 'homepage' %}">{% trans "The Wikipedia Library Card Platform" %}</a>
-      
-      
-      <!-- Welcome Message Logged In User -->
+        <!-- logo -->
+        <a href="{% url 'homepage' %}">
+          <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
+          {% comment %} Translators: Alt text for the Wikipedia Library shown in the top left of all pages. {% endcomment %}
+          {% trans "Library Card Platform home" %}
+          ">
+        </a>
+
+        <!-- site name -->
+        <a class="site-title" href="{% url 'homepage' %}">{% trans "The Wikipedia Library Card Platform" %}</a>
+
+        <br>
         {% if user.is_authenticated %}
-          <div class="nav-greeting welcome"> 
-            
           {% url 'users:home' as home_url %}
-            {% if user.editor %}
-              {% comment %} Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate {{ home_url }} or {{ username }}. {% endcomment %}
-              {% blocktrans trimmed with username=user.editor.wp_username%}
-                Hi, <a href="{{ home_url }}">{{ username }}</a>!
-              {% endblocktrans %}
-            {% else %}
-              {% comment %} Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate {{ home_url }} or {{ username }}. {% endcomment %}
-              {% blocktrans trimmed with username=user.username %}
-                Hi, <a href="{{ home_url }}">{{ username }}</a>!
-              {% endblocktrans %}            
-            {% endif %}
-            
-          </div>      
+          <div class="btn-group dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+              {% if user.editor %}
+                {{ user.editor.wp_username }}
+              {% else %}
+                {{ user.username }}
+              {% endif %}
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{ home_url }}">
+                  {% comment %} Translators: {% endcomment %}
+                  {% trans "Profile" %}
+                </a>
+              </li>
+              {% if user.is_superuser %}
+                <li>
+                  <a href="{% url 'admin:index' %}">
+                    {% comment %} Translators: Shown in the top bar of almost every page when the current user is a superuser, linking to the administrator interface. {% endcomment %}
+                    {% trans "Admin" %}
+                  </a>
+                </li>
+              {% endif %}
+              <li class="divider"></li>
+              <li>
+                <a href="
+                  {% if user.editor %}
+                    {%  url 'users:my_collection' user.editor.pk %}
+                  {% else %}
+                    {%  url 'users:my_collection' user.pk %}
+                  {% endif %}
+                ">
+                  {% comment %} Translators: {% endcomment %}
+                  {% trans "Collection" %}
+                </a>
+              </li>
+              <li>
+                <a href="
+                  {% if user.editor %}
+                    {%  url 'users:my_collection' user.editor.pk %}
+                  {% else %}
+                    {%  url 'users:my_collection' user.pk %}
+                  {% endif %}
+                ">
+                  {% comment %} Translators: {% endcomment %}
+                  {% trans "Application" %}
+                </a>
+              </li>
+            </ul>
+          </div>
         {% endif %}
-      
       </div>
       
         <ul class="nav nav-pills navbar-right">
@@ -126,15 +165,6 @@
         {% trans "Metrics" %}
       </a>
     </li>
-
-    {% if user.is_superuser %}
-      <li role="presentation" class="mobile-menu">
-        <a href="{% url 'admin:index' %}">
-      {% comment %} Translators: Shown in the top bar of almost every page when the current user is a superuser, linking to the administrator interface. {% endcomment %}
-          {% trans "Admin" %}
-        </a>
-      </li>
-    {% endif %}
 
     {% if user.is_authenticated %}
       <li role="presentation" class="divider mobile-menu">

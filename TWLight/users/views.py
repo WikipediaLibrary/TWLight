@@ -4,6 +4,7 @@ import json
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
+from django.db.models import Q
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
@@ -15,6 +16,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
+from django.views.generic.list import ListView
 from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
@@ -255,7 +257,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message (request, messages.WARNING,
+            messages.add_message(self.request, messages.WARNING,
                 # Translators: This message is shown to users who attempt to update their personal information without being logged in.
                 _('You must be logged in to do that.'))
             raise PermissionDenied
@@ -327,7 +329,7 @@ class EmailChangeView(SelfOnly, FormView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message (request, messages.WARNING,
+            messages.add_message(self.request, messages.WARNING,
                 # Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
                 _('You must be logged in to do that.'))
             raise PermissionDenied
@@ -371,7 +373,7 @@ class RestrictDataView(SelfOnly, FormView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message (request, messages.WARNING,
+            messages.add_message (self.request, messages.WARNING,
                 # Translators: This message is shown to users who attempt to update their data processing without being logged in.
                 _('You must be logged in to do that.'))
             raise PermissionDenied
@@ -579,3 +581,89 @@ class AuthorizedUsers(APIView):
 
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
+
+
+class ListApplicationsUserView(SelfOnly, ListView):
+    model = Editor
+    template_name = 'users/my_collection.html'
+
+    def get_object(self):
+        assert 'pk' in self.kwargs.keys()
+        try:
+            return Editor.objects.get(pk=self.kwargs['pk'])
+        except Editor.DoesNotExist:
+            raise Http404
+
+    def get_context_data(self, **kwargs):
+        context = super(ListApplicationsUserView, self).get_context_data(**kwargs)
+        editor = self.get_object()
+        today = datetime.date.today()
+        proxy_bundle_authorizations = Authorization.objects.filter(Q(authorized_user=editor.user),
+                                                                   Q(date_expires__gte=today) |
+                                                                   Q(date_expires=None),
+                                                                   Q(partner__authorization_method=Partner.PROXY) |
+                                                                   Q(partner__authorization_method=Partner.BUNDLE)
+                                                                   ).order_by('partner')
+        proxy_bundle_authorizations_expired = Authorization.objects.filter(Q(authorized_user=editor.user),
+                                                                        Q(date_expires__lt=today),
+                                                                        Q(partner__authorization_method=Partner.PROXY) |
+                                                                        Q(partner__authorization_method=Partner.BUNDLE)
+                                                                           ).order_by('partner')
+        manual_authorizations = Authorization.objects.filter(Q(authorized_user=editor.user),
+                                                             Q(date_expires__gte=today) |
+                                                             Q(date_expires=None),
+                                                             Q(partner__authorization_method=Partner.EMAIL) |
+                                                             Q(partner__authorization_method=Partner.CODES) |
+                                                             Q(partner__authorization_method=Partner.LINK)
+                                                            ).order_by('partner')
+        manual_authorizations_expired = Authorization.objects.filter(Q(authorized_user=editor.user),
+                                                             Q(date_expires__lt=today),
+                                                             Q(partner__authorization_method=Partner.EMAIL) |
+                                                             Q(partner__authorization_method=Partner.CODES) |
+                                                             Q(partner__authorization_method=Partner.LINK)
+                                                            ).order_by('partner')
+        for each_authorization in proxy_bundle_authorizations:
+            if each_authorization.date_expires is not None:
+                if each_authorization.date_expires - today < timedelta(days=30):
+                    each_authorization.about_to_expire = True
+                    try:
+                        each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
+                                                                                   editor=editor
+                                                                                   ).latest('date_closed')
+                    except Application.DoesNotExist:
+                        each_authorization.latest_app = None
+
+        for each_authorization in proxy_bundle_authorizations_expired:
+            each_authorization.is_expired = True
+            try:
+                each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
+                                                                           editor=editor
+                                                                           ).latest('date_closed')
+            except Application.DoesNotExist:
+                each_authorization.latest_app = None
+
+        for each_authorization in manual_authorizations:
+            if each_authorization.date_expires is not None:
+                if each_authorization.date_expires - today < timedelta(days=30):
+                    each_authorization.about_to_expire = True
+                    try:
+                        each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
+                                                                                   editor=editor
+                                                                                   ).latest('date_closed')
+                    except Application.DoesNotExist:
+                        each_authorization.latest_app = None
+
+        for each_authorization in manual_authorizations_expired:
+            each_authorization.is_expired = True
+            try:
+                each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
+                                                                           editor=editor
+                                                                           ).latest('date_closed')
+            except Application.DoesNotExist:
+                each_authorization.latest_app = None
+
+        context['proxy_bundle_authorizations'] = proxy_bundle_authorizations
+        context['proxy_bundle_authorizations_expired'] = proxy_bundle_authorizations_expired
+        context['manual_authorizations'] = manual_authorizations
+        context['manual_authorizations_expired'] = manual_authorizations_expired
+        return context

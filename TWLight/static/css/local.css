@@ -439,16 +439,22 @@ A few spots just need padding instead of margin.
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 
+.top-border.panel-body {
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
 .transparent-panel {
   border-color: transparent;
 }
+
 .panel-heading {
   border: solid #ddd;
   border-width: 1px 1px 0 1px;
   background-color:red;
   font-weight: 700;
   }
-
 
 .banner-flag {
   background-image: url("../img/banner.png"); 
@@ -500,6 +506,34 @@ A few spots just need padding instead of margin.
 	text-align:center;
 }
 
+.btn-extra-large{
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+.btn-extra-large:after{
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.app-list{
+    word-break: break-all;
+    white-space: normal;
+}
+
+.no-padding {
+    margin-right: -14px;
+    margin-left: -14px;
+    margin-top: -14px;
+}
+
+.expiry-warning.panel-body  {
+    border:1px solid #f09b90;
+    -webkit-box-shadow: 0 1px 1px rgba(255,0,0,.05);
+    box-shadow: 0 1px 1px rgba(255,0,0,.05);
+}
 /* Custom page break for long titles */
 /*
 @media (max-width: 1127px) and (min-width: 992px) {

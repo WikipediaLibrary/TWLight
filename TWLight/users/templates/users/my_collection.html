@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load l10n %}
+
+{% block content %}
+  <h3>Your collection</h3>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#manual">Manual access</a></li>
+      <li><a data-toggle="tab" href="#proxy">Proxy/bundle access</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="manual" class="tab-pane fade in active">
+        <br>
+        <div class="row row-flex">
+          {% for each_authorization in manual_authorizations %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% empty %}
+            <div class="col-xs-12">
+              {% trans "You have no active collection." %}
+            </div>
+          {% endfor %}
+        </div>
+        {%  if manual_authorizations_expired %}
+          <h4>Expired</h4>
+          <hr>
+        {% endif %}
+        <div class="row row-flex">
+          {% for each_authorization in manual_authorizations_expired %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div id="proxy" class="tab-pane fade">
+        <br>
+        <div class="row row-flex">
+          {% for each_authorization in proxy_bundle_authorizations %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% empty %}
+            <div class="col-xs-12">
+              {% trans "You have no active collection." %}
+            </div>
+          {% endfor %}
+        </div>
+        {%  if proxy_bundle_authorizations_expired %}
+          <h4>Expired</h4>
+          <hr>
+        {% endif %}
+        <div class="row row-flex">
+          {% for each_authorization in proxy_bundle_authorizations_expired %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
+        </div>
+       </div>
+    </div>
+{% endblock %}
