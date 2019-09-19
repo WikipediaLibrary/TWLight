@@ -597,30 +597,28 @@ class CollectionUserView(SelfOnly, ListView):
         context = super(CollectionUserView, self).get_context_data(**kwargs)
         editor = self.get_object()
         today = datetime.date.today()
-        proxy_bundle_authorizations = Authorization.objects.filter(Q(authorized_user=editor.user),
-                                                                   Q(date_expires__gte=today) |
+        proxy_bundle_authorizations = Authorization.objects.filter(Q(date_expires__gte=today) |
                                                                    Q(date_expires=None),
-                                                                   Q(partner__authorization_method=Partner.PROXY) |
-                                                                   Q(partner__authorization_method=Partner.BUNDLE)
+                                                                   authorized_user=editor.user,
+                                                                   partner__authorization_method__in=
+                                                                   [Partner.PROXY, Partner.BUNDLE]
                                                                    ).order_by('partner')
-        proxy_bundle_authorizations_expired = Authorization.objects.filter(Q(authorized_user=editor.user),
-                                                                        Q(date_expires__lt=today),
-                                                                        Q(partner__authorization_method=Partner.PROXY) |
-                                                                        Q(partner__authorization_method=Partner.BUNDLE)
+        proxy_bundle_authorizations_expired = Authorization.objects.filter(authorized_user=editor.user,
+                                                                           date_expires__lt=today,
+                                                                           partner__authorization_method__in=
+                                                                           [Partner.PROXY, Partner.BUNDLE]
                                                                            ).order_by('partner')
-        manual_authorizations = Authorization.objects.filter(Q(authorized_user=editor.user),
-                                                             Q(date_expires__gte=today) |
+        manual_authorizations = Authorization.objects.filter(Q(date_expires__gte=today) |
                                                              Q(date_expires=None),
-                                                             Q(partner__authorization_method=Partner.EMAIL) |
-                                                             Q(partner__authorization_method=Partner.CODES) |
-                                                             Q(partner__authorization_method=Partner.LINK)
+                                                             authorized_user=editor.user,
+                                                             partner__authorization_method__in=
+                                                             [Partner.EMAIL, Partner.CODES, Partner.LINK]
                                                             ).order_by('partner')
-        manual_authorizations_expired = Authorization.objects.filter(Q(authorized_user=editor.user),
-                                                             Q(date_expires__lt=today),
-                                                             Q(partner__authorization_method=Partner.EMAIL) |
-                                                             Q(partner__authorization_method=Partner.CODES) |
-                                                             Q(partner__authorization_method=Partner.LINK)
-                                                            ).order_by('partner')
+        manual_authorizations_expired = Authorization.objects.filter(authorized_user=editor.user,
+                                                                     date_expires__lt=today,
+                                                                     partner__authorization_method__in=
+                                                                     [Partner.EMAIL, Partner.CODES, Partner.LINK]
+                                                                     ).order_by('partner')
         for authorization_list in [manual_authorizations, proxy_bundle_authorizations]:
             for each_authorization in authorization_list:
                 if each_authorization.date_expires is not None:
