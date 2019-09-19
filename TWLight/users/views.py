@@ -621,45 +621,29 @@ class CollectionUserView(SelfOnly, ListView):
                                                              Q(partner__authorization_method=Partner.CODES) |
                                                              Q(partner__authorization_method=Partner.LINK)
                                                             ).order_by('partner')
-        for each_authorization in proxy_bundle_authorizations:
-            if each_authorization.date_expires is not None:
-                if each_authorization.date_expires - today < timedelta(days=30):
-                    each_authorization.about_to_expire = True
-                    try:
-                        each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
-                                                                                   editor=editor
-                                                                                   ).latest('date_closed')
-                    except Application.DoesNotExist:
-                        each_authorization.latest_app = None
+        for authorization_list in [manual_authorizations, proxy_bundle_authorizations]:
+            for each_authorization in authorization_list:
+                if each_authorization.date_expires is not None:
+                    if each_authorization.date_expires - today < timedelta(days=30):
+                        each_authorization.about_to_expire = True
+                        try:
+                            each_authorization.latest_app = Application.objects.filter(
+                                                                                    partner=each_authorization.partner,
+                                                                                    editor=editor
+                                                                                      ).latest('date_closed')
+                        except Application.DoesNotExist:
+                            each_authorization.latest_app = None
 
-        for each_authorization in proxy_bundle_authorizations_expired:
-            each_authorization.is_expired = True
-            try:
-                each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
-                                                                           editor=editor
-                                                                           ).latest('date_closed')
-            except Application.DoesNotExist:
-                each_authorization.latest_app = None
 
-        for each_authorization in manual_authorizations:
-            if each_authorization.date_expires is not None:
-                if each_authorization.date_expires - today < timedelta(days=30):
-                    each_authorization.about_to_expire = True
-                    try:
-                        each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
-                                                                                   editor=editor
-                                                                                   ).latest('date_closed')
-                    except Application.DoesNotExist:
-                        each_authorization.latest_app = None
-
-        for each_authorization in manual_authorizations_expired:
-            each_authorization.is_expired = True
-            try:
-                each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
-                                                                           editor=editor
-                                                                           ).latest('date_closed')
-            except Application.DoesNotExist:
-                each_authorization.latest_app = None
+        for authorization_list in [manual_authorizations_expired, proxy_bundle_authorizations_expired]:
+            for each_authorization in authorization_list:
+                each_authorization.is_expired = True
+                try:
+                    each_authorization.latest_app = Application.objects.filter(partner=each_authorization.partner,
+                                                                               editor=editor
+                                                                               ).latest('date_closed')
+                except Application.DoesNotExist:
+                    each_authorization.latest_app = None
 
         context['proxy_bundle_authorizations'] = proxy_bundle_authorizations
         context['proxy_bundle_authorizations_expired'] = proxy_bundle_authorizations_expired
