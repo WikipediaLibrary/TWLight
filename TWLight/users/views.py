@@ -106,7 +106,6 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         editor = self.get_object()
         context['editor'] = editor # allow for more semantic templates
-        context['object_list'] = editor.applications.model.include_invalid.filter(editor=editor).order_by('status', '-date_closed')
         context['form'] = EditorUpdateForm(instance=editor)
         context['language_form'] = SetLanguageForm(user=self.request.user)
         context['email_form'] = UserEmailForm(user=self.request.user)
@@ -583,7 +582,7 @@ class AuthorizedUsers(APIView):
         return Response(serializer.data)
 
 
-class ListApplicationsUserView(SelfOnly, ListView):
+class CollectionUserView(SelfOnly, ListView):
     model = Editor
     template_name = 'users/my_collection.html'
 
@@ -595,7 +594,7 @@ class ListApplicationsUserView(SelfOnly, ListView):
             raise Http404
 
     def get_context_data(self, **kwargs):
-        context = super(ListApplicationsUserView, self).get_context_data(**kwargs)
+        context = super(CollectionUserView, self).get_context_data(**kwargs)
         editor = self.get_object()
         today = datetime.date.today()
         proxy_bundle_authorizations = Authorization.objects.filter(Q(authorized_user=editor.user),
@@ -666,4 +665,23 @@ class ListApplicationsUserView(SelfOnly, ListView):
         context['proxy_bundle_authorizations_expired'] = proxy_bundle_authorizations_expired
         context['manual_authorizations'] = manual_authorizations
         context['manual_authorizations_expired'] = manual_authorizations_expired
+        return context
+
+
+class ListApplicationsUserView(SelfOnly, ListView):
+    model = Editor
+    template_name = 'users/my_applications.html'
+
+    def get_object(self):
+        assert 'pk' in self.kwargs.keys()
+        try:
+            return Editor.objects.get(pk=self.kwargs['pk'])
+        except Editor.DoesNotExist:
+            raise Http404
+
+    def get_context_data(self, **kwargs):
+        context = super(ListApplicationsUserView, self).get_context_data(**kwargs)
+        editor = self.get_object()
+        context['object_list'] = editor.applications.model.include_invalid.filter(editor=editor
+                                                                                  ).order_by('status', '-date_closed')
         return context

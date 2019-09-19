@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load l10n %}
+
+{% block content %}
+  <h3>Your applications</h3>
+  {% for app in object_list %}
+    <div class="row">
+      <div class="col-xs-4 col-sm-2">
+        <span class="label label{{ app.get_bootstrap_class }} pull-right">
+          {% if app.parent %}
+            Renewal -
+          {% endif %}
+          {{ app.get_status_display }}
+        </span>
+      </div>
+      <div class="col-xs-8 col-sm-6">
+        <h4>
+        <a href="{{ app.get_absolute_url }}">
+          {{ app.partner }}
+        </a>
+        </h4>
+        {% if app.imported %}
+          {% comment %} Translators: On the page listing applications, this shows next to an application which was imported to the website. {% endcomment %}
+          {% trans 'Imported application' %}
+        {% elif app.get_version_count > 1 %} {# first version is original submission, not later review #}
+          {% if app.get_latest_reviewer %}
+            {% comment %} Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ reviewer }} or {{ review_date }}. {% endcomment %}
+            {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
+              Last reviewed by {{ reviewer }} on {{ review_date }}
+            {% endblocktrans %}
+          {% else %}
+            {% comment %} Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ review_date }}. {% endcomment %}
+            {% blocktrans trimmed with review_date=app.get_latest_review_date|localize %}
+              Last reviewed on {{ review_date }}
+            {% endblocktrans %}
+          {% endif %}
+        {% else %}
+          {% comment %} Translators: On the page listing applications, this shows next to an application which has not yet been reviewed. {% endcomment %}
+          {% trans 'Not yet reviewed.' %}
+        {% endif %}
+        <br />
+      </div>
+      {% ifequal app.editor.user.pk user.pk %}
+        {% if app.status == app.SENT %}
+          <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-0">
+              <strong>{% trans "Has your account expired?" %}</strong> <br />
+              {% if app.is_renewable %}
+                <a class="btn btn-default btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
+              {% else %}
+                <em>{% trans "Renewals are either not required, not available right now, or you have already requested a renewal." %}</em>
+              {% endif %}
+          </div>
+        {% endif %}
+      {% endifequal %}
+      {% if not forloop.last %}
+        <div class="col-sm-10 col-sm-offset-2 col-xs-12">
+          <hr />
+        </div>
+      {% endif %}
+    </div>
+  {% empty %}
+    {% trans 'No applications right now.' %}
+  {% endfor %}
+{% endblock %}

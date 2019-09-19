@@ -3,10 +3,13 @@
 {% load l10n %}
 
 {% block content %}
-  <h3>Your collection</h3>
+  {% comment %} Translators: Heading of the collection page where users can view all partners they are authorized to access with other relevant information. {% endcomment %}
+  <h3>{% trans 'Your collection' %}</h3>
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#manual">Manual access</a></li>
-      <li><a data-toggle="tab" href="#proxy">Proxy/bundle access</a></li>
+      {% comment %} Translators: Tab label (1 of 2) for the page listing all partners which can accessed manually. {% endcomment %}
+      <li class="active"><a data-toggle="tab" href="#manual">{%  trans 'Manual access' %}</a></li>
+      {% comment %} Translators: Tab label (2 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access). {% endcomment %}
+      <li><a data-toggle="tab" href="#proxy">{%  trans 'Proxy/bundle access' %}</a></li>
     </ul>
     <div class="tab-content">
       <div id="manual" class="tab-pane fade in active">
@@ -18,12 +21,14 @@
             </div>
           {% empty %}
             <div class="col-xs-12">
-              {% trans "You have no active collection." %}
+              {% comment %} Translators: On the collection page (manual access tab), this text is displayed when the user has no active collection. {% endcomment %}
+              {% trans 'You have no active collection.' %}
             </div>
           {% endfor %}
         </div>
         {%  if manual_authorizations_expired %}
-          <h4>Expired</h4>
+          {% comment %} Translators: Heading for the section which lists all of the user's expired collection. {% endcomment %}
+          <h4>{% trans 'Expired' %}</h4>
           <hr>
         {% endif %}
         <div class="row row-flex">
@@ -43,12 +48,14 @@
             </div>
           {% empty %}
             <div class="col-xs-12">
-              {% trans "You have no active collection." %}
+              {% comment %} Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collection. {% endcomment %}
+              {% trans 'You have no active collection.' %}
             </div>
           {% endfor %}
         </div>
         {%  if proxy_bundle_authorizations_expired %}
-          <h4>Expired</h4>
+          {% comment %} Translators: Heading for the section which lists all of the user's expired collection. {% endcomment %}
+          <h4>{% trans 'Expired' %}</h4>
           <hr>
         {% endif %}
         <div class="row row-flex">

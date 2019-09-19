@@ -84,14 +84,16 @@
             <ul class="dropdown-menu">
               <li>
                 <a href="{{ home_url }}">
-                  {% comment %} Translators: {% endcomment %}
+                  <i class="fa fa-user-o" aria-hidden="true"></i>
+                  {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their respective profiles. {% endcomment %}
                   {% trans "Profile" %}
                 </a>
               </li>
               {% if user.is_superuser %}
                 <li>
                   <a href="{% url 'admin:index' %}">
-                    {% comment %} Translators: Shown in the top bar of almost every page when the current user is a superuser, linking to the administrator interface. {% endcomment %}
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown when the current user is a superuser, linking to the administrator interface. {% endcomment %}
                     {% trans "Admin" %}
                   </a>
                 </li>
@@ -101,24 +103,22 @@
                 <a href="
                   {% if user.editor %}
                     {%  url 'users:my_collection' user.editor.pk %}
-                  {% else %}
-                    {%  url 'users:my_collection' user.pk %}
                   {% endif %}
                 ">
-                  {% comment %} Translators: {% endcomment %}
+                  <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                  {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their collection. {% endcomment %}
                   {% trans "Collection" %}
                 </a>
               </li>
               <li>
                 <a href="
                   {% if user.editor %}
-                    {%  url 'users:my_collection' user.editor.pk %}
-                  {% else %}
-                    {%  url 'users:my_collection' user.pk %}
+                    {%  url 'users:my_applications' user.editor.pk %}
                   {% endif %}
                 ">
-                  {% comment %} Translators: {% endcomment %}
-                  {% trans "Application" %}
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;
+                  {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications. {% endcomment %}
+                  {% trans "Applications" %}
                 </a>
               </li>
             </ul>
@@ -126,7 +126,7 @@
         {% endif %}
       </div>
       
-        <ul class="nav nav-pills navbar-right">
+      <ul class="nav nav-pills navbar-right">
       <li role="presentation" class="mobile-menu">
         <a href="{% url 'partners:filter' %}">
           {% comment %} Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners. {% endcomment %}
