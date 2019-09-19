@@ -41,7 +41,7 @@
           {% comment %} Translators: Labels the button that links to the renewal url. {% endcomment %}
           <a href="{% url 'applications:renew' each_authorization.latest_app.pk %}" class="btn btn-primary pull-right" role="button">{% trans 'Renew' %}</a><div class="clearfix"></div>
         {% endif %}
-        <span class="pull-right"><small>Expires on: {{ each_authorization.date_expires }}</small></span>
+        <span class="pull-right" {% if each_authorization.about_to_expire %}style="color: #bf4d3d"{% endif %}><small>Expires on: {{ each_authorization.date_expires }}</small></span>
       {% endif %}
     {%  if each_authorization.is_expired and each_authorization.latest_app.pk %}
       {% comment %} Translators: Labels the button that links to the renewal url. {% endcomment %}
