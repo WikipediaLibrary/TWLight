@@ -10,7 +10,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-09-03 17:04+0000\n"
-"PO-Revision-Date: 2019-09-06 05:23:27+0000\n"
+"PO-Revision-Date: 2019-09-19 12:52:23+0000\n"
 "Language: ta\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -599,7 +599,6 @@ msgstr ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
 #: TWLight/applications/templates/applications/send_partner.html:86
-#, invalid-plural
 msgid "Contact"
 msgid_plural "Contacts"
 msgstr[0] ""
@@ -1617,7 +1616,7 @@ msgstr ""
 
 #. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:586
-#, invalid-plural, python-format
+#, python-format
 msgid "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
 msgid_plural "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
 msgstr[0] ""
@@ -1625,7 +1624,7 @@ msgstr[1] ""
 
 #. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:595
-#, invalid-plural, python-format
+#, python-format
 msgid "Number of unique users with approved applications (all time): %(unique_users_approved_or_sent)s"
 msgid_plural "Number of unique users with approved applications (all time): %(unique_users_approved_or_sent)s"
 msgstr[0] ""

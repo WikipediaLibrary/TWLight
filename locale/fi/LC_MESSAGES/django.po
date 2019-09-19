@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-09-03 17:03+0000\n"
-"PO-Revision-Date: 2019-09-06 05:23:20+0000\n"
+"PO-Revision-Date: 2019-09-19 12:52:16+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -641,7 +641,7 @@ msgstr ""
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:174
 msgid "Select code:"
-msgstr ""
+msgstr "Valitse koodi:"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:195
@@ -1410,7 +1410,7 @@ msgstr ""
 #. Translators: This labels a button for uploading files containing lists of access codes.
 #: TWLight/resources/templates/resources/csv_form.html:23
 msgid "Upload"
-msgstr ""
+msgstr "Tallenna"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:36
