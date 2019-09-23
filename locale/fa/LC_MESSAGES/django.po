@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-09-03 17:03+0000\n"
-"PO-Revision-Date: 2019-09-09 17:38:50+0000\n"
+"PO-Revision-Date: 2019-09-23 16:12:21+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1677,7 +1677,7 @@ msgstr ""
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:26
 msgid "Link to {{ partner }} signup page"
-msgstr ""
+msgstr "لینک به {{ partner }} صفحهٔ نام‌نویسی"
 
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #: TWLight/resources/templates/resources/partner_tile.html:59
@@ -2349,7 +2349,7 @@ msgstr ""
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:149
 msgid "Update email"
-msgstr ""
+msgstr "بروزرسانی ایمیل"
 
 #. Translators: Users must agree to the website terms of use.
 #: TWLight/users/models.py:64
@@ -2394,12 +2394,12 @@ msgstr "شناسهٔ حساب کاربری ویکی‌پدیا"
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
 #: TWLight/users/models.py:132
 msgid "Wikipedia groups"
-msgstr ""
+msgstr "گروه‌های ویکی‌پدیا"
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
 #: TWLight/users/models.py:135
 msgid "Wikipedia user rights"
-msgstr ""
+msgstr "اختیارات کاربری ویکی‌پدیا"
 
 #. Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
 #: TWLight/users/models.py:139
@@ -2485,7 +2485,7 @@ msgstr "نام کاربری *"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/)
 #: TWLight/users/templates/users/editor_detail_data.html:24
 msgid "CentralAuth"
-msgstr ""
+msgstr "ورود مرکزی"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's description of their Wikipedia edits.
 #: TWLight/users/templates/users/editor_detail_data.html:34
