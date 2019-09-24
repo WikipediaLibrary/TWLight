@@ -17,10 +17,10 @@
     <div class="col-md-4 col-xs-6">
       <a href="{% url 'users:my_collection' editor.pk %}" class="btn btn-default btn-lg btn-block btn-extra-large"><i class="fa fa-folder-open-o fa-4x pull-left" aria-hidden="true"></i>
         <p class="app-list"  style="font-size:25px; float:left">
-          {% comment %} Translators: Line one of two in a button on users' profile page which when clicked takes users to a page with their collection. {% endcomment %}
+          {% comment %} Translators: Line one of two in a button on users' profile page which when clicked takes users to their collection page. {% endcomment %}
           {% trans 'Your collection' %}
-        </p>
-        <p class="app-list" style="font-size:15px; float:left">
+        </p><br>
+        <p class="app-list hidden-xs" style="font-size:15px; float:left">
           {% comment %} Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection. {% endcomment %}
           {% trans 'A collective list of partners you are authorized to access' %}
         </p>
@@ -29,10 +29,10 @@
     <div class="col-md-4 col-xs-6">
       <a href="{% url 'users:my_applications' editor.pk %}" class="btn btn-default btn-lg btn-block btn-extra-large"><i class="fa fa-file-text-o fa-4x pull-left" aria-hidden="true"></i>
         <p class="app-list"  style="font-size:25px; float:left">
-          {% comment %} Translators: Line one of two in a button on users' profile page which when clicked takes users to a page with their collection. {% endcomment %}
+          {% comment %} Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page. {% endcomment %}
           {% trans 'Your applications' %}
-        </p>
-        <p class="app-list" style="font-size:15px; float:left">
+        </p><br>
+        <p class="app-list hidden-xs" style="font-size:15px; float:left">
           {% comment %} Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection. {% endcomment %}
           {% trans 'Both historical and current, made to various partners' %}
         </p>

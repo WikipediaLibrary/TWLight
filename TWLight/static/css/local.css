@@ -519,7 +519,7 @@ A few spots just need padding instead of margin.
 }
 
 .app-list{
-    word-break: break-all;
+    word-break: break-word;
     white-space: normal;
 }
 
@@ -533,6 +533,11 @@ A few spots just need padding instead of margin.
     border:1px solid #f09b90;
     -webkit-box-shadow: 0 1px 1px rgba(255,0,0,.05);
     box-shadow: 0 1px 1px rgba(255,0,0,.05);
+}
+
+.inline-header {
+  display: inline-block;
+  margin-top: 0;
 }
 /* Custom page break for long titles */
 /*

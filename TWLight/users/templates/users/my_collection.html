@@ -3,67 +3,71 @@
 
 {% block content %}
   {% comment %} Translators: Heading of the collection page where users can view all partners they are authorized to access with other relevant information. {% endcomment %}
-  <h3>{% trans 'Your collection' %}</h3>
-    <ul class="nav nav-tabs">
-      {% comment %} Translators: Tab label (1 of 2) for the page listing all partners which can accessed manually. {% endcomment %}
-      <li class="active"><a data-toggle="tab" href="#manual">{%  trans 'Manual access' %}</a></li>
-      {% comment %} Translators: Tab label (2 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access). {% endcomment %}
-      <li><a data-toggle="tab" href="#proxy">{%  trans 'Proxy/bundle access' %}</a></li>
-    </ul>
-    <div class="tab-content">
-      <div id="manual" class="tab-pane fade in active">
-        <br>
-        <div class="row row-flex">
-          {% for each_authorization in manual_authorizations %}
-            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-              {% include "users/collection_tile.html" %}
-            </div>
-          {% empty %}
-            <div class="col-xs-12">
-              {% comment %} Translators: On the collection page (manual access tab), this text is displayed when the user has no active collection. {% endcomment %}
-              {% trans 'You have no active collection.' %}
-            </div>
-          {% endfor %}
-        </div>
-        {%  if manual_authorizations_expired %}
-          {% comment %} Translators: Heading for the section which lists all of the user's expired collection. {% endcomment %}
-          <h4>{% trans 'Expired' %}</h4>
-          <hr>
-        {% endif %}
-        <div class="row row-flex">
-          {% for each_authorization in manual_authorizations_expired %}
-            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-              {% include "users/collection_tile.html" %}
-            </div>
-          {% endfor %}
-        </div>
+  <h3 class="inline-header">{% trans 'Your collection' %}</h3>
+  <a href="{% url 'users:my_applications' user.editor.pk %}" class="btn btn-default pull-right">
+    {% comment %} Translators: A button on the 'your collection' page which when clicked takes users their applications page. {% endcomment %}
+    {% trans "Your applications" %}
+  </a>
+  <ul class="nav nav-tabs">
+    {% comment %} Translators: Tab label (1 of 2) for the page listing all partners which can accessed manually. {% endcomment %}
+    <li class="active"><a data-toggle="tab" href="#manual">{%  trans 'Manual access' %}</a></li>
+    {% comment %} Translators: Tab label (2 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access). {% endcomment %}
+    <li><a data-toggle="tab" href="#proxy">{%  trans 'Proxy/bundle access' %}</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="manual" class="tab-pane fade in active">
+      <br>
+      <div class="row row-flex">
+        {% for each_authorization in manual_authorizations %}
+          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+            {% include "users/collection_tile.html" %}
+          </div>
+        {% empty %}
+          <div class="col-xs-12">
+            {% comment %} Translators: On the collection page (manual access tab), this text is displayed when the user has no active collection. {% endcomment %}
+            {% trans 'You have no active collections.' %}
+          </div>
+        {% endfor %}
       </div>
-      <div id="proxy" class="tab-pane fade">
-        <br>
-        <div class="row row-flex">
-          {% for each_authorization in proxy_bundle_authorizations %}
-            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-              {% include "users/collection_tile.html" %}
-            </div>
-          {% empty %}
-            <div class="col-xs-12">
-              {% comment %} Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collection. {% endcomment %}
-              {% trans 'You have no active collection.' %}
-            </div>
-          {% endfor %}
-        </div>
-        {%  if proxy_bundle_authorizations_expired %}
-          {% comment %} Translators: Heading for the section which lists all of the user's expired collection. {% endcomment %}
-          <h4>{% trans 'Expired' %}</h4>
-          <hr>
-        {% endif %}
-        <div class="row row-flex">
-          {% for each_authorization in proxy_bundle_authorizations_expired %}
-            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-              {% include "users/collection_tile.html" %}
-            </div>
-          {% endfor %}
-        </div>
-       </div>
+      {%  if manual_authorizations_expired %}
+        {% comment %} Translators: Heading for the section which lists all of the user's expired collection. {% endcomment %}
+        <h4>{% trans 'Expired' %}</h4>
+        <hr>
+      {% endif %}
+      <div class="row row-flex">
+        {% for each_authorization in manual_authorizations_expired %}
+          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+            {% include "users/collection_tile.html" %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
+    <div id="proxy" class="tab-pane fade">
+      <br>
+      <div class="row row-flex">
+        {% for each_authorization in proxy_bundle_authorizations %}
+          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+            {% include "users/collection_tile.html" %}
+          </div>
+        {% empty %}
+          <div class="col-xs-12">
+            {% comment %} Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collection. {% endcomment %}
+            {% trans 'You have no active collection.' %}
+          </div>
+        {% endfor %}
+      </div>
+      {%  if proxy_bundle_authorizations_expired %}
+        {% comment %} Translators: Heading for the section which lists all of the user's expired collection. {% endcomment %}
+        <h4>{% trans 'Expired' %}</h4>
+        <hr>
+      {% endif %}
+      <div class="row row-flex">
+        {% for each_authorization in proxy_bundle_authorizations_expired %}
+          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+            {% include "users/collection_tile.html" %}
+          </div>
+        {% endfor %}
+      </div>
+     </div>
+  </div>
 {% endblock %}
