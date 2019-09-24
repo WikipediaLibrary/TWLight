@@ -2,20 +2,19 @@
 from __future__ import unicode_literals
 
 import hashlib
+import logging
 import urllib
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
-from django.core.exceptions import (
-    ObjectDoesNotExist,
-    SuspiciousOperation,
-    ValidationError,
-)
+from django.core.exceptions import SuspiciousOperation, ValidationError
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Authorization
+
+logger = logging.getLogger(__name__)
 
 
 class EZProxyAuth(View):
@@ -29,19 +28,35 @@ class EZProxyAuth(View):
 
         try:
             authorizations = Authorization.objects.filter(authorized_user=request.user)
-            for authorization in authorizations:
-                if authorization.is_valid:
-                  partner = Partner.objects.get(authorization_method=Partner.PROXY, pk=authorization.partner_id)
-                  group = ""
-                  if partner:
-                      group = "P" + repr(partner.pk)
-                      stream = Stream.objects.get(authorization_method=Partner.PROXY, pk=authorization.stream_id)
-                      if stream:
-                          group += "S" + repr(stream.pk)
-                  if group:
-                      groups.append(group)
-        except ObjectDoesNotExist:
-            pass
+            logger.info(
+                "Editor {username} has the following authorizations: {authorizations}.".format(
+                    username=username, authorizations=authorizations
+                )
+            )
+        except Authorization.DoesNotExist:
+            authorizations = None
+
+        for authorization in authorizations:
+            if authorization.is_valid:
+                group = ""
+                try:
+                    partner = Partner.objects.get(
+                        authorization_method=Partner.PROXY, pk=authorization.partner_id
+                    )
+                    group += "P" + repr(partner.pk)
+                    try:
+                        stream = Stream.objects.get(
+                            authorization_method=Partner.PROXY,
+                            pk=authorization.stream_id,
+                        )
+                        group += "S" + repr(stream.pk)
+                    except Stream.DoesNotExist:
+                        pass
+                except Partner.DoesNotExist:
+                    pass
+
+                groups.append(group)
+                logger.info("{group}.".format(group=group))
 
         if url:
             try:
@@ -75,11 +90,16 @@ class EZProxyTicket(object):
             packet += "$g" + "+".join(groups)
 
         packet += "$e"
+        logger.info(
+            "Editor {username} has the following EZProxy group packet: {packet}.".format(
+                username=user, packet=packet
+            )
+        )
         ticket = urllib.quote(
             hashlib.sha512(secret + user + packet).hexdigest() + packet
         )
         self.starting_point_url = (
-                ezproxy_url + "/login?user=" + user + "&ticket=" + ticket
+            ezproxy_url + "/login?user=" + user + "&ticket=" + ticket
         )
 
     def url(self, url):
