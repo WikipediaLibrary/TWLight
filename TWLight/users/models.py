@@ -503,7 +503,7 @@ class Authorization(models.Model):
             return None
 
     def about_to_expire(self):
-        # less than 30 days but greater than -1 day is what we consider an authorization about to expire
+        # less than 30 days but greater than -1 day is when we consider an authorization about to expire
         today = date.today()
         if self.date_expires and self.date_expires - today < timedelta(days=30) and not self.date_expires < today:
             return True
