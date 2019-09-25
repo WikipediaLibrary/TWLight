@@ -27,13 +27,6 @@ class ValidApplicationsManager(models.Manager):
             ).exclude(status=Application.INVALID)
 
 
-def get_latest_app(partner, editor):
-    try:
-        return Application.objects.filter(partner=partner, editor=editor).latest('date_closed')
-    except Application.DoesNotExist:
-        return None
-
-
 class Application(models.Model):
     class Meta:
         app_label = 'applications'

@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date
 import json
 
 from crispy_forms.helper import FormHelper
@@ -36,7 +36,7 @@ from reversion.models import Version
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm, UserEmailForm
 from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
-from TWLight.applications.models import Application, get_latest_app
+from TWLight.applications.models import Application
 
 import datetime
 
@@ -619,17 +619,24 @@ class CollectionUserView(SelfOnly, ListView):
                                                                      partner__authorization_method__in=
                                                                      [Partner.EMAIL, Partner.CODES, Partner.LINK]
                                                                      ).order_by('partner')
-        for authorization_list in [manual_authorizations, proxy_bundle_authorizations]:
-            for each_authorization in authorization_list:
-                if each_authorization.date_expires is not None:
-                    if each_authorization.date_expires - today < timedelta(days=30):
-                        each_authorization.about_to_expire = True
-                        each_authorization.latest_app = get_latest_app(partner=each_authorization.partner, editor=editor)
 
-        for authorization_list in [manual_authorizations_expired, proxy_bundle_authorizations_expired]:
+        for authorization_list in [manual_authorizations, proxy_bundle_authorizations,
+                                   manual_authorizations_expired, proxy_bundle_authorizations_expired]:
             for each_authorization in authorization_list:
-                each_authorization.is_expired = True
-                each_authorization.latest_app = get_latest_app(partner=each_authorization.partner, editor=editor)
+                if each_authorization.about_to_expire or each_authorization.is_expired:
+                    each_authorization.latest_app = each_authorization.get_latest_app()
+                    if not each_authorization.latest_app.is_renewable:
+                        try:
+                            each_authorization.open_app = Application.objects.filter(editor=editor,
+                                                                                     status__in=(
+                                                                                                 Application.PENDING,
+                                                                                                 Application.QUESTION,
+                                                                                                 Application.APPROVED
+                                                                                                 ),
+                                                                                     partner=each_authorization.partner
+                                                                                     ).latest('date_created')
+                        except Application.DoesNotExist:
+                            each_authorization.open_app = None
 
         context['proxy_bundle_authorizations'] = proxy_bundle_authorizations
         context['proxy_bundle_authorizations_expired'] = proxy_bundle_authorizations_expired

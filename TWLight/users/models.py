@@ -28,7 +28,7 @@ them to the coordinators group. They can also directly create Django user
 accounts without attached Editors in the admin site, if for some reason it's
 useful to have account holders without attached Wikipedia data.
 """
-from datetime import datetime, timedelta
+from datetime import datetime, date, timedelta
 import json
 import logging
 import urllib2
@@ -494,3 +494,25 @@ class Authorization(models.Model):
             company_name=company_name,
             stream_name=stream_name,
         )
+
+    def get_latest_app(self):
+        from TWLight.applications.models import Application
+        try:
+            return Application.objects.filter(partner=self.partner, editor=self.authorized_user.editor).latest('id')
+        except Application.DoesNotExist:
+            return None
+
+    def about_to_expire(self):
+        # less than 30 days but greater than -1 day is what we consider an authorization about to expire
+        today = date.today()
+        if self.date_expires and self.date_expires - today < timedelta(days=30) and not self.date_expires < today:
+            return True
+        else:
+            return False
+
+    def is_expired(self):
+        today = date.today()
+        if self.date_expires and self.date_expires < today:
+            return True
+        else:
+            return False
