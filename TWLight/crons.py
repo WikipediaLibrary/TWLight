@@ -32,3 +32,11 @@ class UserRenewalNoticeCronJob(CronJobBase):
 
     def do(self):
         management.call_command('user_renewal_notice')
+
+
+class ProxyWaitlistDisableCronJob(CronJobBase):
+    schedule = Schedule(run_every_mins=DAILY)
+    code = 'resources.proxy_waitlist_disable'
+
+    def do(self):
+        management.call_command('proxy_waitlist_disable')
