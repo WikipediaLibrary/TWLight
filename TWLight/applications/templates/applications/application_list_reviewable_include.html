@@ -2,6 +2,11 @@
 {% load l10n %}
 
 {% if object_list %}
+  <i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;
+  <span class="label label-primary">
+    {% trans "Status" %}
+  </span>&nbsp;
+  {% trans "Application ID" %} &ndash; {% trans "Username" %} - {% trans "Partner (Collection)" %} &mdash; {% trans "Last reviewed" %} &mdash; <em>{% trans "Date applied" %}</em>
   <form method="post" action="{% url 'applications:batch_edit' %}" id="batch_edit">
     {% csrf_token %}
     <div class="form-group">
@@ -10,7 +15,7 @@
           <input type="checkbox" id="toggle_all">
           <strong>
             {% comment %}Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.{% endcomment %}
-            {% trans "Select/deselect all" %}            
+            {% trans "Select/deselect all" %}
           </strong>
         </li>
         {% for app in object_list %}
@@ -19,13 +24,8 @@
             <span class="label label{{ app.get_bootstrap_class }}">
               {{ app.get_status_display }}
             </span>&nbsp;
-            {% if app.parent %}
-              <span class="label label-info">
-                {% trans "Renewal" %}
-              </span>&nbsp;
-            {% endif %}
             <a href="{{ app.get_absolute_url }}">
-              {{ app }}
+              {{ app.pk }} &ndash; {{ app }} {% if app.specific_stream %}({{ app.specific_stream }}){% endif %}
             </a>
             &mdash;
             {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
@@ -42,7 +42,12 @@
               {% trans 'Not yet reviewed.' %}
             {% endif %}
             &mdash;
-            <em>{{ app.date_created }}</em>
+            <em>{{ app.date_created }}</em>&nbsp;
+            {% if app.parent %}
+              <span class="label label-info">
+                {% trans "Renewal" %}
+              </span>
+            {% endif %}
           </li>
         {% endfor %}
       </ul>

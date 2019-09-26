@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-03 17:04+0000\n"
-"PO-Revision-Date: 2019-08-29 18:48:50+0000\n"
+"POT-Creation-Date: 2019-09-26 13:26+0000\n"
+"PO-Revision-Date: 2019-09-19 12:52:25+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -638,7 +638,7 @@ msgstr "当您处理下面的数据时，单击“标记为发送”按钮。"
 #: TWLight/applications/templates/applications/send_partner.html:86
 msgid "Contact"
 msgid_plural "Contacts"
-msgstr[0] ""
+msgstr[0] "{{PLURAL:GETTEXT|Contact|Contacts}"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/applications/templates/applications/send_partner.html:102
@@ -664,11 +664,13 @@ msgid ""
 "Use the dropdown menus to denote which editor will receive each code. Make "
 "sure to send each code via email before clicking 'Mark as sent'."
 msgstr ""
+"使用下拉菜单表示哪个编辑器将接收每个代码。在单击\"标记为已发送\"之前，请确保"
+"通过电子邮件发送每个代码。"
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:174
 msgid "Select code:"
-msgstr ""
+msgstr "选择角色："
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:195
@@ -743,7 +745,7 @@ msgstr "发送了软件"
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
 #: TWLight/applications/views.py:780
 msgid "You attempted to create a duplicate authorization."
-msgstr ""
+msgstr "您试图创建一个重复的授权。"
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:808
@@ -762,7 +764,7 @@ msgstr "批量更新成功。"
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1010
 msgid "Error: Code used multiple times."
-msgstr ""
+msgstr "错误：代码使用了多次。"
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
 #: TWLight/applications/views.py:1044
@@ -803,7 +805,7 @@ msgstr "消息"
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
 msgid "Receive a copy of this message"
-msgstr ""
+msgstr "接收此消息的副本"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
@@ -1158,7 +1160,7 @@ msgstr "您的维基百科图书馆应用程序已被列入名单"
 #. Translators: Shown to users when they successfully submit a new message using the contact us form.
 #: TWLight/emails/views.py:55
 msgid "Your message has been sent. We'll get back to you soon!"
-msgstr ""
+msgstr "您的信息已经发送。我们很快就会给您答复！"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
@@ -1244,9 +1246,9 @@ msgstr "上传的文件太大。"
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
 #: TWLight/resources/admin.py:159
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Line {line_num} has {num_columns} columns. Expected 2."
-msgstr "第{行序数}行第{列序数}列超过2条更新"
+msgstr "第{line_num}行第{num_columns}列超过2条更新"
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
 #: TWLight/resources/admin.py:169
@@ -1361,17 +1363,17 @@ msgstr "不可用"
 #. Translators: This is the name of the authorization method whereby user accounts are set up via an access code.
 #: TWLight/resources/models.py:188
 msgid "Access codes"
-msgstr ""
+msgstr "接入码"
 
 #. Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
 #: TWLight/resources/models.py:190
 msgid "Proxy"
-msgstr ""
+msgstr "代理"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #: TWLight/resources/models.py:192
 msgid "Library Bundle"
-msgstr ""
+msgstr "图书馆捆绑包"
 
 #. Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
 #: TWLight/resources/models.py:194
@@ -1433,6 +1435,8 @@ msgid ""
 "access code assignment. If this partner has collections, fill out user "
 "instructions on each collection instead."
 msgstr ""
+"编辑使用此合作伙伴的访问代码或免费注册网址的可选说明。通过电子邮件发送申请批"
+"准(链接)或访问代码分配。如果此合作伙伴有收藏，请填写每个收藏的用户说明。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
 #: TWLight/resources/models.py:245
@@ -1639,11 +1643,13 @@ msgid ""
 "containing the access codes, and the second the ID of the partner the code "
 "should be linked to."
 msgstr ""
+"要上传访问代码，请创建一个包含两列的.csv文件：第一列包含访问代码，第二列包含"
+"代码应该链接到的合作伙伴的标识。"
 
 #. Translators: This labels a button for uploading files containing lists of access codes.
 #: TWLight/resources/templates/resources/csv_form.html:23
 msgid "Upload"
-msgstr ""
+msgstr "上传"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:36
@@ -1895,7 +1901,7 @@ msgstr "账户可用性"
 #: TWLight/resources/templates/resources/partner_detail.html:548
 #: TWLight/resources/templates/resources/partner_detail.html:564
 msgid "Actual negative number visible to coordinators and superusers only"
-msgstr ""
+msgstr "仅对协调员和超级用户可见的实际负数"
 
 #. Translators: This is the label which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:559
@@ -1996,7 +2002,7 @@ msgstr "语言未知"
 #. Translators: On the page listing approved users, staff can unassign a code from a user. This is the title of the page which confirms the code removal.
 #: TWLight/resources/templates/resources/partner_unassign_code.html:8
 msgid "Unassign code?"
-msgstr ""
+msgstr "取消分配代码？"
 
 #. Translators: This message is displayed on the page where staff can unassign codes from users.
 #: TWLight/resources/templates/resources/partner_unassign_code.html:14
@@ -2561,7 +2567,7 @@ msgstr "跳转到应用度量"
 
 #: TWLight/templates/dashboard.html:79
 msgid "Average accounts per user"
-msgstr ""
+msgstr "每个用户的平均帐户"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
 #: TWLight/templates/dashboard.html:92
@@ -2722,7 +2728,7 @@ msgstr ""
 
 #: TWLight/users/admin.py:59
 msgid "authorizer"
-msgstr ""
+msgstr "授权人"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/authorization.py:225
@@ -2811,7 +2817,7 @@ msgstr "我接受"
 #: TWLight/users/forms.py:136
 msgid ""
 "Use my Wikipedia email address (will be updated the next time you login)."
-msgstr ""
+msgstr "使用我的维基百科电子邮件地址（下次登录时将更新）。"
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:149
@@ -2840,7 +2846,7 @@ msgstr ""
 #. Translators: Description of the option users have to enable or disable reminder emails for renewals
 #: TWLight/users/models.py:78
 msgid "Does this user want renewal reminder notices?"
-msgstr ""
+msgstr "这个用户需要更新提醒通知吗?"
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
 #: TWLight/users/models.py:110
@@ -2901,22 +2907,22 @@ msgstr ""
 #. Translators: This field records the date the authorization expires.
 #: TWLight/users/models.py:412
 msgid "The date this authorization expires."
-msgstr ""
+msgstr "此授权到期的日期。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
 #: TWLight/users/models.py:419
 msgid "The partner for which the editor is authorized."
-msgstr ""
+msgstr "编辑被授权的合作伙伴。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
 #: TWLight/users/models.py:426
 msgid "The stream for which the editor is authorized."
-msgstr ""
+msgstr "为其授权编辑器的流。"
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
 #: TWLight/users/models.py:430
 msgid "Have we sent a reminder email about this authorization?"
-msgstr ""
+msgstr "关于此授权，我们是否发送了提醒邮件？"
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:13
@@ -3555,7 +3561,7 @@ msgstr "您的信息已被更新。"
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
 #: TWLight/users/views.py:319
 msgid "Both the values cannot be blank. Either enter a email or check the box."
-msgstr ""
+msgstr "两个值都不能为空。要么输入电子邮件，要么选中复选框。"
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
 #: TWLight/users/views.py:342

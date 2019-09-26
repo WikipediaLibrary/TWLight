@@ -30,7 +30,7 @@
     {% endif %}
   {% else %}
     {% comment %}Translators: This is the title of the application page shown to users who are not a coordinator.{% endcomment %}
-    <h1>{% trans 'Application history' %}</h1>  
+    <h1>{% trans 'Application history' %}</h1>
   {% endif %}
   {% comment %}Translators: This is the title of the section of an application page containing information about the request.{% endcomment %}
   <h2>{% trans 'Application' %}</h2>
@@ -87,8 +87,22 @@
       <strong>{% trans 'Partner' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.partner }}
+      {{ object.partner }} 
+      {% comment %}Translators: This labels the partner as waitlisted (if that's the case) to help coordinators better assess application.{% endcomment %}
+      {% if object.partner.is_waitlisted %}
+        ({% trans 'Waitlisted' %})
+      {% endif %}
     </div>
+
+    {% if total_accounts_available_for_distribution is not None %}
+      <div class="col-xs-12 col-sm-4">
+        {% comment %}Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.{% endcomment %}
+        <strong>{% trans 'Accounts available' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ total_accounts_available_for_distribution }}
+      </div>
+    {% endif %}
 
     {% if object.specific_stream %}
       <div class="col-xs-12 col-sm-4">

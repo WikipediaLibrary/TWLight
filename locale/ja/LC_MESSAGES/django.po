@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-03 17:04+0000\n"
-"PO-Revision-Date: 2019-08-29 18:48:47+0000\n"
+"POT-Creation-Date: 2019-09-26 13:25+0000\n"
+"PO-Revision-Date: 2019-09-19 12:52:18+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -583,7 +583,7 @@ msgstr "受付保留中"
 
 #: TWLight/applications/templates/applications/request_for_application.html:50
 msgid "No partner data has been added yet."
-msgstr ""
+msgstr "提携先のデータは未記入です。"
 
 #. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file.
 #: TWLight/applications/templates/applications/request_for_application.html:63
@@ -672,6 +672,9 @@ msgid ""
 "Use the dropdown menus to denote which editor will receive each code. Make "
 "sure to send each code via email before clicking 'Mark as sent'."
 msgstr ""
+"どのコードをどの編集者に送るか、ドロップダウンメニューから選択して示します。"
+"コードをメールで送信完了したかどうか確認するまで「送信済み」ボタンを押さない"
+"でください。"
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:174
@@ -3340,6 +3343,7 @@ msgstr ""
 #, python-brace-format
 msgid "{username} signed up for a Wikipedia Library Card Platform account"
 msgstr ""
+"{username} さんがウィキペディア図書館カードプラットフォームに登録しました"
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/views.py:88
