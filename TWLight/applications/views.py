@@ -14,7 +14,6 @@ from reversion import revisions as reversion
 from reversion.models import Version
 from urlparse import urlparse
 
-
 from django import forms
 from django.conf import settings
 from django.contrib import messages
@@ -40,6 +39,7 @@ from TWLight.view_mixins import (CoordinatorOrSelf,
                                  SelfOnly,
                                  DataProcessingRequired,
                                  NotDeleted)
+from TWLight.applications.signals import no_more_accounts
 from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization, Editor
@@ -47,10 +47,12 @@ from TWLight.users.models import Authorization, Editor
 from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
                       PARTNER_FORM_BASE_FIELDS,
-                      get_output_for_application)
+                      get_output_for_application,
+                      get_active_authorizations,
+                      get_accounts_available,
+                      is_proxy_and_application_approved)
 from .forms import BaseApplicationForm, ApplicationAutocomplete
 from .models import Application
-
 
 logger = logging.getLogger(__name__)
 
@@ -753,7 +755,6 @@ class ListSentApplicationsView(_BaseListApplicationView):
         return context
 
 
-
 class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, UpdateView):
     """
     Allows Coordinators to:
@@ -767,9 +768,38 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     success_url = reverse_lazy('applications:list')
 
     def form_valid(self, form):
-        if self.object.status == Application.SENT:
-            self.object.sent_by = self.request.user
-            self.object.save()
+        app = self.object
+        status = form.cleaned_data['status']
+        
+        # Correctly assign sent_by.
+        if app.status == Application.SENT:
+            app.sent_by = self.request.user
+            app.save()
+        
+        # The logic below hard limits coordinators from approving applications when a particular proxy partner has run out of accounts.
+        if is_proxy_and_application_approved(status, app):
+            if app.partner.status == Partner.WAITLIST:
+                # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
+                messages.add_message(self.request, messages.ERROR,
+                    _('Cannot approve application as partner with proxy authorization method is waitlisted.'))
+                return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
+            
+            total_accounts_available_for_distribution = None
+            total_accounts_available_for_distribution = get_accounts_available(app)
+            if total_accounts_available_for_distribution is None:
+                pass
+            elif total_accounts_available_for_distribution > 0:
+                # We manually send a signal to waitlist the concerned partner if we've only one account available.
+                # This could be tweaked in the future to also waitlist partners with collections. We don't do that
+                # now since it's possible we have accounts left for distribution on other collections.
+                if total_accounts_available_for_distribution == 1 and app.specific_stream is None:
+                    no_more_accounts.send(sender=self.__class__, partner_pk=app.partner.pk)
+            else:
+                # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
+                messages.add_message(self.request, messages.ERROR,
+                    _('Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution.'))
+                return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
+
         with reversion.create_revision():
             reversion.set_user(self.request.user)
             try:
@@ -785,6 +815,12 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         context = super(EvaluateApplicationView, self).get_context_data(**kwargs)
         context['editor'] = self.object.editor
         context['versions'] = Version.objects.get_for_object(self.object)
+
+        app = self.object
+        context['total_accounts_available_for_distribution'] = None
+        # We show accounts available for proxy partners/collections in the evaluation page
+        if app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False):
+            context['total_accounts_available_for_distribution'] = get_accounts_available(app)
 
         # Check if the person viewing this application is actually this
         # partner's coordinator, and not *a* coordinator who happens to
@@ -835,7 +871,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             assert 'applications' in request.POST
         except AssertionError:
             messages.add_message(self.request, messages.WARNING,
-                #Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
+                # Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
                 _('Please select at least one application.'))
             return HttpResponseRedirect(reverse('applications:list'))
 
@@ -844,19 +880,131 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # important work for Applications. This includes handling the closing
         # dates for applications and sending email notifications to editors
         # about their applications.
-        for app_pk in request.POST.getlist('applications'):
+        
+        # This might seem a tad complicated/overkill, but we need this in order to
+        # stop batch approvals of applications for proxy partners when accounts for
+        # approval are greater than the number of accounts available.
+        batch_update_failed = []
+        batch_update_success = []
+        streams_distribution_flag = {}
+        partners_distribution_flag = {}
+        
+        applications_per_partner = {}
+        applications_per_stream = {}
+        waitlist_dict = {}
+        all_apps = request.POST.getlist('applications')
+        for each_app_pk in all_apps:
+            try:
+                each_app = Application.objects.get(pk=each_app_pk)
+            except Application.DoesNotExist:
+                logger.exception('Could not find app with posted pk {pk}; '
+                    'continuing through remaining apps'.format(pk=each_app_pk))
+                continue
+            # We loop through the list of applications (only proxy) counting the number of applications that
+            # are to be approved for a particular partner or collection. The counts are then updated in
+            # applications_per_partner or applications_per_stream dictionaries depending on the application type.
+            if is_proxy_and_application_approved(status, app=each_app):
+                if each_app.specific_stream is not None:
+                    app_count = applications_per_stream.get(each_app.specific_stream)
+                    if app_count is None:
+                        applications_per_stream[each_app.specific_stream.pk] = {
+                            'partner_pk' : each_app.partner.pk,
+                            'app_count'  : 1
+                        }
+                    else:
+                        applications_per_stream[each_app.specific_stream.pk]['app_count'] += 1
+                else:
+                    app_count = applications_per_partner.get(each_app.partner.pk)
+                    if app_count is None:
+                        applications_per_partner[each_app.partner.pk] = 1
+                    else:
+                        applications_per_partner[each_app.partner.pk] += 1
+
+        # For applications that are for collections, we get the number of accounts available based
+        # on their active authorizations to ensure we have enough accounts available and set the
+        # boolean value for the corresponding stream_pk in the streams_distribution_flag dictionary.
+        for stream_pk, info in applications_per_stream.iteritems():
+            total_accounts_available_per_stream = Stream.objects.filter(pk=stream_pk).values('accounts_available')[0]['accounts_available']
+            total_accounts_available_per_partner= Partner.objects.filter(pk=info['partner_pk']).values('accounts_available')[0]['accounts_available']
+
+            total_accounts_available_for_distribution = None
+            if total_accounts_available_per_stream is not None:
+                active_authorizations = get_active_authorizations(info['partner_pk'], stream_pk)
+                total_accounts_available_for_distribution = total_accounts_available_per_stream - active_authorizations
+            elif total_accounts_available_per_partner is not None:
+                active_authorizations = get_active_authorizations(info['partner_pk'])
+                total_accounts_available_for_distribution = total_accounts_available_per_partner - active_authorizations
+
+            if total_accounts_available_for_distribution is None:
+                streams_distribution_flag[stream_pk] = True
+            else:
+                if info['app_count'] > total_accounts_available_for_distribution:
+                    streams_distribution_flag[stream_pk] = False
+                else:
+                  streams_distribution_flag[stream_pk] = True
+
+        # For applications that are for partners, we get the number of accounts available based
+        # on their active authorizations to ensure we have enough accounts available and set the
+        # boolean value for the corresponding partner_pk in the partners_distribution_flag dictionary.
+        for partner_pk, app_count in applications_per_partner.iteritems():
+            total_accounts_available = Partner.objects.filter(pk=partner_pk).values('accounts_available')[0]['accounts_available']
+            if total_accounts_available is not None:
+                active_authorizations = get_active_authorizations(partner_pk)
+                total_accounts_available_for_distribution = total_accounts_available - active_authorizations
+                if app_count > total_accounts_available_for_distribution:
+                    partners_distribution_flag[partner_pk] = False
+                elif app_count == total_accounts_available_for_distribution:
+                    # The waitlist_dict keeps track of partners that'll 
+                    # run out of accounts once we approve all the applications.
+                    waitlist_dict[partner_pk] = True
+                    partners_distribution_flag[partner_pk] = True
+                else:
+                    partners_distribution_flag[partner_pk] = True
+            else:
+                partners_distribution_flag[partner_pk] = True
+
+        for app_pk in all_apps:
             try:
                 app = Application.objects.get(pk=app_pk)
             except Application.DoesNotExist:
-                logger.exception('Could not find app with posted pk {pk}; '
-                    'continuing through remaining apps'.format(pk=app_pk))
                 continue
+            # Based on the distribution flags, we either mark applications as approved and update the batch_update_success
+            # list with the application id or do nothing and update the batch_update_failed list. 
+            if is_proxy_and_application_approved(status, app):
+                if app.partner.status != Partner.WAITLIST:
+                    if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
+                        batch_update_success.append(app_pk)
+                        app.status = int(status)
+                        app.save()
+                    elif partners_distribution_flag[app.partner.pk] is True:
+                        batch_update_success.append(app_pk)
+                        app.status = int(status)
+                        app.save()
+                    else:
+                        batch_update_failed.append(app_pk)
+                else:
+                    batch_update_failed.append(app_pk)
+            else:
+                batch_update_success.append(app_pk)
+                app.status = status
+                app.save()
 
-            app.status = status
-            app.save()
-        #Translators: After a coordinator has changed the status of a number of applications, this message appears.
-        messages.add_message(request, messages.SUCCESS,
-            _('Batch update successful.'))
+        # We manually send the signals to waitlist the partners with corresponding 'True' values.
+        # This could be tweaked in the future to also waitlist partners with collections. We don't do that
+        # now since it's possible we have accounts left for distribution on other collections.
+        for partner_pk in waitlist_dict:
+            no_more_accounts.send(sender=self.__class__, partner_pk=partner_pk)
+
+        if batch_update_success:
+            success_apps = ', '.join(map(str, batch_update_success))
+            # Translators: After a coordinator has changed the status of a number of applications, this message appears.
+            messages.add_message(request, messages.SUCCESS,
+                _('Batch update of application(s) {} successful.'.format(success_apps)))
+        if batch_update_failed:
+            failed_apps = ', '.join(map(str, batch_update_failed))
+            # Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
+            messages.add_message(request, messages.ERROR,
+                _('Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available.'.format(failed_apps)))
 
         return HttpResponseRedirect(reverse_lazy('applications:list'))
 
@@ -941,7 +1089,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
         else:
             context['unavailable_streams'] = None
             
-            #Provide context to template only if accounts_available field is set
+            # Provide context to template only if accounts_available field is set
             if partner.accounts_available is not None:
                 context['total_apps_approved_or_sent'] = total_apps_approved_or_sent
                 

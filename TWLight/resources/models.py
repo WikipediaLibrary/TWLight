@@ -207,7 +207,7 @@ class Partner(models.Model):
             
     accounts_available = models.PositiveSmallIntegerField(blank=True, null=True, 
         # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-        help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
+        help_text=_('Add the number of new accounts to the existing value, not by resetting it to zero. If \'specific stream\' is true, change accounts availability at the collection level.'))
     
     # Optional resource metadata
     # --------------------------------------------------------------------------
@@ -351,21 +351,23 @@ class Partner(models.Model):
         return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
-        """Invalidate this partner's pandoc-rendered html from cache"""
         super(Partner, self).save(*args, **kwargs)
+        """Invalidate this partner's pandoc-rendered html from cache"""
         for code in RESOURCE_LANGUAGE_CODES:
-          short_description_cache_key = make_template_fragment_key(
-              'partner_short_description', [code, self.pk]
-          )        
-          description_cache_key = make_template_fragment_key(
-              'partner_description', [code, self.pk]
-          )
-          send_instructions_cache_key = make_template_fragment_key(
-              'partner_send_instructions', [code, self.pk]
-          )
-          cache.delete(short_description_cache_key)
-          cache.delete(description_cache_key)
-          cache.delete(send_instructions_cache_key)
+            short_description_cache_key = make_template_fragment_key(
+                'partner_short_description', [code, self.pk]
+            )        
+            description_cache_key = make_template_fragment_key(
+                'partner_description', [code, self.pk]
+            )
+            send_instructions_cache_key = make_template_fragment_key(
+                'partner_send_instructions', [code, self.pk]
+            )
+            cache.delete(short_description_cache_key)
+            cache.delete(description_cache_key)
+            cache.delete(send_instructions_cache_key)
+
+
 
     @property
     def get_languages(self):

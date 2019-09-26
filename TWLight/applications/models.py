@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
 
 from datetime import date, datetime, timedelta
-import logging
 from reversion import revisions as reversion
 from reversion.models import Version
 from reversion.signals import post_revision_commit

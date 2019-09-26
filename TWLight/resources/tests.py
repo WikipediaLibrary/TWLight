@@ -3,9 +3,11 @@ import csv
 from datetime import date, timedelta
 from mock import patch
 import os
+import random
 
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.exceptions import ValidationError, PermissionDenied
+from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import Http404
@@ -17,6 +19,7 @@ from TWLight.applications.models import Application
 from TWLight.applications.views import RequestApplicationView
 from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFactory
 from TWLight.users.groups import get_coordinators
+from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode
@@ -695,3 +698,87 @@ class CSVUploadTest(TestCase): # Migrated from staff dashboard test
 
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 0)
+
+
+class AutoWaitlistDisableTest(TestCase):
+    def setUp(self):
+        super(AutoWaitlistDisableTest, self).setUp()
+        editor = EditorFactory()
+        self.user = editor.user
+
+        self.partner = PartnerFactory(
+            status=Partner.WAITLIST,
+            authorization_method=Partner.PROXY,
+            accounts_available=10)
+        self.partner1 = PartnerFactory(
+            status=Partner.WAITLIST,
+            authorization_method=Partner.PROXY,
+            accounts_available=2)
+
+        self.application = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            partner=self.partner,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.application1 = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            partner=self.partner1,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.coordinator = UserFactory(username='coordinator')
+        self.coordinator.set_password('coordinator')
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+        self.coordinator.userprofile.terms_of_use = True
+        self.coordinator.userprofile.save()
+
+        Authorization.objects.create(
+            authorized_user=self.user,
+            authorizer=self.coordinator,
+            date_expires=date.today(),
+            partner=self.partner
+        )
+        Authorization.objects.create(
+            authorized_user=EditorFactory().user,
+            authorizer=self.coordinator,
+            date_expires=date.today(),
+            partner=self.partner
+        )
+
+        Authorization.objects.create(
+            authorized_user=self.user,
+            authorizer=self.coordinator,
+            date_expires=date.today() + timedelta(days=random.randint(1, 5)),
+            partner=self.partner1
+        )
+        Authorization.objects.create(
+            authorized_user=EditorFactory().user,
+            authorizer=self.coordinator,
+            date_expires=date.today() + timedelta(days=random.randint(1, 5)),
+            partner=self.partner1
+        )
+
+        self.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        self.message_patcher.start()
+
+
+    def tearDown(self):
+        super(AutoWaitlistDisableTest, self).tearDown()
+        self.message_patcher.stop()
+
+
+    def test_auto_disable_waitlist_command(self):
+        self.assertEqual(self.partner.status, Partner.WAITLIST)
+        self.assertEqual(self.partner1.status, Partner.WAITLIST)
+
+        call_command('proxy_waitlist_disable')
+        
+        self.partner.refresh_from_db()
+        self.assertEqual(self.partner.status, Partner.AVAILABLE)
+        # No change should've been made to the partner with zero accounts available
+        self.partner1.refresh_from_db()
+        self.assertEqual(self.partner1.status, Partner.WAITLIST)
