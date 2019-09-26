@@ -771,6 +771,11 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         app = self.object
         status = form.cleaned_data['status']
         
+        # Correctly assign sent_by.
+        if app.status == Application.SENT:
+            app.sent_by = self.request.user
+            app.save()
+        
         # The logic below hard limits coordinators from approving applications when a particular proxy partner has run out of accounts.
         if is_proxy_and_application_approved(status, app):
             if app.partner.status == Partner.WAITLIST:

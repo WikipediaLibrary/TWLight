@@ -2,7 +2,7 @@
 
 // Load modules
 var fs = require('fs');
-var cssjanus = require(process.env.HOME + '/node_modules/cssjanus');
+var cssjanus = require('cssjanus');
 
 // Recursively search directory for files. Cribbed from:
 // https://stackoverflow.com/a/21459809

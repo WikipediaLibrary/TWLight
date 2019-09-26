@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 """
-Base settings for TWLight project.
+Base settings for twlight project.
 
 This is not intended to be used as the live settings file for a project and will
 not work as one. You should instead use production.py, local.py, heroku.py, or
@@ -29,7 +30,12 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
+# We're going to replace Django's default logging config.
+import logging.config
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+TWLIGHT_HOME = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(os.path.abspath(__file__), os.pardir))))
 
 # An atypical way of setting django languages for TranslateWiki integration:
 # https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
@@ -76,6 +82,7 @@ DJANGO_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic', # Not a django app; replaces staticfiles
     'django.contrib.staticfiles',
     'django.contrib.sites',         # required by django.contrib.comments
 ]
@@ -86,6 +93,7 @@ THIRD_PARTY_APPS = [
     'dal',
     'dal_select2',
     'django_comments',
+    'django_cron',
     'django_filters',
     'modeltranslation',
     'taggit',
@@ -93,6 +101,8 @@ THIRD_PARTY_APPS = [
     # django-request, the user analytics package.
     'request',
     'django_countries',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 TWLIGHT_APPS = [
@@ -103,27 +113,47 @@ TWLIGHT_APPS = [
     'TWLight.emails',
     'TWLight.graphs',
     'TWLight.comments',
+    'TWLight.api',
 ]
 
 # dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 
+# CRON CONFIGURATION
+# ------------------------------------------------------------------------------
+CRON_CLASSES = [
+    'TWLight.crons.BackupCronJob',
+    'TWLight.crons.SendCoordinatorRemindersCronJob',
+    'TWLight.crons.UserRenewalNoticeCronJob',
+]
+
+# REST FRAMEWORK CONFIG
+# ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+}
+
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
 
 MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    # WhiteNoise should be loaded before everything but security.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # LocaleMiddleware must go after Session (and Cache, if used), but before
     # Common.
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # The default storage backend relies on sessions.
+    # That’s why SessionMiddleware must be enabled and appear before
+    # MessageMiddleware.
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 ]
 
 
@@ -133,8 +163,8 @@ MIDDLEWARE_CLASSES = [
 # By setting this an an environment variable, it is easy to switch debug on in
 # servers to do a quick test.
 # DEBUG SHOULD BE FALSE ON PRODUCTION for security reasons.
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
+DEBUG = bool(os.environ.get('DEBUG', 'False').lower() == 'true')
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -146,10 +176,10 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'twlight',
+        'NAME': os.environ.get('DJANGO_DB_NAME', None),
         'USER': os.environ.get('DJANGO_DB_USER', None),
         'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD', None),
-        'HOST': '127.0.0.1',
+        'HOST': os.environ.get('DJANGO_DB_HOST', None),
         'PORT': '3306',
         # This is critical for handling Unicode data due to stupid properties
         # of MySQL; see https://stackoverflow.com/questions/2108824/mysql-incorrect-string-value-error-when-save-unicode-string-in-django .
@@ -162,11 +192,17 @@ DATABASES = {
 # ------------------------------------------------------------------------------
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # In production, this list should contain the URL of the server and nothing
 # else, for security reasons. For local testing '*' is OK.
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 [::1]').split(' ')
+
+# Let Django know about external URLs in case they differ from internal
+# Needed to be added for /admin
+USE_X_FORWARDED_HOST = True
+
+REQUEST_BASE_URL = os.environ.get('REQUEST_BASE_URL', None)
 
 ROOT_URLCONF = 'TWLight.urls'
 
@@ -250,7 +286,7 @@ TEMPLATES = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # MEDIA FILE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -260,39 +296,6 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 MEDIA_URL = '/media/'
 
-# LOGGING CONFIGURATION
-# ------------------------------------------------------------------------------
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'formatters': {
-        'brief': {
-            'format': '%(asctime)s %(levelname)s %(name)s[%(funcName)s]: %(message)s',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'twlight.log'),
-            'maxBytes': 1024*1024*5, # 5 MB
-            'backupCount': 5,
-            'formatter': 'brief',
-        },
-    },
-    'loggers': {
-        '': {
-            'handlers': ['file'],
-            'level': 'INFO',
-        }
-    }
-}
 
 
 # ------------------------------------------------------------------------------
@@ -314,11 +317,10 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-TWLIGHT_OAUTH_PROVIDER_URL = 'https://meta.wikimedia.org/w/index.php'
+TWLIGHT_OAUTH_PROVIDER_URL = os.environ.get('TWLIGHT_OAUTH_PROVIDER_URL', None)
 
 TWLIGHT_OAUTH_CONSUMER_KEY = os.environ.get('TWLIGHT_OAUTH_CONSUMER_KEY', None)
 TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get('TWLIGHT_OAUTH_CONSUMER_SECRET', None)
-
 
 
 # COMMENTS CONFIGURATION
@@ -343,11 +345,13 @@ TAGGIT_CASE_INSENSITIVE = True
 # DJMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 
-EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
-
-# This is a dummy backend that will write to a file.
-DJMAIL_REAL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'logs', 'emails.log')
+DJMAIL_REAL_BACKEND = os.environ.get('DJANGO_EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_BACKEND = 'djmail.backends.async.EmailBackend'
+EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST', 'localhost')
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
 
 INSTALLED_APPS += ['djmail',]
 
@@ -364,3 +368,69 @@ MIDDLEWARE_CLASSES += ['request.middleware.RequestMiddleware',]
 # as tracking only authenticated vs anonymous users).
 REQUEST_LOG_IP = False
 REQUEST_LOG_USER = False
+
+# LOGGING CONFIGURATION
+# ------------------------------------------------------------------------------
+# We're replacing the default logging config to get better control of the
+# mail_admins behavior.
+
+ADMINS = [('TWLight Developers', 'librarycard-dev@lists.wikimedia.org')]
+DJANGO_EMAIL_ADMINS_BACKEND = os.environ.get('DJANGO_EMAIL_ADMINS_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+LOGGING_CONFIG = None
+
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s',
+        }
+    },
+    'handlers': {
+        'nodebug_console': {
+            'level': 'WARNING',
+            'filters': ['require_debug_false'],
+            'class': 'logging.StreamHandler',
+        },
+        'debug_console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'email_backend': DJANGO_EMAIL_ADMINS_BACKEND,
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['nodebug_console', 'debug_console', 'mail_admins'],
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'TWLight': {
+            'handlers': ['nodebug_console', 'debug_console', 'mail_admins'],
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    }
+})

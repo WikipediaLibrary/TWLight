@@ -10,7 +10,6 @@ from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve, reverse
-from django.template.loader import render_to_string
 from django.test import TestCase, Client, RequestFactory
 from django.utils.translation import get_language
 
@@ -19,7 +18,6 @@ from TWLight.applications.models import Application
 
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
-from TWLight.resources.tests import EditorCraftRoom
 
 from . import views
 from .authorization import OAuthBackend
@@ -27,6 +25,8 @@ from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor
+
+from rest_framework.test import APIRequestFactory, force_authenticate
 
 FAKE_IDENTITY_DATA = {'query': {
     'userinfo': {
@@ -794,3 +794,109 @@ class HelpersTestCase(TestCase):
         LANGUAGES = set(LANGUAGE_CODES.keys())
 
         self.assertEqual(WIKIS_LANGUAGES, LANGUAGES)
+
+
+class AuthorizedUsersAPITestCase(TestCase):
+    """
+    Tests for the AuthorizedUsers view and API.
+    """
+    def setUp(self):
+        super(AuthorizedUsersAPITestCase, self).setUp()
+
+        self.partner1 = PartnerFactory(
+            authorization_method=Partner.EMAIL
+        )
+        self.partner2 = PartnerFactory(
+            authorization_method=Partner.PROXY
+        )
+
+        self.editor1 = EditorFactory()
+        self.editor2 = EditorFactory()
+        self.editor3 = EditorFactory()
+        self.editor4 = EditorFactory()
+
+    def test_authorized_users_api_denied(self):
+        """
+        Test that, if no credentials are supplied, the API returns no data.
+        """
+        factory = APIRequestFactory()
+        request = factory.get('/api/v0/users/authorizations/partner/1')
+
+        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
+
+        self.assertEqual(response.status_code, 401)
+
+    def test_authorized_users_api_success(self):
+        """
+        Test that, if credentials are supplied, the API returns a 200 status code.
+        """
+        factory = APIRequestFactory()
+        request = factory.get('/api/v0/users/authorizations/partner/1')
+        force_authenticate(request, user=self.editor1.user)
+
+        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_authorized_users_api_applications(self):
+        """
+        In the case of a non-proxy partner, we should return all users with
+        a sent application.
+        """
+        _ = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner1,
+            status=Application.SENT
+        )
+        _ = ApplicationFactory(
+            editor=self.editor2,
+            partner=self.partner1,
+            status=Application.APPROVED
+        )
+        _ = ApplicationFactory(
+            editor=self.editor3,
+            partner=self.partner1,
+            status=Application.SENT
+        )
+
+        factory = APIRequestFactory()
+        request = factory.get('/api/v0/users/authorizations/partner/1')
+        force_authenticate(request, user=self.editor1.user)
+
+        response = views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
+
+        expected_json = [{"wp_username": self.editor1.user.editor.wp_username},
+                         {"wp_username": self.editor3.user.editor.wp_username}]
+
+        self.assertEqual(response.data, expected_json)
+
+    def test_authorized_users_api_authorizations(self):
+        """
+        In the case of a proxy partner, we should return all active authorizations
+        for that partner.
+        """
+        _ = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner2,
+            status=Application.SENT
+        )
+        _ = ApplicationFactory(
+            editor=self.editor2,
+            partner=self.partner2,
+            status=Application.SENT
+        )
+        _ = ApplicationFactory(
+            editor=self.editor3,
+            partner=self.partner2,
+            status=Application.PENDING
+        )
+        factory = APIRequestFactory()
+        request = factory.get('/api/v0/users/authorizations/partner/1')
+        force_authenticate(request, user=self.editor1.user)
+
+        response = views.AuthorizedUsers.as_view()(request, self.partner2.pk, 0)
+
+        expected_json = [{"wp_username": self.editor1.user.editor.wp_username},
+                         {"wp_username": self.editor2.user.editor.wp_username}]
+
+        self.assertEqual(response.data, expected_json)

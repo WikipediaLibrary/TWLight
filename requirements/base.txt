@@ -5,6 +5,7 @@ django-autocomplete-light>=3.2.10,<3.3
 django-contrib-comments==1.9.1
 django-countries==5.3.3
 django-crispy-forms==1.7.2
+django-cron==0.5.1
 django-durationfield==0.5.5
 django-filter>=1.1.0,<2.0
 django-modeltranslation==0.12.2
@@ -12,6 +13,7 @@ django-premailer
 django-request==1.5.4
 django-reversion==3.0.3
 django-taggit==0.23.0
+djangorestframework==3.9.4
 djmail==1.1.0
 docutils==0.14
 factory_boy>=2.10.0,<3.0
@@ -24,3 +26,4 @@ python-dateutil==2.8.0
 pytz==2018.9
 six==1.12.0
 wheel==0.33.1
+whitenoise==4.1.2

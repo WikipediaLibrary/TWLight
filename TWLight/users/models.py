@@ -223,35 +223,38 @@ class Editor(models.Model):
         To wit, users must:
         * Have >= 500 edits
         * Be active for >= 6 months
-        * Have Special:Email User enabled
         * Not be blocked on any projects
 
         Note that we won't prohibit signups or applications on this basis.
         Coordinators have discretion to approve people who are near the cutoff.
-        Furthermore, editors who are active on multiple wikis may meet this
-        minimum when their account activity is aggregated even if they do not
-        meet it on their home wiki - but we can only check the home wiki.
         """
+        # If, for some reason, this information hasn't come through,
+        # default to user not being valid.
+        if not global_userinfo:
+            return False
+        # Check: >= 500 edits
+        enough_edits = int(global_userinfo['editcount']) >= 500
+
+        # Check: registered >= 6 months ago
+        # Try oauth registration date first. If it's not valid,
+        # try the global_userinfo date
         try:
-            # Check: >= 500 edits
-            assert int(global_userinfo['editcount']) >= 500
-
-            # Check: registered >= 6 months ago
-            # Try oauth registration date first.  If it's not valid, try the global_userinfo date
-            try:
-                reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
-            except:
-                reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
-            assert datetime.today().date() - timedelta(days=182) >= reg_date
-
-            # Check: not blocked
-            assert identity['blocked'] == False
-
-            return True
-        # Was assertion error, now we're catching any error in case we have
-        # an API communication or data problem.
+            reg_date = datetime.strptime(identity['registered'],
+                                         '%Y%m%d%H%M%S').date()
         except:
-            logger.exception('Editor was not valid.')
+            reg_date = datetime.strptime(global_userinfo['registration'],
+                                         '%Y-%m-%dT%H:%M:%SZ').date()
+        account_old_enough = datetime.today().date() - timedelta(days=182) >= reg_date
+
+        # Check: not blocked
+        not_blocked = identity['blocked'] == False
+
+        if enough_edits and account_old_enough and not_blocked:
+            return True
+        else:
+            logger.info('Editor {username} was not valid.'.format(
+                username=self.wp_username
+            ))
             return False
 
     def get_global_userinfo(self, identity):
@@ -267,7 +270,7 @@ class Editor(models.Model):
           editcount:    10
         """
         try:
-            endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=urllib2.quote(identity['username'].encode('utf8')))
+            endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(base=identity['iss'],username=urllib2.quote(identity['username'].encode('utf-8')))
 
             results = json.loads(urllib2.urlopen(endpoint).read())
             global_userinfo = results['query']['globaluserinfo']
@@ -323,7 +326,7 @@ class Editor(models.Model):
 
         global_userinfo = self.get_global_userinfo(identity)
 
-        self.wp_username = identity['username']
+        self.wp_username = identity['username'].encode('utf-8')
         self.wp_rights = json.dumps(identity['rights'])
         self.wp_groups = json.dumps(identity['groups'])
         if global_userinfo:
@@ -390,7 +393,7 @@ class Authorization(models.Model):
     # Users may have multiple authorizations.
     authorized_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
         on_delete=models.SET_NULL,
-        related_name="+",
+        related_name="authorizations",
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
         help_text=_('The authorized user.'))
 

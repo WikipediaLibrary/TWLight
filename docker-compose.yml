@@ -1,0 +1,53 @@
+---
+
+version: '3.2'
+
+volumes:
+  mysql:
+
+services:
+  db:
+    image: mariadb:10
+    volumes:
+      - mysql:/var/lib/mysql
+      - type: bind
+        source: ./conf/db.cnf
+        target: /etc/mysql/conf.d/db.cnf
+      - type: bind
+        source: ./bin/twlight_mysql_init.sh
+        target: /docker-entrypoint-initdb.d/twlight_mysql_init.sh
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/MYSQL_ROOT_PASSWORD
+    secrets:
+      - DJANGO_DB_NAME
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+  twlight:
+    build:
+      context: .
+    command: /venv/bin/gunicorn TWLight.wsgi
+    volumes:
+      - type: bind
+        source: ./media
+        target: /app/media
+    depends_on:
+      - 'db'
+    secrets:
+      - DJANGO_DB_NAME
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
+      - SECRET_KEY
+      - TWLIGHT_OAUTH_CONSUMER_KEY
+      - TWLIGHT_OAUTH_CONSUMER_SECRET
+  web:
+    image: nginx:latest
+    volumes:
+      - type: bind
+        source: ./media
+        target: /app/media
+      - type: bind
+        source: ./TWLight/templates/500
+        target: /app/500
+    depends_on:
+      - 'twlight'

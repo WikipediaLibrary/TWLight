@@ -2760,6 +2760,24 @@ class EvaluateApplicationTest(TestCase):
         # The email should contain user_instructions
         self.assertTrue(stream.user_instructions in mail.outbox[0].body)
 
+    def test_sent_by_assignment(self):
+        # sent_by wasn't being set when applications were marked as sent
+        # from the evaluate view. This checks that's working correctly.
+        factory = RequestFactory()
+
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+
+        # Send the application
+        response = self.client.post(self.url,
+            data={'status': Application.SENT},
+            follow=True)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.sent_by, coordinator.user)
+
 
 
 class BatchEditTest(TestCase):
