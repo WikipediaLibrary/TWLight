@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-26 13:25+0000\n"
+"POT-Creation-Date: 2019-09-26 14:13+0000\n"
 "PO-Revision-Date: 2019-09-06 05:23:21+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,68 +67,69 @@ msgstr "{partner} के लिए आपका आवेदन"
 msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
 msgstr "आवेदन करने से पहले आपको <a href=\"{url}>{url}</a> पर पंजीकरण करना आवश्यक है।"
 
-#: TWLight/applications/forms.py:320 TWLight/users/admin.py:76
-#: TWLight/users/models.py:117
+#: TWLight/applications/forms.py:320
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
+#: TWLight/users/admin.py:76 TWLight/users/models.py:117
 msgid "Username"
 msgstr "सदस्यनाम"
 
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:321 TWLight/applications/helpers.py:95
+#: TWLight/applications/forms.py:321 TWLight/applications/helpers.py:99
 msgid "Partner name"
 msgstr "भागीदार का नाम"
 
 #. Translators: When filling out an application, users may need to specify their name
-#: TWLight/applications/helpers.py:87
+#: TWLight/applications/helpers.py:91
 msgid "Your real name"
 msgstr "आपका असली नाम"
 
 #. Translators: When filling out an application, users may need to specify the country in which they currently live
-#: TWLight/applications/helpers.py:89
+#: TWLight/applications/helpers.py:93
 msgid "Your country of residence"
 msgstr "आप किस देश में रहते हैं"
 
 #. Translators: When filling out an application, users may need to specify their current occupation
-#: TWLight/applications/helpers.py:91
+#: TWLight/applications/helpers.py:95
 msgid "Your occupation"
 msgstr "आपका व्यवसाय"
 
 #. Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
-#: TWLight/applications/helpers.py:93
+#: TWLight/applications/helpers.py:97
 msgid "Your institutional affiliation"
 msgstr "आपकी संस्थागत संबद्धता"
 
 #. Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
-#: TWLight/applications/helpers.py:97
+#: TWLight/applications/helpers.py:101
 msgid "Why do you want access to this resource?"
 msgstr "आप इस संसाधन तक पहुँच क्यों चाहते हैं?"
 
 #. Translators: When filling out an application, users may need to specify a particular collection of resources they want access to
-#: TWLight/applications/helpers.py:99
+#: TWLight/applications/helpers.py:103
 msgid "Which collection do you want?"
 msgstr "आप कौन सा संग्रह चाहते हैं?"
 
 #. Translators: When filling out an application, users may need to specify a particular book they want access to
-#: TWLight/applications/helpers.py:101
+#: TWLight/applications/helpers.py:105
 msgid "Which book do you want?"
 msgstr "आपको कौन सी किताब चाहिए?"
 
 #. Translators: When filling out an application, users are given a text box where they can include any extra relevant information
-#: TWLight/applications/helpers.py:103
+#: TWLight/applications/helpers.py:107
 msgid "Anything else you want to say"
 msgstr "आप और भी कुछ कहना चाहते हैं"
 
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
-#: TWLight/applications/helpers.py:105
+#: TWLight/applications/helpers.py:109
 msgid "You must agree with the partner's terms of use"
 msgstr "आपको भागीदार की उपयोग की शर्तों से सहमत होना होगा"
 
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/helpers.py:107
+#: TWLight/applications/helpers.py:111
 msgid "The email for your account on the partner's website"
 msgstr "भागीदार की वेबसाइट पर आपके खाते का ईमेल"
 
 #. Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
-#: TWLight/applications/helpers.py:109
+#: TWLight/applications/helpers.py:113
 msgid ""
 "Check this box if you would prefer to hide your application from the 'latest "
 "activity' timeline."
@@ -138,49 +139,49 @@ msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
-#: TWLight/applications/helpers.py:114
+#: TWLight/applications/helpers.py:118
 #: TWLight/users/templates/users/editor_detail_data.html:164
 msgid "Real name"
 msgstr "वास्तविक नाम"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
-#: TWLight/applications/helpers.py:116
+#: TWLight/applications/helpers.py:120
 #: TWLight/users/templates/users/editor_detail_data.html:176
 msgid "Country of residence"
 msgstr "आपका निवास देश"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
-#: TWLight/applications/helpers.py:118
+#: TWLight/applications/helpers.py:122
 #: TWLight/users/templates/users/editor_detail_data.html:188
 msgid "Occupation"
 msgstr "व्यवसाय"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's affiliation
-#: TWLight/applications/helpers.py:120
+#: TWLight/applications/helpers.py:124
 msgid "Affiliation"
 msgstr "संबद्धता"
 
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
-#: TWLight/applications/helpers.py:122
+#: TWLight/applications/helpers.py:126
 msgid "Stream requested"
 msgstr "स्रोत जिसका अनुरोध किया गया है"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
-#: TWLight/applications/helpers.py:124
-#: TWLight/applications/templates/applications/application_evaluation.html:94
+#: TWLight/applications/helpers.py:128
+#: TWLight/applications/templates/applications/application_evaluation.html:108
 msgid "Title requested"
 msgstr "अनुरोधित शीर्षक"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
-#: TWLight/applications/helpers.py:126
+#: TWLight/applications/helpers.py:130
 msgid "Agreed with terms of use"
 msgstr "उपयोग की शर्तों से सहमत हैं"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
-#: TWLight/applications/helpers.py:128
+#: TWLight/applications/helpers.py:132
 msgid "Account email"
 msgstr "खाता ईमेल"
 
@@ -188,7 +189,7 @@ msgstr "खाता ईमेल"
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: This is the name of the authorization method whereby user accounts are set up by email.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
-#: TWLight/applications/helpers.py:142
+#: TWLight/applications/helpers.py:146
 #: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/models.py:186
 #: TWLight/resources/templates/resources/partner_users.html:27
@@ -303,66 +304,84 @@ msgstr "आवेदन बंद होने के बाद से दिन
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:7
 #: TWLight/graphs/views.py:277
 msgid "Status"
 msgstr "स्थिति"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:75
-#: TWLight/applications/views.py:514 TWLight/applications/views.py:591
+#: TWLight/applications/views.py:516 TWLight/applications/views.py:593
 #: TWLight/templates/dashboard.html:127
 msgid "Partner"
 msgstr "भागीदार"
 
+#. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
+#. Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access
+#: TWLight/applications/templates/applications/application_evaluation.html:81
+#: TWLight/applications/templates/applications/request_for_application.html:44
+#: TWLight/resources/models.py:174
+#: TWLight/resources/templates/resources/partner_detail.html:33
+#: TWLight/resources/templates/resources/partner_detail.html:100
+#: TWLight/resources/templates/resources/partner_tile.html:39
+msgid "Waitlisted"
+msgstr "आप प्रतीक्षा सूची में हैं"
+
+#. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
+#: TWLight/applications/templates/applications/application_evaluation.html:88
+#, fuzzy
+msgid "Accounts available"
+msgstr "खातों की उपलब्धता"
+
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
-#: TWLight/applications/templates/applications/application_evaluation.html:84
+#: TWLight/applications/templates/applications/application_evaluation.html:98
 msgid "Collection requested"
 msgstr "अनुरोधित संग्रह"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
-#: TWLight/applications/templates/applications/application_evaluation.html:103
+#: TWLight/applications/templates/applications/application_evaluation.html:117
 msgid "Why the editor wants access"
 msgstr "संपादक पहुँच क्यों चाहता है"
 
 #. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
-#: TWLight/applications/templates/applications/application_evaluation.html:110
+#: TWLight/applications/templates/applications/application_evaluation.html:124
 msgid "Not stated"
 msgstr "नहीं बताया हुआ"
 
 #. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
-#: TWLight/applications/templates/applications/application_evaluation.html:116
+#: TWLight/applications/templates/applications/application_evaluation.html:130
 msgid "Renewal of existing access grant?"
 msgstr "मौजूदा पहुँच अनुदान का नवीनीकरण?"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
-#: TWLight/applications/templates/applications/application_evaluation.html:122
+#: TWLight/applications/templates/applications/application_evaluation.html:136
 #, python-format
 msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
 msgstr "हाँ (<a href=\"%(parent_url)s\">पिछला आवेदन</a>)"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
-#: TWLight/applications/templates/applications/application_evaluation.html:128
+#: TWLight/applications/templates/applications/application_evaluation.html:142
 #: TWLight/users/templates/users/editor_detail_data.html:68
 msgid "No"
 msgstr "नहीं"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
-#: TWLight/applications/templates/applications/application_evaluation.html:134
+#: TWLight/applications/templates/applications/application_evaluation.html:148
 msgid "Comments from the editor"
 msgstr "पिछला आवेदन"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
-#: TWLight/applications/templates/applications/application_evaluation.html:142
+#: TWLight/applications/templates/applications/application_evaluation.html:156
 msgid "Discussion"
 msgstr "चर्चा"
 
 #. Translators: This labels the button which users click to send a typed comment.
-#: TWLight/applications/templates/applications/application_evaluation.html:163
+#: TWLight/applications/templates/applications/application_evaluation.html:177
 msgid "Add comment"
 msgstr "टिप्पणी छोड़ें"
 
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
-#: TWLight/applications/templates/applications/application_evaluation.html:171
+#: TWLight/applications/templates/applications/application_evaluation.html:185
 msgid ""
 "Comments are visible to all coordinators and to the editor who submitted "
 "this application."
@@ -370,43 +389,43 @@ msgstr "टिप्पणियाँ सभी समन्वयकों औ
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
-#: TWLight/applications/templates/applications/application_evaluation.html:178
+#: TWLight/applications/templates/applications/application_evaluation.html:192
 #: TWLight/resources/templates/resources/partner_users.html:25
 #: TWLight/resources/templates/resources/partner_users.html:76
 msgid "User"
 msgstr "उपयोगकर्ता"
 
 #. Translators: This is the title of the section of an application page which lists the history of status changes.
-#: TWLight/applications/templates/applications/application_evaluation.html:183
+#: TWLight/applications/templates/applications/application_evaluation.html:197
 msgid "Revision history"
 msgstr "अवतरण इतिहास"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate submit_user or review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:199
+#: TWLight/applications/templates/applications/application_evaluation.html:213
 #, python-format
 msgid "Submitted by %(submit_user)s on %(review_date)s"
 msgstr "%(review_date)s को %(submit_user)s द्वारा प्रस्तुत किया गया"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:204
+#: TWLight/applications/templates/applications/application_evaluation.html:218
 #, python-format
 msgid "Submitted on %(review_date)s"
 msgstr "प्रस्तुतिकरण तिथि %(review_date)s"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate review_user or review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:215
+#: TWLight/applications/templates/applications/application_evaluation.html:229
 #, python-format
 msgid "Reviewed by %(review_user)s on %(review_date)s"
 msgstr "%(review_date)s को %(review_user)s द्वारा समीक्षित किया गया"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:220
+#: TWLight/applications/templates/applications/application_evaluation.html:234
 #, python-format
 msgid "Reviewed on %(review_date)s"
 msgstr "%(review_date)s को समीक्षित किया गया"
 
 #. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
-#: TWLight/applications/templates/applications/application_evaluation.html:232
+#: TWLight/applications/templates/applications/application_evaluation.html:246
 msgid "No previous versions."
 msgstr "कोई पिछला संस्करण नहीं।"
 
@@ -517,31 +536,55 @@ msgid "Not yet reviewed."
 msgstr "अभी तक समीक्षा नहीं की गयी।"
 
 #: TWLight/applications/templates/applications/application_list_include.html:64
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:74
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:79
 #: TWLight/applications/templates/applications/application_list_user_include.html:60
 msgid "No applications right now."
 msgstr "अभी कोई आवेदन नहीं आया है।"
 
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
+#, fuzzy
+#| msgid "Application"
+msgid "Application ID"
+msgstr "आवेदन"
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
+#, fuzzy
+#| msgid "Collections"
+msgid "Partner (Collection)"
+msgstr "संग्रह"
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
+#, fuzzy
+#| msgid "Not yet reviewed."
+msgid "Last reviewed"
+msgstr "अभी तक समीक्षा नहीं की गयी।"
+
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
+#, fuzzy
+#| msgid "Date of application"
+msgid "Date applied"
+msgstr "आवेदन की तिथि"
+
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:18
 #: TWLight/applications/templates/applications/send_partner.html:121
 msgid "Select/deselect all"
 msgstr "सभी का चयन / चयन रद्द करें"
 
 #. Translators: Denotes whether an application was a renewal request for a previous application.
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:24
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:48
 #: TWLight/resources/templates/resources/partner_users.html:53
 #: TWLight/resources/templates/resources/partner_users.html:104
 msgid "Renewal"
 msgstr "नवीनीकरण"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:56
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:61
 msgid "Status for all selected applications"
 msgstr "सभी चयनित आवेदनों की स्थिति"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:70
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:75
 msgid "Set status"
 msgstr "स्थिति सेट करें"
 
@@ -570,16 +613,6 @@ msgstr "आप किन संसाधनों का उपयोग कर�
 #: TWLight/applications/templates/applications/request_for_application.html:40
 msgid "(more info)"
 msgstr "(अधिक जानकारी)"
-
-#. Translators: This is a status for a Partner, denoting that it has no access grants available at this time (but should later).
-#. Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access
-#: TWLight/applications/templates/applications/request_for_application.html:44
-#: TWLight/resources/models.py:174
-#: TWLight/resources/templates/resources/partner_detail.html:33
-#: TWLight/resources/templates/resources/partner_detail.html:100
-#: TWLight/resources/templates/resources/partner_tile.html:39
-msgid "Waitlisted"
-msgstr "आप प्रतीक्षा सूची में हैं"
 
 #: TWLight/applications/templates/applications/request_for_application.html:50
 msgid "No partner data has been added yet."
@@ -684,21 +717,21 @@ msgid "There are no approved, unsent applications."
 msgstr "कोई स्वीकृत, अप्रेषित आवेदन नहीं हैं।"
 
 #. Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
-#: TWLight/applications/views.py:164
+#: TWLight/applications/views.py:166
 msgid "Please select at least one partner."
 msgstr "कृपया कम से कम एक भागीदार का चयन करें।"
 
-#: TWLight/applications/views.py:281
+#: TWLight/applications/views.py:283
 msgid "This field consists only of restricted text."
 msgstr "इस क्षेत्र में केवल प्रतिबंधित पाठ हैं।"
 
 #. Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
-#: TWLight/applications/views.py:340
+#: TWLight/applications/views.py:342
 msgid "Choose at least one resource you want access to."
 msgstr "कम से कम एक संसाधन चुनें जिसे आप एक्सेस करना चाहते हैं।"
 
 #. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
-#: TWLight/applications/views.py:364 TWLight/applications/views.py:405
+#: TWLight/applications/views.py:366 TWLight/applications/views.py:407
 msgid ""
 "Your application has been submitted for review. You can check the status of "
 "your applications on this page."
@@ -707,7 +740,7 @@ msgstr ""
 "सकते हैं।"
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
-#: TWLight/applications/views.py:394
+#: TWLight/applications/views.py:396
 msgid ""
 "This partner does not have any access grants available at this time. You may "
 "still apply for access; your application will be reviewed when access grants "
@@ -717,69 +750,91 @@ msgstr ""
 "कर सकते हैं; जब अनुदान उपलब्ध हो जाएगा तो आपके आवेदन की समीक्षा की जाएगी।"
 
 #. Translators: Editor = wikipedia editor, gender unknown.
-#: TWLight/applications/views.py:513 TWLight/applications/views.py:590
+#: TWLight/applications/views.py:515 TWLight/applications/views.py:592
 msgid "Editor"
 msgstr "सम्पादक"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
-#: TWLight/applications/views.py:630
+#: TWLight/applications/views.py:632
 msgid "Applications to review"
 msgstr "समीक्षा के लिए आवेदन"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
-#: TWLight/applications/views.py:664
+#: TWLight/applications/views.py:666
 #: TWLight/resources/templates/resources/partner_users.html:19
 msgid "Approved applications"
 msgstr "स्वीकृत आवेदन"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
-#: TWLight/applications/views.py:690
+#: TWLight/applications/views.py:692
 msgid "Rejected applications"
 msgstr "अस्वीकृत आवेदन"
 
 #. Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
-#: TWLight/applications/views.py:723
+#: TWLight/applications/views.py:725
 msgid "Access grants up for renewal"
 msgstr "नवीनीकरण के लिए पहुँच अनुदान"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
-#: TWLight/applications/views.py:749
+#: TWLight/applications/views.py:751
 #: TWLight/resources/templates/resources/partner_users.html:70
 msgid "Sent applications"
 msgstr "प्रेषित आवेदन"
 
+#: TWLight/applications/views.py:784
+msgid ""
+"Cannot approve application as partner with proxy authorization method is "
+"waitlisted."
+msgstr ""
+
+#: TWLight/applications/views.py:800
+msgid ""
+"Cannot approve application as partner with proxy authorization method is "
+"waitlisted and (or) has zero accounts available for distribution."
+msgstr ""
+
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
-#: TWLight/applications/views.py:780
+#: TWLight/applications/views.py:810
 msgid "You attempted to create a duplicate authorization."
 msgstr ""
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:808
+#: TWLight/applications/views.py:844
 msgid "Set application status"
 msgstr "आवेदन की स्थिति निर्धारित करें"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:839
+#: TWLight/applications/views.py:875
 msgid "Please select at least one application."
 msgstr "कम से कम एक आवेदन का चयन करें।"
 
-#: TWLight/applications/views.py:859
-msgid "Batch update successful."
+#: TWLight/applications/views.py:1002
+#, fuzzy
+#| msgid "Batch update successful."
+msgid "Batch update of application(s) {} successful."
 msgstr "बैच अद्यतन सफल।"
 
+#: TWLight/applications/views.py:1007
+msgid ""
+"Cannot approve application(s) {} as partner(s) with proxy authorization "
+"method is/are waitlisted and (or) has/have not enough accounts available. If "
+"not enough accounts are available, prioritise the applications and then "
+"approve applications equal to the accounts available."
+msgstr ""
+
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1010
+#: TWLight/applications/views.py:1158
 msgid "Error: Code used multiple times."
 msgstr ""
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1044
+#: TWLight/applications/views.py:1192
 msgid "All selected applications have been marked as sent."
 msgstr "सभी चयनित आवेदनों को प्रेषित चिन्हित किया गया है।"
 
-#: TWLight/applications/views.py:1093
+#: TWLight/applications/views.py:1241
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
@@ -788,7 +843,7 @@ msgstr ""
 "नवीनीकृत करने का अनुरोध किया है।)"
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1099
+#: TWLight/applications/views.py:1247
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
@@ -1413,9 +1468,15 @@ msgstr ""
 "किसी भी समय नवीनीकरण का अनुरोध कर सकेंगे।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-#: TWLight/resources/models.py:210 TWLight/resources/models.py:425
+#: TWLight/resources/models.py:210
+#, fuzzy
+#| msgid ""
+#| "Add number of new accounts to the existing value, not by reseting it to "
+#| "zero."
 msgid ""
-"Add number of new accounts to the existing value, not by reseting it to zero."
+"Add the number of new accounts to the existing value, not by resetting it to "
+"zero. If 'specific stream' is true, change accounts availability at the "
+"collection level."
 msgstr "नए खातों की संख्या मौजूदा मूल्य में जोड़ें, शून्य पर रीसेट करके नहीं।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
@@ -1584,14 +1645,14 @@ msgstr ""
 "इसे सही चिन्हित करें।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:391
+#: TWLight/resources/models.py:393
 msgid "Optional image file that can be used to represent this partner."
 msgstr ""
 "वैकल्पिक छवि फ़ाइल जिसका उपयोग इस भागीदार का प्रतिनिधित्व करने के लिए किया जा सकता "
 "है।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:419
+#: TWLight/resources/models.py:421
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
@@ -1599,13 +1660,19 @@ msgstr ""
 "स्ट्रीम का नाम (उदाहरण: Health and Behavioral Sciences)। उपयोगकर्ता-दृश्यमान होगा "
 "और *अनुवादित नहीं*। यहाँ भागीदार का नाम शामिल न करें।"
 
+#. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
+#: TWLight/resources/models.py:427
+msgid ""
+"Add number of new accounts to the existing value, not by reseting it to zero."
+msgstr "नए खातों की संख्या मौजूदा मूल्य में जोड़ें, शून्य पर रीसेट करके नहीं।"
+
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:429
+#: TWLight/resources/models.py:431
 msgid "Optional description of this stream's resources."
 msgstr "इस स्ट्रीम के संसाधनों का वैकल्पिक विवरण।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
-#: TWLight/resources/models.py:436
+#: TWLight/resources/models.py:438
 msgid ""
 "Which authorization method does this collection use? 'Email' means the "
 "accounts are set up via email, and is the default. Select 'Access Codes' if "
@@ -1615,7 +1682,7 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
-#: TWLight/resources/models.py:445
+#: TWLight/resources/models.py:447
 msgid ""
 "Optional instructions for editors to use access codes or free signup URLs "
 "for this collection. Sent via email upon application approval (for links) or "
@@ -1623,7 +1690,7 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:486
+#: TWLight/resources/models.py:488
 msgid ""
 "Organizational role or job title. This is NOT intended to be used for "
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
@@ -1632,7 +1699,7 @@ msgstr ""
 "है। 'संपादकीय सेवाओं के निदेशक' के बारे में सोचें, न कि 'सुश्री' वैकल्पिक।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:493
+#: TWLight/resources/models.py:495
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
@@ -1640,37 +1707,37 @@ msgstr ""
 "ईमेल अभिवादन में उपयोग करने के लिए संपर्क व्यक्ति के नाम का रूप ( जैसे कि 'नमस्ते रवि')"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
-#: TWLight/resources/models.py:512
+#: TWLight/resources/models.py:514
 msgid "Potential partner's name (e.g. McFarland)."
 msgstr "संभावित भागीदार का नाम (उदाहरण: McFarland)।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
-#: TWLight/resources/models.py:516
+#: TWLight/resources/models.py:518
 msgid "Optional description of this potential partner."
 msgstr "इस संभावित भागीदार का वैकल्पिक विवरण।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
-#: TWLight/resources/models.py:520
+#: TWLight/resources/models.py:522
 msgid "Link to the potential partner's website."
 msgstr "संभावित भागीदार की वेबसाइट की कड़ी।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
-#: TWLight/resources/models.py:524
+#: TWLight/resources/models.py:526
 msgid "User who authored this suggestion."
 msgstr "इस सुझाव को लिखने वाले उपयोगकर्ता।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-#: TWLight/resources/models.py:528
+#: TWLight/resources/models.py:530
 msgid "Users who have upvoted this suggestion."
 msgstr "जिन उपयोगकर्ताओं ने इस सुझाव को समर्थन दिया है।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
-#: TWLight/resources/models.py:553
+#: TWLight/resources/models.py:555
 msgid "URL of a video tutorial."
 msgstr "वीडियो ट्यूटोरियल का यूआरएल।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
-#: TWLight/resources/models.py:574
+#: TWLight/resources/models.py:576
 #, fuzzy
 msgid "An access code for this partner."
 msgstr "इस भागीदार के लिए समन्वयक, यदि कोई हो।"
