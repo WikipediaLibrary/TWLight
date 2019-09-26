@@ -509,6 +509,7 @@ A few spots just need padding instead of margin.
 .btn-extra-large{
     padding-top:30px;
     padding-bottom:30px;
+    max-width: 575px;
 }
 
 .btn-extra-large:after{
