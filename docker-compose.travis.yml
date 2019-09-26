@@ -21,18 +21,18 @@ secrets:
 
 services:
   db:
-    # Local environment should accomodate a variety of host OSes
+    # Local environment should accommodate a variety of host OSes
     volumes:
       - type: bind
         source: ./conf/db/local.d
         target: /etc/mysql/conf.d
   twlight:
-    image: wikipedialibrary/twlight:branch_${TRAVIS_BRANCH}
+    image: wikipedialibrary/twlight:${BRANCH_TAG}
     build:
       cache_from:
-        - wikipedialibrary/twlight_base:branch_${TRAVIS_BRANCH}
-        - wikipedialibrary/twlight_build:branch_${TRAVIS_BRANCH}
-        - wikipedialibrary/twlight:branch_${TRAVIS_BRANCH}
+        - wikipedialibrary/twlight_base:${BRANCH_TAG}
+        - wikipedialibrary/twlight_build:${BRANCH_TAG}
+        - wikipedialibrary/twlight:${BRANCH_TAG}
     env_file:
       - ./conf/travis.twlight.env
     environment:
