@@ -125,6 +125,7 @@ CRON_CLASSES = [
     'TWLight.crons.BackupCronJob',
     'TWLight.crons.SendCoordinatorRemindersCronJob',
     'TWLight.crons.UserRenewalNoticeCronJob',
+    'TWLight.crons.ProxyWaitlistDisableCronJob',
 ]
 
 # REST FRAMEWORK CONFIG
