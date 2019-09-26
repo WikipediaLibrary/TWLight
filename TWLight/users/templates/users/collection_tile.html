@@ -24,12 +24,38 @@
         {% trans "Library bundle access" %}
         ">
       {% endif %}
-      <a href=#>
-        <img src="{{ each_authorization.partner.logos.logo.url }}" class="img-responsive partner-logo" alt="
-        {% comment %} Translators: Alt text for publisher logos on the my collection page. Don't translate {{ each_authorization.partner }}. {% endcomment %}
-        {% blocktrans trimmed with each_authorization.partner as partner %}
-           Link to {{ partner }} signup page
-        {% endblocktrans %}
+      <a href="
+        {% if each_authorization.partner.authorization_method == each_authorization.partner.BUNDLE or each_authorization.partner.authorization_method == each_authorization.partner.PROXY %}
+          #
+        {% else %}
+          {% url 'partners:detail' each_authorization.partner.pk %}
+        {% endif %}
+      ">
+        <img src="{{ each_authorization.partner.logos.logo.url }}" class="img-responsive partner-logo" title="
+          {% if each_authorization.partner.authorization_method == each_authorization.partner.BUNDLE or each_authorization.partner.authorization_method == each_authorization.partner.PROXY %}
+            {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ partner }}. {% endcomment %}
+            {% blocktrans trimmed with each_authorization.partner as partner %}
+               Link to proxied {{ partner }}'s external website
+            {% endblocktrans %}
+          {% else %}
+            {% comment %} Translators: Title for logo in tiles that are linked to partner description  page. Don't translate {{ partner }}. {% endcomment %}
+            {% blocktrans trimmed with each_authorization.partner as partner %}
+               Link to {{ partner }} signup page
+            {% endblocktrans %}
+          {% endif %}
+          "
+        alt="
+          {% if each_authorization.partner.authorization_method == each_authorization.partner.BUNDLE or each_authorization.partner.authorization_method == each_authorization.partner.PROXY %}
+            {% comment %} Translators: Alt text for publisher logos on the my collection page. Don't translate {{ partner }}. {% endcomment %}
+            {% blocktrans trimmed with each_authorization.partner as partner %}
+               Link to proxied {{ partner }}'s external website
+            {% endblocktrans %}
+          {% else %}
+            {% comment %} Translators: Alt text for publisher logos on the my collection page. Don't translate {{ partner }}. {% endcomment %}
+            {% blocktrans trimmed with each_authorization.partner as partner %}
+               Link to {{ partner }} signup page
+            {% endblocktrans %}
+          {% endif %}
         ">
       </a>
     </div>
