@@ -4,6 +4,9 @@ from django.core.management.base import BaseCommand, CommandError
 from TWLight.applications.helpers import get_active_authorizations
 from TWLight.resources.models import Partner
 
+import logging
+logger = logging.getLogger(__name__)
+
 class Command(BaseCommand):
     help = "Un-waitlists proxy partners having atleast one inactive authorization."
 
