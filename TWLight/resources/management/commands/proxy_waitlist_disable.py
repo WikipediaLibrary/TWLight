@@ -17,4 +17,4 @@ class Command(BaseCommand):
             if total_accounts_available_for_distribution > 0:
                 each_partner.status = Partner.AVAILABLE
                 each_partner.save()
-                print('{name}\'s been unwaitlisted'.format(name=each_partner.company_name))
+                logger.info('Partner {name} is unwaitlisted'.format(name=each_partner.company_name))
