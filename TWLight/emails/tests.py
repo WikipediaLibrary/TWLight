@@ -387,7 +387,7 @@ class ContactUsTest(TestCase):
         contact_us_url = reverse('contact')
         contact_us = self.client.get(contact_us_url, follow=True)
         contact_us_form = contact_us.context['form']
-        data  = contact_us_form.initial
+        data = contact_us_form.initial
         data['email'] = 'editor@example.com'
         data['message'] = 'This is a test'
         data['submit'] = True

@@ -328,6 +328,10 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
         help_text=_("Mark as true if this partner requires applicants to have "
                     "already signed up at the partner website."))
+    requested_access_duration = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners.
+        help_text=_("Mark as true if the authorization method of this partner is proxy "
+                    "and requires the duration of the access (expiry) be specified."))
 
 
     def __unicode__(self):
@@ -345,6 +349,9 @@ class Partner(models.Model):
         if self.account_email and not self.registration_url:
             raise ValidationError('When pre-registration is required, '
                 'a link to the registration page must be provided.')
+        if self.authorization_method == self.PROXY and not self.requested_access_duration:
+            raise ValidationError({'requested_access_duration': ['When authorization method is proxy, '
+                'requested_access_duration field must be checked.',]})
 
 
     def get_absolute_url(self):

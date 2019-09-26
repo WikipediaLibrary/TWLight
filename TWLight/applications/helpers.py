@@ -7,6 +7,8 @@ from TWLight.applications.models import Application
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Authorization
 
+from .models import Application
+
 """
 Lists and characterizes the types of information that partners can require as
 part of access grants. See full comment at end of file.
@@ -52,6 +54,7 @@ SPECIFIC_TITLE = 'specific_title'
 COMMENTS = 'comments'
 AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
 ACCOUNT_EMAIL = 'account_email'
+REQUESTED_ACCESS_DURATION = 'requested_access_duration'
 HIDDEN = 'hidden'
 
 
@@ -65,7 +68,7 @@ PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS, HIDDEN]
 # These fields are displayed only when a specific partner requires that
 # information.
 PARTNER_FORM_OPTIONAL_FIELDS = [SPECIFIC_STREAM, SPECIFIC_TITLE,
-                                AGREEMENT_WITH_TERMS_OF_USE, ACCOUNT_EMAIL]
+                                AGREEMENT_WITH_TERMS_OF_USE, ACCOUNT_EMAIL, REQUESTED_ACCESS_DURATION]
 
 
 # ~~~~ Field information ~~~~ #
@@ -83,6 +86,7 @@ FIELD_TYPES = {
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
     AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(),
     ACCOUNT_EMAIL: forms.EmailField(),
+    REQUESTED_ACCESS_DURATION: forms.ChoiceField(choices=Application.REQUESTED_ACCESS_DURATION_CHOICES),
     HIDDEN: forms.BooleanField(required=False)
 }
 
@@ -109,6 +113,8 @@ FIELD_LABELS = {
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
     # Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
     ACCOUNT_EMAIL: _("The email for your account on the partner's website"),
+    # Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
+    REQUESTED_ACCESS_DURATION: _("The number of months you wish to have this access for before renewal is required"),
     # Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
     HIDDEN: _("Check this box if you would prefer to hide your application from the 'latest activity' timeline.")
 }
@@ -141,17 +147,22 @@ def get_output_for_application(app):
     to fetch only the required data rather than displaying all of Application
     plus Editor in the front end.
     """
-    output = {}
+    output = {_('Email'): {'label': 'Email', 'data': app.editor.user.email}}
     # Translators: This labels a user's email address on a form for account coordinators
-    output[_('Email')] = {'label': 'Email', 'data': app.editor.user.email}
 
     for field in PARTNER_FORM_OPTIONAL_FIELDS:
-        if getattr(app.partner, field): # Will be True if required by Partner.
+        # Since we directly mark applications made to proxy partners as 'sent', this function wouldn't be invoked.
+        # But for tests, and in the off chance we stumble into this function for when requested_access_duration is true
+        # and the partner isn't proxy, we don't want the data to be sent to partners, which is why it's not part
+        # of the SEND_DATA_FIELD_LABELS.
+        if field == 'requested_access_duration':
+            break
+        if getattr(app.partner, field):  # Will be True if required by Partner.
             field_label = SEND_DATA_FIELD_LABELS[field]
             output[field] = {'label': field_label, 'data': getattr(app, field)}
 
     for field in USER_FORM_FIELDS:
-        if getattr(app.partner, field): # Will be True if required by Partner.
+        if getattr(app.partner, field):  # Will be True if required by Partner.
             field_label = SEND_DATA_FIELD_LABELS[field]
             output[field] = {'label': field_label, 'data': getattr(app.editor, field)}
 

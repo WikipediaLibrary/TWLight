@@ -35,10 +35,8 @@ from .helpers import (USER_FORM_FIELDS,
                       FIELD_LABELS,
                       SPECIFIC_STREAM,
                       AGREEMENT_WITH_TERMS_OF_USE,
-                      ACCOUNT_EMAIL,
-                      HIDDEN)
+                      ACCOUNT_EMAIL)
 from .models import Application
-
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +53,6 @@ class StylableSubmit(BaseInput):
     def __init__(self, *args, **kwargs):
         self.field_classes = ''
         super(StylableSubmit, self).__init__(*args, **kwargs)
-
 
 
 class BaseApplicationForm(forms.Form):
@@ -106,7 +103,6 @@ class BaseApplicationForm(forms.Form):
             _('Apply'),
             css_class='center-block'))
 
-
     def _get_partner_object(self, partner):
         # Extract the number component of (e.g.) 'partner_1'.
         try:
@@ -118,9 +114,8 @@ class BaseApplicationForm(forms.Form):
             return partner
         except Partner.DoesNotExist:
             logger.exception('BaseApplicationForm received a partner ID that '
-                'did not match any partner in the database')
+                             'did not match any partner in the database')
             raise
-
 
     def _validate_parameters(self, **kwargs):
         """
@@ -131,14 +126,14 @@ class BaseApplicationForm(forms.Form):
             field_params = kwargs['field_params']
         except KeyError:
             logger.exception('Tried to instantiate a BaseApplicationForm but '
-                'did not have field_params')
+                             'did not have field_params')
             raise
 
         try:
             assert 'user' in field_params
         except AssertionError:
             logger.exception('Tried to instantiate a BaseApplicationForm but '
-                'there was no user parameter in field_params')
+                             'there was no user parameter in field_params')
             raise
 
         try:
@@ -146,7 +141,7 @@ class BaseApplicationForm(forms.Form):
             assert len(field_params.keys()) >= 2
         except AssertionError:
             logger.exception('Tried to instantiate a BaseApplicationForm but '
-                'there was not enough information in field_params')
+                             'there was not enough information in field_params')
             raise
 
         expected = re.compile(r'partner_\d+')
@@ -158,8 +153,7 @@ class BaseApplicationForm(forms.Form):
                     assert expected.match(key)
                 except AssertionError:
                     logger.exception('Tried to instantiate a BaseApplicationForm but '
-                        'there was a key that did not match any expected values')
-
+                                     'there was a key that did not match any expected values')
 
     def _validate_user_data(self, user_data):
         try:
@@ -167,7 +161,6 @@ class BaseApplicationForm(forms.Form):
         except AssertionError:
             logger.exception('BaseApplicationForm received invalid user data')
             raise
-
 
     def _validate_partner_data(self, partner_data):
         try:
@@ -177,13 +170,11 @@ class BaseApplicationForm(forms.Form):
             logger.exception('BaseApplicationForm received invalid partner data')
             raise
 
-
     def _initialize_form_helper(self):
         # Add basic styling to the form.
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-xs-12 col-sm-4 col-md-3'
         self.helper.field_class = 'col-xs-12 col-sm-8 col-md-9'
-
 
     def _add_user_data_subform(self, user_data):
         self._validate_user_data(user_data)
@@ -205,10 +196,9 @@ class BaseApplicationForm(forms.Form):
             self.helper.layout.append(user_data_layout)
             # Translators: This this note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
             self.helper.layout.append(HTML(_('<p><small><i>Your personal data '
-                'will be processed according to our <a href="{terms_url}">'
-                'privacy policy</a>.</i></small></p>'.format(
-                    terms_url=reverse('terms')))))
-
+                                             'will be processed according to our <a href="{terms_url}">'
+                                             'privacy policy</a>.</i></small></p>'.format(
+                terms_url=reverse('terms')))))
 
     def _add_partner_data_subform(self, partner):
         partner_data = self.field_params[partner]
@@ -246,14 +236,14 @@ class BaseApplicationForm(forms.Form):
                     specific_stream = forms.ModelChoiceField(queryset=Stream.objects.filter(partner_id=partner_id))
                     self.fields[field_name] = specific_stream
                     self.fields[field_name].label = FIELD_LABELS[datum]
-                    
+
                 if datum == ACCOUNT_EMAIL:
                     # If partner requires pre-registration, make sure users
                     # get a link where they can sign up.
                     # Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering.
                     help_text = _('You must register at <a href="{url}">{url}</a> '
-                                 'before applying.').format(
-                                    url=partner_object.registration_url)
+                                  'before applying.').format(
+                        url=partner_object.registration_url)
                     self.fields[field_name].help_text = help_text
 
                 partner_layout.append(field_name)
@@ -261,16 +251,15 @@ class BaseApplicationForm(forms.Form):
             self.helper.layout.append(partner_layout)
 
 
-
 class ApplicationAutocomplete(forms.ModelForm):
-    #editor = forms.ModelChoiceField(
+    # editor = forms.ModelChoiceField(
     #    queryset=Editor.objects.all(),
     #    widget=autocomplete.ModelSelect2(url='applications:editor_autocomplete')
-    #)
-    #partner = forms.ModelChoiceField(
+    # )
+    # partner = forms.ModelChoiceField(
     #    queryset=Partner.objects.all(),
     #    widget=autocomplete.ModelSelect2(url='applications:partner_autocomplete')
-    #)
+    # )
 
     class Meta:
         model = Application
@@ -286,19 +275,19 @@ class ApplicationAutocomplete(forms.ModelForm):
         # Make sure that we aren't leaking info via our form choices.
         if user.is_superuser:
             self.fields['editor'].queryset = Editor.objects.all(
-                ).order_by('wp_username')
+            ).order_by('wp_username')
 
             self.fields['partner'].queryset = Partner.objects.all(
-                ).order_by('company_name')
+            ).order_by('company_name')
 
         elif coordinators in user.groups.all():
             self.fields['editor'].queryset = Editor.objects.filter(
-                     applications__partner__coordinator__pk=user.pk
-                ).order_by('wp_username')
+                applications__partner__coordinator__pk=user.pk
+            ).order_by('wp_username')
 
             self.fields['partner'].queryset = Partner.objects.filter(
-                    coordinator__pk=user.pk
-                ).order_by('company_name')
+                coordinator__pk=user.pk
+            ).order_by('company_name')
 
         # Prettify.
         self.helper = FormHelper()
@@ -319,3 +308,50 @@ class ApplicationAutocomplete(forms.ModelForm):
         # placeholders.
         self.fields['editor'].label = _('Username')
         self.fields['partner'].label = _('Partner name')
+
+
+class RenewalForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        try:
+            self.field_params = kwargs.pop('field_params')
+        except KeyError:
+            logger.exception('Tried to instantiate a RenewalForm but '
+                             'did not have field_params')
+            raise
+        super(RenewalForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        # Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
+        fieldset = Fieldset(_('Renewal confirmation'))
+
+        account_email = False
+        if 'account_email' in self.field_params and self.field_params['account_email'] is not None:
+            self.fields['account_email'] = forms.EmailField(initial=self.field_params['account_email'])
+            account_email = True
+        elif 'account_email' in self.field_params:
+            self.fields['account_email'] = forms.EmailField()
+            account_email = True
+        if account_email:
+            # Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
+            self.fields['account_email'].label = _('The email for your account on the partner\'s website')
+            fieldset.append('account_email')
+
+        if 'requested_access_duration' in self.field_params:
+            self.fields['requested_access_duration'] = forms.ChoiceField(choices=Application.REQUESTED_ACCESS_DURATION_CHOICES, )
+            # Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
+            self.fields['requested_access_duration'].label = _('The number of months you wish to have this access'
+                                                               ' for before renewal is required')
+            fieldset.append('requested_access_duration')
+
+        self.fields['return_url'] = forms.CharField(widget=forms.HiddenInput, max_length=70, )
+        self.fields['return_url'].initial = self.field_params['return_url']
+        fieldset.append('return_url')
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-3'
+        self.helper.field_class = 'col-lg-4'
+
+        self.helper.layout = Layout()
+        self.helper.layout.append(fieldset)
