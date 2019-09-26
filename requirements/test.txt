@@ -1,5 +1,5 @@
 # Only needed to run tests.
 django-nose==1.4.6
 coveralls==1.8.0
-coverage==4.5.2
+coverage==4.5.4
 tblib==1.4.0
