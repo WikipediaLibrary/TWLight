@@ -15,7 +15,7 @@ django-reversion==3.0.4
 django-taggit==0.23.0
 djangorestframework==3.9.4
 djmail==1.1.0
-docutils==0.14
+docutils==0.15.2
 factory_boy>=2.10.0,<3.0
 futures==3.2.0
 mock==3.0.5
