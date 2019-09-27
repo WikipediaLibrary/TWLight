@@ -7,12 +7,14 @@ import time
 from datetime import date, timedelta
 from mock import patch
 import os
+import random
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.cache import cache
 from django.core.management import call_command
 from django.core.exceptions import ValidationError, PermissionDenied
+from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import Http404
@@ -23,8 +25,9 @@ from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.applications.views import RequestApplicationView
 from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFactory
-from TWLight.users.groups import get_coordinators
 from TWLight.view_mixins import APIPartnerDescriptions
+from TWLight.users.groups import get_coordinators, get_restricted
+from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, StreamFactory
 from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode
@@ -33,7 +36,8 @@ from .filters import PartnerFilter
 
 from . import views
 
-def EditorCraftRoom(self, Terms=False, Coordinator=False):
+
+def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False):
     """
     The use of the @login_required decorator on many views precludes the use of
     factories for many tests. This method creates an Editor logged into a test
@@ -63,10 +67,17 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False):
     # Add or remove editor from Coordinators as required
     coordinators = get_coordinators()
 
+    # Add or remove editor from Restricted as required
+    restricted = get_restricted()
+
     if Coordinator:
         coordinators.user_set.add(editor.user)
     else:
         coordinators.user_set.remove(editor.user)
+    if Restricted:
+        restricted.user_set.add(editor.user)
+    else:
+        restricted.user_set.remove(editor.user)
 
     return editor
 
@@ -86,7 +97,6 @@ class LanguageModelTests(TestCase):
         cls.lang_en, _ = Language.objects.get_or_create(language='en')
         cls.lang_fr, _ = Language.objects.get_or_create(language='fr')
 
-
     def test_validation(self):
         # Note that RESOURCE_LANGUAGES is a list of tuples, such as
         # `('en', 'English')`, but we only care about the first element of each
@@ -99,16 +109,13 @@ class LanguageModelTests(TestCase):
         with self.assertRaises(ValidationError):
             bad_lang.save()
 
-
     def test_language_display(self):
         self.assertEqual(self.lang_en.__unicode__(), 'English')
-
 
     def test_language_uniqueness(self):
         with self.assertRaises(IntegrityError):
             lang = Language(language='en')
             lang.save()
-
 
 
 class PartnerModelTests(TestCase):
@@ -133,12 +140,10 @@ class PartnerModelTests(TestCase):
         cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
         cls.message_patcher.start()
 
-
     @classmethod
     def tearDownClass(cls):
         super(PartnerModelTests, cls).tearDownClass()
         cls.message_patcher.stop()
-
 
     def test_get_languages(self):
         partner = PartnerFactory()
@@ -155,7 +160,6 @@ class PartnerModelTests(TestCase):
             list(partner.get_languages)
         )
 
-
     def test_visibility_of_not_available_1(self):
         """Regular users shouldn't see NOT_AVAILABLE partner pages."""
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
@@ -169,7 +173,6 @@ class PartnerModelTests(TestCase):
             # We must explicitly pass kwargs to the view even though they are
             # implied by the URL.
             _ = PartnersDetailView.as_view()(request, pk=partner.pk)
-
 
     def test_visibility_of_not_available_2(self):
         """
@@ -187,7 +190,6 @@ class PartnerModelTests(TestCase):
         response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
 
         self.assertNotContains(response, partner.get_absolute_url())
-
 
     def test_visibility_of_not_available_3(self):
         """
@@ -211,7 +213,6 @@ class PartnerModelTests(TestCase):
         response = PartnersDetailView.as_view()(request, pk=partner.pk)
         self.assertEqual(response.status_code, 200)
 
-
     def test_visibility_of_not_available_4(self):
         """
         Staff users *should* see NOT_AVAILABLE partner pages in the list view.
@@ -230,7 +231,6 @@ class PartnerModelTests(TestCase):
 
         self.assertContains(response, partner.get_absolute_url())
 
-
     def test_review_app_page_excludes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
         _ = ApplicationFactory(partner=partner, status=Application.PENDING)
@@ -244,13 +244,12 @@ class PartnerModelTests(TestCase):
         response = self.client.get(url, follow=True)
         self.assertNotContains(response, partner.company_name)
 
-
     def test_renew_app_page_excludes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
 
         tomorrow = date.today() + timedelta(days=1)
         _ = ApplicationFactory(partner=partner,
-            status=Application.SENT)
+                               status=Application.SENT)
         url = reverse('applications:list_renewal')
 
         # Create a coordinator with a test client session
@@ -259,7 +258,6 @@ class PartnerModelTests(TestCase):
         # Test response.
         response = self.client.get(url, follow=True)
         self.assertNotContains(response, partner.company_name)
-
 
     def test_sent_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
@@ -282,9 +280,8 @@ class PartnerModelTests(TestCase):
         # Applications should not be visible to just any coordinator
         self.assertNotContains(denyResponse, partner.company_name)
 
-	# Applications should be visible to the designated coordinator
-	self.assertContains(allowResponse, partner.company_name)
-
+        # Applications should be visible to the designated coordinator
+        self.assertContains(allowResponse, partner.company_name)
 
     def test_rejected_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
@@ -307,9 +304,8 @@ class PartnerModelTests(TestCase):
         # Applications should not be visible to just any coordinator
         self.assertNotContains(denyResponse, partner.company_name)
 
-	# Applications should be visible to the designated coordinator
-	self.assertContains(allowResponse, partner.company_name)
-
+        # Applications should be visible to the designated coordinator
+        self.assertContains(allowResponse, partner.company_name)
 
     def test_approved_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
@@ -332,8 +328,8 @@ class PartnerModelTests(TestCase):
         # Applications should not be visible to just any coordinator
         self.assertNotContains(denyResponse, partner.company_name)
 
-	# Applications should be visible to the designated coordinator
-	self.assertContains(allowResponse, partner.company_name)
+        # Applications should be visible to the designated coordinator
+        self.assertContains(allowResponse, partner.company_name)
 
     def test_statuses_exist(self):
         """
@@ -354,7 +350,6 @@ class PartnerModelTests(TestCase):
         assert Partner.NOT_AVAILABLE in database_statuses
         assert Partner.WAITLIST in database_statuses
 
-
     def test_is_waitlisted(self):
         partner = PartnerFactory(status=Partner.AVAILABLE)
         self.assertFalse(partner.is_waitlisted)
@@ -367,7 +362,6 @@ class PartnerModelTests(TestCase):
         partner = PartnerFactory(status=Partner.WAITLIST)
         self.assertTrue(partner.is_waitlisted)
         partner.delete()
-
 
     def test_default_manager(self):
         """
@@ -387,9 +381,8 @@ class PartnerModelTests(TestCase):
         # Sigh.
         self.assertQuerysetEqual(Partner.objects.all(),
                                  map(repr, Partner.even_not_available.filter(
-                                    status__in=
-                                    [Partner.WAITLIST, Partner.AVAILABLE])))
-
+                                     status__in=
+                                     [Partner.WAITLIST, Partner.AVAILABLE])))
 
 
 class WaitlistBehaviorTests(TestCase):
@@ -423,7 +416,6 @@ class WaitlistBehaviorTests(TestCase):
         response = self.client.get(req_url, follow=True)
         self.assertEqual(response.context['any_waitlisted'], True)
 
-
     def test_request_application_view_context_2(self):
         """
         The any_waitlisted context on RequestApplicationView should False if
@@ -442,7 +434,6 @@ class WaitlistBehaviorTests(TestCase):
         # Test response.
         response = self.client.get(req_url, follow=True)
         self.assertEqual(response.context['any_waitlisted'], False)
-
 
     def test_toggle_waitlist_1(self):
         """
@@ -467,7 +458,6 @@ class WaitlistBehaviorTests(TestCase):
         partner.refresh_from_db()
         self.assertEqual(partner.status, Partner.WAITLIST)
 
-
     def test_toggle_waitlist_2(self):
         """
         Posting to the toggle waitlist view sets a WAITLIST partner to
@@ -490,7 +480,6 @@ class WaitlistBehaviorTests(TestCase):
         _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
         partner.refresh_from_db()
         self.assertEqual(partner.status, Partner.AVAILABLE)
-
 
     def test_toggle_waitlist_access(self):
         """
@@ -518,7 +507,6 @@ class WaitlistBehaviorTests(TestCase):
             _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
 
 
-
 class StreamModelTests(TestCase):
 
     @classmethod
@@ -526,7 +514,6 @@ class StreamModelTests(TestCase):
         super(StreamModelTests, cls).setUpClass()
         cls.lang_en, _ = Language.objects.get_or_create(language='en')
         cls.lang_fr, _ = Language.objects.get_or_create(language='fr')
-
 
     def test_get_languages(self):
         stream = StreamFactory()
@@ -540,8 +527,7 @@ class StreamModelTests(TestCase):
         # Order isn't important.
         stream.languages.add(self.lang_fr)
         self.assertIn(stream.get_languages,
-            [u'English, français', u'français, English'])
-
+                      [u'English, français', u'français, English'])
 
 
 class PartnerViewTests(TestCase):
@@ -560,7 +546,7 @@ class PartnerViewTests(TestCase):
         coordinators.user_set.add(cls.coordinator)
         coordinators.user_set.add(cls.coordinator2)
 
-        application = ApplicationFactory(
+        cls.application = ApplicationFactory(
             partner=cls.partner,
             editor=editor,
             status=Application.SENT)
@@ -634,8 +620,8 @@ class PartnerDescriptionAPITests(APIPartnerDescriptions, TestCase):
         # print(partner_detail)
 
 
-
-class CSVUploadTest(TestCase): # Migrated from staff dashboard test
+        
+class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
     @classmethod
     def setUpClass(cls):
         super(CSVUploadTest, cls).setUpClass()
@@ -663,7 +649,6 @@ class CSVUploadTest(TestCase): # Migrated from staff dashboard test
         cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
         cls.message_patcher.start()
 
-
     @classmethod
     def tearDownClass(cls):
         super(CSVUploadTest, cls).tearDownClass()
@@ -675,7 +660,6 @@ class CSVUploadTest(TestCase): # Migrated from staff dashboard test
             os.remove('accesscodes.csv')
 
         cls.message_patcher.stop()
-
 
     def test_csv_upload(self):
         """
@@ -699,7 +683,6 @@ class CSVUploadTest(TestCase): # Migrated from staff dashboard test
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 3)
 
-
     def test_csv_duplicate(self):
         """
         A csv file with non-unique codes for multiple partners should
@@ -722,7 +705,6 @@ class CSVUploadTest(TestCase): # Migrated from staff dashboard test
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 2)
 
-
     def test_csv_formatting(self):
         """
         An incorrectly formatted csv shouldn't upload anything.
@@ -743,3 +725,88 @@ class CSVUploadTest(TestCase): # Migrated from staff dashboard test
 
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 0)
+
+
+        
+class AutoWaitlistDisableTest(TestCase):
+    def setUp(self):
+        super(AutoWaitlistDisableTest, self).setUp()
+        editor = EditorFactory()
+        self.user = editor.user
+
+        self.partner = PartnerFactory(
+            status=Partner.WAITLIST,
+            authorization_method=Partner.PROXY,
+            accounts_available=10)
+        self.partner1 = PartnerFactory(
+            status=Partner.WAITLIST,
+            authorization_method=Partner.PROXY,
+            accounts_available=2)
+
+        self.application = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            partner=self.partner,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.application1 = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            partner=self.partner1,
+            rationale='Just because',
+            agreement_with_terms_of_use=True)
+
+        self.coordinator = UserFactory(username='coordinator')
+        self.coordinator.set_password('coordinator')
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+        self.coordinator.userprofile.terms_of_use = True
+        self.coordinator.userprofile.save()
+
+        Authorization.objects.create(
+            authorized_user=self.user,
+            authorizer=self.coordinator,
+            date_expires=date.today(),
+            partner=self.partner
+        )
+        Authorization.objects.create(
+            authorized_user=EditorFactory().user,
+            authorizer=self.coordinator,
+            date_expires=date.today(),
+            partner=self.partner
+        )
+
+        Authorization.objects.create(
+            authorized_user=self.user,
+            authorizer=self.coordinator,
+            date_expires=date.today() + timedelta(days=random.randint(1, 5)),
+            partner=self.partner1
+        )
+        Authorization.objects.create(
+            authorized_user=EditorFactory().user,
+            authorizer=self.coordinator,
+            date_expires=date.today() + timedelta(days=random.randint(1, 5)),
+            partner=self.partner1
+        )
+
+        self.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        self.message_patcher.start()
+
+
+    def tearDown(self):
+        super(AutoWaitlistDisableTest, self).tearDown()
+        self.message_patcher.stop()
+
+
+    def test_auto_disable_waitlist_command(self):
+        self.assertEqual(self.partner.status, Partner.WAITLIST)
+        self.assertEqual(self.partner1.status, Partner.WAITLIST)
+
+        call_command('proxy_waitlist_disable')
+        
+        self.partner.refresh_from_db()
+        self.assertEqual(self.partner.status, Partner.AVAILABLE)
+        # No change should've been made to the partner with zero accounts available
+        self.partner1.refresh_from_db()
+        self.assertEqual(self.partner1.status, Partner.WAITLIST)

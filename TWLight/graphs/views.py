@@ -1,4 +1,5 @@
 import csv
+from datetime import date
 # The django-request analytics package, NOT the python URL library requests!
 from request.models import Request
 import logging
@@ -8,17 +9,17 @@ from django.core.urlresolvers import resolve
 from django.contrib import messages
 from django.db.models import Avg, Count
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, View
 from django.utils.translation import ugettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
-from TWLight.users.models import UserProfile, Editor
+from TWLight.users.models import UserProfile, Authorization
 
 from .helpers import (get_application_status_data,
                       get_data_count_by_month,
                       get_users_by_partner_by_month,
-                      get_js_timestamp,
                       get_time_open_histogram,
                       get_median_decision_time,
                       get_user_language_data,
@@ -89,6 +90,22 @@ class DashboardView(TemplateView):
                 "editor").distinct().count()
 
         context['total_partners'] = Partner.objects.count()
+
+        # Average active authorizations per user, for users with at least one.
+        all_authorizations = Authorization.objects.exclude(
+            date_expires__lte=date.today()
+        )
+        authorizations_count = all_authorizations.count()
+        authorized_users_count = all_authorizations.values(
+            'authorized_user').distinct().count()
+
+        # If we haven't authorized anyone yet, just show 0
+        if authorized_users_count:
+            # Have to add float so we don't return an int
+            context['average_authorizations'] = authorizations_count/float(
+                authorized_users_count)
+        else:
+            context['average_authorizations'] = 0
 
         # Application data
         # ----------------------------------------------------------------------
@@ -194,9 +211,9 @@ class CSVAppTimeHistogram(_CSVDownloadView):
 
         writer.writerow(
             # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
-            [_('Days until decision'),
+            [_('Days until decision').encode('utf-8'),
              # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
-             _('Number of applications')])
+             _('Number of applications').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -210,9 +227,9 @@ class CSVNumApprovedApplications(_CSVDownloadView):
         data = get_data_count_by_month(queryset, data_format=PYTHON)
         writer = csv.writer(response)
         # Translators: This is the heading of a data file, for a column containing date data.
-        writer.writerow([_('Date'), 
+        writer.writerow([_('Date').encode('utf-8'),
                          # Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-                         _('Number of approved applications')])
+                         _('Number of approved applications').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -230,9 +247,9 @@ class CSVAppMedians(_CSVDownloadView):
 
         writer.writerow(
             # Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
-            [_('Month'), 
+            [_('Month').encode('utf-8'),
              # Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
-             _('Median days until decision')])
+             _('Median days until decision').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -243,12 +260,7 @@ class CSVAppDistribution(_CSVDownloadView):
     def _write_data(self, response):
         if 'pk' in self.kwargs:
             pk = self.kwargs['pk']
-            try:
-                partner = Partner.objects.get(pk=pk)
-            except Partner.DoesNotExist:
-                logger.exception('Tried to access data for partner #{pk}, who '
-                                 'does not exist'.format(pk=pk))
-                raise
+            partner = get_object_or_404(Partner.even_not_available, pk=pk)
 
             csv_queryset = Application.objects.filter(partner=partner)
 
@@ -262,8 +274,8 @@ class CSVAppDistribution(_CSVDownloadView):
 
         writer = csv.DictWriter(response, fieldnames=['label', 'data'])
 
-        writer.writerow({'label': _('Status'),
-                         'data': _('Number of applications')})
+        writer.writerow({'label': _('Status').encode('utf-8'),
+                         'data': _('Number of applications').encode('utf-8')})
 
         for row in data:
             writer.writerow(row)
@@ -273,12 +285,7 @@ class CSVAppDistribution(_CSVDownloadView):
 class CSVAppCountByPartner(_CSVDownloadView):
     def _write_data(self, response):
         pk = self.kwargs['pk']
-        try:
-            partner = Partner.objects.get(pk=pk)
-        except Partner.DoesNotExist:
-            logger.exception('Tried to access data for partner #{pk}, who '
-                             'does not exist'.format(pk=pk))
-            raise
+        partner = get_object_or_404(Partner.even_not_available, pk=pk)
 
         queryset = Application.objects.filter(partner=partner)
 
@@ -289,9 +296,9 @@ class CSVAppCountByPartner(_CSVDownloadView):
 
         writer = csv.writer(response)
 
-        writer.writerow([_('Date'),
+        writer.writerow([_('Date').encode('utf-8'),
             # Translators: This is the heading of a data file which lists the number of applications to a partner.
-            _('Number of applications')])
+            _('Number of applications').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -302,20 +309,15 @@ class CSVUserCountByPartner(_CSVDownloadView):
     def _write_data(self, response):
         pk = self.kwargs['pk']
 
-        try:
-            partner = Partner.objects.get(pk=pk)
-        except Partner.DoesNotExist:
-            logger.exception('Tried to access data for partner #{pk}, who '
-                             'does not exist'.format(pk=pk))
-            raise
+        partner = get_object_or_404(Partner.even_not_available, pk=pk)
 
         data = get_users_by_partner_by_month(partner, data_format=PYTHON)
 
         writer = csv.writer(response)
 
-        writer.writerow([_('Date'),
+        writer.writerow([_('Date').encode('utf-8'),
             # Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
-            _('Number of unique users who applied')])
+            _('Number of unique users who applied').encode('utf-8')])
 
         for row in data:
             writer.writerow(row)
@@ -340,8 +342,8 @@ class CSVPageViews(_CSVDownloadView):
 
         writer = csv.writer(response)
         # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
-        writer.writerow([_('Page URL'),
-            _('Number of (non-unique) visitors')])
+        writer.writerow([_('Page URL').encode('utf-8'),
+            _('Number of (non-unique) visitors').encode('utf-8')])
 
         for elem in path_list:
             row = [elem['path'].encode('utf-8'), elem['the_count']]
@@ -374,9 +376,9 @@ class CSVPageViewsByPath(_CSVDownloadView):
         path_count = Request.objects.filter(path=path).count()
         writer = csv.writer(response)
 
-        writer.writerow([_('Page URL'),
+        writer.writerow([_('Page URL').encode('utf-8'),
             # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
-            _('Number of (non-unique) visitors')])
+            _('Number of (non-unique) visitors').encode('utf-8')])
 
         row = [path.encode('utf-8'), path_count]
         writer.writerow(row)
@@ -392,8 +394,8 @@ class CSVUserLanguage(_CSVDownloadView):
 
         writer = csv.DictWriter(response, fieldnames=['label', 'data'])
 
-        writer.writerow({'label': _('Language'),
-                         'data': _('Number of users')})
+        writer.writerow({'label': _('Language').encode('utf-8'),
+                         'data': _('Number of users').encode('utf-8')})
 
         for row in data:
             writer.writerow(row)

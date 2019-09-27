@@ -20,6 +20,7 @@ RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
 
+
 def validate_language_code(code):
     """
     Takes a language code and verifies that it is the first element of a tuple
@@ -173,10 +174,12 @@ class Partner(models.Model):
         (WAITLIST, _('Waitlisted')),
     )
 
+    # Authorization methods, used in both Partner and Stream
     EMAIL = 0
     CODES = 1
     PROXY = 2
     BUNDLE = 3
+    LINK = 4
 
     AUTHORIZATION_METHODS = (
         # Translators: This is the name of the authorization method whereby user accounts are set up by email.
@@ -187,6 +190,8 @@ class Partner(models.Model):
         (PROXY, _('Proxy')),
         # Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
         (BUNDLE, _('Library Bundle')),
+        # Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
+        (LINK, _('Link')),
     )
 
     status = models.IntegerField(choices=STATUS_CHOICES,
@@ -202,7 +207,7 @@ class Partner(models.Model):
             
     accounts_available = models.PositiveSmallIntegerField(blank=True, null=True, 
         # Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-        help_text=_('Add number of new accounts to the existing value, not by reseting it to zero.'))
+        help_text=_('Add the number of new accounts to the existing value, not by resetting it to zero. If \'specific stream\' is true, change accounts availability at the collection level.'))
     
     # Optional resource metadata
     # --------------------------------------------------------------------------
@@ -223,10 +228,13 @@ class Partner(models.Model):
         help_text=_("Optional instructions for sending application data to "
             "this partner."))
 
-    access_code_instructions = models.TextField(blank=True, null=True,
-        # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for using an access code to access a partner resource.
+    user_instructions = models.TextField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a partner resource.
         help_text=_("Optional instructions for editors to use access codes "
-            "for this partner. Sent via email upon access code assignment."))
+            "or free signup URLs for this partner. Sent via email upon "
+            "application approval (for links) or access code assignment. "
+            "If this partner has collections, fill out user instructions "
+            "on each collection instead."))
 
     excerpt_limit = models.PositiveSmallIntegerField(blank=True, null=True,
           # Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
@@ -243,7 +251,8 @@ class Partner(models.Model):
             "'Email' means the accounts are set up via email, and is the default. "
             "Select 'Access Codes' if we send individual, or group, login details "
             "or access codes. 'Proxy' means access delivered directly via EZProxy, "
-            "and Library Bundle is automated proxy-based access."))
+            "and Library Bundle is automated proxy-based access. 'Link' is if we "
+            "send users a URL to use to create an account."))
 
     mutually_exclusive = models.NullBooleanField(
         blank=True, null=True,
@@ -258,6 +267,14 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
         help_text=_("Select all languages in which this partner publishes "
             "content.")
+        )
+
+    account_length = models.DurationField(
+        blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
+        help_text=_("The standard length of an access grant from this Partner. "
+            "Entered as &ltdays hours:minutes:seconds&gt."
+            )
         )
 
     tags = TaggableManager(through=TaggedTextField, blank=True)
@@ -307,6 +324,10 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
         help_text=_("Mark as true if this partner requires applicants to have "
                     "already signed up at the partner website."))
+    requested_access_duration = models.BooleanField(default=False,
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners.
+        help_text=_("Mark as true if the authorization method of this partner is proxy "
+                    "and requires the duration of the access (expiry) be specified."))
 
 
     def __unicode__(self):
@@ -324,14 +345,17 @@ class Partner(models.Model):
         if self.account_email and not self.registration_url:
             raise ValidationError('When pre-registration is required, '
                 'a link to the registration page must be provided.')
+        if self.authorization_method == self.PROXY and not self.requested_access_duration:
+            raise ValidationError({'requested_access_duration': ['When authorization method is proxy, '
+                'requested_access_duration field must be checked.',]})
 
 
     def get_absolute_url(self):
         return reverse_lazy('partners:detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
-        """Invalidate this partner's pandoc-rendered html from cache"""
         super(Partner, self).save(*args, **kwargs)
+        """Invalidate this partner's pandoc-rendered html from cache"""
         for code in RESOURCE_LANGUAGE_CODES:
           send_instructions_cache_key = make_template_fragment_key(
               'partner_send_instructions', [code, self.pk]
@@ -404,6 +428,22 @@ class Stream(models.Model):
     description_last_revision_ids = models.TextField(blank=True, null=True, editable=False)
 
     languages = models.ManyToManyField(Language, blank=True)
+
+    authorization_method = models.IntegerField(choices=Partner.AUTHORIZATION_METHODS,
+        default=Partner.EMAIL,
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
+        help_text=_("Which authorization method does this collection use? "
+            "'Email' means the accounts are set up via email, and is the default. "
+            "Select 'Access Codes' if we send individual, or group, login details "
+            "or access codes. 'Proxy' means access delivered directly via EZProxy, "
+            "and Library Bundle is automated proxy-based access. 'Link' is if we "
+            "send users a URL to use to create an account."))
+
+    user_instructions = models.TextField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
+        help_text=_("Optional instructions for editors to use access codes "
+            "or free signup URLs for this collection. Sent via email upon "
+            "application approval (for links) or access code assignment."))
 
 
     def __unicode__(self):

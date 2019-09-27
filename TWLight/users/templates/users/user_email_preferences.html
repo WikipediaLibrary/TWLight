@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<div class="row clearfix">
+  <form method="post" class="form-inline">
+    {% csrf_token %}
+    {% for field in email_form %}
+      <div id="div_{{ field.auto_id }}" class="form-group">
+        {{ field.label }}: {{ field }}
+      </div>
+    {% endfor %}
+    <div style="padding-top: 10px">
+      {% comment %} Translators: This is a button which updates user preference settings {% endcomment %}
+      <input type="submit" name="update_email_settings" value="{% trans "Update" %}" class="btn btn-default"/>
+    </div>
+  </form>
+</div>

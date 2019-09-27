@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import logging
 
 from datetime import date, datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from reversion import revisions as reversion
 from reversion.models import Version
 from reversion.signals import post_revision_commit
@@ -16,6 +18,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Editor, Authorization
+
+logger = logging.getLogger(__name__)
 
 class ValidApplicationsManager(models.Manager):
     def get_queryset(self):
@@ -99,6 +103,13 @@ class Application(models.Model):
     agreement_with_terms_of_use = models.BooleanField(default=False)
     account_email = models.EmailField(blank=True, null=True)
 
+    REQUESTED_ACCESS_DURATION_CHOICES = ((12, _('12 months')), (6, _('6 months')), (3, _('3 months')), (1, _('1 month')))
+
+    requested_access_duration = models.IntegerField(choices=REQUESTED_ACCESS_DURATION_CHOICES, blank=True, null=True,
+                                                    # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
+                                                    help_text=_('User selection of when they\'d like their account to expire (in months). '
+                                                                'Only relevant if the applied partner/collection has authorization_method as \'proxy\'.'))
+
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
 
@@ -153,7 +164,8 @@ class Application(models.Model):
                          'editor': self.editor,
                          'partner': self.partner,
                          'specific_stream': self.specific_stream,
-                         'account_email': self.account_email})
+                         'account_email': self.account_email,
+                         'requested_access_duration': self.requested_access_duration})
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in
@@ -248,6 +260,38 @@ class Application(models.Model):
             return (self.date_closed - self.date_created).days
 
 
+    def get_user_instructions(self):
+        """
+        This application will either be to a partner or collection. If the
+        former, this function returns the partner user instructions. Otherwise,
+        it gets the user instructions for this collection.
+        """
+        if self.specific_stream:
+            return self.specific_stream.user_instructions
+        else:
+            return self.partner.user_instructions
+
+
+    def is_instantly_finalized(self):
+        """
+        Check if this application is to a partner or collection for which
+        we will instantly mark it as finalized and provide access.
+        """
+        instantly_finalised_authorization_methods = [Partner.PROXY, Partner.LINK]
+
+        # Authorization methods are defined at both the partner and collection level,
+        # so we need to know which one to check.
+        if self.specific_stream:
+            authorization_method = self.specific_stream.authorization_method
+        else:
+            authorization_method = self.partner.authorization_method
+
+        if authorization_method in instantly_finalised_authorization_methods:
+            return True
+        else:
+            return False
+
+
     @property
     def user(self):
         # Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation
@@ -318,21 +362,32 @@ def update_app_status_on_save(sender, instance, **kwargs):
             instance.date_closed = localtime(now()).date()
             instance.days_open = 0
 
-# Authorize editor to access resource after an application is saved as sent.
 @receiver(post_save, sender=Application)
 def post_revision_commit(sender, instance, **kwargs):
-    # Check if an authorization already exists.
-    if instance.specific_stream:
-        existing_authorization = Authorization.objects.filter(
-            authorized_user=instance.user,
-            partner=instance.partner,
-            stream=instance.specific_stream)
-    else:
-        existing_authorization = Authorization.objects.filter(
-            authorized_user=instance.user,
-            partner=instance.partner)
+
+    # For some authorization methods, we can skip the manual Approved->Sent
+    # step and just immediately take an Approved application and give it
+    # a finalised status.
+    skip_approved = (instance.status == Application.APPROVED and
+        instance.is_instantly_finalized())
+
+    if skip_approved:
+        instance.status = Application.SENT
+        instance.save()
+
+    # Authorize editor to access resource after an application is saved as sent.
 
     if instance.status == Application.SENT and not instance.imported:
+        # Check if an authorization already exists.
+        if instance.specific_stream:
+            existing_authorization = Authorization.objects.filter(
+                authorized_user=instance.user,
+                partner=instance.partner,
+                stream=instance.specific_stream)
+        else:
+            existing_authorization = Authorization.objects.filter(
+                authorized_user=instance.user,
+                partner=instance.partner)
 
         authorized_user = instance.user
         authorizer = instance.sent_by
@@ -357,10 +412,22 @@ def post_revision_commit(sender, instance, **kwargs):
         authorization.authorizer = authorizer
         authorization.partner = instance.partner
 
-        # If this is a proxy partner, set (or reset) the expiry date
+        # If this is a proxy partner, and the requested_access_duration
+        # field is set to false, set (or reset) the expiry date
         # to one year from now
-        if instance.partner.authorization_method == Partner.PROXY:
-            one_year_from_now = datetime.date.today() + timedelta(years=1)
+        if instance.partner.authorization_method == Partner.PROXY and instance.requested_access_duration is None:
+            one_year_from_now = date.today() + timedelta(days=365)
             authorization.date_expires = one_year_from_now
+        # If this is a proxy partner, and the requested_access_duration
+        # field is set to true, set (or reset) the expiry date
+        # to 1, 3, 6 or 12 months from today based on user input
+        elif instance.partner.authorization_method == Partner.PROXY and instance.partner.requested_access_duration is True:
+            custom_expiry_date = date.today() + relativedelta(months=+instance.requested_access_duration)
+            authorization.date_expires = custom_expiry_date
+        # Alternatively, if this partner has a specified account_length,
+        # we'll use that to set the expiry.
+        elif instance.partner.account_length:
+            # account_length should be a timedelta
+            authorization.date_expires = date.today() + instance.partner.account_length
 
         authorization.save()

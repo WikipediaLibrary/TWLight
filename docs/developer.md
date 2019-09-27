@@ -2,21 +2,13 @@
 
 The intended audience for this document is future developers of TWLight. Hi!
 
-To get set up with TWLight locally you can [twlight_vagrant](https://github.com/WikipediaLibrary/twlight_vagrant).
+To get set up with TWLight locally you will need [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
 
 ## Shell scripts
 
 A suite of shell scripts for performing various functions can be found in the /bin folder.
 
-Scripts starting with `virtualenv_` should be run as `www` (e.g. `sudo su www virtualenv_migrate.sh`).
-
-### Virtual environment
-
-To activate the Python virtual environment for the project, run:
-
-`sudo su www`
-
-`source /var/www/html/TWLight/bin/virtualenv_activate.sh`
+These scripts can be run with, for example `docker exec twlight virtualenv_migrate.sh`.
 
 ### Migrating
 
@@ -32,6 +24,8 @@ See the [official documentation](https://docs.djangoproject.com/en/1.11/topics/m
 ### Testing
 
 To test the tool, simply run the `virtualenv_test.sh` script. This script more or less only runs `python manage.py test`.
+
+You can run a specific test using the `virtualenv_testcase.sh` script, providing a single argument for the test case to run, e.g. `virtualenv_testcase.sh TWLight.resources.tests`.
 
 ### Example data
 
@@ -75,3 +69,31 @@ All four places referenced there must be updated:
     * Add an entry to FIELD_TYPES specifying the widget to be used to render the field.
     * Add an entry to FIELD_LABELS, which will be used to label the field (don't forget to wrap it in `_()`!)
     * Run the tests. `SynchronizeFieldsTest` will fail if you haven't done all the steps.
+
+## PyCharm setup
+
+This project can be set up via PyCharm using its support for Docker. Wikimedia developers can get free access to PyCharm Professional (required for Docker support) - please contact The Wikipedia Library for instructions.
+
+### Process
+
+1. After installing Docker, ensure it's using Linux Containers, and in settings, enable the 'Expose daemon on tcp://localhost:2375 without TLS' option in settings.
+2. In PyCharm, open the repository folder, and navigate to Project Settings (File > Settings)
+3. Under Build, Execution, Deployment > Docker, click the + symbol and check the TCP socket option is selected. The value should be `tcp://localhost:2375`.
+4. Navigate to Project > Project Interpreter, click the cog/gear icon in the top right, then Add... and select the Docker Compose tab
+- Configuration file(s) should be set to both `docker-compose.yml` and `docker-compose.override.yml`
+- Service should be set to `twlight`.
+- Set Python interpreter path to /venv/bin/python
+5. It may take some time for the interpreter to finish adding. If successful, you should see a long list of python packages including Django.
+6. Open the Docker tab in PyCharm's bottom bar. With the Docker entry highlighted, click the icon with three green arrows, then `Create docker-compose deployment...`
+- Compose file(s) should again be set to both `docker-compose.yml` and `docker-compose.override.yml`
+- Check the `--build` option
+- Click Apply, then Run
+7. You should see the three containers - `twlight_docker_db_1`, `twlight_docker_twlight_1`, and `twlight_docker_web_1` start up correctly, and you should see the platform at `localhost`.
+8. Whenever you want to start the Docker containers again, you can simply click the green arrows, then 'Docker'.
+
+### Potential issues
+- `Cannot start service db: driver failed programming external connectivity on endpoint...`: Occassional problem which stops docker containers from starting. To solve, simply restart the docker service.
+- 'Unauthorised' when retrieving alpine: This error is a result of signing into Docker with an ID rather than your email. Simply log out and then back in using your full email address.
+- SDK name error: Clear out your PyCharm interpreters by following the top response at https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000306410-Cannot-use-system-interpreter-in-PyCharm-Pro-2018-1
+- `Drive has not been shared`. This error occurs if Docker can't access the relevant folder. On Windows it can be solved by going to Properties > Sharing > Share > Share.
+- `(2005, "Unknown MySQL server host 'db' (-2)")`. Happens when the 'twlight_db_1' container fails to load. For a simple fix, open command prompt from within the Docker program files directory and run `docker system prune`. Deploying docker-compose.override.yml should now recreate the database from scratch. Run migrations, folowed by the example data script to restore the db to its initial state. Checkout https://github.com/wodby/mariadb/issues/2 if you are interested in not a simple fix.

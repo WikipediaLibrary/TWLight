@@ -1,3 +1,4 @@
+from datetime import date
 import json
 
 from crispy_forms.helper import FormHelper
@@ -8,7 +9,6 @@ from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
-from django.core import serializers
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -20,13 +20,20 @@ from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 from django_comments.models import Comment
 
+from TWLight.resources.models import Partner
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 from TWLight.users.groups import get_coordinators, get_restricted
 
+from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from reversion.models import Version
 
-from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm
+from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm, UserEmailForm
 from .models import Editor, UserProfile
+from .serializers import UserSerializer
 from TWLight.applications.models import Application
 
 import datetime
@@ -100,6 +107,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
         context['object_list'] = editor.applications.model.include_invalid.filter(editor=editor).order_by('status', '-date_closed')
         context['form'] = EditorUpdateForm(instance=editor)
         context['language_form'] = SetLanguageForm(user=self.request.user)
+        context['email_form'] = UserEmailForm(user=self.request.user)
 
         try:
             if self.request.user.editor == editor and not editor.contributions:
@@ -160,6 +168,17 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             response = HttpResponse(json_data, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename=user_data.json'
             return response
+
+        if "update_email_settings" in request.POST:
+            logger.info(request.POST)
+            # Unchecked checkboxes just don't send POST data
+            if "send_renewal_notices" in request.POST:
+                send_renewal_notices = True
+            else:
+                send_renewal_notices = False
+
+            editor.user.userprofile.send_renewal_notices = send_renewal_notices
+            editor.user.userprofile.save()
 
         return HttpResponseRedirect(reverse_lazy('users:home'))
 
@@ -521,3 +540,35 @@ class TermsView(UpdateView):
 
             messages.add_message(self.request, messages.WARNING, fail_msg)
             return reverse_lazy('users:home')
+
+
+class AuthorizedUsers(APIView):
+    """
+    API endpoint returning the list of users authorized to access a specific
+    partner. For proxy partners, uses the list of Authorizations. For others,
+    uses the full list of sent applications.
+    """
+    authentication_classes = (TokenAuthentication,)
+    # TODO: We might want to set up more granular permissions for future APIs.
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, pk, version, format=None):
+        try:
+            partner = Partner.even_not_available.get(pk=pk)
+        except Partner.DoesNotExist:
+            message = "Couldn't find a partner with this ID."
+            return Response(message, status=status.HTTP_404_NOT_FOUND)
+
+        if partner.authorization_method == Partner.PROXY:
+            users = User.objects.filter(
+                authorizations__partner=partner,
+                authorizations__date_expires__gte=date.today()
+            ).distinct()
+        else:
+            users = User.objects.filter(
+                editor__applications__status=Application.SENT,
+                editor__applications__partner=partner
+            ).distinct()
+
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
