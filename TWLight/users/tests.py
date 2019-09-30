@@ -16,6 +16,7 @@ from django.utils.translation import get_language
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 
+from TWLight.resources.tests import EditorCraftRoom
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
 
@@ -24,7 +25,7 @@ from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
-from .models import UserProfile, Editor
+from .models import Authorization, UserProfile, Editor
 
 from rest_framework.test import APIRequestFactory, force_authenticate
 
@@ -795,12 +796,15 @@ class HelpersTestCase(TestCase):
         self.assertEqual(WIKIS_LANGUAGES, LANGUAGES)
 
 
-class AuthorizedUsersAPITestCase(TestCase):
+
+class AuthorizationBaseTestCase(TestCase):
     """
-    Tests for the AuthorizedUsers view and API.
+    Setup class for Authorization Object tests.
+    Could possibly achieve the same effect via a new factory class.
     """
     def setUp(self):
-        super(AuthorizedUsersAPITestCase, self).setUp()
+        super(AuthorizationBaseTestCase, self).setUp()
+
 
         self.partner1 = PartnerFactory(
             authorization_method=Partner.EMAIL
@@ -812,7 +816,134 @@ class AuthorizedUsersAPITestCase(TestCase):
         self.editor1 = EditorFactory()
         self.editor2 = EditorFactory()
         self.editor3 = EditorFactory()
-        self.editor4 = EditorFactory()
+        # Editor 4 is a coordinator with a session.
+        self.editor4 = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        # Editor 4 is the designated coordinator for partners 1 and 2.
+        self.partner1.coordinator = self.editor4.user
+        self.partner1.save()
+        self.partner2.coordinator = self.editor4.user
+        self.partner2.save()
+
+        # Create applications.
+        self.app1 = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner1,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app2 = ApplicationFactory(
+            editor=self.editor2,
+            partner=self.partner1,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app3 = ApplicationFactory(
+            editor=self.editor3,
+            partner=self.partner1,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app4 = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner2,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app5 = ApplicationFactory(
+            editor=self.editor2,
+            partner=self.partner2,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app6 = ApplicationFactory(
+            editor=self.editor3,
+            partner=self.partner2,
+            status=Application.PENDING,
+            date_closed = None
+        )
+
+        # Editor 4 will update status on applications to partners 1 and 2.
+        # Send the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app1.pk}),
+            data={'status': Application.SENT},
+            follow=True
+        )
+        self.app1.refresh_from_db()
+        self.auth_app1 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor1.user, partner=self.partner1)
+
+        # Approve the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app2.pk}),
+            data={'status': Application.APPROVED},
+            follow=True
+        )
+        self.app2.refresh_from_db()
+        #self.auth_app2 =  Authorization(authorizer=self.editor4.user, authorized_user=self.editor2.user, partner=self.partner1)
+
+        # Send the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app3.pk}),
+            data={'status': Application.SENT},
+            follow=True
+        )
+        self.app3.refresh_from_db()
+        self.auth_app3 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor3.user, partner=self.partner1)
+
+        # Send the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app4.pk}),
+            data={'status': Application.SENT},
+            follow=True
+        )
+        self.app4.refresh_from_db()
+        self.auth_app4 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor1.user, partner=self.partner2)
+
+        # Send the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app5.pk}),
+            data={'status': Application.SENT},
+            follow=True
+        )
+        self.app5.refresh_from_db()
+        self.auth_app5 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor2.user, partner=self.partner2)
+
+
+
+    def tearDown(self):
+        super(AuthorizationBaseTestCase, self).tearDown()
+        self.partner1.delete()
+        self.partner2.delete()
+        self.editor1.delete()
+        self.editor2.delete()
+        self.editor3.delete()
+        self.editor4.delete()
+        self.app1.delete()
+        self.app2.delete()
+        self.app3.delete()
+        self.app4.delete()
+        self.app5.delete()
+
+
+
+class AuthorizationTestCase(AuthorizationBaseTestCase):
+    """
+    Tests that Authorizations are correctly created based on user activity.
+    """
+    def test_approval_sets_authorizer(self):
+
+        self.assertEqual(self.auth_app1.authorizer, self.editor4.user)
+        #self.assertEqual(self.auth_app2.authorizer, self.editor4.user)
+        self.assertEqual(self.auth_app3.authorizer, self.editor4.user)
+        self.assertEqual(self.auth_app4.authorizer, self.editor4.user)
+        self.assertEqual(self.auth_app5.authorizer, self.editor4.user)
+
+
+
+class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
+    """
+    Tests for the AuthorizedUsers view and API.
+    """
 
     def test_authorized_users_api_denied(self):
         """
@@ -842,22 +973,6 @@ class AuthorizedUsersAPITestCase(TestCase):
         In the case of a non-proxy partner, we should return all users with
         a sent application.
         """
-        _ = ApplicationFactory(
-            editor=self.editor1,
-            partner=self.partner1,
-            status=Application.SENT
-        )
-        _ = ApplicationFactory(
-            editor=self.editor2,
-            partner=self.partner1,
-            status=Application.APPROVED
-        )
-        _ = ApplicationFactory(
-            editor=self.editor3,
-            partner=self.partner1,
-            status=Application.SENT
-        )
-
         factory = APIRequestFactory()
         request = factory.get('/api/v0/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
@@ -874,21 +989,6 @@ class AuthorizedUsersAPITestCase(TestCase):
         In the case of a proxy partner, we should return all active authorizations
         for that partner.
         """
-        _ = ApplicationFactory(
-            editor=self.editor1,
-            partner=self.partner2,
-            status=Application.SENT
-        )
-        _ = ApplicationFactory(
-            editor=self.editor2,
-            partner=self.partner2,
-            status=Application.SENT
-        )
-        _ = ApplicationFactory(
-            editor=self.editor3,
-            partner=self.partner2,
-            status=Application.PENDING
-        )
         factory = APIRequestFactory()
         request = factory.get('/api/v0/users/authorizations/partner/1')
         force_authenticate(request, user=self.editor1.user)
