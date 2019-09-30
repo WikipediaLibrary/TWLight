@@ -659,10 +659,10 @@ class EditorModelTestCase(TestCase):
 
 
 
-class AuthorizationTestCase(TestCase):
+class OAuthTestCase(TestCase):
 
     def setUp(self):
-        super(AuthorizationTestCase, self).setUp()
+        super(OAuthTestCase, self).setUp()
         # Prevent failures due to side effects from database artifacts.
         for editor in Editor.objects.all():
             editor.delete()
@@ -745,7 +745,6 @@ class AuthorizationTestCase(TestCase):
         identity = copy.copy(FAKE_IDENTITY)
         lang = get_language()
         new_sub = 57381037
-        new_username = oauth_backend._get_username(identity)
         identity['sub'] = new_sub
         self.assertFalse(Editor.objects.filter(wp_sub=new_sub).count())
 
