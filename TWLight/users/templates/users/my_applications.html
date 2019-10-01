@@ -9,9 +9,10 @@
     {% comment %} Translators: A button on the 'your applications' page which when clicked takes users their collection page. {% endcomment %}
     {% trans "Your collection" %}
   </a>
+  <div class="clearfix"></div>
   {% for app in object_list %}
     <div class="row">
-      <div class="col-xs-4 col-sm-2">
+      <div class="col-sm-2 hidden-xs">
         <span class="label label{{ app.get_bootstrap_class }} pull-right">
           {% if app.parent %}
             Renewal -
@@ -25,6 +26,15 @@
           {{ app.partner }}
         </a>
         </h4>
+        <div class="visible-xs">
+          <span class="label label{{ app.get_bootstrap_class }}">
+            {% if app.parent %}
+              Renewal -
+            {% endif %}
+            {{ app.get_status_display }}
+          </span>
+          <br /><br />
+        </div>
         {% if app.imported %}
           {% comment %} Translators: On the page listing applications, this shows next to an application which was imported to the website. {% endcomment %}
           {% trans 'Imported application' %}

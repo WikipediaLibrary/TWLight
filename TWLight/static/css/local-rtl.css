@@ -441,6 +441,7 @@ A few spots just need padding instead of margin.
 
 .top-border.panel-body {
   border: 1px solid #ddd;
+  border-radius: 5px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
@@ -463,10 +464,12 @@ A few spots just need padding instead of margin.
 }
 
 .partner-logo {
+  position: relative;
   padding: 0 10% 0 10%;
   margin: 0 auto 2em auto;
   max-height: 7em;
   min-height: 3em;
+  z-index: 1;
 }
 
 .partner-logo-container {
@@ -483,57 +486,64 @@ A few spots just need padding instead of margin.
 }
 
 .lead {
-	text-align:center;
-	padding: 20px;
-	border:1px solid #c9c9c9;
-	border-radius:4px;
-	box-shadow:-1px 1px 2px #eaeaea;
-	font-size:1.4em;
+  text-align:center;
+  padding: 20px;
+  border:1px solid #c9c9c9;
+  border-radius:4px;
+  box-shadow:-1px 1px 2px #eaeaea;
+  font-size:1.4em;
 }
 
 .border {
-	padding: 10px;
-	border:1px solid #c9c9c9;
-	border-radius:4px;
-	box-shadow:-1px 1px 2px #eaeaea;
-	margin:20px 0px 0px 20px;
-	min-height:350px;
+  padding: 10px;
+  border:1px solid #c9c9c9;
+  border-radius:4px;
+  box-shadow:-1px 1px 2px #eaeaea;
+  margin:20px 0px 0px 20px;
+  min-height:350px;
 }
 
 .read-more {
-	width:200px;
-	margin:auto;
-	text-align:center;
+  width:200px;
+  margin:auto;
+  text-align:center;
 }
 
 .btn-extra-large{
-    padding-top:30px;
-    padding-bottom:30px;
-    max-width: 575px;
+  padding-top:30px;
+  padding-bottom:30px;
+  max-width: 575px;
 }
 
 .btn-extra-large:after{
-   content: " ";
-   display: block;
-   height: 0;
-   clear: both;
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
 }
 
 .app-list{
-    word-break: break-word;
-    white-space: normal;
+  word-break: break-word;
+  white-space: normal;
 }
 
-.no-padding {
-    margin-left: -14px;
-    margin-right: -14px;
-    margin-top: -14px;
+.no-padding-icon {
+  margin-left: -14px;
+  margin-top: -14px;
+  z-index: 2;
+}
+
+.no-padding-logo {
+  position: absolute;
+  margin-right: -18px;
+  margin-top: -14px;
+  z-index: 2;
 }
 
 .expiry-warning.panel-body  {
-    border:1px solid #f09b90;
-    -webkit-box-shadow: 0 1px 1px rgba(255,0,0,.05);
-    box-shadow: 0 1px 1px rgba(255,0,0,.05);
+  border:1px solid #f09b90;
+  -webkit-box-shadow: 0 1px 1px rgba(255,0,0,.05);
+  box-shadow: 0 1px 1px rgba(255,0,0,.05);
 }
 
 .inline-header {
@@ -558,29 +568,29 @@ A few spots just need padding instead of margin.
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
 .nav-greeting {
-	font-size:.9em; 
+  font-size:.9em;
 }
 
 li.mobile-menu {
-	width:150px;
-	font-size:.9em;	
+  width:150px;
+  font-size:.9em;
 }
 
  .nav li a {
-	 padding: 5px;
+   padding: 5px;
  }
 
 .navbar-left {
-	border-bottom:2px solid #ffffff;
+  border-bottom:2px solid #ffffff;
 }
 
 .lead {
-	text-align:center;
-	padding: 20px;
-	border:1px solid #c9c9c9;
-	border-radius:4px;
-	box-shadow:-1px 1px 2px #eaeaea;
-	font-size:1em;
+  text-align:center;
+  padding: 20px;
+  border:1px solid #c9c9c9;
+  border-radius:4px;
+  box-shadow:-1px 1px 2px #eaeaea;
+  font-size:1em;
 }
 }
 
