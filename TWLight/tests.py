@@ -553,6 +553,12 @@ class AuthorizationBaseTestCase(TestCase):
             status = Application.PENDING,
             date_closed = None
         )
+        self.app9 = ApplicationFactory(
+            editor=self.editor2,
+            partner=self.partner3,
+            status=Application.PENDING,
+            date_closed = None
+        )
 
         # Editor 4 will update status on applications to partners 1 and 2.
         # Send the application
@@ -739,34 +745,33 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
             partner=self.app1.partner
         )
         self.assertTrue(auth_app1_renewal)
-"""
+
     def test_access_codes_email(self):
         # For access code partners, when applications are marked sent,
         # access codes should be sent automatically via email.
 
-        # outbox has two emails in by default, from creating two approved
-        # applications during setup. So let's empty it for clarity.
-        #mail.outbox = []
+        # outbox already has messages in the outbox from creating approved
+        # applications during setup. So let's get a starting count.
+        starting_message_count = len(mail.outbox)
 
-        #self.partner.authorization_method = Partner.CODES
-        #self.partner.save()
+        request = RequestFactory().post(reverse('applications:send_partner', kwargs={'pk': self.app9.partner.pk}),
+                                        data={'accesscode': ["{app_pk}_{code}".format(
+                                            app_pk=self.app9.pk,
+                                            code=self.access_code.code)]})
+        request.user = self.editor4.user
 
-        #request = RequestFactory().post(self.url,
-        #                                data={'accesscode': ["{app_pk}_{code}".format(
-        #                                    app_pk=self.app1.pk,
-        #                                    code=self.access_code.code)]})
-        #request.user = self.user
+        # Mark as sent
+        response = TWLight.applications.views.SendReadyApplicationsView.as_view()(
+            request, pk=self.app9.partner.pk)
+        # verify that was successful
+        self.assertEqual(response.status_code, 302)
 
-        #response = views.SendReadyApplicationsView.as_view()(
-        #    request, pk=self.partner.pk)
+        # We expect one additional email should now be sent.
+        self.assertEqual(len(mail.outbox), starting_message_count + 1)
 
-        # We expect that one email should now be sent.
-        self.assertEqual(len(mail.outbox[0].body), 1)
-
-        # The email should contain the assigned access code.
-        print('{outbox}'.format(outbox=mail.outbox))
-        self.assertTrue(self.access_code.code in mail.outbox[0].body)
-
+        # The most recent email should contain the assigned access code.
+        self.assertTrue(self.access_code.code in mail.outbox[-1].body)
+"""
     def test_authorization_expiry_date(self):
         # For a partner with a set account length we should set the expiry
         # date correctly for its authorizations.
