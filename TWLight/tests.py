@@ -7,10 +7,17 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.test import TestCase, RequestFactory, Client
 
+from rest_framework.test import APIRequestFactory, force_authenticate
+
+from TWLight.applications.factories import ApplicationFactory
+from TWLight.applications.models import Application
+from TWLight.resources.tests import EditorCraftRoom
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.factories import UserFactory, EditorFactory
 from TWLight.users.groups import get_coordinators
+from TWLight.users.models import Authorization, UserProfile, Editor
+import TWLight.users.views
 
 from . import views
 
@@ -448,3 +455,212 @@ class UserRenewalNoticeTest(TestCase):
     """
     def test_command_output(self):
         call_command('user_renewal_notice')
+
+
+
+class AuthorizationBaseTestCase(TestCase):
+    """
+    Setup class for Authorization Object tests.
+    Could possibly achieve the same effect via a new factory class.
+    """
+    def setUp(self):
+        super(AuthorizationBaseTestCase, self).setUp()
+
+
+        self.partner1 = PartnerFactory(
+            authorization_method=Partner.EMAIL,
+            status=Partner.AVAILABLE
+        )
+        self.partner2 = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            status=Partner.AVAILABLE
+        )
+
+        self.editor1 = EditorFactory()
+        self.editor2 = EditorFactory()
+        self.editor3 = EditorFactory()
+        # Editor 4 is a coordinator with a session.
+        self.editor4 = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        # Editor 4 is the designated coordinator for partners 1 and 2.
+        self.partner1.coordinator = self.editor4.user
+        self.partner1.save()
+        self.partner2.coordinator = self.editor4.user
+        self.partner2.save()
+
+        # Create applications.
+        self.app1 = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner1,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app2 = ApplicationFactory(
+            editor=self.editor2,
+            partner=self.partner1,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app3 = ApplicationFactory(
+            editor=self.editor3,
+            partner=self.partner1,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app4 = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner2,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app5 = ApplicationFactory(
+            editor=self.editor2,
+            partner=self.partner2,
+            status = Application.PENDING,
+            date_closed = None
+        )
+        self.app6 = ApplicationFactory(
+            editor=self.editor3,
+            partner=self.partner2,
+            status=Application.PENDING,
+            date_closed = None
+        )
+
+        # Editor 4 will update status on applications to partners 1 and 2.
+        # Send the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app1.pk}),
+            data={'status': Application.SENT},
+            follow=True
+        )
+        self.app1.refresh_from_db()
+        self.auth_app1 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor1.user, partner=self.partner1)
+
+        # Approve the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app2.pk}),
+            data={'status': Application.APPROVED},
+            follow=True
+        )
+        self.app2.refresh_from_db()
+        self.auth_app2 =  Authorization(authorizer=self.editor4.user, authorized_user=self.editor2.user, partner=self.partner1)
+
+        # Send the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app3.pk}),
+            data={'status': Application.SENT},
+            follow=True
+        )
+        self.app3.refresh_from_db()
+        self.auth_app3 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor3.user, partner=self.partner1)
+
+        # Send the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app4.pk}),
+            data={'status': Application.SENT},
+            follow=True
+        )
+        self.app4.refresh_from_db()
+        self.auth_app4 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor1.user, partner=self.partner2)
+
+        # Send the application
+        self.client.post(
+            reverse('applications:evaluate', kwargs={'pk': self.app5.pk}),
+            data={'status': Application.SENT},
+            follow=True
+        )
+        self.app5.refresh_from_db()
+        self.auth_app5 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor2.user, partner=self.partner2)
+
+
+
+    def tearDown(self):
+        super(AuthorizationBaseTestCase, self).tearDown()
+        self.partner1.delete()
+        self.partner2.delete()
+        self.editor1.delete()
+        self.editor2.delete()
+        self.editor3.delete()
+        self.editor4.delete()
+        self.app1.delete()
+        self.app2.delete()
+        self.app3.delete()
+        self.app4.delete()
+        self.app5.delete()
+
+
+
+class AuthorizationTestCase(AuthorizationBaseTestCase):
+    """
+    Tests that Authorizations are correctly created and updated based on user activity.
+    """
+    def test_approval_sets_authorizer(self):
+        """
+        Test that authorizer is correctly set.
+        """
+        self.assertEqual(self.auth_app1.authorizer, self.editor4.user)
+        self.assertEqual(self.auth_app2.authorizer, self.editor4.user)
+        self.assertEqual(self.auth_app3.authorizer, self.editor4.user)
+        self.assertEqual(self.auth_app4.authorizer, self.editor4.user)
+        self.assertEqual(self.auth_app5.authorizer, self.editor4.user)
+
+
+
+class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
+    """
+    Tests for the AuthorizedUsers view and API.
+    """
+
+    def test_authorized_users_api_denied(self):
+        """
+        Test that, if no credentials are supplied, the API returns no data.
+        """
+        factory = APIRequestFactory()
+        request = factory.get('/api/v0/users/authorizations/partner/1')
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
+
+        self.assertEqual(response.status_code, 401)
+
+    def test_authorized_users_api_success(self):
+        """
+        Test that, if credentials are supplied, the API returns a 200 status code.
+        """
+        factory = APIRequestFactory()
+        request = factory.get('/api/v0/users/authorizations/partner/1')
+        force_authenticate(request, user=self.editor1.user)
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_authorized_users_api_applications(self):
+        """
+        In the case of a non-proxy partner, we should return all users with
+        a sent application.
+        """
+        factory = APIRequestFactory()
+        request = factory.get('/api/v0/users/authorizations/partner/1')
+        force_authenticate(request, user=self.editor1.user)
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(request, self.partner1.pk, 0)
+
+        expected_json = [{"wp_username": self.editor1.user.editor.wp_username},
+                         {"wp_username": self.editor3.user.editor.wp_username}]
+
+        self.assertEqual(response.data, expected_json)
+
+    def test_authorized_users_api_authorizations(self):
+        """
+        In the case of a proxy partner, we should return all active authorizations
+        for that partner.
+        """
+        factory = APIRequestFactory()
+        request = factory.get('/api/v0/users/authorizations/partner/1')
+        force_authenticate(request, user=self.editor1.user)
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(request, self.partner2.pk, 0)
+
+        expected_json = [{"wp_username": self.editor1.user.editor.wp_username},
+                         {"wp_username": self.editor2.user.editor.wp_username}]
+
+        self.assertEqual(response.data, expected_json)
