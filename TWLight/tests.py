@@ -1,6 +1,7 @@
 from mock import patch
 
 from django.contrib.auth.models import User
+from django.core import mail
 from django.core.exceptions import PermissionDenied
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
@@ -475,17 +476,33 @@ class AuthorizationBaseTestCase(TestCase):
             authorization_method=Partner.PROXY,
             status=Partner.AVAILABLE
         )
+        self.partner3 = PartnerFactory(
+            authorization_method=Partner.CODES,
+            status=Partner.AVAILABLE
+        )
+        self.partner4 = PartnerFactory(
+            authorization_method=Partner.EMAIL,
+            status=Partner.AVAILABLE
+        )
 
         self.editor1 = EditorFactory()
         self.editor2 = EditorFactory()
         self.editor3 = EditorFactory()
         # Editor 4 is a coordinator with a session.
         self.editor4 = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        # Editor 4 is the designated coordinator for partners 1 and 2.
+        # Editor 4 is the designated coordinator for all partners.
         self.partner1.coordinator = self.editor4.user
         self.partner1.save()
         self.partner2.coordinator = self.editor4.user
         self.partner2.save()
+        self.partner3.coordinator = self.editor4.user
+        self.partner3.save()
+        self.partner4.coordinator = self.editor4.user
+        self.partner4.save()
+
+        # Editor 5 is a coordinator without a session and with no designated partners.
+        self.editor5 = EditorFactory()
+        coordinators.user_set.add(self.editor5.user)
 
         # Create applications.
         self.app1 = ApplicationFactory(
@@ -522,6 +539,18 @@ class AuthorizationBaseTestCase(TestCase):
             editor=self.editor3,
             partner=self.partner2,
             status=Application.PENDING,
+            date_closed = None
+        )
+        self.app7 = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner3,
+            status=Application.PENDING,
+            date_closed = None
+        )
+        self.app8 = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner4,
+            status = Application.PENDING,
             date_closed = None
         )
 
@@ -571,12 +600,24 @@ class AuthorizationBaseTestCase(TestCase):
         self.app5.refresh_from_db()
         self.auth_app5 = Authorization.objects.get(authorizer=self.editor4.user, authorized_user=self.editor2.user, partner=self.partner2)
 
+        # Set up an access code to distribute
+        self.access_code = AccessCode(
+            code='ABCD-EFGH-IJKL',
+            partner=self.partner3
+        )
+        self.access_code.save()
+
+        self.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        self.message_patcher.start()
 
 
     def tearDown(self):
         super(AuthorizationBaseTestCase, self).tearDown()
         self.partner1.delete()
         self.partner2.delete()
+        self.partner3.delete()
+        self.partner4.delete()
+        self.access_code.delete()
         self.editor1.delete()
         self.editor2.delete()
         self.editor3.delete()
@@ -586,6 +627,9 @@ class AuthorizationBaseTestCase(TestCase):
         self.app3.delete()
         self.app4.delete()
         self.app5.delete()
+        self.app6.delete()
+        self.app7.delete()
+        self.app8.delete()
 
 
 
@@ -593,16 +637,174 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
     """
     Tests that Authorizations are correctly created and updated based on user activity.
     """
-    def test_approval_sets_authorizer(self):
+    def test_approval_sets_properties(self):
         """
         Test that authorizer is correctly set.
         """
-        self.assertEqual(self.auth_app1.authorizer, self.editor4.user)
-        self.assertEqual(self.auth_app2.authorizer, self.editor4.user)
-        self.assertEqual(self.auth_app3.authorizer, self.editor4.user)
-        self.assertEqual(self.auth_app4.authorizer, self.editor4.user)
-        self.assertEqual(self.auth_app5.authorizer, self.editor4.user)
+        self.assertTrue(self.auth_app1)
+        self.assertTrue(self.auth_app2)
+        self.assertTrue(self.auth_app3)
+        self.assertTrue(self.auth_app4)
+        self.assertTrue(self.auth_app5)
 
+    def test_authorizations_codes(self):
+        # In the distribution_method == CODES case, make sure that
+        # an authorization object with the correct information is
+        # created after a coordinator marks an application as sent.
+
+        authorization_object_exists = Authorization.objects.filter(
+            authorized_user=self.app7.user,
+            partner=self.app7.partner,
+        ).exists()
+
+        self.assertFalse(authorization_object_exists)
+
+        request = RequestFactory().post(reverse('applications:send_partner', kwargs={'pk': self.partner3.pk}),
+                                        data={'accesscode': ["{app_pk}_{code}".format(
+                                            app_pk=self.app7.pk,
+                                            code=self.access_code.code)]})
+        request.user = self.editor4.user
+
+        _ = TWLight.applications.views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner3.pk)
+
+        authorization_object_exists = Authorization.objects.filter(
+            authorized_user=self.app7.user,
+            partner=self.app7.partner,
+        ).exists()
+
+        self.assertTrue(authorization_object_exists)
+
+    def test_authorizations_email(self):
+        # In the distribution_method == EMAIL case, make sure that
+        # an authorization object with the correct information is
+        # created after a coordinator marks an application as sent.
+
+
+        authorization_object_exists = Authorization.objects.filter(
+            authorized_user=self.app8.user,
+            partner=self.app8.partner,
+        ).exists()
+
+        self.assertFalse(authorization_object_exists)
+
+        request = RequestFactory().post(reverse('applications:send_partner', kwargs={'pk': self.partner4.pk}),
+                                        data={'applications': [self.app8.pk]})
+        request.user = self.editor4.user
+
+        _= TWLight.applications.views.SendReadyApplicationsView.as_view()(
+                request, pk=self.partner4.pk)
+
+        authorization_object_exists = Authorization.objects.filter(
+            authorized_user=self.app8.user,
+            partner=self.app8.partner,
+        ).exists()
+
+        self.assertTrue(authorization_object_exists)
+
+    def test_updating_existing_authorization(self):
+        """
+        In the case that an authorization already exists for a user,
+        and they apply for renewal, their authorization object should
+        be updated with any new information (e.g. authorizer).
+        """
+
+        # Revalidate starting authorizer.
+        self.assertEqual(self.auth_app1.authorizer, self.editor4.user)
+
+        # Create a new application to the same partner (in reality this
+        # is most likely to be a renewal)
+        app1_renewal = ApplicationFactory(
+            editor=self.app1.user.editor,
+            partner=self.app1.partner
+        )
+        app1_renewal.status = Application.APPROVED
+        app1_renewal.save()
+
+        # Assign a new coordinator to this partner
+        app1_renewal.partner.coordinator = self.editor5.user
+        app1_renewal.partner.save()
+
+        # And mark this one as sent, but by a different user.
+        request = RequestFactory().post(reverse('applications:send_partner', kwargs={'pk': app1_renewal.partner.pk}),
+                                        data={'applications': [app1_renewal.pk]})
+        request.user = self.editor5.user
+
+        _= TWLight.applications.views.SendReadyApplicationsView.as_view()(
+            request, pk=app1_renewal.partner.pk)
+
+        auth_app1_renewal = Authorization.objects.get(
+            authorized_user=self.app1.user,
+            authorizer=self.editor5.user,
+            partner=self.app1.partner
+        )
+        self.assertTrue(auth_app1_renewal)
+"""
+    def test_access_codes_email(self):
+        # For access code partners, when applications are marked sent,
+        # access codes should be sent automatically via email.
+
+        # outbox has two emails in by default, from creating two approved
+        # applications during setup. So let's empty it for clarity.
+        #mail.outbox = []
+
+        #self.partner.authorization_method = Partner.CODES
+        #self.partner.save()
+
+        #request = RequestFactory().post(self.url,
+        #                                data={'accesscode': ["{app_pk}_{code}".format(
+        #                                    app_pk=self.app1.pk,
+        #                                    code=self.access_code.code)]})
+        #request.user = self.user
+
+        #response = views.SendReadyApplicationsView.as_view()(
+        #    request, pk=self.partner.pk)
+
+        # We expect that one email should now be sent.
+        self.assertEqual(len(mail.outbox[0].body), 1)
+
+        # The email should contain the assigned access code.
+        print('{outbox}'.format(outbox=mail.outbox))
+        self.assertTrue(self.access_code.code in mail.outbox[0].body)
+
+    def test_authorization_expiry_date(self):
+        # For a partner with a set account length we should set the expiry
+        # date correctly for its authorizations.
+        self.partner.account_length = timedelta(days=180)
+        self.partner.save()
+
+        request = RequestFactory().post(self.url,
+                                        data={'applications': [self.app1.pk]})
+        request.user = self.user
+
+        _ = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk)
+
+        authorization_object = Authorization.objects.get(
+            authorized_user=self.app1.user,
+            partner=self.app1.partner,
+        )
+
+        expected_expiry = date.today() + self.partner.account_length
+        self.assertEqual(authorization_object.date_expires, expected_expiry)
+
+    def test_authorization_expiry_date_proxy(self):
+        # For a proxy partner we should set the expiry
+        # date correctly for its authorizations.
+        self.partner.authorization_method = Partner.PROXY
+        self.partner.save()
+
+        self.app1.status = Application.SENT
+        self.app1.save()
+
+        authorization_object = Authorization.objects.get(
+            authorized_user=self.app1.user,
+            partner=self.app1.partner,
+        )
+
+        expected_expiry = date.today() + timedelta(days=365)
+        self.assertEqual(authorization_object.date_expires, expected_expiry)
+"""
 
 
 class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
@@ -664,3 +866,4 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
                          {"wp_username": self.editor2.user.editor.wp_username}]
 
         self.assertEqual(response.data, expected_json)
+
