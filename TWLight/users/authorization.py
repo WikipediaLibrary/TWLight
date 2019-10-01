@@ -217,7 +217,7 @@ class OAuthBackend(object):
         logger.info('Identifying user...')
         try:
             identity = handshaker.identify(access_token)
-        except OAuthException::
+        except OAuthException:
             logger.warning('Someone tried to log in but presented an invalid '
                 'access token.')
             messages.add_message (request, messages.WARNING,
