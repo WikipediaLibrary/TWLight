@@ -879,7 +879,7 @@ class AuthorizationBaseTestCase(TestCase):
             follow=True
         )
         self.app2.refresh_from_db()
-        #self.auth_app2 =  Authorization(authorizer=self.editor4.user, authorized_user=self.editor2.user, partner=self.partner1)
+        self.auth_app2 =  Authorization(authorizer=self.editor4.user, authorized_user=self.editor2.user, partner=self.partner1)
 
         # Send the application
         self.client.post(
@@ -933,7 +933,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
     def test_approval_sets_authorizer(self):
 
         self.assertEqual(self.auth_app1.authorizer, self.editor4.user)
-        #self.assertEqual(self.auth_app2.authorizer, self.editor4.user)
+        self.assertEqual(self.auth_app2.authorizer, self.editor4.user)
         self.assertEqual(self.auth_app3.authorizer, self.editor4.user)
         self.assertEqual(self.auth_app4.authorizer, self.editor4.user)
         self.assertEqual(self.auth_app5.authorizer, self.editor4.user)
