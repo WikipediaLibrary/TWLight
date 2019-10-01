@@ -405,7 +405,7 @@ class OAuthCallbackView(View):
                             handshaker=handshaker)
         created = request.session.pop('user_created', False)
 
-        if not user.is_active:
+        if user and not user.is_active:
             # Do NOT log in the user.
 
             if created:
@@ -425,7 +425,7 @@ class OAuthCallbackView(View):
 
             return_url = reverse_lazy('terms')
 
-        else:
+        elif user:
             login(request, user)
 
             if created:
@@ -459,5 +459,7 @@ class OAuthCallbackView(View):
                         kwargs={'pk': user.editor.pk})
                     logger.warning('User authenticated. No "next" parameter '
                         'for post-login redirection.')
+        else:
+            return_url = reverse_lazy('homepage')
 
         return HttpResponseRedirect(return_url)
