@@ -1,5 +1,5 @@
 import logging
-from mwoauth import ConsumerToken, Handshaker, AccessToken
+from mwoauth import ConsumerToken, Handshaker, AccessToken, OAuthException
 import re
 import urlparse
 
@@ -217,7 +217,7 @@ class OAuthBackend(object):
         logger.info('Identifying user...')
         try:
             identity = handshaker.identify(access_token)
-        except:
+        except OAuthException::
             logger.warning('Someone tried to log in but presented an invalid '
                 'access token.')
             messages.add_message (request, messages.WARNING,
