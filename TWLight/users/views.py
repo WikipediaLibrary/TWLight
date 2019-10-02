@@ -682,5 +682,7 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
         authorization = self.get_object()
         authorization.date_expires = yesterday
         authorization.save()
-
-        return HttpResponseRedirect(reverse('users:my_collection', kwargs={'pk':self.request.user.pk}))
+        # Translators: This message is shown once the access to a partner has successfully been returned.
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('Access to {} has been returned.').format(authorization.partner))
+        return HttpResponseRedirect(reverse('users:my_collection', kwargs={'pk':self.request.user.editor.pk}))
