@@ -618,7 +618,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user=self.app7.user, partner=self.app7.partner
+            authorized_user=self.app7.user,
+            authorizer=self.editor4.user,
+            partner=self.app7.partner,
         ).exists()
 
         self.assertFalse(authorization_object_exists)
@@ -640,7 +642,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user=self.app7.user, partner=self.app7.partner
+            authorized_user=self.app7.user,
+            authorizer=self.editor4.user,
+            partner=self.app7.partner,
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -651,7 +655,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user=self.app8.user, partner=self.app8.partner
+            authorized_user=self.app8.user,
+            authorizer=self.editor4.user,
+            partner=self.app8.partner,
         ).exists()
 
         self.assertFalse(authorization_object_exists)
@@ -667,7 +673,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user=self.app8.user, partner=self.app8.partner
+            authorized_user=self.app8.user,
+            authorizer=self.editor4.user,
+            partner=self.app8.partner,
         ).exists()
 
         self.assertTrue(authorization_object_exists)
