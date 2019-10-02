@@ -1,12 +1,13 @@
 from mock import patch
-
+from datetime import date, timedelta
 from django.contrib.auth.models import User
 from django.core import mail
 from django.core.exceptions import PermissionDenied
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.test import TestCase, RequestFactory, Client
+from django.test import TestCase, RequestFactory
+
 
 from rest_framework.test import APIRequestFactory, force_authenticate
 
@@ -17,10 +18,8 @@ from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.factories import UserFactory, EditorFactory
 from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Authorization, UserProfile, Editor
+from TWLight.users.models import Authorization
 import TWLight.users.views
-
-from . import views
 
 from .view_mixins import (CoordinatorOrSelf,
                           CoordinatorsOnly,
@@ -492,6 +491,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.editor4 = EditorCraftRoom(self, Terms=True, Coordinator=True)
         # Editor 4 is the designated coordinator for all partners.
         self.partner1.coordinator = self.editor4.user
+        self.partner1.account_length = timedelta(days=180)
         self.partner1.save()
         self.partner2.coordinator = self.editor4.user
         self.partner2.save()
@@ -509,55 +509,46 @@ class AuthorizationBaseTestCase(TestCase):
             editor=self.editor1,
             partner=self.partner1,
             status = Application.PENDING,
-            date_closed = None
         )
         self.app2 = ApplicationFactory(
             editor=self.editor2,
             partner=self.partner1,
             status = Application.PENDING,
-            date_closed = None
         )
         self.app3 = ApplicationFactory(
             editor=self.editor3,
             partner=self.partner1,
             status = Application.PENDING,
-            date_closed = None
         )
         self.app4 = ApplicationFactory(
             editor=self.editor1,
             partner=self.partner2,
             status = Application.PENDING,
-            date_closed = None
         )
         self.app5 = ApplicationFactory(
             editor=self.editor2,
             partner=self.partner2,
             status = Application.PENDING,
-            date_closed = None
         )
         self.app6 = ApplicationFactory(
             editor=self.editor3,
             partner=self.partner2,
             status=Application.PENDING,
-            date_closed = None
         )
         self.app7 = ApplicationFactory(
             editor=self.editor1,
             partner=self.partner3,
             status=Application.PENDING,
-            date_closed = None
         )
         self.app8 = ApplicationFactory(
             editor=self.editor1,
             partner=self.partner4,
             status = Application.PENDING,
-            date_closed = None
         )
         self.app9 = ApplicationFactory(
             editor=self.editor2,
             partner=self.partner3,
             status=Application.PENDING,
-            date_closed = None
         )
 
         # Editor 4 will update status on applications to partners 1 and 2.
@@ -636,6 +627,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.app6.delete()
         self.app7.delete()
         self.app8.delete()
+        self.app9.delete()
 
 
 
@@ -771,45 +763,21 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
 
         # The most recent email should contain the assigned access code.
         self.assertTrue(self.access_code.code in mail.outbox[-1].body)
-"""
+
     def test_authorization_expiry_date(self):
         # For a partner with a set account length we should set the expiry
         # date correctly for its authorizations.
-        self.partner.account_length = timedelta(days=180)
-        self.partner.save()
 
-        request = RequestFactory().post(self.url,
-                                        data={'applications': [self.app1.pk]})
-        request.user = self.user
-
-        _ = views.SendReadyApplicationsView.as_view()(
-            request, pk=self.partner.pk)
-
-        authorization_object = Authorization.objects.get(
-            authorized_user=self.app1.user,
-            partner=self.app1.partner,
-        )
-
-        expected_expiry = date.today() + self.partner.account_length
-        self.assertEqual(authorization_object.date_expires, expected_expiry)
+        expected_expiry = date.today() + self.app1.partner.account_length
+        self.assertEqual(self.auth_app1.date_expires, expected_expiry)
 
     def test_authorization_expiry_date_proxy(self):
         # For a proxy partner we should set the expiry
         # date correctly for its authorizations.
-        self.partner.authorization_method = Partner.PROXY
-        self.partner.save()
-
-        self.app1.status = Application.SENT
-        self.app1.save()
-
-        authorization_object = Authorization.objects.get(
-            authorized_user=self.app1.user,
-            partner=self.app1.partner,
-        )
 
         expected_expiry = date.today() + timedelta(days=365)
-        self.assertEqual(authorization_object.date_expires, expected_expiry)
-"""
+        self.assertEqual(self.auth_app4.date_expires, expected_expiry)
+
 
 
 class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
