@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      {% comment %} Translators: This message is displayed on the confirmation page where users can return their access to partner collections. {% endcomment %}
+    {% blocktrans trimmed with object.partner as partner %}
+      Are you sure you want to return your access to <b>{{ partner }}</b>?
+    {% endblocktrans %}
+    </p>
+    <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-primary"/>
+  </form>
+{% endblock content %}

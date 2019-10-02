@@ -540,6 +540,10 @@ A few spots just need padding instead of margin.
   z-index: 2;
 }
 
+.btn.fit-content {
+  padding: 0px;
+}
+
 .expiry-warning.panel-body  {
   border:1px solid #f09b90;
   -webkit-box-shadow: 0 1px 1px rgba(255,0,0,.05);

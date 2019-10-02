@@ -11,7 +11,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
+from django.core.urlresolvers import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
@@ -625,18 +625,19 @@ class CollectionUserView(SelfOnly, ListView):
             for each_authorization in authorization_list:
                 if each_authorization.about_to_expire or each_authorization.is_expired:
                     each_authorization.latest_app = each_authorization.get_latest_app()
-                    if not each_authorization.latest_app.is_renewable:
-                        try:
-                            each_authorization.open_app = Application.objects.filter(editor=editor,
-                                                                                     status__in=(
-                                                                                                 Application.PENDING,
-                                                                                                 Application.QUESTION,
-                                                                                                 Application.APPROVED
-                                                                                                 ),
-                                                                                     partner=each_authorization.partner
-                                                                                     ).latest('date_created')
-                        except Application.DoesNotExist:
-                            each_authorization.open_app = None
+                    if each_authorization.latest_app:
+                        if not each_authorization.latest_app.is_renewable:
+                            try:
+                                each_authorization.open_app = Application.objects.filter(editor=editor,
+                                                                                         status__in=(
+                                                                                                     Application.PENDING,
+                                                                                                     Application.QUESTION,
+                                                                                                     Application.APPROVED
+                                                                                                     ),
+                                                                                         partner=each_authorization.partner
+                                                                                         ).latest('date_created')
+                            except Application.DoesNotExist:
+                                each_authorization.open_app = None
 
         context['proxy_bundle_authorizations'] = proxy_bundle_authorizations
         context['proxy_bundle_authorizations_expired'] = proxy_bundle_authorizations_expired
@@ -662,3 +663,24 @@ class ListApplicationsUserView(SelfOnly, ListView):
         context['object_list'] = editor.applications.model.include_invalid.filter(editor=editor
                                                                                   ).order_by('status', '-date_closed')
         return context
+
+
+class AuthorizationReturnView(SelfOnly, UpdateView):
+    model = Authorization
+    template_name = 'users/authorization_confirm_return.html'
+    fields = ['date_expires']
+
+    def get_object(self):
+        assert 'pk' in self.kwargs.keys()
+        try:
+            return Authorization.objects.get(pk=self.kwargs['pk'])
+        except Authorization.DoesNotExist:
+            raise Http404
+
+    def form_valid(self, form):
+        yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+        authorization = self.get_object()
+        authorization.date_expires = yesterday
+        authorization.save()
+
+        return HttpResponseRedirect(reverse('users:my_collection', kwargs={'pk':self.request.user.pk}))

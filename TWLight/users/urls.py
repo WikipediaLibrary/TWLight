@@ -31,4 +31,7 @@ urlpatterns = [
     url(r'^my_applications/(?P<pk>\d+)/$',
         login_required(views.ListApplicationsUserView.as_view()),
         name='my_applications'),
+    url(r'^return_authorization/(?P<pk>\d+)/$',
+        login_required(views.AuthorizationReturnView.as_view()),
+        name='return_authorization'),
 ]

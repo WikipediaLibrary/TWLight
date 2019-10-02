@@ -62,9 +62,13 @@
     {% endif %}
     <hr>
     {% if each_authorization.partner.authorization_method == each_authorization.partner.BUNDLE or each_authorization.partner.authorization_method == each_authorization.partner.PROXY %}
-      <div style="text-align: center;">
-        {% comment %} Translators: A button when clicked takes users the resource (external) the authorization represents. {% endcomment %}
-        <a href="#" class="btn btn-default" role="button">{% trans 'Access resource' %}</a>
+      {% comment %} Translators: A button when clicked takes users the resource (external) the authorization represents. {% endcomment %}
+      <div>
+      <a href="#" class="btn btn-default" role="button">{% trans 'Access resource' %}</a>
+      {% if each_authorization.partner.authorization_method == each_authorization.partner.PROXY and not each_authorization.is_expired %}
+        {% comment %} Translators: A button when clicked takes users to a confirmation page to return their access for a particular collection. {% endcomment %}
+        <a href="{% url 'users:return_authorization' each_authorization.id %}" class="btn btn-outline-danger fit-content pull-right"><i class="fa fa-times fa-2x" title="{% trans 'Click to return this access' %}"></i></a>
+      {% endif %}
       </div>
       <hr>
     {% endif %}
