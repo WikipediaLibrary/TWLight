@@ -626,7 +626,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         self.assertFalse(authorization_object_exists)
 
         request = RequestFactory().post(
-            reverse("applications:send_partner", kwargs={"pk": self.partner3.pk}),
+            reverse("applications:send_partner", kwargs={"pk": self.app7.partner.pk}),
             data={
                 "accesscode": [
                     "{app_pk}_{code}".format(
@@ -638,7 +638,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         request.user = self.editor4.user
 
         _ = TWLight.applications.views.SendReadyApplicationsView.as_view()(
-            request, pk=self.partner3.pk
+            request, pk=self.app7.partner.pk
         )
 
         authorization_object_exists = Authorization.objects.filter(
@@ -663,13 +663,13 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         self.assertFalse(authorization_object_exists)
 
         request = RequestFactory().post(
-            reverse("applications:send_partner", kwargs={"pk": self.partner4.pk}),
+            reverse("applications:send_partner", kwargs={"pk": self.app8.partner.pk}),
             data={"applications": [self.app8.pk]},
         )
         request.user = self.editor4.user
 
         _ = TWLight.applications.views.SendReadyApplicationsView.as_view()(
-            request, pk=self.partner4.pk
+            request, pk=self.app8.partner.pk
         )
 
         authorization_object_exists = Authorization.objects.filter(
