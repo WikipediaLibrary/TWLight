@@ -5,12 +5,12 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-26 15:24+0000\n"
-"PO-Revision-Date: 2019-09-19 12:52:19+0000\n"
+"POT-Creation-Date: 2019-10-03 19:13+0000\n"
+"PO-Revision-Date: 2019-10-03 17:57:45+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-07-22 22:30:51+0000\n"
+"X-POT-Import-Date: 2019-09-26 16:30:29+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -74,10 +74,8 @@ msgstr "파트너 이름"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:325
-#, fuzzy
-#| msgid "User information"
 msgid "Renewal confirmation"
-msgstr "사용자 정보"
+msgstr "갱신 확인"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
@@ -249,25 +247,19 @@ msgstr ""
 
 #: TWLight/applications/models.py:106
 msgid "12 months"
-msgstr ""
+msgstr "12개월"
 
 #: TWLight/applications/models.py:106
-#, fuzzy
-#| msgid "Month"
 msgid "6 months"
-msgstr "월"
+msgstr "6개월"
 
 #: TWLight/applications/models.py:106
-#, fuzzy
-#| msgid "Month"
 msgid "3 months"
-msgstr "월"
+msgstr "3개월"
 
 #: TWLight/applications/models.py:106
-#, fuzzy
-#| msgid "Month"
 msgid "1 month"
-msgstr "월"
+msgstr "1개월"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
 #: TWLight/applications/models.py:110
@@ -342,15 +334,12 @@ msgstr "상태"
 
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:76
-#, fuzzy
-#| msgid "Occupation"
 msgid "Access duration"
-msgstr "직업"
+msgstr "접근 시간"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
 #, fuzzy
-#| msgid "Month"
 msgid "month(s)"
 msgstr "월"
 
@@ -374,10 +363,8 @@ msgstr ""
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:100
-#, fuzzy
-#| msgid "Accounts available:"
 msgid "Accounts available"
-msgstr "사용 가능한 계정:"
+msgstr "사용 가능한 계정"
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:110
@@ -588,24 +575,19 @@ msgid "No applications right now."
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#, fuzzy
-#| msgid "Application data"
 msgid "Application ID"
-msgstr "애플리케이션 데이터"
+msgstr "애플리케이션 ID"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 msgid "Partner (Collection)"
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#, fuzzy
-#| msgid "Not yet reviewed."
 msgid "Last reviewed"
-msgstr "아직 검토되지 않았습니다."
+msgstr "마지막 검토일"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Date of application"
 msgid "Date applied"
 msgstr "신청일"
 
@@ -851,10 +833,8 @@ msgid "Please select at least one application."
 msgstr ""
 
 #: TWLight/applications/views.py:978
-#, fuzzy
-#| msgid "Batch update successful."
 msgid "Batch update of application(s) {} successful."
-msgstr "일괄 업데이트 성공."
+msgstr "애플리케이션 {} 일괄 업데이트에 성공했습니다."
 
 #: TWLight/applications/views.py:983
 msgid ""

@@ -7,12 +7,12 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-26 15:25+0000\n"
-"PO-Revision-Date: 2019-09-06 05:23:30+0000\n"
+"POT-Creation-Date: 2019-10-03 19:14+0000\n"
+"PO-Revision-Date: 2019-10-03 17:57:52+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-07-22 22:30:51+0000\n"
+"X-POT-Import-Date: 2019-09-26 16:30:29+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -78,10 +78,8 @@ msgstr "合作夥伴名稱"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:325
-#, fuzzy
-#| msgid "User information"
 msgid "Renewal confirmation"
-msgstr "使用者資訊"
+msgstr "續辦確認"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
@@ -95,7 +93,7 @@ msgstr "您在合作夥伴網站上帳號的電子郵件"
 msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
-msgstr ""
+msgstr "在需要續辦之前，您所想要取用的月數"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:95
@@ -253,23 +251,20 @@ msgstr "發送申請程序給合作夥伴的使用者"
 
 #: TWLight/applications/models.py:106
 msgid "12 months"
-msgstr ""
+msgstr "12 個月"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "6 months"
 msgstr "月"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "3 months"
 msgstr "月"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "1 month"
 msgstr "月"
 
@@ -280,6 +275,8 @@ msgid ""
 "relevant if the applied partner/collection has authorization_method as "
 "'proxy'."
 msgstr ""
+"使用者選擇他們希望自己的帳號何時才會逾期（以月為單位）。僅相關在所申請合作夥"
+"伴/典藏的授權方法為「代理」時。"
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -349,15 +346,12 @@ msgstr "狀態"
 
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:76
-#, fuzzy
-#| msgid "Occupation"
 msgid "Access duration"
-msgstr "職業"
+msgstr "取用期間"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
 #, fuzzy
-#| msgid "Month"
 msgid "month(s)"
 msgstr "月"
 
@@ -595,25 +589,21 @@ msgstr "尚無申請程序。"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Application"
 msgid "Application ID"
 msgstr "申請程序"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Collections"
 msgid "Partner (Collection)"
 msgstr "典藏"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Not yet reviewed."
 msgid "Last reviewed"
 msgstr "尚未審查。"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Date of application"
 msgid "Date applied"
 msgstr "申請日期"
 
@@ -657,7 +647,7 @@ msgstr "續辦為非必要，或是現在不可用，或著是您已經有請求
 #: TWLight/applications/templates/applications/confirm_renewal.html:13
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
-msgstr ""
+msgstr "點擊「確認」來續辦您對於%(partner)s的申請程序"
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/applications/templates/applications/confirm_renewal.html:18
@@ -844,13 +834,13 @@ msgstr "已發送申請程序"
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted."
-msgstr ""
+msgstr "代理方法的合作夥伴為候補，無法核准申請程序。"
 
 #: TWLight/applications/views.py:779
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted and (or) has zero accounts available for distribution."
-msgstr ""
+msgstr "代理方法的合作夥伴為候補或是沒有可分配的帳號，無法核准申請程序。"
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
 #: TWLight/applications/views.py:789
@@ -869,7 +859,6 @@ msgstr "請至少選擇一個申請程序。"
 
 #: TWLight/applications/views.py:978
 #, fuzzy
-#| msgid "Batch update successful."
 msgid "Batch update of application(s) {} successful."
 msgstr "批量更新成功。"
 
@@ -880,6 +869,8 @@ msgid ""
 "not enough accounts are available, prioritise the applications and then "
 "approve applications equal to the accounts available."
 msgstr ""
+"代理方法的合作夥伴為候補且（或是）沒有足夠的可用帳號，無法核准申請程序。若可"
+"用帳號不足，會按優先順序處理申請程序，且核准與可用帳號數相同的申請程序。"
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1132
@@ -894,7 +885,7 @@ msgstr "所有選擇的申請程序被標記為已發送。"
 #: TWLight/applications/views.py:1193
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
-msgstr ""
+msgstr "嘗試續辦未核准申請程序#{pk}已被拒絕"
 
 #: TWLight/applications/views.py:1251
 msgid ""
@@ -1516,9 +1507,6 @@ msgstr "此合作夥伴的取用授予可續辦嗎？若是如此，使用者可
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
 #: TWLight/resources/models.py:210
 #, fuzzy
-#| msgid ""
-#| "Add number of new accounts to the existing value, not by reseting it to "
-#| "zero."
 msgid ""
 "Add the number of new accounts to the existing value, not by resetting it to "
 "zero. If 'specific stream' is true, change accounts availability at the "
@@ -1686,7 +1674,7 @@ msgstr "若此合作夥伴需要申請人已有在合作夥伴的網站上註冊
 msgid ""
 "Mark as true if the authorization method of this partner is proxy and "
 "requires the duration of the access (expiry) be specified."
-msgstr ""
+msgstr "若此合作夥伴的授權方法為代理，且需要指定取用（逾期）期間，勾選此項。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
 #: TWLight/resources/models.py:400

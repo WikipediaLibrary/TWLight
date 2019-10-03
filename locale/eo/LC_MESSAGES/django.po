@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-26 15:24+0000\n"
-"PO-Revision-Date: 2019-09-19 12:52:15+0000\n"
+"POT-Creation-Date: 2019-10-03 19:13+0000\n"
+"PO-Revision-Date: 2019-10-03 17:57:42+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-07-22 22:30:51+0000\n"
+"X-POT-Import-Date: 2019-09-26 16:30:29+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -76,7 +76,6 @@ msgstr "Partnera nomo"
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:325
 #, fuzzy
-#| msgid "User information"
 msgid "Renewal confirmation"
 msgstr "Informo pri uzanto"
 
@@ -254,19 +253,16 @@ msgstr ""
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "6 months"
 msgstr "Monato"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "3 months"
 msgstr "Monato"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "1 month"
 msgstr "Monato"
 
@@ -344,14 +340,12 @@ msgstr "Stato"
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:76
 #, fuzzy
-#| msgid "Occupation"
 msgid "Access duration"
 msgstr "Okupo"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
 #, fuzzy
-#| msgid "Month"
 msgid "month(s)"
 msgstr "Monato"
 
@@ -376,7 +370,6 @@ msgstr ""
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:100
 #, fuzzy
-#| msgid "Accounts available:"
 msgid "Accounts available"
 msgstr "Disponaj kontoj:"
 
@@ -590,19 +583,16 @@ msgstr ""
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Application"
 msgid "Application ID"
 msgstr "Apliko"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Collections"
 msgid "Partner (Collection)"
 msgstr "Kolektoj"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Not yet reviewed."
 msgid "Last reviewed"
 msgstr "Ankoraŭ ne reviziita."
 

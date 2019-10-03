@@ -11,12 +11,12 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-26 15:24+0000\n"
-"PO-Revision-Date: 2019-09-23 16:12:21+0000\n"
+"POT-Creation-Date: 2019-10-03 19:13+0000\n"
+"PO-Revision-Date: 2019-10-03 17:57:42+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-07-22 22:30:51+0000\n"
+"X-POT-Import-Date: 2019-09-26 16:30:29+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -83,7 +83,6 @@ msgstr "نام پایگاه مورد نظر"
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:325
 #, fuzzy
-#| msgid "User information"
 msgid "Renewal confirmation"
 msgstr "اطلاعات کاربری"
 
@@ -268,19 +267,16 @@ msgstr ""
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "6 months"
 msgstr "ماه"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "3 months"
 msgstr "ماه"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "1 month"
 msgstr "ماه"
 
@@ -364,14 +360,12 @@ msgstr "وضعیت"
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:76
 #, fuzzy
-#| msgid "Occupation"
 msgid "Access duration"
 msgstr "شغل"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
 #, fuzzy
-#| msgid "Month"
 msgid "month(s)"
 msgstr "ماه"
 
@@ -609,25 +603,21 @@ msgstr "در حال حاضر درخواستی موجود نیست."
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Application"
 msgid "Application ID"
 msgstr "درخواست"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Collections"
 msgid "Partner (Collection)"
 msgstr "مجموعه‌ها"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Not yet reviewed."
 msgid "Last reviewed"
 msgstr "هنوز بررسی نشده‌است."
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Date of application"
 msgid "Date applied"
 msgstr "تاریخ درخواست"
 
@@ -685,7 +675,7 @@ msgstr "تأیید"
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:21
 msgid "What resources do you want to access?"
-msgstr "به دسترسی به چه منابعی نیاز دارید."
+msgstr "به چه منابعی می‌خواهید دسترسی پیدا کنید؟"
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:40
@@ -895,7 +885,6 @@ msgstr "لطفا دستکم یک درخواست را انتخاب کنید"
 
 #: TWLight/applications/views.py:978
 #, fuzzy
-#| msgid "Batch update successful."
 msgid "Batch update of application(s) {} successful."
 msgstr "روزآمدسازی جمعی با موفقیت انجام شد"
 
@@ -1515,9 +1504,6 @@ msgstr ""
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
 #: TWLight/resources/models.py:210
 #, fuzzy
-#| msgid ""
-#| "Add number of new accounts to the existing value, not by reseting it to "
-#| "zero."
 msgid ""
 "Add the number of new accounts to the existing value, not by resetting it to "
 "zero. If 'specific stream' is true, change accounts availability at the "

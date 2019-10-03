@@ -5,6 +5,7 @@
 # Author: Athena Atterdag
 # Author: Diralik
 # Author: Infovarius
+# Author: Katunchik
 # Author: Movses
 # Author: Nk88
 # Author: Okras
@@ -13,12 +14,12 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-26 15:24+0000\n"
-"PO-Revision-Date: 2019-09-19 12:52:22+0000\n"
+"POT-Creation-Date: 2019-10-03 19:14+0000\n"
+"PO-Revision-Date: 2019-10-03 17:57:49+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-07-22 22:30:51+0000\n"
+"X-POT-Import-Date: 2019-09-26 16:30:29+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= "
 "2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
@@ -86,7 +87,7 @@ msgstr "Имя партнёра"
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:325
 msgid "Renewal confirmation"
-msgstr ""
+msgstr "Подтверждение продления"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
@@ -101,6 +102,8 @@ msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
 msgstr ""
+"Количество месяцев, на которое вы хотите получить доступ, прежде чем "
+"потребуется продление срока действия"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:95
@@ -261,23 +264,20 @@ msgstr ""
 
 #: TWLight/applications/models.py:106
 msgid "12 months"
-msgstr ""
+msgstr "12 месяцев"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "6 months"
 msgstr "Месяц"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "3 months"
 msgstr "Месяц"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "1 month"
 msgstr "Месяц"
 
@@ -288,6 +288,9 @@ msgid ""
 "relevant if the applied partner/collection has authorization_method as "
 "'proxy'."
 msgstr ""
+"Выбор пользователем времени истечения срока действия учетной записи (в "
+"месяцах). Актуально только в том случае, если рассматриваемые партнер/"
+"коллекция имеют метод авторизации (authorization_method)  типа \"прокси\"."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -355,14 +358,12 @@ msgstr "Состояние"
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:76
 #, fuzzy
-#| msgid "Occupation"
 msgid "Access duration"
 msgstr "Род деятельности:"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
 #, fuzzy
-#| msgid "Month"
 msgid "month(s)"
 msgstr "Месяц"
 
@@ -387,7 +388,6 @@ msgstr "В списке ожидания"
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:100
 #, fuzzy
-#| msgid "Accounts available:"
 msgid "Accounts available"
 msgstr "Доступные аккаунты:"
 
@@ -605,25 +605,21 @@ msgstr ""
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Application"
 msgid "Application ID"
 msgstr "Заявка"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Collections"
 msgid "Partner (Collection)"
 msgstr "Коллекции"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Not yet reviewed."
 msgid "Last reviewed"
 msgstr "Ещё не проверено."
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Date of application"
 msgid "Date applied"
 msgstr "Дата подачи заявки"
 
@@ -670,6 +666,7 @@ msgstr ""
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
 msgstr ""
+"Нажмите \"Подтвердить\", чтобы обновить ваше приложение для %(partner)s"
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/applications/templates/applications/confirm_renewal.html:18
@@ -849,12 +846,17 @@ msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted."
 msgstr ""
+"Не удается утвердить приложение, поскольку партнер с методом авторизации "
+"типа \"прокси\" находится в списке ожидания."
 
 #: TWLight/applications/views.py:779
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted and (or) has zero accounts available for distribution."
 msgstr ""
+"Не удается утвердить приложение поскольку партнер с методом авторизации "
+"\"прокси\" находится в списке ожидания и (или) имеет нулевые учетные записи, "
+"доступные для распространения."
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
 #: TWLight/applications/views.py:789
@@ -873,7 +875,7 @@ msgstr ""
 
 #: TWLight/applications/views.py:978
 msgid "Batch update of application(s) {} successful."
-msgstr ""
+msgstr "Пакетное обновление приложения(й) {} прошло успешно."
 
 #: TWLight/applications/views.py:983
 msgid ""
@@ -882,6 +884,11 @@ msgid ""
 "not enough accounts are available, prioritise the applications and then "
 "approve applications equal to the accounts available."
 msgstr ""
+"Не удается утвердить приложение(я) {}, так как партнер(ы) с методом "
+"авторизации прокси находится/находятся в списке ожидания и (или) имеет/имеют "
+"недостаточное количество учетных записей. Если учетных записей недостаточно, "
+"расставьте приоритеты приложений, а затем утвердите приложения согласно "
+"имеющимся учетным записям."
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1132
@@ -896,7 +903,7 @@ msgstr ""
 #: TWLight/applications/views.py:1193
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
-msgstr ""
+msgstr "Попытка обновить неутверждённое приложение #{pk} была отклонена"
 
 #: TWLight/applications/views.py:1251
 msgid ""
@@ -1462,6 +1469,9 @@ msgid ""
 "zero. If 'specific stream' is true, change accounts availability at the "
 "collection level."
 msgstr ""
+"Добавьте количество новых учетных записей к существующему значению, не "
+"сбрасывая его до нуля. Если параметр \"конкретный поток\" имеет значение "
+"true, измените наличие учетных записей на уровне коллекции."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
 #: TWLight/resources/models.py:217
@@ -1610,6 +1620,8 @@ msgid ""
 "Mark as true if the authorization method of this partner is proxy and "
 "requires the duration of the access (expiry) be specified."
 msgstr ""
+"Пометить как true, если метод авторизации данного партнера имеет тип прокси "
+"и требует указания срока действия доступа (истечения)."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
 #: TWLight/resources/models.py:400

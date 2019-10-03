@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-09-26 15:24+0000\n"
-"PO-Revision-Date: 2019-09-06 05:23:25+0000\n"
+"POT-Creation-Date: 2019-10-03 19:14+0000\n"
+"PO-Revision-Date: 2019-10-03 17:57:47+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-07-22 22:30:51+0000\n"
+"X-POT-Import-Date: 2019-09-26 16:30:29+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -79,7 +79,6 @@ msgstr "Nome do parceiro"
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:325
 #, fuzzy
-#| msgid "User information"
 msgid "Renewal confirmation"
 msgstr "Informação do utilizador"
 
@@ -261,19 +260,16 @@ msgstr ""
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "6 months"
 msgstr "Mês"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "3 months"
 msgstr "Mês"
 
 #: TWLight/applications/models.py:106
 #, fuzzy
-#| msgid "Month"
 msgid "1 month"
 msgstr "Mês"
 
@@ -358,14 +354,12 @@ msgstr "Estado"
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:76
 #, fuzzy
-#| msgid "Occupation"
 msgid "Access duration"
 msgstr "Profissão"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
 #, fuzzy
-#| msgid "Month"
 msgid "month(s)"
 msgstr "Mês"
 
@@ -390,7 +384,6 @@ msgstr "Com uma lista de espera"
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:100
 #, fuzzy
-#| msgid "Accounts available:"
 msgid "Accounts available"
 msgstr "Contas disponíveis:"
 
@@ -606,25 +599,21 @@ msgstr "Neste momento não existem candidaturas."
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Application"
 msgid "Application ID"
 msgstr "Candidatura"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Collections"
 msgid "Partner (Collection)"
 msgstr "Conjuntos de recursos"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Not yet reviewed."
 msgid "Last reviewed"
 msgstr "Ainda não revista."
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
-#| msgid "Date of application"
 msgid "Date applied"
 msgstr "Data de candidatura"
 
@@ -894,7 +883,6 @@ msgstr "Selecione pelo menos uma candidatura, por favor."
 
 #: TWLight/applications/views.py:978
 #, fuzzy
-#| msgid "Batch update successful."
 msgid "Batch update of application(s) {} successful."
 msgstr "Atualização em segundo plano realizada."
 
@@ -1603,9 +1591,6 @@ msgstr ""
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
 #: TWLight/resources/models.py:210
 #, fuzzy
-#| msgid ""
-#| "Add number of new accounts to the existing value, not by reseting it to "
-#| "zero."
 msgid ""
 "Add the number of new accounts to the existing value, not by resetting it to "
 "zero. If 'specific stream' is true, change accounts availability at the "
