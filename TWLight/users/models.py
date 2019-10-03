@@ -521,4 +521,4 @@ class Authorization(models.Model):
     def user(self):
         # Needed by SelfOnly mixin, e.g. on the authorization return
         # view.
-        return self.authorized_user.editor.user
+        return self.authorized_user
