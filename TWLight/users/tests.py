@@ -17,6 +17,8 @@ from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
+from TWLight.resources.tests import EditorCraftRoom
+from TWLight.users.models import Authorization
 
 from . import views
 from .authorization import OAuthBackend
@@ -274,6 +276,37 @@ class ViewsTestCase(TestCase):
         for each_authorization in response.context_data['manual_authorizations']:
             self.assertEqual(each_authorization.authorized_user, self.user_editor)
             self.assertTrue(each_authorization.partner == partner3 or each_authorization.partner == partner4 or each_authorization.partner == partner5)
+
+
+    def test_return_authorization(self):
+        # Simulate a valid user trying to return their access
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(authorization_method=Partner.PROXY)
+        app = ApplicationFactory(status=Application.SENT, editor=editor, partner=partner)
+        authorization = Authorization.objects.get(authorized_user=editor.user, partner=partner)
+        self.assertEqual(authorization.get_latest_app(), app)
+        return_url = reverse('users:return_authorization',
+                              kwargs={'pk': authorization.pk})
+        response = self.client.get(return_url, follow=True)
+        return_form = response.context['form']
+        self.client.post(return_url, return_form.initial)
+        yesterday = datetime.now().date() - timedelta(days=1)
+        authorization.refresh_from_db()
+        self.assertEqual(authorization.date_expires, yesterday)
+
+        # Simulate an invalid user trying to return access of some other user
+        someday = yesterday + timedelta(days=30)
+        authorization.date_expires = someday
+        authorization.save()
+        EditorCraftRoom(self, Terms=True, Coordinator=False)
+        return_url = reverse('users:return_authorization',
+                              kwargs={'pk': authorization.pk})
+        response = self.client.get(return_url, follow=True)
+        self.assertEqual(response.status_code, 403)
+        response = self.client.post(return_url, return_form.initial)
+        self.assertEqual(response.status_code, 403)
+        authorization.refresh_from_db()
+        self.assertEqual(authorization.date_expires, someday)
 
 
     def test_user_home_view_anon(self):
