@@ -5,7 +5,7 @@ RUN apk add --update \
     libxslt-dev \
     mariadb-dev \
     # Python, duh.
-    python py-pip ;\
+    python py-pip
     pip install virtualenv
 
 FROM twlight_base as twlight_build
@@ -21,9 +21,9 @@ RUN apk add \
     libxml2-dev \
     musl-dev \
     python-dev \
-    zlib-dev ;\
-    virtualenv /venv ;\
-    source /venv/bin/activate ;\
+    zlib-dev
+    virtualenv /venv
+    source /venv/bin/activate
     pip install -r /requirements/wmf.txt
 
 FROM twlight_base
@@ -43,12 +43,12 @@ RUN apk add --update \
     # since we just use it to generate a css file.
     nodejs \
     npm \
-    tar ;\
+    tar
     # CSS Janus is the thing actually used to generate the rtl css.
-    npm install cssjanus ;\
+    npm install cssjanus
     # Pandoc is used for rendering wikicode resource descriptions
     # into html for display. We do need this on the live image.
-    wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-linux.tar.gz -P /tmp ;\
+    wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-linux.tar.gz -P /tmp
     tar -xf /tmp/pandoc-2.7.1-linux.tar.gz --directory /opt
 
 # Utility scripts that run in the virtual environment.
