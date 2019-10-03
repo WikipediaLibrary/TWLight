@@ -528,8 +528,11 @@ A few spots just need padding instead of margin.
 }
 
 .no-padding-icon {
-  margin-left: -14px;
-  margin-top: -14px;
+  position: absolute;
+  left: 14px;
+  margin-top: -17px;
+  border-right-color: #ddd;
+  border-bottom-color: #ddd;
   z-index: 2;
 }
 
@@ -541,7 +544,7 @@ A few spots just need padding instead of margin.
 }
 
 .btn.fit-content {
-  padding: 0px;
+  padding: 2px;
 }
 
 .expiry-warning.panel-body  {
