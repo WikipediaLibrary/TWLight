@@ -8,7 +8,8 @@
     <p>
       {% comment %} Translators: This message is displayed on the confirmation page where users can return their access to partner collections. {% endcomment %}
     {% blocktrans trimmed with object.partner as partner %}
-      Are you sure you want to return your access to <b>{{ partner }}</b>?
+      You will no longer be able to access {{ partner }}'s resources via the Library Card platform, but can request access again
+      by clicking 'renew', if you change your mind. Are you sure you want to return your access?
     {% endblocktrans %}
     </p>
     <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-primary"/>
