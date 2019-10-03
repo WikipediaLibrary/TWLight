@@ -7,12 +7,8 @@ import datetime
 
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django.utils.encoding import force_unicode
 
 from TWLight.applications.models import Application
-from TWLight.users.helpers.wiki_list import WIKIS
-from TWLight.users.models import Editor
-
 
 logger = logging.getLogger(__name__)
 
@@ -116,16 +112,16 @@ def get_application_status_data(queryset, statuses=Application.STATUS_CHOICES, d
         # suitable for use in templates, and inserting it directly into the
         # javascript like this means that we bypass places that would
         # usually translate the string.
-        # Therefore we need to force translation (using force_unicode, not
+        # Therefore we need to force translation (using unicode(_).encode('utf-8'), not
         # force_str, because we don't know what language we might be
         # dealing with.)
-        status_data.append({'label': force_unicode(status[1]), 'data': status_count})
+        status_data.append({'label': unicode(status[1]).encode('utf-8'), 'data': status_count})
 
     if data_format == PYTHON:
         return status_data
     else:
         # We have to use json.dumps and not just return the Python object
-        # because force_unicode will output u'' objects that will confuse
+        # because unicode(_).encode('utf-8') will output u'' objects that will confuse
         # JavaScript.
         return json.dumps(status_data)
 
@@ -141,7 +137,7 @@ def get_user_language_data(queryset, data_format=JSON):
 
     for language in queryset.exclude(lang=None).values("lang").distinct():
         language_count = queryset.filter(lang=language['lang']).count()
-        language_data.append({'label': force_unicode(language['lang']), 'data': language_count})
+        language_data.append({'label': unicode(language['lang']).encode('utf-8'), 'data': language_count})
 
     if data_format == PYTHON:
         return language_data
