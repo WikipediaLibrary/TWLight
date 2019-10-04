@@ -307,8 +307,7 @@ class OAuthInitializeView(View):
                 logger.info('User is already authenticated. Sending them on '
                     'for post-login redirection per "next" parameter.')
             except KeyError:
-                return_url = reverse_lazy('users:editor_detail',
-                    kwargs={'pk': self.request.user.editor.pk})
+                return_url = reverse_lazy('homepage')
                 logger.warning('User already authenticated. No "next" '
                     'parameter for post-login redirection.')
 
@@ -434,8 +433,6 @@ class OAuthCallbackView(View):
                     'Please agree to the terms of use.'))
                 return_url = reverse_lazy('terms')
             else:
-                # Translators: This message is shown when a user logs back in to the site after their first time.
-                messages.add_message(request, messages.INFO, _('Welcome back!'))
                 # We're using this twice. Not very DRY.
                 # Send user either to the destination specified in the 'next'
                 # parameter or to their own editor detail page.
@@ -455,8 +452,7 @@ class OAuthCallbackView(View):
                     logger.info('User authenticated. Sending them on for '
                         'post-login redirection per "next" parameter.')
                 except KeyError:
-                    return_url = reverse_lazy('users:editor_detail',
-                        kwargs={'pk': user.editor.pk})
+                    return_url = reverse_lazy('homepage')
                     logger.warning('User authenticated. No "next" parameter '
                         'for post-login redirection.')
 
