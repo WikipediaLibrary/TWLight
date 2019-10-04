@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import copy
-from datetime import datetime, timedelta
+from datetime import datetime, date, timedelta
 import json
 import re
 from mock import patch, Mock
@@ -22,7 +22,7 @@ from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
-from .models import UserProfile, Editor
+from .models import UserProfile, Editor, Authorization
 
 
 FAKE_IDENTITY_DATA = {'query': {
@@ -358,6 +358,35 @@ class ViewsTestCase(TestCase):
         assert not User.objects.filter(username=self.username1).exists()
         # Check that the associated Editor also got deleted.
         assert not Editor.objects.filter(user=self.user_editor).exists()
+
+    def test_user_delete_authorizations(self):
+        """
+        Verify that deleted user authorizations are expired and contain no user links
+        """
+        delete_url = reverse('users:delete_data',
+            kwargs={'pk': self.user_editor.pk})
+
+        # Need a password so we can login
+        self.user_editor.set_password('editor')
+        self.user_editor.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username1, password='editor')
+
+        partner = PartnerFactory()
+        user_auth = Authorization(
+            authorized_user=self.user_editor,
+            partner=partner,
+            date_authorized=date.today(),
+            date_expires=date.today() + timedelta(days=30)
+        )
+        user_auth.save()
+
+        submit = self.client.post(delete_url)
+
+        user_auth.refresh_from_db()
+        self.assertEqual(user_auth.date_expires, date.today() - timedelta(days=1))
 
     def test_user_data_download(self):
         """

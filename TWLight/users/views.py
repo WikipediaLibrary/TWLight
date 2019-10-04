@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 import json
 
 from crispy_forms.helper import FormHelper
@@ -32,7 +32,7 @@ from rest_framework.views import APIView
 from reversion.models import Version
 
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm, UserEmailForm
-from .models import Editor, UserProfile
+from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
 
@@ -445,6 +445,13 @@ class DeleteDataView(SelfOnly, DeleteView):
             user_comment.user_email = ""
             user_comment.comment = "[deleted]"
             user_comment.save()
+
+        # Expire any expiry date authorizations, but keep the object.
+        for user_authorization in Authorization.objects.filter(
+                authorized_user=user,
+                date_expires__isnull=False):
+            user_authorization.date_expires = date.today() - timedelta(days=1)
+            user_authorization.save()
 
         user.delete()
 
