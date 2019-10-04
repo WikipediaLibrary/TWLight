@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     """
-    Imports users from applications CSV. Only looks at the Username and Timestamp fields.
+    Imports users from applications CSV. Only looks at the Username, Email, and Timestamp fields.
     Fields:
     Partner [not used],
     Timestamp [optional] (date: dd/mm/yyyy),
