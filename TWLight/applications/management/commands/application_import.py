@@ -18,11 +18,11 @@ class Command(BaseCommand):
     """
     Imports applications from CSV.
     Fields:
-    Partner (int: partner.id1),
+    Partner (int: partner1.id),
     Timestamp [optional] (date: dd/mm/yyyy),
     Username (string: wp_username),
     Email [optional] (string: user@example.com),
-    Collection [optional] (comma separated ints: "stream.id1, stream.id2, stream.id3"),
+    Collection [optional] (comma separated ints: "stream1.id, stream2.id, stream3.id"),
     Title [optional] (semicolon separated strings: "specific_title1; specific_title2; specific_title3")
     """
     # Let's not send mails about imported stuff.
