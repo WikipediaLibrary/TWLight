@@ -44,7 +44,7 @@ class Application(models.Model):
     SENT = 4
     INVALID = 5
 
-    STATUS_CHOICES = (
+    STATUS_CHOICES = [
         # Translators: This is the status of an application that has not yet been reviewed.
         (PENDING, _('Pending')),
         # Translators: This is the status of an application that reviewers have asked questions about.
@@ -57,7 +57,7 @@ class Application(models.Model):
         (SENT, _('Sent to partner')),
         # Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
         (INVALID, _('Invalid')),
-    )
+    ]
 
     # This list should contain all statuses that are the end state of an
     # Application - statuses which are not expected to be further modified.
