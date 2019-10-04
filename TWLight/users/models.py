@@ -444,7 +444,7 @@ class Authorization(models.Model):
         try:
             authorized_user = self.authorized_user.editor.wp_username
         except:
-            authorized_user = self.authorized_user.username
+            authorized_user = self.authorized_user
 
         # In reality, we should always have an authorizer,
         # but we need to enhance the sample data commands so they don't
