@@ -19,7 +19,7 @@ class Command(BaseCommand):
     Imports users from applications CSV. Only looks at the Username and Timestamp fields.
     Fields:
     Partner [not used],
-    Timestamp (date: dd/mm/yyyy),
+    Timestamp [optional] (date: dd/mm/yyyy),
     Username (string: wp_username),
     Email (string: user@example.com),
     Collection [not used],
