@@ -15,6 +15,16 @@ from ....users.models import Editor,UserProfile
 logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
+    """
+    Imports users from applications CSV. Only looks at the Username and Timestamp fields.
+    Fields:
+    Partner [not used],
+    Timestamp (date: dd/mm/yyyy),
+    Username (string: wp_username),
+    Email (string: user@example.com),
+    Collection [not used],
+    Title [not used]
+    """
     # Let's not send mails about imported stuff.
     django.conf.settings.EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
