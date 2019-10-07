@@ -240,10 +240,9 @@ class BaseApplicationForm(forms.Form):
                 if datum == ACCOUNT_EMAIL:
                     # If partner requires pre-registration, make sure users
                     # get a link where they can sign up.
-                    # Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering.
-                    help_text = _('You must register at <a href="{url}">{url}</a> '
-                                  'before applying.').format(
-                        url=partner_object.registration_url)
+                    url = '<a href="{url}">{url}</a>'.format(url=partner_object.registration_url)
+                    # Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
+                    help_text = _('You must register at {url} before applying.').format(url=url)
                     self.fields[field_name].help_text = help_text
 
                 partner_layout.append(field_name)
