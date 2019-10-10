@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from datetime import date, timedelta
 import urlparse
 from urllib import quote
 
@@ -7,6 +8,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from TWLight.tests import AuthorizationBaseTestCase
 from TWLight.resources.tests import EditorCraftRoom
+from TWLight.users.models import Authorization
 # from django.test import TestCase
 
 class ProxyTestCase(AuthorizationBaseTestCase):
@@ -29,3 +31,17 @@ class ProxyTestCase(AuthorizationBaseTestCase):
         too_lazy_to_test_ticket = quote(urlparse.parse_qs(response.url)['ticket'][0])
         expected_url = settings.TWLIGHT_EZPROXY_URL + "/login?user=" + self.editor1.wp_username + "&ticket=" + too_lazy_to_test_ticket + "&url=" + self.app1.partner.target_url
         self.assertRedirects(response, expected_url, fetch_redirect_response=False)
+
+        # Users without valid authorization can't get in.
+        # Let's be mean and delete all of this user's authorizations.
+        for user_authorization in Authorization.objects.filter(
+                authorized_user=self.editor1.user):
+            user_authorization.date_expires = date.today() - timedelta(days=1)
+            user_authorization.save()
+
+        response = self.client.get(
+            reverse("ezproxy:ezproxy_auth_u", kwargs={"url": self.app1.partner.target_url})
+        )
+
+        # verify that was denied.
+        self.assertEqual(response.status_code, 403)
