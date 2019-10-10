@@ -1,5 +1,6 @@
 from mock import patch
 from datetime import date, timedelta
+from faker import Faker
 from django.contrib.auth.models import User
 from django.core import mail
 from django.core.exceptions import PermissionDenied
@@ -32,7 +33,7 @@ from .view_mixins import (
 
 
 coordinators = get_coordinators()
-
+fake = Faker()
 
 class ObjGet(object):
     """
@@ -454,6 +455,8 @@ class AuthorizationBaseTestCase(TestCase):
         )
 
         self.editor1 = EditorFactory()
+        self.editor1.user.email = fake.email()
+        self.editor1.user.save()
         self.editor2 = EditorFactory()
         self.editor3 = EditorFactory()
         # Editor 4 is a coordinator with a session.
