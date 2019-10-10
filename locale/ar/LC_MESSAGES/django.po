@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-10 17:11+0000\n"
+"POT-Creation-Date: 2019-10-10 17:32+0000\n"
 "PO-Revision-Date: 2019-10-07 18:07:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3941,7 +3941,7 @@ msgstr ""
 "التقدم بطلب الوصول إلى موارد الشركاء دون بريد إلكتروني."
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:532
+#: TWLight/users/views.py:539
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
@@ -3950,7 +3950,7 @@ msgstr ""
 "التطبيقات ما لم توافق على شروط الاستخدام."
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:537
+#: TWLight/users/views.py:544
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
