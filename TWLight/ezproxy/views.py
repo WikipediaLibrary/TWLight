@@ -21,7 +21,7 @@ class EZProxyAuth(View):
     @staticmethod
     def get(request, url=None, token=None):
         username = request.user.editor.wp_username
-        groups = ["Default"]
+        groups = []
 
         if not username:
             raise SuspiciousOperation("Missing Editor username.")
@@ -80,16 +80,20 @@ class EZProxyTicket(object):
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
         secret = settings.TWLIGHT_EZPROXY_SECRET
 
+        if not groups:
+            raise SuspiciousOperation(
+                "You are not authorized to access this resource."
+            )
+
         if not secret:
             raise SuspiciousOperation(
                 "EZProxy Configuration Error: shared secret cannot be empty."
             )
 
         packet = "$u" + repr(timegm(gmtime()))
-        if groups:
-            packet += "$g" + "+".join(groups)
-
+        packet += "$g" + "+".join(groups)
         packet += "$e"
+
         logger.info(
             "Editor {username} has the following EZProxy group packet: {packet}.".format(
                 username=user, packet=packet
