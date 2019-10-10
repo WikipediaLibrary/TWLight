@@ -441,10 +441,17 @@ class Authorization(models.Model):
         else:
             stream_name = None
 
-        try:
-            authorized_user = self.authorized_user.editor.wp_username
-        except:
-            authorized_user = self.authorized_user
+        # In reality, we should always have an authorized user.
+        if self.authorized_user:
+            try:
+                authorized_user = self.authorized_user.editor.wp_username
+            except:
+                try:
+                    authorized_user = self.authorized_user.username
+                except:
+                    authorized_user = self.authorized_user
+        else:
+            authorized_user = None
 
         # In reality, we should always have an authorizer,
         # but we need to enhance the sample data commands so they don't
@@ -453,7 +460,10 @@ class Authorization(models.Model):
             try:
                 authorizer = self.authorizer.editor.wp_username
             except:
-                authorizer = self.authorizer.username
+                try:
+                    authorizer = self.authorizer.username
+                except:
+                    authorizer = self.authorizer
         else:
             authorizer = None
 
