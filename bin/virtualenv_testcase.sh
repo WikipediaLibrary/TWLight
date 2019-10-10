@@ -11,7 +11,7 @@ fi
     # Load virtual environment
     if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
     then
-        python manage.py test $1
+        DJANGO_LOG_LEVEL=CRITICAL DJANGO_SETTINGS_MODULE=TWLight.settings.local coverage run --source TWLight manage.py test --keepdb --noinput $1
     else
         exit 1
     fi
