@@ -1,6 +1,31 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import urlparse
+from urllib import quote
 
-from django.test import TestCase
+from django.conf import settings
+from django.core.urlresolvers import reverse
+from TWLight.tests import AuthorizationBaseTestCase
+from TWLight.resources.tests import EditorCraftRoom
+# from django.test import TestCase
 
-# Create your tests here.
+class ProxyTestCase(AuthorizationBaseTestCase):
+    """
+    Tests for Proxy Authorizations.
+    """
+
+    def test_authorization_url(self):
+        """
+        Check to see if the URL-based endpoint correctly sends users on to EZProxy.
+        We're testing it rather the token-based endpoint because we can check the target URL.
+        """
+        self.editor1 = EditorCraftRoom(self, Terms=True, Coordinator=False, editor=self.editor1)
+        response = self.client.get(
+            reverse("ezproxy:ezproxy_auth_u", kwargs={"url": self.app1.partner.target_url})
+        )
+        # verify that we get a redirect to the proxy server
+        # We're validating everything but the ticket contents
+        # because the ticket is deterministic based on the input ... and it would be a pain to write a test for it.
+        too_lazy_to_test_ticket = quote(urlparse.parse_qs(response.url)['ticket'][0])
+        expected_url = settings.TWLIGHT_EZPROXY_URL + "/login?user=" + self.editor1.wp_username + "&ticket=" + too_lazy_to_test_ticket + "&url=" + self.app1.partner.target_url
+        self.assertRedirects(response, expected_url, fetch_redirect_response=False)
