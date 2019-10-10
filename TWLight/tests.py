@@ -543,14 +543,17 @@ class AuthorizationBaseTestCase(TestCase):
         )
 
         # Send the application
+        # PROXY authorization methods don't set .SENT on the evaluate page;
+        # .APPROVED will automatically update them to .SENT
         self.client.post(
             reverse("applications:evaluate", kwargs={"pk": self.app4.pk}),
-            data={"status": Application.SENT},
+            data={"status": Application.APPROVED},
             follow=True,
         )
         self.app4.refresh_from_db()
         self.auth_app4 = Authorization.objects.get(
-            authorizer=self.editor4.user,
+            # https://phabricator.wikimedia.org/T233508
+            # authorizer=self.editor4.user,
             authorized_user=self.editor1.user,
             partner=self.partner2,
         )
@@ -558,12 +561,13 @@ class AuthorizationBaseTestCase(TestCase):
         # Send the application
         self.client.post(
             reverse("applications:evaluate", kwargs={"pk": self.app5.pk}),
-            data={"status": Application.SENT},
+            data={"status": Application.APPROVED},
             follow=True,
         )
         self.app5.refresh_from_db()
         self.auth_app5 = Authorization.objects.get(
-            authorizer=self.editor4.user,
+            # https://phabricator.wikimedia.org/T233508
+            # authorizer=self.editor4.user,
             authorized_user=self.editor2.user,
             partner=self.partner2,
         )

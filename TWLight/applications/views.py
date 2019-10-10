@@ -762,8 +762,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                 messages.add_message(self.request, messages.ERROR,
                     _('Cannot approve application as partner with proxy authorization method is waitlisted.'))
                 return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
-            
-            total_accounts_available_for_distribution = None
+
             total_accounts_available_for_distribution = get_accounts_available(app)
             if total_accounts_available_for_distribution is None:
                 pass
@@ -820,6 +819,11 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             # Translators: this lets a reviewer set the status of a single application.
             _('Set application status'),
             css_class='center-block'))
+
+        if self.get_object().is_instantly_finalized():
+            status_choices = Application.STATUS_CHOICES[:]
+            status_choices.pop(4)
+            form.fields['status'].choices = status_choices
 
         return form
 
