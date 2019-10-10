@@ -75,13 +75,14 @@ class EZProxyAuth(View):
 class EZProxyTicket(object):
     starting_point_url = None
 
-    def __init__(self, user, groups=None):
+    def __init__(self, user=None, groups=None):
 
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
         secret = settings.TWLIGHT_EZPROXY_SECRET
 
+        # Clearly not allowed if there is no user.
         # Clearly not allowed if the user isn't in any proxy groups.
-        if not groups:
+        if not (groups and user):
             raise PermissionDenied(
                 "You are not authorized to access this resource."
             )
