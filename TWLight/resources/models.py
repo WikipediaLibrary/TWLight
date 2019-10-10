@@ -211,6 +211,9 @@ class Partner(models.Model):
     
     # Optional resource metadata
     # --------------------------------------------------------------------------
+    target_url = models.URLField(blank=True, null=True,
+    # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's available resources.
+    help_text = _("Link to partner resources. Required for proxied resources; optional otherwise."))
 
     terms_of_use = models.URLField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
@@ -448,6 +451,10 @@ class Stream(models.Model):
             "or access codes. 'Proxy' means access delivered directly via EZProxy, "
             "and Library Bundle is automated proxy-based access. 'Link' is if we "
             "send users a URL to use to create an account."))
+
+    target_url = models.URLField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
+        help_text = _("Link to collection. Required for proxied collections; optional otherwise."))
 
     user_instructions = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.

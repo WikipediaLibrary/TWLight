@@ -461,6 +461,7 @@ class AuthorizationBaseTestCase(TestCase):
         # Editor 4 is the designated coordinator for all partners.
         self.partner1.coordinator = self.editor4.user
         self.partner1.account_length = timedelta(days=180)
+        self.partner1.target_url = 'http://test.localdomain';
         self.partner1.save()
         self.partner2.coordinator = self.editor4.user
         self.partner2.save()
