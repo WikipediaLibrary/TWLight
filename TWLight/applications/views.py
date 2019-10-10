@@ -835,8 +835,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         try:
             assert 'batch_status' in request.POST
 
-            status = request.POST['batch_status']
-            assert int(status) in [Application.PENDING,
+            status = int(request.POST['batch_status'])
+            assert status in [Application.PENDING,
                                    Application.QUESTION,
                                    Application.APPROVED,
                                    Application.NOT_APPROVED,
@@ -954,11 +954,11 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 if app.partner.status != Partner.WAITLIST:
                     if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
                         batch_update_success.append(app_pk)
-                        app.status = int(status)
+                        app.status = status
                         app.save()
                     elif partners_distribution_flag[app.partner.pk] is True:
                         batch_update_success.append(app_pk)
-                        app.status = int(status)
+                        app.status = status
                         app.save()
                     else:
                         batch_update_failed.append(app_pk)
