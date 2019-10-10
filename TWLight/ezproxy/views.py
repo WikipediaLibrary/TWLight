@@ -7,7 +7,7 @@ import urllib
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
-from django.core.exceptions import SuspiciousOperation, ValidationError
+from django.core.exceptions import PermissionDenied, SuspiciousOperation, ValidationError
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
@@ -80,8 +80,9 @@ class EZProxyTicket(object):
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
         secret = settings.TWLIGHT_EZPROXY_SECRET
 
+        # Clearly not allowed if the user isn't in any proxy groups.
         if not groups:
-            raise SuspiciousOperation(
+            raise PermissionDenied(
                 "You are not authorized to access this resource."
             )
 
