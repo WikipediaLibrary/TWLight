@@ -429,6 +429,26 @@ class Authorization(models.Model):
         # Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
         help_text=_("Have we sent a reminder email about this authorization?"))
 
+    @property
+    def is_valid(self):
+        """
+        Gives Boolean response regarding the current validity of this authorization.
+        """
+        # We assume the authorization is invalid unless we know better.
+        valid = False
+        today = datetime.today().date()
+        if (
+            # Valid authorizations always have an authorizer, and authorized_user and a partner_id.
+            self.authorizer and self.authorized_user and self.partner_id
+            # and a valid authorization date that is now or in the past
+            and self.date_authorized and self.date_authorized <= today
+            # and an expiration date in the future (or no expiration date).
+            and ((self.date_expires and self.date_expires > today) or not self.date_expires)
+        ):
+              valid = True
+        return valid
+
+
     # Try to return a useful object name, if fields were set appropriately.
     def __unicode__(self):
         if self.stream:

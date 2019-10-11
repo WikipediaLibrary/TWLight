@@ -29,7 +29,7 @@ from .filters import PartnerFilter
 from . import views
 
 
-def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False):
+def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False, editor=None):
     """
     The use of the @login_required decorator on many views precludes the use of
     factories for many tests. This method creates an Editor logged into a test
@@ -37,8 +37,11 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False):
     """
     terms_url = reverse('terms')
 
-    # Create and editor and set a password
-    editor = EditorFactory()
+    # Create editor if None was specified.
+    if not editor:
+        editor=EditorFactory()
+
+    # Set a password
     editor.user.set_password('editor')
     editor.user.save()
 

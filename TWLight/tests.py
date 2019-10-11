@@ -1,5 +1,6 @@
 from mock import patch
 from datetime import date, timedelta
+from faker import Faker
 from django.contrib.auth.models import User
 from django.core import mail
 from django.core.exceptions import PermissionDenied
@@ -32,7 +33,7 @@ from .view_mixins import (
 
 
 coordinators = get_coordinators()
-
+fake = Faker()
 
 class ObjGet(object):
     """
@@ -454,6 +455,8 @@ class AuthorizationBaseTestCase(TestCase):
         )
 
         self.editor1 = EditorFactory()
+        self.editor1.user.email = fake.email()
+        self.editor1.user.save()
         self.editor2 = EditorFactory()
         self.editor3 = EditorFactory()
         # Editor 4 is a coordinator with a session.
@@ -461,6 +464,7 @@ class AuthorizationBaseTestCase(TestCase):
         # Editor 4 is the designated coordinator for all partners.
         self.partner1.coordinator = self.editor4.user
         self.partner1.account_length = timedelta(days=180)
+        self.partner1.target_url = 'http://test.localdomain';
         self.partner1.save()
         self.partner2.coordinator = self.editor4.user
         self.partner2.save()
