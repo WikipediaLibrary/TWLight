@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-10-01 14:52:42+0000\n"
-"X-POT-Import-Date: 2019-09-26 16:30:29+0000\n"
+"PO-Revision-Date: 2019-10-14 15:52:09+0000\n"
+"X-POT-Import-Date: 2019-10-11 02:31:09+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ms\n"
-"X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -770,54 +770,54 @@ msgstr "Permohonan yang dihantar"
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted."
 msgstr ""
 
-#: TWLight/applications/views.py:779
+#: TWLight/applications/views.py:778
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."
 msgstr ""
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
-#: TWLight/applications/views.py:789
+#: TWLight/applications/views.py:788
 msgid "You attempted to create a duplicate authorization."
 msgstr "Anda cuba mencipta kebenaran pendua."
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:821
+#: TWLight/applications/views.py:820
 msgid "Set application status"
 msgstr "Tetapkan status permohonan"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:851
+#: TWLight/applications/views.py:855
 msgid "Please select at least one application."
 msgstr "Sila pilih sekurang-kurangnya satu permohonan."
 
-#: TWLight/applications/views.py:978
+#: TWLight/applications/views.py:982
 #, fuzzy
 msgid "Batch update of application(s) {} successful."
 msgstr "Kemas kini kumpulan berjaya."
 
-#: TWLight/applications/views.py:983
+#: TWLight/applications/views.py:987
 msgid "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available."
 msgstr ""
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1132
+#: TWLight/applications/views.py:1136
 msgid "Error: Code used multiple times."
 msgstr "Ralat: Kod digunakan berulang kali."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1166
+#: TWLight/applications/views.py:1170
 msgid "All selected applications have been marked as sent."
 msgstr "Semua permohonan yang terpilih telah ditandakan sebagai dihantar."
 
-#: TWLight/applications/views.py:1193
+#: TWLight/applications/views.py:1197
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
 msgstr ""
 
-#: TWLight/applications/views.py:1251
+#: TWLight/applications/views.py:1255
 msgid "This object cannot be renewed. (This probably means that you have already requested that it be renewed.)"
 msgstr "Objek ini tidak boleh diperbaharui. (Ini mungkin bermakna anda telah meminta supaya ia diperbaharui.)"
 
-#: TWLight/applications/views.py:1257
+#: TWLight/applications/views.py:1261
 msgid "Your renewal request has been received. A coordinator will review your request."
 msgstr "Permintaan pembaharuan anda telah diterima. Penyelaras akan menyemak permintaan anda."
 
@@ -1275,187 +1275,197 @@ msgstr "Bolehkah kebenaran akses bagi rakan kongsi ini diperbaharui? Jika ya, pe
 msgid "Add the number of new accounts to the existing value, not by resetting it to zero. If 'specific stream' is true, change accounts availability at the collection level."
 msgstr ""
 
+#. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's available resources.
+#: TWLight/resources/models.py:216
+msgid "Link to partner resources. Required for proxied resources; optional otherwise."
+msgstr ""
+
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
-#: TWLight/resources/models.py:217
+#: TWLight/resources/models.py:220
 msgid "Link to terms of use. Required if users must agree to terms of use to get access; optional otherwise."
 msgstr "Pautan ke terma penggunaan. Diperlukan jika pengguna mesti bersetuju dengan terma penggunaan untuk mendapatkan akses; pilihan jika sebaliknya."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
-#: TWLight/resources/models.py:222
+#: TWLight/resources/models.py:225
 msgid "Optional short description of this partner's resources."
 msgstr "Penerangan pendek pilihan bagi sumber rakan kongsi ini."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a long description of a partner's available resources.
-#: TWLight/resources/models.py:226
+#: TWLight/resources/models.py:229
 msgid "Optional detailed description in addition to the short description such as collections, instructions, notes, special requirements, alternate access options, unique features, citations notes."
 msgstr "Penerangan terperinci pilihan sebagai tambahan kepada penerangan ringkas seperti koleksi, arahan, nota, keperluan khas, pilihan akses alternatif, ciri unik, nota petikan."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
-#: TWLight/resources/models.py:232
+#: TWLight/resources/models.py:235
 msgid "Optional instructions for sending application data to this partner."
 msgstr "Arahan pilihan untuk menghantar data permohonan kepada rakan kongsi ini."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a partner resource.
-#: TWLight/resources/models.py:237
+#: TWLight/resources/models.py:240
 msgid "Optional instructions for editors to use access codes or free signup URLs for this partner. Sent via email upon application approval (for links) or access code assignment. If this partner has collections, fill out user instructions on each collection instead."
 msgstr "Arahan pilihan untuk penyunting untuk menggunakan kod akses atau URL pendaftaran percuma untuk rakan kongsi ini. Dihantar melalui e-mel setelah mendapat kelulusan permohonan (untuk pautan) atau tugasan kod akses. Jika rakan kongsi ini mempunyai koleksi, sebaliknya isikan arahan pengguna pada setiap koleksi."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
-#: TWLight/resources/models.py:245
+#: TWLight/resources/models.py:248
 msgid "Optional excerpt limit in terms of number of words per article. Leave empty if no limit."
 msgstr "Had petikan pilihan mengikut bilangan kata setiap rencana. Biarkan kosong jika tiada had."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
-#: TWLight/resources/models.py:249
+#: TWLight/resources/models.py:252
 msgid "Optional excerpt limit in terms of percentage (%) of an article. Leave empty if no limit."
 msgstr "Had petikan pilihan mengikut peratusan (%) setiap rencana. Biarkan kosong jika tiada had."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
-#: TWLight/resources/models.py:254
+#: TWLight/resources/models.py:257
 msgid "Which authorization method does this partner use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."
 msgstr "Apakah kaedah kebenaran yang digunakan oleh rakan kongsi ini? 'E-mel' bermaksud akaun ditetapkan melalui e-mel, dan merupakan tersedia. Pilih 'Kod Akses' jika kami menghantar butiran log masuk atau kod akses individu, atau kumpulan. 'Proksi' bermaksud akses yang dihantar terus melalui EZProxy, dan Berkas Perpustakaan adalah akses berasaskan proksi automatik. 'Pautan' adalah jika kami menghantar pengguna sebarang URL untuk digunakan untuk membuat akaun."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
-#: TWLight/resources/models.py:265
+#: TWLight/resources/models.py:268
 msgid "If True, users can only apply for one Stream at a time from this Partner. If False, users can apply for multiple Streams at a time. This field must be filled in when Partners have multiple Streams, but may be left blank otherwise."
 msgstr "Jika Betul, pengguna hanya boleh memohon satu Saluran pada satu masa dari Rakan Kongsi ini. Jika Salah, pengguna boleh memohon untuk beberapa Saluran pada satu masa. Medan ini mesti diisi apabila Rakan Kongsi mempunyai beberapa Saluran, tetapi mungkin dibiarkan kosong."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
-#: TWLight/resources/models.py:272
+#: TWLight/resources/models.py:275
 msgid "Select all languages in which this partner publishes content."
 msgstr "Pilih semua bahasa yang mana rakan kongsi ini menerbitkan kandungan."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
-#: TWLight/resources/models.py:279
+#: TWLight/resources/models.py:282
 msgid "The standard length of an access grant from this Partner. Entered as &ltdays hours:minutes:seconds&gt."
 msgstr "Panjang lazim kebenaran akses dari Rakan Kongsi ini. Dimasukkan sebagai <hari jam:minit:saat>."
 
-#: TWLight/resources/models.py:287
+#: TWLight/resources/models.py:290
 msgid "Old Tags"
 msgstr "Teg Lama"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
-#: TWLight/resources/models.py:298
+#: TWLight/resources/models.py:301
 msgid "Link to registration page. Required if users must sign up on the partner's website in advance; optional otherwise."
 msgstr "Pautan ke laman pendaftaran. Diperlukan jika pengguna perlu mendaftar di laman web rakan kongsi terlebih dahulu; pilihan jika sebaliknya."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their real name when applying
-#: TWLight/resources/models.py:302
+#: TWLight/resources/models.py:305
 msgid "Mark as true if this partner requires applicant names."
 msgstr "Tandakan sebagai betul jika rakan kongsi ini memerlukan nama pemohon."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify the country in which they live when applying.
-#: TWLight/resources/models.py:305
+#: TWLight/resources/models.py:308
 msgid "Mark as true if this partner requires applicant countries of residence."
 msgstr "Tandakan sebagai betul jika rakan kongsi ini memerlukan negara mastautin pemohon."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a title for the resource they want to access when applying.
-#: TWLight/resources/models.py:309
+#: TWLight/resources/models.py:312
 msgid "Mark as true if this partner requires applicants to specify the title they want to access."
 msgstr "Tandakan sebagai betul jika rakan kongsi ini memerlukan pemohon untuk memperincikan tajuk yang mereka mahu akses."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a collection of resources when applying.
-#: TWLight/resources/models.py:313
+#: TWLight/resources/models.py:316
 msgid "Mark as true if this partner requires applicants to specify the database they want to access."
 msgstr "Tandakan sebagai betul jika rakan kongsi ini memerlukan pemohon untuk memperincikan pangkalan data yang mereka mahu akses."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their occupation when applying.
-#: TWLight/resources/models.py:317
+#: TWLight/resources/models.py:320
 msgid "Mark as true if this partner requires applicants to specify their occupation."
 msgstr "Tandakan sebagai betul jika rakan kongsi ini memerlukan pemohon untuk memperincikan pekerjaan mereka."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their institutional affiliation (e.g. university) when applying.
-#: TWLight/resources/models.py:321
+#: TWLight/resources/models.py:324
 msgid "Mark as true if this partner requires applicants to specify their institutional affiliation."
 msgstr "Tandakan sebagai betul jika rakan kongsi ini memerlukan pemohon untuk memperincikan afiliasi institusi mereka."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
-#: TWLight/resources/models.py:325
+#: TWLight/resources/models.py:328
 msgid "Mark as true if this partner requires applicants to agree with the partner's terms of use."
 msgstr "Tandakan sebagai betul jika rakan kongsi ini memerlukan pemohon untuk bersetuju dengan terma penggunaan rakan kongsi."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
-#: TWLight/resources/models.py:329
+#: TWLight/resources/models.py:332
 msgid "Mark as true if this partner requires applicants to have already signed up at the partner website."
 msgstr "Tandakan sebagai betul jika rakan kongsi ini memerlukan pemohon untuk sudah mendaftar di laman web rakan kongsi."
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners.
-#: TWLight/resources/models.py:333
+#: TWLight/resources/models.py:336
 msgid "Mark as true if the authorization method of this partner is proxy and requires the duration of the access (expiry) be specified."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:400
+#: TWLight/resources/models.py:403
 msgid "Optional image file that can be used to represent this partner."
 msgstr "Fail imej pilihan yang boleh digunakan untuk mewakili rakan kongsi ini."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:428
+#: TWLight/resources/models.py:431
 msgid "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible and *not translated*. Do not include the name of the partner here."
 msgstr "Nama saluran (e.g. 'Health and Behavioral Sciences). Akan menjadi boleh dilihat oleh pengguna dan *tidak diterjemahkan*. Jangan masukkan nama rakan kongsi di sini."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-#: TWLight/resources/models.py:434
+#: TWLight/resources/models.py:437
 msgid "Add number of new accounts to the existing value, not by reseting it to zero."
 msgstr "Tambah bilangan akaun baharu pada nilai sedia ada, bukan dengan menetapkan semula kepada kosong."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:438
+#: TWLight/resources/models.py:441
 msgid "Optional description of this stream's resources."
 msgstr "Penerangan pilihan untuk sumber saluran ini."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
-#: TWLight/resources/models.py:445
+#: TWLight/resources/models.py:448
 msgid "Which authorization method does this collection use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."
 msgstr "Apakah kaedah kebenaran yang digunakan oleh koleksi ini? 'E-mel' bermaksud akaun ditetapkan melalui e-mel, dan merupakan tersedia. Pilih 'Kod Akses' jika kami menghantar butiran log masuk atau kod akses individu, atau kumpulan. 'Proksi' bermaksud akses yang dihantar terus melalui EZProxy, dan Berkas Perpustakaan adalah akses berasaskan proksi automatik. 'Pautan' adalah jika kami menghantar pengguna sebarang URL untuk digunakan untuk membuat akaun."
 
+#. Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
+#: TWLight/resources/models.py:457
+msgid "Link to collection. Required for proxied collections; optional otherwise."
+msgstr ""
+
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
-#: TWLight/resources/models.py:454
+#: TWLight/resources/models.py:461
 msgid "Optional instructions for editors to use access codes or free signup URLs for this collection. Sent via email upon application approval (for links) or access code assignment."
 msgstr "Arahan pilihan untuk penyunting untuk menggunakan kod akses atau URL pendaftaran percuma untuk koleksi ini. Dihantar melalui e-mel setelah mendapat kelulusan permohonan (untuk pautan) atau tugasan kod akses."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:495
+#: TWLight/resources/models.py:502
 msgid "Organizational role or job title. This is NOT intended to be used for honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
 msgstr "Peranan dalam organisasi atau nama jawatan. Ini TIDAK bertujuan untuk digunakan bagi kata hormat. Fikirkan 'Pengarah Perkhidmatan Editorial', bukan Pilihan 'Cik'."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:502
+#: TWLight/resources/models.py:509
 msgid "The form of the contact person's name to use in email greetings (as in 'Hi Jake')"
 msgstr "Bentuk nama orang hubungan untuk digunakan dalam sapaan e-mel (seperti dalam 'Hai Ahmad')"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
-#: TWLight/resources/models.py:521
+#: TWLight/resources/models.py:528
 msgid "Potential partner's name (e.g. McFarland)."
 msgstr "Nama rakan kongsi yang berpotensi (cth. McFarland)."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
-#: TWLight/resources/models.py:525
+#: TWLight/resources/models.py:532
 msgid "Optional description of this potential partner."
 msgstr "Keterangan pilihan bagi rakan kongsi yang berpotensi ini."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
-#: TWLight/resources/models.py:529
+#: TWLight/resources/models.py:536
 msgid "Link to the potential partner's website."
 msgstr "Pautan ke tapak web rakan kongsi yang mempunyai potensi."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
-#: TWLight/resources/models.py:533
+#: TWLight/resources/models.py:540
 msgid "User who authored this suggestion."
 msgstr "Pengguna yang memberi kebenaran cadangan ini."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-#: TWLight/resources/models.py:537
+#: TWLight/resources/models.py:544
 msgid "Users who have upvoted this suggestion."
 msgstr "Pengguna yang telah mengundi naik cadangan ini."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
-#: TWLight/resources/models.py:562
+#: TWLight/resources/models.py:569
 msgid "URL of a video tutorial."
 msgstr "URL tutorial video."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
-#: TWLight/resources/models.py:583
+#: TWLight/resources/models.py:590
 msgid "An access code for this partner."
 msgstr "Kod akses bagi rakan kongsi ini."
 
@@ -2901,12 +2911,12 @@ msgid "Your email is blank. You can still explore the site, but you won't be abl
 msgstr ""
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:532
+#: TWLight/users/views.py:539
 msgid "You may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:537
+#: TWLight/users/views.py:544
 msgid "You may explore the site, but you will not be able to apply for access unless you agree with the terms of use."
 msgstr ""
 
