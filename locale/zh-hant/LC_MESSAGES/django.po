@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-16 10:09+0000\n"
+"POT-Creation-Date: 2019-10-17 17:58+0000\n"
 "PO-Revision-Date: 2019-10-14 15:52:16+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1678,12 +1678,12 @@ msgid ""
 msgstr "若此合作夥伴的授權方法為代理，且需要指定取用（逾期）期間，勾選此項。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:403
+#: TWLight/resources/models.py:414
 msgid "Optional image file that can be used to represent this partner."
 msgstr "用來代表合作夥伴的圖片檔案。（可選）"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:431
+#: TWLight/resources/models.py:442
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
@@ -1692,18 +1692,18 @@ msgstr ""
 "名稱做出翻譯*，另外也不要包含合作夥伴的名稱。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-#: TWLight/resources/models.py:437
+#: TWLight/resources/models.py:448
 msgid ""
 "Add number of new accounts to the existing value, not by reseting it to zero."
 msgstr "將新帳號數量添加到現有值，而非重新設定爲零。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:441
+#: TWLight/resources/models.py:452
 msgid "Optional description of this stream's resources."
 msgstr "此串流資源的可選描述。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
-#: TWLight/resources/models.py:448
+#: TWLight/resources/models.py:459
 #, fuzzy
 msgid ""
 "Which authorization method does this collection use? 'Email' means the "
@@ -1718,7 +1718,7 @@ msgstr ""
 "代理的自動取用。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
-#: TWLight/resources/models.py:457
+#: TWLight/resources/models.py:468
 #, fuzzy
 msgid ""
 "Link to collection. Required for proxied collections; optional otherwise."
@@ -1726,7 +1726,7 @@ msgstr ""
 "連結至使用條款。若使用者必須同意使用條款才能獲得取用權限則為必須，反之則否。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
-#: TWLight/resources/models.py:461
+#: TWLight/resources/models.py:472
 #, fuzzy
 msgid ""
 "Optional instructions for editors to use access codes or free signup URLs "
@@ -1736,7 +1736,7 @@ msgstr ""
 "向編輯者使用對於此合作夥伴存取代碼的選用說明。透過電子郵件發送存取代碼分配。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:502
+#: TWLight/resources/models.py:524
 msgid ""
 "Organizational role or job title. This is NOT intended to be used for "
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
@@ -1745,44 +1745,44 @@ msgstr ""
 "士」。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:509
+#: TWLight/resources/models.py:531
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
 msgstr "在電子郵件問候裡的聯絡人名稱使用形式（像是「嗨，俊傑」）"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
-#: TWLight/resources/models.py:528
+#: TWLight/resources/models.py:550
 msgid "Potential partner's name (e.g. McFarland)."
 msgstr "潛在合作夥伴的名稱（例如：McFarland）。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
-#: TWLight/resources/models.py:532
+#: TWLight/resources/models.py:554
 msgid "Optional description of this potential partner."
 msgstr "此潛在合作夥伴的可選描述。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
-#: TWLight/resources/models.py:536
+#: TWLight/resources/models.py:558
 msgid "Link to the potential partner's website."
 msgstr "連接至潛在合作夥伴的網站"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
-#: TWLight/resources/models.py:540
+#: TWLight/resources/models.py:562
 msgid "User who authored this suggestion."
 msgstr "提出此建議的使用者。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-#: TWLight/resources/models.py:544
+#: TWLight/resources/models.py:566
 msgid "Users who have upvoted this suggestion."
 msgstr "認同此建議的使用者。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
-#: TWLight/resources/models.py:569
+#: TWLight/resources/models.py:591
 msgid "URL of a video tutorial."
 msgstr "影片教學 URL。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
-#: TWLight/resources/models.py:590
+#: TWLight/resources/models.py:612
 msgid "An access code for this partner."
 msgstr "此合作夥伴的取用代碼（若有的話）。"
 

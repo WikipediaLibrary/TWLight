@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-16 10:08+0000\n"
+"POT-Creation-Date: 2019-10-17 17:57+0000\n"
 "PO-Revision-Date: 2019-10-14 15:52:07+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1723,14 +1723,14 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:403
+#: TWLight/resources/models.py:414
 msgid "Optional image file that can be used to represent this partner."
 msgstr ""
 "वैकल्पिक छवि फ़ाइल जिसका उपयोग इस भागीदार का प्रतिनिधित्व करने के लिए किया जा सकता "
 "है।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:431
+#: TWLight/resources/models.py:442
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
@@ -1739,18 +1739,18 @@ msgstr ""
 "और *अनुवादित नहीं*। यहाँ भागीदार का नाम शामिल न करें।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-#: TWLight/resources/models.py:437
+#: TWLight/resources/models.py:448
 msgid ""
 "Add number of new accounts to the existing value, not by reseting it to zero."
 msgstr "नए खातों की संख्या मौजूदा मूल्य में जोड़ें, शून्य पर रीसेट करके नहीं।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:441
+#: TWLight/resources/models.py:452
 msgid "Optional description of this stream's resources."
 msgstr "इस स्ट्रीम के संसाधनों का वैकल्पिक विवरण।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
-#: TWLight/resources/models.py:448
+#: TWLight/resources/models.py:459
 msgid ""
 "Which authorization method does this collection use? 'Email' means the "
 "accounts are set up via email, and is the default. Select 'Access Codes' if "
@@ -1760,7 +1760,7 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
-#: TWLight/resources/models.py:457
+#: TWLight/resources/models.py:468
 #, fuzzy
 msgid ""
 "Link to collection. Required for proxied collections; optional otherwise."
@@ -1769,7 +1769,7 @@ msgstr ""
 "शर्तों से सहमत होना चाहिए; अन्यथा वैकल्पिक।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
-#: TWLight/resources/models.py:461
+#: TWLight/resources/models.py:472
 msgid ""
 "Optional instructions for editors to use access codes or free signup URLs "
 "for this collection. Sent via email upon application approval (for links) or "
@@ -1777,7 +1777,7 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:502
+#: TWLight/resources/models.py:524
 msgid ""
 "Organizational role or job title. This is NOT intended to be used for "
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
@@ -1786,7 +1786,7 @@ msgstr ""
 "है। 'संपादकीय सेवाओं के निदेशक' के बारे में सोचें, न कि 'सुश्री' वैकल्पिक।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:509
+#: TWLight/resources/models.py:531
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
@@ -1794,37 +1794,37 @@ msgstr ""
 "ईमेल अभिवादन में उपयोग करने के लिए संपर्क व्यक्ति के नाम का रूप ( जैसे कि 'नमस्ते रवि')"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
-#: TWLight/resources/models.py:528
+#: TWLight/resources/models.py:550
 msgid "Potential partner's name (e.g. McFarland)."
 msgstr "संभावित भागीदार का नाम (उदाहरण: McFarland)।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
-#: TWLight/resources/models.py:532
+#: TWLight/resources/models.py:554
 msgid "Optional description of this potential partner."
 msgstr "इस संभावित भागीदार का वैकल्पिक विवरण।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
-#: TWLight/resources/models.py:536
+#: TWLight/resources/models.py:558
 msgid "Link to the potential partner's website."
 msgstr "संभावित भागीदार की वेबसाइट की कड़ी।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
-#: TWLight/resources/models.py:540
+#: TWLight/resources/models.py:562
 msgid "User who authored this suggestion."
 msgstr "इस सुझाव को लिखने वाले उपयोगकर्ता।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-#: TWLight/resources/models.py:544
+#: TWLight/resources/models.py:566
 msgid "Users who have upvoted this suggestion."
 msgstr "जिन उपयोगकर्ताओं ने इस सुझाव को समर्थन दिया है।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
-#: TWLight/resources/models.py:569
+#: TWLight/resources/models.py:591
 msgid "URL of a video tutorial."
 msgstr "वीडियो ट्यूटोरियल का यूआरएल।"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
-#: TWLight/resources/models.py:590
+#: TWLight/resources/models.py:612
 #, fuzzy
 msgid "An access code for this partner."
 msgstr "इस भागीदार के लिए समन्वयक, यदि कोई हो।"
