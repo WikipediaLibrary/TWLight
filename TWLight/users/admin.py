@@ -8,13 +8,13 @@ from django.utils.translation import ugettext_lazy as _
 from TWLight.users.models import Editor, UserProfile, Authorization
 from TWLight.users.forms import AuthorizationForm
 
+
 class EditorInline(admin.StackedInline):
     model = Editor
     max_num = 1
     extra = 1
     can_delete = False
     raw_id_fields = ("user",)
-
 
 
 class UserProfileInline(admin.StackedInline):
@@ -25,18 +25,17 @@ class UserProfileInline(admin.StackedInline):
     raw_id_fields = ("user",)
 
 
-
 class AuthorizationInline(admin.StackedInline):
     form = AuthorizationForm
     model = Authorization
-    fk_name="authorized_user"
+    fk_name = "user"
     extra = 0
-
 
 
 class AuthorizationAdmin(admin.ModelAdmin):
     list_display = ('id', 'partner', 'stream', 'get_authorizer_wp_username', 'get_authorized_user_wp_username')
-    search_fields = ['partner__company_name', 'stream__name', 'authorizer__editor__wp_username', 'authorized_user__editor__wp_username']
+    search_fields = ['partner__company_name', 'stream__name', 'authorizer__editor__wp_username',
+                     'authorized_user__editor__wp_username']
 
     def get_authorized_user_wp_username(self, authorization):
         if authorization.authorized_user:
@@ -46,17 +45,18 @@ class AuthorizationAdmin(admin.ModelAdmin):
         else:
             return ''
 
-    get_authorized_user_wp_username.short_description = _('authorized_user')
+    get_authorized_user_wp_username.short_description = _('user')
 
     def get_authorizer_wp_username(self, authorization):
         if authorization.authorizer:
-            user =  authorization.authorizer
+            user = authorization.authorizer
             if hasattr(user, 'editor'):
                 return user.editor.wp_username
         else:
             return ''
 
     get_authorizer_wp_username.short_description = _('authorizer')
+
 
 admin.site.register(Authorization, AuthorizationAdmin)
 
@@ -73,6 +73,7 @@ class UserAdmin(AuthUserAdmin):
             return user.editor.wp_username
         else:
             return ''
+
     get_wp_username.short_description = _('Username')
 
 

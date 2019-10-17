@@ -386,16 +386,16 @@ class Authorization(models.Model):
         app_label = 'users'
         verbose_name = 'authorization'
         verbose_name_plural = 'authorizations'
-        unique_together = ('authorized_user', 'partner', 'stream', 'date_authorized')
+        unique_together = ('user', 'partner', 'stream', 'date_authorized')
 
     coordinators = get_coordinators()
 
     # Users may have multiple authorizations.
-    authorized_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
-        on_delete=models.SET_NULL,
-        related_name="authorizations",
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-        help_text=_('The authorized user.'))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
+                             on_delete=models.SET_NULL,
+                             related_name="authorizations",
+                             # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
+                             help_text=_('The authorized user.'))
 
     # Authorizers may authorize many users.
     authorizer = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
@@ -462,14 +462,14 @@ class Authorization(models.Model):
             stream_name = None
 
         # In reality, we should always have an authorized user.
-        if self.authorized_user:
+        if self.user:
             try:
-                authorized_user = self.authorized_user.editor.wp_username
+                authorized_user = self.user.editor.wp_username
             except:
                 try:
-                    authorized_user = self.authorized_user.username
+                    authorized_user = self.user.username
                 except:
-                    authorized_user = self.authorized_user
+                    authorized_user = self.user
         else:
             authorized_user = None
 
@@ -498,7 +498,7 @@ class Authorization(models.Model):
     def get_latest_app(self):
         from TWLight.applications.models import Application
         try:
-            return Application.objects.filter(partner=self.partner, editor=self.authorized_user.editor).latest('id')
+            return Application.objects.filter(partner=self.partner, editor=self.user.editor).latest('id')
         except Application.DoesNotExist:
             return None
 
@@ -516,9 +516,3 @@ class Authorization(models.Model):
             return True
         else:
             return False
-
-    @property
-    def user(self):
-        # Needed by SelfOnly mixin, e.g. on the authorization return
-        # view.
-        return self.authorized_user

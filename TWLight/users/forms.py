@@ -56,7 +56,7 @@ class AuthorizationUserChoiceForm(forms.ModelChoiceField):
 
 class AuthorizationForm(forms.ModelForm):
     authorizer = AuthorizationUserChoiceForm(User.objects.filter(models.Q(is_superuser=True) | models.Q(groups__name='coordinators')))
-    authorized_user = AuthorizationUserChoiceForm(queryset=User.objects.all(), widget=ForeignKeyRawIdWidget(Authorization._meta.get_field("authorized_user").rel,admin.site))
+    authorized_user = AuthorizationUserChoiceForm(queryset=User.objects.all(), widget=ForeignKeyRawIdWidget(Authorization._meta.get_field("user").rel,admin.site))
 
 
 

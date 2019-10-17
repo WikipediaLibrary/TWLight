@@ -408,7 +408,7 @@ def post_revision_commit(sender, instance, **kwargs):
         if instance.specific_stream:
             authorization.stream = instance.specific_stream
 
-        authorization.authorized_user = authorized_user
+        authorization.user = authorized_user
         authorization.authorizer = authorizer
         authorization.partner = instance.partner
 
