@@ -35,7 +35,7 @@ class ProxyTestCase(AuthorizationBaseTestCase):
         # Users without valid authorization can't get in.
         # Let's be mean and delete all of this user's authorizations.
         for user_authorization in Authorization.objects.filter(
-                authorized_user=self.editor1.user):
+                user=self.editor1.user):
             user_authorization.date_expires = date.today() - timedelta(days=1)
             user_authorization.save()
 

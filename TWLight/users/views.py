@@ -449,7 +449,7 @@ class DeleteDataView(SelfOnly, DeleteView):
 
         # Expire any expiry date authorizations, but keep the object.
         for user_authorization in Authorization.objects.filter(
-                authorized_user=user,
+                user=user,
                 date_expires__isnull=False):
             user_authorization.date_expires = date.today() - timedelta(days=1)
             user_authorization.save()
@@ -599,22 +599,22 @@ class CollectionUserView(SelfOnly, ListView):
         today = datetime.date.today()
         proxy_bundle_authorizations = Authorization.objects.filter(Q(date_expires__gte=today) |
                                                                    Q(date_expires=None),
-                                                                   authorized_user=editor.user,
+                                                                   user=editor.user,
                                                                    partner__authorization_method__in=
                                                                    [Partner.PROXY, Partner.BUNDLE]
                                                                    ).order_by('partner')
-        proxy_bundle_authorizations_expired = Authorization.objects.filter(authorized_user=editor.user,
+        proxy_bundle_authorizations_expired = Authorization.objects.filter(user=editor.user,
                                                                            date_expires__lt=today,
                                                                            partner__authorization_method__in=
                                                                            [Partner.PROXY, Partner.BUNDLE]
                                                                            ).order_by('partner')
         manual_authorizations = Authorization.objects.filter(Q(date_expires__gte=today) |
                                                              Q(date_expires=None),
-                                                             authorized_user=editor.user,
+                                                             user=editor.user,
                                                              partner__authorization_method__in=
                                                              [Partner.EMAIL, Partner.CODES, Partner.LINK]
                                                             ).order_by('partner')
-        manual_authorizations_expired = Authorization.objects.filter(authorized_user=editor.user,
+        manual_authorizations_expired = Authorization.objects.filter(user=editor.user,
                                                                      date_expires__lt=today,
                                                                      partner__authorization_method__in=
                                                                      [Partner.EMAIL, Partner.CODES, Partner.LINK]

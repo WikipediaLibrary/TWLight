@@ -270,11 +270,11 @@ class ViewsTestCase(TestCase):
         response = views.CollectionUserView.as_view()(request, pk=self.editor1.pk)
 
         for each_authorization in response.context_data['proxy_bundle_authorizations']:
-            self.assertEqual(each_authorization.authorized_user, self.user_editor)
+            self.assertEqual(each_authorization.user, self.user_editor)
             self.assertTrue(each_authorization.partner == partner1 or each_authorization.partner == partner2)
 
         for each_authorization in response.context_data['manual_authorizations']:
-            self.assertEqual(each_authorization.authorized_user, self.user_editor)
+            self.assertEqual(each_authorization.user, self.user_editor)
             self.assertTrue(each_authorization.partner == partner3 or each_authorization.partner == partner4 or each_authorization.partner == partner5)
 
 
@@ -283,7 +283,7 @@ class ViewsTestCase(TestCase):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
         partner = PartnerFactory(authorization_method=Partner.PROXY)
         app = ApplicationFactory(status=Application.SENT, editor=editor, partner=partner)
-        authorization = Authorization.objects.get(authorized_user=editor.user, partner=partner)
+        authorization = Authorization.objects.get(user=editor.user, partner=partner)
         self.assertEqual(authorization.get_latest_app(), app)
         return_url = reverse('users:return_authorization',
                               kwargs={'pk': authorization.pk})
@@ -438,7 +438,7 @@ class ViewsTestCase(TestCase):
 
         partner = PartnerFactory()
         user_auth = Authorization(
-            authorized_user=self.user_editor,
+            user=self.user_editor,
             partner=partner,
             date_authorized=date.today(),
             date_expires=date.today() + timedelta(days=30)

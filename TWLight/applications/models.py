@@ -381,12 +381,12 @@ def post_revision_commit(sender, instance, **kwargs):
         # Check if an authorization already exists.
         if instance.specific_stream:
             existing_authorization = Authorization.objects.filter(
-                authorized_user=instance.user,
+                user=instance.user,
                 partner=instance.partner,
                 stream=instance.specific_stream)
         else:
             existing_authorization = Authorization.objects.filter(
-                authorized_user=instance.user,
+                user=instance.user,
                 partner=instance.partner)
 
         authorized_user = instance.user
