@@ -35,11 +35,11 @@ class AuthorizationInline(admin.StackedInline):
 class AuthorizationAdmin(admin.ModelAdmin):
     list_display = ('id', 'partner', 'stream', 'get_authorizer_wp_username', 'get_authorized_user_wp_username')
     search_fields = ['partner__company_name', 'stream__name', 'authorizer__editor__wp_username',
-                     'authorized_user__editor__wp_username']
+                     'user__editor__wp_username']
 
     def get_authorized_user_wp_username(self, authorization):
-        if authorization.authorized_user:
-            user = authorization.authorized_user
+        if authorization.user:
+            user = authorization.user
             if hasattr(user, 'editor'):
                 return user.editor.wp_username
         else:
