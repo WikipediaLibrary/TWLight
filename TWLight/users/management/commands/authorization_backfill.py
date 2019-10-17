@@ -9,9 +9,12 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
+    """
+    Creates missing authorizations based on existing setnt applications
+    Mostly cribbed from TWLight.applications.models.post_receive_commit. Could factor out the common code.
+    """
 
     def handle(self, **options):
-        # Mostly cribbed from TWLight.applications.models.post_receive_commit. Could factor out the common code.
         # Get sent applications with an available partner and editor. We're sorting by ascending date to back-fill
         # authorizations from oldest to newest.
         sent_applications = Application.objects.filter(
