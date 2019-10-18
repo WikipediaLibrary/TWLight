@@ -9,7 +9,6 @@ from django.core.urlresolvers import reverse
 from TWLight.tests import AuthorizationBaseTestCase
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.models import Authorization
-# from django.test import TestCase
 
 class ProxyTestCase(AuthorizationBaseTestCase):
     """
@@ -28,6 +27,7 @@ class ProxyTestCase(AuthorizationBaseTestCase):
         # verify that we get a redirect to the proxy server
         # We're validating everything but the ticket contents
         # because the ticket is deterministic based on the input ... and it would be a pain to write a test for it.
+        self.assertEqual(response.status_code, 302)
         too_lazy_to_test_ticket = quote(urlparse.parse_qs(response.url)['ticket'][0])
         expected_url = settings.TWLIGHT_EZPROXY_URL + "/login?user=" + self.editor1.wp_username + "&ticket=" + too_lazy_to_test_ticket + "&url=" + self.app1.partner.target_url
         self.assertRedirects(response, expected_url, fetch_redirect_response=False)
