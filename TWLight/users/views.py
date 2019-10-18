@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 import json
 
 from crispy_forms.helper import FormHelper
@@ -623,7 +623,7 @@ class CollectionUserView(SelfOnly, ListView):
         for authorization_list in [manual_authorizations, proxy_bundle_authorizations,
                                    manual_authorizations_expired, proxy_bundle_authorizations_expired]:
             for each_authorization in authorization_list:
-                if each_authorization.about_to_expire or each_authorization.is_expired:
+                if each_authorization.about_to_expire or not each_authorization.is_valid:
                     each_authorization.latest_app = each_authorization.get_latest_app()
                     if each_authorization.latest_app:
                         if not each_authorization.latest_app.is_renewable:
