@@ -497,7 +497,7 @@ class Stream(models.Model):
     def get_access_url(self):
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
         access_url = None
-        if self.authorization_method == self.PROXY and ezproxy_url and self.target_url:
+        if self.authorization_method == Partner.PROXY and ezproxy_url and self.target_url:
             access_url =  ezproxy_url + "/login?url=" + self.target_url
         elif self.target_url:
             access_url = self.target_url
