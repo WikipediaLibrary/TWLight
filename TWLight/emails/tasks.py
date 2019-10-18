@@ -236,18 +236,11 @@ def send_approval_notification_email(instance):
     # If, for some reason, we're trying to send an email to a user
     # who deleted their account, stop doing that.
     if instance.editor:
-        if instance.is_instantly_finalized():
-            user_instructions = instance.get_user_instructions()
-        else:
-            # Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-            user_instructions = _("You can expect to receive access details "
-                "within a week or two once it has been processed.")
-
         email.send(instance.user.email,
             {'user': instance.user.editor.wp_username,
              'lang': instance.user.userprofile.lang,
              'partner': instance.partner,
-             'user_instructions': user_instructions})
+             'user_instructions': instance.get_user_instructions()})
     else:
         logger.error("Tried to send an email to an editor that doesn't "
             "exist, perhaps because their account is deleted.")
@@ -367,17 +360,12 @@ def send_authorization_emails(sender, instance, **kwargs):
         # have one before, we've probably just finalised an application
         # and therefore want to send an email.
         if not orig_code.authorization and instance.authorization:
-
-            base_url = get_current_site(None).domain
-
-            user_instructions = instance.partner.user_instructions
             mail_instance = MagicMailBuilder()
-
             email = mail_instance.access_code_email(instance.authorization.user.email,
                 {'editor_wp_username': instance.authorization.user.editor.wp_username,
                  'partner': instance.partner,
                  'access_code': instance.code,
-                 'user_instructions': user_instructions
+                 'user_instructions': instance.partner.user_instructions
                  })
             email.send()
 
