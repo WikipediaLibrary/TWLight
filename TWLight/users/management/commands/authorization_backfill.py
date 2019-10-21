@@ -26,12 +26,12 @@ class Command(BaseCommand):
             # Check if an authorization already exists.
             if application.specific_stream:
                 existing_authorization = Authorization.objects.filter(
-                    authorized_user=application.user,
+                    user=application.user,
                     partner=application.partner,
                     stream=application.specific_stream)
             else:
                 existing_authorization = Authorization.objects.filter(
-                    authorized_user=application.user,
+                    user=application.user,
                     partner=application.partner)
             # In the case that there is no existing authorization, create a new one
             if existing_authorization.count() == 0:
@@ -43,10 +43,8 @@ class Command(BaseCommand):
                 if application.specific_stream:
                     authorization.stream = application.specific_stream
 
-                authorized_user = application.user
-                authorizer = application.sent_by
-                authorization.authorized_user = authorized_user
-                authorization.authorizer = authorizer
+                authorization.user = application.user
+                authorization.authorizer = application.sent_by
                 authorization.partner = application.partner
                 # If this is a proxy partner, and the requested_access_duration
                 # field is set to false, set (or reset) the expiry date
