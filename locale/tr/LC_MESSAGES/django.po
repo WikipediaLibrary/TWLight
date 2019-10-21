@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-21 16:22+0000\n"
+"POT-Creation-Date: 2019-10-21 19:28+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:12+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -862,11 +862,11 @@ msgstr "Başvuru durumunu ayarla"
 msgid "Please select at least one application."
 msgstr "Lütfen, en az bir başvuru seçin."
 
-#: TWLight/applications/views.py:982
+#: TWLight/applications/views.py:998
 msgid "Batch update of application(s) {} successful."
 msgstr "Toplu iş/uygulama {} başarılı."
 
-#: TWLight/applications/views.py:987
+#: TWLight/applications/views.py:1003
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -879,21 +879,21 @@ msgstr ""
 "onaylayın."
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1136
+#: TWLight/applications/views.py:1152
 msgid "Error: Code used multiple times."
 msgstr "Hata: Kod birden çok kez kullanılmış."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1170
+#: TWLight/applications/views.py:1186
 msgid "All selected applications have been marked as sent."
 msgstr "Seçilen tüm başvurular, gönderildi olarak işaretlendi."
 
-#: TWLight/applications/views.py:1197
+#: TWLight/applications/views.py:1213
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
 msgstr "Onaylanmayan bir uygulamayı yenilemeye çalışıldı #{pk} reddedildi"
 
-#: TWLight/applications/views.py:1255
+#: TWLight/applications/views.py:1271
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
@@ -901,7 +901,7 @@ msgstr ""
 "Bu nesne yenilenemez. (Bu, muhtemelen bunun zaten yenilenmesini istediniz "
 "demektir.)"
 
-#: TWLight/applications/views.py:1261
+#: TWLight/applications/views.py:1277
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."

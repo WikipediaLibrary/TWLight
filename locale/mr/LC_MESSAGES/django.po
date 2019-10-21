@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-21 16:21+0000\n"
+"POT-Creation-Date: 2019-10-21 19:27+0000\n"
 "PO-Revision-Date: 2019-02-14 08:31:32+0000\n"
 "Language: mr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -833,13 +833,13 @@ msgstr "अर्जाची स्थिती निश्चित करा
 msgid "Please select at least one application."
 msgstr "निदान एकतरी अर्ज निवडा"
 
-#: TWLight/applications/views.py:982
+#: TWLight/applications/views.py:998
 #, fuzzy
 #| msgid "Batch update successful."
 msgid "Batch update of application(s) {} successful."
 msgstr "गटाला ताजेतवाने केले गेले."
 
-#: TWLight/applications/views.py:987
+#: TWLight/applications/views.py:1003
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -848,28 +848,28 @@ msgid ""
 msgstr ""
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1136
+#: TWLight/applications/views.py:1152
 msgid "Error: Code used multiple times."
 msgstr ""
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1170
+#: TWLight/applications/views.py:1186
 msgid "All selected applications have been marked as sent."
 msgstr "निवडलेले सर्व अर्ज पुढे पाठवले गेलेले आहेत."
 
-#: TWLight/applications/views.py:1197
+#: TWLight/applications/views.py:1213
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
 msgstr ""
 
-#: TWLight/applications/views.py:1255
+#: TWLight/applications/views.py:1271
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr ""
 "ह्या साहित्याची वर्गणी पुन्हा भरली जाऊ शकत नाही. (कदाचित तुम्ही आधीच ते केलेले असावे.)"
 
-#: TWLight/applications/views.py:1261
+#: TWLight/applications/views.py:1277
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."

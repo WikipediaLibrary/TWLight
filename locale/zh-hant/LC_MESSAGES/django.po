@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-21 16:22+0000\n"
+"POT-Creation-Date: 2019-10-21 19:28+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:14+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -836,11 +836,11 @@ msgstr "設定申請程序狀態"
 msgid "Please select at least one application."
 msgstr "請至少選擇一個申請程序。"
 
-#: TWLight/applications/views.py:982
+#: TWLight/applications/views.py:998
 msgid "Batch update of application(s) {} successful."
 msgstr "申請程序{}批量更新成功。"
 
-#: TWLight/applications/views.py:987
+#: TWLight/applications/views.py:1003
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -851,27 +851,27 @@ msgstr ""
 "用帳號不足，會按優先順序處理申請程序，且核准與可用帳號數相同的申請程序。"
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1136
+#: TWLight/applications/views.py:1152
 msgid "Error: Code used multiple times."
 msgstr "錯誤：代碼被分配給多名使用者。"
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1170
+#: TWLight/applications/views.py:1186
 msgid "All selected applications have been marked as sent."
 msgstr "所有選擇的申請程序被標記為已發送。"
 
-#: TWLight/applications/views.py:1197
+#: TWLight/applications/views.py:1213
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
 msgstr "嘗試續辦未核准申請程序#{pk}已被拒絕"
 
-#: TWLight/applications/views.py:1255
+#: TWLight/applications/views.py:1271
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr "此對象無法續辦。（這通常代表您已經有請求過且已續辦。）"
 
-#: TWLight/applications/views.py:1261
+#: TWLight/applications/views.py:1277
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."

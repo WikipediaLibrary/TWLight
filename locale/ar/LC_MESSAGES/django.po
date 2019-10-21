@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-21 16:20+0000\n"
+"POT-Creation-Date: 2019-10-21 19:26+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:02+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -893,11 +893,11 @@ msgstr "ضبط حالة الطلب"
 msgid "Please select at least one application."
 msgstr "إختر شريكا واحدا على الأقل من فضلك."
 
-#: TWLight/applications/views.py:982
+#: TWLight/applications/views.py:998
 msgid "Batch update of application(s) {} successful."
 msgstr "تم تحديث الدفعة بنجاح."
 
-#: TWLight/applications/views.py:987
+#: TWLight/applications/views.py:1003
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -910,27 +910,27 @@ msgstr ""
 "للحسابات المتاحة."
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1136
+#: TWLight/applications/views.py:1152
 msgid "Error: Code used multiple times."
 msgstr "خطأ: الكود تم استخدامه عدة مرات."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1170
+#: TWLight/applications/views.py:1186
 msgid "All selected applications have been marked as sent."
 msgstr "تم تعليم جميع الطلبات المحددة كمرسلة."
 
-#: TWLight/applications/views.py:1197
+#: TWLight/applications/views.py:1213
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
 msgstr "تم رفض محاولة تجديد التطبيق غير الموافق عليه #{pk}"
 
-#: TWLight/applications/views.py:1255
+#: TWLight/applications/views.py:1271
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr "لا يمكن تجديد هذا الكائن. (ربما يعني هذا أنك قد طلبت بالفعل تجديده.)"
 
-#: TWLight/applications/views.py:1261
+#: TWLight/applications/views.py:1277
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
