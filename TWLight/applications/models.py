@@ -372,6 +372,8 @@ def post_revision_commit(sender, instance, **kwargs):
         instance.is_instantly_finalized())
 
     if skip_approved:
+        # The latest reviewer is the effective sender.
+        instance.sent_by = instance.latest_reviewer
         instance.status = Application.SENT
         instance.save()
 

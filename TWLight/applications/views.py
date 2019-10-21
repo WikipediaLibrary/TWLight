@@ -948,18 +948,29 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 app = Application.objects.get(pk=app_pk)
             except Application.DoesNotExist:
                 continue
+
             # Based on the distribution flags, we either mark applications as approved and update the batch_update_success
-            # list with the application id or do nothing and update the batch_update_failed list. 
+            # list with the application id or do nothing and update the batch_update_failed list.
             if is_proxy_and_application_approved(status, app):
                 if app.partner.status != Partner.WAITLIST:
                     if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
                         batch_update_success.append(app_pk)
                         app.status = status
                         app.save()
+                        # After the app is saved, we set sent_by if we sent the app.
+                        # Necessary because of instantly finalized apps.
+                        if app.status == Application.SENT and not app.sent_by:
+                            app.sent_by = request.user
+                            app.save()
                     elif partners_distribution_flag[app.partner.pk] is True:
                         batch_update_success.append(app_pk)
                         app.status = status
                         app.save()
+                        # After the app is saved, we set sent_by if we sent the app.
+                        # Necessary because of instantly finalized apps.
+                        if app.status == Application.SENT and not app.sent_by:
+                            app.sent_by = request.user
+                            app.save()
                     else:
                         batch_update_failed.append(app_pk)
                 else:
@@ -968,6 +979,11 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 batch_update_success.append(app_pk)
                 app.status = status
                 app.save()
+                # After the app is saved, we set sent_by if we sent the app.
+                # Necessary because of instantly finalized apps.
+                if app.status == Application.SENT and not app.sent_by:
+                    app.sent_by = request.user
+                    app.save()
 
         # We manually send the signals to waitlist the partners with corresponding 'True' values.
         # This could be tweaked in the future to also waitlist partners with collections. We don't do that
