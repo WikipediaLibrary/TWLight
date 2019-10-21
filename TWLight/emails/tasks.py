@@ -373,8 +373,8 @@ def send_authorization_emails(sender, instance, **kwargs):
             user_instructions = instance.partner.user_instructions
             mail_instance = MagicMailBuilder()
 
-            email = mail_instance.access_code_email(instance.authorization.authorized_user.email,
-                {'editor_wp_username': instance.authorization.authorized_user.editor.wp_username,
+            email = mail_instance.access_code_email(instance.authorization.user.email,
+                {'editor_wp_username': instance.authorization.user.editor.wp_username,
                  'partner': instance.partner,
                  'access_code': instance.code,
                  'user_instructions': user_instructions

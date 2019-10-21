@@ -26,6 +26,7 @@ class ValidApplicationsManager(models.Manager):
         return super(ValidApplicationsManager, self).get_queryset(
             ).exclude(status=Application.INVALID)
 
+
 class Application(models.Model):
     class Meta:
         app_label = 'applications'
@@ -291,7 +292,6 @@ class Application(models.Model):
         else:
             return False
 
-
     @property
     def user(self):
         # Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation
@@ -381,12 +381,12 @@ def post_revision_commit(sender, instance, **kwargs):
         # Check if an authorization already exists.
         if instance.specific_stream:
             existing_authorization = Authorization.objects.filter(
-                authorized_user=instance.user,
+                user=instance.user,
                 partner=instance.partner,
                 stream=instance.specific_stream)
         else:
             existing_authorization = Authorization.objects.filter(
-                authorized_user=instance.user,
+                user=instance.user,
                 partner=instance.partner)
 
         authorized_user = instance.user
@@ -408,7 +408,7 @@ def post_revision_commit(sender, instance, **kwargs):
         if instance.specific_stream:
             authorization.stream = instance.specific_stream
 
-        authorization.authorized_user = authorized_user
+        authorization.user = authorized_user
         authorization.authorizer = authorizer
         authorization.partner = instance.partner
 

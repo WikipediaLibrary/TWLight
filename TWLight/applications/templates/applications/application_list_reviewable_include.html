@@ -25,7 +25,7 @@
               {{ app.get_status_display }}
             </span>&nbsp;
             <a href="{{ app.get_absolute_url }}">
-              {{ app.pk }} &ndash; {{ app }} {% if app.specific_stream %}({{ app.specific_stream }}){% endif %}
+              {{ app }} {% if app.specific_stream %}({{ app.specific_stream }}){% endif %}
             </a>
             &mdash;
             {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}

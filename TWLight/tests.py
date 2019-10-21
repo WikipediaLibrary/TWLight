@@ -516,7 +516,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.app1.refresh_from_db()
         self.auth_app1 = Authorization.objects.get(
             authorizer=self.editor4.user,
-            authorized_user=self.editor1.user,
+            user=self.editor1.user,
             partner=self.partner1,
         )
 
@@ -529,7 +529,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.app2.refresh_from_db()
         self.auth_app2 = Authorization(
             authorizer=self.editor4.user,
-            authorized_user=self.editor2.user,
+            user=self.editor2.user,
             partner=self.partner1,
         )
 
@@ -542,7 +542,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.app3.refresh_from_db()
         self.auth_app3 = Authorization.objects.get(
             authorizer=self.editor4.user,
-            authorized_user=self.editor3.user,
+            user=self.editor3.user,
             partner=self.partner1,
         )
 
@@ -558,7 +558,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.auth_app4 = Authorization.objects.get(
             # https://phabricator.wikimedia.org/T233508
             # authorizer=self.editor4.user,
-            authorized_user=self.editor1.user,
+            user=self.editor1.user,
             partner=self.partner2,
         )
 
@@ -572,7 +572,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.auth_app5 = Authorization.objects.get(
             # https://phabricator.wikimedia.org/T233508
             # authorizer=self.editor4.user,
-            authorized_user=self.editor2.user,
+            user=self.editor2.user,
             partner=self.partner2,
         )
 
@@ -626,7 +626,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user=self.app7.user,
+            user=self.app7.user,
             authorizer=self.editor4.user,
             partner=self.app7.partner,
         ).exists()
@@ -650,7 +650,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user=self.app7.user,
+            user=self.app7.user,
             authorizer=self.editor4.user,
             partner=self.app7.partner,
         ).exists()
@@ -663,7 +663,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user=self.app8.user,
+            user=self.app8.user,
             authorizer=self.editor4.user,
             partner=self.app8.partner,
         ).exists()
@@ -681,7 +681,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            authorized_user=self.app8.user,
+            user=self.app8.user,
             authorizer=self.editor4.user,
             partner=self.app8.partner,
         ).exists()
@@ -724,7 +724,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         auth_app1_renewal = Authorization.objects.get(
-            authorized_user=self.app1.user,
+            user=self.app1.user,
             authorizer=self.editor5.user,
             partner=self.app1.partner,
         )

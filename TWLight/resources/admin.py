@@ -2,6 +2,7 @@ from django.contrib import messages
 from django import forms
 from django.conf.urls import url
 from django.contrib import admin
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
@@ -50,7 +51,7 @@ class PartnerLogoInline(admin.TabularInline):
 class AuthorizationInline(admin.StackedInline):
     form = AuthorizationForm
     model = Authorization
-    fk_name='partner'
+    fk_name = 'partner'
     extra = 0
 
 

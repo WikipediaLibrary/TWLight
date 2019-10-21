@@ -3120,7 +3120,7 @@ class BatchEditTest(TestCase):
                                     follow=True)
 
         authorization_exists = Authorization.objects.filter(
-            authorized_user=self.application.user,
+            user=self.application.user,
             partner=self.application.partner
         ).exists()
 

@@ -281,7 +281,8 @@
         </div>
       </div>      
     </li>
-    {% with object.excerpt_limit as excerpt_limit and object.excerpt_limit_percentage as excerpt_limit_percentage %}
+    {% with object.excerpt_limit as excerpt_limit %}
+    {% with object.excerpt_limit_percentage as excerpt_limit_percentage %}
     {% if excerpt_limit or excerpt_limit_percentage %}
       <li class="timeline-inverted">
         <div class="timeline-badge"><i class="fa fa-files-o" aria-hidden="true"></i>
@@ -315,11 +316,12 @@
                   {% endblocktrans %}
                 </li>
               {% endif %}
-            </p>
+            </ul>
           </div>
         </div>
       </li>
     {% endif %}
+    {% endwith %}
     {% endwith %}
     {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.account_email %}
       <li class="timeline-inverted">
