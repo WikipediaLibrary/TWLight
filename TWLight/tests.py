@@ -777,6 +777,23 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         expected_expiry = date.today() + timedelta(days=365)
         self.assertEqual(self.auth_app4.date_expires, expected_expiry)
 
+    def test_authorization_backfill_command(self):
+        # The authorization backfill command should retroactively create authorizations for applications submitted
+        # before we had authorizations.
+        # Count the authorizations created in realtime by previous user activity.
+        realtime_authorization_count = Authorization.objects.count()
+        # Delete all of them.
+        Authorization.objects.all().delete()
+        # Zero authorizations.
+        self.assertEqual(Authorization.objects.count(), 0)
+        # run the backfill command
+        call_command('authorization_backfill')
+        # Count the authorizations created by the backfill command.
+        backfill_authorization_count = Authorization.objects.count()
+        # All authorizations replaced.
+        self.assertEqual(realtime_authorization_count, backfill_authorization_count)
+
+
 
 class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
     """
