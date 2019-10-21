@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-21 13:48+0000\n"
+"POT-Creation-Date: 2019-10-21 16:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1242,47 +1242,47 @@ msgid "Number of users"
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
-#: TWLight/resources/admin.py:136
+#: TWLight/resources/admin.py:127
 msgid "File must be a csv"
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
-#: TWLight/resources/admin.py:142
+#: TWLight/resources/admin.py:133
 msgid "Uploaded file is too large."
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
-#: TWLight/resources/admin.py:160
+#: TWLight/resources/admin.py:151
 #, python-brace-format
 msgid "Line {line_num} has {num_columns} columns. Expected 2."
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
-#: TWLight/resources/admin.py:170
+#: TWLight/resources/admin.py:161
 #, python-brace-format
 msgid "Access code on line {line_num} is too long for the database field."
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
-#: TWLight/resources/admin.py:179
+#: TWLight/resources/admin.py:170
 #, python-brace-format
 msgid "Second column should only contain numbers. Error on line {line_num}."
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
-#: TWLight/resources/admin.py:188
+#: TWLight/resources/admin.py:179
 #, python-brace-format
 msgid "File contains reference to invalid partner ID on line {line_num}"
 msgstr ""
 
 #. Translators: When staff successfully upload a file containing access codes, they receive this message.
-#: TWLight/resources/admin.py:216
+#: TWLight/resources/admin.py:207
 #, python-brace-format
 msgid "{num_codes} access codes successfully uploaded!"
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if any were duplicates.
-#: TWLight/resources/admin.py:220
+#: TWLight/resources/admin.py:211
 #, python-brace-format
 msgid "{num_duplicates} access codes ignored as duplicates."
 msgstr ""
