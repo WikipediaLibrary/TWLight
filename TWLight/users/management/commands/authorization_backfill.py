@@ -38,8 +38,8 @@ class Command(BaseCommand):
                 authorization = Authorization()
                 # You can't set the date_authorized on creation, but you can modify it afterwards. So save immediately.
                 authorization.save()
-                # We set the authorization date to the latest review date.
-                authorization.date_authorized = application.get_latest_review_date()
+                # We set the authorization date to the date the application was closed.
+                authorization.date_authorized = application.date_closed
                 if application.specific_stream:
                     authorization.stream = application.specific_stream
 
