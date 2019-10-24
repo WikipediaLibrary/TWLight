@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-22 15:08+0000\n"
+"POT-Creation-Date: 2019-10-24 14:53+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:04+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -279,6 +279,19 @@ msgid ""
 "User selection of when they'd like their account to expire (in months). Only "
 "relevant if the applied partner/collection has authorization_method as "
 "'proxy'."
+msgstr ""
+
+#. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
+#: TWLight/applications/models.py:283
+#, python-brace-format
+msgid "Access URL: {access_url}"
+msgstr ""
+
+#. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
+#: TWLight/applications/models.py:286
+msgid ""
+"You can expect to receive access details within a week or two once it has "
+"been processed."
 msgstr ""
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
@@ -906,13 +919,6 @@ msgstr "Recibir una copia de este mensaje"
 #: TWLight/emails/forms.py:38 TWLight/resources/forms.py:32
 msgid "Submit"
 msgstr "Enviar"
-
-#. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-#: TWLight/emails/tasks.py:243
-msgid ""
-"You can expect to receive access details within a week or two once it has "
-"been processed."
-msgstr ""
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3

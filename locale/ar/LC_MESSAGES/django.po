@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-22 15:07+0000\n"
+"POT-Creation-Date: 2019-10-24 14:53+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:02+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,6 +294,20 @@ msgid ""
 msgstr ""
 "اختيار المستخدم للوقت الذي يريدون فيه انتهاء صلاحية حسابهم (بالأشهر).  ذات "
 "صلة فقط إذا كان لدى الشريك/المجموعة المطبقة إذن/طريقة \"وكيل\"."
+
+#. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
+#: TWLight/applications/models.py:283
+#, python-brace-format
+msgid "Access URL: {access_url}"
+msgstr ""
+
+#. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
+#: TWLight/applications/models.py:286
+msgid ""
+"You can expect to receive access details within a week or two once it has "
+"been processed."
+msgstr ""
+"يمكنك توقع استلام تفاصيل الوصول في غضون أسبوع أو أسبوعين بمجرد معالجتها."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -966,14 +980,6 @@ msgstr "تلقي نسخة من هذه الرسالة"
 #: TWLight/emails/forms.py:38 TWLight/resources/forms.py:32
 msgid "Submit"
 msgstr "إرسال"
-
-#. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-#: TWLight/emails/tasks.py:243
-msgid ""
-"You can expect to receive access details within a week or two once it has "
-"been processed."
-msgstr ""
-"يمكنك توقع استلام تفاصيل الوصول في غضون أسبوع أو أسبوعين بمجرد معالجتها."
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
