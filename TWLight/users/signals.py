@@ -27,7 +27,7 @@ def update_partner_authorization_expiry(sender, instance, **kwargs):
     elif sender == Stream:
         partner = instance.partner
 
-    if partner.account_length or partner.requested_access_duration:
+    if partner.account_length or partner.authorization_method == Partner.PROXY:
         authorizations = Authorization.objects.filter(partner=partner)
         for authorization in authorizations:
             if authorization.is_valid and not authorization.date_expires:
