@@ -22,7 +22,6 @@ def update_partner_authorization_expiry(sender, instance, **kwargs):
     Could factor out the common code.
     """
 
-    print(sender)
     if sender == Partner:
         partner = instance
     elif sender == Stream:
