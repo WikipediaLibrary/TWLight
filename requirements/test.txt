@@ -2,4 +2,4 @@
 django-nose==1.4.6
 coveralls==1.8.2
 coverage==4.5.4
-tblib==1.4.0
+tblib==1.5.0
