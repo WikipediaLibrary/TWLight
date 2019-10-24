@@ -504,3 +504,18 @@ class Authorization(models.Model):
             return True
         else:
             return False
+
+    def is_renewable(self):
+        partner = self.partner
+        if (
+                # We consider an authorization renewable, if the partner is PROXY and
+                # about to expire or has already expired (is_valid returns false on expiry)
+                # or if the partner isn't PROXY or BUNDLE, in which case the authorization
+                # would have an empty date_expires field. The first would check still cover for
+                # non-PROXY and non-BUNDLE partners with expiry dates.
+                self.about_to_expire() or not self.is_valid or
+                not partner.authorization_method == partner.PROXY and not partner.authorization_method == partner.BUNDLE
+        ):
+            return True
+        else:
+            return False
