@@ -28,9 +28,9 @@ def update_partner_authorization_expiry(sender, instance, **kwargs):
         partner = instance.partner
 
     if partner.account_length or partner.authorization_method == Partner.PROXY:
-        authorizations = Authorization.objects.filter(partner=partner)
+        authorizations = Authorization.objects.filter(partner=partner, date_expires=None)
         for authorization in authorizations:
-            if authorization.is_valid and not authorization.date_expires:
+            if authorization.is_valid:
                 if partner.authorization_method == Partner.PROXY and partner.requested_access_duration is True:
                     one_year_from_auth = authorization.date_authorized + timedelta(days=365)
                     authorization.date_expires = one_year_from_auth
