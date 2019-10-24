@@ -545,6 +545,9 @@ class EditorModelTestCase(TestCase):
         super(EditorModelTestCase, self).tearDown()
         self.test_editor.delete()
 
+    def test_encoder_works_with_special_character_username(self):
+        test = Editor().encode_wp_username('editor model&test')
+        self.assertEqual(test, 'editor%20model%26test')
 
     def test_wp_user_page_url(self):
         expected_url = settings.TWLIGHT_OAUTH_PROVIDER_URL + '/User:editor_model_test'
@@ -554,6 +557,7 @@ class EditorModelTestCase(TestCase):
     def test_wp_link_central_auth(self):
         expected_url = 'https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth&target=editor_model_test'
         self.assertEqual(expected_url, self.test_editor.wp_link_central_auth)
+
 
     def test_get_wp_rights_display(self):
         expected_text = ['cat floofing', 'the big red button']
