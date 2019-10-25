@@ -22,6 +22,55 @@
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 login">
       {% if user.is_authenticated %}
+        <a href="#" class="btn btn-default btn-block">
+          {% comment %} Translators: On the homepage, this message labels a button users can click to go to the 'My Collection' page, which lists their available resources. {% endcomment %}
+          {% trans "Your collection" %}
+        </a>
+      {% else %}
+        <a href="{% url 'oauth_login' %}" class="btn btn-primary btn-block">
+          <span class="glyphicon glyphicon-off"></span>&nbsp;
+          {% comment %} Translators: This message is shown on the button users click to log in to the website. {% endcomment %}
+          {% trans "Log in" %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row">
+	  <div class="col-md-5 col-md-offset-1">
+      {% comment %} Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
+      <div class="border border-homepage">
+        <h2>{% trans "Library Bundle" %}</h2>
+        <div class="bundle-icon">
+          [Bundle icon]
+        </div>
+        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...{% endcomment %}
+		    {% blocktrans trimmed %}
+				  <p>Free and immediate access to a large collection of resources from more than {{ bundle_partner_count }} publishers if you meet the following criteria:</p>
+		    {% endblocktrans %}
+				<ul class="bundle-list">
+          {% for criteria_text, meets_criteria in bundle_criteria %}
+            <li>
+              {{ criteria_text }}
+              <div class="bundle-checks
+              {% if meets_criteria %}
+                bundle-check-true">
+                <b>&#10004;</b>
+              {% else %}
+                {% if request.user.is_authenticated %}
+                  bundle-check-false">
+                  <b>&#10006;</b>
+                {% else %}
+                  ">
+                {% endif %}
+              {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 login">
+      {% if user.is_authenticated %}
         <a href="{% url 'users:my_collection' pk=user.pk %}" class="btn btn-default btn-block">
           {% comment %} Translators: On the homepage, this message labels a button users can click to go to the 'My Collection' page, which lists their available resources. {% endcomment %}
           {% trans "Your collection" %}

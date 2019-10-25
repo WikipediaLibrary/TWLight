@@ -529,12 +529,12 @@ A few spots just need padding instead of margin.
 }
 
 .lead {
-  text-align:center;
-  padding: 15px;
-  border:1px solid #c9c9c9;
-  border-radius:4px;
-  box-shadow:1px 1px 2px #eaeaea;
-  font-size:1.4em;
+	text-align:center;
+	padding: 15px;
+	border:1px solid #c9c9c9;
+	border-radius:4px;
+	box-shadow:1px 1px 2px #eaeaea;
+	font-size:1.4em;
 }
 
 .border {
