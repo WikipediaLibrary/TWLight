@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-24 14:53+0000\n"
+"POT-Creation-Date: 2019-10-25 08:25+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:05+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -609,10 +609,6 @@ msgstr "هنوز بررسی نشده‌است."
 #: TWLight/users/templates/users/my_applications.html:78
 msgid "No applications right now."
 msgstr "در حال حاضر درخواستی موجود نیست."
-
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-msgid "Application ID"
-msgstr "شماره درخواست"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 msgid "Partner (Collection)"
@@ -1322,47 +1318,47 @@ msgid "Number of users"
 msgstr "شمار کاربران"
 
 #. Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
-#: TWLight/resources/admin.py:127
+#: TWLight/resources/admin.py:128
 msgid "File must be a csv"
 msgstr "پرونده باید با فرمت csv باشد"
 
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
-#: TWLight/resources/admin.py:133
+#: TWLight/resources/admin.py:134
 msgid "Uploaded file is too large."
 msgstr "پروندۀ بارگذاری‌شده بسیار بزرگ است."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
-#: TWLight/resources/admin.py:151
+#: TWLight/resources/admin.py:152
 #, python-brace-format
 msgid "Line {line_num} has {num_columns} columns. Expected 2."
 msgstr "خط {line_num} {num_columns} ستون دارد. ۲ مورد انتظار."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
-#: TWLight/resources/admin.py:161
+#: TWLight/resources/admin.py:162
 #, python-brace-format
 msgid "Access code on line {line_num} is too long for the database field."
 msgstr "کد دسترسی به خط {line_num} برای قسمت پایگاه داده خیلی طولانی است."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
-#: TWLight/resources/admin.py:170
+#: TWLight/resources/admin.py:171
 #, python-brace-format
 msgid "Second column should only contain numbers. Error on line {line_num}."
 msgstr "ستون دوم تنها باید شامل اعداد باشد. خطا در خط {line_num}."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
-#: TWLight/resources/admin.py:179
+#: TWLight/resources/admin.py:180
 #, python-brace-format
 msgid "File contains reference to invalid partner ID on line {line_num}"
 msgstr ""
 
 #. Translators: When staff successfully upload a file containing access codes, they receive this message.
-#: TWLight/resources/admin.py:207
+#: TWLight/resources/admin.py:208
 #, python-brace-format
 msgid "{num_codes} access codes successfully uploaded!"
 msgstr "{num_codes} کدهای دسترسی با موفقیت بارگذاری شدند!"
 
 #. Translators: When staff upload a file containing access codes, they receive this message if any were duplicates.
-#: TWLight/resources/admin.py:211
+#: TWLight/resources/admin.py:212
 #, python-brace-format
 msgid "{num_duplicates} access codes ignored as duplicates."
 msgstr "{num_duplicates} کدهای دسترسی به‌عنوان تکراری نادیده گرفته‌شدند."
@@ -3788,3 +3784,6 @@ msgstr ""
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr "{username} دسترسی به <a href=\"{url}\">{partner}</a> را دریافت کرده‌است"
+
+#~ msgid "Application ID"
+#~ msgstr "شماره درخواست"
