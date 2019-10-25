@@ -6,7 +6,7 @@
   <span class="label label-primary">
     {% trans "Status" %}
   </span>&nbsp;
-  {% trans "Application ID" %} &ndash; {% trans "Username" %} - {% trans "Partner (Collection)" %} &mdash; {% trans "Last reviewed" %} &mdash; <em>{% trans "Date applied" %}</em>
+  {% trans "Username" %} - {% trans "Partner (Collection)" %} &mdash; {% trans "Last reviewed" %} &mdash; <em>{% trans "Date applied" %}</em>
   <form method="post" action="{% url 'applications:batch_edit' %}" id="batch_edit">
     {% csrf_token %}
     <div class="form-group">
