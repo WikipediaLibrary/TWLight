@@ -107,6 +107,7 @@ admin.site.register(Video, VideoAdmin)
 class AccessCodeAdmin(admin.ModelAdmin):
     search_fields = ('code', 'partner__company_name',)
     list_display = ('code', 'partner', 'authorization',)
+    raw_id_fields = ('authorization',)
 
     change_list_template = 'accesscode_changelist.html'
 
