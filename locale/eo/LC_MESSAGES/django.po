@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-25 15:18+0000\n"
+"POT-Creation-Date: 2019-10-25 15:46+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:04+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1696,7 +1696,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:50
 #: TWLight/resources/templates/resources/partner_detail.html:114
 #: TWLight/resources/templates/resources/partner_detail.html:116
-#: TWLight/users/templates/users/collection_tile.html:78
+#: TWLight/users/templates/users/collection_tile.html:77
 msgid "Renew"
 msgstr ""
 
@@ -1710,7 +1710,7 @@ msgstr ""
 #. Translators: Labels the button that links to the application page itself if the applications is already renewed.
 #: TWLight/resources/templates/resources/partner_detail.html:59
 #: TWLight/resources/templates/resources/partner_detail.html:123
-#: TWLight/users/templates/users/collection_tile.html:86
+#: TWLight/users/templates/users/collection_tile.html:85
 msgid "View application"
 msgstr ""
 
@@ -2920,7 +2920,7 @@ msgid "Access resource"
 msgstr "Atingokodoj"
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
-#: TWLight/users/templates/users/collection_tile.html:75
+#: TWLight/users/templates/users/collection_tile.html:74
 msgid "Renewals are not available for this partner"
 msgstr ""
 

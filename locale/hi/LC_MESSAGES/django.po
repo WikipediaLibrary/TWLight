@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-25 15:19+0000\n"
+"POT-Creation-Date: 2019-10-25 15:46+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:07+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1845,7 +1845,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:50
 #: TWLight/resources/templates/resources/partner_detail.html:114
 #: TWLight/resources/templates/resources/partner_detail.html:116
-#: TWLight/users/templates/users/collection_tile.html:78
+#: TWLight/users/templates/users/collection_tile.html:77
 msgid "Renew"
 msgstr "नवीनीकरण"
 
@@ -1859,7 +1859,7 @@ msgstr "आवेदन देखें"
 #. Translators: Labels the button that links to the application page itself if the applications is already renewed.
 #: TWLight/resources/templates/resources/partner_detail.html:59
 #: TWLight/resources/templates/resources/partner_detail.html:123
-#: TWLight/users/templates/users/collection_tile.html:86
+#: TWLight/users/templates/users/collection_tile.html:85
 msgid "View application"
 msgstr "आवेदन देखें"
 
@@ -3192,7 +3192,7 @@ msgid "Access resource"
 msgstr "व्यवसाय"
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
-#: TWLight/users/templates/users/collection_tile.html:75
+#: TWLight/users/templates/users/collection_tile.html:74
 #, fuzzy
 msgid "Renewals are not available for this partner"
 msgstr "इस भागीदार के लिए समन्वयक, यदि कोई हो।"
