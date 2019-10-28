@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-25 15:47+0000\n"
+"POT-Creation-Date: 2019-10-28 10:18+0000\n"
 "PO-Revision-Date: 2019-10-21 15:23:13+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +75,7 @@ msgstr "您必须在<a href=\"{url}\">{url}</a>注册以申请。"
 
 #: TWLight/applications/forms.py:308
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#: TWLight/users/admin.py:77 TWLight/users/models.py:120
+#: TWLight/users/admin.py:77 TWLight/users/models.py:121
 msgid "Username"
 msgstr "用户名"
 
@@ -1331,7 +1331,7 @@ msgstr "（非唯一）访客人数"
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
 #: TWLight/graphs/views.py:397 TWLight/resources/models.py:82
-#: TWLight/users/models.py:76 TWLight/users/templates/users/preferences.html:8
+#: TWLight/users/models.py:77 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr "语言"
 
@@ -2972,17 +2972,17 @@ msgid "Update email"
 msgstr "更新电子邮件"
 
 #. Translators: Users must agree to the website terms of use.
-#: TWLight/users/models.py:65
+#: TWLight/users/models.py:66
 msgid "Has this user agreed with the terms of use?"
 msgstr "这位用户同意使用条款了没有？"
 
 #. Translators: This field records the date the user agreed to the website terms of use.
-#: TWLight/users/models.py:68
+#: TWLight/users/models.py:69
 msgid "The date this user agreed to the terms of use."
 msgstr "此人同意使用条款的日期"
 
 #. Translators: An option to set whether users email is copied to their website account from Wikipedia when logging in.
-#: TWLight/users/models.py:70
+#: TWLight/users/models.py:71
 msgid ""
 "Should we automatically update their email from their Wikipedia email when "
 "they log in? Defaults to True."
@@ -2991,83 +2991,83 @@ msgstr ""
 "true。"
 
 #. Translators: Description of the option users have to enable or disable reminder emails for renewals
-#: TWLight/users/models.py:79
+#: TWLight/users/models.py:80
 msgid "Does this user want renewal reminder notices?"
 msgstr "这个用户需要更新提醒通知吗?"
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:113
+#: TWLight/users/models.py:114
 msgid "When this profile was first created"
 msgstr "首次创建此配置文件时"
 
 #. Translators: The total number of edits this user has made to all Wikipedia projects
-#: TWLight/users/models.py:122
+#: TWLight/users/models.py:123
 msgid "Wikipedia edit count"
 msgstr "维基百科编辑数"
 
 #. Translators: The date this user registered their Wikipedia account
-#: TWLight/users/models.py:125
+#: TWLight/users/models.py:126
 msgid "Date registered at Wikipedia"
 msgstr "维基百科注册日期"
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:129
+#: TWLight/users/models.py:130
 msgid "Wikipedia user ID"
 msgstr "维基百科用户号码"
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:135
+#: TWLight/users/models.py:136
 msgid "Wikipedia groups"
 msgstr "维基百科用户组"
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:138
+#: TWLight/users/models.py:139
 msgid "Wikipedia user rights"
 msgstr "维基百科用户权限"
 
 #. Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-#: TWLight/users/models.py:142
+#: TWLight/users/models.py:143
 msgid ""
 "At their last login, did this user meet the criteria in the terms of use?"
 msgstr "在最后一次登录时，该用户是否符合使用条款的标准？"
 
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:148
+#: TWLight/users/models.py:149
 msgid "Wiki contributions, as entered by user"
 msgstr "Wiki贡献者，由用户输入"
 
-#: TWLight/users/models.py:364
+#: TWLight/users/models.py:374
 #, python-brace-format
 msgid "{wp_username}"
 msgstr "{wp_username}"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:393
+#: TWLight/users/models.py:403
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:402
+#: TWLight/users/models.py:412
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:408
+#: TWLight/users/models.py:418
 msgid "The date this authorization expires."
 msgstr "此授权到期的日期。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:415
+#: TWLight/users/models.py:425
 msgid "The partner for which the editor is authorized."
 msgstr "编辑被授权的合作伙伴。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:422
+#: TWLight/users/models.py:432
 msgid "The stream for which the editor is authorized."
 msgstr "为其授权编辑器的流。"
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:426
+#: TWLight/users/models.py:436
 msgid "Have we sent a reminder email about this authorization?"
 msgstr "关于此授权，我们是否发送了提醒邮件？"
 
