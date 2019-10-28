@@ -394,6 +394,17 @@ class Partner(models.Model):
         return self.status == self.NOT_AVAILABLE
 
 
+    @property
+    def get_access_url(self):
+        ezproxy_url = settings.TWLIGHT_EZPROXY_URL
+        access_url = None
+        if self.authorization_method == self.PROXY and ezproxy_url and self.target_url:
+            access_url = ezproxy_url + "/login?url=" + self.target_url
+        elif self.target_url:
+            access_url = self.target_url
+        return access_url
+
+
 
 
 class PartnerLogo(models.Model):
@@ -480,6 +491,17 @@ class Stream(models.Model):
     @property
     def get_languages(self):
         return ", ".join([p.__unicode__() for p in self.languages.all()])
+
+
+    @property
+    def get_access_url(self):
+        ezproxy_url = settings.TWLIGHT_EZPROXY_URL
+        access_url = None
+        if self.authorization_method == Partner.PROXY and ezproxy_url and self.target_url:
+            access_url =  ezproxy_url + "/login?url=" + self.target_url
+        elif self.target_url:
+            access_url = self.target_url
+        return access_url
 
 
 

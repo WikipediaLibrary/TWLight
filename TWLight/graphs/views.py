@@ -97,7 +97,7 @@ class DashboardView(TemplateView):
         )
         authorizations_count = all_authorizations.count()
         authorized_users_count = all_authorizations.values(
-            'authorized_user').distinct().count()
+            'user').distinct().count()
 
         # If we haven't authorized anyone yet, just show 0
         if authorized_users_count:

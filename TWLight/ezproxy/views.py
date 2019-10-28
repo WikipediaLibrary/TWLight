@@ -27,7 +27,7 @@ class EZProxyAuth(View):
             raise SuspiciousOperation("Missing Editor username.")
 
         try:
-            authorizations = Authorization.objects.filter(authorized_user=request.user)
+            authorizations = Authorization.objects.filter(user=request.user)
             logger.info(
                 "Editor {username} has the following authorizations: {authorizations}.".format(
                     username=username, authorizations=authorizations

@@ -777,26 +777,26 @@ class AutoWaitlistDisableTest(TestCase):
         self.coordinator.userprofile.save()
 
         Authorization.objects.create(
-            authorized_user=self.user,
+            user=self.user,
             authorizer=self.coordinator,
             date_expires=date.today(),
             partner=self.partner
         )
         Authorization.objects.create(
-            authorized_user=EditorFactory().user,
+            user=EditorFactory().user,
             authorizer=self.coordinator,
             date_expires=date.today(),
             partner=self.partner
         )
 
         Authorization.objects.create(
-            authorized_user=self.user,
+            user=self.user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
             partner=self.partner1
         )
         Authorization.objects.create(
-            authorized_user=EditorFactory().user,
+            user=EditorFactory().user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
             partner=self.partner1

@@ -18,15 +18,15 @@ class Command(BaseCommand):
             date_expires__gte=datetime.today(),
             reminder_email_sent=False
             ).exclude(
-                authorized_user__userprofile__send_renewal_notices=False
+                user__userprofile__send_renewal_notices=False
                 )
 
         for authorization_object in expiring_authorizations:
             Notice.user_renewal_notice.send(
                        sender=self.__class__,
-                       user_wp_username=authorization_object.authorized_user.editor.wp_username,
-                       user_email=authorization_object.authorized_user.email,
-                       user_lang=authorization_object.authorized_user.userprofile.lang,
+                       user_wp_username=authorization_object.user.editor.wp_username,
+                       user_email=authorization_object.user.email,
+                       user_lang=authorization_object.user.userprofile.lang,
                        partner_name=authorization_object.partner.company_name,
                        partner_link=authorization_object.partner.get_absolute_url()
                    )

@@ -410,7 +410,7 @@ class UserRenewalNoticeTest(TestCase):
         self.partner = PartnerFactory()
 
         self.authorization = Authorization()
-        self.authorization.authorized_user = self.user
+        self.authorization.user = self.user
         self.authorization.authorizer = self.coordinator
         self.authorization.partner = self.partner
         self.authorization.date_expires = datetime.today() + timedelta(weeks=2)
@@ -479,7 +479,7 @@ class UserRenewalNoticeTest(TestCase):
         editor2 = EditorFactory(user__email='editor2@example.com')
 
         authorization2 = Authorization()
-        authorization2.authorized_user = editor2.user
+        authorization2.user = editor2.user
         authorization2.authorizer = self.coordinator
         authorization2.partner = self.partner
         authorization2.date_expires = datetime.today() + timedelta(weeks=1)

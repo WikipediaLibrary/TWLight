@@ -26,6 +26,7 @@ class ValidApplicationsManager(models.Manager):
         return super(ValidApplicationsManager, self).get_queryset(
             ).exclude(status=Application.INVALID)
 
+
 class Application(models.Model):
     class Meta:
         app_label = 'applications'
@@ -266,10 +267,25 @@ class Application(models.Model):
         former, this function returns the partner user instructions. Otherwise,
         it gets the user instructions for this collection.
         """
+        user_instructions = None
+        resource = None
         if self.specific_stream:
-            return self.specific_stream.user_instructions
-        else:
-            return self.partner.user_instructions
+            resource = self.specific_stream
+        elif self.partner:
+            resource = self.partner
+
+        # Fetch instructions from the database if appropriate
+        if resource:
+            if resource.authorization_method in [Partner.CODES, Partner.LINK] and resource.user_instructions:
+                user_instructions = resource.user_instructions
+            elif resource.authorization_method == Partner.PROXY and resource.get_access_url:
+                # Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
+                user_instructions = _("Access URL: {access_url}".format(access_url=resource.get_access_url))
+            else:
+                # Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
+                user_instructions = _("You can expect to receive access details "
+                                      "within a week or two once it has been processed.")
+        return user_instructions
 
 
     def is_instantly_finalized(self):
@@ -290,7 +306,6 @@ class Application(models.Model):
             return True
         else:
             return False
-
 
     @property
     def user(self):
@@ -372,6 +387,8 @@ def post_revision_commit(sender, instance, **kwargs):
         instance.is_instantly_finalized())
 
     if skip_approved:
+        # The latest reviewer is the effective sender.
+        instance.sent_by = instance.latest_reviewer
         instance.status = Application.SENT
         instance.save()
 
@@ -381,12 +398,12 @@ def post_revision_commit(sender, instance, **kwargs):
         # Check if an authorization already exists.
         if instance.specific_stream:
             existing_authorization = Authorization.objects.filter(
-                authorized_user=instance.user,
+                user=instance.user,
                 partner=instance.partner,
                 stream=instance.specific_stream)
         else:
             existing_authorization = Authorization.objects.filter(
-                authorized_user=instance.user,
+                user=instance.user,
                 partner=instance.partner)
 
         authorized_user = instance.user
@@ -408,7 +425,7 @@ def post_revision_commit(sender, instance, **kwargs):
         if instance.specific_stream:
             authorization.stream = instance.specific_stream
 
-        authorization.authorized_user = authorized_user
+        authorization.user = authorized_user
         authorization.authorizer = authorizer
         authorization.partner = instance.partner
 

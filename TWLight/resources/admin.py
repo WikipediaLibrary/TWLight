@@ -2,14 +2,13 @@ from django.contrib import messages
 from django import forms
 from django.conf.urls import url
 from django.contrib import admin
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
 from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Authorization
-from TWLight.users.forms import AuthorizationForm
 
 from .models import TextFieldTag, Partner, PartnerLogo, Stream, Contact, Language, Video, Suggestion, AccessCode
 
@@ -47,13 +46,6 @@ class VideoInline(admin.TabularInline):
 class PartnerLogoInline(admin.TabularInline):
     model = PartnerLogo
 
-class AuthorizationInline(admin.StackedInline):
-    form = AuthorizationForm
-    model = Authorization
-    fk_name='partner'
-    extra = 0
-
-
 class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
     class CustomModelChoiceField(forms.ModelChoiceField):
         """
@@ -85,7 +77,7 @@ class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
 
     search_fields = ('company_name',)
     list_display = ('company_name', 'short_description', 'id', 'language_strings')
-    inlines = [ContactInline, VideoInline, PartnerLogoInline, AuthorizationInline]
+    inlines = [ContactInline, VideoInline, PartnerLogoInline]
 
 admin.site.register(Partner, PartnerAdmin)
 
@@ -115,6 +107,7 @@ admin.site.register(Video, VideoAdmin)
 class AccessCodeAdmin(admin.ModelAdmin):
     search_fields = ('code', 'partner__company_name',)
     list_display = ('code', 'partner', 'authorization',)
+    raw_id_fields = ('authorization',)
 
     change_list_template = 'accesscode_changelist.html'
 
