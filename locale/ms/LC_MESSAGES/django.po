@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-10-21 15:23:09+0000\n"
-"X-POT-Import-Date: 2019-10-21 14:51:55+0000\n"
+"PO-Revision-Date: 2019-10-28 15:52:11+0000\n"
+"X-POT-Import-Date: 2019-10-27 05:59:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ms\n"
@@ -61,7 +61,7 @@ msgstr "Anda mesti mendaftar di <a href=\"{url}\">{url}</a> sebelum membuat perm
 
 #: TWLight/applications/forms.py:308
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#: TWLight/users/admin.py:77 TWLight/users/models.py:120
+#: TWLight/users/admin.py:77 TWLight/users/models.py:121
 msgid "Username"
 msgstr "Nama pengguna"
 
@@ -259,6 +259,17 @@ msgstr ""
 #: TWLight/applications/models.py:111
 msgid "User selection of when they'd like their account to expire (in months). Only relevant if the applied partner/collection has authorization_method as 'proxy'."
 msgstr ""
+
+#. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
+#: TWLight/applications/models.py:283
+#, python-brace-format
+msgid "Access URL: {access_url}"
+msgstr ""
+
+#. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
+#: TWLight/applications/models.py:286
+msgid "You can expect to receive access details within a week or two once it has been processed."
+msgstr "Anda boleh mengharapkan untuk menerima butiran akses dalam seminggu atau dua sebaik sahaja ia telah diproses."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -555,10 +566,6 @@ msgid "No applications right now."
 msgstr "Tiada permohonan pada masa ini."
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-msgid "Application ID"
-msgstr ""
-
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 msgid "Partner (Collection)"
 msgstr ""
 
@@ -776,35 +783,35 @@ msgstr "Tetapkan status permohonan"
 msgid "Please select at least one application."
 msgstr "Sila pilih sekurang-kurangnya satu permohonan."
 
-#: TWLight/applications/views.py:982
+#: TWLight/applications/views.py:998
 #, fuzzy
 msgid "Batch update of application(s) {} successful."
 msgstr "Kemas kini kumpulan berjaya."
 
-#: TWLight/applications/views.py:987
+#: TWLight/applications/views.py:1003
 msgid "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available."
 msgstr ""
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1136
+#: TWLight/applications/views.py:1152
 msgid "Error: Code used multiple times."
 msgstr "Ralat: Kod digunakan berulang kali."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1170
+#: TWLight/applications/views.py:1186
 msgid "All selected applications have been marked as sent."
 msgstr "Semua permohonan yang terpilih telah ditandakan sebagai dihantar."
 
-#: TWLight/applications/views.py:1197
+#: TWLight/applications/views.py:1213
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
 msgstr ""
 
-#: TWLight/applications/views.py:1255
+#: TWLight/applications/views.py:1271
 msgid "This object cannot be renewed. (This probably means that you have already requested that it be renewed.)"
 msgstr "Objek ini tidak boleh diperbaharui. (Ini mungkin bermakna anda telah meminta supaya ia diperbaharui.)"
 
-#: TWLight/applications/views.py:1261
+#: TWLight/applications/views.py:1277
 msgid "Your renewal request has been received. A coordinator will review your request."
 msgstr "Permintaan pembaharuan anda telah diterima. Penyelaras akan menyemak permintaan anda."
 
@@ -833,11 +840,6 @@ msgstr "Terima salinan pesanan ini"
 #: TWLight/emails/forms.py:38 TWLight/resources/forms.py:32
 msgid "Submit"
 msgstr "Hantar"
-
-#. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-#: TWLight/emails/tasks.py:243
-msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr "Anda boleh mengharapkan untuk menerima butiran akses dalam seminggu atau dua sebaik sahaja ia telah diproses."
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1101,7 +1103,7 @@ msgstr "Bilangan pelawat (bukan unik)"
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
 #: TWLight/graphs/views.py:397 TWLight/resources/models.py:82
-#: TWLight/users/models.py:76 TWLight/users/templates/users/preferences.html:8
+#: TWLight/users/models.py:77 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr "Bahasa"
 
@@ -1110,47 +1112,47 @@ msgid "Number of users"
 msgstr "Bilangan pengguna"
 
 #. Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
-#: TWLight/resources/admin.py:136
+#: TWLight/resources/admin.py:128
 msgid "File must be a csv"
 msgstr "Fail mesti csv"
 
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
-#: TWLight/resources/admin.py:142
+#: TWLight/resources/admin.py:134
 msgid "Uploaded file is too large."
 msgstr "Fail yang dimuat naik terlalu besar."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
-#: TWLight/resources/admin.py:160
+#: TWLight/resources/admin.py:152
 #, python-brace-format
 msgid "Line {line_num} has {num_columns} columns. Expected 2."
 msgstr "Baris {line_num} mempunyai {num_columns} lajur. Dijangka 2."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
-#: TWLight/resources/admin.py:170
+#: TWLight/resources/admin.py:162
 #, python-brace-format
 msgid "Access code on line {line_num} is too long for the database field."
 msgstr "Kod akses pada baris {line_num} terlalu panjang untuk medan pangkalan data."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
-#: TWLight/resources/admin.py:179
+#: TWLight/resources/admin.py:171
 #, python-brace-format
 msgid "Second column should only contain numbers. Error on line {line_num}."
 msgstr "Lajur kedua sepatutnya hanya mengandungi nombor. Ralat pada baris {line_num}."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
-#: TWLight/resources/admin.py:188
+#: TWLight/resources/admin.py:180
 #, python-brace-format
 msgid "File contains reference to invalid partner ID on line {line_num}"
 msgstr "Fail mengandungi rujukan ke ID rakan kongsi tidak sah pada baris {line_num}."
 
 #. Translators: When staff successfully upload a file containing access codes, they receive this message.
-#: TWLight/resources/admin.py:216
+#: TWLight/resources/admin.py:208
 #, python-brace-format
 msgid "{num_codes} access codes successfully uploaded!"
 msgstr "Kod akses {num_codes} berjaya dimuat naik!"
 
 #. Translators: When staff upload a file containing access codes, they receive this message if any were duplicates.
-#: TWLight/resources/admin.py:220
+#: TWLight/resources/admin.py:212
 #, python-brace-format
 msgid "{num_duplicates} access codes ignored as duplicates."
 msgstr "{num_duplicates} kod akses diabaikan sebagai pendua."
@@ -1480,7 +1482,7 @@ msgstr "Tiada sebarang kebenaran akses tersedia untuk rakan kongsi ini pada masa
 #: TWLight/resources/templates/resources/partner_detail.html:50
 #: TWLight/resources/templates/resources/partner_detail.html:114
 #: TWLight/resources/templates/resources/partner_detail.html:116
-#: TWLight/users/templates/users/collection_tile.html:78
+#: TWLight/users/templates/users/collection_tile.html:77
 msgid "Renew"
 msgstr "Perbaharui"
 
@@ -1494,7 +1496,7 @@ msgstr "Lihat permohonan"
 #. Translators: Labels the button that links to the application page itself if the applications is already renewed.
 #: TWLight/resources/templates/resources/partner_detail.html:59
 #: TWLight/resources/templates/resources/partner_detail.html:123
-#: TWLight/users/templates/users/collection_tile.html:86
+#: TWLight/users/templates/users/collection_tile.html:85
 msgid "View application"
 msgstr "Lihat permohonan"
 
@@ -2447,97 +2449,97 @@ msgid "Update email"
 msgstr ""
 
 #. Translators: Users must agree to the website terms of use.
-#: TWLight/users/models.py:65
+#: TWLight/users/models.py:66
 msgid "Has this user agreed with the terms of use?"
 msgstr ""
 
 #. Translators: This field records the date the user agreed to the website terms of use.
-#: TWLight/users/models.py:68
+#: TWLight/users/models.py:69
 msgid "The date this user agreed to the terms of use."
 msgstr ""
 
 #. Translators: An option to set whether users email is copied to their website account from Wikipedia when logging in.
-#: TWLight/users/models.py:70
+#: TWLight/users/models.py:71
 msgid "Should we automatically update their email from their Wikipedia email when they log in? Defaults to True."
 msgstr ""
 
 #. Translators: Description of the option users have to enable or disable reminder emails for renewals
-#: TWLight/users/models.py:79
+#: TWLight/users/models.py:80
 msgid "Does this user want renewal reminder notices?"
 msgstr ""
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:113
+#: TWLight/users/models.py:114
 msgid "When this profile was first created"
 msgstr ""
 
 #. Translators: The total number of edits this user has made to all Wikipedia projects
-#: TWLight/users/models.py:122
+#: TWLight/users/models.py:123
 msgid "Wikipedia edit count"
 msgstr ""
 
 #. Translators: The date this user registered their Wikipedia account
-#: TWLight/users/models.py:125
+#: TWLight/users/models.py:126
 msgid "Date registered at Wikipedia"
 msgstr ""
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:129
+#: TWLight/users/models.py:130
 msgid "Wikipedia user ID"
 msgstr ""
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:135
+#: TWLight/users/models.py:136
 msgid "Wikipedia groups"
 msgstr ""
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:138
+#: TWLight/users/models.py:139
 msgid "Wikipedia user rights"
 msgstr ""
 
 #. Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-#: TWLight/users/models.py:142
+#: TWLight/users/models.py:143
 msgid "At their last login, did this user meet the criteria in the terms of use?"
 msgstr ""
 
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:148
+#: TWLight/users/models.py:149
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:364
+#: TWLight/users/models.py:374
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:393
+#: TWLight/users/models.py:403
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:402
+#: TWLight/users/models.py:412
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:408
+#: TWLight/users/models.py:418
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:415
+#: TWLight/users/models.py:425
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:422
+#: TWLight/users/models.py:432
 msgid "The stream for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:426
+#: TWLight/users/models.py:436
 msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
@@ -2570,7 +2572,7 @@ msgid "Access resource"
 msgstr ""
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
-#: TWLight/users/templates/users/collection_tile.html:75
+#: TWLight/users/templates/users/collection_tile.html:74
 msgid "Renewals are not available for this partner"
 msgstr ""
 
