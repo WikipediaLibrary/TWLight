@@ -32,6 +32,7 @@ from datetime import datetime, date, timedelta
 import json
 import logging
 import urllib2
+import urllib
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -156,37 +157,46 @@ class Editor(models.Model):
     occupation = models.CharField(max_length=128, blank=True)
     affiliation = models.CharField(max_length=128, blank=True)
 
+    def encode_wp_username(self, username):
+        result = urllib.quote(username)
+        return result
+
     @cached_property
     def wp_user_page_url(self):
-        url = u'{base_url}/User:{self.wp_username}'.format(
-            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
+        encoded_username = self.encode_wp_username(self.wp_username)
+        url = u'{base_url}/User:{username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username)
         return url
 
     @cached_property
     def wp_talk_page_url(self):
-        url = u'{base_url}/User_talk:{self.wp_username}'.format(
-            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
+        encoded_username = self.encode_wp_username(self.wp_username)
+        url = u'{base_url}/User_talk:{username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username)
         return url
 
     @cached_property
     def wp_email_page_url(self):
-        url = u'{base_url}/Special:EmailUser/{self.wp_username}'.format(
-            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, self=self)
+        encoded_username = self.encode_wp_username(self.wp_username)
+        url = u'{base_url}/Special:EmailUser/{username}'.format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username)
         return url
 
     @cached_property
     def wp_link_guc(self):
-        url = u'{base_url}?user={self.wp_username}'.format(
+        encoded_username = self.encode_wp_username(self.wp_username)
+        url = u'{base_url}?user={username}'.format(
             base_url='https://tools.wmflabs.org/guc/',
-            self=self
+            username=encoded_username
         )
         return url
 
     @cached_property
     def wp_link_central_auth(self):
-        url = u'{base_url}&target={self.wp_username}'.format(
+        encoded_username = self.encode_wp_username(self.wp_username)
+        url = u'{base_url}&target={username}'.format(
             base_url='https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth',
-            self=self
+            username=encoded_username
         )
         return url
 
