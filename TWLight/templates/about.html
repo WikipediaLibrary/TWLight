@@ -16,7 +16,11 @@
   <p>
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). {% endcomment %}
     {% blocktrans trimmed %}
-      The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to those partner resources. Here you can see which partnerships are available, what kinds of materials each database provides, and apply for the ones you want. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review applications and work with partners to get you your free access.
+      The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to our
+      collection. Here you can see which partnerships are available, search their contents, and apply for and access
+      the ones you’re interested in. Volunteer coordinators, who have signed non-disclosure agreements with the
+      Wikimedia Foundation, review applications and work with publishers to get you your free access.
+      Some content is available without an application.
     {% endblocktrans %}    
   </p>
 
@@ -24,7 +28,9 @@
     {% url 'terms' as terms_url %}
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate {{ terms_url }}. {% endcomment %}
     {% blocktrans trimmed %}
-      For more information about how application information is stored and reviewed please see our <a href="{{ terms_url }}">terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them.
+      For more information about how your information is stored and reviewed please see our <a href="{{ terms_url }}">
+      terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each
+      partner’s platform; please review them.
     {% endblocktrans %}    
   </p>
 
@@ -34,13 +40,19 @@
   <p>
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. {% endcomment %}
     {% blocktrans trimmed %}
-      Any active editor in good standing can receive access.  Applications are reviewed based on the editor’s need and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply.
+      Any active editor in good standing can receive access. For publishers with limited numbers of accounts,
+      applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one
+      of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please
+      apply.
     {% endblocktrans %}    
   </p>
 
   <p>
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-    {% trans "Any editor can apply for access, but there are a few basic requirements:" %}
+    {% blocktrans trimmed %}
+      Any editor can apply for access, but there are a few basic requirements. These are also the minimum technical
+      requirements for access to the Library Bundle (see below):
+    {% endblocktrans %}
     <ul>
       <li>
         {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
@@ -48,7 +60,7 @@
       </li>
       <li>
         {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-        {% trans "You have a minimum of 500 edits" %}
+        {% trans "You have made a minimum of 500 edits" %}
       </li>
       <li>
         {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
@@ -68,27 +80,14 @@
   <p>
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% blocktrans trimmed %}
-      If you don't quite meet the experience requirements but think you would still be a strong candidate for access, feel free to apply and you may still be considered.
+      If you don't quite meet the experience requirements but think you would still be a strong candidate for access,
+      feel free to apply and you may still be considered.
     {% endblocktrans %}    
   </p>
 
 
   {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
   <h3>{% trans "What do I do after I get access?" %}</h3>
-
-  <p>
-    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-    {% blocktrans trimmed %}
-      Once you have access we encourage you to use the databases for both research that creates or improves Wikimedia content and serves your other research needs.
-    {% endblocktrans %}    
-  </p>
-
-  <p>
-    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-    {% blocktrans trimmed %}
-      Please keep in mind, our agreements with partners carry certain expectations. 
-    {% endblocktrans %}    
-  </p>
 
   <p>
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
@@ -135,59 +134,61 @@
   <p>
     {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
     {% blocktrans trimmed %}
-      Respecting these agreements allows us to continue growing the partnerships available to our entire community.
+      Respecting these agreements allows us to continue growing the partnerships available to the community.
     {% endblocktrans %}    
   </p>
 
-  <h3>Citation practices</h3>
+  {% comment %} Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
+  <h3>{% trans "EZProxy" %}</h3>
 
   <p>
-    {# Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if other tags are used for your language Wikipedia. If you're not sure how to handle this section, take your best guess and give the developer a heads-up. #}
+    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
     {% blocktrans trimmed %}
-      Citation practices vary by project and even by article.  Generally, we support editors citing where they found information, in a form that allows others to check it for themselves.  That often means providing both original source details as well as a link to the partner database in which the source was found.
-    {% endblocktrans %}    
+      EZProxy is a proxy server used to authenticate users for many Wikipedia Library partners. Users sign into EZProxy
+      via the Library Card platform to verify that they are authorized users, and then the server accesses requested
+      resources using its own IP address.
+    {% endblocktrans %}
   </p>
 
   <p>
-    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above an example Wikipedia citation. {% endcomment %}
-    {% trans "Here is one citation example:" %}
+    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
+    {% blocktrans trimmed %}
+      You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we
+      recommend logging in via the Library Card platform rather than going directly to the unproxied partner website.
+      When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy.
+    {% endblocktrans %}
   </p>
 
-  {% comment %}
-    This section probably does not need to be translated - a look around at a
-    few non-English wikis suggests that titles, journal titles, etc. retain
-    their original language.
-  {% endcomment %}
-  <blockquote>
-    <code>
-      {% verbatim %}
-        {{cite journal |last1=Bearman |first1=Robert |title=Shakespeare's Purchase of New Place |journal=[[Shakespeare Quarterly]] |volume=63 |issue=4 |date=2012 |pages=465–486 |location=Washington, DC |publisher=[[Folger Shakespeare Library]] |issn=0037-3222 |eissn=1538-3555 |url= https://www.jstor.org/stable/41819765 |subscription=yes |via=[[JSTOR]]}}
-      {% endverbatim %}
-    </code>
+  <p>
+    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
+    {% blocktrans trimmed %}
+      Typically once you’ve logged in your session will remain active in your browser for up to two hours after you’ve
+      finished searching. Note that use of EZProxy requires you to enable cookies. If you are having problems you
+      should also try clearing your cache and restarting your browser.
+    {% endblocktrans %}
+  </p>
 
-    <p>
-      Bearman, Robert (2012). "Shakespeare's Purchase of New Place". Shakespeare Quarterly. Washington, DC: Folger Shakespeare Library. 63 (4): 465–486. eISSN 1538-3555. ISSN 0037-3222 &mdash; via JSTOR. (Subscription required)
-    </p>
-  </blockquote>
+  {% comment %} Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
+  <h3>{% trans "Citation practices" %}</h3>
 
-  {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above contact information. {% endcomment %}
-  <h3>{% trans "Whom do I contact if I have questions, need help, or want to volunteer?" %}</h3>
+  <p>
+    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
+    {% blocktrans trimmed %}
+      Citation practices vary by project and even by article. Generally, we support editors citing where they found
+      information, in a form that allows others to check it for themselves. That often means providing both original
+      source details as well as a link to the partner database in which the source was found.
+    {% endblocktrans %}    
+  </p>
 
-  <dl>
-    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to the Wikipedia Library email address. {% endcomment %}
-    <dt>{% trans "Email:" %}</dt>
-    <dd>
-      <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20Card%20Platform%20questions">
-        wikipedialibrary@wikimedia.org
-      </a>
-    </dd>
-    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to a link to the Wikipedia Library discussion page on Wikipedia. Translate 'Talk' to whatever the discussion namespace is called for this language Wikipedia.{% endcomment %}
-    <dt>{% trans "Talk page:" %}</dt>
-    <dd>
-      <a href="https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library">
-        [[Meta:Talk:The Wikipedia Library]]
-      </a>
-    </dd>
-  </dl>
+  {% comment %} Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
+  <h3>{% trans "Contact us" %}</h3>
+  <p>
+    {% url 'contact' as contact_url %}
+    {% comment %} Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
+    {% blocktrans trimmed %}
+      If you have questions, need help, or want to volunteer to help, please see our <a href="{{ contact_url }}">
+      contact page</a>.
+    {% endblocktrans %}
+  </p>
 
 {% endblock content %}
