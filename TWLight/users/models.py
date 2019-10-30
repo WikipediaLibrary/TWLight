@@ -449,7 +449,7 @@ class Authorization(models.Model):
                 # and a valid authorization date that is now or in the past
                 and self.date_authorized and self.date_authorized <= today
                 # and an expiration date in the future (or no expiration date).
-                and ((self.date_expires and self.date_expires > today) or not self.date_expires)
+                and ((self.date_expires and self.date_expires >= today) or not self.date_expires)
         ):
             valid = True
         return valid
