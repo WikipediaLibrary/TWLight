@@ -331,10 +331,20 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
         help_text=_("Mark as true if this partner requires applicants to have "
                     "already signed up at the partner website."))
+    
+    # Integrating a dropdown field to get the duration for which a user wishes to have his/her 
+    # access for without this boolean field isn't a problem for renewals. We want this 
+    # field to get along with the initial dynamic application form generation (applications/forms.py). 
+    # The way these optional fields (to get input from users) work, when different partners have 
+    # different requirements, optional or not is decided by these boolean fields. We could've 
+    # worked around that by checking the authorization_method, but not without a significant amount 
+    # of rework. This is plain and simple and adds one more teeny tiny step for superusers. As it 
+    # happens, this also gives us the unintended advantage of toggling the field on even when the 
+    # partner doesn't have proxy, but has account durations that can be manually set.    
     requested_access_duration = models.BooleanField(default=False,
-        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners.
-        help_text=_("Mark as true if the authorization method of this partner is proxy "
-                    "and requires the duration of the access (expiry) be specified."))
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners and sometimes for other authorization methods.
+        help_text=_("Must be checked if the authorization method of this partner is proxy; "
+                    "optional otherwise."))
 
 
     def __unicode__(self):
