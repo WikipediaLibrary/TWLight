@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-30 04:23+0000\n"
+"POT-Creation-Date: 2019-10-30 09:21+0000\n"
 "PO-Revision-Date: 2019-10-28 15:52:12+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -273,10 +273,14 @@ msgstr "1 mês"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
 #: TWLight/applications/models.py:111
+#, fuzzy
+#| msgid ""
+#| "User selection of when they'd like their account to expire (in months). "
+#| "Only relevant if the applied partner/collection has authorization_method "
+#| "as 'proxy'."
 msgid ""
-"User selection of when they'd like their account to expire (in months). Only "
-"relevant if the applied partner/collection has authorization_method as "
-"'proxy'."
+"User selection of when they'd like their account to expire (in months). "
+"Required for proxied resources; optional otherwise."
 msgstr ""
 "Seleção pelos utilizadores de quando pretendem que a sua conta expire (em "
 "meses). Só relevante se o parceiro ou conjunto de recursos a que se "
@@ -1792,24 +1796,28 @@ msgstr ""
 "Marcar como verdadeiro se este parceiro exige que os candidatos já se tenham "
 "inscrito no sítio do parceiro na Internet."
 
-#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners.
-#: TWLight/resources/models.py:336
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners and sometimes for other authorization methods.
+#: TWLight/resources/models.py:346
+#, fuzzy
+#| msgid ""
+#| "Mark as true if the authorization method of this partner is proxy and "
+#| "requires the duration of the access (expiry) be specified."
 msgid ""
-"Mark as true if the authorization method of this partner is proxy and "
-"requires the duration of the access (expiry) be specified."
+"Must be checked if the authorization method of this partner is proxy; "
+"optional otherwise."
 msgstr ""
 "Marcar como verdadeiro se o método de autorização deste parceiro é 'proxy' e "
 "for exigido que a duração do acesso (expiração) seja especificada."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:414
+#: TWLight/resources/models.py:424
 msgid "Optional image file that can be used to represent this partner."
 msgstr ""
 "Ficheiro de imagem opcional que pode ser usado para representar este "
 "parceiro."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:442
+#: TWLight/resources/models.py:452
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
@@ -1819,7 +1827,7 @@ msgstr ""
 "traduzido*. Não inclua aqui o nome do parceiro."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-#: TWLight/resources/models.py:448
+#: TWLight/resources/models.py:458
 msgid ""
 "Add number of new accounts to the existing value, not by reseting it to zero."
 msgstr ""
@@ -1827,12 +1835,12 @@ msgstr ""
 "especifique por si só."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:452
+#: TWLight/resources/models.py:462
 msgid "Optional description of this stream's resources."
 msgstr "Descrição facultativa do conteúdo deste conjunto de recursos."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
-#: TWLight/resources/models.py:459
+#: TWLight/resources/models.py:469
 #, fuzzy
 msgid ""
 "Which authorization method does this collection use? 'Email' means the "
@@ -1849,7 +1857,7 @@ msgstr ""
 "''proxy'' automatizado."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
-#: TWLight/resources/models.py:468
+#: TWLight/resources/models.py:478
 msgid ""
 "Link to collection. Required for proxied collections; optional otherwise."
 msgstr ""
@@ -1857,7 +1865,7 @@ msgstr ""
 "autorização é 'proxy'; se não, opcional."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
-#: TWLight/resources/models.py:472
+#: TWLight/resources/models.py:482
 #, fuzzy
 msgid ""
 "Optional instructions for editors to use access codes or free signup URLs "
@@ -1869,7 +1877,7 @@ msgstr ""
 "acesso."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:524
+#: TWLight/resources/models.py:534
 msgid ""
 "Organizational role or job title. This is NOT intended to be used for "
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
@@ -1879,7 +1887,7 @@ msgstr ""
 "ª'. Facultativo."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:531
+#: TWLight/resources/models.py:541
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
@@ -1888,37 +1896,37 @@ msgstr ""
 "mensagens de correio eletrónico (como 'Olá João')"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
-#: TWLight/resources/models.py:550
+#: TWLight/resources/models.py:560
 msgid "Potential partner's name (e.g. McFarland)."
 msgstr "Nome do parceiro potencial (ex: McFarland)."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
-#: TWLight/resources/models.py:554
+#: TWLight/resources/models.py:564
 msgid "Optional description of this potential partner."
 msgstr "Descrição facultativa deste parceiro potencial."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
-#: TWLight/resources/models.py:558
+#: TWLight/resources/models.py:568
 msgid "Link to the potential partner's website."
 msgstr "Hiperligação para o ''site'' na Internet do parceiro potencial."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
-#: TWLight/resources/models.py:562
+#: TWLight/resources/models.py:572
 msgid "User who authored this suggestion."
 msgstr "Utilizador que fez esta sugestão."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-#: TWLight/resources/models.py:566
+#: TWLight/resources/models.py:576
 msgid "Users who have upvoted this suggestion."
 msgstr "Utilizadores que apoiaram esta sugestão."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
-#: TWLight/resources/models.py:591
+#: TWLight/resources/models.py:601
 msgid "URL of a video tutorial."
 msgstr "URL de um guia prático em vídeo."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
-#: TWLight/resources/models.py:612
+#: TWLight/resources/models.py:622
 #, fuzzy
 msgid "An access code for this partner."
 msgstr "O coordenador deste parceiro, se existir."
