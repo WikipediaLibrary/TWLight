@@ -109,7 +109,7 @@ class Application(models.Model):
     requested_access_duration = models.IntegerField(choices=REQUESTED_ACCESS_DURATION_CHOICES, blank=True, null=True,
                                                     # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
                                                     help_text=_('User selection of when they\'d like their account to expire (in months). '
-                                                                'Only relevant if the applied partner/collection has authorization_method as \'proxy\'.'))
+                                                                'Required for proxied resources; optional otherwise.'))
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
