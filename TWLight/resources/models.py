@@ -211,6 +211,9 @@ class Partner(models.Model):
     
     # Optional resource metadata
     # --------------------------------------------------------------------------
+    target_url = models.URLField(blank=True, null=True,
+    # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's available resources.
+    help_text = _("Link to partner resources. Required for proxied resources; optional otherwise."))
 
     terms_of_use = models.URLField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
@@ -324,10 +327,20 @@ class Partner(models.Model):
         # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
         help_text=_("Mark as true if this partner requires applicants to have "
                     "already signed up at the partner website."))
+    
+    # Integrating a dropdown field to get the duration for which a user wishes to have his/her 
+    # access for without this boolean field isn't a problem for renewals. We want this 
+    # field to get along with the initial dynamic application form generation (applications/forms.py). 
+    # The way these optional fields (to get input from users) work, when different partners have 
+    # different requirements, optional or not is decided by these boolean fields. We could've 
+    # worked around that by checking the authorization_method, but not without a significant amount 
+    # of rework. This is plain and simple and adds one more teeny tiny step for superusers. As it 
+    # happens, this also gives us the unintended advantage of toggling the field on even when the 
+    # partner doesn't have proxy, but has account durations that can be manually set.    
     requested_access_duration = models.BooleanField(default=False,
-        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners.
-        help_text=_("Mark as true if the authorization method of this partner is proxy "
-                    "and requires the duration of the access (expiry) be specified."))
+        # Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners and sometimes for other authorization methods.
+        help_text=_("Must be checked if the authorization method of this partner is proxy; "
+                    "optional otherwise."))
 
 
     def __unicode__(self):
@@ -375,6 +388,17 @@ class Partner(models.Model):
     @property
     def is_not_available(self):
         return self.status == self.NOT_AVAILABLE
+
+
+    @property
+    def get_access_url(self):
+        ezproxy_url = settings.TWLIGHT_EZPROXY_URL
+        access_url = None
+        if self.authorization_method == self.PROXY and ezproxy_url and self.target_url:
+            access_url = ezproxy_url + "/login?url=" + self.target_url
+        elif self.target_url:
+            access_url = self.target_url
+        return access_url
 
 
 
@@ -439,6 +463,10 @@ class Stream(models.Model):
             "and Library Bundle is automated proxy-based access. 'Link' is if we "
             "send users a URL to use to create an account."))
 
+    target_url = models.URLField(blank=True, null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
+        help_text = _("Link to collection. Required for proxied collections; optional otherwise."))
+
     user_instructions = models.TextField(blank=True, null=True,
         # Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
         help_text=_("Optional instructions for editors to use access codes "
@@ -456,6 +484,17 @@ class Stream(models.Model):
     @property
     def get_languages(self):
         return ", ".join([p.__unicode__() for p in self.languages.all()])
+
+
+    @property
+    def get_access_url(self):
+        ezproxy_url = settings.TWLIGHT_EZPROXY_URL
+        access_url = None
+        if self.authorization_method == Partner.PROXY and ezproxy_url and self.target_url:
+            access_url =  ezproxy_url + "/login?url=" + self.target_url
+        elif self.target_url:
+            access_url = self.target_url
+        return access_url
 
 
 

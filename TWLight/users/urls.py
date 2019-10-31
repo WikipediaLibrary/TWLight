@@ -25,4 +25,13 @@ urlpatterns = [
     url(r'^delete_data/(?P<pk>\d+)/$',
        login_required(views.DeleteDataView.as_view()),
         name='delete_data'),
+    url(r'^my_collection/(?P<pk>\d+)/$',
+        login_required(views.CollectionUserView.as_view()),
+        name='my_collection'),
+    url(r'^my_applications/(?P<pk>\d+)/$',
+        login_required(views.ListApplicationsUserView.as_view()),
+        name='my_applications'),
+    url(r'^return_authorization/(?P<pk>\d+)/$',
+        login_required(views.AuthorizationReturnView.as_view()),
+        name='return_authorization'),
 ]

@@ -15,6 +15,16 @@ from ....resources.models import Partner, Stream
 logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
+    """
+    Imports applications from CSV.
+    Fields:
+    Partner (int: partner1.id),
+    Timestamp [optional] (date: dd/mm/yyyy),
+    Username (string: wp_username),
+    Email [optional] (string: user@example.com),
+    Collection [optional] (comma separated ints: "stream1.id, stream2.id, stream3.id"),
+    Title [optional] (semicolon separated strings: "specific_title1; specific_title2; specific_title3")
+    """
     # Let's not send mails about imported stuff.
     django.conf.settings.EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

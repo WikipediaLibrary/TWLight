@@ -17,6 +17,8 @@ secrets:
     external: true
   TWLIGHT_OAUTH_CONSUMER_SECRET:
     external: true
+  TWLIGHT_EZPROXY_SECRET:
+    external: true
 
 services:
   migrate:
@@ -41,6 +43,7 @@ services:
       - SECRET_KEY
       - TWLIGHT_OAUTH_CONSUMER_KEY
       - TWLIGHT_OAUTH_CONSUMER_SECRET
+      - TWLIGHT_EZPROXY_SECRET
   db:
     ports:
       - "3306:3306"

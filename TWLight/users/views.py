@@ -1,20 +1,22 @@
-from datetime import date
+from datetime import date, timedelta
 import json
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
+from django.db.models import Q
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse_lazy, resolve, Resolver404
+from django.core.urlresolvers import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
+from django.views.generic.list import ListView
 from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
@@ -32,7 +34,7 @@ from rest_framework.views import APIView
 from reversion.models import Version
 
 from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm, UserEmailForm
-from .models import Editor, UserProfile
+from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
 
@@ -104,7 +106,6 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         editor = self.get_object()
         context['editor'] = editor # allow for more semantic templates
-        context['object_list'] = editor.applications.model.include_invalid.filter(editor=editor).order_by('status', '-date_closed')
         context['form'] = EditorUpdateForm(instance=editor)
         context['language_form'] = SetLanguageForm(user=self.request.user)
         context['email_form'] = UserEmailForm(user=self.request.user)
@@ -255,7 +256,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message (request, messages.WARNING,
+            messages.add_message(self.request, messages.WARNING,
                 # Translators: This message is shown to users who attempt to update their personal information without being logged in.
                 _('You must be logged in to do that.'))
             raise PermissionDenied
@@ -327,7 +328,7 @@ class EmailChangeView(SelfOnly, FormView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message (request, messages.WARNING,
+            messages.add_message(self.request, messages.WARNING,
                 # Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
                 _('You must be logged in to do that.'))
             raise PermissionDenied
@@ -371,7 +372,7 @@ class RestrictDataView(SelfOnly, FormView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message (request, messages.WARNING,
+            messages.add_message (self.request, messages.WARNING,
                 # Translators: This message is shown to users who attempt to update their data processing without being logged in.
                 _('You must be logged in to do that.'))
             raise PermissionDenied
@@ -445,6 +446,13 @@ class DeleteDataView(SelfOnly, DeleteView):
             user_comment.user_email = ""
             user_comment.comment = "[deleted]"
             user_comment.save()
+
+        # Expire any expiry date authorizations, but keep the object.
+        for user_authorization in Authorization.objects.filter(
+                user=user,
+                date_expires__isnull=False):
+            user_authorization.date_expires = date.today() - timedelta(days=1)
+            user_authorization.save()
 
         user.delete()
 
@@ -572,3 +580,109 @@ class AuthorizedUsers(APIView):
 
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
+
+
+class CollectionUserView(SelfOnly, ListView):
+    model = Editor
+    template_name = 'users/my_collection.html'
+
+    def get_object(self):
+        assert 'pk' in self.kwargs.keys()
+        try:
+            return Editor.objects.get(pk=self.kwargs['pk'])
+        except Editor.DoesNotExist:
+            raise Http404
+
+    def get_context_data(self, **kwargs):
+        context = super(CollectionUserView, self).get_context_data(**kwargs)
+        editor = self.get_object()
+        today = datetime.date.today()
+        proxy_bundle_authorizations = Authorization.objects.filter(Q(date_expires__gte=today) |
+                                                                   Q(date_expires=None),
+                                                                   user=editor.user,
+                                                                   partner__authorization_method__in=
+                                                                   [Partner.PROXY, Partner.BUNDLE]
+                                                                   ).order_by('partner')
+        proxy_bundle_authorizations_expired = Authorization.objects.filter(user=editor.user,
+                                                                           date_expires__lt=today,
+                                                                           partner__authorization_method__in=
+                                                                           [Partner.PROXY, Partner.BUNDLE]
+                                                                           ).order_by('partner')
+        manual_authorizations = Authorization.objects.filter(Q(date_expires__gte=today) |
+                                                             Q(date_expires=None),
+                                                             user=editor.user,
+                                                             partner__authorization_method__in=
+                                                             [Partner.EMAIL, Partner.CODES, Partner.LINK]
+                                                            ).order_by('partner')
+        manual_authorizations_expired = Authorization.objects.filter(user=editor.user,
+                                                                     date_expires__lt=today,
+                                                                     partner__authorization_method__in=
+                                                                     [Partner.EMAIL, Partner.CODES, Partner.LINK]
+                                                                     ).order_by('partner')
+
+        for authorization_list in [manual_authorizations, proxy_bundle_authorizations,
+                                   manual_authorizations_expired, proxy_bundle_authorizations_expired]:
+            for each_authorization in authorization_list:
+                if each_authorization.about_to_expire or not each_authorization.is_valid:
+                    each_authorization.latest_app = each_authorization.get_latest_app()
+                    if each_authorization.latest_app:
+                        if not each_authorization.latest_app.is_renewable:
+                            try:
+                                each_authorization.open_app = Application.objects.filter(editor=editor,
+                                                                                         status__in=(
+                                                                                                     Application.PENDING,
+                                                                                                     Application.QUESTION,
+                                                                                                     Application.APPROVED
+                                                                                                     ),
+                                                                                         partner=each_authorization.partner
+                                                                                         ).latest('date_created')
+                            except Application.DoesNotExist:
+                                each_authorization.open_app = None
+
+        context['proxy_bundle_authorizations'] = proxy_bundle_authorizations
+        context['proxy_bundle_authorizations_expired'] = proxy_bundle_authorizations_expired
+        context['manual_authorizations'] = manual_authorizations
+        context['manual_authorizations_expired'] = manual_authorizations_expired
+        return context
+
+
+class ListApplicationsUserView(SelfOnly, ListView):
+    model = Editor
+    template_name = 'users/my_applications.html'
+
+    def get_object(self):
+        assert 'pk' in self.kwargs.keys()
+        try:
+            return Editor.objects.get(pk=self.kwargs['pk'])
+        except Editor.DoesNotExist:
+            raise Http404
+
+    def get_context_data(self, **kwargs):
+        context = super(ListApplicationsUserView, self).get_context_data(**kwargs)
+        editor = self.get_object()
+        context['object_list'] = editor.applications.model.include_invalid.filter(editor=editor
+                                                                                  ).order_by('status', '-date_closed')
+        return context
+
+
+class AuthorizationReturnView(SelfOnly, UpdateView):
+    model = Authorization
+    template_name = 'users/authorization_confirm_return.html'
+    fields = ['date_expires']
+
+    def get_object(self):
+        assert 'pk' in self.kwargs.keys()
+        try:
+            return Authorization.objects.get(pk=self.kwargs['pk'])
+        except Authorization.DoesNotExist:
+            raise Http404
+
+    def form_valid(self, form):
+        yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+        authorization = self.get_object()
+        authorization.date_expires = yesterday
+        authorization.save()
+        # Translators: This message is shown once the access to a partner has successfully been returned.
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('Access to {} has been returned.').format(authorization.partner))
+        return HttpResponseRedirect(reverse('users:my_collection', kwargs={'pk':self.request.user.editor.pk}))

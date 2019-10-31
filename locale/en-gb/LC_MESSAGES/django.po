@@ -2,16 +2,17 @@
 # Exported from translatewiki.net
 #
 # Author: Dejavu
+# Author: Qmeades
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-10-03 19:13+0000\n"
-"PO-Revision-Date: 2019-10-03 17:57:41+0000\n"
+"POT-Creation-Date: 2019-10-30 09:20+0000\n"
+"PO-Revision-Date: 2019-10-28 15:52:05+0000\n"
 "Language: en-GB\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-09-26 16:30:29+0000\n"
-"X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
+"X-POT-Import-Date: 2019-10-27 05:59:56+0000\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -25,8 +26,8 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:77
 #: TWLight/resources/templates/resources/partner_detail.html:137
 #: TWLight/resources/templates/resources/partner_detail.html:139
-#: TWLight/resources/templates/resources/partner_tile.html:84
-#: TWLight/templates/base.html:94 TWLight/templates/home.html:49
+#: TWLight/resources/templates/resources/partner_tile.html:86
+#: TWLight/templates/base.html:151 TWLight/templates/home.html:49
 msgid "Apply"
 msgstr "Apply"
 
@@ -57,37 +58,39 @@ msgstr ""
 msgid "Your application to {partner}"
 msgstr "Your application to {partner}"
 
-#. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering.
-#: TWLight/applications/forms.py:244
+#. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
+#: TWLight/applications/forms.py:245
 #, python-brace-format
-msgid "You must register at <a href=\"{url}\">{url}</a> before applying."
-msgstr "You must register at <a href=\"{url}\">{url}</a> before applying."
+msgid "You must register at {url} before applying."
+msgstr ""
+"Jy moet registreer by <a href=\"{url}\">{url}</a> voordat jy kan aansoek "
+"doen."
 
-#: TWLight/applications/forms.py:309
+#: TWLight/applications/forms.py:308
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#: TWLight/users/admin.py:76 TWLight/users/models.py:117
+#: TWLight/users/admin.py:77 TWLight/users/models.py:121
 msgid "Username"
 msgstr "Username"
 
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:310 TWLight/applications/helpers.py:103
+#: TWLight/applications/forms.py:309 TWLight/applications/helpers.py:103
 msgid "Partner name"
 msgstr "Partner name"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
-#: TWLight/applications/forms.py:325
+#: TWLight/applications/forms.py:324
 msgid "Renewal confirmation"
 msgstr ""
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:336 TWLight/applications/helpers.py:115
+#: TWLight/applications/forms.py:335 TWLight/applications/helpers.py:115
 msgid "The email for your account on the partner's website"
 msgstr "The email for your account on the partner's website"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:342 TWLight/applications/helpers.py:117
+#: TWLight/applications/forms.py:341 TWLight/applications/helpers.py:117
 msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
@@ -208,70 +211,84 @@ msgid "Email"
 msgstr "Email"
 
 #. Translators: This is the status of an application that has not yet been reviewed.
-#: TWLight/applications/models.py:49
+#: TWLight/applications/models.py:50
 msgid "Pending"
 msgstr "Pending"
 
 #. Translators: This is the status of an application that reviewers have asked questions about.
-#: TWLight/applications/models.py:51
+#: TWLight/applications/models.py:52
 msgid "Under discussion"
 msgstr "Under discussion"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #. Translators: This describes the status of a group of applications.
-#: TWLight/applications/models.py:53
-#: TWLight/applications/templates/applications/application_list.html:29
+#: TWLight/applications/models.py:54
+#: TWLight/applications/templates/applications/application_list.html:37
 msgid "Approved"
 msgstr "Approved"
 
 #. Translators: This is the status of an application which has been declined by a reviewer.
-#: TWLight/applications/models.py:55
+#: TWLight/applications/models.py:56
 msgid "Not approved"
 msgstr "Not approved"
 
 #. Translators: This is the status of an application that has been sent to a partner.
-#: TWLight/applications/models.py:57
+#: TWLight/applications/models.py:58
 msgid "Sent to partner"
 msgstr "Sent to partner"
 
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
-#: TWLight/applications/models.py:59
+#: TWLight/applications/models.py:60
 msgid "Invalid"
 msgstr "Invalid"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
-#: TWLight/applications/models.py:75 TWLight/applications/models.py:86
+#: TWLight/applications/models.py:76 TWLight/applications/models.py:87
 msgid "Please do not override this field! Its value is set automatically."
 msgstr "Please do not override this field! Its value is set automatically."
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
-#: TWLight/applications/models.py:91
+#: TWLight/applications/models.py:92
 msgid "The user who sent this application to the partner"
 msgstr "The user who sent this application to the partner"
 
-#: TWLight/applications/models.py:106
+#: TWLight/applications/models.py:107
 msgid "12 months"
 msgstr ""
 
-#: TWLight/applications/models.py:106
+#: TWLight/applications/models.py:107
 msgid "6 months"
 msgstr ""
 
-#: TWLight/applications/models.py:106
+#: TWLight/applications/models.py:107
 msgid "3 months"
 msgstr ""
 
-#: TWLight/applications/models.py:106
+#: TWLight/applications/models.py:107
 msgid "1 month"
 msgstr ""
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
-#: TWLight/applications/models.py:110
+#: TWLight/applications/models.py:111
 msgid ""
-"User selection of when they'd like their account to expire (in months). Only "
-"relevant if the applied partner/collection has authorization_method as "
-"'proxy'."
+"User selection of when they'd like their account to expire (in months). "
+"Required for proxied resources; optional otherwise."
 msgstr ""
+
+#. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
+#: TWLight/applications/models.py:283
+#, python-brace-format
+msgid "Access URL: {access_url}"
+msgstr ""
+
+#. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
+#: TWLight/applications/models.py:286
+msgid ""
+"You can expect to receive access details within a week or two once it has "
+"been processed."
+msgstr ""
+"You can expect to receive access details within a week or two once it has "
+"been processed."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -309,9 +326,7 @@ msgstr ""
 "you cannot change the status of their application."
 
 #. Translators: This is the title of the application page shown to users who are not a coordinator.
-#. Translators: This is the title of the section of a user's profile showing their history of applications.
 #: TWLight/applications/templates/applications/application_evaluation.html:33
-#: TWLight/users/templates/users/editor_detail.html:18
 msgid "Application history"
 msgstr "Application history"
 
@@ -367,7 +382,7 @@ msgstr "Partner"
 #: TWLight/resources/models.py:174
 #: TWLight/resources/templates/resources/partner_detail.html:33
 #: TWLight/resources/templates/resources/partner_detail.html:100
-#: TWLight/resources/templates/resources/partner_tile.html:39
+#: TWLight/resources/templates/resources/partner_tile.html:41
 msgid "Waitlisted"
 msgstr "Waitlisted"
 
@@ -476,92 +491,92 @@ msgid "No previous versions."
 msgstr "No previous versions."
 
 #. Translators: On the page which shows a list of applications, coordinators must select which applications they wish to view. This string is found next to the selection buttons, and leads on to options such as "Under review", "Approved", or "Sent.
-#: TWLight/applications/templates/applications/application_list.html:20
+#: TWLight/applications/templates/applications/application_list.html:28
 msgid "View applications which are..."
 msgstr "View applications which are..."
 
 #. Translators: This describes the status of a group of applications.
-#: TWLight/applications/templates/applications/application_list.html:25
+#: TWLight/applications/templates/applications/application_list.html:33
 msgid "Pending review"
 msgstr "Pending review"
 
 #. Translators: This describes the status of a group of applications.
-#: TWLight/applications/templates/applications/application_list.html:33
+#: TWLight/applications/templates/applications/application_list.html:41
 msgid "Rejected"
 msgstr "Rejected"
 
 #. Translators: This describes the status of a group of applications.
-#: TWLight/applications/templates/applications/application_list.html:37
+#: TWLight/applications/templates/applications/application_list.html:45
 msgid "Sent"
 msgstr "Sent"
 
 #. Translators: This describes the status of a group of applications.
-#: TWLight/applications/templates/applications/application_list.html:41
+#: TWLight/applications/templates/applications/application_list.html:49
 msgid "Up for renewal"
 msgstr "Up for renewal"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
-#: TWLight/applications/templates/applications/application_list.html:56
+#: TWLight/applications/templates/applications/application_list.html:64
 msgid "Filter by..."
 msgstr "Filter by..."
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
-#: TWLight/applications/templates/applications/application_list.html:68
+#: TWLight/applications/templates/applications/application_list.html:76
 msgid "Current filters"
 msgstr "Current filters"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
-#: TWLight/applications/templates/applications/application_list.html:79
+#: TWLight/applications/templates/applications/application_list.html:87
 msgid "None"
 msgstr "None"
 
 #. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
-#: TWLight/applications/templates/applications/application_list.html:91
+#: TWLight/applications/templates/applications/application_list.html:99
 msgid "Page navigation"
 msgstr "Page navigation"
 
 #. Translators: This is the label for a button which goes to the previous page of applications.
-#: TWLight/applications/templates/applications/application_list.html:95
-#: TWLight/applications/templates/applications/application_list.html:97
-#: TWLight/applications/templates/applications/application_list.html:102
 #: TWLight/applications/templates/applications/application_list.html:103
+#: TWLight/applications/templates/applications/application_list.html:105
+#: TWLight/applications/templates/applications/application_list.html:110
+#: TWLight/applications/templates/applications/application_list.html:111
 msgid "Previous page"
 msgstr "Previous page"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
-#: TWLight/applications/templates/applications/application_list.html:203
+#: TWLight/applications/templates/applications/application_list.html:211
 msgid "Next"
 msgstr "Next"
 
 #. Translators: This is the label for a button which goes to the next page of applications.
-#: TWLight/applications/templates/applications/application_list.html:205
-#: TWLight/applications/templates/applications/application_list.html:221
-#: TWLight/applications/templates/applications/application_list.html:222
+#: TWLight/applications/templates/applications/application_list.html:213
+#: TWLight/applications/templates/applications/application_list.html:229
+#: TWLight/applications/templates/applications/application_list.html:230
 msgid "Next page"
 msgstr "Next page"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications.
-#: TWLight/applications/templates/applications/application_list.html:212
+#: TWLight/applications/templates/applications/application_list.html:220
 msgid "Last"
 msgstr "Last"
 
 #. Translators: This is the label for a button which goes to the last page of applications.
-#: TWLight/applications/templates/applications/application_list.html:214
-#: TWLight/applications/templates/applications/application_list.html:226
-#: TWLight/applications/templates/applications/application_list.html:227
+#: TWLight/applications/templates/applications/application_list.html:222
+#: TWLight/applications/templates/applications/application_list.html:234
+#: TWLight/applications/templates/applications/application_list.html:235
 msgid "Last page"
 msgstr "Last page"
 
 #. Translators: On the page listing applications, this shows next to an application which was imported to the website.
 #: TWLight/applications/templates/applications/application_list_include.html:33
-#: TWLight/applications/templates/applications/application_list_user_include.html:22
+#: TWLight/users/templates/users/my_applications.html:40
 msgid "Imported application"
 msgstr "Imported application"
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:37
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:33
-#: TWLight/applications/templates/applications/application_list_user_include.html:26
+#: TWLight/users/templates/users/my_applications.html:44
 #, python-format
 msgid "Last reviewed by %(reviewer)s on %(review_date)s"
 msgstr "Last reviewed by %(reviewer)s on %(review_date)s"
@@ -569,7 +584,7 @@ msgstr "Last reviewed by %(reviewer)s on %(review_date)s"
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:42
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:37
-#: TWLight/applications/templates/applications/application_list_user_include.html:31
+#: TWLight/users/templates/users/my_applications.html:49
 #, python-format
 msgid "Last reviewed on %(review_date)s"
 msgstr "Last reviewed on %(review_date)s"
@@ -577,20 +592,15 @@ msgstr "Last reviewed on %(review_date)s"
 #. Translators: On the page listing applications, this shows next to an application which has not yet been reviewed.
 #: TWLight/applications/templates/applications/application_list_include.html:48
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:42
-#: TWLight/applications/templates/applications/application_list_user_include.html:37
+#: TWLight/users/templates/users/my_applications.html:55
 msgid "Not yet reviewed."
 msgstr "Not yet reviewed."
 
 #: TWLight/applications/templates/applications/application_list_include.html:64
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:79
-#: TWLight/applications/templates/applications/application_list_user_include.html:60
+#: TWLight/users/templates/users/my_applications.html:78
 msgid "No applications right now."
 msgstr "No applications right now."
-
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#, fuzzy
-msgid "Application ID"
-msgstr "Application"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 msgid "Partner (Collection)"
@@ -629,20 +639,6 @@ msgstr "Status for all selected applications"
 msgid "Set status"
 msgstr "Set status"
 
-#: TWLight/applications/templates/applications/application_list_user_include.html:44
-msgid "Has your account expired?"
-msgstr "Has your account expired?"
-
-#: TWLight/applications/templates/applications/application_list_user_include.html:46
-msgid "Request renewal"
-msgstr "Request renewal"
-
-#: TWLight/applications/templates/applications/application_list_user_include.html:48
-msgid ""
-"Renewals are either not required, not available right now, or you have "
-"already requested a renewal."
-msgstr ""
-
 #: TWLight/applications/templates/applications/confirm_renewal.html:13
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
@@ -651,7 +647,8 @@ msgstr ""
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/applications/templates/applications/confirm_renewal.html:18
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
-#: TWLight/users/views.py:390
+#: TWLight/users/templates/users/authorization_confirm_return.html:15
+#: TWLight/users/views.py:391
 msgid "Confirm"
 msgstr ""
 
@@ -843,33 +840,33 @@ msgid ""
 "waitlisted."
 msgstr ""
 
-#: TWLight/applications/views.py:779
+#: TWLight/applications/views.py:778
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted and (or) has zero accounts available for distribution."
 msgstr ""
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
-#: TWLight/applications/views.py:789
+#: TWLight/applications/views.py:788
 msgid "You attempted to create a duplicate authorization."
 msgstr "You attempted to create a duplicate authorization."
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:821
+#: TWLight/applications/views.py:820
 msgid "Set application status"
 msgstr "Set application status"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:851
+#: TWLight/applications/views.py:855
 msgid "Please select at least one application."
 msgstr "Please select at least one application."
 
-#: TWLight/applications/views.py:978
+#: TWLight/applications/views.py:998
 #, fuzzy
 msgid "Batch update of application(s) {} successful."
 msgstr "Batch update successful."
 
-#: TWLight/applications/views.py:983
+#: TWLight/applications/views.py:1003
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -878,21 +875,21 @@ msgid ""
 msgstr ""
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1132
+#: TWLight/applications/views.py:1152
 msgid "Error: Code used multiple times."
 msgstr "Error: Code used multiple times."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1166
+#: TWLight/applications/views.py:1186
 msgid "All selected applications have been marked as sent."
 msgstr "All selected applications have been marked as sent."
 
-#: TWLight/applications/views.py:1193
+#: TWLight/applications/views.py:1213
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
 msgstr ""
 
-#: TWLight/applications/views.py:1251
+#: TWLight/applications/views.py:1271
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
@@ -900,7 +897,7 @@ msgstr ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 
-#: TWLight/applications/views.py:1257
+#: TWLight/applications/views.py:1277
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
@@ -937,15 +934,6 @@ msgstr "Receive a copy of this message"
 #: TWLight/emails/forms.py:38 TWLight/resources/forms.py:32
 msgid "Submit"
 msgstr "Submit"
-
-#. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-#: TWLight/emails/tasks.py:243
-msgid ""
-"You can expect to receive access details within a week or two once it has "
-"been processed."
-msgstr ""
-"You can expect to receive access details within a week or two once it has "
-"been processed."
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1087,9 +1075,10 @@ msgid "New comment on a Wikipedia Library application you commented on"
 msgstr "New comment on a Wikipedia Library application you commented on"
 
 #. Translators: This is the title of the form where users can send messages to the Wikipedia Library team.
+#. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/base.html:262
+#: TWLight/templates/about.html:184 TWLight/templates/base.html:288
 msgid "Contact us"
 msgstr "Contact us"
 
@@ -1306,7 +1295,7 @@ msgstr "Your message has been sent. We'll get back to you soon!"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:60 TWLight/resources/views.py:350
+#: TWLight/emails/views.py:60 TWLight/resources/views.py:353
 msgid "You must be a Wikipedia editor to do that."
 msgstr "You must be a Wikipedia editor to do that."
 
@@ -1367,7 +1356,7 @@ msgstr ""
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
 #: TWLight/graphs/views.py:397 TWLight/resources/models.py:82
-#: TWLight/users/models.py:75 TWLight/users/templates/users/preferences.html:8
+#: TWLight/users/models.py:77 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr ""
 
@@ -1376,47 +1365,47 @@ msgid "Number of users"
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
-#: TWLight/resources/admin.py:135
+#: TWLight/resources/admin.py:128
 msgid "File must be a csv"
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
-#: TWLight/resources/admin.py:141
+#: TWLight/resources/admin.py:134
 msgid "Uploaded file is too large."
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
-#: TWLight/resources/admin.py:159
+#: TWLight/resources/admin.py:152
 #, python-brace-format
 msgid "Line {line_num} has {num_columns} columns. Expected 2."
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
-#: TWLight/resources/admin.py:169
+#: TWLight/resources/admin.py:162
 #, python-brace-format
 msgid "Access code on line {line_num} is too long for the database field."
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
-#: TWLight/resources/admin.py:178
+#: TWLight/resources/admin.py:171
 #, python-brace-format
 msgid "Second column should only contain numbers. Error on line {line_num}."
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
-#: TWLight/resources/admin.py:187
+#: TWLight/resources/admin.py:180
 #, python-brace-format
 msgid "File contains reference to invalid partner ID on line {line_num}"
 msgstr ""
 
 #. Translators: When staff successfully upload a file containing access codes, they receive this message.
-#: TWLight/resources/admin.py:215
+#: TWLight/resources/admin.py:208
 #, python-brace-format
 msgid "{num_codes} access codes successfully uploaded!"
 msgstr ""
 
 #. Translators: When staff upload a file containing access codes, they receive this message if any were duplicates.
-#: TWLight/resources/admin.py:219
+#: TWLight/resources/admin.py:212
 #, python-brace-format
 msgid "{num_duplicates} access codes ignored as duplicates."
 msgstr ""
@@ -1427,7 +1416,7 @@ msgid "Name of the potential partner"
 msgstr ""
 
 #: TWLight/resources/forms.py:17
-#: TWLight/resources/templates/resources/suggest.html:55
+#: TWLight/resources/templates/resources/suggest.html:62
 msgid "Description"
 msgstr ""
 
@@ -1494,7 +1483,7 @@ msgstr ""
 
 #. Translators: This is a status for a Partner, denoting that editors cannot apply for access and the Partner will not be displayed to them.
 #: TWLight/resources/models.py:172
-#: TWLight/resources/templates/resources/partner_tile.html:35
+#: TWLight/resources/templates/resources/partner_tile.html:37
 msgid "Not available"
 msgstr ""
 
@@ -1509,7 +1498,9 @@ msgid "Proxy"
 msgstr ""
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
+#. Translators: Title text for the Library Bundle icon shown on the collection page.
 #: TWLight/resources/models.py:192
+#: TWLight/users/templates/users/collection_tile.html:15
 msgid "Library Bundle"
 msgstr ""
 
@@ -1540,20 +1531,27 @@ msgid ""
 "collection level."
 msgstr ""
 
+#. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's available resources.
+#: TWLight/resources/models.py:216
+msgid ""
+"Link to partner resources. Required for proxied resources; optional "
+"otherwise."
+msgstr ""
+
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's Terms of Use.
-#: TWLight/resources/models.py:217
+#: TWLight/resources/models.py:220
 msgid ""
 "Link to terms of use. Required if users must agree to terms of use to get "
 "access; optional otherwise."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a partner's available resources.
-#: TWLight/resources/models.py:222
+#: TWLight/resources/models.py:225
 msgid "Optional short description of this partner's resources."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a long description of a partner's available resources.
-#: TWLight/resources/models.py:226
+#: TWLight/resources/models.py:229
 msgid ""
 "Optional detailed description in addition to the short description such as "
 "collections, instructions, notes, special requirements, alternate access "
@@ -1561,12 +1559,12 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide instructions to coordinators on sending user data to partners.
-#: TWLight/resources/models.py:232
+#: TWLight/resources/models.py:235
 msgid "Optional instructions for sending application data to this partner."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a partner resource.
-#: TWLight/resources/models.py:237
+#: TWLight/resources/models.py:240
 msgid ""
 "Optional instructions for editors to use access codes or free signup URLs "
 "for this partner. Sent via email upon application approval (for links) or "
@@ -1575,21 +1573,21 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
-#: TWLight/resources/models.py:245
+#: TWLight/resources/models.py:248
 msgid ""
 "Optional excerpt limit in terms of number of words per article. Leave empty "
 "if no limit."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
-#: TWLight/resources/models.py:249
+#: TWLight/resources/models.py:252
 msgid ""
 "Optional excerpt limit in terms of percentage (%) of an article. Leave empty "
 "if no limit."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
-#: TWLight/resources/models.py:254
+#: TWLight/resources/models.py:257
 msgid ""
 "Which authorization method does this partner use? 'Email' means the accounts "
 "are set up via email, and is the default. Select 'Access Codes' if we send "
@@ -1599,7 +1597,7 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
-#: TWLight/resources/models.py:265
+#: TWLight/resources/models.py:268
 msgid ""
 "If True, users can only apply for one Stream at a time from this Partner. If "
 "False, users can apply for multiple Streams at a time. This field must be "
@@ -1608,111 +1606,111 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
-#: TWLight/resources/models.py:272
+#: TWLight/resources/models.py:275
 msgid "Select all languages in which this partner publishes content."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
-#: TWLight/resources/models.py:279
+#: TWLight/resources/models.py:282
 msgid ""
 "The standard length of an access grant from this Partner. Entered as &ltdays "
 "hours:minutes:seconds&gt."
 msgstr ""
 
-#: TWLight/resources/models.py:287
+#: TWLight/resources/models.py:290
 msgid "Old Tags"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a partner's registration page.
-#: TWLight/resources/models.py:298
+#: TWLight/resources/models.py:301
 msgid ""
 "Link to registration page. Required if users must sign up on the partner's "
 "website in advance; optional otherwise."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their real name when applying
-#: TWLight/resources/models.py:302
+#: TWLight/resources/models.py:305
 msgid "Mark as true if this partner requires applicant names."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify the country in which they live when applying.
-#: TWLight/resources/models.py:305
+#: TWLight/resources/models.py:308
 msgid "Mark as true if this partner requires applicant countries of residence."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a title for the resource they want to access when applying.
-#: TWLight/resources/models.py:309
+#: TWLight/resources/models.py:312
 msgid ""
 "Mark as true if this partner requires applicants to specify the title they "
 "want to access."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify a collection of resources when applying.
-#: TWLight/resources/models.py:313
+#: TWLight/resources/models.py:316
 msgid ""
 "Mark as true if this partner requires applicants to specify the database "
 "they want to access."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their occupation when applying.
-#: TWLight/resources/models.py:317
+#: TWLight/resources/models.py:320
 msgid ""
 "Mark as true if this partner requires applicants to specify their occupation."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must specify their institutional affiliation (e.g. university) when applying.
-#: TWLight/resources/models.py:321
+#: TWLight/resources/models.py:324
 msgid ""
 "Mark as true if this partner requires applicants to specify their "
 "institutional affiliation."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must agree to Terms of Use when applying.
-#: TWLight/resources/models.py:325
+#: TWLight/resources/models.py:328
 msgid ""
 "Mark as true if this partner requires applicants to agree with the partner's "
 "terms of use."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must first register at the organisation's website before finishing their application.
-#: TWLight/resources/models.py:329
+#: TWLight/resources/models.py:332
 msgid ""
 "Mark as true if this partner requires applicants to have already signed up "
 "at the partner website."
 msgstr ""
 
-#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners.
-#: TWLight/resources/models.py:333
+#. Translators: In the administrator interface, this text is help text for a check box where staff can select whether users must select the length of account they desire for proxy partners and sometimes for other authorization methods.
+#: TWLight/resources/models.py:346
 msgid ""
-"Mark as true if the authorization method of this partner is proxy and "
-"requires the duration of the access (expiry) be specified."
+"Must be checked if the authorization method of this partner is proxy; "
+"optional otherwise."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can upload an image to be used as this partner's logo.
-#: TWLight/resources/models.py:400
+#: TWLight/resources/models.py:424
 msgid "Optional image file that can be used to represent this partner."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the name of a collection of resources. Don't translate Health and Behavioral Sciences.
-#: TWLight/resources/models.py:428
+#: TWLight/resources/models.py:452
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff specify the total number of available accounts.
-#: TWLight/resources/models.py:434
+#: TWLight/resources/models.py:458
 msgid ""
 "Add number of new accounts to the existing value, not by reseting it to zero."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:438
+#: TWLight/resources/models.py:462
 msgid "Optional description of this stream's resources."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
-#: TWLight/resources/models.py:445
+#: TWLight/resources/models.py:469
 msgid ""
 "Which authorization method does this collection use? 'Email' means the "
 "accounts are set up via email, and is the default. Select 'Access Codes' if "
@@ -1721,8 +1719,14 @@ msgid ""
 "based access. 'Link' is if we send users a URL to use to create an account."
 msgstr ""
 
+#. Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
+#: TWLight/resources/models.py:478
+msgid ""
+"Link to collection. Required for proxied collections; optional otherwise."
+msgstr ""
+
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide email instructions to editors for accessing a collection.
-#: TWLight/resources/models.py:454
+#: TWLight/resources/models.py:482
 msgid ""
 "Optional instructions for editors to use access codes or free signup URLs "
 "for this collection. Sent via email upon application approval (for links) or "
@@ -1730,51 +1734,51 @@ msgid ""
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add someone's job title. Example can be changed to something more language appropriate.
-#: TWLight/resources/models.py:495
+#: TWLight/resources/models.py:534
 msgid ""
 "Organizational role or job title. This is NOT intended to be used for "
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add the 'friendly' version of someone's name. e.g. Sam instead of Samuel. Name can be changed to be language appropriate.
-#: TWLight/resources/models.py:502
+#: TWLight/resources/models.py:541
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
-#: TWLight/resources/models.py:521
+#: TWLight/resources/models.py:560
 msgid "Potential partner's name (e.g. McFarland)."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
-#: TWLight/resources/models.py:525
+#: TWLight/resources/models.py:564
 msgid "Optional description of this potential partner."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
-#: TWLight/resources/models.py:529
+#: TWLight/resources/models.py:568
 msgid "Link to the potential partner's website."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
-#: TWLight/resources/models.py:533
+#: TWLight/resources/models.py:572
 msgid "User who authored this suggestion."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-#: TWLight/resources/models.py:537
+#: TWLight/resources/models.py:576
 msgid "Users who have upvoted this suggestion."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
-#: TWLight/resources/models.py:562
+#: TWLight/resources/models.py:601
 msgid "URL of a video tutorial."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
-#: TWLight/resources/models.py:583
+#: TWLight/resources/models.py:622
 msgid "An access code for this partner."
 msgstr ""
 
@@ -1801,10 +1805,12 @@ msgid ""
 msgstr ""
 
 #. Translators: This text labels a button which users can click to renew a previously approved application.
+#. Translators: Labels the button that links to the renewal url.
 #: TWLight/resources/templates/resources/partner_detail.html:48
 #: TWLight/resources/templates/resources/partner_detail.html:50
 #: TWLight/resources/templates/resources/partner_detail.html:114
 #: TWLight/resources/templates/resources/partner_detail.html:116
+#: TWLight/users/templates/users/collection_tile.html:77
 msgid "Renew"
 msgstr ""
 
@@ -1815,8 +1821,10 @@ msgid "View applications"
 msgstr ""
 
 #. Translators: This text labels a button which users can click to view a previously submitted application.
+#. Translators: Labels the button that links to the application page itself if the applications is already renewed.
 #: TWLight/resources/templates/resources/partner_detail.html:59
 #: TWLight/resources/templates/resources/partner_detail.html:123
+#: TWLight/users/templates/users/collection_tile.html:85
 msgid "View application"
 msgstr ""
 
@@ -1896,12 +1904,12 @@ msgid "Languages not available."
 msgstr ""
 
 #. Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field.
-#: TWLight/resources/templates/resources/partner_detail.html:294
+#: TWLight/resources/templates/resources/partner_detail.html:295
 msgid "Excerpt limit"
 msgstr ""
 
 #. Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:301
+#: TWLight/resources/templates/resources/partner_detail.html:302
 #, python-format
 msgid ""
 "%(object)s allows a maximum of %(excerpt_limit)s words or "
@@ -1910,7 +1918,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:308
+#: TWLight/resources/templates/resources/partner_detail.html:309
 #, python-format
 msgid ""
 "%(object)s allows a maximum of %(excerpt_limit)s words be excerpted into a "
@@ -1918,7 +1926,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:315
+#: TWLight/resources/templates/resources/partner_detail.html:316
 #, python-format
 msgid ""
 "%(object)s allows a maximum of %(excerpt_limit_percentage)s%% of an article "
@@ -1926,12 +1934,12 @@ msgid ""
 msgstr ""
 
 #. Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
-#: TWLight/resources/templates/resources/partner_detail.html:333
+#: TWLight/resources/templates/resources/partner_detail.html:335
 msgid "Special requirements for applicants"
 msgstr ""
 
 #. Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate publisher or url.
-#: TWLight/resources/templates/resources/partner_detail.html:341
+#: TWLight/resources/templates/resources/partner_detail.html:343
 #, python-format
 msgid ""
 "%(publisher)s requires that you agree with its <a href=\"%(url)s\">terms of "
@@ -1939,31 +1947,31 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:351
+#: TWLight/resources/templates/resources/partner_detail.html:353
 #, python-format
 msgid "%(publisher)s requires that you provide your real name."
 msgstr ""
 
 #. Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:360
+#: TWLight/resources/templates/resources/partner_detail.html:362
 #, python-format
 msgid "%(publisher)s requires that you provide your country of residence."
 msgstr ""
 
 #. Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:369
+#: TWLight/resources/templates/resources/partner_detail.html:371
 #, python-format
 msgid "%(publisher)s requires that you provide your occupation."
 msgstr ""
 
 #. Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:378
+#: TWLight/resources/templates/resources/partner_detail.html:380
 #, python-format
 msgid "%(publisher)s requires that you provide your institutional affiliation."
 msgstr ""
 
 #. Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail.html:387
+#: TWLight/resources/templates/resources/partner_detail.html:389
 #, python-format
 msgid ""
 "%(publisher)s requires that you specify a particular title that you want to "
@@ -1971,7 +1979,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must register on the partner website before applying, they see this message. Don't translate partner.
-#: TWLight/resources/templates/resources/partner_detail.html:397
+#: TWLight/resources/templates/resources/partner_detail.html:399
 #, python-format
 msgid ""
 "%(publisher)s requires that you sign up for an account before applying for "
@@ -1979,73 +1987,73 @@ msgid ""
 msgstr ""
 
 #. Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
-#: TWLight/resources/templates/resources/partner_detail.html:416
+#: TWLight/resources/templates/resources/partner_detail.html:418
 msgid "Collections"
 msgstr ""
 
 #. Translators: If a partner has their location listed, this message is a label for that location
-#: TWLight/resources/templates/resources/partner_detail.html:453
+#: TWLight/resources/templates/resources/partner_detail.html:455
 msgid "Location"
 msgstr ""
 
 #. Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:457
+#: TWLight/resources/templates/resources/partner_detail.html:459
 msgid "Terms of use"
 msgstr ""
 
 #. Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/).
-#: TWLight/resources/templates/resources/partner_detail.html:460
+#: TWLight/resources/templates/resources/partner_detail.html:462
 msgid "Terms of use not available."
 msgstr ""
 
 #. Translators: This is the heading for the section of a partner page showing data about applications to that partner.
 #. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
-#: TWLight/resources/templates/resources/partner_detail.html:472
-#: TWLight/templates/base.html:126
+#: TWLight/resources/templates/resources/partner_detail.html:474
+#: TWLight/templates/base.html:183
 msgid "Metrics"
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total number of aplications submitted for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:485
+#: TWLight/resources/templates/resources/partner_detail.html:487
 msgid "Total applications (all time)"
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total number of unique (not counting duplicates) users who have applied for access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:501
+#: TWLight/resources/templates/resources/partner_detail.html:503
 msgid "Total unique applicants (all time)"
 msgstr ""
 
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:523
+#: TWLight/resources/templates/resources/partner_detail.html:525
 msgid "Median days from application to decision"
 msgstr ""
 
 #. Translators: This is the section header for accounts availability numbers for the available stream(s). (e.g. https://wikipedialibrary.wmflabs.org/partners/52/).
-#: TWLight/resources/templates/resources/partner_detail.html:538
+#: TWLight/resources/templates/resources/partner_detail.html:540
 msgid "Accounts availability"
 msgstr ""
 
 #. Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed.
-#: TWLight/resources/templates/resources/partner_detail.html:548
-#: TWLight/resources/templates/resources/partner_detail.html:564
+#: TWLight/resources/templates/resources/partner_detail.html:550
+#: TWLight/resources/templates/resources/partner_detail.html:566
 msgid "Actual negative number visible to coordinators and superusers only"
 msgstr ""
 
 #. Translators: This is the label which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:559
+#: TWLight/resources/templates/resources/partner_detail.html:561
 msgid "Accounts available:"
 msgstr ""
 
 #. Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:575
+#: TWLight/resources/templates/resources/partner_detail.html:577
 msgid "Applications by status"
 msgstr ""
 
 #. Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:579
-#: TWLight/resources/templates/resources/partner_detail.html:614
-#: TWLight/resources/templates/resources/partner_detail.html:620
-#: TWLight/resources/templates/resources/partner_detail.html:626
+#: TWLight/resources/templates/resources/partner_detail.html:581
+#: TWLight/resources/templates/resources/partner_detail.html:616
+#: TWLight/resources/templates/resources/partner_detail.html:622
+#: TWLight/resources/templates/resources/partner_detail.html:628
 #: TWLight/templates/dashboard.html:92 TWLight/templates/dashboard.html:158
 #: TWLight/templates/dashboard.html:163 TWLight/templates/dashboard.html:175
 #: TWLight/templates/dashboard.html:185 TWLight/templates/dashboard.html:201
@@ -2053,7 +2061,7 @@ msgid "download as csv"
 msgstr ""
 
 #. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:586
+#: TWLight/resources/templates/resources/partner_detail.html:588
 #, python-format
 msgid ""
 "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
@@ -2063,7 +2071,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:595
+#: TWLight/resources/templates/resources/partner_detail.html:597
 #, python-format
 msgid ""
 "Number of unique users with approved applications (all time): "
@@ -2075,22 +2083,22 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:611
+#: TWLight/resources/templates/resources/partner_detail.html:613
 msgid "Applications over time"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:614
+#: TWLight/resources/templates/resources/partner_detail.html:616
 msgid "All applications"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:620
+#: TWLight/resources/templates/resources/partner_detail.html:622
 msgid "Approved applications only"
 msgstr ""
 
 #. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time.
-#: TWLight/resources/templates/resources/partner_detail.html:626
+#: TWLight/resources/templates/resources/partner_detail.html:628
 msgid "Unique users over time"
 msgstr ""
 
@@ -2101,7 +2109,7 @@ msgstr ""
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_filter.html:24
-#: TWLight/templates/base.html:241
+#: TWLight/templates/base.html:267
 msgid "Suggest a partner"
 msgstr ""
 
@@ -2115,12 +2123,17 @@ msgid "No partners meet the specified criteria."
 msgstr ""
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
+#. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate partner.
+#. Translators: Alt text for publisher logos on the my collection page. Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:26
-msgid "Link to {{ partner }} signup page"
+#: TWLight/users/templates/users/collection_tile.html:41
+#: TWLight/users/templates/users/collection_tile.html:54
+#, python-format
+msgid "Link to %(partner)s signup page"
 msgstr ""
 
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
-#: TWLight/resources/templates/resources/partner_tile.html:59
+#: TWLight/resources/templates/resources/partner_tile.html:61
 msgid "Language(s) not known"
 msgstr ""
 
@@ -2171,32 +2184,32 @@ msgid "Imported"
 msgstr ""
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
-#: TWLight/resources/templates/resources/suggest.html:18
+#: TWLight/resources/templates/resources/suggest.html:25
 msgid "Suggest partners"
 msgstr ""
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
-#: TWLight/resources/templates/resources/suggest.html:38
+#: TWLight/resources/templates/resources/suggest.html:45
 msgid "Browse and support suggestions"
 msgstr ""
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
-#: TWLight/resources/templates/resources/suggest.html:47
+#: TWLight/resources/templates/resources/suggest.html:54
 msgid "Delete"
 msgstr ""
 
 #. Translators: This is the text that appears before the URL of every partner suggestion.
-#: TWLight/resources/templates/resources/suggest.html:59
+#: TWLight/resources/templates/resources/suggest.html:66
 msgid "URL"
 msgstr ""
 
-#: TWLight/resources/templates/resources/suggest.html:64
-#: TWLight/resources/templates/resources/suggest.html:80
+#: TWLight/resources/templates/resources/suggest.html:71
+#: TWLight/resources/templates/resources/suggest.html:87
 msgid "Upvoted"
 msgstr ""
 
-#: TWLight/resources/templates/resources/suggest.html:64
-#: TWLight/resources/templates/resources/suggest.html:80
+#: TWLight/resources/templates/resources/suggest.html:71
+#: TWLight/resources/templates/resources/suggest.html:87
 msgid "Upvote"
 msgstr ""
 
@@ -2207,35 +2220,35 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
 
 #. Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
-#: TWLight/resources/views.py:39
+#: TWLight/resources/views.py:40
 msgid ""
 "Because you are a staff member, this page may include Partners who are not "
 "yet available to all users."
 msgstr ""
 
-#: TWLight/resources/views.py:61
+#: TWLight/resources/views.py:62
 msgid ""
 "This partner is not available. You can see it because you are a staff "
 "member, but it is not visible to non-staff users."
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:232
+#: TWLight/resources/views.py:233
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:236
+#: TWLight/resources/views.py:237
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:345
+#: TWLight/resources/views.py:348
 msgid "Your suggestion has been added."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:365
+#: TWLight/resources/views.py:368
 msgid "Suggestion has been deleted."
 msgstr ""
 
@@ -2335,72 +2348,76 @@ msgstr ""
 #: TWLight/templates/about.html:18
 msgid ""
 "The Wikipedia Library Card Platform is our central tool for reviewing "
-"applications and providing access to those partner resources. Here you can "
-"see which partnerships are available, what kinds of materials each database "
-"provides, and apply for the ones you want. Volunteer coordinators, who have "
-"signed non-disclosure agreements with the Wikimedia Foundation, review "
-"applications and work with partners to get you your free access."
+"applications and providing access to our collection. Here you can see which "
+"partnerships are available, search their contents, and apply for and access "
+"the ones you’re interested in. Volunteer coordinators, who have signed non-"
+"disclosure agreements with the Wikimedia Foundation, review applications and "
+"work with publishers to get you your free access. Some content is available "
+"without an application."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
-#: TWLight/templates/about.html:26
+#: TWLight/templates/about.html:30
 #, python-format
 msgid ""
-"For more information about how application information is stored and "
-"reviewed please see our <a href=\"%(terms_url)s\">terms of use and privacy "
-"policy</a>. Accounts you apply for are also subject to the Terms of Use "
-"provided by each partner’s platform; please review them."
+"For more information about how your information is stored and reviewed "
+"please see our <a href=\"%(terms_url)s\"> terms of use and privacy policy</"
+"a>. Accounts you apply for are also subject to the Terms of Use provided by "
+"each partner’s platform; please review them."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:32
+#: TWLight/templates/about.html:38
 msgid "Who can receive access?"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
-#: TWLight/templates/about.html:36
+#: TWLight/templates/about.html:42
 msgid ""
-"Any active editor in good standing can receive access.  Applications are "
-"reviewed based on the editor’s need and contributions. If you think you "
-"could use access to one of our partner resources and are an active editor in "
-"any project supported by the Wikimedia Foundation, please apply."
+"Any active editor in good standing can receive access. For publishers with "
+"limited numbers of accounts, applications are reviewed based on the editor’s "
+"needs and contributions. If you think you could use access to one of our "
+"partner resources and are an active editor in any project supported by the "
+"Wikimedia Foundation, please apply."
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:43
+#: TWLight/templates/about.html:52
 msgid ""
-"Any editor can apply for access, but there are a few basic requirements:"
-msgstr ""
-
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:47
-msgid "You have an account that is a minimum of 6 months old"
-msgstr ""
-
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:51
-msgid "You have a minimum of 500 edits"
-msgstr ""
-
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:55
-msgid "You have made at least 10 edits to Wikimedia projects in the last month"
+"Any editor can apply for access, but there are a few basic requirements. "
+"These are also the minimum technical requirements for access to the Library "
+"Bundle (see below):"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:59
-msgid "You are not currently blocked from editing Wikipedia"
+msgid "You have an account that is a minimum of 6 months old"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
+msgid "You have made a minimum of 500 edits"
+msgstr ""
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:67
+msgid "You have made at least 10 edits to Wikimedia projects in the last month"
+msgstr ""
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:71
+msgid "You are not currently blocked from editing Wikipedia"
+msgstr ""
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:75
 msgid ""
 "You do not already have access to the resources you’re applying for through "
 "another library or institution"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:70
+#: TWLight/templates/about.html:82
 msgid ""
 "If you don't quite meet the experience requirements but think you would "
 "still be a strong candidate for access, feel free to apply and you may still "
@@ -2408,159 +2425,182 @@ msgid ""
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:77
+#: TWLight/templates/about.html:90
 msgid "What do I do after I get access?"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:81
-msgid ""
-"Once you have access we encourage you to use the databases for both research "
-"that creates or improves Wikimedia content and serves your other research "
-"needs."
-msgstr ""
-
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:88
-msgid ""
-"Please keep in mind, our agreements with partners carry certain expectations."
-msgstr ""
-
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:95
+#: TWLight/templates/about.html:94
 msgid "Approved editors <i>may</i> use their access to:"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:99
+#: TWLight/templates/about.html:98
 msgid "Search, view, retrieve, and display partner content"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:103
+#: TWLight/templates/about.html:102
 msgid "Electronically save partner content"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:107
+#: TWLight/templates/about.html:106
 msgid "Print out single copies of partner content"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:114
+#: TWLight/templates/about.html:113
 msgid "Approved editors <i>should not</i>:"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:118
+#: TWLight/templates/about.html:117
 msgid ""
 "Share their account logins or passwords with others, or sell their access to "
 "other parties"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:122
+#: TWLight/templates/about.html:121
 msgid "Mass scrape or mass download partner content"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:126
+#: TWLight/templates/about.html:125
 msgid ""
 "Systematically make printed or electronic copies of multiple extracts of "
 "restricted content available for any purpose"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
-#: TWLight/templates/about.html:130
+#: TWLight/templates/about.html:129
 msgid ""
 "Datamine metadata without permission, in order, for instance, to use "
 "metadata for auto-created stub articles"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:137
+#: TWLight/templates/about.html:136
 msgid ""
 "Respecting these agreements allows us to continue growing the partnerships "
-"available to our entire community."
+"available to the community."
 msgstr ""
 
-#. Translators: the gunk with ampersands is HTML for <code>|via=</code> and <code>{{subscription required|via=}}</code> . It needs to use the HTML gunk rather than the normal characters for technical reasons. You should leave the gunk alone, but translate '|via' and 'subscription required|via=' if other tags are used for your language Wikipedia. If you're not sure how to handle this section, take your best guess and give the developer a heads-up.
+#. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:142
+msgid "EZProxy"
+msgstr ""
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:146
 msgid ""
-"Citation practices vary by project and even by article.  Generally, we "
+"EZProxy is a proxy server used to authenticate users for many Wikipedia "
+"Library partners. Users sign into EZProxy via the Library Card platform to "
+"verify that they are authorized users, and then the server accesses "
+"requested resources using its own IP address."
+msgstr ""
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:155
+msgid ""
+"You may notice that when accessing resources via EZProxy that URLs are "
+"dynamically rewritten. This is why we recommend logging in via the Library "
+"Card platform rather than going directly to the unproxied partner website. "
+"When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re "
+"connected via EZProxy."
+msgstr ""
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:164
+msgid ""
+"Typically once you’ve logged in your session will remain active in your "
+"browser for up to two hours after you’ve finished searching. Note that use "
+"of EZProxy requires you to enable cookies. If you are having problems you "
+"should also try clearing your cache and restarting your browser."
+msgstr ""
+
+#. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:172
+msgid "Citation practices"
+msgstr ""
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:176
+msgid ""
+"Citation practices vary by project and even by article. Generally, we "
 "support editors citing where they found information, in a form that allows "
-"others to check it for themselves.  That often means providing both original "
+"others to check it for themselves. That often means providing both original "
 "source details as well as a link to the partner database in which the source "
 "was found."
 msgstr ""
 
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above an example Wikipedia citation.
-#: TWLight/templates/about.html:153
-msgid "Here is one citation example:"
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#: TWLight/templates/about.html:188
+#, python-format
+msgid ""
+"If you have questions, need help, or want to volunteer to help, please see "
+"our <a href=\"%(contact_url)s\"> contact page</a>."
 msgstr ""
 
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown above contact information.
-#: TWLight/templates/about.html:175
-msgid "Whom do I contact if I have questions, need help, or want to volunteer?"
-msgstr ""
-
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to the Wikipedia Library email address.
-#: TWLight/templates/about.html:179
-msgid "Email:"
-msgstr ""
-
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/), and is shown next to a link to the Wikipedia Library discussion page on Wikipedia. Translate 'Talk' to whatever the discussion namespace is called for this language Wikipedia.
-#: TWLight/templates/about.html:186
-msgid "Talk page:"
-msgstr ""
-
-#: TWLight/templates/base.html:14 TWLight/templates/base.html:65
+#: TWLight/templates/base.html:14 TWLight/templates/base.html:71
 msgid "The Wikipedia Library Card Platform"
 msgstr ""
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
-#: TWLight/templates/base.html:59
+#: TWLight/templates/base.html:66
 msgid "Library Card Platform home"
 msgstr ""
 
-#. Translators: Shown on the left in the top bar of almost every page when the current user is logged in. Don't translate home_url or username.
-#: TWLight/templates/base.html:75 TWLight/templates/base.html:80
-#, python-format
-msgid "Hi, <a href=\"%(home_url)s\">%(username)s</a>!"
+#. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their respective profiles.
+#: TWLight/templates/base.html:89
+msgid "Profile"
 msgstr ""
 
-#. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/base.html:102
-msgid "Review"
-msgstr ""
-
-#. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/base.html:111
-msgid "Send data to partners"
-msgstr ""
-
-#. Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline).
-#: TWLight/templates/base.html:119
-msgid "Latest activity"
-msgstr ""
-
-#. Translators: Shown in the top bar of almost every page when the current user is a superuser, linking to the administrator interface.
-#: TWLight/templates/base.html:134
+#. Translators: Shown in the top bar of almost every page inside a dropdown when the current user is a superuser, linking to the administrator interface.
+#: TWLight/templates/base.html:97
 msgid "Admin"
 msgstr ""
 
+#. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their collection.
+#: TWLight/templates/base.html:110
+#, fuzzy
+msgid "Collection"
+msgstr "Collection requested"
+
+#. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications.
+#. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
+#: TWLight/templates/base.html:121 TWLight/templates/dashboard.html:155
+msgid "Applications"
+msgstr ""
+
 #. Translators: Shown in the top bar of almost every page when the current user is logged in.
-#: TWLight/templates/base.html:143
+#: TWLight/templates/base.html:129
 msgid "Log out"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
-#: TWLight/templates/base.html:155 TWLight/templates/home.html:22
+#: TWLight/templates/base.html:142 TWLight/templates/home.html:22
 msgid "Log in"
 msgstr ""
 
+#. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
+#: TWLight/templates/base.html:159
+msgid "Review"
+msgstr ""
+
+#. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
+#: TWLight/templates/base.html:168
+msgid "Send data to partners"
+msgstr ""
+
+#. Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline).
+#: TWLight/templates/base.html:176
+msgid "Latest activity"
+msgstr ""
+
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
-#: TWLight/templates/base.html:174
+#: TWLight/templates/base.html:200
 #, python-format
 msgid ""
 "You don't have an email on file. We can't finalize your access to partner "
@@ -2570,7 +2610,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
-#: TWLight/templates/base.html:185
+#: TWLight/templates/base.html:211
 #, python-format
 msgid ""
 "You have requested a restriction on the processing of your data. Most site "
@@ -2592,7 +2632,7 @@ msgstr ""
 #. </p>
 #. <p>
 #. comment Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:215
+#: TWLight/templates/base.html:241
 msgid ""
 "This work is licensed under a <a rel=\"license\" href=\"http://"
 "creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
@@ -2600,17 +2640,17 @@ msgid ""
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:229
+#: TWLight/templates/base.html:255
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:235
+#: TWLight/templates/base.html:261
 msgid "Terms of use and privacy policy"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:247
+#: TWLight/templates/base.html:273
 msgid "Feedback"
 msgstr ""
 
@@ -2660,11 +2700,6 @@ msgstr ""
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the pageview data for each partner page.
 #: TWLight/templates/dashboard.html:123
 msgid "Partner pages by popularity"
-msgstr ""
-
-#. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
-#: TWLight/templates/dashboard.html:155
-msgid "Applications"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time.
@@ -2785,11 +2820,11 @@ msgid ""
 "instructions for setting a new one."
 msgstr ""
 
-#: TWLight/users/admin.py:49
-msgid "authorized_user"
+#: TWLight/users/admin.py:48
+msgid "user"
 msgstr ""
 
-#: TWLight/users/admin.py:59
+#: TWLight/users/admin.py:58
 msgid "authorizer"
 msgstr ""
 
@@ -2884,120 +2919,197 @@ msgid "Update email"
 msgstr ""
 
 #. Translators: Users must agree to the website terms of use.
-#: TWLight/users/models.py:64
+#: TWLight/users/models.py:66
 msgid "Has this user agreed with the terms of use?"
 msgstr ""
 
 #. Translators: This field records the date the user agreed to the website terms of use.
-#: TWLight/users/models.py:67
+#: TWLight/users/models.py:69
 msgid "The date this user agreed to the terms of use."
 msgstr ""
 
 #. Translators: An option to set whether users email is copied to their website account from Wikipedia when logging in.
-#: TWLight/users/models.py:69
+#: TWLight/users/models.py:71
 msgid ""
 "Should we automatically update their email from their Wikipedia email when "
 "they log in? Defaults to True."
 msgstr ""
 
 #. Translators: Description of the option users have to enable or disable reminder emails for renewals
-#: TWLight/users/models.py:78
+#: TWLight/users/models.py:80
 msgid "Does this user want renewal reminder notices?"
 msgstr ""
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:110
+#: TWLight/users/models.py:114
 msgid "When this profile was first created"
 msgstr ""
 
 #. Translators: The total number of edits this user has made to all Wikipedia projects
-#: TWLight/users/models.py:119
+#: TWLight/users/models.py:123
 msgid "Wikipedia edit count"
 msgstr ""
 
 #. Translators: The date this user registered their Wikipedia account
-#: TWLight/users/models.py:122
+#: TWLight/users/models.py:126
 msgid "Date registered at Wikipedia"
 msgstr ""
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:126
+#: TWLight/users/models.py:130
 msgid "Wikipedia user ID"
 msgstr ""
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:132
+#: TWLight/users/models.py:136
 msgid "Wikipedia groups"
 msgstr ""
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:135
+#: TWLight/users/models.py:139
 msgid "Wikipedia user rights"
 msgstr ""
 
 #. Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-#: TWLight/users/models.py:139
+#: TWLight/users/models.py:143
 msgid ""
 "At their last login, did this user meet the criteria in the terms of use?"
 msgstr ""
 
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:146
+#: TWLight/users/models.py:149
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:369
+#: TWLight/users/models.py:374
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:398
+#: TWLight/users/models.py:403
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:406
+#: TWLight/users/models.py:412
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:412
+#: TWLight/users/models.py:418
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:419
+#: TWLight/users/models.py:425
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:426
+#: TWLight/users/models.py:432
 msgid "The stream for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:430
+#: TWLight/users/models.py:436
 msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
+#. Translators: This message is displayed on the confirmation page where users can return their access to partner collections.
+#: TWLight/users/templates/users/authorization_confirm_return.html:10
+#, python-format
+msgid ""
+"You will no longer be able to access <b>%(partner)s's</b> resources via the "
+"Library Card platform, but can request access again by clicking 'renew', if "
+"you change your mind. Are you sure you want to return your access?"
+msgstr ""
+
+#. Translators: Alt text for the Library Bundle icon shown on the collection page.
+#: TWLight/users/templates/users/collection_tile.html:17
+msgid "Library bundle access"
+msgstr ""
+
+#. Translators: A button when clicked takes users to a confirmation page to return their access for a particular collection.
+#: TWLight/users/templates/users/collection_tile.html:22
+msgid "Click to return this access"
+msgstr ""
+
+#. Translators: Title for logo in tiles that are linked to an external website. Don't translate partner.
+#. Translators: Alt text for publisher logos on the my collection page. Don't translate partner.
+#: TWLight/users/templates/users/collection_tile.html:36
+#: TWLight/users/templates/users/collection_tile.html:49
+#, python-format
+msgid "Link to %(partner)s's external website"
+msgstr ""
+
+#: TWLight/users/templates/users/collection_tile.html:66
+#, fuzzy
+msgid "Access resource"
+msgstr "Occupation"
+
+#. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
+#: TWLight/users/templates/users/collection_tile.html:74
+msgid "Renewals are not available for this partner"
+msgstr ""
+
+#. Translators: Text beside the date on which the authorization has expired.
+#: TWLight/users/templates/users/collection_tile.html:92
+msgid "Expired on"
+msgstr ""
+
+#. Translators: Text beside the date on which the authorization will expired.
+#: TWLight/users/templates/users/collection_tile.html:95
+msgid "Expires on"
+msgstr ""
+
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
-#: TWLight/users/templates/users/editor_detail.html:13
+#: TWLight/users/templates/users/editor_detail.html:12
 msgid "Start new application"
 msgstr ""
 
+#. Translators: Line one of two in a button on users' profile page which when clicked takes users to their collection page.
+#. Translators: A button on the 'your applications' page which when clicked takes users their collection page.
+#. Translators: Heading of the collection page where users can view all partners they are authorized to access with other relevant information.
+#: TWLight/users/templates/users/editor_detail.html:21
+#: TWLight/users/templates/users/my_applications.html:10
+#: TWLight/users/templates/users/my_collection.html:6
+#, fuzzy
+msgid "Your collection"
+msgstr "Your occupation"
+
+#. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
+#: TWLight/users/templates/users/editor_detail.html:25
+msgid "A collective list of partners you are authorized to access"
+msgstr ""
+
+#. Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.
+#. Translators: Heading of the applications page where users can view all of their applications listed with other relevant info.
+#. Translators: A button on the 'your collection' page which when clicked takes users their applications page.
+#: TWLight/users/templates/users/editor_detail.html:33
+#: TWLight/users/templates/users/my_applications.html:7
+#: TWLight/users/templates/users/my_collection.html:9
+#, fuzzy
+msgid "Your applications"
+msgstr "Sent applications"
+
+#. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
+#: TWLight/users/templates/users/editor_detail.html:37
+msgid "Both historical and current, made to various partners"
+msgstr ""
+
 #. Translators: This is the heading for user information on profile and application pages.
-#: TWLight/users/templates/users/editor_detail.html:23
+#: TWLight/users/templates/users/editor_detail.html:44
 msgid "User information"
 msgstr ""
 
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
-#: TWLight/users/templates/users/editor_detail.html:25
+#: TWLight/users/templates/users/editor_detail.html:46
 msgid "Editor data"
 msgstr ""
 
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
-#: TWLight/users/templates/users/editor_detail.html:35
+#: TWLight/users/templates/users/editor_detail.html:56
 msgid ""
 "Information with an * was retrieved from Wikipedia directly. Other "
 "information was entered directly by users or site admins, in their preferred "
@@ -3005,7 +3117,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
-#: TWLight/users/templates/users/editor_detail.html:47
+#: TWLight/users/templates/users/editor_detail.html:68
 #, python-format
 msgid "%(username)s has coordinator privileges on this site."
 msgstr ""
@@ -3120,6 +3232,46 @@ msgstr ""
 msgid ""
 "You can help translate the tool at <a href=\"https://translatewiki.net/wiki/"
 "Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
+msgstr ""
+
+#: TWLight/users/templates/users/my_applications.html:62
+msgid "Has your account expired?"
+msgstr "Has your account expired?"
+
+#: TWLight/users/templates/users/my_applications.html:64
+msgid "Request renewal"
+msgstr "Request renewal"
+
+#: TWLight/users/templates/users/my_applications.html:66
+msgid ""
+"Renewals are either not required, not available right now, or you have "
+"already requested a renewal."
+msgstr ""
+
+#. Translators: Tab label (1 of 2) for the page listing all partners which can accessed manually.
+#: TWLight/users/templates/users/my_collection.html:13
+msgid "Manual access"
+msgstr ""
+
+#. Translators: Tab label (2 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
+#: TWLight/users/templates/users/my_collection.html:15
+msgid "Proxy/bundle access"
+msgstr ""
+
+#. Translators: On the collection page (manual access tab), this text is displayed when the user has no active collections.
+#: TWLight/users/templates/users/my_collection.html:28
+msgid "You have no active manual access collections."
+msgstr ""
+
+#. Translators: Heading for the section which lists all of the user's expired collection.
+#: TWLight/users/templates/users/my_collection.html:34
+#: TWLight/users/templates/users/my_collection.html:61
+msgid "Expired"
+msgstr ""
+
+#. Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections.
+#: TWLight/users/templates/users/my_collection.html:55
+msgid "You have no active proxy/bundle collections."
 msgstr ""
 
 #: TWLight/users/templates/users/preferences.html:19
@@ -3488,12 +3640,12 @@ msgstr ""
 #. Translators: This is a button which updates user preference settings
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/user_email_preferences.html:13
-#: TWLight/users/views.py:277
+#: TWLight/users/views.py:278
 msgid "Update"
 msgstr ""
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:116
+#: TWLight/users/views.py:117
 #, python-brace-format
 msgid ""
 "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help "
@@ -3503,46 +3655,50 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:260 TWLight/users/views.py:332
-#: TWLight/users/views.py:376
+#: TWLight/users/views.py:261 TWLight/users/views.py:333
+#: TWLight/users/views.py:377
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:289
+#: TWLight/users/views.py:290
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:319
+#: TWLight/users/views.py:320
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:342
+#: TWLight/users/views.py:343
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:348
+#: TWLight/users/views.py:349
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-#: TWLight/users/views.py:532
+#: TWLight/users/views.py:540
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
 #. Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:537
+#: TWLight/users/views.py:545
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
+msgstr ""
+
+#: TWLight/users/views.py:687
+msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).

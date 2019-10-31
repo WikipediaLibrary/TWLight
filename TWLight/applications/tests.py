@@ -3101,6 +3101,30 @@ class BatchEditTest(TestCase):
         self.application.refresh_from_db()
         self.assertEqual(self.application.date_closed, date.today())
 
+    def test_batch_edit_creates_authorization(self):
+        # Make sure that if we batch edit, authorizations are created
+        # as expected.
+        factory = RequestFactory()
+
+        self.application.status = Application.PENDING
+        self.application.date_created = date.today() - timedelta(days=3)
+        self.application.save()
+
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        # Approve the application
+        response = self.client.post(self.url,
+                                    data={'applications': self.application.pk,
+                                          'batch_status': Application.SENT},
+                                    follow=True)
+
+        authorization_exists = Authorization.objects.filter(
+            user=self.application.user,
+            partner=self.application.partner
+        ).exists()
+
+        self.assertTrue(authorization_exists)
 
 # posting to batch edit without app or status fails appropriately?
 

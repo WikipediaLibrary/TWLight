@@ -40,6 +40,7 @@ services:
       - SECRET_KEY
       - TWLIGHT_OAUTH_CONSUMER_KEY
       - TWLIGHT_OAUTH_CONSUMER_SECRET
+      - TWLIGHT_EZPROXY_SECRET
   web:
     image: nginx:latest
     volumes:

@@ -37,7 +37,7 @@ from .filters import PartnerFilter
 from . import views
 
 
-def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False):
+def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False, editor=None):
     """
     The use of the @login_required decorator on many views precludes the use of
     factories for many tests. This method creates an Editor logged into a test
@@ -45,8 +45,11 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False):
     """
     terms_url = reverse('terms')
 
-    # Create and editor and set a password
-    editor = EditorFactory()
+    # Create editor if None was specified.
+    if not editor:
+        editor=EditorFactory()
+
+    # Set a password
     editor.user.set_password('editor')
     editor.user.save()
 
@@ -765,26 +768,26 @@ class AutoWaitlistDisableTest(TestCase):
         self.coordinator.userprofile.save()
 
         Authorization.objects.create(
-            authorized_user=self.user,
+            user=self.user,
             authorizer=self.coordinator,
             date_expires=date.today(),
             partner=self.partner
         )
         Authorization.objects.create(
-            authorized_user=EditorFactory().user,
+            user=EditorFactory().user,
             authorizer=self.coordinator,
             date_expires=date.today(),
             partner=self.partner
         )
 
         Authorization.objects.create(
-            authorized_user=self.user,
+            user=self.user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
             partner=self.partner1
         )
         Authorization.objects.create(
-            authorized_user=EditorFactory().user,
+            user=EditorFactory().user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
             partner=self.partner1

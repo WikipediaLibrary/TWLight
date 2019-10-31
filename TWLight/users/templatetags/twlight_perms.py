@@ -7,12 +7,18 @@ register = template.Library()
 @register.filter
 def coordinators_only(user):
     """Return True if user is in coordinator group (or superuser), else False"""
-    coordinators = get_coordinators()
-    return (coordinators in user.groups.all() or
+    is_coordinator = False
+    if user:
+        coordinators = get_coordinators()
+        is_coordinator = (coordinators in user.groups.all() or
             user.is_superuser)
+    return is_coordinator
 
 @register.filter
 def restricted(user):
     """Return True if user is in the restricted group, else False"""
-    restricted = get_restricted()
-    return restricted in user.groups.all()
+    is_restricted = False
+    if user:
+        restricted = get_restricted()
+        is_restricted = restricted in user.groups.all()
+    return is_restricted

@@ -114,6 +114,7 @@ TWLIGHT_APPS = [
     'TWLight.graphs',
     'TWLight.comments',
     'TWLight.api',
+    'TWLight.ezproxy'
 ]
 
 # dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
@@ -306,6 +307,11 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+
+# EZPROXY CONFIGURATION
+# ------------------------------------------------------------------------------
+TWLIGHT_EZPROXY_URL = os.environ.get('TWLIGHT_EZPROXY_URL', None)
+TWLIGHT_EZPROXY_SECRET = os.environ.get('TWLIGHT_EZPROXY_SECRET', None)
 
 # OAUTH CONFIGURATION
 # ------------------------------------------------------------------------------

@@ -29,8 +29,10 @@ printf "This is a secret" | docker secret create MYSQL_ROOT_PASSWORD -
 printf "This is a secret" | docker secret create SECRET_KEY -
 printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_KEY -
 printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
+printf "This is a secret" | docker secret create TWLIGHT_EZPROXY_SECRET -
 ```
 - deploy for your environment `docker stack deploy -c docker-compose.yml -c docker-compose.staging.yml twlight_staging`
+  - Repeat this step if you add secrets after deployment or update your docker-compose files.
 - Restore state from a backup `docker exec -t $(docker ps -q -f name=twlight_staging_twlight) /app/bin/virtualenv_restore.sh /app/backup/dd.hh.tar.gz`
 - Get an interactive shell `docker exec -it $(docker ps -q -f name=twlight_staging_twlight) bash`
 - Enable cron tasks for Django tasks and for applying updated Docker images:
@@ -42,8 +44,6 @@ printf "This is a secret" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
 */5 * * * *  docker pull wikipedialibrary/twlight:branch_staging >/dev/null && docker service update --image wikipedialibrary/twlight:branch_staging twlight_staging_twlight
 ```
 
-
-See [twlight_puppet](https://github.com/WikipediaLibrary/twlight_puppet) if you want to set things up on WMF servers, and [twlight_vagrant](https://github.com/WikipediaLibrary/twlight_vagrant) if you want to change things.
 
 [![Build Status](https://travis-ci.org/WikipediaLibrary/TWLight.svg?branch=master)](https://travis-ci.org/WikipediaLibrary/TWLight)
 

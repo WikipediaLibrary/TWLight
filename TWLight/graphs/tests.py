@@ -88,22 +88,22 @@ class GraphsTestCase(TestCase):
 
         # Four Authorizations
         auth1 = Authorization(
-            authorized_user=user1,
+            user=user1,
             partner=partner1
         )
         auth1.save()
         auth2 = Authorization(
-            authorized_user=user2,
+            user=user2,
             partner=partner1
         )
         auth2.save()
         auth3 = Authorization(
-            authorized_user=user2,
+            user=user2,
             partner=partner2
         )
         auth3.save()
         auth4 = Authorization(
-            authorized_user=user2,
+            user=user2,
             partner=partner3
         )
         auth4.save()

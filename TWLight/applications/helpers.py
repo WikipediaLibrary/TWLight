@@ -206,7 +206,7 @@ def get_accounts_available(app):
 
 
 def is_proxy_and_application_approved(status, app):
-    if (app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False)) and int(status) == Application.APPROVED:
+    if (app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False)) and status == Application.APPROVED:
         return True
     else:
         return False
