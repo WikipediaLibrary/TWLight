@@ -477,7 +477,7 @@
                 <i class="fa fa-align-left fa-5x"></i>
               </div>
               <div class="col-xs-9 text-right">
-                <div class="huge">{{ total_accounts_distributed_partner }}{% if object.accounts_available %}/{{ total_accounts_available_partner }}{% endif %}</div>
+                <div class="huge">{{ total_accounts_distributed_partner }}{% if object.accounts_available %}/{{ object.accounts_available }}{% endif %}</div>
                 {% comment %} Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
                 <div>{% trans 'Active accounts' %}</div>
               </div>
