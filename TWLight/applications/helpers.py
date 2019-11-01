@@ -170,27 +170,27 @@ def get_output_for_application(app):
 
 
 def get_active_authorizations(partner_pk, stream_pk=None):
-    '''
+    """
     Retrieves the numbers of active authorizations available for a particular
     partner or collections if stream_pk is not None. Active authorizations are
     authorizations having expiry dates greater than today.
-    '''
+    """
     today = datetime.date.today()
     try:
         if stream_pk is None:
-            active_authorizations = Authorization.objects.filter(date_expires__gt=today, partner=partner_pk)
+            active_authorizations = Authorization.objects.filter(date_expires__gte=today, partner=partner_pk)
         else:
-            active_authorizations = Authorization.objects.filter(date_expires__gt=today, partner=partner_pk, stream=stream_pk)
+            active_authorizations = Authorization.objects.filter(date_expires__gte=today, partner=partner_pk, stream=stream_pk)
         return active_authorizations.count()
     except Authorization.DoesNotExist:
         return 0
 
 
 def get_accounts_available(app):
-    '''
+    """
     Because we allow number of accounts available on either the partner level or the collection level,
     we base our calculations on either the collection level (default) or the partner level.
-    '''
+    """
     if app.specific_stream is not None:
         if app.specific_stream.accounts_available is not None:
             active_authorizations = get_active_authorizations(app.partner, app.specific_stream)

@@ -1,9 +1,11 @@
+from datetime import date
+
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import Http404, HttpResponseRedirect
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -19,6 +21,7 @@ from TWLight.graphs.helpers import (get_median,
                                     get_data_count_by_month,
                                     get_users_by_partner_by_month,
                                     get_earliest_creation_date)
+from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
@@ -63,63 +66,27 @@ class PartnersDetailView(DetailView):
                     "are a staff member, but it is not visible to non-staff "
                     "users."))
 
-        context['total_apps'] = Application.objects.filter(
-            partner=partner).count()
+        today = date.today()
+        context['total_accounts_distributed_partner'] = Authorization.objects.filter(
+            Q(date_expires__gte=today) | Q(date_expires=None),
+            partner=partner
+        ).count()
 
-        context['total_apps_approved'] = Application.objects.filter(
-            partner=partner, status=Application.APPROVED).count()
-
-        context['total_apps_sent'] = Application.objects.filter(
-            partner=partner, status=Application.SENT).count()
-
-        context['total_apps_approved_or_sent'] = context['total_apps_approved'] + context['total_apps_sent']
-        
-        # This if else block supports the template with the number of accounts available 
         partner_streams = Stream.objects.filter(partner=partner)
-        context['partner_streams'] = partner_streams
-        
         if partner_streams.count() > 0:
-            context['total_accounts_available_stream'] = {}
-            context['stream_unique_accepted'] = {}
-            
+            context['total_accounts_distributed_streams'] = {}
+
             for stream in partner_streams:
-                if stream.accounts_available is not None:
-                    total_apps_approved_or_sent_stream = User.objects.filter(
-                                          editor__applications__partner=partner,
-                                          editor__applications__status__in=(Application.APPROVED, Application.SENT),
-                                          editor__applications__specific_stream=stream).count()
-                    
-                    total_accounts_available = stream.accounts_available
-                    
-                    context['total_accounts_available_stream'][stream.name] = total_accounts_available - total_apps_approved_or_sent_stream
-                
-                stream_unique_accepted = User.objects.filter(
-                                      editor__applications__partner=partner,
-                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
-                                      editor__applications__specific_stream=stream).distinct().count()
-                context['stream_unique_accepted'][stream.name] = stream_unique_accepted
-                
+                active_authorizations = Authorization.objects.filter(
+                    Q(date_expires__gte=today) | Q(date_expires=None),
+                    stream=stream,
+                ).count()
+                context['total_accounts_distributed_streams'][stream] = active_authorizations
         else:
-            context['total_accounts_available_stream'] = None
-            context['stream_unique_accepted'] = None
-            
-            if partner.accounts_available is not None:
-                context['total_accounts_available_partner'] = partner.accounts_available - context['total_apps_approved_or_sent']
+            context['total_accounts_distributed_streams'] = None
 
-        context['unique_users'] = User.objects.filter(
-            editor__applications__partner=partner).distinct().count()
-
-        context['unique_users_approved'] = User.objects.filter(
-            editor__applications__partner=partner,
-            editor__applications__status=Application.APPROVED).distinct().count()
-
-        context['unique_users_sent'] = User.objects.filter(
-            editor__applications__partner=partner,
-            editor__applications__status=Application.SENT).distinct().count()
-
-        context['unique_users_approved_or_sent'] = User.objects.filter(
-            editor__applications__partner=partner,
-            editor__applications__status__in=(Application.APPROVED, Application.SENT)).distinct().count()
+        context['total_users'] = Authorization.objects.filter(
+            partner=partner).count()
 
         application_end_states = [Application.APPROVED, Application.NOT_APPROVED, Application.SENT]
         partner_app_time = Application.objects.filter(
@@ -130,36 +97,10 @@ class PartnersDetailView(DetailView):
         else:
             context['median_days'] = None
 
-        context['app_distribution_data'] = get_application_status_data(
-                Application.objects.filter(partner=partner)
-            )
-
         # To restrict the graph from rendering, if there's only a week's worth of data
         earliest_date = get_earliest_creation_date(
                 Application.objects.filter(partner=partner)
             )
-        
-        context['insufficient_data'] = False
-        if earliest_date:
-            current_date = timezone.now().date()
-            days_since_earliest_application = (current_date - earliest_date).days
-
-            if days_since_earliest_application < 7:
-                # Less than a week's of data
-                context['insufficient_data'] = True
-
-        context['signups_time_data'] = get_data_count_by_month(
-                Application.objects.filter(partner=partner)
-            )
-
-        context['approved_or_sent_signups_time_data'] = get_data_count_by_month(
-                Application.objects.filter(
-                    partner=partner,
-                    status__in=(Application.APPROVED, Application.SENT)
-                )
-            )
-
-        context['users_time_data'] = get_users_by_partner_by_month(partner)
 
         # Find out if current user has applications and change the Apply
         # button behaviour accordingly
@@ -184,25 +125,13 @@ class PartnersDetailView(DetailView):
                     context['multiple_open_apps'] = False
                     context['open_app_pk'] = open_apps[0].pk
             elif sent_apps.count() > 0:
-            # Because using sent_apps[0] may not always hold the latest application,
-            # particularly when multiple applications where made on the same day
+                # Because using sent_apps[0] may not always hold the latest application,
+                # particularly when multiple applications where made on the same day
                 for every_app in sent_apps:
                     if every_app.is_renewable:
                         context['latest_sent_app_pk'] = every_app.pk
                         context['user_sent_apps'] = True
                         break
-
-        partner_streams = Stream.objects.filter(partner=partner)
-        if partner_streams.count() > 0:
-            context['stream_unique_accepted'] = {}
-            for stream in partner_streams:
-                stream_unique_accepted = User.objects.filter(
-                                      editor__applications__partner=partner,
-                                      editor__applications__status__in=(Application.APPROVED, Application.SENT),
-                                      editor__applications__specific_stream=stream).distinct().count()
-                context['stream_unique_accepted'][stream.name] = stream_unique_accepted
-        else:
-            context['stream_unique_accepted'] = None
 
         return context
 

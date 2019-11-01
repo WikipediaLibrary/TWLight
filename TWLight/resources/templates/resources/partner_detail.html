@@ -467,286 +467,70 @@
   other stuff to do:
     list streams
 {% endcomment %}
-  {% comment %} Translators: This is the heading for the section of a partner page showing data about applications to that partner. {% endcomment %}
-  <h2>{% trans "Metrics" %}</h2>
-
-  <div class="row">
-    <div class="col-xs-12 col-md-4">
-      <div class="panel panel-green">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-3">
-              <i class="fa fa-align-left fa-5x"></i>
-            </div>
-            <div class="col-xs-9 text-right">
-              <div class="huge">{{ total_apps }}</div>
-              {% comment %} Translators: This is the label for a number which shows the total number of aplications submitted for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-              <div>{% trans 'Total applications (all time)' %}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-md-4">
-      <div class="panel panel-yellow">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-3">
-              <i class="fa fa-users fa-5x"></i>
-            </div>
-            <div class="col-xs-9 text-right">
-              <div class="huge">{{ unique_users }}</div>
-              {% comment %} Translators: This is the label for a number which shows the total number of unique (not counting duplicates) users who have applied for access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-              <div>{% trans 'Total unique applicants (all time)' %}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-3">
-              <i class="fa fa-clock-o fa-5x"></i>
-            </div>
-            <div class="col-xs-9 text-right">
-              <div class="huge">
-                {% if median_days %}
-                    {{ median_days }}
-                {% else %}
-                    -
-                {% endif %}
+  {% if object.authorization_method is not object.BUNDLE %}
+    <div class="row">
+      <div class="col-xs-12 col-md-4">
+        <div class="panel panel-green">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-align-left fa-5x"></i>
               </div>
-              {% comment %} Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-              <div>{% trans 'Median days from application to decision' %}</div>
+              <div class="col-xs-9 text-right">
+                <div class="huge">{{ total_accounts_distributed_partner }}{% if object.accounts_available %}/{{ total_accounts_available_partner }}{% endif %}</div>
+                {% comment %} Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+                <div>{% trans 'Active accounts' %}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <div class="panel panel-yellow">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-users fa-5x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge">{{ total_users }}</div>
+                {% comment %} Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+                <div>{% trans 'Users who received access (all time)' %}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-clock-o fa-5x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge">
+                  {% if median_days %}
+                      {{ median_days }}
+                  {% else %}
+                      -
+                  {% endif %}
+                </div>
+                {% comment %} Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+                <div>{% trans 'Median days from application to decision' %}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  {% comment %}
-    Display # of accounts available
-  {% endcomment %}
-  {% if total_accounts_available_stream %}
-    <h3>
-      {% comment %} Translators: This is the section header for accounts availability numbers for the available stream(s). (e.g. https://wikipedialibrary.wmflabs.org/partners/52/). {% endcomment %}
-      {% trans "Accounts availability" %}
-    </h3>
-    <ul>
-      {% for stream_name, total_accounts in total_accounts_available_stream.items %}
-        <li>
-          {{ stream_name }}:
-          {% if total_accounts < 0 %}
-              0
-            {% if user|coordinators_only %}
-              {% comment %} Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed. {% endcomment %}
-              <span title="{% trans "Actual negative number visible to coordinators and superusers only" %}">({{ total_accounts }})</span>
-            {% endif %}
-          {% else %}
-            {{ total_accounts }}
-          {% endif %}
-        </li>
+
+    {% if total_accounts_distributed_streams %}
+      {% comment %} Translators: This is the header for total accounts on a per-collection level. {% endcomment %}
+      <h4>{% trans 'Active accounts (collections)' %}:</h4>
+      {% for stream, count in total_accounts_distributed_streams.items %}
+        <li>{{ stream }}: {{ count }}{% if stream.accounts_available %}/{{ stream.accounts_available }}{% endif %}</li>
       {% endfor %}
-    </ul>
-  {% elif object.accounts_available %}
-    <h3>
-      {% comment %} Translators: This is the label which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% trans "Accounts available:" %}
-      {% if total_accounts_available_partner < 0 %}
-        0
-        {% if user|coordinators_only %}
-          {% comment %} Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed. {% endcomment %}
-          <span title="{% trans "Actual negative number visible to coordinators and superusers only" %}">({{ total_accounts_available_partner }})</span>
-        {% endif %}
-      {% else %}
-          {{ total_accounts_available_partner }}
-      {% endif %}
-    </h3>
-  {% endif %}
-  
-  {% if total_apps > 0 and insufficient_data == False %}
-    <h3>
-      {% comment %} Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% trans "Applications by status" %}
-    </h3>
-    <a href="{% url 'csv:app_distribution_by_partner' object.pk %}" class="pull-right btn btn-default">
-      {% comment %} Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% trans "download as csv" %}
-    </a>
-    <div style="clear:both;"></div>
-    <div id="app-distribution-graph" style="width:80%;height:300px"></div>
-
-    <p>
-      {% comment %} Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% blocktrans trimmed count counter=total_apps_approved %}
-        Number of applications approved (all time): {{ total_apps_approved_or_sent }}
-      {% plural %}
-        Number of applications approved (all time): {{ total_apps_approved_or_sent }}
-      {% endblocktrans %}
-    </p>
-
-    <p>
-      {% comment %} Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-      {% blocktrans trimmed count counter=unique_users_approved %}
-        Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
-      {% plural %}
-        Number of unique users with approved applications (all time): {{ unique_users_approved_or_sent }}
-      {% endblocktrans %}
-    </p>
-    
-    {% if stream_unique_accepted %}
-      <ul>
-      {% for stream_name, num_apps in stream_unique_accepted.items %}
-        <li>{{ stream_name }}: {{ num_apps }}</li>
-      {% endfor %}
-      </ul>
     {% endif %}
-
-    {% comment %} Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-    <h3>{% trans "Applications over time" %}</h3>
-    
-    {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time. {% endcomment %}
-    <h4>{% trans "All applications" %}</h4> <a href="{% url 'csv:app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
-    <div style="clear:both;"></div>
-    <div id="signups-time-graph" style="width:90%;height:300px"></div>
-
-    {% if total_apps_approved > 0 %}
-      {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time. {% endcomment %}
-      <h4>{% trans "Approved applications only" %}</h4> <a href="{% url 'csv:approved_or_sent_app_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
-      <div style="clear:both;"></div>
-      <div id="approved-or-sent-signups-time-graph" style="width:90%;height:300px"></div>
-    {% endif %}
-    
-    {% comment %} Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time. {% endcomment %}
-    <h3>{% trans "Unique users over time" %}</h3> <a href="{% url 'csv:user_count_by_partner' object.pk %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
-    <div style="clear:both;"></div>
-    <div id="users-time-graph" style="width:90%;height:300px"></div>
   {% endif %}
 {% endblock content %}
-
-{% block javascript %}
-  <script
-    src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
-  <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.js" %}"></script>
-  <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.pie.js" %}"></script>
-  <script type="text/javascript" language="javascript" src="{% static "js/jquery.flot.time.js" %}"></script>
-
-  <script type="text/javascript">
-    $(function() {
-        if ({{ insufficient_data|yesno:"true,false" }} == false ) {
-          // All applications by time
-          var signups_time_graph = $("#signups-time-graph");
-          var signups_time_data = {{ signups_time_data | safe }};
-          var signups_time_plot = $.plot(signups_time_graph, [signups_time_data], {
-            xaxis: {
-              mode: "time",
-            },
-            yaxis: {
-              min: 0,
-              minTickSize: 1,
-              tickDecimals: 0,
-            },
-            colors: ['#5cb85c'],
-          });
-
-          // Approved applications by time
-          if ({{ total_apps_approved }} > 0) {
-            var approved_or_sent_signups_time_graph = $("#approved-or-sent-signups-time-graph");
-            var approved_or_sent_signups_time_data = {{ approved_or_sent_signups_time_data | safe }};
-            var approved_or_sent_signups_time_plot = $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
-              xaxis: {
-                mode: "time",
-              },
-              yaxis: {
-                min: 0,
-                minTickSize: 1,
-                tickDecimals: 0,
-              },
-              colors: ['#5cb85c'],
-            });
-            // Redraw on browser resize
-            window.addEventListener("resize", function() {
-              $.plot(approved_or_sent_signups_time_graph, [approved_or_sent_signups_time_data], {
-                xaxis: {
-                  mode: "time",
-                },
-                yaxis: {
-                  min: 0,
-                  minTickSize: 1,
-                  tickDecimals: 0,
-                },
-                colors: ['#5cb85c'],
-              });
-            });          
-          }
-
-          // Unique users by time
-          var users_time_graph = $("#users-time-graph");
-          var users_time_data = {{ users_time_data | safe }};
-          var users_time_plot = $.plot(users_time_graph, [users_time_data], {
-            xaxis: {
-              mode: "time",
-            },
-            yaxis: {
-              min: 0,
-              minTickSize: 1,
-              tickDecimals: 0,
-            },
-            colors: ['#f0ad4e'],
-          });
-
-          // Application status distribution (pie chart)
-          var app_distribution_graph = $("#app-distribution-graph");
-          var app_distribution_data = {{ app_distribution_data | safe }};
-          var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
-            series: {
-              pie: { 
-                show: true,
-              }
-            },
-          });
-            
-            // Attach a listener to redraw the graphs everytime the user resizes the browser window
-          window.addEventListener("resize", function() {
-          
-            $.plot(signups_time_graph, [signups_time_data], {
-              xaxis: {
-                mode: "time",
-              },
-              yaxis: {
-                min: 0,
-                minTickSize: 1,
-                tickDecimals: 0,
-              },
-              colors: ['#5cb85c'],
-            });
-            
-            $.plot(users_time_graph, [users_time_data], {
-              xaxis: {
-                mode: "time",
-              },
-              yaxis: {
-                min: 0,
-                minTickSize: 1,
-                tickDecimals: 0,
-              },
-              colors: ['#f0ad4e'],
-            });
-            
-            $.plot(app_distribution_graph, app_distribution_data, {
-              series: {
-                pie: { 
-                  show: true,
-                }
-              },
-            });
-          });
-      }
-    });
-  </script>
-{% endblock javascript %}
