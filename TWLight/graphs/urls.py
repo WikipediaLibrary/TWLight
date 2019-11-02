@@ -19,27 +19,6 @@ csv_urlpatterns = [
         name='app_distribution'
     ),
 
-    url(r'^app_distribution/(?P<pk>\d+)/$',
-        views.CSVAppDistribution.as_view(),
-        name='app_distribution_by_partner'
-    ),
-
-    url(r'^app_count/(?P<pk>\d+)/$',
-        views.CSVAppCountByPartner.as_view(),
-        name='app_count_by_partner'
-    ),
-
-    url(r'^app_count/approved/(?P<pk>\d+)/$',
-        views.CSVAppCountByPartner.as_view(),
-        kwargs={'approved_or_sent': True},
-        name='approved_or_sent_app_count_by_partner'
-    ),
-
-    url(r'^user_count/(?P<pk>\d+)/$',
-        views.CSVUserCountByPartner.as_view(),
-        name='user_count_by_partner'
-    ),
-
     url(r'^page_views/$',
         login_required(views.CSVPageViews.as_view()),
         name='page_views'

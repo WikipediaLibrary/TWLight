@@ -258,15 +258,7 @@ class CSVAppMedians(_CSVDownloadView):
 
 class CSVAppDistribution(_CSVDownloadView):
     def _write_data(self, response):
-        if 'pk' in self.kwargs:
-            pk = self.kwargs['pk']
-            partner = get_object_or_404(Partner.even_not_available, pk=pk)
-
-            csv_queryset = Application.objects.filter(partner=partner)
-
-        else:
-            csv_queryset = Application.objects.all()
-
+        csv_queryset = Application.objects.all()
         data = get_application_status_data(
             csv_queryset,
             data_format=PYTHON
@@ -279,49 +271,6 @@ class CSVAppDistribution(_CSVDownloadView):
 
         for row in data:
             writer.writerow(row)
-
-
-
-class CSVAppCountByPartner(_CSVDownloadView):
-    def _write_data(self, response):
-        pk = self.kwargs['pk']
-        partner = get_object_or_404(Partner.even_not_available, pk=pk)
-
-        queryset = Application.objects.filter(partner=partner)
-
-        if 'approved_or_sent' in self.kwargs:
-            queryset = queryset.filter(status__in=(Application.APPROVED, Application.SENT))
-
-        data = get_data_count_by_month(queryset, data_format=PYTHON)
-
-        writer = csv.writer(response)
-
-        writer.writerow([_('Date').encode('utf-8'),
-            # Translators: This is the heading of a data file which lists the number of applications to a partner.
-            _('Number of applications').encode('utf-8')])
-
-        for row in data:
-            writer.writerow(row)
-
-
-
-class CSVUserCountByPartner(_CSVDownloadView):
-    def _write_data(self, response):
-        pk = self.kwargs['pk']
-
-        partner = get_object_or_404(Partner.even_not_available, pk=pk)
-
-        data = get_users_by_partner_by_month(partner, data_format=PYTHON)
-
-        writer = csv.writer(response)
-
-        writer.writerow([_('Date').encode('utf-8'),
-            # Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
-            _('Number of unique users who applied').encode('utf-8')])
-
-        for row in data:
-            writer.writerow(row)
-
 
 
 class CSVPageViews(_CSVDownloadView):
