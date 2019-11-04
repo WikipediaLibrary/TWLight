@@ -269,20 +269,7 @@ class PartnerUsers(CoordinatorOrSelf, DetailView):
             context['partner_streams'] = False
 
         return context
-
-
-class PartnerUnassignCode(CoordinatorOrSelf, DetailView):
-    model = AccessCode
-    template_name = 'resources/partner_unassign_code.html'
-
-    def post(self, request, *args, **kwargs):
-        object = self.get_object()
-
-        object.application = None
-        object.save()
-
-        return HttpResponseRedirect(reverse('partners:users', kwargs={'pk':object.partner.pk}))
-
+      
 
 @method_decorator(login_required, name='post')
 class PartnerSuggestionView(FormView):
