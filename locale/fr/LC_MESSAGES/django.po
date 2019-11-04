@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-11-04 12:17+0000\n"
+"POT-Creation-Date: 2019-11-04 12:26+0000\n"
 "PO-Revision-Date: 2019-10-31 17:58:15+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -1353,7 +1353,7 @@ msgstr "Votre message a été envoyé. Nous reviendrons bientôt vers vous !"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:60 TWLight/resources/views.py:353
+#: TWLight/emails/views.py:60 TWLight/resources/views.py:340
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Vous devez être un contributeur Wikipédia pour faire cela."
 
@@ -2337,17 +2337,6 @@ msgstr "Lien vers la page de souscription de %(partner)s"
 msgid "Language(s) not known"
 msgstr "Langue(s) inconnue(s)"
 
-#. Translators: On the page listing approved users, staff can unassign a code from a user. This is the title of the page which confirms the code removal.
-#: TWLight/resources/templates/resources/partner_unassign_code.html:8
-msgid "Unassign code?"
-msgstr "Désassigner le code ?"
-
-#. Translators: This message is displayed on the page where staff can unassign codes from users.
-#: TWLight/resources/templates/resources/partner_unassign_code.html:14
-#, python-format
-msgid "Unassign access code <code>%(code)s</code> from %(editor)s?"
-msgstr "Désassigner le code d’accès <code>%(code)s</code> de %(editor)s ?"
-
 #: TWLight/resources/templates/resources/partner_users.html:7
 #, python-format
 msgid "%(partner)s approved users"
@@ -2448,12 +2437,12 @@ msgid "This partner is now available for applications"
 msgstr "Ce partenaire est maintenant disponible pour les demandes"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:348
+#: TWLight/resources/views.py:335
 msgid "Your suggestion has been added."
 msgstr "Votre suggestion a été ajoutée."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:368
+#: TWLight/resources/views.py:355
 msgid "Suggestion has been deleted."
 msgstr "Suggestion supprimée."
 
@@ -4287,3 +4276,9 @@ msgstr "{username} a demandé l’accès à <a href=\"{url}\">{partner}</a>"
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr "{username} a reçu un accès à <a href=\"{url}\">{partner}</a>"
+
+#~ msgid "Unassign code?"
+#~ msgstr "Désassigner le code ?"
+
+#~ msgid "Unassign access code <code>%(code)s</code> from %(editor)s?"
+#~ msgstr "Désassigner le code d’accès <code>%(code)s</code> de %(editor)s ?"

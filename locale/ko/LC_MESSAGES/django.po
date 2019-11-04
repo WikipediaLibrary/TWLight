@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-11-04 12:18+0000\n"
+"POT-Creation-Date: 2019-11-04 12:26+0000\n"
 "PO-Revision-Date: 2019-10-31 17:58:16+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1187,7 +1187,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:60 TWLight/resources/views.py:353
+#: TWLight/emails/views.py:60 TWLight/resources/views.py:340
 msgid "You must be a Wikipedia editor to do that."
 msgstr "해당 작업을 수행하려면 위키백과의 편집자여야 합니다."
 
@@ -2029,18 +2029,6 @@ msgstr "%(partner)s 가입 페이지 링크"
 msgid "Language(s) not known"
 msgstr "언어를 알 수 없음"
 
-#. Translators: On the page listing approved users, staff can unassign a code from a user. This is the title of the page which confirms the code removal.
-#: TWLight/resources/templates/resources/partner_unassign_code.html:8
-msgid "Unassign code?"
-msgstr "코드의 할당을 해제하시겠습니까?"
-
-#. Translators: This message is displayed on the page where staff can unassign codes from users.
-#: TWLight/resources/templates/resources/partner_unassign_code.html:14
-#, python-format
-msgid "Unassign access code <code>%(code)s</code> from %(editor)s?"
-msgstr ""
-"<code>%(code)s</code> 코드를 %(editor)s님으로부터 할당을 해제하시겠습니까?"
-
 #: TWLight/resources/templates/resources/partner_users.html:7
 #, python-format
 msgid "%(partner)s approved users"
@@ -2136,12 +2124,12 @@ msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:348
+#: TWLight/resources/views.py:335
 msgid "Your suggestion has been added."
 msgstr "제안이 추가되었습니다."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:368
+#: TWLight/resources/views.py:355
 msgid "Suggestion has been deleted."
 msgstr "제안이 삭제되었습니다."
 
@@ -3640,3 +3628,10 @@ msgstr ""
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr ""
+
+#~ msgid "Unassign code?"
+#~ msgstr "코드의 할당을 해제하시겠습니까?"
+
+#~ msgid "Unassign access code <code>%(code)s</code> from %(editor)s?"
+#~ msgstr ""
+#~ "<code>%(code)s</code> 코드를 %(editor)s님으로부터 할당을 해제하시겠습니까?"

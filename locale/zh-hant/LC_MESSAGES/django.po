@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-11-04 12:18+0000\n"
+"POT-Creation-Date: 2019-11-04 12:27+0000\n"
 "PO-Revision-Date: 2019-10-31 17:58:22+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1268,7 +1268,7 @@ msgstr "您的訊息已送出，我們會盡快回覆給您！"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:60 TWLight/resources/views.py:353
+#: TWLight/emails/views.py:60 TWLight/resources/views.py:340
 msgid "You must be a Wikipedia editor to do that."
 msgstr "您必須要是維基百科上的編輯者才能做出。"
 
@@ -2160,17 +2160,6 @@ msgstr "連結至 %(partner)s 的註冊頁面"
 msgid "Language(s) not known"
 msgstr "語言未知"
 
-#. Translators: On the page listing approved users, staff can unassign a code from a user. This is the title of the page which confirms the code removal.
-#: TWLight/resources/templates/resources/partner_unassign_code.html:8
-msgid "Unassign code?"
-msgstr "解除分配代碼？"
-
-#. Translators: This message is displayed on the page where staff can unassign codes from users.
-#: TWLight/resources/templates/resources/partner_unassign_code.html:14
-#, python-format
-msgid "Unassign access code <code>%(code)s</code> from %(editor)s?"
-msgstr "從%(editor)s解除分配取用代碼 <code>%(code)s</code> 嗎？"
-
 #: TWLight/resources/templates/resources/partner_users.html:7
 #, python-format
 msgid "%(partner)s approved users"
@@ -2268,12 +2257,12 @@ msgid "This partner is now available for applications"
 msgstr "此合作夥伴目前可用於申請程序"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:348
+#: TWLight/resources/views.py:335
 msgid "Your suggestion has been added."
 msgstr "您的建議已添加。"
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:368
+#: TWLight/resources/views.py:355
 msgid "Suggestion has been deleted."
 msgstr "建議已刪除。"
 
@@ -3954,3 +3943,9 @@ msgstr "{username}申請了向 <a href=\"{url}\">{partner}</a> 的取用權限"
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr "{username} 得到了向 <a href=\"{url}\">{partner}</a> 的取用權限"
+
+#~ msgid "Unassign code?"
+#~ msgstr "解除分配代碼？"
+
+#~ msgid "Unassign access code <code>%(code)s</code> from %(editor)s?"
+#~ msgstr "從%(editor)s解除分配取用代碼 <code>%(code)s</code> 嗎？"
