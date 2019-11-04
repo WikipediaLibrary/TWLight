@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-10-31 17:58:17+0000\n"
-"X-POT-Import-Date: 2019-10-31 13:07:26+0000\n"
+"PO-Revision-Date: 2019-11-04 15:14:05+0000\n"
+"X-POT-Import-Date: 2019-11-04 14:32:46+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ms\n"
@@ -145,8 +145,10 @@ msgid "Real name"
 msgstr "Nama sebenar"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
+#. Translators: This labels the section of an application that shows the country of residence of the applicant.
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
 #: TWLight/applications/helpers.py:126
+#: TWLight/applications/templates/applications/application_evaluation.html:100
 #: TWLight/users/templates/users/editor_detail_data.html:176
 msgid "Country of residence"
 msgstr "Negara mastautin"
@@ -171,7 +173,7 @@ msgstr "Saluran dipinta"
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
 #: TWLight/applications/helpers.py:134
-#: TWLight/applications/templates/applications/application_evaluation.html:120
+#: TWLight/applications/templates/applications/application_evaluation.html:139
 msgid "Title requested"
 msgstr "Tajuk dipinta"
 
@@ -354,102 +356,112 @@ msgstr "Rakan kongsi"
 msgid "Waitlisted"
 msgstr "Disenarai tunggu"
 
+#. Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.
+#: TWLight/applications/templates/applications/application_evaluation.html:105
+msgid "Unknown"
+msgstr ""
+
+#. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
+#: TWLight/applications/templates/applications/application_evaluation.html:108
+msgid "Please request the applicant add their country of residence to their profile before proceeding further."
+msgstr ""
+
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
-#: TWLight/applications/templates/applications/application_evaluation.html:100
+#: TWLight/applications/templates/applications/application_evaluation.html:119
 msgid "Accounts available"
 msgstr ""
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
-#: TWLight/applications/templates/applications/application_evaluation.html:110
+#: TWLight/applications/templates/applications/application_evaluation.html:129
 msgid "Collection requested"
 msgstr "Koleksi dipinta"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
-#: TWLight/applications/templates/applications/application_evaluation.html:129
+#: TWLight/applications/templates/applications/application_evaluation.html:148
 msgid "Why the editor wants access"
 msgstr "Mengapa penyunting mahu akses"
 
 #. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
-#: TWLight/applications/templates/applications/application_evaluation.html:136
+#: TWLight/applications/templates/applications/application_evaluation.html:155
 msgid "Not stated"
 msgstr "Tidak dinyatakan"
 
 #. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
-#: TWLight/applications/templates/applications/application_evaluation.html:142
+#: TWLight/applications/templates/applications/application_evaluation.html:161
 msgid "Renewal of existing access grant?"
 msgstr "Pembaharuan kebenaran akses yang sedia ada?"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
-#: TWLight/applications/templates/applications/application_evaluation.html:148
+#: TWLight/applications/templates/applications/application_evaluation.html:167
 #, python-format
 msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
 msgstr "Ya (<a href=\"%(parent_url)s\">permohonan terdahulu</a>)"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
-#: TWLight/applications/templates/applications/application_evaluation.html:154
+#: TWLight/applications/templates/applications/application_evaluation.html:173
 #: TWLight/users/templates/users/editor_detail_data.html:68
 msgid "No"
 msgstr "Tidak"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
-#: TWLight/applications/templates/applications/application_evaluation.html:160
+#: TWLight/applications/templates/applications/application_evaluation.html:179
 msgid "Comments from the editor"
 msgstr "Ulasan dari penyunting"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
-#: TWLight/applications/templates/applications/application_evaluation.html:168
+#: TWLight/applications/templates/applications/application_evaluation.html:187
 msgid "Discussion"
 msgstr "Perbincangan"
 
 #. Translators: This labels the button which users click to send a typed comment.
-#: TWLight/applications/templates/applications/application_evaluation.html:189
+#: TWLight/applications/templates/applications/application_evaluation.html:208
 msgid "Add comment"
 msgstr "Tambah ulasan"
 
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
-#: TWLight/applications/templates/applications/application_evaluation.html:197
+#: TWLight/applications/templates/applications/application_evaluation.html:216
 msgid "Comments are visible to all coordinators and to the editor who submitted this application."
 msgstr "Ulasan boleh dilihat oleh semua penyelaras dan penyunting yang mengemukakan permohonan ini."
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
-#: TWLight/applications/templates/applications/application_evaluation.html:204
+#: TWLight/applications/templates/applications/application_evaluation.html:223
 #: TWLight/resources/templates/resources/partner_users.html:25
 #: TWLight/resources/templates/resources/partner_users.html:76
 msgid "User"
 msgstr "Pengguna"
 
 #. Translators: This is the title of the section of an application page which lists the history of status changes.
-#: TWLight/applications/templates/applications/application_evaluation.html:209
+#: TWLight/applications/templates/applications/application_evaluation.html:228
 msgid "Revision history"
 msgstr "Sejarah semakan"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate submit_user or review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:225
+#: TWLight/applications/templates/applications/application_evaluation.html:244
 #, python-format
 msgid "Submitted by %(submit_user)s on %(review_date)s"
 msgstr "Dihantar oleh %(submit_user)s pada %(review_date)s"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:230
+#: TWLight/applications/templates/applications/application_evaluation.html:249
 #, python-format
 msgid "Submitted on %(review_date)s"
 msgstr "Dihantar pada %(review_date)s"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate review_user or review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:241
+#: TWLight/applications/templates/applications/application_evaluation.html:260
 #, python-format
 msgid "Reviewed by %(review_user)s on %(review_date)s"
 msgstr "Ditinjau oleh %(review_user)s pada %(review_date)s"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:246
+#: TWLight/applications/templates/applications/application_evaluation.html:265
 #, python-format
 msgid "Reviewed on %(review_date)s"
 msgstr "Ditinjau pada %(review_date)s"
 
 #. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
-#: TWLight/applications/templates/applications/application_evaluation.html:258
+#: TWLight/applications/templates/applications/application_evaluation.html:278
 msgid "No previous versions."
 msgstr "Tiada versi terdahulu."
 
@@ -1043,7 +1055,7 @@ msgstr "Pesanan anda telah dihantar. Kami akan menghubungi anda kembali tidak la
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:60 TWLight/resources/views.py:353
+#: TWLight/emails/views.py:60 TWLight/resources/views.py:340
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Anda mesti menjadi penyunting Wikipedia untuk berbuat sedemikian."
 
@@ -1783,17 +1795,6 @@ msgstr "Pautan ke laman pendaftaran {{ partner }}"
 msgid "Language(s) not known"
 msgstr "Bahasa tidak diketahui"
 
-#. Translators: On the page listing approved users, staff can unassign a code from a user. This is the title of the page which confirms the code removal.
-#: TWLight/resources/templates/resources/partner_unassign_code.html:8
-msgid "Unassign code?"
-msgstr "Kod tidak ditugaskan?"
-
-#. Translators: This message is displayed on the page where staff can unassign codes from users.
-#: TWLight/resources/templates/resources/partner_unassign_code.html:14
-#, python-format
-msgid "Unassign access code <code>%(code)s</code> from %(editor)s?"
-msgstr "Kod akses tidak ditugaskan <code>%(code)s</code> dari %(editor)s?"
-
 #: TWLight/resources/templates/resources/partner_users.html:7
 #, python-format
 msgid "%(partner)s approved users"
@@ -1885,12 +1886,12 @@ msgid "This partner is now available for applications"
 msgstr "Rakan kongsi ini sekarang tersedia untuk permohonan"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:348
+#: TWLight/resources/views.py:335
 msgid "Your suggestion has been added."
 msgstr "Cadangan anda telah ditambah."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:368
+#: TWLight/resources/views.py:355
 msgid "Suggestion has been deleted."
 msgstr "Cadangan telah dihapuskan."
 
