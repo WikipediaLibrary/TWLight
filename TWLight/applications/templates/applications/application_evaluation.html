@@ -94,6 +94,25 @@
       {% endif %}
     </div>
 
+    {% if object.partner.country_of_residence %}
+      <div class="col-xs-12 col-sm-4">
+        {% comment %}Translators: This labels the section of an application that shows the country of residence of the applicant.{% endcomment %}
+        <strong>{% trans 'Country of residence' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {% if not object.editor.country_of_residence %}
+          {% comment %}Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.{% endcomment %}
+          {% trans 'Unknown' %}
+          {% if partner_coordinator %}
+            {% comment %}Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.{% endcomment %}
+            <i>({% trans 'Please request the applicant add their country of residence to their profile before proceeding further.' %})</i>
+          {% endif %}
+        {% else %}
+          {{ object.editor.country_of_residence }}
+        {% endif %}
+      </div>
+    {% endif %}
+
     {% if total_accounts_available_for_distribution is not None %}
       <div class="col-xs-12 col-sm-4">
         {% comment %}Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.{% endcomment %}
@@ -252,6 +271,7 @@
               {% endif %}
             </span>
           </div>
+        </div>
       </li>
     {% empty %}
       {% comment %}Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.{% endcomment %}
