@@ -247,8 +247,9 @@ class CSVProxyAuthAndRenewals(_CSVDownloadView):
 
         proxy_auth_data = get_data_count_by_month(proxy_auth, data_format=PYTHON)
         renewed_auth_data = get_data_count_by_month(renewed_auth, data_format=PYTHON)
-        for each_proxy_auth, each_renewed_auth in itertools.izip_longest(proxy_auth_data, renewed_auth_data):
-            each_proxy_auth.append(each_renewed_auth[1])
+        if renewed_auth_data is not None:
+            for each_proxy_auth, each_renewed_auth in itertools.izip_longest(proxy_auth_data, renewed_auth_data):
+                each_proxy_auth.append(each_renewed_auth[1])
         writer = csv.writer(response)
         # Translators: This is the heading of a data file, for a column containing date data.
         writer.writerow([_('Date').encode('utf-8'),
