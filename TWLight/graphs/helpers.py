@@ -6,6 +6,7 @@ import time
 import datetime
 
 from django.contrib.auth.models import User
+from django.core.exceptions import FieldError
 from django.utils import timezone
 
 from TWLight.applications.models import Application
@@ -49,9 +50,14 @@ def get_earliest_creation_date(queryset):
     # Some imported applications had no date and were given
     # creation dates of Jan 1, 1970. This screws up the graphs.
     if queryset:
-        earliest_date = queryset.exclude(
-            date_created=datetime.date(1970,1,1)).earliest(
-                'date_created').date_created
+        try:
+            earliest_date = queryset.exclude(
+                date_created=datetime.date(1970,1,1)).earliest(
+                    'date_created').date_created
+        except FieldError:
+            earliest_date = queryset.exclude(
+                date_authorized=datetime.date(1970,1,1)).earliest(
+                    'date_authorized').date_authorized
     else:
         earliest_date = None
 
@@ -80,7 +86,11 @@ def get_data_count_by_month(queryset, data_format=JSON):
             else:
                 timestamp = current_date
 
-            num_objs = queryset.filter(date_created__lte=current_date).count()
+            try:
+                num_objs = queryset.filter(date_created__lte=current_date).count()
+            except FieldError:
+                num_objs = queryset.filter(date_authorized__lte=current_date).count()
+
             data_series.append([timestamp, num_objs])
             current_date -= relativedelta.relativedelta(months=1)
 
