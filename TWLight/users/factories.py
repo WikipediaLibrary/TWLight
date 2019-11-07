@@ -66,9 +66,7 @@ class EditorFactory(factory.django.DjangoModelFactory):
     country_of_residence = "Elsewhere"
     occupation = "Cat floofer"
     affiliation = "Institut Pasteur"
-    wp_username = factory.LazyAttribute(
-        lambda s: "".join(random.choice(string.lowercase) for i in range(10))
-    )
+    wp_username = factory.Faker("name")
     wp_editcount = 42
     wp_registered = datetime.today()
     # Increment counter each time we create an editor so that we don't fail
