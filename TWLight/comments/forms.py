@@ -2,7 +2,7 @@ import datetime
 
 from django_comments.forms import CommentForm
 from django.contrib.contenttypes.models import ContentType
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.conf import settings
 
 
@@ -12,7 +12,7 @@ class CommentWithoutEmail(CommentForm):
         # From Stack Overflow https://stackoverflow.com/questions/1456267/django-comments-want-to-remove-user-url-not-expand-the-model-how-to/4766543#4766543
         return dict(
             content_type=ContentType.objects.get_for_model(self.target_object),
-            object_pk=force_unicode(self.target_object._get_pk_val()),
+            object_pk=force_text(self.target_object._get_pk_val()),
             user_name=self.cleaned_data["name"],
             comment=self.cleaned_data["comment"],
             submit_date=datetime.datetime.now(),
