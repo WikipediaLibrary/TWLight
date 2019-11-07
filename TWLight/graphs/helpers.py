@@ -49,6 +49,9 @@ def get_median(values_list):
 def get_earliest_creation_date(queryset):
     # Some imported applications had no date and were given
     # creation dates of Jan 1, 1970. This screws up the graphs.
+    # Additionally, Authrorization objects don't have date_created
+    # rather date_authorized; the try block looks out for FieldErrors
+    # when there's no date_created.
     if queryset:
         try:
             earliest_date = queryset.exclude(
