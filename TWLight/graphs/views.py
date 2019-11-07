@@ -1,4 +1,6 @@
 import csv
+
+import itertools
 from datetime import date
 # The django-request analytics package, NOT the python URL library requests!
 from request.models import Request
@@ -170,6 +172,20 @@ class DashboardView(TemplateView):
         context['user_language_data'] = get_user_language_data(
             UserProfile.objects.all())
 
+        # Total authorizations and of that, authorizations renewed (proxy partners only)
+
+        proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
+        context['proxy_auth_data'] = get_data_count_by_month(proxy_auth)
+
+        renewed_auth_ids = []
+        for auth in proxy_auth:
+            latest_app = auth.get_latest_app()
+            if latest_app.parent:
+                renewed_auth_ids.append(auth.id)
+
+        context['renewed_auth_data'] = get_data_count_by_month(
+            proxy_auth.filter(id__in=renewed_auth_ids)
+        )
         return context
 
 
@@ -218,7 +234,33 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         for row in data:
             writer.writerow(row)
 
-            
+class CSVProxyAuthAndRenewals(_CSVDownloadView):
+    def _write_data(self, response):
+        proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
+        renewed_auth_ids = []
+        for auth in proxy_auth:
+            latest_app = auth.get_latest_app()
+            if latest_app.parent:
+                renewed_auth_ids.append(auth.id)
+
+        renewed_auth = proxy_auth.filter(id__in=renewed_auth_ids)
+
+        proxy_auth_data = get_data_count_by_month(proxy_auth, data_format=PYTHON)
+        renewed_auth_data = get_data_count_by_month(renewed_auth, data_format=PYTHON)
+        for each_proxy_auth, each_renewed_auth in itertools.izip_longest(proxy_auth_data, renewed_auth_data):
+            each_proxy_auth.append(each_renewed_auth[1])
+        writer = csv.writer(response)
+        # Translators: This is the heading of a data file, for a column containing date data.
+        writer.writerow([_('Date').encode('utf-8'),
+                         # Translators: This is the heading of a data file. 'Number of proxy authorizations' refers to the total number of authorizations for all proxy partners.
+                         _('Number of proxy authorizations').encode('utf-8'),
+                         # Translators: This is the heading of a data file. 'Number of renewed proxy authorizations' refers to the total number of authorizations for all proxy partners that were renewed.
+                         _('Number of renewed proxy authorizations').encode('utf-8')])
+
+        for row in proxy_auth_data:
+            writer.writerow(row)
+
+
 class CSVNumApprovedApplications(_CSVDownloadView):
     def _write_data(self, response):
         queryset = Application.objects.filter(
