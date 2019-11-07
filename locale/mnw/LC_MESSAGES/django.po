@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-11-04 15:14:05+0000\n"
-"X-POT-Import-Date: 2019-11-04 14:32:46+0000\n"
+"PO-Revision-Date: 2019-11-07 15:36:14+0000\n"
+"X-POT-Import-Date: 2019-11-07 15:32:50+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: mnw\n"
@@ -2391,31 +2391,36 @@ msgid "Could not find handshaker."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:390
+#: TWLight/users/authorization.py:389
+msgid "No session token."
+msgstr ""
+
+#. Translators: This message is shown when the OAuth login process fails.
+#: TWLight/users/authorization.py:399
 msgid "No request token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:400
+#: TWLight/users/authorization.py:409
 msgid "Access token generation failed."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/authorization.py:414
+#: TWLight/users/authorization.py:423
 msgid "Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
-#: TWLight/users/authorization.py:420
+#: TWLight/users/authorization.py:429
 msgid "Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/authorization.py:433
+#: TWLight/users/authorization.py:442
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
 #. Translators: This message is shown when a user logs back in to the site after their first time.
-#: TWLight/users/authorization.py:438
+#: TWLight/users/authorization.py:447
 msgid "Welcome back!"
 msgstr ""
 
