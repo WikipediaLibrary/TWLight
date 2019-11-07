@@ -23,7 +23,7 @@ fi
 
 # Check to see if we're in a virtualenv or not.
 # Cribbed from: https://stackoverflow.com/a/15454916
-ACTIVATED=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
+ACTIVATED=$(python3 -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 if [ "${ACTIVATED}" -eq 0 ]
 then
 

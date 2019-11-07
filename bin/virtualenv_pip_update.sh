@@ -5,9 +5,9 @@
 # Load virtual environment
 if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 then
-    # update pip dependencies
+    # update pip3 dependencies
     cd ~
-    pip install -r ${TWLIGHT_HOME}/requirements/wmf.txt
+    pip3 install -r ${TWLIGHT_HOME}/requirements/wmf.txt
 else
     exit 1
 fi
