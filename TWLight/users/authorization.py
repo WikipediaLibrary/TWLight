@@ -286,7 +286,7 @@ class OAuthInitializeView(View):
             logger.warning('No get parameters for post-login redirection.')
             pass
 
-        # If the user has already logged in, let's not spam the OAuth proider.
+        # If the user has already logged in, let's not spam the OAuth provider.
         if self.request.user.is_authenticated():
             # We're using this twice. Not very DRY.
             # Send user either to the destination specified in the 'next'
@@ -379,8 +379,17 @@ class OAuthCallbackView(View):
                 _('Could not find handshaker.'))
             raise PermissionDenied
 
-        # Get the request token, placed in session by OAuthInitializeView.
+        # Get the session token placed by OAuthInitializeView.
         session_token = request.session.pop('request_token', None)
+
+        if not session_token:
+            logger.info('No session token.')
+            messages.add_message (request, messages.WARNING,
+                                  # Translators: This message is shown when the OAuth login process fails.
+                                  _('No session token.'))
+            raise PermissionDenied
+
+        # Rehydrate it into a request token.
         request_token = _rehydrate_token(session_token)
 
         if not request_token:
