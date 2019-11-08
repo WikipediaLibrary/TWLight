@@ -30,6 +30,9 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
+# Import available locales from Faker, so we can determine what languages we fake in tests.
+from faker.config import AVAILABLE_LOCALES as FAKER_AVAILABLE_LOCALES
+
 # We're going to replace Django's default logging config.
 import logging.config
 
@@ -70,6 +73,15 @@ def get_languages_from_locale_subdirectories(dir):
                     current_languages += [(lang_code, autonym)]
     return sorted(set(current_languages))
 
+
+# Get the intersection of available Faker locales and the specified language set.
+def get_django_faker_languages_intersection(languages):
+    languages_intersection = []
+    for locale in FAKER_AVAILABLE_LOCALES:
+        for i, (djlang_code, djlang_name) in enumerate(languages):
+            if locale == djlang_code:
+                languages_intersection += [locale]
+    return sorted(set(languages_intersection))
 
 # ------------------------------------------------------------------------------
 # ------------------------> core django configurations <------------------------
@@ -246,6 +258,7 @@ LOCALE_PATHS = [
 # be used without reconfiguring the site.
 INTERSECTIONAL_LANGUAGES = get_django_cldr_languages_intersection(LOCALE_PATHS[0])
 LANGUAGES = get_languages_from_locale_subdirectories(LOCALE_PATHS[0])
+FAKER_LOCALES = get_django_faker_languages_intersection(INTERSECTIONAL_LANGUAGES)
 
 TIME_ZONE = "UTC"
 
