@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from faker import Faker
 import random
-
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
@@ -19,7 +19,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         num_editors = options["num"][0]
-        fake = Faker()
 
         existing_users = User.objects.all()
 
@@ -38,18 +37,18 @@ class Command(BaseCommand):
             user.save()
 
         for _ in range(num_editors):
-            user = UserFactory(email=fake.word() + "@example.com")
+            user = UserFactory(email=Faker(random.choice(settings.FAKER_LOCALES)).word() + "@example.com")
             editor = EditorFactory(
                 user=user,
-                real_name=fake.name(),
-                country_of_residence=fake.country(),
-                occupation=fake.job(),
-                affiliation=fake.company(),
+                real_name=Faker(random.choice(settings.FAKER_LOCALES)).name(),
+                country_of_residence=Faker(random.choice(settings.FAKER_LOCALES)).country(),
+                occupation=Faker(random.choice(settings.FAKER_LOCALES)).job(),
+                affiliation=Faker(random.choice(settings.FAKER_LOCALES)).company(),
                 wp_editcount=random.randint(50, 2000),
-                wp_registered=fake.date_time_between(
+                wp_registered=Faker(random.choice(settings.FAKER_LOCALES)).date_time_between(
                     start_date="-10y", end_date="now", tzinfo=None
                 ),
-                contributions=fake.paragraph(nb_sentences=4),
+                contributions=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=4),
             )
 
         # All users who aren't the superuser

@@ -4,6 +4,7 @@ from faker import Faker
 import random
 import string
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
@@ -33,7 +34,6 @@ class Command(BaseCommand):
             "video",
             "multidisciplinary",
         ]
-        fake = Faker()
 
         coordinators = User.objects.filter(groups__name="coordinators")
 
@@ -41,8 +41,8 @@ class Command(BaseCommand):
             partner = PartnerFactory(
                 company_location=random.choice(list(countries)),
                 renewals_available=random.choice([True, False]),
-                short_description=fake.paragraph(nb_sentences=4),
-                send_instructions=fake.paragraph(nb_sentences=2),
+                short_description=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=4),
+                send_instructions=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=2),
                 coordinator=random.choice(coordinators),
                 real_name=self.chance(True, False, 40),
                 country_of_residence=self.chance(True, False, 20),
@@ -75,7 +75,7 @@ class Command(BaseCommand):
         # fields to be set concurrently.
         for registration_partner in random.sample(list(all_partners), 5):
             registration_partner.account_email = True
-            registration_partner.registration_url = fake.uri()
+            registration_partner.registration_url = Faker(random.choice(settings.FAKER_LOCALES)).uri()
             registration_partner.save()
 
         # While most fields can be set at random, we want to make sure we
@@ -111,7 +111,7 @@ class Command(BaseCommand):
 
         # Set 25 random partners to have a long description
         for long_description in random.sample(list(all_partners), 25):
-            long_description.description = fake.paragraph(nb_sentences=10)
+            long_description.description = Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=10)
             long_description.save()
 
         # Set 10 random available partners to be featured
@@ -139,14 +139,14 @@ class Command(BaseCommand):
             for _ in range(3):
                 stream = StreamFactory(
                     partner=partner,
-                    name=fake.sentence(nb_words=3)[:-1],  # [:-1] removes full stop
-                    description=fake.paragraph(nb_sentences=2),
+                    name=Faker(random.choice(settings.FAKER_LOCALES)).sentence(nb_words=3)[:-1],  # [:-1] removes full stop
+                    description=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=2),
                 )
 
         # Set 15 partners to have somewhere between 1 and 5 video tutorial URLs
         for partner in random.sample(list(all_partners), 15):
             for _ in range(random.randint(1, 5)):
-                VideoFactory(partner=partner, tutorial_video_url=fake.url())
+                VideoFactory(partner=partner, tutorial_video_url=Faker(random.choice(settings.FAKER_LOCALES)).url())
 
         # Random number of accounts available for all streams
         all_streams = Stream.objects.all()
@@ -159,7 +159,7 @@ class Command(BaseCommand):
         author_user = random.choice(all_users)
         for _ in range(random.randint(3, 10)):
             suggestion = SuggestionFactory(
-                description=fake.paragraph(nb_sentences=10), author=author_user
+                description=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=10), author=author_user
             )
             suggestion.save()
             suggestion.upvoted_users.add(author_user)
