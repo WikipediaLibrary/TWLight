@@ -39,7 +39,7 @@ class ProxyTestCase(AuthorizationBaseTestCase):
         expected_url = (
             settings.TWLIGHT_EZPROXY_URL
             + "/login?user="
-            + self.editor1.wp_username
+            + quote(self.editor1.wp_username)
             + "&ticket="
             + too_lazy_to_test_ticket
             + "&url="
