@@ -209,7 +209,7 @@ class BaseApplicationForm(forms.Form):
                     self.fields[datum].help_text = _(
                         "Requested by: {partner_list}".format(
                             partner_list=", ".join(user_data[datum])
-                        ).decode("utf-8")
+                        )
                     )
                 user_data_layout.append(datum)
 
