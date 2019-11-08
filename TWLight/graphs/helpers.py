@@ -39,10 +39,10 @@ def get_median(values_list):
         # Mathematically bogus, but will make graph display correctly.
         median = 0
     elif list_len % 2 == 1:
-        median = int(values_list[(list_len - 1) / 2])
+        median = int(values_list[(list_len - 1) // 2])
     else:
         median = int(
-            (values_list[(list_len - 1) / 2] + values_list[1 + (list_len - 1) / 2]) / 2
+            (values_list[(list_len - 1) // 2] + values_list[1 + (list_len - 1) // 2]) // 2
         )
 
     return median

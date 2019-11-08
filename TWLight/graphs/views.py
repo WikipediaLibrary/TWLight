@@ -112,10 +112,8 @@ class DashboardView(TemplateView):
 
         # If we haven't authorized anyone yet, just show 0
         if authorized_users_count:
-            # Have to add float so we don't return an int
-            context["average_authorizations"] = authorizations_count / float(
-                authorized_users_count
-            )
+            # We're using a single slash here because we actually want a float
+            context["average_authorizations"] = authorizations_count / authorized_users_count
         else:
             context["average_authorizations"] = 0
 
