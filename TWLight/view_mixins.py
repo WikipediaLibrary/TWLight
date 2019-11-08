@@ -259,9 +259,9 @@ class ToURequired(object):
             new_url = ParseResult(
                 scheme="",
                 netloc="",
-                path=path,
+                path=str(path),
                 params="",
-                query=next_param,
+                query=str(next_param),
                 fragment="",
             ).geturl()
             return HttpResponseRedirect(new_url)
@@ -296,9 +296,9 @@ class EmailRequired(object):
             new_url = ParseResult(
                 scheme="",
                 netloc="",
-                path=path,
+                path=str(path),
                 params="",
-                query=next_param,
+                query=str(next_param),
                 fragment="",
             ).geturl()
             return HttpResponseRedirect(new_url)
