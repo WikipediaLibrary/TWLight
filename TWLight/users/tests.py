@@ -12,7 +12,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase, Client, RequestFactory
 from django.utils.translation import get_language
-
+from django.utils.html import escape
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
@@ -229,12 +229,12 @@ class ViewsTestCase(TestCase):
         self.assertEqual(
             set(response.context_data["object_list"]), {app1, app2, app3, app4}
         )
-        content = response.render().content.decode(utf-8)
+        content = response.render().content.decode('utf-8')
 
-        self.assertIn(app1.partner.company_name, content.decode("utf-8"))
-        self.assertIn(app2.partner.company_name, content.decode("utf-8"))
-        self.assertIn(app3.partner.company_name, content.decode("utf-8"))
-        self.assertIn(app4.partner.company_name, content.decode("utf-8"))
+        self.assertIn(escape(app1.partner.company_name), content)
+        self.assertIn(escape(app2.partner.company_name), content)
+        self.assertIn(escape(app3.partner.company_name), content)
+        self.assertIn(escape(app4.partner.company_name), content)
 
         # We can't use assertTemplateUsed with RequestFactory (only with
         # Client), and testing that the rendered content is equal to an
