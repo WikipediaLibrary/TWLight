@@ -3,9 +3,7 @@ from datetime import date, timedelta
 from itertools import chain
 from unittest.mock import patch
 import reversion
-import random
 from urllib.parse import urlparse
-from faker import Faker
 
 from django import forms
 from django_comments import get_form_target
@@ -2340,7 +2338,6 @@ class ApplicationModelTest(TestCase):
 
 class EvaluateApplicationTest(TestCase):
     def setUp(self):
-        fake = Faker()
 
         super(EvaluateApplicationTest, self).setUp()
         editor = EditorFactory()

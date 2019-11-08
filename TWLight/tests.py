@@ -1,7 +1,10 @@
+import random
+
 from unittest.mock import patch
 from datetime import date, timedelta
 from faker import Faker
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.core import mail
 from django.core.exceptions import PermissionDenied
 from django.core.management import call_command
@@ -33,7 +36,6 @@ from .view_mixins import (
 
 
 coordinators = get_coordinators()
-fake = Faker()
 
 
 class ObjGet(object):
@@ -458,7 +460,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
 
         self.editor1 = EditorFactory()
-        self.editor1.user.email = fake.email()
+        self.editor1.user.email = Faker(random.choice(settings.FAKER_LOCALES)).email()
         self.editor1.user.save()
         self.editor2 = EditorFactory()
         self.editor3 = EditorFactory()
