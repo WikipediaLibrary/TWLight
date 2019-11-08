@@ -58,7 +58,7 @@ class CoordinatorOrSelf(object):
         obj_coordinator_test = False  # Set default.
 
         # If the user is a coordinator run more tests
-        if user in coordinators.user_set.all():
+        if coordinators and user in coordinators.user_set.all():
             try:
                 obj = self.get_object()
                 if obj:
