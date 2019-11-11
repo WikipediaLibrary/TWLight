@@ -7,7 +7,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-07 15:15+0000\n"
-"PO-Revision-Date: 2019-11-07 15:36:14+0000\n"
+"PO-Revision-Date: 2019-11-11 16:18:58+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2392,9 +2392,8 @@ msgstr "핸드셰이커를 찾지 못했습니다."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/authorization.py:389
-#, fuzzy
 msgid "No session token."
-msgstr "요청 토큰이 없습니다."
+msgstr "세션 토큰이 없습니다."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/authorization.py:399

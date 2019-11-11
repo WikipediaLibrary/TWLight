@@ -8,13 +8,14 @@
 # Author: TmY e12
 # Author: ToprakM
 # Author: UY Scuti
+# Author: Vito Genovese
 # Author: Ömer faruk çakmak
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-07 15:16+0000\n"
-"PO-Revision-Date: 2019-11-07 15:36:18+0000\n"
+"PO-Revision-Date: 2019-11-11 16:19:04+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1585,7 +1586,7 @@ msgstr "Video"
 #. Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:271
 msgid "Language(s)"
-msgstr "Dil(ler)"
+msgstr "Dil"
 
 #. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:281
@@ -1796,14 +1797,14 @@ msgstr "Hiçbir iş ortağı belirtilen kriterleri karşılamıyor."
 #: TWLight/resources/templates/resources/partner_tile.html:26
 #: TWLight/users/templates/users/collection_tile.html:41
 #: TWLight/users/templates/users/collection_tile.html:54
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(partner)s signup page"
-msgstr "{{ partner }} oturum açma sayfasına bağlantı"
+msgstr "%(partner)s oturum açma sayfasına bağlantı"
 
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #: TWLight/resources/templates/resources/partner_tile.html:61
 msgid "Language(s) not known"
-msgstr "Dil(ler) bilinmiyor"
+msgstr "Dil bilinmiyor"
 
 #: TWLight/resources/templates/resources/partner_users.html:7
 #, python-format
@@ -1826,7 +1827,7 @@ msgstr "Başvuru onaylandı"
 #: TWLight/resources/templates/resources/partner_users.html:33
 #: TWLight/resources/templates/resources/partner_users.html:84
 msgid "Renewal?"
-msgstr "Yenileme?"
+msgstr "Yenilensin mi?"
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for.
 #: TWLight/resources/templates/resources/partner_users.html:36
@@ -2028,7 +2029,7 @@ msgstr "Başka bir kütüphane veya kurum aracılığıyla başvurduğunuz kayna
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:82
 msgid "If you don't quite meet the experience requirements but think you would still be a strong candidate for access, feel free to apply and you may still be considered."
-msgstr "Deneyim şartlarını tam olarak karşılamıyorsanız ancak hâlâ erişim için güçlü bir aday olacağınızı düşünüyorsanız başvuru yapmaktan çekinmeyin ve dikkate alınabilirsiniz."
+msgstr "Deneyim şartlarını tam olarak karşılamıyorsanız ancak hâlâ erişim için güçlü bir aday olacağınızı düşünüyorsanız başvuru yapın ve dikkate alınabilirsiniz."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:90
@@ -2087,9 +2088,8 @@ msgstr "Bu anlaşmalara saygı duymak, toplum için mevcut ortaklıkları büyü
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:142
-#, fuzzy
 msgid "EZProxy"
-msgstr "Proxy"
+msgstr "EZProxy"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:146
@@ -2144,9 +2144,8 @@ msgstr "Yönetici"
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their collection.
 #: TWLight/templates/base.html:110
-#, fuzzy
 msgid "Collection"
-msgstr "Koleksiyonlar"
+msgstr "Koleksiyon"
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications.
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
@@ -2528,7 +2527,7 @@ msgstr "Son girişinde bu kullanıcı kullanım koşullarındaki kriterleri kar�
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
 #: TWLight/users/models.py:149
 msgid "Wiki contributions, as entered by user"
-msgstr "Kullanıcı tarafından yapılan Viki katkıları"
+msgstr "Kullanıcı tarafından yapılan viki katkıları"
 
 #: TWLight/users/models.py:374
 #, python-brace-format
@@ -2637,9 +2636,8 @@ msgstr "Erişim yetkiniz olan ortak bir ortak listesi"
 #: TWLight/users/templates/users/editor_detail.html:33
 #: TWLight/users/templates/users/my_applications.html:7
 #: TWLight/users/templates/users/my_collection.html:9
-#, fuzzy
 msgid "Your applications"
-msgstr "Tüm başvurular"
+msgstr "Başvurularınız"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:37
@@ -2732,7 +2730,7 @@ msgstr "Meta-Wiki kaydı veya SUL birleştirme tarihi *"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:114
 msgid "Wikipedia user ID *"
-msgstr "Vikipedi kullanıcı ID *"
+msgstr "Vikipedi kullanıcı kimliği *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:130
@@ -2790,7 +2788,7 @@ msgstr "Proxy/paket erişimi"
 #. Translators: On the collection page (manual access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_collection.html:28
 msgid "You have no active manual access collections."
-msgstr "Etkin bir manuel erişim koleksiyonunuz yok."
+msgstr "Etkin bir manüel erişim koleksiyonunuz yok."
 
 #. Translators: Heading for the section which lists all of the user's expired collection.
 #: TWLight/users/templates/users/my_collection.html:34
@@ -2824,7 +2822,7 @@ msgstr "Veri işlemeyi kısıtlayın"
 #. Translators: This message is displayed on the page where users can request we stop processing their data.
 #: TWLight/users/templates/users/restrict_data.html:11
 msgid "Checking this box and clicking “Restrict” will pause all processing of the data you have entered into this website. You will not be able to apply for access to resources, your applications will not be further processed, and none of your data will be altered, until you return to this page and uncheck the box. This is not the same as deleting your data."
-msgstr "Bu kutuyu işaretleyip “Restrict/Kısıtlama” butonuna tıklamak, bu web sitesine girdiğiniz verilerin tüm işlemlerini duraklatacaktır. Kaynaklara erişim için başvuru yapamazsınız, başvurunuz daha fazla işlenmeyecek ve bu sayfaya dönene ve kutunun işaretini kaldırana kadar verilerinizden hiçbiri değiştirilmeyecektir. Bu, verilerinizi silmekle aynı şey değildir."
+msgstr "Bu kutuyu işaretleyip “Kısıtlama” butonuna tıklamak, bu web sitesine girdiğiniz verilerin tüm işlemlerini duraklatacaktır. Kaynaklara erişim için başvuru yapamazsınız, başvurunuz daha fazla işlenmeyecek ve bu sayfaya dönene ve kutunun işaretini kaldırana kadar verilerinizden hiçbiri değiştirilmeyecektir. Bu, verilerinizi silmekle aynı şey değildir."
 
 #. Translators: This warning message is shown to coordinators who view the data restriction page.
 #: TWLight/users/templates/users/restrict_data.html:22

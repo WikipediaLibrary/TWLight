@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-07 15:15+0000\n"
-"PO-Revision-Date: 2019-11-07 15:36:14+0000\n"
+"PO-Revision-Date: 2019-11-11 16:18:59+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -314,7 +314,7 @@ msgstr ""
 #. Translators: This labels the section of an application showing the date the application was submitted.
 #: TWLight/applications/templates/applications/application_evaluation.html:41
 msgid "Date of application"
-msgstr ""
+msgstr "Датум на аплицирањето"
 
 #. Translators: This labels the section of an application showing how many days it has been since the application was opened.
 #: TWLight/applications/templates/applications/application_evaluation.html:50
@@ -708,7 +708,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/send_partner.html:148
 #: TWLight/applications/templates/applications/send_partner.html:188
 msgid "Mark as sent"
-msgstr ""
+msgstr "Означи како испратено"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:153
@@ -839,9 +839,8 @@ msgstr ""
 
 #. Translators: This labels a textfield where users can enter their email ID.
 #: TWLight/emails/forms.py:17
-#, fuzzy
 msgid "Your email"
-msgstr "Е-пошта на сметката"
+msgstr "Ваша е-пошта"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:19
@@ -953,9 +952,8 @@ msgstr ""
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:39
-#, fuzzy
 msgid "Contact info"
-msgstr "Контакт"
+msgstr "Контактни информации"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:43
@@ -1150,7 +1148,7 @@ msgstr ""
 #. Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
 #: TWLight/resources/admin.py:134
 msgid "Uploaded file is too large."
-msgstr ""
+msgstr "Подигнатата податотека е преголема."
 
 #. Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
 #: TWLight/resources/admin.py:152
@@ -2266,7 +2264,7 @@ msgstr ""
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
 #: TWLight/templates/dashboard.html:92
 msgid "Page views (staff only)"
-msgstr ""
+msgstr "Посети на страницата (само за персоналот)"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the most viewed pages on the site.
 #: TWLight/templates/dashboard.html:98
@@ -2376,7 +2374,7 @@ msgstr "Смени лозинка"
 #: TWLight/templates/registration/password_reset_form.html:7
 #: TWLight/templates/registration/password_reset_form.html:16
 msgid "Reset password"
-msgstr ""
+msgstr "Исчисти лозинка"
 
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
 #: TWLight/templates/registration/password_reset_form.html:10
@@ -2389,7 +2387,7 @@ msgstr "корисник"
 
 #: TWLight/users/admin.py:58
 msgid "authorizer"
-msgstr ""
+msgstr "овластувач"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/authorization.py:225
@@ -2463,7 +2461,7 @@ msgstr ""
 #. Translators: Users must click this button when registering to agree to the website terms of use.
 #: TWLight/users/forms.py:113
 msgid "I agree with the terms of use"
-msgstr ""
+msgstr "Се согласувам со условите на употреба"
 
 #. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
 #: TWLight/users/forms.py:122
@@ -2543,7 +2541,7 @@ msgstr ""
 #: TWLight/users/models.py:374
 #, python-brace-format
 msgid "{wp_username}"
-msgstr ""
+msgstr "{wp_username}"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
 #: TWLight/users/models.py:403
@@ -2657,12 +2655,12 @@ msgstr ""
 #. Translators: This is the heading for user information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:44
 msgid "User information"
-msgstr ""
+msgstr "Кориснички информации"
 
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:46
 msgid "Editor data"
-msgstr ""
+msgstr "Податоци за уредникот"
 
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
 #: TWLight/users/templates/users/editor_detail.html:56
@@ -2683,17 +2681,17 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
 #: TWLight/users/templates/users/editor_detail_data.html:17
 msgid "Username *"
-msgstr ""
+msgstr "Корисничко име *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/)
 #: TWLight/users/templates/users/editor_detail_data.html:24
 msgid "CentralAuth"
-msgstr ""
+msgstr "CentralAuth"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's description of their Wikipedia edits.
 #: TWLight/users/templates/users/editor_detail_data.html:34
 msgid "Contributions"
-msgstr ""
+msgstr "Придонеси"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #: TWLight/users/templates/users/editor_detail_data.html:43
@@ -2725,7 +2723,7 @@ msgstr "%(username)s може сепак да е подобен за дозво�
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:85
 msgid "Global edit count *"
-msgstr ""
+msgstr "Глобален број на уредувања *"
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
 #: TWLight/users/templates/users/editor_detail_data.html:92

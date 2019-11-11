@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-07 15:15+0000\n"
-"PO-Revision-Date: 2019-11-07 15:36:12+0000\n"
+"PO-Revision-Date: 2019-11-11 16:18:56+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -2404,9 +2404,8 @@ msgstr "Impossible de trouver le protocole"
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/authorization.py:389
-#, fuzzy
 msgid "No session token."
-msgstr "Aucun jeton de demande."
+msgstr "Aucun jeton de session."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/authorization.py:399

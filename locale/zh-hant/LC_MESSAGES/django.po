@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-07 15:16+0000\n"
-"PO-Revision-Date: 2019-11-07 15:36:20+0000\n"
+"PO-Revision-Date: 2019-11-11 16:19:06+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -372,9 +372,8 @@ msgstr "在處理前，請要求申請人在個人配置添加他們所居的國
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:119
-#, fuzzy
 msgid "Accounts available"
-msgstr "帳號可利用性"
+msgstr "可用帳號"
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:129
