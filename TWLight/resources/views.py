@@ -15,6 +15,7 @@ from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
 from django.shortcuts import get_object_or_404
 
+from TWLight.applications.helpers import count_active_authorizations
 from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
                                     get_application_status_data,
@@ -66,22 +67,14 @@ class PartnersDetailView(DetailView):
                     "are a staff member, but it is not visible to non-staff "
                     "users."))
 
-        all_auths_partner = Authorization.objects.filter(partner=partner)
-        context['total_accounts_distributed_partner'] = 0
-        for each_auth in all_auths_partner:
-            if each_auth.is_valid:
-                context['total_accounts_distributed_partner'] += 1
+        context['total_accounts_distributed_partner'] = count_active_authorizations(partner)
 
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
             context['total_accounts_distributed_streams'] = {}
 
             for stream in partner_streams:
-                context['total_accounts_distributed_streams'][stream] = 0
-                all_auths_stream = Authorization.objects.filter(stream=stream)
-                for each_auth in all_auths_stream:
-                    if each_auth.is_valid:
-                        context['total_accounts_distributed_streams'][stream] += 1
+                context['total_accounts_distributed_streams'][stream] = count_active_authorizations(partner, stream)
         else:
             context['total_accounts_distributed_streams'] = None
 
