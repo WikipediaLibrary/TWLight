@@ -43,7 +43,8 @@ from .helpers import (USER_FORM_FIELDS,
                       OCCUPATION,
                       AFFILIATION,
                       ACCOUNT_EMAIL,
-                      get_output_for_application)
+                      get_output_for_application,
+                      get_active_authorizations)
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
@@ -2410,10 +2411,10 @@ class EvaluateApplicationTest(TestCase):
 
 
     def test_sets_status_approved_for_proxy_partner_with_authorizations(self):
-        '''
+        """
         We test different behaviours of applications/partners when we approve
         applications for proxy partners by tweaking various parameters.
-        '''
+        """
         factory = RequestFactory()
 
         # Accounts are available, at least one inactive authorization, not waitlisted - approval works
@@ -2484,6 +2485,38 @@ class EvaluateApplicationTest(TestCase):
 
         self.partner.refresh_from_db()
         self.assertEqual(self.partner.status, Partner.WAITLIST)
+
+    def test_get_active_authorizations(self):
+        for _ in range(5):
+            Authorization(
+                user=EditorFactory().user,
+                partner=self.partner,
+                date_expires=date.today() + timedelta(days=random.randint(0, 5))
+            ).save()
+            Authorization(
+                user=EditorFactory().user,
+                partner=self.partner,
+                date_expires=date.today() - timedelta(days=random.randint(1, 5))
+            ).save()
+        total_active_authorizations = get_active_authorizations(self.partner.pk)
+        self.assertEqual(total_active_authorizations, 5)
+
+        stream = StreamFactory(partner=self.partner)
+        for _ in range(5):
+            Authorization(
+                user=EditorFactory().user,
+                partner=self.partner,
+                stream=stream,
+                date_expires=date.today() + timedelta(days=random.randint(0, 5))
+            ).save()
+            Authorization(
+                user=EditorFactory().user,
+                partner=self.partner,
+                stream=stream,
+                date_expires=date.today() - timedelta(days=random.randint(1, 5))
+            ).save()
+        total_active_authorizations = get_active_authorizations(self.partner.pk, stream.pk)
+        self.assertEqual(total_active_authorizations, 5)
 
     def test_sets_days_open(self):
         factory = RequestFactory()
