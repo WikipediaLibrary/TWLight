@@ -14,8 +14,8 @@ class Command(BaseCommand):
         all_partners = Partner.objects.filter(authorization_method=Partner.PROXY, status=Partner.WAITLIST).exclude(specific_stream=True, accounts_available__isnull=True)
         
         for each_partner in all_partners:
-            active_authorizations = count_valid_authorizations(each_partner.pk)
-            total_accounts_available_for_distribution = each_partner.accounts_available - active_authorizations
+            valid_authorizations = count_valid_authorizations(each_partner.pk)
+            total_accounts_available_for_distribution = each_partner.accounts_available - valid_authorizations
             
             if total_accounts_available_for_distribution > 0:
                 each_partner.status = Partner.AVAILABLE

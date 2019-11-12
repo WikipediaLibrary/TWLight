@@ -2516,8 +2516,8 @@ class EvaluateApplicationTest(TestCase):
             partner=self.partner,
             date_expires=date.today() - timedelta(days=random.randint(1, 5))
         ).save()
-        total_active_authorizations = count_valid_authorizations(self.partner)
-        self.assertEqual(total_active_authorizations, 6)
+        total_valid_authorizations = count_valid_authorizations(self.partner)
+        self.assertEqual(total_valid_authorizations, 6)
 
         stream = StreamFactory(partner=self.partner)
         for _ in range(5):
@@ -2537,8 +2537,8 @@ class EvaluateApplicationTest(TestCase):
                 authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5))
             ).save()
-        total_active_authorizations = count_valid_authorizations(self.partner, stream)
-        self.assertEqual(total_active_authorizations, 5)
+        total_valid_authorizations = count_valid_authorizations(self.partner, stream)
+        self.assertEqual(total_valid_authorizations, 5)
 
         # Filter logic in .helpers.get_valid_authorizations and
         # TWLight.users.models.Authorization.is_valid must be in sync.
