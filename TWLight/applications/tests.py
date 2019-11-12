@@ -44,7 +44,7 @@ from .helpers import (USER_FORM_FIELDS,
                       AFFILIATION,
                       ACCOUNT_EMAIL,
                       get_output_for_application,
-                      get_active_authorizations)
+                      count_active_authorizations)
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
@@ -2486,20 +2486,38 @@ class EvaluateApplicationTest(TestCase):
         self.partner.refresh_from_db()
         self.assertEqual(self.partner.status, Partner.WAITLIST)
 
-    def test_get_active_authorizations(self):
+    def test_count_active_authorizations(self):
         for _ in range(5):
+            # active
             Authorization(
                 user=EditorFactory().user,
                 partner=self.partner,
+                authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5))
             ).save()
+            # inactive
             Authorization(
                 user=EditorFactory().user,
                 partner=self.partner,
+                authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5))
             ).save()
-        total_active_authorizations = get_active_authorizations(self.partner.pk)
-        self.assertEqual(total_active_authorizations, 5)
+
+        # no expiry date; yet still, valid
+        Authorization(
+            user=EditorFactory().user,
+            authorizer=self.coordinator,
+            partner=self.partner
+        ).save()
+
+        # invalid (no authorizer)
+        Authorization(
+            user=EditorFactory().user,
+            partner=self.partner,
+            date_expires=date.today() - timedelta(days=random.randint(1, 5))
+        ).save()
+        total_active_authorizations = count_active_authorizations(self.partner)
+        self.assertEqual(total_active_authorizations, 6)
 
         stream = StreamFactory(partner=self.partner)
         for _ in range(5):
@@ -2507,16 +2525,32 @@ class EvaluateApplicationTest(TestCase):
                 user=EditorFactory().user,
                 partner=self.partner,
                 stream=stream,
+                authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5))
             ).save()
             Authorization(
                 user=EditorFactory().user,
                 partner=self.partner,
                 stream=stream,
+                authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5))
             ).save()
-        total_active_authorizations = get_active_authorizations(self.partner.pk, stream.pk)
+        total_active_authorizations = count_active_authorizations(self.partner, stream)
         self.assertEqual(total_active_authorizations, 5)
+
+        # Filter logic in .helpers.get_active_authorizations and
+        # TWLight.users.models.Authorization.is_valid must be in sync.
+        # We test that here.
+        all_authorizations_using_is_valid = Authorization.objects.filter(partner=self.partner)
+        total_active_authorizations_using_helper = count_active_authorizations(self.partner)
+
+        total_active_authorizations_using_is_valid = 0
+        for each_auth in all_authorizations_using_is_valid:
+            if each_auth.is_valid:
+                total_active_authorizations_using_is_valid += 1
+
+        self.assertEqual(total_active_authorizations_using_is_valid, total_active_authorizations_using_helper)
+
 
     def test_sets_days_open(self):
         factory = RequestFactory()
