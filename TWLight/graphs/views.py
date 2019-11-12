@@ -1,10 +1,10 @@
-import csv
+from __future__ import division
 
+import csv
 import itertools
 from datetime import date
 # The django-request analytics package, NOT the python URL library requests!
 from request.models import Request
-import logging
 
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve
@@ -26,9 +26,6 @@ from .helpers import (get_application_status_data,
                       get_median_decision_time,
                       get_user_language_data,
                       PYTHON)
-
-
-logger = logging.getLogger(__name__)
 
 
 class DashboardView(TemplateView):
@@ -172,10 +169,10 @@ class DashboardView(TemplateView):
         context['user_language_data'] = get_user_language_data(
             UserProfile.objects.all())
 
-        # Total authorizations and of that, authorizations renewed (proxy partners only)
+        # Renewal rates for proxy partners -------------------------------------
 
         proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
-        context['proxy_auth_data'] = get_data_count_by_month(proxy_auth)
+        proxy_auth_count = proxy_auth.count()
 
         renewed_auth_ids = []
         for auth in proxy_auth:
@@ -183,9 +180,10 @@ class DashboardView(TemplateView):
             if latest_app.parent:
                 renewed_auth_ids.append(auth.id)
 
-        context['renewed_auth_data'] = get_data_count_by_month(
-            proxy_auth.filter(id__in=renewed_auth_ids)
-        )
+        renewed_auth_count = proxy_auth.filter(id__in=renewed_auth_ids).count()
+        if proxy_auth_count:
+            context['renewal_percentage'] = round(renewed_auth_count/proxy_auth_count*100, 2)
+
         return context
 
 
@@ -234,7 +232,7 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         for row in data:
             writer.writerow(row)
 
-class CSVProxyAuthAndRenewals(_CSVDownloadView):
+class CSVProxyAuthRenewalRate(_CSVDownloadView):
     def _write_data(self, response):
         proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
         renewed_auth_ids = []
@@ -249,14 +247,18 @@ class CSVProxyAuthAndRenewals(_CSVDownloadView):
         renewed_auth_data = get_data_count_by_month(renewed_auth, data_format=PYTHON)
         if renewed_auth_data is not None:
             for each_proxy_auth, each_renewed_auth in itertools.izip_longest(proxy_auth_data, renewed_auth_data):
-                each_proxy_auth.append(each_renewed_auth[1])
+                each_proxy_auth.extend([each_renewed_auth[1],
+                                        str(round(each_renewed_auth[1] / each_proxy_auth[1] * 100, 2)) + '%'])
+
         writer = csv.writer(response)
         # Translators: This is the heading of a data file, for a column containing date data.
         writer.writerow([_('Date').encode('utf-8'),
                          # Translators: This is the heading of a data file. 'Number of proxy authorizations' refers to the total number of authorizations for all proxy partners.
                          _('Number of proxy authorizations').encode('utf-8'),
                          # Translators: This is the heading of a data file. 'Number of renewed proxy authorizations' refers to the total number of authorizations for all proxy partners that were renewed.
-                         _('Number of renewed proxy authorizations').encode('utf-8')])
+                         _('Number of renewed proxy authorizations').encode('utf-8'),
+                         # Translators: This is the heading of a data file. 'Renewal percentage' refers to the percentage of authorizations renewed of all proxy authroizations.
+                         _('Renewal percentage').encode('utf-8')])
 
         for row in proxy_auth_data:
             writer.writerow(row)
