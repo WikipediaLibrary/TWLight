@@ -66,22 +66,22 @@ class PartnersDetailView(DetailView):
                     "are a staff member, but it is not visible to non-staff "
                     "users."))
 
-        today = date.today()
-        context['total_accounts_distributed_partner'] = Authorization.objects.filter(
-            Q(date_expires__gte=today) | Q(date_expires=None),
-            partner=partner
-        ).count()
+        all_auths_partner = Authorization.objects.filter(partner=partner)
+        context['total_accounts_distributed_partner'] = 0
+        for each_auth in all_auths_partner:
+            if each_auth.is_valid:
+                context['total_accounts_distributed_partner'] += 1
 
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
             context['total_accounts_distributed_streams'] = {}
 
             for stream in partner_streams:
-                active_authorizations = Authorization.objects.filter(
-                    Q(date_expires__gte=today) | Q(date_expires=None),
-                    stream=stream,
-                ).count()
-                context['total_accounts_distributed_streams'][stream] = active_authorizations
+                context['total_accounts_distributed_streams'][stream] = 0
+                all_auths_stream = Authorization.objects.filter(stream=stream)
+                for each_auth in all_auths_stream:
+                    if each_auth.is_valid:
+                        context['total_accounts_distributed_streams'][stream] += 1
         else:
             context['total_accounts_distributed_streams'] = None
 
