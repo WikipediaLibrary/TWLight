@@ -207,9 +207,17 @@ def count_active_authorizations(partner_pk, stream_pk=None):
     get_active_authorizations() method above.
     """
     if stream_pk:
-        return get_active_authorizations(partner_pk, stream_pk).count()
+        active_authorizations = get_active_authorizations(partner_pk, stream_pk)
+        if active_authorizations is None:
+            return 0
+        else:
+            return active_authorizations.count()
     else:
-        return get_active_authorizations(partner_pk).count()
+        active_authorizations = get_active_authorizations(partner_pk)
+        if active_authorizations is None:
+            return 0
+        else:
+            return active_authorizations.count()
 
 
 def get_accounts_available(app):
