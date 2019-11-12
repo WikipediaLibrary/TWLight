@@ -6,7 +6,6 @@ import time
 import datetime
 
 from django.contrib.auth.models import User
-from django.core.exceptions import FieldError
 from django.utils import timezone
 
 from TWLight.applications.models import Application
