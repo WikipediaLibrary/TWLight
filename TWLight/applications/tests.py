@@ -2486,16 +2486,16 @@ class EvaluateApplicationTest(TestCase):
         self.partner.refresh_from_db()
         self.assertEqual(self.partner.status, Partner.WAITLIST)
 
-    def test_count_active_authorizations(self):
+    def test_count_valid_authorizations(self):
         for _ in range(5):
-            # active
+            # valid
             Authorization(
                 user=EditorFactory().user,
                 partner=self.partner,
                 authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5))
             ).save()
-            # inactive
+            # invalid
             Authorization(
                 user=EditorFactory().user,
                 partner=self.partner,
@@ -2521,6 +2521,7 @@ class EvaluateApplicationTest(TestCase):
 
         stream = StreamFactory(partner=self.partner)
         for _ in range(5):
+            # valid
             Authorization(
                 user=EditorFactory().user,
                 partner=self.partner,
@@ -2528,6 +2529,7 @@ class EvaluateApplicationTest(TestCase):
                 authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5))
             ).save()
+            # valid
             Authorization(
                 user=EditorFactory().user,
                 partner=self.partner,
@@ -2538,18 +2540,18 @@ class EvaluateApplicationTest(TestCase):
         total_active_authorizations = count_valid_authorizations(self.partner, stream)
         self.assertEqual(total_active_authorizations, 5)
 
-        # Filter logic in .helpers.get_active_authorizations and
+        # Filter logic in .helpers.get_valid_authorizations and
         # TWLight.users.models.Authorization.is_valid must be in sync.
         # We test that here.
         all_authorizations_using_is_valid = Authorization.objects.filter(partner=self.partner)
-        total_active_authorizations_using_helper = count_valid_authorizations(self.partner)
+        total_valid_authorizations_using_helper = count_valid_authorizations(self.partner)
 
-        total_active_authorizations_using_is_valid = 0
+        total_valid_authorizations_using_is_valid = 0
         for each_auth in all_authorizations_using_is_valid:
             if each_auth.is_valid:
-                total_active_authorizations_using_is_valid += 1
+                total_valid_authorizations_using_is_valid += 1
 
-        self.assertEqual(total_active_authorizations_using_is_valid, total_active_authorizations_using_helper)
+        self.assertEqual(total_valid_authorizations_using_is_valid, total_valid_authorizations_using_helper)
 
 
     def test_sets_days_open(self):
