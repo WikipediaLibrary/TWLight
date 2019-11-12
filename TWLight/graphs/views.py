@@ -25,6 +25,7 @@ from .helpers import (get_application_status_data,
                       get_time_open_histogram,
                       get_median_decision_time,
                       get_user_language_data,
+                      get_proxy_and_renewed_authorizations,
                       PYTHON)
 
 
@@ -171,16 +172,10 @@ class DashboardView(TemplateView):
 
         # Renewal rates for proxy partners -------------------------------------
 
-        proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
+        proxy_auth, renewed_auth = get_proxy_and_renewed_authorizations()
         proxy_auth_count = proxy_auth.count()
+        renewed_auth_count = renewed_auth.count()
 
-        renewed_auth_ids = []
-        for auth in proxy_auth:
-            latest_app = auth.get_latest_app()
-            if latest_app.parent:
-                renewed_auth_ids.append(auth.id)
-
-        renewed_auth_count = proxy_auth.filter(id__in=renewed_auth_ids).count()
         if proxy_auth_count:
             context['renewal_percentage'] = round(renewed_auth_count/proxy_auth_count*100, 2)
 
@@ -234,14 +229,7 @@ class CSVAppTimeHistogram(_CSVDownloadView):
 
 class CSVProxyAuthRenewalRate(_CSVDownloadView):
     def _write_data(self, response):
-        proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
-        renewed_auth_ids = []
-        for auth in proxy_auth:
-            latest_app = auth.get_latest_app()
-            if latest_app.parent:
-                renewed_auth_ids.append(auth.id)
-
-        renewed_auth = proxy_auth.filter(id__in=renewed_auth_ids)
+        proxy_auth, renewed_auth = get_proxy_and_renewed_authorizations()
 
         proxy_auth_data = get_data_count_by_month(proxy_auth, data_format=PYTHON)
         renewed_auth_data = get_data_count_by_month(renewed_auth, data_format=PYTHON)

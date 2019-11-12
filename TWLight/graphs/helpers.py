@@ -10,6 +10,8 @@ from django.core.exceptions import FieldError
 from django.utils import timezone
 
 from TWLight.applications.models import Application
+from TWLight.resources.models import Partner
+from TWLight.users.models import Authorization
 
 logger = logging.getLogger(__name__)
 
@@ -274,3 +276,16 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
         return json.dumps(data_series)
     else:
         return data_series
+
+
+def get_proxy_and_renewed_authorizations():
+    proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
+
+    renewed_auth_ids = []
+    for auth in proxy_auth:
+        latest_app = auth.get_latest_app()
+        if latest_app.parent:
+            renewed_auth_ids.append(auth.id)
+
+    renewed_auth = proxy_auth.filter(id__in=renewed_auth_ids)
+    return proxy_auth, renewed_auth
