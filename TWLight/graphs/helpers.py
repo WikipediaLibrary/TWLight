@@ -49,18 +49,16 @@ def get_median(values_list):
 def get_earliest_creation_date(queryset):
     # Some imported applications had no date and were given
     # creation dates of Jan 1, 1970. This screws up the graphs.
-    # Additionally, Authrorization objects don't have date_created
-    # rather date_authorized; the try block looks out for FieldErrors
-    # when there's no date_created.
     if queryset:
-        try:
+        # Authorization creation date field is named 'date_authorized'
+        if queryset.model.__name__ is 'Authorization':
             earliest_date = queryset.exclude(
-                date_created=datetime.date(1970,1,1)).earliest(
-                    'date_created').date_created
-        except FieldError:
-            earliest_date = queryset.exclude(
-                date_authorized=datetime.date(1970,1,1)).earliest(
+                date_authorized=datetime.date(1970, 1, 1)).earliest(
                     'date_authorized').date_authorized
+        else:
+            earliest_date = queryset.exclude(
+                date_created=datetime.date(1970, 1, 1)).earliest(
+                    'date_created').date_created
     else:
         earliest_date = None
 
@@ -89,10 +87,11 @@ def get_data_count_by_month(queryset, data_format=JSON):
             else:
                 timestamp = current_date
 
-            try:
-                num_objs = queryset.filter(date_created__lte=current_date).count()
-            except FieldError:
+            # Authorization creation date field is named 'date_authorized'
+            if queryset.model.__name__ is 'Authorization':
                 num_objs = queryset.filter(date_authorized__lte=current_date).count()
+            else:
+                num_objs = queryset.filter(date_created__lte=current_date).count()
 
             data_series.append([timestamp, num_objs])
             current_date -= relativedelta.relativedelta(months=1)
