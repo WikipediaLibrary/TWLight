@@ -1,13 +1,9 @@
-from datetime import date
-
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.db.models import Count, Q
+from django.db.models import Count
 from django.http import Http404, HttpResponseRedirect
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, View, RedirectView
@@ -15,12 +11,9 @@ from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
 from django.shortcuts import get_object_or_404
 
-from TWLight.applications.helpers import count_active_authorizations
+from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
 from TWLight.graphs.helpers import (get_median,
-                                    get_application_status_data,
-                                    get_data_count_by_month,
-                                    get_users_by_partner_by_month,
                                     get_earliest_creation_date)
 from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
@@ -48,7 +41,6 @@ class PartnersFilterView(FilterView):
             return Partner.objects.order_by('company_name')
 
 
-
 class PartnersDetailView(DetailView):
     model = Partner
 
@@ -67,14 +59,14 @@ class PartnersDetailView(DetailView):
                     "are a staff member, but it is not visible to non-staff "
                     "users."))
 
-        context['total_accounts_distributed_partner'] = count_active_authorizations(partner)
+        context['total_accounts_distributed_partner'] = count_valid_authorizations(partner)
 
         partner_streams = Stream.objects.filter(partner=partner)
         if partner_streams.count() > 0:
             context['total_accounts_distributed_streams'] = {}
 
             for stream in partner_streams:
-                context['total_accounts_distributed_streams'][stream] = count_active_authorizations(partner, stream)
+                context['total_accounts_distributed_streams'][stream] = count_valid_authorizations(partner, stream)
         else:
             context['total_accounts_distributed_streams'] = None
 

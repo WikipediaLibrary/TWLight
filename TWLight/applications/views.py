@@ -47,7 +47,7 @@ from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
                       PARTNER_FORM_BASE_FIELDS,
                       get_output_for_application,
-                      count_active_authorizations,
+                      count_valid_authorizations,
                       get_accounts_available,
                       is_proxy_and_application_approved)
 from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
@@ -909,10 +909,10 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
             total_accounts_available_for_distribution = None
             if total_accounts_available_per_stream is not None:
-                active_authorizations = count_active_authorizations(info['partner_pk'], stream_pk)
+                active_authorizations = count_valid_authorizations(info['partner_pk'], stream_pk)
                 total_accounts_available_for_distribution = total_accounts_available_per_stream - active_authorizations
             elif total_accounts_available_per_partner is not None:
-                active_authorizations = count_active_authorizations(info['partner_pk'])
+                active_authorizations = count_valid_authorizations(info['partner_pk'])
                 total_accounts_available_for_distribution = total_accounts_available_per_partner - active_authorizations
 
             if total_accounts_available_for_distribution is None:
@@ -929,7 +929,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         for partner_pk, app_count in applications_per_partner.iteritems():
             total_accounts_available = Partner.objects.filter(pk=partner_pk).values('accounts_available')[0]['accounts_available']
             if total_accounts_available is not None:
-                active_authorizations = count_active_authorizations(partner_pk)
+                active_authorizations = count_valid_authorizations(partner_pk)
                 total_accounts_available_for_distribution = total_accounts_available - active_authorizations
                 if app_count > total_accounts_available_for_distribution:
                     partners_distribution_flag[partner_pk] = False

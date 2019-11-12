@@ -44,7 +44,7 @@ from .helpers import (USER_FORM_FIELDS,
                       AFFILIATION,
                       ACCOUNT_EMAIL,
                       get_output_for_application,
-                      count_active_authorizations)
+                      count_valid_authorizations)
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
@@ -2516,7 +2516,7 @@ class EvaluateApplicationTest(TestCase):
             partner=self.partner,
             date_expires=date.today() - timedelta(days=random.randint(1, 5))
         ).save()
-        total_active_authorizations = count_active_authorizations(self.partner)
+        total_active_authorizations = count_valid_authorizations(self.partner)
         self.assertEqual(total_active_authorizations, 6)
 
         stream = StreamFactory(partner=self.partner)
@@ -2535,14 +2535,14 @@ class EvaluateApplicationTest(TestCase):
                 authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5))
             ).save()
-        total_active_authorizations = count_active_authorizations(self.partner, stream)
+        total_active_authorizations = count_valid_authorizations(self.partner, stream)
         self.assertEqual(total_active_authorizations, 5)
 
         # Filter logic in .helpers.get_active_authorizations and
         # TWLight.users.models.Authorization.is_valid must be in sync.
         # We test that here.
         all_authorizations_using_is_valid = Authorization.objects.filter(partner=self.partner)
-        total_active_authorizations_using_helper = count_active_authorizations(self.partner)
+        total_active_authorizations_using_helper = count_valid_authorizations(self.partner)
 
         total_active_authorizations_using_is_valid = 0
         for each_auth in all_authorizations_using_is_valid:

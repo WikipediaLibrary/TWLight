@@ -4,7 +4,6 @@ from django import forms
 from django.db.models import Q
 from django.utils.translation import ugettext as _
 
-from TWLight.applications.models import Application
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Authorization
 
@@ -170,10 +169,10 @@ def get_output_for_application(app):
     return output
 
 
-def get_active_authorizations(partner_pk, stream_pk=None):
+def get_valid_authorizations(partner_pk, stream_pk=None):
     """
-    Retrieves the active authorizations available for a particular
-    partner or collections if stream_pk is not None. Active authorizations are
+    Retrieves the valid authorizations available for a particular
+    partner or collections if stream_pk is not None. Valid authorizations are
     authorizations with which we can operate, and is decided by certain conditions as
     spelled out in the is_valid property of the Authorization model object (users/models.py).
     """
@@ -182,42 +181,34 @@ def get_active_authorizations(partner_pk, stream_pk=None):
         # The filter below is equivalent to retrieving all authorizations for a partner
         # and (or) stream and checking every authorization against the is_valid property
         # of the authorization model, and hence *must* be kept in sync with the logic in
-        # TWLight.users.model.Authorization.is_valid property.
-        active_authorizations = Authorization.objects.filter(
+        # TWLight.users.model.Authorization.is_valid property. We don't need to check for
+        # partner_id__isnull since it is functionally covered by partner=partner_pk.
+        valid_authorizations = Authorization.objects.filter(
             Q(date_expires__isnull=False, date_expires__gte=today) |
             Q(date_expires__isnull=True),
             authorizer__isnull=False,
             user__isnull=False,
-            partner_id__isnull=False,
             date_authorized__isnull=False,
             date_authorized__lte=today,
             partner=partner_pk
         )
         if stream_pk:
-            active_authorizations = active_authorizations.filter(stream=stream_pk)
+            valid_authorizations = valid_authorizations.filter(stream=stream_pk)
 
-        return active_authorizations
+        return valid_authorizations
     except Authorization.DoesNotExist:
         return None
 
 
-def count_active_authorizations(partner_pk, stream_pk=None):
+def count_valid_authorizations(partner_pk, stream_pk=None):
     """
-    Retrieves the numbers of active authorizations using the
-    get_active_authorizations() method above.
+    Retrieves the numbers of valid authorizations using the
+    get_valid_authorizations() method above.
     """
     if stream_pk:
-        active_authorizations = get_active_authorizations(partner_pk, stream_pk)
-        if active_authorizations is None:
-            return 0
-        else:
-            return active_authorizations.count()
+        return get_valid_authorizations(partner_pk, stream_pk).count()
     else:
-        active_authorizations = get_active_authorizations(partner_pk)
-        if active_authorizations is None:
-            return 0
-        else:
-            return active_authorizations.count()
+        return get_valid_authorizations(partner_pk).count()
 
 
 def get_accounts_available(app):
@@ -227,16 +218,16 @@ def get_accounts_available(app):
     """
     if app.specific_stream is not None:
         if app.specific_stream.accounts_available is not None:
-            active_authorizations = count_active_authorizations(app.partner, app.specific_stream)
+            valid_authorizations = count_valid_authorizations(app.partner, app.specific_stream)
             total_accounts_available = app.specific_stream.accounts_available
-            return total_accounts_available - active_authorizations
+            return total_accounts_available - valid_authorizations
         elif app.partner.accounts_available is not None:
-            active_authorizations = count_active_authorizations(app.partner)
+            valid_authorizations = count_valid_authorizations(app.partner)
             total_accounts_available = app.partner.accounts_available
-            return total_accounts_available - active_authorizations
+            return total_accounts_available - valid_authorizations
     elif app.partner.accounts_available is not None:
-        active_authorizations = count_active_authorizations(app.partner)
-        return app.partner.accounts_available - active_authorizations
+        valid_authorizations = count_valid_authorizations(app.partner)
+        return app.partner.accounts_available - valid_authorizations
 
 
 def is_proxy_and_application_approved(status, app):
