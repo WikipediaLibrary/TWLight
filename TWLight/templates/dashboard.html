@@ -83,6 +83,32 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-refresh fa-5x" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">{{ renewal_percentage }}</div>
+              {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the panel with the renewal rate for proxy partners. {% endcomment %}
+              <div>{% trans "Renewal rate (proxy partners only)" %}</div>
+            </div>
+          </div>
+        </div>
+        <a href="{% url 'csv:proxy_authorizations' %}">
+          <div class="panel-footer">
+            {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button to download the authorization renewal rates. {% endcomment %}
+            <span class="pull-left">{% trans 'Download renewal rates over time as CSV' %}</span>
+            <span class="pull-right"><i class="fa fa-cloud-download" aria-hidden="true"></i></span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
   {% if user.is_staff %}
     <!-- begin pageview metrics -->
@@ -147,19 +173,13 @@
     </div>
 
   {% endif %}
+
   <!-- begin application metrics -->
   <div class="row">
     <div class="col-lg-12">
       {% comment %} Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.{% endcomment %}
       <h2 class="page-header" id="applications-section">{% trans 'Applications' %}</h2>
       {% if total_apps > 0 %}
-        {% if proxy_auth_data %}
-          {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the total and renewed authorizations over time for proxy partners. {% endcomment %}
-          <h3>{% trans "All authorizations and renewals over time (proxy partners only)" %}</h3> <a href="{% url 'csv:proxy_authorizations' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
-          <div style="clear:both;"></div>
-          <div id="authorization-time-graph" style="width:80%;height:300px"></div>
-        {% endif %}
-
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time. {% endcomment %}
         <h3>{% trans "Number of accounts distributed over time" %}</h3> <a href="{% url 'csv:num_applications' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
         <div style="clear:both;"></div>
@@ -317,33 +337,6 @@
           apps_over_time();
           app_time_to_decision();
           app_status_distribution();
-        });
-      }
-      if ({{ proxy_auth_data }}) {
-          // Applications over time
-         var authorization_time_graph = $("#authorization-time-graph");
-         var proxy_auth_data = {{ proxy_auth_data}};
-         var renewed_auth_data = {{ renewed_auth_data }};
-         var combined_data = [
-           { label: "{% trans 'All authorizations' %}", data: proxy_auth_data},
-           { label: "{% trans 'Renewed authorizations' %}", data: renewed_auth_data}
-         ];
-         function auths_over_time() {
-           $.plot(authorization_time_graph, combined_data, {
-             xaxis: {
-               mode: "time",
-             },
-             yaxis: {
-               min: 0,
-               minTickSize: 1,
-               tickDecimals: 0,
-             },
-           });
-         }
-         auths_over_time();
-        // Redraw on browser resize
-        window.addEventListener("resize", function() {
-          auths_over_time();
         });
       }
       if ({{ user_count }} > 0) {
