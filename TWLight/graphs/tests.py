@@ -147,9 +147,9 @@ class GraphsTestCase(TestCase):
         request = self.factory.get(reverse('csv:proxy_authorizations'))
         request.user = self.user
 
-        response = views.CSVProxyAuthAndRenewals.as_view()(request)
+        response = views.CSVProxyAuthRenewalRate.as_view()(request)
 
-        expected_data = [[str(date.today()), '2', '1']]
+        expected_data = [[str(date.today()), '2', '1', '50.0%']]
         self._verify_equal(response, expected_data)
 
     def test_app_time_histogram_csv(self):

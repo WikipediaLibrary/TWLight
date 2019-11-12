@@ -51,7 +51,7 @@ csv_urlpatterns = [
     ),
 
     url(r'^proxy_authorizations_renewals/$',
-        views.CSVProxyAuthAndRenewals.as_view(),
+        views.CSVProxyAuthRenewalRate.as_view(),
         name='proxy_authorizations'
         ),
     
