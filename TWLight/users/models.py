@@ -443,6 +443,9 @@ class Authorization(models.Model):
         # We assume the authorization is invalid unless we know better.
         valid = False
         today = datetime.today().date()
+        # When updating this logic, please also update the filter in
+        # TWLight.applications.helpers.get_active_authorizations function,
+        # so that they remain in sync and return the same type of authorizations.
         if (
                 # Valid authorizations always have an authorizer, and user and a partner_id.
                 self.authorizer and self.user and self.partner_id

@@ -43,7 +43,8 @@ from .helpers import (USER_FORM_FIELDS,
                       OCCUPATION,
                       AFFILIATION,
                       ACCOUNT_EMAIL,
-                      get_output_for_application)
+                      get_output_for_application,
+                      count_valid_authorizations)
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
@@ -2410,10 +2411,10 @@ class EvaluateApplicationTest(TestCase):
 
 
     def test_sets_status_approved_for_proxy_partner_with_authorizations(self):
-        '''
+        """
         We test different behaviours of applications/partners when we approve
         applications for proxy partners by tweaking various parameters.
-        '''
+        """
         factory = RequestFactory()
 
         # Accounts are available, at least one inactive authorization, not waitlisted - approval works
@@ -2484,6 +2485,74 @@ class EvaluateApplicationTest(TestCase):
 
         self.partner.refresh_from_db()
         self.assertEqual(self.partner.status, Partner.WAITLIST)
+
+    def test_count_valid_authorizations(self):
+        for _ in range(5):
+            # valid
+            Authorization(
+                user=EditorFactory().user,
+                partner=self.partner,
+                authorizer=self.coordinator,
+                date_expires=date.today() + timedelta(days=random.randint(0, 5))
+            ).save()
+            # invalid
+            Authorization(
+                user=EditorFactory().user,
+                partner=self.partner,
+                authorizer=self.coordinator,
+                date_expires=date.today() - timedelta(days=random.randint(1, 5))
+            ).save()
+
+        # no expiry date; yet still, valid
+        Authorization(
+            user=EditorFactory().user,
+            authorizer=self.coordinator,
+            partner=self.partner
+        ).save()
+
+        # invalid (no authorizer)
+        Authorization(
+            user=EditorFactory().user,
+            partner=self.partner,
+            date_expires=date.today() - timedelta(days=random.randint(1, 5))
+        ).save()
+        total_valid_authorizations = count_valid_authorizations(self.partner)
+        self.assertEqual(total_valid_authorizations, 6)
+
+        stream = StreamFactory(partner=self.partner)
+        for _ in range(5):
+            # valid
+            Authorization(
+                user=EditorFactory().user,
+                partner=self.partner,
+                stream=stream,
+                authorizer=self.coordinator,
+                date_expires=date.today() + timedelta(days=random.randint(0, 5))
+            ).save()
+            # valid
+            Authorization(
+                user=EditorFactory().user,
+                partner=self.partner,
+                stream=stream,
+                authorizer=self.coordinator,
+                date_expires=date.today() - timedelta(days=random.randint(1, 5))
+            ).save()
+        total_valid_authorizations = count_valid_authorizations(self.partner, stream)
+        self.assertEqual(total_valid_authorizations, 5)
+
+        # Filter logic in .helpers.get_valid_authorizations and
+        # TWLight.users.models.Authorization.is_valid must be in sync.
+        # We test that here.
+        all_authorizations_using_is_valid = Authorization.objects.filter(partner=self.partner)
+        total_valid_authorizations_using_helper = count_valid_authorizations(self.partner)
+
+        total_valid_authorizations_using_is_valid = 0
+        for each_auth in all_authorizations_using_is_valid:
+            if each_auth.is_valid:
+                total_valid_authorizations_using_is_valid += 1
+
+        self.assertEqual(total_valid_authorizations_using_is_valid, total_valid_authorizations_using_helper)
+
 
     def test_sets_days_open(self):
         factory = RequestFactory()

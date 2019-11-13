@@ -47,7 +47,7 @@ from .helpers import (USER_FORM_FIELDS,
                       PARTNER_FORM_OPTIONAL_FIELDS,
                       PARTNER_FORM_BASE_FIELDS,
                       get_output_for_application,
-                      get_active_authorizations,
+                      count_valid_authorizations,
                       get_accounts_available,
                       is_proxy_and_application_approved)
 from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
@@ -905,15 +905,15 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # boolean value for the corresponding stream_pk in the streams_distribution_flag dictionary.
         for stream_pk, info in applications_per_stream.iteritems():
             total_accounts_available_per_stream = Stream.objects.filter(pk=stream_pk).values('accounts_available')[0]['accounts_available']
-            total_accounts_available_per_partner= Partner.objects.filter(pk=info['partner_pk']).values('accounts_available')[0]['accounts_available']
+            total_accounts_available_per_partner = Partner.objects.filter(pk=info['partner_pk']).values('accounts_available')[0]['accounts_available']
 
             total_accounts_available_for_distribution = None
             if total_accounts_available_per_stream is not None:
-                active_authorizations = get_active_authorizations(info['partner_pk'], stream_pk)
-                total_accounts_available_for_distribution = total_accounts_available_per_stream - active_authorizations
+                valid_authorizations = count_valid_authorizations(info['partner_pk'], stream_pk)
+                total_accounts_available_for_distribution = total_accounts_available_per_stream - valid_authorizations
             elif total_accounts_available_per_partner is not None:
-                active_authorizations = get_active_authorizations(info['partner_pk'])
-                total_accounts_available_for_distribution = total_accounts_available_per_partner - active_authorizations
+                valid_authorizations = count_valid_authorizations(info['partner_pk'])
+                total_accounts_available_for_distribution = total_accounts_available_per_partner - valid_authorizations
 
             if total_accounts_available_for_distribution is None:
                 streams_distribution_flag[stream_pk] = True
@@ -921,16 +921,16 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 if info['app_count'] > total_accounts_available_for_distribution:
                     streams_distribution_flag[stream_pk] = False
                 else:
-                  streams_distribution_flag[stream_pk] = True
+                    streams_distribution_flag[stream_pk] = True
 
         # For applications that are for partners, we get the number of accounts available based
-        # on their active authorizations to ensure we have enough accounts available and set the
+        # on their valid authorizations to ensure we have enough accounts available and set the
         # boolean value for the corresponding partner_pk in the partners_distribution_flag dictionary.
         for partner_pk, app_count in applications_per_partner.iteritems():
             total_accounts_available = Partner.objects.filter(pk=partner_pk).values('accounts_available')[0]['accounts_available']
             if total_accounts_available is not None:
-                active_authorizations = get_active_authorizations(partner_pk)
-                total_accounts_available_for_distribution = total_accounts_available - active_authorizations
+                valid_authorizations = count_valid_authorizations(partner_pk)
+                total_accounts_available_for_distribution = total_accounts_available - valid_authorizations
                 if app_count > total_accounts_available_for_distribution:
                     partners_distribution_flag[partner_pk] = False
                 elif app_count == total_accounts_available_for_distribution:
