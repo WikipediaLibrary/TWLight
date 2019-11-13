@@ -197,7 +197,7 @@ def get_valid_authorizations(partner_pk, stream_pk=None):
 
         return valid_authorizations
     except Authorization.DoesNotExist:
-        return None
+        return Authorization.objects.none()
 
 
 def count_valid_authorizations(partner_pk, stream_pk=None):
