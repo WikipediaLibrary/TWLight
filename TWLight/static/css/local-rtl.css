@@ -13,7 +13,7 @@ TYPOGRAPHY & IMAGES
 h1, h2, h3 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   margin-bottom: 20px;
-  min-height: 2em
+  min-height: 1em
 }
 
 h1, h2 {
