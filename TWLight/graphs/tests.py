@@ -14,7 +14,7 @@ from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.resources.factories import PartnerFactory
 from TWLight.users.models import Authorization
-from TWLight.users.factories import UserFactory
+from TWLight.users.factories import UserFactory, EditorFactory
 
 from . import views
 
@@ -48,7 +48,7 @@ class GraphsTestCase(TestCase):
 
     def _verify_equal(self, resp, expected_data):
         reader_list = csv.reader(resp.content.splitlines())
-        reader_list.next() # Skip header row
+        reader_list.next()  # Skip header row
         for row in reader_list:
             assert row in expected_data
 
@@ -117,6 +117,40 @@ class GraphsTestCase(TestCase):
         # We expect 2 authorizations (one user has 1, one has 3, average is 2)
         self.assertEqual(average_authorizations, 2)
 
+    def test_proxy_auth_renewals_csv(self):
+        """
+        Test that the CSVProxyAuthAndRenewals csv download works
+        """
+        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
+        partner2 = PartnerFactory(authorization_method=Partner.PROXY)
+
+        editor1 = EditorFactory()
+        editor2 = EditorFactory()
+
+        parent_app = ApplicationFactory(
+            status=Application.SENT,
+            partner=partner1,
+            editor=editor1
+        )
+        ApplicationFactory(
+            status=Application.SENT,
+            partner=partner1,
+            editor=editor1,
+            parent=parent_app
+        )
+        ApplicationFactory(
+            status=Application.SENT,
+            partner=partner2,
+            editor=editor2,
+        )
+
+        request = self.factory.get(reverse('csv:proxy_authorizations'))
+        request.user = self.user
+
+        response = views.CSVProxyAuthRenewalRate.as_view()(request)
+
+        expected_data = [[str(date.today()), '2', '1', '50.0%']]
+        self._verify_equal(response, expected_data)
 
     def test_app_time_histogram_csv(self):
         """

@@ -28,6 +28,11 @@ csv_urlpatterns = [
         views.CSVPageViewsByPath.as_view(),
         name='page_views_by_path'
     ),
+
+    url(r'^proxy_authorizations_renewals/$',
+        views.CSVProxyAuthRenewalRate.as_view(),
+        name='proxy_authorizations'
+        ),
     
     url(r'^num_applications/$',
         views.CSVNumApprovedApplications.as_view(),

@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from TWLight.applications.models import Application
+from TWLight.resources.models import Partner
+from TWLight.users.models import Authorization
 
 logger = logging.getLogger(__name__)
 
@@ -49,9 +51,15 @@ def get_earliest_creation_date(queryset):
     # Some imported applications had no date and were given
     # creation dates of Jan 1, 1970. This screws up the graphs.
     if queryset:
-        earliest_date = queryset.exclude(
-            date_created=datetime.date(1970,1,1)).earliest(
-                'date_created').date_created
+        # Authorization creation date field is named 'date_authorized'
+        if queryset.model.__name__ is 'Authorization':
+            earliest_date = queryset.exclude(
+                date_authorized=datetime.date(1970, 1, 1)).earliest(
+                    'date_authorized').date_authorized
+        else:
+            earliest_date = queryset.exclude(
+                date_created=datetime.date(1970, 1, 1)).earliest(
+                    'date_created').date_created
     else:
         earliest_date = None
 
@@ -80,7 +88,12 @@ def get_data_count_by_month(queryset, data_format=JSON):
             else:
                 timestamp = current_date
 
-            num_objs = queryset.filter(date_created__lte=current_date).count()
+            # Authorization creation date field is named 'date_authorized'
+            if queryset.model.__name__ is 'Authorization':
+                num_objs = queryset.filter(date_authorized__lte=current_date).count()
+            else:
+                num_objs = queryset.filter(date_created__lte=current_date).count()
+
             data_series.append([timestamp, num_objs])
             current_date -= relativedelta.relativedelta(months=1)
 
@@ -262,3 +275,16 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
         return json.dumps(data_series)
     else:
         return data_series
+
+
+def get_proxy_and_renewed_authorizations():
+    proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
+
+    renewed_auth_ids = []
+    for auth in proxy_auth:
+        latest_app = auth.get_latest_app()
+        if latest_app.parent:
+            renewed_auth_ids.append(auth.id)
+
+    renewed_auth = proxy_auth.filter(id__in=renewed_auth_ids)
+    return proxy_auth, renewed_auth

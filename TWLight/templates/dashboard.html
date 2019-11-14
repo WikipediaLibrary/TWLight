@@ -83,6 +83,32 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-refresh fa-5x" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge">{{ renewal_percentage }}%</div>
+              {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the panel with the renewal rate for proxy partners. {% endcomment %}
+              <div>{% trans "Renewal rate (proxy partners only)" %}</div>
+            </div>
+          </div>
+        </div>
+        <a href="{% url 'csv:proxy_authorizations' %}">
+          <div class="panel-footer">
+            {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button to download the authorization renewal rates. {% endcomment %}
+            <span class="pull-left">{% trans 'Download renewal rates over time as CSV' %}</span>
+            <span class="pull-right"><i class="fa fa-cloud-download" aria-hidden="true"></i></span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
   {% if user.is_staff %}
     <!-- begin pageview metrics -->
@@ -228,88 +254,7 @@
           'data': {{ app_time_histogram_data | safe }},
           'label': ''
         }];
-        var app_time_histogram_plot = $.plot(app_time_histogram_graph, app_time_histogram_data, {
-          yaxis: {
-            min: 0,
-            minTickSize: 1,
-            tickDecimals: 0,
-          },
-          xaxis: {
-            min: 0,
-          },
-          bars: {
-            show: true,
-            barWidth: 1,
-          }
-        });       
-
-        // Applications over time
-        var application_time_graph = $("#application-time-graph");
-        var application_time_data = {{ application_time_data }};
-        var application_time_plot = $.plot(application_time_graph, [application_time_data], {
-          xaxis: {
-            mode: "time",
-          },
-          yaxis: {
-            min: 0,
-            minTickSize: 1,
-            tickDecimals: 0,
-          },
-          colors: ['#5cb85c'],
-        });
-
-        // Median time-to-decision per month
-        var app_medians_graph = $("#app-medians-graph");
-        var app_medians_data = [{
-          'data': {{ app_medians_data | safe }},
-          'label': ''
-        }];
-        var app_medians_plot = $.plot(app_medians_graph, app_medians_data, {
-          yaxis: {
-            min: 0.01,
-            minTickSize: 1,
-            tickDecimals: 0,
-          },
-          xaxis: {
-            mode: 'time',
-          },
-          bars: {
-            show: true,
-            barWidth: 15*24*60*60*1000, // About half a month in milliseconds
-            align: 'center',
-          }
-        });
-          
-        // Application status distribution (pie chart)
-        var app_distribution_graph = $("#app-distribution-graph");
-        var app_distribution_data = {{ app_distribution_data | safe }};
-        var app_distribution_plot = $.plot(app_distribution_graph, app_distribution_data, {
-          series: {
-            pie: { 
-              show: true
-            }
-          },
-        });
-        
-        // Attach a listener to redraw the graphs everytime the user resizes the browser window
-        window.addEventListener("resize", function() {
-        
-          $.plot(app_medians_graph, app_medians_data, {
-            yaxis: {
-              min: 0.01,
-              minTickSize: 1,
-              tickDecimals: 0,
-            },
-            xaxis: {
-              mode: 'time',
-            },
-            bars: {
-              show: true,
-              barWidth: 15*24*60*60*1000, // About half a month in milliseconds
-              align: 'center',
-            }
-          });
-          
+        function app_time_to_decision() {
           $.plot(app_time_histogram_graph, app_time_histogram_data, {
             yaxis: {
               min: 0,
@@ -324,43 +269,81 @@
               barWidth: 1,
             }
           });
-          
-          $.plot(application_time_graph, [application_time_data], {
-            xaxis: {
-              mode: "time",
-            },
+        }
+
+        // Applications over time
+       var application_time_graph = $("#application-time-graph");
+       var application_time_data = {{ application_time_data }};
+       function apps_over_time() {
+         $.plot(application_time_graph, [application_time_data], {
+           xaxis: {
+             mode: "time",
+           },
+           yaxis: {
+             min: 0,
+             minTickSize: 1,
+             tickDecimals: 0,
+           },
+           colors: ['#5cb85c'],
+         });
+       }
+
+        // Median time-to-decision per month
+        var app_medians_graph = $("#app-medians-graph");
+        var app_medians_data = [{
+          'data': {{ app_medians_data | safe }},
+          'label': ''
+        }];
+        function median_time_to_decision() {
+          var app_medians_plot = $.plot(app_medians_graph, app_medians_data, {
             yaxis: {
-              min: 0,
+              min: 0.01,
               minTickSize: 1,
               tickDecimals: 0,
             },
-            colors: ['#5cb85c'],
+            xaxis: {
+              mode: 'time',
+            },
+            bars: {
+              show: true,
+              barWidth: 15*24*60*60*1000, // About half a month in milliseconds
+              align: 'center',
+            }
           });
+        }
           
+        // Application status distribution (pie chart)
+        var app_distribution_graph = $("#app-distribution-graph");
+        var app_distribution_data = {{ app_distribution_data | safe }};
+        function app_status_distribution() {
           $.plot(app_distribution_graph, app_distribution_data, {
             series: {
-              pie: { 
+              pie: {
                 show: true
               }
             },
           });
+        }
+
+        median_time_to_decision();
+        apps_over_time();
+        app_time_to_decision();
+        app_status_distribution();
+
+        // Attach a listener to redraw the graphs everytime the user resizes the browser window
+        window.addEventListener("resize", function() {
+          median_time_to_decision();
+          auths_over_time();
+          apps_over_time();
+          app_time_to_decision();
+          app_status_distribution();
         });
       }
-
       if ({{ user_count }} > 0) {
         // User language distribution (pie chart)
         var user_language_graph = $("#user-language-graph");
         var user_language_data = {{ user_language_data | safe }};
-        var user_language_plot = $.plot(user_language_graph, user_language_data, {
-          series: {
-            pie: {
-              show: true
-            }
-          },
-        });
-        
-        // Redraw on browser resize
-        window.addEventListener("resize", function() {
+        function user_language() {
           $.plot(user_language_graph, user_language_data, {
             series: {
               pie: {
@@ -368,6 +351,11 @@
               }
             },
           });
+        }
+        user_language();
+        // Redraw on browser resize
+        window.addEventListener("resize", function() {
+          user_language();
         });
       }
     });
