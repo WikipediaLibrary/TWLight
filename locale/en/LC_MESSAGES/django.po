@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-11-13 04:05+0000\n"
+"POT-Creation-Date: 2019-11-14 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -343,7 +343,7 @@ msgstr ""
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:7
-#: TWLight/graphs/views.py:269
+#: TWLight/graphs/views.py:302
 msgid "Status"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:87
 #: TWLight/applications/views.py:502 TWLight/applications/views.py:578
-#: TWLight/templates/dashboard.html:127
+#: TWLight/templates/dashboard.html:153
 msgid "Partner"
 msgstr ""
 
@@ -1193,59 +1193,74 @@ msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
-#: TWLight/graphs/views.py:214
+#: TWLight/graphs/views.py:223
 msgid "Days until decision"
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
-#: TWLight/graphs/views.py:216 TWLight/graphs/views.py:270
+#: TWLight/graphs/views.py:225 TWLight/graphs/views.py:303
 msgid "Number of applications"
 msgstr ""
 
 #. Translators: This is the heading of a data file, for a column containing date data.
-#: TWLight/graphs/views.py:230
+#: TWLight/graphs/views.py:243 TWLight/graphs/views.py:263
 msgid "Date"
 msgstr ""
 
+#. Translators: This is the heading of a data file. 'Number of proxy authorizations' refers to the total number of authorizations for all proxy partners.
+#: TWLight/graphs/views.py:245
+msgid "Number of proxy authorizations"
+msgstr ""
+
+#. Translators: This is the heading of a data file. 'Number of renewed proxy authorizations' refers to the total number of authorizations for all proxy partners that were renewed.
+#: TWLight/graphs/views.py:247
+msgid "Number of renewed proxy authorizations"
+msgstr ""
+
+#. Translators: This is the heading of a data file. 'Renewal percentage' refers to the percentage of authorizations renewed of all proxy authroizations.
+#: TWLight/graphs/views.py:249
+msgid "Renewal percentage"
+msgstr ""
+
 #. Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-#: TWLight/graphs/views.py:232
+#: TWLight/graphs/views.py:265
 msgid "Number of approved applications"
 msgstr ""
 
 #. Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
-#: TWLight/graphs/views.py:250
+#: TWLight/graphs/views.py:283
 msgid "Month"
 msgstr ""
 
 #. Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
-#: TWLight/graphs/views.py:252
+#: TWLight/graphs/views.py:285
 msgid "Median days until decision"
 msgstr ""
 
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
-#: TWLight/graphs/views.py:284 TWLight/graphs/views.py:311
+#: TWLight/graphs/views.py:317 TWLight/graphs/views.py:344
 msgid "You must be staff to do that."
 msgstr ""
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
-#: TWLight/graphs/views.py:294 TWLight/graphs/views.py:328
-#: TWLight/templates/dashboard.html:102
+#: TWLight/graphs/views.py:327 TWLight/graphs/views.py:361
+#: TWLight/templates/dashboard.html:128
 msgid "Page URL"
 msgstr ""
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
-#: TWLight/graphs/views.py:295 TWLight/graphs/views.py:330
+#: TWLight/graphs/views.py:328 TWLight/graphs/views.py:363
 msgid "Number of (non-unique) visitors"
 msgstr ""
 
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
-#: TWLight/graphs/views.py:346 TWLight/resources/models.py:82
+#: TWLight/graphs/views.py:379 TWLight/resources/models.py:82
 #: TWLight/users/models.py:77 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr ""
 
-#: TWLight/graphs/views.py:347
+#: TWLight/graphs/views.py:380
 msgid "Number of users"
 msgstr ""
 
@@ -2367,7 +2382,7 @@ msgstr ""
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications.
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
-#: TWLight/templates/base.html:121 TWLight/templates/dashboard.html:155
+#: TWLight/templates/base.html:121 TWLight/templates/dashboard.html:181
 msgid "Applications"
 msgstr ""
 
@@ -2484,44 +2499,54 @@ msgstr ""
 msgid "Average accounts per user"
 msgstr ""
 
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the panel with the renewal rate for proxy partners.
+#: TWLight/templates/dashboard.html:97
+msgid "Renewal rate (proxy partners only)"
+msgstr ""
+
+#. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button to download the authorization renewal rates.
+#: TWLight/templates/dashboard.html:104
+msgid "Download renewal rates over time as CSV"
+msgstr ""
+
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
-#: TWLight/templates/dashboard.html:92
+#: TWLight/templates/dashboard.html:118
 msgid "Page views (staff only)"
 msgstr ""
 
-#: TWLight/templates/dashboard.html:92 TWLight/templates/dashboard.html:158
-#: TWLight/templates/dashboard.html:163 TWLight/templates/dashboard.html:175
-#: TWLight/templates/dashboard.html:185 TWLight/templates/dashboard.html:201
+#: TWLight/templates/dashboard.html:118 TWLight/templates/dashboard.html:184
+#: TWLight/templates/dashboard.html:189 TWLight/templates/dashboard.html:201
+#: TWLight/templates/dashboard.html:211 TWLight/templates/dashboard.html:227
 msgid "download as csv"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the most viewed pages on the site.
-#: TWLight/templates/dashboard.html:98
+#: TWLight/templates/dashboard.html:124
 msgid "Most popular pages"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the column for pageview numbers for each partner page.
-#: TWLight/templates/dashboard.html:106 TWLight/templates/dashboard.html:130
+#: TWLight/templates/dashboard.html:132 TWLight/templates/dashboard.html:156
 msgid "Number of views"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the pageview data for each partner page.
-#: TWLight/templates/dashboard.html:123
+#: TWLight/templates/dashboard.html:149
 msgid "Partner pages by popularity"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time.
-#: TWLight/templates/dashboard.html:158
+#: TWLight/templates/dashboard.html:184
 msgid "Number of accounts distributed over time"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.
-#: TWLight/templates/dashboard.html:163
+#: TWLight/templates/dashboard.html:189
 msgid "Applications by number of days until decision"
 msgstr ""
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/).
-#: TWLight/templates/dashboard.html:166
+#: TWLight/templates/dashboard.html:192
 msgid ""
 "The x axis is the number of days to make a final decision (either approved "
 "or denied) on an application. The y axis is the number of applications that "
@@ -2529,29 +2554,29 @@ msgid ""
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.
-#: TWLight/templates/dashboard.html:175
+#: TWLight/templates/dashboard.html:201
 msgid "Median days until application decision, per month"
 msgstr ""
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean.
-#: TWLight/templates/dashboard.html:178
+#: TWLight/templates/dashboard.html:204
 msgid ""
 "This shows the median number of days to reach a decision on the applications "
 "opened in a given month."
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
-#: TWLight/templates/dashboard.html:185
+#: TWLight/templates/dashboard.html:211
 msgid "Open application status distribution"
 msgstr ""
 
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.
-#: TWLight/templates/dashboard.html:197
+#: TWLight/templates/dashboard.html:223
 msgid "Users"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
-#: TWLight/templates/dashboard.html:201
+#: TWLight/templates/dashboard.html:227
 msgid "User language distribution"
 msgstr ""
 
