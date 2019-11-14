@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-11-14 17:14+0000\n"
+"POT-Creation-Date: 2019-11-14 18:20+0000\n"
 "PO-Revision-Date: 2019-11-14 16:43:23+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3495,30 +3495,41 @@ msgstr ""
 "المنسق الخاص بك."
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
-#: TWLight/users/templates/users/terms.html:19
-msgid "Last updated 8 August 2016"
+#: TWLight/users/templates/users/terms.html:24
+#, fuzzy
+#| msgid "Last updated 8 August 2016"
+msgid "Last updated 12 November 2019"
 msgstr "تم تعديله آخر مرة في 8 أغسطس 2016"
 
-#. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy).
-#: TWLight/users/templates/users/terms.html:23
+#. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
+#: TWLight/users/templates/users/terms.html:28
 msgid "Wikimedia Foundation privacy policy"
 msgstr "سياسة خصوصية مؤسسة ويكيميديا"
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:27
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:32
 msgid "Wikipedia Library Card Terms of Use and Privacy Statement"
 msgstr "بيان شروط استخدام بطاقة مكتبة ويكيبيديا"
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:36
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:41
+#, fuzzy
+#| msgid ""
+#| "The Wikipedia Library is an open research hub, through which active "
+#| "Wikipedia editors can gain both access to the vital reliable sources "
+#| "needed for their work and support in using those resources to improve the "
+#| "encyclopedia. We have partnered with publishers around the world to allow "
+#| "users to freely access otherwise paywalled resources. This platform "
+#| "allows users to apply simultaneously for access to multiple publishers, "
+#| "and makes the administration of Wikipedia Library accounts easy and "
+#| "efficient."
 msgid ""
-"The Wikipedia Library is an open research hub, through which active "
-"Wikipedia editors can gain both access to the vital reliable sources needed "
-"for their work and support in using those resources to improve the "
-"encyclopedia. We have partnered with publishers around the world to allow "
-"users to freely access otherwise paywalled resources. This platform allows "
-"users to apply simultaneously for access to multiple publishers, and makes "
-"the administration of Wikipedia Library accounts easy and efficient."
+"<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The "
+"Wikipedia Library</a> has partnered with publishers around the world to "
+"allow users to access otherwise paywalled resources. This website allows "
+"users to apply simultaneously for access to multiple publishers’ materials, "
+"and makes the administration of and access to Wikipedia Library accounts "
+"easy and efficient."
 msgstr ""
 "مكتبة ويكيبيديا هي مركز أبحاث مفتوح، يمكن من خلاله لمحرري ويكيبيديا النشطين "
 "الوصول إلى المصادر الحيوية الموثوقة اللازمة لعملهم ودعمهم في استخدام تلك "
@@ -3527,17 +3538,26 @@ msgstr ""
 "أخرى، تسمح هذه المنصة للمستخدمين بالطلب في وقت واحد للوصول إلى العديد من "
 "الناشرين، مما يجعل إدارة حسابات مكتبة ويكيبيديا سهلة وفعالة."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:43
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:48
+#, fuzzy
+#| msgid ""
+#| "These terms pertain to your application for access to Wikipedia Library "
+#| "resources, and your use of those resources. They also describe our "
+#| "handling of the information you provide to us in order to create and "
+#| "administer your Wikipedia Library account. The Wikipedia Library system "
+#| "is evolving, and over time we may update these terms due to changes in "
+#| "the technology. We recommend that you review the terms from time to time. "
+#| "If we make substantial changes to the terms, we will send a notification "
+#| "email to Wikipedia Library users."
 msgid ""
-"These terms pertain to your application for access to Wikipedia Library "
-"resources, and your use of those resources. They also describe our handling "
-"of the information you provide to us in order to create and administer your "
-"Wikipedia Library account. The Wikipedia Library system is evolving, and "
-"over time we may update these terms due to changes in the technology. We "
-"recommend that you review the terms from time to time. If we make "
-"substantial changes to the terms, we will send a notification email to "
-"Wikipedia Library users."
+"This program is administered by the Wikimedia Foundation (WMF). These terms "
+"of use and privacy notice pertain to your application for access to "
+"resources through the Wikipedia Library, your use of this website, and your "
+"access to and use of those resources. They also describe our handling of the "
+"information you provide to us in order to create and administer your "
+"Wikipedia Library account. If we make material changes to the terms, we will "
+"notify users."
 msgstr ""
 "تتعلق هذه الشروط بطلبك للوصول إلى موارد مكتبة ويكيبيديا، واستخدامك لتلك "
 "الموارد، كما أنها تصف طريقة تعاملنا مع المعلومات التي تقدمها لنا من أجل "
@@ -3546,26 +3566,39 @@ msgstr ""
 "بمراجعة البنود من وقت لآخر، إذا أجرينا تغييرات جوهرية على الشروط، فسوف نرسل "
 "إشعارا بالبريد الإلكتروني إلى مستخدمي مكتبة ويكيبيديا."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:49
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:54
 msgid "Requirements for a Wikipedia Library Card Account"
 msgstr "متطلبات حساب بطاقة مكتبة ويكيبيديا"
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Special:EmailUser should be translated to this language's title for https://en.wikipedia.org/wiki/Special:EmailUser.
-#: TWLight/users/templates/users/terms.html:53
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:58
+#, fuzzy
+#| msgid ""
+#| "As a preliminary note, Wikipedia Library accounts are reserved for "
+#| "community members who have demonstrated their commitment to the Wikimedia "
+#| "projects, and will use their access to these resources to improve project "
+#| "content. To that end, in order to be eligible for the Wikipedia Library "
+#| "program, we require that you be registered for a user account on the "
+#| "projects. We generally give preference to users with at least 500 edits "
+#| "and six (6) months of activity, but these are not strict requirements. "
+#| "You must have the Special:EmailUser feature enabled on at least one "
+#| "version of Wikipedia, and you will identify that as your \"home\" wiki "
+#| "when you create an account. We ask that you do not request access to any "
+#| "publishers whose resources you can already access for free through your "
+#| "local library or university, or another institution or organization, in "
+#| "order to provide that opportunity to others."
 msgid ""
-"As a preliminary note, Wikipedia Library accounts are reserved for community "
+"Access to resources via The Wikipedia Library is reserved for community "
 "members who have demonstrated their commitment to the Wikimedia projects, "
-"and will use their access to these resources to improve project content. To "
-"that end, in order to be eligible for the Wikipedia Library program, we "
-"require that you be registered for a user account on the projects. We "
-"generally give preference to users with at least 500 edits and six (6) "
-"months of activity, but these are not strict requirements. You must have the "
-"Special:EmailUser feature enabled on at least one version of Wikipedia, and "
-"you will identify that as your \"home\" wiki when you create an account. We "
-"ask that you do not request access to any publishers whose resources you can "
-"already access for free through your local library or university, or another "
-"institution or organization, in order to provide that opportunity to others."
+"and who will use their access to these resources to improve project content. "
+"To that end, in order to be eligible for the Wikipedia Library program, we "
+"require that you be registered for a user account on the projects. We give "
+"preference to users with at least 500 edits and six (6) months of activity, "
+"but these are not strict requirements. We ask that you do not request access "
+"to any publishers whose resources you can already access for free through "
+"your local library or university, or another institution or organization, in "
+"order to provide that opportunity to others."
 msgstr ""
 "كملاحظة أولية، يتم حجز حسابات مكتبة ويكيبيديا لأعضاء المجتمع الذين أظهروا "
 "التزامهم بمشاريع ويكيميديا، وسوف يستخدمون وصولهم إلى هذه الموارد لتحسين "
@@ -3578,12 +3611,19 @@ msgstr ""
 "الوصول إلى مواردهم مجانا من خلال مكتبتك المحلية أو جامعتك أو مؤسسة أو منظمة "
 "أخرى; من أجل توفير تلك الفرصة للآخرين."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:60
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:65
+#, fuzzy
+#| msgid ""
+#| "Additionally, if you are currently blocked or banned from a Wikimedia "
+#| "project, you may be rejected when you apply for a Wikipedia Library "
+#| "account. If you obtain a Wikipedia Library account, but a long-term block "
+#| "or ban is subsequently instituted against you on one of the projects, you "
+#| "may lose access to your Wikipedia Library account."
 msgid ""
 "Additionally, if you are currently blocked or banned from a Wikimedia "
-"project, you may be rejected when you apply for a Wikipedia Library account. "
-"If you obtain a Wikipedia Library account, but a long-term block or ban is "
+"project, applications to resources may be rejected or restricted. If you "
+"obtain a Wikipedia Library account, but a long-term block or ban is "
 "subsequently instituted against you on one of the projects, you may lose "
 "access to your Wikipedia Library account."
 msgstr ""
@@ -3592,8 +3632,8 @@ msgstr ""
 "مكتبة ويكيبيديا، إلا أنه تم في وقت لاحق فرض منع أو منع طويل المدى ضدك على "
 "أحد المشروعات، فقد تفقد الوصول إلى حساب مكتبة ويكيبيديا الخاص بك."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:67
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:72
 msgid ""
 "Wikipedia Library Card accounts do not expire. However, access to an "
 "individual publisher’s resources will generally lapse after one year, after "
@@ -3604,21 +3644,31 @@ msgstr ""
 "الناشر الفردي سينقضي عموما بعد عام واحد، وبعد ذلك ستحتاج إما إلى التقدم بطلب "
 "التجديد أو سيتم تجديد حسابك تلقائيا."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:73
-msgid "Applying for Your Wikipedia Library Card Account"
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:78
+#, fuzzy
+#| msgid "Applying for Your Wikipedia Library Card Account"
+msgid "Applying via Your Wikipedia Library Card Account"
 msgstr "تقديم طلب للحصول على حساب بطاقة مكتبة ويكيبيديا الخاصة بك"
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:77
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:82
+#, fuzzy
+#| msgid ""
+#| "In order to apply for a Wikipedia Library Card account, you must provide "
+#| "us with certain information, which we will use to evaluate your "
+#| "application. If your application is approved, we may transfer the "
+#| "information you have given us to the publishers whose resources you wish "
+#| "to access. The publisher will then create a free account for you. In most "
+#| "cases, they will contact you with the account information directly, "
+#| "although sometimes we will send access information to you ourselves."
 msgid ""
-"In order to apply for a Wikipedia Library Card account, you must provide us "
-"with certain information, which we will use to evaluate your application. If "
-"your application is approved, we may transfer the information you have given "
-"us to the publishers whose resources you wish to access. The publisher will "
-"then create a free account for you. In most cases, they will contact you "
-"with the account information directly, although sometimes we will send "
-"access information to you ourselves."
+"In order to apply for access to a partner resource, you must provide us with "
+"certain information, which we will use to evaluate your application. If your "
+"application is approved, we may transfer the information you have given us "
+"to the publishers whose resources you wish to access. They will either "
+"contact you with the account information directly or we will send access "
+"information to you ourselves."
 msgstr ""
 "للتقدم بطلب للحصول على حساب في بطاقة مكتبة ويكيبيديا; يجب أن تزودنا بمعلومات "
 "معينة، والتي سنستخدمها لتقييم طلبك، إذا تمت الموافقة على طلبك، يجوز لنا نقل "
@@ -3626,37 +3676,21 @@ msgstr ""
 "الناشر بعد ذلك بإنشاء حساب مجاني لك، في معظم الحالات، سيتصلون بك بمعلومات "
 "الحساب مباشرة، رغم أننا سنرسل إليك أحيانا معلومات للوصول إليك."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). partners_page should not be translated.
-#: TWLight/users/templates/users/terms.html:85
-#, python-format
-msgid ""
-"Each publisher who is a member of the Wikipedia Library program requires "
-"different specific information in the application. Some publishers may "
-"request only an email address, while others request more detailed data, such "
-"as your name, location, occupation, or institutional affiliation. When you "
-"complete your application, you will only be asked to supply information "
-"required by the publishers you have chosen, and each publisher will only "
-"receive the information they require. Please see our <a href="
-"\"%(partners_page)s\">partner information pages</a> to learn what "
-"information is required by each publisher to gain access to their resources."
-msgstr ""
-"كل ناشر يكون عضوا في برنامج مكتبة ويكيبيديا يتطلب معلومات محددة مختلفة في "
-"الطلب، قد يطلب بعض الناشرين عنوان بريد إلكتروني فقط، بينما يطلب آخرون بيانات "
-"أكثر تفصيلا، مثل اسمك أو موقعك أو مهنتك أو انتماءك المؤسسي، عند إكمال طلبك، "
-"سيُطلَب منك فقط توفير المعلومات التي يطلبها الناشرون الذين اخترتهم، وسيتلقى كل "
-"ناشر المعلومات التي يحتاجونها فقط/ يُرجَى الاطلاع على <a href="
-"\"%(partners_page)s\">صفحات معلومات الشركاء</a> لمعرفة المعلومات المطلوبة من "
-"كل ناشر للوصول إلى موارده."
-
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:92
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:89
+#, fuzzy
+#| msgid ""
+#| "In addition to the basic information you provide to us, our system will "
+#| "retrieve some information directly from the Wikimedia projects: your "
+#| "username, email address, edit count, registration date, user ID number, "
+#| "groups to which you belong, and any special user rights. Each time you "
+#| "log in to the Wikipedia Library Card Platform, this information will be "
+#| "automatically updated."
 msgid ""
 "In addition to the basic information you provide to us, our system will "
 "retrieve some information directly from the Wikimedia projects: your "
 "username, email address, edit count, registration date, user ID number, "
-"groups to which you belong, and any special user rights. Each time you log "
-"in to the Wikipedia Library Card Platform, this information will be "
-"automatically updated."
+"groups to which you belong, and any special user rights."
 msgstr ""
 "بالإضافة إلى المعلومات الأساسية التي تزودنا بها، سيقوم نظامنا باسترداد بعض "
 "المعلومات مباشرة من مشاريع ويكيميديا: اسم المستخدم الخاص بك، وعنوان البريد "
@@ -3664,19 +3698,64 @@ msgstr ""
 "التي تنتمي إليها، وأية صلاحيات مستخدم خاصة، في كل مرة تقوم فيها بتسجيل "
 "الدخول إلى منصة بطاقة مكتبة ويكيبيديا، سيتم تحديث هذه المعلومات تلقائيا."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:99
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:96
+msgid ""
+"Each time you log in to the Wikipedia Library Card Platform, this "
+"information will be automatically updated."
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:103
+#, fuzzy
+#| msgid ""
+#| "We will ask you to identify your home wiki (or any Wikipedia version "
+#| "where you have enabled email), and finally to provide us with some "
+#| "information about your history of contributions to the Wikimedia "
+#| "projects. Information on contribution history is optional, but will "
+#| "greatly assist us in evaluating your application."
+msgid ""
+"We will ask you to provide us with some information about your history of "
+"contributions to the Wikimedia projects. Information on contribution history "
+"is optional, but will greatly assist us in evaluating your application."
+msgstr ""
+"سنطلب منك تحديد موقع الويكي الخاص بك (أو أي إصدار من ويكيبيديا حيث قمت "
+"بتمكين البريد الإلكتروني)، وأخيرا لتزويدنا ببعض المعلومات حول محفوظات "
+"مساهماتك في مشاريع ويكيميديا، المعلومات حول تاريخ المساهمة اختيارية، ولكنها "
+"ستساعدنا كثيرا في تقييم طلبك."
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:110
 msgid ""
 "The information you provide when creating your account will be visible to "
-"you while on the site but not to other users unless they are approved "
-"Coordinators, WMF Staff, or WMF Contractors under a non-disclosure agreement "
-"(NDA), and who are working with the Wikipedia Library.  The following "
-"limited information that you provide is public to all users by default: 1) "
-"when you created a Wikipedia Library Card account; 2) which publishers’ "
-"resources you have applied to access; 3) your brief description of your "
-"rationale for accessing the resources of each partner to which you apply.  "
-"Editors who do not wish to make this information public may email the "
-"required information to WMF Staff to request and receive access privately."
+"you while on the site but not to others unless they are approved Wikipedia "
+"Library Coordinators, WMF Staff, or WMF Contractors who need access to this "
+"data in order to carry out their work with the Wikipedia Library, all of "
+"whom are subject to non-disclosure obligations."
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:117
+#, fuzzy
+#| msgid ""
+#| "The information you provide when creating your account will be visible to "
+#| "you while on the site but not to other users unless they are approved "
+#| "Coordinators, WMF Staff, or WMF Contractors under a non-disclosure "
+#| "agreement (NDA), and who are working with the Wikipedia Library.  The "
+#| "following limited information that you provide is public to all users by "
+#| "default: 1) when you created a Wikipedia Library Card account; 2) which "
+#| "publishers’ resources you have applied to access; 3) your brief "
+#| "description of your rationale for accessing the resources of each partner "
+#| "to which you apply.  Editors who do not wish to make this information "
+#| "public may email the required information to WMF Staff to request and "
+#| "receive access privately."
+msgid ""
+"The following limited information that you provide is public to all users by "
+"default: 1) when you created a Wikipedia Library Card account; 2) which "
+"publishers’ resources you have applied to access; 3) your rationale for "
+"accessing the resources of each partner to which you apply. Editors who do "
+"not wish to make points 2 and 3 public may opt out using a checkbox when "
+"filing an application."
 msgstr ""
 "ستكون المعلومات التي تقدمها عند إنشاء حسابك مرئية لك على الموقع ولكن ليس "
 "للمستخدمين الآخرين ما لم تتم موافقة منسقي أو موظفي مؤسسة ويكيميديا أو مقاولي "
@@ -3689,34 +3768,187 @@ msgstr ""
 "لطلب الحصول على الوصول بشكل خاص واستلامه."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:106
+#: TWLight/users/templates/users/terms.html:123
+msgid "Your Use of Publisher Resources"
+msgstr "استخدامك لموارد الناشر"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:127
+#, fuzzy
+#| msgid ""
+#| "Please note that in order to access an individual publisher’s resources, "
+#| "you agree to that publisher’s terms of use and privacy policy. "
+#| "Additionally, your access to publisher resources through the Wikipedia "
+#| "Library is accompanied by the following terms."
 msgid ""
-"We will ask you to identify your home wiki (or any Wikipedia version where "
-"you have enabled email), and finally to provide us with some information "
-"about your history of contributions to the Wikimedia projects. Information "
-"on contribution history is optional, but will greatly assist us in "
-"evaluating your application."
+"In order to access an individual publisher’s resources, you must agree to "
+"that publisher’s terms of use and privacy policy. You agree that you will "
+"not violate such terms and policies in connection with your use of the "
+"Wikipedia Library. Additionally, the following activities are prohibited "
+"while accessing publisher resources through the Wikipedia Library."
 msgstr ""
-"سنطلب منك تحديد موقع الويكي الخاص بك (أو أي إصدار من ويكيبيديا حيث قمت "
-"بتمكين البريد الإلكتروني)، وأخيرا لتزويدنا ببعض المعلومات حول محفوظات "
-"مساهماتك في مشاريع ويكيميديا، المعلومات حول تاريخ المساهمة اختيارية، ولكنها "
-"ستساعدنا كثيرا في تقييم طلبك."
+"تُرجَى ملاحظة أنه من أجل الوصول إلى موارد الناشر الفردي; فإنك توافق على شروط "
+"استخدام وسياسة خصوصية الناشر، بالإضافة إلى ذلك، فإن وصولك إلى موارد الناشر "
+"من خلال مكتبة ويكيبيديا ترافقه الشروط التالية."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:112
+#: TWLight/users/templates/users/terms.html:136
+#, fuzzy
+#| msgid ""
+#| "You must agree not to share your usernames and passwords for access to "
+#| "publisher resources with others."
+msgid ""
+"Sharing your usernames, passwords, or any access codes for publisher "
+"resources with others;"
+msgstr ""
+"يجب أن توافق على عدم مشاركة أسماء المستخدمين وكلمات المرور الخاصة بك للوصول "
+"إلى موارد الناشر مع الآخرين."
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:142
+msgid ""
+"Automatically scraping or downloading restricted content from publishers;"
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:148
+#, fuzzy
+#| msgid ""
+#| "Systematically make printed or electronic copies of multiple extracts of "
+#| "restricted content available for any purpose"
+msgid ""
+"Systematically making printed or electronic copies of multiple extracts of "
+"restricted content available for any purpose;"
+msgstr ""
+"إجراء نسخ مطبوعة أو إلكترونية بشكل منهجي لمقتطفات متعددة من المحتويات "
+"المقيدة المتاحة لأي غرض من الأغراض"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:154
+#, fuzzy
+#| msgid ""
+#| "Datamine metadata without permission, in order, for instance, to use "
+#| "metadata for auto-created stub articles"
+msgid ""
+"Data mining metadata without permission—for example, in order to use "
+"metadata for auto-created stub articles;"
+msgstr ""
+"البيانات الوصفية لمنجم البيانات بدون إذن، على سبيل المثال، من أجل استخدام "
+"بيانات التعريف لمقالات البذور المنشأة تلقائيا"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:160
+msgid ""
+"Using the access you receive through the Wikipedia Library for profit by "
+"selling access to your account or resources which you have through it."
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:168
+msgid "External Search and Proxy Services"
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:172
+msgid ""
+"Certain resources may only be accessed using an external search service, "
+"such as the EBSCO Discovery Service, or a proxy service, such as OCLC "
+"EZProxy. If you use such external search and/or proxy services, please "
+"review the applicable terms of use and privacy policies."
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:179
+msgid ""
+"In addition, if you use OCLC EZProxy, please note that you may not use it "
+"for commercial purposes."
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:185
 msgid "Data Retention and Handling"
 msgstr "الاحتفاظ بالبيانات والتعامل معها"
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). user_home_url should not be translated.
-#: TWLight/users/templates/users/terms.html:117
-#, python-format
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:189
+msgid ""
+"The Wikimedia Foundation and our service providers use your information for "
+"the legitimate purpose of providing Wikipedia Library services in support of "
+"our charitable mission. When you apply for a Wikipedia Library account, or "
+"use your Wikipedia Library account, we may routinely collect the following "
+"information:  your username, email address, edit count, registration date, "
+"user ID number, groups to which you belong, and any special user rights; "
+"your name, country of residence, occupation, and/or affiliation, if required "
+"by a partner to which you are applying; your narrative description of your "
+"contributions and reasons for applying for access to partner resources; and "
+"the date you agree to these terms of use."
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:197
+#, fuzzy, python-format
+#| msgid ""
+#| "Each publisher who is a member of the Wikipedia Library program requires "
+#| "different specific information in the application. Some publishers may "
+#| "request only an email address, while others request more detailed data, "
+#| "such as your name, location, occupation, or institutional affiliation. "
+#| "When you complete your application, you will only be asked to supply "
+#| "information required by the publishers you have chosen, and each "
+#| "publisher will only receive the information they require. Please see our "
+#| "<a href=\"%(partners_page)s\">partner information pages</a> to learn what "
+#| "information is required by each publisher to gain access to their "
+#| "resources."
+msgid ""
+"Each publisher who is a member of the Wikipedia Library program requires "
+"different specific information in the application. Some publishers may "
+"request only an email address, while others request more detailed data, such "
+"as your name, location, occupation, or institutional affiliation. When you "
+"complete your application, you will only be asked to supply information "
+"required by the publishers you have chosen, and each publisher will only "
+"receive the information they require for providing you with access. Please "
+"see our <a href=\"%(all_partners_url)s\">partner information</a> pages to "
+"learn what information is required by each publisher to gain access to their "
+"resources."
+msgstr ""
+"كل ناشر يكون عضوا في برنامج مكتبة ويكيبيديا يتطلب معلومات محددة مختلفة في "
+"الطلب، قد يطلب بعض الناشرين عنوان بريد إلكتروني فقط، بينما يطلب آخرون بيانات "
+"أكثر تفصيلا، مثل اسمك أو موقعك أو مهنتك أو انتماءك المؤسسي، عند إكمال طلبك، "
+"سيُطلَب منك فقط توفير المعلومات التي يطلبها الناشرون الذين اخترتهم، وسيتلقى كل "
+"ناشر المعلومات التي يحتاجونها فقط/ يُرجَى الاطلاع على <a href="
+"\"%(partners_page)s\">صفحات معلومات الشركاء</a> لمعرفة المعلومات المطلوبة من "
+"كل ناشر للوصول إلى موارده."
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:204
+msgid ""
+"You can browse the Wikipedia Library site without logging in, but will need "
+"to log in to apply or access proprietary partner resources. We use the data "
+"provided by you via OAuth and Wikimedia API calls to assess your application "
+"for access and to process approved requests."
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:212
+#, fuzzy, python-format
+#| msgid ""
+#| "In order to administer the Wikipedia Library program, we will retain the "
+#| "data we collect indefinitely, unless you delete your account, as "
+#| "described below. You can log in and go to your <a href=\"%(user_home_url)s"
+#| "\">profile page</a> in order to see the information associated with your "
+#| "account. You may update this information at any time, except for the "
+#| "information that is automatically retrieved from the projects."
 msgid ""
 "In order to administer the Wikipedia Library program, we will retain the "
-"data we collect indefinitely, unless you delete your account, as described "
-"below. You can log in and go to your <a href=\"%(user_home_url)s\">profile "
-"page</a> in order to see the information associated with your account. You "
-"may update this information at any time, except for the information that is "
-"automatically retrieved from the projects."
+"application data we collect from you for three years after your most recent "
+"login, unless you delete your account, as described below. You can log in "
+"and go to <a href=\"%(profile_url)s\">your profile page</a> in order to see "
+"the information associated with your account, and can download it in JSON "
+"format. You may access, update, restrict, or delete this information at any "
+"time, except for the information that is automatically retrieved from the "
+"projects. If you have any questions or concerns about the handling of your "
+"data, please contact <a href=\"mailto:wikipedialibrary@wikimedia.org?"
+"Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation"
+"\">wikipedialibrary@wikimedia.org</a>."
 msgstr ""
 "من أجل إدارة برنامج مكتبة ويكيبيديا; سنحتفظ بالبيانات التي نجمعها لأجل غير "
 "مسمى، ما لم تحذف حسابك، كما هو موضح أدناه، يمكنك تسجيل الدخول والانتقال إلى "
@@ -3724,41 +3956,68 @@ msgstr ""
 "المرتبطة بحسابك، يمكنك تحديث هذه المعلومات في أي وقت، باستثناء المعلومات "
 "التي يتم استردادها تلقائيا من المشاريع."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:124
-#, python-format
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:219
+#, fuzzy
+#| msgid ""
+#| "If you decide to disable your Wikipedia Library account, you may email us "
+#| "at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%"
+#| "%20Library%%20Card%%20account%%20deactivation"
+#| "\">wikipedialibrary@wikimedia.org</a> in order to request the deletion of "
+#| "certain personal information associated with your account. We will delete "
+#| "your real name, occupation, institutional affiliation, and country of "
+#| "residence. Please note that the system will retain a record of your "
+#| "username, the publishers to which you applied or had access, and the "
+#| "dates of that access. If you request the deletion of account information "
+#| "and later wish to apply for a new account, you will need to provide the "
+#| "necessary information again."
 msgid ""
-"If you decide to disable your Wikipedia Library account, you may email us at "
-"<a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library"
-"%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a> in "
-"order to request the deletion of certain personal information associated "
-"with your account. We will delete your real name, occupation, institutional "
-"affiliation, and country of residence. Please note that the system will "
-"retain a record of your username, the publishers to which you applied or had "
-"access, and the dates of that access. If you request the deletion of account "
-"information and later wish to apply for a new account, you will need to "
-"provide the necessary information again."
+"If you decide to disable your Wikipedia Library account, you can use the "
+"delete button on your profile to delete certain personal information "
+"associated with your account. We will delete your real name, occupation, "
+"institutional affiliation, and country of residence. Please note that the "
+"system will retain a record of your username, the publishers to which you "
+"applied or had access, and the dates of that access. Note that deletion is "
+"not reversible. Deletion of your Wikipedia Library account may also "
+"correspond with the removal of any resource access to which you were "
+"eligible or approved. If you request the deletion of account information and "
+"later wish to apply for a new account, you will need to provide the "
+"necessary information again."
 msgstr ""
 "إذا قررت تعطيل حساب مكتبة ويكيبيديا الخاص بك، يمكنك مراسلتنا على <a href="
-"\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card"
-"%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a> لطلب حذف "
-"بعض المعلومات الشخصية المرتبطة بحسابك، سنحذف اسمك الحقيقي، ومهنتك، وانتسابك "
+"\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%"
+"%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a> لطلب حذف بعض "
+"المعلومات الشخصية المرتبطة بحسابك، سنحذف اسمك الحقيقي، ومهنتك، وانتسابك "
 "المؤسسي، وبلد إقامتك تُرجَى ملاحظة أن النظام سيحتفظ بسجل عن اسم المستخدم الخاص "
 "بك، والناشرين الذين قمت بطلبهم أو كان لهم حق الوصول إليهه، وتواريخ الوصول، "
 "إذا طلبت حذف معلومات الحساب وترغب لاحقا في التقدم بطلب للحصول على حساب جديد، "
 "فستحتاج إلى تقديم المعلومات الضرورية مرة أخرى."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:133
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:226
+#, fuzzy
+#| msgid ""
+#| "The Wikipedia Library is run by Wikimedia Foundation Staff, Contractors, "
+#| "and approved volunteer Coordinators who may have access to your "
+#| "information. The data associated with your account will be shared with "
+#| "the Wikimedia staff, contractors, service providers, and volunteer "
+#| "Coordinators who need to process the information, and who are subject to "
+#| "non-disclosure obligations. Otherwise, the Wikimedia Foundation will only "
+#| "share your information with the publishers whom you specifically select, "
+#| "with the exception of the circumstances described below."
 msgid ""
-"The Wikipedia Library is run by Wikimedia Foundation Staff, Contractors, and "
-"approved volunteer Coordinators who may have access to your information. The "
-"data associated with your account will be shared with the Wikimedia staff, "
-"contractors, service providers, and volunteer Coordinators who need to "
-"process the information, and who are subject to non-disclosure obligations. "
-"Otherwise, the Wikimedia Foundation will only share your information with "
-"the publishers whom you specifically select, with the exception of the "
-"circumstances described below."
+"The Wikipedia Library is run by WMF Staff, Contractors, and approved "
+"volunteer Coordinators. The data associated with your account will be shared "
+"with the WMF staff, contractors, service providers, and volunteer "
+"coordinators who need to process the information in connection with their "
+"work for the Wikipedia Library, and who are subject to confidentiality "
+"obligations. We will also use your data for internal Wikipedia Library "
+"purposes such as distributing user surveys and account notifications, and in "
+"a depersonalized or aggregated fashion for statistical analysis and "
+"administration. Finally, we will share your information with the publishers "
+"whom you specifically select in order to provide you with access to "
+"resources. Otherwise, your information will not be shared with third "
+"parties, with the exception of the circumstances described below."
 msgstr ""
 "يتم تشغيل مكتبة ويكيبيديا من قبل موظفي​​، ومقاولي، ومنسقي مؤسسة ويكيميديا "
 "المتطوعين المعتمدين الذين يمكنهم الوصول إلى معلوماتك، ستتم مشاركة البيانات "
@@ -3767,13 +4026,20 @@ msgstr ""
 "الإفصاح، خلاف ذلك، لن تقوم مؤسسة ويكيميديا ​​بمشاركة معلوماتك إلا مع الناشرين "
 "الذين تختارهم بشكل محدد، باستثناء الظروف الموضحة أدناه."
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:140
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
+#: TWLight/users/templates/users/terms.html:233
+#, fuzzy
+#| msgid ""
+#| "We may disclose any collected information when required by law, when we "
+#| "have your permission, when needed to protect our rights, privacy, safety, "
+#| "users, or the general public, and when necessary to enforce these terms, "
+#| "our general Terms of Use, or any other Wikimedia policy."
 msgid ""
 "We may disclose any collected information when required by law, when we have "
 "your permission, when needed to protect our rights, privacy, safety, users, "
-"or the general public, and when necessary to enforce these terms, our "
-"general Terms of Use, or any other Wikimedia policy."
+"or the general public, and when necessary to enforce these terms, WMF’s "
+"general <a href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Terms "
+"of Use</a>, or any other WMF policy."
 msgstr ""
 "قد نكشف عن أية معلومات تم جمعها عندما يتطلب القانون ذلك، عندما يكون لدينا "
 "إذن منك، أو عند الحاجة لحماية حقوقنا أو خصوصيتنا أو سلامتنا أو مستخدمينا أو "
@@ -3781,86 +4047,68 @@ msgstr ""
 "بنا، أو أي سياسة ويكيميديا ​​أخرى."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:147
+#: TWLight/users/templates/users/terms.html:240
+msgid ""
+"We take the security of your personal data seriously, and take reasonable "
+"precautions to ensure your data is protected. These precautions include "
+"access controls to limit who has access to your data and security "
+"technologies to protect data stored on the server. However, we cannot "
+"guarantee the safety of your data as it is transmitted and stored."
+msgstr ""
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
+#: TWLight/users/templates/users/terms.html:247
+#, fuzzy
+#| msgid ""
+#| "Please note that these terms do not control the use and handling of your "
+#| "data by the publishers whose resources you access. Please read their "
+#| "individual privacy policies for that information."
 msgid ""
 "Please note that these terms do not control the use and handling of your "
-"data by the publishers whose resources you access. Please read their "
-"individual privacy policies for that information."
+"data by the publishers and service providers whose resources you access or "
+"apply to access. Please read their individual privacy policies for that "
+"information."
 msgstr ""
 "تُرجَى ملاحظة أن هذه الشروط لا تتحكم في استخدام بياناتك ومعالجتها من قبل "
 "الناشرين الذين تصلهم موارده،. تُرجَى قراءة سياسات خصوصيتهم الفردية لهذه "
 "المعلومات."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:153
-msgid "Your Use of Publisher Resources"
-msgstr "استخدامك لموارد الناشر"
+#: TWLight/users/templates/users/terms.html:253
+#, fuzzy
+#| msgid "Imported"
+msgid "Important Note"
+msgstr "مستورد"
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:157
-msgid ""
-"Please note that in order to access an individual publisher’s resources, you "
-"agree to that publisher’s terms of use and privacy policy. Additionally, "
-"your access to publisher resources through the Wikipedia Library is "
-"accompanied by the following terms."
-msgstr ""
-"تُرجَى ملاحظة أنه من أجل الوصول إلى موارد الناشر الفردي; فإنك توافق على شروط "
-"استخدام وسياسة خصوصية الناشر، بالإضافة إلى ذلك، فإن وصولك إلى موارد الناشر "
-"من خلال مكتبة ويكيبيديا ترافقه الشروط التالية."
-
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:164
-msgid ""
-"Your access allows you to search, view, retrieve and display partner content "
-"(that is, content that requires an account to access) from publishers; to "
-"electronically save partner content; and to print out single copies of "
-"partner content."
-msgstr ""
-"يتيح لك وصولك البحث عن محتوى الشركاء وعرضه واسترداده وعرضه (أي المحتوى الذي "
-"يتطلب الوصول إلى الحساب) من الناشرين; لحفظ محتوى الشريك إلكترونيا، وطباعة "
-"نسخ مفردة من محتوى الشريك."
-
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:171
-msgid ""
-"You must agree not to share your usernames and passwords for access to "
-"publisher resources with others."
-msgstr ""
-"يجب أن توافق على عدم مشاركة أسماء المستخدمين وكلمات المرور الخاصة بك للوصول "
-"إلى موارد الناشر مع الآخرين."
-
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:178
-msgid ""
-"Your access to publisher resources does not allow you to mass scrape or mass "
-"download restricted content from publishers; to systematically make printed "
-"or electronic copies of multiple extracts of restricted content available "
-"for any purpose; to data mine metadata without permission, in order to use "
-"metadata for auto-created stub articles, for example; or to use the access "
-"you receive through the Wikipedia Library for profit by selling access to "
-"your account or resources to which you have through it."
-msgstr ""
-"لا يسمح لك وصولك إلى موارد الناشر بتجميع المحتوى المحظور أو التنزيل الشامل "
-"من الناشرين، إجراء نسخ مطبوعة أو إلكترونية بشكل منهجي من مقتطفات متعددة من "
-"المحتويات المقيدة المتاحة لأي غرض، للبيانات الوصفية لملف البيانات بدون إذن; "
-"من أجل استخدام البيانات الوصفية لمقالات العنان المنشأة تلقائيا، على سبيل "
-"المثال، أو استخدام الوصول الذي تتلقاه من خلال مكتبة ويكيبيديا من أجل تحقيق "
-"الربح عن طريق بيع الدخول إلى حسابك أو الموارد التي تملكها من خلاله."
-
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:188
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:258
+#, fuzzy
+#| msgid ""
+#| "The Wikimedia Foundation is a nonprofit organization based in San "
+#| "Francisco, California. The Wikipedia Library program provides access to "
+#| "resources held by publishers in multiple countries. By applying for a "
+#| "Wikipedia Library account (whether you are inside or outside of the "
+#| "United States), you agree to the collection, transfer, storage, "
+#| "processing, disclosure, and other uses of the collected information in "
+#| "the United States and other places as may be necessary to carry out the "
+#| "purposes and objectives discussed above. You also consent to the transfer "
+#| "of your information by us from the U.S. to other countries, which may "
+#| "have different or less stringent data protection laws than your country, "
+#| "in connection with providing services to you, including evaluating your "
+#| "application and securing access to your chosen publishers."
 msgid ""
 "The Wikimedia Foundation is a nonprofit organization based in San Francisco, "
 "California. The Wikipedia Library program provides access to resources held "
-"by publishers in multiple countries. By applying for a Wikipedia Library "
-"account (whether you are inside or outside of the United States), you agree "
-"to the collection, transfer, storage, processing, disclosure, and other uses "
-"of the collected information in the United States and other places as may be "
-"necessary to carry out the purposes and objectives discussed above. You also "
-"consent to the transfer of your information by us from the U.S. to other "
-"countries, which may have different or less stringent data protection laws "
-"than your country, in connection with providing services to you, including "
-"evaluating your application and securing access to your chosen publishers."
+"by publishers in multiple countries. If you apply for a Wikipedia Library "
+"account (whether you are inside or outside of the United States), you "
+"understand that your personal data will be collected, transferred, stored, "
+"processed, disclosed and otherwise used in the U.S. as described in this "
+"privacy policy. You also understand that your information may be transferred "
+"by us from the U.S. to other countries, which may have different or less "
+"stringent data protection laws than your country, in connection with "
+"providing services to you, including evaluating your application and "
+"securing access to your chosen publishers (locations for each publisher are "
+"outlined on their respective partner information pages)."
 msgstr ""
 "مؤسسة ويكيميديا ​​هي منظمة غير ربحية مقرها في سان فرانسيسكو، كاليفورنيا، يوفر "
 "برنامج مكتبة ويكيبيديا إمكانية الوصول إلى الموارد التي يحتفظ بها الناشرون في "
@@ -3873,7 +4121,7 @@ msgstr ""
 "لك، بما في ذلك تقييم طلبك وتأمين الوصول إلى ما اخترته من ناشرين."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:197
+#: TWLight/users/templates/users/terms.html:267
 msgid ""
 "Please note that in the event of any differences in meaning or "
 "interpretation between the original English version of these terms and a "
@@ -3883,23 +4131,43 @@ msgstr ""
 "الإنجليزية الأصلية من هذه المصطلحات والترجمة، فإن النسخة الإنجليزية الأصلية "
 "تكون لها الأسبقية."
 
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
+#: TWLight/users/templates/users/terms.html:276
+msgid ""
+"See also the <a href=\"https://wikimediafoundation.org/wiki/Privacy_policy"
+"\">Wikimedia Foundation Privacy Policy</a>."
+msgstr ""
+
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:205
+#: TWLight/users/templates/users/terms.html:285
 msgid "Thank you!"
 msgstr "شكرا!"
 
-#. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:209
+#. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:289
 msgid "The Wikipedia Library Team"
 msgstr "فريق مكتبة ويكيبيديا"
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/terms.html:216
+#. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
+#: TWLight/users/templates/users/terms.html:291
+#, fuzzy
+#| msgid "Wikimedia Foundation privacy policy"
+msgid "Wikimedia Foundation"
+msgstr "سياسة خصوصية مؤسسة ويكيميديا"
+
+#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
+#: TWLight/users/templates/users/terms.html:299
+#, fuzzy
+#| msgid ""
+#| "By checking this box and clicking “I Accept”, you consent to the above "
+#| "privacy statement and terms, and agree to adhere to them in your "
+#| "application to and use of the The Wikipedia Library, and the publishers’ "
+#| "services to which you gain access through The Wikipedia Library program."
 msgid ""
-"By checking this box and clicking “I Accept”, you consent to the above "
-"privacy statement and terms, and agree to adhere to them in your application "
-"to and use of the The Wikipedia Library, and the publishers’ services to "
-"which you gain access through The Wikipedia Library program."
+"By checking this box and clicking “I Accept”, you agree that you have read "
+"the above terms and that you will adhere to the terms of use in your "
+"application to and use of the The Wikipedia Library, and the publishers’ "
+"services to which you gain access through The Wikipedia Library program."
 msgstr ""
 "بتحديد هذا الصندوق والنقر على \"أوافق\"، فإنك توافق على بيان الخصوصية "
 "والبنود أعلاه، وتوافق على الالتزام بها في طلب اشتراكك في مكتبة ويكيبيديا "
@@ -4061,3 +4329,30 @@ msgstr "{username} طلب الوصول إلى <a href=\"{url}\">{partner}</a>"
 #, python-brace-format
 msgid "{username} received access to <a href=\"{url}\">{partner}</a>"
 msgstr "{username} استقبل الوصول إلى <a href=\"{url}\">{partner}</a>"
+
+#~ msgid ""
+#~ "Your access allows you to search, view, retrieve and display partner "
+#~ "content (that is, content that requires an account to access) from "
+#~ "publishers; to electronically save partner content; and to print out "
+#~ "single copies of partner content."
+#~ msgstr ""
+#~ "يتيح لك وصولك البحث عن محتوى الشركاء وعرضه واسترداده وعرضه (أي المحتوى "
+#~ "الذي يتطلب الوصول إلى الحساب) من الناشرين; لحفظ محتوى الشريك إلكترونيا، "
+#~ "وطباعة نسخ مفردة من محتوى الشريك."
+
+#~ msgid ""
+#~ "Your access to publisher resources does not allow you to mass scrape or "
+#~ "mass download restricted content from publishers; to systematically make "
+#~ "printed or electronic copies of multiple extracts of restricted content "
+#~ "available for any purpose; to data mine metadata without permission, in "
+#~ "order to use metadata for auto-created stub articles, for example; or to "
+#~ "use the access you receive through the Wikipedia Library for profit by "
+#~ "selling access to your account or resources to which you have through it."
+#~ msgstr ""
+#~ "لا يسمح لك وصولك إلى موارد الناشر بتجميع المحتوى المحظور أو التنزيل "
+#~ "الشامل من الناشرين، إجراء نسخ مطبوعة أو إلكترونية بشكل منهجي من مقتطفات "
+#~ "متعددة من المحتويات المقيدة المتاحة لأي غرض، للبيانات الوصفية لملف "
+#~ "البيانات بدون إذن; من أجل استخدام البيانات الوصفية لمقالات العنان المنشأة "
+#~ "تلقائيا، على سبيل المثال، أو استخدام الوصول الذي تتلقاه من خلال مكتبة "
+#~ "ويكيبيديا من أجل تحقيق الربح عن طريق بيع الدخول إلى حسابك أو الموارد التي "
+#~ "تملكها من خلاله."
