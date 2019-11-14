@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-11-07 15:36:08+0000\n"
-"X-POT-Import-Date: 2019-11-07 15:32:50+0000\n"
+"PO-Revision-Date: 2019-11-14 16:43:24+0000\n"
+"X-POT-Import-Date: 2019-11-14 14:24:12+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bcl\n"
@@ -325,7 +325,7 @@ msgstr "Aldaw puon kan aplikasyon isinara"
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:7
-#: TWLight/graphs/views.py:277
+#: TWLight/graphs/views.py:269
 msgid "Status"
 msgstr "Kamugtakan"
 
@@ -1057,7 +1057,7 @@ msgstr "An saimong mensahe naipadara na! Mabalik kami saimo sa madaling panahon.
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:60 TWLight/resources/views.py:340
+#: TWLight/emails/views.py:60 TWLight/resources/views.py:254
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Kaipuhan mong magin paraliwat sa Wikipedya para magibo yan."
 
@@ -1067,15 +1067,12 @@ msgid "Days until decision"
 msgstr "Aldaw bago magdesisyon"
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
-#. Translators: This is the heading of a data file which lists the number of applications to a partner.
-#: TWLight/graphs/views.py:216 TWLight/graphs/views.py:278
-#: TWLight/graphs/views.py:301
+#: TWLight/graphs/views.py:216 TWLight/graphs/views.py:270
 msgid "Number of applications"
 msgstr "Bilang kan mga aplikasyon"
 
 #. Translators: This is the heading of a data file, for a column containing date data.
-#: TWLight/graphs/views.py:230 TWLight/graphs/views.py:299
-#: TWLight/graphs/views.py:318
+#: TWLight/graphs/views.py:230
 msgid "Date"
 msgstr "Petsa"
 
@@ -1094,35 +1091,30 @@ msgstr "Bulan"
 msgid "Median days until decision"
 msgstr "Aldaw bago an desisyon"
 
-#. Translators: This is the heading of a data file which lists the number of unique (not counting repeat applications) users who have applied to a partner.
-#: TWLight/graphs/views.py:320
-msgid "Number of unique users who applied"
-msgstr "Bilang kan mga natatanging paragamit na nag-aply"
-
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
-#: TWLight/graphs/views.py:335 TWLight/graphs/views.py:362
+#: TWLight/graphs/views.py:284 TWLight/graphs/views.py:311
 msgid "You must be staff to do that."
 msgstr "Kaipuhan mong maging ''Staff'' para magibo yan."
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
-#: TWLight/graphs/views.py:345 TWLight/graphs/views.py:379
+#: TWLight/graphs/views.py:294 TWLight/graphs/views.py:328
 #: TWLight/templates/dashboard.html:102
 msgid "Page URL"
 msgstr "URL kan pahina"
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
-#: TWLight/graphs/views.py:346 TWLight/graphs/views.py:381
+#: TWLight/graphs/views.py:295 TWLight/graphs/views.py:330
 msgid "Number of (non-unique) visitors"
 msgstr "Bilang kan (pararehong) mga bisita"
 
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
-#: TWLight/graphs/views.py:397 TWLight/resources/models.py:82
+#: TWLight/graphs/views.py:346 TWLight/resources/models.py:82
 #: TWLight/users/models.py:77 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr "Lengguwahe"
 
-#: TWLight/graphs/views.py:398
+#: TWLight/graphs/views.py:347
 msgid "Number of users"
 msgstr "Bilang kan mga paragamit"
 
@@ -1674,95 +1666,25 @@ msgstr "Takda kan paggamit"
 msgid "Terms of use not available."
 msgstr "Mayo nin termino nin paggamit."
 
-#. Translators: This is the heading for the section of a partner page showing data about applications to that partner.
-#. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
-#: TWLight/resources/templates/resources/partner_detail.html:474
-#: TWLight/templates/base.html:183
-msgid "Metrics"
-msgstr "Metrics"
+#. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:485
+msgid "Active accounts"
+msgstr ""
 
-#. Translators: This is the label for a number which shows the total number of aplications submitted for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:487
-msgid "Total applications (all time)"
-msgstr "Gabos na aplikasyon"
-
-#. Translators: This is the label for a number which shows the total number of unique (not counting duplicates) users who have applied for access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:503
-msgid "Total unique applicants (all time)"
-msgstr "Gabos na mayong kaparehong aplikante (Gabos na panahon)"
+#. Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#: TWLight/resources/templates/resources/partner_detail.html:501
+msgid "Users who received access (all time)"
+msgstr ""
 
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:525
+#: TWLight/resources/templates/resources/partner_detail.html:523
 msgid "Median days from application to decision"
 msgstr "Aldaw poon sa aplikasyon hanggang sa desisyon"
 
-#. Translators: This is the section header for accounts availability numbers for the available stream(s). (e.g. https://wikipedialibrary.wmflabs.org/partners/52/).
-#: TWLight/resources/templates/resources/partner_detail.html:540
-msgid "Accounts availability"
-msgstr "Pagkakaigwa nin mga panindog"
-
-#. Translators: This help text is visible to coordinators and superusers when a negative accounts available number is displayed.
-#: TWLight/resources/templates/resources/partner_detail.html:550
-#: TWLight/resources/templates/resources/partner_detail.html:566
-msgid "Actual negative number visible to coordinators and superusers only"
+#. Translators: This is the header for total accounts on a per-collection level.
+#: TWLight/resources/templates/resources/partner_detail.html:533
+msgid "Active accounts (collections)"
 msgstr ""
-
-#. Translators: This is the label which shows the number of accounts available for the particular partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:561
-msgid "Accounts available:"
-msgstr "Mga yaun na panindog:"
-
-#. Translators: This is the section header for application statistics for a specific partner resources, arranged by the status of submitted applications. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:577
-msgid "Applications by status"
-msgstr "Mga Aplikasyon uyon sa estado"
-
-#. Translators: This is the anchor text for a hyperlink directing users to download statistical information as a comma separated value file. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:581
-#: TWLight/resources/templates/resources/partner_detail.html:616
-#: TWLight/resources/templates/resources/partner_detail.html:622
-#: TWLight/resources/templates/resources/partner_detail.html:628
-#: TWLight/templates/dashboard.html:92 TWLight/templates/dashboard.html:158
-#: TWLight/templates/dashboard.html:163 TWLight/templates/dashboard.html:175
-#: TWLight/templates/dashboard.html:185 TWLight/templates/dashboard.html:201
-msgid "download as csv"
-msgstr "I-download bilang csv"
-
-#. Translators: This is the label and number which shows the total number of applications approved for a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:588
-#, python-format
-msgid "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
-msgid_plural "Number of applications approved (all time): %(total_apps_approved_or_sent)s"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Translators: This is the label and number which shows the total number of unique users who have been approved for access to a specific partner resource. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:597
-#, python-format
-msgid "Number of unique users with approved applications (all time): %(unique_users_approved_or_sent)s"
-msgid_plural "Number of unique users with approved applications (all time): %(unique_users_approved_or_sent)s"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Translators: This is the heading of a section on partner pages which shows graphs for application numbers with time (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:613
-msgid "Applications over time"
-msgstr "Mga Aplikasyon sa gabos na panahon"
-
-#. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:616
-msgid "All applications"
-msgstr "Gabos na mga application"
-
-#. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of approved applications over time.
-#: TWLight/resources/templates/resources/partner_detail.html:622
-msgid "Approved applications only"
-msgstr "Mga aprubadong aplikasyon sana"
-
-#. Translators: This is the title of a graph on partner pages (e.g. https://wikipedialibrary.wmflabs.org/partners/8/) for a graph showing the number of unique applicants over time.
-#: TWLight/resources/templates/resources/partner_detail.html:628
-msgid "Unique users over time"
-msgstr "Mga mayong kaparehong paragamit sa gabos na panahon"
 
 #: TWLight/resources/templates/resources/partner_filter.html:10
 msgid "Browse Partners"
@@ -1871,31 +1793,31 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "Sigurado ka nang gusto mong puraon an %(object)s?"
 
 #. Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
-#: TWLight/resources/views.py:40
+#: TWLight/resources/views.py:37
 msgid "Because you are a staff member, this page may include Partners who are not yet available to all users."
 msgstr ""
 
-#: TWLight/resources/views.py:62
+#: TWLight/resources/views.py:58
 msgid "This partner is not available. You can see it because you are a staff member, but it is not visible to non-staff users."
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:233
+#: TWLight/resources/views.py:147
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:237
+#: TWLight/resources/views.py:151
 msgid "This partner is now available for applications"
 msgstr "An kaparehang ini handa na para sa mga aplikasyon"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:335
+#: TWLight/resources/views.py:249
 msgid "Your suggestion has been added."
 msgstr "An saimong suhestiyon naidugang na."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:355
+#: TWLight/resources/views.py:269
 msgid "Suggestion has been deleted."
 msgstr "An suhestiyon napura na."
 
@@ -2171,6 +2093,11 @@ msgstr "Ipadara na data sa mga kapareha"
 msgid "Latest activity"
 msgstr "Pinakabaguhong aktibidad"
 
+#. Translators: Shown in the top bar of almost every page, linking to the statitics for applications.
+#: TWLight/templates/base.html:183
+msgid "Metrics"
+msgstr "Metrics"
+
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
 #: TWLight/templates/base.html:200
 #, python-format
@@ -2248,6 +2175,12 @@ msgstr "Tamang bilang kan panindog kada paragamit"
 #: TWLight/templates/dashboard.html:92
 msgid "Page views (staff only)"
 msgstr "Paghiling sa mga pahina (Staff sana)"
+
+#: TWLight/templates/dashboard.html:92 TWLight/templates/dashboard.html:158
+#: TWLight/templates/dashboard.html:163 TWLight/templates/dashboard.html:175
+#: TWLight/templates/dashboard.html:185 TWLight/templates/dashboard.html:201
+msgid "download as csv"
+msgstr "I-download bilang csv"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the most viewed pages on the site.
 #: TWLight/templates/dashboard.html:98
