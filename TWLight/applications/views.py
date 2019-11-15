@@ -748,14 +748,10 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
 
     def form_valid(self, form):
         app = self.object
+        status = form.cleaned_data['status']
 
-        # Correctly assign sent_by.
-        if app.status == Application.SENT or (app.is_instantly_finalized() and app.status == Application.APPROVED):
-            app.sent_by = self.request.user
-            app.save()
-        
         # The logic below hard limits coordinators from approving applications when a particular proxy partner has run out of accounts.
-        if is_proxy_and_application_approved(app.status, app):
+        if is_proxy_and_application_approved(status, app):
             if app.partner.status == Partner.WAITLIST:
                 # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
                 messages.add_message(self.request, messages.ERROR,
@@ -776,6 +772,12 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                 messages.add_message(self.request, messages.ERROR,
                     _('Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution.'))
                 return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
+
+        # Correctly assign sent_by.
+        if app.status == Application.SENT or (app.is_instantly_finalized() and app.status == Application.APPROVED):
+            app.sent_by = self.request.user
+            app.save()
+
 
         with reversion.create_revision():
             reversion.set_user(self.request.user)
