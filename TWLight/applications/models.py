@@ -313,20 +313,6 @@ class Application(models.Model):
         # view.
         return self.editor.user
 
-
-    @property
-    def latest_reviewer(self):
-        revision = self.get_latest_revision()
-
-        if revision:
-            try:
-                return revision.user
-            except AttributeError:
-                return None
-        else:
-            return None
-
-
     @property
     def is_renewable(self):
         """
@@ -387,8 +373,6 @@ def post_revision_commit(sender, instance, **kwargs):
         instance.is_instantly_finalized())
 
     if skip_approved:
-        # The latest reviewer is the effective sender.
-        instance.sent_by = instance.latest_reviewer
         instance.status = Application.SENT
         instance.save()
 
