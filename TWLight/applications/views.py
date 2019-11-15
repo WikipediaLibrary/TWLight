@@ -749,12 +749,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
     def form_valid(self, form):
         app = self.object
         status = form.cleaned_data['status']
-        
-        # Correctly assign sent_by.
-        if app.status == Application.SENT:
-            app.sent_by = self.request.user
-            app.save()
-        
+
         # The logic below hard limits coordinators from approving applications when a particular proxy partner has run out of accounts.
         if is_proxy_and_application_approved(status, app):
             if app.partner.status == Partner.WAITLIST:
@@ -777,6 +772,12 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                 messages.add_message(self.request, messages.ERROR,
                     _('Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution.'))
                 return HttpResponseRedirect(reverse('applications:evaluate', kwargs={'pk':self.object.pk}))
+
+        # Correctly assign sent_by.
+        if app.status == Application.SENT or (app.is_instantly_finalized() and app.status == Application.APPROVED):
+            app.sent_by = self.request.user
+            app.save()
+
 
         with reversion.create_revision():
             reversion.set_user(self.request.user)
@@ -956,21 +957,13 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                     if app.specific_stream is not None and streams_distribution_flag[app.specific_stream.pk] is True:
                         batch_update_success.append(app_pk)
                         app.status = status
+                        app.sent_by = request.user
                         app.save()
-                        # After the app is saved, we set sent_by if we sent the app.
-                        # Necessary because of instantly finalized apps.
-                        if app.status == Application.SENT and not app.sent_by:
-                            app.sent_by = request.user
-                            app.save()
                     elif partners_distribution_flag[app.partner.pk] is True:
                         batch_update_success.append(app_pk)
                         app.status = status
+                        app.sent_by = request.user
                         app.save()
-                        # After the app is saved, we set sent_by if we sent the app.
-                        # Necessary because of instantly finalized apps.
-                        if app.status == Application.SENT and not app.sent_by:
-                            app.sent_by = request.user
-                            app.save()
                     else:
                         batch_update_failed.append(app_pk)
                 else:
@@ -978,12 +971,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             else:
                 batch_update_success.append(app_pk)
                 app.status = status
-                app.save()
-                # After the app is saved, we set sent_by if we sent the app.
-                # Necessary because of instantly finalized apps.
-                if app.status == Application.SENT and not app.sent_by:
+                if app.is_instantly_finalized() and app.status in [Application.APPROVED, Application.SENT]:
                     app.sent_by = request.user
-                    app.save()
+                app.save()
 
         # We manually send the signals to waitlist the partners with corresponding 'True' values.
         # This could be tweaked in the future to also waitlist partners with collections. We don't do that
