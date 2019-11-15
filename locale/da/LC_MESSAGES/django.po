@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-11-14 18:21+0000\n"
+"POT-Creation-Date: 2019-11-15 14:30+0000\n"
 "PO-Revision-Date: 2019-11-14 16:43:25+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -825,38 +825,38 @@ msgstr ""
 msgid "Sent applications"
 msgstr "Sendte ansøgninger"
 
-#: TWLight/applications/views.py:763
+#: TWLight/applications/views.py:758
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted."
 msgstr ""
 
-#: TWLight/applications/views.py:778
+#: TWLight/applications/views.py:773
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted and (or) has zero accounts available for distribution."
 msgstr ""
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
-#: TWLight/applications/views.py:788
+#: TWLight/applications/views.py:789
 msgid "You attempted to create a duplicate authorization."
 msgstr ""
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:820
+#: TWLight/applications/views.py:821
 msgid "Set application status"
 msgstr ""
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:855
+#: TWLight/applications/views.py:856
 msgid "Please select at least one application."
 msgstr "Vælg venligst en ansøgning."
 
-#: TWLight/applications/views.py:998
+#: TWLight/applications/views.py:988
 msgid "Batch update of application(s) {} successful."
 msgstr ""
 
-#: TWLight/applications/views.py:1003
+#: TWLight/applications/views.py:993
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -865,27 +865,27 @@ msgid ""
 msgstr ""
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1152
+#: TWLight/applications/views.py:1142
 msgid "Error: Code used multiple times."
 msgstr ""
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1186
+#: TWLight/applications/views.py:1176
 msgid "All selected applications have been marked as sent."
 msgstr "Alle valgte ansøgninger er blevet markeret som sendt."
 
-#: TWLight/applications/views.py:1213
+#: TWLight/applications/views.py:1203
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
 msgstr ""
 
-#: TWLight/applications/views.py:1271
+#: TWLight/applications/views.py:1261
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr ""
 
-#: TWLight/applications/views.py:1277
+#: TWLight/applications/views.py:1267
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
