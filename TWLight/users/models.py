@@ -158,8 +158,8 @@ class Editor(models.Model):
     affiliation = models.CharField(max_length=128, blank=True)
 
     def encode_wp_username(self, username):
-        encode_username = username.encode('utf-8')
-        return urllib.quote(encode_username)
+        encoded_username = username.encode('utf-8')
+        return urllib.quote(encoded_username)
 
     @cached_property
     def wp_user_page_url(self):
