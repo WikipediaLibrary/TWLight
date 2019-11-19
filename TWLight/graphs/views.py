@@ -187,9 +187,12 @@ class DashboardView(TemplateView):
         proxy_auth_count = proxy_auth.count()
         renewed_auth_count = renewed_auth.count()
 
+        # TODO: a double-slash was added here to preserve floor division after
+        # upgrading to python 3. Check in about the intended results to see if
+        # streamlining is possible.
         if proxy_auth_count:
             context["renewal_percentage"] = round(
-                renewed_auth_count / proxy_auth_count * 100, 2
+                renewed_auth_count // proxy_auth_count * 100, 2
             )
 
         return context
@@ -254,10 +257,13 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
             for each_proxy_auth, each_renewed_auth in itertools.zip_longest(
                 proxy_auth_data, renewed_auth_data
             ):
+                # TODO: a double-slash was added here to preserve floor division after
+                # upgrading to python 3. Check in about the intended results to see if
+                # streamlining is possible.
                 each_proxy_auth.extend(
                     [
                         each_renewed_auth[1],
-                        str(round(each_renewed_auth[1] / each_proxy_auth[1] * 100, 2))
+                        str(round(each_renewed_auth[1] // each_proxy_auth[1] * 100, 2))
                         + "%",
                     ]
                 )
