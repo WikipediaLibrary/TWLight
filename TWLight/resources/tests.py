@@ -12,11 +12,10 @@ from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import Http404
 from django.test import Client, TestCase, RequestFactory
+from django.utils.html import escape
 
-from TWLight.applications import views as app_views
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
-from TWLight.applications.views import RequestApplicationView
 from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFactory
 from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Authorization
@@ -233,7 +232,7 @@ class PartnerModelTests(TestCase):
 
         # Test response.
         response = self.client.get(url, follow=True)
-        self.assertNotContains(response, partner.company_name)
+        self.assertNotContains(response, escape(partner.company_name))
 
     def test_renew_app_page_excludes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
@@ -247,7 +246,7 @@ class PartnerModelTests(TestCase):
 
         # Test response.
         response = self.client.get(url, follow=True)
-        self.assertNotContains(response, partner.company_name)
+        self.assertNotContains(response, escape(partner.company_name))
 
     def test_sent_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
@@ -268,10 +267,10 @@ class PartnerModelTests(TestCase):
         allowResponse = self.client.get(url, follow=True)
 
         # Applications should not be visible to just any coordinator
-        self.assertNotContains(denyResponse, partner.company_name)
+        self.assertNotContains(denyResponse, escape(partner.company_name))
 
         # Applications should be visible to the designated coordinator
-        self.assertContains(allowResponse, partner.company_name)
+        self.assertContains(allowResponse, escape(partner.company_name))
 
     def test_rejected_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
@@ -292,10 +291,10 @@ class PartnerModelTests(TestCase):
         allowResponse = self.client.get(url, follow=True)
 
         # Applications should not be visible to just any coordinator
-        self.assertNotContains(denyResponse, partner.company_name)
+        self.assertNotContains(denyResponse, escape(partner.company_name))
 
         # Applications should be visible to the designated coordinator
-        self.assertContains(allowResponse, partner.company_name)
+        self.assertContains(allowResponse, escape(partner.company_name))
 
     def test_approved_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
@@ -316,10 +315,10 @@ class PartnerModelTests(TestCase):
         allowResponse = self.client.get(url, follow=True)
 
         # Applications should not be visible to just any coordinator
-        self.assertNotContains(denyResponse, partner.company_name)
+        self.assertNotContains(denyResponse, escape(partner.company_name))
 
         # Applications should be visible to the designated coordinator
-        self.assertContains(allowResponse, partner.company_name)
+        self.assertContains(allowResponse, escape(partner.company_name))
 
     def test_statuses_exist(self):
         """
