@@ -104,7 +104,8 @@ class EZProxyTicket(object):
             )
         )
         ticket = urllib.parse.quote(
-            hashlib.sha512(str(secret + user + packet).encode('utf-8')).hexdigest() + packet
+            hashlib.sha512(str(secret + user + packet).encode("utf-8")).hexdigest()
+            + packet
         )
         self.starting_point_url = (
             ezproxy_url + "/login?user=" + user + "&ticket=" + ticket

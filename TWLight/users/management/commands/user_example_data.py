@@ -37,18 +37,25 @@ class Command(BaseCommand):
             user.save()
 
         for _ in range(num_editors):
-            user = UserFactory(email=Faker(random.choice(settings.FAKER_LOCALES)).word() + "@example.com")
+            user = UserFactory(
+                email=Faker(random.choice(settings.FAKER_LOCALES)).word()
+                + "@example.com"
+            )
             editor = EditorFactory(
                 user=user,
                 real_name=Faker(random.choice(settings.FAKER_LOCALES)).name(),
-                country_of_residence=Faker(random.choice(settings.FAKER_LOCALES)).country(),
+                country_of_residence=Faker(
+                    random.choice(settings.FAKER_LOCALES)
+                ).country(),
                 occupation=Faker(random.choice(settings.FAKER_LOCALES)).job(),
                 affiliation=Faker(random.choice(settings.FAKER_LOCALES)).company(),
                 wp_editcount=random.randint(50, 2000),
-                wp_registered=Faker(random.choice(settings.FAKER_LOCALES)).date_time_between(
-                    start_date="-10y", end_date="now", tzinfo=None
+                wp_registered=Faker(
+                    random.choice(settings.FAKER_LOCALES)
+                ).date_time_between(start_date="-10y", end_date="now", tzinfo=None),
+                contributions=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(
+                    nb_sentences=4
                 ),
-                contributions=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=4),
             )
 
         # All users who aren't the superuser

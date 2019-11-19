@@ -83,6 +83,7 @@ def get_django_faker_languages_intersection(languages):
                 languages_intersection += [locale]
     return sorted(set(languages_intersection))
 
+
 # ------------------------------------------------------------------------------
 # ------------------------> core django configurations <------------------------
 # ------------------------------------------------------------------------------

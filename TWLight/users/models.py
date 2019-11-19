@@ -301,8 +301,7 @@ class Editor(models.Model):
         """
         try:
             endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2".format(
-                base=identity["iss"],
-                username=urllib.parse.quote(identity["username"]),
+                base=identity["iss"], username=urllib.parse.quote(identity["username"])
             )
 
             results = json.loads(urllib.request.urlopen(endpoint).read())

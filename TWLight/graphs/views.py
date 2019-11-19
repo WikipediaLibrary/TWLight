@@ -113,7 +113,9 @@ class DashboardView(TemplateView):
         # If we haven't authorized anyone yet, just show 0
         if authorized_users_count:
             # We're using a single slash here because we actually want a float
-            context["average_authorizations"] = authorizations_count / authorized_users_count
+            context["average_authorizations"] = (
+                authorizations_count / authorized_users_count
+            )
         else:
             context["average_authorizations"] = 0
 
@@ -330,12 +332,7 @@ class CSVAppDistribution(_CSVDownloadView):
 
         writer = csv.DictWriter(response, fieldnames=["label", "data"])
 
-        writer.writerow(
-            {
-                "label": _("Status"),
-                "data": _("Number of applications"),
-            }
-        )
+        writer.writerow({"label": _("Status"), "data": _("Number of applications")})
 
         for row in data:
             writer.writerow(row)
@@ -361,12 +358,7 @@ class CSVPageViews(_CSVDownloadView):
 
         writer = csv.writer(response)
         # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
-        writer.writerow(
-            [
-                _("Page URL"),
-                _("Number of (non-unique) visitors"),
-            ]
-        )
+        writer.writerow([_("Page URL"), _("Number of (non-unique) visitors")])
 
         for elem in path_list:
             row = [elem["path"], elem["the_count"]]
@@ -416,12 +408,7 @@ class CSVUserLanguage(_CSVDownloadView):
 
         writer = csv.DictWriter(response, fieldnames=["label", "data"])
 
-        writer.writerow(
-            {
-                "label": _("Language"),
-                "data": _("Number of users"),
-            }
-        )
+        writer.writerow({"label": _("Language"), "data": _("Number of users")})
 
         for row in data:
             writer.writerow(row)

@@ -42,7 +42,8 @@ def get_median(values_list):
         median = int(values_list[(list_len - 1) // 2])
     else:
         median = int(
-            (values_list[(list_len - 1) // 2] + values_list[1 + (list_len - 1) // 2]) // 2
+            (values_list[(list_len - 1) // 2] + values_list[1 + (list_len - 1) // 2])
+            // 2
         )
 
     return median
@@ -134,9 +135,7 @@ def get_application_status_data(
         # Therefore we need to force translation (using unicode(_).encode('utf-8'), not
         # force_str, because we don't know what language we might be
         # dealing with.)
-        status_data.append(
-            {"label": str(status[1]), "data": status_count}
-        )
+        status_data.append({"label": str(status[1]), "data": status_count})
 
     if data_format == PYTHON:
         return status_data
@@ -158,9 +157,7 @@ def get_user_language_data(queryset, data_format=JSON):
 
     for language in queryset.exclude(lang=None).values("lang").distinct():
         language_count = queryset.filter(lang=language["lang"]).count()
-        language_data.append(
-            {"label": str(language["lang"]), "data": language_count}
-        )
+        language_data.append({"label": str(language["lang"]), "data": language_count})
 
     if data_format == PYTHON:
         return language_data

@@ -56,10 +56,7 @@ class Command(BaseCommand):
         except:
             self.stdout.write(
                 "{username}:{wp_username}: could not fetch global_userinfo.".format(
-                    username=str(
-                        user.username,
-                        wp_username=user.editor.wp_username,
-                    )
+                    username=str(user.username, wp_username=user.editor.wp_username)
                 )
             )
             return None

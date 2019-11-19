@@ -82,7 +82,9 @@ class Command(BaseCommand):
                 )
 
             if random_partner.specific_title:
-                app.specific_title = Faker(random.choice(settings.FAKER_LOCALES)).sentence(nb_words=3)
+                app.specific_title = Faker(
+                    random.choice(settings.FAKER_LOCALES)
+                ).sentence(nb_words=3)
 
             if random_partner.agreement_with_terms_of_use:
                 app.agreement_with_terms_of_use = True
@@ -110,11 +112,15 @@ class Command(BaseCommand):
                 else:
                     start_date = random_user.editor.wp_registered
 
-                app.date_created = Faker(random.choice(settings.FAKER_LOCALES)).date_time_between(
-                    start_date=start_date, end_date="now", tzinfo=None
+                app.date_created = Faker(
+                    random.choice(settings.FAKER_LOCALES)
+                ).date_time_between(start_date=start_date, end_date="now", tzinfo=None)
+                app.rationale = Faker(random.choice(settings.FAKER_LOCALES)).paragraph(
+                    nb_sentences=3
                 )
-                app.rationale = Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=3)
-                app.comments = Faker(random.choice(settings.FAKER_LOCALES)).paragraph(nb_sentences=2)
+                app.comments = Faker(random.choice(settings.FAKER_LOCALES)).paragraph(
+                    nb_sentences=2
+                )
 
             # For closed applications, assign date_closed and date_open
             if app.status in Application.FINAL_STATUS_LIST:
@@ -124,7 +130,9 @@ class Command(BaseCommand):
                         end_date = "now"
                     else:
                         end_date = potential_end_date
-                    app.date_closed = Faker(random.choice(settings.FAKER_LOCALES)).date_time_between(
+                    app.date_closed = Faker(
+                        random.choice(settings.FAKER_LOCALES)
+                    ).date_time_between(
                         start_date=app.date_created, end_date=end_date, tzinfo=None
                     )
                     app.days_open = (app.date_closed - app.date_created).days

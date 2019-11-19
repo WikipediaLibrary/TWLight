@@ -9,6 +9,7 @@ from django.db.models.signals import post_save
 
 from TWLight.users.models import Editor, UserProfile
 
+
 class UserProfileFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = UserProfile
@@ -19,6 +20,7 @@ class UserProfileFactory(factory.django.DjangoModelFactory):
     # this same problem in defining the RelatedFactory in UserFactory.)
     user = factory.SubFactory("TWLight.users.factories.UserFactory", profile=None)
     terms_of_use = True
+
 
 @factory.django.mute_signals(post_save)
 class UserFactory(factory.django.DjangoModelFactory):
@@ -34,6 +36,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     See https://factoryboy.readthedocs.io/en/latest/recipes.html#example-django-s-profile
     """
+
     class Meta:
         model = User
         django_get_or_create = ("username",)
@@ -47,6 +50,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     profile.terms_of_use = True
     profile.terms_of_use_date = datetime.today()
     profile.lang = random.choice(settings.FAKER_LOCALES)
+
 
 class EditorFactory(factory.django.DjangoModelFactory):
     class Meta:

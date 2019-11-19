@@ -47,7 +47,7 @@ class GraphsTestCase(TestCase):
         cls.dashboard_url = reverse("dashboard")
 
     def _verify_equal(self, resp, expected_data):
-        reader_list = csv.reader(resp.content.decode('utf-8').splitlines())
+        reader_list = csv.reader(resp.content.decode("utf-8").splitlines())
         next(reader_list)  # Skip header row
         for row in reader_list:
             assert row in expected_data
