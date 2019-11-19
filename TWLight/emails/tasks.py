@@ -100,7 +100,7 @@ def send_coordinator_reminder_emails(sender, **kwargs):
     link = "https://{base}{path}".format(base=base_url, path=path)
 
     logger.info(
-        u"Received coordinator reminder signal for {coordinator_wp_username}; "
+        "Received coordinator reminder signal for {coordinator_wp_username}; "
         "preparing to send reminder email to {coordinator_email}.".format(
             coordinator_wp_username=coordinator_wp_username,
             coordinator_email=coordinator_email,
@@ -118,7 +118,7 @@ def send_coordinator_reminder_emails(sender, **kwargs):
             "link": link,
         },
     )
-    logger.info(u"Email queued.")
+    logger.info("Email queued.")
 
 
 @receiver(Notice.user_renewal_notice)
@@ -466,7 +466,7 @@ def contact_us_emails(sender, **kwargs):
     reply_to.append(user_email)
 
     logger.info(
-        u"Received contact us form submit signal for {editor_wp_username}; "
+        "Received contact us form submit signal for {editor_wp_username}; "
         "preparing to send email to wikipedialibrary@wikimedia.org.".format(
             editor_wp_username=editor_wp_username
         )
@@ -484,4 +484,4 @@ def contact_us_emails(sender, **kwargs):
 
     logger.info("Email constructed.")
     email.send()
-    logger.info(u"Email queued.")
+    logger.info("Email queued.")

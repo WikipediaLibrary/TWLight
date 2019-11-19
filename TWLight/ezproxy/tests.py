@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 from datetime import date, timedelta
-import urlparse
-from urllib import quote
+import urllib.parse
+from urllib.parse import quote
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -33,7 +33,7 @@ class ProxyTestCase(AuthorizationBaseTestCase):
         # We're validating everything but the ticket contents
         # because the ticket is deterministic based on the input ... and it would be a pain to write a test for it.
         self.assertEqual(response.status_code, 302)
-        too_lazy_to_test_ticket = quote(urlparse.parse_qs(response.url)["ticket"][0])
+        too_lazy_to_test_ticket = quote(urllib.parse.parse_qs(response.url)["ticket"][0])
         expected_url = (
             settings.TWLIGHT_EZPROXY_URL
             + "/login?user="

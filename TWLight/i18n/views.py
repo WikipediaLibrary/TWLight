@@ -85,7 +85,7 @@ def get_formats():
         for attr in FORMAT_SETTINGS:
             result[attr] = get_format(attr)
     formats = {}
-    for k, v in result.items():
+    for k, v in list(result.items()):
         if isinstance(v, (six.string_types, int)):
             formats[k] = smart_text(v)
         elif isinstance(v, (tuple, list)):
@@ -288,7 +288,7 @@ def get_javascript_catalog(locale, domain, packages):
     pdict = {}
     maxcnts = {}
     catalog = {}
-    for k, v in t.items():
+    for k, v in list(t.items()):
         if k == "":
             continue
         if isinstance(k, six.string_types):
@@ -300,7 +300,7 @@ def get_javascript_catalog(locale, domain, packages):
             pdict.setdefault(msgid, {})[cnt] = v
         else:
             raise TypeError(k)
-    for k, v in pdict.items():
+    for k, v in list(pdict.items()):
         catalog[k] = [v.get(i, "") for i in range(maxcnts[msgid] + 1)]
 
     return catalog, plural

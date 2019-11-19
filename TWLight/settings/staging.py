@@ -5,7 +5,7 @@ Settings file intended for use in staging, on WMF servers.  This file:
 """
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-from __future__ import print_function
+
 import sys
 
 from .base import *

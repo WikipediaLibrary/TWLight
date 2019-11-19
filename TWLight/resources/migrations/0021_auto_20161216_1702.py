@@ -5,7 +5,7 @@ DurationField. In migration 19 we created the new field; in 20 we copied over
 the data. In this migration we delete the old field. In 22 we'll rename it so
 that it presents the prior API.
 """
-from __future__ import unicode_literals
+
 
 from django.db import migrations, models
 import datetime

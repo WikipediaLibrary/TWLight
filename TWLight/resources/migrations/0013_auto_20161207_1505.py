@@ -6,7 +6,7 @@ applications. However, all Partners existing in the database already need to be
 set as AVAILABLE.
 """
 
-from __future__ import unicode_literals
+
 
 from django.db import models, migrations
 

@@ -48,7 +48,7 @@ class GraphsTestCase(TestCase):
 
     def _verify_equal(self, resp, expected_data):
         reader_list = csv.reader(resp.content.splitlines())
-        reader_list.next()  # Skip header row
+        next(reader_list)  # Skip header row
         for row in reader_list:
             assert row in expected_data
 

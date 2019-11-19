@@ -4,7 +4,7 @@ from datetime import datetime, date, timedelta
 import json
 import re
 from mock import patch, Mock
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser

@@ -150,7 +150,7 @@ class Application(models.Model):
     hidden = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return u"{self.editor} - {self.partner}".format(self=self)
+        return "{self.editor} - {self.partner}".format(self=self)
 
     def get_absolute_url(self):
         return reverse_lazy("applications:evaluate", kwargs={"pk": self.pk})

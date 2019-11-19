@@ -49,7 +49,7 @@ def get_django_cldr_languages_intersection(dir):
     languages_intersection = []
     language_data_json = open(os.path.join(dir, "language-data.json"))
     languages = json.loads(language_data_json.read())["languages"]
-    for lang_code, lang_data in languages.iteritems():
+    for lang_code, lang_data in languages.items():
         for i, (djlang_code, djlang_name) in enumerate(GLOBAL_LANGUAGES):
             if lang_code == djlang_code:
                 autonym = lang_data[-1]

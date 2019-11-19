@@ -5,14 +5,14 @@ Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
 import bleach
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import logging
 from dal import autocomplete
 from reversion import revisions as reversion
 from reversion.models import Version
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from django import forms
 from django.conf import settings
@@ -361,7 +361,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
         """
         # Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
         fail_msg = _("Choose at least one resource you want access to.")
-        if not PARTNERS_SESSION_KEY in request.session.keys():
+        if not PARTNERS_SESSION_KEY in list(request.session.keys()):
             messages.add_message(request, messages.WARNING, fail_msg)
             return HttpResponseRedirect(reverse("applications:request"))
 
@@ -532,7 +532,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         # recreating a data structure from post.
         if not filters:
             try:
-                editor_pk = urllib2.unquote(
+                editor_pk = urllib.parse.unquote(
                     bleach.clean(self.request.GET.get("Editor"))
                 )
                 if editor_pk:
@@ -540,7 +540,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
                 else:
                     editor = ""
 
-                partner_pk = urllib2.unquote(
+                partner_pk = urllib.parse.unquote(
                     bleach.clean(self.request.GET.get("Partner"))
                 )
                 if partner_pk:
@@ -1007,7 +1007,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # For applications that are for collections, we get the number of accounts available based
         # on their active authorizations to ensure we have enough accounts available and set the
         # boolean value for the corresponding stream_pk in the streams_distribution_flag dictionary.
-        for stream_pk, info in applications_per_stream.iteritems():
+        for stream_pk, info in applications_per_stream.items():
             total_accounts_available_per_stream = Stream.objects.filter(
                 pk=stream_pk
             ).values("accounts_available")[0]["accounts_available"]
@@ -1040,7 +1040,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # For applications that are for partners, we get the number of accounts available based
         # on their valid authorizations to ensure we have enough accounts available and set the
         # boolean value for the corresponding partner_pk in the partners_distribution_flag dictionary.
-        for partner_pk, app_count in applications_per_partner.iteritems():
+        for partner_pk, app_count in applications_per_partner.items():
             total_accounts_available = Partner.objects.filter(pk=partner_pk).values(
                 "accounts_available"
             )[0]["accounts_available"]

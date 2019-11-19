@@ -40,7 +40,7 @@ class Command(BaseCommand):
                 )
             )
 
-            for coordinator, count in coordinators.items():
+            for coordinator, count in list(coordinators.items()):
                 # Only bother with the signal if we have a coordinator email.
                 if coordinator[1]:
                     Reminder.coordinator_reminder.send(

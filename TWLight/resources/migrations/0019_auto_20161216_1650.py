@@ -6,7 +6,7 @@ copy over the data. In 21 we'll delete the old field, and in 22 we'll rename the
 new one to the old name so as to present the expected API.
 """
 
-from __future__ import unicode_literals
+
 
 from django.db import migrations, models
 import datetime

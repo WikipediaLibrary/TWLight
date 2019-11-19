@@ -31,8 +31,8 @@ useful to have account holders without attached Wikipedia data.
 from datetime import datetime, date, timedelta
 import json
 import logging
-import urllib2
-import urllib
+import urllib.request, urllib.error, urllib.parse
+import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -181,13 +181,13 @@ class Editor(models.Model):
     affiliation = models.CharField(max_length=128, blank=True)
 
     def encode_wp_username(self, username):
-        result = urllib.quote(username)
+        result = urllib.parse.quote(username)
         return result
 
     @cached_property
     def wp_user_page_url(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u"{base_url}/User:{username}".format(
+        url = "{base_url}/User:{username}".format(
             base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
         )
         return url
@@ -195,7 +195,7 @@ class Editor(models.Model):
     @cached_property
     def wp_talk_page_url(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u"{base_url}/User_talk:{username}".format(
+        url = "{base_url}/User_talk:{username}".format(
             base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
         )
         return url
@@ -203,7 +203,7 @@ class Editor(models.Model):
     @cached_property
     def wp_email_page_url(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u"{base_url}/Special:EmailUser/{username}".format(
+        url = "{base_url}/Special:EmailUser/{username}".format(
             base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
         )
         return url
@@ -211,7 +211,7 @@ class Editor(models.Model):
     @cached_property
     def wp_link_guc(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u"{base_url}?user={username}".format(
+        url = "{base_url}?user={username}".format(
             base_url="https://tools.wmflabs.org/guc/", username=encoded_username
         )
         return url
@@ -219,7 +219,7 @@ class Editor(models.Model):
     @cached_property
     def wp_link_central_auth(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u"{base_url}&target={username}".format(
+        url = "{base_url}&target={username}".format(
             base_url="https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth",
             username=encoded_username,
         )
@@ -302,10 +302,10 @@ class Editor(models.Model):
         try:
             endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2".format(
                 base=identity["iss"],
-                username=urllib2.quote(identity["username"].encode("utf-8")),
+                username=urllib.parse.quote(identity["username"].encode("utf-8")),
             )
 
-            results = json.loads(urllib2.urlopen(endpoint).read())
+            results = json.loads(urllib.request.urlopen(endpoint).read())
             global_userinfo = results["query"]["globaluserinfo"]
 
             try:
@@ -402,7 +402,7 @@ class Editor(models.Model):
             self.user.userprofile.save()
 
     def __unicode__(self):
-        return _(u"{wp_username}").format(
+        return _("{wp_username}").format(
             # Translators: Do not translate.
             wp_username=self.wp_username
         )
@@ -555,7 +555,7 @@ class Authorization(models.Model):
         else:
             authorizer = None
 
-        return u"authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}".format(
+        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}".format(
             authorized_user=authorized_user,
             authorizer=authorizer,
             date_authorized=self.date_authorized,

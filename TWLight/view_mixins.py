@@ -7,8 +7,8 @@ coordinator AND must have agreed to the terms of use). If we used that mixin,
 test functions and login URLs would overwrite each other. Using the dispatch
 function and super() means we can chain as many access tests as we'd like.
 """
-from urllib import urlencode
-from urlparse import ParseResult
+from urllib.parse import urlencode
+from urllib.parse import ParseResult
 
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME

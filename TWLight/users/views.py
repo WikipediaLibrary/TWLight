@@ -87,7 +87,7 @@ class UserDetailView(SelfOnly, TemplateView):
         Although 'user' is part of the default context, we need to define a
         get_object in order to be able to use the SelfOnly mixin.
         """
-        assert "pk" in self.kwargs.keys()
+        assert "pk" in list(self.kwargs.keys())
         try:
             return User.objects.get(pk=self.kwargs["pk"])
         except User.DoesNotExist:
@@ -640,7 +640,7 @@ class CollectionUserView(SelfOnly, ListView):
     template_name = "users/my_collection.html"
 
     def get_object(self):
-        assert "pk" in self.kwargs.keys()
+        assert "pk" in list(self.kwargs.keys())
         try:
             return Editor.objects.get(pk=self.kwargs["pk"])
         except Editor.DoesNotExist:
@@ -722,7 +722,7 @@ class ListApplicationsUserView(SelfOnly, ListView):
     template_name = "users/my_applications.html"
 
     def get_object(self):
-        assert "pk" in self.kwargs.keys()
+        assert "pk" in list(self.kwargs.keys())
         try:
             return Editor.objects.get(pk=self.kwargs["pk"])
         except Editor.DoesNotExist:
@@ -743,7 +743,7 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
     fields = ["date_expires"]
 
     def get_object(self):
-        assert "pk" in self.kwargs.keys()
+        assert "pk" in list(self.kwargs.keys())
         try:
             return Authorization.objects.get(pk=self.kwargs["pk"])
         except Authorization.DoesNotExist:

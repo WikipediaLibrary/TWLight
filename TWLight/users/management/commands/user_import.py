@@ -2,7 +2,7 @@ import csv
 import django.conf
 import json
 import logging
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 from datetime import datetime
 from django.utils.timezone import now
@@ -114,10 +114,10 @@ class Command(BaseCommand):
     def get_global_userinfo_from_wp_username(self, wp_username):
         try:
             endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={name}&guiprop=editcount&format=json&formatversion=2".format(
-                base="https://meta.wikimedia.org", name=urllib2.quote(wp_username)
+                base="https://meta.wikimedia.org", name=urllib.parse.quote(wp_username)
             )
 
-            results = json.loads(urllib2.urlopen(endpoint).read())
+            results = json.loads(urllib.request.urlopen(endpoint).read())
             global_userinfo = results["query"]["globaluserinfo"]
             # If the user isn't found global_userinfo contains the empty key
             # "missing"

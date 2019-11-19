@@ -135,7 +135,7 @@ def get_application_status_data(
         # force_str, because we don't know what language we might be
         # dealing with.)
         status_data.append(
-            {"label": unicode(status[1]).encode("utf-8"), "data": status_count}
+            {"label": str(status[1]).encode("utf-8"), "data": status_count}
         )
 
     if data_format == PYTHON:
@@ -159,7 +159,7 @@ def get_user_language_data(queryset, data_format=JSON):
     for language in queryset.exclude(lang=None).values("lang").distinct():
         language_count = queryset.filter(lang=language["lang"]).count()
         language_data.append(
-            {"label": unicode(language["lang"]).encode("utf-8"), "data": language_count}
+            {"label": str(language["lang"]).encode("utf-8"), "data": language_count}
         )
 
     if data_format == PYTHON:
@@ -200,7 +200,7 @@ def get_time_open_histogram(queryset, data_format=JSON):
 
     # Reformat dict (easy to use in Python) into list-of-lists expected by
     # flot.
-    output = [[k, v] for (k, v) in data_series.items()]
+    output = [[k, v] for (k, v) in list(data_series.items())]
 
     if data_format == JSON:
         return json.dumps(output)

@@ -1,7 +1,7 @@
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken, OAuthException
 import re
-import urlparse
+import urllib.parse
 
 from django.conf import settings
 from django.contrib import messages
@@ -15,7 +15,7 @@ from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django.utils.translation import get_language, ugettext as _
 
-from urllib import urlencode
+from urllib.parse import urlencode
 
 from .models import Editor
 
@@ -30,8 +30,8 @@ def _localize_oauth_redirect(redirect):
     """
     logger.info("Localizing oauth handshake URL.")
 
-    redirect_parsed = urlparse.urlparse(redirect)
-    redirect_query = urlparse.parse_qs(redirect_parsed.query)
+    redirect_parsed = urllib.parse.urlparse(redirect)
+    redirect_query = urllib.parse.parse_qs(redirect_parsed.query)
 
     localized_redirect = redirect_parsed.scheme
     localized_redirect += "://"
@@ -358,7 +358,7 @@ class OAuthCallbackView(View):
             response_qs = request_get.urlencode()
 
         try:
-            response_qs_parsed = urlparse.parse_qs(response_qs)
+            response_qs_parsed = urllib.parse.parse_qs(response_qs)
             assert "oauth_token" in response_qs_parsed
             assert "oauth_verifier" in response_qs_parsed
         except (AssertionError, TypeError):

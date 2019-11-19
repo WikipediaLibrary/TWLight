@@ -1,5 +1,5 @@
 from django import template
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 register = template.Library()
 
@@ -10,5 +10,5 @@ register = template.Library()
 @register.filter
 def urlencode(value):
     """Passes string through urlencode"""
-    output = urllib2.quote(value)
+    output = urllib.parse.quote(value)
     return output

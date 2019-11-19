@@ -151,7 +151,7 @@ class BaseApplicationForm(forms.Form):
 
         try:
             # We should have 'user' plus at least one partner in the keys.
-            assert len(field_params.keys()) >= 2
+            assert len(list(field_params.keys())) >= 2
         except AssertionError:
             logger.exception(
                 "Tried to instantiate a BaseApplicationForm but "
@@ -161,7 +161,7 @@ class BaseApplicationForm(forms.Form):
 
         expected = re.compile(r"partner_\d+")
 
-        for key in field_params.keys():
+        for key in list(field_params.keys()):
             # All keys which are not the user data should be partner data.
             if key != "user":
                 try:

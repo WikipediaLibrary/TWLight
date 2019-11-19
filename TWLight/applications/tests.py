@@ -4,7 +4,7 @@ from itertools import chain
 from mock import patch
 import reversion
 import random
-from urlparse import urlparse
+from urllib.parse import urlparse
 from faker import Faker
 
 from django import forms
@@ -271,7 +271,7 @@ class SynchronizeFieldsTest(TestCase):
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(9, len(output.keys()))
+        self.assertEqual(9, len(list(output.keys())))
 
     def test_application_output_2(self):
         """
@@ -305,7 +305,7 @@ class SynchronizeFieldsTest(TestCase):
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(1, len(output.keys()))
+        self.assertEqual(1, len(list(output.keys())))
 
     def test_application_output_3(self):
         """
@@ -349,7 +349,7 @@ class SynchronizeFieldsTest(TestCase):
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(5, len(output.keys()))
+        self.assertEqual(5, len(list(output.keys())))
 
 
 class BaseApplicationViewTest(TestCase):
@@ -726,7 +726,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         editor = EditorCraftRoom(self, Terms=True)
 
         session = self.client.session
-        if views.PARTNERS_SESSION_KEY in session.keys():
+        if views.PARTNERS_SESSION_KEY in list(session.keys()):
             del session[views.PARTNERS_SESSION_KEY]
 
         response = self.client.get(self.url)

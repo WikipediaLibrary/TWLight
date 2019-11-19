@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 import hashlib
 import logging
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
@@ -103,7 +103,7 @@ class EZProxyTicket(object):
                 username=user, packet=packet
             )
         )
-        ticket = urllib.quote(
+        ticket = urllib.parse.quote(
             hashlib.sha512(secret + user + packet).hexdigest() + packet
         )
         self.starting_point_url = (

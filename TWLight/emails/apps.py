@@ -11,4 +11,4 @@ class EmailConfig(AppConfig):
         # not be received, and emails won't get sent, and there will be nothing
         # but a lone and level field of yaks stretching far away...
         """
-        import tasks
+        from . import tasks
