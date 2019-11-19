@@ -33,7 +33,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from reversion.models import Version
 
-from .forms import EditorUpdateForm, SetLanguageForm, TermsForm, EmailChangeForm, RestrictDataForm, UserEmailForm
+from .forms import (
+    EditorUpdateForm,
+    SetLanguageForm,
+    TermsForm,
+    EmailChangeForm,
+    RestrictDataForm,
+    UserEmailForm,
+)
 from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
@@ -44,7 +51,9 @@ coordinators = get_coordinators()
 restricted = get_restricted()
 
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 def _is_real_url(url):
     """
@@ -57,37 +66,38 @@ def _is_real_url(url):
     except Resolver404:
         return False
 
+
 def _redirect_to_next_param(request):
-    next_param = request.GET.get(REDIRECT_FIELD_NAME, '')
-    if (next_param and
-        is_safe_url(url=next_param, host=request.get_host()) and
-        _is_real_url(next_param)):
+    next_param = request.GET.get(REDIRECT_FIELD_NAME, "")
+    if (
+        next_param
+        and is_safe_url(url=next_param, host=request.get_host())
+        and _is_real_url(next_param)
+    ):
         return next_param
     else:
-        return reverse_lazy('users:home')
+        return reverse_lazy("users:home")
 
 
 class UserDetailView(SelfOnly, TemplateView):
-    template_name = 'users/user_detail.html'
+    template_name = "users/user_detail.html"
 
     def get_object(self):
         """
         Although 'user' is part of the default context, we need to define a
         get_object in order to be able to use the SelfOnly mixin.
         """
-        assert 'pk' in self.kwargs.keys()
+        assert "pk" in list(self.kwargs.keys())
         try:
-            return User.objects.get(pk=self.kwargs['pk'])
+            return User.objects.get(pk=self.kwargs["pk"])
         except User.DoesNotExist:
             raise Http404
 
-
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context['language_form'] = SetLanguageForm(user=self.request.user)
-        context['password_form'] = PasswordChangeForm(user=self.request.user)
+        context["language_form"] = SetLanguageForm(user=self.request.user)
+        context["password_form"] = PasswordChangeForm(user=self.request.user)
         return context
-
 
 
 class EditorDetailView(CoordinatorOrSelf, DetailView):
@@ -99,26 +109,34 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
        EditorUpdateView, because you know Wikipedians will employ URL hacking
        to get places on the site, and this simplifies that.
     """
+
     model = Editor
-    template_name = 'users/editor_detail.html'
+    template_name = "users/editor_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         editor = self.get_object()
-        context['editor'] = editor # allow for more semantic templates
-        context['form'] = EditorUpdateForm(instance=editor)
-        context['language_form'] = SetLanguageForm(user=self.request.user)
-        context['email_form'] = UserEmailForm(user=self.request.user)
+        context["editor"] = editor  # allow for more semantic templates
+        context["form"] = EditorUpdateForm(instance=editor)
+        context["language_form"] = SetLanguageForm(user=self.request.user)
+        context["email_form"] = UserEmailForm(user=self.request.user)
 
         try:
             if self.request.user.editor == editor and not editor.contributions:
-                messages.add_message(self.request, messages.WARNING,
+                messages.add_message(
+                    self.request,
+                    messages.WARNING,
                     # Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-                    _('Please <a href="{url}">update your contributions</a> '
-                      'to Wikipedia to help coordinators evaluate your '
-                      'applications.'.format(
-                        url=reverse_lazy('users:editor_update',
-                            kwargs={'pk': editor.pk}))))
+                    _(
+                        'Please <a href="{url}">update your contributions</a> '
+                        "to Wikipedia to help coordinators evaluate your "
+                        "applications.".format(
+                            url=reverse_lazy(
+                                "users:editor_update", kwargs={"pk": editor.pk}
+                            )
+                        )
+                    ),
+                )
         except Editor.DoesNotExist:
             """
             If the user viewing the site does not have an attached editor
@@ -129,7 +147,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             """
             pass
 
-        context['password_form'] = PasswordChangeForm(user=self.request.user)
+        context["password_form"] = PasswordChangeForm(user=self.request.user)
 
         return context
 
@@ -143,31 +161,37 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             user_json = {}
             editor_data = Editor.objects.get(pk=editor.pk)
 
-            user_json['user_data'] = {}
-            user_field_list = ['wp_username', 'contributions', 'real_name',
-                'country_of_residence', 'occupation', 'affiliation']
+            user_json["user_data"] = {}
+            user_field_list = [
+                "wp_username",
+                "contributions",
+                "real_name",
+                "country_of_residence",
+                "occupation",
+                "affiliation",
+            ]
             for field in user_field_list:
                 field_data = getattr(editor_data, field)
                 if field_data:
-                    user_json['user_data'][field] = field_data
+                    user_json["user_data"][field] = field_data
 
             user_apps = Application.objects.filter(editor=editor)
-            user_json['applications'] = {}
+            user_json["applications"] = {}
             for app in user_apps:
-                user_json['applications'][app.id] = {}
-                for field in ['rationale', 'comments', 'account_email']:
+                user_json["applications"][app.id] = {}
+                for field in ["rationale", "comments", "account_email"]:
                     field_data = getattr(app, field)
                     if field_data:
-                        user_json['applications'][app.id][field] = field_data
+                        user_json["applications"][app.id][field] = field_data
 
             user_comments = Comment.objects.filter(user_id=editor.user.id)
-            user_json['comments'] = []
+            user_json["comments"] = []
             for comment in user_comments:
-                user_json['comments'].append(comment.comment)
+                user_json["comments"].append(comment.comment)
 
             json_data = json.dumps(user_json, indent=2)
-            response = HttpResponse(json_data, content_type='application/json')
-            response['Content-Disposition'] = 'attachment; filename=user_data.json'
+            response = HttpResponse(json_data, content_type="application/json")
+            response["Content-Disposition"] = "attachment; filename=user_data.json"
             return response
 
         if "update_email_settings" in request.POST:
@@ -181,8 +205,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             editor.user.userprofile.send_renewal_notices = send_renewal_notices
             editor.user.userprofile.save()
 
-        return HttpResponseRedirect(reverse_lazy('users:home'))
-
+        return HttpResponseRedirect(reverse_lazy("users:home"))
 
 
 class UserHomeView(View):
@@ -195,6 +218,7 @@ class UserHomeView(View):
     Does not do any access limitation; EditorDetailView and UserDetailView
     are responsible for that.
     """
+
     editor_view = EditorDetailView
     non_editor_view = UserDetailView
 
@@ -206,17 +230,16 @@ class UserHomeView(View):
                 # here, because as_view applies at an earlier point in the
                 # process.
                 return redirect_to_login(request.get_full_path())
-            if hasattr(request.user, 'editor'):
-                kwargs.update({'pk': request.user.editor.pk})
+            if hasattr(request.user, "editor"):
+                kwargs.update({"pk": request.user.editor.pk})
                 return_view = cls.editor_view
             else:
-                kwargs.update({'pk': request.user.pk})
+                kwargs.update({"pk": request.user.pk})
                 return_view = cls.non_editor_view
 
             return return_view.as_view()(request, *args, **kwargs)
 
         return _get_view
-
 
 
 class EditorUpdateView(SelfOnly, UpdateView):
@@ -229,10 +252,10 @@ class EditorUpdateView(SelfOnly, UpdateView):
 
     We handle personally identifying information through PIIUpdateView.
     """
-    model = Editor
-    template_name = 'users/editor_update.html'
-    form_class = EditorUpdateForm
 
+    model = Editor
+    template_name = "users/editor_update.html"
+    form_class = EditorUpdateForm
 
 
 class PIIUpdateView(SelfOnly, UpdateView):
@@ -245,9 +268,10 @@ class PIIUpdateView(SelfOnly, UpdateView):
 
     We handle personally identifying information through PIIUpdateView.
     """
+
     model = Editor
-    template_name = 'users/editor_update.html'
-    fields = ['real_name', 'country_of_residence', 'occupation', 'affiliation']
+    template_name = "users/editor_update.html"
+    fields = ["real_name", "country_of_residence", "occupation", "affiliation"]
 
     def get_object(self):
         """
@@ -256,13 +280,15 @@ class PIIUpdateView(SelfOnly, UpdateView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message(self.request, messages.WARNING,
+            messages.add_message(
+                self.request,
+                messages.WARNING,
                 # Translators: This message is shown to users who attempt to update their personal information without being logged in.
-                _('You must be logged in to do that.'))
+                _("You must be logged in to do that."),
+            )
             raise PermissionDenied
 
         return self.request.user.editor
-
 
     def get_form(self, form_class=None):
         """
@@ -272,54 +298,61 @@ class PIIUpdateView(SelfOnly, UpdateView):
             form_class = self.form_class
         form = super(PIIUpdateView, self).get_form(form_class)
         form.helper = FormHelper()
-        form.helper.add_input(Submit(
-            'submit',
-            # Translators: This is the button users click to confirm changes to their personal information.
-            _('Update'),
-            css_class='center-block'))
+        form.helper.add_input(
+            Submit(
+                "submit",
+                # Translators: This is the button users click to confirm changes to their personal information.
+                _("Update"),
+                css_class="center-block",
+            )
+        )
 
         return form
-
 
     def get_success_url(self):
         """
         Define get_success_url so that we can add a success message.
         """
-        messages.add_message(self.request, messages.SUCCESS,
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
             # Translators: Shown to the user when they successfully modify their personal information.
-            _('Your information has been updated.'))
-        return reverse_lazy('users:home')
-
+            _("Your information has been updated."),
+        )
+        return reverse_lazy("users:home")
 
 
 class EmailChangeView(SelfOnly, FormView):
     form_class = EmailChangeForm
-    template_name = 'users/editor_update.html'
+    template_name = "users/editor_update.html"
 
     def get_form_kwargs(self):
         kwargs = super(EmailChangeView, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
+        kwargs.update({"user": self.request.user})
         return kwargs
-
 
     def form_valid(self, form):
         user = self.request.user
-        
-        email = self.request.POST.get('email', False)
-        
-        if email or self.request.POST.get('use_wp_email'):
-            user.email = form.cleaned_data['email']
+
+        email = self.request.POST.get("email", False)
+
+        if email or self.request.POST.get("use_wp_email"):
+            user.email = form.cleaned_data["email"]
             user.save()
-            
-            user.userprofile.use_wp_email = form.cleaned_data['use_wp_email']
+
+            user.userprofile.use_wp_email = form.cleaned_data["use_wp_email"]
             user.userprofile.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
-            messages.add_message(self.request, messages.WARNING,
+            messages.add_message(
+                self.request,
+                messages.WARNING,
                 # Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-                _('Both the values cannot be blank. Either enter a email or check the box.'))
-            return HttpResponseRedirect(reverse_lazy('users:email_change'))
-
+                _(
+                    "Both the values cannot be blank. Either enter a email or check the box."
+                ),
+            )
+            return HttpResponseRedirect(reverse_lazy("users:email_change"))
 
     def get_object(self):
         """
@@ -328,29 +361,39 @@ class EmailChangeView(SelfOnly, FormView):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message(self.request, messages.WARNING,
+            messages.add_message(
+                self.request,
+                messages.WARNING,
                 # Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
-                _('You must be logged in to do that.'))
+                _("You must be logged in to do that."),
+            )
             raise PermissionDenied
 
         return self.request.user
 
-
     def get_success_url(self):
         if self.request.user.email:
-            messages.add_message(self.request, messages.SUCCESS,
+            messages.add_message(
+                self.request,
+                messages.SUCCESS,
                 # Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-                _('Your email has been changed to {email}.').format(
-                    email=self.request.user.email))
+                _("Your email has been changed to {email}.").format(
+                    email=self.request.user.email
+                ),
+            )
             return _redirect_to_next_param(self.request)
         else:
-            messages.add_message(self.request, messages.WARNING,
+            messages.add_message(
+                self.request,
+                messages.WARNING,
                 # Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-                _('Your email is blank. You can still explore the site, '
-                  "but you won't be able to apply for access to partner "
-                  'resources without an email.'))
-            return reverse_lazy('users:home')
-
+                _(
+                    "Your email is blank. You can still explore the site, "
+                    "but you won't be able to apply for access to partner "
+                    "resources without an email."
+                ),
+            )
+            return reverse_lazy("users:home")
 
 
 class RestrictDataView(SelfOnly, FormView):
@@ -360,41 +403,47 @@ class RestrictDataView(SelfOnly, FormView):
     ability to interact with the website. We want to make sure they
     definitely mean to do this.
     """
-    template_name = 'users/restrict_data.html'
+
+    template_name = "users/restrict_data.html"
     form_class = RestrictDataForm
 
     def get_form_kwargs(self):
         kwargs = super(RestrictDataView, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
+        kwargs.update({"user": self.request.user})
         return kwargs
 
     def get_object(self, queryset=None):
         try:
             assert self.request.user.is_authenticated()
         except AssertionError:
-            messages.add_message (self.request, messages.WARNING,
+            messages.add_message(
+                self.request,
+                messages.WARNING,
                 # Translators: This message is shown to users who attempt to update their data processing without being logged in.
-                _('You must be logged in to do that.'))
+                _("You must be logged in to do that."),
+            )
             raise PermissionDenied
 
         return self.request.user.userprofile
-
 
     def get_form(self, form_class=None):
         if form_class is None:
             form_class = self.form_class
         form = super(RestrictDataView, self).get_form(form_class)
         form.helper = FormHelper()
-        form.helper.add_input(Submit(
-            'submit',
-            # Translators: This is the button users click to confirm changes to their personal information.
-            _('Confirm'),
-            css_class='center-block'))
+        form.helper.add_input(
+            Submit(
+                "submit",
+                # Translators: This is the button users click to confirm changes to their personal information.
+                _("Confirm"),
+                css_class="center-block",
+            )
+        )
 
         return form
 
     def form_valid(self, form):
-        if form.cleaned_data['restricted']:
+        if form.cleaned_data["restricted"]:
             self.request.user.groups.add(restricted)
 
             # If a coordinator requests we stop processing their data, we
@@ -405,19 +454,18 @@ class RestrictDataView(SelfOnly, FormView):
             self.request.user.groups.remove(restricted)
 
         return HttpResponseRedirect(self.get_success_url())
-    
-    def get_success_url(self):
-        return reverse_lazy('users:home')
 
+    def get_success_url(self):
+        return reverse_lazy("users:home")
 
 
 class DeleteDataView(SelfOnly, DeleteView):
     model = User
-    template_name = 'users/user_confirm_delete.html'
-    success_url = reverse_lazy('homepage')
+    template_name = "users/user_confirm_delete.html"
+    success_url = reverse_lazy("homepage")
 
     def get_object(self, queryset=None):
-        return User.objects.get(pk=self.kwargs['pk'])
+        return User.objects.get(pk=self.kwargs["pk"])
 
     # We want to blank applications too, not just delete the user
     # object, so we need to overwrite delete()
@@ -435,7 +483,8 @@ class DeleteDataView(SelfOnly, DeleteView):
 
             # Delete the app's version history
             app_versions = Version.objects.get_for_object_reference(
-                Application, user_app.pk)
+                Application, user_app.pk
+            )
             for app_version in app_versions:
                 app_version.delete()
 
@@ -449,8 +498,8 @@ class DeleteDataView(SelfOnly, DeleteView):
 
         # Expire any expiry date authorizations, but keep the object.
         for user_authorization in Authorization.objects.filter(
-                user=user,
-                date_expires__isnull=False):
+            user=user, date_expires__isnull=False
+        ):
             user_authorization.date_expires = date.today() - timedelta(days=1)
             user_authorization.save()
 
@@ -460,6 +509,7 @@ class DeleteDataView(SelfOnly, DeleteView):
 
     def post(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
 
 class TermsView(UpdateView):
     """
@@ -471,8 +521,9 @@ class TermsView(UpdateView):
     generate or show the form for agreeing with the terms, because that wouldn't
     make any sense.
     """
+
     model = UserProfile
-    template_name = 'users/terms.html'
+    template_name = "users/terms.html"
     form_class = TermsForm
 
     def get_object(self, queryset=None):
@@ -485,7 +536,6 @@ class TermsView(UpdateView):
         else:
             return None
 
-
     def get_form(self, form_class=None):
         """
         For authenticated users, returns an instance of the form to be used in
@@ -495,11 +545,10 @@ class TermsView(UpdateView):
             form_class = self.form_class
         kwargs = self.get_form_kwargs()
 
-        if 'instance' not in kwargs:
+        if "instance" not in kwargs:
             return None
         else:
             return form_class(**self.get_form_kwargs())
-
 
     def get_form_kwargs(self):
         """
@@ -508,9 +557,8 @@ class TermsView(UpdateView):
         """
         kwargs = super(TermsView, self).get_form_kwargs()
         if self.request.user.is_authenticated():
-            kwargs.update({'instance': self.request.user.userprofile})
+            kwargs.update({"instance": self.request.user.userprofile})
         return kwargs
-
 
     def get_success_url(self):
 
@@ -537,17 +585,21 @@ class TermsView(UpdateView):
 
             if self.request.user in coordinators.user_set.all():
                 # Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-                fail_msg = _('You may explore the site, but you will not be '
-                  'able to apply for access to materials or evaluate '
-                  'applications unless you agree with the terms of use.')
+                fail_msg = _(
+                    "You may explore the site, but you will not be "
+                    "able to apply for access to materials or evaluate "
+                    "applications unless you agree with the terms of use."
+                )
             else:
                 # Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-                fail_msg = _('You may explore the site, but you will not be '
-                  'able to apply for access unless you agree with '
-                  'the terms of use.')
+                fail_msg = _(
+                    "You may explore the site, but you will not be "
+                    "able to apply for access unless you agree with "
+                    "the terms of use."
+                )
 
             messages.add_message(self.request, messages.WARNING, fail_msg)
-            return reverse_lazy('users:home')
+            return reverse_lazy("users:home")
 
 
 class AuthorizedUsers(APIView):
@@ -556,6 +608,7 @@ class AuthorizedUsers(APIView):
     partner. For proxy partners, uses the list of Authorizations. For others,
     uses the full list of sent applications.
     """
+
     authentication_classes = (TokenAuthentication,)
     # TODO: We might want to set up more granular permissions for future APIs.
     permission_classes = (IsAuthenticated,)
@@ -570,12 +623,12 @@ class AuthorizedUsers(APIView):
         if partner.authorization_method == Partner.PROXY:
             users = User.objects.filter(
                 authorizations__partner=partner,
-                authorizations__date_expires__gte=date.today()
+                authorizations__date_expires__gte=date.today(),
             ).distinct()
         else:
             users = User.objects.filter(
                 editor__applications__status=Application.SENT,
-                editor__applications__partner=partner
+                editor__applications__partner=partner,
             ).distinct()
 
         serializer = UserSerializer(users, many=True)
@@ -584,12 +637,12 @@ class AuthorizedUsers(APIView):
 
 class CollectionUserView(SelfOnly, ListView):
     model = Editor
-    template_name = 'users/my_collection.html'
+    template_name = "users/my_collection.html"
 
     def get_object(self):
-        assert 'pk' in self.kwargs.keys()
+        assert "pk" in list(self.kwargs.keys())
         try:
-            return Editor.objects.get(pk=self.kwargs['pk'])
+            return Editor.objects.get(pk=self.kwargs["pk"])
         except Editor.DoesNotExist:
             raise Http404
 
@@ -597,83 +650,102 @@ class CollectionUserView(SelfOnly, ListView):
         context = super(CollectionUserView, self).get_context_data(**kwargs)
         editor = self.get_object()
         today = datetime.date.today()
-        proxy_bundle_authorizations = Authorization.objects.filter(Q(date_expires__gte=today) |
-                                                                   Q(date_expires=None),
-                                                                   user=editor.user,
-                                                                   partner__authorization_method__in=
-                                                                   [Partner.PROXY, Partner.BUNDLE]
-                                                                   ).order_by('partner')
-        proxy_bundle_authorizations_expired = Authorization.objects.filter(user=editor.user,
-                                                                           date_expires__lt=today,
-                                                                           partner__authorization_method__in=
-                                                                           [Partner.PROXY, Partner.BUNDLE]
-                                                                           ).order_by('partner')
-        manual_authorizations = Authorization.objects.filter(Q(date_expires__gte=today) |
-                                                             Q(date_expires=None),
-                                                             user=editor.user,
-                                                             partner__authorization_method__in=
-                                                             [Partner.EMAIL, Partner.CODES, Partner.LINK]
-                                                            ).order_by('partner')
-        manual_authorizations_expired = Authorization.objects.filter(user=editor.user,
-                                                                     date_expires__lt=today,
-                                                                     partner__authorization_method__in=
-                                                                     [Partner.EMAIL, Partner.CODES, Partner.LINK]
-                                                                     ).order_by('partner')
+        proxy_bundle_authorizations = Authorization.objects.filter(
+            Q(date_expires__gte=today) | Q(date_expires=None),
+            user=editor.user,
+            partner__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
+        ).order_by("partner")
+        proxy_bundle_authorizations_expired = Authorization.objects.filter(
+            user=editor.user,
+            date_expires__lt=today,
+            partner__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
+        ).order_by("partner")
+        manual_authorizations = Authorization.objects.filter(
+            Q(date_expires__gte=today) | Q(date_expires=None),
+            user=editor.user,
+            partner__authorization_method__in=[
+                Partner.EMAIL,
+                Partner.CODES,
+                Partner.LINK,
+            ],
+        ).order_by("partner")
+        manual_authorizations_expired = Authorization.objects.filter(
+            user=editor.user,
+            date_expires__lt=today,
+            partner__authorization_method__in=[
+                Partner.EMAIL,
+                Partner.CODES,
+                Partner.LINK,
+            ],
+        ).order_by("partner")
 
-        for authorization_list in [manual_authorizations, proxy_bundle_authorizations,
-                                   manual_authorizations_expired, proxy_bundle_authorizations_expired]:
+        for authorization_list in [
+            manual_authorizations,
+            proxy_bundle_authorizations,
+            manual_authorizations_expired,
+            proxy_bundle_authorizations_expired,
+        ]:
             for each_authorization in authorization_list:
-                if each_authorization.about_to_expire or not each_authorization.is_valid:
+                if (
+                    each_authorization.about_to_expire
+                    or not each_authorization.is_valid
+                ):
                     each_authorization.latest_app = each_authorization.get_latest_app()
                     if each_authorization.latest_app:
                         if not each_authorization.latest_app.is_renewable:
                             try:
-                                each_authorization.open_app = Application.objects.filter(editor=editor,
-                                                                                         status__in=(
-                                                                                                     Application.PENDING,
-                                                                                                     Application.QUESTION,
-                                                                                                     Application.APPROVED
-                                                                                                     ),
-                                                                                         partner=each_authorization.partner
-                                                                                         ).latest('date_created')
+                                each_authorization.open_app = Application.objects.filter(
+                                    editor=editor,
+                                    status__in=(
+                                        Application.PENDING,
+                                        Application.QUESTION,
+                                        Application.APPROVED,
+                                    ),
+                                    partner=each_authorization.partner,
+                                ).latest(
+                                    "date_created"
+                                )
                             except Application.DoesNotExist:
                                 each_authorization.open_app = None
 
-        context['proxy_bundle_authorizations'] = proxy_bundle_authorizations
-        context['proxy_bundle_authorizations_expired'] = proxy_bundle_authorizations_expired
-        context['manual_authorizations'] = manual_authorizations
-        context['manual_authorizations_expired'] = manual_authorizations_expired
+        context["proxy_bundle_authorizations"] = proxy_bundle_authorizations
+        context[
+            "proxy_bundle_authorizations_expired"
+        ] = proxy_bundle_authorizations_expired
+        context["manual_authorizations"] = manual_authorizations
+        context["manual_authorizations_expired"] = manual_authorizations_expired
         return context
 
 
 class ListApplicationsUserView(SelfOnly, ListView):
     model = Editor
-    template_name = 'users/my_applications.html'
+    template_name = "users/my_applications.html"
 
     def get_object(self):
-        assert 'pk' in self.kwargs.keys()
+        assert "pk" in list(self.kwargs.keys())
         try:
-            return Editor.objects.get(pk=self.kwargs['pk'])
+            return Editor.objects.get(pk=self.kwargs["pk"])
         except Editor.DoesNotExist:
             raise Http404
 
     def get_context_data(self, **kwargs):
         context = super(ListApplicationsUserView, self).get_context_data(**kwargs)
         editor = self.get_object()
-        context['object_list'] = editor.applications.model.include_invalid.filter(editor=editor
-                                                                                  ).order_by('status', '-date_closed')
+        context["object_list"] = editor.applications.model.include_invalid.filter(
+            editor=editor
+        ).order_by("status", "-date_closed")
         return context
 
 
 class AuthorizationReturnView(SelfOnly, UpdateView):
     model = Authorization
-    template_name = 'users/authorization_confirm_return.html'
-    fields = ['date_expires']
+    template_name = "users/authorization_confirm_return.html"
+    fields = ["date_expires"]
 
     def get_object(self):
-        assert 'pk' in self.kwargs.keys()
+        assert "pk" in list(self.kwargs.keys())
         try:
-            return Authorization.objects.get(pk=self.kwargs['pk'])
+            return Authorization.objects.get(pk=self.kwargs["pk"])
         except Authorization.DoesNotExist:
             raise Http404
 
@@ -683,6 +755,11 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
         authorization.date_expires = yesterday
         authorization.save()
         # Translators: This message is shown once the access to a partner has successfully been returned.
-        messages.add_message(self.request, messages.SUCCESS,
-                             _('Access to {} has been returned.').format(authorization.partner))
-        return HttpResponseRedirect(reverse('users:my_collection', kwargs={'pk':self.request.user.editor.pk}))
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _("Access to {} has been returned.").format(authorization.partner),
+        )
+        return HttpResponseRedirect(
+            reverse("users:my_collection", kwargs={"pk": self.request.user.editor.pk})
+        )

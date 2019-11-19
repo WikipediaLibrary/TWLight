@@ -52,35 +52,36 @@ logger = logging.getLogger(__name__)
 
 
 class CommentNotificationEmailEditors(template_mail.TemplateMail):
-    name = 'comment_notification_editors'
+    name = "comment_notification_editors"
 
 
 class CommentNotificationCoordinators(template_mail.TemplateMail):
-    name = 'comment_notification_coordinator'
+    name = "comment_notification_coordinator"
 
 
 class CommentNotificationEmailOthers(template_mail.TemplateMail):
-    name = 'comment_notification_others'
+    name = "comment_notification_others"
 
 
 class ApprovalNotification(template_mail.TemplateMail):
-    name = 'approval_notification'
+    name = "approval_notification"
 
 
 class WaitlistNotification(template_mail.TemplateMail):
-    name = 'waitlist_notification'
+    name = "waitlist_notification"
 
 
 class RejectionNotification(template_mail.TemplateMail):
-    name = 'rejection_notification'
+    name = "rejection_notification"
 
 
 class CoordinatorReminderNotification(template_mail.TemplateMail):
-    name = 'coordinator_reminder_notification'
+    name = "coordinator_reminder_notification"
 
 
 class UserRenewalNotice(template_mail.TemplateMail):
-    name = 'user_renewal_notice'
+    name = "user_renewal_notice"
+
 
 @receiver(Reminder.coordinator_reminder)
 def send_coordinator_reminder_emails(sender, **kwargs):
@@ -89,26 +90,36 @@ def send_coordinator_reminder_emails(sender, **kwargs):
     to designated coordinators, reminding them to login
     to the site if there are pending applications.
     """
-    app_status = kwargs['app_status']
-    app_count = kwargs['app_count']
-    coordinator_wp_username = kwargs['coordinator_wp_username']
-    coordinator_email = kwargs['coordinator_email']
-    coordinator_lang = kwargs['coordinator_lang']
+    app_status = kwargs["app_status"]
+    app_count = kwargs["app_count"]
+    coordinator_wp_username = kwargs["coordinator_wp_username"]
+    coordinator_email = kwargs["coordinator_email"]
+    coordinator_lang = kwargs["coordinator_lang"]
     base_url = get_current_site(None).domain
-    path = reverse_lazy('applications:list')
-    link = 'https://{base}{path}'.format(base=base_url, path=path)
+    path = reverse_lazy("applications:list")
+    link = "https://{base}{path}".format(base=base_url, path=path)
 
-    logger.info(u'Received coordinator reminder signal for {coordinator_wp_username}; '
-        'preparing to send reminder email to {coordinator_email}.'.format(coordinator_wp_username=coordinator_wp_username, coordinator_email=coordinator_email))
+    logger.info(
+        "Received coordinator reminder signal for {coordinator_wp_username}; "
+        "preparing to send reminder email to {coordinator_email}.".format(
+            coordinator_wp_username=coordinator_wp_username,
+            coordinator_email=coordinator_email,
+        )
+    )
     email = CoordinatorReminderNotification()
-    logger.info('Email constructed.')
-    email.send(coordinator_email,
-        {'user': coordinator_wp_username,
-         'lang': coordinator_lang,
-         'app_status': app_status,
-         'app_count': app_count,
-         'link': link})
-    logger.info(u'Email queued.')
+    logger.info("Email constructed.")
+    email.send(
+        coordinator_email,
+        {
+            "user": coordinator_wp_username,
+            "lang": coordinator_lang,
+            "app_status": app_status,
+            "app_count": app_count,
+            "link": link,
+        },
+    )
+    logger.info("Email queued.")
+
 
 @receiver(Notice.user_renewal_notice)
 def send_user_renewal_notice_emails(sender, **kwargs):
@@ -116,22 +127,27 @@ def send_user_renewal_notice_emails(sender, **kwargs):
     Any time the related managment command is run, this sends email to
     users who have authorizations that are soon to expire.
     """
-    user_wp_username = kwargs['user_wp_username']
-    user_email = kwargs['user_email']
-    user_lang = kwargs['user_lang']
-    partner_name = kwargs['partner_name']
-    path = kwargs['partner_link']
+    user_wp_username = kwargs["user_wp_username"]
+    user_email = kwargs["user_email"]
+    user_lang = kwargs["user_lang"]
+    partner_name = kwargs["partner_name"]
+    path = kwargs["partner_link"]
 
     base_url = get_current_site(None).domain
-    partner_link = 'https://{base}{path}'.format(base=base_url, path=path)
+    partner_link = "https://{base}{path}".format(base=base_url, path=path)
 
     email = UserRenewalNotice()
 
-    email.send(user_email,
-        {'user': user_wp_username,
-         'lang': user_lang,
-         'partner_name': partner_name,
-         'partner_link': partner_link})
+    email.send(
+        user_email,
+        {
+            "user": user_wp_username,
+            "lang": user_lang,
+            "partner_name": partner_name,
+            "partner_link": partner_link,
+        },
+    )
+
 
 @receiver(comment_was_posted)
 def send_comment_notification_emails(sender, **kwargs):
@@ -139,43 +155,50 @@ def send_comment_notification_emails(sender, **kwargs):
     Any time a comment is posted on an application, this sends email to the
     application owner and anyone else who previously commented.
     """
-    current_comment = kwargs['comment']
+    current_comment = kwargs["comment"]
     app = current_comment.content_object
     assert isinstance(app, Application)
 
-    logger.info('Received comment signal on app number {app.pk}; preparing '
-                'to send notification emails'.format(app=app))
+    logger.info(
+        "Received comment signal on app number {app.pk}; preparing "
+        "to send notification emails".format(app=app)
+    )
 
-    if 'request' in kwargs:
+    if "request" in kwargs:
         # This is the expected case; the comment_was_posted signal should send
         # this.
-        request = kwargs['request']
+        request = kwargs["request"]
     else:
         # But if there's no request somehow, get_current_site has a sensible
         # default.
         request = None
 
     base_url = get_current_site(request).domain
-    logger.info('Site base_url is {base_url}'.format(base_url=base_url))
-    app_url = 'https://{base}{path}'.format(
-        base=base_url, path=app.get_absolute_url())
-    logger.info('app_url is {app_url}'.format(app_url=app_url))
+    logger.info("Site base_url is {base_url}".format(base_url=base_url))
+    app_url = "https://{base}{path}".format(base=base_url, path=app.get_absolute_url())
+    logger.info("app_url is {app_url}".format(app_url=app_url))
 
     # If the editor who owns this application was not the comment poster, notify
     # them of the new comment.
     if current_comment.user != app.editor.user:
         if app.editor.user.email:
-            logger.info('we should notify the editor')
+            logger.info("we should notify the editor")
             email = CommentNotificationEmailEditors()
-            logger.info('email constructed')
-            email.send(app.editor.user.email,
-                {'user': app.editor.wp_username,
-                 'lang': app.editor.user.userprofile.lang,
-                 'app': app,
-                 'app_url': app_url,
-                 'partner': app.partner})
-            logger.info('Email queued for {app.editor.user.email} about '
-                'app #{app.pk}'.format(app=app))
+            logger.info("email constructed")
+            email.send(
+                app.editor.user.email,
+                {
+                    "user": app.editor.wp_username,
+                    "lang": app.editor.user.userprofile.lang,
+                    "app": app,
+                    "app_url": app_url,
+                    "partner": app.partner,
+                },
+            )
+            logger.info(
+                "Email queued for {app.editor.user.email} about "
+                "app #{app.pk}".format(app=app)
+            )
 
     # Send emails to the last coordinator to make a status change to this
     # application, as long as they aren't the ones leaving the comment.
@@ -185,23 +208,29 @@ def send_comment_notification_emails(sender, **kwargs):
     recent_app_coordinator = app_versions.first().revision.user
     if recent_app_coordinator and recent_app_coordinator != current_comment.user:
         email = CommentNotificationCoordinators()
-        email.send(recent_app_coordinator.email,
-            {'user': recent_app_coordinator.editor.wp_username,
-             'lang': recent_app_coordinator.userprofile.lang,
-             'app': app,
-             'app_url': app_url,
-             'partner': app.partner})
-        logger.info('Coordinator email queued for {app.editor.user.email} about app '
-            '#{app.pk}'.format(app=app))
+        email.send(
+            recent_app_coordinator.email,
+            {
+                "user": recent_app_coordinator.editor.wp_username,
+                "lang": recent_app_coordinator.userprofile.lang,
+                "app": app,
+                "app_url": app_url,
+                "partner": app.partner,
+            },
+        )
+        logger.info(
+            "Coordinator email queued for {app.editor.user.email} about app "
+            "#{app.pk}".format(app=app)
+        )
 
     # Send to any previous commenters on the thread, other than the editor,
     # the person who left the comment just now, and the last coordinator.
-    all_comments = Comment.objects.filter(object_pk=app.pk,
-                        content_type__model='application',
-                        content_type__app_label='applications')
-    users = set(
-        [comment.user for comment in all_comments]
-        )
+    all_comments = Comment.objects.filter(
+        object_pk=app.pk,
+        content_type__model="application",
+        content_type__app_label="applications",
+    )
+    users = set([comment.user for comment in all_comments])
 
     users.remove(current_comment.user)
     try:
@@ -220,14 +249,20 @@ def send_comment_notification_emails(sender, **kwargs):
     for user in users:
         if user:
             email = CommentNotificationEmailOthers()
-            email.send(user.email,
-                {'user': user.editor.wp_username,
-                 'lang': user.userprofile.lang,
-                 'app': app,
-                 'app_url': app_url,
-                 'partner': app.partner})
-            logger.info('Email queued for {app.editor.user.email} about app '
-                '#{app.pk}'.format(app=app))
+            email.send(
+                user.email,
+                {
+                    "user": user.editor.wp_username,
+                    "lang": user.userprofile.lang,
+                    "app": app,
+                    "app_url": app_url,
+                    "partner": app.partner,
+                },
+            )
+            logger.info(
+                "Email queued for {app.editor.user.email} about app "
+                "#{app.pk}".format(app=app)
+            )
 
 
 def send_approval_notification_email(instance):
@@ -236,46 +271,63 @@ def send_approval_notification_email(instance):
     # If, for some reason, we're trying to send an email to a user
     # who deleted their account, stop doing that.
     if instance.editor:
-        email.send(instance.user.email,
-            {'user': instance.user.editor.wp_username,
-             'lang': instance.user.userprofile.lang,
-             'partner': instance.partner,
-             'user_instructions': instance.get_user_instructions()})
+        email.send(
+            instance.user.email,
+            {
+                "user": instance.user.editor.wp_username,
+                "lang": instance.user.userprofile.lang,
+                "partner": instance.partner,
+                "user_instructions": instance.get_user_instructions(),
+            },
+        )
     else:
-        logger.error("Tried to send an email to an editor that doesn't "
-            "exist, perhaps because their account is deleted.")
+        logger.error(
+            "Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted."
+        )
 
 
 def send_waitlist_notification_email(instance):
     base_url = get_current_site(None).domain
-    path = reverse_lazy('partners:filter')
-    link = 'https://{base}{path}'.format(base=base_url, path=path)
+    path = reverse_lazy("partners:filter")
+    link = "https://{base}{path}".format(base=base_url, path=path)
 
     restricted = get_restricted()
 
     email = WaitlistNotification()
     if instance.editor:
         if restricted not in instance.editor.user.groups.all():
-            email.send(instance.user.email,
-                {'user': instance.user.editor.wp_username,
-                 'lang': instance.user.userprofile.lang,
-                 'partner': instance.partner,
-                 'link': link})
+            email.send(
+                instance.user.email,
+                {
+                    "user": instance.user.editor.wp_username,
+                    "lang": instance.user.userprofile.lang,
+                    "partner": instance.partner,
+                    "link": link,
+                },
+            )
         else:
-            logger.info("Skipped user {username} when sending "
+            logger.info(
+                "Skipped user {username} when sending "
                 "waitlist notification email because user has "
                 "restricted data processing.".format(
-                    username=instance.editor.wp_username))
+                    username=instance.editor.wp_username
+                )
+            )
     else:
-        logger.error("Tried to send an email to an editor that doesn't "
-            "exist, perhaps because their account is deleted.")
+        logger.error(
+            "Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted."
+        )
+
 
 def send_rejection_notification_email(instance):
     base_url = get_current_site(None).domain
 
     if instance.pk:
-        app_url = 'https://{base}{path}'.format(
-            base=base_url, path=instance.get_absolute_url())
+        app_url = "https://{base}{path}".format(
+            base=base_url, path=instance.get_absolute_url()
+        )
     else:
         # If we are sending an email for a newly created instance, it won't have
         # a pk, so instance.get_absolute_url() won't return successfully.
@@ -283,18 +335,25 @@ def send_rejection_notification_email(instance):
         # the text of the email - it won't take them straight to their app, but
         # it will take them to a page *via which* they can perform the review
         # steps described in the email template.
-        app_url = reverse_lazy('users:home')
+        app_url = reverse_lazy("users:home")
 
     email = RejectionNotification()
     if instance.editor:
-        email.send(instance.user.email,
-            {'user': instance.user.editor.wp_username,
-             'lang': instance.user.userprofile.lang,
-             'partner': instance.partner,
-             'app_url': app_url})
+        email.send(
+            instance.user.email,
+            {
+                "user": instance.user.editor.wp_username,
+                "lang": instance.user.userprofile.lang,
+                "partner": instance.partner,
+                "app_url": app_url,
+            },
+        )
     else:
-        logger.error("Tried to send an email to an editor that doesn't "
-            "exist, perhaps because their account is deleted.")
+        logger.error(
+            "Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted."
+        )
+
 
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):
@@ -306,12 +365,11 @@ def update_app_status_on_save(sender, instance, **kwargs):
     handlers = {
         Application.APPROVED: send_approval_notification_email,
         Application.NOT_APPROVED: send_rejection_notification_email,
-
         # We can't use Partner.WAITLIST as the key, because that's actually an
         # integer, and it happens to be the same as Application.APPROVED. If
         # we're going to have a lot more keys on this list, we're going to have
         # to start thinking about namespacing them.
-        'waitlist': send_waitlist_notification_email,
+        "waitlist": send_waitlist_notification_email,
     }
 
     handler_key = None
@@ -333,7 +391,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
         # app creation under normal circumstances.
 
         if instance.partner.status == Partner.WAITLIST:
-            handler_key = 'waitlist'
+            handler_key = "waitlist"
         else:
             handler_key = instance.status
 
@@ -345,6 +403,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
             # This is fine - we only send emails for a few of the range of
             # possible statuses, so just continue.
             pass
+
 
 @receiver(pre_save, sender=AccessCode)
 def send_authorization_emails(sender, instance, **kwargs):
@@ -361,13 +420,17 @@ def send_authorization_emails(sender, instance, **kwargs):
         # and therefore want to send an email.
         if not orig_code.authorization and instance.authorization:
             mail_instance = MagicMailBuilder()
-            email = mail_instance.access_code_email(instance.authorization.user.email,
-                {'editor_wp_username': instance.authorization.user.editor.wp_username,
-                 'partner': instance.partner,
-                 'access_code': instance.code,
-                 'user_instructions': instance.partner.user_instructions
-                 })
+            email = mail_instance.access_code_email(
+                instance.authorization.user.email,
+                {
+                    "editor_wp_username": instance.authorization.user.editor.wp_username,
+                    "partner": instance.partner,
+                    "access_code": instance.code,
+                    "user_instructions": instance.partner.user_instructions,
+                },
+            )
             email.send()
+
 
 @receiver(pre_save, sender=Partner)
 def notify_applicants_when_waitlisted(sender, instance, **kwargs):
@@ -378,11 +441,13 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
     if instance.id:
         orig_partner = get_object_or_404(Partner, pk=instance.id)
 
-        if ((orig_partner.status != instance.status) and 
-            instance.status == Partner.WAITLIST):
+        if (
+            orig_partner.status != instance.status
+        ) and instance.status == Partner.WAITLIST:
 
             for app in orig_partner.applications.filter(
-                status__in=[Application.PENDING, Application.QUESTION]):
+                status__in=[Application.PENDING, Application.QUESTION]
+            ):
                 send_waitlist_notification_email(app)
 
 
@@ -395,23 +460,28 @@ def contact_us_emails(sender, **kwargs):
     """
     reply_to = []
     cc = []
-    user_email = kwargs['user_email']
-    editor_wp_username = kwargs['editor_wp_username']
-    body = kwargs['body']
+    user_email = kwargs["user_email"]
+    editor_wp_username = kwargs["editor_wp_username"]
+    body = kwargs["body"]
     reply_to.append(user_email)
-    
-    logger.info(u'Received contact us form submit signal for {editor_wp_username}; '
-        'preparing to send email to wikipedialibrary@wikimedia.org.'.format(editor_wp_username=editor_wp_username))
-        
+
+    logger.info(
+        "Received contact us form submit signal for {editor_wp_username}; "
+        "preparing to send email to wikipedialibrary@wikimedia.org.".format(
+            editor_wp_username=editor_wp_username
+        )
+    )
+
     mail_instance = MagicMailBuilder(template_mail_cls=InlineCSSTemplateMail)
-    email = mail_instance.contact_us_email('wikipedialibrary@wikimedia.org', 
-        {'editor_wp_username': editor_wp_username,
-         'body': body})
+    email = mail_instance.contact_us_email(
+        "wikipedialibrary@wikimedia.org",
+        {"editor_wp_username": editor_wp_username, "body": body},
+    )
     email.extra_headers["Reply-To"] = ", ".join(reply_to)
-    if kwargs['cc']:
+    if kwargs["cc"]:
         cc.append(user_email)
         email.extra_headers["Cc"] = ", ".join(cc)
-        
-    logger.info('Email constructed.')
+
+    logger.info("Email constructed.")
     email.send()
-    logger.info(u'Email queued.')
+    logger.info("Email queued.")

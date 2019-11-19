@@ -1,7 +1,10 @@
-from mock import patch
+import random
+
+from unittest.mock import patch
 from datetime import date, timedelta
 from faker import Faker
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.core import mail
 from django.core.exceptions import PermissionDenied
 from django.core.management import call_command
@@ -33,7 +36,7 @@ from .view_mixins import (
 
 
 coordinators = get_coordinators()
-fake = Faker()
+
 
 class ObjGet(object):
     """
@@ -445,7 +448,9 @@ class AuthorizationBaseTestCase(TestCase):
             authorization_method=Partner.EMAIL, status=Partner.AVAILABLE
         )
         self.partner2 = PartnerFactory(
-            authorization_method=Partner.PROXY, status=Partner.AVAILABLE, requested_access_duration=True
+            authorization_method=Partner.PROXY,
+            status=Partner.AVAILABLE,
+            requested_access_duration=True,
         )
         self.partner3 = PartnerFactory(
             authorization_method=Partner.CODES, status=Partner.AVAILABLE
@@ -455,7 +460,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
 
         self.editor1 = EditorFactory()
-        self.editor1.user.email = fake.email()
+        self.editor1.user.email = Faker(random.choice(settings.FAKER_LOCALES)).email()
         self.editor1.user.save()
         self.editor2 = EditorFactory()
         self.editor3 = EditorFactory()
@@ -464,7 +469,7 @@ class AuthorizationBaseTestCase(TestCase):
         # Editor 4 is the designated coordinator for all partners.
         self.partner1.coordinator = self.editor4.user
         self.partner1.account_length = timedelta(days=180)
-        self.partner1.target_url = 'http://test.localdomain';
+        self.partner1.target_url = "http://test.localdomain"
         self.partner1.save()
         self.partner2.coordinator = self.editor4.user
         self.partner2.save()
@@ -515,9 +520,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app1.refresh_from_db()
         self.auth_app1 = Authorization.objects.get(
-            authorizer=self.editor4.user,
-            user=self.editor1.user,
-            partner=self.partner1,
+            authorizer=self.editor4.user, user=self.editor1.user, partner=self.partner1
         )
 
         # Approve the application
@@ -528,9 +531,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app2.refresh_from_db()
         self.auth_app2 = Authorization(
-            authorizer=self.editor4.user,
-            user=self.editor2.user,
-            partner=self.partner1,
+            authorizer=self.editor4.user, user=self.editor2.user, partner=self.partner1
         )
 
         # Send the application
@@ -541,9 +542,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app3.refresh_from_db()
         self.auth_app3 = Authorization.objects.get(
-            authorizer=self.editor4.user,
-            user=self.editor3.user,
-            partner=self.partner1,
+            authorizer=self.editor4.user, user=self.editor3.user, partner=self.partner1
         )
 
         # PROXY authorization methods don't set .SENT on the evaluate page;
@@ -565,9 +564,7 @@ class AuthorizationBaseTestCase(TestCase):
 
         self.app4.refresh_from_db()
         self.auth_app4 = Authorization.objects.get(
-            authorizer=self.editor4.user,
-            user=self.editor1.user,
-            partner=self.partner2,
+            authorizer=self.editor4.user, user=self.editor1.user, partner=self.partner2
         )
 
         # This app was created with a factory, which doesn't create a revision.
@@ -585,9 +582,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app5.refresh_from_db()
         self.auth_app5 = Authorization.objects.get(
-            authorizer=self.editor4.user,
-            user=self.editor2.user,
-            partner=self.partner2,
+            authorizer=self.editor4.user, user=self.editor2.user, partner=self.partner2
         )
 
         # Set up an access code to distribute
@@ -640,9 +635,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app7.user,
-            authorizer=self.editor4.user,
-            partner=self.app7.partner,
+            user=self.app7.user, authorizer=self.editor4.user, partner=self.app7.partner
         ).exists()
 
         self.assertFalse(authorization_object_exists)
@@ -664,9 +657,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app7.user,
-            authorizer=self.editor4.user,
-            partner=self.app7.partner,
+            user=self.app7.user, authorizer=self.editor4.user, partner=self.app7.partner
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -677,9 +668,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app8.user,
-            authorizer=self.editor4.user,
-            partner=self.app8.partner,
+            user=self.app8.user, authorizer=self.editor4.user, partner=self.app8.partner
         ).exists()
 
         self.assertFalse(authorization_object_exists)
@@ -695,9 +684,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app8.user,
-            authorizer=self.editor4.user,
-            partner=self.app8.partner,
+            user=self.app8.user, authorizer=self.editor4.user, partner=self.app8.partner
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -738,9 +725,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         auth_app1_renewal = Authorization.objects.get(
-            user=self.app1.user,
-            authorizer=self.editor5.user,
-            partner=self.app1.partner,
+            user=self.app1.user, authorizer=self.editor5.user, partner=self.app1.partner
         )
         self.assertTrue(auth_app1_renewal)
 
@@ -796,14 +781,18 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # This comes up when partner authorization method is changed from one that has no expiration to proxy.
         # Zero partner 2 authorizations with no expiry.
         initial_partner2_auths_no_expiry_count = 0
-        initial_partner2_auths_no_expiry = Authorization.objects.filter(partner=self.partner2, date_expires__isnull=True)
+        initial_partner2_auths_no_expiry = Authorization.objects.filter(
+            partner=self.partner2, date_expires__isnull=True
+        )
         for partner2_auth in initial_partner2_auths_no_expiry:
             if partner2_auth.is_valid:
                 initial_partner2_auths_no_expiry_count += 1
 
         # Count partner 2 apps with an expiration date.
         initial_partner2_auths_with_expiry_count = 0
-        initial_partner2_auths_with_expiry = Authorization.objects.filter(partner=self.partner2, date_expires__isnull=False)
+        initial_partner2_auths_with_expiry = Authorization.objects.filter(
+            partner=self.partner2, date_expires__isnull=False
+        )
         for partner2_auth in initial_partner2_auths_with_expiry:
             if partner2_auth.is_valid:
                 initial_partner2_auths_with_expiry_count += 1
@@ -816,14 +805,22 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         self.partner2.refresh_from_db()
         # Count partner 2 apps with an expiration date post_save.
         post_save_partner2_auths_with_expiry_count = 0
-        post_save_partner2_auths_with_expiry = Authorization.objects.filter(partner=self.partner2, date_expires__isnull=False)
+        post_save_partner2_auths_with_expiry = Authorization.objects.filter(
+            partner=self.partner2, date_expires__isnull=False
+        )
         for partner2_auth in post_save_partner2_auths_with_expiry:
             if partner2_auth.is_valid:
                 post_save_partner2_auths_with_expiry_count += 1
 
         # All valid partner 2 authorizations have expiry set.
-        post_save_partner2_auths_no_expiry_count = Authorization.objects.filter(partner=self.partner2, date_expires__isnull=True).count()
-        self.assertEqual(initial_partner2_auths_with_expiry_count + initial_partner2_auths_no_expiry_count, post_save_partner2_auths_with_expiry_count)
+        post_save_partner2_auths_no_expiry_count = Authorization.objects.filter(
+            partner=self.partner2, date_expires__isnull=True
+        ).count()
+        self.assertEqual(
+            initial_partner2_auths_with_expiry_count
+            + initial_partner2_auths_no_expiry_count,
+            post_save_partner2_auths_with_expiry_count,
+        )
 
     def test_authorization_backfill_command(self):
         # The authorization backfill command should retroactively create authorizations for applications submitted
@@ -835,12 +832,11 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # Zero authorizations.
         self.assertEqual(Authorization.objects.count(), 0)
         # run the backfill command
-        call_command('authorization_backfill')
+        call_command("authorization_backfill")
         # Count the authorizations created by the backfill command.
         backfill_authorization_count = Authorization.objects.count()
         # All authorizations replaced.
         self.assertEqual(realtime_authorization_count, backfill_authorization_count)
-
 
 
 class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):

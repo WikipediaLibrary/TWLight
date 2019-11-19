@@ -11,6 +11,9 @@ set -euo pipefail
     # Load virtual environment
     if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
     then
+        # Run linters
+        echo "black --target-version py37 --check TWLight"
+        black --target-version py37 --check TWLight || :
         # Run test suite via coverage so we can get a report without having to run separate tests for it.
         DJANGO_LOG_LEVEL=CRITICAL DJANGO_SETTINGS_MODULE=TWLight.settings.local coverage run --source TWLight manage.py test --keepdb --noinput
     else

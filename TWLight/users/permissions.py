@@ -1,4 +1,3 @@
-
 """
 This is where we should think about user permissions.
 Note that coordinators do NOT have perms to see everything in the applications -

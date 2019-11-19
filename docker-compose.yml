@@ -26,7 +26,7 @@ services:
   twlight:
     build:
       context: .
-    command: /venv/bin/gunicorn TWLight.wsgi
+    command: /venv/bin/gunicorn -b 0.0.0.0:80 TWLight.wsgi
     volumes:
       - type: bind
         source: ./media

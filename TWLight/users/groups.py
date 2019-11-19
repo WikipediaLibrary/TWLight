@@ -1,9 +1,9 @@
 from django.contrib.auth.models import Group
 
 # Woo yeah named constant!
-COORDINATOR_GROUP_NAME = 'Coordinators'
+COORDINATOR_GROUP_NAME = "Coordinators"
 # Woo yeah another named constant!
-RESTRICTED_GROUP_NAME = 'Restricted'
+RESTRICTED_GROUP_NAME = "Restricted"
 
 # Django will try to execute this file before syncdb has been run for the
 # first time, i.e. before the database has been set up. That means this
@@ -13,11 +13,13 @@ RESTRICTED_GROUP_NAME = 'Restricted'
 # The actual groups are established by a migration, so they are
 # guaranteed to exist at runtime.
 
+
 def get_coordinators():
     try:
         return Group.objects.get(name=COORDINATOR_GROUP_NAME)
     except:
         pass
+
 
 def get_restricted():
     try:

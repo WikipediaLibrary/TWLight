@@ -14,22 +14,20 @@ class Command(BaseCommand):
         # four weeks, for which we haven't yet sent a reminder email, and
         # exclude users who disabled these emails.
         expiring_authorizations = Authorization.objects.filter(
-            date_expires__lt=datetime.today()+timedelta(weeks=4),
+            date_expires__lt=datetime.today() + timedelta(weeks=4),
             date_expires__gte=datetime.today(),
-            reminder_email_sent=False
-            ).exclude(
-                user__userprofile__send_renewal_notices=False
-                )
+            reminder_email_sent=False,
+        ).exclude(user__userprofile__send_renewal_notices=False)
 
         for authorization_object in expiring_authorizations:
             Notice.user_renewal_notice.send(
-                       sender=self.__class__,
-                       user_wp_username=authorization_object.user.editor.wp_username,
-                       user_email=authorization_object.user.email,
-                       user_lang=authorization_object.user.userprofile.lang,
-                       partner_name=authorization_object.partner.company_name,
-                       partner_link=authorization_object.partner.get_absolute_url()
-                   )
+                sender=self.__class__,
+                user_wp_username=authorization_object.user.editor.wp_username,
+                user_email=authorization_object.user.email,
+                user_lang=authorization_object.user.userprofile.lang,
+                partner_name=authorization_object.partner.company_name,
+                partner_link=authorization_object.partner.get_absolute_url(),
+            )
 
             # Record that we sent the email so that we only send one.
             authorization_object.reminder_email_sent = True

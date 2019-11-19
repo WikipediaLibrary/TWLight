@@ -2,8 +2,9 @@ from autocomplete_light import shortcuts as autocomplete_light
 
 from .models import Partner
 
+
 class PartnerAutocomplete(autocomplete_light.AutocompleteModelBase):
-    search_fields = ['company_name']
+    search_fields = ["company_name"]
     model = Partner
 
     # Without this line, the autocomplete apparently supplies all Partners,
@@ -14,5 +15,6 @@ class PartnerAutocomplete(autocomplete_light.AutocompleteModelBase):
     # an autocomplete over all possible partners, create and register a
     # separate one and use that in other contexts.
     choices = Partner.objects.all()
+
 
 autocomplete_light.register(PartnerAutocomplete)

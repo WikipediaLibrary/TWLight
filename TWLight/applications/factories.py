@@ -9,7 +9,6 @@ from TWLight.applications.models import Application
 
 
 class ApplicationFactory(factory.django.DjangoModelFactory):
-
     class Meta:
         model = Application
         strategy = factory.CREATE_STRATEGY

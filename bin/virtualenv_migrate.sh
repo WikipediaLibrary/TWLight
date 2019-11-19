@@ -9,16 +9,16 @@ then
     echo "migrate"
     # We need to create initial revisions on fresh installs, which fail on
     # existing installs. Ignore exit status.
-    python ${TWLIGHT_HOME}/manage.py createinitialrevisions || :
-    python ${TWLIGHT_HOME}/manage.py makemigrations || exit 1
+    python3 ${TWLIGHT_HOME}/manage.py createinitialrevisions || :
+    python3 ${TWLIGHT_HOME}/manage.py makemigrations || exit 1
 
-    if ! python ${TWLIGHT_HOME}/manage.py migrate; then
+    if ! python3 ${TWLIGHT_HOME}/manage.py migrate; then
         # Sync any translation fields that were missed by migration.
-        python ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
-        python ${TWLIGHT_HOME}/manage.py migrate
+        python3 ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
+        python3 ${TWLIGHT_HOME}/manage.py migrate
     fi
 
-    apps=($(python ${TWLIGHT_HOME}/manage.py diffsettings | grep 'TWLIGHT_APPS' | grep -o "'[^']*'" | xargs))
+    apps=($(python3 ${TWLIGHT_HOME}/manage.py diffsettings | grep 'TWLIGHT_APPS' | grep -o "'[^']*'" | xargs))
     for path in "${apps[@]}"; do
       # Strip 'TWLight.' from the front of each TWLIGHT_APP
       app=${path:8}
@@ -27,20 +27,20 @@ then
         continue
       fi
       echo "createinitialrevisions ${app}"
-      python ${TWLIGHT_HOME}/manage.py createinitialrevisions ${app} || :
+      python3 ${TWLIGHT_HOME}/manage.py createinitialrevisions ${app} || :
       echo "makemigrations ${app}"
-      python ${TWLIGHT_HOME}/manage.py makemigrations ${app} || exit 1
+      python3 ${TWLIGHT_HOME}/manage.py makemigrations ${app} || exit 1
       echo "migrate ${app}"
-      if ! python ${TWLIGHT_HOME}/manage.py migrate ${app}; then
+      if ! python3 ${TWLIGHT_HOME}/manage.py migrate ${app}; then
           # Sync any translation fields that were missed by migration.
-          python ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
-          python ${TWLIGHT_HOME}/manage.py migrate ${app}
+          python3 ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
+          python3 ${TWLIGHT_HOME}/manage.py migrate ${app}
       fi
     done
 
     # Sync any translation fields that were missed by migration.
     echo "sync_translation_fields"
-    python ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
+    python3 ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
 else
     exit 1
 fi

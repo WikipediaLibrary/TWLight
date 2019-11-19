@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 import hashlib
 import logging
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
-from django.core.exceptions import PermissionDenied, SuspiciousOperation, ValidationError
+from django.core.exceptions import (
+    PermissionDenied,
+    SuspiciousOperation,
+    ValidationError,
+)
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
@@ -83,9 +87,7 @@ class EZProxyTicket(object):
         # Clearly not allowed if there is no user.
         # Clearly not allowed if the user isn't in any proxy groups.
         if not (groups and user):
-            raise PermissionDenied(
-                "You are not authorized to access this resource."
-            )
+            raise PermissionDenied("You are not authorized to access this resource.")
 
         if not secret:
             raise SuspiciousOperation(
@@ -101,8 +103,9 @@ class EZProxyTicket(object):
                 username=user, packet=packet
             )
         )
-        ticket = urllib.quote(
-            hashlib.sha512(secret + user + packet).hexdigest() + packet
+        ticket = urllib.parse.quote(
+            hashlib.sha512(str(secret + user + packet).encode("utf-8")).hexdigest()
+            + packet
         )
         self.starting_point_url = (
             ezproxy_url + "/login?user=" + user + "&ticket=" + ticket

@@ -31,8 +31,8 @@ useful to have account holders without attached Wikipedia data.
 from datetime import datetime, date, timedelta
 import json
 import logging
-import urllib2
-import urllib
+import urllib.request, urllib.error, urllib.parse
+import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -53,31 +53,47 @@ class UserProfile(models.Model):
     """
 
     class Meta:
-        app_label = 'users'
+        app_label = "users"
         # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
-        verbose_name = 'user profile'
-        verbose_name_plural = 'user profiles'
+        verbose_name = "user profile"
+        verbose_name_plural = "user profiles"
 
     # Related name for backwards queries defaults to "userprofile".
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Have they agreed to our terms?
-    terms_of_use = models.BooleanField(default=False,
-                                       # Translators: Users must agree to the website terms of use.
-                                       help_text=_("Has this user agreed with the terms of use?"))
-    terms_of_use_date = models.DateField(blank=True, null=True,
-                                         # Translators: This field records the date the user agreed to the website terms of use.
-                                         help_text=_("The date this user agreed to the terms of use."))
+    terms_of_use = models.BooleanField(
+        default=False,
+        # Translators: Users must agree to the website terms of use.
+        help_text=_("Has this user agreed with the terms of use?"),
+    )
+    terms_of_use_date = models.DateField(
+        blank=True,
+        null=True,
+        # Translators: This field records the date the user agreed to the website terms of use.
+        help_text=_("The date this user agreed to the terms of use."),
+    )
     # Translators: An option to set whether users email is copied to their website account from Wikipedia when logging in.
-    use_wp_email = models.BooleanField(default=True, help_text=_('Should we '
-                                                                 'automatically update their email from their Wikipedia email when they '
-                                                                 'log in? Defaults to True.'))
-    lang = models.CharField(max_length=128, null=True, blank=True,
-                            choices=settings.LANGUAGES,
-                            # Translators: Users' detected or selected language.
-                            help_text=_("Language"))
-    send_renewal_notices = models.BooleanField(default=True,
-                                               # Translators: Description of the option users have to enable or disable reminder emails for renewals
-                                               help_text=_("Does this user want renewal reminder notices?"))
+    use_wp_email = models.BooleanField(
+        default=True,
+        help_text=_(
+            "Should we "
+            "automatically update their email from their Wikipedia email when they "
+            "log in? Defaults to True."
+        ),
+    )
+    lang = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        choices=settings.LANGUAGES,
+        # Translators: Users' detected or selected language.
+        help_text=_("Language"),
+    )
+    send_renewal_notices = models.BooleanField(
+        default=True,
+        # Translators: Description of the option users have to enable or disable reminder emails for renewals
+        help_text=_("Does this user want renewal reminder notices?"),
+    )
 
 
 # Create user profiles automatically when users are created.
@@ -86,8 +102,7 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.create(user=instance)
 
 
-models.signals.post_save.connect(create_user_profile,
-                                 sender=settings.AUTH_USER_MODEL)
+models.signals.post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL)
 
 
 class Editor(models.Model):
@@ -99,55 +114,63 @@ class Editor(models.Model):
     """
 
     class Meta:
-        app_label = 'users'
+        app_label = "users"
         # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
-        verbose_name = 'wikipedia editor'
-        verbose_name_plural = 'wikipedia editors'
+        verbose_name = "wikipedia editor"
+        verbose_name_plural = "wikipedia editors"
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Set as non-editable.
-    date_created = models.DateField(default=now,
-                                    editable=False,
-                                    # Translators: The date the user's profile was created on the website (not on Wikipedia).
-                                    help_text=_("When this profile was first created"))
+    date_created = models.DateField(
+        default=now,
+        editable=False,
+        # Translators: The date the user's profile was created on the website (not on Wikipedia).
+        help_text=_("When this profile was first created"),
+    )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
     # Data are current *as of the time of TWLight signup* but may get out of
     # sync thereafter.
-    wp_username = models.CharField(max_length=235,
-                                   help_text=_("Username"))
+    wp_username = models.CharField(max_length=235, help_text=_("Username"))
     # Translators: The total number of edits this user has made to all Wikipedia projects
-    wp_editcount = models.IntegerField(help_text=_("Wikipedia edit count"),
-                                       blank=True, null=True)
+    wp_editcount = models.IntegerField(
+        help_text=_("Wikipedia edit count"), blank=True, null=True
+    )
     # Translators: The date this user registered their Wikipedia account
-    wp_registered = models.DateField(help_text=_("Date registered at Wikipedia"),
-                                     blank=True, null=True)
-    wp_sub = models.IntegerField(unique=True,
-                                 # Translators: The User ID for this user on Wikipedia
-                                 help_text=_("Wikipedia user ID"))  # WP user id.
+    wp_registered = models.DateField(
+        help_text=_("Date registered at Wikipedia"), blank=True, null=True
+    )
+    wp_sub = models.IntegerField(
+        unique=True,
+        # Translators: The User ID for this user on Wikipedia
+        help_text=_("Wikipedia user ID"),
+    )  # WP user id.
 
     # Should we want to filter these to check for specific group membership or
     # user rights in future:
     # Editor.objects.filter(wp_groups__icontains=groupname) or similar.
     # Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-    wp_groups = models.TextField(help_text=_("Wikipedia groups"),
-                                 blank=True)
+    wp_groups = models.TextField(help_text=_("Wikipedia groups"), blank=True)
     # Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-    wp_rights = models.TextField(help_text=_("Wikipedia user rights"),
-                                 blank=True)
-    wp_valid = models.BooleanField(default=False,
-                                   # Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-                                   help_text=_('At their last login, did this user meet the criteria in '
-                                               'the terms of use?'))
+    wp_rights = models.TextField(help_text=_("Wikipedia user rights"), blank=True)
+    wp_valid = models.BooleanField(
+        default=False,
+        # Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
+        help_text=_(
+            "At their last login, did this user meet the criteria in "
+            "the terms of use?"
+        ),
+    )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     contributions = models.TextField(
         # Translators: Describes information added by the user to describe their Wikipedia edits.
         help_text=_("Wiki contributions, as entered by user"),
-        blank=True)
+        blank=True,
+    )
 
     # Fields we may, or may not, have collected in the course of applications
     # for resource grants.
@@ -158,45 +181,47 @@ class Editor(models.Model):
     affiliation = models.CharField(max_length=128, blank=True)
 
     def encode_wp_username(self, username):
-        result = urllib.quote(username)
+        result = urllib.parse.quote(username)
         return result
 
     @cached_property
     def wp_user_page_url(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u'{base_url}/User:{username}'.format(
-            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username)
+        url = "{base_url}/User:{username}".format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
+        )
         return url
 
     @cached_property
     def wp_talk_page_url(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u'{base_url}/User_talk:{username}'.format(
-            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username)
+        url = "{base_url}/User_talk:{username}".format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
+        )
         return url
 
     @cached_property
     def wp_email_page_url(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u'{base_url}/Special:EmailUser/{username}'.format(
-            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username)
+        url = "{base_url}/Special:EmailUser/{username}".format(
+            base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
+        )
         return url
 
     @cached_property
     def wp_link_guc(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u'{base_url}?user={username}'.format(
-            base_url='https://tools.wmflabs.org/guc/',
-            username=encoded_username
+        url = "{base_url}?user={username}".format(
+            base_url="https://tools.wmflabs.org/guc/", username=encoded_username
         )
         return url
 
     @cached_property
     def wp_link_central_auth(self):
         encoded_username = self.encode_wp_username(self.wp_username)
-        url = u'{base_url}&target={username}'.format(
-            base_url='https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth',
-            username=encoded_username
+        url = "{base_url}&target={username}".format(
+            base_url="https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth",
+            username=encoded_username,
         )
         return url
 
@@ -238,28 +263,28 @@ class Editor(models.Model):
         if not global_userinfo:
             return False
         # Check: >= 500 edits
-        enough_edits = int(global_userinfo['editcount']) >= 500
+        enough_edits = int(global_userinfo["editcount"]) >= 500
 
         # Check: registered >= 6 months ago
         # Try oauth registration date first. If it's not valid,
         # try the global_userinfo date
         try:
-            reg_date = datetime.strptime(identity['registered'],
-                                         '%Y%m%d%H%M%S').date()
+            reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
         except:
-            reg_date = datetime.strptime(global_userinfo['registration'],
-                                         '%Y-%m-%dT%H:%M:%SZ').date()
+            reg_date = datetime.strptime(
+                global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
+            ).date()
         account_old_enough = datetime.today().date() - timedelta(days=182) >= reg_date
 
         # Check: not blocked
-        not_blocked = identity['blocked'] == False
+        not_blocked = identity["blocked"] == False
 
         if enough_edits and account_old_enough and not_blocked:
             return True
         else:
-            logger.info('Editor {username} was not valid.'.format(
-                username=self.wp_username
-            ))
+            logger.info(
+                "Editor {username} was not valid.".format(username=self.wp_username)
+            )
             return False
 
     def get_global_userinfo(self, identity):
@@ -275,23 +300,24 @@ class Editor(models.Model):
           editcount:    10
         """
         try:
-            endpoint = '{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2'.format(
-                base=identity['iss'], username=urllib2.quote(identity['username'].encode('utf-8')))
+            endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2".format(
+                base=identity["iss"], username=urllib.parse.quote(identity["username"])
+            )
 
-            results = json.loads(urllib2.urlopen(endpoint).read())
-            global_userinfo = results['query']['globaluserinfo']
+            results = json.loads(urllib.request.urlopen(endpoint).read())
+            global_userinfo = results["query"]["globaluserinfo"]
 
             try:
-                assert 'missing' not in global_userinfo
-                logger.info('Fetched global_userinfo for User.')
+                assert "missing" not in global_userinfo
+                logger.info("Fetched global_userinfo for User.")
                 return global_userinfo
             except AssertionError:
-                logger.exception('Could not fetch global_userinfo for User.')
+                logger.exception("Could not fetch global_userinfo for User.")
                 return None
                 pass
 
         except:
-            logger.exception('Could not fetch global_userinfo for User.')
+            logger.exception("Could not fetch global_userinfo for User.")
             return None
             pass
 
@@ -323,27 +349,31 @@ class Editor(models.Model):
         """
 
         try:
-            assert self.wp_sub == identity['sub']
+            assert self.wp_sub == identity["sub"]
         except AssertionError:
-            logger.exception('Was asked to update Editor data, but the '
-                             'WP sub in the identity passed in did not match the wp_sub on '
-                             'the instance. Not updating.')
+            logger.exception(
+                "Was asked to update Editor data, but the "
+                "WP sub in the identity passed in did not match the wp_sub on "
+                "the instance. Not updating."
+            )
             raise
 
         global_userinfo = self.get_global_userinfo(identity)
 
-        self.wp_username = identity['username'].encode('utf-8')
-        self.wp_rights = json.dumps(identity['rights'])
-        self.wp_groups = json.dumps(identity['groups'])
+        self.wp_username = identity["username"]
+        self.wp_rights = json.dumps(identity["rights"])
+        self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            self.wp_editcount = global_userinfo['editcount']
+            self.wp_editcount = global_userinfo["editcount"]
         # Try oauth registration date first.  If it's not valid, try the global_userinfo date
         try:
-            reg_date = datetime.strptime(identity['registered'], '%Y%m%d%H%M%S').date()
-        except TypeError, ValueError:
+            reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
+        except (TypeError, ValueError):
             try:
-                reg_date = datetime.strptime(global_userinfo['registration'], '%Y-%m-%dT%H:%M:%SZ').date()
-            except TypeError, ValueError:
+                reg_date = datetime.strptime(
+                    global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
+                ).date()
+            except (TypeError, ValueError):
                 reg_date = None
                 pass
 
@@ -356,11 +386,11 @@ class Editor(models.Model):
         # they have an email at WP for us to initialize it with.
         if self.user.userprofile.use_wp_email:
             try:
-                self.user.email = identity['email']
+                self.user.email = identity["email"]
             except KeyError:
                 # Email isn't guaranteed to be present in identity - don't do
                 # anything if we can't find it.
-                logger.exception('Unable to get Editor email address from Wikipedia.')
+                logger.exception("Unable to get Editor email address from Wikipedia.")
                 pass
 
         self.user.save()
@@ -370,13 +400,14 @@ class Editor(models.Model):
             self.user.userprofile.lang = lang
             self.user.userprofile.save()
 
-    def __unicode__(self):
-        return _(u'{wp_username}').format(
+    def __str__(self):
+        return _("{wp_username}").format(
             # Translators: Do not translate.
-            wp_username=self.wp_username)
+            wp_username=self.wp_username
+        )
 
     def get_absolute_url(self):
-        return reverse('users:editor_detail', kwargs={'pk': self.pk})
+        return reverse("users:editor_detail", kwargs={"pk": self.pk})
 
 
 class Authorization(models.Model):
@@ -388,52 +419,74 @@ class Authorization(models.Model):
     """
 
     class Meta:
-        app_label = 'users'
-        verbose_name = 'authorization'
-        verbose_name_plural = 'authorizations'
-        unique_together = ('user', 'partner', 'stream', 'date_authorized')
+        app_label = "users"
+        verbose_name = "authorization"
+        verbose_name_plural = "authorizations"
+        unique_together = ("user", "partner", "stream", "date_authorized")
 
     coordinators = get_coordinators()
 
     # Users may have multiple authorizations.
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
-                             on_delete=models.SET_NULL,
-                             related_name="authorizations",
-                             # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-                             help_text=_('The authorized user.'))
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=False,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="authorizations",
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
+        help_text=_("The authorized user."),
+    )
 
     # Authorizers may authorize many users.
-    authorizer = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True,
-                                   on_delete=models.SET_NULL,
-                                   # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
-                                   limit_choices_to=(
-                                               models.Q(is_superuser=True) | models.Q(groups__name='coordinators')),
-                                   # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-                                   help_text=_('The authorizing user.'))
+    authorizer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=False,
+        null=True,
+        on_delete=models.SET_NULL,
+        # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
+        limit_choices_to=(
+            models.Q(is_superuser=True) | models.Q(groups__name="coordinators")
+        ),
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
+        help_text=_("The authorizing user."),
+    )
 
     date_authorized = models.DateField(auto_now_add=True)
 
-    date_expires = models.DateField(blank=True, null=True,
-                                    # Translators: This field records the date the authorization expires.
-                                    help_text=_("The date this authorization expires."))
+    date_expires = models.DateField(
+        blank=True,
+        null=True,
+        # Translators: This field records the date the authorization expires.
+        help_text=_("The date this authorization expires."),
+    )
 
-    partner = models.ForeignKey(Partner, blank=True, null=True,
-                                on_delete=models.SET_NULL,
-                                # Limit to available partners.
-                                limit_choices_to=(models.Q(status=0)),
-                                # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-                                help_text=_('The partner for which the editor is authorized.'))
+    partner = models.ForeignKey(
+        Partner,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        # Limit to available partners.
+        limit_choices_to=(models.Q(status=0)),
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
+        help_text=_("The partner for which the editor is authorized."),
+    )
 
-    stream = models.ForeignKey(Stream, blank=True, null=True,
-                               on_delete=models.SET_NULL,
-                               # Limit to available partners.
-                               limit_choices_to=(models.Q(partner__status=0)),
-                               # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-                               help_text=_('The stream for which the editor is authorized.'))
+    stream = models.ForeignKey(
+        Stream,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        # Limit to available partners.
+        limit_choices_to=(models.Q(partner__status=0)),
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
+        help_text=_("The stream for which the editor is authorized."),
+    )
 
-    reminder_email_sent = models.BooleanField(default=False,
-                                              # Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-                                              help_text=_("Have we sent a reminder email about this authorization?"))
+    reminder_email_sent = models.BooleanField(
+        default=False,
+        # Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
+        help_text=_("Have we sent a reminder email about this authorization?"),
+    )
 
     @property
     def is_valid(self):
@@ -447,18 +500,24 @@ class Authorization(models.Model):
         # TWLight.applications.helpers.get_active_authorizations function,
         # so that they remain in sync and return the same type of authorizations.
         if (
-                # Valid authorizations always have an authorizer, and user and a partner_id.
-                self.authorizer and self.user and self.partner_id
-                # and a valid authorization date that is now or in the past
-                and self.date_authorized and self.date_authorized <= today
-                # and an expiration date in the future (or no expiration date).
-                and ((self.date_expires and self.date_expires >= today) or not self.date_expires)
+            # Valid authorizations always have an authorizer, and user and a partner_id.
+            self.authorizer
+            and self.user
+            and self.partner_id
+            # and a valid authorization date that is now or in the past
+            and self.date_authorized
+            and self.date_authorized <= today
+            # and an expiration date in the future (or no expiration date).
+            and (
+                (self.date_expires and self.date_expires >= today)
+                or not self.date_expires
+            )
         ):
             valid = True
         return valid
 
     # Try to return a useful object name, if fields were set appropriately.
-    def __unicode__(self):
+    def __str__(self):
         if self.stream:
             stream_name = self.stream.name
         else:
@@ -495,7 +554,7 @@ class Authorization(models.Model):
         else:
             authorizer = None
 
-        return u'authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}'.format(
+        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}".format(
             authorized_user=authorized_user,
             authorizer=authorizer,
             date_authorized=self.date_authorized,
@@ -505,15 +564,22 @@ class Authorization(models.Model):
 
     def get_latest_app(self):
         from TWLight.applications.models import Application
+
         try:
-            return Application.objects.filter(partner=self.partner, editor=self.user.editor).latest('id')
+            return Application.objects.filter(
+                partner=self.partner, editor=self.user.editor
+            ).latest("id")
         except Application.DoesNotExist:
             return None
 
     def about_to_expire(self):
         # less than 30 days but greater than -1 day is when we consider an authorization about to expire
         today = date.today()
-        if self.date_expires and self.date_expires - today < timedelta(days=30) and not self.date_expires < today:
+        if (
+            self.date_expires
+            and self.date_expires - today < timedelta(days=30)
+            and not self.date_expires < today
+        ):
             return True
         else:
             return False
@@ -521,13 +587,15 @@ class Authorization(models.Model):
     def is_renewable(self):
         partner = self.partner
         if (
-                # We consider an authorization renewable, if the partner is PROXY and
-                # about to expire or has already expired (is_valid returns false on expiry)
-                # or if the partner isn't PROXY or BUNDLE, in which case the authorization
-                # would have an empty date_expires field. The first would check still cover for
-                # non-PROXY and non-BUNDLE partners with expiry dates.
-                self.about_to_expire() or not self.is_valid or
-                not partner.authorization_method == partner.PROXY and not partner.authorization_method == partner.BUNDLE
+            # We consider an authorization renewable, if the partner is PROXY and
+            # about to expire or has already expired (is_valid returns false on expiry)
+            # or if the partner isn't PROXY or BUNDLE, in which case the authorization
+            # would have an empty date_expires field. The first would check still cover for
+            # non-PROXY and non-BUNDLE partners with expiry dates.
+            self.about_to_expire()
+            or not self.is_valid
+            or not partner.authorization_method == partner.PROXY
+            and not partner.authorization_method == partner.BUNDLE
         ):
             return True
         else:

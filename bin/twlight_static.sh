@@ -12,7 +12,7 @@ then
 
     # Clear and collect css
     echo "collectstatic --noinput --clear"
-    python manage.py collectstatic --noinput --clear || exit 1
+    python3 manage.py collectstatic --noinput --clear || exit 1
 else
     exit 1
 fi

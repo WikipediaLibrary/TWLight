@@ -15,14 +15,14 @@ fi
 if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 then
     # Get a list of languages, and add the reserved code for translation documentation.
-    langs=($(python manage.py diffsettings | grep '^LANGUAGES =' | grep -o "(u'[^']*'" | grep -o "'[^']*'"  | xargs))
+    langs=($(python3 manage.py diffsettings | grep '^LANGUAGES =' | grep -o "(u'[^']*'" | grep -o "'[^']*'"  | xargs))
     langs+=('qqq')
 
     makemessages() {
         echo "makemessages:"
         for locale in "${langs[@]}"
         do
-          python manage.py makemessages --locale=${locale} || exit 1
+          python3 manage.py makemessages --locale=${locale} || exit 1
           # Search and replace meaningless boilerplate information from headers.
           sed -i "s/# SOME DESCRIPTIVE TITLE./# TWLight ${locale} translation./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
           sed -i "s/# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER/# Copyright (C) 2017 Wikimedia Foundation, Inc./" ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
@@ -78,7 +78,7 @@ then
         # we can and silently pass over the rest.
         for locale in "${langs[@]}"
         do
-          python manage.py compilemessages --locale=${locale} || :
+          python3 manage.py compilemessages --locale=${locale} || :
         done
     else
        echo "No translations changed."
