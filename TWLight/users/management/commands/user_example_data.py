@@ -68,13 +68,13 @@ class Command(BaseCommand):
 
         # Make 5 random users coordinators
         coordinators = get_coordinators()
-        for user in random.sample(all_users, 5):
+        for user in random.sample(list(all_users), 5):
             user.groups.add(coordinators)
             user.save()
 
         # Set 5 random non-coordinator users to have restricted data processing
         restricted = get_restricted()
         non_coordinators = all_users.exclude(groups__name="coordinators")
-        for user in random.sample(non_coordinators, 5):
+        for user in random.sample(list(non_coordinators), 5):
             user.groups.add(restricted)
             user.save()

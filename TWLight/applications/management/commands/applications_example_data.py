@@ -183,7 +183,7 @@ class Command(BaseCommand):
         # Renew a selection of sent apps.
         all_apps = Application.objects.filter(status=Application.SENT)
         num_to_renew = int(all_apps.count() * 0.5)
-        for app_to_renew in random.sample(all_apps, num_to_renew):
+        for app_to_renew in random.sample(list(all_apps), num_to_renew):
             app_to_renew.renew()
 
     def chance(self, selected, default, chance):

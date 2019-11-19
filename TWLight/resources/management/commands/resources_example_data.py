@@ -57,7 +57,7 @@ class Command(BaseCommand):
             # ManyToMany relationships can't be set until the partner object has
             # been created.
             random_languages = random.sample(
-                Language.objects.all(), random.randint(1, 2)
+                list(Language.objects.all()), random.randint(1, 2)
             )
 
             for lang in random_languages:
@@ -73,7 +73,7 @@ class Command(BaseCommand):
         # Set 5 partners to need a registration URL. We do this separately
         # because it requires both the account_email and registration_url
         # fields to be set concurrently.
-        for registration_partner in random.sample(all_partners, 5):
+        for registration_partner in random.sample(list(all_partners), 5):
             registration_partner.account_email = True
             registration_partner.registration_url = fake.uri()
             registration_partner.save()
@@ -82,22 +82,22 @@ class Command(BaseCommand):
         # get partners with certain fields set to particular values.
 
         # Set 5 random partners to be unavailable
-        for unavailable_partner in random.sample(all_partners, 5):
+        for unavailable_partner in random.sample(list(all_partners), 5):
             unavailable_partner.status = Partner.NOT_AVAILABLE
             unavailable_partner.save()
 
         # Set 5% random partners to have excerpt limit in words
-        for words in random.sample(all_partners, 10):
+        for words in random.sample(list(all_partners), 10):
             words.excerpt_limit = random.randint(100, 250)
             words.save()
 
         # Set 5% random partners to have excerpt limit in words
-        for percentage in random.sample(all_partners, 10):
+        for percentage in random.sample(list(all_partners), 10):
             percentage.excerpt_limit_percentage = random.randint(5, 50)
             percentage.save()
 
         # Set 1 random partner to have excerpt limits both in words and percentage
-        for percentage_words in random.sample(all_partners, 1):
+        for percentage_words in random.sample(list(all_partners), 1):
             percentage_words.excerpt_limit_percentage = random.randint(5, 50)
             percentage_words.excerpt_limit = random.randint(100, 250)
             percentage_words.save()
@@ -105,17 +105,17 @@ class Command(BaseCommand):
         available_partners = all_partners.exclude(status=Partner.NOT_AVAILABLE)
 
         # Set 10 random available partners to be waitlisted
-        for waitlisted_partner in random.sample(available_partners, 10):
+        for waitlisted_partner in random.sample(list(available_partners), 10):
             waitlisted_partner.status = Partner.WAITLIST
             waitlisted_partner.save()
 
         # Set 25 random partners to have a long description
-        for long_description in random.sample(all_partners, 25):
+        for long_description in random.sample(list(all_partners), 25):
             long_description.description = fake.paragraph(nb_sentences=10)
             long_description.save()
 
         # Set 10 random available partners to be featured
-        for featured_partner in random.sample(available_partners, 10):
+        for featured_partner in random.sample(list(available_partners), 10):
             featured_partner.featured = True
             featured_partner.save()
 
@@ -131,7 +131,7 @@ class Command(BaseCommand):
         # If we happened to not create any partners with streams,
         # create one deliberately.
         if stream_partners.count() == 0:
-            stream_partners = random.sample(all_partners, 1)
+            stream_partners = random.sample(list(all_partners), 1)
             stream_partners[0].specific_stream = True
             stream_partners[0].save()
 
@@ -144,7 +144,7 @@ class Command(BaseCommand):
                 )
 
         # Set 15 partners to have somewhere between 1 and 5 video tutorial URLs
-        for partner in random.sample(all_partners, 15):
+        for partner in random.sample(list(all_partners), 15):
             for _ in range(random.randint(1, 5)):
                 VideoFactory(partner=partner, tutorial_video_url=fake.url())
 
@@ -163,12 +163,12 @@ class Command(BaseCommand):
             )
             suggestion.save()
             suggestion.upvoted_users.add(author_user)
-            random_users = random.sample(all_users, random.randint(1, 10))
+            random_users = random.sample(list(all_users), random.randint(1, 10))
             suggestion.upvoted_users.add(*random_users)
 
         # Set 5 partners use the access code authorization method,
         # and generate a bunch of codes for each.
-        for partner in random.sample(available_partners, 5):
+        for partner in random.sample(list(available_partners), 5):
             partner.authorization_method = Partner.CODES
             partner.save()
 
@@ -183,7 +183,7 @@ class Command(BaseCommand):
 
         # Set 5 partners use the access code authorization method,
         # and generate a bunch of codes for each.
-        for partner in random.sample(available_partners, 5):
+        for partner in random.sample(list(available_partners), 5):
             partner.authorization_method = Partner.CODES
             partner.save()
 
