@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import random
 from datetime import date, timedelta
 from itertools import chain
 from unittest.mock import patch
