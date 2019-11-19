@@ -264,7 +264,7 @@ class PartnerModelTests(TestCase):
         partner.coordinator = editor.user
         partner.save()
 
-        # reponse for view when user is the designated coordinator
+        # response for view when user is the designated coordinator
         allowResponse = self.client.get(url, follow=True)
 
         # Applications should not be visible to just any coordinator
