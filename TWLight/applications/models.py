@@ -149,7 +149,7 @@ class Application(models.Model):
 
     hidden = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return "{self.editor} - {self.partner}".format(self=self)
 
     def get_absolute_url(self):

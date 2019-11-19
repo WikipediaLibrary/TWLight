@@ -401,7 +401,7 @@ class Editor(models.Model):
             self.user.userprofile.lang = lang
             self.user.userprofile.save()
 
-    def __unicode__(self):
+    def __str__(self):
         return _("{wp_username}").format(
             # Translators: Do not translate.
             wp_username=self.wp_username
@@ -518,7 +518,7 @@ class Authorization(models.Model):
         return valid
 
     # Try to return a useful object name, if fields were set appropriately.
-    def __unicode__(self):
+    def __str__(self):
         if self.stream:
             stream_name = self.stream.name
         else:

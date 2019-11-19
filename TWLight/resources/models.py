@@ -100,7 +100,7 @@ class Language(models.Model):
         self.clean_fields()
         super(Language, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.get_language_display()
 
 
@@ -466,7 +466,7 @@ class Partner(models.Model):
         ),
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.company_name
 
     def clean(self):
@@ -637,7 +637,7 @@ class Stream(models.Model):
         ),
     )
 
-    def __unicode__(self):
+    def __str__(self):
         # Do not try to also return the partner name here (e.g.
         # "Partnername: Streamname") because that will be hard to
         # internationalize. Returning the atomic stream name gives us more
@@ -655,7 +655,7 @@ class Stream(models.Model):
 
     @property
     def get_languages(self):
-        return ", ".join([p.__unicode__() for p in self.languages.all()])
+        return ", ".join([p.__str__() for p in self.languages.all()])
 
     @property
     def get_access_url(self):
@@ -707,7 +707,7 @@ class Contact(models.Model):
         ),
     )
 
-    def __unicode__(self):
+    def __str__(self):
         # As with Stream, do not return the partner name here.
         return self.full_name
 
@@ -756,7 +756,7 @@ class Suggestion(models.Model):
         help_text=_("Users who have upvoted this suggestion."),
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.suggested_company_name
 
     def get_absolute_url(self):

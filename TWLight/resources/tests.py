@@ -106,7 +106,7 @@ class LanguageModelTests(TestCase):
             bad_lang.save()
 
     def test_language_display(self):
-        self.assertEqual(self.lang_en.__unicode__(), "English")
+        self.assertEqual(self.lang_en.__str__(), "English")
 
     def test_language_uniqueness(self):
         with self.assertRaises(IntegrityError):
