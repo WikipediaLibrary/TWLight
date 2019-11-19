@@ -740,7 +740,7 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(new_editor.wp_editcount, 960)
         self.assertEqual(new_editor.user.email, 'porkchop@example.com')
         self.assertEqual(new_editor.wp_registered,
-            datetime(2013, 02, 05).date())
+            datetime(2013, 2, 5).date())
 
         # Now check what happens if their wikipedia ID number has changed - this
         # should throw an error as we can no longer verify they're the same
