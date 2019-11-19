@@ -682,8 +682,8 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
         A csv file with unique codes for multiple partners should
         upload successfully and create the relevant objects.
         """
-        test_file = open("accesscodes.csv", "wb")
-        csv_writer = csv.writer(test_file, lineterminator="\n")
+        test_file = open("accesscodes.csv", "w", newline="")
+        csv_writer = csv.writer(test_file)
         csv_writer.writerow(("ABCD-EFGH-IJKL", str(self.partner1_pk)))
         csv_writer.writerow(("BBCD-EFGH-IJKL", str(self.partner1_pk)))
         csv_writer.writerow(("CBCD-EFGH-IJKL", str(self.partner2_pk)))
@@ -704,8 +704,8 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
         A csv file with non-unique codes for multiple partners should
         only upload the unique ones.
         """
-        test_file = open("accesscodes.csv", "wb")
-        csv_writer = csv.writer(test_file, lineterminator="\n")
+        test_file = open("accesscodes.csv", "w", newline="")
+        csv_writer = csv.writer(test_file)
         csv_writer.writerow(("ABCD-EFGH-IJKL", str(self.partner1_pk)))
         csv_writer.writerow(("BBCD-EFGH-IJKL", str(self.partner1_pk)))
         csv_writer.writerow(("ABCD-EFGH-IJKL", str(self.partner1_pk)))
@@ -725,8 +725,8 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
         """
         An incorrectly formatted csv shouldn't upload anything.
         """
-        test_file = open("accesscodes.csv", "wb")
-        csv_writer = csv.writer(test_file, lineterminator="\n")
+        test_file = open("accesscodes.csv", "w", newline="")
+        csv_writer = csv.writer(test_file)
         csv_writer.writerow(("ABCD-EFGH-IJKL", "EBSCO"))
         csv_writer.writerow(("BBCD-EFGH-IJKL", "JSTOR"))
         csv_writer.writerow(("ABCD-EFGH-IJKL", "BMJ"))
