@@ -371,12 +371,14 @@ class PartnerModelTests(TestCase):
         # Sigh.
         self.assertQuerysetEqual(
             Partner.objects.all(),
-            list(map(
-                repr,
-                Partner.even_not_available.filter(
-                    status__in=[Partner.WAITLIST, Partner.AVAILABLE]
-                ),
-            )),
+            list(
+                map(
+                    repr,
+                    Partner.even_not_available.filter(
+                        status__in=[Partner.WAITLIST, Partner.AVAILABLE]
+                    ),
+                )
+            ),
         )
 
 
@@ -520,9 +522,7 @@ class StreamModelTests(TestCase):
 
         # Order isn't important.
         stream.languages.add(self.lang_fr)
-        self.assertIn(
-            stream.get_languages, ["English, français", "français, English"]
-        )
+        self.assertIn(stream.get_languages, ["English, français", "français, English"])
 
 
 class PartnerViewTests(TestCase):

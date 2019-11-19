@@ -7,7 +7,6 @@ set as AVAILABLE.
 """
 
 
-
 from django.db import models, migrations
 
 

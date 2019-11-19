@@ -7,7 +7,6 @@ new one to the old name so as to present the expected API.
 """
 
 
-
 from django.db import migrations, models
 import datetime
 

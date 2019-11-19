@@ -1,5 +1,3 @@
-
-
 import csv
 import itertools
 from datetime import date
