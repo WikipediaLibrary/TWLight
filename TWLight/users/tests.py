@@ -195,7 +195,7 @@ class ViewsTestCase(TestCase):
 
         response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
 
-        content = response.render().content
+        content = response.render().content.decode(utf-8)
 
         # This uses default data from EditorFactory, except for the username,
         # which is randomly generated (hence has no default).
@@ -229,7 +229,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(
             set(response.context_data["object_list"]), {app1, app2, app3, app4}
         )
-        content = response.render().content
+        content = response.render().content.decode(utf-8)
 
         self.assertIn(app1.partner.company_name, content.decode("utf-8"))
         self.assertIn(app2.partner.company_name, content.decode("utf-8"))
@@ -365,8 +365,8 @@ class ViewsTestCase(TestCase):
         # same thing on either page.
         self.assertEqual(home_response.status_code, 200)
         self.assertEqual(
-            remove_csrfmiddlewaretoken(home_response.render().content),
-            remove_csrfmiddlewaretoken(detail_response.render().content),
+            remove_csrfmiddlewaretoken(home_response.render().content.decode(utf-8)),
+            remove_csrfmiddlewaretoken(detail_response.render().content.decode(utf-8)),
         )
 
     @patch("TWLight.users.views.UserDetailView.as_view")

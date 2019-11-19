@@ -1438,10 +1438,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
             # we'll have to do that before we can check for its content.
 
             # Applications should not be visible to just any coordinator
-            self.assertNotIn(obj.__str__(), denyResponse.render().content)
+            self.assertNotIn(obj.__str__(), denyResponse.render().content.decode(utf-8))
 
             # Applications should be visible to the designated coordinator
-            self.assertIn(obj.__str__(), allowResponse.render().content)
+            self.assertIn(obj.__str__(), allowResponse.render().content.decode(utf-8))
 
     def test_list_authorization(self):
         url = reverse("applications:list")
@@ -1498,7 +1498,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         for obj in queryset_deleted:
             # Deleted applications should not be visible to anyone, even the
             # assigned coordinator.
-            self.assertNotIn(obj.__str__(), response.render().content)
+            self.assertNotIn(obj.__str__(), response.render().content.decode(utf-8))
 
     def test_list_object_visibility(self):
         url = reverse("applications:list")
@@ -2643,7 +2643,7 @@ class EvaluateApplicationTest(TestCase):
         response = views.EvaluateApplicationView.as_view()(
             request, pk=self.application.pk
         )
-        self.assertIn("<form", response.render().content)
+        self.assertIn("<form", response.render().content.decode(utf-8))
 
     def test_form_not_present_restricted(self):
         factory = RequestFactory()
@@ -2659,7 +2659,7 @@ class EvaluateApplicationTest(TestCase):
         response = views.EvaluateApplicationView.as_view()(
             request, pk=self.restricted_application.pk
         )
-        self.assertNotIn("<form", response.render().content)
+        self.assertNotIn("<form", response.render().content.decode(utf-8))
 
     def test_deleted_user_app_visibility(self):
         # If a user deletes their data, any applications
@@ -3473,7 +3473,7 @@ class MarkSentTest(TestCase):
         self.partner2.save()
 
         response = views.ListReadyApplicationsView.as_view()(request)
-        content = response.render().content
+        content = response.render().content.decode(utf-8)
         self.assertIn(self.partner2.company_name, content)
         self.assertNotIn(partner3.company_name, content)
 
@@ -3505,7 +3505,7 @@ class MarkSentTest(TestCase):
         response = views.SendReadyApplicationsView.as_view()(
             request, pk=self.partner2.pk
         )
-        content = response.render().content
+        content = response.render().content.decode(utf-8)
 
         self.assertIn(self.app2.editor.wp_username, content)
         self.assertNotIn(app_restricted.editor.wp_username, content)
