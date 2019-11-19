@@ -12,7 +12,7 @@
 			<ul class="timeline">
 		 
 			{% for event in activity %}
-			  <li class="{% cycle 'timeline' 'timeline-inverted' %}">
+			  <li class="{% if forloop.counter|divisibleby:2 %}timeline-inverted{% endif %}">
 				<div class="timeline-badge {{ event.color }}">
 				  <i class="fa {{ event.icon }}"></i>
 				</div>
