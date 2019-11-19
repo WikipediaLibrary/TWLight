@@ -11,29 +11,81 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('resources', '0062_auto_20190220_1639'),
-        ('users', '0037_auto_20190117_1008'),
+        ("resources", "0062_auto_20190220_1639"),
+        ("users", "0037_auto_20190117_1008"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Authorization',
+            name="Authorization",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_authorized', models.DateField(auto_now_add=True)),
-                ('date_expires', models.DateField(blank=True, help_text='The date this authorization expires.', null=True)),
-                ('authorized_user', models.ForeignKey(help_text='The authorized user.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to=settings.AUTH_USER_MODEL)),
-                ('authorizer', models.ForeignKey(help_text='The authorizing user.', null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
-                ('partner', models.ForeignKey(blank=True, help_text='The partner for which the editor is authorized.', null=True, on_delete=django.db.models.deletion.SET_NULL, to='resources.Partner')),
-                ('stream', models.ForeignKey(blank=True, help_text='The stream for which the editor is authorized.', null=True, on_delete=django.db.models.deletion.SET_NULL, to='resources.Stream')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_authorized", models.DateField(auto_now_add=True)),
+                (
+                    "date_expires",
+                    models.DateField(
+                        blank=True,
+                        help_text="The date this authorization expires.",
+                        null=True,
+                    ),
+                ),
+                (
+                    "authorized_user",
+                    models.ForeignKey(
+                        help_text="The authorized user.",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="+",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "authorizer",
+                    models.ForeignKey(
+                        help_text="The authorizing user.",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "partner",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="The partner for which the editor is authorized.",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="resources.Partner",
+                    ),
+                ),
+                (
+                    "stream",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="The stream for which the editor is authorized.",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="resources.Stream",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'authorization',
-                'verbose_name_plural': 'authorizations',
+                "verbose_name": "authorization",
+                "verbose_name_plural": "authorizations",
             },
         ),
         migrations.AlterUniqueTogether(
-            name='authorization',
-            unique_together=set([('authorized_user', 'partner', 'stream', 'date_authorized')]),
+            name="authorization",
+            unique_together=set(
+                [("authorized_user", "partner", "stream", "date_authorized")]
+            ),
         ),
     ]

@@ -7,14 +7,16 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0072_auto_20190808_1849'),
-    ]
+    dependencies = [("resources", "0072_auto_20190808_1849")]
 
     operations = [
         migrations.AlterField(
-            model_name='partner',
-            name='accounts_available',
-            field=models.PositiveSmallIntegerField(blank=True, help_text="Add the number of new accounts to the existing value, not by resetting it to zero. If 'specific stream' is true, change accounts availability at the collection level.", null=True),
-        ),
+            model_name="partner",
+            name="accounts_available",
+            field=models.PositiveSmallIntegerField(
+                blank=True,
+                help_text="Add the number of new accounts to the existing value, not by resetting it to zero. If 'specific stream' is true, change accounts availability at the collection level.",
+                null=True,
+            ),
+        )
     ]

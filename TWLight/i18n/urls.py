@@ -9,6 +9,7 @@ from TWLight.i18n.views import set_language
 # Direct rip from django.conf.urls.i18n, but imports our local set_language
 # https://docs.djangoproject.com/en/1.8/_modules/django/conf/urls/i18n/
 
+
 def i18n_patterns(prefix, *args):
     """
     Adds the language code prefix to every URL pattern within this
@@ -24,7 +25,4 @@ def i18n_patterns(prefix, *args):
     return [LocaleRegexURLResolver(pattern_list)]
 
 
-
-urlpatterns = [
-    url(r'^setlang/$', set_language, name='set_language'),
-]
+urlpatterns = [url(r"^setlang/$", set_language, name="set_language")]

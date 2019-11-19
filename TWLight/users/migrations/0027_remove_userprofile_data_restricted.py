@@ -7,13 +7,8 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('users', '0026_create_restricted'),
-    ]
+    dependencies = [("users", "0026_create_restricted")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='userprofile',
-            name='data_restricted',
-        ),
+        migrations.RemoveField(model_name="userprofile", name="data_restricted")
     ]

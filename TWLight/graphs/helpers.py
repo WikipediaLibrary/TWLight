@@ -14,14 +14,14 @@ from TWLight.users.models import Authorization
 
 logger = logging.getLogger(__name__)
 
-JSON = 'json'
-PYTHON = 'python'
+JSON = "json"
+PYTHON = "python"
 
 # Utilities --------------------------------------------------------------------
 def get_js_timestamp(datetime):
     # Expects a date or datetime object; returns same in milliseconds
     # since the epoch. (That is the date format expected by flot.js.)
-    return int(time.mktime(datetime.timetuple())*1000)
+    return int(time.mktime(datetime.timetuple()) * 1000)
 
 
 def get_median(values_list):
@@ -39,10 +39,11 @@ def get_median(values_list):
         # Mathematically bogus, but will make graph display correctly.
         median = 0
     elif list_len % 2 == 1:
-        median = int(values_list[(list_len - 1 )/2])
+        median = int(values_list[(list_len - 1) / 2])
     else:
-        median = int((values_list[(list_len - 1 )/2] +
-                       values_list[1 + (list_len -1 )/2]) / 2)
+        median = int(
+            (values_list[(list_len - 1) / 2] + values_list[1 + (list_len - 1) / 2]) / 2
+        )
 
     return median
 
@@ -52,19 +53,22 @@ def get_earliest_creation_date(queryset):
     # creation dates of Jan 1, 1970. This screws up the graphs.
     if queryset:
         # Authorization creation date field is named 'date_authorized'
-        if queryset.model.__name__ is 'Authorization':
-            earliest_date = queryset.exclude(
-                date_authorized=datetime.date(1970, 1, 1)).earliest(
-                    'date_authorized').date_authorized
+        if queryset.model.__name__ is "Authorization":
+            earliest_date = (
+                queryset.exclude(date_authorized=datetime.date(1970, 1, 1))
+                .earliest("date_authorized")
+                .date_authorized
+            )
         else:
-            earliest_date = queryset.exclude(
-                date_created=datetime.date(1970, 1, 1)).earliest(
-                    'date_created').date_created
+            earliest_date = (
+                queryset.exclude(date_created=datetime.date(1970, 1, 1))
+                .earliest("date_created")
+                .date_created
+            )
     else:
         earliest_date = None
 
     return earliest_date
-
 
 
 def get_data_count_by_month(queryset, data_format=JSON):
@@ -89,7 +93,7 @@ def get_data_count_by_month(queryset, data_format=JSON):
                 timestamp = current_date
 
             # Authorization creation date field is named 'date_authorized'
-            if queryset.model.__name__ is 'Authorization':
+            if queryset.model.__name__ is "Authorization":
                 num_objs = queryset.filter(date_authorized__lte=current_date).count()
             else:
                 num_objs = queryset.filter(date_created__lte=current_date).count()
@@ -104,7 +108,9 @@ def get_data_count_by_month(queryset, data_format=JSON):
 
 
 # Application stats ------------------------------------------------------------
-def get_application_status_data(queryset, statuses=Application.STATUS_CHOICES, data_format=JSON):
+def get_application_status_data(
+    queryset, statuses=Application.STATUS_CHOICES, data_format=JSON
+):
     """
     Returns data about the status of Applications in a queryset. By default,
     returns json in a format suitable for display as a flot.js pie chart; can
@@ -128,7 +134,9 @@ def get_application_status_data(queryset, statuses=Application.STATUS_CHOICES, d
         # Therefore we need to force translation (using unicode(_).encode('utf-8'), not
         # force_str, because we don't know what language we might be
         # dealing with.)
-        status_data.append({'label': unicode(status[1]).encode('utf-8'), 'data': status_count})
+        status_data.append(
+            {"label": unicode(status[1]).encode("utf-8"), "data": status_count}
+        )
 
     if data_format == PYTHON:
         return status_data
@@ -149,8 +157,10 @@ def get_user_language_data(queryset, data_format=JSON):
     language_data = []
 
     for language in queryset.exclude(lang=None).values("lang").distinct():
-        language_count = queryset.filter(lang=language['lang']).count()
-        language_data.append({'label': unicode(language['lang']).encode('utf-8'), 'data': language_count})
+        language_count = queryset.filter(lang=language["lang"]).count()
+        language_data.append(
+            {"label": unicode(language["lang"]).encode("utf-8"), "data": language_count}
+        )
 
     if data_format == PYTHON:
         return language_data
@@ -173,8 +183,10 @@ def get_time_open_histogram(queryset, data_format=JSON):
         # days_open=0 (that is, when the app was closed the same day that
         # it was submitted).
         if app.days_open is None:
-            logger.warning("Application #{pk} is closed but doesn't have a "
-                "days_open value.".format(pk=app.pk))
+            logger.warning(
+                "Application #{pk} is closed but doesn't have a "
+                "days_open value.".format(pk=app.pk)
+            )
         else:
             # They're stored as longs, which breaks flot.js's data
             # expectations. But if we actually *need* a long int rather than
@@ -204,21 +216,22 @@ def get_median_decision_time(queryset, data_format=JSON):
     data_series = []
 
     if queryset:
-        earliest_date = queryset.earliest('date_created').date_created
+        earliest_date = queryset.earliest("date_created").date_created
 
         this_month_start = earliest_date.replace(day=1)
-        next_month_start = (earliest_date + \
-            relativedelta.relativedelta(months=1)).replace(day=1)
+        next_month_start = (
+            earliest_date + relativedelta.relativedelta(months=1)
+        ).replace(day=1)
 
         while this_month_start <= timezone.now().date():
             days_to_close = list(
                 Application.objects.filter(
                     status__in=Application.FINAL_STATUS_LIST,
                     date_created__gte=this_month_start,
-                    date_created__lt=next_month_start
-                ).exclude(
-                    days_open=None
-                ).values_list('days_open', flat=True)
+                    date_created__lt=next_month_start,
+                )
+                .exclude(days_open=None)
+                .values_list("days_open", flat=True)
             )
 
             median_days = get_median(days_to_close)
@@ -249,9 +262,11 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
 
     if partner_apps:
         # Again removing undated (Jan 1 1970) applications
-        earliest_date = partner_apps.exclude(
-            date_created=datetime.date(1970,1,1)).earliest(
-                'date_created').date_created
+        earliest_date = (
+            partner_apps.exclude(date_created=datetime.date(1970, 1, 1))
+            .earliest("date_created")
+            .date_created
+        )
 
         current_date = timezone.now().date()
 
@@ -262,11 +277,14 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
                 timestamp = current_date
 
             apps_to_date = Application.objects.filter(
-                partner=partner,
-                date_created__lte=current_date)
+                partner=partner, date_created__lte=current_date
+            )
 
-            unique_users = User.objects.filter(
-                editor__applications__in=apps_to_date).distinct().count()
+            unique_users = (
+                User.objects.filter(editor__applications__in=apps_to_date)
+                .distinct()
+                .count()
+            )
 
             data_series.append([timestamp, unique_users])
             current_date -= relativedelta.relativedelta(months=1)
@@ -278,7 +296,9 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
 
 
 def get_proxy_and_renewed_authorizations():
-    proxy_auth = Authorization.objects.filter(partner__authorization_method=Partner.PROXY)
+    proxy_auth = Authorization.objects.filter(
+        partner__authorization_method=Partner.PROXY
+    )
 
     renewed_auth_ids = []
     for auth in proxy_auth:

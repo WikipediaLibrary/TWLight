@@ -8,9 +8,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0027_remove_userprofile_data_restricted'),
-        ('users', '0026_remove_editor_last_updated'),
+        ("users", "0027_remove_userprofile_data_restricted"),
+        ("users", "0026_remove_editor_last_updated"),
     ]
 
-    operations = [
-    ]
+    operations = []

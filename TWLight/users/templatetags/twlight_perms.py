@@ -4,15 +4,16 @@ from TWLight.users.groups import get_coordinators, get_restricted
 
 register = template.Library()
 
+
 @register.filter
 def coordinators_only(user):
     """Return True if user is in coordinator group (or superuser), else False"""
     is_coordinator = False
     if user:
         coordinators = get_coordinators()
-        is_coordinator = (coordinators in user.groups.all() or
-            user.is_superuser)
+        is_coordinator = coordinators in user.groups.all() or user.is_superuser
     return is_coordinator
+
 
 @register.filter
 def restricted(user):

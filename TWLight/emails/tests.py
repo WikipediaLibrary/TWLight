@@ -24,29 +24,32 @@ from TWLight.users.models import Authorization
 # We need to import these in order to register the signal handlers; if we don't,
 # when we test that those handler functions have been called, we will get
 # False even when they work in real life.
-from .tasks import (send_comment_notification_emails,
-                    send_approval_notification_email,
-                    send_rejection_notification_email,
-                    send_user_renewal_notice_emails,
-                    contact_us_emails)
+from .tasks import (
+    send_comment_notification_emails,
+    send_approval_notification_email,
+    send_rejection_notification_email,
+    send_user_renewal_notice_emails,
+    contact_us_emails,
+)
+
 
 class ApplicationCommentTest(TestCase):
-
     def setUp(self):
         super(ApplicationCommentTest, self).setUp()
-        self.editor = EditorFactory(user__email='editor@example.com').user
+        self.editor = EditorFactory(user__email="editor@example.com").user
 
         coordinators = get_coordinators()
 
-        self.coordinator1 = EditorFactory(user__email='c1@example.com',
-                                          user__username='c1').user
-        self.coordinator2 = EditorFactory(user__email='c2@example.com',
-                                          user__username='c2').user
+        self.coordinator1 = EditorFactory(
+            user__email="c1@example.com", user__username="c1"
+        ).user
+        self.coordinator2 = EditorFactory(
+            user__email="c2@example.com", user__username="c2"
+        ).user
         coordinators.user_set.add(self.coordinator1)
         coordinators.user_set.add(self.coordinator2)
 
         self.partner = PartnerFactory()
-
 
     def _create_comment(self, app, user):
         CT = ContentType.objects.get_for_model
@@ -63,15 +66,12 @@ class ApplicationCommentTest(TestCase):
 
         return comm
 
-
     def _set_up_email_test_objects(self):
-        app = ApplicationFactory(editor=self.editor.editor,
-                                 partner=self.partner)
+        app = ApplicationFactory(editor=self.editor.editor, partner=self.partner)
 
         factory = RequestFactory()
         request = factory.post(get_form_target())
         return app, request
-
 
     def test_comment_email_sending_1(self):
         """
@@ -84,15 +84,10 @@ class ApplicationCommentTest(TestCase):
         self.assertEqual(len(mail.outbox), 0)
 
         comment1 = self._create_comment(app, self.coordinator1)
-        comment_was_posted.send(
-            sender=Comment,
-            comment=comment1,
-            request=request
-            )
+        comment_was_posted.send(sender=Comment, comment=comment1, request=request)
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.editor.email])
-
 
     def test_comment_email_sending_2(self):
         """
@@ -107,15 +102,10 @@ class ApplicationCommentTest(TestCase):
         _ = self._create_comment(app, self.coordinator1)
         comment2 = self._create_comment(app, self.editor)
 
-        comment_was_posted.send(
-            sender=Comment,
-            comment=comment2,
-            request=request
-            )
+        comment_was_posted.send(sender=Comment, comment=comment2, request=request)
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.coordinator1.email])
-
 
     def test_comment_email_sending_3(self):
         """
@@ -130,11 +120,7 @@ class ApplicationCommentTest(TestCase):
         _ = self._create_comment(app, self.coordinator1)
         _ = self._create_comment(app, self.editor)
         comment3 = self._create_comment(app, self.coordinator2)
-        comment_was_posted.send(
-            sender=Comment,
-            comment=comment3,
-            request=request
-            )
+        comment_was_posted.send(sender=Comment, comment=comment3, request=request)
 
         self.assertEqual(len(mail.outbox), 2)
 
@@ -145,7 +131,6 @@ class ApplicationCommentTest(TestCase):
         except AssertionError:
             self.assertEqual(mail.outbox[1].to, [self.coordinator1.email])
             self.assertEqual(mail.outbox[0].to, [self.editor.email])
-
 
     def test_comment_email_sending_4(self):
         """
@@ -164,23 +149,17 @@ class ApplicationCommentTest(TestCase):
         self.partner.save()
 
         # Approve the application
-        url = reverse('applications:evaluate',
-            kwargs={'pk': app.pk})
-        response = self.client.post(url,
-            data={'status': Application.QUESTION},
-            follow=True)
+        url = reverse("applications:evaluate", kwargs={"pk": app.pk})
+        response = self.client.post(
+            url, data={"status": Application.QUESTION}, follow=True
+        )
 
         comment4 = self._create_comment(app, self.editor)
-        comment_was_posted.send(
-            sender=Comment,
-            comment=comment4,
-            request=request
-            )
+        comment_was_posted.send(sender=Comment, comment=comment4, request=request)
 
         self.assertEqual(len(mail.outbox), 1)
 
         self.assertEqual(mail.outbox[0].to, [coordinator.user.email])
-
 
     def test_comment_email_sending_5(self):
         """
@@ -193,11 +172,7 @@ class ApplicationCommentTest(TestCase):
         self.assertEqual(len(mail.outbox), 0)
 
         comment5 = self._create_comment(app, self.editor)
-        comment_was_posted.send(
-            sender=Comment,
-            comment=comment5,
-            request=request
-            )
+        comment_was_posted.send(sender=Comment, comment=comment5, request=request)
 
         self.assertEqual(len(mail.outbox), 0)
 
@@ -207,18 +182,15 @@ class ApplicationCommentTest(TestCase):
     # the mocked one.
 
 
-
 class ApplicationStatusTest(TestCase):
-
-    @patch('TWLight.emails.tasks.send_approval_notification_email')
+    @patch("TWLight.emails.tasks.send_approval_notification_email")
     def test_approval_calls_email_function(self, mock_email):
         app = ApplicationFactory(status=Application.PENDING)
         app.status = Application.APPROVED
         app.save()
         self.assertTrue(mock_email.called)
 
-
-    @patch('TWLight.emails.tasks.send_approval_notification_email')
+    @patch("TWLight.emails.tasks.send_approval_notification_email")
     def test_reapproval_does_not_call_email_function(self, mock_email):
         """
         Saving an Application with APPROVED status, when it already had an
@@ -230,23 +202,20 @@ class ApplicationStatusTest(TestCase):
         app.save()
         self.assertEqual(mock_email.call_count, 1)
 
-
-    @patch('TWLight.emails.tasks.send_rejection_notification_email')
+    @patch("TWLight.emails.tasks.send_rejection_notification_email")
     def test_rejection_calls_email_function(self, mock_email):
         app = ApplicationFactory(status=Application.PENDING)
         app.status = Application.NOT_APPROVED
         app.save()
         self.assertTrue(mock_email.called)
 
-
-    @patch('TWLight.emails.tasks.send_rejection_notification_email')
+    @patch("TWLight.emails.tasks.send_rejection_notification_email")
     def test_rerejection_does_not_call_email_function(self, mock_email):
         app = ApplicationFactory(status=Application.PENDING)
         app.status = Application.NOT_APPROVED
         app.save()
         app.save()
         self.assertEqual(mock_email.call_count, 1)
-
 
     def test_pending_does_not_call_email_function(self):
         """
@@ -256,7 +225,6 @@ class ApplicationStatusTest(TestCase):
         _ = ApplicationFactory(status=Application.PENDING)
         self.assertEqual(len(mail.outbox), orig_outbox)
 
-
     def test_question_does_not_call_email_function(self):
         """
         Applications saved with a QUESTION status should not generate email.
@@ -264,7 +232,6 @@ class ApplicationStatusTest(TestCase):
         orig_outbox = len(mail.outbox)
         _ = ApplicationFactory(status=Application.QUESTION)
         self.assertEqual(len(mail.outbox), orig_outbox)
-
 
     def test_sent_does_not_call_email_function(self):
         """
@@ -274,8 +241,7 @@ class ApplicationStatusTest(TestCase):
         _ = ApplicationFactory(status=Application.SENT)
         self.assertEqual(len(mail.outbox), orig_outbox)
 
-
-    @patch('TWLight.emails.tasks.send_waitlist_notification_email')
+    @patch("TWLight.emails.tasks.send_waitlist_notification_email")
     def test_waitlist_calls_email_function(self, mock_email):
         partner = PartnerFactory(status=Partner.WAITLIST)
         app = ApplicationFactory(status=Application.PENDING, partner=partner)
@@ -284,8 +250,7 @@ class ApplicationStatusTest(TestCase):
         partner.delete()
         app.delete()
 
-
-    @patch('TWLight.emails.tasks.send_waitlist_notification_email')
+    @patch("TWLight.emails.tasks.send_waitlist_notification_email")
     def test_nonwaitlist_does_not_call_email_function(self, mock_email):
         partner = PartnerFactory(status=Partner.AVAILABLE)
         app = ApplicationFactory(status=Application.PENDING, partner=partner)
@@ -301,8 +266,7 @@ class ApplicationStatusTest(TestCase):
         partner.delete()
         app.delete()
 
-
-    @patch('TWLight.emails.tasks.send_waitlist_notification_email')
+    @patch("TWLight.emails.tasks.send_waitlist_notification_email")
     def test_waitlisting_partner_calls_email_function(self, mock_email):
         """
         Switching a Partner to WAITLIST status should call the email function
@@ -317,8 +281,7 @@ class ApplicationStatusTest(TestCase):
         self.assertTrue(mock_email.called)
         mock_email.assert_called_with(app)
 
-
-    @patch('TWLight.emails.tasks.send_waitlist_notification_email')
+    @patch("TWLight.emails.tasks.send_waitlist_notification_email")
     def test_waitlisting_partner_does_not_call_email_function(self, mock_email):
         """
         Switching a Partner to WAITLIST status should NOT call the email
@@ -336,71 +299,69 @@ class ApplicationStatusTest(TestCase):
 
 
 class ContactUsTest(TestCase):
-
     def setUp(self):
         super(ContactUsTest, self).setUp()
-        self.editor = EditorFactory(user__email='editor@example.com').user
+        self.editor = EditorFactory(user__email="editor@example.com").user
 
-    @patch('TWLight.emails.tasks.contact_us_emails')
+    @patch("TWLight.emails.tasks.contact_us_emails")
     def test_contact_us_emails(self, mock_email):
         factory = RequestFactory()
         request = factory.post(get_form_target())
         request.user = UserFactory()
         editor = EditorFactory()
-        reply_to = ['editor@example.com']
-        cc = ['editor@example.com']
-        
+        reply_to = ["editor@example.com"]
+        cc = ["editor@example.com"]
+
         self.assertEqual(len(mail.outbox), 0)
-        
+
         mail_instance = MagicMailBuilder(template_mail_cls=InlineCSSTemplateMail)
-        email = mail_instance.contact_us_email('wikipedialibrary@wikimedia.org', 
-            {'editor_wp_username': editor.wp_username,
-             'body': 'This is a test email'})
+        email = mail_instance.contact_us_email(
+            "wikipedialibrary@wikimedia.org",
+            {"editor_wp_username": editor.wp_username, "body": "This is a test email"},
+        )
         email.extra_headers["Reply-To"] = ", ".join(reply_to)
         email.extra_headers["Cc"] = ", ".join(cc)
         email.send()
-        
-        self.assertEqual(len(mail.outbox), 1)
 
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_user_submit_contact_us_emails(self):
         EditorCraftRoom(self, Terms=True, Coordinator=False)
-        
-        self.assertEqual(len(mail.outbox), 0)
-        
-        contact_us_url = reverse('contact')
-        contact_us = self.client.get(contact_us_url, follow=True)
-        contact_us_form = contact_us.context['form']
-        data  = contact_us_form.initial
-        data['email'] = 'editor@example.com'
-        data['message'] = 'This is a test'
-        data['cc'] = True
-        data['submit'] = True
-        self.client.post(contact_us_url, data)
-        
-        self.assertEqual(len(mail.outbox), 1)
 
+        self.assertEqual(len(mail.outbox), 0)
+
+        contact_us_url = reverse("contact")
+        contact_us = self.client.get(contact_us_url, follow=True)
+        contact_us_form = contact_us.context["form"]
+        data = contact_us_form.initial
+        data["email"] = "editor@example.com"
+        data["message"] = "This is a test"
+        data["cc"] = True
+        data["submit"] = True
+        self.client.post(contact_us_url, data)
+
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_not_logged_in_user_submit_contact_us_emails(self):
         self.assertEqual(len(mail.outbox), 0)
-        
-        contact_us_url = reverse('contact')
+
+        contact_us_url = reverse("contact")
         contact_us = self.client.get(contact_us_url, follow=True)
-        contact_us_form = contact_us.context['form']
+        contact_us_form = contact_us.context["form"]
         data = contact_us_form.initial
-        data['email'] = 'editor@example.com'
-        data['message'] = 'This is a test'
-        data['submit'] = True
-        data['cc'] = True
+        data["email"] = "editor@example.com"
+        data["message"] = "This is a test"
+        data["submit"] = True
+        data["cc"] = True
         self.client.post(contact_us_url, data)
-        
+
         self.assertEqual(len(mail.outbox), 0)
 
-class UserRenewalNoticeTest(TestCase):
 
+class UserRenewalNoticeTest(TestCase):
     def setUp(self):
         super(UserRenewalNoticeTest, self).setUp()
-        editor = EditorFactory(user__email='editor@example.com')
+        editor = EditorFactory(user__email="editor@example.com")
         self.user = editor.user
 
         self.coordinator = EditorFactory().user
@@ -421,7 +382,7 @@ class UserRenewalNoticeTest(TestCase):
         Given one authorization that expires in two weeks, ensure
         that our email task sends an email to that user.
         """
-        call_command('user_renewal_notice')
+        call_command("user_renewal_notice")
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.user.email])
@@ -434,7 +395,7 @@ class UserRenewalNoticeTest(TestCase):
         self.user.userprofile.send_renewal_notices = False
         self.user.userprofile.save()
 
-        call_command('user_renewal_notice')
+        call_command("user_renewal_notice")
 
         self.assertEqual(len(mail.outbox), 0)
 
@@ -443,10 +404,10 @@ class UserRenewalNoticeTest(TestCase):
         If we run the command a second time, the same user shouldn't receive
         a second email.
         """
-        call_command('user_renewal_notice')
+        call_command("user_renewal_notice")
         self.assertEqual(len(mail.outbox), 1)
 
-        call_command('user_renewal_notice')
+        call_command("user_renewal_notice")
         self.assertEqual(len(mail.outbox), 1)
 
     def test_user_renewal_notice_past_date(self):
@@ -456,7 +417,7 @@ class UserRenewalNoticeTest(TestCase):
         """
         self.authorization.date_expires = datetime.today() - timedelta(weeks=1)
         self.authorization.save()
-        call_command('user_renewal_notice')
+        call_command("user_renewal_notice")
 
         self.assertEqual(len(mail.outbox), 0)
 
@@ -467,7 +428,7 @@ class UserRenewalNoticeTest(TestCase):
         """
         self.authorization.date_expires = datetime.today() + timedelta(weeks=8)
         self.authorization.save()
-        call_command('user_renewal_notice')
+        call_command("user_renewal_notice")
 
         self.assertEqual(len(mail.outbox), 0)
 
@@ -476,7 +437,7 @@ class UserRenewalNoticeTest(TestCase):
         If we have multiple authorizations to send emails for, let's make
         sure we send distinct emails to the right places.
         """
-        editor2 = EditorFactory(user__email='editor2@example.com')
+        editor2 = EditorFactory(user__email="editor2@example.com")
 
         authorization2 = Authorization()
         authorization2.user = editor2.user
@@ -485,7 +446,7 @@ class UserRenewalNoticeTest(TestCase):
         authorization2.date_expires = datetime.today() + timedelta(weeks=1)
         authorization2.save()
 
-        call_command('user_renewal_notice')
+        call_command("user_renewal_notice")
 
         self.assertEqual(len(mail.outbox), 2)
 
@@ -494,5 +455,7 @@ class UserRenewalNoticeTest(TestCase):
         # This looks a little complicated because mail.outbox[0].to is a
         # (one element) list, and we need to compare sets to ensure we've
         # got 1 of each email.
-        self.assertEqual(set([mail.outbox[0].to[0],mail.outbox[1].to[0]]),
-            set(['editor@example.com', 'editor2@example.com']))
+        self.assertEqual(
+            set([mail.outbox[0].to[0], mail.outbox[1].to[0]]),
+            set(["editor@example.com", "editor2@example.com"]),
+        )

@@ -9,14 +9,18 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('users', '0042_auto_20190530_1757'),
-    ]
+    dependencies = [("users", "0042_auto_20190530_1757")]
 
     operations = [
         migrations.AlterField(
-            model_name='authorization',
-            name='authorized_user',
-            field=models.ForeignKey(help_text='The authorized user.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='authorizations', to=settings.AUTH_USER_MODEL),
-        ),
+            model_name="authorization",
+            name="authorized_user",
+            field=models.ForeignKey(
+                help_text="The authorized user.",
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="authorizations",
+                to=settings.AUTH_USER_MODEL,
+            ),
+        )
     ]

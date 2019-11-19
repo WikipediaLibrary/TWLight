@@ -14,19 +14,17 @@ import datetime
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0018_auto_20161213_1603'),
-    ]
+    dependencies = [("resources", "0018_auto_20161213_1603")]
 
     operations = [
         migrations.AddField(
-            model_name='partner',
-            name='access_grant_term_pythonic',
-            field=models.DurationField(default=datetime.timedelta(365), null=True, blank=True),
+            model_name="partner",
+            name="access_grant_term_pythonic",
+            field=models.DurationField(
+                default=datetime.timedelta(365), null=True, blank=True
+            ),
         ),
         migrations.AlterField(
-            model_name='contact',
-            name='email',
-            field=models.EmailField(max_length=254),
+            model_name="contact", name="email", field=models.EmailField(max_length=254)
         ),
     ]

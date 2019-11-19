@@ -7,19 +7,25 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0075_auto_20191001_1455'),
-    ]
+    dependencies = [("resources", "0075_auto_20191001_1455")]
 
     operations = [
         migrations.AddField(
-            model_name='partner',
-            name='target_url',
-            field=models.URLField(blank=True, help_text='Link to partner resources. Required for proxied resources; optional otherwise.', null=True),
+            model_name="partner",
+            name="target_url",
+            field=models.URLField(
+                blank=True,
+                help_text="Link to partner resources. Required for proxied resources; optional otherwise.",
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='stream',
-            name='target_url',
-            field=models.URLField(blank=True, help_text='Link to collection. Required for proxied collections; optional otherwise.', null=True),
+            model_name="stream",
+            name="target_url",
+            field=models.URLField(
+                blank=True,
+                help_text="Link to collection. Required for proxied collections; optional otherwise.",
+                null=True,
+            ),
         ),
     ]

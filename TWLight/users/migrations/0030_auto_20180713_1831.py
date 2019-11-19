@@ -7,14 +7,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('users', '0029_auto_20180612_1453'),
-    ]
+    dependencies = [("users", "0029_auto_20180612_1453")]
 
     operations = [
         migrations.AlterField(
-            model_name='userprofile',
-            name='lang',
-            field=models.CharField(blank=True, choices=[('ar', '\u0627\u0644\u0639\u0631\u0628\u064a\u0629'), ('en', 'English'), ('fi', 'suomi'), ('fr', 'fran\xe7ais')], help_text='Language', max_length=128, null=True),
-        ),
+            model_name="userprofile",
+            name="lang",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("ar", "\u0627\u0644\u0639\u0631\u0628\u064a\u0629"),
+                    ("en", "English"),
+                    ("fi", "suomi"),
+                    ("fr", "fran\xe7ais"),
+                ],
+                help_text="Language",
+                max_length=128,
+                null=True,
+            ),
+        )
     ]

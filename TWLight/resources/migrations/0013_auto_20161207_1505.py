@@ -22,10 +22,6 @@ def fix_partner_status(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0012_partner_status'),
-    ]
+    dependencies = [("resources", "0012_partner_status")]
 
-    operations = [
-        migrations.RunPython(fix_partner_status),
-    ]
+    operations = [migrations.RunPython(fix_partner_status)]

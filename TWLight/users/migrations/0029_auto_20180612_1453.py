@@ -7,14 +7,18 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('users', '0028_merge_20180522_1304'),
-    ]
+    dependencies = [("users", "0028_merge_20180522_1304")]
 
     operations = [
         migrations.AlterField(
-            model_name='userprofile',
-            name='lang',
-            field=models.CharField(blank=True, choices=[('en', 'English'), ('fi', 'suomi'), ('fr', 'fran\xe7ais')], help_text='Language', max_length=128, null=True),
-        ),
+            model_name="userprofile",
+            name="lang",
+            field=models.CharField(
+                blank=True,
+                choices=[("en", "English"), ("fi", "suomi"), ("fr", "fran\xe7ais")],
+                help_text="Language",
+                max_length=128,
+                null=True,
+            ),
+        )
     ]

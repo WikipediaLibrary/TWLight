@@ -7,59 +7,93 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0060_auto_20190107_0927'),
-    ]
+    dependencies = [("resources", "0060_auto_20190107_0927")]
 
     operations = [
         migrations.AddField(
-            model_name='partner',
-            name='description_hi',
-            field=models.TextField(blank=True, help_text='Optional detailed description in addition to the short description such as collections, instructions, notes, special requirements, alternate access options, unique features, citations notes.', null=True, verbose_name=b'long description'),
+            model_name="partner",
+            name="description_hi",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional detailed description in addition to the short description such as collections, instructions, notes, special requirements, alternate access options, unique features, citations notes.",
+                null=True,
+                verbose_name=b"long description",
+            ),
         ),
         migrations.AddField(
-            model_name='partner',
-            name='description_mr',
-            field=models.TextField(blank=True, help_text='Optional detailed description in addition to the short description such as collections, instructions, notes, special requirements, alternate access options, unique features, citations notes.', null=True, verbose_name=b'long description'),
+            model_name="partner",
+            name="description_mr",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional detailed description in addition to the short description such as collections, instructions, notes, special requirements, alternate access options, unique features, citations notes.",
+                null=True,
+                verbose_name=b"long description",
+            ),
         ),
         migrations.AddField(
-            model_name='partner',
-            name='send_instructions_hi',
-            field=models.TextField(blank=True, help_text='Optional instructions for sending application data to this partner.', null=True),
+            model_name="partner",
+            name="send_instructions_hi",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional instructions for sending application data to this partner.",
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='partner',
-            name='send_instructions_mr',
-            field=models.TextField(blank=True, help_text='Optional instructions for sending application data to this partner.', null=True),
+            model_name="partner",
+            name="send_instructions_mr",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional instructions for sending application data to this partner.",
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='partner',
-            name='short_description_hi',
-            field=models.TextField(blank=True, help_text="Optional short description of this partner's resources.", max_length=1000, null=True),
+            model_name="partner",
+            name="short_description_hi",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional short description of this partner's resources.",
+                max_length=1000,
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='partner',
-            name='short_description_mr',
-            field=models.TextField(blank=True, help_text="Optional short description of this partner's resources.", max_length=1000, null=True),
+            model_name="partner",
+            name="short_description_mr",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional short description of this partner's resources.",
+                max_length=1000,
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='stream',
-            name='description_hi',
-            field=models.TextField(blank=True, help_text="Optional description of this stream's resources.", null=True),
+            model_name="stream",
+            name="description_hi",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional description of this stream's resources.",
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='stream',
-            name='description_mr',
-            field=models.TextField(blank=True, help_text="Optional description of this stream's resources.", null=True),
+            model_name="stream",
+            name="description_mr",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional description of this stream's resources.",
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='textfieldtag',
-            name='name_hi',
-            field=models.TextField(max_length=100, null=True, verbose_name='Name'),
+            model_name="textfieldtag",
+            name="name_hi",
+            field=models.TextField(max_length=100, null=True, verbose_name="Name"),
         ),
         migrations.AddField(
-            model_name='textfieldtag',
-            name='name_mr',
-            field=models.TextField(max_length=100, null=True, verbose_name='Name'),
+            model_name="textfieldtag",
+            name="name_mr",
+            field=models.TextField(max_length=100, null=True, verbose_name="Name"),
         ),
     ]

@@ -7,14 +7,15 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('users', '0024_userprofile_lang'),
-    ]
+    dependencies = [("users", "0024_userprofile_lang")]
 
     operations = [
         migrations.AddField(
-            model_name='userprofile',
-            name='data_restricted',
-            field=models.BooleanField(default=False, help_text='Has this user requested a restriction on the processing of their data?'),
-        ),
+            model_name="userprofile",
+            name="data_restricted",
+            field=models.BooleanField(
+                default=False,
+                help_text="Has this user requested a restriction on the processing of their data?",
+            ),
+        )
     ]

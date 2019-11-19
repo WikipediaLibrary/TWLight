@@ -8,14 +8,14 @@ import django_countries.fields
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0042_auto_20180426_2025'),
-    ]
+    dependencies = [("resources", "0042_auto_20180426_2025")]
 
     operations = [
         migrations.AddField(
-            model_name='partner',
-            name='company_location',
-            field=django_countries.fields.CountryField(help_text="Partner's primary location.", max_length=2, null=True),
-        ),
+            model_name="partner",
+            name="company_location",
+            field=django_countries.fields.CountryField(
+                help_text="Partner's primary location.", max_length=2, null=True
+            ),
+        )
     ]

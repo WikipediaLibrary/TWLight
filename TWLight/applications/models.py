@@ -21,18 +21,22 @@ from TWLight.users.models import Editor, Authorization
 
 logger = logging.getLogger(__name__)
 
+
 class ValidApplicationsManager(models.Manager):
     def get_queryset(self):
-        return super(ValidApplicationsManager, self).get_queryset(
-            ).exclude(status=Application.INVALID)
+        return (
+            super(ValidApplicationsManager, self)
+            .get_queryset()
+            .exclude(status=Application.INVALID)
+        )
 
 
 class Application(models.Model):
     class Meta:
-        app_label = 'applications'
-        verbose_name = 'application'
-        verbose_name_plural = 'applications'
-        ordering = ['-date_created', 'editor', 'partner']
+        app_label = "applications"
+        verbose_name = "application"
+        verbose_name_plural = "applications"
+        ordering = ["-date_created", "editor", "partner"]
 
     # Managers defined here
     include_invalid = models.Manager()
@@ -47,17 +51,17 @@ class Application(models.Model):
 
     STATUS_CHOICES = [
         # Translators: This is the status of an application that has not yet been reviewed.
-        (PENDING, _('Pending')),
+        (PENDING, _("Pending")),
         # Translators: This is the status of an application that reviewers have asked questions about.
-        (QUESTION, _('Under discussion')),
+        (QUESTION, _("Under discussion")),
         # Translators: This is the status of an application which has been approved by a reviewer.
-        (APPROVED, _('Approved')),
+        (APPROVED, _("Approved")),
         # Translators: This is the status of an application which has been declined by a reviewer.
-        (NOT_APPROVED, _('Not approved')),
+        (NOT_APPROVED, _("Not approved")),
         # Translators: This is the status of an application that has been sent to a partner.
-        (SENT, _('Sent to partner')),
+        (SENT, _("Sent to partner")),
         # Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
-        (INVALID, _('Invalid')),
+        (INVALID, _("Invalid")),
     ]
 
     # This list should contain all statuses that are the end state of an
@@ -71,10 +75,14 @@ class Application(models.Model):
 
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
-    date_closed = models.DateField(blank=True, null=True,
+    date_closed = models.DateField(
+        blank=True,
+        null=True,
         # Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
-        help_text=_('Please do not override this field! Its value is set '
-                  'automatically.'))
+        help_text=_(
+            "Please do not override this field! Its value is set " "automatically."
+        ),
+    )
 
     # Will be set on save() if status changes from PENDING/QUESTION to
     # APPROVED/NOT APPROVED.
@@ -83,50 +91,69 @@ class Application(models.Model):
     # code was originally written in 1.7), so we needed to precompute. At this
     # point the upgrade would be nice to have, but not worth the hassle of
     # updating all the things that touch this field.
-    days_open = models.IntegerField(blank=True, null=True,
-        help_text=_('Please do not override this field! Its value is set '
-                  'automatically.'))
+    days_open = models.IntegerField(
+        blank=True,
+        null=True,
+        help_text=_(
+            "Please do not override this field! Its value is set " "automatically."
+        ),
+    )
 
-    sent_by = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL,
+    sent_by = models.ForeignKey(
+        User,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
         # Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
-        help_text=_('The user who sent this application to the partner'))
+        help_text=_("The user who sent this application to the partner"),
+    )
 
-    editor = models.ForeignKey(Editor, related_name='applications', null=True,
-        on_delete=models.SET_NULL)
-    partner = models.ForeignKey(Partner, related_name='applications')
+    editor = models.ForeignKey(
+        Editor, related_name="applications", null=True, on_delete=models.SET_NULL
+    )
+    partner = models.ForeignKey(Partner, related_name="applications")
 
     rationale = models.TextField(blank=True)
     specific_title = models.CharField(max_length=128, blank=True)
-    specific_stream = models.ForeignKey(Stream,
-                            related_name='applications',
-                            blank=True, null=True)
+    specific_stream = models.ForeignKey(
+        Stream, related_name="applications", blank=True, null=True
+    )
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
     account_email = models.EmailField(blank=True, null=True)
 
-    REQUESTED_ACCESS_DURATION_CHOICES = ((12, _('12 months')), (6, _('6 months')), (3, _('3 months')), (1, _('1 month')))
+    REQUESTED_ACCESS_DURATION_CHOICES = (
+        (12, _("12 months")),
+        (6, _("6 months")),
+        (3, _("3 months")),
+        (1, _("1 month")),
+    )
 
-    requested_access_duration = models.IntegerField(choices=REQUESTED_ACCESS_DURATION_CHOICES, blank=True, null=True,
-                                                    # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
-                                                    help_text=_('User selection of when they\'d like their account to expire (in months). '
-                                                                'Required for proxied resources; optional otherwise.'))
+    requested_access_duration = models.IntegerField(
+        choices=REQUESTED_ACCESS_DURATION_CHOICES,
+        blank=True,
+        null=True,
+        # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
+        help_text=_(
+            "User selection of when they'd like their account to expire (in months). "
+            "Required for proxied resources; optional otherwise."
+        ),
+    )
 
     # Was this application imported via CLI?
     imported = models.NullBooleanField(default=False)
 
     # If this Application is a renewal, the parent is the original Application
     # it was copied from.
-    parent = models.ForeignKey('self',
-        on_delete=models.SET_NULL, blank=True, null=True)
+    parent = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True)
 
     hidden = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return u'{self.editor} - {self.partner}'.format(self=self)
-
+        return u"{self.editor} - {self.partner}".format(self=self)
 
     def get_absolute_url(self):
-        return reverse_lazy('applications:evaluate', kwargs={'pk': self.pk})
+        return reverse_lazy("applications:evaluate", kwargs={"pk": self.pk})
 
     # Every single save to this model should create a revision.
     # You can access two models this way: REVISIONS and VERSIONS.
@@ -141,7 +168,6 @@ class Application(models.Model):
     def save(self, *args, **kwargs):
         super(Application, self).save(*args, **kwargs)
 
-
     def renew(self):
         """
         Create a reviewable clone of this application: that is, a PENDING
@@ -152,21 +178,32 @@ class Application(models.Model):
         if not self.is_renewable:
             return None
         else:
-            data = model_to_dict(self,
-                    fields=['rationale', 'specific_title', 'comments',
-                            'agreement_with_terms_of_use', 'account_email'])
+            data = model_to_dict(
+                self,
+                fields=[
+                    "rationale",
+                    "specific_title",
+                    "comments",
+                    "agreement_with_terms_of_use",
+                    "account_email",
+                ],
+            )
 
             # Status and parent are explicitly different on the child than
             # on the parent application. For editor, partner, and stream, we
             # need to pull those directly - model_to_dict will give us the pks
             # of the referenced objects, but we need the actual objects.
-            data.update({'status': self.PENDING, 
-                         'parent': self,
-                         'editor': self.editor,
-                         'partner': self.partner,
-                         'specific_stream': self.specific_stream,
-                         'account_email': self.account_email,
-                         'requested_access_duration': self.requested_access_duration})
+            data.update(
+                {
+                    "status": self.PENDING,
+                    "parent": self,
+                    "editor": self.editor,
+                    "partner": self.partner,
+                    "specific_stream": self.specific_stream,
+                    "account_email": self.account_email,
+                    "requested_access_duration": self.requested_access_duration,
+                }
+            )
 
             # Create clone. We can't use the normal approach of setting the
             # object's pk to None and then saving it, because the object in
@@ -176,14 +213,13 @@ class Application(models.Model):
 
             return clone
 
-
     LABELMAKER = {
-        PENDING: '-primary',
-        INVALID: '-danger',
-        QUESTION: '-warning',
-        APPROVED: '-success',
-        NOT_APPROVED: '-danger',
-        SENT: '-success',
+        PENDING: "-primary",
+        INVALID: "-danger",
+        QUESTION: "-warning",
+        APPROVED: "-success",
+        NOT_APPROVED: "-danger",
+        SENT: "-success",
     }
 
     def get_bootstrap_class(self):
@@ -199,7 +235,6 @@ class Application(models.Model):
         except KeyError:
             return None
 
-
     def get_version_count(self):
         try:
             return len(Version.objects.get_for_object(self))
@@ -209,14 +244,12 @@ class Application(models.Model):
             # yet set.
             return None
 
-
     def get_latest_version(self):
         try:
             return Version.objects.get_for_object(self)[0]
         except (TypeError, IndexError):
             # If no versions yet...
             return None
-
 
     def get_latest_revision(self):
         version = self.get_latest_version()
@@ -225,7 +258,6 @@ class Application(models.Model):
             return version.revision
         else:
             return None
-
 
     def get_latest_reviewer(self):
         revision = self.get_latest_revision()
@@ -238,7 +270,6 @@ class Application(models.Model):
         else:
             return None
 
-
     def get_latest_review_date(self):
         revision = self.get_latest_revision()
 
@@ -246,7 +277,6 @@ class Application(models.Model):
             return revision.date_created
         else:
             return None
-
 
     def get_num_days_open(self):
         """
@@ -257,9 +287,13 @@ class Application(models.Model):
         if self.status in [self.PENDING, self.QUESTION]:
             return (date.today() - self.date_created).days
         else:
-            assert self.status in [self.APPROVED, self.NOT_APPROVED, self.SENT, self.INVALID]
+            assert self.status in [
+                self.APPROVED,
+                self.NOT_APPROVED,
+                self.SENT,
+                self.INVALID,
+            ]
             return (self.date_closed - self.date_created).days
-
 
     def get_user_instructions(self):
         """
@@ -276,17 +310,28 @@ class Application(models.Model):
 
         # Fetch instructions from the database if appropriate
         if resource:
-            if resource.authorization_method in [Partner.CODES, Partner.LINK] and resource.user_instructions:
+            if (
+                resource.authorization_method in [Partner.CODES, Partner.LINK]
+                and resource.user_instructions
+            ):
                 user_instructions = resource.user_instructions
-            elif resource.authorization_method == Partner.PROXY and resource.get_access_url:
+            elif (
+                resource.authorization_method == Partner.PROXY
+                and resource.get_access_url
+            ):
                 # Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
-                user_instructions = _("Access URL: {access_url}".format(access_url=resource.get_access_url))
+                user_instructions = _(
+                    "Access URL: {access_url}".format(
+                        access_url=resource.get_access_url
+                    )
+                )
             else:
                 # Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-                user_instructions = _("You can expect to receive access details "
-                                      "within a week or two once it has been processed.")
+                user_instructions = _(
+                    "You can expect to receive access details "
+                    "within a week or two once it has been processed."
+                )
         return user_instructions
-
 
     def is_instantly_finalized(self):
         """
@@ -319,9 +364,13 @@ class Application(models.Model):
         Apps are eligible for renewal if they are approved and have not already
         been renewed. (We presume that SENT apps were at some point APPROVED.)
         """
-        return all([not bool(Application.objects.filter(parent=self)),
-                    self.status in [self.APPROVED, self.SENT],
-                    self.partner.renewals_available])
+        return all(
+            [
+                not bool(Application.objects.filter(parent=self)),
+                self.status in [self.APPROVED, self.SENT],
+                self.partner.renewals_available,
+            ]
+        )
 
 
 # IMPORTANT: pre_save is not sent by Queryset.update(), so *none of this
@@ -345,23 +394,29 @@ def update_app_status_on_save(sender, instance, **kwargs):
     if instance.id:
         orig_app = Application.include_invalid.get(pk=instance.id)
         orig_status = orig_app.status
-        if all([orig_status not in Application.FINAL_STATUS_LIST,
+        if all(
+            [
+                orig_status not in Application.FINAL_STATUS_LIST,
                 int(instance.status) in Application.FINAL_STATUS_LIST,
-                not bool(instance.date_closed)]):
+                not bool(instance.date_closed),
+            ]
+        ):
 
             instance.date_closed = localtime(now()).date()
-            instance.days_open = \
-                (instance.date_closed - instance.date_created).days
+            instance.days_open = (instance.date_closed - instance.date_created).days
 
     else:
         # If somehow we've created an Application whose status is final
         # at the moment of creation, set its date-closed-type parameters
         # too.
-        if (instance.status in Application.FINAL_STATUS_LIST
-            and not instance.date_closed):
+        if (
+            instance.status in Application.FINAL_STATUS_LIST
+            and not instance.date_closed
+        ):
 
             instance.date_closed = localtime(now()).date()
             instance.days_open = 0
+
 
 @receiver(post_save, sender=Application)
 def post_revision_commit(sender, instance, **kwargs):
@@ -369,8 +424,9 @@ def post_revision_commit(sender, instance, **kwargs):
     # For some authorization methods, we can skip the manual Approved->Sent
     # step and just immediately take an Approved application and give it
     # a finalised status.
-    skip_approved = (instance.status == Application.APPROVED and
-        instance.is_instantly_finalized())
+    skip_approved = (
+        instance.status == Application.APPROVED and instance.is_instantly_finalized()
+    )
 
     if skip_approved:
         instance.status = Application.SENT
@@ -384,11 +440,12 @@ def post_revision_commit(sender, instance, **kwargs):
             existing_authorization = Authorization.objects.filter(
                 user=instance.user,
                 partner=instance.partner,
-                stream=instance.specific_stream)
+                stream=instance.specific_stream,
+            )
         else:
             existing_authorization = Authorization.objects.filter(
-                user=instance.user,
-                partner=instance.partner)
+                user=instance.user, partner=instance.partner
+            )
 
         authorized_user = instance.user
         authorizer = instance.sent_by
@@ -401,9 +458,12 @@ def post_revision_commit(sender, instance, **kwargs):
         elif existing_authorization.count() == 1:
             authorization = existing_authorization[0]
         else:
-            logger.error("Found more than one authorization object for "
-                         "{user} - {partner}".format(user=instance.user,
-                                                     partner=instance.partner))
+            logger.error(
+                "Found more than one authorization object for "
+                "{user} - {partner}".format(
+                    user=instance.user, partner=instance.partner
+                )
+            )
             return
 
         if instance.specific_stream:
@@ -416,14 +476,22 @@ def post_revision_commit(sender, instance, **kwargs):
         # If this is a proxy partner, and the requested_access_duration
         # field is set to false, set (or reset) the expiry date
         # to one year from now
-        if instance.partner.authorization_method == Partner.PROXY and instance.requested_access_duration is None:
+        if (
+            instance.partner.authorization_method == Partner.PROXY
+            and instance.requested_access_duration is None
+        ):
             one_year_from_now = date.today() + timedelta(days=365)
             authorization.date_expires = one_year_from_now
         # If this is a proxy partner, and the requested_access_duration
         # field is set to true, set (or reset) the expiry date
         # to 1, 3, 6 or 12 months from today based on user input
-        elif instance.partner.authorization_method == Partner.PROXY and instance.partner.requested_access_duration is True:
-            custom_expiry_date = date.today() + relativedelta(months=+instance.requested_access_duration)
+        elif (
+            instance.partner.authorization_method == Partner.PROXY
+            and instance.partner.requested_access_duration is True
+        ):
+            custom_expiry_date = date.today() + relativedelta(
+                months=+instance.requested_access_duration
+            )
             authorization.date_expires = custom_expiry_date
         # Alternatively, if this partner has a specified account_length,
         # we'll use that to set the expiry.

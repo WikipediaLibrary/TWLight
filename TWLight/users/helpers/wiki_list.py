@@ -6,7 +6,7 @@
 WIKIS = (
     # Machine-readable/human-readable pairs intended as options
     # for the home_wiki element on the user profile.
-    ('meta', 'meta.wikimedia.org'),
+    ("meta", "meta.wikimedia.org"),
 )
 
 # Given the wiki code, get the base URL.
@@ -17,5 +17,5 @@ LANGUAGE_CODES = {
     # For providing human-readable language names for the
     # above wikis. Note: exploits Python3 unicode support
     # to provide things like 'Bokmål'.
-    'meta': 'Global',
+    "meta": "Global"
 }

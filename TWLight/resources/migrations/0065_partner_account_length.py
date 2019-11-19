@@ -7,14 +7,16 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0064_partner_access_code_instructions'),
-    ]
+    dependencies = [("resources", "0064_partner_access_code_instructions")]
 
     operations = [
         migrations.AddField(
-            model_name='partner',
-            name='account_length',
-            field=models.DurationField(blank=True, help_text='The standard length of an access grant from this Partner. Entered as <days hours:minutes:seconds>.', null=True),
-        ),
+            model_name="partner",
+            name="account_length",
+            field=models.DurationField(
+                blank=True,
+                help_text="The standard length of an access grant from this Partner. Entered as <days hours:minutes:seconds>.",
+                null=True,
+            ),
+        )
     ]

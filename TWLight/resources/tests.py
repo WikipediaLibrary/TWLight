@@ -29,34 +29,36 @@ from .filters import PartnerFilter
 from . import views
 
 
-def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False, editor=None):
+def EditorCraftRoom(
+    self, Terms=False, Coordinator=False, Restricted=False, editor=None
+):
     """
     The use of the @login_required decorator on many views precludes the use of
     factories for many tests. This method creates an Editor logged into a test
     client session.
     """
-    terms_url = reverse('terms')
+    terms_url = reverse("terms")
 
     # Create editor if None was specified.
     if not editor:
-        editor=EditorFactory()
+        editor = EditorFactory()
 
     # Set a password
-    editor.user.set_password('editor')
+    editor.user.set_password("editor")
     editor.user.save()
 
     # Log user in
     self.client = Client()
     session = self.client.session
-    self.client.login(username=editor.user.username, password='editor')
+    self.client.login(username=editor.user.username, password="editor")
 
     # Agree to terms of use in Client (or not).
     if Terms:
         terms = self.client.get(terms_url, follow=True)
-        terms_form = terms.context['form']
+        terms_form = terms.context["form"]
         data = terms_form.initial
-        data['terms_of_use'] = True
-        data['submit'] = True
+        data["terms_of_use"] = True
+        data["submit"] = True
         agree = self.client.post(terms_url, data)
 
     # Add or remove editor from Coordinators as required
@@ -78,7 +80,6 @@ def EditorCraftRoom(self, Terms=False, Coordinator=False, Restricted=False, edit
 
 
 class LanguageModelTests(TestCase):
-
     @classmethod
     def setUpClass(cls):
         """
@@ -89,8 +90,8 @@ class LanguageModelTests(TestCase):
         primary key but doesn't delete the fields.)
         """
         super(LanguageModelTests, cls).setUpClass()
-        cls.lang_en, _ = Language.objects.get_or_create(language='en')
-        cls.lang_fr, _ = Language.objects.get_or_create(language='fr')
+        cls.lang_en, _ = Language.objects.get_or_create(language="en")
+        cls.lang_fr, _ = Language.objects.get_or_create(language="fr")
 
     def test_validation(self):
         # Note that RESOURCE_LANGUAGES is a list of tuples, such as
@@ -98,28 +99,27 @@ class LanguageModelTests(TestCase):
         # tuple, as it is the one stored in the database.
         language_codes = [lang[0] for lang in RESOURCE_LANGUAGES]
 
-        not_a_language = 'fksdja'
+        not_a_language = "fksdja"
         assert not_a_language not in language_codes
         bad_lang = Language(language=not_a_language)
         with self.assertRaises(ValidationError):
             bad_lang.save()
 
     def test_language_display(self):
-        self.assertEqual(self.lang_en.__unicode__(), 'English')
+        self.assertEqual(self.lang_en.__unicode__(), "English")
 
     def test_language_uniqueness(self):
         with self.assertRaises(IntegrityError):
-            lang = Language(language='en')
+            lang = Language(language="en")
             lang.save()
 
 
 class PartnerModelTests(TestCase):
-
     @classmethod
     def setUpClass(cls):
         super(PartnerModelTests, cls).setUpClass()
-        cls.lang_en, _ = Language.objects.get_or_create(language='en')
-        cls.lang_fr, _ = Language.objects.get_or_create(language='fr')
+        cls.lang_en, _ = Language.objects.get_or_create(language="en")
+        cls.lang_fr, _ = Language.objects.get_or_create(language="fr")
 
         editor = EditorFactory()
         coordinators = get_coordinators()
@@ -132,7 +132,7 @@ class PartnerModelTests(TestCase):
         # RequestFactory (unlike Client) doesn't run middleware. If you
         # actually want to test that messages are displayed, use Client(),
         # and stop/restart the patcher.
-        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
         cls.message_patcher.start()
 
     @classmethod
@@ -147,13 +147,12 @@ class PartnerModelTests(TestCase):
         self.assertFalse(partner.languages.all())
 
         partner.languages.add(self.lang_en)
-        self.assertEqual(list(partner.get_languages), [Language.objects.get(language='en')])
+        self.assertEqual(
+            list(partner.get_languages), [Language.objects.get(language="en")]
+        )
 
         partner.languages.add(self.lang_fr)
-        self.assertIn(
-            Language.objects.get(language='fr'),
-            list(partner.get_languages)
-        )
+        self.assertIn(Language.objects.get(language="fr"), list(partner.get_languages))
 
     def test_visibility_of_not_available_1(self):
         """Regular users shouldn't see NOT_AVAILABLE partner pages."""
@@ -175,7 +174,7 @@ class PartnerModelTests(TestCase):
         listview.
         """
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
-        filter_url = reverse('partners:filter')
+        filter_url = reverse("partners:filter")
 
         editor = EditorFactory()
 
@@ -211,7 +210,7 @@ class PartnerModelTests(TestCase):
         Staff users *should* see NOT_AVAILABLE partner pages in the list view.
         """
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
-        filter_url = reverse('partners:filter')
+        filter_url = reverse("partners:filter")
 
         editor = EditorFactory()
         editor.user.is_staff = True
@@ -227,7 +226,7 @@ class PartnerModelTests(TestCase):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
         _ = ApplicationFactory(partner=partner, status=Application.PENDING)
 
-        url = reverse('applications:list')
+        url = reverse("applications:list")
 
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -240,9 +239,8 @@ class PartnerModelTests(TestCase):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
 
         tomorrow = date.today() + timedelta(days=1)
-        _ = ApplicationFactory(partner=partner,
-                               status=Application.SENT)
-        url = reverse('applications:list_renewal')
+        _ = ApplicationFactory(partner=partner, status=Application.SENT)
+        url = reverse("applications:list_renewal")
 
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -254,7 +252,7 @@ class PartnerModelTests(TestCase):
     def test_sent_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
         _ = ApplicationFactory(partner=partner, status=Application.SENT)
-        url = reverse('applications:list_sent')
+        url = reverse("applications:list_sent")
 
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -278,7 +276,7 @@ class PartnerModelTests(TestCase):
     def test_rejected_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
         _ = ApplicationFactory(partner=partner, status=Application.NOT_APPROVED)
-        url = reverse('applications:list_rejected')
+        url = reverse("applications:list_rejected")
 
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -302,7 +300,7 @@ class PartnerModelTests(TestCase):
     def test_approved_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
         _ = ApplicationFactory(partner=partner, status=Application.APPROVED)
-        url = reverse('applications:list_approved')
+        url = reverse("applications:list_approved")
 
         # Create a coordinator with a test client session
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -328,11 +326,11 @@ class PartnerModelTests(TestCase):
         AVAILABLE, NOT_AVAILABLE, WAITLIST should be the status choices.
         """
 
-        assert hasattr(Partner, 'AVAILABLE')
-        assert hasattr(Partner, 'NOT_AVAILABLE')
-        assert hasattr(Partner, 'WAITLIST')
+        assert hasattr(Partner, "AVAILABLE")
+        assert hasattr(Partner, "NOT_AVAILABLE")
+        assert hasattr(Partner, "WAITLIST")
 
-        assert hasattr(Partner, 'STATUS_CHOICES')
+        assert hasattr(Partner, "STATUS_CHOICES")
 
         assert len(Partner.STATUS_CHOICES) == 3
 
@@ -371,10 +369,15 @@ class PartnerModelTests(TestCase):
 
         # assertQuerysetEqual compares a queryset to a list of representations.
         # Sigh.
-        self.assertQuerysetEqual(Partner.objects.all(),
-                                 map(repr, Partner.even_not_available.filter(
-                                     status__in=
-                                     [Partner.WAITLIST, Partner.AVAILABLE])))
+        self.assertQuerysetEqual(
+            Partner.objects.all(),
+            map(
+                repr,
+                Partner.even_not_available.filter(
+                    status__in=[Partner.WAITLIST, Partner.AVAILABLE]
+                ),
+            ),
+        )
 
 
 class WaitlistBehaviorTests(TestCase):
@@ -387,7 +390,7 @@ class WaitlistBehaviorTests(TestCase):
     @classmethod
     def setUpClass(cls):
         super(WaitlistBehaviorTests, cls).setUpClass()
-        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
         cls.message_patcher.start()
 
     def test_request_application_view_context_1(self):
@@ -396,7 +399,7 @@ class WaitlistBehaviorTests(TestCase):
         there are waitlisted Partners.
         """
         # Set up request.
-        req_url = reverse('applications:request')
+        req_url = reverse("applications:request")
 
         # Create an editor with a test client session
         editor = EditorCraftRoom(self, Terms=True)
@@ -406,7 +409,7 @@ class WaitlistBehaviorTests(TestCase):
 
         # Test response.
         response = self.client.get(req_url, follow=True)
-        self.assertEqual(response.context['any_waitlisted'], True)
+        self.assertEqual(response.context["any_waitlisted"], True)
 
     def test_request_application_view_context_2(self):
         """
@@ -414,7 +417,7 @@ class WaitlistBehaviorTests(TestCase):
         there are not waitlisted Partners.
         """
         # Set up request.
-        req_url = reverse('applications:request')
+        req_url = reverse("applications:request")
 
         # Create an editor with a test client session
         editor = EditorCraftRoom(self, Terms=True)
@@ -425,7 +428,7 @@ class WaitlistBehaviorTests(TestCase):
 
         # Test response.
         response = self.client.get(req_url, follow=True)
-        self.assertEqual(response.context['any_waitlisted'], False)
+        self.assertEqual(response.context["any_waitlisted"], False)
 
     def test_toggle_waitlist_1(self):
         """
@@ -441,7 +444,7 @@ class WaitlistBehaviorTests(TestCase):
         partner = PartnerFactory(status=Partner.AVAILABLE)
 
         # Set up request.
-        url = reverse('partners:toggle_waitlist', kwargs={'pk': partner.pk})
+        url = reverse("partners:toggle_waitlist", kwargs={"pk": partner.pk})
 
         request = RequestFactory().post(url)
         request.user = editor.user
@@ -464,7 +467,7 @@ class WaitlistBehaviorTests(TestCase):
         partner = PartnerFactory(status=Partner.WAITLIST)
 
         # Set up request.
-        url = reverse('partners:toggle_waitlist', kwargs={'pk': partner.pk})
+        url = reverse("partners:toggle_waitlist", kwargs={"pk": partner.pk})
 
         request = RequestFactory().post(url)
         request.user = editor.user
@@ -486,7 +489,7 @@ class WaitlistBehaviorTests(TestCase):
         partner = PartnerFactory(status=Partner.AVAILABLE)
 
         # Set up request.
-        url = reverse('partners:toggle_waitlist', kwargs={'pk': partner.pk})
+        url = reverse("partners:toggle_waitlist", kwargs={"pk": partner.pk})
 
         request = RequestFactory().post(url)
         request.user = editor.user
@@ -500,12 +503,11 @@ class WaitlistBehaviorTests(TestCase):
 
 
 class StreamModelTests(TestCase):
-
     @classmethod
     def setUpClass(cls):
         super(StreamModelTests, cls).setUpClass()
-        cls.lang_en, _ = Language.objects.get_or_create(language='en')
-        cls.lang_fr, _ = Language.objects.get_or_create(language='fr')
+        cls.lang_en, _ = Language.objects.get_or_create(language="en")
+        cls.lang_fr, _ = Language.objects.get_or_create(language="fr")
 
     def test_get_languages(self):
         stream = StreamFactory()
@@ -514,16 +516,16 @@ class StreamModelTests(TestCase):
         self.assertFalse(stream.languages.all())
 
         stream.languages.add(self.lang_en)
-        self.assertEqual(stream.get_languages, u'English')
+        self.assertEqual(stream.get_languages, u"English")
 
         # Order isn't important.
         stream.languages.add(self.lang_fr)
-        self.assertIn(stream.get_languages,
-                      [u'English, français', u'français, English'])
+        self.assertIn(
+            stream.get_languages, [u"English, français", u"français, English"]
+        )
 
 
 class PartnerViewTests(TestCase):
-
     @classmethod
     def setUpClass(cls):
         super(PartnerViewTests, cls).setUpClass()
@@ -539,18 +541,17 @@ class PartnerViewTests(TestCase):
         coordinators.user_set.add(cls.coordinator2)
 
         cls.application = ApplicationFactory(
-            partner=cls.partner,
-            editor=editor,
-            status=Application.SENT)
+            partner=cls.partner, editor=editor, status=Application.SENT
+        )
 
         cls.partner.coordinator = cls.coordinator
         cls.partner.save()
 
-        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
         cls.message_patcher.start()
 
     def test_users_view(self):
-        users_url = reverse('partners:users', kwargs={'pk': self.partner.pk})
+        users_url = reverse("partners:users", kwargs={"pk": self.partner.pk})
 
         factory = RequestFactory()
         request = factory.get(users_url)
@@ -599,11 +600,12 @@ class PartnerViewTests(TestCase):
         application3.save()
 
         factory = RequestFactory()
-        request = factory.get(reverse('partners:detail',
-                                      kwargs={'pk': self.partner.pk}))
+        request = factory.get(
+            reverse("partners:detail", kwargs={"pk": self.partner.pk})
+        )
         request.user = self.user
         response = PartnersDetailView.as_view()(request, pk=self.partner.pk)
-        latest_sent_app_pk = response.context_data['latest_sent_app_pk']
+        latest_sent_app_pk = response.context_data["latest_sent_app_pk"]
 
         self.assertEqual(application3.pk, latest_sent_app_pk)
 
@@ -625,11 +627,12 @@ class PartnerViewTests(TestCase):
         application3.save()
 
         factory = RequestFactory()
-        request = factory.get(reverse('partners:detail',
-                                      kwargs={'pk': self.partner.pk}))
+        request = factory.get(
+            reverse("partners:detail", kwargs={"pk": self.partner.pk})
+        )
         request.user = self.user
         response = PartnersDetailView.as_view()(request, pk=self.partner.pk)
-        latest_sent_app_pk = response.context_data['latest_sent_app_pk']
+        latest_sent_app_pk = response.context_data["latest_sent_app_pk"]
 
         self.assertEqual(application3.pk, latest_sent_app_pk)
 
@@ -639,8 +642,8 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
     def setUpClass(cls):
         super(CSVUploadTest, cls).setUpClass()
 
-        cls.staff_user = UserFactory(username='staff_user', is_staff=True)
-        cls.staff_user.set_password('staff')
+        cls.staff_user = UserFactory(username="staff_user", is_staff=True)
+        cls.staff_user.set_password("staff")
         cls.staff_user.save()
         cls.user = UserFactory()
 
@@ -651,15 +654,15 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
         cls.partner3 = PartnerFactory()
         cls.partner3_pk = cls.partner3.pk
 
-        cls.url = reverse('admin:resources_accesscode_changelist')
+        cls.url = reverse("admin:resources_accesscode_changelist")
         # import url is added inside admin.py so just manually add it here.
-        cls.url = cls.url + 'import/'
+        cls.url = cls.url + "import/"
 
         # We should mock out any call to messages call in the view, since
         # RequestFactory (unlike Client) doesn't run middleware. If you
         # actually want to test that messages are displayed, use Client(),
         # and stop/restart the patcher.
-        cls.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
         cls.message_patcher.start()
 
     @classmethod
@@ -669,8 +672,8 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
         cls.user.delete()
 
         # If one of the tests made a csv, delete it.
-        if os.path.exists('accesscodes.csv'):
-            os.remove('accesscodes.csv')
+        if os.path.exists("accesscodes.csv"):
+            os.remove("accesscodes.csv")
 
         cls.message_patcher.stop()
 
@@ -679,19 +682,19 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
         A csv file with unique codes for multiple partners should
         upload successfully and create the relevant objects.
         """
-        test_file = open('accesscodes.csv', 'wb')
-        csv_writer = csv.writer(test_file, lineterminator='\n')
-        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
-        csv_writer.writerow(('BBCD-EFGH-IJKL', str(self.partner1_pk)))
-        csv_writer.writerow(('CBCD-EFGH-IJKL', str(self.partner2_pk)))
+        test_file = open("accesscodes.csv", "wb")
+        csv_writer = csv.writer(test_file, lineterminator="\n")
+        csv_writer.writerow(("ABCD-EFGH-IJKL", str(self.partner1_pk)))
+        csv_writer.writerow(("BBCD-EFGH-IJKL", str(self.partner1_pk)))
+        csv_writer.writerow(("CBCD-EFGH-IJKL", str(self.partner2_pk)))
         test_file.close()
 
         client = Client()
         session = client.session
-        client.login(username=self.staff_user.username, password='staff')
+        client.login(username=self.staff_user.username, password="staff")
 
-        with open('accesscodes.csv', 'r') as csv_file:
-            response = client.post(self.url, {'access_code_csv': csv_file})
+        with open("accesscodes.csv", "r") as csv_file:
+            response = client.post(self.url, {"access_code_csv": csv_file})
 
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 3)
@@ -701,19 +704,19 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
         A csv file with non-unique codes for multiple partners should
         only upload the unique ones.
         """
-        test_file = open('accesscodes.csv', 'wb')
-        csv_writer = csv.writer(test_file, lineterminator='\n')
-        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
-        csv_writer.writerow(('BBCD-EFGH-IJKL', str(self.partner1_pk)))
-        csv_writer.writerow(('ABCD-EFGH-IJKL', str(self.partner1_pk)))
+        test_file = open("accesscodes.csv", "wb")
+        csv_writer = csv.writer(test_file, lineterminator="\n")
+        csv_writer.writerow(("ABCD-EFGH-IJKL", str(self.partner1_pk)))
+        csv_writer.writerow(("BBCD-EFGH-IJKL", str(self.partner1_pk)))
+        csv_writer.writerow(("ABCD-EFGH-IJKL", str(self.partner1_pk)))
         test_file.close()
 
         client = Client()
         session = client.session
-        client.login(username=self.staff_user.username, password='staff')
+        client.login(username=self.staff_user.username, password="staff")
 
-        with open('accesscodes.csv', 'r') as csv_file:
-            response = client.post(self.url, {'access_code_csv': csv_file})
+        with open("accesscodes.csv", "r") as csv_file:
+            response = client.post(self.url, {"access_code_csv": csv_file})
 
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 2)
@@ -722,19 +725,19 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
         """
         An incorrectly formatted csv shouldn't upload anything.
         """
-        test_file = open('accesscodes.csv', 'wb')
-        csv_writer = csv.writer(test_file, lineterminator='\n')
-        csv_writer.writerow(('ABCD-EFGH-IJKL', 'EBSCO'))
-        csv_writer.writerow(('BBCD-EFGH-IJKL', 'JSTOR'))
-        csv_writer.writerow(('ABCD-EFGH-IJKL', 'BMJ'))
+        test_file = open("accesscodes.csv", "wb")
+        csv_writer = csv.writer(test_file, lineterminator="\n")
+        csv_writer.writerow(("ABCD-EFGH-IJKL", "EBSCO"))
+        csv_writer.writerow(("BBCD-EFGH-IJKL", "JSTOR"))
+        csv_writer.writerow(("ABCD-EFGH-IJKL", "BMJ"))
         test_file.close()
 
         client = Client()
         session = client.session
-        client.login(username=self.staff_user.username, password='staff')
+        client.login(username=self.staff_user.username, password="staff")
 
-        with open('accesscodes.csv', 'r') as csv_file:
-            response = client.post(self.url, {'access_code_csv': csv_file})
+        with open("accesscodes.csv", "r") as csv_file:
+            response = client.post(self.url, {"access_code_csv": csv_file})
 
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 0)
@@ -749,28 +752,32 @@ class AutoWaitlistDisableTest(TestCase):
         self.partner = PartnerFactory(
             status=Partner.WAITLIST,
             authorization_method=Partner.PROXY,
-            accounts_available=10)
+            accounts_available=10,
+        )
         self.partner1 = PartnerFactory(
             status=Partner.WAITLIST,
             authorization_method=Partner.PROXY,
-            accounts_available=2)
+            accounts_available=2,
+        )
 
         self.application = ApplicationFactory(
             editor=editor,
             status=Application.PENDING,
             partner=self.partner,
-            rationale='Just because',
-            agreement_with_terms_of_use=True)
+            rationale="Just because",
+            agreement_with_terms_of_use=True,
+        )
 
         self.application1 = ApplicationFactory(
             editor=editor,
             status=Application.PENDING,
             partner=self.partner1,
-            rationale='Just because',
-            agreement_with_terms_of_use=True)
+            rationale="Just because",
+            agreement_with_terms_of_use=True,
+        )
 
-        self.coordinator = UserFactory(username='coordinator')
-        self.coordinator.set_password('coordinator')
+        self.coordinator = UserFactory(username="coordinator")
+        self.coordinator.set_password("coordinator")
         coordinators = get_coordinators()
         coordinators.user_set.add(self.coordinator)
         self.coordinator.userprofile.terms_of_use = True
@@ -780,43 +787,41 @@ class AutoWaitlistDisableTest(TestCase):
             user=self.user,
             authorizer=self.coordinator,
             date_expires=date.today(),
-            partner=self.partner
+            partner=self.partner,
         )
         Authorization.objects.create(
             user=EditorFactory().user,
             authorizer=self.coordinator,
             date_expires=date.today(),
-            partner=self.partner
+            partner=self.partner,
         )
 
         Authorization.objects.create(
             user=self.user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-            partner=self.partner1
+            partner=self.partner1,
         )
         Authorization.objects.create(
             user=EditorFactory().user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-            partner=self.partner1
+            partner=self.partner1,
         )
 
-        self.message_patcher = patch('TWLight.applications.views.messages.add_message')
+        self.message_patcher = patch("TWLight.applications.views.messages.add_message")
         self.message_patcher.start()
-
 
     def tearDown(self):
         super(AutoWaitlistDisableTest, self).tearDown()
         self.message_patcher.stop()
 
-
     def test_auto_disable_waitlist_command(self):
         self.assertEqual(self.partner.status, Partner.WAITLIST)
         self.assertEqual(self.partner1.status, Partner.WAITLIST)
 
-        call_command('proxy_waitlist_disable')
-        
+        call_command("proxy_waitlist_disable")
+
         self.partner.refresh_from_db()
         self.assertEqual(self.partner.status, Partner.AVAILABLE)
         # No change should've been made to the partner with zero accounts available

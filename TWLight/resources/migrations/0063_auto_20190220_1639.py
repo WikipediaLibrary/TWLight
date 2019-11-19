@@ -9,19 +9,29 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0038_auto_20190220_1639'),
-        ('resources', '0062_auto_20190220_1639'),
+        ("users", "0038_auto_20190220_1639"),
+        ("resources", "0062_auto_20190220_1639"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='accesscode',
-            name='authorization',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='accesscodes', to='users.Authorization'),
+            model_name="accesscode",
+            name="authorization",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="accesscodes",
+                to="users.Authorization",
+            ),
         ),
         migrations.AddField(
-            model_name='accesscode',
-            name='partner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='accesscodes', to='resources.Partner'),
+            model_name="accesscode",
+            name="partner",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="accesscodes",
+                to="resources.Partner",
+            ),
         ),
     ]

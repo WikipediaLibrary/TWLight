@@ -7,14 +7,15 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0076_auto_20191011_0137'),
-    ]
+    dependencies = [("resources", "0076_auto_20191011_0137")]
 
     operations = [
         migrations.AlterField(
-            model_name='partner',
-            name='requested_access_duration',
-            field=models.BooleanField(default=False, help_text='Must be checked if the authorization method of this partner is proxy; optional otherwise.'),
-        ),
+            model_name="partner",
+            name="requested_access_duration",
+            field=models.BooleanField(
+                default=False,
+                help_text="Must be checked if the authorization method of this partner is proxy; optional otherwise.",
+            ),
+        )
     ]

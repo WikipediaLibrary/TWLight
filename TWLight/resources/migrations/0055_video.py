@@ -8,22 +8,40 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0054_auto_20181012_1611'),
-    ]
+    dependencies = [("resources", "0054_auto_20181012_1611")]
 
     operations = [
         migrations.CreateModel(
-            name='Video',
+            name="Video",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tutorial_video_url', models.URLField(blank=True, help_text='URL of a video tutorial.', null=True)),
-                ('partner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='videos', to='resources.Partner')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "tutorial_video_url",
+                    models.URLField(
+                        blank=True, help_text="URL of a video tutorial.", null=True
+                    ),
+                ),
+                (
+                    "partner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="videos",
+                        to="resources.Partner",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['partner'],
-                'verbose_name': 'video tutorial',
-                'verbose_name_plural': 'video tutorials',
+                "ordering": ["partner"],
+                "verbose_name": "video tutorial",
+                "verbose_name_plural": "video tutorials",
             },
-        ),
+        )
     ]

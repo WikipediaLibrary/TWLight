@@ -11,7 +11,7 @@ from django.db import migrations, models
 
 
 def copy_access_grant_terms(apps, schema_editor):
-    Partner = apps.get_model('resources', 'Partner')
+    Partner = apps.get_model("resources", "Partner")
     # Although this looks like it should only get AVAILABLE Partners (since
     # we've defined a custom manager), in fact it uses the Django default
     # internal manager and finds all Partners.
@@ -21,20 +21,18 @@ def copy_access_grant_terms(apps, schema_editor):
 
 
 def delete_access_grant_terms(apps, schema_editor):
-    Partner = apps.get_model('resources', 'Partner')
+    Partner = apps.get_model("resources", "Partner")
     for partner in Partner.objects.all():
         partner.access_grant_term_pythonic = None
         partner.save()
 
 
-
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0019_auto_20161216_1650'),
-    ]
+    dependencies = [("resources", "0019_auto_20161216_1650")]
 
     operations = [
-        migrations.RunPython(copy_access_grant_terms,
-            reverse_code=delete_access_grant_terms),
+        migrations.RunPython(
+            copy_access_grant_terms, reverse_code=delete_access_grant_terms
+        )
     ]

@@ -43,32 +43,36 @@ Optional/unique:
 """
 
 # ~~~~~ Named constants ~~~~~ #
-REAL_NAME = 'real_name'
-COUNTRY_OF_RESIDENCE = 'country_of_residence'
-OCCUPATION = 'occupation'
-AFFILIATION = 'affiliation'
-PARTNER = 'partner'
-RATIONALE = 'rationale'
-SPECIFIC_STREAM = 'specific_stream'
-SPECIFIC_TITLE = 'specific_title'
-COMMENTS = 'comments'
-AGREEMENT_WITH_TERMS_OF_USE = 'agreement_with_terms_of_use'
-ACCOUNT_EMAIL = 'account_email'
-REQUESTED_ACCESS_DURATION = 'requested_access_duration'
-HIDDEN = 'hidden'
+REAL_NAME = "real_name"
+COUNTRY_OF_RESIDENCE = "country_of_residence"
+OCCUPATION = "occupation"
+AFFILIATION = "affiliation"
+PARTNER = "partner"
+RATIONALE = "rationale"
+SPECIFIC_STREAM = "specific_stream"
+SPECIFIC_TITLE = "specific_title"
+COMMENTS = "comments"
+AGREEMENT_WITH_TERMS_OF_USE = "agreement_with_terms_of_use"
+ACCOUNT_EMAIL = "account_email"
+REQUESTED_ACCESS_DURATION = "requested_access_duration"
+HIDDEN = "hidden"
 
 
 # ~~~~ Basic field names ~~~~ #
-USER_FORM_FIELDS = [REAL_NAME, COUNTRY_OF_RESIDENCE, OCCUPATION,
-                    AFFILIATION]
+USER_FORM_FIELDS = [REAL_NAME, COUNTRY_OF_RESIDENCE, OCCUPATION, AFFILIATION]
 
 # These fields are displayed for all partners.
 PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS, HIDDEN]
 
 # These fields are displayed only when a specific partner requires that
 # information.
-PARTNER_FORM_OPTIONAL_FIELDS = [SPECIFIC_STREAM, SPECIFIC_TITLE,
-                                AGREEMENT_WITH_TERMS_OF_USE, ACCOUNT_EMAIL, REQUESTED_ACCESS_DURATION]
+PARTNER_FORM_OPTIONAL_FIELDS = [
+    SPECIFIC_STREAM,
+    SPECIFIC_TITLE,
+    AGREEMENT_WITH_TERMS_OF_USE,
+    ACCOUNT_EMAIL,
+    REQUESTED_ACCESS_DURATION,
+]
 
 
 # ~~~~ Field information ~~~~ #
@@ -78,64 +82,70 @@ FIELD_TYPES = {
     OCCUPATION: forms.CharField(max_length=128),
     AFFILIATION: forms.CharField(max_length=128),
     PARTNER: forms.ModelChoiceField(
-        queryset=Partner.objects.all(),
-        widget=forms.HiddenInput),
+        queryset=Partner.objects.all(), widget=forms.HiddenInput
+    ),
     RATIONALE: forms.CharField(widget=forms.Textarea),
     SPECIFIC_STREAM: forms.ModelChoiceField(queryset=Stream.objects.all()),
     SPECIFIC_TITLE: forms.CharField(max_length=128),
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
     AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(),
     ACCOUNT_EMAIL: forms.EmailField(),
-    REQUESTED_ACCESS_DURATION: forms.ChoiceField(choices=Application.REQUESTED_ACCESS_DURATION_CHOICES),
-    HIDDEN: forms.BooleanField(required=False)
+    REQUESTED_ACCESS_DURATION: forms.ChoiceField(
+        choices=Application.REQUESTED_ACCESS_DURATION_CHOICES
+    ),
+    HIDDEN: forms.BooleanField(required=False),
 }
 
 FIELD_LABELS = {
     # Translators: When filling out an application, users may need to specify their name
-    REAL_NAME: _('Your real name'),
+    REAL_NAME: _("Your real name"),
     # Translators: When filling out an application, users may need to specify the country in which they currently live
-    COUNTRY_OF_RESIDENCE: _('Your country of residence'),
+    COUNTRY_OF_RESIDENCE: _("Your country of residence"),
     # Translators: When filling out an application, users may need to specify their current occupation
-    OCCUPATION: _('Your occupation'),
+    OCCUPATION: _("Your occupation"),
     # Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
-    AFFILIATION: _('Your institutional affiliation'),
+    AFFILIATION: _("Your institutional affiliation"),
     # Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-    PARTNER: _('Partner name'),
+    PARTNER: _("Partner name"),
     # Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
-    RATIONALE: _('Why do you want access to this resource?'),
+    RATIONALE: _("Why do you want access to this resource?"),
     # Translators: When filling out an application, users may need to specify a particular collection of resources they want access to
-    SPECIFIC_STREAM: _('Which collection do you want?'),
+    SPECIFIC_STREAM: _("Which collection do you want?"),
     # Translators: When filling out an application, users may need to specify a particular book they want access to
-    SPECIFIC_TITLE: _('Which book do you want?'),
+    SPECIFIC_TITLE: _("Which book do you want?"),
     # Translators: When filling out an application, users are given a text box where they can include any extra relevant information
-    COMMENTS: _('Anything else you want to say'),
+    COMMENTS: _("Anything else you want to say"),
     # Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
     # Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
     ACCOUNT_EMAIL: _("The email for your account on the partner's website"),
     # Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-    REQUESTED_ACCESS_DURATION: _("The number of months you wish to have this access for before renewal is required"),
+    REQUESTED_ACCESS_DURATION: _(
+        "The number of months you wish to have this access for before renewal is required"
+    ),
     # Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
-    HIDDEN: _("Check this box if you would prefer to hide your application from the 'latest activity' timeline.")
+    HIDDEN: _(
+        "Check this box if you would prefer to hide your application from the 'latest activity' timeline."
+    ),
 }
 
 SEND_DATA_FIELD_LABELS = {
     # Translators: When sending application data to partners, this is the text labelling a user's real name
-    REAL_NAME: _('Real name'),
+    REAL_NAME: _("Real name"),
     # Translators: When sending application data to partners, this is the text labelling a user's country of residence
-    COUNTRY_OF_RESIDENCE: _('Country of residence'),
+    COUNTRY_OF_RESIDENCE: _("Country of residence"),
     # Translators: When sending application data to partners, this is the text labelling a user's occupation
-    OCCUPATION: _('Occupation'),
+    OCCUPATION: _("Occupation"),
     # Translators: When sending application data to partners, this is the text labelling a user's affiliation
-    AFFILIATION: _('Affiliation'),
+    AFFILIATION: _("Affiliation"),
     # Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
-    SPECIFIC_STREAM: _('Stream requested'),
+    SPECIFIC_STREAM: _("Stream requested"),
     # Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
-    SPECIFIC_TITLE: _('Title requested'),
+    SPECIFIC_TITLE: _("Title requested"),
     # Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
-    AGREEMENT_WITH_TERMS_OF_USE: _('Agreed with terms of use'),
+    AGREEMENT_WITH_TERMS_OF_USE: _("Agreed with terms of use"),
     # Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
-    ACCOUNT_EMAIL: _('Account email'),
+    ACCOUNT_EMAIL: _("Account email"),
 }
 
 
@@ -147,7 +157,7 @@ def get_output_for_application(app):
     to fetch only the required data rather than displaying all of Application
     plus Editor in the front end.
     """
-    output = {_('Email'): {'label': 'Email', 'data': app.editor.user.email}}
+    output = {_("Email"): {"label": "Email", "data": app.editor.user.email}}
     # Translators: This labels a user's email address on a form for account coordinators
 
     for field in PARTNER_FORM_OPTIONAL_FIELDS:
@@ -155,16 +165,16 @@ def get_output_for_application(app):
         # But for tests, and in the off chance we stumble into this function for when requested_access_duration is true
         # and the partner isn't proxy, we don't want the data to be sent to partners, which is why it's not part
         # of the SEND_DATA_FIELD_LABELS.
-        if field == 'requested_access_duration':
+        if field == "requested_access_duration":
             break
         if getattr(app.partner, field):  # Will be True if required by Partner.
             field_label = SEND_DATA_FIELD_LABELS[field]
-            output[field] = {'label': field_label, 'data': getattr(app, field)}
+            output[field] = {"label": field_label, "data": getattr(app, field)}
 
     for field in USER_FORM_FIELDS:
         if getattr(app.partner, field):  # Will be True if required by Partner.
             field_label = SEND_DATA_FIELD_LABELS[field]
-            output[field] = {'label': field_label, 'data': getattr(app.editor, field)}
+            output[field] = {"label": field_label, "data": getattr(app.editor, field)}
 
     return output
 
@@ -184,13 +194,13 @@ def get_valid_authorizations(partner_pk, stream_pk=None):
         # TWLight.users.model.Authorization.is_valid property. We don't need to check for
         # partner_id__isnull since it is functionally covered by partner=partner_pk.
         valid_authorizations = Authorization.objects.filter(
-            Q(date_expires__isnull=False, date_expires__gte=today) |
-            Q(date_expires__isnull=True),
+            Q(date_expires__isnull=False, date_expires__gte=today)
+            | Q(date_expires__isnull=True),
             authorizer__isnull=False,
             user__isnull=False,
             date_authorized__isnull=False,
             date_authorized__lte=today,
-            partner=partner_pk
+            partner=partner_pk,
         )
         if stream_pk:
             valid_authorizations = valid_authorizations.filter(stream=stream_pk)
@@ -218,7 +228,9 @@ def get_accounts_available(app):
     """
     if app.specific_stream is not None:
         if app.specific_stream.accounts_available is not None:
-            valid_authorizations = count_valid_authorizations(app.partner, app.specific_stream)
+            valid_authorizations = count_valid_authorizations(
+                app.partner, app.specific_stream
+            )
             total_accounts_available = app.specific_stream.accounts_available
             return total_accounts_available - valid_authorizations
         elif app.partner.accounts_available is not None:
@@ -231,10 +243,18 @@ def get_accounts_available(app):
 
 
 def is_proxy_and_application_approved(status, app):
-    if (app.partner.authorization_method == Partner.PROXY or (app.specific_stream.authorization_method == Partner.PROXY if app.specific_stream else False)) and status == Application.APPROVED:
+    if (
+        app.partner.authorization_method == Partner.PROXY
+        or (
+            app.specific_stream.authorization_method == Partner.PROXY
+            if app.specific_stream
+            else False
+        )
+    ) and status == Application.APPROVED:
         return True
     else:
         return False
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 

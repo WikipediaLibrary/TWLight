@@ -13,12 +13,16 @@ from django.utils.encoding import smart_text
 from django.utils.formats import get_format, get_format_modules
 from django.utils.http import is_safe_url
 from django.utils.translation import (
-    LANGUAGE_SESSION_KEY, check_for_language, get_language, to_locale,
+    LANGUAGE_SESSION_KEY,
+    check_for_language,
+    get_language,
+    to_locale,
 )
 
 # Direct rip from django.views.i18n, but with a small update to save the users'
 # selected lang_code
 # https://docs.djangoproject.com/en/1.8/_modules/django/views/i18n/#set_language
+
 
 def set_language(request):
     """
@@ -31,27 +35,29 @@ def set_language(request):
     redirect to the page in the request (the 'next' parameter) without changing
     any state.
     """
-    next = request.POST.get('next', request.GET.get('next'))
+    next = request.POST.get("next", request.GET.get("next"))
     if not is_safe_url(url=next, host=request.get_host()):
-        next = request.META.get('HTTP_REFERER')
+        next = request.META.get("HTTP_REFERER")
         if not is_safe_url(url=next, host=request.get_host()):
-            next = '/'
+            next = "/"
     response = http.HttpResponseRedirect(next)
-    if request.method == 'POST':
-        lang_code = request.POST.get('language', None)
+    if request.method == "POST":
+        lang_code = request.POST.get("language", None)
         if lang_code and check_for_language(lang_code):
-            if hasattr(request, 'session'):
+            if hasattr(request, "session"):
                 request.session[LANGUAGE_SESSION_KEY] = lang_code
             else:
-                response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code,
-                                    max_age=settings.LANGUAGE_COOKIE_AGE,
-                                    path=settings.LANGUAGE_COOKIE_PATH,
-                                    domain=settings.LANGUAGE_COOKIE_DOMAIN)
+                response.set_cookie(
+                    settings.LANGUAGE_COOKIE_NAME,
+                    lang_code,
+                    max_age=settings.LANGUAGE_COOKIE_AGE,
+                    path=settings.LANGUAGE_COOKIE_PATH,
+                    domain=settings.LANGUAGE_COOKIE_DOMAIN,
+                )
             if request.user.is_authenticated():
                 request.user.userprofile.lang = lang_code
                 request.user.userprofile.save()
     return response
-
 
 
 def get_formats():
@@ -59,11 +65,20 @@ def get_formats():
     Returns all formats strings required for i18n to work
     """
     FORMAT_SETTINGS = (
-        'DATE_FORMAT', 'DATETIME_FORMAT', 'TIME_FORMAT',
-        'YEAR_MONTH_FORMAT', 'MONTH_DAY_FORMAT', 'SHORT_DATE_FORMAT',
-        'SHORT_DATETIME_FORMAT', 'FIRST_DAY_OF_WEEK', 'DECIMAL_SEPARATOR',
-        'THOUSAND_SEPARATOR', 'NUMBER_GROUPING',
-        'DATE_INPUT_FORMATS', 'TIME_INPUT_FORMATS', 'DATETIME_INPUT_FORMATS'
+        "DATE_FORMAT",
+        "DATETIME_FORMAT",
+        "TIME_FORMAT",
+        "YEAR_MONTH_FORMAT",
+        "MONTH_DAY_FORMAT",
+        "SHORT_DATE_FORMAT",
+        "SHORT_DATETIME_FORMAT",
+        "FIRST_DAY_OF_WEEK",
+        "DECIMAL_SEPARATOR",
+        "THOUSAND_SEPARATOR",
+        "NUMBER_GROUPING",
+        "DATE_INPUT_FORMATS",
+        "TIME_INPUT_FORMATS",
+        "DATETIME_INPUT_FORMATS",
     )
     result = {}
     for module in [settings] + get_format_modules(reverse=True):
@@ -186,39 +201,41 @@ js_catalog_template = r"""
 
 def render_javascript_catalog(catalog=None, plural=None):
     template = Engine().from_string(js_catalog_template)
-    indent = lambda s: s.replace('\n', '\n  ')
-    context = Context({
-        'catalog_str': indent(json.dumps(
-            catalog, sort_keys=True, indent=2)) if catalog else None,
-        'formats_str': indent(json.dumps(
-            get_formats(), sort_keys=True, indent=2)),
-        'plural': plural,
-    })
+    indent = lambda s: s.replace("\n", "\n  ")
+    context = Context(
+        {
+            "catalog_str": indent(json.dumps(catalog, sort_keys=True, indent=2))
+            if catalog
+            else None,
+            "formats_str": indent(json.dumps(get_formats(), sort_keys=True, indent=2)),
+            "plural": plural,
+        }
+    )
 
-    return http.HttpResponse(template.render(context), 'text/javascript')
+    return http.HttpResponse(template.render(context), "text/javascript")
 
 
 def get_javascript_catalog(locale, domain, packages):
     default_locale = to_locale(settings.LANGUAGE_CODE)
     app_configs = apps.get_app_configs()
     allowable_packages = set(app_config.name for app_config in app_configs)
-    allowable_packages.add('django.conf')
+    allowable_packages.add("django.conf")
     packages = [p for p in packages if p in allowable_packages]
     t = {}
     paths = []
-    en_selected = locale.startswith('en')
+    en_selected = locale.startswith("en")
     en_catalog_missing = True
     # paths of requested packages
     for package in packages:
         p = importlib.import_module(package)
-        path = os.path.join(os.path.dirname(upath(p.__file__)), 'locale')
+        path = os.path.join(os.path.dirname(upath(p.__file__)), "locale")
         paths.append(path)
     # add the filesystem paths listed in the LOCALE_PATHS setting
     paths.extend(list(reversed(settings.LOCALE_PATHS)))
     # first load all english languages files for defaults
     for path in paths:
         try:
-            catalog = gettext_module.translation(domain, path, ['en'])
+            catalog = gettext_module.translation(domain, path, ["en"])
             t.update(catalog._catalog)
         except IOError:
             pass
@@ -228,7 +245,7 @@ def get_javascript_catalog(locale, domain, packages):
             if en_selected:
                 en_catalog_missing = False
     # next load the settings.LANGUAGE_CODE translations if it isn't english
-    if default_locale != 'en':
+    if default_locale != "en":
         for path in paths:
             try:
                 catalog = gettext_module.translation(domain, path, [default_locale])
@@ -256,21 +273,23 @@ def get_javascript_catalog(locale, domain, packages):
             if locale_t:
                 t = locale_t
     plural = None
-    if '' in t:
-        for l in t[''].split('\n'):
-            if l.startswith('Plural-Forms:'):
-                plural = l.split(':', 1)[1].strip()
+    if "" in t:
+        for l in t[""].split("\n"):
+            if l.startswith("Plural-Forms:"):
+                plural = l.split(":", 1)[1].strip()
     if plural is not None:
         # this should actually be a compiled function of a typical plural-form:
         # Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 :
         #               n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;
-        plural = [el.strip() for el in plural.split(';') if el.strip().startswith('plural=')][0].split('=', 1)[1]
+        plural = [
+            el.strip() for el in plural.split(";") if el.strip().startswith("plural=")
+        ][0].split("=", 1)[1]
 
     pdict = {}
     maxcnts = {}
     catalog = {}
     for k, v in t.items():
-        if k == '':
+        if k == "":
             continue
         if isinstance(k, six.string_types):
             catalog[k] = v
@@ -282,7 +301,7 @@ def get_javascript_catalog(locale, domain, packages):
         else:
             raise TypeError(k)
     for k, v in pdict.items():
-        catalog[k] = [v.get(i, '') for i in range(maxcnts[msgid] + 1)]
+        catalog[k] = [v.get(i, "") for i in range(maxcnts[msgid] + 1)]
 
     return catalog, plural
 
@@ -295,7 +314,7 @@ def null_javascript_catalog(request, domain=None, packages=None):
     return render_javascript_catalog()
 
 
-def javascript_catalog(request, domain='djangojs', packages=None):
+def javascript_catalog(request, domain="djangojs", packages=None):
     """
     Returns the selected language catalog as a javascript library.
 
@@ -310,14 +329,14 @@ def javascript_catalog(request, domain='djangojs', packages=None):
     """
     locale = to_locale(get_language())
 
-    if request.GET and 'language' in request.GET:
-        if check_for_language(request.GET['language']):
-            locale = to_locale(request.GET['language'])
+    if request.GET and "language" in request.GET:
+        if check_for_language(request.GET["language"]):
+            locale = to_locale(request.GET["language"])
 
     if packages is None:
-        packages = ['django.conf']
+        packages = ["django.conf"]
     if isinstance(packages, six.string_types):
-        packages = packages.split('+')
+        packages = packages.split("+")
 
     catalog, plural = get_javascript_catalog(locale, domain, packages)
     return render_javascript_catalog(catalog, plural)

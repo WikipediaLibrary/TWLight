@@ -14,33 +14,35 @@ from TWLight.applications.models import Application
 from TWLight.applications.views import SendReadyApplicationsView
 from TWLight.resources.models import Partner, Stream, AccessCode
 
+
 def logged_in_example_coordinator(client, coordinator):
     """
     Creates a logged in coordinator user. Compacted version of EditorCraftRoom
     used in tests.
     """
-    terms_url = reverse('terms')
+    terms_url = reverse("terms")
 
-    coordinator.set_password('editor')
+    coordinator.set_password("editor")
     coordinator.save()
 
     # Log user in
-    client = Client(SERVER_NAME='twlight.vagrant.localdomain')
+    client = Client(SERVER_NAME="twlight.vagrant.localdomain")
     session = client.session
-    client.login(username=coordinator.username, password='editor')
+    client.login(username=coordinator.username, password="editor")
 
     coordinator.terms_of_use = True
 
     return coordinator
 
+
 class Command(BaseCommand):
     help = "Adds a number of example applications."
 
     def add_arguments(self, parser):
-        parser.add_argument('num', nargs='+', type=int)
+        parser.add_argument("num", nargs="+", type=int)
 
     def handle(self, *args, **options):
-        num_applications = options['num'][0]
+        num_applications = options["num"][0]
         fake = Faker()
 
         available_partners = Partner.objects.all()
@@ -51,30 +53,36 @@ class Command(BaseCommand):
 
         # We want to flag applications as SENT via a client later, so let's only
         # automatically give applications non-Sent statuses.
-        valid_choices = [Application.PENDING, Application.QUESTION,
-            Application.APPROVED, Application.NOT_APPROVED, Application.INVALID]
+        valid_choices = [
+            Application.PENDING,
+            Application.QUESTION,
+            Application.APPROVED,
+            Application.NOT_APPROVED,
+            Application.INVALID,
+        ]
 
         for _ in range(num_applications):
             random_user = random.choice(all_users)
             # Limit to partners this user hasn't already applied to.
             not_applied_partners = available_partners.exclude(
                 applications__editor=random_user.editor
-                )
+            )
             random_partner = random.choice(not_applied_partners)
 
             app = ApplicationFactory(
-                editor = random_user.editor,
-                partner = random_partner,
-                hidden = self.chance(True, False, 10)
-                )
+                editor=random_user.editor,
+                partner=random_partner,
+                hidden=self.chance(True, False, 10),
+            )
 
             # Make sure partner-specific information is filled.
             if random_partner.specific_stream:
                 app.specific_stream = random.choice(
-                    Stream.objects.filter(partner=random_partner))
+                    Stream.objects.filter(partner=random_partner)
+                )
 
             if random_partner.specific_title:
-                app.specific_title = fake.sentence(nb_words= 3)
+                app.specific_title = fake.sentence(nb_words=3)
 
             if random_partner.agreement_with_terms_of_use:
                 app.agreement_with_terms_of_use = True
@@ -103,9 +111,8 @@ class Command(BaseCommand):
                     start_date = random_user.editor.wp_registered
 
                 app.date_created = fake.date_time_between(
-                    start_date = start_date,
-                    end_date = "now",
-                    tzinfo=None)
+                    start_date=start_date, end_date="now", tzinfo=None
+                )
                 app.rationale = fake.paragraph(nb_sentences=3)
                 app.comments = fake.paragraph(nb_sentences=2)
 
@@ -118,9 +125,8 @@ class Command(BaseCommand):
                     else:
                         end_date = potential_end_date
                     app.date_closed = fake.date_time_between(
-                        start_date = app.date_created,
-                        end_date = end_date,
-                        tzinfo=None)
+                        start_date=app.date_created, end_date=end_date, tzinfo=None
+                    )
                     app.days_open = (app.date_closed - app.date_created).days
 
             app.save()
@@ -129,43 +135,54 @@ class Command(BaseCommand):
         # than 3 weeks ago as Sent.
         old_approved_apps = Application.objects.filter(
             status=Application.APPROVED,
-            date_created__lte=datetime.datetime.now() - relativedelta(weeks=3)
-            )
+            date_created__lte=datetime.datetime.now() - relativedelta(weeks=3),
+        )
 
         # We need to be able to handle messages
-        message_patcher = patch('TWLight.applications.views.messages.add_message')
+        message_patcher = patch("TWLight.applications.views.messages.add_message")
         message_patcher.start()
         for approved_app in old_approved_apps:
-            client = Client(SERVER_NAME='twlight.vagrant.localdomain')
-            coordinator = logged_in_example_coordinator(client, approved_app.partner.coordinator)
+            client = Client(SERVER_NAME="twlight.vagrant.localdomain")
+            coordinator = logged_in_example_coordinator(
+                client, approved_app.partner.coordinator
+            )
             this_partner_access_codes = AccessCode.objects.filter(
-                                partner=approved_app.partner,
-                                authorization__isnull=True)
+                partner=approved_app.partner, authorization__isnull=True
+            )
 
-            url = reverse('applications:send_partner',
-                kwargs={'pk': approved_app.partner.pk})
+            url = reverse(
+                "applications:send_partner", kwargs={"pk": approved_app.partner.pk}
+            )
 
             if approved_app.partner.authorization_method == Partner.EMAIL:
-                request = RequestFactory().post(url,
-                    data={'applications': [approved_app.pk]})
+                request = RequestFactory().post(
+                    url, data={"applications": [approved_app.pk]}
+                )
 
             # If this partner has access codes, assign a code to
             # this sent application.
             elif approved_app.partner.authorization_method == Partner.CODES:
                 access_code = random.choice(this_partner_access_codes)
-                request = RequestFactory().post(url,
-                            data={'accesscode': ["{app_pk}_{code}".format(
-                                app_pk=approved_app.pk,
-                                code=access_code.code)]})
+                request = RequestFactory().post(
+                    url,
+                    data={
+                        "accesscode": [
+                            "{app_pk}_{code}".format(
+                                app_pk=approved_app.pk, code=access_code.code
+                            )
+                        ]
+                    },
+                )
 
             request.user = coordinator
 
             response = SendReadyApplicationsView.as_view()(
-                request, pk=approved_app.partner.pk)
+                request, pk=approved_app.partner.pk
+            )
 
         # Renew a selection of sent apps.
         all_apps = Application.objects.filter(status=Application.SENT)
-        num_to_renew = int(all_apps.count()*0.5)
+        num_to_renew = int(all_apps.count() * 0.5)
         for app_to_renew in random.sample(all_apps, num_to_renew):
             app_to_renew.renew()
 
@@ -174,7 +191,7 @@ class Command(BaseCommand):
         # the default option. Used to generate data that's more
         # in line with the live site distribution.
 
-        roll = random.randint(0,100)
+        roll = random.randint(0, 100)
         if roll < chance:
             selection = selected
         else:

@@ -7,33 +7,56 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0065_partner_account_length'),
-    ]
+    dependencies = [("resources", "0065_partner_account_length")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='partner',
-            name='access_code_instructions',
+        migrations.RemoveField(model_name="partner", name="access_code_instructions"),
+        migrations.AddField(
+            model_name="partner",
+            name="user_instructions",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional instructions for editors to use access codes or free signup URLs for this partner. Sent via email upon application approval (for links) or access code assignment. If this partner has collections, fill out user instructions on each collection instead.",
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='partner',
-            name='user_instructions',
-            field=models.TextField(blank=True, help_text='Optional instructions for editors to use access codes or free signup URLs for this partner. Sent via email upon application approval (for links) or access code assignment. If this partner has collections, fill out user instructions on each collection instead.', null=True),
+            model_name="stream",
+            name="authorization_method",
+            field=models.IntegerField(
+                choices=[
+                    (0, "Email"),
+                    (1, "Access codes"),
+                    (2, "Proxy"),
+                    (3, "Library Bundle"),
+                    (4, "Link"),
+                ],
+                default=0,
+                help_text="Which authorization method does this collection use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account.",
+            ),
         ),
         migrations.AddField(
-            model_name='stream',
-            name='authorization_method',
-            field=models.IntegerField(choices=[(0, 'Email'), (1, 'Access codes'), (2, 'Proxy'), (3, 'Library Bundle'), (4, 'Link')], default=0, help_text="Which authorization method does this collection use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."),
-        ),
-        migrations.AddField(
-            model_name='stream',
-            name='user_instructions',
-            field=models.TextField(blank=True, help_text='Optional instructions for editors to use access codes or free signup URLs for this collection. Sent via email upon application approval (for links) or access code assignment.', null=True),
+            model_name="stream",
+            name="user_instructions",
+            field=models.TextField(
+                blank=True,
+                help_text="Optional instructions for editors to use access codes or free signup URLs for this collection. Sent via email upon application approval (for links) or access code assignment.",
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='partner',
-            name='authorization_method',
-            field=models.IntegerField(choices=[(0, 'Email'), (1, 'Access codes'), (2, 'Proxy'), (3, 'Library Bundle'), (4, 'Link')], default=0, help_text="Which authorization method does this partner use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."),
+            model_name="partner",
+            name="authorization_method",
+            field=models.IntegerField(
+                choices=[
+                    (0, "Email"),
+                    (1, "Access codes"),
+                    (2, "Proxy"),
+                    (3, "Library Bundle"),
+                    (4, "Link"),
+                ],
+                default=0,
+                help_text="Which authorization method does this partner use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account.",
+            ),
         ),
     ]

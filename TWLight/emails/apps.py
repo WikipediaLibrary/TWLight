@@ -1,7 +1,8 @@
 from django.apps import AppConfig
 
+
 class EmailConfig(AppConfig):
-    name = 'TWLight.emails'
+    name = "TWLight.emails"
 
     def ready(self):
         """

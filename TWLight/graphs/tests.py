@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import csv
 from datetime import date
+
 # django-request analytics package, NOT requests URL library!
 from request.models import Request
 
@@ -18,18 +19,18 @@ from TWLight.users.factories import UserFactory, EditorFactory
 
 from . import views
 
-class GraphsTestCase(TestCase):
 
+class GraphsTestCase(TestCase):
     @classmethod
     def setUpClass(cls):
         super(GraphsTestCase, cls).setUpClass()
         cls.factory = RequestFactory()
 
-        Request(path='/admin/', ip='127.0.0.1').save()
-        Request(path='/admin/', ip='127.0.0.1').save()
-        Request(path='/admin/login/', ip='127.0.0.1').save()
+        Request(path="/admin/", ip="127.0.0.1").save()
+        Request(path="/admin/", ip="127.0.0.1").save()
+        Request(path="/admin/login/", ip="127.0.0.1").save()
 
-        staff_user = User.objects.create_user(username='foo', password='bar')
+        staff_user = User.objects.create_user(username="foo", password="bar")
         staff_user.is_staff = True
         staff_user.save()
         cls.staff_user = staff_user
@@ -43,8 +44,7 @@ class GraphsTestCase(TestCase):
         cls.app.status = Application.APPROVED
         cls.app.save()
 
-        cls.dashboard_url = reverse('dashboard')
-
+        cls.dashboard_url = reverse("dashboard")
 
     def _verify_equal(self, resp, expected_data):
         reader_list = csv.reader(resp.content.splitlines())
@@ -58,7 +58,6 @@ class GraphsTestCase(TestCase):
         # expected data, we've now verified that they are identical (modulo the
         # header).
         self.assertEqual(reader_list.line_num, len(expected_data) + 1)
-
 
     def test_dashboard_view(self):
         """
@@ -87,32 +86,20 @@ class GraphsTestCase(TestCase):
         partner3 = PartnerFactory()
 
         # Four Authorizations
-        auth1 = Authorization(
-            user=user1,
-            partner=partner1
-        )
+        auth1 = Authorization(user=user1, partner=partner1)
         auth1.save()
-        auth2 = Authorization(
-            user=user2,
-            partner=partner1
-        )
+        auth2 = Authorization(user=user2, partner=partner1)
         auth2.save()
-        auth3 = Authorization(
-            user=user2,
-            partner=partner2
-        )
+        auth3 = Authorization(user=user2, partner=partner2)
         auth3.save()
-        auth4 = Authorization(
-            user=user2,
-            partner=partner3
-        )
+        auth4 = Authorization(user=user2, partner=partner3)
         auth4.save()
 
         request = self.factory.get(self.dashboard_url)
         request.user = self.user
 
         response = views.DashboardView.as_view()(request)
-        average_authorizations = response.context_data['average_authorizations']
+        average_authorizations = response.context_data["average_authorizations"]
 
         # We expect 2 authorizations (one user has 1, one has 3, average is 2)
         self.assertEqual(average_authorizations, 2)
@@ -128,28 +115,19 @@ class GraphsTestCase(TestCase):
         editor2 = EditorFactory()
 
         parent_app = ApplicationFactory(
-            status=Application.SENT,
-            partner=partner1,
-            editor=editor1
+            status=Application.SENT, partner=partner1, editor=editor1
         )
         ApplicationFactory(
-            status=Application.SENT,
-            partner=partner1,
-            editor=editor1,
-            parent=parent_app
+            status=Application.SENT, partner=partner1, editor=editor1, parent=parent_app
         )
-        ApplicationFactory(
-            status=Application.SENT,
-            partner=partner2,
-            editor=editor2,
-        )
+        ApplicationFactory(status=Application.SENT, partner=partner2, editor=editor2)
 
-        request = self.factory.get(reverse('csv:proxy_authorizations'))
+        request = self.factory.get(reverse("csv:proxy_authorizations"))
         request.user = self.user
 
         response = views.CSVProxyAuthRenewalRate.as_view()(request)
 
-        expected_data = [[str(date.today()), '2', '1', '50.0%']]
+        expected_data = [[str(date.today()), "2", "1", "50.0%"]]
         self._verify_equal(response, expected_data)
 
     def test_app_time_histogram_csv(self):
@@ -157,83 +135,85 @@ class GraphsTestCase(TestCase):
         Test that the CSVAppTimeHistogram csv download works
         """
 
-        request = self.factory.get(reverse('csv:app_time_histogram'))
+        request = self.factory.get(reverse("csv:app_time_histogram"))
         request.user = self.user
 
         response = views.CSVAppTimeHistogram.as_view()(request)
 
-        expected_data = [['0', '1']]
+        expected_data = [["0", "1"]]
 
         self._verify_equal(response, expected_data)
-
 
     def test_num_approved_applications_csv(self):
         """
         Test that the CSVNumApprovedApplications csv download works
         """
 
-        request = self.factory.get(reverse('csv:num_applications'))
+        request = self.factory.get(reverse("csv:num_applications"))
         request.user = self.user
 
         response = views.CSVNumApprovedApplications.as_view()(request)
 
         # The application was created today, so the expectation is that the
         # resulting data will be an application for today.
-        expected_data = [[str(date.today()), '1']]
+        expected_data = [[str(date.today()), "1"]]
 
         self._verify_equal(response, expected_data)
-
 
     def test_app_distribution_csv(self):
         """
         Test that the CSVAppDistribution csv download works
         """
         # Create some applications with different statuses
-        for app_status in [Application.PENDING, Application.APPROVED, Application.QUESTION]:
+        for app_status in [
+            Application.PENDING,
+            Application.APPROVED,
+            Application.QUESTION,
+        ]:
             app = ApplicationFactory()
             app.status = app_status
             app.save()
 
-        request = self.factory.get(reverse('csv:app_distribution'))
+        request = self.factory.get(reverse("csv:app_distribution"))
         request.user = self.user
 
         response = views.CSVAppDistribution.as_view()(request)
 
-        expected_data = [['Pending', '1'],
-                         ['Approved', '2'],
-                         ['Under discussion', '1'],
-                         ['Sent to partner', '0'],
-                         ['Not approved', '0'],
-                         ['Invalid', '0']]
+        expected_data = [
+            ["Pending", "1"],
+            ["Approved", "2"],
+            ["Under discussion", "1"],
+            ["Sent to partner", "0"],
+            ["Not approved", "0"],
+            ["Invalid", "0"],
+        ]
 
         self._verify_equal(response, expected_data)
-
 
     def test_user_language_csv(self):
         """
         Test that the CSVUserLanguage csv download works
         """
-        for language in ['en', 'fr', 'fr', 'de']:
+        for language in ["en", "fr", "fr", "de"]:
             user = UserFactory()
             user.userprofile.lang = language
             user.userprofile.save()
 
-        request = self.factory.get(reverse('csv:user_language'))
+        request = self.factory.get(reverse("csv:user_language"))
         request.user = self.user
 
         response = views.CSVUserLanguage.as_view()(request)
 
-        expected_data = [['en', '1'],['fr', '2'],['de', '1']]
+        expected_data = [["en", "1"], ["fr", "2"], ["de", "1"]]
 
         self._verify_equal(response, expected_data)
-
 
     def test_app_medians_csv(self):
         """
         Test that the CSVAppMedians csv download works
         """
 
-        request = self.factory.get(reverse('csv:app_medians'))
+        request = self.factory.get(reverse("csv:app_medians"))
         request.user = self.user
 
         response = views.CSVAppMedians.as_view()(request)
@@ -241,13 +221,12 @@ class GraphsTestCase(TestCase):
         # The application was created today, so the expectation is that the
         # resulting data will be an application for this month with 0 days
         # to decision (we approved it immediately).
-        expected_data = [[str(date.today().replace(day=1)), '0']]
+        expected_data = [[str(date.today().replace(day=1)), "0"]]
 
         self._verify_equal(response, expected_data)
 
-
     def test_csv_page_views(self):
-        url = reverse('csv:page_views')
+        url = reverse("csv:page_views")
 
         # Page view metrics are limited to staff, so make sure to use
         # RequestFactory to add a staff user to the request.
@@ -256,41 +235,40 @@ class GraphsTestCase(TestCase):
 
         resp = views.CSVPageViews.as_view()(req)
 
-        expected_data = [['/admin/', '2'], ['/admin/login/', '1']]
+        expected_data = [["/admin/", "2"], ["/admin/login/", "1"]]
 
         self._verify_equal(resp, expected_data)
 
-
     def test_csv_page_views_by_path(self):
         # Try one of the paths in our responses.
-        url = reverse('csv:page_views_by_path', kwargs={'path': 'admin/login'})
+        url = reverse("csv:page_views_by_path", kwargs={"path": "admin/login"})
         req = self.factory.get(url)
         req.user = self.staff_user
 
-        resp = views.CSVPageViewsByPath.as_view()(req, path='admin/login')
+        resp = views.CSVPageViewsByPath.as_view()(req, path="admin/login")
 
-        expected_data = [['/admin/login/', '1']]
+        expected_data = [["/admin/login/", "1"]]
 
         self._verify_equal(resp, expected_data)
 
         # Try the other.
-        url = reverse('csv:page_views_by_path', kwargs={'path': 'admin'})
+        url = reverse("csv:page_views_by_path", kwargs={"path": "admin"})
         req = self.factory.get(url)
         req.user = self.staff_user
 
-        resp = views.CSVPageViewsByPath.as_view()(req, path='admin')
+        resp = views.CSVPageViewsByPath.as_view()(req, path="admin")
 
-        expected_data = [['/admin/', '2']]
+        expected_data = [["/admin/", "2"]]
 
         self._verify_equal(resp, expected_data)
 
         # Try a path we haven't hit.
-        url = reverse('csv:page_views_by_path', kwargs={'path': 'fake/url'})
+        url = reverse("csv:page_views_by_path", kwargs={"path": "fake/url"})
         req = self.factory.get(url)
         req.user = self.staff_user
 
-        resp = views.CSVPageViewsByPath.as_view()(req, path='fake/url')
+        resp = views.CSVPageViewsByPath.as_view()(req, path="fake/url")
 
-        expected_data = [['/fake/url/', '0']]
+        expected_data = [["/fake/url/", "0"]]
 
         self._verify_equal(resp, expected_data)

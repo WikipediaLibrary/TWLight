@@ -9,14 +9,19 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('applications', '0012_auto_20160930_1434'),
+        ("applications", "0012_auto_20160930_1434"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='application',
-            name='sent_by',
-            field=models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, help_text='The user who sent this application to the partner', null=True),
+            model_name="application",
+            name="sent_by",
+            field=models.ForeignKey(
+                blank=True,
+                to=settings.AUTH_USER_MODEL,
+                help_text="The user who sent this application to the partner",
+                null=True,
+            ),
             preserve_default=True,
-        ),
+        )
     ]

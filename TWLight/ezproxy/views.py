@@ -7,7 +7,11 @@ import urllib
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
-from django.core.exceptions import PermissionDenied, SuspiciousOperation, ValidationError
+from django.core.exceptions import (
+    PermissionDenied,
+    SuspiciousOperation,
+    ValidationError,
+)
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
@@ -83,9 +87,7 @@ class EZProxyTicket(object):
         # Clearly not allowed if there is no user.
         # Clearly not allowed if the user isn't in any proxy groups.
         if not (groups and user):
-            raise PermissionDenied(
-                "You are not authorized to access this resource."
-            )
+            raise PermissionDenied("You are not authorized to access this resource.")
 
         if not secret:
             raise SuspiciousOperation(

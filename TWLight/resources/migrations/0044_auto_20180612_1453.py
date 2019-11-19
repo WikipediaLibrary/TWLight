@@ -10,45 +10,89 @@ import taggit.managers
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
-        ('resources', '0043_partner_company_location'),
+        ("contenttypes", "0002_remove_content_type_name"),
+        ("resources", "0043_partner_company_location"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TaggedTextField',
+            name="TaggedTextField",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('object_id', models.IntegerField(db_index=True, verbose_name='Object id')),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='resources_taggedtextfield_tagged_items', to='contenttypes.ContentType', verbose_name='Content type')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "object_id",
+                    models.IntegerField(db_index=True, verbose_name="Object id"),
+                ),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="resources_taggedtextfield_tagged_items",
+                        to="contenttypes.ContentType",
+                        verbose_name="Content type",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False},
         ),
         migrations.CreateModel(
-            name='TextFieldTag',
+            name="TextFieldTag",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.TextField(max_length=100, verbose_name='Name')),
-                ('name_en', models.TextField(max_length=100, null=True, verbose_name='Name')),
-                ('name_fi', models.TextField(max_length=100, null=True, verbose_name='Name')),
-                ('name_fr', models.TextField(max_length=100, null=True, verbose_name='Name')),
-                ('slug', models.SlugField(max_length=100, unique=True, verbose_name='Slug')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.TextField(max_length=100, verbose_name="Name")),
+                (
+                    "name_en",
+                    models.TextField(max_length=100, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fi",
+                    models.TextField(max_length=100, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.TextField(max_length=100, null=True, verbose_name="Name"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(max_length=100, unique=True, verbose_name="Slug"),
+                ),
             ],
-            options={
-                'verbose_name': 'Tag',
-                'verbose_name_plural': 'Tags',
-            },
+            options={"verbose_name": "Tag", "verbose_name_plural": "Tags"},
         ),
         migrations.AlterField(
-            model_name='partner',
-            name='tags',
-            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='resources.TaggedTextField', to='resources.TextFieldTag', verbose_name='Tags'),
+            model_name="partner",
+            name="tags",
+            field=taggit.managers.TaggableManager(
+                blank=True,
+                help_text="A comma-separated list of tags.",
+                through="resources.TaggedTextField",
+                to="resources.TextFieldTag",
+                verbose_name="Tags",
+            ),
         ),
         migrations.AddField(
-            model_name='taggedtextfield',
-            name='tag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='resources_taggedtextfield_items', to='resources.TextFieldTag'),
+            model_name="taggedtextfield",
+            name="tag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="resources_taggedtextfield_items",
+                to="resources.TextFieldTag",
+            ),
         ),
     ]

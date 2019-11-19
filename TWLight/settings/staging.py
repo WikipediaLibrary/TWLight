@@ -14,12 +14,12 @@ from .base import *
 # Needed to be added for /admin
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
-SERVER_EMAIL = 'Wikipedia Library Card Staging <noreply@twlight-staging.wmflabs.org>'
+SERVER_EMAIL = "Wikipedia Library Card Staging <noreply@twlight-staging.wmflabs.org>"
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/tmp/django_cache',
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/var/tmp/django_cache",
     }
 }

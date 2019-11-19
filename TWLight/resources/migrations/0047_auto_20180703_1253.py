@@ -9,14 +9,18 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0046_auto_20180612_1506'),
-    ]
+    dependencies = [("resources", "0046_auto_20180612_1506")]
 
     operations = [
         migrations.AlterField(
-            model_name='partner',
-            name='coordinator',
-            field=models.ForeignKey(blank=True, help_text='The coordinator for this Partner, if any.', null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL),
-        ),
+            model_name="partner",
+            name="coordinator",
+            field=models.ForeignKey(
+                blank=True,
+                help_text="The coordinator for this Partner, if any.",
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to=settings.AUTH_USER_MODEL,
+            ),
+        )
     ]

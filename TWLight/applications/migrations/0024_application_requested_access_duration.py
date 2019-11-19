@@ -7,14 +7,22 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('applications', '0023_auto_20190329_1631'),
-    ]
+    dependencies = [("applications", "0023_auto_20190329_1631")]
 
     operations = [
         migrations.AddField(
-            model_name='application',
-            name='requested_access_duration',
-            field=models.IntegerField(blank=True, choices=[(12, '12 months'), (6, '6 months'), (3, '3 months'), (1, '1 month')], help_text="User selection of when they'd like their account to expire (in months). Only relevant if the applied partner/collection has authorization_method as 'proxy'.", null=True),
-        ),
+            model_name="application",
+            name="requested_access_duration",
+            field=models.IntegerField(
+                blank=True,
+                choices=[
+                    (12, "12 months"),
+                    (6, "6 months"),
+                    (3, "3 months"),
+                    (1, "1 month"),
+                ],
+                help_text="User selection of when they'd like their account to expire (in months). Only relevant if the applied partner/collection has authorization_method as 'proxy'.",
+                null=True,
+            ),
+        )
     ]

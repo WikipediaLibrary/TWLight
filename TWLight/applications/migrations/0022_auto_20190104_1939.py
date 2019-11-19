@@ -8,20 +8,26 @@ import django.db.models.manager
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('applications', '0021_application_hidden'),
-    ]
+    dependencies = [("applications", "0021_application_hidden")]
 
     operations = [
         migrations.AlterModelManagers(
-            name='application',
-            managers=[
-                ('include_invalid', django.db.models.manager.Manager()),
-            ],
+            name="application",
+            managers=[("include_invalid", django.db.models.manager.Manager())],
         ),
         migrations.AlterField(
-            model_name='application',
-            name='status',
-            field=models.IntegerField(choices=[(0, 'Pending'), (1, 'Under discussion'), (2, 'Approved'), (3, 'Not approved'), (4, 'Sent to partner'), (5, 'Invalid')], default=0),
+            model_name="application",
+            name="status",
+            field=models.IntegerField(
+                choices=[
+                    (0, "Pending"),
+                    (1, "Under discussion"),
+                    (2, "Approved"),
+                    (3, "Not approved"),
+                    (4, "Sent to partner"),
+                    (5, "Invalid"),
+                ],
+                default=0,
+            ),
         ),
     ]

@@ -11,17 +11,14 @@ def initialize_languages(apps, schema_editor):
     field in the admin site.)
     """
     Language = apps.get_model("resources", "Language")
-    basic_codes = ['en', 'fr', 'fa']
+    basic_codes = ["en", "fr", "fa"]
     for code in basic_codes:
         lang = Language(language=code)
         lang.save()
 
+
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resources', '0014_auto_20161208_1520'),
-    ]
+    dependencies = [("resources", "0014_auto_20161208_1520")]
 
-    operations = [
-        migrations.RunPython(initialize_languages)
-    ]
+    operations = [migrations.RunPython(initialize_languages)]

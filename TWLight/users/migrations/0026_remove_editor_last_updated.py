@@ -7,13 +7,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('users', '0025_userprofile_terms_of_use_date'),
-    ]
+    dependencies = [("users", "0025_userprofile_terms_of_use_date")]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='editor',
-            name='last_updated',
-        ),
-    ]
+    operations = [migrations.RemoveField(model_name="editor", name="last_updated")]

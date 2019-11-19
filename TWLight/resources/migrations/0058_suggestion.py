@@ -11,24 +11,69 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('resources', '0057_auto_20181115_0733'),
+        ("resources", "0057_auto_20181115_0733"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Suggestion',
+            name="Suggestion",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('suggested_company_name', models.CharField(help_text="Potential partner's name (e.g. McFarland).", max_length=40)),
-                ('description', models.TextField(blank=True, help_text='Optional description of this potential partner.', max_length=1000)),
-                ('company_url', models.URLField(blank=True, help_text="Link to the potential partner's website.", null=True)),
-                ('author', models.ForeignKey(blank=True, help_text='User who authored this suggestion.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='suggestion_author', to=settings.AUTH_USER_MODEL)),
-                ('upvoted_users', models.ManyToManyField(blank=True, help_text='Users who have upvoted this suggestion.', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "suggested_company_name",
+                    models.CharField(
+                        help_text="Potential partner's name (e.g. McFarland).",
+                        max_length=40,
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True,
+                        help_text="Optional description of this potential partner.",
+                        max_length=1000,
+                    ),
+                ),
+                (
+                    "company_url",
+                    models.URLField(
+                        blank=True,
+                        help_text="Link to the potential partner's website.",
+                        null=True,
+                    ),
+                ),
+                (
+                    "author",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="User who authored this suggestion.",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="suggestion_author",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "upvoted_users",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="Users who have upvoted this suggestion.",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ['suggested_company_name'],
-                'verbose_name': 'suggestion',
-                'verbose_name_plural': 'suggestions',
+                "ordering": ["suggested_company_name"],
+                "verbose_name": "suggestion",
+                "verbose_name_plural": "suggestions",
             },
-        ),
+        )
     ]

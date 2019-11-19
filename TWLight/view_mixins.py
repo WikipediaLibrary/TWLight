@@ -23,9 +23,11 @@ from TWLight.users.models import Editor
 from TWLight.users.groups import get_coordinators, get_restricted
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 coordinators = get_coordinators()
+
 
 class CoordinatorOrSelf(object):
     """
@@ -40,66 +42,57 @@ class CoordinatorOrSelf(object):
     """
 
     def test_func_coordinator_or_self(self, user):
-        obj_owner_test = False # Set default.
+        obj_owner_test = False  # Set default.
 
         try:
             obj = self.get_object()
             if obj:
                 if isinstance(obj, User):
-                    obj_owner_test = (obj.pk == user.pk)
+                    obj_owner_test = obj.pk == user.pk
                 else:
-                    obj_owner_test = (obj.user.pk == user.pk)
+                    obj_owner_test = obj.user.pk == user.pk
         except AttributeError:
             # Keep the default.
             pass
 
-        obj_coordinator_test = False # Set default.
+        obj_coordinator_test = False  # Set default.
 
         # If the user is a coordinator run more tests
         if user in coordinators.user_set.all():
             try:
                 obj = self.get_object()
                 if obj:
-                        # Return true if the object is an editor and has
-                        # at least one application to a partner for whom
-                        # the user is a designated coordinator.
-                        if isinstance(obj, Editor):
-                            obj_coordinator_test = (Application.objects.filter(
-                                editor__pk=obj.pk,
-                                partner__coordinator__pk=user.pk
-                            ).exists())
-                        # Return true if the object is an application to a
-                        # partner for whom the user is a designated coordinator
-                        elif isinstance(obj, Application):
-                            obj_coordinator_test = (
-                                obj.partner.coordinator.pk == user.pk
-                            )
-                        elif isinstance(obj, Partner):
-                            obj_coordinator_test = (
-                                obj.coordinator.pk == user.pk
-                            )
-                        elif isinstance(obj, AccessCode):
-                            obj_coordinator_test = (
-                                obj.partner.coordinator.pk == user.pk
-                            )
+                    # Return true if the object is an editor and has
+                    # at least one application to a partner for whom
+                    # the user is a designated coordinator.
+                    if isinstance(obj, Editor):
+                        obj_coordinator_test = Application.objects.filter(
+                            editor__pk=obj.pk, partner__coordinator__pk=user.pk
+                        ).exists()
+                    # Return true if the object is an application to a
+                    # partner for whom the user is a designated coordinator
+                    elif isinstance(obj, Application):
+                        obj_coordinator_test = obj.partner.coordinator.pk == user.pk
+                    elif isinstance(obj, Partner):
+                        obj_coordinator_test = obj.coordinator.pk == user.pk
+                    elif isinstance(obj, AccessCode):
+                        obj_coordinator_test = obj.partner.coordinator.pk == user.pk
             except AttributeError:
                 # Keep the default.
                 pass
 
-        return (user.is_superuser or
-                obj_coordinator_test or
-                obj_owner_test)
-
+        return user.is_superuser or obj_coordinator_test or obj_owner_test
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_coordinator_or_self(request.user):
-            messages.add_message(request, messages.WARNING, 'You must be the '
-                    'designated coordinator or the owner to do that.')
+            messages.add_message(
+                request,
+                messages.WARNING,
+                "You must be the " "designated coordinator or the owner to do that.",
+            )
             raise PermissionDenied
 
-        return super(CoordinatorOrSelf, self).dispatch(
-            request, *args, **kwargs)
-
+        return super(CoordinatorOrSelf, self).dispatch(request, *args, **kwargs)
 
 
 class CoordinatorsOnly(object):
@@ -109,21 +102,17 @@ class CoordinatorsOnly(object):
     * Superusers.
     """
 
-
     def test_func_coordinators_only(self, user):
-        return (user.is_superuser or
-                user in coordinators.user_set.all())
-
+        return user.is_superuser or user in coordinators.user_set.all()
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_coordinators_only(request.user):
-            messages.add_message(request, messages.WARNING, 'You must be a '
-                    'coordinator to do that.')
+            messages.add_message(
+                request, messages.WARNING, "You must be a " "coordinator to do that."
+            )
             raise PermissionDenied
 
-        return super(CoordinatorsOnly, self).dispatch(
-            request, *args, **kwargs)
-
+        return super(CoordinatorsOnly, self).dispatch(request, *args, **kwargs)
 
 
 class PartnerCoordinatorOnly(object):
@@ -139,48 +128,42 @@ class PartnerCoordinatorOnly(object):
 
     def test_func_coordinator_or_self(self, user):
 
-        obj_coordinator_test = False # Set default.
+        obj_coordinator_test = False  # Set default.
 
         # If the user is a coordinator run more tests
         if user in coordinators.user_set.all():
             try:
                 obj = self.get_object()
                 if obj:
-                        # Return true if the object is an editor and has
-                        # at least one application to a partner for whom
-                        # the user is a designated coordinator.
-                        if isinstance(obj, Editor):
-                            obj_coordinator_test = (Application.objects.filter(
-                                editor__pk=obj.pk,
-                                partner__coordinator__pk=user.pk
-                            ).exists())
-                        # Return true if the object is an application to a
-                        # partner for whom the user is a designated coordinator
-                        elif isinstance(obj, Application):
-                            obj_coordinator_test = (
-                                obj.partner.coordinator.pk == user.pk
-                            )
-                        elif isinstance(obj, Partner):
-                            obj_coordinator_test = (
-                                obj.coordinator.pk == user.pk
-                            )
+                    # Return true if the object is an editor and has
+                    # at least one application to a partner for whom
+                    # the user is a designated coordinator.
+                    if isinstance(obj, Editor):
+                        obj_coordinator_test = Application.objects.filter(
+                            editor__pk=obj.pk, partner__coordinator__pk=user.pk
+                        ).exists()
+                    # Return true if the object is an application to a
+                    # partner for whom the user is a designated coordinator
+                    elif isinstance(obj, Application):
+                        obj_coordinator_test = obj.partner.coordinator.pk == user.pk
+                    elif isinstance(obj, Partner):
+                        obj_coordinator_test = obj.coordinator.pk == user.pk
             except AttributeError:
                 # Keep the default.
                 pass
 
-        return (user.is_superuser or
-                obj_coordinator_test)
-
+        return user.is_superuser or obj_coordinator_test
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_coordinator_or_self(request.user):
-            messages.add_message(request, messages.WARNING, 'You must be the '
-                    'designated coordinator or the owner to do that.')
+            messages.add_message(
+                request,
+                messages.WARNING,
+                "You must be the " "designated coordinator or the owner to do that.",
+            )
             raise PermissionDenied
 
-        return super(PartnerCoordinatorOnly, self).dispatch(
-            request, *args, **kwargs)
-
+        return super(PartnerCoordinatorOnly, self).dispatch(request, *args, **kwargs)
 
 
 class EditorsOnly(object):
@@ -195,18 +178,18 @@ class EditorsOnly(object):
     """
 
     def test_func_editors_only(self, user):
-        return hasattr(user, 'editor')
-
+        return hasattr(user, "editor")
 
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_editors_only(request.user):
-            messages.add_message(request, messages.WARNING, 'You must be a '
-                    'coordinator or an editor to do that.')
+            messages.add_message(
+                request,
+                messages.WARNING,
+                "You must be a " "coordinator or an editor to do that.",
+            )
             raise PermissionDenied
 
-        return super(EditorsOnly, self).dispatch(
-            request, *args, **kwargs)
-
+        return super(EditorsOnly, self).dispatch(request, *args, **kwargs)
 
 
 class SelfOnly(object):
@@ -220,30 +203,28 @@ class SelfOnly(object):
     """
 
     def test_func_self_only(self, user):
-        obj_owner_test = False # set default
+        obj_owner_test = False  # set default
 
         obj = self.get_object()
 
         try:
             if isinstance(obj, User):
-                obj_owner_test = (obj.pk == user.pk)
+                obj_owner_test = obj.pk == user.pk
             else:
-                obj_owner_test = (self.get_object().user.pk == user.pk)
+                obj_owner_test = self.get_object().user.pk == user.pk
         except AttributeError:
             pass
 
         return obj_owner_test
 
-
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_self_only(request.user):
-            messages.add_message(request, messages.WARNING, 'You must be the '
-                    'owner to do that.')
+            messages.add_message(
+                request, messages.WARNING, "You must be the " "owner to do that."
+            )
             raise PermissionDenied
 
-        return super(SelfOnly, self).dispatch(
-            request, *args, **kwargs)
-
+        return super(SelfOnly, self).dispatch(request, *args, **kwargs)
 
 
 class ToURequired(object):
@@ -261,25 +242,31 @@ class ToURequired(object):
             # agreed to the Terms, either, so we can safely deny them.
             return False
 
-
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_tou_required(request.user):
-            messages.add_message(request, messages.INFO,
-                'You need to agree to the terms of use before you can do that.')
+            messages.add_message(
+                request,
+                messages.INFO,
+                "You need to agree to the terms of use before you can do that.",
+            )
 
             # Remember where they were trying to go, so we can redirect them
             # back after they agree. There's logic in TermsView to pick up on
             # this parameter.
             next_path = request.path
             next_param = urlencode({REDIRECT_FIELD_NAME: next_path})
-            path = reverse_lazy('terms')
-            new_url = ParseResult(scheme='', netloc='', path=path, params='',
-                query=next_param, fragment='').geturl()            
+            path = reverse_lazy("terms")
+            new_url = ParseResult(
+                scheme="",
+                netloc="",
+                path=path,
+                params="",
+                query=next_param,
+                fragment="",
+            ).geturl()
             return HttpResponseRedirect(new_url)
 
-        return super(ToURequired, self).dispatch(
-            request, *args, **kwargs)
-
+        return super(ToURequired, self).dispatch(request, *args, **kwargs)
 
 
 class EmailRequired(object):
@@ -292,25 +279,31 @@ class EmailRequired(object):
     def test_func_email_required(self, user):
         return bool(user.email) or user.is_superuser
 
-
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func_email_required(request.user):
-            messages.add_message(request, messages.INFO,
-                'You need to have an email address on file before you can do that.')
+            messages.add_message(
+                request,
+                messages.INFO,
+                "You need to have an email address on file before you can do that.",
+            )
 
             # Remember where they were trying to go, so we can redirect them
             # back after they agree. There's logic in TermsView to pick up on
             # this parameter.
             next_path = request.path
             next_param = urlencode({REDIRECT_FIELD_NAME: next_path})
-            path = reverse_lazy('users:email_change')
-            new_url = ParseResult(scheme='', netloc='', path=path, params='',
-                query=next_param, fragment='').geturl()            
+            path = reverse_lazy("users:email_change")
+            new_url = ParseResult(
+                scheme="",
+                netloc="",
+                path=path,
+                params="",
+                query=next_param,
+                fragment="",
+            ).geturl()
             return HttpResponseRedirect(new_url)
 
-        return super(EmailRequired, self).dispatch(
-            request, *args, **kwargs)
-
+        return super(EmailRequired, self).dispatch(request, *args, **kwargs)
 
 
 class DataProcessingRequired(object):
@@ -322,15 +315,14 @@ class DataProcessingRequired(object):
         restricted = get_restricted()
         return user in restricted.user_set.all()
 
-
     def dispatch(self, request, *args, **kwargs):
         if self.test_func_data_processing_required(request.user):
             # No need to give the user a message because they will already
             # have the generic data processing notice.
             raise PermissionDenied
 
-        return super(DataProcessingRequired, self).dispatch(
-            request, *args, **kwargs)
+        return super(DataProcessingRequired, self).dispatch(request, *args, **kwargs)
+
 
 class NotDeleted(object):
     """
@@ -347,5 +339,4 @@ class NotDeleted(object):
         if self.test_func_not_deleted(object):
             raise Http404
 
-        return super(NotDeleted, self).dispatch(
-            request, *args, **kwargs)
+        return super(NotDeleted, self).dispatch(request, *args, **kwargs)

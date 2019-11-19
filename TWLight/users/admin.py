@@ -33,29 +33,39 @@ class AuthorizationInline(admin.StackedInline):
 
 
 class AuthorizationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'partner', 'stream', 'get_authorizer_wp_username', 'get_authorized_user_wp_username')
-    search_fields = ['partner__company_name', 'stream__name', 'authorizer__editor__wp_username',
-                     'user__editor__wp_username']
+    list_display = (
+        "id",
+        "partner",
+        "stream",
+        "get_authorizer_wp_username",
+        "get_authorized_user_wp_username",
+    )
+    search_fields = [
+        "partner__company_name",
+        "stream__name",
+        "authorizer__editor__wp_username",
+        "user__editor__wp_username",
+    ]
 
     def get_authorized_user_wp_username(self, authorization):
         if authorization.user:
             user = authorization.user
-            if hasattr(user, 'editor'):
+            if hasattr(user, "editor"):
                 return user.editor.wp_username
         else:
-            return ''
+            return ""
 
-    get_authorized_user_wp_username.short_description = _('user')
+    get_authorized_user_wp_username.short_description = _("user")
 
     def get_authorizer_wp_username(self, authorization):
         if authorization.authorizer:
             user = authorization.authorizer
-            if hasattr(user, 'editor'):
+            if hasattr(user, "editor"):
                 return user.editor.wp_username
         else:
-            return ''
+            return ""
 
-    get_authorizer_wp_username.short_description = _('authorizer')
+    get_authorizer_wp_username.short_description = _("authorizer")
 
 
 admin.site.register(Authorization, AuthorizationAdmin)
@@ -63,18 +73,18 @@ admin.site.register(Authorization, AuthorizationAdmin)
 
 class UserAdmin(AuthUserAdmin):
     inlines = [EditorInline, UserProfileInline, AuthorizationInline]
-    list_display = ['username', 'get_wp_username', 'is_staff']
-    list_filter = ['is_staff', 'is_active', 'is_superuser']
-    default_filters = ['is_active__exact=1']
-    search_fields = ['editor__wp_username', 'username']
+    list_display = ["username", "get_wp_username", "is_staff"]
+    list_filter = ["is_staff", "is_active", "is_superuser"]
+    default_filters = ["is_active__exact=1"]
+    search_fields = ["editor__wp_username", "username"]
 
     def get_wp_username(self, user):
-        if hasattr(user, 'editor'):
+        if hasattr(user, "editor"):
             return user.editor.wp_username
         else:
-            return ''
+            return ""
 
-    get_wp_username.short_description = _('Username')
+    get_wp_username.short_description = _("Username")
 
 
 # Unregister old user admin; register new, improved user admin.
