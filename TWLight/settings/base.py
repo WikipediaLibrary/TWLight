@@ -80,7 +80,12 @@ def get_django_faker_languages_intersection(languages):
     for locale in FAKER_AVAILABLE_LOCALES:
         for i, (djlang_code, djlang_name) in enumerate(languages):
             # Exclude common English locales from random test selection; English often works while others are broken.
-            if locale == djlang_code and locale != 'en' and locale != 'en_US' and locale != 'en_GB':
+            if (
+                locale == djlang_code
+                and locale != "en"
+                and locale != "en_US"
+                and locale != "en_GB"
+            ):
                 languages_intersection += [locale]
     return sorted(set(languages_intersection))
 
