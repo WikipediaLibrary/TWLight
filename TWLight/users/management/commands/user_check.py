@@ -44,7 +44,7 @@ class Command(BaseCommand):
         try:
             endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={name}&format=json&formatversion=2".format(
                 base="https://meta.wikimedia.org",
-                name=urllib.parse.quote(user.editor.wp_username.encode("utf-8")),
+                name=urllib.parse.quote(user.editor.wp_username),
             )
 
             results = json.loads(urllib.request.urlopen(endpoint).read())
@@ -58,7 +58,7 @@ class Command(BaseCommand):
                 "{username}:{wp_username}: could not fetch global_userinfo.".format(
                     username=str(
                         user.username,
-                        wp_username=user.editor.wp_username.encode("utf-8"),
+                        wp_username=user.editor.wp_username,
                     )
                 )
             )

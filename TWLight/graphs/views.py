@@ -236,9 +236,9 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         writer.writerow(
             # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
             [
-                _("Days until decision").encode("utf-8"),
+                _("Days until decision"),
                 # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
-                _("Number of applications").encode("utf-8"),
+                _("Number of applications"),
             ]
         )
 
@@ -268,13 +268,13 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
         # Translators: This is the heading of a data file, for a column containing date data.
         writer.writerow(
             [
-                _("Date").encode("utf-8"),
+                _("Date"),
                 # Translators: This is the heading of a data file. 'Number of proxy authorizations' refers to the total number of authorizations for all proxy partners.
-                _("Number of proxy authorizations").encode("utf-8"),
+                _("Number of proxy authorizations"),
                 # Translators: This is the heading of a data file. 'Number of renewed proxy authorizations' refers to the total number of authorizations for all proxy partners that were renewed.
-                _("Number of renewed proxy authorizations").encode("utf-8"),
+                _("Number of renewed proxy authorizations"),
                 # Translators: This is the heading of a data file. 'Renewal percentage' refers to the percentage of authorizations renewed of all proxy authroizations.
-                _("Renewal percentage").encode("utf-8"),
+                _("Renewal percentage"),
             ]
         )
 
@@ -293,9 +293,9 @@ class CSVNumApprovedApplications(_CSVDownloadView):
         # Translators: This is the heading of a data file, for a column containing date data.
         writer.writerow(
             [
-                _("Date").encode("utf-8"),
+                _("Date"),
                 # Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-                _("Number of approved applications").encode("utf-8"),
+                _("Number of approved applications"),
             ]
         )
 
@@ -315,9 +315,9 @@ class CSVAppMedians(_CSVDownloadView):
         writer.writerow(
             # Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
             [
-                _("Month").encode("utf-8"),
+                _("Month"),
                 # Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
-                _("Median days until decision").encode("utf-8"),
+                _("Median days until decision"),
             ]
         )
 
@@ -334,8 +334,8 @@ class CSVAppDistribution(_CSVDownloadView):
 
         writer.writerow(
             {
-                "label": _("Status").encode("utf-8"),
-                "data": _("Number of applications").encode("utf-8"),
+                "label": _("Status"),
+                "data": _("Number of applications"),
             }
         )
 
@@ -365,13 +365,13 @@ class CSVPageViews(_CSVDownloadView):
         # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
         writer.writerow(
             [
-                _("Page URL").encode("utf-8"),
-                _("Number of (non-unique) visitors").encode("utf-8"),
+                _("Page URL"),
+                _("Number of (non-unique) visitors"),
             ]
         )
 
         for elem in path_list:
-            row = [elem["path"].encode("utf-8"), elem["the_count"]]
+            row = [elem["path"], elem["the_count"]]
             writer.writerow(row)
 
 
@@ -400,13 +400,13 @@ class CSVPageViewsByPath(_CSVDownloadView):
 
         writer.writerow(
             [
-                _("Page URL").encode("utf-8"),
+                _("Page URL"),
                 # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
-                _("Number of (non-unique) visitors").encode("utf-8"),
+                _("Number of (non-unique) visitors"),
             ]
         )
 
-        row = [path.encode("utf-8"), path_count]
+        row = [path, path_count]
         writer.writerow(row)
 
 
@@ -420,8 +420,8 @@ class CSVUserLanguage(_CSVDownloadView):
 
         writer.writerow(
             {
-                "label": _("Language").encode("utf-8"),
-                "data": _("Number of users").encode("utf-8"),
+                "label": _("Language"),
+                "data": _("Number of users"),
             }
         )
 

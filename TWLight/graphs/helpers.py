@@ -135,7 +135,7 @@ def get_application_status_data(
         # force_str, because we don't know what language we might be
         # dealing with.)
         status_data.append(
-            {"label": str(status[1]).encode("utf-8"), "data": status_count}
+            {"label": str(status[1]), "data": status_count}
         )
 
     if data_format == PYTHON:
@@ -159,7 +159,7 @@ def get_user_language_data(queryset, data_format=JSON):
     for language in queryset.exclude(lang=None).values("lang").distinct():
         language_count = queryset.filter(lang=language["lang"]).count()
         language_data.append(
-            {"label": str(language["lang"]).encode("utf-8"), "data": language_count}
+            {"label": str(language["lang"]), "data": language_count}
         )
 
     if data_format == PYTHON:
