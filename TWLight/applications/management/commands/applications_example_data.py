@@ -2,7 +2,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from faker import Faker
 import random
-from mock import patch
+from unittest.mock import patch
 
 from django.test import Client, RequestFactory
 from django.contrib.auth.models import User

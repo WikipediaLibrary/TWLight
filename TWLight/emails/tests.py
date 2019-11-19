@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
-from mock import patch
+from unittest.mock import patch
 
 from django_comments import get_form_target
 from django_comments.models import Comment

@@ -3,7 +3,7 @@ import copy
 from datetime import datetime, date, timedelta
 import json
 import re
-from mock import patch, Mock
+from unittest.mock import patch, Mock
 from urllib.parse import urlparse
 
 from django.conf import settings
@@ -640,8 +640,8 @@ class EditorModelTestCase(TestCase):
         expected_text = ["sysops", "bureaucrats"]
         self.assertEqual(expected_text, self.test_editor.get_wp_groups_display)
 
-    @patch("urllib2.urlopen")
-    def test_is_user_valid(self, mock_urllib2):
+    @patch("urllib.request.urlopen")
+    def test_is_user_valid(self, mock_urlopen):
         """
         Users must:
         * Have >= 500 edits
@@ -664,7 +664,7 @@ class EditorModelTestCase(TestCase):
         # enough times to power all the calls to read() in this function.
         mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
 
-        mock_urllib2.return_value = mock_response
+        mock_urlopen.return_value = mock_response
 
         identity = copy.copy(FAKE_IDENTITY)
         global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
@@ -766,8 +766,8 @@ class OAuthTestCase(TestCase):
         for editor in Editor.objects.all():
             editor.delete()
 
-    @patch("urllib2.urlopen")
-    def test_create_user_and_editor(self, mock_urllib2):
+    @patch("urllib.request.urlopen")
+    def test_create_user_and_editor(self, mock_urlopen):
         """
         OAuthBackend._create_user_and_editor() should:
         * create a user
@@ -781,7 +781,7 @@ class OAuthTestCase(TestCase):
 
         mock_response = Mock()
         mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
-        mock_urllib2.return_value = mock_response
+        mock_urlopen.return_value = mock_response
 
         user, editor = oauth_backend._create_user_and_editor(identity)
 

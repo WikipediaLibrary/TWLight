@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import csv
 from datetime import date, timedelta
-from mock import patch
+from unittest.mock import patch
 import os
 import random
 

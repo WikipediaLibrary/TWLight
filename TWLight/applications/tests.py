@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import date, timedelta
 from itertools import chain
-from mock import patch
+from unittest.mock import patch
 import reversion
 import random
 from urllib.parse import urlparse

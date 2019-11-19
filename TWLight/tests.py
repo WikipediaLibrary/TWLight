@@ -1,4 +1,4 @@
-from mock import patch
+from unittest.mock import patch
 from datetime import date, timedelta
 from faker import Faker
 from django.contrib.auth.models import User

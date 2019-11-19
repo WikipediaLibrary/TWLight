@@ -17,7 +17,6 @@ djangorestframework==3.9.4
 djmail==1.1.0
 docutils==0.15.2
 factory_boy>=2.10.0,<3.0
-mock==3.0.5
 mwoauth==0.3.7
 pillow==6.2.1
 pypandoc==1.4
