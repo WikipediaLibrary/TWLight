@@ -6,7 +6,9 @@
   <span class="label label-primary">
     {% trans "Status" %}
   </span>&nbsp;
-  {% trans "Username" %} - {% trans "Partner (Collection)" %} &mdash; {% trans "Last reviewed" %} &mdash; <em>{% trans "Date applied" %}</em>
+  {% trans "Username" %} - {% trans "Partner (Collection)" %} &mdash; {% trans "Last reviewed" %} &mdash; <em>{% trans "Date applied" %}</em> &mdash;
+  {% comment %} Translators: This labels the column description showing whether the user had agreed to the terms of use or not. {% endcomment %}
+  <em>{% trans "Has agreed to the terms of use?" %}</em>
   <form method="post" action="{% url 'applications:batch_edit' %}" id="batch_edit">
     {% csrf_token %}
     <div class="form-group">
@@ -47,6 +49,12 @@
               <span class="label label-info">
                 {% trans "Renewal" %}
               </span>
+            {% endif %}
+            &mdash;
+            {% if app.editor.user.userprofile.terms_of_use %}
+              {% trans 'Yes' %}
+            {% else %}
+              <span style="color: #cc3434">{% trans 'No' %}</span>
             {% endif %}
           </li>
         {% endfor %}

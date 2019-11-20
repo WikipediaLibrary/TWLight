@@ -123,6 +123,27 @@
       </div>
     {% endif %}
 
+    <div class="col-xs-12 col-sm-4">
+      {% comment %}Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not. {% endcomment %}
+      <strong>
+        {% url 'terms' as terms_url %}
+        {% blocktrans trimmed %}
+          Has agreed to the site's <a href="{{ terms_url }}">terms of use</a>?
+        {% endblocktrans %}
+      </strong>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      {% if user.userprofile.terms_of_use %}
+        {% trans 'Yes' %}
+      {% else %}
+        <strong><span style="color: #cc3434">{% trans 'No' %}</span></strong>
+        {% if partner_coordinator %}
+          {% comment %}Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.{% endcomment %}
+          <i>({% trans "Please request the applicant agree to the site's terms of use before approving this application." %})</i>
+        {% endif %}
+      {% endif %}
+    </div>
+
     {% if object.specific_stream %}
       <div class="col-xs-12 col-sm-4">
         {% comment %}Translators: This labels the section of an application showing which collection of resources the user requested access to.{% endcomment %}
