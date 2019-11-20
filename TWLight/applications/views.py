@@ -1330,7 +1330,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
         )
 
 
-class RenewApplicationView(SelfOnly, DataProcessingRequired, FormView):
+class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormView):
     """
     This view takes an existing Application and creates a clone, with new
     dates and a FK back to the original application. If the application is
