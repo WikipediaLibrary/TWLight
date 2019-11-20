@@ -24,7 +24,7 @@
     {% if each_authorization.partner.logos.logo.url %}
       <div class="partner-logo-container">
         <a href="
-          {% if each_authorization.partner.get_access_url and each_authorization.is_valid %}
+          {% if each_authorization.partner.get_access_url and each_authorization.is_valid and each_authorization.user.userprofile.terms_of_use %}
             {{ each_authorization.partner.get_access_url }}
           {% else %}
             {% url 'partners:detail' each_authorization.partner.pk %}
@@ -63,7 +63,7 @@
     {% if each_authorization.partner.get_access_url and each_authorization.is_valid %}
       {% comment %} Translators: A button when clicked takes users the resource (external) the authorization represents. {% endcomment %}
       <div style="text-align: center;">
-      <a href="{{ each_authorization.partner.get_access_url }}" class="btn btn-default" role="button">{% trans 'Access resource' %}</a>
+      <a href="{{ each_authorization.partner.get_access_url }}" class="btn btn-default {% if not each_authorization.user.userprofile.terms_of_use %}disabled{% endif %}" role="button">{% trans 'Access resource' %}</a>
       </div>
       <hr>
     {% endif %}
