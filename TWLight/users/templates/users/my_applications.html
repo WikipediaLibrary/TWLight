@@ -24,6 +24,9 @@
         <h4>
         <a href="{{ app.get_absolute_url }}">
           {{ app.partner }}
+          {% if app.specific_stream %}
+            ({{ app.specific_stream }})
+          {% endif %}
         </a>
         </h4>
         <div class="visible-xs">
