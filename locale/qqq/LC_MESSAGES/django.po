@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-11-19 22:55+0000\n"
+"POT-Creation-Date: 2019-11-21 13:38+0000\n"
 "PO-Revision-Date: 2019-11-18 17:34:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,7 +177,7 @@ msgstr ""
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
 #: TWLight/applications/helpers.py:144
-#: TWLight/applications/templates/applications/application_evaluation.html:139
+#: TWLight/applications/templates/applications/application_evaluation.html:160
 msgid "Title requested"
 msgstr ""
 
@@ -383,55 +383,76 @@ msgstr ""
 msgid "Accounts available"
 msgstr ""
 
-#. Translators: This labels the section of an application showing which collection of resources the user requested access to.
-#: TWLight/applications/templates/applications/application_evaluation.html:129
-msgid "Collection requested"
-msgstr ""
-
-#. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
-#: TWLight/applications/templates/applications/application_evaluation.html:148
-msgid "Why the editor wants access"
-msgstr ""
-
-#. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
-#: TWLight/applications/templates/applications/application_evaluation.html:155
-msgid "Not stated"
-msgstr ""
-
-#. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
-#: TWLight/applications/templates/applications/application_evaluation.html:161
-msgid "Renewal of existing access grant?"
-msgstr ""
-
-#. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
-#: TWLight/applications/templates/applications/application_evaluation.html:167
+#: TWLight/applications/templates/applications/application_evaluation.html:130
 #, python-format
-msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
+msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
+msgstr ""
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
+#: TWLight/applications/templates/applications/application_evaluation.html:137
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:55
+#: TWLight/users/templates/users/editor_detail_data.html:66
+msgid "Yes"
 msgstr ""
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
-#: TWLight/applications/templates/applications/application_evaluation.html:173
+#: TWLight/applications/templates/applications/application_evaluation.html:139
+#: TWLight/applications/templates/applications/application_evaluation.html:194
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:57
 #: TWLight/users/templates/users/editor_detail_data.html:68
 msgid "No"
 msgstr "{{Identical|No}}"
 
+#. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
+#: TWLight/applications/templates/applications/application_evaluation.html:142
+msgid ""
+"Please request the applicant agree to the site's terms of use before "
+"approving this application."
+msgstr ""
+
+#. Translators: This labels the section of an application showing which collection of resources the user requested access to.
+#: TWLight/applications/templates/applications/application_evaluation.html:150
+msgid "Collection requested"
+msgstr ""
+
+#. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
+#: TWLight/applications/templates/applications/application_evaluation.html:169
+msgid "Why the editor wants access"
+msgstr ""
+
+#. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
+#: TWLight/applications/templates/applications/application_evaluation.html:176
+msgid "Not stated"
+msgstr ""
+
+#. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
+#: TWLight/applications/templates/applications/application_evaluation.html:182
+msgid "Renewal of existing access grant?"
+msgstr ""
+
+#. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
+#: TWLight/applications/templates/applications/application_evaluation.html:188
+#, python-format
+msgid "Yes (<a href=\"%(parent_url)s\">previous application</a>)"
+msgstr ""
+
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
-#: TWLight/applications/templates/applications/application_evaluation.html:179
+#: TWLight/applications/templates/applications/application_evaluation.html:200
 msgid "Comments from the editor"
 msgstr ""
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
-#: TWLight/applications/templates/applications/application_evaluation.html:187
+#: TWLight/applications/templates/applications/application_evaluation.html:208
 msgid "Discussion"
 msgstr ""
 
 #. Translators: This labels the button which users click to send a typed comment.
-#: TWLight/applications/templates/applications/application_evaluation.html:208
+#: TWLight/applications/templates/applications/application_evaluation.html:229
 msgid "Add comment"
 msgstr ""
 
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
-#: TWLight/applications/templates/applications/application_evaluation.html:216
+#: TWLight/applications/templates/applications/application_evaluation.html:237
 msgid ""
 "Comments are visible to all coordinators and to the editor who submitted "
 "this application."
@@ -439,43 +460,43 @@ msgstr ""
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
-#: TWLight/applications/templates/applications/application_evaluation.html:223
+#: TWLight/applications/templates/applications/application_evaluation.html:244
 #: TWLight/resources/templates/resources/partner_users.html:25
 #: TWLight/resources/templates/resources/partner_users.html:76
 msgid "User"
 msgstr ""
 
 #. Translators: This is the title of the section of an application page which lists the history of status changes.
-#: TWLight/applications/templates/applications/application_evaluation.html:228
+#: TWLight/applications/templates/applications/application_evaluation.html:249
 msgid "Revision history"
 msgstr ""
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate submit_user or review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:244
+#: TWLight/applications/templates/applications/application_evaluation.html:265
 #, python-format
 msgid "Submitted by %(submit_user)s on %(review_date)s"
 msgstr ""
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:249
+#: TWLight/applications/templates/applications/application_evaluation.html:270
 #, python-format
 msgid "Submitted on %(review_date)s"
 msgstr ""
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate review_user or review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:260
+#: TWLight/applications/templates/applications/application_evaluation.html:281
 #, python-format
 msgid "Reviewed by %(review_user)s on %(review_date)s"
 msgstr ""
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate review_date
-#: TWLight/applications/templates/applications/application_evaluation.html:265
+#: TWLight/applications/templates/applications/application_evaluation.html:286
 #, python-format
 msgid "Reviewed on %(review_date)s"
 msgstr ""
 
 #. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
-#: TWLight/applications/templates/applications/application_evaluation.html:278
+#: TWLight/applications/templates/applications/application_evaluation.html:299
 msgid "No previous versions."
 msgstr ""
 
@@ -564,7 +585,7 @@ msgstr ""
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:37
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:33
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:35
 #: TWLight/users/templates/users/my_applications.html:44
 #, python-format
 msgid "Last reviewed by %(reviewer)s on %(review_date)s"
@@ -572,7 +593,7 @@ msgstr ""
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:42
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:37
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:39
 #: TWLight/users/templates/users/my_applications.html:49
 #, python-format
 msgid "Last reviewed on %(review_date)s"
@@ -580,13 +601,13 @@ msgstr ""
 
 #. Translators: On the page listing applications, this shows next to an application which has not yet been reviewed.
 #: TWLight/applications/templates/applications/application_list_include.html:48
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:42
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:44
 #: TWLight/users/templates/users/my_applications.html:55
 msgid "Not yet reviewed."
 msgstr ""
 
 #: TWLight/applications/templates/applications/application_list_include.html:64
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:79
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:87
 #: TWLight/users/templates/users/my_applications.html:78
 msgid "No applications right now."
 msgstr ""
@@ -603,26 +624,31 @@ msgstr ""
 msgid "Date applied"
 msgstr ""
 
+#. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:11
+msgid "Has agreed to the terms of use?"
+msgstr ""
+
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:18
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:20
 #: TWLight/applications/templates/applications/send_partner.html:121
 msgid "Select/deselect all"
 msgstr ""
 
 #. Translators: Denotes whether an application was a renewal request for a previous application.
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:48
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:50
 #: TWLight/resources/templates/resources/partner_users.html:53
 #: TWLight/resources/templates/resources/partner_users.html:104
 msgid "Renewal"
 msgstr ""
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:61
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:69
 msgid "Status for all selected applications"
 msgstr ""
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
-#: TWLight/applications/templates/applications/application_list_reviewable_include.html:75
+#: TWLight/applications/templates/applications/application_list_reviewable_include.html:83
 msgid "Set status"
 msgstr ""
 
@@ -1004,7 +1030,7 @@ msgstr ""
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/about.html:184 TWLight/templates/base.html:288
+#: TWLight/templates/about.html:184 TWLight/templates/base.html:299
 msgid "Contact us"
 msgstr ""
 
@@ -1879,7 +1905,7 @@ msgstr ""
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_filter.html:24
-#: TWLight/templates/base.html:267
+#: TWLight/templates/base.html:278
 msgid "Suggest a partner"
 msgstr ""
 
@@ -2380,6 +2406,15 @@ msgid ""
 "\"%(restrict_url)s\">lift this restriction</a>."
 msgstr ""
 
+#. Translators: Shown if the current user has not agreed to the terms of use.
+#: TWLight/templates/base.html:222
+#, python-format
+msgid ""
+"You have not agreed to the <a href=\"%(terms_url)s\">terms of use</a> of "
+"this site. Your applications will not be processed and you won't be able to "
+"apply or access resources you are approved for."
+msgstr ""
+
 #. Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
 #. blocktrans trimmed
 #. The Wikipedia Library Card Platform is a project of
@@ -2394,7 +2429,7 @@ msgstr ""
 #. </p>
 #. <p>
 #. comment Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:241
+#: TWLight/templates/base.html:252
 msgid ""
 "This work is licensed under a <a rel=\"license\" href=\"http://"
 "creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
@@ -2402,17 +2437,17 @@ msgid ""
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:255
+#: TWLight/templates/base.html:266
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:261
+#: TWLight/templates/base.html:272
 msgid "Terms of use and privacy policy"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:273
+#: TWLight/templates/base.html:284
 msgid "Feedback"
 msgstr ""
 
@@ -2607,60 +2642,64 @@ msgid "authorizer"
 msgstr ""
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
-#: TWLight/users/authorization.py:230
+#: TWLight/users/authorization.py:228
 msgid "You tried to log in but presented an invalid access  token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/authorization.py:283 TWLight/users/authorization.py:381
+#: TWLight/users/authorization.py:281 TWLight/users/authorization.py:379
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr ""
 
-#: TWLight/users/authorization.py:367
+#: TWLight/users/authorization.py:365
 msgid "Did not receive a valid oauth response."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:394
+#: TWLight/users/authorization.py:392
 msgid "Could not find handshaker."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:407
+#: TWLight/users/authorization.py:405
 msgid "No session token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:420
+#: TWLight/users/authorization.py:418
 msgid "No request token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/authorization.py:433
+#: TWLight/users/authorization.py:431
 msgid "Access token generation failed."
 msgstr ""
 
-#: TWLight/users/authorization.py:451
+#: TWLight/users/authorization.py:449
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
-#: TWLight/users/authorization.py:462
+#: TWLight/users/authorization.py:460
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
 "in, please email wikipedialibrary@wikimedia.org."
 msgstr ""
 
-#: TWLight/users/authorization.py:480
+#: TWLight/users/authorization.py:478
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
 #. Translators: This message is shown when a user logs back in to the site after their first time.
-#: TWLight/users/authorization.py:485
+#: TWLight/users/authorization.py:487
 msgid "Welcome back!"
+msgstr ""
+
+#: TWLight/users/authorization.py:520
+msgid "Welcome back! Please agree to the terms of use."
 msgstr ""
 
 #. Translators: This is the label for a button that users click to update their public information.
@@ -2932,11 +2971,6 @@ msgstr ""
 msgid ""
 "At their last login, did this user meet the criteria set forth in the terms "
 "of use?"
-msgstr ""
-
-#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
-#: TWLight/users/templates/users/editor_detail_data.html:66
-msgid "Yes"
 msgstr ""
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
