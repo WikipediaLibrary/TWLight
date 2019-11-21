@@ -2042,7 +2042,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
         self.assertTrue(Application.objects.filter(parent=app))
 
         partner.authorization_method = Partner.PROXY
-        partner.requested_access_duration = True  # require duration of access required
+        partner.requested_access_duration = True  # require duration of access
         partner.save()
 
         editor1 = EditorCraftRoom(self, Terms=True, Coordinator=False)
@@ -2066,8 +2066,72 @@ class RenewApplicationTest(BaseApplicationViewTest):
         self.client.post(renewal_url, data)
         app1.refresh_from_db()
         self.assertFalse(app1.is_renewable)
+        app2 = Application.objects.filter(parent=app1)
         self.assertTrue(Application.objects.filter(parent=app1))
+        app2 = app2.first()
+        # Make sure everything is in place in the app
+        self.assertEqual(app2.account_email, "test@example.com")
+        self.assertEqual(app2.requested_access_duration, 6)
 
+    def test_renewal_with_specific_stream(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(
+            renewals_available=True,
+            authorization_method=Partner.PROXY,
+            requested_access_duration=True,
+            specific_stream=True
+        )
+        stream1 = StreamFactory(partner=partner)
+        stream2 = StreamFactory(partner=partner)
+        app1 = ApplicationFactory(
+            partner=partner, specific_stream=stream1, status=Application.SENT, editor=editor
+        )
+        renewal_url = reverse("applications:renew", kwargs={"pk": app1.pk})
+        response = self.client.get(renewal_url)
+        renewal_form = response.context["form"]
+        self.assertTrue(renewal_form["specific_stream"])
+
+        data = renewal_form.initial
+        data["specific_stream"] = stream2.pk  # not the stream of the parent, but this should work
+        data["return_url"] = renewal_form["return_url"].value()
+        data["requested_access_duration"] = 6
+
+        self.client.post(renewal_url, data)
+        app1.refresh_from_db()
+        # Because app1 has no children (app made to a different stream
+        # is not associated with app with which renewal was attempted),
+        # this app should still be renewable
+        self.assertTrue(app1.is_renewable)
+        # We should have a new app made to stream2 with empty parent
+        app2 = Application.objects.filter(
+                partner=partner, specific_stream=stream2, parent=None
+            )
+        self.assertEqual(app2.count(), 1)
+        # app needs to be SENT before a renewal can operate on it
+        app2 = app2.first()
+        app2.status = Application.SENT
+        app2.save()
+
+        # Normal renewal with the same stream - nothing surprising here
+        renewal_url = reverse("applications:renew", kwargs={"pk": app2.pk})
+        response = self.client.get(renewal_url)
+        self.assertEqual(response.status_code, 200)
+        renewal_form = response.context["form"]
+        self.assertTrue(renewal_form["specific_stream"])
+
+        data = renewal_form.initial
+        data["specific_stream"] = stream2.pk
+        data["return_url"] = renewal_form["return_url"].value()
+        data["requested_access_duration"] = 6
+
+        self.client.post(renewal_url, data)
+        app1.refresh_from_db()
+        self.assertFalse(app2.is_renewable)
+        # We should have a new app made to stream2 with empty parent
+        app3 = Application.objects.filter(
+                partner=partner, specific_stream=stream2, parent=app2
+            )
+        self.assertEqual(app3.count(), 1)
 
 class ApplicationModelTest(TestCase):
     def test_approval_sets_date_closed(self):
