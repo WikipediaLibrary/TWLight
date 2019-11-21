@@ -693,20 +693,12 @@ class CollectionUserView(SelfOnly, ListView):
                     each_authorization.latest_app = each_authorization.get_latest_app()
                     if each_authorization.latest_app:
                         if not each_authorization.latest_app.is_renewable:
-                            try:
-                                each_authorization.open_app = Application.objects.filter(
-                                    editor=editor,
-                                    status__in=(
-                                        Application.PENDING,
-                                        Application.QUESTION,
-                                        Application.APPROVED,
-                                    ),
-                                    partner=each_authorization.partner,
-                                ).latest(
-                                    "date_created"
-                                )
-                            except Application.DoesNotExist:
-                                each_authorization.open_app = None
+                            if each_authorization.latest_app.status in [
+                                Application.QUESTION,
+                                Application.PENDING,
+                                Application.APPROVED
+                            ]:
+                                each_authorization.open_app = each_authorization.latest_app
 
         context["proxy_bundle_authorizations"] = proxy_bundle_authorizations
         context[
