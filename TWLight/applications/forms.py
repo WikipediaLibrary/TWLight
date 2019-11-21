@@ -353,7 +353,7 @@ class RenewalForm(forms.Form):
             self.field_params = kwargs.pop("field_params")
         except KeyError:
             logger.exception(
-                "Tried to instantiate a RenewalForm but " "did not have field_params"
+                "Tried to instantiate a RenewalForm but did not have field_params"
             )
             raise
         super(RenewalForm, self).__init__(*args, **kwargs)
@@ -380,6 +380,20 @@ class RenewalForm(forms.Form):
                 "The email for your account on the partner's website"
             )
             fieldset.append("account_email")
+
+        if "partner" in self.field_params:
+            specific_stream = None
+            if "specific_stream" in self.field_params:
+                specific_stream = self.field_params["specific_stream"]
+            self.fields["specific_stream"] = forms.ModelChoiceField(
+                queryset=Stream.objects.filter(partner=self.field_params["partner"]),
+                initial=specific_stream
+            )
+            # Translators: This labels a model choice field where users will have to select the collection for a partner they wish to renew
+            self.fields["specific_stream"].label = _(
+                "The collection you wish to renew"
+            )
+            fieldset.append("specific_stream")
 
         if "requested_access_duration" in self.field_params:
             self.fields["requested_access_duration"] = forms.ChoiceField(
