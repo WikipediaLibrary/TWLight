@@ -133,7 +133,7 @@
       </strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {% if user.userprofile.terms_of_use %}
+      {% if object.editor.user.userprofile.terms_of_use %}
         {% trans 'Yes' %}
       {% else %}
         <strong><span style="color: #cc3434">{% trans 'No' %}</span></strong>
