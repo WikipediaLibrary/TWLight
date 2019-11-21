@@ -566,9 +566,14 @@ class Authorization(models.Model):
         from TWLight.applications.models import Application
 
         try:
-            return Application.objects.filter(
-                partner=self.partner, editor=self.user.editor
-            ).latest("id")
+            if self.stream:
+                return Application.objects.filter(
+                    specific_stream=self.stream, editor=self.user.editor
+                ).latest("id")
+            else:
+                return Application.objects.filter(
+                    partner=self.partner, editor=self.user.editor
+                ).latest("id")
         except Application.DoesNotExist:
             return None
 
