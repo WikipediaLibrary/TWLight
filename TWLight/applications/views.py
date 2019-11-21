@@ -1394,6 +1394,10 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             field_params["account_email"] = application.account_email
         if partner.requested_access_duration:
             field_params["requested_access_duration"] = None
+        if partner.specific_stream:
+            field_params["partner"] = partner
+            if application.specific_stream:
+                field_params["specific_stream"] = application.specific_stream
         field_params["return_url"] = return_url
 
         kwargs["field_params"] = field_params
@@ -1408,8 +1412,36 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
         if domain in settings.ALLOWED_HOSTS:
             return_url = referer
 
+        parent = True
         application = self.get_object()
         partner = application.partner
+        # Because users can request renewals from multiple places, we
+        # ought to double check if we're renewing the right application.
+        # We perform some checks to ensure the parent always has the
+        # same specific_stream as a the requested one. If not, we try
+        # to find out ourselves if there's an app with the same editor,
+        # partner and specific_stream attributes. If so, we set the
+        # correct parent; if not, we set no parent.
+        # *Applicable only for partners with collections*
+        if application.specific_stream and partner.specific_stream:
+            specific_stream = form.cleaned_data["specific_stream"]
+            if application.specific_stream == specific_stream:
+                application.specific_stream = specific_stream
+            else:
+                try:
+                    correct_app = Application.objects.filter(
+                        editor=self.request.user.editor,
+                        partner=partner,
+                        specific_stream=specific_stream
+                    ).latest("id")
+                    application = correct_app
+                    application.specific_stream = specific_stream
+                except Application.DoesNotExist:
+                    application.specific_stream = specific_stream
+                    parent = False
+        elif application.specific_stream and not partner.specific_stream:
+            application.specific_stream = None
+
         if partner.account_email:
             application.account_email = form.cleaned_data["account_email"]
         if partner.requested_access_duration:
@@ -1417,8 +1449,7 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
                 "requested_access_duration"
             ]
 
-        renewal = application.renew()
-
+        renewal = application.renew(parent)
         if not renewal:
             messages.add_message(
                 self.request,
