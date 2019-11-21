@@ -215,6 +215,17 @@
         {% endblocktrans %}
       </div>
     {% endif %}
+    {% if not user.userprofile.terms_of_use and not user.is_anonymous %}
+      <div class="alert alert-warning">
+        {% url 'terms' as terms_url %}
+        {% comment %} Translators: Shown if the current user has not agreed to the terms of use. {% endcomment %}
+        {% blocktrans trimmed %}
+          You have not agreed to the <a href="{{ terms_url }}">terms of use</a>
+          of this site. Your applications will not be processed and you won't be
+          able to apply or access resources you are approved for.
+        {% endblocktrans %}
+      </div>
+    {% endif %}
 
     {% block content %}
     {% endblock %}

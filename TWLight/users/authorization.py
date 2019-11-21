@@ -1,6 +1,5 @@
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken, OAuthException
-import re
 import urllib.parse
 
 from django.conf import settings
@@ -12,7 +11,6 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
 from django.views.generic.base import View
-from django.views.generic.edit import FormView
 from django.utils.translation import get_language, ugettext as _
 
 from urllib.parse import urlencode
@@ -481,38 +479,47 @@ class OAuthCallbackView(View):
                 )
                 return_url = reverse_lazy("terms")
             else:
-                # Translators: This message is shown when a user logs back in to the site after their first time.
-                messages.add_message(request, messages.INFO, _("Welcome back!"))
                 # We're using this twice. Not very DRY.
                 # Send user either to the destination specified in the 'next'
                 # parameter or to their own editor detail page.
-                try:
-                    # Create a QueryDict from the 'get' session dict.
-                    query_dict = QueryDict(
-                        urlencode(request.session["get"]), mutable=True
+                if user.userprofile.terms_of_use:
+                    # Translators: This message is shown when a user logs back in to the site after their first time.
+                    messages.add_message(request, messages.INFO, _("Welcome back!"))
+                    try:
+                        # Create a QueryDict from the 'get' session dict.
+                        query_dict = QueryDict(
+                            urlencode(request.session["get"]), mutable=True
+                        )
+                        # Pop the 'next' parameter out of the QueryDict.
+                        next = query_dict.pop("next")
+                        # Set the return url to the value of 'next'. Basic.
+                        return_url = next[0].encode("ascii", "ignore")
+                        # If there is anything left in the QueryDict after popping
+                        # 'next', append it to the return url. This preserves state
+                        # for filtered lists and redirected form submissions like
+                        # the partner suggestion form.
+                        if query_dict:
+                            return_url += "?" + urlencode(query_dict)
+                        logger.info(
+                            "User authenticated. Sending them on for "
+                            'post-login redirection per "next" parameter.'
+                        )
+                    except KeyError:
+                        return_url = reverse_lazy(
+                            "users:editor_detail", kwargs={"pk": user.editor.pk}
+                        )
+                        logger.warning(
+                            'User authenticated. No "next" parameter '
+                            "for post-login redirection."
+                        )
+                else:
+                    # Translators: This message is shown when a user logs back in to the site after their first time and hasn't agreed to the terms of use.
+                    messages.add_message(
+                        request,
+                        messages.INFO,
+                        _("Welcome back! " "Please agree to the terms of use."),
                     )
-                    # Pop the 'next' parameter out of the QueryDict.
-                    next = query_dict.pop("next")
-                    # Set the return url to the value of 'next'. Basic.
-                    return_url = next[0].encode("ascii", "ignore")
-                    # If there is anything left in the QueryDict after popping
-                    # 'next', append it to the return url. This preserves state
-                    # for filtered lists and redirected form submissions like
-                    # the partner suggestion form.
-                    if query_dict:
-                        return_url += "?" + urlencode(query_dict)
-                    logger.info(
-                        "User authenticated. Sending them on for "
-                        'post-login redirection per "next" parameter.'
-                    )
-                except KeyError:
-                    return_url = reverse_lazy(
-                        "users:editor_detail", kwargs={"pk": user.editor.pk}
-                    )
-                    logger.warning(
-                        'User authenticated. No "next" parameter '
-                        "for post-login redirection."
-                    )
+                    return_url = reverse_lazy("terms")
         else:
             return_url = reverse_lazy("homepage")
 

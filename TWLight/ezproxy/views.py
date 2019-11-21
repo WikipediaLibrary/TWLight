@@ -15,13 +15,15 @@ from django.core.exceptions import (
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
+
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Authorization
+from TWLight.view_mixins import ToURequired
 
 logger = logging.getLogger(__name__)
 
 
-class EZProxyAuth(View):
+class EZProxyAuth(ToURequired, View):
     @staticmethod
     def get(request, url=None, token=None):
         username = request.user.editor.wp_username
