@@ -406,6 +406,14 @@ class RenewalForm(forms.Form):
             )
             fieldset.append("requested_access_duration")
 
+        if "specific_title" in self.field_params:
+            self.fields["specific_title"] = forms.CharField(max_length=128)
+            # Translators: When renewing an application, users may need to specify a particular book/title they want access to
+            self.fields["specific_title"].label = _(
+                "The title/book you wish to have access to"
+            )
+            fieldset.append("specific_title")
+
         self.fields["return_url"] = forms.CharField(
             widget=forms.HiddenInput, max_length=70
         )

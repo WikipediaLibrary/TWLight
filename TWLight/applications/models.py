@@ -182,14 +182,13 @@ class Application(models.Model):
                 self,
                 fields=[
                     "rationale",
-                    "specific_title",
                     "comments",
                     "agreement_with_terms_of_use",
                 ],
             )
 
-            # Status, stream and parent are explicitly different on the child than
-            # on the parent application. For editor and partner, we
+            # Status, stream (sometimes) and parent are explicitly different
+            # on the child than on the parent application. For editor and partner, we
             # need to pull those directly - model_to_dict will give us the pks
             # of the referenced objects, but we need the actual objects.
             data.update(
@@ -199,6 +198,7 @@ class Application(models.Model):
                     "editor": self.editor,
                     "partner": self.partner,
                     "specific_stream": self.specific_stream,
+                    "specific_title": self.specific_title,
                     "account_email": self.account_email,
                     "requested_access_duration": self.requested_access_duration,
                 }
