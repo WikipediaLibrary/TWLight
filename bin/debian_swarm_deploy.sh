@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Installs dependencies and deploys TWLight to a single Debian host.
-
+set -euo
 # Ensure the docker repo will be usable.
 apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 # Add the apt key
