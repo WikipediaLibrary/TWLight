@@ -1,104 +1,101 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load i18n %}
 {% load l10n %}
 
 {% block content %}
-   <div class="lead">
-		<p>
-                {% comment %} Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-		{% blocktrans trimmed %}
-			Sign up for free access to dozens of research databases and resources available through The Wikipedia Library. 
-		{% endblocktrans %}
-			
-		<a href="{% url 'about' %}">{% trans "Learn more" %}</a>
+  <div class="lead">
+    <p>
+      {% comment %} Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+      {% blocktrans trimmed %}
+        The Wikipedia Library provides free access to research databases and resources.
+  		{% endblocktrans %}
+      <a href="{% url 'about' %}">{% trans "Learn more" %}</a>
 		</p>
+  </div>
 
-	  <div class="row">
-		<div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 login">
-		  {% if not user.is_authenticated %}
-			<a href="{% url 'oauth_login' %}" class="btn btn-primary btn-block"> 
-				<span class="glyphicon glyphicon-off"></span>&nbsp;
-		
-	  {% trans "Log in" %}
-			</a>
-		  {% endif %}
-		</div>
-	  </div>
-   </div>
- 
-  
   <div class="row">
-	<div class="col-md-6">
-                {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the header for that section.{% endcomment %}
-		<h2><img src="/static/img/benefits.PNG" class="icons" alt="">{% trans "Benefits" %}</h2>
-		
-		<div class="border">
-                {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Benefits' section describes why editors would want to use the project. This is the content of that section.{% endcomment %}
-		{% blocktrans trimmed %}
-				<p>The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects. </p>
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 login">
+      {% if user.is_authenticated %}
+        <a href="{% url 'users:my_collection' pk=user.pk %}" class="btn btn-default btn-block">
+          {% comment %} Translators: On the homepage, this message labels a button users can click to go to the 'My Collection' page, which lists their available resources. {% endcomment %}
+          {% trans "Your collection" %}
+        </a>
+      {% else %}
+        <a href="{% url 'oauth_login' %}" class="btn btn-primary btn-block">
+          <span class="glyphicon glyphicon-off"></span>&nbsp;
+          {% comment %} Translators: This message is shown on the button users click to log in to the website. {% endcomment %}
+          {% trans "Log in" %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
 
-				<p>Through the Library Card you can apply for access to {{partner_count}} leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p>
-
-		
-				<p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply.</p>
-		{% endblocktrans %}
-				<p>&nbsp;</p>
-				<p>&nbsp;</p>
+  <div class="row">
+	  <div class="col-md-5 col-md-offset-1">
+      {% comment %} Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
+      <div class="border border-homepage">
+        <h2 style="padding-bottom:20px;">{% trans "Library Bundle" %}
+          <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive bundle-icon" alt="
+          {% comment %} Translators: Alt text for the Library Bundle logo. {% endcomment %}
+          {% trans "A stack of books tied together with a ribbon, the Library Bunbdle icon" %}
+          ">
+        </h2>
+        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...{% endcomment %}
+		    {% blocktrans trimmed %}
+				  <p>Free and immediate access to a large collection of resources from more than {{ bundle_partner_count }} publishers if you meet the following criteria:</p>
+		    {% endblocktrans %}
+				<ul class="bundle-list">
+          {% for criteria_text, meets_criteria in bundle_criteria %}
+            <li>
+              {{ criteria_text }}
+              <div class="bundle-checks
+              {% if meets_criteria %}
+                bundle-check-true">
+                <b>&#10004;</b>
+              {% else %}
+                {% if request.user.is_authenticated %}
+                  bundle-check-false">
+                  <b>&#10006;</b>
+                {% else %}
+                  ">
+                {% endif %}
+              {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
 				{% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
 				<p>
-          <a href="{% url 'partners:filter' %}" class="btn btn-primary btn-block read-more">{% trans "Apply" %} </a>
           <a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a>
         </p>
-		</div>
-	</div>
-	
-	<div class="col-md-6">
-                {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.{% endcomment %}
-		<h2><img src="/static/img/favorite.png" class="icons" alt="">{% trans "Partners" %}</h2>
-			<div class="border">
-                                {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the introductory text to that list.{% endcomment %}
-				<p>{% trans "Below are a few of our featured partners:" %}</p>
-					<ul>
-						{% for partner in featured_partners %}
-							<li><a href={% url 'partners:detail' partner.pk %}>{{ partner }}</a></li>
-						{% endfor %}
-					</ul>
-				<p><a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more"> {% trans "Browse all partners" %}</a>
-			
-			</div>
-	</div>
+      </div>
+	  </div>
+
+	  <div class="col-md-5">
+      {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...{% endcomment %}
+			<div class="border border-homepage">
+        <h2>{% trans "Apply" %}</h2>
+        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...{% endcomment %}
+				<p style="padding-bottom: 20px;">{% trans "Some collections have a limited number of concurrent users and require an application." %}</p>
+        {% for partner in featured_partners %}
+          <div class="row">
+            <div class="featured-partner">
+              <div class="col-md-4">
+                <a href="{% url 'partners:detail' partner.pk %}"><img src="{{ partner.logos.logo.url }}" alt="{{ partner }} logo" class="featured-partner-logo"></a>
+              </div>
+              <div class="col-md-8" style="display:inline-block;">
+                {{ partner.short_description |truncatechars:200 }}
+              </div>
+            </div>
+          </div>
+          <hr/>
+        {% endfor %}
+        <p><a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more"> {% trans "See more" %}</a>
+      </div>
+	  </div>
   </div>
-  
+
   <p>&nbsp;</p>
 
-  <div class="row">
-	<div class="col-md-12">
-		<h2><span class="glyphicon glyphicon-grey glyphicon-th-list"></span> Latest Activity</h2>
-		
-		<hr>
-			<ul class="timeline timeline-home">
-		 
-			{% for event in activity %}
-			  <li class="{% if forloop.counter|divisibleby:2 %}timeline-inverted{% endif %}">
-				<div class="timeline-badge {{ event.color }}">
-				  <i class="fa {{ event.icon }}"></i>
-				</div>
-				<div class="timeline-panel">
-				  <div class="timeline-body">
-					<p>{{ event.text | safe }}</p>
-
-					<p class="small pull-right">
-					  {{ event.date | localize }}
-					</p>
-				  </div>
-				</div>      
-			  </li>
-			{% endfor %}
-		  </ul>
-		  <a href="{% url 'activity' %}" class="btn btn-primary btn-block read-more">
-        {% trans "More Activity" %}
-      </a>
-	</div>
-  </div>
-  
 {% endblock content %}
