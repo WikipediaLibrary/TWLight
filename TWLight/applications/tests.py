@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
+import urllib
 from datetime import date, timedelta
 from itertools import chain
 from unittest.mock import patch
@@ -2412,13 +2413,13 @@ class EvaluateApplicationTest(TestCase):
     def setUp(self):
 
         super(EvaluateApplicationTest, self).setUp()
-        editor = EditorFactory()
-        self.user = editor.user
+        self.editor = EditorFactory()
+        self.user = self.editor.user
 
         self.partner = PartnerFactory()
 
         self.application = ApplicationFactory(
-            editor=editor,
+            editor=self.editor,
             status=Application.PENDING,
             partner=self.partner,
             rationale="Just because",
@@ -2953,6 +2954,25 @@ class EvaluateApplicationTest(TestCase):
         # Assert one twl_team comment per pending_app.
         self.assertEqual(twl_comment_count, pending_apps.count())
 
+    def test_everything_is_rendered_as_intended(self):
+        EditorCraftRoom(self, Terms=False, editor=self.editor)
+        response = self.client.get(self.url)
+        pk = self.application.pk
+        # Users visiting EvaluateApplication are redirected to ToU if they
+        # agreed to it and redirected back
+        terms_url = reverse("terms") + "?next=" + urllib.parse.quote_plus("/applications/evaluate/{}/".format(pk))
+        self.assertRedirects(response, terms_url)
+        # Editor agrees to the terms of use
+        EditorCraftRoom(self, Terms=True, editor=self.editor, Coordinator=False)
+        # Visits the App Eval page
+        response = self.client.get(self.url)
+        # For some reason the date formatting in tests is different
+        # eg. Nov. 01, 2019
+        today = date.today().strftime("%b. %d, %Y")
+        self.assertContains(response, today)
+        self.assertContains(response, self.application.status)
+        self.assertContains(response, self.application.partner)
+        self.assertContains(response, self.application.rationale)
 
 class BatchEditTest(TestCase):
     def setUp(self):
