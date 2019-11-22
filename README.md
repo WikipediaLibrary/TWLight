@@ -17,8 +17,7 @@ Further guidance for developers, including a guide to setting the project up wit
 If you are feeling trustworthy, go ahead and pipe our script directly into a root shell on your server.
 What's the worst that could happen?
 
-`curl -fsSL https://raw.githubusercontent.com/WikipediaLibrary/TWLight/production/bin/debian_swarm_deploy.sh | sudo bash`
-
+`bash -c "$(curl -fsSL https://raw.githubusercontent.com/WikipediaLibrary/TWLight/production/bin/debian_swarm_deploy.sh)"`
 You should at least check the source at [bin/debian_swarm_deploy.sh](bin/debian_swarm_deploy.sh)
 
 Alternatively, you could follow these instructions; the staging environment is used in the following examples.
