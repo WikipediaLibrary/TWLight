@@ -18,7 +18,7 @@ curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compo
 chmod +x /usr/local/bin/docker-compose
 
 # Add twlight user
-adduser twlight
+adduser twlight --disabled-password
 usermod -a -G docker twlight
 
 # Pull TWLight code and make twlight user the owner

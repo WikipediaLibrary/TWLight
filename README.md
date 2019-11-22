@@ -13,7 +13,15 @@ The Wikipedia Library Card Platform app, available at http://wikipedialibrary.wm
 Further guidance for developers, including a guide to setting the project up with PyCharm, can be found at [docs/developer.md](docs/developer.md).
 
 ## Quick setup notes for Debian Servers
-The staging environment is used in the following examples.
+
+If you are feeling trustworthy, go ahead and pipe our script directly into a root shell on your server.
+What's the worst that could happen?
+
+`curl -fsSL https://raw.githubusercontent.com/WikipediaLibrary/TWLight/production/bin/debian_swarm_deploy.sh | sudo bash`
+
+You should at least check the source at [bin/debian_swarm_deploy.sh](bin/debian_swarm_deploy.sh)
+
+Alternatively, you could follow these instructions; the staging environment is used in the following examples.
 
 - Configure the upstream [Docker Repository](https://docs.docker.com/install/linux/docker-ce/debian/#install-using-the-repository) and install the latest version of Docker CE
 - Install [Docker Compose](https://docs.docker.com/compose/install)
