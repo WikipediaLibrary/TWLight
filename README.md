@@ -14,10 +14,12 @@ Further guidance for developers, including a guide to setting the project up wit
 
 ## Quick setup notes for Debian Servers
 
+Make sure that `/data/project/<environment>` exists. On WMF servers, this is provided by setting `mount_nfs: true` in the instance Hiera configuration.
+
 If you are feeling trustworthy, go ahead and pipe our script directly into a root shell on your server.
 What's the worst that could happen?
 
-`bash -c "$(curl -fsSL https://raw.githubusercontent.com/WikipediaLibrary/TWLight/production/bin/debian_swarm_deploy.sh)"`
+`sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/WikipediaLibrary/TWLight/production/bin/debian_swarm_deploy.sh)"`
 
 You should at least check the source at [bin/debian_swarm_deploy.sh](bin/debian_swarm_deploy.sh)
 
