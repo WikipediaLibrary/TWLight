@@ -82,7 +82,7 @@ This project can be set up via PyCharm using its support for Docker. Wikimedia d
 4. Navigate to Project > Project Interpreter, click the cog/gear icon in the top right, then Add... and select the Docker Compose tab
 - Configuration file(s) should be set to both `docker-compose.yml` and `docker-compose.override.yml`
 - Service should be set to `twlight`.
-- Set Python interpreter path to /venv/bin/python
+- Set Python interpreter path to /venv/bin/python3
 5. It may take some time for the interpreter to finish adding. If successful, you should see a long list of python packages including Django.
 6. Open the Docker tab in PyCharm's bottom bar. With the Docker entry highlighted, click the icon with three green arrows, then `Create docker-compose deployment...`
 - Compose file(s) should again be set to both `docker-compose.yml` and `docker-compose.override.yml`
