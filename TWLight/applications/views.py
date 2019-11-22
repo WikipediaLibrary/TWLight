@@ -1344,6 +1344,38 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
     template_name = "applications/confirm_renewal.html"
     form_class = RenewalForm
 
+    def dispatch(self, request, *args, **kwargs):
+        app = self.get_object()
+
+        if app.partner.is_not_available:
+            return_url = self._set_return_url(self._get_return_url())
+            # Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
+            messages.add_message(
+                request,
+                messages.WARNING,
+                _(
+                    "Cannot renew application at this time as partner is not available. "
+                    "Please check back later, or contact us for more information."
+                ),
+            )
+            return HttpResponseRedirect(return_url)
+        elif app.partner.status == Partner.WAITLIST:
+            # Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
+            messages.add_message(
+                request,
+                messages.WARNING,
+                _(
+                    "This partner "
+                    "does not have any access grants available at this time. "
+                    "You may still apply for access; your application will be "
+                    "reviewed when access grants become available."
+                ),
+            )
+
+        return super(RenewApplicationView, self).dispatch(
+            request, *args, **kwargs
+        )
+
     def get_object(self):
         app = Application.objects.get(pk=self.kwargs["pk"])
 
@@ -1372,7 +1404,7 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
         context["partner"] = self.get_object().partner
         return context
 
-    def get_form(self, form_class=None):
+    def _get_return_url(self):
         # Figure out where users should be returned to.
         return_url = reverse("users:home")  # set default
         try:
@@ -1380,7 +1412,18 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
         except KeyError:
             # If we don't have an HTTP_REFERER, we'll use the default.
             pass
+        return return_url
 
+    def _set_return_url(self, referer):
+        # We'll validate the return_url set in the previous method
+        return_url = reverse("users:home")  # default
+        domain = urlparse(referer).netloc
+        if domain in settings.ALLOWED_HOSTS:
+            return_url = referer
+        return return_url
+
+    def get_form(self, form_class=None):
+        return_url = self._get_return_url()
         if form_class is None:
             form_class = self.form_class
 
@@ -1399,19 +1442,16 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             field_params["partner"] = partner
             if application.specific_stream:
                 field_params["specific_stream"] = application.specific_stream
+        if partner.specific_title:
+            field_params["specific_title"] = application.specific_title
+
         field_params["return_url"] = return_url
-
         kwargs["field_params"] = field_params
-
         return form_class(**kwargs)
 
     def form_valid(self, form):
-        # We'll validate the return_url set in the previous method
-        return_url = reverse("users:home")  # default
         referer = form.cleaned_data["return_url"]
-        domain = urlparse(referer).netloc
-        if domain in settings.ALLOWED_HOSTS:
-            return_url = referer
+        return_url = self._set_return_url(referer)
 
         parent = True
         application = self.get_object()
@@ -1450,6 +1490,8 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             application.requested_access_duration = form.cleaned_data[
                 "requested_access_duration"
             ]
+        if partner.specific_title:
+            application.specific_title = form.cleaned_data["specific_title"]
 
         renewal = application.renew(parent)
         if not renewal:
