@@ -48,7 +48,7 @@ read TWLIGHT_EZPROXY_SECRET
 echo "Enter stack environment (eg. override \| staging \| production):"
 read TWLIGHT_STACK_ENV
 
-chown -R twlight:twlight TWLight
+chown -R twlight:twlight /srv/TWLight
 
 read -r -d '' TWLIGHT <<- EOF
 
