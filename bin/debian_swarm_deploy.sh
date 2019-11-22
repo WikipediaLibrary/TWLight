@@ -45,7 +45,7 @@ echo "Enter TWLIGHT_OAUTH_CONSUMER_SECRET:"
 read TWLIGHT_OAUTH_CONSUMER_SECRET
 echo "Enter TWLIGHT_EZPROXY_SECRET:"
 read TWLIGHT_EZPROXY_SECRET
-echo "Enter stack environment (eg. override | staging | production):"
+echo "Enter stack environment (eg. override \| staging \| production):"
 read TWLIGHT_STACK_ENV
 
 chown -R twlight:twlight TWLight
