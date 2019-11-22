@@ -2971,8 +2971,57 @@ class EvaluateApplicationTest(TestCase):
         today = date.today().strftime("%b. %d, %Y")
         self.assertContains(response, today)
         self.assertContains(response, self.application.status)
-        self.assertContains(response, self.application.partner)
+        self.assertContains(response, self.application.partner.company_name)
         self.assertContains(response, self.application.rationale)
+        # Only one 'Yes' and that too for terms of use
+        self.assertContains(response, "Yes")
+        # Personal data should be visible only to self
+        self.assertContains(response, self.user.email)
+        self.assertContains(response, self.editor.real_name)
+        self.assertContains(response, self.editor.country_of_residence)
+        self.assertContains(response, self.editor.occupation)
+        self.assertContains(response, self.editor.affiliation)
+        # Users shouldn't see some things coordinators see
+        self.assertNotContains(response, "Evaluate application")
+        self.assertNotContains(response, "select")  # form to change app status
+
+        # Now let's make the coordinator visit the same page
+        # In the meantime, editor has disagreed to the terms of use
+        self.user.userprofile.terms_of_use = False
+        self.user.userprofile.save()
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        # Not all coordinators can visit every application
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+        response = self.client.get(self.url)
+        self.assertContains(response, today)
+        self.assertContains(response, self.application.status)
+        self.assertContains(response, self.application.partner.company_name)
+        self.assertContains(response, self.application.rationale)
+        # No terms of use
+        self.assertContains(
+            response,
+            # This is copied verbatim from the app eval page.
+            # Change if necessary.
+            "Please request the applicant "
+            "agree to the site's terms of use before approving this application."
+        )
+        # Personal data should *NOT* be visible to coordinators
+        self.assertNotContains(response, self.user.email)
+        self.assertNotContains(response, self.editor.real_name)
+        self.assertNotContains(response, self.editor.country_of_residence)
+        self.assertNotContains(response, self.editor.occupation)
+        self.assertNotContains(response, self.editor.affiliation)
+        # Coordinators can evaluate application
+        self.assertContains(response, "Evaluate application")
+        self.assertContains(response, "select")  # form to change app status
+        # Some additional user info is visible to whoever has permissions to
+        # visit this page, but it's more relevant to coordinators. So, we
+        # test this page as a coordinator.
+        self.assertContains(response, self.editor.wp_username)
+        self.assertContains(response, self.editor.contributions)
+        self.assertContains(response, self.editor.wp_editcount)
+
 
 class BatchEditTest(TestCase):
     def setUp(self):
