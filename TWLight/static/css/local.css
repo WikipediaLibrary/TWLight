@@ -46,6 +46,43 @@ img.icons {
    margin: -6px 6px 0px 0px;
 }
 
+.bundle-icon {
+  height: 40px;
+  float: right;
+}
+
+.bundle-list {
+  font-size: 1.3em;
+  padding: 1em 15% 2em 10%;
+}
+
+.bundle-checks {
+  float: right;
+}
+
+.bundle-check-true {
+  color: #4cae4c;
+}
+
+.bundle-check-false {
+  color: #df2e32;
+}
+
+.bundle-check-anon {
+  color: #7a7a7a;
+}
+
+.featured-partner {
+  overflow: hidden;
+}
+
+.featured-partner-logo {
+  max-width: 100%;
+  max-height: 100%;
+  float: left;
+  padding-bottom: 10px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 767px) {
   .text-justify-sm {
@@ -111,7 +148,6 @@ header {
 .login .btn {
 	padding:10px 12px;
 	font-size: 18px;
-	margin:10px;
 }
 
 @media (min-width: 992px) {
@@ -281,6 +317,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
 #id_honeypot {
     display: none;
 }
+
 
 /* Bootstrap default labels are really hard to read. This makes them bigger
    and opens up them up a bit, while still preventing them from overlapping
@@ -476,7 +513,7 @@ A few spots just need padding instead of margin.
 
 .lead {
   text-align:center;
-  padding: 20px;
+  padding: 15px;
   border:1px solid #c9c9c9;
   border-radius:4px;
   box-shadow:1px 1px 2px #eaeaea;
@@ -490,6 +527,11 @@ A few spots just need padding instead of margin.
   box-shadow:1px 1px 2px #eaeaea;
   margin:20px 20px 0px 0px;
   min-height:350px;
+}
+
+.border-homepage {
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .read-more {
