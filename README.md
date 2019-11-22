@@ -18,6 +18,7 @@ If you are feeling trustworthy, go ahead and pipe our script directly into a roo
 What's the worst that could happen?
 
 `bash -c "$(curl -fsSL https://raw.githubusercontent.com/WikipediaLibrary/TWLight/production/bin/debian_swarm_deploy.sh)"`
+
 You should at least check the source at [bin/debian_swarm_deploy.sh](bin/debian_swarm_deploy.sh)
 
 Alternatively, you could follow these instructions; the staging environment is used in the following examples.
