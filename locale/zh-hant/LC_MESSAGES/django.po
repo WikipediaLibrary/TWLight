@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:44+0000\n"
+"PO-Revision-Date: 2019-11-25 14:53:49+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2823,15 +2823,13 @@ msgstr "維基百科圖書館借閱卡帳號的需求"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:58
-#, fuzzy
 msgid "Access to resources via The Wikipedia Library is reserved for community members who have demonstrated their commitment to the Wikimedia projects, and who will use their access to these resources to improve project content. To that end, in order to be eligible for the Wikipedia Library program, we require that you be registered for a user account on the projects. We give preference to users with at least 500 edits and six (6) months of activity, but these are not strict requirements. We ask that you do not request access to any publishers whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
-msgstr "作為初步說明，維基百科圖書館帳號是保留給行為符合維基媒體專案承諾的成員，讓他們使用對資源的取用權限來增進專案內容。就此，為了符合維基百科圖書館方案，我們會要求您是專案上的已註冊使用者。我們通常會讓至少 6 個月內有 500 次編輯紀錄的人優先，不過這些並非是嚴謹的要求。您必須至少要在其中一種語言版本維基百科裡啟用 Special:EmailUser 功能，以便當您建立帳號時，來識別成是您的「首要」維基。若一些出版方的資源您已經可以透過您本地圖書館、大學、機構，或是其它組織來免費獲得，我們請求您不要再向這些出版方提出申請，以便讓機會留給其他人。"
+msgstr "透過維基百科圖書館取用資源是保留給行為符合維基媒體專案承諾的成員，讓他們使用對資源的取用權限來增進專案內容。就此，為了符合維基百科圖書館方案，我們會要求您是專案上的已註冊使用者。我們會讓至少 6 個月內有 500 次編輯紀錄的人優先，不過這些並非是嚴謹的要求。若一些出版方的資源您已經可以透過您本地圖書館、大學、機構，或是其它組織來免費獲得，我們請求您不要再向這些出版方提出申請，以便讓機會留給其他人。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:65
-#, fuzzy
 msgid "Additionally, if you are currently blocked or banned from a Wikimedia project, applications to resources may be rejected or restricted. If you obtain a Wikipedia Library account, but a long-term block or ban is subsequently instituted against you on one of the projects, you may lose access to your Wikipedia Library account."
-msgstr "另外，如果您目前正被維基媒體專案給封鎖或禁止使用，您申請維基百科圖書館帳號可能會遭到拒絕。若您已取得維基百科圖書館帳號，但隨後在任一專案上被長期封鎖或禁止使用，您會無法存取您的維基百科圖書館帳號。"
+msgstr "另外，如果您目前正被維基媒體專案給封鎖或禁止使用，資源的申請可能會遭到拒絕或受限制。若您已取得維基百科圖書館帳號，但隨後在任一專案上被長期封鎖或禁止使用，您會無法存取您的維基百科圖書館帳號。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:72
@@ -2846,9 +2844,8 @@ msgstr "申請您的維基百科圖書館借閱卡帳號"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:82
-#, fuzzy
 msgid "In order to apply for access to a partner resource, you must provide us with certain information, which we will use to evaluate your application. If your application is approved, we may transfer the information you have given us to the publishers whose resources you wish to access. They will either contact you with the account information directly or we will send access information to you ourselves."
-msgstr "為了申請維基百科圖書館借閱卡帳號，您必須提供給我們某些資訊，讓我們可以使用來評估您的申請程序。若您的申請程序已核准，我們會轉送您提供給我們的資訊，給您所想取用資源的出版方。出版方到時會替您建立一個免費帳號，然後會直接連絡給您帳號資訊，而有時會是由我們發送帳號資訊給您。"
+msgstr "為了申請取用合作夥伴的資源，您必須提供給我們某些資訊，讓我們可以使用來評估您的申請程序。若您的申請程序已核准，我們會轉送您提供給我們的資訊，給您所想取用資源的出版方。出版方到時會直接連絡給您帳號資訊，或是由我們發送帳號資訊給您。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:89
@@ -2867,9 +2864,8 @@ msgstr "我們會請求您提供給我們一些有關您在維基媒體專案上
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:110
-#, fuzzy
 msgid "The information you provide when creating your account will be visible to you while on the site but not to others unless they are approved Wikipedia Library Coordinators, WMF Staff, or WMF Contractors who need access to this data in order to carry out their work with the Wikipedia Library, all of whom are subject to non-disclosure obligations."
-msgstr "當創建您的帳號時，您所提供的資訊在整個網站裡除了您之外，其他人皆不可見，除非他們是基於保密協議（Non-Disclosure Agreement、NDA）的所核准協調人、維基媒體基金會機構人員、或維基媒體基金會承包人，且正投入維護維基百科圖書館的人員除外。您所提供的以下有限資訊，按預設是對所有使用者公開：1）當您建立維基百科圖書館借閱卡帳號的時間；2）您所申請過取用的出版方資源；3）您向各出版方申請取用資源時的理據簡要描述。編輯者若不想公開以上資訊，可發送電子郵件給維基媒體基金會機構人員請求不公開。"
+msgstr "當創建您的帳號時，您所提供的資訊在整個網站裡除了您之外，其他人皆不可見，除非他們是被認可為維基百科圖書館協調人、維基媒體基金會機構人員、或維基媒體基金會承包人，這些需要存取資料才能進行他們在維基百科圖書館上事項的人員之外，而以上這些人皆有保密的義務。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:117
@@ -2884,9 +2880,8 @@ msgstr "您的出版方資源使用"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:127
-#, fuzzy
 msgid "In order to access an individual publisher’s resources, you must agree to that publisher’s terms of use and privacy policy. You agree that you will not violate such terms and policies in connection with your use of the Wikipedia Library. Additionally, the following activities are prohibited while accessing publisher resources through the Wikipedia Library."
-msgstr "請注意，為了取用各出版方的資源，您要同意該出版方的使用條款和隱私方針。另外，當您透過維基百科圖書館來取用出版方資源時，還會附有下列條款。"
+msgstr "為了取用各出版方的資源，您必須同意該出版方的使用條款和隱私方針。您同意您將不會違反使用維基百科圖書館的相關條款與方針。另外，當您透過維基百科圖書館來取用出版方資源時，禁止以下的行為。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:136
@@ -2913,7 +2908,7 @@ msgstr "未經許可之下，基於目的對詮釋資料進行資料探勘。例
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:160
 msgid "Using the access you receive through the Wikipedia Library for profit by selling access to your account or resources which you have through it."
-msgstr ""
+msgstr "利用您透過維基百科圖書館獲取的取用權限，來透過販售您的帳號取用權限或資源獲得牟利。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:168
@@ -2923,7 +2918,7 @@ msgstr "外部搜尋與代理服務"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:172
 msgid "Certain resources may only be accessed using an external search service, such as the EBSCO Discovery Service, or a proxy service, such as OCLC EZProxy. If you use such external search and/or proxy services, please review the applicable terms of use and privacy policies."
-msgstr ""
+msgstr "某些資源僅能透過使用外部搜尋服務來取用，例如像是 EBSCO 探索服務，或是像是 OCLC EZProxy 的代理服務。如果您使用此類的外部搜尋服務以及/或是代理服務，請檢閱適當的使用條款與隱私方針。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:179
@@ -2938,24 +2933,24 @@ msgstr "資料保存與處理"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:189
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information:  your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr ""
+msgstr "維基媒體基金會與我們的服務提供方會合法使用您的資訊，提供給維基百科圖書館服務來支援我們的慈善使命。當您申請維基百科圖書館帳號，或是使用維基百科圖書館帳號時，我們可能會定期收集以下資訊：您的使用者名稱、電子郵件位址、編輯次數、註冊日期、使用者 ID 號碼、所屬群組、任何特殊使用者權限、您的名稱、居住國家、職業、以及/或是從屬關係（若您所申請的合作夥伴有需求）、您對於您所做出貢獻的敘述性描述、以及申請取用合作夥伴資源的原因、和您同意這些使用條款的日期。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:197
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "各出版方皆為維基百科圖書館方案的成員，會在申請程序裡需要不同的特定資訊。一些出版方可能會僅需要電子郵件地址，其他則會需要更多的詳細資料，例如您的名稱、地點、職業、或是所屬機構。當您完成您的申請程序後，您僅會被您所挑選的出版方請求提供所需資訊，且各出版方僅會接收到他們所需資訊。請查看我們的<a href=\"%(partners_page)s\">合作夥伴資訊頁面</a>來了解各出版方所需資訊，以獲得取用他們的資源。"
+msgstr "各出版方皆為維基百科圖書館方案的成員，會在申請程序裡需要不同的特定資訊。一些出版方可能會僅需要電子郵件地址，其他則會需要更多的詳細資料，例如您的名稱、地點、職業、或是所屬機構。當您完成您的申請程序後，您僅會被您所挑選的出版方請求提供所需資訊，且各出版方僅會接收到他們所需資訊來提供給您取用權限。請查看我們的<a href=\"%(all_partners_url)s\">合作夥伴資訊</a>頁面來了解各出版方所需資訊，以獲得取用他們的資源。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:204
 msgid "You can browse the Wikipedia Library site without logging in, but will need to log in to apply or access proprietary partner resources. We use the data provided by you via OAuth and Wikimedia API calls to assess your application for access and to process approved requests."
-msgstr ""
+msgstr "您可以不必登入便可瀏覽維基百科圖書館網站，但若要申請或取用專有合作夥伴的資源，仍需要登入才行。我們使用依您透過 OAuth 與維基媒體 API 所調用提供的資料，來評估您對於取用的申請，並處理核准的申請。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:212
-#, fuzzy, python-format
+#, python-format
 msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
-msgstr "為了管理維基百科圖書館方案，我們會無限期保存所收集到的資料，除非您如後面所述，有意刪除您的帳號。您可以登入並前往您的<a href=\"%(user_home_url)s\">配置頁面</a>，來查看有哪些資訊相關到您的帳號。您可以隨時更新此資訊，除了是從專案裡自動檢索出的資訊之外。"
+msgstr "為了管理維基百科圖書館方案，我們會從您最近一次登入時所收集到的資料保存三年，除非您如後面所述，有意刪除您的帳號。您可以登入並前往您的<a href=\"%(profile_url)s\">配置頁面</a>，來查看有哪些資訊相關到您的帳號，並且可下載成 JSON 格式。排除是從專案裡自動檢索出的資訊以外，您可以隨時存取、更新、限制、或是刪除此資訊。若您有任何問題，或是對於處理您的資料方面有所疑慮，請聯絡 <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:219
@@ -2965,9 +2960,8 @@ msgstr "若您打算停用您的維基百科圖書館帳號，您可以電子郵
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:226
-#, fuzzy
 msgid "The Wikipedia Library is run by WMF Staff, Contractors, and approved volunteer Coordinators. The data associated with your account will be shared with the WMF staff, contractors, service providers, and volunteer coordinators who need to process the information in connection with their work for the Wikipedia Library, and who are subject to confidentiality obligations. We will also use your data for internal Wikipedia Library purposes such as distributing user surveys and account notifications, and in a depersonalized or aggregated fashion for statistical analysis and administration. Finally, we will share your information with the publishers whom you specifically select in order to provide you with access to resources. Otherwise, your information will not be shared with third parties, with the exception of the circumstances described below."
-msgstr "維基百科圖書館是由維基媒體基金會成員、承包人，以及經核准可取用您個人資訊的志工協調人所運作。與您帳號所關聯的資料會分享給維基媒體成員、承包人、服務提供者，和需處理資訊且有義務不披露出的志工協調人。除此之外，維基媒體基金會僅與您所指定挑選的出版方分享您的資料，例外情況則如下所敘。"
+msgstr "維基百科圖書館是由維基媒體基金會成員、承包人，以及經核准的志工協調人所運作。與您帳號所關聯的資料會分享給維基媒體成員、承包人、服務提供者，和需處理與維基百科圖書館事項相關資訊且有義務保密的志工協調人。我們會另外使用您的資料用於維基百科圖書館內部方面，例如分佈使用者調查、帳號通知、去人格化與整合方式的統計分析、以及管理。最後，我們會與您所指定挑選的出版方分享您的資料，以便提供您資源上的取用。排除如下所述的情況之外，您的資料不會與第三方分享。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
 #: TWLight/users/templates/users/terms.html:233
@@ -2977,13 +2971,12 @@ msgstr "當有法律上的需求或我們得到了您的許可，或著是需要
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:240
 msgid "We take the security of your personal data seriously, and take reasonable precautions to ensure your data is protected. These precautions include access controls to limit who has access to your data and security technologies to protect data stored on the server. However, we cannot guarantee the safety of your data as it is transmitted and stored."
-msgstr ""
+msgstr "我們會認真對待您個人資料方面的安全，並採取合理的預防措施，來確保您的資料是受保護的。這些預防錯誤包含限制可存取您資料對象的存取控制，與資安技術來保護儲存在伺服器上的資料。然而，我們無法保證您的資料在傳輸與儲存時的安全性。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:247
-#, fuzzy
 msgid "Please note that these terms do not control the use and handling of your data by the publishers and service providers whose resources you access or apply to access. Please read their individual privacy policies for that information."
-msgstr "另外請注意，您所取用資源的出版方，在使用並處理您的資料不受這些條款所控制。請閱讀他們自身擁有的隱私方針資訊。"
+msgstr "另外請注意，您所取用或申請資源的出版方與服務提供方，在使用並處理您的資料不受這些條款所控制。請閱讀他們自身擁有的隱私方針資訊。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:253
@@ -2993,9 +2986,8 @@ msgstr "已匯入"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:258
-#, fuzzy
 msgid "The Wikimedia Foundation is a nonprofit organization based in San Francisco, California. The Wikipedia Library program provides access to resources held by publishers in multiple countries. If you apply for a Wikipedia Library account (whether you are inside or outside of the United States), you understand that your personal data will be collected, transferred, stored, processed, disclosed and otherwise used in the U.S. as described in this privacy policy. You also understand that your information may be transferred by us from the U.S. to other countries, which may have different or less stringent data protection laws than your country, in connection with providing services to you, including evaluating your application and securing access to your chosen publishers (locations for each publisher are outlined on their respective partner information pages)."
-msgstr "維基媒體基金會是設於加利福尼亞州舊金山的非營利組織，維基媒體圖書館方案提供可取用多個國家出版方持有的資源。透過向維基百科圖書館申請帳號（無論您是位於美國境內或境外），代表您同意收集、轉移、儲存、處理、披露，以及在美國或其它地方可能會需要實行上述目的與目標的其它收集資訊用途。您也同意讓我們將您的個人資訊從美國轉移至其它國家，而那些國家與您的國家相比之下，在向您提供服務方面可能會有差別或較不嚴謹的資料保護法律，包含評估您的申請程序、與保護對您所挑選出版方的取用權限。"
+msgstr "維基媒體基金會是設於加利福尼亞州舊金山的非營利組織，維基媒體圖書館方案提供可取用多個國家出版方持有的資源。若您申請維基百科圖書館帳號（無論您是位於美國境內或境外），代表您了解您的個人資料會如隱私方針所述，在美國境內被收集、轉移、儲存、處理、披露，以及其它用途。您也了解您的資訊可能會從美國轉移至其它國家，而那些國家與您的國家相比之下，在向您提供服務方面可能會有差別或較不嚴謹的資料保護法律，包含評估您的申請程序，與保護對您所挑選出版方的取用權限（各出版方的所在地點會概述在他們各自合作夥伴資訊頁面裡）。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:267
@@ -3025,9 +3017,8 @@ msgstr "維基媒體基金會隱私方針"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
-#, fuzzy
 msgid "By checking this box and clicking “I Accept”, you agree that you have read the above terms and that you will adhere to the terms of use in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
-msgstr "透過勾選方框並點擊「我接受」，代表您接受以上隱私聲明與條款，並同意在您的申請程序、使用維基百科圖書館，以及透過維基百科圖書館方案獲得取用出版方的服務裡遵守條款。"
+msgstr "透過勾選方框並點擊「我接受」，代表您同意您已閱讀過以上條款，並且會遵守申請程序、維基百科圖書館的利用，以及透過維基百科圖書館方案獲得取用出版方服務的使用條款。"
 
 #: TWLight/users/templates/users/user_confirm_delete.html:7
 msgid "Delete all data"
