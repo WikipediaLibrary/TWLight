@@ -168,7 +168,7 @@ class Application(models.Model):
     def save(self, *args, **kwargs):
         super(Application, self).save(*args, **kwargs)
 
-    def renew(self, parent=True):
+    def renew(self):
         """
         Create a reviewable clone of this application: that is, a PENDING
         application dated today with the same user-submitted data (but with
@@ -182,23 +182,23 @@ class Application(models.Model):
                 self,
                 fields=[
                     "rationale",
+                    "specific_title",
                     "comments",
                     "agreement_with_terms_of_use",
                 ],
             )
 
-            # Status, stream (sometimes) and parent are explicitly different
-            # on the child than on the parent application. For editor and partner, we
+            # Status and parent are explicitly different on the child than
+            # than on the parent application. For editor, partner, and stream, we
             # need to pull those directly - model_to_dict will give us the pks
             # of the referenced objects, but we need the actual objects.
             data.update(
                 {
                     "status": self.PENDING,
-                    "parent": self if parent else None,
+                    "parent": self,
                     "editor": self.editor,
                     "partner": self.partner,
                     "specific_stream": self.specific_stream,
-                    "specific_title": self.specific_title,
                     "account_email": self.account_email,
                     "requested_access_duration": self.requested_access_duration,
                 }

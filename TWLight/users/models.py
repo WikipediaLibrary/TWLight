@@ -526,7 +526,7 @@ class Authorization(models.Model):
         if self.partner:
             company_name = self.partner.company_name
         else:
-            stream_name = None
+            company_name = None
 
         # In reality, we should always have an authorized user.
         if self.user:
