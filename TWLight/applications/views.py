@@ -1337,11 +1337,10 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormView):
     """
     This view takes an existing Application and creates a clone, with new
-    dates and typically a FK back to the original application. If the application is
+    dates and a FK back to the original application. If the application is
     made to a proxy partner, and (or) if the account_email field is true,
-    and (or) the partner has specific_streams, tries to get the account length
-    preference and (or) the email and (or) the new stream from the user respectively.
-    If not, just adds an additional confirmation step.
+    tries to get the account length preference and (or) the email from the
+    user respectively. If not, just adds an additional confirmation step.
     """
 
     model = Application
