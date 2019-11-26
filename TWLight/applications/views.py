@@ -53,7 +53,7 @@ from .helpers import (
     count_valid_authorizations,
     get_accounts_available,
     is_proxy_and_application_approved,
-)
+    SPECIFIC_STREAM)
 from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .models import Application
 
@@ -240,11 +240,15 @@ class _BaseSubmitApplicationView(
 
         field_params["user"] = user_fields
 
+        specific_stream = False
         for partner in partners:
             key = "partner_{id}".format(id=partner.id)
             fields = self._get_partner_fields(partner)
+            if SPECIFIC_STREAM in fields:
+                specific_stream = True
             field_params[key] = fields
-
+        if specific_stream:
+            kwargs["requested_user"] = self.request.user
         kwargs["field_params"] = field_params
 
         return form_class(**kwargs)
@@ -1438,14 +1442,8 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             field_params["account_email"] = application.account_email
         if partner.requested_access_duration:
             field_params["requested_access_duration"] = None
-        if partner.specific_stream:
-            field_params["partner"] = partner
-            if application.specific_stream:
-                field_params["specific_stream"] = application.specific_stream
-        if partner.specific_title:
-            field_params["specific_title"] = application.specific_title
-
         field_params["return_url"] = return_url
+
         kwargs["field_params"] = field_params
         return form_class(**kwargs)
 
@@ -1453,48 +1451,18 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
         referer = form.cleaned_data["return_url"]
         return_url = self._set_return_url(referer)
 
-        parent = True
         application = self.get_object()
         partner = application.partner
-        # Because users can request renewals from multiple places, we
-        # ought to double check if we're renewing the right application.
-        # We perform some checks to ensure the parent always has the
-        # same specific_stream as a the requested one. If not, we try
-        # to find out ourselves if there's an app with the same editor,
-        # partner and specific_stream attributes. If so, we set the
-        # correct parent; if not, we set no parent.
-        # *Applicable only for partners with collections*
-        if application.specific_stream and partner.specific_stream:
-            specific_stream = form.cleaned_data["specific_stream"]
-            if application.specific_stream == specific_stream:
-                application.specific_stream = specific_stream
-            else:
-                try:
-                    correct_app = Application.objects.filter(
-                        editor=self.request.user.editor,
-                        partner=partner,
-                        specific_stream=specific_stream
-                    ).latest("id")
-                    application = correct_app
-                    application.specific_stream = specific_stream
-                    logger.info("True")
-                except Application.DoesNotExist:
-                    application.specific_stream = specific_stream
-                    parent = False
-        elif application.specific_stream and not partner.specific_stream:
-            application.specific_stream = None
-
         if partner.account_email:
             application.account_email = form.cleaned_data["account_email"]
         if partner.requested_access_duration:
             application.requested_access_duration = form.cleaned_data[
                 "requested_access_duration"
             ]
-        if partner.specific_title:
-            application.specific_title = form.cleaned_data["specific_title"]
 
-        renewal = application.renew(parent)
+        renewal = application.renew()
         if not renewal:
+            # Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
             messages.add_message(
                 self.request,
                 messages.WARNING,
