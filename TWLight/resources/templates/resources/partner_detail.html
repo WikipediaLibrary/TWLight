@@ -54,7 +54,7 @@
       </div>
     {% endif %}
     {% if user|restricted %}
-      <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block"{% trans "Apply" %}</button><br />
+      <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
     {% else %}
       <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100 {% if not apply or has_open_apps %}disabled{% endif %}">{% trans "Apply" %}</a><br />
       {% if not apply or has_open_apps %}

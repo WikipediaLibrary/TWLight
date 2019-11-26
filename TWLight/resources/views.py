@@ -153,6 +153,8 @@ class PartnersDetailView(DetailView):
                 ).count()
                 if num_authorizations == partner_streams.count():
                     context["apply"] = False
+                elif context["has_open_apps"] and num_authorizations != partner_streams.count() - 1:
+                    context["has_open_apps"] = False
         return context
 
     def get_queryset(self):
