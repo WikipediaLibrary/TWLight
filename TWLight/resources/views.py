@@ -104,44 +104,55 @@ class PartnersDetailView(DetailView):
         else:
             context["median_days"] = None
 
-        # Find out if current user has applications and change the Apply
+        # Find out if current user has authorizations and change the Apply
         # button behaviour accordingly
+        context["apply"] = True
+        context["has_open_apps"] = False
         if (
             self.request.user.is_authenticated()
             and not partner.authorization_method == partner.BUNDLE
         ):
-            sent_apps = Application.objects.filter(
-                editor=self.request.user.editor,
-                status=Application.SENT,
-                partner=partner,
-            ).order_by("-date_closed")
-            open_apps = Application.objects.filter(
-                editor=self.request.user.editor,
-                status__in=(
+            user = self.request.user
+            num_apps = Application.objects.filter(
+                status__in=[
                     Application.PENDING,
                     Application.QUESTION,
-                    Application.APPROVED,
-                ),
+                    Application.APPROVED
+                ],
                 partner=partner,
-            )
-            context["user_sent_apps"] = False
-            context["user_open_apps"] = False
-            if open_apps.count() > 0:
-                context["user_open_apps"] = True
-                if open_apps.count() > 1:
-                    context["multiple_open_apps"] = True
-                else:
-                    context["multiple_open_apps"] = False
-                    context["open_app_pk"] = open_apps[0].pk
-            elif sent_apps.count() > 0:
-                # Because using sent_apps[0] may not always hold the latest application,
-                # particularly when multiple applications where made on the same day
-                for every_app in sent_apps:
-                    if every_app.is_renewable:
-                        context["latest_sent_app_pk"] = every_app.pk
-                        context["user_sent_apps"] = True
-                        break
-
+                editor=user.editor
+            ).count()
+            if num_apps > 0:
+                context["has_open_apps"] = True
+            if partner_streams.count() == 0:
+                try:
+                    Authorization.objects.get(
+                        partner=partner,
+                        user=user
+                    )
+                    context["apply"] = False
+                except Authorization.DoesNotExist:
+                    pass
+                except Authorization.MultipleObjectsReturned:
+                    logger.info("Multiple authorizations returned for partner {} and user {}").format(
+                        partner, user
+                    )
+                    # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                    messages.add_message(
+                        self.request,
+                        messages.ERROR,
+                        _(
+                            "Multiple authorizations were returned – something's wrong. "
+                            "Please contact us and don't forget to mention this message."
+                        ),
+                    )
+            else:
+                num_authorizations = Authorization.objects.filter(
+                    partner=partner,
+                    user=user
+                ).count()
+                if num_authorizations == partner_streams.count():
+                    context["apply"] = False
         return context
 
     def get_queryset(self):
