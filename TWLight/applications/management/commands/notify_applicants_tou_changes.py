@@ -31,6 +31,6 @@ class Command(BaseCommand):
                 site_id=settings.SITE_ID,
                 # Translators: This comment is added to pending applications when our terms of use change.
                 comment=_("Our terms of use have changed. "
-                          "Your applications will not be processed until you log in agree to our updated terms.")
+                          "Your applications will not be processed until you log in and agree to our updated terms.")
             )
             comment.save()
