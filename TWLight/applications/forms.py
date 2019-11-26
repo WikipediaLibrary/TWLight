@@ -26,7 +26,7 @@ from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Editor
+from TWLight.users.models import Editor, Authorization
 
 from .helpers import (
     USER_FORM_FIELDS,
@@ -81,6 +81,10 @@ class BaseApplicationForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self._validate_parameters(**kwargs)
         self.field_params = kwargs.pop("field_params")
+        try:
+            self.user = kwargs.pop("requested_user")
+        except KeyError:
+            pass
 
         super(BaseApplicationForm, self).__init__(*args, **kwargs)
 
@@ -261,8 +265,32 @@ class BaseApplicationForm(forms.Form):
                 if datum == SPECIFIC_STREAM:
                     # Only show streams for this partner
                     partner_id = int(partner[8:])
+                    queryset = Stream.objects.filter(partner_id=partner_id)
+                    if self.user:
+                        all_authorizations = Authorization.objects.filter(
+                            user=self.user,
+                            partner=partner_id,
+                            stream__isnull=False
+                        )
+                        existing_streams = []
+                        for each_authorization in all_authorizations:
+                            existing_streams.append(each_authorization.stream.id)
+                        if len(existing_streams) > len(set(existing_streams)):
+                            logger.info(
+                                "Multiple authorizations returned for the same partner {}, same stream for user {}. "
+                                "Unable to pop options.".format(
+                                    partner_id, self.user
+                                )
+                            )
+                            break
+                        else:
+                            queryset = Stream.objects.exclude(id__in=existing_streams).filter(
+                                partner_id=partner_id
+                            )
+
                     specific_stream = forms.ModelChoiceField(
-                        queryset=Stream.objects.filter(partner_id=partner_id)
+                        queryset=queryset,
+                        empty_label = None
                     )
                     self.fields[field_name] = specific_stream
                     self.fields[field_name].label = FIELD_LABELS[datum]
@@ -381,20 +409,6 @@ class RenewalForm(forms.Form):
             )
             fieldset.append("account_email")
 
-        if "partner" in self.field_params:
-            specific_stream = None
-            if "specific_stream" in self.field_params:
-                specific_stream = self.field_params["specific_stream"]
-            self.fields["specific_stream"] = forms.ModelChoiceField(
-                queryset=Stream.objects.filter(partner=self.field_params["partner"]),
-                initial=specific_stream
-            )
-            # Translators: This labels a model choice field where users will have to select the collection for a partner they wish to renew
-            self.fields["specific_stream"].label = _(
-                "The collection you wish to renew"
-            )
-            fieldset.append("specific_stream")
-
         if "requested_access_duration" in self.field_params:
             self.fields["requested_access_duration"] = forms.ChoiceField(
                 choices=Application.REQUESTED_ACCESS_DURATION_CHOICES
@@ -405,14 +419,6 @@ class RenewalForm(forms.Form):
                 " for before renewal is required"
             )
             fieldset.append("requested_access_duration")
-
-        if "specific_title" in self.field_params:
-            self.fields["specific_title"] = forms.CharField(max_length=128)
-            # Translators: When renewing an application, users may need to specify a particular book/title they want access to
-            self.fields["specific_title"].label = _(
-                "The title/book you wish to have access to"
-            )
-            fieldset.append("specific_title")
 
         self.fields["return_url"] = forms.CharField(
             widget=forms.HiddenInput, max_length=70
