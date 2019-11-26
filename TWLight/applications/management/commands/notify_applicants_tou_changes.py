@@ -1,5 +1,6 @@
 import logging
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
 from TWLight.applications.models import Application
@@ -8,6 +9,7 @@ from django_comments.models import Comment
 
 logger = logging.getLogger(__name__)
 
+twl_team, created = User.objects.get_or_create(username='TWL Team',email='wikipedialibrary@wikimedia.org')
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -29,6 +31,7 @@ class Command(BaseCommand):
             comment = Comment(
                 content_object=app,
                 site_id=settings.SITE_ID,
+                user=twl_team,
                 # Translators: This comment is added to pending applications when our terms of use change.
                 comment=_("Our terms of use have changed. "
                           "Your applications will not be processed until you log in and agree to our updated terms.")
