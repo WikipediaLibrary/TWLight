@@ -189,7 +189,7 @@ class Application(models.Model):
             )
 
             # Status and parent are explicitly different on the child than
-            # than on the parent application. For editor, partner, and stream, we
+            # on the parent application. For editor, partner, and stream, we
             # need to pull those directly - model_to_dict will give us the pks
             # of the referenced objects, but we need the actual objects.
             data.update(
