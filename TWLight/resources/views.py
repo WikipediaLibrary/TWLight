@@ -113,7 +113,6 @@ class PartnersDetailView(DetailView):
         if (
             self.request.user.is_authenticated()
             and not partner.authorization_method == partner.BUNDLE
-            and not partner.specific_title
         ):
             context["apply"] = True
             user = self.request.user
@@ -131,7 +130,8 @@ class PartnersDetailView(DetailView):
                     # User has open applications, don't show 'apply',
                     # but link to apps page
                     context["has_open_apps"] = True
-                    context["apply"] = False
+                    if not partner.specific_title:
+                        context["apply"] = False
                 try:
                     Authorization.objects.get(
                         partner=partner,
@@ -139,7 +139,8 @@ class PartnersDetailView(DetailView):
                     )
                     # User has an authorization, don't show 'apply',
                     # but link to collection page
-                    context["apply"] = False
+                    if not partner.specific_title:
+                        context["apply"] = False
                     context["has_auths"] = True
                 except Authorization.DoesNotExist:
                     pass
@@ -199,8 +200,6 @@ class PartnersDetailView(DetailView):
                                 break
                         if all_streams_have_apps:
                             context["apply"] = False
-        if partner.specific_title:
-            context["apply"] = True
         return context
 
     def get_queryset(self):
