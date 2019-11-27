@@ -13,7 +13,7 @@ twl_team, created = User.objects.get_or_create(username='TWL Team',email='wikipe
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        # Get apps with a status of PENDING or QUESTION for partners with a status of AVAILABLE or WAITLIST
+        # Get apps with a status of PENDING or QUESTION for partners with a status of AVAILABLE
         # where the editor has not agreed to the terms of use.
         pending_apps = (
             Application.objects.filter(
