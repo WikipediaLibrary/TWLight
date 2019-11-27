@@ -107,13 +107,15 @@ class PartnersDetailView(DetailView):
         # Find out if current user has authorizations/apps
         # and change the Apply button and the help text
         # behaviour accordingly
-        context["apply"] = True
+        context["apply"] = False
         context["has_open_apps"] = False
         context["has_auths"] = False
         if (
             self.request.user.is_authenticated()
             and not partner.authorization_method == partner.BUNDLE
+            and not partner.specific_title
         ):
+            context["apply"] = True
             user = self.request.user
             apps = Application.objects.filter(
                 status__in=[
@@ -197,6 +199,8 @@ class PartnersDetailView(DetailView):
                                 break
                         if all_streams_have_apps:
                             context["apply"] = False
+        if partner.specific_title:
+            context["apply"] = True
         return context
 
     def get_queryset(self):
