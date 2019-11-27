@@ -56,17 +56,27 @@
     {% if user|restricted %}
       <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
     {% else %}
-      <a href="{{ app_url }}" class="btn btn-primary text-center visible-xs z-index-100 {% if not apply or has_open_apps %}disabled{% endif %}">{% trans "Apply" %}</a><br />
-      {% if not apply or has_open_apps %}
+      <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary text-center visible-xs z-index-100 {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
+      {% if has_open_apps or has_auths %}
         {% url 'users:my_collection' user.editor.pk as collection_url %}
         {% url 'users:my_applications' user.editor.pk as applications_url %}
         <div class="panel panel-default visible-xs">
           <div class="panel-body top-border">
-            {% comment %} Translators: This message is shown when a user has active authorizations or open applications, linking to their respective collection and application pages. {% endcomment %}
-            {% blocktrans trimmed %}
-              View the status of your accesses in <strong><a href="{{ collection_url }}">Your Collection</a></strong> page, and the
-              status of your applications in <strong><a href="{{ applications_url }}">Your Applications</a></strong> page.
-            {% endblocktrans %}
+            {% if has_auths %}
+              {% comment %} Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
+              {% blocktrans trimmed %}
+                View the status of your access(es) in <strong><a href="{{ collection_url }}">Your Collection</a></strong> page.
+              {% endblocktrans %}
+              {% if has_open_apps %}
+                <hr />
+              {% endif %}
+            {% endif %}
+            {% if has_open_apps %}
+              {% comment %} Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
+              {% blocktrans trimmed %}
+                View the status of your application(s) in <strong><a href="{{ applications_url }}">Your Applications</a></strong> page.
+              {% endblocktrans %}
+            {% endif %}
           </div>
         </div>
       {% endif %}
@@ -119,17 +129,27 @@
     {% if user|restricted %}
       <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
     {% else %}
-      <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block {% if not apply or has_open_apps %}disabled{% endif %}">{% trans "Apply" %}</a><br />
-      {% if not apply or has_open_apps %}
+      <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary btn-lg hidden-xs btn-block {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
+      {% if has_open_apps or has_auths %}
         {% url 'users:my_collection' user.editor.pk as collection_url %}
         {% url 'users:my_applications' user.editor.pk as applications_url %}
         <div class="panel panel-default hidden-xs">
           <div class="panel-body top-border">
-            {% comment %} Translators: This message is shown when a user has active authorizations or open applications, linking to their respective collection and application pages. {% endcomment %}
-            {% blocktrans trimmed %}
-              View the status of your accesses in <strong><a href="{{ collection_url }}">Your Collection</a></strong> page, and the
-              status of your applications in <strong><a href="{{ applications_url }}">Your Applications</a></strong> page.
-            {% endblocktrans %}
+            {% if has_auths %}
+              {% comment %} Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
+              {% blocktrans trimmed %}
+                View the status of your access(es) in <strong><a href="{{ collection_url }}">Your Collection</a></strong> page.
+              {% endblocktrans %}
+              {% if has_open_apps %}
+                <hr />
+              {% endif %}
+            {% endif %}
+            {% if has_open_apps %}
+              {% comment %} Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
+              {% blocktrans trimmed %}
+                View the status of your application(s) in <strong><a href="{{ applications_url }}">Your Applications</a></strong> page.
+              {% endblocktrans %}
+            {% endif %}
           </div>
         </div>
       {% endif %}

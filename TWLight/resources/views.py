@@ -104,16 +104,18 @@ class PartnersDetailView(DetailView):
         else:
             context["median_days"] = None
 
-        # Find out if current user has authorizations and change the Apply
-        # button behaviour accordingly
+        # Find out if current user has authorizations/apps
+        # and change the Apply button and the help text
+        # behaviour accordingly
         context["apply"] = True
         context["has_open_apps"] = False
+        context["has_auths"] = False
         if (
             self.request.user.is_authenticated()
             and not partner.authorization_method == partner.BUNDLE
         ):
             user = self.request.user
-            num_apps = Application.objects.filter(
+            apps = Application.objects.filter(
                 status__in=[
                     Application.PENDING,
                     Application.QUESTION,
@@ -121,16 +123,22 @@ class PartnersDetailView(DetailView):
                 ],
                 partner=partner,
                 editor=user.editor
-            ).count()
-            if num_apps > 0:
-                context["has_open_apps"] = True
+            )
             if partner_streams.count() == 0:
+                if apps.count() > 0:
+                    # User has open applications, don't show 'apply',
+                    # but link to apps page
+                    context["has_open_apps"] = True
+                    context["apply"] = False
                 try:
                     Authorization.objects.get(
                         partner=partner,
                         user=user
                     )
+                    # User has an authorization, don't show 'apply',
+                    # but link to collection page
                     context["apply"] = False
+                    context["has_auths"] = True
                 except Authorization.DoesNotExist:
                     pass
                 except Authorization.MultipleObjectsReturned:
@@ -147,14 +155,48 @@ class PartnersDetailView(DetailView):
                         ),
                     )
             else:
-                num_authorizations = Authorization.objects.filter(
+                authorizations = Authorization.objects.filter(
                     partner=partner,
                     user=user
-                ).count()
-                if num_authorizations == partner_streams.count():
+                )
+                if authorizations.count() == partner_streams.count():
+                    # User has correct number of auths, don't show 'apply',
+                    # but link to collection page
                     context["apply"] = False
+                    context["has_auths"] = True
+                    if apps.count() > 0:
+                        # User has open apps, link to apps page
+                        context["has_open_apps"] = True
                 else:
-                    context["apply"] = True
+                    auth_streams = []
+                    for each_authorization in authorizations:
+                        # We are interested in the streams of existing authorizations
+                        if each_authorization.stream in partner_streams:
+                            auth_streams.append(each_authorization.stream)
+                    if auth_streams:
+                        # User has authorizations, link to collection page
+                        context["has_auths"] = True
+                    no_auth_streams = partner_streams.exclude(
+                        name__in=auth_streams
+                    )  # streams with no corresponding authorizations – we'll want to know if these have apps
+                    if apps.count() > 0:
+                        # User has open apps, link to apps page
+                        context["has_open_apps"] = True
+                        # The idea behind the logic below is to find out if we have
+                        # at least a single stream the user hasn't applied to. If so,
+                        # we show the apply button; if not, we disable it.
+                        all_streams_have_apps = True
+                        for each_no_auth_stream in no_auth_streams:
+                            stream_has_app = False
+                            for each_app in apps:
+                                if each_app.specific_stream == each_no_auth_stream:
+                                    stream_has_app = True
+                                    break
+                            if not stream_has_app:
+                                all_streams_have_apps = False
+                                break
+                        if all_streams_have_apps:
+                            context["apply"] = False
         return context
 
     def get_queryset(self):
