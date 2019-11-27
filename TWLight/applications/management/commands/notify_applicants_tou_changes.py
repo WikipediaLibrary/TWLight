@@ -18,7 +18,7 @@ class Command(BaseCommand):
         pending_apps = (
             Application.objects.filter(
                 status__in=[Application.PENDING, Application.QUESTION],
-                partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
+                partner__status__in=[Partner.AVAILABLE],
                 editor__isnull=False,
                 agreement_with_terms_of_use=False
             )
