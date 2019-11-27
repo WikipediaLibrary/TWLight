@@ -60,4 +60,3 @@ class ContactUsView(FormView):
                 _("You must be a Wikipedia editor to do that."),
             )
             raise PermissionDenied
-        return self.request.user.editor

@@ -336,7 +336,6 @@ class PartnerSuggestionView(FormView):
                 _("You must be a Wikipedia editor to do that."),
             )
             raise PermissionDenied
-        return self.request.user.editor
 
 
 class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
@@ -345,8 +344,8 @@ class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
     success_url = reverse_lazy("suggest")
 
     def delete(self, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.delete()
+        suggestion = self.get_object()
+        suggestion.delete()
         messages.add_message(
             self.request,
             messages.SUCCESS,
