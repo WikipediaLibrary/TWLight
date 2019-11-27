@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import html
 import random
 import urllib
 from datetime import date, timedelta
@@ -2952,7 +2953,7 @@ class EvaluateApplicationTest(TestCase):
         today = date.today().strftime("%b. %d, %Y")
         self.assertContains(response, today)
         self.assertContains(response, self.application.status)
-        self.assertContains(response, self.application.partner.company_name)
+        self.assertContains(response, html.escape(self.application.partner.company_name))
         self.assertContains(response, self.application.rationale)
         # Only one 'Yes' and that too for terms of use
         self.assertContains(response, "Yes")
@@ -2977,7 +2978,7 @@ class EvaluateApplicationTest(TestCase):
         response = self.client.get(self.url)
         self.assertContains(response, today)
         self.assertContains(response, self.application.status)
-        self.assertContains(response, self.application.partner.company_name)
+        self.assertContains(response, html.escape(self.application.partner.company_name))
         self.assertContains(response, self.application.rationale)
         # No terms of use
         self.assertContains(
