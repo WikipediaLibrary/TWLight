@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:33+0000\n"
+"PO-Revision-Date: 2019-11-28 16:00:52+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,9 +58,9 @@ msgstr "Din ansøgning til {partner}"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:245
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr "Du er nødt til at registrere dig på <a href=\"{url}\">{url}</a> før du ansøger."
+msgstr "Du er nødt til at registrere dig på {url} før du ansøger."
 
 #: TWLight/applications/forms.py:308
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
@@ -250,19 +250,16 @@ msgid "12 months"
 msgstr "12 måneder"
 
 #: TWLight/applications/models.py:107
-#, fuzzy
 msgid "6 months"
-msgstr "Måned"
+msgstr "6 måneder"
 
 #: TWLight/applications/models.py:107
-#, fuzzy
 msgid "3 months"
-msgstr "Måned"
+msgstr "3 måneder"
 
 #: TWLight/applications/models.py:107
-#, fuzzy
 msgid "1 month"
-msgstr "Måned"
+msgstr "1 måned"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
 #: TWLight/applications/models.py:111
@@ -343,9 +340,8 @@ msgstr "Beskæftigelse"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
-#, fuzzy
 msgid "month(s)"
-msgstr "Måned"
+msgstr "måned(er)"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:87
@@ -384,7 +380,7 @@ msgstr "Kontos tilgængelighed"
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:129
 msgid "Collection requested"
-msgstr ""
+msgstr "Samling anmodet"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:148
@@ -721,7 +717,7 @@ msgstr ""
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:174
 msgid "Select code:"
-msgstr ""
+msgstr "Vælg kode:"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:195
@@ -842,9 +838,8 @@ msgstr ""
 
 #. Translators: This labels a textfield where users can enter their email ID.
 #: TWLight/emails/forms.py:17
-#, fuzzy
 msgid "Your email"
-msgstr "Kontoens e-mail"
+msgstr "Din e-mail"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:19
@@ -955,21 +950,18 @@ msgstr ""
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:39
-#, fuzzy
 msgid "Contact info"
-msgstr "Contact"
+msgstr "Kontaktoplysninger"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:43
-#, fuzzy
 msgid "Meta page"
-msgstr "Næste side"
+msgstr "Meta-side"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:45
-#, fuzzy
 msgid "The Wikipedia Library"
-msgstr "Wikipedia bibliotek teamet"
+msgstr "Wikipedia biblioteket"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/emails/templates/emails/contact.html:52
@@ -983,21 +975,19 @@ msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:64
-#, fuzzy
 msgid "Wikipedia Library Facebook page"
-msgstr "Wikipedia bibliotek teamet"
+msgstr "Wikipedia bibliotek facebookside"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:70
-#, fuzzy
 msgid "Wikipedia Library Twitter page"
-msgstr "Wikipedia bibliotek teamet"
+msgstr "Wikipedia bibliotek twitterside"
 
 #. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
 #: TWLight/emails/templates/emails/contact_us_email-subject.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Wikipedia Library Card Platform message from %(editor_wp_username)s"
-msgstr "Wikipedia bibliotekskort platformen"
+msgstr "Wikipedia bibliotekskort platformen besked fra %(editor_wp_username)s"
 
 #. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like user or partner; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
@@ -1047,9 +1037,8 @@ msgstr ""
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
-#, fuzzy
 msgid "Your Wikipedia Library access may soon expire"
-msgstr "Din adgangskode til Wikipedia biblioteket"
+msgstr "Din adgangskode til Wikipedia biblioteket udløber måske snart"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
@@ -2096,9 +2085,8 @@ msgstr "Administrator"
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their collection.
 #: TWLight/templates/base.html:110
-#, fuzzy
 msgid "Collection"
-msgstr "Samlinger"
+msgstr "Samling"
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications.
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
@@ -2575,12 +2563,12 @@ msgstr "Koordinatoren for denne partner, hvis denne partner har en koordinator."
 #. Translators: Text beside the date on which the authorization has expired.
 #: TWLight/users/templates/users/collection_tile.html:92
 msgid "Expired on"
-msgstr ""
+msgstr "Udløb den"
 
 #. Translators: Text beside the date on which the authorization will expired.
 #: TWLight/users/templates/users/collection_tile.html:95
 msgid "Expires on"
-msgstr ""
+msgstr "Udløber den"
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:12
@@ -2593,9 +2581,8 @@ msgstr "Påbegynd en ny ansøgning"
 #: TWLight/users/templates/users/editor_detail.html:21
 #: TWLight/users/templates/users/my_applications.html:10
 #: TWLight/users/templates/users/my_collection.html:6
-#, fuzzy
 msgid "Your collection"
-msgstr "Din beskæftigelse"
+msgstr "Din samling"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:25
@@ -2608,9 +2595,8 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail.html:33
 #: TWLight/users/templates/users/my_applications.html:7
 #: TWLight/users/templates/users/my_collection.html:9
-#, fuzzy
 msgid "Your applications"
-msgstr "Alle ansøgninger"
+msgstr "Dine ansøgninger"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:37
@@ -2661,9 +2647,8 @@ msgstr "Bidrag"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #: TWLight/users/templates/users/editor_detail_data.html:43
 #: TWLight/users/templates/users/editor_detail_data.html:155
-#, fuzzy
 msgid "(update)"
-msgstr "Opdater"
+msgstr "(opdater)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:54
@@ -2694,7 +2679,7 @@ msgstr "Globale antal redigeringer *"
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
 #: TWLight/users/templates/users/editor_detail_data.html:92
 msgid "(view global user contributions)"
-msgstr ""
+msgstr "(vis globale brugerbidrag)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:102
@@ -2776,7 +2761,6 @@ msgid "You have no active proxy/bundle collections."
 msgstr ""
 
 #: TWLight/users/templates/users/preferences.html:19
-#, fuzzy
 msgid "Emails"
 msgstr "E-mail"
 

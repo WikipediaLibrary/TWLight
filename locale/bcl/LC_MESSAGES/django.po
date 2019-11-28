@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-11-18 17:34:34+0000\n"
+"PO-Revision-Date: 2019-11-28 16:00:51+0000\n"
 "X-POT-Import-Date: 2019-11-15 19:55:47+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2777,9 +2777,8 @@ msgstr ""
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
-#, fuzzy
 msgid "Last updated 12 November 2019"
-msgstr "Huring binago kan 8 Agosto 2016"
+msgstr "Huring binago kan 2 Nobyembre 2019"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28
