@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:43+0000\n"
+"PO-Revision-Date: 2019-12-02 08:52:29+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -271,7 +271,7 @@ msgstr "Вибір користувачем строку припинення д
 #: TWLight/applications/models.py:283
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr ""
+msgstr "Посилання з доступом: {access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:286
@@ -364,12 +364,12 @@ msgstr "У списку очікування"
 #. Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:105
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомо"
 
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:108
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr ""
+msgstr "Будь ласка, перш ніж продовжувати, попросіть заявника додати у своєму профілі країну проживання."
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:119
@@ -1099,7 +1099,7 @@ msgstr "Кількість схвалених заявок"
 #. Translators: This is the heading of a data file. 'Renewal percentage' refers to the percentage of authorizations renewed of all proxy authroizations.
 #: TWLight/graphs/views.py:249
 msgid "Renewal percentage"
-msgstr ""
+msgstr "Відсоток поновлень"
 
 #. Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
 #: TWLight/graphs/views.py:265
@@ -1704,7 +1704,7 @@ msgstr "В середньому, облікових записів на кори
 #. Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:501
 msgid "Users who received access (all time)"
-msgstr ""
+msgstr "Користувачі, хто отримали доступ (увесь час)"
 
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:523
@@ -1714,7 +1714,7 @@ msgstr "Середня кількість днів від подачі до рі
 #. Translators: This is the header for total accounts on a per-collection level.
 #: TWLight/resources/templates/resources/partner_detail.html:533
 msgid "Active accounts (collections)"
-msgstr ""
+msgstr "Активні обліковки (колекції)"
 
 #: TWLight/resources/templates/resources/partner_filter.html:10
 msgid "Browse Partners"
@@ -2040,22 +2040,22 @@ msgstr "Проксі"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:146
 msgid "EZProxy is a proxy server used to authenticate users for many Wikipedia Library partners. Users sign into EZProxy via the Library Card platform to verify that they are authorized users, and then the server accesses requested resources using its own IP address."
-msgstr ""
+msgstr "EZProxy — це проксі-сервер, що використовується для автентифікації користувачів у багатьох партнерів Бібліотеки Вікіпедії. Користувачі входять у систему EZProxy через Карткову платформу Бібліотеки Вікіпедії, щоб довести, що вони є авторизованими користувачами, а тоді сервер отримує запитувані ресурси, використовуючи власну IP-адресу."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:155
 msgid "You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we recommend logging in via the Library Card platform rather than going directly to the unproxied partner website. When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy."
-msgstr ""
+msgstr "Ви можете помітити, що при доступі до ресурсів через EZProxy посилання динамічно переписуються. Ось чому ми рекомендуємо входити в систему через Карткову платформу Бібліотеки Вікіпедії, а не переходити напряму на сайт партнера без проксі. Якщо вагаєтеся, перевірте, чи є у посиланні частинка «idm.oclc». Якщо є, це означає, що ви з'єднані через EZProxy."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:164
 msgid "Typically once you’ve logged in your session will remain active in your browser for up to two hours after you’ve finished searching. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser."
-msgstr ""
+msgstr "Зазвичай, як тільки ви увійшли, ваш сеанс лишатиметься активним у вашому браузері до двох годин після закінчення пошуку. Зверніть увагу, що використання EZProxy вимагає уможливлення cookies. Якщо у вас виникають проблеми, вам варто очистити кеш і перезапустити браузер."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:172
 msgid "Citation practices"
-msgstr ""
+msgstr "Практики посилань на джерела"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:176
@@ -2067,7 +2067,7 @@ msgstr "Практики використання джерел відрізня�
 #: TWLight/templates/about.html:188
 #, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a href=\"%(contact_url)s\"> contact page</a>."
-msgstr ""
+msgstr "Якщо у вас є запитання, потрібна допомога або ви хочете зголоситися допомагати іншим, будь ласка, завітайте на нашу <a href=\"%(contact_url)s\">контактну сторінку</a>."
 
 #: TWLight/templates/base.html:14 TWLight/templates/base.html:71
 msgid "The Wikipedia Library Card Platform"
@@ -2206,12 +2206,12 @@ msgstr "В середньому, облікових записів на кори
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the panel with the renewal rate for proxy partners.
 #: TWLight/templates/dashboard.html:97
 msgid "Renewal rate (proxy partners only)"
-msgstr ""
+msgstr "Рівень поновлень (лише партнери проксі)"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button to download the authorization renewal rates.
 #: TWLight/templates/dashboard.html:104
 msgid "Download renewal rates over time as CSV"
-msgstr ""
+msgstr "Завантажити рівні поновлень за весь час у форматі CSV"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
 #: TWLight/templates/dashboard.html:118
@@ -2536,7 +2536,7 @@ msgstr "Чи надсилали ми лист-нагадування про цю
 #: TWLight/users/templates/users/authorization_confirm_return.html:10
 #, python-format
 msgid "You will no longer be able to access <b>%(partner)s's</b> resources via the Library Card platform, but can request access again by clicking 'renew', if you change your mind. Are you sure you want to return your access?"
-msgstr ""
+msgstr "Ви більше не зможете отримувати доступ до ресурсів партнера <b>%(partner)s</b> через Карткову платформу Бібліотеки, але можете знову запит на доступ, натиснувши «поновити», якщо зміните свою думку. Ви впевнені, що бажаєте здати свій доступ?"
 
 #. Translators: Alt text for the Library Bundle icon shown on the collection page.
 #: TWLight/users/templates/users/collection_tile.html:17
@@ -2546,7 +2546,7 @@ msgstr "Доступ до Library Bundle"
 #. Translators: A button when clicked takes users to a confirmation page to return their access for a particular collection.
 #: TWLight/users/templates/users/collection_tile.html:22
 msgid "Click to return this access"
-msgstr ""
+msgstr "Натисніть, щоб здати свій доступ"
 
 #. Translators: Title for logo in tiles that are linked to an external website. Don't translate partner.
 #. Translators: Alt text for publisher logos on the my collection page. Don't translate partner.
@@ -2570,12 +2570,12 @@ msgstr "Код доступу для цього партнера."
 #. Translators: Text beside the date on which the authorization has expired.
 #: TWLight/users/templates/users/collection_tile.html:92
 msgid "Expired on"
-msgstr ""
+msgstr "Час вийшов"
 
 #. Translators: Text beside the date on which the authorization will expired.
 #: TWLight/users/templates/users/collection_tile.html:95
 msgid "Expires on"
-msgstr ""
+msgstr "Закінчується:"
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:12
@@ -2595,7 +2595,7 @@ msgstr "Ваш рід занять"
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:25
 msgid "A collective list of partners you are authorized to access"
-msgstr ""
+msgstr "Збірний список партнерів, на доступ до яких вас авторизовано"
 
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.
 #. Translators: Heading of the applications page where users can view all of their applications listed with other relevant info.
@@ -2610,7 +2610,7 @@ msgstr "Усі заявки"
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:37
 msgid "Both historical and current, made to various partners"
-msgstr ""
+msgstr "І минулі, і поточні, до різних партнерів"
 
 #. Translators: This is the heading for user information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:44
@@ -2746,23 +2746,23 @@ msgstr "Поновлення або не потрібно, або недосту
 #. Translators: Tab label (1 of 2) for the page listing all partners which can accessed manually.
 #: TWLight/users/templates/users/my_collection.html:13
 msgid "Manual access"
-msgstr ""
+msgstr "Ручний доступ"
 
 #. Translators: Tab label (2 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
 #: TWLight/users/templates/users/my_collection.html:15
 msgid "Proxy/bundle access"
-msgstr ""
+msgstr "Доступ через проксі/бандл"
 
 #. Translators: On the collection page (manual access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_collection.html:28
 msgid "You have no active manual access collections."
-msgstr ""
+msgstr "У вас немає активних колекцій ручного доступу."
 
 #. Translators: Heading for the section which lists all of the user's expired collection.
 #: TWLight/users/templates/users/my_collection.html:34
 #: TWLight/users/templates/users/my_collection.html:61
 msgid "Expired"
-msgstr ""
+msgstr "Термін вийшов"
 
 #. Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_collection.html:55
@@ -2799,9 +2799,8 @@ msgstr "Ви є координатором на цьому сайті. Якщо 
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
-#, fuzzy
 msgid "Last updated 12 November 2019"
-msgstr "Останнє оновлення: 8 серпня 2016 року"
+msgstr "Останнє оновлення: 12 листопада 2019 року"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28
@@ -2815,9 +2814,8 @@ msgstr "Умови використання та Заява про приват�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:41
-#, fuzzy
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows users to apply simultaneously for access to multiple publishers’ materials, and makes the administration of and access to Wikipedia Library accounts easy and efficient."
-msgstr "Бібліотека Вікіпедії — це відкритий дослідницьких хаб, через який активні редактори Вікіпедії можуть отримати доступ до необхідних надійних джерел, потрібних  для їхньої роботи, та підтримку у використанні цих джерел для покращення енциклопедії. Ми є партнерами з видавцями по всьому світу, що дозволяє користувачам вільно отримувати доступ до ресурсів, що інакше є платними. Ця платформа дозволяє користувачам одночасно подавати заявку на доступ до багатьох видавців і робить адміністрування облікових записів Бібліотеки Вікімедіа простим та ефективним."
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">Бібліотека Вікіпедії</a> має партнерські зв'язки з видавцями по всьому світу, що дозволяє користувачам отримувати доступ до ресурсів, що інакше є платними. Цей вебсайт дозволяє користувачам одночасно подавати заявку на доступ до матеріалів багатьох видавців і робить адміністрування й доступ до облікових записів Бібліотеки Вікімедіа простим та ефективним."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:48
@@ -2832,15 +2830,13 @@ msgstr "Вимоги до облікового запису у Карткові�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:58
-#, fuzzy
 msgid "Access to resources via The Wikipedia Library is reserved for community members who have demonstrated their commitment to the Wikimedia projects, and who will use their access to these resources to improve project content. To that end, in order to be eligible for the Wikipedia Library program, we require that you be registered for a user account on the projects. We give preference to users with at least 500 edits and six (6) months of activity, but these are not strict requirements. We ask that you do not request access to any publishers whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
-msgstr "Зауважимо, що облікові записи Бібліотеки Вікіпедії зарезервовані для членів спільноти, які продемонстрували свою відданість проектам Вікімедіа і використають свій доступ до ресурсів на покращення контенту проектів. Таким чином, аби мати право на участь у програмі Бібліотеки Вікіпедії, ми вимагаємо, щоб ви були зареєстровані у проектах. Ми загалом віддаємо перевагу користувачам, які мають принаймні 500 редагувань і шість (6) місяців активності, але це не строгі вимоги. У вас має бути увімкненою функція Спеціальна:Лист_користувачеві принаймні в одній версії Вікіпедії, яку ви назвете «домашньою» вікі під час створення облікового запису. Ми просимо, щоб ви не подавали запит на доступ до тих видавців, до чиїх ресурсів у вас і так є безкоштовний доступ через місцеву бібліотеку чи університет або іншу установу чи організацію, щоб ми могли надати цю можливість іншим."
+msgstr "Доступ до ресурсів через Бібліотеку Вікіпедії зарезервований для членів спільноти, які продемонстрували свою відданість проектам Вікімедіа і які використають свій доступ до ресурсів на покращення контенту проектів. Таким чином, аби мати право на участь у програмі Бібліотеки Вікіпедії, ми вимагаємо, щоб ви були зареєстровані у проектах. Ми віддаємо перевагу користувачам, які мають принаймні 500 редагувань і шість (6) місяців активності, але це не строгі вимоги. Ми просимо, щоб ви не подавали запит на доступ до тих видавців, до чиїх ресурсів у вас і так є безкоштовний доступ через місцеву бібліотеку чи університет або іншу установу чи організацію, щоб ми могли надати цю можливість іншим."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:65
-#, fuzzy
 msgid "Additionally, if you are currently blocked or banned from a Wikimedia project, applications to resources may be rejected or restricted. If you obtain a Wikipedia Library account, but a long-term block or ban is subsequently instituted against you on one of the projects, you may lose access to your Wikipedia Library account."
-msgstr "Окрім цього, якщо ви зараз заблоковані чи забанені у проекті Вікімедіа, вам можуть відмовити у створенні облікового запису у програмі Бібліотеки Вікіпедії. Якщо ви вже маєте обліковий запис Бібліотеки Вікіпедії, але на вас згодом накладено довготривале блокування чи бан в одному з проектів, ви можете втратити доступ до свого облікового запису Бібліотеки Вікіпедії."
+msgstr "Окрім цього, якщо ви зараз заблоковані чи забанені у проекті Вікімедіа, заявки на доступ можуть бути відхилені або обмежені. Якщо ви вже маєте обліковий запис Бібліотеки Вікіпедії, але на вас згодом накладено довготривале блокування чи бан в одному з проектів, ви можете втратити доступ до свого облікового запису Бібліотеки Вікіпедії."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:72
@@ -2855,32 +2851,28 @@ msgstr "Подання запиту на обліковий запис Карт�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:82
-#, fuzzy
 msgid "In order to apply for access to a partner resource, you must provide us with certain information, which we will use to evaluate your application. If your application is approved, we may transfer the information you have given us to the publishers whose resources you wish to access. They will either contact you with the account information directly or we will send access information to you ourselves."
-msgstr "Для того, щоб подати запит на обліковий запис Карткової платформи Бібліотеки Вікіпедії, ви мусите надати нам певну інформацію, яку ми використаємо для оцінки вашої заявки. Якщо вашу заявку буде схвалено, ми можемо передати інформацію, отриману від вас, видавцям, до ресурсів яких ви хочете отримати доступ. Видавець далі може створити для вас безкоштовний обліковий запис. У більшості випадків, вони зв'яжуться з вами і нададуть інформацію про обліковий запис, хоча інколи ми надішлемо вам інформацію про доступ самостійно."
+msgstr "Для того, щоб подати запит на доступ до партнерських ресурсів, ви мусите надати нам певну інформацію, яку ми використаємо для оцінки вашої заявки. Якщо вашу заявку буде схвалено, ми можемо передати інформацію, отриману від вас, видавцям, до ресурсів яких ви хочете отримати доступ. Вони зв'яжуться з вами й або вони нададуть вам інформацію про обліковий запис, або ми надішлемо вам інформацію про доступ самостійно."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:89
-#, fuzzy
 msgid "In addition to the basic information you provide to us, our system will retrieve some information directly from the Wikimedia projects: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights."
-msgstr "Окрім базової інформації, яку ви нам надаєте, наша система отримує деяку інформацію прямо з проектів Вікімедіа: ваше ім'я користувача, електронну пошту, кількість редагувань, дату реєстрації, ідентифікатор користувача, групи, до яких ви належите, та спеціальні права користувача. Щоразу, коли ви входите у Карткову платформу Бібліотеки Вікіпедії, ця інформація автоматично оновлюється."
+msgstr "Окрім базової інформації, яку ви нам надаєте, наша система отримує деяку інформацію прямо з проектів Вікімедіа: ваше ім'я користувача, електронну пошту, кількість редагувань, дату реєстрації, ідентифікатор користувача, групи, до яких ви належите, та спеціальні права користувача."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:96
 msgid "Each time you log in to the Wikipedia Library Card Platform, this information will be automatically updated."
-msgstr ""
+msgstr "Щоразу, коли ви входите у Карткову платформу Бібліотеки Вікіпедії, ця інформація автоматично оновлюється."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:103
-#, fuzzy
 msgid "We will ask you to provide us with some information about your history of contributions to the Wikimedia projects. Information on contribution history is optional, but will greatly assist us in evaluating your application."
-msgstr "Ми просимо вас назвати свою домашню вікі (або будь-який розділ Вікіпедії, де у вас увімкнена можливість надіслати вам електронного листа), і наостанок, надати нам певну інформацію про історію вашого внеску до проектів Вікімедіа. Інформація про історію внеску є необов'язковою, але вона дуже допомагає нам під час оцінки вашої заявки."
+msgstr "Ми просимо вас надати нам певну інформацію про історію вашого внеску до проектів Вікімедіа. Інформація про історію внеску є необов'язковою, але вона дуже допомагає нам під час оцінки вашої заявки."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:110
-#, fuzzy
 msgid "The information you provide when creating your account will be visible to you while on the site but not to others unless they are approved Wikipedia Library Coordinators, WMF Staff, or WMF Contractors who need access to this data in order to carry out their work with the Wikipedia Library, all of whom are subject to non-disclosure obligations."
-msgstr "Інформація, яку ви надаєте під час створення свого облікового запису, буде видима вам на сайті, але не іншим користувачам — окрім координаторів, працівників ФВМ чи підрядників ФВМ, що підписали угоду про нерозголошення і працюють з Бібліотекою Вікіпедії. Публічна усім користувачам за замовчуванням така інформація, яку ви надаєте: 1) коли ви створили обліковий запис у Картковій платформі Бібліотеки Вікіпедії; 2) на доступ до ресурсів яких видавців ви подавали запит; 3) короткий опис вашого обґрунтування отримання доступу для кожного партнера, до якого ви подаєтеся. Редактори, які не бажають, щоб ця інформація була публічною, можуть надати необхідну інформацію щодо запиту працівникам ФВМ і отримати доступ приватно."
+msgstr "Інформація, яку ви надаєте під час створення свого облікового запису, буде видима вам на сайті, але не іншим — окрім координаторів Бібліотеки Вікіпедії, працівників ФВМ чи підрядників ФВМ, яким потрібен доступ до цих даних, щоб виконувати свою роботу, пов'язану з Бібліотекою Вікіпедії; усі вони підписали угоду про нерозголошення."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:117
@@ -2895,20 +2887,18 @@ msgstr "Ваше використання ресурсів видавця"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:127
-#, fuzzy
 msgid "In order to access an individual publisher’s resources, you must agree to that publisher’s terms of use and privacy policy. You agree that you will not violate such terms and policies in connection with your use of the Wikipedia Library. Additionally, the following activities are prohibited while accessing publisher resources through the Wikipedia Library."
-msgstr "Будь ласка, зверніть увагу, що для отримання доступу до ресурсів окремого видавця, ви погоджуєтеся дотримуватися умов використання та політики приватності цього видавця. Окрім цього, ваш доступ до ресурсів видавця через Бібліотеку Вікіпедії супроводжується такими умовами."
+msgstr "Для отримання доступу до ресурсів окремого видавця, ви мусите погодитися дотримуватися умов використання та політики приватності цього видавця. Ви погоджуєтеся, що не порушуватимете такі умови та політики під час свого використання Бібліотеки Вікіпедії. Окрім цього, під час доступу до ресурсів видавця через Бібліотеку Вікіпедії заборонена наступна діяльність."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:136
-#, fuzzy
 msgid "Sharing your usernames, passwords, or any access codes for publisher resources with others;"
-msgstr "Ви повинні погодитися не ділитися своїми іменами користувача і паролями для доступу до ресурсів видавця з іншими людьми."
+msgstr "Передача своїх імен користувача, паролів чи будь-яких кодів доступу до ресурсів видавця іншим людям;"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:142
 msgid "Automatically scraping or downloading restricted content from publishers;"
-msgstr ""
+msgstr "Автоматичне зчитування чи завантаження обмеженого контенту із сайтів видавців;"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:148
@@ -2925,22 +2915,22 @@ msgstr "Використовувати метадані без дозволу, �
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:160
 msgid "Using the access you receive through the Wikipedia Library for profit by selling access to your account or resources which you have through it."
-msgstr ""
+msgstr "Використання доступу, який ви отримуєте через Бібліотеку Вікіпедії, з метою отримання прибутку від продажу доступу до вашого облікового запису чи ресурсів, які ви через нього маєте."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:168
 msgid "External Search and Proxy Services"
-msgstr ""
+msgstr "Зовнішній пошук та сервіси проксі"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:172
 msgid "Certain resources may only be accessed using an external search service, such as the EBSCO Discovery Service, or a proxy service, such as OCLC EZProxy. If you use such external search and/or proxy services, please review the applicable terms of use and privacy policies."
-msgstr ""
+msgstr "Певні ресурси можна відкрити лише з використанням зовнішнього пошукового сервісу, такого як EBSCO Discovery Service, або проксі, наприклад, OCLC EZProxy. Якщо ви використовуєте подібні зовнішні пошукові та/або проксі сервіси, будь ласка, перегляньте відповідні умови використання та політику приватності."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:179
 msgid "In addition, if you use OCLC EZProxy, please note that you may not use it for commercial purposes."
-msgstr ""
+msgstr "Окрім цього, якщо ви використовуєте OCLC EZProxy, то зверніть увагу, що ви не можете користуватися цим у комерційних цілях."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:185
@@ -2950,24 +2940,24 @@ msgstr "Зберігання та обробка даних"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:189
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information:  your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr ""
+msgstr "Фонд Вікімедіа та провайдери наших послуг використовують вашу інформацію із законною метою надавати послуги Бібліотеки Вікіпедії на підтримку нашої благодійної мети. Коли ви подаєте заявку на обліковий запис Бібліотеки Вікіпедії або використовуєте свій обліковий запис Бібліотеки Вікіпедії, ми можемо регулярно збирати таку інформацію: ваше ім'я користувача, адресу електронної пошти, кількість редагувань, дату реєстрації, ID-номер користувача, групи, до яких ви належите, та будь-які спеціальні права; ваше ім'я, країну проживання, рід занять та/або афіліацію, якщо цього вимагає партнер, до якого ви хочете отримати доступ; вашу розповідь про свій внесок та причини подачі заявки на доступ до партнерських ресурсів; а також дату, коли ви погодилися з цими умовами використання."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:197
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "Кожен видавець, який є членом програми Бібліотеки Вікіпедії, вимагає іншої інформації у заявці. Деякі видавці можуть запитувати лише адресу електронної пошти, тоді як інші запитують більш детальні дані, такі як ваше ім'я, розташування, рід занять чи інституційна приналежність. Коли ви заповнюєте свою заявку, вас просять надати лише ту інформацію, якої потребують обрані вами видавці, і кожен видавець отримає лише ту інформацію, якої він потребує. Будь ласка, перегляньте наші <a href=\"%(partners_page)s\">сторінки інформації про партнерів</a>, щоб дізнатися більше про те, яку інформацію вимагає кожен видавець для отримання доступу до їхніх ресурсів."
+msgstr "Кожен видавець, який є членом програми Бібліотеки Вікіпедії, вимагає іншої інформації у заявці. Деякі видавці можуть запитувати лише адресу електронної пошти, тоді як інші запитують більш детальні дані, такі як ваше ім'я, розташування, рід занять чи інституційна приналежність. Коли ви заповнюєте свою заявку, вас просять надати лише ту інформацію, якої потребують обрані вами видавці, і кожен видавець отримає лише ту інформацію, якої він потребує для надання вам доступу. Будь ласка, перегляньте наші сторінки <a href=\"%(all_partners_url)s\">інформації про партнерів</a>, щоб дізнатися більше про те, яку інформацію вимагає кожен видавець для отримання доступу до їхніх ресурсів."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:204
 msgid "You can browse the Wikipedia Library site without logging in, but will need to log in to apply or access proprietary partner resources. We use the data provided by you via OAuth and Wikimedia API calls to assess your application for access and to process approved requests."
-msgstr ""
+msgstr "Ви можете переглядати сайт Бібліотеки Вікіпедії без входу в систему, але вам треба буде увійти в систему, щоб подати заявку або отримати доступ до пропрієтарних партнерських ресурсів. Ми використовуємо надані вами дані через OAuth та виклики Вікімедіа API для оцінки вашої заявки на доступ та обробки схвалених запитів."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:212
-#, fuzzy, python-format
+#, python-format
 msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
-msgstr "З метою адміністрування програми Бібліотеки Вікіпедії, ми зберігаємо дані, які збираємо, необмежений час, поки ви не вилучите свій обліковий запис, як описано нижче. Ви можете увійти і перейти до своєї <a href=\"%(user_home_url)s\">сторінки профілю</a>, щоб переглянути інформацію, пов'язану з вашим обліковим записом. Ви можете оновити цю інформацію у будь-який час, окрім інформації, яка автоматично оновлюється з проектів."
+msgstr "З метою адміністрування програми Бібліотеки Вікіпедії, ми зберігаємо програмні дані, які збираємо від вас, упродовж трьох років після вашого останнього входу в систему, поки ви не вилучите свій обліковий запис, як описано нижче. Ви можете увійти і перейти до <a href=\"%(profile_url)s\">своєї сторінки профілю</a>, щоб переглянути інформацію, пов'язану з вашим обліковим записом, і можете завантажити її у форматі JSON. Ви можете відкривати, оновлювати, обмежувати чи вилучати цю інформацію у будь-який час, окрім інформації, яка автоматично оновлюється з проектів. Якщо у вас є будь-які запитання чи застереження щодо обробки ваших даних, будь ласка, напишіть на <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:219
@@ -2977,26 +2967,23 @@ msgstr "Якщо ви вирішите відімкнути свій облік�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:226
-#, fuzzy
 msgid "The Wikipedia Library is run by WMF Staff, Contractors, and approved volunteer Coordinators. The data associated with your account will be shared with the WMF staff, contractors, service providers, and volunteer coordinators who need to process the information in connection with their work for the Wikipedia Library, and who are subject to confidentiality obligations. We will also use your data for internal Wikipedia Library purposes such as distributing user surveys and account notifications, and in a depersonalized or aggregated fashion for statistical analysis and administration. Finally, we will share your information with the publishers whom you specifically select in order to provide you with access to resources. Otherwise, your information will not be shared with third parties, with the exception of the circumstances described below."
-msgstr "Бібліотекою Вікіпедії опікуються працівники і підрядники Фонду Вікімедіа, а також схвалені координатори-волонтери, які можуть мати доступ до вашої інформації. Дані, пов'язані з вашим обліковим записом, будуть надані працівникам Вікімедіа, підрядникам, надавачам послуг та координаторам-волонтерам, яким необхідно обробити інформацію і які зв'язані зобов'язаннями про нерозкриття. Окрім цього, Фонд Вікімедіа надаватиме вашу інформацію лише видавцям, яких ви вибираєте, за винятком обставин, описаних нижче."
+msgstr "Бібліотекою Вікіпедії опікуються працівники і підрядники Фонду Вікімедіа, а також схвалені координатори-волонтери, які можуть мати доступ до вашої інформації. Дані, пов'язані з вашим обліковим записом, будуть надані працівникам ФВМ, підрядникам, надавачам послуг та координаторам-волонтерам, яким необхідно обробити інформацію у рамках своєї роботи на Бібліотеку Вікіпедії і які зв'язані зобов'язаннями конфіденційності. Ми також використовуватимемо ваші дані у внутрішніх цілях Бібліотеки Вікіпедії, таких як розсилання опитувань користувачів та сповіщень облікових записів, а також у знеособленому чи агрегованому вигляді для статистичного аналізу й адміністрування. І наостанок, ми надаватимемо вашу інформацію видавцям, яких ви конкретно вибираєте, щоб вони могли надати вам доступ до ресурсів. В іншому випадку, ваша інформація не буде надана третім сторонам, за винятком обставин, описаних нижче."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
 #: TWLight/users/templates/users/terms.html:233
-#, fuzzy
 msgid "We may disclose any collected information when required by law, when we have your permission, when needed to protect our rights, privacy, safety, users, or the general public, and when necessary to enforce these terms, WMF’s general <a href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Terms of Use</a>, or any other WMF policy."
-msgstr "Ми можемо розкрити будь-яку зібрану інформацію, коли це вимагається законом, коли ми маємо ваш дозвіл, коли нам потрібно захистити наші права, приватність, безпеку, користувачів або широку громадськість і коли необхідно здійснити ці умови, наші загальні Умови використання або будь-яку іншу політику Вікімедіа."
+msgstr "Ми можемо розкрити будь-яку зібрану інформацію, коли це вимагається законом, коли ми маємо ваш дозвіл, коли нам потрібно захистити наші права, приватність, безпеку, користувачів або широку громадськість і коли необхідно здійснити ці умови, загальні <a href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use/uk\">Умови використання</a> ФВМ або будь-яку іншу політику ФВМ."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:240
 msgid "We take the security of your personal data seriously, and take reasonable precautions to ensure your data is protected. These precautions include access controls to limit who has access to your data and security technologies to protect data stored on the server. However, we cannot guarantee the safety of your data as it is transmitted and stored."
-msgstr ""
+msgstr "Ми серйозно ставимося до безпеки ваших персональних даних і здійснюємо розумні запобіжні заходи захисту ваших даних. Ці заходи включають контроль доступу з обмеженням тих, хто може отримати доступ до ваших даних, та безпекові технології захисту даних, що зберігаються на сервері. Однак ми не можемо гарантувати безпеку ваших даних у процесі передачі чи зберігання."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:247
-#, fuzzy
 msgid "Please note that these terms do not control the use and handling of your data by the publishers and service providers whose resources you access or apply to access. Please read their individual privacy policies for that information."
-msgstr "Будь ласка, візьміть до уваги, що ці умови не контролюють використання та обробку ваших даних видавцями, доступ до ресурсів яких ви отримуєте. Будь ласка, почитайте їхні індивідуальні правила приватності, щоб отримати цю інформацію."
+msgstr "Будь ласка, візьміть до уваги, що ці умови не контролюють використання та обробку ваших даних видавцями та провайдерами послуг, доступ до ресурсів яких ви отримуєте або подаєте заявку на отримання. Будь ласка, почитайте їхні індивідуальні правила приватності, щоб отримати цю інформацію."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:253
@@ -3006,9 +2993,8 @@ msgstr "Імпортовано"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:258
-#, fuzzy
 msgid "The Wikimedia Foundation is a nonprofit organization based in San Francisco, California. The Wikipedia Library program provides access to resources held by publishers in multiple countries. If you apply for a Wikipedia Library account (whether you are inside or outside of the United States), you understand that your personal data will be collected, transferred, stored, processed, disclosed and otherwise used in the U.S. as described in this privacy policy. You also understand that your information may be transferred by us from the U.S. to other countries, which may have different or less stringent data protection laws than your country, in connection with providing services to you, including evaluating your application and securing access to your chosen publishers (locations for each publisher are outlined on their respective partner information pages)."
-msgstr "Фонд Вікімедіа є неприбутковою організацією, розташованою у Сан-Франциско (Каліфорнія). Програма Бібліотеки Вікіпедії надає доступ до ресурсів від видавців у багатьох країнах. Подаючи запит на обліковий запис Бібліотеки Вікіпедії (не залежно від того, чи ви у Сполучених Штатах, чи поза ними), ви погоджуєтеся на збір, передачу, зберігання, обробку, розкриття та інше використання зібраної інформації у Сполучених Штатах та інших місцях, якщо це необхідно для виконання цілей і завдань, описаних вище. Ви також погоджуєтеся на передачу вашої інформації від нас зі США до інших країни, які можуть мати інші або менш строгі закони щодо захисту даних, ніж ті, що діють у вашій країні, у зв'язку з наданням вам послуг, включно з оцінкою вашої заявки та забезпечення доступ до обраних видавців."
+msgstr "Фонд Вікімедіа є неприбутковою організацією, розташованою у Сан-Франциско (Каліфорнія). Програма Бібліотеки Вікіпедії надає доступ до ресурсів від видавців у багатьох країнах. Якщо ви подаєте запит на обліковий запис Бібліотеки Вікіпедії (не залежно від того, чи ви у Сполучених Штатах, чи поза ними), ви розумієте, що ваші персональні дані будуть збиратися, передаватися, зберігатися, оброблятися, розкриватися та інакше використовуватися у США, як це описано у цій політиці приватності. Ви також розумієте, що ваша інформація може бути передана нами зі США до інших країн, які можуть мати інші або менш строгі закони щодо захисту даних, ніж ті, що діють у вашій країні, у зв'язку з наданням вам послуг, включно з оцінкою вашої заявки та забезпечення доступ до обраних видавців (розташування кожного видавця вказана на відповідній інформаційній сторінці партнера)."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:267
@@ -3018,7 +3004,7 @@ msgstr "Будь ласка, зверніть увагу, що у випадку
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:276
 msgid "See also the <a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Wikimedia Foundation Privacy Policy</a>."
-msgstr ""
+msgstr "Див. також <a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Політику конфіденційності Фонду Вікімедіа</a>."
 
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:285
@@ -3038,9 +3024,8 @@ msgstr "Політика приватності Фонду Вікімедіа"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
-#, fuzzy
 msgid "By checking this box and clicking “I Accept”, you agree that you have read the above terms and that you will adhere to the terms of use in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
-msgstr "Ставляючи цю галочку і натискаючи «Я погоджуюся», ви погоджуєтеся з викладеними вище заявою про приватність та умовами, а також погоджуєтеся дотримуватися їх у своїй заявці та використанні Бібліотеки Вікіпедії і послуг видавців, до яких ви отримуєте доступ завдяки програмі Бібліотеки Вікіпедії."
+msgstr "Ставлячи цю галочку і натискаючи «Я погоджуюся», ви погоджуєтеся, що прочитали викладені вище умови і що будете дотримуватися умов використання у своїй заявці та використанні Бібліотеки Вікіпедії і послуг видавців, до яких ви отримуєте доступ завдяки програмі Бібліотеки Вікіпедії."
 
 #: TWLight/users/templates/users/user_confirm_delete.html:7
 msgid "Delete all data"

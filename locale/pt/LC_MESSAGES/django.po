@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-11-28 16:01:00+0000\n"
+"PO-Revision-Date: 2019-12-02 08:52:26+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2920,7 +2920,7 @@ msgstr ""
 #: TWLight/users/templates/users/terms.html:197
 #, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "Cada editora que é membro do programa Biblioteca da Wikipédia requer informação específica na candidatura. Algumas editoras podem pedir só um endereço de correio eletrónico, enquanto outras pedem dados mais detalhados, como o seu nome, localização, ocupação ou filiação em instituições. Quando preenche a sua candidatura, só lhe será pedida a informação exigida pelas editoras que escolheu, e cada editora só receberá a informação que requer para lhe conceder acesso. Consulte as nossas páginas de <a href=\"%(all_partners_url)s\">informações para parceiros</a> para saber que informação é exigida por cada editora para obter acesso aos recursos da mesma."
+msgstr "Cada editora que é membro do programa Biblioteca da Wikipédia requer informação específica na candidatura. Algumas editoras podem pedir só um endereço de correio eletrónico, enquanto outras pedem dados mais detalhados, como o seu nome, localização, ocupação ou filiação em instituições. Quando preenche a sua candidatura, só lhe será pedida a informação exigida pelas editoras que escolheu, e cada editora só receberá a informação que requer para lhe conceder acesso. Consulte as nossas páginas de <a href=\"%(all_partners_url)s\">informações de parceiros</a> para saber que informação é exigida por cada editora para obter acesso aos recursos da mesma."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:204
@@ -2946,9 +2946,8 @@ msgstr "A Biblioteca da Wikipédia é administrada por funcionários da Wikimedi
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
 #: TWLight/users/templates/users/terms.html:233
-#, fuzzy
 msgid "We may disclose any collected information when required by law, when we have your permission, when needed to protect our rights, privacy, safety, users, or the general public, and when necessary to enforce these terms, WMF’s general <a href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Terms of Use</a>, or any other WMF policy."
-msgstr "Poderemos divulgar informações coligidas quando tal for exigido por lei, quando tivermos a sua autorização, quando necessário para proteger os nossos direitos, privacidade, segurança, utilizadores ou o público em geral, e quando necessário para aplicar estas condições, as nossas condições de utilização gerais ou qualquer outra norma da Wikimedia."
+msgstr "Poderemos divulgar informações coligidas quando tal for exigido por lei, quando tivermos a sua autorização, quando necessário para proteger os nossos direitos, privacidade, segurança, utilizadores ou o público em geral, e quando necessário para aplicar estas condições, as <a href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">condições de utilização</a> gerais da WMF ou qualquer outra norma da WMF."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:240
@@ -2957,9 +2956,8 @@ msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:247
-#, fuzzy
 msgid "Please note that these terms do not control the use and handling of your data by the publishers and service providers whose resources you access or apply to access. Please read their individual privacy policies for that information."
-msgstr "Note, por favor, que estas condições não controlam o uso e o tratamento dos seus dados pelas editoras a cujos recursos acede. Para obter essa informação leia as normas de privacidade da respetiva editora."
+msgstr "Note, por favor, que estas condições não controlam o uso e o tratamento dos seus dados pelas editoras e fornecedores de serviços a cujos recursos acede ou se candidata a aceder. Para obter essa informação leia as normas de privacidade da entidade respetiva."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:253
@@ -2968,9 +2966,8 @@ msgstr "Nota importante"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:258
-#, fuzzy
 msgid "The Wikimedia Foundation is a nonprofit organization based in San Francisco, California. The Wikipedia Library program provides access to resources held by publishers in multiple countries. If you apply for a Wikipedia Library account (whether you are inside or outside of the United States), you understand that your personal data will be collected, transferred, stored, processed, disclosed and otherwise used in the U.S. as described in this privacy policy. You also understand that your information may be transferred by us from the U.S. to other countries, which may have different or less stringent data protection laws than your country, in connection with providing services to you, including evaluating your application and securing access to your chosen publishers (locations for each publisher are outlined on their respective partner information pages)."
-msgstr "A Wikimedia Foundation é uma organização sem fins lucrativos com sede em São Francisco, na Califórnia. O programa Biblioteca da Wikipédia oferece acesso a recursos detidos por editoras em vários países. Ao candidatar-se a uma conta na Biblioteca da Wikipédia (quer se encontre nos Estados Unidos ou fora) concorda com a recolha, transferência, armazenamento, processamento, divulgação e outros usos da informação recolhida nos Estados Unidos e noutros lugares, conforme necessário para os fins e objetivos discutidos acima. Também concorda com a transferência da sua informação dos EUA para outros países, que podem ter uma legislação de proteção de dados diferente ou menos restritiva do que o seu país, com o objetivo de lhe prestar serviços, incluindo a avaliação da sua candidatura e a obtenção do acesso às editoras que escolheu."
+msgstr "A Wikimedia Foundation é uma organização sem fins lucrativos com sede em São Francisco, na Califórnia. O programa Biblioteca da Wikipédia oferece acesso a recursos detidos por editoras em vários países. Se se candidatar a uma conta na Biblioteca da Wikipédia (quer se encontre nos Estados Unidos ou fora) compreende que os seus dados pessoais serão recolhidos, transferidos, armazenados, processados, divulgados e sofrerão outros tratamentos nos Estados Unidos tal como é descrito nestas normas de privacidade. Também compreende que as suas informações poderão ser transferidas por nós dos EUA para outros países, que podem ter uma legislação de proteção de dados diferente ou menos restritiva do que o seu país, com o objetivo de lhe prestar serviços, incluindo a avaliação da sua candidatura e a obtenção do acesso às editoras que escolheu (as localizações de cada editora são descritas nas respetivas páginas de informação do parceiro)."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:267
@@ -2999,9 +2996,8 @@ msgstr "Wikimedia Foundation"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
-#, fuzzy
 msgid "By checking this box and clicking “I Accept”, you agree that you have read the above terms and that you will adhere to the terms of use in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
-msgstr "Ao marcar esta caixa e clicar em \"Aceito\", aceita a declaração de privacidade e as condições acima, e concorda em aderir a elas na sua candidatura e uso da Biblioteca da Wikipédia e dos serviços das editoras a que ganhar acesso através do programa Biblioteca da Wikipédia."
+msgstr "Ao marcar esta caixa e clicar em \"Aceito\", declara ter lido as condições acima e concorda em aderir às condições de utilização na sua candidatura e uso da Biblioteca da Wikipédia e dos serviços das editoras a que ganhar acesso através do programa Biblioteca da Wikipédia."
 
 #: TWLight/users/templates/users/user_confirm_delete.html:7
 msgid "Delete all data"
