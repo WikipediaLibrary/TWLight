@@ -333,6 +333,23 @@ class Application(models.Model):
                 )
         return user_instructions
 
+    def get_authorization(self):
+        """
+        For a given application, find an authorization for this partner-stream-editor, if possible.
+        """
+        authorization = Authorization.objects.filter(
+                partner=self.partner, user=self.editor.user
+            )
+        if self.specific_stream:
+            authorization = authorization.filter(
+                stream=self.specific_stream
+            )
+
+        if authorization.exists():
+            return authorization[0]
+        else:
+            return None
+
     def is_instantly_finalized(self):
         """
         Check if this application is to a partner or collection for which

@@ -897,6 +897,9 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         partner_coordinator = self.request.user == self.object.partner.coordinator
         superuser = self.request.user.is_superuser
         context["partner_coordinator"] = partner_coordinator or superuser
+        existing_authorization = app.get_authorization()
+        if app.parent and existing_authorization:
+            context["previous_auth_expiry_date"] = existing_authorization.date_expires
 
         return context
 
