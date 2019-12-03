@@ -2878,6 +2878,8 @@ class EvaluateApplicationTest(TestCase):
                     site_id=settings.SITE_ID,
                     user=twl_team,
             ).count()
+        # Run the command again, which should not add more comments to outstanding apps.
+        call_command("notify_applicants_tou_changes")
         # Assert that we have at least one pending app; if other tests leave no pending_apps, we want to fail here
         # because that might mask a problem with the command that causes it to leave no comments.
         self.assertGreater(pending_apps.count(), 0)
