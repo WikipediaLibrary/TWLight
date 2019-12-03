@@ -20,7 +20,7 @@ class Command(BaseCommand):
                 status__in=[Application.PENDING, Application.QUESTION],
                 partner__status__in=[Partner.AVAILABLE],
                 editor__isnull=False,
-                editor__user__terms_of_use=False
+                editor__user__userprofile__terms_of_use=False
             )
                 .exclude(editor__user__groups__name="restricted")
                 .order_by("status", "partner", "date_created")
