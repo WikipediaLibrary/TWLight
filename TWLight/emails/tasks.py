@@ -248,11 +248,16 @@ def send_comment_notification_emails(sender, **kwargs):
 
     for user in users:
         if user:
+            # Allow emails to be sent to system users with no editor object.
+            if user.editor:
+                username = user.editor.wp_username
+            else:
+                username = user.username
             email = CommentNotificationEmailOthers()
             email.send(
                 user.email,
                 {
-                    "user": user.editor.wp_username,
+                    "user": username,
                     "lang": user.userprofile.lang,
                     "app": app,
                     "app_url": app_url,
