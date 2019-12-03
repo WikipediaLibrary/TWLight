@@ -26,14 +26,19 @@ class Command(BaseCommand):
                 .order_by("status", "partner", "date_created")
         )
 
-        # Loop through the apps and add a comment.
+        # Loop through the apps and add a comment if twl_team hasn't commented already.
         for app in pending_apps:
-            comment = Comment(
-                content_object=app,
-                site_id=settings.SITE_ID,
-                user=twl_team,
-                # Translators: This comment is added to pending applications when our terms of use change.
-                comment=_("Our terms of use have changed. "
-                          "Your applications will not be processed until you log in and agree to our updated terms.")
-            )
-            comment.save()
+            if Comment.objects.filter(
+                    object_pk=str(app.pk),
+                    site_id=settings.SITE_ID,
+                    user=twl_team,
+            ).count() == 0:
+                comment = Comment(
+                    content_object=app,
+                    site_id=settings.SITE_ID,
+                    user=twl_team,
+                    # Translators: This comment is added to pending applications when our terms of use change.
+                    comment=_("Our terms of use have changed. "
+                              "Your applications will not be processed until you log in and agree to our updated terms.")
+                )
+                comment.save()
