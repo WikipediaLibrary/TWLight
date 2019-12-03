@@ -2864,19 +2864,17 @@ class EvaluateApplicationTest(TestCase):
                 status__in=[Application.PENDING, Application.QUESTION],
                 partner__status__in=[Partner.AVAILABLE],
                 editor__isnull=False,
-                editor__user__userprofile__terms_of_use=False
+                editor__user__userprofile__terms_of_use=False,
             )
-                .exclude(editor__user__groups__name="restricted")
-                .order_by("status", "partner", "date_created")
+            .exclude(editor__user__groups__name="restricted")
+            .order_by("status", "partner", "date_created")
         )
         twl_comment_count = 0
-        twl_team = User.objects.get(username='TWL Team')
+        twl_team = User.objects.get(username="TWL Team")
         # Loop through the apps and count comments from twl_team.
         for app in pending_apps:
             twl_comment_count += Comment.objects.filter(
-                    object_pk=str(app.pk),
-                    site_id=settings.SITE_ID,
-                    user=twl_team,
+                object_pk=str(app.pk), site_id=settings.SITE_ID, user=twl_team
             ).count()
         # Run the command again, which should not add more comments to outstanding apps.
         call_command("notify_applicants_tou_changes")

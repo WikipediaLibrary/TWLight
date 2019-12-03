@@ -9,7 +9,10 @@ from django_comments.models import Comment
 
 logger = logging.getLogger(__name__)
 
-twl_team, created = User.objects.get_or_create(username='TWL Team',email='wikipedialibrary@wikimedia.org')
+twl_team, created = User.objects.get_or_create(
+    username="TWL Team", email="wikipedialibrary@wikimedia.org"
+)
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -20,25 +23,28 @@ class Command(BaseCommand):
                 status__in=[Application.PENDING, Application.QUESTION],
                 partner__status__in=[Partner.AVAILABLE],
                 editor__isnull=False,
-                editor__user__userprofile__terms_of_use=False
+                editor__user__userprofile__terms_of_use=False,
             )
-                .exclude(editor__user__groups__name="restricted")
-                .order_by("status", "partner", "date_created")
+            .exclude(editor__user__groups__name="restricted")
+            .order_by("status", "partner", "date_created")
         )
 
         # Loop through the apps and add a comment if twl_team hasn't commented already.
         for app in pending_apps:
-            if Comment.objects.filter(
-                    object_pk=str(app.pk),
-                    site_id=settings.SITE_ID,
-                    user=twl_team,
-            ).count() == 0:
+            if (
+                Comment.objects.filter(
+                    object_pk=str(app.pk), site_id=settings.SITE_ID, user=twl_team
+                ).count()
+                == 0
+            ):
                 comment = Comment(
                     content_object=app,
                     site_id=settings.SITE_ID,
                     user=twl_team,
                     # Translators: This comment is added to pending applications when our terms of use change.
-                    comment=_("Our terms of use have changed. "
-                              "Your applications will not be processed until you log in and agree to our updated terms.")
+                    comment=_(
+                        "Our terms of use have changed. "
+                        "Your applications will not be processed until you log in and agree to our updated terms."
+                    ),
                 )
                 comment.save()
