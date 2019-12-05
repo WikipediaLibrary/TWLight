@@ -915,10 +915,36 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             )
         )
 
-        if self.get_object().is_instantly_finalized():
+        app = self.get_object()
+        if app.is_instantly_finalized():
             status_choices = Application.STATUS_CHOICES[:]
             status_choices.pop(4)
             form.fields["status"].choices = status_choices
+
+        total_accounts_available_for_distribution = get_accounts_available(app)
+        if total_accounts_available_for_distribution is not None and app.editor.user == self.request.user:
+            total_pending_apps = Application.objects.filter(
+                partner=app.partner,
+                status__in=[Application.PENDING, Application.QUESTION]
+            )
+            if app.specific_stream:
+                total_pending_apps = total_pending_apps.filter(
+                    specific_stream=app.specific_stream
+                )
+
+            if (
+                total_accounts_available_for_distribution -
+                total_pending_apps.count() < 0
+            ):
+                messages.add_message(
+                    self.request,
+                    messages.WARNING,
+                    # Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
+                    _(
+                        "There are more number of pending applications than there "
+                        "are accounts available. Your application might get waitlisted."
+                    )
+                )
 
         return form
 
