@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-12-02 08:52:23+0000\n"
+"PO-Revision-Date: 2019-12-05 14:47:28+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -1987,7 +1987,7 @@ msgstr "Les contributeurs approuvés <i>peuvent</i> utiliser leur accès pour 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:98
 msgid "Search, view, retrieve, and display partner content"
-msgstr "rechercher, voir, récupérer et afficher le contenu du partenaire."
+msgstr "rechercher, voir, récupérer et afficher le contenu du partenaire ;"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:102
@@ -1997,7 +1997,7 @@ msgstr "enregistrer électroniquement des contenus des partenaires ;"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:106
 msgid "Print out single copies of partner content"
-msgstr "imprimer des exemplaires du contenu des partenaires ;"
+msgstr "imprimer des exemplaires du contenu des partenaires."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:113
@@ -2022,7 +2022,7 @@ msgstr "faire systématiquement des copies imprimées ou électroniques de nombr
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
 #: TWLight/templates/about.html:129
 msgid "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles"
-msgstr "fouiller des métadonnées sans permission, par exemple pour la création automatique d’ébauches d’articles ;"
+msgstr "fouiller des métadonnées sans permission, par exemple pour la création automatique d’ébauches d’articles."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:136
