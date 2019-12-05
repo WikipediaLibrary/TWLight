@@ -1,7 +1,12 @@
 import logging
+
+from datetime import timedelta
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
+from django.db.models import Q
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
@@ -29,11 +34,16 @@ class Command(BaseCommand):
             .order_by("status", "partner", "date_created")
         )
 
-        # Loop through the apps and add a comment if twl_team hasn't commented already.
+        # Loop through the apps and add a comment if twl_team hasn't commented already or if the app hasn't had comments
+        # in 8 days or more.
         for app in pending_apps:
             if (
                 Comment.objects.filter(
-                    object_pk=str(app.pk), site_id=settings.SITE_ID, user=twl_team
+                    Q(object_pk=str(app.pk), site_id=settings.SITE_ID),
+                    (
+                        Q(user=twl_team)
+                        | Q(submit_date__gte=(timezone.now() - timedelta(days=8)))
+                    ),
                 ).count()
                 == 0
             ):
