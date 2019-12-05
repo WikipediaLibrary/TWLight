@@ -936,7 +936,8 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                     specific_stream=app.specific_stream
                 )
             if (
-                total_accounts_available_for_distribution > 0
+                app.partner.status != Partner.WAITLIST
+                and total_accounts_available_for_distribution > 0
                 and total_accounts_available_for_distribution -
                 total_pending_apps.count() < 0
             ):
