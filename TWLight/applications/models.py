@@ -337,18 +337,19 @@ class Application(models.Model):
         """
         For a given application, find an authorization for this partner-stream-editor, if possible.
         """
-        authorization = Authorization.objects.filter(
-                partner=self.partner, user=self.editor.user
-            )
-        if self.specific_stream:
-            authorization = authorization.filter(
-                stream=self.specific_stream
-            )
-
-        if authorization.exists():
-            return authorization[0]
-        else:
+        try:
+            if self.specific_stream:
+                authorization = Authorization.objects.get(
+                    partner=self.partner, user=self.editor.user, stream=self.specific_stream
+                )
+            else:
+                authorization = Authorization.objects.get(
+                    partner=self.partner, user=self.editor.user
+                )
+        except Authorization.DoesNotExist:
             return None
+
+        return authorization
 
     def is_instantly_finalized(self):
         """
