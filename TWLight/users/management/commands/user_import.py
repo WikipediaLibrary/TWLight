@@ -99,7 +99,6 @@ class Command(BaseCommand):
                                     wp_registered=reg_date,
                                     wp_valid=True,
                                     date_created=date_created,
-                                    last_updated=date_created,
                                 )
                                 logger.info("Can't find editor; creating one.")
                             except:

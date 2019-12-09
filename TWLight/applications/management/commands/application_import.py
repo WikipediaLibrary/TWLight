@@ -67,7 +67,7 @@ class Command(BaseCommand):
                             # to our attributes to verify they already exist.
 
                             partner_id = row[0]
-                            partner = Partner.objects.get(pk=partner_id)
+                            partner = Partner.even_not_available.get(pk=partner_id)
 
                             # Inconsistent date format on the input files
                             # If the date field is empty, set it to the beginning of (Unix) time.
