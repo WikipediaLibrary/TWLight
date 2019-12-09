@@ -256,6 +256,28 @@ def is_proxy_and_application_approved(status, app):
         return False
 
 
+def more_applications_than_accounts_available(app):
+    total_accounts_available_for_distribution = get_accounts_available(app)
+    if (
+            total_accounts_available_for_distribution is not None
+            and app.status in [Application.PENDING, Application.QUESTION]
+    ):
+        total_pending_apps = Application.objects.filter(
+            partner=app.partner,
+            status__in=[Application.PENDING, Application.QUESTION]
+        )
+        if app.specific_stream:
+            total_pending_apps = total_pending_apps.filter(
+                specific_stream=app.specific_stream
+            )
+        if (
+                app.partner.status != Partner.WAITLIST
+                and total_accounts_available_for_distribution > 0
+                and total_accounts_available_for_distribution -
+                total_pending_apps.count() < 0
+        ):
+            return True
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
 """
