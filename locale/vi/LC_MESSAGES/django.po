@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:43+0000\n"
+"PO-Revision-Date: 2019-12-09 15:13:46+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1948,9 +1948,8 @@ msgstr "Bạn phải có tài khoản ít nhất 6 tháng"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
-#, fuzzy
 msgid "You have made a minimum of 500 edits"
-msgstr "Bạn phải đã đóng góp ít nhất 500 sửa đổi"
+msgstr "Bạn đã đóng góp ít nhất 500 sửa đổi"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67
@@ -2793,9 +2792,8 @@ msgstr ""
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
-#, fuzzy
 msgid "Last updated 12 November 2019"
-msgstr "Cập nhật lần cuối cùng ngày 8 tháng 8 năm 2016"
+msgstr "Cập nhật lần cuối cùng ngày 12 tháng 11 năm 2019"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28

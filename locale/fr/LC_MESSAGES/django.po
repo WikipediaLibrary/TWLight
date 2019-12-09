@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-12-05 14:47:28+0000\n"
+"PO-Revision-Date: 2019-12-09 15:13:38+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -1272,7 +1272,7 @@ msgstr "Codes d’accès"
 #. Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
 #: TWLight/resources/models.py:190
 msgid "Proxy"
-msgstr "Proxy"
+msgstr "Mandataire"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #. Translators: Title text for the Library Bundle icon shown on the collection page.
@@ -1344,7 +1344,7 @@ msgstr "Limite facultative de l'extrait en termes de pourcentage (%) d'un articl
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
 #: TWLight/resources/models.py:257
 msgid "Which authorization method does this partner use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."
-msgstr "Quelle méthode d’autorisation ce partenaire utilise-t-il ? « Courriel » signifie que les comptes sont configurés par courriel et ceci est la valeur par défaut. Sélectionnez « Codes d’accès » pour que nous envoyions le détails des paramètres de connexion ou les codes d’accès individuels ou de groupe. « Proxy » signifie que l’accès est fourni directement par ''EZProxy'' et le Paquet de bibliothèques est un accès automatisé par proxy. « Lien » signifie que nous envoyons aux utilisateurs une URL à utiliser qui leur permet de créer un compte."
+msgstr "Quelle méthode d’autorisation ce partenaire utilise-t-il ? « Courriel » signifie que les comptes sont configurés par courriel et ceci est la valeur par défaut. Sélectionnez « Codes d’accès » pour que nous envoyions le détails des paramètres de connexion ou les codes d’accès individuels ou de groupe. « Mandataire » signifie que l’accès est fourni directement par EZProxy et le Paquet de bibliothèques est un accès automatisé basé sur un mandataire. « Lien » signifie que nous envoyons aux utilisateurs une URL à utiliser pour leur permettre de créer un compte."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
 #: TWLight/resources/models.py:268
@@ -1438,7 +1438,7 @@ msgstr "Description facultative des ressources de ce flux."
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
 #: TWLight/resources/models.py:469
 msgid "Which authorization method does this collection use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."
-msgstr "Quelle méthode d’autorisation cette collection utilise-t-elle ? « Courriel » signifie que les comptes sont configurés par courriel, ceci est la valeur par défaut. Sélectionnez « Codes d’accès » si nous envoyons le détail des paramètres de connexion ou les codes d’accès individuels ou de groupe. « Proxy » signifie que l’accès est fourni directement par ''EZProxy'' et le Paquet de bibliothèques est un accès automatisé par proxy. « Lien » signifie que nous envoyons aux utilisateurs une URL qui leur permet de créer un compte."
+msgstr "Quelle méthode d’autorisation cette collection utilise-t-elle ? « Courriel » signifie que les comptes sont configurés par courriel, ceci est la valeur par défaut. Sélectionnez « Codes d’accès » si nous envoyons le détail des paramètres de connexion ou les codes d’accès individuels ou de groupe. « Mandataire » signifie que l’accès est fourni directement par EZProxy et le Paquet de bibliothèques est un accès automatisé basé sur un mandataire. « Lien » signifie que nous envoyons aux utilisateurs une URL pour leur permettre de créer un compte."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
 #: TWLight/resources/models.py:478
@@ -2037,17 +2037,17 @@ msgstr "EZProxy"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:146
 msgid "EZProxy is a proxy server used to authenticate users for many Wikipedia Library partners. Users sign into EZProxy via the Library Card platform to verify that they are authorized users, and then the server accesses requested resources using its own IP address."
-msgstr "''EZProxy'' est un serveur mandataire utilisé pour authentifier les utilisateurs pour de nombreux partenaires de la Bibliothèque Wikipédia. Les utilisateurs s’inscrivent dans ''EZProxy'' via la plateforme de Carte de Bibliothèque afin de vérifier qu’ils sont des utilisateurs autorisés, puis le serveur mandataire accède aux ressources demandées en utilisant sa propre adresse IP."
+msgstr "EZProxy est un serveur mandataire utilisé pour authentifier les utilisateurs pour de nombreux partenaires de la Bibliothèque Wikipédia. Les utilisateurs s’inscrivent dans EZProxy via la plateforme de Carte de Bibliothèque afin de vérifier qu’ils sont des utilisateurs autorisés, puis le serveur mandataire accède aux ressources demandées en utilisant sa propre adresse IP."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:155
 msgid "You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we recommend logging in via the Library Card platform rather than going directly to the unproxied partner website. When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy."
-msgstr "Vous pouvez remarquer que lors de l’accès aux ressources via ''EZProxy'', les URLs sont dynamiquement réécrites. C’est pourquoi nous vous recommandons de vous connecter via la plateforme de Carte de Bibliothèque plutôt que directement sur le site web non mandaté du partenaire. En cas de doute, vérifiez la présence de « idm.oclc » dans l’URL : si elle y est, alors vous êtes connecté via ''EZProxy''."
+msgstr "Vous pouvez remarquer que lors de l’accès aux ressources via EZProxy, les URLs sont dynamiquement réécrites. C’est pourquoi nous vous recommandons de vous connecter via la plateforme de Carte de Bibliothèque plutôt que directement sur le site web non mandaté du partenaire. En cas de doute, vérifiez la présence de « idm.oclc » dans l’URL : si elle y est, alors vous êtes connecté via EZProxy."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:164
 msgid "Typically once you’ve logged in your session will remain active in your browser for up to two hours after you’ve finished searching. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser."
-msgstr "Typiquement, une fois que vous êtes connecté, votre session restera active dans votre navigateur pour une durée allant jusqu’à deux heures après la fin de votre recherche. Notez que l’utilisation d’''EZProxy'' requière que vous activiez les témoins (cookies) de session dans votre navigateur. Si vous avez des problèmes à garder vos sessions autorisées, vous devriez également essayer d’effacer votre cache et de redémarrer votre navigateur."
+msgstr "Typiquement, une fois que vous êtes connecté, votre session restera active dans votre navigateur pour une durée allant jusqu’à deux heures après la fin de votre recherche. Notez que l’utilisation d’EZProxy requière que vous activiez les témoins (cookies) de session dans votre navigateur. Si vous avez des problèmes à garder vos sessions autorisées, vous devriez également essayer d’effacer votre cache et de redémarrer votre navigateur."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:172
