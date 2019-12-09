@@ -1,5 +1,9 @@
+{% load i18n %}
+{% comment %} Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like {{ user }} or {{ partner }}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+{% blocktrans trimmed %}
 Your approved application to {{ partner }} has now been finalised. Your access code or login details can be found below:
 
 {{ access_code }}
 
 {{ access_code_instructions }}
+{% endblocktrans %}
