@@ -5,15 +5,19 @@ import logging
 from datetime import date, datetime
 from django.utils.timezone import now
 from django.db import models
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 from reversion import revisions as reversion
 from reversion.models import Version
-from ....users.models import Editor
-from ....applications.models import Application
-from ....resources.models import Partner, Stream
+from TWLight.users.models import Editor
+from TWLight.applications.models import Application
+from TWLight.resources.models import Partner, Stream
 
 logger = logging.getLogger(__name__)
 
+twl_team, created = User.objects.get_or_create(
+    username="TWL Team", email="wikipedialibrary@wikimedia.org"
+)
 
 class Command(BaseCommand):
     """
@@ -123,7 +127,7 @@ class Command(BaseCommand):
                                     specific_stream_id=specific_stream_id,
                                     specific_title=specific_title,
                                     imported=True,
-                                    status=4,
+                                    status=Application.SENT,
                                 )
                             except Application.DoesNotExist:
                                 application = Application(
@@ -136,7 +140,8 @@ class Command(BaseCommand):
                                     comments=import_note,
                                     rationale=import_note,
                                     imported=True,
-                                    status=4,
+                                    status=Application.SENT,
+                                    sent_by=twl_team
                                 )
                                 with reversion.create_revision():
                                     reversion.set_date_created(datetime_created)
