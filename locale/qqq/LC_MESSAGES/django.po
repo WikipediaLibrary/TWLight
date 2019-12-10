@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2019-12-09 15:55+0000\n"
+"POT-Creation-Date: 2019-12-10 17:57+0000\n"
 "PO-Revision-Date: 2019-12-09 15:13:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: TWLight/applications/forms.py:346
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#: TWLight/users/admin.py:87 TWLight/users/models.py:137
+#: TWLight/users/admin.py:89 TWLight/users/models.py:137
 msgid "Username"
 msgstr ""
 
@@ -2680,7 +2680,7 @@ msgstr ""
 msgid "user"
 msgstr ""
 
-#: TWLight/users/admin.py:68
+#: TWLight/users/admin.py:70
 msgid "authorizer"
 msgstr ""
 
