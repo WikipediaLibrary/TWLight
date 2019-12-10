@@ -434,7 +434,7 @@ def post_revision_commit(sender, instance, **kwargs):
 
     # Authorize editor to access resource after an application is saved as sent.
 
-    if instance.status == Application.SENT and not instance.imported:
+    if instance.status == Application.SENT:
         # Check if an authorization already exists.
         if instance.specific_stream:
             existing_authorization = Authorization.objects.filter(
