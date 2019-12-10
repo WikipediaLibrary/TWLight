@@ -608,6 +608,6 @@ class ProxyAuthorization(Authorization):
     class Meta:
         proxy = True
         app_label = "auth"
-        # set following lines to display ProxyReview as Review
+        # set following lines to display ProxyAuthorization as Authorization
         verbose_name = Authorization._meta.verbose_name
         verbose_name_plural = Authorization._meta.verbose_name_plural
