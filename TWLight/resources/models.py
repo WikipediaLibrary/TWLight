@@ -142,7 +142,7 @@ class Partner(models.Model):
     # --------------------------------------------------------------------------
 
     company_name = models.CharField(
-        max_length=40,
+        max_length=255,
         # Translators: In the administrator interface, this text is help text for a field where staff can enter the name of the partner. Don't translate McFarland.
         help_text=_(
             "Partner's name (e.g. McFarland). Note: "
