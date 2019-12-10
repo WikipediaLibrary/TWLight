@@ -22,6 +22,7 @@ from django.core.management import call_command
 from django.db import models
 from django.http import Http404
 from django.test import TestCase, Client, RequestFactory
+from django.utils.html import escape
 
 from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.resources.factories import PartnerFactory, StreamFactory
@@ -1438,11 +1439,13 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
             # Applications should not be visible to just any coordinator
             self.assertNotIn(
-                obj.__str__(), denyResponse.render().content.decode("utf-8")
+                escape(obj.__str__()), denyResponse.render().content.decode("utf-8")
             )
 
             # Applications should be visible to the designated coordinator
-            self.assertIn(obj.__str__(), allowResponse.render().content.decode("utf-8"))
+            self.assertIn(
+                escape(obj.__str__()), allowResponse.render().content.decode("utf-8")
+            )
 
     def test_list_authorization(self):
         url = reverse("applications:list")
@@ -1499,7 +1502,9 @@ class ListApplicationsTest(BaseApplicationViewTest):
         for obj in queryset_deleted:
             # Deleted applications should not be visible to anyone, even the
             # assigned coordinator.
-            self.assertNotIn(obj.__str__(), response.render().content.decode("utf-8"))
+            self.assertNotIn(
+                escape(obj.__str__()), response.render().content.decode("utf-8")
+            )
 
     def test_list_object_visibility(self):
         url = reverse("applications:list")
@@ -3503,8 +3508,8 @@ class MarkSentTest(TestCase):
 
         response = views.ListReadyApplicationsView.as_view()(request)
         content = response.render().content.decode("utf-8")
-        self.assertIn(self.partner2.company_name, content)
-        self.assertNotIn(partner3.company_name, content)
+        self.assertIn(escape(self.partner2.company_name), content)
+        self.assertNotIn(escape(partner3.company_name), content)
 
     def test_restricted_applications_mark_sent(self):
         # Applications from restricted users shouldn't be listed
@@ -3536,8 +3541,8 @@ class MarkSentTest(TestCase):
         )
         content = response.render().content.decode("utf-8")
 
-        self.assertIn(self.app2.editor.wp_username, content)
-        self.assertNotIn(app_restricted.editor.wp_username, content)
+        self.assertIn(escape(self.app2.editor.wp_username), content)
+        self.assertNotIn(escape(app_restricted.editor.wp_username), content)
 
     def test_access_codes_sent(self):
         # For access code partners, coordinators assign a code to an
