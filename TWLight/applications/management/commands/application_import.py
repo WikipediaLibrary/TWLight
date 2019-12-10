@@ -19,6 +19,7 @@ twl_team, created = User.objects.get_or_create(
     username="TWL Team", email="wikipedialibrary@wikimedia.org"
 )
 
+
 class Command(BaseCommand):
     """
     Imports applications from CSV.
@@ -141,7 +142,7 @@ class Command(BaseCommand):
                                     rationale=import_note,
                                     imported=True,
                                     status=Application.SENT,
-                                    sent_by=twl_team
+                                    sent_by=twl_team,
                                 )
                                 with reversion.create_revision():
                                     reversion.set_date_created(datetime_created)

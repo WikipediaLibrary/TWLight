@@ -41,6 +41,9 @@ then
     # Sync any translation fields that were missed by migration.
     echo "sync_translation_fields"
     python3 ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
+
+    # Run black on all migrations.
+    find ${TWLIGHT_HOME}/TWLight -type d -name "migrations" -print0 | xargs -0 black -t py37
 else
     exit 1
 fi

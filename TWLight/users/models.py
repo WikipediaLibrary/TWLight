@@ -601,10 +601,12 @@ class Authorization(models.Model):
         else:
             return False
 
+
 class ProxyAuthorization(Authorization):
     """
     This is only here so we can group authorizations with other auth-related things in admin.
     """
+
     class Meta:
         proxy = True
         app_label = "auth"
