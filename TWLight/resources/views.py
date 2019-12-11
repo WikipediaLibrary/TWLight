@@ -104,11 +104,6 @@ class PartnersDetailView(DetailView):
         else:
             context["median_days"] = None
 
-        # To restrict the graph from rendering, if there's only a week's worth of data
-        earliest_date = get_earliest_creation_date(
-            Application.objects.filter(partner=partner)
-        )
-
         # Find out if current user has applications and change the Apply
         # button behaviour accordingly
         if (
