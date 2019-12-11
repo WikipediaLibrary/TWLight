@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
 from datetime import date, timedelta
+from dateutil.relativedelta import relativedelta
 from itertools import chain
 from unittest.mock import patch
 import reversion
@@ -2063,6 +2064,49 @@ class RenewApplicationTest(BaseApplicationViewTest):
         self.assertFalse(app1.is_renewable)
         self.assertTrue(Application.objects.filter(parent=app1))
 
+    def test_renewal_extends_access_duration(self):
+        # Tests that an approved renewal sets the correct, extended, expiry date
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(
+            renewals_available=True,
+            authorization_method=Partner.PROXY,
+            account_email=True,  # require account_email on renewal
+            requested_access_duration=True,
+        )
+        app = ApplicationFactory(
+            partner=partner, status=Application.APPROVED, editor=editor, requested_access_duration=3
+        )
+
+        renewal_url = reverse("applications:renew", kwargs={"pk": app.pk})
+        response = self.client.get(renewal_url, follow=True)
+        renewal_form = response.context["form"]
+
+        data = renewal_form.initial
+        data["account_email"] = "test@example.com"
+        data["return_url"] = renewal_form["return_url"].value()
+        data["requested_access_duration"] = 6
+
+        self.client.post(renewal_url, data)
+        app.refresh_from_db()
+
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        partner.coordinator = coordinator.user
+        partner.save()
+
+        renewal_app = Application.objects.get(parent=app)
+        # Approve the renewal request
+        app_url = reverse("applications:evaluate", kwargs={"pk": renewal_app.pk})
+        # Approve the application
+        response = self.client.post(
+            app_url, data={"status": Application.APPROVED}, follow=True
+        )
+
+        renewal_app.refresh_from_db()
+        auth = renewal_app.get_authorization()
+        six_months_from_now = date.today() + relativedelta(months=+6)
+        self.assertEqual(auth.date_expires, six_months_from_now)
+
 
 class ApplicationModelTest(TestCase):
     def test_approval_sets_date_closed(self):
@@ -2337,6 +2381,29 @@ class ApplicationModelTest(TestCase):
 
         application.refresh_from_db()
         assert application.editor == editor
+
+    def test_get_authorization(self):
+        # Approve an application so that we create an authorization
+        partner = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            requested_access_duration=True
+        )
+        application = ApplicationFactory(
+            partner=partner,
+            status=Application.PENDING
+        )
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        application.partner.coordinator = coordinator.user
+        application.partner.save()
+
+        url = reverse("applications:evaluate", kwargs={"pk": application.pk})
+        response = self.client.post(
+            url, data={"status": Application.APPROVED}, follow=True
+        )
+
+        # Check that we're fetching the correct authorization
+        authorization = Authorization.objects.get(user=application.editor.user, partner=application.partner)
+        self.assertEqual(application.get_authorization(), authorization)
 
 
 class EvaluateApplicationTest(TestCase):
