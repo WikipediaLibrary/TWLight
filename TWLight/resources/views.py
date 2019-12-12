@@ -120,10 +120,10 @@ class PartnersDetailView(DetailView):
                 status__in=[
                     Application.PENDING,
                     Application.QUESTION,
-                    Application.APPROVED
+                    Application.APPROVED,
                 ],
                 partner=partner,
-                editor=user.editor
+                editor=user.editor,
             )
             if partner_streams.count() == 0:
                 if apps.count() > 0:
@@ -133,10 +133,7 @@ class PartnersDetailView(DetailView):
                     if not partner.specific_title:
                         context["apply"] = False
                 try:
-                    Authorization.objects.get(
-                        partner=partner,
-                        user=user
-                    )
+                    Authorization.objects.get(partner=partner, user=user)
                     # User has an authorization, don't show 'apply',
                     # but link to collection page
                     if not partner.specific_title:
@@ -145,9 +142,9 @@ class PartnersDetailView(DetailView):
                 except Authorization.DoesNotExist:
                     pass
                 except Authorization.MultipleObjectsReturned:
-                    logger.info("Multiple authorizations returned for partner {} and user {}").format(
-                        partner, user
-                    )
+                    logger.info(
+                        "Multiple authorizations returned for partner {} and user {}"
+                    ).format(partner, user)
                     # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
                     messages.add_message(
                         self.request,
@@ -159,8 +156,7 @@ class PartnersDetailView(DetailView):
                     )
             else:
                 authorizations = Authorization.objects.filter(
-                    partner=partner,
-                    user=user
+                    partner=partner, user=user
                 )
                 if authorizations.count() == partner_streams.count():
                     # User has correct number of auths, don't show 'apply',

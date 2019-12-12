@@ -1337,20 +1337,18 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             status=Application.SENT,
             editor=editor,
             partner=partner,
-            specific_stream=stream1
+            specific_stream=stream1,
         )
 
         request.session = {views.PARTNERS_SESSION_KEY: [partner.pk]}
         response = views.SubmitApplicationView.as_view()(request)
         self.assertEqual(response.status_code, 200)
-        option1 = "<option value=\"{stream_id}\">{stream_name}</option>".format(
-            stream_id=stream1.id,
-            stream_name=stream1.name
-            )
-        option2 = "<option value=\"{stream_id}\">{stream_name}</option>".format(
-            stream_id=stream2.id,
-            stream_name=stream2.name
-            )
+        option1 = '<option value="{stream_id}">{stream_name}</option>'.format(
+            stream_id=stream1.id, stream_name=stream1.name
+        )
+        option2 = '<option value="{stream_id}">{stream_name}</option>'.format(
+            stream_id=stream2.id, stream_name=stream2.name
+        )
         self.assertContains(response, option2)
         # User already has an authorization for stream1 i.e. the
         # option should not be on the apply page
@@ -2942,7 +2940,11 @@ class EvaluateApplicationTest(TestCase):
         pk = self.application.pk
         # Users visiting EvaluateApplication are redirected to ToU if they
         # agreed to it and redirected back
-        terms_url = reverse("terms") + "?next=" + urllib.parse.quote_plus("/applications/evaluate/{}/".format(pk))
+        terms_url = (
+            reverse("terms")
+            + "?next="
+            + urllib.parse.quote_plus("/applications/evaluate/{}/".format(pk))
+        )
         self.assertRedirects(response, terms_url)
         # Editor agrees to the terms of use
         EditorCraftRoom(self, Terms=True, editor=self.editor, Coordinator=False)
@@ -2953,7 +2955,9 @@ class EvaluateApplicationTest(TestCase):
         today = date.today().strftime("%b. %d, %Y")
         self.assertContains(response, today)
         self.assertContains(response, self.application.status)
-        self.assertContains(response, html.escape(self.application.partner.company_name))
+        self.assertContains(
+            response, html.escape(self.application.partner.company_name)
+        )
         self.assertContains(response, self.application.rationale)
         # Only one 'Yes' and that too for terms of use
         self.assertContains(response, "Yes")
@@ -2978,7 +2982,9 @@ class EvaluateApplicationTest(TestCase):
         response = self.client.get(self.url)
         self.assertContains(response, today)
         self.assertContains(response, self.application.status)
-        self.assertContains(response, html.escape(self.application.partner.company_name))
+        self.assertContains(
+            response, html.escape(self.application.partner.company_name)
+        )
         self.assertContains(response, self.application.rationale)
         # No terms of use
         self.assertContains(
@@ -2986,7 +2992,7 @@ class EvaluateApplicationTest(TestCase):
             # This is copied verbatim from the app eval page.
             # Change if necessary.
             "Please request the applicant "
-            "agree to the site's terms of use before approving this application."
+            "agree to the site's terms of use before approving this application.",
         )
         # Personal data should *NOT* be visible to coordinators
         self.assertNotContains(response, self.user.email)

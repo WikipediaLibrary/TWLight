@@ -696,9 +696,11 @@ class CollectionUserView(SelfOnly, ListView):
                             if each_authorization.latest_app.status in [
                                 Application.QUESTION,
                                 Application.PENDING,
-                                Application.APPROVED
+                                Application.APPROVED,
                             ]:
-                                each_authorization.open_app = each_authorization.latest_app
+                                each_authorization.open_app = (
+                                    each_authorization.latest_app
+                                )
 
         context["proxy_bundle_authorizations"] = proxy_bundle_authorizations
         context[

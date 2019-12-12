@@ -53,7 +53,8 @@ from .helpers import (
     count_valid_authorizations,
     get_accounts_available,
     is_proxy_and_application_approved,
-    SPECIFIC_STREAM)
+    SPECIFIC_STREAM,
+)
 from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .models import Application
 
@@ -1375,9 +1376,7 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
                 ),
             )
 
-        return super(RenewApplicationView, self).dispatch(
-            request, *args, **kwargs
-        )
+        return super(RenewApplicationView, self).dispatch(request, *args, **kwargs)
 
     def get_object(self):
         app = Application.objects.get(pk=self.kwargs["pk"])

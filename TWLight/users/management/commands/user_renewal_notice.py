@@ -27,7 +27,10 @@ class Command(BaseCommand):
                 user_email=authorization_object.user.email,
                 user_lang=authorization_object.user.userprofile.lang,
                 partner_name=authorization_object.partner.company_name,
-                partner_link=reverse("users:my_collection", kwargs={"pk": authorization_object.user.editor.pk}),
+                partner_link=reverse(
+                    "users:my_collection",
+                    kwargs={"pk": authorization_object.user.editor.pk},
+                ),
             )
 
             # Record that we sent the email so that we only send one.

@@ -268,9 +268,7 @@ class BaseApplicationForm(forms.Form):
                     queryset = Stream.objects.filter(partner_id=partner_id)
                     if self.user:
                         all_authorizations = Authorization.objects.filter(
-                            user=self.user,
-                            partner=partner_id,
-                            stream__isnull=False
+                            user=self.user, partner=partner_id, stream__isnull=False
                         )
                         existing_streams = []
                         for each_authorization in all_authorizations:
@@ -278,19 +276,16 @@ class BaseApplicationForm(forms.Form):
                         if len(existing_streams) > len(set(existing_streams)):
                             logger.info(
                                 "Multiple authorizations returned for the same partner {}, same stream for user {}. "
-                                "Unable to pop options.".format(
-                                    partner_id, self.user
-                                )
+                                "Unable to pop options.".format(partner_id, self.user)
                             )
                             break
                         else:
-                            queryset = Stream.objects.exclude(id__in=existing_streams).filter(
-                                partner_id=partner_id
-                            )
+                            queryset = Stream.objects.exclude(
+                                id__in=existing_streams
+                            ).filter(partner_id=partner_id)
 
                     specific_stream = forms.ModelChoiceField(
-                        queryset=queryset,
-                        empty_label = None
+                        queryset=queryset, empty_label=None
                     )
                     self.fields[field_name] = specific_stream
                     self.fields[field_name].label = FIELD_LABELS[datum]
