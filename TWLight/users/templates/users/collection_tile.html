@@ -97,7 +97,7 @@
           </a>
         </span>
       {% endif %}
-    {% elif each_authorization.partner.specific_title %}
+    {% elif each_authorization.partner.specific_title and not each_authorization.open_app %}
       <span class="pull-right">
         <a href="{% url 'applications:apply_single' each_authorization.partner.pk %}" class="btn btn-primary pull-right" role="button">
           {% comment %} Translators: Labels the button users can click to apply for a resource. {% endcomment %}
