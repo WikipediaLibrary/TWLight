@@ -53,7 +53,8 @@ from .helpers import (
     count_valid_authorizations,
     get_accounts_available,
     is_proxy_and_application_approved,
-    more_applications_than_accounts_available)
+    more_applications_than_accounts_available,
+)
 from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .models import Application
 
@@ -930,7 +931,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                     _(
                         "There are more number of pending applications than there "
                         "are accounts available. Your application might get waitlisted."
-                    )
+                    ),
                 )
 
         return form
