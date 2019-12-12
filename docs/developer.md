@@ -8,7 +8,7 @@ To get set up with TWLight locally you will need [Docker](https://www.docker.com
 
 A suite of shell scripts for performing various functions can be found in the /bin folder.
 
-These scripts can be run with, for example `docker exec twlight virtualenv_migrate.sh`.
+These scripts can be run with, for example `docker-compose exec twlight /app/bin/virtualenv_migrate.sh`.
 
 ### Migrating
 
