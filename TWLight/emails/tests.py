@@ -479,9 +479,7 @@ class CoordinatorReminderEmailTest(TestCase):
 
     def test_send_coordinator_reminder_email(self):
         ApplicationFactory(
-            partner=self.partner,
-            status=Application.PENDING,
-            editor=self.user.editor
+            partner=self.partner, status=Application.PENDING, editor=self.user.editor
         )
 
         # Coordinator only wants reminders for apps under discussion
@@ -492,9 +490,7 @@ class CoordinatorReminderEmailTest(TestCase):
         self.assertEqual(len(mail.outbox), 0)
 
         ApplicationFactory(
-            partner=self.partner2,
-            status=Application.QUESTION,
-            editor=self.user2.editor
+            partner=self.partner2, status=Application.QUESTION, editor=self.user2.editor
         )
 
         call_command("send_coordinator_reminders")
@@ -510,14 +506,10 @@ class CoordinatorReminderEmailTest(TestCase):
         self.assertNotIn("One approved application", mail.outbox[0].body)
 
         ApplicationFactory(
-            partner=self.partner,
-            status=Application.APPROVED,
-            editor=self.user2.editor
+            partner=self.partner, status=Application.APPROVED, editor=self.user2.editor
         )
         ApplicationFactory(
-            partner=self.partner2,
-            status=Application.SENT,
-            editor=self.user.editor
+            partner=self.partner2, status=Application.SENT, editor=self.user.editor
         )
 
         # Clear mail outbox since approvals send emails

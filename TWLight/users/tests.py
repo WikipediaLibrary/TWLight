@@ -533,7 +533,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(self.user_editor2.userprofile.send_renewal_notices, False)
         self.assertEqual(self.user_editor2.userprofile.pending_app_reminders, False)
         self.assertEqual(self.user_editor2.userprofile.discussion_app_reminders, False)
-        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders , False)
+        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, False)
 
     def test_user_email_preferences_enable_update(self):
         """
@@ -570,7 +570,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(self.user_editor2.userprofile.send_renewal_notices, True)
         self.assertEqual(self.user_editor2.userprofile.pending_app_reminders, True)
         self.assertEqual(self.user_editor2.userprofile.discussion_app_reminders, True)
-        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders , True)
+        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, True)
 
     def test_user_email_preferences_update_non_coordinator(self):
         # Need a password so we can login
@@ -602,7 +602,7 @@ class ViewsTestCase(TestCase):
         # Only coordinators get to change their reminder preferences
         self.assertEqual(self.user_editor2.userprofile.pending_app_reminders, False)
         self.assertEqual(self.user_editor2.userprofile.discussion_app_reminders, False)
-        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders , False)
+        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, False)
 
 
 class UserProfileModelTestCase(TestCase):
