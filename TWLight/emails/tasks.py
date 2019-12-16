@@ -90,8 +90,22 @@ def send_coordinator_reminder_emails(sender, **kwargs):
     to designated coordinators, reminding them to login
     to the site if there are pending applications.
     """
-    app_status = kwargs["app_status"]
-    app_count = kwargs["app_count"]
+    app_status_and_count = kwargs["app_status_and_count"]
+    pending_count = None
+    question_count = None
+    approved_count = None
+    total_apps = 0
+    for status, count in app_status_and_count.items():
+        if count != 0 and status == Application.PENDING:
+            pending_count = count
+            total_apps += count
+        if count != 0 and status == Application.QUESTION:
+            question_count = count
+            total_apps += count
+        if count != 0 and status == Application.APPROVED:
+            approved_count = count
+            total_apps += count
+
     coordinator_wp_username = kwargs["coordinator_wp_username"]
     coordinator_email = kwargs["coordinator_email"]
     coordinator_lang = kwargs["coordinator_lang"]
@@ -113,8 +127,10 @@ def send_coordinator_reminder_emails(sender, **kwargs):
         {
             "user": coordinator_wp_username,
             "lang": coordinator_lang,
-            "app_status": app_status,
-            "app_count": app_count,
+            "pending_count": pending_count,
+            "question_count": question_count,
+            "approved_count": approved_count,
+            "total_apps": total_apps,
             "link": link,
         },
     )
