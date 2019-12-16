@@ -22,18 +22,22 @@ class Command(BaseCommand):
             Application.objects.filter(
                 Q(
                     partner__coordinator__editor__user__userprofile__pending_app_reminders=True
+                )&
+                Q(
+                    status=Application.PENDING
                 )
-                | Q(
+                | (Q(
                     partner__coordinator__editor__user__userprofile__discussion_app_reminders=True
-                )
-                | Q(
+                )&
+                Q(
+                    status=Application.QUESTION
+                ))
+                | (Q(
                     partner__coordinator__editor__user__userprofile__approved_app_reminders=True
-                ),
-                status__in=[
-                    Application.PENDING,
-                    Application.QUESTION,
-                    Application.APPROVED,
-                ],
+                )&
+                Q(
+                    status=Application.APPROVED
+                )),
                 partner__status__in=[Partner.AVAILABLE],
                 editor__isnull=False,
             )

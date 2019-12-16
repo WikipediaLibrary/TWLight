@@ -9,6 +9,7 @@
 {% endblocktrans %}
 {% comment %} Translators: Breakdown as in 'cost breakdown'; analysis. {% endcomment %}
 <strong>{% trans "Breakdown" %}</strong><br />
+{% comment %} We make use of the text below to test the behaviour of reminder emails. If you plan to change any of the 'breakdown' text, you'd also need to change the corresponding tests in emails.tests.CoordinatorReminderEmailTest. {% endcomment %}
 {% if pending_count %}
   {% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}. {% endcomment %}
   {% blocktrans count counter=pending_count trimmed%}
