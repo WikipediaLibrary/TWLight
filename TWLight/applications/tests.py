@@ -2079,7 +2079,10 @@ class RenewApplicationTest(BaseApplicationViewTest):
             requested_access_duration=True,
         )
         app = ApplicationFactory(
-            partner=partner, status=Application.APPROVED, editor=editor, requested_access_duration=3
+            partner=partner,
+            status=Application.APPROVED,
+            editor=editor,
+            requested_access_duration=3,
         )
 
         renewal_url = reverse("applications:renew", kwargs={"pk": app.pk})
@@ -2390,13 +2393,9 @@ class ApplicationModelTest(TestCase):
     def test_get_authorization(self):
         # Approve an application so that we create an authorization
         partner = PartnerFactory(
-            authorization_method=Partner.PROXY,
-            requested_access_duration=True
+            authorization_method=Partner.PROXY, requested_access_duration=True
         )
-        application = ApplicationFactory(
-            partner=partner,
-            status=Application.PENDING
-        )
+        application = ApplicationFactory(partner=partner, status=Application.PENDING)
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
         application.partner.coordinator = coordinator.user
         application.partner.save()
@@ -2407,7 +2406,9 @@ class ApplicationModelTest(TestCase):
         )
 
         # Check that we're fetching the correct authorization
-        authorization = Authorization.objects.get(user=application.editor.user, partner=application.partner)
+        authorization = Authorization.objects.get(
+            user=application.editor.user, partner=application.partner
+        )
         self.assertEqual(application.get_authorization(), authorization)
 
 
