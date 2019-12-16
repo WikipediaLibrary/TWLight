@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 from unittest.mock import patch
 
@@ -432,7 +433,7 @@ class UserRenewalNoticeTest(TestCase):
 
         self.assertEqual(len(mail.outbox), 0)
 
-    def test_user_renewal_notice_future_date(self):
+    def test_user_renewal_notice_future_date_1(self):
         """
         If we have multiple authorizations to send emails for, let's make
         sure we send distinct emails to the right places.
@@ -456,6 +457,78 @@ class UserRenewalNoticeTest(TestCase):
         # (one element) list, and we need to compare sets to ensure we've
         # got 1 of each email.
         self.assertEqual(
-            set([mail.outbox[0].to[0], mail.outbox[1].to[0]]),
-            set(["editor@example.com", "editor2@example.com"]),
+            {mail.outbox[0].to[0], mail.outbox[1].to[0]},
+            {"editor@example.com", "editor2@example.com"},
         )
+
+
+class CoordinatorReminderEmailTest(TestCase):
+    def setUp(self):
+        super(CoordinatorReminderEmailTest, self).setUp()
+        editor = EditorFactory()
+        self.user = editor.user
+        editor2 = EditorFactory()
+        self.user2 = editor2.user
+
+        self.coordinator = EditorFactory(user__email="editor@example.com").user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+
+        self.partner = PartnerFactory(coordinator=self.coordinator)
+        self.partner2 = PartnerFactory(coordinator=self.coordinator)
+
+    def test_send_coordinator_reminder_email(self):
+        ApplicationFactory(
+            partner=self.partner,
+            status=Application.PENDING,
+            editor=self.user.editor
+        )
+
+        # Coordinator only wants reminders for apps under discussion
+        self.coordinator.userprofile.discussion_app_reminders = True
+        self.coordinator.userprofile.save()
+
+        call_command("send_coordinator_reminders")
+        self.assertEqual(len(mail.outbox), 0)
+
+        ApplicationFactory(
+            partner=self.partner2,
+            status=Application.QUESTION,
+            editor=self.user2.editor
+        )
+
+        call_command("send_coordinator_reminders")
+        self.assertEqual(len(mail.outbox), 1)
+        # We include the count for all waiting (PENDING, QUESTION,
+        # APPROVED) apps whenever we send an email, but trigger
+        # emails only based on preferences i.e. if a coordinator
+        # has enabled reminders only for QUESTION, we send a
+        # reminder only when we have an app of status: QUESTION,
+        # but include info on all apps in the email.
+        self.assertNotIn("One pending application", mail.outbox[0].body)
+        self.assertIn("One under discussion application", mail.outbox[0].body)
+        self.assertNotIn("One approved application", mail.outbox[0].body)
+
+        ApplicationFactory(
+            partner=self.partner,
+            status=Application.APPROVED,
+            editor=self.user2.editor
+        )
+        ApplicationFactory(
+            partner=self.partner2,
+            status=Application.SENT,
+            editor=self.user.editor
+        )
+
+        # Clear mail outbox since approvals send emails
+        mail.outbox = []
+        # Coordinator only wants reminders for apps under discussion
+        self.coordinator.userprofile.pending_app_reminders = True
+        self.coordinator.userprofile.approved_app_reminders = True
+        self.coordinator.userprofile.save()
+
+        call_command("send_coordinator_reminders")
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("One pending application", mail.outbox[0].body)
+        self.assertIn("One under discussion application", mail.outbox[0].body)
+        self.assertIn("One approved application", mail.outbox[0].body)
