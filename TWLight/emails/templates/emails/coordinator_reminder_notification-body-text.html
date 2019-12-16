@@ -1,5 +1,5 @@
 {% load i18n %}
-{% comment %} Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate email adresses or items in curly braces.{% endcomment %}
+{% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ total_apps }}, or {{ user }}. {% endcomment %}
 {% blocktrans trimmed %}
 Dear {{ user }},
 
@@ -7,12 +7,14 @@ Our records indicate that you are the designated coordinator for partners that
 have a total of {{ total_apps }} applications.
 {% endblocktrans %}
 {% if pending_count %}
+  {% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}. {% endcomment %}
   {% blocktrans count counter=pending_count trimmed%}
     One pending application.
   {% plural %}
     {{ counter }} pending applications.
   {% endblocktrans %}
 {% endif %}
+{% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}. {% endcomment %}
 {% if question_count %}
   {% blocktrans count counter=question_count trimmed%}
     One under discussion application.
@@ -21,12 +23,14 @@ have a total of {{ total_apps }} applications.
   {% endblocktrans %}
 {% endif %}
 {% if approved_count %}
+  {% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}. {% endcomment %}
   {% blocktrans count counter=approved_count trimmed %}
-    {{ approved_count }} approved applications.
+    One approved application.
   {% plural %}
     {{ counter }} approved applications.
   {% endblocktrans %}
 {% endif %}
+{% comment %}Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like {{ link }}; don't translate the email address either.{% endcomment %}
 {% blocktrans trimmed %}
 This is a gentle reminder that you may review applications at:
 {{ link }}
