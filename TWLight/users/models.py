@@ -102,7 +102,9 @@ class UserProfile(models.Model):
     discussion_app_reminders = models.BooleanField(
         default=False,
         # Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for under discussion applications
-        help_text=_("Does this coordinator want under discussion app reminder notices?"),
+        help_text=_(
+            "Does this coordinator want under discussion app reminder notices?"
+        ),
     )
     approved_app_reminders = models.BooleanField(
         default=False,

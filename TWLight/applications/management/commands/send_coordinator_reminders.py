@@ -20,10 +20,20 @@ class Command(BaseCommand):
         # or APPROVED for partners with a status of AVAILABLE.
         all_apps = (
             Application.objects.filter(
-                Q(partner__coordinator__editor__user__userprofile__pending_app_reminders=True) |
-                Q(partner__coordinator__editor__user__userprofile__discussion_app_reminders=True) |
-                Q(partner__coordinator__editor__user__userprofile__approved_app_reminders=True),
-                status__in=[Application.PENDING, Application.QUESTION, Application.APPROVED],
+                Q(
+                    partner__coordinator__editor__user__userprofile__pending_app_reminders=True
+                )
+                | Q(
+                    partner__coordinator__editor__user__userprofile__discussion_app_reminders=True
+                )
+                | Q(
+                    partner__coordinator__editor__user__userprofile__approved_app_reminders=True
+                ),
+                status__in=[
+                    Application.PENDING,
+                    Application.QUESTION,
+                    Application.APPROVED,
+                ],
                 partner__status__in=[Partner.AVAILABLE],
                 editor__isnull=False,
             )
@@ -45,21 +55,23 @@ class Command(BaseCommand):
             app_status_and_count = {
                 Application.PENDING: all_apps.filter(
                     status=Application.PENDING,
-                    partner__coordinator__editor=coordinator[0]
+                    partner__coordinator__editor=coordinator[0],
                 ).count(),
                 Application.QUESTION: all_apps.filter(
                     status=Application.QUESTION,
-                    partner__coordinator__editor=coordinator[0]
+                    partner__coordinator__editor=coordinator[0],
                 ).count(),
                 Application.APPROVED: all_apps.filter(
                     status=Application.APPROVED,
-                    partner__coordinator__editor=coordinator[0]
-                ).count()
+                    partner__coordinator__editor=coordinator[0],
+                ).count(),
             }
             try:
                 editor = Editor.objects.get(id=coordinator[0])
             except Editor.DoesNotExist:
-                logger.info("Editor {} does not exist; skipping.".format(coordinator[0]))
+                logger.info(
+                    "Editor {} does not exist; skipping.".format(coordinator[0])
+                )
                 break
             # Only bother with the signal if we have a coordinator email.
             if coordinator[1]:

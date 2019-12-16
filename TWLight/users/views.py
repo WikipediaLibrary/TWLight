@@ -40,7 +40,8 @@ from .forms import (
     EmailChangeForm,
     RestrictDataForm,
     UserEmailForm,
-    CoordinatorEmailForm)
+    CoordinatorEmailForm,
+)
 from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
@@ -208,7 +209,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             editor.user.userprofile.send_renewal_notices = send_renewal_notices
             editor.user.userprofile.save()
 
-            user= self.request.user
+            user = self.request.user
             if coordinators in user.groups.all():
                 if "send_pending_application_reminders" in request.POST:
                     send_pending_app_reminders = True
@@ -223,11 +224,17 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
                 else:
                     send_approved_app_reminders = False
                 user.userprofile.pending_app_reminders = send_pending_app_reminders
-                user.userprofile.discussion_app_reminders = send_discussion_app_reminders
+                user.userprofile.discussion_app_reminders = (
+                    send_discussion_app_reminders
+                )
                 user.userprofile.approved_app_reminders = send_approved_app_reminders
                 user.userprofile.save()
 
-                if not send_pending_app_reminders and not send_discussion_app_reminders and not send_pending_app_reminders:
+                if (
+                    not send_pending_app_reminders
+                    and not send_discussion_app_reminders
+                    and not send_pending_app_reminders
+                ):
                     messages.add_message(
                         request,
                         messages.WARNING,
@@ -236,16 +243,14 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
                             "You have chosen not to receive reminder emails. "
                             "As a coordinator, you should receive at least one "
                             "type of reminder emails, consider changing your preferences."
-                        )
+                        ),
                     )
                 else:
                     messages.add_message(
                         request,
                         messages.SUCCESS,
                         # Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-                        _(
-                            "Your reminder email preferences are updated."
-                        )
+                        _("Your reminder email preferences are updated."),
                     )
 
         return HttpResponseRedirect(reverse_lazy("users:home"))

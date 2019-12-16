@@ -28,8 +28,21 @@ class UserProfileInline(admin.StackedInline):
     can_delete = False
     raw_id_fields = ("user",)
     fieldsets = (
-        (None, {"fields": ("terms_of_use", "terms_of_use_date", "use_wp_email", "lang")}),
-        (_("Email preferences"), {"fields": ("send_renewal_notices", "pending_app_reminders", "discussion_app_reminders", "approved_app_reminders")}),
+        (
+            None,
+            {"fields": ("terms_of_use", "terms_of_use_date", "use_wp_email", "lang")},
+        ),
+        (
+            _("Email preferences"),
+            {
+                "fields": (
+                    "send_renewal_notices",
+                    "pending_app_reminders",
+                    "discussion_app_reminders",
+                    "approved_app_reminders",
+                )
+            },
+        ),
     )
 
 
