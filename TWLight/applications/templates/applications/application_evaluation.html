@@ -194,6 +194,17 @@
         {% trans 'No' %}
       {% endif %}
     </div>
+
+    {% if object.parent and object.parent.get_authorization %}
+      <div class="col-xs-12 col-sm-4">
+        {% comment %} Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.{% endcomment %}
+        <strong>{% trans 'Previous access expiry date' %}</strong>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        {{ previous_auth_expiry_date }}
+      </div>
+    {% endif %}
+
     {% if object.comments %}
       <div class="col-xs-12 col-sm-4">
         {% comment %} Translators: This labels the section of an application containing the additional comments submitted by the user when applying.{% endcomment %}

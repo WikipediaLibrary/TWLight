@@ -68,20 +68,23 @@
       <hr>
     {% endif %}
     <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i> <strong><a href="{% url 'partners:detail' each_authorization.partner.pk %}">{{ each_authorization.partner }}</a></strong>
-    {% if each_authorization.is_renewable %}
       {% if each_authorization.latest_app and not each_authorization.open_app %}
         {% comment %} Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled. {% endcomment %}
         <span class="pull-right" {% if not each_authorization.partner.renewals_available %}title="{% trans 'Renewals are not available for this partner' %}"{% endif %}>
           <a href="{% url 'applications:renew' each_authorization.latest_app.pk %}" class="btn btn-primary pull-right {% if not each_authorization.partner.renewals_available %}disabled{% endif %}" role="button">
-            {% comment %} Translators: Labels the button that links to the renewal url. {% endcomment %}
-            {% trans 'Renew' %}
+            {% if each_authorization.is_valid %}
+              {% comment %} Translators: Labels a button users can click to extend the duration of their access. {% endcomment %}
+              {% trans 'Extend' %}
+            {% else %}
+              {% comment %} Translators: Labels a button users can click to renew an expired account. {% endcomment %}
+              {% trans 'Renew' %}
+            {% endif %}
           </a>
         </span>
         <div class="clearfix"></div>
       {% endif %}
-    {% endif %}
     {% if each_authorization.open_app %}
-      {% comment %} Translators: Labels the button that links to the application page itself if the applications is already renewed. {% endcomment %}
+      {% comment %} Translators: Labels a button users can click to view an application requesting access to a resource. {% endcomment %}
       <a href="{% url 'applications:evaluate' each_authorization.open_app.pk %}" class="btn btn-primary pull-right" role="button">{% trans 'View application' %}</a><div class="clearfix"></div>
     {% endif %}
     {% if each_authorization.date_expires %}
@@ -91,7 +94,7 @@
             {% comment %} Translators: Text beside the date on which the authorization has expired. {% endcomment %}
             {% trans 'Expired on' %}: {{ each_authorization.date_expires }}
           {% else %}
-            {% comment %} Translators: Text beside the date on which the authorization will expired. {% endcomment %}
+            {% comment %} Translators: Text beside the date on which the authorization will expire. {% endcomment %}
             {% trans 'Expires on' %}: {{ each_authorization.date_expires }}
           {% endif %}
         </small>
