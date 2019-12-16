@@ -7,6 +7,8 @@
   <p>Our records indicate that you are the designated coordinator for partners that
      have a total of {{ total_apps }} applications.</p>
 {% endblocktrans %}
+{% comment %} Translators: Breakdown as in 'cost breakdown'; analysis. {% endcomment %}
+<strong>{% trans "Breakdown" %}</strong><br />
 {% if pending_count %}
   {% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}. {% endcomment %}
   {% blocktrans count counter=pending_count trimmed%}
