@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-12-09 15:13:38+0000\n"
+"PO-Revision-Date: 2019-12-12 14:49:39+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -63,13 +63,13 @@ msgstr "<p><small><i>Vos données personnelles seront traitées conformément à
 #: TWLight/applications/forms.py:208
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr "Votre demande à {partner}"
+msgstr "Votre candidature à {partner}"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:245
 #, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr "Vous devez vous enregistrer sur {url} avant de faire la demande."
+msgstr "Vous devez vous enregistrer sur {url} avant de postuler."
 
 #: TWLight/applications/forms.py:308
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
@@ -598,7 +598,6 @@ msgid "Last reviewed"
 msgstr "Dernière évaluation"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#, fuzzy
 msgid "Date applied"
 msgstr "Date de la demande"
 

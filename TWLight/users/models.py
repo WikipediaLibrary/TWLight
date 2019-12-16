@@ -423,7 +423,7 @@ class Authorization(models.Model):
         app_label = "users"
         verbose_name = "authorization"
         verbose_name_plural = "authorizations"
-        unique_together = ("user", "partner", "stream", "date_authorized")
+        unique_together = ("user", "partner", "stream")
 
     coordinators = get_coordinators()
 
