@@ -4,7 +4,30 @@
 Dear {{ user }},
 
 Our records indicate that you are the designated coordinator for partners that 
-have a total of {{ app_count }} applications with a status of {{ app_status }}.
+have a total of {{ total_apps }} applications.
+{% endblocktrans %}
+{% if pending_count %}
+  {% blocktrans count counter=pending_count trimmed%}
+    One pending application.
+  {% plural %}
+    {{ counter }} pending applications.
+  {% endblocktrans %}
+{% endif %}
+{% if question_count %}
+  {% blocktrans count counter=question_count trimmed%}
+    One under discussion application.
+  {% plural %}
+    {{ counter }} under discussion applications.
+  {% endblocktrans %}
+{% endif %}
+{% if approved_count %}
+  {% blocktrans count counter=approved_count trimmed %}
+    {{ approved_count }} approved applications.
+  {% plural %}
+    {{ counter }} approved applications.
+  {% endblocktrans %}
+{% endif %}
+{% blocktrans trimmed %}
 This is a gentle reminder that you may review applications at:
 {{ link }}
 
