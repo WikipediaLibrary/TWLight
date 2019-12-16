@@ -115,9 +115,8 @@ def send_coordinator_reminder_emails(sender, **kwargs):
 
     logger.info(
         "Received coordinator reminder signal for {coordinator_wp_username}; "
-        "preparing to send reminder email to {coordinator_email}.".format(
+        "preparing to send reminder email.".format(
             coordinator_wp_username=coordinator_wp_username,
-            coordinator_email=coordinator_email,
         )
     )
     email = CoordinatorReminderNotification()
