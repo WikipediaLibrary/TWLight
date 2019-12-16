@@ -89,6 +89,24 @@ class UserEmailForm(forms.Form):
         ].initial = user.userprofile.send_renewal_notices
 
 
+class CoordinatorEmailForm(forms.Form):
+    send_pending_application_reminders = forms.BooleanField(required=False)
+    send_discussion_application_reminders = forms.BooleanField(required=False)
+    send_approved_application_reminders = forms.BooleanField(required=False)
+
+    def __init__(self, user, *args, **kwargs):
+        super(CoordinatorEmailForm, self).__init__(*args, **kwargs)
+        self.fields[
+            "send_pending_application_reminders"
+        ].initial = user.userprofile.pending_app_reminders
+        self.fields[
+            "send_discussion_application_reminders"
+        ].initial = user.userprofile.discussion_app_reminders
+        self.fields[
+            "send_approved_application_reminders"
+        ].initial = user.userprofile.approved_app_reminders
+
+
 class RestrictDataForm(forms.Form):
     restricted = forms.BooleanField(required=False)
 
