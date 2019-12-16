@@ -199,7 +199,6 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             return response
 
         if "update_email_settings" in request.POST:
-            logger.info(request.POST)
             # Unchecked checkboxes just don't send POST data
             if "send_renewal_notices" in request.POST:
                 send_renewal_notices = True

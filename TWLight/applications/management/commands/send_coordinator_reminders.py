@@ -51,7 +51,6 @@ class Command(BaseCommand):
         )
 
         for coordinator, count in list(coordinators.items()):
-            logger.info(coordinator)
             app_status_and_count = {
                 Application.PENDING: all_apps.filter(
                     status=Application.PENDING,
