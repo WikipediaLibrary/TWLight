@@ -86,7 +86,7 @@ class UserRenewalNotice(template_mail.TemplateMail):
 @receiver(Reminder.coordinator_reminder)
 def send_coordinator_reminder_emails(sender, **kwargs):
     """
-    Any time the related managment command is run, this sends email to the
+    Any time the related management command is run, this sends email to the
     to designated coordinators, reminding them to login
     to the site if there are pending applications.
     """
@@ -116,7 +116,7 @@ def send_coordinator_reminder_emails(sender, **kwargs):
     logger.info(
         "Received coordinator reminder signal for {coordinator_wp_username}; "
         "preparing to send reminder email.".format(
-            coordinator_wp_username=coordinator_wp_username,
+            coordinator_wp_username=coordinator_wp_username
         )
     )
     email = CoordinatorReminderNotification()

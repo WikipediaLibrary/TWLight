@@ -55,13 +55,13 @@ from .models import Application
 class SendCoordinatorRemindersTest(TestCase):
     """
     Stub of a test for the send_coordinator_reminders command.
-    Currently we're not actually checking for any desiured/undesired behavior,
+    Currently we're not actually checking for any desired/undesired behavior,
     we're just verifying that the command can be executed without throwing an
     error. 
     """
 
     def test_command_output(self):
-        call_command("send_coordinator_reminders", "--app_status=PENDING")
+        call_command("send_coordinator_reminders")
 
 
 class SynchronizeFieldsTest(TestCase):
