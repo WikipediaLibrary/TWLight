@@ -543,6 +543,9 @@ class ViewsTestCase(TestCase):
         # Need a password so we can login
         self.user_editor2.set_password("editor")
         self.user_editor2.userprofile.send_renewal_notices = False
+        self.user_editor2.userprofile.pending_app_reminders = False
+        self.user_editor2.userprofile.discussion_app_reminders = False
+        self.user_editor2.userprofile.approved_app_reminders = False
         self.user_editor2.save()
         # Only coordinators get to change their reminder preferences
         get_coordinators().user_set.add(self.user_editor2)
@@ -584,13 +587,7 @@ class ViewsTestCase(TestCase):
 
         response = self.client.post(
             self.url2,
-            {
-                "update_email_settings": ["Update"],
-                "send_renewal_notices": ["on"],
-                "send_pending_application_reminders": ["on"],
-                "send_discussion_application_reminders": ["on"],
-                "send_approved_application_reminders": ["on"],
-            },
+            {"update_email_settings": ["Update"], "send_renewal_notices": ["on"]},
         )
 
         # Should be successfully redirected back to the user page.
@@ -600,9 +597,9 @@ class ViewsTestCase(TestCase):
 
         self.assertEqual(self.user_editor2.userprofile.send_renewal_notices, True)
         # Only coordinators get to change their reminder preferences
-        self.assertEqual(self.user_editor2.userprofile.pending_app_reminders, False)
-        self.assertEqual(self.user_editor2.userprofile.discussion_app_reminders, False)
-        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, False)
+        self.assertEqual(self.user_editor2.userprofile.pending_app_reminders, True)
+        self.assertEqual(self.user_editor2.userprofile.discussion_app_reminders, True)
+        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, True)
 
 
 class UserProfileModelTestCase(TestCase):

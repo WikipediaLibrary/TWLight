@@ -483,7 +483,8 @@ class CoordinatorReminderEmailTest(TestCase):
         )
 
         # Coordinator only wants reminders for apps under discussion
-        self.coordinator.userprofile.discussion_app_reminders = True
+        self.coordinator.userprofile.pending_app_reminders = False
+        self.coordinator.userprofile.approved_app_reminders = False
         self.coordinator.userprofile.save()
 
         call_command("send_coordinator_reminders")
