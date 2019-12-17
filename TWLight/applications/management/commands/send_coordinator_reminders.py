@@ -49,21 +49,21 @@ class Command(BaseCommand):
         )
 
         for coordinator, count in list(coordinators.items()):
-            app_status_and_count = {
-                Application.PENDING: all_apps.filter(
-                    status=Application.PENDING,
-                    partner__coordinator__editor=coordinator[0],
-                ).count(),
-                Application.QUESTION: all_apps.filter(
-                    status=Application.QUESTION,
-                    partner__coordinator__editor=coordinator[0],
-                ).count(),
-                Application.APPROVED: all_apps.filter(
-                    status=Application.APPROVED,
-                    partner__coordinator__editor=coordinator[0],
-                ).count(),
-            }
             try:
+                app_status_and_count = {
+                    Application.PENDING: all_apps.filter(
+                        status=Application.PENDING,
+                        partner__coordinator__editor=coordinator[0],
+                    ).count(),
+                    Application.QUESTION: all_apps.filter(
+                        status=Application.QUESTION,
+                        partner__coordinator__editor=coordinator[0],
+                    ).count(),
+                    Application.APPROVED: all_apps.filter(
+                        status=Application.APPROVED,
+                        partner__coordinator__editor=coordinator[0],
+                    ).count(),
+                }
                 editor = Editor.objects.get(id=coordinator[0])
             except Editor.DoesNotExist:
                 logger.info(

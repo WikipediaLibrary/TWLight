@@ -95,19 +95,19 @@ class UserProfile(models.Model):
         help_text=_("Does this user want renewal reminder notices?"),
     )
     pending_app_reminders = models.BooleanField(
-        default=False,
+        default=True,
         # Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for pending applications
         help_text=_("Does this coordinator want pending app reminder notices?"),
     )
     discussion_app_reminders = models.BooleanField(
-        default=False,
+        default=True,
         # Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for under discussion applications
         help_text=_(
             "Does this coordinator want under discussion app reminder notices?"
         ),
     )
     approved_app_reminders = models.BooleanField(
-        default=False,
+        default=True,
         # Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for approved applications
         help_text=_("Does this coordinator want approved app reminder notices?"),
     )
