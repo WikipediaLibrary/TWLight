@@ -22,24 +22,24 @@
 {% endblock extra_css %}
 
 {% block content %}
-  <a href="{% url 'partner:filter' %}" class="btn btn-primary">Back to partners</a>
   <h1>{{ object }}</h1>
+  <a href="{% url 'partner:filter' %}" class="btn btn-default">Back to partners</a>
   {% if not object.authorization_method == object.BUNDLE %}
     {% url 'applications:apply_single' object.pk as app_url %}
     {% url 'about' as about %}
     {% url 'terms' as terms %}
     {% if object.is_waitlisted %}
     <div class="alert alert-warning visible-xs resource-label-warning">
-        {% comment %} Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
-        <span class="resource-label">{% trans "Waitlisted" %}</span>
-        <p>
-        {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
-        {% blocktrans trimmed %}
-        There are no access grants available for this partner
-        at this time. You can still apply for access; applications will
-        be processed when access is available.
-        {% endblocktrans %}
-        </p>
+       {% comment %} Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
+       <span class="resource-label">{% trans "Waitlisted" %}</span>
+       <p>
+       {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
+       {% blocktrans trimmed %}
+       There are no access grants available for this partner
+       at this time. You can still apply for access; applications will
+       be processed when access is available.
+       {% endblocktrans %}
+       </p>
     </div>
     {% endif %}
     {% if user_sent_apps %}
