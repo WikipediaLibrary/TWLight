@@ -23,6 +23,8 @@
 
 {% block content %}
   <h1>{{ object }}</h1>
+  {% comment %} Translators: This text is located on individual partner pages, and when clicked takes users back to the list of publishers. {% endcomment %}
+  <a href="{% url 'partners:filter' %}" class="btn btn-default">{% trans "Back to partners" %}</a><br><br>
   {% if not object.authorization_method == object.BUNDLE %}
     {% url 'applications:apply_single' object.pk as app_url %}
     {% url 'about' as about %}
