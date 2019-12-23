@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:41+0000\n"
+"PO-Revision-Date: 2019-12-23 15:15:54+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -644,7 +644,7 @@ msgstr "Нажмите \"Подтвердить\", чтобы обновить �
 #: TWLight/users/templates/users/authorization_confirm_return.html:15
 #: TWLight/users/views.py:391
 msgid "Confirm"
-msgstr ""
+msgstr "Подтвердить"
 
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:21
@@ -851,9 +851,8 @@ msgstr ""
 
 #. Translators: This labels a textfield where users can enter their email ID.
 #: TWLight/emails/forms.py:17
-#, fuzzy
 msgid "Your email"
-msgstr "Почта учётной записи"
+msgstr "Ваш адрес эл. почты"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:19
@@ -863,7 +862,7 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:21
 msgid "Message"
-msgstr ""
+msgstr "Сообщение"
 
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
@@ -964,30 +963,28 @@ msgstr ""
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:39
-#, fuzzy
 msgid "Contact info"
-msgstr "Свяжитесь с нами"
+msgstr "Контактная информация"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:43
-#, fuzzy
 msgid "Meta page"
-msgstr "Следующая страница"
+msgstr "Мета-страница"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:45
 msgid "The Wikipedia Library"
-msgstr ""
+msgstr "Библиотека Википедии"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/emails/templates/emails/contact.html:52
 msgid "Mailing list"
-msgstr ""
+msgstr "Список рассылки"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
 #: TWLight/emails/templates/emails/contact.html:56
 msgid "IRC"
-msgstr ""
+msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:64
@@ -1145,7 +1142,7 @@ msgstr "URL страницы"
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
 #: TWLight/graphs/views.py:328 TWLight/graphs/views.py:363
 msgid "Number of (non-unique) visitors"
-msgstr ""
+msgstr "Количество (неуникальных) посетителей"
 
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
@@ -1279,12 +1276,12 @@ msgstr "Недоступно"
 #. Translators: This is the name of the authorization method whereby user accounts are set up via an access code.
 #: TWLight/resources/models.py:188
 msgid "Access codes"
-msgstr ""
+msgstr "Коды доступа"
 
 #. Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
 #: TWLight/resources/models.py:190
 msgid "Proxy"
-msgstr ""
+msgstr "Прокси"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #. Translators: Title text for the Library Bundle icon shown on the collection page.
