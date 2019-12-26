@@ -10,7 +10,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-12-23 15:15:54+0000\n"
+"PO-Revision-Date: 2019-12-26 12:00:48+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2119,7 +2119,7 @@ msgstr "Métricas"
 #: TWLight/templates/base.html:200
 #, python-format
 msgid "You don't have an email on file. We can't finalize your access to partner resources, and you won't be able to <a href=\"%(contact_us_url)s\">contact us</a> without an email. Please <a href=\"%(email_url)s\">update your email</a>."
-msgstr "Não tem um endereço de e-mail no ficheiro. Nós não podemos finalizar o seu acesso aos recursos do parceiro, e não irá poder <a href=\"%(contact_us_url)s\">contactar-nos</a> sem um em-mail. Por favor, <a href=\"%(email_url)s\">atualize o seu e-mail</a>."
+msgstr "Não tem um endereço de correio eletrónico registado. Não podemos finalizar o seu acesso aos recursos de parceiros, nem poderá <a href=\"%(contact_us_url)s\">contactar-nos</a>, sem um endereço. <a href=\"%(email_url)s\">Atualize o seu correio eletrónico</a>, por favor."
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
 #: TWLight/templates/base.html:211
@@ -2191,12 +2191,12 @@ msgstr "Média de contas por utilizador"
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the panel with the renewal rate for proxy partners.
 #: TWLight/templates/dashboard.html:97
 msgid "Renewal rate (proxy partners only)"
-msgstr "Taxa de renovação (apenas parceiros proxy)"
+msgstr "Taxa de renovação (apenas parceiros com método de autorização 'proxy')"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button to download the authorization renewal rates.
 #: TWLight/templates/dashboard.html:104
 msgid "Download renewal rates over time as CSV"
-msgstr "Transfira as taxas de renovação ao longo do tempo, como CSV"
+msgstr "Descarregue as taxas de renovação ao longo do tempo, como CSV"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the section showing pageview data, only visible to TWL staff.
 #: TWLight/templates/dashboard.html:118
@@ -2282,7 +2282,7 @@ msgstr "Benefícios"
 #: TWLight/templates/home.html:37
 #, python-format
 msgid "<p>The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects. </p> <p>Through the Library Card you can apply for access to %(partner_count)s leading publishers of reliable sources including 80,000 unique journals that would otherwise be paywalled. Use just your Wikipedia login to sign up. Coming soon... direct access to resources using only your Wikipedia login!</p> <p>If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply.</p>"
-msgstr "<p>A 'Biblioteca' da Wikipédia oferece acesso gratuito a materiais de pesquisa para melhorar a sua capacidade de contribuir com conteúdos para os projetos da Wikimedia. </p> <p>Através do 'Cartão da Biblioteca', pode candidatar-se para aceder a fontes confiáveis publicadas por %(partner_count)s editoras líderes, incluindo 80.000 revistas únicas cujo acesso seria, de outra forma, pago. Use unicamente a sua sessão na Wikipédia para se inscrever. Brevemente... terá acesso direto aos recursos utilizando apenas a sua sessão na Wikipédia!</p> <p>Se achar que poderia utilizar o acesso aos recursos de um dos nossos parceiros e que é um editor ativo em qualquer projeto apoiado pela Fundação Wikimedia, por favor, candidate-se.</p>"
+msgstr "<p>A Biblioteca da Wikipédia oferece acesso gratuito a materiais de pesquisa para melhorar a sua capacidade de contribuir com conteúdos para os projetos da Wikimedia. </p> <p>Através do Cartão da Biblioteca, pode candidatar-se a ter acesso a fontes confiáveis publicadas por %(partner_count)s editoras de vanguarda, incluindo 80 000 revistas cujo acesso seria, de outra forma, pago. Use unicamente a sua sessão na Wikipédia para se inscrever. Em breve... terá acesso direto aos recursos usando apenas a sua sessão na Wikipédia!</p> <p>Se achar que lhe seria útil ter acesso aos recursos de um dos nossos parceiros e for um editor ativo em qualquer projeto apoiado pela Wikimedia Foundation, candidate-se, por favor.</p>"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'partners' section contains a list of links to featured partner resources. This is the header for that section.
 #: TWLight/templates/home.html:57
@@ -2942,7 +2942,7 @@ msgstr "Se decidir desativar a sua conta da Biblioteca da Wikipédia, pode usar 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:226
 msgid "The Wikipedia Library is run by WMF Staff, Contractors, and approved volunteer Coordinators. The data associated with your account will be shared with the WMF staff, contractors, service providers, and volunteer coordinators who need to process the information in connection with their work for the Wikipedia Library, and who are subject to confidentiality obligations. We will also use your data for internal Wikipedia Library purposes such as distributing user surveys and account notifications, and in a depersonalized or aggregated fashion for statistical analysis and administration. Finally, we will share your information with the publishers whom you specifically select in order to provide you with access to resources. Otherwise, your information will not be shared with third parties, with the exception of the circumstances described below."
-msgstr "A Biblioteca da Wikipédia é administrada pela Equipa da Fundação Wikimedia, Fornecedores, e Coordenadores voluntários aprovados. Os dados associados com a sua conta serão partilhados com a equipa da Wikimedia, fornecedores, provedores de serviços, e coordenadores voluntários que precisam de processar a informação relacionada com os seus pr´prios trabalhos para a Biblioteca da Wikipédia, e que estão sujeitas às obrigações de confidencialidade. Nós também iremos utilizar os seus dados para fins internos da Biblioteca da Wikipedia, tais como distribuir pesquisas de utilizadores e notificações de contas, e de forma despersonalizada ou agregada para análise e administração estatística. Por fim, nós iremos partilhar a sua informação com os editores que especificamente seleciona para fornecer acesso aos recursos. Caso contrário, a Fundação Wikimedia só irá partilhar a sua informação com as editoras especificamente selecionadas por si, exceto nas circunstâncias descritas abaixo."
+msgstr "A Biblioteca da Wikipédia é administrada por funcionários da WMF, fornecedores externos e coordenadores voluntários aprovados. Os dados associados à sua conta serão partilhados com a equipa da WMF, fornecedores externos, prestadores de serviços e coordenadores voluntários, que precisam de processar as informações no âmbito do seu trabalho para a Biblioteca da Wikipédia, e que estão sujeitos a obrigações de confidencialidade. Também usaremos os seus dados para fins internos da Biblioteca da Wikipédia, tais como a distribuição de inquéritos aos utilizadores e notificações de contas, e de forma despersonalizada ou agregada para análise estatística e administração. Por fim, partilharemos a sua informação com as editoras que selecionar especificamente, de forma a lhe fornecer acesso aos recursos. Caso contrário, as suas informações não serão partilhadas com terceiros, exceto nas circunstâncias descritas abaixo."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
 #: TWLight/users/templates/users/terms.html:233
@@ -2977,7 +2977,7 @@ msgstr "Note, por favor, que caso haja diferenças de significado ou interpreta�
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:276
 msgid "See also the <a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Wikimedia Foundation Privacy Policy</a>."
-msgstr "Consulte também a <a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Política de Privacidade da Fundação Wikimedia</a>."
+msgstr "Consulte também as <a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Normas de Privacidade da Wikimedia Foundation</a>."
 
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:285
