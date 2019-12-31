@@ -10,7 +10,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-12-26 12:00:48+0000\n"
+"PO-Revision-Date: 2019-12-31 06:57:31+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2036,7 +2036,7 @@ msgstr "Poderá notar, ao aceder a recursos via EZProxy, que os URL são reescri
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:164
 msgid "Typically once you’ve logged in your session will remain active in your browser for up to two hours after you’ve finished searching. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser."
-msgstr ""
+msgstr "Normalmente, após ter entrado, a sua sessão permanece ativa no ''browser'' até duas horas após terminar a pesquisa. Note que o uso do EZProxy exige a ativação dos ''cookies''. Se está a ter problemas, tente limpar a ''cache'' e reiniciar o ''browser''."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:172
@@ -2053,7 +2053,7 @@ msgstr "As práticas de citação variam entre projetos e até mesmo de artigo p
 #: TWLight/templates/about.html:188
 #, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a href=\"%(contact_url)s\"> contact page</a>."
-msgstr ""
+msgstr "Se tem dúvidas, precisa de ajuda ou quer ajudar, consulte a nossa <a href=\"%(contact_url)s\">página de contacto</a>, por favor"
 
 #: TWLight/templates/base.html:14 TWLight/templates/base.html:71
 msgid "The Wikipedia Library Card Platform"
@@ -2520,7 +2520,7 @@ msgstr "Já enviámos uma mensagem eletrónica de aviso acerca desta autorizaç�
 #: TWLight/users/templates/users/authorization_confirm_return.html:10
 #, python-format
 msgid "You will no longer be able to access <b>%(partner)s's</b> resources via the Library Card platform, but can request access again by clicking 'renew', if you change your mind. Are you sure you want to return your access?"
-msgstr ""
+msgstr "Deixará de poder aceder aos recursos do parceiro <b>%(partner)s</b> através da plataforma Cartão da Biblioteca, mas poderá voltar a pedir acesso clicando em 'renovar' se mudar de ideias. Tem a certeza de que deseja devolver o seu acesso?"
 
 #. Translators: Alt text for the Library Bundle icon shown on the collection page.
 #: TWLight/users/templates/users/collection_tile.html:17
@@ -2900,12 +2900,12 @@ msgstr "Serviços de pesquisa externos e de <i>proxy</i>"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:172
 msgid "Certain resources may only be accessed using an external search service, such as the EBSCO Discovery Service, or a proxy service, such as OCLC EZProxy. If you use such external search and/or proxy services, please review the applicable terms of use and privacy policies."
-msgstr ""
+msgstr "Certos recursos só podem ser acedidos usando um serviço de pesquisa externo, como o EBSCO Discovery Service, ou um serviço de ''proxy'', como o OCLC EZProxy. Se usar serviços externos de pesquisa ou ''proxy'', reveja as condições de utilização e normas de privacidade relevantes."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:179
 msgid "In addition, if you use OCLC EZProxy, please note that you may not use it for commercial purposes."
-msgstr ""
+msgstr "Adicionalmente, se usar o OCLC EZProxy, note que não pode usá-lo para fins comerciais, por favor."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:185
@@ -2915,7 +2915,7 @@ msgstr "Retenção e tratamento de dados"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:189
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information:  your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr ""
+msgstr "A Wikimedia Foundation e os nossos fornecedores de serviços usam as suas informações com a finalidade legítima de fornecer serviços da Biblioteca da Wikipédia em apoio à nossa missão caritativa. Quando se candidata a uma conta da Biblioteca da Wikipédia, ou usa a sua conta da Biblioteca da Wikipédia, podemos recolher rotineiramente as seguintes informações: o seu nome de utilizador, endereço de correio eletrónico, contagem de edições, data de registo, número de identificação de utilizador, os grupos aos quais pertence e todos os direitos de utilizador especiais; o seu nome, país de residência, profissão e afiliação, se exigido por um parceiro ao qual se esteja a candidatar; a sua descrição narrativa das suas contribuições e razões para pedir acesso aos recursos dos parceiros; e a data em que concorda com estas condições de utilização."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:197
@@ -2926,7 +2926,7 @@ msgstr "Cada editora que é membro do programa Biblioteca da Wikipédia requer i
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:204
 msgid "You can browse the Wikipedia Library site without logging in, but will need to log in to apply or access proprietary partner resources. We use the data provided by you via OAuth and Wikimedia API calls to assess your application for access and to process approved requests."
-msgstr ""
+msgstr "Pode explorar a Biblioteca da Wikipédia sem iniciar uma sessão, mas terá de iniciá-la para se candidatar a acesso, ou aceder, aos recursos restritos dos parceiros. Usamos os dados fornecidos por si nas chamadas das API do OAuth e da Wikimedia, para avaliar os seus pedidos de acesso e para processar os pedidos aprovados."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:212
@@ -2952,7 +2952,7 @@ msgstr "Poderemos divulgar informações coligidas quando tal for exigido por le
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:240
 msgid "We take the security of your personal data seriously, and take reasonable precautions to ensure your data is protected. These precautions include access controls to limit who has access to your data and security technologies to protect data stored on the server. However, we cannot guarantee the safety of your data as it is transmitted and stored."
-msgstr ""
+msgstr "Encaramos com seriedade a segurança dos seus dados pessoais e tomamos as precauções que são razoáveis para garantir que os seus dados estão protegidos. Estas precauções incluem controlos de acesso para limitar quem tem acesso aos seus dados e tecnologias de segurança para proteger os dados armazenados no servidor. No entanto, não podemos garantir a segurança dos seus dados quando estes são transmitidos e armazenados."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:247
