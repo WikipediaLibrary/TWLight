@@ -18,7 +18,7 @@ from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
-from .models import Partner, Stream, Suggestion
+from .models import Partner, Stream, Suggestion, TextFieldTag
 
 import logging
 
@@ -45,6 +45,16 @@ class PartnersFilterView(FilterView):
         else:
             return Partner.objects.order_by("company_name")
 
+    def get_context_data(self, **kwargs):
+        context = super(PartnersFilterView, self).get_context_data(**kwargs)
+        try:
+            filter_data = kwargs.pop("filter").data
+            tag_id = filter_data.get("tags")
+            if tag_id:
+                context["tag"] = TextFieldTag.objects.get(id=tag_id)
+        except KeyError:
+            pass
+        return context
 
 class PartnersDetailView(DetailView):
     model = Partner
