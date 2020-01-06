@@ -1,6 +1,4 @@
 from django.conf.urls import url
-from django_filters.views import FilterView
-from .models import Partner
 from .filters import PartnerFilter
 
 from . import views

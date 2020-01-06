@@ -52,6 +52,15 @@ class TextFieldTag(TagBase):
 
     name = models.TextField(verbose_name=_("Name"), unique=False, max_length=100)
     slug = models.SlugField(verbose_name=_("Slug"), unique=True, max_length=100)
+    meta_url = models.URLField(
+        blank=True,
+        null=True,
+        # Translators: In the administrator interface, this text is help text for a field where staff can link to Meta-Wiki for more information on a tag.
+        help_text=_(
+            "Link to Meta-Wiki (eg.: https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Collections/Agroforestry) "
+            "for additional information for this tag."
+        ),
+    )
 
     class Meta:
         verbose_name = _("Tag")
