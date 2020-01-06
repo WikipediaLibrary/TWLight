@@ -54,7 +54,10 @@ class PartnersFilterView(FilterView):
                 context["tag"] = TextFieldTag.objects.get(id=tag_id)
         except KeyError:
             pass
+        except TextFieldTag.DoesNotExist:
+            pass
         return context
+
 
 class PartnersDetailView(DetailView):
     model = Partner
