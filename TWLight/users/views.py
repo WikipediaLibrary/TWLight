@@ -698,8 +698,10 @@ class CollectionUserView(SelfOnly, ListView):
                                 each_authorization.latest_sent_app = Application.objects.filter(
                                     status=Application.SENT,
                                     partner=each_authorization.partner,
-                                    editor=each_authorization.user.editor
-                                ).latest("id")
+                                    editor=each_authorization.user.editor,
+                                ).latest(
+                                    "id"
+                                )
                             except Application.DoesNotExist:
                                 pass
                         else:
