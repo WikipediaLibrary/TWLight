@@ -139,6 +139,22 @@ class Editor(models.Model):
         # Translators: The date the user's profile was created on the website (not on Wikipedia).
         help_text=_("When this profile was first created"),
     )
+    # Set as non-editable.
+    date_prev_editcount_updated = models.DateField(
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+        help_text=_("When the previous editcount was last updated from Wikipedia"),
+    )
+    # Translators: The number of edits this user has made to all Wikipedia projects 30 days ago
+    prev_editcount = models.IntegerField(
+        default=0,
+        null=True,
+        blank=True,
+        editable=False,
+        help_text=_("30-day-old Wikipedia edit count"),
+    )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
@@ -257,6 +273,17 @@ class Editor(models.Model):
         else:
             return None
 
+    @property
+    def is_bundle_eligible(self, identity, global_userinfo):
+
+        # prev_editcount is set to 0 for the first 30 days, all edits get counted here for new users.
+        recent_edits = self.wp_editcount - self.prev_editcount
+
+        if self._is_user_valid(identity, global_userinfo) and recent_edits >= 10:
+            return True
+        else:
+            return False
+
     def _is_user_valid(self, identity, global_userinfo):
         """
         Check for the eligibility criteria laid out in the terms of service.
@@ -374,6 +401,13 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
+            # If it's been 30 days or more since we last updated historical editcount,
+            # copy wp_editcount to prev_editcount before updating wp_editcount.
+            # This allows us track recent edits for bundle eligibility.
+            if self.date_prev_editcount_updated:
+                editcount_update_delta = date.today() - self.date_prev_editcount_updated
+                if editcount_update_delta.days >= 30:
+                    self.prev_editcount = self.wp_editcount
             self.wp_editcount = global_userinfo["editcount"]
         # Try oauth registration date first.  If it's not valid, try the global_userinfo date
         try:
@@ -389,6 +423,7 @@ class Editor(models.Model):
 
         self.wp_registered = reg_date
         self.wp_valid = self._is_user_valid(identity, global_userinfo)
+        self.date_prev_editcount_updated = now()
         self.save()
 
         # This will be True the first time the user logs in, since use_wp_email
