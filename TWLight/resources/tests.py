@@ -21,13 +21,7 @@ from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, StreamFactory
-from .models import (
-    Language,
-    RESOURCE_LANGUAGES,
-    Partner,
-    AccessCode,
-    TextFieldTag,
-)
+from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode, TextFieldTag
 from .views import PartnersDetailView, PartnersFilterView, PartnersToggleWaitlistView
 from .filters import PartnerFilter
 
