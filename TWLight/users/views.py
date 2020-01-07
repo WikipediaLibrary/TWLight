@@ -690,9 +690,21 @@ class CollectionUserView(SelfOnly, ListView):
                     each_authorization.about_to_expire
                     or not each_authorization.is_valid
                 ):
-                    each_authorization.latest_app = each_authorization.get_latest_app()
-                    if each_authorization.latest_app:
-                        if not each_authorization.latest_app.is_renewable:
+                    latest_app = each_authorization.get_latest_app()
+                    if latest_app:
+                        each_authorization.latest_sent_app = None
+                        if latest_app.status != Application.SENT:
+                            try:
+                                each_authorization.latest_sent_app = Application.objects.filter(
+                                    status=Application.SENT,
+                                    partner=each_authorization.partner,
+                                    editor=each_authorization.user.editor
+                                ).latest("id")
+                            except Application.DoesNotExist:
+                                pass
+                        else:
+                            each_authorization.latest_sent_app = latest_app
+                        if not latest_app.is_renewable:
                             try:
                                 each_authorization.open_app = Application.objects.filter(
                                     editor=editor,
