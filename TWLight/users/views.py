@@ -122,6 +122,8 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
         context["form"] = EditorUpdateForm(instance=editor)
         context["language_form"] = SetLanguageForm(user=user)
         context["email_form"] = UserEmailForm(user=user)
+        # Check if the user is in the group: 'coordinators',
+        # and add the reminder email preferences form.
         if coordinators in user.groups.all():
             context["coordinator_email_form"] = CoordinatorEmailForm(user=user)
 
@@ -209,7 +211,10 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             editor.user.userprofile.save()
 
             user = self.request.user
+            # Again, process email preferences data only if the user
+            # is present in the group: 'coordinators'.
             if coordinators in user.groups.all():
+                # Unchecked checkboxes doesn't send POST data
                 if "send_pending_application_reminders" in request.POST:
                     send_pending_app_reminders = True
                 else:
@@ -229,6 +234,9 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
                 user.userprofile.approved_app_reminders = send_approved_app_reminders
                 user.userprofile.save()
 
+                # Although not disallowed, we'd prefer if coordinators opted
+                # to receive at least one (of the 3) type of reminder emails.
+                # If they choose to receive none, we post a warning message.
                 if (
                     not send_pending_app_reminders
                     and not send_discussion_app_reminders

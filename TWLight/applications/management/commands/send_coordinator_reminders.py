@@ -17,7 +17,8 @@ class Command(BaseCommand):
         # TWLight.applications.views.ListApplicationsView.get_queryset().
         # But that now expects a request object. So, we did a copy/paste.
         # We're actually getting apps with a status of PENDING or QUESTION
-        # or APPROVED for partners with a status of AVAILABLE.
+        # or APPROVED, and their corresponding user preferences being True
+        # for partners with a status of AVAILABLE.
         all_apps = (
             Application.objects.filter(
                 Q(
@@ -50,6 +51,9 @@ class Command(BaseCommand):
 
         for coordinator, count in list(coordinators.items()):
             try:
+                # We create a dictionary with the three status codes
+                # we'd want to send emails for, and their corresponding
+                # counts.
                 app_status_and_count = {
                     Application.PENDING: all_apps.filter(
                         status=Application.PENDING,

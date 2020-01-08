@@ -95,6 +95,8 @@ def send_coordinator_reminder_emails(sender, **kwargs):
     question_count = None
     approved_count = None
     total_apps = 0
+    # We unwrap app_status_and_count and take stock of the data
+    # in a way that's convenient for us to use in email.send
     for status, count in app_status_and_count.items():
         if count != 0 and status == Application.PENDING:
             pending_count = count

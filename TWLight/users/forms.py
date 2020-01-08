@@ -96,6 +96,8 @@ class CoordinatorEmailForm(forms.Form):
 
     def __init__(self, user, *args, **kwargs):
         super(CoordinatorEmailForm, self).__init__(*args, **kwargs)
+        # We default to the values from the user's userprofile on
+        # page (Profile) load.
         self.fields[
             "send_pending_application_reminders"
         ].initial = user.userprofile.pending_app_reminders
