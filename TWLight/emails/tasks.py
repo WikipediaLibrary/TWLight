@@ -86,12 +86,28 @@ class UserRenewalNotice(template_mail.TemplateMail):
 @receiver(Reminder.coordinator_reminder)
 def send_coordinator_reminder_emails(sender, **kwargs):
     """
-    Any time the related managment command is run, this sends email to the
+    Any time the related management command is run, this sends email to the
     to designated coordinators, reminding them to login
     to the site if there are pending applications.
     """
-    app_status = kwargs["app_status"]
-    app_count = kwargs["app_count"]
+    app_status_and_count = kwargs["app_status_and_count"]
+    pending_count = None
+    question_count = None
+    approved_count = None
+    total_apps = 0
+    # We unwrap app_status_and_count and take stock of the data
+    # in a way that's convenient for us to use in email.send
+    for status, count in app_status_and_count.items():
+        if count != 0 and status == Application.PENDING:
+            pending_count = count
+            total_apps += count
+        if count != 0 and status == Application.QUESTION:
+            question_count = count
+            total_apps += count
+        if count != 0 and status == Application.APPROVED:
+            approved_count = count
+            total_apps += count
+
     coordinator_wp_username = kwargs["coordinator_wp_username"]
     coordinator_email = kwargs["coordinator_email"]
     coordinator_lang = kwargs["coordinator_lang"]
@@ -101,9 +117,8 @@ def send_coordinator_reminder_emails(sender, **kwargs):
 
     logger.info(
         "Received coordinator reminder signal for {coordinator_wp_username}; "
-        "preparing to send reminder email to {coordinator_email}.".format(
-            coordinator_wp_username=coordinator_wp_username,
-            coordinator_email=coordinator_email,
+        "preparing to send reminder email.".format(
+            coordinator_wp_username=coordinator_wp_username
         )
     )
     email = CoordinatorReminderNotification()
@@ -113,8 +128,10 @@ def send_coordinator_reminder_emails(sender, **kwargs):
         {
             "user": coordinator_wp_username,
             "lang": coordinator_lang,
-            "app_status": app_status,
-            "app_count": app_count,
+            "pending_count": pending_count,
+            "question_count": question_count,
+            "approved_count": approved_count,
+            "total_apps": total_apps,
             "link": link,
         },
     )

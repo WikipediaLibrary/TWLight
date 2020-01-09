@@ -505,13 +505,16 @@ class ViewsTestCase(TestCase):
         # Should be successfully redirected back to the user page.
         self.assertEqual(response.status_code, 302)
 
-    def test_user_email_disable_renewal_update(self):
+    def test_user_email_preferences_disable_update(self):
         """
-        Verify that users can disable renewal notices in the email form.
+        Verify that users can disable renewal notices and coordinator reminder
+        emails in the email form.
         """
         # Need a password so we can login
         self.user_editor2.set_password("editor")
         self.user_editor2.save()
+        # Only coordinators get to change their reminder preferences
+        get_coordinators().user_set.add(self.user_editor2)
 
         self.client = Client()
         session = self.client.session
@@ -524,14 +527,55 @@ class ViewsTestCase(TestCase):
 
         self.user_editor2.userprofile.refresh_from_db()
 
-        # We didn't send send_renewal_notices in POST to simulate an
-        # unchecked box.
+        # We didn't send send_renewal_notices or send_pending_application_reminders
+        # or send_discussion_application_reminders or send_approved_application_reminders
+        # in POST to simulate an unchecked box.
         self.assertEqual(self.user_editor2.userprofile.send_renewal_notices, False)
+        self.assertEqual(self.user_editor2.userprofile.pending_app_reminders, False)
+        self.assertEqual(self.user_editor2.userprofile.discussion_app_reminders, False)
+        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, False)
 
-    def test_user_email_enable_renewal_update(self):
+    def test_user_email_preferences_enable_update(self):
         """
-        Verify that users can enable renewal notices in the email form.
+        Verify that users can email renewal notices and coordinator reminder
+        emails in the email form.
         """
+        # Need a password so we can login
+        self.user_editor2.set_password("editor")
+        self.user_editor2.userprofile.send_renewal_notices = False
+        self.user_editor2.userprofile.pending_app_reminders = False
+        self.user_editor2.userprofile.discussion_app_reminders = False
+        self.user_editor2.userprofile.approved_app_reminders = False
+        self.user_editor2.save()
+        # Only coordinators get to change their reminder preferences
+        get_coordinators().user_set.add(self.user_editor2)
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username2, password="editor")
+
+        response = self.client.post(
+            self.url2,
+            {
+                "update_email_settings": ["Update"],
+                "send_renewal_notices": ["on"],
+                "send_pending_application_reminders": ["on"],
+                "send_discussion_application_reminders": ["on"],
+                "send_approved_application_reminders": ["on"],
+            },
+        )
+
+        # Should be successfully redirected back to the user page.
+        self.assertEqual(response.status_code, 302)
+
+        self.user_editor2.userprofile.refresh_from_db()
+
+        self.assertEqual(self.user_editor2.userprofile.send_renewal_notices, True)
+        self.assertEqual(self.user_editor2.userprofile.pending_app_reminders, True)
+        self.assertEqual(self.user_editor2.userprofile.discussion_app_reminders, True)
+        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, True)
+
+    def test_user_email_preferences_update_non_coordinator(self):
         # Need a password so we can login
         self.user_editor2.set_password("editor")
         self.user_editor2.userprofile.send_renewal_notices = False
@@ -552,6 +596,10 @@ class ViewsTestCase(TestCase):
         self.user_editor2.userprofile.refresh_from_db()
 
         self.assertEqual(self.user_editor2.userprofile.send_renewal_notices, True)
+        # Only coordinators get to change their reminder preferences
+        self.assertEqual(self.user_editor2.userprofile.pending_app_reminders, True)
+        self.assertEqual(self.user_editor2.userprofile.discussion_app_reminders, True)
+        self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, True)
 
 
 class UserProfileModelTestCase(TestCase):
