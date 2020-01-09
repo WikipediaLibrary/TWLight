@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-01-07 14:49+0000\n"
+"POT-Creation-Date: 2020-01-09 16:43+0000\n"
 "PO-Revision-Date: 2020-01-06 17:11:09+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: TWLight/applications/forms.py:346
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#: TWLight/users/admin.py:93 TWLight/users/models.py:137
+#: TWLight/users/admin.py:110 TWLight/users/models.py:154
 msgid "Username"
 msgstr ""
 
@@ -200,7 +200,7 @@ msgstr ""
 #: TWLight/resources/models.py:205
 #: TWLight/resources/templates/resources/partner_users.html:27
 #: TWLight/resources/templates/resources/partner_users.html:78
-#: TWLight/users/forms.py:140
+#: TWLight/users/forms.py:160
 msgid "Email"
 msgstr ""
 
@@ -673,7 +673,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/confirm_renewal.html:18
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
 #: TWLight/users/templates/users/authorization_confirm_return.html:15
-#: TWLight/users/views.py:438
+#: TWLight/users/views.py:493
 msgid "Confirm"
 msgstr ""
 
@@ -1112,28 +1112,79 @@ msgstr ""
 msgid "Wikipedia Library Card Platform message from %(editor_wp_username)s"
 msgstr ""
 
-#. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like user or partner; don't translate email addresses or html tags either.
+#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
 #, python-format
 msgid ""
 "<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated "
-"coordinator for partners that have a total of %(app_count)s applications "
-"with a status of %(app_status)s.</p> <p>This is a gentle reminder that you "
-"may review applications at <a href=\"%(link)s\">%(link)s</a>.</p> <p>If you "
-"received this message in error, drop us a line at wikipedialibrary@wikimedia."
-"org.</p> <p>Thanks for helping review Wikipedia Library applications!</p>"
+"coordinator for partners that have a total of %(total_apps)s applications.</"
+"p>"
 msgstr ""
 
-#. Translators: This is a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate email adresses or items in curly braces.
+#. Translators: Breakdown as in 'cost breakdown'; analysis.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:11
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:10
+msgid "Breakdown"
+msgstr ""
+
+#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
+#, python-format
+msgid "One pending application."
+msgid_plural "%(counter)s pending applications."
+msgstr[0] ""
+
+#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
+#, python-format
+msgid "One under discussion application."
+msgid_plural "%(counter)s under discussion applications."
+msgstr[0] ""
+
+#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
+#, python-format
+msgid "%(approved_count)s approved applications."
+msgid_plural "%(counter)s approved applications."
+msgstr[0] ""
+
+#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
+#, python-format
+msgid ""
+"<p>This is a gentle reminder that you may review applications at <a href="
+"\"%(link)s\">%(link)s</a>.</p> <p>You can customise your reminders under "
+"'preferences' in your user profile.</p> <p>If you received this message in "
+"error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for "
+"helping review Wikipedia Library applications!</p>"
+msgstr ""
+
+#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
 #, python-format
 msgid ""
 "Dear %(user)s, Our records indicate that you are the designated coordinator "
-"for partners that have a total of %(app_count)s applications with a status "
-"of %(app_status)s. This is a gentle reminder that you may review "
-"applications at: %(link)s If you received this message in error, drop us a "
-"line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia "
-"Library applications!"
+"for partners that have a total of %(total_apps)s applications."
+msgstr ""
+
+#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
+#, python-format
+msgid "One approved application."
+msgid_plural "%(counter)s approved applications."
+msgstr[0] ""
+
+#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate the email address either.
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
+#, python-format
+msgid ""
+"This is a gentle reminder that you may review applications at: %(link)s. You "
+"can customise your reminders under 'preferences' in your user profile. If "
+"you received this message in error, drop us a line at: "
+"wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library "
+"applications!"
 msgstr ""
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
@@ -2686,11 +2737,15 @@ msgid ""
 "instructions for setting a new one."
 msgstr ""
 
-#: TWLight/users/admin.py:62
+#: TWLight/users/admin.py:36
+msgid "Email preferences"
+msgstr ""
+
+#: TWLight/users/admin.py:79
 msgid "user"
 msgstr ""
 
-#: TWLight/users/admin.py:74
+#: TWLight/users/admin.py:91
 msgid "authorizer"
 msgstr ""
 
@@ -2765,26 +2820,26 @@ msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
 msgstr ""
 
 #. Translators: Labels the button users click to request a restriction on the processing of their data.
-#: TWLight/users/forms.py:99
+#: TWLight/users/forms.py:119
 msgid "Restrict my data"
 msgstr ""
 
 #. Translators: Users must click this button when registering to agree to the website terms of use.
-#: TWLight/users/forms.py:120
+#: TWLight/users/forms.py:140
 msgid "I agree with the terms of use"
 msgstr ""
 
 #. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:129
+#: TWLight/users/forms.py:149
 msgid "I accept"
 msgstr ""
 
-#: TWLight/users/forms.py:143
+#: TWLight/users/forms.py:163
 msgid ""
 "Use my Wikipedia email address (will be updated the next time you login)."
 msgstr ""
 
-#: TWLight/users/forms.py:158
+#: TWLight/users/forms.py:178
 msgid "Update email"
 msgstr ""
 
@@ -2809,76 +2864,90 @@ msgstr ""
 msgid "Does this user want renewal reminder notices?"
 msgstr ""
 
+#. Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for pending applications
+#: TWLight/users/models.py:100
+msgid "Does this coordinator want pending app reminder notices?"
+msgstr ""
+
+#: TWLight/users/models.py:106
+msgid "Does this coordinator want under discussion app reminder notices?"
+msgstr ""
+
+#. Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for approved applications
+#: TWLight/users/models.py:112
+msgid "Does this coordinator want approved app reminder notices?"
+msgstr ""
+
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:130
+#: TWLight/users/models.py:147
 msgid "When this profile was first created"
 msgstr ""
 
-#: TWLight/users/models.py:140
+#: TWLight/users/models.py:157
 msgid "Wikipedia edit count"
 msgstr ""
 
-#: TWLight/users/models.py:144
+#: TWLight/users/models.py:161
 msgid "Date registered at Wikipedia"
 msgstr ""
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:149
+#: TWLight/users/models.py:166
 msgid "Wikipedia user ID"
 msgstr ""
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:156
+#: TWLight/users/models.py:173
 msgid "Wikipedia groups"
 msgstr ""
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:158
+#: TWLight/users/models.py:175
 msgid "Wikipedia user rights"
 msgstr ""
 
-#: TWLight/users/models.py:163
+#: TWLight/users/models.py:180
 msgid ""
 "At their last login, did this user meet the criteria in the terms of use?"
 msgstr ""
 
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:171
+#: TWLight/users/models.py:188
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:404
+#: TWLight/users/models.py:421
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:437
+#: TWLight/users/models.py:454
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:451
+#: TWLight/users/models.py:468
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:460
+#: TWLight/users/models.py:477
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:471
+#: TWLight/users/models.py:488
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:482
+#: TWLight/users/models.py:499
 msgid "The stream for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:488
+#: TWLight/users/models.py:505
 msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
@@ -3596,62 +3665,79 @@ msgid ""
 "administrator for help."
 msgstr ""
 
+#. Translators: Labels a sections where coordinators can select their email preferences.
+#: TWLight/users/templates/users/user_email_preferences.html:14
+msgid "Coordinators only"
+msgstr ""
+
 #. Translators: This is a button which updates user preference settings
 #. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/templates/users/user_email_preferences.html:13
-#: TWLight/users/views.py:305
+#: TWLight/users/templates/users/user_email_preferences.html:23
+#: TWLight/users/views.py:360
 msgid "Update"
 msgstr ""
 
-#: TWLight/users/views.py:131
+#: TWLight/users/views.py:137
 #, python-brace-format
 msgid ""
 "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help "
 "coordinators evaluate your applications."
 msgstr ""
 
+#: TWLight/users/views.py:250
+msgid ""
+"You have chosen not to receive reminder emails. As a coordinator, you should "
+"receive at least one type of reminder emails, consider changing your "
+"preferences."
+msgstr ""
+
+#. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
+#: TWLight/users/views.py:260
+msgid "Your reminder email preferences are updated."
+msgstr ""
+
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:287 TWLight/users/views.py:368
-#: TWLight/users/views.py:423
+#: TWLight/users/views.py:342 TWLight/users/views.py:423
+#: TWLight/users/views.py:478
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:320
+#: TWLight/users/views.py:375
 msgid "Your information has been updated."
 msgstr ""
 
-#: TWLight/users/views.py:352
+#: TWLight/users/views.py:407
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:380
+#: TWLight/users/views.py:435
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
-#: TWLight/users/views.py:391
+#: TWLight/users/views.py:446
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
-#: TWLight/users/views.py:589
+#: TWLight/users/views.py:644
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
-#: TWLight/users/views.py:596
+#: TWLight/users/views.py:651
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
 msgstr ""
 
-#: TWLight/users/views.py:761
+#: TWLight/users/views.py:816
 msgid "Access to {} has been returned."
 msgstr ""
 
