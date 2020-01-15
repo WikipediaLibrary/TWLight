@@ -40,6 +40,7 @@ from .forms import (
     EmailChangeForm,
     RestrictDataForm,
     UserEmailForm,
+    CoordinatorEmailForm,
 )
 from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
@@ -116,13 +117,18 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
     def get_context_data(self, **kwargs):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         editor = self.get_object()
+        user = self.request.user
         context["editor"] = editor  # allow for more semantic templates
         context["form"] = EditorUpdateForm(instance=editor)
-        context["language_form"] = SetLanguageForm(user=self.request.user)
-        context["email_form"] = UserEmailForm(user=self.request.user)
+        context["language_form"] = SetLanguageForm(user=user)
+        context["email_form"] = UserEmailForm(user=user)
+        # Check if the user is in the group: 'coordinators',
+        # and add the reminder email preferences form.
+        if coordinators in user.groups.all():
+            context["coordinator_email_form"] = CoordinatorEmailForm(user=user)
 
         try:
-            if self.request.user.editor == editor and not editor.contributions:
+            if user.editor == editor and not editor.contributions:
                 messages.add_message(
                     self.request,
                     messages.WARNING,
@@ -147,7 +153,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             """
             pass
 
-        context["password_form"] = PasswordChangeForm(user=self.request.user)
+        context["password_form"] = PasswordChangeForm(user=user)
 
         return context
 
@@ -195,7 +201,6 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             return response
 
         if "update_email_settings" in request.POST:
-            logger.info(request.POST)
             # Unchecked checkboxes just don't send POST data
             if "send_renewal_notices" in request.POST:
                 send_renewal_notices = True
@@ -204,6 +209,56 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
 
             editor.user.userprofile.send_renewal_notices = send_renewal_notices
             editor.user.userprofile.save()
+
+            user = self.request.user
+            # Again, process email preferences data only if the user
+            # is present in the group: 'coordinators'.
+            if coordinators in user.groups.all():
+                # Unchecked checkboxes doesn't send POST data
+                if "send_pending_application_reminders" in request.POST:
+                    send_pending_app_reminders = True
+                else:
+                    send_pending_app_reminders = False
+                if "send_discussion_application_reminders" in request.POST:
+                    send_discussion_app_reminders = True
+                else:
+                    send_discussion_app_reminders = False
+                if "send_approved_application_reminders" in request.POST:
+                    send_approved_app_reminders = True
+                else:
+                    send_approved_app_reminders = False
+                user.userprofile.pending_app_reminders = send_pending_app_reminders
+                user.userprofile.discussion_app_reminders = (
+                    send_discussion_app_reminders
+                )
+                user.userprofile.approved_app_reminders = send_approved_app_reminders
+                user.userprofile.save()
+
+                # Although not disallowed, we'd prefer if coordinators opted
+                # to receive at least one (of the 3) type of reminder emails.
+                # If they choose to receive none, we post a warning message.
+                if (
+                    not send_pending_app_reminders
+                    and not send_discussion_app_reminders
+                    and not send_pending_app_reminders
+                ):
+                    messages.add_message(
+                        request,
+                        messages.WARNING,
+                        # Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
+                        _(
+                            "You have chosen not to receive reminder emails. "
+                            "As a coordinator, you should receive at least one "
+                            "type of reminder emails, consider changing your preferences."
+                        ),
+                    )
+                else:
+                    messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        # Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
+                        _("Your reminder email preferences are updated."),
+                    )
 
         return HttpResponseRedirect(reverse_lazy("users:home"))
 

@@ -4,6 +4,7 @@
 # Author: Jsn.sherman
 # Author: Meno25
 # Author: Nikkimaria
+# Author: Sonic N800
 # Author: ديفيد
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:31+0000\n"
+"PO-Revision-Date: 2020-01-09 19:34:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -331,7 +332,7 @@ msgstr "عدد أيام الفتح"
 #. Translators: This labels the section of an application showing how many days it has been since the application was closed.
 #: TWLight/applications/templates/applications/application_evaluation.html:58
 msgid "Days since application was closed"
-msgstr "عدد الأيام منذ غلق التقديم"
+msgstr "عدد الأيام منذ إغلاق التقديم"
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #: TWLight/applications/templates/applications/application_evaluation.html:67

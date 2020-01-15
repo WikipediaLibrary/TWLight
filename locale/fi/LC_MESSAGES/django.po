@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:35+0000\n"
+"PO-Revision-Date: 2020-01-09 19:34:31+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -486,9 +486,8 @@ msgstr "Ei aiempia versioita."
 
 #. Translators: On the page which shows a list of applications, coordinators must select which applications they wish to view. This string is found next to the selection buttons, and leads on to options such as "Under review", "Approved", or "Sent.
 #: TWLight/applications/templates/applications/application_list.html:28
-#, fuzzy
 msgid "View applications which are..."
-msgstr "Suodata hakemukset..."
+msgstr "Näytä hakemukset jotka ovat..."
 
 #. Translators: This describes the status of a group of applications.
 #: TWLight/applications/templates/applications/application_list.html:33
@@ -561,9 +560,8 @@ msgstr "Viimeinen"
 #: TWLight/applications/templates/applications/application_list.html:222
 #: TWLight/applications/templates/applications/application_list.html:234
 #: TWLight/applications/templates/applications/application_list.html:235
-#, fuzzy
 msgid "Last page"
-msgstr "Keskustelusivu"
+msgstr "Viimeinen sivu"
 
 #. Translators: On the page listing applications, this shows next to an application which was imported to the website.
 #: TWLight/applications/templates/applications/application_list_include.html:33
@@ -654,7 +652,6 @@ msgstr "Vahvista"
 
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:21
-#, fuzzy
 msgid "What resources do you want to access?"
 msgstr "Kenen aineistoon haluat käyttöoikeuden?"
 
@@ -862,9 +859,8 @@ msgstr ""
 
 #. Translators: This labels a textfield where users can enter their email ID.
 #: TWLight/emails/forms.py:17
-#, fuzzy
 msgid "Your email"
-msgstr "Tilin sähköposti"
+msgstr "Sähköpostiosoitteesi"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:19
@@ -984,37 +980,33 @@ msgstr "Yrityksen edustaja"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:43
-#, fuzzy
 msgid "Meta page"
-msgstr "Seuraava sivu"
+msgstr "Metasivu"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:45
-#, fuzzy
 msgid "The Wikipedia Library"
-msgstr "Wikipedian Lähdekirjaston tiimi"
+msgstr "Wikipedian Lähdekirjasto"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/emails/templates/emails/contact.html:52
 msgid "Mailing list"
-msgstr ""
+msgstr "Postituslista"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
 #: TWLight/emails/templates/emails/contact.html:56
 msgid "IRC"
-msgstr ""
+msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:64
-#, fuzzy
 msgid "Wikipedia Library Facebook page"
-msgstr "Wikipedian Lähdekirjaston tiimi"
+msgstr "Wikipedian Lähdekirjaston Facebook-sivu"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:70
-#, fuzzy
 msgid "Wikipedia Library Twitter page"
-msgstr "Wikipedian Lähdekirjaston tiimi"
+msgstr "Wikipedian Lähdekirjaston Twitter-sivu"
 
 #. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
 #: TWLight/emails/templates/emails/contact_us_email-subject.html:3
@@ -1322,7 +1314,7 @@ msgstr ""
 #. Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
 #: TWLight/resources/models.py:194
 msgid "Link"
-msgstr ""
+msgstr "Linkki"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether this partner should be displayed to users.
 #: TWLight/resources/models.py:200
@@ -1611,7 +1603,6 @@ msgstr "<strong>%(coordinator)s</strong> käsittelee hakemuksia kumppanille %(pa
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to.
 #: TWLight/resources/templates/resources/partner_detail.html:166
-#, fuzzy
 msgid "Talk page"
 msgstr "Keskustelusivu"
 
@@ -2567,9 +2558,9 @@ msgid "Wiki contributions, as entered by user"
 msgstr "Käyttäjän antama muokkausmäärä"
 
 #: TWLight/users/models.py:374
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{wp_username}"
-msgstr "{wp_username} ({wiki})"
+msgstr "{wp_username}"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
 #: TWLight/users/models.py:403
@@ -2725,7 +2716,6 @@ msgstr "Muokkaukset"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #: TWLight/users/templates/users/editor_detail_data.html:43
 #: TWLight/users/templates/users/editor_detail_data.html:155
-#, fuzzy
 msgid "(update)"
 msgstr "(päivitä)"
 
@@ -2746,9 +2736,9 @@ msgstr "Kyllä"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
 #: TWLight/users/templates/users/editor_detail_data.html:71
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s may still be eligible for access grants at the coordinators' discretion."
-msgstr "\n            %(username)s voi silti olla kelpoinen käyttöoikeuteen \n            koordinaattorien harkinnan mukaisesti.\n          "
+msgstr "%(username)s voi silti olla kelpoinen käyttöoikeuteen koordinaattorien harkinnan mukaisesti."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:85
@@ -2871,9 +2861,8 @@ msgstr ""
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
-#, fuzzy
 msgid "Last updated 12 November 2019"
-msgstr "Viimeksi päivitetty 8. elokuuta 2016"
+msgstr "Viimeksi päivitetty 12. marraskuuta 2019"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28
@@ -3137,9 +3126,8 @@ msgstr "Jos et ole sivuston ylläpitäjä, jotain outoa tapahtui. Sinä et voi h
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/user_email_preferences.html:13
 #: TWLight/users/views.py:278
-#, fuzzy
 msgid "Update"
-msgstr "(päivitä)"
+msgstr "Päivitä"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
 #: TWLight/users/views.py:117

@@ -8,21 +8,10 @@
 
 {% get_current_language as LANGUAGE_CODE %}
 
-{% block extra_css %}
-  <style type="text/css">
-    @media (min-width: 768px) {
-      .timeline-right-overlay {
-        z-index: 100;
-        position: relative;
-        height: 0;
-        overflow: visible;
-      }
-    }
-  </style>
-{% endblock extra_css %}
-
 {% block content %}
   <h1>{{ object }}</h1>
+  {% comment %} Translators: This text is located on individual partner pages, and when clicked takes users back to the list of publishers. {% endcomment %}
+  <a href="{% url 'partners:filter' %}" class="btn btn-default">{% trans "Back to partners" %}</a><br><br>
   {% if not object.authorization_method == object.BUNDLE %}
     {% url 'applications:apply_single' object.pk as app_url %}
     {% url 'about' as about %}
@@ -96,387 +85,384 @@
     </form>
     {% endif %}
   {% endif %}
-    <ul class="timeline half-timeline margin-bottom-2em">
-
-    <div class="col-sm-5 col-md-4 pull-right timeline-right-overlay">
-  {% if not object.authorization_method == object.BUNDLE %}
-    {% if object.is_waitlisted %}
-    <div class="hidden-xs alert alert-warning resource-label-warning">
-      <span class="resource-label">{% trans "Waitlisted" %}</span>
-      <p>
-      {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
-      {% blocktrans trimmed %}
-      There are no access grants available for this partner
-      at this time. You can still apply for access; applications will
-      be processed when access is available.
-      {% endblocktrans %}
-      </p>
-    </div>
-    {% endif %}
-
-    {% if apply %}
-      <div class="alert alert-info hidden-xs">
-        <p>
-          {% comment %} Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
-          {% blocktrans trimmed %}
-            Before applying, please review the 
-            <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
-            and our <strong><a href="{{ terms }}">terms of use</a></strong>.
-          {% endblocktrans %}
-        </p>
-      </div>
-    {% endif %}
-    {% if user|restricted %}
-      <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
-    {% else %}
-      <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary btn-lg hidden-xs btn-block {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
-      {% if has_open_apps or has_auths %}
-        {% url 'users:my_collection' user.editor.pk as collection_url %}
-        {% url 'users:my_applications' user.editor.pk as applications_url %}
-        <div class="panel panel-default hidden-xs">
-          <div class="panel-body top-border">
-            {% if has_auths %}
-              {% comment %} Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
-              {% blocktrans trimmed %}
-                View the status of your access(es) in <strong><a href="{{ collection_url }}">Your Collection</a></strong> page.
-              {% endblocktrans %}
-              {% if has_open_apps %}
-                <hr />
-              {% endif %}
-            {% endif %}
-            {% if has_open_apps %}
-              {% comment %} Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
-              {% blocktrans trimmed %}
-                View the status of your application(s) in <strong><a href="{{ applications_url }}">Your Applications</a></strong> page.
-              {% endblocktrans %}
-            {% endif %}
-          </div>
-        </div>
-      {% endif %}
-    {% endif %}
-
-    {% if user|coordinators_only %}
-    <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
-      {% csrf_token %}
-      <input type="submit" class="btn btn-default btn-block text-center hidden-xs" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
-    </form>
-    {% endif %}
-  {% endif %}
-      {% if object.logos.logo.url %}
-        <img src="{{ object.logos.logo.url }}" class="img-responsive hidden-xs center-block partner-logo">
-      {% endif %}
-  {% if not object.authorization_method == object.BUNDLE %}
-      <div class="well hidden-xs">
-        {% if object.coordinator.editor.wp_username %}
-          {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}
-          {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
-            <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
-          {% endblocktrans %}
-
-          <ul>
-            {% if object.coordinator.editor.wp_talk_page_url %}
-              <li>
-                <a href="{{ object.coordinator.editor.wp_talk_page_url }}">
-                  {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to. {% endcomment %}
-                  {% trans "Talk page" %}
-                </a>
-              </li>            
-            {% endif %}
-            {% if object.coordinator.editor.wp_email_page_url %}
-              <li>
-                <a href="{{ object.coordinator.editor.wp_email_page_url }}">
-                  {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to. {% endcomment %}
-                  {% trans "Special:EmailUser page" %}
-                </a>            
-              </li>            
-            {% endif %}
-          </ul>
-        {% else %}
-          {% comment %} Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-          {% blocktrans trimmed %}
-            The Wikipedia Library team will process this application. Want to
-            help? <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
-            coordinator.</a>
-          {% endblocktrans %}
-        {% endif %}
-      </div>
-      {% if object.coordinator == user or user.is_staff %}
-        {% comment %} Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
-        <a href="{% url 'partners:users' pk=object.pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "List applications" %}</a>
-      {% endif %}
-    {% endif %}
-    </div>
-    <li class="timeline-inverted">
-      <div class="timeline-badge"><i class="fa fa-info"></i>
-      </div>
-      <div class="timeline-panel">
-        <div class="timeline-body">
-          {% if object.short_description %}
-            <p>
-            {% comment %}
-              Cache lifetime should be None, which would be forever since we're
-              invalidating on update. However, as 2017-04-06 a bug in django
-              doesn't allow for None to be passed from here into cache.  The
-              fix is in master, but not release.
-              https://code.djangoproject.com/ticket/27882
-            {% endcomment %}
-            {% cache 31536000 partner_short_description LANGUAGE_CODE object.pk %}
-              {{ object.short_description | twlight_wikicode2html | safe }}
-            {% endcache %}
-            </p>
-          {% else %}
-            {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
-            {% trans "Description not available." %}
-          {% endif %}
-          {% if object.tags.count > 0 %}
-            <div class="resource-label-subject">
-            {% for tag in object.tags.all %}
-              <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
-              {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
-            {% endfor %}
+  <div class="float-container margin-bottom-2em">
+    <div class="row">
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        <ul class="timeline half-timeline margin-bottom-2em">
+          <li class="timeline-inverted">
+            <div class="timeline-badge"><i class="fa fa-info"></i>
             </div>
-          {% endif %}
-          {% if object.description %}
-            <p>
-            {% comment %}
-              Cache lifetime should be None, which would be forever since we're
-              invalidating on update. However, as 2017-04-06 a bug in django
-              doesn't allow for None to be passed from here into cache.  The
-              fix is in master, but not release.
-              https://code.djangoproject.com/ticket/27882
-            {% endcomment %}
-            {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
-              {{ object.description | twlight_wikicode2html | safe }}
-            {% endcache %}
-            </p>
-          {% endif %}
-        </div>
-      </div>      
-    </li>
-    {% if object.videos.all %}
-      <li class="timeline-inverted">
-        <div class="timeline-badge"><i class="fa fa-file"></i>
-        </div>
-        <div class="timeline-panel">
-          <div class="timeline-body">
-            <h4 class="timeline-title">
-              {% comment %} Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
-              {% trans "Video tutorials" %}
-            </h4>
-            <ul>
-              {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
-              {% for each_tutorial in object.videos.all %}
-                <li><a href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </li>
-    {% endif %}
-    <li class="timeline-inverted">
-      <div class="timeline-badge"><i class="fa fa-language"></i>
-      </div>
-      <div class="timeline-panel">
-        <div class="timeline-body">
-          {% if object.get_languages %}
-            <p class="partner-languages">
-                {% comment %} Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
-                {% trans 'Language(s)' %}:
-                <div class="resource-label-languages">
-                {% for language in partner.get_languages %}
-                    <a class="resource-label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+            <div class="timeline-panel">
+              <div class="timeline-body">
+                {% if object.short_description %}
+                  <p>
+                  {% comment %}
+                    Cache lifetime should be None, which would be forever since we're
+                    invalidating on update. However, as 2017-04-06 a bug in django
+                    doesn't allow for None to be passed from here into cache.  The
+                    fix is in master, but not release.
+                    https://code.djangoproject.com/ticket/27882
+                  {% endcomment %}
+                  {% cache 31536000 partner_short_description LANGUAGE_CODE object.pk %}
+                    {{ object.short_description | twlight_wikicode2html | safe }}
+                  {% endcache %}
+                  </p>
+                {% else %}
+                  {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
+                  {% trans "Description not available." %}
+                {% endif %}
+                {% if object.tags.count > 0 %}
+                  <div class="resource-label-subject">
+                  {% for tag in object.tags.all %}
+                    <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
                     {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
-                {% endfor %}
+                  {% endfor %}
+                  </div>
+                {% endif %}
+                {% if object.description %}
+                  <p>
+                  {% comment %}
+                    Cache lifetime should be None, which would be forever since we're
+                    invalidating on update. However, as 2017-04-06 a bug in django
+                    doesn't allow for None to be passed from here into cache.  The
+                    fix is in master, but not release.
+                    https://code.djangoproject.com/ticket/27882
+                  {% endcomment %}
+                  {% cache 31536000 partner_description LANGUAGE_CODE object.pk %}
+                    {{ object.description | twlight_wikicode2html | safe }}
+                  {% endcache %}
+                  </p>
+                {% endif %}
+              </div>
+            </div>      
+          </li>
+          {% if object.videos.all %}
+            <li class="timeline-inverted">
+              <div class="timeline-badge"><i class="fa fa-file"></i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-body">
+                  <h4 class="timeline-title">
+                    {% comment %} Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
+                    {% trans "Video tutorials" %}
+                  </h4>
+                  <ul>
+                    {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
+                    {% for each_tutorial in object.videos.all %}
+                      <li><a href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
+                    {% endfor %}
+                  </ul>
                 </div>
-            </p>
-          {% else %}
-            {% comment %} Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page. {% endcomment %}
-            <p>{% trans "Languages not available." %}</p>
+              </div>
+            </li>
           {% endif %}
-        </div>
-      </div>      
-    </li>
-    {% with object.excerpt_limit as excerpt_limit %}
-    {% with object.excerpt_limit_percentage as excerpt_limit_percentage %}
-    {% if excerpt_limit or excerpt_limit_percentage %}
-      <li class="timeline-inverted">
-        <div class="timeline-badge"><i class="fa fa-files-o" aria-hidden="true"></i>
-        </div>
-        <div class="timeline-panel">
-          <div class="timeline-heading">
-            {% comment %} Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field. {% endcomment %}
-            <h4 class="timeline-title">{% trans "Excerpt limit" %}</h4>
-          </div>        
-          <div class="timeline-body">
-            <ul>
-              {% if excerpt_limit_percentage and excerpt_limit %}
-                <li>
-                  {% comment %} Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page. {% endcomment %}
-                  {% blocktrans trimmed %}
-                    {{ object }} allows a maximum of {{ excerpt_limit }} words or {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
-                  {% endblocktrans %}
-                </li>            
-              {% elif excerpt_limit %}
-                <li>
-                  {% comment %} Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
-                  {% blocktrans trimmed %}
-                    {{ object }} allows a maximum of {{ excerpt_limit }} words be excerpted into a Wikipedia article.
-                  {% endblocktrans %}
-                </li>
-              {% elif excerpt_limit_percentage %}
-                <li>
-                  {% comment %} Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page. {% endcomment %}
-                  {% blocktrans trimmed %}
-                    {{ object }} allows a maximum of {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
-                  {% endblocktrans %}
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-      </li>
-    {% endif %}
-    {% endwith %}
-    {% endwith %}
-    {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.account_email %}
-      <li class="timeline-inverted">
-        <div class="timeline-badge"><i class="fa fa-exclamation"></i>
-        </div>
-        <div class="timeline-panel">
-          <div class="timeline-heading">
-            {% comment %} Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
-            <h4 class="timeline-title">{% trans "Special requirements for applicants" %}</h4>
-          </div>
-          <div class="timeline-body">
+          <li class="timeline-inverted">
+            <div class="timeline-badge"><i class="fa fa-language"></i>
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-body">
+                {% if object.get_languages %}
+                  <p class="partner-languages">
+                      {% comment %} Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
+                      {% trans 'Language(s)' %}:
+                      <div class="resource-label-languages">
+                      {% for language in partner.get_languages %}
+                          <a class="resource-label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+                          {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
+                      {% endfor %}
+                      </div>
+                  </p>
+                {% else %}
+                  {% comment %} Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page. {% endcomment %}
+                  <p>{% trans "Languages not available." %}</p>
+                {% endif %}
+              </div>
+            </div>      
+          </li>
+          {% with object.excerpt_limit as excerpt_limit %}
+          {% with object.excerpt_limit_percentage as excerpt_limit_percentage %}
+          {% if excerpt_limit or excerpt_limit_percentage %}
+            <li class="timeline-inverted">
+              <div class="timeline-badge"><i class="fa fa-files-o" aria-hidden="true"></i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  {% comment %} Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field. {% endcomment %}
+                  <h4 class="timeline-title">{% trans "Excerpt limit" %}</h4>
+                </div>        
+                <div class="timeline-body">
+                  <ul>
+                    {% if excerpt_limit_percentage and excerpt_limit %}
+                      <li>
+                        {% comment %} Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page. {% endcomment %}
+                        {% blocktrans trimmed %}
+                          {{ object }} allows a maximum of {{ excerpt_limit }} words or {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
+                        {% endblocktrans %}
+                      </li>            
+                    {% elif excerpt_limit %}
+                      <li>
+                        {% comment %} Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
+                        {% blocktrans trimmed %}
+                          {{ object }} allows a maximum of {{ excerpt_limit }} words be excerpted into a Wikipedia article.
+                        {% endblocktrans %}
+                      </li>
+                    {% elif excerpt_limit_percentage %}
+                      <li>
+                        {% comment %} Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page. {% endcomment %}
+                        {% blocktrans trimmed %}
+                          {{ object }} allows a maximum of {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
+                        {% endblocktrans %}
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </li>
+          {% endif %}
+          {% endwith %}
+          {% endwith %}
+          {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.account_email %}
+            <li class="timeline-inverted">
+              <div class="timeline-badge"><i class="fa fa-exclamation"></i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  {% comment %} Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
+                  <h4 class="timeline-title">{% trans "Special requirements for applicants" %}</h4>
+                </div>
+                <div class="timeline-body">
 
-            <ul>
-              {% if object.agreement_with_terms_of_use %}
-                <li>
-                  {% comment %} Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate {{ publisher }} or {{ url }}. {% endcomment %}
-                  {% blocktrans trimmed with publisher=object.company_name url=object.terms_of_use %}
-                    {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
-                    of use</a>.
-                  {% endblocktrans %}
-                </li>
-              {% endif %}
+                  <ul>
+                    {% if object.agreement_with_terms_of_use %}
+                      <li>
+                        {% comment %} Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate {{ publisher }} or {{ url }}. {% endcomment %}
+                        {% blocktrans trimmed with publisher=object.company_name url=object.terms_of_use %}
+                          {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
+                          of use</a>.
+                        {% endblocktrans %}
+                      </li>
+                    {% endif %}
 
-              {% if object.real_name %}
-                <li>
-                  {% comment %} Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                  {% blocktrans trimmed with publisher=object.company_name %}
-                    {{ publisher }} requires that you provide your real name.
-                  {% endblocktrans %}
-                </li>
-              {% endif %}
+                    {% if object.real_name %}
+                      <li>
+                        {% comment %} Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% blocktrans trimmed with publisher=object.company_name %}
+                          {{ publisher }} requires that you provide your real name.
+                        {% endblocktrans %}
+                      </li>
+                    {% endif %}
 
-              {% if object.country_of_residence %}
-                <li>
-                  {% comment %} Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                  {% blocktrans trimmed with publisher=object.company_name %}
-                    {{ publisher }} requires that you provide your country of residence.
-                  {% endblocktrans %}
-                </li>
-              {% endif %}
+                    {% if object.country_of_residence %}
+                      <li>
+                        {% comment %} Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% blocktrans trimmed with publisher=object.company_name %}
+                          {{ publisher }} requires that you provide your country of residence.
+                        {% endblocktrans %}
+                      </li>
+                    {% endif %}
 
-              {% if object.occupation %}
-                <li>
-                  {% comment %} Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                  {% blocktrans trimmed with publisher=object.company_name %}
-                    {{ publisher }} requires that you provide your occupation.
-                  {% endblocktrans %}
-                </li>
-              {% endif %}
+                    {% if object.occupation %}
+                      <li>
+                        {% comment %} Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% blocktrans trimmed with publisher=object.company_name %}
+                          {{ publisher }} requires that you provide your occupation.
+                        {% endblocktrans %}
+                      </li>
+                    {% endif %}
 
-              {% if object.affiliation %}
-                <li>
-                  {% comment %} Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                  {% blocktrans trimmed with publisher=object.company_name %}
-                    {{ publisher }} requires that you provide your institutional affiliation.
-                  {% endblocktrans %}
-                </li>
-              {% endif %}
+                    {% if object.affiliation %}
+                      <li>
+                        {% comment %} Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% blocktrans trimmed with publisher=object.company_name %}
+                          {{ publisher }} requires that you provide your institutional affiliation.
+                        {% endblocktrans %}
+                      </li>
+                    {% endif %}
 
-              {% if object.specific_title %}
-                <li>
-                  {% comment %} Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                  {% blocktrans trimmed with publisher=object.company_name %}
-                    {{ publisher }} requires that you specify a particular title that you want
-                    to access.
-                  {% endblocktrans %}
-                </li>
-              {% endif %}
+                    {% if object.specific_title %}
+                      <li>
+                        {% comment %} Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% blocktrans trimmed with publisher=object.company_name %}
+                          {{ publisher }} requires that you specify a particular title that you want
+                          to access.
+                        {% endblocktrans %}
+                      </li>
+                    {% endif %}
 
-              {% if object.account_email %}
-                <li>
-                  {% comment %} Translators: If a user must register on the partner website before applying, they see this message. Don't translate {{ partner }}. {% endcomment %}
-                  {% blocktrans trimmed with publisher=object.company_name %}
-                    {{ publisher }} requires that you sign up for an account before applying
-                    for access.
-                  {% endblocktrans %}
-                </li>
-              {% endif %}
-            </ul>
+                    {% if object.account_email %}
+                      <li>
+                        {% comment %} Translators: If a user must register on the partner website before applying, they see this message. Don't translate {{ partner }}. {% endcomment %}
+                        {% blocktrans trimmed with publisher=object.company_name %}
+                          {{ publisher }} requires that you sign up for an account before applying
+                          for access.
+                        {% endblocktrans %}
+                      </li>
+                    {% endif %}
+                  </ul>
 
-          </div>
-        </div>
-      </li>
-    {% endif %}
-    {% if object.streams.all %}
-      <li class="timeline-inverted">
-        <div class="timeline-badge"><i class="fa fa-tags"></i>
-        </div>
-        <div class="timeline-panel">
-          <div class="timeline-heading">
-            {% comment %} Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
-            <h4 class="timeline-title">{% trans "Collections" %}</h4>
-          </div>
-          <div class="timeline-body">
-            <ul>
-              {% for stream in object.streams.all %}
-              {% comment %}
-                Cache lifetime should be None, which would be forever since we're
-                invalidating on update. However, as 2017-04-06 a bug in django
-                doesn't allow for None to be passed from here into cache.  The
-                fix is in master, but not release.
-                https://code.djangoproject.com/ticket/27882
-                We filter out details and summary tags so that we always see
-                the full content on the details page.
-              {% endcomment %}
-                <li><b>{{ stream }}</b>
-                  {% if stream.description %}&mdash; 
-                    {% filter twlight_removetags:"details summary" %}
-                      {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
-                        {{ stream.description | twlight_wikicode2html | safe }}
-                      {% endcache %}
-                    {% endfilter %}
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>      
-      </li>
-    {% endif %}
-    <li class="timeline-inverted">
-      <div class="timeline-badge"><i class="fa fa-link"></i>
+                </div>
+              </div>
+            </li>
+          {% endif %}
+          {% if object.streams.all %}
+            <li class="timeline-inverted">
+              <div class="timeline-badge"><i class="fa fa-tags"></i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  {% comment %} Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
+                  <h4 class="timeline-title">{% trans "Collections" %}</h4>
+                </div>
+                <div class="timeline-body">
+                  <ul>
+                    {% for stream in object.streams.all %}
+                    {% comment %}
+                      Cache lifetime should be None, which would be forever since we're
+                      invalidating on update. However, as 2017-04-06 a bug in django
+                      doesn't allow for None to be passed from here into cache.  The
+                      fix is in master, but not release.
+                      https://code.djangoproject.com/ticket/27882
+                      We filter out details and summary tags so that we always see
+                      the full content on the details page.
+                    {% endcomment %}
+                      <li><b>{{ stream }}</b>
+                        {% if stream.description %}&mdash; 
+                          {% filter twlight_removetags:"details summary" %}
+                            {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
+                              {{ stream.description | twlight_wikicode2html | safe }}
+                            {% endcache %}
+                          {% endfilter %}
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>      
+            </li>
+          {% endif %}
+          <li class="timeline-inverted">
+            <div class="timeline-badge"><i class="fa fa-link"></i>
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-body">
+                {% if object.company_location %}
+                  {% comment %} Translators: If a partner has their location listed, this message is a label for that location {% endcomment %}
+                  <p>{% trans "Location" %}: {{ object.company_location.name }}</p>
+                {% endif %}
+                {% if object.terms_of_use %}
+                  {% comment %} Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+                  <p><a href="{{ object.terms_of_use }}">{% trans "Terms of use" %}</a></p>
+                {% else %}
+                  {% comment %} Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/). {% endcomment %}
+                  <p>{% trans "Terms of use not available." %}</p>
+                {% endif %}
+              </div>
+            </div>      
+          </li>
+        </ul>
       </div>
-      <div class="timeline-panel">
-        <div class="timeline-body">
-          {% if object.company_location %}
-            {% comment %} Translators: If a partner has their location listed, this message is a label for that location {% endcomment %}
-            <p>{% trans "Location" %}: {{ object.company_location.name }}</p>
+
+      <div class="col-sm-4 col-md-4 col-lg-4 pull-right">
+        {% if not object.authorization_method == object.BUNDLE %}
+          {% if object.is_waitlisted %}
+          <div class="hidden-xs alert alert-warning resource-label-warning">
+            <span class="resource-label">{% trans "Waitlisted" %}</span>
+            <p>
+            {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
+            {% blocktrans trimmed %}
+            There are no access grants available for this partner
+            at this time. You can still apply for access; applications will
+            be processed when access is available.
+            {% endblocktrans %}
+            </p>
+          </div>
           {% endif %}
-          {% if object.terms_of_use %}
-            {% comment %} Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
-            <p><a href="{{ object.terms_of_use }}">{% trans "Terms of use" %}</a></p>
+          {% if user_sent_apps %}
+            {% if object.renewals_available %}
+              {% if user|restricted %}
+                <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Renew" %}</button><br />
+              {% else %}
+                <a href="{% url 'applications:renew' latest_sent_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Renew" %}</a>
+              {% endif %}
+            {% endif %}
+          {% elif user_open_apps %}
+          {% if multiple_open_apps %}
+            <a href="{% url 'users:home' %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View applications" %}</a>
           {% else %}
-            {% comment %} Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/). {% endcomment %}
-            <p>{% trans "Terms of use not available." %}</p>
+            <a href="{% url 'applications:evaluate' open_app_pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "View application" %}</a>
           {% endif %}
-        </div>
-      </div>      
-    </li>
-  </ul>
+          {% else %}
+            <div class="alert alert-info hidden-xs">
+              <p>
+                {% comment %} Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
+                {% blocktrans trimmed %}
+                  Before applying, please review the 
+                  <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
+                  and our <strong><a href="{{ terms }}">terms of use</a></strong>.
+                {% endblocktrans %}
+              </p>
+            </div>
+            {% if user|restricted %}
+              <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
+            {% else %}
+              <a href="{{ app_url }}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "Apply" %}</a><br />
+            {% endif %}
+          {% endif %}
+      
+          {% if user|coordinators_only %}
+          <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-default btn-block text-center hidden-xs" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
+          </form>
+          {% endif %}
+        {% endif %}
+            {% if object.logos.logo.url %}
+              <img src="{{ object.logos.logo.url }}" class="img-responsive hidden-xs center-block partner-logo">
+            {% endif %}
+        {% if not object.authorization_method == object.BUNDLE %}
+            <div class="well hidden-xs">
+              {% if object.coordinator.editor.wp_username %}
+                {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}
+                {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
+                  <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
+                {% endblocktrans %}
+      
+                <ul>
+                  {% if object.coordinator.editor.wp_talk_page_url %}
+                    <li>
+                      <a href="{{ object.coordinator.editor.wp_talk_page_url }}">
+                        {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to. {% endcomment %}
+                        {% trans "Talk page" %}
+                      </a>
+                    </li>            
+                  {% endif %}
+                  {% if object.coordinator.editor.wp_email_page_url %}
+                    <li>
+                      <a href="{{ object.coordinator.editor.wp_email_page_url }}">
+                        {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to. {% endcomment %}
+                        {% trans "Special:EmailUser page" %}
+                      </a>            
+                    </li>            
+                  {% endif %}
+                </ul>
+              {% else %}
+                {% comment %} Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+                {% blocktrans trimmed %}
+                  The Wikipedia Library team will process this application. Want to
+                  help? <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
+                  coordinator.</a>
+                {% endblocktrans %}
+              {% endif %}
+            </div>
+            {% if object.coordinator == user or user.is_staff %}
+              {% comment %} Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
+              <a href="{% url 'partners:users' pk=object.pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "List applications" %}</a>
+            {% endif %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+  
 
 {% comment %}
   other stuff to do:

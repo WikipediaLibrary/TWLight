@@ -12,7 +12,7 @@ class SendCoordinatorRemindersCronJob(CronJobBase):
     code = "applications.send_coordinator_reminders"
 
     def do(self):
-        management.call_command("send_coordinator_reminders", "--app_status=PENDING")
+        management.call_command("send_coordinator_reminders")
 
 
 class BackupCronJob(CronJobBase):

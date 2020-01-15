@@ -229,6 +229,7 @@ TIMELINE
 .half-timeline > li.timeline-inverted > .timeline-panel {
   float: left;
   margin-left: 50px;
+  width: 70%;
 }
 
 .full-width {
