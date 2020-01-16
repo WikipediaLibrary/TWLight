@@ -287,7 +287,7 @@ def send_comment_notification_emails(sender, **kwargs):
                     "partner": app.partner,
                     "submit_date": current_comment.submit_date,
                     "commenter": current_comment.user.editor.wp_username,
-                    "comment": current_comment.comment
+                    "comment": current_comment.comment,
                 },
             )
             logger.info(
