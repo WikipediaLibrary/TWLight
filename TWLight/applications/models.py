@@ -457,10 +457,9 @@ def post_revision_commit(sender, instance, **kwargs):
     # correctly renewing the parent. So, we unset the parent
     # if the status is NOT_APPROVED and the app already has
     # a parent.
-    if instance.status == Application.NOT_APPROVED:
-        if instance.parent:
-            instance.parent = None
-            instance.save()
+    if instance.status == Application.NOT_APPROVED and instance.parent:
+        instance.parent = None
+        instance.save()
 
     # Authorize editor to access resource after an application is saved as sent.
 
