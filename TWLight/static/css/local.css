@@ -120,8 +120,6 @@ header {
   }
 
   #top-nav, #footer {
-    padding-top: auto;
-    padding-bottom: auto;
     padding-right: 56px;
     padding-left: 56px;
   }
@@ -133,8 +131,6 @@ header {
   }
 
   #top-nav, #footer {
-    padding-top: auto;
-    padding-bottom: auto;
     padding-right: 14px;
     padding-left: 14px;
   }
@@ -146,8 +142,6 @@ header {
   }
 
   #top-nav, #footer {
-    padding-top: auto;
-    padding-bottom: auto;
     padding-right: 28px;
     padding-left: 28px;
   }

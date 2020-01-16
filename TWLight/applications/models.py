@@ -452,6 +452,16 @@ def post_revision_commit(sender, instance, **kwargs):
         instance.status = Application.SENT
         instance.save()
 
+    # Renewals are for applications that are approved/sent.
+    # Having a parent for NOT_APPROVED apps hinders us from
+    # correctly renewing the parent. So, we unset the parent
+    # if the status is NOT_APPROVED and the app already has
+    # a parent.
+    if instance.status == Application.NOT_APPROVED:
+        if instance.parent:
+            instance.parent = None
+            instance.save()
+
     # Authorize editor to access resource after an application is saved as sent.
 
     if instance.status == Application.SENT:
