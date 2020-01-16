@@ -105,6 +105,33 @@ def create_user_profile(sender, instance, created, **kwargs):
 models.signals.post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL)
 
 
+def editor_account_old_enough(identity, global_userinfo):
+    # Check: registered >= 6 months ago
+    # Try oauth registration date first. If it's not valid,
+    # try the global_userinfo date
+    try:
+        reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
+    except:
+        reg_date = datetime.strptime(
+            global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
+        ).date()
+    return datetime.today().date() - timedelta(days=182) >= reg_date
+
+
+def editor_enough_edits(global_userinfo):
+    # If, for some reason, this information hasn't come through,
+    # default to user not being valid.
+    if not global_userinfo:
+        return False
+    # Check: >= 500 edits
+    return int(global_userinfo["editcount"]) >= 500
+
+
+def editor_not_blocked(identity):
+    # Check: not blocked
+    return identity["blocked"] == False
+
+
 class Editor(models.Model):
     """
     This model is for storing data related to people's accounts on Wikipedia.
@@ -263,7 +290,6 @@ class Editor(models.Model):
         else:
             return None
 
-    @cached_property
     def bundle_eligible(self, identity, global_userinfo):
 
         # prev_editcount is set to 0 for the first 30 days, all edits get counted here for new users.
@@ -273,30 +299,6 @@ class Editor(models.Model):
             return True
         else:
             return False
-
-    def account_old_enough(self, identity, global_userinfo):
-        # Check: registered >= 6 months ago
-        # Try oauth registration date first. If it's not valid,
-        # try the global_userinfo date
-        try:
-            reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
-        except:
-            reg_date = datetime.strptime(
-                global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
-            ).date()
-        return datetime.today().date() - timedelta(days=182) >= reg_date
-
-    def enough_edits(self, global_userinfo):
-        # If, for some reason, this information hasn't come through,
-        # default to user not being valid.
-        if not global_userinfo:
-            return False
-        # Check: >= 500 edits
-        return int(global_userinfo["editcount"]) >= 500
-
-    def not_blocked(self, identity):
-        # Check: not blocked
-        return identity["blocked"] == False
 
     def _is_user_valid(self, identity, global_userinfo):
         """
@@ -311,9 +313,9 @@ class Editor(models.Model):
         """
 
         if (
-            self.enough_edits(global_userinfo)
-            and self.account_old_enough(identity, global_userinfo)
-            and self.not_blocked(identity)
+            editor_enough_edits(global_userinfo)
+            and editor_account_old_enough(identity, global_userinfo)
+            and editor_not_blocked(identity)
         ):
             return True
         else:
