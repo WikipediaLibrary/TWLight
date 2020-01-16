@@ -446,7 +446,7 @@ class Authorization(models.Model):
         on_delete=models.SET_NULL,
         # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
         limit_choices_to=(
-                models.Q(is_superuser=True) | models.Q(groups__name="coordinators")
+            models.Q(is_superuser=True) | models.Q(groups__name="coordinators")
         ),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
         help_text=_("The authorizing user."),
@@ -501,18 +501,18 @@ class Authorization(models.Model):
         # TWLight.applications.helpers.get_active_authorizations function,
         # so that they remain in sync and return the same type of authorizations.
         if (
-                # Valid authorizations always have an authorizer, and user and a partner_id.
-                self.authorizer
-                and self.user
-                and self.partner_id
-                # and a valid authorization date that is now or in the past
-                and self.date_authorized
-                and self.date_authorized <= today
-                # and an expiration date in the future (or no expiration date).
-                and (
+            # Valid authorizations always have an authorizer, and user and a partner_id.
+            self.authorizer
+            and self.user
+            and self.partner_id
+            # and a valid authorization date that is now or in the past
+            and self.date_authorized
+            and self.date_authorized <= today
+            # and an expiration date in the future (or no expiration date).
+            and (
                 (self.date_expires and self.date_expires >= today)
                 or not self.date_expires
-                )
+            )
         ):
             valid = True
         return valid
@@ -555,14 +555,16 @@ class Authorization(models.Model):
         else:
             authorizer = None
 
-        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - " \
-               "company_name: {company_name} - stream_name: {stream_name}".format(
-                    authorized_user=authorized_user,
-                    authorizer=authorizer,
-                    date_authorized=self.date_authorized,
-                    company_name=company_name,
-                    stream_name=stream_name,
-               )
+        return (
+            "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - "
+            "company_name: {company_name} - stream_name: {stream_name}".format(
+                authorized_user=authorized_user,
+                authorizer=authorizer,
+                date_authorized=self.date_authorized,
+                company_name=company_name,
+                stream_name=stream_name,
+            )
+        )
 
     def get_latest_app(self):
         from TWLight.applications.models import Application
@@ -579,12 +581,8 @@ class Authorization(models.Model):
 
         try:
             return Application.objects.filter(
-                status=Application.SENT,
-                partner=self.partner,
-                editor=self.user.editor,
-            ).latest(
-                "id"
-            )
+                status=Application.SENT, partner=self.partner, editor=self.user.editor
+            ).latest("id")
         except Application.DoesNotExist:
             return None
 
@@ -592,9 +590,9 @@ class Authorization(models.Model):
         # less than 30 days but greater than -1 day is when we consider an authorization about to expire
         today = date.today()
         if (
-                self.date_expires
-                and self.date_expires - today < timedelta(days=30)
-                and not self.date_expires < today
+            self.date_expires
+            and self.date_expires - today < timedelta(days=30)
+            and not self.date_expires < today
         ):
             return True
         else:
@@ -603,15 +601,15 @@ class Authorization(models.Model):
     def is_renewable(self):
         partner = self.partner
         if (
-                # We consider an authorization renewable, if the partner is PROXY and
-                # about to expire or has already expired (is_valid returns false on expiry)
-                # or if the partner isn't PROXY or BUNDLE, in which case the authorization
-                # would have an empty date_expires field. The first would check still cover for
-                # non-PROXY and non-BUNDLE partners with expiry dates.
-                self.about_to_expire()
-                or not self.is_valid
-                or not partner.authorization_method == partner.PROXY
-                and not partner.authorization_method == partner.BUNDLE
+            # We consider an authorization renewable, if the partner is PROXY and
+            # about to expire or has already expired (is_valid returns false on expiry)
+            # or if the partner isn't PROXY or BUNDLE, in which case the authorization
+            # would have an empty date_expires field. The first would check still cover for
+            # non-PROXY and non-BUNDLE partners with expiry dates.
+            self.about_to_expire()
+            or not self.is_valid
+            or not partner.authorization_method == partner.PROXY
+            and not partner.authorization_method == partner.BUNDLE
         ):
             return True
         else:

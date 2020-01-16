@@ -68,9 +68,9 @@ def _is_real_url(url):
 def _redirect_to_next_param(request):
     next_param = request.GET.get(REDIRECT_FIELD_NAME, "")
     if (
-            next_param
-            and is_safe_url(url=next_param, host=request.get_host())
-            and _is_real_url(next_param)
+        next_param
+        and is_safe_url(url=next_param, host=request.get_host())
+        and _is_real_url(next_param)
     ):
         return next_param
     else:
@@ -496,7 +496,7 @@ class DeleteDataView(SelfOnly, DeleteView):
 
         # Expire any expiry date authorizations, but keep the object.
         for user_authorization in Authorization.objects.filter(
-                user=user, date_expires__isnull=False
+            user=user, date_expires__isnull=False
         ):
             user_authorization.date_expires = date.today() - timedelta(days=1)
             user_authorization.save()
@@ -685,13 +685,15 @@ class CollectionUserView(SelfOnly, ListView):
         ]:
             for each_authorization in authorization_list:
                 if (
-                        each_authorization.about_to_expire
-                        or not each_authorization.is_valid
+                    each_authorization.about_to_expire
+                    or not each_authorization.is_valid
                 ):
                     latest_app = each_authorization.get_latest_app()
                     if latest_app:
                         if latest_app.status != Application.SENT:
-                            each_authorization.latest_sent_app = each_authorization.get_latest_sent_app()
+                            each_authorization.latest_sent_app = (
+                                each_authorization.get_latest_sent_app()
+                            )
                         else:
                             each_authorization.latest_sent_app = latest_app
                         if not latest_app.is_renewable:
