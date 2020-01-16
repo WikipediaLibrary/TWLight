@@ -168,22 +168,6 @@ class Editor(models.Model):
         # Translators: The date the user's profile was created on the website (not on Wikipedia).
         help_text=_("When this profile was first created"),
     )
-    # Set as non-editable.
-    date_prev_editcount_updated = models.DateField(
-        default=None,
-        null=True,
-        blank=True,
-        editable=False,
-        help_text=_("When the previous editcount was last updated from Wikipedia"),
-    )
-    # Translators: The number of edits this user has made to all Wikipedia projects 30 days ago
-    prev_editcount = models.IntegerField(
-        default=0,
-        null=True,
-        blank=True,
-        editable=False,
-        help_text=_("30-day-old Wikipedia edit count"),
-    )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
@@ -211,13 +195,68 @@ class Editor(models.Model):
     wp_groups = models.TextField(help_text=_("Wikipedia groups"), blank=True)
     # Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
     wp_rights = models.TextField(help_text=_("Wikipedia user rights"), blank=True)
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~ Non-editable data computed from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     wp_valid = models.BooleanField(
         default=False,
-        # Translators: Help text asking whether the user met the requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
+        editable=False,
+        # Translators: Help text asking whether the user met all requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
         help_text=_(
             "At their last login, did this user meet the criteria in "
             "the terms of use?"
         ),
+    )
+    wp_account_old_enough = models.BooleanField(
+        default=False,
+        editable=False,
+        # Translators: Help text asking whether the user met the account age requirement for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
+        help_text=_(
+            "At their last login, did this user meet the account age criterion in "
+            "the terms of use?"
+        ),
+    )
+    wp_enough_edits = models.BooleanField(
+        default=False,
+        editable=False,
+        # Translators: Help text asking whether the user met the total editcount requirement for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
+        help_text=_(
+            "At their last login, did this user meet the total editcount criterion in "
+            "the terms of use?"
+        ),
+    )
+    wp_enough_recent_edits = models.BooleanField(
+        default=False,
+        editable=False,
+        # Translators: Help text asking whether the user met the recent editcount requirement for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
+        help_text=_(
+            "At their last login, did this user meet the recent editcount criterion in "
+            "the terms of use?"
+        ),
+    )
+    wp_not_blocked = models.BooleanField(
+        default=False,
+        editable=False,
+        # Translators: Help text asking whether the user met the 'not currently blocked' requirement for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
+        help_text=_(
+            "At their last login, did this user meet the 'not currently blocked' criterion in "
+            "the terms of use?"
+        ),
+    )
+    wp_editcount_prev_date_updated = models.DateField(
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+        help_text=_("When the previous editcount was last updated from Wikipedia"),
+    )
+    # wp_editcount_prev is initially set to 0 so that all edits get counted as recent edits for new users.
+    # Translators: The number of edits this user has made to all Wikipedia projects 30 days ago
+    wp_editcount_prev = models.IntegerField(
+        default=0,
+        null=True,
+        blank=True,
+        editable=False,
+        help_text=_("30-day-old Wikipedia edit count"),
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -302,15 +341,32 @@ class Editor(models.Model):
         else:
             return None
 
-    def bundle_eligible(self, identity, global_userinfo):
+    def editor_account_old_enough(self):
+        # Check: registered >= 6 months ago
+        return datetime.today().date() - timedelta(days=182) >= self.wp_registered
 
-        # prev_editcount is set to 0 for the first 30 days, all edits get counted here for new users.
-        recent_edits = self.wp_editcount - self.prev_editcount
-
-        if self._is_user_valid(identity, global_userinfo) and recent_edits >= 10:
+    def bundle_eligible(self):
+        if self.wp_valid and self.wp_enough_recent_edits:
             return True
         else:
             return False
+
+    def _set_recent_edits(self):
+        # If it's been 30 days or more since we last updated historical editcount,
+        # copy wp_editcount to wp_editcount_prev before updating wp_editcount.
+        # This allows us track recent edits for bundle eligibility.
+        if self.wp_editcount_prev_date_updated:
+            editcount_update_delta = date.today() - self.wp_editcount_prev_date_updated
+            if editcount_update_delta.days >= 30:
+                self.wp_editcount_prev = self.wp_editcount
+                self.wp_editcount_prev_date_updated = date.today()
+                recent_edits = self.wp_editcount - self.wp_editcount_prev
+                if recent_edits >= 10:
+                    self.wp_enough_recent_edits = True
+                else:
+                    self.wp_enough_recent_edits = False
+        else:
+            self.wp_editcount_prev_date_updated = date.today()
 
     def _is_user_valid(self, identity, global_userinfo):
         """
@@ -326,7 +382,7 @@ class Editor(models.Model):
 
         if (
             editor_enough_edits(global_userinfo)
-            and editor_account_old_enough(identity, global_userinfo)
+            and self.editor_account_old_enough
             and editor_not_blocked(identity)
         ):
             return True
@@ -413,13 +469,7 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            # If it's been 30 days or more since we last updated historical editcount,
-            # copy wp_editcount to prev_editcount before updating wp_editcount.
-            # This allows us track recent edits for bundle eligibility.
-            if self.date_prev_editcount_updated:
-                editcount_update_delta = date.today() - self.date_prev_editcount_updated
-                if editcount_update_delta.days >= 30:
-                    self.prev_editcount = self.wp_editcount
+            self._set_recent_edits()
             self.wp_editcount = global_userinfo["editcount"]
         # Try oauth registration date first.  If it's not valid, try the global_userinfo date
         try:
@@ -434,8 +484,9 @@ class Editor(models.Model):
                 pass
 
         self.wp_registered = reg_date
+        self.wp_enough_edits = editor_enough_edits(global_userinfo)
+        self.wp_not_blocked = editor_not_blocked(identity)
         self.wp_valid = self._is_user_valid(identity, global_userinfo)
-        self.date_prev_editcount_updated = now()
         self.save()
 
         # This will be True the first time the user logs in, since use_wp_email
