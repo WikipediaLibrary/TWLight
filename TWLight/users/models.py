@@ -275,8 +275,8 @@ class Editor(models.Model):
         else:
             return None
 
-    @property
-    def is_bundle_eligible(self, identity, global_userinfo):
+    @cached_property
+    def bundle_eligible(self, identity, global_userinfo):
 
         # prev_editcount is set to 0 for the first 30 days, all edits get counted here for new users.
         recent_edits = self.wp_editcount - self.prev_editcount
@@ -285,6 +285,30 @@ class Editor(models.Model):
             return True
         else:
             return False
+
+    def account_old_enough(self, identity, global_userinfo):
+        # Check: registered >= 6 months ago
+        # Try oauth registration date first. If it's not valid,
+        # try the global_userinfo date
+        try:
+            reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
+        except:
+            reg_date = datetime.strptime(
+                global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
+            ).date()
+        return datetime.today().date() - timedelta(days=182) >= reg_date
+
+    def enough_edits(self, global_userinfo):
+        # If, for some reason, this information hasn't come through,
+        # default to user not being valid.
+        if not global_userinfo:
+            return False
+        # Check: >= 500 edits
+        return int(global_userinfo["editcount"]) >= 500
+
+    def not_blocked(self, identity):
+        # Check: not blocked
+        return identity["blocked"] == False
 
     def _is_user_valid(self, identity, global_userinfo):
         """
@@ -297,28 +321,12 @@ class Editor(models.Model):
         Note that we won't prohibit signups or applications on this basis.
         Coordinators have discretion to approve people who are near the cutoff.
         """
-        # If, for some reason, this information hasn't come through,
-        # default to user not being valid.
-        if not global_userinfo:
-            return False
-        # Check: >= 500 edits
-        enough_edits = int(global_userinfo["editcount"]) >= 500
 
-        # Check: registered >= 6 months ago
-        # Try oauth registration date first. If it's not valid,
-        # try the global_userinfo date
-        try:
-            reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
-        except:
-            reg_date = datetime.strptime(
-                global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
-            ).date()
-        account_old_enough = datetime.today().date() - timedelta(days=182) >= reg_date
-
-        # Check: not blocked
-        not_blocked = identity["blocked"] == False
-
-        if enough_edits and account_old_enough and not_blocked:
+        if (
+            self.enough_edits(global_userinfo)
+            and self.account_old_enough(identity, global_userinfo)
+            and self.not_blocked(identity)
+        ):
             return True
         else:
             logger.info(
