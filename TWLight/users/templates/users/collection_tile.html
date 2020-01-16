@@ -12,7 +12,7 @@
   <div class="panel-body top-border {% if each_authorization.about_to_expire %}expiry-warning{% endif %}">
     {% if each_authorization.partner.authorization_method == each_authorization.partner.BUNDLE %}
       {% comment %} Translators: Title text for the Library Bundle icon shown on the collection page. {% endcomment %}
-      <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive no-padding-logo" style="width:35px; height:30px;" title="{% trans 'Library Bundle' %}" alt="
+      <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive no-padding-logo-collection-tiles" style="width:35px; height:30px;" title="{% trans 'Library Bundle' %}" alt="
       {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
       {% trans "Library bundle access" %}
       ">
