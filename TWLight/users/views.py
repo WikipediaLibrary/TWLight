@@ -24,7 +24,7 @@ from django_comments.models import Comment
 
 from TWLight.resources.models import Partner
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
-from TWLight.users.groups import get_coordinators, get_restricted
+from TWLight.users.groups import get_restricted
 
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
