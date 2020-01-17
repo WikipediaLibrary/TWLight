@@ -48,7 +48,6 @@ from TWLight.applications.models import Application
 
 import datetime
 
-coordinators = get_coordinators()
 restricted = get_restricted()
 
 import logging
