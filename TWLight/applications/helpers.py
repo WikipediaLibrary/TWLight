@@ -175,7 +175,7 @@ def get_output_for_application(app):
 def get_valid_authorizations(partner_pk, stream_pk=None):
     """
     Retrieves the valid authorizations available for a particular
-    partner or collections if stream_pk is not None. Valid authorizations are
+    partner (or collections if stream_pk is not None). Valid authorizations are
     authorizations with which we can operate, and is decided by certain conditions as
     spelled out in the is_valid property of the Authorization model object (users/models.py).
     """
