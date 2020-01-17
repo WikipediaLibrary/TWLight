@@ -497,18 +497,9 @@ def post_revision_commit(sender, instance, **kwargs):
         authorization.partner = instance.partner
 
         # If this is a proxy partner, and the requested_access_duration
-        # field is set to false, set (or reset) the expiry date
-        # to one year from now
-        if (
-            instance.partner.authorization_method == Partner.PROXY
-            and instance.requested_access_duration is None
-        ):
-            one_year_from_now = date.today() + timedelta(days=365)
-            authorization.date_expires = one_year_from_now
-        # If this is a proxy partner, and the requested_access_duration
         # field is set to true, set (or reset) the expiry date
         # to 1, 3, 6 or 12 months from today based on user input
-        elif (
+        if (
             instance.partner.authorization_method == Partner.PROXY
             and instance.partner.requested_access_duration is True
         ):
