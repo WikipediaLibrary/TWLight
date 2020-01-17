@@ -22,6 +22,9 @@ logger = logging.getLogger(__name__)
 
 
 class ValidApplicationsManager(models.Manager):
+    """
+    This custom model manager excludes applications marked 'invalid' from querysets by default.
+    """
     def get_queryset(self):
         return (
             super(ValidApplicationsManager, self)
@@ -57,7 +60,7 @@ class Application(models.Model):
         (APPROVED, _("Approved")),
         # Translators: This is the status of an application which has been declined by a reviewer.
         (NOT_APPROVED, _("Not approved")),
-        # Translators: This is the status of an application that has been sent to a partner.
+        # Translators: This is the status of an application that has been finalised, such as by sending to a partner.
         (SENT, _("Sent to partner")),
         # Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
         (INVALID, _("Invalid")),
@@ -68,12 +71,12 @@ class Application(models.Model):
     FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED, SENT, INVALID]
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
-    # Moved from auto_now_add=True so that we can set the date for import.
+
     # Defaults to today, set as non-editable, and not required in forms.
     date_created = models.DateField(default=now, editable=False)
 
     # Will be set on save() if status changes from PENDING/QUESTION to
-    # APPROVED/NOT APPROVED.
+    # APPROVED/NOT APPROVED, as defined via post_save signals.
     date_closed = models.DateField(
         blank=True,
         null=True,
@@ -373,15 +376,16 @@ class Application(models.Model):
 
     @property
     def user(self):
-        # Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation
-        # view.
+        """
+        Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation view.
+        """
         return self.editor.user
 
     @property
     def is_renewable(self):
         """
-        Apps are eligible for renewal if they are approved and have not already
-        been renewed. (We presume that SENT apps were at some point APPROVED.)
+        Apps are eligible for renewal if they are approved/sent and have not already
+        been renewed.
         """
         return all(
             [
