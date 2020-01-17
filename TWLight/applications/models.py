@@ -5,7 +5,6 @@ from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from reversion import revisions as reversion
 from reversion.models import Version
-from reversion.signals import post_revision_commit
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
