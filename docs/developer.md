@@ -1,8 +1,10 @@
 # Developer docs
 
-The intended audience for this document is future developers of TWLight. Hi!
+The intended audience for this document is developers of TWLight. Hi!
 
 To get set up with TWLight locally you will need [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
+
+TWLight runs on Django 1.11 (a Django 2 upgrade will be taking place before 1.11 end of life), and uses Python 3.7.
 
 ## Shell scripts
 
@@ -33,17 +35,25 @@ When working on TWLight locally you may want example data reflecting the live to
 
 This script can only be generated with an empty database, after you have logged in to an account you want to be made a superuser (the script looks for a single account in the database and makes it a Django superuser).
 
+## Code formatting
+
+We enforce code formatting via [black](https://github.com/psf/black) - tests will fail (both locally and on Travis) if black detects an issue with your code formatting. Run black on your code before pushing it via `docker-compose exec twlight /venv/bin/black -t py37 /app/TWLight`. 
+
 ## Translation
 
 [Translations](https://github.com/wikipedialibrary/TWLight/blob/master/docs/sysadmin.md#translations) are supported in the platform. Please make sure to correctly comment new or updated strings with guidance for translators - to do so, write a comment to the line preceding the string which starts `# Translators:` in python files or `{% comment %}Translators:` in HTML.
 
 In HTML files, make sure to wrap multiline strings with `{% blocktrans trimmed %}`, not just `{% blocktrans %}`, to avoid whitespace and indentation formatting issues.
 
-Where possible, try to keep code and HTML tags outside of strings (i.e. `<p>{% trans "Text" %}</p>` rather than `{% trans "<p>Text</p>" %}` to avoid confusion for translators.
+Where possible, try to keep code and HTML tags outside of strings (i.e. `<p>{% trans "Text" %}</p>` rather than `{% trans "<p>Text</p>" %}` to avoid confusion for translators. Don't, however, break up sentences into multiple translation blocks. Translators need to see the entire context of a string to translate it accurately.
 
 ## Pushing changes
 
 When filing Pull Requests for code changes, you should _not_ include translation updates and are not _required_ to include migration files. When changes are merged into the Master branch, Travis CI runs checks on the build and if it passes, pushes the changes through to the Production branch, which is then pulled to the live tool. This will run migration and string localization processes automatically.
+
+## Staging environment
+
+We have a staging environment hosted adjacent to the production site at https://twlight-staging.wmflabs.org/. If you would like to test your changes in this environment, to test against live data or in a close-to-production environment, please let a member of the TWL team know and we can pull your code down.
 
 ## Specific code changes
 
@@ -72,7 +82,7 @@ All four places referenced there must be updated:
 
 ## PyCharm setup
 
-This project can be set up via PyCharm using its support for Docker. Wikimedia developers can get free access to PyCharm Professional (required for Docker support) - please contact The Wikipedia Library for instructions.
+This project can be set up via PyCharm using its support for Docker. Wikimedia developers can get free access to PyCharm Professional (required for Docker support) - please contact The Wikipedia Library team for instructions.
 
 ### Process
 
@@ -96,4 +106,4 @@ This project can be set up via PyCharm using its support for Docker. Wikimedia d
 - 'Unauthorised' when retrieving alpine: This error is a result of signing into Docker with an ID rather than your email. Simply log out and then back in using your full email address.
 - SDK name error: Clear out your PyCharm interpreters by following the top response at https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000306410-Cannot-use-system-interpreter-in-PyCharm-Pro-2018-1
 - `Drive has not been shared`. This error occurs if Docker can't access the relevant folder. On Windows it can be solved by going to Properties > Sharing > Share > Share.
-- `(2005, "Unknown MySQL server host 'db' (-2)")`. Happens when the 'twlight_db_1' container fails to load. For a simple fix, open command prompt from within the Docker program files directory and run `docker system prune`. Deploying docker-compose.override.yml should now recreate the database from scratch. Run migrations, folowed by the example data script to restore the db to its initial state. Checkout https://github.com/wodby/mariadb/issues/2 if you are interested in not a simple fix.
+- `(2005, "Unknown MySQL server host 'db' (-2)")`. Happens when the 'twlight_db_1' container fails to load. For a simple fix, open command prompt from within the Docker program files directory and run `docker system prune`. Deploying docker-compose.override.yml should now recreate the database from scratch. Run migrations, folowed by the example data script to restore the db to its initial state. Check out https://github.com/wodby/mariadb/issues/2 if you are interested in not a simple fix.
