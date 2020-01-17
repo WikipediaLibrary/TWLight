@@ -11,7 +11,8 @@ from .models import Application
 
 """
 Lists and characterizes the types of information that partners can require as
-part of access grants. See full comment at end of file.
+part of access grants. See full comment at end of file and docs at
+https://github.com/WikipediaLibrary/TWLight/blob/master/docs/developer.md#changing-the-data-collected-on-application-forms
 """
 
 """
