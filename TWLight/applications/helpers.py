@@ -18,14 +18,6 @@ part of access grants. See full comment at end of file.
 Harvestable from user profile:
     Username (all partnerships)
     Email (all partnerships)
-    Projects user is active on (all partnerships)
-    Call for volunteers (as needed - checkbox "I'm interested")
-
-        Perhaps invite them to review/update their user profile as part of
-        application process.
-
-        Make sure to communicate to them what info will be shared with
-        coordinators and what to expect...
 
 Required/nonharvestable:
 
