@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2020-01-13 15:38:15+0000\n"
+"PO-Revision-Date: 2020-01-20 10:47:42+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +59,7 @@ msgstr "Вашето барање до {partner}"
 #: TWLight/applications/forms.py:245
 #, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr "Мора да се регистрирате на {url} пред поднесувањето."
+msgstr "Мора да се зачлените на {url} пред поднесувањето."
 
 #: TWLight/applications/forms.py:308
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
@@ -2857,7 +2857,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:89
 msgid "In addition to the basic information you provide to us, our system will retrieve some information directly from the Wikimedia projects: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights."
-msgstr "Покрај основните податоци што ни ги доставате, самиот наш систем ќе преземе извесни информации непосредно од Викимедиините проекти: вашето корисничко име, е-пошта, број на уредувања, датум на регистрација, корисничка назнака, во кои групи членувате и било кои посебни кориснички права."
+msgstr "Покрај основните податоци што ни ги доставате, самиот наш систем ќе преземе извесни информации непосредно од Викимедиините проекти: вашето корисничко име, е-пошта, број на уредувања, датум на зачленување, корисничка назнака, во кои групи членувате и било кои посебни кориснички права."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:96
