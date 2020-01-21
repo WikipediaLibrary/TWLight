@@ -25,7 +25,16 @@ from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
-from .models import UserProfile, Editor, Authorization
+from .models import (
+    UserProfile,
+    Editor,
+    Authorization,
+    editor_valid,
+    editor_account_old_enough,
+    editor_enough_edits,
+    editor_not_blocked,
+    editor_reg_date,
+)
 
 FAKE_IDENTITY_DATA = {"query": {"userinfo": {"options": {"disablemail": 0}}}}
 
@@ -750,41 +759,76 @@ class EditorModelTestCase(TestCase):
         global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
 
         # Valid data
-        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        enough_edits = editor_enough_edits(global_userinfo)
+        not_blocked = editor_not_blocked(identity)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.assertTrue(valid)
 
         # Edge case
         global_userinfo["editcount"] = 500
-        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
+        enough_edits = editor_enough_edits(global_userinfo)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.assertTrue(valid)
 
         # Too few edits
         global_userinfo["editcount"] = 499
-        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
+        enough_edits = editor_enough_edits(global_userinfo)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.assertFalse(valid)
 
         # Account created too recently
         global_userinfo["editcount"] = 500
         identity["registered"] = datetime.today().strftime("%Y%m%d%H%M%S")
-        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        enough_edits = editor_enough_edits(global_userinfo)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.assertFalse(valid)
 
         # Edge case: this shouldn't.
         almost_6_months_ago = datetime.today() - timedelta(days=183)
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
-        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.assertTrue(valid)
 
         # Edge case: this should work.
         almost_6_months_ago = datetime.today() - timedelta(days=182)
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
-        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.assertTrue(valid)
 
         # Bad editor! No biscuit.
         identity["blocked"] = True
-        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
+        not_blocked = editor_not_blocked(identity)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.assertFalse(valid)
 
     @patch.object(Editor, "get_global_userinfo")
-    @patch.object(Editor, "_is_user_valid")
-    def test_update_from_wikipedia(self, mock_validity, mock_global_userinfo):
+    # @patch.object(Editor, "_is_user_valid")
+    def test_update_from_wikipedia(self, mock_global_userinfo):
         # update_from_wikipedia calls _is_user_valid, which generates an API
         # call to Wikipedia that we don't actually want to do in testing.
-        mock_validity.return_value = True
+        # mock_validity.return_value = True
 
         identity = {}
         identity["username"] = "evil_dr_porkchop"
@@ -798,6 +842,8 @@ class EditorModelTestCase(TestCase):
         identity["email"] = "porkchop@example.com"
         identity["iss"] = "zh-classical.wikipedia.org"
         identity["registered"] = "20130205230142"
+        # validity
+        identity["blocked"] = False
 
         global_userinfo = {}
         global_userinfo["home"] = "zh_classicalwiki"
