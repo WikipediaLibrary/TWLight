@@ -1,5 +1,8 @@
-from datetime import date, timedelta
+import datetime
 import json
+import logging
+
+from datetime import date, timedelta
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -24,7 +27,7 @@ from django_comments.models import Comment
 
 from TWLight.resources.models import Partner
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
-from TWLight.users.groups import get_coordinators, get_restricted
+from TWLight.users.groups import get_restricted
 
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
@@ -46,12 +49,7 @@ from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
 
-import datetime
-
-coordinators = get_coordinators()
 restricted = get_restricted()
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -745,9 +743,15 @@ class CollectionUserView(SelfOnly, ListView):
                     each_authorization.about_to_expire
                     or not each_authorization.is_valid
                 ):
-                    each_authorization.latest_app = each_authorization.get_latest_app()
-                    if each_authorization.latest_app:
-                        if not each_authorization.latest_app.is_renewable:
+                    latest_app = each_authorization.get_latest_app()
+                    if latest_app:
+                        if latest_app.status != Application.SENT:
+                            each_authorization.latest_sent_app = (
+                                each_authorization.get_latest_sent_app()
+                            )
+                        else:
+                            each_authorization.latest_sent_app = latest_app
+                        if not latest_app.is_renewable:
                             try:
                                 each_authorization.open_app = Application.objects.filter(
                                     editor=editor,
