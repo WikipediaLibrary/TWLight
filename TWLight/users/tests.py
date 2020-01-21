@@ -824,12 +824,7 @@ class EditorModelTestCase(TestCase):
         self.assertFalse(valid)
 
     @patch.object(Editor, "get_global_userinfo")
-    # @patch.object(Editor, "_is_user_valid")
     def test_update_from_wikipedia(self, mock_global_userinfo):
-        # update_from_wikipedia calls _is_user_valid, which generates an API
-        # call to Wikipedia that we don't actually want to do in testing.
-        # mock_validity.return_value = True
-
         identity = {}
         identity["username"] = "evil_dr_porkchop"
         # Users' unique WP IDs should not change across API calls, but are
