@@ -105,6 +105,21 @@ def create_user_profile(sender, instance, created, **kwargs):
 models.signals.post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL)
 
 
+def editor_reg_date(identity, global_userinfo):
+    # Try oauth registration date first.  If it's not valid, try the global_userinfo date
+    try:
+        reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
+    except (TypeError, ValueError):
+        try:
+            reg_date = datetime.strptime(
+                global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
+            ).date()
+        except (TypeError, ValueError):
+            reg_date = None
+            pass
+    return reg_date
+
+
 def editor_enough_edits(global_userinfo):
     # If, for some reason, this information hasn't come through,
     # default to user not being valid.
@@ -115,8 +130,21 @@ def editor_enough_edits(global_userinfo):
 
 
 def editor_not_blocked(identity):
+    # If, for some reason, this information hasn't come through,
+    # default to user not being valid.
+    if not identity:
+        return False
     # Check: not blocked
     return identity["blocked"] == False
+
+
+def editor_account_old_enough(wp_registered):
+    # If, for some reason, this information hasn't come through,
+    # default to user not being valid.
+    if not wp_registered:
+        return False
+    # Check: registered >= 6 months ago
+    return datetime.today().date() - timedelta(days=182) >= wp_registered
 
 
 class Editor(models.Model):
@@ -316,10 +344,6 @@ class Editor(models.Model):
         else:
             return None
 
-    def editor_account_old_enough(self):
-        # Check: registered >= 6 months ago
-        return datetime.today().date() - timedelta(days=182) >= self.wp_registered
-
     def bundle_eligible(self):
         if self.wp_valid and self.wp_enough_recent_edits:
             return True
@@ -354,18 +378,18 @@ class Editor(models.Model):
         Note that we won't prohibit signups or applications on this basis.
         Coordinators have discretion to approve people who are near the cutoff.
         """
-
-        if (
-            editor_enough_edits(global_userinfo)
-            and self.editor_account_old_enough
-            and editor_not_blocked(identity)
-        ):
-            return True
+        self.wp_registered = editor_reg_date(identity, global_userinfo)
+        self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
+        self.wp_enough_edits = editor_enough_edits(global_userinfo)
+        self.wp_not_blocked = editor_not_blocked(identity)
+        if self.wp_enough_edits and self.wp_account_old_enough and self.wp_not_blocked:
+            self.wp_valid = True
         else:
             logger.info(
                 "Editor {username} was not valid.".format(username=self.wp_username)
             )
-            return False
+            self.wp_valid = False
+        return self.wp_valid
 
     def get_global_userinfo(self, identity):
         """
@@ -446,22 +470,7 @@ class Editor(models.Model):
         if global_userinfo:
             self._set_recent_edits()
             self.wp_editcount = global_userinfo["editcount"]
-        # Try oauth registration date first.  If it's not valid, try the global_userinfo date
-        try:
-            reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
-        except (TypeError, ValueError):
-            try:
-                reg_date = datetime.strptime(
-                    global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
-                ).date()
-            except (TypeError, ValueError):
-                reg_date = None
-                pass
-
-        self.wp_registered = reg_date
-        self.wp_enough_edits = editor_enough_edits(global_userinfo)
-        self.wp_not_blocked = editor_not_blocked(identity)
-        self.wp_valid = self._is_user_valid(identity, global_userinfo)
+        self._is_user_valid(identity, global_userinfo)
         self.save()
 
         # This will be True the first time the user logs in, since use_wp_email
