@@ -147,6 +147,24 @@ def editor_account_old_enough(wp_registered):
     return datetime.today().date() - timedelta(days=182) >= wp_registered
 
 
+def editor_valid(username, enough_edits, account_old_enough, not_blocked):
+    """
+    Check for the eligibility criteria laid out in the terms of service.
+    To wit, users must:
+    * Have >= 500 edits
+    * Be active for >= 6 months
+    * Not be blocked on any projects
+
+    Note that we won't prohibit signups or applications on this basis.
+    Coordinators have discretion to approve people who are near the cutoff.
+    """
+    if enough_edits and account_old_enough and not_blocked:
+        return True
+    else:
+        logger.info("Editor {username} was not valid.".format(username=username))
+        return False
+
+
 class Editor(models.Model):
     """
     This model is for storing data related to people's accounts on Wikipedia.
@@ -367,30 +385,6 @@ class Editor(models.Model):
         else:
             self.wp_editcount_prev_date_updated = date.today()
 
-    def _is_user_valid(self, identity, global_userinfo):
-        """
-        Check for the eligibility criteria laid out in the terms of service.
-        To wit, users must:
-        * Have >= 500 edits
-        * Be active for >= 6 months
-        * Not be blocked on any projects
-
-        Note that we won't prohibit signups or applications on this basis.
-        Coordinators have discretion to approve people who are near the cutoff.
-        """
-        self.wp_registered = editor_reg_date(identity, global_userinfo)
-        self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
-        self.wp_enough_edits = editor_enough_edits(global_userinfo)
-        self.wp_not_blocked = editor_not_blocked(identity)
-        if self.wp_enough_edits and self.wp_account_old_enough and self.wp_not_blocked:
-            self.wp_valid = True
-        else:
-            logger.info(
-                "Editor {username} was not valid.".format(username=self.wp_username)
-            )
-            self.wp_valid = False
-        return self.wp_valid
-
     def get_global_userinfo(self, identity):
         """
         Grab global user information from the API, which we'll use to overlay
@@ -470,8 +464,6 @@ class Editor(models.Model):
         if global_userinfo:
             self._set_recent_edits()
             self.wp_editcount = global_userinfo["editcount"]
-        self._is_user_valid(identity, global_userinfo)
-        self.save()
 
         # This will be True the first time the user logs in, since use_wp_email
         # defaults to True. Therefore we will initialize the email field if
@@ -485,6 +477,16 @@ class Editor(models.Model):
                 logger.exception("Unable to get Editor email address from Wikipedia.")
                 pass
 
+        self.wp_registered = editor_reg_date(identity, global_userinfo)
+        self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
+        self.wp_enough_edits = editor_enough_edits(global_userinfo)
+        self.wp_not_blocked = editor_not_blocked(identity)
+        self.wp_valid = editor_valid(
+            self.wp_username,
+            self.wp_enough_edits,
+            self.wp_account_old_enough,
+            self.wp_not_blocked,
+        )
         self.user.save()
 
         # Add language if the user hasn't selected one
