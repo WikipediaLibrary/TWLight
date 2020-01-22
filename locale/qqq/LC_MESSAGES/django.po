@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-01-17 10:28+0000\n"
-"PO-Revision-Date: 2020-01-16 14:43:49+0000\n"
+"POT-Creation-Date: 2020-01-21 14:24+0000\n"
+"PO-Revision-Date: 2020-01-20 10:47:46+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: TWLight/applications/forms.py:346
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#: TWLight/users/admin.py:110 TWLight/users/models.py:154
+#: TWLight/users/admin.py:110 TWLight/users/models.py:155
 msgid "Username"
 msgstr ""
 
@@ -673,7 +673,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/confirm_renewal.html:18
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:13
 #: TWLight/users/templates/users/authorization_confirm_return.html:15
-#: TWLight/users/views.py:493
+#: TWLight/users/views.py:491
 msgid "Confirm"
 msgstr ""
 
@@ -1339,7 +1339,7 @@ msgstr ""
 #. Translators: Title for a list of languages if there is only one.
 #. Translators: Users' detected or selected language.
 #: TWLight/graphs/views.py:411 TWLight/resources/models.py:87
-#: TWLight/users/models.py:90 TWLight/users/templates/users/preferences.html:8
+#: TWLight/users/models.py:91 TWLight/users/templates/users/preferences.html:8
 msgid "Language"
 msgstr "{{Identical|Sprooch}}"
 
@@ -2844,110 +2844,110 @@ msgid "Update email"
 msgstr ""
 
 #. Translators: Users must agree to the website terms of use.
-#: TWLight/users/models.py:67
+#: TWLight/users/models.py:68
 msgid "Has this user agreed with the terms of use?"
 msgstr ""
 
 #. Translators: This field records the date the user agreed to the website terms of use.
-#: TWLight/users/models.py:73
+#: TWLight/users/models.py:74
 msgid "The date this user agreed to the terms of use."
 msgstr ""
 
-#: TWLight/users/models.py:79
+#: TWLight/users/models.py:80
 msgid ""
 "Should we automatically update their email from their Wikipedia email when "
 "they log in? Defaults to True."
 msgstr ""
 
 #. Translators: Description of the option users have to enable or disable reminder emails for renewals
-#: TWLight/users/models.py:95
+#: TWLight/users/models.py:96
 msgid "Does this user want renewal reminder notices?"
 msgstr ""
 
 #. Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for pending applications
-#: TWLight/users/models.py:100
+#: TWLight/users/models.py:101
 msgid "Does this coordinator want pending app reminder notices?"
 msgstr ""
 
-#: TWLight/users/models.py:106
+#: TWLight/users/models.py:107
 msgid "Does this coordinator want under discussion app reminder notices?"
 msgstr ""
 
 #. Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for approved applications
-#: TWLight/users/models.py:112
+#: TWLight/users/models.py:113
 msgid "Does this coordinator want approved app reminder notices?"
 msgstr ""
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:147
+#: TWLight/users/models.py:148
 msgid "When this profile was first created"
 msgstr ""
 
-#: TWLight/users/models.py:157
+#: TWLight/users/models.py:158
 msgid "Wikipedia edit count"
 msgstr ""
 
-#: TWLight/users/models.py:161
+#: TWLight/users/models.py:162
 msgid "Date registered at Wikipedia"
 msgstr ""
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:166
+#: TWLight/users/models.py:167
 msgid "Wikipedia user ID"
 msgstr ""
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:173
+#: TWLight/users/models.py:174
 msgid "Wikipedia groups"
 msgstr ""
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:175
+#: TWLight/users/models.py:176
 msgid "Wikipedia user rights"
 msgstr ""
 
-#: TWLight/users/models.py:180
+#: TWLight/users/models.py:181
 msgid ""
 "At their last login, did this user meet the criteria in the terms of use?"
 msgstr ""
 
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:188
+#: TWLight/users/models.py:189
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:421
+#: TWLight/users/models.py:422
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:454
+#: TWLight/users/models.py:455
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:468
+#: TWLight/users/models.py:469
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:477
+#: TWLight/users/models.py:478
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:488
+#: TWLight/users/models.py:489
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:499
+#: TWLight/users/models.py:500
 msgid "The stream for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:505
+#: TWLight/users/models.py:506
 msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
@@ -3668,18 +3668,18 @@ msgstr ""
 #. Translators: This is a button which updates user preference settings
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:360
+#: TWLight/users/views.py:358
 msgid "Update"
 msgstr ""
 
-#: TWLight/users/views.py:137
+#: TWLight/users/views.py:135
 #, python-brace-format
 msgid ""
 "Please <a href=\"{url}\">update your contributions</a> to Wikipedia to help "
 "coordinators evaluate your applications."
 msgstr ""
 
-#: TWLight/users/views.py:250
+#: TWLight/users/views.py:248
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, consider changing your "
@@ -3687,52 +3687,52 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:260
+#: TWLight/users/views.py:258
 msgid "Your reminder email preferences are updated."
 msgstr ""
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:342 TWLight/users/views.py:423
-#: TWLight/users/views.py:478
+#: TWLight/users/views.py:340 TWLight/users/views.py:421
+#: TWLight/users/views.py:476
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:375
+#: TWLight/users/views.py:373
 msgid "Your information has been updated."
 msgstr ""
 
-#: TWLight/users/views.py:407
+#: TWLight/users/views.py:405
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:435
+#: TWLight/users/views.py:433
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
-#: TWLight/users/views.py:446
+#: TWLight/users/views.py:444
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
-#: TWLight/users/views.py:644
+#: TWLight/users/views.py:642
 msgid ""
 "You may explore the site, but you will not be able to apply for access to "
 "materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
-#: TWLight/users/views.py:651
+#: TWLight/users/views.py:649
 msgid ""
 "You may explore the site, but you will not be able to apply for access "
 "unless you agree with the terms of use."
 msgstr ""
 
-#: TWLight/users/views.py:816
+#: TWLight/users/views.py:820
 msgid "Access to {} has been returned."
 msgstr ""
 
