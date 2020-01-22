@@ -285,7 +285,6 @@ class BaseApplicationForm(forms.Form):
 
 
 class ApplicationAutocomplete(forms.ModelForm):
-
     class Meta:
         model = Application
         fields = ["editor", "partner"]

@@ -25,6 +25,7 @@ class ValidApplicationsManager(models.Manager):
     """
     This custom model manager excludes applications marked 'invalid' from querysets by default.
     """
+
     def get_queryset(self):
         return (
             super(ValidApplicationsManager, self)
@@ -507,6 +508,14 @@ def post_revision_commit(sender, instance, **kwargs):
                 months=+instance.requested_access_duration
             )
             authorization.date_expires = custom_expiry_date
+        # Our admin validation shouldn't allow this to be the case, but
+        # just in case, we'll default to a one-year access period.
+        elif (
+            instance.partner.authorization_method == Partner.PROXY
+            and instance.requested_access_duration is None
+        ):
+            one_year_from_now = date.today() + timedelta(days=365)
+            authorization.date_expires = one_year_from_now
         # Alternatively, if this partner has a specified account_length,
         # we'll use that to set the expiry.
         elif instance.partner.account_length:
