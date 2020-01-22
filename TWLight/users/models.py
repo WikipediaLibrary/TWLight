@@ -35,6 +35,7 @@ import urllib.request, urllib.error, urllib.parse
 import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.timezone import now
@@ -543,16 +544,16 @@ class Authorization(models.Model):
         if self.partner:
             company_name = self.partner.company_name
         else:
-            stream_name = None
+            company_name = None
 
         # In reality, we should always have an authorized user.
         if self.user:
             try:
                 authorized_user = self.user.editor.wp_username
-            except:
+            except Editor.DoesNotExist:
                 try:
                     authorized_user = self.user.username
-                except:
+                except User.DoesNotExist:
                     authorized_user = self.user
         else:
             authorized_user = None
@@ -563,20 +564,23 @@ class Authorization(models.Model):
         if self.authorizer:
             try:
                 authorizer = self.authorizer.editor.wp_username
-            except:
+            except Editor.DoesNotExist:
                 try:
                     authorizer = self.authorizer.username
-                except:
+                except User.DoesNotExist:
                     authorizer = self.authorizer
         else:
             authorizer = None
 
-        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}".format(
-            authorized_user=authorized_user,
-            authorizer=authorizer,
-            date_authorized=self.date_authorized,
-            company_name=company_name,
-            stream_name=stream_name,
+        return (
+            "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - "
+            "company_name: {company_name} - stream_name: {stream_name}".format(
+                authorized_user=authorized_user,
+                authorizer=authorizer,
+                date_authorized=self.date_authorized,
+                company_name=company_name,
+                stream_name=stream_name,
+            )
         )
 
     def get_latest_app(self):
@@ -585,6 +589,16 @@ class Authorization(models.Model):
         try:
             return Application.objects.filter(
                 partner=self.partner, editor=self.user.editor
+            ).latest("id")
+        except Application.DoesNotExist:
+            return None
+
+    def get_latest_sent_app(self):
+        from TWLight.applications.models import Application
+
+        try:
+            return Application.objects.filter(
+                status=Application.SENT, partner=self.partner, editor=self.user.editor
             ).latest("id")
         except Application.DoesNotExist:
             return None
