@@ -30,7 +30,7 @@ class EditorUpdateForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.add_input(
             Submit(
-                "submit",
+                "Submit",
                 # Translators: This is the label for a button that users click to update their public information.
                 _("Update profile"),
                 css_class="center-block",
@@ -126,7 +126,7 @@ class TermsForm(forms.ModelForm):
         self.helper.layout = Layout(
             "terms_of_use",
             # Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-            Submit("submit", _("submit"), css_class="btn btn-default"),
+            Submit("Submit", _("Submit"), css_class="btn btn-default"),
         )
 
 
@@ -155,6 +155,6 @@ class EmailChangeForm(forms.Form):
             "use_wp_email",
             # Translators: This labels a button which users click to change their email.
             Submit(
-                "submit", _("Update email"), css_class="btn btn-default col-md-offset-2"
+                "Submit", _("Update email"), css_class="btn btn-default col-md-offset-2"
             ),
         )
