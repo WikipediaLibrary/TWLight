@@ -16,6 +16,16 @@ class PartnerFactory(factory.django.DjangoModelFactory):
     )
     terms_of_use = factory.Faker("uri", locale=random.choice(settings.FAKER_LOCALES))
     status = Partner.AVAILABLE  # not the default, but usually wanted in tests
+    authorization_method = Partner.EMAIL
+
+    # PROXY partners need requested_access_duration to be True, so we ensure
+    # that field is set even if a test doesn't set it explicitly.
+    @factory.lazy_attribute
+    def requested_access_duration(self):
+        if self.authorization_method == Partner.PROXY:
+            return True
+        else:
+            return False
 
 
 class StreamFactory(factory.django.DjangoModelFactory):

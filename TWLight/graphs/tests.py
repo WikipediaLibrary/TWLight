@@ -115,12 +115,24 @@ class GraphsTestCase(TestCase):
         editor2 = EditorFactory()
 
         parent_app = ApplicationFactory(
-            status=Application.SENT, partner=partner1, editor=editor1
+            status=Application.SENT,
+            partner=partner1,
+            editor=editor1,
+            requested_access_duration=12,
         )
         ApplicationFactory(
-            status=Application.SENT, partner=partner1, editor=editor1, parent=parent_app
+            status=Application.SENT,
+            partner=partner1,
+            editor=editor1,
+            parent=parent_app,
+            requested_access_duration=12,
         )
-        ApplicationFactory(status=Application.SENT, partner=partner2, editor=editor2)
+        ApplicationFactory(
+            status=Application.SENT,
+            partner=partner2,
+            editor=editor2,
+            requested_access_duration=12,
+        )
 
         request = self.factory.get(reverse("csv:proxy_authorizations"))
         request.user = self.user

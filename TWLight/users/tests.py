@@ -298,7 +298,10 @@ class ViewsTestCase(TestCase):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
         partner = PartnerFactory(authorization_method=Partner.PROXY)
         app = ApplicationFactory(
-            status=Application.SENT, editor=editor, partner=partner
+            status=Application.SENT,
+            editor=editor,
+            partner=partner,
+            requested_access_duration=12,
         )
         authorization = Authorization.objects.get(user=editor.user, partner=partner)
         self.assertEqual(authorization.get_latest_app(), app)

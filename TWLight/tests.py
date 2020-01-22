@@ -2,6 +2,7 @@ import random
 
 from unittest.mock import patch
 from datetime import date, timedelta
+from dateutil.relativedelta import relativedelta
 from faker import Faker
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -493,13 +494,22 @@ class AuthorizationBaseTestCase(TestCase):
             editor=self.editor3, partner=self.partner1, status=Application.PENDING
         )
         self.app4 = ApplicationFactory(
-            editor=self.editor1, partner=self.partner2, status=Application.PENDING
+            editor=self.editor1,
+            partner=self.partner2,
+            status=Application.PENDING,
+            requested_access_duration=12,
         )
         self.app5 = ApplicationFactory(
-            editor=self.editor2, partner=self.partner2, status=Application.PENDING
+            editor=self.editor2,
+            partner=self.partner2,
+            status=Application.PENDING,
+            requested_access_duration=12,
         )
         self.app6 = ApplicationFactory(
-            editor=self.editor3, partner=self.partner2, status=Application.PENDING
+            editor=self.editor3,
+            partner=self.partner2,
+            status=Application.PENDING,
+            requested_access_duration=12,
         )
         self.app7 = ApplicationFactory(
             editor=self.editor1, partner=self.partner3, status=Application.PENDING
@@ -773,7 +783,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # For a proxy partner we should set the expiry
         # date correctly for its authorizations.
 
-        expected_expiry = date.today() + timedelta(days=365)
+        expected_expiry = date.today() + relativedelta(months=12)
         self.assertEqual(self.auth_app4.date_expires, expected_expiry)
 
     def test_authorization_backfill_expiry_date_on_partner_save(self):
