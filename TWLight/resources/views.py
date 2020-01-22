@@ -13,12 +13,12 @@ from django.shortcuts import get_object_or_404
 
 from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
-from TWLight.graphs.helpers import get_median, get_earliest_creation_date
+from TWLight.graphs.helpers import get_median
 from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
-from .models import Partner, Stream, Suggestion, AccessCode
+from .models import Partner, Stream, Suggestion
 
 import logging
 
@@ -299,8 +299,8 @@ class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
 
 class SuggestionUpvoteView(EditorsOnly, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        id = self.kwargs.get("pk")
-        obj = get_object_or_404(Suggestion, id=id)
+        suggestion_id = self.kwargs.get("pk")
+        obj = get_object_or_404(Suggestion, id=suggestion_id)
         url_ = obj.get_absolute_url()
         user = self.request.user
         if user.is_authenticated():

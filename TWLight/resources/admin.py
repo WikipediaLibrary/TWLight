@@ -136,6 +136,10 @@ class AccessCodeAdmin(admin.ModelAdmin):
         return my_urls + urls
 
     def import_csv(self, request):
+        """
+        Staff can import a csv file containing access codes. This function processes that CSV, creating
+        AccessCode objects as required.
+        """
         if request.method == "POST":
             uploaded_csv = request.FILES["access_code_csv"]
             return_url = HttpResponseRedirect("..")

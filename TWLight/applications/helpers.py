@@ -11,21 +11,14 @@ from .models import Application
 
 """
 Lists and characterizes the types of information that partners can require as
-part of access grants. See full comment at end of file.
+part of access grants. See full comment at end of file and docs at
+https://github.com/WikipediaLibrary/TWLight/blob/master/docs/developer.md#changing-the-data-collected-on-application-forms
 """
 
 """
 Harvestable from user profile:
     Username (all partnerships)
     Email (all partnerships)
-    Projects user is active on (all partnerships)
-    Call for volunteers (as needed - checkbox "I'm interested")
-
-        Perhaps invite them to review/update their user profile as part of
-        application process.
-
-        Make sure to communicate to them what info will be shared with
-        coordinators and what to expect...
 
 Required/nonharvestable:
 
@@ -182,7 +175,7 @@ def get_output_for_application(app):
 def get_valid_authorizations(partner_pk, stream_pk=None):
     """
     Retrieves the valid authorizations available for a particular
-    partner or collections if stream_pk is not None. Valid authorizations are
+    partner (or collections if stream_pk is not None). Valid authorizations are
     authorizations with which we can operate, and is decided by certain conditions as
     spelled out in the is_valid property of the Authorization model object (users/models.py).
     """

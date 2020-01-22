@@ -2,7 +2,7 @@
 
 """
 This file holds user profile information. (The base User model is part of
-Django; profiles extend that with locally useful     information.)
+Django; profiles extend that with locally useful information.)
 
 TWLight has three user types:
 * editors
@@ -25,8 +25,8 @@ flag through the admin site.
 New users who sign up via oauth will be created as editors. Site administrators
 may promote them to coordinators manually in the Django admin site, by adding
 them to the coordinators group. They can also directly create Django user
-accounts without attached Editors in the admin site, if for some reason it's
-useful to have account holders without attached Wikipedia data.
+accounts without attached Editors in the admin site, but this has no current
+use case.
 """
 from datetime import datetime, date, timedelta
 import json
@@ -150,7 +150,7 @@ class Editor(models.Model):
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
-    # Data are current *as of the time of TWLight signup* but may get out of
+    # Data are current *as of the time of last TWLight login* but may get out of
     # sync thereafter.
     wp_username = models.CharField(max_length=235, help_text=_("Username"))
     # Translators: The total number of edits this user has made to all Wikipedia projects
