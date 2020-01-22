@@ -505,7 +505,7 @@ def post_revision_commit(sender, instance, **kwargs):
             and instance.partner.requested_access_duration is True
         ):
             custom_expiry_date = date.today() + relativedelta(
-                months=+instance.requested_access_duration
+                months=instance.requested_access_duration
             )
             authorization.date_expires = custom_expiry_date
         # Our admin validation shouldn't allow this to be the case, but
