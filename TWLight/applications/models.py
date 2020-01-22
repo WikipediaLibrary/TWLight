@@ -511,7 +511,7 @@ def post_revision_commit(sender, instance, **kwargs):
         # to one year from now
         if (
             instance.partner.authorization_method == Partner.PROXY
-            and instance.requested_access_duration is False
+            and instance.partner.requested_access_duration is False
         ):
             one_year_from_now = date.today() + timedelta(days=365)
             authorization.date_expires = one_year_from_now
