@@ -2051,6 +2051,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
             partner=partner,
             status=Application.SENT,  # proxy applications are directly marked SENT
             editor=editor1,
+            requested_access_duration=12,
         )
 
         renewal_url = reverse("applications:renew", kwargs={"pk": app1.pk})
@@ -2395,7 +2396,9 @@ class ApplicationModelTest(TestCase):
         partner = PartnerFactory(
             authorization_method=Partner.PROXY, requested_access_duration=True
         )
-        application = ApplicationFactory(partner=partner, status=Application.PENDING)
+        application = ApplicationFactory(
+            partner=partner, status=Application.PENDING, requested_access_duration=12
+        )
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
         application.partner.coordinator = coordinator.user
         application.partner.save()
