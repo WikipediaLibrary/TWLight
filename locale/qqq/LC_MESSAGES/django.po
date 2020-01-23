@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-01-22 15:00+0000\n"
+"POT-Creation-Date: 2020-01-23 10:44+0000\n"
 "PO-Revision-Date: 2020-01-20 10:47:46+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1274,7 +1274,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:277
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:289
 msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
@@ -2114,29 +2114,29 @@ msgid ""
 "yet available to all users."
 msgstr ""
 
-#: TWLight/resources/views.py:66
+#: TWLight/resources/views.py:61
 msgid ""
 "This partner is not available. You can see it because you are a staff "
 "member, but it is not visible to non-staff users."
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:169
+#: TWLight/resources/views.py:181
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:173
+#: TWLight/resources/views.py:185
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:269
+#: TWLight/resources/views.py:281
 msgid "Your suggestion has been added."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:295
+#: TWLight/resources/views.py:307
 msgid "Suggestion has been deleted."
 msgstr ""
 
