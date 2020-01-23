@@ -34,6 +34,8 @@ from .models import (
     editor_enough_edits,
     editor_not_blocked,
     editor_reg_date,
+    editor_recent_edits,
+    editor_bundle_eligible,
 )
 
 FAKE_IDENTITY_DATA = {"query": {"userinfo": {"options": {"disablemail": 0}}}}
@@ -744,6 +746,92 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
         )
         self.assertFalse(valid)
+
+    def test_editor_eligibility_functions(self):
+        # Start out with basic validation of the eligibility functions.
+
+        # Invalid users without enough recent edits are not eligible.
+        self.asertFalse(editor_bundle_eligible(False, False))
+
+        # Invalid users with enough recent edits are not eligible.
+        self.asertFalse(editor_bundle_eligible(False, True))
+
+        # Valid users without enough recent edits are not eligible.
+        self.asertFalse(editor_bundle_eligible(True, False))
+
+        # Valid users with enough recent edits are eligible.
+        self.asertTrue(editor_bundle_eligible(True, True))
+
+    @patch("urllib.request.urlopen")
+    def test_is_user_bundle_eligible(self, mock_urlopen):
+        """
+        Users must:
+        * Be valid
+        * Have made 10 edits in the last 30 days (with some wiggle room, as you will see)
+        """
+        mock_response = Mock()
+
+        oauth_data = FAKE_IDENTITY_DATA
+
+        global_userinfo_data = FAKE_GLOBAL_USERINFO
+
+        # This goes to an iterator; we need to return the expected data
+        # enough times to power all the calls to read() in this function.
+        mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
+
+        mock_urlopen.return_value = mock_response
+
+        identity = copy.copy(FAKE_IDENTITY)
+        global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
+
+        # Valid data
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        enough_edits = editor_enough_edits(global_userinfo)
+        not_blocked = editor_not_blocked(identity)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.assertTrue(valid)
+
+        # 1st time bundle check should always pass for a valid user.
+        self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"],
+            self.test_editor.wp_editcount_prev_date_updated,
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.assertTrue(bundle_eligible)
+
+        # A valid user should pass 30 days after their first login, even if they haven't made anymore edits.
+        self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"],
+            self.test_editor.wp_editcount_prev_date_updated - timedelta(days=30),
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.assertTrue(bundle_eligible)
+
+        # A valid user should fail 31 days after their first login, if they haven't made any more edits.
+        self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"],
+            self.test_editor.wp_editcount_prev_date_updated - timedelta(days=31),
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.assertFalse(bundle_eligible)
 
     @patch.object(Editor, "get_global_userinfo")
     def test_update_from_wikipedia(self, mock_global_userinfo):
