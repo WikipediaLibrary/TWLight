@@ -169,11 +169,6 @@ def editor_account_old_enough(wp_registered):
 def editor_valid(username, enough_edits, account_old_enough, not_blocked):
     """
     Check for the eligibility criteria laid out in the terms of service.
-    To wit, users must:
-    * Have >= 500 edits
-    * Be active for >= 6 months
-    * Not be blocked on any projects
-
     Note that we won't prohibit signups or applications on this basis.
     Coordinators have discretion to approve people who are near the cutoff.
     """
@@ -226,6 +221,12 @@ def editor_recent_edits(
         wp_editcount_recent,
         wp_enough_recent_edits,
     )
+
+def editor_bundle_eligible(wp_valid, wp_enough_recent_edits):
+    if wp_valid and wp_enough_recent_edits:
+        return True
+    else:
+        return False
 
 
 class Editor(models.Model):
@@ -353,6 +354,16 @@ class Editor(models.Model):
         editable=False,
         help_text=_("Recent Wikipedia edit count"),
     )
+    wp_bundle_eligible = models.BooleanField(
+        default=False,
+        editable=False,
+        # Translators: Help text asking whether the user met all requirements for access to the library card bundle the last time they logged in (when their information was last updated).
+        help_text=_(
+            "At their last login, did this user meet the criteria for access to the library card bundle?"
+        ),
+    )
+
+
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     contributions = models.TextField(
@@ -435,12 +446,6 @@ class Editor(models.Model):
             return json.loads(self.wp_groups)
         else:
             return None
-
-    def bundle_eligible(self):
-        if self.wp_valid and self.wp_enough_recent_edits:
-            return True
-        else:
-            return False
 
     def get_global_userinfo(self, identity):
         """
@@ -550,6 +555,7 @@ class Editor(models.Model):
             self.wp_account_old_enough,
             self.wp_not_blocked,
         )
+        self.wp_bundle_eligible = editor_bundle_eligible(self.wp_valid, self.wp_enough_recent_edits)
         self.user.save()
 
         # Add language if the user hasn't selected one
