@@ -829,16 +829,16 @@ class EditorModelTestCase(TestCase):
         # Start out with basic validation of the eligibility functions.
 
         # Invalid users without enough recent edits are not eligible.
-        self.asertFalse(editor_bundle_eligible(False, False))
+        self.assertFalse(editor_bundle_eligible(False, False))
 
         # Invalid users with enough recent edits are not eligible.
-        self.asertFalse(editor_bundle_eligible(False, True))
+        self.assertFalse(editor_bundle_eligible(False, True))
 
         # Valid users without enough recent edits are not eligible.
-        self.asertFalse(editor_bundle_eligible(True, False))
+        self.assertFalse(editor_bundle_eligible(True, False))
 
         # Valid users with enough recent edits are eligible.
-        self.asertTrue(editor_bundle_eligible(True, True))
+        self.assertTrue(editor_bundle_eligible(True, True))
 
     @patch("urllib.request.urlopen")
     def test_is_user_bundle_eligible(self, mock_urlopen):
