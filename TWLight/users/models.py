@@ -222,6 +222,7 @@ def editor_recent_edits(
         wp_enough_recent_edits,
     )
 
+
 def editor_bundle_eligible(wp_valid, wp_enough_recent_edits):
     if wp_valid and wp_enough_recent_edits:
         return True
@@ -362,8 +363,6 @@ class Editor(models.Model):
             "At their last login, did this user meet the criteria for access to the library card bundle?"
         ),
     )
-
-
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     contributions = models.TextField(
@@ -555,7 +554,9 @@ class Editor(models.Model):
             self.wp_account_old_enough,
             self.wp_not_blocked,
         )
-        self.wp_bundle_eligible = editor_bundle_eligible(self.wp_valid, self.wp_enough_recent_edits)
+        self.wp_bundle_eligible = editor_bundle_eligible(
+            self.wp_valid, self.wp_enough_recent_edits
+        )
         self.user.save()
 
         # Add language if the user hasn't selected one
