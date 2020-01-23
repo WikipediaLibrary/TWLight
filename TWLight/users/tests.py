@@ -711,31 +711,14 @@ class EditorModelTestCase(TestCase):
         expected_text = ["sysops", "bureaucrats"]
         self.assertEqual(expected_text, self.test_editor.get_wp_groups_display)
 
-    @patch("urllib.request.urlopen")
-    def test_is_user_valid(self, mock_urlopen):
+    def test_is_user_valid(self):
         """
         Users must:
         * Have >= 500 edits
         * Be active for >= 6 months
         * Have Special:Email User enabled
         * Not be blocked on any projects
-
-        This checks everything except Special:Email. (Checking that requires
-        another http request, so we're going to mock a successful request here
-        in order to check all the other criteria, and check for the failure case
-        in the next test.)
         """
-        mock_response = Mock()
-
-        oauth_data = FAKE_IDENTITY_DATA
-
-        global_userinfo_data = FAKE_GLOBAL_USERINFO
-
-        # This goes to an iterator; we need to return the expected data
-        # enough times to power all the calls to read() in this function.
-        mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
-
-        mock_urlopen.return_value = mock_response
 
         identity = copy.copy(FAKE_IDENTITY)
         global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
@@ -820,24 +803,12 @@ class EditorModelTestCase(TestCase):
         # Valid users with enough recent edits are eligible.
         self.assertTrue(editor_bundle_eligible(True, True))
 
-    @patch("urllib.request.urlopen")
-    def test_is_user_bundle_eligible(self, mock_urlopen):
+    def test_is_user_bundle_eligible(self):
         """
         Users must:
         * Be valid
         * Have made 10 edits in the last 30 days (with some wiggle room, as you will see)
         """
-        mock_response = Mock()
-
-        oauth_data = FAKE_IDENTITY_DATA
-
-        global_userinfo_data = FAKE_GLOBAL_USERINFO
-
-        # This goes to an iterator; we need to return the expected data
-        # enough times to power all the calls to read() in this function.
-        mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
-
-        mock_urlopen.return_value = mock_response
 
         identity = copy.copy(FAKE_IDENTITY)
         global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
