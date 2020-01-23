@@ -51,13 +51,8 @@ class PartnersDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PartnersDetailView, self).get_context_data(**kwargs)
-
         partner = self.get_object()
-
         if partner.status == Partner.NOT_AVAILABLE:
-            # This should be guaranteed by get_queryset and the manager
-            # definitions.
-            assert self.request.user.is_staff
             # Translators: Staff members can view partner pages which are hidden from other users. This message appears on those specific partner resource pages.
             messages.add_message(
                 self.request,
@@ -145,10 +140,27 @@ class PartnersDetailView(DetailView):
         return context
 
     def get_queryset(self):
+        # We have three types of users who might try to access partner pages - the partner's coordinator, staff,
+        # and normal users. We want to limit the list of viewable partner pages in different ways for each.
+
+        # By default users can only view available partners
+        available_partners = Partner.objects.all()
+        partner_list = available_partners
+
+        # If logged in, what's the list of unavailable partners, if any, for which the current user is the coordinator?
+        if self.request.user.is_authenticated():
+            coordinator_partners = Partner.even_not_available.filter(
+                coordinator=self.request.user, status=Partner.NOT_AVAILABLE
+            )
+            if coordinator_partners.exists():
+                # Coordinated partners are also valid for this user to view
+                partner_list = available_partners | coordinator_partners
+
         if self.request.user.is_staff:
-            return Partner.even_not_available.order_by("company_name")
-        else:
-            return Partner.objects.order_by("company_name")
+            # Staff can see any partner pages, even unavailable ones.
+            partner_list = Partner.even_not_available.all()
+
+        return partner_list
 
 
 class PartnersToggleWaitlistView(CoordinatorsOnly, View):
