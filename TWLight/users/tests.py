@@ -911,6 +911,37 @@ class EditorModelTestCase(TestCase):
         )
         self.assertFalse(bundle_eligible)
 
+        # A valid user should pass 31 days after their first login if they have made enough edits.
+        self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"] + 10,
+            self.test_editor.wp_editcount_prev_date_updated - timedelta(days=31),
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.assertTrue(bundle_eligible)
+
+        # Bad editor! No biscuit, even if you have enough edits.
+        identity["blocked"] = True
+        not_blocked = editor_not_blocked(identity)
+        valid = editor_valid(
+            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+        )
+        self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"] + 10,
+            self.test_editor.wp_editcount_prev_date_updated - timedelta(days=31),
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.assertFalse(bundle_eligible)
+
     @patch.object(Editor, "get_global_userinfo")
     def test_update_from_wikipedia(self, mock_global_userinfo):
         identity = {}
