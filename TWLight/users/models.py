@@ -165,6 +165,50 @@ def editor_valid(username, enough_edits, account_old_enough, not_blocked):
         return False
 
 
+def editor_recent_edits(
+    wp_editcount,
+    wp_editcount_prev_date_updated,
+    wp_editcount_prev,
+    wp_editcount_recent,
+    wp_enough_recent_edits,
+):
+    # If we have historical data, see how many days have passed and how many edits have been made since the last check.
+    if wp_editcount_prev_date_updated:
+        editcount_update_delta = date.today() - wp_editcount_prev_date_updated
+        editcount_delta = wp_editcount - wp_editcount_prev
+        if (
+            # If the editor didn't have enough recent edits yet
+            # update the counts if it's been 30 days or sooner if they have now have enough edits.
+            # This grants them eligibility as soon as possible.
+            (not wp_enough_recent_edits)
+            and (editcount_update_delta.days >= 30 or editcount_delta >= 10)
+            # If the user had enough edits, just update the counts after 30 days.
+            or (wp_enough_recent_edits and editcount_update_delta.days >= 30)
+        ):
+            wp_editcount_prev = wp_editcount
+            wp_editcount_prev_date_updated = date.today()
+            wp_editcount_recent = editcount_delta
+
+    # If we don't have any historical editcount data, let all edits to date count.
+    # Editor.wp_editcount_prev defaults to 0, so we don't need to worry about changing it.
+    else:
+        wp_editcount_prev_date_updated = date.today()
+        wp_editcount_recent = wp_editcount
+
+    # Perform the check for enough recent edits.
+    if wp_editcount_recent >= 10:
+        wp_enough_recent_edits = True
+    else:
+        wp_enough_recent_edits = False
+    # Return a tuple containing all recent-editcount-related results.
+    return (
+        wp_editcount_prev_date_updated,
+        wp_editcount_prev,
+        wp_editcount_recent,
+        wp_enough_recent_edits,
+    )
+
+
 class Editor(models.Model):
     """
     This model is for storing data related to people's accounts on Wikipedia.
@@ -263,6 +307,7 @@ class Editor(models.Model):
             "the terms of use?"
         ),
     )
+    # Translators: The date that wp_editcount_prev was updated from Wikipedia.
     wp_editcount_prev_date_updated = models.DateField(
         default=None,
         null=True,
@@ -271,13 +316,23 @@ class Editor(models.Model):
         help_text=_("When the previous editcount was last updated from Wikipedia"),
     )
     # wp_editcount_prev is initially set to 0 so that all edits get counted as recent edits for new users.
-    # Translators: The number of edits this user has made to all Wikipedia projects 30 days ago
+    # Translators: The number of edits this user made to all Wikipedia projects at a previous date.
     wp_editcount_prev = models.IntegerField(
         default=0,
         null=True,
         blank=True,
         editable=False,
-        help_text=_("30-day-old Wikipedia edit count"),
+        help_text=_("Previous Wikipedia edit count"),
+    )
+
+    # wp_editcount_recent is computed by selectively subtracting wp_editcount_prev from wp_editcount.
+    # Translators: The number of edits this user recently made to all Wikipedia projects.
+    wp_editcount_recent = models.IntegerField(
+        default=0,
+        null=True,
+        blank=True,
+        editable=False,
+        help_text=_("Recent Wikipedia edit count"),
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -368,23 +423,6 @@ class Editor(models.Model):
         else:
             return False
 
-    def _set_recent_edits(self):
-        # If it's been 30 days or more since we last updated historical editcount,
-        # copy wp_editcount to wp_editcount_prev before updating wp_editcount.
-        # This allows us track recent edits for bundle eligibility.
-        if self.wp_editcount_prev_date_updated:
-            editcount_update_delta = date.today() - self.wp_editcount_prev_date_updated
-            if editcount_update_delta.days >= 30:
-                self.wp_editcount_prev = self.wp_editcount
-                self.wp_editcount_prev_date_updated = date.today()
-                recent_edits = self.wp_editcount - self.wp_editcount_prev
-                if recent_edits >= 10:
-                    self.wp_enough_recent_edits = True
-                else:
-                    self.wp_enough_recent_edits = False
-        else:
-            self.wp_editcount_prev_date_updated = date.today()
-
     def get_global_userinfo(self, identity):
         """
         Grab global user information from the API, which we'll use to overlay
@@ -462,7 +500,13 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            self._set_recent_edits()
+            self.wp_editcount_prev_date_updated, self.wp_editcount_prev, self.wp_editcount_recent, self.wp_enough_recent_edits = editor_recent_edits(
+                global_userinfo["editcount"],
+                self.wp_editcount_prev_date_updated,
+                self.wp_editcount_prev,
+                self.wp_editcount_recent,
+                self.wp_enough_recent_edits,
+            )
             self.wp_editcount = global_userinfo["editcount"]
 
         # This will be True the first time the user logs in, since use_wp_email
