@@ -748,25 +748,19 @@ class EditorModelTestCase(TestCase):
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
         not_blocked = editor_not_blocked(identity)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertTrue(valid)
 
         # Edge case
         global_userinfo["editcount"] = 500
         enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertTrue(valid)
 
         # Too few edits
         global_userinfo["editcount"] = 499
         enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertFalse(valid)
 
         # Account created too recently
@@ -775,9 +769,7 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertFalse(valid)
 
         # Edge case: this shouldn't.
@@ -785,9 +777,7 @@ class EditorModelTestCase(TestCase):
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertTrue(valid)
 
         # Edge case: this should work.
@@ -795,17 +785,13 @@ class EditorModelTestCase(TestCase):
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertTrue(valid)
 
         # Bad editor! No biscuit.
         identity["blocked"] = True
         not_blocked = editor_not_blocked(identity)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertFalse(valid)
 
     def test_editor_eligibility_functions(self):
@@ -838,9 +824,7 @@ class EditorModelTestCase(TestCase):
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
         not_blocked = editor_not_blocked(identity)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertTrue(valid)
 
         # 1st time bundle check should always pass for a valid user.
@@ -898,9 +882,7 @@ class EditorModelTestCase(TestCase):
         # Bad editor! No biscuit, even if you have enough edits.
         identity["blocked"] = True
         not_blocked = editor_not_blocked(identity)
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked
-        )
+        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"] + 10,
             self.test_editor.wp_editcount_prev_date_updated - timedelta(days=31),
