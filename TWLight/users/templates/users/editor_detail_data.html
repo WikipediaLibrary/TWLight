@@ -173,36 +173,9 @@
     <div class="col-xs-12 col-sm-3">
         {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the recent edit count of the user across all Wikimedia projects. Don't remove the * {% endcomment %}
         <strong>{% trans "Recent global edit count *" %}</strong>
-        <p>
-            {% comment %} translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this describes the method used to determine recent editcount. {% endcomment %}
-            {% blocktrans trimmed %}
-                Recent global edit count is computed by periodically recording the current global edit count and retaining a previous value.
-                1 current value and 1 previous value are kept in order to determine recent activity over a period of up to 30 days.
-            {% endblocktrans %}
-        </p>
     </div>
     <div class="col-xs-12 col-sm-9">
         {{ editor.wp_editcount_recent }}
-    </div>
-</div>
-
-<div class="row clearfix">
-    <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the previous edit count of the user across all Wikimedia projects. Don't remove the * {% endcomment %}
-        {% trans "Previous global edit count *" %}
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        {{ editor.wp_editcount_prev }}
-    </div>
-</div>
-
-<div class="row clearfix">
-    <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the previous edit count of the user across all Wikimedia projects was collected. Don't remove the * {% endcomment %}
-        {% trans "Previous global edit count date *" %}
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        {{ editor.wp_editcount_prev_date_updated }}
     </div>
 </div>
 
