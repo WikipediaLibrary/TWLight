@@ -308,15 +308,6 @@ class Editor(models.Model):
             "the terms of use?"
         ),
     )
-    wp_enough_recent_edits = models.BooleanField(
-        default=False,
-        editable=False,
-        # Translators: Help text asking whether the user met the recent editcount requirement for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-        help_text=_(
-            "At their last login, did this user meet the recent editcount criterion in "
-            "the terms of use?"
-        ),
-    )
     wp_not_blocked = models.BooleanField(
         default=False,
         editable=False,
@@ -326,31 +317,40 @@ class Editor(models.Model):
             "the terms of use?"
         ),
     )
-    # Translators: The date that wp_editcount_prev was updated from Wikipedia.
+    wp_enough_recent_edits = models.BooleanField(
+        default=False,
+        editable=False,
+        # Translators: Help text asking whether the user met the recent editcount requirement for access to the library card bundle the last time they logged in (when their information was last updated).
+        help_text=_(
+            "At their last login, did this user meet the recent editcount criterion in "
+            "the terms of use?"
+        ),
+    )
     wp_editcount_prev_date_updated = models.DateField(
         default=None,
         null=True,
         blank=True,
         editable=False,
+        # Translators: The date that wp_editcount_prev was updated from Wikipedia.
         help_text=_("When the previous editcount was last updated from Wikipedia"),
     )
     # wp_editcount_prev is initially set to 0 so that all edits get counted as recent edits for new users.
-    # Translators: The number of edits this user made to all Wikipedia projects at a previous date.
     wp_editcount_prev = models.IntegerField(
         default=0,
         null=True,
         blank=True,
         editable=False,
+        # Translators: The number of edits this user made to all Wikipedia projects at a previous date.
         help_text=_("Previous Wikipedia edit count"),
     )
 
     # wp_editcount_recent is computed by selectively subtracting wp_editcount_prev from wp_editcount.
-    # Translators: The number of edits this user recently made to all Wikipedia projects.
     wp_editcount_recent = models.IntegerField(
         default=0,
         null=True,
         blank=True,
         editable=False,
+        # Translators: The number of edits this user recently made to all Wikipedia projects.
         help_text=_("Recent Wikipedia edit count"),
     )
     wp_bundle_eligible = models.BooleanField(
