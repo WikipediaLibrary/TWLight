@@ -1,208 +1,244 @@
 {% load i18n %}
 
-  <p>
+<p>
     {% comment %} Translators: This is shown on editor profiles, under the heading for Wikipedia editor data. {% endcomment %}
     {% blocktrans trimmed %}
-      This information is updated automatically from your Wikimedia account 
-      each time you log in, except for the Contributions field, where you 
-      can describe your Wikimedia editing history.
+        This information is updated automatically from your Wikimedia account
+        each time you log in, except for the Contributions field, where you
+        can describe your Wikimedia editing history.
     {% endblocktrans %}
-  </p>
+</p>
 
-  <hr />
+<hr/>
 
-  <div class="row clearfix">
+<div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username. {% endcomment %}
-      <strong>{% trans "Username *" %}</strong>
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username. {% endcomment %}
+        <strong>{% trans "Username *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-9">
-      {{ editor.wp_username }}
-      {% if editor.wp_link_central_auth %}
-        <br />
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/) {% endcomment %}
-        <a href="{{ editor.wp_link_central_auth }}">({% trans "CentralAuth" %})</a>
-      {% endif %}
+        {{ editor.wp_username }}
+        {% if editor.wp_link_central_auth %}
+            <br/>
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/) {% endcomment %}
+            <a href="{{ editor.wp_link_central_auth }}">({% trans "CentralAuth" %})</a>
+        {% endif %}
     </div>
-  </div>
+</div>
 
-  <hr />
+<hr/>
 
-  <div class="row clearfix">
+<div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's description of their Wikipedia edits. {% endcomment %}
-      <strong>{% trans "Contributions" %}</strong>
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's description of their Wikipedia edits. {% endcomment %}
+        <strong>{% trans "Contributions" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-9">
-      {% if editor.contributions %}
-        {{ editor.contributions }}
-      {% endif %}
-      {% ifequal editor.user user %}
-        <br />
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself. {% endcomment %}
-         <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
-      {% endifequal %}
-      <br />
+        {% if editor.contributions %}
+            {{ editor.contributions }}
+        {% endif %}
+        {% ifequal editor.user user %}
+            <br/>
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself. {% endcomment %}
+            <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
+        {% endifequal %}
+        <br/>
     </div>
-  </div>
+</div>
 
-  <hr />
+<hr/>
 
-  <div class="row clearfix">
+<div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
-      <strong>{% trans "Satisfies terms of use?" %}</strong>
-      <p>
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer. {% endcomment %}
-        {% blocktrans trimmed %}
-          At their last login, did this user meet the criteria set forth in the
-          terms of use?
-        {% endblocktrans %}
-      </p>
-    </div>
-    <div class="col-xs-12 col-sm-9">
-      {% if editor.wp_valid %}
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
-        {% trans "Yes" %}
-      {% else %}
-        <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
+        <strong>{% trans "Satisfies terms of use?" %}</strong>
         <p>
-          {% comment %} Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate {{ username }}.{% endcomment %}
-          {% blocktrans trimmed with username=editor.wp_username %}
-            {{ username }} may still be eligible for access grants at the
-            coordinators' discretion.
-          {% endblocktrans %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer. {% endcomment %}
+            {% blocktrans trimmed %}
+                At their last login, did this user meet the criteria set forth in the
+                terms of use?
+            {% endblocktrans %}
         </p>
-      {% endif %}
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="row clearfix">
-    <div class="col-xs-12 col-sm-3">
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the * {% endcomment %}
-      <strong>{% trans "Global edit count *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-9">
-      {{ editor.wp_editcount }}
-      {% if editor.wp_link_guc %}
-        <br />
-        {# Translators: this links to a Tools page with edit stats for a given wikipedia editor. #}
-        <a href="{{ editor.wp_link_guc }}">{% trans "(view global user contributions)" %}</a>
-      {% endif %}
+        {% if editor.wp_valid %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
+            {% trans "Yes" %}
+        {% else %}
+            <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
+            <p>
+                {% comment %} Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate {{ username }}.{% endcomment %}
+                {% blocktrans trimmed with username=editor.wp_username %}
+                    {{ username }} may still be eligible for access grants at the
+                    coordinators' discretion.
+                {% endblocktrans %}
+            </p>
+        {% endif %}
     </div>
-  </div>
-
-  <hr />
-
-  <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the * {% endcomment %}
-      <strong>{% trans "Meta-Wiki registration or SUL merge date *" %}</strong>
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
+        {% trans "Satisfies minimum account age?" %}
     </div>
     <div class="col-xs-12 col-sm-9">
-      {{ editor.wp_registered }}
+        {% if editor.wp_account_old_enough %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
+            {% trans "Yes" %}
+        {% else %}
+            <strong class="warning">{% trans "No" %}</strong>
+        {% endif %}
     </div>
-  </div>
-
-  <hr />
-
-  <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the * {% endcomment %}
-      <strong>{% trans "Wikipedia user ID *" %}</strong>
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
+        {% trans "Satisfies minimum edit count?" %}
     </div>
     <div class="col-xs-12 col-sm-9">
-      {{ editor.wp_sub }}
+        {% if editor.wp_enough_edits %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
+            {% trans "Yes" %}
+        {% else %}
+            <strong class="warning">{% trans "No" %}</strong>
+        {% endif %}
     </div>
-  </div>
+    <div class="col-xs-12 col-sm-3">
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
+        {% trans "Is not blocked on any project?" %}
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        {% if editor.wp_not_blocked %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
+            {% trans "Yes" %}
+        {% else %}
+            <strong class="warning">{% trans "No" %}</strong>
+        {% endif %}
+    </div>
+</div>
 
-  {# The following is personal data and must ONLY be displayed to its owner. #}
-  {% ifequal editor.user user %}
-    <hr />
+<hr/>
+
+<div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the * {% endcomment %}
+        <strong>{% trans "Global edit count *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        {{ editor.wp_editcount }}
+        {% if editor.wp_link_guc %}
+            <br/>
+            {# Translators: this links to a Tools page with edit stats for a given wikipedia editor. #}
+            <a href="{{ editor.wp_link_guc }}">{% trans "(view global user contributions)" %}</a>
+        {% endif %}
+    </div>
+</div>
+
+<hr/>
+
+<div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the * {% endcomment %}
+        <strong>{% trans "Meta-Wiki registration or SUL merge date *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        {{ editor.wp_registered }}
+    </div>
+</div>
+
+<hr/>
+
+<div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the * {% endcomment %}
+        <strong>{% trans "Wikipedia user ID *" %}</strong>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        {{ editor.wp_sub }}
+    </div>
+</div>
+
+{# The following is personal data and must ONLY be displayed to its owner. #}
+{% ifequal editor.user user %}
+    <hr/>
 
     <h3>Personal data</h3>
 
     <p>
-      <span class="glyphicon glyphicon-info-sign"></span>
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-      {% blocktrans trimmed %}
-        The following information is visible only to you, site administrators,
-        publishing partners (where required), and volunteer Wikipedia Library
-        coordinators (who have signed a Non-Disclosure Agreement).
-      {% endblocktrans %}
+        <span class="glyphicon glyphicon-info-sign"></span>
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+        {% blocktrans trimmed %}
+            The following information is visible only to you, site administrators,
+            publishing partners (where required), and volunteer Wikipedia Library
+            coordinators (who have signed a Non-Disclosure Agreement).
+        {% endblocktrans %}
     </p>
 
     <p>
-      {% url 'users:pii_update' as update_url %}
-      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate {{ update_url }}.{% endcomment %}
-      {% blocktrans trimmed %}
-        You may <a href="{{ update_url }}">update or delete</a>
-        your data at any time.
-      {% endblocktrans %}
+        {% url 'users:pii_update' as update_url %}
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate {{ update_url }}.{% endcomment %}
+        {% blocktrans trimmed %}
+            You may <a href="{{ update_url }}">update or delete</a>
+            your data at any time.
+        {% endblocktrans %}
     </p>
 
-    <hr />
+    <hr/>
 
     <div class="row clearfix">
-      <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *. {% endcomment %}
-        <strong>{% trans "Email *" %}</strong>
-      </div>
-      <div class="col-xs-12 col-sm-9">
-	      {{ editor.user.email }}<br />
-        <a href="{% url 'users:email_change' %}">{% trans "(update)" %}</a>
-      </div>
+        <div class="col-xs-12 col-sm-3">
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *. {% endcomment %}
+            <strong>{% trans "Email *" %}</strong>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            {{ editor.user.email }}<br/>
+            <a href="{% url 'users:email_change' %}">{% trans "(update)" %}</a>
+        </div>
     </div>
 
-    <hr />
+    <hr/>
 
     <div class="row clearfix">
-      <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name. {% endcomment %}
-        <strong>{% trans "Real name" %}</strong>
-      </div>
-      <div class="col-xs-12 col-sm-9">
-        {{ editor.real_name }}
-      </div>
+        <div class="col-xs-12 col-sm-3">
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name. {% endcomment %}
+            <strong>{% trans "Real name" %}</strong>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            {{ editor.real_name }}
+        </div>
     </div>
 
-    <hr />
+    <hr/>
 
     <div class="row clearfix">
-      <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives. {% endcomment %}
-        <strong>{% trans "Country of residence" %}</strong>
-      </div>
-      <div class="col-xs-12 col-sm-9">
-        {{ editor.country_of_residence }}
-      </div>
+        <div class="col-xs-12 col-sm-3">
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives. {% endcomment %}
+            <strong>{% trans "Country of residence" %}</strong>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            {{ editor.country_of_residence }}
+        </div>
     </div>
 
-    <hr />
+    <hr/>
 
     <div class="row clearfix">
-      <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation. {% endcomment %}
-        <strong>{% trans "Occupation" %}</strong>
-      </div>
-      <div class="col-xs-12 col-sm-9">
-        {{ editor.occupation }}
-      </div>
+        <div class="col-xs-12 col-sm-3">
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation. {% endcomment %}
+            <strong>{% trans "Occupation" %}</strong>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            {{ editor.occupation }}
+        </div>
     </div>
 
-    <hr />
+    <hr/>
 
     <div class="row clearfix">
-      <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university) {% endcomment %}
-        <strong>{% trans "Institutional affiliation" %}</strong>
-      </div>
-      <div class="col-xs-12 col-sm-9">
-        {{ editor.affiliation }}
-      </div>
+        <div class="col-xs-12 col-sm-3">
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university) {% endcomment %}
+            <strong>{% trans "Institutional affiliation" %}</strong>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            {{ editor.affiliation }}
+        </div>
     </div>
 
-    <hr />
-  {% endifequal %}
+    <hr/>
+{% endifequal %}
