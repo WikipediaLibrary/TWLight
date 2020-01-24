@@ -116,7 +116,6 @@ def editor_reg_date(identity, global_userinfo):
             ).date()
         except (TypeError, ValueError):
             reg_date = None
-            pass
     return reg_date
 
 
@@ -454,12 +453,10 @@ class Editor(models.Model):
             except AssertionError:
                 logger.exception("Could not fetch global_userinfo for User.")
                 return None
-                pass
 
         except:
             logger.exception("Could not fetch global_userinfo for User.")
             return None
-            pass
 
     def update_from_wikipedia(self, identity, lang):
         """
@@ -523,7 +520,6 @@ class Editor(models.Model):
                 # Email isn't guaranteed to be present in identity - don't do
                 # anything if we can't find it.
                 logger.exception("Unable to get Editor email address from Wikipedia.")
-                pass
 
         self.wp_registered = editor_reg_date(identity, global_userinfo)
         self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
