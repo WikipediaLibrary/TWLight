@@ -117,6 +117,41 @@
 
 <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question. {% endcomment %}
+        <strong>{% trans "Eligible for Bundle?" %}</strong>
+        <p>
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer. {% endcomment %}
+            {% blocktrans trimmed %}
+                At their last login, did this user meet the criteria set forth in the Library Bundle? Note that satisfying terms of use is a prerequisite to bundle eligibility.
+            {% endblocktrans %}
+        </p>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        {% if editor.wp_bundle_eligible %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle. {% endcomment %}
+            {% trans "Yes" %}
+        {% else %}
+            <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
+        {% endif %}
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question. {% endcomment %}
+        {% trans "Satisfies recent edit count?" %}
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        {% if editor.enough_recent_edits %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle. {% endcomment %}
+            {% trans "Yes" %}
+        {% else %}
+            <strong class="warning">{% trans "No" %}</strong>
+        {% endif %}
+    </div>
+</div>
+
+<hr/>
+
+<div class="row clearfix">
+    <div class="col-xs-12 col-sm-3">
         {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the * {% endcomment %}
         <strong>{% trans "Global edit count *" %}</strong>
     </div>
