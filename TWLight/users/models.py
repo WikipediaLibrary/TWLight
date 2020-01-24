@@ -146,7 +146,7 @@ def editor_account_old_enough(wp_registered):
     return datetime.today().date() - timedelta(days=182) >= wp_registered
 
 
-def editor_valid(username, enough_edits, account_old_enough, not_blocked):
+def editor_valid(enough_edits, account_old_enough, not_blocked):
     """
     Check for the eligibility criteria laid out in the terms of service.
     Note that we won't prohibit signups or applications on this basis.
@@ -155,7 +155,6 @@ def editor_valid(username, enough_edits, account_old_enough, not_blocked):
     if enough_edits and account_old_enough and not_blocked:
         return True
     else:
-        logger.info("Editor {username} was not valid.".format(username=username))
         return False
 
 
@@ -526,7 +525,6 @@ class Editor(models.Model):
         self.wp_enough_edits = editor_enough_edits(global_userinfo)
         self.wp_not_blocked = editor_not_blocked(identity)
         self.wp_valid = editor_valid(
-            self.wp_username,
             self.wp_enough_edits,
             self.wp_account_old_enough,
             self.wp_not_blocked,

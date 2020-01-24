@@ -671,7 +671,7 @@ class EditorModelTestCase(TestCase):
         enough_edits = editor_enough_edits(global_userinfo)
         not_blocked = editor_not_blocked(identity)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.assertTrue(valid)
 
@@ -679,7 +679,7 @@ class EditorModelTestCase(TestCase):
         global_userinfo["editcount"] = 500
         enough_edits = editor_enough_edits(global_userinfo)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.assertTrue(valid)
 
@@ -687,7 +687,7 @@ class EditorModelTestCase(TestCase):
         global_userinfo["editcount"] = 499
         enough_edits = editor_enough_edits(global_userinfo)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.assertFalse(valid)
 
@@ -698,7 +698,7 @@ class EditorModelTestCase(TestCase):
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.assertFalse(valid)
 
@@ -708,7 +708,7 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.assertTrue(valid)
 
@@ -718,7 +718,7 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.assertTrue(valid)
 
@@ -726,7 +726,7 @@ class EditorModelTestCase(TestCase):
         identity["blocked"] = True
         not_blocked = editor_not_blocked(identity)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.assertFalse(valid)
 
@@ -761,7 +761,7 @@ class EditorModelTestCase(TestCase):
         enough_edits = editor_enough_edits(global_userinfo)
         not_blocked = editor_not_blocked(identity)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.assertTrue(valid)
 
@@ -821,7 +821,7 @@ class EditorModelTestCase(TestCase):
         identity["blocked"] = True
         not_blocked = editor_not_blocked(identity)
         valid = editor_valid(
-            self.test_editor.wp_username, enough_edits, account_old_enough, not_blocked
+            enough_edits, account_old_enough, not_blocked
         )
         self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"] + 10,
