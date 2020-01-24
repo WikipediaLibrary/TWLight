@@ -548,9 +548,7 @@ class Editor(models.Model):
         self.wp_enough_edits = editor_enough_edits(global_userinfo)
         self.wp_not_blocked = editor_not_blocked(identity)
         self.wp_valid = editor_valid(
-            self.wp_enough_edits,
-            self.wp_account_old_enough,
-            self.wp_not_blocked,
+            self.wp_enough_edits, self.wp_account_old_enough, self.wp_not_blocked
         )
         self.wp_bundle_eligible = editor_bundle_eligible(
             self.wp_valid, self.wp_enough_recent_edits
