@@ -301,7 +301,7 @@ class OAuthInitializeView(View):
                 # Pop the 'next' parameter out of the QueryDict.
                 next = query_dict.pop("next")
                 # Set the return url to the value of 'next'. Basic.
-                return_url = next[0].encode("ascii", "ignore")
+                return_url = next[0]
                 # If there is anything left in the QueryDict after popping
                 # 'next', append it to the return url. This preserves state
                 # for filtered lists and redirected form submissions like
@@ -493,7 +493,7 @@ class OAuthCallbackView(View):
                         # Pop the 'next' parameter out of the QueryDict.
                         next = query_dict.pop("next")
                         # Set the return url to the value of 'next'. Basic.
-                        return_url = next[0].encode("ascii", "ignore")
+                        return_url = next[0]
                         # If there is anything left in the QueryDict after popping
                         # 'next', append it to the return url. This preserves state
                         # for filtered lists and redirected form submissions like
