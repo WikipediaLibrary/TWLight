@@ -160,16 +160,16 @@ def editor_valid(enough_edits, account_old_enough, not_blocked):
 
 def editor_recent_edits(
     global_userinfo_editcount,
-    wp_editcount_date_updated,
+    wp_editcount_updated,
     wp_editcount,
-    wp_editcount_prev_date_updated,
+    wp_editcount_prev_updated,
     wp_editcount_prev,
     wp_editcount_recent,
     wp_enough_recent_edits,
 ):
     # If we have historical data, see how many days have passed and how many edits have been made since the last check.
-    if wp_editcount_prev_date_updated:
-        editcount_update_delta = date.today() - wp_editcount_prev_date_updated
+    if wp_editcount_prev_updated and wp_editcount_updated:
+        editcount_update_delta = now() - wp_editcount_prev_updated
         editcount_delta = global_userinfo_editcount - wp_editcount_prev
         if (
             # If the editor didn't have enough recent edits yet
@@ -181,13 +181,13 @@ def editor_recent_edits(
             or (wp_enough_recent_edits and editcount_update_delta.days >= 30)
         ):
             wp_editcount_prev = wp_editcount
-            wp_editcount_prev_date_updated = wp_editcount_date_updated
+            wp_editcount_prev_updated = wp_editcount_updated
             wp_editcount_recent = global_userinfo_editcount - wp_editcount_prev
 
     # If we don't have any historical editcount data, let all edits to date count.
     # Editor.wp_editcount_prev defaults to 0, so we don't need to worry about changing it.
     else:
-        wp_editcount_prev_date_updated = date.today()
+        wp_editcount_prev_updated = now()
         wp_editcount_recent = global_userinfo_editcount
 
     # Perform the check for enough recent edits.
@@ -197,7 +197,7 @@ def editor_recent_edits(
         wp_enough_recent_edits = False
     # Return a tuple containing all recent-editcount-related results.
     return (
-        wp_editcount_prev_date_updated,
+        wp_editcount_prev_updated,
         wp_editcount_prev,
         wp_editcount_recent,
         wp_enough_recent_edits,
@@ -245,12 +245,12 @@ class Editor(models.Model):
     wp_editcount = models.IntegerField(
         help_text=_("Wikipedia edit count"), blank=True, null=True
     )
-    wp_editcount_date_updated = models.DateField(
+    wp_editcount_updated = models.DateTimeField(
         default=None,
         null=True,
         blank=True,
         editable=False,
-        # Translators: The date that wp_editcount was updated from Wikipedia.
+        # Translators: Date and time that wp_editcount was updated from Wikipedia.
         help_text=_("When the editcount was updated from Wikipedia"),
     )
     # Translators: The date this user registered their Wikipedia account
@@ -317,12 +317,12 @@ class Editor(models.Model):
             "the terms of use?"
         ),
     )
-    wp_editcount_prev_date_updated = models.DateField(
+    wp_editcount_prev_updated = models.DateTimeField(
         default=None,
         null=True,
         blank=True,
         editable=False,
-        # Translators: The date that wp_editcount_prev was updated from Wikipedia.
+        # Translators: The date and time that wp_editcount_prev was updated from Wikipedia.
         help_text=_("When the previous editcount was last updated from Wikipedia"),
     )
     # wp_editcount_prev is initially set to 0 so that all edits get counted as recent edits for new users.
@@ -510,17 +510,17 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            self.wp_editcount_prev_date_updated, self.wp_editcount_prev, self.wp_editcount_recent, self.wp_enough_recent_edits = editor_recent_edits(
+            self.wp_editcount_prev_updated, self.wp_editcount_prev, self.wp_editcount_recent, self.wp_enough_recent_edits = editor_recent_edits(
                 global_userinfo["editcount"],
-                self.wp_editcount_date_updated,
+                self.wp_editcount_updated,
                 self.wp_editcount,
-                self.wp_editcount_prev_date_updated,
+                self.wp_editcount_prev_updated,
                 self.wp_editcount_prev,
                 self.wp_editcount_recent,
                 self.wp_enough_recent_edits,
             )
             self.wp_editcount = global_userinfo["editcount"]
-            self.wp_editcount_date_updated = date.today()
+            self.wp_editcount_updated = now()
 
         # This will be True the first time the user logs in, since use_wp_email
         # defaults to True. Therefore we will initialize the email field if
