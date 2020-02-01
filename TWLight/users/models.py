@@ -178,6 +178,8 @@ def editor_valid(enough_edits, account_old_enough, not_blocked):
 
 
 def editor_recent_edits(
+    global_userinfo_editcount,
+    wp_editcount_date_updated,
     wp_editcount,
     wp_editcount_prev_date_updated,
     wp_editcount_prev,
@@ -187,7 +189,7 @@ def editor_recent_edits(
     # If we have historical data, see how many days have passed and how many edits have been made since the last check.
     if wp_editcount_prev_date_updated:
         editcount_update_delta = date.today() - wp_editcount_prev_date_updated
-        editcount_delta = wp_editcount - wp_editcount_prev
+        editcount_delta = global_userinfo_editcount - wp_editcount_prev
         if (
             # If the editor didn't have enough recent edits yet
             # update the counts if it's been 30 days or sooner if they have now have enough edits.
@@ -198,14 +200,14 @@ def editor_recent_edits(
             or (wp_enough_recent_edits and editcount_update_delta.days >= 30)
         ):
             wp_editcount_prev = wp_editcount
-            wp_editcount_prev_date_updated = date.today()
-            wp_editcount_recent = editcount_delta
+            wp_editcount_prev_date_updated = wp_editcount_date_updated
+            wp_editcount_recent = global_userinfo_editcount - wp_editcount_prev
 
     # If we don't have any historical editcount data, let all edits to date count.
     # Editor.wp_editcount_prev defaults to 0, so we don't need to worry about changing it.
     else:
         wp_editcount_prev_date_updated = date.today()
-        wp_editcount_recent = wp_editcount
+        wp_editcount_recent = global_userinfo_editcount
 
     # Perform the check for enough recent edits.
     if wp_editcount_recent >= 10:
@@ -261,6 +263,14 @@ class Editor(models.Model):
     # Translators: The total number of edits this user has made to all Wikipedia projects
     wp_editcount = models.IntegerField(
         help_text=_("Wikipedia edit count"), blank=True, null=True
+    )
+    wp_editcount_date_updated = models.DateField(
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+        # Translators: The date that wp_editcount was updated from Wikipedia.
+        help_text=_("When the editcount was updated from Wikipedia"),
     )
     # Translators: The date this user registered their Wikipedia account
     wp_registered = models.DateField(
@@ -521,12 +531,15 @@ class Editor(models.Model):
         if global_userinfo:
             self.wp_editcount_prev_date_updated, self.wp_editcount_prev, self.wp_editcount_recent, self.wp_enough_recent_edits = editor_recent_edits(
                 global_userinfo["editcount"],
+                self.wp_editcount_date_updated,
+                self.wp_editcount,
                 self.wp_editcount_prev_date_updated,
                 self.wp_editcount_prev,
                 self.wp_editcount_recent,
                 self.wp_enough_recent_edits,
             )
             self.wp_editcount = global_userinfo["editcount"]
+            self.wp_editcount_date_updated = date.today()
 
         # This will be True the first time the user logs in, since use_wp_email
         # defaults to True. Therefore we will initialize the email field if

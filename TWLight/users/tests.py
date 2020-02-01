@@ -810,6 +810,8 @@ class EditorModelTestCase(TestCase):
         # 1st time bundle check should always pass for a valid user.
         self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"],
+            self.test_editor.wp_editcount_date_updated,
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_date_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -823,6 +825,8 @@ class EditorModelTestCase(TestCase):
         # A valid user should pass 30 days after their first login, even if they haven't made anymore edits.
         self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"],
+            self.test_editor.wp_editcount_date_updated,
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_date_updated - timedelta(days=30),
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -836,6 +840,8 @@ class EditorModelTestCase(TestCase):
         # A valid user should fail 31 days after their first login, if they haven't made any more edits.
         self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"],
+            self.test_editor.wp_editcount_date_updated,
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_date_updated - timedelta(days=31),
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -849,6 +855,8 @@ class EditorModelTestCase(TestCase):
         # A valid user should pass 31 days after their first login if they have made enough edits.
         self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"] + 10,
+            self.test_editor.wp_editcount_date_updated,
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_date_updated - timedelta(days=31),
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -865,6 +873,8 @@ class EditorModelTestCase(TestCase):
         valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.test_editor.wp_editcount_prev_date_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"] + 10,
+            self.test_editor.wp_editcount_date_updated,
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_date_updated - timedelta(days=31),
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
