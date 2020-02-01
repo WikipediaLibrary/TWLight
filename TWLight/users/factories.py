@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, date
+from datetime import datetime
 import factory
 import json
 import random
@@ -65,7 +65,6 @@ class EditorFactory(factory.django.DjangoModelFactory):
     affiliation = "Institut Pasteur"
     wp_username = factory.Faker("name", locale=random.choice(settings.FAKER_LOCALES))
     wp_editcount = 42
-    wp_editcount_date_updated = date.today()
     wp_registered = datetime.today()
     # Increment counter each time we create an editor so that we don't fail
     # the wp_sub + home_wiki uniqueness constraint on Editor.
