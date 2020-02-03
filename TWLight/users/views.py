@@ -792,6 +792,8 @@ class ListApplicationsUserView(SelfOnly, ListView):
         editor = self.get_object()
         context["object_list"] = editor.applications.model.include_invalid.filter(
             editor=editor
+        ).exclude(
+            partner__authorization_method=Partner.BUNDLE
         ).order_by("status", "-date_closed")
         return context
 
