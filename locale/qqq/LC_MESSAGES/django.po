@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-02-04 14:47+0000\n"
-"PO-Revision-Date: 2020-01-30 14:59:35+0000\n"
+"POT-Creation-Date: 2020-02-03 16:31+0000\n"
+"PO-Revision-Date: 2020-01-06 17:11:09+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: TWLight/applications/forms.py:367
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#: TWLight/users/admin.py:110 TWLight/users/models.py:156
+#: TWLight/users/admin.py:93 TWLight/users/models.py:243
 msgid "Username"
 msgstr ""
 
@@ -145,8 +145,8 @@ msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
-#: TWLight/applications/helpers.py:127
-#: TWLight/users/templates/users/editor_detail_data.html:164
+#: TWLight/applications/helpers.py:134
+#: TWLight/users/templates/users/editor_detail_data.html:250
 msgid "Real name"
 msgstr ""
 
@@ -155,14 +155,14 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
 #: TWLight/applications/helpers.py:129
 #: TWLight/applications/templates/applications/application_evaluation.html:100
-#: TWLight/users/templates/users/editor_detail_data.html:176
+#: TWLight/users/templates/users/editor_detail_data.html:262
 msgid "Country of residence"
 msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
-#: TWLight/applications/helpers.py:131
-#: TWLight/users/templates/users/editor_detail_data.html:188
+#: TWLight/applications/helpers.py:138
+#: TWLight/users/templates/users/editor_detail_data.html:274
 msgid "Occupation"
 msgstr ""
 
@@ -397,9 +397,15 @@ msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle.
 #: TWLight/applications/templates/applications/application_evaluation.html:137
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:55
-#: TWLight/users/templates/users/editor_detail_data.html:66
+#: TWLight/users/templates/users/editor_detail_data.html:67
+#: TWLight/users/templates/users/editor_detail_data.html:86
+#: TWLight/users/templates/users/editor_detail_data.html:98
+#: TWLight/users/templates/users/editor_detail_data.html:110
+#: TWLight/users/templates/users/editor_detail_data.html:133
+#: TWLight/users/templates/users/editor_detail_data.html:147
 msgid "Yes"
 msgstr ""
 
@@ -407,7 +413,12 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_evaluation.html:139
 #: TWLight/applications/templates/applications/application_evaluation.html:194
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:57
-#: TWLight/users/templates/users/editor_detail_data.html:68
+#: TWLight/users/templates/users/editor_detail_data.html:69
+#: TWLight/users/templates/users/editor_detail_data.html:88
+#: TWLight/users/templates/users/editor_detail_data.html:100
+#: TWLight/users/templates/users/editor_detail_data.html:112
+#: TWLight/users/templates/users/editor_detail_data.html:135
+#: TWLight/users/templates/users/editor_detail_data.html:149
 msgid "No"
 msgstr "{{Identical|No}}"
 
@@ -2886,75 +2897,125 @@ msgid "Does this coordinator want approved app reminder notices?"
 msgstr ""
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:149
+#: TWLight/users/models.py:236
 msgid "When this profile was first created"
 msgstr ""
 
-#: TWLight/users/models.py:159
+#: TWLight/users/models.py:246
 msgid "Wikipedia edit count"
 msgstr ""
 
-#: TWLight/users/models.py:163
+#. Translators: Date and time that wp_editcount was updated from Wikipedia.
+#: TWLight/users/models.py:254
+msgid "When the editcount was updated from Wikipedia"
+msgstr ""
+
+#: TWLight/users/models.py:258
 msgid "Date registered at Wikipedia"
 msgstr ""
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:168
+#: TWLight/users/models.py:263
 msgid "Wikipedia user ID"
 msgstr ""
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:175
+#: TWLight/users/models.py:270
 msgid "Wikipedia groups"
 msgstr ""
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:177
+#: TWLight/users/models.py:272
 msgid "Wikipedia user rights"
 msgstr ""
 
-#: TWLight/users/models.py:182
+#: TWLight/users/models.py:280
 msgid ""
 "At their last login, did this user meet the criteria in the terms of use?"
 msgstr ""
 
+#: TWLight/users/models.py:289
+msgid ""
+"At their last login, did this user meet the account age criterion in the "
+"terms of use?"
+msgstr ""
+
+#: TWLight/users/models.py:298
+msgid ""
+"At their last login, did this user meet the total editcount criterion in the "
+"terms of use?"
+msgstr ""
+
+#: TWLight/users/models.py:307
+msgid ""
+"At their last login, did this user meet the 'not currently blocked' "
+"criterion in the terms of use?"
+msgstr ""
+
+#: TWLight/users/models.py:316
+msgid ""
+"At their last login, did this user meet the recent editcount criterion in "
+"the terms of use?"
+msgstr ""
+
+#. Translators: The date and time that wp_editcount_prev was updated from Wikipedia.
+#: TWLight/users/models.py:326
+msgid "When the previous editcount was last updated from Wikipedia"
+msgstr ""
+
+#. Translators: The number of edits this user made to all Wikipedia projects at a previous date.
+#: TWLight/users/models.py:335
+msgid "Previous Wikipedia edit count"
+msgstr ""
+
+#. Translators: The number of edits this user recently made to all Wikipedia projects.
+#: TWLight/users/models.py:345
+msgid "Recent Wikipedia edit count"
+msgstr ""
+
+#: TWLight/users/models.py:352
+msgid ""
+"At their last login, did this user meet the criteria for access to the "
+"library card bundle?"
+msgstr ""
+
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:190
+#: TWLight/users/models.py:359
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:423
+#: TWLight/users/models.py:554
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:456
+#: TWLight/users/models.py:587
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:470
+#: TWLight/users/models.py:601
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:479
+#: TWLight/users/models.py:610
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:490
+#: TWLight/users/models.py:621
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:501
+#: TWLight/users/models.py:632
 msgid "The stream for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:507
+#: TWLight/users/models.py:638
 msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
@@ -3104,7 +3165,7 @@ msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #: TWLight/users/templates/users/editor_detail_data.html:43
-#: TWLight/users/templates/users/editor_detail_data.html:155
+#: TWLight/users/templates/users/editor_detail_data.html:241
 msgid "(update)"
 msgstr ""
 
@@ -3113,43 +3174,80 @@ msgstr ""
 msgid "Satisfies terms of use?"
 msgstr ""
 
-#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
-#: TWLight/users/templates/users/editor_detail_data.html:57
+#: TWLight/users/templates/users/editor_detail_data.html:58
 msgid ""
-"At their last login, did this user meet the criteria set forth in the terms "
+"at their last login, did this user meet the criteria set forth in the terms "
 "of use?"
 msgstr ""
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
-#: TWLight/users/templates/users/editor_detail_data.html:71
+#: TWLight/users/templates/users/editor_detail_data.html:72
 #, python-format
 msgid ""
 "%(username)s may still be eligible for access grants at the coordinators' "
 "discretion."
 msgstr ""
 
-#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit count of the user across all Wikimedia projects. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:85
-msgid "Global edit count *"
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
+#: TWLight/users/templates/users/editor_detail_data.html:81
+msgid "Satisfies minimum account age?"
+msgstr ""
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
+#: TWLight/users/templates/users/editor_detail_data.html:93
+msgid "Satisfies minimum edit count?"
+msgstr ""
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
+#: TWLight/users/templates/users/editor_detail_data.html:105
+msgid "Is not blocked on any project?"
+msgstr ""
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
+#: TWLight/users/templates/users/editor_detail_data.html:122
+msgid "Eligible for Bundle?"
+msgstr ""
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
+#: TWLight/users/templates/users/editor_detail_data.html:125
+msgid ""
+"At their last login, did this user meet the criteria set forth in the "
+"Library Bundle? Note that satisfying terms of use is a prerequisite to "
+"bundle eligibility."
+msgstr ""
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
+#: TWLight/users/templates/users/editor_detail_data.html:142
+msgid "Satisfies recent edit count?"
+msgstr ""
+
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit current count of the user across all Wikimedia projects. Don't remove the *
+#: TWLight/users/templates/users/editor_detail_data.html:159
+msgid "Current global edit count *"
 msgstr ""
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
-#: TWLight/users/templates/users/editor_detail_data.html:92
+#: TWLight/users/templates/users/editor_detail_data.html:166
 msgid "(view global user contributions)"
 msgstr ""
 
+#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the recent edit count of the user across all Wikimedia projects. Don't remove the *
+#: TWLight/users/templates/users/editor_detail_data.html:176
+msgid "Recent global edit count *"
+msgstr ""
+
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:102
+#: TWLight/users/templates/users/editor_detail_data.html:188
 msgid "Meta-Wiki registration or SUL merge date *"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:114
+#: TWLight/users/templates/users/editor_detail_data.html:200
 msgid "Wikipedia user ID *"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/editor_detail_data.html:130
+#: TWLight/users/templates/users/editor_detail_data.html:216
 msgid ""
 "The following information is visible only to you, site administrators, "
 "publishing partners (where required), and volunteer Wikipedia Library "
@@ -3157,7 +3255,7 @@ msgid ""
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
-#: TWLight/users/templates/users/editor_detail_data.html:140
+#: TWLight/users/templates/users/editor_detail_data.html:226
 #, python-format
 msgid ""
 "You may <a href=\"%(update_url)s\">update or delete</a> your data at any "
@@ -3165,12 +3263,12 @@ msgid ""
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
-#: TWLight/users/templates/users/editor_detail_data.html:151
+#: TWLight/users/templates/users/editor_detail_data.html:237
 msgid "Email *"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
-#: TWLight/users/templates/users/editor_detail_data.html:200
+#: TWLight/users/templates/users/editor_detail_data.html:286
 msgid "Institutional affiliation"
 msgstr ""
 
