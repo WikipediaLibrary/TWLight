@@ -804,16 +804,3 @@ class Authorization(models.Model):
             return True
         else:
             return False
-
-
-class ProxyAuthorization(Authorization):
-    """
-    This is only here so we can group authorizations with other auth-related things in admin.
-    """
-
-    class Meta:
-        proxy = True
-        app_label = "auth"
-        # set following lines to display ProxyAuthorization as Authorization
-        verbose_name = Authorization._meta.verbose_name
-        verbose_name_plural = Authorization._meta.verbose_name_plural

@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from TWLight.users.models import (
     Editor,
     UserProfile,
-    ProxyAuthorization as Authorization,
+    Authorization,
 )
 from TWLight.users.forms import AuthorizationForm
 
