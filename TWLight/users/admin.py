@@ -5,11 +5,7 @@ from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from TWLight.users.models import (
-    Editor,
-    UserProfile,
-    Authorization,
-)
+from TWLight.users.models import Editor, UserProfile, Authorization
 from TWLight.users.forms import AuthorizationForm
 
 
