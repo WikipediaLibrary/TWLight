@@ -823,6 +823,8 @@ class EditorModelTestCase(TestCase):
         global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
 
         # Valid data
+        global_userinfo["editcount"] = 500
+        self.test_editor.wp_editcount = 500
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
