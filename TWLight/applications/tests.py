@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+import html
 import random
+import urllib
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 from itertools import chain
@@ -1314,6 +1316,45 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             "This field consists only of restricted text.",
         )
 
+    def test_pop_specific_stream_options(self):
+        """
+        For partners having multiple streams, users should only be able
+        to apply for the ones they don't have an authorization to.
+        """
+        # Set up request.
+        factory = RequestFactory()
+        request = factory.get(self.url)
+        user = UserFactory()
+        user.email = "foo@bar.com"
+        user.save()
+        user.userprofile.terms_of_use = True
+        user.userprofile.save()
+        editor = EditorFactory(user=user)
+        request.user = user
+        partner = PartnerFactory(specific_stream=True)
+        stream1 = StreamFactory(partner=partner)
+        stream2 = StreamFactory(partner=partner)
+        ApplicationFactory(
+            status=Application.SENT,
+            editor=editor,
+            partner=partner,
+            specific_stream=stream1,
+        )
+
+        request.session = {views.PARTNERS_SESSION_KEY: [partner.pk]}
+        response = views.SubmitApplicationView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
+        option1 = '<option value="{stream_id}">{stream_name}</option>'.format(
+            stream_id=stream1.id, stream_name=stream1.name
+        )
+        option2 = '<option value="{stream_id}">{stream_name}</option>'.format(
+            stream_id=stream2.id, stream_name=stream2.name
+        )
+        self.assertContains(response, option2)
+        # User already has an authorization for stream1 i.e. the
+        # option should not be on the apply page
+        self.assertNotContains(response, option1)
+
 
 class ListApplicationsTest(BaseApplicationViewTest):
     @classmethod
@@ -2043,7 +2084,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
         self.assertTrue(Application.objects.filter(parent=app))
 
         partner.authorization_method = Partner.PROXY
-        partner.requested_access_duration = True  # require duration of access required
+        partner.requested_access_duration = True  # require duration of access
         partner.save()
 
         editor1 = EditorCraftRoom(self, Terms=True, Coordinator=False)
@@ -2067,7 +2108,11 @@ class RenewApplicationTest(BaseApplicationViewTest):
         self.client.post(renewal_url, data)
         app1.refresh_from_db()
         self.assertFalse(app1.is_renewable)
-        self.assertTrue(Application.objects.filter(parent=app1))
+        app2 = Application.objects.filter(parent=app1)
+        app2 = app2.first()
+        # Make sure everything is in place in the app
+        self.assertEqual(app2.account_email, "test@example.com")
+        self.assertEqual(app2.requested_access_duration, 6)
 
     def test_renewal_extends_access_duration(self):
         # Tests that an approved renewal sets the correct, extended, expiry date
@@ -2416,13 +2461,13 @@ class EvaluateApplicationTest(TestCase):
     def setUp(self):
 
         super(EvaluateApplicationTest, self).setUp()
-        editor = EditorFactory()
-        self.user = editor.user
+        self.editor = EditorFactory()
+        self.user = self.editor.user
 
         self.partner = PartnerFactory()
 
         self.application = ApplicationFactory(
-            editor=editor,
+            editor=self.editor,
             status=Application.PENDING,
             partner=self.partner,
             rationale="Just because",
@@ -2957,6 +3002,82 @@ class EvaluateApplicationTest(TestCase):
         self.assertGreater(pending_apps.count(), 0)
         # Assert one twl_team comment per pending_app.
         self.assertEqual(twl_comment_count, pending_apps.count())
+
+    def test_everything_is_rendered_as_intended(self):
+        EditorCraftRoom(self, Terms=False, editor=self.editor)
+        response = self.client.get(self.url)
+        pk = self.application.pk
+        # Users visiting EvaluateApplication are redirected to ToU if they
+        # agreed to it and redirected back
+        terms_url = (
+            reverse("terms")
+            + "?next="
+            + urllib.parse.quote_plus("/applications/evaluate/{}/".format(pk))
+        )
+        self.assertRedirects(response, terms_url)
+        # Editor agrees to the terms of use
+        EditorCraftRoom(self, Terms=True, editor=self.editor, Coordinator=False)
+        # Visits the App Eval page
+        response = self.client.get(self.url)
+        # For some reason the date formatting in tests is different
+        # eg. Nov. 1, 2019
+        today = date.today().strftime("%b. %-d, %Y")
+        self.assertContains(response, today)
+        self.assertContains(response, self.application.status)
+        self.assertContains(
+            response, html.escape(self.application.partner.company_name)
+        )
+        self.assertContains(response, self.application.rationale)
+        # Only one 'Yes' and that too for terms of use
+        self.assertContains(response, "Yes")
+        # Personal data should be visible only to self
+        self.assertContains(response, self.user.email)
+        self.assertContains(response, self.editor.real_name)
+        self.assertContains(response, self.editor.country_of_residence)
+        self.assertContains(response, self.editor.occupation)
+        self.assertContains(response, self.editor.affiliation)
+        # Users shouldn't see some things coordinators see
+        self.assertNotContains(response, "Evaluate application")
+        self.assertNotContains(response, "select")  # form to change app status
+
+        # Now let's make the coordinator visit the same page
+        # In the meantime, editor has disagreed to the terms of use
+        self.user.userprofile.terms_of_use = False
+        self.user.userprofile.save()
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        # Not all coordinators can visit every application
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+        response = self.client.get(self.url)
+        self.assertContains(response, today)
+        self.assertContains(response, self.application.status)
+        self.assertContains(
+            response, html.escape(self.application.partner.company_name)
+        )
+        self.assertContains(response, self.application.rationale)
+        # No terms of use
+        self.assertContains(
+            response,
+            # This is copied verbatim from the app eval page.
+            # Change if necessary.
+            "Please request the applicant "
+            "agree to the site's terms of use before approving this application.",
+        )
+        # Personal data should *NOT* be visible to coordinators
+        self.assertNotContains(response, self.user.email)
+        self.assertNotContains(response, self.editor.real_name)
+        self.assertNotContains(response, self.editor.country_of_residence)
+        self.assertNotContains(response, self.editor.occupation)
+        self.assertNotContains(response, self.editor.affiliation)
+        # Coordinators can evaluate application
+        self.assertContains(response, "Evaluate application")
+        self.assertContains(response, "select")  # form to change app status
+        # Some additional user info is visible to whoever has permissions to
+        # visit this page, but it's more relevant to coordinators. So, we
+        # test this page as a coordinator.
+        self.assertContains(response, self.editor.wp_username)
+        self.assertContains(response, self.editor.contributions)
+        self.assertContains(response, self.editor.wp_editcount)
 
 
 class BatchEditTest(TestCase):

@@ -99,44 +99,98 @@ class PartnersDetailView(DetailView):
         else:
             context["median_days"] = None
 
-        # Find out if current user has applications and change the Apply
-        # button behaviour accordingly
+        # Find out if current user has authorizations/apps
+        # and change the Apply button and the help text
+        # behaviour accordingly
+        context["apply"] = False
+        context["has_open_apps"] = False
+        context["has_auths"] = False
         if (
             self.request.user.is_authenticated()
             and not partner.authorization_method == partner.BUNDLE
         ):
-            sent_apps = Application.objects.filter(
-                editor=self.request.user.editor,
-                status=Application.SENT,
-                partner=partner,
-            ).order_by("-date_closed")
-            open_apps = Application.objects.filter(
-                editor=self.request.user.editor,
-                status__in=(
+            context["apply"] = True
+            user = self.request.user
+            apps = Application.objects.filter(
+                status__in=[
                     Application.PENDING,
                     Application.QUESTION,
                     Application.APPROVED,
-                ),
+                ],
                 partner=partner,
+                editor=user.editor,
             )
-            context["user_sent_apps"] = False
-            context["user_open_apps"] = False
-            if open_apps.count() > 0:
-                context["user_open_apps"] = True
-                if open_apps.count() > 1:
-                    context["multiple_open_apps"] = True
+            if partner_streams.count() == 0:
+                if apps.count() > 0:
+                    # User has open applications, don't show 'apply',
+                    # but link to apps page
+                    context["has_open_apps"] = True
+                    if not partner.specific_title:
+                        context["apply"] = False
+                try:
+                    Authorization.objects.get(partner=partner, user=user)
+                    # User has an authorization, don't show 'apply',
+                    # but link to collection page
+                    if not partner.specific_title:
+                        context["apply"] = False
+                    context["has_auths"] = True
+                except Authorization.DoesNotExist:
+                    pass
+                except Authorization.MultipleObjectsReturned:
+                    logger.info(
+                        "Multiple authorizations returned for partner {} and user {}"
+                    ).format(partner, user)
+                    # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                    messages.add_message(
+                        self.request,
+                        messages.ERROR,
+                        _(
+                            "Multiple authorizations were returned – something's wrong. "
+                            "Please contact us and don't forget to mention this message."
+                        ),
+                    )
+            else:
+                authorizations = Authorization.objects.filter(
+                    partner=partner, user=user
+                )
+                if authorizations.count() == partner_streams.count():
+                    # User has correct number of auths, don't show 'apply',
+                    # but link to collection page
+                    context["apply"] = False
+                    context["has_auths"] = True
+                    if apps.count() > 0:
+                        # User has open apps, link to apps page
+                        context["has_open_apps"] = True
                 else:
-                    context["multiple_open_apps"] = False
-                    context["open_app_pk"] = open_apps[0].pk
-            elif sent_apps.count() > 0:
-                # Because using sent_apps[0] may not always hold the latest application,
-                # particularly when multiple applications where made on the same day
-                for every_app in sent_apps:
-                    if every_app.is_renewable:
-                        context["latest_sent_app_pk"] = every_app.pk
-                        context["user_sent_apps"] = True
-                        break
-
+                    auth_streams = []
+                    for each_authorization in authorizations:
+                        # We are interested in the streams of existing authorizations
+                        if each_authorization.stream in partner_streams:
+                            auth_streams.append(each_authorization.stream)
+                    if auth_streams:
+                        # User has authorizations, link to collection page
+                        context["has_auths"] = True
+                    no_auth_streams = partner_streams.exclude(
+                        name__in=auth_streams
+                    )  # streams with no corresponding authorizations – we'll want to know if these have apps
+                    if apps.count() > 0:
+                        # User has open apps, link to apps page
+                        context["has_open_apps"] = True
+                        # The idea behind the logic below is to find out if we have
+                        # at least a single stream the user hasn't applied to. If so,
+                        # we show the apply button; if not, we disable it.
+                        all_streams_have_apps = True
+                        for each_no_auth_stream in no_auth_streams:
+                            stream_has_app = False
+                            for each_app in apps:
+                                if each_app.specific_stream == each_no_auth_stream:
+                                    stream_has_app = True
+                                    break
+                            if not stream_has_app:
+                                all_streams_have_apps = False
+                                break
+                        if all_streams_have_apps:
+                            context["apply"] = False
         return context
 
     def get_queryset(self):
@@ -289,7 +343,6 @@ class PartnerSuggestionView(FormView):
                 _("You must be a Wikipedia editor to do that."),
             )
             raise PermissionDenied
-        return self.request.user.editor
 
 
 class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
@@ -298,8 +351,8 @@ class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
     success_url = reverse_lazy("suggest")
 
     def delete(self, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.delete()
+        suggestion = self.get_object()
+        suggestion.delete()
         messages.add_message(
             self.request,
             messages.SUCCESS,

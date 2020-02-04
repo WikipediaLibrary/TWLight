@@ -26,6 +26,8 @@
         <a href="
           {% if each_authorization.partner.get_access_url and each_authorization.is_valid and each_authorization.user.userprofile.terms_of_use %}
             {{ each_authorization.partner.get_access_url }}
+          {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
+            {{ each_authorization.stream.get_access_url }}
           {% else %}
             {% url 'partners:detail' each_authorization.partner.pk %}
           {% endif %}
@@ -35,6 +37,11 @@
               {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ partner }}. {% endcomment %}
               {% blocktrans trimmed with each_authorization.partner as partner %}
                  Link to {{ partner }}'s external website
+              {% endblocktrans %}
+            {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
+              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ each_authorization.stream }}. {% endcomment %}
+              {% blocktrans trimmed with each_authorization.stream as stream %}
+                 Link to {{ stream }}'s external website
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Title for logo in tiles that are linked to partner description  page. Don't translate {{ partner }}. {% endcomment %}
@@ -48,6 +55,11 @@
               {% comment %} Translators: Alt text for publisher logos on the my collection page. Don't translate {{ partner }}. {% endcomment %}
               {% blocktrans trimmed with each_authorization.partner as partner %}
                  Link to {{ partner }}'s external website
+              {% endblocktrans %}
+            {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
+              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ each_authorization.stream }}. {% endcomment %}
+              {% blocktrans trimmed with each_authorization.stream as stream %}
+                 Link to {{ stream }}'s external website
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Alt text for publisher logos on the my collection page. Don't translate {{ partner }}. {% endcomment %}
@@ -66,8 +78,16 @@
       <a href="{{ each_authorization.partner.get_access_url }}" class="btn btn-default {% if not each_authorization.user.userprofile.terms_of_use %}disabled{% endif %}" role="button">{% trans 'Access resource' %}</a>
       </div>
       <hr>
+    {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
+      {% comment %} Translators: A button when clicked takes users the resource (external) the authorization represents. {% endcomment %}
+      <div style="text-align: center;">
+      <a href="{{ each_authorization.stream.get_access_url }}" class="btn btn-default" role="button">{% trans 'Access resource' %}</a>
+      </div>
+      <hr>
     {% endif %}
-    <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i> <strong><a href="{% url 'partners:detail' each_authorization.partner.pk %}">{{ each_authorization.partner }}</a></strong>
+    <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i>
+    <strong><a href="{% url 'partners:detail' each_authorization.partner.pk %}">{{ each_authorization.partner }}</a></strong>
+    {% if each_authorization.stream %}({{ each_authorization.stream }}){% endif %}
     {% if each_authorization.latest_sent_app and not each_authorization.open_app %}
       {% comment %} Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled. {% endcomment %}
       <span class="pull-right" {% if not each_authorization.partner.renewals_available %}title="{% trans 'Renewals are not available for this partner' %}"{% endif %}>
@@ -79,6 +99,14 @@
             {% comment %} Translators: Labels a button users can click to renew an expired account. {% endcomment %}
             {% trans 'Renew' %}
           {% endif %}
+        </a>
+      </span>
+      <div class="clearfix"></div>
+    {% elif each_authorization.partner.specific_title and not each_authorization.open_app %}
+      <span class="pull-right">
+        <a href="{% url 'applications:apply_single' each_authorization.partner.pk %}" class="btn btn-primary pull-right" role="button">
+          {% comment %} Translators: Labels the button users can click to apply for a resource. {% endcomment %}
+          {% trans 'Apply' %}
         </a>
       </span>
       <div class="clearfix"></div>

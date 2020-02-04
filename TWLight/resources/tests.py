@@ -600,65 +600,6 @@ class PartnerViewTests(TestCase):
         response = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
         self.assertEqual(response.status_code, 200)
 
-    def test_latest_sent_app(self):
-        """
-        Test that the Renew button on partner pages attempts to renew the correct app.
-        """
-        self.partner.renewals_available = True
-        self.partner.save()
-
-        # Sent apps get sorted by date_closed which is a date field. If we
-        # renew all these apps at the same time, they have the same
-        # date_closed and the view picks the wrong app.
-        self.application.date_closed = date(2019, 1, 2)
-        self.application.save()
-
-        application2 = self.application.renew()
-        application2.status = Application.SENT
-        application2.date_closed = date(2019, 3, 3)
-        application2.save()
-
-        application3 = application2.renew()
-        application3.status = Application.SENT
-        application3.save()
-
-        factory = RequestFactory()
-        request = factory.get(
-            reverse("partners:detail", kwargs={"pk": self.partner.pk})
-        )
-        request.user = self.user
-        response = PartnersDetailView.as_view()(request, pk=self.partner.pk)
-        latest_sent_app_pk = response.context_data["latest_sent_app_pk"]
-
-        self.assertEqual(application3.pk, latest_sent_app_pk)
-
-    def test_latest_sent_app_dev(self):
-        """
-        Test that the Renew button on partner pages attempts to renew the
-        correct application, even in development where we make a bunch
-        of applications with the same 'date_closed'.
-        """
-        self.partner.renewals_available = True
-        self.partner.save()
-
-        application2 = self.application.renew()
-        application2.status = Application.SENT
-        application2.save()
-
-        application3 = application2.renew()
-        application3.status = Application.SENT
-        application3.save()
-
-        factory = RequestFactory()
-        request = factory.get(
-            reverse("partners:detail", kwargs={"pk": self.partner.pk})
-        )
-        request.user = self.user
-        response = PartnersDetailView.as_view()(request, pk=self.partner.pk)
-        latest_sent_app_pk = response.context_data["latest_sent_app_pk"]
-
-        self.assertEqual(application3.pk, latest_sent_app_pk)
-
 
 class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
     @classmethod

@@ -188,7 +188,6 @@ class Application(models.Model):
                     "specific_title",
                     "comments",
                     "agreement_with_terms_of_use",
-                    "account_email",
                 ],
             )
 

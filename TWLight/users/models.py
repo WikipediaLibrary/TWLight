@@ -38,6 +38,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Q
 from django.utils.timezone import now
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
@@ -584,12 +585,26 @@ class Authorization(models.Model):
         )
 
     def get_latest_app(self):
+        """
+        Returns the latest application for a corresponding authorization,
+        except when the status of the application is NOT_APPROVED, in which
+        case returns the previous not NOT_APPROVED application.
+        """
         from TWLight.applications.models import Application
 
         try:
-            return Application.objects.filter(
-                partner=self.partner, editor=self.user.editor
-            ).latest("id")
+            if self.stream:
+                return Application.objects.filter(
+                    ~Q(status=Application.NOT_APPROVED),
+                    specific_stream=self.stream,
+                    editor=self.user.editor,
+                ).latest("id")
+            else:
+                return Application.objects.filter(
+                    ~Q(status=Application.NOT_APPROVED),
+                    partner=self.partner,
+                    editor=self.user.editor,
+                ).latest("id")
         except Application.DoesNotExist:
             return None
 

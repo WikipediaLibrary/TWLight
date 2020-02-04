@@ -26,7 +26,7 @@ from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Editor
+from TWLight.users.models import Editor, Authorization
 
 from .helpers import (
     USER_FORM_FIELDS,
@@ -81,6 +81,10 @@ class BaseApplicationForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self._validate_parameters(**kwargs)
         self.field_params = kwargs.pop("field_params")
+        try:
+            self.user = kwargs.pop("requested_user")
+        except KeyError:
+            pass
 
         super(BaseApplicationForm, self).__init__(*args, **kwargs)
 
@@ -261,8 +265,34 @@ class BaseApplicationForm(forms.Form):
                 if datum == SPECIFIC_STREAM:
                     # Only show streams for this partner
                     partner_id = int(partner[8:])
+                    # We use the logic below to filter out the streams for which
+                    # the user already has authorizations. Streams with authorizations
+                    # can only be renewed (as opposed to applying) from the My Collection
+                    # page.
+                    queryset = Stream.objects.filter(partner_id=partner_id)
+                    # We need a user if we are to determine which streams have authorizations.
+                    # We set the user in the view code if a partner has streams.
+                    if self.user:
+                        all_authorizations = Authorization.objects.filter(
+                            user=self.user, partner=partner_id, stream__isnull=False
+                        )
+                        existing_streams = []
+                        for each_authorization in all_authorizations:
+                            existing_streams.append(each_authorization.stream.id)
+                        if len(existing_streams) > len(set(existing_streams)):
+                            logger.info(
+                                "Multiple authorizations returned for the same partner {}, same stream for user {}. "
+                                "Unable to pop options.".format(partner_id, self.user)
+                            )
+                            break
+                        else:
+                            # We exclude the streams that already have authorizations.
+                            queryset = Stream.objects.exclude(
+                                id__in=existing_streams
+                            ).filter(partner_id=partner_id)
+
                     specific_stream = forms.ModelChoiceField(
-                        queryset=Stream.objects.filter(partner_id=partner_id)
+                        queryset=queryset, empty_label=None
                     )
                     self.fields[field_name] = specific_stream
                     self.fields[field_name].label = FIELD_LABELS[datum]
@@ -344,7 +374,7 @@ class RenewalForm(forms.Form):
             self.field_params = kwargs.pop("field_params")
         except KeyError:
             logger.exception(
-                "Tried to instantiate a RenewalForm but " "did not have field_params"
+                "Tried to instantiate a RenewalForm but did not have field_params"
             )
             raise
         super(RenewalForm, self).__init__(*args, **kwargs)
