@@ -790,11 +790,11 @@ class ListApplicationsUserView(SelfOnly, ListView):
     def get_context_data(self, **kwargs):
         context = super(ListApplicationsUserView, self).get_context_data(**kwargs)
         editor = self.get_object()
-        context["object_list"] = editor.applications.model.include_invalid.filter(
-            editor=editor
-        ).exclude(
-            partner__authorization_method=Partner.BUNDLE
-        ).order_by("status", "-date_closed")
+        context["object_list"] = (
+            editor.applications.model.include_invalid.filter(editor=editor)
+            .exclude(partner__authorization_method=Partner.BUNDLE)
+            .order_by("status", "-date_closed")
+        )
         return context
 
 
