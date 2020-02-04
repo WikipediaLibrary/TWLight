@@ -131,6 +131,16 @@ class ViewsTestCase(TestCase):
         response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
         self.assertEqual(response.status_code, 200)
 
+    def test_user_view_no_coordinators(self):
+        """Check that users with no coordinators can see their own pages."""
+        get_coordinators().user_set.remove(self.user_coordinator)
+        factory = RequestFactory()
+        request = factory.get(self.url1)
+        request.user = self.user_editor
+
+        response = views.EditorDetailView.as_view()(request, pk=self.editor1.pk)
+        self.assertEqual(response.status_code, 200)
+
     def test_editor_cannot_see_other_editor_page(self):
         """Editors cannot see other editors' pages."""
         factory = RequestFactory()

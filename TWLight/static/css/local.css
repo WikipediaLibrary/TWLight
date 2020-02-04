@@ -120,8 +120,6 @@ header {
   }
 
   #top-nav, #footer {
-    padding-top: auto;
-    padding-bottom: auto;
     padding-right: 56px;
     padding-left: 56px;
   }
@@ -133,8 +131,6 @@ header {
   }
 
   #top-nav, #footer {
-    padding-top: auto;
-    padding-bottom: auto;
     padding-right: 14px;
     padding-left: 14px;
   }
@@ -146,8 +142,6 @@ header {
   }
 
   #top-nav, #footer {
-    padding-top: auto;
-    padding-bottom: auto;
     padding-right: 28px;
     padding-left: 28px;
   }
@@ -458,12 +452,6 @@ A few spots just need padding instead of margin.
   font-weight: 700;
   }
 
-.banner-flag {
-  background-image: url("../img/banner.png"); 
-  background-repeat: no-repeat;
-  background-position: right top;  
-}
-
 .partner-logo {
   position: relative;
   padding: 0 10% 0 10%;
@@ -537,11 +525,17 @@ A few spots just need padding instead of margin.
   z-index: 2;
 }
 
-.no-padding-logo {
+.no-padding-logo-collection-tiles {
   position: absolute;
   margin-left: -18px;
   margin-top: -14px;
   z-index: 2;
+}
+
+.no-padding-logo-partner-tiles {
+  margin-right: -13px;
+  margin-top: -4px;
+  float: right;
 }
 
 .btn.fit-content {

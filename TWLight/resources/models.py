@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import copy
-from datetime import timedelta
 
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase

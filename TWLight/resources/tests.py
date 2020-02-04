@@ -221,6 +221,30 @@ class PartnerModelTests(TestCase):
 
         self.assertContains(response, partner.get_absolute_url())
 
+    def test_visibility_of_not_available_5(self):
+        """
+        Coordinators *should* see NOT_AVAILABLE partner pages.
+        We won't test to see if they include the message, because RequestFactory
+        doesn't include message middleware, but we can't use the Django test
+        client to log in users without passwords (which is our normal user).
+        """
+        partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
+        detail_url = partner.get_absolute_url()
+
+        editor = EditorFactory()
+        coordinators = get_coordinators()
+        coordinators.user_set.add(editor.user)
+
+        partner.coordinator = editor.user
+        partner.save()
+
+        request = RequestFactory().get(detail_url)
+        request.user = editor.user
+
+        # This should not raise Http404.
+        response = PartnersDetailView.as_view()(request, pk=partner.pk)
+        self.assertEqual(response.status_code, 200)
+
     def test_review_app_page_excludes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
         _ = ApplicationFactory(partner=partner, status=Application.PENDING)

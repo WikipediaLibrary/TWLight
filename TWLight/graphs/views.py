@@ -10,7 +10,6 @@ from django.core.urlresolvers import resolve
 from django.contrib import messages
 from django.db.models import Avg, Count
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, View
 from django.utils.translation import ugettext as _
 
@@ -21,7 +20,6 @@ from TWLight.users.models import UserProfile, Authorization
 from .helpers import (
     get_application_status_data,
     get_data_count_by_month,
-    get_users_by_partner_by_month,
     get_time_open_histogram,
     get_median_decision_time,
     get_user_language_data,

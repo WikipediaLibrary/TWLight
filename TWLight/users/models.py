@@ -2,7 +2,7 @@
 
 """
 This file holds user profile information. (The base User model is part of
-Django; profiles extend that with locally useful     information.)
+Django; profiles extend that with locally useful information.)
 
 TWLight has three user types:
 * editors
@@ -25,8 +25,8 @@ flag through the admin site.
 New users who sign up via oauth will be created as editors. Site administrators
 may promote them to coordinators manually in the Django admin site, by adding
 them to the coordinators group. They can also directly create Django user
-accounts without attached Editors in the admin site, if for some reason it's
-useful to have account holders without attached Wikipedia data.
+accounts without attached Editors in the admin site, but this has no current
+use case.
 """
 from datetime import datetime, date, timedelta
 import json
@@ -35,6 +35,7 @@ import urllib.request, urllib.error, urllib.parse
 import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
@@ -150,7 +151,7 @@ class Editor(models.Model):
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
-    # Data are current *as of the time of TWLight signup* but may get out of
+    # Data are current *as of the time of last TWLight login* but may get out of
     # sync thereafter.
     wp_username = models.CharField(max_length=235, help_text=_("Username"))
     # Translators: The total number of edits this user has made to all Wikipedia projects
@@ -550,10 +551,10 @@ class Authorization(models.Model):
         if self.user:
             try:
                 authorized_user = self.user.editor.wp_username
-            except:
+            except Editor.DoesNotExist:
                 try:
                     authorized_user = self.user.username
-                except:
+                except User.DoesNotExist:
                     authorized_user = self.user
         else:
             authorized_user = None
@@ -564,20 +565,23 @@ class Authorization(models.Model):
         if self.authorizer:
             try:
                 authorizer = self.authorizer.editor.wp_username
-            except:
+            except Editor.DoesNotExist:
                 try:
                     authorizer = self.authorizer.username
-                except:
+                except User.DoesNotExist:
                     authorizer = self.authorizer
         else:
             authorizer = None
 
-        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - company_name: {company_name} - stream_name: {stream_name}".format(
-            authorized_user=authorized_user,
-            authorizer=authorizer,
-            date_authorized=self.date_authorized,
-            company_name=company_name,
-            stream_name=stream_name,
+        return (
+            "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - "
+            "company_name: {company_name} - stream_name: {stream_name}".format(
+                authorized_user=authorized_user,
+                authorizer=authorizer,
+                date_authorized=self.date_authorized,
+                company_name=company_name,
+                stream_name=stream_name,
+            )
         )
 
     def get_latest_app(self):
@@ -601,6 +605,16 @@ class Authorization(models.Model):
                     partner=self.partner,
                     editor=self.user.editor,
                 ).latest("id")
+        except Application.DoesNotExist:
+            return None
+
+    def get_latest_sent_app(self):
+        from TWLight.applications.models import Application
+
+        try:
+            return Application.objects.filter(
+                status=Application.SENT, partner=self.partner, editor=self.user.editor
+            ).latest("id")
         except Application.DoesNotExist:
             return None
 
