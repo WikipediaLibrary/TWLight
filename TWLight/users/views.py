@@ -763,7 +763,7 @@ class CollectionUserView(SelfOnly, ListView):
                                     partner=each_authorization.partner,
                                 ).latest(
                                     "date_created"
-                                    )
+                                )
                             except Application.DoesNotExist:
                                 each_authorization.open_app = None
 
