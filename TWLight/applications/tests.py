@@ -3020,8 +3020,8 @@ class EvaluateApplicationTest(TestCase):
         # Visits the App Eval page
         response = self.client.get(self.url)
         # For some reason the date formatting in tests is different
-        # eg. Nov. 01, 2019
-        today = date.today().strftime("%b. %d, %Y")
+        # eg. Nov. 1, 2019
+        today = date.today().strftime("%b. %-d, %Y")
         self.assertContains(response, today)
         self.assertContains(response, self.application.status)
         self.assertContains(
