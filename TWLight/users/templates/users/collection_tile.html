@@ -87,6 +87,7 @@
     {% endif %}
     <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i>
     <strong><a href="{% url 'partners:detail' each_authorization.partner.pk %}">{{ each_authorization.partner }}</a></strong>
+    {% if each_authorization.stream %}({{ each_authorization.stream }}){% endif %}
     {% if each_authorization.latest_sent_app and not each_authorization.open_app %}
       {% comment %} Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled. {% endcomment %}
       <span class="pull-right" {% if not each_authorization.partner.renewals_available %}title="{% trans 'Renewals are not available for this partner' %}"{% endif %}>
@@ -108,10 +109,8 @@
           {% trans 'Apply' %}
         </a>
       </span>
+      <div class="clearfix"></div>
     {% endif %}
-    {% if each_authorization.stream %}({{ each_authorization.stream }}){% endif %}
-    <div class="clearfix"></div>
-    
     {% if each_authorization.open_app %}
       {% comment %} Translators: Labels a button users can click to view an application requesting access to a resource. {% endcomment %}
       <a href="{% url 'applications:evaluate' each_authorization.open_app.pk %}" class="btn btn-primary pull-right" role="button">{% trans 'View application' %}</a><div class="clearfix"></div>

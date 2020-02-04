@@ -265,7 +265,13 @@ class BaseApplicationForm(forms.Form):
                 if datum == SPECIFIC_STREAM:
                     # Only show streams for this partner
                     partner_id = int(partner[8:])
+                    # We use the logic below to filter out the streams for which
+                    # the user already has authorizations. Streams with authorizations
+                    # can only be renewed (as opposed to applying) from the My Collection
+                    # page.
                     queryset = Stream.objects.filter(partner_id=partner_id)
+                    # We need a user if we are to determine which streams have authorizations.
+                    # We set the user in the view code if a partner has streams.
                     if self.user:
                         all_authorizations = Authorization.objects.filter(
                             user=self.user, partner=partner_id, stream__isnull=False
@@ -280,6 +286,7 @@ class BaseApplicationForm(forms.Form):
                             )
                             break
                         else:
+                            # We exclude the streams that already have authorizations.
                             queryset = Stream.objects.exclude(
                                 id__in=existing_streams
                             ).filter(partner_id=partner_id)

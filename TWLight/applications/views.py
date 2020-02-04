@@ -49,11 +49,11 @@ from .helpers import (
     USER_FORM_FIELDS,
     PARTNER_FORM_OPTIONAL_FIELDS,
     PARTNER_FORM_BASE_FIELDS,
+    SPECIFIC_STREAM,
     get_output_for_application,
     count_valid_authorizations,
     get_accounts_available,
     is_proxy_and_application_approved,
-    SPECIFIC_STREAM,
 )
 from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .models import Application
