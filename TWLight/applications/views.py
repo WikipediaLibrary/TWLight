@@ -4,16 +4,16 @@ Views for managing applications for resource grants go here.
 Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
-import bleach
-import urllib.request, urllib.error, urllib.parse
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 import logging
-from dal import autocomplete
-from reversion import revisions as reversion
-from reversion.models import Version
+import urllib.error
+import urllib.parse
+import urllib.request
 from urllib.parse import urlparse
 
+import bleach
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from dal import autocomplete
 from django import forms
 from django.conf import settings
 from django.contrib import messages
@@ -28,7 +28,13 @@ from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
 from django.views.generic.list import ListView
+from reversion import revisions as reversion
+from reversion.models import Version
 
+from TWLight.applications.signals import no_more_accounts
+from TWLight.resources.models import Partner, Stream, AccessCode
+from TWLight.users.groups import get_coordinators
+from TWLight.users.models import Authorization, Editor
 from TWLight.view_mixins import (
     CoordinatorOrSelf,
     CoordinatorsOnly,
@@ -40,11 +46,7 @@ from TWLight.view_mixins import (
     DataProcessingRequired,
     NotDeleted,
 )
-from TWLight.applications.signals import no_more_accounts
-from TWLight.resources.models import Partner, Stream, AccessCode
-from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Authorization, Editor
-
+from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .helpers import (
     USER_FORM_FIELDS,
     PARTNER_FORM_OPTIONAL_FIELDS,
@@ -55,7 +57,6 @@ from .helpers import (
     get_accounts_available,
     is_proxy_and_application_approved,
 )
-from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .models import Application
 
 logger = logging.getLogger(__name__)
@@ -142,7 +143,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         open_apps_partners = []
         for i in open_apps:
             open_apps_partners.append(i.partner.company_name)
-        for partner in Partner.objects.all().order_by("company_name"):
+        for partner in Partner.objects.all().exclude(authorization_method=Partner.BUNDLE).order_by("company_name"):
             # We cannot just use the partner ID as the field name; Django won't
             # be able to find the resultant data.
             # http://stackoverflow.com/a/8289048
@@ -175,7 +176,12 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         partner_ids = [
             int(key[8:]) for key in form.cleaned_data if form.cleaned_data[key]
         ]
-
+        for each_id in partner_ids:
+            try:
+                if Partner.objects.get(id=each_id).authorization_method == Partner.BUNDLE:
+                    partner_ids.remove(each_id)
+            except Partner.NOT_AVAILABLE:
+                partner_ids.remove(each_id)
         self.request.session[PARTNERS_SESSION_KEY] = partner_ids
 
         if len(partner_ids):
@@ -287,6 +293,11 @@ class _BaseSubmitApplicationView(
         for partner in form.field_params:
             partner_id = partner[8:]
             partner_obj = Partner.objects.get(id=partner_id)
+
+            # We exclude Bundle partners from the apply page, but if they are
+            # here somehow, we can be reasonably sure something has gone awry.
+            if partner_obj.authorization_method == Partner.BUNDLE:
+                raise Http404
 
             app = Application()
             app.editor = self.request.user.editor
