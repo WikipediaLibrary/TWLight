@@ -75,42 +75,48 @@
             </p>
         {% endif %}
     </div>
-    <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
-        {% trans "Satisfies minimum account age?" %}
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        {% if editor.wp_account_old_enough %}
-            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
-            {% trans "Yes" %}
-        {% else %}
-            <strong class="warning">{% trans "No" %}</strong>
-        {% endif %}
-    </div>
-    <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
-        {% trans "Satisfies minimum edit count?" %}
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        {% if editor.wp_enough_edits %}
-            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
-            {% trans "Yes" %}
-        {% else %}
-            <strong class="warning">{% trans "No" %}</strong>
-        {% endif %}
-    </div>
-    <div class="col-xs-12 col-sm-3">
-        {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
-        {% trans "Is not blocked on any project?" %}
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        {% if editor.wp_not_blocked %}
-            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
-            {% trans "Yes" %}
-        {% else %}
-            <strong class="warning">{% trans "No" %}</strong>
-        {% endif %}
-    </div>
+</div>
+<div class="row clearfix">
+  <div class="col-xs-12 col-sm-3">
+      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
+      {% trans "Satisfies minimum account age?" %}
+  </div>
+  <div class="col-xs-12 col-sm-9">
+      {% if editor.wp_account_old_enough %}
+          {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
+          {% trans "Yes" %}
+      {% else %}
+          <strong class="warning">{% trans "No" %}</strong>
+      {% endif %}
+  </div>
+</div>
+<div class="row clearfix">
+  <div class="col-xs-12 col-sm-3">
+      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
+      {% trans "Satisfies minimum edit count?" %}
+  </div>
+  <div class="col-xs-12 col-sm-9">
+      {% if editor.wp_enough_edits %}
+          {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
+          {% trans "Yes" %}
+      {% else %}
+          <strong class="warning">{% trans "No" %}</strong>
+      {% endif %}
+  </div>
+</div>
+<div class="row clearfix">
+  <div class="col-xs-12 col-sm-3">
+      {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
+      {% trans "Is not blocked on any project?" %}
+  </div>
+  <div class="col-xs-12 col-sm-9">
+      {% if editor.wp_not_blocked %}
+          {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
+          {% trans "Yes" %}
+      {% else %}
+          <strong class="warning">{% trans "No" %}</strong>
+      {% endif %}
+  </div>
 </div>
 
 <hr/>
