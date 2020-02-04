@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-02-04 14:24+0000\n"
+"POT-Creation-Date: 2020-02-04 17:20+0000\n"
 "PO-Revision-Date: 2020-01-06 17:11:09+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: TWLight/applications/forms.py:367
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
-#: TWLight/users/admin.py:89 TWLight/users/models.py:243
+#: TWLight/users/admin.py:106 TWLight/users/models.py:262
 msgid "Username"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
-#: TWLight/applications/helpers.py:134
+#: TWLight/applications/helpers.py:127
 #: TWLight/users/templates/users/editor_detail_data.html:250
 msgid "Real name"
 msgstr ""
@@ -161,7 +161,7 @@ msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
-#: TWLight/applications/helpers.py:138
+#: TWLight/applications/helpers.py:131
 #: TWLight/users/templates/users/editor_detail_data.html:274
 msgid "Occupation"
 msgstr ""
@@ -2755,11 +2755,15 @@ msgid ""
 "instructions for setting a new one."
 msgstr ""
 
-#: TWLight/users/admin.py:58
+#: TWLight/users/admin.py:32
+msgid "Email preferences"
+msgstr ""
+
+#: TWLight/users/admin.py:75
 msgid "user"
 msgstr ""
 
-#: TWLight/users/admin.py:70
+#: TWLight/users/admin.py:87
 msgid "authorizer"
 msgstr ""
 
@@ -2893,125 +2897,125 @@ msgid "Does this coordinator want approved app reminder notices?"
 msgstr ""
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
-#: TWLight/users/models.py:236
+#: TWLight/users/models.py:255
 msgid "When this profile was first created"
 msgstr ""
 
-#: TWLight/users/models.py:246
+#: TWLight/users/models.py:265
 msgid "Wikipedia edit count"
 msgstr ""
 
 #. Translators: Date and time that wp_editcount was updated from Wikipedia.
-#: TWLight/users/models.py:254
+#: TWLight/users/models.py:273
 msgid "When the editcount was updated from Wikipedia"
 msgstr ""
 
-#: TWLight/users/models.py:258
+#: TWLight/users/models.py:277
 msgid "Date registered at Wikipedia"
 msgstr ""
 
 #. Translators: The User ID for this user on Wikipedia
-#: TWLight/users/models.py:263
+#: TWLight/users/models.py:282
 msgid "Wikipedia user ID"
 msgstr ""
 
 #. Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-#: TWLight/users/models.py:270
+#: TWLight/users/models.py:289
 msgid "Wikipedia groups"
 msgstr ""
 
 #. Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-#: TWLight/users/models.py:272
+#: TWLight/users/models.py:291
 msgid "Wikipedia user rights"
 msgstr ""
 
-#: TWLight/users/models.py:280
+#: TWLight/users/models.py:299
 msgid ""
 "At their last login, did this user meet the criteria in the terms of use?"
 msgstr ""
 
-#: TWLight/users/models.py:289
+#: TWLight/users/models.py:308
 msgid ""
 "At their last login, did this user meet the account age criterion in the "
 "terms of use?"
 msgstr ""
 
-#: TWLight/users/models.py:298
+#: TWLight/users/models.py:317
 msgid ""
 "At their last login, did this user meet the total editcount criterion in the "
 "terms of use?"
 msgstr ""
 
-#: TWLight/users/models.py:307
+#: TWLight/users/models.py:326
 msgid ""
 "At their last login, did this user meet the 'not currently blocked' "
 "criterion in the terms of use?"
 msgstr ""
 
-#: TWLight/users/models.py:316
+#: TWLight/users/models.py:335
 msgid ""
 "At their last login, did this user meet the recent editcount criterion in "
 "the terms of use?"
 msgstr ""
 
 #. Translators: The date and time that wp_editcount_prev was updated from Wikipedia.
-#: TWLight/users/models.py:326
+#: TWLight/users/models.py:345
 msgid "When the previous editcount was last updated from Wikipedia"
 msgstr ""
 
 #. Translators: The number of edits this user made to all Wikipedia projects at a previous date.
-#: TWLight/users/models.py:335
+#: TWLight/users/models.py:354
 msgid "Previous Wikipedia edit count"
 msgstr ""
 
 #. Translators: The number of edits this user recently made to all Wikipedia projects.
-#: TWLight/users/models.py:345
+#: TWLight/users/models.py:364
 msgid "Recent Wikipedia edit count"
 msgstr ""
 
-#: TWLight/users/models.py:352
+#: TWLight/users/models.py:371
 msgid ""
 "At their last login, did this user meet the criteria for access to the "
 "library card bundle?"
 msgstr ""
 
 #. Translators: Describes information added by the user to describe their Wikipedia edits.
-#: TWLight/users/models.py:359
+#: TWLight/users/models.py:378
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:554
+#: TWLight/users/models.py:573
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:587
+#: TWLight/users/models.py:606
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:601
+#: TWLight/users/models.py:620
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:610
+#: TWLight/users/models.py:629
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:621
+#: TWLight/users/models.py:640
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:632
+#: TWLight/users/models.py:651
 msgid "The stream for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:638
+#: TWLight/users/models.py:657
 msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
