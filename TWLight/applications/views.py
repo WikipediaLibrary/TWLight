@@ -295,9 +295,9 @@ class _BaseSubmitApplicationView(
             partner_obj = Partner.objects.get(id=partner_id)
 
             # We exclude Bundle partners from the apply page, but if they are
-            # here somehow, we can be reasonably sure something has gone awry.
+            # here somehow, we can be reasonably certain something has gone awry.
             if partner_obj.authorization_method == Partner.BUNDLE:
-                raise Http404
+                raise PermissionDenied
 
             app = Application()
             app.editor = self.request.user.editor
@@ -433,7 +433,9 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
 
 class SubmitSingleApplicationView(_BaseSubmitApplicationView):
     def dispatch(self, request, *args, **kwargs):
-        if self._get_partners()[0].status == Partner.WAITLIST:
+        if self._get_partners()[0].authorization_method == Partner.BUNDLE:
+            raise PermissionDenied
+        elif self._get_partners()[0].status == Partner.WAITLIST:
             # Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
             messages.add_message(
                 request,
