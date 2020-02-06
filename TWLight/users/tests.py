@@ -909,7 +909,9 @@ class EditorModelTestCase(TestCase):
         # even if we're not sure whether they made those edits in the last 30 days.
         identity["blocked"] = False
         not_blocked = editor_not_blocked(identity)
-        self.test_editor.wp_valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        self.test_editor.wp_valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked
+        )
 
         self.test_editor.wp_editcount_updated = now() - timedelta(days=60)
         self.test_editor.wp_editcount_prev_updated = (
