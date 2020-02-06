@@ -907,17 +907,23 @@ class EditorModelTestCase(TestCase):
 
         # Without a scheduled management command, a valid user will pass 60 days after their first login if they have 10 more edits,
         # even if we're not sure whether they made those edits in the last 30 days.
+        # Valid data
+        global_userinfo["editcount"] = 500
         identity["blocked"] = False
-        not_blocked = editor_not_blocked(identity)
+        self.test_editor.wp_editcount = 500
+        self.test_editor.wp_registered = editor_reg_date(identity, global_userinfo)
+        self.test_editor.wp_account_old_enough = editor_account_old_enough(registered)
+        self.test_editor.wp_enough_edits = editor_enough_edits(global_userinfo)
+        self.test_editor.wp_not_blocked = editor_not_blocked(identity)
         self.test_editor.wp_valid = editor_valid(
             enough_edits, account_old_enough, not_blocked
         )
-
         self.test_editor.wp_editcount_updated = now() - timedelta(days=60)
         self.test_editor.wp_editcount_prev_updated = (
             self.test_editor.wp_editcount_prev_updated - timedelta(days=60)
         )
         self.test_editor.save()
+        
         # This command will run every day to ensure the date used to calculate recent edits is never greater than 30 days.
         call_command("user_update_eligibility")
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
