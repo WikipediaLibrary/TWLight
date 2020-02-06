@@ -936,14 +936,16 @@ class EditorModelTestCase(TestCase):
         self.test_editor.wp_enough_edits = editor_enough_edits(global_userinfo)
         self.test_editor.wp_not_blocked = editor_not_blocked(identity)
         self.test_editor.wp_valid = editor_valid(
-            self.test_editor.wp_enough_edits, self.test_editor.wp_account_old_enough, self.test_editor.wp_not_blocked
+            self.test_editor.wp_enough_edits,
+            self.test_editor.wp_account_old_enough,
+            self.test_editor.wp_not_blocked
         )
         self.test_editor.wp_editcount_updated = now() - timedelta(days=60)
         self.test_editor.wp_editcount_prev_updated = (
             self.test_editor.wp_editcount_prev_updated - timedelta(days=60)
         )
         self.test_editor.save()
-        
+
         # This command will run every day to ensure the date used to calculate recent edits is never greater than 30 days.
         call_command("user_update_eligibility")
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
