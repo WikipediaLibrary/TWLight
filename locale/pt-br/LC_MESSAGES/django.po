@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:40+0000\n"
+"PO-Revision-Date: 2020-02-06 14:09:27+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -864,15 +864,15 @@ msgstr "O seu código de acesso à Biblioteca da Wikipédia"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Caro %(user)s,</p> <p>Obrigado por solicitar acesso aos recursos do %(partner)s através da Biblioteca da Wikipédia. Temos a satisfação de informar que sua inscrição foi aprovada. Você pode esperar receber detalhes de acesso dentro de uma semana ou duas depois de processado.</p> <p>Felicidades!</p> <p>A Biblioteca da Wikipedia</p>"
+msgstr "<p>Caro(a) %(user)s,</p> <p>Agradecemos a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Temos o prazer de informar que a sua candidatura foi aprovada.</p> <p>%(user_instructions)s</p> <p>Cumprimentos!</p> <p>A Biblioteca da Wikipédia</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s Cheers! The Wikipedia Library"
-msgstr "Caro(a) %(user)s, Agradecemos o seu pedido de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Temos o prazer de informar que a sua candidatura foi aprovada. Irá receber os detalhes de acesso uma ou duas semanas após o respetivo processamento. Cumprimentos! A Biblioteca da Wikipédia"
+msgstr "Caro(a) %(user)s, Agradecemos  a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Temos o prazer de informar que a sua candidatura foi aprovada. %(user_instructions)s Cumprimentos! A Biblioteca da Wikipédia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -881,9 +881,9 @@ msgstr "Sua candidatura da Biblioteca da Wikipédia foi aprovada"
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for coordinating %(partner)s resources through The Wikipedia Library. There are one or more comments on an application that require a response from you. Please reply to these at: <a href=\"%(app_url)s\">%(app_url)s</a></p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Caro %(user)s,</p> <p>Obrigado por coordenar os recursos do %(partner)s através da Biblioteca da Wikipedia. Há um ou mais comentários em um aplicativo que exigem uma resposta sua. Por favor, responda a estas em: %(app_url)s</p> <p>Obrigado,</p> <p>A Biblioteca da Wikipedia</p>"
+msgstr "<p>Caro(a) %(user)s,</p> <p>Agradecemos a sua coordenação dos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Há um ou mais comentários sobre uma candidatura que necessitam de uma resposta sua. Responda, por favor, em: <a href=\"%(app_url)s\">%(app_url)s</a></p> <p>Melhores cumprimentos!</p> <p>A Biblioteca da Wikipédia</p>"
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
@@ -898,9 +898,9 @@ msgstr "Novo comentário em uma candidatura da Biblioteca da Wikipedia que você
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are one or more comments on your application that require a response from you. Please reply to these at <a href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Caro %(user)s,</p> <p>Obrigado por solicitar acesso a recursos de %(partner)s através da Biblioteca da Wikipedia. Há um ou mais comentários em seu aplicativo que exigem uma resposta sua. Por favor, responda a estas em %(app_url)s para que possamos avaliar sua candidatura.</p> <p>Obrigado,</p> <p>A Biblioteca da Wikipedia</p>"
+msgstr "<p>Caro(a) %(user)s,</p> <p>Agradecemos a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Há um ou mais comentários sobre a sua candidatura que necessitam de uma resposta sua. Para podermos avaliar a sua candidatura, responda, por favor, em <a href=\"%(app_url)s\">%(app_url)s</a>.</p> <p>Melhores cumprimentos,</p> <p>A Biblioteca da Wikipédia</p>"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
@@ -1332,9 +1332,8 @@ msgstr "Limite de excerto opcional em termos de percentagem (%) de um artigo. De
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this partner uses.
 #: TWLight/resources/models.py:257
-#, fuzzy
 msgid "Which authorization method does this partner use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."
-msgstr "Qual método de autorização esse parceiro usa? \"E-mail\" significa que as contas são configuradas por e-mail e são o padrão. Selecione \"Códigos de acesso\" se enviarmos detalhes de login ou códigos de acesso individuais ou de grupo. 'Proxy' significa acesso diretamente via EZProxy, e o Library Bundle é acesso automatizado baseado em proxy."
+msgstr "Qual é o método de autorização deste parceiro? 'E-mail' significa que as contas são criadas por e-mail, o método padrão. Selecionar 'Códigos de acesso' se enviarmos detalhes para início de sessão ou códigos de acesso, individuais ou de grupo. '<i>Proxy</i>' significa acesso entregado diretamente via EZProxy, e Pacote Biblioteca é o acesso por <i>proxy</i> automatizado. '<i>Link</i>' é se enviarmos aos usuários um URL a ser usado para criar uma conta."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify whether users can apply for one or multiple collections of resources. Streams means 'collections'.
 #: TWLight/resources/models.py:268
@@ -1427,9 +1426,8 @@ msgstr "Descrição opcional dos recursos desta corrente."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify which method of account distribution this collection uses.
 #: TWLight/resources/models.py:469
-#, fuzzy
 msgid "Which authorization method does this collection use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."
-msgstr "Qual método de autorização esse parceiro usa? \"E-mail\" significa que as contas são configuradas por e-mail e são o padrão. Selecione \"Códigos de acesso\" se enviarmos detalhes de login ou códigos de acesso individuais ou de grupo. 'Proxy' significa acesso diretamente via EZProxy, e o Library Bundle é acesso automatizado baseado em proxy."
+msgstr "Qual é o método de autorização deste parceiro? 'E-mail' significa que as contas são criadas por e-mail, o método padrão. Selecionar 'Códigos de acesso' se enviarmos detalhes para início de sessão ou códigos de acesso, individuais ou de grupo. '<i>Proxy</i>' significa acesso entregado diretamente via EZProxy, e Pacote Biblioteca é o acesso por <i>proxy</i> automatizado. '<i>Link</i>' é se enviarmos aos usuários um URL a ser usado para criar uma conta."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a collection of resources.
 #: TWLight/resources/models.py:478
@@ -2118,9 +2116,9 @@ msgstr "Métricas"
 
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
 #: TWLight/templates/base.html:200
-#, fuzzy, python-format
+#, python-format
 msgid "You don't have an email on file. We can't finalize your access to partner resources, and you won't be able to <a href=\"%(contact_us_url)s\">contact us</a> without an email. Please <a href=\"%(email_url)s\">update your email</a>."
-msgstr "Você não tem um email no arquivo. Não podemos finalizar seu acesso a recursos de parceiros sem um e-mail. Por favor <a href=\"%(email_url)s\">atualize seu e-mail</a>."
+msgstr "Não tem um endereço de e-mail registado. Não podemos finalizar o seu acesso aos recursos de parceiros, nem poderá <a href=\"%(contact_us_url)s\">contactar-nos</a>, sem um endereço. <a href=\"%(email_url)s\">Atualize o seu e-mail</a>, por favor."
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
 #: TWLight/templates/base.html:211
@@ -2795,9 +2793,8 @@ msgstr "Termos de Uso e Declaração de Privacidade do Cartão de Biblioteca da 
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:41
-#, fuzzy
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows users to apply simultaneously for access to multiple publishers’ materials, and makes the administration of and access to Wikipedia Library accounts easy and efficient."
-msgstr "A Biblioteca da Wikipédia é um centro de pesquisa aberto, através do qual os editores ativos da Wikipédia podem obter acesso às fontes vitais confiáveis necessárias para seu trabalho e apoio no uso desses recursos para melhorar a enciclopédia. Fizemos uma parceria com editores em todo o mundo para permitir que os usuários acessem livremente recursos de outra forma pagos. Essa plataforma permite que os usuários se inscrevam simultaneamente para acesso a vários editores e torna a administração de contas da Biblioteca da Wikipédia fácil e eficiente."
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">A Biblioteca da Wikipédia</a> estabeleceu parcerias com editoras de todo o mundo para permitir que os usuários acessem a recursos que, de outra forma, seriam pagos. Este <i>site</i> da Internet permite que os usuários se candidatem simultaneamente a acesso ao conteúdo de várias editoras e torna fácil e eficiente a administração de contas da Biblioteca da Wikipédia, e o acesso às mesmas."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:48
@@ -2924,9 +2921,9 @@ msgstr "A Fundação Wikimedia e nossos provedores de serviços usam suas inform
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:197
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "Cada editor que é membro do programa Biblioteca da Wikipédia requer informações específicas diferentes no aplicativo. Alguns editores podem solicitar apenas um endereço de e-mail, enquanto outros solicitam dados mais detalhados, como seu nome, local, ocupação ou afiliação institucional. Quando você completar sua inscrição, você será solicitado a fornecer as informações exigidas pelos editores escolhidos, e cada editora receberá apenas as informações necessárias. Consulte nossas <a href=\"%(partners_page)s\">páginas de informações sobre parceiros</a> para saber quais informações são exigidas por cada editor para obter acesso a seus recursos."
+msgstr "Cada editora que é membro do programa Biblioteca da Wikipédia requer informação específica na candidatura. Algumas editoras podem pedir só um endereço de e-mail, enquanto outras pedem dados mais detalhados, como o seu nome, localização, ocupação ou filiação em instituições. Quando preenche a sua candidatura, só lhe será pedida a informação exigida pelas editoras que escolheu, e cada editora só receberá a informação que requer para lhe conceder acesso. Consulte as nossas páginas de <a href=\"%(all_partners_url)s\">informações de parceiros</a> para saber que informação é exigida por cada editora para obter acesso aos recursos da mesma."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:204
@@ -2935,9 +2932,9 @@ msgstr "Você pode navegar no site da Biblioteca da Wikipédia sem fazer login, 
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:212
-#, fuzzy, python-format
+#, python-format
 msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
-msgstr "Para administrar o programa da Biblioteca da Wikipédia, reteremos os dados coletados indefinidamente, a menos que você exclua sua conta, conforme descrito abaixo. Você pode fazer login e acessar sua <a href=\"%(user_home_url)s\">página de perfil</a> para ver as informações associadas à sua conta. Você pode atualizar essas informações a qualquer momento, exceto as informações que são recuperadas automaticamente dos projetos."
+msgstr "Para administrar o programa da Biblioteca da Wikipédia reteremos os dados de candidatura que nos forneceu, durante um período de três anos após o seu início de sessão mais recente, a menos que elimine a sua conta conforme descrito abaixo. Pode iniciar uma sessão e aceder à <a href=\"%(profile_url)s\">sua página de perfil</a> para ver as informações associadas à sua conta, e pode baixar-las em formato JSON. Pode aceder, atualizar, restringir ou apagar estas informações em qualquer altura, exceto as que são obtidas automaticamente dos projetos. Se tem qualquer pergunta ou preocupação acerca do nosso tratamento dos seus dados, é favor contactar <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:219
