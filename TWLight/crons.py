@@ -40,3 +40,11 @@ class ProxyWaitlistDisableCronJob(CronJobBase):
 
     def do(self):
         management.call_command("proxy_waitlist_disable")
+
+
+class UserUpdateEligibilityCronJob(CronJobBase):
+    schedule = Schedule(run_every_mins=DAILY)
+    code = "users.user_update_eligibility"
+
+    def do(self):
+        management.call_command("user_updated_eligibility")
