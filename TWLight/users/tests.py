@@ -948,6 +948,7 @@ class EditorModelTestCase(TestCase):
 
         # This command will run every day to ensure the date used to calculate recent edits is never greater than 30 days.
         call_command("user_update_eligibility")
+        self.test_editor.refresh_from_db()
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"] + 10,
             self.test_editor.wp_editcount_updated,
