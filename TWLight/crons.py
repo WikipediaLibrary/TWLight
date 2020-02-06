@@ -47,4 +47,4 @@ class UserUpdateEligibilityCronJob(CronJobBase):
     code = "users.user_update_eligibility"
 
     def do(self):
-        management.call_command("user_updated_eligibility")
+        management.call_command("user_update_eligibility")
