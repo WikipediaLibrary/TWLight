@@ -143,7 +143,11 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         open_apps_partners = []
         for i in open_apps:
             open_apps_partners.append(i.partner.company_name)
-        for partner in Partner.objects.all().exclude(authorization_method=Partner.BUNDLE).order_by("company_name"):
+        for partner in (
+            Partner.objects.all()
+            .exclude(authorization_method=Partner.BUNDLE)
+            .order_by("company_name")
+        ):
             # We cannot just use the partner ID as the field name; Django won't
             # be able to find the resultant data.
             # http://stackoverflow.com/a/8289048
@@ -178,7 +182,10 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         ]
         for each_id in partner_ids:
             try:
-                if Partner.objects.get(id=each_id).authorization_method == Partner.BUNDLE:
+                if (
+                    Partner.objects.get(id=each_id).authorization_method
+                    == Partner.BUNDLE
+                ):
                     partner_ids.remove(each_id)
             except Partner.NOT_AVAILABLE:
                 partner_ids.remove(each_id)
