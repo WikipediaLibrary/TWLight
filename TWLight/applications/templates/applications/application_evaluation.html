@@ -25,7 +25,7 @@
     {% if object.user|restricted %}
       {% comment %}Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.{% endcomment %}
       {% trans 'This user has requested a restriction on the processing of their data, so you cannot change the status of their application.' %}
-    {% else %}
+    {% elif object.partner.authorization_method != object.partner.BUNDLE %}
       {% crispy form %}
     {% endif %}
   {% else %}
