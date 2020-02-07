@@ -929,6 +929,10 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         return context
 
     def get_form(self, form_class=None):
+        app = self.get_object()
+        # Status cannot be changed for applications made to bundle partners.
+        if app.partner.authorization_method == Partner.BUNDLE:
+            return
         if form_class is None:
             form_class = self.form_class
         form = super(EvaluateApplicationView, self).get_form(form_class)
@@ -943,7 +947,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             )
         )
 
-        if self.get_object().is_instantly_finalized():
+        if app.is_instantly_finalized():
             status_choices = Application.STATUS_CHOICES[:]
             status_choices.pop(4)
             form.fields["status"].choices = status_choices
