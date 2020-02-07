@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import logging
 import urllib.request, urllib.error, urllib.parse
@@ -33,10 +34,29 @@ def get_global_userinfo(editor):
 
 
 class Command(BaseCommand):
-    def handle(self, **options):
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--datetime",
+            action="store",
+            help="ISO datetime used for calculating eligibility. Defaults to now. Currently only used for backdating command runs in tests.",
+        )
+        parser.add_argument(
+            "--global_userinfo",
+            action="store",
+            help="specify Wikipedia global_userinfo data. Defaults to fetching live data. Currently only used for faking command runs in tests.",
+        )
+
+    def handle(self, *args, **options):
+        wp_editcount_updated = now()
+        if options["datetime"]:
+            wp_editcount_updated = datetime.fromisoformat(options["datetime"])
+
         editors = Editor.objects.filter(wp_bundle_eligible=True)
         for editor in editors:
-            global_userinfo = get_global_userinfo(editor)
+            if options["global_userinfo"]:
+                global_userinfo = options["global_userinfo"]
+            else:
+                global_userinfo = get_global_userinfo(editor)
             if global_userinfo:
                 editor.wp_editcount_prev_updated, editor.wp_editcount_prev, editor.wp_editcount_recent, editor.wp_enough_recent_edits = editor_recent_edits(
                     global_userinfo["editcount"],
@@ -48,7 +68,7 @@ class Command(BaseCommand):
                     editor.wp_enough_recent_edits,
                 )
                 editor.wp_editcount = global_userinfo["editcount"]
-                editor.wp_editcount_updated = now()
+                editor.wp_editcount_updated = wp_editcount_updated
                 editor.wp_enough_edits = editor_enough_edits(global_userinfo)
                 editor.wp_valid = editor_valid(
                     editor.wp_enough_edits,
