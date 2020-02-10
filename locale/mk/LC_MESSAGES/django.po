@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2020-01-20 10:47:42+0000\n"
+"PO-Revision-Date: 2020-02-10 14:05:38+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2327,13 +2327,13 @@ msgstr ""
 #: TWLight/templates/registration/password_change_form.html:11
 #: TWLight/users/templates/users/preferences.html:39
 msgid "Change password"
-msgstr "Смени јавка"
+msgstr "Смени лозинка"
 
 #. Translators: Found on the page for resetting your password.
 #: TWLight/templates/registration/password_reset_form.html:7
 #: TWLight/templates/registration/password_reset_form.html:16
 msgid "Reset password"
-msgstr "Смени јавка"
+msgstr "Смени лозинка"
 
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
 #: TWLight/templates/registration/password_reset_form.html:10
@@ -2776,7 +2776,7 @@ msgstr "Е-пошта"
 #. Translators: This is the heading of the section of a user's profile where they can change their password.
 #: TWLight/users/templates/users/preferences.html:32
 msgid "Password"
-msgstr "Јавка"
+msgstr "Лозинка"
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
 #: TWLight/users/templates/users/preferences.html:51
