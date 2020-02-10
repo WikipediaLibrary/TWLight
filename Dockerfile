@@ -22,12 +22,13 @@ RUN apk add \
     python3-dev \
     zlib-dev ;\
     virtualenv /venv ;\
-    source /venv/bin/activate ;\
+    source /venv/bin/activate ; \
+    pip3 install --upgrade --force pip setuptools ; \
     pip3 install -r /requirements/wmf.txt
 
 FROM twlight_base
 COPY --from=twlight_build /venv /venv
-ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/usr/lib/python3.7"
+ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv:/usr/lib/python3.8"
 
 # Runtime dependencies.
 # Refactoring shell code could remove bash dependency
