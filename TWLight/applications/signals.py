@@ -2,7 +2,7 @@ from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import logging
 
-from django.conf import settings
+from TWLight.helpers import site_id
 from django.dispatch import receiver, Signal
 from django.db.models.signals import pre_save, post_save
 from django_comments.signals import comment_was_posted
@@ -17,10 +17,6 @@ from TWLight.users.models import Authorization
 no_more_accounts = Signal(providing_args=["partner_pk"])
 
 logger = logging.getLogger(__name__)
-
-twl_team, created = User.objects.get_or_create(
-    username="TWL Team", email="wikipedialibrary@wikimedia.org"
-)
 
 
 class Reminder(object):
@@ -56,7 +52,6 @@ def under_discussion(sender, comment, request, **kwargs):
                 comment.object_pk
             )
         )
-        pass
 
 
 @receiver(no_more_accounts)
@@ -224,6 +219,10 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
     Invalidates open applications for bundle partners.
     """
 
+    twl_team, created = User.objects.get_or_create(
+        username="TWL Team", email="wikipedialibrary@wikimedia.org"
+    )
+
     if sender == Partner:
         partner = instance
     elif sender == Stream:
@@ -242,9 +241,9 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
 
         for application in applications:
             # Add a comment.
-            comment = Comment(
+            comment = Comment.objects.create(
                 content_object=application,
-                site_id=settings.SITE_ID,
+                site_id=site_id(),
                 user=twl_team,
                 # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
                 comment=_(
