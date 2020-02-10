@@ -37,6 +37,7 @@ def under_discussion(sender, comment, request, **kwargs):
         if (
             application_object.status == Application.PENDING
             and application_object.editor.user.username != request.user.username
+            and application_object.partner.authorization_method != Partner.BUNDLE
         ):
             application_object.status = Application.QUESTION
             application_object.save()
