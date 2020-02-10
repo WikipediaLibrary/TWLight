@@ -1,17 +1,26 @@
-import logging
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from django.db.models.signals import pre_save, post_save
+import logging
+
+from django.conf import settings
 from django.dispatch import receiver, Signal
-from django.utils.timezone import localtime, now
+from django.db.models.signals import pre_save, post_save
 from django_comments.signals import comment_was_posted
-from TWLight.resources.models import Partner
+from django_comments.models import Comment
+from django.contrib.auth.models import User
+from django.utils.timezone import localtime, now
+from django.utils.translation import ugettext as _
+from TWLight.resources.models import Partner, Stream
 from TWLight.applications.models import Application
 from TWLight.users.models import Authorization
 
 no_more_accounts = Signal(providing_args=["partner_pk"])
 
 logger = logging.getLogger(__name__)
+
+twl_team, created = User.objects.get_or_create(
+    username="TWL Team", email="wikipedialibrary@wikimedia.org"
+)
 
 
 class Reminder(object):
@@ -206,3 +215,44 @@ def post_revision_commit(sender, instance, **kwargs):
             authorization.date_expires = date.today() + instance.partner.account_length
 
         authorization.save()
+
+
+@receiver(post_save, sender=Partner)
+@receiver(post_save, sender=Stream)
+def invalidate_bundle_partner_applications(sender, instance, **kwargs):
+    """
+    Invalidates open applications for bundle partners.
+    """
+
+    if sender == Partner:
+        partner = instance
+    elif sender == Stream:
+        partner = instance.partner
+
+    if partner.authorization_method == Partner.BUNDLE:
+        # All open applications for this partner.
+        applications = Application.objects.filter(
+            partner=partner,
+            status__in=(
+                Application.PENDING,
+                Application.QUESTION,
+                Application.APPROVED,
+            ),
+        )
+
+        for application in applications:
+            # Add a comment.
+            comment = Comment(
+                content_object=application,
+                site_id=settings.SITE_ID,
+                user=twl_team,
+                # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
+                comment=_(
+                    "This partner joined the Library Bundle, which does not require applications."
+                    "This application will be marked as invalid."
+                ),
+            )
+            comment.save()
+            # Mark application invalid.
+            application.status = Application.INVALID
+            application.save()
