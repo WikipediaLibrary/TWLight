@@ -2,12 +2,12 @@ import logging
 
 from datetime import timedelta
 
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from TWLight.helpers import site_id
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from django_comments.models import Comment
@@ -39,7 +39,7 @@ class Command(BaseCommand):
         for app in pending_apps:
             if (
                 Comment.objects.filter(
-                    Q(object_pk=str(app.pk), site_id=settings.SITE_ID),
+                    Q(object_pk=str(app.pk), site_id=site_id()),
                     (
                         Q(user=twl_team)
                         | Q(submit_date__gte=(timezone.now() - timedelta(days=8)))
@@ -49,7 +49,7 @@ class Command(BaseCommand):
             ):
                 comment = Comment(
                     content_object=app,
-                    site_id=settings.SITE_ID,
+                    site_id=site_id(),
                     user=twl_team,
                     # Translators: This comment is added to pending applications when our terms of use change.
                     comment=_(
