@@ -1191,7 +1191,11 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
             status=Application.APPROVED, editor__isnull=False
         ).exclude(editor__user__groups__name="restricted")
 
-        partner_list = Partner.objects.filter(applications__in=base_queryset).distinct()
+        partner_list = (
+            Partner.objects.filter(applications__in=base_queryset)
+            .exclude(authorization_method=Partner.BUNDLE)
+            .distinct()
+        )
 
         # Superusers can see all unrestricted applications, otherwise
         # limit to ones from the current coordinator
@@ -1207,11 +1211,12 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
-        apps = (
-            self.get_object()
-            .applications.filter(status=Application.APPROVED, editor__isnull=False)
-            .exclude(editor__user__groups__name="restricted")
-        )
+        partner = self.get_object()
+        if partner.authorization_method == Partner.BUNDLE:
+            raise PermissionDenied
+        apps = partner.applications.filter(
+            status=Application.APPROVED, editor__isnull=False
+        ).exclude(editor__user__groups__name="restricted")
         app_outputs = {}
         stream_outputs = []
         list_unavailable_streams = []
@@ -1224,8 +1229,6 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
         # This part checks to see if there are applications from stream(s) with no accounts available.
         # Additionally, supports send_partner template with total approved/sent applications.
-        partner = self.get_object()
-
         total_apps_approved = Application.objects.filter(
             partner=partner, status=Application.APPROVED
         ).count()
@@ -1271,7 +1274,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 context["total_apps_approved_or_sent"] = None
 
         available_access_codes = AccessCode.objects.filter(
-            partner=self.get_object(), authorization__isnull=True
+            partner=partner, authorization__isnull=True
         )
         context["available_access_codes"] = available_access_codes
 
