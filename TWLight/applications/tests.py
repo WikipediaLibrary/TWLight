@@ -17,7 +17,6 @@ from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.middleware import SessionMiddleware
-from django.contrib.sites.models import Site
 from django.core import mail
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
@@ -27,6 +26,7 @@ from django.http import Http404
 from django.test import TestCase, Client, RequestFactory
 from django.utils.html import escape
 
+from TWLight.helpers import site_id
 from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.resources.tests import EditorCraftRoom
@@ -2993,7 +2993,7 @@ class EvaluateApplicationTest(TestCase):
             user_name=self.coordinator.username,
             user_email=self.coordinator.email,
             comment="A comment",
-            site=Site.objects.get_current(),
+            site_id=site_id(),
         )
         comm.save()
 
@@ -3188,7 +3188,7 @@ class EvaluateApplicationTest(TestCase):
         # Loop through the apps and count comments from twl_team.
         for app in pending_apps:
             twl_comment_count += Comment.objects.filter(
-                object_pk=str(app.pk), site_id=settings.SITE_ID, user=twl_team
+                object_pk=str(app.pk), site_id=site_id(), user=twl_team
             ).count()
         # Run the command again, which should not add more comments to outstanding apps.
         call_command("notify_applicants_tou_changes")
@@ -3290,6 +3290,133 @@ class EvaluateApplicationTest(TestCase):
         response = self.client.get(url)
         # Not even for coordinators
         self.assertNotContains(response, 'name="status"')
+
+    class ListApplicationsTest(BaseApplicationViewTest):
+        @classmethod
+        def setUpClass(cls):
+            super(ListApplicationsTest, cls).setUpClass()
+            cls.superuser = User.objects.create_user(username="super", password="super")
+            cls.superuser.is_superuser = True
+            cls.superuser.save()
+
+            ApplicationFactory(status=Application.PENDING)
+            ApplicationFactory(status=Application.PENDING)
+            ApplicationFactory(status=Application.QUESTION)
+            parent = ApplicationFactory(status=Application.APPROVED)
+            ApplicationFactory(status=Application.APPROVED)
+            ApplicationFactory(status=Application.NOT_APPROVED)
+            ApplicationFactory(status=Application.NOT_APPROVED)
+            ApplicationFactory(status=Application.NOT_APPROVED)
+            ApplicationFactory(status=Application.INVALID)
+            ApplicationFactory(status=Application.INVALID)
+
+            # Make sure there are some up-for-renewal querysets, too.
+            ApplicationFactory(status=Application.PENDING, parent=parent)
+            ApplicationFactory(status=Application.QUESTION, parent=parent)
+            ApplicationFactory(status=Application.APPROVED, parent=parent)
+            ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
+            ApplicationFactory(status=Application.SENT, parent=parent)
+
+            user = UserFactory(username="editor")
+            editor = EditorFactory(user=user)
+
+            # And some applications from a user who will delete their account.
+            ApplicationFactory(status=Application.PENDING, editor=editor)
+            ApplicationFactory(status=Application.QUESTION, editor=editor)
+            ApplicationFactory(status=Application.APPROVED, editor=editor)
+            ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
+            ApplicationFactory(status=Application.SENT, editor=editor)
+
+
+class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
+    @classmethod
+    def setUpClass(cls):
+        super(SignalsUpdateApplicationsTest, cls).setUpClass()
+
+        parent = ApplicationFactory(status=Application.APPROVED)
+        user = UserFactory(username="editor")
+        editor = EditorFactory(user=user)
+
+        ApplicationFactory(status=Application.PENDING)
+        ApplicationFactory(status=Application.PENDING)
+        ApplicationFactory(status=Application.QUESTION)
+        ApplicationFactory(status=Application.APPROVED)
+        ApplicationFactory(status=Application.NOT_APPROVED)
+        ApplicationFactory(status=Application.NOT_APPROVED)
+        ApplicationFactory(status=Application.NOT_APPROVED)
+        ApplicationFactory(status=Application.INVALID)
+        ApplicationFactory(status=Application.INVALID)
+
+        # Make sure there are some up-for-renewal querysets, too.
+        ApplicationFactory(status=Application.PENDING, parent=parent)
+        ApplicationFactory(status=Application.QUESTION, parent=parent)
+        ApplicationFactory(status=Application.APPROVED, parent=parent)
+        ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
+        ApplicationFactory(status=Application.SENT, parent=parent)
+
+        # And some applications from a user who will delete their account.
+        ApplicationFactory(status=Application.PENDING, editor=editor)
+        ApplicationFactory(status=Application.QUESTION, editor=editor)
+        ApplicationFactory(status=Application.APPROVED, editor=editor)
+        ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
+        ApplicationFactory(status=Application.SENT, editor=editor)
+
+    def test_invalidate_bundle_partner_applications_signal(self):
+        """
+        Test partner post_save signal fires correctly, updating Open applications for bundle partners to Invalid.
+        """
+
+        available_partners = Partner.objects.filter(status__in=[Partner.AVAILABLE])
+
+        # count invalid apps for available partners.
+        invalid_apps_count = Application.include_invalid.filter(
+            status__in=[Application.INVALID],
+            partner__in=available_partners,
+        ).count()
+        # count open apps for available partners.
+        open_apps_count = Application.objects.filter(
+            status__in=[
+                Application.PENDING,
+                Application.QUESTION,
+                Application.APPROVED,
+            ],
+            partner__in=available_partners,
+        ).count()
+        # None of the following comparisons are going to be valid if we've bungled things and don't have open apps.
+        self.assertGreater(open_apps_count, 0)
+
+        # Change all available partners to bundle.
+        for partner in available_partners:
+            partner.authorization_method = Partner.BUNDLE
+            partner.save()
+
+        # recount invalid apps for available partners.
+        post_save_invalid_apps_count = Application.include_invalid.filter(
+            status__in=[Application.INVALID],
+            partner__in=available_partners,
+        ).count()
+        # recount open apps for available partners.
+        post_save_open_apps_count = Application.objects.filter(
+            status__in=[
+                Application.PENDING,
+                Application.QUESTION,
+                Application.APPROVED,
+            ],
+            partner__in=available_partners,
+        ).count()
+
+        # We should have more invalid apps.
+        self.assertGreater(post_save_invalid_apps_count, invalid_apps_count)
+        # We should have fewer open apps
+        self.assertLess(post_save_open_apps_count, open_apps_count)
+
+        # None of those applications should be open now.
+        self.assertEqual(post_save_open_apps_count, 0)
+
+        # We should have gained the number of invalid apps that are no longer counted as open
+        self.assertEqual(
+            post_save_invalid_apps_count, invalid_apps_count + open_apps_count
+        )
 
 
 class BatchEditTest(TestCase):
