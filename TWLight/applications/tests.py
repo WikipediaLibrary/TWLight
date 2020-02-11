@@ -3455,8 +3455,7 @@ class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
 
         # count invalid apps for available partners.
         invalid_apps_count = Application.include_invalid.filter(
-            status__in=[Application.INVALID],
-            partner__in=available_partners,
+            status__in=[Application.INVALID], partner__in=available_partners,
         ).count()
         # count open apps for available partners.
         open_apps_count = Application.objects.filter(
@@ -3477,8 +3476,7 @@ class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
 
         # recount invalid apps for available partners.
         post_save_invalid_apps_count = Application.include_invalid.filter(
-            status__in=[Application.INVALID],
-            partner__in=available_partners,
+            status__in=[Application.INVALID], partner__in=available_partners,
         ).count()
         # recount open apps for available partners.
         post_save_open_apps_count = Application.objects.filter(
