@@ -6,7 +6,6 @@ from unittest.mock import patch
 
 from django.test import Client, RequestFactory
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 
@@ -14,6 +13,7 @@ from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.applications.views import SendReadyApplicationsView
 from TWLight.resources.models import Partner, Stream, AccessCode
+from TWLight.users.models import Editor
 
 
 def logged_in_example_coordinator(client, coordinator):
@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
         available_partners = Partner.objects.all()
         # Don't fire any applications from the superuser.
-        all_users = User.objects.exclude(is_superuser=True)
+        all_editors = Editor.objects.exclude(user__is_superuser=True)
 
         import_date = datetime.datetime(2017, 7, 17, 0, 0, 0)
 
@@ -62,15 +62,15 @@ class Command(BaseCommand):
         ]
 
         for _ in range(num_applications):
-            random_user = random.choice(all_users)
+            random_editor = random.choice(all_editors)
             # Limit to partners this user hasn't already applied to.
             not_applied_partners = available_partners.exclude(
-                applications__editor=random_user.editor
+                applications__editor=random_editor
             )
             random_partner = random.choice(not_applied_partners)
 
             app = ApplicationFactory(
-                editor=random_user.editor,
+                editor=random_editor,
                 partner=random_partner,
                 hidden=self.chance(True, False, 10),
             )
@@ -107,10 +107,10 @@ class Command(BaseCommand):
                 app.status = random.choice(valid_choices)
 
                 # Figure out earliest valid date for this app
-                if random_user.editor.wp_registered < import_date.date():
+                if random_editor.wp_registered < import_date.date():
                     start_date = import_date
                 else:
-                    start_date = random_user.editor.wp_registered
+                    start_date = random_editor.wp_registered
 
                 app.date_created = Faker(
                     random.choice(settings.FAKER_LOCALES)
