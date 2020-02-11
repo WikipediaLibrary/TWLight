@@ -545,6 +545,8 @@ class Editor(models.Model):
             self.wp_editcount = global_userinfo["editcount"]
             self.wp_editcount_updated = now()
 
+        self.save()
+
         # This will be True the first time the user logs in, since use_wp_email
         # defaults to True. Therefore we will initialize the email field if
         # they have an email at WP for us to initialize it with.
