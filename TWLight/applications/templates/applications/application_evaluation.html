@@ -219,7 +219,7 @@
   <h2>{% trans 'Discussion' %}</h2>
   {% render_comment_list for object %}
 
-  {% if not object.user|restricted and not object.partner.authorization_method == object.partner.BUNDLE %}
+  {% if not object.user|restricted %}
     {% get_comment_form for object as form %}
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-3">
