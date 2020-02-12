@@ -58,30 +58,32 @@ class HomePageView(TemplateView):
         if self.request.user.is_authenticated():
             editor = self.request.user.editor
             sufficient_edits = editor.wp_editcount > 500
-            sufficient_tenure = editor.wp_registered < date.today() + relativedelta.relativedelta(months=-6)
+            sufficient_tenure = editor.wp_registered < date.today() + relativedelta.relativedelta(
+                months=-6
+            )
             sufficient_recent_edits = False  # TODO: Implement
         else:
             sufficient_edits = False
             sufficient_tenure = False
             sufficient_recent_edits = False
 
-        context['bundle_criteria'] = [('500+ edits', sufficient_edits),
-                                      ('6+ months editing', sufficient_tenure),
-                                      ('10+ edits in the last month', sufficient_recent_edits)]
+        context["bundle_criteria"] = [
+            ("500+ edits", sufficient_edits),
+            ("6+ months editing", sufficient_tenure),
+            ("10+ edits in the last month", sufficient_recent_edits),
+        ]
 
         # Partner count
         # -----------------------------------------------------
 
         context["partner_count"] = Partner.objects.all().count()
-        context['bundle_partner_count'] = Partner.objects.filter(
+        context["bundle_partner_count"] = Partner.objects.filter(
             authorization_method=Partner.BUNDLE
         ).count()
 
         # Apply section
         # -----------------------------------------------------
 
-        context['featured_partners'] = Partner.objects.filter(
-            featured=True
-        )[:3]
+        context["featured_partners"] = Partner.objects.filter(featured=True)[:3]
 
         return context
