@@ -54,14 +54,11 @@ class HomePageView(TemplateView):
 
         # We bundle these up into a list so that we can loop them and have a simpler time
         # setting the relevant CSS.
-        # TODO: This will need unifying/centralising with Bundle mechanism
         if self.request.user.is_authenticated():
             editor = self.request.user.editor
-            sufficient_edits = editor.wp_editcount > 500
-            sufficient_tenure = editor.wp_registered < date.today() + relativedelta.relativedelta(
-                months=-6
-            )
-            sufficient_recent_edits = False  # TODO: Implement
+            sufficient_edits = editor.wp_enough_edits
+            sufficient_tenure = editor.wp_account_old_enough
+            sufficient_recent_edits = editor.wp_enough_recent_edits
         else:
             sufficient_edits = False
             sufficient_tenure = False
