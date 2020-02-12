@@ -313,7 +313,7 @@ class OAuthInitializeView(View):
                     'for post-login redirection per "next" parameter.'
                 )
             except KeyError:
-                return_url = reverse_lazy('homepage')
+                return_url = reverse_lazy("homepage")
                 logger.warning(
                     'User already authenticated. No "next" '
                     "parameter for post-login redirection."
@@ -501,7 +501,7 @@ class OAuthCallbackView(View):
                             'post-login redirection per "next" parameter.'
                         )
                     except KeyError:
-                        return_url = reverse_lazy('homepage')
+                        return_url = reverse_lazy("homepage")
                         logger.warning(
                             'User authenticated. No "next" parameter '
                             "for post-login redirection."
