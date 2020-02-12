@@ -467,8 +467,7 @@ class RequestApplicationTest(BaseApplicationViewTest):
         # Make sure there's a session key - otherwise we'll get redirected to
         # /applications/request before we hit the login test
         p1 = PartnerFactory()
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
 
         with self.assertRaises(PermissionDenied):
             _ = views.RequestApplicationView.as_view()(request)
@@ -563,6 +562,12 @@ class RequestApplicationTest(BaseApplicationViewTest):
         _ = PartnerFactory()
         _ = PartnerFactory()
 
+        form_class = view.get_form_class()
+        form = form_class()
+        self.assertEqual(len(form.fields), 4)
+
+        # Add BUNDLE partners and ensure the form fields remain intact
+        PartnerFactory(authorization_method=Partner.BUNDLE)
         form_class = view.get_form_class()
         form = form_class()
         self.assertEqual(len(form.fields), 4)
@@ -691,8 +696,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # Make sure there's a session key - otherwise we'll get redirected to
         # /applications/request before we hit the login test
         p1 = PartnerFactory()
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
 
         with self.assertRaises(PermissionDenied):
             _ = views.SubmitApplicationView.as_view()(request)
@@ -719,8 +723,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         factory = RequestFactory()
         request = factory.get(self.url)
         p1 = PartnerFactory()
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
         user = UserFactory()
         user.userprofile.terms_of_use = True
         user.userprofile.save()
@@ -761,8 +764,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.get(self.url)
         request.user = self.editor
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = []
+        request.session = {views.PARTNERS_SESSION_KEY: []}
 
         response = views.SubmitApplicationView.as_view()(request)
 
@@ -782,8 +784,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         request.user = self.editor
 
         # Invalid pk: not an integer
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = ["cats"]
+        request.session = {views.PARTNERS_SESSION_KEY: ["cats"]}
         response = views.SubmitApplicationView.as_view()(request)
 
         self.assertEqual(response.status_code, 302)
@@ -812,8 +813,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         # Make sure there's a session key - otherwise we'll get redirected to
         # /applications/request before we hit the login test
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
 
         response = views.SubmitApplicationView.as_view()(request)
         self.assertEqual(response.status_code, 200)
@@ -1027,6 +1027,17 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         user.delete()
 
+    def test_403_on_bundle_application(self):
+        """
+        Users shouldn't be allowed to post new applications for BUNDLE
+        partners, but if they try to, throw a 403
+        """
+        EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(authorization_method=Partner.BUNDLE)
+        url = reverse("applications:apply_single", kwargs={"pk": partner.id})
+        response = self.client.get(url, follow=True)
+        self.assertEqual(response.status_code, 403)
+
     def test_redirection_on_success(self):
         """
         Make sure we redirect to the expected page upon posting a valid form.
@@ -1051,8 +1062,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.post(self.url, data)
         request.user = self.editor
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.id]}
 
         response = views.SubmitApplicationView.as_view()(request)
 
@@ -1104,8 +1114,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.post(self.url, data)
         request.user = user
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.id]}
 
         _ = views.SubmitApplicationView.as_view()(request)
         editor = user.editor
@@ -1168,8 +1177,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.post(self.url, data)
         request.user = self.editor
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.id, p2.id]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.id, p2.id]}
 
         _ = views.SubmitApplicationView.as_view()(request)
 
@@ -1252,10 +1260,10 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # Use set(), because order is unimportant.
         self.assertEqual(
             set(view._get_partner_fields(p1)),
-            set(["specific_title", "agreement_with_terms_of_use"]),
+            {"specific_title", "agreement_with_terms_of_use"},
         )
 
-        self.assertEqual(set(view._get_partner_fields(p2)), set(["specific_stream"]))
+        self.assertEqual(set(view._get_partner_fields(p2)), {"specific_stream"})
 
     def test_get_user_fields(self):
 
@@ -1287,7 +1295,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         self.assertEqual(
             set(view._get_user_fields(partners)),
-            set(["real_name", "occupation", "affiliation"]),
+            {"real_name", "occupation", "affiliation"},
         )
 
     def test_deleted_field_invalid(self):
@@ -1441,8 +1449,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # /applications/request before we hit the login test
         p1 = PartnerFactory()
         p1.coordinator = self.coordinator
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
 
         with self.assertRaises(PermissionDenied):
             _ = view.as_view()(request)
