@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 user_lang=authorization_object.user.userprofile.lang,
                 partner_name=authorization_object.partner.company_name,
                 partner_link=reverse(
-                    "users:my_collection",
+                    "users:my_library",
                     kwargs={"pk": authorization_object.user.editor.pk},
                 ),
             )

@@ -47,14 +47,14 @@
     {% else %}
       <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary text-center visible-xs z-index-100 {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
       {% if has_open_apps or has_auths %}
-        {% url 'users:my_collection' user.editor.pk as collection_url %}
+        {% url 'users:my_library' user.editor.pk as library_url %}
         {% url 'users:my_applications' user.editor.pk as applications_url %}
         <div class="panel panel-default visible-xs">
           <div class="panel-body top-border">
             {% if has_auths %}
               {% comment %} Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
               {% blocktrans trimmed %}
-                View the status of your access(es) in <strong><a href="{{ collection_url }}">Your Collection</a></strong> page.
+                View the status of your access(es) in <strong><a href="{{ library_url }}">Your Collection</a></strong> page.
               {% endblocktrans %}
               {% if has_open_apps %}
                 <hr />
@@ -394,14 +394,14 @@
           {% else %}
             <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary btn-lg hidden-xs btn-block {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
             {% if has_open_apps or has_auths %}
-              {% url 'users:my_collection' user.editor.pk as collection_url %}
+              {% url 'users:my_library' user.editor.pk as library_url %}
               {% url 'users:my_applications' user.editor.pk as applications_url %}
               <div class="panel panel-default hidden-xs">
                 <div class="panel-body top-border">
                   {% if has_auths %}
                     {% comment %} Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
                     {% blocktrans trimmed %}
-                      View the status of your access(es) in <strong><a href="{{ collection_url }}">Your Collection</a></strong> page.
+                      View the status of your access(es) in <strong><a href="{{ library_url }}">Your Collection</a></strong> page.
                     {% endblocktrans %}
                     {% if has_open_apps %}
                       <hr />
