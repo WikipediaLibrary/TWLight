@@ -10,9 +10,35 @@
   </a>
   <ul class="nav nav-tabs">
     {% comment %} Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access). {% endcomment %}
-    <li {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}class="active"{% elif not manual_authorizations and not manual_authorizations_expired %}class="active"{% endif %}><a data-toggle="tab" href="#proxy">{%  trans 'Proxy/bundle access' %} <span class="badge">{{ proxy_bundle_authorizations.count }}</span></a></li>
+    <li
+      {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}
+        class="active"
+      {% elif not manual_authorizations and not manual_authorizations_expired %}
+        class="active"
+      {% endif %}
+    >
+      <a data-toggle="tab" href="#proxy">
+        {% trans 'Proxy/bundle access' %}
+        <span class="badge">
+          {{ proxy_bundle_authorizations.count }}
+        </span>
+      </a>
+    </li>
     {% comment %} Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually. {% endcomment %}
-    <li {% if manual_authorizations or manual_authorizations_expired %}{% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}class="active"{% endif %}{% endif %}><a data-toggle="tab" href="#manual">{%  trans 'Manual access' %} <span class="badge">{{ manual_authorizations.count }}</span></a></li>
+    <li
+      {% if manual_authorizations or manual_authorizations_expired %}
+        {% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}
+          class="active"
+        {% endif %}
+      {% endif %}
+    >
+      <a data-toggle="tab" href="#manual">
+        {% trans 'Manual access' %}
+        <span class="badge">
+          {{ manual_authorizations.count }}
+        </span>
+      </a>
+    </li>
   </ul>
   <div class="tab-content">
     <div id="proxy" class="tab-pane fade {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}in active{% elif not manual_authorizations and not manual_authorizations_expired %}in active{% endif %}">
