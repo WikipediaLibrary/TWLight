@@ -496,8 +496,7 @@ class RequestApplicationTest(BaseApplicationViewTest):
         factory = RequestFactory()
         request = factory.get(self.url)
         p1 = PartnerFactory()
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
         user = UserFactory()
         user.userprofile.terms_of_use = True
         user.userprofile.save()
@@ -645,11 +644,27 @@ class RequestApplicationTest(BaseApplicationViewTest):
         # is sensitive to order, let's check first that both lists have the
         # same elements, and second that they are of the same length.
         self.assertEqual(
-            set(request.session[views.PARTNERS_SESSION_KEY]), set([p2.id, p1.id])
+            set(request.session[views.PARTNERS_SESSION_KEY]), {p2.id, p1.id}
         )
         self.assertEqual(
             len(request.session[views.PARTNERS_SESSION_KEY]), len([p2.id, p1.id])
         )
+
+    def test_bundle_partner_in_form_data(self):
+        """
+        Building upon the previous test function, this tests for
+        the appropriate handling of BUNDLE partners in the posted
+        data (they shouldn't get added to the session key.
+        """
+        p1 = PartnerFactory()
+        p2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        data = {
+            "partner_{id}".format(id=p1.id): True,
+            "partner_{id}".format(id=p2.id): True,
+        }
+        request = self._get_request_with_session(data)
+        self.assertEqual(request.session[views.PARTNERS_SESSION_KEY], [p1.id])
 
 
 class SubmitApplicationTest(BaseApplicationViewTest):
