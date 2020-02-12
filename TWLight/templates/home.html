@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 login">
       {% if user.is_authenticated %}
-        <a href="{% url 'users:my_library' pk=user.pk %}" class="btn btn-default btn-block">
+        <a href="{% url 'users:my_library' pk=user.pk %}" class="btn btn-primary btn-block">
           {% comment %} Translators: On the homepage, this message labels a button users can click to go to the 'My Library' page, which lists their available collections. {% endcomment %}
           {% trans "Your library" %}
         </a>
