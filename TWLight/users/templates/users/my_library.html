@@ -41,7 +41,13 @@
     </li>
   </ul>
   <div class="tab-content">
-    <div id="proxy" class="tab-pane fade {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}in active{% elif not manual_authorizations and not manual_authorizations_expired %}in active{% endif %}">
+    <div id="proxy" class="tab-pane fade
+      {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}
+        in active
+      {% elif not manual_authorizations and not manual_authorizations_expired %}
+        in active
+      {% endif %}
+    ">
       <br>
       <div class="row row-flex">
         {% for each_authorization in proxy_bundle_authorizations %}
@@ -68,7 +74,13 @@
         {% endfor %}
       </div>
     </div>
-    <div id="manual" class="tab-pane fade {% if manual_authorizations or manual_authorizations_expired %}{% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}in active{% endif %}{% endif %}">
+    <div id="manual" class="tab-pane fade
+      {% if manual_authorizations or manual_authorizations_expired %}
+        {% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}
+          in active
+        {% endif %}
+      {% endif %}
+    ">
       <br>
       <div class="row row-flex">
         {% for each_authorization in manual_authorizations %}
