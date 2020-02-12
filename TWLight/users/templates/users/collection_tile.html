@@ -74,7 +74,7 @@
     <hr>
     {% if each_authorization.is_valid and each_authorization.get_access_url %}
       <div style="text-align: center;">
-        <a href="{{ each_authorization.get_access_url }}" class="btn btn-default
+        <a href="{{ each_authorization.get_access_url }}" class="btn btn-primary
         {% if not each_authorization.user.userprofile.terms_of_use %}
           disabled
         {% endif %}
@@ -96,7 +96,7 @@
     {% if each_authorization.latest_sent_app and not each_authorization.open_app %}
       {% comment %} Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled. {% endcomment %}
       <span class="pull-right" {% if not each_authorization.partner.renewals_available %}title="{% trans 'Renewals are not available for this partner' %}"{% endif %}>
-        <a href="{% url 'applications:renew' each_authorization.latest_sent_app.pk %}" class="btn btn-primary pull-right {% if not each_authorization.partner.renewals_available %}disabled{% endif %}" role="button">
+        <a href="{% url 'applications:renew' each_authorization.latest_sent_app.pk %}" class="btn btn-default pull-right {% if not each_authorization.partner.renewals_available %}disabled{% endif %}" role="button">
           {% if each_authorization.is_valid %}
             {% comment %} Translators: Labels a button users can click to extend the duration of their access. {% endcomment %}
             {% trans 'Extend' %}
