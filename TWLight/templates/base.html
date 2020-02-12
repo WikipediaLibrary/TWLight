@@ -102,12 +102,12 @@
             <li>
               <a href="
                 {% if user.editor %}
-                  {%  url 'users:my_collection' user.editor.pk %}
+                  {% url 'users:my_library' user.editor.pk %}
                 {% endif %}
               ">
                 <i class="fa fa-folder-open-o" aria-hidden="true"></i>
-                {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their collection. {% endcomment %}
-                {% trans "Collection" %}
+                {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their library. {% endcomment %}
+                {% trans "My Library" %}
               </a>
             </li>
             <li>
@@ -118,7 +118,7 @@
               ">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;
                 {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications. {% endcomment %}
-                {% trans "Applications" %}
+                {% trans "My Applications" %}
               </a>
             </li>
             <li class="divider"></li>

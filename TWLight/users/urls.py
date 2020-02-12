@@ -32,9 +32,9 @@ urlpatterns = [
         name="delete_data",
     ),
     url(
-        r"^my_collection/(?P<pk>\d+)/$",
+        r"^my_library/(?P<pk>\d+)/$",
         login_required(views.CollectionUserView.as_view()),
-        name="my_collection",
+        name="my_library",
     ),
     url(
         r"^my_applications/(?P<pk>\d+)/$",
