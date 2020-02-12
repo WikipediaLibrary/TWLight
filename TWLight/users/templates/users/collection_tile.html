@@ -72,16 +72,21 @@
       </div>
     {% endif %}
     <hr>
-    {% if each_authorization.partner.get_access_url and each_authorization.is_valid %}
-      {% comment %} Translators: A button when clicked takes users the resource (external) the authorization represents. {% endcomment %}
+    {% if each_authorization.is_valid and each_authorization.get_access_url %}
       <div style="text-align: center;">
-      <a href="{{ each_authorization.partner.get_access_url }}" class="btn btn-default {% if not each_authorization.user.userprofile.terms_of_use %}disabled{% endif %}" role="button">{% trans 'Access resource' %}</a>
-      </div>
-      <hr>
-    {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
-      {% comment %} Translators: A button when clicked takes users the resource (external) the authorization represents. {% endcomment %}
-      <div style="text-align: center;">
-      <a href="{{ each_authorization.stream.get_access_url }}" class="btn btn-default" role="button">{% trans 'Access resource' %}</a>
+        <a href="{{ each_authorization.get_access_url }}" class="btn btn-default
+        {% if not each_authorization.user.userprofile.terms_of_use %}
+          disabled
+        {% endif %}
+        " role="button">
+          {% if each_authorization.is_accessed_via_proxy %}
+            {% comment %} Translators: Users can click this button to access a collection they have access to. {% endcomment %}
+            {% trans 'Access collection' %}
+          {% else %}
+            {% comment %} Translators: Users can click this button to be taken to the website for a collection. {% endcomment %}
+            {% trans 'Go to site' %}
+          {% endif %}
+        </a>
       </div>
       <hr>
     {% endif %}
