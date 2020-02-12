@@ -289,9 +289,13 @@ class ApplicationAutocomplete(forms.ModelForm):
         model = Application
         fields = ["editor", "partner"]
         widgets = {
-            "editor": autocomplete.ModelSelect2(url="applications:editor_autocomplete"),
+            "editor": autocomplete.ModelSelect2(
+                url="applications:editor_autocomplete",
+                attrs={"data-placeholder": "Username"},
+            ),
             "partner": autocomplete.ModelSelect2(
-                url="applications:partner_autocomplete"
+                url="applications:partner_autocomplete",
+                attrs={"data-placeholder": "Partner"},
             ),
         }
 
