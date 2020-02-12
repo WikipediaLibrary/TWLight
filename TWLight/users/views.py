@@ -690,7 +690,7 @@ class AuthorizedUsers(APIView):
 
 class CollectionUserView(SelfOnly, ListView):
     model = Editor
-    template_name = "users/my_collection.html"
+    template_name = "users/my_library.html"
 
     def get_object(self):
         assert "pk" in list(self.kwargs.keys())
@@ -822,5 +822,5 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
             _("Access to {} has been returned.").format(authorization.partner),
         )
         return HttpResponseRedirect(
-            reverse("users:my_collection", kwargs={"pk": self.request.user.editor.pk})
+            reverse("users:my_library", kwargs={"pk": self.request.user.editor.pk})
         )
