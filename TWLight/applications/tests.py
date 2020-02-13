@@ -2038,6 +2038,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
             sorted([item.pk for item in allow_qs]),
         )
 
+
 class RenewApplicationTest(BaseApplicationViewTest):
     def test_protected_to_self_only(self):
         partner = PartnerFactory(renewals_available=True)
