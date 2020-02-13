@@ -2000,18 +2000,43 @@ class ListApplicationsTest(BaseApplicationViewTest):
         )
         not_a_bundle_partner = PartnerFactory(coordinator=editor.user)
         bundle_app = ApplicationFactory(
-            status=Application.PENDING, partner=bundle_partner, editor=editor.user
+            status=Application.PENDING, partner=bundle_partner, editor=editor
         )
         not_a_bundle_app = ApplicationFactory(
-            status=Application.PENDING, partner=not_a_bundle_partner, editor=editor.user
+            status=Application.PENDING, partner=not_a_bundle_partner, editor=editor
         )
         response = self.client.get(reverse("applications:list"))
         self.assertNotContains(response, bundle_app)
         self.assertContains(response, not_a_bundle_app)
 
     def test_no_bundle_partners_in_filter_form(self):
-        # TODO: Ensure filtering doesn't reveal Bundle apps
+        editor = EditorFactory()
+        self.client.login(username="coordinator", password="coordinator")
+        bundle_partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE, coordinator=self.coordinator
+        )
+        not_a_bundle_partner = PartnerFactory(coordinator=self.coordinator)
+        ApplicationFactory(
+            status=Application.PENDING, partner=bundle_partner, editor=editor
+        )
+        ApplicationFactory(
+            status=Application.PENDING, partner=not_a_bundle_partner, editor=editor
+        )
+        url = reverse("applications:list")
+        factory = RequestFactory()
+        # Post to filter Bundle apps only
+        request = factory.post(url, {"partner": bundle_partner.pk})
+        request.user = self.coordinator
 
+        # We don't expect to see any Bundle apps
+        expected_qs = Application.objects.none()
+        response = views.ListApplicationsView.as_view()(request)
+        allow_qs = response.context_data["object_list"]
+
+        self.assertEqual(
+            sorted([item.pk for item in expected_qs]),
+            sorted([item.pk for item in allow_qs]),
+        )
 
 class RenewApplicationTest(BaseApplicationViewTest):
     def test_protected_to_self_only(self):
