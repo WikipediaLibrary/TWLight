@@ -22,6 +22,7 @@ from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import IntegrityError
+from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
@@ -94,7 +95,9 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Make sure that we aren't leaking info via our form choices.
         if self.request.user.is_superuser:
-            partner_qs = Partner.objects.all().order_by("company_name")
+            partner_qs = Partner.objects.exclude(
+                authorization_method=Partner.BUNDLE
+            ).order_by("company_name")
             # Query by partner name
             if self.q:
                 partner_qs = partner_qs.filter(
@@ -671,6 +674,7 @@ class ListApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             base_qs = (
                 Application.objects.filter(
+                    ~Q(partner__authorization_method=Partner.BUNDLE),
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
                     editor__isnull=False,
@@ -682,6 +686,7 @@ class ListApplicationsView(_BaseListApplicationView):
         else:
             base_qs = (
                 Application.objects.filter(
+                    ~Q(partner__authorization_method=Partner.BUNDLE),
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
                     partner__coordinator__pk=self.request.user.pk,
@@ -715,7 +720,9 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             return (
                 Application.objects.filter(
-                    status=Application.APPROVED, editor__isnull=False
+                    ~Q(partner__authorization_method=Partner.BUNDLE),
+                    status=Application.APPROVED,
+                    editor__isnull=False,
                 )
                 .exclude(editor__user__groups__name="restricted")
                 .order_by("status", "partner", "date_created")
@@ -723,6 +730,7 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         else:
             return (
                 Application.objects.filter(
+                    ~Q(partner__authorization_method=Partner.BUNDLE),
                     status=Application.APPROVED,
                     partner__coordinator__pk=self.request.user.pk,
                     editor__isnull=False,
@@ -745,11 +753,13 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.include_invalid.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.NOT_APPROVED, Application.INVALID],
                 editor__isnull=False,
             ).order_by("date_closed", "partner")
         else:
             return Application.include_invalid.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.NOT_APPROVED, Application.INVALID],
                 partner__coordinator__pk=self.request.user.pk,
                 editor__isnull=False,
@@ -774,12 +784,14 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.PENDING, Application.QUESTION],
                 parent__isnull=False,
                 editor__isnull=False,
             ).order_by("-date_created")
         else:
             return Application.objects.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.PENDING, Application.QUESTION],
                 partner__coordinator__pk=self.request.user.pk,
                 parent__isnull=False,
@@ -801,10 +813,13 @@ class ListSentApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                status=Application.SENT, editor__isnull=False
+                ~Q(partner__authorization_method=Partner.BUNDLE),
+                status=Application.SENT,
+                editor__isnull=False,
             ).order_by("date_closed", "partner")
         else:
             return Application.objects.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status=Application.SENT,
                 partner__coordinator__pk=self.request.user.pk,
                 editor__isnull=False,

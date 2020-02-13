@@ -53,6 +53,7 @@ from .helpers import (
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
+from .views import PartnerAutocompleteView
 
 
 class SendCoordinatorRemindersTest(TestCase):
@@ -1991,6 +1992,56 @@ class ListApplicationsTest(BaseApplicationViewTest):
         instance.get_context_data()
 
         self.assertTrue(hasattr(instance, "object_list"))
+
+    def test_no_bundle_partners_in_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE, coordinator=editor.user
+        )
+        not_a_bundle_partner = PartnerFactory(coordinator=editor.user)
+        bundle_app = ApplicationFactory(
+            status=Application.PENDING, partner=bundle_partner, editor=editor.user
+        )
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.PENDING, partner=not_a_bundle_partner, editor=editor.user
+        )
+        response = self.client.get(reverse("applications:list"))
+        self.assertNotContains(response, bundle_app)
+        self.assertContains(response, not_a_bundle_app)
+
+    def test_no_bundle_partners_in_filter_form(self):
+        _, new_partner, url = self._test_queryset_filtered_base()
+
+        factory = RequestFactory()
+        request = factory.post(url, {"partner": new_partner.pk})
+        request.user = self.coordinator
+
+        expected_qs = Application.objects.filter(
+            status__in=[Application.PENDING, Application.QUESTION], partner=new_partner
+        )
+
+        # reponse for view when user isn't the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        deny_qs = response.context_data["object_list"]
+
+        # Designate the coordinator
+        for obj in expected_qs:
+            partner = Partner.objects.get(pk=obj.partner.pk)
+            partner.coordinator = self.coordinator
+            partner.save()
+
+        # reponse for view when user is the designated coordinator
+        response = views.ListApplicationsView.as_view()(request)
+        allow_qs = response.context_data["object_list"]
+
+        # Applications should not be visible to just any coordinator
+        self.assertFalse(deny_qs)
+
+        # Applications should be visible to the designated coordinator
+        self.assertEqual(
+            sorted([item.pk for item in expected_qs]),
+            sorted([item.pk for item in allow_qs]),
+        )
 
 
 class RenewApplicationTest(BaseApplicationViewTest):
