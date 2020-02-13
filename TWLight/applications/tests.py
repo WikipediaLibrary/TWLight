@@ -2010,38 +2010,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.assertContains(response, not_a_bundle_app)
 
     def test_no_bundle_partners_in_filter_form(self):
-        _, new_partner, url = self._test_queryset_filtered_base()
-
-        factory = RequestFactory()
-        request = factory.post(url, {"partner": new_partner.pk})
-        request.user = self.coordinator
-
-        expected_qs = Application.objects.filter(
-            status__in=[Application.PENDING, Application.QUESTION], partner=new_partner
-        )
-
-        # reponse for view when user isn't the designated coordinator
-        response = views.ListApplicationsView.as_view()(request)
-        deny_qs = response.context_data["object_list"]
-
-        # Designate the coordinator
-        for obj in expected_qs:
-            partner = Partner.objects.get(pk=obj.partner.pk)
-            partner.coordinator = self.coordinator
-            partner.save()
-
-        # reponse for view when user is the designated coordinator
-        response = views.ListApplicationsView.as_view()(request)
-        allow_qs = response.context_data["object_list"]
-
-        # Applications should not be visible to just any coordinator
-        self.assertFalse(deny_qs)
-
-        # Applications should be visible to the designated coordinator
-        self.assertEqual(
-            sorted([item.pk for item in expected_qs]),
-            sorted([item.pk for item in allow_qs]),
-        )
+        # TODO: Ensure filtering doesn't reveal Bundle apps
 
 
 class RenewApplicationTest(BaseApplicationViewTest):
