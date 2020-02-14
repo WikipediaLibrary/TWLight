@@ -47,7 +47,7 @@
     {% else %}
       <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary text-center visible-xs z-index-100 {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
       {% if has_open_apps or has_auths %}
-        {% url 'users:my_library' user.editor.pk as library_url %}
+        {% url 'users:my_library' as library_url %}
         {% url 'users:my_applications' user.editor.pk as applications_url %}
         <div class="panel panel-default visible-xs">
           <div class="panel-body top-border">
@@ -394,7 +394,7 @@
           {% else %}
             <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary btn-lg hidden-xs btn-block {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
             {% if has_open_apps or has_auths %}
-              {% url 'users:my_library' user.editor.pk as library_url %}
+              {% url 'users:my_library' as library_url %}
               {% url 'users:my_applications' user.editor.pk as applications_url %}
               <div class="panel panel-default hidden-xs">
                 <div class="panel-body top-border">

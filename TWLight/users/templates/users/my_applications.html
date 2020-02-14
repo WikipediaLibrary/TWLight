@@ -5,7 +5,7 @@
 {% block content %}
   {% comment %} Translators: Heading of the applications page where users can view all of their applications listed with other relevant info. {% endcomment %}
   <h3 class="inline-header">{% trans 'Your applications' %}</h3>
-    <a href="{% url 'users:my_library' user.editor.pk %}" class="btn btn-default pull-right">
+    <a href="{% url 'users:my_library' %}" class="btn btn-default pull-right">
     {% comment %} Translators: A button on the 'your applications' page which when clicked takes users their collection page. {% endcomment %}
     {% trans "My Library" %}
   </a>
