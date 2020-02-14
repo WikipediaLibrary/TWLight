@@ -16,7 +16,7 @@ from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.views.generic.base import TemplateView, View
+from django.views.generic.base import TemplateView, View, RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
@@ -824,3 +824,8 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
         return HttpResponseRedirect(
             reverse("users:my_library", kwargs={"pk": self.request.user.editor.pk})
         )
+
+
+class LibraryRedirectView(RedirectView):
+    permanent = True
+    pattern_name = 'users:my_library'
