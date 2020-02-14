@@ -67,10 +67,14 @@ class HomePageView(TemplateView):
             not_blocked = False
 
         context["bundle_criteria"] = [
-            ("500+ edits", sufficient_edits),
-            ("6+ months editing", sufficient_tenure),
-            ("10+ edits in the last month", sufficient_recent_edits),
-            ("No active blocks", not_blocked),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
+            (_("500+ edits"), sufficient_edits),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
+            (_("6+ months editing"), sufficient_tenure),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
+            (_("10+ edits in the last month"), sufficient_recent_edits),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
+            (_("No active blocks"), not_blocked),
         ]
 
         # Partner count
