@@ -297,7 +297,7 @@ class ViewsTestCase(TestCase):
         request = factory.get(reverse("users:my_library"))
         request.user = self.user_editor
 
-        response = views.CollectionUserView.as_view()(request, pk=self.editor1.pk)
+        response = views.CollectionUserView.as_view()(request)
 
         for each_authorization in response.context_data["proxy_bundle_authorizations"]:
             self.assertEqual(each_authorization.user, self.user_editor)
