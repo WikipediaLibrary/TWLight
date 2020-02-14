@@ -46,4 +46,10 @@ urlpatterns = [
         login_required(views.AuthorizationReturnView.as_view()),
         name="return_authorization",
     ),
+    # Temporary redirect from my_collection to my_library following a rename
+    url(
+        r"^my_collection/(?P<pk>\d+)/$",
+        views.LibraryRedirectView.as_view(),
+        name='my_collection'
+    ),
 ]
