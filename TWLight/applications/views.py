@@ -1169,7 +1169,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 request, *args, **kwargs
             )
         else:
-            raise Http404("Application's for this Partner are sent automatically")
+            raise Http404("Applications for this Partner are sent automatically")
 
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
