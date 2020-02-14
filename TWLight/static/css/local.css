@@ -236,12 +236,6 @@ nav .divider {
 	float:left; 
 	padding:0px 10px 0px 0px;
 }
-
-.login .btn {
-	padding:10px 12px;
-	font-size: 1em;
-	margin:10px;
-}
 }
 
 /*
@@ -525,7 +519,7 @@ A few spots just need padding instead of margin.
   border:1px solid #c9c9c9;
   border-radius:4px;
   box-shadow:1px 1px 2px #eaeaea;
-  margin:20px 20px 0px 0px;
+  margin-top:20px;
   min-height:350px;
 }
 
