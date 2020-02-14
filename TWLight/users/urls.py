@@ -50,6 +50,6 @@ urlpatterns = [
     url(
         r"^my_collection/(?P<pk>\d+)/$",
         views.LibraryRedirectView.as_view(),
-        name='my_collection'
+        name="my_collection",
     ),
 ]

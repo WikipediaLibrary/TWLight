@@ -817,11 +817,9 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
             messages.SUCCESS,
             _("Access to {} has been returned.").format(authorization.partner),
         )
-        return HttpResponseRedirect(
-            reverse("users:my_library")
-        )
+        return HttpResponseRedirect(reverse("users:my_library"))
 
 
 class LibraryRedirectView(RedirectView):
     permanent = True
-    url = reverse_lazy('users:my_library')
+    url = reverse_lazy("users:my_library")
