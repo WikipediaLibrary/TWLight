@@ -59,15 +59,18 @@ class HomePageView(TemplateView):
             sufficient_edits = editor.wp_enough_edits
             sufficient_tenure = editor.wp_account_old_enough
             sufficient_recent_edits = editor.wp_enough_recent_edits
+            not_blocked = editor.wp_not_blocked
         else:
             sufficient_edits = False
             sufficient_tenure = False
             sufficient_recent_edits = False
+            not_blocked = False
 
         context["bundle_criteria"] = [
             ("500+ edits", sufficient_edits),
             ("6+ months editing", sufficient_tenure),
             ("10+ edits in the last month", sufficient_recent_edits),
+            ("No active blocks", not_blocked),
         ]
 
         # Partner count
