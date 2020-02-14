@@ -1161,6 +1161,16 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
     model = Partner
     template_name = "applications/send_partner.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        partner = self.get_object()
+        auth_method = partner.authorization_method
+        if auth_method == Partner.EMAIL or auth_method == Partner.CODES:
+            return super(SendReadyApplicationsView, self).dispatch(
+                request, *args, **kwargs
+            )
+        else:
+            raise Http404("Applications for this Partner are sent automatically")
+
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
         apps = (
