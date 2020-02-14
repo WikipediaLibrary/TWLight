@@ -8,7 +8,7 @@
     <p>
       {% comment %} Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
       {% blocktrans trimmed %}
-        The Wikipedia Library provides free access to research databases and resources.
+        The Wikipedia Library provides free access to research databases and collections.
   		{% endblocktrans %}
       <a href="{% url 'about' %}">{% trans "Learn more" %}</a>
 		</p>
@@ -33,8 +33,8 @@
 
   <div class="row">
 	  <div class="col-md-5 col-md-offset-1">
-      {% comment %} Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
       <div class="border border-homepage">
+        {% comment %} Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
         <h2 style="padding-bottom:20px;">{% trans "Library Bundle" %}
           <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive bundle-icon" alt="
           {% comment %} Translators: Alt text for the Library Bundle logo. {% endcomment %}
@@ -90,10 +90,10 @@
 	  </div>
 
 	  <div class="col-md-5">
-      {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...{% endcomment %}
 			<div class="border border-homepage">
+        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this is the heading of the box on the right, which contains information about collections to which users need to make an application.{% endcomment %}
         <h2>{% trans "Apply" %}</h2>
-        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...{% endcomment %}
+        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.{% endcomment %}
 				<p style="padding-bottom: 20px;">{% trans "Some collections have a limited number of concurrent users and require an application." %}</p>
         {% for partner in featured_partners %}
           <div class="row">
@@ -108,6 +108,7 @@
           </div>
           <hr/>
         {% endfor %}
+        {% comment %} Translators: This is text on a button on the homepage, which allows users to see more available collections to which they can apply. {% endcomment %}
         <a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more"> {% trans "See more" %}</a>
       </div>
 	  </div>
