@@ -693,7 +693,7 @@ class CollectionUserView(SelfOnly, ListView):
     template_name = "users/my_library.html"
 
     def get_object(self):
-        return Editor.objects.get(pk=self.request.user.pk)
+        return Editor.objects.get(pk=self.request.user.editor.pk)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionUserView, self).get_context_data(**kwargs)
