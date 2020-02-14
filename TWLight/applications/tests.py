@@ -3760,18 +3760,16 @@ class MarkSentTest(TestCase):
         # Expected success condition: redirect back to the original page.
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, self.url)
-    
+
     def test_email_authorization_method(self):
         # If partner's authroization method is EMAIL
-        # then partner's 'mark as sent' page should 
-        # display list of approved applications 
+        # then partner's 'mark as sent' page should
+        # display list of approved applications
 
         self.partner.authorization_method = Partner.EMAIL
         self.partner.save()
 
-        request = RequestFactory().get(
-            self.url
-        )
+        request = RequestFactory().get(self.url)
         request.user = self.user
         response = views.SendReadyApplicationsView.as_view()(
             request, pk=self.partner.pk
@@ -3779,7 +3777,7 @@ class MarkSentTest(TestCase):
 
         # Expected success condition: coordinator may access the page
         self.assertEqual(response.status_code, 200)
-    
+
     def test_proxy_authorization_method(self):
         # If partner's authroization method is PROXY
         # then partner's 'mark as sent' page should raise 404
@@ -3787,12 +3785,9 @@ class MarkSentTest(TestCase):
         self.partner.authorization_method = Partner.PROXY
         self.partner.save()
 
-        request = RequestFactory().get(
-            self.url,
-        )
+        request = RequestFactory().get(self.url)
         request.user = self.user
 
         # Expected success condition: raise a 404 not found page
         with self.assertRaises(Http404):
-            _ = views.SendReadyApplicationsView.as_view()(
-            request, pk=self.partner.pk)
+            _ = views.SendReadyApplicationsView.as_view()(request, pk=self.partner.pk)

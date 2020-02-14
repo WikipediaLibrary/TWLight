@@ -1165,7 +1165,9 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
         partner = self.get_object()
         auth_method = partner.authorization_method
         if auth_method == Partner.EMAIL or auth_method == Partner.CODES:
-            return super(SendReadyApplicationsView, self).dispatch(request, *args, **kwargs)
+            return super(SendReadyApplicationsView, self).dispatch(
+                request, *args, **kwargs
+            )
         else:
             raise Http404("Application's for this Partner are sent automatically")
 
