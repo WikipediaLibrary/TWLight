@@ -294,9 +294,7 @@ class ViewsTestCase(TestCase):
         )
 
         factory = RequestFactory()
-        request = factory.get(
-            reverse("users:my_library")
-        )
+        request = factory.get(reverse("users:my_library"))
         request.user = self.user_editor
 
         response = views.CollectionUserView.as_view()(request, pk=self.editor1.pk)
