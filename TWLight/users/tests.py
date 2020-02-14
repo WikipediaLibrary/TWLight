@@ -295,7 +295,7 @@ class ViewsTestCase(TestCase):
 
         factory = RequestFactory()
         request = factory.get(
-            reverse("users:my_library", kwargs={"pk": self.editor1.pk})
+            reverse("users:my_library")
         )
         request.user = self.user_editor
 
