@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 login">
       {% if user.is_authenticated %}
-        <a href="{% url 'users:my_library' pk=user.pk %}" class="btn btn-primary btn-block">
+        <a href="{% url 'users:my_library' %}" class="btn btn-primary btn-block">
           {% comment %} Translators: On the homepage, this message labels a button users can click to go to the 'My Library' page, which lists their available collections. {% endcomment %}
           {% trans "Your Library" %}
         </a>
@@ -76,7 +76,7 @@
         {% endif %}
         {% if user.is_authenticated and user.editor.wp_bundle_eligible %}
           <div class="alert alert-success">
-            {% url 'users:my_library' pk=user.pk as library_url %}
+            {% url 'users:my_library' as library_url %}
             {% comment %} Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle. {% endcomment %}
             {% blocktrans %}
               You meet the eligibility criteria! Check out <a href="{{ library_url }}">Your Library</a> to see what you have access to.

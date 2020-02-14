@@ -693,11 +693,7 @@ class CollectionUserView(SelfOnly, ListView):
     template_name = "users/my_library.html"
 
     def get_object(self):
-        assert "pk" in list(self.kwargs.keys())
-        try:
-            return Editor.objects.get(pk=self.kwargs["pk"])
-        except Editor.DoesNotExist:
-            raise Http404
+        return Editor.objects.get(pk=self.request.user.pk)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionUserView, self).get_context_data(**kwargs)
@@ -822,10 +818,10 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
             _("Access to {} has been returned.").format(authorization.partner),
         )
         return HttpResponseRedirect(
-            reverse("users:my_library", kwargs={"pk": self.request.user.editor.pk})
+            reverse("users:my_library")
         )
 
 
 class LibraryRedirectView(RedirectView):
     permanent = True
-    pattern_name = 'users:my_library'
+    url = reverse_lazy('users:my_library')
