@@ -27,9 +27,7 @@ class Command(BaseCommand):
                 user_email=authorization_object.user.email,
                 user_lang=authorization_object.user.userprofile.lang,
                 partner_name=authorization_object.partner.company_name,
-                partner_link=reverse(
-                    "users:my_library",
-                ),
+                partner_link=reverse("users:my_library"),
             )
 
             # Record that we sent the email so that we only send one.
