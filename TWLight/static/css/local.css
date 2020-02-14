@@ -530,13 +530,17 @@ A few spots just need padding instead of margin.
 
 .read-more {
   width:200px;
-  margin:auto;
+  margin:0 auto 10px auto;
   text-align:center;
 }
 
 .block-notice {
     padding: 0 10% 2em 10%;
     color: #df2e32;
+}
+
+.eligible-notice {
+    padding: 0 10% 2em 10%;
 }
 
 .btn-extra-large{

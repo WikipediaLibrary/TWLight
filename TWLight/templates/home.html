@@ -19,7 +19,7 @@
       {% if user.is_authenticated %}
         <a href="{% url 'users:my_library' pk=user.pk %}" class="btn btn-primary btn-block">
           {% comment %} Translators: On the homepage, this message labels a button users can click to go to the 'My Library' page, which lists their available collections. {% endcomment %}
-          {% trans "Your library" %}
+          {% trans "Your Library" %}
         </a>
       {% else %}
         <a href="{% url 'oauth_login' %}" class="btn btn-primary btn-block">
@@ -54,7 +54,7 @@
                 bundle-check-true">
                 <b>&#10004;</b>
               {% else %}
-                {% if request.user.is_authenticated %}
+                {% if user.is_authenticated %}
                   bundle-check-false">
                   <b>&#10006;</b>
                 {% else %}
@@ -65,18 +65,27 @@
             </li>
           {% endfor %}
         </ul>
-        {% if request.user.is_authenticated and not request.user.editor.wp_not_blocked %}
+        {% if user.is_authenticated and not user.editor.wp_not_blocked %}
           <p class="block-notice">
             {% url 'contact' as contact_url %}
+            {% comment %} Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
             {% blocktrans %}
-              It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access - please <a href="{{ contact_url }}">contact us</a>.
+              It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
             {% endblocktrans %}
           </p>
         {% endif %}
-				{% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
-				<p>
+        {% if user.is_authenticated and user.editor.wp_bundle_eligible %}
+          <div class="alert alert-success">
+            {% url 'users:my_library' pk=user.pk as library_url %}
+            {% comment %} Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle. {% endcomment %}
+            {% blocktrans %}
+              You meet the eligibility criteria! Check out <a href="{{ library_url }}">Your Library</a> to see what you have access to.
+            {% endblocktrans %}
+          </div>
+        {% else %}
+				  {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
           <a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a>
-        </p>
+        {% endif %}
       </div>
 	  </div>
 
@@ -99,11 +108,9 @@
           </div>
           <hr/>
         {% endfor %}
-        <p><a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more"> {% trans "See more" %}</a>
+        <a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more"> {% trans "See more" %}</a>
       </div>
 	  </div>
   </div>
-
-  <p>&nbsp;</p>
 
 {% endblock content %}
