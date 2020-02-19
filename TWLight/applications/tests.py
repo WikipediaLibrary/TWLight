@@ -53,8 +53,6 @@ from .helpers import (
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
-from .views import PartnerAutocompleteView
-
 
 class SendCoordinatorRemindersTest(TestCase):
     """
@@ -1993,12 +1991,18 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         self.assertTrue(hasattr(instance, "object_list"))
 
+    def _set_up_a_bundle_and_not_a_bundle_partner(self, user):
+        bundle_partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE, coordinator=user
+        )
+        not_a_bundle_partner = PartnerFactory(coordinator=user)
+        return bundle_partner, not_a_bundle_partner
+
     def test_no_bundle_partners_in_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner = PartnerFactory(
-            authorization_method=Partner.BUNDLE, coordinator=editor.user
+        bundle_partner, not_a_bundle_partner = (
+            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
         )
-        not_a_bundle_partner = PartnerFactory(coordinator=editor.user)
         bundle_app = ApplicationFactory(
             status=Application.PENDING, partner=bundle_partner, editor=editor
         )
@@ -2009,13 +2013,74 @@ class ListApplicationsTest(BaseApplicationViewTest):
         self.assertNotContains(response, bundle_app)
         self.assertContains(response, not_a_bundle_app)
 
+    def test_no_bundle_partners_in_approved_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = (
+            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        )
+        bundle_app = ApplicationFactory(
+            status=Application.APPROVED, partner=bundle_partner, editor=editor
+        )
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.APPROVED, partner=not_a_bundle_partner, editor=editor
+        )
+        response = self.client.get(reverse("applications:list_approved"))
+        self.assertNotContains(response, bundle_app)
+        self.assertContains(response, not_a_bundle_app)
+
+    def test_no_bundle_partners_in_rejected_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = (
+            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        )
+        bundle_app = ApplicationFactory(
+            status=Application.NOT_APPROVED, partner=bundle_partner, editor=editor
+        )
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.NOT_APPROVED, partner=not_a_bundle_partner, editor=editor
+        )
+        response = self.client.get(reverse("applications:list_rejected"))
+        self.assertNotContains(response, bundle_app)
+        self.assertContains(response, not_a_bundle_app)
+
+    def test_no_bundle_partners_in_renewal_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = (
+            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        )
+        app1 = ApplicationFactory(status=Application.SENT, partner=bundle_partner, editor=editor)
+        app2 = ApplicationFactory(status=Application.SENT, partner=not_a_bundle_partner, editor=editor)
+        bundle_app = ApplicationFactory(
+            status=Application.PENDING, partner=bundle_partner, editor=editor, parent=app1
+        )
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.PENDING, partner=not_a_bundle_partner, editor=editor, parent=app2
+        )
+        response = self.client.get(reverse("applications:list_renewal"))
+        self.assertNotContains(response, bundle_app)
+        self.assertContains(response, not_a_bundle_app)
+
+    def test_no_bundle_partners_in_sent_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = (
+            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        )
+        bundle_app = ApplicationFactory(
+            status=Application.SENT, partner=bundle_partner, editor=editor
+        )
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.SENT, partner=not_a_bundle_partner, editor=editor
+        )
+        response = self.client.get(reverse("applications:list_sent"))
+        self.assertNotContains(response, bundle_app)
+        self.assertContains(response, not_a_bundle_app)
+
     def test_no_bundle_partners_in_filter_form(self):
         editor = EditorFactory()
         self.client.login(username="coordinator", password="coordinator")
-        bundle_partner = PartnerFactory(
-            authorization_method=Partner.BUNDLE, coordinator=self.coordinator
+        bundle_partner, not_a_bundle_partner = (
+            self._set_up_a_bundle_and_not_a_bundle_partner(self.coordinator)
         )
-        not_a_bundle_partner = PartnerFactory(coordinator=self.coordinator)
         ApplicationFactory(
             status=Application.PENDING, partner=bundle_partner, editor=editor
         )
@@ -2885,19 +2950,7 @@ class EvaluateApplicationTest(TestCase):
         with self.assertRaises(Http404):
             _ = views.EvaluateApplicationView.as_view()(request, pk=self.application.pk)
 
-    def test_under_discussion_signal(self):
-        """
-        Test comment signal fires correctly, updating Pending
-        applications to Under Discussion
-        """
-        self.application.status = Application.PENDING
-        self.application.save()
-
-        factory = RequestFactory()
-        request = factory.post(get_form_target())
-        request.user = UserFactory()
-        editor = EditorFactory(user=self.coordinator)
-
+    def _add_a_comment_and_trigger_the_signal(self, request):
         CT = ContentType.objects.get_for_model
 
         comm = Comment.objects.create(
@@ -2913,9 +2966,37 @@ class EvaluateApplicationTest(TestCase):
 
         comment_was_posted.send(sender=Comment, comment=comm, request=request)
 
-        self.application.refresh_from_db()
+    def test_under_discussion_signal(self):
+        """
+        Test comment signal fires correctly, updating Pending
+        applications to Under Discussion except for Bundle partners
+        """
+        self.application.status = Application.PENDING
+        self.application.save()
 
+        factory = RequestFactory()
+        request = factory.post(get_form_target())
+        request.user = UserFactory()
+        EditorFactory(user=self.coordinator)
+
+        self._add_a_comment_and_trigger_the_signal(request)
+
+        self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.QUESTION)
+
+        # Comment posted in application made to BUNDLE partner
+        original_partner = self.application.partner
+        self.application.partner = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        self._add_a_comment_and_trigger_the_signal(request)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.PENDING)
+
+        self.application.partner = original_partner
+        self.application.save()
 
     def test_immediately_sent_collection(self):
         """
