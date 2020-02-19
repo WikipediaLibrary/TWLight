@@ -476,12 +476,11 @@
               {% if user.is_authenticated %}
                 {% comment %} Logic to support accessing the Bundle resource. {% endcomment %}
               {% else %}
-                {% url 'oauth_login' as oauth_login %}
+                {% url 'about' as about %}
                 {% blocktrans trimmed %}
-                  This resources is part of our <a href="#">Bundle access</a>, which
+                  This resources is part of our <a href="{{ about }}">Bundle access</a>, which
                   you can access if you meet our minimum eligibility criteria.
-                  <strong><a href="{{ oauth_login }}?next={{ request.path|urlencode }}">
-                  Log in</a></strong> to find out if you are eligible.
+                  Log in to find out if you are eligible.
                 {% endblocktrans %}
               {% endif %}
             </div>
