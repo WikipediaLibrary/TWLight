@@ -2228,6 +2228,19 @@ class RenewApplicationTest(BaseApplicationViewTest):
         six_months_from_now = date.today() + relativedelta(months=+6)
         self.assertEqual(auth.date_expires, six_months_from_now)
 
+    def test_bundle_app_renewal_raises_permission_denied(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(authorization_method=Partner.BUNDLE)
+        app = ApplicationFactory(
+            status=Application.SENT,
+            partner=partner,
+            editor=editor
+        )
+        request = RequestFactory().get(reverse("applications:renew", kwargs={"pk": app.pk}))
+        request.user = editor.user
+        with self.assertRaises(PermissionDenied):
+            views.RenewApplicationView.as_view()(request, pk=app.pk)
+
 
 class ApplicationModelTest(TestCase):
     def test_approval_sets_date_closed(self):
