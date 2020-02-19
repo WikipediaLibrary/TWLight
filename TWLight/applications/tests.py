@@ -54,6 +54,7 @@ from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
 from .models import Application
 
+
 class SendCoordinatorRemindersTest(TestCase):
     """
     Stub of a test for the send_coordinator_reminders command.
@@ -2000,8 +2001,8 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = (
-            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
         )
         bundle_app = ApplicationFactory(
             status=Application.PENDING, partner=bundle_partner, editor=editor
@@ -2015,8 +2016,8 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_approved_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = (
-            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
         )
         bundle_app = ApplicationFactory(
             status=Application.APPROVED, partner=bundle_partner, editor=editor
@@ -2030,8 +2031,8 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_rejected_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = (
-            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
         )
         bundle_app = ApplicationFactory(
             status=Application.NOT_APPROVED, partner=bundle_partner, editor=editor
@@ -2045,16 +2046,26 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_renewal_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = (
-            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
         )
-        app1 = ApplicationFactory(status=Application.SENT, partner=bundle_partner, editor=editor)
-        app2 = ApplicationFactory(status=Application.SENT, partner=not_a_bundle_partner, editor=editor)
+        app1 = ApplicationFactory(
+            status=Application.SENT, partner=bundle_partner, editor=editor
+        )
+        app2 = ApplicationFactory(
+            status=Application.SENT, partner=not_a_bundle_partner, editor=editor
+        )
         bundle_app = ApplicationFactory(
-            status=Application.PENDING, partner=bundle_partner, editor=editor, parent=app1
+            status=Application.PENDING,
+            partner=bundle_partner,
+            editor=editor,
+            parent=app1,
         )
         not_a_bundle_app = ApplicationFactory(
-            status=Application.PENDING, partner=not_a_bundle_partner, editor=editor, parent=app2
+            status=Application.PENDING,
+            partner=not_a_bundle_partner,
+            editor=editor,
+            parent=app2,
         )
         response = self.client.get(reverse("applications:list_renewal"))
         self.assertNotContains(response, bundle_app)
@@ -2062,8 +2073,8 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_sent_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = (
-            self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
         )
         bundle_app = ApplicationFactory(
             status=Application.SENT, partner=bundle_partner, editor=editor
@@ -2078,8 +2089,8 @@ class ListApplicationsTest(BaseApplicationViewTest):
     def test_no_bundle_partners_in_filter_form(self):
         editor = EditorFactory()
         self.client.login(username="coordinator", password="coordinator")
-        bundle_partner, not_a_bundle_partner = (
-            self._set_up_a_bundle_and_not_a_bundle_partner(self.coordinator)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            self.coordinator
         )
         ApplicationFactory(
             status=Application.PENDING, partner=bundle_partner, editor=editor
@@ -2297,11 +2308,11 @@ class RenewApplicationTest(BaseApplicationViewTest):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
         partner = PartnerFactory(authorization_method=Partner.BUNDLE)
         app = ApplicationFactory(
-            status=Application.SENT,
-            partner=partner,
-            editor=editor
+            status=Application.SENT, partner=partner, editor=editor
         )
-        request = RequestFactory().get(reverse("applications:renew", kwargs={"pk": app.pk}))
+        request = RequestFactory().get(
+            reverse("applications:renew", kwargs={"pk": app.pk})
+        )
         request.user = editor.user
         with self.assertRaises(PermissionDenied):
             views.RenewApplicationView.as_view()(request, pk=app.pk)
