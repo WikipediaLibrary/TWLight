@@ -95,8 +95,8 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Make sure that we aren't leaking info via our form choices.
         if self.request.user.is_superuser:
-            partner_qs = Partner.objects.exclude(
-                authorization_method=Partner.BUNDLE
+            partner_qs = Partner.objects.filter(
+                ~Q(authorization_method=Partner.BUNDLE)
             ).order_by("company_name")
             # Query by partner name
             if self.q:
@@ -147,8 +147,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         for i in open_apps:
             open_apps_partners.append(i.partner.company_name)
         for partner in (
-            Partner.objects.all()
-            .exclude(authorization_method=Partner.BUNDLE)
+            Partner.objects.filter(~Q(authorization_method=Partner.BUNDLE))
             .order_by("company_name")
         ):
             # We cannot just use the partner ID as the field name; Django won't
@@ -947,7 +946,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         app = self.get_object()
         # Status cannot be changed for applications made to bundle partners.
         if app.partner.authorization_method == Partner.BUNDLE:
-            bundle_url = "#"  # TODO: Modify this post an faq is added to the site
+            bundle_url = reverse("about")
             collections_url = reverse(
                 "users:my_collection", kwargs={"pk": self.request.user.editor.pk}
             )
@@ -955,6 +954,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             messages.add_message(
                 self.request,
                 messages.WARNING,
+                # Translators: This message is shown to users when they access an application page of a now Bundle partner (new applications aren't allowed for Bundle partners and the status of old applications cannot be modified)
                 _(
                     "This application cannot be modified since this "
                     'partner is now part of our <a href="{bundle}">bundle access</a>. '
@@ -1220,11 +1220,10 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
             status=Application.APPROVED, editor__isnull=False
         ).exclude(editor__user__groups__name="restricted")
 
-        partner_list = (
-            Partner.objects.filter(applications__in=base_queryset)
-            .exclude(authorization_method__in=[Partner.PROXY, Partner.BUNDLE])
-            .distinct()
-        )
+        partner_list = Partner.objects.filter(
+            applications__in=base_queryset,
+            authorization_method__in=[Partner.CODES, Partner.EMAIL]
+        ).distinct()
 
         # Superusers can see all unrestricted applications, otherwise
         # limit to ones from the current coordinator
