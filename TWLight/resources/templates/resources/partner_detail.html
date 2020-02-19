@@ -469,17 +469,46 @@
             {% endif %}
           {% else %}
             <div class="panel-body top-border">
-              <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive" style="width:40px; height:45px; float:right;" title="{% trans 'Library Bundle' %}" alt="
-              {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
-              {% trans "Library bundle access" %}
-              ">
               {% if user.is_authenticated %}
-                {% comment %} Logic to support accessing the Bundle resource. {% endcomment %}
+                {% if user.editor.wp_bundle_eligible %}
+                  {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+                  <a class="btn btn-default btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
+                  <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                  {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                  {% trans "Library bundle access" %}
+                  ">
+                  {% comment %} Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
+                  {% blocktrans trimmed %}
+                    You are eligible to access Library Bundle partners.
+                    Click the above button to access the collection.
+                  {% endblocktrans %}
+                {% else %}
+                  {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+                  <a class="btn btn-default btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
+                  <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                  {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                  {% trans "Library bundle access" %}
+                  ">
+                  {% comment %} Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
+                  {% url 'homepage' as homepage %}
+                  {% blocktrans trimmed %}
+                    You are not eligible to access Library Bundle partners.
+                    Visit the <a href="{{ homepage }}">homepage</a> to check the
+                    eligibility criteria.
+                  {% endblocktrans %}
+                {% endif %}
               {% else %}
+                {% comment %} Translators: Buttton prompting users to log in. {% endcomment %}
+                <a class="btn btn-default btn-lg btn-block" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">{% trans "Log in" %}</a><br />
+                <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                {% trans "Library bundle access" %}
+                ">
+                {% comment %} Translators: Text shown to unauthenticated users when they visit a Bundle partner page. {% endcomment %}
                 {% url 'about' as about %}
                 {% blocktrans trimmed %}
-                  This resources is part of our <a href="{{ about }}">Bundle access</a>, which
-                  you can access if you meet our minimum eligibility criteria.
+                  This resource is part of our <a href="{{ about }}">Library Bundle</a>
+                  access, which you can access if you meet our minimum eligibility criteria.
                   Log in to find out if you are eligible.
                 {% endblocktrans %}
               {% endif %}
