@@ -1996,7 +1996,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
         bundle_partner = PartnerFactory(
             authorization_method=Partner.BUNDLE, coordinator=user
         )
-        not_a_bundle_partner = PartnerFactory(coordinator=user)
+        not_a_bundle_partner = PartnerFactory(
+            authorization_method=Partner.EMAIL,
+            coordinator=user
+        )
         return bundle_partner, not_a_bundle_partner
 
     def test_no_bundle_partners_in_list_view(self):
@@ -2007,12 +2010,14 @@ class ListApplicationsTest(BaseApplicationViewTest):
         bundle_app = ApplicationFactory(
             status=Application.PENDING, partner=bundle_partner, editor=editor
         )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
         not_a_bundle_app = ApplicationFactory(
             status=Application.PENDING, partner=not_a_bundle_partner, editor=editor
         )
+        not_a_bundle_app_url = reverse("applications:evaluate", kwargs={"pk": not_a_bundle_app.pk})
         response = self.client.get(reverse("applications:list"))
-        self.assertNotContains(response, bundle_app)
-        self.assertContains(response, not_a_bundle_app)
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
 
     def test_no_bundle_partners_in_approved_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -2022,12 +2027,14 @@ class ListApplicationsTest(BaseApplicationViewTest):
         bundle_app = ApplicationFactory(
             status=Application.APPROVED, partner=bundle_partner, editor=editor
         )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
         not_a_bundle_app = ApplicationFactory(
             status=Application.APPROVED, partner=not_a_bundle_partner, editor=editor
         )
+        not_a_bundle_app_url = reverse("applications:evaluate", kwargs={"pk": not_a_bundle_app.pk})
         response = self.client.get(reverse("applications:list_approved"))
-        self.assertNotContains(response, bundle_app)
-        self.assertContains(response, not_a_bundle_app)
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
 
     def test_no_bundle_partners_in_rejected_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -2037,12 +2044,14 @@ class ListApplicationsTest(BaseApplicationViewTest):
         bundle_app = ApplicationFactory(
             status=Application.NOT_APPROVED, partner=bundle_partner, editor=editor
         )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
         not_a_bundle_app = ApplicationFactory(
             status=Application.NOT_APPROVED, partner=not_a_bundle_partner, editor=editor
         )
+        not_a_bundle_app_url = reverse("applications:evaluate", kwargs={"pk": not_a_bundle_app.pk})
         response = self.client.get(reverse("applications:list_rejected"))
-        self.assertNotContains(response, bundle_app)
-        self.assertContains(response, not_a_bundle_app)
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
 
     def test_no_bundle_partners_in_renewal_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -2061,15 +2070,17 @@ class ListApplicationsTest(BaseApplicationViewTest):
             editor=editor,
             parent=app1,
         )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
         not_a_bundle_app = ApplicationFactory(
             status=Application.PENDING,
             partner=not_a_bundle_partner,
             editor=editor,
             parent=app2,
         )
+        not_a_bundle_app_url = reverse("applications:evaluate", kwargs={"pk": not_a_bundle_app.pk})
         response = self.client.get(reverse("applications:list_renewal"))
-        self.assertNotContains(response, bundle_app)
-        self.assertContains(response, not_a_bundle_app)
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
 
     def test_no_bundle_partners_in_sent_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -2079,12 +2090,14 @@ class ListApplicationsTest(BaseApplicationViewTest):
         bundle_app = ApplicationFactory(
             status=Application.SENT, partner=bundle_partner, editor=editor
         )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
         not_a_bundle_app = ApplicationFactory(
             status=Application.SENT, partner=not_a_bundle_partner, editor=editor
         )
+        not_a_bundle_app_url = reverse("applications:evaluate", kwargs={"pk": not_a_bundle_app.pk})
         response = self.client.get(reverse("applications:list_sent"))
-        self.assertNotContains(response, bundle_app)
-        self.assertContains(response, not_a_bundle_app)
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
 
     def test_no_bundle_partners_in_filter_form(self):
         editor = EditorFactory()
