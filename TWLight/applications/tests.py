@@ -3152,10 +3152,7 @@ class EvaluateApplicationTest(TestCase):
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
         partner.coordinator = coordinator.user
         partner.save()
-        application = ApplicationFactory(
-            status=Application.PENDING,
-            partner=partner
-        )
+        application = ApplicationFactory(status=Application.PENDING, partner=partner)
         url = reverse("applications:evaluate", kwargs={"pk": application.pk})
         response = self.client.get(url)
         # Applications made to Bundle partners should not have a select
@@ -3589,44 +3586,39 @@ class ListReadyApplicationsTest(TestCase):
     def test_no_proxy_bundle_partners(self):
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
         proxy_partner = PartnerFactory(
-            authorization_method=Partner.PROXY,
-            coordinator=coordinator.user
+            authorization_method=Partner.PROXY, coordinator=coordinator.user
         )
         bundle_partner = PartnerFactory(
-            authorization_method=Partner.BUNDLE,
-            coordinator=coordinator.user
+            authorization_method=Partner.BUNDLE, coordinator=coordinator.user
         )
         other_partner1 = PartnerFactory(coordinator=coordinator.user)
         other_partner2 = PartnerFactory()
         ApplicationFactory(
             status=Application.APPROVED,  # This shouldn't be the case, but could happen in certain situations
-            partner=proxy_partner
+            partner=proxy_partner,
         )
-        ApplicationFactory(
-            status=Application.APPROVED,
-            partner=bundle_partner
-        )
-        ApplicationFactory(
-            status=Application.APPROVED,
-            partner=other_partner1
-        )
-        ApplicationFactory(
-            status=Application.APPROVED,
-            partner=other_partner2
-        )
+        ApplicationFactory(status=Application.APPROVED, partner=bundle_partner)
+        ApplicationFactory(status=Application.APPROVED, partner=other_partner1)
+        ApplicationFactory(status=Application.APPROVED, partner=other_partner2)
 
         request = RequestFactory().get(reverse("applications:send"))
         request.user = coordinator.user
         response = views.ListReadyApplicationsView.as_view()(request)
-        self.assertNotEqual(set(response.context_data["object_list"]), {proxy_partner, bundle_partner})
+        self.assertNotEqual(
+            set(response.context_data["object_list"]), {proxy_partner, bundle_partner}
+        )
         self.assertEqual(set(response.context_data["object_list"]), {other_partner1})
         coordinator.user.is_superuser = True
         coordinator.user.save()
         request = RequestFactory().get(reverse("applications:send"))
         request.user = coordinator.user
         response = views.ListReadyApplicationsView.as_view()(request)
-        self.assertNotEqual(set(response.context_data["object_list"]), {proxy_partner, bundle_partner})
-        self.assertEqual(set(response.context_data["object_list"]), {other_partner1, other_partner2})
+        self.assertNotEqual(
+            set(response.context_data["object_list"]), {proxy_partner, bundle_partner}
+        )
+        self.assertEqual(
+            set(response.context_data["object_list"]), {other_partner1, other_partner2}
+        )
 
 
 class MarkSentTest(TestCase):
