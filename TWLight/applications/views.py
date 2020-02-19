@@ -146,10 +146,9 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         open_apps_partners = []
         for i in open_apps:
             open_apps_partners.append(i.partner.company_name)
-        for partner in (
-            Partner.objects.filter(~Q(authorization_method=Partner.BUNDLE))
-            .order_by("company_name")
-        ):
+        for partner in Partner.objects.filter(
+            ~Q(authorization_method=Partner.BUNDLE)
+        ).order_by("company_name"):
             # We cannot just use the partner ID as the field name; Django won't
             # be able to find the resultant data.
             # http://stackoverflow.com/a/8289048
@@ -1222,7 +1221,7 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
 
         partner_list = Partner.objects.filter(
             applications__in=base_queryset,
-            authorization_method__in=[Partner.CODES, Partner.EMAIL]
+            authorization_method__in=[Partner.CODES, Partner.EMAIL],
         ).distinct()
 
         # Superusers can see all unrestricted applications, otherwise
