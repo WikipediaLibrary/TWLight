@@ -1222,7 +1222,7 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
 
         partner_list = (
             Partner.objects.filter(applications__in=base_queryset)
-            .exclude(authorization_method=Partner.BUNDLE)
+            .exclude(authorization_method__in=[Partner.PROXY, Partner.BUNDLE])
             .distinct()
         )
 
@@ -1251,8 +1251,6 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
         partner = self.get_object()
-        if partner.authorization_method == Partner.BUNDLE:
-            raise PermissionDenied
         apps = partner.applications.filter(
             status=Application.APPROVED, editor__isnull=False
         ).exclude(editor__user__groups__name="restricted")
@@ -1469,6 +1467,9 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
 
     def get_object(self):
         app = Application.objects.get(pk=self.kwargs["pk"])
+
+        if app.partner.authorization_method == Partner.BUNDLE:
+            raise PermissionDenied
 
         try:
             assert (app.status == Application.APPROVED) or (
