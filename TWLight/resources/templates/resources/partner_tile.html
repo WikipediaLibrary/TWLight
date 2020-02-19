@@ -88,8 +88,13 @@
     <div class="panel-partner-info">
       <div class="text-center">
         <a href="{% url 'partners:detail' partner.pk %}" class="btn btn-default">
-          {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and the apply button. {% endcomment %}
-          {% trans "Apply" %}
+          {% if partner.authorization_method == partner.BUNDLE %}
+            {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the bundle partner's page, where they can find more information about the partner. {% endcomment %}
+            {% trans "More info" %}
+          {% else %}
+            {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and apply for access. {% endcomment %}
+            {% trans "Apply" %}
+          {% endif %}
         </a>
         <br />
       </div>
