@@ -4,19 +4,14 @@ TWLight URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
 """
-from django.conf import settings
-from django.conf.urls import include, static, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
-import django
 
-
-import TWLight.i18n.views
-import TWLight.i18n.urls
 from TWLight.api.urls import urlpatterns as api_urls
 from TWLight.applications.urls import urlpatterns as applications_urls
 from TWLight.emails.views import ContactUsView
