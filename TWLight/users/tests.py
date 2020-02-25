@@ -227,6 +227,22 @@ class ViewsTestCase(TestCase):
         app4 = ApplicationFactory(
             status=Application.NOT_APPROVED, editor=self.user_editor.editor
         )
+        # Bundle applications shouldn't be listed on this page
+        app5 = ApplicationFactory(
+            status=Application.APPROVED,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
+        app6 = ApplicationFactory(
+            status=Application.PENDING,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
+        app7 = ApplicationFactory(
+            status=Application.INVALID,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
 
         factory = RequestFactory()
         request = factory.get(
@@ -245,6 +261,10 @@ class ViewsTestCase(TestCase):
         self.assertIn(escape(app2.partner.company_name), content)
         self.assertIn(escape(app3.partner.company_name), content)
         self.assertIn(escape(app4.partner.company_name), content)
+        # No Bundle applications
+        self.assertNotIn(escape(app5.partner.company_name), content)
+        self.assertNotIn(escape(app6.partner.company_name), content)
+        self.assertNotIn(escape(app7.partner.company_name), content)
 
         # We can't use assertTemplateUsed with RequestFactory (only with
         # Client), and testing that the rendered content is equal to an
