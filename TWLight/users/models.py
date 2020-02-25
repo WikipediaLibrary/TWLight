@@ -46,6 +46,7 @@ from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
 
 from TWLight.users.helpers.editor_data import (
+    editor_global_userinfo,
     editor_valid,
     editor_account_old_enough,
     editor_enough_edits,
@@ -358,37 +359,9 @@ class Editor(models.Model):
         else:
             return None
 
+    @property
     def get_global_userinfo(self, identity):
-        """
-        Grab global user information from the API, which we'll use to overlay
-        somme local wiki user info returned by OAuth.  Returns a dict like:
-
-        global_userinfo:
-          home:         "zhwikisource"
-          id:           27666025
-          registration: "2013-05-05T16:00:09Z"
-          name:         "Example"
-          editcount:    10
-        """
-        try:
-            endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={username}&guiprop=editcount&format=json&formatversion=2".format(
-                base=identity["iss"], username=urllib.parse.quote(identity["username"])
-            )
-
-            results = json.loads(urllib.request.urlopen(endpoint).read())
-            global_userinfo = results["query"]["globaluserinfo"]
-
-            try:
-                assert "missing" not in global_userinfo
-                logger.info("Fetched global_userinfo for User.")
-                return global_userinfo
-            except AssertionError:
-                logger.exception("Could not fetch global_userinfo for User.")
-                return None
-
-        except:
-            logger.exception("Could not fetch global_userinfo for User.")
-            return None
+        return editor_global_userinfo(identity["username"], identity["id"], True)
 
     def update_from_wikipedia(self, identity, lang):
         """

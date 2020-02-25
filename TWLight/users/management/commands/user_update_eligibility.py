@@ -1,13 +1,14 @@
 from datetime import datetime
-import json
+
 import logging
-import urllib.request, urllib.error, urllib.parse
+
 
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
 from TWLight.users.models import Editor
 
 from TWLight.users.helpers.editor_data import (
+    editor_global_userinfo,
     editor_valid,
     editor_enough_edits,
     editor_recent_edits,
@@ -18,20 +19,6 @@ logger = logging.getLogger(__name__)
 
 
 # Everything here is largely lifted from the Editor model. An indicator that things should be refactored.
-
-
-def get_global_userinfo(editor):
-    endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={name}&format=json&formatversion=2".format(
-        base="https://meta.wikimedia.org", name=urllib.parse.quote(editor.wp_username)
-    )
-
-    results = json.loads(urllib.request.urlopen(endpoint).read())
-    global_userinfo = results["query"]["globaluserinfo"]
-    # If the user isn't found global_userinfo contains the empty key "missing"
-    assert "missing" not in global_userinfo
-    # Verify that the numerical account ID matches, not just the user's handle.
-    assert editor.wp_sub == global_userinfo["id"]
-    return global_userinfo
 
 
 class Command(BaseCommand):
@@ -57,7 +44,9 @@ class Command(BaseCommand):
             if options["global_userinfo"]:
                 global_userinfo = options["global_userinfo"]
             else:
-                global_userinfo = get_global_userinfo(editor)
+                global_userinfo = editor_global_userinfo(
+                    editor.wp_username, editor.wp_sub, True
+                )
             if global_userinfo:
                 editor.wp_editcount_prev_updated, editor.wp_editcount_prev, editor.wp_editcount_recent, editor.wp_enough_recent_edits = editor_recent_edits(
                     global_userinfo["editcount"],
