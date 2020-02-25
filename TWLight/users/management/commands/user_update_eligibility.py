@@ -5,12 +5,13 @@ import urllib.request, urllib.error, urllib.parse
 
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
-from TWLight.users.models import (
-    Editor,
+from TWLight.users.models import Editor
+
+from TWLight.users.helpers.editor_data import (
+    editor_valid,
+    editor_enough_edits,
     editor_recent_edits,
     editor_bundle_eligible,
-    editor_enough_edits,
-    editor_valid,
 )
 
 logger = logging.getLogger(__name__)
