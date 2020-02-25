@@ -33,7 +33,7 @@ from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 from TWLight.ezproxy.urls import urlpatterns as ezproxy_urls
 
-from .views import LanguageWhiteListView, HomePageView
+from .views import LanguageWhiteListView, HomePageView, ActivityView
 
 
 urlpatterns = [
@@ -96,7 +96,7 @@ urlpatterns = [
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
     url(
         r"^activity/$",
-        HomePageView.as_view(template_name="activity.html"),
+        ActivityView.as_view(),
         name="activity",
     ),
 ]
