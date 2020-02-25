@@ -1,5 +1,27 @@
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
+import json
+import typing
+import urllib.request, urllib.error, urllib.parse
+from django.conf import settings
 from django.utils.timezone import now
+
+
+def editor_global_userinfo(
+    wp_username: str, wp_sub: typing.Optional[int], strict: bool
+):
+    endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={name}&format=json&formatversion=2".format(
+        base=settings.TWLIGHT_OAUTH_PROVIDER_URL, name=urllib.parse.quote(wp_username)
+    )
+
+    results = json.loads(urllib.request.urlopen(endpoint).read())
+    global_userinfo = results["query"]["globaluserinfo"]
+    # If the user isn't found global_userinfo contains the empty key "missing"
+    assert "missing" not in global_userinfo
+    if strict:
+        # Verify that the numerical account ID matches, not just the user's handle.
+        assert isinstance(wp_sub, int)
+        assert wp_sub == global_userinfo["id"]
+    return global_userinfo
 
 
 def editor_reg_date(identity, global_userinfo):
