@@ -70,7 +70,7 @@
             {% url 'contact' as contact_url %}
             {% comment %} Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
             {% blocktrans %}
-              It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
+              It looks like you have an active block on your account on at least one Wikimedia project. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
             {% endblocktrans %}
           </p>
         {% endif %}
