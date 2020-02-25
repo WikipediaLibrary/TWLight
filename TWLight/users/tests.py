@@ -27,10 +27,9 @@ from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
-from .models import (
-    UserProfile,
-    Editor,
-    Authorization,
+from .models import UserProfile, Editor, Authorization
+
+from TWLight.users.helpers.editor_data import (
     editor_valid,
     editor_account_old_enough,
     editor_enough_edits,
