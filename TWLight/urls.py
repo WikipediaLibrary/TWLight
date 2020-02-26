@@ -89,9 +89,5 @@ urlpatterns = [
     ),
     url(r"^$", HomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
-    url(
-        r"^activity/$",
-        ActivityView.as_view(),
-        name="activity",
-    ),
+    url(r"^activity/$", ActivityView.as_view(), name="activity"),
 ]
