@@ -350,9 +350,8 @@ class Editor(models.Model):
         else:
             return None
 
-    @property
     def get_global_userinfo(self, identity):
-        return editor_global_userinfo(identity["username"], identity["id"], True)
+        return editor_global_userinfo(identity["username"], identity["sub"], True)
 
     def update_from_wikipedia(self, identity, lang):
         """
