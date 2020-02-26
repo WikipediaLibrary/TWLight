@@ -1,9 +1,12 @@
 from datetime import datetime, timedelta
 import json
+import logging
 import typing
 import urllib.request, urllib.error, urllib.parse
 from django.conf import settings
 from django.utils.timezone import now
+
+logger = logging.getLogger(__name__)
 
 
 def editor_global_userinfo(
@@ -14,13 +17,17 @@ def editor_global_userinfo(
     )
 
     results = json.loads(urllib.request.urlopen(endpoint).read())
-    global_userinfo = results["query"]["globaluserinfo"]
-    # If the user isn't found global_userinfo contains the empty key "missing"
-    assert "missing" not in global_userinfo
-    if strict:
-        # Verify that the numerical account ID matches, not just the user's handle.
-        assert isinstance(wp_sub, int)
-        assert wp_sub == global_userinfo["id"]
+    try:
+        global_userinfo = results["query"]["globaluserinfo"]
+        # If the user isn't found global_userinfo contains the empty key "missing"
+        assert "missing" not in global_userinfo
+        if strict:
+            # Verify that the numerical account ID matches, not just the user's handle.
+            assert isinstance(wp_sub, int)
+            assert wp_sub == global_userinfo["id"]
+    except (KeyError, AssertionError):
+        global_userinfo = None
+        logger.exception("Could not fetch global_userinfo for User.")
     return global_userinfo
 
 
