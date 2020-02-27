@@ -54,13 +54,40 @@ FAKE_IDENTITY = {
     "username": "alice",
 }
 
+FAKE_MERGED_ACCOUNTS = [
+    {
+        "wiki": "enwiki",
+        "url": "https://en.wikipedia.org",
+        "timestamp": "2015-11-06T15:46:29Z",
+        "method": "login",
+        "editcount": 100,
+        "registration": "2015-11-06T15:46:29Z",
+        "groups": ["extendedconfirmed"],
+    }
+]
+
+FAKE_MERGED_ACCOUNTS_BLOCKED = [
+    {
+        "wiki": "enwiki",
+        "url": "https://en.wikipedia.org",
+        "timestamp": "2015-11-06T15:46:29Z",
+        "method": "login",
+        "editcount": 100,
+        "registration": "2015-11-06T15:46:29Z",
+        "groups": ["extendedconfirmed"],
+        "blocked": {"expiry": "infinity", "reason": "bad editor!"},
+    }
+]
+
 FAKE_GLOBAL_USERINFO = {
     "home": "enwiki",
     "id": 567823,
     "registration": "2015-11-06T15:46:29Z",  # Well before first commit.
     "name": "alice",
     "editcount": 5000,
+    "merged": copy.copy(FAKE_MERGED_ACCOUNTS),
 }
+
 
 # CSRF middleware is helpful for site security, but not helpful for testing
 # the rendered output of a page.
@@ -748,7 +775,7 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
-        not_blocked = editor_not_blocked(identity)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
         valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertTrue(valid)
 
@@ -790,8 +817,8 @@ class EditorModelTestCase(TestCase):
         self.assertTrue(valid)
 
         # Bad editor! No biscuit.
-        identity["blocked"] = True
-        not_blocked = editor_not_blocked(identity)
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
         valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertFalse(valid)
 
@@ -826,7 +853,7 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
-        not_blocked = editor_not_blocked(identity)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
         valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.assertTrue(valid)
 
@@ -900,8 +927,8 @@ class EditorModelTestCase(TestCase):
         self.assertTrue(bundle_eligible)
 
         # Bad editor! No biscuit, even if you have enough edits.
-        identity["blocked"] = True
-        not_blocked = editor_not_blocked(identity)
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
         valid = editor_valid(enough_edits, account_old_enough, not_blocked)
         self.test_editor.wp_editcount_updated = now() - timedelta(days=31)
         self.test_editor.wp_editcount_prev_updated = (
@@ -927,12 +954,12 @@ class EditorModelTestCase(TestCase):
 
         # Valid data for first time logging in after bundle was launched. 60 days ago.
         global_userinfo["editcount"] = 500
-        identity["blocked"] = False
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS)
         self.test_editor.wp_editcount = global_userinfo["editcount"]
         self.test_editor.wp_registered = editor_reg_date(identity, global_userinfo)
         self.test_editor.wp_account_old_enough = editor_account_old_enough(registered)
         self.test_editor.wp_enough_edits = editor_enough_edits(global_userinfo)
-        self.test_editor.wp_not_blocked = editor_not_blocked(identity)
+        self.test_editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
         self.test_editor.wp_valid = editor_valid(
             self.test_editor.wp_enough_edits,
             self.test_editor.wp_account_old_enough,
@@ -1009,6 +1036,8 @@ class EditorModelTestCase(TestCase):
         global_userinfo["name"] = identity["username"]
         # We should now be using the global_userinfo editcount
         global_userinfo["editcount"] = 960
+
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
 
         # update_from_wikipedia calls get_global_userinfo, which generates an
         # API call to Wikipedia that we don't actually want to do in testing.
