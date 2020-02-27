@@ -106,13 +106,13 @@ def editor_account_old_enough(wp_registered):
     return datetime.today().date() - timedelta(days=182) >= wp_registered
 
 
-def editor_valid(enough_edits, account_old_enough, not_blocked):
+def editor_valid(enough_edits, account_old_enough, not_blocked, ignore_wp_blocks):
     """
     Check for the eligibility criteria laid out in the terms of service.
     Note that we won't prohibit signups or applications on this basis.
     Coordinators have discretion to approve people who are near the cutoff.
     """
-    if enough_edits and account_old_enough and not_blocked:
+    if enough_edits and account_old_enough and (not_blocked or ignore_wp_blocks):
         return True
     else:
         return False
