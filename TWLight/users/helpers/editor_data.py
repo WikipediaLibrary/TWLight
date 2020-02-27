@@ -86,13 +86,15 @@ def editor_enough_edits(global_userinfo):
     return int(global_userinfo["editcount"]) >= 500
 
 
-def editor_not_blocked(identity):
+def editor_not_blocked(merged: list):
     # If, for some reason, this information hasn't come through,
     # default to user not being valid.
-    if not identity:
+    if not merged:
         return False
-    # Check: not blocked
-    return identity["blocked"] == False
+    else:
+        # Check: not blocked on any merged account.
+        # Note that this looks funny since we're inverting the truthiness returned by the check for blocks.
+        return False if any("blocked" in account for account in merged) else True
 
 
 def editor_account_old_enough(wp_registered):
