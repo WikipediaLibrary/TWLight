@@ -12,6 +12,7 @@ from TWLight.users.helpers.editor_data import (
     editor_valid,
     editor_enough_edits,
     editor_recent_edits,
+    editor_not_blocked,
     editor_bundle_eligible,
 )
 
@@ -60,6 +61,7 @@ class Command(BaseCommand):
                 editor.wp_editcount = global_userinfo["editcount"]
                 editor.wp_editcount_updated = wp_editcount_updated
                 editor.wp_enough_edits = editor_enough_edits(global_userinfo)
+                editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
                 editor.wp_valid = editor_valid(
                     editor.wp_enough_edits,
                     # We could recalculate this, but we would only need to do that if upped the minimum required account age.
