@@ -415,6 +415,7 @@ class Editor(models.Model):
                 self.wp_enough_recent_edits,
             )
             self.wp_editcount = global_userinfo["editcount"]
+            self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
             self.wp_editcount_updated = now()
 
         self.save()
@@ -433,7 +434,6 @@ class Editor(models.Model):
         self.wp_registered = editor_reg_date(identity, global_userinfo)
         self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
         self.wp_enough_edits = editor_enough_edits(global_userinfo)
-        self.wp_not_blocked = editor_not_blocked(identity)
         self.wp_valid = editor_valid(
             self.wp_enough_edits, self.wp_account_old_enough, self.wp_not_blocked
         )
