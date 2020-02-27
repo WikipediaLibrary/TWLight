@@ -776,19 +776,26 @@ class EditorModelTestCase(TestCase):
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
         not_blocked = editor_not_blocked(global_userinfo["merged"])
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        ignore_wp_blocks = False
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertTrue(valid)
 
         # Edge case
         global_userinfo["editcount"] = 500
         enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertTrue(valid)
 
         # Too few edits
         global_userinfo["editcount"] = 499
         enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertFalse(valid)
 
         # Account created too recently
@@ -797,7 +804,9 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertFalse(valid)
 
         # Edge case: this shouldn't.
@@ -805,7 +814,9 @@ class EditorModelTestCase(TestCase):
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertTrue(valid)
 
         # Edge case: this should work.
@@ -813,13 +824,17 @@ class EditorModelTestCase(TestCase):
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertTrue(valid)
 
         # Bad editor! No biscuit.
         global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
         not_blocked = editor_not_blocked(global_userinfo["merged"])
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertFalse(valid)
 
     def test_editor_eligibility_functions(self):
@@ -854,7 +869,10 @@ class EditorModelTestCase(TestCase):
         account_old_enough = editor_account_old_enough(registered)
         enough_edits = editor_enough_edits(global_userinfo)
         not_blocked = editor_not_blocked(global_userinfo["merged"])
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        ignore_wp_blocks = False
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertTrue(valid)
 
         # 1st time bundle check should always pass for a valid user.
@@ -929,7 +947,9 @@ class EditorModelTestCase(TestCase):
         # Bad editor! No biscuit, even if you have enough edits.
         global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
         not_blocked = editor_not_blocked(global_userinfo["merged"])
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.test_editor.wp_editcount_updated = now() - timedelta(days=31)
         self.test_editor.wp_editcount_prev_updated = (
             self.test_editor.wp_editcount_prev_updated - timedelta(days=31)
@@ -964,6 +984,7 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_enough_edits,
             self.test_editor.wp_account_old_enough,
             self.test_editor.wp_not_blocked,
+            self.test_editor.ignore_wp_blocks,
         )
         self.test_editor.wp_editcount_updated = now() - timedelta(days=60)
         self.test_editor.wp_editcount_prev_updated = (
