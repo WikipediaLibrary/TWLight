@@ -12,11 +12,13 @@ logger = logging.getLogger(__name__)
 def editor_global_userinfo(
     wp_username: str, wp_sub: typing.Optional[int], strict: bool
 ):
-    endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={name}&format=json&formatversion=2".format(
-        base=settings.TWLIGHT_OAUTH_PROVIDER_URL, name=urllib.parse.quote(wp_username)
+    endpoint = settings.TWLIGHT_OAUTH_PROVIDER_URL + "/w/api.php"
+    guiuser = urllib.parse.quote(wp_username)
+    query = "{endpoint}?action=query&meta=globaluserinfo&guiuser={guiuser}&guiprop=merged|unattached&format=json&formatversion=2".format(
+        endpoint=endpoint, guiuser=guiuser
     )
 
-    results = json.loads(urllib.request.urlopen(endpoint).read())
+    results = json.loads(urllib.request.urlopen(query).read())
     try:
         global_userinfo = results["query"]["globaluserinfo"]
         # If the user isn't found global_userinfo contains the empty key "missing"
