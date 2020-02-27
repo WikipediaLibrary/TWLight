@@ -14,11 +14,41 @@ def editor_global_userinfo(
 ):
     endpoint = settings.TWLIGHT_OAUTH_PROVIDER_URL + "/w/api.php"
     guiuser = urllib.parse.quote(wp_username)
-    query = "{endpoint}?action=query&meta=globaluserinfo&guiuser={guiuser}&guiprop=merged|unattached&format=json&formatversion=2".format(
+    query = "{endpoint}?action=query&meta=globaluserinfo&guiuser={guiuser}&guiprop=merged&format=json&formatversion=2".format(
         endpoint=endpoint, guiuser=guiuser
     )
 
     results = json.loads(urllib.request.urlopen(query).read())
+    """
+    Expected data:
+    {
+    "batchcomplete": true,
+     "query": {
+        "globaluserinfo": {                         # Global account
+            "home": "enwiki",                           # Wiki used to determine the name of the global account. See https://www.mediawiki.org/wiki/SUL_finalisation
+            "id": account['id'],                        # Wikipedia ID
+            "registration": "YYYY-MM-DDTHH:mm:ssZ",     # Date registered
+            "name": account['name'],                    # wikipedia username
+            "merged": [                                 # Individual project accounts attached to the global account.
+                {
+                    "wiki": "enwiki",
+                    "url": "https://en.wikipedia.org",
+                    "timestamp": "YYYY-MM-DDTHH:mm:ssZ",
+                    "method": "login",
+                    "editcount": account['editcount']           # editcount for this project
+                    "registration": "YYYY-MM-DDTHH:mm:ssZ",     # Date registered for this project
+                    "groups": ["extendedconfirmed"],
+                    "blocked": {                                # Only exists if the user has blocks for this project.
+                    "expiry": "infinity",
+                    "reason": ""
+                }
+                ... # Continues ad nauseam
+            ]
+        }
+     }
+    }
+    """
+
     try:
         global_userinfo = results["query"]["globaluserinfo"]
         # If the user isn't found global_userinfo contains the empty key "missing"
