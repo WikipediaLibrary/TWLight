@@ -186,7 +186,7 @@ class Editor(models.Model):
     # Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
     wp_rights = models.TextField(help_text=_("Wikipedia user rights"), blank=True)
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~ Non-editable data computed from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
+    # ~~~~~~~~~~~~~~~~~~~~~~~ Non-editable data computed from Wikimedia OAuth / API Query ~~~~~~~~~~~~~~~~~~~~~~~#
     wp_valid = models.BooleanField(
         default=False,
         editable=False,
@@ -266,6 +266,13 @@ class Editor(models.Model):
         help_text=_(
             "At their last login, did this user meet the criteria for access to the library card bundle?"
         ),
+    )
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Staff-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ignore_wp_blocks = models.BooleanField(
+        default=False,
+        # Translators: Help text asking whether to ignore the 'not currently blocked' requirement for access.
+        help_text=_("Ignore the 'not currently blocked' criterion for access?"),
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -426,7 +433,10 @@ class Editor(models.Model):
         self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
         self.wp_enough_edits = editor_enough_edits(global_userinfo)
         self.wp_valid = editor_valid(
-            self.wp_enough_edits, self.wp_account_old_enough, self.wp_not_blocked
+            self.wp_enough_edits,
+            self.wp_account_old_enough,
+            self.wp_not_blocked,
+            self.ignore_wp_blocks,
         )
         self.wp_bundle_eligible = editor_bundle_eligible(
             self.wp_valid, self.wp_enough_recent_edits
