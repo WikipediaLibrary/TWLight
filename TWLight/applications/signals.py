@@ -1,9 +1,13 @@
 import logging
 
+from TWLight.helpers import site_id
 from django.dispatch import receiver, Signal
+from django.db.models.signals import post_save
 from django_comments.signals import comment_was_posted
-
-from TWLight.resources.models import Partner
+from django_comments.models import Comment
+from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
+from TWLight.resources.models import Partner, Stream
 from .models import Application
 
 no_more_accounts = Signal(providing_args=["partner_pk"])
@@ -44,7 +48,6 @@ def under_discussion(sender, comment, request, **kwargs):
                 comment.object_pk
             )
         )
-        pass
 
 
 @receiver(no_more_accounts)
@@ -65,3 +68,48 @@ def set_partner_status(sender, **kwargs):
             " partner {pk} does not exist - unable to set"
             " partner status".format(pk=partner_pk)
         )
+
+
+@receiver(post_save, sender=Partner)
+@receiver(post_save, sender=Stream)
+def invalidate_bundle_partner_applications(sender, instance, **kwargs):
+    """
+    Invalidates open applications for bundle partners.
+    """
+
+    twl_team, created = User.objects.get_or_create(
+        username="TWL Team", email="wikipedialibrary@wikimedia.org"
+    )
+
+    if sender == Partner:
+        partner = instance
+    elif sender == Stream:
+        partner = instance.partner
+
+    if partner.authorization_method == Partner.BUNDLE:
+        # All open applications for this partner.
+        applications = Application.objects.filter(
+            partner=partner,
+            status__in=(
+                Application.PENDING,
+                Application.QUESTION,
+                Application.APPROVED,
+            ),
+        )
+
+        for application in applications:
+            # Add a comment.
+            comment = Comment.objects.create(
+                content_object=application,
+                site_id=site_id(),
+                user=twl_team,
+                # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
+                comment=_(
+                    "This partner joined the Library Bundle, which does not require applications."
+                    "This application will be marked as invalid."
+                ),
+            )
+            comment.save()
+            # Mark application invalid.
+            application.status = Application.INVALID
+            application.save()
