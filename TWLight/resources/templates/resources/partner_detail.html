@@ -162,7 +162,7 @@
             <div class="timeline-panel">
               <div class="timeline-body">
                 {% if object.get_languages %}
-                  <p class="partner-languages">
+                  <div class="partner-languages">
                       {% comment %} Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
                       {% trans 'Language(s)' %}:
                       <div class="resource-label-languages">
@@ -171,13 +171,13 @@
                           {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
                       {% endfor %}
                       </div>
-                  </p>
+                  </div>
                 {% else %}
                   {% comment %} Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page. {% endcomment %}
                   <p>{% trans "Languages not available." %}</p>
                 {% endif %}
               </div>
-            </div>      
+            </div>
           </li>
           {% with object.excerpt_limit as excerpt_limit %}
           {% with object.excerpt_limit_percentage as excerpt_limit_percentage %}
@@ -189,7 +189,7 @@
                 <div class="timeline-heading">
                   {% comment %} Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field. {% endcomment %}
                   <h4 class="timeline-title">{% trans "Excerpt limit" %}</h4>
-                </div>        
+                </div>
                 <div class="timeline-body">
                   <ul>
                     {% if excerpt_limit_percentage and excerpt_limit %}
@@ -198,7 +198,7 @@
                         {% blocktrans trimmed %}
                           {{ object }} allows a maximum of {{ excerpt_limit }} words or {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
                         {% endblocktrans %}
-                      </li>            
+                      </li>
                     {% elif excerpt_limit %}
                       <li>
                         {% comment %} Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
@@ -326,7 +326,7 @@
                       the full content on the details page.
                     {% endcomment %}
                       <li><b>{{ stream }}</b>
-                        {% if stream.description %}&mdash; 
+                        {% if stream.description %}&mdash;
                           {% filter twlight_removetags:"details summary" %}
                             {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
                               {{ stream.description | twlight_wikicode2html | safe }}
@@ -337,7 +337,7 @@
                     {% endfor %}
                   </ul>
                 </div>
-              </div>      
+              </div>
             </li>
           {% endif %}
           <li class="timeline-inverted">
@@ -357,7 +357,7 @@
                   <p>{% trans "Terms of use not available." %}</p>
                 {% endif %}
               </div>
-            </div>      
+            </div>
           </li>
         </ul>
       </div>
@@ -417,7 +417,7 @@
               </div>
             {% endif %}
           {% endif %}
-      
+
           {% if user|coordinators_only %}
           <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
             {% csrf_token %}
@@ -425,9 +425,9 @@
           </form>
           {% endif %}
         {% endif %}
-            {% if object.logos.logo.url %}
-              <img src="{{ object.logos.logo.url }}" class="img-responsive hidden-xs center-block partner-logo">
-            {% endif %}
+        {% if object.logos.logo.url %}
+          <img src="{{ object.logos.logo.url }}" class="img-responsive hidden-xs center-block partner-logo">
+        {% endif %}
         {% if not object.authorization_method == object.BUNDLE %}
             <div class="well hidden-xs">
               {% if object.coordinator.editor.wp_username %}
@@ -435,7 +435,7 @@
                 {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
                   <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
                 {% endblocktrans %}
-      
+
                 <ul>
                   {% if object.coordinator.editor.wp_talk_page_url %}
                     <li>
@@ -443,15 +443,15 @@
                         {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to. {% endcomment %}
                         {% trans "Talk page" %}
                       </a>
-                    </li>            
+                    </li>
                   {% endif %}
                   {% if object.coordinator.editor.wp_email_page_url %}
                     <li>
                       <a href="{{ object.coordinator.editor.wp_email_page_url }}">
                         {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to. {% endcomment %}
                         {% trans "Special:EmailUser page" %}
-                      </a>            
-                    </li>            
+                      </a>
+                    </li>
                   {% endif %}
                 </ul>
               {% else %}
@@ -467,6 +467,52 @@
               {% comment %} Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
               <a href="{% url 'partners:users' pk=object.pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "List applications" %}</a>
             {% endif %}
+          {% else %}
+            <div class="panel-body top-border">
+              {% if user.is_authenticated %}
+                {% if user.editor.wp_bundle_eligible %}
+                  {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+                  <a class="btn btn-default btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
+                  <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                  {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                  {% trans "Library bundle access" %}
+                  ">
+                  {% comment %} Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
+                  {% blocktrans trimmed %}
+                    You are eligible to access Library Bundle partners.
+                    Click the above button to access the collection.
+                  {% endblocktrans %}
+                {% else %}
+                  {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+                  <a class="btn btn-default btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
+                  <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                  {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                  {% trans "Library bundle access" %}
+                  ">
+                  {% comment %} Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
+                  {% url 'homepage' as homepage %}
+                  {% blocktrans trimmed %}
+                    You are not eligible to access Library Bundle partners.
+                    Visit the <a href="{{ homepage }}">homepage</a> to check the
+                    eligibility criteria.
+                  {% endblocktrans %}
+                {% endif %}
+              {% else %}
+                {% comment %} Translators: Buttton prompting users to log in. {% endcomment %}
+                <a class="btn btn-default btn-lg btn-block" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">{% trans "Log in" %}</a><br />
+                <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                {% trans "Library bundle access" %}
+                ">
+                {% comment %} Translators: Text shown to unauthenticated users when they visit a Bundle partner page. {% endcomment %}
+                {% url 'about' as about %}
+                {% blocktrans trimmed %}
+                  This resource is part of our <a href="{{ about }}">Library Bundle</a>
+                  access, which you can access if you meet our minimum eligibility criteria.
+                  Log in to find out if you are eligible.
+                {% endblocktrans %}
+              {% endif %}
+            </div>
           {% endif %}
       </div>
     </div>

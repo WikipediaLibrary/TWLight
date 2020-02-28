@@ -4,16 +4,16 @@ Views for managing applications for resource grants go here.
 Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
-import bleach
-import urllib.request, urllib.error, urllib.parse
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 import logging
-from dal import autocomplete
-from reversion import revisions as reversion
-from reversion.models import Version
+import urllib.error
+import urllib.parse
+import urllib.request
 from urllib.parse import urlparse
 
+import bleach
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from dal import autocomplete
 from django import forms
 from django.conf import settings
 from django.contrib import messages
@@ -22,13 +22,20 @@ from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import IntegrityError
+from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
 from django.views.generic.list import ListView
+from reversion import revisions as reversion
+from reversion.models import Version
 
+from TWLight.applications.signals import no_more_accounts
+from TWLight.resources.models import Partner, Stream, AccessCode
+from TWLight.users.groups import get_coordinators
+from TWLight.users.models import Authorization, Editor
 from TWLight.view_mixins import (
     CoordinatorOrSelf,
     CoordinatorsOnly,
@@ -40,11 +47,7 @@ from TWLight.view_mixins import (
     DataProcessingRequired,
     NotDeleted,
 )
-from TWLight.applications.signals import no_more_accounts
-from TWLight.resources.models import Partner, Stream, AccessCode
-from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Authorization, Editor
-
+from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .helpers import (
     USER_FORM_FIELDS,
     PARTNER_FORM_OPTIONAL_FIELDS,
@@ -55,7 +58,6 @@ from .helpers import (
     get_accounts_available,
     is_proxy_and_application_approved,
 )
-from .forms import BaseApplicationForm, ApplicationAutocomplete, RenewalForm
 from .models import Application
 
 logger = logging.getLogger(__name__)
@@ -93,7 +95,9 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Make sure that we aren't leaking info via our form choices.
         if self.request.user.is_superuser:
-            partner_qs = Partner.objects.all().order_by("company_name")
+            partner_qs = Partner.objects.filter(
+                ~Q(authorization_method=Partner.BUNDLE)
+            ).order_by("company_name")
             # Query by partner name
             if self.q:
                 partner_qs = partner_qs.filter(
@@ -142,7 +146,9 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         open_apps_partners = []
         for i in open_apps:
             open_apps_partners.append(i.partner.company_name)
-        for partner in Partner.objects.all().order_by("company_name"):
+        for partner in Partner.objects.filter(
+            ~Q(authorization_method=Partner.BUNDLE)
+        ).order_by("company_name"):
             # We cannot just use the partner ID as the field name; Django won't
             # be able to find the resultant data.
             # http://stackoverflow.com/a/8289048
@@ -175,7 +181,15 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
         partner_ids = [
             int(key[8:]) for key in form.cleaned_data if form.cleaned_data[key]
         ]
-
+        for each_id in partner_ids:
+            try:
+                if (
+                    Partner.objects.get(id=each_id).authorization_method
+                    == Partner.BUNDLE
+                ):
+                    partner_ids.remove(each_id)
+            except Partner.NOT_AVAILABLE:
+                partner_ids.remove(each_id)
         self.request.session[PARTNERS_SESSION_KEY] = partner_ids
 
         if len(partner_ids):
@@ -287,6 +301,11 @@ class _BaseSubmitApplicationView(
         for partner in form.field_params:
             partner_id = partner[8:]
             partner_obj = Partner.objects.get(id=partner_id)
+
+            # We exclude Bundle partners from the apply page, but if they are
+            # here somehow, we can be reasonably certain something has gone awry.
+            if partner_obj.authorization_method == Partner.BUNDLE:
+                raise PermissionDenied
 
             app = Application()
             app.editor = self.request.user.editor
@@ -422,7 +441,9 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
 
 class SubmitSingleApplicationView(_BaseSubmitApplicationView):
     def dispatch(self, request, *args, **kwargs):
-        if self._get_partners()[0].status == Partner.WAITLIST:
+        if self._get_partners()[0].authorization_method == Partner.BUNDLE:
+            raise PermissionDenied
+        elif self._get_partners()[0].status == Partner.WAITLIST:
             # Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
             messages.add_message(
                 request,
@@ -651,6 +672,7 @@ class ListApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             base_qs = (
                 Application.objects.filter(
+                    ~Q(partner__authorization_method=Partner.BUNDLE),
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
                     editor__isnull=False,
@@ -662,6 +684,7 @@ class ListApplicationsView(_BaseListApplicationView):
         else:
             base_qs = (
                 Application.objects.filter(
+                    ~Q(partner__authorization_method=Partner.BUNDLE),
                     status__in=[Application.PENDING, Application.QUESTION],
                     partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST],
                     partner__coordinator__pk=self.request.user.pk,
@@ -695,7 +718,9 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         if self.request.user.is_superuser:
             return (
                 Application.objects.filter(
-                    status=Application.APPROVED, editor__isnull=False
+                    ~Q(partner__authorization_method=Partner.BUNDLE),
+                    status=Application.APPROVED,
+                    editor__isnull=False,
                 )
                 .exclude(editor__user__groups__name="restricted")
                 .order_by("status", "partner", "date_created")
@@ -703,6 +728,7 @@ class ListApprovedApplicationsView(_BaseListApplicationView):
         else:
             return (
                 Application.objects.filter(
+                    ~Q(partner__authorization_method=Partner.BUNDLE),
                     status=Application.APPROVED,
                     partner__coordinator__pk=self.request.user.pk,
                     editor__isnull=False,
@@ -725,11 +751,13 @@ class ListRejectedApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.include_invalid.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.NOT_APPROVED, Application.INVALID],
                 editor__isnull=False,
             ).order_by("date_closed", "partner")
         else:
             return Application.include_invalid.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.NOT_APPROVED, Application.INVALID],
                 partner__coordinator__pk=self.request.user.pk,
                 editor__isnull=False,
@@ -754,12 +782,14 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.PENDING, Application.QUESTION],
                 parent__isnull=False,
                 editor__isnull=False,
             ).order_by("-date_created")
         else:
             return Application.objects.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.PENDING, Application.QUESTION],
                 partner__coordinator__pk=self.request.user.pk,
                 parent__isnull=False,
@@ -781,10 +811,13 @@ class ListSentApplicationsView(_BaseListApplicationView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Application.objects.filter(
-                status=Application.SENT, editor__isnull=False
+                ~Q(partner__authorization_method=Partner.BUNDLE),
+                status=Application.SENT,
+                editor__isnull=False,
             ).order_by("date_closed", "partner")
         else:
             return Application.objects.filter(
+                ~Q(partner__authorization_method=Partner.BUNDLE),
                 status=Application.SENT,
                 partner__coordinator__pk=self.request.user.pk,
                 editor__isnull=False,
@@ -909,6 +942,31 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         return context
 
     def get_form(self, form_class=None):
+        app = self.get_object()
+        # Status cannot be changed for applications made to bundle partners.
+        if app.partner.authorization_method == Partner.BUNDLE:
+            bundle_url = reverse("about")
+            collections_url = reverse(
+                "users:my_collection", kwargs={"pk": self.request.user.editor.pk}
+            )
+            contact_url = reverse("contact")
+            messages.add_message(
+                self.request,
+                messages.WARNING,
+                # Translators: This message is shown to users when they access an application page of a now Bundle partner (new applications aren't allowed for Bundle partners and the status of old applications cannot be modified)
+                _(
+                    "This application cannot be modified since this "
+                    'partner is now part of our <a href="{bundle}">bundle access</a>. '
+                    "If you are eligible, you can access this resource from <a href="
+                    '"{collections}">your collections</a>. <a href="{contact}">'
+                    "Contact us</a> if you have any questions.".format(
+                        bundle=bundle_url,
+                        collections=collections_url,
+                        contact=contact_url,
+                    )
+                ),
+            )
+            return
         if form_class is None:
             form_class = self.form_class
         form = super(EvaluateApplicationView, self).get_form(form_class)
@@ -923,7 +981,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             )
         )
 
-        if self.get_object().is_instantly_finalized():
+        if app.is_instantly_finalized():
             status_choices = Application.STATUS_CHOICES[:]
             status_choices.pop(4)
             form.fields["status"].choices = status_choices
@@ -1147,7 +1205,10 @@ class ListReadyApplicationsView(CoordinatorsOnly, ListView):
             status=Application.APPROVED, editor__isnull=False
         ).exclude(editor__user__groups__name="restricted")
 
-        partner_list = Partner.objects.filter(applications__in=base_queryset).distinct()
+        partner_list = Partner.objects.filter(
+            applications__in=base_queryset,
+            authorization_method__in=[Partner.CODES, Partner.EMAIL],
+        ).distinct()
 
         # Superusers can see all unrestricted applications, otherwise
         # limit to ones from the current coordinator
@@ -1163,11 +1224,10 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SendReadyApplicationsView, self).get_context_data(**kwargs)
-        apps = (
-            self.get_object()
-            .applications.filter(status=Application.APPROVED, editor__isnull=False)
-            .exclude(editor__user__groups__name="restricted")
-        )
+        partner = self.get_object()
+        apps = partner.applications.filter(
+            status=Application.APPROVED, editor__isnull=False
+        ).exclude(editor__user__groups__name="restricted")
         app_outputs = {}
         stream_outputs = []
         list_unavailable_streams = []
@@ -1180,8 +1240,6 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
         # This part checks to see if there are applications from stream(s) with no accounts available.
         # Additionally, supports send_partner template with total approved/sent applications.
-        partner = self.get_object()
-
         total_apps_approved = Application.objects.filter(
             partner=partner, status=Application.APPROVED
         ).count()
@@ -1227,7 +1285,7 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 context["total_apps_approved_or_sent"] = None
 
         available_access_codes = AccessCode.objects.filter(
-            partner=self.get_object(), authorization__isnull=True
+            partner=partner, authorization__isnull=True
         )
         context["available_access_codes"] = available_access_codes
 
@@ -1383,6 +1441,9 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
 
     def get_object(self):
         app = Application.objects.get(pk=self.kwargs["pk"])
+
+        if app.partner.authorization_method == Partner.BUNDLE:
+            raise PermissionDenied
 
         try:
             assert (app.status == Application.APPROVED) or (
