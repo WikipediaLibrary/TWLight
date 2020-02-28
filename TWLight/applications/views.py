@@ -188,7 +188,7 @@ class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
                     == Partner.BUNDLE
                 ):
                     partner_ids.remove(each_id)
-            except Partner.NOT_AVAILABLE:
+            except Partner.DoesNotExist:
                 partner_ids.remove(each_id)
         self.request.session[PARTNERS_SESSION_KEY] = partner_ids
 
