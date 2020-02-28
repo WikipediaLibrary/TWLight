@@ -12,12 +12,10 @@ logger = logging.getLogger(__name__)
 def editor_global_userinfo(
     wp_username: str, wp_sub: typing.Optional[int], strict: bool
 ):
-    endpoint = settings.TWLIGHT_OAUTH_PROVIDER_URL + "/w/api.php"
     guiuser = urllib.parse.quote(wp_username)
     query = "{endpoint}?action=query&meta=globaluserinfo&guiuser={guiuser}&guiprop=editcount|merged&format=json&formatversion=2".format(
-        endpoint=endpoint, guiuser=guiuser
+        endpoint=settings.TWLIGHT_API_PROVIDER_ENDPOINT, guiuser=guiuser
     )
-
     results = json.loads(urllib.request.urlopen(query).read())
     """
     Expected data:
