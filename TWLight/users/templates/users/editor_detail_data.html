@@ -154,7 +154,7 @@
         {% trans "Satisfies recent edit count?" %}
     </div>
     <div class="col-xs-12 col-sm-9">
-        {% if editor.enough_recent_edits %}
+        {% if editor.wp_enough_recent_edits %}
             {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle. {% endcomment %}
             {% trans "Yes" %}
         {% else %}
