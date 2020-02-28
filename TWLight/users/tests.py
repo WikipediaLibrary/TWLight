@@ -771,10 +771,10 @@ class EditorModelTestCase(TestCase):
 
         # Valid data
         global_userinfo["editcount"] = 500
-        self.test_editor.wp_editcount = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        enough_edits = editor_enough_edits(global_userinfo["editcount"])
         not_blocked = editor_not_blocked(global_userinfo["merged"])
         ignore_wp_blocks = False
         valid = editor_valid(
@@ -782,17 +782,10 @@ class EditorModelTestCase(TestCase):
         )
         self.assertTrue(valid)
 
-        # Edge case
-        global_userinfo["editcount"] = 500
-        enough_edits = editor_enough_edits(global_userinfo["editcount"])
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
-        )
-        self.assertTrue(valid)
-
         # Too few edits
         global_userinfo["editcount"] = 499
-        enough_edits = editor_enough_edits(global_userinfo["editcount"])
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
         valid = editor_valid(
             enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
         )
@@ -800,10 +793,11 @@ class EditorModelTestCase(TestCase):
 
         # Account created too recently
         global_userinfo["editcount"] = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
         identity["registered"] = datetime.today().strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        enough_edits = editor_enough_edits(global_userinfo["editcount"])
         valid = editor_valid(
             enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
         )
@@ -864,10 +858,10 @@ class EditorModelTestCase(TestCase):
 
         # Valid data
         global_userinfo["editcount"] = 500
-        self.test_editor.wp_editcount = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        enough_edits = editor_enough_edits(global_userinfo["editcount"])
         not_blocked = editor_not_blocked(global_userinfo["merged"])
         ignore_wp_blocks = False
         valid = editor_valid(
@@ -973,12 +967,15 @@ class EditorModelTestCase(TestCase):
         # even if we're not sure whether they made those edits in the last 30 days.
 
         # Valid data for first time logging in after bundle was launched. 60 days ago.
-        global_userinfo["editcount"] = 500
         global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS)
+        global_userinfo["editcount"] = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        self.test_editor.wp_enough_edits = editor_enough_edits(
+            self.test_editor.wp_editcount
+        )
         self.test_editor.wp_editcount = global_userinfo["editcount"]
         self.test_editor.wp_registered = editor_reg_date(identity, global_userinfo)
         self.test_editor.wp_account_old_enough = editor_account_old_enough(registered)
-        self.test_editor.wp_enough_edits = editor_enough_edits(global_userinfo["editcount"])
         self.test_editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
         self.test_editor.wp_valid = editor_valid(
             self.test_editor.wp_enough_edits,
