@@ -77,13 +77,8 @@ def editor_reg_date(identity, global_userinfo):
     return reg_date
 
 
-def editor_enough_edits(global_userinfo):
-    # If, for some reason, this information hasn't come through,
-    # default to user not being valid.
-    if not global_userinfo:
-        return False
-    # Check: >= 500 edits
-    return int(global_userinfo["editcount"]) >= 500
+def editor_enough_edits(editcount: int):
+    return editcount >= 500
 
 
 def editor_not_blocked(merged: list):
