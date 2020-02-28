@@ -535,7 +535,7 @@ class Partner(models.Model):
     def get_access_url(self):
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
         access_url = None
-        if(
+        if (
             self.authorization_method in [self.PROXY, self.BUNDLE]
             and ezproxy_url
             and self.target_url
