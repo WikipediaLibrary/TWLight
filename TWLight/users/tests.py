@@ -27,10 +27,9 @@ from .authorization import OAuthBackend
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
-from .models import (
-    UserProfile,
-    Editor,
-    Authorization,
+from .models import UserProfile, Editor, Authorization
+
+from TWLight.users.helpers.editor_data import (
     editor_valid,
     editor_account_old_enough,
     editor_enough_edits,
@@ -55,13 +54,40 @@ FAKE_IDENTITY = {
     "username": "alice",
 }
 
+FAKE_MERGED_ACCOUNTS = [
+    {
+        "wiki": "enwiki",
+        "url": "https://en.wikipedia.org",
+        "timestamp": "2015-11-06T15:46:29Z",
+        "method": "login",
+        "editcount": 100,
+        "registration": "2015-11-06T15:46:29Z",
+        "groups": ["extendedconfirmed"],
+    }
+]
+
+FAKE_MERGED_ACCOUNTS_BLOCKED = [
+    {
+        "wiki": "enwiki",
+        "url": "https://en.wikipedia.org",
+        "timestamp": "2015-11-06T15:46:29Z",
+        "method": "login",
+        "editcount": 100,
+        "registration": "2015-11-06T15:46:29Z",
+        "groups": ["extendedconfirmed"],
+        "blocked": {"expiry": "infinity", "reason": "bad editor!"},
+    }
+]
+
 FAKE_GLOBAL_USERINFO = {
     "home": "enwiki",
     "id": 567823,
     "registration": "2015-11-06T15:46:29Z",  # Well before first commit.
     "name": "alice",
     "editcount": 5000,
+    "merged": copy.copy(FAKE_MERGED_ACCOUNTS),
 }
+
 
 # CSRF middleware is helpful for site security, but not helpful for testing
 # the rendered output of a page.
@@ -725,56 +751,74 @@ class EditorModelTestCase(TestCase):
 
         # Valid data
         global_userinfo["editcount"] = 500
-        self.test_editor.wp_editcount = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        enough_edits = editor_enough_edits(global_userinfo)
-        not_blocked = editor_not_blocked(identity)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
-        self.assertTrue(valid)
-
-        # Edge case
-        global_userinfo["editcount"] = 500
-        enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        ignore_wp_blocks = False
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertTrue(valid)
 
         # Too few edits
         global_userinfo["editcount"] = 499
-        enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertFalse(valid)
 
         # Account created too recently
         global_userinfo["editcount"] = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
         identity["registered"] = datetime.today().strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        enough_edits = editor_enough_edits(global_userinfo)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertFalse(valid)
 
-        # Edge case: this shouldn't.
-        almost_6_months_ago = datetime.today() - timedelta(days=183)
+        # Edge case: this shouldn't work.
+        almost_6_months_ago = datetime.today() - timedelta(days=181)
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
-        self.assertTrue(valid)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertFalse(valid)
 
         # Edge case: this should work.
         almost_6_months_ago = datetime.today() - timedelta(days=182)
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertTrue(valid)
 
         # Bad editor! No biscuit.
-        identity["blocked"] = True
-        not_blocked = editor_not_blocked(identity)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertFalse(valid)
+
+        # Aw, you're not that bad. Have a cookie.
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        ignore_wp_blocks = True
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertTrue(valid)
 
     def test_editor_eligibility_functions(self):
         # Start out with basic validation of the eligibility functions.
@@ -803,12 +847,15 @@ class EditorModelTestCase(TestCase):
 
         # Valid data
         global_userinfo["editcount"] = 500
-        self.test_editor.wp_editcount = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
-        enough_edits = editor_enough_edits(global_userinfo)
-        not_blocked = editor_not_blocked(identity)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        ignore_wp_blocks = False
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.assertTrue(valid)
 
         # 1st time bundle check should always pass for a valid user.
@@ -881,9 +928,11 @@ class EditorModelTestCase(TestCase):
         self.assertTrue(bundle_eligible)
 
         # Bad editor! No biscuit, even if you have enough edits.
-        identity["blocked"] = True
-        not_blocked = editor_not_blocked(identity)
-        valid = editor_valid(enough_edits, account_old_enough, not_blocked)
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
         self.test_editor.wp_editcount_updated = now() - timedelta(days=31)
         self.test_editor.wp_editcount_prev_updated = (
             self.test_editor.wp_editcount_prev_updated - timedelta(days=31)
@@ -907,17 +956,21 @@ class EditorModelTestCase(TestCase):
         # even if we're not sure whether they made those edits in the last 30 days.
 
         # Valid data for first time logging in after bundle was launched. 60 days ago.
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS)
         global_userinfo["editcount"] = 500
-        identity["blocked"] = False
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        self.test_editor.wp_enough_edits = editor_enough_edits(
+            self.test_editor.wp_editcount
+        )
         self.test_editor.wp_editcount = global_userinfo["editcount"]
         self.test_editor.wp_registered = editor_reg_date(identity, global_userinfo)
         self.test_editor.wp_account_old_enough = editor_account_old_enough(registered)
-        self.test_editor.wp_enough_edits = editor_enough_edits(global_userinfo)
-        self.test_editor.wp_not_blocked = editor_not_blocked(identity)
+        self.test_editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
         self.test_editor.wp_valid = editor_valid(
             self.test_editor.wp_enough_edits,
             self.test_editor.wp_account_old_enough,
             self.test_editor.wp_not_blocked,
+            self.test_editor.ignore_wp_blocks,
         )
         self.test_editor.wp_editcount_updated = now() - timedelta(days=60)
         self.test_editor.wp_editcount_prev_updated = (
@@ -990,6 +1043,8 @@ class EditorModelTestCase(TestCase):
         global_userinfo["name"] = identity["username"]
         # We should now be using the global_userinfo editcount
         global_userinfo["editcount"] = 960
+
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
 
         # update_from_wikipedia calls get_global_userinfo, which generates an
         # API call to Wikipedia that we don't actually want to do in testing.
