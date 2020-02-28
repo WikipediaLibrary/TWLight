@@ -416,6 +416,19 @@ class Editor(models.Model):
             self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
             self.wp_editcount_updated = now()
 
+        self.wp_registered = editor_reg_date(identity, global_userinfo)
+        self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
+        # TODO: update this function to simply take editcount.
+        self.wp_enough_edits = editor_enough_edits(global_userinfo)
+        self.wp_valid = editor_valid(
+            self.wp_enough_edits,
+            self.wp_account_old_enough,
+            self.wp_not_blocked,
+            self.ignore_wp_blocks,
+        )
+        self.wp_bundle_eligible = editor_bundle_eligible(
+            self.wp_valid, self.wp_enough_recent_edits
+        )
         self.save()
 
         # This will be True the first time the user logs in, since use_wp_email
@@ -429,18 +442,6 @@ class Editor(models.Model):
                 # anything if we can't find it.
                 logger.exception("Unable to get Editor email address from Wikipedia.")
 
-        self.wp_registered = editor_reg_date(identity, global_userinfo)
-        self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
-        self.wp_enough_edits = editor_enough_edits(global_userinfo)
-        self.wp_valid = editor_valid(
-            self.wp_enough_edits,
-            self.wp_account_old_enough,
-            self.wp_not_blocked,
-            self.ignore_wp_blocks,
-        )
-        self.wp_bundle_eligible = editor_bundle_eligible(
-            self.wp_valid, self.wp_enough_recent_edits
-        )
         self.user.save()
 
         # Add language if the user hasn't selected one
