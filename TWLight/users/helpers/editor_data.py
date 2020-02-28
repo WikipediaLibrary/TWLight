@@ -78,6 +78,10 @@ def editor_reg_date(identity, global_userinfo):
 
 
 def editor_enough_edits(editcount: int):
+    # If, for some reason, this information hasn't come through,
+    # default to user not being valid.
+    if not editcount:
+        return False
     return editcount >= 500
 
 
