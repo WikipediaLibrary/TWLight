@@ -78,8 +78,12 @@ class HomePageView(TemplateView):
             event["color"] = "warning"  # will be yellow
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
             event["text"] = _(
-                "{username} signed up for a Wikipedia Library " "Card Platform account"
-            ).format(username=editor.wp_username)
+                '<a href="{central_auth_url}">{username}</a>'
+                " signed up for a Wikipedia Library Card Platform account"
+            ).format(
+                username=editor.wp_username,
+                central_auth_url=editor.wp_link_central_auth,
+            )
             event["date"] = editor.date_created
             activity.append(event)
 
@@ -91,8 +95,11 @@ class HomePageView(TemplateView):
             event["icon"] = "fa-files-o"
             event["color"] = "success"  # green
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-            event["text"] = _("{partner} joined the Wikipedia Library ").format(
-                partner=partner.company_name
+            event["text"] = _(
+                '<a href="{url}">{partner}</a>' " joined the Wikipedia Library "
+            ).format(
+                partner=partner.company_name,
+                url=reverse_lazy("partners:detail", kwargs={"pk": partner.pk}),
             )
             event["date"] = partner.date_created
             activity.append(event)
@@ -110,9 +117,11 @@ class HomePageView(TemplateView):
             if app.parent:
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
                 text = _(
-                    "{username} applied for renewal of their "
+                    '<a href="{central_auth_url}">{username}</a>'
+                    " applied for renewal of their "
                     '<a href="{url}">{partner}</a> access'
                 ).format(
+                    central_auth_url=app.editor.wp_link_central_auth,
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
@@ -120,10 +129,12 @@ class HomePageView(TemplateView):
             elif app.rationale:
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
                 text = _(
-                    "{username} applied for access to "
+                    '<a href="{central_auth_url}">{username}</a>'
+                    " applied for access to "
                     '<a href="{url}">{partner}</a>'
                     "<blockquote>{rationale}</blockquote>"
                 ).format(
+                    central_auth_url=app.editor.wp_link_central_auth,
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
@@ -132,8 +143,11 @@ class HomePageView(TemplateView):
             else:
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
                 text = _(
-                    "{username} applied for access to " '<a href="{url}">{partner}</a>'
+                    '<a href="{central_auth_url}">{username}</a>'
+                    " applied for access to "
+                    '<a href="{url}">{partner}</a>'
                 ).format(
+                    central_auth_url=app.editor.wp_link_central_auth,
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
@@ -156,8 +170,11 @@ class HomePageView(TemplateView):
             event["color"] = "info"  # light blue
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
             event["text"] = _(
-                "{username} received access to " '<a href="{url}">{partner}</a>'
+                '<a href="{central_auth_url}">{username}</a>'
+                " received access to "
+                '<a href="{url}">{partner}</a>'
             ).format(
+                central_auth_url=app.editor.wp_link_central_auth,
                 username=grant.editor.wp_username,
                 partner=grant.partner.company_name,
                 url=reverse_lazy("partners:detail", kwargs={"pk": grant.partner.pk}),
