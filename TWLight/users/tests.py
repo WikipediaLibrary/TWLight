@@ -785,15 +785,15 @@ class EditorModelTestCase(TestCase):
         )
         self.assertFalse(valid)
 
-        # Edge case: this shouldn't.
-        almost_6_months_ago = datetime.today() - timedelta(days=183)
+        # Edge case: this shouldn't work.
+        almost_6_months_ago = datetime.today() - timedelta(days=181)
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         valid = editor_valid(
             enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
         )
-        self.assertTrue(valid)
+        self.assertFalse(valid)
 
         # Edge case: this should work.
         almost_6_months_ago = datetime.today() - timedelta(days=182)
@@ -812,6 +812,15 @@ class EditorModelTestCase(TestCase):
             enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
         )
         self.assertFalse(valid)
+
+        # Aw, you're not that bad. Have a cookie.
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        ignore_wp_blocks = True
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertTrue(valid)
 
     def test_editor_eligibility_functions(self):
         # Start out with basic validation of the eligibility functions.
