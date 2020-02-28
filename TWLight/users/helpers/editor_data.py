@@ -14,7 +14,7 @@ def editor_global_userinfo(
 ):
     endpoint = settings.TWLIGHT_OAUTH_PROVIDER_URL + "/w/api.php"
     guiuser = urllib.parse.quote(wp_username)
-    query = "{endpoint}?action=query&meta=globaluserinfo&guiuser={guiuser}&guiprop=merged&format=json&formatversion=2".format(
+    query = "{endpoint}?action=query&meta=globaluserinfo&guiuser={guiuser}&guiprop=editcount|merged&format=json&formatversion=2".format(
         endpoint=endpoint, guiuser=guiuser
     )
 
@@ -43,7 +43,8 @@ def editor_global_userinfo(
                     "reason": ""
                 }
                 ... # Continues ad nauseam
-            ]
+            ],
+            "editcount": account['editcount']           # global editcount
         }
      }
     }
