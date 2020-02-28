@@ -958,9 +958,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                     "If you are eligible, you can access this resource from <a href="
                     '"{library}">your library</a>. <a href="{contact}">'
                     "Contact us</a> if you have any questions.".format(
-                        bundle=bundle_url,
-                        library=library_url,
-                        contact=contact_url,
+                        bundle=bundle_url, library=library_url, contact=contact_url
                     )
                 ),
             )
