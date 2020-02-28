@@ -2,7 +2,6 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load l10n %}
-{% load cache %}
 {% load twlight_wikicode2html %}
 
 {% block content %}
@@ -104,9 +103,7 @@
                 <a href="{% url 'partners:detail' partner.pk %}"><img src="{{ partner.logos.logo.url }}" alt="{{ partner }} logo" class="featured-partner-logo"></a>
               </div>
               <div class="col-md-9" style="display:inline-block;">
-                {% cache 31536000 partner_short_description LANGUAGE_CODE object.pk %}
-                  {{ partner.short_description | twlight_wikicode2html | safe |truncatechars:200}}
-                {% endcache %}
+                {{ partner.short_description | twlight_wikicode2html | safe |truncatechars:200}}
               </div>
             </div>
           </div>
