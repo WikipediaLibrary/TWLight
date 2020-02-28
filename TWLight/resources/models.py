@@ -662,7 +662,7 @@ class Stream(models.Model):
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
         access_url = None
         if (
-            self.authorization_method == Partner.PROXY
+            self.authorization_method in [Partner.PROXY, Partner.BUNDLE]
             and ezproxy_url
             and self.target_url
         ):
