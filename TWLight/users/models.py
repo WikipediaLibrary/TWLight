@@ -770,6 +770,18 @@ class Authorization(models.Model):
         except Application.DoesNotExist:
             return None
 
+    def get_access_url(self):
+        """
+        For this authorization, which URL - if any - will users click to get to the collection?
+        Returns a string if an access URL exists, and None if it doesn't.
+        """
+        if self.stream:
+            access_url = self.stream.get_access_url
+        else:
+            access_url = self.partner.get_access_url
+
+        return access_url
+
     def about_to_expire(self):
         # less than 30 days but greater than -1 day is when we consider an authorization about to expire
         today = date.today()
@@ -795,6 +807,21 @@ class Authorization(models.Model):
             or not partner.authorization_method == partner.PROXY
             and not partner.authorization_method == partner.BUNDLE
         ):
+            return True
+        else:
+            return False
+
+    def is_accessed_via_proxy(self):
+        """
+        Do users access the collection for this authorization via the proxy, or not?
+        Returns True if the partner or stream has an authorization_method of Proxy or Bundle.
+        """
+        if self.stream:
+            authorization_method = self.stream.authorization_method
+        else:
+            authorization_method = self.partner.authorization_method
+
+        if authorization_method in [Partner.PROXY, Partner.BUNDLE]:
             return True
         else:
             return False

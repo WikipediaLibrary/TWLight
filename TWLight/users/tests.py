@@ -263,7 +263,7 @@ class ViewsTestCase(TestCase):
         # Client), and testing that the rendered content is equal to an
         # expected string is too fragile.
 
-    def test_my_collection_page_has_authorizations(self):
+    def test_my_library_page_has_authorizations(self):
         partner1 = PartnerFactory(authorization_method=Partner.PROXY)
         ApplicationFactory(
             status=Application.PENDING, editor=self.user_editor.editor, partner=partner1
@@ -294,12 +294,10 @@ class ViewsTestCase(TestCase):
         )
 
         factory = RequestFactory()
-        request = factory.get(
-            reverse("users:my_collection", kwargs={"pk": self.editor1.pk})
-        )
+        request = factory.get(reverse("users:my_library"))
         request.user = self.user_editor
 
-        response = views.CollectionUserView.as_view()(request, pk=self.editor1.pk)
+        response = views.CollectionUserView.as_view()(request)
 
         for each_authorization in response.context_data["proxy_bundle_authorizations"]:
             self.assertEqual(each_authorization.user, self.user_editor)

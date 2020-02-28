@@ -946,9 +946,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         # Status cannot be changed for applications made to bundle partners.
         if app.partner.authorization_method == Partner.BUNDLE:
             bundle_url = reverse("about")
-            collections_url = reverse(
-                "users:my_collection", kwargs={"pk": self.request.user.editor.pk}
-            )
+            library_url = reverse("users:my_library")
             contact_url = reverse("contact")
             messages.add_message(
                 self.request,
@@ -958,11 +956,9 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                     "This application cannot be modified since this "
                     'partner is now part of our <a href="{bundle}">bundle access</a>. '
                     "If you are eligible, you can access this resource from <a href="
-                    '"{collections}">your collections</a>. <a href="{contact}">'
+                    '"{library}">your library</a>. <a href="{contact}">'
                     "Contact us</a> if you have any questions.".format(
-                        bundle=bundle_url,
-                        collections=collections_url,
-                        contact=contact_url,
+                        bundle=bundle_url, library=library_url, contact=contact_url
                     )
                 ),
             )

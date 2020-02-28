@@ -115,6 +115,13 @@
           {% trans "Yes" %}
       {% else %}
           <strong class="warning">{% trans "No" %}</strong>
+          <p class="block-notice">
+            {% url 'contact' as contact_url %}
+            {% comment %} Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
+            {% blocktrans %}
+              It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
+            {% endblocktrans %}
+          </p>
       {% endif %}
   </div>
 </div>
@@ -147,7 +154,7 @@
         {% trans "Satisfies recent edit count?" %}
     </div>
     <div class="col-xs-12 col-sm-9">
-        {% if editor.enough_recent_edits %}
+        {% if editor.wp_enough_recent_edits %}
             {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle. {% endcomment %}
             {% trans "Yes" %}
         {% else %}

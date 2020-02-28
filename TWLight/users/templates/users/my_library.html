@@ -3,19 +3,51 @@
 
 {% block content %}
   {% comment %} Translators: Heading of the collection page where users can view all partners they are authorized to access with other relevant information. {% endcomment %}
-  <h3 class="inline-header">{% trans 'Your collection' %}</h3>
+  <h3 class="inline-header">{% trans 'Your Library' %}</h3>
   <a href="{% url 'users:my_applications' user.editor.pk %}" class="btn btn-default pull-right">
-    {% comment %} Translators: A button on the 'your collection' page which when clicked takes users their applications page. {% endcomment %}
+    {% comment %} Translators: A button on the 'your library' page which when clicked takes users their applications page. {% endcomment %}
     {% trans "Your applications" %}
   </a>
   <ul class="nav nav-tabs">
     {% comment %} Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access). {% endcomment %}
-    <li {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}class="active"{% elif not manual_authorizations and not manual_authorizations_expired %}class="active"{% endif %}><a data-toggle="tab" href="#proxy">{%  trans 'Proxy/bundle access' %} <span class="badge">{{ proxy_bundle_authorizations.count }}</span></a></li>
+    <li
+      {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}
+        class="active"
+      {% elif not manual_authorizations and not manual_authorizations_expired %}
+        class="active"
+      {% endif %}
+    >
+      <a data-toggle="tab" href="#proxy">
+        {% trans 'Instant access' %}
+        <span class="badge">
+          {{ proxy_bundle_authorizations.count }}
+        </span>
+      </a>
+    </li>
     {% comment %} Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually. {% endcomment %}
-    <li {% if manual_authorizations or manual_authorizations_expired %}{% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}class="active"{% endif %}{% endif %}><a data-toggle="tab" href="#manual">{%  trans 'Manual access' %} <span class="badge">{{ manual_authorizations.count }}</span></a></li>
+    <li
+      {% if manual_authorizations or manual_authorizations_expired %}
+        {% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}
+          class="active"
+        {% endif %}
+      {% endif %}
+    >
+      <a data-toggle="tab" href="#manual">
+        {% trans 'Individual access' %}
+        <span class="badge">
+          {{ manual_authorizations.count }}
+        </span>
+      </a>
+    </li>
   </ul>
   <div class="tab-content">
-    <div id="proxy" class="tab-pane fade {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}in active{% elif not manual_authorizations and not manual_authorizations_expired %}in active{% endif %}">
+    <div id="proxy" class="tab-pane fade
+      {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}
+        in active
+      {% elif not manual_authorizations and not manual_authorizations_expired %}
+        in active
+      {% endif %}
+    ">
       <br>
       <div class="row row-flex">
         {% for each_authorization in proxy_bundle_authorizations %}
@@ -42,7 +74,13 @@
         {% endfor %}
       </div>
     </div>
-    <div id="manual" class="tab-pane fade {% if manual_authorizations or manual_authorizations_expired %}{% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}in active{% endif %}{% endif %}">
+    <div id="manual" class="tab-pane fade
+      {% if manual_authorizations or manual_authorizations_expired %}
+        {% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}
+          in active
+        {% endif %}
+      {% endif %}
+    ">
       <br>
       <div class="row row-flex">
         {% for each_authorization in manual_authorizations %}

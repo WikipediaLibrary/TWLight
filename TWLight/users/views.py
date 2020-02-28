@@ -16,7 +16,7 @@ from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.views.generic.base import TemplateView, View
+from django.views.generic.base import TemplateView, View, RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
@@ -690,14 +690,10 @@ class AuthorizedUsers(APIView):
 
 class CollectionUserView(SelfOnly, ListView):
     model = Editor
-    template_name = "users/my_collection.html"
+    template_name = "users/my_library.html"
 
     def get_object(self):
-        assert "pk" in list(self.kwargs.keys())
-        try:
-            return Editor.objects.get(pk=self.kwargs["pk"])
-        except Editor.DoesNotExist:
-            raise Http404
+        return Editor.objects.get(pk=self.request.user.editor.pk)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionUserView, self).get_context_data(**kwargs)
@@ -821,6 +817,9 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
             messages.SUCCESS,
             _("Access to {} has been returned.").format(authorization.partner),
         )
-        return HttpResponseRedirect(
-            reverse("users:my_collection", kwargs={"pk": self.request.user.editor.pk})
-        )
+        return HttpResponseRedirect(reverse("users:my_library"))
+
+
+class LibraryRedirectView(RedirectView):
+    permanent = True
+    url = reverse_lazy("users:my_library")
