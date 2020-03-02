@@ -689,7 +689,6 @@ class Authorization(models.Model):
         or stream and False otherwise.
         """
         authorization_method = self.get_authorization_method()
-        logger.info(authorization_method)
 
         if authorization_method == Partner.BUNDLE:
             return True
