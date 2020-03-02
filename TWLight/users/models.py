@@ -675,19 +675,27 @@ class Authorization(models.Model):
         else:
             return False
 
-    def is_renewable(self):
-        partner = self.partner
-        if (
-            # We consider an authorization renewable, if the partner is PROXY and
-            # about to expire or has already expired (is_valid returns false on expiry)
-            # or if the partner isn't PROXY or BUNDLE, in which case the authorization
-            # would have an empty date_expires field. The first would check still cover for
-            # non-PROXY and non-BUNDLE partners with expiry dates.
-            self.about_to_expire()
-            or not self.is_valid
-            or not partner.authorization_method == partner.PROXY
-            and not partner.authorization_method == partner.BUNDLE
-        ):
+    def get_authorization_method(self):
+        """
+        For this authorization, returns the linked authorization
+        method of the partner or stream, as applicable
+        """
+        if self.stream:
+            authorization_method = self.stream.authorization_method
+        else:
+            authorization_method = self.partner.authorization_method
+
+        return authorization_method
+
+    def is_bundle(self):
+        """
+        Returns True if this authorization is to a Bundle partner
+        or stream and False otherwise.
+        """
+        authorization_method = self.get_authorization_method()
+        logger.info(authorization_method)
+
+        if authorization_method == Partner.BUNDLE:
             return True
         else:
             return False
@@ -697,10 +705,7 @@ class Authorization(models.Model):
         Do users access the collection for this authorization via the proxy, or not?
         Returns True if the partner or stream has an authorization_method of Proxy or Bundle.
         """
-        if self.stream:
-            authorization_method = self.stream.authorization_method
-        else:
-            authorization_method = self.partner.authorization_method
+        authorization_method = self.get_authorization_method()
 
         if authorization_method in [Partner.PROXY, Partner.BUNDLE]:
             return True
