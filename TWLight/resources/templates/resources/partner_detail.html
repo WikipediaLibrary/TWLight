@@ -471,17 +471,32 @@
             <div class="panel-body top-border">
               {% if user.is_authenticated %}
                 {% if user.editor.wp_bundle_eligible %}
-                  {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
-                  <a class="btn btn-default btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
-                  <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-                  {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
-                  {% trans "Library bundle access" %}
-                  ">
-                  {% comment %} Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
-                  {% blocktrans trimmed %}
-                    You are eligible to access Library Bundle partners.
-                    Click the above button to access the collection.
-                  {% endblocktrans %}
+                  {% if partner.specific_stream %}
+                    {% comment %} Translators: This text labels a button taking users to their library. {% endcomment %}
+                    <a class="btn btn-default btn-lg btn-block" href="{% url "users:my_library" %}">{% trans "My Library" %}</a><br />
+                    <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                    {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                    {% trans "Library bundle access" %}
+                    ">
+                    {% comment %} Translators: Text shown to authenticated, bundle eligible users when they need to visit My Library to access collections. {% endcomment %}
+                    {% blocktrans trimmed %}
+                      You are eligible to access Library Bundle partners.
+                      Click the button above to go to your Library and browse
+                      collections from this partner.
+                    {% endblocktrans %}
+                  {% else %}
+                    {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+                    <a class="btn btn-default btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
+                    <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                    {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                    {% trans "Library bundle access" %}
+                    ">
+                    {% comment %} Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
+                    {% blocktrans trimmed %}
+                      You are eligible to access Library Bundle partners.
+                      Click the button above to access the collection.
+                    {% endblocktrans %}
+                  {% endif %}
                 {% else %}
                   {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
                   <a class="btn btn-default btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
