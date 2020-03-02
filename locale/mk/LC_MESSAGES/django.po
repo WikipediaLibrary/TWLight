@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2020-02-10 14:05:38+0000\n"
+"PO-Revision-Date: 2020-03-02 13:56:33+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -957,15 +957,13 @@ msgstr "Контактни информации"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:43
-#, fuzzy
 msgid "Meta page"
-msgstr "Следна страница"
+msgstr "Метастраница"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:45
-#, fuzzy
 msgid "The Wikipedia Library"
-msgstr "Библиотекарската екипа на Википедија"
+msgstr "Википедиина библиотека"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/emails/templates/emails/contact.html:52
@@ -979,15 +977,13 @@ msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:64
-#, fuzzy
 msgid "Wikipedia Library Facebook page"
-msgstr "Библиотекарската екипа на Википедија"
+msgstr "Википедиината библиотека на Facebook"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:70
-#, fuzzy
 msgid "Wikipedia Library Twitter page"
-msgstr "Библиотекарската екипа на Википедија"
+msgstr "Википедиината библиотека на Twitter"
 
 #. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
 #: TWLight/emails/templates/emails/contact_us_email-subject.html:3
