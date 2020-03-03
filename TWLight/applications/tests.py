@@ -3027,7 +3027,7 @@ class EvaluateApplicationTest(TestCase):
         if len(today.strftime("%B")) > 5:
             formatted_date = today.strftime("%b. %-d, %Y")
         else:
-            formatted_date = today.strftime("%B %-d %Y")
+            formatted_date = today.strftime("%B %-d, %Y")
         self.assertContains(response, formatted_date)
         self.assertContains(response, self.application.status)
         self.assertContains(
