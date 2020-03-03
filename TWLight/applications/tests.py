@@ -3024,7 +3024,7 @@ class EvaluateApplicationTest(TestCase):
         # month, the date is written in full ("April"). If it's
         # longer, like November, it's shortened to "Nov.".
         today = date.today()
-        if len(today.strftime("%B")) < 5:
+        if len(today.strftime("%B")) > 5:
             formatted_date = today.strftime("%b. %-d, %Y")
         else:
             formatted_date = today.strftime("%B %-d %Y")
