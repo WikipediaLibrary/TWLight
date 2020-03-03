@@ -3019,10 +3019,16 @@ class EvaluateApplicationTest(TestCase):
         EditorCraftRoom(self, Terms=True, editor=self.editor, Coordinator=False)
         # Visits the App Eval page
         response = self.client.get(self.url)
-        # For some reason the date formatting in tests is different
-        # eg. Nov. 1, 2019
-        today = date.today().strftime("%b. %-d, %Y")
-        self.assertContains(response, today)
+
+        # If there are less than 5 characters in the name of this
+        # month, the date is written in full ("April"). If it's
+        # longer, like November, it's shortened to "Nov.".
+        today = date.today()
+        if len(today.strftime("%B")) > 5:
+            formatted_date = today.strftime("%b. %-d, %Y")
+        else:
+            formatted_date = today.strftime("%B %-d, %Y")
+        self.assertContains(response, formatted_date)
         self.assertContains(response, self.application.status)
         self.assertContains(
             response, html.escape(self.application.partner.company_name)
@@ -3049,7 +3055,7 @@ class EvaluateApplicationTest(TestCase):
         self.partner.coordinator = coordinator.user
         self.partner.save()
         response = self.client.get(self.url)
-        self.assertContains(response, today)
+        self.assertContains(response, formatted_date)
         self.assertContains(response, self.application.status)
         self.assertContains(
             response, html.escape(self.application.partner.company_name)
