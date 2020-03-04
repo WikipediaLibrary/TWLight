@@ -26,4 +26,4 @@ pytz==2019.3
 setuptools>=45.2.0
 six==1.13.0
 wheel>=0.34.2
-whitenoise==4.1.4
+whitenoise==5.0.1
