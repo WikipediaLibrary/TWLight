@@ -123,7 +123,7 @@ class Application(models.Model):
         related_name="applications",
         blank=True,
         null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
     )
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)

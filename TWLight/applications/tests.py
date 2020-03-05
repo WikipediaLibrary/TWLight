@@ -2442,7 +2442,9 @@ class ApplicationModelTest(TestCase):
         editor = EditorFactory(user=user)
         coordinator = UserFactory()
         get_coordinators().user_set.add(coordinator)
-        partner = PartnerFactory(specific_stream=True, authorization_method=Partner.EMAIL)
+        partner = PartnerFactory(
+            specific_stream=True, authorization_method=Partner.EMAIL
+        )
         stream = StreamFactory(partner=partner, authorization_method=Partner.EMAIL)
         app = ApplicationFactory(
             rationale="Because I said so",
@@ -2458,13 +2460,25 @@ class ApplicationModelTest(TestCase):
             sent_by=coordinator,
         )
         # This app should show up in stream specific queries.
-        self.assertEqual(Application.objects.filter(pk=app.pk, specific_stream=stream.pk, editor=editor).count(), 1)
+        self.assertEqual(
+            Application.objects.filter(
+                pk=app.pk, specific_stream=stream.pk, editor=editor
+            ).count(),
+            1,
+        )
         # Delete the stream.
         stream.delete()
         # This app should no longer show up in stream specific queries.
-        self.assertEqual(Application.objects.filter(pk=app.pk, specific_stream=stream.pk, editor=editor).count(), 0)
+        self.assertEqual(
+            Application.objects.filter(
+                pk=app.pk, specific_stream=stream.pk, editor=editor
+            ).count(),
+            0,
+        )
         # But it should still be there.
-        self.assertEqual(Application.objects.filter(pk=app.pk, editor=editor).count(), 1)
+        self.assertEqual(
+            Application.objects.filter(pk=app.pk, editor=editor).count(), 1
+        )
 
     def test_get_authorization(self):
         # Approve an application so that we create an authorization
