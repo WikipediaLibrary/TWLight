@@ -119,7 +119,11 @@ class Application(models.Model):
     rationale = models.TextField(blank=True)
     specific_title = models.CharField(max_length=128, blank=True)
     specific_stream = models.ForeignKey(
-        Stream, related_name="applications", blank=True, null=True
+        Stream,
+        related_name="applications",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
     )
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
