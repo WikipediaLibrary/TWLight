@@ -2467,11 +2467,12 @@ class ApplicationModelTest(TestCase):
             1,
         )
         # Delete the stream.
+        stream_pk = stream.pk
         stream.delete()
         # This app should no longer show up in stream specific queries.
         self.assertEqual(
             Application.objects.filter(
-                pk=app.pk, specific_stream=stream.pk, editor=editor
+                pk=app.pk, specific_stream=stream_pk, editor=editor
             ).count(),
             0,
         )
