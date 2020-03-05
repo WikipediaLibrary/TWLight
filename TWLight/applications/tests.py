@@ -2435,6 +2435,37 @@ class ApplicationModelTest(TestCase):
         application.refresh_from_db()
         assert application.editor == editor
 
+    def test_stream_delete(self):
+        # Null out specific_stream for application if the stream gets deleted.
+        # This is important for appropriately handling partner/stream configuration changes.
+        user = UserFactory()
+        editor = EditorFactory(user=user)
+        coordinator = UserFactory()
+        get_coordinators().user_set.add(coordinator)
+        partner = PartnerFactory(specific_stream=True, authorization_method=Partner.EMAIL)
+        stream = StreamFactory(partner=partner, authorization_method=Partner.EMAIL)
+        app = ApplicationFactory(
+            rationale="Because I said so",
+            comments="No comment",
+            agreement_with_terms_of_use=True,
+            account_email="bob@example.com",
+            editor=editor,
+            partner=partner,
+            specific_stream=stream,
+            status=Application.SENT,
+            date_closed=date.today() + timedelta(days=1),
+            days_open=1,
+            sent_by=coordinator,
+        )
+        # This app should show up in stream specific queries.
+        self.assertEqual(Application.objects.filter(pk=app.pk, specific_stream=stream.pk, editor=editor).count(), 1)
+        # Delete the stream.
+        stream.delete()
+        # This app should no longer show up in stream specific queries.
+        self.assertEqual(Application.objects.filter(pk=app.pk, specific_stream=stream.pk, editor=editor).count(), 0)
+        # But it should still be there.
+        self.assertEqual(Application.objects.filter(pk=app.pk, editor=editor).count(), 1)
+
     def test_get_authorization(self):
         # Approve an application so that we create an authorization
         partner = PartnerFactory(
