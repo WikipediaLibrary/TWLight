@@ -1,6 +1,7 @@
 from datetime import timedelta
+from django.contrib.auth.models import User
 from django.dispatch import receiver, Signal
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from TWLight.users.models import Authorization
 from .models import Partner, Stream
 
@@ -54,3 +55,23 @@ def update_partner_authorization_expiry(sender, instance, **kwargs):
                         authorization.date_authorized + partner.account_length
                     )
                     authorization.save()
+
+
+@receiver(post_delete, sender=Stream)
+def delete_all_but_latest_partner_authorizations(sender, instance, **kwargs):
+    """
+    Deletes any duplicate partner auths left after a stream is deleted.
+    """
+
+    partner = instance.partner
+    authorizations = Authorization.objects.filter(partner=partner)
+    users = User.objects.filter(authorization__in=authorizations)
+    for user in users:
+        partner_authorizations = Authorization.objects.filter(
+            user=user, partner=partner, stream__isnull=True
+        )
+        if partner_authorizations.count() > 1:
+            latest_partner_authorization = partner_authorizations.latest(
+                "date_authorized"
+            )
+            partner_authorizations.exclude(pk=latest_partner_authorization.pk).delete()
