@@ -1,5 +1,4 @@
 import random
-
 from unittest.mock import patch
 from datetime import date, timedelta
 from faker import Faker
@@ -18,7 +17,7 @@ from rest_framework.test import APIRequestFactory, force_authenticate
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.resources.tests import EditorCraftRoom
-from TWLight.resources.factories import PartnerFactory
+from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.factories import UserFactory, EditorFactory
 from TWLight.users.groups import get_coordinators
@@ -458,6 +457,17 @@ class AuthorizationBaseTestCase(TestCase):
         self.partner4 = PartnerFactory(
             authorization_method=Partner.EMAIL, status=Partner.AVAILABLE
         )
+        self.partner5 = PartnerFactory(
+            authorization_method=Partner.EMAIL,
+            status=Partner.AVAILABLE,
+            specific_stream=True,
+        )
+        self.partner5_stream1 = StreamFactory(
+            partner=self.partner5, authorization_method=Partner.EMAIL
+        )
+        self.partner5_stream2 = StreamFactory(
+            partner=self.partner5, authorization_method=Partner.EMAIL
+        )
 
         self.editor1 = EditorFactory()
         self.editor1.user.email = Faker(random.choice(settings.FAKER_LOCALES)).email()
@@ -477,6 +487,8 @@ class AuthorizationBaseTestCase(TestCase):
         self.partner3.save()
         self.partner4.coordinator = self.editor4.user
         self.partner4.save()
+        self.partner5.coordinator = self.editor4.user
+        self.partner5.save()
 
         # Editor 5 is a coordinator without a session and with no designated partners.
         self.editor5 = EditorFactory()
@@ -510,8 +522,20 @@ class AuthorizationBaseTestCase(TestCase):
         self.app9 = ApplicationFactory(
             editor=self.editor2, partner=self.partner3, status=Application.PENDING
         )
+        self.app10 = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner5,
+            specific_stream=self.partner5_stream1,
+            status=Application.PENDING,
+        )
+        self.app11 = ApplicationFactory(
+            editor=self.editor1,
+            partner=self.partner5,
+            specific_stream=self.partner5_stream2,
+            status=Application.PENDING,
+        )
 
-        # Editor 4 will update status on applications to partners 1 and 2.
+        # Editor 4 will update status on applications to partners 1, 2, and 5.
         # Send the application
         self.client.post(
             reverse("applications:evaluate", kwargs={"pk": self.app1.pk}),
@@ -521,6 +545,30 @@ class AuthorizationBaseTestCase(TestCase):
         self.app1.refresh_from_db()
         self.auth_app1 = Authorization.objects.get(
             authorizer=self.editor4.user, user=self.editor1.user, partner=self.partner1
+        )
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": self.app10.pk}),
+            data={"status": Application.SENT},
+            follow=True,
+        )
+        self.app10.refresh_from_db()
+        self.auth_app10 = Authorization.objects.get(
+            authorizer=self.editor4.user,
+            user=self.editor1.user,
+            partner=self.partner5,
+            stream=self.partner5_stream1,
+        )
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": self.app11.pk}),
+            data={"status": Application.SENT},
+            follow=True,
+        )
+        self.app11.refresh_from_db()
+        self.auth_app11 = Authorization.objects.get(
+            authorizer=self.editor4.user,
+            user=self.editor1.user,
+            partner=self.partner5,
+            stream=self.partner5_stream2,
         )
 
         # Approve the application
@@ -598,6 +646,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.partner2.delete()
         self.partner3.delete()
         self.partner4.delete()
+        self.partner5.delete()
         self.access_code.delete()
         self.editor1.delete()
         self.editor2.delete()
@@ -612,6 +661,8 @@ class AuthorizationBaseTestCase(TestCase):
         self.app7.delete()
         self.app8.delete()
         self.app9.delete()
+        self.app10.delete()
+        self.app11.delete()
 
 
 class AuthorizationTestCase(AuthorizationBaseTestCase):
@@ -688,6 +739,40 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         ).exists()
 
         self.assertTrue(authorization_object_exists)
+
+    def test_handle_stream_post_delete(self):
+
+        partner5_authorizations = Authorization.objects.filter(
+            partner=self.partner5, stream__isnull=True
+        )
+        stream1_authorizations = Authorization.objects.filter(
+            stream=self.partner5_stream1
+        )
+        stream2_authorizations = Authorization.objects.filter(
+            stream=self.partner5_stream2
+        )
+        # Verifying that we only have stream-specific auths.
+        self.assertTrue(self.partner5.specific_stream)
+        self.assertEquals(partner5_authorizations.count(), 0)
+        self.assertEquals(stream1_authorizations.count(), 1)
+        self.assertEquals(stream2_authorizations.count(), 1)
+
+        # Deleting stream 1 should convert its related auths to partner scope.
+        self.partner5_stream1.delete()
+        self.assertTrue(self.partner5.specific_stream)
+        stream1_authorizations.all()
+        partner5_authorizations.all()
+        self.assertEqual(partner5_authorizations.count(), 1)
+        self.assertEquals(stream1_authorizations.count(), 0)
+
+        # Deleting stream 2 shouldn't create a duplicate partner-scoped auth. The extra auth should just disappear.
+        # Since stream 2 was the last stream related to partner 5, partner5.specific_stream should now be False.
+        self.partner5_stream2.delete()
+        self.assertFalse(self.partner5.specific_stream)
+        stream2_authorizations.all()
+        partner5_authorizations.all()
+        self.assertEqual(partner5_authorizations.count(), 1)
+        self.assertEquals(stream2_authorizations.count(), 0)
 
     def test_updating_existing_authorization(self):
         """
