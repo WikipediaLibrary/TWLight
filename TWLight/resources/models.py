@@ -681,7 +681,7 @@ def set_partner_specific_stream_false_if_no_streams(sender, instance, **kwargs):
     """
 
     partner = instance.partner
-    if Stream.objects.filter(partner=partner).count() == 0:
+    if partner.specific_stream and Stream.objects.filter(partner=partner).count() == 0:
         partner.specific_stream = False
         partner.save()
 
