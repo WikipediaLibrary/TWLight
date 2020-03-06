@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver, Signal
 from django.db.models.signals import post_save, post_delete
 from TWLight.users.models import Authorization
-from .models import Partner, Stream
+from TWLight.resources.models import Partner, Stream
 
 
 class Notice(object):
