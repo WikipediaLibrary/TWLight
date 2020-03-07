@@ -2566,6 +2566,7 @@ class EvaluateApplicationTest(TestCase):
         response = self.client.post(
             self.url, data={"status": Application.APPROVED}, follow=True
         )
+
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)
 
