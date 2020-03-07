@@ -2520,7 +2520,6 @@ class EvaluateApplicationTest(TestCase):
         response = self.client.post(
             self.url, data={"status": Application.APPROVED}, follow=True
         )
-
         self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.APPROVED)
 
@@ -3084,6 +3083,39 @@ class EvaluateApplicationTest(TestCase):
         self.assertContains(response, self.editor.wp_username)
         self.assertContains(response, self.editor.contributions)
         self.assertContains(response, self.editor.wp_editcount)
+
+    def test_modify_app_status_from_invalid_to_anything(self):
+        """
+        when a coordinator tries to modify application status from
+        INVALID to anything it should return the coordinator back to 
+        the application with an error message.
+        """
+        factory = RequestFactory()
+
+        # Marking status of the application as INVALID
+        self.application.status = Application.INVALID
+        self.application.save()
+
+        # Create an coordinator with a test client session
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+
+        # Now trying to change the status of application
+        response = self.client.post(
+            self.url, data={"status": Application.APPROVED}, follow=True
+        )
+
+        self.application.refresh_from_db()
+
+        # The status should remain same as INVALID
+        self.assertEqual(self.application.status, Application.INVALID)
+
+        # It should redirect to the same page
+        self.assertRedirects(
+            response,
+            reverse("applications:evaluate", kwargs={"pk": self.application.pk}),
+        )
 
 
 class BatchEditTest(TestCase):
