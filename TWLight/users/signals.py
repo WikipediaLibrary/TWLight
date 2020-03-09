@@ -72,13 +72,10 @@ def delete_all_but_latest_partner_authorizations(sender, instance, **kwargs):
     """
 
     partner = instance.partner
-    authorizations = Authorization.objects.filter(partner=partner)
+    authorizations = Authorization.objects.filter(partner=partner, stream__isnull=True)
     users = User.objects.filter(authorization__in=authorizations)
-
     for user in users:
-        partner_authorizations = Authorization.objects.filter(
-            user=user, partner=partner, stream__isnull=True
-        )
+        partner_authorizations = authorizations.filter(user=user)
         if partner_authorizations.count() > 1:
             latest_partner_authorization = partner_authorizations.latest(
                 "date_authorized"
