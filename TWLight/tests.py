@@ -743,13 +743,13 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
     def test_handle_stream_post_delete(self):
 
         partner5_authorizations = Authorization.objects.filter(
-            partner=self.partner5, stream__isnull=True
+            partner=self.partner5, user=self.editor1.user, stream__isnull=True
         )
         stream1_authorizations = Authorization.objects.filter(
-            stream=self.partner5_stream1
+            partner=self.partner5, user=self.editor1.user, stream=self.partner5_stream1
         )
         stream2_authorizations = Authorization.objects.filter(
-            stream=self.partner5_stream2
+            partner=self.partner5, user=self.editor1.user, stream=self.partner5_stream2
         )
         # Verifying that we only have stream-specific auths.
         self.assertTrue(self.partner5.specific_stream)
