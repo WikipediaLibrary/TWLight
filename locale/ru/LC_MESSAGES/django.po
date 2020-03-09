@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-12-23 15:15:54+0000\n"
+"PO-Revision-Date: 2020-03-09 15:53:58+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -273,9 +273,8 @@ msgstr "Месяц"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
 #: TWLight/applications/models.py:111
-#, fuzzy
 msgid "User selection of when they'd like their account to expire (in months). Required for proxied resources; optional otherwise."
-msgstr "Выбор пользователем времени истечения срока действия учетной записи (в месяцах). Актуально только в том случае, если рассматриваемые партнер/коллекция имеют метод авторизации (authorization_method)  типа \"прокси\"."
+msgstr "Выбор пользователем времени истечения срока действия учётной записи (в месяцах). Требуется для ресурсов с прокси; необязательна в противном случае."
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:283
@@ -1961,9 +1960,8 @@ msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
-#, fuzzy
 msgid "You have made a minimum of 500 edits"
-msgstr "У вас минимум 500 правок."
+msgstr "Вы сделали минимум 500 правок."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67
@@ -2435,7 +2433,6 @@ msgstr ""
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:136
-#, fuzzy
 msgid "Use my Wikipedia email address (will be updated the next time you login)."
 msgstr "Использовать мой адрес электронной почты в Википедии (будет обновлено при следующем входе в аккаунт)."
 
@@ -2776,7 +2773,6 @@ msgid "You have no active proxy/bundle collections."
 msgstr ""
 
 #: TWLight/users/templates/users/preferences.html:19
-#, fuzzy
 msgid "Emails"
 msgstr "Эл. почта"
 
