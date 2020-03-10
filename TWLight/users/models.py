@@ -115,15 +115,6 @@ class UserProfile(models.Model):
     )
 
 
-# Create user profiles automatically when users are created.
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-
-models.signals.post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL)
-
-
 class Editor(models.Model):
     """
     This model is for storing data related to people's accounts on Wikipedia.

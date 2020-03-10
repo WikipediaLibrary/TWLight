@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from datetime import date, datetime, timedelta
-from dateutil.relativedelta import relativedelta
+from datetime import date
 from reversion import revisions as reversion
 from reversion.models import Version
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
-from django.db.models.signals import pre_save, post_save
-from django.dispatch import receiver
 from django.forms.models import model_to_dict
-from django.utils.timezone import localtime, now
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
@@ -398,141 +395,3 @@ class Application(models.Model):
                 self.partner.renewals_available,
             ]
         )
-
-
-# IMPORTANT: pre_save is not sent by Queryset.update(), so *none of this
-# behavior will happen on if you update() an Application queryset*.
-# That is sometimes okay, but it is not always okay.
-# Errors caused by days_open not existing when expected to
-# exist can show up in weird parts of the application (for example, template
-# rendering failing when get_num_days_open returns None but its output is
-# passed to a template filter that needs an integer).
-@receiver(pre_save, sender=Application)
-def update_app_status_on_save(sender, instance, **kwargs):
-
-    # Make sure not using a mix of dates and datetimes
-    if instance.date_created and isinstance(instance.date_created, datetime):
-        instance.date_created = instance.date_created.date()
-
-    # Make sure not using a mix of dates and datetimes
-    if instance.date_closed and isinstance(instance.date_closed, datetime):
-        instance.date_closed = instance.date_closed.date()
-
-    if instance.id:
-        orig_app = Application.include_invalid.get(pk=instance.id)
-        orig_status = orig_app.status
-        if all(
-            [
-                orig_status not in Application.FINAL_STATUS_LIST,
-                int(instance.status) in Application.FINAL_STATUS_LIST,
-                not bool(instance.date_closed),
-            ]
-        ):
-
-            instance.date_closed = localtime(now()).date()
-            instance.days_open = (instance.date_closed - instance.date_created).days
-
-    else:
-        # If somehow we've created an Application whose status is final
-        # at the moment of creation, set its date-closed-type parameters
-        # too.
-        if (
-            instance.status in Application.FINAL_STATUS_LIST
-            and not instance.date_closed
-        ):
-
-            instance.date_closed = localtime(now()).date()
-            instance.days_open = 0
-
-
-@receiver(post_save, sender=Application)
-def post_revision_commit(sender, instance, **kwargs):
-
-    # For some authorization methods, we can skip the manual Approved->Sent
-    # step and just immediately take an Approved application and give it
-    # a finalised status.
-    skip_approved = (
-        instance.status == Application.APPROVED and instance.is_instantly_finalized()
-    )
-
-    if skip_approved:
-        instance.status = Application.SENT
-        instance.save()
-
-    # Renewals are for applications that are approved/sent.
-    # Having a parent for NOT_APPROVED apps hinders us from
-    # correctly renewing the parent. So, we unset the parent
-    # if the status is NOT_APPROVED and the app already has
-    # a parent.
-    if instance.status == Application.NOT_APPROVED and instance.parent:
-        instance.parent = None
-        instance.save()
-
-    # Authorize editor to access resource after an application is saved as sent.
-
-    if instance.status == Application.SENT:
-        # Check if an authorization already exists.
-        if instance.specific_stream:
-            existing_authorization = Authorization.objects.filter(
-                user=instance.user,
-                partner=instance.partner,
-                stream=instance.specific_stream,
-            )
-        else:
-            existing_authorization = Authorization.objects.filter(
-                user=instance.user, partner=instance.partner
-            )
-
-        authorized_user = instance.user
-        authorizer = instance.sent_by
-
-        # In the case that there is no existing authorization, create a new one
-        if existing_authorization.count() == 0:
-            authorization = Authorization()
-        # If an authorization already existed (such as in the case of a
-        # renewal), we'll simply update that one.
-        elif existing_authorization.count() == 1:
-            authorization = existing_authorization[0]
-        else:
-            logger.error(
-                "Found more than one authorization object for "
-                "{user} - {partner}".format(
-                    user=instance.user, partner=instance.partner
-                )
-            )
-            return
-
-        if instance.specific_stream:
-            authorization.stream = instance.specific_stream
-
-        authorization.user = authorized_user
-        authorization.authorizer = authorizer
-        authorization.partner = instance.partner
-
-        # If this is a proxy partner, and the requested_access_duration
-        # field is set to false, set (or reset) the expiry date
-        # to one year from now
-        if (
-            instance.partner.authorization_method == Partner.PROXY
-            and instance.requested_access_duration is None
-        ):
-            one_year_from_now = date.today() + timedelta(days=365)
-            authorization.date_expires = one_year_from_now
-        # If this is a proxy partner, and the requested_access_duration
-        # field is set to true, set (or reset) the expiry date
-        # to 1, 3, 6 or 12 months from today based on user input
-        elif (
-            instance.partner.authorization_method == Partner.PROXY
-            and instance.partner.requested_access_duration is True
-        ):
-            custom_expiry_date = date.today() + relativedelta(
-                months=instance.requested_access_duration
-            )
-            authorization.date_expires = custom_expiry_date
-        # Alternatively, if this partner has a specified account_length,
-        # we'll use that to set the expiry.
-        elif instance.partner.account_length:
-            # account_length should be a timedelta
-            authorization.date_expires = date.today() + instance.partner.account_length
-
-        authorization.save()
