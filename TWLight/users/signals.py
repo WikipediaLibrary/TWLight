@@ -1,6 +1,5 @@
 from datetime import timedelta
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.dispatch import receiver, Signal
 from django.db.models.signals import post_save, post_delete
 from TWLight.users.models import Authorization, UserProfile
@@ -73,11 +72,10 @@ def delete_all_but_latest_partner_authorizations(sender, instance, **kwargs):
 
     partner = instance.partner
     authorizations = Authorization.objects.filter(partner=partner, stream__isnull=True)
-    users = User.objects.filter(authorization__in=authorizations)
+    # TODO: Figure out why we were getting bizarre results when this was a queryset.
+    users = authorizations.values_list("user", flat=True)
     for user in users:
         user_authorizations = authorizations.filter(user=user)
         if user_authorizations.count() > 1:
-            latest_authorization = user_authorizations.latest(
-                "date_authorized"
-            )
+            latest_authorization = user_authorizations.latest("date_authorized")
             user_authorizations.exclude(pk=latest_authorization.pk).delete()
