@@ -930,6 +930,20 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
 
         return form
 
+    def post(self, request, *args, **kwargs):
+        app = self.get_object()
+        if app.status == Application.INVALID:
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                # Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
+                _("Status of INVALID applications Cannot be changed."),
+            )
+            return HttpResponseRedirect(
+                reverse("applications:evaluate", kwargs={"pk": app.pk})
+            )
+        return super(EvaluateApplicationView, self).post(request, *args, **kwargs)
+
 
 class BatchEditView(CoordinatorsOnly, ToURequired, View):
     http_method_names = ["post"]
