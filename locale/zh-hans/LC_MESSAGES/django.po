@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:44+0000\n"
+"PO-Revision-Date: 2020-03-12 18:33:31+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -98,7 +98,7 @@ msgstr "您在合作伙伴网站上的账户的电子邮件地址"
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
 #: TWLight/applications/forms.py:341 TWLight/applications/helpers.py:117
 msgid "The number of months you wish to have this access for before renewal is required"
-msgstr ""
+msgstr "您希望拥有此访问权限的月数，需要进行续订"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:95
@@ -383,7 +383,7 @@ msgstr ""
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:108
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr ""
+msgstr "请要求申请人在其个人资料中添加居住国，然后再继续。"
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:119
@@ -797,7 +797,7 @@ msgstr "发送了软件"
 
 #: TWLight/applications/views.py:758
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted."
-msgstr ""
+msgstr "由于代理授权方法的合作伙伴已列入等待名单，因此无法批准应用程序。"
 
 #: TWLight/applications/views.py:773
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."
@@ -2828,9 +2828,8 @@ msgstr "您是这个网站的协调员。如果限制数据的处理，将取消
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
-#, fuzzy
 msgid "Last updated 12 November 2019"
-msgstr "上一次更新在2016年8月8日"
+msgstr "上一次更新在2019年11月12日"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28
@@ -2937,7 +2936,7 @@ msgstr "您必须同意不要与其他人共享您的用户名和密码来访问
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:142
 msgid "Automatically scraping or downloading restricted content from publishers;"
-msgstr ""
+msgstr "自动从发布者处抓取或下载受限制的内容；"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:148
@@ -2969,7 +2968,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:179
 msgid "In addition, if you use OCLC EZProxy, please note that you may not use it for commercial purposes."
-msgstr ""
+msgstr "此外，如果您使用 OCLC EZProxy，请注意，您不得将其用于商业目的。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:185
