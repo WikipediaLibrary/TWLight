@@ -470,7 +470,6 @@ class Authorization(models.Model):
         app_label = "users"
         verbose_name = "authorization"
         verbose_name_plural = "authorizations"
-        unique_together = ("user", "partner", "stream")
 
     coordinators = get_coordinators()
 
@@ -508,11 +507,9 @@ class Authorization(models.Model):
         help_text=_("The date this authorization expires."),
     )
 
-    partner = models.ForeignKey(
+    partners = models.ManyToManyField(
         Partner,
         blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
         # Limit to available partners.
         limit_choices_to=(models.Q(status=0)),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
@@ -551,7 +548,7 @@ class Authorization(models.Model):
             # Valid authorizations always have an authorizer, and user and a partner_id.
             self.authorizer
             and self.user
-            and self.partner_id
+            and self.partners.all().exists()
             # and a valid authorization date that is now or in the past
             and self.date_authorized
             and self.date_authorized <= today
@@ -571,8 +568,8 @@ class Authorization(models.Model):
         else:
             stream_name = None
 
-        if self.partner:
-            company_name = self.partner.company_name
+        if self.partners.all().exists():
+            company_name = "\n".join([p.company_name for p in self.partners.all()])
         else:
             company_name = None
 
