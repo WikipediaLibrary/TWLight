@@ -19,12 +19,7 @@ class Notice(object):
 
 
 class ProxyBundleLaunch(object):
-    launch_notice = Signal(
-        providing_args=[
-            "user_wp_username",
-            "user_email",
-        ]
-    )
+    launch_notice = Signal(providing_args=["user_wp_username", "user_email"])
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

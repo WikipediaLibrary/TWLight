@@ -179,12 +179,7 @@ def send_proxy_bundle_launch_notice(sender, **kwargs):
 
     email = ProxyBundleEmail()
 
-    email.send(
-        user_email,
-        {
-            "username": user_wp_username,
-        },
-    )
+    email.send(user_email, {"username": user_wp_username})
 
 
 @receiver(comment_was_posted)
