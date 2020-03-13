@@ -46,24 +46,13 @@ class EZProxyAuth(ToURequired, View):
             authorizations = None
 
         for authorization in authorizations:
-            if authorization.is_valid:
-                group = ""
-                try:
-                    partner = Partner.objects.get(
-                        authorization_method=Partner.PROXY, pk=authorization.partner_id
-                    )
-                    group += "P" + repr(partner.pk)
-                    try:
-                        stream = Stream.objects.get(
-                            authorization_method=Partner.PROXY,
-                            pk=authorization.stream_id,
-                        )
-                        group += "S" + repr(stream.pk)
-                    except Stream.DoesNotExist:
-                        pass
-                except Partner.DoesNotExist:
-                    pass
-
+            if (
+                authorization.is_valid
+                and authorization.get_authorization_method() == Partner.PROXY
+            ):
+                group = "P" + repr(authorization.partner_id)
+                if authorization.stream:
+                    group += "S" + repr(authorization.stream_id)
                 groups.append(group)
                 logger.info("{group}.".format(group=group))
 
