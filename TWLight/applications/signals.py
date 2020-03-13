@@ -154,7 +154,7 @@ def post_revision_commit(sender, instance, **kwargs):
             )
         else:
             existing_authorization = Authorization.objects.filter(
-                user=instance.user, partner=instance.partner
+                user=instance.user, partners=instance.partner
             )
 
         authorized_user = instance.user
