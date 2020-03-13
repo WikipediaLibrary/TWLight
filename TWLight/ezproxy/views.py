@@ -32,6 +32,9 @@ class EZProxyAuth(ToURequired, View):
         if not username:
             raise SuspiciousOperation("Missing Editor username.")
 
+        if request.user.editor.wp_bundle_eligible:
+            groups.append("BUNDLE")
+
         try:
             authorizations = Authorization.objects.filter(user=request.user)
             logger.info(
