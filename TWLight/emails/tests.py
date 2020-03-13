@@ -30,6 +30,7 @@ from .tasks import (
     send_approval_notification_email,
     send_rejection_notification_email,
     send_user_renewal_notice_emails,
+    send_proxy_bundle_launch_notice,
     contact_us_emails,
 )
 
@@ -525,3 +526,29 @@ class CoordinatorReminderEmailTest(TestCase):
         self.assertIn("One pending application", mail.outbox[0].body)
         self.assertIn("One under discussion application", mail.outbox[0].body)
         self.assertIn("One approved application", mail.outbox[0].body)
+
+
+class ProxyBundleLaunchTest(TestCase):
+    def setUp(self):
+        super(ProxyBundleLaunchTest, self).setUp()
+        editor = EditorFactory(user__email="editor@example.com")
+        self.user = editor.user
+
+    def test_proxy_bundle_launch_email_1(self):
+        """
+        With one user, calling the proxy/bundle launch command
+        should send a single email, to that user.
+        """
+        call_command("proxy_bundle_launch")
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [self.user.email])
+
+    def test_proxy_bundle_launch_email_2(self):
+        """
+        Adding another user should result in two sent emails.
+        """
+        _ = EditorFactory(user__email="editor@example.com")
+        call_command("proxy_bundle_launch")
+
+        self.assertEqual(len(mail.outbox), 2)

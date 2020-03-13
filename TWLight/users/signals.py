@@ -18,6 +18,15 @@ class Notice(object):
     )
 
 
+class ProxyBundleLaunch(object):
+    launch_notice = Signal(
+        providing_args=[
+            "user_wp_username",
+            "user_email",
+        ]
+    )
+
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_user_profile(sender, instance, created, **kwargs):
     """Create user profiles automatically when users are created."""
