@@ -52,7 +52,7 @@ class AuthorizationInline(admin.StackedInline):
 class AuthorizationAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "partner",
+        "get_partners",
         "stream",
         "get_authorizer_wp_username",
         "get_authorized_user_wp_username",
@@ -85,6 +85,9 @@ class AuthorizationAdmin(admin.ModelAdmin):
             return ""
 
     get_authorizer_wp_username.short_description = _("authorizer")
+
+    def get_partners(self, authorization):
+        return "\n".join([p.company_name for p in authorization.partners.all()])
 
 
 admin.site.register(Authorization, AuthorizationAdmin)
