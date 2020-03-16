@@ -15,7 +15,7 @@ class Command(BaseCommand):
         # four weeks, for which we haven't yet sent a reminder email, and
         # exclude users who disabled these emails.
         expiring_authorizations = Authorization.objects.filter(
-            date_expires__lt=datetime.today() + timedelta(weeks=4),
+            date_expires__lt=datetime.today() + timedelta(weeks=2),
             date_expires__gte=datetime.today(),
             reminder_email_sent=False,
         ).exclude(user__userprofile__send_renewal_notices=False)
