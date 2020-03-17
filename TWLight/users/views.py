@@ -681,7 +681,7 @@ class AuthorizedUsers(APIView):
         else:
             users = User.objects.filter(
                 editor__applications__status=Application.SENT,
-                editor__applications__partners=partner,
+                editor__applications__partner=partner,
             ).distinct()
 
         serializer = UserSerializer(users, many=True)
