@@ -149,7 +149,7 @@ def post_revision_commit(sender, instance, **kwargs):
         if instance.specific_stream:
             existing_authorization = Authorization.objects.filter(
                 user=instance.user,
-                partner=instance.partner,
+                partners=instance.partner,
                 stream=instance.specific_stream,
             )
         else:
@@ -181,7 +181,6 @@ def post_revision_commit(sender, instance, **kwargs):
 
         authorization.user = authorized_user
         authorization.authorizer = authorizer
-        authorization.partner = instance.partner
 
         # If this is a proxy partner, and the requested_access_duration
         # field is set to false, set (or reset) the expiry date
@@ -210,6 +209,7 @@ def post_revision_commit(sender, instance, **kwargs):
             authorization.date_expires = date.today() + instance.partner.account_length
 
         authorization.save()
+        authorization.partners.add(instance.partner)
 
 
 @receiver(post_save, sender=Partner)
