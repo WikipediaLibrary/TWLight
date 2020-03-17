@@ -1405,12 +1405,12 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 if application.specific_stream:
                     code_object.authorization = Authorization.objects.get(
                         user=application.user,
-                        partner=application.partner,
+                        partners=application.partner,
                         stream=application.specific_stream,
                     )
                 else:
                     code_object.authorization = Authorization.objects.get(
-                        user=application.user, partner=application.partner
+                        user=application.user, partners=application.partner
                     )
                 code_object.save()
 

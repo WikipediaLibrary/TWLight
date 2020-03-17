@@ -2677,7 +2677,7 @@ class ApplicationModelTest(TestCase):
 
         # Check that we're fetching the correct authorization
         authorization = Authorization.objects.get(
-            user=application.editor.user, partner=application.partner
+            user=application.editor.user, partners=application.partner
         )
         self.assertEqual(application.get_authorization(), authorization)
 
@@ -2859,52 +2859,58 @@ class EvaluateApplicationTest(TestCase):
     def test_count_valid_authorizations(self):
         for _ in range(5):
             # valid
-            Authorization(
+            auth1 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5)),
-            ).save()
+            )
+            auth1.save()
+            auth1.partners.add(self.partner)
             # invalid
-            Authorization(
+            auth2 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-            ).save()
+            )
+            auth2.save()
+            auth2.partners.add(self.partner)
 
         # no expiry date; yet still, valid
-        Authorization(
-            user=EditorFactory().user, authorizer=self.coordinator, partner=self.partner
-        ).save()
+        auth3 = Authorization(user=EditorFactory().user, authorizer=self.coordinator)
+        auth3.save()
+        auth3.partners.add(self.partner)
 
         # invalid (no authorizer)
-        Authorization(
+        auth4 = Authorization(
             user=EditorFactory().user,
-            partner=self.partner,
             date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-        ).save()
+        )
+        auth4.save()
+        auth4.partners.add(self.partner)
+
         total_valid_authorizations = count_valid_authorizations(self.partner)
         self.assertEqual(total_valid_authorizations, 6)
 
         stream = StreamFactory(partner=self.partner)
         for _ in range(5):
             # valid
-            Authorization(
+            auth5 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 stream=stream,
                 authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5)),
-            ).save()
+            )
+            auth5.save()
+            auth5.partners.add(self.partner)
             # valid
-            Authorization(
+            auth6 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 stream=stream,
                 authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-            ).save()
+            )
+            auth6.save()
+            auth6.partners.add(self.partner)
         total_valid_authorizations = count_valid_authorizations(self.partner, stream)
         self.assertEqual(total_valid_authorizations, 5)
 
@@ -2912,7 +2918,7 @@ class EvaluateApplicationTest(TestCase):
         # TWLight.users.models.Authorization.is_valid must be in sync.
         # We test that here.
         all_authorizations_using_is_valid = Authorization.objects.filter(
-            partner=self.partner
+            partners=self.partner
         )
         total_valid_authorizations_using_helper = count_valid_authorizations(
             self.partner
@@ -3913,7 +3919,7 @@ class BatchEditTest(TestCase):
         )
 
         authorization_exists = Authorization.objects.filter(
-            user=self.application.user, partner=self.application.partner
+            user=self.application.user, partners=self.application.partner
         ).exists()
 
         self.assertTrue(authorization_exists)
