@@ -185,7 +185,7 @@ def get_valid_authorizations(partner_pk, stream_pk=None):
         # and (or) stream and checking every authorization against the is_valid property
         # of the authorization model, and hence *must* be kept in sync with the logic in
         # TWLight.users.model.Authorization.is_valid property. We don't need to check for
-        # partner_id__isnull since it is functionally covered by partner=partner_pk.
+        # partner_id__isnull since it is functionally covered by partners=partner_pk.
         valid_authorizations = Authorization.objects.filter(
             Q(date_expires__isnull=False, date_expires__gte=today)
             | Q(date_expires__isnull=True),
@@ -193,7 +193,7 @@ def get_valid_authorizations(partner_pk, stream_pk=None):
             user__isnull=False,
             date_authorized__isnull=False,
             date_authorized__lte=today,
-            partner=partner_pk,
+            partners=partner_pk,
         )
         if stream_pk:
             valid_authorizations = valid_authorizations.filter(stream=stream_pk)
