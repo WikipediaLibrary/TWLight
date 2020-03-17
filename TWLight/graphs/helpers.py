@@ -294,7 +294,7 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
 
 def get_proxy_and_renewed_authorizations():
     proxy_auth = Authorization.objects.filter(
-        partner__authorization_method=Partner.PROXY
+        partners__authorization_method=Partner.PROXY
     )
 
     renewed_auth_ids = []
