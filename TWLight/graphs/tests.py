@@ -86,14 +86,18 @@ class GraphsTestCase(TestCase):
         partner3 = PartnerFactory()
 
         # Four Authorizations
-        auth1 = Authorization(user=user1, partner=partner1)
+        auth1 = Authorization(user=user1)
         auth1.save()
-        auth2 = Authorization(user=user2, partner=partner1)
+        auth1.partners.add(partner1)
+        auth2 = Authorization(user=user2)
         auth2.save()
-        auth3 = Authorization(user=user2, partner=partner2)
+        auth2.partners.add(partner1)
+        auth3 = Authorization(user=user2)
         auth3.save()
-        auth4 = Authorization(user=user2, partner=partner3)
+        auth3.partners.add(partner2)
+        auth4 = Authorization(user=user2)
         auth4.save()
+        auth4.partners.add(partner3)
 
         request = self.factory.get(self.dashboard_url)
         request.user = self.user
