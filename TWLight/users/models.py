@@ -678,7 +678,7 @@ class Authorization(models.Model):
         if self.stream:
             authorization_method = self.stream.authorization_method
         else:
-            authorization_method = self.partners.authorization_method
+            authorization_method = self.partners.first().authorization_method
 
         return authorization_method
 

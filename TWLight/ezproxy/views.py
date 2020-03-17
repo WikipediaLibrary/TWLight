@@ -50,7 +50,7 @@ class EZProxyAuth(ToURequired, View):
                 authorization.is_valid
                 and authorization.get_authorization_method() == Partner.PROXY
             ):
-                group = "P" + repr(authorization.partner_id)
+                group = "P" + repr(authorization.partners.first().pk)
                 if authorization.stream:
                     group += "S" + repr(authorization.stream_id)
                 groups.append(group)
