@@ -747,31 +747,31 @@ class AutoWaitlistDisableTest(TestCase):
         self.coordinator.userprofile.terms_of_use = True
         self.coordinator.userprofile.save()
 
-        Authorization.objects.create(
-            user=self.user,
-            authorizer=self.coordinator,
-            date_expires=date.today(),
-            partner=self.partner,
+        auth1 = Authorization.objects.create(
+            user=self.user, authorizer=self.coordinator, date_expires=date.today()
         )
-        Authorization.objects.create(
-            user=EditorFactory().user,
-            authorizer=self.coordinator,
-            date_expires=date.today(),
-            partner=self.partner,
-        )
+        auth1.partners.add(self.partner)
 
-        Authorization.objects.create(
+        auth2 = Authorization.objects.create(
+            user=EditorFactory().user,
+            authorizer=self.coordinator,
+            date_expires=date.today(),
+        )
+        auth2.partners.add(self.partner)
+
+        auth3 = Authorization.objects.create(
             user=self.user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-            partner=self.partner1,
         )
-        Authorization.objects.create(
+        auth3.partners.add(self.partner1)
+
+        auth4 = Authorization.objects.create(
             user=EditorFactory().user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-            partner=self.partner1,
         )
+        auth4.partners.add(self.partner1)
 
         self.message_patcher = patch("TWLight.applications.views.messages.add_message")
         self.message_patcher.start()

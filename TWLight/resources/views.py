@@ -79,7 +79,7 @@ class PartnersDetailView(DetailView):
         else:
             context["total_accounts_distributed_streams"] = None
 
-        context["total_users"] = Authorization.objects.filter(partner=partner).count()
+        context["total_users"] = Authorization.objects.filter(partners=partner).count()
 
         application_end_states = [
             Application.APPROVED,
@@ -128,7 +128,7 @@ class PartnersDetailView(DetailView):
                     if not partner.specific_title:
                         context["apply"] = False
                 try:
-                    Authorization.objects.get(partner=partner, user=user)
+                    Authorization.objects.get(partners=partner, user=user)
                     # User has an authorization, don't show 'apply',
                     # but link to collection page
                     if not partner.specific_title:
