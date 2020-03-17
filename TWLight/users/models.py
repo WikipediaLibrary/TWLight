@@ -629,7 +629,7 @@ class Authorization(models.Model):
             elif self.partner and self.user and self.user.editor:
                 return Application.objects.filter(
                     ~Q(status=Application.NOT_APPROVED),
-                    partner=self.partner,
+                    partner=self.partners.all(),
                     editor=self.user.editor,
                 ).latest("id")
             else:
@@ -642,7 +642,9 @@ class Authorization(models.Model):
 
         try:
             return Application.objects.filter(
-                status=Application.SENT, partner=self.partner, editor=self.user.editor
+                status=Application.SENT,
+                partner=self.partners.all(),
+                editor=self.user.editor,
             ).latest("id")
         except Application.DoesNotExist:
             return None
@@ -655,7 +657,7 @@ class Authorization(models.Model):
         if self.stream:
             access_url = self.stream.get_access_url
         else:
-            access_url = self.partner.get_access_url
+            access_url = self.partners.get_access_url
 
         return access_url
 
@@ -679,7 +681,7 @@ class Authorization(models.Model):
         if self.stream:
             authorization_method = self.stream.authorization_method
         else:
-            authorization_method = self.partner.authorization_method
+            authorization_method = self.partners.authorization_method
 
         return authorization_method
 

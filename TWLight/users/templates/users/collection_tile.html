@@ -35,7 +35,7 @@
           <img src="{{ each_authorization.partner.logos.logo.url }}" class="img-responsive partner-logo" title="
             {% if each_authorization.partner.get_access_url and each_authorization.is_valid %}
               {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_authorization.partner as partner %}
+              {% blocktrans trimmed with each_authorization.partners as partner %}
                  Link to {{ partner }}'s external website
               {% endblocktrans %}
             {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
@@ -45,7 +45,7 @@
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Title for logo in tiles that are linked to partner description  page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_authorization.partner as partner %}
+              {% blocktrans trimmed with each_authorization.partners as partner %}
                  Link to {{ partner }} signup page
               {% endblocktrans %}
             {% endif %}
@@ -53,7 +53,7 @@
           alt="
             {% if each_authorization.partner.get_access_url and each_authorization.is_valid %}
               {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_authorization.partner as partner %}
+              {% blocktrans trimmed with each_authorization.partners as partner %}
                  Link to {{ partner }}'s external website
               {% endblocktrans %}
             {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
@@ -63,7 +63,7 @@
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_authorization.partner as partner %}
+              {% blocktrans trimmed with each_authorization.partners as partner %}
                  Link to {{ partner }} signup page
               {% endblocktrans %}
             {% endif %}
@@ -91,7 +91,7 @@
       <hr>
     {% endif %}
     <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i>
-    <strong><a href="{% url 'partners:detail' each_authorization.partner.pk %}">{{ each_authorization.partner }}</a></strong>
+    <strong><a href="{% url 'partners:detail' each_authorization.partner.pk %}">{{ each_authorization.partners }}</a></strong>
     {% if each_authorization.stream %}({{ each_authorization.stream }}){% endif %}
     {% if not each_authorization.is_bundle %}
       {% if each_authorization.latest_sent_app and not each_authorization.open_app %}
