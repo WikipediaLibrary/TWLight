@@ -44,7 +44,7 @@ def update_partner_authorization_expiry(sender, instance, **kwargs):
 
     if partner.account_length or partner.authorization_method == Partner.PROXY:
         authorizations = Authorization.objects.filter(
-            partner=partner, date_expires=None
+            partners=partner, date_expires=None
         )
         for authorization in authorizations:
             if authorization.is_valid:
@@ -71,7 +71,7 @@ def delete_all_but_latest_partner_authorizations(sender, instance, **kwargs):
     """
 
     partner = instance.partner
-    authorizations = Authorization.objects.filter(partner=partner, stream__isnull=True)
+    authorizations = Authorization.objects.filter(partners=partner, stream__isnull=True)
     # TODO: Figure out why we were getting bizarre results when this was a queryset.
     users = authorizations.values_list("user", flat=True)
     for user in users:

@@ -348,16 +348,16 @@ class ViewsTestCase(TestCase):
         for each_authorization in response.context_data["proxy_bundle_authorizations"]:
             self.assertEqual(each_authorization.user, self.user_editor)
             self.assertTrue(
-                each_authorization.partner == partner1
-                or each_authorization.partner == partner2
+                each_authorization.partners == partner1
+                or each_authorization.partners == partner2
             )
 
         for each_authorization in response.context_data["manual_authorizations"]:
             self.assertEqual(each_authorization.user, self.user_editor)
             self.assertTrue(
-                each_authorization.partner == partner3
-                or each_authorization.partner == partner4
-                or each_authorization.partner == partner5
+                each_authorization.partners == partner3
+                or each_authorization.partners == partner4
+                or each_authorization.partners == partner5
             )
 
     def test_return_authorization(self):
@@ -367,7 +367,7 @@ class ViewsTestCase(TestCase):
         app = ApplicationFactory(
             status=Application.SENT, editor=editor, partner=partner
         )
-        authorization = Authorization.objects.get(user=editor.user, partner=partner)
+        authorization = Authorization.objects.get(user=editor.user, partners=partner)
         self.assertEqual(authorization.get_latest_app(), app)
         return_url = reverse(
             "users:return_authorization", kwargs={"pk": authorization.pk}
@@ -523,11 +523,11 @@ class ViewsTestCase(TestCase):
         partner = PartnerFactory()
         user_auth = Authorization(
             user=self.user_editor,
-            partner=partner,
             date_authorized=date.today(),
             date_expires=date.today() + timedelta(days=30),
         )
         user_auth.save()
+        user_auth.partners.add(partner)
 
         submit = self.client.post(delete_url)
 

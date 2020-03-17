@@ -675,13 +675,13 @@ class AuthorizedUsers(APIView):
 
         if partner.authorization_method == Partner.PROXY:
             users = User.objects.filter(
-                authorizations__partner=partner,
+                authorizations__partners=partner,
                 authorizations__date_expires__gte=date.today(),
             ).distinct()
         else:
             users = User.objects.filter(
                 editor__applications__status=Application.SENT,
-                editor__applications__partner=partner,
+                editor__applications__partners=partner,
             ).distinct()
 
         serializer = UserSerializer(users, many=True)
@@ -702,31 +702,31 @@ class CollectionUserView(SelfOnly, ListView):
         proxy_bundle_authorizations = Authorization.objects.filter(
             Q(date_expires__gte=today) | Q(date_expires=None),
             user=editor.user,
-            partner__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        ).order_by("partner")
+            partners__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
+        ).order_by("partners")
         proxy_bundle_authorizations_expired = Authorization.objects.filter(
             user=editor.user,
             date_expires__lt=today,
-            partner__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        ).order_by("partner")
+            partners__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
+        ).order_by("partners")
         manual_authorizations = Authorization.objects.filter(
             Q(date_expires__gte=today) | Q(date_expires=None),
             user=editor.user,
-            partner__authorization_method__in=[
+            partners__authorization_method__in=[
                 Partner.EMAIL,
                 Partner.CODES,
                 Partner.LINK,
             ],
-        ).order_by("partner")
+        ).order_by("partners")
         manual_authorizations_expired = Authorization.objects.filter(
             user=editor.user,
             date_expires__lt=today,
-            partner__authorization_method__in=[
+            partners__authorization_method__in=[
                 Partner.EMAIL,
                 Partner.CODES,
                 Partner.LINK,
             ],
-        ).order_by("partner")
+        ).order_by("partners")
 
         for authorization_list in [
             manual_authorizations,
@@ -756,7 +756,7 @@ class CollectionUserView(SelfOnly, ListView):
                                         Application.QUESTION,
                                         Application.APPROVED,
                                     ),
-                                    partner=each_authorization.partner,
+                                    partner=each_authorization.partners,
                                 ).latest(
                                     "date_created"
                                 )
@@ -815,7 +815,7 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
         messages.add_message(
             self.request,
             messages.SUCCESS,
-            _("Access to {} has been returned.").format(authorization.partner),
+            _("Access to {} has been returned.").format(authorization.partners),
         )
         return HttpResponseRedirect(reverse("users:my_library"))
 
