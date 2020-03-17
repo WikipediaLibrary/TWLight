@@ -571,18 +571,16 @@ class AuthorizationBaseTestCase(TestCase):
             stream=self.partner5_stream2,
         )
 
-        # Approve the application
+        # Send the application
         self.client.post(
             reverse("applications:evaluate", kwargs={"pk": self.app2.pk}),
-            data={"status": Application.APPROVED},
+            data={"status": Application.SENT},
             follow=True,
         )
         self.app2.refresh_from_db()
-        self.auth_app2 = Authorization(
-            authorizer=self.editor4.user, user=self.editor2.user
+        self.auth_app2 = Authorization.objects.get(
+            authorizer=self.editor4.user, user=self.editor2.user, partners=self.partner1
         )
-        self.auth_app2.save()
-        self.auth_app2.partners.add(self.partner1)
 
         # Send the application
         self.client.post(
