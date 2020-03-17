@@ -443,9 +443,9 @@ class UserRenewalNoticeTest(TestCase):
         authorization2 = Authorization()
         authorization2.user = editor2.user
         authorization2.authorizer = self.coordinator
-        authorization2.partner = self.partner
         authorization2.date_expires = datetime.today() + timedelta(weeks=1)
         authorization2.save()
+        authorization2.partners.add(self.partner)
 
         call_command("user_renewal_notice")
 
