@@ -552,3 +552,28 @@ class ProxyBundleLaunchTest(TestCase):
         call_command("proxy_bundle_launch")
 
         self.assertEqual(len(mail.outbox), 2)
+
+    def test_proxy_bundle_launch_email_3(self):
+        """
+        The proxy/bundle launch command should record the
+        email was sent
+        """
+        self.assertFalse(self.user.userprofile.proxy_notification_sent)
+
+        call_command("proxy_bundle_launch")
+
+        self.user.userprofile.refresh_from_db()
+        self.assertTrue(self.user.userprofile.proxy_notification_sent)
+
+    def test_proxy_bundle_launch_email_4(self):
+        """
+        The proxy/bundle launch command should not send
+        to a user we recorded as having received the email
+        already.
+        """
+        self.user.userprofile.proxy_notification_sent = True
+        self.user.userprofile.save()
+
+        call_command("proxy_bundle_launch")
+
+        self.assertEqual(len(mail.outbox), 0)

@@ -10,8 +10,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         all_users = User.objects.all()
         for user in all_users:
-            ProxyBundleLaunch.launch_notice.send(
-                sender=self.__class__,
-                user_wp_username=user.editor.wp_username,
-                user_email=user.email,
-            )
+            # Ensure we didn't already send this user an email.
+            if not user.userprofile.proxy_notification_sent:
+                ProxyBundleLaunch.launch_notice.send(
+                    sender=self.__class__,
+                    user_wp_username=user.editor.wp_username,
+                    user_email=user.email,
+                )
+                user.userprofile.proxy_notification_sent = True
+                user.userprofile.save()
