@@ -18,7 +18,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core import mail
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django.db import models
@@ -2312,6 +2312,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
             status=Application.APPROVED,
             editor=editor,
             requested_access_duration=3,
+            sent_by=self.coordinator,
         )
 
         renewal_url = reverse("applications:renew", kwargs={"pk": app.pk})
@@ -2912,8 +2913,7 @@ class EvaluateApplicationTest(TestCase):
             user=EditorFactory().user,
             date_expires=date.today() - timedelta(days=random.randint(1, 5)),
         )
-        auth4.save()
-        auth4.partners.add(self.partner)
+        self.assertRaises(ValidationError, auth4.save)
 
         total_valid_authorizations = count_valid_authorizations(self.partner)
         self.assertEqual(total_valid_authorizations, 6)
@@ -3943,10 +3943,10 @@ class BatchEditTest(TestCase):
         # Create an coordinator with a test client session
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
         coordinator.user.set_password("coordinator")
-
         self.client.login(username=coordinator.user.username, password="coordinator")
+
         # Approve the application
-        response = self.client.post(
+        self.client.post(
             self.url,
             data={
                 "applications": self.application.pk,
@@ -3976,6 +3976,7 @@ class ListReadyApplicationsTest(TestCase):
         ApplicationFactory(
             status=Application.APPROVED,  # This shouldn't be the case, but could happen in certain situations
             partner=proxy_partner,
+            sent_by=coordinator.user,
         )
         ApplicationFactory(status=Application.APPROVED, partner=bundle_partner)
         ApplicationFactory(status=Application.APPROVED, partner=other_partner1)
