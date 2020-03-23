@@ -262,7 +262,9 @@ class PartnerModelTests(TestCase):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
 
         tomorrow = date.today() + timedelta(days=1)
-        _ = ApplicationFactory(partner=partner, status=Application.SENT)
+        _ = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=self.coordinator
+        )
         url = reverse("applications:list_renewal")
 
         # Create a coordinator with a test client session
@@ -274,7 +276,9 @@ class PartnerModelTests(TestCase):
 
     def test_sent_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
-        _ = ApplicationFactory(partner=partner, status=Application.SENT)
+        _ = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=self.coordinator
+        )
         url = reverse("applications:list_sent")
 
         # Create a coordinator with a test client session
@@ -563,12 +567,15 @@ class PartnerViewTests(TestCase):
         coordinators.user_set.add(cls.coordinator)
         coordinators.user_set.add(cls.coordinator2)
 
-        cls.application = ApplicationFactory(
-            partner=cls.partner, editor=editor, status=Application.SENT
-        )
-
         cls.partner.coordinator = cls.coordinator
         cls.partner.save()
+
+        cls.application = ApplicationFactory(
+            partner=cls.partner,
+            editor=editor,
+            status=Application.SENT,
+            sent_by=cls.coordinator,
+        )
 
         cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
         cls.message_patcher.start()
