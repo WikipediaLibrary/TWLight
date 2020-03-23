@@ -981,6 +981,7 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
 
         expected_json = [
             {"wp_username": self.editor1.user.editor.wp_username},
+            {"wp_username": self.editor2.user.editor.wp_username},
             {"wp_username": self.editor3.user.editor.wp_username},
         ]
 
