@@ -1,7 +1,7 @@
 from datetime import timedelta
 from django.conf import settings
 from django.dispatch import receiver, Signal
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import pre_save, post_save, post_delete
 from TWLight.users.models import Authorization, UserProfile
 from TWLight.resources.models import Partner, Stream
 
@@ -20,6 +20,12 @@ class Notice(object):
 
 class ProxyBundleLaunch(object):
     launch_notice = Signal(providing_args=["user_wp_username", "user_email"])
+
+
+@receiver(pre_save, sender=Authorization)
+def validate_authorization(sender, instance, **kwargs):
+    """Auths may only relate to partners with the same auth method. Only one non-bundle partner allowed."""
+    instance.full_clean()
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
