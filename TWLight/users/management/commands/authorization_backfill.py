@@ -38,6 +38,8 @@ class Command(BaseCommand):
             # In the case that there is no existing authorization, create a new one
             if existing_authorization.count() == 0:
                 authorization = Authorization()
+                authorization.user = application.user
+                authorization.authorizer = application.sent_by
                 # You can't set the date_authorized on creation, but you can modify it afterwards. So save immediately.
                 authorization.save()
                 # We set the authorization date to the date the application was closed.
@@ -45,8 +47,6 @@ class Command(BaseCommand):
                 if application.specific_stream:
                     authorization.stream = application.specific_stream
 
-                authorization.user = application.user
-                authorization.authorizer = application.sent_by
                 authorization.partners.add(application.partner)
                 # If this is a proxy partner, and the requested_access_duration
                 # field is set to false, set (or reset) the expiry date
