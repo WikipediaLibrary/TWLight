@@ -1179,10 +1179,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             else:
                 batch_update_success.append(app_pk)
                 app.status = status
-                if app.is_instantly_finalized() and app.status in [
-                    Application.APPROVED,
-                    Application.SENT,
-                ]:
+                if (
+                    app.is_instantly_finalized() and app.status == Application.APPROVED
+                ) or app.status == Application.SENT:
                     app.sent_by = request.user
                 app.save()
 

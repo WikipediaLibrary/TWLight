@@ -1362,6 +1362,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             editor=editor,
             partner=partner,
             specific_stream=stream1,
+            sent_by=self.coordinator,
         )
 
         request.session = {views.PARTNERS_SESSION_KEY: [partner.pk]}
@@ -1403,7 +1404,9 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.QUESTION, parent=parent)
         ApplicationFactory(status=Application.APPROVED, parent=parent)
         ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
-        ApplicationFactory(status=Application.SENT, parent=parent)
+        ApplicationFactory(
+            status=Application.SENT, parent=parent, sent_by=cls.coordinator
+        )
 
         user = UserFactory(username="editor")
         editor = EditorFactory(user=user)
@@ -1413,7 +1416,9 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.QUESTION, editor=editor)
         ApplicationFactory(status=Application.APPROVED, editor=editor)
         ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
-        ApplicationFactory(status=Application.SENT, editor=editor)
+        ApplicationFactory(
+            status=Application.SENT, editor=editor, sent_by=cls.coordinator
+        )
 
         delete_url = reverse("users:delete_data", kwargs={"pk": user.pk})
 
@@ -2064,10 +2069,16 @@ class ListApplicationsTest(BaseApplicationViewTest):
             editor.user
         )
         app1 = ApplicationFactory(
-            status=Application.SENT, partner=bundle_partner, editor=editor
+            status=Application.SENT,
+            partner=bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         app2 = ApplicationFactory(
-            status=Application.SENT, partner=not_a_bundle_partner, editor=editor
+            status=Application.SENT,
+            partner=not_a_bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         bundle_app = ApplicationFactory(
             status=Application.PENDING,
@@ -2095,11 +2106,17 @@ class ListApplicationsTest(BaseApplicationViewTest):
             editor.user
         )
         bundle_app = ApplicationFactory(
-            status=Application.SENT, partner=bundle_partner, editor=editor
+            status=Application.SENT,
+            partner=bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
         not_a_bundle_app = ApplicationFactory(
-            status=Application.SENT, partner=not_a_bundle_partner, editor=editor
+            status=Application.SENT,
+            partner=not_a_bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         not_a_bundle_app_url = reverse(
             "applications:evaluate", kwargs={"pk": not_a_bundle_app.pk}
@@ -2258,6 +2275,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
             partner=partner,
             status=Application.SENT,  # proxy applications are directly marked SENT
             editor=editor1,
+            sent_by=self.coordinator,
         )
 
         renewal_url = reverse("applications:renew", kwargs={"pk": app1.pk})
@@ -2330,7 +2348,10 @@ class RenewApplicationTest(BaseApplicationViewTest):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
         partner = PartnerFactory(authorization_method=Partner.BUNDLE)
         app = ApplicationFactory(
-            status=Application.SENT, partner=partner, editor=editor
+            status=Application.SENT,
+            partner=partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         request = RequestFactory().get(
             reverse("applications:renew", kwargs={"pk": app.pk})
@@ -2456,6 +2477,10 @@ class ApplicationModelTest(TestCase):
         app2.parent = app1
         app2.save()
 
+        coordinator = UserFactory()
+        coordinator_editor = EditorFactory(user=coordinator)
+        get_coordinators().user_set.add(coordinator)
+
         self.assertFalse(app1.is_renewable)
 
         # Applications whose status is not APPROVED or SENT cannot be renewed,
@@ -2481,7 +2506,9 @@ class ApplicationModelTest(TestCase):
         good_app = ApplicationFactory(partner=partner, status=Application.APPROVED)
         self.assertTrue(good_app.is_renewable)
 
-        good_app2 = ApplicationFactory(partner=partner, status=Application.SENT)
+        good_app2 = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=coordinator
+        )
         self.assertTrue(good_app.is_renewable)
 
         delete_me = [
@@ -3406,7 +3433,9 @@ class EvaluateApplicationTest(TestCase):
             ApplicationFactory(status=Application.QUESTION, parent=parent)
             ApplicationFactory(status=Application.APPROVED, parent=parent)
             ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
-            ApplicationFactory(status=Application.SENT, parent=parent)
+            ApplicationFactory(
+                status=Application.SENT, parent=parent, sent_by=cls.coordinator
+            )
 
             user = UserFactory(username="editor")
             editor = EditorFactory(user=user)
@@ -3416,7 +3445,9 @@ class EvaluateApplicationTest(TestCase):
             ApplicationFactory(status=Application.QUESTION, editor=editor)
             ApplicationFactory(status=Application.APPROVED, editor=editor)
             ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
-            ApplicationFactory(status=Application.SENT, editor=editor)
+            ApplicationFactory(
+                status=Application.SENT, editor=editor, sent_by=cls.coordinator
+            )
 
 
 class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
@@ -3443,14 +3474,18 @@ class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.QUESTION, parent=parent)
         ApplicationFactory(status=Application.APPROVED, parent=parent)
         ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
-        ApplicationFactory(status=Application.SENT, parent=parent)
+        ApplicationFactory(
+            status=Application.SENT, parent=parent, sent_by=cls.coordinator
+        )
 
         # And some applications from a user who will delete their account.
         ApplicationFactory(status=Application.PENDING, editor=editor)
         ApplicationFactory(status=Application.QUESTION, editor=editor)
         ApplicationFactory(status=Application.APPROVED, editor=editor)
         ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
-        ApplicationFactory(status=Application.SENT, editor=editor)
+        ApplicationFactory(
+            status=Application.SENT, editor=editor, sent_by=cls.coordinator
+        )
 
     def test_invalidate_bundle_partner_applications_signal(self):
         """
@@ -3907,7 +3942,9 @@ class BatchEditTest(TestCase):
 
         # Create an coordinator with a test client session
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        coordinator.user.set_password("coordinator")
 
+        self.client.login(username=coordinator.user.username, password="coordinator")
         # Approve the application
         response = self.client.post(
             self.url,
