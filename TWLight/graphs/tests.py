@@ -16,6 +16,7 @@ from TWLight.resources.models import Partner
 from TWLight.resources.factories import PartnerFactory
 from TWLight.users.models import Authorization
 from TWLight.users.factories import UserFactory, EditorFactory
+from TWLight.users.groups import get_coordinators
 
 from . import views
 
@@ -34,6 +35,10 @@ class GraphsTestCase(TestCase):
         staff_user.is_staff = True
         staff_user.save()
         cls.staff_user = staff_user
+
+        cls.coordinator = EditorFactory(user__email="editor@example.com").user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(cls.coordinator)
 
         user = UserFactory()
         cls.user = user
@@ -86,16 +91,16 @@ class GraphsTestCase(TestCase):
         partner3 = PartnerFactory()
 
         # Four Authorizations
-        auth1 = Authorization(user=user1)
+        auth1 = Authorization(user=user1, authorizer=self.coordinator)
         auth1.save()
         auth1.partners.add(partner1)
-        auth2 = Authorization(user=user2)
+        auth2 = Authorization(user=user2, authorizer=self.coordinator)
         auth2.save()
         auth2.partners.add(partner1)
-        auth3 = Authorization(user=user2)
+        auth3 = Authorization(user=user2, authorizer=self.coordinator)
         auth3.save()
         auth3.partners.add(partner2)
-        auth4 = Authorization(user=user2)
+        auth4 = Authorization(user=user2, authorizer=self.coordinator)
         auth4.save()
         auth4.partners.add(partner3)
 
@@ -119,12 +124,24 @@ class GraphsTestCase(TestCase):
         editor2 = EditorFactory()
 
         parent_app = ApplicationFactory(
-            status=Application.SENT, partner=partner1, editor=editor1
+            status=Application.SENT,
+            partner=partner1,
+            editor=editor1,
+            sent_by=self.coordinator,
         )
         ApplicationFactory(
-            status=Application.SENT, partner=partner1, editor=editor1, parent=parent_app
+            status=Application.SENT,
+            partner=partner1,
+            editor=editor1,
+            parent=parent_app,
+            sent_by=self.coordinator,
         )
-        ApplicationFactory(status=Application.SENT, partner=partner2, editor=editor2)
+        ApplicationFactory(
+            status=Application.SENT,
+            partner=partner2,
+            editor=editor2,
+            sent_by=self.coordinator,
+        )
 
         request = self.factory.get(reverse("csv:proxy_authorizations"))
         request.user = self.user
