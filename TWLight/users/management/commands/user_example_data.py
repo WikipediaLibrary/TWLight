@@ -20,7 +20,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         num_editors = options["num"][0]
 
-        existing_users = User.objects.all()
+        existing_users = User.objects.exclude(username="TWL Team")
 
         # Superuser the only user, per twlight_vagrant README instructions.
         if existing_users.count() == 0:
@@ -59,7 +59,7 @@ class Command(BaseCommand):
             )
 
         # All users who aren't the superuser
-        all_users = User.objects.exclude(is_superuser=True)
+        all_users = User.objects.exclude(username="TWL Team").exclude(is_superuser=True)
 
         # Flag wp_valid correctly if user is valid
         for user in all_users:
