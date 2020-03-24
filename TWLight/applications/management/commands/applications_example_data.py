@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 from django.test import Client, RequestFactory
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 
@@ -14,6 +15,8 @@ from TWLight.applications.models import Application
 from TWLight.applications.views import SendReadyApplicationsView
 from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.users.models import Editor
+
+twl_team = User.objects.get(username="TWL Team")
 
 
 def logged_in_example_coordinator(client, coordinator):
@@ -136,6 +139,9 @@ class Command(BaseCommand):
                         start_date=app.date_created, end_date=end_date, tzinfo=None
                     )
                     app.days_open = (app.date_closed - app.date_created).days
+            # Make sure we always set sent_by
+            if app.status == Application.SENT and not app.sent_by:
+                app.sent_by = twl_team
 
             app.save()
 
