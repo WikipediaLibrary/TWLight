@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2020-03-16 15:01:37+0000\n"
+"PO-Revision-Date: 2020-03-26 15:18:57+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2688,7 +2688,7 @@ msgstr "(kullanıcının küresel katkılarını görüntüle)"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:102
 msgid "Meta-Wiki registration or SUL merge date *"
-msgstr "Meta-Wiki kaydı veya SUL birleştirme tarihi *"
+msgstr "Meta Viki kaydı veya SUL birleştirme tarihi *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:114
