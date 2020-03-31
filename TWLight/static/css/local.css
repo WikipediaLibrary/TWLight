@@ -2,8 +2,26 @@
 ----------------------------------------------------------------------------
 BODY
 --------------------------------------------------------------------------*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background-color: white;
+}
+
+/* Different buffers for the footer based on screen size */
+@media (max-width: 767px) {
+  body {
+    margin-bottom: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    margin-bottom: 130px;
+  }
 }
 
 /*
@@ -191,9 +209,10 @@ header {
 #footer {
   background-color: #f8f8f8;
   border-top: 1px solid #eee;
-  margin-top: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 40px 15px 40px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .nav-greeting {
