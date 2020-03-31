@@ -414,7 +414,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
                 'Head over to <a href="{applications_url}">Your Applications'
                 "</a> to view the status.".format(
                     applications_url=reverse_lazy(
-                        "users:my_applications", kwargs={"pk": self.request.user.pk}
+                        "users:my_applications", kwargs={"pk": self.request.user.editor.pk}
                     )
                 )
             ),
@@ -474,7 +474,7 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
                 'Head over to <a href="{applications_url}">Your Applications'
                 "</a> to view the status.".format(
                     applications_url=reverse_lazy(
-                        "users:my_applications", kwargs={"pk": self.request.user.pk}
+                        "users:my_applications", kwargs={"pk": self.request.user.editor.pk}
                     )
                 )
             ),
