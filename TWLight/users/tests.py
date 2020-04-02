@@ -882,7 +882,6 @@ class EditorModelTestCase(TestCase):
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"],
             None,
-            self.test_editor.wp_editcount,
             None,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -901,7 +900,6 @@ class EditorModelTestCase(TestCase):
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"],
             self.test_editor.wp_editcount_updated,
-            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -920,7 +918,6 @@ class EditorModelTestCase(TestCase):
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"],
             self.test_editor.wp_editcount_updated,
-            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -935,7 +932,6 @@ class EditorModelTestCase(TestCase):
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"] + 10,
             self.test_editor.wp_editcount_updated,
-            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -960,7 +956,6 @@ class EditorModelTestCase(TestCase):
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             global_userinfo["editcount"] + 10,
             self.test_editor.wp_editcount_updated,
-            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
@@ -1027,7 +1022,6 @@ class EditorModelTestCase(TestCase):
         self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
             self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_updated,
-            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
