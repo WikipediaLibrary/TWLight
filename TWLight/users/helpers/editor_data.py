@@ -119,7 +119,6 @@ def editor_valid(enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
 def editor_recent_edits(
     global_userinfo_editcount,
     wp_editcount_updated,
-    wp_editcount,
     wp_editcount_prev_updated,
     wp_editcount_prev,
     wp_editcount_recent,
@@ -138,13 +137,13 @@ def editor_recent_edits(
             # This means that eligibility always lasts at least 30 days.
             or (wp_enough_recent_edits and editcount_update_delta.days > 30)
         ):
-            wp_editcount_prev = wp_editcount
-            wp_editcount_prev_updated = wp_editcount_updated
             wp_editcount_recent = global_userinfo_editcount - wp_editcount_prev
+            wp_editcount_prev = global_userinfo_editcount
+            wp_editcount_prev_updated = wp_editcount_updated
 
-    # If we don't have any historical editcount data, let all edits to date count.
-    # Editor.wp_editcount_prev defaults to 0, so we don't need to worry about changing it.
+    # If we don't have any historical editcount data, let all edits to date count
     else:
+        wp_editcount_prev = global_userinfo_editcount
         wp_editcount_prev_updated = now()
         wp_editcount_recent = global_userinfo_editcount
 
