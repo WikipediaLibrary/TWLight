@@ -1,5 +1,6 @@
 from datetime import timedelta
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.dispatch import receiver, Signal
 from django.db.models.signals import pre_save, post_save, post_delete
 from TWLight.users.models import Authorization, UserProfile
@@ -21,7 +22,18 @@ class Notice(object):
 @receiver(pre_save, sender=Authorization)
 def validate_authorization(sender, instance, **kwargs):
     """Auths may only relate to partners with the same auth method. Only one non-bundle partner allowed."""
-    instance.full_clean()
+    # TODO: Investigate why we get an authorizer does not exist validation error, though we can fetch the user object.
+    # django.core.exceptions.ValidationError: {'authorizer': ['user instance with id 1 does not exist.']}
+    if (
+        instance.pk
+        #and instance.authorizer.username == "TWL Team"
+        #and User.objects.filter(pk=instance.authorizer.pk).exists()
+    ):
+        print(instance)
+        instance.full_clean()
+    else:
+        print(instance.authorizers)
+        instance.full_clean(exclude="authorizer")
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
