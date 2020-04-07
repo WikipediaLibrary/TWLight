@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-04-02 14:32+0000\n"
+"POT-Creation-Date: 2020-04-07 15:26+0000\n"
 "PO-Revision-Date: 2020-03-09 15:54:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1096,7 +1096,7 @@ msgstr ""
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/about.html:207 TWLight/templates/base.html:293
+#: TWLight/templates/about.html:207 TWLight/templates/base.html:273
 msgid "Contact us"
 msgstr ""
 
@@ -2118,7 +2118,7 @@ msgstr ""
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_filter.html:24
-#: TWLight/templates/base.html:272
+#: TWLight/templates/base.html:252
 msgid "Suggest a partner"
 msgstr ""
 
@@ -2646,21 +2646,8 @@ msgid ""
 "apply or access resources you are approved for."
 msgstr ""
 
-#. Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
-#. blocktrans trimmed
-#. The Wikipedia Library Card Platform is a project of
-#. <a href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
-#. The Wikipedia Library</a>.
-#. endblocktrans
-#. </p>
-#. <p>
-#. <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-#. <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
-#. </a>
-#. </p>
-#. <p>
-#. comment Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:246
+#. Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
+#: TWLight/templates/base.html:231
 msgid ""
 "This work is licensed under a <a rel=\"license\" href=\"http://"
 "creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
@@ -2668,17 +2655,17 @@ msgid ""
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:260
+#: TWLight/templates/base.html:240
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:266
+#: TWLight/templates/base.html:246
 msgid "Terms of use and privacy policy"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:278
+#: TWLight/templates/base.html:258
 msgid "Feedback"
 msgstr ""
 
@@ -3121,38 +3108,38 @@ msgstr ""
 msgid "Wiki contributions, as entered by user"
 msgstr ""
 
-#: TWLight/users/models.py:452
+#: TWLight/users/models.py:451
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-#: TWLight/users/models.py:485
+#: TWLight/users/models.py:484
 msgid "The authorized user."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-#: TWLight/users/models.py:499
+#: TWLight/users/models.py:498
 msgid "The authorizing user."
 msgstr ""
 
 #. Translators: This field records the date the authorization expires.
-#: TWLight/users/models.py:508
+#: TWLight/users/models.py:507
 msgid "The date this authorization expires."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-#: TWLight/users/models.py:519
+#: TWLight/users/models.py:518
 msgid "The partner for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-#: TWLight/users/models.py:530
+#: TWLight/users/models.py:529
 msgid "The stream for which the editor is authorized."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-#: TWLight/users/models.py:536
+#: TWLight/users/models.py:535
 msgid "Have we sent a reminder email about this authorization?"
 msgstr ""
 
