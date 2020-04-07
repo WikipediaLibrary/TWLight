@@ -59,6 +59,14 @@ from TWLight.users.helpers.editor_data import (
 logger = logging.getLogger(__name__)
 
 
+def get_company_name(instance):
+    # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
+    if instance.pk:
+        return "\n".join(str(partner) for partner in instance.partners.all())
+    else:
+        return None
+
+
 class UserProfile(models.Model):
     """
     This is for storing data that relates only to accounts on TWLight, _not_ to
@@ -569,10 +577,7 @@ class Authorization(models.Model):
         else:
             stream_name = None
 
-        if self.partners.all().exists():
-            company_name = "\n".join([p.company_name for p in self.partners.all()])
-        else:
-            company_name = None
+        company_name = get_company_name(self)
 
         # In reality, we should always have an authorized user.
         if self.user:
