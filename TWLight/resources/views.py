@@ -151,7 +151,7 @@ class PartnersDetailView(DetailView):
                     )
             else:
                 authorizations = Authorization.objects.filter(
-                    partner=partner, user=user
+                    partners=partner, user=user
                 )
                 if authorizations.count() == partner_streams.count():
                     # User has correct number of auths, don't show 'apply',
