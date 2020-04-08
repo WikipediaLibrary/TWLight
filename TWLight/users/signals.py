@@ -22,18 +22,17 @@ class Notice(object):
 @receiver(pre_save, sender=Authorization)
 def validate_authorization(sender, instance, **kwargs):
     """Auths may only relate to partners with the same auth method. Only one non-bundle partner allowed."""
-    # TODO: Investigate why we get an authorizer does not exist validation error, though we can fetch the user object.
-    # django.core.exceptions.ValidationError: {'authorizer': ['user instance with id 1 does not exist.']}
-    if (
-        instance.pk
-        #and instance.authorizer.username == "TWL Team"
-        #and User.objects.filter(pk=instance.authorizer.pk).exists()
+    # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
+    if not instance.pk or (
+        # TODO: Investigate why we get an authorizer does not exist validation error, though we can fetch the user object.
+        # django.core.exceptions.ValidationError: {'authorizer': ['user instance with id 1 does not exist.']}
+        instance.authorizer.username == "TWL Team"
+        and User.objects.filter(pk=instance.authorizer.pk).exists()
     ):
-        print(instance)
-        instance.full_clean()
+        instance.full_clean(exclude=["authorizer"])
     else:
-        print(instance.authorizers)
-        instance.full_clean(exclude="authorizer")
+        print(instance.authorizer)
+        instance.full_clean()
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
