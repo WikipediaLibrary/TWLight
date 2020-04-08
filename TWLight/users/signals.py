@@ -35,7 +35,6 @@ def validate_authorization(sender, instance, **kwargs):
     ):
         instance.full_clean(exclude=["authorizer"])
     else:
-        print(instance.authorizer)
         instance.full_clean()
 
 
