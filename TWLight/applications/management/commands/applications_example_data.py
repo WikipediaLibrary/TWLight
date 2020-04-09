@@ -165,12 +165,12 @@ class Command(BaseCommand):
             coordinator = logged_in_example_coordinator(
                 client, approved_app.partner.coordinator
             )
-            this_partner_access_codes = AccessCode.objects.filter(
-                partner=approved_app.partner, authorization__isnull=True
-            )
-
             url = reverse(
                 "applications:send_partner", kwargs={"pk": approved_app.partner.pk}
+            )
+
+            this_partner_access_codes = AccessCode.objects.filter(
+                partner=approved_app.partner, authorization__isnull=True
             )
 
             if approved_app.partner.authorization_method == Partner.EMAIL:
@@ -180,7 +180,10 @@ class Command(BaseCommand):
 
             # If this partner has access codes, assign a code to
             # this sent application.
-            elif approved_app.partner.authorization_method == Partner.CODES:
+            elif (
+                this_partner_access_codes
+                and approved_app.partner.authorization_method == Partner.CODES
+            ):
                 access_code = random.choice(this_partner_access_codes)
                 request = RequestFactory().post(
                     url,
