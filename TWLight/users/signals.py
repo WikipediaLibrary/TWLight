@@ -31,14 +31,7 @@ def validate_authorization(sender, instance, **kwargs):
     # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
     if not instance.pk:
         exclude.append("partners")
-    # TODO: Investigate why we get an authorizer does not exist validation error, though we can fetch the user object.
-    # django.core.exceptions.ValidationError: {'authorizer': ['user instance with id 1 does not exist.']}
-    if (
-        instance.authorizer
-        and instance.authorizer.username == "TWL Team"
-        and User.objects.filter(pk=instance.authorizer.pk).exists()
-    ):
-        exclude.append("authorizer")
+
     instance.full_clean(exclude=exclude)
 
 
