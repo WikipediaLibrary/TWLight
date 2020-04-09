@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2020-03-26 15:18:55+0000\n"
+"PO-Revision-Date: 2020-04-09 14:17:53+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2153,7 +2153,7 @@ msgstr "정보"
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
 #: TWLight/templates/base.html:261
 msgid "Terms of use and privacy policy"
-msgstr "이용 약관 및 개인정보처리방침"
+msgstr "이용 약관 및 개인정보보호정책"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
 #: TWLight/templates/base.html:273
@@ -2786,7 +2786,7 @@ msgstr "2019년 11월 12일에 마지막으로 업데이트됨"
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28
 msgid "Wikimedia Foundation privacy policy"
-msgstr "위키미디어 재단 개인정보처리방침"
+msgstr "위키미디어 재단 개인정보보호정책"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:32

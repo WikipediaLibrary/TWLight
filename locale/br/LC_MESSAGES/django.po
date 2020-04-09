@@ -1,13 +1,14 @@
 # Translation of Wikipedia Library Card Platform to Breton (brezhoneg)
 # Exported from translatewiki.net
 #
+# Author: Fulup
 # Author: Gwenn-Ael
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:32+0000\n"
+"PO-Revision-Date: 2020-04-09 14:17:52+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -857,7 +858,7 @@ msgstr "Kemennadenn"
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:23
 msgid "Receive a copy of this message"
-msgstr "Resev un eilenn eus ar c'hemennad"
+msgstr "Resev un eilenn eus ar gemennadenn"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
