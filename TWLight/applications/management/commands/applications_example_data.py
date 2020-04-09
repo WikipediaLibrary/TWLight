@@ -70,80 +70,85 @@ class Command(BaseCommand):
             not_applied_partners = available_partners.exclude(
                 applications__editor=random_editor
             )
-            random_partner = random.choice(not_applied_partners)
 
-            app = ApplicationFactory(
-                editor=random_editor,
-                partner=random_partner,
-                hidden=self.chance(True, False, 10),
-            )
-
-            # Make sure partner-specific information is filled.
-            if random_partner.specific_stream:
-                app.specific_stream = random.choice(
-                    Stream.objects.filter(partner=random_partner)
+            if not_applied_partners:
+                random_partner = random.choice(not_applied_partners)
+                app = ApplicationFactory(
+                    editor=random_editor,
+                    partner=random_partner,
+                    hidden=self.chance(True, False, 10),
                 )
 
-            if random_partner.specific_title:
-                app.specific_title = Faker(
-                    random.choice(settings.FAKER_LOCALES)
-                ).sentence(nb_words=3)
+                # Make sure partner-specific information is filled.
+                if random_partner.specific_stream:
+                    app.specific_stream = random.choice(
+                        Stream.objects.filter(partner=random_partner)
+                    )
 
-            if random_partner.agreement_with_terms_of_use:
-                app.agreement_with_terms_of_use = True
+                if random_partner.specific_title:
+                    app.specific_title = Faker(
+                        random.choice(settings.FAKER_LOCALES)
+                    ).sentence(nb_words=3)
 
-            if random_partner.account_email:
-                app.account_email = Faker(random.choice(settings.FAKER_LOCALES)).email()
+                if random_partner.agreement_with_terms_of_use:
+                    app.agreement_with_terms_of_use = True
 
-            # Imported applications have very specific information, and were
-            # all imported on the same date.
-            imported = self.chance(True, False, 50)
+                if random_partner.account_email:
+                    app.account_email = Faker(
+                        random.choice(settings.FAKER_LOCALES)
+                    ).email()
 
-            if imported:
-                app.status = Application.SENT
-                app.date_created = import_date
-                app.date_closed = import_date
-                app.rationale = "Imported on 2017-07-17"
-                app.comments = "Imported on 2017-07-17"
-                app.imported = True
-            else:
-                app.status = random.choice(valid_choices)
+                # Imported applications have very specific information, and were
+                # all imported on the same date.
+                imported = self.chance(True, False, 50)
 
-                # Figure out earliest valid date for this app
-                if random_editor.wp_registered < import_date.date():
-                    start_date = import_date
+                if imported:
+                    app.status = Application.SENT
+                    app.date_created = import_date
+                    app.date_closed = import_date
+                    app.rationale = "Imported on 2017-07-17"
+                    app.comments = "Imported on 2017-07-17"
+                    app.imported = True
                 else:
-                    start_date = random_editor.wp_registered
+                    app.status = random.choice(valid_choices)
 
-                app.date_created = Faker(
-                    random.choice(settings.FAKER_LOCALES)
-                ).date_time_between(start_date=start_date, end_date="now", tzinfo=None)
-                app.rationale = Faker(random.choice(settings.FAKER_LOCALES)).paragraph(
-                    nb_sentences=3
-                )
-                app.comments = Faker(random.choice(settings.FAKER_LOCALES)).paragraph(
-                    nb_sentences=2
-                )
-
-            # For closed applications, assign date_closed and date_open
-            if app.status in Application.FINAL_STATUS_LIST:
-                if not imported:
-                    potential_end_date = app.date_created + relativedelta(years=1)
-                    if potential_end_date > datetime.datetime.now():
-                        end_date = "now"
+                    # Figure out earliest valid date for this app
+                    if random_editor.wp_registered < import_date.date():
+                        start_date = import_date
                     else:
-                        end_date = potential_end_date
-                    app.date_closed = Faker(
+                        start_date = random_editor.wp_registered
+
+                    app.date_created = Faker(
                         random.choice(settings.FAKER_LOCALES)
                     ).date_time_between(
-                        start_date=app.date_created, end_date=end_date, tzinfo=None
+                        start_date=start_date, end_date="now", tzinfo=None
                     )
-                    app.days_open = (app.date_closed - app.date_created).days
-            # Make sure we always set sent_by
-            if app.status == Application.SENT and not app.sent_by:
-                app.sent_by = twl_team
+                    app.rationale = Faker(
+                        random.choice(settings.FAKER_LOCALES)
+                    ).paragraph(nb_sentences=3)
+                    app.comments = Faker(
+                        random.choice(settings.FAKER_LOCALES)
+                    ).paragraph(nb_sentences=2)
 
-            app.save()
+                # For closed applications, assign date_closed and date_open
+                if app.status in Application.FINAL_STATUS_LIST:
+                    if not imported:
+                        potential_end_date = app.date_created + relativedelta(years=1)
+                        if potential_end_date > datetime.datetime.now():
+                            end_date = "now"
+                        else:
+                            end_date = potential_end_date
+                        app.date_closed = Faker(
+                            random.choice(settings.FAKER_LOCALES)
+                        ).date_time_between(
+                            start_date=app.date_created, end_date=end_date, tzinfo=None
+                        )
+                        app.days_open = (app.date_closed - app.date_created).days
+                # Make sure we always set sent_by
+                if app.status == Application.SENT and not app.sent_by:
+                    app.sent_by = twl_team
+
+                app.save()
 
         # Let's mark all Approved applications that were approved more
         # than 3 weeks ago as Sent.
