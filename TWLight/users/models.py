@@ -501,7 +501,9 @@ class Authorization(models.Model):
         on_delete=models.SET_NULL,
         # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
         limit_choices_to=(
-            models.Q(is_superuser=True) | models.Q(groups__name="coordinators")
+            models.Q(is_superuser=True)
+            | models.Q(groups__name="coordinators")
+            | models.Q(username="TWL Team")
         ),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
         help_text=_("The authorizing user."),
@@ -520,7 +522,7 @@ class Authorization(models.Model):
         Partner,
         blank=True,
         # Limit to available partners.
-        limit_choices_to=(models.Q(status=0)),
+        limit_choices_to=(models.Q(status__in=[Partner.AVAILABLE, Partner.WAITLIST])),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
         help_text=_("The partner for which the editor is authorized."),
     )
@@ -531,7 +533,9 @@ class Authorization(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         # Limit to available partners.
-        limit_choices_to=(models.Q(partner__status=0)),
+        limit_choices_to=(
+            models.Q(partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST])
+        ),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
         help_text=_("The stream for which the editor is authorized."),
     )
