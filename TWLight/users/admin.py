@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from TWLight.users.models import Editor, UserProfile, Authorization
+from TWLight.users.models import Editor, UserProfile, Authorization, get_company_name
 from TWLight.users.forms import AuthorizationForm
 
 
@@ -52,13 +52,13 @@ class AuthorizationInline(admin.StackedInline):
 class AuthorizationAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "get_partners",
+        "get_partners_company_name",
         "stream",
         "get_authorizer_wp_username",
         "get_authorized_user_wp_username",
     )
     search_fields = [
-        "partner__company_name",
+        "partners__company_name",
         "stream__name",
         "authorizer__editor__wp_username",
         "user__editor__wp_username",
@@ -86,8 +86,10 @@ class AuthorizationAdmin(admin.ModelAdmin):
 
     get_authorizer_wp_username.short_description = _("authorizer")
 
-    def get_partners(self, authorization):
-        return "\n".join([p.company_name for p in authorization.partners.all()])
+    def get_partners_company_name(self, authorization):
+        return get_company_name(authorization)
+
+    get_partners_company_name.short_description = _("partners")
 
 
 admin.site.register(Authorization, AuthorizationAdmin)
