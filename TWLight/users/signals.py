@@ -33,6 +33,7 @@ def validate_authorization(sender, instance, **kwargs):
             instance.partners.all()
             .values_list("authorization_method", flat=True)
             .distinct()
+            .get()
             == Partner.BUNDLE
         )
 
