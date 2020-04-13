@@ -736,5 +736,6 @@ class Authorization(models.Model):
                 .values_list("authorization_method", flat=True)
                 .distinct()
             )
+            # TODO: Emit useful error messages.
             assert authorization_methods.count == 1
             assert authorization_methods.get() == Partner.BUNDLE
