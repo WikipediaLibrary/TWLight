@@ -725,3 +725,16 @@ class Authorization(models.Model):
             return True
         else:
             return False
+
+    def clean(self):
+        """Auths may only relate to partners with the same auth method. Only one non-bundle partner allowed."""
+        # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
+        # If we have more than one partner, assert that the auth method is the same for all partners and is bundle.
+        if self.pk and self.partners.count() > 1:
+            authorization_methods = (
+                self.partners.all()
+                .values_list("authorization_method", flat=True)
+                .distinct()
+            )
+            assert authorization_methods.count == 1
+            assert authorization_methods.get() == Partner.BUNDLE
