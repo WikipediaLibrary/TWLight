@@ -27,6 +27,14 @@ def validate_authorization(sender, instance, **kwargs):
     # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
     if not instance.pk:
         exclude.append("partners")
+    # If we have more than one partner, assert that the auth method is bundle.
+    elif instance.pk and instance.partners.count() > 1:
+        assert (
+            instance.partners.all()
+            .values_list("authorization_method", flat=True)
+            .distinct()
+            == Partner.BUNDLE
+        )
 
     instance.full_clean(exclude=exclude)
 
