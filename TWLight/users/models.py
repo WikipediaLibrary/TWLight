@@ -62,7 +62,7 @@ logger = logging.getLogger(__name__)
 def get_company_name(instance):
     # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
     if instance.pk:
-        return "\n".join(str(partner) for partner in instance.partners.all())
+        return ", ".join(str(partner) for partner in instance.partners.all())
     else:
         return None
 
@@ -689,8 +689,16 @@ class Authorization(models.Model):
         """
         if self.stream:
             authorization_method = self.stream.authorization_method
+        elif self.pk and self.partners.exists():
+            # Even if there is more than one partner, there should only be one authorization_method.
+            authorization_method = (
+                self.partners.all()
+                .values_list("authorization_method", flat=True)
+                .distinct()
+                .get()
+            )
         else:
-            authorization_method = self.partners.first().authorization_method
+            authorization_method = None
 
         return authorization_method
 
