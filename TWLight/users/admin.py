@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
@@ -49,6 +50,20 @@ class AuthorizationInline(admin.StackedInline):
     extra = 0
 
 
+class AuthorizationAdminForm(forms.ModelForm):
+    def clean_partners(self):
+        try:
+            self.instance.clean()
+        # TODO: Narrow this exception down to partner relationship problems.
+        # TODO: Prevent save.
+        # TODO: display useful warning.
+        except AssertionError:
+            print(self.cleaned_data["partners"])
+            self.instance.partners.clear()
+            self.cleaned_data["partners"] = []
+        return self.cleaned_data["partners"]
+
+
 class AuthorizationAdmin(admin.ModelAdmin):
     list_display = (
         "id",
@@ -63,6 +78,8 @@ class AuthorizationAdmin(admin.ModelAdmin):
         "authorizer__editor__wp_username",
         "user__editor__wp_username",
     ]
+
+    form = AuthorizationAdminForm
 
     def get_authorized_user_wp_username(self, authorization):
         if authorization.user:
