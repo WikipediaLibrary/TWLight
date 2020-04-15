@@ -6,46 +6,9 @@ To get set up with TWLight locally you will need [Docker](https://www.docker.com
 
 TWLight runs on Django 1.11 (a Django 2 upgrade will be taking place before 1.11 end of life), and uses Python 3.7.
 
-## Shell scripts
-
-A suite of shell scripts for performing various functions can be found in the /bin folder.
-
-These scripts can be run with, for example `docker-compose exec twlight /app/bin/virtualenv_migrate.sh`.
-
-### Migrating
-
-The script `virtualenv_migrate.sh` will, for each TWLight app, run:
-
-- `python manage.py createinitialrevisions`
-- `python manage.py makemigrations`
-- `python manage.py migrate`
-- `python manage.py sync_translation_fields`
-
-See the [official documentation](https://docs.djangoproject.com/en/1.11/topics/migrations/) for more on what each of these commands does.
-
-### Testing
-
-To test the tool, simply run the `virtualenv_test.sh` script. This script more or less only runs `python manage.py test`.
-
-You can run a specific test using the `virtualenv_testcase.sh` script, providing a single argument for the test case to run, e.g. `virtualenv_testcase.sh TWLight.resources.tests`.
-
-### Example data
-
-When working on TWLight locally you may want example data reflecting the live tool. The script `virtualenv_example_data.sh` will generate 200 users, 50 resources, and 1000 applications, with pre-filled data and relations that broadly reflect the real data.
-
-This script can only be generated with an empty database, after you have logged in to an account you want to be made a superuser (the script looks for a single account in the database and makes it a Django superuser).
-
 ## Code formatting
 
 We enforce code formatting via [black](https://github.com/psf/black) - tests will fail (both locally and on Travis) if black detects an issue with your code formatting. Run black on your code before pushing it via `docker-compose exec twlight /venv/bin/black -t py37 /app/TWLight`. 
-
-## Translation
-
-[Translations](https://github.com/wikipedialibrary/TWLight/blob/master/docs/sysadmin.md#translations) are supported in the platform. Please make sure to correctly comment new or updated strings with guidance for translators - to do so, write a comment to the line preceding the string which starts `# Translators:` in python files or `{% comment %}Translators:` in HTML.
-
-In HTML files, make sure to wrap multiline strings with `{% blocktrans trimmed %}`, not just `{% blocktrans %}`, to avoid whitespace and indentation formatting issues.
-
-Where possible, try to keep code and HTML tags outside of strings (i.e. `<p>{% trans "Text" %}</p>` rather than `{% trans "<p>Text</p>" %}` to avoid confusion for translators. Don't, however, break up sentences into multiple translation blocks. Translators need to see the entire context of a string to translate it accurately.
 
 ## Pushing changes
 
@@ -79,31 +42,3 @@ All four places referenced there must be updated:
     * Add an entry to FIELD_TYPES specifying the widget to be used to render the field.
     * Add an entry to FIELD_LABELS, which will be used to label the field (don't forget to wrap it in `_()`!)
     * Run the tests. `SynchronizeFieldsTest` will fail if you haven't done all the steps.
-
-## PyCharm setup
-
-This project can be set up via PyCharm using its support for Docker. Wikimedia developers can get free access to PyCharm Professional (required for Docker support) - please contact The Wikipedia Library team for instructions.
-
-### Process
-
-1. After installing Docker, ensure it's using Linux Containers, and in settings, enable the 'Expose daemon on tcp://localhost:2375 without TLS' option in settings.
-2. In PyCharm, open the repository folder, and navigate to Project Settings (File > Settings)
-3. Under Build, Execution, Deployment > Docker, click the + symbol and check the TCP socket option is selected. The value should be `tcp://localhost:2375`.
-4. Navigate to Project > Project Interpreter, click the cog/gear icon in the top right, then Add... and select the Docker Compose tab
-- Configuration file(s) should be set to both `docker-compose.yml` and `docker-compose.override.yml`
-- Service should be set to `twlight`.
-- Set Python interpreter path to /venv/bin/python3
-5. It may take some time for the interpreter to finish adding. If successful, you should see a long list of python packages including Django.
-6. Open the Docker tab in PyCharm's bottom bar. With the Docker entry highlighted, click the icon with three green arrows, then `Create docker-compose deployment...`
-- Compose file(s) should again be set to both `docker-compose.yml` and `docker-compose.override.yml`
-- Check the `--build` option
-- Click Apply, then Run
-7. You should see the three containers - `twlight_docker_db_1`, `twlight_docker_twlight_1`, and `twlight_docker_web_1` start up correctly, and you should see the platform at `localhost`.
-8. Whenever you want to start the Docker containers again, you can simply click the green arrows, then 'Docker'.
-
-### Potential issues
-- `Cannot start service db: driver failed programming external connectivity on endpoint...`: Occassional problem which stops docker containers from starting. To solve, simply restart the docker service.
-- 'Unauthorised' when retrieving alpine: This error is a result of signing into Docker with an ID rather than your email. Simply log out and then back in using your full email address.
-- SDK name error: Clear out your PyCharm interpreters by following the top response at https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000306410-Cannot-use-system-interpreter-in-PyCharm-Pro-2018-1
-- `Drive has not been shared`. This error occurs if Docker can't access the relevant folder. On Windows it can be solved by going to Properties > Sharing > Share > Share.
-- `(2005, "Unknown MySQL server host 'db' (-2)")`. Happens when the 'twlight_db_1' container fails to load. For a simple fix, open command prompt from within the Docker program files directory and run `docker system prune`. Deploying docker-compose.override.yml should now recreate the database from scratch. Run migrations, folowed by the example data script to restore the db to its initial state. Check out https://github.com/wodby/mariadb/issues/2 if you are interested in not a simple fix.
