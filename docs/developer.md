@@ -4,16 +4,6 @@ The intended audience for this document is developers of TWLight. Hi!
 
 To get set up with TWLight locally you will need [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
 
-TWLight runs on Django 1.11 (a Django 2 upgrade will be taking place before 1.11 end of life), and uses Python 3.7.
-
-## Code formatting
-
-We enforce code formatting via [black](https://github.com/psf/black) - tests will fail (both locally and on Travis) if black detects an issue with your code formatting. Run black on your code before pushing it via `docker-compose exec twlight /venv/bin/black -t py37 /app/TWLight`. 
-
-## Staging environment
-
-We have a staging environment hosted adjacent to the production site at https://twlight-staging.wmflabs.org/. If you would like to test your changes in this environment, to test against live data or in a close-to-production environment, please let a member of the TWL team know and we can pull your code down.
-
 ## Specific code changes
 
 Some bits and pieces of advice and guidance on changing specific areas of the codebase.
