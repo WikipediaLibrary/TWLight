@@ -4,6 +4,8 @@ The intended audience for this document is developers of TWLight. Hi!
 
 To get set up with TWLight locally you will need [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
 
+We are in the process of consolidating and structuring our documentation in [the Wiki](https://github.com/WikipediaLibrary/TWLight/wiki), please look there!
+
 ## Specific code changes
 
 Some bits and pieces of advice and guidance on changing specific areas of the codebase.
