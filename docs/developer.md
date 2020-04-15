@@ -10,10 +10,6 @@ TWLight runs on Django 1.11 (a Django 2 upgrade will be taking place before 1.11
 
 We enforce code formatting via [black](https://github.com/psf/black) - tests will fail (both locally and on Travis) if black detects an issue with your code formatting. Run black on your code before pushing it via `docker-compose exec twlight /venv/bin/black -t py37 /app/TWLight`. 
 
-## Pushing changes
-
-When filing Pull Requests for code changes, you should _not_ include translation updates and are not _required_ to include migration files. When changes are merged into the Master branch, Travis CI runs checks on the build and if it passes, pushes the changes through to the Production branch, which is then pulled to the live tool. This will run migration and string localization processes automatically.
-
 ## Staging environment
 
 We have a staging environment hosted adjacent to the production site at https://twlight-staging.wmflabs.org/. If you would like to test your changes in this environment, to test against live data or in a close-to-production environment, please let a member of the TWL team know and we can pull your code down.
