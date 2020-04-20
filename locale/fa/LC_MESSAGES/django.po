@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:35+0000\n"
+"PO-Revision-Date: 2020-04-20 15:08:46+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -286,7 +286,7 @@ msgstr "شما می توانید انتظار داشته باشید که پس ا
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
 msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
-msgstr "این درخواست در فهرست انتظار قرار دارد، چرا که موجودی دسترسی‌های اعطا شده از سوی پایگاه مورد نظر درحال حاضر به پایان رسیده‌است."
+msgstr "این درخواست در فهرست انتظار قرار دارد، چرا که موجودی دسترسی‌های اعطا شده از سوی پایگاه مورد نظر در حال حاضر به پایان رسیده‌است."
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:21
@@ -749,7 +749,7 @@ msgstr "درخواست شما برای بررسی ثبت شد. می‌توانی
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #: TWLight/applications/views.py:388
 msgid "This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."
-msgstr "درحال حاضر حساب دسترسی‌ای برای این پایگاه موجود نیست. بااین‌حال هنوز می‌توانید برای دسترسی درخواست بدهید تا هر زمان که حساب جدیدی موجود شد درخواستتان بررسی شود."
+msgstr "در حال حاضر حساب دسترسی‌ای برای این پایگاه موجود نیست. بااین حال هنوز می‌توانید برای دسترسی درخواست دهید تا هر زمان که حساب جدیدی موجود شد درخواست‌تان بررسی شود."
 
 #. Translators: Editor = wikipedia editor, gender unknown.
 #: TWLight/applications/views.py:501 TWLight/applications/views.py:577
