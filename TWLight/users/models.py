@@ -36,6 +36,7 @@ import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
@@ -736,6 +737,12 @@ class Authorization(models.Model):
                 .values_list("authorization_method", flat=True)
                 .distinct()
             )
-            # TODO: Emit useful error messages.
-            assert authorization_methods.count == 1
-            assert authorization_methods.get() == Partner.BUNDLE
+
+            if authorization_methods.count() > 1:
+                raise ValidationError(
+                    _("All related Partners must share the same Authorization method.")
+                )
+            if authorization_methods.get() is not Partner.BUNDLE:
+                raise ValidationError(
+                    _("Only Bundle Partners support shared Authorization.")
+                )
