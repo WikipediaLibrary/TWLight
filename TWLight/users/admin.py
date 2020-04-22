@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.users.models import Editor, UserProfile, Authorization, get_company_name
-from TWLight.users.forms import AuthorizationForm
+from TWLight.users.forms import AuthorizationAdminForm, AuthorizationInlineForm
 
 
 class EditorInline(admin.StackedInline):
@@ -44,24 +43,10 @@ class UserProfileInline(admin.StackedInline):
 
 
 class AuthorizationInline(admin.StackedInline):
-    form = AuthorizationForm
+    form = AuthorizationInlineForm
     model = Authorization
     fk_name = "user"
     extra = 0
-
-
-class AuthorizationAdminForm(forms.ModelForm):
-    def clean_partners(self):
-        try:
-            self.instance.clean()
-        # TODO: Narrow this exception down to partner relationship problems.
-        # TODO: Prevent save.
-        # TODO: display useful warning.
-        except AssertionError:
-            print(self.cleaned_data["partners"])
-            self.instance.partners.clear()
-            self.cleaned_data["partners"] = []
-        return self.cleaned_data["partners"]
 
 
 class AuthorizationAdmin(admin.ModelAdmin):
