@@ -36,7 +36,6 @@ import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
@@ -45,6 +44,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
+from TWLight.users.helpers.authorizations import validate_partners
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
@@ -728,21 +728,11 @@ class Authorization(models.Model):
             return False
 
     def clean(self):
-        """Auths may only relate to partners with the same auth method. Only one non-bundle partner allowed."""
-        # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
-        # If we have more than one partner, assert that the auth method is the same for all partners and is bundle.
-        if self.pk and self.partners.count() > 1:
-            authorization_methods = (
-                self.partners.all()
-                .values_list("authorization_method", flat=True)
-                .distinct()
-            )
-
-            if authorization_methods.count() > 1:
-                raise ValidationError(
-                    _("All related Partners must share the same Authorization method.")
-                )
-            if authorization_methods.get() is not Partner.BUNDLE:
-                raise ValidationError(
-                    _("Only Bundle Partners support shared Authorization.")
-                )
+        """
+        Run custom validation for ManyToMany Partner relationship.
+        This only works on updates to existing instances because ManyToMany relationships only exist if the instance is in the db.
+        Those will have a pk.
+        The admin form calls validate_partners before saving, so we are covered between the two.
+        """
+        if self.pk:
+            validate_partners(self.partners)
