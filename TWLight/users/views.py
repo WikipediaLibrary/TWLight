@@ -91,9 +91,8 @@ class UserDetailView(SelfOnly, TemplateView):
         assert "pk" in list(self.kwargs.keys())
 
         try:
-            # if self.kwargs["pk"] == None :
-            #     return User.objects.get(self.kwargs["pk"])
-            return User.objects.get(pk=self.kwargs["pk"])
+            if self.kwargs["pk"] == None :
+                return User.objects.get(self.kwargs["pk"])
         except User.DoesNotExist:
             raise Http404
 
