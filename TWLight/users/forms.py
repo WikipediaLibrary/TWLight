@@ -170,18 +170,21 @@ class TermsForm(forms.ModelForm):
         model = UserProfile
         fields = ["terms_of_use"]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user_profile, *args, **kwargs):
         super(TermsForm, self).__init__(*args, **kwargs)
 
         # Translators: Users must click this button when registering to agree to the website terms of use.
         self.fields["terms_of_use"].label = _("I agree with the terms of use")
-
+        self.fields['terms_of_use'].initial = user_profile.terms_of_use
         self.helper = FormHelper()
         self.helper.form_class = "form-inline"
         self.helper.field_template = "bootstrap3/layout/inline_field.html"
-
+        self.fields['terms_of_use'].help_text = "By unchecking this box and clicking “Update”, " \
+                                                 "you may explore the site, but you will not be able to apply for " \
+                                                 "access to materials or evaluate applications unless you agree " \
+                                                 "with the terms of use."
         self.helper.layout = Layout(
-            "terms_of_use",
+            'terms_of_use',
             # Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
             Submit("submit", _("I accept"), css_class="btn btn-default"),
         )

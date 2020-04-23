@@ -688,6 +688,19 @@ class ViewsTestCase(TestCase):
             response.get("Content-Disposition"), "attachment; filename=user_data.json"
         )
 
+    def test_terms_of_use_access(self):
+        """User who agreed term of use, can see checkbox to disagree"""
+
+        factory = RequestFactory()
+        user_agreed_TOU = UserFactory(username="userWithToUTrue")
+        user_agreed_TOU.userprofile.terms_of_use = True
+        request = factory.get(reverse("users:home"))
+        request.user = user_agreed_TOU
+        response = views.UserDetailView.as_view()(request, pk=user_agreed_TOU.pk)
+
+        content = response.render().content.decode("utf-8")
+        self.assertIn("By unchecking this box and clicking “Update", content)
+
     def test_user_email_form(self):
         """
         Users have a form available on their user pages which enables them to

@@ -47,6 +47,27 @@
     <hr />
   {% endif %}
 
+  {% if user.userprofile.terms_of_use %}
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        {% comment %} Translators: This is the heading of the section of a user's
+        profile where they can change their ToU. {% endcomment %}
+        <strong>Terms of use</strong>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        <form method="post" action="{% url 'terms' %}">
+          {% csrf_token %}
+          {{ terms_form | crispy }}
+          <button class="btn btn-default" type="submit">
+             {% trans "Update" %}
+          </button>
+          </br></br> Last updated at : {{ user.userprofile.terms_of_use_date }} {{ user.userprofile.terms_of_use_date | time:"H:i" }}
+        </form>
+      </div>
+    </div>
+    <hr />
+  {% endif %}
+
   <div class="row clearfix">
     <div class="col-xs-12 col-sm-3">
       {% comment %}Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data. {% endcomment %}

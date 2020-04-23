@@ -89,7 +89,10 @@ class UserDetailView(SelfOnly, TemplateView):
         get_object in order to be able to use the SelfOnly mixin.
         """
         assert "pk" in list(self.kwargs.keys())
+
         try:
+            # if self.kwargs["pk"] == None :
+            #     return User.objects.get(self.kwargs["pk"])
             return User.objects.get(pk=self.kwargs["pk"])
         except User.DoesNotExist:
             raise Http404
@@ -98,6 +101,7 @@ class UserDetailView(SelfOnly, TemplateView):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         context["language_form"] = SetLanguageForm(user=self.request.user)
         context["password_form"] = PasswordChangeForm(user=self.request.user)
+        context["terms_form"] = TermsForm(user_profile=self.request.user.userprofile)
         return context
 
 
@@ -153,6 +157,7 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
             pass
 
         context["password_form"] = PasswordChangeForm(user=user)
+        context["terms_form"] = TermsForm(user_profile=user.userprofile)
 
         return context
 
@@ -606,7 +611,7 @@ class TermsView(UpdateView):
         if "instance" not in kwargs:
             return None
         else:
-            return form_class(**self.get_form_kwargs())
+            return form_class(self.request.user.userprofile, **self.get_form_kwargs())
 
     def get_form_kwargs(self):
         """
@@ -637,8 +642,8 @@ class TermsView(UpdateView):
             # put them in an obnoxious redirect loop - send them to where
             # they were going, which promptly sends them back to the terms
             # page because they haven't agreed to the terms....
-            # Also clear the ToU date field in case a user un-agrees
-            self.get_object().terms_of_use_date = None
+            # However, we will keep the terms_of_use_date as last updated date
+            self.get_object().terms_of_use_date = datetime.date.today()
             self.get_object().save()
 
             return reverse_lazy("homepage")
