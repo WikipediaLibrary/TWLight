@@ -291,6 +291,12 @@ class _BaseSubmitApplicationView(
             app = Application()
             app.editor = self.request.user.editor
             app.partner = partner_obj
+
+            # Application created for a WAITLISTED Partners
+            # should have waitlist_status as True
+            if app.partner.status == Partner.WAITLIST:
+                app.waitlist_status = True
+
             # Status will be set to PENDING by default.
 
             for field in partner_fields:

@@ -526,6 +526,44 @@ class WaitlistBehaviorTests(TestCase):
         with self.assertRaises(PermissionDenied):
             _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
 
+    def test_toggle_available_to_waitlist_changes_application_waitlist_status(self):
+        """
+        Post to the toggle waitlist view set to make an AVAILABLE partner 
+        change to WAITLIST. By doing this waitlist_status of some applications 
+        under this partner will become True.
+        """
+
+        # Create needed objects
+        editor = EditorFactory()
+        coordinators = get_coordinators()
+        coordinators.user_set.add(editor.user)
+        UserProfileFactory(user=editor.user, terms_of_use=True)
+
+        # Create a Partner and some applications for it
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+        app1 = ApplicationFactory(partner=partner, status=Application.PENDING)
+        app2 = ApplicationFactory(partner=partner, status=Application.QUESTION)
+        app3 = ApplicationFactory(partner=partner, status=Application.APPROVED)
+        app4 = ApplicationFactory(partner=partner, status=Application.SENT)
+
+        # Set up request
+        url = reverse("partners:toggle_waitlist", kwargs={"pk": partner.pk})
+        request = RequestFactory().post(url)
+        request.user = editor.user
+        _ = PartnersToggleWaitlistView.as_view()(request, pk=partner.pk)
+        partner.refresh_from_db()
+
+        # Test partner status is changed to Waitlist
+        self.assertEqual(partner.status, Partner.WAITLIST)
+
+        # Test if waitlist_status is True for all applications
+        # which are Pending or Under Discussion for this partner
+        applications = Application.objects.filter(
+            partner=partner, status__in=[Application.PENDING, Application.QUESTION]
+        )
+        for app in applications:
+            self.assertEqual(app.waitlist_status, True)
+
 
 class StreamModelTests(TestCase):
     @classmethod
