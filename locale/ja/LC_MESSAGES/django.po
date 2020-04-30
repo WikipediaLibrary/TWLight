@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:37+0000\n"
+"PO-Revision-Date: 2020-04-30 15:05:32+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,9 +58,9 @@ msgstr "{partner} に対する申請手続き"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:245
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr "手続きを進める前に必ず<a href=\"{url}\">{url}</a> において登録をお済ませください。"
+msgstr "手続きを進める前に必ず{url}において登録をお済ませください。"
 
 #: TWLight/applications/forms.py:308
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
@@ -89,7 +89,7 @@ msgstr "提携組織に登録したメールアドレス"
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
 #: TWLight/applications/forms.py:341 TWLight/applications/helpers.py:117
 msgid "The number of months you wish to have this access for before renewal is required"
-msgstr ""
+msgstr "更新時期以前にアクセスを希望する月数（必須）"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:95
@@ -247,7 +247,7 @@ msgstr "提携組織に対してこの申請を送付した利用者"
 
 #: TWLight/applications/models.py:107
 msgid "12 months"
-msgstr ""
+msgstr "12ヵ月"
 
 #: TWLight/applications/models.py:107
 #, fuzzy
@@ -266,20 +266,19 @@ msgstr "月"
 
 #. Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
 #: TWLight/applications/models.py:111
-#, fuzzy
 msgid "User selection of when they'd like their account to expire (in months). Required for proxied resources; optional otherwise."
-msgstr "使用規約へのリンク。アクセスの条件として利用者が使用規約に合意する場合に必要。その他はオプション。"
+msgstr "利用者が選ぶアクセス権の期限（月数）。プロキシ化されたリソースに対して必須。その他は選択制。"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:283
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr ""
+msgstr "アクセスURL：{access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:286
 msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr ""
+msgstr "申し込み受理後、1、2週間のうちにアクセスの詳細が届く予定です。"
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -369,12 +368,12 @@ msgstr "受付保留中"
 #. Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:105
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:108
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr ""
+msgstr "申請者にはプロフィール登録の時、まず居住国を入力すること、その後、ほかの記入欄に取りかかるようお勧めください。"
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:119
@@ -590,7 +589,7 @@ msgstr "現在はまだ審査を受けていません。"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 msgid "Partner (Collection)"
-msgstr ""
+msgstr "提携組織（収蔵先）"
 
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
 #, fuzzy
@@ -628,7 +627,7 @@ msgstr "状態を設定"
 #: TWLight/applications/templates/applications/confirm_renewal.html:13
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
-msgstr ""
+msgstr "Click 'confirm' to renew your application for %(partner)sへの申請を更新するには、「確定」（confirm）ボタンを押します"
 
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/applications/templates/applications/confirm_renewal.html:18
@@ -636,7 +635,7 @@ msgstr ""
 #: TWLight/users/templates/users/authorization_confirm_return.html:15
 #: TWLight/users/views.py:391
 msgid "Confirm"
-msgstr ""
+msgstr "確定"
 
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:21
@@ -725,7 +724,7 @@ msgstr "コードの選択:"
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:195
 msgid "There are no approved, unsent applications."
-msgstr ""
+msgstr "承認済みで更新手続きが済んでいない申請はありません。"
 
 #. Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
 #: TWLight/applications/views.py:165
@@ -734,7 +733,7 @@ msgstr "少なくとも提携先を1件選択してください。"
 
 #: TWLight/applications/views.py:279
 msgid "This field consists only of restricted text."
-msgstr ""
+msgstr "この欄には既定の文のみ記入できます。"
 
 #. Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
 #: TWLight/applications/views.py:336
@@ -744,12 +743,12 @@ msgstr "アクセスしたいリソースを最低1件選択してください�
 #. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
 #: TWLight/applications/views.py:359 TWLight/applications/views.py:398
 msgid "Your application has been submitted for review. You can check the status of your applications on this page."
-msgstr ""
+msgstr "申請は審査過程に送られました。このページで処理の段階を確認できます。"
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #: TWLight/applications/views.py:388
 msgid "This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."
-msgstr ""
+msgstr "現時点で、この提携組織ではアクセス権の無料提供はしていません。応募は受け付けています。申請は無料提供のアクセス権が再開された時に、審査過程へ送られます。"
 
 #. Translators: Editor = wikipedia editor, gender unknown.
 #: TWLight/applications/views.py:501 TWLight/applications/views.py:577
@@ -776,7 +775,7 @@ msgstr "却下された申請"
 #. Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
 #: TWLight/applications/views.py:705
 msgid "Access grants up for renewal"
-msgstr ""
+msgstr "更新が必要な無料アクセス権"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
@@ -787,21 +786,21 @@ msgstr "申請を送付"
 
 #: TWLight/applications/views.py:758
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted."
-msgstr ""
+msgstr "提携組織のプロキシ承認方式が順番待ちのため、申請の処理ができません。"
 
 #: TWLight/applications/views.py:773
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."
-msgstr ""
+msgstr "提携組織のプロキシ承認方式が順番待ち（かつ／もしくは）配布できる無料アクセス権がゼロのため、申請の処理ができません。"
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
 #: TWLight/applications/views.py:789
 msgid "You attempted to create a duplicate authorization."
-msgstr ""
+msgstr "すでに申請済みのアクセス権について、申請手続きが重複したようです。"
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:821
 msgid "Set application status"
-msgstr ""
+msgstr "申請の処理状態を設定"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
 #: TWLight/applications/views.py:856
@@ -809,9 +808,8 @@ msgid "Please select at least one application."
 msgstr "申請を最低1件、選択してください。"
 
 #: TWLight/applications/views.py:988
-#, fuzzy
 msgid "Batch update of application(s) {} successful."
-msgstr "一括更新に成功しました。"
+msgstr "申請 {} の一括更新に成功しました。"
 
 #: TWLight/applications/views.py:993
 msgid "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available."
@@ -1210,7 +1208,7 @@ msgstr ""
 #: TWLight/resources/models.py:32
 #, python-format
 msgid "%(code)s is not a valid language code. You must enter an ISO language code, as in the INTERSECTIONAL_LANGUAGES setting at https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py"
-msgstr ""
+msgstr "%(code)s は使用可能な言語コードではありません。ISO 言語コード https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py を参照し、有効な INTERSECTIONAL_LANGUAGES 設定値を入力してください。"
 
 #: TWLight/resources/models.py:49
 msgid "Name"
@@ -1355,7 +1353,7 @@ msgstr ""
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the languages a partner has resources in.
 #: TWLight/resources/models.py:275
 msgid "Select all languages in which this partner publishes content."
-msgstr ""
+msgstr "この提携先がコンテンツを用意する全ての言語を選択。"
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can specify the standard duration of a manually granted account for this partner.
 #: TWLight/resources/models.py:282
@@ -1599,7 +1597,7 @@ msgstr "動画"
 #. Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:271
 msgid "Language(s)"
-msgstr ""
+msgstr "対応言語"
 
 #. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:281
@@ -1650,7 +1648,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:362
 #, python-format
 msgid "%(publisher)s requires that you provide your country of residence."
-msgstr ""
+msgstr "%(publisher)s の申請条件には、居住国の記入が必須です。"
 
 #. Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
 #: TWLight/resources/templates/resources/partner_detail.html:371
@@ -1709,7 +1707,7 @@ msgstr ""
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:523
 msgid "Median days from application to decision"
-msgstr ""
+msgstr "新生から結果発表までの平均所用日数"
 
 #. Translators: This is the header for total accounts on a per-collection level.
 #: TWLight/resources/templates/resources/partner_detail.html:533
@@ -1749,7 +1747,7 @@ msgstr ""
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #: TWLight/resources/templates/resources/partner_tile.html:61
 msgid "Language(s) not known"
-msgstr ""
+msgstr "対応言語が不明"
 
 #: TWLight/resources/templates/resources/partner_users.html:7
 #, python-format
@@ -1949,7 +1947,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:59
 msgid "You have an account that is a minimum of 6 months old"
-msgstr ""
+msgstr "アカウントの保持期間は6ヶ月以上です"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
@@ -1959,7 +1957,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr ""
+msgstr "この1カ月間に10回以上編集した履歴があります"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
@@ -2245,22 +2243,22 @@ msgstr ""
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.
 #: TWLight/templates/dashboard.html:189
 msgid "Applications by number of days until decision"
-msgstr ""
+msgstr "結果発表までの残り日数と申請件数"
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/).
 #: TWLight/templates/dashboard.html:192
 msgid "The x axis is the number of days to make a final decision (either approved or denied) on an application. The y axis is the number of applications that have taken exactly that many days to decide."
-msgstr ""
+msgstr "グラフの x 軸は日数を示し、1件の申請について審査の最終結果発表 (受理か却下) までに要する期間です。y 軸は申請件数を示し、所用日数ごとの分布を表します。"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.
 #: TWLight/templates/dashboard.html:201
 msgid "Median days until application decision, per month"
-msgstr ""
+msgstr "申請の結果までかかる月ごとの所用時間"
 
 #. Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean.
 #: TWLight/templates/dashboard.html:204
 msgid "This shows the median number of days to reach a decision on the applications opened in a given month."
-msgstr ""
+msgstr "当該月に審査を開始した申請について、結論が出るまでに要する日数を示します。"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
 #: TWLight/templates/dashboard.html:211
@@ -2275,7 +2273,7 @@ msgstr ""
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
 #: TWLight/templates/dashboard.html:227
 msgid "User language distribution"
-msgstr ""
+msgstr "利用者の言語統計"
 
 #. Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/home.html:9
@@ -2621,7 +2619,7 @@ msgstr ""
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
 #: TWLight/users/templates/users/editor_detail.html:56
 msgid "Information with an * was retrieved from Wikipedia directly. Other information was entered directly by users or site admins, in their preferred language."
-msgstr ""
+msgstr "「*」印付きの情報は、ウィキペディアから直接、抽出してあります。その他の情報は使用言語を含め、利用者もしくはサイト管理者による入力を示します。"
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:68
@@ -2932,7 +2930,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:189
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information:  your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr ""
+msgstr "ウィキメディア財団と提携サービス提供者は申請者の個人情報の取り扱いにつき、公共的使命に資するウィキメディア図書館サービス提供の適法な目的にのみ用います。ウィキメディア図書館の利用権を申請する場合、もしくはウィキメディア図書館の利用権を行使する場合、私たちは定期的に次の情報を収集することがあります。利用者の申請先の提携組織からの求めに応じて、利用者名、電子メールアドレス、編集回数、アカウント登録日、利用者識別番号（ID）、所属する利用者グループ、特別な利用者権限、居住国、職業および／もしくは所属を開示します。自己申告による利用者の貢献と提携先リソースを利用する理由。利用者がこれら利用規約に同意した日付。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:197
@@ -2954,7 +2952,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:219
 msgid "If you decide to disable your Wikipedia Library account, you can use the delete button on your profile to delete certain personal information associated with your account. We will delete your real name, occupation, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. Note that deletion is not reversible. Deletion of your Wikipedia Library account may also correspond with the removal of any resource access to which you were eligible or approved. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
-msgstr ""
+msgstr "ウィキペディア図書館の利用停止をご希望の場合は、個人情報ページにある「削除」ボタンを押し、利用券に紐付けされた特定の個人情報を削除してください。利用者の本名、職業、所属機関名、居住地は管理者が削除します。ご留意点として、システムには利用者名、申請もしくは利用歴のある出版社ならびに使用履歴の記録を保持します。いったん利用権を削除すると、復活はできません。ウィキペディア図書館のアカウントは、履歴があるもしくは申請中だったリソース利用権の削除と連動して、書き換えられる場合があります。もしアカウントの個人情報の削除を申請し、後で新規アカウントの申請をする場合、必要な情報を全て最初から入力し直していただきます。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:226
@@ -2984,7 +2982,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:258
 msgid "The Wikimedia Foundation is a nonprofit organization based in San Francisco, California. The Wikipedia Library program provides access to resources held by publishers in multiple countries. If you apply for a Wikipedia Library account (whether you are inside or outside of the United States), you understand that your personal data will be collected, transferred, stored, processed, disclosed and otherwise used in the U.S. as described in this privacy policy. You also understand that your information may be transferred by us from the U.S. to other countries, which may have different or less stringent data protection laws than your country, in connection with providing services to you, including evaluating your application and securing access to your chosen publishers (locations for each publisher are outlined on their respective partner information pages)."
-msgstr ""
+msgstr "ウィキメディア財団は米国カリフォルニア州サンフランシスコに本拠地を置く非営利活動団体です。ウィキメディア図書館制度は複数国の出版社が所有するリソースの利用券を提供します。ウィキメディア図書館のアカウント申請 (居住国が米国か外国かを問わず) 個人情報の収集、送信、保存、処理、開示その他の利用は、この個人情報方針に示すとおり、米国内で発生することに同意していただきます。さらに利用者情報は私たちがアメリカから外国へ送信する場合があり、送信先では利用者に提供するサービスに関して利用者の居住国とはデータ保護関連法が異なるもしくは規制がゆるい場合があり、その対象として利用者の申請の審査、利用者が選択した出版社への安全な接続を含みます (個別の出版社の所在地情報はそれぞれの当該情報ページに概説されます。)"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:267

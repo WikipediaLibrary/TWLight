@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2019-11-21 14:22:33+0000\n"
+"PO-Revision-Date: 2020-04-30 15:05:31+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,9 +61,9 @@ msgstr "Deine Bewrbung bei {partner}"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:245
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr "Bevor du dich bewerben kannst, musst du dich unter <a href=\"{url}\">{url}</a> anmelden."
+msgstr "Bevor du dich bewerben kannst, musst du dich unter {url} anmelden."
 
 #: TWLight/applications/forms.py:308
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:9
@@ -846,9 +846,8 @@ msgstr "Deine Erneurerungsanfrage wurde empfangen. Ein Koordinator wird deine An
 
 #. Translators: This labels a textfield where users can enter their email ID.
 #: TWLight/emails/forms.py:17
-#, fuzzy
 msgid "Your email"
-msgstr "E-Mail-Addresse des Accounts"
+msgstr "Deine E-Mail-Addresse"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:19
@@ -960,15 +959,13 @@ msgstr ""
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:39
-#, fuzzy
 msgid "Contact info"
-msgstr "Kontakt"
+msgstr "Kontakt-Information"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:43
-#, fuzzy
 msgid "Meta page"
-msgstr "Nächste Seite"
+msgstr "Metaseite"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:45
