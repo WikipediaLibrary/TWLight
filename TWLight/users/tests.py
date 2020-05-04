@@ -688,18 +688,35 @@ class ViewsTestCase(TestCase):
             response.get("Content-Disposition"), "attachment; filename=user_data.json"
         )
 
-    def test_terms_of_use_access(self):
-        """User who agreed term of use, can see checkbox to disagree"""
-
-        factory = RequestFactory()
-        user_agreed_TOU = UserFactory(username="userWithToUTrue")
+    def test_terms_of_use_on_editor_detail_page_show(self):
+        """Editor who agreed term of use, can see checkbox to disagree"""
+        user_agreed_TOU = UserFactory()
         user_agreed_TOU.userprofile.terms_of_use = True
-        request = factory.get(reverse("users:home"))
-        request.user = user_agreed_TOU
-        response = views.UserDetailView.as_view()(request, pk=user_agreed_TOU.pk)
+        editor_agreed_TOU = EditorFactory(user=user_agreed_TOU)
+        factory = RequestFactory()
+        detail_request = factory.get(
+            reverse("users:editor_detail", kwargs={"pk": editor_agreed_TOU.pk})
+        )
+        detail_request.user = user_agreed_TOU
+        response = views.EditorDetailView.as_view()(detail_request, pk=editor_agreed_TOU.pk)
 
         content = response.render().content.decode("utf-8")
         self.assertIn("By unchecking this box and clicking “Update", content)
+
+    def test_terms_of_use_on_editor_detail_page_not_show(self):
+        """Editor who hasn't agreed term of use, won't see checkbox to disagree"""
+        user_not_agreed_TOU = UserFactory()
+        user_not_agreed_TOU.userprofile.terms_of_use = False
+        editor_not_agreed_TOU = EditorFactory(user=user_not_agreed_TOU)
+        factory = RequestFactory()
+        detail_request = factory.get(
+            reverse("users:editor_detail", kwargs={"pk": editor_not_agreed_TOU.pk})
+        )
+        detail_request.user = user_not_agreed_TOU
+        response = views.EditorDetailView.as_view()(detail_request, pk=editor_not_agreed_TOU.pk)
+
+        content = response.render().content.decode("utf-8")
+        self.assertNotIn("By unchecking this box and clicking “Update", content)
 
     def test_user_email_form(self):
         """
