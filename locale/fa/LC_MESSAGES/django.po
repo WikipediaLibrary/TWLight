@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2020-04-20 15:08:46+0000\n"
+"PO-Revision-Date: 2020-05-04 14:07:04+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -446,7 +446,7 @@ msgstr "کاربر"
 #. Translators: This is the title of the section of an application page which lists the history of status changes.
 #: TWLight/applications/templates/applications/application_evaluation.html:228
 msgid "Revision history"
-msgstr "تاریخچهٔ بازبینی"
+msgstr "تاریخچهٔ ویرایش‌ها"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate submit_user or review_date
 #: TWLight/applications/templates/applications/application_evaluation.html:244

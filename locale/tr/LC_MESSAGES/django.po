@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:19+0000\n"
-"PO-Revision-Date: 2020-04-30 15:05:34+0000\n"
+"PO-Revision-Date: 2020-05-04 14:07:07+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1330,7 +1330,7 @@ msgstr "Editörlerin bu ortak için erişim kodları veya ücretsiz kayıt URL'l
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article.
 #: TWLight/resources/models.py:248
 msgid "Optional excerpt limit in terms of number of words per article. Leave empty if no limit."
-msgstr "Makale başına kelime sayısı bakımından isteğe bağlı alıntı sınırı. Limit yoksa boş bırakın."
+msgstr "Madde başına kelime sayısı bakımından isteğe bağlı alıntı sınırı. Limit yoksa boş bırakın."
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can optionally provide a excerpt word limit per article in terms of percentage per article.
 #: TWLight/resources/models.py:252
@@ -1856,7 +1856,7 @@ msgstr "Geçersiz İstek"
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:12
 msgid "Sorry; we don't know what to do with that."
-msgstr "Üzgünüz ama bununla ne yapacağımızı bilmiyoruz."
+msgstr "Üzgünüz: bununla ne yapacağımızı bilmiyoruz."
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate path or Phabricator.
 #: TWLight/templates/400.html:17
@@ -1878,7 +1878,7 @@ msgstr "İzin reddedildi"
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:12
 msgid "Sorry; you aren't allowed to do that."
-msgstr "Üzgünüz ama bunu yapma yetkiniz yok."
+msgstr "Üzgünüz: bunu yapma yetkiniz yok."
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate path or Phabricator.
 #: TWLight/templates/403.html:17
@@ -1894,7 +1894,7 @@ msgstr "Bulunamadı"
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:12
 msgid "Sorry; we can't find that."
-msgstr "Üzgünüz ama bunu bulamıyoruz."
+msgstr "Üzgünüz: bunu bulamıyoruz."
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate path or Phabricator.
 #: TWLight/templates/404.html:16
