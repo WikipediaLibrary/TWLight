@@ -404,6 +404,13 @@ class Editor(models.Model):
             if not self.wp_bundle_eligible:
                 bundle_authorization.date_expires = date.today() - timedelta(days=1)
                 bundle_authorization.save()
+            else:
+                # If the user is eligible, and has an expiry date on their
+                # bundle authorization, that probably means we previously
+                # expired it. So reset it to being active.
+                if bundle_authorization.date_expires:
+                    bundle_authorization.date_expires = None
+                    bundle_authorization.save()
         else:
             # If the user has become eligible, we should create an auth
             if self.wp_bundle_eligible:
