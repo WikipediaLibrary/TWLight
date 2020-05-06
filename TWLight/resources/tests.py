@@ -802,18 +802,11 @@ class AutoWaitlistDisableTest(TestCase):
 
 class BundlePartnerTest(TestCase):
     def setUp(self):
-        self.bundle_partner_1 = PartnerFactory(
-            authorization_method=Partner.BUNDLE
-        )
-        self.bundle_partner_2 = PartnerFactory(
-            authorization_method=Partner.BUNDLE
-        )
-        self.proxy_partner_1 = PartnerFactory(
-            authorization_method=Partner.PROXY
-        )
+        self.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
         self.bundle_partner_3 = PartnerFactory(
-            authorization_method=Partner.BUNDLE,
-            status=Partner.NOT_AVAILABLE
+            authorization_method=Partner.BUNDLE, status=Partner.NOT_AVAILABLE
         )
 
         self.editor = EditorFactory()
@@ -830,8 +823,7 @@ class BundlePartnerTest(TestCase):
         should be updated to include it.
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
@@ -848,8 +840,7 @@ class BundlePartnerTest(TestCase):
         should be updated to remove it.
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
@@ -866,8 +857,7 @@ class BundlePartnerTest(TestCase):
         should be updated to add it.
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
@@ -883,8 +873,7 @@ class BundlePartnerTest(TestCase):
         authorizations should be updated to add it.
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
@@ -900,8 +889,7 @@ class BundlePartnerTest(TestCase):
         changes to bundle auths
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
@@ -918,8 +906,7 @@ class BundlePartnerTest(TestCase):
         to bundle auths
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
@@ -935,15 +922,13 @@ class BundlePartnerTest(TestCase):
         immediately should add to existing Bundle authorizations.
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
 
         _ = PartnerFactory(
-            authorization_method=Partner.BUNDLE,
-            status=Partner.AVAILABLE
+            authorization_method=Partner.BUNDLE, status=Partner.AVAILABLE
         )
 
         self.assertEqual(bundle_authorization.first().partners.count(), 3)
@@ -954,15 +939,13 @@ class BundlePartnerTest(TestCase):
         but NOT_AVAILABLE status should not change existing auths
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
 
         _ = PartnerFactory(
-            authorization_method=Partner.BUNDLE,
-            status=Partner.NOT_AVAILABLE
+            authorization_method=Partner.BUNDLE, status=Partner.NOT_AVAILABLE
         )
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
@@ -973,16 +956,11 @@ class BundlePartnerTest(TestCase):
         should make no change to existing Bundle authorizations
         """
         bundle_authorization = Authorization.objects.filter(
-            user=self.editor.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
 
-        _ = PartnerFactory(
-            authorization_method=Partner.PROXY,
-            status=Partner.AVAILABLE
-        )
+        _ = PartnerFactory(authorization_method=Partner.PROXY, status=Partner.AVAILABLE)
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
-
