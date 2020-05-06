@@ -1107,6 +1107,42 @@ class EditorModelTestCase(TestCase):
             bundle_authorization.first().date_expires, date.today() - timedelta(days=1)
         )
 
+    def test_update_bundle_authorization_user_eligible_again(self):
+        """
+        update_bundle_authorization() should undo expiry of existing
+        bundle authorizations if the user is now eligible again
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        # Marking them as eligible a 2nd time should update their
+        # expired authorization to remove the expiry date.
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Authorization should still exist
+        self.assertEqual(bundle_authorization.count(), 1)
+
+        # It should have no expiry date, i.e. it's now active again.
+        self.assertEqual(bundle_authorization.first().date_expires, None)
+
     @patch.object(Editor, "get_global_userinfo")
     def test_update_from_wikipedia(self, mock_global_userinfo):
         identity = {}
