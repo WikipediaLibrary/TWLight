@@ -798,3 +798,191 @@ class AutoWaitlistDisableTest(TestCase):
         # No change should've been made to the partner with zero accounts available
         self.partner1.refresh_from_db()
         self.assertEqual(self.partner1.status, Partner.WAITLIST)
+
+
+class BundlePartnerTest(TestCase):
+    def setUp(self):
+        self.bundle_partner_1 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+        self.bundle_partner_2 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+        self.proxy_partner_1 = PartnerFactory(
+            authorization_method=Partner.PROXY
+        )
+        self.bundle_partner_3 = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            status=Partner.NOT_AVAILABLE
+        )
+
+        self.editor = EditorFactory()
+        self.editor.wp_bundle_eligible = True
+        self.editor.save()
+        # This should create an authorization linked to
+        # bundle partners.
+        self.editor.update_bundle_authorization()
+
+    def test_switching_partner_to_bundle_updates_auths(self):
+        """
+        When a partner switches from a non-Bundle authorization
+        method to Bundle, existing bundle authorizations
+        should be updated to include it.
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.proxy_partner_1.authorization_method = Partner.BUNDLE
+        self.proxy_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 3)
+
+    def test_switching_partner_from_bundle_updates_auths(self):
+        """
+        When a partner switches from the Bundle authorization
+        method to non-Bundle, existing bundle authorizations
+        should be updated to remove it.
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.bundle_partner_1.authorization_method = Partner.PROXY
+        self.bundle_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 1)
+
+    def test_making_bundle_partner_available_updates_auths(self):
+        """
+        When a partner is made available after being marked
+        not available, existing bundle authorizations
+        should be updated to add it.
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.bundle_partner_3.status = Partner.AVAILABLE
+        self.bundle_partner_3.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 3)
+
+    def test_making_bundle_partner_not_available_updates_auths(self):
+        """
+        When a partner is marked as not available, existing bundle
+        authorizations should be updated to add it.
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.bundle_partner_1.status = Partner.NOT_AVAILABLE
+        self.bundle_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 1)
+
+    def test_making_proxy_partner_not_available_doesnt_update_bundle_auths(self):
+        """
+        Changing the availability of a PROXY partner should make no
+        changes to bundle auths
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.proxy_partner_1.status = Partner.NOT_AVAILABLE
+        self.proxy_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+    def test_making_proxy_partner_email_doesnt_update_bundle_auths(self):
+        """
+        Changing the authorization method of a PROXY partner
+        to a non-bundle authorization should not make any changes
+        to bundle auths
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.proxy_partner_1.authorization_method = Partner.EMAIL
+        self.proxy_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+    def test_creating_bundle_partner_updates_bundle_auths(self):
+        """
+        Creating a new partner with the BUNDLE authorization method
+        immediately should add to existing Bundle authorizations.
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        _ = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            status=Partner.AVAILABLE
+        )
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 3)
+
+    def test_creating_not_available_bundle_partner_doesnt_update_bundle_auths(self):
+        """
+        Creating a new partner with the BUNDLE authorization method
+        but NOT_AVAILABLE status should not change existing auths
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        _ = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            status=Partner.NOT_AVAILABLE
+        )
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+    def test_creating_proxy_partner_doesnt_update_bundle_auths(self):
+        """
+        Creating a new partner with the PROXY authorization method
+        should make no change to existing Bundle authorizations
+        """
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        _ = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            status=Partner.AVAILABLE
+        )
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
