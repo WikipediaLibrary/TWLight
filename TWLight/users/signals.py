@@ -86,3 +86,74 @@ def delete_all_but_latest_partner_authorizations(sender, instance, **kwargs):
         if user_authorizations.count() > 1:
             latest_authorization = user_authorizations.latest("date_authorized")
             user_authorizations.exclude(pk=latest_authorization.pk).delete()
+
+
+@receiver(pre_save, sender=Partner)
+def update_existing_bundle_authorizations(sender, instance, **kwargs):
+    """
+    If this partner was just switched to Bundle from a non-Bundle
+    authorization method, update any existing Bundle authorizations
+    to include it, and vice-versa, including if it was marked not-available.
+    """
+    add_to_auths = False
+    remove_from_auths = False
+
+    try:
+        previous_data = Partner.even_not_available.get(
+            pk=instance.pk
+        )
+    # We must be creating this partner, we'll handle this case in a
+    # post-save signal
+    except Partner.DoesNotExist:
+        return
+
+    # New data for this partner for readability
+    now_bundle = instance.authorization_method == Partner.BUNDLE
+    now_available = instance.status == Partner.AVAILABLE
+    now_not_available = instance.status == Partner.NOT_AVAILABLE
+
+    # Previous data for this partner for readability
+    previously_available = previous_data.status == Partner.AVAILABLE
+    previously_not_available = previous_data.status == Partner.NOT_AVAILABLE
+    previously_bundle = previous_data.authorization_method == Partner.BUNDLE
+
+    if now_available:
+        if now_bundle:
+            if previously_not_available or not previously_bundle:
+                add_to_auths = True
+        else:
+            if previously_bundle:
+                remove_from_auths = True
+
+    elif now_not_available:
+        if previously_available and previously_bundle:
+            remove_from_auths = True
+
+    # Let's avoid db queries if we don't need them
+    if add_to_auths or remove_from_auths:
+        authorizations_to_update = Authorization.objects.filter(
+            partners__authorization_method=Partner.BUNDLE,
+        ).distinct()
+
+        if add_to_auths:
+            for authorization in authorizations_to_update:
+                authorization.partners.add(instance)
+        elif remove_from_auths:
+            for authorization in authorizations_to_update:
+                authorization.partners.remove(instance)
+
+
+@receiver(post_save, sender=Partner)
+def update_bundle_authorizations_on_bundle_partner_creation(sender, instance, created, **kwargs):
+    """
+    This does the same thing that the pre-save signal update_existing_bundle_authorizations()
+    does, except it handles new Bundle-partner creations. We can't do this in
+    pre-save because the partner object doesn't exist yet.
+    """
+    if created and instance.status == Partner.AVAILABLE and instance.authorization_method == Partner.BUNDLE:
+        authorizations_to_update = Authorization.objects.filter(
+            partners__authorization_method=Partner.BUNDLE,
+        ).distinct()
+
+        for authorization in authorizations_to_update:
+            authorization.partners.add(instance)
