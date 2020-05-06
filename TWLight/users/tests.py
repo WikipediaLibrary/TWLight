@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import resolve, reverse
 from django.core.management import call_command
 from django.test import TestCase, Client, RequestFactory
@@ -24,6 +24,7 @@ from TWLight.users.models import Authorization
 
 from . import views
 from .authorization import OAuthBackend
+from .helpers.authorizations import validate_partners
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
@@ -1218,3 +1219,67 @@ class HelpersTestCase(TestCase):
         LANGUAGES = set(LANGUAGE_CODES.keys())
 
         self.assertEqual(WIKIS_LANGUAGES, LANGUAGES)
+
+
+class AuthorizationsHelpersTestCase(TestCase):
+    def setUp(self):
+        self.bundle_partner_1 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+        self.bundle_partner_2 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+        self.bundle_partner_3 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+        self.proxy_partner_1 = PartnerFactory(
+            authorization_method=Partner.PROXY
+        )
+        self.proxy_partner_2 = PartnerFactory(
+            authorization_method=Partner.PROXY
+        )
+
+    def test_validate_partners_for_bundle_auth(self):
+        """
+        Passing a queryset of partners which are all set to
+        the BUNDLE authorization method should raise no
+        errors
+        """
+        partner_queryset = Partner.objects.filter(
+            authorization_method=Partner.BUNDLE
+        )
+        try:
+            validation = validate_partners(partner_queryset)
+        except ValidationError:
+            self.fail("validate_partners() raised ValidationError unexpectedly.")
+
+    def test_validate_partners_for_mixed_auth_types(self):
+        """
+        Passing a queryset with both BUNDLE and PROXY authorization
+        types to validate_partners() should raise a ValidationError
+        """
+        partner_queryset = Partner.objects.filter(
+            authorization_method__in=[Partner.BUNDLE, Partner.PROXY]
+        )
+        with self.assertRaises(ValidationError):
+            validate_partners(partner_queryset)
+
+    def test_validate_partners_for_wrong_auth_type(self):
+        """
+        Passing a queryset with multiple PROXY partners
+        to validate_partners() should raise a ValidationError
+        """
+        partner_queryset = Partner.objects.filter(
+            authorization_method=Partner.PROXY
+        )
+        with self.assertRaises(ValidationError):
+            validate_partners(partner_queryset)
+
+    def test_validate_partners_validates_authorizations(self):
+        """
+        When we create an authorization, linking it to partners with
+        different authorization types should raise a ValidationError
+        """
+        Authorization.objects.create(
+
+        )
