@@ -369,6 +369,16 @@ class Editor(models.Model):
         else:
             return None
 
+    def authorized_for_bundle(self):
+        user_bundle_authorizations = Authorization.objects.filter(
+            user=self.user,
+            partners__authorization_method=Partner.BUNDLE,
+        ).exists()
+        if user_bundle_authorizations:
+            return True
+        else:
+            return False
+
     def get_global_userinfo(self, identity):
         return editor_global_userinfo(identity["username"], identity["sub"], True)
 
