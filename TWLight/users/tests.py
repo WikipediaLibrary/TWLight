@@ -1044,6 +1044,79 @@ class EditorModelTestCase(TestCase):
         self.test_editor.save()
         self.assertFalse(self.test_editor.wp_bundle_eligible)
 
+    def test_update_bundle_authorization_creation(self):
+        """
+        update_bundle_authorization() should create a new bundle
+        authorization if one didn't exist when the user is
+        bundle eligible.
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+        bundle_partner_2 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+
+        # Check we don't already have a Bundle authorization
+        with self.assertRaises(Authorization.DoesNotExist):
+            bundle_authorization = Authorization.objects.get(
+                user=editor.user,
+                partners__authorization_method=Partner.BUNDLE
+            )
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+        # We should now have created a single authorization to
+        # Bundle partners.
+        self.assertEqual(bundle_authorization.count(), 1)
+
+    def test_update_bundle_authorization_expiry(self):
+        """
+        update_bundle_authorization() should expire existing bundle
+        authorizations if the user is no longer eligible
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+        bundle_partner_2 = PartnerFactory(
+            authorization_method=Partner.BUNDLE
+        )
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user,
+            partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Authorization should still exist
+        self.assertEqual(bundle_authorization.count(), 1)
+
+        # But it should have now expired
+        self.assertEqual(bundle_authorization.first().date_expires, date.today() - timedelta(days=1))
+
     @patch.object(Editor, "get_global_userinfo")
     def test_update_from_wikipedia(self, mock_global_userinfo):
         identity = {}

@@ -383,16 +383,18 @@ class Editor(models.Model):
         # method, we should only ever find one or zero authorizations
         # for bundle partners.
         bundle_authorization = Authorization.objects.filter(
-            user=self,
+            user=self.user,
             partners__authorization_method=Partner.BUNDLE
-        )
+        ).distinct()  # Required because partners__authorization_method is ManyToMany
         if bundle_authorization.count() > 1:
             # This is unexpected and implies something else is wrong.
             raise MultipleObjectsReturned
         if bundle_authorization.exists():
+            # Move from Queryset to a single object
+            bundle_authorization = bundle_authorization.first()
             # If the user is no longer eligible, we should expire the auth
             if not self.wp_bundle_eligible:
-                bundle_authorization.date_expires = datetime.now() - timedelta(days=1)
+                bundle_authorization.date_expires = date.today() - timedelta(days=1)
                 bundle_authorization.save()
         else:
             # If the user has become eligible, we should create an auth
@@ -402,7 +404,7 @@ class Editor(models.Model):
                     authorization_method=Partner.BUNDLE
                 )
                 user_authorization = Authorization(
-                    user=self,
+                    user=self.user,
                     authorizer=twl_team
                 )
                 user_authorization.save()
