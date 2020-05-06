@@ -1274,12 +1274,3 @@ class AuthorizationsHelpersTestCase(TestCase):
         )
         with self.assertRaises(ValidationError):
             validate_partners(partner_queryset)
-
-    def test_validate_partners_validates_authorizations(self):
-        """
-        When we create an authorization, linking it to partners with
-        different authorization types should raise a ValidationError
-        """
-        Authorization.objects.create(
-
-        )
