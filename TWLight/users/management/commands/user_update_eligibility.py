@@ -73,3 +73,5 @@ class Command(BaseCommand):
                     editor.wp_valid, editor.wp_enough_recent_edits
                 )
                 editor.save()
+
+                editor.update_bundle_authorization()
