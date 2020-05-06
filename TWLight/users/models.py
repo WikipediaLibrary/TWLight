@@ -371,8 +371,7 @@ class Editor(models.Model):
 
     def authorized_for_bundle(self):
         user_bundle_authorizations = Authorization.objects.filter(
-            user=self.user,
-            partners__authorization_method=Partner.BUNDLE,
+            user=self.user, partners__authorization_method=Partner.BUNDLE
         ).exists()
         if user_bundle_authorizations:
             return True
@@ -395,8 +394,7 @@ class Editor(models.Model):
         # method, we should only ever find one or zero authorizations
         # for bundle partners.
         bundle_authorization = Authorization.objects.filter(
-            user=self.user,
-            partners__authorization_method=Partner.BUNDLE
+            user=self.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()  # Required because partners__authorization_method is ManyToMany
         if bundle_authorization.count() > 1:
             # This is unexpected and implies something else is wrong.
@@ -415,10 +413,7 @@ class Editor(models.Model):
                 bundle_partners = Partner.objects.filter(
                     authorization_method=Partner.BUNDLE
                 )
-                user_authorization = Authorization(
-                    user=self.user,
-                    authorizer=twl_team
-                )
+                user_authorization = Authorization(user=self.user, authorizer=twl_team)
                 user_authorization.save()
 
                 for partner in bundle_partners:
