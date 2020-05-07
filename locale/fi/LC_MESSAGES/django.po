@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2019-11-19 18:18+0000\n"
-"PO-Revision-Date: 2020-01-09 19:34:31+0000\n"
+"PO-Revision-Date: 2020-05-07 15:20:34+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2019-11-15 19:55:47+0000\n"
-"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2020-04-20\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: This text labels a button which users can click to submit an application.

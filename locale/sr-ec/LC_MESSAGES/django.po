@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-04-27 15:00:00+0000\n"
+"PO-Revision-Date: 2020-05-07 15:20:35+0000\n"
 "X-POT-Import-Date: 2019-11-15 19:55:47+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr-Cyrl\n"
-"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2020-04-20\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
