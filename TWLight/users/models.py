@@ -369,20 +369,19 @@ class Editor(models.Model):
 
     @property
     def wp_bundle_authorized(self):
+        # If the user has a Bundle authorization, ensure its validity
         try:
-            editor_auth = (
+            return (
                 Authorization.objects.filter(
                     user=self.user, partners__authorization_method=Partner.BUNDLE
                 )
                 .distinct()
                 .get()
+                .is_valid
             )
         # If the user has no Bundle authorization, they're not authorized
         except Authorization.DoesNotExist:
             return False
-
-        # If the user has a Bundle authorization, ensure its validity
-        return editor_auth.is_valid
 
     def get_global_userinfo(self, identity):
         return editor_global_userinfo(identity["username"], identity["sub"], True)
