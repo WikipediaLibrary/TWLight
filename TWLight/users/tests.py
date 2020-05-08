@@ -22,7 +22,7 @@ from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
 
 from . import views
-from .authorization import OAuthBackend
+from .oauth import OAuthBackend
 from .helpers.authorizations import validate_partners
 from .helpers.bundle_authorizations import get_all_bundle_authorizations
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
