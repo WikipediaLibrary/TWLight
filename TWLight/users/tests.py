@@ -1137,6 +1137,55 @@ class EditorModelTestCase(TestCase):
         # It should have no expiry date, i.e. it's now active again.
         self.assertEqual(bundle_authorization.first().date_expires, None)
 
+    def test_wp_bundle_authorized_no_bundle_auth(self):
+        """
+        If a user has no authorization to Bundle
+        resources, wp_bundle_authorized should return False
+        """
+        editor = EditorFactory()
+
+        self.assertFalse(editor.wp_bundle_authorized)
+
+    def test_wp_bundle_authorized_true(self):
+        """
+        If a user has an active authorization to Bundle
+        resources, wp_bundle_authorized should return True
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        # Create Bundle auth for this user
+        editor.update_bundle_authorization()
+
+        self.assertTrue(editor.wp_bundle_authorized)
+
+    def test_wp_bundle_authorized_false(self):
+        """
+        If a user has an expired authorization to Bundle
+        resources, wp_bundle_authorized should return False
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        # Create Bundle auth for this user
+        editor.update_bundle_authorization()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        # Expire the user's auth
+        editor.update_bundle_authorization()
+
+        self.assertFalse(editor.wp_bundle_authorized)
+
     @patch.object(Editor, "get_global_userinfo")
     def test_update_from_wikipedia(self, mock_global_userinfo):
         identity = {}
