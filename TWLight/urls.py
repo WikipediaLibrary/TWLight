@@ -23,7 +23,7 @@ from TWLight.resources.views import (
     SuggestionDeleteView,
     SuggestionUpvoteView,
 )
-from TWLight.users import authorization as auth
+from TWLight.users import oauth as auth
 from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 from TWLight.ezproxy.urls import urlpatterns as ezproxy_urls
