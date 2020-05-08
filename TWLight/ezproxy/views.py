@@ -4,6 +4,7 @@
 import hashlib
 import logging
 import urllib.request, urllib.parse, urllib.error
+from annoying.functions import get_object_or_None
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
@@ -35,15 +36,15 @@ class EZProxyAuth(ToURequired, View):
         if request.user.editor.wp_bundle_authorized:
             groups.append("BUNDLE")
 
-        try:
-            authorizations = Authorization.objects.filter(user=request.user)
-            logger.info(
-                "Editor {username} has the following authorizations: {authorizations}.".format(
-                    username=username, authorizations=authorizations
-                )
+        authorizations = get_object_or_None(
+            Authorization.objects.filter(user=request.user)
+        )
+
+        logger.info(
+            "Editor {username} has the following authorizations: {authorizations}.".format(
+                username=username, authorizations=authorizations
             )
-        except Authorization.DoesNotExist:
-            authorizations = None
+        )
 
         for authorization in authorizations:
             if (
