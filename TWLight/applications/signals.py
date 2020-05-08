@@ -149,12 +149,12 @@ def post_revision_commit(sender, instance, **kwargs):
         if instance.specific_stream:
             existing_authorization = Authorization.objects.filter(
                 user=instance.user,
-                partner=instance.partner,
+                partners=instance.partner,
                 stream=instance.specific_stream,
             )
         else:
             existing_authorization = Authorization.objects.filter(
-                user=instance.user, partner=instance.partner
+                user=instance.user, partners=instance.partner
             )
 
         authorized_user = instance.user
@@ -181,7 +181,6 @@ def post_revision_commit(sender, instance, **kwargs):
 
         authorization.user = authorized_user
         authorization.authorizer = authorizer
-        authorization.partner = instance.partner
 
         # If this is a proxy partner, and the requested_access_duration
         # field is set to false, set (or reset) the expiry date
@@ -208,8 +207,8 @@ def post_revision_commit(sender, instance, **kwargs):
         elif instance.partner.account_length:
             # account_length should be a timedelta
             authorization.date_expires = date.today() + instance.partner.account_length
-
         authorization.save()
+        authorization.partners.add(instance.partner)
 
 
 @receiver(post_save, sender=Partner)
@@ -219,9 +218,7 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
     Invalidates open applications for bundle partners.
     """
 
-    twl_team, created = User.objects.get_or_create(
-        username="TWL Team", email="wikipedialibrary@wikimedia.org"
-    )
+    twl_team = User.objects.get(username="TWL Team")
 
     if sender == Partner:
         partner = instance

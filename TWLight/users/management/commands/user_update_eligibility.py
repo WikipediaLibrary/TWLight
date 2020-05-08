@@ -52,7 +52,6 @@ class Command(BaseCommand):
                 editor.wp_editcount_prev_updated, editor.wp_editcount_prev, editor.wp_editcount_recent, editor.wp_enough_recent_edits = editor_recent_edits(
                     global_userinfo["editcount"],
                     editor.wp_editcount_updated,
-                    editor.wp_editcount,
                     editor.wp_editcount_prev_updated,
                     editor.wp_editcount_prev,
                     editor.wp_editcount_recent,
@@ -74,3 +73,5 @@ class Command(BaseCommand):
                     editor.wp_valid, editor.wp_enough_recent_edits
                 )
                 editor.save()
+
+                editor.update_bundle_authorization()

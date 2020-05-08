@@ -414,7 +414,8 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
                 'Head over to <a href="{applications_url}">Your Applications'
                 "</a> to view the status.".format(
                     applications_url=reverse_lazy(
-                        "users:my_applications", kwargs={"pk": self.request.user.pk}
+                        "users:my_applications",
+                        kwargs={"pk": self.request.user.editor.pk},
                     )
                 )
             ),
@@ -474,7 +475,8 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
                 'Head over to <a href="{applications_url}">Your Applications'
                 "</a> to view the status.".format(
                     applications_url=reverse_lazy(
-                        "users:my_applications", kwargs={"pk": self.request.user.pk}
+                        "users:my_applications",
+                        kwargs={"pk": self.request.user.editor.pk},
                     )
                 )
             ),
@@ -1177,10 +1179,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             else:
                 batch_update_success.append(app_pk)
                 app.status = status
-                if app.is_instantly_finalized() and app.status in [
-                    Application.APPROVED,
-                    Application.SENT,
-                ]:
+                if (
+                    app.is_instantly_finalized() and app.status == Application.APPROVED
+                ) or app.status == Application.SENT:
                     app.sent_by = request.user
                 app.save()
 
@@ -1405,12 +1406,12 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 if application.specific_stream:
                     code_object.authorization = Authorization.objects.get(
                         user=application.user,
-                        partner=application.partner,
+                        partners=application.partner,
                         stream=application.specific_stream,
                     )
                 else:
                     code_object.authorization = Authorization.objects.get(
-                        user=application.user, partner=application.partner
+                        user=application.user, partners=application.partner
                     )
                 code_object.save()
 

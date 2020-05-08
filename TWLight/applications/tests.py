@@ -18,7 +18,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core import mail
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django.db import models
@@ -1362,6 +1362,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             editor=editor,
             partner=partner,
             specific_stream=stream1,
+            sent_by=self.coordinator,
         )
 
         request.session = {views.PARTNERS_SESSION_KEY: [partner.pk]}
@@ -1403,7 +1404,9 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.QUESTION, parent=parent)
         ApplicationFactory(status=Application.APPROVED, parent=parent)
         ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
-        ApplicationFactory(status=Application.SENT, parent=parent)
+        ApplicationFactory(
+            status=Application.SENT, parent=parent, sent_by=cls.coordinator
+        )
 
         user = UserFactory(username="editor")
         editor = EditorFactory(user=user)
@@ -1413,7 +1416,9 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.QUESTION, editor=editor)
         ApplicationFactory(status=Application.APPROVED, editor=editor)
         ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
-        ApplicationFactory(status=Application.SENT, editor=editor)
+        ApplicationFactory(
+            status=Application.SENT, editor=editor, sent_by=cls.coordinator
+        )
 
         delete_url = reverse("users:delete_data", kwargs={"pk": user.pk})
 
@@ -2064,10 +2069,16 @@ class ListApplicationsTest(BaseApplicationViewTest):
             editor.user
         )
         app1 = ApplicationFactory(
-            status=Application.SENT, partner=bundle_partner, editor=editor
+            status=Application.SENT,
+            partner=bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         app2 = ApplicationFactory(
-            status=Application.SENT, partner=not_a_bundle_partner, editor=editor
+            status=Application.SENT,
+            partner=not_a_bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         bundle_app = ApplicationFactory(
             status=Application.PENDING,
@@ -2095,11 +2106,17 @@ class ListApplicationsTest(BaseApplicationViewTest):
             editor.user
         )
         bundle_app = ApplicationFactory(
-            status=Application.SENT, partner=bundle_partner, editor=editor
+            status=Application.SENT,
+            partner=bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
         not_a_bundle_app = ApplicationFactory(
-            status=Application.SENT, partner=not_a_bundle_partner, editor=editor
+            status=Application.SENT,
+            partner=not_a_bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         not_a_bundle_app_url = reverse(
             "applications:evaluate", kwargs={"pk": not_a_bundle_app.pk}
@@ -2258,6 +2275,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
             partner=partner,
             status=Application.SENT,  # proxy applications are directly marked SENT
             editor=editor1,
+            sent_by=self.coordinator,
         )
 
         renewal_url = reverse("applications:renew", kwargs={"pk": app1.pk})
@@ -2294,6 +2312,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
             status=Application.APPROVED,
             editor=editor,
             requested_access_duration=3,
+            sent_by=self.coordinator,
         )
 
         renewal_url = reverse("applications:renew", kwargs={"pk": app.pk})
@@ -2330,7 +2349,10 @@ class RenewApplicationTest(BaseApplicationViewTest):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
         partner = PartnerFactory(authorization_method=Partner.BUNDLE)
         app = ApplicationFactory(
-            status=Application.SENT, partner=partner, editor=editor
+            status=Application.SENT,
+            partner=partner,
+            editor=editor,
+            sent_by=self.coordinator,
         )
         request = RequestFactory().get(
             reverse("applications:renew", kwargs={"pk": app.pk})
@@ -2456,6 +2478,10 @@ class ApplicationModelTest(TestCase):
         app2.parent = app1
         app2.save()
 
+        coordinator = UserFactory()
+        coordinator_editor = EditorFactory(user=coordinator)
+        get_coordinators().user_set.add(coordinator)
+
         self.assertFalse(app1.is_renewable)
 
         # Applications whose status is not APPROVED or SENT cannot be renewed,
@@ -2481,7 +2507,9 @@ class ApplicationModelTest(TestCase):
         good_app = ApplicationFactory(partner=partner, status=Application.APPROVED)
         self.assertTrue(good_app.is_renewable)
 
-        good_app2 = ApplicationFactory(partner=partner, status=Application.SENT)
+        good_app2 = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=coordinator
+        )
         self.assertTrue(good_app.is_renewable)
 
         delete_me = [
@@ -2677,7 +2705,7 @@ class ApplicationModelTest(TestCase):
 
         # Check that we're fetching the correct authorization
         authorization = Authorization.objects.get(
-            user=application.editor.user, partner=application.partner
+            user=application.editor.user, partners=application.partner
         )
         self.assertEqual(application.get_authorization(), authorization)
 
@@ -2859,60 +2887,65 @@ class EvaluateApplicationTest(TestCase):
     def test_count_valid_authorizations(self):
         for _ in range(5):
             # valid
-            Authorization(
+            auth1 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5)),
-            ).save()
+            )
+            auth1.save()
+            auth1.partners.add(self.partner)
             # invalid
-            Authorization(
+            auth2 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-            ).save()
+            )
+            auth2.save()
+            auth2.partners.add(self.partner)
 
         # no expiry date; yet still, valid
-        Authorization(
-            user=EditorFactory().user, authorizer=self.coordinator, partner=self.partner
-        ).save()
+        auth3 = Authorization(user=EditorFactory().user, authorizer=self.coordinator)
+        auth3.save()
+        auth3.partners.add(self.partner)
 
         # invalid (no authorizer)
-        Authorization(
+        auth4 = Authorization(
             user=EditorFactory().user,
-            partner=self.partner,
             date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-        ).save()
+        )
+        self.assertRaises(ValidationError, auth4.save)
+
         total_valid_authorizations = count_valid_authorizations(self.partner)
         self.assertEqual(total_valid_authorizations, 6)
 
         stream = StreamFactory(partner=self.partner)
         for _ in range(5):
             # valid
-            Authorization(
+            auth5 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 stream=stream,
                 authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5)),
-            ).save()
+            )
+            auth5.save()
+            auth5.partners.add(self.partner)
             # valid
-            Authorization(
+            auth6 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 stream=stream,
                 authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-            ).save()
+            )
+            auth6.save()
+            auth6.partners.add(self.partner)
         total_valid_authorizations = count_valid_authorizations(self.partner, stream)
         self.assertEqual(total_valid_authorizations, 5)
 
-        # Filter logic in .helpers.get_valid_authorizations and
+        # Filter logic in .helpers.get_valid_partner_authorizations and
         # TWLight.users.models.Authorization.is_valid must be in sync.
         # We test that here.
         all_authorizations_using_is_valid = Authorization.objects.filter(
-            partner=self.partner
+            partners=self.partner
         )
         total_valid_authorizations_using_helper = count_valid_authorizations(
             self.partner
@@ -3400,7 +3433,9 @@ class EvaluateApplicationTest(TestCase):
             ApplicationFactory(status=Application.QUESTION, parent=parent)
             ApplicationFactory(status=Application.APPROVED, parent=parent)
             ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
-            ApplicationFactory(status=Application.SENT, parent=parent)
+            ApplicationFactory(
+                status=Application.SENT, parent=parent, sent_by=cls.coordinator
+            )
 
             user = UserFactory(username="editor")
             editor = EditorFactory(user=user)
@@ -3410,7 +3445,9 @@ class EvaluateApplicationTest(TestCase):
             ApplicationFactory(status=Application.QUESTION, editor=editor)
             ApplicationFactory(status=Application.APPROVED, editor=editor)
             ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
-            ApplicationFactory(status=Application.SENT, editor=editor)
+            ApplicationFactory(
+                status=Application.SENT, editor=editor, sent_by=cls.coordinator
+            )
 
 
 class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
@@ -3437,14 +3474,18 @@ class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.QUESTION, parent=parent)
         ApplicationFactory(status=Application.APPROVED, parent=parent)
         ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
-        ApplicationFactory(status=Application.SENT, parent=parent)
+        ApplicationFactory(
+            status=Application.SENT, parent=parent, sent_by=cls.coordinator
+        )
 
         # And some applications from a user who will delete their account.
         ApplicationFactory(status=Application.PENDING, editor=editor)
         ApplicationFactory(status=Application.QUESTION, editor=editor)
         ApplicationFactory(status=Application.APPROVED, editor=editor)
         ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
-        ApplicationFactory(status=Application.SENT, editor=editor)
+        ApplicationFactory(
+            status=Application.SENT, editor=editor, sent_by=cls.coordinator
+        )
 
     def test_invalidate_bundle_partner_applications_signal(self):
         """
@@ -3901,9 +3942,11 @@ class BatchEditTest(TestCase):
 
         # Create an coordinator with a test client session
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        coordinator.user.set_password("coordinator")
+        self.client.login(username=coordinator.user.username, password="coordinator")
 
         # Approve the application
-        response = self.client.post(
+        self.client.post(
             self.url,
             data={
                 "applications": self.application.pk,
@@ -3913,7 +3956,7 @@ class BatchEditTest(TestCase):
         )
 
         authorization_exists = Authorization.objects.filter(
-            user=self.application.user, partner=self.application.partner
+            user=self.application.user, partners=self.application.partner
         ).exists()
 
         self.assertTrue(authorization_exists)
@@ -3933,6 +3976,7 @@ class ListReadyApplicationsTest(TestCase):
         ApplicationFactory(
             status=Application.APPROVED,  # This shouldn't be the case, but could happen in certain situations
             partner=proxy_partner,
+            sent_by=coordinator.user,
         )
         ApplicationFactory(status=Application.APPROVED, partner=bundle_partner)
         ApplicationFactory(status=Application.APPROVED, partner=other_partner1)

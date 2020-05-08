@@ -28,12 +28,13 @@ them to the coordinators group. They can also directly create Django user
 accounts without attached Editors in the admin site, but this has no current
 use case.
 """
+
 from datetime import datetime, date, timedelta
 import json
 import logging
 import urllib.request, urllib.error, urllib.parse
 import urllib.request, urllib.parse, urllib.error
-
+from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -44,6 +45,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
+from TWLight.users.helpers.validation import validate_partners
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
@@ -57,6 +59,14 @@ from TWLight.users.helpers.editor_data import (
 )
 
 logger = logging.getLogger(__name__)
+
+
+def get_company_name(instance):
+    # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
+    if instance.pk:
+        return ", ".join(str(partner) for partner in instance.partners.all())
+    else:
+        return None
 
 
 class UserProfile(models.Model):
@@ -357,8 +367,72 @@ class Editor(models.Model):
         else:
             return None
 
+    @property
+    def wp_bundle_authorized(self):
+        user_authorization = self.get_bundle_authorization
+        # If the user has no Bundle authorization, they're not authorized
+        if not user_authorization:
+            return False
+        else:
+            # If the user has a Bundle authorization, ensure its validity
+            return self.get_bundle_authorization.is_valid
+
     def get_global_userinfo(self, identity):
         return editor_global_userinfo(identity["username"], identity["sub"], True)
+
+    @property
+    def get_bundle_authorization(self):
+        """
+        Find this user's Bundle authorization. If they
+        don't have one, return None.
+        """
+        # Although we have multiple partners with the BUNDLE authorization
+        # method, we should only ever find one or zero authorizations
+        # for bundle partners.
+        return get_object_or_None(
+            Authorization.objects.filter(
+                user=self.user, partners__authorization_method=Partner.BUNDLE
+            ).distinct()  # distinct() required because partners__authorization_method is ManyToMany
+        )
+
+    def update_bundle_authorization(self):
+        """
+        Create or expire this user's bundle authorizations
+        if necessary.
+        The list of partners for the auth will be kept up-to-date
+        elsewhere after initial creation, so no need to worry about
+        updating an existing auth with the latest bundle partner
+        changes here.
+        """
+        user_authorization = self.get_bundle_authorization
+        if not user_authorization:
+            # If the user has become eligible, we should create an auth
+            if self.wp_bundle_eligible:
+                twl_team = User.objects.get(username="TWL Team")
+                bundle_partners = Partner.objects.filter(
+                    authorization_method=Partner.BUNDLE
+                )
+                user_authorization = Authorization(user=self.user, authorizer=twl_team)
+                user_authorization.save()
+
+                for partner in bundle_partners:
+                    user_authorization.partners.add(partner)
+            return
+
+        # If we got a bundle authorization, let's see if we need to modify it
+        # If the user is no longer eligible, we should expire the auth
+        if not self.wp_bundle_eligible:
+            user_authorization.date_expires = date.today() - timedelta(days=1)
+            user_authorization.save()
+        else:
+            # If the user is eligible, and has an expiry date on their
+            # bundle authorization, that probably means we previously
+            # expired it. So reset it to being active.
+            # If they're eligible and have no expiry date, then we
+            # don't need to do anything else, they remain authorized.
+            if user_authorization.date_expires:
+                user_authorization.date_expires = None
+                user_authorization.save()
 
     def update_from_wikipedia(self, identity, lang):
         """
@@ -406,7 +480,6 @@ class Editor(models.Model):
             self.wp_editcount_prev_updated, self.wp_editcount_prev, self.wp_editcount_recent, self.wp_enough_recent_edits = editor_recent_edits(
                 global_userinfo["editcount"],
                 self.wp_editcount_updated,
-                self.wp_editcount,
                 self.wp_editcount_prev_updated,
                 self.wp_editcount_prev,
                 self.wp_editcount_recent,
@@ -429,6 +502,8 @@ class Editor(models.Model):
             self.wp_valid, self.wp_enough_recent_edits
         )
         self.save()
+
+        self.update_bundle_authorization()
 
         # This will be True the first time the user logs in, since use_wp_email
         # defaults to True. Therefore we will initialize the email field if
@@ -470,7 +545,6 @@ class Authorization(models.Model):
         app_label = "users"
         verbose_name = "authorization"
         verbose_name_plural = "authorizations"
-        unique_together = ("user", "partner", "stream")
 
     coordinators = get_coordinators()
 
@@ -493,7 +567,9 @@ class Authorization(models.Model):
         on_delete=models.SET_NULL,
         # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
         limit_choices_to=(
-            models.Q(is_superuser=True) | models.Q(groups__name="coordinators")
+            models.Q(is_superuser=True)
+            | models.Q(groups__name="coordinators")
+            | models.Q(username="TWL Team")
         ),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
         help_text=_("The authorizing user."),
@@ -508,15 +584,13 @@ class Authorization(models.Model):
         help_text=_("The date this authorization expires."),
     )
 
-    partner = models.ForeignKey(
+    partners = models.ManyToManyField(
         Partner,
         blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
         # Limit to available partners.
-        limit_choices_to=(models.Q(status=0)),
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-        help_text=_("The partner for which the editor is authorized."),
+        limit_choices_to=(models.Q(status__in=[Partner.AVAILABLE, Partner.WAITLIST])),
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner(s) for which the editor is authorized.
+        help_text=_("The partner(s) for which the editor is authorized."),
     )
 
     stream = models.ForeignKey(
@@ -525,7 +599,9 @@ class Authorization(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         # Limit to available partners.
-        limit_choices_to=(models.Q(partner__status=0)),
+        limit_choices_to=(
+            models.Q(partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST])
+        ),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
         help_text=_("The stream for which the editor is authorized."),
     )
@@ -551,7 +627,7 @@ class Authorization(models.Model):
             # Valid authorizations always have an authorizer, and user and a partner_id.
             self.authorizer
             and self.user
-            and self.partner_id
+            and self.partners.all().exists()
             # and a valid authorization date that is now or in the past
             and self.date_authorized
             and self.date_authorized <= today
@@ -571,10 +647,7 @@ class Authorization(models.Model):
         else:
             stream_name = None
 
-        if self.partner:
-            company_name = self.partner.company_name
-        else:
-            company_name = None
+        company_name = get_company_name(self)
 
         # In reality, we should always have an authorized user.
         if self.user:
@@ -631,7 +704,7 @@ class Authorization(models.Model):
             else:
                 return Application.objects.filter(
                     ~Q(status=Application.NOT_APPROVED),
-                    partner=self.partner,
+                    partner=self.partners.all(),
                     editor=self.user.editor,
                 ).latest("id")
         except Application.DoesNotExist:
@@ -642,7 +715,9 @@ class Authorization(models.Model):
 
         try:
             return Application.objects.filter(
-                status=Application.SENT, partner=self.partner, editor=self.user.editor
+                status=Application.SENT,
+                partner=self.partners.all(),
+                editor=self.user.editor,
             ).latest("id")
         except Application.DoesNotExist:
             return None
@@ -655,7 +730,7 @@ class Authorization(models.Model):
         if self.stream:
             access_url = self.stream.get_access_url
         else:
-            access_url = self.partner.get_access_url
+            access_url = self.partners.get_access_url
 
         return access_url
 
@@ -678,8 +753,16 @@ class Authorization(models.Model):
         """
         if self.stream:
             authorization_method = self.stream.authorization_method
+        elif self.pk and self.partners.exists():
+            # Even if there is more than one partner, there should only be one authorization_method.
+            authorization_method = (
+                self.partners.all()
+                .values_list("authorization_method", flat=True)
+                .distinct()
+                .get()
+            )
         else:
-            authorization_method = self.partner.authorization_method
+            authorization_method = None
 
         return authorization_method
 
@@ -706,3 +789,13 @@ class Authorization(models.Model):
             return True
         else:
             return False
+
+    def clean(self):
+        """
+        Run custom validation for ManyToMany Partner relationship.
+        This only works on updates to existing instances because ManyToMany relationships only exist if the instance is in the db.
+        Those will have a pk.
+        The admin form calls validate_partners before saving, so we are covered between the two.
+        """
+        if self.pk:
+            validate_partners(self.partners)

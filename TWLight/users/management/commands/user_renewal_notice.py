@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from django.urls import reverse
 
 from TWLight.users.signals import Notice
-from TWLight.users.models import Authorization
+from TWLight.users.models import Authorization, get_company_name
 
 
 class Command(BaseCommand):
@@ -18,6 +18,7 @@ class Command(BaseCommand):
             date_expires__lt=datetime.today() + timedelta(weeks=2),
             date_expires__gte=datetime.today(),
             reminder_email_sent=False,
+            partners__isnull=False,
         ).exclude(user__userprofile__send_renewal_notices=False)
 
         for authorization_object in expiring_authorizations:
@@ -26,7 +27,7 @@ class Command(BaseCommand):
                 user_wp_username=authorization_object.user.editor.wp_username,
                 user_email=authorization_object.user.email,
                 user_lang=authorization_object.user.userprofile.lang,
-                partner_name=authorization_object.partner.company_name,
+                partner_name=get_company_name(authorization_object),
                 partner_link=reverse("users:my_library"),
             )
 
