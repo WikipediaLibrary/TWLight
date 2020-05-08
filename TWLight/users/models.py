@@ -394,10 +394,11 @@ class Editor(models.Model):
         bundle_authorization = Authorization.objects.filter(
             user=self.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()  # Required because partners__authorization_method is ManyToMany
-        if bundle_authorization.count() > 1:
+        authorization_count = bundle_authorization.count()
+        if authorization_count > 1:
             # This is unexpected and implies something else is wrong.
             raise MultipleObjectsReturned
-        if bundle_authorization.exists():
+        elif authorization_count == 1:
             # Move from Queryset to a single object
             bundle_authorization = bundle_authorization.first()
             # If the user is no longer eligible, we should expire the auth
