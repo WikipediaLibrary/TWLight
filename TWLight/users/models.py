@@ -591,8 +591,8 @@ class Authorization(models.Model):
         blank=True,
         # Limit to available partners.
         limit_choices_to=(models.Q(status__in=[Partner.AVAILABLE, Partner.WAITLIST])),
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authorized.
-        help_text=_("The partner for which the editor is authorized."),
+        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner(s) for which the editor is authorized.
+        help_text=_("The partner(s) for which the editor is authorized."),
     )
 
     stream = models.ForeignKey(
