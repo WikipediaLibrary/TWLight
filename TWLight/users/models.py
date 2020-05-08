@@ -45,7 +45,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
-from TWLight.users.helpers.authorizations import validate_partners
+from TWLight.users.helpers.validation import validate_partners
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
