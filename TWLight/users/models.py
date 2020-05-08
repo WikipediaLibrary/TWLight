@@ -389,28 +389,11 @@ class Editor(models.Model):
         # Although we have multiple partners with the BUNDLE authorization
         # method, we should only ever find one or zero authorizations
         # for bundle partners.
-        bundle_authorization = Authorization.objects.filter(
-            user=self.user, partners__authorization_method=Partner.BUNDLE
-        ).distinct()  # Required because partners__authorization_method is ManyToMany
-        authorization_count = bundle_authorization.count()
-        if authorization_count > 1:
-            # This is unexpected and implies something else is wrong.
-            raise MultipleObjectsReturned
-        elif authorization_count == 1:
-            # Move from Queryset to a single object
-            bundle_authorization = bundle_authorization.first()
-            # If the user is no longer eligible, we should expire the auth
-            if not self.wp_bundle_eligible:
-                bundle_authorization.date_expires = date.today() - timedelta(days=1)
-                bundle_authorization.save()
-            else:
-                # If the user is eligible, and has an expiry date on their
-                # bundle authorization, that probably means we previously
-                # expired it. So reset it to being active.
-                if bundle_authorization.date_expires:
-                    bundle_authorization.date_expires = None
-                    bundle_authorization.save()
-        else:
+        try:
+            bundle_authorization = Authorization.objects.filter(
+                user=self.user, partners__authorization_method=Partner.BUNDLE
+            ).distinct().get()  # dinstinct() required because partners__authorization_method is ManyToMany
+        except Authorization.DoesNotExist:
             # If the user has become eligible, we should create an auth
             if self.wp_bundle_eligible:
                 twl_team = User.objects.get(username="TWL Team")
@@ -422,6 +405,23 @@ class Editor(models.Model):
 
                 for partner in bundle_partners:
                     user_authorization.partners.add(partner)
+            return
+
+        # If we got a bundle authorization, let's see if we need to modify it
+        # If the user is no longer eligible, we should expire the auth
+        if not self.wp_bundle_eligible:
+            bundle_authorization.date_expires = date.today() - timedelta(days=1)
+            bundle_authorization.save()
+        else:
+            # If the user is eligible, and has an expiry date on their
+            # bundle authorization, that probably means we previously
+            # expired it. So reset it to being active.
+            if bundle_authorization.date_expires:
+                bundle_authorization.date_expires = None
+                bundle_authorization.save()
+
+
+
 
     def update_from_wikipedia(self, identity, lang):
         """
