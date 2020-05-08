@@ -12,7 +12,7 @@ from django import forms
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from .helpers.authorizations import validate_partners
+from .helpers.validation import validate_partners
 from .models import Editor, UserProfile, Authorization
 from .groups import get_restricted
 
