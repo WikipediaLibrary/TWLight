@@ -5,7 +5,7 @@ from TWLight.users.models import User
 
 
 class Command(BaseCommand):
-    help = "Sends emails to all users notifying them of the Proxy/Bundle rollout, and drops active user sessions."
+    help = "Sends emails to all users notifying them of the Proxy/Bundle rollout."
 
     def handle(self, *args, **options):
         all_users = User.objects.all()
