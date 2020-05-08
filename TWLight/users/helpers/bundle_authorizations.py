@@ -12,4 +12,4 @@ def get_all_bundle_authorizations():
 
     return Authorization.objects.filter(
         partners__authorization_method=Partner.BUNDLE
-    ).distinct()
+    ).distinct() # distinct() required because partners__authorization_method is ManyToMany
