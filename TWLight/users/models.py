@@ -394,7 +394,7 @@ class Editor(models.Model):
         return get_object_or_None(
             Authorization.objects.filter(
                 user=self.user, partners__authorization_method=Partner.BUNDLE
-            ).distinct() # distinct() required because partners__authorization_method is ManyToMany
+            ).distinct()  # distinct() required because partners__authorization_method is ManyToMany
         )
 
     def update_bundle_authorization(self):
