@@ -28,16 +28,16 @@ them to the coordinators group. They can also directly create Django user
 accounts without attached Editors in the admin site, but this has no current
 use case.
 """
+
 from datetime import datetime, date, timedelta
 import json
 import logging
 import urllib.request, urllib.error, urllib.parse
 import urllib.request, urllib.parse, urllib.error
-
+from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.core.exceptions import MultipleObjectsReturned
 from django.db import models
 from django.db.models import Q
 from django.utils.timezone import now
@@ -369,19 +369,13 @@ class Editor(models.Model):
 
     @property
     def wp_bundle_authorized(self):
-        # If the user has a Bundle authorization, ensure its validity
-        try:
-            return (
-                Authorization.objects.filter(
-                    user=self.user, partners__authorization_method=Partner.BUNDLE
-                )
-                .distinct()
-                .get()
-                .is_valid
-            )
+        user_authorization = self.get_bundle_authorization
         # If the user has no Bundle authorization, they're not authorized
-        except Authorization.DoesNotExist:
+        if not user_authorization:
             return False
+        else:
+            # If the user has a Bundle authorization, ensure its validity
+            return self.get_bundle_authorization.is_valid
 
     def get_global_userinfo(self, identity):
         return editor_global_userinfo(identity["username"], identity["sub"], True)
@@ -395,17 +389,11 @@ class Editor(models.Model):
         # Although we have multiple partners with the BUNDLE authorization
         # method, we should only ever find one or zero authorizations
         # for bundle partners.
-        try:
-            bundle_authorization = (
-                Authorization.objects.filter(
-                    user=self.user, partners__authorization_method=Partner.BUNDLE
-                )
-                .distinct()
-                .get()
-            )  # dinstinct() required because partners__authorization_method is ManyToMany
-        except Authorization.DoesNotExist:
-            return None
-        return bundle_authorization
+        return get_object_or_None(
+            Authorization.objects.filter(
+                user=self.user, partners__authorization_method=Partner.BUNDLE
+            ).distinct() # distinct() required because partners__authorization_method is ManyToMany
+        )
 
     def update_bundle_authorization(self):
         """
