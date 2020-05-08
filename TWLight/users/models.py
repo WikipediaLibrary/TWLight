@@ -383,14 +383,11 @@ class Editor(models.Model):
     def get_global_userinfo(self, identity):
         return editor_global_userinfo(identity["username"], identity["sub"], True)
 
-    def update_bundle_authorization(self):
+    @property
+    def get_bundle_authorization(self):
         """
-        Create or expire this user's bundle authorizations
-        if necessary.
-        The list of partners for the auth will be kept up-to-date
-        elsewhere after initial creation, so no need to worry about
-        updating an existing auth with the latest bundle partner
-        changes here.
+        Find this user's Bundle authorization. If they
+        don't have one, return None.
         """
         # Although we have multiple partners with the BUNDLE authorization
         # method, we should only ever find one or zero authorizations
@@ -400,6 +397,20 @@ class Editor(models.Model):
                 user=self.user, partners__authorization_method=Partner.BUNDLE
             ).distinct().get()  # dinstinct() required because partners__authorization_method is ManyToMany
         except Authorization.DoesNotExist:
+            return None
+        return bundle_authorization
+
+    def update_bundle_authorization(self):
+        """
+        Create or expire this user's bundle authorizations
+        if necessary.
+        The list of partners for the auth will be kept up-to-date
+        elsewhere after initial creation, so no need to worry about
+        updating an existing auth with the latest bundle partner
+        changes here.
+        """
+        user_authorization = self.get_bundle_authorization
+        if not user_authorization:
             # If the user has become eligible, we should create an auth
             if self.wp_bundle_eligible:
                 twl_team = User.objects.get(username="TWL Team")
@@ -416,17 +427,17 @@ class Editor(models.Model):
         # If we got a bundle authorization, let's see if we need to modify it
         # If the user is no longer eligible, we should expire the auth
         if not self.wp_bundle_eligible:
-            bundle_authorization.date_expires = date.today() - timedelta(days=1)
-            bundle_authorization.save()
+            user_authorization.date_expires = date.today() - timedelta(days=1)
+            user_authorization.save()
         else:
             # If the user is eligible, and has an expiry date on their
             # bundle authorization, that probably means we previously
             # expired it. So reset it to being active.
             # If they're eligible and have no expiry date, then we
             # don't need to do anything else, they remain authorized.
-            if bundle_authorization.date_expires:
-                bundle_authorization.date_expires = None
-                bundle_authorization.save()
+            if user_authorization.date_expires:
+                user_authorization.date_expires = None
+                user_authorization.save()
 
     def update_from_wikipedia(self, identity, lang):
         """

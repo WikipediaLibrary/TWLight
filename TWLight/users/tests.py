@@ -1141,7 +1141,7 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(bundle_authorization.count(), 1)
 
         # It should have no expiry date, i.e. it's now active again.
-        self.assertEqual(bundle_authorization.first().date_expires, None)
+        self.assertEqual(bundle_authorization.get().date_expires, None)
 
     def test_wp_bundle_authorized_no_bundle_auth(self):
         """
