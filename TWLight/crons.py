@@ -48,3 +48,10 @@ class UserUpdateEligibilityCronJob(CronJobBase):
 
     def do(self):
         management.call_command("user_update_eligibility")
+
+class ClearSessions(CronJobBase):
+    schedule = Schedule(run_every_mins=DAILY)
+    code = "django.contrib.sessions.clearsessions"
+
+    def do(self):
+        management.call_command("clearsessions")
