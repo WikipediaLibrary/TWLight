@@ -3,11 +3,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.users.models import Editor, UserProfile, Authorization, get_company_name
 from TWLight.users.forms import AuthorizationAdminForm, AuthorizationInlineForm
-
 
 class EditorInline(admin.StackedInline):
     model = Editor
@@ -116,3 +116,10 @@ class UserAdmin(AuthUserAdmin):
 # Unregister old user admin; register new, improved user admin.
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
+# Cribbed from: https://stackoverflow.com/a/4978234
+class SessionAdmin(admin.ModelAdmin):
+    def _session_data(self, obj):
+        return obj.get_decoded()
+    list_display = ['session_key', '_session_data', 'expire_date']
+admin.site.register(Session, SessionAdmin)
