@@ -370,13 +370,9 @@ class Editor(models.Model):
             return None
 
     def wp_bundle_authorized(self):
-        user_bundle_authorizations = Authorization.objects.filter(
+        return Authorization.objects.filter(
             user=self.user, partners__authorization_method=Partner.BUNDLE
         ).exists()
-        if user_bundle_authorizations:
-            return True
-        else:
-            return False
 
     def get_global_userinfo(self, identity):
         return editor_global_userinfo(identity["username"], identity["sub"], True)
