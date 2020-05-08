@@ -113,6 +113,8 @@ class UserProfile(models.Model):
         # Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for approved applications
         help_text=_("Does this coordinator want approved app reminder notices?"),
     )
+    # Temporary field to track sending of proxy launch email to prevent duplication in case of error.
+    proxy_notification_sent = models.BooleanField(default=False)
 
 
 class Editor(models.Model):

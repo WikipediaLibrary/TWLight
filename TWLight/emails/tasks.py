@@ -39,7 +39,7 @@ from TWLight.applications.signals import Reminder
 from TWLight.emails.signals import ContactUs
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice
+from TWLight.users.signals import Notice, ProxyBundleLaunch
 
 
 logger = logging.getLogger(__name__)
@@ -79,6 +79,10 @@ class CoordinatorReminderNotification(template_mail.TemplateMail):
 
 class UserRenewalNotice(template_mail.TemplateMail):
     name = "user_renewal_notice"
+
+
+class ProxyBundleEmail(template_mail.TemplateMail):
+    name = "proxy_bundle_email"
 
 
 @receiver(Reminder.coordinator_reminder)
@@ -162,6 +166,20 @@ def send_user_renewal_notice_emails(sender, **kwargs):
             "partner_link": partner_link,
         },
     )
+
+
+@receiver(ProxyBundleLaunch.launch_notice)
+def send_proxy_bundle_launch_notice(sender, **kwargs):
+    """
+    Sends the email to notify users that the proxy & bundle features
+    have launched. Will only need to be sent once as-is.
+    """
+    user_wp_username = kwargs["user_wp_username"]
+    user_email = kwargs["user_email"]
+
+    email = ProxyBundleEmail()
+
+    email.send(user_email, {"username": user_wp_username})
 
 
 @receiver(comment_was_posted)
