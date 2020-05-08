@@ -20,11 +20,11 @@ from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
-from TWLight.users.models import Authorization
 
 from . import views
 from .authorization import OAuthBackend
 from .helpers.authorizations import validate_partners
+from .helpers.bundle_authorizations import get_all_bundle_authorizations
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
@@ -1408,3 +1408,22 @@ class AuthorizationsHelpersTestCase(TestCase):
         partner_queryset = Partner.objects.filter(authorization_method=Partner.PROXY)
         with self.assertRaises(ValidationError):
             validate_partners(partner_queryset)
+
+    def test_get_all_bundle_authorizations(self):
+        """
+        The get_all_bundle_authorizations() helper function
+        should return a Queryset of all authorizations
+        for the Library Bundle, both active and not.
+        """
+        editor = EditorFactory()
+        editor.wp_bundle_eligible = True
+        editor.save()
+        # This should create an authorization linked to
+        # bundle partners.
+        editor.update_bundle_authorization()
+
+        all_auths = get_all_bundle_authorizations()
+
+        # One editor has Bundle auths, so this should be a
+        # Queryset with 1 entry.
+        self.assertEqual(all_auths.count(), 1)
