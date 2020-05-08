@@ -1,13 +1,10 @@
-import datetime
-
 from django import forms
-from django.db.models import Q
 from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream
-from TWLight.users.models import Authorization
 
 from .models import Application
+from ..users.helpers.authorizations import get_valid_partner_authorizations
 
 """
 Lists and characterizes the types of information that partners can require as
@@ -172,46 +169,15 @@ def get_output_for_application(app):
     return output
 
 
-def get_valid_authorizations(partner_pk, stream_pk=None):
-    """
-    Retrieves the valid authorizations available for a particular
-    partner (or collections if stream_pk is not None). Valid authorizations are
-    authorizations with which we can operate, and is decided by certain conditions as
-    spelled out in the is_valid property of the Authorization model object (users/models.py).
-    """
-    today = datetime.date.today()
-    try:
-        # The filter below is equivalent to retrieving all authorizations for a partner
-        # and (or) stream and checking every authorization against the is_valid property
-        # of the authorization model, and hence *must* be kept in sync with the logic in
-        # TWLight.users.model.Authorization.is_valid property. We don't need to check for
-        # partner_id__isnull since it is functionally covered by partner=partner_pk.
-        valid_authorizations = Authorization.objects.filter(
-            Q(date_expires__isnull=False, date_expires__gte=today)
-            | Q(date_expires__isnull=True),
-            authorizer__isnull=False,
-            user__isnull=False,
-            date_authorized__isnull=False,
-            date_authorized__lte=today,
-            partner=partner_pk,
-        )
-        if stream_pk:
-            valid_authorizations = valid_authorizations.filter(stream=stream_pk)
-
-        return valid_authorizations
-    except Authorization.DoesNotExist:
-        return Authorization.objects.none()
-
-
 def count_valid_authorizations(partner_pk, stream_pk=None):
     """
     Retrieves the numbers of valid authorizations using the
-    get_valid_authorizations() method above.
+    get_valid_partner_authorizations() method above.
     """
     if stream_pk:
-        return get_valid_authorizations(partner_pk, stream_pk).count()
+        return get_valid_partner_authorizations(partner_pk, stream_pk).count()
     else:
-        return get_valid_authorizations(partner_pk).count()
+        return get_valid_partner_authorizations(partner_pk).count()
 
 
 def get_accounts_available(app):

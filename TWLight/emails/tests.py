@@ -184,6 +184,12 @@ class ApplicationCommentTest(TestCase):
 
 
 class ApplicationStatusTest(TestCase):
+    def setUp(self):
+        super(ApplicationStatusTest, self).setUp()
+        self.coordinator = EditorFactory().user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+
     @patch("TWLight.emails.tasks.send_approval_notification_email")
     def test_approval_calls_email_function(self, mock_email):
         app = ApplicationFactory(status=Application.PENDING)
@@ -239,7 +245,7 @@ class ApplicationStatusTest(TestCase):
         Applications saved with a SENT status should not generate email.
         """
         orig_outbox = len(mail.outbox)
-        _ = ApplicationFactory(status=Application.SENT)
+        ApplicationFactory(status=Application.SENT, sent_by=self.coordinator)
         self.assertEqual(len(mail.outbox), orig_outbox)
 
     @patch("TWLight.emails.tasks.send_waitlist_notification_email")
@@ -291,7 +297,9 @@ class ApplicationStatusTest(TestCase):
         partner = PartnerFactory(status=Partner.AVAILABLE)
         app = ApplicationFactory(status=Application.APPROVED, partner=partner)
         app = ApplicationFactory(status=Application.NOT_APPROVED, partner=partner)
-        app = ApplicationFactory(status=Application.SENT, partner=partner)
+        app = ApplicationFactory(
+            status=Application.SENT, partner=partner, sent_by=self.coordinator
+        )
         self.assertFalse(mock_email.called)
 
         partner.status = Partner.WAITLIST
@@ -374,9 +382,9 @@ class UserRenewalNoticeTest(TestCase):
         self.authorization = Authorization()
         self.authorization.user = self.user
         self.authorization.authorizer = self.coordinator
-        self.authorization.partner = self.partner
         self.authorization.date_expires = datetime.today() + timedelta(weeks=2)
         self.authorization.save()
+        self.authorization.partners.add(self.partner)
 
     def test_single_user_renewal_notice(self):
         """
@@ -443,9 +451,9 @@ class UserRenewalNoticeTest(TestCase):
         authorization2 = Authorization()
         authorization2.user = editor2.user
         authorization2.authorizer = self.coordinator
-        authorization2.partner = self.partner
         authorization2.date_expires = datetime.today() + timedelta(weeks=1)
         authorization2.save()
+        authorization2.partners.add(self.partner)
 
         call_command("user_renewal_notice")
 
@@ -510,7 +518,10 @@ class CoordinatorReminderEmailTest(TestCase):
             partner=self.partner, status=Application.APPROVED, editor=self.user2.editor
         )
         ApplicationFactory(
-            partner=self.partner2, status=Application.SENT, editor=self.user.editor
+            partner=self.partner2,
+            status=Application.SENT,
+            editor=self.user.editor,
+            sent_by=self.coordinator,
         )
 
         # Clear mail outbox since approvals send emails

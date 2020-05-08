@@ -544,7 +544,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app1.refresh_from_db()
         self.auth_app1 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor1.user, partner=self.partner1
+            authorizer=self.editor4.user, user=self.editor1.user, partners=self.partner1
         )
         self.client.post(
             reverse("applications:evaluate", kwargs={"pk": self.app10.pk}),
@@ -555,7 +555,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.auth_app10 = Authorization.objects.get(
             authorizer=self.editor4.user,
             user=self.editor1.user,
-            partner=self.partner5,
+            partners=self.partner5,
             stream=self.partner5_stream1,
         )
         self.client.post(
@@ -567,19 +567,19 @@ class AuthorizationBaseTestCase(TestCase):
         self.auth_app11 = Authorization.objects.get(
             authorizer=self.editor4.user,
             user=self.editor1.user,
-            partner=self.partner5,
+            partners=self.partner5,
             stream=self.partner5_stream2,
         )
 
-        # Approve the application
+        # Send the application
         self.client.post(
             reverse("applications:evaluate", kwargs={"pk": self.app2.pk}),
-            data={"status": Application.APPROVED},
+            data={"status": Application.SENT},
             follow=True,
         )
         self.app2.refresh_from_db()
-        self.auth_app2 = Authorization(
-            authorizer=self.editor4.user, user=self.editor2.user, partner=self.partner1
+        self.auth_app2 = Authorization.objects.get(
+            authorizer=self.editor4.user, user=self.editor2.user, partners=self.partner1
         )
 
         # Send the application
@@ -590,7 +590,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app3.refresh_from_db()
         self.auth_app3 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor3.user, partner=self.partner1
+            authorizer=self.editor4.user, user=self.editor3.user, partners=self.partner1
         )
 
         # PROXY authorization methods don't set .SENT on the evaluate page;
@@ -612,7 +612,7 @@ class AuthorizationBaseTestCase(TestCase):
 
         self.app4.refresh_from_db()
         self.auth_app4 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor1.user, partner=self.partner2
+            authorizer=self.editor4.user, user=self.editor1.user, partners=self.partner2
         )
 
         # This app was created with a factory, which doesn't create a revision.
@@ -630,7 +630,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app5.refresh_from_db()
         self.auth_app5 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor2.user, partner=self.partner2
+            authorizer=self.editor4.user, user=self.editor2.user, partners=self.partner2
         )
 
         # Set up an access code to distribute
@@ -686,7 +686,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app7.user, authorizer=self.editor4.user, partner=self.app7.partner
+            user=self.app7.user,
+            authorizer=self.editor4.user,
+            partners=self.app7.partner,
         ).exists()
 
         self.assertFalse(authorization_object_exists)
@@ -708,7 +710,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app7.user, authorizer=self.editor4.user, partner=self.app7.partner
+            user=self.app7.user,
+            authorizer=self.editor4.user,
+            partners=self.app7.partner,
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -719,7 +723,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app8.user, authorizer=self.editor4.user, partner=self.app8.partner
+            user=self.app8.user,
+            authorizer=self.editor4.user,
+            partners=self.app8.partner,
         ).exists()
 
         self.assertFalse(authorization_object_exists)
@@ -735,7 +741,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app8.user, authorizer=self.editor4.user, partner=self.app8.partner
+            user=self.app8.user,
+            authorizer=self.editor4.user,
+            partners=self.app8.partner,
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -743,13 +751,13 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
     def test_handle_stream_post_delete(self):
 
         partner5_authorizations = Authorization.objects.filter(
-            partner=self.partner5, user=self.editor1.user, stream__isnull=True
+            partners=self.partner5, user=self.editor1.user, stream__isnull=True
         )
         stream1_authorizations = Authorization.objects.filter(
-            partner=self.partner5, user=self.editor1.user, stream=self.partner5_stream1
+            partners=self.partner5, user=self.editor1.user, stream=self.partner5_stream1
         )
         stream2_authorizations = Authorization.objects.filter(
-            partner=self.partner5, user=self.editor1.user, stream=self.partner5_stream2
+            partners=self.partner5, user=self.editor1.user, stream=self.partner5_stream2
         )
         # Verifying that we only have stream-specific auths.
         self.assertTrue(self.partner5.specific_stream)
@@ -810,7 +818,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         auth_app1_renewal = Authorization.objects.get(
-            user=self.app1.user, authorizer=self.editor5.user, partner=self.app1.partner
+            user=self.app1.user,
+            authorizer=self.editor5.user,
+            partners=self.app1.partner,
         )
         self.assertTrue(auth_app1_renewal)
 
@@ -867,7 +877,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # Zero partner 2 authorizations with no expiry.
         initial_partner2_auths_no_expiry_count = 0
         initial_partner2_auths_no_expiry = Authorization.objects.filter(
-            partner=self.partner2, date_expires__isnull=True
+            partners=self.partner2, date_expires__isnull=True
         )
         for partner2_auth in initial_partner2_auths_no_expiry:
             if partner2_auth.is_valid:
@@ -876,7 +886,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # Count partner 2 apps with an expiration date.
         initial_partner2_auths_with_expiry_count = 0
         initial_partner2_auths_with_expiry = Authorization.objects.filter(
-            partner=self.partner2, date_expires__isnull=False
+            partners=self.partner2, date_expires__isnull=False
         )
         for partner2_auth in initial_partner2_auths_with_expiry:
             if partner2_auth.is_valid:
@@ -891,7 +901,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # Count partner 2 apps with an expiration date post_save.
         post_save_partner2_auths_with_expiry_count = 0
         post_save_partner2_auths_with_expiry = Authorization.objects.filter(
-            partner=self.partner2, date_expires__isnull=False
+            partners=self.partner2, date_expires__isnull=False
         )
         for partner2_auth in post_save_partner2_auths_with_expiry:
             if partner2_auth.is_valid:
@@ -899,7 +909,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
 
         # All valid partner 2 authorizations have expiry set.
         post_save_partner2_auths_no_expiry_count = Authorization.objects.filter(
-            partner=self.partner2, date_expires__isnull=True
+            partners=self.partner2, date_expires__isnull=True
         ).count()
         self.assertEqual(
             initial_partner2_auths_with_expiry_count
@@ -971,6 +981,7 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
 
         expected_json = [
             {"wp_username": self.editor1.user.editor.wp_username},
+            {"wp_username": self.editor2.user.editor.wp_username},
             {"wp_username": self.editor3.user.editor.wp_username},
         ]
 

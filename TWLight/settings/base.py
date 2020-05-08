@@ -110,6 +110,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "annoying",
     "crispy_forms",
     "reversion",
     "dal",
@@ -348,7 +349,7 @@ LOGIN_URL = reverse_lazy("oauth_login")
 LOGIN_REDIRECT_URL = reverse_lazy("users:home")
 
 AUTHENTICATION_BACKENDS = [
-    "TWLight.users.authorization.OAuthBackend",
+    "TWLight.users.oauth.OAuthBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
 

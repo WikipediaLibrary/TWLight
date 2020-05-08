@@ -15,9 +15,7 @@ from TWLight.resources.models import Partner, Stream
 
 logger = logging.getLogger(__name__)
 
-twl_team, created = User.objects.get_or_create(
-    username="TWL Team", email="wikipedialibrary@wikimedia.org"
-)
+twl_team = User.objects.get(username="TWL Team")
 
 
 class Command(BaseCommand):

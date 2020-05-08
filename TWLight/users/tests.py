@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import resolve, reverse
 from django.core.management import call_command
 from django.test import TestCase, Client, RequestFactory
@@ -20,10 +20,11 @@ from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
-from TWLight.users.models import Authorization
 
 from . import views
-from .authorization import OAuthBackend
+from .oauth import OAuthBackend
+from .helpers.validation import validate_partners
+from .helpers.authorizations import get_all_bundle_authorizations
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
@@ -348,16 +349,16 @@ class ViewsTestCase(TestCase):
         for each_authorization in response.context_data["proxy_bundle_authorizations"]:
             self.assertEqual(each_authorization.user, self.user_editor)
             self.assertTrue(
-                each_authorization.partner == partner1
-                or each_authorization.partner == partner2
+                each_authorization.partners == partner1
+                or each_authorization.partners == partner2
             )
 
         for each_authorization in response.context_data["manual_authorizations"]:
             self.assertEqual(each_authorization.user, self.user_editor)
             self.assertTrue(
-                each_authorization.partner == partner3
-                or each_authorization.partner == partner4
-                or each_authorization.partner == partner5
+                each_authorization.partners == partner3
+                or each_authorization.partners == partner4
+                or each_authorization.partners == partner5
             )
 
     def test_return_authorization(self):
@@ -365,9 +366,12 @@ class ViewsTestCase(TestCase):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
         partner = PartnerFactory(authorization_method=Partner.PROXY)
         app = ApplicationFactory(
-            status=Application.SENT, editor=editor, partner=partner
+            status=Application.SENT,
+            editor=editor,
+            partner=partner,
+            sent_by=self.user_coordinator,
         )
-        authorization = Authorization.objects.get(user=editor.user, partner=partner)
+        authorization = Authorization.objects.get(user=editor.user, partners=partner)
         self.assertEqual(authorization.get_latest_app(), app)
         return_url = reverse(
             "users:return_authorization", kwargs={"pk": authorization.pk}
@@ -523,11 +527,12 @@ class ViewsTestCase(TestCase):
         partner = PartnerFactory()
         user_auth = Authorization(
             user=self.user_editor,
-            partner=partner,
+            authorizer=self.user_coordinator,
             date_authorized=date.today(),
             date_expires=date.today() + timedelta(days=30),
         )
         user_auth.save()
+        user_auth.partners.add(partner)
 
         submit = self.client.post(delete_url)
 
@@ -1033,6 +1038,154 @@ class EditorModelTestCase(TestCase):
         self.test_editor.save()
         self.assertFalse(self.test_editor.wp_bundle_eligible)
 
+    def test_update_bundle_authorization_creation(self):
+        """
+        update_bundle_authorization() should create a new bundle
+        authorization if one didn't exist when the user is
+        bundle eligible.
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        # Check we don't already have a Bundle authorization
+        with self.assertRaises(Authorization.DoesNotExist):
+            bundle_authorization = Authorization.objects.get(
+                user=editor.user, partners__authorization_method=Partner.BUNDLE
+            )
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+        # We should now have created a single authorization to
+        # Bundle partners.
+        self.assertEqual(bundle_authorization.count(), 1)
+
+    def test_update_bundle_authorization_expiry(self):
+        """
+        update_bundle_authorization() should expire existing bundle
+        authorizations if the user is no longer eligible
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Authorization should still exist
+        self.assertEqual(bundle_authorization.count(), 1)
+
+        # But it should have now expired
+        self.assertEqual(
+            bundle_authorization.first().date_expires, date.today() - timedelta(days=1)
+        )
+
+    def test_update_bundle_authorization_user_eligible_again(self):
+        """
+        update_bundle_authorization() should undo expiry of existing
+        bundle authorizations if the user is now eligible again
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        # Marking them as eligible a 2nd time should update their
+        # expired authorization to remove the expiry date.
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Authorization should still exist
+        self.assertEqual(bundle_authorization.count(), 1)
+
+        # It should have no expiry date, i.e. it's now active again.
+        self.assertEqual(bundle_authorization.get().date_expires, None)
+
+    def test_wp_bundle_authorized_no_bundle_auth(self):
+        """
+        If a user has no authorization to Bundle
+        resources, wp_bundle_authorized should return False
+        """
+        editor = EditorFactory()
+
+        self.assertFalse(editor.wp_bundle_authorized)
+
+    def test_wp_bundle_authorized_true(self):
+        """
+        If a user has an active authorization to Bundle
+        resources, wp_bundle_authorized should return True
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        # Create Bundle auth for this user
+        editor.update_bundle_authorization()
+
+        self.assertTrue(editor.wp_bundle_authorized)
+
+    def test_wp_bundle_authorized_false(self):
+        """
+        If a user has an expired authorization to Bundle
+        resources, wp_bundle_authorized should return False
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        # Create Bundle auth for this user
+        editor.update_bundle_authorization()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        # Expire the user's auth
+        editor.update_bundle_authorization()
+
+        self.assertFalse(editor.wp_bundle_authorized)
+
     @patch.object(Editor, "get_global_userinfo")
     def test_update_from_wikipedia(self, mock_global_userinfo):
         identity = {}
@@ -1214,3 +1367,63 @@ class HelpersTestCase(TestCase):
         LANGUAGES = set(LANGUAGE_CODES.keys())
 
         self.assertEqual(WIKIS_LANGUAGES, LANGUAGES)
+
+
+class AuthorizationsHelpersTestCase(TestCase):
+    def setUp(self):
+        self.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.bundle_partner_3 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        self.proxy_partner_2 = PartnerFactory(authorization_method=Partner.PROXY)
+
+    def test_validate_partners_for_bundle_auth(self):
+        """
+        Passing a queryset of partners which are all set to
+        the BUNDLE authorization method should raise no
+        errors
+        """
+        partner_queryset = Partner.objects.filter(authorization_method=Partner.BUNDLE)
+        try:
+            validation = validate_partners(partner_queryset)
+        except ValidationError:
+            self.fail("validate_partners() raised ValidationError unexpectedly.")
+
+    def test_validate_partners_for_mixed_auth_types(self):
+        """
+        Passing a queryset with both BUNDLE and PROXY authorization
+        types to validate_partners() should raise a ValidationError
+        """
+        partner_queryset = Partner.objects.filter(
+            authorization_method__in=[Partner.BUNDLE, Partner.PROXY]
+        )
+        with self.assertRaises(ValidationError):
+            validate_partners(partner_queryset)
+
+    def test_validate_partners_for_wrong_auth_type(self):
+        """
+        Passing a queryset with multiple PROXY partners
+        to validate_partners() should raise a ValidationError
+        """
+        partner_queryset = Partner.objects.filter(authorization_method=Partner.PROXY)
+        with self.assertRaises(ValidationError):
+            validate_partners(partner_queryset)
+
+    def test_get_all_bundle_authorizations(self):
+        """
+        The get_all_bundle_authorizations() helper function
+        should return a Queryset of all authorizations
+        for the Library Bundle, both active and not.
+        """
+        editor = EditorFactory()
+        editor.wp_bundle_eligible = True
+        editor.save()
+        # This should create an authorization linked to
+        # bundle partners.
+        editor.update_bundle_authorization()
+
+        all_auths = get_all_bundle_authorizations()
+
+        # One editor has Bundle auths, so this should be a
+        # Queryset with 1 entry.
+        self.assertEqual(all_auths.count(), 1)

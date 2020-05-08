@@ -4,6 +4,7 @@
 import hashlib
 import logging
 import urllib.request, urllib.parse, urllib.error
+from annoying.functions import get_object_or_None
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
@@ -32,35 +33,27 @@ class EZProxyAuth(ToURequired, View):
         if not username:
             raise SuspiciousOperation("Missing Editor username.")
 
-        try:
-            authorizations = Authorization.objects.filter(user=request.user)
-            logger.info(
-                "Editor {username} has the following authorizations: {authorizations}.".format(
-                    username=username, authorizations=authorizations
-                )
+        if request.user.editor.wp_bundle_authorized:
+            groups.append("BUNDLE")
+
+        authorizations = get_object_or_None(
+            Authorization.objects.filter(user=request.user)
+        )
+
+        logger.info(
+            "Editor {username} has the following authorizations: {authorizations}.".format(
+                username=username, authorizations=authorizations
             )
-        except Authorization.DoesNotExist:
-            authorizations = None
+        )
 
         for authorization in authorizations:
-            if authorization.is_valid:
-                group = ""
-                try:
-                    partner = Partner.objects.get(
-                        authorization_method=Partner.PROXY, pk=authorization.partner_id
-                    )
-                    group += "P" + repr(partner.pk)
-                    try:
-                        stream = Stream.objects.get(
-                            authorization_method=Partner.PROXY,
-                            pk=authorization.stream_id,
-                        )
-                        group += "S" + repr(stream.pk)
-                    except Stream.DoesNotExist:
-                        pass
-                except Partner.DoesNotExist:
-                    pass
-
+            if (
+                authorization.is_valid
+                and authorization.get_authorization_method() == Partner.PROXY
+            ):
+                group = "P" + repr(authorization.partners.get().pk)
+                if authorization.stream:
+                    group += "S" + repr(authorization.stream_id)
                 groups.append(group)
                 logger.info("{group}.".format(group=group))
 
