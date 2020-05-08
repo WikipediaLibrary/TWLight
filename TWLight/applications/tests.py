@@ -2941,7 +2941,7 @@ class EvaluateApplicationTest(TestCase):
         total_valid_authorizations = count_valid_authorizations(self.partner, stream)
         self.assertEqual(total_valid_authorizations, 5)
 
-        # Filter logic in .helpers.get_valid_authorizations and
+        # Filter logic in .helpers.get_valid_partner_authorizations and
         # TWLight.users.models.Authorization.is_valid must be in sync.
         # We test that here.
         all_authorizations_using_is_valid = Authorization.objects.filter(
