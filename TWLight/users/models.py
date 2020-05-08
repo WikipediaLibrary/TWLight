@@ -369,10 +369,18 @@ class Editor(models.Model):
         else:
             return None
 
+    @property
     def wp_bundle_authorized(self):
-        return Authorization.objects.filter(
-            user=self.user, partners__authorization_method=Partner.BUNDLE
-        ).exists()
+        try:
+            editor_auth = Authorization.objects.filter(
+                user=self.user, partners__authorization_method=Partner.BUNDLE
+            ).distinct().get()
+        # If the user has no Bundle authorization, they're not authorized
+        except Authorization.DoesNotExist:
+            return False
+
+        # If the user has a Bundle authorization, ensure its validity
+        return editor_auth.is_valid
 
     def get_global_userinfo(self, identity):
         return editor_global_userinfo(identity["username"], identity["sub"], True)
@@ -421,9 +429,6 @@ class Editor(models.Model):
             if bundle_authorization.date_expires:
                 bundle_authorization.date_expires = None
                 bundle_authorization.save()
-
-
-
 
     def update_from_wikipedia(self, identity, lang):
         """
