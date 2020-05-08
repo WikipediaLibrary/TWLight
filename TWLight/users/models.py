@@ -416,6 +416,8 @@ class Editor(models.Model):
             # If the user is eligible, and has an expiry date on their
             # bundle authorization, that probably means we previously
             # expired it. So reset it to being active.
+            # If they're eligible and have no expiry date, then we
+            # don't need to do anything else, they remain authorized.
             if bundle_authorization.date_expires:
                 bundle_authorization.date_expires = None
                 bundle_authorization.save()
