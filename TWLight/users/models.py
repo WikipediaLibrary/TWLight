@@ -369,7 +369,7 @@ class Editor(models.Model):
         else:
             return None
 
-    def authorized_for_bundle(self):
+    def wp_bundle_authorized(self):
         user_bundle_authorizations = Authorization.objects.filter(
             user=self.user, partners__authorization_method=Partner.BUNDLE
         ).exists()
