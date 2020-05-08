@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.dispatch import receiver, Signal
 from django.db.models.signals import pre_save, post_save, post_delete
+from TWLight.users.helpers.bundle_authorizations import get_all_bundle_authorizations
 from TWLight.users.models import Authorization, UserProfile
 from TWLight.resources.models import Partner, Stream
 
@@ -98,6 +99,12 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
     add_to_auths = False
     remove_from_auths = False
 
+    authorizations_to_update = get_all_bundle_authorizations()
+    # If no Bundle authorizations exist, we don't have anything
+    # else to do here, so just return
+    if not authorizations_to_update:
+        return
+
     try:
         previous_data = Partner.even_not_available.get(pk=instance.pk)
     # We must be creating this partner, we'll handle this case in a
@@ -129,9 +136,6 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
 
     # Let's avoid db queries if we don't need them
     if add_to_auths or remove_from_auths:
-        authorizations_to_update = Authorization.objects.filter(
-            partners__authorization_method=Partner.BUNDLE
-        ).distinct()
 
         if add_to_auths:
             for authorization in authorizations_to_update:
@@ -155,9 +159,8 @@ def update_bundle_authorizations_on_bundle_partner_creation(
         and instance.status == Partner.AVAILABLE
         and instance.authorization_method == Partner.BUNDLE
     ):
-        authorizations_to_update = Authorization.objects.filter(
-            partners__authorization_method=Partner.BUNDLE
-        ).distinct()
+        authorizations_to_update = get_all_bundle_authorizations()
 
-        for authorization in authorizations_to_update:
-            authorization.partners.add(instance)
+        if authorizations_to_update:
+            for authorization in authorizations_to_update:
+                authorization.partners.add(instance)

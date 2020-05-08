@@ -370,9 +370,13 @@ class Editor(models.Model):
     @property
     def wp_bundle_authorized(self):
         try:
-            editor_auth = Authorization.objects.filter(
-                user=self.user, partners__authorization_method=Partner.BUNDLE
-            ).distinct().get()
+            editor_auth = (
+                Authorization.objects.filter(
+                    user=self.user, partners__authorization_method=Partner.BUNDLE
+                )
+                .distinct()
+                .get()
+            )
         # If the user has no Bundle authorization, they're not authorized
         except Authorization.DoesNotExist:
             return False
@@ -393,9 +397,13 @@ class Editor(models.Model):
         # method, we should only ever find one or zero authorizations
         # for bundle partners.
         try:
-            bundle_authorization = Authorization.objects.filter(
-                user=self.user, partners__authorization_method=Partner.BUNDLE
-            ).distinct().get()  # dinstinct() required because partners__authorization_method is ManyToMany
+            bundle_authorization = (
+                Authorization.objects.filter(
+                    user=self.user, partners__authorization_method=Partner.BUNDLE
+                )
+                .distinct()
+                .get()
+            )  # dinstinct() required because partners__authorization_method is ManyToMany
         except Authorization.DoesNotExist:
             return None
         return bundle_authorization
