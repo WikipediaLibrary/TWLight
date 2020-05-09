@@ -37,12 +37,6 @@ class EZProxyAuth(ToURequired, View):
 
         authorizations = Authorization.objects.filter(user=request.user)
 
-        logger.info(
-            "Editor {username} has the following authorizations: {authorizations}.".format(
-                username=username, authorizations=authorizations
-            )
-        )
-
         for authorization in authorizations:
             if (
                 authorization.is_valid
