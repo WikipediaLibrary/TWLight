@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from TWLight.users.models import Editor, UserProfile, Authorization, get_company_name
 from TWLight.users.forms import AuthorizationAdminForm, AuthorizationInlineForm
 
+
 class EditorInline(admin.StackedInline):
     model = Editor
     max_num = 1
@@ -121,5 +122,8 @@ admin.site.register(User, UserAdmin)
 class SessionAdmin(admin.ModelAdmin):
     def _session_data(self, obj):
         return obj.get_decoded()
-    list_display = ['session_key', '_session_data', 'expire_date']
+
+    list_display = ["session_key", "_session_data", "expire_date"]
+
+
 admin.site.register(Session, SessionAdmin)
