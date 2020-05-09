@@ -35,9 +35,7 @@ class EZProxyAuth(ToURequired, View):
         if request.user.editor.wp_bundle_authorized:
             groups.append("BUNDLE")
 
-        authorizations = Authorization.objects.filter(user=request.user)
-
-        for authorization in authorizations:
+        for authorization in Authorization.objects.filter(user=request.user):
             if (
                 authorization.is_valid
                 and authorization.get_authorization_method() == Partner.PROXY
