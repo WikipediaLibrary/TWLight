@@ -4,7 +4,6 @@
 import hashlib
 import logging
 import urllib.request, urllib.parse, urllib.error
-from annoying.functions import get_object_or_None
 from time import gmtime
 from calendar import timegm
 from django.conf import settings
@@ -17,7 +16,7 @@ from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 from TWLight.users.models import Authorization
 from TWLight.view_mixins import ToURequired
 
@@ -36,9 +35,7 @@ class EZProxyAuth(ToURequired, View):
         if request.user.editor.wp_bundle_authorized:
             groups.append("BUNDLE")
 
-        authorizations = get_object_or_None(
-            Authorization.objects.filter(user=request.user)
-        )
+        authorizations = Authorization.objects.filter(user=request.user)
 
         logger.info(
             "Editor {username} has the following authorizations: {authorizations}.".format(
