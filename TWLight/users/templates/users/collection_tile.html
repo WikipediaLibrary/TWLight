@@ -91,7 +91,7 @@
       <hr>
     {% endif %}
     <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i>
-    <strong><a href="{% url 'partners:detail' each_authorization.partner.pk %}">{{ each_authorization.partners }}</a></strong>
+    <strong><a href="{% url 'partners:detail' each_partner.pk %}">{{ each_partner }}</a></strong>
     {% if each_authorization.stream %}({{ each_authorization.stream }}){% endif %}
     {% if not each_authorization.is_bundle %}
       {% if each_authorization.latest_sent_app and not each_authorization.open_app %}
