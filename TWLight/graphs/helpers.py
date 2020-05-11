@@ -300,7 +300,7 @@ def get_proxy_and_renewed_authorizations():
     renewed_auth_ids = []
     for auth in proxy_auth:
         latest_app = auth.get_latest_app()
-        if latest_app.parent:
+        if latest_app and latest_app.parent:
             renewed_auth_ids.append(auth.id)
 
     renewed_auth = proxy_auth.filter(id__in=renewed_auth_ids)
