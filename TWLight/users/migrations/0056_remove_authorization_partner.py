@@ -8,7 +8,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("users", "0054_authorization_data_partners_foreignkey_to_manytomany")
+        ("users", "0055_authorization_data_partners_foreignkey_to_manytomany")
     ]
 
     operations = [migrations.RemoveField(model_name="authorization", name="partner")]
