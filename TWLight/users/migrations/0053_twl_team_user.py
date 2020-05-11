@@ -14,6 +14,6 @@ def twl_team(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [("users", "0051_auto_20200312_1628")]
+    dependencies = [("users", "0052_auto_20200312_1628")]
 
     operations = [migrations.RunPython(twl_team, migrations.RunPython.noop)]

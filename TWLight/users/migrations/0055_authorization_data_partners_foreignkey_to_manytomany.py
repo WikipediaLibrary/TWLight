@@ -18,6 +18,6 @@ def partner_to_partners(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [("users", "0053_auto_20200508_1715")]
+    dependencies = [("users", "0054_auto_20200508_1715")]
 
     operations = [migrations.RunPython(partner_to_partners)]
