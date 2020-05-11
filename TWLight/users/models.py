@@ -703,7 +703,7 @@ class Authorization(models.Model):
                     specific_stream=self.stream,
                     editor=self.user.editor,
                 ).latest("id")
-            elif self.partner and self.user and self.user.editor:
+            elif self.partners.all().exists() and self.user and self.user.editor:
                 return Application.objects.filter(
                     ~Q(status=Application.NOT_APPROVED),
                     partner=self.partners.all(),
