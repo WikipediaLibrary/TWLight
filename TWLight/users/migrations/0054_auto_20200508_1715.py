@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("resources", "0079_auto_20191210_1832"),
-        ("users", "0052_twl_team_user"),
+        ("users", "0053_twl_team_user"),
     ]
 
     operations = [
@@ -20,18 +20,6 @@ class Migration(migrations.Migration):
             field=models.ManyToManyField(
                 blank=True,
                 help_text="The partner(s) for which the editor is authorized.",
-                to="resources.Partner",
-            ),
-        ),
-        migrations.AlterField(
-            model_name="authorization",
-            name="partner",
-            field=models.ForeignKey(
-                blank=True,
-                help_text="The partner for which the editor is authorized.",
-                null=True,
-                on_delete=django.db.models.deletion.CASCADE,
-                related_name="partner",
                 to="resources.Partner",
             ),
         ),

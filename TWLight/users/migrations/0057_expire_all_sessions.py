@@ -23,6 +23,6 @@ def expire_all_sessions(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [("users", "0055_remove_authorization_partner")]
+    dependencies = [("users", "0056_remove_authorization_partner")]
 
     operations = [migrations.RunPython(expire_all_sessions)]
