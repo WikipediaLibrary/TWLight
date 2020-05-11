@@ -70,9 +70,11 @@
       {% endif %}
       <div class="row row-flex">
         {% for each_authorization in proxy_bundle_authorizations_expired %}
-          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
-          </div>
+          {% for each_partner in each_authorization.partners.all %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
         {% endfor %}
       </div>
     </div>
@@ -86,9 +88,11 @@
       <br>
       <div class="row row-flex">
         {% for each_authorization in manual_authorizations %}
-          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
-          </div>
+          {% for each_partner in each_authorization.partners.all %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
         {% empty %}
           <div class="col-xs-12">
             {% comment %} Translators: On the collection page (manual access tab), this text is displayed when the user has no active collections. {% endcomment %}
@@ -103,9 +107,11 @@
       {% endif %}
       <div class="row row-flex">
         {% for each_authorization in manual_authorizations_expired %}
-          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
-          </div>
+          {% for each_partner in each_authorization.partners.all %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
         {% endfor %}
       </div>
     </div>
