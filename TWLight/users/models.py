@@ -738,6 +738,7 @@ class Authorization(models.Model):
 
         return access_url
 
+    @property
     def about_to_expire(self):
         # less than 30 days but greater than -1 day is when we consider an authorization about to expire
         today = date.today()
@@ -770,6 +771,7 @@ class Authorization(models.Model):
 
         return authorization_method
 
+    @property
     def is_bundle(self):
         """
         Returns True if this authorization is to a Bundle partner
