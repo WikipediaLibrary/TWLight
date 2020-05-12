@@ -428,7 +428,7 @@ class ViewsTestCase(TestCase):
             self.assertEqual(each_authorization.user, self.user_editor)
             partners = each_authorization.partners.all()
             for partner in partners:
-                response_proxy_bundle_partners.append(partner)
+                response_manual_partners.append(partner)
 
         # Check for manual auths
         for partner in manual_partners:
