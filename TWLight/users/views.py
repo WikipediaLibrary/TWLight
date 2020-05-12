@@ -757,7 +757,7 @@ class CollectionUserView(SelfOnly, ListView):
                                         Application.QUESTION,
                                         Application.APPROVED,
                                     ),
-                                    partner=each_authorization.partners.first(),
+                                    partner=each_authorization.partners.get(),
                                 ).latest(
                                     "date_created"
                                 )
