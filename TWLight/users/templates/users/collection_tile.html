@@ -17,25 +17,25 @@
       {% trans "Library bundle access" %}
       ">
     {% endif %}
-    {% if each_authorization.partner.authorization_method == each_authorization.partner.PROXY and each_authorization.is_valid %}
+    {% if each_partner.authorization_method == each_partner.PROXY and each_authorization.is_valid %}
       {% comment %} Translators: A button when clicked takes users to a confirmation page to return their access for a particular collection. {% endcomment %}
       <a href="{% url 'users:return_authorization' each_authorization.id %}" class="btn btn-outline-danger fit-content no-padding-icon"><i class="fa fa-times fa-2x" title="{% trans 'Click to return this access' %}"></i></a>
     {% endif %}
-    {% if each_authorization.partner.logos.logo.url %}
+    {% if each_partner.logos.logo.url %}
       <div class="partner-logo-container">
         <a href="
-          {% if each_authorization.partner.get_access_url and each_authorization.is_valid and each_authorization.user.userprofile.terms_of_use %}
-            {{ each_authorization.partner.get_access_url }}
+          {% if each_partner.get_access_url and each_authorization.is_valid and each_authorization.user.userprofile.terms_of_use %}
+            {{ each_partner.get_access_url }}
           {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
             {{ each_authorization.stream.get_access_url }}
           {% else %}
-            {% url 'partners:detail' each_authorization.partner.pk %}
+            {% url 'partners:detail' each_partner.pk %}
           {% endif %}
         ">
-          <img src="{{ each_authorization.partner.logos.logo.url }}" class="img-responsive partner-logo" title="
-            {% if each_authorization.partner.get_access_url and each_authorization.is_valid %}
+          <img src="{{ each_partner.logos.logo.url }}" class="img-responsive partner-logo" title="
+            {% if each_partner.get_access_url and each_authorization.is_valid %}
               {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_authorization.partners as partner %}
+              {% blocktrans trimmed with each_partners as partner %}
                  Link to {{ partner }}'s external website
               {% endblocktrans %}
             {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
@@ -45,15 +45,15 @@
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Title for logo in tiles that are linked to partner description  page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_authorization.partners as partner %}
+              {% blocktrans trimmed with each_partners as partner %}
                  Link to {{ partner }} signup page
               {% endblocktrans %}
             {% endif %}
             "
           alt="
-            {% if each_authorization.partner.get_access_url and each_authorization.is_valid %}
+            {% if each_partner.get_access_url and each_authorization.is_valid %}
               {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_authorization.partners as partner %}
+              {% blocktrans trimmed with each_partners as partner %}
                  Link to {{ partner }}'s external website
               {% endblocktrans %}
             {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
@@ -63,7 +63,7 @@
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_authorization.partners as partner %}
+              {% blocktrans trimmed with each_partners as partner %}
                  Link to {{ partner }} signup page
               {% endblocktrans %}
             {% endif %}
@@ -96,8 +96,8 @@
     {% if not each_authorization.is_bundle %}
       {% if each_authorization.latest_sent_app and not each_authorization.open_app %}
         {% comment %} Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled. {% endcomment %}
-        <span class="pull-right" {% if not each_authorization.partner.renewals_available %}title="{% trans 'Renewals are not available for this partner' %}"{% endif %}>
-          <a href="{% url 'applications:renew' each_authorization.latest_sent_app.pk %}" class="btn btn-default pull-right {% if not each_authorization.partner.renewals_available %}disabled{% endif %}" role="button">
+        <span class="pull-right" {% if not each_partner.renewals_available %}title="{% trans 'Renewals are not available for this partner' %}"{% endif %}>
+          <a href="{% url 'applications:renew' each_authorization.latest_sent_app.pk %}" class="btn btn-default pull-right {% if not each_partner.renewals_available %}disabled{% endif %}" role="button">
             {% if each_authorization.is_valid %}
               {% comment %} Translators: Labels a button users can click to extend the duration of their access. {% endcomment %}
               {% trans 'Extend' %}
@@ -108,9 +108,9 @@
           </a>
         </span>
         <div class="clearfix"></div>
-      {% elif each_authorization.partner.specific_title and not each_authorization.open_app %}
+      {% elif each_partner.specific_title and not each_authorization.open_app %}
         <span class="pull-right">
-          <a href="{% url 'applications:apply_single' each_authorization.partner.pk %}" class="btn btn-primary pull-right" role="button">
+          <a href="{% url 'applications:apply_single' each_partner.pk %}" class="btn btn-primary pull-right" role="button">
             {% comment %} Translators: Labels the button users can click to apply for a resource. {% endcomment %}
             {% trans 'Apply' %}
           </a>
