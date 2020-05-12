@@ -15,7 +15,7 @@ fi
 if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 then
     # Get a list of languages, and add the reserved code for translation documentation.
-    langs=($(python3 manage.py diffsettings | grep '^LANGUAGES =' | grep -o "(u'[^']*'" | grep -o "'[^']*'"  | xargs))
+    langs=($(python3 manage.py diffsettings | grep '^LANGUAGES =' | grep -o "('[^']*'" | grep -o "'[^']*'"  | xargs))
     langs+=('qqq')
 
     makemessages() {
