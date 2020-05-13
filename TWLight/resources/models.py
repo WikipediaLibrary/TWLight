@@ -505,8 +505,7 @@ class Partner(models.Model):
             raise ValidationError(
                 {
                     "target_url": [
-                        "For partners accessed via proxy, a "
-                        "target URL is required."
+                        "For partners accessed via proxy, a target URL is required."
                     ]
                 }
             )
