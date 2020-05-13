@@ -26,7 +26,7 @@
         <a href="
           {% if each_partner.get_access_url and each_authorization.is_valid and each_authorization.user.userprofile.terms_of_use %}
             {{ each_partner.get_access_url }}
-          {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
+          {% elif each_authorization.stream.get_access_url and each_authorization.is_valid and each_authorization.user.userprofile.terms_of_use %}
             {{ each_authorization.stream.get_access_url }}
           {% else %}
             {% url 'partners:detail' each_partner.pk %}
@@ -34,37 +34,37 @@
         ">
           <img src="{{ each_partner.logos.logo.url }}" class="img-responsive partner-logo" title="
             {% if each_partner.get_access_url and each_authorization.is_valid %}
-              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_partner as partner %}
-                 Link to {{ partner }}'s external website
+              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ each_partner }}. {% endcomment %}
+              {% blocktrans trimmed %}
+                 External link to {{ each_partner }}'s website
               {% endblocktrans %}
             {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
-              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ each_authorization.stream }}. {% endcomment %}
+              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ stream }}. {% endcomment %}
               {% blocktrans trimmed with each_authorization.stream as stream %}
                  Link to {{ stream }}'s external website
               {% endblocktrans %}
             {% else %}
-              {% comment %} Translators: Title for logo in tiles that are linked to partner description  page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_partner as partner %}
-                 Link to {{ partner }} signup page
+              {% comment %} Translators: Title for logo in tiles that are linked to partner description  page. Don't translate {{ each_partner }}. {% endcomment %}
+              {% blocktrans trimmed %}
+                 Link to {{ each_partner }} signup page
               {% endblocktrans %}
             {% endif %}
             "
           alt="
             {% if each_partner.get_access_url and each_authorization.is_valid %}
-              {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_partner as partner %}
-                 Link to {{ partner }}'s external website
+              {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ each_partner }}. {% endcomment %}
+              {% blocktrans trimmed %}
+                 Link to {{ each_partner }}'s external website
               {% endblocktrans %}
             {% elif each_authorization.stream.get_access_url and each_authorization.is_valid %}
-              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ each_authorization.stream }}. {% endcomment %}
+              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ stream }}. {% endcomment %}
               {% blocktrans trimmed with each_authorization.stream as stream %}
                  Link to {{ stream }}'s external website
               {% endblocktrans %}
             {% else %}
-              {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ partner }}. {% endcomment %}
-              {% blocktrans trimmed with each_partner as partner %}
-                 Link to {{ partner }} signup page
+              {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ each_partner }}. {% endcomment %}
+              {% blocktrans trimmed %}
+                 Link to {{ each_partner }} signup page
               {% endblocktrans %}
             {% endif %}
           ">
@@ -72,9 +72,15 @@
       </div>
     {% endif %}
     <hr>
-    {% if each_authorization.is_valid and each_authorization.get_access_url %}
+    {% if each_authorization.is_valid and each_partner.get_access_url or each_authorization.stream.get_access_url %}
       <div style="text-align: center;">
-        <a href="{{ each_authorization.get_access_url }}" class="btn btn-primary
+        <a href="
+          {% if each_authorization.stream %}
+            {{ each_authorization.stream.get_access_url }}
+          {% else %}
+            {{ each_partner.get_access_url }}
+          {% endif %}
+        " class="btn btn-primary
         {% if not each_authorization.user.userprofile.terms_of_use %}
           disabled
         {% endif %}
