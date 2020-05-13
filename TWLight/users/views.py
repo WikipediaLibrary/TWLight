@@ -738,7 +738,6 @@ class CollectionUserView(SelfOnly, ListView):
                 if (
                     each_authorization.about_to_expire
                     or not each_authorization.is_valid
-                    or not each_authorization.is_bundle
                 ):
                     latest_app = each_authorization.get_latest_app()
                     if latest_app:
