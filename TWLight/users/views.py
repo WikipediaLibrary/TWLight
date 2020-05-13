@@ -703,12 +703,12 @@ class CollectionUserView(SelfOnly, ListView):
             Q(date_expires__gte=today) | Q(date_expires=None),
             user=editor.user,
             partners__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        ).order_by("partners")
+        ).distinct()
         proxy_bundle_authorizations_expired = Authorization.objects.filter(
             user=editor.user,
             date_expires__lt=today,
             partners__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        ).order_by("partners")
+        ).distinct()
         manual_authorizations = Authorization.objects.filter(
             Q(date_expires__gte=today) | Q(date_expires=None),
             user=editor.user,
@@ -756,7 +756,7 @@ class CollectionUserView(SelfOnly, ListView):
                                         Application.QUESTION,
                                         Application.APPROVED,
                                     ),
-                                    partner=each_authorization.partners,
+                                    partner=each_authorization.partners.get(),
                                 ).latest(
                                     "date_created"
                                 )

@@ -9,7 +9,6 @@
     {% trans "Your applications" %}
   </a>
   <ul class="nav nav-tabs">
-    {% comment %} Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access). {% endcomment %}
     <li
       {% if proxy_bundle_authorizations or proxy_bundle_authorizations_expired %}
         class="active"
@@ -18,13 +17,13 @@
       {% endif %}
     >
       <a data-toggle="tab" href="#proxy">
+        {% comment %} Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access). {% endcomment %}
         {% trans 'Instant access' %}
         <span class="badge">
           {{ proxy_bundle_authorizations.count }}
         </span>
       </a>
     </li>
-    {% comment %} Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually. {% endcomment %}
     <li
       {% if manual_authorizations or manual_authorizations_expired %}
         {% if not proxy_bundle_authorizations and not proxy_bundle_authorizations_expired %}
@@ -33,6 +32,7 @@
       {% endif %}
     >
       <a data-toggle="tab" href="#manual">
+        {% comment %} Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually. {% endcomment %}
         {% trans 'Individual access' %}
         <span class="badge">
           {{ manual_authorizations.count }}
@@ -51,9 +51,11 @@
       <br>
       <div class="row row-flex">
         {% for each_authorization in proxy_bundle_authorizations %}
-          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
-          </div>
+          {% for each_partner in each_authorization.partners.all %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
         {% empty %}
           <div class="col-xs-12">
             {% comment %} Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections. {% endcomment %}
@@ -61,16 +63,18 @@
           </div>
         {% endfor %}
       </div>
-      {%  if proxy_bundle_authorizations_expired %}
+      {% if proxy_bundle_authorizations_expired %}
         {% comment %} Translators: Heading for the section which lists all of the user's expired collection. {% endcomment %}
         <h4>{% trans 'Expired' %}</h4>
         <hr>
       {% endif %}
       <div class="row row-flex">
         {% for each_authorization in proxy_bundle_authorizations_expired %}
-          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
-          </div>
+          {% for each_partner in each_authorization.partners.all %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
         {% endfor %}
       </div>
     </div>
@@ -84,9 +88,11 @@
       <br>
       <div class="row row-flex">
         {% for each_authorization in manual_authorizations %}
-          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
-          </div>
+          {% for each_partner in each_authorization.partners.all %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
         {% empty %}
           <div class="col-xs-12">
             {% comment %} Translators: On the collection page (manual access tab), this text is displayed when the user has no active collections. {% endcomment %}
@@ -101,9 +107,11 @@
       {% endif %}
       <div class="row row-flex">
         {% for each_authorization in manual_authorizations_expired %}
-          <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
-          </div>
+          {% for each_partner in each_authorization.partners.all %}
+            <div class="col-flex col-xs-12 col-sm-4 col-md-3">
+              {% include "users/collection_tile.html" %}
+            </div>
+          {% endfor %}
         {% endfor %}
       </div>
     </div>

@@ -108,6 +108,8 @@ class ViewsTestCase(TestCase):
         self.username1 = "alice"
         self.user_editor = UserFactory(username=self.username1)
         self.editor1 = EditorFactory(user=self.user_editor)
+        self.editor1.wp_bundle_eligible = True
+        self.editor1.save()
         self.url1 = reverse("users:editor_detail", kwargs={"pk": self.editor1.pk})
 
         # User 2: regular Editor
@@ -291,7 +293,6 @@ class ViewsTestCase(TestCase):
         request.user = self.user_editor
 
         response = views.ListApplicationsUserView.as_view()(request, pk=self.editor1.pk)
-
         self.assertEqual(
             set(response.context_data["object_list"]), {app1, app2, app3, app4}
         )
@@ -311,55 +312,127 @@ class ViewsTestCase(TestCase):
         # expected string is too fragile.
 
     def test_my_library_page_has_authorizations(self):
-        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
-        ApplicationFactory(
+
+        # a coordinator with a session.
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        partner1 = PartnerFactory(
+            authorization_method=Partner.PROXY, status=Partner.AVAILABLE
+        )
+        app1 = ApplicationFactory(
             status=Application.PENDING, editor=self.user_editor.editor, partner=partner1
         )
-        partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        ApplicationFactory(
-            status=Application.QUESTION,
-            editor=self.user_editor.editor,
-            partner=partner2,
+        partner1.coordinator = coordinator.user
+        partner1.save()
+        # coordinator will update the status
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app1.pk}),
+            data={"status": Application.APPROVED},
+            follow=True,
         )
-        partner3 = PartnerFactory(authorization_method=Partner.CODES)
-        ApplicationFactory(
-            status=Application.APPROVED,
-            editor=self.user_editor.editor,
-            partner=partner3,
+
+        partner2 = PartnerFactory(
+            authorization_method=Partner.BUNDLE, status=Partner.AVAILABLE
         )
-        partner4 = PartnerFactory(authorization_method=Partner.EMAIL)
-        ApplicationFactory(
-            status=Application.NOT_APPROVED,
-            editor=self.user_editor.editor,
-            partner=partner4,
+        partner2.coordinator = coordinator.user
+        partner2.save()
+
+        partner3 = PartnerFactory(
+            authorization_method=Partner.CODES, status=Partner.AVAILABLE
         )
-        partner5 = PartnerFactory(authorization_method=Partner.LINK)
-        ApplicationFactory(
-            status=Application.NOT_APPROVED,
-            editor=self.user_editor.editor,
-            partner=partner5,
+        app3 = ApplicationFactory(
+            status=Application.PENDING, editor=self.user_editor.editor, partner=partner3
         )
+        partner3.coordinator = coordinator.user
+        partner3.save()
+        # coordinator will update the status
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app3.pk}),
+            data={"status": Application.APPROVED},
+            follow=True,
+        )
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app3.pk}),
+            data={"status": Application.SENT},
+            follow=True,
+        )
+
+        partner4 = PartnerFactory(
+            authorization_method=Partner.EMAIL, status=Partner.AVAILABLE
+        )
+        app4 = ApplicationFactory(
+            status=Application.PENDING, editor=self.user_editor.editor, partner=partner4
+        )
+        partner4.coordinator = coordinator.user
+        partner4.save()
+        # coordinator will update the status
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app4.pk}),
+            data={"status": Application.NOT_APPROVED},
+            follow=True,
+        )
+
+        partner5 = PartnerFactory(
+            authorization_method=Partner.LINK, status=Partner.AVAILABLE
+        )
+        app5 = ApplicationFactory(
+            status=Application.PENDING, editor=self.user_editor.editor, partner=partner5
+        )
+        partner5.coordinator = coordinator.user
+        partner5.save()
+        # coordinator will update the status
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app5.pk}),
+            data={"status": Application.NOT_APPROVED},
+            follow=True,
+        )
+
+        partner6 = PartnerFactory(
+            authorization_method=Partner.BUNDLE, status=Partner.AVAILABLE
+        )
+        partner6.coordinator = coordinator.user
+        partner6.save()
+
+        self.editor1.update_bundle_authorization()
 
         factory = RequestFactory()
         request = factory.get(reverse("users:my_library"))
         request.user = self.user_editor
-
         response = views.CollectionUserView.as_view()(request)
 
-        for each_authorization in response.context_data["proxy_bundle_authorizations"]:
+        # Proxy and bundle checks
+        proxy_partners = [partner1]
+        bundle_partners = [partner2, partner6]
+        response_proxy_bundle_auths = response.context_data[
+            "proxy_bundle_authorizations"
+        ]
+        response_proxy_bundle_partners = []
+        for each_authorization in response_proxy_bundle_auths:
             self.assertEqual(each_authorization.user, self.user_editor)
-            self.assertTrue(
-                each_authorization.partners == partner1
-                or each_authorization.partners == partner2
-            )
+            partners = each_authorization.partners.all()
+            for partner in partners:
+                response_proxy_bundle_partners.append(partner)
 
-        for each_authorization in response.context_data["manual_authorizations"]:
+        # Check for proxy auths
+        for partner in proxy_partners:
+            self.assertTrue(partner in response_proxy_bundle_partners)
+
+        # Check for bundle auths
+        for partner in bundle_partners:
+            self.assertTrue(partner in response_proxy_bundle_partners)
+
+        # Manual checks
+        manual_partners = [partner3]
+        response_manual_auths = response.context_data["manual_authorizations"]
+        response_manual_partners = []
+        for each_authorization in response_manual_auths:
             self.assertEqual(each_authorization.user, self.user_editor)
-            self.assertTrue(
-                each_authorization.partners == partner3
-                or each_authorization.partners == partner4
-                or each_authorization.partners == partner5
-            )
+            partners = each_authorization.partners.all()
+            for partner in partners:
+                response_manual_partners.append(partner)
+
+        # Check for manual auths
+        for partner in manual_partners:
+            self.assertTrue(partner in response_manual_partners)
 
     def test_return_authorization(self):
         # Simulate a valid user trying to return their access
