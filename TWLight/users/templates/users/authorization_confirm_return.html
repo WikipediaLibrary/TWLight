@@ -7,7 +7,7 @@
     {% csrf_token %}
     <p>
       {% comment %} Translators: This message is displayed on the confirmation page where users can return their access to partner collections. {% endcomment %}
-    {% blocktrans trimmed with object.partner as partner %}
+    {% blocktrans trimmed with object.partners.get as partner %}
       You will no longer be able to access <b>{{ partner }}'s</b> resources via the Library Card platform, but can request access again
       by clicking 'renew', if you change your mind. Are you sure you want to return your access?
     {% endblocktrans %}
