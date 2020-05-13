@@ -726,18 +726,6 @@ class Authorization(models.Model):
         except Application.DoesNotExist:
             return None
 
-    def get_access_url(self):
-        """
-        For this authorization, which URL - if any - will users click to get to the collection?
-        Returns a string if an access URL exists, and None if it doesn't.
-        """
-        if self.stream:
-            access_url = self.stream.get_access_url
-        else:
-            access_url = self.partners.get_access_url
-
-        return access_url
-
     @property
     def about_to_expire(self):
         # less than 30 days but greater than -1 day is when we consider an authorization about to expire
