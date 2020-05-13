@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-05-11 15:46+0000\n"
+"POT-Creation-Date: 2020-05-13 14:11+0000\n"
 "PO-Revision-Date: 2020-05-07 15:20:37+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:398
 #: TWLight/resources/templates/resources/partner_tile.html:97
 #: TWLight/templates/base.html:151 TWLight/templates/home.html:97
-#: TWLight/users/templates/users/collection_tile.html:115
+#: TWLight/users/templates/users/collection_tile.html:121
 msgid "Apply"
 msgstr ""
 
@@ -1793,27 +1793,27 @@ msgid ""
 "optional otherwise."
 msgstr ""
 
-#: TWLight/resources/models.py:556
+#: TWLight/resources/models.py:567
 msgid "Optional image file that can be used to represent this partner."
 msgstr ""
 
-#: TWLight/resources/models.py:586
+#: TWLight/resources/models.py:597
 msgid ""
 "Name of stream (e.g. 'Health and Behavioral Sciences). Will be user-visible "
 "and *not translated*. Do not include the name of the partner here."
 msgstr ""
 
-#: TWLight/resources/models.py:597
+#: TWLight/resources/models.py:608
 msgid ""
 "Add number of new accounts to the existing value, not by reseting it to zero."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add a description of a collection of resources.
-#: TWLight/resources/models.py:605
+#: TWLight/resources/models.py:616
 msgid "Optional description of this stream's resources."
 msgstr ""
 
-#: TWLight/resources/models.py:615
+#: TWLight/resources/models.py:626
 msgid ""
 "Which authorization method does this collection use? 'Email' means the "
 "accounts are set up via email, and is the default. Select 'Access Codes' if "
@@ -1828,62 +1828,62 @@ msgstr ""
 "* 'Link' must have the same translation than {{msg-wm|Wikipedia-library-"
 "d05170-Link}}."
 
-#: TWLight/resources/models.py:629
+#: TWLight/resources/models.py:640
 msgid ""
 "Link to collection. Required for proxied collections; optional otherwise."
 msgstr ""
 
-#: TWLight/resources/models.py:638
+#: TWLight/resources/models.py:649
 msgid ""
 "Optional instructions for editors to use access codes or free signup URLs "
 "for this collection. Sent via email upon application approval (for links) or "
 "access code assignment."
 msgstr ""
 
-#: TWLight/resources/models.py:698
+#: TWLight/resources/models.py:709
 msgid ""
 "Organizational role or job title. This is NOT intended to be used for "
 "honorifics. Think 'Director of Editorial Services', not 'Ms.' Optional."
 msgstr ""
 
-#: TWLight/resources/models.py:709
+#: TWLight/resources/models.py:720
 msgid ""
 "The form of the contact person's name to use in email greetings (as in 'Hi "
 "Jake')"
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add partner suggestions.
-#: TWLight/resources/models.py:729
+#: TWLight/resources/models.py:740
 msgid "Potential partner's name (e.g. McFarland)."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide a description of a potential partner.
-#: TWLight/resources/models.py:736
+#: TWLight/resources/models.py:747
 msgid "Optional description of this potential partner."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link to a potential partner's website.
-#: TWLight/resources/models.py:743
+#: TWLight/resources/models.py:754
 msgid "Link to the potential partner's website."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link a user as the author to a suggestion.
-#: TWLight/resources/models.py:753
+#: TWLight/resources/models.py:764
 msgid "User who authored this suggestion."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can link multiple users to a suggestion (as upvotes).
-#: TWLight/resources/models.py:760
+#: TWLight/resources/models.py:771
 msgid "Users who have upvoted this suggestion."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can provide links to help videos (if any) for a partner.
-#: TWLight/resources/models.py:786
+#: TWLight/resources/models.py:797
 msgid "URL of a video tutorial."
 msgstr ""
 
 #. Translators: In the administrator interface, this text is help text for a field where staff can add an access code for a partner, to be used by editors when signing up for access.
-#: TWLight/resources/models.py:812
+#: TWLight/resources/models.py:823
 msgid "An access code for this partner."
 msgstr ""
 
@@ -2219,11 +2219,7 @@ msgid "No partners meet the specified criteria."
 msgstr ""
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
-#. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate partner.
-#. Translators: Alt text for publisher logos on the my library page. Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:33
-#: TWLight/users/templates/users/collection_tile.html:48
-#: TWLight/users/templates/users/collection_tile.html:66
 #, python-format
 msgid "Link to %(partner)s signup page"
 msgstr ""
@@ -3256,23 +3252,35 @@ msgstr ""
 msgid "Click to return this access"
 msgstr ""
 
-#. Translators: Title for logo in tiles that are linked to an external website. Don't translate partner.
-#. Translators: Alt text for publisher logos on the my library page. Don't translate partner.
+#. Translators: Title for logo in tiles that are linked to an external website. Don't translate each_partner.
 #: TWLight/users/templates/users/collection_tile.html:38
-#: TWLight/users/templates/users/collection_tile.html:56
 #, python-format
-msgid "Link to %(partner)s's external website"
+msgid "External link to %(each_partner)s's website"
 msgstr ""
 
-#. Translators: Title for logo in tiles that are linked to an external website. Don't translate each_authorization.stream.
+#. Translators: Title for logo in tiles that are linked to an external website. Don't translate stream.
 #: TWLight/users/templates/users/collection_tile.html:43
 #: TWLight/users/templates/users/collection_tile.html:61
 #, python-format
 msgid "Link to %(stream)s's external website"
 msgstr ""
 
+#. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate each_partner.
+#. Translators: Alt text for publisher logos on the my library page. Don't translate each_partner.
+#: TWLight/users/templates/users/collection_tile.html:48
+#: TWLight/users/templates/users/collection_tile.html:66
+#, python-format
+msgid "Link to %(each_partner)s signup page"
+msgstr ""
+
+#. Translators: Alt text for publisher logos on the my library page. Don't translate each_partner.
+#: TWLight/users/templates/users/collection_tile.html:56
+#, python-format
+msgid "Link to %(each_partner)s's external website"
+msgstr ""
+
 #. Translators: Users can click this button to access a collection they have access to.
-#: TWLight/users/templates/users/collection_tile.html:84
+#: TWLight/users/templates/users/collection_tile.html:90
 #, fuzzy
 #| msgid "Access codes"
 msgid "Access collection"
@@ -3281,37 +3289,37 @@ msgstr ""
 "Which_authorization_method_doe}}."
 
 #. Translators: Users can click this button to be taken to the website for a collection.
-#: TWLight/users/templates/users/collection_tile.html:87
+#: TWLight/users/templates/users/collection_tile.html:93
 msgid "Go to site"
 msgstr ""
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
-#: TWLight/users/templates/users/collection_tile.html:99
+#: TWLight/users/templates/users/collection_tile.html:105
 msgid "Renewals are not available for this partner"
 msgstr ""
 
 #. Translators: Labels a button users can click to extend the duration of their access.
-#: TWLight/users/templates/users/collection_tile.html:103
+#: TWLight/users/templates/users/collection_tile.html:109
 msgid "Extend"
 msgstr ""
 
 #. Translators: Labels a button users can click to renew an expired account.
-#: TWLight/users/templates/users/collection_tile.html:106
+#: TWLight/users/templates/users/collection_tile.html:112
 msgid "Renew"
 msgstr ""
 
 #. Translators: Labels a button users can click to view an application requesting access to a resource.
-#: TWLight/users/templates/users/collection_tile.html:123
+#: TWLight/users/templates/users/collection_tile.html:129
 msgid "View application"
 msgstr ""
 
 #. Translators: Text beside the date on which the authorization has expired.
-#: TWLight/users/templates/users/collection_tile.html:130
+#: TWLight/users/templates/users/collection_tile.html:136
 msgid "Expired on"
 msgstr ""
 
 #. Translators: Text beside the date on which the authorization will expire.
-#: TWLight/users/templates/users/collection_tile.html:133
+#: TWLight/users/templates/users/collection_tile.html:139
 msgid "Expires on"
 msgstr ""
 
@@ -3532,27 +3540,29 @@ msgid ""
 "already requested a renewal."
 msgstr ""
 
+#. Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
 #: TWLight/users/templates/users/my_library.html:21
 msgid "Instant access"
 msgstr ""
 
+#. Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually.
 #: TWLight/users/templates/users/my_library.html:36
 msgid "Individual access"
 msgstr ""
 
 #. Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections.
-#: TWLight/users/templates/users/my_library.html:60
+#: TWLight/users/templates/users/my_library.html:62
 msgid "You have no active proxy/bundle collections."
 msgstr ""
 
 #. Translators: Heading for the section which lists all of the user's expired collection.
-#: TWLight/users/templates/users/my_library.html:66
-#: TWLight/users/templates/users/my_library.html:99
+#: TWLight/users/templates/users/my_library.html:68
+#: TWLight/users/templates/users/my_library.html:105
 msgid "Expired"
 msgstr ""
 
 #. Translators: On the collection page (manual access tab), this text is displayed when the user has no active collections.
-#: TWLight/users/templates/users/my_library.html:93
+#: TWLight/users/templates/users/my_library.html:99
 msgid "You have no active manual access collections."
 msgstr ""
 
