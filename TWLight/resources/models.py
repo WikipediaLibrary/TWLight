@@ -498,6 +498,18 @@ class Partner(models.Model):
                     ]
                 }
             )
+        if (
+            self.authorization_method in [self.PROXY, self.BUNDLE]
+            and not self.target_url
+        ):
+            raise ValidationError(
+                {
+                    "target_url": [
+                        "For partners accessed via proxy, a "
+                        "target URL is required."
+                    ]
+                }
+            )
 
     def get_absolute_url(self):
         return reverse_lazy("partners:detail", kwargs={"pk": self.pk})
