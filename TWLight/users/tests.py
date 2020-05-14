@@ -406,9 +406,9 @@ class ViewsTestCase(TestCase):
             "proxy_bundle_authorizations"
         ]
         response_proxy_bundle_partners = []
-        for each_authorization in response_proxy_bundle_auths:
-            self.assertEqual(each_authorization.user, self.user_editor)
-            partners = each_authorization.partners.all()
+        for collection in response_proxy_bundle_auths:
+            self.assertEqual(collection["authorization"].user, self.user_editor)
+            partners = collection["authorization"].partners.all()
             for partner in partners:
                 response_proxy_bundle_partners.append(partner)
 
@@ -424,9 +424,9 @@ class ViewsTestCase(TestCase):
         manual_partners = [partner3]
         response_manual_auths = response.context_data["manual_authorizations"]
         response_manual_partners = []
-        for each_authorization in response_manual_auths:
-            self.assertEqual(each_authorization.user, self.user_editor)
-            partners = each_authorization.partners.all()
+        for collection in response_manual_auths:
+            self.assertEqual(collection["authorization"].user, self.user_editor)
+            partners = collection["authorization"].partners.all()
             for partner in partners:
                 response_manual_partners.append(partner)
 

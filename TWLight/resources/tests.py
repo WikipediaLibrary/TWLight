@@ -812,9 +812,6 @@ class BundlePartnerTest(TestCase):
         self.editor = EditorFactory()
         self.editor.wp_bundle_eligible = True
         self.editor.save()
-        # This should create an authorization linked to
-        # bundle partners.
-        self.editor.update_bundle_authorization()
 
     def test_switching_partner_to_bundle_updates_auths(self):
         """
@@ -822,6 +819,10 @@ class BundlePartnerTest(TestCase):
         method to Bundle, existing bundle authorizations
         should be updated to include it.
         """
+        # This should create an authorization linked to
+        # bundle partners.
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -839,6 +840,8 @@ class BundlePartnerTest(TestCase):
         method to non-Bundle, existing bundle authorizations
         should be updated to remove it.
         """
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -856,6 +859,8 @@ class BundlePartnerTest(TestCase):
         not available, existing bundle authorizations
         should be updated to add it.
         """
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -872,6 +877,8 @@ class BundlePartnerTest(TestCase):
         When a partner is marked as not available, existing bundle
         authorizations should be updated to add it.
         """
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -888,6 +895,8 @@ class BundlePartnerTest(TestCase):
         Changing the availability of a PROXY partner should make no
         changes to bundle auths
         """
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -905,6 +914,8 @@ class BundlePartnerTest(TestCase):
         to a non-bundle authorization should not make any changes
         to bundle auths
         """
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -921,6 +932,8 @@ class BundlePartnerTest(TestCase):
         Creating a new partner with the BUNDLE authorization method
         immediately should add to existing Bundle authorizations.
         """
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -938,6 +951,8 @@ class BundlePartnerTest(TestCase):
         Creating a new partner with the BUNDLE authorization method
         but NOT_AVAILABLE status should not change existing auths
         """
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -955,6 +970,8 @@ class BundlePartnerTest(TestCase):
         Creating a new partner with the PROXY authorization method
         should make no change to existing Bundle authorizations
         """
+        self.editor.update_bundle_authorization()
+
         bundle_authorization = Authorization.objects.filter(
             user=self.editor.user, partners__authorization_method=Partner.BUNDLE
         ).distinct()
@@ -964,3 +981,43 @@ class BundlePartnerTest(TestCase):
         _ = PartnerFactory(authorization_method=Partner.PROXY, status=Partner.AVAILABLE)
 
         self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+    def test_switching_partner_to_bundle_deletes_previous_auths(self):
+        """
+        Users may have previously had an authorization to a partner that
+        we switch to Bundle. When switching a partner to Bundle, they
+        should be deleted and we should only have a single Bundle auth.
+        """
+        # Before we create the user's Bundle authorizations, let's
+        # give them an authorization to the Proxy partner.
+
+        application = ApplicationFactory(
+            partner=self.proxy_partner_1, editor=self.editor, status=Application.PENDING
+        )
+
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        application.status = Application.APPROVED
+        application.sent_by = coordinator.user
+        application.save()
+
+        # We should now have an auth for this user to this partner
+        try:
+            authorization = Authorization.objects.get(
+                user=self.editor.user,
+                partners=Partner.objects.filter(pk=self.proxy_partner_1.pk),
+            )
+        except Authorization.DoesNotExist:
+            self.fail("Authorization wasn't created in the first place.")
+
+        self.editor.update_bundle_authorization()
+
+        self.proxy_partner_1.authorization_method = Partner.BUNDLE
+        self.proxy_partner_1.save()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Ultimately we should have one Bundle authorization
+        self.assertEqual(bundle_authorization.count(), 1)

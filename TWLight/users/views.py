@@ -45,6 +45,7 @@ from .forms import (
     UserEmailForm,
     CoordinatorEmailForm,
 )
+from .helpers.authorizations import sort_authorizations_into_resource_list
 from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
@@ -652,7 +653,7 @@ class TermsView(UpdateView):
                 )
 
             messages.add_message(self.request, messages.WARNING, fail_msg)
-            return reverse_lazy("users:home")
+            return reverse_lazy("homepage")
 
 
 class AuthorizedUsers(APIView):
@@ -763,12 +764,26 @@ class CollectionUserView(SelfOnly, ListView):
                             except Application.DoesNotExist:
                                 each_authorization.open_app = None
 
-        context["proxy_bundle_authorizations"] = proxy_bundle_authorizations
+        # Sort the querysets into more useful lists
+        manual_authorizations_list = sort_authorizations_into_resource_list(
+            manual_authorizations
+        )
+        manual_authorizations_expired_list = sort_authorizations_into_resource_list(
+            manual_authorizations_expired
+        )
+        proxy_bundle_authorizations_list = sort_authorizations_into_resource_list(
+            proxy_bundle_authorizations
+        )
+        proxy_bundle_authorizations_expired_list = sort_authorizations_into_resource_list(
+            proxy_bundle_authorizations_expired
+        )
+
+        context["proxy_bundle_authorizations"] = proxy_bundle_authorizations_list
         context[
             "proxy_bundle_authorizations_expired"
-        ] = proxy_bundle_authorizations_expired
-        context["manual_authorizations"] = manual_authorizations
-        context["manual_authorizations_expired"] = manual_authorizations_expired
+        ] = proxy_bundle_authorizations_expired_list
+        context["manual_authorizations"] = manual_authorizations_list
+        context["manual_authorizations_expired"] = manual_authorizations_expired_list
         return context
 
 
