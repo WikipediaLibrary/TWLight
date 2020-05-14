@@ -82,7 +82,10 @@
       {% trans "Satisfies minimum account age?" %}
   </div>
   <div class="col-xs-12 col-sm-9">
-      {% if editor.wp_account_old_enough %}
+      {% if not editor.wp_editcount_prev %}
+          {% comment %} Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
+          <i>{% trans "Unknown (requires user login)" %}</i>
+      {% elif editor.wp_account_old_enough %}
           {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
           {% trans "Yes" %}
       {% else %}
@@ -96,7 +99,10 @@
       {% trans "Satisfies minimum edit count?" %}
   </div>
   <div class="col-xs-12 col-sm-9">
-      {% if editor.wp_enough_edits %}
+      {% if not editor.wp_editcount_prev %}
+          {% comment %} Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
+          <i>{% trans "Unknown (requires user login)" %}</i>
+      {% elif editor.wp_enough_edits %}
           {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
           {% trans "Yes" %}
       {% else %}
@@ -110,7 +116,10 @@
       {% trans "Is not blocked on any project?" %}
   </div>
   <div class="col-xs-12 col-sm-9">
-      {% if editor.wp_not_blocked %}
+      {% if not editor.wp_editcount_prev %}
+          {% comment %} Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
+          <i>{% trans "Unknown (requires user login)" %}</i>
+      {% elif editor.wp_not_blocked %}
           {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
           {% trans "Yes" %}
       {% else %}
@@ -140,7 +149,10 @@
         </p>
     </div>
     <div class="col-xs-12 col-sm-9">
-        {% if editor.wp_bundle_eligible %}
+        {% if not editor.wp_editcount_prev %}
+            {% comment %} Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
+            <i>{% trans "Unknown (requires user login)" %}</i>
+        {% elif editor.wp_bundle_eligible %}
             {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle. {% endcomment %}
             {% trans "Yes" %}
         {% else %}
@@ -154,7 +166,10 @@
         {% trans "Satisfies recent edit count?" %}
     </div>
     <div class="col-xs-12 col-sm-9">
-        {% if editor.wp_enough_recent_edits %}
+        {% if not editor.wp_editcount_prev %}
+            {% comment %} Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
+            <i>{% trans "Unknown (requires user login)" %}</i>
+        {% elif editor.wp_enough_recent_edits %}
             {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle. {% endcomment %}
             {% trans "Yes" %}
         {% else %}
