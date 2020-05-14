@@ -84,17 +84,6 @@ class OAuthBackend(object):
         # wiki userID should be unique, and limited to ASCII.
         return "{sub}".format(sub=identity["sub"])
 
-    def _meets_minimum_requirement(self, identity):
-        """
-        If the user is not confirmed (or autoconfirmed), they are not allowed
-        to log in to the site at all.
-        This needs to be reworked to actually check against global_userinfo.
-        """
-        if "autoconfirmed" in identity["rights"] or "confirmed" in identity["rights"]:
-            return True
-
-        return False
-
     def _create_user(self, identity):
         # This can't be super informative because we don't want to log
         # identities.
