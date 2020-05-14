@@ -99,15 +99,10 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
     If this partner was just switched to Bundle from a non-Bundle
     authorization method, update any existing Bundle authorizations
     to include it, and vice-versa, including if it was marked not-available.
+    Also delete any authorizations that previously existed to this partner.
     """
     add_to_auths = False
     remove_from_auths = False
-
-    authorizations_to_update = get_all_bundle_authorizations()
-    # If no Bundle authorizations exist, we don't have anything
-    # else to do here, so just return
-    if not authorizations_to_update:
-        return
 
     try:
         previous_data = Partner.even_not_available.get(pk=instance.pk)
@@ -140,10 +135,20 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
 
     # Let's avoid db queries if we don't need them
     if add_to_auths or remove_from_auths:
+        authorizations_to_update = get_all_bundle_authorizations()
 
         if add_to_auths:
+            # Before updating Bundle auths, let's delete any
+            # previously existing authorizations for this partner
+            all_partner_authorizations = Authorization.objects.filter(
+                partners__pk=instance.pk
+            )
+            for defunct_authorization in all_partner_authorizations:
+                defunct_authorization.delete()
+
             for authorization in authorizations_to_update:
                 authorization.partners.add(instance)
+
         elif remove_from_auths:
             for authorization in authorizations_to_update:
                 authorization.partners.remove(instance)
