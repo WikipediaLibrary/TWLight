@@ -652,7 +652,7 @@ class TermsView(UpdateView):
                 )
 
             messages.add_message(self.request, messages.WARNING, fail_msg)
-            return reverse_lazy("users:home")
+            return reverse_lazy("homepage")
 
 
 class AuthorizedUsers(APIView):
