@@ -86,9 +86,11 @@ class OAuthBackend(object):
 
     def _meets_minimum_requirement(self, identity):
         """
+        If the user is not confirmed (or autoconfirmed), they are not allowed
+        to log in to the site at all.
         This needs to be reworked to actually check against global_userinfo.
         """
-        if "autoconfirmed" in identity["rights"]:
+        if "autoconfirmed" in identity["rights"] or "confirmed" in identity["rights"]:
             return True
 
         return False
