@@ -45,7 +45,7 @@ from .forms import (
     UserEmailForm,
     CoordinatorEmailForm,
 )
-from .helpers.authorizations import sort_authorizations_into_my_library_list
+from .helpers.authorizations import sort_authorizations_into_resource_list
 from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
@@ -765,16 +765,16 @@ class CollectionUserView(SelfOnly, ListView):
                                 each_authorization.open_app = None
 
         # Sort the querysets into more useful lists
-        manual_authorizations_list = sort_authorizations_into_my_library_list(
+        manual_authorizations_list = sort_authorizations_into_resource_list(
             manual_authorizations
         )
-        manual_authorizations_expired_list = sort_authorizations_into_my_library_list(
+        manual_authorizations_expired_list = sort_authorizations_into_resource_list(
             manual_authorizations_expired
         )
-        proxy_bundle_authorizations_list = sort_authorizations_into_my_library_list(
+        proxy_bundle_authorizations_list = sort_authorizations_into_resource_list(
             proxy_bundle_authorizations
         )
-        proxy_bundle_authorizations_expired_list = sort_authorizations_into_my_library_list(
+        proxy_bundle_authorizations_expired_list = sort_authorizations_into_resource_list(
             proxy_bundle_authorizations_expired
         )
 
