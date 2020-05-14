@@ -992,9 +992,7 @@ class BundlePartnerTest(TestCase):
         # give them an authorization to the Proxy partner.
 
         application = ApplicationFactory(
-            partner=self.proxy_partner_1,
-            editor=self.editor,
-            status=Application.PENDING
+            partner=self.proxy_partner_1, editor=self.editor, status=Application.PENDING
         )
 
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -1007,7 +1005,7 @@ class BundlePartnerTest(TestCase):
         try:
             authorization = Authorization.objects.get(
                 user=self.editor.user,
-                partners=Partner.objects.filter(pk=self.proxy_partner_1.pk)
+                partners=Partner.objects.filter(pk=self.proxy_partner_1.pk),
             )
         except Authorization.DoesNotExist:
             self.fail("Authorization wasn't created in the first place.")
