@@ -48,14 +48,14 @@ def get_valid_partner_authorizations(partner_pk, stream_pk=None):
         return Authorization.objects.none()
 
 
-def sort_authorizations_into_my_library_list(authorizations):
+def sort_authorizations_into_resource_list(authorizations):
     """
     Given a queryset of Authorization objects, return a
     list of dictionaries, sorted alphabetically by partner
     or stream name, with additional data computed for ease
     of display in the my_library template.
     """
-    authorization_list = []
+    resource_list = []
     if authorizations:
         for authorization in authorizations:
             for partner in authorization.partners.all():
@@ -66,8 +66,8 @@ def sort_authorizations_into_my_library_list(authorizations):
                     name_string = stream.name
                 else:
                     name_string = partner.company_name
-                authorization_list.append({"name": name_string})
-                this_item = authorization_list[-1]
+                resource_list.append({"name": name_string})
+                this_item = resource_list[-1]
 
                 this_item["partner"] = partner
                 this_item["authorization"] = authorization
@@ -83,8 +83,8 @@ def sort_authorizations_into_my_library_list(authorizations):
                 this_item['valid_authorization_with_access_url'] = access_url and valid_authorization and authorization.user.userprofile.terms_of_use
 
         # Alphabetise by name
-        authorization_list = sorted(authorization_list, key=lambda i: i["name"])
+        resource_list = sorted(resource_list, key=lambda i: i["name"])
 
-        return authorization_list
+        return resource_list
     else:
         return None
