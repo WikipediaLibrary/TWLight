@@ -50,9 +50,9 @@
     ">
       <br>
       <div class="row row-flex">
-        {% for collection in proxy_bundle_authorizations %}
+        {% for resource in proxy_bundle_authorizations %}
           <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
+            {% include "users/resource_tile.html" %}
           </div>
         {% empty %}
           <div class="col-xs-12">
@@ -67,9 +67,9 @@
         <hr>
       {% endif %}
       <div class="row row-flex">
-        {% for collection in proxy_bundle_authorizations_expired %}
+        {% for resource in proxy_bundle_authorizations_expired %}
           <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
+            {% include "users/resource_tile.html" %}
           </div>
         {% endfor %}
       </div>
@@ -83,9 +83,9 @@
     ">
       <br>
       <div class="row row-flex">
-        {% for collection in manual_authorizations %}
+        {% for resource in manual_authorizations %}
           <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
+            {% include "users/resource_tile.html" %}
           </div>
         {% empty %}
           <div class="col-xs-12">
@@ -100,9 +100,9 @@
         <hr>
       {% endif %}
       <div class="row row-flex">
-        {% for collection in manual_authorizations_expired %}
+        {% for resource in manual_authorizations_expired %}
           <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-            {% include "users/collection_tile.html" %}
+            {% include "users/resource_tile.html" %}
           </div>
         {% endfor %}
       </div>
