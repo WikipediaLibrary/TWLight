@@ -79,8 +79,15 @@ def sort_authorizations_into_resource_list(authorizations):
                 this_item["access_url"] = access_url
 
                 valid_authorization = authorization.is_valid
-                this_item['valid_proxy_authorization'] = partner.authorization_method == partner.PROXY and valid_authorization
-                this_item['valid_authorization_with_access_url'] = access_url and valid_authorization and authorization.user.userprofile.terms_of_use
+                this_item["valid_proxy_authorization"] = (
+                    partner.authorization_method == partner.PROXY
+                    and valid_authorization
+                )
+                this_item["valid_authorization_with_access_url"] = (
+                    access_url
+                    and valid_authorization
+                    and authorization.user.userprofile.terms_of_use
+                )
 
         # Alphabetise by name
         resource_list = sorted(resource_list, key=lambda i: i["name"])
