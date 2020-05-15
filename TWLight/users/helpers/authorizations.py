@@ -53,7 +53,7 @@ def create_resource_dict(name, authorization, partner, stream):
         "name": name,
         "partner": partner,
         "authorization": authorization,
-        "stream": stream
+        "stream": stream,
     }
 
     if stream:
@@ -64,13 +64,12 @@ def create_resource_dict(name, authorization, partner, stream):
 
     valid_authorization = authorization.is_valid
     resource_item["valid_proxy_authorization"] = (
-            partner.authorization_method == partner.PROXY
-            and valid_authorization
+        partner.authorization_method == partner.PROXY and valid_authorization
     )
     resource_item["valid_authorization_with_access_url"] = (
-            access_url
-            and valid_authorization
-            and authorization.user.userprofile.terms_of_use
+        access_url
+        and valid_authorization
+        and authorization.user.userprofile.terms_of_use
     )
 
     return resource_item
@@ -88,9 +87,7 @@ def sort_authorizations_into_resource_list(authorizations):
         for authorization in authorizations:
             for partner in authorization.partners.all():
                 stream = authorization.stream
-                partner_streams = Stream.objects.filter(
-                    partner=partner
-                )
+                partner_streams = Stream.objects.filter(partner=partner)
                 if partner_streams and not stream:
                     # If this authorization wasn't to a specific stream, but the
                     # partner has streams, we assume that means all streams
@@ -100,10 +97,8 @@ def sort_authorizations_into_resource_list(authorizations):
                     for stream in partner_streams:
                         resource_list.append(
                             create_resource_dict(
-                                stream.name,
-                                authorization,
-                                partner,
-                                stream)
+                                stream.name, authorization, partner, stream
+                            )
                         )
                 else:
                     # Name this item according to whether this authorization is
@@ -115,10 +110,7 @@ def sort_authorizations_into_resource_list(authorizations):
 
                     resource_list.append(
                         create_resource_dict(
-                            name_string,
-                            authorization,
-                            partner,
-                            stream
+                            name_string, authorization, partner, stream
                         )
                     )
 
