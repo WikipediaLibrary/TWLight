@@ -645,22 +645,6 @@ class TermsView(UpdateView):
             self.get_object().terms_of_use_date = None
             self.get_object().save()
 
-            if self.request.user in coordinators.user_set.all():
-                # Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-                fail_msg = _(
-                    "You may explore the site, but you will not be "
-                    "able to apply for access to materials or evaluate "
-                    "applications unless you agree with the terms of use."
-                )
-            else:
-                # Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-                fail_msg = _(
-                    "You may explore the site, but you will not be "
-                    "able to apply for access unless you agree with "
-                    "the terms of use."
-                )
-
-            messages.add_message(self.request, messages.WARNING, fail_msg)
             return reverse_lazy("homepage")
 
 
