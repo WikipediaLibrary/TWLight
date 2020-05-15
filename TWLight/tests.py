@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, Client
 
 
 from rest_framework.test import APIRequestFactory, force_authenticate
@@ -894,6 +894,115 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
                 # Clear out the expiration date on those.
                 partner2_auth.date_expires = None
                 partner2_auth.save()
+
+        # Save partner 2
+        self.partner2.save()
+        self.partner2.refresh_from_db()
+        # Count partner 2 apps with an expiration date post_save.
+        post_save_partner2_auths_with_expiry_count = 0
+        post_save_partner2_auths_with_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=False
+        )
+        for partner2_auth in post_save_partner2_auths_with_expiry:
+            if partner2_auth.is_valid:
+                post_save_partner2_auths_with_expiry_count += 1
+
+        # All valid partner 2 authorizations have expiry set.
+        post_save_partner2_auths_no_expiry_count = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=True
+        ).count()
+        self.assertEqual(
+            initial_partner2_auths_with_expiry_count
+            + initial_partner2_auths_no_expiry_count,
+            post_save_partner2_auths_with_expiry_count,
+        )
+
+    def test_authorization_backfill_expiry_date_on_partner_save_with_coordinator_deletion(self):
+        # As above, but this should still work in the case that an authorization's
+        # coordinator deleted their data after authorizing a user.
+        initial_partner2_auths_no_expiry_count = 0
+        initial_partner2_auths_no_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=True
+        )
+        for partner2_auth in initial_partner2_auths_no_expiry:
+            if partner2_auth.is_valid:
+                initial_partner2_auths_no_expiry_count += 1
+
+        # Count partner 2 apps with an expiration date.
+        initial_partner2_auths_with_expiry_count = 0
+        initial_partner2_auths_with_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=False
+        )
+        for partner2_auth in initial_partner2_auths_with_expiry:
+            if partner2_auth.is_valid:
+                initial_partner2_auths_with_expiry_count += 1
+                # Clear out the expiration date on those.
+                partner2_auth.date_expires = None
+                partner2_auth.save()
+
+        # Now have a user with an authorization to partner2 delete their data
+        delete_url = reverse("users:delete_data", kwargs={"pk": self.editor4.user.pk})
+
+        # Need a password so we can login
+        self.editor4.user.set_password("editor")
+        self.editor4.user.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.editor4.user, password="editor")
+
+        submit = self.client.post(delete_url)
+
+        # We get a strange error if we don't refresh the object first.
+        self.partner2.refresh_from_db()
+
+        # Save partner 2
+        self.partner2.save()
+        self.partner2.refresh_from_db()
+        # Count partner 2 apps with an expiration date post_save.
+        post_save_partner2_auths_with_expiry_count = 0
+        post_save_partner2_auths_with_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=False
+        )
+        for partner2_auth in post_save_partner2_auths_with_expiry:
+            if partner2_auth.is_valid:
+                post_save_partner2_auths_with_expiry_count += 1
+
+        # All valid partner 2 authorizations have expiry set.
+        post_save_partner2_auths_no_expiry_count = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=True
+        ).count()
+        self.assertEqual(
+            initial_partner2_auths_with_expiry_count
+            + initial_partner2_auths_no_expiry_count,
+            post_save_partner2_auths_with_expiry_count,
+        )
+
+    def test_authorization_backfill_expiry_date_on_partner_save_with_new_coordinator(self):
+        # As above, but this should still work in the case that the coordinator
+        # for a partner has changed, so Authorizer is no longer in the coordinators
+        # user group.
+        initial_partner2_auths_no_expiry_count = 0
+        initial_partner2_auths_no_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=True
+        )
+        for partner2_auth in initial_partner2_auths_no_expiry:
+            if partner2_auth.is_valid:
+                initial_partner2_auths_no_expiry_count += 1
+
+        # Count partner 2 apps with an expiration date.
+        initial_partner2_auths_with_expiry_count = 0
+        initial_partner2_auths_with_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=False
+        )
+        for partner2_auth in initial_partner2_auths_with_expiry:
+            if partner2_auth.is_valid:
+                initial_partner2_auths_with_expiry_count += 1
+                # Clear out the expiration date on those.
+                partner2_auth.date_expires = None
+                partner2_auth.save()
+
+        get_coordinators().user_set.remove(self.editor4.user)
 
         # Save partner 2
         self.partner2.save()

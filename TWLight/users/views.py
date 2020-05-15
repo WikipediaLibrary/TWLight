@@ -557,6 +557,16 @@ class DeleteDataView(SelfOnly, DeleteView):
             user_authorization.date_expires = date.today() - timedelta(days=1)
             user_authorization.save()
 
+        # Did the user authorize any authorizations?
+        # If so, we need to retain their validity by shifting
+        # the authorizer to TWL Team
+        twl_team = User.objects.get(username="TWL Team")
+        for authorization in Authorization.objects.filter(
+            authorizer=user
+        ):
+            authorization.authorizer = twl_team
+            authorization.save()
+
         user.delete()
 
         return HttpResponseRedirect(self.success_url)
