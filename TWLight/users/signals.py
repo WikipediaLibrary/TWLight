@@ -114,22 +114,20 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
     # New data for this partner for readability
     now_bundle = instance.authorization_method == Partner.BUNDLE
     now_available = instance.status == Partner.AVAILABLE
-    now_not_available = instance.status == Partner.NOT_AVAILABLE
 
     # Previous data for this partner for readability
     previously_available = previous_data.status == Partner.AVAILABLE
-    previously_not_available = previous_data.status == Partner.NOT_AVAILABLE
     previously_bundle = previous_data.authorization_method == Partner.BUNDLE
 
     if now_available:
         if now_bundle:
-            if previously_not_available or not previously_bundle:
+            if not previously_available or not previously_bundle:
                 add_to_auths = True
         else:
             if previously_bundle:
                 remove_from_auths = True
 
-    elif now_not_available:
+    elif not now_available:
         if previously_available and previously_bundle:
             remove_from_auths = True
 
