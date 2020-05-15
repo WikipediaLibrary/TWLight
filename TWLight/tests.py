@@ -940,7 +940,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
                 partner2_auth.date_expires = None
                 partner2_auth.save()
 
-        # Now have a user with an authorization to partner2 delete their data
+        # Now have partner2's coordinator delete their data
         delete_url = reverse("users:delete_data", kwargs={"pk": self.editor4.user.pk})
 
         # Need a password so we can login
@@ -1002,6 +1002,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
                 partner2_auth.date_expires = None
                 partner2_auth.save()
 
+        # editor4 stops being a coordinator
         get_coordinators().user_set.remove(self.editor4.user)
 
         # Save partner 2
