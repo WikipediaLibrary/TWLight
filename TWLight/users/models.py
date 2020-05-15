@@ -567,12 +567,6 @@ class Authorization(models.Model):
         blank=False,
         null=True,
         on_delete=models.SET_NULL,
-        # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
-        limit_choices_to=(
-            models.Q(is_superuser=True)
-            | models.Q(groups__name="coordinators")
-            | models.Q(username="TWL Team")
-        ),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
         help_text=_("The authorizing user."),
     )
