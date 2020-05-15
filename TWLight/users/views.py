@@ -561,9 +561,7 @@ class DeleteDataView(SelfOnly, DeleteView):
         # If so, we need to retain their validity by shifting
         # the authorizer to TWL Team
         twl_team = User.objects.get(username="TWL Team")
-        for authorization in Authorization.objects.filter(
-            authorizer=user
-        ):
+        for authorization in Authorization.objects.filter(authorizer=user):
             authorization.authorizer = twl_team
             authorization.save()
 
