@@ -95,9 +95,7 @@ def sort_authorizations_into_resource_list(authorizations):
                     name_string = partner.company_name
 
                 resource_list.append(
-                    create_resource_dict(
-                        name_string, authorization, partner, stream
-                    )
+                    create_resource_dict(name_string, authorization, partner, stream)
                 )
 
         # Alphabetise by name
