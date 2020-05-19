@@ -361,14 +361,16 @@ class ApplicationAutocomplete(forms.ModelForm):
             StylableSubmit("submit", "Filter", css_class="btn btn-default"),
         )
 
-        # Required on the model, but optional for autocomplete, so overrride
+        # Required on the model, but optional for autocomplete, so override
         # the default.
         self.fields["editor"].required = False
         self.fields["partner"].required = False
 
         # Internationalize user-visible labels. These will appear inline as
         # placeholders.
+        # Translators: Label of the field where coordinators can enter the username of a users
         self.fields["editor"].label = _("Username")
+        # Translators: Label of the field where coordinators can enter the name of a partner
         self.fields["partner"].label = _("Partner name")
 
 

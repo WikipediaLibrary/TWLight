@@ -77,7 +77,6 @@ class UserProfile(models.Model):
 
     class Meta:
         app_label = "users"
-        # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
         verbose_name = "user profile"
         verbose_name_plural = "user profiles"
 

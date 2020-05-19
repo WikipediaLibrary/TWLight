@@ -333,6 +333,7 @@ class _BaseSubmitApplicationView(
                     data = None
 
                 if data == "[deleted]":
+                    # Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
                     fail_msg = _("This field consists only of restricted text.")
                     form.add_error(label, fail_msg)
                     return self.form_invalid(form)
@@ -474,6 +475,7 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
         )
 
     def get_success_url(self):
+        # Translators: This message is shown to users once they've successfully submitted their application for review.
         messages.add_message(
             self.request,
             messages.SUCCESS,
@@ -596,6 +598,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
                 filters = [
                     # Translators: Editor = wikipedia editor, gender unknown.
                     {"label": _("Editor"), "object": editor},
+                    # Translators: Partner is the resource a user will access.
                     {"label": _("Partner"), "object": partner},
                 ]
             except:
@@ -674,6 +677,7 @@ class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
         filters = [
             # Translators: Editor = wikipedia editor, gender unknown.
             {"label": _("Editor"), "object": editor},
+            # Translators: Partner is the resource a user will access.
             {"label": _("Partner"), "object": partner},
         ]
 
@@ -1504,6 +1508,7 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
                 "Attempt to renew unapproved app #{pk} has been "
                 "denied".format(pk=app.pk)
             )
+            # Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
             messages.add_message(
                 self.request,
                 messages.WARNING,
