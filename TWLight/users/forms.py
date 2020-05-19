@@ -58,7 +58,7 @@ class AuthorizationUserChoiceForm(forms.ModelChoiceField):
 
 class AuthorizationAdminForm(forms.ModelForm):
     """
-    This override only exists to run custom validation for ManyToMany Partner relationship.
+    This override only exists to run custom validation.
     """
 
     class Meta:
