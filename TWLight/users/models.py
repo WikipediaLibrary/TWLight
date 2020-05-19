@@ -37,6 +37,7 @@ import urllib.request, urllib.parse, urllib.error
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
@@ -45,7 +46,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
-from TWLight.users.helpers.validation import validate_partners
+from TWLight.users.helpers.validation import validate_partners, validate_authorizer
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
@@ -567,12 +568,6 @@ class Authorization(models.Model):
         blank=False,
         null=True,
         on_delete=models.SET_NULL,
-        # Really this should be limited to superusers or the associated partner coordinator instead of any coordinator. This object structure needs to change a bit for that to be possible.
-        limit_choices_to=(
-            models.Q(is_superuser=True)
-            | models.Q(groups__name="coordinators")
-            | models.Q(username="TWL Team")
-        ),
         # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
         help_text=_("The authorizing user."),
     )
@@ -786,10 +781,19 @@ class Authorization(models.Model):
 
     def clean(self):
         """
-        Run custom validation for ManyToMany Partner relationship.
-        This only works on updates to existing instances because ManyToMany relationships only exist if the instance is in the db.
-        Those will have a pk.
-        The admin form calls validate_partners before saving, so we are covered between the two.
+        Run custom validations for Authorization objects, both when the
+        object is created and updated, separately
         """
+        # Run custom validation for ManyToMany Partner relationship.
+        # This only works on updates to existing instances because ManyToMany relationships only exist
+        # if the instance is in the db. Those will have a pk.
+        # The admin form calls validate_partners before saving, so we are covered between the two.
         if self.pk:
             validate_partners(self.partners)
+
+        # If the Authorization *is* being created, then we want to validate
+        # that the authorizer field is a user in expected groups.
+        # A user can stop being in one of these groups later, so we
+        # only verify this on object creation.
+        else:
+            validate_authorizer(self.authorizer)

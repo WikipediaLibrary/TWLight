@@ -48,6 +48,33 @@ def get_valid_partner_authorizations(partner_pk, stream_pk=None):
         return Authorization.objects.none()
 
 
+def create_resource_dict(name, authorization, partner, stream):
+    resource_item = {
+        "name": name,
+        "partner": partner,
+        "authorization": authorization,
+        "stream": stream,
+    }
+
+    if stream:
+        access_url = stream.get_access_url
+    else:
+        access_url = partner.get_access_url
+    resource_item["access_url"] = access_url
+
+    valid_authorization = authorization.is_valid
+    resource_item["valid_proxy_authorization"] = (
+        partner.authorization_method == partner.PROXY and valid_authorization
+    )
+    resource_item["valid_authorization_with_access_url"] = (
+        access_url
+        and valid_authorization
+        and authorization.user.userprofile.terms_of_use
+    )
+
+    return resource_item
+
+
 def sort_authorizations_into_resource_list(authorizations):
     """
     Given a queryset of Authorization objects, return a
@@ -59,34 +86,16 @@ def sort_authorizations_into_resource_list(authorizations):
     if authorizations:
         for authorization in authorizations:
             for partner in authorization.partners.all():
+                stream = authorization.stream
                 # Name this item according to whether this authorization is
                 # to a stream
-                stream = authorization.stream
                 if stream:
                     name_string = stream.name
                 else:
                     name_string = partner.company_name
-                resource_list.append({"name": name_string})
-                this_item = resource_list[-1]
 
-                this_item["partner"] = partner
-                this_item["authorization"] = authorization
-                this_item["stream"] = stream
-                if stream:
-                    access_url = stream.get_access_url
-                else:
-                    access_url = partner.get_access_url
-                this_item["access_url"] = access_url
-
-                valid_authorization = authorization.is_valid
-                this_item["valid_proxy_authorization"] = (
-                    partner.authorization_method == partner.PROXY
-                    and valid_authorization
-                )
-                this_item["valid_authorization_with_access_url"] = (
-                    access_url
-                    and valid_authorization
-                    and authorization.user.userprofile.terms_of_use
+                resource_list.append(
+                    create_resource_dict(name_string, authorization, partner, stream)
                 )
 
         # Alphabetise by name

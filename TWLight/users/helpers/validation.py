@@ -3,7 +3,9 @@ from django.db.models import QuerySet
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from modeltranslation.manager import MultilingualQuerySet
+
 from TWLight.resources.models import Partner
+from TWLight.users.groups import get_coordinators
 
 
 def validate_partners(partners: Union[QuerySet, MultilingualQuerySet]):
@@ -23,3 +25,16 @@ def validate_partners(partners: Union[QuerySet, MultilingualQuerySet]):
             raise ValidationError(
                 _("Only Bundle Partners support shared Authorization.")
             )
+
+
+def validate_authorizer(authorizer):
+    coordinators = get_coordinators()
+    authorizer_is_coordinator = authorizer in coordinators.user_set.all()
+    if not authorizer or not (
+        authorizer_is_coordinator
+        or authorizer.is_staff
+        or authorizer.username == "TWL Team"
+    ):
+        raise ValidationError(
+            "Authorization authorizer must be a coordinator or staff."
+        )
