@@ -37,6 +37,7 @@ import urllib.request, urllib.parse, urllib.error
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
@@ -778,12 +779,34 @@ class Authorization(models.Model):
         else:
             return False
 
+    def validate_authorizer(self):
+        authorizer = self.authorizer
+        coordinators = get_coordinators()
+        authorizer_is_coordinator = authorizer in coordinators.user_set.all()
+        if not authorizer or not (
+            authorizer_is_coordinator
+            or authorizer.is_staff
+            or authorizer.username == "TWL Team"
+        ):
+            raise ValidationError(
+                "Authorization authorizer must be a coordinator or staff."
+            )
+
     def clean(self):
         """
-        Run custom validation for ManyToMany Partner relationship.
-        This only works on updates to existing instances because ManyToMany relationships only exist if the instance is in the db.
-        Those will have a pk.
-        The admin form calls validate_partners before saving, so we are covered between the two.
+        Run custom validations for Authorization objects, both when the
+        object is created and updated, separately
         """
+        # Run custom validation for ManyToMany Partner relationship.
+        # This only works on updates to existing instances because ManyToMany relationships only exist
+        # if the instance is in the db. Those will have a pk.
+        # The admin form calls validate_partners before saving, so we are covered between the two.
         if self.pk:
             validate_partners(self.partners)
+
+        # If the Authorization *is* being created, then we want to validate
+        # that the authorizer field is a user in expected groups.
+        # A user can stop being in one of these groups later, so we
+        # only verify this on object creation.
+        else:
+            self.validate_authorizer()
