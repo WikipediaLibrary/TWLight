@@ -46,7 +46,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
-from TWLight.users.helpers.validation import validate_partners
+from TWLight.users.helpers.validation import validate_partners, validate_authorizer
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
@@ -779,19 +779,6 @@ class Authorization(models.Model):
         else:
             return False
 
-    def validate_authorizer(self):
-        authorizer = self.authorizer
-        coordinators = get_coordinators()
-        authorizer_is_coordinator = authorizer in coordinators.user_set.all()
-        if not authorizer or not (
-            authorizer_is_coordinator
-            or authorizer.is_staff
-            or authorizer.username == "TWL Team"
-        ):
-            raise ValidationError(
-                "Authorization authorizer must be a coordinator or staff."
-            )
-
     def clean(self):
         """
         Run custom validations for Authorization objects, both when the
@@ -809,4 +796,4 @@ class Authorization(models.Model):
         # A user can stop being in one of these groups later, so we
         # only verify this on object creation.
         else:
-            self.validate_authorizer()
+            validate_authorizer(self.authorizer)

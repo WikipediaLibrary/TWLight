@@ -12,7 +12,7 @@ from django import forms
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from .helpers.validation import validate_partners
+from .helpers.validation import validate_partners, validate_authorizer
 from .models import Editor, UserProfile, Authorization
 from .groups import get_restricted
 
@@ -68,6 +68,10 @@ class AuthorizationAdminForm(forms.ModelForm):
     def clean_partners(self):
         validate_partners(self.cleaned_data["partners"])
         return self.cleaned_data["partners"]
+
+    def clean_authorizer(self):
+        validate_authorizer(self.cleaned_data["authorizer"])
+        return self.cleaned_data["authorizer"]
 
 
 class AuthorizationInlineForm(forms.ModelForm):
