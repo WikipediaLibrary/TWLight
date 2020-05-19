@@ -85,8 +85,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Have they agreed to our terms?
     terms_of_use = models.BooleanField(
-        default=False,
-        help_text="Has this user agreed with the terms of use?",
+        default=False, help_text="Has this user agreed with the terms of use?"
     )
     terms_of_use_date = models.DateField(
         blank=True,
@@ -95,11 +94,9 @@ class UserProfile(models.Model):
     )
     use_wp_email = models.BooleanField(
         default=True,
-        help_text=
-            "Should we "
-            "automatically update their email from their Wikipedia email when they "
-            "log in? Defaults to True."
-        ,
+        help_text="Should we "
+        "automatically update their email from their Wikipedia email when they "
+        "log in? Defaults to True.",
     )
     lang = models.CharField(
         max_length=128,
@@ -109,8 +106,7 @@ class UserProfile(models.Model):
         help_text="Language",
     )
     send_renewal_notices = models.BooleanField(
-        default=True,
-        help_text="Does this user want renewal reminder notices?",
+        default=True, help_text="Does this user want renewal reminder notices?"
     )
     pending_app_reminders = models.BooleanField(
         default=True,
@@ -146,9 +142,7 @@ class Editor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Set as non-editable.
     date_created = models.DateField(
-        default=now,
-        editable=False,
-        help_text="When this profile was first created",
+        default=now, editable=False, help_text="When this profile was first created"
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
@@ -170,8 +164,7 @@ class Editor(models.Model):
         help_text="Date registered at Wikipedia", blank=True, null=True
     )
     wp_sub = models.IntegerField(
-        unique=True,
-        help_text="Wikipedia user ID",
+        unique=True, help_text="Wikipedia user ID"
     )  # WP user id.
 
     # Should we want to filter these to check for specific group membership or
@@ -184,43 +177,32 @@ class Editor(models.Model):
     wp_valid = models.BooleanField(
         default=False,
         editable=False,
-        help_text=
-            "At their last login, did this user meet the criteria in "
-            "the terms of use?"
-        ,
+        help_text="At their last login, did this user meet the criteria in "
+        "the terms of use?",
     )
     wp_account_old_enough = models.BooleanField(
         default=False,
         editable=False,
-        help_text=
-            "At their last login, did this user meet the account age criterion in "
-            "the terms of use?"
-        ,
+        help_text="At their last login, did this user meet the account age criterion in "
+        "the terms of use?",
     )
     wp_enough_edits = models.BooleanField(
         default=False,
         editable=False,
-        help_text=
-            "At their last login, did this user meet the total editcount criterion in "
-            "the terms of use?"
-        ,
+        help_text="At their last login, did this user meet the total editcount criterion in "
+        "the terms of use?",
     )
     wp_not_blocked = models.BooleanField(
         default=False,
         editable=False,
-
-        help_text=
-            "At their last login, did this user meet the 'not currently blocked' criterion in "
-            "the terms of use?"
-        ,
+        help_text="At their last login, did this user meet the 'not currently blocked' criterion in "
+        "the terms of use?",
     )
     wp_enough_recent_edits = models.BooleanField(
         default=False,
         editable=False,
-        help_text=
-            "At their last login, did this user meet the recent editcount criterion in "
-            "the terms of use?"
-        ,
+        help_text="At their last login, did this user meet the recent editcount criterion in "
+        "the terms of use?",
     )
     wp_editcount_prev_updated = models.DateTimeField(
         default=None,
@@ -249,9 +231,7 @@ class Editor(models.Model):
     wp_bundle_eligible = models.BooleanField(
         default=False,
         editable=False,
-        help_text=
-            "At their last login, did this user meet the criteria for access to the library card bundle?"
-        ,
+        help_text="At their last login, did this user meet the criteria for access to the library card bundle?",
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Staff-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -262,8 +242,7 @@ class Editor(models.Model):
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     contributions = models.TextField(
-        help_text="Wiki contributions, as entered by user",
-        blank=True,
+        help_text="Wiki contributions, as entered by user", blank=True
     )
 
     # Fields we may, or may not, have collected in the course of applications
@@ -544,9 +523,7 @@ class Authorization(models.Model):
     date_authorized = models.DateField(auto_now_add=True)
 
     date_expires = models.DateField(
-        blank=True,
-        null=True,
-        help_text="The date this authorization expires.",
+        blank=True, null=True, help_text="The date this authorization expires."
     )
 
     partners = models.ManyToManyField(
