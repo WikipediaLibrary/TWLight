@@ -87,32 +87,18 @@ def sort_authorizations_into_resource_list(authorizations):
         for authorization in authorizations:
             for partner in authorization.partners.all():
                 stream = authorization.stream
-                partner_streams = Stream.objects.filter(partner=partner)
-                if partner_streams and not stream:
-                    # If this authorization wasn't to a specific stream, but the
-                    # partner has streams, we assume that means all streams
-                    # need to be included, with the same auth method.
-                    # This is specifically useful for Bundle authorizations to
-                    # partners with multiple streams.
-                    for stream in partner_streams:
-                        resource_list.append(
-                            create_resource_dict(
-                                stream.name, authorization, partner, stream
-                            )
-                        )
+                # Name this item according to whether this authorization is
+                # to a stream
+                if stream:
+                    name_string = stream.name
                 else:
-                    # Name this item according to whether this authorization is
-                    # to a stream
-                    if stream:
-                        name_string = stream.name
-                    else:
-                        name_string = partner.company_name
+                    name_string = partner.company_name
 
-                    resource_list.append(
-                        create_resource_dict(
-                            name_string, authorization, partner, stream
-                        )
+                resource_list.append(
+                    create_resource_dict(
+                        name_string, authorization, partner, stream
                     )
+                )
 
         # Alphabetise by name
         resource_list = sorted(resource_list, key=lambda i: i["name"])
