@@ -2,7 +2,7 @@ import datetime
 
 from django.db.models import Q
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 from TWLight.users.models import Authorization
 
 
