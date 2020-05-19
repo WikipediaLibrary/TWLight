@@ -5,7 +5,7 @@ from faker import Faker
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core import mail
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -1046,6 +1046,68 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         backfill_authorization_count = Authorization.objects.count()
         # All authorizations replaced.
         self.assertEqual(realtime_authorization_count, backfill_authorization_count)
+
+    def test_authorization_authorizer_validation(self):
+        """
+        When an Authorization is created, we validate that
+        the authorizer field is set to a user with an expected
+        group.
+        """
+        user = UserFactory()
+        coordinator_editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        auth = Authorization(user=user, authorizer=coordinator_editor.user)
+        try:
+            auth.save()
+        except ValidationError:
+            self.fail("Authorization authorizer validation failed.")
+
+    def test_authorization_authorizer_validation_staff(self):
+        """
+        The authorizer can be a staff member but not a coordinator.
+        """
+        user = UserFactory()
+        user2 = UserFactory()
+        user2.is_staff = True
+        user2.save()
+
+        auth = Authorization(user=user, authorizer=user2)
+        try:
+            auth.save()
+        except ValidationError:
+            self.fail("Authorization authorizer validation failed.")
+
+    def test_authorization_authorizer_fails_validation(self):
+        """
+        Attempting to create an authorization with a non-coordinator
+        and non-staff user should raise a ValidationError.
+        """
+        user = UserFactory()
+        user2 = UserFactory()
+
+        auth = Authorization(user=user, authorizer=user2)
+        with self.assertRaises(ValidationError):
+            auth.save()
+
+    def test_authorization_authorizer_can_be_updated(self):
+        """
+        After successfully creating a valid Authorization,
+        we should be able to remove the authorizer from
+        the expected user groups and still save the object.
+        """
+        user = UserFactory()
+        coordinator_editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        auth = Authorization(user=user, authorizer=coordinator_editor.user)
+        auth.save()
+
+        coordinators = get_coordinators()
+        coordinators.user_set.remove(coordinator_editor.user)
+
+        try:
+            auth.save()
+        except ValidationError:
+            self.fail("Authorization authorizer validation failed.")
 
 
 class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
