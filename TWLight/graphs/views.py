@@ -329,8 +329,14 @@ class CSVAppDistribution(_CSVDownloadView):
         data = get_application_status_data(csv_queryset, data_format=PYTHON)
 
         writer = csv.DictWriter(response, fieldnames=["label", "data"])
-
-        writer.writerow({"label": _("Status"), "data": _("Number of applications")})
+        # Translators: This is the heading of a data file, denoting the column which contains the status of listed applications
+        writer.writerow(
+            {
+                "label": _("Status"),
+                # Translators: This is the heading of a data file, denoting the column which contains the numbers of listed applications for a given status
+                "data": _("Number of applications"),
+            }
+        )
 
         for row in data:
             writer.writerow(row)
@@ -356,7 +362,13 @@ class CSVPageViews(_CSVDownloadView):
 
         writer = csv.writer(response)
         # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
-        writer.writerow([_("Page URL"), _("Number of (non-unique) visitors")])
+        writer.writerow(
+            [
+                _("Page URL"),
+                # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. This describes the column that lists the number of unique site visitors.
+                _("Number of (non-unique) visitors"),
+            ]
+        )
 
         for elem in path_list:
             row = [elem["path"], elem["the_count"]]
@@ -368,6 +380,7 @@ class CSVPageViewsByPath(_CSVDownloadView):
         if request.user.is_staff:
             return super(CSVPageViewsByPath, self).dispatch(request, *args, **kwargs)
         else:
+            # Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
             messages.add_message(
                 request, messages.WARNING, _("You must be staff to do that.")
             )
@@ -388,8 +401,9 @@ class CSVPageViewsByPath(_CSVDownloadView):
 
         writer.writerow(
             [
+                # Translators: This is the heading for a downloadable data file showing the number of visitors to each page (by path) on the website. Page URL is the column which lists the URL of each page
                 _("Page URL"),
-                # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website.
+                # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. This describes the column that lists the number of unique site visitors.
                 _("Number of (non-unique) visitors"),
             ]
         )
@@ -405,8 +419,14 @@ class CSVUserLanguage(_CSVDownloadView):
         data = get_user_language_data(csv_queryset, data_format=PYTHON)
 
         writer = csv.DictWriter(response, fieldnames=["label", "data"])
-
-        writer.writerow({"label": _("Language"), "data": _("Number of users")})
+        # Translators: This is the heading of a data file, denoting the column which lists all the available language on the platform
+        writer.writerow(
+            {
+                "label": _("Language"),
+                # Translators: This is the heading of a data file, denoting the column which lists the number of users using a particular language against each available language on the platform
+                "data": _("Number of users"),
+            }
+        )
 
         for row in data:
             writer.writerow(row)
