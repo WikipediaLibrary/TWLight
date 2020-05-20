@@ -210,6 +210,12 @@ def post_revision_commit(sender, instance, **kwargs):
         authorization.save()
         authorization.partners.add(instance.partner)
 
+        # If we just finalised a renewal, reset reminder_email_sent
+        # so that we can send further reminders.
+        if instance.parent and authorization.reminder_email_sent:
+            authorization.reminder_email_sent = False
+            authorization.save()
+
 
 @receiver(post_save, sender=Partner)
 @receiver(post_save, sender=Stream)
