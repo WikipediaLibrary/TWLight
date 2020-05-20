@@ -41,16 +41,19 @@
           </a>
           {% if field.field.widget.attrs.object.is_waitlisted %}
             <span class="label label-warning">
+              {% comment %} Translators: On the page where users can apply for multiple partners, this text indicates the partner has been waitlisted i.e. no more accounts are available. {% endcomment %}
               {% trans "Waitlisted" %}
             </span>
           {% endif %}
         </div>
       </li>
     {% empty %}
+      {% comment %} Translators: On the page where users can apply for multiple partners, this text is displayed when there are no available partners. {% endcomment %}
       {% trans "No partner data has been added yet." %}
     {% endfor %}
   </ul>
   {% if user|restricted %}
+    {% comment %} Translators: On the page where users can apply for multiple partners, this text labels the button, which when clicked submits the selections. {% endcomment %}
     <button type="button" class="btn btn-primary" disabled>{% trans "Apply" %}</button>
   {% else %}
     <input type="submit" value="{% trans "Apply" %}" class="btn btn-primary" />

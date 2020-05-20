@@ -147,12 +147,12 @@
               {{ object_list.number }}
             </a>
           </li>
-          {% comment %}Display next page.{% endcomment %}
+          {% comment %} Display next page. {% endcomment %}
           {% if object_list.has_next %}
             <li><a href="?page={{ object_list.next_page_number }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
                 {{ object_list.next_page_number }}
                 </a></li>
-            {% comment %}Decide based on the total number of pages, if a '...' is needed or not.{% endcomment %}
+            {% comment %} Decide based on the total number of pages, if a '...' is needed or not. {% endcomment %}
             {% if object_list.number|add:'1' != object_list.paginator.num_pages %}
               <li><a>...</a></li>
             {% endif %}
