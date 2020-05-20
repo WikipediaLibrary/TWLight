@@ -470,6 +470,49 @@ class UserRenewalNoticeTest(TestCase):
             {"editor@example.com", "editor2@example.com"},
         )
 
+    def test_user_renewal_notice_after_renewal(self):
+        """
+        If a user renews their authorization, we want to remind
+        them again when it runs out.
+        """
+        call_command("user_renewal_notice")
+        self.assertEqual(len(mail.outbox), 1)
+        self.authorization.refresh_from_db()
+        self.assertTrue(self.authorization.reminder_email_sent)
+
+        # We already have an authorization, so let's setup up
+        # an application that 'corresponds' to it.
+        application = ApplicationFactory(
+            editor=self.user.editor,
+            sent_by=self.coordinator,
+            partner=self.partner,
+            status=Application.SENT,
+            requested_access_duration=1,
+        )
+        application.save()
+
+        # File a renewal, approve it, and send it.
+        self.partner.renewals_available = True
+        self.partner.save()
+        renewed_app = application.renew()
+        renewed_app.status = application.APPROVED
+        renewed_app.save()
+        renewed_app.status = application.SENT
+        renewed_app.sent_by = self.coordinator
+        renewed_app.save()
+
+        # Sending this renewal notice will have sent the user
+        # an email, so we expect 2 emails now.
+        self.assertEqual(len(mail.outbox), 2)
+
+        # We've correctly marked reminder_email_sent as False
+        self.authorization.refresh_from_db()
+        self.assertFalse(self.authorization.reminder_email_sent)
+
+        # And calling the command should send a third email.
+        call_command("user_renewal_notice")
+        self.assertEqual(len(mail.outbox), 3)
+
 
 class CoordinatorReminderEmailTest(TestCase):
     def setUp(self):
