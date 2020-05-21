@@ -27,10 +27,9 @@ def validate_language_code(code):
     """
     if code not in RESOURCE_LANGUAGE_CODES:
         raise ValidationError(
-                "%(code)s is not a valid language code. You must enter an ISO "
-                "language code, as in the INTERSECTIONAL_LANGUAGES setting at "
-                "https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py"
-            ,
+            "%(code)s is not a valid language code. You must enter an ISO "
+            "language code, as in the INTERSECTIONAL_LANGUAGES setting at "
+            "https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py",
             params={"code": code},
         )
 
@@ -145,10 +144,8 @@ class Partner(models.Model):
 
     company_name = models.CharField(
         max_length=255,
-        help_text=
-            "Partner's name (e.g. McFarland). Note: "
-            "this will be user-visible and *not translated*."
-        ,
+        help_text="Partner's name (e.g. McFarland). Note: "
+        "this will be user-visible and *not translated*.",
     )
     date_created = models.DateField(auto_now_add=True)
     coordinator = models.ForeignKey(
@@ -162,10 +159,7 @@ class Partner(models.Model):
         default=False,
         help_text="Mark as true to feature this partner on the front page.",
     )
-    company_location = CountryField(
-        null=True,
-        help_text="Partner's primary location.",
-    )
+    company_location = CountryField(null=True, help_text="Partner's primary location.")
 
     # Status metadata
     # --------------------------------------------------------------------------
@@ -206,26 +200,20 @@ class Partner(models.Model):
     status = models.IntegerField(
         choices=STATUS_CHOICES,
         default=NOT_AVAILABLE,
-        help_text=
-            "Should this Partner be displayed to users? Is it "
-            "open for applications right now?"
-        ,
+        help_text="Should this Partner be displayed to users? Is it "
+        "open for applications right now?",
     )
 
     renewals_available = models.BooleanField(
         default=False,
-        help_text=
-            "Can access grants to this partner be renewed? If so, "
-            "users will be able to request renewals at any time."
-        ,
+        help_text="Can access grants to this partner be renewed? If so, "
+        "users will be able to request renewals at any time.",
     )
 
     accounts_available = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
-        help_text=
-            "Add the number of new accounts to the existing value, not by resetting it to zero. If 'specific stream' is true, change accounts availability at the collection level."
-        ,
+        help_text="Add the number of new accounts to the existing value, not by resetting it to zero. If 'specific stream' is true, change accounts availability at the collection level.",
     )
 
     # Optional resource metadata
@@ -233,18 +221,14 @@ class Partner(models.Model):
     target_url = models.URLField(
         blank=True,
         null=True,
-        help_text=
-            "Link to partner resources. Required for proxied resources; optional otherwise."
-        ,
+        help_text="Link to partner resources. Required for proxied resources; optional otherwise.",
     )
 
     terms_of_use = models.URLField(
         blank=True,
         null=True,
-        help_text=
-            "Link to terms of use. Required if users must agree to "
-            "terms of use to get access; optional otherwise."
-        ,
+        help_text="Link to terms of use. Required if users must agree to "
+        "terms of use to get access; optional otherwise.",
     )
 
     short_description = models.TextField(
@@ -257,73 +241,60 @@ class Partner(models.Model):
     description = models.TextField(
         "long description",
         blank=True,
-        help_text=
-            "Optional detailed description in addition to the short "
-            "description such as collections, instructions, notes, special "
-            "requirements, alternate access options, unique features, citations notes."
-        ,
+        help_text="Optional detailed description in addition to the short "
+        "description such as collections, instructions, notes, special "
+        "requirements, alternate access options, unique features, citations notes.",
     )
 
     send_instructions = models.TextField(
         blank=True,
         null=True,
-        help_text=
-            "Optional instructions for sending application data to " "this partner."
-        ,
+        help_text="Optional instructions for sending application data to "
+        "this partner.",
     )
 
     user_instructions = models.TextField(
         blank=True,
         null=True,
-        help_text=
-            "Optional instructions for editors to use access codes "
-            "or free signup URLs for this partner. Sent via email upon "
-            "application approval (for links) or access code assignment. "
-            "If this partner has collections, fill out user instructions "
-            "on each collection instead."
-        ,
+        help_text="Optional instructions for editors to use access codes "
+        "or free signup URLs for this partner. Sent via email upon "
+        "application approval (for links) or access code assignment. "
+        "If this partner has collections, fill out user instructions "
+        "on each collection instead.",
     )
 
     excerpt_limit = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
-        help_text=
-            "Optional excerpt limit in terms of number of words per article. Leave empty if no limit."
-        ,
+        help_text="Optional excerpt limit in terms of number of words per article. Leave empty if no limit.",
     )
 
     excerpt_limit_percentage = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
         validators=[MaxValueValidator(100)],
-        help_text=
-            "Optional excerpt limit in terms of percentage (%) of an article. Leave empty if no limit."
-        ,
+        help_text="Optional excerpt limit in terms of percentage (%) of an article. Leave empty if no limit.",
     )
 
     authorization_method = models.IntegerField(
         choices=AUTHORIZATION_METHODS,
         default=EMAIL,
-        help_text=
-            "Which authorization method does this partner use? "
-            "'Email' means the accounts are set up via email, and is the default. "
-            "Select 'Access Codes' if we send individual, or group, login details "
-            "or access codes. 'Proxy' means access delivered directly via EZProxy, "
-            "and Library Bundle is automated proxy-based access. 'Link' is if we "
-            "send users a URL to use to create an account."
-        ,
+        help_text="Which authorization method does this partner use? "
+        "'Email' means the accounts are set up via email, and is the default. "
+        "Select 'Access Codes' if we send individual, or group, login details "
+        "or access codes. 'Proxy' means access delivered directly via EZProxy, "
+        "and Library Bundle is automated proxy-based access. 'Link' is if we "
+        "send users a URL to use to create an account.",
     )
 
     mutually_exclusive = models.NullBooleanField(
         blank=True,
         null=True,
         default=None,
-        help_text=
-            "If True, users can only apply for one Stream at a time "
-            "from this Partner. If False, users can apply for multiple Streams at "
-            "a time. This field must be filled in when Partners have multiple "
-            "Streams, but may be left blank otherwise."
-        ,
+        help_text="If True, users can only apply for one Stream at a time "
+        "from this Partner. If False, users can apply for multiple Streams at "
+        "a time. This field must be filled in when Partners have multiple "
+        "Streams, but may be left blank otherwise.",
     )
 
     languages = models.ManyToManyField(
@@ -335,10 +306,8 @@ class Partner(models.Model):
     account_length = models.DurationField(
         blank=True,
         null=True,
-        help_text=
-            "The standard length of an access grant from this Partner. "
-            "Entered as &ltdays hours:minutes:seconds&gt."
-        ,
+        help_text="The standard length of an access grant from this Partner. "
+        "Entered as &ltdays hours:minutes:seconds&gt.",
     )
 
     tags = TaggableManager(through=TaggedTextField, blank=True)
@@ -356,10 +325,8 @@ class Partner(models.Model):
     registration_url = models.URLField(
         blank=True,
         null=True,
-        help_text=
-            "Link to registration page. Required if users must sign up "
-            "on the partner's website in advance; optional otherwise."
-        ,
+        help_text="Link to registration page. Required if users must sign up "
+        "on the partner's website in advance; optional otherwise.",
     )
     real_name = models.BooleanField(
         default=False,
@@ -367,51 +334,38 @@ class Partner(models.Model):
     )
     country_of_residence = models.BooleanField(
         default=False,
-        help_text=
-            "Mark as true if this partner requires applicant countries " "of residence."
-        ,
+        help_text="Mark as true if this partner requires applicant countries "
+        "of residence.",
     )
     specific_title = models.BooleanField(
         default=False,
-        help_text=
-            "Mark as true if this partner requires applicants to "
-            "specify the title they want to access."
-        ,
+        help_text="Mark as true if this partner requires applicants to "
+        "specify the title they want to access.",
     )
     specific_stream = models.BooleanField(
         default=False,
-        help_text=
-            "Mark as true if this partner requires applicants to "
-            "specify the database they want to access."
-        ,
+        help_text="Mark as true if this partner requires applicants to "
+        "specify the database they want to access.",
     )
     occupation = models.BooleanField(
         default=False,
-        help_text=
-            "Mark as true if this partner requires applicants to "
-            "specify their occupation."
-        ,
+        help_text="Mark as true if this partner requires applicants to "
+        "specify their occupation.",
     )
     affiliation = models.BooleanField(
         default=False,
-        help_text=
-            "Mark as true if this partner requires applicants to "
-            "specify their institutional affiliation."
-        ,
+        help_text="Mark as true if this partner requires applicants to "
+        "specify their institutional affiliation.",
     )
     agreement_with_terms_of_use = models.BooleanField(
         default=False,
-        help_text=
-            "Mark as true if this partner requires applicants to agree "
-            "with the partner's terms of use."
-        ,
+        help_text="Mark as true if this partner requires applicants to agree "
+        "with the partner's terms of use.",
     )
     account_email = models.BooleanField(
         default=False,
-        help_text=
-            "Mark as true if this partner requires applicants to have "
-            "already signed up at the partner website."
-        ,
+        help_text="Mark as true if this partner requires applicants to have "
+        "already signed up at the partner website.",
     )
 
     # Integrating a dropdown field to get the duration for which a user wishes to have his/her
@@ -425,10 +379,8 @@ class Partner(models.Model):
     # partner doesn't have proxy, but has account durations that can be manually set.
     requested_access_duration = models.BooleanField(
         default=False,
-        help_text=
-            "Must be checked if the authorization method of this partner is proxy; "
-            "optional otherwise."
-        ,
+        help_text="Must be checked if the authorization method of this partner is proxy; "
+        "optional otherwise.",
     )
 
     def __str__(self):
@@ -516,9 +468,7 @@ class PartnerLogo(models.Model):
     logo = models.ImageField(
         blank=True,
         null=True,
-        help_text=
-            "Optional image file that can be used to represent this " "partner."
-        ,
+        help_text="Optional image file that can be used to represent this " "partner.",
     )
 
 
@@ -545,19 +495,15 @@ class Stream(models.Model):
     partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
     name = models.CharField(
         max_length=50,
-        help_text=
-            "Name of stream (e.g. 'Health and Behavioral Sciences). "
-            "Will be user-visible and *not translated*. Do not include the "
-            "name of the partner here."
-        ,
+        help_text="Name of stream (e.g. 'Health and Behavioral Sciences). "
+        "Will be user-visible and *not translated*. Do not include the "
+        "name of the partner here.",
     )
 
     accounts_available = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
-        help_text=
-            "Add number of new accounts to the existing value, not by reseting it to zero."
-        ,
+        help_text="Add number of new accounts to the existing value, not by reseting it to zero.",
     )
 
     description = models.TextField(
@@ -571,32 +517,26 @@ class Stream(models.Model):
     authorization_method = models.IntegerField(
         choices=Partner.AUTHORIZATION_METHODS,
         default=Partner.EMAIL,
-        help_text=
-            "Which authorization method does this collection use? "
-            "'Email' means the accounts are set up via email, and is the default. "
-            "Select 'Access Codes' if we send individual, or group, login details "
-            "or access codes. 'Proxy' means access delivered directly via EZProxy, "
-            "and Library Bundle is automated proxy-based access. 'Link' is if we "
-            "send users a URL to use to create an account."
-        ,
+        help_text="Which authorization method does this collection use? "
+        "'Email' means the accounts are set up via email, and is the default. "
+        "Select 'Access Codes' if we send individual, or group, login details "
+        "or access codes. 'Proxy' means access delivered directly via EZProxy, "
+        "and Library Bundle is automated proxy-based access. 'Link' is if we "
+        "send users a URL to use to create an account.",
     )
 
     target_url = models.URLField(
         blank=True,
         null=True,
-        help_text=
-            "Link to collection. Required for proxied collections; optional otherwise."
-        ,
+        help_text="Link to collection. Required for proxied collections; optional otherwise.",
     )
 
     user_instructions = models.TextField(
         blank=True,
         null=True,
-        help_text=
-            "Optional instructions for editors to use access codes "
-            "or free signup URLs for this collection. Sent via email upon "
-            "application approval (for links) or access code assignment."
-        ,
+        help_text="Optional instructions for editors to use access codes "
+        "or free signup URLs for this collection. Sent via email upon "
+        "application approval (for links) or access code assignment.",
     )
 
     def __str__(self):
@@ -651,20 +591,16 @@ class Contact(models.Model):
     title = models.CharField(
         max_length=75,
         blank=True,
-        help_text=
-            "Organizational role or job title. This is NOT intended "
-            "to be used for honorifics. Think 'Director of Editorial Services', "
-            "not 'Ms.' Optional."
-        ,
+        help_text="Organizational role or job title. This is NOT intended "
+        "to be used for honorifics. Think 'Director of Editorial Services', "
+        "not 'Ms.' Optional.",
     )
     email = models.EmailField()
     full_name = models.CharField(max_length=50)
     short_name = models.CharField(
         max_length=15,
-        help_text=
-            "The form of the contact person's name to use in email "
-            "greetings (as in 'Hi Jake')"
-        ,
+        help_text="The form of the contact person's name to use in email "
+        "greetings (as in 'Hi Jake')",
     )
 
     def __str__(self):
@@ -680,8 +616,7 @@ class Suggestion(models.Model):
         ordering = ["suggested_company_name"]
 
     suggested_company_name = models.CharField(
-        max_length=40,
-        help_text="Potential partner's name (e.g. McFarland).",
+        max_length=40, help_text="Potential partner's name (e.g. McFarland)."
     )
 
     description = models.TextField(
@@ -691,9 +626,7 @@ class Suggestion(models.Model):
     )
 
     company_url = models.URLField(
-        blank=True,
-        null=True,
-        help_text="Link to the potential partner's website.",
+        blank=True, null=True, help_text="Link to the potential partner's website."
     )
 
     author = models.ForeignKey(
@@ -706,9 +639,7 @@ class Suggestion(models.Model):
     )
 
     upvoted_users = models.ManyToManyField(
-        User,
-        blank=True,
-        help_text="Users who have upvoted this suggestion.",
+        User, blank=True, help_text="Users who have upvoted this suggestion."
     )
 
     def __str__(self):
@@ -731,9 +662,7 @@ class Video(models.Model):
     partner = models.ForeignKey(Partner, db_index=True, related_name="videos")
 
     tutorial_video_url = models.URLField(
-        blank=True,
-        null=True,
-        help_text="URL of a video tutorial.",
+        blank=True, null=True, help_text="URL of a video tutorial."
     )
 
 
@@ -756,10 +685,7 @@ class AccessCode(models.Model):
         limit_choices_to=(models.Q(authorization_method=1)),
     )
 
-    code = models.CharField(
-        max_length=60,
-        help_text="An access code for this partner.",
-    )
+    code = models.CharField(max_length=60, help_text="An access code for this partner.")
 
     # This syntax is required for the ForeignKey to avoid a circular
     # import between the authorizations and resources models

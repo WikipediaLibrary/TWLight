@@ -78,9 +78,7 @@ class Application(models.Model):
     date_closed = models.DateField(
         blank=True,
         null=True,
-        help_text=
-            "Please do not override this field! Its value is set automatically."
-        ,
+        help_text="Please do not override this field! Its value is set automatically.",
     )
 
     # Will be set on save() if status changes from PENDING/QUESTION to
@@ -93,9 +91,7 @@ class Application(models.Model):
     days_open = models.IntegerField(
         blank=True,
         null=True,
-        help_text=
-            "Please do not override this field! Its value is set automatically."
-        ,
+        help_text="Please do not override this field! Its value is set automatically.",
     )
 
     sent_by = models.ForeignKey(
@@ -135,10 +131,8 @@ class Application(models.Model):
         choices=REQUESTED_ACCESS_DURATION_CHOICES,
         blank=True,
         null=True,
-        help_text=
-            "User selection of when they'd like their account to expire (in months). "
-            "Required for proxied resources; optional otherwise."
-        ,
+        help_text="User selection of when they'd like their account to expire (in months). "
+        "Required for proxied resources; optional otherwise.",
     )
 
     # Was this application imported via CLI?
