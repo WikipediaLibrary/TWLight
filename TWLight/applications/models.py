@@ -78,10 +78,9 @@ class Application(models.Model):
     date_closed = models.DateField(
         blank=True,
         null=True,
-        # Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
-        help_text=_(
-            "Please do not override this field! Its value is set " "automatically."
-        ),
+        help_text=
+            "Please do not override this field! Its value is set automatically."
+        ,
     )
 
     # Will be set on save() if status changes from PENDING/QUESTION to
@@ -94,9 +93,9 @@ class Application(models.Model):
     days_open = models.IntegerField(
         blank=True,
         null=True,
-        help_text=_(
-            "Please do not override this field! Its value is set " "automatically."
-        ),
+        help_text=
+            "Please do not override this field! Its value is set automatically."
+        ,
     )
 
     sent_by = models.ForeignKey(
@@ -104,8 +103,7 @@ class Application(models.Model):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        # Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
-        help_text=_("The user who sent this application to the partner"),
+        help_text="The user who sent this application to the partner",
     )
 
     editor = models.ForeignKey(
@@ -137,11 +135,10 @@ class Application(models.Model):
         choices=REQUESTED_ACCESS_DURATION_CHOICES,
         blank=True,
         null=True,
-        # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
-        help_text=_(
+        help_text=
             "User selection of when they'd like their account to expire (in months). "
             "Required for proxied resources; optional otherwise."
-        ),
+        ,
     )
 
     # Was this application imported via CLI?
