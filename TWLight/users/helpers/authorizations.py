@@ -92,7 +92,9 @@ def sort_authorizations_into_resource_list(authorizations):
                 )
 
         # Alphabetise by name
-        resource_list = sorted(resource_list, key=lambda i: i["partner"].company_name.lower())
+        resource_list = sorted(
+            resource_list, key=lambda i: i["partner"].company_name.lower()
+        )
 
         return resource_list
     else:
