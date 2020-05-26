@@ -232,8 +232,8 @@ class CSVAppTimeHistogram(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow(
-            # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
             [
+                # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
                 _("Days until decision"),
                 # Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
                 _("Number of applications"),
@@ -263,9 +263,9 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
                 )
 
         writer = csv.writer(response)
-        # Translators: This is the heading of a data file, for a column containing date data.
         writer.writerow(
             [
+                # Translators: This is the heading of a data file, for a column containing date data.
                 _("Date"),
                 # Translators: This is the heading of a data file. 'Number of proxy authorizations' refers to the total number of authorizations for all proxy partners.
                 _("Number of proxy authorizations"),
@@ -288,9 +288,9 @@ class CSVNumApprovedApplications(_CSVDownloadView):
 
         data = get_data_count_by_month(queryset, data_format=PYTHON)
         writer = csv.writer(response)
-        # Translators: This is the heading of a data file, for a column containing date data.
         writer.writerow(
             [
+                # Translators: This is the heading of a data file, for a column containing date data.
                 _("Date"),
                 # Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
                 _("Number of approved applications"),
@@ -311,8 +311,8 @@ class CSVAppMedians(_CSVDownloadView):
         writer = csv.writer(response)
 
         writer.writerow(
-            # Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
             [
+                # Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
                 _("Month"),
                 # Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
                 _("Median days until decision"),
@@ -329,9 +329,9 @@ class CSVAppDistribution(_CSVDownloadView):
         data = get_application_status_data(csv_queryset, data_format=PYTHON)
 
         writer = csv.DictWriter(response, fieldnames=["label", "data"])
-        # Translators: This is the heading of a data file, denoting the column which contains the status of listed applications
         writer.writerow(
             {
+                # Translators: This is the heading of a data file, denoting the column which contains the status of listed applications
                 "label": _("Status"),
                 # Translators: This is the heading of a data file, denoting the column which contains the numbers of listed applications for a given status
                 "data": _("Number of applications"),
@@ -361,9 +361,9 @@ class CSVPageViews(_CSVDownloadView):
         )
 
         writer = csv.writer(response)
-        # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
         writer.writerow(
             [
+                # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
                 _("Page URL"),
                 # Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. This describes the column that lists the number of unique site visitors.
                 _("Number of (non-unique) visitors"),
@@ -380,8 +380,8 @@ class CSVPageViewsByPath(_CSVDownloadView):
         if request.user.is_staff:
             return super(CSVPageViewsByPath, self).dispatch(request, *args, **kwargs)
         else:
-            # Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
             messages.add_message(
+                # Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
                 request, messages.WARNING, _("You must be staff to do that.")
             )
             raise PermissionDenied
@@ -419,9 +419,9 @@ class CSVUserLanguage(_CSVDownloadView):
         data = get_user_language_data(csv_queryset, data_format=PYTHON)
 
         writer = csv.DictWriter(response, fieldnames=["label", "data"])
-        # Translators: This is the heading of a data file, denoting the column which lists all the available language on the platform
         writer.writerow(
             {
+                # Translators: This is the heading of a data file, denoting the column which lists all the available language on the platform
                 "label": _("Language"),
                 # Translators: This is the heading of a data file, denoting the column which lists the number of users using a particular language against each available language on the platform
                 "data": _("Number of users"),
