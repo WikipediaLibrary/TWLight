@@ -68,7 +68,17 @@
               {% if user.is_authenticated %}
                 <div class="col-md-2 pull-right" style="text-align: right;">
                   <a class="btn upvote{% if user in each_suggestion.upvoted_users.all %} btn-success{% else %} btn-default{% endif %}" data-href="{{ each_suggestion.get_upvote_url }}" href="">
-                    <span class="utext">{% if user in each_suggestion.upvoted_users.all %}{% trans 'Upvoted' %} {% else %}{% trans 'Upvote' %} {% endif %}</span><span class="count badge">{{ each_suggestion.upvoted_users.count }}</span>
+                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                    <span class="utext">
+                      {% if user in each_suggestion.upvoted_users.all %}
+                        {% comment %} Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
+                        {% trans 'Upvoted' %}
+                      {% else %}
+                        {% comment %} Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse). {% endcomment %}
+                        {% trans 'Upvote' %}
+                      {% endif %}
+                    </span>
+                    <span class="count badge">{{ each_suggestion.upvoted_users.count }}</span>
                   </a>
                 </div>
               {% endif %}
@@ -84,7 +94,13 @@
     $('.upvote').click(function(e){
       e.preventDefault();
       var count = parseInt($(this).children('.count').text());
-      $(this).children('.utext').text($(this).children('.utext').text() == '{% trans 'Upvoted' %} ' ? '{% trans 'Upvote' %} ' : '{% trans 'Upvoted' %} ');
+      $(this).children('.utext').text($(this).children('.utext').text() ==
+          {% comment %} Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
+          '{% trans 'Upvoted' %} ' ?
+          {% comment %} Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse). {% endcomment %}
+          '{% trans 'Upvote' %} ' :
+          {% comment %} Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
+          '{% trans 'Upvoted' %} ');
       if($(this).hasClass('btn-success')){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-default');

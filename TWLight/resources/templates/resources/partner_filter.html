@@ -3,10 +3,10 @@
 {% load twlight_perms %}
 
 {% block content %}
-  {% comment %} Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
   <!-- begin filtering options/info -->
   <div class="row">
     <div class="col-flex col-xs-12 col-sm-4 {% if tag and tag.meta_url %}col-md-2 col-lg-2{% else %}col-md-3{% endif %}">
+      {% comment %} Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
       <h2>{% trans "Browse Partners" %}</h2>
     </div>
     <div class="col-flex col-xs-12 {% if tag and tag.meta_url %}col-sm-8 col-md-4 col-lg-5{% else %}col-sm-5 col-md-7{% endif %}">
@@ -44,6 +44,7 @@
       </div>
     {% empty %}
       <div class="col-xs-12">
+        {% comment %} Translators: This text is shown to users when no partners meet the filtering criteria. {% endcomment %}
         {% trans "No partners meet the specified criteria." %}
       </div>
     {% endfor %}
