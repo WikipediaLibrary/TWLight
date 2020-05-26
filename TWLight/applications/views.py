@@ -876,10 +876,10 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
         # The logic below hard limits coordinators from approving applications when a particular proxy partner has run out of accounts.
         if is_proxy_and_application_approved(status, app):
             if app.partner.status == Partner.WAITLIST:
-                # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
                 messages.add_message(
                     self.request,
                     messages.ERROR,
+                    # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
                     _(
                         "Cannot approve application as partner with proxy authorization method is waitlisted."
                     ),
@@ -903,10 +903,10 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                         sender=self.__class__, partner_pk=app.partner.pk
                     )
             else:
-                # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
                 messages.add_message(
                     self.request,
                     messages.ERROR,
+                    # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
                     _(
                         "Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."
                     ),
@@ -1216,18 +1216,18 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
 
         if batch_update_success:
             success_apps = ", ".join(map(str, batch_update_success))
-            # Translators: After a coordinator has changed the status of a number of applications, this message appears.
             messages.add_message(
                 request,
                 messages.SUCCESS,
+                # Translators: After a coordinator has changed the status of a number of applications, this message appears.
                 _("Batch update of application(s) {} successful.".format(success_apps)),
             )
         if batch_update_failed:
             failed_apps = ", ".join(map(str, batch_update_failed))
-            # Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
             messages.add_message(
                 request,
                 messages.ERROR,
+                # Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
                 _(
                     "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available.".format(
                         failed_apps
@@ -1468,10 +1468,10 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
 
         if app.partner.is_not_available:
             return_url = self._set_return_url(self._get_return_url())
-            # Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
             messages.add_message(
                 request,
                 messages.WARNING,
+                # Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
                 _(
                     "Cannot renew application at this time as partner is not available. "
                     "Please check back later, or contact us for more information."
@@ -1479,10 +1479,10 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             )
             return HttpResponseRedirect(return_url)
         elif app.partner.status == Partner.WAITLIST:
-            # Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
             messages.add_message(
                 request,
                 messages.WARNING,
+                # Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
                 _(
                     "This partner "
                     "does not have any access grants available at this time. "
@@ -1508,10 +1508,10 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
                 "Attempt to renew unapproved app #{pk} has been "
                 "denied".format(pk=app.pk)
             )
-            # Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
             messages.add_message(
                 self.request,
                 messages.WARNING,
+                # Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
                 _("Attempt to renew unapproved app #{pk} has been denied").format(
                     pk=app.pk
                 ),
@@ -1579,10 +1579,10 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
 
         renewal = application.renew()
         if not renewal:
-            # Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
             messages.add_message(
                 self.request,
                 messages.WARNING,
+                # Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
                 _(
                     "This object cannot be renewed. (This probably means that you have already "
                     "requested that it be renewed.)"
@@ -1590,10 +1590,10 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             )
             return HttpResponseRedirect(return_url)
 
-        # Translators: If a user requests the renewal of their account, this message is shown to them.
         messages.add_message(
             self.request,
             messages.INFO,
+            # Translators: If a user requests the renewal of their account, this message is shown to them.
             _(
                 "Your renewal request has been received. A coordinator will review your request."
             ),
