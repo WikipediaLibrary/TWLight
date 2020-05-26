@@ -475,10 +475,10 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
         )
 
     def get_success_url(self):
-        # Translators: This message is shown to users once they've successfully submitted their application for review.
         messages.add_message(
             self.request,
             messages.SUCCESS,
+            # Translators: This message is shown to users once they've successfully submitted their application for review.
             _(
                 "Your application has been submitted for review. "
                 'Head over to <a href="{applications_url}">My Applications'
