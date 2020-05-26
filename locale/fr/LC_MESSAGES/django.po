@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:19+0000\n"
-"PO-Revision-Date: 2020-05-18 14:18:57+0000\n"
+"PO-Revision-Date: 2020-05-26 15:22:02+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -179,7 +179,7 @@ msgstr "Affiliation"
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
 #: TWLight/applications/helpers.py:135
 msgid "Stream requested"
-msgstr "Collection ou flux demandé"
+msgstr "Collection demandée"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
@@ -191,7 +191,7 @@ msgstr "Titre demandé"
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:139
 msgid "Agreed with terms of use"
-msgstr "Je suis d’accord avec les conditions d’utilisation"
+msgstr "D’accord avec les conditions d’utilisation"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:141
@@ -273,7 +273,7 @@ msgstr "1 mois"
 
 #: TWLight/applications/models.py:142
 msgid "User selection of when they'd like their account to expire (in months). Required for proxied resources; optional otherwise."
-msgstr "Sélection par l’utilisateur de la durée après laquelle il voudrait que son compte expire (en mois). Requis seulement pour les ressources obtenues d’un mandataire ; sinon facultatif."
+msgstr "Sélection par l’utilisateur de la durée après laquelle il voudrait que son compte expire (en mois). Requis seulement pour les ressources obtenues par proxy ; sinon facultatif."
 
 #: TWLight/applications/models.py:327
 #, python-brace-format
@@ -704,7 +704,7 @@ msgstr "Données de la demande pour %(object)s"
 #: TWLight/applications/templates/applications/send_partner.html:51
 #, python-format
 msgid "Application(s) for <strong>%(unavailable_streams)s</strong> if sent, will exceed the total available accounts for the stream(s). Please proceed at your own discretion."
-msgstr "Les demandes pour <strong>%(unavailable_streams)s</strong>, si elles sont envoyées, dépasseront le total des comptes disponibles pour le(s) flux. Veuillez procéder selon votre propre appréciation."
+msgstr "Les demandes pour <strong>%(unavailable_streams)s</strong>, si elles sont envoyées, dépasseront le total des comptes disponibles pour le(s) collection(s). Veuillez procéder selon votre propre appréciation."
 
 #. Translators: This message is shown when applications exceed the number of accounts available.
 #: TWLight/applications/templates/applications/send_partner.html:57
@@ -817,7 +817,7 @@ msgstr "Impossible d’approuver la demande car le partenaire avec méthode d’
 
 #: TWLight/applications/views.py:855
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."
-msgstr "Impossible d’approuver la demande car le partenaire avec méthode d’autorisation par proxy est en liste d’attente ou n’a aucun compte disponible pour la distribution."
+msgstr "Impossible d’approuver la demande car le partenaire avec méthode d’autorisation par proxy est en liste d’attente et (ou) n’a aucun compte disponible pour la distribution."
 
 #. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
 #: TWLight/applications/views.py:878
@@ -1110,16 +1110,16 @@ msgstr "Des demandes pour la Bibliothèque Wikipédia sont en attente de votre e
 #: TWLight/emails/templates/emails/proxy_bundle_email-body-html.html:4
 #, python-format
 msgid "<p>Hi %(username)s,</p> <p>The Wikipedia Library is pleased to announce the implementation of EZProxy access and the Library Bundle!</p> <p>EZProxy is a proxy server used to authenticate your access. Instead of managing individual logins for each collection to which you have been approved, you can now access all EZProxy-supported content simply by logging in to your Library Card account and clicking through to the website. To access EZProxy collections, simply visit the Library Card platform, go to the My Library page at https://wikipedialibrary.wmflabs.org/users/my_library, and click on ‘Access collection’ for the content you wish to access under the ‘Instant access’ tab.</p> <p>If you had active accounts before now, please take the time to review the My Library page to verify how you need to access those accounts going forward. Collections in the 'Instant Access' tab must now be accessed via EZProxy. Collections in the 'Individual Access' tab should be accessed as before.</p> <p>Until now, all access via The Wikipedia Library required that you apply to and be approved for individual collections. The Library Bundle changes that workflow by making some collections immediately available to everyone who meets the experience requirements outlined in our Terms of Use. As long as you continue to meet those requirements (which include 10 edits within the past month and not being blocked), you will have on-demand access to Library Bundle collections via the Library Card without needing to make an application or renewal request.</p> <p>You can verify whether you meet the criteria to access Library Bundle collections on the Library Card homepage - https://wikipedialibrary.wmflabs.org. If you are eligible, collections will be accessible via the 'Instant Access' tab of My Library.</p> <p>You may notice when accessing resources via EZProxy that URLs are dynamically rewritten. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser. Please be aware that existing individual logins for EZProxy-enabled collections (including the Library Bundle) will soon be deactivated, so this will be your only means of access for these collections. Any collections in the ‘Individual access’ tab in My Library will function as before.</p> <p>Along with the launch of these new access methods, we are happy to announce several major new partnerships, including large multidisciplinary collections from Springer Nature and ProQuest.</p> <p>Best,</p> <p>The Wikipedia Library Team</p>"
-msgstr ""
+msgstr "<p>Bonjour %(username)s,</p> <p>La bibliothèque Wikipédia est heureuse d'annoncer la mise en œuvre de l'accès à EZProxy et du Paquet de Bibliothèque!</p> <p>EZProxy est un serveur proxy utilisé pour vous authentifier pour l'accès. Au lieu d'avoir des connexions individuelles pour chaque collection pour laquelle vous avez été approuvé, vous pouvez désormais accéder à tout le contenu pris en charge par EZProxy simplement en vous connectant à votre compte Library Card et en cliquant sur le site Web. Pour accéder aux collections d'EZProxy, visitez simplement la Carte de Bibliothèque, allez à la page Ma bibliothèque à https://wikipedialibrary.wmflabs.org/users/my_library, et cliquez sur «Accéder à la collection» pour le contenu auquel vous souhaitez accéder sous l'onglet «Accès instantané».</p> <p>Si vous aviez des comptes actifs avant maintenant, veuillez prendre le temps de consulter la page Ma bibliothèque pour vérifier comment vous devez accéder à ces comptes à l'avenir. Les collections de l'onglet «Accès instantané» doivent maintenant être accessibles via EZProxy. Les collections de l'onglet «Accès individuel» sont accessibles comme auparavant.</p> <p>Jusqu'à présent, tous les accès via la bibliothèque Wikipedia nécessitaient que vous postuliez et soyez approuvé pour des collections individuelles. Le Paquet de Bibliothèque met immédiatement certaines collections à la disposition de tous ceux qui satisfont aux exigences décrites dans nos conditions d'utilisation. Tant que vous continuez de répondre à ces exigences (qui comprennent 10 modifications au cours du mois passé et ne pas être bloqué), vous aurez un accès instantané aux collections du Paquet de Bibliothèques via la Carte de Bibliothèque sans avoir besoin de faire une demande.</p> <p>Vous pouvez vérifier si vous remplissez les critères pour accéder aux collections du Paquet de Bibliothèque sur la page d'accueil de la Carte de Bibliothèque - https://wikipedialibrary.wmflabs.org. Si vous êtes éligible, les collections seront accessibles via l'onglet «Accès instantané» de Ma bibliothèque.</p> <p>Vous pouvez remarquer lors de l'accès aux ressources via EZProxy que les URL sont réécrites dynamiquement. Notez que l'utilisation d'EZProxy vous oblige à activer les cookies. Si vous rencontrez des problèmes, vous devez également essayer d'effacer votre cache et de redémarrer votre navigateur. Veuillez noter que les connexions individuelles existantes pour les collections compatibles EZProxy (y compris le Paquet de Bibliothèque) seront bientôt désactivées, ce sera donc votre seul moyen d'accès pour ces collections. Toutes les collections de l'onglet «Accès individuel» dans Ma bibliothèque fonctionneront comme avant.</p> <p>Parallèlement au lancement de ces nouvelles méthodes d'accès, nous sommes heureux d'annoncer plusieurs nouveaux partenariats majeurs, notamment de grandes collections multidisciplinaires de Springer Nature et ProQuest.</p> <p>Cordialement,</p> <p>L'équipe de la bibliothèque Wikipédia</p>"
 
 #: TWLight/emails/templates/emails/proxy_bundle_email-body-text.html:2
 #, python-format
 msgid "Hi %(username)s, The Wikipedia Library is pleased to announce the implementation of EZProxy access and the Library Bundle! EZProxy is a proxy server used to authenticate your access. Instead of managing individual logins for each collection to which you have been approved, you can now access all EZProxy-supported content simply by logging in to your Library Card account and clicking through to the website. To access EZProxy collections, simply visit the Library Card platform, go to the My Library page at https://wikipedialibrary.wmflabs.org/users/my_library, and click on ‘Access collection’ for the content you wish to access under the ‘Instant access’ tab. If you had active accounts before now, please take the time to review the My Library page to verify how you need to access those accounts going forward. Collections in the 'Instant Access' tab must now be accessed via EZProxy. Collections in the 'Individual Access' tab should be accessed as before. Until now, all access via The Wikipedia Library required that you apply to and be approved for individual collections. The Library Bundle changes that workflow by making some collections immediately available to everyone who meets the experience requirements outlined in our Terms of Use. As long as you continue to meet those requirements (which include 10 edits within the past month and not being blocked), you will have on-demand access to Library Bundle collections via the Library Card without needing to make an application or renewal request. You can verify whether you meet the criteria to access Library Bundle collections on the Library Card homepage - https://wikipedialibrary.wmflabs.org. If you are eligible, collections will be accessible via the 'Instant Access' tab of My Library. You may notice when accessing resources via EZProxy that URLs are dynamically rewritten. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser. Please be aware that existing individual logins for EZProxy-enabled collections (including the Library Bundle) will soon be deactivated, so this will be your only means of access for these collections. Any collections in the ‘Individual access’ tab in My Library will function as before. Along with the launch of these new access methods, we are happy to announce several major new partnerships, including large multidisciplinary collections from Springer Nature and ProQuest. You can read more at https://meta.wikimedia.org/wiki/Library_Card_platform/Authentication-based_access. If you have any questions please post on the talk page. Best, The Wikipedia Library Team"
-msgstr ""
+msgstr "Bonjour %(username)s, La bibliothèque Wikipédia est heureuse d'annoncer la mise en œuvre de l'accès à EZProxy et du Paquet de Bibliothèque! EZProxy est un serveur proxy utilisé pour vous authentifier pour l'accès. Au lieu d'avoir des connexions individuelles pour chaque collection pour laquelle vous avez été approuvé, vous pouvez désormais accéder à tout le contenu pris en charge par EZProxy simplement en vous connectant à votre compte Library Card et en cliquant sur le site Web. Pour accéder aux collections d'EZProxy, visitez simplement la Carte de Bibliothèque, allez à la page Ma bibliothèque à https://wikipedialibrary.wmflabs.org/users/my_library, et cliquez sur «Accéder à la collection» pour le contenu auquel vous souhaitez accéder sous l'onglet «Accès instantané». Si vous aviez des comptes actifs avant maintenant, veuillez prendre le temps de consulter la page Ma bibliothèque pour vérifier comment vous devez accéder à ces comptes à l'avenir. Les collections de l'onglet «Accès instantané» doivent maintenant être accessibles via EZProxy. Les collections de l'onglet «Accès individuel» sont accessibles comme auparavant. Jusqu'à présent, tous les accès via la bibliothèque Wikipedia nécessitaient que vous postuliez et soyez approuvé pour des collections individuelles. Le Paquet de Bibliothèque met immédiatement certaines collections à la disposition de tous ceux qui satisfont aux exigences décrites dans nos conditions d'utilisation. Tant que vous continuez de répondre à ces exigences (qui comprennent 10 modifications au cours du mois passé et ne pas être bloqué), vous aurez un accès instantané aux collections du Paquet de Bibliothèques via la Carte de Bibliothèque sans avoir besoin de faire une demande. Vous pouvez vérifier si vous remplissez les critères pour accéder aux collections du Paquet de Bibliothèque sur la page d'accueil de la Carte de Bibliothèque - https://wikipedialibrary.wmflabs.org. Si vous êtes éligible, les collections seront accessibles via l'onglet «Accès instantané» de Ma bibliothèque. Vous pouvez remarquer lors de l'accès aux ressources via EZProxy que les URL sont réécrites dynamiquement. Notez que l'utilisation d'EZProxy vous oblige à activer les cookies. Si vous rencontrez des problèmes, vous devez également essayer d'effacer votre cache et de redémarrer votre navigateur. Veuillez noter que les connexions individuelles existantes pour les collections compatibles EZProxy (y compris le Paquet de Bibliothèque) seront bientôt désactivées, ce sera donc votre seul moyen d'accès pour ces collections. Toutes les collections de l'onglet «Accès individuel» dans Ma bibliothèque fonctionneront comme avant. Parallèlement au lancement de ces nouvelles méthodes d'accès, nous sommes heureux d'annoncer plusieurs nouveaux partenariats majeurs, notamment de grandes collections multidisciplinaires de Springer Nature et ProQuest. Cordialement, L'équipe de la bibliothèque Wikipédia"
 
 #: TWLight/emails/templates/emails/proxy_bundle_email-subject.html:3
 msgid "The Wikipedia Library - new platform features and publishers now available!"
-msgstr ""
+msgstr "La bibliothèque Wikipedia - nouvelles fonctionnalités de la plateforme et des partenaires disponibles maintenant !"
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
@@ -1148,7 +1148,7 @@ msgstr "<p>Cher/chère %(user)s,</p><p>Selon nos informations, votre accès à %
 #: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s. Best, The Wikipedia Library You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/"
-msgstr "Cher/chère %(user)s, \nSelon nos informations, votre accès à %(partner_name)s expirera bientôt et vous pourriez en perdre l’accès. Si vous voulez continuer à utiliser votre compte gratuit, vous pouvez demander son renouvellement en cliquant sur le bouton « Renouveler » sur %(partner_link)s. Sincères salutations, la Bibliothèque Wikipédia. Vous pouvez désactiver ces courriels dans votre page de préférences utilisateur : https://wikipedialibrary.wmflabs.org/users/"
+msgstr "Cher/chère %(user)s, \nSelon nos informations, votre accès à %(partner_name)s expirera bientôt et vous pourriez en perdre l’accès. Si vous voulez continuer à utiliser votre compte gratuit, vous pouvez demander son renouvellement en cliquant sur le bouton « Renouveler » sur %(partner_link)s. Cordialement, la Bibliothèque Wikipédia. Vous pouvez désactiver ces courriels dans votre page de préférences utilisateur : https://wikipedialibrary.wmflabs.org/users/"
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
@@ -1295,9 +1295,8 @@ msgid "{num_duplicates} access codes ignored as duplicates."
 msgstr "{num_duplicates} codes d’accès ignorés comme doublons."
 
 #: TWLight/resources/app.py:7
-#, fuzzy
 msgid "resources"
-msgstr "Codes d’accès"
+msgstr "ressources"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:17
@@ -1377,7 +1376,7 @@ msgstr "Codes d’accès"
 #. Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
 #: TWLight/resources/models.py:209
 msgid "Proxy"
-msgstr "Mandataire"
+msgstr "Proxy"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #. Translators: Title text for the Library Bundle icon shown on the collection page.
@@ -1385,7 +1384,7 @@ msgstr "Mandataire"
 #: TWLight/resources/templates/resources/partner_tile.html:21
 #: TWLight/users/templates/users/collection_tile.html:15
 msgid "Library Bundle"
-msgstr "Paquet de bibliothèques"
+msgstr "Paquet de Bibliothèque"
 
 #. Translators: This is the name of the authorization method whereby users are provided with a link through which they can create a free account.
 #: TWLight/resources/models.py:213
@@ -1439,7 +1438,7 @@ msgstr "Limite facultative de l'extrait en termes de pourcentage (%) d'un articl
 
 #: TWLight/resources/models.py:330
 msgid "Which authorization method does this partner use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."
-msgstr "Quelle méthode d’autorisation ce partenaire utilise-t-il ? « Courriel » signifie que les comptes sont configurés par courriel et ceci est la valeur par défaut. Sélectionnez « Codes d’accès » pour que nous envoyions le détails des paramètres de connexion ou les codes d’accès individuels ou de groupe. « Mandataire » signifie que l’accès est fourni directement par EZProxy et le Paquet de bibliothèques est un accès automatisé basé sur un mandataire. « Lien » signifie que nous envoyons aux utilisateurs une URL à utiliser pour leur permettre de créer un compte."
+msgstr "Quelle méthode d’autorisation ce partenaire utilise-t-il ? « Courriel » signifie que les comptes sont configurés par courriel et ceci est la valeur par défaut. Sélectionnez « Codes d’accès » pour que nous envoyions le détails des paramètres de connexion ou les codes d’accès individuels ou de groupe. « Proxy » signifie que l’accès est fourni directement par EZProxy et le Paquet de Bibliothèque est un accès automatisé basé sur un mandataire. « Lien » signifie que nous envoyons aux utilisateurs une URL à utiliser pour leur permettre de créer un compte."
 
 #: TWLight/resources/models.py:345
 msgid "If True, users can only apply for one Stream at a time from this Partner. If False, users can apply for multiple Streams at a time. This field must be filled in when Partners have multiple Streams, but may be left blank otherwise."
@@ -1497,7 +1496,7 @@ msgstr "Marquer comme vrai si ce partenaire exige que les demandeurs se soient d
 
 #: TWLight/resources/models.py:464
 msgid "Must be checked if the authorization method of this partner is proxy; optional otherwise."
-msgstr "Doit être coché si la méthode d’autorisation de ce partenaire est par un mandataire ; sinon facultatif."
+msgstr "Doit être coché si la méthode d’autorisation de ce partenaire est par proxy ; sinon facultatif."
 
 #: TWLight/resources/models.py:552
 msgid "Optional image file that can be used to represent this partner."
@@ -1518,7 +1517,7 @@ msgstr "Description facultative des ressources de ce flux."
 
 #: TWLight/resources/models.py:611
 msgid "Which authorization method does this collection use? 'Email' means the accounts are set up via email, and is the default. Select 'Access Codes' if we send individual, or group, login details or access codes. 'Proxy' means access delivered directly via EZProxy, and Library Bundle is automated proxy-based access. 'Link' is if we send users a URL to use to create an account."
-msgstr "Quelle méthode d’autorisation cette collection utilise-t-elle ? « Courriel » signifie que les comptes sont configurés par courriel, ceci est la valeur par défaut. Sélectionnez « Codes d’accès » si nous envoyons le détail des paramètres de connexion ou les codes d’accès individuels ou de groupe. « Mandataire » signifie que l’accès est fourni directement par EZProxy et le Paquet de bibliothèques est un accès automatisé basé sur un mandataire. « Lien » signifie que nous envoyons aux utilisateurs une URL pour leur permettre de créer un compte."
+msgstr "Quelle méthode d’autorisation cette collection utilise-t-elle ? « Courriel » signifie que les comptes sont configurés par courriel, ceci est la valeur par défaut. Sélectionnez « Codes d’accès » si nous envoyons le détail des paramètres de connexion ou les codes d’accès individuels ou de groupe. « Proxy » signifie que l’accès est fourni directement par EZProxy et le Paquet de Bibliothèque est un accès automatisé basé sur un mandataire. « Lien » signifie que nous envoyons aux utilisateurs une URL pour leur permettre de créer un compte."
 
 #: TWLight/resources/models.py:625
 msgid "Link to collection. Required for proxied collections; optional otherwise."
@@ -1583,9 +1582,8 @@ msgstr "Téléverser"
 
 #. Translators: This text is located on individual partner pages, and when clicked takes users back to the list of publishers.
 #: TWLight/resources/templates/resources/partner_detail.html:14
-#, fuzzy
 msgid "Back to partners"
-msgstr "Envoyé au partenaire"
+msgstr "Retour aux partenaires"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:25
@@ -1605,14 +1603,14 @@ msgstr "Avant de soumettre votre demande, veuillez relire les <strong><a href=\"
 #: TWLight/resources/templates/resources/partner_detail.html:406
 #, python-format
 msgid "View the status of your access(es) in <strong><a href=\"%(collection_url)s\">Your Collection</a></strong> page."
-msgstr ""
+msgstr "Afficher l'état de votre/vos accès sur la page <strong><a href=\"%(collection_url)s\">Votre collection</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:65
 #: TWLight/resources/templates/resources/partner_detail.html:415
 #, python-format
 msgid "View the status of your application(s) in <strong><a href=\"%(applications_url)s\">Your Applications</a></strong> page."
-msgstr ""
+msgstr "Afficher l'état de votre/vos application(s) sur la page <strong><a href=\"%(applications_url)s\">Vos applications</a></strong>."
 
 #. Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist.
 #: TWLight/resources/templates/resources/partner_detail.html:80
@@ -1811,7 +1809,7 @@ msgstr "Aucun partenaire ne correspond aux critères spécifiés."
 #: TWLight/resources/templates/resources/partner_tile.html:23
 #: TWLight/users/templates/users/collection_tile.html:17
 msgid "Library bundle access"
-msgstr "Accès à un paquet de bibliothèque"
+msgstr "Accès au Paquet de Bibliothèque"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate partner.
@@ -1909,7 +1907,7 @@ msgstr "Ce partenaire n’est pas disponible. Vous pouvez le voir parce que vous
 
 #: TWLight/resources/views.py:148
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
-msgstr ""
+msgstr "Plusieurs autorisations ont été retournées – ce qui est mauvais. Veuillez nous contacter sans omettre ce message."
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
 #: TWLight/resources/views.py:235
@@ -2024,7 +2022,7 @@ msgstr "Tout utilisateur actif et en règle peut avoir accès. Pour les éditeur
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:52
 msgid "Any editor can apply for access, but there are a few basic requirements. These are also the minimum technical requirements for access to the Library Bundle (see below):"
-msgstr "Tout utilisateur peut demander un accès, mais il y a quelques conditions de base. Ce sont également les exigences techniques minimales requises pour l’accès au Pack Bibliothèque (voir ci-dessous) :"
+msgstr "Tout utilisateur peut demander un accès, mais il y a quelques conditions de base. Ce sont également les exigences techniques minimales requises pour l’accès au Paquet de Bibliothèque (voir ci-dessous) :"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:59
@@ -2089,7 +2087,7 @@ msgstr "Les contributeurs approuvés <i>ne peuvent pas</i> :"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:117
 msgid "Share their account logins or passwords with others, or sell their access to other parties"
-msgstr "partager leur identifiant de connexion ou leur mot de passe avec d’autres, ou vendre ou céder leur accès à des tiers ;"
+msgstr "partager leur identifiant de connexion ou leur mot de passe avec d’autres, ou vendre ou céder leur accès ;"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:121
@@ -2119,7 +2117,7 @@ msgstr "EZProxy"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:146
 msgid "EZProxy is a proxy server used to authenticate users for many Wikipedia Library partners. Users sign into EZProxy via the Library Card platform to verify that they are authorized users, and then the server accesses requested resources using its own IP address."
-msgstr "EZProxy est un serveur mandataire utilisé pour authentifier les utilisateurs pour de nombreux partenaires de la Bibliothèque Wikipédia. Les utilisateurs s’inscrivent dans EZProxy via la plateforme de Carte de Bibliothèque afin de vérifier qu’ils sont des utilisateurs autorisés, puis le serveur mandataire accède aux ressources demandées en utilisant sa propre adresse IP."
+msgstr "EZProxy est un logiciel de type proxy utilisé pour authentifier les utilisateurs pour de nombreux partenaires de la Bibliothèque Wikipédia. Les utilisateurs s’inscrivent dans EZProxy via la plateforme de Carte de Bibliothèque afin de vérifier qu’ils sont des utilisateurs autorisés, puis le serveur mandataire accède aux ressources demandées en utilisant sa propre adresse IP."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:155
@@ -2224,7 +2222,7 @@ msgstr "Vous avez demandé une restriction sur le traitement de vos données. La
 #: TWLight/templates/base.html:222
 #, python-format
 msgid "You have not agreed to the <a href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will not be processed and you won't be able to apply or access resources you are approved for."
-msgstr ""
+msgstr "Vous n'avez pas accepté les <a href=\"%(terms_url)s\">conditions d'utilisation</a> de ce site. Vos applications ne seront pas prises en compte et vous ne pourrez pas utiliser ni accéder aux ressources qui vous ont été autorisées."
 
 #. Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
 #. blocktrans trimmed
@@ -2493,7 +2491,7 @@ msgstr "Heureux de vous revoir !"
 
 #: TWLight/users/authorization.py:520
 msgid "Welcome back! Please agree to the terms of use."
-msgstr "Bienvenue ! Veuillez accepter les conditions d’utilisation."
+msgstr "Bienvenue à nouveau  ! Veuillez accepter les conditions d’utilisation."
 
 #. Translators: This is the label for a button that users click to update their public information.
 #: TWLight/users/forms.py:35
@@ -2552,9 +2550,8 @@ msgid "Does this coordinator want pending app reminder notices?"
 msgstr "Ce coordinateur veut-il activer les notifications des demandes en attente ?"
 
 #: TWLight/users/models.py:108
-#, fuzzy
 msgid "Does this coordinator want under discussion app reminder notices?"
-msgstr "Cet utilisateur veut-il activer les notifications de rappel ?"
+msgstr "Ce coordinateur veut-il activer les notifications de rappel de l'application de discussion  ?"
 
 #. Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for approved applications
 #: TWLight/users/models.py:114
@@ -2857,7 +2854,7 @@ msgstr "Les renouvellements ne sont pas nécessaires,ou sont indisponibles pour 
 #. Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
 #: TWLight/users/templates/users/my_collection.html:13
 msgid "Proxy/bundle access"
-msgstr "Accès par mandataire/paquet"
+msgstr "Accès par proxy/paquet"
 
 #. Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually.
 #: TWLight/users/templates/users/my_collection.html:15
@@ -2867,7 +2864,7 @@ msgstr "Accès manuel"
 #. Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_collection.html:28
 msgid "You have no active proxy/bundle collections."
-msgstr "Vous n’avez aucune collection par mandataire ou paquet active."
+msgstr "Vous n’avez aucune collection par proxy ou paquet active."
 
 #. Translators: Heading for the section which lists all of the user's expired collection.
 #: TWLight/users/templates/users/my_collection.html:34
@@ -3026,7 +3023,7 @@ msgstr "Utiliser l’accès que vous avez reçu grâce à la Bibliothèque Wikip
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:168
 msgid "External Search and Proxy Services"
-msgstr "Services de recherche externe et de serveur mandataire"
+msgstr "Services de recherche externe et de proxy"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:172
@@ -3170,13 +3167,12 @@ msgstr "Veuillez <a href=\"{url}\">mettre à jour vos contributions</a> sur Wiki
 
 #: TWLight/users/views.py:248
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, consider changing your preferences."
-msgstr ""
+msgstr "Vous avez choisi de ne pas recevoir les courriels de rappel. En tant que coordinateur, vous devez recevoir au moins un type des courriels de rappel, veuillez revoir vos préférences."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:258
-#, fuzzy
 msgid "Your reminder email preferences are updated."
-msgstr "Vos informations ont été mises à jour."
+msgstr "Vos préférences de courriel de rappel ont été mises à jour."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.

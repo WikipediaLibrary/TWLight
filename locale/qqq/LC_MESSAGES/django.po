@@ -3,13 +3,14 @@
 #
 # Author: Pols12
 # Author: Robby
+# Author: Samwalton9 (WMF)
 msgid ""
 msgstr ""
 ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:20+0000\n"
-"PO-Revision-Date: 2020-05-18 14:19:00+0000\n"
+"PO-Revision-Date: 2020-05-26 15:22:05+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -1363,7 +1364,7 @@ msgstr "Must be consistent with {{msg-wm|Wikipedia-library-0907f2-Which_authoriz
 #. Translators: This is the name of the authorization method whereby users access resources via an IP proxy.
 #: TWLight/resources/models.py:209
 msgid "Proxy"
-msgstr "Must be consistent with {{msg-wm|Wikipedia-library-0907f2-Which_authorization_method_doe}}."
+msgstr "Must be consistent with {{msg-wm|Wikipedia-library-0907f2-Which_authorization_method_doe}}"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #. Translators: Title text for the Library Bundle icon shown on the collection page.

@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:20+0000\n"
-"PO-Revision-Date: 2020-05-18 14:19:00+0000\n"
+"PO-Revision-Date: 2020-05-26 15:22:04+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -205,7 +205,7 @@ msgstr "Електронна пошта"
 
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:56
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "Наші умови використання змінилися. Ваші заявки не будуть оброблятися, поки ви не увійдете й не погодитеся з нашими оновленими умовами."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -377,9 +377,9 @@ msgid "Accounts available"
 msgstr "Доступні облікові записи:"
 
 #: TWLight/applications/templates/applications/application_evaluation.html:130
-#, fuzzy, python-format
+#, python-format
 msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
-msgstr "%(publisher)s вимагає, щоб ви погодилися з їхніми <a href=\"%(url)s\">умовами користування</a>."
+msgstr "Погодилися з <a href=\"%(terms_url)s\">умовами користування</a> сайту?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
 #: TWLight/applications/templates/applications/application_evaluation.html:137
@@ -398,9 +398,8 @@ msgstr "Ні"
 
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:142
-#, fuzzy
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr "Будь ласка, перш ніж продовжувати, попросіть заявника додати у своєму профілі країну проживання."
+msgstr "Будь ласка, попросіть заявника погодитися з умовами користування, перш ніж схвалювати цю заявку."
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:150
@@ -430,9 +429,8 @@ msgstr "Так (<a href=\"%(parent_url)s\">попередня заявка</a>)"
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:201
-#, fuzzy
 msgid "Previous access expiry date"
-msgstr "Попередня сторінка"
+msgstr "Дата попереднього завершення доступу"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:211
@@ -625,9 +623,8 @@ msgstr "Дата подачі заявки"
 
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:11
-#, fuzzy
 msgid "Has agreed to the terms of use?"
-msgstr "Я погоджуюся з умовами використання"
+msgstr "Погодилися з умовами використання?"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:20
@@ -833,7 +830,7 @@ msgstr "Встановити статус заявки"
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:940
 msgid "Status of INVALID applications Cannot be changed."
-msgstr ""
+msgstr "Якщо статус заявки INVALID, його не можна змінити."
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
 #: TWLight/applications/views.py:976
@@ -860,7 +857,7 @@ msgstr "Усі вибрані заявки мають бути позначен�
 
 #: TWLight/applications/views.py:1388
 msgid "Cannot renew application at this time as partner is not available. Please check back later, or contact us for more information."
-msgstr ""
+msgstr "Не вдалося поновити заявку цього разу, оскільки партнер недоступний. Будь ласка, зверніться пізніше або напишіть нам за детальнішою інформацією."
 
 #: TWLight/applications/views.py:1423
 #, python-brace-format
@@ -904,13 +901,13 @@ msgstr "Надіслати"
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
 #, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
-msgstr ""
+msgstr "<p>Ваша схвалена заявка до %(partner)s фіналізована. Свій код доступу або деталі для входу ви можете знайти нижче:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
 #, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(access_code_instructions)s"
-msgstr ""
+msgstr "Ваша схвалена заявка до %(partner)s фіналізована. Свій код доступу або деталі для входу ви можете знайти нижче: %(access_code)s %(access_code_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -938,13 +935,13 @@ msgstr "Вашу заявку до Бібліотеки Вікіпедії бу�
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-html.html:5
 #, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at: <a href=\"%(app_url)s\">%(app_url)s</a></p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Будь ласка, відповідайте на це отут: <a href=\"%(app_url)s\">%(app_url)s</a></p> <p>З найкращими побажаннями,</p> <p>Бібліотека Вікіпедії</p>"
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
 #, python-format
 msgid "%(submit_date)s - %(commenter)s %(comment)s Please reply to this at: %(app_url)s Best, The Wikipedia Library"
-msgstr ""
+msgstr "%(submit_date)s - %(commenter)s %(comment)s Будь ласка, відповідайте на це отут: %(app_url)s З найкращими побажаннями, Бібліотека Вікіпедії"
 
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
 #: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
@@ -953,15 +950,15 @@ msgstr "Новий коментар у заявці Бібліотеки Вік�
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at <a href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Шановний/а %(user)s,</p> <p>Дякуємо за вашу заявку на доступ до ресурсів %(partner)s через Бібліотеку Вікіпедії. До вашої заявки є один чи декілька коментарів, які вимагають вашої відповіді. Будь ласка, дайте на них відповідь тут: <a href=\"%(app_url)s\">%(app_url)s</a>, щоб ми могли оцінити вашу заявку.</p> <p>З найкращими побажаннями,</p> <p>Бібліотека Вікіпедії</p>"
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Будь ласка, дайте на них відповідь тут: <a href=\"%(app_url)s\">%(app_url)s</a>, щоб ми могли оцінити вашу заявку.</p> <p>З найкращими побажаннями,</p> <p>Бібліотека Вікіпедії</p>"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
 #, python-format
 msgid "%(submit_date)s - %(commenter)s %(comment)s Please reply to these at: %(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
-msgstr ""
+msgstr "%(submit_date)s - %(commenter)s %(comment)s Будь ласка, відповідайте на них отут: %(app_url)s, щоб ми могли оцінити вашу заявку. З найкращими побажаннями, Бібліотека Вікіпедії"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
@@ -970,15 +967,15 @@ msgstr "Новий коментар до вашої заявки у Бібліо
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> See it at <a href=\"%(app_url)s\">%(app_url)s</a>. Thanks for helping review Wikipedia Library applications!"
-msgstr "З'явився новий коментар у заявці Бібліотеки Вікіпедії, яку ви також коментували. У ньому може бути відповідь на поставлене вашим запитання. Перегляньте його на <a href=\"%(app_url)s\">%(app_url)s</a>. Дякуємо, що допомагаєте розглядати заявки Бібліотеки Вікіпедії!"
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> Перегляньте його на <a href=\"%(app_url)s\">%(app_url)s</a>. Дякуємо, що допомагаєте розглядати заявки Бібліотеки Вікіпедії!"
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "%(submit_date)s - %(commenter)s %(comment)s See it at: %(app_url)s Thanks for helping review Wikipedia Library applications!"
-msgstr "З'явився новий коментар у заявці Бібліотеки Вікіпедії, яку ви також коментували. У ньому може бути відповідь на поставлене вашим запитання. Перегляньте його на %(app_url)s. Дякуємо, що допомагаєте розглядати заявки Бібліотеки Вікіпедії!"
+msgstr "%(submit_date)s - %(commenter)s %(comment)s Перегляньте його на %(app_url)s. Дякуємо, що допомагаєте розглядати заявки Бібліотеки Вікіпедії!"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-subject.html:4
@@ -1043,33 +1040,33 @@ msgstr "Повідомлення Карткової платформи Бібл�
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated coordinator for partners that have a total of %(total_apps)s applications.</p>"
-msgstr ""
+msgstr "<p>Шановний/а %(user)s,</p> <p>Наші записи свідчать, що ви є призначеним координатором для партнерів, які мають сумарно %(total_apps)s заявок.</p>"
 
 #. Translators: Breakdown as in 'cost breakdown'; analysis.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:11
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:10
 msgid "Breakdown"
-msgstr ""
+msgstr "Кошторис"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "One pending application."
 msgid_plural "%(counter)s pending applications."
-msgstr[0] "Надіслані заявки"
-msgstr[1] "Надіслані заявки"
-msgstr[2] "Надіслані заявки"
+msgstr[0] "Одна надіслана заявка."
+msgstr[1] "%(counter)s надіслані заявки."
+msgstr[2] "%(counter)s надісланих заявок."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
-#, fuzzy, python-format
+#, python-format
 msgid "One under discussion application."
 msgid_plural "%(counter)s under discussion applications."
-msgstr[0] "Кількість заявок"
-msgstr[1] "Кількість заявок"
-msgstr[2] "Кількість заявок"
+msgstr[0] "Одна заявка на обговоренні."
+msgstr[1] "%(counter)s заявки на обговоренні."
+msgstr[2] "%(counter)s заявок на обговоренні."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
@@ -1082,30 +1079,30 @@ msgstr[2] "%(counter)s схвалених заявок."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
-#, fuzzy, python-format
+#, python-format
 msgid "<p>This is a gentle reminder that you may review applications at <a href=\"%(link)s\">%(link)s</a>.</p> <p>You can customise your reminders under 'preferences' in your user profile.</p> <p>If you received this message in error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for helping review Wikipedia Library applications!</p>"
-msgstr "<p>Шановний/а %(user)s,</p> <p>Наші записи свідчать, що ви є призначеним координатором партнерів, які загалом мають %(app_count)s заявок зі статусом «%(app_status)s».</p> <p>Це легке нагадування, що ви можете розглядати ці заявки на <a href=\"%(link)s\">%(link)s</a>.</p> <p>Якщо ви отримали це повідомлення помилково, повідомте нас про це, написавши на wikipedialibrary@wikimedia.org.</p> <p>Дякуємо, що допомагаєте розглядати заявки Бібліотеки Вікіпедії!</p>"
+msgstr "<p>Це легке нагадування, що ви можете розглядати ці заявки на <a href=\"%(link)s\">%(link)s</a>.</p> <p>Ви можете налаштувати свої нагадування у налаштуваннях свого профілю користувача.</p> <p>Якщо ви отримали це повідомлення помилково, повідомте нас про це, написавши на wikipedialibrary@wikimedia.org.</p> <p>Дякуємо, що допомагаєте розглядати заявки Бібліотеки Вікіпедії!</p>"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Our records indicate that you are the designated coordinator for partners that have a total of %(total_apps)s applications."
-msgstr ""
+msgstr "Шановний/а %(user)s! Наші записи свідчать, що ви є призначеним координатором для партнерів, які мають сумарно %(total_apps)s заявок."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "One approved application."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "Схвалені заявки"
-msgstr[1] "Схвалені заявки"
-msgstr[2] "Схвалені заявки"
+msgstr[0] "Одна схвалена заявка."
+msgstr[1] "%(counter)s схвалені заявки."
+msgstr[2] "%(counter)s схвалених заявок."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate the email address either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
-#, fuzzy, python-format
+#, python-format
 msgid "This is a gentle reminder that you may review applications at: %(link)s. You can customise your reminders under 'preferences' in your user profile. If you received this message in error, drop us a line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library applications!"
-msgstr "Шановний/а %(user)s, Наші записи свідчать, що ви є призначеним координатором партнерів, які загалом мають %(app_count)s заявок зі статусом «%(app_status)s». Це легке нагадування, що ви можете розглядати ці заявки на %(link)s. Якщо ви отримали це повідомлення помилково, повідомте нас про це, написавши на wikipedialibrary@wikimedia.org. Дякуємо, що допомагаєте розглядати заявки Бібліотеки Вікіпедії!"
+msgstr "Це легке нагадування, що ви можете розглядати ці заявки на %(link)s. Ви можете налаштувати свої нагадування у налаштуваннях свого профілю користувача. Якщо ви отримали це повідомлення помилково, повідомте нас про це, написавши на wikipedialibrary@wikimedia.org. Дякуємо, що допомагаєте розглядати заявки Бібліотеки Вікіпедії!"
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
@@ -1124,7 +1121,7 @@ msgstr ""
 
 #: TWLight/emails/templates/emails/proxy_bundle_email-subject.html:3
 msgid "The Wikipedia Library - new platform features and publishers now available!"
-msgstr ""
+msgstr "Бібліотека Вікіпедії — тепер доступні нові функції платформи та видавці!"
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
@@ -1300,9 +1297,8 @@ msgid "{num_duplicates} access codes ignored as duplicates."
 msgstr "{num_duplicates} кодів доступу проігноровано як дублікати."
 
 #: TWLight/resources/app.py:7
-#, fuzzy
 msgid "resources"
-msgstr "Коди доступу"
+msgstr "ресурси"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:17
@@ -1592,9 +1588,8 @@ msgstr "Завантажити"
 
 #. Translators: This text is located on individual partner pages, and when clicked takes users back to the list of publishers.
 #: TWLight/resources/templates/resources/partner_detail.html:14
-#, fuzzy
 msgid "Back to partners"
-msgstr "Надіслано партнеру"
+msgstr "Назад до партнерів"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:25
@@ -1614,14 +1609,14 @@ msgstr "Перед подачею заявки, будь ласка, перег�
 #: TWLight/resources/templates/resources/partner_detail.html:406
 #, python-format
 msgid "View the status of your access(es) in <strong><a href=\"%(collection_url)s\">Your Collection</a></strong> page."
-msgstr ""
+msgstr "Перегляньте статус свого доступу чи доступів на сторінці <strong><a href=\"%(collection_url)s\">Ваша колекція</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:65
 #: TWLight/resources/templates/resources/partner_detail.html:415
 #, python-format
 msgid "View the status of your application(s) in <strong><a href=\"%(applications_url)s\">Your Applications</a></strong> page."
-msgstr ""
+msgstr "Перегляньте статус своєї заявки чи заявок на сторінці <strong><a href=\"%(applications_url)s\">Ваші заявки</a></strong>."
 
 #. Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist.
 #: TWLight/resources/templates/resources/partner_detail.html:80
@@ -1919,7 +1914,7 @@ msgstr "Цей партнер недоступний. Ви можете бачи
 
 #: TWLight/resources/views.py:148
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
-msgstr ""
+msgstr "Отримано багато авторизацій — щось не так. Будь ласка, зв'яжіться з нами, і не забудьте згадати це повідомлення."
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
 #: TWLight/resources/views.py:235
@@ -2236,7 +2231,7 @@ msgstr "Ви зробили запит на обмеження обробки в
 #: TWLight/templates/base.html:222
 #, python-format
 msgid "You have not agreed to the <a href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will not be processed and you won't be able to apply or access resources you are approved for."
-msgstr ""
+msgstr "Ви не погодилися з <a href=\"%(terms_url)s\">умовами користування</a> цього сайту. Ваші заявки не будуть оброблятися і ви не зможете податися чи отримати доступ до ресурсів, на який ви отримали схвалення."
 
 #. Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
 #. blocktrans trimmed
@@ -2437,7 +2432,7 @@ msgstr "Забули свій пароль? Уведіть нижче свою �
 
 #: TWLight/users/admin.py:36
 msgid "Email preferences"
-msgstr ""
+msgstr "Налаштування електронної пошти"
 
 #: TWLight/users/admin.py:79
 msgid "user"
@@ -2448,9 +2443,8 @@ msgid "authorizer"
 msgstr "авторизатор"
 
 #: TWLight/users/app.py:7
-#, fuzzy
 msgid "users"
-msgstr "користувач"
+msgstr "користувачі"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/authorization.py:228
@@ -2506,9 +2500,8 @@ msgid "Welcome back!"
 msgstr "З поверненням!"
 
 #: TWLight/users/authorization.py:520
-#, fuzzy
 msgid "Welcome back! Please agree to the terms of use."
-msgstr "Ласкаво просимо! Будь ласка, погодьтеся з умовами використання."
+msgstr "З поверненням! Будь ласка, погодьтеся з умовами використання."
 
 #. Translators: This is the label for a button that users click to update their public information.
 #: TWLight/users/forms.py:35
@@ -2563,9 +2556,8 @@ msgstr "Чи бажає цей користувач отримувати наг�
 
 #. Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for pending applications
 #: TWLight/users/models.py:102
-#, fuzzy
 msgid "Does this coordinator want pending app reminder notices?"
-msgstr "Чи бажає цей користувач отримувати нагадування про поновлення?"
+msgstr "Чи бажає цей координатор отримувати нагадування про поновлення?"
 
 #: TWLight/users/models.py:108
 #, fuzzy
@@ -2672,9 +2664,9 @@ msgstr "Посилання на веб-сайт потенційного пар�
 #. Translators: Title for logo in tiles that are linked to an external website. Don't translate each_authorization.stream.
 #: TWLight/users/templates/users/collection_tile.html:43
 #: TWLight/users/templates/users/collection_tile.html:61
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(stream)s's external website"
-msgstr "Посилання на веб-сайт потенційного партнера."
+msgstr "Посилання на зовнішній вебсайт %(stream)s."
 
 #: TWLight/users/templates/users/collection_tile.html:78
 #: TWLight/users/templates/users/collection_tile.html:84
@@ -2691,7 +2683,7 @@ msgstr "Код доступу для цього партнера."
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/collection_tile.html:97
 msgid "Extend"
-msgstr ""
+msgstr "Продовжити"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/collection_tile.html:100
@@ -3181,7 +3173,7 @@ msgstr "Якщо ви не є адміністратором сайту, то с
 #. Translators: Labels a sections where coordinators can select their email preferences.
 #: TWLight/users/templates/users/user_email_preferences.html:14
 msgid "Coordinators only"
-msgstr ""
+msgstr "Лише координатори"
 
 #. Translators: This is a button which updates user preference settings
 #. Translators: This is the button users click to confirm changes to their personal information.
@@ -3197,13 +3189,12 @@ msgstr "Будь ласка, <a href=\"{url}\">оновіть свій внес�
 
 #: TWLight/users/views.py:248
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, consider changing your preferences."
-msgstr ""
+msgstr "Ви вибрали не отримувати листи-нагадування. Як координатор, ви маєте отримувати хоча б один тип листів-нагадувань, тому будь ласка, змініть свої налаштування."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:258
-#, fuzzy
 msgid "Your reminder email preferences are updated."
-msgstr "Вашу інформацію оновлено."
+msgstr "Ваші налаштування листів-нагадувань оновлено."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
@@ -3246,32 +3237,32 @@ msgid "Access to {} has been returned."
 msgstr "Пропозицію було вилучено."
 
 #: TWLight/views.py:81
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> signed up for a Wikipedia Library Card Platform account"
-msgstr "{username} подає запит на обліковий запис у Картковій платформі Бібліотеки Вікімедіа"
+msgstr "<a href=\"{central_auth_url}\">{username}</a> подає запит на обліковий запис у Картковій платформі Бібліотеки Вікімедіа"
 
 #: TWLight/views.py:99
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{url}\">{partner}</a> joined the Wikipedia Library "
-msgstr "{partner} приєднується до Бібліотеки Вікіпедії "
+msgstr "<a href=\"{url}\">{partner}</a> приєднується до Бібліотеки Вікіпедії "
 
 #: TWLight/views.py:120
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> applied for renewal of their <a href=\"{url}\">{partner}</a> access"
-msgstr "{username} подає запит на поновлення свого доступу до <a href=\"{url}\">{partner}</a>"
+msgstr "<a href=\"{central_auth_url}\">{username}</a> подає запит на поновлення свого доступу до <a href=\"{url}\">{partner}</a>"
 
 #: TWLight/views.py:132
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> applied for access to <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
-msgstr "{username} подає заявку на доступ до <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
+msgstr "<a href=\"{central_auth_url}\">{username}</a> подає заявку на доступ до <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
 
 #: TWLight/views.py:146
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> applied for access to <a href=\"{url}\">{partner}</a>"
-msgstr "{username} подає заявку на доступ до <a href=\"{url}\">{partner}</a>"
+msgstr "<a href=\"{central_auth_url}\">{username}</a> подає заявку на доступ до <a href=\"{url}\">{partner}</a>"
 
 #: TWLight/views.py:173
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> received access to <a href=\"{url}\">{partner}</a>"
-msgstr "{username} отримує доступ до <a href=\"{url}\">{partner}</a>"
+msgstr "<a href=\"{central_auth_url}\">{username}</a> отримує доступ до <a href=\"{url}\">{partner}</a>"
 

@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:20+0000\n"
-"PO-Revision-Date: 2020-05-18 14:18:59+0000\n"
+"PO-Revision-Date: 2020-05-26 15:22:04+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1306,9 +1306,8 @@ msgid "{num_duplicates} access codes ignored as duplicates."
 msgstr ""
 
 #: TWLight/resources/app.py:7
-#, fuzzy
 msgid "resources"
-msgstr "Åtkomstkoder"
+msgstr "resurser"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:17
@@ -2437,7 +2436,7 @@ msgstr "Glömt ditt lösenord? Ange din e-postadress nedan så kommer vi e-posta
 
 #: TWLight/users/admin.py:36
 msgid "Email preferences"
-msgstr ""
+msgstr "E-postinställningar"
 
 #: TWLight/users/admin.py:79
 msgid "user"
@@ -2687,7 +2686,7 @@ msgstr "Koordinatorn för denna partner, om det finns någon."
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/collection_tile.html:97
 msgid "Extend"
-msgstr ""
+msgstr "Utvidga"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/collection_tile.html:100

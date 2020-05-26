@@ -5,6 +5,7 @@
 # Author: FF11
 # Author: Flori4nK
 # Author: Hwboehm
+# Author: Killarnee
 # Author: Metalhead64
 # Author: Mirzali
 # Author: SoWhy
@@ -13,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:19+0000\n"
-"PO-Revision-Date: 2020-05-18 14:18:56+0000\n"
+"PO-Revision-Date: 2020-05-26 15:22:00+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2439,7 +2440,7 @@ msgstr ""
 
 #: TWLight/users/admin.py:36
 msgid "Email preferences"
-msgstr ""
+msgstr "E-Mail-Einstellungen"
 
 #: TWLight/users/admin.py:79
 msgid "user"
@@ -2689,7 +2690,7 @@ msgstr "Der Koordinator für diesen Partner, falls vorhanden."
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/collection_tile.html:97
 msgid "Extend"
-msgstr ""
+msgstr "Erweitern"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/collection_tile.html:100

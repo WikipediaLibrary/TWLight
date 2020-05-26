@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform to Korean (한국어)
 # Exported from translatewiki.net
 #
+# Author: Codenstory
 # Author: Gongsoonyee
 # Author: Ykhwong
 # Author: 아라
@@ -9,7 +10,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:19+0000\n"
-"PO-Revision-Date: 2020-05-18 14:18:58+0000\n"
+"PO-Revision-Date: 2020-05-26 15:22:02+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,9 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: TWLight/applications/app.py:7
-#, fuzzy
 msgid "applications"
-msgstr "내 애플리케이션"
+msgstr "애플리케이션"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and the apply button.
@@ -378,7 +378,7 @@ msgstr "사용 가능한 계정"
 #: TWLight/applications/templates/applications/application_evaluation.html:130
 #, python-format
 msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
-msgstr ""
+msgstr "사이트의 <a href=\"%(terms_url)s\">이용 조항</a>에 동의하셨나요?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements.
 #: TWLight/applications/templates/applications/application_evaluation.html:137
@@ -428,9 +428,8 @@ msgstr ""
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:201
-#, fuzzy
 msgid "Previous access expiry date"
-msgstr "이전 페이지"
+msgstr "이전 접근 만료일"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:211
@@ -1037,13 +1036,13 @@ msgstr "%(editor_wp_username)님으로부터 온 위키백과 도서관 카드 �
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated coordinator for partners that have a total of %(total_apps)s applications.</p>"
-msgstr ""
+msgstr "<p>%(user)s님, </p> <p>저희의 기록에 따르면 귀하는 총 %(total_apps)s 응용 프로그램을 보유한 파트너의 지정된 조정자입니다.</p>"
 
 #. Translators: Breakdown as in 'cost breakdown'; analysis.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:11
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:10
 msgid "Breakdown"
-msgstr ""
+msgstr "고장"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
@@ -1110,7 +1109,7 @@ msgstr ""
 
 #: TWLight/emails/templates/emails/proxy_bundle_email-subject.html:3
 msgid "The Wikipedia Library - new platform features and publishers now available!"
-msgstr ""
+msgstr "위키백과 도서관 - 지금 새 플랫폼 기능과 퍼블리셔를 이용할 수 있습니다!"
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
@@ -2422,7 +2421,6 @@ msgid "authorizer"
 msgstr ""
 
 #: TWLight/users/app.py:7
-#, fuzzy
 msgid "users"
 msgstr "사용자"
 
@@ -2536,7 +2534,7 @@ msgstr ""
 #. Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for pending applications
 #: TWLight/users/models.py:102
 msgid "Does this coordinator want pending app reminder notices?"
-msgstr ""
+msgstr "이 조정자가 보류 중인 앱 알림을 원합니까?"
 
 #: TWLight/users/models.py:108
 msgid "Does this coordinator want under discussion app reminder notices?"
@@ -2658,7 +2656,7 @@ msgstr "이 파트너에 대해 갱신이 불가능합니다"
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/collection_tile.html:97
 msgid "Extend"
-msgstr ""
+msgstr "확장"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/collection_tile.html:100
@@ -3140,7 +3138,7 @@ msgstr ""
 #. Translators: Labels a sections where coordinators can select their email preferences.
 #: TWLight/users/templates/users/user_email_preferences.html:14
 msgid "Coordinators only"
-msgstr ""
+msgstr "조정자 전용"
 
 #. Translators: This is a button which updates user preference settings
 #. Translators: This is the button users click to confirm changes to their personal information.
@@ -3160,9 +3158,8 @@ msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:258
-#, fuzzy
 msgid "Your reminder email preferences are updated."
-msgstr "내 정보가 업데이트되었습니다."
+msgstr "내 리마인더 이메일 환경 설정이 업데이트되었습니다."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
@@ -3204,9 +3201,9 @@ msgid "Access to {} has been returned."
 msgstr "{}의 접근이 반환되었습니다."
 
 #: TWLight/views.py:81
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> signed up for a Wikipedia Library Card Platform account"
-msgstr "{username}님이 위키백과 도서관 카드 플랫폼 계정에 가입했습니다"
+msgstr "<a href=\"{central_auth_url}\">{username}</a>님이 위키백과 도서관 카드 플랫폼 계정에 가입했습니다"
 
 #: TWLight/views.py:99
 #, python-brace-format

@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:19+0000\n"
-"PO-Revision-Date: 2020-05-18 14:18:58+0000\n"
+"PO-Revision-Date: 2020-05-26 15:22:02+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,9 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: TWLight/applications/app.py:7
-#, fuzzy
 msgid "applications"
-msgstr "申請手続き"
+msgstr "アプリケーション"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and the apply button.
@@ -434,9 +433,8 @@ msgstr "はい (<a href=\"%(parent_url)s\">前回の申請を更新します</a>
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:201
-#, fuzzy
 msgid "Previous access expiry date"
-msgstr "前のページ"
+msgstr "直近のアクセス期限"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:211
@@ -1054,25 +1052,25 @@ msgstr ""
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "One pending application."
 msgid_plural "%(counter)s pending applications."
-msgstr[0] "申請を送付"
+msgstr[0] "承認待ちの申請%(counter)s件。"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
-#, fuzzy, python-format
+#, python-format
 msgid "One under discussion application."
 msgid_plural "%(counter)s under discussion applications."
-msgstr[0] "申請件数"
+msgstr[0] "審査中の申請%(counter)s件。"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
-#, fuzzy, python-format
+#, python-format
 msgid "%(approved_count)s approved applications."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "承認済み申請件数"
+msgstr[0] "承認済み申請%(approved_count)s件"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
@@ -1088,10 +1086,10 @@ msgstr ""
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "One approved application."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "承認された申請"
+msgstr[0] "承認済み申請%(counter)s件。"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate the email address either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
@@ -1292,9 +1290,8 @@ msgid "{num_duplicates} access codes ignored as duplicates."
 msgstr ""
 
 #: TWLight/resources/app.py:7
-#, fuzzy
 msgid "resources"
-msgstr "職業"
+msgstr "リソース"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:17
@@ -1582,9 +1579,8 @@ msgstr "アップロード"
 
 #. Translators: This text is located on individual partner pages, and when clicked takes users back to the list of publishers.
 #: TWLight/resources/templates/resources/partner_detail.html:14
-#, fuzzy
 msgid "Back to partners"
-msgstr "提携組織に送付済み"
+msgstr "提携組織一覧に戻る"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:25
@@ -2491,9 +2487,8 @@ msgid "Welcome back!"
 msgstr ""
 
 #: TWLight/users/authorization.py:520
-#, fuzzy
 msgid "Welcome back! Please agree to the terms of use."
-msgstr "利用に当たり、必ず提携組織の定める使用規約に同意していただきます。"
+msgstr "再びようこそ。ご利用には使用規約に同意していただきます。"
 
 #. Translators: This is the label for a button that users click to update their public information.
 #: TWLight/users/forms.py:35
