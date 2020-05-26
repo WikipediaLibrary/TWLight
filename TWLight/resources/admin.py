@@ -5,7 +5,6 @@ from django.contrib import admin
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.utils.translation import ugettext as _
 from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
 from TWLight.users.groups import get_coordinators
