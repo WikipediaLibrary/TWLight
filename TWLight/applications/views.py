@@ -411,7 +411,7 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
             # Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
             _(
                 "Your application has been submitted for review. "
-                'Head over to <a href="{applications_url}">Your Applications'
+                'Head over to <a href="{applications_url}">My Applications'
                 "</a> to view the status.".format(
                     applications_url=reverse_lazy(
                         "users:my_applications",
@@ -472,7 +472,7 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
             messages.SUCCESS,
             _(
                 "Your application has been submitted for review. "
-                'Head over to <a href="{applications_url}">Your Applications'
+                'Head over to <a href="{applications_url}">My Applications'
                 "</a> to view the status.".format(
                     applications_url=reverse_lazy(
                         "users:my_applications",

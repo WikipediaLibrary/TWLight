@@ -3,10 +3,10 @@
 
 {% block content %}
   {% comment %} Translators: Heading of the collection page where users can view all partners they are authorized to access with other relevant information. {% endcomment %}
-  <h3 class="inline-header">{% trans 'Your Library' %}</h3>
+  <h3 class="inline-header">{% trans 'My Library' %}</h3>
   <a href="{% url 'users:my_applications' user.editor.pk %}" class="btn btn-default pull-right">
-    {% comment %} Translators: A button on the 'your library' page which when clicked takes users their applications page. {% endcomment %}
-    {% trans "Your applications" %}
+    {% comment %} Translators: A button on the 'my library' page which when clicked takes users their applications page. {% endcomment %}
+    {% trans "My applications" %}
   </a>
   <ul class="nav nav-tabs">
     <li
