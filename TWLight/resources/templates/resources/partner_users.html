@@ -2,8 +2,9 @@
 {% load i18n %}
 
 {% block content %}
-  {% comment %} Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate {{ partner }}. {% endcomment %}
+
   <h1>
+  {% comment %} Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate {{ partner }}. {% endcomment %}
   {% blocktrans trimmed with partner=object.company_name %}
   {{ partner }} approved users
   {% endblocktrans %}

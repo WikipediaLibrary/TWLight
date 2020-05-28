@@ -87,9 +87,9 @@
       <strong>{% trans 'Partner' %}</strong>
     </div>
     <div class="col-xs-12 col-sm-8">
-      {{ object.partner }} 
-      {% comment %}Translators: This labels the partner as waitlisted (if that's the case) to help coordinators better assess application.{% endcomment %}
+      {{ object.partner }}
       {% if object.partner.is_waitlisted %}
+        {% comment %}Translators: This labels the partner as waitlisted (if that's the case) to help coordinators better assess application.{% endcomment %}
         ({% trans 'Waitlisted' %})
       {% endif %}
     </div>
@@ -124,9 +124,9 @@
     {% endif %}
 
     <div class="col-xs-12 col-sm-4">
-      {% comment %}Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not. {% endcomment %}
       <strong>
         {% url 'terms' as terms_url %}
+        {% comment %}Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not. {% endcomment %}
         {% blocktrans trimmed %}
           Has agreed to the site's <a href="{{ terms_url }}">terms of use</a>?
         {% endblocktrans %}
