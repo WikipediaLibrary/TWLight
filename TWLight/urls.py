@@ -53,6 +53,7 @@ urlpatterns = [
     ),
     # Third-party --------------------------------------------------------------
     url(r"^comments/", include("django_comments.urls")),
+    url(r"^admin/rosetta/", include("rosetta.urls")),
     # TWLight apps -------------------------------------------------------------
     # This makes our custom set language form  available.
     url(r"^i18n/", include("TWLight.i18n.urls")),

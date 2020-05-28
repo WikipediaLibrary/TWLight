@@ -218,18 +218,14 @@ class BaseApplicationForm(forms.Form):
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)
-            self.helper.layout.append(
-                HTML(
-                    # Translators: This this note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-                    _(
-                        "<p><small><i>Your personal data "
-                        'will be processed according to our <a href="{terms_url}">'
-                        "privacy policy</a>.</i></small></p>".format(
-                            terms_url=reverse("terms")
-                        )
-                    )
-                )
+            # Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
+            disclaimer_html = _(
+                "<p><small><i>"
+                "Your personal data will be processed "
+                "according to our <a href='{terms_url}'> privacy "
+                "policy</a>.</i></small></p>".format(terms_url=reverse("terms"))
             )
+            self.helper.layout.append(HTML(disclaimer_html))
 
     def _add_partner_data_subform(self, partner):
         partner_data = self.field_params[partner]

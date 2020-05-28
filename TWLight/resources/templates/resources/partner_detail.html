@@ -149,8 +149,8 @@
                     {% trans "Video tutorials" %}
                   </h4>
                   <ul>
-                    {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
                     {% for each_tutorial in object.videos.all %}
+                      {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
                       <li><a href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
                     {% endfor %}
                   </ul>
@@ -513,8 +513,8 @@
                   {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
                   {% trans "Library bundle access" %}
                   ">
-                  {% comment %} Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
                   {% url 'homepage' as homepage %}
+                  {% comment %} Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
                   {% blocktrans trimmed %}
                     You are not eligible to access Library Bundle partners.
                     Visit the <a href="{{ homepage }}">homepage</a> to check the
