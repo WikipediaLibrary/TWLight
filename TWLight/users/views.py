@@ -28,6 +28,7 @@ from django_comments.models import Comment
 from TWLight.resources.models import Partner
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
 from TWLight.users.groups import get_restricted
+from TWLight.users.helpers.authorizations import get_valid_partner_authorizations
 
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
@@ -666,16 +667,12 @@ class AuthorizedUsers(APIView):
             message = "Couldn't find a partner with this ID."
             return Response(message, status=status.HTTP_404_NOT_FOUND)
 
-        if partner.authorization_method == Partner.PROXY:
-            users = User.objects.filter(
-                authorizations__partners=partner,
-                authorizations__date_expires__gte=date.today(),
-            ).distinct()
-        else:
-            users = User.objects.filter(
-                editor__applications__status=Application.SENT,
-                editor__applications__partner=partner,
-            ).distinct()
+        # We're ignoring streams here, because the API operates at the partner
+        # level. This is fine for the use case we built it for (Wikilink tool)
+        valid_partner_auths = get_valid_partner_authorizations(pk)
+        users = User.objects.filter(
+            authorizations__in=valid_partner_auths
+        ).distinct()
 
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)

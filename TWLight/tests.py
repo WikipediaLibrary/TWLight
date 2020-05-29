@@ -19,6 +19,7 @@ from TWLight.applications.models import Application
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.resources.models import AccessCode, Partner
+from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
 from TWLight.users.factories import UserFactory, EditorFactory
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization
@@ -1156,9 +1157,9 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         )
 
         expected_json = [
-            {"wp_username": self.editor1.user.editor.wp_username},
-            {"wp_username": self.editor2.user.editor.wp_username},
-            {"wp_username": self.editor3.user.editor.wp_username},
+            {"wp_username": self.editor1.wp_username},
+            {"wp_username": self.editor2.wp_username},
+            {"wp_username": self.editor3.wp_username},
         ]
 
         self.assertEqual(response.data, expected_json)
@@ -1177,8 +1178,55 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         )
 
         expected_json = [
-            {"wp_username": self.editor1.user.editor.wp_username},
-            {"wp_username": self.editor2.user.editor.wp_username},
+            {"wp_username": self.editor1.wp_username},
+            {"wp_username": self.editor2.wp_username},
+        ]
+
+        self.assertEqual(response.data, expected_json)
+
+    def test_authorized_users_api_bundle(self):
+        """
+        With the addition of Bundle partners, the API
+        should still return the correct list of authorized
+        users.
+        """
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        self.editor1.wp_bundle_eligible = True
+        self.editor1.save()
+        self.editor1.update_bundle_authorization()
+
+        # Verify we created the bundle auth as expected
+        self.assertEqual(get_all_bundle_authorizations().count(), 1)
+
+        factory = APIRequestFactory()
+        request = factory.get("/api/v0/users/authorizations/partner/1")
+        force_authenticate(request, user=self.editor1.user)
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(
+            request, bundle_partner_1.pk, 0
+        )
+
+        expected_json = [{"wp_username": self.editor1.wp_username}]
+
+        self.assertEqual(response.data, expected_json)
+
+    def test_authorized_users_api_streams(self):
+        """
+        For a partner with streams, we should still return the
+        correct list of authorized users.
+        """
+        factory = APIRequestFactory()
+        request = factory.get("/api/v0/users/authorizations/partner/1")
+        force_authenticate(request, user=self.editor1.user)
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(
+            request, self.partner5.pk, 0
+        )
+
+        expected_json = [
+            {"wp_username": self.editor1.wp_username},
         ]
 
         self.assertEqual(response.data, expected_json)
