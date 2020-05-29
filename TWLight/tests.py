@@ -1225,8 +1225,6 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
             request, self.partner5.pk, 0
         )
 
-        expected_json = [
-            {"wp_username": self.editor1.wp_username},
-        ]
+        expected_json = [{"wp_username": self.editor1.wp_username}]
 
         self.assertEqual(response.data, expected_json)
