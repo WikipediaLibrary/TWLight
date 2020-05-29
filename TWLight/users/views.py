@@ -670,9 +670,7 @@ class AuthorizedUsers(APIView):
         # We're ignoring streams here, because the API operates at the partner
         # level. This is fine for the use case we built it for (Wikilink tool)
         valid_partner_auths = get_valid_partner_authorizations(pk)
-        users = User.objects.filter(
-            authorizations__in=valid_partner_auths
-        ).distinct()
+        users = User.objects.filter(authorizations__in=valid_partner_auths).distinct()
 
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
