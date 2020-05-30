@@ -1,4 +1,4 @@
-FROM library/alpine:latest as twlight_base
+FROM library/alpine:3.11 as twlight_base
 # Base dependencies.
 RUN apk add --update \
     libjpeg-turbo \
