@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:19+0000\n"
-"PO-Revision-Date: 2020-05-18 14:18:56+0000\n"
+"PO-Revision-Date: 2020-06-01 20:44:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -25,9 +25,8 @@ msgstr ""
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2020-04-20\n"
 
 #: TWLight/applications/app.py:7
-#, fuzzy
 msgid "applications"
-msgstr "الطلبات"
+msgstr "تطبيقات"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and the apply button.
@@ -2475,9 +2474,8 @@ msgid "authorizer"
 msgstr "المفوض"
 
 #: TWLight/users/app.py:7
-#, fuzzy
 msgid "users"
-msgstr "المستخدم"
+msgstr "المستخدمون"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/authorization.py:228

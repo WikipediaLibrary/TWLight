@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:20+0000\n"
-"PO-Revision-Date: 2020-05-26 15:22:05+0000\n"
+"PO-Revision-Date: 2020-06-01 20:44:09+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -203,7 +203,7 @@ msgstr "電子郵件"
 
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:56
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "我們的使用條款已有變動。在您登入並同意我們的更新條款之前，您的申請程序將不被處理。"
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -396,9 +396,8 @@ msgstr "否"
 
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:142
-#, fuzzy
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr "在處理前，請要求申請人在個人配置添加他們所居的國家。"
+msgstr "在核准此申請程序前，請要求申請人同意網站的使用條款。"
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:150
@@ -825,7 +824,7 @@ msgstr "設定申請程序狀態"
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:940
 msgid "Status of INVALID applications Cannot be changed."
-msgstr ""
+msgstr "不能更改無效狀態的申請程序。"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
 #: TWLight/applications/views.py:976
@@ -852,7 +851,7 @@ msgstr "所有選擇的申請程序被標記為已發送。"
 
 #: TWLight/applications/views.py:1388
 msgid "Cannot renew application at this time as partner is not available. Please check back later, or contact us for more information."
-msgstr ""
+msgstr "由於合作夥伴已不可用，現在無法重新申請程序。請稍後回頭查看，或是聯絡我們來取得更多資訊。"
 
 #: TWLight/applications/views.py:1423
 #, python-brace-format
@@ -896,13 +895,13 @@ msgstr "提交"
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
 #, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
-msgstr ""
+msgstr "<p>您對於%(partner)s的核准申請程序已完成。您的取用代碼或是登入詳情可在以下找出：</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
 #, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(access_code_instructions)s"
-msgstr ""
+msgstr "您對於%(partner)s的核准申請程序已完成。您的取用代碼或是登入詳情可在以下找出：%(access_code)s %(access_code_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1099,12 +1098,12 @@ msgstr "維基百科圖書館等待您的審查"
 #: TWLight/emails/templates/emails/proxy_bundle_email-body-html.html:4
 #, python-format
 msgid "<p>Hi %(username)s,</p> <p>The Wikipedia Library is pleased to announce the implementation of EZProxy access and the Library Bundle!</p> <p>EZProxy is a proxy server used to authenticate your access. Instead of managing individual logins for each collection to which you have been approved, you can now access all EZProxy-supported content simply by logging in to your Library Card account and clicking through to the website. To access EZProxy collections, simply visit the Library Card platform, go to the My Library page at https://wikipedialibrary.wmflabs.org/users/my_library, and click on ‘Access collection’ for the content you wish to access under the ‘Instant access’ tab.</p> <p>If you had active accounts before now, please take the time to review the My Library page to verify how you need to access those accounts going forward. Collections in the 'Instant Access' tab must now be accessed via EZProxy. Collections in the 'Individual Access' tab should be accessed as before.</p> <p>Until now, all access via The Wikipedia Library required that you apply to and be approved for individual collections. The Library Bundle changes that workflow by making some collections immediately available to everyone who meets the experience requirements outlined in our Terms of Use. As long as you continue to meet those requirements (which include 10 edits within the past month and not being blocked), you will have on-demand access to Library Bundle collections via the Library Card without needing to make an application or renewal request.</p> <p>You can verify whether you meet the criteria to access Library Bundle collections on the Library Card homepage - https://wikipedialibrary.wmflabs.org. If you are eligible, collections will be accessible via the 'Instant Access' tab of My Library.</p> <p>You may notice when accessing resources via EZProxy that URLs are dynamically rewritten. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser. Please be aware that existing individual logins for EZProxy-enabled collections (including the Library Bundle) will soon be deactivated, so this will be your only means of access for these collections. Any collections in the ‘Individual access’ tab in My Library will function as before.</p> <p>Along with the launch of these new access methods, we are happy to announce several major new partnerships, including large multidisciplinary collections from Springer Nature and ProQuest.</p> <p>Best,</p> <p>The Wikipedia Library Team</p>"
-msgstr ""
+msgstr "<p>嗨 %(username)s：</p> <p>維基百科圖書館現在很榮幸宣布有關 EZProxy 取用與 Library Bundle 的實現！</p> <p>EZProxy 是用於驗證您的取用之代理伺服器。現在您可以僅需透過登入到您的借閱卡帳號並點擊進入網站，便可取用所有 EZProxy 支援的內容，而不必管理用於您所被核准的各典藏之個人登入。要取用 EZProxy 典藏，只需要簡單地參訪圖書卡平台，前往在 https://wikipedialibrary.wmflabs.org/users/my_library 裡的我的圖書館頁面，然後在「即時取用」分頁下對您想要取用的內容點擊「取用典藏」。</p> <p>若您之前已經有有效的帳號，請花些時間檢閱我的圖書館頁面來確認往後要如何存取這些帳號。在「即時取用」分頁的典藏，現已可透過 EZProxy 取用；在「個人取用」分頁的典藏，則沿用先前方式取用。</p> <p>就目前為止，所有透過維基百科圖書館的取用都需要您申請，且要被核准用於個人典藏。Library Bundle 藉由對於滿足在我們的使用條款裡經驗需求概述的任何人，立即提供可用典藏的方式，改變了先前的工作流程。只要您有持續符合在過去一個月裡有做出 10 編輯且未被封鎖的條件，您可以透過借閱卡來按所需取用 Library Bundle 典藏，而無需做出申請程序或是續借請求。</p> <p>您可以在圖書館平台首頁 - https://wikipedialibrary.wmflabs.org，來確認您是否符合取用 Library Bundle 典藏的取用資格。若您符合條件，可透過在我的圖書館裡的「即時取用」分頁來取用。</p> <p>在透過 EZProxy 來取用資源時，您可能會注意網址會被動態覆寫。請注意當使用 EZProxy 時，會需要您啟用 cookie，若您有遇到問題時，您可以試著清除快取並重新啟用您的瀏覽器。另外請留意，現有用於啟用 EZProxy 典藏的個人登入（包括 Library Bundle）不久將被棄用，因此這將會是您取用典藏的唯一方式。任何我的圖書館裡「個人取用」分頁中的典藏，會如同以往般作用。</p> <p>隨著這些新取用方式的推出，我們很榮幸宣布幾個重要的新合作夥伴關係，包括來自施普林格·自然與 ProQuest 的大型多樣學科典藏。</p> <p>在此獻上最好的祝福，</p> <p>維基百科圖書館團隊</p>"
 
 #: TWLight/emails/templates/emails/proxy_bundle_email-body-text.html:2
 #, python-format
 msgid "Hi %(username)s, The Wikipedia Library is pleased to announce the implementation of EZProxy access and the Library Bundle! EZProxy is a proxy server used to authenticate your access. Instead of managing individual logins for each collection to which you have been approved, you can now access all EZProxy-supported content simply by logging in to your Library Card account and clicking through to the website. To access EZProxy collections, simply visit the Library Card platform, go to the My Library page at https://wikipedialibrary.wmflabs.org/users/my_library, and click on ‘Access collection’ for the content you wish to access under the ‘Instant access’ tab. If you had active accounts before now, please take the time to review the My Library page to verify how you need to access those accounts going forward. Collections in the 'Instant Access' tab must now be accessed via EZProxy. Collections in the 'Individual Access' tab should be accessed as before. Until now, all access via The Wikipedia Library required that you apply to and be approved for individual collections. The Library Bundle changes that workflow by making some collections immediately available to everyone who meets the experience requirements outlined in our Terms of Use. As long as you continue to meet those requirements (which include 10 edits within the past month and not being blocked), you will have on-demand access to Library Bundle collections via the Library Card without needing to make an application or renewal request. You can verify whether you meet the criteria to access Library Bundle collections on the Library Card homepage - https://wikipedialibrary.wmflabs.org. If you are eligible, collections will be accessible via the 'Instant Access' tab of My Library. You may notice when accessing resources via EZProxy that URLs are dynamically rewritten. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser. Please be aware that existing individual logins for EZProxy-enabled collections (including the Library Bundle) will soon be deactivated, so this will be your only means of access for these collections. Any collections in the ‘Individual access’ tab in My Library will function as before. Along with the launch of these new access methods, we are happy to announce several major new partnerships, including large multidisciplinary collections from Springer Nature and ProQuest. You can read more at https://meta.wikimedia.org/wiki/Library_Card_platform/Authentication-based_access. If you have any questions please post on the talk page. Best, The Wikipedia Library Team"
-msgstr ""
+msgstr "嗨 %(username)s：維基百科圖書館現在很榮幸宣布有關 EZProxy 取用與 Library Bundle 的實現！EZProxy 是用於驗證您的取用之代理伺服器。現在您可以僅需透過登入到您的借閱卡帳號並點擊進入網站，便可取用所有 EZProxy 支援的內容，而不必管理用於您所被核准的各典藏之個人登入。要取用 EZProxy 典藏，只需要簡單地參訪圖書卡平台，前往在 https://wikipedialibrary.wmflabs.org/users/my_library 裡的我的圖書館頁面，然後在「即時取用」分頁下對您想要取用的內容點擊「取用典藏」。若您之前已經有有效的帳號，請花些時間檢閱我的圖書館頁面來確認往後要如何存取這些帳號。在「即時取用」分頁的典藏，現已可透過 EZProxy 取用；在「個人取用」分頁的典藏，則沿用先前方式取用。就目前為止，所有透過維基百科圖書館的取用都需要您申請，且要被核准用於個人典藏。Library Bundle 藉由對於滿足在我們的使用條款裡經驗需求概述的任何人，立即提供可用典藏的方式，改變了先前的工作流程。只要您有持續符合在過去一個月裡有做出 10 編輯且未被封鎖的條件，您可以透過借閱卡來按所需取用 Library Bundle 典藏，而無需做出申請程序或是續借請求。您可以在圖書館平台首頁 - https://wikipedialibrary.wmflabs.org，來確認您是否符合取用 Library Bundle 典藏的取用資格。若您符合條件，可透過在我的圖書館裡的「即時取用」分頁來取用。在透過 EZProxy 來取用資源時，您可能會注意網址會被動態覆寫。請注意當使用 EZProxy 時，會需要您啟用 cookie，若您有遇到問題時，您可以試著清除快取並重新啟用您的瀏覽器。另外請留意，現有用於啟用 EZProxy 典藏的個人登入（包括 Library Bundle）不久將被棄用，因此這將會是您取用典藏的唯一方式。任何我的圖書館裡「個人取用」分頁中的典藏，會如同以往般作用。</p> <p>隨著這些新取用方式的推出，我們很榮幸宣布幾個重要的新合作夥伴關係，包括來自施普林格·自然與 ProQuest 的大型多樣學科典藏。在此獻上最好的祝福，維基百科圖書館團隊"
 
 #: TWLight/emails/templates/emails/proxy_bundle_email-subject.html:3
 msgid "The Wikipedia Library - new platform features and publishers now available!"
@@ -1187,9 +1186,8 @@ msgstr "日期"
 
 #. Translators: This is the heading of a data file. 'Number of proxy authorizations' refers to the total number of authorizations for all proxy partners.
 #: TWLight/graphs/views.py:271
-#, fuzzy
 msgid "Number of proxy authorizations"
-msgstr "已核准申請程序數目"
+msgstr "代理授權數目"
 
 #. Translators: This is the heading of a data file. 'Number of renewed proxy authorizations' refers to the total number of authorizations for all proxy partners that were renewed.
 #: TWLight/graphs/views.py:273
@@ -1801,9 +1799,8 @@ msgstr "沒有符合指定標準的合作夥伴。"
 #. Translators: Alt text for the Library Bundle icon shown on the collection page.
 #: TWLight/resources/templates/resources/partner_tile.html:23
 #: TWLight/users/templates/users/collection_tile.html:17
-#, fuzzy
 msgid "Library bundle access"
-msgstr "Library Bundle"
+msgstr "Library Bundle 取用"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate partner.
@@ -1901,7 +1898,7 @@ msgstr "此合作夥伴不可用。您能夠看見是因為您屬於機構成員
 
 #: TWLight/resources/views.py:148
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
-msgstr ""
+msgstr "有多個授權被回傳 - 發生了一些狀況。請聯絡我們，並不要忘記提及此訊息。"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
 #: TWLight/resources/views.py:235
@@ -2217,7 +2214,7 @@ msgstr "您已請求對處理您的資料進行限制。您將不再能使用網
 #: TWLight/templates/base.html:222
 #, python-format
 msgid "You have not agreed to the <a href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will not be processed and you won't be able to apply or access resources you are approved for."
-msgstr ""
+msgstr "您還沒有同意網站的<a href=\"%(terms_url)s\">使用條款</a>。您的申請程序會不被處理，並且會無法應用或取用所被核准的資源。"
 
 #. Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
 #. blocktrans trimmed
@@ -2667,7 +2664,7 @@ msgstr "此合作夥伴的取用代碼（若有的話）。"
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/collection_tile.html:97
 msgid "Extend"
-msgstr ""
+msgstr "延長"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/collection_tile.html:100
@@ -2852,7 +2849,7 @@ msgstr "續辦為非必要，或是現在不可用，或著是您已經有請求
 #. Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
 #: TWLight/users/templates/users/my_collection.html:13
 msgid "Proxy/bundle access"
-msgstr "代理/直接取用"
+msgstr "代理/Bundle 取用"
 
 #. Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually.
 #: TWLight/users/templates/users/my_collection.html:15
@@ -2862,7 +2859,7 @@ msgstr "手動取用"
 #. Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_collection.html:28
 msgid "You have no active proxy/bundle collections."
-msgstr "您沒有有效的代理/直接取用典藏。"
+msgstr "您沒有有效的代理/Bundle 取用典藏。"
 
 #. Translators: Heading for the section which lists all of the user's expired collection.
 #: TWLight/users/templates/users/my_collection.html:34
@@ -3170,7 +3167,7 @@ msgstr "請更新<a href=\"{url}\">您對於維基百科的貢獻</a>，來協�
 
 #: TWLight/users/views.py:248
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, consider changing your preferences."
-msgstr ""
+msgstr "您已選擇不要接收提醒電子郵件。作為一名志願者，您應至少接收其中一種提醒電子郵件，請考慮更改您的偏好設定。"
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:258
