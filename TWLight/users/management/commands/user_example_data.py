@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
         existing_users = User.objects.exclude(username="TWL Team")
 
-        # Superuser the only user, per twlight_vagrant README instructions.
+        # Superuser the only user
         if existing_users.count() == 0:
             raise CommandError("No users present to Superuser. " "Please login first.")
         elif existing_users.count() > 1:
