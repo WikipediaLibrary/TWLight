@@ -51,9 +51,7 @@ class Command(BaseCommand):
                     user=twl_team,
                     # fmt: off
                     # Translators: This comment is added to pending applications when our terms of use change.
-                    comment=_("Our terms of use have changed. "
-                        "Your applications will not be processed until you log in and agree to our updated terms."
-                    ),
+                    comment=_("Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."),
                     # fmt: on
                 )
                 comment.save()

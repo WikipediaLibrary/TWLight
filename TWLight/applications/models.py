@@ -323,17 +323,13 @@ class Application(models.Model):
             ):
                 # fmt: off
                 # Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
-                user_instructions = _("Access URL: {access_url}".format(
-                        access_url=resource.get_access_url
-                    )
-                )
+                user_instructions = _("Access URL: {access_url}")\
+                    .format(access_url=resource.get_access_url)
                 # fmt: on
             else:
                 # fmt: off
                 # Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-                user_instructions = _("You can expect to receive access details "
-                    "within a week or two once it has been processed."
-                )
+                user_instructions = _("You can expect to receive access details within a week or two once it has been processed.")
                 # fmt: on
         return user_instructions
 
