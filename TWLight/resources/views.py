@@ -151,7 +151,9 @@ class PartnersDetailView(DetailView):
                     pass
                 except Authorization.MultipleObjectsReturned:
                     logger.info(
-                        "Multiple authorizations returned for partner {} and user {}".format(partner, user)
+                        "Multiple authorizations returned for partner {} and user {}".format(
+                            partner, user
+                        )
                     )
                     messages.add_message(
                         self.request,
