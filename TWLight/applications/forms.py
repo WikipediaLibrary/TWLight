@@ -211,21 +211,17 @@ class BaseApplicationForm(forms.Form):
                 if len(self.field_params) > 1:
                     # fmt: off
                     # Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-                    self.fields[datum].help_text = _("Requested by: {partner_list}".format(
-                            partner_list=", ".join(user_data[datum])
-                        )
-                    )
+                    self.fields[datum].help_text = _("Requested by: {partner_list}").format(
+                        partner_list=", ".join(user_data[datum])
+                    ),
                     # fmt: on
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)
             # fmt: off
             # Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-            disclaimer_html = _("<p><small><i>"
-                "Your personal data will be processed "
-                "according to our <a href='{terms_url}'> privacy "
-                "policy</a>.</i></small></p>".format(terms_url=reverse("terms"))
-            )
+            disclaimer_html = _("<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>")\
+            .format(terms_url=reverse("terms"))
             # fmt: on
             self.helper.layout.append(HTML(disclaimer_html))
 
@@ -412,9 +408,7 @@ class RenewalForm(forms.Form):
             )
             # fmt: off
             # Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
-            self.fields["requested_access_duration"].label = _("The number of months you wish to have this access"
-                " for before renewal is required"
-            )
+            self.fields["requested_access_duration"].label = _("The number of months you wish to have this access for before renewal is required")
             # fmt: on
             fieldset.append("requested_access_duration")
 

@@ -134,12 +134,10 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
                     messages.WARNING,
                     # fmt: off
                     # Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-                    _("Please <a href='{url}'>update your contributions</a> "
-                        "to Wikipedia to help coordinators evaluate your "
-                        "applications.".format(
-                            url=reverse_lazy(
-                                "users:editor_update", kwargs={"pk": editor.pk}
-                            )
+                    _("Please <a href='{url}'>update your contributions</a> to Wikipedia to help coordinators evaluate your applications.")
+                    .format(
+                        url=reverse_lazy(
+                        "users:editor_update", kwargs={"pk": editor.pk}
                         )
                     ),
                     # fmt: on
@@ -248,10 +246,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
                         messages.WARNING,
                         # fmt: off
                         # Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-                        _("You have chosen not to receive reminder emails. "
-                            "As a coordinator, you should receive at least one "
-                            "type of reminder emails, consider changing your preferences."
-                        ),
+                        _("You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, consider changing your preferences."),
                         # fmt: on
                     )
                 else:
@@ -445,10 +440,7 @@ class EmailChangeView(SelfOnly, FormView):
                 messages.WARNING,
                 # fmt: off
                 # Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-                _("Your email is blank. You can still explore the site, "
-                    "but you won't be able to apply for access to partner "
-                    "resources without an email."
-                ),
+                _("Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."),
                 # fmt: on
             )
             return reverse_lazy("users:home")

@@ -160,9 +160,7 @@ class PartnersDetailView(DetailView):
                         messages.ERROR,
                         # fmt: off
                         # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-                        _("Multiple authorizations were returned – something's wrong. "
-                            "Please contact us and don't forget to mention this message."
-                        ),
+                        _("Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."),
                         # fmt: on
                     )
             else:

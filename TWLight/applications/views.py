@@ -418,14 +418,12 @@ class SubmitApplicationView(_BaseSubmitApplicationView):
             messages.SUCCESS,
             # fmt: off
             # Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
-            _("Your application has been submitted for review. "
-              'Head over to <a href="{applications_url}">My Applications'
-              "</a> to view the status.".format(
+            _("Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status.")
+            .format(
                 applications_url=reverse_lazy(
                     "users:my_applications",
                     kwargs={"pk": self.request.user.editor.pk},
                 )
-              )
             ),
             # fmt: on
         )
@@ -464,11 +462,7 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
                 messages.WARNING,
                 # fmt: off
                 # Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
-                _("This partner "
-                    "does not have any access grants available at this time. "
-                    "You may still apply for access; your application will be "
-                    "reviewed when access grants become available."
-                ),
+                _("This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."),
                 # fmt: on
             )
 
@@ -482,13 +476,11 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
             messages.SUCCESS,
             # fmt: off
             # Translators: This message is shown to users once they've successfully submitted their application for review.
-            _("Your application has been submitted for review. "
-                'Head over to <a href="{applications_url}">My Applications'
-                "</a> to view the status.".format(
-                    applications_url=reverse_lazy(
-                        "users:my_applications",
-                        kwargs={"pk": self.request.user.editor.pk},
-                    )
+            _("Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status.")
+            .format(
+                applications_url=reverse_lazy(
+                    "users:my_applications",
+                    kwargs={"pk": self.request.user.editor.pk},
                 )
             ),
             # fmt: on
@@ -911,8 +903,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                     messages.ERROR,
                     # fmt: off
                     # Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
-                    _("Cannot approve application as partner with proxy "
-                        "authorization method is waitlisted and (or) has zero accounts available for distribution."),
+                    _("Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."),
                     # fmt: on
                 )
                 return HttpResponseRedirect(
@@ -980,14 +971,8 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                 messages.WARNING,
                 # fmt: off
                 # Translators: This message is shown to users when they access an application page of a now Bundle partner (new applications aren't allowed for Bundle partners and the status of old applications cannot be modified)
-                _("This application cannot be modified since this "
-                    'partner is now part of our <a href="{bundle}">bundle access</a>. '
-                    "If you are eligible, you can access this resource from <a href="
-                    '"{library}">your library</a>. <a href="{contact}">'
-                    "Contact us</a> if you have any questions.".format(
-                        bundle=bundle_url, library=library_url, contact=contact_url
-                    )
-                ),
+                _("This application cannot be modified since this partner is now part of our <a href='{bundle}'>bundle access</a>. If you are eligible, you can access this resource from <a href='{library}'>your library</a>. <a href='{contact}'>Contact us</a> if you have any questions.")
+                .format(bundle=bundle_url, library=library_url, contact=contact_url),
                 # fmt: on
             )
             return
@@ -1225,7 +1210,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 request,
                 messages.SUCCESS,
                 # Translators: After a coordinator has changed the status of a number of applications, this message appears.
-                _("Batch update of application(s) {} successful.".format(success_apps)),
+                _("Batch update of application(s) {} successful.").format(success_apps),
             )
         if batch_update_failed:
             failed_apps = ", ".join(map(str, batch_update_failed))
@@ -1234,14 +1219,8 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 messages.ERROR,
                 # fmt: off
                 # Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
-                _("Cannot approve application(s) {} as partner(s) with proxy "
-                    "authorization method is/are waitlisted and (or) has/have "
-                    "not enough accounts available. If not enough accounts are "
-                    "available, prioritise the applications and then approve "
-                    "applications equal to the accounts available.".format(
-                        failed_apps
-                    )
-                ),
+                _("Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available.")
+                .format(failed_apps),
                 # fmt: on
             )
 
@@ -1483,9 +1462,7 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
                 messages.WARNING,
                 # fmt: off
                 # Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
-                _("Cannot renew application at this time as partner is not available. "
-                    "Please check back later, or contact us for more information."
-                ),
+                _("Cannot renew application at this time as partner is not available. Please check back later, or contact us for more information."),
                 # fmt: on
             )
             return HttpResponseRedirect(return_url)
@@ -1495,11 +1472,7 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
                 messages.WARNING,
                 # fmt: off
                 # Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
-                _("This partner "
-                    "does not have any access grants available at this time. "
-                    "You may still apply for access; your application will be "
-                    "reviewed when access grants become available."
-                ),
+                _("This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."),
                 # fmt: on
             )
 
@@ -1596,9 +1569,7 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
                 messages.WARNING,
                 # fmt: off
                 # Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
-                _("This object cannot be renewed. (This probably means that you have already "
-                    "requested that it be renewed.)"
-                ),
+                _("This object cannot be renewed. (This probably means that you have already requested that it be renewed.)"),
                 # fmt: on
             )
             return HttpResponseRedirect(return_url)

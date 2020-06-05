@@ -250,9 +250,7 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
                 user=twl_team,
                 # fmt: off
                 # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
-                comment=_("This partner joined the Library Bundle, which does not require applications."
-                    "This application will be marked as invalid."
-                ),
+                comment=_("This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."),
                 # fmt: on
             )
             comment.save()

@@ -18,11 +18,8 @@ class ContactUsForm(forms.Form):
         self.fields["email"].label = _("Your email")
         # fmt: off
         # Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
-        self.fields["email"].help_text = _("This field is automatically updated with "
-            "the email from your <a href='{}'>user profile</a>.".format(
-                reverse_lazy("users:home")
-            )
-        )
+        self.fields["email"].help_text = _("This field is automatically updated with the email from your <a href='{}'>user profile</a>.")\
+        .format(reverse_lazy("users:home"))
         # fmt: on
         # Translators: This labels a textfield where users can enter their email message.
         self.fields["message"].label = _("Message")

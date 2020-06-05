@@ -203,7 +203,7 @@ class ActivityView(TemplateView):
             event["color"] = "info"  # light blue
             # fmt: off
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
-            event["text"] = _("{username} received access to " '<a href="{url}">{partner}</a>').format(
+            event["text"] = _("{username} received access to <a href='{url}'>{partner}</a>").format(
                 username=grant.editor.wp_username,
                 partner=grant.partner.company_name,
                 url=reverse_lazy("partners:detail", kwargs={"pk": grant.partner.pk}),

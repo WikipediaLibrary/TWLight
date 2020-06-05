@@ -381,9 +381,9 @@ class CSVPageViewsByPath(_CSVDownloadView):
             return super(CSVPageViewsByPath, self).dispatch(request, *args, **kwargs)
         else:
             messages.add_message(
-                # Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
                 request,
                 messages.WARNING,
+                # Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
                 _("You must be staff to do that."),
             )
             raise PermissionDenied

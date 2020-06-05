@@ -439,10 +439,7 @@ class OAuthCallbackView(View):
                     messages.WARNING,
                     # fmt: off
                     # Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-                    _("Your Wikipedia account does not meet the eligibility "
-                        "criteria in the terms of use, so your Wikipedia Library "
-                        "Card Platform account cannot be activated."
-                    ),
+                    _("Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."),
                     # fmt: on
                 )
             else:
@@ -451,12 +448,7 @@ class OAuthCallbackView(View):
                     messages.WARNING,
                     # fmt: off
                     # Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-                    _("Your Wikipedia account no longer "
-                        "meets the eligibility criteria in the terms of use, so "
-                        "you cannot be logged in. If you think you should be "
-                        "able to log in, please email "
-                        "wikipedialibrary@wikimedia.org."
-                    ),
+                    _("Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."),
                     # fmt: on
                 )
 
