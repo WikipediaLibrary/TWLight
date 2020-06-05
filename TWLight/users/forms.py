@@ -194,6 +194,7 @@ class EmailChangeForm(forms.Form):
     def __init__(self, user, *args, **kwargs):
         super(EmailChangeForm, self).__init__(*args, **kwargs)
 
+        # Translators: Labels the field where the user's email is displayed.
         self.fields["email"].label = _("Email")
         # fmt: off
         # Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.

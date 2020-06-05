@@ -65,6 +65,7 @@
             {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
             {% trans "Yes" %}
         {% else %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
             <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
             <p>
                 {% comment %} Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate {{ username }}.{% endcomment %}
@@ -106,6 +107,7 @@
           {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
           {% trans "Yes" %}
       {% else %}
+          {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
           <strong class="warning">{% trans "No" %}</strong>
       {% endif %}
   </div>
@@ -123,6 +125,7 @@
           {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements. {% endcomment %}
           {% trans "Yes" %}
       {% else %}
+          {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
           <strong class="warning">{% trans "No" %}</strong>
           <p class="block-notice">
             {% url 'contact' as contact_url %}
@@ -156,6 +159,7 @@
             {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle. {% endcomment %}
             {% trans "Yes" %}
         {% else %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
             <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
         {% endif %}
     </div>
@@ -173,6 +177,7 @@
             {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user qualifies through the technical requirements for the Library Bundle. {% endcomment %}
             {% trans "Yes" %}
         {% else %}
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
             <strong class="warning">{% trans "No" %}</strong>
         {% endif %}
     </div>
@@ -265,7 +270,8 @@
         </div>
         <div class="col-xs-12 col-sm-9">
             {{ editor.user.email }}<br/>
-            <a href="{% url 'users:email_change' %}">{% trans "(update)" %}</a>
+            {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email. {% endcomment %}
+            <a href="{% url 'users:email_change' %}">({% trans "update" %})</a>
         </div>
     </div>
 
