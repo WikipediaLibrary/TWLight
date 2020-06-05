@@ -40,10 +40,10 @@ class EditorUpdateForm(forms.ModelForm):
 
         editor = self.instance
         self.helper.form_action = reverse("users:editor_update", args=[editor.id])
+        # fmt: off
         # Translators: This labels a field where users can describe their activity on Wikipedia in a small biography.
-        self.fields["contributions"].label = _(
-            "Describe your contributions " "to Wikipedia: topics edited, et cetera."
-        )
+        self.fields["contributions"].label = _("Describe your contributions " "to Wikipedia: topics edited, et cetera.")
+        # fmt: on
         self.fields["contributions"].help_text = None
 
 
@@ -177,10 +177,12 @@ class EmailChangeForm(forms.Form):
         super(EmailChangeForm, self).__init__(*args, **kwargs)
 
         self.fields["email"].label = _("Email")
+        # fmt: off
         # Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
-        self.fields["use_wp_email"].label = _(
-            "Use my Wikipedia email address (will be updated the next time you login)."
+        self.fields["use_wp_email"].label = _("Use my Wikipedia email address "
+            "(will be updated the next time you login)."
         )
+        # fmt: on
 
         self.fields["email"].initial = user.email
         self.fields["use_wp_email"].initial = user.userprofile.use_wp_email

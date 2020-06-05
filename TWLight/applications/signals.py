@@ -231,7 +231,7 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
     elif sender == Stream:
         partner = instance.partner
 
-    if partner.authorization_method == Partner.BUNDLE:
+    if partner and partner.authorization_method == Partner.BUNDLE:
         # All open applications for this partner.
         applications = Application.objects.filter(
             partner=partner,
@@ -248,11 +248,12 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
                 content_object=application,
                 site_id=site_id(),
                 user=twl_team,
+                # fmt: off
                 # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
-                comment=_(
-                    "This partner joined the Library Bundle, which does not require applications."
+                comment=_("This partner joined the Library Bundle, which does not require applications."
                     "This application will be marked as invalid."
                 ),
+                # fmt: on
             )
             comment.save()
             # Mark application invalid.

@@ -245,12 +245,13 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
                     messages.add_message(
                         request,
                         messages.WARNING,
+                        # fmt: off
                         # Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-                        _(
-                            "You have chosen not to receive reminder emails. "
+                        _("You have chosen not to receive reminder emails. "
                             "As a coordinator, you should receive at least one "
                             "type of reminder emails, consider changing your preferences."
                         ),
+                        # fmt: on
                     )
                 else:
                     messages.add_message(
@@ -402,10 +403,10 @@ class EmailChangeView(SelfOnly, FormView):
             messages.add_message(
                 self.request,
                 messages.WARNING,
+                # fmt: off
                 # Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-                _(
-                    "Both the values cannot be blank. Either enter a email or check the box."
-                ),
+                _("Both the values cannot be blank. Either enter a email or check the box."),
+                # fmt: on
             )
             return HttpResponseRedirect(reverse_lazy("users:email_change"))
 
@@ -441,12 +442,13 @@ class EmailChangeView(SelfOnly, FormView):
             messages.add_message(
                 self.request,
                 messages.WARNING,
+                # fmt: off
                 # Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-                _(
-                    "Your email is blank. You can still explore the site, "
+                _("Your email is blank. You can still explore the site, "
                     "but you won't be able to apply for access to partner "
                     "resources without an email."
                 ),
+                # fmt: on
             )
             return reverse_lazy("users:home")
 

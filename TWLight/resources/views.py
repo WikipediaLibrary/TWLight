@@ -151,16 +151,17 @@ class PartnersDetailView(DetailView):
                     pass
                 except Authorization.MultipleObjectsReturned:
                     logger.info(
-                        "Multiple authorizations returned for partner {} and user {}"
-                    ).format(partner, user)
+                        "Multiple authorizations returned for partner {} and user {}".format(partner, user)
+                    )
                     messages.add_message(
                         self.request,
                         messages.ERROR,
+                        # fmt: off
                         # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-                        _(
-                            "Multiple authorizations were returned – something's wrong. "
+                        _("Multiple authorizations were returned – something's wrong. "
                             "Please contact us and don't forget to mention this message."
                         ),
+                        # fmt: on
                     )
             else:
                 authorizations = Authorization.objects.filter(
