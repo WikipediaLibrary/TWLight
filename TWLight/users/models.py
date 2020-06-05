@@ -477,9 +477,7 @@ class Editor(models.Model):
 
     def __str__(self):
         # Translators: Do not translate.
-        return _("{wp_username}").format(
-            wp_username=self.wp_username
-        )
+        return _("{wp_username}").format(wp_username=self.wp_username)
 
     def get_absolute_url(self):
         return reverse("users:editor_detail", kwargs={"pk": self.pk})

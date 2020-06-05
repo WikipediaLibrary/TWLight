@@ -351,8 +351,10 @@ class OAuthCallbackView(View):
         except (AssertionError, TypeError):
             logger.exception("Did not receive a valid oauth response.")
             messages.add_message(
+                request,
+                messages.WARNING,
                 # Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-                request, messages.WARNING, _("Did not receive a valid oauth response.")
+                _("Did not receive a valid oauth response."),
             )
             raise PermissionDenied
 

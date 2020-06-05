@@ -21,9 +21,7 @@ def validate_partners(partners: Union[QuerySet, MultilingualQuerySet]):
                 "All related Partners must share the same Authorization method."
             )
         if authorization_methods.get() is not Partner.BUNDLE:
-            raise ValidationError(
-                "Only Bundle Partners support shared Authorization."
-            )
+            raise ValidationError("Only Bundle Partners support shared Authorization.")
 
 
 def validate_authorizer(authorizer):
