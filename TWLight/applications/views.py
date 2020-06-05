@@ -825,7 +825,7 @@ class ListRenewalApplicationsView(_BaseListApplicationView):
     def get_context_data(self, **kwargs):
         context = super(ListRenewalApplicationsView, self).get_context_data(**kwargs)
 
-        # Translators: #Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
+        # Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
         context["title"] = _("Access grants up for renewal")
 
         context["renewal_class"] = "active"
