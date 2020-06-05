@@ -53,7 +53,7 @@
         {% comment %} Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question. {% endcomment %}
         <strong>{% trans "Satisfies terms of use?" %}</strong>
         <p>
-            {% comment %} translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a yes or no answer. {% endcomment %}
+            {% comment %} Translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a yes or no answer. {% endcomment %}
             {% blocktrans trimmed %}
                 at their last login, did this user meet the criteria set forth in the
                 terms of use?
@@ -127,7 +127,7 @@
           <p class="block-notice">
             {% url 'contact' as contact_url %}
             {% comment %} Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
-            {% blocktrans %}
+            {% blocktrans trimmed %}
               It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
             {% endblocktrans %}
           </p>

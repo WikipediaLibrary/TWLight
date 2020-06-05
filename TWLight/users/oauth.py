@@ -260,8 +260,8 @@ class OAuthInitializeView(View):
         # one (and make sure it's legit).
         # The Sites framework was designed for different URLs that correspond to
         # different databases or functionality - it's not a good fit here.
+        domain = self.request.get_host()
         try:
-            domain = self.request.get_host()
             assert domain in settings.ALLOWED_HOSTS  # safety first!
         except (AssertionError, DisallowedHost):
             logger.exception()
@@ -351,20 +351,22 @@ class OAuthCallbackView(View):
         except (AssertionError, TypeError):
             logger.exception("Did not receive a valid oauth response.")
             messages.add_message(
+                # Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
                 request, messages.WARNING, _("Did not receive a valid oauth response.")
             )
             raise PermissionDenied
 
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
+        domain = self.request.get_host()
         try:
-            domain = self.request.get_host()
             assert domain in settings.ALLOWED_HOSTS
         except (AssertionError, DisallowedHost):
             logger.exception("Domain is not an allowed host")
             messages.add_message(
                 request,
                 messages.WARNING,
+                # Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
                 _("{domain} is not an allowed host.").format(domain=domain),
             )
             raise PermissionDenied
@@ -462,11 +464,11 @@ class OAuthCallbackView(View):
             login(request, user)
 
             if created:
-                # Translators: this message is displayed to users with brand new accounts.
                 messages.add_message(
                     request,
                     messages.INFO,
-                    _("Welcome! " "Please agree to the terms of use."),
+                    # Translators: this message is displayed to users with brand new accounts.
+                    _("Welcome! Please agree to the terms of use."),
                 )
                 return_url = reverse_lazy("terms")
             else:
@@ -500,11 +502,11 @@ class OAuthCallbackView(View):
                             "for post-login redirection."
                         )
                 else:
-                    # Translators: This message is shown when a user logs back in to the site after their first time and hasn't agreed to the terms of use.
                     messages.add_message(
                         request,
                         messages.INFO,
-                        _("Welcome back! " "Please agree to the terms of use."),
+                        # Translators: This message is shown when a user logs back in to the site after their first time and hasn't agreed to the terms of use.
+                        _("Welcome back! Please agree to the terms of use."),
                     )
                     return_url = reverse_lazy("terms")
         else:

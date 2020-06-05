@@ -106,6 +106,10 @@ class UserEmailForm(forms.Form):
         self.fields[
             "send_renewal_notices"
         ].initial = user.userprofile.send_renewal_notices
+        self.fields[
+            "send_renewal_notices"
+        # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive account renewal notices or not.
+        ].label = _("Send renewal notices")
 
 
 class CoordinatorEmailForm(forms.Form):
@@ -121,11 +125,25 @@ class CoordinatorEmailForm(forms.Form):
             "send_pending_application_reminders"
         ].initial = user.userprofile.pending_app_reminders
         self.fields[
+            "send_pending_application_reminders"
+        # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive pending application reminders or not.
+        ].label = _("Send pending application reminders")
+
+        self.fields[
             "send_discussion_application_reminders"
         ].initial = user.userprofile.discussion_app_reminders
         self.fields[
+            "send_discussion_application_reminders"
+        # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive application reminders that are under discussion or not.
+        ].label = _("Send discussion application reminders")
+
+        self.fields[
             "send_approved_application_reminders"
         ].initial = user.userprofile.approved_app_reminders
+        self.fields[
+            "send_approved_application_reminders"
+            # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive approved application reminders or not.
+        ].label = _("Send approved application reminders")
 
 
 class RestrictDataForm(forms.Form):
@@ -194,8 +212,10 @@ class EmailChangeForm(forms.Form):
         self.helper.layout = Layout(
             "email",
             "use_wp_email",
-            # Translators: This labels a button which users click to change their email.
             Submit(
-                "submit", _("Update email"), css_class="btn btn-default col-md-offset-2"
+                "submit",
+                # Translators: This labels a button which users click to change their email.
+                _("Update email"),
+                css_class="btn btn-default col-md-offset-2"
             ),
         )

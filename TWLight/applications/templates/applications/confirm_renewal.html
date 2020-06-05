@@ -7,9 +7,9 @@
     <form class="form-horizontal" method="post">
       {% csrf_token %}
       {% crispy form %}
-      {% comment %} Translators: This message is displayed on the page where users can confirm their renewal. {% endcomment %}
       <div class="form-group">
         <label class="control-label col-lg-3">
+          {% comment %} Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate {{  partner }}. {% endcomment %}
           {% blocktrans trimmed %}
             Click 'confirm' to renew your application for {{ partner }}
           {% endblocktrans %}

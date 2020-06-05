@@ -132,9 +132,9 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
                 messages.add_message(
                     self.request,
                     messages.WARNING,
+                    # fmt: off
                     # Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-                    _(
-                        'Please <a href="{url}">update your contributions</a> '
+                    _("Please <a href='{url}'>update your contributions</a> "
                         "to Wikipedia to help coordinators evaluate your "
                         "applications.".format(
                             url=reverse_lazy(
@@ -142,6 +142,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
                             )
                         )
                     ),
+                    # fmt: on
                 )
         except Editor.DoesNotExist:
             """
@@ -815,10 +816,10 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
         authorization = self.get_object()
         authorization.date_expires = yesterday
         authorization.save()
-        # Translators: This message is shown once the access to a partner has successfully been returned.
         messages.add_message(
             self.request,
             messages.SUCCESS,
+            # Translators: This message is shown once the access to a partner has successfully been returned.
             _("Access to {} has been returned.").format(authorization.partners),
         )
         return HttpResponseRedirect(reverse("users:my_library"))

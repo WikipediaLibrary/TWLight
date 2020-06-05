@@ -476,8 +476,8 @@ class Editor(models.Model):
             self.user.userprofile.save()
 
     def __str__(self):
+        # Translators: Do not translate.
         return _("{wp_username}").format(
-            # Translators: Do not translate.
             wp_username=self.wp_username
         )
 

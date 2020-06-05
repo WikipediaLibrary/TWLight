@@ -53,6 +53,7 @@
             </div>
             <div class="col-xs-9 text-right">
               <div class="huge">{{ total_apps }}</div>
+              {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of accounts distributed. {% endcomment %}
               <div>{% trans 'Total accounts distributed' %}</div>
             </div>
           </div>
@@ -76,6 +77,7 @@
             </div>
             <div class="col-xs-9 text-right">
               <div class="huge">{{ average_authorizations|floatformat:2 }}</div>
+              {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the avergae number of accounts distributed per user. {% endcomment %}
               <div>{% trans 'Average accounts per user' %}</div>
             </div>
           </div>
@@ -125,6 +127,7 @@
         <table class="table table-striped table-hover">
           <tr>
             <th>
+              {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the various URLs of the site.{% endcomment %}
               {% trans 'Page URL' %}
             </th>
             <th>
@@ -150,9 +153,11 @@
         <table class="table table-striped table-hover">
           <tr>
             <th>
+              {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data column showing the name of the partners.{% endcomment %}
               {% trans 'Partner' %}
             </th>
             <th>
+              {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data column showing the number of views against eash partner names.{% endcomment %}
               {% trans 'Number of views' %}                
             </th>
           </tr>
@@ -181,12 +186,20 @@
       <h2 class="page-header" id="applications-section">{% trans 'Applications' %}</h2>
       {% if total_apps > 0 %}
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time. {% endcomment %}
-        <h3>{% trans "Number of accounts distributed over time" %}</h3> <a href="{% url 'csv:num_applications' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+        <h3>{% trans "Number of accounts distributed over time" %}</h3>
+        <a href="{% url 'csv:num_applications' %}" class="pull-right btn btn-default">
+          {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the button staff users can click to downlad the associated data in the form of a CSV file. {% endcomment %}
+          {% trans "download as csv" %}
+        </a>
         <div style="clear:both;"></div>
         <div id="application-time-graph" style="width:80%;height:300px"></div>
 
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of applications by number of days to be approved or rejected.{% endcomment %}
-        <h3>{% trans "Applications by number of days until decision" %}</h3> <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+        <h3>{% trans "Applications by number of days until decision" %}</h3>
+        <a href="{% url 'csv:app_time_histogram' %}" class="pull-right btn btn-default">
+          {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the button staff users can click to downlad the associated data in the form of a CSV file. {% endcomment %}
+          {% trans "download as csv" %}
+        </a>
         <p>
           {% comment %} Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). {% endcomment %}
           {% blocktrans trimmed %}
@@ -198,7 +211,11 @@
         <div id="app-time-histogram-graph" style="width:80%;height:300px"></div>          
 
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the median (not mean) number of days for applications to receive a decision.{% endcomment %}
-        <h3>{% trans "Median days until application decision, per month" %}</h3> <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+        <h3>{% trans "Median days until application decision, per month" %}</h3>
+        <a href="{% url 'csv:app_medians' %}" class="pull-right btn btn-default">
+          {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the button staff users can click to downlad the associated data in the form of a CSV file. {% endcomment %}
+          {% trans "download as csv" %}
+        </a>
         <p>
           {% comment %} Translators: This text describes a graph on the metrics page (https://wikipedialibrary.wmflabs.org/dashboard/). The data is median, not mean. {% endcomment %}
           {% blocktrans trimmed %}
@@ -208,7 +225,11 @@
         </p>
         <div id="app-medians-graph" style="width:80%;height:300px"></div>
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
-        <h3>{% trans "Open application status distribution" %}</h3> <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+        <h3>{% trans "Open application status distribution" %}</h3>
+        <a href="{% url 'csv:app_distribution' %}" class="pull-right btn btn-default">
+          {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the button staff users can click to downlad the associated data in the form of a CSV file. {% endcomment %}
+          {% trans "download as csv" %}
+        </a>
         <div id="app-distribution-graph" style="width:50%;height:300px"></div>
       {% endif %}
 
@@ -224,7 +245,11 @@
 
       {% if user_count > 0 %}
         {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.{% endcomment %}
-        <h3>{% trans "User language distribution" %}</h3> <a href="{% url 'csv:user_language' %}" class="pull-right btn btn-default">{% trans "download as csv" %}</a>
+        <h3>{% trans "User language distribution" %}</h3>
+        <a href="{% url 'csv:user_language' %}" class="pull-right btn btn-default">
+          {% comment %} Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text labels the button staff users can click to downlad the associated data in the form of a CSV file. {% endcomment %}
+          {% trans "download as csv" %}
+        </a>
         <div id="user-language-graph" style="width:50%;height:300px"></div>
       {% endif %}
     </div>
