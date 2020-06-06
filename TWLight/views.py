@@ -121,7 +121,7 @@ class ActivityView(TemplateView):
             event["color"] = "warning"  # will be yellow
             # fmt: off
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-            event["text"] = _("{username} signed up for a Wikipedia Library " "Card Platform account").format(
+            event["text"] = _("{username} signed up for a Wikipedia Library Card Platform account").format(
                 username=editor.wp_username
             )
             # fmt: on
@@ -155,9 +155,7 @@ class ActivityView(TemplateView):
             if app.parent:
                 # fmt: off
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
-                text = _("{username} applied for renewal of their "
-                    '<a href="{url}">{partner}</a> access'
-                ).format(
+                text = _("{username} applied for renewal of their <a href='{url}'>{partner}</a> access").format(
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
@@ -166,10 +164,7 @@ class ActivityView(TemplateView):
             elif app.rationale:
                 # fmt: off
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
-                text = _("{username} applied for access to "
-                    '<a href="{url}">{partner}</a>'
-                    "<blockquote>{rationale}</blockquote>"
-                ).format(
+                text = _("{username} applied for access to <a href='{url}'>{partner}</a><blockquote>{rationale}</blockquote>").format(
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
@@ -179,7 +174,7 @@ class ActivityView(TemplateView):
             else:
                 # fmt: off
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
-                text = _("{username} applied for access to " '<a href="{url}">{partner}</a>').format(
+                text = _("{username} applied for access to <a href='{url}'>{partner}</a>").format(
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),

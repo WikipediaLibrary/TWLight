@@ -220,8 +220,9 @@ class BaseApplicationForm(forms.Form):
             self.helper.layout.append(user_data_layout)
             # fmt: off
             # Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-            disclaimer_html = _("<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>")\
-            .format(terms_url=reverse("terms"))
+            disclaimer_html = _("<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>").format(
+                terms_url=reverse("terms")
+            )
             # fmt: on
             self.helper.layout.append(HTML(disclaimer_html))
 
