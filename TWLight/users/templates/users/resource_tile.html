@@ -33,12 +33,12 @@
           <img src="{{ resource.partner.logos.logo.url }}" class="img-responsive partner-logo" title="
             {% if resource.valid_authorization_with_access_url %}
               {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ name }}. {% endcomment %}
-              {% blocktrans trimmed with resource.name as name %}
+              {% blocktrans trimmed with resource.partner as name %}
                  External link to {{ name }}'s website
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Title for logo in tiles that are linked to partner description  page. Don't translate {{ name }}. {% endcomment %}
-              {% blocktrans trimmed with resource.name as name %}
+              {% blocktrans trimmed with resource.partner as name %}
                  Link to {{ name }} signup page
               {% endblocktrans %}
             {% endif %}
@@ -46,12 +46,12 @@
           alt="
             {% if resource.valid_authorization_with_access_url %}
               {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ name }}. {% endcomment %}
-              {% blocktrans trimmed with resource.name as name %}
+              {% blocktrans trimmed with resource.partner as name %}
                  Link to {{ name }}'s external website
               {% endblocktrans %}
             {% else %}
               {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ name }}. {% endcomment %}
-              {% blocktrans trimmed with resource.name as name %}
+              {% blocktrans trimmed with resource.partner as name %}
                  Link to {{ name }} signup page
               {% endblocktrans %}
             {% endif %}
