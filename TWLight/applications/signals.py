@@ -1,11 +1,16 @@
-import logging
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from django.db.models.signals import pre_save, post_save
+import logging
+
+from TWLight.helpers import site_id
 from django.dispatch import receiver, Signal
-from django.utils.timezone import localtime, now
+from django.db.models.signals import pre_save, post_save
 from django_comments.signals import comment_was_posted
-from TWLight.resources.models import Partner
+from django_comments.models import Comment
+from django.contrib.auth.models import User
+from django.utils.timezone import localtime, now
+from django.utils.translation import ugettext as _
+from TWLight.resources.models import Partner, Stream
 from TWLight.applications.models import Application
 from TWLight.users.models import Authorization
 
@@ -37,6 +42,7 @@ def under_discussion(sender, comment, request, **kwargs):
         if (
             application_object.status == Application.PENDING
             and application_object.editor.user.username != request.user.username
+            and application_object.partner.authorization_method != Partner.BUNDLE
         ):
             application_object.status = Application.QUESTION
             application_object.save()
@@ -46,7 +52,6 @@ def under_discussion(sender, comment, request, **kwargs):
                 comment.object_pk
             )
         )
-        pass
 
 
 @receiver(no_more_accounts)
@@ -144,12 +149,12 @@ def post_revision_commit(sender, instance, **kwargs):
         if instance.specific_stream:
             existing_authorization = Authorization.objects.filter(
                 user=instance.user,
-                partner=instance.partner,
+                partners=instance.partner,
                 stream=instance.specific_stream,
             )
         else:
             existing_authorization = Authorization.objects.filter(
-                user=instance.user, partner=instance.partner
+                user=instance.user, partners=instance.partner
             )
 
         authorized_user = instance.user
@@ -176,7 +181,6 @@ def post_revision_commit(sender, instance, **kwargs):
 
         authorization.user = authorized_user
         authorization.authorizer = authorizer
-        authorization.partner = instance.partner
 
         # If this is a proxy partner, and the requested_access_duration
         # field is set to false, set (or reset) the expiry date
@@ -203,5 +207,54 @@ def post_revision_commit(sender, instance, **kwargs):
         elif instance.partner.account_length:
             # account_length should be a timedelta
             authorization.date_expires = date.today() + instance.partner.account_length
-
         authorization.save()
+        authorization.partners.add(instance.partner)
+
+        # If we just finalised a renewal, reset reminder_email_sent
+        # so that we can send further reminders.
+        if instance.parent and authorization.reminder_email_sent:
+            authorization.reminder_email_sent = False
+            authorization.save()
+
+
+@receiver(post_save, sender=Partner)
+@receiver(post_save, sender=Stream)
+def invalidate_bundle_partner_applications(sender, instance, **kwargs):
+    """
+    Invalidates open applications for bundle partners.
+    """
+
+    twl_team = User.objects.get(username="TWL Team")
+
+    if sender == Partner:
+        partner = instance
+    elif sender == Stream:
+        partner = instance.partner
+
+    if partner.authorization_method == Partner.BUNDLE:
+        # All open applications for this partner.
+        applications = Application.objects.filter(
+            partner=partner,
+            status__in=(
+                Application.PENDING,
+                Application.QUESTION,
+                Application.APPROVED,
+            ),
+        )
+
+        for application in applications:
+            # Add a comment.
+            comment = Comment.objects.create(
+                content_object=application,
+                site_id=site_id(),
+                user=twl_team,
+                # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
+                comment=_(
+                    "This partner joined the Library Bundle, which does not require applications."
+                    "This application will be marked as invalid."
+                ),
+            )
+            comment.save()
+            # Mark application invalid.
+            application.status = Application.INVALID
+            application.save()

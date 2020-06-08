@@ -84,15 +84,6 @@ class OAuthBackend(object):
         # wiki userID should be unique, and limited to ASCII.
         return "{sub}".format(sub=identity["sub"])
 
-    def _meets_minimum_requirement(self, identity):
-        """
-        This needs to be reworked to actually check against global_userinfo.
-        """
-        if "autoconfirmed" in identity["rights"]:
-            return True
-
-        return False
-
     def _create_user(self, identity):
         # This can't be super informative because we don't want to log
         # identities.
@@ -313,9 +304,7 @@ class OAuthInitializeView(View):
                     'for post-login redirection per "next" parameter.'
                 )
             except KeyError:
-                return_url = reverse_lazy(
-                    "users:editor_detail", kwargs={"pk": self.request.user.editor.pk}
-                )
+                return_url = reverse_lazy("homepage")
                 logger.warning(
                     'User already authenticated. No "next" '
                     "parameter for post-login redirection."
@@ -483,8 +472,6 @@ class OAuthCallbackView(View):
                 # Send user either to the destination specified in the 'next'
                 # parameter or to their own editor detail page.
                 if user.userprofile.terms_of_use:
-                    # Translators: This message is shown when a user logs back in to the site after their first time.
-                    messages.add_message(request, messages.INFO, _("Welcome back!"))
                     try:
                         # Create a QueryDict from the 'get' session dict.
                         query_dict = QueryDict(
@@ -505,9 +492,7 @@ class OAuthCallbackView(View):
                             'post-login redirection per "next" parameter.'
                         )
                     except KeyError:
-                        return_url = reverse_lazy(
-                            "users:editor_detail", kwargs={"pk": user.editor.pk}
-                        )
+                        return_url = reverse_lazy("homepage")
                         logger.warning(
                             'User authenticated. No "next" parameter '
                             "for post-login redirection."

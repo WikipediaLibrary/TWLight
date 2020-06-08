@@ -12,6 +12,7 @@ from django import forms
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from .helpers.validation import validate_partners, validate_authorizer
 from .models import Editor, UserProfile, Authorization
 from .groups import get_restricted
 
@@ -55,7 +56,25 @@ class AuthorizationUserChoiceForm(forms.ModelChoiceField):
             return obj.username
 
 
-class AuthorizationForm(forms.ModelForm):
+class AuthorizationAdminForm(forms.ModelForm):
+    """
+    This override only exists to run custom validation.
+    """
+
+    class Meta:
+        model = Authorization
+        fields = "__all__"
+
+    def clean_partners(self):
+        validate_partners(self.cleaned_data["partners"])
+        return self.cleaned_data["partners"]
+
+    def clean_authorizer(self):
+        validate_authorizer(self.cleaned_data["authorizer"])
+        return self.cleaned_data["authorizer"]
+
+
+class AuthorizationInlineForm(forms.ModelForm):
     authorizer = AuthorizationUserChoiceForm(
         User.objects.filter(
             models.Q(is_superuser=True) | models.Q(groups__name="coordinators")

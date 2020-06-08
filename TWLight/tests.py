@@ -5,11 +5,11 @@ from faker import Faker
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core import mail
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, Client
 
 
 from rest_framework.test import APIRequestFactory, force_authenticate
@@ -19,6 +19,7 @@ from TWLight.applications.models import Application
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.resources.models import AccessCode, Partner
+from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
 from TWLight.users.factories import UserFactory, EditorFactory
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization
@@ -544,7 +545,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app1.refresh_from_db()
         self.auth_app1 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor1.user, partner=self.partner1
+            authorizer=self.editor4.user, user=self.editor1.user, partners=self.partner1
         )
         self.client.post(
             reverse("applications:evaluate", kwargs={"pk": self.app10.pk}),
@@ -555,7 +556,7 @@ class AuthorizationBaseTestCase(TestCase):
         self.auth_app10 = Authorization.objects.get(
             authorizer=self.editor4.user,
             user=self.editor1.user,
-            partner=self.partner5,
+            partners=self.partner5,
             stream=self.partner5_stream1,
         )
         self.client.post(
@@ -567,19 +568,19 @@ class AuthorizationBaseTestCase(TestCase):
         self.auth_app11 = Authorization.objects.get(
             authorizer=self.editor4.user,
             user=self.editor1.user,
-            partner=self.partner5,
+            partners=self.partner5,
             stream=self.partner5_stream2,
         )
 
-        # Approve the application
+        # Send the application
         self.client.post(
             reverse("applications:evaluate", kwargs={"pk": self.app2.pk}),
-            data={"status": Application.APPROVED},
+            data={"status": Application.SENT},
             follow=True,
         )
         self.app2.refresh_from_db()
-        self.auth_app2 = Authorization(
-            authorizer=self.editor4.user, user=self.editor2.user, partner=self.partner1
+        self.auth_app2 = Authorization.objects.get(
+            authorizer=self.editor4.user, user=self.editor2.user, partners=self.partner1
         )
 
         # Send the application
@@ -590,7 +591,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app3.refresh_from_db()
         self.auth_app3 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor3.user, partner=self.partner1
+            authorizer=self.editor4.user, user=self.editor3.user, partners=self.partner1
         )
 
         # PROXY authorization methods don't set .SENT on the evaluate page;
@@ -612,7 +613,7 @@ class AuthorizationBaseTestCase(TestCase):
 
         self.app4.refresh_from_db()
         self.auth_app4 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor1.user, partner=self.partner2
+            authorizer=self.editor4.user, user=self.editor1.user, partners=self.partner2
         )
 
         # This app was created with a factory, which doesn't create a revision.
@@ -630,7 +631,7 @@ class AuthorizationBaseTestCase(TestCase):
         )
         self.app5.refresh_from_db()
         self.auth_app5 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor2.user, partner=self.partner2
+            authorizer=self.editor4.user, user=self.editor2.user, partners=self.partner2
         )
 
         # Set up an access code to distribute
@@ -686,7 +687,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app7.user, authorizer=self.editor4.user, partner=self.app7.partner
+            user=self.app7.user,
+            authorizer=self.editor4.user,
+            partners=self.app7.partner,
         ).exists()
 
         self.assertFalse(authorization_object_exists)
@@ -708,7 +711,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app7.user, authorizer=self.editor4.user, partner=self.app7.partner
+            user=self.app7.user,
+            authorizer=self.editor4.user,
+            partners=self.app7.partner,
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -719,7 +724,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # created after a coordinator marks an application as sent.
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app8.user, authorizer=self.editor4.user, partner=self.app8.partner
+            user=self.app8.user,
+            authorizer=self.editor4.user,
+            partners=self.app8.partner,
         ).exists()
 
         self.assertFalse(authorization_object_exists)
@@ -735,7 +742,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         authorization_object_exists = Authorization.objects.filter(
-            user=self.app8.user, authorizer=self.editor4.user, partner=self.app8.partner
+            user=self.app8.user,
+            authorizer=self.editor4.user,
+            partners=self.app8.partner,
         ).exists()
 
         self.assertTrue(authorization_object_exists)
@@ -743,13 +752,13 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
     def test_handle_stream_post_delete(self):
 
         partner5_authorizations = Authorization.objects.filter(
-            partner=self.partner5, user=self.editor1.user, stream__isnull=True
+            partners=self.partner5, user=self.editor1.user, stream__isnull=True
         )
         stream1_authorizations = Authorization.objects.filter(
-            partner=self.partner5, user=self.editor1.user, stream=self.partner5_stream1
+            partners=self.partner5, user=self.editor1.user, stream=self.partner5_stream1
         )
         stream2_authorizations = Authorization.objects.filter(
-            partner=self.partner5, user=self.editor1.user, stream=self.partner5_stream2
+            partners=self.partner5, user=self.editor1.user, stream=self.partner5_stream2
         )
         # Verifying that we only have stream-specific auths.
         self.assertTrue(self.partner5.specific_stream)
@@ -810,7 +819,9 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
         auth_app1_renewal = Authorization.objects.get(
-            user=self.app1.user, authorizer=self.editor5.user, partner=self.app1.partner
+            user=self.app1.user,
+            authorizer=self.editor5.user,
+            partners=self.app1.partner,
         )
         self.assertTrue(auth_app1_renewal)
 
@@ -867,7 +878,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # Zero partner 2 authorizations with no expiry.
         initial_partner2_auths_no_expiry_count = 0
         initial_partner2_auths_no_expiry = Authorization.objects.filter(
-            partner=self.partner2, date_expires__isnull=True
+            partners=self.partner2, date_expires__isnull=True
         )
         for partner2_auth in initial_partner2_auths_no_expiry:
             if partner2_auth.is_valid:
@@ -876,7 +887,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # Count partner 2 apps with an expiration date.
         initial_partner2_auths_with_expiry_count = 0
         initial_partner2_auths_with_expiry = Authorization.objects.filter(
-            partner=self.partner2, date_expires__isnull=False
+            partners=self.partner2, date_expires__isnull=False
         )
         for partner2_auth in initial_partner2_auths_with_expiry:
             if partner2_auth.is_valid:
@@ -891,7 +902,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # Count partner 2 apps with an expiration date post_save.
         post_save_partner2_auths_with_expiry_count = 0
         post_save_partner2_auths_with_expiry = Authorization.objects.filter(
-            partner=self.partner2, date_expires__isnull=False
+            partners=self.partner2, date_expires__isnull=False
         )
         for partner2_auth in post_save_partner2_auths_with_expiry:
             if partner2_auth.is_valid:
@@ -899,7 +910,121 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
 
         # All valid partner 2 authorizations have expiry set.
         post_save_partner2_auths_no_expiry_count = Authorization.objects.filter(
-            partner=self.partner2, date_expires__isnull=True
+            partners=self.partner2, date_expires__isnull=True
+        ).count()
+        self.assertEqual(
+            initial_partner2_auths_with_expiry_count
+            + initial_partner2_auths_no_expiry_count,
+            post_save_partner2_auths_with_expiry_count,
+        )
+
+    def test_authorization_backfill_expiry_date_on_partner_save_with_coordinator_deletion(
+        self
+    ):
+        # As above, but this should still work in the case that an authorization's
+        # coordinator deleted their data after authorizing a user.
+        initial_partner2_auths_no_expiry_count = 0
+        initial_partner2_auths_no_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=True
+        )
+        for partner2_auth in initial_partner2_auths_no_expiry:
+            if partner2_auth.is_valid:
+                initial_partner2_auths_no_expiry_count += 1
+
+        # Count partner 2 apps with an expiration date.
+        initial_partner2_auths_with_expiry_count = 0
+        initial_partner2_auths_with_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=False
+        )
+        for partner2_auth in initial_partner2_auths_with_expiry:
+            if partner2_auth.is_valid:
+                initial_partner2_auths_with_expiry_count += 1
+                # Clear out the expiration date on those.
+                partner2_auth.date_expires = None
+                partner2_auth.save()
+
+        # Now have partner2's coordinator delete their data
+        delete_url = reverse("users:delete_data", kwargs={"pk": self.editor4.user.pk})
+
+        # Need a password so we can login
+        self.editor4.user.set_password("editor")
+        self.editor4.user.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.editor4.user, password="editor")
+
+        submit = self.client.post(delete_url)
+
+        # We get a strange error if we don't refresh the object first.
+        self.partner2.refresh_from_db()
+
+        # Save partner 2
+        self.partner2.save()
+        self.partner2.refresh_from_db()
+        # Count partner 2 apps with an expiration date post_save.
+        post_save_partner2_auths_with_expiry_count = 0
+        post_save_partner2_auths_with_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=False
+        )
+        for partner2_auth in post_save_partner2_auths_with_expiry:
+            if partner2_auth.is_valid:
+                post_save_partner2_auths_with_expiry_count += 1
+
+        # All valid partner 2 authorizations have expiry set.
+        post_save_partner2_auths_no_expiry_count = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=True
+        ).count()
+        self.assertEqual(
+            initial_partner2_auths_with_expiry_count
+            + initial_partner2_auths_no_expiry_count,
+            post_save_partner2_auths_with_expiry_count,
+        )
+
+    def test_authorization_backfill_expiry_date_on_partner_save_with_new_coordinator(
+        self
+    ):
+        # As above, but this should still work in the case that the coordinator
+        # for a partner has changed, so Authorizer is no longer in the coordinators
+        # user group.
+        initial_partner2_auths_no_expiry_count = 0
+        initial_partner2_auths_no_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=True
+        )
+        for partner2_auth in initial_partner2_auths_no_expiry:
+            if partner2_auth.is_valid:
+                initial_partner2_auths_no_expiry_count += 1
+
+        # Count partner 2 apps with an expiration date.
+        initial_partner2_auths_with_expiry_count = 0
+        initial_partner2_auths_with_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=False
+        )
+        for partner2_auth in initial_partner2_auths_with_expiry:
+            if partner2_auth.is_valid:
+                initial_partner2_auths_with_expiry_count += 1
+                # Clear out the expiration date on those.
+                partner2_auth.date_expires = None
+                partner2_auth.save()
+
+        # editor4 stops being a coordinator
+        get_coordinators().user_set.remove(self.editor4.user)
+
+        # Save partner 2
+        self.partner2.save()
+        self.partner2.refresh_from_db()
+        # Count partner 2 apps with an expiration date post_save.
+        post_save_partner2_auths_with_expiry_count = 0
+        post_save_partner2_auths_with_expiry = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=False
+        )
+        for partner2_auth in post_save_partner2_auths_with_expiry:
+            if partner2_auth.is_valid:
+                post_save_partner2_auths_with_expiry_count += 1
+
+        # All valid partner 2 authorizations have expiry set.
+        post_save_partner2_auths_no_expiry_count = Authorization.objects.filter(
+            partners=self.partner2, date_expires__isnull=True
         ).count()
         self.assertEqual(
             initial_partner2_auths_with_expiry_count
@@ -922,6 +1047,68 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         backfill_authorization_count = Authorization.objects.count()
         # All authorizations replaced.
         self.assertEqual(realtime_authorization_count, backfill_authorization_count)
+
+    def test_authorization_authorizer_validation(self):
+        """
+        When an Authorization is created, we validate that
+        the authorizer field is set to a user with an expected
+        group.
+        """
+        user = UserFactory()
+        coordinator_editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        auth = Authorization(user=user, authorizer=coordinator_editor.user)
+        try:
+            auth.save()
+        except ValidationError:
+            self.fail("Authorization authorizer validation failed.")
+
+    def test_authorization_authorizer_validation_staff(self):
+        """
+        The authorizer can be a staff member but not a coordinator.
+        """
+        user = UserFactory()
+        user2 = UserFactory()
+        user2.is_staff = True
+        user2.save()
+
+        auth = Authorization(user=user, authorizer=user2)
+        try:
+            auth.save()
+        except ValidationError:
+            self.fail("Authorization authorizer validation failed.")
+
+    def test_authorization_authorizer_fails_validation(self):
+        """
+        Attempting to create an authorization with a non-coordinator
+        and non-staff user should raise a ValidationError.
+        """
+        user = UserFactory()
+        user2 = UserFactory()
+
+        auth = Authorization(user=user, authorizer=user2)
+        with self.assertRaises(ValidationError):
+            auth.save()
+
+    def test_authorization_authorizer_can_be_updated(self):
+        """
+        After successfully creating a valid Authorization,
+        we should be able to remove the authorizer from
+        the expected user groups and still save the object.
+        """
+        user = UserFactory()
+        coordinator_editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        auth = Authorization(user=user, authorizer=coordinator_editor.user)
+        auth.save()
+
+        coordinators = get_coordinators()
+        coordinators.user_set.remove(coordinator_editor.user)
+
+        try:
+            auth.save()
+        except ValidationError:
+            self.fail("Authorization authorizer validation failed.")
 
 
 class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
@@ -970,8 +1157,9 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         )
 
         expected_json = [
-            {"wp_username": self.editor1.user.editor.wp_username},
-            {"wp_username": self.editor3.user.editor.wp_username},
+            {"wp_username": self.editor1.wp_username},
+            {"wp_username": self.editor2.wp_username},
+            {"wp_username": self.editor3.wp_username},
         ]
 
         self.assertEqual(response.data, expected_json)
@@ -990,8 +1178,53 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         )
 
         expected_json = [
-            {"wp_username": self.editor1.user.editor.wp_username},
-            {"wp_username": self.editor2.user.editor.wp_username},
+            {"wp_username": self.editor1.wp_username},
+            {"wp_username": self.editor2.wp_username},
         ]
+
+        self.assertEqual(response.data, expected_json)
+
+    def test_authorized_users_api_bundle(self):
+        """
+        With the addition of Bundle partners, the API
+        should still return the correct list of authorized
+        users.
+        """
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        self.editor1.wp_bundle_eligible = True
+        self.editor1.save()
+        self.editor1.update_bundle_authorization()
+
+        # Verify we created the bundle auth as expected
+        self.assertEqual(get_all_bundle_authorizations().count(), 1)
+
+        factory = APIRequestFactory()
+        request = factory.get("/api/v0/users/authorizations/partner/1")
+        force_authenticate(request, user=self.editor1.user)
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(
+            request, bundle_partner_1.pk, 0
+        )
+
+        expected_json = [{"wp_username": self.editor1.wp_username}]
+
+        self.assertEqual(response.data, expected_json)
+
+    def test_authorized_users_api_streams(self):
+        """
+        For a partner with streams, we should still return the
+        correct list of authorized users.
+        """
+        factory = APIRequestFactory()
+        request = factory.get("/api/v0/users/authorizations/partner/1")
+        force_authenticate(request, user=self.editor1.user)
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(
+            request, self.partner5.pk, 0
+        )
+
+        expected_json = [{"wp_username": self.editor1.wp_username}]
 
         self.assertEqual(response.data, expected_json)

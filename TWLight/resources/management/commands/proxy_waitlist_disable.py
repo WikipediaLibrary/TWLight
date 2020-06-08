@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-    help = "Un-waitlists proxy partners having atleast one inactive authorization."
+    help = "Un-waitlists proxy partners having at least one inactive authorization."
 
     def handle(self, *args, **options):
         all_partners = Partner.objects.filter(

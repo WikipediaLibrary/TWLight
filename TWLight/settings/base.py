@@ -110,6 +110,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "annoying",
     "crispy_forms",
     "reversion",
     "dal",
@@ -348,7 +349,7 @@ LOGIN_URL = reverse_lazy("oauth_login")
 LOGIN_REDIRECT_URL = reverse_lazy("users:home")
 
 AUTHENTICATION_BACKENDS = [
-    "TWLight.users.authorization.OAuthBackend",
+    "TWLight.users.oauth.OAuthBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
 
@@ -357,6 +358,10 @@ TWLIGHT_OAUTH_PROVIDER_URL = os.environ.get("TWLIGHT_OAUTH_PROVIDER_URL", None)
 TWLIGHT_OAUTH_CONSUMER_KEY = os.environ.get("TWLIGHT_OAUTH_CONSUMER_KEY", None)
 TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get("TWLIGHT_OAUTH_CONSUMER_SECRET", None)
 
+# API CONFIGURATION
+# ------------------------------------------------------------------------------
+
+TWLIGHT_API_PROVIDER_ENDPOINT = os.environ.get("TWLIGHT_API_PROVIDER_ENDPOINT", None)
 
 # COMMENTS CONFIGURATION
 # ------------------------------------------------------------------------------

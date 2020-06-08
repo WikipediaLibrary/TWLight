@@ -102,12 +102,12 @@
             <li>
               <a href="
                 {% if user.editor %}
-                  {%  url 'users:my_collection' user.editor.pk %}
+                  {% url 'users:my_library' %}
                 {% endif %}
               ">
                 <i class="fa fa-folder-open-o" aria-hidden="true"></i>
-                {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their collection. {% endcomment %}
-                {% trans "Collection" %}
+                {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their library. {% endcomment %}
+                {% trans "My Library" %}
               </a>
             </li>
             <li>
@@ -118,7 +118,7 @@
               ">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;
                 {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications. {% endcomment %}
-                {% trans "Applications" %}
+                {% trans "My Applications" %}
               </a>
             </li>
             <li class="divider"></li>
@@ -177,12 +177,6 @@
         </a>
       </li>
 
-      <li role="presentation" class="mobile-menu">
-        <a href="{% url 'dashboard' %}">
-          {% comment %} Translators: Shown in the top bar of almost every page, linking to the statitics for applications. {% endcomment %}
-          {% trans "Metrics" %}
-        </a>
-      </li>
     </ul>
   </div>
  
@@ -233,32 +227,12 @@
  </div>
   <footer id="footer">
     <div class="row">
-      <div class="col-xs-12">
-        <p>
-          {% comment %} Translators: This text is at the bottom of every page. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). { %endcomment %}
-          {% blocktrans trimmed %}
-            The Wikipedia Library Card Platform is a project of 
-            <a href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
-            The Wikipedia Library</a>.
-          {% endblocktrans %}
-        </p>
-        <p>
-          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-          <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
-      </a>
-        </p>
-        <p>
-          {% comment %} Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International". {% endcomment %}
-          {% blocktrans trimmed %}
-            This work is licensed under a
-            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-          {% endblocktrans %}
-        </p>
-        
-    <hr />
-    </div>
-      
-    <div class="col-xs-12">
+        {% comment %} Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International". {% endcomment %}
+        {% blocktrans trimmed %}
+          This work is licensed under a
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        {% endblocktrans %}
+
         <ul class="list-inline pull-right">
           <li>
             <a href="{% url 'about' %}">
@@ -300,7 +274,6 @@
             </a>
           </li>
         </ul>
-      </div>
     </div>
   </footer>
 

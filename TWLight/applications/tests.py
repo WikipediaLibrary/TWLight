@@ -17,9 +17,8 @@ from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.middleware import SessionMiddleware
-from django.contrib.sites.models import Site
 from django.core import mail
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django.db import models
@@ -27,6 +26,7 @@ from django.http import Http404
 from django.test import TestCase, Client, RequestFactory
 from django.utils.html import escape
 
+from TWLight.helpers import site_id
 from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.resources.factories import PartnerFactory, StreamFactory
 from TWLight.resources.tests import EditorCraftRoom
@@ -467,8 +467,7 @@ class RequestApplicationTest(BaseApplicationViewTest):
         # Make sure there's a session key - otherwise we'll get redirected to
         # /applications/request before we hit the login test
         p1 = PartnerFactory()
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
 
         with self.assertRaises(PermissionDenied):
             _ = views.RequestApplicationView.as_view()(request)
@@ -496,8 +495,7 @@ class RequestApplicationTest(BaseApplicationViewTest):
         factory = RequestFactory()
         request = factory.get(self.url)
         p1 = PartnerFactory()
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
         user = UserFactory()
         user.userprofile.terms_of_use = True
         user.userprofile.save()
@@ -564,6 +562,12 @@ class RequestApplicationTest(BaseApplicationViewTest):
         _ = PartnerFactory()
         _ = PartnerFactory()
 
+        form_class = view.get_form_class()
+        form = form_class()
+        self.assertEqual(len(form.fields), 4)
+
+        # Add BUNDLE partners and ensure the form fields remain intact
+        PartnerFactory(authorization_method=Partner.BUNDLE)
         form_class = view.get_form_class()
         form = form_class()
         self.assertEqual(len(form.fields), 4)
@@ -645,11 +649,27 @@ class RequestApplicationTest(BaseApplicationViewTest):
         # is sensitive to order, let's check first that both lists have the
         # same elements, and second that they are of the same length.
         self.assertEqual(
-            set(request.session[views.PARTNERS_SESSION_KEY]), set([p2.id, p1.id])
+            set(request.session[views.PARTNERS_SESSION_KEY]), {p2.id, p1.id}
         )
         self.assertEqual(
             len(request.session[views.PARTNERS_SESSION_KEY]), len([p2.id, p1.id])
         )
+
+    def test_bundle_partner_in_form_data(self):
+        """
+        Building upon the previous test function, this tests for
+        the appropriate handling of BUNDLE partners in the posted
+        data (they shouldn't get added to the session key.
+        """
+        p1 = PartnerFactory()
+        p2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        data = {
+            "partner_{id}".format(id=p1.id): True,
+            "partner_{id}".format(id=p2.id): True,
+        }
+        request = self._get_request_with_session(data)
+        self.assertEqual(request.session[views.PARTNERS_SESSION_KEY], [p1.id])
 
 
 class SubmitApplicationTest(BaseApplicationViewTest):
@@ -676,8 +696,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # Make sure there's a session key - otherwise we'll get redirected to
         # /applications/request before we hit the login test
         p1 = PartnerFactory()
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
 
         with self.assertRaises(PermissionDenied):
             _ = views.SubmitApplicationView.as_view()(request)
@@ -704,8 +723,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         factory = RequestFactory()
         request = factory.get(self.url)
         p1 = PartnerFactory()
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
         user = UserFactory()
         user.userprofile.terms_of_use = True
         user.userprofile.save()
@@ -746,8 +764,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.get(self.url)
         request.user = self.editor
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = []
+        request.session = {views.PARTNERS_SESSION_KEY: []}
 
         response = views.SubmitApplicationView.as_view()(request)
 
@@ -767,8 +784,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         request.user = self.editor
 
         # Invalid pk: not an integer
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = ["cats"]
+        request.session = {views.PARTNERS_SESSION_KEY: ["cats"]}
         response = views.SubmitApplicationView.as_view()(request)
 
         self.assertEqual(response.status_code, 302)
@@ -797,8 +813,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         # Make sure there's a session key - otherwise we'll get redirected to
         # /applications/request before we hit the login test
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
 
         response = views.SubmitApplicationView.as_view()(request)
         self.assertEqual(response.status_code, 200)
@@ -1012,6 +1027,17 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         user.delete()
 
+    def test_403_on_bundle_application(self):
+        """
+        Users shouldn't be allowed to post new applications for BUNDLE
+        partners, but if they try to, throw a 403
+        """
+        EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(authorization_method=Partner.BUNDLE)
+        url = reverse("applications:apply_single", kwargs={"pk": partner.id})
+        response = self.client.get(url, follow=True)
+        self.assertEqual(response.status_code, 403)
+
     def test_redirection_on_success(self):
         """
         Make sure we redirect to the expected page upon posting a valid form.
@@ -1036,8 +1062,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.post(self.url, data)
         request.user = self.editor
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.id]}
 
         response = views.SubmitApplicationView.as_view()(request)
 
@@ -1089,8 +1114,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.post(self.url, data)
         request.user = user
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.id]}
 
         _ = views.SubmitApplicationView.as_view()(request)
         editor = user.editor
@@ -1153,8 +1177,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         request = factory.post(self.url, data)
         request.user = self.editor
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.id, p2.id]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.id, p2.id]}
 
         _ = views.SubmitApplicationView.as_view()(request)
 
@@ -1237,10 +1260,10 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # Use set(), because order is unimportant.
         self.assertEqual(
             set(view._get_partner_fields(p1)),
-            set(["specific_title", "agreement_with_terms_of_use"]),
+            {"specific_title", "agreement_with_terms_of_use"},
         )
 
-        self.assertEqual(set(view._get_partner_fields(p2)), set(["specific_stream"]))
+        self.assertEqual(set(view._get_partner_fields(p2)), {"specific_stream"})
 
     def test_get_user_fields(self):
 
@@ -1272,7 +1295,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         self.assertEqual(
             set(view._get_user_fields(partners)),
-            set(["real_name", "occupation", "affiliation"]),
+            {"real_name", "occupation", "affiliation"},
         )
 
     def test_deleted_field_invalid(self):
@@ -1339,6 +1362,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             editor=editor,
             partner=partner,
             specific_stream=stream1,
+            sent_by=self.coordinator,
         )
 
         request.session = {views.PARTNERS_SESSION_KEY: [partner.pk]}
@@ -1380,7 +1404,9 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.QUESTION, parent=parent)
         ApplicationFactory(status=Application.APPROVED, parent=parent)
         ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
-        ApplicationFactory(status=Application.SENT, parent=parent)
+        ApplicationFactory(
+            status=Application.SENT, parent=parent, sent_by=cls.coordinator
+        )
 
         user = UserFactory(username="editor")
         editor = EditorFactory(user=user)
@@ -1390,7 +1416,9 @@ class ListApplicationsTest(BaseApplicationViewTest):
         ApplicationFactory(status=Application.QUESTION, editor=editor)
         ApplicationFactory(status=Application.APPROVED, editor=editor)
         ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
-        ApplicationFactory(status=Application.SENT, editor=editor)
+        ApplicationFactory(
+            status=Application.SENT, editor=editor, sent_by=cls.coordinator
+        )
 
         delete_url = reverse("users:delete_data", kwargs={"pk": user.pk})
 
@@ -1426,8 +1454,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # /applications/request before we hit the login test
         p1 = PartnerFactory()
         p1.coordinator = self.coordinator
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [p1.pk]
+        request.session = {views.PARTNERS_SESSION_KEY: [p1.pk]}
 
         with self.assertRaises(PermissionDenied):
             _ = view.as_view()(request)
@@ -1970,6 +1997,162 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
         self.assertTrue(hasattr(instance, "object_list"))
 
+    def _set_up_a_bundle_and_not_a_bundle_partner(self, user):
+        bundle_partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE, coordinator=user
+        )
+        not_a_bundle_partner = PartnerFactory(
+            authorization_method=Partner.EMAIL, coordinator=user
+        )
+        return bundle_partner, not_a_bundle_partner
+
+    def test_no_bundle_partners_in_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
+        )
+        bundle_app = ApplicationFactory(
+            status=Application.PENDING, partner=bundle_partner, editor=editor
+        )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.PENDING, partner=not_a_bundle_partner, editor=editor
+        )
+        not_a_bundle_app_url = reverse(
+            "applications:evaluate", kwargs={"pk": not_a_bundle_app.pk}
+        )
+        response = self.client.get(reverse("applications:list"))
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
+
+    def test_no_bundle_partners_in_approved_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
+        )
+        bundle_app = ApplicationFactory(
+            status=Application.APPROVED, partner=bundle_partner, editor=editor
+        )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.APPROVED, partner=not_a_bundle_partner, editor=editor
+        )
+        not_a_bundle_app_url = reverse(
+            "applications:evaluate", kwargs={"pk": not_a_bundle_app.pk}
+        )
+        response = self.client.get(reverse("applications:list_approved"))
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
+
+    def test_no_bundle_partners_in_rejected_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
+        )
+        bundle_app = ApplicationFactory(
+            status=Application.NOT_APPROVED, partner=bundle_partner, editor=editor
+        )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.NOT_APPROVED, partner=not_a_bundle_partner, editor=editor
+        )
+        not_a_bundle_app_url = reverse(
+            "applications:evaluate", kwargs={"pk": not_a_bundle_app.pk}
+        )
+        response = self.client.get(reverse("applications:list_rejected"))
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
+
+    def test_no_bundle_partners_in_renewal_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
+        )
+        app1 = ApplicationFactory(
+            status=Application.SENT,
+            partner=bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
+        )
+        app2 = ApplicationFactory(
+            status=Application.SENT,
+            partner=not_a_bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
+        )
+        bundle_app = ApplicationFactory(
+            status=Application.PENDING,
+            partner=bundle_partner,
+            editor=editor,
+            parent=app1,
+        )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.PENDING,
+            partner=not_a_bundle_partner,
+            editor=editor,
+            parent=app2,
+        )
+        not_a_bundle_app_url = reverse(
+            "applications:evaluate", kwargs={"pk": not_a_bundle_app.pk}
+        )
+        response = self.client.get(reverse("applications:list_renewal"))
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
+
+    def test_no_bundle_partners_in_sent_list_view(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            editor.user
+        )
+        bundle_app = ApplicationFactory(
+            status=Application.SENT,
+            partner=bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
+        )
+        bundle_app_url = reverse("applications:evaluate", kwargs={"pk": bundle_app.pk})
+        not_a_bundle_app = ApplicationFactory(
+            status=Application.SENT,
+            partner=not_a_bundle_partner,
+            editor=editor,
+            sent_by=self.coordinator,
+        )
+        not_a_bundle_app_url = reverse(
+            "applications:evaluate", kwargs={"pk": not_a_bundle_app.pk}
+        )
+        response = self.client.get(reverse("applications:list_sent"))
+        self.assertNotContains(response, bundle_app_url)
+        self.assertContains(response, not_a_bundle_app_url)
+
+    def test_no_bundle_partners_in_filter_form(self):
+        editor = EditorFactory()
+        self.client.login(username="coordinator", password="coordinator")
+        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
+            self.coordinator
+        )
+        ApplicationFactory(
+            status=Application.PENDING, partner=bundle_partner, editor=editor
+        )
+        ApplicationFactory(
+            status=Application.PENDING, partner=not_a_bundle_partner, editor=editor
+        )
+        url = reverse("applications:list")
+        factory = RequestFactory()
+        # Post to filter Bundle apps only
+        request = factory.post(url, {"partner": bundle_partner.pk})
+        request.user = self.coordinator
+
+        # We don't expect to see any Bundle apps
+        expected_qs = Application.objects.none()
+        response = views.ListApplicationsView.as_view()(request)
+        allow_qs = response.context_data["object_list"]
+
+        self.assertEqual(
+            sorted([item.pk for item in expected_qs]),
+            sorted([item.pk for item in allow_qs]),
+        )
+
 
 class RenewApplicationTest(BaseApplicationViewTest):
     def test_protected_to_self_only(self):
@@ -2092,6 +2275,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
             partner=partner,
             status=Application.SENT,  # proxy applications are directly marked SENT
             editor=editor1,
+            sent_by=self.coordinator,
         )
 
         renewal_url = reverse("applications:renew", kwargs={"pk": app1.pk})
@@ -2128,6 +2312,7 @@ class RenewApplicationTest(BaseApplicationViewTest):
             status=Application.APPROVED,
             editor=editor,
             requested_access_duration=3,
+            sent_by=self.coordinator,
         )
 
         renewal_url = reverse("applications:renew", kwargs={"pk": app.pk})
@@ -2159,6 +2344,22 @@ class RenewApplicationTest(BaseApplicationViewTest):
         auth = renewal_app.get_authorization()
         six_months_from_now = date.today() + relativedelta(months=+6)
         self.assertEqual(auth.date_expires, six_months_from_now)
+
+    def test_bundle_app_renewal_raises_permission_denied(self):
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+        partner = PartnerFactory(authorization_method=Partner.BUNDLE)
+        app = ApplicationFactory(
+            status=Application.SENT,
+            partner=partner,
+            editor=editor,
+            sent_by=self.coordinator,
+        )
+        request = RequestFactory().get(
+            reverse("applications:renew", kwargs={"pk": app.pk})
+        )
+        request.user = editor.user
+        with self.assertRaises(PermissionDenied):
+            views.RenewApplicationView.as_view()(request, pk=app.pk)
 
 
 class ApplicationModelTest(TestCase):
@@ -2277,6 +2478,10 @@ class ApplicationModelTest(TestCase):
         app2.parent = app1
         app2.save()
 
+        coordinator = UserFactory()
+        coordinator_editor = EditorFactory(user=coordinator)
+        get_coordinators().user_set.add(coordinator)
+
         self.assertFalse(app1.is_renewable)
 
         # Applications whose status is not APPROVED or SENT cannot be renewed,
@@ -2302,7 +2507,9 @@ class ApplicationModelTest(TestCase):
         good_app = ApplicationFactory(partner=partner, status=Application.APPROVED)
         self.assertTrue(good_app.is_renewable)
 
-        good_app2 = ApplicationFactory(partner=partner, status=Application.SENT)
+        good_app2 = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=coordinator
+        )
         self.assertTrue(good_app.is_renewable)
 
         delete_me = [
@@ -2498,7 +2705,7 @@ class ApplicationModelTest(TestCase):
 
         # Check that we're fetching the correct authorization
         authorization = Authorization.objects.get(
-            user=application.editor.user, partner=application.partner
+            user=application.editor.user, partners=application.partner
         )
         self.assertEqual(application.get_authorization(), authorization)
 
@@ -2680,60 +2887,65 @@ class EvaluateApplicationTest(TestCase):
     def test_count_valid_authorizations(self):
         for _ in range(5):
             # valid
-            Authorization(
+            auth1 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5)),
-            ).save()
+            )
+            auth1.save()
+            auth1.partners.add(self.partner)
             # invalid
-            Authorization(
+            auth2 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-            ).save()
+            )
+            auth2.save()
+            auth2.partners.add(self.partner)
 
         # no expiry date; yet still, valid
-        Authorization(
-            user=EditorFactory().user, authorizer=self.coordinator, partner=self.partner
-        ).save()
+        auth3 = Authorization(user=EditorFactory().user, authorizer=self.coordinator)
+        auth3.save()
+        auth3.partners.add(self.partner)
 
         # invalid (no authorizer)
-        Authorization(
+        auth4 = Authorization(
             user=EditorFactory().user,
-            partner=self.partner,
             date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-        ).save()
+        )
+        self.assertRaises(ValidationError, auth4.save)
+
         total_valid_authorizations = count_valid_authorizations(self.partner)
         self.assertEqual(total_valid_authorizations, 6)
 
         stream = StreamFactory(partner=self.partner)
         for _ in range(5):
             # valid
-            Authorization(
+            auth5 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 stream=stream,
                 authorizer=self.coordinator,
                 date_expires=date.today() + timedelta(days=random.randint(0, 5)),
-            ).save()
+            )
+            auth5.save()
+            auth5.partners.add(self.partner)
             # valid
-            Authorization(
+            auth6 = Authorization(
                 user=EditorFactory().user,
-                partner=self.partner,
                 stream=stream,
                 authorizer=self.coordinator,
                 date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-            ).save()
+            )
+            auth6.save()
+            auth6.partners.add(self.partner)
         total_valid_authorizations = count_valid_authorizations(self.partner, stream)
         self.assertEqual(total_valid_authorizations, 5)
 
-        # Filter logic in .helpers.get_valid_authorizations and
+        # Filter logic in .helpers.get_valid_partner_authorizations and
         # TWLight.users.models.Authorization.is_valid must be in sync.
         # We test that here.
         all_authorizations_using_is_valid = Authorization.objects.filter(
-            partner=self.partner
+            partners=self.partner
         )
         total_valid_authorizations_using_helper = count_valid_authorizations(
             self.partner
@@ -2850,19 +3062,7 @@ class EvaluateApplicationTest(TestCase):
         with self.assertRaises(Http404):
             _ = views.EvaluateApplicationView.as_view()(request, pk=self.application.pk)
 
-    def test_under_discussion_signal(self):
-        """
-        Test comment signal fires correctly, updating Pending
-        applications to Under Discussion
-        """
-        self.application.status = Application.PENDING
-        self.application.save()
-
-        factory = RequestFactory()
-        request = factory.post(get_form_target())
-        request.user = UserFactory()
-        editor = EditorFactory(user=self.coordinator)
-
+    def _add_a_comment_and_trigger_the_signal(self, request):
         CT = ContentType.objects.get_for_model
 
         comm = Comment.objects.create(
@@ -2872,15 +3072,43 @@ class EvaluateApplicationTest(TestCase):
             user_name=self.coordinator.username,
             user_email=self.coordinator.email,
             comment="A comment",
-            site=Site.objects.get_current(),
+            site_id=site_id(),
         )
         comm.save()
 
         comment_was_posted.send(sender=Comment, comment=comm, request=request)
 
-        self.application.refresh_from_db()
+    def test_under_discussion_signal(self):
+        """
+        Test comment signal fires correctly, updating Pending
+        applications to Under Discussion except for Bundle partners
+        """
+        self.application.status = Application.PENDING
+        self.application.save()
 
+        factory = RequestFactory()
+        request = factory.post(get_form_target())
+        request.user = UserFactory()
+        EditorFactory(user=self.coordinator)
+
+        self._add_a_comment_and_trigger_the_signal(request)
+
+        self.application.refresh_from_db()
         self.assertEqual(self.application.status, Application.QUESTION)
+
+        # Comment posted in application made to BUNDLE partner
+        original_partner = self.application.partner
+        self.application.partner = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.application.status = Application.PENDING
+        self.application.save()
+
+        self._add_a_comment_and_trigger_the_signal(request)
+
+        self.application.refresh_from_db()
+        self.assertEqual(self.application.status, Application.PENDING)
+
+        self.application.partner = original_partner
+        self.application.save()
 
     def test_immediately_sent_collection(self):
         """
@@ -3039,7 +3267,7 @@ class EvaluateApplicationTest(TestCase):
         # Loop through the apps and count comments from twl_team.
         for app in pending_apps:
             twl_comment_count += Comment.objects.filter(
-                object_pk=str(app.pk), site_id=settings.SITE_ID, user=twl_team
+                object_pk=str(app.pk), site_id=site_id(), user=twl_team
             ).count()
         # Run the command again, which should not add more comments to outstanding apps.
         call_command("notify_applicants_tou_changes")
@@ -3162,6 +3390,156 @@ class EvaluateApplicationTest(TestCase):
         self.assertRedirects(
             response,
             reverse("applications:evaluate", kwargs={"pk": self.application.pk}),
+        )
+
+    def test_no_status_form_for_bundle_partners(self):
+        partner = PartnerFactory(authorization_method=Partner.BUNDLE)
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        partner.coordinator = coordinator.user
+        partner.save()
+        application = ApplicationFactory(status=Application.PENDING, partner=partner)
+        url = reverse("applications:evaluate", kwargs={"pk": application.pk})
+        response = self.client.get(url)
+        # Applications made to Bundle partners should not have a select
+        # status form
+        self.assertNotContains(response, 'name="status"')
+        coordinator.user.is_superuser = True
+        coordinator.user.save()
+        response = self.client.get(url)
+        # Not even for coordinators
+        self.assertNotContains(response, 'name="status"')
+
+    class ListApplicationsTest(BaseApplicationViewTest):
+        @classmethod
+        def setUpClass(cls):
+            super(ListApplicationsTest, cls).setUpClass()
+            cls.superuser = User.objects.create_user(username="super", password="super")
+            cls.superuser.is_superuser = True
+            cls.superuser.save()
+
+            ApplicationFactory(status=Application.PENDING)
+            ApplicationFactory(status=Application.PENDING)
+            ApplicationFactory(status=Application.QUESTION)
+            parent = ApplicationFactory(status=Application.APPROVED)
+            ApplicationFactory(status=Application.APPROVED)
+            ApplicationFactory(status=Application.NOT_APPROVED)
+            ApplicationFactory(status=Application.NOT_APPROVED)
+            ApplicationFactory(status=Application.NOT_APPROVED)
+            ApplicationFactory(status=Application.INVALID)
+            ApplicationFactory(status=Application.INVALID)
+
+            # Make sure there are some up-for-renewal querysets, too.
+            ApplicationFactory(status=Application.PENDING, parent=parent)
+            ApplicationFactory(status=Application.QUESTION, parent=parent)
+            ApplicationFactory(status=Application.APPROVED, parent=parent)
+            ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
+            ApplicationFactory(
+                status=Application.SENT, parent=parent, sent_by=cls.coordinator
+            )
+
+            user = UserFactory(username="editor")
+            editor = EditorFactory(user=user)
+
+            # And some applications from a user who will delete their account.
+            ApplicationFactory(status=Application.PENDING, editor=editor)
+            ApplicationFactory(status=Application.QUESTION, editor=editor)
+            ApplicationFactory(status=Application.APPROVED, editor=editor)
+            ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
+            ApplicationFactory(
+                status=Application.SENT, editor=editor, sent_by=cls.coordinator
+            )
+
+
+class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
+    @classmethod
+    def setUpClass(cls):
+        super(SignalsUpdateApplicationsTest, cls).setUpClass()
+
+        parent = ApplicationFactory(status=Application.APPROVED)
+        user = UserFactory(username="editor")
+        editor = EditorFactory(user=user)
+
+        ApplicationFactory(status=Application.PENDING)
+        ApplicationFactory(status=Application.PENDING)
+        ApplicationFactory(status=Application.QUESTION)
+        ApplicationFactory(status=Application.APPROVED)
+        ApplicationFactory(status=Application.NOT_APPROVED)
+        ApplicationFactory(status=Application.NOT_APPROVED)
+        ApplicationFactory(status=Application.NOT_APPROVED)
+        ApplicationFactory(status=Application.INVALID)
+        ApplicationFactory(status=Application.INVALID)
+
+        # Make sure there are some up-for-renewal querysets, too.
+        ApplicationFactory(status=Application.PENDING, parent=parent)
+        ApplicationFactory(status=Application.QUESTION, parent=parent)
+        ApplicationFactory(status=Application.APPROVED, parent=parent)
+        ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
+        ApplicationFactory(
+            status=Application.SENT, parent=parent, sent_by=cls.coordinator
+        )
+
+        # And some applications from a user who will delete their account.
+        ApplicationFactory(status=Application.PENDING, editor=editor)
+        ApplicationFactory(status=Application.QUESTION, editor=editor)
+        ApplicationFactory(status=Application.APPROVED, editor=editor)
+        ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
+        ApplicationFactory(
+            status=Application.SENT, editor=editor, sent_by=cls.coordinator
+        )
+
+    def test_invalidate_bundle_partner_applications_signal(self):
+        """
+        Test partner post_save signal fires correctly, updating Open applications for bundle partners to Invalid.
+        """
+
+        available_partners = Partner.objects.filter(status__in=[Partner.AVAILABLE])
+
+        # count invalid apps for available partners.
+        invalid_apps_count = Application.include_invalid.filter(
+            status__in=[Application.INVALID], partner__in=available_partners
+        ).count()
+        # count open apps for available partners.
+        open_apps_count = Application.objects.filter(
+            status__in=[
+                Application.PENDING,
+                Application.QUESTION,
+                Application.APPROVED,
+            ],
+            partner__in=available_partners,
+        ).count()
+        # None of the following comparisons are going to be valid if we've bungled things and don't have open apps.
+        self.assertGreater(open_apps_count, 0)
+
+        # Change all available partners to bundle.
+        for partner in available_partners:
+            partner.authorization_method = Partner.BUNDLE
+            partner.save()
+
+        # recount invalid apps for available partners.
+        post_save_invalid_apps_count = Application.include_invalid.filter(
+            status__in=[Application.INVALID], partner__in=available_partners
+        ).count()
+        # recount open apps for available partners.
+        post_save_open_apps_count = Application.objects.filter(
+            status__in=[
+                Application.PENDING,
+                Application.QUESTION,
+                Application.APPROVED,
+            ],
+            partner__in=available_partners,
+        ).count()
+
+        # We should have more invalid apps.
+        self.assertGreater(post_save_invalid_apps_count, invalid_apps_count)
+        # We should have fewer open apps
+        self.assertLess(post_save_open_apps_count, open_apps_count)
+
+        # None of those applications should be open now.
+        self.assertEqual(post_save_open_apps_count, 0)
+
+        # We should have gained the number of invalid apps that are no longer counted as open
+        self.assertEqual(
+            post_save_invalid_apps_count, invalid_apps_count + open_apps_count
         )
 
 
@@ -3564,9 +3942,11 @@ class BatchEditTest(TestCase):
 
         # Create an coordinator with a test client session
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        coordinator.user.set_password("coordinator")
+        self.client.login(username=coordinator.user.username, password="coordinator")
 
         # Approve the application
-        response = self.client.post(
+        self.client.post(
             self.url,
             data={
                 "applications": self.application.pk,
@@ -3576,13 +3956,50 @@ class BatchEditTest(TestCase):
         )
 
         authorization_exists = Authorization.objects.filter(
-            user=self.application.user, partner=self.application.partner
+            user=self.application.user, partners=self.application.partner
         ).exists()
 
         self.assertTrue(authorization_exists)
 
 
-# posting to batch edit without app or status fails appropriately?
+class ListReadyApplicationsTest(TestCase):
+    def test_no_proxy_bundle_partners(self):
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        proxy_partner = PartnerFactory(
+            authorization_method=Partner.PROXY, coordinator=coordinator.user
+        )
+        bundle_partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE, coordinator=coordinator.user
+        )
+        other_partner1 = PartnerFactory(coordinator=coordinator.user)
+        other_partner2 = PartnerFactory()
+        ApplicationFactory(
+            status=Application.APPROVED,  # This shouldn't be the case, but could happen in certain situations
+            partner=proxy_partner,
+            sent_by=coordinator.user,
+        )
+        ApplicationFactory(status=Application.APPROVED, partner=bundle_partner)
+        ApplicationFactory(status=Application.APPROVED, partner=other_partner1)
+        ApplicationFactory(status=Application.APPROVED, partner=other_partner2)
+
+        request = RequestFactory().get(reverse("applications:send"))
+        request.user = coordinator.user
+        response = views.ListReadyApplicationsView.as_view()(request)
+        self.assertNotEqual(
+            set(response.context_data["object_list"]), {proxy_partner, bundle_partner}
+        )
+        self.assertEqual(set(response.context_data["object_list"]), {other_partner1})
+        coordinator.user.is_superuser = True
+        coordinator.user.save()
+        request = RequestFactory().get(reverse("applications:send"))
+        request.user = coordinator.user
+        response = views.ListReadyApplicationsView.as_view()(request)
+        self.assertNotEqual(
+            set(response.context_data["object_list"]), {proxy_partner, bundle_partner}
+        )
+        self.assertEqual(
+            set(response.context_data["object_list"]), {other_partner1, other_partner2}
+        )
 
 
 class MarkSentTest(TestCase):

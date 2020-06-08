@@ -267,14 +267,14 @@ class BaseApplicationForm(forms.Form):
                     partner_id = int(partner[8:])
                     # We use the logic below to filter out the streams for which
                     # the user already has authorizations. Streams with authorizations
-                    # can only be renewed (as opposed to applying) from the My Collection
+                    # can only be renewed (as opposed to applying) from the My Library
                     # page.
                     queryset = Stream.objects.filter(partner_id=partner_id)
                     # We need a user if we are to determine which streams have authorizations.
                     # We set the user in the view code if a partner has streams.
                     if self.user:
                         all_authorizations = Authorization.objects.filter(
-                            user=self.user, partner=partner_id, stream__isnull=False
+                            user=self.user, partners=partner_id, stream__isnull=False
                         )
                         existing_streams = []
                         for each_authorization in all_authorizations:

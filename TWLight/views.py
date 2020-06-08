@@ -1,20 +1,16 @@
 # -*- coding: utf-8 -*-
 import json
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
-from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.utils.translation import ugettext_lazy as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
-from TWLight.resources.models import AccessCode
 
 import logging
 
@@ -39,11 +35,59 @@ class LanguageWhiteListView(View):
 
 
 class HomePageView(TemplateView):
-    """
-    At / , people should see recent activity.
-    """
 
     template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+
+        # Library bundle requirements
+        # -----------------------------------------------------
+
+        # We bundle these up into a list so that we can loop them and have a simpler time
+        # setting the relevant CSS.
+        if self.request.user.is_authenticated():
+            editor = self.request.user.editor
+            sufficient_edits = editor.wp_enough_edits
+            sufficient_tenure = editor.wp_account_old_enough
+            sufficient_recent_edits = editor.wp_enough_recent_edits
+            not_blocked = editor.wp_not_blocked
+        else:
+            sufficient_edits = False
+            sufficient_tenure = False
+            sufficient_recent_edits = False
+            not_blocked = False
+
+        context["bundle_criteria"] = [
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
+            (_("500+ edits"), sufficient_edits),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
+            (_("6+ months editing"), sufficient_tenure),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
+            (_("10+ edits in the last month"), sufficient_recent_edits),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
+            (_("No active blocks"), not_blocked),
+        ]
+
+        # Partner count
+        # -----------------------------------------------------
+
+        context["partner_count"] = Partner.objects.all().count()
+        context["bundle_partner_count"] = Partner.objects.filter(
+            authorization_method=Partner.BUNDLE
+        ).count()
+
+        # Apply section
+        # -----------------------------------------------------
+
+        context["featured_partners"] = Partner.objects.filter(featured=True)[:3]
+
+        return context
+
+
+class ActivityView(TemplateView):
+
+    template_name = "activity.html"
 
     def _get_newest(self, queryset):
         count = queryset.count()
@@ -58,14 +102,13 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         """
         Provide latest activity data for the front page to display.
-
         Each tile will need:
         * an icon
         * a color
         * text
         * a datetime
         """
-        context = super(HomePageView, self).get_context_data(**kwargs)
+        context = super(ActivityView, self).get_context_data(**kwargs)
 
         activity = []
 
@@ -78,12 +121,8 @@ class HomePageView(TemplateView):
             event["color"] = "warning"  # will be yellow
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
             event["text"] = _(
-                '<a href="{central_auth_url}">{username}</a>'
-                " signed up for a Wikipedia Library Card Platform account"
-            ).format(
-                username=editor.wp_username,
-                central_auth_url=editor.wp_link_central_auth,
-            )
+                "{username} signed up for a Wikipedia Library " "Card Platform account"
+            ).format(username=editor.wp_username)
             event["date"] = editor.date_created
             activity.append(event)
 
@@ -95,11 +134,8 @@ class HomePageView(TemplateView):
             event["icon"] = "fa-files-o"
             event["color"] = "success"  # green
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-            event["text"] = _(
-                '<a href="{url}">{partner}</a>' " joined the Wikipedia Library "
-            ).format(
-                partner=partner.company_name,
-                url=reverse_lazy("partners:detail", kwargs={"pk": partner.pk}),
+            event["text"] = _("{partner} joined the Wikipedia Library ").format(
+                partner=partner.company_name
             )
             event["date"] = partner.date_created
             activity.append(event)
@@ -117,11 +153,9 @@ class HomePageView(TemplateView):
             if app.parent:
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
                 text = _(
-                    '<a href="{central_auth_url}">{username}</a>'
-                    " applied for renewal of their "
+                    "{username} applied for renewal of their "
                     '<a href="{url}">{partner}</a> access'
                 ).format(
-                    central_auth_url=app.editor.wp_link_central_auth,
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
@@ -129,12 +163,10 @@ class HomePageView(TemplateView):
             elif app.rationale:
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
                 text = _(
-                    '<a href="{central_auth_url}">{username}</a>'
-                    " applied for access to "
+                    "{username} applied for access to "
                     '<a href="{url}">{partner}</a>'
                     "<blockquote>{rationale}</blockquote>"
                 ).format(
-                    central_auth_url=app.editor.wp_link_central_auth,
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
@@ -143,11 +175,8 @@ class HomePageView(TemplateView):
             else:
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
                 text = _(
-                    '<a href="{central_auth_url}">{username}</a>'
-                    " applied for access to "
-                    '<a href="{url}">{partner}</a>'
+                    "{username} applied for access to " '<a href="{url}">{partner}</a>'
                 ).format(
-                    central_auth_url=app.editor.wp_link_central_auth,
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
@@ -170,11 +199,8 @@ class HomePageView(TemplateView):
             event["color"] = "info"  # light blue
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
             event["text"] = _(
-                '<a href="{central_auth_url}">{username}</a>'
-                " received access to "
-                '<a href="{url}">{partner}</a>'
+                "{username} received access to " '<a href="{url}">{partner}</a>'
             ).format(
-                central_auth_url=app.editor.wp_link_central_auth,
                 username=grant.editor.wp_username,
                 partner=grant.partner.company_name,
                 url=reverse_lazy("partners:detail", kwargs={"pk": grant.partner.pk}),
@@ -189,17 +215,5 @@ class HomePageView(TemplateView):
         except TypeError:
             # If we don't have any site activity yet, we'll get an exception.
             context["activity"] = []
-
-        # Featured partners
-        # -----------------------------------------------------
-
-        context["featured_partners"] = Partner.objects.filter(featured=True).order_by(
-            "company_name"
-        )
-
-        # Partner count
-        # -----------------------------------------------------
-
-        context["partner_count"] = Partner.objects.all().count()
 
         return context

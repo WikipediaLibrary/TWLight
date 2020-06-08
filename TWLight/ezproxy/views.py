@@ -16,7 +16,7 @@ from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
 from django.views import View
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 from TWLight.users.models import Authorization
 from TWLight.view_mixins import ToURequired
 
@@ -32,35 +32,17 @@ class EZProxyAuth(ToURequired, View):
         if not username:
             raise SuspiciousOperation("Missing Editor username.")
 
-        try:
-            authorizations = Authorization.objects.filter(user=request.user)
-            logger.info(
-                "Editor {username} has the following authorizations: {authorizations}.".format(
-                    username=username, authorizations=authorizations
-                )
-            )
-        except Authorization.DoesNotExist:
-            authorizations = None
+        if request.user.editor.wp_bundle_authorized:
+            groups.append("BUNDLE")
 
-        for authorization in authorizations:
-            if authorization.is_valid:
-                group = ""
-                try:
-                    partner = Partner.objects.get(
-                        authorization_method=Partner.PROXY, pk=authorization.partner_id
-                    )
-                    group += "P" + repr(partner.pk)
-                    try:
-                        stream = Stream.objects.get(
-                            authorization_method=Partner.PROXY,
-                            pk=authorization.stream_id,
-                        )
-                        group += "S" + repr(stream.pk)
-                    except Stream.DoesNotExist:
-                        pass
-                except Partner.DoesNotExist:
-                    pass
-
+        for authorization in Authorization.objects.filter(user=request.user):
+            if (
+                authorization.is_valid
+                and authorization.get_authorization_method() == Partner.PROXY
+            ):
+                group = "P" + repr(authorization.partners.get().pk)
+                if authorization.stream:
+                    group += "S" + repr(authorization.stream_id)
                 groups.append(group)
                 logger.info("{group}.".format(group=group))
 

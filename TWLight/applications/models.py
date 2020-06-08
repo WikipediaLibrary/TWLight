@@ -343,13 +343,13 @@ class Application(models.Model):
         try:
             if self.specific_stream:
                 authorization = Authorization.objects.get(
-                    partner=self.partner,
+                    partners=self.partner,
                     user=self.editor.user,
                     stream=self.specific_stream,
                 )
             else:
                 authorization = Authorization.objects.get(
-                    partner=self.partner, user=self.editor.user
+                    partners=self.partner, user=self.editor.user
                 )
         except Authorization.DoesNotExist:
             return None

@@ -8,24 +8,37 @@ from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import resolve, reverse
+from django.core.management import call_command
 from django.test import TestCase, Client, RequestFactory
 from django.utils.translation import get_language
 from django.utils.html import escape
+from django.utils.timezone import now
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
-from TWLight.users.models import Authorization
 
 from . import views
-from .authorization import OAuthBackend
+from .oauth import OAuthBackend
+from .helpers.validation import validate_partners
+from .helpers.authorizations import get_all_bundle_authorizations
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor, Authorization
+
+from TWLight.users.helpers.editor_data import (
+    editor_valid,
+    editor_account_old_enough,
+    editor_enough_edits,
+    editor_not_blocked,
+    editor_reg_date,
+    editor_recent_edits,
+    editor_bundle_eligible,
+)
 
 FAKE_IDENTITY_DATA = {"query": {"userinfo": {"options": {"disablemail": 0}}}}
 
@@ -42,13 +55,40 @@ FAKE_IDENTITY = {
     "username": "alice",
 }
 
+FAKE_MERGED_ACCOUNTS = [
+    {
+        "wiki": "enwiki",
+        "url": "https://en.wikipedia.org",
+        "timestamp": "2015-11-06T15:46:29Z",
+        "method": "login",
+        "editcount": 100,
+        "registration": "2015-11-06T15:46:29Z",
+        "groups": ["extendedconfirmed"],
+    }
+]
+
+FAKE_MERGED_ACCOUNTS_BLOCKED = [
+    {
+        "wiki": "enwiki",
+        "url": "https://en.wikipedia.org",
+        "timestamp": "2015-11-06T15:46:29Z",
+        "method": "login",
+        "editcount": 100,
+        "registration": "2015-11-06T15:46:29Z",
+        "groups": ["extendedconfirmed"],
+        "blocked": {"expiry": "infinity", "reason": "bad editor!"},
+    }
+]
+
 FAKE_GLOBAL_USERINFO = {
     "home": "enwiki",
     "id": 567823,
     "registration": "2015-11-06T15:46:29Z",  # Well before first commit.
     "name": "alice",
     "editcount": 5000,
+    "merged": copy.copy(FAKE_MERGED_ACCOUNTS),
 }
+
 
 # CSRF middleware is helpful for site security, but not helpful for testing
 # the rendered output of a page.
@@ -68,6 +108,8 @@ class ViewsTestCase(TestCase):
         self.username1 = "alice"
         self.user_editor = UserFactory(username=self.username1)
         self.editor1 = EditorFactory(user=self.user_editor)
+        self.editor1.wp_bundle_eligible = True
+        self.editor1.save()
         self.url1 = reverse("users:editor_detail", kwargs={"pk": self.editor1.pk})
 
         # User 2: regular Editor
@@ -251,7 +293,6 @@ class ViewsTestCase(TestCase):
         request.user = self.user_editor
 
         response = views.ListApplicationsUserView.as_view()(request, pk=self.editor1.pk)
-
         self.assertEqual(
             set(response.context_data["object_list"]), {app1, app2, app3, app4}
         )
@@ -270,67 +311,140 @@ class ViewsTestCase(TestCase):
         # Client), and testing that the rendered content is equal to an
         # expected string is too fragile.
 
-    def test_my_collection_page_has_authorizations(self):
-        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
-        ApplicationFactory(
+    def test_my_library_page_has_authorizations(self):
+
+        # a coordinator with a session.
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        partner1 = PartnerFactory(
+            authorization_method=Partner.PROXY, status=Partner.AVAILABLE
+        )
+        app1 = ApplicationFactory(
             status=Application.PENDING, editor=self.user_editor.editor, partner=partner1
         )
-        partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        ApplicationFactory(
-            status=Application.QUESTION,
-            editor=self.user_editor.editor,
-            partner=partner2,
+        partner1.coordinator = coordinator.user
+        partner1.save()
+        # coordinator will update the status
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app1.pk}),
+            data={"status": Application.APPROVED},
+            follow=True,
         )
-        partner3 = PartnerFactory(authorization_method=Partner.CODES)
-        ApplicationFactory(
-            status=Application.APPROVED,
-            editor=self.user_editor.editor,
-            partner=partner3,
+
+        partner2 = PartnerFactory(
+            authorization_method=Partner.BUNDLE, status=Partner.AVAILABLE
         )
-        partner4 = PartnerFactory(authorization_method=Partner.EMAIL)
-        ApplicationFactory(
-            status=Application.NOT_APPROVED,
-            editor=self.user_editor.editor,
-            partner=partner4,
+        partner2.coordinator = coordinator.user
+        partner2.save()
+
+        partner3 = PartnerFactory(
+            authorization_method=Partner.CODES, status=Partner.AVAILABLE
         )
-        partner5 = PartnerFactory(authorization_method=Partner.LINK)
-        ApplicationFactory(
-            status=Application.NOT_APPROVED,
-            editor=self.user_editor.editor,
-            partner=partner5,
+        app3 = ApplicationFactory(
+            status=Application.PENDING, editor=self.user_editor.editor, partner=partner3
         )
+        partner3.coordinator = coordinator.user
+        partner3.save()
+        # coordinator will update the status
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app3.pk}),
+            data={"status": Application.APPROVED},
+            follow=True,
+        )
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app3.pk}),
+            data={"status": Application.SENT},
+            follow=True,
+        )
+
+        partner4 = PartnerFactory(
+            authorization_method=Partner.EMAIL, status=Partner.AVAILABLE
+        )
+        app4 = ApplicationFactory(
+            status=Application.PENDING, editor=self.user_editor.editor, partner=partner4
+        )
+        partner4.coordinator = coordinator.user
+        partner4.save()
+        # coordinator will update the status
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app4.pk}),
+            data={"status": Application.NOT_APPROVED},
+            follow=True,
+        )
+
+        partner5 = PartnerFactory(
+            authorization_method=Partner.LINK, status=Partner.AVAILABLE
+        )
+        app5 = ApplicationFactory(
+            status=Application.PENDING, editor=self.user_editor.editor, partner=partner5
+        )
+        partner5.coordinator = coordinator.user
+        partner5.save()
+        # coordinator will update the status
+        self.client.post(
+            reverse("applications:evaluate", kwargs={"pk": app5.pk}),
+            data={"status": Application.NOT_APPROVED},
+            follow=True,
+        )
+
+        partner6 = PartnerFactory(
+            authorization_method=Partner.BUNDLE, status=Partner.AVAILABLE
+        )
+        partner6.coordinator = coordinator.user
+        partner6.save()
+
+        self.editor1.update_bundle_authorization()
 
         factory = RequestFactory()
-        request = factory.get(
-            reverse("users:my_collection", kwargs={"pk": self.editor1.pk})
-        )
+        request = factory.get(reverse("users:my_library"))
         request.user = self.user_editor
+        response = views.CollectionUserView.as_view()(request)
 
-        response = views.CollectionUserView.as_view()(request, pk=self.editor1.pk)
+        # Proxy and bundle checks
+        proxy_partners = [partner1]
+        bundle_partners = [partner2, partner6]
+        response_proxy_bundle_auths = response.context_data[
+            "proxy_bundle_authorizations"
+        ]
+        response_proxy_bundle_partners = []
+        for collection in response_proxy_bundle_auths:
+            self.assertEqual(collection["authorization"].user, self.user_editor)
+            partners = collection["authorization"].partners.all()
+            for partner in partners:
+                response_proxy_bundle_partners.append(partner)
 
-        for each_authorization in response.context_data["proxy_bundle_authorizations"]:
-            self.assertEqual(each_authorization.user, self.user_editor)
-            self.assertTrue(
-                each_authorization.partner == partner1
-                or each_authorization.partner == partner2
-            )
+        # Check for proxy auths
+        for partner in proxy_partners:
+            self.assertTrue(partner in response_proxy_bundle_partners)
 
-        for each_authorization in response.context_data["manual_authorizations"]:
-            self.assertEqual(each_authorization.user, self.user_editor)
-            self.assertTrue(
-                each_authorization.partner == partner3
-                or each_authorization.partner == partner4
-                or each_authorization.partner == partner5
-            )
+        # Check for bundle auths
+        for partner in bundle_partners:
+            self.assertTrue(partner in response_proxy_bundle_partners)
+
+        # Manual checks
+        manual_partners = [partner3]
+        response_manual_auths = response.context_data["manual_authorizations"]
+        response_manual_partners = []
+        for collection in response_manual_auths:
+            self.assertEqual(collection["authorization"].user, self.user_editor)
+            partners = collection["authorization"].partners.all()
+            for partner in partners:
+                response_manual_partners.append(partner)
+
+        # Check for manual auths
+        for partner in manual_partners:
+            self.assertTrue(partner in response_manual_partners)
 
     def test_return_authorization(self):
         # Simulate a valid user trying to return their access
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
         partner = PartnerFactory(authorization_method=Partner.PROXY)
         app = ApplicationFactory(
-            status=Application.SENT, editor=editor, partner=partner
+            status=Application.SENT,
+            editor=editor,
+            partner=partner,
+            sent_by=self.user_coordinator,
         )
-        authorization = Authorization.objects.get(user=editor.user, partner=partner)
+        authorization = Authorization.objects.get(user=editor.user, partners=partner)
         self.assertEqual(authorization.get_latest_app(), app)
         return_url = reverse(
             "users:return_authorization", kwargs={"pk": authorization.pk}
@@ -486,11 +600,12 @@ class ViewsTestCase(TestCase):
         partner = PartnerFactory()
         user_auth = Authorization(
             user=self.user_editor,
-            partner=partner,
+            authorizer=self.user_coordinator,
             date_authorized=date.today(),
             date_expires=date.today() + timedelta(days=30),
         )
         user_auth.save()
+        user_auth.partners.add(partner)
 
         submit = self.client.post(delete_url)
 
@@ -720,72 +835,432 @@ class EditorModelTestCase(TestCase):
         expected_text = ["sysops", "bureaucrats"]
         self.assertEqual(expected_text, self.test_editor.get_wp_groups_display)
 
-    @patch("urllib.request.urlopen")
-    def test_is_user_valid(self, mock_urlopen):
+    def test_is_user_valid(self):
         """
         Users must:
         * Have >= 500 edits
         * Be active for >= 6 months
         * Have Special:Email User enabled
         * Not be blocked on any projects
-
-        This checks everything except Special:Email. (Checking that requires
-        another http request, so we're going to mock a successful request here
-        in order to check all the other criteria, and check for the failure case
-        in the next test.)
         """
-        mock_response = Mock()
-
-        oauth_data = FAKE_IDENTITY_DATA
-
-        global_userinfo_data = FAKE_GLOBAL_USERINFO
-
-        # This goes to an iterator; we need to return the expected data
-        # enough times to power all the calls to read() in this function.
-        mock_response.read.side_effect = [json.dumps(oauth_data)] * 7
-
-        mock_urlopen.return_value = mock_response
 
         identity = copy.copy(FAKE_IDENTITY)
         global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
 
         # Valid data
-        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
-
-        # Edge case
         global_userinfo["editcount"] = 500
-        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        ignore_wp_blocks = False
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertTrue(valid)
 
         # Too few edits
         global_userinfo["editcount"] = 499
-        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertFalse(valid)
 
         # Account created too recently
         global_userinfo["editcount"] = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
         identity["registered"] = datetime.today().strftime("%Y%m%d%H%M%S")
-        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertFalse(valid)
 
-        # Edge case: this shouldn't.
-        almost_6_months_ago = datetime.today() - timedelta(days=183)
+        # Edge case: this shouldn't work.
+        almost_6_months_ago = datetime.today() - timedelta(days=181)
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
-        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertFalse(valid)
 
         # Edge case: this should work.
         almost_6_months_ago = datetime.today() - timedelta(days=182)
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
-        self.assertTrue(self.test_editor._is_user_valid(identity, global_userinfo))
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertTrue(valid)
 
         # Bad editor! No biscuit.
-        identity["blocked"] = True
-        self.assertFalse(self.test_editor._is_user_valid(identity, global_userinfo))
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertFalse(valid)
+
+        # Aw, you're not that bad. Have a cookie.
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        ignore_wp_blocks = True
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertTrue(valid)
+
+    def test_editor_eligibility_functions(self):
+        # Start out with basic validation of the eligibility functions.
+
+        # Invalid users without enough recent edits are not eligible.
+        self.assertFalse(editor_bundle_eligible(False, False))
+
+        # Invalid users with enough recent edits are not eligible.
+        self.assertFalse(editor_bundle_eligible(False, True))
+
+        # Valid users without enough recent edits are not eligible.
+        self.assertFalse(editor_bundle_eligible(True, False))
+
+        # Valid users with enough recent edits are eligible.
+        self.assertTrue(editor_bundle_eligible(True, True))
+
+    def test_is_user_bundle_eligible(self):
+        """
+        Users must:
+        * Be valid
+        * Have made 10 edits in the last 30 days (with some wiggle room, as you will see)
+        """
+
+        identity = copy.copy(FAKE_IDENTITY)
+        global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
+
+        # Valid data
+        global_userinfo["editcount"] = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        enough_edits = editor_enough_edits(self.test_editor.wp_editcount)
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        ignore_wp_blocks = False
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertTrue(valid)
+
+        # 1st time bundle check should always pass for a valid user.
+        self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"],
+            None,
+            None,
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.assertTrue(bundle_eligible)
+
+        # A valid user should pass 30 days after their first login, even if they haven't made anymore edits.
+        self.test_editor.wp_editcount_updated = now() - timedelta(days=30)
+        self.test_editor.wp_editcount_prev_updated = (
+            self.test_editor.wp_editcount_prev_updated - timedelta(days=30)
+        )
+        self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"],
+            self.test_editor.wp_editcount_updated,
+            self.test_editor.wp_editcount_prev_updated,
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.assertTrue(bundle_eligible)
+
+        # A valid user should fail 31 days after their first login, if they haven't made any more edits.
+        self.test_editor.wp_editcount_updated = now() - timedelta(days=31)
+        self.test_editor.wp_editcount_prev_updated = (
+            self.test_editor.wp_editcount_prev_updated - timedelta(days=31)
+        )
+        self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"],
+            self.test_editor.wp_editcount_updated,
+            self.test_editor.wp_editcount_prev_updated,
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.assertFalse(bundle_eligible)
+
+        # A valid user should pass 31 days after their first login if they have made enough edits.
+        self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"] + 10,
+            self.test_editor.wp_editcount_updated,
+            self.test_editor.wp_editcount_prev_updated,
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.test_editor.wp_editcount_updated = now()
+        self.assertTrue(bundle_eligible)
+
+        # Bad editor! No biscuit, even if you have enough edits.
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.test_editor.wp_editcount_updated = now() - timedelta(days=31)
+        self.test_editor.wp_editcount_prev_updated = (
+            self.test_editor.wp_editcount_prev_updated - timedelta(days=31)
+        )
+        self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            global_userinfo["editcount"] + 10,
+            self.test_editor.wp_editcount_updated,
+            self.test_editor.wp_editcount_prev_updated,
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        bundle_eligible = editor_bundle_eligible(
+            valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.test_editor.wp_editcount_updated = now()
+        self.assertFalse(bundle_eligible)
+
+        # Without a scheduled management command, a valid user will pass 60 days after their first login if they have 10 more edits,
+        # even if we're not sure whether they made those edits in the last 30 days.
+
+        # Valid data for first time logging in after bundle was launched. 60 days ago.
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS)
+        global_userinfo["editcount"] = 500
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        self.test_editor.wp_enough_edits = editor_enough_edits(
+            self.test_editor.wp_editcount
+        )
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        self.test_editor.wp_registered = editor_reg_date(identity, global_userinfo)
+        self.test_editor.wp_account_old_enough = editor_account_old_enough(registered)
+        self.test_editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
+        self.test_editor.wp_valid = editor_valid(
+            self.test_editor.wp_enough_edits,
+            self.test_editor.wp_account_old_enough,
+            self.test_editor.wp_not_blocked,
+            self.test_editor.ignore_wp_blocks,
+        )
+        self.test_editor.wp_editcount_updated = now() - timedelta(days=60)
+        self.test_editor.wp_editcount_prev_updated = (
+            self.test_editor.wp_editcount_prev_updated - timedelta(days=60)
+        )
+        self.test_editor.wp_bundle_eligible = True
+        self.test_editor.save()
+
+        # 15 days later, they logged with 10 more edits. Valid
+        global_userinfo["editcount"] = global_userinfo["editcount"] + 10
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
+        self.test_editor.wp_editcount_updated = (
+            self.test_editor.wp_editcount_updated + timedelta(days=15)
+        )
+        self.test_editor.wp_editcount_prev_updated = (
+            self.test_editor.wp_editcount_prev_updated + timedelta(days=15)
+        )
+        self.test_editor.wp_bundle_eligible = True
+        self.test_editor.save()
+        self.test_editor.refresh_from_db()
+        self.assertTrue(self.test_editor.wp_bundle_eligible)
+
+        # 31 days later with no activity, their eligibility gets updated by the cron task.
+        command = call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.test_editor.wp_editcount_updated + timedelta(days=31)
+            ),
+            global_userinfo=global_userinfo,
+        )
+
+        # They login today and aren't eligible for the bundle.
+        self.test_editor.refresh_from_db()
+        self.test_editor.wp_editcount_prev_updated, self.test_editor.wp_editcount_prev, self.test_editor.wp_editcount_recent, self.test_editor.wp_enough_recent_edits = editor_recent_edits(
+            self.test_editor.wp_editcount,
+            self.test_editor.wp_editcount_updated,
+            self.test_editor.wp_editcount_prev_updated,
+            self.test_editor.wp_editcount_prev,
+            self.test_editor.wp_editcount_recent,
+            self.test_editor.wp_enough_recent_edits,
+        )
+        self.test_editor.wp_bundle_eligible = editor_bundle_eligible(
+            self.test_editor.wp_valid, self.test_editor.wp_enough_recent_edits
+        )
+        self.test_editor.save()
+        self.assertFalse(self.test_editor.wp_bundle_eligible)
+
+    def test_update_bundle_authorization_creation(self):
+        """
+        update_bundle_authorization() should create a new bundle
+        authorization if one didn't exist when the user is
+        bundle eligible.
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        # Check we don't already have a Bundle authorization
+        with self.assertRaises(Authorization.DoesNotExist):
+            bundle_authorization = Authorization.objects.get(
+                user=editor.user, partners__authorization_method=Partner.BUNDLE
+            )
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+        # We should now have created a single authorization to
+        # Bundle partners.
+        self.assertEqual(bundle_authorization.count(), 1)
+
+    def test_update_bundle_authorization_expiry(self):
+        """
+        update_bundle_authorization() should expire existing bundle
+        authorizations if the user is no longer eligible
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Authorization should still exist
+        self.assertEqual(bundle_authorization.count(), 1)
+
+        # But it should have now expired
+        self.assertEqual(
+            bundle_authorization.first().date_expires, date.today() - timedelta(days=1)
+        )
+
+    def test_update_bundle_authorization_user_eligible_again(self):
+        """
+        update_bundle_authorization() should undo expiry of existing
+        bundle authorizations if the user is now eligible again
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        # Marking them as eligible a 2nd time should update their
+        # expired authorization to remove the expiry date.
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Authorization should still exist
+        self.assertEqual(bundle_authorization.count(), 1)
+
+        # It should have no expiry date, i.e. it's now active again.
+        self.assertEqual(bundle_authorization.get().date_expires, None)
+
+    def test_wp_bundle_authorized_no_bundle_auth(self):
+        """
+        If a user has no authorization to Bundle
+        resources, wp_bundle_authorized should return False
+        """
+        editor = EditorFactory()
+
+        self.assertFalse(editor.wp_bundle_authorized)
+
+    def test_wp_bundle_authorized_true(self):
+        """
+        If a user has an active authorization to Bundle
+        resources, wp_bundle_authorized should return True
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        # Create Bundle auth for this user
+        editor.update_bundle_authorization()
+
+        self.assertTrue(editor.wp_bundle_authorized)
+
+    def test_wp_bundle_authorized_false(self):
+        """
+        If a user has an expired authorization to Bundle
+        resources, wp_bundle_authorized should return False
+        """
+        editor = EditorFactory()
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        editor.wp_bundle_eligible = True
+        editor.save()
+
+        # Create Bundle auth for this user
+        editor.update_bundle_authorization()
+
+        editor.wp_bundle_eligible = False
+        editor.save()
+
+        # Expire the user's auth
+        editor.update_bundle_authorization()
+
+        self.assertFalse(editor.wp_bundle_authorized)
 
     @patch.object(Editor, "get_global_userinfo")
-    @patch.object(Editor, "_is_user_valid")
-    def test_update_from_wikipedia(self, mock_validity, mock_global_userinfo):
-        # update_from_wikipedia calls _is_user_valid, which generates an API
-        # call to Wikipedia that we don't actually want to do in testing.
-        mock_validity.return_value = True
-
+    def test_update_from_wikipedia(self, mock_global_userinfo):
         identity = {}
         identity["username"] = "evil_dr_porkchop"
         # Users' unique WP IDs should not change across API calls, but are
@@ -798,6 +1273,8 @@ class EditorModelTestCase(TestCase):
         identity["email"] = "porkchop@example.com"
         identity["iss"] = "zh-classical.wikipedia.org"
         identity["registered"] = "20130205230142"
+        # validity
+        identity["blocked"] = False
 
         global_userinfo = {}
         global_userinfo["home"] = "zh_classicalwiki"
@@ -806,6 +1283,8 @@ class EditorModelTestCase(TestCase):
         global_userinfo["name"] = identity["username"]
         # We should now be using the global_userinfo editcount
         global_userinfo["editcount"] = 960
+
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
 
         # update_from_wikipedia calls get_global_userinfo, which generates an
         # API call to Wikipedia that we don't actually want to do in testing.
@@ -961,3 +1440,63 @@ class HelpersTestCase(TestCase):
         LANGUAGES = set(LANGUAGE_CODES.keys())
 
         self.assertEqual(WIKIS_LANGUAGES, LANGUAGES)
+
+
+class AuthorizationsHelpersTestCase(TestCase):
+    def setUp(self):
+        self.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.bundle_partner_3 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        self.proxy_partner_2 = PartnerFactory(authorization_method=Partner.PROXY)
+
+    def test_validate_partners_for_bundle_auth(self):
+        """
+        Passing a queryset of partners which are all set to
+        the BUNDLE authorization method should raise no
+        errors
+        """
+        partner_queryset = Partner.objects.filter(authorization_method=Partner.BUNDLE)
+        try:
+            validation = validate_partners(partner_queryset)
+        except ValidationError:
+            self.fail("validate_partners() raised ValidationError unexpectedly.")
+
+    def test_validate_partners_for_mixed_auth_types(self):
+        """
+        Passing a queryset with both BUNDLE and PROXY authorization
+        types to validate_partners() should raise a ValidationError
+        """
+        partner_queryset = Partner.objects.filter(
+            authorization_method__in=[Partner.BUNDLE, Partner.PROXY]
+        )
+        with self.assertRaises(ValidationError):
+            validate_partners(partner_queryset)
+
+    def test_validate_partners_for_wrong_auth_type(self):
+        """
+        Passing a queryset with multiple PROXY partners
+        to validate_partners() should raise a ValidationError
+        """
+        partner_queryset = Partner.objects.filter(authorization_method=Partner.PROXY)
+        with self.assertRaises(ValidationError):
+            validate_partners(partner_queryset)
+
+    def test_get_all_bundle_authorizations(self):
+        """
+        The get_all_bundle_authorizations() helper function
+        should return a Queryset of all authorizations
+        for the Library Bundle, both active and not.
+        """
+        editor = EditorFactory()
+        editor.wp_bundle_eligible = True
+        editor.save()
+        # This should create an authorization linked to
+        # bundle partners.
+        editor.update_bundle_authorization()
+
+        all_auths = get_all_bundle_authorizations()
+
+        # One editor has Bundle auths, so this should be a
+        # Queryset with 1 entry.
+        self.assertEqual(all_auths.count(), 1)
