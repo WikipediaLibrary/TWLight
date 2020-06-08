@@ -12,6 +12,7 @@
 # Author: Phenolla
 # Author: SomeyaMako
 # Author: 予弦
+# Author: 列维劳德
 # Author: 神樂坂秀吉
 # Author: 科劳
 msgid ""
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-05-12 13:20+0000\n"
-"PO-Revision-Date: 2020-06-04 16:09:41+0000\n"
+"PO-Revision-Date: 2020-06-08 15:19:18+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -413,9 +414,8 @@ msgstr "否"
 
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:142
-#, fuzzy
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr "请要求申请人在其个人资料中添加居住国，然后再继续。"
+msgstr "请要求申请人同意网站的使用条款，然后再批准。"
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:150
@@ -966,9 +966,9 @@ msgstr "对您处理的维基百科库应用程序的新评论"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at <a href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr "<p>亲爱的%(user)s，</p><p>谢谢您通过维基百科库申请访问%(partner)s的资源。在您的应用程序中有一个或多个注释需要您的响应。请在%(app_url)s回复这些，这样我们就可以评估您的应用程序。</p><p>最好</p><p>维基百科文库</p>"
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>请在%(app_url)s回复这些，这样我们就可以评估您的应用程序。</p><p>最好</p><p>维基百科文库</p>"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
@@ -983,15 +983,15 @@ msgstr "关于维基百科书斋应用的新评论"
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> See it at <a href=\"%(app_url)s\">%(app_url)s</a>. Thanks for helping review Wikipedia Library applications!"
-msgstr "还有一个关于维基百科图书馆应用程序的新评论，您也对此进行了评论。这可能是对你提出的问题的回答。在<a href=\"%(app_url)s\">%(app_url)s</a>中查看。感谢帮助审查维基百科图书馆应用程序！"
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote>在<a href=\"%(app_url)s\">%(app_url)s</a>中查看。感谢帮助审查维基百科图书馆应用程序！"
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "%(submit_date)s - %(commenter)s %(comment)s See it at: %(app_url)s Thanks for helping review Wikipedia Library applications!"
-msgstr "\n在维基百科图书馆应用程序中有一个新的评论，您也评论了。这可能是对您提出的问题的回答。参见：%(app_url)s感谢帮助审查维基百科图书馆应用程序！"
+msgstr "%(submit_date)s - %(commenter)s %(comment)s参见：%(app_url)s感谢帮助审查维基百科图书馆应用程序！"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-subject.html:4
@@ -1072,31 +1072,31 @@ msgstr ""
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "One pending application."
 msgid_plural "%(counter)s pending applications."
-msgstr[0] "发送了软件"
+msgstr[0] "%(counter)s发送了软件"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
-#, fuzzy, python-format
+#, python-format
 msgid "One under discussion application."
 msgid_plural "%(counter)s under discussion applications."
-msgstr[0] "申请数"
+msgstr[0] "%(counter)s申请数"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
-#, fuzzy, python-format
+#, python-format
 msgid "%(approved_count)s approved applications."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "批准申请数"
+msgstr[0] ""
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
-#, fuzzy, python-format
+#, python-format
 msgid "<p>This is a gentle reminder that you may review applications at <a href=\"%(link)s\">%(link)s</a>.</p> <p>You can customise your reminders under 'preferences' in your user profile.</p> <p>If you received this message in error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for helping review Wikipedia Library applications!</p>"
-msgstr "<p>亲爱的%(user)s：</p> <p>我们的记录表明您是合作伙伴的指定协调者，总共有%(app_count)s的应用程序具有%(app_status)s</p> <p>这是一个温和的提醒，你可以查看应用程序在<a href=\"%(link)s\">%(link)s</a>。若您收到了错误消息，请在wikipedialibrary@wikimedia.org中删除我们的一行，</p><p>感谢您帮助查看维基百科库应用程序！</P>"
+msgstr "<p>这是一个温和的提醒，你可以查看应用程序在<a href=\"%(link)s\">%(link)s</a>。若您收到了错误消息，请在wikipedialibrary@wikimedia.org中删除我们的一行，</p><p>感谢您帮助查看维基百科库应用程序！</P>"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
@@ -1106,16 +1106,16 @@ msgstr ""
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "One approved application."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "批准申请"
+msgstr[0] "%(counter)s批准申请"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate the email address either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
-#, fuzzy, python-format
+#, python-format
 msgid "This is a gentle reminder that you may review applications at: %(link)s. You can customise your reminders under 'preferences' in your user profile. If you received this message in error, drop us a line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library applications!"
-msgstr "\n亲爱的%(user)s，我们的记录表明你是合作伙伴的指定协调者。\n具有%(app_status)s状态的%(app_count)s的应用程序。这是一个温和的提醒，您可以查看应用程序：%(link)s如果您收到这个的消息是错误的，请给我们发一个邮件到：\nwikipedialibrary@wikimedia.org 感谢帮助审查维基百科图书馆应用程序！"
+msgstr "这是一个温和的提醒，您可以查看应用程序：%(link)s如果您收到这个的消息是错误的，请给我们发一个邮件到：\nwikipedialibrary@wikimedia.org 感谢帮助审查维基百科图书馆应用程序！"
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
@@ -2581,15 +2581,13 @@ msgid "Does this coordinator want pending app reminder notices?"
 msgstr "这名协调员想要接收关于待处理的应用提醒的通知吗？"
 
 #: TWLight/users/models.py:108
-#, fuzzy
 msgid "Does this coordinator want under discussion app reminder notices?"
-msgstr "这个用户需要更新提醒通知吗?"
+msgstr "这个协调者需要更新提醒通知吗?"
 
 #. Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for approved applications
 #: TWLight/users/models.py:114
-#, fuzzy
 msgid "Does this coordinator want approved app reminder notices?"
-msgstr "这个用户需要更新提醒通知吗?"
+msgstr "这个协调者需要更新提醒通知吗?"
 
 #. Translators: The date the user's profile was created on the website (not on Wikipedia).
 #: TWLight/users/models.py:142
@@ -2685,9 +2683,9 @@ msgstr "链接到潜在合作伙伴的网站。"
 #. Translators: Title for logo in tiles that are linked to an external website. Don't translate each_authorization.stream.
 #: TWLight/users/templates/users/collection_tile.html:43
 #: TWLight/users/templates/users/collection_tile.html:61
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(stream)s's external website"
-msgstr "链接到潜在合作伙伴的网站。"
+msgstr "链接到潜在%(stream)s的网站。"
 
 #: TWLight/users/templates/users/collection_tile.html:78
 #: TWLight/users/templates/users/collection_tile.html:84
@@ -3230,9 +3228,8 @@ msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:258
-#, fuzzy
 msgid "Your reminder email preferences are updated."
-msgstr "您的信息已被更新。"
+msgstr "您的电子邮件提醒参数设置已被更新。"
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
@@ -3275,32 +3272,32 @@ msgid "Access to {} has been returned."
 msgstr "提议已被删除。"
 
 #: TWLight/views.py:81
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> signed up for a Wikipedia Library Card Platform account"
-msgstr "{username}注册了维基百科图卡台的账号"
+msgstr "<a href=\"{central_auth_url}\">{username}</a>注册了维基百科图卡台的账号"
 
 #: TWLight/views.py:99
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{url}\">{partner}</a> joined the Wikipedia Library "
-msgstr "{partner}加入了维基百科书斋 "
+msgstr "<a href=\"{url}\">{partner}</a>加入了维基百科书斋 "
 
 #: TWLight/views.py:120
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> applied for renewal of their <a href=\"{url}\">{partner}</a> access"
-msgstr "{username}用于更新其<a href=\"{url}\">{partner}</a>访问权限"
+msgstr "<a href=\"{central_auth_url}\">{username}</a>用于更新其<a href=\"{url}\">{partner}</a>访问权限"
 
 #: TWLight/views.py:132
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> applied for access to <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
-msgstr "{username}用于访问<a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
+msgstr "<a href=\"{central_auth_url}\">{username}</a>用于访问<a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>"
 
 #: TWLight/views.py:146
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> applied for access to <a href=\"{url}\">{partner}</a>"
-msgstr "{username}用于访问<a href=\"{url}\">{partner}</a>"
+msgstr "<a href=\"{central_auth_url}\">{username}</a>用于访问<a href=\"{url}\">{partner}</a>"
 
 #: TWLight/views.py:173
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<a href=\"{central_auth_url}\">{username}</a> received access to <a href=\"{url}\">{partner}</a>"
-msgstr "{username}用于访问<a href=\"{url}\">{partner}</a>"
+msgstr "<a href=\"{central_auth_url}\">{username}</a>用于访问<a href=\"{url}\">{partner}</a>"
 
