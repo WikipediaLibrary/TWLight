@@ -1,0 +1,129 @@
+{% load i18n %}
+{% load static %}
+
+{% comment %}
+  To be used in presenting lists of partners a user is authorized to access plus
+  key data about them. Provides a tile. Including templates are responsible for
+  laying out these tiles and supplying a `authorization` variable (presumed to be an
+  instance of class Authorization).
+{% endcomment %}
+
+<div class="panel panel-default full-width">
+  <div class="panel-body top-border {% if resource.authorization.about_to_expire %}expiry-warning{% endif %}">
+    {% if resource.authorization.is_bundle %}
+      {% comment %} Translators: Title text for the Library Bundle icon shown on the collection page. {% endcomment %}
+      <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive no-padding-logo-collection-tiles" style="width:35px; height:30px;" title="{% trans 'Library Bundle' %}" alt="
+      {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+      {% trans "Library bundle access" %}
+      ">
+    {% endif %}
+    {% if resource.valid_proxy_authorization %}
+      {% comment %} Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource. {% endcomment %}
+      <a href="{% url 'users:return_authorization' resource.authorization.id %}" class="btn btn-outline-danger fit-content no-padding-icon"><i class="fa fa-times fa-2x" title="{% trans 'Click to return this access' %}"></i></a>
+    {% endif %}
+    {% if resource.partner.logos.logo.url %}
+      <div class="partner-logo-container">
+        <a href="
+          {% if resource.valid_authorization_with_access_url %}
+            {{ resource.access_url }}
+          {% else %}
+            {% url 'partners:detail' resource.partner.pk %}
+          {% endif %}
+        ">
+          <img src="{{ resource.partner.logos.logo.url }}" class="img-responsive partner-logo" title="
+            {% if resource.valid_authorization_with_access_url %}
+              {% comment %} Translators: Title for logo in tiles that are linked to an external website. Don't translate {{ name }}. {% endcomment %}
+              {% blocktrans trimmed with resource.name as name %}
+                 External link to {{ name }}'s website
+              {% endblocktrans %}
+            {% else %}
+              {% comment %} Translators: Title for logo in tiles that are linked to partner description  page. Don't translate {{ name }}. {% endcomment %}
+              {% blocktrans trimmed with resource.name as name %}
+                 Link to {{ name }} signup page
+              {% endblocktrans %}
+            {% endif %}
+            "
+          alt="
+            {% if resource.valid_authorization_with_access_url %}
+              {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ name }}. {% endcomment %}
+              {% blocktrans trimmed with resource.name as name %}
+                 Link to {{ name }}'s external website
+              {% endblocktrans %}
+            {% else %}
+              {% comment %} Translators: Alt text for publisher logos on the my library page. Don't translate {{ name }}. {% endcomment %}
+              {% blocktrans trimmed with resource.name as name %}
+                 Link to {{ name }} signup page
+              {% endblocktrans %}
+            {% endif %}
+          ">
+        </a>
+      </div>
+    {% endif %}
+    <hr>
+    {% if resource.authorization.is_valid and resource.access_url %}
+      <div style="text-align: center;">
+        <a href="
+          {{ resource.access_url }}
+        " class="btn btn-primary
+        {% if not resource.authorization.user.userprofile.terms_of_use %}
+          disabled
+        {% endif %}
+        " role="button">
+          {% if resource.authorization.is_accessed_via_proxy %}
+            {% comment %} Translators: Users can click this button to access a collection they have access to. {% endcomment %}
+            {% trans 'Access collection' %}
+          {% else %}
+            {% comment %} Translators: Users can click this button to be taken to the website for a resource. {% endcomment %}
+            {% trans 'Go to site' %}
+          {% endif %}
+        </a>
+      </div>
+      <hr>
+    {% endif %}
+    <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i>
+    <strong><a href="{% url 'partners:detail' resource.partner.pk %}">{{ resource.partner }}</a></strong>
+    {% if resource.stream %}({{ resource.stream }}){% endif %}
+    {% if not resource.authorization.is_bundle %}
+      {% if resource.authorization.latest_sent_app and not resource.authorization.open_app %}
+        {% comment %} Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled. {% endcomment %}
+        <span class="pull-right" {% if not resource.partner.renewals_available %}title="{% trans 'Renewals are not available for this partner' %}"{% endif %}>
+          <a href="{% url 'applications:renew' resource.authorization.latest_sent_app.pk %}" class="btn btn-default pull-right {% if not resource.partner.renewals_available %}disabled{% endif %}" role="button">
+            {% if resource.authorization.is_valid %}
+              {% comment %} Translators: Labels a button users can click to extend the duration of their access. {% endcomment %}
+              {% trans 'Extend' %}
+            {% else %}
+              {% comment %} Translators: Labels a button users can click to renew an expired account. {% endcomment %}
+              {% trans 'Renew' %}
+            {% endif %}
+          </a>
+        </span>
+        <div class="clearfix"></div>
+      {% elif resource.partner.specific_title and not resource.authorization.open_app %}
+        <span class="pull-right">
+          <a href="{% url 'applications:apply_single' resource.partner.pk %}" class="btn btn-primary pull-right" role="button">
+            {% comment %} Translators: Labels the button users can click to apply for a resource. {% endcomment %}
+            {% trans 'Apply' %}
+          </a>
+        </span>
+        <div class="clearfix"></div>
+      {% endif %}
+    {% endif %}
+    {% if resource.authorization.open_app %}
+      {% comment %} Translators: Labels a button users can click to view an application requesting access to a resource. {% endcomment %}
+      <a href="{% url 'applications:evaluate' resource.authorization.open_app.pk %}" class="btn btn-primary pull-right" role="button">{% trans 'View application' %}</a><div class="clearfix"></div>
+    {% endif %}
+    {% if resource.authorization.date_expires %}
+      <span class="pull-right" {% if resource.authorization.about_to_expire %}style="color: #bf4d3d"{% endif %}>
+        <small>
+          {% if not resource.authorization.is_valid %}
+            {% comment %} Translators: Text beside the date on which the authorization has expired. {% endcomment %}
+            {% trans 'Expired on' %}: {{ resource.authorization.date_expires }}
+          {% else %}
+            {% comment %} Translators: Text beside the date on which the authorization will expire. {% endcomment %}
+            {% trans 'Expires on' %}: {{ resource.authorization.date_expires }}
+          {% endif %}
+        </small>
+      </span>
+    {% endif %}
+  </div>
+</div>

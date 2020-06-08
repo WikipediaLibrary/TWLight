@@ -185,8 +185,6 @@
         {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
         <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
       </form>
-    {% else %}
-      This partner's authorization method has been set to proxy or bundle, but these features aren't supported yet.
     {% endif %}
   {% else %}
     {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.{% endcomment %}

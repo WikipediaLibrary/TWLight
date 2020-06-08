@@ -229,6 +229,7 @@ TIMELINE
 .half-timeline > li.timeline-inverted > .timeline-panel {
   float: right;
   margin-right: 50px;
+  width: 70%;
 }
 
 .full-width {
@@ -457,12 +458,6 @@ A few spots just need padding instead of margin.
   font-weight: 700;
   }
 
-.banner-flag {
-  background-image: url("../img/banner.png"); 
-  background-repeat: no-repeat;
-  background-position: left top;  
-}
-
 .partner-logo {
   position: relative;
   padding: 0 10% 0 10%;
@@ -536,11 +531,17 @@ A few spots just need padding instead of margin.
   z-index: 2;
 }
 
-.no-padding-logo {
+.no-padding-logo-collection-tiles {
   position: absolute;
   margin-right: -18px;
   margin-top: -14px;
   z-index: 2;
+}
+
+.no-padding-logo-partner-tiles {
+  margin-left: -13px;
+  margin-top: -4px;
+  float: left;
 }
 
 .btn.fit-content {

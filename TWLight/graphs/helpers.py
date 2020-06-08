@@ -294,13 +294,13 @@ def get_users_by_partner_by_month(partner, data_format=JSON):
 
 def get_proxy_and_renewed_authorizations():
     proxy_auth = Authorization.objects.filter(
-        partner__authorization_method=Partner.PROXY
+        partners__authorization_method=Partner.PROXY
     )
 
     renewed_auth_ids = []
     for auth in proxy_auth:
         latest_app = auth.get_latest_app()
-        if latest_app.parent:
+        if latest_app and latest_app.parent:
             renewed_auth_ids.append(auth.id)
 
     renewed_auth = proxy_auth.filter(id__in=renewed_auth_ids)

@@ -11,11 +11,19 @@ set -euo pipefail
     # Load virtual environment
     if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
     then
-        # Run linters
+        # Run linter
         echo "black --target-version py37 --check TWLight"
-        black --target-version py37 --check TWLight
-        # Run test suite via coverage so we can get a report without having to run separate tests for it.
-        DJANGO_LOG_LEVEL=CRITICAL DJANGO_SETTINGS_MODULE=TWLight.settings.local coverage run --source TWLight manage.py test --keepdb --noinput
+        if black --target-version py37 --check TWLight
+        then
+            # Run test suite via coverage so we can get a report without having to run separate tests for it.
+            DJANGO_LOG_LEVEL=CRITICAL DJANGO_SETTINGS_MODULE=TWLight.settings.local coverage run --source TWLight manage.py test --keepdb --noinput
+        else
+            # If linting fails, offer some useful feedback to the user.
+            black --target-version py37 --quiet --diff TWLight
+            echo "You can fix these issues by running the following command on your host"
+            echo "docker exec CONTAINER $(which black) -t py37 ${TWLIGHT_HOME}/TWLight"
+            exit 1
+        fi
     else
         exit 1
     fi

@@ -32,9 +32,9 @@ urlpatterns = [
         name="delete_data",
     ),
     url(
-        r"^my_collection/(?P<pk>\d+)/$",
+        r"^my_library/$",
         login_required(views.CollectionUserView.as_view()),
-        name="my_collection",
+        name="my_library",
     ),
     url(
         r"^my_applications/(?P<pk>\d+)/$",
@@ -45,5 +45,11 @@ urlpatterns = [
         r"^return_authorization/(?P<pk>\d+)/$",
         login_required(views.AuthorizationReturnView.as_view()),
         name="return_authorization",
+    ),
+    # Temporary redirect from my_collection to my_library following a rename
+    url(
+        r"^my_collection/(?P<pk>\d+)/$",
+        views.LibraryRedirectView.as_view(),
+        name="my_collection",
     ),
 ]

@@ -221,6 +221,30 @@ class PartnerModelTests(TestCase):
 
         self.assertContains(response, partner.get_absolute_url())
 
+    def test_visibility_of_not_available_5(self):
+        """
+        Coordinators *should* see NOT_AVAILABLE partner pages.
+        We won't test to see if they include the message, because RequestFactory
+        doesn't include message middleware, but we can't use the Django test
+        client to log in users without passwords (which is our normal user).
+        """
+        partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
+        detail_url = partner.get_absolute_url()
+
+        editor = EditorFactory()
+        coordinators = get_coordinators()
+        coordinators.user_set.add(editor.user)
+
+        partner.coordinator = editor.user
+        partner.save()
+
+        request = RequestFactory().get(detail_url)
+        request.user = editor.user
+
+        # This should not raise Http404.
+        response = PartnersDetailView.as_view()(request, pk=partner.pk)
+        self.assertEqual(response.status_code, 200)
+
     def test_review_app_page_excludes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
         _ = ApplicationFactory(partner=partner, status=Application.PENDING)
@@ -238,7 +262,9 @@ class PartnerModelTests(TestCase):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
 
         tomorrow = date.today() + timedelta(days=1)
-        _ = ApplicationFactory(partner=partner, status=Application.SENT)
+        _ = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=self.coordinator
+        )
         url = reverse("applications:list_renewal")
 
         # Create a coordinator with a test client session
@@ -250,7 +276,9 @@ class PartnerModelTests(TestCase):
 
     def test_sent_app_page_includes_not_available(self):
         partner = PartnerFactory(status=Partner.NOT_AVAILABLE)
-        _ = ApplicationFactory(partner=partner, status=Application.SENT)
+        _ = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=self.coordinator
+        )
         url = reverse("applications:list_sent")
 
         # Create a coordinator with a test client session
@@ -539,12 +567,15 @@ class PartnerViewTests(TestCase):
         coordinators.user_set.add(cls.coordinator)
         coordinators.user_set.add(cls.coordinator2)
 
-        cls.application = ApplicationFactory(
-            partner=cls.partner, editor=editor, status=Application.SENT
-        )
-
         cls.partner.coordinator = cls.coordinator
         cls.partner.save()
+
+        cls.application = ApplicationFactory(
+            partner=cls.partner,
+            editor=editor,
+            status=Application.SENT,
+            sent_by=cls.coordinator,
+        )
 
         cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
         cls.message_patcher.start()
@@ -575,65 +606,6 @@ class PartnerViewTests(TestCase):
         # The assigned coordinator can see the user list!
         response = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
         self.assertEqual(response.status_code, 200)
-
-    def test_latest_sent_app(self):
-        """
-        Test that the Renew button on partner pages attempts to renew the correct app.
-        """
-        self.partner.renewals_available = True
-        self.partner.save()
-
-        # Sent apps get sorted by date_closed which is a date field. If we
-        # renew all these apps at the same time, they have the same
-        # date_closed and the view picks the wrong app.
-        self.application.date_closed = date(2019, 1, 2)
-        self.application.save()
-
-        application2 = self.application.renew()
-        application2.status = Application.SENT
-        application2.date_closed = date(2019, 3, 3)
-        application2.save()
-
-        application3 = application2.renew()
-        application3.status = Application.SENT
-        application3.save()
-
-        factory = RequestFactory()
-        request = factory.get(
-            reverse("partners:detail", kwargs={"pk": self.partner.pk})
-        )
-        request.user = self.user
-        response = PartnersDetailView.as_view()(request, pk=self.partner.pk)
-        latest_sent_app_pk = response.context_data["latest_sent_app_pk"]
-
-        self.assertEqual(application3.pk, latest_sent_app_pk)
-
-    def test_latest_sent_app_dev(self):
-        """
-        Test that the Renew button on partner pages attempts to renew the
-        correct application, even in development where we make a bunch
-        of applications with the same 'date_closed'.
-        """
-        self.partner.renewals_available = True
-        self.partner.save()
-
-        application2 = self.application.renew()
-        application2.status = Application.SENT
-        application2.save()
-
-        application3 = application2.renew()
-        application3.status = Application.SENT
-        application3.save()
-
-        factory = RequestFactory()
-        request = factory.get(
-            reverse("partners:detail", kwargs={"pk": self.partner.pk})
-        )
-        request.user = self.user
-        response = PartnersDetailView.as_view()(request, pk=self.partner.pk)
-        latest_sent_app_pk = response.context_data["latest_sent_app_pk"]
-
-        self.assertEqual(application3.pk, latest_sent_app_pk)
 
 
 class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
@@ -782,31 +754,31 @@ class AutoWaitlistDisableTest(TestCase):
         self.coordinator.userprofile.terms_of_use = True
         self.coordinator.userprofile.save()
 
-        Authorization.objects.create(
-            user=self.user,
-            authorizer=self.coordinator,
-            date_expires=date.today(),
-            partner=self.partner,
+        auth1 = Authorization.objects.create(
+            user=self.user, authorizer=self.coordinator, date_expires=date.today()
         )
-        Authorization.objects.create(
-            user=EditorFactory().user,
-            authorizer=self.coordinator,
-            date_expires=date.today(),
-            partner=self.partner,
-        )
+        auth1.partners.add(self.partner)
 
-        Authorization.objects.create(
+        auth2 = Authorization.objects.create(
+            user=EditorFactory().user,
+            authorizer=self.coordinator,
+            date_expires=date.today(),
+        )
+        auth2.partners.add(self.partner)
+
+        auth3 = Authorization.objects.create(
             user=self.user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-            partner=self.partner1,
         )
-        Authorization.objects.create(
+        auth3.partners.add(self.partner1)
+
+        auth4 = Authorization.objects.create(
             user=EditorFactory().user,
             authorizer=self.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
-            partner=self.partner1,
         )
+        auth4.partners.add(self.partner1)
 
         self.message_patcher = patch("TWLight.applications.views.messages.add_message")
         self.message_patcher.start()
@@ -826,3 +798,226 @@ class AutoWaitlistDisableTest(TestCase):
         # No change should've been made to the partner with zero accounts available
         self.partner1.refresh_from_db()
         self.assertEqual(self.partner1.status, Partner.WAITLIST)
+
+
+class BundlePartnerTest(TestCase):
+    def setUp(self):
+        self.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        self.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        self.bundle_partner_3 = PartnerFactory(
+            authorization_method=Partner.BUNDLE, status=Partner.NOT_AVAILABLE
+        )
+
+        self.editor = EditorFactory()
+        self.editor.wp_bundle_eligible = True
+        self.editor.save()
+
+    def test_switching_partner_to_bundle_updates_auths(self):
+        """
+        When a partner switches from a non-Bundle authorization
+        method to Bundle, existing bundle authorizations
+        should be updated to include it.
+        """
+        # This should create an authorization linked to
+        # bundle partners.
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.proxy_partner_1.authorization_method = Partner.BUNDLE
+        self.proxy_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 3)
+
+    def test_switching_partner_from_bundle_updates_auths(self):
+        """
+        When a partner switches from the Bundle authorization
+        method to non-Bundle, existing bundle authorizations
+        should be updated to remove it.
+        """
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.bundle_partner_1.authorization_method = Partner.PROXY
+        self.bundle_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 1)
+
+    def test_making_bundle_partner_available_updates_auths(self):
+        """
+        When a partner is made available after being marked
+        not available, existing bundle authorizations
+        should be updated to add it.
+        """
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.bundle_partner_3.status = Partner.AVAILABLE
+        self.bundle_partner_3.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 3)
+
+    def test_making_bundle_partner_not_available_updates_auths(self):
+        """
+        When a partner is marked as not available, existing bundle
+        authorizations should be updated to add it.
+        """
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.bundle_partner_1.status = Partner.NOT_AVAILABLE
+        self.bundle_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 1)
+
+    def test_making_proxy_partner_not_available_doesnt_update_bundle_auths(self):
+        """
+        Changing the availability of a PROXY partner should make no
+        changes to bundle auths
+        """
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.proxy_partner_1.status = Partner.NOT_AVAILABLE
+        self.proxy_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+    def test_making_proxy_partner_email_doesnt_update_bundle_auths(self):
+        """
+        Changing the authorization method of a PROXY partner
+        to a non-bundle authorization should not make any changes
+        to bundle auths
+        """
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        self.proxy_partner_1.authorization_method = Partner.EMAIL
+        self.proxy_partner_1.save()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+    def test_creating_bundle_partner_updates_bundle_auths(self):
+        """
+        Creating a new partner with the BUNDLE authorization method
+        immediately should add to existing Bundle authorizations.
+        """
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        _ = PartnerFactory(
+            authorization_method=Partner.BUNDLE, status=Partner.AVAILABLE
+        )
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 3)
+
+    def test_creating_not_available_bundle_partner_doesnt_update_bundle_auths(self):
+        """
+        Creating a new partner with the BUNDLE authorization method
+        but NOT_AVAILABLE status should not change existing auths
+        """
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        _ = PartnerFactory(
+            authorization_method=Partner.BUNDLE, status=Partner.NOT_AVAILABLE
+        )
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+    def test_creating_proxy_partner_doesnt_update_bundle_auths(self):
+        """
+        Creating a new partner with the PROXY authorization method
+        should make no change to existing Bundle authorizations
+        """
+        self.editor.update_bundle_authorization()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+        _ = PartnerFactory(authorization_method=Partner.PROXY, status=Partner.AVAILABLE)
+
+        self.assertEqual(bundle_authorization.first().partners.count(), 2)
+
+    def test_switching_partner_to_bundle_deletes_previous_auths(self):
+        """
+        Users may have previously had an authorization to a partner that
+        we switch to Bundle. When switching a partner to Bundle, they
+        should be deleted and we should only have a single Bundle auth.
+        """
+        # Before we create the user's Bundle authorizations, let's
+        # give them an authorization to the Proxy partner.
+
+        application = ApplicationFactory(
+            partner=self.proxy_partner_1, editor=self.editor, status=Application.PENDING
+        )
+
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        application.status = Application.APPROVED
+        application.sent_by = coordinator.user
+        application.save()
+
+        # We should now have an auth for this user to this partner
+        try:
+            authorization = Authorization.objects.get(
+                user=self.editor.user,
+                partners=Partner.objects.filter(pk=self.proxy_partner_1.pk),
+            )
+        except Authorization.DoesNotExist:
+            self.fail("Authorization wasn't created in the first place.")
+
+        self.editor.update_bundle_authorization()
+
+        self.proxy_partner_1.authorization_method = Partner.BUNDLE
+        self.proxy_partner_1.save()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Ultimately we should have one Bundle authorization
+        self.assertEqual(bundle_authorization.count(), 1)

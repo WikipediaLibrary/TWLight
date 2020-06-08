@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 from unittest.mock import patch
 
@@ -29,6 +30,7 @@ from .tasks import (
     send_approval_notification_email,
     send_rejection_notification_email,
     send_user_renewal_notice_emails,
+    send_proxy_bundle_launch_notice,
     contact_us_emails,
 )
 
@@ -183,6 +185,12 @@ class ApplicationCommentTest(TestCase):
 
 
 class ApplicationStatusTest(TestCase):
+    def setUp(self):
+        super(ApplicationStatusTest, self).setUp()
+        self.coordinator = EditorFactory().user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+
     @patch("TWLight.emails.tasks.send_approval_notification_email")
     def test_approval_calls_email_function(self, mock_email):
         app = ApplicationFactory(status=Application.PENDING)
@@ -238,7 +246,7 @@ class ApplicationStatusTest(TestCase):
         Applications saved with a SENT status should not generate email.
         """
         orig_outbox = len(mail.outbox)
-        _ = ApplicationFactory(status=Application.SENT)
+        ApplicationFactory(status=Application.SENT, sent_by=self.coordinator)
         self.assertEqual(len(mail.outbox), orig_outbox)
 
     @patch("TWLight.emails.tasks.send_waitlist_notification_email")
@@ -290,7 +298,9 @@ class ApplicationStatusTest(TestCase):
         partner = PartnerFactory(status=Partner.AVAILABLE)
         app = ApplicationFactory(status=Application.APPROVED, partner=partner)
         app = ApplicationFactory(status=Application.NOT_APPROVED, partner=partner)
-        app = ApplicationFactory(status=Application.SENT, partner=partner)
+        app = ApplicationFactory(
+            status=Application.SENT, partner=partner, sent_by=self.coordinator
+        )
         self.assertFalse(mock_email.called)
 
         partner.status = Partner.WAITLIST
@@ -373,9 +383,9 @@ class UserRenewalNoticeTest(TestCase):
         self.authorization = Authorization()
         self.authorization.user = self.user
         self.authorization.authorizer = self.coordinator
-        self.authorization.partner = self.partner
-        self.authorization.date_expires = datetime.today() + timedelta(weeks=2)
+        self.authorization.date_expires = datetime.today() + timedelta(weeks=1)
         self.authorization.save()
+        self.authorization.partners.add(self.partner)
 
     def test_single_user_renewal_notice(self):
         """
@@ -432,7 +442,7 @@ class UserRenewalNoticeTest(TestCase):
 
         self.assertEqual(len(mail.outbox), 0)
 
-    def test_user_renewal_notice_future_date(self):
+    def test_user_renewal_notice_future_date_1(self):
         """
         If we have multiple authorizations to send emails for, let's make
         sure we send distinct emails to the right places.
@@ -442,9 +452,9 @@ class UserRenewalNoticeTest(TestCase):
         authorization2 = Authorization()
         authorization2.user = editor2.user
         authorization2.authorizer = self.coordinator
-        authorization2.partner = self.partner
         authorization2.date_expires = datetime.today() + timedelta(weeks=1)
         authorization2.save()
+        authorization2.partners.add(self.partner)
 
         call_command("user_renewal_notice")
 
@@ -456,6 +466,168 @@ class UserRenewalNoticeTest(TestCase):
         # (one element) list, and we need to compare sets to ensure we've
         # got 1 of each email.
         self.assertEqual(
-            set([mail.outbox[0].to[0], mail.outbox[1].to[0]]),
-            set(["editor@example.com", "editor2@example.com"]),
+            {mail.outbox[0].to[0], mail.outbox[1].to[0]},
+            {"editor@example.com", "editor2@example.com"},
         )
+
+    def test_user_renewal_notice_after_renewal(self):
+        """
+        If a user renews their authorization, we want to remind
+        them again when it runs out.
+        """
+        call_command("user_renewal_notice")
+        self.assertEqual(len(mail.outbox), 1)
+        self.authorization.refresh_from_db()
+        self.assertTrue(self.authorization.reminder_email_sent)
+
+        # We already have an authorization, so let's setup up
+        # an application that 'corresponds' to it.
+        application = ApplicationFactory(
+            editor=self.user.editor,
+            sent_by=self.coordinator,
+            partner=self.partner,
+            status=Application.SENT,
+            requested_access_duration=1,
+        )
+        application.save()
+
+        # File a renewal, approve it, and send it.
+        self.partner.renewals_available = True
+        self.partner.save()
+        renewed_app = application.renew()
+        renewed_app.status = application.APPROVED
+        renewed_app.save()
+        renewed_app.status = application.SENT
+        renewed_app.sent_by = self.coordinator
+        renewed_app.save()
+
+        # Sending this renewal notice will have sent the user
+        # an email, so we expect 2 emails now.
+        self.assertEqual(len(mail.outbox), 2)
+
+        # We've correctly marked reminder_email_sent as False
+        self.authorization.refresh_from_db()
+        self.assertFalse(self.authorization.reminder_email_sent)
+
+        # And calling the command should send a third email.
+        call_command("user_renewal_notice")
+        self.assertEqual(len(mail.outbox), 3)
+
+
+class CoordinatorReminderEmailTest(TestCase):
+    def setUp(self):
+        super(CoordinatorReminderEmailTest, self).setUp()
+        editor = EditorFactory()
+        self.user = editor.user
+        editor2 = EditorFactory()
+        self.user2 = editor2.user
+
+        self.coordinator = EditorFactory(user__email="editor@example.com").user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+
+        self.partner = PartnerFactory(coordinator=self.coordinator)
+        self.partner2 = PartnerFactory(coordinator=self.coordinator)
+
+    def test_send_coordinator_reminder_email(self):
+        ApplicationFactory(
+            partner=self.partner, status=Application.PENDING, editor=self.user.editor
+        )
+
+        # Coordinator only wants reminders for apps under discussion
+        self.coordinator.userprofile.pending_app_reminders = False
+        self.coordinator.userprofile.approved_app_reminders = False
+        self.coordinator.userprofile.save()
+
+        call_command("send_coordinator_reminders")
+        self.assertEqual(len(mail.outbox), 0)
+
+        ApplicationFactory(
+            partner=self.partner2, status=Application.QUESTION, editor=self.user2.editor
+        )
+
+        call_command("send_coordinator_reminders")
+        self.assertEqual(len(mail.outbox), 1)
+        # We include the count for all waiting (PENDING, QUESTION,
+        # APPROVED) apps whenever we send an email, but trigger
+        # emails only based on preferences i.e. if a coordinator
+        # has enabled reminders only for QUESTION, we send a
+        # reminder only when we have an app of status: QUESTION,
+        # but include info on all apps in the email.
+        self.assertNotIn("One pending application", mail.outbox[0].body)
+        self.assertIn("One under discussion application", mail.outbox[0].body)
+        self.assertNotIn("One approved application", mail.outbox[0].body)
+
+        ApplicationFactory(
+            partner=self.partner, status=Application.APPROVED, editor=self.user2.editor
+        )
+        ApplicationFactory(
+            partner=self.partner2,
+            status=Application.SENT,
+            editor=self.user.editor,
+            sent_by=self.coordinator,
+        )
+
+        # Clear mail outbox since approvals send emails
+        mail.outbox = []
+        # Coordinator only wants reminders for apps under discussion
+        self.coordinator.userprofile.pending_app_reminders = True
+        self.coordinator.userprofile.approved_app_reminders = True
+        self.coordinator.userprofile.save()
+
+        call_command("send_coordinator_reminders")
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("One pending application", mail.outbox[0].body)
+        self.assertIn("One under discussion application", mail.outbox[0].body)
+        self.assertIn("One approved application", mail.outbox[0].body)
+
+
+class ProxyBundleLaunchTest(TestCase):
+    def setUp(self):
+        super(ProxyBundleLaunchTest, self).setUp()
+        editor = EditorFactory(user__email="editor@example.com")
+        self.user = editor.user
+
+    def test_proxy_bundle_launch_email_1(self):
+        """
+        With one user, calling the proxy/bundle launch command
+        should send a single email, to that user.
+        """
+        call_command("proxy_bundle_launch")
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [self.user.email])
+
+    def test_proxy_bundle_launch_email_2(self):
+        """
+        Adding another user should result in two sent emails.
+        """
+        _ = EditorFactory(user__email="editor@example.com")
+        call_command("proxy_bundle_launch")
+
+        self.assertEqual(len(mail.outbox), 2)
+
+    def test_proxy_bundle_launch_email_3(self):
+        """
+        The proxy/bundle launch command should record the
+        email was sent
+        """
+        self.assertFalse(self.user.userprofile.proxy_notification_sent)
+
+        call_command("proxy_bundle_launch")
+
+        self.user.userprofile.refresh_from_db()
+        self.assertTrue(self.user.userprofile.proxy_notification_sent)
+
+    def test_proxy_bundle_launch_email_4(self):
+        """
+        The proxy/bundle launch command should not send
+        to a user we recorded as having received the email
+        already.
+        """
+        self.user.userprofile.proxy_notification_sent = True
+        self.user.userprofile.save()
+
+        call_command("proxy_bundle_launch")
+
+        self.assertEqual(len(mail.outbox), 0)

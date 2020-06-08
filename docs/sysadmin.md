@@ -62,10 +62,4 @@ Application log: `/var/www/html/TWLight/logs/twlight.log` (or e.g. `twlight.log.
 Gunicorn log: `/var/www/html/TWLight/logs/gunicorn.log`
     * Note that this is the log *for the gunicorn process*, as distinct from *the service that starts gunicorn*.
 
-Postfix, nginx, and the service that starts gunicorn on boot log to their system defaults in `/var/log`.
-
-## Translations
-
-Translations for the platform's interface elements (i.e. everything that lives in this repository) are handled via [translatewiki.net](https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform), where volunteer contributors add translations. These are synced twice a week - on Mondays and Thursdays.
-
-Translations for database content such as partner descriptions, tags, and send instructions, are not currently handled by translatewiki. We [plan](https://phabricator.wikimedia.org/T171874) to create translatable pages on Meta for translating this content. For now, new translations can be added in the administrator interface.
+Postfix, nginx, and the service that starts gunicorn on boot log to their system defaults in `/var/log`. 

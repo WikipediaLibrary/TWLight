@@ -30,18 +30,16 @@ from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse_lazy
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
-from django.utils.translation import ugettext_lazy as _
 
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.emails.signals import ContactUs
 from TWLight.resources.models import AccessCode, Partner
-from TWLight.users.models import Authorization
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice
+from TWLight.users.signals import Notice, ProxyBundleLaunch
 
 
 logger = logging.getLogger(__name__)
@@ -83,15 +81,35 @@ class UserRenewalNotice(template_mail.TemplateMail):
     name = "user_renewal_notice"
 
 
+class ProxyBundleEmail(template_mail.TemplateMail):
+    name = "proxy_bundle_email"
+
+
 @receiver(Reminder.coordinator_reminder)
 def send_coordinator_reminder_emails(sender, **kwargs):
     """
-    Any time the related managment command is run, this sends email to the
+    Any time the related management command is run, this sends email to the
     to designated coordinators, reminding them to login
     to the site if there are pending applications.
     """
-    app_status = kwargs["app_status"]
-    app_count = kwargs["app_count"]
+    app_status_and_count = kwargs["app_status_and_count"]
+    pending_count = None
+    question_count = None
+    approved_count = None
+    total_apps = 0
+    # We unwrap app_status_and_count and take stock of the data
+    # in a way that's convenient for us to use in email.send
+    for status, count in app_status_and_count.items():
+        if count != 0 and status == Application.PENDING:
+            pending_count = count
+            total_apps += count
+        if count != 0 and status == Application.QUESTION:
+            question_count = count
+            total_apps += count
+        if count != 0 and status == Application.APPROVED:
+            approved_count = count
+            total_apps += count
+
     coordinator_wp_username = kwargs["coordinator_wp_username"]
     coordinator_email = kwargs["coordinator_email"]
     coordinator_lang = kwargs["coordinator_lang"]
@@ -101,9 +119,8 @@ def send_coordinator_reminder_emails(sender, **kwargs):
 
     logger.info(
         "Received coordinator reminder signal for {coordinator_wp_username}; "
-        "preparing to send reminder email to {coordinator_email}.".format(
-            coordinator_wp_username=coordinator_wp_username,
-            coordinator_email=coordinator_email,
+        "preparing to send reminder email.".format(
+            coordinator_wp_username=coordinator_wp_username
         )
     )
     email = CoordinatorReminderNotification()
@@ -113,8 +130,10 @@ def send_coordinator_reminder_emails(sender, **kwargs):
         {
             "user": coordinator_wp_username,
             "lang": coordinator_lang,
-            "app_status": app_status,
-            "app_count": app_count,
+            "pending_count": pending_count,
+            "question_count": question_count,
+            "approved_count": approved_count,
+            "total_apps": total_apps,
             "link": link,
         },
     )
@@ -147,6 +166,20 @@ def send_user_renewal_notice_emails(sender, **kwargs):
             "partner_link": partner_link,
         },
     )
+
+
+@receiver(ProxyBundleLaunch.launch_notice)
+def send_proxy_bundle_launch_notice(sender, **kwargs):
+    """
+    Sends the email to notify users that the proxy & bundle features
+    have launched. Will only need to be sent once as-is.
+    """
+    user_wp_username = kwargs["user_wp_username"]
+    user_email = kwargs["user_email"]
+
+    email = ProxyBundleEmail()
+
+    email.send(user_email, {"username": user_wp_username})
 
 
 @receiver(comment_was_posted)
@@ -193,6 +226,9 @@ def send_comment_notification_emails(sender, **kwargs):
                     "app": app,
                     "app_url": app_url,
                     "partner": app.partner,
+                    "submit_date": current_comment.submit_date,
+                    "commenter": current_comment.user.editor.wp_username,
+                    "comment": current_comment.comment,
                 },
             )
             logger.info(
@@ -216,6 +252,9 @@ def send_comment_notification_emails(sender, **kwargs):
                 "app": app,
                 "app_url": app_url,
                 "partner": app.partner,
+                "submit_date": current_comment.submit_date,
+                "commenter": current_comment.user.editor.wp_username,
+                "comment": current_comment.comment,
             },
         )
         logger.info(
@@ -262,6 +301,9 @@ def send_comment_notification_emails(sender, **kwargs):
                     "app": app,
                     "app_url": app_url,
                     "partner": app.partner,
+                    "submit_date": current_comment.submit_date,
+                    "commenter": current_comment.user.editor.wp_username,
+                    "comment": current_comment.comment,
                 },
             )
             logger.info(

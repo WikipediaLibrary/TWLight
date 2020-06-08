@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from django.contrib import admin, messages
+from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.utils.translation import ugettext_lazy as _
 
-from TWLight.users.models import (
-    Editor,
-    UserProfile,
-    ProxyAuthorization as Authorization,
-)
-from TWLight.users.forms import AuthorizationForm
+from TWLight.users.models import Editor, UserProfile, Authorization, get_company_name
+from TWLight.users.forms import AuthorizationAdminForm, AuthorizationInlineForm
 
 
 class EditorInline(admin.StackedInline):
@@ -27,10 +24,27 @@ class UserProfileInline(admin.StackedInline):
     extra = 1
     can_delete = False
     raw_id_fields = ("user",)
+    fieldsets = (
+        (
+            None,
+            {"fields": ("terms_of_use", "terms_of_use_date", "use_wp_email", "lang")},
+        ),
+        (
+            _("Email preferences"),
+            {
+                "fields": (
+                    "send_renewal_notices",
+                    "pending_app_reminders",
+                    "discussion_app_reminders",
+                    "approved_app_reminders",
+                )
+            },
+        ),
+    )
 
 
 class AuthorizationInline(admin.StackedInline):
-    form = AuthorizationForm
+    form = AuthorizationInlineForm
     model = Authorization
     fk_name = "user"
     extra = 0
@@ -39,17 +53,19 @@ class AuthorizationInline(admin.StackedInline):
 class AuthorizationAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "partner",
+        "get_partners_company_name",
         "stream",
         "get_authorizer_wp_username",
         "get_authorized_user_wp_username",
     )
     search_fields = [
-        "partner__company_name",
+        "partners__company_name",
         "stream__name",
         "authorizer__editor__wp_username",
         "user__editor__wp_username",
     ]
+
+    form = AuthorizationAdminForm
 
     def get_authorized_user_wp_username(self, authorization):
         if authorization.user:
@@ -72,6 +88,11 @@ class AuthorizationAdmin(admin.ModelAdmin):
             return ""
 
     get_authorizer_wp_username.short_description = _("authorizer")
+
+    def get_partners_company_name(self, authorization):
+        return get_company_name(authorization)
+
+    get_partners_company_name.short_description = _("partners")
 
 
 admin.site.register(Authorization, AuthorizationAdmin)
@@ -96,3 +117,13 @@ class UserAdmin(AuthUserAdmin):
 # Unregister old user admin; register new, improved user admin.
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
+# Cribbed from: https://stackoverflow.com/a/4978234
+class SessionAdmin(admin.ModelAdmin):
+    def _session_data(self, obj):
+        return obj.get_decoded()
+
+    list_display = ["session_key", "_session_data", "expire_date"]
+
+
+admin.site.register(Session, SessionAdmin)

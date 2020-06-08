@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from datetime import date, datetime, timedelta
-from dateutil.relativedelta import relativedelta
+from datetime import date
 from reversion import revisions as reversion
 from reversion.models import Version
-from reversion.signals import post_revision_commit
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
-from django.db.models.signals import pre_save, post_save
-from django.dispatch import receiver
 from django.forms.models import model_to_dict
-from django.utils.timezone import localtime, now
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
@@ -23,6 +19,10 @@ logger = logging.getLogger(__name__)
 
 
 class ValidApplicationsManager(models.Manager):
+    """
+    This custom model manager excludes applications marked 'invalid' from querysets by default.
+    """
+
     def get_queryset(self):
         return (
             super(ValidApplicationsManager, self)
@@ -58,7 +58,7 @@ class Application(models.Model):
         (APPROVED, _("Approved")),
         # Translators: This is the status of an application which has been declined by a reviewer.
         (NOT_APPROVED, _("Not approved")),
-        # Translators: This is the status of an application that has been sent to a partner.
+        # Translators: This is the status of an application that has been finalised, such as by sending to a partner.
         (SENT, _("Sent to partner")),
         # Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
         (INVALID, _("Invalid")),
@@ -69,12 +69,12 @@ class Application(models.Model):
     FINAL_STATUS_LIST = [APPROVED, NOT_APPROVED, SENT, INVALID]
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=PENDING)
-    # Moved from auto_now_add=True so that we can set the date for import.
+
     # Defaults to today, set as non-editable, and not required in forms.
     date_created = models.DateField(default=now, editable=False)
 
     # Will be set on save() if status changes from PENDING/QUESTION to
-    # APPROVED/NOT APPROVED.
+    # APPROVED/NOT APPROVED, as defined via post_save signals.
     date_closed = models.DateField(
         blank=True,
         null=True,
@@ -116,7 +116,11 @@ class Application(models.Model):
     rationale = models.TextField(blank=True)
     specific_title = models.CharField(max_length=128, blank=True)
     specific_stream = models.ForeignKey(
-        Stream, related_name="applications", blank=True, null=True
+        Stream,
+        related_name="applications",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
     )
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
@@ -185,7 +189,6 @@ class Application(models.Model):
                     "specific_title",
                     "comments",
                     "agreement_with_terms_of_use",
-                    "account_email",
                 ],
             )
 
@@ -333,6 +336,26 @@ class Application(models.Model):
                 )
         return user_instructions
 
+    def get_authorization(self):
+        """
+        For a given application, find an authorization for this partner-stream-editor, if possible.
+        """
+        try:
+            if self.specific_stream:
+                authorization = Authorization.objects.get(
+                    partners=self.partner,
+                    user=self.editor.user,
+                    stream=self.specific_stream,
+                )
+            else:
+                authorization = Authorization.objects.get(
+                    partners=self.partner, user=self.editor.user
+                )
+        except Authorization.DoesNotExist:
+            return None
+
+        return authorization
+
     def is_instantly_finalized(self):
         """
         Check if this application is to a partner or collection for which
@@ -354,15 +377,16 @@ class Application(models.Model):
 
     @property
     def user(self):
-        # Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation
-        # view.
+        """
+        Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation view.
+        """
         return self.editor.user
 
     @property
     def is_renewable(self):
         """
-        Apps are eligible for renewal if they are approved and have not already
-        been renewed. (We presume that SENT apps were at some point APPROVED.)
+        Apps are eligible for renewal if they are approved/sent and have not already
+        been renewed.
         """
         return all(
             [
@@ -371,132 +395,3 @@ class Application(models.Model):
                 self.partner.renewals_available,
             ]
         )
-
-
-# IMPORTANT: pre_save is not sent by Queryset.update(), so *none of this
-# behavior will happen on if you update() an Application queryset*.
-# That is sometimes okay, but it is not always okay.
-# Errors caused by days_open not existing when expected to
-# exist can show up in weird parts of the application (for example, template
-# rendering failing when get_num_days_open returns None but its output is
-# passed to a template filter that needs an integer).
-@receiver(pre_save, sender=Application)
-def update_app_status_on_save(sender, instance, **kwargs):
-
-    # Make sure not using a mix of dates and datetimes
-    if instance.date_created and isinstance(instance.date_created, datetime):
-        instance.date_created = instance.date_created.date()
-
-    # Make sure not using a mix of dates and datetimes
-    if instance.date_closed and isinstance(instance.date_closed, datetime):
-        instance.date_closed = instance.date_closed.date()
-
-    if instance.id:
-        orig_app = Application.include_invalid.get(pk=instance.id)
-        orig_status = orig_app.status
-        if all(
-            [
-                orig_status not in Application.FINAL_STATUS_LIST,
-                int(instance.status) in Application.FINAL_STATUS_LIST,
-                not bool(instance.date_closed),
-            ]
-        ):
-
-            instance.date_closed = localtime(now()).date()
-            instance.days_open = (instance.date_closed - instance.date_created).days
-
-    else:
-        # If somehow we've created an Application whose status is final
-        # at the moment of creation, set its date-closed-type parameters
-        # too.
-        if (
-            instance.status in Application.FINAL_STATUS_LIST
-            and not instance.date_closed
-        ):
-
-            instance.date_closed = localtime(now()).date()
-            instance.days_open = 0
-
-
-@receiver(post_save, sender=Application)
-def post_revision_commit(sender, instance, **kwargs):
-
-    # For some authorization methods, we can skip the manual Approved->Sent
-    # step and just immediately take an Approved application and give it
-    # a finalised status.
-    skip_approved = (
-        instance.status == Application.APPROVED and instance.is_instantly_finalized()
-    )
-
-    if skip_approved:
-        instance.status = Application.SENT
-        instance.save()
-
-    # Authorize editor to access resource after an application is saved as sent.
-
-    if instance.status == Application.SENT:
-        # Check if an authorization already exists.
-        if instance.specific_stream:
-            existing_authorization = Authorization.objects.filter(
-                user=instance.user,
-                partner=instance.partner,
-                stream=instance.specific_stream,
-            )
-        else:
-            existing_authorization = Authorization.objects.filter(
-                user=instance.user, partner=instance.partner
-            )
-
-        authorized_user = instance.user
-        authorizer = instance.sent_by
-
-        # In the case that there is no existing authorization, create a new one
-        if existing_authorization.count() == 0:
-            authorization = Authorization()
-        # If an authorization already existed (such as in the case of a
-        # renewal), we'll simply update that one.
-        elif existing_authorization.count() == 1:
-            authorization = existing_authorization[0]
-        else:
-            logger.error(
-                "Found more than one authorization object for "
-                "{user} - {partner}".format(
-                    user=instance.user, partner=instance.partner
-                )
-            )
-            return
-
-        if instance.specific_stream:
-            authorization.stream = instance.specific_stream
-
-        authorization.user = authorized_user
-        authorization.authorizer = authorizer
-        authorization.partner = instance.partner
-
-        # If this is a proxy partner, and the requested_access_duration
-        # field is set to false, set (or reset) the expiry date
-        # to one year from now
-        if (
-            instance.partner.authorization_method == Partner.PROXY
-            and instance.requested_access_duration is None
-        ):
-            one_year_from_now = date.today() + timedelta(days=365)
-            authorization.date_expires = one_year_from_now
-        # If this is a proxy partner, and the requested_access_duration
-        # field is set to true, set (or reset) the expiry date
-        # to 1, 3, 6 or 12 months from today based on user input
-        elif (
-            instance.partner.authorization_method == Partner.PROXY
-            and instance.partner.requested_access_duration is True
-        ):
-            custom_expiry_date = date.today() + relativedelta(
-                months=+instance.requested_access_duration
-            )
-            authorization.date_expires = custom_expiry_date
-        # Alternatively, if this partner has a specified account_length,
-        # we'll use that to set the expiry.
-        elif instance.partner.account_length:
-            # account_length should be a timedelta
-            authorization.date_expires = date.today() + instance.partner.account_length
-
-        authorization.save()

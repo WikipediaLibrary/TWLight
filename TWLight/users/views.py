@@ -1,5 +1,8 @@
-from datetime import date, timedelta
+import datetime
 import json
+import logging
+
+from datetime import date, timedelta
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -13,7 +16,7 @@ from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.views.generic.base import TemplateView, View
+from django.views.generic.base import TemplateView, View, RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
@@ -24,7 +27,8 @@ from django_comments.models import Comment
 
 from TWLight.resources.models import Partner
 from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
-from TWLight.users.groups import get_coordinators, get_restricted
+from TWLight.users.groups import get_restricted
+from TWLight.users.helpers.authorizations import get_valid_partner_authorizations
 
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
@@ -40,17 +44,14 @@ from .forms import (
     EmailChangeForm,
     RestrictDataForm,
     UserEmailForm,
+    CoordinatorEmailForm,
 )
+from .helpers.authorizations import sort_authorizations_into_resource_list
 from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
 
-import datetime
-
-coordinators = get_coordinators()
 restricted = get_restricted()
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -116,13 +117,18 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
     def get_context_data(self, **kwargs):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
         editor = self.get_object()
+        user = self.request.user
         context["editor"] = editor  # allow for more semantic templates
         context["form"] = EditorUpdateForm(instance=editor)
-        context["language_form"] = SetLanguageForm(user=self.request.user)
-        context["email_form"] = UserEmailForm(user=self.request.user)
+        context["language_form"] = SetLanguageForm(user=user)
+        context["email_form"] = UserEmailForm(user=user)
+        # Check if the user is in the group: 'coordinators',
+        # and add the reminder email preferences form.
+        if coordinators in user.groups.all():
+            context["coordinator_email_form"] = CoordinatorEmailForm(user=user)
 
         try:
-            if self.request.user.editor == editor and not editor.contributions:
+            if user.editor == editor and not editor.contributions:
                 messages.add_message(
                     self.request,
                     messages.WARNING,
@@ -147,7 +153,7 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             """
             pass
 
-        context["password_form"] = PasswordChangeForm(user=self.request.user)
+        context["password_form"] = PasswordChangeForm(user=user)
 
         return context
 
@@ -195,7 +201,6 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
             return response
 
         if "update_email_settings" in request.POST:
-            logger.info(request.POST)
             # Unchecked checkboxes just don't send POST data
             if "send_renewal_notices" in request.POST:
                 send_renewal_notices = True
@@ -204,6 +209,56 @@ class EditorDetailView(CoordinatorOrSelf, DetailView):
 
             editor.user.userprofile.send_renewal_notices = send_renewal_notices
             editor.user.userprofile.save()
+
+            user = self.request.user
+            # Again, process email preferences data only if the user
+            # is present in the group: 'coordinators'.
+            if coordinators in user.groups.all():
+                # Unchecked checkboxes doesn't send POST data
+                if "send_pending_application_reminders" in request.POST:
+                    send_pending_app_reminders = True
+                else:
+                    send_pending_app_reminders = False
+                if "send_discussion_application_reminders" in request.POST:
+                    send_discussion_app_reminders = True
+                else:
+                    send_discussion_app_reminders = False
+                if "send_approved_application_reminders" in request.POST:
+                    send_approved_app_reminders = True
+                else:
+                    send_approved_app_reminders = False
+                user.userprofile.pending_app_reminders = send_pending_app_reminders
+                user.userprofile.discussion_app_reminders = (
+                    send_discussion_app_reminders
+                )
+                user.userprofile.approved_app_reminders = send_approved_app_reminders
+                user.userprofile.save()
+
+                # Although not disallowed, we'd prefer if coordinators opted
+                # to receive at least one (of the 3) type of reminder emails.
+                # If they choose to receive none, we post a warning message.
+                if (
+                    not send_pending_app_reminders
+                    and not send_discussion_app_reminders
+                    and not send_pending_app_reminders
+                ):
+                    messages.add_message(
+                        request,
+                        messages.WARNING,
+                        # Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
+                        _(
+                            "You have chosen not to receive reminder emails. "
+                            "As a coordinator, you should receive at least one "
+                            "type of reminder emails, consider changing your preferences."
+                        ),
+                    )
+                else:
+                    messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        # Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
+                        _("Your reminder email preferences are updated."),
+                    )
 
         return HttpResponseRedirect(reverse_lazy("users:home"))
 
@@ -503,6 +558,14 @@ class DeleteDataView(SelfOnly, DeleteView):
             user_authorization.date_expires = date.today() - timedelta(days=1)
             user_authorization.save()
 
+        # Did the user authorize any authorizations?
+        # If so, we need to retain their validity by shifting
+        # the authorizer to TWL Team
+        twl_team = User.objects.get(username="TWL Team")
+        for authorization in Authorization.objects.filter(authorizer=user):
+            authorization.authorizer = twl_team
+            authorization.save()
+
         user.delete()
 
         return HttpResponseRedirect(self.success_url)
@@ -583,23 +646,7 @@ class TermsView(UpdateView):
             self.get_object().terms_of_use_date = None
             self.get_object().save()
 
-            if self.request.user in coordinators.user_set.all():
-                # Translators: This message is shown if the user (who is also a coordinator) does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for or evaluate applications for access to resources.
-                fail_msg = _(
-                    "You may explore the site, but you will not be "
-                    "able to apply for access to materials or evaluate "
-                    "applications unless you agree with the terms of use."
-                )
-            else:
-                # Translators: This message is shown if the user does not accept to the Terms of Use when signing up. They can browse the website but cannot apply for access to resources.
-                fail_msg = _(
-                    "You may explore the site, but you will not be "
-                    "able to apply for access unless you agree with "
-                    "the terms of use."
-                )
-
-            messages.add_message(self.request, messages.WARNING, fail_msg)
-            return reverse_lazy("users:home")
+            return reverse_lazy("homepage")
 
 
 class AuthorizedUsers(APIView):
@@ -620,16 +667,10 @@ class AuthorizedUsers(APIView):
             message = "Couldn't find a partner with this ID."
             return Response(message, status=status.HTTP_404_NOT_FOUND)
 
-        if partner.authorization_method == Partner.PROXY:
-            users = User.objects.filter(
-                authorizations__partner=partner,
-                authorizations__date_expires__gte=date.today(),
-            ).distinct()
-        else:
-            users = User.objects.filter(
-                editor__applications__status=Application.SENT,
-                editor__applications__partner=partner,
-            ).distinct()
+        # We're ignoring streams here, because the API operates at the partner
+        # level. This is fine for the use case we built it for (Wikilink tool)
+        valid_partner_auths = get_valid_partner_authorizations(pk)
+        users = User.objects.filter(authorizations__in=valid_partner_auths).distinct()
 
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
@@ -637,14 +678,10 @@ class AuthorizedUsers(APIView):
 
 class CollectionUserView(SelfOnly, ListView):
     model = Editor
-    template_name = "users/my_collection.html"
+    template_name = "users/my_library.html"
 
     def get_object(self):
-        assert "pk" in list(self.kwargs.keys())
-        try:
-            return Editor.objects.get(pk=self.kwargs["pk"])
-        except Editor.DoesNotExist:
-            raise Http404
+        return Editor.objects.get(pk=self.request.user.editor.pk)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionUserView, self).get_context_data(**kwargs)
@@ -653,31 +690,31 @@ class CollectionUserView(SelfOnly, ListView):
         proxy_bundle_authorizations = Authorization.objects.filter(
             Q(date_expires__gte=today) | Q(date_expires=None),
             user=editor.user,
-            partner__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        ).order_by("partner")
+            partners__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
+        ).distinct()
         proxy_bundle_authorizations_expired = Authorization.objects.filter(
             user=editor.user,
             date_expires__lt=today,
-            partner__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        ).order_by("partner")
+            partners__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
+        ).distinct()
         manual_authorizations = Authorization.objects.filter(
             Q(date_expires__gte=today) | Q(date_expires=None),
             user=editor.user,
-            partner__authorization_method__in=[
+            partners__authorization_method__in=[
                 Partner.EMAIL,
                 Partner.CODES,
                 Partner.LINK,
             ],
-        ).order_by("partner")
+        ).order_by("partners")
         manual_authorizations_expired = Authorization.objects.filter(
             user=editor.user,
             date_expires__lt=today,
-            partner__authorization_method__in=[
+            partners__authorization_method__in=[
                 Partner.EMAIL,
                 Partner.CODES,
                 Partner.LINK,
             ],
-        ).order_by("partner")
+        ).order_by("partners")
 
         for authorization_list in [
             manual_authorizations,
@@ -690,9 +727,15 @@ class CollectionUserView(SelfOnly, ListView):
                     each_authorization.about_to_expire
                     or not each_authorization.is_valid
                 ):
-                    each_authorization.latest_app = each_authorization.get_latest_app()
-                    if each_authorization.latest_app:
-                        if not each_authorization.latest_app.is_renewable:
+                    latest_app = each_authorization.get_latest_app()
+                    if latest_app:
+                        if latest_app.status != Application.SENT:
+                            each_authorization.latest_sent_app = (
+                                each_authorization.get_latest_sent_app()
+                            )
+                        else:
+                            each_authorization.latest_sent_app = latest_app
+                        if not latest_app.is_renewable:
                             try:
                                 each_authorization.open_app = Application.objects.filter(
                                     editor=editor,
@@ -701,19 +744,33 @@ class CollectionUserView(SelfOnly, ListView):
                                         Application.QUESTION,
                                         Application.APPROVED,
                                     ),
-                                    partner=each_authorization.partner,
+                                    partner=each_authorization.partners.get(),
                                 ).latest(
                                     "date_created"
                                 )
                             except Application.DoesNotExist:
                                 each_authorization.open_app = None
 
-        context["proxy_bundle_authorizations"] = proxy_bundle_authorizations
+        # Sort the querysets into more useful lists
+        manual_authorizations_list = sort_authorizations_into_resource_list(
+            manual_authorizations
+        )
+        manual_authorizations_expired_list = sort_authorizations_into_resource_list(
+            manual_authorizations_expired
+        )
+        proxy_bundle_authorizations_list = sort_authorizations_into_resource_list(
+            proxy_bundle_authorizations
+        )
+        proxy_bundle_authorizations_expired_list = sort_authorizations_into_resource_list(
+            proxy_bundle_authorizations_expired
+        )
+
+        context["proxy_bundle_authorizations"] = proxy_bundle_authorizations_list
         context[
             "proxy_bundle_authorizations_expired"
-        ] = proxy_bundle_authorizations_expired
-        context["manual_authorizations"] = manual_authorizations
-        context["manual_authorizations_expired"] = manual_authorizations_expired
+        ] = proxy_bundle_authorizations_expired_list
+        context["manual_authorizations"] = manual_authorizations_list
+        context["manual_authorizations_expired"] = manual_authorizations_expired_list
         return context
 
 
@@ -731,9 +788,11 @@ class ListApplicationsUserView(SelfOnly, ListView):
     def get_context_data(self, **kwargs):
         context = super(ListApplicationsUserView, self).get_context_data(**kwargs)
         editor = self.get_object()
-        context["object_list"] = editor.applications.model.include_invalid.filter(
-            editor=editor
-        ).order_by("status", "-date_closed")
+        context["object_list"] = (
+            editor.applications.model.include_invalid.filter(editor=editor)
+            .exclude(partner__authorization_method=Partner.BUNDLE)
+            .order_by("status", "-date_closed")
+        )
         return context
 
 
@@ -758,8 +817,11 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
         messages.add_message(
             self.request,
             messages.SUCCESS,
-            _("Access to {} has been returned.").format(authorization.partner),
+            _("Access to {} has been returned.").format(authorization.partners),
         )
-        return HttpResponseRedirect(
-            reverse("users:my_collection", kwargs={"pk": self.request.user.editor.pk})
-        )
+        return HttpResponseRedirect(reverse("users:my_library"))
+
+
+class LibraryRedirectView(RedirectView):
+    permanent = True
+    url = reverse_lazy("users:my_library")

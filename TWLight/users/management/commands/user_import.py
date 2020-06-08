@@ -5,12 +5,12 @@ import logging
 import urllib.request, urllib.error, urllib.parse
 
 from datetime import datetime
-from django.utils.timezone import now
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.management.base import BaseCommand, CommandError
-from ....users.models import Editor, UserProfile
+from django.core.management.base import BaseCommand
+from TWLight.users.models import Editor
+from TWLight.users.helpers.editor_data import editor_global_userinfo
 
 logger = logging.getLogger(__name__)
 
@@ -52,9 +52,8 @@ class Command(BaseCommand):
                     editor = Editor.objects.get(wp_username=wp_username)
                     logger.info("Editor exists. Skipping import")
                 except:
-                    global_userinfo = self.get_global_userinfo_from_wp_username(
-                        wp_username
-                    )
+                    # TODO: Run import check to see if this actually works.
+                    global_userinfo = editor_global_userinfo(wp_username, None, False)
                     if global_userinfo:
                         logger.info("{info}.".format(info=global_userinfo))
                         reg_date = datetime.strptime(
@@ -85,7 +84,6 @@ class Command(BaseCommand):
                                         row[1], "%d/%m/%Y %H:%M:%S"
                                     ).date()
                                 except:
-                                    # date_created = now
                                     date_created = datetime.strptime(
                                         "01/01/1971 00:00:01", "%d/%m/%Y %H:%M:%S"
                                     ).date()
@@ -109,28 +107,6 @@ class Command(BaseCommand):
                                 )
                                 pass
                     pass
-
-    def get_global_userinfo_from_wp_username(self, wp_username):
-        try:
-            endpoint = "{base}/w/api.php?action=query&meta=globaluserinfo&guiuser={name}&guiprop=editcount&format=json&formatversion=2".format(
-                base="https://meta.wikimedia.org", name=urllib.parse.quote(wp_username)
-            )
-
-            results = json.loads(urllib.request.urlopen(endpoint).read())
-            global_userinfo = results["query"]["globaluserinfo"]
-            # If the user isn't found global_userinfo contains the empty key
-            # "missing"
-            assert "missing" not in global_userinfo
-            logger.info("fetched global_userinfo for user")
-            return global_userinfo
-        except:
-            logger.exception(
-                "could not fetch global_userinfo for {username}.".format(
-                    username=wp_username
-                )
-            )
-            return None
-            pass
 
     # Cribbed from stack overflow
     # https://stackoverflow.com/a/32232764

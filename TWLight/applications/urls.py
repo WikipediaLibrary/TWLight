@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
-from dal import autocomplete
 
 from TWLight.applications import views
 from TWLight.users.models import Editor

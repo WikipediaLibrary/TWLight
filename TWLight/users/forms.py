@@ -12,6 +12,7 @@ from django import forms
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from .helpers.validation import validate_partners, validate_authorizer
 from .models import Editor, UserProfile, Authorization
 from .groups import get_restricted
 
@@ -55,7 +56,25 @@ class AuthorizationUserChoiceForm(forms.ModelChoiceField):
             return obj.username
 
 
-class AuthorizationForm(forms.ModelForm):
+class AuthorizationAdminForm(forms.ModelForm):
+    """
+    This override only exists to run custom validation.
+    """
+
+    class Meta:
+        model = Authorization
+        fields = "__all__"
+
+    def clean_partners(self):
+        validate_partners(self.cleaned_data["partners"])
+        return self.cleaned_data["partners"]
+
+    def clean_authorizer(self):
+        validate_authorizer(self.cleaned_data["authorizer"])
+        return self.cleaned_data["authorizer"]
+
+
+class AuthorizationInlineForm(forms.ModelForm):
     authorizer = AuthorizationUserChoiceForm(
         User.objects.filter(
             models.Q(is_superuser=True) | models.Q(groups__name="coordinators")
@@ -87,6 +106,26 @@ class UserEmailForm(forms.Form):
         self.fields[
             "send_renewal_notices"
         ].initial = user.userprofile.send_renewal_notices
+
+
+class CoordinatorEmailForm(forms.Form):
+    send_pending_application_reminders = forms.BooleanField(required=False)
+    send_discussion_application_reminders = forms.BooleanField(required=False)
+    send_approved_application_reminders = forms.BooleanField(required=False)
+
+    def __init__(self, user, *args, **kwargs):
+        super(CoordinatorEmailForm, self).__init__(*args, **kwargs)
+        # We default to the values from the user's userprofile on
+        # page (Profile) load.
+        self.fields[
+            "send_pending_application_reminders"
+        ].initial = user.userprofile.pending_app_reminders
+        self.fields[
+            "send_discussion_application_reminders"
+        ].initial = user.userprofile.discussion_app_reminders
+        self.fields[
+            "send_approved_application_reminders"
+        ].initial = user.userprofile.approved_app_reminders
 
 
 class RestrictDataForm(forms.Form):
