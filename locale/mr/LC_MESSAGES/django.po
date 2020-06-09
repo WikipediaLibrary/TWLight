@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-06-08 15:57+0000\n"
+"POT-Creation-Date: 2020-06-09 16:30+0000\n"
 "PO-Revision-Date: 2019-02-14 08:31:32+0000\n"
 "Language: mr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1030,8 +1030,9 @@ msgstr "खालील विकिपिडीया ग्रंथालय 
 msgid ""
 "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
 "resources through The Wikipedia Library. We are happy to inform you that "
-"your application has been approved.</p> <p>%(user_instructions)s</p> "
-"<p>Cheers!</p> <p>The Wikipedia Library</p>"
+"your application has been approved.</p> <p>%(user_instructions)s</p> <p>You "
+"can view the collections you're authorized to access at My Library: "
+"%(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
 msgstr ""
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1040,8 +1041,9 @@ msgstr ""
 msgid ""
 "Dear %(user)s, Thank you for applying for access to %(partner)s resources "
 "through The Wikipedia Library. We are happy to inform you that your "
-"application has been approved. %(user_instructions)s Cheers! The Wikipedia "
-"Library"
+"application has been approved. %(user_instructions)s You can view the "
+"collections you're authorized to access at My Library: %(link)s Cheers! The "
+"Wikipedia Library"
 msgstr ""
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).

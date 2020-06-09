@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-06-08 15:58+0000\n"
+"POT-Creation-Date: 2020-06-09 16:30+0000\n"
 "PO-Revision-Date: 2020-06-01 20:44:09+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1031,12 +1031,18 @@ msgstr "您的維基百科圖書館取用代碼"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
+#| "resources through The Wikipedia Library. We are happy to inform you that "
+#| "your application has been approved.</p> <p>%(user_instructions)s</p> "
+#| "<p>Cheers!</p> <p>The Wikipedia Library</p>"
 msgid ""
 "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
 "resources through The Wikipedia Library. We are happy to inform you that "
-"your application has been approved.</p> <p>%(user_instructions)s</p> "
-"<p>Cheers!</p> <p>The Wikipedia Library</p>"
+"your application has been approved.</p> <p>%(user_instructions)s</p> <p>You "
+"can view the collections you're authorized to access at My Library: "
+"%(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
 msgstr ""
 "<p>致 %(user)s：</p> <p>感謝您透過維基百科圖書館申請向 %(partner)s 取用資源。"
 "我們很高興向您通知您的申請程序已被核准。一旦處理完畢後，您可以在一到兩週內收"
@@ -1045,12 +1051,18 @@ msgstr ""
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Dear %(user)s, Thank you for applying for access to %(partner)s resources "
+#| "through The Wikipedia Library. We are happy to inform you that your "
+#| "application has been approved. %(user_instructions)s Cheers! The "
+#| "Wikipedia Library"
 msgid ""
 "Dear %(user)s, Thank you for applying for access to %(partner)s resources "
 "through The Wikipedia Library. We are happy to inform you that your "
-"application has been approved. %(user_instructions)s Cheers! The Wikipedia "
-"Library"
+"application has been approved. %(user_instructions)s You can view the "
+"collections you're authorized to access at My Library: %(link)s Cheers! The "
+"Wikipedia Library"
 msgstr ""
 "致：%(user)s，感謝您透過維基百科圖書館申請向 %(partner)s 取用資源。我們很高興"
 "向您通知您的申請程序已被核准。一旦處理完畢後，您可以在一到兩週內收到取用方面"
