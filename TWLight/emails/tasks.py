@@ -313,6 +313,9 @@ def send_comment_notification_emails(sender, **kwargs):
 
 
 def send_approval_notification_email(instance):
+    base_url = get_current_site(None).domain
+    path = reverse_lazy("users:my_library")
+    link = "https://{base}{path}".format(base=base_url, path=path)
     email = ApprovalNotification()
 
     # If, for some reason, we're trying to send an email to a user
@@ -324,6 +327,7 @@ def send_approval_notification_email(instance):
                 "user": instance.user.editor.wp_username,
                 "lang": instance.user.userprofile.lang,
                 "partner": instance.partner,
+                "link": link,
                 "user_instructions": instance.get_user_instructions(),
             },
         )
