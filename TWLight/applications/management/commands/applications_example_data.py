@@ -208,7 +208,9 @@ class Command(BaseCommand):
         for app_to_renew in random.sample(list(all_apps), num_to_renew):
             app_to_renew.renew()
 
-        for application in Application.objects.filter(status=Application.PENDING, parent__isnull=False):
+        for application in Application.objects.filter(
+            status=Application.PENDING, parent__isnull=False
+        ):
             parent_application = Application.objects.get(pk=application.parent)
             app_date = parent_application.date_closed
 
