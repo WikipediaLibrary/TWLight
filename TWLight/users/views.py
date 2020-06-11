@@ -91,7 +91,7 @@ class UserDetailView(SelfOnly, TemplateView):
         assert "pk" in list(self.kwargs.keys())
 
         try:
-            if self.kwargs["pk"] is None:
+            if self.kwargs["pk"] == None:
                 return User.objects.get(self.kwargs["pk"])
             return User.objects.get(pk=self.kwargs["pk"])
         except User.DoesNotExist:
