@@ -548,7 +548,9 @@ class WaitlistBehaviorTests(TestCase):
         app1 = ApplicationFactory(partner=partner, status=Application.PENDING)
         app2 = ApplicationFactory(partner=partner, status=Application.QUESTION)
         app3 = ApplicationFactory(partner=partner, status=Application.APPROVED)
-        app4 = ApplicationFactory(partner=partner, status=Application.SENT)
+        app4 = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=editor.user
+        )
 
         # Set up request
         url = reverse("partners:toggle_waitlist", kwargs={"pk": partner.pk})

@@ -7,14 +7,14 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('applications', '0027_application_waitlist_status'),
-    ]
+    dependencies = [("applications", "0027_application_waitlist_status")]
 
     operations = [
         migrations.AlterField(
-            model_name='application',
-            name='waitlist_status',
-            field=models.BooleanField(default=False, help_text='Mark as True if the partner is WAITLISTED'),
-        ),
+            model_name="application",
+            name="waitlist_status",
+            field=models.BooleanField(
+                default=False, help_text="Mark as True if the partner is WAITLISTED"
+            ),
+        )
     ]
