@@ -153,6 +153,10 @@ class Application(models.Model):
 
     hidden = models.BooleanField(default=False)
 
+    waitlist_status = models.BooleanField(
+        default=False, help_text=_("Mark as True if the partner is WAITLISTED")
+    )
+
     def __str__(self):
         return "{self.editor} - {self.partner}".format(self=self)
 

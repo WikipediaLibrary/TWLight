@@ -233,6 +233,15 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
             partner.status = Partner.WAITLIST
             # Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
             msg = _("This partner is now waitlisted")
+
+            # Set waitlist_status to True for all the applications
+            # which are Pending or Under Discussion for this partner
+            applications = Application.objects.filter(
+                partner=partner, status__in=[Application.PENDING, Application.QUESTION]
+            )
+            for app in applications:
+                app.waitlist_status = True
+                app.save()
         else:
             partner.status = Partner.AVAILABLE
             # Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
