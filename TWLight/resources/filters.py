@@ -7,7 +7,7 @@ from .models import Language, Partner
 # don't yet exist;, so it needs to be a function.
 def get_partner_tags():
     try:
-        return Partner.tags.all()
+        return Partner.tags.all().order_by("name")
     except:
         pass
 

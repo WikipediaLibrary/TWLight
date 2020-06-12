@@ -5,7 +5,7 @@ from unittest.mock import patch
 import os
 import random
 
-from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
@@ -21,7 +21,7 @@ from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, StreamFactory
-from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode
+from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode, TextFieldTag
 from .views import PartnersDetailView, PartnersFilterView, PartnersToggleWaitlistView
 from .filters import PartnerFilter
 
@@ -532,8 +532,8 @@ class WaitlistBehaviorTests(TestCase):
 
     def test_toggle_available_to_waitlist_changes_application_waitlist_status(self):
         """
-        Post to the toggle waitlist view set to make an AVAILABLE partner 
-        change to WAITLIST. By doing this waitlist_status of some applications 
+        Post to the toggle waitlist view set to make an AVAILABLE partner
+        change to WAITLIST. By doing this waitlist_status of some applications
         under this partner will become True.
         """
 
@@ -1061,3 +1061,41 @@ class BundlePartnerTest(TestCase):
 
         # Ultimately we should have one Bundle authorization
         self.assertEqual(bundle_authorization.count(), 1)
+
+
+class PartnerTagTest(TestCase):
+    def test_tag_filtering_with_meta_url(self):
+        """
+        We are testing for a couple for things here.
+        1, Filtering for a particular tag returns the
+        partner(s) with that tag, and
+        2, if there's a meta_url for that tag, we make sure
+        it's in the response returned.
+        :return:
+        """
+        partner = PartnerFactory()
+        partner.tags.add("art")
+        partner1 = PartnerFactory()
+        partner1.tags.add("science")
+        tag1 = Partner.objects.filter(id=partner.id).values_list("tags", flat=True)
+        tag2 = Partner.objects.filter(id=partner1.id).values_list("tags", flat=True)
+
+        tag1 = TextFieldTag.objects.get(id=tag1[0])
+        tag1.meta_url = "https://www.example.com"
+        tag1.save()
+        tag2 = TextFieldTag.objects.get(id=tag2[0])
+        tag2.meta_url = "https://www.example.com/example"
+        tag2.save()
+        filter_url = reverse("partners:filter")
+        filter_url = filter_url + "?tags={}".format(tag1.pk)
+
+        editor = EditorFactory()
+
+        request = RequestFactory().get(filter_url)
+        request.user = editor.user
+        response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
+
+        self.assertNotContains(response, partner1.get_absolute_url())
+        self.assertContains(response, partner.get_absolute_url())
+        self.assertContains(response, tag1.meta_url)
+        self.assertNotContains(response, tag2.meta_url)
