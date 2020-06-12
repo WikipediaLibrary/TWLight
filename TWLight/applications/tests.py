@@ -48,7 +48,7 @@ from .helpers import (
     AFFILIATION,
     ACCOUNT_EMAIL,
     get_output_for_application,
-    count_valid_authorizations,
+    count_valid_authorizations, more_applications_than_accounts_available,
 )
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
@@ -3409,26 +3409,34 @@ class EvaluateApplicationTest(TestCase):
         # Not even for coordinators
         self.assertNotContains(response, 'name="status"')
 
-        def test_more_applications_than_accounts_available_for_proxy(self):
-            self.partner.authorization_method = Partner.PROXY
-            self.partner.accounts_available = 1
-            self.partner.save()
-            self.user.set_password("editor")
-            self.user.save()
-            self.user.userprofile.terms_of_use = True
-            self.user.userprofile.save()
+    def test_more_applications_than_accounts_available_for_proxy(self):
+        partner = PartnerFactory(
+            authorization_method=Partner.PROXY
+        )
+        partner.accounts_available = 2
+        partner.save()
+        app = ApplicationFactory(
+            status=Application.PENDING,
+            partner=partner
+        )
+        # Should be false since we have two accounts available,
+        # but only one application pending.
+        self.assertFalse(more_applications_than_accounts_available(app))
+        app = ApplicationFactory(
+            status=Application.PENDING,
+            partner=partner
+        )
+        # Should be false since we have two accounts available,
+        # and two applications pending.
+        self.assertFalse(more_applications_than_accounts_available(app))
+        app = ApplicationFactory(
+            status=Application.PENDING,
+            partner=partner
+        )
+        # Should be true since we have two accounts available,
+        # but three applications pending.
+        self.assertTrue(more_applications_than_accounts_available(app))
 
-            self.client.login(username=self.user.username, password="editor")
-            self.message_patcher.stop()
-            response = self.client.post(self.url)
-            messages = list(response.context["messages"])
-            self.assertEqual(len(messages), 1)
-            self.assertEqual(
-                str(messages[0]),
-                "There are more number of pending applications "
-                "than there are accounts available. Your application might get waitlisted.",
-            )
-            self.message_patcher.start()
 
     class ListApplicationsTest(BaseApplicationViewTest):
         @classmethod
