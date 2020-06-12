@@ -48,7 +48,8 @@ from .helpers import (
     AFFILIATION,
     ACCOUNT_EMAIL,
     get_output_for_application,
-    count_valid_authorizations, more_applications_than_accounts_available,
+    count_valid_authorizations,
+    more_applications_than_accounts_available,
 )
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
@@ -3410,33 +3411,21 @@ class EvaluateApplicationTest(TestCase):
         self.assertNotContains(response, 'name="status"')
 
     def test_more_applications_than_accounts_available_for_proxy(self):
-        partner = PartnerFactory(
-            authorization_method=Partner.PROXY
-        )
+        partner = PartnerFactory(authorization_method=Partner.PROXY)
         partner.accounts_available = 2
         partner.save()
-        app = ApplicationFactory(
-            status=Application.PENDING,
-            partner=partner
-        )
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
         # Should be false since we have two accounts available,
         # but only one application pending.
         self.assertFalse(more_applications_than_accounts_available(app))
-        app = ApplicationFactory(
-            status=Application.PENDING,
-            partner=partner
-        )
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
         # Should be false since we have two accounts available,
         # and two applications pending.
         self.assertFalse(more_applications_than_accounts_available(app))
-        app = ApplicationFactory(
-            status=Application.PENDING,
-            partner=partner
-        )
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
         # Should be true since we have two accounts available,
         # but three applications pending.
         self.assertTrue(more_applications_than_accounts_available(app))
-
 
     class ListApplicationsTest(BaseApplicationViewTest):
         @classmethod
