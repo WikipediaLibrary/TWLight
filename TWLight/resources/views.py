@@ -46,15 +46,21 @@ class PartnersFilterView(FilterView):
             return Partner.objects.order_by("company_name")
 
     def get_context_data(self, **kwargs):
+        """
+        We try to find out if the user has decided to filter by tags.
+        If there's no filtering or tags involved, we carry on. If not,
+        we add the tag to the context and get the corresponding meta url
+        in the template.
+        :param kwargs:
+        :return:
+        """
         context = super(PartnersFilterView, self).get_context_data(**kwargs)
         try:
             filter_data = kwargs.pop("filter").data
             tag_id = filter_data.get("tags")
             if tag_id:
                 context["tag"] = TextFieldTag.objects.get(id=tag_id)
-        except KeyError:
-            pass
-        except TextFieldTag.DoesNotExist:
+        except (KeyError, TextFieldTag.DoesNotExist):
             pass
         return context
 

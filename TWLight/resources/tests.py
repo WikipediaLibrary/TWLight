@@ -1065,6 +1065,14 @@ class BundlePartnerTest(TestCase):
 
 class PartnerTagTest(TestCase):
     def test_tag_filtering_with_meta_url(self):
+        """
+        We are testing for a couple for things here.
+        1, Filtering for a particular tag returns the
+        partner(s) with that tag, and
+        2, if there's a meta_url for that tag, we make sure
+        it's in the response returned.
+        :return:
+        """
         partner = PartnerFactory()
         partner.tags.add("art")
         partner1 = PartnerFactory()

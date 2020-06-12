@@ -22,7 +22,7 @@
     {% if tag and tag.meta_url %}
       <div class="col-flex col-xs-12 col-sm-6 col-md-4 col-lg-3 meta-link">
         {% comment %} Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to Meta-Wiki for more information on a tag. {% endcomment %}
-        <a class="btn btn-info" href="{{ tag.meta_url }}">{% trans "See subject guide on Meta-Wiki" %}</a>
+        <a class="btn btn-info" href="{{ tag.meta_url }}" target="_blank">{% trans "See subject guide on Meta-Wiki" %}</a>
       </div>
     {% endif %}
     <div class="col-flex {% if tag and tag.meta_url %}hidden-xs col-sm-6 col-md-2 col-lg-2{% else %}col-xs-12 col-sm-3 col-md-2{% endif %} browse-suggest">
