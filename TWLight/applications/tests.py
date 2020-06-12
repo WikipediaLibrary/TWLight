@@ -49,6 +49,7 @@ from .helpers import (
     ACCOUNT_EMAIL,
     get_output_for_application,
     count_valid_authorizations,
+    more_applications_than_accounts_available,
 )
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
@@ -3436,7 +3437,7 @@ class EvaluateApplicationTest(TestCase):
     def test_modify_app_status_from_invalid_to_anything(self):
         """
         when a coordinator tries to modify application status from
-        INVALID to anything it should return the coordinator back to 
+        INVALID to anything it should return the coordinator back to
         the application with an error message.
         """
         factory = RequestFactory()
@@ -3482,6 +3483,23 @@ class EvaluateApplicationTest(TestCase):
         response = self.client.get(url)
         # Not even for coordinators
         self.assertNotContains(response, 'name="status"')
+
+    def test_more_applications_than_accounts_available_for_proxy(self):
+        partner = PartnerFactory(authorization_method=Partner.PROXY)
+        partner.accounts_available = 2
+        partner.save()
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        # Should be false since we have two accounts available,
+        # but only one application pending.
+        self.assertFalse(more_applications_than_accounts_available(app))
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        # Should be false since we have two accounts available,
+        # and two applications pending.
+        self.assertFalse(more_applications_than_accounts_available(app))
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        # Should be true since we have two accounts available,
+        # but three applications pending.
+        self.assertTrue(more_applications_than_accounts_available(app))
 
     class ListApplicationsTest(BaseApplicationViewTest):
         @classmethod

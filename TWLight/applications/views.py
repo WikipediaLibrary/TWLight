@@ -57,6 +57,7 @@ from .helpers import (
     count_valid_authorizations,
     get_accounts_available,
     is_proxy_and_application_approved,
+    more_applications_than_accounts_available,
 )
 from .models import Application
 
@@ -995,10 +996,22 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
             )
         )
 
+        app = self.get_object()
         if app.is_instantly_finalized():
             status_choices = Application.STATUS_CHOICES[:]
             status_choices.pop(4)
             form.fields["status"].choices = status_choices
+
+        if app.editor.user == self.request.user:
+            if more_applications_than_accounts_available(app):
+                messages.add_message(
+                    self.request,
+                    messages.WARNING,
+                    # fmt: off
+                    # Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
+                    _("There are more pending applications than available accounts. Your application might get waitlisted."),
+                    # fmt: on
+                )
 
         return form
 
