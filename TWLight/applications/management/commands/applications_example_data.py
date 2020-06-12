@@ -211,7 +211,7 @@ class Command(BaseCommand):
         for application in Application.objects.filter(
             status=Application.PENDING, parent__isnull=False
         ):
-            parent_application = Application.objects.get(pk=application.parent)
+            parent_application = Application.objects.get(pk=application.parent.pk)
             app_date = parent_application.date_closed
 
             renewal_date = Faker(
