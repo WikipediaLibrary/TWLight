@@ -179,12 +179,12 @@ class TermsForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = "form-inline"
         self.helper.field_template = "bootstrap3/layout/inline_field.html"
-        self.fields["terms_of_use"].help_text = _("By unchecking this box and clicking “Update”, " \
-                                                 "you may explore the site, but you will not be able to apply for " \
-                                                 "access to materials or evaluate applications unless you agree " \
-                                                 "with the terms of use.")
+        # fmt: off
+        self.fields["terms_of_use"].help_text = _("By unchecking this box and clicking “Update” you may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use.")
+        # fmt: on
+
         self.helper.layout = Layout(
-            'terms_of_use',
+            "terms_of_use",
             # Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
             Submit("submit", _("I accept"), css_class="btn btn-default"),
         )
