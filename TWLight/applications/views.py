@@ -1001,11 +1001,10 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                 messages.add_message(
                     self.request,
                     messages.WARNING,
+                    # fmt: off
                     # Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
-                    _(
-                        "There are more number of pending applications than there "
-                        "are accounts available. Your application might get waitlisted."
-                    ),
+                    _("There are more number of pending applications than there are accounts available. Your application might get waitlisted."),
+                    # fmt: on
                 )
 
         return form

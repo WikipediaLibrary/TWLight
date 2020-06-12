@@ -3362,7 +3362,7 @@ class EvaluateApplicationTest(TestCase):
     def test_modify_app_status_from_invalid_to_anything(self):
         """
         when a coordinator tries to modify application status from
-        INVALID to anything it should return the coordinator back to 
+        INVALID to anything it should return the coordinator back to
         the application with an error message.
         """
         factory = RequestFactory()
@@ -3408,6 +3408,27 @@ class EvaluateApplicationTest(TestCase):
         response = self.client.get(url)
         # Not even for coordinators
         self.assertNotContains(response, 'name="status"')
+
+        def test_more_applications_than_accounts_available_for_proxy(self):
+            self.partner.authorization_method = Partner.PROXY
+            self.partner.accounts_available = 1
+            self.partner.save()
+            self.user.set_password("editor")
+            self.user.save()
+            self.user.userprofile.terms_of_use = True
+            self.user.userprofile.save()
+
+            self.client.login(username=self.user.username, password="editor")
+            self.message_patcher.stop()
+            response = self.client.post(self.url)
+            messages = list(response.context["messages"])
+            self.assertEqual(len(messages), 1)
+            self.assertEqual(
+                str(messages[0]),
+                "There are more number of pending applications "
+                "than there are accounts available. Your application might get waitlisted.",
+            )
+            self.message_patcher.start()
 
     class ListApplicationsTest(BaseApplicationViewTest):
         @classmethod
