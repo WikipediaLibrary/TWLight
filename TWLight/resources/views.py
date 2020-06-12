@@ -48,7 +48,7 @@ class PartnersFilterView(FilterView):
     def get_context_data(self, **kwargs):
         """
         We try to find out if the user has decided to filter by tags.
-        If there's no filtering or tags involved, we carry on. If not,
+        If there's no filtering or tags involved, we carry on. Otherwise,
         we add the tag to the context and get the corresponding meta url
         in the template.
         :param kwargs:
