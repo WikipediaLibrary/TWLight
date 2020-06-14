@@ -62,12 +62,12 @@
           {{ terms_form | crispy }}
 
           <button class="btn btn-default" type="submit">
-             {% comment %} Translators: This is a button for updating a user's term of use. {% endcomment %}
+             {% comment %} Translators: This text labels a button which, when clicked, updates a user's acceptance to the site's terms of use.{% endcomment %}
              {% trans "Update" %}
           </button>
           </br>
           </br>
-          {% comment %} Translators: This link is to Wikipedia Library Card Terms of Use and Privacy Statement. Wikipedia Library Card should not be translated. {% endcomment %}
+          {% comment %} Translators: This link is to the site's terms of use. {% endcomment %}
           <a href="{% url 'terms' %}"> {% trans "View Terms of Use" %}</a>
         </form>
       </div>

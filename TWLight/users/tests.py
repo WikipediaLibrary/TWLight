@@ -698,7 +698,9 @@ class ViewsTestCase(TestCase):
             reverse("users:editor_detail", kwargs={"pk": editor_agreed_TOU.pk})
         )
         detail_request.user = user_agreed_TOU
-        response = views.EditorDetailView.as_view()(detail_request, pk=editor_agreed_TOU.pk)
+        response = views.EditorDetailView.as_view()(
+            detail_request, pk=editor_agreed_TOU.pk
+        )
 
         content = response.render().content.decode("utf-8")
         self.assertIn("By unchecking this box and clicking “Update", content)
@@ -713,7 +715,9 @@ class ViewsTestCase(TestCase):
             reverse("users:editor_detail", kwargs={"pk": editor_not_agreed_TOU.pk})
         )
         detail_request.user = user_not_agreed_TOU
-        response = views.EditorDetailView.as_view()(detail_request, pk=editor_not_agreed_TOU.pk)
+        response = views.EditorDetailView.as_view()(
+            detail_request, pk=editor_not_agreed_TOU.pk
+        )
 
         content = response.render().content.decode("utf-8")
         self.assertNotIn("By unchecking this box and clicking “Update", content)

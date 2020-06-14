@@ -180,6 +180,7 @@ class TermsForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.field_template = "bootstrap3/layout/inline_field.html"
         # fmt: off
+        # Translators: This text explains how to disagree the site's terms of use and restrictions of the site when users disagree the terms of use.
         self.fields["terms_of_use"].help_text = _("By unchecking this box and clicking “Update” you may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use.")
         # fmt: on
 
