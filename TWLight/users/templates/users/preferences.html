@@ -66,9 +66,9 @@
              {% trans "Update" %}
           </button>
           </br>
-          </br>
+          </br> Last updated at : {{ user.userprofile.terms_of_use_date }} {{ user.userprofile.terms_of_use_date | time:"H:i" }}
           {% comment %} Translators: This link is to the site's terms of use. {% endcomment %}
-          <a href="{% url 'terms' %}"> {% trans "View Terms of Use" %}</a>
+          </br><a href="{% url 'terms' %}"> {% trans "View Terms of Use" %}</a>
         </form>
       </div>
     </div>
