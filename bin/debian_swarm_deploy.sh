@@ -24,9 +24,10 @@ cd /srv
 git clone https://github.com/WikipediaLibrary/TWLight.git ||:
 cd /srv/TWLight
 # Get on correct branch
-echo "Enter git branch: (eg. staging \| production):"
+echo "Enter git branch:"
 read TWLIGHT_GIT_BRANCH
 git checkout "${TWLIGHT_GIT_BRANCH}" && git pull
+
 
 echo "Enter DJANGO_DB_NAME:"
 read DJANGO_DB_NAME
@@ -44,6 +45,8 @@ echo "Enter TWLIGHT_OAUTH_CONSUMER_SECRET:"
 read TWLIGHT_OAUTH_CONSUMER_SECRET
 echo "Enter TWLIGHT_EZPROXY_SECRET:"
 read TWLIGHT_EZPROXY_SECRET
+echo "Enter stack environment (eg. override \| staging \| production):"
+read TWLIGHT_STACK_ENV
 
 chown -R twlight:twlight /srv/TWLight
 
@@ -65,15 +68,15 @@ printf "${TWLIGHT_OAUTH_CONSUMER_KEY}" | docker secret create TWLIGHT_OAUTH_CONS
 printf "${TWLIGHT_OAUTH_CONSUMER_SECRET}" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
 printf "${TWLIGHT_EZPROXY_SECRET}" | docker secret create TWLIGHT_EZPROXY_SECRET -
 
-docker stack deploy -c "docker-compose.yml" -c "docker-compose.${TWLIGHT_GIT_BRANCH}.yml" "${TWLIGHT_GIT_BRANCH}"
+docker stack deploy -c "docker-compose.yml" -c "docker-compose.${TWLIGHT_STACK_ENV}.yml" "${TWLIGHT_STACK_ENV}"
 
-echo 'Setting up crontab. *WARNING* This will create duplicate jobs if run repeatedly.'
-(crontab -l 2>/dev/null; echo '# Reclaim disk space previously used by docker.') | crontab -
+echo "Setting up crontab. *WARNING* This will create duplicate jobs if run repeatedly."
+(crontab -l 2>/dev/null; echo "# Reclaim disk space previously used by docker.") | crontab -
 (crontab -l 2>/dev/null; echo '0 5 * * * docker system prune -a -f; docker volume rm $(docker volume ls -qf dangling=true)') | crontab -
-(crontab -l 2>/dev/null; echo '# Run django_cron tasks.') | crontab -
-(crontab -l 2>/dev/null; echo '*/5 * * * *  docker exec -t $(docker ps -q -f name="\${TWLIGHT_GIT_BRANCH}_twlight") /app/bin/twlight_docker_entrypoint.sh python manage.py runcrons') | crontab -
-(crontab -l 2>/dev/null; echo '# Update the running stack if there is a new image.') | crontab -
-(crontab -l 2>/dev/null; echo '*/5 * * * *  /srv/TWLight/bin/./twlight_docker_deploy.sh' | crontab -
+(crontab -l 2>/dev/null; echo "# Run django_cron tasks.") | crontab -
+(crontab -l 2>/dev/null; echo '*/5 * * * *  docker exec -t $(docker ps -q -f name="${TWLIGHT_STACK_ENV}_twlight") /app/bin/twlight_docker_entrypoint.sh python manage.py runcrons') | crontab -
+(crontab -l 2>/dev/null; echo "# Update the running TWLight service if there is a new image. The initial pull is just to verify that the image is valid. Otherwise an inaccessible image could break the service.") | crontab -
+(crontab -l 2>/dev/null; echo '*/5 * * * *  docker pull "wikipedialibrary/twlight:branch_${TWLIGHT_GIT_BRANCH}" >/dev/null && docker service update --image "wikipedialibrary/twlight:branch_${TWLIGHT_GIT_BRANCH}" "${TWLIGHT_STACK_ENV}_twlight"') | crontab -
 
 EOF
 sudo su --login twlight /usr/bin/env bash -c "${TWLIGHT}"
