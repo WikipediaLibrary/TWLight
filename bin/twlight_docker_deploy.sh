@@ -2,7 +2,7 @@
 # Move into the repository and determine the git branch.
 cd /srv/TWLight && branch=$(git rev-parse --abbrev-ref HEAD)
 # Check for newer image
-if [ -n "${branch+isset}" ] && docker pull wikipedialibrary/twlight:branch_${branch} | grep "Status: Downloaded newer image for wikipedialibrary/twlight    :branch_${branch}" >/dev/null
+if [ -n "${branch+isset}" ] && docker pull wikipedialibrary/twlight:branch_${branch} | grep "Status: Downloaded newer image for wikipedialibrary/twlight:branch_${branch}" >/dev/null
 then
     # Get any new docker-compose or script updates.
     git pull
