@@ -3,8 +3,8 @@
 if [ -z "$1" ] || [ -z "$2" ]
 then
     echo "Usage: twlight_docker_deploy.sh \$env \$tag
-    \$env    docker swarm environment (eg. staging \| production).
-    \$tag    docker hub image tag (eg. branch_staging \| branch_production \| latest)"
+    \$env    docker swarm environment (eg. staging | production).
+    \$tag    docker hub image tag (eg. branch_staging | branch_production | latest)"
     exit 1;
 fi
 
