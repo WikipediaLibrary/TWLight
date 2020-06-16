@@ -60,7 +60,7 @@ class PartnersFilterView(FilterView):
             tag_id = filter_data.get("tags")
             if tag_id:
                 context["tag"] = TextFieldTag.objects.get(id=tag_id)
-        except (KeyError, TextFieldTag.DoesNotExist):
+        except (KeyError, ValueError, TextFieldTag.DoesNotExist):
             pass
         return context
 
