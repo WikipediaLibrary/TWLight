@@ -58,9 +58,9 @@ class PartnersFilterView(FilterView):
         try:
             filter_data = kwargs.pop("filter").data
             tag_id = filter_data.get("tags")
-            if tag_id:
+            if tag_id and isinstance(tag_id, int):
                 context["tag"] = TextFieldTag.objects.get(id=tag_id)
-        except (KeyError, TextFieldTag.DoesNotExist):
+        except (KeyError, ValueError, TextFieldTag.DoesNotExist):
             pass
         return context
 
