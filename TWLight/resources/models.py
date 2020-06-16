@@ -46,8 +46,8 @@ class TextFieldTag(TagBase):
     Docs here: https://django-taggit.readthedocs.io/en/latest/custom_tagging.html#using-a-custom-tag-or-through-model
     """
 
-    name = models.TextField(verbose_name=_("Name"), unique=False, max_length=100)
-    slug = models.SlugField(verbose_name=_("Slug"), unique=True, max_length=100)
+    name = models.TextField(verbose_name="Name", unique=False, max_length=100)
+    slug = models.SlugField(verbose_name="Slug", unique=True, max_length=100)
     meta_url = models.URLField(
         blank=True,
         null=True,

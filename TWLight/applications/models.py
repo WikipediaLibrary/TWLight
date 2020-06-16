@@ -149,7 +149,7 @@ class Application(models.Model):
     hidden = models.BooleanField(default=False)
 
     waitlist_status = models.BooleanField(
-        default=False, help_text=_("Mark as True if the partner is WAITLISTED")
+        default=False, help_text="Mark as True if the partner is WAITLISTED"
     )
 
     def __str__(self):
