@@ -17,7 +17,7 @@
 
   {% if partner_coordinator %}
     <div class="alert alert-info">
-      {% comment %} Translators: This message is shown on pages where coordinators can see personal information about applicants. {% endcomment %}
+      {% comment %}Translators: This message is shown on pages where coordinators can see personal information about applicants.{% endcomment %}
       {% trans 'Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential.' %}
     </div>
     {% comment %}Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.{% endcomment %}
@@ -72,12 +72,12 @@
 
     {% if object.requested_access_duration %}
       <div class="col-xs-12 col-sm-4">
-        {% comment %} Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.{% endcomment %}
+        {% comment %}Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.{% endcomment %}
         <strong>{% trans 'Access duration' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
         {{ object.requested_access_duration }}
-        {% comment %} Translators: This adds the word 'month(s)' next to the actual number of months.{% endcomment %}
+        {% comment %}Translators: This adds the word 'month(s)' next to the actual number of months.{% endcomment %}
         {% trans 'month(s)' %}
       </div>
     {% endif %}
@@ -126,7 +126,7 @@
     <div class="col-xs-12 col-sm-4">
       <strong>
         {% url 'terms' as terms_url %}
-        {% comment %}Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not. {% endcomment %}
+        {% comment %}Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.{% endcomment %}
         {% blocktrans trimmed %}
           Has agreed to the site's <a href="{{ terms_url }}">terms of use</a>?
         {% endblocktrans %}
@@ -134,13 +134,13 @@
     </div>
     <div class="col-xs-12 col-sm-8">
       {% if object.editor.user.userprofile.terms_of_use %}
-        {% comment %}Translators: Displayed to coordinators when they've agreed to the terms of use. {% endcomment %}
+        {% comment %}Translators: Displayed to coordinators when they've agreed to the terms of use.{% endcomment %}
         {% trans 'Yes' %}
       {% else %}
-        {% comment %}Translators: Displayed to coordinators when they've not agreed to the terms of use. {% endcomment %}
+        {% comment %}Translators: Displayed to coordinators when they've not agreed to the terms of use.{% endcomment %}
         <strong><span style="color: #cc3434">{% trans 'No' %}</span></strong>
         {% if partner_coordinator %}
-          {% comment %}Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use. {% endcomment %}
+          {% comment %}Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.{% endcomment %}
           <i>({% trans "Please request the applicant agree to the site's terms of use before approving this application." %})</i>
         {% endif %}
       {% endif %}
@@ -199,7 +199,7 @@
 
     {% if object.parent and object.parent.get_authorization %}
       <div class="col-xs-12 col-sm-4">
-        {% comment %} Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.{% endcomment %}
+        {% comment %}Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.{% endcomment %}
         <strong>{% trans 'Previous access expiry date' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
@@ -209,7 +209,7 @@
 
     {% if object.comments %}
       <div class="col-xs-12 col-sm-4">
-        {% comment %} Translators: This labels the section of an application containing the additional comments submitted by the user when applying.{% endcomment %}
+        {% comment %}Translators: This labels the section of an application containing the additional comments submitted by the user when applying.{% endcomment %}
         <strong>{% trans 'Comments from the editor' %}</strong>
       </div>
       <div class="col-xs-12 col-sm-8">
@@ -238,7 +238,7 @@
           {{ form.security_hash }}
           <input type="hidden" name="next" value="{% url 'applications:evaluate' object.pk %}" />
           <br />
-          {% comment %} Translators: This labels the button which users click to send a typed comment.{% endcomment %}
+          {% comment %}Translators: This labels the button which users click to send a typed comment.{% endcomment %}
           <input type="submit" value="{% trans 'Add comment' %}" id="id_submit" class="btn btn-block btn-default" />
         </form>
       </div>
@@ -246,19 +246,19 @@
   {% endif %}
 
   <p>
-    {% comment %} Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only. {% endcomment %}
+    {% comment %}Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.{% endcomment %}
     {% blocktrans trimmed %}
       Comments are visible to all
       coordinators and to the editor who submitted this application.
     {% endblocktrans %}
   </p>
 
-  {% comment %}Translators: This is the title of the section of an application page which lists information about the user who submitted the application. {% endcomment %}
+  {% comment %}Translators: This is the title of the section of an application page which lists information about the user who submitted the application.{% endcomment %}
   <h2>{% trans 'User' %}</h2>
 
   {% include 'users/editor_detail_data.html' %}
     
-  {% comment %}Translators: This is the title of the section of an application page which lists the history of status changes. {% endcomment %}
+  {% comment %}Translators: This is the title of the section of an application page which lists the history of status changes.{% endcomment %}
   <h2>{% trans 'Revision history' %}</h2>
 
   <ul class="list-unstyled">
@@ -274,12 +274,12 @@
                 {% with submit_user=version.revision.user.editor.wp_username %}
                   {% with review_date=version.revision.date_created|localize %}
                     {% if submit_user %}
-                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate {{ submit_user }} or {{ review_date }} {% endcomment %}
+                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate {{ submit_user }} or {{ review_date }}.{% endcomment %}
                       {% blocktrans trimmed %}
                         Submitted by {{ submit_user }} on {{ review_date }}
                       {% endblocktrans %}
                     {% else %}
-                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate {{ review_date }} {% endcomment %}
+                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate {{ review_date }}.{% endcomment %}
                       {% blocktrans trimmed %}
                         Submitted on {{ review_date }}
                       {% endblocktrans %}
@@ -290,12 +290,12 @@
                 {% with review_user=version.revision.user.editor.wp_username %}
                   {% with review_date=version.revision.date_created|localize %}
                     {% if review_user %}
-                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate {{ review_user }} or {{ review_date }} {% endcomment %}
+                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate {{ review_user }} or {{ review_date }}.{% endcomment %}
                       {% blocktrans trimmed %}
                         Reviewed by {{ review_user }} on {{ review_date }}
                       {% endblocktrans %}
                     {% else %}
-                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate {{ review_date }} {% endcomment %}
+                      {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate {{ review_date }}.{% endcomment %}
                       {% blocktrans trimmed %}
                         Reviewed on {{ review_date }}
                       {% endblocktrans %}

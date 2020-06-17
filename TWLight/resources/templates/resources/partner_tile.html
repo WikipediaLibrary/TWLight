@@ -20,7 +20,7 @@
     {% if partner.authorization_method == partner.BUNDLE %}
       {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
       <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive no-padding-logo-partner-tiles" style="width:35px; height:30px;" title="{% trans 'Library Bundle' %}" alt="
-      {% comment %} Translators: Alt text for the Library Bundle icon shown on the browse partner page. {% endcomment %}
+      {% comment %}Translators: Alt text for the Library Bundle icon shown on the browse partner page. {% endcomment %}
       {% trans "Library bundle access" %}
       ">
     {% endif %}
@@ -30,7 +30,7 @@
     <div class="partner-logo-container">
       <a href="{% url 'partners:detail' partner.pk %}">
         <img src="{{ partner.logos.logo.url }}" class="img-responsive partner-logo" alt="
-        {% comment %} Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate {{ partner }}. {% endcomment %}
+        {% comment %}Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate {{ partner }}. {% endcomment %}
           {% blocktrans trimmed %}
             Link to {{ partner }} signup page
           {% endblocktrans %}
@@ -67,7 +67,7 @@
               {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
             {% endfor %}
           {% else %}
-            {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show. {% endcomment %}
+            {% comment %}Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show. {% endcomment %}
             {% trans "Language(s) not known" %}
           {% endif %}
       </div>
@@ -92,10 +92,10 @@
       <div class="text-center">
         <a href="{% url 'partners:detail' partner.pk %}" class="btn btn-default">
           {% if partner.authorization_method == partner.BUNDLE %}
-            {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the bundle partner's page, where they can find more information about the partner. {% endcomment %}
+            {% comment %}Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the bundle partner's page, where they can find more information about the partner. {% endcomment %}
             {% trans "More info" %}
           {% else %}
-            {% comment %} Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and apply for access. {% endcomment %}
+            {% comment %}Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and apply for access. {% endcomment %}
             {% trans "Apply" %}
           {% endif %}
         </a>

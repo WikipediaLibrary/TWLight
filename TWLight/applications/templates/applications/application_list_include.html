@@ -2,7 +2,7 @@
 {% load l10n %}
 
 <div class="alert alert-info">
-  {% comment %} Translators: This message is shown on pages where coordinators can see personal information about applicants. {% endcomment %}
+  {% comment %}Translators: This message is shown on pages where coordinators can see personal information about applicants.{% endcomment %}
   {% trans 'Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential.' %}
 </div>
 
@@ -29,22 +29,22 @@
       <br />
       {% endif %}
       {% if app.imported %}
-        {% comment %} Translators: On the page listing applications, this shows next to an application which was imported to the website. {% endcomment %}
+        {% comment %}Translators: On the page listing applications, this shows next to an application which was imported to the website.{% endcomment %}
         {% trans 'Imported application' %}
       {% elif app.get_version_count > 1 %} {# first version is original submission, not later review #}
         {% if app.get_latest_reviewer %}
-          {% comment %} Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ reviewer }} or {{ review_date }}. {% endcomment %}
+          {% comment %}Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ reviewer }} or {{ review_date }}.{% endcomment %}
           {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
             Last reviewed by {{ reviewer }} on {{ review_date }}
           {% endblocktrans %}
         {% else %}
-          {% comment %} Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ review_date }}. {% endcomment %}
+          {% comment %}Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate {{ review_date }}.{% endcomment %}
           {% blocktrans trimmed with review_date=app.get_latest_review_date|localize %}
             Last reviewed on {{ review_date }}
           {% endblocktrans %}
         {% endif %}
       {% else %}
-        {% comment %} Translators: On the page listing applications, this shows next to an application which has not yet been reviewed. {% endcomment %}
+        {% comment %}Translators: On the page listing applications, this shows next to an application which has not yet been reviewed.{% endcomment %}
         {% trans 'Not yet reviewed.' %}
       {% endif %}
       <br />
@@ -61,6 +61,6 @@
     {% endif %}
   </div>
 {% empty %}
-  {% comment %} Translators: On the page listing applications, this text is displayed when there are no applications to be shown. {% endcomment %}
+  {% comment %}Translators: On the page listing applications, this text is displayed when there are no applications to be shown.{% endcomment %}
   {% trans 'No applications right now.' %}
 {% endfor %}

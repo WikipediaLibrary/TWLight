@@ -11,7 +11,7 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <title>
-    {% comment %} Translators: Name of the project/tool. {% endcomment %}
+    {% comment %}Translators: Name of the project/tool.{% endcomment %}
     {% trans "The Wikipedia Library Card Platform" %}
   </title>
   
@@ -63,13 +63,13 @@
       <!-- logo -->
       <a href="{% url 'homepage' %}">
         <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
-        {% comment %} Translators: Alt text for the Wikipedia Library shown in the top left of all pages. {% endcomment %}
+        {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
         {% trans "Library Card Platform home" %}
         ">
       </a>
 
       <!-- site name -->
-      {% comment %} Translators: Name of the project/tool. {% endcomment %}
+      {% comment %}Translators: Name of the project/tool.{% endcomment %}
       <a class="site-title" href="{% url 'homepage' %}">{% trans "The Wikipedia Library Card Platform" %}</a>
 
       <br>
@@ -87,7 +87,7 @@
             <li>
               <a href="{{ home_url }}">
                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their respective profiles. {% endcomment %}
+                {% comment %}Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their respective profiles.{% endcomment %}
                 {% trans "Profile" %}
               </a>
             </li>
@@ -95,7 +95,7 @@
               <li>
                 <a href="{% url 'admin:index' %}">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>
-                  {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown when the current user is a superuser, linking to the administrator interface. {% endcomment %}
+                  {% comment %}Translators: Shown in the top bar of almost every page inside a dropdown when the current user is a superuser, linking to the administrator interface.{% endcomment %}
                   {% trans "Admin" %}
                 </a>
               </li>
@@ -108,7 +108,7 @@
                 {% endif %}
               ">
                 <i class="fa fa-folder-open-o" aria-hidden="true"></i>
-                {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their library. {% endcomment %}
+                {% comment %}Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their library.{% endcomment %}
                 {% trans "My Library" %}
               </a>
             </li>
@@ -119,7 +119,7 @@
                 {% endif %}
               ">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;
-                {% comment %} Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications. {% endcomment %}
+                {% comment %}Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications.{% endcomment %}
                 {% trans "My Applications" %}
               </a>
             </li>
@@ -127,7 +127,7 @@
             <li>
               <a href="{% url 'auth_logout' %}">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
-                {% comment %} Translators: Shown in the top bar of almost every page when the current user is logged in. {% endcomment %}
+                {% comment %}Translators: Shown in the top bar of almost every page when the current user is logged in. {% endcomment %}
                 {% trans "Log out" %}
               </a>
             </li>
@@ -140,7 +140,7 @@
         <a  class="btn btn-default" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
         {% endif %}
           <span class="glyphicon glyphicon-off"></span>
-          {% comment %} Translators: Shown in the top bar of almost every page when the current user is not logged in. {% endcomment %}
+          {% comment %}Translators: Shown in the top bar of almost every page when the current user is not logged in. {% endcomment %}
           {% trans "Log in" %}
         </a>
       {% endif %}
@@ -149,7 +149,7 @@
     <ul class="nav nav-pills navbar-right">
       <li role="presentation" class="mobile-menu">
         <a href="{% url 'partners:filter' %}">
-          {% comment %} Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners. {% endcomment %}
+          {% comment %}Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners. {% endcomment %}
           {% trans "Apply" %}
         </a>
       </li>
@@ -157,7 +157,7 @@
       {% if user|coordinators_only %}
         <li role="presentation" class="mobile-menu">
           <a href="{% url 'applications:list' %}">
-            {% comment %} Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
+            {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
             {% trans "Review" %}
           </a>
         </li>
@@ -166,7 +166,7 @@
       {% if user|coordinators_only %}
         <li role="presentation" class="mobile-menu">
           <a href="{% url 'applications:send' %}">
-            {% comment %} Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
+            {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
             {% trans "Send data to partners" %}
           </a>
         </li>
@@ -174,7 +174,7 @@
 
       <li role="presentation" class="divider mobile-menu">
         <a href="{% url 'activity' %}">
-          {% comment %} Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline). {% endcomment %}
+          {% comment %}Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline). {% endcomment %}
           {% trans "Latest activity" %}
         </a>
       </li>
@@ -192,7 +192,7 @@
       <div class="alert alert-warning">
         {% url 'users:email_change' as email_url %}
         {% url 'contact' as contact_us_url %}
-        {% comment %} Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ contact_us_url }} or {{ email_url }}. {% endcomment %}
+        {% comment %}Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ contact_us_url }} or {{ email_url }}. {% endcomment %}
         {% blocktrans trimmed %}
           You don't have an email on file. We can't finalize your access to
           partner resources, and you won't be able to <a href="{{ contact_us_url }}">contact us</a> without an email. Please
@@ -203,7 +203,7 @@
     {% if user|restricted %}
       <div class="alert alert-warning">
         {% url 'users:restrict_data' as restrict_url %}
-        {% comment %} Translators: Shown if the current user has requested the processing of their data should be restricted. {% endcomment %}
+        {% comment %}Translators: Shown if the current user has requested the processing of their data should be restricted. {% endcomment %}
         {% blocktrans trimmed %}
           You have requested a restriction on the processing of your data.
           Most site functionality will not be available to you until you
@@ -214,7 +214,7 @@
     {% if not user.userprofile.terms_of_use and not user.is_anonymous %}
       <div class="alert alert-warning">
         {% url 'terms' as terms_url %}
-        {% comment %} Translators: Shown if the current user has not agreed to the terms of use. {% endcomment %}
+        {% comment %}Translators: Shown if the current user has not agreed to the terms of use. {% endcomment %}
         {% blocktrans trimmed %}
           You have not agreed to the <a href="{{ terms_url }}">terms of use</a>
           of this site. Your applications will not be processed and you won't be
@@ -229,7 +229,7 @@
  </div>
   <footer id="footer">
     <div class="row">
-        {% comment %} Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International". {% endcomment %}
+        {% comment %}Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International". {% endcomment %}
         {% blocktrans trimmed %}
           This work is licensed under a
           <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
@@ -238,25 +238,25 @@
         <ul class="list-inline pull-right">
           <li>
             <a href="{% url 'about' %}">
-              {% comment %} Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
+              {% comment %}Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
               {% trans "About" %}
             </a>
           </li>
           <li>
             <a href="{% url 'terms' %}">
-              {% comment %} Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page. {% endcomment %}
+              {% comment %}Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page. {% endcomment %}
               {% trans "Terms of use and privacy policy" %}
             </a>
           </li>
           <li>
             <a href="{% url 'suggest' %}">
-              {% comment %} Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page. {% endcomment %}
+              {% comment %}Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page. {% endcomment %}
               {% trans "Suggest a partner" %}
             </a>
           </li>
           <li>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYp-D5h--5Fnj-9knp_Zj9mhxjk5DJDKNJaJDtS4Z4AXxB6g/viewform">
-              {% comment %} Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form. {% endcomment %}
+              {% comment %}Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form. {% endcomment %}
               {% trans "Feedback" %}
             </a>
           </li>
@@ -271,7 +271,7 @@
           </li>
           <li>
             <a href="{% url 'contact' %}">
-              {% comment %} Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team. {% endcomment %}
+              {% comment %}Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team. {% endcomment %}
               {% trans "Contact us" %}
             </a>
           </li>

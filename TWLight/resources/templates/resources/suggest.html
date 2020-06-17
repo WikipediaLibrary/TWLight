@@ -21,7 +21,7 @@
 {% block content %}
     <div class="panel panel-default full-width">
       <div class="panel-heading">
-        {% comment %} Translators: This is the title of the form where users can submit partner suggestions. {% endcomment %}
+        {% comment %}Translators: This is the title of the form where users can submit partner suggestions. {% endcomment %}
         <strong><span class="panel-title">{% trans 'Suggest partners' %}</span></strong>
       </div>
       <div class="panel-body">
@@ -41,7 +41,7 @@
   {% if all_suggestions %}
     <div class="panel panel-default full-width">
       <div class="panel-heading">
-        {% comment %} Translators: This is the title of the panel where user suggestions are displayed. {% endcomment %}
+        {% comment %}Translators: This is the title of the panel where user suggestions are displayed. {% endcomment %}
         <strong><span class="panel-title">{% trans 'Browse and support suggestions' %}</span></strong>
       </div>
       <div class="panel-body">
@@ -50,19 +50,19 @@
             <div class="panel-heading">
               <div class="panel-title pull-left"><span class="panel-title">{{ each_suggestion.suggested_company_name }}</span></div>
               {% if user|coordinators_only %}
-                {% comment %} Translators: This button is at the partner suggestions page for coordinators to delete suggestions. {% endcomment %}
+                {% comment %}Translators: This button is at the partner suggestions page for coordinators to delete suggestions. {% endcomment %}
                 <a href="{% url 'suggest-delete' each_suggestion.id %}" class="btn btn-outline-danger pull-right">{% trans 'Delete' %} <i class="fa fa-trash-o" aria-hidden="true"></i></a>
               {% endif %}
               <div class="clearfix"></div>
             </div>
             <div class="panel-body ">
               <div class="col-md-10">
-                {% comment %} Translators: This is the text that appears before the description of every partner suggestion. {% endcomment %}
+                {% comment %}Translators: This is the text that appears before the description of every partner suggestion. {% endcomment %}
                 <p>
                   <strong>{% trans 'Description' %}: </strong>
                   {{ each_suggestion.description | safe }}
                 </p>
-                {% comment %} Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
+                {% comment %}Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
                 <p><strong>{% trans 'URL' %}:</strong> <a href="{{ each_suggestion.company_url }}">{{ each_suggestion.company_url }}</a></p>
               </div>
               {% if user.is_authenticated %}
@@ -71,10 +71,10 @@
                     <i class="fa fa-arrow-up" aria-hidden="true"></i>
                     <span class="utext">
                       {% if user in each_suggestion.upvoted_users.all %}
-                        {% comment %} Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
+                        {% comment %}Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
                         {% trans 'Upvoted' %}
                       {% else %}
-                        {% comment %} Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse). {% endcomment %}
+                        {% comment %}Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse). {% endcomment %}
                         {% trans 'Upvote' %}
                       {% endif %}
                     </span>
@@ -95,11 +95,11 @@
       e.preventDefault();
       var count = parseInt($(this).children('.count').text());
       $(this).children('.utext').text($(this).children('.utext').text() ==
-          {% comment %} Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
+          {% comment %}Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
           '{% trans 'Upvoted' %} ' ?
-          {% comment %} Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse). {% endcomment %}
+          {% comment %}Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse). {% endcomment %}
           '{% trans 'Upvote' %} ' :
-          {% comment %} Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
+          {% comment %}Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
           '{% trans 'Upvoted' %} ');
       if($(this).hasClass('btn-success')){
         $(this).removeClass('btn-success');
