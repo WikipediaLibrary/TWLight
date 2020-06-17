@@ -126,7 +126,6 @@ THIRD_PARTY_APPS = [
     "django_countries",
     "rest_framework",
     "rest_framework.authtoken",
-    "rosetta",
 ]
 
 TWLIGHT_APPS = [
@@ -371,10 +370,6 @@ COMMENTS_APP = "TWLight.comments"
 # TAGGIT CONFIGURATION
 # ------------------------------------------------------------------------------
 TAGGIT_CASE_INSENSITIVE = True
-
-# ROSETTA CONFIGURATION
-# ------------------------------------------------------------------------------
-ROSETTA_SHOW_AT_ADMIN_PANEL = True
 
 # REVERSION CONFIGURATION
 # ------------------------------------------------------------------------------
