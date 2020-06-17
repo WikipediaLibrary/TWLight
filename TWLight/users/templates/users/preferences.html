@@ -1,3 +1,4 @@
+{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 
@@ -34,14 +35,11 @@
         {% comment %}Translators: This is the heading of the section of a user's profile where users can change their password. {% endcomment %}
         <strong>{% trans "Password" %}</strong>
       </div>
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-xs-12 col-sm-9">
         <form method="post" action="{% url 'password_change' %}">
           {% csrf_token %}
           {{ password_form | crispy }}    
-          <button class="btn btn-default" type="submit">
-            {% comment %}Translators: In the preferences section of a user profile, this text labels the button users can click to change their password. {% endcomment %}
-            {% trans "Change password" %}
-          </button>
+          <button class="btn btn-default" type="submit">Change password</button>
         </form>    
       </div>
     </div>
