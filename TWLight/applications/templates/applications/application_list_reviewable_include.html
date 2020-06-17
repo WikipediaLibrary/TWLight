@@ -4,10 +4,18 @@
 {% if object_list %}
   <i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;
   <span class="label label-primary">
+    {% comment %}Translators: This labels the column description indicating the status of the listed applications.{% endcomment %}
     {% trans "Status" %}
   </span>&nbsp;
-  {% trans "Username" %} - {% trans "Partner (Collection)" %} &mdash; {% trans "Last reviewed" %} &mdash; <em>{% trans "Date applied" %}</em> &mdash;
-  {% comment %} Translators: This labels the column description showing whether the user had agreed to the terms of use or not. {% endcomment %}
+  {% comment %}Translators: This labels the column description that lists the name of the applicants.{% endcomment %}
+  {% trans "Username" %} -
+  {% comment %}Translators: This labels the column description that lists the partner (and the corresponding collection, if any) of the listed applications.{% endcomment %}
+  {% trans "Partner (Collection)" %} &mdash;
+  {% comment %}Translators: This labels the column description that indicates the last review date of the applications.{% endcomment %}
+  {% trans "Last reviewed" %} &mdash;
+  {% comment %}Translators: This labels the column description that lists the date the applications have been made.{% endcomment %}
+  <em>{% trans "Date applied" %}</em> &mdash;
+  {% comment %}Translators: This labels the column description showing whether the user had agreed to the terms of use or not.{% endcomment %}
   <em>{% trans "Has agreed to the terms of use?" %}</em>
   <form method="post" action="{% url 'applications:batch_edit' %}" id="batch_edit">
     {% csrf_token %}
@@ -32,28 +40,34 @@
             &mdash;
             {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
               {% if app.get_latest_reviewer %}
+                {% comment %}Translators: If an application was previously reviewed by a coordinator, this text displays the date and the name of the coordinator.{% endcomment %}
                 {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
                   Last reviewed by {{ reviewer }} on {{ review_date }}
                 {% endblocktrans %}
               {% else %}
+                {% comment %}Translators: If an application was previously reviewed, this text displays the date of the review.{% endcomment %}
                 {% blocktrans trimmed with review_date=app.get_latest_review_date|localize %}
                   Last reviewed on {{ review_date }}
                 {% endblocktrans %}
               {% endif %}
             {% else %}
+              {% comment %}Translators: If an application wasn't previously reviewed, this text is displayed.{% endcomment %}
               {% trans 'Not yet reviewed.' %}
             {% endif %}
             &mdash;
             <em>{{ app.date_created }}</em>&nbsp;
             {% if app.parent %}
               <span class="label label-info">
+                {% comment %}Translators: Displayed if an application is a renewal.{% endcomment %}
                 {% trans "Renewal" %}
               </span>
             {% endif %}
             &mdash;
             {% if app.editor.user.userprofile.terms_of_use %}
+              {% comment %}Translators: Displayed if the user has agreed to the terms of use.{% endcomment %}
               {% trans 'Yes' %}
             {% else %}
+              {% comment %}Translators: Displayed if the user hasn't agreed to the terms of use.{% endcomment %}
               <span style="color: #cc3434">{% trans 'No' %}</span>
             {% endif %}
           </li>
@@ -84,5 +98,6 @@
     </div>
   </form>
 {% else %}
+  {% comment %}Translators: On the page listing applications, this text is displayed when there are no app;ications to be shown.{% endcomment %}
   {% trans 'No applications right now.' %}
 {% endif %}

@@ -119,10 +119,12 @@ class ActivityView(TemplateView):
             event = {}
             event["icon"] = "fa-users"
             event["color"] = "warning"  # will be yellow
+            # fmt: off
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-            event["text"] = _(
-                "{username} signed up for a Wikipedia Library " "Card Platform account"
-            ).format(username=editor.wp_username)
+            event["text"] = _("{username} signed up for a Wikipedia Library Card Platform account").format(
+                username=editor.wp_username
+            )
+            # fmt: on
             event["date"] = editor.date_created
             activity.append(event)
 
@@ -151,36 +153,33 @@ class ActivityView(TemplateView):
             event["icon"] = "fa-align-left"
             event["color"] = ""  # grey (default when no color class is applied)
             if app.parent:
+                # fmt: off
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
-                text = _(
-                    "{username} applied for renewal of their "
-                    '<a href="{url}">{partner}</a> access'
-                ).format(
+                text = _("{username} applied for renewal of their <a href='{url}'>{partner}</a> access").format(
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
                 )
+                # fmt: on
             elif app.rationale:
+                # fmt: off
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
-                text = _(
-                    "{username} applied for access to "
-                    '<a href="{url}">{partner}</a>'
-                    "<blockquote>{rationale}</blockquote>"
-                ).format(
+                text = _("{username} applied for access to <a href='{url}'>{partner}</a><blockquote>{rationale}</blockquote>").format(
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
                     rationale=app.rationale,
                 )
+                # fmt: on
             else:
+                # fmt: off
                 # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
-                text = _(
-                    "{username} applied for access to " '<a href="{url}">{partner}</a>'
-                ).format(
+                text = _("{username} applied for access to <a href='{url}'>{partner}</a>").format(
                     username=app.editor.wp_username,
                     partner=app.partner.company_name,
                     url=reverse_lazy("partners:detail", kwargs={"pk": app.partner.pk}),
                 )
+                # fmt: on
 
             event["text"] = text
             event["date"] = app.date_created
@@ -197,14 +196,14 @@ class ActivityView(TemplateView):
             event = {}
             event["icon"] = "fa-align-left"
             event["color"] = "info"  # light blue
+            # fmt: off
             # Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
-            event["text"] = _(
-                "{username} received access to " '<a href="{url}">{partner}</a>'
-            ).format(
+            event["text"] = _("{username} received access to <a href='{url}'>{partner}</a>").format(
                 username=grant.editor.wp_username,
                 partner=grant.partner.company_name,
                 url=reverse_lazy("partners:detail", kwargs={"pk": grant.partner.pk}),
             )
+            # fmt: on
             event["date"] = grant.date_closed
             activity.append(event)
 

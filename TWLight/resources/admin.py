@@ -5,7 +5,6 @@ from django.contrib import admin
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.utils.translation import ugettext as _
 from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
 from TWLight.users.groups import get_coordinators
@@ -145,14 +144,12 @@ class AccessCodeAdmin(admin.ModelAdmin):
             return_url = HttpResponseRedirect("..")
 
             if not uploaded_csv.name.endswith(".csv"):
-                # Translators: When staff upload a file containing access codes, it must be a .csv file. This error message is shown if it is any other file type.
-                messages.error(request, _("File must be a csv"))
+                messages.error(request, "File must be a csv")
                 return return_url
 
             # Check against the maximum upload size (2.5mb by default)
             if uploaded_csv.multiple_chunks():
-                # Translators: When staff upload a file containing access codes, they receive this error message if the file size is too large.
-                messages.error(request, _("Uploaded file is too large."))
+                messages.error(request, "Uploaded file is too large.")
                 return return_url
 
             file_data = uploaded_csv.read().decode("utf-8")
@@ -169,14 +166,11 @@ class AccessCodeAdmin(admin.ModelAdmin):
                 if line == "":
                     continue
                 if num_columns != 2:
-                    # Translators: When staff upload a file containing access codes, they receive this message if a line in the file has more than 2 pieces of data.
                     messages.error(
                         request,
-                        _(
-                            "Line {line_num} has {num_columns} columns. "
-                            "Expected 2.".format(
-                                line_num=line_num + 1, num_columns=num_columns
-                            )
+                        "Line {line_num} has {num_columns} columns. "
+                        "Expected 2.".format(
+                            line_num=line_num + 1, num_columns=num_columns
                         ),
                     )
                     return return_url
@@ -184,14 +178,11 @@ class AccessCodeAdmin(admin.ModelAdmin):
                 access_code = fields[0].strip()
 
                 if len(access_code) > 60:
-                    # Translators: When staff upload a file containing access codes, they receive this message if a code is too long for the relevant database field, likely indicating an error.
                     messages.error(
                         request,
-                        _(
-                            "Access code on line {line_num} is "
-                            "too long for the database field.".format(
-                                line_num=line_num + 1
-                            )
+                        "Access code on line {line_num} is "
+                        "too long for the database field.".format(
+                            line_num=line_num + 1
                         ),
                     )
                     return return_url
@@ -199,30 +190,22 @@ class AccessCodeAdmin(admin.ModelAdmin):
                 try:
                     partner_pk = int(fields[1].strip())
                 except ValueError:
-                    # Translators: When staff upload a file containing access codes, they receive this message if the column which should only contain a number contains anything that isn't a number.
                     messages.error(
                         request,
-                        _(
-                            "Second column should only contain "
-                            "numbers. Error on line {line_num}.".format(
-                                line_num=line_num + 1
-                            )
+                        "Second column should only contain "
+                        "numbers. Error on line {line_num}.".format(
+                            line_num=line_num + 1
                         ),
                     )
                     return return_url
 
                 try:
-                    check_partner = Partner.even_not_available.get(pk=partner_pk)
+                    Partner.even_not_available.get(pk=partner_pk)
                 except ObjectDoesNotExist:
-                    # Translators: When staff upload a file containing access codes, they receive this message if a partner ID in the file doesn't correspond to a partner in the Library Card platform database.
                     messages.error(
                         request,
-                        _(
-                            "File contains reference to invalid "
-                            "partner ID on line {line_num}".format(
-                                line_num=line_num + 1
-                            )
-                        ),
+                        "File contains reference to invalid "
+                        "partner ID on line {line_num}".format(line_num=line_num + 1),
                     )
                     return return_url
 
@@ -252,22 +235,16 @@ class AccessCodeAdmin(admin.ModelAdmin):
                     num_codes += 1
 
             if num_codes > 0:
-                # Translators: When staff successfully upload a file containing access codes, they receive this message.
                 messages.info(
                     request,
-                    _(
-                        "{num_codes} access codes successfully "
-                        "uploaded!".format(num_codes=num_codes)
-                    ),
+                    "{num_codes} access codes successfully "
+                    "uploaded!".format(num_codes=num_codes),
                 )
             if skipped_codes > 0:
-                # Translators: When staff upload a file containing access codes, they receive this message if any were duplicates.
                 messages.info(
                     request,
-                    _(
-                        "{num_duplicates} access codes ignored "
-                        "as duplicates.".format(num_duplicates=skipped_codes)
-                    ),
+                    "{num_duplicates} access codes ignored "
+                    "as duplicates.".format(num_duplicates=skipped_codes),
                 )
             return HttpResponseRedirect("admin")
         return render(request, "resources/csv_form.html")

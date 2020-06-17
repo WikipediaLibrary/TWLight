@@ -54,7 +54,7 @@ def get_earliest_creation_date(queryset):
     # creation dates of Jan 1, 1970. This screws up the graphs.
     if queryset:
         # Authorization creation date field is named 'date_authorized'
-        if queryset.model.__name__ is "Authorization":
+        if queryset.model.__name__ == "Authorization":
             earliest_date = (
                 queryset.exclude(date_authorized=datetime.date(1970, 1, 1))
                 .earliest("date_authorized")
@@ -94,7 +94,7 @@ def get_data_count_by_month(queryset, data_format=JSON):
                 timestamp = current_date
 
             # Authorization creation date field is named 'date_authorized'
-            if queryset.model.__name__ is "Authorization":
+            if queryset.model.__name__ == "Authorization":
                 num_objs = queryset.filter(date_authorized__lte=current_date).count()
             else:
                 num_objs = queryset.filter(date_created__lte=current_date).count()

@@ -35,11 +35,8 @@ class PartnersFilterView(FilterView):
             messages.add_message(
                 self.request,
                 messages.INFO,
-                # Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
-                _(
-                    "Because you are a staff member, this page may include "
-                    "Partners who are not yet available to all users."
-                ),
+                "Because you are a staff member, this page may include "
+                "Partners who are not yet available to all users.",
             )
             return Partner.even_not_available.order_by("company_name")
         else:
@@ -72,15 +69,12 @@ class PartnersDetailView(DetailView):
         context = super(PartnersDetailView, self).get_context_data(**kwargs)
         partner = self.get_object()
         if partner.status == Partner.NOT_AVAILABLE:
-            # Translators: Staff members can view partner pages which are hidden from other users. This message appears on those specific partner resource pages.
             messages.add_message(
                 self.request,
                 messages.WARNING,
-                _(
-                    "This partner is not available. You can see it because you "
-                    "are a staff member, but it is not visible to non-staff "
-                    "users."
-                ),
+                "This partner is not available. You can see it because you "
+                "are a staff member, but it is not visible to non-staff "
+                "users.",
             )
 
         context["total_accounts_distributed_partner"] = count_valid_authorizations(
@@ -157,16 +151,17 @@ class PartnersDetailView(DetailView):
                     pass
                 except Authorization.MultipleObjectsReturned:
                     logger.info(
-                        "Multiple authorizations returned for partner {} and user {}"
-                    ).format(partner, user)
-                    # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                        "Multiple authorizations returned for partner {} and user {}".format(
+                            partner, user
+                        )
+                    )
                     messages.add_message(
                         self.request,
                         messages.ERROR,
-                        _(
-                            "Multiple authorizations were returned – something's wrong. "
-                            "Please contact us and don't forget to mention this message."
-                        ),
+                        # fmt: off
+                        # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                        _("Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."),
+                        # fmt: on
                     )
             else:
                 authorizations = Authorization.objects.filter(

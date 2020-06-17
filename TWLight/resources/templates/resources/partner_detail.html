@@ -10,7 +10,7 @@
 
 {% block content %}
   <h1>{{ object }}</h1>
-  {% comment %} Translators: This text is located on individual partner pages, and when clicked takes users back to the list of publishers. {% endcomment %}
+  {% comment %}Translators: This text is located on individual partner pages, and when clicked takes users back to the list of publishers. {% endcomment %}
   <a href="{% url 'partners:filter' %}" class="btn btn-default">{% trans "Back to partners" %}</a><br><br>
   {% if not object.authorization_method == object.BUNDLE %}
     {% url 'applications:apply_single' object.pk as app_url %}
@@ -18,10 +18,10 @@
     {% url 'terms' as terms %}
     {% if object.is_waitlisted %}
     <div class="alert alert-warning visible-xs resource-label-warning">
-       {% comment %} Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
+       {% comment %}Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
        <span class="resource-label">{% trans "Waitlisted" %}</span>
        <p>
-       {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
+       {% comment %}Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
        {% blocktrans trimmed %}
        There are no access grants available for this partner
        at this time. You can still apply for access; applications will
@@ -33,7 +33,7 @@
     {% if apply %}
       <div class="alert alert-info visible-xs">
         <p>
-          {% comment %} Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
+          {% comment %}Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
           {% blocktrans trimmed %}
             Before applying, please review the
             <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
@@ -43,8 +43,10 @@
       </div>
     {% endif %}
     {% if user|restricted %}
+      {% comment %}Translators: One the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
       <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
     {% else %}
+      {% comment %}Translators: One the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
       <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary text-center visible-xs z-index-100 {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
       {% if has_open_apps or has_auths %}
         {% url 'users:my_library' as library_url %}
@@ -52,7 +54,7 @@
         <div class="panel panel-default visible-xs">
           <div class="panel-body top-border">
             {% if has_auths %}
-              {% comment %} Translators: This text refers to the page containing the content a user is authorized to access. {% endcomment %}
+              {% comment %}Translators: This text refers to the page containing the content a user is authorized to access. {% endcomment %}
               {% blocktrans trimmed %}
                 View the status of your access(es) in <strong><a href="{{ library_url }}">My Library</a></strong> page.
               {% endblocktrans %}
@@ -61,7 +63,7 @@
               {% endif %}
             {% endif %}
             {% if has_open_apps %}
-              {% comment %} Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
+              {% comment %}Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
               {% blocktrans trimmed %}
                 View the status of your application(s) on your <strong><a href="{{ applications_url }}">My Applications</a></strong> page.
               {% endblocktrans %}
@@ -76,10 +78,10 @@
       {% csrf_token %}
       <input type="submit" class="btn btn-default btn-block text-center visible-xs z-index-100" value="
       {% if object.is_waitlisted %}
-        {% comment %} Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist. {% endcomment %}
+        {% comment %}Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist. {% endcomment %}
         {% trans "Remove from waitlist" %}
       {% else %}
-        {% comment %} Translators: If a partner is not currently waitlisted, this button allows coordinators to add the partner to the waitlist. {% endcomment %}
+        {% comment %}Translators: If a partner is not currently waitlisted, this button allows coordinators to add the partner to the waitlist. {% endcomment %}
         {% trans "Set as waitlisted" %}
       {% endif %}"/>
     </form>
@@ -108,7 +110,7 @@
                   {% endcache %}
                   </p>
                 {% else %}
-                  {% comment %} Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
+                  {% comment %}Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
                   {% trans "Description not available." %}
                 {% endif %}
                 {% if object.tags.count > 0 %}
@@ -143,12 +145,12 @@
               <div class="timeline-panel">
                 <div class="timeline-body">
                   <h4 class="timeline-title">
-                    {% comment %} Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
+                    {% comment %}Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
                     {% trans "Video tutorials" %}
                   </h4>
                   <ul>
-                    {% comment %} Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
                     {% for each_tutorial in object.videos.all %}
+                      {% comment %}Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
                       <li><a href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
                     {% endfor %}
                   </ul>
@@ -163,7 +165,7 @@
               <div class="timeline-body">
                 {% if object.get_languages %}
                   <div class="partner-languages">
-                      {% comment %} Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
+                      {% comment %}Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
                       {% trans 'Language(s)' %}:
                       <div class="resource-label-languages">
                       {% for language in partner.get_languages %}
@@ -173,7 +175,7 @@
                       </div>
                   </div>
                 {% else %}
-                  {% comment %} Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page. {% endcomment %}
+                  {% comment %}Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page. {% endcomment %}
                   <p>{% trans "Languages not available." %}</p>
                 {% endif %}
               </div>
@@ -187,28 +189,28 @@
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
-                  {% comment %} Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field. {% endcomment %}
+                  {% comment %}Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field. {% endcomment %}
                   <h4 class="timeline-title">{% trans "Excerpt limit" %}</h4>
                 </div>
                 <div class="timeline-body">
                   <ul>
                     {% if excerpt_limit_percentage and excerpt_limit %}
                       <li>
-                        {% comment %} Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page. {% endcomment %}
+                        {% comment %}Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page. {% endcomment %}
                         {% blocktrans trimmed %}
                           {{ object }} allows a maximum of {{ excerpt_limit }} words or {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
                         {% endblocktrans %}
                       </li>
                     {% elif excerpt_limit %}
                       <li>
-                        {% comment %} Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
+                        {% comment %}Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
                         {% blocktrans trimmed %}
                           {{ object }} allows a maximum of {{ excerpt_limit }} words be excerpted into a Wikipedia article.
                         {% endblocktrans %}
                       </li>
                     {% elif excerpt_limit_percentage %}
                       <li>
-                        {% comment %} Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page. {% endcomment %}
+                        {% comment %}Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page. {% endcomment %}
                         {% blocktrans trimmed %}
                           {{ object }} allows a maximum of {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
                         {% endblocktrans %}
@@ -227,7 +229,7 @@
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
-                  {% comment %} Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
+                  {% comment %}Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
                   <h4 class="timeline-title">{% trans "Special requirements for applicants" %}</h4>
                 </div>
                 <div class="timeline-body">
@@ -235,7 +237,7 @@
                   <ul>
                     {% if object.agreement_with_terms_of_use %}
                       <li>
-                        {% comment %} Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate {{ publisher }} or {{ url }}. {% endcomment %}
+                        {% comment %}Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate {{ publisher }} or {{ url }}. {% endcomment %}
                         {% blocktrans trimmed with publisher=object.company_name url=object.terms_of_use %}
                           {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
                           of use</a>.
@@ -245,7 +247,7 @@
 
                     {% if object.real_name %}
                       <li>
-                        {% comment %} Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% comment %}Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                         {% blocktrans trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you provide your real name.
                         {% endblocktrans %}
@@ -254,7 +256,7 @@
 
                     {% if object.country_of_residence %}
                       <li>
-                        {% comment %} Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% comment %}Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                         {% blocktrans trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you provide your country of residence.
                         {% endblocktrans %}
@@ -263,7 +265,7 @@
 
                     {% if object.occupation %}
                       <li>
-                        {% comment %} Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% comment %}Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                         {% blocktrans trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you provide your occupation.
                         {% endblocktrans %}
@@ -272,7 +274,7 @@
 
                     {% if object.affiliation %}
                       <li>
-                        {% comment %} Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% comment %}Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                         {% blocktrans trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you provide your institutional affiliation.
                         {% endblocktrans %}
@@ -281,7 +283,7 @@
 
                     {% if object.specific_title %}
                       <li>
-                        {% comment %} Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                        {% comment %}Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                         {% blocktrans trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you specify a particular title that you want
                           to access.
@@ -291,7 +293,7 @@
 
                     {% if object.account_email %}
                       <li>
-                        {% comment %} Translators: If a user must register on the partner website before applying, they see this message. Don't translate {{ partner }}. {% endcomment %}
+                        {% comment %}Translators: If a user must register on the partner website before applying, they see this message. Don't translate {{ partner }}. {% endcomment %}
                         {% blocktrans trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you sign up for an account before applying
                           for access.
@@ -310,7 +312,7 @@
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
-                  {% comment %} Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
+                  {% comment %}Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
                   <h4 class="timeline-title">{% trans "Collections" %}</h4>
                 </div>
                 <div class="timeline-body">
@@ -346,14 +348,14 @@
             <div class="timeline-panel">
               <div class="timeline-body">
                 {% if object.company_location %}
-                  {% comment %} Translators: If a partner has their location listed, this message is a label for that location {% endcomment %}
+                  {% comment %}Translators: If a partner has their location listed, this message is a label for that location {% endcomment %}
                   <p>{% trans "Location" %}: {{ object.company_location.name }}</p>
                 {% endif %}
                 {% if object.terms_of_use %}
-                  {% comment %} Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+                  {% comment %}Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
                   <p><a href="{{ object.terms_of_use }}">{% trans "Terms of use" %}</a></p>
                 {% else %}
-                  {% comment %} Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/). {% endcomment %}
+                  {% comment %}Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/). {% endcomment %}
                   <p>{% trans "Terms of use not available." %}</p>
                 {% endif %}
               </div>
@@ -366,9 +368,10 @@
         {% if not object.authorization_method == object.BUNDLE %}
           {% if object.is_waitlisted %}
           <div class="hidden-xs alert alert-warning resource-label-warning">
+            {% comment %}Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
             <span class="resource-label">{% trans "Waitlisted" %}</span>
             <p>
-            {% comment %} Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
+            {% comment %}Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
             {% blocktrans trimmed %}
             There are no access grants available for this partner
             at this time. You can still apply for access; applications will
@@ -380,7 +383,7 @@
           {% if apply %}
             <div class="alert alert-info hidden-xs">
               <p>
-                {% comment %} Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
+                {% comment %}Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
                 {% blocktrans trimmed %}
                   Before applying, please review the
                   <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
@@ -390,8 +393,10 @@
             </div>
           {% endif %}
           {% if user|restricted %}
+            {% comment %}Translators: One the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
             <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
           {% else %}
+            {% comment %}Translators: One the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
             <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary btn-lg hidden-xs btn-block {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
             {% if has_open_apps or has_auths %}
               {% url 'users:my_library' as library_url %}
@@ -399,7 +404,7 @@
               <div class="panel panel-default hidden-xs">
                 <div class="panel-body top-border">
                   {% if has_auths %}
-                    {% comment %} Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
+                    {% comment %}Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
                     {% blocktrans trimmed %}
                       View the status of your access(es) on your <strong><a href="{{ library_url }}">My Library</a></strong> page.
                     {% endblocktrans %}
@@ -408,7 +413,7 @@
                     {% endif %}
                   {% endif %}
                   {% if has_open_apps %}
-                    {% comment %} Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
+                    {% comment %}Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
                     {% blocktrans trimmed %}
                       View the status of your application(s) on your <strong><a href="{{ applications_url }}">My Applications</a></strong> page.
                     {% endblocktrans %}
@@ -421,6 +426,7 @@
           {% if user|coordinators_only %}
           <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
             {% csrf_token %}
+            {% comment %}Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status. {% endcomment %}
             <input type="submit" class="btn btn-default btn-block text-center hidden-xs" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
           </form>
           {% endif %}
@@ -431,7 +437,7 @@
         {% if not object.authorization_method == object.BUNDLE %}
             <div class="well hidden-xs">
               {% if object.coordinator.editor.wp_username %}
-                {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}
+                {% comment %}Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}
                 {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
                   <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
                 {% endblocktrans %}
@@ -440,7 +446,7 @@
                   {% if object.coordinator.editor.wp_talk_page_url %}
                     <li>
                       <a href="{{ object.coordinator.editor.wp_talk_page_url }}">
-                        {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to. {% endcomment %}
+                        {% comment %}Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to. {% endcomment %}
                         {% trans "Talk page" %}
                       </a>
                     </li>
@@ -448,14 +454,14 @@
                   {% if object.coordinator.editor.wp_email_page_url %}
                     <li>
                       <a href="{{ object.coordinator.editor.wp_email_page_url }}">
-                        {% comment %} Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to. {% endcomment %}
+                        {% comment %}Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to. {% endcomment %}
                         {% trans "Special:EmailUser page" %}
                       </a>
                     </li>
                   {% endif %}
                 </ul>
               {% else %}
-                {% comment %} Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+                {% comment %}Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
                 {% blocktrans trimmed %}
                   The Wikipedia Library team will process this application. Want to
                   help? <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
@@ -464,7 +470,7 @@
               {% endif %}
             </div>
             {% if object.coordinator == user or user.is_staff %}
-              {% comment %} Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
+              {% comment %}Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
               <a href="{% url 'partners:users' pk=object.pk %}" class="btn btn-primary btn-lg hidden-xs btn-block">{% trans "List applications" %}</a>
             {% endif %}
           {% else %}
@@ -472,40 +478,43 @@
               {% if user.is_authenticated %}
                 {% if user.editor.wp_bundle_eligible %}
                   {% if partner.specific_stream %}
-                    {% comment %} Translators: This text labels a button taking users to their library. {% endcomment %}
+                    {% comment %}Translators: This text labels a button taking users to their library. {% endcomment %}
                     <a class="btn btn-primary btn-lg btn-block" href="{% url "users:my_library" %}">{% trans "My Library" %}</a><br />
+                    {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
                     <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-                    {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                    {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
                     {% trans "Library bundle access" %}
                     ">
-                    {% comment %} Translators: Text shown to authenticated, bundle eligible users when they need to visit My Library to access collections. {% endcomment %}
+                    {% comment %}Translators: Text shown to authenticated, bundle eligible users when they need to visit My Library to access collections. {% endcomment %}
                     {% blocktrans trimmed %}
                       You are eligible to access Library Bundle partners.
                       Click the button above to go to your Library and browse
                       collections from this partner.
                     {% endblocktrans %}
                   {% else %}
-                    {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+                    {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
                     <a class="btn btn-primary btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
+                    {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
                     <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-                    {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                    {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
                     {% trans "Library bundle access" %}
                     ">
-                    {% comment %} Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
+                    {% comment %}Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
                     {% blocktrans trimmed %}
                       You are eligible to access Library Bundle partners.
                       Click the button above to access the collection.
                     {% endblocktrans %}
                   {% endif %}
                 {% else %}
-                  {% comment %} Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+                  {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
                   <a class="btn btn-primary btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
+                  {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
                   <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-                  {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                  {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
                   {% trans "Library bundle access" %}
                   ">
-                  {% comment %} Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
                   {% url 'homepage' as homepage %}
+                  {% comment %}Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
                   {% blocktrans trimmed %}
                     You are not eligible to access Library Bundle partners.
                     Visit the <a href="{{ homepage }}">homepage</a> to check the
@@ -513,14 +522,15 @@
                   {% endblocktrans %}
                 {% endif %}
               {% else %}
-                {% comment %} Translators: Buttton prompting users to log in. {% endcomment %}
+                {% comment %}Translators: Buttton prompting users to log in. {% endcomment %}
                 <a class="btn btn-primary btn-lg btn-block" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">{% trans "Log in" %}</a><br />
+                {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
                 <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-                {% comment %} Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
                 {% trans "Library bundle access" %}
                 ">
-                {% comment %} Translators: Text shown to unauthenticated users when they visit a Bundle partner page. {% endcomment %}
                 {% url 'about' as about %}
+                {% comment %}Translators: Text shown to unauthenticated users when they visit a Bundle partner page. {% endcomment %}
                 {% blocktrans trimmed %}
                   This resource is part of our <a href="{{ about }}">Library Bundle</a>
                   access, which you can access if you meet our minimum eligibility criteria.
@@ -549,7 +559,7 @@
               </div>
               <div class="col-xs-9 text-right">
                 <div class="huge">{{ total_accounts_distributed_partner }}{% if object.accounts_available %}/{{ object.accounts_available }}{% endif %}</div>
-                {% comment %} Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+                {% comment %}Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
                 <div>{% trans 'Active accounts' %}</div>
               </div>
             </div>
@@ -565,7 +575,7 @@
               </div>
               <div class="col-xs-9 text-right">
                 <div class="huge">{{ total_users }}</div>
-                {% comment %} Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+                {% comment %}Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
                 <div>{% trans 'Users who received access (all time)' %}</div>
               </div>
             </div>
@@ -587,7 +597,7 @@
                       -
                   {% endif %}
                 </div>
-                {% comment %} Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+                {% comment %}Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
                 <div>{% trans 'Median days from application to decision' %}</div>
               </div>
             </div>
@@ -597,7 +607,7 @@
     </div>
 
     {% if total_accounts_distributed_streams %}
-      {% comment %} Translators: This is the header for total accounts on a per-collection level. {% endcomment %}
+      {% comment %}Translators: This is the header for total accounts on a per-collection level. {% endcomment %}
       <h4>{% trans 'Active accounts (collections)' %}:</h4>
       {% for stream, count in total_accounts_distributed_streams.items %}
         <li>{{ stream }}: {{ count }}{% if stream.accounts_available %}/{{ stream.accounts_available }}{% endif %}</li>

@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
 
@@ -109,14 +109,12 @@ FIELD_LABELS = {
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
     # Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
     ACCOUNT_EMAIL: _("The email for your account on the partner's website"),
+    # fmt: off
     # Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-    REQUESTED_ACCESS_DURATION: _(
-        "The number of months you wish to have this access for before renewal is required"
-    ),
+    REQUESTED_ACCESS_DURATION: _("The number of months you wish to have this access for before renewal is required"),
     # Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
-    HIDDEN: _(
-        "Check this box if you would prefer to hide your application from the 'latest activity' timeline."
-    ),
+    HIDDEN: _("Check this box if you would prefer to hide your application from the 'latest activity' timeline."),
+    # fmt: on
 }
 
 SEND_DATA_FIELD_LABELS = {

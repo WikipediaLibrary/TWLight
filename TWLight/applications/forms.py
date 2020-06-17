@@ -209,27 +209,22 @@ class BaseApplicationForm(forms.Form):
                 # Show which partner wants which personal data if applying
                 # for more than one.
                 if len(self.field_params) > 1:
+                    # fmt: off
                     # Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-                    self.fields[datum].help_text = _(
-                        "Requested by: {partner_list}".format(
-                            partner_list=", ".join(user_data[datum])
-                        )
-                    )
+                    self.fields[datum].help_text = _("Requested by: {partner_list}").format(
+                        partner_list=", ".join(user_data[datum])
+                    ),
+                    # fmt: on
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)
-            # Translators: This this note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-            self.helper.layout.append(
-                HTML(
-                    _(
-                        "<p><small><i>Your personal data "
-                        'will be processed according to our <a href="{terms_url}">'
-                        "privacy policy</a>.</i></small></p>".format(
-                            terms_url=reverse("terms")
-                        )
-                    )
-                )
+            # fmt: off
+            # Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
+            disclaimer_html = _("<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>").format(
+                terms_url=reverse("terms")
             )
+            # fmt: on
+            self.helper.layout.append(HTML(disclaimer_html))
 
     def _add_partner_data_subform(self, partner):
         partner_data = self.field_params[partner]
@@ -361,14 +356,16 @@ class ApplicationAutocomplete(forms.ModelForm):
             StylableSubmit("submit", "Filter", css_class="btn btn-default"),
         )
 
-        # Required on the model, but optional for autocomplete, so overrride
+        # Required on the model, but optional for autocomplete, so override
         # the default.
         self.fields["editor"].required = False
         self.fields["partner"].required = False
 
         # Internationalize user-visible labels. These will appear inline as
         # placeholders.
+        # Translators: Label of the field where coordinators can enter the username of a users
         self.fields["editor"].label = _("Username")
+        # Translators: Label of the field where coordinators can enter the name of a partner
         self.fields["partner"].label = _("Partner name")
 
 
@@ -400,21 +397,20 @@ class RenewalForm(forms.Form):
             self.fields["account_email"] = forms.EmailField()
             account_email = True
         if account_email:
+            # fmt: off
             # Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
-            self.fields["account_email"].label = _(
-                "The email for your account on the partner's website"
-            )
+            self.fields["account_email"].label = _("The email for your account on the partner's website")
+            # fmt: on
             fieldset.append("account_email")
 
         if "requested_access_duration" in self.field_params:
             self.fields["requested_access_duration"] = forms.ChoiceField(
                 choices=Application.REQUESTED_ACCESS_DURATION_CHOICES
             )
+            # fmt: off
             # Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
-            self.fields["requested_access_duration"].label = _(
-                "The number of months you wish to have this access"
-                " for before renewal is required"
-            )
+            self.fields["requested_access_duration"].label = _("The number of months you wish to have this access for before renewal is required")
+            # fmt: on
             fieldset.append("requested_access_duration")
 
         self.fields["return_url"] = forms.CharField(

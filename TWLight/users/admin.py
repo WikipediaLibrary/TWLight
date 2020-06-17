@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
-from django.utils.translation import ugettext_lazy as _
 
 from TWLight.users.models import Editor, UserProfile, Authorization, get_company_name
 from TWLight.users.forms import AuthorizationAdminForm, AuthorizationInlineForm
@@ -30,7 +29,7 @@ class UserProfileInline(admin.StackedInline):
             {"fields": ("terms_of_use", "terms_of_use_date", "use_wp_email", "lang")},
         ),
         (
-            _("Email preferences"),
+            "Email preferences",
             {
                 "fields": (
                     "send_renewal_notices",
@@ -75,7 +74,7 @@ class AuthorizationAdmin(admin.ModelAdmin):
         else:
             return ""
 
-    get_authorized_user_wp_username.short_description = _("user")
+    get_authorized_user_wp_username.short_description = "user"
 
     def get_authorizer_wp_username(self, authorization):
         if authorization.authorizer:
@@ -87,12 +86,12 @@ class AuthorizationAdmin(admin.ModelAdmin):
         else:
             return ""
 
-    get_authorizer_wp_username.short_description = _("authorizer")
+    get_authorizer_wp_username.short_description = "authorizer"
 
     def get_partners_company_name(self, authorization):
         return get_company_name(authorization)
 
-    get_partners_company_name.short_description = _("partners")
+    get_partners_company_name.short_description = "partners"
 
 
 admin.site.register(Authorization, AuthorizationAdmin)
@@ -111,7 +110,7 @@ class UserAdmin(AuthUserAdmin):
         else:
             return ""
 
-    get_wp_username.short_description = _("Username")
+    get_wp_username.short_description = "Username"
 
 
 # Unregister old user admin; register new, improved user admin.

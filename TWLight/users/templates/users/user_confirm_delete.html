@@ -4,12 +4,13 @@
 {% load twlight_perms %}
 
 {% block content %}
+  {% comment %}Translators: This is the heading of the page where users can request the deletion of their data.{% endcomment %}
   <h1>{% trans 'Delete all data' %}</h1>
 
   <form method="post">
     {% csrf_token %}
     <p>
-      {% comment %} Translators: This message is displayed on the page where users can request the deletion of their data. {% endcomment %}
+      {% comment %}Translators: This message is displayed on the page where users can request the deletion of their data.{% endcomment %}
       {% blocktrans trimmed %}
           <b>Warning:</b> Performing this action will delete your Wikipedia 
           Library Card user account and all associated applications. This 
@@ -18,8 +19,9 @@
           accounts or apply for new ones.
       {% endblocktrans %}
     </p>
-    <center>
-      <input type="submit" value="Confirm" class="btn btn-danger"/>
-    </center>
+    <div style="text-align: center;">
+      {% comment %}Translators: A button users can click to delete their account.{% endcomment %}
+      <input type="submit" style="position: absolute;" value="{% trans 'Confirm' %}" class="btn btn-danger"/>
+    </div>
   </form>
 {% endblock content %}
