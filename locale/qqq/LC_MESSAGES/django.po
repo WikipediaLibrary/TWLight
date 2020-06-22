@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-06-18 13:34+0000\n"
-"PO-Revision-Date: 2020-06-18 19:33:19+0000\n"
+"PO-Revision-Date: 2020-06-22 15:37:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -2574,7 +2574,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:274
 msgid "update"
-msgstr ""
+msgstr "{{identical|update}}"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:319
@@ -2635,7 +2635,7 @@ msgstr ""
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
 msgid "Preferences"
-msgstr ""
+msgstr "{{identical|Preferences}}"
 
 #. Translators: In the preferences section of a user profile, this text labels the form where users can change their email preferences.
 #: TWLight/users/templates/users/preferences.html:23
@@ -2655,7 +2655,7 @@ msgstr ""
 #. Translators: This text labels a button users can click to download their data.
 #: TWLight/users/templates/users/preferences.html:59
 msgid "Download"
-msgstr ""
+msgstr "{{identical|Download}}"
 
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
 #: TWLight/users/templates/users/preferences.html:65

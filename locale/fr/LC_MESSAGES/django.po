@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-06-18 13:33+0000\n"
-"PO-Revision-Date: 2020-06-18 19:33:16+0000\n"
+"PO-Revision-Date: 2020-06-22 15:36:56+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -747,7 +747,7 @@ msgstr "Données de la demande pour %(object)s"
 #: TWLight/applications/templates/applications/send_partner.html:51
 #, python-format
 msgid "Application(s) for <strong>%(unavailable_streams)s</strong> if sent, will exceed the total available accounts for the stream(s). Please proceed at your own discretion."
-msgstr "Les demandes pour <strong>%(unavailable_streams)s</strong>, si elles sont envoyées, dépasseront le total des comptes disponibles pour le(s) collection(s). Veuillez procéder selon votre propre appréciation."
+msgstr "Les demandes d’accès à <strong>%(unavailable_streams)s</strong>, si elles sont envoyées, dépasseront le total des comptes disponibles pour cette (ces) collection(s). Vous êtes libre de procéder selon votre propre appréciation."
 
 #. Translators: This message is shown when applications exceed the number of accounts available.
 #: TWLight/applications/templates/applications/send_partner.html:57
@@ -1209,7 +1209,7 @@ msgstr "Cher/chère %(user)s,\nMerci d’avoir demandé l’accès aux ressource
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
 msgid "Your Wikipedia Library application"
-msgstr "Votre demande à la Bibliothèque Wikipédia"
+msgstr "Votre demande sur la Bibliothèque Wikipédia"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1259,7 +1259,7 @@ msgstr "Vous devez être un contributeur Wikipédia pour faire cela."
 #. Translators: When a user is being authenticated to access proxied resources, and the request's missing the editor's username, this error text is displayed.
 #: TWLight/ezproxy/views.py:35
 msgid "Missing Editor username."
-msgstr "Nom d'utilisateur du contributeur non trouvé."
+msgstr "Nom d’utilisateur du contributeur manquant."
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is invalid.
 #: TWLight/ezproxy/views.py:57
@@ -1568,7 +1568,7 @@ msgstr "Lister les demandes"
 #: TWLight/users/templates/users/my_applications.html:10
 #: TWLight/users/templates/users/my_library.html:6
 msgid "My Library"
-msgstr "Ma Bibliothèque"
+msgstr "Ma bibliothèque"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #. Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.
@@ -2311,7 +2311,7 @@ msgstr "Envoyer les rappels de demandes en attente"
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive application reminders that are under discussion or not.
 #: TWLight/users/forms.py:138
 msgid "Send discussion application reminders"
-msgstr "Envoyer les rappels de l'application de discussion."
+msgstr "Envoyer les rappels pour les demandes d’accès en discussion"
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive approved application reminders or not.
 #: TWLight/users/forms.py:146
@@ -2586,7 +2586,7 @@ msgstr "Courriel *"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:274
 msgid "update"
-msgstr "actualiser"
+msgstr "mettre à jour"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:319
@@ -2717,7 +2717,7 @@ msgstr "Les renouvellements ne sont pas disponibles pour ce partenaire"
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/resource_tile.html:93
 msgid "Extend"
-msgstr "Etendre"
+msgstr "Étendre"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/resource_tile.html:96
@@ -3114,5 +3114,5 @@ msgstr "{username} a demandé l’accès à <a href='{url}'>{partner}</a>"
 #: TWLight/views.py:201
 #, python-brace-format
 msgid "{username} received access to <a href='{url}'>{partner}</a>"
-msgstr "{username} a reçu l'accès à <a href='{url}'>{partner}</a>"
+msgstr "{username} a reçu l’accès à <a href='{url}'>{partner}</a>"
 

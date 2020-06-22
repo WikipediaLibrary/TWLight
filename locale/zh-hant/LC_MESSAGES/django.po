@@ -5,12 +5,14 @@
 # Author: Abijeet Patro
 # Author: Kly
 # Author: Nikkimaria
+# Author: Sunny00217
+# Author: SupaplexTW
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-06-18 13:33+0000\n"
-"PO-Revision-Date: 2020-06-18 19:33:18+0000\n"
+"PO-Revision-Date: 2020-06-22 15:37:00+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,9 +53,9 @@ msgstr "請求由：{partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:223
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr "<p><small><i>您的個人資料將會根據我們的<a href=\"{terms_url}\">隱私方針</a>處理。</i></small></p>"
+msgstr "<p><small><i>您的個人資料將會根據我們的<a href='{terms_url}'>隱私方針</a>處理。</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:234
@@ -105,7 +107,7 @@ msgstr "您的真實姓名"
 #. Translators: When filling out an application, users may need to specify the country in which they currently live
 #: TWLight/applications/helpers.py:93
 msgid "Your country of residence"
-msgstr "您的國家或居住地"
+msgstr "您的居住國家"
 
 #. Translators: When filling out an application, users may need to specify their current occupation
 #: TWLight/applications/helpers.py:95
@@ -278,7 +280,7 @@ msgstr "一旦處理完畢後，您可預期在一到兩週後收到取用詳情
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:253
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr ""
+msgstr "這位伙伴加入圖書館綑綁計畫，並不需要申請，這次申請會被標示為無效。"
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -808,9 +810,9 @@ msgstr "請至少選擇一項您想要取用的資源。"
 #. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
 #. Translators: This message is shown to users once they've successfully submitted their application for review.
 #: TWLight/applications/views.py:421 TWLight/applications/views.py:479
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status."
-msgstr "您的申請程序已提交於審核。您可以在此頁面上查閱您的申請程序狀態。"
+msgstr "您的申請程序已提交於審核。您可以在此頁面上查閱<a href='{applications_url}'我的申請程序</a>狀態。"
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
@@ -871,7 +873,7 @@ msgstr "您嘗試建立重複的授權。"
 #: TWLight/applications/views.py:974
 #, python-brace-format
 msgid "This application cannot be modified since this partner is now part of our <a href='{bundle}'>bundle access</a>. If you are eligible, you can access this resource from <a href='{library}'>your library</a>. <a href='{contact}'>Contact us</a> if you have any questions."
-msgstr ""
+msgstr "這次申請程序無法變動，因為這位伙伴已經屬於我們的<a href='{bundle}'>捆綁連結</a>。如果符合資格，你可以連接到 <a href='{library}'>你圖書館</a>的資源。如果有問題歡迎<a href='{contact}'>聯絡我們</a>。"
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:988
@@ -881,7 +883,7 @@ msgstr "設定申請程序狀態"
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
 #: TWLight/applications/views.py:1006
 msgid "There are more pending applications than available accounts. Your application might get waitlisted."
-msgstr ""
+msgstr "等待審核的申請多於可用的帳號數量，你的申請將被放入等待名單當中。"
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:1019
@@ -941,9 +943,8 @@ msgstr "您的電子郵件"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
-#, fuzzy
 msgid "This field is automatically updated with the email from your <a href='{}'>user profile</a>."
-msgstr "此欄位會以來自於您的<a href=\"{}\">使用者配置</a>裡的電子郵件做自動更新。"
+msgstr "此欄位會以來自於您的<a href='{}'>使用者配置</a>裡的電子郵件做自動更新。"
 
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:26
@@ -1197,9 +1198,8 @@ msgstr "致：%(user)s，感謝您透過維基百科圖書館來向 %(partner)s 
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
-#, fuzzy
 msgid "Your Wikipedia Library application"
-msgstr "您的維基百科申請程序已被拒絕"
+msgstr "您的維基百科申請程序"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1249,17 +1249,17 @@ msgstr "您必須要是維基百科上的編輯者才能做出。"
 #. Translators: When a user is being authenticated to access proxied resources, and the request's missing the editor's username, this error text is displayed.
 #: TWLight/ezproxy/views.py:35
 msgid "Missing Editor username."
-msgstr ""
+msgstr "遺漏編輯者使用者名稱。"
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is invalid.
 #: TWLight/ezproxy/views.py:57
 msgid "Invalid EZProxy target URL."
-msgstr ""
+msgstr "無效的 EZProxy 目標網址。"
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is missing.
 #: TWLight/ezproxy/views.py:62
 msgid "Missing EZProxy target URL."
-msgstr ""
+msgstr "遺漏 EZProxy 目標網址。"
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
 #: TWLight/graphs/views.py:237
@@ -2584,9 +2584,8 @@ msgstr "電子郵件 *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:274
-#, fuzzy
 msgid "update"
-msgstr "（更新）"
+msgstr "更新"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:319
@@ -2646,9 +2645,8 @@ msgstr "您沒有有效的個人取用典藏。"
 
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
-#, fuzzy
 msgid "Preferences"
-msgstr "電子郵件偏好設定"
+msgstr "偏好設定"
 
 #. Translators: In the preferences section of a user profile, this text labels the form where users can change their email preferences.
 #: TWLight/users/templates/users/preferences.html:23
@@ -2667,15 +2665,13 @@ msgstr "資料"
 
 #. Translators: This text labels a button users can click to download their data.
 #: TWLight/users/templates/users/preferences.html:59
-#, fuzzy
 msgid "Download"
-msgstr "下載成 csv 檔案"
+msgstr "下載"
 
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
 #: TWLight/users/templates/users/preferences.html:65
-#, fuzzy
 msgid "Restrict"
-msgstr "限制我的資料"
+msgstr "受限"
 
 #. Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource.
 #: TWLight/users/templates/users/resource_tile.html:22

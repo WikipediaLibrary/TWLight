@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-06-18 13:33+0000\n"
-"PO-Revision-Date: 2020-06-18 19:33:18+0000\n"
+"PO-Revision-Date: 2020-06-22 15:36:59+0000\n"
 "Language: ta\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,7 +53,7 @@ msgstr "கோரிய பங்குதாரர்: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:223
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>"
 msgstr "<p><small><i>உங்கள் தனிப்பட்ட தரவு எங்கள் \n<a href=\"{terms_url}\">தனியுரிமை கொள்கையின்படி</a> பயன்படுத்தப்படும்.</i></small></p>"
 
@@ -213,7 +213,7 @@ msgstr "மின்னஞ்சல்"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "எங்கள் பயன்பாட்டு விதிமுறைகள் மாறிவிட்டன. நீங்கள் உள்நுழைந்து எங்கள் புதுப்பிக்கப்பட்ட விதிமுறைகளை ஒப்புக் கொள்ளும் வரை உங்கள் விண்ணப்பங்கள் மதிப்பாய்வு செய்யப்படமாட்டாது."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -273,17 +273,17 @@ msgstr "மாதம்"
 #: TWLight/applications/models.py:326
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr ""
+msgstr "அணுகல் URL: {access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:332
 msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr ""
+msgstr "மதிப்பாய்வு செய்யப்பட்ட ஒன்று அல்லது இரண்டு வாரங்களுக்குள் அணுகல் விவரங்களை நீங்கள் பெறுவீர்கள் என்று எதிர்பார்க்கலாம்."
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:253
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr ""
+msgstr "இந்த கூட்டாளர் லைப்ரரி பண்டிலில் சேர்ந்துள்ளார், இதற்கு விண்ணப்பங்கள் தேவையில்லை. இந்த விண்ணப்பம் செல்லாது என குறிக்கப்படும்."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -378,12 +378,12 @@ msgstr "காத்திருப்புப் பட்டியலில�
 #. Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:105
 msgid "Unknown"
-msgstr ""
+msgstr "அறியப்படாதது"
 
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:108
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr ""
+msgstr "மேலும் தொடருமுன் விண்ணப்பதாரர் அவர்கள் வசிக்கும் நாட்டை தங்கள் சுயவிவரத்தில் சேர்க்குமாறு கோருங்கள்."
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:119
@@ -395,7 +395,7 @@ msgstr "கிடைக்கப் பெறுவதில்லை"
 #: TWLight/applications/templates/applications/application_evaluation.html:130
 #, python-format
 msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
-msgstr ""
+msgstr "தளத்தின் <a href=\"%(terms_url)s\">பயன்பாட்டு விதிமுறைகளுக்கு</a> ஒப்புக் கொண்டார்களா?"
 
 #. Translators: Displayed to coordinators when they've agreed to the terms of use.
 #. Translators: Displayed if the user has agreed to the terms of use.
@@ -410,7 +410,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail_data.html:160
 #: TWLight/users/templates/users/editor_detail_data.html:178
 msgid "Yes"
-msgstr ""
+msgstr "ஆம்"
 
 #. Translators: Displayed to coordinators when they've not agreed to the terms of use.
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.
@@ -431,7 +431,7 @@ msgstr "இல்லை"
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:144
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr ""
+msgstr "இந்த விண்ணப்பத்திற்கு ஒப்புதல் அளிக்கும் முன் விண்ணப்பதாரர், தளத்தின் பயன்பாட்டு விதிமுறைகளுக்கு ஒப்புக் கொள்ளுமாறு கோருங்கள்."
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:152
@@ -695,7 +695,7 @@ msgstr "நிலையை அமைக்கவும்"
 #: TWLight/applications/templates/applications/confirm_renewal.html:13
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
-msgstr ""
+msgstr "%(partner)s க்கான உங்கள் விண்ணப்பத்தைப் புதுப்பிக்க 'உறுதிப்படுத்து' என்பதைக் கிளிக் செய்க"
 
 #. Translators: Labels the submit button requesting confirmation of application renewal.
 #. Translators: This is the button coordinators click to confirm deletion of a suggestion.

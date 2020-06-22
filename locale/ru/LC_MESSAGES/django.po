@@ -7,6 +7,7 @@
 # Author: Athena Atterdag
 # Author: Diman Russkov
 # Author: Diralik
+# Author: GKyusya
 # Author: Infovarius
 # Author: Katunchik
 # Author: Movses
@@ -21,7 +22,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-06-18 13:33+0000\n"
-"PO-Revision-Date: 2020-06-18 19:33:17+0000\n"
+"PO-Revision-Date: 2020-06-22 15:36:58+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,19 +59,19 @@ msgstr "О вас"
 #: TWLight/applications/forms.py:214
 #, python-brace-format
 msgid "Requested by: {partner_list}"
-msgstr ""
+msgstr "По запросу: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:223
 #, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr ""
+msgstr "<p><small><i>Ваши персональные данные будут обрабатываться в соответствии с нашей <a href='{terms_url}'> политикой конфиденциальности</a>.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:234
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr ""
+msgstr "Ваша заявка к {partner}"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:302
@@ -156,7 +157,7 @@ msgstr "Вы должны согласиться с партнёрскими у�
 #. Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
 #: TWLight/applications/helpers.py:116
 msgid "Check this box if you would prefer to hide your application from the 'latest activity' timeline."
-msgstr ""
+msgstr "Установите этот флажок, если вы предпочитаете скрыть свою заявку из истории \"последние действия\"."
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
@@ -189,7 +190,7 @@ msgstr "Организация"
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
 #: TWLight/applications/helpers.py:130
 msgid "Stream requested"
-msgstr ""
+msgstr "Запрошенный поток"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
@@ -222,7 +223,7 @@ msgstr "Эл. почта"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "Наши условия использования изменились. Ваши заявки не будут обработаны до тех пор, пока вы не войдете в систему и не согласитесь с нашими обновленными условиями."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -282,12 +283,12 @@ msgstr "Месяц"
 #: TWLight/applications/models.py:326
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr ""
+msgstr "URL-адрес доступа: {access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:332
 msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr ""
+msgstr "Вы можете рассчитывать на получение сведений о доступе в течение недели или двух после его обработки."
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:253
@@ -470,9 +471,8 @@ msgstr ""
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:203
-#, fuzzy
 msgid "Previous access expiry date"
-msgstr "Предыдущая страница"
+msgstr "Предыдущий срок действия доступа"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:213
@@ -1149,9 +1149,9 @@ msgstr[2] "\n%(counter)s импортированных заявок"
 #, fuzzy, python-format
 msgid "One under discussion application."
 msgid_plural "%(counter)s under discussion applications."
-msgstr[0] "В процессе обсуждения"
-msgstr[1] "В процессе обсуждения"
-msgstr[2] "В процессе обсуждения"
+msgstr[0] "Заявка под обсуждением."
+msgstr[1] "%(counter)s Заявки под обсуждением."
+msgstr[2] ""
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
