@@ -44,9 +44,9 @@
           {% trans "A stack of books tied together with a ribbon, the Library Bundle icon" %}
           ">
         </h2>
-        {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...{% endcomment %}
+        {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this message is displayed to all users in the panel where their Library Bundle eligibility is displayed. 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
 		    {% blocktrans trimmed %}
-				  <p>Free and immediate access to a large collection of resources from {{ bundle_partner_count }} publishers if you meet the following criteria:</p>
+				  <p>Free and immediate access to a large selection of resources, spanning {{ bundle_partner_count }} collections, if you meet the following criteria:</p>
 		    {% endblocktrans %}
 				<ul class="bundle-list">
           {% for criteria_text, meets_criteria in bundle_criteria %}
