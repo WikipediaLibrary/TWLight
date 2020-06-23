@@ -42,12 +42,8 @@ sub print_error {
         for my $i (0 .. $#input) {
             if ("$input[$i]" eq "$match") {
                 my $number = $i + 1;
-                print color('red');
-                print "ERROR: $error\n";
-                print "$filename:$number\n";
-                print "$match\n";
                 $code = 1;
-                print color('reset');
+                print colored("ERROR: $error\n$filename:$number\n$match\n", 'red');
             }
         }
     }
