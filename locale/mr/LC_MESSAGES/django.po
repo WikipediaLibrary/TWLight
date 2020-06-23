@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-06-18 13:33+0000\n"
+"POT-Creation-Date: 2020-06-23 15:31+0000\n"
 "PO-Revision-Date: 2019-02-14 08:31:32+0000\n"
 "Language: mr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2638,12 +2638,12 @@ msgstr ""
 msgid "A stack of books tied together with a ribbon, the Library Bundle icon"
 msgstr ""
 
-#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...
+#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this message is displayed to all users as the description of Library Bundle eligibility panel. 'Library Bundle' is the set of resources which active users have automatic access to.
 #: TWLight/templates/home.html:48
 #, python-format
 msgid ""
-"<p>Free and immediate access to a large collection of resources from "
-"%(bundle_partner_count)s publishers if you meet the following criteria:</p>"
+"<p>Free and immediate access to a large selection of resources, spanning "
+"%(bundle_partner_count)s collections, if you meet the following criteria:</p>"
 msgstr ""
 
 #. Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
