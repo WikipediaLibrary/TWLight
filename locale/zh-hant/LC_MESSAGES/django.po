@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-06-23 15:32+0000\n"
+"POT-Creation-Date: 2020-06-23 16:18+0000\n"
 "PO-Revision-Date: 2020-06-22 15:37:00+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1201,7 +1201,7 @@ msgstr "在您曾評註過維基百科圖書館申請程序的新評註"
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/about.html:207 TWLight/templates/base.html:275
+#: TWLight/templates/about.html:204 TWLight/templates/base.html:275
 msgid "Contact us"
 msgstr "聯絡我們"
 
@@ -2385,7 +2385,9 @@ msgstr "在過去一個月裡，您有在維基媒體專案裡做出至少 10 �
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
-msgid "You are not currently blocked from editing Wikipedia"
+#, fuzzy
+#| msgid "You are not currently blocked from editing Wikipedia"
+msgid "You are not currently blocked from editing a Wikimedia project"
 msgstr "您目前並沒有被禁止編輯維基百科"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
@@ -2396,7 +2398,7 @@ msgid ""
 msgstr "您尚無法透過其它的圖書館或機構，來取用您現在所想申請的資源"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:82
+#: TWLight/templates/about.html:81
 msgid ""
 "If you don't quite meet the experience requirements but think you would "
 "still be a strong candidate for access, feel free to apply and you may still "
@@ -2406,56 +2408,56 @@ msgstr ""
 "申請。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:90
+#: TWLight/templates/about.html:89
 msgid "What do I do after I get access?"
 msgstr "獲得取用的權限之後，我可以做些什麼？"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:94
+#: TWLight/templates/about.html:93
 msgid "Approved editors <i>may</i> use their access to:"
 msgstr "經核准的編輯者<i>可以</i>使用他們的取用權限來做出："
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:98
+#: TWLight/templates/about.html:97
 msgid "Search, view, retrieve, and display partner content"
 msgstr "搜尋、查看、檢索，以及展示出合作夥伴的內容"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:102
+#: TWLight/templates/about.html:101
 msgid "Electronically save partner content"
 msgstr "以電子化來保存合作夥伴的內容"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:106
+#: TWLight/templates/about.html:105
 msgid "Print out single copies of partner content"
 msgstr "將合作夥伴的內容列印成單一複本"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:113
+#: TWLight/templates/about.html:111
 msgid "Approved editors <i>should not</i>:"
 msgstr "經核准的編輯者<i>不應該</i>做出："
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:117
+#: TWLight/templates/about.html:115
 msgid ""
 "Share their account logins or passwords with others, or sell their access to "
 "other parties"
 msgstr "將登入帳號或密碼給其他人得知，或是販賣自己的帳號"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:121
+#: TWLight/templates/about.html:119
 msgid "Mass scrape or mass download partner content"
 msgstr "大規模抓取，或海量下載合作夥伴的內容"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:125
+#: TWLight/templates/about.html:123
 msgid ""
 "Systematically make printed or electronic copies of multiple extracts of "
 "restricted content available for any purpose"
 msgstr "對多個有限制可用內容的摘錄，系統化地製作出用於任何目的之列印或電子複本"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
-#: TWLight/templates/about.html:129
+#: TWLight/templates/about.html:127
 msgid ""
 "Datamine metadata without permission, in order, for instance, to use "
 "metadata for auto-created stub articles"
@@ -2464,20 +2466,20 @@ msgstr ""
 "小條目"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:136
+#: TWLight/templates/about.html:133
 msgid ""
 "Respecting these agreements allows us to continue growing the partnerships "
 "available to the community."
 msgstr "請遵守這些協議，使得我們可以讓社群與合作夥伴之間關係能夠持續建立。"
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:142
+#: TWLight/templates/about.html:139
 #, fuzzy
 msgid "EZProxy"
 msgstr "代理"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:146
+#: TWLight/templates/about.html:143
 msgid ""
 "EZProxy is a proxy server used to authenticate users for many Wikipedia "
 "Library partners. Users sign into EZProxy via the Library Card platform to "
@@ -2489,7 +2491,7 @@ msgstr ""
 "身的 IP 位址來取用所請求的資源。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:155
+#: TWLight/templates/about.html:152
 msgid ""
 "You may notice that when accessing resources via EZProxy that URLs are "
 "dynamically rewritten. This is why we recommend logging in via the Library "
@@ -2503,7 +2505,7 @@ msgstr ""
 "接。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:164
+#: TWLight/templates/about.html:161
 msgid ""
 "Typically once you’ve logged in your session will remain active in your "
 "browser for up to two hours after you’ve finished searching. Note that use "
@@ -2515,7 +2517,7 @@ msgstr ""
 "上的快取，並重新開啟瀏覽器。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/about.html:175
+#: TWLight/templates/about.html:172
 msgid ""
 "The Library Bundle is a collection of resources for which no application is "
 "required. If you meet the criteria laid out above, you will be authorized "
@@ -2526,7 +2528,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/about.html:185
+#: TWLight/templates/about.html:182
 msgid ""
 "If your account is blocked on one or more Wikimedia projects, you may still "
 "be granted access to the Library Bundle. You will need to contact the "
@@ -2538,12 +2540,12 @@ msgid ""
 msgstr ""
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:195
+#: TWLight/templates/about.html:192
 msgid "Citation practices"
 msgstr "引文實踐"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:199
+#: TWLight/templates/about.html:196
 msgid ""
 "Citation practices vary by project and even by article. Generally, we "
 "support editors citing where they found information, in a form that allows "
@@ -2556,7 +2558,7 @@ msgstr ""
 "在該來源上會連至合作夥伴資料庫的連結。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:211
+#: TWLight/templates/about.html:208
 #, python-format
 msgid ""
 "If you have questions, need help, or want to volunteer to help, please see "
