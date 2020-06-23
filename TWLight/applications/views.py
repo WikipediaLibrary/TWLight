@@ -925,7 +925,7 @@ class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, Update
                 messages.add_message(
                     self.request,
                     messages.WARNING,
-                    # Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
+                    # Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
                     _("You attempted to create a duplicate authorization."),
                 )
                 raise PermissionDenied
