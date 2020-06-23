@@ -17,19 +17,12 @@ set -euo pipefail
         then
             # https://phabricator.wikimedia.org/T255167
             echo "Checking for localization issues"
-            if _newline=$(find TWLight -name "*.py" -type f -print0 | \
-                xargs -0 pcregrep --color=always -Mn '(?<!_)_\(\n(([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)' \
-            )
-            then
-                echo "ERROR: ugettext messages can't be preceded by a newline, even though it's valid python"
-                printf "${_newline}\n"
-                exit 1
-            else
-                echo "No localization issues found"
-                # Run test suite via coverage so we can get a report without having to run separate tests for it.
-                DJANGO_LOG_LEVEL=CRITICAL DJANGO_SETTINGS_MODULE=TWLight.settings.local \
-                coverage run --source TWLight manage.py test --keepdb --noinput
-            fi
+            find TWLight -name "*.py" -type f -print0 | xargs -0 -I % ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl %
+            echo "No localization issues found"
+
+            # Run test suite via coverage so we can get a report without having to run separate tests for it.
+            DJANGO_LOG_LEVEL=CRITICAL DJANGO_SETTINGS_MODULE=TWLight.settings.local \
+            coverage run --source TWLight manage.py test --keepdb --noinput
         else
             # If linting fails, offer some useful feedback to the user.
             black --target-version py37 --quiet --diff TWLight
