@@ -414,7 +414,7 @@ class PartnerModelTests(TestCase):
         partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
         stream1 = StreamFactory(authorization_method=Partner.PROXY)
 
-        example_url = "https:/www.example.com"
+        example_url = "https://www.example.com"
         partner1.target_url = example_url
         partner1.save()
         partner2.target_url = example_url
@@ -433,6 +433,9 @@ class PartnerModelTests(TestCase):
             partner2, partner=True
         )
         self.assertIsNotNone(msg)
+	# We only want the duplicate partner names to be shown,
+	# not self.
+	self.assertNotIn(partner2.company_name, msg)
         self.assertIn(partner1.company_name, msg)
         self.assertIn(stream1.name, msg)
 
