@@ -18,7 +18,7 @@ from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
-from .models import Partner, Stream, Suggestion
+from .models import Partner, Stream, Suggestion, TextFieldTag
 
 import logging
 
@@ -35,15 +35,31 @@ class PartnersFilterView(FilterView):
             messages.add_message(
                 self.request,
                 messages.INFO,
-                # Translators: Staff members can see partners on the Browse page (https://wikipedialibrary.wmflabs.org/partners/) which are hidden from other users.
-                _(
-                    "Because you are a staff member, this page may include "
-                    "Partners who are not yet available to all users."
-                ),
+                "Because you are a staff member, this page may include "
+                "Partners who are not yet available to all users.",
             )
             return Partner.even_not_available.order_by("company_name")
         else:
             return Partner.objects.order_by("company_name")
+
+    def get_context_data(self, **kwargs):
+        """
+        We try to find out if the user has decided to filter by tags.
+        If there's no filtering or tags involved, we carry on. Otherwise,
+        we add the tag to the context and get the corresponding meta url
+        in the template.
+        :param kwargs:
+        :return:
+        """
+        context = super(PartnersFilterView, self).get_context_data(**kwargs)
+        try:
+            filter_data = kwargs.pop("filter").data
+            tag_id = filter_data.get("tags")
+            if tag_id:
+                context["tag"] = TextFieldTag.objects.get(id=tag_id)
+        except (KeyError, ValueError, TextFieldTag.DoesNotExist):
+            pass
+        return context
 
 
 class PartnersDetailView(DetailView):
@@ -53,15 +69,12 @@ class PartnersDetailView(DetailView):
         context = super(PartnersDetailView, self).get_context_data(**kwargs)
         partner = self.get_object()
         if partner.status == Partner.NOT_AVAILABLE:
-            # Translators: Staff members can view partner pages which are hidden from other users. This message appears on those specific partner resource pages.
             messages.add_message(
                 self.request,
                 messages.WARNING,
-                _(
-                    "This partner is not available. You can see it because you "
-                    "are a staff member, but it is not visible to non-staff "
-                    "users."
-                ),
+                "This partner is not available. You can see it because you "
+                "are a staff member, but it is not visible to non-staff "
+                "users.",
             )
 
         context["total_accounts_distributed_partner"] = count_valid_authorizations(
@@ -138,16 +151,17 @@ class PartnersDetailView(DetailView):
                     pass
                 except Authorization.MultipleObjectsReturned:
                     logger.info(
-                        "Multiple authorizations returned for partner {} and user {}"
-                    ).format(partner, user)
-                    # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                        "Multiple authorizations returned for partner {} and user {}".format(
+                            partner, user
+                        )
+                    )
                     messages.add_message(
                         self.request,
                         messages.ERROR,
-                        _(
-                            "Multiple authorizations were returned – something's wrong. "
-                            "Please contact us and don't forget to mention this message."
-                        ),
+                        # fmt: off
+                        # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                        _("Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."),
+                        # fmt: on
                     )
             else:
                 authorizations = Authorization.objects.filter(
@@ -233,6 +247,15 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
             partner.status = Partner.WAITLIST
             # Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
             msg = _("This partner is now waitlisted")
+
+            # Set waitlist_status to True for all the applications
+            # which are Pending or Under Discussion for this partner
+            applications = Application.objects.filter(
+                partner=partner, status__in=[Application.PENDING, Application.QUESTION]
+            )
+            for app in applications:
+                app.waitlist_status = True
+                app.save()
         else:
             partner.status = Partner.AVAILABLE
             # Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.

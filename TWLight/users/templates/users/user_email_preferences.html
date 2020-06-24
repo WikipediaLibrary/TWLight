@@ -10,7 +10,7 @@
       </div> <br />
     {% endfor %}
     {% if user|coordinators_only %}
-      {% comment %} Translators: Labels a sections where coordinators can select their email preferences. {% endcomment %}
+      {% comment %}Translators: Labels a sections where coordinators can select their email preferences.{% endcomment %}
       <br /><strong>{% trans "Coordinators only" %}</strong><br />
       {% for field in coordinator_email_form %}
         <div id="div_{{ field.auto_id }}" class="form-group">
@@ -19,7 +19,7 @@
       {% endfor %}
     {% endif %}
     <div style="padding-top: 10px">
-      {% comment %} Translators: This is a button which updates user preference settings {% endcomment %}
+      {% comment %}Translators: This is a button which updates user preference settings {% endcomment %}
       <input type="submit" name="update_email_settings" value="{% trans "Update" %}" class="btn btn-default"/>
     </div>
   </form>

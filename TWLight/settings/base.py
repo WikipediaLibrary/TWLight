@@ -150,6 +150,8 @@ CRON_CLASSES = [
     "TWLight.crons.SendCoordinatorRemindersCronJob",
     "TWLight.crons.UserRenewalNoticeCronJob",
     "TWLight.crons.ProxyWaitlistDisableCronJob",
+    "TWLight.crons.UserUpdateEligibilityCronJob",
+    "TWLight.crons.ClearSessions",
 ]
 
 # REST FRAMEWORK CONFIG
@@ -370,7 +372,6 @@ COMMENTS_APP = "TWLight.comments"
 # TAGGIT CONFIGURATION
 # ------------------------------------------------------------------------------
 TAGGIT_CASE_INSENSITIVE = True
-
 
 # REVERSION CONFIGURATION
 # ------------------------------------------------------------------------------

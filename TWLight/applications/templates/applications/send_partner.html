@@ -34,25 +34,25 @@
 
 {% block content %}
   <h2>
-    {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where {{ object }} will be the name of the partner. Don't translate {{ object }}.{% endcomment %}
+    {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where {{ object }} will be the name of the partner. Don't translate {{ object }}.{% endcomment %}
     {% blocktrans trimmed %}Application data for {{ object }}{% endblocktrans %}
   </h2>
 
   <div class="alert alert-info">
-    {% comment %} Translators: This message is shown on pages where coordinators can see personal information about applicants. {% endcomment %}
+    {% comment %}Translators: This message is shown on pages where coordinators can see personal information about applicants. {% endcomment %}
     {% trans 'Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential.' %}
   </div>
   
-  {% comment %} This block warns coordinators if the number of applications they are about to send exceeds the number of accounts available. {% endcomment %}
+  {% comment %}This block warns coordinators if the number of applications they are about to send exceeds the number of accounts available. {% endcomment %}
   {% if unavailable_streams %}
     <div class="well hidden-xs">
-      {% comment %} Translators: This message is shown when applications exceed the number of accounts available for each stream(s). {% endcomment %}
+      {% comment %}Translators: This message is shown when applications exceed the number of accounts available for each stream(s). {% endcomment %}
       {% blocktrans trimmed %}Application(s) for <strong>{{ unavailable_streams }}</strong> if sent, will exceed the total available accounts for the stream(s). Please proceed at your own discretion.{% endblocktrans %}
     </div>
   {% elif total_apps_approved_or_sent %}
         {% if object.accounts_available < total_apps_approved_or_sent %}
           <div class="well hidden-xs">
-            {% comment %} Translators: This message is shown when applications exceed the number of accounts available. {% endcomment %}
+            {% comment %}Translators: This message is shown when applications exceed the number of accounts available. {% endcomment %}
             {% blocktrans trimmed %}Application(s) for {{ object }}, if sent, will exceed the total available accounts for the partner. Please proceed at your own discretion.{% endblocktrans %}
           </div>
         {% endif %}
@@ -74,13 +74,13 @@
         {{ object.send_instructions | twlight_wikicode2html | safe }}
       {% endcache %}
     {% else %}
-      {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.{% endcomment %}
+      {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.{% endcomment %}
       {% trans "When you've processed the data below, click the 'mark as sent' button." %}
     {% endif %}
   </p>
   {% if object.authorization_method == object.EMAIL %}
     <h3>
-      {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.{% endcomment %}
+      {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.{% endcomment %}
       {% blocktrans trimmed count object.contacts.all|length as counter %}
         Contact
       {% plural %}
@@ -96,12 +96,12 @@
         <hr />
       {% endif %}
     {% empty %}
-      {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+      {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
       {% trans "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators." %} 
     {% endfor %}
   {% endif %}
 
-  {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.{% endcomment %}
+  {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.{% endcomment %}
   <h3>{% trans "Application data" %}</h3>
   {% if app_outputs %}
     {% if object.authorization_method == object.EMAIL %}
@@ -116,6 +116,7 @@
                 </div>
                 <div class="media-body">
                   <i>
+                    {% comment %}Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes. {% endcomment %}
                     <label for="toggle_all">{% trans "Select/deselect all" %}</label>
                   </i>
                 </div>
@@ -142,12 +143,12 @@
             {% endfor %}
           </ul>
         </div>
-        {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
+        {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
         <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
       </form>
     {% elif object.authorization_method == object.CODES %}
       <p>
-      {% comment %} Translators: This text guides coordinators in using the code sending interface for approved applications. {% endcomment %}
+      {% comment %}Translators: This text guides coordinators in using the code sending interface for approved applications. {% endcomment %}
       {% blocktrans trimmed %}
         Use the dropdown menus to denote which editor will receive each code.
         Make sure to send each code via email before clicking 'Mark as sent'.
@@ -168,7 +169,7 @@
                 </ul>
               </label>
               <div class="pull-right">
-                {% comment %} Translators: This labels a drop-down selection where staff can assign an access code to a user. {% endcomment %}
+                {% comment %}Translators: This labels a drop-down selection where staff can assign an access code to a user. {% endcomment %}
                 <label for="accesscode-select">{% trans "Select code:" %}</label>
                 <select name="accesscode" class="form-control" id="accesscode-select">
                   <option value="default">-</option>
@@ -182,12 +183,12 @@
             <hr/>
           {% endfor %}
         </div>
-        {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
+        {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.{% endcomment %}
         <input type="submit" class="btn btn-primary" value="{% trans "Mark as sent" %}"></input>
       </form>
     {% endif %}
   {% else %}
-    {% comment %} Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.{% endcomment %}
+    {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.{% endcomment %}
     {% trans "There are no approved, unsent applications." %}
   {% endif %}
 
@@ -195,7 +196,7 @@
 
 {% block javascript %}
   <script
-    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/2.2.4/jquery.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
     crossorigin="anonymous"></script>
 

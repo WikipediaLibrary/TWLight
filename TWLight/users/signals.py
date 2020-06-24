@@ -1,6 +1,5 @@
 from datetime import timedelta
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.dispatch import receiver, Signal
 from django.db.models.signals import pre_save, post_save, post_delete
 from TWLight.users.helpers.authorizations import get_all_bundle_authorizations

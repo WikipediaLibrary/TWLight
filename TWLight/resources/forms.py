@@ -15,7 +15,9 @@ class SuggestionForm(forms.Form):
         super(SuggestionForm, self).__init__(*args, **kwargs)
         # Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
         self.fields["suggested_company_name"].label = _("Name of the potential partner")
+        # Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
         self.fields["description"].label = _("Description")
+        # Translators: This labels a textfield where users can enter the website URL of the potential partner they'll suggest
         self.fields["company_url"].label = _("Website")
         # @TODO: This sort of gets repeated in PartnerSuggestionView.
         # We could probably be factored out to a common place for DRYness.

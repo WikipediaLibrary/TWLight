@@ -14,6 +14,7 @@ from django.core.exceptions import (
 )
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
+from django.utils.translation import ugettext as _
 from django.views import View
 
 from TWLight.resources.models import Partner
@@ -30,7 +31,8 @@ class EZProxyAuth(ToURequired, View):
         groups = []
 
         if not username:
-            raise SuspiciousOperation("Missing Editor username.")
+            # Translators: When a user is being authenticated to access proxied resources, and the request's missing the editor's username, this error text is displayed.
+            raise SuspiciousOperation(_("Missing Editor username."))
 
         if request.user.editor.wp_bundle_authorized:
             groups.append("BUNDLE")
@@ -51,11 +53,13 @@ class EZProxyAuth(ToURequired, View):
                 validate = URLValidator(schemes=("http", "https"))
                 validate(url)
             except ValidationError:
-                raise SuspiciousOperation("Invalid EZProxy target URL.")
+                # Translators: Error text displayed to users when the target URL to access proxied publisher resources is invalid.
+                raise SuspiciousOperation(_("Invalid EZProxy target URL."))
         elif token:
             url = token
         else:
-            raise SuspiciousOperation("Missing EZProxy target URL.")
+            # Translators: Error text displayed to users when the target URL to access proxied publisher resources is missing.
+            raise SuspiciousOperation(_("Missing EZProxy target URL."))
 
         return HttpResponseRedirect(EZProxyTicket(username, groups).url(url))
 
@@ -71,6 +75,7 @@ class EZProxyTicket(object):
         # Clearly not allowed if there is no user.
         # Clearly not allowed if the user isn't in any proxy groups.
         if not (groups and user):
+            # Translators: Error text displayed to users when they are not allowed to access the publisher resource they are trying to access.
             raise PermissionDenied("You are not authorized to access this resource.")
 
         if not secret:

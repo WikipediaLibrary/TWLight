@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
 
@@ -109,14 +109,12 @@ FIELD_LABELS = {
     AGREEMENT_WITH_TERMS_OF_USE: _("You must agree with the partner's terms of use"),
     # Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
     ACCOUNT_EMAIL: _("The email for your account on the partner's website"),
+    # fmt: off
     # Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-    REQUESTED_ACCESS_DURATION: _(
-        "The number of months you wish to have this access for before renewal is required"
-    ),
+    REQUESTED_ACCESS_DURATION: _("The number of months you wish to have this access for before renewal is required"),
     # Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
-    HIDDEN: _(
-        "Check this box if you would prefer to hide your application from the 'latest activity' timeline."
-    ),
+    HIDDEN: _("Check this box if you would prefer to hide your application from the 'latest activity' timeline."),
+    # fmt: on
 }
 
 SEND_DATA_FIELD_LABELS = {
@@ -213,6 +211,29 @@ def is_proxy_and_application_approved(status, app):
         return True
     else:
         return False
+
+
+def more_applications_than_accounts_available(app):
+    total_accounts_available_for_distribution = get_accounts_available(app)
+    if total_accounts_available_for_distribution is not None and app.status in [
+        Application.PENDING,
+        Application.QUESTION,
+    ]:
+        total_pending_apps = Application.objects.filter(
+            partner=app.partner, status__in=[Application.PENDING, Application.QUESTION]
+        )
+        if app.specific_stream:
+            total_pending_apps = total_pending_apps.filter(
+                specific_stream=app.specific_stream
+            )
+        if (
+            app.partner.status != Partner.WAITLIST
+            and total_accounts_available_for_distribution > 0
+            and total_accounts_available_for_distribution - total_pending_apps.count()
+            < 0
+        ):
+            return True
+    return False
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #

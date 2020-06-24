@@ -78,10 +78,7 @@ class Application(models.Model):
     date_closed = models.DateField(
         blank=True,
         null=True,
-        # Translators: Shown in the administrator interface for editing applications directly. Site administrators should rarely, if ever, have to change this number.
-        help_text=_(
-            "Please do not override this field! Its value is set " "automatically."
-        ),
+        help_text="Please do not override this field! Its value is set automatically.",
     )
 
     # Will be set on save() if status changes from PENDING/QUESTION to
@@ -94,9 +91,7 @@ class Application(models.Model):
     days_open = models.IntegerField(
         blank=True,
         null=True,
-        help_text=_(
-            "Please do not override this field! Its value is set " "automatically."
-        ),
+        help_text="Please do not override this field! Its value is set automatically.",
     )
 
     sent_by = models.ForeignKey(
@@ -104,8 +99,7 @@ class Application(models.Model):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        # Translators: Shown in the administrator interface for editing applications directly. Labels the username of a user who flagged an application as 'sent to partner'.
-        help_text=_("The user who sent this application to the partner"),
+        help_text="The user who sent this application to the partner",
     )
 
     editor = models.ForeignKey(
@@ -127,9 +121,13 @@ class Application(models.Model):
     account_email = models.EmailField(blank=True, null=True)
 
     REQUESTED_ACCESS_DURATION_CHOICES = (
+        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
         (12, _("12 months")),
+        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
         (6, _("6 months")),
+        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
         (3, _("3 months")),
+        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
         (1, _("1 month")),
     )
 
@@ -137,11 +135,8 @@ class Application(models.Model):
         choices=REQUESTED_ACCESS_DURATION_CHOICES,
         blank=True,
         null=True,
-        # Translators: Shown in the administrator interface for editing applications directly. Labels the field that holds the account length for proxy partners.
-        help_text=_(
-            "User selection of when they'd like their account to expire (in months). "
-            "Required for proxied resources; optional otherwise."
-        ),
+        help_text="User selection of when they'd like their account to expire (in months). "
+        "Required for proxied resources; optional otherwise.",
     )
 
     # Was this application imported via CLI?
@@ -152,6 +147,10 @@ class Application(models.Model):
     parent = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True)
 
     hidden = models.BooleanField(default=False)
+
+    waitlist_status = models.BooleanField(
+        default=False, help_text="Mark as True if the partner is WAITLISTED"
+    )
 
     def __str__(self):
         return "{self.editor} - {self.partner}".format(self=self)
@@ -322,18 +321,16 @@ class Application(models.Model):
                 resource.authorization_method == Partner.PROXY
                 and resource.get_access_url
             ):
+                # fmt: off
                 # Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
-                user_instructions = _(
-                    "Access URL: {access_url}".format(
-                        access_url=resource.get_access_url
-                    )
-                )
+                user_instructions = _("Access URL: {access_url}")\
+                    .format(access_url=resource.get_access_url)
+                # fmt: on
             else:
+                # fmt: off
                 # Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-                user_instructions = _(
-                    "You can expect to receive access details "
-                    "within a week or two once it has been processed."
-                )
+                user_instructions = _("You can expect to receive access details within a week or two once it has been processed.")
+                # fmt: on
         return user_instructions
 
     def get_authorization(self):

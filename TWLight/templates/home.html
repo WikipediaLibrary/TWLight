@@ -8,10 +8,11 @@
 {% block content %}
   <div class="lead">
     <p>
-      {% comment %} Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+      {% comment %}Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
       {% blocktrans trimmed %}
         The Wikipedia Library provides free access to research databases and collections.
   		{% endblocktrans %}
+      {% comment %}Translators: A link users can click to read more about the project or the tool. {% endcomment %}
       <a href="{% url 'about' %}">{% trans "Learn more" %}</a>
 		</p>
   </div>
@@ -20,13 +21,13 @@
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 login">
       {% if user.is_authenticated %}
         <a href="{% url 'users:my_library' %}" class="btn btn-primary btn-block">
-          {% comment %} Translators: On the homepage, this message labels a button users can click to go to the 'My Library' page, which lists their available collections. {% endcomment %}
+          {% comment %}Translators: On the homepage, this message labels a button users can click to go to the 'My Library' page, which lists their available collections. {% endcomment %}
           {% trans "My Library" %}
         </a>
       {% else %}
         <a href="{% url 'oauth_login' %}" class="btn btn-primary btn-block">
           <span class="glyphicon glyphicon-off"></span>&nbsp;
-          {% comment %} Translators: This message is shown on the button users click to log in to the website. {% endcomment %}
+          {% comment %}Translators: This message is shown on the button users click to log in to the website. {% endcomment %}
           {% trans "Log in" %}
         </a>
       {% endif %}
@@ -36,16 +37,16 @@
   <div class="row">
 	  <div class="col-md-5 col-md-offset-1">
       <div class="border border-homepage">
-        {% comment %} Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
+        {% comment %}Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
         <h2 style="padding-bottom:20px;">{% trans "Library Bundle" %}
           <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive bundle-icon" alt="
-          {% comment %} Translators: Alt text for the Library Bundle logo. {% endcomment %}
+          {% comment %}Translators: Alt text for the Library Bundle logo. {% endcomment %}
           {% trans "A stack of books tied together with a ribbon, the Library Bundle icon" %}
           ">
         </h2>
-        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/)...{% endcomment %}
+        {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this message is displayed to all users as the description of Library Bundle eligibility panel. 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
 		    {% blocktrans trimmed %}
-				  <p>Free and immediate access to a large collection of resources from {{ bundle_partner_count }} publishers if you meet the following criteria:</p>
+				  <p>Free and immediate access to a large selection of resources, spanning {{ bundle_partner_count }} collections, if you meet the following criteria:</p>
 		    {% endblocktrans %}
 				<ul class="bundle-list">
           {% for criteria_text, meets_criteria in bundle_criteria %}
@@ -70,7 +71,7 @@
         {% if user.is_authenticated and not user.editor.wp_not_blocked %}
           <p class="block-notice">
             {% url 'contact' as contact_url %}
-            {% comment %} Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
+            {% comment %}Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
             {% blocktrans %}
               It looks like you have an active block on your account on at least one Wikimedia project. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
             {% endblocktrans %}
@@ -79,13 +80,13 @@
         {% if user.is_authenticated and user.editor.wp_bundle_eligible %}
           <div class="alert alert-success">
             {% url 'users:my_library' as library_url %}
-            {% comment %} Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle. {% endcomment %}
+            {% comment %}Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle. {% endcomment %}
             {% blocktrans %}
               You meet the eligibility criteria! Check out <a href="{{ library_url }}">My Library</a> to see what you have access to.
             {% endblocktrans %}
           </div>
         {% else %}
-				  {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
+				  {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
           <a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a>
         {% endif %}
       </div>
@@ -93,9 +94,9 @@
 
 	  <div class="col-md-5">
 			<div class="border border-homepage">
-        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this is the heading of the box on the right, which contains information about collections to which users need to make an application.{% endcomment %}
+        {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this is the heading of the box on the right, which contains information about collections to which users need to make an application.{% endcomment %}
         <h2>{% trans "Apply" %}</h2>
-        {% comment %} Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.{% endcomment %}
+        {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.{% endcomment %}
 				<p style="padding-bottom: 20px;">{% trans "Some collections have a limited number of concurrent users and require an application." %}</p>
         {% for partner in featured_partners %}
           <div class="row">
@@ -112,7 +113,7 @@
           </div>
           <hr/>
         {% endfor %}
-        {% comment %} Translators: This is text on a button on the homepage, which allows users to see more available collections to which they can apply. {% endcomment %}
+        {% comment %}Translators: This is text on a button on the homepage, which allows users to see more available collections to which they can apply. {% endcomment %}
         <a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more"> {% trans "See more" %}</a>
       </div>
 	  </div>

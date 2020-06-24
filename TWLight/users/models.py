@@ -37,7 +37,6 @@ import urllib.request, urllib.parse, urllib.error
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
@@ -78,7 +77,6 @@ class UserProfile(models.Model):
 
     class Meta:
         app_label = "users"
-        # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
         verbose_name = "user profile"
         verbose_name_plural = "user profiles"
 
@@ -86,54 +84,40 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Have they agreed to our terms?
     terms_of_use = models.BooleanField(
-        default=False,
-        # Translators: Users must agree to the website terms of use.
-        help_text=_("Has this user agreed with the terms of use?"),
+        default=False, help_text="Has this user agreed with the terms of use?"
     )
     terms_of_use_date = models.DateField(
         blank=True,
         null=True,
-        # Translators: This field records the date the user agreed to the website terms of use.
-        help_text=_("The date this user agreed to the terms of use."),
+        help_text="The date this user agreed to the terms of use.",
     )
-    # Translators: An option to set whether users email is copied to their website account from Wikipedia when logging in.
     use_wp_email = models.BooleanField(
         default=True,
-        help_text=_(
-            "Should we "
-            "automatically update their email from their Wikipedia email when they "
-            "log in? Defaults to True."
-        ),
+        help_text="Should we "
+        "automatically update their email from their Wikipedia email when they "
+        "log in? Defaults to True.",
     )
     lang = models.CharField(
         max_length=128,
         null=True,
         blank=True,
         choices=settings.LANGUAGES,
-        # Translators: Users' detected or selected language.
-        help_text=_("Language"),
+        help_text="Language",
     )
     send_renewal_notices = models.BooleanField(
-        default=True,
-        # Translators: Description of the option users have to enable or disable reminder emails for renewals
-        help_text=_("Does this user want renewal reminder notices?"),
+        default=True, help_text="Does this user want renewal reminder notices?"
     )
     pending_app_reminders = models.BooleanField(
         default=True,
-        # Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for pending applications
-        help_text=_("Does this coordinator want pending app reminder notices?"),
+        help_text="Does this coordinator want pending app reminder notices?",
     )
     discussion_app_reminders = models.BooleanField(
         default=True,
-        # Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for under discussion applications
-        help_text=_(
-            "Does this coordinator want under discussion app reminder notices?"
-        ),
+        help_text="Does this coordinator want under discussion app reminder notices?",
     )
     approved_app_reminders = models.BooleanField(
         default=True,
-        # Translators: Description of the option coordinators have to enable or disable to receive (or not) reminder emails for approved applications
-        help_text=_("Does this coordinator want approved app reminder notices?"),
+        help_text="Does this coordinator want approved app reminder notices?",
     )
     # Temporary field to track sending of proxy launch email to prevent duplication in case of error.
     proxy_notification_sent = models.BooleanField(default=False)
@@ -149,7 +133,6 @@ class Editor(models.Model):
 
     class Meta:
         app_label = "users"
-        # Translators: Gender unknown. This will probably only be displayed on admin-only pages.
         verbose_name = "wikipedia editor"
         verbose_name_plural = "wikipedia editors"
 
@@ -158,100 +141,74 @@ class Editor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     # Set as non-editable.
     date_created = models.DateField(
-        default=now,
-        editable=False,
-        # Translators: The date the user's profile was created on the website (not on Wikipedia).
-        help_text=_("When this profile was first created"),
+        default=now, editable=False, help_text="When this profile was first created"
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
     # Data are current *as of the time of last TWLight login* but may get out of
     # sync thereafter.
-    wp_username = models.CharField(max_length=235, help_text=_("Username"))
-    # Translators: The total number of edits this user has made to all Wikipedia projects
+    wp_username = models.CharField(max_length=235, help_text="Username")
     wp_editcount = models.IntegerField(
-        help_text=_("Wikipedia edit count"), blank=True, null=True
+        help_text="Wikipedia edit count", blank=True, null=True
     )
     wp_editcount_updated = models.DateTimeField(
         default=None,
         null=True,
         blank=True,
         editable=False,
-        # Translators: Date and time that wp_editcount was updated from Wikipedia.
-        help_text=_("When the editcount was updated from Wikipedia"),
+        help_text="When the editcount was updated from Wikipedia",
     )
-    # Translators: The date this user registered their Wikipedia account
     wp_registered = models.DateField(
-        help_text=_("Date registered at Wikipedia"), blank=True, null=True
+        help_text="Date registered at Wikipedia", blank=True, null=True
     )
     wp_sub = models.IntegerField(
-        unique=True,
-        # Translators: The User ID for this user on Wikipedia
-        help_text=_("Wikipedia user ID"),
+        unique=True, help_text="Wikipedia user ID"
     )  # WP user id.
 
     # Should we want to filter these to check for specific group membership or
     # user rights in future:
     # Editor.objects.filter(wp_groups__icontains=groupname) or similar.
-    # Translators: Lists the user groups (https://en.wikipedia.org/wiki/Wikipedia:User_access_levels) this editor has. e.g. Confirmed, Administrator, CheckUser
-    wp_groups = models.TextField(help_text=_("Wikipedia groups"), blank=True)
-    # Translators: Lists the individual user rights permissions the editor has on Wikipedia. e.g. sendemail, createpage, move
-    wp_rights = models.TextField(help_text=_("Wikipedia user rights"), blank=True)
+    wp_groups = models.TextField(help_text="Wikipedia groups", blank=True)
+    wp_rights = models.TextField(help_text="Wikipedia user rights", blank=True)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Non-editable data computed from Wikimedia OAuth / API Query ~~~~~~~~~~~~~~~~~~~~~~~#
     wp_valid = models.BooleanField(
         default=False,
         editable=False,
-        # Translators: Help text asking whether the user met all requirements for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-        help_text=_(
-            "At their last login, did this user meet the criteria in "
-            "the terms of use?"
-        ),
+        help_text="At their last login, did this user meet the criteria in "
+        "the terms of use?",
     )
     wp_account_old_enough = models.BooleanField(
         default=False,
         editable=False,
-        # Translators: Help text asking whether the user met the account age requirement for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-        help_text=_(
-            "At their last login, did this user meet the account age criterion in "
-            "the terms of use?"
-        ),
+        help_text="At their last login, did this user meet the account age criterion in "
+        "the terms of use?",
     )
     wp_enough_edits = models.BooleanField(
         default=False,
         editable=False,
-        # Translators: Help text asking whether the user met the total editcount requirement for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-        help_text=_(
-            "At their last login, did this user meet the total editcount criterion in "
-            "the terms of use?"
-        ),
+        help_text="At their last login, did this user meet the total editcount criterion in "
+        "the terms of use?",
     )
     wp_not_blocked = models.BooleanField(
         default=False,
         editable=False,
-        # Translators: Help text asking whether the user met the 'not currently blocked' requirement for access (see https://wikipedialibrary.wmflabs.org/about/) the last time they logged in (when their information was last updated).
-        help_text=_(
-            "At their last login, did this user meet the 'not currently blocked' criterion in "
-            "the terms of use?"
-        ),
+        help_text="At their last login, did this user meet the 'not currently blocked' criterion in "
+        "the terms of use?",
     )
     wp_enough_recent_edits = models.BooleanField(
         default=False,
         editable=False,
-        # Translators: Help text asking whether the user met the recent editcount requirement for access to the library card bundle the last time they logged in (when their information was last updated).
-        help_text=_(
-            "At their last login, did this user meet the recent editcount criterion in "
-            "the terms of use?"
-        ),
+        help_text="At their last login, did this user meet the recent editcount criterion in "
+        "the terms of use?",
     )
     wp_editcount_prev_updated = models.DateTimeField(
         default=None,
         null=True,
         blank=True,
         editable=False,
-        # Translators: The date and time that wp_editcount_prev was updated from Wikipedia.
-        help_text=_("When the previous editcount was last updated from Wikipedia"),
+        help_text="When the previous editcount was last updated from Wikipedia",
     )
     # wp_editcount_prev is initially set to 0 so that all edits get counted as recent edits for new users.
     wp_editcount_prev = models.IntegerField(
@@ -259,8 +216,7 @@ class Editor(models.Model):
         null=True,
         blank=True,
         editable=False,
-        # Translators: The number of edits this user made to all Wikipedia projects at a previous date.
-        help_text=_("Previous Wikipedia edit count"),
+        help_text="Previous Wikipedia edit count",
     )
 
     # wp_editcount_recent is computed by selectively subtracting wp_editcount_prev from wp_editcount.
@@ -269,30 +225,23 @@ class Editor(models.Model):
         null=True,
         blank=True,
         editable=False,
-        # Translators: The number of edits this user recently made to all Wikipedia projects.
-        help_text=_("Recent Wikipedia edit count"),
+        help_text="Recent Wikipedia edit count",
     )
     wp_bundle_eligible = models.BooleanField(
         default=False,
         editable=False,
-        # Translators: Help text asking whether the user met all requirements for access to the library card bundle the last time they logged in (when their information was last updated).
-        help_text=_(
-            "At their last login, did this user meet the criteria for access to the library card bundle?"
-        ),
+        help_text="At their last login, did this user meet the criteria for access to the library card bundle?",
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Staff-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ignore_wp_blocks = models.BooleanField(
         default=False,
-        # Translators: Help text asking whether to ignore the 'not currently blocked' requirement for access.
-        help_text=_("Ignore the 'not currently blocked' criterion for access?"),
+        help_text="Ignore the 'not currently blocked' criterion for access?",
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     contributions = models.TextField(
-        # Translators: Describes information added by the user to describe their Wikipedia edits.
-        help_text=_("Wiki contributions, as entered by user"),
-        blank=True,
+        help_text="Wiki contributions, as entered by user", blank=True
     )
 
     # Fields we may, or may not, have collected in the course of applications
@@ -527,10 +476,8 @@ class Editor(models.Model):
             self.user.userprofile.save()
 
     def __str__(self):
-        return _("{wp_username}").format(
-            # Translators: Do not translate.
-            wp_username=self.wp_username
-        )
+        # Translators: Do not translate.
+        return _("{wp_username}").format(wp_username=self.wp_username)
 
     def get_absolute_url(self):
         return reverse("users:editor_detail", kwargs={"pk": self.pk})
@@ -558,8 +505,7 @@ class Authorization(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         related_name="authorizations",
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the username of the authorized editor.
-        help_text=_("The authorized user."),
+        help_text="The authorized user.",
     )
 
     # Authorizers may authorize many users.
@@ -568,17 +514,13 @@ class Authorization(models.Model):
         blank=False,
         null=True,
         on_delete=models.SET_NULL,
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the user who authorized the editor.
-        help_text=_("The authorizing user."),
+        help_text="The authorizing user.",
     )
 
     date_authorized = models.DateField(auto_now_add=True)
 
     date_expires = models.DateField(
-        blank=True,
-        null=True,
-        # Translators: This field records the date the authorization expires.
-        help_text=_("The date this authorization expires."),
+        blank=True, null=True, help_text="The date this authorization expires."
     )
 
     partners = models.ManyToManyField(
@@ -586,8 +528,7 @@ class Authorization(models.Model):
         blank=True,
         # Limit to available partners.
         limit_choices_to=(models.Q(status__in=[Partner.AVAILABLE, Partner.WAITLIST])),
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner(s) for which the editor is authorized.
-        help_text=_("The partner(s) for which the editor is authorized."),
+        help_text="The partner(s) for which the editor is authorized.",
     )
 
     stream = models.ForeignKey(
@@ -599,14 +540,12 @@ class Authorization(models.Model):
         limit_choices_to=(
             models.Q(partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST])
         ),
-        # Translators: In the administrator interface, this text is help text for a field where staff can specify the partner for which the editor is authoried.
-        help_text=_("The stream for which the editor is authorized."),
+        help_text="The stream for which the editor is authorized.",
     )
 
     reminder_email_sent = models.BooleanField(
         default=False,
-        # Translators: In the administrator interface, this text is help text for a field which tracks whether a reminder has been sent about this authorization yet.
-        help_text=_("Have we sent a reminder email about this authorization?"),
+        help_text="Have we sent a reminder email about this authorization?",
     )
 
     @property

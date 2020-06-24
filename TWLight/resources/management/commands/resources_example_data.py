@@ -6,7 +6,7 @@ import string
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from TWLight.resources.factories import (
     PartnerFactory,
@@ -14,7 +14,7 @@ from TWLight.resources.factories import (
     VideoFactory,
     SuggestionFactory,
 )
-from TWLight.resources.models import Language, Partner, Stream, Suggestion, AccessCode
+from TWLight.resources.models import Language, Partner, Stream, AccessCode
 
 
 class Command(BaseCommand):

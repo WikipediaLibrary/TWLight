@@ -49,6 +49,7 @@ from .helpers import (
     ACCOUNT_EMAIL,
     get_output_for_application,
     count_valid_authorizations,
+    more_applications_than_accounts_available,
 )
 from .factories import ApplicationFactory
 from .forms import BaseApplicationForm
@@ -1378,6 +1379,80 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # User already has an authorization for stream1 i.e. the
         # option should not be on the apply page
         self.assertNotContains(response, option1)
+
+    def test_application_waitlist_status_for_single_partner(self):
+        """
+        Any Application created for a WAITLISTED Partners should have 
+        waitlist_status as True
+        """
+
+        # Create a partner wihich is WAITLISTED
+        p1 = PartnerFactory(status=Partner.WAITLIST)
+
+        # Make sure get() queries later on should not raise MultipleObjectsReturned.
+        self.assertEqual(Application.objects.filter(partner=p1).count(), 0)
+
+        # Set up request
+        factory = RequestFactory()
+        data = {
+            "partner_{id}_rationale".format(id=p1.id): "Whimsy",
+            "partner_{id}_comments".format(id=p1.id): "None whatsoever",
+        }
+
+        request = factory.post(self.url, data)
+        request.user = self.editor
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
+
+        _ = views.SubmitSingleApplicationView.as_view()(request, pk=p1.pk)
+
+        # Get Application
+        app1 = Application.objects.get(partner=p1, editor=self.editor.editor)
+
+        # Application's waitlist status should be True
+        self.assertEqual(app1.waitlist_status, True)
+
+    def test_application_waitlist_status_for_different_partners(self):
+        """
+        (1) Applications created for AVAILABLE Partners should have 
+        waitlist_status as False
+        (2) Applications created for WAITLISTED Partners should have 
+        waitlist_status as True
+        """
+
+        # Create 2 partners one AVAILABLE and other is WAITLISTED
+        p1 = PartnerFactory(status=Partner.AVAILABLE)
+        p2 = PartnerFactory(status=Partner.WAITLIST)
+
+        # Make sure get() queries later on should not raise MultipleObjectsReturned.
+        self.assertEqual(Application.objects.filter(partner=p1).count(), 0)
+        self.assertEqual(Application.objects.filter(partner=p2).count(), 0)
+
+        # Set up request
+        factory = RequestFactory()
+        data = {
+            "partner_{id}_rationale".format(id=p1.id): "Whimsy",
+            "partner_{id}_comments".format(id=p1.id): "None whatsoever",
+            "partner_{id}_rationale".format(id=p2.id): "Saving the world",
+            "partner_{id}_comments".format(id=p2.id): "Nothing else",
+        }
+
+        request = factory.post(self.url, data)
+        request.user = self.editor
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [p1.id, p2.id]
+
+        _ = views.SubmitApplicationView.as_view()(request)
+
+        # Get the applications
+        app1 = Application.objects.get(partner=p1, editor=self.editor.editor)
+        app2 = Application.objects.get(partner=p2, editor=self.editor.editor)
+
+        # For first application waitlist_status should remain False
+        self.assertEqual(app1.waitlist_status, False)
+
+        # For second application waitlist_status should be True
+        self.assertEqual(app2.waitlist_status, True)
 
 
 class ListApplicationsTest(BaseApplicationViewTest):
@@ -3362,7 +3437,7 @@ class EvaluateApplicationTest(TestCase):
     def test_modify_app_status_from_invalid_to_anything(self):
         """
         when a coordinator tries to modify application status from
-        INVALID to anything it should return the coordinator back to 
+        INVALID to anything it should return the coordinator back to
         the application with an error message.
         """
         factory = RequestFactory()
@@ -3408,6 +3483,23 @@ class EvaluateApplicationTest(TestCase):
         response = self.client.get(url)
         # Not even for coordinators
         self.assertNotContains(response, 'name="status"')
+
+    def test_more_applications_than_accounts_available_for_proxy(self):
+        partner = PartnerFactory(authorization_method=Partner.PROXY)
+        partner.accounts_available = 2
+        partner.save()
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        # Should be false since we have two accounts available,
+        # but only one application pending.
+        self.assertFalse(more_applications_than_accounts_available(app))
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        # Should be false since we have two accounts available,
+        # and two applications pending.
+        self.assertFalse(more_applications_than_accounts_available(app))
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+        # Should be true since we have two accounts available,
+        # but three applications pending.
+        self.assertTrue(more_applications_than_accounts_available(app))
 
     class ListApplicationsTest(BaseApplicationViewTest):
         @classmethod

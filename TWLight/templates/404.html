@@ -4,15 +4,15 @@
 
 {% block content %}
 {% get_current_language as LANGUAGE_CODE %}
-  {% comment %} Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. {% endcomment %}
+  {% comment %}Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.{% endcomment %}
   <h1>{% trans "Not found" %}</h1>
 
   <p>
-    {% comment %} Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. {% endcomment %}
+    {% comment %}Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.{% endcomment %}
     {% trans "Sorry; we can't find that." %}
   </p>
   <p>
-    {% comment %} Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate {{ path }} or Phabricator. {% endcomment %}
+    {% comment %}Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate {{ path }} or Phabricator.{% endcomment %}
     {% blocktrans trimmed with request.path|urlencode as path %}
       If you are certain that something should be here, please email us about this error at
       <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20{{ path }}%20Not%20found">
@@ -25,7 +25,7 @@
   <div class="clearfix">
     <div class="pull-left">
       <img class="img-responsive img-thumbnail" src={% static "img/say_what.jpg" %} alt="
-      {% comment %} Translators: Alt text for an image shown on the 404 error page. {% endcomment %}
+      {% comment %}Translators: Alt text for an image shown on the 404 error page.{% endcomment %}
       {% trans "A crab on a beach looking towards the camera" %}
       ">
 

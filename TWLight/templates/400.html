@@ -4,16 +4,16 @@
 
 {% block content %}
 {% get_current_language as LANGUAGE_CODE %}
-  {% comment %} Translators: Shown on the website's 400 page, when a user sends a bad request.{% endcomment %}
+  {% comment %}Translators: Shown on the website's 400 page, when a user sends a bad request.{% endcomment %}
   <h1>{% trans "Bad Request" %}</h1>
 
   <p>
-    {% comment %} Translators: Shown on the website's 400 page, when a user sends a bad request. {% endcomment %}
+    {% comment %}Translators: Shown on the website's 400 page, when a user sends a bad request. {% endcomment %}
     {% trans "Sorry; we don't know what to do with that." %}
   </p>
 
   <p>
-    {% comment %} Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate {{ path }} or Phabricator. {% endcomment %}
+    {% comment %}Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate {{ path }} or Phabricator. {% endcomment %}
     {% blocktrans trimmed with request.path|urlencode as path %}
       If you think we should know what to do with that, please email us about this error at
       <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20{{ path }}%20Permission%20denied">wikipedialibrary@wikimedia.org</a>
@@ -26,7 +26,7 @@
   <div class="clearfix">
     <div class="pull-left">
       <img class="img-responsive img-thumbnail" src={% static "img/sad_critter.jpg" %} alt="
-      {% comment %} Translators: Alt text for an image shown on the 400 error page. {% endcomment %}
+      {% comment %}Translators: Alt text for an image shown on the 400 error page. {% endcomment %}
       {% trans "Sad hamster in a cage" %}
       ">
 

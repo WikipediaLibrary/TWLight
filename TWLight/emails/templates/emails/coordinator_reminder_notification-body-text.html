@@ -1,23 +1,23 @@
 {% load i18n %}
-{% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ total_apps }}, or {{ user }}. {% endcomment %}
+{% comment %}Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ total_apps }}, or {{ user }}.{% endcomment %}
 {% blocktrans trimmed %}
 Dear {{ user }},
 
 Our records indicate that you are the designated coordinator for partners that 
 have a total of {{ total_apps }} applications.
 {% endblocktrans %}
-{% comment %} Translators: Breakdown as in 'cost breakdown'; analysis. {% endcomment %}
+{% comment %}Translators: Breakdown as in 'cost breakdown'; analysis.{% endcomment %}
 {% trans "Breakdown" %}:
-{% comment %} We make use of the text below to test the behaviour of reminder emails. If you plan to change any of the 'breakdown' text, you'd also need to change the corresponding tests in emails.tests.CoordinatorReminderEmailTest. {% endcomment %}
+{% comment %}We make use of the text below to test the behaviour of reminder emails. If you plan to change any of the 'breakdown' text, you'd also need to change the corresponding tests in emails.tests.CoordinatorReminderEmailTest.{% endcomment %}
 {% if pending_count %}
-  {% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}. {% endcomment %}
+  {% comment %}Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}.{% endcomment %}
   {% blocktrans count counter=pending_count trimmed%}
     One pending application.
   {% plural %}
     {{ counter }} pending applications.
   {% endblocktrans %}
 {% endif %}
-{% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}. {% endcomment %}
+{% comment %}Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}.{% endcomment %}
 {% if question_count %}
   {% blocktrans count counter=question_count trimmed%}
     One under discussion application.
@@ -26,7 +26,7 @@ have a total of {{ total_apps }} applications.
   {% endblocktrans %}
 {% endif %}
 {% if approved_count %}
-  {% comment %} Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}. {% endcomment %}
+  {% comment %}Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}.{% endcomment %}
   {% blocktrans count counter=approved_count trimmed %}
     One approved application.
   {% plural %}

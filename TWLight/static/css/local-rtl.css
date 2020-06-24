@@ -275,6 +275,10 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   justify-content: flex-end;
 }
 
+.meta-link {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
 /* Quick hack for tos misalignment on applications. */
 .apply-tos {
   margin-left: 100%;
