@@ -433,9 +433,9 @@ class PartnerModelTests(TestCase):
             partner2, partner=True
         )
         self.assertIsNotNone(msg)
-	# We only want the duplicate partner names to be shown,
-	# not self.
-	self.assertNotIn(partner2.company_name, msg)
+        # We only want the duplicate partner names to be shown,
+        # not self.
+        self.assertNotIn(partner2.company_name, msg)
         self.assertIn(partner1.company_name, msg)
         self.assertIn(stream1.name, msg)
 
