@@ -59,7 +59,7 @@ if (exists($allowed{$extension})) {
         when ($extension eq 'html') {
             # Check for blocktrans without the 'trimmed' option, which allows arbitrary newline changes.
             # These easily create message mismatches with translatewiki.
-            my @blocktrans_trimmed_errors = ($input =~ /([^\n]*{% blocktrans(?! trimmed) %}[^\n]*)\n/sg);
+            my @blocktrans_trimmed_errors = ($input =~ /([^\n]*\{% blocktrans(?! trimmed) %\}[^\n]*)\n/sg);
             foreach my $match (@blocktrans_trimmed_errors) {
                 my $message = "blocktrans used without trimmed option";
                 print_error($message, $filename, $input, $match) if $match;
@@ -68,12 +68,12 @@ if (exists($allowed{$extension})) {
             # Check for messages not preceded by a translator comment with a max length of 213 characters.
             # Note the variable-width negative lookbehind, which has experimental support.
             # We're keeping the pattern within the limitations of the engine.
-            my @trans_comment_errors = ($input =~ /(?<!{% comment %}Translators:[^\n]{1,213}{% endcomment %}\n)([ \t]*{% trans "[^\n]*" %}[^\n]*\n)/sg);
+            my @trans_comment_errors = ($input =~ /(?<!\{% comment %\}Translators:[^\n]{1,213}\{% endcomment %\}\n)([ \t]*\{% trans "[^\n]*" %\}[^\n]*\n)/sg);
             foreach my $match (@trans_comment_errors) {
                 my $message = 'Missing or overlong (> 213 chars) translator comment';
                 print_error($message, $filename, $input, $match) if $match;
             }
-            my @blocktrans_comment_errors = ($input =~ /(?<!{% comment %}Translators:[^\n]{1,213}{% endcomment %}\n)([ \t]*{% blocktrans[^\n]* %}[^\n]*\n)/sg);
+            my @blocktrans_comment_errors = ($input =~ /(?<!\{% comment %\}Translators:[^\n]{1,213}\{% endcomment %\}\n)([ \t]*\{% blocktrans[^\n]* %\}[^\n]*\n)/sg);
             foreach my $match (@blocktrans_comment_errors) {
                 my $message = 'Missing or overlong (> 213 chars) translator comment';
                 print_error($message, $filename, $input, $match) if $match;
