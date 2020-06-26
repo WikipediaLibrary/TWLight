@@ -42,7 +42,7 @@ if (exists($allowed{$extension})) {
             my @newline_errors = ($input =~ /(?<!_)_\(\n(([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)/sg);
             foreach my $match (@newline_errors) {
                 my $message = "ugettext messages should't be preceded by a newline";
-                print_error($message, $filename, $input, $match);
+                print_error($message, $filename, $input, $match) if $match;
             }
 
             # Check for messages not preceded by a translator comment with a max length of 240 characters.
@@ -51,7 +51,7 @@ if (exists($allowed{$extension})) {
             my @comment_errors = ($input =~ /(?<!# Translators:[^\n]{1,240}\n)([^\n]*(?<!_)_\((([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)[^\n]\n)/sg);
             foreach my $match (@comment_errors) {
                 my $message = 'Missing or overlong (> 240 chars) translator comment';
-                print_error($message, $filename, $input, $match);
+                print_error($message, $filename, $input, $match) if $match;
             }
         }
 
@@ -62,7 +62,21 @@ if (exists($allowed{$extension})) {
             my @blocktrans_trimmed_errors = ($input =~ /([^\n]*{% blocktrans(?! trimmed) %}[^\n]*)\n/sg);
             foreach my $match (@blocktrans_trimmed_errors) {
                 my $message = "blocktrans used without trimmed option";
-                print_error($message, $filename, $input, $match);
+                print_error($message, $filename, $input, $match) if $match;
+            }
+
+            # Check for messages not preceded by a translator comment with a max length of 213 characters.
+            # Note the variable-width negative lookbehind, which has experimental support.
+            # We're keeping the pattern within the limitations of the engine.
+            my @trans_comment_errors = ($input =~ /(?<!{% comment %}Translators:[^\n]{1,213}{% endcomment %}\n)([ \t]*{% trans "[^\n]*" %}[^\n]*\n)/sg);
+            foreach my $match (@trans_comment_errors) {
+                my $message = 'Missing or overlong (> 213 chars) translator comment';
+                print_error($message, $filename, $input, $match) if $match;
+            }
+            my @blocktrans_comment_errors = ($input =~ /(?<!{% comment %}Translators:[^\n]{1,213}{% endcomment %}\n)([ \t]*{% blocktrans[^\n]* %}[^\n]*\n)/sg);
+            foreach my $match (@blocktrans_comment_errors) {
+                my $message = 'Missing or overlong (> 213 chars) translator comment';
+                print_error($message, $filename, $input, $match) if $match;
             }
         }
     }
@@ -77,16 +91,13 @@ sub print_error {
     # Drop newlines that complicate comparison.
     chomp(my $match = $_[3]);
 
-    # Drop zero-length matches.
-    if (length($match) > 0) {
-        # Loop through the input lines
-        for my $i (0 .. $#input) {
-            # Print the error with line number when we get to the match.
-            if ("$input[$i]" eq "$match") {
-                my $number = $i + 1;
-                $code = 1;
-                print colored("ERROR: $message\n$filename:$number\n$match\n", 'red');
-            }
+    # Loop through the input lines
+    for my $i (0 .. $#input) {
+        # Print the error with line number when we get to the match.
+        if ("$input[$i]" eq "$match") {
+            my $number = $i + 1;
+            $code = 1;
+            print colored("ERROR: $message\n$filename:$number\n$match\n", 'red');
         }
     }
 }
