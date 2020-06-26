@@ -29,12 +29,15 @@ my $extension = $1;
 
 # Only proceed if the file extension is allowed.
 if (exists($allowed{$extension})) {
+
     # Capture file content as string.
     my $input = do { local $/; <> };
 
     given($extension) {
+
         # Python files.
         when($extension eq 'py') {
+
             # Check for newlines that can cause message mismatches with translatewiki.
             my @newline_errors = ($input =~ /(?<!_)_\(\n(([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)/sg);
             foreach my $match (@newline_errors) {
@@ -56,11 +59,13 @@ if (exists($allowed{$extension})) {
 
 # Prints errors. Surpise!
 sub print_error {
+
     my $message = $_[0];
     my $filename = $_[1];
     my @input = split /\n/, $_[2];
     # Drop newlines that complicate comparison.
     chomp(my $match = $_[3]);
+
     # Drop zero-length matches.
     if (length($match) > 0) {
         # Loop through the input lines
