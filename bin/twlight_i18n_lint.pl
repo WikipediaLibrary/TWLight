@@ -5,31 +5,53 @@
 
 use strict;
 use warnings;
+use feature "switch";
 use Term::ANSIColor;
 
 # Experimental features add warning output, which we don't want in our CI logs.
 no warnings 'experimental';
+
 # Exit code.
 my $code = 0;
 
+# File extensions we allow for searching.
+my %allowed = (
+    'html' => 1,
+    'py' => 1
+);
+
 # We take a file path as the first argument.
 my $filename = $ARGV[0];
-my $input = do { local $/; <> };
 
-# Check for newlines that can cause message mismatches with translatewiki.
-my @newline_errors = ($input =~ /(?<!_)_\(\n(([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)/sg);
-foreach my $match (@newline_errors) {
-    my $message = "ugettext messages should't be preceded by a newline";
-    print_error($message, $filename, $input, $match);
-}
+# Extract the extension from the input filename.
+$filename =~ /\.([^.]+)$/;
+my $extension = $1;
 
-# Check for messages not preceded by a translator comment with a max length of 240 characters.
-# Note the variable-width negative lookbehind, which has experimental support.
-# We're keeping the pattern within the limitations of the engine.
-my @comment_errors = ($input =~ /(?<!# Translators:[^\n]{1,240}\n)([^\n]*(?<!_)_\((([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)[^\n]\n)/sg);
-foreach my $match (@comment_errors) {
-    my $message = 'Missing or overlong (> 240 chars) translator comment';
-    print_error($message, $filename, $input, $match);
+# Only proceed if the file extension is allowed.
+if (exists($allowed{$extension})) {
+    # Capture file content as string.
+    my $input = do { local $/; <> };
+
+    given($extension) {
+        # Python files.
+        when($extension eq 'py') {
+            # Check for newlines that can cause message mismatches with translatewiki.
+            my @newline_errors = ($input =~ /(?<!_)_\(\n(([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)/sg);
+            foreach my $match (@newline_errors) {
+                my $message = "ugettext messages should't be preceded by a newline";
+                print_error($message, $filename, $input, $match);
+            }
+
+            # Check for messages not preceded by a translator comment with a max length of 240 characters.
+            # Note the variable-width negative lookbehind, which has experimental support.
+            # We're keeping the pattern within the limitations of the engine.
+            my @comment_errors = ($input =~ /(?<!# Translators:[^\n]{1,240}\n)([^\n]*(?<!_)_\((([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)[^\n]\n)/sg);
+            foreach my $match (@comment_errors) {
+                my $message = 'Missing or overlong (> 240 chars) translator comment';
+                print_error($message, $filename, $input, $match);
+            }
+        }
+    }
 }
 
 # Prints errors. Surpise!
