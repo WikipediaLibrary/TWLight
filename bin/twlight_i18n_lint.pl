@@ -54,6 +54,17 @@ if (exists($allowed{$extension})) {
                 print_error($message, $filename, $input, $match);
             }
         }
+
+        # HTML files.
+        when ($extension eq 'html') {
+            # Check for blocktrans without the 'trimmed' option, which allows arbitrary newline changes.
+            # These easily create message mismatches with translatewiki.
+            my @blocktrans_trimmed_errors = ($input =~ /([^\n]*{% blocktrans(?! trimmed) %}[^\n]*)\n/sg);
+            foreach my $match (@blocktrans_trimmed_errors) {
+                my $message = "blocktrans used without trimmed option";
+                print_error($message, $filename, $input, $match);
+            }
+        }
     }
 }
 
