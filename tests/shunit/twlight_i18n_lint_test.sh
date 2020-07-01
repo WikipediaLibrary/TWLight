@@ -8,7 +8,7 @@ testBadPyNewlines() {
     for ((i=$start; i<=$end; i++))
     do
         file=${TWLIGHT_HOME}/tests/shunit/data/bad_i18n_newline_$i.py
-        assertTrue "${file} should cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${file}"
+        assertFalse "${file} should cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${file}"
     done
 }
 
