@@ -39,7 +39,7 @@ if (exists($allowed{$extension})) {
         when($extension eq 'py') {
 
             # Check for newlines that can cause message mismatches with translatewiki.
-            my @newline_errors = ($input =~ /(?<!_)_\(\n(([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)/sg);
+            my @newline_errors = ($input =~ /(?<!_)_\(\n(([ \t]*)?("|')[^\n]*("|')\n?)*([ \t]*)\)/sg);
             foreach my $match (@newline_errors) {
                 my $message = "ugettext messages should't be preceded by a newline";
                 print_error($message, $filename, $input, $match) if $match;
