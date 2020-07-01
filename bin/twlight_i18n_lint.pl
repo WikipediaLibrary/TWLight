@@ -94,7 +94,7 @@ sub print_error {
     # Loop through the input lines
     for my $i (0 .. $#input) {
         # Print the error with line number when we get to the match.
-        if ("$input[$i]" eq "$match") {
+        if (index($input[$i], $match) != -1) {
             my $number = $i + 1;
             $code = 1;
             print colored("ERROR: $message\n$filename:$number\n$match\n", 'red');
