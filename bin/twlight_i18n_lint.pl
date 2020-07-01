@@ -48,7 +48,8 @@ if (exists($allowed{$extension})) {
             # Check for messages not preceded by a translator comment with a max length of 240 characters.
             # Note the variable-width negative lookbehind, which has experimental support.
             # We're keeping the pattern within the limitations of the engine.
-            my @comment_errors = ($input =~ /(?<!# Translators:[^\n]{1,240}\n)([^\n]*(?<!_)_\((([ \t]*)?"[^\n]*"\n?)*([ \t]*)\)[^\n]\n)/sg);
+            my @comment_errors = ($input =~ /(?<!# Translators:[^\n]{1,240}\n)([^\n]*(?<!_)_\((?:[ \t]*"[^\n]*"\n?)+[ \t]*\)[^\n]*\n)/sg);
+
             foreach my $match (@comment_errors) {
                 my $message = 'Missing or overlong (> 240 chars) translator comment';
                 print_error($message, $filename, $input, $match) if $match;
