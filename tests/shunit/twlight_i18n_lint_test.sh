@@ -12,4 +12,4 @@ testBadPyNewlines() {
     done
 }
 
-. ${TWLIGHT_HOME}/bin/shunit2
+. ${TWLIGHT_HOME}/tests/shunit/shunit2
