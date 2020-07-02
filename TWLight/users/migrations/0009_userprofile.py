@@ -26,7 +26,12 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("terms_of_use", models.BooleanField(default=False)),
-                ("user", models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+                    ),
+                ),
             ],
             options={
                 "verbose_name": "user profile",

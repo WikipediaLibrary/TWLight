@@ -21,7 +21,7 @@ import logging
 import re
 
 from django import forms
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.translation import ugettext as _
 
 from TWLight.resources.models import Partner, Stream

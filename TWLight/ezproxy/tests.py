@@ -5,7 +5,7 @@ import urllib.parse
 from urllib.parse import quote
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from TWLight.tests import AuthorizationBaseTestCase
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.models import Authorization

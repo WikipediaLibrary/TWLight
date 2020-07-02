@@ -6,7 +6,7 @@ from datetime import date
 from request.models import Request
 
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import resolve
+from django.urls import resolve
 from django.contrib import messages
 from django.db.models import Avg, Count
 from django.http import HttpResponse

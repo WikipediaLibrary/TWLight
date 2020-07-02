@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django import forms
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -83,13 +83,13 @@ class AuthorizationInlineForm(forms.ModelForm):
     user = AuthorizationUserChoiceForm(
         queryset=User.objects.all(),
         widget=ForeignKeyRawIdWidget(
-            Authorization._meta.get_field("user").rel, admin.site
+            Authorization._meta.get_field("user").remote_field, admin.site
         ),
     )
 
 
 class SetLanguageForm(forms.Form):
-    language = forms.ChoiceField(settings.LANGUAGES)
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
 
     def __init__(self, user, *args, **kwargs):
         super(SetLanguageForm, self).__init__(*args, **kwargs)

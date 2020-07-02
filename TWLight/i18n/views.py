@@ -54,7 +54,7 @@ def set_language(request):
                     path=settings.LANGUAGE_COOKIE_PATH,
                     domain=settings.LANGUAGE_COOKIE_DOMAIN,
                 )
-            if request.user.is_authenticated():
+            if request.user.is_authenticated:
                 request.user.userprofile.lang = lang_code
                 request.user.userprofile.save()
     return response

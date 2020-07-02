@@ -16,7 +16,11 @@ class Migration(migrations.Migration):
             model_name="application",
             name="editor",
             field=models.ForeignKey(
-                related_name="applications", blank=True, to="users.Editor", null=True
+                related_name="applications",
+                blank=True,
+                to="users.Editor",
+                null=True,
+                on_delete=models.CASCADE,
             ),
             preserve_default=True,
         )

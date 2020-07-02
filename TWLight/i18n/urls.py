@@ -2,7 +2,7 @@ import warnings
 
 from django.conf import settings
 from django.conf.urls import url
-from django.core.urlresolvers import LocaleRegexURLResolver
+from django.urls import URLResolver
 from django.utils import six
 from TWLight.i18n.views import set_language
 
@@ -22,7 +22,7 @@ def i18n_patterns(prefix, *args):
         pattern_list = [prefix] + list(args)
     if not settings.USE_I18N:
         return pattern_list
-    return [LocaleRegexURLResolver(pattern_list)]
+    return [URLResolver(pattern_list)]
 
 
 urlpatterns = [url(r"^setlang/$", set_language, name="set_language")]

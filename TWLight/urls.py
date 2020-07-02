@@ -2,7 +2,7 @@
 TWLight URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
+    https://docs.djangoproject.com/en/2.0/ref/urls/
 """
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -34,7 +34,7 @@ from .views import LanguageWhiteListView, HomePageView, ActivityView
 urlpatterns = [
     # Built-in -----------------------------------------------------------------
     url(r"^admin/doc", include(admindocs)),
-    url(r"^admin/", include(admin.site.urls)),
+    url(r"^admin/", admin.site.urls),
     url(r"^accounts/login/", auth_views.login, name="auth_login"),
     url(
         r"^accounts/logout/", auth_views.logout, {"next_page": "/"}, name="auth_logout"
@@ -56,12 +56,15 @@ urlpatterns = [
     # TWLight apps -------------------------------------------------------------
     # This makes our custom set language form  available.
     url(r"^i18n/", include("TWLight.i18n.urls")),
-    url(r"^api/", include(api_urls, namespace="api")),
-    url(r"^users/", include(users_urls, namespace="users")),
-    url(r"^applications/", include(applications_urls, namespace="applications")),
-    url(r"^partners/", include(partners_urls, namespace="partners")),
-    url(r"^csv/", include(csv_urls, namespace="csv")),
-    url(r"^ezproxy/", include(ezproxy_urls, namespace="ezproxy")),
+    url(r"^api/", include((api_urls, "api"), namespace="api")),
+    url(r"^users/", include((users_urls, "users"), namespace="users")),
+    url(
+        r"^applications/",
+        include((applications_urls, "applications"), namespace="applications"),
+    ),
+    url(r"^partners/", include((partners_urls, "resources"), namespace="partners")),
+    url(r"^csv/", include((csv_urls, "graphs"), namespace="csv")),
+    url(r"^ezproxy/", include((ezproxy_urls, "ezproxy"), namespace="ezproxy")),
     # Other TWLight views
     url(r"^oauth/login/$", auth.OAuthInitializeView.as_view(), name="oauth_login"),
     url(r"^oauth/callback/$", auth.OAuthCallbackView.as_view(), name="oauth_callback"),

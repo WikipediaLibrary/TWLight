@@ -8,7 +8,7 @@ import random
 from django.contrib.auth.models import AnonymousUser, User
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.management import call_command
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import IntegrityError
 from django.http import Http404
 from django.test import Client, TestCase, RequestFactory
@@ -20,10 +20,24 @@ from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFacto
 from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Authorization
 
-from .factories import PartnerFactory, StreamFactory
-from .helpers import check_for_target_url_duplication_and_generate_error_message
-from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode, TextFieldTag
-from .views import PartnersDetailView, PartnersFilterView, PartnersToggleWaitlistView
+from .factories import PartnerFactory, StreamFactory, SuggestionFactory
+from .helpers import check_for_target_url_duplication_and_generate_error_message 
+from .models import (
+    Language,
+    RESOURCE_LANGUAGES,
+    Partner,
+    AccessCode,
+    TextFieldTag,
+    Suggestion,
+)
+from .views import (
+    PartnersDetailView,
+    PartnersFilterView,
+    PartnersToggleWaitlistView,
+    PartnerSuggestionView,
+    SuggestionDeleteView,
+    SuggestionUpvoteView,
+)
 from .filters import PartnerFilter
 
 from . import views
@@ -418,8 +432,8 @@ class PartnerModelTests(TestCase):
         example_url = "https://www.example.com"
         partner1.target_url = example_url
         partner1.requested_access_duration = (
-            True
-        )  # We don't want the ValidationError from requested_access_duration
+            True  # We don't want the ValidationError from requested_access_duration
+        )
         partner1.save()
         partner2.target_url = example_url
         partner2.save()
@@ -1097,7 +1111,7 @@ class BundlePartnerTest(TestCase):
         try:
             authorization = Authorization.objects.get(
                 user=self.editor.user,
-                partners=Partner.objects.filter(pk=self.proxy_partner_1.pk),
+                partners=Partner.objects.get(pk=self.proxy_partner_1.pk),
             )
         except Authorization.DoesNotExist:
             self.fail("Authorization wasn't created in the first place.")
@@ -1151,3 +1165,105 @@ class PartnerTagTest(TestCase):
         self.assertContains(response, partner.get_absolute_url())
         self.assertContains(response, tag1.meta_url)
         self.assertNotContains(response, tag2.meta_url)
+
+
+class PartnerSuggestionViewTests(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super(PartnerSuggestionViewTests, cls).setUpClass()
+
+        cls.suggestion = SuggestionFactory()
+        cls.suggestion_to_delete = SuggestionFactory()
+        cls.editor = EditorCraftRoom(cls, Terms=True, Coordinator=True)
+        cls.upvoter = EditorCraftRoom(cls, Terms=True)
+        cls.user = UserFactory(editor=cls.editor)
+        cls.suggestion.author = cls.editor.user
+        cls.suggestion_to_delete.author = cls.editor.user
+
+        cls.suggestion.upvoted_users.add(cls.editor.user)
+        cls.suggestion_to_delete.upvoted_users.add(cls.editor.user)
+        cls.suggestion.save()
+        cls.suggestion_to_delete.save()
+
+        # We should mock out any call to messages call in the view, since
+        # RequestFactory (unlike Client) doesn't run middleware. If you
+        # actually want to test that messages are displayed, use Client(),
+        # and stop/restart the patcher.
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
+        cls.message_patcher.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(PartnerSuggestionViewTests, cls).tearDownClass()
+        cls.message_patcher.stop()
+
+    def test_partner_suggestion_view_get(self):
+        """
+        Tests that getting the suggested partners works properly
+        """
+        suggestion_url = reverse("suggest")
+
+        factory = RequestFactory()
+        request = factory.get(suggestion_url)
+
+        response = PartnerSuggestionView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.suggestion.company_url)
+
+    def test_partner_suggestion_view_post(self):
+        """
+        Tests that adding a new partner suggestion works properly
+        """
+        suggestion_url = reverse("suggest")
+
+        new_suggested_partner = {
+            "suggested_company_name": "Company",
+            "company_url": "www.testing123.com",
+            "author": self.user,
+        }
+        factory = RequestFactory()
+        request = factory.post(suggestion_url, new_suggested_partner)
+        request.user = self.user
+
+        response = PartnerSuggestionView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, new_suggested_partner["suggested_company_name"])
+        self.assertContains(response, new_suggested_partner["company_url"])
+
+    def test_partner_suggestion_upvote_view(self):
+        """
+        Tests that upvoting a partner suggestion works properly
+        """
+        suggestion_url = reverse("upvote", kwargs={"pk": self.suggestion.pk})
+
+        suggestion_before_upvote = Suggestion.objects.get(pk=self.suggestion.pk)
+        self.assertEqual(suggestion_before_upvote.upvoted_users.count(), 1)
+
+        # Create a coordinator with a test client session
+        EditorCraftRoom(self, Terms=True, Coordinator=True)
+        request = self.client.get(path=suggestion_url, follow=True)
+
+        suggestion = Suggestion.objects.get(pk=self.suggestion.pk)
+
+        self.assertEqual(request.status_code, 200)
+        self.assertEqual(suggestion.upvoted_users.count(), 2)
+
+    def test_partner_suggestion_delete_view(self):
+        """
+        Tests that deleting a partner suggestion works properly
+        """
+        suggestion_url = reverse(
+            "suggest-delete", kwargs={"pk": self.suggestion_to_delete.pk}
+        )
+        # Create a coordinator with a test client session
+        EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        # Checking that the suggestion hasn't been deleted yet
+        self.assertEquals(Suggestion.objects.count(), 2)
+
+        response = self.client.delete(path=suggestion_url, follow=True)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(Suggestion.objects.count(), 1)

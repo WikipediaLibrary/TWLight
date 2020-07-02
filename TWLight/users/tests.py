@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.exceptions import PermissionDenied, ValidationError
-from django.core.urlresolvers import resolve, reverse
+from django.urls import resolve, reverse
 from django.core.management import call_command
 from django.test import TestCase, Client, RequestFactory
 from django.utils.translation import get_language

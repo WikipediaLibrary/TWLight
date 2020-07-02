@@ -6,7 +6,7 @@ from reversion import revisions as reversion
 from reversion.models import Version
 
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.db import models
 from django.forms.models import model_to_dict
 from django.utils.timezone import now
@@ -105,7 +105,9 @@ class Application(models.Model):
     editor = models.ForeignKey(
         Editor, related_name="applications", null=True, on_delete=models.SET_NULL
     )
-    partner = models.ForeignKey(Partner, related_name="applications")
+    partner = models.ForeignKey(
+        Partner, related_name="applications", on_delete=models.CASCADE
+    )
 
     rationale = models.TextField(blank=True)
     specific_title = models.CharField(max_length=128, blank=True)

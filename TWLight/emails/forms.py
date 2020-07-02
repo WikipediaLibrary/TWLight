@@ -1,5 +1,5 @@
 from django import forms
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from crispy_forms.helper import FormHelper

@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user who sent this application to the partner",
                 null=True,
+                on_delete=models.CASCADE,
             ),
             preserve_default=True,
         )

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
@@ -21,7 +21,7 @@ class ContactUsView(FormView):
         initial = super(ContactUsView, self).get_initial()
         # @TODO: This sort of gets repeated in ContactUsForm.
         # We could probably be factored out to a common place for DRYness.
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             if self.request.user.email:
                 initial.update({"email": self.request.user.email})
         if "message" in self.request.GET:

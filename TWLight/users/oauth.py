@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied, DisallowedHost
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
 from django.views.generic.base import View
@@ -282,7 +282,7 @@ class OAuthInitializeView(View):
             pass
 
         # If the user has already logged in, let's not spam the OAuth provider.
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             # We're using this twice. Not very DRY.
             # Send user either to the destination specified in the 'next'
             # parameter or to their own editor detail page.

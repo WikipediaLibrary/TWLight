@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.db.models import Count
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -119,7 +119,7 @@ class PartnersDetailView(DetailView):
         context["has_open_apps"] = False
         context["has_auths"] = False
         if (
-            self.request.user.is_authenticated()
+            self.request.user.is_authenticated
             and not partner.authorization_method == partner.BUNDLE
         ):
             context["apply"] = True
@@ -216,7 +216,7 @@ class PartnersDetailView(DetailView):
         partner_list = available_partners
 
         # If logged in, what's the list of unavailable partners, if any, for which the current user is the coordinator?
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             coordinator_partners = Partner.even_not_available.filter(
                 coordinator=self.request.user, status=Partner.NOT_AVAILABLE
             )
@@ -409,7 +409,7 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
         obj = get_object_or_404(Suggestion, id=suggestion_id)
         url_ = obj.get_absolute_url()
         user = self.request.user
-        if user.is_authenticated():
+        if user.is_authenticated:
             if user in obj.upvoted_users.all():
                 obj.upvoted_users.remove(user)
             else:
