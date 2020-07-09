@@ -12,6 +12,16 @@ testBadPyNewlines() {
     done
 }
 
+testGoodPyComments() {
+    start=1
+    end=2
+    for ((i=$start; i<=$end; i++))
+    do
+        file=${TWLIGHT_HOME}/tests/shunit/data/good_i18n_comment_$i.py
+        assertTrue "${file} should not cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${file}" ||:
+    done
+}
+
 testBadPyComments() {
     start=1
     end=2
