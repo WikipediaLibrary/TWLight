@@ -36,9 +36,9 @@ def set_language(request):
     any state.
     """
     next = request.POST.get("next", request.GET.get("next"))
-    if not is_safe_url(url=next, host=request.get_host()):
+    if not is_safe_url(url=next, allowed_hosts=request.get_host()):
         next = request.META.get("HTTP_REFERER")
-        if not is_safe_url(url=next, host=request.get_host()):
+        if not is_safe_url(url=next, allowed_hosts=request.get_host()):
             next = "/"
     response = http.HttpResponseRedirect(next)
     if request.method == "POST":
