@@ -145,8 +145,9 @@ def get_output_for_application(app):
     to fetch only the required data rather than displaying all of Application
     plus Editor in the front end.
     """
-    output = {_("Email"): {"label": "Email", "data": app.editor.user.email}}
+
     # Translators: This labels a user's email address on a form for account coordinators
+    output = {_("Email"): {"label": "Email", "data": app.editor.user.email}}
 
     for field in PARTNER_FORM_OPTIONAL_FIELDS:
         # Since we directly mark applications made to proxy partners as 'sent', this function wouldn't be invoked.
