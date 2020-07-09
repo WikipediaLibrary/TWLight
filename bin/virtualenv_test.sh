@@ -20,7 +20,9 @@ set -euo pipefail
 
             # https://phabricator.wikimedia.org/T255167
             echo "Checking for localization issues"
-            find TWLight -type f \( -name "*.py" -o -name "*.html" \) -print0 | xargs -0 -I % ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl %
+            # TODO: add html jinja template checks.
+            # find TWLight -type f \( -name "*.py" -o -name "*.html" \) -print0 | xargs -0 -I % ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl %
+            find TWLight -type f \( -name "*.py" \) -print0 | xargs -0 -I % ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl %
             echo "No localization issues found"
 
             # Run test suite via coverage so we can get a report without having to run separate tests for it.

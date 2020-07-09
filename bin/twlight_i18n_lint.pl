@@ -57,6 +57,7 @@ if (exists($allowed{$extension})) {
         }
 
         # HTML files.
+        # @TODO: clean up these expressions based on the work done on the python expressions.
         when ($extension eq 'html') {
             # Check for blocktrans without the 'trimmed' option, which allows arbitrary newline changes.
             # These easily create message mismatches with translatewiki.
