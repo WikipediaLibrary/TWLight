@@ -10,7 +10,7 @@ from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 from django.urls import reverse
 from django import forms
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from .helpers.validation import validate_partners, validate_authorizer
 from .models import Editor, UserProfile, Authorization

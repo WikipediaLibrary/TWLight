@@ -28,7 +28,7 @@ from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
 from django.contrib import messages
 
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 # Import available locales from Faker, so we can determine what languages we fake in tests.
 from faker.config import AVAILABLE_LOCALES as FAKER_AVAILABLE_LOCALES
@@ -253,8 +253,8 @@ LANGUAGE_CODE = "en"  # Sets site default language.
 # https://django-modeltranslation.readthedocs.io/en/latest/installation.html#advanced-settings
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = (
-    LANGUAGE_CODE
-)  # sets the modeltranslation default language.
+    LANGUAGE_CODE  # sets the modeltranslation default language.
+)
 
 LOCALE_PATHS = [
     # makemessages looks for locale/ in the top level, not the project level.

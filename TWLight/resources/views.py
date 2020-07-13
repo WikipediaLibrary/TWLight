@@ -5,7 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.db.models import Count
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, View, RedirectView
 from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView

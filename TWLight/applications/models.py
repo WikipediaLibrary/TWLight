@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.db import models
 from django.forms.models import model_to_dict
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.models import Editor, Authorization

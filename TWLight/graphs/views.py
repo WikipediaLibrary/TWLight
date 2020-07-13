@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner

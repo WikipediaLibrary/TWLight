@@ -9,7 +9,7 @@ from django_comments.signals import comment_was_posted
 from django_comments.models import Comment
 from django.contrib.auth.models import User
 from django.utils.timezone import localtime, now
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.applications.models import Application
 from TWLight.users.models import Authorization
@@ -58,7 +58,7 @@ def under_discussion(sender, comment, request, **kwargs):
 def set_partner_status(sender, **kwargs):
     """
     Whenever an application is approved (except for in BatchEditView)
-    we do some calculations to see if we've run out of accounts. If 
+    we do some calculations to see if we've run out of accounts. If
     we have, we mark the partner as waitlisted if not, continue.
     """
     partner_pk = kwargs["partner_pk"]

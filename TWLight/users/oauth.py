@@ -11,7 +11,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
 from django.views.generic.base import View
-from django.utils.translation import get_language, ugettext as _
+from django.utils.translation import get_language, gettext as _
 
 from urllib.parse import urlencode
 

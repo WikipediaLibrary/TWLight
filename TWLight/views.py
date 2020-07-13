@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
 from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner

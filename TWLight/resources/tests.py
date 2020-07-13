@@ -21,7 +21,7 @@ from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, StreamFactory, SuggestionFactory
-from .helpers import check_for_target_url_duplication_and_generate_error_message 
+from .helpers import check_for_target_url_duplication_and_generate_error_message
 from .models import (
     Language,
     RESOURCE_LANGUAGES,

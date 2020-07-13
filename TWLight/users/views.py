@@ -22,7 +22,7 @@ from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
 from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
 
 from TWLight.resources.models import Partner

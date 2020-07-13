@@ -14,7 +14,7 @@ from django.core.exceptions import (
 )
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views import View
 
 from TWLight.resources.models import Partner

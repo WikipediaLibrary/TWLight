@@ -42,7 +42,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils.timezone import now
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
 from TWLight.users.helpers.validation import validate_partners, validate_authorizer
@@ -429,7 +429,12 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            self.wp_editcount_prev_updated, self.wp_editcount_prev, self.wp_editcount_recent, self.wp_enough_recent_edits = editor_recent_edits(
+            (
+                self.wp_editcount_prev_updated,
+                self.wp_editcount_prev,
+                self.wp_editcount_recent,
+                self.wp_enough_recent_edits,
+            ) = editor_recent_edits(
                 global_userinfo["editcount"],
                 self.wp_editcount_updated,
                 self.wp_editcount_prev_updated,
