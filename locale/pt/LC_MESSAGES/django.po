@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-07-06 17:08+0000\n"
-"PO-Revision-Date: 2020-07-10 09:45:36+0000\n"
+"PO-Revision-Date: 2020-07-14 08:29:16+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,9 +52,9 @@ msgstr "Pedido por: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:223
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr "<p><small><i>Os seus dados pessoais serão processados de acordo com as nossas <a href=\"{terms_url}\">normas de privacidade</a>.</i></small></p>"
+msgstr "<p><small><i>Os seus dados pessoais serão processados de acordo com as nossas <a href='{terms_url}'> normas de privacidade</a>.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:234
@@ -212,7 +212,7 @@ msgstr "Correio eletrónico"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "As nossas condições de utilização foram alteradas. As suas candidaturas não serão processadas até ter iniciado uma sessão e concordado com as condições atualizadas."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -279,7 +279,7 @@ msgstr "Pode esperar receber os detalhes de acesso no prazo de uma ou duas seman
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:253
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr ""
+msgstr "Este parceiro aderiu ao Pacote Biblioteca, que não requer candidaturas. Esta candidatura será marcada como inválida."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -386,9 +386,9 @@ msgstr "Contas disponíveis"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:130
-#, fuzzy, python-format
+#, python-format
 msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
-msgstr "%(publisher)s exige que concorde com as respetivas <a href=\"%(url)s\">condições de utilização</a>."
+msgstr "Concordou com as <a href=\"%(terms_url)s\">condições de utilização</a> do ''site''?"
 
 #. Translators: Displayed to coordinators when they've agreed to the terms of use.
 #. Translators: Displayed if the user has agreed to the terms of use.
@@ -423,9 +423,8 @@ msgstr "Não"
 
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:144
-#, fuzzy
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr "Solicite ao candidato que adicione o país de residência ao seu perfil antes de prosseguir, por favor."
+msgstr "Solicite ao candidato que concorde com as condições de utilização do ''site'' antes de aprovar esta candidatura, por favor."
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:152
@@ -455,9 +454,8 @@ msgstr "Sim (<a href=\"%(parent_url)s\">candidatura anterior</a>)"
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:203
-#, fuzzy
 msgid "Previous access expiry date"
-msgstr "Página anterior"
+msgstr "Data de expiração de acesso anterior"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:213
@@ -654,9 +652,8 @@ msgstr "Data de candidatura"
 
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:19
-#, fuzzy
 msgid "Has agreed to the terms of use?"
-msgstr "Concordo com as condições de utilização"
+msgstr "Concordou com as condições de utilização?"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #. Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes.
@@ -811,9 +808,9 @@ msgstr "Escolha pelo menos um recurso ao qual deseja acesso."
 #. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
 #. Translators: This message is shown to users once they've successfully submitted their application for review.
 #: TWLight/applications/views.py:421 TWLight/applications/views.py:479
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status."
-msgstr "A sua candidatura foi enviada para revisão. Pode consultar o estado das suas candidaturas nesta página."
+msgstr "A sua candidatura foi enviada para revisão. Dirija-se a <a href='{applications_url}'>Candidaturas</a> para ver o estado."
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
@@ -874,7 +871,7 @@ msgstr "Você tentou criar uma autorização duplicada."
 #: TWLight/applications/views.py:974
 #, python-brace-format
 msgid "This application cannot be modified since this partner is now part of our <a href='{bundle}'>bundle access</a>. If you are eligible, you can access this resource from <a href='{library}'>your library</a>. <a href='{contact}'>Contact us</a> if you have any questions."
-msgstr ""
+msgstr "Esta candidatura não pode ser modificada porque este parceiro faz agora parte do nosso <a href='{bundle}'>acesso Pacote Biblioteca</a>. Se for elegível, pode aceder a este recurso na sua <a href='{library}'>Biblioteca</a>. <a href='{contact}'>Contacte-nos</a> se tiver alguma dúvida."
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:988
@@ -884,12 +881,12 @@ msgstr "Definir estado da candidatura"
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
 #: TWLight/applications/views.py:1006
 msgid "There are more pending applications than available accounts. Your application might get waitlisted."
-msgstr ""
+msgstr "Existem mais candidaturas pendentes do que contas disponíveis. A sua candidatura pode ficar em lista de espera."
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:1019
 msgid "Status of INVALID applications Cannot be changed."
-msgstr ""
+msgstr "O estado das candidaturas INVÁLIDAS não pode ser alterado."
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
 #: TWLight/applications/views.py:1055
@@ -919,7 +916,7 @@ msgstr "Todas as candidaturas selecionadas foram marcadas como enviadas."
 #. Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
 #: TWLight/applications/views.py:1465
 msgid "Cannot renew application at this time as partner is not available. Please check back later, or contact us for more information."
-msgstr ""
+msgstr "Não é possível renovar a candidatura nesta altura porque o parceiro não está disponível. Verifique novamente mais tarde, por favor, ou contacte-nos para mais informações."
 
 #. Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
 #: TWLight/applications/views.py:1500
@@ -944,9 +941,8 @@ msgstr "O seu correio eletrónico"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
-#, fuzzy
 msgid "This field is automatically updated with the email from your <a href='{}'>user profile</a>."
-msgstr "Este campo é atualizado automaticamente com o correio eletrónico do seu <a href=\"{}\">perfil de utilizador</a>."
+msgstr "Este campo é atualizado automaticamente com o correio eletrónico do seu <a href='{}'>perfil de utilizador</a>."
 
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:26
@@ -1564,7 +1560,7 @@ msgstr "Listar candidaturas"
 #: TWLight/users/templates/users/my_applications.html:10
 #: TWLight/users/templates/users/my_library.html:6
 msgid "My Library"
-msgstr ""
+msgstr "Biblioteca"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #. Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.
@@ -1594,25 +1590,24 @@ msgstr "Acesso Pacote Biblioteca"
 #. Translators: Text shown to authenticated, bundle eligible users when they need to visit My Library to access collections.
 #: TWLight/resources/templates/resources/partner_detail.html:492
 msgid "You are eligible to access Library Bundle partners. Click the button above to go to your Library and browse collections from this partner."
-msgstr ""
+msgstr "Você é elegível para aceder aos parceiros do Pacote Biblioteca. Clique o botão acima para ir à sua Biblioteca e navegar pelos conjuntos de recursos deste parceiro."
 
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
 #: TWLight/resources/templates/resources/partner_detail.html:499
 #: TWLight/resources/templates/resources/partner_detail.html:513
-#, fuzzy
 msgid "Access Collection"
-msgstr "Conjunto de recursos"
+msgstr "Aceder ao conjunto de recursos"
 
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:506
 msgid "You are eligible to access Library Bundle partners. Click the button above to access the collection."
-msgstr ""
+msgstr "Você é elegível para aceder aos parceiros do Pacote Biblioteca. Clique o botão acima para aceder ao conjunto de recursos."
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:521
 #, python-format
 msgid "You are not eligible to access Library Bundle partners. Visit the <a href=\"%(homepage)s\">homepage</a> to check the eligibility criteria."
-msgstr ""
+msgstr "Você não é elegível para aceder aos parceiros do Pacote Biblioteca. Visite a <a href=\"%(homepage)s\">página inicial</a> para conhecer os critérios de elegibilidade."
 
 #. Translators: Buttton prompting users to log in.
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
@@ -1626,7 +1621,7 @@ msgstr "Entrar"
 #: TWLight/resources/templates/resources/partner_detail.html:537
 #, python-format
 msgid "This resource is part of our <a href=\"%(about)s\">Library Bundle</a> access, which you can access if you meet our minimum eligibility criteria. Log in to find out if you are eligible."
-msgstr ""
+msgstr "Este recurso faz parte do nosso acesso <a href=\"%(about)s\">Pacote Biblioteca</a>, a que pode aceder se preencher os nossos critérios mínimos de elegibilidade. Inicie uma sessão para saber se é elegível."
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:566
@@ -1777,7 +1772,7 @@ msgstr "Tem a certeza de que quer eliminar <b>%(object)s</b>?"
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
 #: TWLight/resources/views.py:163
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
-msgstr ""
+msgstr "Foram devolvidas várias autorizações - algo não está bem. Contacte-nos, por favor, e não se esqueça de referir esta mensagem."
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
 #: TWLight/resources/views.py:249
@@ -1911,9 +1906,8 @@ msgstr "Realizou pelo menos 10 edições em projetos da Wikimedia no último mê
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
-#, fuzzy
 msgid "You are not currently blocked from editing a Wikimedia project"
-msgstr "Não está atualmente impedido de editar a Wikipédia"
+msgstr "Não está atualmente impedido de editar um projeto da Wikimedia"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:75
