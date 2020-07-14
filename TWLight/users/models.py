@@ -624,41 +624,44 @@ class Authorization(models.Model):
 
     def get_latest_app(self):
         """
-        Returns the latest application for a corresponding authorization,
-        except when the status of the application is NOT_APPROVED, in which
-        case returns the previous not NOT_APPROVED application.
+        Returns the latest app corresponding to this auth in which the the status is *NOT* NOT_APPROVED.
         """
         from TWLight.applications.models import Application
 
-        try:
-            if self.stream and self.user and self.user.editor:
+        if self.partners.all().count() == 1 and self.user and self.user.editor:
+            partner = self.partners.all()
+            try:
+                if self.stream:
+                    return Application.objects.filter(
+                        ~Q(status=Application.NOT_APPROVED),
+                        partner=partner,
+                        specific_stream=self.stream,
+                        editor=self.user.editor,
+                    ).latest("id")
+                else:
+                    return Application.objects.filter(
+                        ~Q(status=Application.NOT_APPROVED),
+                        partner=partner,
+                        editor=self.user.editor,
+                    ).latest("id")
+            except Application.DoesNotExist:
+                return None
+
+    def get_latest_sent_app(self):
+        """
+        Returns the latest app corresponding to this auth in which the the status is SENT.
+        """
+        from TWLight.applications.models import Application
+
+        if self.partners.all().count() == 1 and self.user and self.user.editor:
+            try:
                 return Application.objects.filter(
-                    ~Q(status=Application.NOT_APPROVED),
-                    specific_stream=self.stream,
-                    editor=self.user.editor,
-                ).latest("id")
-            elif self.partners.all().exists() and self.user and self.user.editor:
-                return Application.objects.filter(
-                    ~Q(status=Application.NOT_APPROVED),
+                    status=Application.SENT,
                     partner=self.partners.all(),
                     editor=self.user.editor,
                 ).latest("id")
-            else:
+            except Application.DoesNotExist:
                 return None
-        except Application.DoesNotExist:
-            return None
-
-    def get_latest_sent_app(self):
-        from TWLight.applications.models import Application
-
-        try:
-            return Application.objects.filter(
-                status=Application.SENT,
-                partner=self.partners.all(),
-                editor=self.user.editor,
-            ).latest("id")
-        except Application.DoesNotExist:
-            return None
 
     @property
     def about_to_expire(self):

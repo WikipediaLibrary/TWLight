@@ -471,6 +471,63 @@ class ViewsTestCase(TestCase):
         authorization.refresh_from_db()
         self.assertEqual(authorization.date_expires, someday)
 
+    def test_latest_application(self):
+        # Create an editor with a session.
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
+
+        partner = PartnerFactory(authorization_method=Partner.PROXY)
+
+        app = ApplicationFactory(
+            status=Application.SENT,
+            editor=editor,
+            partner=partner,
+            sent_by=self.user_coordinator,
+        )
+        authorization = Authorization.objects.get(user=editor.user, partners=partner)
+        self.assertEqual(authorization.get_latest_app(), app)
+
+        # Simulate a valid user trying to return their access
+        return_url = reverse(
+            "users:return_authorization", kwargs={"pk": authorization.pk}
+        )
+        response = self.client.get(return_url, follow=True)
+        return_form = response.context["form"]
+        self.client.post(return_url, return_form.initial)
+        yesterday = datetime.now().date() - timedelta(days=1)
+        authorization.refresh_from_db()
+        self.assertEqual(authorization.date_expires, yesterday)
+
+        # Create a new application to the same partner (in reality this
+        # is most likely to be a renewal)
+        app_renewal = ApplicationFactory(
+            status=Application.SENT,
+            editor=editor,
+            partner=partner,
+            sent_by=self.user_coordinator,
+        )
+        app_renewal.save()
+
+        # return access
+        authorization.refresh_from_db()
+        return_url = reverse(
+            "users:return_authorization", kwargs={"pk": authorization.pk}
+        )
+        response = self.client.get(return_url, follow=True)
+        return_form = response.context["form"]
+        self.client.post(return_url, return_form.initial)
+        yesterday = datetime.now().date() - timedelta(days=1)
+        authorization.refresh_from_db()
+        self.assertEqual(authorization.date_expires, yesterday)
+
+        # Renew again, but deny this time.
+        app_renewal2 = ApplicationFactory(editor=editor, partner=partner)
+        app_renewal2.status = Application.NOT_APPROVED
+        app_renewal2.save()
+        authorization.refresh_from_db()
+
+        self.assertEqual(authorization.get_latest_app(), app_renewal)
+        self.assertEqual(authorization.get_latest_sent_app(), app_renewal)
+
     def test_user_home_view_anon(self):
         """
         If an AnonymousUser hits UserHomeView, they are redirected to login.
