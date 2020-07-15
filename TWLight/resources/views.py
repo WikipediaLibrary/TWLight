@@ -15,7 +15,7 @@ from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
 from TWLight.graphs.helpers import get_median
 from TWLight.users.models import Authorization
-from TWLight.view_mixins import CoordinatorsOnly, CoordinatorOrSelf, EditorsOnly
+from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
 from .models import Partner, Stream, Suggestion, TextFieldTag
@@ -267,7 +267,7 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
         return HttpResponseRedirect(partner.get_absolute_url())
 
 
-class PartnerUsers(CoordinatorOrSelf, DetailView):
+class PartnerUsers(PartnerCoordinatorOrSelf, DetailView):
     model = Partner
     template_name_suffix = "_users"
 

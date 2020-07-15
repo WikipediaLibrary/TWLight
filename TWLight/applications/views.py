@@ -37,7 +37,7 @@ from TWLight.resources.models import Partner, Stream, AccessCode
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization, Editor
 from TWLight.view_mixins import (
-    CoordinatorOrSelf,
+    PartnerCoordinatorOrSelf,
     CoordinatorsOnly,
     PartnerCoordinatorOnly,
     EditorsOnly,
@@ -851,7 +851,9 @@ class ListSentApplicationsView(_BaseListApplicationView):
         return context
 
 
-class EvaluateApplicationView(NotDeleted, CoordinatorOrSelf, ToURequired, UpdateView):
+class EvaluateApplicationView(
+    NotDeleted, PartnerCoordinatorOrSelf, ToURequired, UpdateView
+):
     """
     Allows Coordinators to:
     * view single applications

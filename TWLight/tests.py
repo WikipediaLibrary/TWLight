@@ -26,7 +26,7 @@ from TWLight.users.models import Authorization
 import TWLight.users.views
 
 from .view_mixins import (
-    CoordinatorOrSelf,
+    PartnerCoordinatorOrSelf,
     CoordinatorsOnly,
     EditorsOnly,
     SelfOnly,
@@ -64,7 +64,7 @@ class DispatchProvider(object):
         return True
 
 
-class TestCoordinatorOrSelf(CoordinatorOrSelf, ObjGet, DispatchProvider):
+class TestPartnerCoordinatorOrSelf(PartnerCoordinatorOrSelf, ObjGet, DispatchProvider):
     pass
 
 
@@ -108,7 +108,7 @@ class ViewMixinTests(TestCase):
 
     def test_coordinators_or_self_1(self):
         """
-        CoordinatorOrSelf should allow coordinators.
+        PartnerCoordinatorOrSelf should allow coordinators.
         """
         user = UserFactory()
         coordinators.user_set.add(user)
@@ -116,7 +116,7 @@ class ViewMixinTests(TestCase):
         req = RequestFactory()
         req.user = user
 
-        test = TestCoordinatorOrSelf()
+        test = TestPartnerCoordinatorOrSelf()
 
         # Should not raise error.
         # test.dispatch(req)
@@ -124,20 +124,20 @@ class ViewMixinTests(TestCase):
 
     def test_coordinators_or_self_2(self):
         """
-        CoordinatorOrSelf should allow superusers.
+        PartnerCoordinatorOrSelf should allow superusers.
         """
         user = UserFactory(is_superuser=True)
 
         req = RequestFactory()
         req.user = user
 
-        test = TestCoordinatorOrSelf()
+        test = TestPartnerCoordinatorOrSelf()
 
         test.dispatch(req)
 
     def test_coordinators_or_self_3(self):
         """
-        CoordinatorOrSelf should users who are the same as the view's user,
+        PartnerCoordinatorOrSelf should users who are the same as the view's user,
         if view.get_object returns a user.
         """
         user = UserFactory()
@@ -145,13 +145,13 @@ class ViewMixinTests(TestCase):
         req = RequestFactory()
         req.user = user
 
-        test = TestCoordinatorOrSelf(obj=user)
+        test = TestPartnerCoordinatorOrSelf(obj=user)
 
         test.dispatch(req)
 
     def test_coordinators_or_self_4(self):
         """
-        CoordinatorOrSelf should users who own the object returned by the
+        PartnerCoordinatorOrSelf should users who own the object returned by the
         view's get_object.
         """
         user = UserFactory()
@@ -160,13 +160,13 @@ class ViewMixinTests(TestCase):
         req = RequestFactory()
         req.user = user
 
-        test = TestCoordinatorOrSelf(obj=editor)
+        test = TestPartnerCoordinatorOrSelf(obj=editor)
 
         test.dispatch(req)
 
     def test_coordinators_or_self_5(self):
         """
-        CoordinatorOrSelf should not allow users who fail all of the above
+        PartnerCoordinatorOrSelf should not allow users who fail all of the above
         criteria.
         """
         user = UserFactory(is_superuser=False)
@@ -174,7 +174,7 @@ class ViewMixinTests(TestCase):
         req = RequestFactory()
         req.user = user
 
-        test = TestCoordinatorOrSelf(obj=None)
+        test = TestPartnerCoordinatorOrSelf(obj=None)
 
         with self.assertRaises(PermissionDenied):
             test.dispatch(req)

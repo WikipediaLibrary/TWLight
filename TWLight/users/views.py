@@ -26,7 +26,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_comments.models import Comment
 
 from TWLight.resources.models import Partner
-from TWLight.view_mixins import CoordinatorOrSelf, SelfOnly, coordinators
+from TWLight.view_mixins import PartnerCoordinatorOrSelf, SelfOnly, coordinators
 from TWLight.users.groups import get_restricted
 from TWLight.users.helpers.authorizations import get_valid_partner_authorizations
 
@@ -101,7 +101,7 @@ class UserDetailView(SelfOnly, TemplateView):
         return context
 
 
-class EditorDetailView(CoordinatorOrSelf, DetailView):
+class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
     """
     User profile data page for users who are Editors. Uses the Editor model,
     because:

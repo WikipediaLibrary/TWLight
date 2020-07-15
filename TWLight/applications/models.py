@@ -375,7 +375,7 @@ class Application(models.Model):
     @property
     def user(self):
         """
-        Needed by CoordinatorOrSelf mixin, e.g. on the application evaluation view.
+        Needed by PartnerCoordinatorOrSelf mixin, e.g. on the application evaluation view.
         """
         return self.editor.user
 

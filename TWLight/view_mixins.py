@@ -18,7 +18,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 
 from TWLight.applications.models import Application
-from TWLight.resources.models import Partner, AccessCode
+from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
 from TWLight.users.groups import get_coordinators, get_restricted
 
@@ -29,141 +29,154 @@ logger = logging.getLogger(__name__)
 coordinators = get_coordinators()
 
 
-class CoordinatorOrSelf(object):
+class BaseObj(object):
     """
-    Restricts visibility to:
-    * The designated Coordinator for partner related to the object; or
-    * The Editor who owns (or is) the object in the view; or
-    * Superusers.
-
-    This mixin assumes that the decorated view has a get_object method, and that
-    the object in question has a ForeignKey, 'user', to the User model, or else
-    is an instance of User.
+    Normalizes the objects to reduce repetitive try/except blocks for this attribute.
     """
 
-    def test_func_coordinator_or_self(self, user):
-        obj_owner_test = False  # Set default.
-
+    def get_object(self):
         try:
-            obj = self.get_object()
-            if obj:
-                if isinstance(obj, User):
-                    obj_owner_test = obj.pk == user.pk
-                else:
-                    obj_owner_test = obj.user.pk == user.pk
+            return super(BaseObj, self).get_object()
         except AttributeError:
-            # Keep the default.
-            pass
+            return None
 
-        obj_coordinator_test = False  # Set default.
 
-        # If the user is a coordinator run more tests
-        if coordinators and user in coordinators.user_set.all():
-            try:
-                obj = self.get_object()
-                if obj:
-                    # Return true if the object is an editor and has
-                    # at least one application to a partner for whom
-                    # the user is a designated coordinator.
-                    if isinstance(obj, Editor):
-                        obj_coordinator_test = Application.objects.filter(
-                            editor__pk=obj.pk, partner__coordinator__pk=user.pk
-                        ).exists()
-                    # Return true if the object is an application to a
-                    # partner for whom the user is a designated coordinator
-                    elif isinstance(obj, Application):
-                        obj_coordinator_test = obj.partner.coordinator.pk == user.pk
-                    elif isinstance(obj, Partner):
-                        obj_coordinator_test = obj.coordinator.pk == user.pk
-                    elif isinstance(obj, AccessCode):
-                        obj_coordinator_test = obj.partner.coordinator.pk == user.pk
-            except AttributeError:
-                # Keep the default.
-                pass
-
-        return user.is_superuser or obj_coordinator_test or obj_owner_test
-
-    def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_coordinator_or_self(request.user):
-            messages.add_message(
-                request,
-                messages.WARNING,
-                "You must be the " "designated coordinator or the owner to do that.",
-            )
-            raise PermissionDenied
-
-        return super(CoordinatorOrSelf, self).dispatch(request, *args, **kwargs)
+def test_func_coordinators_only(user):
+    obj_coordinator_test = user.is_superuser  # Skip subsequent test if superuser.
+    if not obj_coordinator_test:
+        obj_coordinator_test = coordinators and user in coordinators.user_set.all()
+    return obj_coordinator_test
 
 
 class CoordinatorsOnly(object):
     """
     Restricts visibility to:
-    * Coordinators; or
-    * Superusers.
+    * Superusers; or
+    * Coordinators.
     """
 
-    def test_func_coordinators_only(self, user):
-        return user.is_superuser or user in coordinators.user_set.all()
-
     def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_coordinators_only(request.user):
+        if not test_func_coordinators_only(request.user):
             messages.add_message(
-                request, messages.WARNING, "You must be a " "coordinator to do that."
+                request, messages.WARNING, "You must be a coordinator to do that."
             )
             raise PermissionDenied
 
         return super(CoordinatorsOnly, self).dispatch(request, *args, **kwargs)
 
 
-class PartnerCoordinatorOnly(object):
+def test_func_partner_coordinator(obj, user):
+    obj_partner_coordinator_test = (
+        user.is_superuser
+    )  # Skip subsequent test if superuser.
+    if not obj_partner_coordinator_test:
+        # If the user is a coordinator run more tests
+        if obj and coordinators and user in coordinators.user_set.all():
+            # Return true if the object is an editor and has
+            # at least one application to a partner for whom
+            # the user is a designated coordinator.
+            if isinstance(obj, Editor):
+                obj_partner_coordinator_test = Application.objects.filter(
+                    editor__pk=obj.pk, partner__coordinator__pk=user.pk
+                ).exists()
+            # Return true if the object is an application to a
+            # partner for whom the user is a designated coordinator
+            elif isinstance(obj, Application):
+                obj_partner_coordinator_test = obj.partner.coordinator.pk == user.pk
+            # Return true if the object is a partner for whom the user is a designated coordinator
+            elif isinstance(obj, Partner):
+                obj_partner_coordinator_test = obj.coordinator.pk == user.pk
+
+    return obj_partner_coordinator_test
+
+
+class PartnerCoordinatorOnly(BaseObj):
     """
     Restricts visibility to:
-    * The designated Coordinator for partner related to the object; or
-    * Superusers.
+    * Superusers; or
+    * The designated Coordinator for partner related to the object.
 
     This mixin assumes that the decorated view has a get_object method, and that
     the object in question has a ForeignKey, 'user', to the User model, or else
     is an instance of User.
     """
 
-    def test_func_coordinator_or_self(self, user):
-
-        obj_coordinator_test = False  # Set default.
-
-        # If the user is a coordinator run more tests
-        if user in coordinators.user_set.all():
-            try:
-                obj = self.get_object()
-                if obj:
-                    # Return true if the object is an editor and has
-                    # at least one application to a partner for whom
-                    # the user is a designated coordinator.
-                    if isinstance(obj, Editor):
-                        obj_coordinator_test = Application.objects.filter(
-                            editor__pk=obj.pk, partner__coordinator__pk=user.pk
-                        ).exists()
-                    # Return true if the object is an application to a
-                    # partner for whom the user is a designated coordinator
-                    elif isinstance(obj, Application):
-                        obj_coordinator_test = obj.partner.coordinator.pk == user.pk
-                    elif isinstance(obj, Partner):
-                        obj_coordinator_test = obj.coordinator.pk == user.pk
-            except AttributeError:
-                # Keep the default.
-                pass
-
-        return user.is_superuser or obj_coordinator_test
-
     def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_coordinator_or_self(request.user):
+        if not test_func_partner_coordinator(self.get_object(), request.user):
             messages.add_message(
                 request,
                 messages.WARNING,
-                "You must be the " "designated coordinator or the owner to do that.",
+                "You must be the designated coordinator or the owner to do that.",
             )
             raise PermissionDenied
 
         return super(PartnerCoordinatorOnly, self).dispatch(request, *args, **kwargs)
+
+
+def test_func_self_only(obj, user):
+    obj_owner_test = False  # set default
+
+    try:
+        if isinstance(obj, User):
+            obj_owner_test = obj.pk == user.pk
+        else:
+            obj_owner_test = obj.user.pk == user.pk
+    except AttributeError:
+        pass
+
+    return obj_owner_test
+
+
+class SelfOnly(BaseObj):
+    """
+    Restricts visibility to:
+    * The user who owns (or is) the object in question.
+
+    This mixin assumes that the decorated view has a get_object method, and that
+    the object in question has a ForeignKey, 'user', to the User model, or else
+    is an instance of User.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        if not test_func_self_only(self.get_object(), request.user):
+            messages.add_message(
+                request, messages.WARNING, "You must be the owner to do that."
+            )
+            raise PermissionDenied
+
+        return super(SelfOnly, self).dispatch(request, *args, **kwargs)
+
+
+def test_func_partner_coordinator_or_self(obj, user):
+    return test_func_partner_coordinator(obj, user) or test_func_self_only(obj, user)
+
+
+class PartnerCoordinatorOrSelf(BaseObj):
+    """
+    Restricts visibility to:
+    * Superusers; or
+    * The designated Coordinator for partner related to the object; or
+    * The Editor who owns (or is) the object in the view.
+
+    This mixin assumes that the decorated view has a get_object method, and that
+    the object in question has a ForeignKey, 'user', to the User model, or else
+    is an instance of User.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        if not test_func_partner_coordinator_or_self(self.get_object(), request.user):
+            messages.add_message(
+                request,
+                messages.WARNING,
+                "You must be the designated coordinator or the owner to do that.",
+            )
+            raise PermissionDenied
+
+        return super(PartnerCoordinatorOrSelf, self).dispatch(request, *args, **kwargs)
+
+
+def test_func_editors_only(user):
+    return hasattr(user, "editor")
 
 
 class EditorsOnly(object):
@@ -177,54 +190,25 @@ class EditorsOnly(object):
     OAuth.
     """
 
-    def test_func_editors_only(self, user):
-        return hasattr(user, "editor")
-
     def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_editors_only(request.user):
+        if not test_func_editors_only(request.user):
             messages.add_message(
                 request,
                 messages.WARNING,
-                "You must be a " "coordinator or an editor to do that.",
+                "You must be a coordinator or an editor to do that.",
             )
             raise PermissionDenied
 
         return super(EditorsOnly, self).dispatch(request, *args, **kwargs)
 
 
-class SelfOnly(object):
-    """
-    Restricts visibility to:
-    * The user who owns (or is) the object in question.
-
-    This mixin assumes that the decorated view has a get_object method, and that
-    the object in question has a ForeignKey, 'user', to the User model, or else
-    is an instance of User.
-    """
-
-    def test_func_self_only(self, user):
-        obj_owner_test = False  # set default
-
-        obj = self.get_object()
-
-        try:
-            if isinstance(obj, User):
-                obj_owner_test = obj.pk == user.pk
-            else:
-                obj_owner_test = self.get_object().user.pk == user.pk
-        except AttributeError:
-            pass
-
-        return obj_owner_test
-
-    def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_self_only(request.user):
-            messages.add_message(
-                request, messages.WARNING, "You must be the " "owner to do that."
-            )
-            raise PermissionDenied
-
-        return super(SelfOnly, self).dispatch(request, *args, **kwargs)
+def test_func_tou_required(user):
+    try:
+        return user.is_superuser or user.userprofile.terms_of_use
+    except AttributeError:
+        # AnonymousUser won't have a userprofile...but AnonymousUser hasn't
+        # agreed to the Terms, either, so we can safely deny them.
+        return False
 
 
 class ToURequired(object):
@@ -234,16 +218,8 @@ class ToURequired(object):
     * Superusers.
     """
 
-    def test_func_tou_required(self, user):
-        try:
-            return user.is_superuser or user.userprofile.terms_of_use
-        except AttributeError:
-            # AnonymousUser won't have a userprofile...but AnonymousUser hasn't
-            # agreed to the Terms, either, so we can safely deny them.
-            return False
-
     def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_tou_required(request.user):
+        if not test_func_tou_required(request.user):
             messages.add_message(
                 request,
                 messages.INFO,
@@ -269,6 +245,10 @@ class ToURequired(object):
         return super(ToURequired, self).dispatch(request, *args, **kwargs)
 
 
+def test_func_email_required(user):
+    return bool(user.email) or user.is_superuser
+
+
 class EmailRequired(object):
     """
     Restricts visibility to:
@@ -276,11 +256,8 @@ class EmailRequired(object):
     * Superusers.
     """
 
-    def test_func_email_required(self, user):
-        return bool(user.email) or user.is_superuser
-
     def dispatch(self, request, *args, **kwargs):
-        if not self.test_func_email_required(request.user):
+        if not test_func_email_required(request.user):
             messages.add_message(
                 request,
                 messages.INFO,
@@ -306,17 +283,18 @@ class EmailRequired(object):
         return super(EmailRequired, self).dispatch(request, *args, **kwargs)
 
 
+def test_func_data_processing_required(user):
+    restricted = get_restricted()
+    return user in restricted.user_set.all()
+
+
 class DataProcessingRequired(object):
     """
     Used to restrict views from users with data processing restricted.
     """
 
-    def test_func_data_processing_required(self, user):
-        restricted = get_restricted()
-        return user in restricted.user_set.all()
-
     def dispatch(self, request, *args, **kwargs):
-        if self.test_func_data_processing_required(request.user):
+        if test_func_data_processing_required(request.user):
             # No need to give the user a message because they will already
             # have the generic data processing notice.
             raise PermissionDenied
@@ -324,19 +302,19 @@ class DataProcessingRequired(object):
         return super(DataProcessingRequired, self).dispatch(request, *args, **kwargs)
 
 
-class NotDeleted(object):
+def test_func_not_deleted(user):
+    return user.editor is None
+
+
+class NotDeleted(BaseObj):
     """
     Used to check that the submitting user hasn't deleted their account.
     Without this, users hit a Server Error if trying to navigate directly
     to an app from a deleted user.
     """
 
-    def test_func_not_deleted(self, object):
-        obj = self.get_object()
-        return obj.editor is None
-
     def dispatch(self, request, *args, **kwargs):
-        if self.test_func_not_deleted(object):
+        if test_func_not_deleted(self.get_object()):
             raise Http404
 
         return super(NotDeleted, self).dispatch(request, *args, **kwargs)
