@@ -416,7 +416,9 @@ class PartnerModelTests(TestCase):
 
         example_url = "https://www.example.com"
         partner1.target_url = example_url
-        partner1.requested_access_duration = True  # We don't want the ValidationError from requested_access_duration
+        partner1.requested_access_duration = (
+            True
+        )  # We don't want the ValidationError from requested_access_duration
         partner1.save()
         partner2.target_url = example_url
         partner2.save()
