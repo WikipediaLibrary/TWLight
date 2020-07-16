@@ -5,7 +5,7 @@ from unittest.mock import patch
 import os
 import random
 
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import AnonymousUser, User
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
@@ -21,6 +21,7 @@ from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, StreamFactory
+from .helpers import check_for_target_url_duplication_and_generate_error_message
 from .models import Language, RESOURCE_LANGUAGES, Partner, AccessCode, TextFieldTag
 from .views import PartnersDetailView, PartnersFilterView, PartnersToggleWaitlistView
 from .filters import PartnerFilter
@@ -407,6 +408,56 @@ class PartnerModelTests(TestCase):
                 )
             ),
         )
+
+    def test_helper_function_for_target_url_uniqueness(self):
+        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
+        partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        stream1 = StreamFactory(authorization_method=Partner.PROXY)
+
+        example_url = "https://www.example.com"
+        partner1.target_url = example_url
+        partner1.requested_access_duration = (
+            True
+        )  # We don't want the ValidationError from requested_access_duration
+        partner1.save()
+        partner2.target_url = example_url
+        partner2.save()
+
+        msg = check_for_target_url_duplication_and_generate_error_message(
+            partner1, partner=True
+        )
+        self.assertIsNotNone(msg)
+        self.assertIn(partner2.company_name, msg)
+
+        self.assertRaises(ValidationError, partner1.clean)
+        try:
+            partner1.clean()
+        except ValidationError as e:
+            self.assertEqual([msg], e.messages)
+
+        stream1.target_url = example_url
+        stream1.save()
+
+        msg = check_for_target_url_duplication_and_generate_error_message(
+            partner2, partner=True
+        )
+        self.assertIsNotNone(msg)
+        # We only want the duplicate partner names to be shown,
+        # not self.
+        self.assertNotIn(partner2.company_name, msg)
+        self.assertIn(partner1.company_name, msg)
+        self.assertIn(stream1.name, msg)
+
+        msg = check_for_target_url_duplication_and_generate_error_message(
+            stream1, stream=True
+        )
+
+        self.assertIsNotNone(msg)
+        self.assertRaises(ValidationError, stream1.clean)
+        try:
+            stream1.clean()
+        except ValidationError as e:
+            self.assertEqual([msg], e.messages)
 
 
 class WaitlistBehaviorTests(TestCase):

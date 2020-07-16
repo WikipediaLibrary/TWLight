@@ -14,6 +14,9 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.db import models
 from django_countries.fields import CountryField
 
+from TWLight.resources.helpers import (
+    check_for_target_url_duplication_and_generate_error_message,
+)
 
 RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
 
@@ -415,6 +418,14 @@ class Partner(models.Model):
                     ]
                 }
             )
+        if self.target_url:
+            # Validate the form for the uniqueness of self.target_url across
+            # all PROXY and BUNDLE partners/streams.
+            validation_error_msg = check_for_target_url_duplication_and_generate_error_message(
+                self, partner=True
+            )
+            if validation_error_msg:
+                raise ValidationError({"target_url": validation_error_msg})
 
     def get_absolute_url(self):
         return reverse_lazy("partners:detail", kwargs={"pk": self.pk})
@@ -545,6 +556,16 @@ class Stream(models.Model):
         # internationalize. Returning the atomic stream name gives us more
         # options for how this is displayed in templates.
         return self.name
+
+    def clean(self):
+        if self.target_url:
+            # Validate the form for the uniqueness of self.target_url across
+            # all PROXY and BUNDLE partners/streams.
+            validation_error_msg = check_for_target_url_duplication_and_generate_error_message(
+                self, stream=True
+            )
+            if validation_error_msg:
+                raise ValidationError({"target_url": validation_error_msg})
 
     def save(self, *args, **kwargs):
         """Invalidate the rendered html stream description from cache"""
