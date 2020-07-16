@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-15 18:35+0000\n"
+"POT-Creation-Date: 2020-07-16 17:15+0000\n"
 "PO-Revision-Date: 2020-07-10 09:45:36+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:403
 #: TWLight/resources/templates/resources/partner_tile.html:100
 #: TWLight/templates/base.html:153 TWLight/templates/home.html:98
-#: TWLight/users/templates/users/resource_tile.html:105
+#: TWLight/users/templates/users/resource_tile.html:133
 msgid "Apply"
 msgstr "आवेदन करें"
 
@@ -3332,64 +3332,64 @@ msgid "Click to return this access"
 msgstr ""
 
 #. Translators: Title for logo in tiles that are linked to an external website. Don't translate name.
-#: TWLight/users/templates/users/resource_tile.html:36
-#, fuzzy, python-format
-msgid "External link to %(name)s's website"
-msgstr "संभावित भागीदार की वेबसाइट की कड़ी।"
-
-#. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate name.
 #. Translators: Alt text for publisher logos on the my library page. Don't translate name.
-#: TWLight/users/templates/users/resource_tile.html:41
-#: TWLight/users/templates/users/resource_tile.html:54
-#, fuzzy, python-format
-msgid "Link to %(name)s signup page"
-msgstr "{{ partner }} पंजीकरण पृष्ठ की कड़ी"
-
-#. Translators: Alt text for publisher logos on the my library page. Don't translate name.
-#: TWLight/users/templates/users/resource_tile.html:49
+#: TWLight/users/templates/users/resource_tile.html:37
+#: TWLight/users/templates/users/resource_tile.html:42
+#: TWLight/users/templates/users/resource_tile.html:64
+#: TWLight/users/templates/users/resource_tile.html:69
 #, fuzzy, python-format
 msgid "Link to %(name)s's external website"
 msgstr "संभावित भागीदार की वेबसाइट की कड़ी।"
 
+#. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate name.
+#. Translators: Alt text for publisher logos on the my library page. Don't translate name.
+#: TWLight/users/templates/users/resource_tile.html:49
+#: TWLight/users/templates/users/resource_tile.html:54
+#: TWLight/users/templates/users/resource_tile.html:76
+#: TWLight/users/templates/users/resource_tile.html:81
+#, fuzzy, python-format
+msgid "Link to %(name)s's signup page"
+msgstr "{{ partner }} पंजीकरण पृष्ठ की कड़ी"
+
 #. Translators: Users can click this button to access a collection they have access to.
-#: TWLight/users/templates/users/resource_tile.html:74
+#: TWLight/users/templates/users/resource_tile.html:102
 #, fuzzy
 msgid "Access collection"
 msgstr "आपका व्यवसाय"
 
 #. Translators: Users can click this button to be taken to the website for a resource.
-#: TWLight/users/templates/users/resource_tile.html:77
+#: TWLight/users/templates/users/resource_tile.html:105
 msgid "Go to site"
 msgstr ""
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
-#: TWLight/users/templates/users/resource_tile.html:89
+#: TWLight/users/templates/users/resource_tile.html:117
 #, fuzzy
 msgid "Renewals are not available for this partner"
 msgstr "इस भागीदार के लिए समन्वयक, यदि कोई हो।"
 
 #. Translators: Labels a button users can click to extend the duration of their access.
-#: TWLight/users/templates/users/resource_tile.html:93
+#: TWLight/users/templates/users/resource_tile.html:121
 msgid "Extend"
 msgstr ""
 
 #. Translators: Labels a button users can click to renew an expired account.
-#: TWLight/users/templates/users/resource_tile.html:96
+#: TWLight/users/templates/users/resource_tile.html:124
 msgid "Renew"
 msgstr "नवीनीकरण"
 
 #. Translators: Labels a button users can click to view an application requesting access to a resource.
-#: TWLight/users/templates/users/resource_tile.html:113
+#: TWLight/users/templates/users/resource_tile.html:141
 msgid "View application"
 msgstr "आवेदन देखें"
 
 #. Translators: Text beside the date on which the authorization has expired.
-#: TWLight/users/templates/users/resource_tile.html:120
+#: TWLight/users/templates/users/resource_tile.html:148
 msgid "Expired on"
 msgstr ""
 
 #. Translators: Text beside the date on which the authorization will expire.
-#: TWLight/users/templates/users/resource_tile.html:123
+#: TWLight/users/templates/users/resource_tile.html:151
 msgid "Expires on"
 msgstr ""
 
@@ -4146,3 +4146,7 @@ msgid "{username} received access to <a href='{url}'>{partner}</a>"
 msgstr ""
 "\n"
 "{username} ने <a href=\"{url}\">{partner}</a> तक पहुँच प्राप्त की"
+
+#, fuzzy, python-format
+#~ msgid "External link to %(name)s's website"
+#~ msgstr "संभावित भागीदार की वेबसाइट की कड़ी।"

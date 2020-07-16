@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-15 18:36+0000\n"
+"POT-Creation-Date: 2020-07-16 17:16+0000\n"
 "PO-Revision-Date: 2020-07-10 09:45:37+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:403
 #: TWLight/resources/templates/resources/partner_tile.html:100
 #: TWLight/templates/base.html:153 TWLight/templates/home.html:98
-#: TWLight/users/templates/users/resource_tile.html:105
+#: TWLight/users/templates/users/resource_tile.html:133
 msgid "Apply"
 msgstr "申請"
 
@@ -3347,63 +3347,64 @@ msgid "Click to return this access"
 msgstr "點擊來歸還此取用"
 
 #. Translators: Title for logo in tiles that are linked to an external website. Don't translate name.
-#: TWLight/users/templates/users/resource_tile.html:36
-#, python-format
-msgid "External link to %(name)s's website"
-msgstr "連接到 %(name)s 的外部網站"
-
-#. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate name.
 #. Translators: Alt text for publisher logos on the my library page. Don't translate name.
-#: TWLight/users/templates/users/resource_tile.html:41
-#: TWLight/users/templates/users/resource_tile.html:54
-#, python-format
-msgid "Link to %(name)s signup page"
-msgstr "連結至 %(name)s 的註冊頁面"
-
-#. Translators: Alt text for publisher logos on the my library page. Don't translate name.
-#: TWLight/users/templates/users/resource_tile.html:49
+#: TWLight/users/templates/users/resource_tile.html:37
+#: TWLight/users/templates/users/resource_tile.html:42
+#: TWLight/users/templates/users/resource_tile.html:64
+#: TWLight/users/templates/users/resource_tile.html:69
 #, python-format
 msgid "Link to %(name)s's external website"
 msgstr "連接到 %(name)s 的外部網站"
 
+#. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate name.
+#. Translators: Alt text for publisher logos on the my library page. Don't translate name.
+#: TWLight/users/templates/users/resource_tile.html:49
+#: TWLight/users/templates/users/resource_tile.html:54
+#: TWLight/users/templates/users/resource_tile.html:76
+#: TWLight/users/templates/users/resource_tile.html:81
+#, fuzzy, python-format
+#| msgid "Link to %(name)s signup page"
+msgid "Link to %(name)s's signup page"
+msgstr "連結至 %(name)s 的註冊頁面"
+
 #. Translators: Users can click this button to access a collection they have access to.
-#: TWLight/users/templates/users/resource_tile.html:74
+#: TWLight/users/templates/users/resource_tile.html:102
 msgid "Access collection"
 msgstr "取用典藏"
 
 #. Translators: Users can click this button to be taken to the website for a resource.
-#: TWLight/users/templates/users/resource_tile.html:77
+#: TWLight/users/templates/users/resource_tile.html:105
 msgid "Go to site"
 msgstr "前往網站"
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
-#: TWLight/users/templates/users/resource_tile.html:89
+#: TWLight/users/templates/users/resource_tile.html:117
 #, fuzzy
 msgid "Renewals are not available for this partner"
 msgstr "此合作夥伴的取用代碼（若有的話）。"
 
 #. Translators: Labels a button users can click to extend the duration of their access.
-#: TWLight/users/templates/users/resource_tile.html:93
+#: TWLight/users/templates/users/resource_tile.html:121
 msgid "Extend"
 msgstr "延長"
 
 #. Translators: Labels a button users can click to renew an expired account.
-#: TWLight/users/templates/users/resource_tile.html:96
+#: TWLight/users/templates/users/resource_tile.html:124
 msgid "Renew"
 msgstr "續辦"
 
 #. Translators: Labels a button users can click to view an application requesting access to a resource.
-#: TWLight/users/templates/users/resource_tile.html:113
+#: TWLight/users/templates/users/resource_tile.html:141
 msgid "View application"
 msgstr "查看申請程序"
 
 #. Translators: Text beside the date on which the authorization has expired.
-#: TWLight/users/templates/users/resource_tile.html:120
+#: TWLight/users/templates/users/resource_tile.html:148
 msgid "Expired on"
 msgstr "已逾期於"
 
 #. Translators: Text beside the date on which the authorization will expire.
-#: TWLight/users/templates/users/resource_tile.html:123
+#: TWLight/users/templates/users/resource_tile.html:151
 msgid "Expires on"
 msgstr "逾期於"
 
@@ -4113,3 +4114,7 @@ msgstr "{username} 申請了向 <a href='{url}'>{partner}</a> 的取用權限"
 #, python-brace-format
 msgid "{username} received access to <a href='{url}'>{partner}</a>"
 msgstr "{username} 得到了對於 <a href='{url}'>{partner}</a> 的取用權限"
+
+#, python-format
+#~ msgid "External link to %(name)s's website"
+#~ msgstr "連接到 %(name)s 的外部網站"
