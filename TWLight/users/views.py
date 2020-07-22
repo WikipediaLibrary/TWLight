@@ -611,7 +611,12 @@ class TermsView(UpdateView):
         if "instance" not in kwargs:
             return None
         else:
-            return form_class(self.request.user.userprofile, **self.get_form_kwargs())
+            if self.request.user.is_authenticated:
+                return form_class(
+                    self.request.user.userprofile, **self.get_form_kwargs()
+                )
+            else:
+                return form_class(None, **self.get_form_kwargs())
 
     def get_form_kwargs(self):
         """

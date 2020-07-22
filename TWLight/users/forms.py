@@ -175,7 +175,8 @@ class TermsForm(forms.ModelForm):
 
         # Translators: Users must click this button when registering to agree to the website terms of use.
         self.fields["terms_of_use"].label = _("I agree with the terms of use")
-        self.fields["terms_of_use"].initial = user_profile.terms_of_use
+        if user_profile:
+            self.fields["terms_of_use"].initial = user_profile.terms_of_use
         self.helper = FormHelper()
         self.helper.form_class = "form-inline"
         self.helper.field_template = "bootstrap3/layout/inline_field.html"
