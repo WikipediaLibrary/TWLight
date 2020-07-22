@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-22 00:21+0000\n"
+"POT-Creation-Date: 2020-07-22 19:19+0000\n"
 "PO-Revision-Date: 2020-07-20 17:59:32+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -224,7 +224,7 @@ msgstr "Courriel du compte"
 #: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/templates/resources/partner_users.html:28
 #: TWLight/resources/templates/resources/partner_users.html:79
-#: TWLight/users/forms.py:202
+#: TWLight/users/forms.py:203
 msgid "Email"
 msgstr "Courriel"
 
@@ -3167,7 +3167,7 @@ msgid "I agree with the terms of use"
 msgstr "J’accepte les conditions d’utilisation"
 
 #. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
-#: TWLight/users/forms.py:184
+#: TWLight/users/forms.py:185
 #, fuzzy
 #| msgid ""
 #| "Your email is blank. You can still explore the site, but you won't be "
@@ -3182,12 +3182,12 @@ msgstr ""
 "sans adresse courriel."
 
 #. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:190
+#: TWLight/users/forms.py:191
 msgid "I accept"
 msgstr "J’accepte"
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
-#: TWLight/users/forms.py:205
+#: TWLight/users/forms.py:206
 msgid ""
 "Use my Wikipedia email address (will be updated the next time you login)."
 msgstr ""
@@ -3195,7 +3195,7 @@ msgstr ""
 "jour la prochaine fois que vous vous connectez)."
 
 #. Translators: This labels a button which users click to change their email.
-#: TWLight/users/forms.py:223
+#: TWLight/users/forms.py:224
 msgid "Update email"
 msgstr "Mettre à jour votre courriel"
 
@@ -4426,7 +4426,7 @@ msgstr ""
 "sans adresse courriel."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:820
+#: TWLight/users/views.py:825
 msgid "Access to {} has been returned."
 msgstr "L’accès à {} a été retourné."
 
