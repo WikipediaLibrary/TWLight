@@ -8,12 +8,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-07-20 17:59:33+0000\n"
-"X-POT-Import-Date: 2020-07-20 13:46:16+0000\n"
+"PO-Revision-Date: 2020-07-27 16:36:13+0000\n"
+"X-POT-Import-Date: 2020-07-22 00:31:42+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ms\n"
-"X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-04-20\n"
+"X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-07-20\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -202,7 +202,7 @@ msgstr "E-mel akaun"
 #: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/templates/resources/partner_users.html:28
 #: TWLight/resources/templates/resources/partner_users.html:79
-#: TWLight/users/forms.py:198
+#: TWLight/users/forms.py:203
 msgid "Email"
 msgstr "E-mel"
 
@@ -692,7 +692,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
-#: TWLight/users/views.py:488
+#: TWLight/users/views.py:493
 msgid "Confirm"
 msgstr "Sahkan"
 
@@ -1499,7 +1499,10 @@ msgid "Location"
 msgstr "Lokasi"
 
 #. Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
+#. Translators: This is the heading of the section of a user's
+#. profile where they disagree their terms of use.
 #: TWLight/resources/templates/resources/partner_detail.html:359
+#: TWLight/users/templates/users/preferences.html:57
 msgid "Terms of use"
 msgstr "Terma penggunaan"
 
@@ -1732,7 +1735,7 @@ msgstr "Tinjau dan sokong cadangan"
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
 #: TWLight/resources/templates/resources/suggest.html:54
-#: TWLight/users/templates/users/preferences.html:70
+#: TWLight/users/templates/users/preferences.html:98
 msgid "Delete"
 msgstr "Hapuskan"
 
@@ -2258,6 +2261,7 @@ msgstr ""
 
 #. Translators: Found on the password reset page.
 #: TWLight/templates/registration/password_change_form.html:11
+#: TWLight/users/templates/users/preferences.html:43
 msgid "Change password"
 msgstr "Tukar kata laluan"
 
@@ -2312,18 +2316,23 @@ msgstr ""
 msgid "I agree with the terms of use"
 msgstr ""
 
+#. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
+#: TWLight/users/forms.py:185
+msgid "By unchecking this box and clicking “Update” you may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
+msgstr ""
+
 #. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:186
+#: TWLight/users/forms.py:191
 msgid "I accept"
 msgstr "Saya terima"
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
-#: TWLight/users/forms.py:201
+#: TWLight/users/forms.py:206
 msgid "Use my Wikipedia email address (will be updated the next time you login)."
 msgstr ""
 
 #. Translators: This labels a button which users click to change their email.
-#: TWLight/users/forms.py:219
+#: TWLight/users/forms.py:224
 msgid "Update email"
 msgstr "Kemas kini e-mel"
 
@@ -2643,18 +2652,32 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#. Translators: This text labels a button which, when clicked, updates a user's acceptance to the site's terms of use.
+#. Translators: This is a button which updates user preference settings
+#. Translators: This is the button users click to confirm changes to their personal information.
+#: TWLight/users/templates/users/preferences.html:66
+#: TWLight/users/templates/users/user_email_preferences.html:23
+#: TWLight/users/views.py:362
+msgid "Update"
+msgstr ""
+
+#. Translators: This link is to the site's terms of use.
+#: TWLight/users/templates/users/preferences.html:71
+msgid "View Terms of Use"
+msgstr ""
+
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
-#: TWLight/users/templates/users/preferences.html:53
+#: TWLight/users/templates/users/preferences.html:81
 msgid "Data"
 msgstr ""
 
 #. Translators: This text labels a button users can click to download their data.
-#: TWLight/users/templates/users/preferences.html:59
+#: TWLight/users/templates/users/preferences.html:87
 msgid "Download"
 msgstr "Muat turun"
 
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
-#: TWLight/users/templates/users/preferences.html:65
+#: TWLight/users/templates/users/preferences.html:93
 msgid "Restrict"
 msgstr ""
 
@@ -2986,60 +3009,53 @@ msgstr ""
 msgid "Coordinators only"
 msgstr ""
 
-#. Translators: This is a button which updates user preference settings
-#. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:357
-msgid "Update"
-msgstr ""
-
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:137
+#: TWLight/users/views.py:141
 #, python-brace-format
 msgid "Please <a href='{url}'>update your contributions</a> to Wikipedia to help coordinators evaluate your applications."
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:249
+#: TWLight/users/views.py:254
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, consider changing your preferences."
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:257
+#: TWLight/users/views.py:262
 msgid "Your reminder email preferences are updated."
 msgstr ""
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:339 TWLight/users/views.py:420
-#: TWLight/users/views.py:473
+#: TWLight/users/views.py:344 TWLight/users/views.py:425
+#: TWLight/users/views.py:478
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:372
+#: TWLight/users/views.py:377
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:404
+#: TWLight/users/views.py:409
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:432
+#: TWLight/users/views.py:437
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:443
+#: TWLight/users/views.py:448
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:815
+#: TWLight/users/views.py:825
 msgid "Access to {} has been returned."
 msgstr ""
 
