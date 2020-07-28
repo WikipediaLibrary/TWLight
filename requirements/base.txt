@@ -20,7 +20,7 @@ djmail==1.1.0
 docutils==0.15.2
 factory_boy>=2.10.0,<3.0
 mwoauth==0.3.7
-pillow==6.2.2
+pillow==7.2.0
 pypandoc==1.4
 python-dateutil==2.8.1
 pytz==2019.3
