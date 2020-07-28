@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-22 19:19+0000\n"
+"POT-Creation-Date: 2020-07-28 12:57+0000\n"
 "PO-Revision-Date: 2019-02-14 08:31:32+0000\n"
 "Language: mr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1965,6 +1965,13 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_filter.html:48
 msgid "No partners meet the specified criteria."
 msgstr ""
+
+#. Translators: This is a button to go back on the top of page.
+#: TWLight/resources/templates/resources/partner_filter.html:55
+#, fuzzy
+#| msgid "Sent to partner"
+msgid "Back to top"
+msgstr "साथीदारांना पाठवले आहे"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:34

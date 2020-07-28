@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-22 19:19+0000\n"
+"POT-Creation-Date: 2020-07-28 12:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1922,6 +1922,11 @@ msgstr ""
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
 #: TWLight/resources/templates/resources/partner_filter.html:48
 msgid "No partners meet the specified criteria."
+msgstr ""
+
+#. Translators: This is a button to go back on the top of page.
+#: TWLight/resources/templates/resources/partner_filter.html:55
+msgid "Back to top"
 msgstr ""
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
