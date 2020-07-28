@@ -230,6 +230,24 @@ class PartnersDetailView(DetailView):
 
         return partner_list
 
+    def get(self, request, *args, **kwargs):
+        try:
+            partner = self.get_object()
+        except Http404:
+            # If partner object does not exists check if the partner's status is NOT_AVAILABLE.
+            partner_pk = self.kwargs.get("pk")
+            if Partner.even_not_available.filter(pk=partner_pk).exists():
+                messages.add_message(
+                    self.request,
+                    messages.ERROR,
+                    # Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
+                    _("This partner is currently not open for applications"),
+                )
+                raise PermissionDenied
+
+        # In all other cases call the default get method.
+        return super(PartnersDetailView, self).get(request, *args, **kwargs)
+
 
 class PartnersToggleWaitlistView(CoordinatorsOnly, View):
     def post(self, request, *args, **kwargs):

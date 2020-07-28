@@ -163,7 +163,8 @@ class PartnerModelTests(TestCase):
 
         request = RequestFactory().get(detail_url)
         request.user = editor.user
-        with self.assertRaises(Http404):
+        # This must raise a PermissionDenied exception
+        with self.assertRaises(PermissionDenied):
             # We must explicitly pass kwargs to the view even though they are
             # implied by the URL.
             _ = PartnersDetailView.as_view()(request, pk=partner.pk)
