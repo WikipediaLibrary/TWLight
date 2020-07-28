@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-28 12:57+0000\n"
+"POT-Creation-Date: 2020-07-28 13:47+0000\n"
 "PO-Revision-Date: 2020-07-27 16:36:12+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1526,7 +1526,7 @@ msgstr "پیغام شما فرستاده شد. به زودی به شما پاس�
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:366
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:384
 msgid "You must be a Wikipedia editor to do that."
 msgstr "برای اینکار باید یکی از ویرایشگران ویکی‌پدیا باشید."
 
@@ -2114,23 +2114,30 @@ msgid ""
 "and don't forget to mention this message."
 msgstr ""
 
+#. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
+#: TWLight/resources/views.py:244
+#, fuzzy
+#| msgid "This partner is now available for applications"
+msgid "This partner is currently not open for applications"
+msgstr "این پایگاه آمادهٔ دریافت درخواست‌ها است."
+
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:249
+#: TWLight/resources/views.py:267
 msgid "This partner is now waitlisted"
 msgstr "پایگاه مورد نظر در لیست انتظار قرار گرفت."
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:262
+#: TWLight/resources/views.py:280
 msgid "This partner is now available for applications"
 msgstr "این پایگاه آمادهٔ دریافت درخواست‌ها است."
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:358
+#: TWLight/resources/views.py:376
 msgid "Your suggestion has been added."
 msgstr "پیشنهاد شما اضافه شد."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:383
+#: TWLight/resources/views.py:401
 msgid "Suggestion has been deleted."
 msgstr "پیشنهاد حذف شد."
 

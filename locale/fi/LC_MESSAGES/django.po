@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-28 12:57+0000\n"
+"POT-Creation-Date: 2020-07-28 13:47+0000\n"
 "PO-Revision-Date: 2020-07-27 16:36:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1527,7 +1527,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:366
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:384
 #, fuzzy
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Sinun on oltava kirjautuneena sisään tehdäksesi sen."
@@ -2148,28 +2148,35 @@ msgid ""
 "and don't forget to mention this message."
 msgstr ""
 
+#. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
+#: TWLight/resources/views.py:244
+#, fuzzy
+msgid "This partner is currently not open for applications"
+msgstr ""
+"Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
+
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:249
+#: TWLight/resources/views.py:267
 #, fuzzy
 msgid "This partner is now waitlisted"
 msgstr ""
 "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:262
+#: TWLight/resources/views.py:280
 #, fuzzy
 msgid "This partner is now available for applications"
 msgstr ""
 "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:358
+#: TWLight/resources/views.py:376
 #, fuzzy
 msgid "Your suggestion has been added."
 msgstr "Tietosi on päivitetty."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:383
+#: TWLight/resources/views.py:401
 #, fuzzy
 msgid "Suggestion has been deleted."
 msgstr "Tietosi on päivitetty."
