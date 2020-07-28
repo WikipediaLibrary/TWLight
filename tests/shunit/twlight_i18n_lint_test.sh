@@ -3,32 +3,26 @@
 shopt -s expand_aliases
 
 testBadPyNewlines() {
-    start=1
-    end=6
-    for ((i=$start; i<=$end; i++))
+    prefix=${TWLIGHT_HOME}/tests/shunit/data/bad_i18n_newline_
+    for i in ${prefix}*.py
     do
-        file=${TWLIGHT_HOME}/tests/shunit/data/bad_i18n_newline_$i.py
-        assertFalse "${file} should cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${file}"
+        assertFalse "${file} should cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${i}"
     done
 }
 
 testGoodPy() {
-    start=1
-    end=2
-    for ((i=$start; i<=$end; i++))
+    prefix=${TWLIGHT_HOME}/tests/shunit/data/good_i18n_
+    for i in ${prefix}*.py
     do
-        file=${TWLIGHT_HOME}/tests/shunit/data/good_i18n_$i.py
-        assertTrue "${file} should not cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${file}" ||:
+        assertTrue "${file} should not cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${i}" ||:
     done
 }
 
 testBadPyComments() {
-    start=1
-    end=2
-    for ((i=$start; i<=$end; i++))
+    prefix=${TWLIGHT_HOME}/tests/shunit/data/bad_i18n_comment_
+    for i in ${prefix}*.py
     do
-        file=${TWLIGHT_HOME}/tests/shunit/data/bad_i18n_comment_$i.py
-        assertFalse "${file} should cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${file}"
+        assertFalse "${file} should cause an error." "perl ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl ${i}"
     done
 }
 
