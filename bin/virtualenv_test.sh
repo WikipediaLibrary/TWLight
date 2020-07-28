@@ -18,7 +18,7 @@ set -euo pipefail
             echo "${TWLIGHT_HOME}/tests/shunit/twlight_i18n_lint_test.sh"
             ${TWLIGHT_HOME}/tests/shunit/twlight_i18n_lint_test.sh
 
-            # https://phabricator.wikimedia.org/T255167
+            # https://github.com/WikipediaLibrary/TWLight/wiki/Translation
             echo "Checking for localization issues"
             # TODO: add html jinja template checks.
             # find TWLight -type f \( -name "*.py" -o -name "*.html" \) -print0 | xargs -0 -I % ${TWLIGHT_HOME}/bin/twlight_i18n_lint.pl %
