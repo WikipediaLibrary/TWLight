@@ -4,6 +4,7 @@ RUN apk add --update \
     libjpeg-turbo \
     libxslt-dev \
     mariadb-dev \
+    perl \
     python3;\
     pip3 install virtualenv
 
