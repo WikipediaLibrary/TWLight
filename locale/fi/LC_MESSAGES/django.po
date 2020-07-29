@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-28 13:47+0000\n"
+"POT-Creation-Date: 2020-07-29 02:18+0000\n"
 "PO-Revision-Date: 2020-07-27 16:36:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1064,7 +1064,9 @@ msgstr ""
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
+#. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
 #: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
+#: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "Lähetä"
 
@@ -2921,11 +2923,6 @@ msgstr ""
 "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
-#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:191
-msgid "I accept"
-msgstr "Hyväksyn"
-
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
 msgid ""
@@ -3994,10 +3991,10 @@ msgstr "Wikimedia Foundationin tietosuojakäytäntö"
 #: TWLight/users/templates/users/terms.html:299
 #, fuzzy
 msgid ""
-"By checking this box and clicking “I Accept”, you agree that you have read "
-"the above terms and that you will adhere to the terms of use in your "
-"application to and use of the The Wikipedia Library, and the publishers’ "
-"services to which you gain access through The Wikipedia Library program."
+"By checking this box and clicking “Submit”, you agree that you have read the "
+"above terms and that you will adhere to the terms of use in your application "
+"to and use of the The Wikipedia Library, and the publishers’ services to "
+"which you gain access through The Wikipedia Library program."
 msgstr ""
 "Rastimalla tämän laatikon ja klikkaamalla “Hyväksyn”, hyväksyt ylläolevan "
 "yksityisyydensuojakäytännön ja käyttöehdot, ja sitoudut noudattamaan niitä "
@@ -4178,3 +4175,6 @@ msgstr ""
 msgid "{username} received access to <a href='{url}'>{partner}</a>"
 msgstr ""
 "{username} sai käyttöoikeuden aineistoon <a href=\"{url}\">{partner}</a>"
+
+#~ msgid "I accept"
+#~ msgstr "Hyväksyn"

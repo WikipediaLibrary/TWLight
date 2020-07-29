@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-28 13:48+0000\n"
+"POT-Creation-Date: 2020-07-29 02:19+0000\n"
 "PO-Revision-Date: 2020-07-27 16:36:14+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1052,7 +1052,9 @@ msgstr "接收此消息的副本"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
+#. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
 #: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
+#: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "发布"
 
@@ -2861,11 +2863,6 @@ msgstr ""
 "您还似乎未设置电子邮件呢。您仍然可以探索网站，但是您将无法申请没有电子邮件的"
 "合作伙伴资源。"
 
-#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:191
-msgid "I accept"
-msgstr "我接受"
-
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
 msgid ""
@@ -3848,10 +3845,10 @@ msgstr "维基媒体基金会隐私政策"
 #: TWLight/users/templates/users/terms.html:299
 #, fuzzy
 msgid ""
-"By checking this box and clicking “I Accept”, you agree that you have read "
-"the above terms and that you will adhere to the terms of use in your "
-"application to and use of the The Wikipedia Library, and the publishers’ "
-"services to which you gain access through The Wikipedia Library program."
+"By checking this box and clicking “Submit”, you agree that you have read the "
+"above terms and that you will adhere to the terms of use in your application "
+"to and use of the The Wikipedia Library, and the publishers’ services to "
+"which you gain access through The Wikipedia Library program."
 msgstr ""
 "通过选中此框并单击“I Accept”，您就会同意上述隐私声明和条款，并同意在您申请和"
 "使用“维基百科书斋”以及通过“维基百科书斋”程序访问的出版商服务时遵守这些声明和"
@@ -4024,3 +4021,6 @@ msgstr "{username}</a>用于访问<a href='{url}'>{partner}</a>"
 #, python-brace-format
 msgid "{username} received access to <a href='{url}'>{partner}</a>"
 msgstr "{username}</a>用于访问<a href='{url}'>{partner}</a>"
+
+#~ msgid "I accept"
+#~ msgstr "我接受"

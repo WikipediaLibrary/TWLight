@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-28 13:47+0000\n"
+"POT-Creation-Date: 2020-07-29 02:18+0000\n"
 "PO-Revision-Date: 2020-07-27 16:36:12+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1063,7 +1063,9 @@ msgstr ""
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
+#. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
 #: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
+#: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "जमा करें"
 
@@ -2934,11 +2936,6 @@ msgstr ""
 "आपका ईमेल रिक्त है। आप अभी भी साइट को देख सकते हैं, लेकिन आप बिना ईमेल के भागीदार "
 "संसाधनों तक पहुंच के लिए आवेदन नहीं कर पाएंगे।"
 
-#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:191
-msgid "I accept"
-msgstr "मुझे स्वीकार है"
-
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
 #, fuzzy
@@ -3997,10 +3994,10 @@ msgstr "विकिमीडिया फाउंडेशन गोपनी�
 #: TWLight/users/templates/users/terms.html:299
 #, fuzzy
 msgid ""
-"By checking this box and clicking “I Accept”, you agree that you have read "
-"the above terms and that you will adhere to the terms of use in your "
-"application to and use of the The Wikipedia Library, and the publishers’ "
-"services to which you gain access through The Wikipedia Library program."
+"By checking this box and clicking “Submit”, you agree that you have read the "
+"above terms and that you will adhere to the terms of use in your application "
+"to and use of the The Wikipedia Library, and the publishers’ services to "
+"which you gain access through The Wikipedia Library program."
 msgstr ""
 "इस बॉक्स को चेक करके और \"सहमत हूँ\" पर क्लिक करके, आप उपरोक्त गोपनीयता कथन और शर्तों "
 "पर सहमति देते हैं, और विकिपीडिया पुस्तकालय और प्रकाशक की सेवाओं के उपयोग और उपयोग के "
@@ -4182,3 +4179,6 @@ msgid "{username} received access to <a href='{url}'>{partner}</a>"
 msgstr ""
 "\n"
 "{username} ने <a href=\"{url}\">{partner}</a> तक पहुँच प्राप्त की"
+
+#~ msgid "I accept"
+#~ msgstr "मुझे स्वीकार है"

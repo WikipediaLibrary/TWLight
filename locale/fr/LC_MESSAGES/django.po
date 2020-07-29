@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-28 13:47+0000\n"
+"POT-Creation-Date: 2020-07-29 02:18+0000\n"
 "PO-Revision-Date: 2020-07-27 16:36:12+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -1105,7 +1105,9 @@ msgstr "Recevoir une copie de ce message"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
+#. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
 #: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
+#: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -3191,11 +3193,6 @@ msgstr ""
 "explorer le site, mais vous ne pourrez pas demander l’accès aux ressources "
 "ou évaluer les demandes sans avoir accepté les conditions d’utilisation."
 
-#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:191
-msgid "I accept"
-msgstr "J’accepte"
-
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
 msgid ""
@@ -4309,11 +4306,17 @@ msgstr "Wikimedia Foundation"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
+#, fuzzy
+#| msgid ""
+#| "By checking this box and clicking “I Accept”, you agree that you have "
+#| "read the above terms and that you will adhere to the terms of use in your "
+#| "application to and use of the The Wikipedia Library, and the publishers’ "
+#| "services to which you gain access through The Wikipedia Library program."
 msgid ""
-"By checking this box and clicking “I Accept”, you agree that you have read "
-"the above terms and that you will adhere to the terms of use in your "
-"application to and use of the The Wikipedia Library, and the publishers’ "
-"services to which you gain access through The Wikipedia Library program."
+"By checking this box and clicking “Submit”, you agree that you have read the "
+"above terms and that you will adhere to the terms of use in your application "
+"to and use of the The Wikipedia Library, and the publishers’ services to "
+"which you gain access through The Wikipedia Library program."
 msgstr ""
 "En cochant cette case et cliquant sur « J’accepte », vous confirmez que vous "
 "avez lu les conditions ci-dessus et que vous respecterez les conditions "
@@ -4502,3 +4505,6 @@ msgstr "{username} a demandé l’accès à <a href='{url}'>{partner}</a>"
 #, python-brace-format
 msgid "{username} received access to <a href='{url}'>{partner}</a>"
 msgstr "{username} a reçu l’accès à <a href='{url}'>{partner}</a>"
+
+#~ msgid "I accept"
+#~ msgstr "J’accepte"

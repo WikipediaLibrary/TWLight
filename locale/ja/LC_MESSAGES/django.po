@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-28 13:47+0000\n"
+"POT-Creation-Date: 2020-07-29 02:18+0000\n"
 "PO-Revision-Date: 2020-07-27 16:36:13+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1080,7 +1080,9 @@ msgstr "このメッセージの副本を受け取る"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
+#. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
 #: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
+#: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "提出"
 
@@ -3108,11 +3110,6 @@ msgstr ""
 "ますが、利用規約に同意しない限り資料へのアクセスやアプリケーションの試用を申"
 "請することはできなくなります。"
 
-#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:191
-msgid "I accept"
-msgstr "賛同します"
-
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
 msgid ""
@@ -4162,11 +4159,17 @@ msgstr "ウィキメディア財団"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
+#, fuzzy
+#| msgid ""
+#| "By checking this box and clicking “I Accept”, you agree that you have "
+#| "read the above terms and that you will adhere to the terms of use in your "
+#| "application to and use of the The Wikipedia Library, and the publishers’ "
+#| "services to which you gain access through The Wikipedia Library program."
 msgid ""
-"By checking this box and clicking “I Accept”, you agree that you have read "
-"the above terms and that you will adhere to the terms of use in your "
-"application to and use of the The Wikipedia Library, and the publishers’ "
-"services to which you gain access through The Wikipedia Library program."
+"By checking this box and clicking “Submit”, you agree that you have read the "
+"above terms and that you will adhere to the terms of use in your application "
+"to and use of the The Wikipedia Library, and the publishers’ services to "
+"which you gain access through The Wikipedia Library program."
 msgstr ""
 "このチェックボックスにレ点を記入し「了承します」を押すと、利用者は上記の規約"
 "を通読したこと、なおかつその利用申請およびその利用において、ウィキペディア図"
@@ -4350,3 +4353,6 @@ msgstr ""
 msgid "{username} received access to <a href='{url}'>{partner}</a>"
 msgstr ""
 "{username} さんが<a href='{url}'>{partner}</a>のアクセス権を取得しました"
+
+#~ msgid "I accept"
+#~ msgstr "賛同します"
