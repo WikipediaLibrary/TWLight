@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-07-29 02:18+0000\n"
+"POT-Creation-Date: 2020-07-29 13:16+0000\n"
 "PO-Revision-Date: 2020-07-27 16:36:13+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -205,10 +205,11 @@ msgstr ""
 msgid "Account email"
 msgstr "계정 이메일"
 
+#. Translators: This labels a user's email address on a form for account coordinators
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #. Translators: Labels the field where the user's email is displayed.
-#: TWLight/applications/helpers.py:148
+#: TWLight/applications/helpers.py:150
 #: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/templates/resources/partner_users.html:28
 #: TWLight/resources/templates/resources/partner_users.html:79
@@ -910,7 +911,7 @@ msgid ""
 "waitlisted and (or) has zero accounts available for distribution."
 msgstr ""
 
-#. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
+#. Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
 #: TWLight/applications/views.py:931
 msgid "You attempted to create a duplicate authorization."
 msgstr ""
@@ -2796,7 +2797,7 @@ msgid ""
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
-#. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:451
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
@@ -3733,7 +3734,7 @@ msgstr ""
 msgid "No active blocks"
 msgstr ""
 
-#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: This displays on the timeline when a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/views.py:124
 #, fuzzy, python-brace-format
 msgid "{username} signed up for a Wikipedia Library Card Platform account"
@@ -3741,7 +3742,7 @@ msgstr ""
 "<a href=\"{central_auth_url}\">{username}</a>님이 위키백과 도서관 카드 플랫"
 "폼 계정에 가입했습니다"
 
-#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: This displays on the timeline when a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/views.py:139
 #, fuzzy, python-brace-format
 msgid "{partner} joined the Wikipedia Library "
@@ -3772,6 +3773,35 @@ msgstr ""
 #: TWLight/views.py:201
 #, python-brace-format
 msgid "{username} received access to <a href='{url}'>{partner}</a>"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_comment_1.py:3
+#: tests/shunit/data/bad_i18n_newline_1.py:5
+msgid "1"
+msgstr ""
+
+#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non viverra vitae, interdum ut aenean ipsum.
+#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non.
+#: tests/shunit/data/bad_i18n_comment_2.py:4
+#: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
+#: tests/shunit/data/good_i18n_2.py:2
+msgid "2"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_newline_3.py:5
+msgid "3"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_newline_4.py:5
+msgid "4"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_newline_5.py:5
+msgid "5"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_newline_6.py:5
+msgid "6"
 msgstr ""
 
 #~ msgid "I accept"
