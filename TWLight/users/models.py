@@ -455,9 +455,9 @@ class Editor(models.Model):
             self.wp_not_blocked,
             self.ignore_wp_blocks,
         )
-        self.wp_bundle_eligible = editor_bundle_eligible(
-            self.wp_valid, self.wp_enough_recent_edits
-        )
+
+        self.wp_bundle_eligible = editor_bundle_eligible(self)
+
         self.save()
 
         self.update_bundle_authorization()

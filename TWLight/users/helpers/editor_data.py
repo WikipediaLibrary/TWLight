@@ -184,8 +184,11 @@ def editor_recent_edits(
     )
 
 
-def editor_bundle_eligible(wp_valid, wp_enough_recent_edits):
-    if wp_valid and wp_enough_recent_edits:
+def editor_bundle_eligible(editor):
+    enough_edits_and_valid = editor.wp_valid and editor.wp_enough_recent_edits
+    # Staff and superusers should be eligible for bundles for testing purposes
+    user_staff_or_superuser = editor.user.is_staff or editor.user.is_superuser
+    if enough_edits_and_valid or user_staff_or_superuser:
         return True
     else:
         return False
