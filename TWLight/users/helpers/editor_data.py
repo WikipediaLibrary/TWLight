@@ -58,7 +58,7 @@ def editor_global_userinfo(
             assert wp_sub == global_userinfo["id"]
     except (KeyError, AssertionError):
         global_userinfo = None
-        logger.exception("Could not fetch global_userinfo for User.")
+        logger.exception(f"Could not fetch global_userinfo for User {guiuser}")
     return global_userinfo
 
 
