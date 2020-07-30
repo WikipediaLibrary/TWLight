@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-07-27 16:36:11+0000\n"
-"X-POT-Import-Date: 2020-07-22 00:31:42+0000\n"
+"PO-Revision-Date: 2020-07-30 13:41:20+0000\n"
+"X-POT-Import-Date: 2020-07-29 14:31:43+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bcl\n"
@@ -194,10 +194,11 @@ msgstr "Mag-ayon sa termino kan paggamit"
 msgid "Account email"
 msgstr "Pampalaog na e-surat"
 
+#. Translators: This labels a user's email address on a form for account coordinators
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #. Translators: Labels the field where the user's email is displayed.
-#: TWLight/applications/helpers.py:148
+#: TWLight/applications/helpers.py:150
 #: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/templates/resources/partner_users.html:28
 #: TWLight/resources/templates/resources/partner_users.html:79
@@ -858,7 +859,7 @@ msgstr ""
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."
 msgstr ""
 
-#. Translators: this message is shown to users who attempt to authorize an editor to access a resource during a time period for which they are already authorized. This could result in the unintended distribution of extra access codes, so the message is shown in the context of an "access denied" screen.
+#. Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
 #: TWLight/applications/views.py:931
 msgid "You attempted to create a duplicate authorization."
 msgstr "Ika nagporbar maggibo nin dobleng awtorisasyon."
@@ -953,7 +954,9 @@ msgstr "Magresibe nin kopya kaning mensahe"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
+#. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
 #: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
+#: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "Isumite"
 
@@ -1241,7 +1244,7 @@ msgstr "An saimong mensahe naipadara na! Mabalik kami saimo sa madaling panahon.
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:366
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:384
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Kaipuhan mong magin paraliwat sa Wikipedya para magibo yan."
 
@@ -1668,6 +1671,11 @@ msgstr "Mag-aply sa dakol na kapareha"
 msgid "No partners meet the specified criteria."
 msgstr ""
 
+#. Translators: This is a button to go back on the top of page.
+#: TWLight/resources/templates/resources/partner_filter.html:55
+msgid "Back to top"
+msgstr ""
+
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:34
 #, fuzzy, python-format
@@ -1771,23 +1779,28 @@ msgstr "Sigurado ka nang gusto mong puraon an %(object)s?"
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
 msgstr ""
 
+#. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
+#: TWLight/resources/views.py:244
+msgid "This partner is currently not open for applications"
+msgstr ""
+
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:249
+#: TWLight/resources/views.py:267
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:262
+#: TWLight/resources/views.py:280
 msgid "This partner is now available for applications"
 msgstr "An kaparehang ini handa na para sa mga aplikasyon"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:358
+#: TWLight/resources/views.py:376
 msgid "Your suggestion has been added."
 msgstr "An saimong suhestiyon naidugang na."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:383
+#: TWLight/resources/views.py:401
 msgid "Suggestion has been deleted."
 msgstr "An suhestiyon napura na."
 
@@ -2325,11 +2338,6 @@ msgstr "Nagtutugot ako sa termino kan paggamit"
 msgid "By unchecking this box and clicking “Update” you may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
 msgstr ""
 
-#. Translators: this 'I accept' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/users/forms.py:191
-msgid "I accept"
-msgstr "Inaako ko"
-
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
 msgid "Use my Wikipedia email address (will be updated the next time you login)."
@@ -2387,7 +2395,7 @@ msgstr ""
 msgid "Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
-#. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:451
 msgid "Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."
 msgstr ""
@@ -2984,7 +2992,7 @@ msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
-msgid "By checking this box and clicking “I Accept”, you agree that you have read the above terms and that you will adhere to the terms of use in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
+msgid "By checking this box and clicking “Submit”, you agree that you have read the above terms and that you will adhere to the terms of use in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
 msgstr ""
 
 #. Translators: This is the heading of the page where users can request the deletion of their data.
@@ -3083,13 +3091,13 @@ msgstr ""
 msgid "No active blocks"
 msgstr ""
 
-#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: This displays on the timeline when a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/views.py:124
 #, python-brace-format
 msgid "{username} signed up for a Wikipedia Library Card Platform account"
 msgstr "{username} maggibo nin panindog para sa Wikipedia Library Card Platform"
 
-#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: This displays on the timeline when a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/views.py:139
 #, python-brace-format
 msgid "{partner} joined the Wikipedia Library "
@@ -3118,4 +3126,33 @@ msgstr "{username} nagsumite nin aplikasyon para maka-access sa <a href=\"{url}\
 #, fuzzy, python-brace-format
 msgid "{username} received access to <a href='{url}'>{partner}</a>"
 msgstr "{username} nakaresibe nin access sa  <a href=\"{url}\">{partner}</a>"
+
+#: tests/shunit/data/bad_i18n_comment_1.py:3
+#: tests/shunit/data/bad_i18n_newline_1.py:5
+msgid "1"
+msgstr ""
+
+#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non viverra vitae, interdum ut aenean ipsum.
+#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non.
+#: tests/shunit/data/bad_i18n_comment_2.py:4
+#: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
+#: tests/shunit/data/good_i18n_2.py:2
+msgid "2"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_newline_3.py:5
+msgid "3"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_newline_4.py:5
+msgid "4"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_newline_5.py:5
+msgid "5"
+msgstr ""
+
+#: tests/shunit/data/bad_i18n_newline_6.py:5
+msgid "6"
+msgstr ""
 
