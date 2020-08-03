@@ -26,8 +26,12 @@ from django.utils.translation import ugettext_lazy as _
 from django_comments.models import Comment
 
 from TWLight.resources.models import Partner
-from TWLight.view_mixins import PartnerCoordinatorOrSelf, SelfOnly, coordinators
-from TWLight.users.groups import get_restricted
+from TWLight.view_mixins import (
+    PartnerCoordinatorOrSelf,
+    SelfOnly,
+    test_func_coordinators_only,
+)
+from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.helpers.authorizations import get_valid_partner_authorizations
 
 from rest_framework import status
@@ -50,8 +54,6 @@ from .helpers.authorizations import sort_authorizations_into_resource_list
 from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
-
-restricted = get_restricted()
 
 logger = logging.getLogger(__name__)
 
@@ -128,7 +130,7 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
         context["email_form"] = UserEmailForm(user=user)
         # Check if the user is in the group: 'coordinators',
         # and add the reminder email preferences form.
-        if coordinators in user.groups.all():
+        if test_func_coordinators_only(user):
             context["coordinator_email_form"] = CoordinatorEmailForm(user=user)
 
         try:
@@ -217,7 +219,7 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
             user = self.request.user
             # Again, process email preferences data only if the user
             # is present in the group: 'coordinators'.
-            if coordinators in user.groups.all():
+            if test_func_coordinators_only(user):
                 # Unchecked checkboxes doesn't send POST data
                 if "send_pending_application_reminders" in request.POST:
                     send_pending_app_reminders = True
@@ -498,12 +500,14 @@ class RestrictDataView(SelfOnly, FormView):
         return form
 
     def form_valid(self, form):
+        coordinators = get_coordinators()
+        restricted = get_restricted()
         if form.cleaned_data["restricted"]:
             self.request.user.groups.add(restricted)
 
             # If a coordinator requests we stop processing their data, we
             # shouldn't allow them to continue being one.
-            if coordinators in self.request.user.groups.all():
+            if test_func_coordinators_only(self.request.user):
                 self.request.user.groups.remove(coordinators)
         else:
             self.request.user.groups.remove(restricted)
