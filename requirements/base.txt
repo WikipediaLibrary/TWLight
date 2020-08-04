@@ -21,7 +21,7 @@ docutils==0.16
 factory_boy>=2.10.0,<3.0
 mwoauth==0.3.7
 pillow==7.2.0
-pypandoc==1.4
+pypandoc==1.5
 python-dateutil==2.8.1
 pytz==2019.3
 setuptools>=45.2.0
