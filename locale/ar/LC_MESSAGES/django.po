@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-03 16:57+0000\n"
+"POT-Creation-Date: 2020-08-04 16:35+0000\n"
 "PO-Revision-Date: 2020-07-30 13:41:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr ""
 #. Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners.
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this is the heading of the box on the right, which contains information about collections to which users need to make an application.
 #. Translators: Labels the button users can click to apply for a resource.
-#: TWLight/applications/forms.py:112
+#: TWLight/applications/forms.py:113
 #: TWLight/applications/templates/applications/request_for_application.html:57
 #: TWLight/applications/templates/applications/request_for_application.html:59
 #: TWLight/resources/templates/resources/partner_detail.html:47
@@ -50,18 +50,18 @@ msgid "Apply"
 msgstr "تطبيق"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
-#: TWLight/applications/forms.py:205
+#: TWLight/applications/forms.py:206
 msgid "About you"
 msgstr "حولك"
 
 #. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-#: TWLight/applications/forms.py:214
+#: TWLight/applications/forms.py:215
 #, python-brace-format
 msgid "Requested by: {partner_list}"
 msgstr "مطلوب بواسطة: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:223
+#: TWLight/applications/forms.py:224
 #, fuzzy, python-brace-format
 msgid ""
 "<p><small><i>Your personal data will be processed according to our <a "
@@ -71,45 +71,45 @@ msgstr ""
 "الخصوصيةلدينا</a>.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
-#: TWLight/applications/forms.py:234
+#: TWLight/applications/forms.py:235
 #, python-brace-format
 msgid "Your application to {partner}"
 msgstr "طلبك ل{partner}"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
-#: TWLight/applications/forms.py:302
+#: TWLight/applications/forms.py:303
 #, python-brace-format
 msgid "You must register at {url} before applying."
 msgstr "يجب عليك التسجيل في {url} قبل تقديم الطلب."
 
-#. Translators: Label of the field where coordinators can enter the username of a users
+#. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
-#: TWLight/applications/forms.py:367
+#: TWLight/applications/forms.py:368
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:11
 msgid "Username"
 msgstr "اسم المستخدم"
 
 #. Translators: Label of the field where coordinators can enter the name of a partner
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:369 TWLight/applications/helpers.py:99
+#: TWLight/applications/forms.py:370 TWLight/applications/helpers.py:99
 msgid "Partner name"
 msgstr "اسم الشريك"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
-#: TWLight/applications/forms.py:385
+#: TWLight/applications/forms.py:386
 #, fuzzy
 msgid "Renewal confirmation"
 msgstr "عدل المعطيات"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:402 TWLight/applications/helpers.py:111
+#: TWLight/applications/forms.py:403 TWLight/applications/helpers.py:111
 msgid "The email for your account on the partner's website"
 msgstr "البريد الإلكتروني الخاص بحسابك على موقع الشريك"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:412 TWLight/applications/helpers.py:114
+#: TWLight/applications/forms.py:413 TWLight/applications/helpers.py:114
 msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
@@ -269,36 +269,36 @@ msgid "Invalid"
 msgstr "غير صالح"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
-#: TWLight/applications/models.py:125
+#: TWLight/applications/models.py:127
 msgid "12 months"
 msgstr "12 شهر"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
-#: TWLight/applications/models.py:127
+#: TWLight/applications/models.py:129
 #, fuzzy
 msgid "6 months"
 msgstr "شهر"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
-#: TWLight/applications/models.py:129
+#: TWLight/applications/models.py:131
 #, fuzzy
 msgid "3 months"
 msgstr "شهر"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
-#: TWLight/applications/models.py:131
+#: TWLight/applications/models.py:133
 #, fuzzy
 msgid "1 month"
 msgstr "شهر"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
-#: TWLight/applications/models.py:326
+#: TWLight/applications/models.py:328
 #, python-brace-format
 msgid "Access URL: {access_url}"
 msgstr "مسار الوصول: {access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-#: TWLight/applications/models.py:332
+#: TWLight/applications/models.py:334
 msgid ""
 "You can expect to receive access details within a week or two once it has "
 "been processed."
@@ -2994,7 +2994,7 @@ msgid "Update email"
 msgstr "عدل البريد الإلكتروني"
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:480
+#: TWLight/users/models.py:485
 #, python-brace-format
 msgid "{wp_username}"
 msgstr "{wp_username}"
