@@ -36,6 +36,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="partnerlogo",
             name="partner",
-            field=models.OneToOneField(related_name="logos", to="resources.Partner"),
+            field=models.OneToOneField(
+                related_name="logos", to="resources.Partner", on_delete=models.CASCADE
+            ),
         ),
     ]

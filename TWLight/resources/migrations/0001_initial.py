@@ -123,7 +123,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "partner",
-                    models.ForeignKey(related_name="streams", to="resources.Partner"),
+                    models.ForeignKey(
+                        related_name="streams",
+                        to="resources.Partner",
+                        on_delete=models.CASCADE,
+                    ),
                 ),
             ],
             options={},
@@ -132,7 +136,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="contact",
             name="partner",
-            field=models.ForeignKey(related_name="contacts", to="resources.Partner"),
+            field=models.ForeignKey(
+                related_name="contacts",
+                to="resources.Partner",
+                on_delete=models.CASCADE,
+            ),
             preserve_default=True,
         ),
     ]

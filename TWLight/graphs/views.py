@@ -6,12 +6,12 @@ from datetime import date
 from request.models import Request
 
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import resolve
+from django.urls import resolve
 from django.contrib import messages
 from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner

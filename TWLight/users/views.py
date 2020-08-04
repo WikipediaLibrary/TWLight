@@ -14,7 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse_lazy, resolve, Resolver404, reverse
+from django.urls import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View, RedirectView
 from django.views.generic.detail import DetailView
@@ -22,7 +22,7 @@ from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
 from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
 
 from TWLight.resources.models import Partner
@@ -284,7 +284,7 @@ class UserHomeView(View):
     @classonlymethod
     def as_view(cls):
         def _get_view(request, *args, **kwargs):
-            if request.user.is_anonymous():
+            if request.user.is_anonymous:
                 # We can't use something like django-braces LoginRequiredMixin
                 # here, because as_view applies at an earlier point in the
                 # process.
@@ -337,7 +337,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
         Users may only update their own information.
         """
         try:
-            assert self.request.user.is_authenticated()
+            assert self.request.user.is_authenticated
         except AssertionError:
             messages.add_message(
                 self.request,
@@ -418,7 +418,7 @@ class EmailChangeView(SelfOnly, FormView):
         Users may only update their own email.
         """
         try:
-            assert self.request.user.is_authenticated()
+            assert self.request.user.is_authenticated
         except AssertionError:
             messages.add_message(
                 self.request,
@@ -471,7 +471,7 @@ class RestrictDataView(SelfOnly, FormView):
 
     def get_object(self, queryset=None):
         try:
-            assert self.request.user.is_authenticated()
+            assert self.request.user.is_authenticated
         except AssertionError:
             messages.add_message(
                 self.request,
@@ -598,7 +598,7 @@ class TermsView(UpdateView):
         For authenticated users, returns their associated UserProfile instance.
         For anonymous users, returns None.
         """
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return self.request.user.userprofile
         else:
             return None
@@ -628,7 +628,7 @@ class TermsView(UpdateView):
         the form. For anonymous users, returns None.
         """
         kwargs = super(TermsView, self).get_form_kwargs()
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             kwargs.update({"instance": self.request.user.userprofile})
         return kwargs
 

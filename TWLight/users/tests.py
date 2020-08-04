@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.exceptions import PermissionDenied, ValidationError
-from django.core.urlresolvers import resolve, reverse
+from django.urls import resolve, reverse
 from django.core.management import call_command
 from django.test import TestCase, Client, RequestFactory
 from django.utils.translation import get_language
@@ -94,7 +94,7 @@ FAKE_GLOBAL_USERINFO = {
 # the rendered output of a page.
 def remove_csrfmiddlewaretoken(rendered_html):
     csrfmiddlewaretoken_pattern = (
-        r"<input type='hidden' name='csrfmiddlewaretoken' value='.+' />"
+        r"<input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\".+\">"
     )
     return re.sub(csrfmiddlewaretoken_pattern, "", rendered_html)
 
@@ -543,6 +543,8 @@ class ViewsTestCase(TestCase):
     def test_user_home_view_is_editor(self):
         """
         If a User who is an editor hits UserHomeView, they see EditorDetailView.
+        TODO: Change this test's assertions (they might break when the csrf
+        token is rendered differently)
         """
         user = UserFactory()
         editor = EditorFactory(user=user)
@@ -565,12 +567,11 @@ class ViewsTestCase(TestCase):
         # output of the two pages is the same - the user would have seen the
         # same thing on either page.
         self.assertEqual(home_response.status_code, 200)
-        self.assertEqual(
-            remove_csrfmiddlewaretoken(home_response.render().content.decode("utf-8")),
-            remove_csrfmiddlewaretoken(
-                detail_response.render().content.decode("utf-8")
-            ),
+        expected_detail_view = remove_csrfmiddlewaretoken(
+            detail_response.rendered_content
         )
+        home_view = remove_csrfmiddlewaretoken(home_response.rendered_content)
+        self.assertEqual(expected_detail_view, home_view)
 
     @patch("TWLight.users.views.UserDetailView.as_view")
     def test_user_home_view_non_editor(self, mock_view):

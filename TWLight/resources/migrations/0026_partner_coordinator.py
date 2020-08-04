@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 to=settings.AUTH_USER_MODEL,
                 help_text="The coordinator for this Partner, if any.",
                 null=True,
+                on_delete=models.CASCADE,
             ),
         )
     ]

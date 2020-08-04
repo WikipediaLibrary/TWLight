@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import json
 
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
 from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
@@ -46,7 +46,7 @@ class HomePageView(TemplateView):
 
         # We bundle these up into a list so that we can loop them and have a simpler time
         # setting the relevant CSS.
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             editor = self.request.user.editor
             sufficient_edits = editor.wp_enough_edits
             sufficient_tenure = editor.wp_account_old_enough
