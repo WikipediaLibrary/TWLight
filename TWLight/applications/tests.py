@@ -3501,46 +3501,6 @@ class EvaluateApplicationTest(TestCase):
         # but three applications pending.
         self.assertTrue(more_applications_than_accounts_available(app))
 
-    class ListApplicationsTest(BaseApplicationViewTest):
-        @classmethod
-        def setUpClass(cls):
-            super(ListApplicationsTest, cls).setUpClass()
-            cls.superuser = User.objects.create_user(username="super", password="super")
-            cls.superuser.is_superuser = True
-            cls.superuser.save()
-
-            ApplicationFactory(status=Application.PENDING)
-            ApplicationFactory(status=Application.PENDING)
-            ApplicationFactory(status=Application.QUESTION)
-            parent = ApplicationFactory(status=Application.APPROVED)
-            ApplicationFactory(status=Application.APPROVED)
-            ApplicationFactory(status=Application.NOT_APPROVED)
-            ApplicationFactory(status=Application.NOT_APPROVED)
-            ApplicationFactory(status=Application.NOT_APPROVED)
-            ApplicationFactory(status=Application.INVALID)
-            ApplicationFactory(status=Application.INVALID)
-
-            # Make sure there are some up-for-renewal querysets, too.
-            ApplicationFactory(status=Application.PENDING, parent=parent)
-            ApplicationFactory(status=Application.QUESTION, parent=parent)
-            ApplicationFactory(status=Application.APPROVED, parent=parent)
-            ApplicationFactory(status=Application.NOT_APPROVED, parent=parent)
-            ApplicationFactory(
-                status=Application.SENT, parent=parent, sent_by=cls.coordinator
-            )
-
-            user = UserFactory(username="editor")
-            editor = EditorFactory(user=user)
-
-            # And some applications from a user who will delete their account.
-            ApplicationFactory(status=Application.PENDING, editor=editor)
-            ApplicationFactory(status=Application.QUESTION, editor=editor)
-            ApplicationFactory(status=Application.APPROVED, editor=editor)
-            ApplicationFactory(status=Application.NOT_APPROVED, editor=editor)
-            ApplicationFactory(
-                status=Application.SENT, editor=editor, sent_by=cls.coordinator
-            )
-
 
 class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
     @classmethod
