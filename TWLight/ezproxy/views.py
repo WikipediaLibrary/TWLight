@@ -97,7 +97,17 @@ class EZProxyTicket(object):
             + packet
         )
         self.starting_point_url = (
-            ezproxy_url + "/login?user=" + user + "&ticket=" + ticket
+            # The EZproxy server.
+            ezproxy_url
+            # The TWLight editor.
+            + "/login?user="
+            + user
+            # The editor's authorization ticket.
+            + "&ticket="
+            + ticket
+            # An identifier for this CGI endpoint.
+            + "&auth="
+            + settings.TWLIGHT_ENV
         )
 
     def url(self, url):

@@ -42,6 +42,8 @@ class ProxyTestCase(AuthorizationBaseTestCase):
             + quote(self.editor1.wp_username)
             + "&ticket="
             + too_lazy_to_test_ticket
+            + "&auth="
+            + settings.TWLIGHT_ENV
             + "&url="
             + self.app1.partner.target_url
         )

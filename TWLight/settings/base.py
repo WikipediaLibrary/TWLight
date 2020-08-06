@@ -42,6 +42,8 @@ TWLIGHT_HOME = os.path.dirname(
     os.path.dirname(os.path.abspath(os.path.join(os.path.abspath(__file__), os.pardir)))
 )
 
+TWLIGHT_ENV = os.environ.get("TWLIGHT_ENV")
+
 # An atypical way of setting django languages for TranslateWiki integration:
 # https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
 
