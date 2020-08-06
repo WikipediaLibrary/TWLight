@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-07-30 13:41:22+0000\n"
+"PO-Revision-Date: 2020-08-06 15:14:24+0000\n"
 "X-POT-Import-Date: 2020-07-29 14:31:43+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners.
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this is the heading of the box on the right, which contains information about collections to which users need to make an application.
 #. Translators: Labels the button users can click to apply for a resource.
-#: TWLight/applications/forms.py:112
+#: TWLight/applications/forms.py:113
 #: TWLight/applications/templates/applications/request_for_application.html:57
 #: TWLight/applications/templates/applications/request_for_application.html:59
 #: TWLight/resources/templates/resources/partner_detail.html:47
@@ -37,61 +37,61 @@ msgid "Apply"
 msgstr "Gunakan"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
-#: TWLight/applications/forms.py:205
+#: TWLight/applications/forms.py:206
 msgid "About you"
 msgstr "Mengenai anda"
 
 #. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-#: TWLight/applications/forms.py:214
+#: TWLight/applications/forms.py:215
 #, python-brace-format
 msgid "Requested by: {partner_list}"
 msgstr "Dipinta oleh: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:223
+#: TWLight/applications/forms.py:224
 #, fuzzy, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>"
 msgstr "<p><small><i>Data peribadi anda akan diproses menurut <a href=\"{terms_url}\">dasar peribadi</a> kami.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
-#: TWLight/applications/forms.py:234
+#: TWLight/applications/forms.py:235
 #, python-brace-format
 msgid "Your application to {partner}"
 msgstr "Permohonan anda kepada {partner}"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
-#: TWLight/applications/forms.py:302
+#: TWLight/applications/forms.py:303
 #, python-brace-format
 msgid "You must register at {url} before applying."
 msgstr "Anda mesti mendaftar di {url} sebelum memohon."
 
-#. Translators: Label of the field where coordinators can enter the username of a users
+#. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
-#: TWLight/applications/forms.py:367
+#: TWLight/applications/forms.py:368
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:11
 msgid "Username"
 msgstr "Nama pengguna"
 
 #. Translators: Label of the field where coordinators can enter the name of a partner
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:369 TWLight/applications/helpers.py:99
+#: TWLight/applications/forms.py:370 TWLight/applications/helpers.py:99
 msgid "Partner name"
 msgstr "Nama rakan kongsi"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
-#: TWLight/applications/forms.py:385
+#: TWLight/applications/forms.py:386
 msgid "Renewal confirmation"
 msgstr "Pengesahan pembaharuan"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:402 TWLight/applications/helpers.py:111
+#: TWLight/applications/forms.py:403 TWLight/applications/helpers.py:111
 msgid "The email for your account on the partner's website"
 msgstr "E-mel untuk akaun anda di laman web rakan kongsi"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:412 TWLight/applications/helpers.py:114
+#: TWLight/applications/forms.py:413 TWLight/applications/helpers.py:114
 msgid "The number of months you wish to have this access for before renewal is required"
 msgstr "Bilangan bulan yang anda berhajat untuk mendapat capaian ini sebelum pembaharuan diperlukan."
 
@@ -244,33 +244,33 @@ msgid "Invalid"
 msgstr "Tidak sah"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
-#: TWLight/applications/models.py:125
+#: TWLight/applications/models.py:127
 msgid "12 months"
 msgstr "12 bulan"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
-#: TWLight/applications/models.py:127
+#: TWLight/applications/models.py:129
 msgid "6 months"
 msgstr "6 bulan"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
-#: TWLight/applications/models.py:129
+#: TWLight/applications/models.py:131
 msgid "3 months"
 msgstr "3 bulan"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
-#: TWLight/applications/models.py:131
+#: TWLight/applications/models.py:133
 msgid "1 month"
 msgstr "1 bulan"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
-#: TWLight/applications/models.py:326
+#: TWLight/applications/models.py:328
 #, python-brace-format
 msgid "Access URL: {access_url}"
 msgstr ""
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-#: TWLight/applications/models.py:332
+#: TWLight/applications/models.py:334
 msgid "You can expect to receive access details within a week or two once it has been processed."
 msgstr "Anda boleh mengharapkan untuk menerima butiran akses dalam seminggu atau dua sebaik sahaja ia telah diproses."
 
@@ -693,7 +693,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
-#: TWLight/users/views.py:493
+#: TWLight/users/views.py:495
 msgid "Confirm"
 msgstr "Sahkan"
 
@@ -2345,7 +2345,7 @@ msgid "Update email"
 msgstr "Kemas kini e-mel"
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:480
+#: TWLight/users/models.py:485
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
@@ -2665,7 +2665,7 @@ msgstr ""
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:362
+#: TWLight/users/views.py:364
 msgid "Update"
 msgstr ""
 
@@ -3018,52 +3018,52 @@ msgid "Coordinators only"
 msgstr ""
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:141
+#: TWLight/users/views.py:143
 #, python-brace-format
 msgid "Please <a href='{url}'>update your contributions</a> to Wikipedia to help coordinators evaluate your applications."
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:254
+#: TWLight/users/views.py:256
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, consider changing your preferences."
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:262
+#: TWLight/users/views.py:264
 msgid "Your reminder email preferences are updated."
 msgstr ""
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:344 TWLight/users/views.py:425
-#: TWLight/users/views.py:478
+#: TWLight/users/views.py:346 TWLight/users/views.py:427
+#: TWLight/users/views.py:480
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:377
+#: TWLight/users/views.py:379
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:409
+#: TWLight/users/views.py:411
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:437
+#: TWLight/users/views.py:439
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:448
+#: TWLight/users/views.py:450
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:825
+#: TWLight/users/views.py:829
 msgid "Access to {} has been returned."
 msgstr ""
 
