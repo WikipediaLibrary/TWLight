@@ -562,6 +562,11 @@ class DeleteDataView(SelfOnly, DeleteView):
             user_authorization.date_expires = date.today() - timedelta(days=1)
             user_authorization.save()
 
+        # Delete any bundle authorizations.
+        bundle_auths = user.editor.get_bundle_authorization
+        if bundle_auths:
+            bundle_auths.delete()
+
         # Did the user authorize any authorizations?
         # If so, we need to retain their validity by shifting
         # the authorizer to TWL Team
