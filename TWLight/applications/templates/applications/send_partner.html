@@ -130,7 +130,16 @@
                   </div>
                   <div class="media-body">
                   <label for="app_{{ app.pk }}">
-                    <h4 class="media-heading">{{ app }}</h4>
+                    <h4 class="media-heading">{{ app }}
+                
+                    <!--Flag renewals on Send to partners page-->                    
+                    {% if app.parent %}
+                    <span class="label label-info">
+                      {% comment %}Translators: Displayed if an application is a renewal.{% endcomment %}
+                      {% trans "Renewal" %}
+                    </span>
+                  {% endif %}</h4>
+                  
                     <ul class="list-unstyled pull-left">
                       {% for key, send_data in output.items %}
                         <li><strong>{{ send_data.label }}</strong> &mdash; {{ send_data.data }}</li>
