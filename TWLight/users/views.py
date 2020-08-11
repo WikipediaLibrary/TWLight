@@ -74,7 +74,7 @@ def _redirect_to_next_param(request):
     next_param = request.GET.get(REDIRECT_FIELD_NAME, "")
     if (
         next_param
-        and is_safe_url(url=next_param, host=request.get_host())
+        and is_safe_url(url=next_param, allowed_hosts=request.get_host())
         and _is_real_url(next_param)
     ):
         return next_param
