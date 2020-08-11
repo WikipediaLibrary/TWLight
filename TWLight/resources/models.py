@@ -466,13 +466,17 @@ class Partner(models.Model):
     @property
     def get_access_url(self):
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
+        ezproxy_auth = settings.TWLIGHT_ENV
         access_url = None
         if (
             self.authorization_method in [self.PROXY, self.BUNDLE]
             and ezproxy_url
+            and ezproxy_auth
             and self.target_url
         ):
-            access_url = ezproxy_url + "/login?url=" + self.target_url
+            access_url = (
+                ezproxy_url + "/login?auth=" + ezproxy_auth + "&url=" + self.target_url
+            )
         elif self.target_url:
             access_url = self.target_url
         return access_url
