@@ -86,6 +86,7 @@ def get_data_count_by_month(queryset, data_format=JSON):
 
         current_date = timezone.now().date()
 
+        # TODO: find out if returning an empty data series array is correct when earliest_date is None
         while current_date >= earliest_date:
             if data_format == JSON:
                 # flot.js expects milliseconds since the epoch.

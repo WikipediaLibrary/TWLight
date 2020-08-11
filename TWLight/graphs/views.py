@@ -254,13 +254,25 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
             for each_proxy_auth, each_renewed_auth in itertools.zip_longest(
                 proxy_auth_data, renewed_auth_data
             ):
-                each_proxy_auth.extend(
-                    [
-                        each_renewed_auth[1],
-                        str(round(each_renewed_auth[1] / each_proxy_auth[1] * 100, 2))
-                        + "%",
-                    ]
-                )
+                if len(each_renewed_auth) == 2:
+                    each_proxy_auth.extend(
+                        [
+                            each_renewed_auth[1],
+                            str(
+                                round(
+                                    each_renewed_auth[1] / each_proxy_auth[1] * 100, 2
+                                )
+                            )
+                            + "%",
+                        ]
+                    )
+                else:
+                    each_proxy_auth.extend(
+                        [
+                            "There was a problem reading renewed data: "
+                            + each_renewed_auth
+                        ]
+                    )
 
         writer = csv.writer(response)
         writer.writerow(
