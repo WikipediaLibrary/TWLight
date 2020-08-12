@@ -1,5 +1,6 @@
 import csv
 import itertools
+import logging
 from datetime import date
 
 # The django-request analytics package, NOT the python URL library requests!
@@ -26,6 +27,8 @@ from .helpers import (
     get_proxy_and_renewed_authorizations,
     PYTHON,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class DashboardView(TemplateView):
@@ -254,13 +257,32 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
             for each_proxy_auth, each_renewed_auth in itertools.zip_longest(
                 proxy_auth_data, renewed_auth_data
             ):
-                each_proxy_auth.extend(
-                    [
-                        each_renewed_auth[1],
-                        str(round(each_renewed_auth[1] / each_proxy_auth[1] * 100, 2))
-                        + "%",
-                    ]
-                )
+                # Checking if each_renewed_auth is a tuple, since that is what
+                # get_data_count_by_month should return
+                if len(each_renewed_auth) == 2:
+                    each_proxy_auth.extend(
+                        [
+                            each_renewed_auth[1],
+                            str(
+                                round(
+                                    each_renewed_auth[1] / each_proxy_auth[1] * 100, 2
+                                )
+                            )
+                            + "%",
+                        ]
+                    )
+                # If get_data_count_by_month does not return a tuple, print the
+                # returned value in the csv and log it
+                else:
+                    each_proxy_auth.extend(
+                        [
+                            "There was a problem reading renewed data: "
+                            + each_renewed_auth
+                        ]
+                    )
+                    logger.warning(
+                        "Data is not a tuple. It instead returned: " + each_renewed_auth
+                    )
 
         writer = csv.writer(response)
         writer.writerow(
