@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-12 00:03+0000\n"
+"POT-Creation-Date: 2020-08-12 13:42+0000\n"
 "PO-Revision-Date: 2020-08-06 15:14:23+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4276,7 +4276,7 @@ msgstr ""
 "の登録をするまで提携組織の情報源にアクセス権を申請できません。"
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:829
+#: TWLight/users/views.py:834
 msgid "Access to {} has been returned."
 msgstr "{}へのアクセスが成功しました。"
 

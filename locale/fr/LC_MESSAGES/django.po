@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-12 00:03+0000\n"
+"POT-Creation-Date: 2020-08-12 13:42+0000\n"
 "PO-Revision-Date: 2020-08-06 15:14:23+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -4429,7 +4429,7 @@ msgstr ""
 "sans adresse courriel."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:829
+#: TWLight/users/views.py:834
 msgid "Access to {} has been returned."
 msgstr "L’accès à {} a été retourné."
 

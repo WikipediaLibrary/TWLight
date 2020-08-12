@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-12 00:03+0000\n"
+"POT-Creation-Date: 2020-08-12 13:42+0000\n"
 "PO-Revision-Date: 2020-08-06 15:14:23+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4104,7 +4104,7 @@ msgstr ""
 "arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:829
+#: TWLight/users/views.py:834
 #, fuzzy
 msgid "Access to {} has been returned."
 msgstr "Tietosi on päivitetty."

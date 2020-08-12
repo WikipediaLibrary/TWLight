@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-12 00:03+0000\n"
+"POT-Creation-Date: 2020-08-12 13:42+0000\n"
 "PO-Revision-Date: 2020-08-06 15:14:23+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3845,7 +3845,7 @@ msgstr ""
 "برای دسترسی به منابع درخواست دهید."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:829
+#: TWLight/users/views.py:834
 #, fuzzy
 msgid "Access to {} has been returned."
 msgstr "پیشنهاد حذف شد."
