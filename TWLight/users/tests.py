@@ -670,6 +670,44 @@ class ViewsTestCase(TestCase):
         user_auth.refresh_from_db()
         self.assertEqual(user_auth.date_expires, date.today() - timedelta(days=1))
 
+    def test_user_delete_bundle_authorizations(self):
+        """
+        Verify that deleted user authorizations are expired and contain no user links
+        """
+        delete_url = reverse("users:delete_data", kwargs={"pk": self.user_editor.pk})
+
+        # Need a password so we can login
+        self.editor1.user.set_password("editor")
+        self.editor1.user.save()
+
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username1, password="editor")
+
+        # Bundle authorization should be created
+        self.editor1.update_bundle_authorization()
+
+        self.editor1.refresh_from_db()
+
+        bundle_auth = self.editor1.get_bundle_authorization
+
+        self.assertTrue(bundle_auth.is_bundle)
+
+        # Saving the bundle authorization id so we can query it after to make
+        # sure it's been deleted
+        bundle_auth_id = bundle_auth.pk
+
+        submit = self.client.post(delete_url)
+
+        editor_count = Editor.objects.filter(pk=self.editor1.pk).count()
+        self.assertEqual(editor_count, 0)
+
+        bundle_auth_count = Authorization.objects.filter(pk=bundle_auth_id).count()
+        self.assertEqual(bundle_auth_count, 0)
+
     def test_user_data_download(self):
         """
         Verify that if users try to download their personal data they
