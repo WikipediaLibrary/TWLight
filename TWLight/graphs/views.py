@@ -286,13 +286,9 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
                 # If there is no value, log that as well.
                 else:
                     each_proxy_auth.extend(
-                        [
-                            "There was a problem reading renewed data: None"
-                        ]
+                        ["There was a problem reading renewed data: None"]
                     )
-                    logger.warning(
-                        "Data is not a tuple. It instead returned: None"
-                    )
+                    logger.warning("Data is not a tuple. It instead returned: None")
 
         writer = csv.writer(response)
         writer.writerow(
