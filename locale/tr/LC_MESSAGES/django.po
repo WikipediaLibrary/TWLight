@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-13 18:20+0000\n"
+"POT-Creation-Date: 2020-08-13 21:34+0000\n"
 "PO-Revision-Date: 2020-08-06 15:14:25+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -376,7 +376,7 @@ msgstr "Başvurunun kapanmasından beri geçen gün"
 #. Translators: This is the heading of a data file, denoting the column which contains the status of listed applications
 #: TWLight/applications/templates/applications/application_evaluation.html:67
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:8
-#: TWLight/graphs/views.py:357
+#: TWLight/graphs/views.py:363
 msgid "Status"
 msgstr "Durum"
 
@@ -1724,72 +1724,72 @@ msgstr "Karar verilene kadar geçen gün"
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected. This heading denotes the number of applicants for a particular number of days.
 #. Translators: This is the heading of a data file, denoting the column which contains the numbers of listed applications for a given status
-#: TWLight/graphs/views.py:242 TWLight/graphs/views.py:359
+#: TWLight/graphs/views.py:242 TWLight/graphs/views.py:365
 msgid "Number of applications"
 msgstr "Başvuru sayısı"
 
 #. Translators: This is the heading of a data file, for a column containing date data.
-#: TWLight/graphs/views.py:291 TWLight/graphs/views.py:316
+#: TWLight/graphs/views.py:297 TWLight/graphs/views.py:322
 msgid "Date"
 msgstr "Tarih"
 
 #. Translators: This is the heading of a data file. 'Number of proxy authorizations' refers to the total number of authorizations for all proxy partners.
-#: TWLight/graphs/views.py:293
+#: TWLight/graphs/views.py:299
 msgid "Number of proxy authorizations"
 msgstr "Proxy yetkilendirme sayısı"
 
 #. Translators: This is the heading of a data file. 'Number of renewed proxy authorizations' refers to the total number of authorizations for all proxy partners that were renewed.
-#: TWLight/graphs/views.py:295
+#: TWLight/graphs/views.py:301
 msgid "Number of renewed proxy authorizations"
 msgstr "Yenilenen proxy yetkilendirme sayısı"
 
 #. Translators: This is the heading of a data file. 'Renewal percentage' refers to the percentage of authorizations renewed of all proxy authroizations.
-#: TWLight/graphs/views.py:297
+#: TWLight/graphs/views.py:303
 msgid "Renewal percentage"
 msgstr "Yenileme yüzdesi"
 
 #. Translators: This is the heading of a data file. 'Number of partners' refers to the total number of publishers/databases open to applications on the website.
-#: TWLight/graphs/views.py:318
+#: TWLight/graphs/views.py:324
 msgid "Number of approved applications"
 msgstr "Onaylanmış başvuru sayısı"
 
 #. Translators: This is the heading of a data file, denoting the column which contains the dates (months) corresponding to data collection
-#: TWLight/graphs/views.py:338
+#: TWLight/graphs/views.py:344
 msgid "Month"
 msgstr "Ay"
 
 #. Translators: This is the heading of a data file which lists the median (not mean) number of days until a decision (approve or reject) was made on applications.
-#: TWLight/graphs/views.py:340
+#: TWLight/graphs/views.py:346
 msgid "Median days until decision"
 msgstr "Karar verilene kadar geçen ortalama gün"
 
 #. Translators: This is a warning which is shown when a user who is not a staff member attempts to download the pageview data file.
-#: TWLight/graphs/views.py:376 TWLight/graphs/views.py:409
+#: TWLight/graphs/views.py:382 TWLight/graphs/views.py:415
 msgid "You must be staff to do that."
 msgstr "Bunu yapacak ekipten biri olmalısınız."
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. Page URL is the column which lists the URL of each page
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page (by path) on the website. Page URL is the column which lists the URL of each page
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the various URLs of the site.
-#: TWLight/graphs/views.py:389 TWLight/graphs/views.py:429
+#: TWLight/graphs/views.py:395 TWLight/graphs/views.py:435
 #: TWLight/templates/dashboard.html:131
 msgid "Page URL"
 msgstr "Sayfa URL'si"
 
 #. Translators: This is the heading for a downloadable data file showing the number of visitors to each page on the website. This describes the column that lists the number of unique site visitors.
-#: TWLight/graphs/views.py:391 TWLight/graphs/views.py:431
+#: TWLight/graphs/views.py:397 TWLight/graphs/views.py:437
 msgid "Number of (non-unique) visitors"
 msgstr "(Benzersiz olmayan) ziyaretçi sayısı"
 
 #. Translators: This is the heading of a data file, denoting the column which lists all the available language on the platform
 #. Translators: In the preferences section of a user profile, this text labels the form where users can change the site language.
-#: TWLight/graphs/views.py:449
+#: TWLight/graphs/views.py:455
 #: TWLight/users/templates/users/preferences.html:11
 msgid "Language"
 msgstr "Dil"
 
 #. Translators: This is the heading of a data file, denoting the column which lists the number of users using a particular language against each available language on the platform
-#: TWLight/graphs/views.py:451
+#: TWLight/graphs/views.py:457
 msgid "Number of users"
 msgstr "Kullanıcı sayısı"
 
