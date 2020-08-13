@@ -259,7 +259,7 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
             ):
                 # Checking if each_renewed_auth is a tuple, since that is what
                 # get_data_count_by_month should return
-                if len(each_renewed_auth) == 2:
+                if each_renewed_auth and len(each_renewed_auth) == 2:
                     each_proxy_auth.extend(
                         [
                             each_renewed_auth[1],
