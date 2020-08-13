@@ -940,6 +940,10 @@ class EditorModelTestCase(TestCase):
             wp_rights=json.dumps(["cat floofing", "the big red button"]),
             wp_groups=json.dumps(["sysops", "bureaucrats"]),
         )
+        self.test_editor.user.userprofile.terms_of_use = True
+        self.test_editor.user.userprofile.save()
+        self.test_editor.user.save()
+        self.test_editor.save()
 
     def tearDown(self):
         super(EditorModelTestCase, self).tearDown()
@@ -1641,6 +1645,9 @@ class ManagementCommandsTestCase(TestCase):
         normal_editor.wp_bundle_eligible = True
         normal_editor.wp_editcount_updated = now() - timedelta(days=30)
         normal_editor.wp_account_old_enough = True
+        normal_editor.user.userprofile.terms_of_use = True
+        normal_editor.user.userprofile.save()
+        normal_editor.user.save()
         normal_editor.save()
 
         global_userinfo_editor = {
@@ -1665,3 +1672,37 @@ class ManagementCommandsTestCase(TestCase):
         normal_editor.refresh_from_db()
 
         self.assertTrue(normal_editor.wp_bundle_eligible)
+
+    def test_user_update_eligibility_command_user_terms_not_accepted(self):
+        normal_editor = EditorFactory()
+        normal_editor.wp_bundle_eligible = True
+        normal_editor.wp_editcount_updated = now() - timedelta(days=30)
+        normal_editor.wp_account_old_enough = True
+        # The editor hasn't accepted the terms of use
+        normal_editor.user.userprofile.terms_of_use = False
+        normal_editor.user.userprofile.save()
+        normal_editor.user.save()
+        normal_editor.save()
+
+        global_userinfo_editor = {
+            "home": "enwiki",
+            "id": 567823,
+            "registration": "2015-11-06T15:46:29Z",  # Well before first commit.
+            "name": "user328",
+            "editcount": 5000,
+            "merged": copy.copy(FAKE_MERGED_ACCOUNTS),
+        }
+
+        self.assertTrue(normal_editor.wp_bundle_eligible)
+
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                normal_editor.wp_editcount_updated + timedelta(days=31)
+            ),
+            global_userinfo=global_userinfo_editor,
+        )
+
+        normal_editor.refresh_from_db()
+
+        self.assertFalse(normal_editor.wp_bundle_eligible)
