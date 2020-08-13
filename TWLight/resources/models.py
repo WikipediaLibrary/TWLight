@@ -428,6 +428,11 @@ class Partner(models.Model):
             )
             if validation_error_msg:
                 raise ValidationError({"target_url": validation_error_msg})
+        if self.PROXY or self.BUNDLE and not self.target_url:
+            raise ValidationError(
+            'Proxy and Bundle partners require a target URL'
+            )
+            
     def get_absolute_url(self):
         return reverse_lazy("partners:detail", kwargs={"pk": self.pk})
 
