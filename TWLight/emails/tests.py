@@ -180,6 +180,7 @@ class ApplicationCommentTest(TestCase):
 
     def test_comment_email_sending_6(self):
         """
+
         In case the coordinator is changed for a Partner, then the 
         previous coordinator should not receive comment notification email.
         Also now the new coordinator should receive the email.

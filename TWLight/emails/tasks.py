@@ -241,6 +241,7 @@ def send_comment_notification_emails(sender, **kwargs):
     app_versions = Version.objects.get_for_object(app)
 
     # 'First' app version is the most recent
+
     recent_app_coordinator = app_versions.first().revision.user
     if recent_app_coordinator and recent_app_coordinator != current_comment.user:
         if recent_app_coordinator != app.partner.coordinator and not (
