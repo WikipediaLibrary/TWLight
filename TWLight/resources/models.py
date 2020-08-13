@@ -394,7 +394,7 @@ class Partner(models.Model):
         return self.company_name
 
     def clean(self):
-        if self.agreement_with_terms_of_use and not self.terms_of_use:
+        if self.agreement_with_terms_of_use or not self.terms_of_use:
             raise ValidationError(
                 "When agreement with terms of use is "
                 "required, a link to terms of use must be provided."
@@ -430,7 +430,6 @@ class Partner(models.Model):
             )
             if validation_error_msg:
                 raise ValidationError({"target_url": validation_error_msg})
-
     def get_absolute_url(self):
         return reverse_lazy("partners:detail", kwargs={"pk": self.pk})
 
