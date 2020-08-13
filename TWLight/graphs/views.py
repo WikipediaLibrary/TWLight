@@ -273,7 +273,7 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
                     )
                 # If get_data_count_by_month does not return a tuple, print the
                 # returned value in the csv and log it
-                else:
+                elif each_renewed_auth:
                     each_proxy_auth.extend(
                         [
                             "There was a problem reading renewed data: "
@@ -282,6 +282,16 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
                     )
                     logger.warning(
                         "Data is not a tuple. It instead returned: " + each_renewed_auth
+                    )
+                # If there is no value, log that as well.
+                else:
+                    each_proxy_auth.extend(
+                        [
+                            "There was a problem reading renewed data: None"
+                        ]
+                    )
+                    logger.warning(
+                        "Data is not a tuple. It instead returned: None"
                     )
 
         writer = csv.writer(response)
