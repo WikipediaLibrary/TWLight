@@ -91,7 +91,6 @@ class Language(models.Model):
           and already translated. We can always expand it if we find ourselves
           needing more languages, though.
     """
-
     class Meta:
         verbose_name = "Language"
         verbose_name_plural = "Languages"
@@ -394,9 +393,9 @@ class Partner(models.Model):
         return self.company_name
 
     def clean(self):
-        if self.agreement_with_terms_of_use or not self.terms_of_use:
+        if self.agreement_with_terms_of_use and not self.terms_of_use:
             raise ValidationError(
-                "When agreement with terms of use is "
+                "When agreement with terms of use is"
                 "required, a link to terms of use must be provided."
             )
         if self.streams.count() > 1:
@@ -411,8 +410,7 @@ class Partner(models.Model):
                 "a link to the registration page must be provided."
             )
         if (
-            self.authorization_method == self.PROXY
-            and not self.requested_access_duration
+            self.authorization_method == self.PROXY and not self.requested_access_duration and self.target_url 
         ):
             raise ValidationError(
                 {
