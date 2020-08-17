@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-13 21:34+0000\n"
+"POT-Creation-Date: 2020-08-17 23:03+0000\n"
 "PO-Revision-Date: 2019-02-14 08:31:32+0000\n"
 "Language: mr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -707,6 +707,7 @@ msgstr "निवडा/निवडलेले काढा"
 #. Translators: Displayed if an application is a renewal.
 #. Translators: Denotes whether an application was a renewal request for a previous application.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:62
+#: TWLight/applications/templates/applications/send_partner.html:141
 #: TWLight/resources/templates/resources/partner_users.html:54
 #: TWLight/resources/templates/resources/partner_users.html:105
 msgid "Renewal"
@@ -823,25 +824,25 @@ msgid "Application data"
 msgstr "अवजारांची माहिती"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.
-#: TWLight/applications/templates/applications/send_partner.html:149
-#: TWLight/applications/templates/applications/send_partner.html:189
+#: TWLight/applications/templates/applications/send_partner.html:158
+#: TWLight/applications/templates/applications/send_partner.html:198
 msgid "Mark as sent"
 msgstr "पाठवले अशी खूण"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
-#: TWLight/applications/templates/applications/send_partner.html:154
+#: TWLight/applications/templates/applications/send_partner.html:163
 msgid ""
 "Use the dropdown menus to denote which editor will receive each code. Make "
 "sure to send each code via email before clicking 'Mark as sent'."
 msgstr ""
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
-#: TWLight/applications/templates/applications/send_partner.html:175
+#: TWLight/applications/templates/applications/send_partner.html:184
 msgid "Select code:"
 msgstr ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
-#: TWLight/applications/templates/applications/send_partner.html:194
+#: TWLight/applications/templates/applications/send_partner.html:203
 msgid "There are no approved, unsent applications."
 msgstr "मंजूर झालेले आणि पुढे न पाठवलेले अर्ज नाहीत."
 
