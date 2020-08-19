@@ -432,7 +432,9 @@ class Partner(models.Model):
                 raise ValidationError({"target_url": validation_error_msg})
 
         if self.CODES or self.LINK and not self.user_instructions:
-            raise ValidationError('Partners with automatically sent messages require user instructions to be entered')
+            raise ValidationError(
+                "Partners with automatically sent messages require user instructions to be entered"
+            )
 
     def get_absolute_url(self):
         return reverse_lazy("partners:detail", kwargs={"pk": self.pk})
