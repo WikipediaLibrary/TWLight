@@ -476,7 +476,7 @@
           {% else %}
             <div class="panel-body top-border">
               {% if user.is_authenticated %}
-                {% if user.editor.wp_bundle_eligible and user.userprofile.terms_of_use %}
+                {% if user.editor.wp_bundle_eligible %}
                   {% if partner.specific_stream %}
                     {% comment %}Translators: This text labels a button taking users to their library. {% endcomment %}
                     <a class="btn btn-primary btn-lg btn-block" href="{% url "users:my_library" %}">{% trans "My Library" %}</a><br />
