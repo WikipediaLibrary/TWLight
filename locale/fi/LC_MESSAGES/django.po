@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-08-17 23:03+0000\n"
-"PO-Revision-Date: 2020-08-21 15:35:11+0000\n"
+"PO-Revision-Date: 2020-08-24 13:37:34+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -356,9 +356,8 @@ msgstr "Ammatti"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
-#, fuzzy
 msgid "month(s)"
-msgstr "Kuukausi"
+msgstr "kuukautta"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #. Translators: Partner is the resource a user will access.
@@ -399,9 +398,9 @@ msgstr "Ei kuvausta"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:130
-#, fuzzy, python-format
+#, python-format
 msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
-msgstr "\n                  %(publisher)s vaatii, että hyväksyt <a href=\"%(url)s\">käyttöehdot</a>.\n                "
+msgstr "On hyväksynyt sivuston <a href=\"%(terms_url)s\">käyttöehdot</a>?"
 
 #. Translators: Displayed to coordinators when they've agreed to the terms of use.
 #. Translators: Displayed if the user has agreed to the terms of use.
@@ -1462,9 +1461,8 @@ msgstr "Kielet"
 
 #. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:181
-#, fuzzy
 msgid "Languages not available."
-msgstr "Ei kuvausta"
+msgstr "Kielet eivät ole saatavilla."
 
 #. Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field.
 #: TWLight/resources/templates/resources/partner_detail.html:195
@@ -3166,9 +3164,8 @@ msgstr "Sähköpostiksesi on vaihdettu {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
 #: TWLight/users/views.py:450
-#, fuzzy
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
-msgstr "Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
+msgstr "Sähköpostiosoitteesi on tyhjä. Voit silti tutkia sivustoa, mutta et voi hakea käyttöoikeutta aineistoon ilman sähköpostiosoitetta."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
 #: TWLight/users/views.py:834
