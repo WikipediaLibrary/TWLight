@@ -33,6 +33,7 @@ from TWLight.view_mixins import (
 )
 from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.helpers.authorizations import get_valid_partner_authorizations
+from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
@@ -638,6 +639,13 @@ class TermsView(UpdateView):
         return kwargs
 
     def get_success_url(self):
+
+        # Check if user is still eligible for bundle based on if they agreed to
+        # the terms of use or not
+        self.request.user.editor.wp_bundle_eligible = editor_bundle_eligible(
+            self.request.user.editor
+        )
+        self.request.user.editor.save()
 
         if self.get_object().terms_of_use:
             # If they agreed with the terms, awesome. Send them where they were

@@ -188,7 +188,9 @@ def editor_bundle_eligible(editor):
     enough_edits_and_valid = editor.wp_valid and editor.wp_enough_recent_edits
     # Staff and superusers should be eligible for bundles for testing purposes
     user_staff_or_superuser = editor.user.is_staff or editor.user.is_superuser
-    if enough_edits_and_valid or user_staff_or_superuser:
+    # Users must accept the terms of use in order to be eligible for bundle access
+    user_accepted_terms = editor.user.userprofile.terms_of_use
+    if (enough_edits_and_valid or user_staff_or_superuser) and user_accepted_terms:
         return True
     else:
         return False
