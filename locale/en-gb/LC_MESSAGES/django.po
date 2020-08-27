@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-08-17 23:03+0000\n"
-"PO-Revision-Date: 2020-08-21 15:35:11+0000\n"
+"PO-Revision-Date: 2020-08-27 14:05:06+0000\n"
 "Language: en-GB\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -341,9 +341,8 @@ msgstr "Status"
 
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:76
-#, fuzzy
 msgid "Access duration"
-msgstr "Occupation"
+msgstr "Access duration"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
@@ -1681,9 +1680,8 @@ msgstr ""
 
 #. Translators: This is a button to go back on the top of page.
 #: TWLight/resources/templates/resources/partner_filter.html:55
-#, fuzzy
 msgid "Back to top"
-msgstr "Back to partners"
+msgstr "Back to top"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:34

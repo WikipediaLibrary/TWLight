@@ -20,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-08-17 23:03+0000\n"
-"PO-Revision-Date: 2020-08-21 15:35:11+0000\n"
+"PO-Revision-Date: 2020-08-27 14:05:06+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1588,7 +1588,7 @@ msgstr "Mi Biblioteca"
 #: TWLight/templates/home.html:41
 #: TWLight/users/templates/users/resource_tile.html:15
 msgid "Library Bundle"
-msgstr ""
+msgstr "Paquete de Biblioteca"
 
 #. Translators: Alt text for the Library Bundle icon shown on the collection page.
 #. Translators: Alt text for the Library Bundle icon shown on the browse partner page.
@@ -1600,12 +1600,12 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_tile.html:24
 #: TWLight/users/templates/users/resource_tile.html:17
 msgid "Library bundle access"
-msgstr ""
+msgstr "Acceso al paquete de biblioteca"
 
 #. Translators: Text shown to authenticated, bundle eligible users when they need to visit My Library to access collections.
 #: TWLight/resources/templates/resources/partner_detail.html:492
 msgid "You are eligible to access Library Bundle partners. Click the button above to go to your Library and browse collections from this partner."
-msgstr ""
+msgstr "Eres elegible para acceder a los socios del Paquete de Biblioteca. Haz clic en el botón de arriba para ir a Tu Biblioteca y explorar las colecciones de los socios."
 
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
 #: TWLight/resources/templates/resources/partner_detail.html:499
@@ -1616,13 +1616,13 @@ msgstr "Acceder a la Colección"
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:506
 msgid "You are eligible to access Library Bundle partners. Click the button above to access the collection."
-msgstr ""
+msgstr "Eres elegible para acceder a los socios del Paquete de Biblioteca. Haz clic en el botón de arriba para acceder a la colección."
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:521
 #, python-format
 msgid "You are not eligible to access Library Bundle partners. Visit the <a href=\"%(homepage)s\">homepage</a> to check the eligibility criteria."
-msgstr ""
+msgstr "No eres elegible para acceder a los socios del Paquete de Biblioteca. Visita <a href=\"%(homepage)s\">homepage</a> para revisar los criterios de elegibilidad."
 
 #. Translators: Buttton prompting users to log in.
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
@@ -1636,7 +1636,7 @@ msgstr "Iniciar sesión"
 #: TWLight/resources/templates/resources/partner_detail.html:537
 #, python-format
 msgid "This resource is part of our <a href=\"%(about)s\">Library Bundle</a> access, which you can access if you meet our minimum eligibility criteria. Log in to find out if you are eligible."
-msgstr ""
+msgstr "Este recurso es parte de nuestro  <a href=\"%(about)s\">Paquete de Biblioteca</a>, el cual puedes acceder si cubres los criterios de elegibilidad mínimos. Inicia sesión para ver si eres elegible."
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:566
@@ -3143,7 +3143,7 @@ msgstr "{username} recibió acceso a <a href='{url}'>{partner}</a>"
 #: tests/shunit/data/bad_i18n_comment_1.py:3
 #: tests/shunit/data/bad_i18n_newline_1.py:5
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non viverra vitae, interdum ut aenean ipsum.
 #. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non.
@@ -3151,21 +3151,21 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
 #: tests/shunit/data/good_i18n_2.py:2
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: tests/shunit/data/bad_i18n_newline_3.py:5
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #: tests/shunit/data/bad_i18n_newline_4.py:5
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: tests/shunit/data/bad_i18n_newline_5.py:5
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
-msgstr ""
+msgstr "6"
 
