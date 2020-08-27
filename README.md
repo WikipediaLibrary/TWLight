@@ -1,6 +1,6 @@
 # README.md
 
-The Wikipedia Library Card Platform app, available at http://wikipedialibrary.wmflabs.org.
+The Wikipedia Library Card Platform app is available at http://wikipedialibrary.wmflabs.org.
 
 ## Quick Installation for Developers
 
@@ -12,7 +12,7 @@ The Wikipedia Library Card Platform app, available at http://wikipedialibrary.wm
 
 ## Documentation
 
-Further project documentation can be found in the [Wiki](https://github.com/WikipediaLibrary/TWLight/wiki). Our issue tracking takes place on the [Library-Card-Platform Phabricator](https://phabricator.wikimedia.org/project/board/2765/) board.
+Further project documentation will be available in the [Wiki](https://github.com/WikipediaLibrary/TWLight/wiki). Our issue tracking takes place on the [Library-Card-Platform Phabricator](https://phabricator.wikimedia.org/project/board/2765/) board.
 
 [![Build Status](https://travis-ci.org/WikipediaLibrary/TWLight.svg?branch=master)](https://travis-ci.org/WikipediaLibrary/TWLight)
 
