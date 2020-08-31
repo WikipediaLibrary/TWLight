@@ -759,16 +759,16 @@ class CollectionUserView(SelfOnly, ListView):
                             each_authorization.latest_sent_app = latest_app
                         if not latest_app.is_renewable:
                             try:
-                                each_authorization.open_app = Application.objects.filter(
-                                    editor=editor,
-                                    status__in=(
-                                        Application.PENDING,
-                                        Application.QUESTION,
-                                        Application.APPROVED,
-                                    ),
-                                    partner=each_authorization.partners.get(),
-                                ).latest(
-                                    "date_created"
+                                each_authorization.open_app = (
+                                    Application.objects.filter(
+                                        editor=editor,
+                                        status__in=(
+                                            Application.PENDING,
+                                            Application.QUESTION,
+                                            Application.APPROVED,
+                                        ),
+                                        partner=each_authorization.partners.get(),
+                                    ).latest("date_created")
                                 )
                             except Application.DoesNotExist:
                                 each_authorization.open_app = None
@@ -783,8 +783,8 @@ class CollectionUserView(SelfOnly, ListView):
         proxy_bundle_authorizations_list = sort_authorizations_into_resource_list(
             proxy_bundle_authorizations
         )
-        proxy_bundle_authorizations_expired_list = sort_authorizations_into_resource_list(
-            proxy_bundle_authorizations_expired
+        proxy_bundle_authorizations_expired_list = (
+            sort_authorizations_into_resource_list(proxy_bundle_authorizations_expired)
         )
 
         context["proxy_bundle_authorizations"] = proxy_bundle_authorizations_list

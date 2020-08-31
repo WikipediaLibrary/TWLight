@@ -919,7 +919,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
     def test_authorization_backfill_expiry_date_on_partner_save_with_coordinator_deletion(
-        self
+        self,
     ):
         # As above, but this should still work in the case that an authorization's
         # coordinator deleted their data after authorizing a user.
@@ -982,7 +982,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
     def test_authorization_backfill_expiry_date_on_partner_save_with_new_coordinator(
-        self
+        self,
     ):
         # As above, but this should still work in the case that the coordinator
         # for a partner has changed, so Authorizer is no longer in the coordinators

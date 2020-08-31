@@ -61,7 +61,7 @@ class SendCoordinatorRemindersTest(TestCase):
     Stub of a test for the send_coordinator_reminders command.
     Currently we're not actually checking for any desired/undesired behavior,
     we're just verifying that the command can be executed without throwing an
-    error. 
+    error.
     """
 
     def test_command_output(self):
@@ -1382,7 +1382,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
     def test_application_waitlist_status_for_single_partner(self):
         """
-        Any Application created for a WAITLISTED Partners should have 
+        Any Application created for a WAITLISTED Partners should have
         waitlist_status as True
         """
 
@@ -1414,9 +1414,9 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
     def test_application_waitlist_status_for_different_partners(self):
         """
-        (1) Applications created for AVAILABLE Partners should have 
+        (1) Applications created for AVAILABLE Partners should have
         waitlist_status as False
-        (2) Applications created for WAITLISTED Partners should have 
+        (2) Applications created for WAITLISTED Partners should have
         waitlist_status as True
         """
 
@@ -2083,9 +2083,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
-            editor.user
-        )
+        (
+            bundle_partner,
+            not_a_bundle_partner,
+        ) = self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
         bundle_app = ApplicationFactory(
             status=Application.PENDING, partner=bundle_partner, editor=editor
         )
@@ -2102,9 +2103,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_approved_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
-            editor.user
-        )
+        (
+            bundle_partner,
+            not_a_bundle_partner,
+        ) = self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
         bundle_app = ApplicationFactory(
             status=Application.APPROVED, partner=bundle_partner, editor=editor
         )
@@ -2121,9 +2123,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_rejected_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
-            editor.user
-        )
+        (
+            bundle_partner,
+            not_a_bundle_partner,
+        ) = self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
         bundle_app = ApplicationFactory(
             status=Application.NOT_APPROVED, partner=bundle_partner, editor=editor
         )
@@ -2140,9 +2143,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_renewal_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
-            editor.user
-        )
+        (
+            bundle_partner,
+            not_a_bundle_partner,
+        ) = self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
         app1 = ApplicationFactory(
             status=Application.SENT,
             partner=bundle_partner,
@@ -2177,9 +2181,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     def test_no_bundle_partners_in_sent_list_view(self):
         editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
-            editor.user
-        )
+        (
+            bundle_partner,
+            not_a_bundle_partner,
+        ) = self._set_up_a_bundle_and_not_a_bundle_partner(editor.user)
         bundle_app = ApplicationFactory(
             status=Application.SENT,
             partner=bundle_partner,
@@ -2203,9 +2208,10 @@ class ListApplicationsTest(BaseApplicationViewTest):
     def test_no_bundle_partners_in_filter_form(self):
         editor = EditorFactory()
         self.client.login(username="coordinator", password="coordinator")
-        bundle_partner, not_a_bundle_partner = self._set_up_a_bundle_and_not_a_bundle_partner(
-            self.coordinator
-        )
+        (
+            bundle_partner,
+            not_a_bundle_partner,
+        ) = self._set_up_a_bundle_and_not_a_bundle_partner(self.coordinator)
         ApplicationFactory(
             status=Application.PENDING, partner=bundle_partner, editor=editor
         )
