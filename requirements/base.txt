@@ -23,7 +23,7 @@ mwoauth==0.3.7
 pillow==7.2.0
 pypandoc==1.5
 python-dateutil==2.8.1
-pytz==2019.3
+pytz==2020.1
 setuptools>=45.2.0
 six==1.15.0
 wheel>=0.34.2
