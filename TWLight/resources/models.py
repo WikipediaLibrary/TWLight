@@ -425,8 +425,10 @@ class Partner(models.Model):
         if self.target_url:
             # Validate the form for the uniqueness of self.target_url across
             # all PROXY and BUNDLE partners/streams.
-            validation_error_msg = check_for_target_url_duplication_and_generate_error_message(
-                self, partner=True
+            validation_error_msg = (
+                check_for_target_url_duplication_and_generate_error_message(
+                    self, partner=True
+                )
             )
             if validation_error_msg:
                 raise ValidationError({"target_url": validation_error_msg})
@@ -573,8 +575,10 @@ class Stream(models.Model):
         if self.target_url:
             # Validate the form for the uniqueness of self.target_url across
             # all PROXY and BUNDLE partners/streams.
-            validation_error_msg = check_for_target_url_duplication_and_generate_error_message(
-                self, stream=True
+            validation_error_msg = (
+                check_for_target_url_duplication_and_generate_error_message(
+                    self, stream=True
+                )
             )
             if validation_error_msg:
                 raise ValidationError({"target_url": validation_error_msg})
