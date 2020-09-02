@@ -646,6 +646,7 @@ class TermsView(UpdateView):
             self.request.user.editor
         )
         self.request.user.editor.save()
+        self.request.user.editor.update_bundle_authorization()
 
         if self.get_object().terms_of_use:
             # If they agreed with the terms, awesome. Send them where they were
