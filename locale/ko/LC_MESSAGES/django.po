@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-31 23:44+0000\n"
+"POT-Creation-Date: 2020-09-02 16:08+0000\n"
 "PO-Revision-Date: 2020-08-31 14:23:34+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3709,7 +3709,7 @@ msgstr ""
 "리소스에 접근을 신청하지 못하게 됩니다."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:842
+#: TWLight/users/views.py:843
 msgid "Access to {} has been returned."
 msgstr "{}의 접근이 반환되었습니다."
 

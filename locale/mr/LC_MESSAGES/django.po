@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-31 23:44+0000\n"
+"POT-Creation-Date: 2020-09-02 16:08+0000\n"
 "PO-Revision-Date: 2019-02-14 08:31:32+0000\n"
 "Language: mr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3747,7 +3747,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:842
+#: TWLight/users/views.py:843
 msgid "Access to {} has been returned."
 msgstr ""
 
