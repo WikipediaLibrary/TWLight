@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-08-31 14:23:34+0000\n"
+"PO-Revision-Date: 2020-09-03 14:54:43+0000\n"
 "X-POT-Import-Date: 2020-07-29 14:31:43+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3064,7 +3064,7 @@ msgid "Your email is blank. You can still explore the site, but you won't be abl
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:842
+#: TWLight/users/views.py:843
 msgid "Access to {} has been returned."
 msgstr ""
 
