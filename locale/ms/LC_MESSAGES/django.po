@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-09-03 14:54:43+0000\n"
+"PO-Revision-Date: 2020-09-07 14:57:24+0000\n"
 "X-POT-Import-Date: 2020-07-29 14:31:43+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -370,7 +370,7 @@ msgstr "Disenarai tunggu"
 #. Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:105
 msgid "Unknown"
-msgstr ""
+msgstr "Tidak diketahui"
 
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:108
@@ -401,7 +401,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail_data.html:160
 #: TWLight/users/templates/users/editor_detail_data.html:178
 msgid "Yes"
-msgstr ""
+msgstr "Ya"
 
 #. Translators: Displayed to coordinators when they've not agreed to the terms of use.
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.

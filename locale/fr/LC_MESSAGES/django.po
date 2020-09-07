@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-02 16:08+0000\n"
-"PO-Revision-Date: 2020-09-03 14:54:42+0000\n"
+"PO-Revision-Date: 2020-09-07 14:57:23+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -217,7 +217,7 @@ msgstr "E-mail du compte"
 #: TWLight/resources/templates/resources/partner_users.html:79
 #: TWLight/users/forms.py:203
 msgid "Email"
-msgstr "E-mail"
+msgstr "Courriel"
 
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
@@ -302,7 +302,7 @@ msgstr "Cette demande est en liste d’attente car ce partenaire n’a pas d’a
 #: TWLight/applications/templates/applications/send_partner.html:43
 #: TWLight/resources/templates/resources/partner_users.html:15
 msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
-msgstr "Coordinateurs  : cette page peut contenir des informations personnelles telles que les noms réels et les adresses de courriel. Veuillez vous rappeler que ces informations sont confidentielles."
+msgstr "Coordinateurs : cette page peut contenir des informations personnelles telles que les noms réels et les adresses de courriel. Veuillez vous rappeler que ces informations sont confidentielles."
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:24
