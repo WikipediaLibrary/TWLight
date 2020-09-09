@@ -2241,15 +2241,16 @@ class ListApplicationsTest(BaseApplicationViewTest):
         """
         factory = RequestFactory()
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        editor = EditorFactory()
 
         # Create some applications for an editor
-        app1 = ApplicationFactory(editor=self.editor, status=Application.PENDING)
-        app2 = ApplicationFactory(editor=self.editor, status=Application.QUESTION)
-        app3 = ApplicationFactory(editor=self.editor, status=Application.PENDING)
-        app4 = ApplicationFactory(editor=self.editor, status=Application.APPROVED)
-        app5 = ApplicationFactory(editor=self.editor, status=Application.NOT_APPROVED)
-        app6 = ApplicationFactory(editor=self.editor, status=Application.APPROVED)
-        app7 = ApplicationFactory(editor=self.editor, status=Application.QUESTION)
+        app1 = ApplicationFactory(editor=editor, status=Application.PENDING)
+        app2 = ApplicationFactory(editor=editor, status=Application.QUESTION)
+        app3 = ApplicationFactory(editor=editor, status=Application.PENDING)
+        app4 = ApplicationFactory(editor=editor, status=Application.APPROVED)
+        app5 = ApplicationFactory(editor=editor, status=Application.NOT_APPROVED)
+        app6 = ApplicationFactory(editor=editor, status=Application.APPROVED)
+        app7 = ApplicationFactory(editor=editor, status=Application.QUESTION)
 
         # Set partner and coordinator for app2
         partner2 = PartnerFactory()
