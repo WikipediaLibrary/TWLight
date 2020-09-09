@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-17 23:03+0000\n"
-"PO-Revision-Date: 2020-08-17 17:09:58+0000\n"
+"POT-Creation-Date: 2020-09-07 22:38+0000\n"
+"PO-Revision-Date: 2020-09-03 14:54:43+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -748,7 +748,7 @@ msgstr "Clique 'confirmar' para renovar a sua candidatura a %(partner)s"
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
-#: TWLight/users/views.py:495
+#: TWLight/users/views.py:496
 msgid "Confirm"
 msgstr "Confirmar"
 
@@ -1457,6 +1457,47 @@ msgid ""
 "large multidisciplinary collections from Springer Nature and ProQuest.</p> "
 "<p>Best,</p> <p>The Wikipedia Library Team</p>"
 msgstr ""
+"<p>Olá %(username)s,</p> <p>A Biblioteca da Wikipédia tem o prazer de "
+"anunciar a implementação do acesso EZProxy e do Pacote Biblioteca!</p> <p>O "
+"EZProxy é um servidor ''proxy'' usado para autenticar os seus acessos. Em "
+"vez de gerir autenticações individualizadas para cada conjunto de recursos a "
+"que lhe seja concedido acesso, pode agora aceder a todos os conteúdos com "
+"suporte EZProxy entrando simplesmente na sua conta Cartão da Biblioteca e "
+"clicando no acesso ao ''site'' da Internet. Para aceder aos conjuntos de "
+"recursos EZProxy, visite simplesmente a plataforma Cartão da Biblioteca, "
+"dirija-se à página da sua Biblioteca em https://wikipedialibrary.wmflabs.org/"
+"users/my_library, e clique ‘Aceder ao conjunto de recursos’ para o conteúdo "
+"a que pretende aceder no separador ‘Acesso instantâneo’.</p> <p>Se tinha "
+"contas ativas antes deste momento, consulte a página da sua Biblioteca para "
+"verificar como deve aceder a essas contas de futuro. Os conjuntos de "
+"recursos do separador 'Acesso instantâneo' têm agora de ser acedidos através "
+"de EZProxy. Os conjuntos de recursos do separador 'Acesso individual' devem "
+"continuar a ser acedidos como anteriormente.</p> <p>Até agora, todo o acesso "
+"através da Biblioteca da Wikipédia requeria que você se candidatasse e fosse "
+"aprovado para os conjuntos de recursos individuais. O Pacote Biblioteca "
+"altera esse fluxo, disponibilizando de imediato alguns conjuntos de recursos "
+"a todos aqueles que preenchem os critérios de experiência definidos nas "
+"nossas 'Condições de utilização'. Desde que continue a preencher esses "
+"critérios (que incluem 10 edições no período anterior de um mês e não ser "
+"bloqueado), terá acesso instantâneo aos conjuntos de recursos do Pacote "
+"Biblioteca através do Cartão da Biblioteca sem ser necessário candidatar-se "
+"nem fazer pedidos de renovação.</p> <p>Pode verificar se preenche os "
+"critérios para aceder a recursos do Pacote Biblioteca na página de início do "
+"Cartão da Biblioteca - https://wikipedialibrary.wmflabs.org. Se for "
+"elegível, os conjuntos de recursos serão acessíveis através do separador "
+"'Acesso instantâneo' da sua Biblioteca.</p> <p>Ao aceder aos conjuntos de "
+"recursos através de EZProxy poderá notar que os URL são reescritos "
+"dinamicamente. Note que o uso de EZProxy exige que ative os ''cookies''. Se "
+"tiver problemas deve também limpar a ''cache'' e reiniciar o ''browser''. "
+"Note, por favor, que as credenciais individuais de acesso a conjuntos de "
+"recursos acessíveis por EZProxy (incluindo o Pacote Biblioteca) serão "
+"desativadas em breve, portanto esta será a única forma de acesso a estes "
+"conjuntos de recursos. Todos os conjuntos de recursos do separador ‘Acesso "
+"individual’ na sua Biblioteca funcionaram tal como antes.</p> <p>Em conjunto "
+"com o lançamento destes novos métodos de acesso, temos o prazer de anunciar "
+"várias novas parcerias importantes, que incluem conjuntos de recursos vastos "
+"e multidisciplinares da Springer Nature e da ProQuest.</p> <p>Cumprimentos,</"
+"p> <p>A Equipa da Biblioteca da Wikipédia</p>"
 
 #. Translators: This is the announcement email sent to users of the Library Card platform, announcing the roll-out of EZProxy and Bundle (instant) access. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/proxy_bundle_email-body-text.html:3
@@ -1500,6 +1541,49 @@ msgid ""
 "If you have any questions please post on the talk page. Best, The Wikipedia "
 "Library Team"
 msgstr ""
+"Olá %(username)s, A Biblioteca da Wikipédia tem o prazer de anunciar a "
+"implementação do acesso EZProxy e do Pacote Biblioteca! O EZProxy é um "
+"servidor ''proxy'' usado para autenticar os seus acessos. Em vez de gerir "
+"autenticações individualizadas para cada conjunto de recursos a que lhe seja "
+"concedido acesso, pode agora aceder a todos os conteúdos com suporte EZProxy "
+"entrando simplesmente na sua conta Cartão da Biblioteca e clicando no acesso "
+"ao ''site'' da Internet. Para aceder aos conjuntos de recursos EZProxy, "
+"visite simplesmente a plataforma Cartão da Biblioteca, dirija-se à página da "
+"sua Biblioteca em https://wikipedialibrary.wmflabs.org/users/my_library, e "
+"clique ‘Aceder ao conjunto de recursos’ para o conteúdo a que pretende "
+"aceder no separador ‘Acesso instantâneo’. Se tinha contas ativas antes deste "
+"momento, consulte a página da sua Biblioteca para verificar como deve aceder "
+"a essas contas de futuro. Os conjuntos de recursos do separador 'Acesso "
+"instantâneo' têm agora de ser acedidos através de EZProxy. Os conjuntos de "
+"recursos do separador 'Acesso individual' devem continuar a ser acedidos "
+"como anteriormente. Até agora, todo o acesso através da Biblioteca da "
+"Wikipédia requeria que você se candidatasse e fosse aprovado para os "
+"conjuntos de recursos individuais. O Pacote Biblioteca altera esse fluxo, "
+"disponibilizando de imediato alguns conjuntos de recursos a todos aqueles "
+"que preenchem os critérios de experiência definidos nas nossas 'Condições de "
+"utilização'. Desde que continue a preencher esses critérios (que incluem 10 "
+"edições no período anterior de um mês e não ser bloqueado), terá acesso "
+"instantâneo aos conjuntos de recursos do Pacote Biblioteca através do Cartão "
+"da Biblioteca sem ser necessário candidatar-se nem fazer pedidos de "
+"renovação. Pode verificar se preenche os critérios para aceder a recursos do "
+"Pacote Biblioteca na página de início do Cartão da Biblioteca - https://"
+"wikipedialibrary.wmflabs.org. Se for elegível, os conjuntos de recursos "
+"serão acessíveis através do separador 'Acesso instantâneo' da sua "
+"Biblioteca. Ao aceder aos conjuntos de recursos através de EZProxy poderá "
+"notar que os URL são reescritos dinamicamente. Note que o uso de EZProxy "
+"exige que ative os ''cookies''. Se tiver problemas deve também limpar a "
+"''cache'' e reiniciar o ''browser''. Note, por favor, que as credenciais "
+"individuais de acesso a conjuntos de recursos acessíveis por EZProxy "
+"(incluindo o Pacote Biblioteca) serão desativadas em breve, portanto esta "
+"será a única forma de acesso a estes conjuntos de recursos. Todos os "
+"conjuntos de recursos do separador ‘Acesso individual’ na sua Biblioteca "
+"funcionaram tal como antes. Em conjunto com o lançamento destes novos "
+"métodos de acesso, temos o prazer de anunciar várias novas parcerias "
+"importantes, que incluem conjuntos de recursos vastos e multidisciplinares "
+"da Springer Nature e da ProQuest. Pode ler mais sobre este assunto em "
+"https://meta.wikimedia.org/wiki/Library_Card_platform/Authentication-"
+"based_access. Se tiver alguma pergunta, coloque-a na página de discussão, "
+"por favor. Cumprimentos, A Equipa da Biblioteca da Wikipédia"
 
 #. Translators: This is the subject of the announcement email sent to users of the Library Card platform, announcing the roll-out of EZProxy and Bundle (instant) access. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/proxy_bundle_email-subject.html:3
@@ -1635,24 +1719,24 @@ msgstr "A sua mensagem foi enviada. Responderemos em breve!"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:384
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:402
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Para realizar essa operação tem de ser editor da Wikipédia."
 
 #. Translators: When a user is being authenticated to access proxied resources, and the request's missing the editor's username, this error text is displayed.
 #: TWLight/ezproxy/views.py:35
 msgid "Missing Editor username."
-msgstr ""
+msgstr "Nome de utilizador do editor em falta."
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is invalid.
 #: TWLight/ezproxy/views.py:57
 msgid "Invalid EZProxy target URL."
-msgstr ""
+msgstr "URL de destino EZProxy inválido."
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is missing.
 #: TWLight/ezproxy/views.py:62
 msgid "Missing EZProxy target URL."
-msgstr ""
+msgstr "URL de destino EZProxy em falta."
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
 #: TWLight/graphs/views.py:240
@@ -1748,9 +1832,8 @@ msgstr "''Site'' na Internet"
 
 #. Translators: This text is located on individual partner pages, and when clicked takes users back to the list of publishers.
 #: TWLight/resources/templates/resources/partner_detail.html:14
-#, fuzzy
 msgid "Back to partners"
-msgstr "Enviada ao parceiro"
+msgstr "Voltar aos parceiros"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:25
@@ -1784,6 +1867,8 @@ msgid ""
 "View the status of your access(es) in <strong><a href=\"%(library_url)s\">My "
 "Library</a></strong> page."
 msgstr ""
+"Ver o estado dos seus acessos na página da sua <strong><a href="
+"\"%(library_url)s\">Biblioteca</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:67
@@ -1793,6 +1878,8 @@ msgid ""
 "View the status of your application(s) on your <strong><a href="
 "\"%(applications_url)s\">My Applications</a></strong> page."
 msgstr ""
+"Ver o estado das suas candidaturas na página das suas <strong><a href="
+"\"%(applications_url)s\">Candidaturas</a></strong>."
 
 #. Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist.
 #. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
@@ -1957,6 +2044,8 @@ msgid ""
 "View the status of your access(es) on your <strong><a href=\"%(library_url)s"
 "\">My Library</a></strong> page."
 msgstr ""
+"Ver o estado dos seus acessos na página da sua <strong><a href="
+"\"%(library_url)s\">Biblioteca</a></strong>."
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail.html:444
@@ -2115,7 +2204,7 @@ msgstr "Navegar pelos parceiros"
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to Meta-Wiki for more information on a tag.
 #: TWLight/resources/templates/resources/partner_filter.html:25
 msgid "See subject guide on Meta-Wiki"
-msgstr ""
+msgstr "Ver guia sobre este assunto na Meta-Wiki"
 
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
@@ -2136,9 +2225,8 @@ msgstr "Nenhum parceiro corresponde aos critérios especificados."
 
 #. Translators: This is a button to go back on the top of page.
 #: TWLight/resources/templates/resources/partner_filter.html:55
-#, fuzzy
 msgid "Back to top"
-msgstr "Enviada ao parceiro"
+msgstr "Voltar ao topo"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:34
@@ -2158,9 +2246,8 @@ msgstr "Língua(s) desconhecida(s)"
 
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the bundle partner's page, where they can find more information about the partner.
 #: TWLight/resources/templates/resources/partner_tile.html:97
-#, fuzzy
 msgid "More info"
-msgstr "(mais informações)"
+msgstr "Mais informações"
 
 #. Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate partner.
 #: TWLight/resources/templates/resources/partner_users.html:8
@@ -2240,7 +2327,7 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "Tem a certeza de que quer eliminar <b>%(object)s</b>?"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:163
+#: TWLight/resources/views.py:169
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
@@ -2249,28 +2336,27 @@ msgstr ""
 "favor, e não se esqueça de referir esta mensagem."
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:244
-#, fuzzy
+#: TWLight/resources/views.py:262
 msgid "This partner is currently not open for applications"
-msgstr "Este parceiro está agora disponível para receber candidaturas"
+msgstr "De momento, este parceiro não está aberto a candidaturas"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:267
+#: TWLight/resources/views.py:285
 msgid "This partner is now waitlisted"
 msgstr "Este parceiro tem agora uma lista de espera"
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:280
+#: TWLight/resources/views.py:298
 msgid "This partner is now available for applications"
 msgstr "Este parceiro está agora disponível para receber candidaturas"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:376
+#: TWLight/resources/views.py:394
 msgid "Your suggestion has been added."
 msgstr "A sua sugestão foi acrescentada."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:401
+#: TWLight/resources/views.py:419
 msgid "Suggestion has been deleted."
 msgstr "A sugestão foi eliminada."
 
@@ -2463,7 +2549,9 @@ msgstr "Tem uma conta há um mínimo de 6 meses"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
-msgid "You have made a minimum of 500 edits"
+#, fuzzy
+#| msgid "You have made a minimum of 500 edits"
+msgid "You have made a minimum of 500 edits to Wikimedia projects"
 msgstr "Já fez no mínimo 500 edições"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
@@ -2626,6 +2714,13 @@ msgid ""
 "expand the collection as more publishers become comfortable with "
 "participating. All Bundle content is accessed via EZProxy."
 msgstr ""
+"O Pacote Biblioteca é um conjunto de recursos aos quais não é necessário "
+"candidatar-se. Se preencher os critérios descritos acima, será "
+"automaticamente autorizado a aceder-lhes quando inicia uma sessão na "
+"plataforma. Neste momento só uma parte do nosso conteúdo está incluído no "
+"Pacote Biblioteca. No entanto, esperamos expandir os recursos à medida que "
+"mais editores se sintam à vontade em participar. Todo o conteúdo incluído no "
+"pacote é acedido através de EZProxy."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:182
@@ -2638,6 +2733,13 @@ msgid ""
 "your block status changes after being approved, you will need to request "
 "another review."
 msgstr ""
+"Se a sua conta estiver bloqueada em um ou mais projetos Wikimedia, ainda "
+"assim poderá receber acesso ao Pacote Biblioteca. Para tal, terá de entrar "
+"em contacto com a equipa da Biblioteca da Wikipédia, que irá rever os seus "
+"bloqueios. Se foi bloqueado por problemas de conteúdo, principalmente por "
+"violações de direitos de autor, ou se tem vários bloqueios de longo prazo, "
+"poderemos recusar o seu pedido. Além disso, se o estado dos seus bloqueios "
+"se alterar após a aprovação, terá de pedir outra revisão."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:192
@@ -2693,7 +2795,6 @@ msgstr "Admin"
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications.
 #: TWLight/templates/base.html:123
-#, fuzzy
 msgid "My Applications"
 msgstr "Candidaturas"
 
@@ -2751,6 +2852,9 @@ msgid ""
 "this site. Your applications will not be processed and you won't be able to "
 "apply or access resources you are approved for."
 msgstr ""
+"Não concordou com as <a href=\"%(terms_url)s\">condições de utilização</a> "
+"deste <i>site</i>. As suas candidaturas não serão processadas e não se "
+"poderá candidatar nem aceder a recursos para os quais tenha sido aprovado."
 
 #. Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
 #: TWLight/templates/base.html:233
@@ -2903,14 +3007,12 @@ msgstr "Distribuição da língua dos utilizadores"
 
 #. Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/home.html:12
-#, fuzzy
 msgid ""
 "The Wikipedia Library provides free access to research databases and "
 "collections."
 msgstr ""
-"A Biblioteca da Wikipédia oferece acesso gratuito a conteúdos de pesquisa "
-"para melhorar a sua capacidade de contribuir com conteúdo para os projetos "
-"da Wikimedia."
+"A Biblioteca da Wikipédia oferece acesso gratuito a bases de dados de "
+"pesquisa e conjuntos de recursos."
 
 #. Translators: A link users can click to read more about the project or the tool.
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
@@ -2921,7 +3023,7 @@ msgstr "Saiba mais"
 #. Translators: Alt text for the Library Bundle logo.
 #: TWLight/templates/home.html:44
 msgid "A stack of books tied together with a ribbon, the Library Bundle icon"
-msgstr ""
+msgstr "Uma pilha de livros atados com uma fita, o ícone do Pacote Biblioteca"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this message is displayed to all users as the description of Library Bundle eligibility panel. 'Library Bundle' is the set of resources which active users have automatic access to.
 #: TWLight/templates/home.html:48
@@ -2930,6 +3032,9 @@ msgid ""
 "<p>Free and immediate access to a large selection of resources, spanning "
 "%(bundle_partner_count)s collections, if you meet the following criteria:</p>"
 msgstr ""
+"<p>Acesso gratuito e imediato a uma grande seleção de fontes, constituída "
+"por %(bundle_partner_count)s conjuntos de recursos, se satisfizer os "
+"seguintes critérios:</p>"
 
 #. Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/templates/home.html:75
@@ -2942,6 +3047,12 @@ msgid ""
 "\">contact us</a>.\n"
 "            "
 msgstr ""
+"\n"
+"              Aparentemente, tem um bloqueio ativo da sua conta em pelo "
+"menos um projeto Wikimedia. Se preencher os restantes critérios poderá, "
+"ainda assim, ser-lhe permitido acesso ao Pacote Biblioteca - <a href="
+"\"%(contact_url)s\">contacte-nos</a>, por favor.\n"
+"            "
 
 #. Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle.
 #: TWLight/templates/home.html:84
@@ -2952,6 +3063,10 @@ msgid ""
 "\"%(library_url)s\">My Library</a> to see what you have access to.\n"
 "            "
 msgstr ""
+"\n"
+"              Preenche os critérios de elegibilidade! Visite a sua <a href="
+"\"%(library_url)s\">Biblioteca</a> para conhecer aquilo a que tem acesso.\n"
+"            "
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
 #: TWLight/templates/home.html:100
@@ -2959,12 +3074,13 @@ msgid ""
 "Some collections have a limited number of concurrent users and require an "
 "application."
 msgstr ""
+"Alguns conjuntos de recursos têm um número limitado de utilizadores em "
+"simultâneo e exigem uma candidatura."
 
 #. Translators: This is text on a button on the homepage, which allows users to see more available collections to which they can apply.
 #: TWLight/templates/home.html:117
-#, fuzzy
 msgid "See more"
-msgstr "Saiba mais"
+msgstr "Ver mais"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16
@@ -3006,25 +3122,22 @@ msgstr ""
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive account renewal notices or not.
 #: TWLight/users/forms.py:112
 msgid "Send renewal notices"
-msgstr ""
+msgstr "Enviar avisos de renovação"
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive pending application reminders or not.
 #: TWLight/users/forms.py:130
-#, fuzzy
 msgid "Send pending application reminders"
-msgstr "Candidaturas enviadas"
+msgstr "Enviar avisos de candidaturas pendentes"
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive application reminders that are under discussion or not.
 #: TWLight/users/forms.py:138
-#, fuzzy
 msgid "Send discussion application reminders"
-msgstr "Número de candidaturas"
+msgstr "Enviar avisos de candidaturas em discussão"
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive approved application reminders or not.
 #: TWLight/users/forms.py:146
-#, fuzzy
 msgid "Send approved application reminders"
-msgstr "Candidaturas aprovadas"
+msgstr "Enviar avisos de candidaturas aprovadas"
 
 #. Translators: Labels the button users click to request a restriction on the processing of their data.
 #: TWLight/users/forms.py:156
@@ -3038,15 +3151,14 @@ msgstr "Concordo com as condições de utilização"
 
 #. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
 #: TWLight/users/forms.py:185
-#, fuzzy
 msgid ""
 "By unchecking this box and clicking “Update” you may explore the site, but "
 "you will not be able to apply for access to materials or evaluate "
 "applications unless you agree with the terms of use."
 msgstr ""
-"O seu endereço de correio eletrónico está em branco. Isto permite-lhe "
-"explorar o <i>site</i>, mas não poderá pedir acesso a recursos de parceiros "
-"sem um correio eletrónico."
+"Ao desmarcar esta caixa e clicar \"Atualizar\" poderá explorar o <i>site</"
+"i>, mas não poderá pedir acesso a materiais nem avaliar candidaturas a menos "
+"que concorde com as condições de utilização."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
@@ -3132,9 +3244,9 @@ msgstr "Bem-vindo(a)! Concorde com as condições de utilização, por favor."
 
 #. Translators: This message is shown when a user logs back in to the site after their first time and hasn't agreed to the terms of use.
 #: TWLight/users/oauth.py:503
-#, fuzzy
 msgid "Welcome back! Please agree to the terms of use."
-msgstr "Bem-vindo(a)! Concorde com as condições de utilização, por favor."
+msgstr ""
+"Bem-vindo(a) de volta! Concorde com as condições de utilização, por favor."
 
 #. Translators: This message is displayed on the confirmation page where users can return their access to partner collections.
 #: TWLight/users/templates/users/authorization_confirm_return.html:10
@@ -3156,9 +3268,9 @@ msgstr "Iniciar nova candidatura"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.
 #: TWLight/users/templates/users/editor_detail.html:25
-#, fuzzy
 msgid "A collective list of collections you are authorized to access"
-msgstr "Uma lista dos parceiros que está autorizado a aceder"
+msgstr ""
+"Uma lista coletiva dos conjuntos de recursos que está autorizado a aceder"
 
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.
 #. Translators: Heading of the applications page where users can view all of their applications listed with other relevant info.
@@ -3239,12 +3351,11 @@ msgstr "Satisfaz as condições de utilização?"
 
 #. Translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a yes or no answer.
 #: TWLight/users/templates/users/editor_detail_data.html:57
-#, fuzzy
 msgid ""
 "at their last login, did this user meet the criteria set forth in the terms "
 "of use?"
 msgstr ""
-"No último início de sessão, este utilizador preencheu os critérios "
+"no seu último início de sessão, este utilizador preenchia os critérios "
 "especificados nas condições de utilização?"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
@@ -3259,9 +3370,8 @@ msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:83
-#, fuzzy
 msgid "Satisfies minimum account age?"
-msgstr "Satisfaz as condições de utilização?"
+msgstr "Satisfaz a idade mínima de conta?"
 
 #. Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:88
@@ -3270,18 +3380,17 @@ msgstr "Satisfaz as condições de utilização?"
 #: TWLight/users/templates/users/editor_detail_data.html:157
 #: TWLight/users/templates/users/editor_detail_data.html:175
 msgid "Unknown (requires user login)"
-msgstr ""
+msgstr "Desconhecido (requer início de sessão)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:100
-#, fuzzy
 msgid "Satisfies minimum edit count?"
-msgstr "Contagem de edições na Wikipédia"
+msgstr "Satisfaz o número mínimo de edições?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:118
 msgid "Is not blocked on any project?"
-msgstr ""
+msgstr "Não está bloqueado em nenhum projeto?"
 
 #. Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/users/templates/users/editor_detail_data.html:133
@@ -3291,34 +3400,35 @@ msgid ""
 "other criteria you may still be permitted access to the Library Bundle - "
 "please <a href=\"%(contact_url)s\">contact us</a>."
 msgstr ""
+"Aparentemente, tem um bloqueio ativo da sua conta. Se preencher os restantes "
+"critérios poderá, ainda assim, ser-lhe permitido acesso ao Pacote Biblioteca "
+"- <a href=\"%(contact_url)s\">contacte-nos</a>, por favor."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:146
 msgid "Eligible for Bundle?"
-msgstr ""
+msgstr "Será elegível para o Pacote?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
 #: TWLight/users/templates/users/editor_detail_data.html:149
-#, fuzzy
 msgid ""
 "At their last login, did this user meet the criteria set forth in the "
 "Library Bundle? Note that satisfying terms of use is a prerequisite to "
 "bundle eligibility."
 msgstr ""
-"No último início de sessão, este utilizador preencheu os critérios "
-"especificados nas condições de utilização?"
+"No último início de sessão, este utilizador preenchia os critérios "
+"especificados no Pacote Biblioteca? Note que satisfazer as condições de "
+"utilização é um pré-requisito de elegibilidade para o pacote."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:170
-#, fuzzy
 msgid "Satisfies recent edit count?"
-msgstr "Satisfaz as condições de utilização?"
+msgstr "Satisfaz o número de edições recentes?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit current count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:191
-#, fuzzy
 msgid "Current global edit count *"
-msgstr "Contagem global de edições *"
+msgstr "Atual contagem global de edições *"
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
 #: TWLight/users/templates/users/editor_detail_data.html:198
@@ -3327,14 +3437,13 @@ msgstr "(ver contribuições globais do utilizador)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the recent edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:208
-#, fuzzy
 msgid "Recent global edit count *"
-msgstr "Contagem global de edições *"
+msgstr "Recente contagem global de edições *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:220
 msgid "Meta-Wiki registration or SUL merge date *"
-msgstr "Data de registo na wiki Meta ou de fusão da autenticação unificada *"
+msgstr "Data de registo na Meta-Wiki ou de fusão da autenticação unificada *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:232
@@ -3370,9 +3479,8 @@ msgstr "Correio eletrónico *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:274
-#, fuzzy
 msgid "update"
-msgstr "(atualizar)"
+msgstr "atualizar"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:319
@@ -3414,15 +3522,13 @@ msgstr ""
 
 #. Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
 #: TWLight/users/templates/users/my_library.html:21
-#, fuzzy
 msgid "Instant access"
-msgstr "Acesso manual"
+msgstr "Acesso instantâneo"
 
 #. Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually.
 #: TWLight/users/templates/users/my_library.html:36
-#, fuzzy
 msgid "Individual access"
-msgstr "Acesso manual"
+msgstr "Acesso individual"
 
 #. Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_library.html:60
@@ -3437,14 +3543,13 @@ msgstr "Expirado"
 
 #. Translators: On the collection page (individual access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_library.html:93
-#, fuzzy
 msgid "You have no active individual access collections."
-msgstr "Não tem nenhum conjunto de recursos de acesso manual ativo."
+msgstr "Não tem nenhum conjunto de recursos de acesso individual ativo."
 
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
 msgid "Preferences"
-msgstr ""
+msgstr "Preferências"
 
 #. Translators: In the preferences section of a user profile, this text labels the form where users can change their email preferences.
 #: TWLight/users/templates/users/preferences.html:23
@@ -3461,15 +3566,14 @@ msgstr "Palavra-passe"
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:364
+#: TWLight/users/views.py:365
 msgid "Update"
 msgstr "Atualizar"
 
 #. Translators: This link is to the site's terms of use.
 #: TWLight/users/templates/users/preferences.html:71
-#, fuzzy
 msgid "View Terms of Use"
-msgstr "Condições de utilização"
+msgstr "Ver condições de utilização"
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
 #: TWLight/users/templates/users/preferences.html:81
@@ -3478,15 +3582,13 @@ msgstr "Dados"
 
 #. Translators: This text labels a button users can click to download their data.
 #: TWLight/users/templates/users/preferences.html:87
-#, fuzzy
 msgid "Download"
-msgstr "descarregar como CSV"
+msgstr "Descarregar"
 
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
 #: TWLight/users/templates/users/preferences.html:93
-#, fuzzy
 msgid "Restrict"
-msgstr "Restringir os meus dados"
+msgstr "Restringir"
 
 #. Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource.
 #: TWLight/users/templates/users/resource_tile.html:22
@@ -3499,9 +3601,9 @@ msgstr "Clicar para devolver este acesso"
 #: TWLight/users/templates/users/resource_tile.html:42
 #: TWLight/users/templates/users/resource_tile.html:64
 #: TWLight/users/templates/users/resource_tile.html:69
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(name)s's external website"
-msgstr "Hiperligação para o <i>site</i> na Internet do parceiro %(partner)s."
+msgstr "Hiperligação para o <i>site</i> externo do parceiro %(name)s's."
 
 #. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate name.
 #. Translators: Alt text for publisher logos on the my library page. Don't translate name.
@@ -3509,20 +3611,19 @@ msgstr "Hiperligação para o <i>site</i> na Internet do parceiro %(partner)s."
 #: TWLight/users/templates/users/resource_tile.html:54
 #: TWLight/users/templates/users/resource_tile.html:76
 #: TWLight/users/templates/users/resource_tile.html:81
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(name)s's signup page"
-msgstr "Hiperligação para a página de registo do parceiro %(partner)s"
+msgstr "Hiperligação para a página de registo do parceiro %(name)s's"
 
 #. Translators: Users can click this button to access a collection they have access to.
 #: TWLight/users/templates/users/resource_tile.html:102
-#, fuzzy
 msgid "Access collection"
-msgstr "Códigos de acesso"
+msgstr "Aceder ao conjunto de recursos"
 
 #. Translators: Users can click this button to be taken to the website for a resource.
 #: TWLight/users/templates/users/resource_tile.html:105
 msgid "Go to site"
-msgstr ""
+msgstr "Ir para o <i>site</i>"
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
 #: TWLight/users/templates/users/resource_tile.html:117
@@ -3532,7 +3633,7 @@ msgstr "As renovações não estão disponíveis para este parceiro"
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/resource_tile.html:121
 msgid "Extend"
-msgstr ""
+msgstr "Prolongar"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/resource_tile.html:124
@@ -4212,7 +4313,7 @@ msgid "Coordinators only"
 msgstr "Só para coordenadores"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:143
+#: TWLight/users/views.py:144
 #, python-brace-format
 msgid ""
 "Please <a href='{url}'>update your contributions</a> to Wikipedia to help "
@@ -4222,7 +4323,7 @@ msgstr ""
 "os coordenadores a avaliarem as suas candidaturas, por favor."
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:256
+#: TWLight/users/views.py:257
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, consider changing your "
@@ -4233,7 +4334,7 @@ msgstr ""
 "as suas preferências."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:264
+#: TWLight/users/views.py:265
 msgid "Your reminder email preferences are updated."
 msgstr ""
 "As suas preferências de avisos por correio eletrónico estão atualizadas."
@@ -4241,31 +4342,31 @@ msgstr ""
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:346 TWLight/users/views.py:427
-#: TWLight/users/views.py:480
+#: TWLight/users/views.py:347 TWLight/users/views.py:428
+#: TWLight/users/views.py:481
 msgid "You must be logged in to do that."
 msgstr "Para realizar essa operação tem de ter uma sessão iniciada."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:379
+#: TWLight/users/views.py:380
 msgid "Your information has been updated."
 msgstr "A sua informação foi atualizada."
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:411
+#: TWLight/users/views.py:412
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 "Os valores não podem estar ambos em branco. Introduza um endereço de correio "
 "eletrónico ou marque a caixa."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:439
+#: TWLight/users/views.py:440
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "O seu correio eletrónico foi alterado para {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:450
+#: TWLight/users/views.py:451
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -4275,7 +4376,7 @@ msgstr ""
 "sem um correio eletrónico."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:834
+#: TWLight/users/views.py:843
 msgid "Access to {} has been returned."
 msgstr "O acesso a {} foi devolvido."
 

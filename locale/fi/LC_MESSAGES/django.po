@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-17 23:03+0000\n"
-"PO-Revision-Date: 2020-08-17 17:09:57+0000\n"
+"POT-Creation-Date: 2020-09-07 22:37+0000\n"
+"PO-Revision-Date: 2020-09-03 14:54:42+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -375,9 +375,8 @@ msgstr "Ammatti"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:81
-#, fuzzy
 msgid "month(s)"
-msgstr "Kuukausi"
+msgstr "kuukautta"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #. Translators: Partner is the resource a user will access.
@@ -420,13 +419,9 @@ msgstr "Ei kuvausta"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:130
-#, fuzzy, python-format
+#, python-format
 msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
-msgstr ""
-"\n"
-"                  %(publisher)s vaatii, että hyväksyt <a href=\"%(url)s"
-"\">käyttöehdot</a>.\n"
-"                "
+msgstr "On hyväksynyt sivuston <a href=\"%(terms_url)s\">käyttöehdot</a>?"
 
 #. Translators: Displayed to coordinators when they've agreed to the terms of use.
 #. Translators: Displayed if the user has agreed to the terms of use.
@@ -750,7 +745,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
-#: TWLight/users/views.py:495
+#: TWLight/users/views.py:496
 msgid "Confirm"
 msgstr "Vahvista"
 
@@ -1528,7 +1523,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:384
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:402
 #, fuzzy
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Sinun on oltava kirjautuneena sisään tehdäksesi sen."
@@ -1723,9 +1718,8 @@ msgstr "Kielet"
 
 #. Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:181
-#, fuzzy
 msgid "Languages not available."
-msgstr "Ei kuvausta"
+msgstr "Kielet eivät ole saatavilla."
 
 #. Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field.
 #: TWLight/resources/templates/resources/partner_detail.html:195
@@ -2141,39 +2135,39 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:163
+#: TWLight/resources/views.py:169
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:244
+#: TWLight/resources/views.py:262
 msgid "This partner is currently not open for applications"
 msgstr "Yhteistyökumppani ei tällä hetkellä ota hakemuksia vastaan"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:267
+#: TWLight/resources/views.py:285
 #, fuzzy
 msgid "This partner is now waitlisted"
 msgstr ""
 "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:280
+#: TWLight/resources/views.py:298
 #, fuzzy
 msgid "This partner is now available for applications"
 msgstr ""
 "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:376
+#: TWLight/resources/views.py:394
 #, fuzzy
 msgid "Your suggestion has been added."
 msgstr "Tietosi on päivitetty."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:401
+#: TWLight/resources/views.py:419
 #, fuzzy
 msgid "Suggestion has been deleted."
 msgstr "Tietosi on päivitetty."
@@ -2343,7 +2337,7 @@ msgstr "Sinulla on käyttäjätunnus, joka on vähintään kuusi kuukautta vanha
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
 #, fuzzy
-msgid "You have made a minimum of 500 edits"
+msgid "You have made a minimum of 500 edits to Wikimedia projects"
 msgstr "Sinulla on vähintään 500 muokkausta tietosanakirjassa"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
@@ -3315,7 +3309,7 @@ msgstr "Salasana"
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:364
+#: TWLight/users/views.py:365
 msgid "Update"
 msgstr "Päivitä"
 
@@ -4036,7 +4030,7 @@ msgid "Coordinators only"
 msgstr ""
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:143
+#: TWLight/users/views.py:144
 #, fuzzy, python-brace-format
 msgid ""
 "Please <a href='{url}'>update your contributions</a> to Wikipedia to help "
@@ -4046,7 +4040,7 @@ msgstr ""
 "voivat arvioida hakemuksesi."
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:256
+#: TWLight/users/views.py:257
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, consider changing your "
@@ -4054,7 +4048,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:264
+#: TWLight/users/views.py:265
 #, fuzzy
 msgid "Your reminder email preferences are updated."
 msgstr "Tietosi on päivitetty."
@@ -4062,39 +4056,38 @@ msgstr "Tietosi on päivitetty."
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:346 TWLight/users/views.py:427
-#: TWLight/users/views.py:480
+#: TWLight/users/views.py:347 TWLight/users/views.py:428
+#: TWLight/users/views.py:481
 msgid "You must be logged in to do that."
 msgstr "Sinun on oltava kirjautuneena sisään tehdäksesi sen."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:379
+#: TWLight/users/views.py:380
 msgid "Your information has been updated."
 msgstr "Tietosi on päivitetty."
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:411
+#: TWLight/users/views.py:412
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:439
+#: TWLight/users/views.py:440
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Sähköpostiksesi on vaihdettu {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:450
-#, fuzzy
+#: TWLight/users/views.py:451
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
-"Voit käyttää sivua, mutta et voi hakea käyttöoikeutta aineistoon tai "
-"arvioida hakemuksia ennen kuin olet hyväksynyt käyttöehdot."
+"Sähköpostiosoitteesi on tyhjä. Voit silti tutkia sivustoa, mutta et voi "
+"hakea käyttöoikeutta aineistoon ilman sähköpostiosoitetta."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:834
+#: TWLight/users/views.py:843
 #, fuzzy
 msgid "Access to {} has been returned."
 msgstr "Tietosi on päivitetty."

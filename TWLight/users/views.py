@@ -33,6 +33,7 @@ from TWLight.view_mixins import (
 )
 from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.helpers.authorizations import get_valid_partner_authorizations
+from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
@@ -639,6 +640,14 @@ class TermsView(UpdateView):
 
     def get_success_url(self):
 
+        # Check if user is still eligible for bundle based on if they agreed to
+        # the terms of use or not
+        self.request.user.editor.wp_bundle_eligible = editor_bundle_eligible(
+            self.request.user.editor
+        )
+        self.request.user.editor.save()
+        self.request.user.editor.update_bundle_authorization()
+
         if self.get_object().terms_of_use:
             # If they agreed with the terms, awesome. Send them where they were
             # trying to go, if there's a meaningful `next` parameter in the URL;
@@ -751,16 +760,16 @@ class CollectionUserView(SelfOnly, ListView):
                             each_authorization.latest_sent_app = latest_app
                         if not latest_app.is_renewable:
                             try:
-                                each_authorization.open_app = Application.objects.filter(
-                                    editor=editor,
-                                    status__in=(
-                                        Application.PENDING,
-                                        Application.QUESTION,
-                                        Application.APPROVED,
-                                    ),
-                                    partner=each_authorization.partners.get(),
-                                ).latest(
-                                    "date_created"
+                                each_authorization.open_app = (
+                                    Application.objects.filter(
+                                        editor=editor,
+                                        status__in=(
+                                            Application.PENDING,
+                                            Application.QUESTION,
+                                            Application.APPROVED,
+                                        ),
+                                        partner=each_authorization.partners.get(),
+                                    ).latest("date_created")
                                 )
                             except Application.DoesNotExist:
                                 each_authorization.open_app = None
@@ -775,8 +784,8 @@ class CollectionUserView(SelfOnly, ListView):
         proxy_bundle_authorizations_list = sort_authorizations_into_resource_list(
             proxy_bundle_authorizations
         )
-        proxy_bundle_authorizations_expired_list = sort_authorizations_into_resource_list(
-            proxy_bundle_authorizations_expired
+        proxy_bundle_authorizations_expired_list = (
+            sort_authorizations_into_resource_list(proxy_bundle_authorizations_expired)
         )
 
         context["proxy_bundle_authorizations"] = proxy_bundle_authorizations_list

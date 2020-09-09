@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform to Polish (polski)
 # Exported from translatewiki.net
 #
+# Author: Ashaio
 # Author: Chrumps
 # Author: Nux
 # Author: Rail
@@ -10,8 +11,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-08-17 23:03+0000\n"
-"PO-Revision-Date: 2020-08-17 17:09:58+0000\n"
+"POT-Creation-Date: 2020-09-07 22:38+0000\n"
+"PO-Revision-Date: 2020-09-03 14:54:43+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,6 +59,8 @@ msgid ""
 "<p><small><i>Your personal data will be processed according to our <a "
 "href='{terms_url}'> privacy policy</a>.</i></small></p>"
 msgstr ""
+"<p><small><i>Twoje dane osobowe będą przetwarzane zgodnie z naszą <a "
+"href='{terms_url}'>polityką prywatności</a>.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:235
@@ -103,6 +106,8 @@ msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
 msgstr ""
+"Przez ile miesięcy chcesz mieć dostęp do usługi, zanim wymagane będzie "
+"odnowienie uprawnień"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:91
@@ -293,6 +298,8 @@ msgid ""
 "You can expect to receive access details within a week or two once it has "
 "been processed."
 msgstr ""
+"Szczegółowe informacje o dostępie będą przesłane, gdy tylko zostaną "
+"przetworzone; możesz się ich spodziewać za około tydzień lub dwa."
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:253
@@ -300,6 +307,8 @@ msgid ""
 "This partner joined the Library Bundle, which does not require applications. "
 "This application will be marked as invalid."
 msgstr ""
+"Ta instytucja partnerska przyłączyła się do Library Bundle, co nie wymaga "
+"złożenia wniosku. Ten wniosek będzie oznaczony jako nieważny."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -307,6 +316,8 @@ msgid ""
 "This application is on the waitlist because this partner does not have any "
 "access grants available at this time."
 msgstr ""
+"Ten wniosek jest na liście oczekiwania, ponieważ dana instytucja partnerska "
+"nie posiada aktualnie przyznań dostępu."
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:21
@@ -739,7 +750,7 @@ msgstr "Kliknij potwierdzenie aby odnowić swoje zgłoszenie u %(partner)s"
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
-#: TWLight/users/views.py:495
+#: TWLight/users/views.py:496
 msgid "Confirm"
 msgstr "Potwierdź"
 
@@ -806,6 +817,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/send_partner.html:80
 msgid "When you've processed the data below, click the 'mark as sent' button."
 msgstr ""
+"Kiedy przetworzysz poniższe dane, kliknij przyscisk 'zaznacz jako wysłane'."
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
 #: TWLight/applications/templates/applications/send_partner.html:86
@@ -848,7 +860,7 @@ msgstr ""
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:203
 msgid "There are no approved, unsent applications."
-msgstr ""
+msgstr "Nie ma zatwierdzonych, nie wysłanych wniosków."
 
 #. Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
 #: TWLight/applications/views.py:203
@@ -951,7 +963,7 @@ msgstr ""
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:990
 msgid "Set application status"
-msgstr ""
+msgstr "Ustaw status wniosku"
 
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
 #: TWLight/applications/views.py:1008
@@ -959,6 +971,8 @@ msgid ""
 "There are more pending applications than available accounts. Your "
 "application might get waitlisted."
 msgstr ""
+"Jest obecnie więcej oczekujących wniosków, niż dostępów do przyznania. Twój "
+"wniosek może trafić na listę oczekiwania."
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:1021
@@ -968,12 +982,12 @@ msgstr ""
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
 #: TWLight/applications/views.py:1057
 msgid "Please select at least one application."
-msgstr ""
+msgstr "Proszę wybrać przynajmniej jeden wniosek."
 
 #. Translators: After a coordinator has changed the status of a number of applications, this message appears.
 #: TWLight/applications/views.py:1215
 msgid "Batch update of application(s) {} successful."
-msgstr ""
+msgstr "Wsadowa aktualizacja wniosków {} zakończona sukcesem."
 
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:1224
@@ -987,12 +1001,12 @@ msgstr ""
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1395
 msgid "Error: Code used multiple times."
-msgstr ""
+msgstr "Błąd: kod użyty wiele razy."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
 #: TWLight/applications/views.py:1436
 msgid "All selected applications have been marked as sent."
-msgstr ""
+msgstr "Wszystkie zaznaczone wnioski zostały oznaczone jako wysłane."
 
 #. Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
 #: TWLight/applications/views.py:1467
@@ -1005,7 +1019,7 @@ msgstr ""
 #: TWLight/applications/views.py:1502
 #, python-brace-format
 msgid "Attempt to renew unapproved app #{pk} has been denied"
-msgstr ""
+msgstr "Próba odnowienia niezatwierdzonego wniosku #{pk} została odrzucona."
 
 #. Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
 #: TWLight/applications/views.py:1574
@@ -1013,6 +1027,8 @@ msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr ""
+"Ten obiekt nie może być odnowiony. (Prawdopodobnie oznacza to, że już "
+"wystąpiłeś o jego odnowienie)."
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
 #: TWLight/applications/views.py:1584
@@ -1020,11 +1036,13 @@ msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
 msgstr ""
+"Twój wniosek o odnowienie został dostarczony. Koordynator przejrzy twój "
+"wniosek."
 
 #. Translators: This labels a textfield where users can enter their email ID.
 #: TWLight/emails/forms.py:18
 msgid "Your email"
-msgstr ""
+msgstr "Twój e-mail"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
@@ -1032,16 +1050,18 @@ msgid ""
 "This field is automatically updated with the email from your <a "
 "href='{}'>user profile</a>."
 msgstr ""
+"To pole jest automatycznie uzupełnione o e-mail z twojego <a href='{}'>user "
+"profile</a>."
 
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:26
 msgid "Message"
-msgstr ""
+msgstr "Wiadomość"
 
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:28
 msgid "Receive a copy of this message"
-msgstr ""
+msgstr "Wyślij kopię wiadomości także do mnie"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
@@ -1072,7 +1092,7 @@ msgstr ""
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
 msgid "Your Wikipedia Library access code"
-msgstr ""
+msgstr "Twój kod dostępu do Biblioteki Wikipedii"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
@@ -1084,6 +1104,11 @@ msgid ""
 "can view the collections you're authorized to access at My Library: "
 "%(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
 msgstr ""
+"<p>Drodzy %(user)s,</p> <p>Dziękujemy za złożenie wniosku o dostęp do "
+"zasobów %(partner)s poprzez Bibliotekę Wikipedii. Z radością zawiadamiamy, "
+"że wniosek został przyjęty.</p> <p>%(user_instructions)s</p> <p>Możesz "
+"obejrzeć kolekcje, do przeglądania których zostałeś upoważniony, przez Moją "
+"Bibliotekę: %(link)s</p> <p>Pozdrowienia,</p> <p>Biblioteka Wikipedii</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
@@ -1099,7 +1124,7 @@ msgstr ""
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
 msgid "Your Wikipedia Library application has been approved"
-msgstr ""
+msgstr "Tówj wniosek o dostęp do Biblioteki Wikipedii został przyjęty"
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-html.html:5
@@ -1122,7 +1147,7 @@ msgstr ""
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
 #: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
 msgid "New comment on a Wikipedia Library application you processed"
-msgstr ""
+msgstr "Nowy komentarz na wniosku do Biblioteki Wikipedii, który przeglądałeś"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
@@ -1145,7 +1170,7 @@ msgstr ""
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
 msgid "New comment on your Wikipedia Library application"
-msgstr ""
+msgstr "Nowy komentarz na twoim wniosku do Biblioteki Wikipedii"
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:5
@@ -1168,6 +1193,7 @@ msgstr ""
 #: TWLight/emails/templates/emails/comment_notification_others-subject.html:4
 msgid "New comment on a Wikipedia Library application you commented on"
 msgstr ""
+"Nowy komentarz na wniosku do Biblioteki Wikipedii, który komentowałeś/-aś"
 
 #. Translators: This is the title of the form where users can send messages to the Wikipedia Library team.
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
@@ -1175,7 +1201,7 @@ msgstr ""
 #: TWLight/emails/templates/emails/contact.html:13
 #: TWLight/templates/about.html:204 TWLight/templates/base.html:275
 msgid "Contact us"
-msgstr ""
+msgstr "Skontaktuj się z nami"
 
 #. Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.
 #: TWLight/emails/templates/emails/contact.html:30
@@ -1188,17 +1214,17 @@ msgstr ""
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:39
 msgid "Contact info"
-msgstr ""
+msgstr "Informacje kontaktowe"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:43
 msgid "Meta page"
-msgstr ""
+msgstr "Strona Meta"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:45
 msgid "The Wikipedia Library"
-msgstr ""
+msgstr "Biblioteka Wikipedii"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/emails/templates/emails/contact.html:52
@@ -1208,17 +1234,17 @@ msgstr ""
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
 #: TWLight/emails/templates/emails/contact.html:56
 msgid "IRC"
-msgstr ""
+msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:64
 msgid "Wikipedia Library Facebook page"
-msgstr ""
+msgstr "Biblioteka Wikipedii na Facebooku"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:70
 msgid "Wikipedia Library Twitter page"
-msgstr ""
+msgstr "Biblioteka Wikipedii na Twitterze"
 
 #. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
 #: TWLight/emails/templates/emails/contact_us_email-subject.html:3
@@ -1239,7 +1265,7 @@ msgstr ""
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:11
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:10
 msgid "Breakdown"
-msgstr ""
+msgstr "Analiza"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
@@ -1280,6 +1306,11 @@ msgid ""
 "error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for "
 "helping review Wikipedia Library applications!</p>"
 msgstr ""
+"<p>Oto łagodne przypomnienie, że możesz przglądać wnioski na stronie <a href="
+"\"%(link)s\">%(link)s</a>.</p> <p>Możesz dostosować przypomnienia w zakładce "
+"'Preferencje' na swoim profilu użytkownika.</p> <p>Jeśli otrzymałeś/-aś tę "
+"wiadomość przez pomyłkę, daj nam znać na wikipedialibrary@wikimedia.org.</p> "
+"<p>Dzięki za pomoc w przeglądaniu wniosków do Biblioteki WIkipedii!</p>"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
@@ -1308,11 +1339,16 @@ msgid ""
 "wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library "
 "applications!"
 msgstr ""
+"<p>Oto łagodne przypomnienie, że możesz przglądać wnioski na stronie <a href="
+"\"%(link)s\">%(link)s</a>.</p> <p>Możesz dostosować przypomnienia w zakładce "
+"'Preferencje' na swoim profilu użytkownika.</p> <p>Jeśli otrzymałeś/-aś tę "
+"wiadomość przez pomyłkę, daj nam znać na wikipedialibrary@wikimedia.org.</p> "
+"<p>Dzięki za pomoc w przeglądaniu wniosków do Biblioteki WIkipedii!</p>"
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
 msgid "Wikipedia Library applications await your review"
-msgstr ""
+msgstr "Wnioski Biblioteki Wikipedii oczekują na przejrzenie"
 
 #. Translators: This is the announcement email sent to users of the Library Card platform, announcing the roll-out of EZProxy and Bundle (instant) access. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/proxy_bundle_email-body-html.html:5
@@ -1494,7 +1530,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:384
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:402
 msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
@@ -2062,34 +2098,34 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "Czy na pewno chcesz usunąć <b>%(object)s</b>?"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:163
+#: TWLight/resources/views.py:169
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:244
+#: TWLight/resources/views.py:262
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:267
+#: TWLight/resources/views.py:285
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:280
+#: TWLight/resources/views.py:298
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:376
+#: TWLight/resources/views.py:394
 msgid "Your suggestion has been added."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:401
+#: TWLight/resources/views.py:419
 msgid "Suggestion has been deleted."
 msgstr ""
 
@@ -2237,7 +2273,7 @@ msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
-msgid "You have made a minimum of 500 edits"
+msgid "You have made a minimum of 500 edits to Wikimedia projects"
 msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
@@ -3122,7 +3158,7 @@ msgstr "Hasło"
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:364
+#: TWLight/users/views.py:365
 msgid "Update"
 msgstr ""
 
@@ -3664,7 +3700,7 @@ msgid "Coordinators only"
 msgstr ""
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:143
+#: TWLight/users/views.py:144
 #, python-brace-format
 msgid ""
 "Please <a href='{url}'>update your contributions</a> to Wikipedia to help "
@@ -3672,7 +3708,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:256
+#: TWLight/users/views.py:257
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, consider changing your "
@@ -3680,43 +3716,43 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:264
+#: TWLight/users/views.py:265
 msgid "Your reminder email preferences are updated."
 msgstr ""
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:346 TWLight/users/views.py:427
-#: TWLight/users/views.py:480
+#: TWLight/users/views.py:347 TWLight/users/views.py:428
+#: TWLight/users/views.py:481
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:379
+#: TWLight/users/views.py:380
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:411
+#: TWLight/users/views.py:412
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:439
+#: TWLight/users/views.py:440
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:450
+#: TWLight/users/views.py:451
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:834
+#: TWLight/users/views.py:843
 msgid "Access to {} has been returned."
 msgstr ""
 
@@ -3784,7 +3820,7 @@ msgstr "{username} dostał dostęp do <a href='{url}'>{partner}</a>"
 #: tests/shunit/data/bad_i18n_comment_1.py:3
 #: tests/shunit/data/bad_i18n_newline_1.py:5
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non viverra vitae, interdum ut aenean ipsum.
 #. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non.
@@ -3792,20 +3828,20 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
 #: tests/shunit/data/good_i18n_2.py:2
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: tests/shunit/data/bad_i18n_newline_3.py:5
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #: tests/shunit/data/bad_i18n_newline_4.py:5
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: tests/shunit/data/bad_i18n_newline_5.py:5
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
-msgstr ""
+msgstr "6"
