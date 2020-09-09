@@ -27,8 +27,8 @@ import json
 from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
 from django.contrib import messages
 
-from django.core.urlresolvers import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Import available locales from Faker, so we can determine what languages we fake in tests.
 from faker.config import AVAILABLE_LOCALES as FAKER_AVAILABLE_LOCALES
@@ -41,6 +41,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TWLIGHT_HOME = os.path.dirname(
     os.path.dirname(os.path.abspath(os.path.join(os.path.abspath(__file__), os.pardir)))
 )
+
+TWLIGHT_ENV = os.environ.get("TWLIGHT_ENV")
 
 # An atypical way of setting django languages for TranslateWiki integration:
 # https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
@@ -163,7 +165,7 @@ REST_FRAMEWORK = {
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # WhiteNoise should be loaded before everything but security.
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -176,7 +178,6 @@ MIDDLEWARE_CLASSES = [
     "django.middleware.common.CommonMiddleware",
     "django.contrib.admindocs.middleware.XViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     # The default storage backend relies on sessions.
     # That’s why SessionMiddleware must be enabled and appear before
     # MessageMiddleware.
@@ -254,8 +255,8 @@ LANGUAGE_CODE = "en"  # Sets site default language.
 # https://django-modeltranslation.readthedocs.io/en/latest/installation.html#advanced-settings
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = (
-    LANGUAGE_CODE
-)  # sets the modeltranslation default language.
+    LANGUAGE_CODE  # sets the modeltranslation default language.
+)
 
 LOCALE_PATHS = [
     # makemessages looks for locale/ in the top level, not the project level.
@@ -402,7 +403,7 @@ INSTALLED_APPS += ["djmail"]
 # DJANGO_REQUEST CONFIGURATION
 # ------------------------------------------------------------------------------
 
-MIDDLEWARE_CLASSES += ["request.middleware.RequestMiddleware"]
+MIDDLEWARE += ["request.middleware.RequestMiddleware"]
 
 # The following are set for privacy purposes. Note that, if some amount of
 # geographic tracking is desired, there is a REQUEST_ANONYMOUS_IP setting which

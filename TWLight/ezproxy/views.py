@@ -14,7 +14,7 @@ from django.core.exceptions import (
 )
 from django.core.validators import URLValidator
 from django.http import HttpResponseRedirect
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views import View
 
 from TWLight.resources.models import Partner
@@ -97,7 +97,17 @@ class EZProxyTicket(object):
             + packet
         )
         self.starting_point_url = (
-            ezproxy_url + "/login?user=" + user + "&ticket=" + ticket
+            # The EZproxy server.
+            ezproxy_url
+            # The TWLight editor.
+            + "/login?user="
+            + user
+            # The editor's authorization ticket.
+            + "&ticket="
+            + ticket
+            # An identifier for this CGI endpoint.
+            + "&auth="
+            + settings.TWLIGHT_ENV
         )
 
     def url(self, url):

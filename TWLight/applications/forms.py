@@ -15,14 +15,15 @@ form that takes a dict of required fields, and constructs the form accordingly.
 (See the docstring of BaseApplicationForm for the expected dict format.)
 """
 from dal import autocomplete
+from crispy_forms.bootstrap import InlineField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput, Div, HTML
 import logging
 import re
 
 from django import forms
-from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext as _
+from django.urls import reverse
+from django.utils.translation import gettext as _
 
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
@@ -351,8 +352,8 @@ class ApplicationAutocomplete(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.field_template = "bootstrap3/layout/inline_field.html"
         self.helper.layout = Layout(
-            "editor",
-            "partner",
+            InlineField("editor"),
+            InlineField("partner"),
             StylableSubmit("submit", "Filter", css_class="btn btn-default"),
         )
 
@@ -363,7 +364,7 @@ class ApplicationAutocomplete(forms.ModelForm):
 
         # Internationalize user-visible labels. These will appear inline as
         # placeholders.
-        # Translators: Label of the field where coordinators can enter the username of a users
+        # Translators: Label of the field where coordinators can enter the username of a user
         self.fields["editor"].label = _("Username")
         # Translators: Label of the field where coordinators can enter the name of a partner
         self.fields["partner"].label = _("Partner name")

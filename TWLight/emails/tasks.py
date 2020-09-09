@@ -29,7 +29,7 @@ from reversion.models import Version
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
@@ -243,6 +243,10 @@ def send_comment_notification_emails(sender, **kwargs):
     # 'First' app version is the most recent
     recent_app_coordinator = app_versions.first().revision.user
     if recent_app_coordinator and recent_app_coordinator != current_comment.user:
+        if recent_app_coordinator != app.partner.coordinator and not (
+            recent_app_coordinator.is_staff
+        ):
+            recent_app_coordinator = app.partner.coordinator
         email = CommentNotificationCoordinators()
         email.send(
             recent_app_coordinator.email,

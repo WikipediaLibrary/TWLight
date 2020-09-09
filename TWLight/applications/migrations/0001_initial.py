@@ -44,7 +44,9 @@ class Migration(migrations.Migration):
                 (
                     "partner",
                     models.ForeignKey(
-                        related_name="applications", to="resources.Partner"
+                        related_name="applications",
+                        to="resources.Partner",
+                        on_delete=models.CASCADE,
                     ),
                 ),
                 (
@@ -54,12 +56,15 @@ class Migration(migrations.Migration):
                         blank=True,
                         to="resources.Stream",
                         null=True,
+                        on_delete=models.CASCADE,
                     ),
                 ),
                 (
                     "user",
                     models.ForeignKey(
-                        related_name="applications", to=settings.AUTH_USER_MODEL
+                        related_name="applications",
+                        to=settings.AUTH_USER_MODEL,
+                        on_delete=models.CASCADE,
                     ),
                 ),
             ],

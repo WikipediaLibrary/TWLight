@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core import mail
 from django.core.management import call_command
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase, RequestFactory
 
 from TWLight.applications.factories import ApplicationFactory
@@ -177,6 +177,46 @@ class ApplicationCommentTest(TestCase):
         comment_was_posted.send(sender=Comment, comment=comment5, request=request)
 
         self.assertEqual(len(mail.outbox), 0)
+
+    def test_comment_email_sending_6(self):
+        """
+        In case the coordinator is changed for a Partner, then the
+        previous coordinator should not receive comment notification email.
+        Also now the new coordinator should receive the email.
+        """
+        app, request = self._set_up_email_test_objects()
+        request.user = UserFactory()
+        self.assertEqual(len(mail.outbox), 0)
+
+        # Setting up coordinator1 as coordinator for partner
+        self.partner.coordinator = self.coordinator1
+        self.partner.save()
+
+        # Coordinator posts a comment, then Editor posts an additional comment
+        # An email is sent to the coordinator who posted the earlier comment
+        _ = self._create_comment(app, self.coordinator1)
+        comment1 = self._create_comment(app, self.editor)
+        comment_was_posted.send(sender=Comment, comment=comment1, request=request)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [self.coordinator1.email])
+
+        # Create a coordinator with a test client session
+        # and set it as the coordinator for partner
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        self.partner.coordinator = coordinator.user
+        self.partner.save()
+
+        # Evaluate the application
+        url = reverse("applications:evaluate", kwargs={"pk": app.pk})
+        response = self.client.post(
+            url, data={"status": Application.QUESTION}, follow=True
+        )
+
+        # Editor makes another comment
+        # Now the New Coordinator will receive the Email
+        comment2 = self._create_comment(app, self.editor)
+        comment_was_posted.send(sender=Comment, comment=comment2, request=request)
+        self.assertEqual(mail.outbox[1].to, [coordinator.user.email])
 
     # We'd like to mock out send_comment_notification_emails and test that
     # it is called when comment_was_posted is fired, but we can't; the signal

@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core import mail
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.management import call_command
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.test import TestCase, RequestFactory, Client
 
@@ -919,7 +919,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
     def test_authorization_backfill_expiry_date_on_partner_save_with_coordinator_deletion(
-        self
+        self,
     ):
         # As above, but this should still work in the case that an authorization's
         # coordinator deleted their data after authorizing a user.
@@ -982,7 +982,7 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         )
 
     def test_authorization_backfill_expiry_date_on_partner_save_with_new_coordinator(
-        self
+        self,
     ):
         # As above, but this should still work in the case that the coordinator
         # for a partner has changed, so Authorizer is no longer in the coordinators

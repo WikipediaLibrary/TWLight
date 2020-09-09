@@ -37,12 +37,12 @@ import urllib.request, urllib.parse, urllib.error
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.db.models import Q
 from django.utils.timezone import now
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from TWLight.resources.models import Partner, Stream
 from TWLight.users.groups import get_coordinators
 from TWLight.users.helpers.validation import validate_partners, validate_authorizer
@@ -81,7 +81,7 @@ class UserProfile(models.Model):
         verbose_name_plural = "user profiles"
 
     # Related name for backwards queries defaults to "userprofile".
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # Have they agreed to our terms?
     terms_of_use = models.BooleanField(
         default=False, help_text="Has this user agreed with the terms of use?"
@@ -138,7 +138,7 @@ class Editor(models.Model):
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Internal data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     # Database recordkeeping.
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # Set as non-editable.
     date_created = models.DateField(
         default=now, editable=False, help_text="When this profile was first created"
@@ -429,7 +429,12 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            self.wp_editcount_prev_updated, self.wp_editcount_prev, self.wp_editcount_recent, self.wp_enough_recent_edits = editor_recent_edits(
+            (
+                self.wp_editcount_prev_updated,
+                self.wp_editcount_prev,
+                self.wp_editcount_recent,
+                self.wp_enough_recent_edits,
+            ) = editor_recent_edits(
                 global_userinfo["editcount"],
                 self.wp_editcount_updated,
                 self.wp_editcount_prev_updated,
@@ -450,9 +455,9 @@ class Editor(models.Model):
             self.wp_not_blocked,
             self.ignore_wp_blocks,
         )
-        self.wp_bundle_eligible = editor_bundle_eligible(
-            self.wp_valid, self.wp_enough_recent_edits
-        )
+
+        self.wp_bundle_eligible = editor_bundle_eligible(self)
+
         self.save()
 
         self.update_bundle_authorization()
@@ -611,15 +616,12 @@ class Authorization(models.Model):
         else:
             authorizer = None
 
-        return (
-            "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - "
-            "company_name: {company_name} - stream_name: {stream_name}".format(
-                authorized_user=authorized_user,
-                authorizer=authorizer,
-                date_authorized=self.date_authorized,
-                company_name=company_name,
-                stream_name=stream_name,
-            )
+        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - " "company_name: {company_name} - stream_name: {stream_name}".format(
+            authorized_user=authorized_user,
+            authorizer=authorizer,
+            date_authorized=self.date_authorized,
+            company_name=company_name,
+            stream_name=stream_name,
         )
 
     def get_latest_app(self):
@@ -634,14 +636,14 @@ class Authorization(models.Model):
                 if self.stream:
                     return Application.objects.filter(
                         ~Q(status=Application.NOT_APPROVED),
-                        partner=partner,
+                        partner__in=partner,
                         specific_stream=self.stream,
                         editor=self.user.editor,
                     ).latest("id")
                 else:
                     return Application.objects.filter(
                         ~Q(status=Application.NOT_APPROVED),
-                        partner=partner,
+                        partner__in=partner,
                         editor=self.user.editor,
                     ).latest("id")
             except Application.DoesNotExist:
@@ -657,7 +659,7 @@ class Authorization(models.Model):
             try:
                 return Application.objects.filter(
                     status=Application.SENT,
-                    partner=self.partners.all(),
+                    partner__in=self.partners.all(),
                     editor=self.user.editor,
                 ).latest("id")
             except Application.DoesNotExist:

@@ -14,19 +14,17 @@ from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
-from TWLight.users.groups import get_coordinators, get_restricted
+from TWLight.users.groups import COORDINATOR_GROUP_NAME, RESTRICTED_GROUP_NAME
 
 import logging
 
 logger = logging.getLogger(__name__)
-
-coordinators = get_coordinators()
 
 
 class BaseObj(object):
@@ -44,7 +42,7 @@ class BaseObj(object):
 def test_func_coordinators_only(user):
     obj_coordinator_test = user.is_superuser  # Skip subsequent test if superuser.
     if not obj_coordinator_test:
-        obj_coordinator_test = coordinators and user in coordinators.user_set.all()
+        obj_coordinator_test = user.groups.filter(name=COORDINATOR_GROUP_NAME).exists()
     return obj_coordinator_test
 
 
@@ -71,7 +69,7 @@ def test_func_partner_coordinator(obj, user):
     )  # Skip subsequent test if superuser.
     if not obj_partner_coordinator_test:
         # If the user is a coordinator run more tests
-        if obj and coordinators and user in coordinators.user_set.all():
+        if obj and user.groups.filter(name=COORDINATOR_GROUP_NAME).exists():
             # Return true if the object is an editor and has
             # at least one application to a partner for whom
             # the user is a designated coordinator.
@@ -284,8 +282,7 @@ class EmailRequired(object):
 
 
 def test_func_data_processing_required(user):
-    restricted = get_restricted()
-    return user in restricted.user_set.all()
+    return user.groups.filter(name=RESTRICTED_GROUP_NAME).exists()
 
 
 class DataProcessingRequired(object):

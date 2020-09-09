@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load staticfiles %}
+{% load static %}
 {% load twlight_perms %}
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
     {% comment %}Translators: Name of the project/tool.{% endcomment %}
     {% trans "The Wikipedia Library Card Platform" %}
   </title>
-  
+
   <link rel="shortcut icon" href="{% static 'img/favicon.png' %}"/>
   <!-- Custom CSS -->
   {% if LANGUAGE_BIDI %}
@@ -37,7 +37,7 @@
     <link href="{% static "css/local.css" %}" rel="stylesheet" type="text/css">
   {% endif %}
 
-  {% block extra_css %}    
+  {% block extra_css %}
   {% endblock extra_css %}
 
   {% block head_javascript %}
@@ -56,7 +56,7 @@
 {% else %}
   <body>
 {% endif %}
-  
+
  <!-- navbar -->
   <div class="navbar navbar-default" id="top-nav">
     <div class="navbar-left">
@@ -125,7 +125,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="{% url 'auth_logout' %}">
+              <a href="{% url 'auth_logout' %}?next=/">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 {% comment %}Translators: Shown in the top bar of almost every page when the current user is logged in. {% endcomment %}
                 {% trans "Log out" %}
@@ -145,7 +145,7 @@
         </a>
       {% endif %}
     </div>
-      
+
     <ul class="nav nav-pills navbar-right">
       <li role="presentation" class="mobile-menu">
         <a href="{% url 'partners:filter' %}">
@@ -181,7 +181,7 @@
 
     </ul>
   </div>
- 
+
   <div id="main-content">
     {% if messages %}
       {% for message in messages %}
@@ -225,7 +225,7 @@
 
     {% block content %}
     {% endblock %}
-    
+
  </div>
   <footer id="footer">
     <div class="row">

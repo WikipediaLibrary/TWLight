@@ -355,7 +355,12 @@ class Migration(migrations.Migration):
                         help_text="Email, as entered by user", max_length=75
                     ),
                 ),
-                ("user", models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+                    ),
+                ),
             ],
             options={},
             bases=(models.Model,),

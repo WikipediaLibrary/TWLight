@@ -40,6 +40,7 @@ class Command(BaseCommand):
         if options["datetime"]:
             wp_editcount_updated = datetime.fromisoformat(options["datetime"])
 
+        # Getting all editors that are currently eligible or are staff or are superusers
         editors = Editor.objects.filter(wp_bundle_eligible=True)
         for editor in editors:
             if options["global_userinfo"]:
@@ -49,7 +50,12 @@ class Command(BaseCommand):
                     editor.wp_username, editor.wp_sub, True
                 )
             if global_userinfo:
-                editor.wp_editcount_prev_updated, editor.wp_editcount_prev, editor.wp_editcount_recent, editor.wp_enough_recent_edits = editor_recent_edits(
+                (
+                    editor.wp_editcount_prev_updated,
+                    editor.wp_editcount_prev,
+                    editor.wp_editcount_recent,
+                    editor.wp_enough_recent_edits,
+                ) = editor_recent_edits(
                     global_userinfo["editcount"],
                     editor.wp_editcount_updated,
                     editor.wp_editcount_prev_updated,
@@ -69,9 +75,8 @@ class Command(BaseCommand):
                     editor.wp_not_blocked,
                     editor.ignore_wp_blocks,
                 )
-                editor.wp_bundle_eligible = editor_bundle_eligible(
-                    editor.wp_valid, editor.wp_enough_recent_edits
-                )
+                editor.wp_bundle_eligible = editor_bundle_eligible(editor)
+
                 editor.save()
 
                 editor.update_bundle_authorization()

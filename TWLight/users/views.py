@@ -14,7 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse_lazy, resolve, Resolver404, reverse
+from django.urls import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View, RedirectView
 from django.views.generic.detail import DetailView
@@ -22,13 +22,18 @@ from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
 from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
 
 from TWLight.resources.models import Partner
-from TWLight.view_mixins import PartnerCoordinatorOrSelf, SelfOnly, coordinators
-from TWLight.users.groups import get_restricted
+from TWLight.view_mixins import (
+    PartnerCoordinatorOrSelf,
+    SelfOnly,
+    test_func_coordinators_only,
+)
+from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.helpers.authorizations import get_valid_partner_authorizations
+from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
@@ -51,8 +56,6 @@ from .models import Editor, UserProfile, Authorization
 from .serializers import UserSerializer
 from TWLight.applications.models import Application
 
-restricted = get_restricted()
-
 logger = logging.getLogger(__name__)
 
 
@@ -72,7 +75,7 @@ def _redirect_to_next_param(request):
     next_param = request.GET.get(REDIRECT_FIELD_NAME, "")
     if (
         next_param
-        and is_safe_url(url=next_param, host=request.get_host())
+        and is_safe_url(url=next_param, allowed_hosts=request.get_host())
         and _is_real_url(next_param)
     ):
         return next_param
@@ -128,7 +131,7 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
         context["email_form"] = UserEmailForm(user=user)
         # Check if the user is in the group: 'coordinators',
         # and add the reminder email preferences form.
-        if coordinators in user.groups.all():
+        if test_func_coordinators_only(user):
             context["coordinator_email_form"] = CoordinatorEmailForm(user=user)
 
         try:
@@ -217,7 +220,7 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
             user = self.request.user
             # Again, process email preferences data only if the user
             # is present in the group: 'coordinators'.
-            if coordinators in user.groups.all():
+            if test_func_coordinators_only(user):
                 # Unchecked checkboxes doesn't send POST data
                 if "send_pending_application_reminders" in request.POST:
                     send_pending_app_reminders = True
@@ -282,7 +285,7 @@ class UserHomeView(View):
     @classonlymethod
     def as_view(cls):
         def _get_view(request, *args, **kwargs):
-            if request.user.is_anonymous():
+            if request.user.is_anonymous:
                 # We can't use something like django-braces LoginRequiredMixin
                 # here, because as_view applies at an earlier point in the
                 # process.
@@ -335,7 +338,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
         Users may only update their own information.
         """
         try:
-            assert self.request.user.is_authenticated()
+            assert self.request.user.is_authenticated
         except AssertionError:
             messages.add_message(
                 self.request,
@@ -416,7 +419,7 @@ class EmailChangeView(SelfOnly, FormView):
         Users may only update their own email.
         """
         try:
-            assert self.request.user.is_authenticated()
+            assert self.request.user.is_authenticated
         except AssertionError:
             messages.add_message(
                 self.request,
@@ -469,7 +472,7 @@ class RestrictDataView(SelfOnly, FormView):
 
     def get_object(self, queryset=None):
         try:
-            assert self.request.user.is_authenticated()
+            assert self.request.user.is_authenticated
         except AssertionError:
             messages.add_message(
                 self.request,
@@ -498,12 +501,14 @@ class RestrictDataView(SelfOnly, FormView):
         return form
 
     def form_valid(self, form):
+        coordinators = get_coordinators()
+        restricted = get_restricted()
         if form.cleaned_data["restricted"]:
             self.request.user.groups.add(restricted)
 
             # If a coordinator requests we stop processing their data, we
             # shouldn't allow them to continue being one.
-            if coordinators in self.request.user.groups.all():
+            if test_func_coordinators_only(self.request.user):
                 self.request.user.groups.remove(coordinators)
         else:
             self.request.user.groups.remove(restricted)
@@ -558,6 +563,11 @@ class DeleteDataView(SelfOnly, DeleteView):
             user_authorization.date_expires = date.today() - timedelta(days=1)
             user_authorization.save()
 
+        # Delete any bundle authorizations.
+        bundle_auths = user.editor.get_bundle_authorization
+        if bundle_auths:
+            bundle_auths.delete()
+
         # Did the user authorize any authorizations?
         # If so, we need to retain their validity by shifting
         # the authorizer to TWL Team
@@ -594,7 +604,7 @@ class TermsView(UpdateView):
         For authenticated users, returns their associated UserProfile instance.
         For anonymous users, returns None.
         """
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return self.request.user.userprofile
         else:
             return None
@@ -624,11 +634,19 @@ class TermsView(UpdateView):
         the form. For anonymous users, returns None.
         """
         kwargs = super(TermsView, self).get_form_kwargs()
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             kwargs.update({"instance": self.request.user.userprofile})
         return kwargs
 
     def get_success_url(self):
+
+        # Check if user is still eligible for bundle based on if they agreed to
+        # the terms of use or not
+        self.request.user.editor.wp_bundle_eligible = editor_bundle_eligible(
+            self.request.user.editor
+        )
+        self.request.user.editor.save()
+        self.request.user.editor.update_bundle_authorization()
 
         if self.get_object().terms_of_use:
             # If they agreed with the terms, awesome. Send them where they were
@@ -742,16 +760,16 @@ class CollectionUserView(SelfOnly, ListView):
                             each_authorization.latest_sent_app = latest_app
                         if not latest_app.is_renewable:
                             try:
-                                each_authorization.open_app = Application.objects.filter(
-                                    editor=editor,
-                                    status__in=(
-                                        Application.PENDING,
-                                        Application.QUESTION,
-                                        Application.APPROVED,
-                                    ),
-                                    partner=each_authorization.partners.get(),
-                                ).latest(
-                                    "date_created"
+                                each_authorization.open_app = (
+                                    Application.objects.filter(
+                                        editor=editor,
+                                        status__in=(
+                                            Application.PENDING,
+                                            Application.QUESTION,
+                                            Application.APPROVED,
+                                        ),
+                                        partner=each_authorization.partners.get(),
+                                    ).latest("date_created")
                                 )
                             except Application.DoesNotExist:
                                 each_authorization.open_app = None
@@ -766,8 +784,8 @@ class CollectionUserView(SelfOnly, ListView):
         proxy_bundle_authorizations_list = sort_authorizations_into_resource_list(
             proxy_bundle_authorizations
         )
-        proxy_bundle_authorizations_expired_list = sort_authorizations_into_resource_list(
-            proxy_bundle_authorizations_expired
+        proxy_bundle_authorizations_expired_list = (
+            sort_authorizations_into_resource_list(proxy_bundle_authorizations_expired)
         )
 
         context["proxy_bundle_authorizations"] = proxy_bundle_authorizations_list

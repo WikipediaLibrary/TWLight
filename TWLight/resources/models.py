@@ -10,7 +10,7 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.urls import reverse_lazy, reverse
 from django.db import models
 from django_countries.fields import CountryField
 
@@ -65,7 +65,11 @@ class TextFieldTag(TagBase):
 
 
 class TaggedTextField(GenericTaggedItemBase):
-    tag = models.ForeignKey(TextFieldTag, related_name="%(app_label)s_%(class)s_items")
+    tag = models.ForeignKey(
+        TextFieldTag,
+        related_name="%(app_label)s_%(class)s_items",
+        on_delete=models.CASCADE,
+    )
 
 
 class Language(models.Model):
@@ -421,8 +425,10 @@ class Partner(models.Model):
         if self.target_url:
             # Validate the form for the uniqueness of self.target_url across
             # all PROXY and BUNDLE partners/streams.
-            validation_error_msg = check_for_target_url_duplication_and_generate_error_message(
-                self, partner=True
+            validation_error_msg = (
+                check_for_target_url_duplication_and_generate_error_message(
+                    self, partner=True
+                )
             )
             if validation_error_msg:
                 raise ValidationError({"target_url": validation_error_msg})
@@ -462,20 +468,26 @@ class Partner(models.Model):
     @property
     def get_access_url(self):
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
+        ezproxy_auth = settings.TWLIGHT_ENV
         access_url = None
         if (
             self.authorization_method in [self.PROXY, self.BUNDLE]
             and ezproxy_url
+            and ezproxy_auth
             and self.target_url
         ):
-            access_url = ezproxy_url + "/login?url=" + self.target_url
+            access_url = (
+                ezproxy_url + "/login?auth=" + ezproxy_auth + "&url=" + self.target_url
+            )
         elif self.target_url:
             access_url = self.target_url
         return access_url
 
 
 class PartnerLogo(models.Model):
-    partner = models.OneToOneField("Partner", related_name="logos")
+    partner = models.OneToOneField(
+        "Partner", related_name="logos", on_delete=models.CASCADE
+    )
     logo = models.ImageField(
         blank=True,
         null=True,
@@ -503,7 +515,9 @@ class Stream(models.Model):
         verbose_name_plural = "collections"
         ordering = ["partner", "name"]
 
-    partner = models.ForeignKey(Partner, db_index=True, related_name="streams")
+    partner = models.ForeignKey(
+        Partner, db_index=True, related_name="streams", on_delete=models.CASCADE
+    )
     name = models.CharField(
         max_length=50,
         help_text="Name of stream (e.g. 'Health and Behavioral Sciences). "
@@ -561,8 +575,10 @@ class Stream(models.Model):
         if self.target_url:
             # Validate the form for the uniqueness of self.target_url across
             # all PROXY and BUNDLE partners/streams.
-            validation_error_msg = check_for_target_url_duplication_and_generate_error_message(
-                self, stream=True
+            validation_error_msg = (
+                check_for_target_url_duplication_and_generate_error_message(
+                    self, stream=True
+                )
             )
             if validation_error_msg:
                 raise ValidationError({"target_url": validation_error_msg})
@@ -607,7 +623,9 @@ class Contact(models.Model):
         verbose_name = "contact person"
         verbose_name_plural = "contact people"
 
-    partner = models.ForeignKey(Partner, db_index=True, related_name="contacts")
+    partner = models.ForeignKey(
+        Partner, db_index=True, related_name="contacts", on_delete=models.CASCADE
+    )
 
     title = models.CharField(
         max_length=75,
@@ -680,7 +698,9 @@ class Video(models.Model):
         verbose_name_plural = "video tutorials"
         ordering = ["partner"]
 
-    partner = models.ForeignKey(Partner, db_index=True, related_name="videos")
+    partner = models.ForeignKey(
+        Partner, db_index=True, related_name="videos", on_delete=models.CASCADE
+    )
 
     tutorial_video_url = models.URLField(
         blank=True, null=True, help_text="URL of a video tutorial."
@@ -704,6 +724,7 @@ class AccessCode(models.Model):
         db_index=True,
         related_name="accesscodes",
         limit_choices_to=(models.Q(authorization_method=1)),
+        on_delete=models.CASCADE,
     )
 
     code = models.CharField(max_length=60, help_text="An access code for this partner.")
@@ -711,5 +732,9 @@ class AccessCode(models.Model):
     # This syntax is required for the ForeignKey to avoid a circular
     # import between the authorizations and resources models
     authorization = models.OneToOneField(
-        "users.Authorization", related_name="accesscodes", null=True, blank=True
+        "users.Authorization",
+        related_name="accesscodes",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
     )

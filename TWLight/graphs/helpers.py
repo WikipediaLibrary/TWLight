@@ -86,6 +86,7 @@ def get_data_count_by_month(queryset, data_format=JSON):
 
         current_date = timezone.now().date()
 
+        # TODO: find out if returning an empty data series array is correct when earliest_date is None
         while current_date >= earliest_date:
             if data_format == JSON:
                 # flot.js expects milliseconds since the epoch.
@@ -121,13 +122,13 @@ def get_application_status_data(
 
     for status in statuses:
         status_count = queryset.filter(status=status[0]).count()
-        # We have to force unicode here because we used ugettext_lazy, not
-        # ugettext, to internationalize the status labels in
+        # We have to force unicode here because we used gettext_lazy, not
+        # gettext, to internationalize the status labels in
         # TWLight.applications.models.
-        # We had to use ugettext_lazy because the order in which Django
+        # We had to use gettext_lazy because the order in which Django
         # initializes objects means the system will fail on startup if we
-        # try to use ugettext.
-        # However, ugettext_lazy returns a reference to the translated
+        # try to use gettext.
+        # However, gettext_lazy returns a reference to the translated
         # string, not the actual translation string. That reference is not
         # suitable for use in templates, and inserting it directly into the
         # javascript like this means that we bypass places that would

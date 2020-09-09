@@ -5,7 +5,7 @@ import urllib.parse
 from urllib.parse import quote
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from TWLight.tests import AuthorizationBaseTestCase
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.models import Authorization
@@ -42,6 +42,8 @@ class ProxyTestCase(AuthorizationBaseTestCase):
             + quote(self.editor1.wp_username)
             + "&ticket="
             + too_lazy_to_test_ticket
+            + "&auth="
+            + settings.TWLIGHT_ENV
             + "&url="
             + self.app1.partner.target_url
         )

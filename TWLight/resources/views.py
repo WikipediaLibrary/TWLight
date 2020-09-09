@@ -1,11 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.db.models import Count
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, View, RedirectView
 from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
@@ -119,7 +119,7 @@ class PartnersDetailView(DetailView):
         context["has_open_apps"] = False
         context["has_auths"] = False
         if (
-            self.request.user.is_authenticated()
+            self.request.user.is_authenticated
             and not partner.authorization_method == partner.BUNDLE
         ):
             context["apply"] = True
@@ -146,7 +146,13 @@ class PartnersDetailView(DetailView):
                     # but link to collection page
                     if not partner.specific_title:
                         context["apply"] = False
-                    context["has_auths"] = True
+                    # User fulfills initial authorization
+                    fulfills_auth = True
+                    # Checking if user has agreed to terms and conditions, otherwise
+                    # they shouldn't be authorized to access the collection
+                    user_agreed_terms = user.userprofile.terms_of_use
+                    final_auth = fulfills_auth and user_agreed_terms
+                    context["has_auths"] = final_auth
                 except Authorization.DoesNotExist:
                     pass
                 except Authorization.MultipleObjectsReturned:
@@ -171,7 +177,13 @@ class PartnersDetailView(DetailView):
                     # User has correct number of auths, don't show 'apply',
                     # but link to collection page
                     context["apply"] = False
-                    context["has_auths"] = True
+                    # User fulfills initial authorization
+                    fulfills_auth = True
+                    # Checking if user has agreed to terms and conditions, otherwise
+                    # they shouldn't be authorized to access the collection
+                    user_agreed_terms = user.userprofile.terms_of_use
+                    final_auth = fulfills_auth and user_agreed_terms
+                    context["has_auths"] = final_auth
                     if apps.count() > 0:
                         # User has open apps, link to apps page
                         context["has_open_apps"] = True
@@ -182,8 +194,14 @@ class PartnersDetailView(DetailView):
                         if each_authorization.stream in partner_streams:
                             auth_streams.append(each_authorization.stream)
                     if auth_streams:
+                        # User fulfills initial authorization
+                        fulfills_auth = True
+                        # Checking if user has agreed to terms and conditions, otherwise
+                        # they shouldn't be authorized to access the collection
+                        user_agreed_terms = user.userprofile.terms_of_use
+                        final_auth = fulfills_auth and user_agreed_terms
                         # User has authorizations, link to collection page
-                        context["has_auths"] = True
+                        context["has_auths"] = final_auth
                     no_auth_streams = partner_streams.exclude(
                         name__in=auth_streams
                     )  # streams with no corresponding authorizations – we'll want to know if these have apps
@@ -216,7 +234,7 @@ class PartnersDetailView(DetailView):
         partner_list = available_partners
 
         # If logged in, what's the list of unavailable partners, if any, for which the current user is the coordinator?
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             coordinator_partners = Partner.even_not_available.filter(
                 coordinator=self.request.user, status=Partner.NOT_AVAILABLE
             )
@@ -409,7 +427,7 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
         obj = get_object_or_404(Suggestion, id=suggestion_id)
         url_ = obj.get_absolute_url()
         user = self.request.user
-        if user.is_authenticated():
+        if user.is_authenticated:
             if user in obj.upvoted_users.all():
                 obj.upvoted_users.remove(user)
             else:

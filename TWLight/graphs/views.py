@@ -1,17 +1,18 @@
 import csv
 import itertools
+import logging
 from datetime import date
 
 # The django-request analytics package, NOT the python URL library requests!
 from request.models import Request
 
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import resolve
+from django.urls import resolve
 from django.contrib import messages
 from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
@@ -26,6 +27,8 @@ from .helpers import (
     get_proxy_and_renewed_authorizations,
     PYTHON,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class DashboardView(TemplateView):
@@ -254,13 +257,38 @@ class CSVProxyAuthRenewalRate(_CSVDownloadView):
             for each_proxy_auth, each_renewed_auth in itertools.zip_longest(
                 proxy_auth_data, renewed_auth_data
             ):
-                each_proxy_auth.extend(
-                    [
-                        each_renewed_auth[1],
-                        str(round(each_renewed_auth[1] / each_proxy_auth[1] * 100, 2))
-                        + "%",
-                    ]
-                )
+                # Checking if each_renewed_auth is a tuple, since that is what
+                # get_data_count_by_month should return
+                if each_renewed_auth and len(each_renewed_auth) == 2:
+                    each_proxy_auth.extend(
+                        [
+                            each_renewed_auth[1],
+                            str(
+                                round(
+                                    each_renewed_auth[1] / each_proxy_auth[1] * 100, 2
+                                )
+                            )
+                            + "%",
+                        ]
+                    )
+                # If get_data_count_by_month does not return a tuple, print the
+                # returned value in the csv and log it
+                elif each_renewed_auth:
+                    each_proxy_auth.extend(
+                        [
+                            "There was a problem reading renewed data: "
+                            + each_renewed_auth
+                        ]
+                    )
+                    logger.warning(
+                        "Data is not a tuple. It instead returned: " + each_renewed_auth
+                    )
+                # If there is no value, log that as well.
+                else:
+                    each_proxy_auth.extend(
+                        ["There was a problem reading renewed data: None"]
+                    )
+                    logger.warning("Data is not a tuple. It instead returned: None")
 
         writer = csv.writer(response)
         writer.writerow(

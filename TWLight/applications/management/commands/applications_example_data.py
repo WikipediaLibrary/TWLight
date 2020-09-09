@@ -8,7 +8,7 @@ from django.test import Client, RequestFactory
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application

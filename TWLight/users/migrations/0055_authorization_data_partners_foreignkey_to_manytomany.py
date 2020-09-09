@@ -7,8 +7,8 @@ from django.db import migrations
 
 def partner_to_partners(apps, schema_editor):
     """
-        Adds the Partner object in Authorization.partner to the
-        many-to-many relationship in Authorization.partners
+    Adds the Partner object in Authorization.partner to the
+    many-to-many relationship in Authorization.partners
     """
     authorization_model = apps.get_model("users", "Authorization")
 
