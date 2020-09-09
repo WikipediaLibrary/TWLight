@@ -859,6 +859,7 @@ class EvaluateApplicationView(
     * view single applications
     * view associated editor metadata
     * assign status
+    * view recent applications made by applicant
     """
 
     model = Application
@@ -958,6 +959,15 @@ class EvaluateApplicationView(
         existing_authorization = app.get_authorization()
         if app.parent and existing_authorization:
             context["previous_auth_expiry_date"] = existing_authorization.date_expires
+
+        # Get 5 recent applications
+        # also exclude current app if it is present in recent apps
+        recent_apps = (
+            Application.objects.filter(editor=self.object.editor)
+            .exclude(pk=app.pk)
+            .order_by("-id")[:5]
+        )
+        context["recent_apps"] = recent_apps
 
         return context
 

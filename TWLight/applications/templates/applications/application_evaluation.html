@@ -217,6 +217,27 @@
       </div>
     {% endif %}    
   </div>
+
+  {% comment %}Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant{% endcomment %}
+  <h2>{% trans 'Recent Applications' %}</h2>
+  
+  <div class="row">
+    {% for app in recent_apps %}
+      <div class="col-xs-12 col-sm-4">
+        {% if app.partner.coordinator == request.user or app.partner.coordinator == app.editor.user %}
+          <a href="{{ app.get_absolute_url }}">
+            <strong>{{ app.partner }}</strong>
+          </a>
+        {% else %}
+          <strong>{{ app.partner }}</strong>
+        {% endif %}
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        <span class="label label{{ app.get_bootstrap_class }} label-lg">{{ app.get_status_display }}</span>
+      </div>
+    {% endfor %}
+  </div>
+
   {% comment %}Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.{% endcomment %}
   <h2>{% trans 'Discussion' %}</h2>
   {% render_comment_list for object %}

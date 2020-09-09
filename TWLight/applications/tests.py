@@ -2234,6 +2234,73 @@ class ListApplicationsTest(BaseApplicationViewTest):
             sorted([item.pk for item in allow_qs]),
         )
 
+    def test_recent_apps_evaluation(self):
+        """
+        recent_app context data should
+        contain applicant's 5 recent applications
+        """
+        factory = RequestFactory()
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        editor = EditorFactory()
+
+        # Create some applications for an editor
+        app1 = ApplicationFactory(editor=editor, status=Application.PENDING)
+        app2 = ApplicationFactory(editor=editor, status=Application.QUESTION)
+        app3 = ApplicationFactory(editor=editor, status=Application.PENDING)
+        app4 = ApplicationFactory(editor=editor, status=Application.APPROVED)
+        app5 = ApplicationFactory(editor=editor, status=Application.NOT_APPROVED)
+        app6 = ApplicationFactory(editor=editor, status=Application.APPROVED)
+        app7 = ApplicationFactory(editor=editor, status=Application.QUESTION)
+
+        # Set partner and coordinator for app2
+        partner2 = PartnerFactory()
+        app2.partner = partner2
+        app2.save()
+        partner2.coordinator = coordinator.user
+        partner2.save()
+
+        # Generate expected result for app2
+        expected_recent_apps = [
+            repr(app7),
+            repr(app6),
+            repr(app5),
+            repr(app4),
+            repr(app3),
+        ]
+
+        # Visit page and get recent apps from context data
+        app2_url = reverse("applications:evaluate", kwargs={"pk": app2.pk})
+        response = self.client.get(app2_url)
+        recent_apps = response.context_data["recent_apps"]
+
+        # Expected and actual recent app querysets must be equal
+        self.assertQuerysetEqual(recent_apps, expected_recent_apps)
+
+        # Set partner and coordinator for app6
+        partner6 = PartnerFactory()
+        app6.partner = partner6
+        app6.save()
+        partner6.coordinator = coordinator.user
+        partner6.save()
+
+        # Generate expected result for app6
+        # Also note that app6 will be excluded from recent apps
+        expected_recent_apps = [
+            repr(app7),
+            repr(app5),
+            repr(app4),
+            repr(app3),
+            repr(app2),
+        ]
+
+        # Visit page and get recent apps from context data
+        app6_url = reverse("applications:evaluate", kwargs={"pk": app6.pk})
+        response = self.client.get(app6_url)
+        recent_apps = response.context_data["recent_apps"]
+
+        # Expected and actual recent app querysets must be equal
+        self.assertQuerysetEqual(recent_apps, expected_recent_apps)
+
 
 class RenewApplicationTest(BaseApplicationViewTest):
     def test_protected_to_self_only(self):
