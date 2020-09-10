@@ -433,7 +433,7 @@ class Partner(models.Model):
             if validation_error_msg:
                 raise ValidationError({"target_url": validation_error_msg})
 
-        if self.CODES or self.LINK and not self.user_instructions:
+        if (self.CODES or self.LINK) and (not self.user_instructions):
             raise ValidationError(
                 "Partners with automatically sent messages require user instructions to be entered"
             )
