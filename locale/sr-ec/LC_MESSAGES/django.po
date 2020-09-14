@@ -3,11 +3,12 @@
 #
 # Author: Abijeet Patro
 # Author: BadDog
+# Author: Kizule
 # Author: Zoranzoki21
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-09-10 16:58:10+0000\n"
+"PO-Revision-Date: 2020-09-14 15:16:48+0000\n"
 "X-POT-Import-Date: 2020-09-09 16:31:47+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

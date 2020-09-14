@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:55+0000\n"
-"PO-Revision-Date: 2020-09-10 16:58:09+0000\n"
+"PO-Revision-Date: 2020-09-14 15:16:46+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -469,9 +469,8 @@ msgstr ""
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant
 #: TWLight/applications/templates/applications/application_evaluation.html:222
-#, fuzzy
 msgid "Recent Applications"
-msgstr "내 애플리케이션"
+msgstr "최근 애플리케이션"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:242
@@ -1919,9 +1918,8 @@ msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
-#, fuzzy
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
-msgstr "적어도 500건을 편집했습니다"
+msgstr "위키미디어 프로젝트에 적어도 500건을 편집했습니다"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67

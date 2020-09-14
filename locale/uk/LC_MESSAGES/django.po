@@ -5,6 +5,7 @@
 # Author: Andrew J.Kurbiko
 # Author: BaRaN6161 TURK
 # Author: Movses
+# Author: MuratTheTurkish
 # Author: Olghinabella
 # Author: Sabelöga
 # Author: Vlad5250
@@ -14,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:55+0000\n"
-"PO-Revision-Date: 2020-09-10 16:58:11+0000\n"
+"PO-Revision-Date: 2020-09-14 15:16:48+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2770,9 +2771,9 @@ msgstr "Посилання на зовнішній вебсайт %(stream)s."
 #: TWLight/users/templates/users/resource_tile.html:54
 #: TWLight/users/templates/users/resource_tile.html:76
 #: TWLight/users/templates/users/resource_tile.html:81
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(name)s's signup page"
-msgstr "Посилання на сторінку реєстрації {{ partner }}"
+msgstr "Посилання на сторінку реєстрації %(name)s"
 
 #. Translators: Users can click this button to access a collection they have access to.
 #: TWLight/users/templates/users/resource_tile.html:102

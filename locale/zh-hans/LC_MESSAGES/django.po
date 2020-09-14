@@ -4,6 +4,7 @@
 # Author: A Chinese Wikipedian
 # Author: A Retired User
 # Author: A2B4C
+# Author: AYZ04
 # Author: Abijeet Patro
 # Author: Angrydog001
 # Author: BaRaN6161 TURK
@@ -23,7 +24,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:56+0000\n"
-"PO-Revision-Date: 2020-09-10 16:58:11+0000\n"
+"PO-Revision-Date: 2020-09-14 15:16:48+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -480,9 +481,8 @@ msgstr "编者评论"
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant
 #: TWLight/applications/templates/applications/application_evaluation.html:222
-#, fuzzy
 msgid "Recent Applications"
-msgstr "发送了软件"
+msgstr "最近的应用程序"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:242

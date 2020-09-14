@@ -3,11 +3,12 @@
 #
 # Author: Abijeet Patro
 # Author: Brazal.dang
+# Author: MuratTheTurkish
 # Author: ShimunUfesoj
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-09-10 16:58:08+0000\n"
+"PO-Revision-Date: 2020-09-14 15:16:45+0000\n"
 "X-POT-Import-Date: 2020-09-09 16:31:47+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1684,9 +1685,9 @@ msgstr ""
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:34
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(partner)s signup page"
-msgstr "I-sugpon sa {{ partner }} pahina nin pagsali"
+msgstr "I-sugpon sa %(partner)s pahina nin pagsali"
 
 #. Translators: This is the text shown to coordinators when a partner is marked not available.
 #: TWLight/resources/templates/resources/partner_tile.html:46
