@@ -474,6 +474,35 @@ class PartnerModelTests(TestCase):
         except ValidationError as e:
             self.assertEqual([msg], e.messages)
 
+    def test_user_instructions(self):
+        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
+        partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        user_instructions="Wikimedia"
+        partner1.user_instructions = user_instructions
+        partner1.requested_access_duration = (
+            True  # We don't want the ValidationError from requested_access_duration
+        )
+
+        partner2.requested_access_duration = (
+            True  # We don't want the ValidationError from requested_access_duration
+        )
+
+        try:
+            partner1.clean()
+            partner1.save()
+        except ValidationError as e:
+            print(e.message)
+
+
+        partner2.user_instructions = ""
+        try:
+            partner2.clean()
+            partner2.save()
+        except ValidationError as e:
+            print(e.message)
+
+
 
 class WaitlistBehaviorTests(TestCase):
     """
