@@ -27,7 +27,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:55+0000\n"
-"PO-Revision-Date: 2020-09-14 15:16:47+0000\n"
+"PO-Revision-Date: 2020-09-17 14:54:19+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1165,9 +1165,9 @@ msgstr[2] "%(counter)s заявок под обсуждением."
 #, python-format
 msgid "%(approved_count)s approved applications."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "%(approved_count)s подтверждённых заявок"
-msgstr[1] "%(counter)s подтверждённые заявки"
-msgstr[2] "%(counter)s подтверждённых заявок"
+msgstr[0] "Одна подтверждённая заявка."
+msgstr[1] "%(approved_count)s подтверждённые заявки."
+msgstr[2] "%(counter)s подтверждённых заявок."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
