@@ -218,25 +218,46 @@
     {% endif %}    
   </div>
 
-  {% comment %}Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant{% endcomment %}
-  <h2>{% trans 'Recent Applications' %}</h2>
+  {% comment %}Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.{% endcomment %}
+  <h2>{% trans 'Recent Applications (last 90 days)' %}</h2>
   
-  <div class="row">
-    {% for app in recent_apps %}
-      <div class="col-xs-12 col-sm-4">
-        {% if app.partner.coordinator == request.user or app.partner.coordinator == app.editor.user %}
-          <a href="{{ app.get_absolute_url }}">
-            <strong>{{ app.partner }}</strong>
-          </a>
-        {% else %}
-          <strong>{{ app.partner }}</strong>
-        {% endif %}
-      </div>
-      <div class="col-xs-12 col-sm-8">
-        <span class="label label{{ app.get_bootstrap_class }} label-lg">{{ app.get_status_display }}</span>
-      </div>
-    {% endfor %}
-  </div>
+  {% if recent_apps|length > 0 %}
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Partner</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for app in recent_apps %}
+          <tr>
+            <td>
+              {% if app.partner.coordinator == request.user or app.partner.coordinator == app.editor.user %}
+              <a href="{{ app.get_absolute_url }}">
+                <strong>{{ app.partner }}</strong>
+              </a>
+              {% else %}
+                <strong>{{ app.partner }}</strong>
+              {% endif %}
+            </td>
+            <td>
+              <span class="label label{{ app.get_bootstrap_class }} label-lg">{{ app.get_status_display }}</span>
+            </td>
+            <td>
+              <span>{{ app.date_created }}</span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    {% comment %}Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days. {% endcomment %}
+    <i>{% trans "No applications were made in last 90 days by the applicant" %}</i>
+{% endif %}
 
   {% comment %}Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.{% endcomment %}
   <h2>{% trans 'Discussion' %}</h2>
