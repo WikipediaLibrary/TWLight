@@ -10,7 +10,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:55+0000\n"
-"PO-Revision-Date: 2020-09-10 16:58:10+0000\n"
+"PO-Revision-Date: 2020-09-21 14:17:38+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -470,9 +470,8 @@ msgstr "Kommentarer från redigeraren"
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant
 #: TWLight/applications/templates/applications/application_evaluation.html:222
-#, fuzzy
 msgid "Recent Applications"
-msgstr "Skickade ansökningar"
+msgstr "Senaste ansökningar"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:242

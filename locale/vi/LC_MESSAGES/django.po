@@ -8,12 +8,13 @@
 # Author: MuratTheTurkish
 # Author: Nguyễn Mạnh An
 # Author: Sabelöga
+# Author: Yosari101
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:55+0000\n"
-"PO-Revision-Date: 2020-09-14 15:16:48+0000\n"
+"PO-Revision-Date: 2020-09-21 14:17:39+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -475,9 +476,8 @@ msgstr ""
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant
 #: TWLight/applications/templates/applications/application_evaluation.html:222
-#, fuzzy
 msgid "Recent Applications"
-msgstr "Đơn xin đã gửi"
+msgstr "Đơn xin gần đây"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:242
@@ -1932,9 +1932,8 @@ msgstr "Bạn phải có tài khoản ít nhất 6 tháng"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
-#, fuzzy
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
-msgstr "Bạn đã đóng góp ít nhất 500 sửa đổi"
+msgstr "Bạn đã đóng góp ít nhất 500 sửa đổi cho các dự án của Wikimedia"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67
