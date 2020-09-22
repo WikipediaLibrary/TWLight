@@ -9,6 +9,7 @@ Settings file intended for use in local, on WMF servers.  This file:
 import sys
 
 from .base import *
+from .logging import *
 
 DEFAULT_FROM_EMAIL = "<twlight.local@localhost.localdomain>"
 

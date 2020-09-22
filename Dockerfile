@@ -30,6 +30,7 @@ RUN apk add \
 FROM twlight_base
 COPY --from=twlight_build /venv /venv
 ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv:/usr/lib/python3.8"
+ENV SECRET_KEY=twlight
 
 # Runtime dependencies.
 # Refactoring shell code could remove bash dependency
@@ -68,7 +69,7 @@ WORKDIR $TWLIGHT_HOME
 COPY manage.py /app/manage.py
 
 # Configure static assets.
-RUN SECRET_KEY=twlight /app/bin/twlight_static.sh
+RUN /app/bin/twlight_static.sh
 
 EXPOSE 80
 

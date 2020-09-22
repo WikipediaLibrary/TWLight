@@ -13,10 +13,10 @@ If you want to use production settings, you are now done.  If not, you will also
 need to set the environment variables indicated in the README.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
+https://docs.djangoproject.com/en/3.1/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
+https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
@@ -32,9 +32,6 @@ from django.utils.translation import gettext_lazy as _
 
 # Import available locales from Faker, so we can determine what languages we fake in tests.
 from faker.config import AVAILABLE_LOCALES as FAKER_AVAILABLE_LOCALES
-
-# We're going to replace Django's default logging config.
-import logging.config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -197,7 +194,7 @@ DEBUG = bool(os.environ.get("DEBUG", "False").lower() == "true")
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # WMF sysadmins strongly prefer mysql, so use that.
 # If you're deploying to Heroku, heroku.py will override this.
@@ -223,7 +220,7 @@ DATABASES = {
 # ------------------------------------------------------------------------------
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "twlight")
 
 # In production, this list should contain the URL of the server and nothing
 # else, for security reasons. For local testing '*' is OK.
@@ -412,69 +409,3 @@ MIDDLEWARE += ["request.middleware.RequestMiddleware"]
 # as tracking only authenticated vs anonymous users).
 REQUEST_LOG_IP = False
 REQUEST_LOG_USER = False
-
-# LOGGING CONFIGURATION
-# ------------------------------------------------------------------------------
-# We're replacing the default logging config to get better control of the
-# mail_admins behavior.
-
-ADMINS = [("TWLight Developers", "librarycard-dev@lists.wikimedia.org")]
-DJANGO_EMAIL_ADMINS_BACKEND = os.environ.get(
-    "DJANGO_EMAIL_ADMINS_BACKEND", "django.core.mail.backends.console.EmailBackend"
-)
-LOGGING_CONFIG = None
-
-logging.config.dictConfig(
-    {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "filters": {
-            "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},
-            "require_debug_true": {"()": "django.utils.log.RequireDebugTrue"},
-        },
-        "formatters": {
-            "django.server": {
-                "()": "django.utils.log.ServerFormatter",
-                "format": "[%(server_time)s] %(message)s",
-            }
-        },
-        "handlers": {
-            "nodebug_console": {
-                "level": "WARNING",
-                "filters": ["require_debug_false"],
-                "class": "logging.StreamHandler",
-            },
-            "debug_console": {
-                "level": "INFO",
-                "filters": ["require_debug_true"],
-                "class": "logging.StreamHandler",
-            },
-            "django.server": {
-                "level": "INFO",
-                "class": "logging.StreamHandler",
-                "formatter": "django.server",
-            },
-            "mail_admins": {
-                "level": "ERROR",
-                "filters": ["require_debug_false"],
-                "class": "django.utils.log.AdminEmailHandler",
-                "email_backend": DJANGO_EMAIL_ADMINS_BACKEND,
-            },
-        },
-        "loggers": {
-            "django": {
-                "handlers": ["nodebug_console", "debug_console", "mail_admins"],
-                "level": os.environ.get("DJANGO_LOG_LEVEL", "INFO"),
-            },
-            "django.server": {
-                "handlers": ["django.server"],
-                "level": os.environ.get("DJANGO_LOG_LEVEL", "INFO"),
-                "propagate": False,
-            },
-            "TWLight": {
-                "handlers": ["nodebug_console", "debug_console", "mail_admins"],
-                "level": os.environ.get("DJANGO_LOG_LEVEL", "INFO"),
-            },
-        },
-    }
-)

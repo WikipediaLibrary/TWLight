@@ -9,6 +9,7 @@ Settings file intended for use in staging, on WMF servers.  This file:
 import sys
 
 from .base import *
+from .logging import *
 
 # Let Django know that allowed hosts are trusted for CSRF.
 # Needed to be added for /admin
