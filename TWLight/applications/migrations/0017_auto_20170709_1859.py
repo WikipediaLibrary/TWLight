@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="application",
             name="imported",
-            field=models.NullBooleanField(default=False),
+            field=models.BooleanField(default=False, null=True),
         ),
         migrations.AlterField(
             model_name="application",

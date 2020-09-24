@@ -12,8 +12,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="partner",
             name="bundle",
-            field=models.NullBooleanField(
-                default=False, help_text="Is this partner a part of the Bundle?"
+            field=models.BooleanField(
+                default=False,
+                null=True,
+                help_text="Is this partner a part of the Bundle?",
             ),
         )
     ]

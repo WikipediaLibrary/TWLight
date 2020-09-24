@@ -78,8 +78,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "mutually_exclusive",
-                    models.NullBooleanField(
+                    models.BooleanField(
                         default=None,
+                        null=True,
                         help_text=b"If True, users can only apply for one Stream at a time from this Partner. If False, users can apply for multiple Streams at a time. This field must be filled in when Partners have multiple Streams, but may be left blank otherwise.",
                     ),
                 ),
