@@ -1,6 +1,7 @@
 import datetime
 import json
 import logging
+import pytz
 
 from datetime import date, timedelta
 
@@ -693,6 +694,16 @@ class AuthorizedUsers(APIView):
         # We're ignoring streams here, because the API operates at the partner
         # level. This is fine for the use case we built it for (Wikilink tool)
         valid_partner_auths = get_valid_partner_authorizations(pk)
+
+        # List only those users who have been active lately,
+        # that is, do not list the users who had last logged in more than two weeks ago
+        if partner.authorization_method == partner.BUNDLE:
+            valid_partner_auths = valid_partner_auths.filter(
+                user__last_login__gt=pytz.utc.localize(
+                    datetime.datetime.today() - timedelta(weeks=2)
+                )
+            )
+
         users = User.objects.filter(authorizations__in=valid_partner_auths).distinct()
 
         serializer = UserSerializer(users, many=True)
