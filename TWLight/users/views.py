@@ -699,7 +699,7 @@ class AuthorizedUsers(APIView):
         # that is, do not list the users who had last logged in more than two weeks ago
         if partner.authorization_method == partner.BUNDLE:
             valid_partner_auths = valid_partner_auths.filter(
-                user__last_login__gt=pytz.utc.localize(
+                user__editor__user__last_login__gt=pytz.utc.localize(
                     datetime.datetime.today() - timedelta(weeks=2)
                 )
             )
