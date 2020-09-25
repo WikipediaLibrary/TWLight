@@ -2863,6 +2863,8 @@ class EvaluateApplicationTest(TestCase):
 
         super(EvaluateApplicationTest, self).setUp()
         self.editor = EditorFactory()
+        self.editor.user.userprofile.terms_of_use = False
+        self.editor.user.userprofile.save()
         self.user = self.editor.user
 
         self.partner = PartnerFactory()

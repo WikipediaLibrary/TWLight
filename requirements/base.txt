@@ -18,7 +18,7 @@ django-taggit==1.3.0
 djangorestframework==3.11.1
 djmail==2.0.0
 docutils==0.16
-factory_boy>=2.10.0,<3.0
+factory_boy>=2.10.0,<4.0
 mwoauth==0.3.7
 pillow==7.2.0
 pypandoc==1.5
