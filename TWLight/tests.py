@@ -10,6 +10,7 @@ from django.core.management import call_command
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.test import TestCase, RequestFactory, Client
+from django.utils import timezone
 
 
 from rest_framework.test import APIRequestFactory, force_authenticate
@@ -33,8 +34,6 @@ from .view_mixins import (
     ToURequired,
     EmailRequired,
 )
-import pytz
-import datetime
 
 
 coordinators = get_coordinators()
@@ -1196,7 +1195,7 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
 
         self.editor1.wp_bundle_eligible = True
-        self.editor1.user.last_login = pytz.utc.localize(datetime.datetime.today())
+        self.editor1.user.last_login = timezone.now()
         self.editor1.user.save()
         self.editor1.save()
         self.editor1.update_bundle_authorization()
@@ -1227,9 +1226,7 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
 
         self.editor1.wp_bundle_eligible = True
         # The user had last logged in three weeks ago
-        self.editor1.user.last_login = pytz.utc.localize(
-            datetime.datetime.today() - timedelta(weeks=3)
-        )
+        self.editor1.user.last_login = timezone.now() - timedelta(weeks=3)
         self.editor1.user.save()
         self.editor1.save()
         self.editor1.update_bundle_authorization()

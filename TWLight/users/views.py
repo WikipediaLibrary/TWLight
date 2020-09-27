@@ -1,7 +1,6 @@
 import datetime
 import json
 import logging
-import pytz
 
 from datetime import date, timedelta
 
@@ -25,6 +24,7 @@ from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
+from django.utils import timezone
 
 from TWLight.resources.models import Partner
 from TWLight.view_mixins import (
@@ -699,9 +699,7 @@ class AuthorizedUsers(APIView):
         # that is, do not list the users who had last logged in more than two weeks ago
         if partner.authorization_method == partner.BUNDLE:
             valid_partner_auths = valid_partner_auths.filter(
-                user__editor__user__last_login__gt=pytz.utc.localize(
-                    datetime.datetime.today() - timedelta(weeks=2)
-                )
+                user__editor__user__last_login__gt=timezone.now() - timedelta(weeks=2)
             )
 
         users = User.objects.filter(authorizations__in=valid_partner_auths).distinct()
