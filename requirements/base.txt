@@ -9,7 +9,7 @@ django-countries==6.1.3
 django-crispy-forms==1.9.2
 django-cron==0.5.1
 django-durationfield==0.5.5
-django-filter==2.3.0
+django-filter==2.4.0
 django-modeltranslation==0.15.2
 django-premailer
 django-request==1.5.6
