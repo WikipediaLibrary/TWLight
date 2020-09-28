@@ -5,6 +5,7 @@
 # Author: Abijeet Patro
 # Author: Ailbeve
 # Author: Athena Atterdag
+# Author: Colt browning
 # Author: Diman Russkov
 # Author: Diralik
 # Author: Facenapalm
@@ -27,7 +28,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:55+0000\n"
-"PO-Revision-Date: 2020-09-24 14:09:00+0000\n"
+"PO-Revision-Date: 2020-09-28 15:30:19+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2334,7 +2335,7 @@ msgstr "Обновить профиль"
 #. Translators: This labels a field where users can describe their activity on Wikipedia in a small biography.
 #: TWLight/users/forms.py:45
 msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
-msgstr "Опишите ваш вклад в Википедию: редактируемые темы, и так далее."
+msgstr "Опишите ваш вклад в Википедию: тематики, в которых вы работаете, и т. п."
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive account renewal notices or not.
 #: TWLight/users/forms.py:112

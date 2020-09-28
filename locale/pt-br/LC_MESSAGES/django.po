@@ -3,6 +3,7 @@
 #
 # Author: Abijeet Patro
 # Author: Eduardo Addad de Oliveira
+# Author: MuratTheTurkish
 # Author: Rafaelff
 # Author: Tks4Fish
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:55+0000\n"
-"PO-Revision-Date: 2020-09-14 15:16:47+0000\n"
+"PO-Revision-Date: 2020-09-28 15:30:18+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -991,13 +992,13 @@ msgstr "O seu código de acesso à Biblioteca da Wikipédia"
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access at My Library: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>{{GENDER|Caro|Cara|Caro(a)}} %(user)s,</p> <p>agradecemos a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Temos o prazer de informar que a sua candidatura foi aprovada.</p> <p>%(user_instructions)s</p> <p>Você pode ver as coleções às quais você está {{GENDER|autorizado|autorizado|autorizado(a)}} a acessar em Minha Biblioteca: %(link)s</p> <p>Divirta-se</p> <p>A Biblioteca da Wikipédia</p>"
+msgstr "<p>{{GENDER:|Caro|Cara|Caro(a)}} %(user)s,</p> <p>agradecemos a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Temos o prazer de informar que a sua candidatura foi aprovada.</p> <p>%(user_instructions)s</p> <p>Você pode ver as coleções às quais você está {{GENDER:|autorizado|autorizado|autorizado(a)}} a acessar em Minha Biblioteca: %(link)s</p> <p>Divirta-se</p> <p>A Biblioteca da Wikipédia</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
-msgstr "{{GENDER|Caro|Cara|Caro(a)}} %(user)s, agradecemos a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Temos o prazer de informar que a sua candidatura foi aprovada. %(user_instructions)s Você pode ver as coleções às quais você está {{GENDER|autorizado|autorizado|autorizado(a)}} a acessar em Minha Biblioteca: %(link)s Divirta-se! A Biblioteca da Wikipédia"
+msgstr "{{GENDER:|Caro|Cara|Caro(a)}} %(user)s, agradecemos a sua candidatura de acesso aos recursos do parceiro %(partner)s através da Biblioteca da Wikipédia. Temos o prazer de informar que a sua candidatura foi aprovada. %(user_instructions)s Você pode ver as coleções às quais você está {{GENDER:|autorizado|autorizado|autorizado(a)}} a acessar em Minha Biblioteca: %(link)s Divirta-se! A Biblioteca da Wikipédia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4

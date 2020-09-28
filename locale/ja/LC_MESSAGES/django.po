@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Abijeet Patro
+# Author: Kkairri
 # Author: Omotecho
 # Author: Otokoume
 # Author: Sabelöga
@@ -12,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-09-09 14:55+0000\n"
-"PO-Revision-Date: 2020-09-14 15:16:46+0000\n"
+"PO-Revision-Date: 2020-09-28 15:30:18+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1910,7 +1911,7 @@ msgstr "アクセス権の申請は誰でもできますが、基本的な必要
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:59
 msgid "You have an account that is a minimum of 6 months old"
-msgstr "アカウントの保持期間は6ヶ月以上です"
+msgstr "登録から6ヶ月以上が経過したアカウントであること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
@@ -1920,7 +1921,7 @@ msgstr "ウィキメディアのプロジェクト群で500回以上の編集履
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr "この1カ月間に10回以上編集した履歴があります"
+msgstr "直近1ヶ月に10回以上編集していること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
@@ -1930,7 +1931,7 @@ msgstr "現状でウィキメディアのいずれのプロジェクトでもブ
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:75
 msgid "You do not already have access to the resources you’re applying for through another library or institution"
-msgstr "アクセス権の申請先の情報源に、すでに他の図書館もしくは期間を経由したアクセスができないこと"
+msgstr "別な図書館・機関を通じてその情報源へのアクセス権を得ていないこと"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:81
@@ -1985,7 +1986,7 @@ msgstr "目的のいかんに関わらず、制限されたコンテンツから
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
 #: TWLight/templates/about.html:127
 msgid "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles"
-msgstr "たとえばスタブ記事の自動作成に、許可を得ずにメタデータを[[:w:ja:データマイニング|データマイニング]]すること"
+msgstr "たとえばスタブ記事の自動作成に、許可を得ずにメタデータをデータマイニングすること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:133
@@ -2104,7 +2105,7 @@ msgstr "まだこのサイトの<a href=\"%(terms_url)s\">利用規約</a>に同
 #. Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
 #: TWLight/templates/base.html:233
 msgid "This work is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 International License</a>."
-msgstr "この制作物は<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">[[:w:ja:継承 (クリエイティブ・コモンズ)|Creative Commons Attribution-ShareAlike 4.0]] (表示-継承) 国際ライセンス</a>に基づいてライセンスされています。"
+msgstr "この制作物は<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 国際ライセンス</a>に基づいてライセンスされています。"
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/base.html:242
