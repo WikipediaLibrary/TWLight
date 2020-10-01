@@ -483,23 +483,23 @@ class PartnerModelTests(TestCase):
         partner1.requested_access_duration = (
             True  # We don't want the ValidationError from requested_access_duration
         )
-
+        partner2.user_instructions = ""
         partner2.requested_access_duration = (
             True  # We don't want the ValidationError from requested_access_duration
         )
 
+        error_msg = "Partners with automatically sent messages require user instructions to be entered"
+
         try:
             partner1.clean()
-            partner1.save()
         except ValidationError as e:
-            print(e.message)
+            self.assertEqual([error_msg], e.messages)
 
-        partner2.user_instructions = ""
+        self.assertRaises(ValidationError, partner2.clean)
         try:
             partner2.clean()
-            partner2.save()
         except ValidationError as e:
-            print(e.message)
+            self.assertEqual([error_msg], e.messages)
 
 
 class WaitlistBehaviorTests(TestCase):
