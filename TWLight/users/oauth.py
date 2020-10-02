@@ -496,7 +496,6 @@ class OAuthCallbackView(View):
                             "for post-login redirection."
                         )
                 else:
-                    
                     return_url = reverse_lazy("terms")
         else:
             return_url = reverse_lazy("homepage")
