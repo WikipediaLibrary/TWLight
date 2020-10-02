@@ -1,3 +1,4 @@
+{#need to edit line 90 for about#}
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
@@ -87,7 +88,8 @@
           </div>
         {% else %}
 				  {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
-          <a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a>
+          <a href="{% url 'about' %}#anchor" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a>
+{#          need to edit this#}
         {% endif %}
       </div>
 	  </div>
