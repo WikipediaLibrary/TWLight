@@ -137,7 +137,7 @@
         {% if request.GET %}
         <a  class="btn btn-default" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}&{{ request.GET.urlencode }}">
         {% else %}
-        <a  class="btn btn-default" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
+        <a  class="btn btn-default homeBtn" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
         {% endif %}
           <span class="glyphicon glyphicon-off"></span>
           {% comment %}Translators: Shown in the top bar of almost every page when the current user is not logged in. {% endcomment %}
