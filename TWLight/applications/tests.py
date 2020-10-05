@@ -2237,65 +2237,80 @@ class ListApplicationsTest(BaseApplicationViewTest):
     def test_recent_apps_evaluation(self):
         """
         recent_app context data should
-        contain applicant's 5 recent applications
+        contain applicant's recent applications
+        which are created in last 3 months by the applicant
+
+        Also we do not take any application which is not
+        made in last 3 months
         """
         factory = RequestFactory()
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
         editor = EditorFactory()
 
-        # Create some applications for an editor
-        app1 = ApplicationFactory(editor=editor, status=Application.PENDING)
-        app2 = ApplicationFactory(editor=editor, status=Application.QUESTION)
-        app3 = ApplicationFactory(editor=editor, status=Application.PENDING)
-        app4 = ApplicationFactory(editor=editor, status=Application.APPROVED)
-        app5 = ApplicationFactory(editor=editor, status=Application.NOT_APPROVED)
-        app6 = ApplicationFactory(editor=editor, status=Application.APPROVED)
-        app7 = ApplicationFactory(editor=editor, status=Application.QUESTION)
+        # applications older than 3 months
+        app1 = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            date_created=date.today() - timedelta(days=210),
+        )
+        app2 = ApplicationFactory(
+            editor=editor,
+            status=Application.QUESTION,
+            date_created=date.today() - timedelta(days=200),
+        )
 
-        # Set partner and coordinator for app2
-        partner2 = PartnerFactory()
-        app2.partner = partner2
-        app2.save()
-        partner2.coordinator = coordinator.user
-        partner2.save()
+        # applications created in last 3 months
+        app3 = ApplicationFactory(
+            editor=editor,
+            status=Application.PENDING,
+            date_created=date.today() - timedelta(days=80),
+        )
+        app4 = ApplicationFactory(
+            editor=editor,
+            status=Application.APPROVED,
+            date_created=date.today() - timedelta(days=70),
+        )
+        app5 = ApplicationFactory(
+            editor=editor,
+            status=Application.NOT_APPROVED,
+            date_created=date.today() - timedelta(days=60),
+        )
+        app6 = ApplicationFactory(
+            editor=editor,
+            status=Application.APPROVED,
+            date_created=date.today() - timedelta(days=50),
+        )
+        app7 = ApplicationFactory(
+            editor=editor,
+            status=Application.QUESTION,
+            date_created=date.today() - timedelta(days=40),
+        )
+        app8 = ApplicationFactory(
+            editor=editor,
+            status=Application.NOT_APPROVED,
+            date_created=date.today() - timedelta(days=30),
+        )
 
-        # Generate expected result for app2
+        # Set partner and coordinator for a random app (say app5)
+        partner5 = PartnerFactory()
+        app5.partner = partner5
+        app5.save()
+        partner5.coordinator = coordinator.user
+        partner5.save()
+
+        # Generate expected result for app5
+        # Also note that app5 will be excluded from recent apps
         expected_recent_apps = [
+            repr(app8),
             repr(app7),
             repr(app6),
-            repr(app5),
             repr(app4),
             repr(app3),
         ]
 
-        # Visit page and get recent apps from context data
-        app2_url = reverse("applications:evaluate", kwargs={"pk": app2.pk})
-        response = self.client.get(app2_url)
-        recent_apps = response.context_data["recent_apps"]
-
-        # Expected and actual recent app querysets must be equal
-        self.assertQuerysetEqual(recent_apps, expected_recent_apps)
-
-        # Set partner and coordinator for app6
-        partner6 = PartnerFactory()
-        app6.partner = partner6
-        app6.save()
-        partner6.coordinator = coordinator.user
-        partner6.save()
-
-        # Generate expected result for app6
-        # Also note that app6 will be excluded from recent apps
-        expected_recent_apps = [
-            repr(app7),
-            repr(app5),
-            repr(app4),
-            repr(app3),
-            repr(app2),
-        ]
-
-        # Visit page and get recent apps from context data
-        app6_url = reverse("applications:evaluate", kwargs={"pk": app6.pk})
-        response = self.client.get(app6_url)
+        # Visit evaluation page and get recent apps from context data for app5
+        app5_url = reverse("applications:evaluate", kwargs={"pk": app5.pk})
+        response = self.client.get(app5_url)
         recent_apps = response.context_data["recent_apps"]
 
         # Expected and actual recent app querysets must be equal

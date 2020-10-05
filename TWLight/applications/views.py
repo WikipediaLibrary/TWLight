@@ -9,6 +9,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from urllib.parse import urlparse
+from datetime import datetime, timedelta
 
 import bleach
 from crispy_forms.helper import FormHelper
@@ -960,12 +961,17 @@ class EvaluateApplicationView(
         if app.parent and existing_authorization:
             context["previous_auth_expiry_date"] = existing_authorization.date_expires
 
-        # Get 5 recent applications
+        # Add recent applications in context
+        # get applications opened by editor in last 3 months
         # also exclude current app if it is present in recent apps
+
         recent_apps = (
-            Application.objects.filter(editor=self.object.editor)
+            Application.objects.filter(
+                editor=self.object.editor,
+                date_created__gte=datetime.today() - timedelta(days=90),
+            )
             .exclude(pk=app.pk)
-            .order_by("-id")[:5]
+            .order_by("-id")
         )
         context["recent_apps"] = recent_apps
 
