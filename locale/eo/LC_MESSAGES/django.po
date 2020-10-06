@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-10-05 22:10+0000\n"
+"POT-Creation-Date: 2020-10-06 18:20+0000\n"
 "PO-Revision-Date: 2020-09-10 16:58:08+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2042,16 +2042,20 @@ msgstr "Forigi"
 msgid "URL"
 msgstr "URL"
 
+#: TWLight/resources/templates/resources/suggest.html:67
+msgid "Proposer"
+msgstr ""
+
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
-#: TWLight/resources/templates/resources/suggest.html:75
-#: TWLight/resources/templates/resources/suggest.html:99
-#: TWLight/resources/templates/resources/suggest.html:103
+#: TWLight/resources/templates/resources/suggest.html:76
+#: TWLight/resources/templates/resources/suggest.html:100
+#: TWLight/resources/templates/resources/suggest.html:104
 msgid "Upvoted"
 msgstr "Porvoĉdonita"
 
 #. Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse).
-#: TWLight/resources/templates/resources/suggest.html:78
-#: TWLight/resources/templates/resources/suggest.html:101
+#: TWLight/resources/templates/resources/suggest.html:79
+#: TWLight/resources/templates/resources/suggest.html:102
 msgid "Upvote"
 msgstr "Porvoĉdoni"
 
