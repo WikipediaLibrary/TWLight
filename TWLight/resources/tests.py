@@ -475,8 +475,8 @@ class PartnerModelTests(TestCase):
             self.assertEqual([msg], e.messages)
 
     def test_user_instructions(self):
-        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
-        partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        partner1 = PartnerFactory(authorization_method=Partner.CODES)
+        partner2 = PartnerFactory(authorization_method=Partner.CODES)
 
         user_instructions = "Wikimedia"
         partner1.user_instructions = user_instructions
