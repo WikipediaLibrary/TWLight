@@ -10,6 +10,7 @@ from django.core.management import call_command
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.test import TestCase, RequestFactory, Client
+from django.utils import timezone
 
 
 from rest_framework.test import APIRequestFactory, force_authenticate
@@ -1194,6 +1195,8 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
 
         self.editor1.wp_bundle_eligible = True
+        self.editor1.user.last_login = timezone.now()
+        self.editor1.user.save()
         self.editor1.save()
         self.editor1.update_bundle_authorization()
 
@@ -1209,6 +1212,38 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         )
 
         expected_json = [{"wp_username": self.editor1.wp_username}]
+
+        self.assertEqual(response.data, expected_json)
+
+    def test_authorized_users_api_bundle_inactive_user(self):
+        """
+        With the addition of Bundle partners, the API
+        should still return the correct list of authorized
+        users. This time, the list should be empty because
+        the user hasn't been active in the last two weeks
+        """
+        bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        self.editor1.wp_bundle_eligible = True
+        # The user had last logged in three weeks ago
+        self.editor1.user.last_login = timezone.now() - timedelta(weeks=3)
+        self.editor1.user.save()
+        self.editor1.save()
+        self.editor1.update_bundle_authorization()
+
+        # Verify we created the bundle auth as expected
+        self.assertEqual(get_all_bundle_authorizations().count(), 1)
+
+        factory = APIRequestFactory()
+        request = factory.get("/api/v0/users/authorizations/partner/1")
+        force_authenticate(request, user=self.editor1.user)
+
+        response = TWLight.users.views.AuthorizedUsers.as_view()(
+            request, bundle_partner_1.pk, 0
+        )
+
+        # Returned list should be empty because of the applied filter
+        expected_json = []
 
         self.assertEqual(response.data, expected_json)
 

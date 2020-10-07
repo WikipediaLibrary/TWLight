@@ -24,6 +24,7 @@ from django.utils.decorators import classonlymethod
 from django.utils.http import is_safe_url
 from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
+from django.utils import timezone
 
 from TWLight.resources.models import Partner
 from TWLight.view_mixins import (
@@ -693,6 +694,13 @@ class AuthorizedUsers(APIView):
         # We're ignoring streams here, because the API operates at the partner
         # level. This is fine for the use case we built it for (Wikilink tool)
         valid_partner_auths = get_valid_partner_authorizations(pk)
+
+        # For Bundle partners, get auths for users who logged in within the last 2 weeks.
+        if partner.authorization_method == partner.BUNDLE:
+            valid_partner_auths = valid_partner_auths.filter(
+                user__last_login__gt=timezone.now() - timedelta(weeks=2)
+            )
+
         users = User.objects.filter(authorizations__in=valid_partner_auths).distinct()
 
         serializer = UserSerializer(users, many=True)
