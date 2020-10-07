@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-10-07 17:52+0000\n"
+"POT-Creation-Date: 2020-10-07 18:26+0000\n"
 "PO-Revision-Date: 2020-09-10 16:58:08+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2961,12 +2961,6 @@ msgstr ""
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
-#. Translators: This message is shown when a user logs back in to the site after their first time and hasn't agreed to the terms of use.
-#: TWLight/users/oauth.py:503
-#, fuzzy
-msgid "Welcome back! Please agree to the terms of use."
-msgstr "Du musst den Nutzungsbedingungen des Partners zustimmen"
-
 #. Translators: This message is displayed on the confirmation page where users can return their access to partner collections.
 #: TWLight/users/templates/users/authorization_confirm_return.html:10
 #, python-format
@@ -3963,3 +3957,7 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Welcome back! Please agree to the terms of use."
+#~ msgstr "Du musst den Nutzungsbedingungen des Partners zustimmen"
