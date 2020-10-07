@@ -496,12 +496,6 @@ class OAuthCallbackView(View):
                             "for post-login redirection."
                         )
                 else:
-                    messages.add_message(
-                        request,
-                        messages.INFO,
-                        # Translators: This message is shown when a user logs back in to the site after their first time and hasn't agreed to the terms of use.
-                        _("Welcome back! Please agree to the terms of use."),
-                    )
                     return_url = reverse_lazy("terms")
         else:
             return_url = reverse_lazy("homepage")
