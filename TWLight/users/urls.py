@@ -52,4 +52,9 @@ urlpatterns = [
         views.LibraryRedirectView.as_view(),
         name="my_collection",
     ),
+    url(
+        r"^deletion/(?P<pk>\d+)/(?P<id>\d+)/$",
+        login_required(views.DeleteApplication.as_view()),
+        name="my_deletion",
+    ),
 ]
