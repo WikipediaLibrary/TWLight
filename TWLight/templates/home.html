@@ -87,7 +87,7 @@
           </div>
         {% else %}
 				  {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
-          <a href="{% url 'about' %}" class="btn btn-default btn-block read-more homeBtn">{% trans "Learn more" %} </a>
+          <a href="{% url 'about' %}" class="btn btn-default btn-block read-more">{% trans "Learn more" %} </a>
         {% endif %}
       </div>
 	  </div>
@@ -114,7 +114,7 @@
           <hr/>
         {% endfor %}
         {% comment %}Translators: This is text on a button on the homepage, which allows users to see more available collections to which they can apply. {% endcomment %}
-        <a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more homeBtn"> {% trans "See more" %}</a>
+        <a href="{% url 'partners:filter' %}" class="btn btn-default btn-block read-more"> {% trans "See more" %}</a>
       </div>
 	  </div>
   </div>
