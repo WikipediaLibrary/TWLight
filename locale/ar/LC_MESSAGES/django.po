@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-10-06 18:20+0000\n"
+"POT-Creation-Date: 2020-10-07 17:52+0000\n"
 "PO-Revision-Date: 2020-09-28 15:30:16+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -768,7 +768,7 @@ msgstr "انقر فوق \"تأكيد\" لتجديد طلبك لـ%(partner)s"
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
-#: TWLight/users/views.py:496
+#: TWLight/users/views.py:497
 msgid "Confirm"
 msgstr "تأكيد"
 
@@ -3402,7 +3402,7 @@ msgstr "كلمة السر"
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:365
+#: TWLight/users/views.py:366
 msgid "Update"
 msgstr "(تحديث)"
 
@@ -4118,7 +4118,7 @@ msgid "Coordinators only"
 msgstr "المنسقين فقط"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:144
+#: TWLight/users/views.py:145
 #, fuzzy, python-brace-format
 msgid ""
 "Please <a href='{url}'>update your contributions</a> to Wikipedia to help "
@@ -4128,7 +4128,7 @@ msgstr ""
 "على تقييم طلباتك."
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:257
+#: TWLight/users/views.py:258
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, consider changing your "
@@ -4136,7 +4136,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:265
+#: TWLight/users/views.py:266
 #, fuzzy
 msgid "Your reminder email preferences are updated."
 msgstr "معطياتك تم تعديلها."
@@ -4144,31 +4144,31 @@ msgstr "معطياتك تم تعديلها."
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:347 TWLight/users/views.py:428
-#: TWLight/users/views.py:481
+#: TWLight/users/views.py:348 TWLight/users/views.py:429
+#: TWLight/users/views.py:482
 msgid "You must be logged in to do that."
 msgstr "يجب تسجيل الدخول لتقوم بذلك."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:380
+#: TWLight/users/views.py:381
 msgid "Your information has been updated."
 msgstr "معطياتك تم تعديلها."
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:412
+#: TWLight/users/views.py:413
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 "لا يمكن أن تكون كلتا القيمتان فارغتين؛ إما أن تقوم بإدخال بريد إلكتروني أو "
 "تحديد الصندوق."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:440
+#: TWLight/users/views.py:441
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "بريدك الإلكتروني تم تعديله ليصبح {email}"
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:451
+#: TWLight/users/views.py:452
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -4177,7 +4177,7 @@ msgstr ""
 "التقدم بطلب الوصول إلى موارد الشركاء دون بريد إلكتروني."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:843
+#: TWLight/users/views.py:851
 #, fuzzy
 msgid "Access to {} has been returned."
 msgstr "تم حذف الاقتراح."
