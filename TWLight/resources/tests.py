@@ -490,10 +490,7 @@ class PartnerModelTests(TestCase):
 
         error_msg = "Partners with automatically sent messages require user instructions to be entered"
 
-        try:
-            partner1.clean()
-        except ValidationError as e:
-            self.assertEqual([error_msg], e.messages)
+        self.assertEqual(partner1.clean(), None)
 
         self.assertRaises(ValidationError, partner2.clean)
         try:
