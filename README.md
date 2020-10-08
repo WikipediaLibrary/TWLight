@@ -14,7 +14,7 @@ The Wikipedia Library Card Platform app is available at http://wikipedialibrary.
 
 Further project documentation is available in the [Wiki](https://github.com/WikipediaLibrary/TWLight/wiki). Our issue tracking takes place on the [Library-Card-Platform Phabricator](https://phabricator.wikimedia.org/project/board/2765/) board.
 
-[![Build Status](https://travis-ci.org/WikipediaLibrary/TWLight.svg?branch=master)](https://travis-ci.org/WikipediaLibrary/TWLight)
+[![Build Status](https://travis-ci.com/WikipediaLibrary/TWLight.svg?branch=master)](https://travis-ci.com/WikipediaLibrary/TWLight)
 
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=WikipediaLibrary/TWLight)](https://dependabot.com)
 
