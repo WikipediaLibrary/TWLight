@@ -474,6 +474,33 @@ class PartnerModelTests(TestCase):
         except ValidationError as e:
             self.assertEqual([msg], e.messages)
 
+    def test_user_instructions(self):
+        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
+        partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        user_instructions = "Wikimedia"
+        partner1.user_instructions = user_instructions
+        partner1.requested_access_duration = (
+            True  # We don't want the ValidationError from requested_access_duration
+        )
+        partner2.user_instructions = ""
+        partner2.requested_access_duration = (
+            True  # We don't want the ValidationError from requested_access_duration
+        )
+
+        error_msg = "Partners with automatically sent messages require user instructions to be entered"
+
+        # This partner should validate without errors.
+        self.assertEqual(partner1.clean(), None)
+
+        # This partner should fail validation.
+        self.assertRaises(ValidationError, partner2.clean)
+        try:
+            partner2.clean()
+        except ValidationError as e:
+            # We're making sure that it fails because of a lack of user instructions, specifically.
+            self.assertEqual([error_msg], e.messages)
+
 
 class WaitlistBehaviorTests(TestCase):
     """
