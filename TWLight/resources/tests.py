@@ -490,6 +490,7 @@ class PartnerModelTests(TestCase):
 
         error_msg = "Partners with automatically sent messages require user instructions to be entered"
 
+        # This partner should validate without errors.
         self.assertEqual(partner1.clean(), None)
 
         # This partner should fail validation.
