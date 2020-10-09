@@ -492,10 +492,12 @@ class PartnerModelTests(TestCase):
 
         self.assertEqual(partner1.clean(), None)
 
+        # This partner should fail validation.
         self.assertRaises(ValidationError, partner2.clean)
         try:
             partner2.clean()
         except ValidationError as e:
+            # We're making sure that it fails because of a lack of user instructions, specifically.
             self.assertEqual([error_msg], e.messages)
 
 
