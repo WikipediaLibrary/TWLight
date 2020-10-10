@@ -840,7 +840,7 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
             self.request,
             messages.SUCCESS,
             # Translators: This message is shown once the access to a partner has successfully been returned.
-            _("Access to {} has been returned.").format(authorization.partners),
+            _("Access to {} has been returned.").format(authorization.partners.get()),
         )
         return HttpResponseRedirect(reverse("users:my_library"))
 
