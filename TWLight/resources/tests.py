@@ -501,6 +501,52 @@ class PartnerModelTests(TestCase):
             # We're making sure that it fails because of a lack of user instructions, specifically.
             self.assertEqual([error_msg], e.messages)
 
+    def test_for_target_url_not_empty_when_authorization_method_is_proxy_or_bundle(
+        self,
+    ):
+        """
+        When partner’s authorization method is PROXY or BUNDLE
+        then leaving target_url empty should raise a ValidationError
+        """
+        message = "Proxy and Bundle partners require a target URL."
+
+        # test for a partner with proxy authorization method
+        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
+        partner1.requested_access_duration = (
+            True  # We don't want the ValidationError from requested_access_duration
+        )
+
+        self.assertRaises(ValidationError, partner1.clean)
+        try:
+            partner1.save()
+        except ValidationError as e:
+            self.assertEqual([message], e.messages)
+
+    def test_for_target_url_not_empty_when_authorization_method_is_proxy_or_bundle_2(
+        self,
+    ):
+        """
+        When partner’s authorization method is not PROXY or not BUNDLE
+        then leaving target_url empty should not raise a ValidationError
+        """
+        partner2 = PartnerFactory(authorization_method=Partner.EMAIL)
+        self.assertEqual(partner2.clean(), None)
+
+    def test_for_target_url_not_empty_when_authorization_method_is_proxy_or_bundle_3(
+        self,
+    ):
+        """
+        When partner’s authorization method is PROXY or BUNDLE and if it has a
+        specific stream then leaving target_url empty should not raise a ValidationError
+        """
+        # test for a partner with proxy authorization method
+        partner3 = PartnerFactory(authorization_method=Partner.PROXY)
+        partner3.requested_access_duration = (
+            True  # We don't want the ValidationError from requested_access_duration
+        )
+        partner3.specific_stream = True
+        self.assertEqual(partner3.clean(), None)
+
 
 class WaitlistBehaviorTests(TestCase):
     """
