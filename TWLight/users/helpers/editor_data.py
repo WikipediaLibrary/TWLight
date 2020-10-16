@@ -205,7 +205,7 @@ def editor_valid(
     Returns
     -------
     bool
-        The editor's validity.
+        Answer to the question: is the editor account valid?
     """
     if enough_edits and account_old_enough and (not_blocked or ignore_wp_blocks):
         return True
@@ -284,7 +284,7 @@ def editor_bundle_eligible(editor: "Editor"):
     Returns
     -------
     bool
-        The editor's eligibility.
+        Answer to the question: is the editor account eligible for Bundle?
     """
     enough_edits_and_valid = editor.wp_valid and editor.wp_enough_recent_edits
     # Staff and superusers should be eligible for bundles for testing purposes
