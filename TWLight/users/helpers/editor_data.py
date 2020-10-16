@@ -33,7 +33,7 @@ def editor_global_userinfo(
     return global_userinfo
 
 
-def _get_user_info_request(wp_param_name, wp_param):
+def _get_user_info_request(wp_param_name: str, wp_param: str):
     """
     This function queries the mediawiki api to get users' Wikipedia information
 
@@ -85,7 +85,7 @@ def _get_user_info_request(wp_param_name, wp_param):
     return json.loads(urllib.request.urlopen(query).read())
 
 
-def editor_reg_date(identity, global_userinfo):
+def editor_reg_date(identity: dict, global_userinfo: dict):
     # Try oauth registration date first.  If it's not valid, try the global_userinfo date
     try:
         reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
@@ -118,7 +118,7 @@ def editor_not_blocked(merged: list):
         return False if any("blocked" in account for account in merged) else True
 
 
-def editor_account_old_enough(wp_registered):
+def editor_account_old_enough(wp_registered: datetime.date):
     # If, for some reason, this information hasn't come through,
     # default to user not being valid.
     if not wp_registered:
@@ -127,7 +127,12 @@ def editor_account_old_enough(wp_registered):
     return datetime.today().date() - timedelta(days=182) >= wp_registered
 
 
-def editor_valid(enough_edits, account_old_enough, not_blocked, ignore_wp_blocks):
+def editor_valid(
+    enough_edits: bool,
+    account_old_enough: bool,
+    not_blocked: bool,
+    ignore_wp_blocks: bool,
+):
     """
     Check for the eligibility criteria laid out in the terms of service.
     Note that we won't prohibit signups or applications on this basis.
@@ -140,12 +145,12 @@ def editor_valid(enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
 
 
 def editor_recent_edits(
-    global_userinfo_editcount,
-    wp_editcount_updated,
-    wp_editcount_prev_updated,
-    wp_editcount_prev,
-    wp_editcount_recent,
-    wp_enough_recent_edits,
+    global_userinfo_editcount: int,
+    wp_editcount_updated: datetime.date,
+    wp_editcount_prev_updated: datetime.date,
+    wp_editcount_prev: int,
+    wp_editcount_recent: int,
+    wp_enough_recent_edits: bool,
 ):
 
     # If we have historical data, see how many days have passed and how many edits have been made since the last check.
@@ -184,7 +189,7 @@ def editor_recent_edits(
     )
 
 
-def editor_bundle_eligible(editor):
+def editor_bundle_eligible(editor: "Editor"):
     enough_edits_and_valid = editor.wp_valid and editor.wp_enough_recent_edits
     # Staff and superusers should be eligible for bundles for testing purposes
     user_staff_or_superuser = editor.user.is_staff or editor.user.is_superuser
