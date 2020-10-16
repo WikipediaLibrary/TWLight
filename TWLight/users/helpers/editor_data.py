@@ -12,6 +12,19 @@ logger = logging.getLogger(__name__)
 def editor_global_userinfo(
     wp_username: str, wp_sub: typing.Optional[int], strict: bool
 ):
+    """
+    Public interface for fetching Editor global_userinfo.
+    Parameters
+    ----------
+    wp_username : str
+    wp_sub : int
+    strict : bool
+
+    Returns
+    -------
+    dict
+        Contains the editor's globaluserinfo as returned by the mediawiki api.
+    """
     guiuser = urllib.parse.quote(wp_username)
     # Trying to get global user info with the username
     results = _get_user_info_request("guiuser", guiuser)
@@ -86,6 +99,17 @@ def _get_user_info_request(wp_param_name: str, wp_param: str):
 
 
 def editor_reg_date(identity: dict, global_userinfo: dict):
+    """
+    Normalize registration date from either oauth or global_userinfo as datetime.date object.
+    Parameters
+    ----------
+    identity : dict
+    global_userinfo : dict
+
+    Returns
+    -------
+    datetime.date
+    """
     # Try oauth registration date first.  If it's not valid, try the global_userinfo date
     try:
         reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
@@ -100,6 +124,17 @@ def editor_reg_date(identity: dict, global_userinfo: dict):
 
 
 def editor_enough_edits(editcount: int):
+    """
+    Check for Editor global editcount criterion.
+    Parameters
+    ----------
+    editcount : int
+
+    Returns
+    -------
+    bool
+        Answer to the question: has the editor made at least 500 edits across all projects?
+    """
     # If, for some reason, this information hasn't come through,
     # default to user not being valid.
     if not editcount:
@@ -108,6 +143,18 @@ def editor_enough_edits(editcount: int):
 
 
 def editor_not_blocked(merged: list):
+    """
+    Check for Editor "no blocks on any merged account" criterion.
+    Parameters
+    ----------
+    merged : list
+        A list of merged accounts for this Editor as returned by globaluserinfo.
+
+    Returns
+    -------
+    bool
+        Answer to the question: is the editor's free of blocks for all merged accounts?
+    """
     # If, for some reason, this information hasn't come through,
     # default to user not being valid.
     if not merged:
@@ -119,6 +166,17 @@ def editor_not_blocked(merged: list):
 
 
 def editor_account_old_enough(wp_registered: datetime.date):
+    """
+    Check for Editor account age criterion.
+    Parameters
+    ----------
+    wp_registered : datetime.date
+
+    Returns
+    -------
+    bool
+        Answer to the question: is the editor's account old enough?
+    """
     # If, for some reason, this information hasn't come through,
     # default to user not being valid.
     if not wp_registered:
@@ -134,9 +192,20 @@ def editor_valid(
     ignore_wp_blocks: bool,
 ):
     """
-    Check for the eligibility criteria laid out in the terms of service.
+    Check all eligibility criteria laid out in the terms of service.
     Note that we won't prohibit signups or applications on this basis.
     Coordinators have discretion to approve people who are near the cutoff.
+    Parameters
+    ----------
+    enough_edits : bool
+    account_old_enough : bool
+    not_blocked : bool
+    ignore_wp_blocks : bool
+
+    Returns
+    -------
+    bool
+        The editor's validity.
     """
     if enough_edits and account_old_enough and (not_blocked or ignore_wp_blocks):
         return True
@@ -152,7 +221,22 @@ def editor_recent_edits(
     wp_editcount_recent: int,
     wp_enough_recent_edits: bool,
 ):
+    """
+    Checks current global_userinfo editcount against stored editor data and returns updated data.
+    Parameters
+    ----------
+    global_userinfo_editcount : int
+    wp_editcount_updated : datetime.date
+    wp_editcount_prev_updated : datetime.date
+    wp_editcount_prev : int
+    wp_editcount_recent : int
+    wp_enough_recent_edits : bool
 
+    Returns
+    -------
+    tuple
+        Contains recent-editcount-related results.
+    """
     # If we have historical data, see how many days have passed and how many edits have been made since the last check.
     if wp_editcount_prev_updated and wp_editcount_updated:
         editcount_update_delta = now() - wp_editcount_prev_updated
@@ -190,6 +274,18 @@ def editor_recent_edits(
 
 
 def editor_bundle_eligible(editor: "Editor"):
+    """
+    Checks all of the individual eligibility components to determine if Editor is eligible for Bundle.
+    Note that the type hint is just the classname to avoid a circular import.
+    Parameters
+    ----------
+    editor : Editor
+
+    Returns
+    -------
+    bool
+        The editor's eligibility.
+    """
     enough_edits_and_valid = editor.wp_valid and editor.wp_enough_recent_edits
     # Staff and superusers should be eligible for bundles for testing purposes
     user_staff_or_superuser = editor.user.is_staff or editor.user.is_superuser
