@@ -3,6 +3,7 @@
 #
 # Author: Abijeet Patro
 # Author: Eduardo Addad de Oliveira
+# Author: Luk3
 # Author: MuratTheTurkish
 # Author: Rafaelff
 # Author: Tks4Fish
@@ -11,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-09 11:46+0000\n"
-"PO-Revision-Date: 2020-10-12 14:08:15+0000\n"
+"PO-Revision-Date: 2020-10-19 13:08:42+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -467,7 +468,7 @@ msgstr "Comentários do editor"
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:222
 msgid "Recent Applications (last 90 days)"
-msgstr "Candidaturas recentes (90 dias0"
+msgstr "Candidaturas recentes (90 dias)"
 
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:259
