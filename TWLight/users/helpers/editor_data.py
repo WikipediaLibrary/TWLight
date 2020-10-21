@@ -4,7 +4,7 @@ import logging
 import typing
 import urllib.request, urllib.error, urllib.parse
 from django.conf import settings
-from django.utils.timezone import now
+from django.utils import timezone
 
 logger = logging.getLogger(__name__)
 
@@ -220,6 +220,7 @@ def editor_recent_edits(
     wp_editcount_prev: int,
     wp_editcount_recent: int,
     wp_enough_recent_edits: bool,
+    current_datetime: timezone = None,
 ):
     """
     Checks current global_userinfo editcount against stored editor data and returns updated data.
@@ -231,15 +232,19 @@ def editor_recent_edits(
     wp_editcount_prev : int
     wp_editcount_recent : int
     wp_enough_recent_edits : bool
+    current_datetime : timezone
 
     Returns
     -------
     tuple
         Contains recent-editcount-related results.
     """
+    if not current_datetime:
+        current_datetime = timezone.now()
+
     # If we have historical data, see how many days have passed and how many edits have been made since the last check.
     if wp_editcount_prev_updated and wp_editcount_updated:
-        editcount_update_delta = now() - wp_editcount_prev_updated
+        editcount_update_delta = current_datetime - wp_editcount_prev_updated
         editcount_delta = global_userinfo_editcount - wp_editcount_prev
         if (
             # If the editor didn't have enough recent edits but they do now, update the counts immediately.
@@ -256,7 +261,7 @@ def editor_recent_edits(
     # If we don't have any historical editcount data, let all edits to date count
     else:
         wp_editcount_prev = global_userinfo_editcount
-        wp_editcount_prev_updated = now()
+        wp_editcount_prev_updated = current_datetime
         wp_editcount_recent = global_userinfo_editcount
 
     # Perform the check for enough recent edits.

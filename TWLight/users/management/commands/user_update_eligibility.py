@@ -37,8 +37,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         wp_editcount_updated = now()
+        datetime_override = None
+
         if options["datetime"]:
-            wp_editcount_updated = datetime.fromisoformat(options["datetime"])
+            datetime_override = datetime.fromisoformat(options["datetime"])
+            wp_editcount_updated = datetime_override
 
         # Getting all editors that are currently eligible or are staff or are superusers
         editors = Editor.objects.filter(wp_bundle_eligible=True)
@@ -62,6 +65,7 @@ class Command(BaseCommand):
                     editor.wp_editcount_prev,
                     editor.wp_editcount_recent,
                     editor.wp_enough_recent_edits,
+                    datetime_override,
                 )
                 editor.wp_editcount = global_userinfo["editcount"]
                 editor.wp_editcount_updated = wp_editcount_updated
