@@ -1,8 +1,5 @@
 from datetime import datetime
-
 import logging
-
-
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
 from TWLight.users.models import Editor
@@ -19,11 +16,13 @@ from TWLight.users.helpers.editor_data import (
 logger = logging.getLogger(__name__)
 
 
-# Everything here is largely lifted from the Editor model. An indicator that things should be refactored.
-
-
 class Command(BaseCommand):
+    help = "Updates editor info and Bundle eligibility for currently-eligible Editors."
+
     def add_arguments(self, parser):
+        """
+        Adds `datetime` and `global_userinfo` arguments.
+        """
         parser.add_argument(
             "--datetime",
             action="store",
@@ -36,9 +35,23 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        """
+        Updates editor info and Bundle eligibility for currently-eligible Editors.
+        Parameters
+        ----------
+        args
+        options
+
+        Returns
+        -------
+        None
+        """
+
+        # Default behavior is to use current datetime for timestamps.
         wp_editcount_updated = now()
         datetime_override = None
 
+        # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
         if options["datetime"]:
             datetime_override = datetime.fromisoformat(options["datetime"])
             wp_editcount_updated = datetime_override
@@ -46,13 +59,16 @@ class Command(BaseCommand):
         # Getting all editors that are currently eligible or are staff or are superusers
         editors = Editor.objects.filter(wp_bundle_eligible=True)
         for editor in editors:
+            # `global_userinfo` data may be overridden.
             if options["global_userinfo"]:
                 global_userinfo = options["global_userinfo"]
+            # Default behavior is to fetch live `global_userinfo`
             else:
                 global_userinfo = editor_global_userinfo(
                     editor.wp_username, editor.wp_sub, True
                 )
             if global_userinfo:
+                # Determine recent editcount.
                 (
                     editor.wp_editcount_prev_updated,
                     editor.wp_editcount_prev,
@@ -67,8 +83,10 @@ class Command(BaseCommand):
                     editor.wp_enough_recent_edits,
                     datetime_override,
                 )
+                # Set current editcount.
                 editor.wp_editcount = global_userinfo["editcount"]
                 editor.wp_editcount_updated = wp_editcount_updated
+                # Determine editor validity.
                 editor.wp_enough_edits = editor_enough_edits(editor.wp_editcount)
                 editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
                 editor.wp_valid = editor_valid(
@@ -79,8 +97,9 @@ class Command(BaseCommand):
                     editor.wp_not_blocked,
                     editor.ignore_wp_blocks,
                 )
+                # Determine Bundle eligibility.
                 editor.wp_bundle_eligible = editor_bundle_eligible(editor)
-
+                # Save editor.
                 editor.save()
-
+                # Update bundle authorizations.
                 editor.update_bundle_authorization()
