@@ -1640,17 +1640,23 @@ class AuthorizationsHelpersTestCase(TestCase):
 
 
 class ManagementCommandsTestCase(TestCase):
-    def test_user_update_eligibility_command_normal_user(self):
-        normal_editor = EditorFactory()
-        normal_editor.wp_bundle_eligible = True
-        normal_editor.wp_editcount_updated = now() - timedelta(days=30)
-        normal_editor.wp_account_old_enough = True
-        normal_editor.user.userprofile.terms_of_use = True
-        normal_editor.user.userprofile.save()
-        normal_editor.user.save()
-        normal_editor.save()
+    def setUp(self):
+        """
+        Creates a bundle-eligible editor.
+        Returns
+        -------
+        None
+        """
+        self.editor = EditorFactory()
+        self.editor.wp_bundle_eligible = True
+        self.editor.wp_editcount_updated = now() - timedelta(days=30)
+        self.editor.wp_account_old_enough = True
+        self.editor.user.userprofile.terms_of_use = True
+        self.editor.user.userprofile.save()
+        self.editor.user.save()
+        self.editor.save()
 
-        global_userinfo_editor = {
+        self.global_userinfo_editor = {
             "home": "enwiki",
             "id": 567823,
             "registration": "2015-11-06T15:46:29Z",  # Well before first commit.
@@ -1659,50 +1665,96 @@ class ManagementCommandsTestCase(TestCase):
             "merged": copy.copy(FAKE_MERGED_ACCOUNTS),
         }
 
-        self.assertTrue(normal_editor.wp_bundle_eligible)
+    def test_user_update_eligibility_command_initial(self):
+        """
+        1st time bundle check should always pass for a valid user.
+        Returns
+        -------
+        None
+        """
+        self.assertTrue(self.editor.wp_bundle_eligible)
 
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
-                normal_editor.wp_editcount_updated + timedelta(days=31)
+                self.editor.wp_editcount_updated + timedelta(days=31)
             ),
-            global_userinfo=global_userinfo_editor,
+            global_userinfo=self.global_userinfo_editor,
+        )
+        self.editor.refresh_from_db()
+
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
+    def test_user_update_eligibility_command_valid(self):
+        """
+        user_update_eligibility command should check and update Bundle eligible editors correctly.
+        Returns
+        -------
+        None
+        """
+
+        # 1st time bundle check should always pass for a valid editor.
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
+        # A valid editor should pass 30 days after their first login, even if they haven't made any more edits.
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.editor.wp_editcount_updated + timedelta(days=30)
+            ),
+            global_userinfo=self.global_userinfo_editor,
+        )
+        self.editor.refresh_from_db()
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
+        # A valid editor should pass 31 days after their last update, so long as they made enough edits.
+        self.global_userinfo_editor["editcount"] = 5010
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.editor.wp_editcount_updated + timedelta(days=31)
+            ),
+            global_userinfo=self.global_userinfo_editor,
+        )
+        self.editor.refresh_from_db()
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
+        # Editors whose editcount has been updated within the last 30 days should be left alone.
+        self.global_userinfo_editor["editcount"] = 5010
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.editor.wp_editcount_updated + timedelta(days=10)
+            ),
+            global_userinfo=self.global_userinfo_editor,
         )
 
-        normal_editor.refresh_from_db()
+        self.editor.refresh_from_db()
+        self.assertTrue(self.editor.wp_bundle_eligible)
 
-        self.assertTrue(normal_editor.wp_bundle_eligible)
-
-    def test_user_update_eligibility_command_user_terms_not_accepted(self):
-        normal_editor = EditorFactory()
-        normal_editor.wp_bundle_eligible = True
-        normal_editor.wp_editcount_updated = now() - timedelta(days=30)
-        normal_editor.wp_account_old_enough = True
+    def test_user_update_eligibility_command_terms_not_accepted(self):
+        """
+        Editors who don't agree to terms are not bundle eligible.
+        Returns
+        -------
+        None
+        """
         # The editor hasn't accepted the terms of use
-        normal_editor.user.userprofile.terms_of_use = False
-        normal_editor.user.userprofile.save()
-        normal_editor.user.save()
-        normal_editor.save()
+        self.editor.user.userprofile.terms_of_use = False
+        self.editor.user.userprofile.save()
+        self.editor.user.save()
+        self.editor.save()
 
-        global_userinfo_editor = {
-            "home": "enwiki",
-            "id": 567823,
-            "registration": "2015-11-06T15:46:29Z",  # Well before first commit.
-            "name": "user328",
-            "editcount": 5000,
-            "merged": copy.copy(FAKE_MERGED_ACCOUNTS),
-        }
-
-        self.assertTrue(normal_editor.wp_bundle_eligible)
+        self.assertTrue(self.editor.wp_bundle_eligible)
 
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
-                normal_editor.wp_editcount_updated + timedelta(days=31)
+                self.editor.wp_editcount_updated + timedelta(days=31)
             ),
-            global_userinfo=global_userinfo_editor,
+            global_userinfo=self.global_userinfo_editor,
         )
 
-        normal_editor.refresh_from_db()
+        self.editor.refresh_from_db()
 
-        self.assertFalse(normal_editor.wp_bundle_eligible)
+        self.assertFalse(self.editor.wp_bundle_eligible)
