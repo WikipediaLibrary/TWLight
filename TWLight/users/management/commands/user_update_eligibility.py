@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
@@ -56,8 +56,10 @@ class Command(BaseCommand):
             datetime_override = datetime.fromisoformat(options["datetime"])
             wp_editcount_updated = datetime_override
 
-        # Getting all editors that are currently eligible or are staff or are superusers
-        editors = Editor.objects.filter(wp_bundle_eligible=True)
+        # Getting all editors that are currently eligible and have not been recently updated.
+        editors = Editor.objects.filter(
+            wp_bundle_eligible=True, wp_editcount_updated__lt=now() - timedelta(days=30)
+        )
         for editor in editors:
             # `global_userinfo` data may be overridden.
             if options["global_userinfo"]:
