@@ -56,9 +56,9 @@ class Command(BaseCommand):
             datetime_override = datetime.fromisoformat(options["datetime"])
             wp_editcount_updated = datetime_override
 
-        # Getting all editors that are currently eligible and have not been recently updated.
+        # Get all editors who have not been updated in more than 30 days.
         editors = Editor.objects.filter(
-            wp_bundle_eligible=True, wp_editcount_updated__lt=now() - timedelta(days=30)
+            wp_editcount_updated__lt=now() - timedelta(days=30)
         )
         for editor in editors:
             # `global_userinfo` data may be overridden.
