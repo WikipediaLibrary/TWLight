@@ -1157,9 +1157,10 @@ class EditorModelTestCase(TestCase):
         self.assertTrue(bundle_eligible)
 
         # Bad editor! No biscuit, even if you have enough edits.
+        global_userinfo["editcount"] = 510
         global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
         not_blocked = editor_not_blocked(global_userinfo["merged"])
-        valid = editor_valid(
+        self.test_editor.wp_valid = editor_valid(
             enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
         )
         self.test_editor.wp_editcount_updated = now() - timedelta(days=31)
@@ -1172,7 +1173,7 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_editcount_recent,
             self.test_editor.wp_enough_recent_edits,
         ) = editor_recent_edits(
-            global_userinfo["editcount"] + 10,
+            global_userinfo["editcount"],
             self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_updated,
             self.test_editor.wp_editcount_prev_updated,
@@ -1181,7 +1182,11 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_enough_recent_edits,
         )
         bundle_eligible = editor_bundle_eligible(self.test_editor)
+        self.test_editor.wp_editcount = global_userinfo["editcount"]
         self.test_editor.wp_editcount_updated = now()
+
+        self.assertEqual(self.test_editor.wp_editcount, 510)
+        self.assertEqual(self.test_editor.wp_editcount_prev, 500)
         self.assertFalse(bundle_eligible)
 
         # Without a scheduled management command, a valid user will pass 60 days after their first login if they have 10 more edits,
