@@ -53,8 +53,8 @@ urlpatterns = [
         name="my_collection",
     ),
     url(
-        r"^deletion/(?P<pk>\d+)/(?P<id>\d+)/$",
-        login_required(views.DeleteApplication.as_view()),
-        name="my_deletion",
+        r"^withdraw/(?P<pk>\d+)/(?P<id>\d+)/$",
+        login_required(views.WithdrawApplication.as_view()),
+        name="withdraw",
     ),
 ]

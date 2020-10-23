@@ -58,7 +58,7 @@
           {% trans 'Not yet reviewed.' %}
         {% endif %}
         <br />
-        <form action="{% url 'users:my_deletion' user.editor.pk app.pk%}" class="m-2" method="post">
+        <form action="{% url 'users:withdraw' user.editor.pk app.pk%}" class="m-2" method="post">
         {% csrf_token %}
         <input type="submit" value="Withdraw" class="btn btn-danger btn-sm">
         </form>
