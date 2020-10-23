@@ -215,6 +215,7 @@ def editor_valid(
 
 def editor_recent_edits(
     global_userinfo_editcount: int,
+    wp_editcount: int,
     wp_editcount_updated: datetime.date,
     wp_editcount_prev_updated: datetime.date,
     wp_editcount_prev: int,
@@ -227,12 +228,21 @@ def editor_recent_edits(
     Parameters
     ----------
     global_userinfo_editcount : int
+        editcount returned by globaluserinfo.
+    wp_editcount : int
+        editcount currently stored in database.
     wp_editcount_updated : datetime.date
+        timestamp for stored editcount
     wp_editcount_prev_updated : datetime.date
+        timestamp for stored previous editcount
     wp_editcount_prev : int
+        historical editcount used to calculate recent edits
     wp_editcount_recent : int
+        recent editcount used to determine bundle eligibility
     wp_enough_recent_edits : bool
+        current recent edit status as stored in database
     current_datetime : timezone
+        optional timezone-aware timestamp override that represents now()
 
     Returns
     -------
@@ -254,8 +264,10 @@ def editor_recent_edits(
             # This means that eligibility always lasts at least 30 days.
             or (wp_enough_recent_edits and editcount_update_delta.days > 30)
         ):
-            wp_editcount_recent = global_userinfo_editcount - wp_editcount_prev
-            wp_editcount_prev = global_userinfo_editcount
+            # recent edits = global userinfo editcount - stored editcount.
+            wp_editcount_recent = global_userinfo_editcount - wp_editcount
+            # Shift the currently stored counts into the "prev" fields for use in future checks.
+            wp_editcount_prev = wp_editcount
             wp_editcount_prev_updated = wp_editcount_updated
 
     # If we don't have any historical editcount data, let all edits to date count

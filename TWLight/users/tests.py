@@ -1083,6 +1083,7 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_enough_recent_edits,
         ) = editor_recent_edits(
             global_userinfo["editcount"],
+            self.test_editor.wp_editcount,
             None,
             None,
             self.test_editor.wp_editcount_prev,
@@ -1104,6 +1105,7 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_enough_recent_edits,
         ) = editor_recent_edits(
             global_userinfo["editcount"],
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_updated,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
@@ -1125,6 +1127,7 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_enough_recent_edits,
         ) = editor_recent_edits(
             global_userinfo["editcount"],
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_updated,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
@@ -1142,6 +1145,7 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_enough_recent_edits,
         ) = editor_recent_edits(
             global_userinfo["editcount"] + 10,
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_updated,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
@@ -1169,6 +1173,7 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_enough_recent_edits,
         ) = editor_recent_edits(
             global_userinfo["editcount"] + 10,
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_updated,
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
@@ -1237,6 +1242,7 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_editcount_recent,
             self.test_editor.wp_enough_recent_edits,
         ) = editor_recent_edits(
+            self.test_editor.wp_editcount,
             self.test_editor.wp_editcount,
             self.test_editor.wp_editcount_updated,
             self.test_editor.wp_editcount_prev_updated,
@@ -1696,15 +1702,16 @@ class ManagementCommandsTestCase(TestCase):
         # 1st time bundle check should always pass for a valid editor.
         self.assertTrue(self.editor.wp_bundle_eligible)
 
-        # A valid editor should pass 30 days after their first login, even if they haven't made any more edits.
+        # A valid editor should pass 31 days after their first login, even if they haven't made any more edits.
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=30)
+                self.editor.wp_editcount_updated + timedelta(days=31)
             ),
             global_userinfo=self.global_userinfo_editor,
         )
         self.editor.refresh_from_db()
+        self.assertEqual(self.editor.wp_editcount, self.editor.wp_editcount_prev)
         self.assertTrue(self.editor.wp_bundle_eligible)
 
         # A valid editor should pass 31 days after their last update, so long as they made enough edits.
@@ -1717,6 +1724,9 @@ class ManagementCommandsTestCase(TestCase):
             global_userinfo=self.global_userinfo_editor,
         )
         self.editor.refresh_from_db()
+        self.assertEqual(self.editor.wp_editcount, 5010)
+        self.assertEqual(self.editor.wp_editcount_prev, 5000)
+        self.assertEqual(self.editor.wp_editcount_recent, 10)
         self.assertTrue(self.editor.wp_bundle_eligible)
 
         # Editors whose editcount has been updated within the last 30 days should be left alone.
@@ -1730,7 +1740,26 @@ class ManagementCommandsTestCase(TestCase):
         )
 
         self.editor.refresh_from_db()
+        self.assertEqual(self.editor.wp_editcount, 5010)
+        self.assertEqual(self.editor.wp_editcount_prev, 5000)
+        self.assertEqual(self.editor.wp_editcount_recent, 10)
         self.assertTrue(self.editor.wp_bundle_eligible)
+
+        # Editors who haven't made enough edits in the last 31 days are not eligible.
+        self.global_userinfo_editor["editcount"] = 5010
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.editor.wp_editcount_updated + timedelta(days=31)
+            ),
+            global_userinfo=self.global_userinfo_editor,
+        )
+
+        self.editor.refresh_from_db()
+        self.assertEqual(self.editor.wp_editcount, 5010)
+        self.assertEqual(self.editor.wp_editcount_prev, 5010)
+        self.assertEqual(self.editor.wp_editcount_recent, 0)
+        self.assertFalse(self.editor.wp_bundle_eligible)
 
     def test_user_update_eligibility_command_terms_not_accepted(self):
         """

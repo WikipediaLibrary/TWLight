@@ -78,6 +78,7 @@ class Command(BaseCommand):
                     editor.wp_enough_recent_edits,
                 ) = editor_recent_edits(
                     global_userinfo["editcount"],
+                    editor.wp_editcount,
                     editor.wp_editcount_updated,
                     editor.wp_editcount_prev_updated,
                     editor.wp_editcount_prev,
