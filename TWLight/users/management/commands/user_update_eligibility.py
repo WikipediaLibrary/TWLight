@@ -48,17 +48,17 @@ class Command(BaseCommand):
         """
 
         # Default behavior is to use current datetime for timestamps.
-        wp_editcount_updated = now()
+        now_or_datetime = now()
         datetime_override = None
 
         # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
         if options["datetime"]:
-            datetime_override = datetime.fromisoformat(options["datetime"])
-            wp_editcount_updated = datetime_override
+            datetime_override = now_or_datetime.fromisoformat(options["datetime"])
+            now_or_datetime = datetime_override
 
         # Get all editors who have not been updated in more than 30 days.
         editors = Editor.objects.filter(
-            wp_editcount_updated__lt=now() - timedelta(days=30)
+            wp_editcount_updated__lt=now_or_datetime - timedelta(days=30)
         )
         for editor in editors:
             # `global_userinfo` data may be overridden.
@@ -87,7 +87,7 @@ class Command(BaseCommand):
                 )
                 # Set current editcount.
                 editor.wp_editcount = global_userinfo["editcount"]
-                editor.wp_editcount_updated = wp_editcount_updated
+                editor.wp_editcount_updated = now_or_datetime
                 # Determine editor validity.
                 editor.wp_enough_edits = editor_enough_edits(editor.wp_editcount)
                 editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
