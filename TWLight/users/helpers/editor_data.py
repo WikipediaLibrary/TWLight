@@ -17,13 +17,17 @@ def editor_global_userinfo(
     Parameters
     ----------
     wp_username : str
+        Global Wikipedia username, used for guiuser parameter in globaluserinfo calls.
     wp_sub : int
+        Global Wikipedia User ID, used for guiid parameter in globaluserinfo calls.
     strict : bool
+        Verify that guiuser and guiid match. This precludes library account takeover via wikipedia username changes,
+        but also precludes updates to accounts upon username change.
 
     Returns
     -------
     dict
-        Contains the editor's globaluserinfo as returned by the mediawiki api.
+        The editor's globaluserinfo as returned by the mediawiki api.
     """
     guiuser = urllib.parse.quote(wp_username)
     # Trying to get global user info with the username
@@ -60,36 +64,8 @@ def _get_user_info_request(wp_param_name: str, wp_param: str):
     Returns
     -------
     dict
-        A dictionary like the one below or a dictionary with a "missing" key
-
-    Expected data:
-    {
-    "batchcomplete": true,
-     "query": {
-        "globaluserinfo": {                         # Global account
-            "home": "enwiki",                           # Wiki used to determine the name of the global account. See https://www.mediawiki.org/wiki/SUL_finalisation
-            "id": account['id'],                        # Wikipedia ID
-            "registration": "YYYY-MM-DDTHH:mm:ssZ",     # Date registered
-            "name": account['name'],                    # wikipedia username
-            "merged": [                                 # Individual project accounts attached to the global account.
-                {
-                    "wiki": "enwiki",
-                    "url": "https://en.wikipedia.org",
-                    "timestamp": "YYYY-MM-DDTHH:mm:ssZ",
-                    "method": "login",
-                    "editcount": account['editcount']           # editcount for this project
-                    "registration": "YYYY-MM-DDTHH:mm:ssZ",     # Date registered for this project
-                    "groups": ["extendedconfirmed"],
-                    "blocked": {                                # Only exists if the user has blocks for this project.
-                    "expiry": "infinity",
-                    "reason": ""
-                }
-                ... # Continues ad nauseam
-            ],
-            "editcount": account['editcount']           # global editcount
-        }
-     }
-    }
+        The globaluserinfo api query response as described in the MediaWiki API globaluserinfo documentation:
+        https://www.mediawiki.org/w/api.php?action=help&modules=query%2Bglobaluserinfo
     """
     endpoint = settings.TWLIGHT_API_PROVIDER_ENDPOINT
     query = "{endpoint}?action=query&meta=globaluserinfo&{wp_param_name}={wp_param}&guiprop=editcount|merged&format=json&formatversion=2".format(
@@ -264,7 +240,6 @@ def editor_recent_edits(
             # This means that eligibility always lasts at least 30 days.
             or (wp_enough_recent_edits and editcount_update_delta.days > 30)
         ):
-            # recent edits = global userinfo editcount - stored editcount.
             wp_editcount_recent = global_userinfo_editcount - wp_editcount
             # Shift the currently stored counts into the "prev" fields for use in future checks.
             wp_editcount_prev = wp_editcount
