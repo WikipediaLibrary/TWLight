@@ -436,6 +436,7 @@ class Editor(models.Model):
                 self.wp_enough_recent_edits,
             ) = editor_recent_edits(
                 global_userinfo["editcount"],
+                self.wp_editcount,
                 self.wp_editcount_updated,
                 self.wp_editcount_prev_updated,
                 self.wp_editcount_prev,
