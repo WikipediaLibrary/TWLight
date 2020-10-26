@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-10-22 20:31+0000\n"
+"POT-Creation-Date: 2020-10-26 12:48+0000\n"
 "PO-Revision-Date: 2020-10-22 11:16:33+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2804,7 +2804,7 @@ msgid "Update email"
 msgstr "Поднови е-пошта"
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:485
+#: TWLight/users/models.py:486
 #, python-brace-format
 msgid "{wp_username}"
 msgstr "{wp_username}"
