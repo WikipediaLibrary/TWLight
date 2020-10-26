@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-10-08 14:07:53+0000\n"
+"PO-Revision-Date: 2020-10-26 15:14:27+0000\n"
 "X-POT-Import-Date: 2020-10-08 12:05:05+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2360,7 +2360,7 @@ msgid "Update email"
 msgstr "Kemas kini e-mel"
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:485
+#: TWLight/users/models.py:486
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
