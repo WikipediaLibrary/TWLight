@@ -1,2 +1,2 @@
-pre_commit==2.7.1
+pre_commit==2.8.0
 
