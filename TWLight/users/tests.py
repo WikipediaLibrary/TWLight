@@ -103,6 +103,7 @@ class ViewsTestCase(TestCase):
     def setUp(self):
         super(ViewsTestCase, self).setUp()
         self.client = Client()
+        
 
         # User 1: regular Editor
         self.username1 = "alice"
@@ -285,8 +286,21 @@ class ViewsTestCase(TestCase):
             partner=PartnerFactory(authorization_method=Partner.BUNDLE),
             editor=self.user_editor.editor,
         )
+        app8 = ApplicationFactory(
+            status = Application.PENDING,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
 
         factory = RequestFactory()
+        request = factory.get(
+            reverse("users:withdraw", kwargs={"pk": self.editor1.pk, "id":app8.pk})
+        )
+        request.user = self.user_editor
+        response = views.WithdrawApplication.as_view()(request,pk=self.editor1.pk, id=app8.pk)
+        
+        self.assertEqual(app8.status,Application.INVALID)
+        
         request = factory.get(
             reverse("users:my_applications", kwargs={"pk": self.editor1.pk})
         )
