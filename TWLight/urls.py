@@ -11,6 +11,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
+from django.conf import settings
 
 from TWLight.api.urls import urlpatterns as api_urls
 from TWLight.applications.urls import urlpatterns as applications_urls
@@ -34,7 +35,6 @@ from .views import LanguageWhiteListView, HomePageView
 urlpatterns = [
     # Built-in -----------------------------------------------------------------
     url(r"^admin/doc", include(admindocs)),
-    url(r"^admin/", admin.site.urls),
     url(r"^accounts/login/", auth_views.LoginView.as_view(), name="auth_login"),
     url(
         r"^accounts/logout/",
@@ -96,3 +96,6 @@ urlpatterns = [
     url(r"^$", HomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
 ]
+
+if settings.ADMIN_ENABLED:
+    urlpatterns += [url(r"^admin/", admin.site.urls)]

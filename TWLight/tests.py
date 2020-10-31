@@ -1263,3 +1263,38 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         expected_json = [{"wp_username": self.editor1.wp_username}]
 
         self.assertEqual(response.data, expected_json)
+
+
+class AdminEnableTestCase(TestCase):
+    def test_admin_enabled(self):
+        """
+        Test behaviour when ADMIN_ENABLED set to True
+        """
+
+        # check ADMIN_ENABLED value
+        self.assertEqual(settings.ADMIN_ENABLED, True)
+
+        # check homepage
+        response = self.client.get(reverse("homepage"))
+        self.assertEqual(response.status_code, 200)
+
+        # Check admin page
+        response = self.client.get("/admin/")
+        self.assertRedirects(response, "/admin/login/?next=/admin/")
+        self.assertEqual(response.status_code, 302)
+
+    def test_admin_disabled(self):
+        """
+        Test behaviour when ADMIN_ENABLED set to True
+        """
+        # override settings and update ADMIN_ENABLED
+        with self.settings(ADMIN_ENABLED=False):
+            # check ADMIN_ENABLED value
+            self.assertEqual(settings.ADMIN_ENABLED, False)
+
+            # check homepage
+            response = self.client.get(reverse("homepage"))
+            self.assertEqual(response.status_code, 200)
+            # Check admin
+            response = self.client.get("/admin/")
+            self.assertEqual(response.status_code, 404)

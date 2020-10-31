@@ -12,6 +12,9 @@ from .base import *
 
 DEFAULT_FROM_EMAIL = "<twlight.local@localhost.localdomain>"
 
+# To Block/Unblock /admin login page in production & staging
+ADMIN_ENABLED = True
+
 # TEST CONFIGURATION
 # ------------------------------------------------------------------------------
 

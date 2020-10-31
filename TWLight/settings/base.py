@@ -44,6 +44,9 @@ TWLIGHT_HOME = os.path.dirname(
 
 TWLIGHT_ENV = os.environ.get("TWLIGHT_ENV")
 
+# To Block/Unblock /admin login page in production & staging
+ADMIN_ENABLED = False
+
 # An atypical way of setting django languages for TranslateWiki integration:
 # https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
 
