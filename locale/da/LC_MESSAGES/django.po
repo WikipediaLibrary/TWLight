@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-26 13:06+0000\n"
-"PO-Revision-Date: 2020-10-29 12:34:32+0000\n"
+"PO-Revision-Date: 2020-11-02 12:02:37+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -83,9 +83,8 @@ msgstr "Navn på partner"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:386
-#, fuzzy
 msgid "Renewal confirmation"
-msgstr "Brugeroplysninger"
+msgstr "Forny bekræftelse"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
@@ -651,9 +650,8 @@ msgstr "Ingen ansøgninger lige nu."
 
 #. Translators: This labels the column description that lists the partner (and the corresponding collection, if any) of the listed applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
-#, fuzzy
 msgid "Partner (Collection)"
-msgstr "Samlinger"
+msgstr "Partner (Samling)"
 
 #. Translators: This labels the column description that indicates the last review date of the applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:15

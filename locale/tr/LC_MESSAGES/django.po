@@ -20,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-26 13:07+0000\n"
-"PO-Revision-Date: 2020-10-29 12:34:36+0000\n"
+"PO-Revision-Date: 2020-11-02 12:02:41+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2959,7 +2959,7 @@ msgstr "Vikipedi Kütüphanesi WMF Ekibi, Yükleniciler ve onaylı gönüllü Ko
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
 #: TWLight/users/templates/users/terms.html:233
 msgid "We may disclose any collected information when required by law, when we have your permission, when needed to protect our rights, privacy, safety, users, or the general public, and when necessary to enforce these terms, WMF’s general <a href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Terms of Use</a>, or any other WMF policy."
-msgstr "Yasalar gereği, sizden izin aldığımızda, haklarımızı, gizliliğimizi, güvenliğimizi, kullanıcılarımızı veya kamuoyunu korumak için gerektiğinde ve bu şartları uygulamak için -<a href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Kullanım Koşulları</a> veya başka bir WMF politikası- gerektiğinde WMF genelinin topladığı bilgileri ifşa edebiliriz."
+msgstr "Yasalar gereği, sizden izin aldığımızda, haklarımızı, gizliliğimizi, güvenliğimizi, kullanıcılarımızı veya kamuoyunu korumak için gerektiğinde ve bu şartları uygulamak için -<a href=\"https://meta.wikimedia.org/wiki/Terms_of_use/tr\">Kullanım Şartları</a> veya başka bir WMF politikası gerektiğinde WMF genelinin topladığı bilgileri ifşa edebiliriz."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:240

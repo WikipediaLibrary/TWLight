@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-26 13:06+0000\n"
-"PO-Revision-Date: 2020-10-29 12:34:32+0000\n"
+"PO-Revision-Date: 2020-11-02 12:02:37+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1010,13 +1010,13 @@ msgstr "Dein Wikipedia-Library Zugangscode"
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access at My Library: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Liebe/r %(user)s,</p> <p>Danke für deine Bewerbung für einen Zugang zu %(partner)s über The Wikipedia Library. Deine Bewerbung wurde akzeptiert. </p> <p>%(user_instructions)s</p> <p>Du kannst die zugänglichen Inhalte in „Meine Zugänge“ einsehen: : %(link)s</p> <p>Willkommen!</p> <p>The Wikipedia Library</p>"
+msgstr "<p>Hallo %(user)s!</p> <p>Danke für deine Bewerbung für einen Zugang zu %(partner)s über „The Wikipedia Library“. Deine Bewerbung war erfolgreich. </p> <p>%(user_instructions)s</p> <p>Du kannst die zugänglichen Inhalte in „Meine Zugänge“ einsehen: %(link)s</p> <p>Herzlich willkommen!</p> <p>The Wikipedia Library</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
-msgstr "Liebe/r %(user)s, Danke für deine Bewerbung für einen Zugang zu %(partner)s über The Wikipedia Library. Deine Bewerbung wurde erfolgreich angenommen.  %(user_instructions)s Du kannst deine zugängliche Literatur in „Meine Zugänge“ einsehen: %(link)s Willkommen! The Wikipedia Library"
+msgstr "Hallo %(user)s! Danke für deine Bewerbung für einen Zugang zu %(partner)s über „The Wikipedia Library“. Deine Bewerbung wurde erfolgreich angenommen.  %(user_instructions)s Du kannst deine zugängliche Literatur in „Meine Zugänge“ einsehen: %(link)s Willkommen! The Wikipedia Library"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1202,13 +1202,13 @@ msgstr "Wikipedia-Library-Anwendungen warten auf deine Überprüfung"
 #: TWLight/emails/templates/emails/proxy_bundle_email-body-html.html:5
 #, python-format
 msgid "<p>Hi %(username)s,</p> <p>The Wikipedia Library is pleased to announce the implementation of EZProxy access and the Library Bundle!</p> <p>EZProxy is a proxy server used to authenticate your access. Instead of managing individual logins for each collection to which you have been approved, you can now access all EZProxy-supported content simply by logging in to your Library Card account and clicking through to the website. To access EZProxy collections, simply visit the Library Card platform, go to the My Library page at https://wikipedialibrary.wmflabs.org/users/my_library, and click on ‘Access collection’ for the content you wish to access under the ‘Instant access’ tab.</p> <p>If you had active accounts before now, please take the time to review the My Library page to verify how you need to access those accounts going forward. Collections in the 'Instant Access' tab must now be accessed via EZProxy. Collections in the 'Individual Access' tab should be accessed as before.</p> <p>Until now, all access via The Wikipedia Library required that you apply to and be approved for individual collections. The Library Bundle changes that workflow by making some collections immediately available to everyone who meets the experience requirements outlined in our Terms of Use. As long as you continue to meet those requirements (which include 10 edits within the past month and not being blocked), you will have on-demand access to Library Bundle collections via the Library Card without needing to make an application or renewal request.</p> <p>You can verify whether you meet the criteria to access Library Bundle collections on the Library Card homepage - https://wikipedialibrary.wmflabs.org. If you are eligible, collections will be accessible via the 'Instant Access' tab of My Library.</p> <p>You may notice when accessing resources via EZProxy that URLs are dynamically rewritten. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser. Please be aware that existing individual logins for EZProxy-enabled collections (including the Library Bundle) will soon be deactivated, so this will be your only means of access for these collections. Any collections in the ‘Individual access’ tab in My Library will function as before.</p> <p>Along with the launch of these new access methods, we are happy to announce several major new partnerships, including large multidisciplinary collections from Springer Nature and ProQuest.</p> <p>Best,</p> <p>The Wikipedia Library Team</p>"
-msgstr ""
+msgstr "<p>Hallo %(username)s!</p> <p>„The Wikipedia Library“ freut sich, die Implementierung des EZProxy-Zuganges sowie das Zugangspaket anzukündigen!</p> <p>EZProxy ist ein Proxy-Server, der deinen Zugang authentifiziert. Statt sich einzeln für jede bestätige Sammlung einloggen zu müssen, kannst du auf Inhalte, die das EZProxy-System unterstützen, ganz einfach zugreifen, indem du dich in dein Konto einloggst und die Inhalte auf der Webseite aufrufst. Gehe dazu einfach auf https://wikipedialibrary.wmflabs.org/users/my_library und wähle dort „Zugriff auf die Sammlungen“ für den Inhalt aus, den du unter dem Reiter „Direkter Zugang“ abrufen möchtest.</p> <p>Falls du schon vorher aktive Konten gehabt haben solltest, nimm dir bitte etwas Zeit, um dir auf der Seite „Meine Zugänge“ anzuschauen, was nötig ist, um weiter mit diesen Zugängen arbeiten zu können. Sammlungen im Reiter „Direkter Zugang” sollten wie bisher abrufbar sein.</p> <p>Bisher war es nötig, dass du dich für jede einzelne Sammlung bewerben musst und für diese bestätigt wirst. Das Zugangspaket verändert diesen Ablauf, indem es sofortigen Zugang zu einigen Sammlungen all denjenigen gewährt, die die in den Nutzungsbedingungen genannten Zugangsvoraussetzungen erfüllen. Solange du diese Bedingungen erfüllst (darunter 10 Bearbeitungen im letzten Monat und keine aktuelle Sperre), hast du über die Plattform direkten Zugang auf alle Sammlungen des Zugangspaketes ohne weitere Bewerbungen oder Erneuerungen des Zuganges.</p> <p> Du kannst deinen Status der Zugangsberechtigung auf unserer Homepage https://wikipedialibrary.wmflabs.org überprüfen. Falls du berechtigt bist, kannst du die Sammlungen über den Reiter „Direkter Zugang“ unter „Meine Zugänge“ aufrufen.</p> <p>Du wirst beim Aufrufen der Inhalte über EZPRoxy vielleicht feststellen, dass die URLs dynamisch aktualisiert werden. Dafür müssen Cookies genehmigt werden. Sollte es Probleme geben, empfehlen wir das Leeren des Caches oder Neustarten des Browsers. Bitte beachte, dass aktuell bestehende individuelle Zugänge zu EZProxy-fähigen Sammlungen (inklusive des Zugangspaktes) demnächst deaktiviert werden, sodass ausschließlich diese Form des Zuganges zu den Sammlungen übrigbleibt. Jede Sammlung im Reiter „Individueller Zugang“ wird wie bisher abgerufen werden können.</p> <p>Wir freuen uns, neben dem Freischalten dieser neuen Zugangsmethoden einige weitere größere Partnerschaften anzukündigen, darunter die umfangreichen fachübergreifenden Sammlungen von Springer Nature und ProQuest.</p> <p>Liebe Grüße</p> <p>Das Team von „The Wikipedia Library Team“</p>"
 
 #. Translators: This is the announcement email sent to users of the Library Card platform, announcing the roll-out of EZProxy and Bundle (instant) access. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/proxy_bundle_email-body-text.html:3
 #, python-format
 msgid "Hi %(username)s, The Wikipedia Library is pleased to announce the implementation of EZProxy access and the Library Bundle! EZProxy is a proxy server used to authenticate your access. Instead of managing individual logins for each collection to which you have been approved, you can now access all EZProxy-supported content simply by logging in to your Library Card account and clicking through to the website. To access EZProxy collections, simply visit the Library Card platform, go to the My Library page at https://wikipedialibrary.wmflabs.org/users/my_library, and click on ‘Access collection’ for the content you wish to access under the ‘Instant access’ tab. If you had active accounts before now, please take the time to review the My Library page to verify how you need to access those accounts going forward. Collections in the 'Instant Access' tab must now be accessed via EZProxy. Collections in the 'Individual Access' tab should be accessed as before. Until now, all access via The Wikipedia Library required that you apply to and be approved for individual collections. The Library Bundle changes that workflow by making some collections immediately available to everyone who meets the experience requirements outlined in our Terms of Use. As long as you continue to meet those requirements (which include 10 edits within the past month and not being blocked), you will have on-demand access to Library Bundle collections via the Library Card without needing to make an application or renewal request. You can verify whether you meet the criteria to access Library Bundle collections on the Library Card homepage - https://wikipedialibrary.wmflabs.org. If you are eligible, collections will be accessible via the 'Instant Access' tab of My Library. You may notice when accessing resources via EZProxy that URLs are dynamically rewritten. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser. Please be aware that existing individual logins for EZProxy-enabled collections (including the Library Bundle) will soon be deactivated, so this will be your only means of access for these collections. Any collections in the ‘Individual access’ tab in My Library will function as before. Along with the launch of these new access methods, we are happy to announce several major new partnerships, including large multidisciplinary collections from Springer Nature and ProQuest. You can read more at https://meta.wikimedia.org/wiki/Library_Card_platform/Authentication-based_access. If you have any questions please post on the talk page. Best, The Wikipedia Library Team"
-msgstr ""
+msgstr "Hallo %(username)s! „The Wikipedia Library“ freut sich, die Implementierung des EZProxy-Zuganges sowie das Zugangspaket anzukündigen! EZProxy ist ein Proxy-Server, der deinen Zugang authentifiziert. Statt sich einzeln für jede bestätige Sammlung einloggen zu müssen, kannst du auf Inhalte, die das EZProxy-System unterstützen, ganz einfach zugreifen, indem du dich in dein Konto einloggst und die Inhalte auf der Webseite aufrufst. Gehe dazu einfach auf https://wikipedialibrary.wmflabs.org/users/my_library und wähle dort „Zugriff auf die Sammlungen“ für den Inhalt aus, den du unter dem Reiter „Direkter Zugang“ abrufen möchtest. Falls du schon vorher aktive Konten gehabt haben solltest, nimm dir bitte etwas Zeit, um dir auf der Seite „Meine Zugänge“ anzuschauen, was nötig ist, um weiter mit diesen Zugängen arbeiten zu können. Sammlungen im Reiter „Direkter Zugang” sollten wie bisher abrufbar sein. Bisher war es nötig, dass du dich für jede einzelne Sammlung bewerben musst und für diese bestätigt wirst. Das Zugangspaket verändert diesen Ablauf, indem es sofortigen Zugang zu einigen Sammlungen all denjenigen gewährt, die die in den Nutzungsbedingungen genannten Zugangsvoraussetzungen erfüllen. Solange du diese Bedingungen erfüllst (darunter 10 Bearbeitungen im letzten Monat und keine aktuelle Sperre), hast du über die Plattform direkten Zugang auf alle Sammlungen des Zugangspaketes ohne weitere Bewerbungen oder Erneuerungen des Zuganges. Du kannst deinen Status der Zugangsberechtigung auf unserer Homepage https://wikipedialibrary.wmflabs.org überprüfen. Falls du berechtigt bist, kannst du die Sammlungen über den Reiter „Direkter Zugang“ unter „Meine Zugänge“ aufrufen. Du wirst beim Aufrufen der Inhalte über EZPRoxy vielleicht feststellen, dass die URLs dynamisch aktualisiert werden. Dafür müssen Cookies genehmigt werden. Sollte es Probleme geben, empfehlen wir das Leeren des Caches oder Neustarten des Browsers. Bitte beachte, dass aktuell bestehende individuelle Zugänge zu EZProxy-fähigen Sammlungen (inklusive des Zugangspaktes) demnächst deaktiviert werden, sodass ausschließlich diese Form des Zuganges zu den Sammlungen übrigbleibt. Jede Sammlung im Reiter „Individueller Zugang“ wird wie bisher abgerufen werden können. Wir freuen uns, neben dem Freischalten dieser neuen Zugangsmethoden einige weitere größere Partnerschaften anzukündigen, darunter die umfangreichen fachübergreifenden Sammlungen von Springer Nature und ProQuest. Mehr Informationen dazu unter https://meta.wikimedia.org/wiki/Library_Card_platform/Authentication-based_access. Bei Fragen hierzu, schreibe diese bitte auf die Diskussionsseite. Liebe Grüße, das Team von „The Wikipedia Library Team“"
 
 #. Translators: This is the subject of the announcement email sent to users of the Library Card platform, announcing the roll-out of EZProxy and Bundle (instant) access. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/proxy_bundle_email-subject.html:3
@@ -1219,13 +1219,13 @@ msgstr "The Wikipedia Library – neue Funktionen und Verlage sind jetzt verfüg
 #: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at <a href=\"%(app_url)s\">%(app_url)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Hallo %(user)s!</p> <p>Vielen Dank für deine Bewerbung auf den Zugang zu %(partner)s auf The Wikipedia Library. Bedauerlicherweise kann deine Bewerbung aktuell nicht bestätigt werden. Du kannst deine Bewerbung sowie Kommentare dazu hier einsehen: <a href=\"%(app_url)s\">%(app_url)s</a>.</p> <p>Mit freundlichen Grüßen</p> <p>The Wikipedia Library</p>"
+msgstr "<p>Hallo %(user)s!</p> <p>Vielen Dank für deine Bewerbung auf den Zugang zu %(partner)s auf The Wikipedia Library. Bedauerlicherweise war deine Bewerbung aktuell nicht erfolgreich. Du kannst deine Bewerbung sowie Kommentare dazu hier einsehen: <a href=\"%(app_url)s\">%(app_url)s</a>.</p> <p>Mit freundlichen Grüßen</p> <p>The Wikipedia Library</p>"
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at: %(app_url)s Best, The Wikipedia Library"
-msgstr "Hallo %(user)s! Vielen Dank für deine Bewerbung auf den Zugang zu %(partner)s auf The Wikipedia Library. Bedauerlicherweise kann deine Bewerbung aktuell nicht bestätigt werden. Du kannst deine Bewerbung sowie Kommentare dazu hier einsehen: <a href=\"%(app_url)s\">%(app_url)s. Mit freundlichen Grüßen, The Wikipedia Library"
+msgstr "Hallo %(user)s! Vielen Dank für deine Bewerbung auf den Zugang zu %(partner)s auf The Wikipedia Library. Bedauerlicherweise war deine Bewerbung aktuell nicht erfolgreich. Du kannst deine Bewerbung sowie Kommentare dazu hier einsehen: <a href=\"%(app_url)s\">%(app_url)s. Mit freundlichen Grüßen, The Wikipedia Library"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
@@ -1253,18 +1253,18 @@ msgstr "Dein Zugang auf The Wikipedia Library läuft demnächst aus"
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at <a href=\"%(link)s\">%(link)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p>Hallo %(user)s!</p> <p>Danke für deine Bewerbung für einen Zugang zu %(partner)s über „The Wikipedia Library“. Aktuell sind keine Zugänge verfügbar, sodass wir dich auf die Warteliste gesetzt haben. Deine Bewerbung wird beurteilt, sobald weitere Zugänge zur Verfügung stehen. Du kannst die zugänglichen Inhalte in „Meine Zugänge“ einsehen: %(link)s</p> <p>Liebe Grüße</p> <p>The Wikipedia Library</p>"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at: %(link)s Best, The Wikipedia Library"
-msgstr ""
+msgstr "Hallo %(user)s! Vielen Dank für deine Bewerbung auf die Inhalte von %(partner)s über „The Wikipedia Library“. Aktuell sind keine Zugänge verfügbar, sodass wir dich auf die Warteliste gesetzt haben. Deine Bewerbung wird beurteilt, sobald weitere Zugänge zur Verfügung stehen. Einen Überblick über alle aktuell verfügbaren Inhalte erhältst du auf: %(link)s Liebe Grüße, The Wikipedia Library"
 
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
 msgid "Your Wikipedia Library application has been waitlisted"
-msgstr "Deine Bewerbung bei Wikipedia Library wurde auf die Warteliste gesetzt"
+msgstr "Deine Bewerbung bei Wikipedia Library wurde auf die Warteliste gesetzt."
 
 #. Translators: Shown to users when they successfully submit a new message using the contact us form.
 #: TWLight/emails/views.py:51
@@ -1911,13 +1911,13 @@ msgstr "Die Wikipedia Library gewährt freien Zugriff auf Quellen, die der Arbei
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:18
 msgid "The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to our collection. Here you can see which partnerships are available, search their contents, and apply for and access the ones you’re interested in. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review applications and work with publishers to get you your free access. Some content is available without an application."
-msgstr ""
+msgstr "Die Plattform von „The Wikipedia Library“ ist das zentrale Werkzeug zur Bewertung von Bewerbungen und für Zugänge zu unseren Sammlungen. Hier kannst du dir anschauen, welche Partnerschaften vorhanden sind und ihre Inhalte, die dich interessieren, durchsuchen, dich auf sie bewerben und auf sie zugreifen. Freiwillige Koordinatoren, die Vertraulichkeitserklärungen mit der Wikimedia Foundation abgeschlossen haben, beurteilen die Bewerbungen und arbeiten mit Verlagen zusammen, um dir einen kostenfreien Zugang zu ermöglichen. Manche Inhalte sind auch ohne Bewerbung verfügbar."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:30
 #, python-format
 msgid "For more information about how your information is stored and reviewed please see our <a href=\"%(terms_url)s\"> terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them."
-msgstr ""
+msgstr "Mehr Informationen über die Speicherung und Verarbeitung deiner Daten auf der Seite <a href=\"%(terms_url)s\">Nutzungsbedingungen und Datenschutzrichtlinie</a>. Für die Zugänge, auf die du dich beworben hast, gelten auch die Nutzungsbedingungen der Plattformen der jeweiligen Partner; bitte informiere dich bei ihnen."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:38
@@ -2028,22 +2028,22 @@ msgstr "Proxy"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:143
 msgid "EZProxy is a proxy server used to authenticate users for many Wikipedia Library partners. Users sign into EZProxy via the Library Card platform to verify that they are authorized users, and then the server accesses requested resources using its own IP address."
-msgstr ""
+msgstr "EZProxy ist ein Proxy-Server, den wir für die Authentifizierung unserer Nutzer gegenüber den Partner von „The Wikipedia Library“ verwenden. Die Anmeldung zum EZProxy wird über unsere Plattform bestätigt, danach ruft der Server die angefragten Inhalte über eine eigene IP-Adresse auf."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:152
 msgid "You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we recommend logging in via the Library Card platform rather than going directly to the unproxied partner website. When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy."
-msgstr ""
+msgstr "Du wirst beim Aufrufen der Inhalte über EZPRoxy vielleicht feststellen, dass die URLs dynamisch aktualisiert werden. Aus diesem Grund empfehlen wir die Anmeldung über unsere Plattform, statt diese ohne Proxy auf der Webseite des Partners aufzurufen. Sollte es Unklarheiten in der Verwendung des Proxys geben, dann überprüfe, ob die URL „idm.oclc“ enthält. Sollte dies der Fall sein, dann bist du über EZProxy mit den Inhalten verbunden."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:161
 msgid "Typically once you’ve logged in your session will remain active in your browser for up to two hours after you’ve finished searching. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser."
-msgstr ""
+msgstr "Üblicherweise bleibst du in dieser Browsersession für weitere zwei Stunden nach dem Ende deiner Suche hier eingeloggt. Bitte beachte, dass EZPRoxy die Aktivierung von Cookies verlangt. Solltest du Probleme damit haben, könnte das Löschen des Caches oder Neustarten deines Browser diese vielleicht beheben."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:172
 msgid "The Library Bundle is a collection of resources for which no application is required. If you meet the criteria laid out above, you will be authorized for access automatically upon logging in to the platform. Only some of our content is currently included in the Library Bundle, however we hope to expand the collection as more publishers become comfortable with participating. All Bundle content is accessed via EZProxy."
-msgstr ""
+msgstr "Das Zugangspaket ist eine Sammlung an Inhalten, für die keine weiteren Bewerbungen benötigt werden. Falls du die oben dargelegten Kriterien erfüllst, erhältst du nach Anmeldung hier auf der Plattform automatisch Zugang dazu. Bisher ist nur ein Teil unserer Partnerschaften im Zugangspaket verfügbar, wir hoffen jedoch die Sammlung zu erweitern und mehr Verlage zur Beteiligung zu motivieren. Alle Inhalte werden dabei über EZProxy zur Verfügung gestellt."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:182
@@ -2288,13 +2288,13 @@ msgstr "<p>Sofort kostenfreier Zugang zu einer großen Anzahl an Inhalten, die %
 #: TWLight/templates/home.html:75
 #, python-format
 msgid "\n              It looks like you have an active block on your account on at least one Wikimedia project. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href=\"%(contact_url)s\">contact us</a>.\n            "
-msgstr ""
+msgstr "              Es sieht so aus, als ob du aktuell in mindestens einem Wikimedia-Projekt gesperrt bist. Falls du die anderen Kriterien erfüllen solltest, könntest du unter Umständen dennoch Zugang zum Zugangspaket  erhalten. Bitte <a href=\"%(contact_url)s\">kontaktiere uns.</a>.\n            "
 
 #. Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle.
 #: TWLight/templates/home.html:84
 #, python-format
 msgid "\n              You meet the eligibility criteria! Check out <a href=\"%(library_url)s\">My Library</a> to see what you have access to.\n            "
-msgstr ""
+msgstr "              Du erfüllst die Zugänglichkeitskriterien! Schau auf <a href=\"%(library_url)s\">My Library</a> vorbei, um dir deine Zugänge anzuschauen.\n            "
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
 #: TWLight/templates/home.html:100
@@ -2366,7 +2366,7 @@ msgstr "Einschränkung meiner Daten durchführen"
 #. Translators: Users must click this button when registering to agree to the website terms of use.
 #: TWLight/users/forms.py:177
 msgid "I agree with the terms of use"
-msgstr "Ich stimme den Benutzungsbedingungen (Terms of Use) zu"
+msgstr "Ich stimme den Nutzungsbedingungen (Terms of Use) zu"
 
 #. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
 #: TWLight/users/forms.py:185
@@ -2807,7 +2807,7 @@ msgstr "Du bist ein Koordinator auf dieser Seite. Solltest du die Datenübermitt
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
 msgid "Last updated 12 November 2019"
-msgstr ""
+msgstr "Letzte Aktualisierung am 30. Oktober 2020"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28
@@ -2822,12 +2822,12 @@ msgstr "Nutzungsbedingungen und Datenschutzerklärung der Wikipedia Library Card
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:41
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows users to apply simultaneously for access to multiple publishers’ materials, and makes the administration of and access to Wikipedia Library accounts easy and efficient."
-msgstr ""
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> umfasst Partnerschaften mit Verlagen aus der ganzen Welt, um Benutzern der Wikimedia-Projekte Zugang zu Inhalten zu ermöglichen, die sich sonst hinter Bezahlschranken befänden. Diese Webseite erlaubt es Nutzern, auf die Inhalte mehrerer Verlage gleichzeitig zuzugreifen. Sie will die Verwaltung der Konten und Zugänge von „The Wikipedia Library“ leicht und einfach gestalten."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:48
 msgid "This program is administered by the Wikimedia Foundation (WMF). These terms of use and privacy notice pertain to your application for access to resources through the Wikipedia Library, your use of this website, and your access to and use of those resources. They also describe our handling of the information you provide to us in order to create and administer your Wikipedia Library account. If we make material changes to the terms, we will notify users."
-msgstr ""
+msgstr "Das Programm wird von der Wikimedia Foundation (WMNF) administriert. Diese Nutzungsbedingungen und Datenschutzrichtlinie sind gültig für deinen Zugang zu Inhalten in „the Wikipedia Library“, deine Nutzung dieser Webseite und deinen Zugang sowie die Nutzung der Inhalte. Sie beschreiben außerdem unsere Handhabe an Daten, die du uns übermittelst, um dein Konto bei „The Wikipedia Library“ zu erstellen und zu verwalten. Bei Änderungen an diesen Richtlinien informieren wir unsere Nutzer."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:54
@@ -2837,17 +2837,17 @@ msgstr "Bedingungen für ein Konto bei der Wikipedia Library Card"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:58
 msgid "Access to resources via The Wikipedia Library is reserved for community members who have demonstrated their commitment to the Wikimedia projects, and who will use their access to these resources to improve project content. To that end, in order to be eligible for the Wikipedia Library program, we require that you be registered for a user account on the projects. We give preference to users with at least 500 edits and six (6) months of activity, but these are not strict requirements. We ask that you do not request access to any publishers whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
-msgstr ""
+msgstr "Der Zugang zu Inhalten von „The Wikipedia Library“ ist auf Community-Mitglieder mit aktivem Engagement in den Wikimedia-Projekten beschränkt und ihre Zugänge zu diesen Inhalten zum Verbessern der Projekte verwenden werden. Für die Nutzung von „The Wikipedia Library“ muss daher ein Benutzerkonto in diesen Projekten registriert sein. Bei der Bewerbung berücksichtigen wir vornehmlich Benutzer mit mindestens 500 Bearbeitungen und sechs Monaten Aktivitäten. Dies sind jedoch keine festen Mindestvoraussetzungen. Wir bitten dich jedoch darum, dich auf keine Inhalte von Verlagen zu bewerben, auf die du schon kostenfreien Zugang über eine Bibliothek, Universität oder andere Institutionen oder Organisationen in deiner Nähe Zugang hast, damit wir diesen anderen Personen stattdessen ermöglichen können."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:65
 msgid "Additionally, if you are currently blocked or banned from a Wikimedia project, applications to resources may be rejected or restricted. If you obtain a Wikipedia Library account, but a long-term block or ban is subsequently instituted against you on one of the projects, you may lose access to your Wikipedia Library account."
-msgstr ""
+msgstr "Darüber hinaus kann es sein, dass deine Bewerbungen auf bestimmte Inhalte abgelehnt oder eingeschränkt werden, solltest du gegenwärtig in einem Wikimedia-Projekt gesperrt oder gebannt sein. Solltest du schon ein Konto bei „The Wikipedia Library“ haben und in dieser Zeit eine langfristige Sperre oder einen Bann erhalten, verlierst du unter Umständen deinen Zugang zum Konto bei „The Wikipedia Library“."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:72
 msgid "Wikipedia Library Card accounts do not expire. However, access to an individual publisher’s resources will generally lapse after one year, after which you will either need to apply for renewal or your account will automatically be renewed."
-msgstr ""
+msgstr "Konten bei „The Wikipedia Library“ verfallen nicht einfach. Der jeweilige Zugang zu den Inhalten der Verlage läuft jedoch grundsätzlich nach einem Jahr aus. Sofern er nicht automatisch erneuert wird, musst du dich dafür neu bewerben."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:78
@@ -2858,32 +2858,32 @@ msgstr "Bewerbung für Deine Wikipedia Bibliothek Karte"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:82
 msgid "In order to apply for access to a partner resource, you must provide us with certain information, which we will use to evaluate your application. If your application is approved, we may transfer the information you have given us to the publishers whose resources you wish to access. They will either contact you with the account information directly or we will send access information to you ourselves."
-msgstr ""
+msgstr "Für die Beurteilung deiner Bewerbung auf Inhalte unserer Partner musst du uns bestimmte Daten mitteilen. Wenn deine Bewerbung erfolgreich war, werden wir gegebenenfalls die Daten, die du mit uns für diesen Zweck geteilt hattest, an den Verlag weiterleiten, zu dem du den Zugang erhalten hast. Dafür werden die Verlage uns entweder selbst kontaktieren oder wir versenden die Daten von unserer Seite aus."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:89
 msgid "In addition to the basic information you provide to us, our system will retrieve some information directly from the Wikimedia projects: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights."
-msgstr ""
+msgstr "Über deine direkt übermittelten Angaben hinaus verarbeitet unser System einige Daten von den Wikimedia-Projekten: deinen Benutzernamen, deine ggf. hinterlegte E-Mail-Adresse, deine Bearbeitungszahl, dein Registrierungsdatum, deine Benutzeridentifikationsnummer (ID), deine Benutzergruppen sowie andere Benutzerrechte."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:96
 msgid "Each time you log in to the Wikipedia Library Card Platform, this information will be automatically updated."
-msgstr ""
+msgstr "Jedes Mal, wenn du dich bei „The Wikipedia Library“ einloggst, werden diese Informationen automatisch aktualisiert."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:103
 msgid "We will ask you to provide us with some information about your history of contributions to the Wikimedia projects. Information on contribution history is optional, but will greatly assist us in evaluating your application."
-msgstr ""
+msgstr "Wir werden dich um ein paar Angaben zu deinen bisherigen Bearbeitungen in den Wikimedia-Projekten bitten. Diese Angabe an Daten zu deinen Bearbeitungen ist optional, würde uns aber sehr bei der Beurteilung deiner Bewerbung helfen."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:110
 msgid "The information you provide when creating your account will be visible to you while on the site but not to others unless they are approved Wikipedia Library Coordinators, WMF Staff, or WMF Contractors who need access to this data in order to carry out their work with the Wikipedia Library, all of whom are subject to non-disclosure obligations."
-msgstr ""
+msgstr "Die bei der Anlage deines Kontos gemachten Angaben sind für dich sichtbar, jedoch nicht für andere Nutzer der Webseite. Ausgenommen davon sind Koordinatoren von „The Wikipedia Library“ sowie Mitarbeitenden oder Vertragspartnern der Wikimedia Foundation, die Zugang dazu benötigen, um ihre Arbeit in „The Wikipedia Library“ zu erledigen. Diese haben Vertraulichkeitsvereinbarungen unterschrieben."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:117
 msgid "The following limited information that you provide is public to all users by default: 1) when you created a Wikipedia Library Card account; 2) which publishers’ resources you have applied to access; 3) your rationale for accessing the resources of each partner to which you apply. Editors who do not wish to make points 2 and 3 public may opt out using a checkbox when filing an application."
-msgstr ""
+msgstr "Nur folgende Informationen über deine Aktivitäten sind generell von allen Nutzenden der Webseite einsehbar: 1) wann du ein Konto bei „The Wikipedia Library“ angelegt hast; 2) auf die Inhalte welcher Verlage du dich beworben hast; 3) die Begründungen jeder Bewerbung auf Inhalte eines unserer Partner. Beitragende, die die Punkte 2) und/oder 3) nicht öffentlich machen wollen, können dies bei der Bewerbung deaktivieren."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:123
@@ -2943,29 +2943,29 @@ msgstr "Datenspeicherung und -verarbeitung"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:189
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information:  your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr ""
+msgstr "Die Wikimedia Foundation und unsere Dienstleister nutzen deine Daten für den legitimen Zweck der Bereitstellung von „The Wikipedia Library“ im Interesse unserer gemeinnützigen Mission. Wenn du dich für ein Konto bei „The Wikipedia Library“ bewirbst oder dieses benutzt, sammeln wir routinemäßig die folgenden Daten: 1) deinen Benutzernamen, deine E-Mail-Adresse, deine Bearbeitungszahl, dein Registrierungsdatum, deine Benutzeridentifikationsnummer (ID), deine Benutzergruppen sowie andere Benutzerrechte; 2) deinen Namen, deinen Wohnsitz, deinen Beruf und/oder deine Zugehörigkeit – sofern dies vom Partner verlangt wird, auf dessen Inhalte du dich bewirbst; 3) die Beschreibung deines bisherigen Engagements und die Gründe für deine Bewerbung auf die Inhalte unserer Partner; 4) das Datum der Zustimmung zu diesen Nutzungsrichtlinien."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:197
 #, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr ""
+msgstr "Jeder Verlag, der Teil des Programms von „The Wikipedia Library ist“, verlangt bei der Bewerbung bestimmte andere Daten. Manche Verlage fragen nur die Angabe der E-Mail-Adresse an, während andere detaillierte Daten abfragen, darunter den Namen, den Ort, den Beruf oder die Institutionszugehörigkeit. Sobald du deine Bewerbung beendet hast, wirst du nur nach den Daten gefragt, die vom Verlag verlangt werden; und jeder Verlag erhält auch nur die Daten, die für die Bereitstellung eines Zuganges benötigt werden. Bitte schau auf der <a href=\"%(all_partners_url)s\">Seite mit Informationen zu den Verlagen</a> vorbei, welche Daten vom jeweiligen Verlag für den Zugang zu seinen Inhalten benötigt werden."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:204
 msgid "You can browse the Wikipedia Library site without logging in, but will need to log in to apply or access proprietary partner resources. We use the data provided by you via OAuth and Wikimedia API calls to assess your application for access and to process approved requests."
-msgstr ""
+msgstr "Du kannst die Seite von „The Wikipedia Library“ auch unangemeldet durchsuchen, musst dich für die Bewerbung oder den Zugang von geschützten Inhalten unserer Partner einloggen. Wir verwenden dafür die Daten, die von dir über Abfragen über die Zugangsschnittstelle OAuth sowie die Datenbankschnittstelle „Wikimedia API“ übermittelt werden, um deine Bewerbung für einen Zugang zu beurteilen sowie bestätigte Anfragen weiterzuverarbeiten."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:212
 #, python-format
 msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
-msgstr ""
+msgstr "Für die Verwaltung von „The Wikipedia Library“ werden wir die von dir übermittelten Daten für drei Jahre nach deinem letzten Login aufbewahren, sofern du dein Konto nicht selbstständig wie unten beschrieben löschst. Als angemeldeter Nutzer kannst du auf <a href=\"%(profile_url)s\">your profile page</a> die mit deinem Konto verknüpften Daten einsehen und im JSON-Format herunterladen. Du kannst diese Daten jederzeit aufrufen, aktualisieren, einschränken oder löschen mit Ausnahme der Daten, die automatisch von den Wikimedia-Projekten übertragen werden. Falls du Fragen oder Bedenken bezüglich unseres Umgangs mit deinen Daten haben solltest, kontaktiere bitte <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>. Eine Kommunikation auf Deutsch ist möglich."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:219
 msgid "If you decide to disable your Wikipedia Library account, you can use the delete button on your profile to delete certain personal information associated with your account. We will delete your real name, occupation, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. Note that deletion is not reversible. Deletion of your Wikipedia Library account may also correspond with the removal of any resource access to which you were eligible or approved. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
-msgstr ""
+msgstr "Wenn du dich dafür entscheidest, dein Konto bei „The Wikipedia Library“ zu deaktivieren, kannst du bestimmte damit verbundene persönliche Daten löschen, indem du den Löschen-Button in deinen Einstellungen verwendest. Wir werden deinen echten Namen, deinen Beruf, deine Institutionszugehörigkeit und deinen Wohnsitz löschen. Bitte beachte, dass das System Aufzeichnungen über deinen Wikimedia-Benutzernamen, die Verlage, auf die du dich beworben oder zu denen du Zugang hattest, sowie die Zugangsdaten. Bitte beachte außerdem, dass das Löschen nicht rückgängig gemacht werden kann. Mit dem Löschen deines Kontos bei „The Wikipedia Library“ geht auch das Entfernen von Zugängen zu Inhalten, für die du berechtigt oder bestätigt warst, einher. Wenn du nach Löschung der bisherigen Kontodaten später einen neues Konto beantragen willst, musst du die benötigten Informationen erneut angeben."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:226
