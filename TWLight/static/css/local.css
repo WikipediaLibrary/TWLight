@@ -774,3 +774,9 @@ CLEARING COLUMNS
   color: #fff;
 }
 
+@media (max-width:300px){
+  #footer{
+    position: relative;
+    top: 7px;
+  }
+}
