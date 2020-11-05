@@ -4,6 +4,7 @@
 # Author: A Chinese Wikipedian
 # Author: Abijeet Patro
 # Author: Kly
+# Author: MuratTheTurkish
 # Author: Nikkimaria
 # Author: Sunny00217
 # Author: SupaplexTW
@@ -12,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-26 13:07+0000\n"
-"PO-Revision-Date: 2020-10-29 12:34:36+0000\n"
+"PO-Revision-Date: 2020-11-05 12:36:25+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2805,7 +2806,7 @@ msgstr "維基百科圖書館借閱卡使用條款與隱私聲明"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:41
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows users to apply simultaneously for access to multiple publishers’ materials, and makes the administration of and access to Wikipedia Library accounts easy and efficient."
-msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">維基百科圖書館</a>與全球裡允許使用者來自由取用付費牆形式資源的出版者合作。此網站允許使用者向多個出版者的資料同時申請取用，並且讓管理存取維基百科圖書館帳號方面變得簡單有效。"
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/zh\">維基百科圖書館</a>與全球裡允許使用者來自由取用付費牆形式資源的出版者合作。此網站允許使用者向多個出版者的資料同時申請取用，並且讓管理存取維基百科圖書館帳號方面變得簡單有效。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:48

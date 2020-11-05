@@ -5,6 +5,7 @@
 # Author: Dr. Mohammed
 # Author: Jsn.sherman
 # Author: Meno25
+# Author: MuratTheTurkish
 # Author: Nikkimaria
 # Author: Sonic N800
 # Author: Tala Ali
@@ -17,7 +18,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-26 13:06+0000\n"
-"PO-Revision-Date: 2020-10-29 12:34:31+0000\n"
+"PO-Revision-Date: 2020-11-05 12:36:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -2885,7 +2886,7 @@ msgstr "بيان شروط استخدام بطاقة مكتبة ويكيبيدي�
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:41
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows users to apply simultaneously for access to multiple publishers’ materials, and makes the administration of and access to Wikipedia Library accounts easy and efficient."
-msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">مكتبة ويكيبيديا</a> عقدت شراكة مع الناشرين في جميع أنحاء العالم للسماح للمستخدمين بالوصول إلى الموارد المدفوعة بطريقة أخرى، يتيح موقع الويب هذا للمستخدمين إمكانية التقديم في وقت واحد للوصول إلى مواد ناشرين متعددين ط، ويجعل إدارة حسابات مكتبة ويكيبيديا والوصول إليها سهلا وفعالا."
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/ar\">مكتبة ويكيبيديا</a> عقدت شراكة مع الناشرين في جميع أنحاء العالم للسماح للمستخدمين بالوصول إلى الموارد المدفوعة بطريقة أخرى، يتيح موقع الويب هذا للمستخدمين إمكانية التقديم في وقت واحد للوصول إلى مواد ناشرين متعددين ط، ويجعل إدارة حسابات مكتبة ويكيبيديا والوصول إليها سهلا وفعالا."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:48

@@ -11,6 +11,7 @@
 # Author: Martin Rulsch (WMDE)
 # Author: Metalhead64
 # Author: Mirzali
+# Author: MuratTheTurkish
 # Author: Quedel
 # Author: Sabelöga
 # Author: SoWhy
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-26 13:06+0000\n"
-"PO-Revision-Date: 2020-11-02 12:02:37+0000\n"
+"PO-Revision-Date: 2020-11-05 12:36:20+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2137,7 +2138,7 @@ msgstr "Dieses Werk ist unter der <a rel=\"license\" href=\"http://creativecommo
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/base.html:242
 msgid "About"
-msgstr "Über"
+msgstr "Informationen"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
 #: TWLight/templates/base.html:248
@@ -2147,12 +2148,12 @@ msgstr "Nutzungsbedingungen und Datenschutzerklärung"
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
 #: TWLight/templates/base.html:260
 msgid "Feedback"
-msgstr "Rückmeldung"
+msgstr "Feedback"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of available partners.
 #: TWLight/templates/dashboard.html:17
 msgid "Total partners"
-msgstr "Partner ingesamt"
+msgstr "Partner insgesamt"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a button which goes to the full list of available partners.
 #: TWLight/templates/dashboard.html:24
@@ -2822,7 +2823,7 @@ msgstr "Nutzungsbedingungen und Datenschutzerklärung der Wikipedia Library Card
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:41
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows users to apply simultaneously for access to multiple publishers’ materials, and makes the administration of and access to Wikipedia Library accounts easy and efficient."
-msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> umfasst Partnerschaften mit Verlagen aus der ganzen Welt, um Benutzern der Wikimedia-Projekte Zugang zu Inhalten zu ermöglichen, die sich sonst hinter Bezahlschranken befänden. Diese Webseite erlaubt es Nutzern, auf die Inhalte mehrerer Verlage gleichzeitig zuzugreifen. Sie will die Verwaltung der Konten und Zugänge von „The Wikipedia Library“ leicht und einfach gestalten."
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/de\">The Wikipedia Library</a> umfasst Partnerschaften mit Verlagen aus der ganzen Welt, um Benutzern der Wikimedia-Projekte Zugang zu Inhalten zu ermöglichen, die sich sonst hinter Bezahlschranken befänden. Diese Webseite erlaubt es Nutzern, auf die Inhalte mehrerer Verlage gleichzeitig zuzugreifen. Sie will die Verwaltung der Konten und Zugänge von „The Wikipedia Library“ leicht und einfach gestalten."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:48

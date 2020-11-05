@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-26 13:07+0000\n"
-"PO-Revision-Date: 2020-10-29 12:34:35+0000\n"
+"PO-Revision-Date: 2020-11-05 12:36:23+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2806,7 +2806,7 @@ msgstr "Termos de Uso e Declaração de Privacidade do Cartão de Biblioteca da 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:41
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows users to apply simultaneously for access to multiple publishers’ materials, and makes the administration of and access to Wikipedia Library accounts easy and efficient."
-msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">A Biblioteca da Wikipédia</a> estabeleceu parcerias com editoras de todo o mundo para permitir que os usuários acessem a recursos que, de outra forma, seriam pagos. Este <i>site</i> da Internet permite que os usuários se candidatem simultaneamente a acesso ao conteúdo de várias editoras e torna fácil e eficiente a administração de contas da Biblioteca da Wikipédia, e o acesso às mesmas."
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/pt-br\">A Biblioteca da Wikipédia</a> estabeleceu parcerias com editoras de todo o mundo para permitir que os usuários acessem a recursos que, de outra forma, seriam pagos. Este <i>site</i> da Internet permite que os usuários se candidatem simultaneamente a acesso ao conteúdo de várias editoras e torna fácil e eficiente a administração de contas da Biblioteca da Wikipédia, e o acesso às mesmas."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:48

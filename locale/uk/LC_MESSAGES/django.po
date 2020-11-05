@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-10-26 13:07+0000\n"
-"PO-Revision-Date: 2020-10-29 12:34:36+0000\n"
+"PO-Revision-Date: 2020-11-05 12:36:24+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2854,7 +2854,7 @@ msgstr "Умови використання та Заява про приват�
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:41
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows users to apply simultaneously for access to multiple publishers’ materials, and makes the administration of and access to Wikipedia Library accounts easy and efficient."
-msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">Бібліотека Вікіпедії</a> має партнерські зв'язки з видавцями по всьому світу, що дозволяє користувачам отримувати доступ до ресурсів, що інакше є платними. Цей вебсайт дозволяє користувачам одночасно подавати заявку на доступ до матеріалів багатьох видавців і робить адміністрування й доступ до облікових записів Бібліотеки Вікімедіа простим та ефективним."
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/uk\">Бібліотека Вікіпедії</a> має партнерські зв'язки з видавцями по всьому світу, що дозволяє користувачам отримувати доступ до ресурсів, що інакше є платними. Цей вебсайт дозволяє користувачам одночасно подавати заявку на доступ до матеріалів багатьох видавців і робить адміністрування й доступ до облікових записів Бібліотеки Вікімедіа простим та ефективним."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:48
