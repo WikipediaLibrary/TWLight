@@ -439,6 +439,13 @@ class Partner(models.Model):
             raise ValidationError(
                 "Partners with automatically sent messages require user instructions to be entered"
             )
+        if self.authorization_method in [self.PROXY, self.BUNDLE] and (
+            not self.specific_stream
+        ):
+            # Validate that target_url should not be empty
+            # when authorization method is PROXY or BUNDLE
+            if not self.target_url:
+                raise ValidationError("Proxy and Bundle partners require a target URL.")
 
     def get_absolute_url(self):
         return reverse_lazy("partners:detail", kwargs={"pk": self.pk})
