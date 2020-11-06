@@ -15,7 +15,7 @@ django-premailer
 django-request==1.5.6
 django-reversion==3.0.8
 django-taggit==1.3.0
-djangorestframework==3.12.1
+djangorestframework==3.12.2
 djmail==2.0.0
 docutils==0.16
 factory_boy>=2.10.0,<4.0
