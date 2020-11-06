@@ -236,11 +236,6 @@
 {% endblock %}
 
 {% block javascript %}
-  <script
-    src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/2.2.4/jquery.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
-
   {% comment %}
     Needed for select/deselect all function on main list page. Can't be included
     there because, as an included template, it doesn't get to extend this block.
