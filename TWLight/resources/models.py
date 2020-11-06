@@ -101,6 +101,7 @@ class Language(models.Model):
         max_length=8,
         validators=[validate_language_code],
         unique=True,
+        default=RESOURCE_LANGUAGES[16]
     )
 
     def save(self, *args, **kwargs):
