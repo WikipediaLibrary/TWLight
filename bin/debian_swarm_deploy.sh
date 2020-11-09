@@ -13,6 +13,9 @@ apt update && apt upgrade -y
 # Install docker
 apt install -y docker-ce docker-ce-cli containerd.io
 
+# Cleanup unneeded packages
+apt autoremove
+
 # Install docker compose
 latest=$(curl https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')
 curl -L "https://github.com/docker/compose/releases/download/${latest}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
