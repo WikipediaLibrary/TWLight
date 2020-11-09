@@ -12,11 +12,17 @@ apt update && apt upgrade -y
 
 # Install docker
 apt install -y docker-ce docker-ce-cli containerd.io
-curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+# Cleanup unneeded packages
+apt autoremove -y
+
+# Install docker compose
+latest=$(curl https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')
+curl -L "https://github.com/docker/compose/releases/download/${latest}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 # Add twlight user
-adduser twlight --disabled-password --quiet ||:
+adduser twlight --disabled-password --quiet --gecos "" ||:
 usermod -a -G docker twlight
 
 # Pull TWLight code and make twlight user the owner
@@ -72,11 +78,11 @@ docker stack deploy -c "docker-compose.yml" -c "docker-compose.${TWLIGHT_STACK_E
 
 echo "Setting up crontab. *WARNING* This will create duplicate jobs if run repeatedly."
 (crontab -l 2>/dev/null; echo "# Reclaim disk space previously used by docker.") | crontab -
-(crontab -l 2>/dev/null; echo '0 5 * * * docker system prune -a -f; docker volume rm $(docker volume ls -qf dangling=true)') | crontab -
+(crontab -l 2>/dev/null; echo '0 5 * * * docker system prune -a -f; docker volume rm \$(docker volume ls -qf dangling=true)') | crontab -
 (crontab -l 2>/dev/null; echo "# Run django_cron tasks.") | crontab -
-(crontab -l 2>/dev/null; echo '*/5 * * * *  docker exec -t $(docker ps -q -f name="${TWLIGHT_STACK_ENV}_twlight") /app/bin/twlight_docker_entrypoint.sh python manage.py runcrons') | crontab -
+(crontab -l 2>/dev/null; echo '*/5 * * * *  docker exec -t \$(docker ps -q -f name=${TWLIGHT_STACK_ENV}_twlight) /app/bin/twlight_docker_entrypoint.sh python manage.py runcrons') | crontab -
 (crontab -l 2>/dev/null; echo "# Update the running TWLight service if there is a new image. The initial pull is just to verify that the image is valid. Otherwise an inaccessible image could break the service.") | crontab -
-(crontab -l 2>/dev/null; echo '*/5 * * * *  docker pull "wikipedialibrary/twlight:branch_${TWLIGHT_GIT_BRANCH}" >/dev/null && docker service update --image "wikipedialibrary/twlight:branch_${TWLIGHT_GIT_BRANCH}" "${TWLIGHT_STACK_ENV}_twlight"') | crontab -
+(crontab -l 2>/dev/null; echo '*/5 * * * *  docker pull wikipedialibrary/twlight:branch_${TWLIGHT_GIT_BRANCH} >/dev/null && docker service update --image wikipedialibrary/twlight:branch_${TWLIGHT_GIT_BRANCH} ${TWLIGHT_STACK_ENV}_twlight') | crontab -
 
 EOF
 sudo su --login twlight /usr/bin/env bash -c "${TWLIGHT}"
