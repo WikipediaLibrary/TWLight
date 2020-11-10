@@ -1716,7 +1716,9 @@ class ManagementCommandsTestCase(TestCase):
             global_userinfo=self.global_userinfo_editor,
         )
         self.editor.refresh_from_db()
-        self.assertEqual(self.editor.wp_editcount, self.editor.wp_editcount_prev)
+        self.assertEqual(self.editor.wp_editcount, 5000)
+        self.assertEqual(self.editor.wp_editcount_prev, 42)
+        self.assertEqual(self.editor.wp_editcount_recent, 4958)
         self.assertTrue(self.editor.wp_bundle_eligible)
 
         # A valid editor should pass 31 days after their last update, so long as they made enough edits.
