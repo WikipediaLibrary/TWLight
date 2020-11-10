@@ -229,9 +229,9 @@ def editor_recent_edits(
         current_datetime = timezone.now()
 
     # If we have historical data, see how many days have passed and how many edits have been made since the last check.
-    if wp_editcount_prev_updated and wp_editcount_updated:
-        editcount_update_delta = current_datetime - wp_editcount_prev_updated
-        editcount_delta = global_userinfo_editcount - wp_editcount_prev
+    if wp_editcount and wp_editcount_updated:
+        editcount_update_delta = current_datetime - wp_editcount_updated
+        editcount_delta = global_userinfo_editcount - wp_editcount
         if (
             # If the editor didn't have enough recent edits but they do now, update the counts immediately.
             # This recognizes their eligibility as soon as possible.
