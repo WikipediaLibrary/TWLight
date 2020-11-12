@@ -236,6 +236,10 @@ def editor_recent_edits(
     ):
         editcount_update_delta = wp_editcount_updated - wp_editcount_prev_updated
         editcount_delta = global_userinfo_editcount - wp_editcount_prev
+        # We want to hang on to wp_editcount_prev and wp_editcount_prev as long as they are fresh.
+        # This will let them survive the shift that happens further down.
+        wp_editcount = wp_editcount_prev
+        wp_editcount_updated = wp_editcount_prev_updated
     # If we have normal historical data, see how many days have passed and how many edits have been made since the last check.
     elif wp_editcount and wp_editcount_updated:
         editcount_update_delta = current_datetime - wp_editcount_updated
