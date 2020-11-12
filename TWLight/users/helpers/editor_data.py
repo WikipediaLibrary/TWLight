@@ -228,28 +228,41 @@ def editor_recent_edits(
     if not current_datetime:
         current_datetime = timezone.now()
 
-    # If we have historical data, see how many days have passed and how many edits have been made since the last check.
-    if wp_editcount and wp_editcount_updated:
+    # If we have historical data that might let us fix eligibility issues, use wp_editcount_prev to do so.
+    if (
+        wp_editcount_prev
+        and wp_editcount_prev_updated
+        and (current_datetime - wp_editcount_prev_updated).days < 31
+    ):
+        editcount_update_delta = wp_editcount_updated - wp_editcount_prev_updated
+        editcount_delta = global_userinfo_editcount - wp_editcount_prev
+        # We want to hang on to wp_editcount_prev and wp_editcount_prev as long as they are fresh.
+        # This will let them survive the shift that happens further down.
+        wp_editcount = wp_editcount_prev
+        wp_editcount_updated = wp_editcount_prev_updated
+    # If we have normal historical data, see how many days have passed and how many edits have been made since the last check.
+    elif wp_editcount and wp_editcount_updated:
         editcount_update_delta = current_datetime - wp_editcount_updated
         editcount_delta = global_userinfo_editcount - wp_editcount
-        if (
-            # If the editor didn't have enough recent edits but they do now, update the counts immediately.
-            # This recognizes their eligibility as soon as possible.
-            (not wp_enough_recent_edits and editcount_delta >= 10)
-            # If the user had enough edits, just update the counts after 30 days.
-            # This means that eligibility always lasts at least 30 days.
-            or (wp_enough_recent_edits and editcount_update_delta.days > 30)
-        ):
-            wp_editcount_recent = global_userinfo_editcount - wp_editcount
-            # Shift the currently stored counts into the "prev" fields for use in future checks.
-            wp_editcount_prev = wp_editcount
-            wp_editcount_prev_updated = wp_editcount_updated
-
     # If we don't have any historical editcount data, let all edits to date count
     else:
-        wp_editcount_prev = global_userinfo_editcount
-        wp_editcount_prev_updated = current_datetime
-        wp_editcount_recent = global_userinfo_editcount
+        editcount_update_delta = current_datetime - timedelta(days=31)
+        editcount_delta = global_userinfo_editcount
+        wp_editcount = global_userinfo_editcount
+        wp_editcount_updated = current_datetime
+
+    if (
+        # If the editor didn't have enough recent edits but they do now, update the counts immediately.
+        # This recognizes their eligibility as soon as possible.
+        (not wp_enough_recent_edits and editcount_delta >= 10)
+        # If the user had enough edits, just update the counts after 30 days.
+        # This means that eligibility always lasts at least 30 days.
+        or (wp_enough_recent_edits and editcount_update_delta.days > 30)
+    ):
+        # Shift the currently stored counts into the "prev" fields for use in future checks.
+        wp_editcount_prev = wp_editcount
+        wp_editcount_prev_updated = wp_editcount_updated
+        wp_editcount_recent = editcount_delta
 
     # Perform the check for enough recent edits.
     if wp_editcount_recent >= 10:
