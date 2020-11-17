@@ -33,6 +33,11 @@ class Command(BaseCommand):
             action="store",
             help="specify Wikipedia global_userinfo data. Defaults to fetching live data. Currently only used for faking command runs in tests.",
         )
+        parser.add_argument(
+            "--timedelta_days",
+            action="store",
+            help="Number of days used to define 'recent' edits. Defaults to 30. Currently only used for faking command runs in tests.",
+        )
 
     def handle(self, *args, **options):
         """
@@ -50,15 +55,19 @@ class Command(BaseCommand):
         # Default behavior is to use current datetime for timestamps.
         now_or_datetime = now()
         datetime_override = None
+        timedelta_days = 30
 
         # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
         if options["datetime"]:
             datetime_override = now_or_datetime.fromisoformat(options["datetime"])
             now_or_datetime = datetime_override
 
+        if options["timedelta_days"]:
+            timedelta_days = int(options["timedelta_days"])
+
         # Get all editors who have not been updated in more than 30 days.
         editors = Editor.objects.filter(
-            wp_editcount_updated__lt=now_or_datetime - timedelta(days=30)
+            wp_editcount_updated__lt=now_or_datetime - timedelta(days=timedelta_days)
         )
         for editor in editors:
             # `global_userinfo` data may be overridden.
