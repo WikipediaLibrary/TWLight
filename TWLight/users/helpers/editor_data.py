@@ -233,6 +233,8 @@ def editor_recent_edits(
         wp_editcount_prev
         and wp_editcount_prev_updated
         and (current_datetime - wp_editcount_prev_updated).days < 31
+        and global_userinfo_editcount - wp_editcount_prev >= 10
+        and global_userinfo_editcount - wp_editcount < 10
     ):
         editcount_update_delta = wp_editcount_updated - wp_editcount_prev_updated
         editcount_delta = global_userinfo_editcount - wp_editcount_prev
@@ -252,9 +254,9 @@ def editor_recent_edits(
         wp_editcount_updated = current_datetime
 
     if (
-        # If the editor didn't have enough recent edits but they do now, update the counts immediately.
+        # If the editcount delta is big enough, update the counts immediately.
         # This recognizes their eligibility as soon as possible.
-        (not wp_enough_recent_edits and editcount_delta >= 10)
+        editcount_delta >= 10
         # If the user had enough edits, just update the counts after 30 days.
         # This means that eligibility always lasts at least 30 days.
         or (wp_enough_recent_edits and editcount_update_delta.days > 30)

@@ -1707,13 +1707,24 @@ class ManagementCommandsTestCase(TestCase):
         # 1st time bundle check should always pass for a valid editor.
         self.assertTrue(self.editor.wp_bundle_eligible)
 
-        # A valid editor should pass 31 days after their first login, even if they haven't made any more edits.
+        # A valid editor should pass editcount checks for 31 days after their first login, even if they haven't made any more edits.
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=31)
+                self.editor.wp_editcount_updated + timedelta(days=5)
             ),
             global_userinfo=self.global_userinfo_editor,
+            timedelta_days=4,
+        )
+        self.editor.refresh_from_db()
+        self.assertTrue(self.editor.wp_bundle_eligible)
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.editor.wp_editcount_updated + timedelta(days=26)
+            ),
+            global_userinfo=self.global_userinfo_editor,
+            timedelta_days=25,
         )
         self.editor.refresh_from_db()
         self.assertEqual(self.editor.wp_editcount, 5000)
@@ -1741,7 +1752,7 @@ class ManagementCommandsTestCase(TestCase):
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=10)
+                self.editor.wp_editcount_updated + timedelta(days=5)
             ),
             global_userinfo=self.global_userinfo_editor,
         )
@@ -1752,8 +1763,45 @@ class ManagementCommandsTestCase(TestCase):
         self.assertEqual(self.editor.wp_editcount_recent, 10)
         self.assertTrue(self.editor.wp_bundle_eligible)
 
+        # wp_editcount should always be updated, but wp_editcount should be left alone if the delta is < 10.
+        # This allows access to last at least 30 days.
+        self.global_userinfo_editor["editcount"] = 5012
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.editor.wp_editcount_updated + timedelta(days=5)
+            ),
+            global_userinfo=self.global_userinfo_editor,
+            timedelta_days=4,
+        )
+
+        self.editor.refresh_from_db()
+        self.assertEqual(self.editor.wp_editcount, 5012)
+        self.assertEqual(self.editor.wp_editcount_prev, 5000)
+        self.assertEqual(self.editor.wp_editcount_recent, 10)
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
+        # wp_editcount_prev should be updated too if the delta is >= 10.
+        # This allows continuous access as editors contribute over time.
+        # Otherwise, they would lose access after 30 days, even if they contributed enough during the access window.
+        self.global_userinfo_editor["editcount"] = 5025
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.editor.wp_editcount_updated + timedelta(days=5)
+            ),
+            global_userinfo=self.global_userinfo_editor,
+            timedelta_days=4,
+        )
+
+        self.editor.refresh_from_db()
+        self.assertEqual(self.editor.wp_editcount, 5025)
+        self.assertEqual(self.editor.wp_editcount_prev, 5012)
+        self.assertEqual(self.editor.wp_editcount_recent, 13)
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
         # Editors who haven't made enough edits in the last 31 days are not eligible.
-        self.global_userinfo_editor["editcount"] = 5010
+        self.global_userinfo_editor["editcount"] = 5025
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
@@ -1763,8 +1811,8 @@ class ManagementCommandsTestCase(TestCase):
         )
 
         self.editor.refresh_from_db()
-        self.assertEqual(self.editor.wp_editcount, 5010)
-        self.assertEqual(self.editor.wp_editcount_prev, 5010)
+        self.assertEqual(self.editor.wp_editcount, 5025)
+        self.assertEqual(self.editor.wp_editcount_prev, 5025)
         self.assertEqual(self.editor.wp_editcount_recent, 0)
         self.assertFalse(self.editor.wp_bundle_eligible)
 
