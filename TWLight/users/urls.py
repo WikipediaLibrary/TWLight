@@ -52,4 +52,9 @@ urlpatterns = [
         views.LibraryRedirectView.as_view(),
         name="my_collection",
     ),
+    url(
+        r"^withdraw/(?P<pk>\d+)/(?P<id>\d+)/$",
+        login_required(views.WithdrawApplication.as_view()),
+        name="withdraw",
+    ),
 ]

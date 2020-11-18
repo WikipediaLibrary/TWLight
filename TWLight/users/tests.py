@@ -311,6 +311,23 @@ class ViewsTestCase(TestCase):
         # Client), and testing that the rendered content is equal to an
         # expected string is too fragile.
 
+    def test_withdraw_application(self):
+        app = ApplicationFactory(
+            status=Application.PENDING,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
+        factory = RequestFactory()
+        request = factory.get(
+            reverse("users:withdraw", kwargs={"pk": self.editor1.pk, "id": app.pk})
+        )
+        request.user = self.user_editor
+        response = views.WithdrawApplication.as_view()(
+            request, pk=self.editor1.pk, id=app.pk
+        )
+        app.refresh_from_db()
+        self.assertEqual(app.status, Application.INVALID)
+
     def test_my_library_page_has_authorizations(self):
 
         # a coordinator with a session.
