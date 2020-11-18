@@ -233,7 +233,7 @@ def editor_recent_edits(
         and global_userinfo_editcount - wp_editcount_prev >= 10
         and global_userinfo_editcount - wp_editcount < 10
     ):
-        editcount_update_delta = wp_editcount_updated - wp_editcount_prev_updated
+        editcount_update_delta = (wp_editcount_updated - wp_editcount_prev_updated).days
         editcount_delta = global_userinfo_editcount - wp_editcount_prev
         # We want to hang on to wp_editcount_prev and wp_editcount_prev as long as they are fresh.
         # This will let them survive the shift that happens further down.
@@ -241,22 +241,21 @@ def editor_recent_edits(
         wp_editcount_updated = wp_editcount_prev_updated
     # If we have normal historical data, see how many days have passed and how many edits have been made since the last check.
     elif wp_editcount and wp_editcount_updated:
-        editcount_update_delta = current_datetime - wp_editcount_updated
+        editcount_update_delta = (current_datetime - wp_editcount_updated).days
         editcount_delta = global_userinfo_editcount - wp_editcount
     # If we don't have any historical editcount data, let all edits to date count
     else:
-        editcount_update_delta = current_datetime - timedelta(days=31)
+        editcount_update_delta = 31
         editcount_delta = global_userinfo_editcount
         wp_editcount = global_userinfo_editcount
         wp_editcount_updated = current_datetime
-
     if (
         # If the editcount delta is big enough, update the counts immediately.
         # This recognizes their eligibility as soon as possible.
         editcount_delta >= 10
         # If the user had enough edits, just update the counts after 30 days.
         # This means that eligibility always lasts at least 30 days.
-        or editcount_update_delta.days > 30
+        or editcount_update_delta > 30
     ):
         # Shift the currently stored counts into the "prev" fields for use in future checks.
         wp_editcount_prev = wp_editcount
