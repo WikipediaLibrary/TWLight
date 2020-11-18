@@ -196,7 +196,6 @@ def editor_recent_edits(
     wp_editcount_prev_updated: datetime.date,
     wp_editcount_prev: int,
     wp_editcount_recent: int,
-    wp_enough_recent_edits: bool,
     current_datetime: timezone = None,
 ):
     """
@@ -215,8 +214,6 @@ def editor_recent_edits(
         historical editcount used to calculate recent edits
     wp_editcount_recent : int
         recent editcount used to determine bundle eligibility
-    wp_enough_recent_edits : bool
-        current recent edit status as stored in database
     current_datetime : timezone
         optional timezone-aware timestamp override that represents now()
 
@@ -259,7 +256,7 @@ def editor_recent_edits(
         editcount_delta >= 10
         # If the user had enough edits, just update the counts after 30 days.
         # This means that eligibility always lasts at least 30 days.
-        or (wp_enough_recent_edits and editcount_update_delta.days > 30)
+        or editcount_update_delta.days > 30
     ):
         # Shift the currently stored counts into the "prev" fields for use in future checks.
         wp_editcount_prev = wp_editcount

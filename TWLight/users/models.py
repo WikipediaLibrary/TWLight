@@ -441,7 +441,6 @@ class Editor(models.Model):
                 self.wp_editcount_prev_updated,
                 self.wp_editcount_prev,
                 self.wp_editcount_recent,
-                self.wp_enough_recent_edits,
             )
             self.wp_editcount = global_userinfo["editcount"]
             self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])

@@ -92,7 +92,6 @@ class Command(BaseCommand):
                     editor.wp_editcount_prev_updated,
                     editor.wp_editcount_prev,
                     editor.wp_editcount_recent,
-                    editor.wp_enough_recent_edits,
                     datetime_override,
                 )
                 # Set current editcount.

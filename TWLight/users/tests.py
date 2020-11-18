@@ -1088,7 +1088,6 @@ class EditorModelTestCase(TestCase):
             None,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
-            self.test_editor.wp_enough_recent_edits,
         )
         bundle_eligible = editor_bundle_eligible(self.test_editor)
         self.assertTrue(bundle_eligible)
@@ -1110,7 +1109,6 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
-            self.test_editor.wp_enough_recent_edits,
         )
         bundle_eligible = editor_bundle_eligible(self.test_editor)
         self.assertTrue(bundle_eligible)
@@ -1132,7 +1130,6 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
-            self.test_editor.wp_enough_recent_edits,
         )
         bundle_eligible = editor_bundle_eligible(self.test_editor)
         self.assertFalse(bundle_eligible)
@@ -1150,7 +1147,6 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
-            self.test_editor.wp_enough_recent_edits,
         )
         bundle_eligible = editor_bundle_eligible(self.test_editor)
         self.test_editor.wp_editcount_updated = now()
@@ -1179,7 +1175,6 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
-            self.test_editor.wp_enough_recent_edits,
         )
         bundle_eligible = editor_bundle_eligible(self.test_editor)
         self.test_editor.wp_editcount = global_userinfo["editcount"]
@@ -1253,7 +1248,6 @@ class EditorModelTestCase(TestCase):
             self.test_editor.wp_editcount_prev_updated,
             self.test_editor.wp_editcount_prev,
             self.test_editor.wp_editcount_recent,
-            self.test_editor.wp_enough_recent_edits,
         )
         self.test_editor.wp_bundle_eligible = editor_bundle_eligible(self.test_editor)
         self.test_editor.save()
