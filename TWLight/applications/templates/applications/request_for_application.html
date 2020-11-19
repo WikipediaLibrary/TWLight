@@ -19,11 +19,12 @@
 
 {% comment %}Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.{% endcomment %}
 <h1>{% trans 'What resources do you want to access?' %}</h1>
- <div class="well well-sm">
-      {% blocktrans trimmed %}
+<div class="well well-sm">
+  {% comment %}Translators: This text explains that Library Bundle partners are not shown in this list.{% endcomment %}
+    {% blocktrans trimmed %}
       Library Bundle partners are not shown as eligibility is determined automatically.
     {% endblocktrans %}
-  </div>
+</div>
 
 
 <form method="post">
