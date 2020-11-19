@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-10-29 12:34:34+0000\n"
+"PO-Revision-Date: 2020-11-19 15:03:28+0000\n"
 "X-POT-Import-Date: 2020-10-08 12:05:05+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -639,7 +639,7 @@ msgstr "Belum ditinjau."
 #. Translators: On the page listing applications, this text is displayed when there aren't any applications to list.
 #: TWLight/applications/templates/applications/application_list_include.html:65
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:102
-#: TWLight/users/templates/users/my_applications.html:85
+#: TWLight/users/templates/users/my_applications.html:91
 msgid "No applications right now."
 msgstr "Tiada permohonan pada masa ini."
 
@@ -2615,17 +2615,17 @@ msgid "You can help translate the tool at <a href=\"https://translatewiki.net/wi
 msgstr ""
 
 #. Translators: On the page listing applications, this text labels an area where users can either request for renewals, or be shown a message of why they cannot renew.
-#: TWLight/users/templates/users/my_applications.html:66
+#: TWLight/users/templates/users/my_applications.html:72
 msgid "Has your account expired?"
 msgstr "Adakah akaun anda telah mansuh?"
 
 #. Translators: On the page listing applications, this text labels a link which users can click to request a renewal of their application.
-#: TWLight/users/templates/users/my_applications.html:69
+#: TWLight/users/templates/users/my_applications.html:75
 msgid "Request renewal"
 msgstr "Minta pembaharuan"
 
 #. Translators: On the page listing applications, this text explains a user they cannot renew their application since they've already requested a renewal or there aren't any renewals available.
-#: TWLight/users/templates/users/my_applications.html:72
+#: TWLight/users/templates/users/my_applications.html:78
 msgid "Renewals are either not required, not available right now, or you have already requested a renewal."
 msgstr "Pembaharuan sama ada tidak diperlukan, tidak ada pada masa ini, atau anda telah meminta pembaharuan."
 
