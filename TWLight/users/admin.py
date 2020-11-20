@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 
-from TWLight.users.models import Editor, UserProfile, Authorization, get_company_name
+from TWLight.users.models import Editor, EditorLog, UserProfile, Authorization, get_company_name
 from TWLight.users.forms import AuthorizationAdminForm, AuthorizationInlineForm
 
 
@@ -15,7 +15,12 @@ class EditorInline(admin.StackedInline):
     extra = 1
     can_delete = False
     raw_id_fields = ("user",)
+    readonly_fields = ("wp_editcount", "wp_editcount_updated",)
 
+class EditorLogInline(admin.StackedInline):
+    model = EditorLog
+    can_delete = False
+    raw_id_fields = ("editor",)
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
@@ -112,6 +117,18 @@ class UserAdmin(AuthUserAdmin):
 
     get_wp_username.short_description = "Username"
 
+class EditorLogAdmin(admin.ModelAdmin):
+    model = EditorLog
+    list_display = (
+        "editor",
+        "timestamp",
+        "editcount",
+    )
+    search_fields = [
+        "editor__wp_username",
+    ]
+
+admin.site.register(EditorLog, EditorLogAdmin)
 
 # Unregister old user admin; register new, improved user admin.
 admin.site.unregister(User)
