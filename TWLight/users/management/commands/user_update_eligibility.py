@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 import logging
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
@@ -21,7 +21,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         """
-        Adds `datetime` and `global_userinfo` arguments.
+        Adds command arguments.
         """
         parser.add_argument(
             "--datetime",
@@ -31,12 +31,17 @@ class Command(BaseCommand):
         parser.add_argument(
             "--global_userinfo",
             action="store",
-            help="specify Wikipedia global_userinfo data. Defaults to fetching live data. Currently only used for faking command runs in tests.",
+            help="Specify Wikipedia global_userinfo data. Defaults to fetching live data. Currently only used for faking command runs in tests.",
         )
         parser.add_argument(
             "--timedelta_days",
             action="store",
             help="Number of days used to define 'recent' edits. Defaults to 30. Currently only used for faking command runs in tests.",
+        )
+        parser.add_argument(
+            "--wp_username",
+            action="store",
+            help="Specify a single editor to update. Other arguments and filters still apply.",
         )
 
     def handle(self, *args, **options):
@@ -57,18 +62,28 @@ class Command(BaseCommand):
         datetime_override = None
         timedelta_days = 30
 
+        wp_username = None
+
         # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
+        # This is also passed to the helper function.
         if options["datetime"]:
             datetime_override = now_or_datetime.fromisoformat(options["datetime"])
             now_or_datetime = datetime_override
 
+        # These are used to limit the set of editors updated by the command.
+        # Nothing is passed to the helper function.
         if options["timedelta_days"]:
             timedelta_days = int(options["timedelta_days"])
 
-        # Get all editors who have not been updated in more than 30 days.
+        # Get editors with data that's about to become stale, with an option to limit on wp_username.
         editors = Editor.objects.filter(
             wp_editcount_updated__lt=now_or_datetime - timedelta(days=timedelta_days)
         )
+
+        # Optional wp_username filter.
+        if options["wp_username"]:
+                editors = editors.filter(wp_username=str(options["wp_username"]))
+
         for editor in editors:
             # `global_userinfo` data may be overridden.
             if options["global_userinfo"]:
