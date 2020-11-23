@@ -26,4 +26,8 @@ class Migration(migrations.Migration):
             model_name="editor",
             name="wp_editcount_updated",
         ),
+        migrations.RemoveField(
+            model_name="editor",
+            name="wp_editcount_recent",
+        ),
     ]
