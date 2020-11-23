@@ -64,7 +64,6 @@ class EditorFactory(factory.django.DjangoModelFactory):
     occupation = "Cat floofer"
     affiliation = "Institut Pasteur"
     wp_username = factory.Faker("name", locale=random.choice(settings.FAKER_LOCALES))
-    wp_editcount = 42
     wp_registered = datetime.today()
     # Increment counter each time we create an editor so that we don't fail
     # the wp_sub + home_wiki uniqueness constraint on Editor.
@@ -72,3 +71,7 @@ class EditorFactory(factory.django.DjangoModelFactory):
     wp_groups = json.dumps(["some groups"])
     wp_rights = json.dumps(["some rights"])
     contributions = "Cat floofing, telemetry, fermentation"
+
+    @classmethod
+    def _after_postgeneration(cls, instance, create, results=None):
+        instance.update_editcount(42)
