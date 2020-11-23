@@ -235,9 +235,10 @@ class Editor(models.Model):
         -------
         int : Most recently recorded Wikipedia editcount
         """
-        log = EditorLog.objects.filter(editor=self).latest("timestamp")
-        if log:
-            return log.editcount
+        try:
+            return (EditorLog.objects.filter(editor=self).latest("timestamp")).editcount
+        except models.ObjectDoesNotExist:
+            pass
 
     @property
     def wp_editcount_updated(self):
@@ -251,9 +252,10 @@ class Editor(models.Model):
         -------
         datetime.datetime : datetime that editcount was recorded
         """
-        log = EditorLog.objects.filter(editor=self).latest("timestamp")
-        if log:
-            return log.timestamp
+        try:
+            return (EditorLog.objects.filter(editor=self).latest("timestamp")).timestamp
+        except models.ObjectDoesNotExist:
+            pass
 
     def wp_editcount_prev(
         self,
