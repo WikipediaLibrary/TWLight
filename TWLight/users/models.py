@@ -40,7 +40,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.db import models
 from django.db.models import Q
-from django.utils.timezone import now
+from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from TWLight.resources.models import Partner, Stream
@@ -54,7 +54,6 @@ from TWLight.users.helpers.editor_data import (
     editor_enough_edits,
     editor_not_blocked,
     editor_reg_date,
-    editor_recent_edits,
     editor_bundle_eligible,
 )
 
@@ -141,7 +140,9 @@ class Editor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # Set as non-editable.
     date_created = models.DateField(
-        default=now, editable=False, help_text="When this profile was first created"
+        default=timezone.now,
+        editable=False,
+        help_text="When this profile was first created",
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
@@ -193,15 +194,6 @@ class Editor(models.Model):
         help_text="At their last login, did this user meet the recent editcount criterion in "
         "the terms of use?",
     )
-
-    # wp_editcount_recent is computed by selectively subtracting wp_editcount_prev from wp_editcount.
-    wp_editcount_recent = models.IntegerField(
-        default=0,
-        null=True,
-        blank=True,
-        editable=False,
-        help_text="Recent Wikipedia edit count",
-    )
     wp_bundle_eligible = models.BooleanField(
         default=False,
         editable=False,
@@ -244,7 +236,8 @@ class Editor(models.Model):
         int : Most recently recorded Wikipedia editcount
         """
         log = EditorLog.objects.filter(editor=self).latest("timestamp")
-        return log.editcount
+        if log:
+            return log.editcount
 
     @property
     def wp_editcount_updated(self):
@@ -259,7 +252,122 @@ class Editor(models.Model):
         datetime.datetime : datetime that editcount was recorded
         """
         log = EditorLog.objects.filter(editor=self).latest("timestamp")
-        return log.timestamp
+        if log:
+            return log.timestamp
+
+    @property
+    def wp_editcount_prev(
+        self,
+        current_datetime: timezone = None,
+    ):
+        """
+
+        Parameters
+        ----------
+        self
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        int : 30-day old Wikipedia editcount, if available.
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+        log = EditorLog.objects.filter(
+            editor=self, timestamp__lte=current_datetime - timedelta(days=30)
+        ).latest("timestamp")
+        if log:
+            return log.editcount
+
+    @property
+    def wp_editcount_prev_updated(
+        self,
+        current_datetime: timezone = None,
+    ):
+        """
+
+        Parameters
+        ----------
+        self
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        datetime.datetime : datetime that editcount_prev was recorded
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+        log = EditorLog.objects.filter(
+            editor=self, timestamp__lte=current_datetime - timedelta(days=30)
+        ).latest("timestamp")
+        if log:
+            return log.timestamp
+
+    @property
+    def wp_editcount_recent(
+        self,
+        current_datetime: timezone = None,
+    ):
+        """
+
+        Parameters
+        ----------
+        self
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        int : number of recent Wikipedia edits, if available.
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+
+        wp_editcount_prev = self.wp_editcount_prev(current_datetime=current_datetime)
+        wp_editcount = self.wp_editcount
+
+        if wp_editcount and wp_editcount_prev:
+            recent_editcount = self.wp_editcount - self.wp_editcount_prev(
+                current_datetime=current_datetime
+            )
+            return recent_editcount
+
+    def update_editcount(
+        self,
+        editcount: int,
+        current_datetime: timezone = None,
+    ):
+        """
+        Logs current global_userinfo editcount and calculates recent edits against stored editor data.
+        Parameters
+        ----------
+        self
+        editcount : int
+            editcount provided by globaluserinfo or oauth.
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        None
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+
+        editor_log_entry = EditorLog()
+        editor_log_entry.editor = self
+        editor_log_entry.editcount = editcount
+        editor_log_entry.timestamp = current_datetime
+        editor_log_entry.save()
+
+        if self.wp_editcount_recent and self.wp_editcount_recent >= 10:
+            self.wp_enough_recent_edits = True
+        elif self.wp_editcount_recent:
+            self.wp_enough_recent_edits = False
+        else:
+            self.wp_enough_recent_edits = True
 
     @cached_property
     def wp_user_page_url(self):
@@ -434,11 +542,7 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            editor_log_entry = EditorLog()
-            editor_log_entry.editor = self
-            editor_log_entry.editcount = global_userinfo["editcount"]
-            editor_log_entry.timestamp = now()
-            editor_log_entry.save()
+            self.update_editcount(global_userinfo["editcount"])
             self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
 
         self.wp_registered = editor_reg_date(identity, global_userinfo)
@@ -484,14 +588,13 @@ class Editor(models.Model):
 
 
 class EditorLog(models.Model):
-    """
-    """
+    """"""
 
     class Meta:
         app_label: "users"
         verbose_name: "editorlog"
         verbose_name_plural: "editorlogs"
-        get_latest_by:  "timestamp"
+        get_latest_by: "timestamp"
 
     editor = models.ForeignKey(
         Editor, related_name="editorlogs", on_delete=models.CASCADE, db_index=True
