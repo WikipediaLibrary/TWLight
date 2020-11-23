@@ -275,7 +275,7 @@ class Editor(models.Model):
         if not current_datetime:
             current_datetime = timezone.now()
         log = EditorLog.objects.filter(
-            editor=self, timestamp__lte=current_datetime - timedelta(days=30)
+            editor=self, timestamp__lt=current_datetime - timedelta(days=30)
         ).latest("timestamp")
         if log:
             return log.editcount
@@ -300,7 +300,7 @@ class Editor(models.Model):
         if not current_datetime:
             current_datetime = timezone.now()
         log = EditorLog.objects.filter(
-            editor=self, timestamp__lte=current_datetime - timedelta(days=30)
+            editor=self, timestamp__lt=current_datetime - timedelta(days=30)
         ).latest("timestamp")
         if log:
             return log.timestamp
