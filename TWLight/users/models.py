@@ -255,7 +255,6 @@ class Editor(models.Model):
         if log:
             return log.timestamp
 
-    @property
     def wp_editcount_prev(
         self,
         current_datetime: timezone = None,
@@ -280,7 +279,6 @@ class Editor(models.Model):
         if log:
             return log.editcount
 
-    @property
     def wp_editcount_prev_updated(
         self,
         current_datetime: timezone = None,
@@ -305,7 +303,6 @@ class Editor(models.Model):
         if log:
             return log.timestamp
 
-    @property
     def wp_editcount_recent(
         self,
         current_datetime: timezone = None,
