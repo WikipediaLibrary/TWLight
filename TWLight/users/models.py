@@ -273,11 +273,14 @@ class Editor(models.Model):
         """
         if not current_datetime:
             current_datetime = timezone.now()
-        log = EditorLog.objects.filter(
-            editor=self, timestamp__lt=current_datetime - timedelta(days=30)
-        ).latest("timestamp")
-        if log:
-            return log.editcount
+        try:
+            return (
+                EditorLog.objects.filter(
+                    editor=self, timestamp__lt=current_datetime - timedelta(days=30)
+                ).latest("timestamp")
+            ).editcount
+        except models.ObjectDoesNotExist:
+            pass
 
     def wp_editcount_prev_updated(
         self,
@@ -297,11 +300,14 @@ class Editor(models.Model):
         """
         if not current_datetime:
             current_datetime = timezone.now()
-        log = EditorLog.objects.filter(
-            editor=self, timestamp__lt=current_datetime - timedelta(days=30)
-        ).latest("timestamp")
-        if log:
-            return log.timestamp
+        try:
+            return (
+                EditorLog.objects.filter(
+                    editor=self, timestamp__lt=current_datetime - timedelta(days=30)
+                ).latest("timestamp")
+            ).timestamp
+        except models.ObjectDoesNotExist:
+            pass
 
     def wp_editcount_recent(
         self,
@@ -353,6 +359,9 @@ class Editor(models.Model):
         if not current_datetime:
             current_datetime = timezone.now()
 
+        if not self.pk:
+            self.save()
+
         editor_log_entry = EditorLog()
         editor_log_entry.editor = self
         editor_log_entry.editcount = editcount
@@ -360,10 +369,10 @@ class Editor(models.Model):
         editor_log_entry.save()
 
         # A recent editcount of 10 is enough.
-        if self.wp_editcount_recent and self.wp_editcount_recent >= 10:
+        if self.wp_editcount_recent() and self.wp_editcount_recent() >= 10:
             self.wp_enough_recent_edits = True
         # Less than 10 is not enough.
-        elif self.wp_editcount_recent:
+        elif self.wp_editcount_recent():
             self.wp_enough_recent_edits = False
         # If we don't have a recent editcount yet, consider it good enough.
         else:
