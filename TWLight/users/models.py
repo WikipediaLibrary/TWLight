@@ -359,10 +359,13 @@ class Editor(models.Model):
         editor_log_entry.timestamp = current_datetime
         editor_log_entry.save()
 
+        # A recent editcount of 10 is enough.
         if self.wp_editcount_recent and self.wp_editcount_recent >= 10:
             self.wp_enough_recent_edits = True
+        # Less than 10 is not enough.
         elif self.wp_editcount_recent:
             self.wp_enough_recent_edits = False
+        # If we don't have a recent editcount yet, consider it good enough.
         else:
             self.wp_enough_recent_edits = True
 
