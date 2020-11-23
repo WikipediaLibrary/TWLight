@@ -2,13 +2,12 @@ from datetime import timedelta
 import logging
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
-from TWLight.users.models import Editor
+from TWLight.users.models import Editor, EditorLog
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
     editor_valid,
     editor_enough_edits,
-    editor_recent_edits,
     editor_not_blocked,
     editor_bundle_eligible,
 )
@@ -60,29 +59,29 @@ class Command(BaseCommand):
         # Default behavior is to use current datetime for timestamps.
         now_or_datetime = now()
         datetime_override = None
-        timedelta_days = 30
+        timedelta_days = 1
 
         wp_username = None
 
         # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
-        # This is also passed to the helper function.
+        # This is also passed to the model method.
         if options["datetime"]:
             datetime_override = now_or_datetime.fromisoformat(options["datetime"])
             now_or_datetime = datetime_override
 
         # These are used to limit the set of editors updated by the command.
-        # Nothing is passed to the helper function.
+        # Nothing is passed to the model method.
         if options["timedelta_days"]:
             timedelta_days = int(options["timedelta_days"])
 
-        # Get editors with data that's about to become stale, with an option to limit on wp_username.
-        editors = Editor.objects.filter(
-            wp_editcount_updated__lt=now_or_datetime - timedelta(days=timedelta_days)
+        # Get editors that haven't been updated in the specified time range, with an option to limit on wp_username.
+        editors = Editor.objects.exclude(
+            editorlogs__timestamp__gt=now_or_datetime - timedelta(days=timedelta_days),
         )
 
         # Optional wp_username filter.
         if options["wp_username"]:
-                editors = editors.filter(wp_username=str(options["wp_username"]))
+            editors = editors.filter(wp_username=str(options["wp_username"]))
 
         for editor in editors:
             # `global_userinfo` data may be overridden.
@@ -94,24 +93,7 @@ class Command(BaseCommand):
                     editor.wp_username, editor.wp_sub, True
                 )
             if global_userinfo:
-                # Determine recent editcount.
-                (
-                    editor.wp_editcount_prev_updated,
-                    editor.wp_editcount_prev,
-                    editor.wp_editcount_recent,
-                    editor.wp_enough_recent_edits,
-                ) = editor_recent_edits(
-                    global_userinfo["editcount"],
-                    editor.wp_editcount,
-                    editor.wp_editcount_updated,
-                    editor.wp_editcount_prev_updated,
-                    editor.wp_editcount_prev,
-                    editor.wp_editcount_recent,
-                    datetime_override,
-                )
-                # Set current editcount.
-                editor.wp_editcount = global_userinfo["editcount"]
-                editor.wp_editcount_updated = now_or_datetime
+                editor.update_editcount(global_userinfo["editcount"], datetime_override)
                 # Determine editor validity.
                 editor.wp_enough_edits = editor_enough_edits(editor.wp_editcount)
                 editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
