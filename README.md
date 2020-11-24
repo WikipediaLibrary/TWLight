@@ -10,6 +10,8 @@ The Wikipedia Library Card Platform app is available at http://wikipedialibrary.
 - See the thing running on [localhost](http://localhost/)
 - Get an interactive shell `docker-compose exec twlight bash`
 
+See the [Local setup](https://github.com/WikipediaLibrary/TWLight/wiki/Local-setup) Wiki page for more information.
+
 ## Documentation
 
 Further project documentation is available in the [Wiki](https://github.com/WikipediaLibrary/TWLight/wiki). Our issue tracking takes place on the [Library-Card-Platform Phabricator](https://phabricator.wikimedia.org/project/board/2765/) board.
