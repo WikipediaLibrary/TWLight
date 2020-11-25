@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from faker import Faker
 import random
+from django.utils.timezone import get_current_timezone
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
@@ -49,12 +50,21 @@ class Command(BaseCommand):
                 ).country(),
                 occupation=Faker(random.choice(settings.FAKER_LOCALES)).job(),
                 affiliation=Faker(random.choice(settings.FAKER_LOCALES)).company(),
-                wp_editcount=random.randint(50, 2000),
                 wp_registered=Faker(
                     random.choice(settings.FAKER_LOCALES)
                 ).date_time_between(start_date="-10y", end_date="now", tzinfo=None),
                 contributions=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(
                     nb_sentences=4
+                ),
+            )
+            editor.update_editcount(
+                random.randint(50, 2000),
+                current_datetime=Faker(
+                    random.choice(settings.FAKER_LOCALES)
+                ).date_time_between(
+                    start_date="-10y",
+                    end_date="now",
+                    tzinfo=get_current_timezone(),
                 ),
             )
 
