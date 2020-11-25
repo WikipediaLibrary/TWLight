@@ -59,7 +59,7 @@ class Command(BaseCommand):
         # Default behavior is to use current datetime for timestamps.
         now_or_datetime = now()
         datetime_override = None
-        timedelta_days = 1
+        timedelta_days = 0
 
         wp_username = None
 
@@ -109,5 +109,6 @@ class Command(BaseCommand):
                 editor.wp_bundle_eligible = editor_bundle_eligible(editor)
                 # Save editor.
                 editor.save()
+                editor.prune_editcount(current_datetime=datetime_override)
                 # Update bundle authorizations.
                 editor.update_bundle_authorization()

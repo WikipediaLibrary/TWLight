@@ -226,7 +226,7 @@ class Editor(models.Model):
     @property
     def wp_editcount(self):
         """
-
+        Fetches latest editcount from EditorLogs related to this editor.
         Parameters
         ----------
         self
@@ -243,7 +243,7 @@ class Editor(models.Model):
     @property
     def wp_editcount_updated(self):
         """
-
+        Fetches timestamp of latest editcount from EditorLogs related to this editor.
         Parameters
         ----------
         self
@@ -262,7 +262,7 @@ class Editor(models.Model):
         current_datetime: timezone = None,
     ):
         """
-
+        Fetches 30-day old editcount from EditorLogs related to this editor.
         Parameters
         ----------
         self
@@ -289,7 +289,7 @@ class Editor(models.Model):
         current_datetime: timezone = None,
     ):
         """
-
+        Fetches timestamp of 30-day old editcount from EditorLogs related to this editor.
         Parameters
         ----------
         self
@@ -316,7 +316,7 @@ class Editor(models.Model):
         current_datetime: timezone = None,
     ):
         """
-
+        Calculates recent editcount based on EditorLogs related to this editor.
         Parameters
         ----------
         self
@@ -384,6 +384,30 @@ class Editor(models.Model):
         # If we don't have a recent editcount yet, consider it good enough.
         else:
             self.wp_enough_recent_edits = True
+
+    def prune_editcount(
+        self,
+        current_datetime: timezone = None,
+    ):
+        """
+        Removes extraneous and outdated EditorLogs related to this editor.
+        Parameters
+        ----------
+        self
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        None
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+
+        # Prune EditorLogs that are more than 31 days old.
+        EditorLog.objects.filter(
+            editor=self, timestamp__lt=current_datetime - timedelta(days=31)
+        ).delete()
 
     @cached_property
     def wp_user_page_url(self):
