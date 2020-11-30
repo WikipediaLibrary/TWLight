@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-11-19 20:06+0000\n"
-"PO-Revision-Date: 2020-11-23 14:37:33+0000\n"
+"PO-Revision-Date: 2020-11-30 16:19:43+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -725,7 +725,7 @@ msgstr "どのリソースのアクセス権をご希望ですか？"
 #. Translators: This text explains that Library Bundle partners are not shown in this list.
 #: TWLight/applications/templates/applications/request_for_application.html:24
 msgid "Library Bundle partners are not shown as eligibility is determined automatically."
-msgstr ""
+msgstr "Library Bundle は自動確認の利用資格により表示されません。"
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:47
