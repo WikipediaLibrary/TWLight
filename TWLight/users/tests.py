@@ -1651,22 +1651,23 @@ class ManagementCommandsTestCase(TestCase):
         )
         self.assertTrue(self.editor.wp_bundle_eligible)
 
-        # A valid editor should pass 32 days after their last update, so long as they made enough edits.
-        # No change during the first 30 days.
-        for day in range(31):
-            call_command(
-                "user_update_eligibility",
-                datetime=datetime.isoformat(
-                    self.editor.wp_editcount_updated + timedelta(days=1)
-                ),
-                global_userinfo=self.global_userinfo_editor,
-            )
-        # Additional contributions on day 32.
-        self.global_userinfo_editor["editcount"] = 5010
+        # A valid Editor should fail 31 days after their last edit.
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
                 self.editor.wp_editcount_updated + timedelta(days=1)
+            ),
+            global_userinfo=self.global_userinfo_editor,
+        )
+        self.editor.refresh_from_db()
+        self.assertFalse(self.editor.wp_bundle_eligible)
+
+        # A valid Editor should then pass if they make at least 10 edits.
+        self.global_userinfo_editor["editcount"] = 5010
+        call_command(
+            "user_update_eligibility",
+            datetime=datetime.isoformat(
+                self.editor.wp_editcount_updated + timedelta(minutes=1)
             ),
             global_userinfo=self.global_userinfo_editor,
         )
