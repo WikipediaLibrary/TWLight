@@ -76,7 +76,6 @@ class Command(BaseCommand):
                 app = ApplicationFactory(
                     editor=random_editor,
                     partner=random_partner,
-                    hidden=self.chance(True, False, 10),
                 )
 
                 # Make sure partner-specific information is filled.
