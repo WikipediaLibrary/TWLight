@@ -56,12 +56,12 @@ class Command(BaseCommand):
         None
         """
 
-        # Default behavior is to use current datetime for timestamps.
+        # Default behavior is to use current datetime for timestamps to check all editors.
         now_or_datetime = now()
         datetime_override = None
         timedelta_days = 0
-
         wp_username = None
+        editors = Editor.objects.all()
 
         # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
         # This is also passed to the model method.
@@ -75,9 +75,11 @@ class Command(BaseCommand):
             timedelta_days = int(options["timedelta_days"])
 
         # Get editors that haven't been updated in the specified time range, with an option to limit on wp_username.
-        editors = Editor.objects.exclude(
-            editorlogs__timestamp__gt=now_or_datetime - timedelta(days=timedelta_days),
-        )
+        if timedelta_days:
+            editors = editors.exclude(
+                editorlogs__timestamp__gt=now_or_datetime
+                - timedelta(days=timedelta_days),
+            )
 
         # Optional wp_username filter.
         if options["wp_username"]:

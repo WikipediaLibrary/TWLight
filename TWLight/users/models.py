@@ -409,6 +409,26 @@ class Editor(models.Model):
             editor=self, timestamp__lt=current_datetime - timedelta(days=31)
         ).delete()
 
+        # Prune EditorLogs that:
+        # have a timestamp between 12am 30 days ago and 12am yesterday.
+        # are not the earliest EditorLog for that day.
+        current_date = timezone.localtime(current_datetime).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        for day in range(1, 30):
+            start_time = current_date - timedelta(days=day + 1)
+            end_time = current_date - timedelta(days=day)
+            extra_logs = EditorLog.objects.filter(
+                editor=self, timestamp__gt=start_time, timestamp__lt=end_time
+            )
+            if extra_logs.count() > 1:
+                try:
+                    earliest = extra_logs.earliest("timestamp")
+                    extra_logs = extra_logs.exclude(pk=earliest.pk)
+                    extra_logs.delete()
+                except models.ObjectDoesNotExist:
+                    pass
+
     @cached_property
     def wp_user_page_url(self):
         encoded_username = self.encode_wp_username(self.wp_username)

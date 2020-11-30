@@ -1079,12 +1079,11 @@ class EditorModelTestCase(TestCase):
         bundle_eligible = editor_bundle_eligible(self.test_editor)
         self.assertTrue(bundle_eligible)
 
-        # A valid user should pass 30 days after their first login, even if they haven't made anymore edits.
-        for day in range(30, 0):
+        # A valid user should pass 31 days after their first login, even if they haven't made anymore edits.
+        for day in range(30, 1):
             self.test_editor.update_editcount(
                 global_userinfo["editcount"], now() - timedelta(days=day)
             )
-        # self.test_editor.update_editcount(global_userinfo["editcount"])
         bundle_eligible = editor_bundle_eligible(self.test_editor)
         self.assertTrue(bundle_eligible)
 
@@ -1109,7 +1108,7 @@ class EditorModelTestCase(TestCase):
         self.test_editor.wp_valid = editor_valid(
             enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
         )
-        for day in range(30, 0):
+        for day in range(31, 1):
             self.test_editor.update_editcount(
                 global_userinfo["editcount"], now() - timedelta(days=day)
             )
@@ -1154,20 +1153,19 @@ class EditorModelTestCase(TestCase):
         self.test_editor.refresh_from_db()
         self.assertTrue(self.test_editor.wp_bundle_eligible)
 
-        # 31 days later with no activity, their eligibility gets updated by the cron task.
-        for day in range(0, 31):
-            command = call_command(
+        # 32 days later with no activity, their eligibility gets updated by the cron task.
+        for day in range(32):
+            self.test_editor.refresh_from_db()
+            call_command(
                 "user_update_eligibility",
                 datetime=datetime.isoformat(
-                    self.test_editor.wp_editcount_updated + timedelta(days=day)
+                    self.test_editor.wp_editcount_updated + timedelta(days=1)
                 ),
                 global_userinfo=global_userinfo,
             )
 
         # They aren't eligible for the bundle today.
         self.test_editor.refresh_from_db()
-        self.test_editor.wp_bundle_eligible = editor_bundle_eligible(self.test_editor)
-        self.test_editor.save()
         self.assertFalse(self.test_editor.wp_bundle_eligible)
 
     def test_update_bundle_authorization_creation(self):
@@ -1619,44 +1617,56 @@ class ManagementCommandsTestCase(TestCase):
         self.assertTrue(self.editor.wp_bundle_eligible)
 
         # A valid editor should pass editcount checks for 31 days after their first login, even if they haven't made any more edits.
-        call_command(
-            "user_update_eligibility",
-            datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=5)
-            ),
-            global_userinfo=self.global_userinfo_editor,
-            timedelta_days=4,
-        )
-        self.editor.refresh_from_db()
-        self.assertTrue(self.editor.wp_bundle_eligible)
-        call_command(
-            "user_update_eligibility",
-            datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=26)
-            ),
-            global_userinfo=self.global_userinfo_editor,
-            timedelta_days=25,
-        )
-        self.editor.refresh_from_db()
-        self.assertEqual(self.editor.wp_editcount, 5000)
-        self.assertEqual(self.editor.wp_editcount_prev(), 42)
-        self.assertEqual(self.editor.wp_editcount_recent(), 4958)
-        self.assertTrue(self.editor.wp_bundle_eligible)
-
-        # A valid editor should pass 31 days after their last update, so long as they made enough edits.
-        for day in range(0, 30):
+        for day in range(5):
             call_command(
                 "user_update_eligibility",
                 datetime=datetime.isoformat(
-                    self.editor.wp_editcount_updated + timedelta(days=day)
+                    self.editor.wp_editcount_updated + timedelta(days=1)
                 ),
                 global_userinfo=self.global_userinfo_editor,
             )
+        self.editor.refresh_from_db()
+        self.assertTrue(self.editor.wp_bundle_eligible)
+        for day in range(26):
+            call_command(
+                "user_update_eligibility",
+                datetime=datetime.isoformat(
+                    self.editor.wp_editcount_updated + timedelta(days=1)
+                ),
+                global_userinfo=self.global_userinfo_editor,
+            )
+        self.editor.refresh_from_db()
+        self.assertEqual(self.editor.wp_editcount, 5000)
+        self.assertEqual(
+            self.editor.wp_editcount_prev(
+                current_datetime=self.editor.wp_editcount_updated
+            ),
+            42,
+        )
+        self.assertEqual(
+            self.editor.wp_editcount_recent(
+                current_datetime=self.editor.wp_editcount_updated
+            ),
+            4958,
+        )
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
+        # A valid editor should pass 32 days after their last update, so long as they made enough edits.
+        # No change during the first 30 days.
+        for day in range(31):
+            call_command(
+                "user_update_eligibility",
+                datetime=datetime.isoformat(
+                    self.editor.wp_editcount_updated + timedelta(days=1)
+                ),
+                global_userinfo=self.global_userinfo_editor,
+            )
+        # Additional contributions on day 32.
         self.global_userinfo_editor["editcount"] = 5010
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=31)
+                self.editor.wp_editcount_updated + timedelta(days=1)
             ),
             global_userinfo=self.global_userinfo_editor,
         )
