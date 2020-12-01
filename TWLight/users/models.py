@@ -227,10 +227,6 @@ class Editor(models.Model):
     def wp_editcount(self):
         """
         Fetches latest editcount from EditorLogs related to this editor.
-        Parameters
-        ----------
-        self
-
         Returns
         -------
         int : Most recently recorded Wikipedia editcount
@@ -244,10 +240,6 @@ class Editor(models.Model):
     def wp_editcount_updated(self):
         """
         Fetches timestamp of latest editcount from EditorLogs related to this editor.
-        Parameters
-        ----------
-        self
-
         Returns
         -------
         datetime.datetime : datetime that editcount was recorded
@@ -265,7 +257,6 @@ class Editor(models.Model):
         Fetches 30-day old editcount from EditorLogs related to this editor.
         Parameters
         ----------
-        self
         current_datetime : timezone
             optional timezone-aware timestamp override that represents now()
 
@@ -292,7 +283,6 @@ class Editor(models.Model):
         Fetches timestamp of 30-day old editcount from EditorLogs related to this editor.
         Parameters
         ----------
-        self
         current_datetime : timezone
             optional timezone-aware timestamp override that represents now()
 
@@ -319,7 +309,6 @@ class Editor(models.Model):
         Calculates recent editcount based on EditorLogs related to this editor.
         Parameters
         ----------
-        self
         current_datetime : timezone
             optional timezone-aware timestamp override that represents now()
 
@@ -348,7 +337,6 @@ class Editor(models.Model):
         Logs current global_userinfo editcount and calculates recent edits against stored editor data.
         Parameters
         ----------
-        self
         editcount : int
             editcount provided by globaluserinfo or oauth.
         current_datetime : timezone
@@ -393,7 +381,6 @@ class Editor(models.Model):
         Removes extraneous and outdated EditorLogs related to this editor.
         Parameters
         ----------
-        self
         current_datetime : timezone
             optional timezone-aware timestamp override that represents now()
 
