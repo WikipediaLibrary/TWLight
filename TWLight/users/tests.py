@@ -1717,7 +1717,7 @@ class ManagementCommandsTestCase(TestCase):
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=31)
+                self.editor.wp_editcount_updated + timedelta(days=1)
             ),
             global_userinfo=self.global_userinfo_editor,
         )
