@@ -40,7 +40,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.db import models
 from django.db.models import Q
-from django.utils.timezone import now
+from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from TWLight.resources.models import Partner, Stream
@@ -54,7 +54,6 @@ from TWLight.users.helpers.editor_data import (
     editor_enough_edits,
     editor_not_blocked,
     editor_reg_date,
-    editor_recent_edits,
     editor_bundle_eligible,
 )
 
@@ -141,7 +140,9 @@ class Editor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # Set as non-editable.
     date_created = models.DateField(
-        default=now, editable=False, help_text="When this profile was first created"
+        default=timezone.now,
+        editable=False,
+        help_text="When this profile was first created",
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
@@ -149,16 +150,6 @@ class Editor(models.Model):
     # Data are current *as of the time of last TWLight login* but may get out of
     # sync thereafter.
     wp_username = models.CharField(max_length=235, help_text="Username")
-    wp_editcount = models.IntegerField(
-        help_text="Wikipedia edit count", blank=True, null=True
-    )
-    wp_editcount_updated = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        editable=False,
-        help_text="When the editcount was updated from Wikipedia",
-    )
     wp_registered = models.DateField(
         help_text="Date registered at Wikipedia", blank=True, null=True
     )
@@ -203,30 +194,6 @@ class Editor(models.Model):
         help_text="At their last login, did this user meet the recent editcount criterion in "
         "the terms of use?",
     )
-    wp_editcount_prev_updated = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        editable=False,
-        help_text="When the previous editcount was last updated from Wikipedia",
-    )
-    # wp_editcount_prev is initially set to 0 so that all edits get counted as recent edits for new users.
-    wp_editcount_prev = models.IntegerField(
-        default=0,
-        null=True,
-        blank=True,
-        editable=False,
-        help_text="Previous Wikipedia edit count",
-    )
-
-    # wp_editcount_recent is computed by selectively subtracting wp_editcount_prev from wp_editcount.
-    wp_editcount_recent = models.IntegerField(
-        default=0,
-        null=True,
-        blank=True,
-        editable=False,
-        help_text="Recent Wikipedia edit count",
-    )
     wp_bundle_eligible = models.BooleanField(
         default=False,
         editable=False,
@@ -255,6 +222,200 @@ class Editor(models.Model):
     def encode_wp_username(self, username):
         result = urllib.parse.quote(username)
         return result
+
+    @property
+    def wp_editcount(self):
+        """
+        Fetches latest editcount from EditorLogs related to this editor.
+        Returns
+        -------
+        int : Most recently recorded Wikipedia editcount
+        """
+        try:
+            return (EditorLog.objects.filter(editor=self).latest("timestamp")).editcount
+        except models.ObjectDoesNotExist:
+            pass
+
+    @property
+    def wp_editcount_updated(self):
+        """
+        Fetches timestamp of latest editcount from EditorLogs related to this editor.
+        Returns
+        -------
+        datetime.datetime : datetime that editcount was recorded
+        """
+        try:
+            return (EditorLog.objects.filter(editor=self).latest("timestamp")).timestamp
+        except models.ObjectDoesNotExist:
+            pass
+
+    def wp_editcount_prev(
+        self,
+        current_datetime: timezone = None,
+    ):
+        """
+        Fetches 30-day old editcount from EditorLogs related to this editor.
+        Parameters
+        ----------
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        int : 30-day old Wikipedia editcount, if available.
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+        try:
+            return (
+                EditorLog.objects.filter(
+                    editor=self, timestamp__lte=current_datetime - timedelta(days=30)
+                ).latest("timestamp")
+            ).editcount
+        except models.ObjectDoesNotExist:
+            pass
+
+    def wp_editcount_prev_updated(
+        self,
+        current_datetime: timezone = None,
+    ):
+        """
+        Fetches timestamp of 30-day old editcount from EditorLogs related to this editor.
+        Parameters
+        ----------
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        datetime.datetime : datetime that editcount_prev was recorded
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+        try:
+            return (
+                EditorLog.objects.filter(
+                    editor=self, timestamp__lte=current_datetime - timedelta(days=30)
+                ).latest("timestamp")
+            ).timestamp
+        except models.ObjectDoesNotExist:
+            pass
+
+    def wp_editcount_recent(
+        self,
+        current_datetime: timezone = None,
+    ):
+        """
+        Calculates recent editcount based on EditorLogs related to this editor.
+        Used to determine if the editor meets the recent editcount criterion for access to the library card bundle.
+        Parameters
+        ----------
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        int : number of recent Wikipedia edits, if available.
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+
+        wp_editcount_prev = self.wp_editcount_prev(current_datetime=current_datetime)
+        wp_editcount = self.wp_editcount
+
+        if wp_editcount and wp_editcount_prev:
+            recent_editcount = self.wp_editcount - self.wp_editcount_prev(
+                current_datetime=current_datetime
+            )
+            return recent_editcount
+
+    def update_editcount(
+        self,
+        editcount: int,
+        current_datetime: timezone = None,
+    ):
+        """
+        Logs current global_userinfo editcount and calculates recent edits against stored editor data.
+        Parameters
+        ----------
+        editcount : int
+            editcount provided by globaluserinfo or oauth.
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        None
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+
+        if not self.pk:
+            self.save()
+
+        editor_log_entry = EditorLog()
+        editor_log_entry.editor = self
+        editor_log_entry.editcount = editcount
+        editor_log_entry.timestamp = current_datetime
+        editor_log_entry.save()
+
+        # Get the current recent editcount
+        wp_editcount_recent = self.wp_editcount_recent(
+            current_datetime=current_datetime
+        )
+
+        # A recent editcount of 10 is enough.
+        if wp_editcount_recent is not None and wp_editcount_recent >= 10:
+            self.wp_enough_recent_edits = True
+        # Less than 10 is not enough.
+        elif wp_editcount_recent is not None:
+            self.wp_enough_recent_edits = False
+        # If we don't have a recent editcount yet, consider it good enough.
+        else:
+            self.wp_enough_recent_edits = True
+
+    def prune_editcount(
+        self,
+        current_datetime: timezone = None,
+    ):
+        """
+        Removes extraneous and outdated EditorLogs related to this editor.
+        Parameters
+        ----------
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+
+        Returns
+        -------
+        None
+        """
+        if not current_datetime:
+            current_datetime = timezone.now()
+
+        # Prune EditorLogs that are more than 31 days old.
+        EditorLog.objects.filter(
+            editor=self, timestamp__lt=current_datetime - timedelta(days=31)
+        ).delete()
+
+        # Prune EditorLogs that:
+        # have a timestamp between 12am 30 days ago and 12am yesterday.
+        # are not the earliest EditorLog for that day.
+        current_date = timezone.localtime(current_datetime).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        for day in range(1, 30):
+            start_time = current_date - timedelta(days=day + 1)
+            end_time = current_date - timedelta(days=day)
+            extra_logs = EditorLog.objects.filter(
+                editor=self, timestamp__gt=start_time, timestamp__lt=end_time
+            )
+            if extra_logs.count() > 1:
+                try:
+                    earliest = extra_logs.earliest("timestamp")
+                    extra_logs = extra_logs.exclude(pk=earliest.pk)
+                    extra_logs.delete()
+                except models.ObjectDoesNotExist:
+                    pass
 
     @cached_property
     def wp_user_page_url(self):
@@ -386,7 +547,13 @@ class Editor(models.Model):
                 user_authorization.date_expires = None
                 user_authorization.save()
 
-    def update_from_wikipedia(self, identity, lang):
+    def update_from_wikipedia(
+        self,
+        identity: dict,
+        lang: str,
+        global_userinfo: dict = None,
+        current_datetime: timezone = None,
+    ):
         """
         Given the dict returned from the Wikipedia OAuth /identify endpoint,
         update the instance accordingly.
@@ -394,24 +561,54 @@ class Editor(models.Model):
         This assumes that we have used wp_sub to match the Editor and the
         Wikipedia info.
 
-        Expected identity data:
+        Parameters
+        ----------
+        identity : dict
+            {
+                'username': identity['username'],       # wikipedia username
+                'sub': identity['sub'],                 # wikipedia ID
+                'rights': identity['rights'],           # user rights on-wiki
+                'groups': identity['groups'],           # user groups on-wiki
+                'editcount': identity['editcount'],
+                'email': identity['email'],
 
-        {
-            'username': identity['username'],       # wikipedia username
-            'sub': identity['sub'],                 # wikipedia ID
-            'rights': identity['rights'],           # user rights on-wiki
-            'groups': identity['groups'],           # user groups on-wiki
-            'editcount': identity['editcount'],
-            'email': identity['email'],
+                # Date registered: YYYYMMDDHHMMSS
+                'registered': identity['registered']
+            }
 
-            # Date registered: YYYYMMDDHHMMSS
-            'registered': identity['registered']
-        }
-
-        We could attempt to harvest real name, but we won't; we'll let
-        users enter it if required by partners, and avoid knowing the
-        data otherwise.
+            We could attempt to harvest real name, but we won't; we'll let
+            users enter it if required by partners, and avoid knowing the
+            data otherwise.
+        lang : str
+        global_userinfo : dict
+            Optional override currently used for tests only. Defaults to fetching from global_userinfo API.
+            {
+                "home": str,                            # SUL home wiki
+                "id": int,                              # Same as identity['sub']
+                "registration": datetime.datetime,      # Wikipedia account registration date.
+                "name": str,                            # Same as identity['username']
+                "editcount": int,                       # Same as identity['editcount']
+                "merged": [                             # List of wiki accounts attached to the SUL account
+                    {
+                        "wiki": str,                        # Wiki name
+                        "url": str,                         # Wiki URL
+                        "timestamp": datetime.datetime,
+                        "method": str,
+                        "editcount": int,
+                        "registration": datetime.datetime,  # Wiki registration date.
+                        "groups": list,                     # user groups on-wiki.
+                    },
+                    ...
+                ],
+            }
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+        Returns
+        -------
+        None
         """
+        if not current_datetime:
+            current_datetime = timezone.now()
 
         try:
             assert self.wp_sub == identity["sub"]
@@ -423,29 +620,28 @@ class Editor(models.Model):
             )
             raise
 
-        global_userinfo = self.get_global_userinfo(identity)
+        if not global_userinfo:
+            global_userinfo = self.get_global_userinfo(identity)
 
         self.wp_username = identity["username"]
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            (
-                self.wp_editcount_prev_updated,
-                self.wp_editcount_prev,
-                self.wp_editcount_recent,
-                self.wp_enough_recent_edits,
-            ) = editor_recent_edits(
-                global_userinfo["editcount"],
-                self.wp_editcount,
-                self.wp_editcount_updated,
-                self.wp_editcount_prev_updated,
-                self.wp_editcount_prev,
-                self.wp_editcount_recent,
-                self.wp_enough_recent_edits,
+            try:
+                assert self.wp_sub == global_userinfo["id"]
+            except AssertionError:
+                print(self.wp_sub)
+                print(global_userinfo["id"])
+                logger.exception(
+                    "Was asked to update Editor data, but the "
+                    "WP sub in the global_userinfo passed in did not match the wp_sub on "
+                    "the instance. Not updating."
+                )
+                raise
+            self.update_editcount(
+                global_userinfo["editcount"], current_datetime=current_datetime
             )
-            self.wp_editcount = global_userinfo["editcount"]
             self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
-            self.wp_editcount_updated = now()
 
         self.wp_registered = editor_reg_date(identity, global_userinfo)
         self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
@@ -487,6 +683,37 @@ class Editor(models.Model):
 
     def get_absolute_url(self):
         return reverse("users:editor_detail", kwargs={"pk": self.pk})
+
+
+class EditorLog(models.Model):
+    """"""
+
+    class Meta:
+        app_label: "users"
+        verbose_name: "editorlog"
+        verbose_name_plural: "editorlogs"
+        get_latest_by: "timestamp"
+
+    editor = models.ForeignKey(
+        Editor, related_name="editorlogs", on_delete=models.CASCADE, db_index=True
+    )
+
+    editcount = models.IntegerField(
+        default=None,
+        null=False,
+        blank=False,
+        editable=False,
+        help_text="Wikipedia edit count",
+    )
+
+    timestamp = models.DateTimeField(
+        default=None,
+        null=False,
+        blank=False,
+        editable=False,
+        db_index=True,
+        help_text="When the editcount was updated from Wikipedia",
+    )
 
 
 class Authorization(models.Model):

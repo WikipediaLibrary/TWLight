@@ -4,7 +4,6 @@ import logging
 import typing
 import urllib.request, urllib.error, urllib.parse
 from django.conf import settings
-from django.utils import timezone
 
 logger = logging.getLogger(__name__)
 
@@ -187,95 +186,6 @@ def editor_valid(
         return True
     else:
         return False
-
-
-def editor_recent_edits(
-    global_userinfo_editcount: int,
-    wp_editcount: int,
-    wp_editcount_updated: datetime.date,
-    wp_editcount_prev_updated: datetime.date,
-    wp_editcount_prev: int,
-    wp_editcount_recent: int,
-    wp_enough_recent_edits: bool,
-    current_datetime: timezone = None,
-):
-    """
-    Checks current global_userinfo editcount against stored editor data and returns updated data.
-    Parameters
-    ----------
-    global_userinfo_editcount : int
-        editcount returned by globaluserinfo.
-    wp_editcount : int
-        editcount currently stored in database.
-    wp_editcount_updated : datetime.date
-        timestamp for stored editcount
-    wp_editcount_prev_updated : datetime.date
-        timestamp for stored previous editcount
-    wp_editcount_prev : int
-        historical editcount used to calculate recent edits
-    wp_editcount_recent : int
-        recent editcount used to determine bundle eligibility
-    wp_enough_recent_edits : bool
-        current recent edit status as stored in database
-    current_datetime : timezone
-        optional timezone-aware timestamp override that represents now()
-
-    Returns
-    -------
-    tuple
-        Contains recent-editcount-related results.
-    """
-    if not current_datetime:
-        current_datetime = timezone.now()
-
-    # If we have historical data that might let us fix eligibility issues, use wp_editcount_prev to do so.
-    if (
-        wp_editcount_prev
-        and wp_editcount_prev_updated
-        and (current_datetime - wp_editcount_prev_updated).days < 31
-    ):
-        editcount_update_delta = wp_editcount_updated - wp_editcount_prev_updated
-        editcount_delta = global_userinfo_editcount - wp_editcount_prev
-        # We want to hang on to wp_editcount_prev and wp_editcount_prev as long as they are fresh.
-        # This will let them survive the shift that happens further down.
-        wp_editcount = wp_editcount_prev
-        wp_editcount_updated = wp_editcount_prev_updated
-    # If we have normal historical data, see how many days have passed and how many edits have been made since the last check.
-    elif wp_editcount and wp_editcount_updated:
-        editcount_update_delta = current_datetime - wp_editcount_updated
-        editcount_delta = global_userinfo_editcount - wp_editcount
-    # If we don't have any historical editcount data, let all edits to date count
-    else:
-        editcount_update_delta = current_datetime - timedelta(days=31)
-        editcount_delta = global_userinfo_editcount
-        wp_editcount = global_userinfo_editcount
-        wp_editcount_updated = current_datetime
-
-    if (
-        # If the editor didn't have enough recent edits but they do now, update the counts immediately.
-        # This recognizes their eligibility as soon as possible.
-        (not wp_enough_recent_edits and editcount_delta >= 10)
-        # If the user had enough edits, just update the counts after 30 days.
-        # This means that eligibility always lasts at least 30 days.
-        or (wp_enough_recent_edits and editcount_update_delta.days > 30)
-    ):
-        # Shift the currently stored counts into the "prev" fields for use in future checks.
-        wp_editcount_prev = wp_editcount
-        wp_editcount_prev_updated = wp_editcount_updated
-        wp_editcount_recent = editcount_delta
-
-    # Perform the check for enough recent edits.
-    if wp_editcount_recent >= 10:
-        wp_enough_recent_edits = True
-    else:
-        wp_enough_recent_edits = False
-    # Return a tuple containing all recent-editcount-related results.
-    return (
-        wp_editcount_prev_updated,
-        wp_editcount_prev,
-        wp_editcount_recent,
-        wp_enough_recent_edits,
-    )
 
 
 def editor_bundle_eligible(editor: "Editor"):

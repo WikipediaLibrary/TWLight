@@ -1,14 +1,13 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 import logging
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
-from TWLight.users.models import Editor
+from TWLight.users.models import Editor, EditorLog
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
     editor_valid,
     editor_enough_edits,
-    editor_recent_edits,
     editor_not_blocked,
     editor_bundle_eligible,
 )
@@ -21,7 +20,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         """
-        Adds `datetime` and `global_userinfo` arguments.
+        Adds command arguments.
         """
         parser.add_argument(
             "--datetime",
@@ -31,7 +30,17 @@ class Command(BaseCommand):
         parser.add_argument(
             "--global_userinfo",
             action="store",
-            help="specify Wikipedia global_userinfo data. Defaults to fetching live data. Currently only used for faking command runs in tests.",
+            help="Specify Wikipedia global_userinfo data. Defaults to fetching live data. Currently only used for faking command runs in tests.",
+        )
+        parser.add_argument(
+            "--timedelta_days",
+            action="store",
+            help="Number of days used to define 'recent' edits. Defaults to 30. Currently only used for faking command runs in tests.",
+        )
+        parser.add_argument(
+            "--wp_username",
+            action="store",
+            help="Specify a single editor to update. Other arguments and filters still apply.",
         )
 
     def handle(self, *args, **options):
@@ -47,19 +56,35 @@ class Command(BaseCommand):
         None
         """
 
-        # Default behavior is to use current datetime for timestamps.
+        # Default behavior is to use current datetime for timestamps to check all editors.
         now_or_datetime = now()
         datetime_override = None
+        timedelta_days = 0
+        wp_username = None
+        editors = Editor.objects.all()
 
         # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
+        # This is also passed to the model method.
         if options["datetime"]:
             datetime_override = now_or_datetime.fromisoformat(options["datetime"])
             now_or_datetime = datetime_override
 
-        # Get all editors who have not been updated in more than 30 days.
-        editors = Editor.objects.filter(
-            wp_editcount_updated__lt=now_or_datetime - timedelta(days=30)
-        )
+        # These are used to limit the set of editors updated by the command.
+        # Nothing is passed to the model method.
+        if options["timedelta_days"]:
+            timedelta_days = int(options["timedelta_days"])
+
+        # Get editors that haven't been updated in the specified time range, with an option to limit on wp_username.
+        if timedelta_days:
+            editors = editors.exclude(
+                editorlogs__timestamp__gt=now_or_datetime
+                - timedelta(days=timedelta_days),
+            )
+
+        # Optional wp_username filter.
+        if options["wp_username"]:
+            editors = editors.filter(wp_username=str(options["wp_username"]))
+
         for editor in editors:
             # `global_userinfo` data may be overridden.
             if options["global_userinfo"]:
@@ -70,25 +95,7 @@ class Command(BaseCommand):
                     editor.wp_username, editor.wp_sub, True
                 )
             if global_userinfo:
-                # Determine recent editcount.
-                (
-                    editor.wp_editcount_prev_updated,
-                    editor.wp_editcount_prev,
-                    editor.wp_editcount_recent,
-                    editor.wp_enough_recent_edits,
-                ) = editor_recent_edits(
-                    global_userinfo["editcount"],
-                    editor.wp_editcount,
-                    editor.wp_editcount_updated,
-                    editor.wp_editcount_prev_updated,
-                    editor.wp_editcount_prev,
-                    editor.wp_editcount_recent,
-                    editor.wp_enough_recent_edits,
-                    datetime_override,
-                )
-                # Set current editcount.
-                editor.wp_editcount = global_userinfo["editcount"]
-                editor.wp_editcount_updated = now_or_datetime
+                editor.update_editcount(global_userinfo["editcount"], datetime_override)
                 # Determine editor validity.
                 editor.wp_enough_edits = editor_enough_edits(editor.wp_editcount)
                 editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
@@ -104,5 +111,6 @@ class Command(BaseCommand):
                 editor.wp_bundle_eligible = editor_bundle_eligible(editor)
                 # Save editor.
                 editor.save()
+                editor.prune_editcount(current_datetime=datetime_override)
                 # Update bundle authorizations.
                 editor.update_bundle_authorization()
