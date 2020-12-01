@@ -1563,6 +1563,7 @@ class ManagementCommandsTestCase(TestCase):
                 ),
                 global_userinfo=self.global_userinfo_editor,
             )
+        self.editor.refresh_from_db()
         self.assertEqual(self.editor.wp_editcount, 5000)
         self.assertEqual(
             self.editor.wp_editcount_prev(
