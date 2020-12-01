@@ -1585,26 +1585,6 @@ class ManagementCommandsTestCase(TestCase):
             "merged": copy.copy(FAKE_MERGED_ACCOUNTS),
         }
 
-    def test_user_update_eligibility_command_initial(self):
-        """
-        1st time bundle check should always pass for a valid user.
-        Returns
-        -------
-        None
-        """
-        self.assertTrue(self.editor.wp_bundle_eligible)
-
-        call_command(
-            "user_update_eligibility",
-            datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=31)
-            ),
-            global_userinfo=self.global_userinfo_editor,
-        )
-        self.editor.refresh_from_db()
-
-        self.assertTrue(self.editor.wp_bundle_eligible)
-
     def test_user_update_eligibility_command_valid(self):
         """
         user_update_eligibility command should check and update Bundle eligible editors correctly.
