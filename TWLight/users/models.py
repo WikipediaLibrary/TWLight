@@ -307,6 +307,7 @@ class Editor(models.Model):
     ):
         """
         Calculates recent editcount based on EditorLogs related to this editor.
+        Used to determine if the editor meets the recent editcount criterion for access to the library card bundle.
         Parameters
         ----------
         current_datetime : timezone
