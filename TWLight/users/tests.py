@@ -1617,7 +1617,7 @@ class ManagementCommandsTestCase(TestCase):
         self.assertTrue(self.editor.wp_bundle_eligible)
 
         # A valid editor should pass editcount checks for 31 days after their first login, even if they haven't made any more edits.
-        for day in range(5):
+        for day in range(31):
             call_command(
                 "user_update_eligibility",
                 datetime=datetime.isoformat(
@@ -1625,17 +1625,6 @@ class ManagementCommandsTestCase(TestCase):
                 ),
                 global_userinfo=self.global_userinfo_editor,
             )
-        self.editor.refresh_from_db()
-        self.assertTrue(self.editor.wp_bundle_eligible)
-        for day in range(26):
-            call_command(
-                "user_update_eligibility",
-                datetime=datetime.isoformat(
-                    self.editor.wp_editcount_updated + timedelta(days=1)
-                ),
-                global_userinfo=self.global_userinfo_editor,
-            )
-        self.editor.refresh_from_db()
         self.assertEqual(self.editor.wp_editcount, 5000)
         self.assertEqual(
             self.editor.wp_editcount_prev(
