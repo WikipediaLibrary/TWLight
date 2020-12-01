@@ -1674,11 +1674,11 @@ class ManagementCommandsTestCase(TestCase):
         self.assertTrue(self.editor.wp_bundle_eligible)
 
         # Editors whose editcount has been updated within the last 30 days should be left alone.
-        self.global_userinfo_editor["editcount"] = 5010
         call_command(
             "user_update_eligibility",
             datetime=datetime.isoformat(
-                self.editor.wp_editcount_updated + timedelta(days=5)
+                self.editor.wp_editcount_updated
+                + timedelta(days=29, hours=23, minutes=59, seconds=59)
             ),
             global_userinfo=self.global_userinfo_editor,
         )
