@@ -1057,113 +1057,75 @@ class EditorModelTestCase(TestCase):
         * Be valid
         * Have made 10 edits in the last 30 days (with some wiggle room, as you will see)
         """
-        identity = copy.copy(FAKE_IDENTITY)
-        global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
-
         # Valid data
+        lang = get_language()
+        identity = copy.copy(FAKE_IDENTITY)
+        identity["sub"] = self.editor.wp_sub
+        identity["editcount"] = 500
+        global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
+        global_userinfo["id"] = self.editor.wp_sub
         global_userinfo["editcount"] = 500
-        self.editor.update_editcount(global_userinfo["editcount"])
-        enough_edits = editor_enough_edits(self.editor.wp_editcount)
-        registered = editor_reg_date(identity, global_userinfo)
-        account_old_enough = editor_account_old_enough(registered)
-        not_blocked = editor_not_blocked(global_userinfo["merged"])
-        ignore_wp_blocks = False
-        valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
-        )
-        self.assertTrue(valid)
-        self.editor.wp_valid = valid
 
         # 1st time bundle check should always pass for a valid user.
-        self.editor.update_editcount(global_userinfo["editcount"])
-        bundle_eligible = editor_bundle_eligible(self.editor)
-        self.assertTrue(bundle_eligible)
-
-        # A valid user should pass 31 days after their first login, even if they haven't made anymore edits.
-        for day in range(30, 1):
-            self.editor.update_editcount(
-                global_userinfo["editcount"], now() - timedelta(days=day)
-            )
-        bundle_eligible = editor_bundle_eligible(self.editor)
-        self.assertTrue(bundle_eligible)
-
-        # A valid user should fail 31 days after their first login, if they haven't made any more edits.
-        self.editor.update_editcount(
-            global_userinfo["editcount"], now() - timedelta(days=31)
+        self.editor.update_from_wikipedia(
+            identity, lang, global_userinfo=global_userinfo
         )
-        # Running again with current timestamp to correctly set editor.wp_enough_recent_edits
-        self.editor.update_editcount(global_userinfo["editcount"])
-        bundle_eligible = editor_bundle_eligible(self.editor)
-        self.assertFalse(bundle_eligible)
-
-        # A valid user should pass 31 days after their first login if they have made enough edits.
-        self.editor.update_editcount(global_userinfo["editcount"] + 10)
-        bundle_eligible = editor_bundle_eligible(self.editor)
-        self.assertTrue(bundle_eligible)
-
-        # Bad editor! No biscuit, even if you have enough edits.
-        global_userinfo["editcount"] = 510
-        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
-        not_blocked = editor_not_blocked(global_userinfo["merged"])
-        self.editor.wp_valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
-        )
-        for day in range(31, 1):
-            self.editor.update_editcount(
-                global_userinfo["editcount"], now() - timedelta(days=day)
-            )
-        bundle_eligible = editor_bundle_eligible(self.editor)
-
-        self.assertEqual(self.editor.wp_editcount, 510)
-        self.assertEqual(self.editor.wp_editcount_prev(), 500)
-        self.assertFalse(bundle_eligible)
-
-        # Without a scheduled management command, a valid user will pass 60 days after their first login if they have 10 more edits,
-        # even if we're not sure whether they made those edits in the last 30 days.
-
-        # Valid data for first time logging in after bundle was launched. 60 days ago.
-        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS)
-        global_userinfo["editcount"] = 500
-        self.editor.update_editcount(global_userinfo["editcount"])
-        self.editor.wp_enough_edits = editor_enough_edits(self.editor.wp_editcount)
-        self.editor.wp_registered = editor_reg_date(identity, global_userinfo)
-        self.editor.wp_account_old_enough = editor_account_old_enough(registered)
-        self.editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
-        self.editor.wp_valid = editor_valid(
-            self.editor.wp_enough_edits,
-            self.editor.wp_account_old_enough,
-            self.editor.wp_not_blocked,
-            self.editor.ignore_wp_blocks,
-        )
-        self.editor.update_editcount(
-            global_userinfo["editcount"], now() - timedelta(days=60)
-        )
-        self.editor.wp_bundle_eligible = True
-        self.editor.save()
-
-        # 15 days later, they logged with 10 more edits. Valid
-        global_userinfo["editcount"] = global_userinfo["editcount"] + 10
-        self.editor.update_editcount(
-            global_userinfo["editcount"], now() - timedelta(days=15)
-        )
-        self.editor.wp_bundle_eligible = True
-        self.editor.save()
         self.editor.refresh_from_db()
         self.assertTrue(self.editor.wp_bundle_eligible)
 
-        # 32 days later with no activity, their eligibility gets updated by the cron task.
-        for day in range(32):
-            self.editor.refresh_from_db()
-            call_command(
-                "user_update_eligibility",
-                datetime=datetime.isoformat(
-                    self.editor.wp_editcount_updated + timedelta(days=1)
-                ),
-                global_userinfo=global_userinfo,
+        # A valid user should pass up to 30 days after their first login, even if they haven't made anymore edits.
+        for day in range(29):
+            self.editor.update_from_wikipedia(
+                identity,
+                lang,
+                global_userinfo,
+                self.editor.wp_editcount_updated + timedelta(days=1),
             )
-
-        # They aren't eligible for the bundle today.
+        self.editor.update_editcount(
+            global_userinfo["editcount"],
+            self.editor.wp_editcount_updated + timedelta(hours=23, minutes=59),
+        )
         self.editor.refresh_from_db()
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
+        # A valid user should fail 30 days after their last edit.
+        self.editor.update_from_wikipedia(
+            identity,
+            lang,
+            global_userinfo,
+            self.editor.wp_editcount_updated + timedelta(minutes=1),
+        )
+        self.editor.refresh_from_db()
+        self.assertFalse(self.editor.wp_bundle_eligible)
+
+        # A valid user should pass if they have made enough recent edits.
+        global_userinfo["editcount"] = 510
+        self.editor.update_from_wikipedia(
+            identity,
+            lang,
+            global_userinfo,
+            self.editor.wp_editcount_updated + timedelta(minutes=1),
+        )
+        self.editor.refresh_from_db()
+        self.assertTrue(self.editor.wp_bundle_eligible)
+
+        # Bad editor! No biscuit, even if you have enough edits.
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        self.editor.update_from_wikipedia(
+            identity,
+            lang,
+            global_userinfo,
+            self.editor.wp_editcount_updated + timedelta(minutes=1),
+        )
+
+        self.editor.refresh_from_db()
+        self.assertEqual(self.editor.wp_editcount, 510)
+        self.assertEqual(
+            self.editor.wp_editcount_prev(
+                current_datetime=self.editor.wp_editcount_updated
+            ),
+            500,
+        )
         self.assertFalse(self.editor.wp_bundle_eligible)
 
     def test_update_bundle_authorization_creation(self):
@@ -1314,8 +1276,7 @@ class EditorModelTestCase(TestCase):
 
         self.assertFalse(editor.wp_bundle_authorized)
 
-    @patch.object(Editor, "get_global_userinfo")
-    def test_update_from_wikipedia(self, mock_global_userinfo):
+    def test_update_from_wikipedia(self):
         identity = {}
         identity["username"] = "evil_dr_porkchop"
         # Users' unique WP IDs should not change across API calls, but are
@@ -1341,19 +1302,17 @@ class EditorModelTestCase(TestCase):
 
         global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
 
-        # update_from_wikipedia calls get_global_userinfo, which generates an
-        # API call to Wikipedia that we don't actually want to do in testing.
-        mock_global_userinfo.return_value = global_userinfo
-
         # Don't change self.editor, or other tests will fail! Make a new one
         # to test instead.
         new_editor = EditorFactory()
         new_identity = dict(identity)
+        new_global_userinfo = dict(global_userinfo)
         new_identity["sub"] = new_editor.wp_sub
+        new_global_userinfo["id"] = new_identity["sub"]
 
         lang = get_language()
         new_editor.update_from_wikipedia(
-            new_identity, lang
+            new_identity, lang, new_global_userinfo
         )  # This call also saves the editor
 
         self.assertEqual(new_editor.wp_username, "evil_dr_porkchop")
@@ -1368,8 +1327,9 @@ class EditorModelTestCase(TestCase):
         # editor.
         with self.assertRaises(AssertionError):
             new_identity["sub"] = new_editor.wp_sub + 1
+            new_global_userinfo["id"] = new_identity["sub"]
             new_editor.update_from_wikipedia(
-                new_identity, lang
+                new_identity, lang, new_global_userinfo
             )  # This call also saves the editor
 
 

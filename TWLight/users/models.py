@@ -559,7 +559,13 @@ class Editor(models.Model):
                 user_authorization.date_expires = None
                 user_authorization.save()
 
-    def update_from_wikipedia(self, identity, lang):
+    def update_from_wikipedia(
+        self,
+        identity: dict,
+        lang: str,
+        global_userinfo: dict = None,
+        current_datetime: timezone = None,
+    ):
         """
         Given the dict returned from the Wikipedia OAuth /identify endpoint,
         update the instance accordingly.
@@ -567,24 +573,54 @@ class Editor(models.Model):
         This assumes that we have used wp_sub to match the Editor and the
         Wikipedia info.
 
-        Expected identity data:
+        Parameters
+        ----------
+        identity : dict
+            {
+                'username': identity['username'],       # wikipedia username
+                'sub': identity['sub'],                 # wikipedia ID
+                'rights': identity['rights'],           # user rights on-wiki
+                'groups': identity['groups'],           # user groups on-wiki
+                'editcount': identity['editcount'],
+                'email': identity['email'],
 
-        {
-            'username': identity['username'],       # wikipedia username
-            'sub': identity['sub'],                 # wikipedia ID
-            'rights': identity['rights'],           # user rights on-wiki
-            'groups': identity['groups'],           # user groups on-wiki
-            'editcount': identity['editcount'],
-            'email': identity['email'],
+                # Date registered: YYYYMMDDHHMMSS
+                'registered': identity['registered']
+            }
 
-            # Date registered: YYYYMMDDHHMMSS
-            'registered': identity['registered']
-        }
-
-        We could attempt to harvest real name, but we won't; we'll let
-        users enter it if required by partners, and avoid knowing the
-        data otherwise.
+            We could attempt to harvest real name, but we won't; we'll let
+            users enter it if required by partners, and avoid knowing the
+            data otherwise.
+        lang : str
+        global_userinfo : dict
+            Optional override currently used for tests only. Defaults to fetching from global_userinfo API.
+            {
+                "home": str,                            # SUL home wiki
+                "id": int,                              # Same as identity['sub']
+                "registration": datetime.datetime,      # Wikipedia account registration date.
+                "name": str,                            # Same as identity['username']
+                "editcount": int,                       # Same as identity['editcount']
+                "merged": [                             # List of wiki accounts attached to the SUL account
+                    {
+                        "wiki": str,                        # Wiki name
+                        "url": str,                         # Wiki URL
+                        "timestamp": datetime.datetime,
+                        "method": str,
+                        "editcount": int,
+                        "registration": datetime.datetime,  # Wiki registration date.
+                        "groups": list,                     # user groups on-wiki.
+                    },
+                    ...
+                ],
+            }
+        current_datetime : timezone
+            optional timezone-aware timestamp override that represents now()
+        Returns
+        -------
+        None
         """
+        if not current_datetime:
+            current_datetime = timezone.now()
 
         try:
             assert self.wp_sub == identity["sub"]
@@ -596,13 +632,27 @@ class Editor(models.Model):
             )
             raise
 
-        global_userinfo = self.get_global_userinfo(identity)
+        if not global_userinfo:
+            global_userinfo = self.get_global_userinfo(identity)
 
         self.wp_username = identity["username"]
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            self.update_editcount(global_userinfo["editcount"])
+            try:
+                assert self.wp_sub == global_userinfo["id"]
+            except AssertionError:
+                print(self.wp_sub)
+                print(global_userinfo["id"])
+                logger.exception(
+                    "Was asked to update Editor data, but the "
+                    "WP sub in the global_userinfo passed in did not match the wp_sub on "
+                    "the instance. Not updating."
+                )
+                raise
+            self.update_editcount(
+                global_userinfo["editcount"], current_datetime=current_datetime
+            )
             self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
 
         self.wp_registered = editor_reg_date(identity, global_userinfo)
