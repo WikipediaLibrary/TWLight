@@ -83,7 +83,7 @@
       {% trans "Satisfies minimum account age?" %}
   </div>
   <div class="col-xs-12 col-sm-9">
-      {% if not editor.wp_editcount_prev %}
+      {% if editor.wp_account_old_enough is None %}
           {% comment %}Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
           <i>{% trans "Unknown (requires user login)" %}</i>
       {% elif editor.wp_account_old_enough %}
@@ -100,7 +100,7 @@
       {% trans "Satisfies minimum edit count?" %}
   </div>
   <div class="col-xs-12 col-sm-9">
-      {% if not editor.wp_editcount_prev %}
+      {% if editor.wp_enough_edits is None %}
           {% comment %}Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
           <i>{% trans "Unknown (requires user login)" %}</i>
       {% elif editor.wp_enough_edits %}
@@ -118,7 +118,7 @@
       {% trans "Is not blocked on any project?" %}
   </div>
   <div class="col-xs-12 col-sm-9">
-      {% if not editor.wp_editcount_prev %}
+      {% if editor.wp_not_blocked is None %}
           {% comment %}Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
           <i>{% trans "Unknown (requires user login)" %}</i>
       {% elif editor.wp_not_blocked %}
@@ -152,7 +152,7 @@
         </p>
     </div>
     <div class="col-xs-12 col-sm-9">
-        {% if not editor.wp_editcount_prev %}
+        {% if editor.wp_bundle_eligible is None %}
             {% comment %}Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
             <i>{% trans "Unknown (requires user login)" %}</i>
         {% elif editor.wp_bundle_eligible %}
@@ -170,7 +170,7 @@
         {% trans "Satisfies recent edit count?" %}
     </div>
     <div class="col-xs-12 col-sm-9">
-        {% if not editor.wp_editcount_prev %}
+        {% if editor.wp_enough_recent_edits is None %}
             {% comment %}Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
             <i>{% trans "Unknown (requires user login)" %}</i>
         {% elif editor.wp_enough_recent_edits %}
@@ -208,7 +208,12 @@
         <strong>{% trans "Recent global edit count *" %}</strong>
     </div>
     <div class="col-xs-12 col-sm-9">
-        {{ editor.wp_editcount_recent }}
+        {% if editor.wp_editcount_recent is None %}
+          {% comment %}Translators: This text is shown next to a user's recent global edit count if less than 30 days has passed since they first logged in to the Library Card. In this case, we don't yet know if they're eligible. {% endcomment %}
+          <i>{% trans "Unknown (requires 30 days from initial user login)" %}</i>
+        {% else %}
+          {{ editor.wp_editcount_recent }}
+        {% endif %}
     </div>
 </div>
 
