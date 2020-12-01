@@ -1616,8 +1616,8 @@ class ManagementCommandsTestCase(TestCase):
         # 1st time bundle check should always pass for a valid editor.
         self.assertTrue(self.editor.wp_bundle_eligible)
 
-        # A valid editor should pass editcount checks for 31 days after their first login, even if they haven't made any more edits.
-        for day in range(31):
+        # A valid editor should pass editcount checks for 30 days after their first login, even if they haven't made any more edits.
+        for day in range(30):
             call_command(
                 "user_update_eligibility",
                 datetime=datetime.isoformat(

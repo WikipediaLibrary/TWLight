@@ -278,7 +278,7 @@ class Editor(models.Model):
         try:
             return (
                 EditorLog.objects.filter(
-                    editor=self, timestamp__lt=current_datetime - timedelta(days=30)
+                    editor=self, timestamp__lte=current_datetime - timedelta(days=30)
                 ).latest("timestamp")
             ).editcount
         except models.ObjectDoesNotExist:
@@ -305,7 +305,7 @@ class Editor(models.Model):
         try:
             return (
                 EditorLog.objects.filter(
-                    editor=self, timestamp__lt=current_datetime - timedelta(days=30)
+                    editor=self, timestamp__lte=current_datetime - timedelta(days=30)
                 ).latest("timestamp")
             ).timestamp
         except models.ObjectDoesNotExist:
