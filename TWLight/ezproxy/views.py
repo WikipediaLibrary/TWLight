@@ -101,7 +101,7 @@ class EZProxyTicket(object):
             ezproxy_url
             # The TWLight editor.
             + "/login?user="
-            + user
+            + urllib.parse.quote(user)
             # The editor's authorization ticket.
             + "&ticket="
             + ticket
