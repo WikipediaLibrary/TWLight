@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-11-23 14:37:33+0000\n"
-"X-POT-Import-Date: 2020-11-19 21:31:53+0000\n"
+"PO-Revision-Date: 2020-12-03 14:59:33+0000\n"
+"X-POT-Import-Date: 2020-12-01 23:31:55+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: mnw\n"
@@ -147,7 +147,7 @@ msgstr ""
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
 #: TWLight/applications/helpers.py:122
-#: TWLight/users/templates/users/editor_detail_data.html:283
+#: TWLight/users/templates/users/editor_detail_data.html:288
 msgid "Real name"
 msgstr "ယၟုဍာံ:"
 
@@ -156,14 +156,14 @@ msgstr "ယၟုဍာံ:"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
 #: TWLight/applications/helpers.py:124
 #: TWLight/applications/templates/applications/application_evaluation.html:100
-#: TWLight/users/templates/users/editor_detail_data.html:295
+#: TWLight/users/templates/users/editor_detail_data.html:300
 msgid "Country of residence"
 msgstr "ကၟိုန်ဍုၚ်မပဒတဴ"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
 #: TWLight/applications/helpers.py:126
-#: TWLight/users/templates/users/editor_detail_data.html:307
+#: TWLight/users/templates/users/editor_detail_data.html:312
 msgid "Occupation"
 msgstr "ကမၠောန်"
 
@@ -2367,7 +2367,7 @@ msgid "Update email"
 msgstr "ပခိုဟ်လဟဵု အီမေလ်"
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:486
+#: TWLight/users/models.py:682
 #, python-brace-format
 msgid "{wp_username}"
 msgstr "{wp_username}"
@@ -2575,39 +2575,44 @@ msgstr ""
 msgid "Recent global edit count *"
 msgstr ""
 
+#. Translators: This text is shown next to a user's recent global edit count if less than 30 days has passed since they first logged in to the Library Card. In this case, we don't yet know if they're eligible.
+#: TWLight/users/templates/users/editor_detail_data.html:213
+msgid "Unknown (requires 30 days from initial user login)"
+msgstr ""
+
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:220
+#: TWLight/users/templates/users/editor_detail_data.html:225
 msgid "Meta-Wiki registration or SUL merge date *"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
-#: TWLight/users/templates/users/editor_detail_data.html:232
+#: TWLight/users/templates/users/editor_detail_data.html:237
 msgid "Wikipedia user ID *"
 msgstr "ID ညးလွပ် ဝဳကဳပဳဒဳယာ *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/editor_detail_data.html:248
+#: TWLight/users/templates/users/editor_detail_data.html:253
 msgid "The following information is visible only to you, site administrators, publishing partners (where required), and volunteer Wikipedia Library coordinators (who have signed a Non-Disclosure Agreement)."
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
-#: TWLight/users/templates/users/editor_detail_data.html:258
+#: TWLight/users/templates/users/editor_detail_data.html:263
 #, python-format
 msgid "You may <a href=\"%(update_url)s\">update or delete</a> your data at any time."
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
-#: TWLight/users/templates/users/editor_detail_data.html:269
+#: TWLight/users/templates/users/editor_detail_data.html:274
 msgid "Email *"
 msgstr "အဳမေလ်*"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
-#: TWLight/users/templates/users/editor_detail_data.html:274
+#: TWLight/users/templates/users/editor_detail_data.html:279
 msgid "update"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
-#: TWLight/users/templates/users/editor_detail_data.html:319
+#: TWLight/users/templates/users/editor_detail_data.html:324
 msgid "Institutional affiliation"
 msgstr ""
 
