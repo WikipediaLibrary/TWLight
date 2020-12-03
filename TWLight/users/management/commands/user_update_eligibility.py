@@ -2,7 +2,7 @@ from datetime import timedelta
 import logging
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
-from TWLight.users.models import Editor, EditorLog
+from TWLight.users.models import Editor
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
@@ -89,11 +89,10 @@ class Command(BaseCommand):
             # `global_userinfo` data may be overridden.
             if options["global_userinfo"]:
                 global_userinfo = options["global_userinfo"]
+                editor.check_sub(global_userinfo["id"])
             # Default behavior is to fetch live `global_userinfo`
             else:
-                global_userinfo = editor_global_userinfo(
-                    editor.wp_username, editor.wp_sub, True
-                )
+                global_userinfo = editor_global_userinfo(editor.wp_sub)
             if global_userinfo:
                 editor.update_editcount(global_userinfo["editcount"], datetime_override)
                 # Determine editor validity.
@@ -111,6 +110,9 @@ class Command(BaseCommand):
                 editor.wp_bundle_eligible = editor_bundle_eligible(editor)
                 # Save editor.
                 editor.save()
-                editor.prune_editcount(current_datetime=datetime_override)
+                # Prune EditorLogs, with daily_prune_range set to only check the previous day to improve performance.
+                editor.prune_editcount(
+                    current_datetime=datetime_override, daily_prune_range=2
+                )
                 # Update bundle authorizations.
                 editor.update_bundle_authorization()

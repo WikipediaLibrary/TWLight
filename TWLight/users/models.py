@@ -37,6 +37,7 @@ import urllib.request, urllib.parse, urllib.error
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import SuspiciousOperation
 from django.urls import reverse
 from django.db import models
 from django.db.models import Q
@@ -375,8 +376,7 @@ class Editor(models.Model):
             self.wp_enough_recent_edits = True
 
     def prune_editcount(
-        self,
-        current_datetime: timezone = None,
+        self, current_datetime: timezone = None, daily_prune_range: int = 30
     ):
         """
         Removes extraneous and outdated EditorLogs related to this editor.
@@ -384,7 +384,8 @@ class Editor(models.Model):
         ----------
         current_datetime : timezone
             optional timezone-aware timestamp override that represents now()
-
+        daily_prune_range : int
+            optional number of days to check for and prune excess daily counts. Defaults to 30.
         Returns
         -------
         None
@@ -398,12 +399,12 @@ class Editor(models.Model):
         ).delete()
 
         # Prune EditorLogs that:
-        # have a timestamp between 12am 30 days ago and 12am yesterday.
-        # are not the earliest EditorLog for that day.
+        # have a timestamp between 12am `daily_prune_range` days ago and 12am yesterday
+        # and are not the earliest EditorLog for that day.
         current_date = timezone.localtime(current_datetime).replace(
             hour=0, minute=0, second=0, microsecond=0
         )
-        for day in range(1, 30):
+        for day in range(1, daily_prune_range):
             start_time = current_date - timedelta(days=day + 1)
             end_time = current_date - timedelta(days=day)
             extra_logs = EditorLog.objects.filter(
@@ -491,7 +492,28 @@ class Editor(models.Model):
             return self.get_bundle_authorization.is_valid
 
     def get_global_userinfo(self, identity):
-        return editor_global_userinfo(identity["username"], identity["sub"], True)
+        self.check_sub(identity["sub"])
+        return editor_global_userinfo(identity["sub"])
+
+    def check_sub(self, wp_sub):
+        """
+        Verifies that the supplied Global Wikipedia User ID matches stored editor ID.
+        Parameters
+        ----------
+        wp_sub : int
+            Global Wikipedia User ID, used for guiid parameter in globaluserinfo calls.
+
+        Returns
+        -------
+        None
+        """
+
+        if self.wp_sub != wp_sub:
+            raise SuspiciousOperation(
+                "Was asked to update Editor data, but the "
+                "WP sub in the identity passed in did not match the wp_sub on "
+                "the instance. Not updating."
+            )
 
     @property
     def get_bundle_authorization(self):
@@ -610,34 +632,15 @@ class Editor(models.Model):
         if not current_datetime:
             current_datetime = timezone.now()
 
-        try:
-            assert self.wp_sub == identity["sub"]
-        except AssertionError:
-            logger.exception(
-                "Was asked to update Editor data, but the "
-                "WP sub in the identity passed in did not match the wp_sub on "
-                "the instance. Not updating."
-            )
-            raise
-
-        if not global_userinfo:
+        if global_userinfo:
+            self.check_sub(global_userinfo["id"])
+        else:
             global_userinfo = self.get_global_userinfo(identity)
 
         self.wp_username = identity["username"]
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
-            try:
-                assert self.wp_sub == global_userinfo["id"]
-            except AssertionError:
-                print(self.wp_sub)
-                print(global_userinfo["id"])
-                logger.exception(
-                    "Was asked to update Editor data, but the "
-                    "WP sub in the global_userinfo passed in did not match the wp_sub on "
-                    "the instance. Not updating."
-                )
-                raise
             self.update_editcount(
                 global_userinfo["editcount"], current_datetime=current_datetime
             )
