@@ -2,7 +2,7 @@ from datetime import timedelta
 import logging
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
-from TWLight.users.models import Editor, EditorLog
+from TWLight.users.models import Editor
 
 from TWLight.users.helpers.editor_data import (
     editor_global_userinfo,
@@ -91,9 +91,7 @@ class Command(BaseCommand):
                 global_userinfo = options["global_userinfo"]
             # Default behavior is to fetch live `global_userinfo`
             else:
-                global_userinfo = editor_global_userinfo(
-                    editor.wp_username, editor.wp_sub, True
-                )
+                global_userinfo = editor_global_userinfo(editor.wp_sub)
             if global_userinfo:
                 editor.update_editcount(global_userinfo["editcount"], datetime_override)
                 # Determine editor validity.

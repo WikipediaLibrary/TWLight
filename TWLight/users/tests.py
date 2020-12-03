@@ -8,7 +8,11 @@ from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
-from django.core.exceptions import PermissionDenied, ValidationError
+from django.core.exceptions import (
+    PermissionDenied,
+    SuspiciousOperation,
+    ValidationError,
+)
 from django.urls import resolve, reverse
 from django.core.management import call_command
 from django.test import TestCase, Client, RequestFactory
@@ -1342,7 +1346,7 @@ class EditorModelTestCase(TestCase):
         # Now check what happens if their wikipedia ID number has changed - this
         # should throw an error as we can no longer verify they're the same
         # editor.
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(SuspiciousOperation):
             new_identity["sub"] = new_editor.wp_sub + 1
             new_global_userinfo["id"] = new_identity["sub"]
             new_editor.update_from_wikipedia(

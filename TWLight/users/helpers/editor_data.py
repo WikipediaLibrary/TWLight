@@ -1,51 +1,37 @@
 from datetime import datetime, timedelta
 import json
 import logging
-import typing
 import urllib.request, urllib.error, urllib.parse
 from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
 
-def editor_global_userinfo(
-    wp_username: str, wp_sub: typing.Optional[int], strict: bool
-):
+def editor_global_userinfo(wp_sub: int):
     """
     Public interface for fetching Editor global_userinfo.
     Parameters
     ----------
-    wp_username : str
-        Global Wikipedia username, used for guiuser parameter in globaluserinfo calls.
     wp_sub : int
         Global Wikipedia User ID, used for guiid parameter in globaluserinfo calls.
-    strict : bool
-        Verify that guiuser and guiid match. This precludes library account takeover via wikipedia username changes,
-        but also precludes updates to accounts upon username change.
 
     Returns
     -------
     dict
         The editor's globaluserinfo as returned by the mediawiki api.
     """
-    guiuser = urllib.parse.quote(wp_username)
-    # Trying to get global user info with the username
-    results = _get_user_info_request("guiuser", guiuser)
-
     try:
+        # Try to get global user info with wp_sub
+        results = _get_user_info_request("guiid", str(wp_sub))
         global_userinfo = results["query"]["globaluserinfo"]
         # If the user isn't found global_userinfo contains the empty key "missing"
         if "missing" in global_userinfo:
-            # querying again, this time using wp_sub
-            results = _get_user_info_request("guiid", wp_sub)
-            global_userinfo = results["query"]["globaluserinfo"]
-        if strict:
-            # Verify that the numerical account ID matches, not just the user's handle.
-            assert isinstance(wp_sub, int)
-            assert wp_sub == global_userinfo["id"]
-    except (KeyError, AssertionError):
+            global_userinfo = None
+    # If we don't get a response with the expected keys, something else went awry.
+    except KeyError:
         global_userinfo = None
-        logger.exception(f"Could not fetch global_userinfo for User {guiuser}")
+    if global_userinfo is None:
+        logger.exception(f"Could not fetch global_userinfo for User {wp_sub}")
     return global_userinfo
 
 
