@@ -375,8 +375,7 @@ class Editor(models.Model):
             self.wp_enough_recent_edits = True
 
     def prune_editcount(
-        self,
-        current_datetime: timezone = None,
+        self, current_datetime: timezone = None, daily_prune_range: int = 30
     ):
         """
         Removes extraneous and outdated EditorLogs related to this editor.
@@ -384,7 +383,8 @@ class Editor(models.Model):
         ----------
         current_datetime : timezone
             optional timezone-aware timestamp override that represents now()
-
+        daily_prune_range : int
+            optional number of days to check for and prune excess daily counts. Defaults to 30.
         Returns
         -------
         None
@@ -398,12 +398,12 @@ class Editor(models.Model):
         ).delete()
 
         # Prune EditorLogs that:
-        # have a timestamp between 12am 30 days ago and 12am yesterday.
-        # are not the earliest EditorLog for that day.
+        # have a timestamp between 12am `daily_prune_range` days ago and 12am yesterday
+        # and are not the earliest EditorLog for that day.
         current_date = timezone.localtime(current_datetime).replace(
             hour=0, minute=0, second=0, microsecond=0
         )
-        for day in range(1, 30):
+        for day in range(1, daily_prune_range):
             start_time = current_date - timedelta(days=day + 1)
             end_time = current_date - timedelta(days=day)
             extra_logs = EditorLog.objects.filter(

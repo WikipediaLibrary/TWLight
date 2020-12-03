@@ -111,6 +111,9 @@ class Command(BaseCommand):
                 editor.wp_bundle_eligible = editor_bundle_eligible(editor)
                 # Save editor.
                 editor.save()
-                editor.prune_editcount(current_datetime=datetime_override)
+                # Prune EditorLogs, with daily_prune_range set to only check the previous day to improve performance.
+                editor.prune_editcount(
+                    current_datetime=datetime_override, daily_prune_range=2
+                )
                 # Update bundle authorizations.
                 editor.update_bundle_authorization()
