@@ -89,6 +89,7 @@ class Command(BaseCommand):
             # `global_userinfo` data may be overridden.
             if options["global_userinfo"]:
                 global_userinfo = options["global_userinfo"]
+                editor.check_sub(global_userinfo["id"])
             # Default behavior is to fetch live `global_userinfo`
             else:
                 global_userinfo = editor_global_userinfo(editor.wp_sub)

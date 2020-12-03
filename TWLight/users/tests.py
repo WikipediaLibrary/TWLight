@@ -1557,7 +1557,7 @@ class ManagementCommandsTestCase(TestCase):
 
         self.global_userinfo_editor = {
             "home": "enwiki",
-            "id": 567823,
+            "id": self.editor.wp_sub,
             "registration": "2015-11-06T15:46:29Z",  # Well before first commit.
             "name": "user328",
             "editcount": 5000,
@@ -1582,6 +1582,7 @@ class ManagementCommandsTestCase(TestCase):
                 datetime=datetime.isoformat(
                     self.editor.wp_editcount_updated + timedelta(days=1)
                 ),
+                wp_username=self.editor.wp_username,
                 global_userinfo=self.global_userinfo_editor,
             )
         self.editor.refresh_from_db()
@@ -1679,6 +1680,7 @@ class ManagementCommandsTestCase(TestCase):
             datetime=datetime.isoformat(
                 self.editor.wp_editcount_updated + timedelta(days=1)
             ),
+            wp_username=self.editor.wp_username,
             global_userinfo=self.global_userinfo_editor,
         )
 
