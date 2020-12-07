@@ -312,8 +312,18 @@ class ViewsTestCase(TestCase):
         # expected string is too fragile.
 
     def test_withdraw_application(self):
-        app = ApplicationFactory(
+        app1 = ApplicationFactory(
             status=Application.PENDING,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
+        app2 = ApplicationFactory(
+            status=Application.APPROVED,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
+        app3 = ApplicationFactory(
+            status=Application.QUESTION,
             partner=PartnerFactory(authorization_method=Partner.BUNDLE),
             editor=self.user_editor.editor,
         )
@@ -326,7 +336,9 @@ class ViewsTestCase(TestCase):
             request, pk=self.editor1.pk, id=app.pk
         )
         app.refresh_from_db()
-        self.assertEqual(app.status, Application.INVALID)
+        self.assertEqual(app1.status, Application.INVALID)
+        self.assertEqual(app2.status, Application.INVALID)
+        self.assertEqual(app3.status, Application.INVALID)
 
     def test_my_library_page_has_authorizations(self):
 
