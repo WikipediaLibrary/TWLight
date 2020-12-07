@@ -45,14 +45,13 @@ COMMENTS = "comments"
 AGREEMENT_WITH_TERMS_OF_USE = "agreement_with_terms_of_use"
 ACCOUNT_EMAIL = "account_email"
 REQUESTED_ACCESS_DURATION = "requested_access_duration"
-HIDDEN = "hidden"
 
 
 # ~~~~ Basic field names ~~~~ #
 USER_FORM_FIELDS = [REAL_NAME, COUNTRY_OF_RESIDENCE, OCCUPATION, AFFILIATION]
 
 # These fields are displayed for all partners.
-PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS, HIDDEN]
+PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS]
 
 # These fields are displayed only when a specific partner requires that
 # information.
@@ -83,7 +82,6 @@ FIELD_TYPES = {
     REQUESTED_ACCESS_DURATION: forms.ChoiceField(
         choices=Application.REQUESTED_ACCESS_DURATION_CHOICES
     ),
-    HIDDEN: forms.BooleanField(required=False),
 }
 
 FIELD_LABELS = {
@@ -112,9 +110,6 @@ FIELD_LABELS = {
     # fmt: off
     # Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
     REQUESTED_ACCESS_DURATION: _("The number of months you wish to have this access for before renewal is required"),
-    # Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
-    HIDDEN: _("Check this box if you would prefer to hide your application from the 'latest activity' timeline."),
-    # fmt: on
 }
 
 SEND_DATA_FIELD_LABELS = {

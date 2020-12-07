@@ -147,9 +147,6 @@ class Application(models.Model):
     # If this Application is a renewal, the parent is the original Application
     # it was copied from.
     parent = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True)
-
-    hidden = models.BooleanField(default=False)
-
     waitlist_status = models.BooleanField(
         default=False, help_text="Mark as True if the partner is WAITLISTED"
     )
