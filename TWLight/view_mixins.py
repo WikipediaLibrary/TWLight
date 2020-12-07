@@ -80,6 +80,10 @@ def test_func_partner_coordinator(obj, user):
             # Return true if the object is an application to a
             # partner for whom the user is a designated coordinator
             elif isinstance(obj, Application):
+                # When coordinators view their own application
+                # Return none if the partner has no coordinator
+                if obj.partner.coordinator is None:
+                    return None
                 obj_partner_coordinator_test = obj.partner.coordinator.pk == user.pk
             # Return true if the object is a partner for whom the user is a designated coordinator
             elif isinstance(obj, Partner):
