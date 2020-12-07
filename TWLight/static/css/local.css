@@ -202,6 +202,7 @@ header {
   }
 }
 
+
 #top-nav {
   border-bottom: 1px solid #eee;
   margin-bottom: 20px;
@@ -214,6 +215,13 @@ header {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+@media (max-width:300px){
+  #footer{
+    position: relative;
+    top: 7px;
+  }
 }
 
 .nav-greeting {
@@ -773,4 +781,5 @@ CLEARING COLUMNS
   background-color: #333;
   color: #fff;
 }
+
 
