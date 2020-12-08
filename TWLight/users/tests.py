@@ -329,7 +329,7 @@ class ViewsTestCase(TestCase):
         app.refresh_from_db()
         self.assertEqual(app.status, Application.INVALID)
 
-    def test_withdraw_sent_application(self):
+    def test_sent_application(self):
         app = ApplicationFactory(
             status=Application.SENT,
             partner=PartnerFactory(authorization_method=Partner.BUNDLE),
@@ -339,14 +339,14 @@ class ViewsTestCase(TestCase):
 
         factory = RequestFactory()
         request = factory.get(
-            reverse("users:withdraw", kwargs={"pk": self.editor1.pk, "id": app.pk})
+            reverse("users:my_applications", kwargs={"pk": self.editor1.pk})
         )
         request.user = self.user_editor
-        response = views.WithdrawApplication.as_view()(
-            request, pk=self.editor1.pk, id=app.pk
+        response = views. ListApplicationsUserView.as_view()(
+            request, pk=self.editor1.pk,
         )
         app.refresh_from_db()
-        self.assertNotIn(app.status, response.render().content.decode("utf-8"))
+        self.assertNotIn("Withdraw", response.render().content.decode("utf-8"))
 
     def test_my_library_page_has_authorizations(self):
 
