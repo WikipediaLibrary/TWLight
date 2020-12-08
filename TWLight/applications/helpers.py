@@ -110,6 +110,7 @@ FIELD_LABELS = {
     # fmt: off
     # Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
     REQUESTED_ACCESS_DURATION: _("The number of months you wish to have this access for before renewal is required"),
+    # fmt: on
 }
 
 SEND_DATA_FIELD_LABELS = {
