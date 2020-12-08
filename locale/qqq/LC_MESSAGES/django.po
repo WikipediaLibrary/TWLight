@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2020-12-07 17:37+0000\n"
+"POT-Creation-Date: 2020-12-08 13:07+0000\n"
 "PO-Revision-Date: 2020-12-07 15:07:34+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,7 +151,7 @@ msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
-#: TWLight/applications/helpers.py:117
+#: TWLight/applications/helpers.py:118
 #: TWLight/users/templates/users/editor_detail_data.html:288
 msgid "Real name"
 msgstr ""
@@ -159,7 +159,7 @@ msgstr ""
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
 #. Translators: This labels the section of an application that shows the country of residence of the applicant.
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
-#: TWLight/applications/helpers.py:119
+#: TWLight/applications/helpers.py:120
 #: TWLight/applications/templates/applications/application_evaluation.html:100
 #: TWLight/users/templates/users/editor_detail_data.html:300
 msgid "Country of residence"
@@ -167,35 +167,35 @@ msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
-#: TWLight/applications/helpers.py:121
+#: TWLight/applications/helpers.py:122
 #: TWLight/users/templates/users/editor_detail_data.html:312
 msgid "Occupation"
 msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling a user's affiliation
-#: TWLight/applications/helpers.py:123
+#: TWLight/applications/helpers.py:124
 msgid "Affiliation"
 msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
-#: TWLight/applications/helpers.py:125
+#: TWLight/applications/helpers.py:126
 msgid "Stream requested"
 msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
-#: TWLight/applications/helpers.py:127
+#: TWLight/applications/helpers.py:128
 #: TWLight/applications/templates/applications/application_evaluation.html:162
 msgid "Title requested"
 msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
-#: TWLight/applications/helpers.py:129
+#: TWLight/applications/helpers.py:130
 msgid "Agreed with terms of use"
 msgstr ""
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
-#: TWLight/applications/helpers.py:131
+#: TWLight/applications/helpers.py:132
 msgid "Account email"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #. Translators: Labels the field where the user's email is displayed.
-#: TWLight/applications/helpers.py:145
+#: TWLight/applications/helpers.py:146
 #: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/templates/resources/partner_users.html:28
 #: TWLight/resources/templates/resources/partner_users.html:79
