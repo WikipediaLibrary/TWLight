@@ -342,8 +342,9 @@ class ViewsTestCase(TestCase):
             reverse("users:my_applications", kwargs={"pk": self.editor1.pk})
         )
         request.user = self.user_editor
-        response = views. ListApplicationsUserView.as_view()(
-            request, pk=self.editor1.pk,
+        response = views.ListApplicationsUserView.as_view()(
+            request,
+            pk=self.editor1.pk,
         )
         app.refresh_from_db()
         self.assertNotIn("Withdraw", response.render().content.decode("utf-8"))
