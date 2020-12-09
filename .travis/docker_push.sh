@@ -15,6 +15,7 @@ then
   echo "$cr_password" | docker login $cr_server -u "$cr_username" --password-stdin
 
   docker push ${cr_server}/wikipedialibrary/alpine:3.11
+  docker push ${cr_server}/wikipedialibrary/mariadb:10
 
   docker push ${cr_server}/wikipedialibrary/twlight_base:${COMMIT_TAG}
   docker push ${cr_server}/wikipedialibrary/twlight_base:${BRANCH_TAG}

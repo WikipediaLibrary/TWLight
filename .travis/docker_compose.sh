@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-# Pull alpine base image from docker hub, but then retag it for $cr_server for reuse and mirroring.
+# Pull images from docker hub, but then retag for $cr_server for reuse and mirroring.
 docker pull "docker.io/library/alpine:3.11" || true
 docker tag "docker.io/library/alpine:3.11" "${cr_server}/wikipedialibrary/alpine:3.11"
+docker pull "docker.io/library/mariadb:10" || true
+docker tag "docker.io/library/mariadb:10" "${cr_server}/wikipedialibrary/mariadb:10"
 
 # Build images with caching and then run the stack in docker-compose.
 docker pull "${cr_server}/wikipedialibrary/twlight_base:${BRANCH_TAG}" || true
