@@ -31,7 +31,7 @@ services:
     ports:
       - "3306:3306"
   twlight:
-    image: wikipedialibrary/twlight:local
+    image: quay.io/wikipedialibrary/twlight:local
     env_file:
       - ./conf/local.twlight.env
     # Local environment should mount things from the code directory

@@ -14,15 +14,15 @@ tag=${2}
 # Move into the repository.
 cd /srv/TWLight
 # Check for newer image
-pull=$(docker pull wikipedialibrary/twlight:${tag})
+pull=$(docker pull quay.io/wikipedialibrary/twlight:${tag})
 
 # Pull swarm config updates and update the stack if there is a new image.
-if echo ${pull} | grep "Status: Downloaded newer image for wikipedialibrary/twlight:${tag}" >/dev/null
+if echo ${pull} | grep "Status: Downloaded newer image for quay.io/wikipedialibrary/twlight:${tag}" >/dev/null
 then
     git pull
     docker stack deploy -c docker-compose.yml -c docker-compose.${env}.yml ${env}
 # Report if the local image is already up to date.
-elif echo ${pull} | grep "Status: Image is up to date for wikipedialibrary/twlight:${tag}" >/dev/null
+elif echo ${pull} | grep "Status: Image is up to date for quay.io/wikipedialibrary/twlight:${tag}" >/dev/null
 then
    echo "Up to date"
 # Fail in any other circumstance.
