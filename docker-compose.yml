@@ -42,7 +42,7 @@ services:
       - TWLIGHT_OAUTH_CONSUMER_SECRET
       - TWLIGHT_EZPROXY_SECRET
   web:
-    image: nginx:latest
+    image: quay.io/wikipedialibrary/nginx:latest
     volumes:
       - type: bind
         source: ./media

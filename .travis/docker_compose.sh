@@ -5,6 +5,8 @@ docker pull "docker.io/library/alpine:3.11" || true
 docker tag "docker.io/library/alpine:3.11" "${cr_server}/wikipedialibrary/alpine:3.11"
 docker pull "docker.io/library/mariadb:10" || true
 docker tag "docker.io/library/mariadb:10" "${cr_server}/wikipedialibrary/mariadb:10"
+docker pull "docker.io/library/nginx:latest" || true
+docker tag "docker.io/library/nginx:latest" "${cr_server}/wikipedialibrary/nginx:latest"
 
 # Build images with caching and then run the stack in docker-compose.
 docker pull "${cr_server}/wikipedialibrary/twlight_base:${BRANCH_TAG}" || true
