@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-12-07 15:07:30+0000\n"
-"X-POT-Import-Date: 2020-12-01 23:31:55+0000\n"
+"PO-Revision-Date: 2020-12-10 13:05:18+0000\n"
+"X-POT-Import-Date: 2020-12-08 06:34:58+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bcl\n"
@@ -74,7 +74,7 @@ msgstr "Ngaran nin Paragamit:"
 
 #. Translators: Label of the field where coordinators can enter the name of a partner
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:370 TWLight/applications/helpers.py:99
+#: TWLight/applications/forms.py:370 TWLight/applications/helpers.py:97
 msgid "Partner name"
 msgstr "Ngaran kan kapareha"
 
@@ -85,69 +85,64 @@ msgstr ""
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:403 TWLight/applications/helpers.py:111
+#: TWLight/applications/forms.py:403 TWLight/applications/helpers.py:109
 msgid "The email for your account on the partner's website"
 msgstr "An e-surat sa saimong panlaog sa websityo kan kapareha"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:413 TWLight/applications/helpers.py:114
+#: TWLight/applications/forms.py:413 TWLight/applications/helpers.py:112
 msgid "The number of months you wish to have this access for before renewal is required"
 msgstr ""
 
 #. Translators: When filling out an application, users may need to specify their name
-#: TWLight/applications/helpers.py:91
+#: TWLight/applications/helpers.py:89
 msgid "Your real name"
 msgstr "An saimong totoong pangaran"
 
 #. Translators: When filling out an application, users may need to specify the country in which they currently live
-#: TWLight/applications/helpers.py:93
+#: TWLight/applications/helpers.py:91
 msgid "Your country of residence"
 msgstr "An saimong bansang iniistaran"
 
 #. Translators: When filling out an application, users may need to specify their current occupation
-#: TWLight/applications/helpers.py:95
+#: TWLight/applications/helpers.py:93
 msgid "Your occupation"
 msgstr "Trabaho"
 
 #. Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
-#: TWLight/applications/helpers.py:97
+#: TWLight/applications/helpers.py:95
 msgid "Your institutional affiliation"
 msgstr "Kairibang institusyon"
 
 #. Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
-#: TWLight/applications/helpers.py:101
+#: TWLight/applications/helpers.py:99
 msgid "Why do you want access to this resource?"
 msgstr "Tano kaipuhan mong i-access an resource na ini?"
 
 #. Translators: When filling out an application, users may need to specify a particular collection of resources they want access to
-#: TWLight/applications/helpers.py:103
+#: TWLight/applications/helpers.py:101
 msgid "Which collection do you want?"
 msgstr "Arin koleksiyon an saimong gusto?"
 
 #. Translators: When filling out an application, users may need to specify a particular book they want access to
-#: TWLight/applications/helpers.py:105
+#: TWLight/applications/helpers.py:103
 msgid "Which book do you want?"
 msgstr "Arin na libro an saimong gusto?"
 
 #. Translators: When filling out an application, users are given a text box where they can include any extra relevant information
-#: TWLight/applications/helpers.py:107
+#: TWLight/applications/helpers.py:105
 msgid "Anything else you want to say"
 msgstr "Iba pang muya mong sabihon"
 
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
-#: TWLight/applications/helpers.py:109
+#: TWLight/applications/helpers.py:107
 msgid "You must agree with the partner's terms of use"
 msgstr "Kaipuhan mong mag-sang-ayon sa mga termino kan paggamit kan saimong kapareha"
 
-#. Translators: When filling out an application, this text labels a checkbox that hides this application from the website's 'latest activity' timeline.
-#: TWLight/applications/helpers.py:116
-msgid "Check this box if you would prefer to hide your application from the 'latest activity' timeline."
-msgstr "I-klik an kahon kun mas gusto mong itago an saimong aplikasyon sa 'pinakabagong aktibidad' sa timeline."
-
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
-#: TWLight/applications/helpers.py:122
+#: TWLight/applications/helpers.py:118
 #: TWLight/users/templates/users/editor_detail_data.html:288
 msgid "Real name"
 msgstr "Totoong pangaran:"
@@ -155,7 +150,7 @@ msgstr "Totoong pangaran:"
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
 #. Translators: This labels the section of an application that shows the country of residence of the applicant.
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
-#: TWLight/applications/helpers.py:124
+#: TWLight/applications/helpers.py:120
 #: TWLight/applications/templates/applications/application_evaluation.html:100
 #: TWLight/users/templates/users/editor_detail_data.html:300
 msgid "Country of residence"
@@ -163,35 +158,35 @@ msgstr "Bansang iniistaran"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
-#: TWLight/applications/helpers.py:126
+#: TWLight/applications/helpers.py:122
 #: TWLight/users/templates/users/editor_detail_data.html:312
 msgid "Occupation"
 msgstr "Trabaho"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's affiliation
-#: TWLight/applications/helpers.py:128
+#: TWLight/applications/helpers.py:124
 msgid "Affiliation"
 msgstr "Afilyasiyon"
 
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
-#: TWLight/applications/helpers.py:130
+#: TWLight/applications/helpers.py:126
 msgid "Stream requested"
 msgstr "Naghagad na madalan"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
-#: TWLight/applications/helpers.py:132
+#: TWLight/applications/helpers.py:128
 #: TWLight/applications/templates/applications/application_evaluation.html:162
 msgid "Title requested"
 msgstr "Mga titulong hinahagad"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
-#: TWLight/applications/helpers.py:134
+#: TWLight/applications/helpers.py:130
 msgid "Agreed with terms of use"
 msgstr "Mag-ayon sa termino kan paggamit"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
-#: TWLight/applications/helpers.py:136
+#: TWLight/applications/helpers.py:132
 msgid "Account email"
 msgstr "Pampalaog na e-surat"
 
@@ -199,7 +194,7 @@ msgstr "Pampalaog na e-surat"
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #. Translators: Labels the field where the user's email is displayed.
-#: TWLight/applications/helpers.py:150
+#: TWLight/applications/helpers.py:146
 #: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/resources/templates/resources/partner_users.html:28
 #: TWLight/resources/templates/resources/partner_users.html:79
@@ -264,13 +259,13 @@ msgid "1 month"
 msgstr ""
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
-#: TWLight/applications/models.py:328
+#: TWLight/applications/models.py:325
 #, python-brace-format
 msgid "Access URL: {access_url}"
 msgstr ""
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-#: TWLight/applications/models.py:334
+#: TWLight/applications/models.py:331
 msgid "You can expect to receive access details within a week or two once it has been processed."
 msgstr ""
 
@@ -1066,7 +1061,7 @@ msgstr "Bagong komento sa aplikasyon sa Wikipedyang Libraryong saimong pigkoment
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/about.html:204 TWLight/templates/base.html:275
+#: TWLight/templates/about.html:204 TWLight/templates/base.html:267
 msgid "Contact us"
 msgstr "Hadoyon kami"
 
@@ -1674,7 +1669,7 @@ msgstr ""
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_filter.html:30
-#: TWLight/templates/base.html:254
+#: TWLight/templates/base.html:246
 msgid "Suggest a partner"
 msgstr "Magmungkahi nin kapareha"
 
@@ -2091,46 +2086,41 @@ msgstr "Surion"
 msgid "Send data to partners"
 msgstr "Ipadara na data sa mga kapareha"
 
-#. Translators: Shown in the top bar of almost every page, linking to the home page (for the timeline).
-#: TWLight/templates/base.html:178
-msgid "Latest activity"
-msgstr "Pinakabaguhong aktibidad"
-
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
-#: TWLight/templates/base.html:196
+#: TWLight/templates/base.html:188
 #, python-format
 msgid "You don't have an email on file. We can't finalize your access to partner resources, and you won't be able to <a href=\"%(contact_us_url)s\">contact us</a> without an email. Please <a href=\"%(email_url)s\">update your email</a>."
 msgstr ""
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
-#: TWLight/templates/base.html:207
+#: TWLight/templates/base.html:199
 #, python-format
 msgid "You have requested a restriction on the processing of your data. Most site functionality will not be available to you until you <a href=\"%(restrict_url)s\">lift this restriction</a>."
 msgstr ""
 
 #. Translators: Shown if the current user has not agreed to the terms of use.
-#: TWLight/templates/base.html:218
+#: TWLight/templates/base.html:210
 #, python-format
 msgid "You have not agreed to the <a href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will not be processed and you won't be able to apply or access resources you are approved for."
 msgstr ""
 
 #. Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:233
+#: TWLight/templates/base.html:225
 msgid "This work is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 International License</a>."
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:242
+#: TWLight/templates/base.html:234
 msgid "About"
 msgstr "Manonongod"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:248
+#: TWLight/templates/base.html:240
 msgid "Terms of use and privacy policy"
 msgstr "Termino kan paggamit asin kalakawan kan pribasidad"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:260
+#: TWLight/templates/base.html:252
 msgid "Feedback"
 msgstr "Balik-simbag"
 
@@ -3110,42 +3100,6 @@ msgstr ""
 #: TWLight/views.py:69
 msgid "No active blocks"
 msgstr ""
-
-#. Translators: This displays on the timeline when a new user registers. Don't translate {username}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/views.py:124
-#, python-brace-format
-msgid "{username} signed up for a Wikipedia Library Card Platform account"
-msgstr "{username} maggibo nin panindog para sa Wikipedia Library Card Platform"
-
-#. Translators: This displays on the timeline when a new partner is added. Don't translate {partner}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/views.py:139
-#, python-brace-format
-msgid "{partner} joined the Wikipedia Library "
-msgstr "{partner} nagsali sa Wikipedyang Libraryo\\"
-
-#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits a renewal request. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
-#: TWLight/views.py:158
-#, python-brace-format
-msgid "{username} applied for renewal of their <a href='{url}'>{partner}</a> access"
-msgstr ""
-
-#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application with a rationale. Don't translate <a href=\"{url}\">{partner}</a><blockquote>{rationale}</blockquote>
-#: TWLight/views.py:167
-#, python-brace-format
-msgid "{username} applied for access to <a href='{url}'>{partner}</a><blockquote>{rationale}</blockquote>"
-msgstr ""
-
-#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if a user submits an application. Don't translate <a href="{url}">{partner}</a>
-#: TWLight/views.py:177
-#, fuzzy, python-brace-format
-msgid "{username} applied for access to <a href='{url}'>{partner}</a>"
-msgstr "{username} nagsumite nin aplikasyon para maka-access sa <a href=\"{url}\">{partner}</a>"
-
-#. Translators: On the website front page (https://wikipedialibrary.wmflabs.org/), this message is on the timeline if an application is accepted. Don't translate <a href="{url}">{partner}</a>.
-#: TWLight/views.py:201
-#, fuzzy, python-brace-format
-msgid "{username} received access to <a href='{url}'>{partner}</a>"
-msgstr "{username} nakaresibe nin access sa  <a href=\"{url}\">{partner}</a>"
 
 #: tests/shunit/data/bad_i18n_comment_1.py:3
 #: tests/shunit/data/bad_i18n_newline_1.py:5
