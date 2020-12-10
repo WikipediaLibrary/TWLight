@@ -48,7 +48,7 @@ services:
     ports:
       - "3306:3306"
   twlight:
-    image: wikipedialibrary/twlight:branch_production
+    image: quay.io/wikipedialibrary/twlight:branch_production
     command: /app/bin/twlight_docker_entrypoint.sh "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
     env_file:
       - ./conf/production.twlight.env
