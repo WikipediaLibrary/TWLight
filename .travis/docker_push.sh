@@ -10,18 +10,23 @@ echo "TWLIGHT_TRANSLATION_FILES_CHANGED: ${TWLIGHT_TRANSLATION_FILES_CHANGED}"
 
 
 # Only act if this is build was fired from a push and there are no missing migrations or changed translations.
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ -n "${DOCKER_USERNAME+isset}" ] && [ -n "${DOCKER_PASSWORD+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -eq 0 ] && [ "${TWLIGHT_TRANSLATION_FILES_CHANGED}" -eq 0 ]
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ -n "${cr_server+isset}" && [ -n "${cr_username+isset}" ] && [ -n "${cr_password+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -eq 0 ] && [ "${TWLIGHT_TRANSLATION_FILES_CHANGED}" -eq 0 ]
 then
-  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  docker push wikipedialibrary/twlight_base:${COMMIT_TAG}
-  docker push wikipedialibrary/twlight_base:${BRANCH_TAG}
-  docker push wikipedialibrary/twlight_base:${BUILD_TAG}
+  echo "$cr_password" | docker login $cr_server -u "$cr_username" --password-stdin
 
-  docker push wikipedialibrary/twlight_build:${COMMIT_TAG}
-  docker push wikipedialibrary/twlight_build:${BRANCH_TAG}
-  docker push wikipedialibrary/twlight_build:${BUILD_TAG}
+  docker push ${cr_server}/wikipedialibrary/alpine:3.11
+  docker push ${cr_server}/wikipedialibrary/mariadb:10
+  docker push ${cr_server}/wikipedialibrary/nginx:latest
 
-  docker push wikipedialibrary/twlight:${COMMIT_TAG}
-  docker push wikipedialibrary/twlight:${BRANCH_TAG}
-  docker push wikipedialibrary/twlight:${BUILD_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight_base:${COMMIT_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight_base:${BRANCH_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight_base:${BUILD_TAG}
+
+  docker push ${cr_server}/wikipedialibrary/twlight_build:${COMMIT_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight_build:${BRANCH_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight_build:${BUILD_TAG}
+
+  docker push ${cr_server}/wikipedialibrary/twlight:${COMMIT_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight:${BRANCH_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight:${BUILD_TAG}
 fi

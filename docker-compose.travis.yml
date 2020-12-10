@@ -29,12 +29,12 @@ services:
         source: ./conf/db/local.d
         target: /etc/mysql/conf.d
   twlight:
-    image: wikipedialibrary/twlight:${BRANCH_TAG}
+    image: ${cr_server}/wikipedialibrary/twlight:${BRANCH_TAG}
     build:
       cache_from:
-        - wikipedialibrary/twlight_base:${BRANCH_TAG}
-        - wikipedialibrary/twlight_build:${BRANCH_TAG}
-        - wikipedialibrary/twlight:${BRANCH_TAG}
+        - ${cr_server}/wikipedialibrary/twlight_base:${BRANCH_TAG}
+        - ${cr_server}/wikipedialibrary/twlight_build:${BRANCH_TAG}
+        - ${cr_server}/wikipedialibrary/twlight:${BRANCH_TAG}
     env_file:
       - ./conf/travis.twlight.env
     environment:
