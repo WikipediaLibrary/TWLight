@@ -4,6 +4,7 @@
 # Author: Abijeet Patro
 # Author: Andrew J.Kurbiko
 # Author: BaRaN6161 TURK
+# Author: Base
 # Author: Movses
 # Author: MuratTheTurkish
 # Author: Olghinabella
@@ -15,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-12-08 13:07+0000\n"
-"PO-Revision-Date: 2020-12-10 13:05:21+0000\n"
+"PO-Revision-Date: 2020-12-14 14:22:36+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -923,7 +924,7 @@ msgstr "Пакетне оновлення заявик(ок) {} успішне."
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:1240
 msgid "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available."
-msgstr "Не вдається схвалити заявки {} оскільки партнери із проксі-авторизацією знаходяться у списку очікування, або  недостатньо облікових записів. У випадку недостатності облікових записів, треба виставити пріорітети заявкам, а потім схвалити заявки у відповідності до кількості доступних облікових записів."
+msgstr "Не вдається схвалити заявки {} оскільки партнери із проксі-авторизацією знаходяться у списку очікування, або  недостатньо облікових записів. У випадку недостатності облікових записів, треба виставити пріоритети заявкам, а потім схвалити заявки у відповідності до кількості доступних облікових записів."
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1411

@@ -31,7 +31,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-12-08 13:07+0000\n"
-"PO-Revision-Date: 2020-12-10 13:05:21+0000\n"
+"PO-Revision-Date: 2020-12-14 14:22:35+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2601,9 +2601,8 @@ msgstr "Глобальный счётчик последних правок *"
 
 #. Translators: This text is shown next to a user's recent global edit count if less than 30 days has passed since they first logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:213
-#, fuzzy
 msgid "Unknown (requires 30 days from initial user login)"
-msgstr "Неизвестно (требуется авторизация участника)"
+msgstr "Неизвестно (требуется 30 дней с первой авторизации участника)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:225
