@@ -61,6 +61,10 @@ class CommentNotificationEmailOthers(template_mail.TemplateMail):
     name = "comment_notification_others"
 
 
+class ApprovalNotification(template_mail.TemplateMail):
+    name = "approval_notification"
+
+
 class WaitlistNotification(template_mail.TemplateMail):
     name = "waitlist_notification"
 
@@ -312,6 +316,32 @@ def send_comment_notification_emails(sender, **kwargs):
             )
 
 
+def send_approval_notification_email(instance):
+    base_url = get_current_site(None).domain
+    path = reverse_lazy("users:my_library")
+    link = "https://{base}{path}".format(base=base_url, path=path)
+    email = ApprovalNotification()
+
+    # If, for some reason, we're trying to send an email to a user
+    # who deleted their account, stop doing that.
+    if instance.editor and instance.partner.authorization_method!=1:
+        email.send(
+            instance.user.email,
+            {
+                "user": instance.user.editor.wp_username,
+                "lang": instance.user.userprofile.lang,
+                "partner": instance.partner,
+                "link": link,
+                "user_instructions": instance.get_user_instructions(),
+            },
+        )
+    else:
+        logger.error(
+            "Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted."
+        )
+
+
 def send_waitlist_notification_email(instance):
     base_url = get_current_site(None).domain
     path = reverse_lazy("partners:filter")
@@ -388,6 +418,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
     """
     # Maps status indicators to the correct email handling function.
     handlers = {
+        Application.APPROVED: send_approval_notification_email,
         Application.NOT_APPROVED: send_rejection_notification_email,
         # We can't use Partner.WAITLIST as the key, because that's actually an
         # integer, and it happens to be the same as Application.APPROVED. If
