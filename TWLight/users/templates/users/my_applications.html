@@ -58,7 +58,7 @@
           {% trans 'Not yet reviewed.' %}
         {% endif %}
         <br />
-        {% if app.status != app.INVALID %}
+        {% if app.status == app.APPROVED or app.status == app.PENDING or app.status == app.QUESTION %}
           <form action="{% url 'users:withdraw' user.editor.pk app.pk%}" class="m-2" method="post">
           {% csrf_token %}
           <input type="submit" value="Withdraw" class="btn btn-danger btn-sm">
