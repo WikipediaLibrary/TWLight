@@ -9,9 +9,15 @@
 {% for app in object_list %}
   <div class="row">
     <div class="col-xs-4 col-sm-2">
+    {% if app.partner.authorization_method == 0 %}
       <span class="label label{{ app.get_bootstrap_class }} pull-right">
         {{ app.get_status_display }}
       </span>
+    {% else %}
+      <span class="label label{{ app.get_bootstrap_class }} pull-right">
+        Finalized
+      </span>
+    {% endif %}
     </div>    
     <div class="col-xs-8 col-sm-6">
       <h4>
