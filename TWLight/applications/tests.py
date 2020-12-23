@@ -1454,6 +1454,191 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         # For second application waitlist_status should be True
         self.assertEqual(app2.waitlist_status, True)
 
+    def test_disallow_user_from_creating_multiple_applications(self):
+        """
+        Disallow user from applying to same partner more than once
+        and redirect to the application if user tries to do so
+        """
+        # create a partner, user and editor
+        partner = PartnerFactory()
+        user = UserFactory()
+        editor = EditorFactory(user=user)
+
+        # Set up request
+        factory = RequestFactory()
+        url = reverse("applications:apply_single", kwargs={"pk": partner.id})
+        data = {
+            "partner_{id}_rationale".format(id=partner.id): "Whimsy",
+            "partner_{id}_comments".format(id=partner.id): "None whatsoever",
+        }
+        request = factory.post(url, data)
+        request.user = user
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
+
+        # Send request
+        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
+
+        # it should redirect to partner detail page on success
+        expected_url = reverse("resources:detail", kwargs={"pk": partner.pk})
+
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, expected_url)
+
+        # Create another application to the same partner
+        data = {
+            "partner_{id}_rationale".format(id=partner.id): "Random",
+            "partner_{id}_comments".format(id=partner.id): "Random whatsoever",
+        }
+        request = factory.post(url, data)
+        request.user = user
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
+        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
+
+        # get duplicate applications
+        apps = Application.objects.filter(
+            partner=partner,
+            editor=editor,
+            status__in=(
+                Application.QUESTION,
+                Application.PENDING,
+                Application.APPROVED,
+            ),
+        )
+        if apps.exists():
+            if len(apps) == 1:
+                # if there is only app we should redirect user to that application
+                app = apps[0]
+                expected_url = reverse("applications:evaluate", kwargs={"pk": app.id})
+            else:
+                # if there are more than one application exists then
+                # redirect user to my_applications page
+                expected_url = reverse(
+                    "users:my_applications", kwargs={"pk": editor.pk}
+                )
+
+        # it should redirect to the expected url
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, expected_url)
+
+    def test_allow_user_for_creating_multiple_applications_for_collections(self):
+        """
+        allow a user only from applying to the same partner
+        more than once  when partner is collection
+        """
+        # create partner with specific stream
+        partner = PartnerFactory(specific_stream=True)
+        user = UserFactory()
+        editor = EditorFactory(user=user)
+
+        # add partner to stream
+        s1 = StreamFactory()
+        s1.partner = partner
+        s1.name = "Health and Biological Sciences"
+        s1.save()
+
+        # Set up request
+        factory = RequestFactory()
+        url = reverse("applications:apply_single", kwargs={"pk": partner.id})
+        data = {
+            "partner_{id}_rationale".format(id=partner.id): "abc",
+            "partner_{id}_comments".format(id=partner.id): "Saving the world",
+            "partner_{id}_specific_stream".format(id=partner.id): s1.pk,
+        }
+        request = factory.post(url, data)
+        request.user = user
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
+
+        # send request
+        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
+        # it should redirect to partner detail page on success
+        expected_url = reverse("resources:detail", kwargs={"pk": partner.pk})
+
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, expected_url)
+
+        # create another application
+        data = {
+            "partner_{id}_rationale".format(id=partner.id): "abcd",
+            "partner_{id}_comments".format(id=partner.id): "None whatsoever",
+            "partner_{id}_specific_stream".format(id=partner.id): s1.pk,
+        }
+        request = factory.post(url, data)
+        request.user = user
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
+
+        # send request
+        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
+
+        # again it should redirect to the same url
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, expected_url)
+
+    def test_allow_user_for_multiple_applications_for_partners_with_specific_title(
+        self,
+    ):
+        """
+        allow a user only from applying to the same partner
+        more than once  when partner is collection
+        """
+        # create partner with specific title
+        partner = PartnerFactory(specific_title=True)
+        user = UserFactory()
+        editor = EditorFactory(user=user)
+
+        # add partner to stream
+        s1 = StreamFactory()
+        s1.partner = partner
+        s1.name = "Health and Biological Sciences"
+        s1.save()
+
+        # Set up request
+        factory = RequestFactory()
+        url = reverse("applications:apply_single", kwargs={"pk": partner.id})
+        data = {
+            "partner_{id}_rationale".format(id=partner.id): "abc",
+            "partner_{id}_comments".format(id=partner.id): "Saving the world",
+            "partner_{id}_specific_title".format(
+                id=partner.id
+            ): "Open Access for geeks",
+        }
+        request = factory.post(url, data)
+        request.user = user
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
+
+        # send request
+        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
+
+        # it should redirect to partner detail page on success
+        expected_url = reverse("resources:detail", kwargs={"pk": partner.pk})
+
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, expected_url)
+
+        # create another application
+        data = {
+            "partner_{id}_rationale".format(id=partner.id): "abcd",
+            "partner_{id}_comments".format(id=partner.id): "None whatsoever",
+            "partner_{id}_specific_title".format(
+                id=partner.id
+            ): "Open Access for geeks",
+        }
+        request = factory.post(url, data)
+        request.user = user
+        request.session = {}
+        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
+
+        # send request
+        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
+
+        # again it should redirect to the same url
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, expected_url)
+
 
 class ListApplicationsTest(BaseApplicationViewTest):
     @classmethod
