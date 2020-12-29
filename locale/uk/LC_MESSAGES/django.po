@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-12-21 16:44+0000\n"
-"PO-Revision-Date: 2020-12-22 13:13:55+0000\n"
+"PO-Revision-Date: 2020-12-29 08:15:59+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -57,9 +57,9 @@ msgstr "На запит від: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:224
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr "<p><small><i>Ваші персональні дані буде опрацьовано відповідно до нашої <a href=\"{terms_url}\">політики приватності</a>.</i></small></p>"
+msgstr "<p><small><i>Ваші персональні дані буде опрацьовано відповідно до нашої <a href='{terms_url}'> політики приватності</a>.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:235
@@ -466,9 +466,8 @@ msgstr "Коментарі від автора"
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:222
-#, fuzzy
 msgid "Recent Applications (last 90 days)"
-msgstr "Надіслані заявки"
+msgstr "Нещодавні заявки (минулі 90 днів)"
 
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:259
@@ -831,9 +830,9 @@ msgstr "Оберіть принаймні один ресурс, до якого
 #. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
 #. Translators: This message is shown to users once they've successfully submitted their application for review.
 #: TWLight/applications/views.py:422 TWLight/applications/views.py:480
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status."
-msgstr "Ваша заявка надіслана на розгляд. Ви можете перевірити статус своїх заявок на цій сторінці."
+msgstr "Ваша заявка надіслана на розгляд. Перейдіть на сторінку <a href='{applications_url}'>Мої заявки</a>, щоб переглянути її статус."
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
@@ -964,9 +963,8 @@ msgstr "Ваша електронна пошта"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
-#, fuzzy
 msgid "This field is automatically updated with the email from your <a href='{}'>user profile</a>."
-msgstr "Це поле автоматично оновлюється електронною поштою з вашого <a href=\"{}\">профілю користувача</a>."
+msgstr "Це поле автоматично оновлюється електронною поштою з вашого <a href='{}'>профілю користувача</a>."
 
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:26
@@ -1005,15 +1003,15 @@ msgstr "Ваш код доступу Бібліотеки Вікіпедії"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access at My Library: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Шановний/а %(user)s,</p> <p>Дякуємо вам за подачу заявки на доступ до ресурсів %(partner)s через Бібліотеку Вікіпедії. Ми раді повідомити вам, що вашу заявку було схвалено.</p> <p>%(user_instructions)s</p> <p>Щасти!</p> <p>Бібліотека Вікіпедії</p>"
+msgstr "<p>Шановний/а %(user)s,</p> <p>Дякуємо вам за подачу заявки на доступ до ресурсів %(partner)s через Бібліотеку Вікіпедії. Ми раді повідомити вам, що вашу заявку було схвалено.</p> <p>%(user_instructions)s</p> <p>Ви можете переглянути колекції, до яких маєте доступ, на сторінці Моя бібліотека: %(link)s</p> <p>Щасти!</p> <p>Бібліотека Вікіпедії</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
-msgstr "Шановний/а %(user)s, Дякуємо вам за подачу заявки на доступ до ресурсів %(partner)s через Бібліотеку Вікіпедії. Ми раді повідомити вам, що вашу заявку було схвалено. %(user_instructions)s Щасти! Бібліотека Вікіпедії"
+msgstr "Шановний/а %(user)s, Дякуємо вам за подачу заявки на доступ до ресурсів %(partner)s через Бібліотеку Вікіпедії. Ми раді повідомити вам, що вашу заявку було схвалено. %(user_instructions)s Ви можете переглянути колекції, до яких маєте доступ, на сторінці Моя бібліотека: %(link)s Щасти! Бібліотека Вікіпедії"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1230,9 +1228,8 @@ msgstr "Шановний/а %(user)s, Дякуємо за вашу заявку 
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
-#, fuzzy
 msgid "Your Wikipedia Library application"
-msgstr "Вашу заявку до Бібліотеки Вікіпедії було відхилено"
+msgstr "Ваша заявка до Бібліотеки Вікіпедії"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1552,9 +1549,9 @@ msgstr "Умови використання недоступні."
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail.html:411
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access(es) on your <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr "Перегляньте статус свого доступу чи доступів на сторінці <strong><a href=\"%(collection_url)s\">Ваша колекція</a></strong>."
+msgstr "Перегляньте статус свого доступу чи доступів на сторінці <strong><a href=\"%(library_url)s\">Моя бібліотека</a></strong>."
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail.html:444
@@ -1629,9 +1626,8 @@ msgstr ""
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
 #: TWLight/resources/templates/resources/partner_detail.html:499
 #: TWLight/resources/templates/resources/partner_detail.html:513
-#, fuzzy
 msgid "Access Collection"
-msgstr "Колекції"
+msgstr "Отримати доступ до колекції"
 
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:506
@@ -1708,9 +1704,8 @@ msgstr "Немає партнерів, що відповідають указа�
 
 #. Translators: This is a button to go back on the top of page.
 #: TWLight/resources/templates/resources/partner_filter.html:55
-#, fuzzy
 msgid "Back to top"
-msgstr "Назад до партнерів"
+msgstr "Повернутись угору"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:34
@@ -1821,9 +1816,8 @@ msgstr "Отримано багато авторизацій — щось не �
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
 #: TWLight/resources/views.py:262
-#, fuzzy
 msgid "This partner is currently not open for applications"
-msgstr "Цей партнер зараз доступний для заявок"
+msgstr "Цей партнер зараз не доступний для заявок"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
 #: TWLight/resources/views.py:285
@@ -1947,9 +1941,8 @@ msgstr "Ви маєте обліковий запис, якому не менш�
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
-#, fuzzy
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
-msgstr "Ви зробили не менше 500 редагувань"
+msgstr "Ви зробили щонайменше 500 редагувань у проектах Вікімедіа"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67
@@ -1958,9 +1951,8 @@ msgstr "Ви зробити щонайменше 10 редагувань у пр
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
-#, fuzzy
 msgid "You are not currently blocked from editing a Wikimedia project"
-msgstr "Ви зараз не заблоковані у Вікіпедії"
+msgstr "Ви зараз не заблоковані у проекті Вікімедіа"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:75
@@ -2268,9 +2260,8 @@ msgstr "Розподіл користувачів за мовою"
 
 #. Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/home.html:12
-#, fuzzy
 msgid "The Wikipedia Library provides free access to research databases and collections."
-msgstr "Бібліотека Вікіпедії надає вільний доступ до дослідницьких матеріалів, щоб дати вам кращу можливість робити внесок до проектів Вікімедіа."
+msgstr "Бібліотека Вікіпедії надає вільний доступ до дослідницьких баз даних та колекцій."
 
 #. Translators: A link users can click to read more about the project or the tool.
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
@@ -2350,21 +2341,18 @@ msgstr ""
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive pending application reminders or not.
 #: TWLight/users/forms.py:130
-#, fuzzy
 msgid "Send pending application reminders"
-msgstr "Одна надіслана заявка."
+msgstr "Надсилати нагадування про заявки на розгляді"
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive application reminders that are under discussion or not.
 #: TWLight/users/forms.py:138
-#, fuzzy
 msgid "Send discussion application reminders"
-msgstr "Одна заявка на обговоренні."
+msgstr "Надсилати нагадування про заявки на обговоренні"
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive approved application reminders or not.
 #: TWLight/users/forms.py:146
-#, fuzzy
 msgid "Send approved application reminders"
-msgstr "Одна схвалена заявка."
+msgstr "Надсилати нагадування про схвалені заявки"
 
 #. Translators: Labels the button users click to request a restriction on the processing of their data.
 #: TWLight/users/forms.py:156
@@ -2596,9 +2584,8 @@ msgstr "Задовольняє умови використання?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit current count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:191
-#, fuzzy
 msgid "Current global edit count *"
-msgstr "Глобальна кількість редагувань *"
+msgstr "Поточна глобальна кількість редагувань *"
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
 #: TWLight/users/templates/users/editor_detail_data.html:198
@@ -2607,9 +2594,8 @@ msgstr "(переглянути глобальний внесок користу
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the recent edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:208
-#, fuzzy
 msgid "Recent global edit count *"
-msgstr "Глобальна кількість редагувань *"
+msgstr "Нещодавня глобальна кількість редагувань *"
 
 #. Translators: This text is shown next to a user's recent global edit count if less than 30 days has passed since they first logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:213
@@ -2644,9 +2630,8 @@ msgstr "Електронна пошта *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:279
-#, fuzzy
 msgid "update"
-msgstr "(оновити)"
+msgstr "оновити"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:324
@@ -2680,15 +2665,13 @@ msgstr "Поновлення або не потрібно, або недосту
 
 #. Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
 #: TWLight/users/templates/users/my_library.html:21
-#, fuzzy
 msgid "Instant access"
-msgstr "Ручний доступ"
+msgstr "Миттєвий доступ"
 
 #. Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually.
 #: TWLight/users/templates/users/my_library.html:36
-#, fuzzy
 msgid "Individual access"
-msgstr "Ручний доступ"
+msgstr "Індивідуальний доступ"
 
 #. Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_library.html:60
@@ -2709,9 +2692,8 @@ msgstr "У вас немає активних колекцій ручного д
 
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
-#, fuzzy
 msgid "Preferences"
-msgstr "Налаштування електронної пошти"
+msgstr "Налаштування"
 
 #. Translators: In the preferences section of a user profile, this text labels the form where users can change their email preferences.
 #: TWLight/users/templates/users/preferences.html:23
@@ -2734,9 +2716,8 @@ msgstr "Оновити"
 
 #. Translators: This link is to the site's terms of use.
 #: TWLight/users/templates/users/preferences.html:71
-#, fuzzy
 msgid "View Terms of Use"
-msgstr "Умови використання"
+msgstr "Переглянути Умови використання"
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
 #: TWLight/users/templates/users/preferences.html:81
@@ -2745,15 +2726,13 @@ msgstr "Дані"
 
 #. Translators: This text labels a button users can click to download their data.
 #: TWLight/users/templates/users/preferences.html:87
-#, fuzzy
 msgid "Download"
-msgstr "завантажити як csv"
+msgstr "Завантажити"
 
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
 #: TWLight/users/templates/users/preferences.html:93
-#, fuzzy
 msgid "Restrict"
-msgstr "Обмежити мої дані"
+msgstr "Обмежити"
 
 #. Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource.
 #: TWLight/users/templates/users/resource_tile.html:22
@@ -2766,9 +2745,9 @@ msgstr "Натисніть, щоб здати свій доступ"
 #: TWLight/users/templates/users/resource_tile.html:42
 #: TWLight/users/templates/users/resource_tile.html:64
 #: TWLight/users/templates/users/resource_tile.html:69
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(name)s's external website"
-msgstr "Посилання на зовнішній вебсайт %(stream)s."
+msgstr "Посилання на зовнішній вебсайт %(name)s"
 
 #. Translators: Title for logo in tiles that are linked to partner description  page. Don't translate name.
 #. Translators: Alt text for publisher logos on the my library page. Don't translate name.
@@ -2782,9 +2761,8 @@ msgstr "Посилання на сторінку реєстрації %(name)s"
 
 #. Translators: Users can click this button to access a collection they have access to.
 #: TWLight/users/templates/users/resource_tile.html:102
-#, fuzzy
 msgid "Access collection"
-msgstr "Коди доступу"
+msgstr "Отримати доступ до колекції"
 
 #. Translators: Users can click this button to be taken to the website for a resource.
 #: TWLight/users/templates/users/resource_tile.html:105
@@ -3027,9 +3005,8 @@ msgstr "Будь ласка, візьміть до уваги, що ці умо�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:253
-#, fuzzy
 msgid "Important Note"
-msgstr "Імпортовано"
+msgstr "Важлива примітка"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:258
@@ -3064,9 +3041,8 @@ msgstr "Політика приватності Фонду Вікімедіа"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
-#, fuzzy
 msgid "By checking this box and clicking “Submit”, you agree that you have read the above terms and that you will adhere to the terms of use in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
-msgstr "Ставлячи цю галочку і натискаючи «Я погоджуюся», ви погоджуєтеся, що прочитали викладені вище умови і що будете дотримуватися умов використання у своїй заявці та використанні Бібліотеки Вікіпедії і послуг видавців, до яких ви отримуєте доступ завдяки програмі Бібліотеки Вікіпедії."
+msgstr "Ставлячи цю галочку і натискаючи «Надіслати», ви погоджуєтеся, що прочитали викладені вище умови і що будете дотримуватися умов використання у своїй заявці та використанні Бібліотеки Вікіпедії і послуг видавців, до яких ви отримуєте доступ завдяки програмі Бібліотеки Вікіпедії."
 
 #. Translators: This is the heading of the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:8
@@ -3096,9 +3072,9 @@ msgstr "Лише координатори"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
 #: TWLight/users/views.py:145
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Please <a href='{url}'>update your contributions</a> to Wikipedia to help coordinators evaluate your applications."
-msgstr "Будь ласка, <a href=\"{url}\">оновіть свій внесок</a> у Вікіпедію, щоб полегшити координаторам оцінку ваших заявок."
+msgstr "Будь ласка, <a href='{url}'>оновіть свій внесок</a> у Вікіпедію, щоб полегшити координаторам оцінку ваших заявок."
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:258
@@ -3152,9 +3128,8 @@ msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/views.py:65
-#, fuzzy
 msgid "6+ months editing"
-msgstr "6 місяців"
+msgstr "понад 6 місяців редагування"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/views.py:67
