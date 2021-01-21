@@ -10,6 +10,7 @@
 # Author: Mirzali
 # Author: MuratTheTurkish
 # Author: Rapsar
+# Author: SaldırganSincap
 # Author: TmY e12
 # Author: ToprakM
 # Author: UY Scuti
@@ -20,11 +21,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-12-21 16:44+0000\n"
-"PO-Revision-Date: 2020-12-22 13:13:54+0000\n"
+"PO-Revision-Date: 2021-01-21 14:33:29+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-12-08 06:34:58+0000\n"
+"X-POT-Import-Date: 2021-01-21 09:03:07+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -2444,7 +2445,7 @@ msgstr "Erişim yetkiniz olan toplu koleksiyon listesi"
 #: TWLight/users/templates/users/my_applications.html:7
 #: TWLight/users/templates/users/my_library.html:9
 msgid "My applications"
-msgstr "Başvurularınız"
+msgstr "Başvurularım"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:37

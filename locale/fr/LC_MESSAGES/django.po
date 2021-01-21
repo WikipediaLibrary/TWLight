@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2020-12-21 16:43+0000\n"
-"PO-Revision-Date: 2021-01-18 16:06:33+0000\n"
+"PO-Revision-Date: 2021-01-21 14:33:26+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-POT-Import-Date: 2020-12-08 06:34:58+0000\n"
+"X-POT-Import-Date: 2021-01-21 09:03:07+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -2449,6 +2449,7 @@ msgstr "Une liste commune de collections auxquelles vous avez le droit d’accé
 #: TWLight/users/templates/users/editor_detail.html:33
 #: TWLight/users/templates/users/my_applications.html:7
 #: TWLight/users/templates/users/my_library.html:9
+#, fuzzy
 msgid "My applications"
 msgstr "Mes candidatures"
 
