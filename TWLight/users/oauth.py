@@ -1,12 +1,13 @@
 import logging
-from mwoauth import ConsumerToken, Handshaker, AccessToken, OAuthException
+from mwoauth import ConsumerToken, Handshaker, AccessToken
+from mwoauth.errors import OAuthException
 import urllib.parse
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied, DisallowedHost
+from django.core.exceptions import PermissionDenied, DisallowedHost, SuspiciousOperation
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
@@ -210,13 +211,13 @@ class OAuthBackend(object):
             identity = handshaker.identify(access_token, 15)
         except OAuthException:
             logger.warning(
-                "Someone tried to log in but presented an invalid " "access token."
+                "Someone tried to log in but presented an invalid access token."
             )
             messages.add_message(
                 request,
                 messages.WARNING,
                 # Translators: This error message is shown when there's a problem with the authenticated login process.
-                _("You tried to log in but presented an invalid access " " token."),
+                _("You tried to log in but presented an invalid access token."),
             )
             raise PermissionDenied
 
@@ -318,9 +319,9 @@ class OAuthInitializeView(View):
 
             try:
                 redirect, request_token = handshaker.initiate()
-            except:
+            except OAuthException:
                 logger.exception("Handshaker not initiated.")
-                raise
+                raise SuspiciousOperation
 
             local_redirect = _localize_oauth_redirect(redirect)
 
