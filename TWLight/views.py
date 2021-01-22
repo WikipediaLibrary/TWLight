@@ -4,6 +4,7 @@ import json
 from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
+from django.contrib.messages import get_messages
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
 
@@ -108,5 +109,6 @@ def bad_request(request, exception, template_name=ERROR_400_TEMPLATE_NAME):
             content_type="text/html",
         )
     # In django core, no exception content is passed to the template, to not disclose any sensitive information.
-    # We go ahead and include the request data so that we can pass in messages.
-    return HttpResponseBadRequest(template.render(request=request))
+    # We pass in messages fetched from request data, but leave the rest behind.
+    messages = get_messages(request)
+    return HttpResponseBadRequest(template.render({"messages": messages}))
