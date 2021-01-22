@@ -1,18 +1,23 @@
 # -*- coding: utf-8 -*-
 import json
 
-from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
+from django.contrib.messages import get_messages
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
 
-from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
-from TWLight.users.models import Editor
+
+from django.http import HttpResponseBadRequest
+from django.template import TemplateDoesNotExist, loader
+from django.views.decorators.csrf import requires_csrf_token
+from django.views.decorators.debug import sensitive_variables
 
 import logging
+
+from django.views.defaults import ERROR_400_TEMPLATE_NAME, ERROR_PAGE_TEMPLATE
 
 logger = logging.getLogger(__name__)
 
@@ -83,3 +88,27 @@ class HomePageView(TemplateView):
         context["featured_partners"] = Partner.objects.filter(featured=True)[:3]
 
         return context
+
+
+@sensitive_variables()
+@requires_csrf_token
+def bad_request(request, exception, template_name=ERROR_400_TEMPLATE_NAME):
+    """
+    400 error handler.
+    Templates: :template:`400.html`
+    Context: None
+    """
+    try:
+        template = loader.get_template(template_name)
+    except TemplateDoesNotExist:
+        if template_name != ERROR_400_TEMPLATE_NAME:
+            # Reraise if it's a missing custom template.
+            raise
+        return HttpResponseBadRequest(
+            ERROR_PAGE_TEMPLATE % {"title": "Bad Request (400)", "details": ""},
+            content_type="text/html",
+        )
+    # In django core, no exception content is passed to the template, to not disclose any sensitive information.
+    # We pass in messages fetched from request data, but leave the rest behind.
+    messages = get_messages(request)
+    return HttpResponseBadRequest(template.render({"messages": messages}))

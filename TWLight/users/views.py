@@ -286,7 +286,7 @@ class UserHomeView(View):
     @classonlymethod
     def as_view(cls):
         def _get_view(request, *args, **kwargs):
-            if request.user.is_anonymous:
+            if not request.user.is_authenticated:
                 # We can't use something like django-braces LoginRequiredMixin
                 # here, because as_view applies at an earlier point in the
                 # process.

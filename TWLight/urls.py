@@ -30,6 +30,7 @@ from TWLight.ezproxy.urls import urlpatterns as ezproxy_urls
 
 from .views import LanguageWhiteListView, HomePageView
 
+handler400 = "TWLight.views.bad_request"
 
 urlpatterns = [
     # Built-in -----------------------------------------------------------------

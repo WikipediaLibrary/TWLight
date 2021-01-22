@@ -1,12 +1,13 @@
 import logging
-from mwoauth import ConsumerToken, Handshaker, AccessToken, OAuthException
+from mwoauth import ConsumerToken, Handshaker, AccessToken
+from mwoauth.errors import OAuthException
 import urllib.parse
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied, DisallowedHost
+from django.core.exceptions import DisallowedHost, SuspiciousOperation
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
@@ -175,7 +176,7 @@ class OAuthBackend(object):
                     editor = self._create_editor(user, identity)
                     created = True
                 except:
-                    raise PermissionDenied
+                    raise SuspiciousOperation
 
         except User.DoesNotExist:
             logger.info("Can't find user; creating one.")
@@ -197,8 +198,8 @@ class OAuthBackend(object):
 
         try:
             assert isinstance(access_token, AccessToken)
-        except AssertionError:
-            logger.exception("Did not have a properly formed AccessToken")
+        except AssertionError as e:
+            logger.exception(e)
             return None
 
         # Get identifying information about the user. This doubles as a way
@@ -208,17 +209,15 @@ class OAuthBackend(object):
         logger.info("Identifying user...")
         try:
             identity = handshaker.identify(access_token, 15)
-        except OAuthException:
-            logger.warning(
-                "Someone tried to log in but presented an invalid " "access token."
-            )
+        except OAuthException as e:
+            logger.exception(e)
             messages.add_message(
                 request,
                 messages.WARNING,
                 # Translators: This error message is shown when there's a problem with the authenticated login process.
-                _("You tried to log in but presented an invalid access " " token."),
+                _("You tried to log in but presented an invalid access token."),
             )
-            raise PermissionDenied
+            raise SuspiciousOperation
 
         # Get or create the user.
         logger.info("User has been identified; getting or creating user.")
@@ -244,8 +243,8 @@ class OAuthBackend(object):
     def get_user(self, user_id):
         try:
             return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
-            logger.warning("There is no user {user_id}".format(user_id=user_id))
+        except User.DoesNotExist as e:
+            logger.exception(e)
             return None
 
 
@@ -263,22 +262,22 @@ class OAuthInitializeView(View):
         domain = self.request.get_host()
         try:
             assert domain in settings.ALLOWED_HOSTS  # safety first!
-        except (AssertionError, DisallowedHost):
-            logger.exception()
+        except (AssertionError, DisallowedHost) as e:
+            logger.exception(e)
             messages.add_message(
                 request,
                 messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
                 _("{domain} is not an allowed host.").format(domain=domain),
             )
-            raise PermissionDenied
+            raise SuspiciousOperation
 
         # Try to capture the relevant page state, including desired destination
         try:
             request.session["get"] = request.GET
             logger.info("Found get parameters for post-login redirection.")
-        except:
-            logger.warning("No get parameters for post-login redirection.")
+        except Exception as e:
+            logger.warning(e)
             pass
 
         # If the user has already logged in, let's not spam the OAuth provider.
@@ -303,12 +302,9 @@ class OAuthInitializeView(View):
                     "User is already authenticated. Sending them on "
                     'for post-login redirection per "next" parameter.'
                 )
-            except KeyError:
+            except KeyError as e:
                 return_url = reverse_lazy("homepage")
-                logger.warning(
-                    'User already authenticated. No "next" '
-                    "parameter for post-login redirection."
-                )
+                logger.warning(e)
 
             return HttpResponseRedirect(return_url)
         else:
@@ -318,9 +314,15 @@ class OAuthInitializeView(View):
 
             try:
                 redirect, request_token = handshaker.initiate()
-            except:
-                logger.exception("Handshaker not initiated.")
-                raise
+            except OAuthException as e:
+                logger.exception(e)
+                messages.add_message(
+                    request,
+                    messages.WARNING,
+                    # Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
+                    _("Handshaker not initiated, please try logging in again."),
+                )
+                raise SuspiciousOperation
 
             local_redirect = _localize_oauth_redirect(redirect)
 
@@ -348,43 +350,43 @@ class OAuthCallbackView(View):
             response_qs_parsed = urllib.parse.parse_qs(response_qs)
             assert "oauth_token" in response_qs_parsed
             assert "oauth_verifier" in response_qs_parsed
-        except (AssertionError, TypeError):
-            logger.exception("Did not receive a valid oauth response.")
+        except (AssertionError, TypeError) as e:
+            logger.exception(e)
             messages.add_message(
                 request,
                 messages.WARNING,
                 # Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
                 _("Did not receive a valid oauth response."),
             )
-            raise PermissionDenied
+            raise SuspiciousOperation
 
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
         domain = self.request.get_host()
         try:
             assert domain in settings.ALLOWED_HOSTS
-        except (AssertionError, DisallowedHost):
-            logger.exception("Domain is not an allowed host")
+        except (AssertionError, DisallowedHost) as e:
+            logger.exception(e)
             messages.add_message(
                 request,
                 messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
                 _("{domain} is not an allowed host.").format(domain=domain),
             )
-            raise PermissionDenied
+            raise SuspiciousOperation
 
         try:
             handshaker = _get_handshaker()
-        except AssertionError:
+        except AssertionError as e:
             # get_handshaker will throw AssertionErrors for invalid data.
-            logger.exception("Could not find handshaker")
+            logger.exception(e)
             messages.add_message(
                 request,
                 messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails.
                 _("Could not find handshaker."),
             )
-            raise PermissionDenied
+            raise SuspiciousOperation
 
         # Get the session token placed by OAuthInitializeView.
         session_token = request.session.pop("request_token", None)
@@ -397,33 +399,33 @@ class OAuthCallbackView(View):
                 # Translators: This message is shown when the OAuth login process fails.
                 _("No session token."),
             )
-            raise PermissionDenied
+            raise SuspiciousOperation
 
         # Rehydrate it into a request token.
         request_token = _rehydrate_token(session_token)
 
         if not request_token:
-            logger.info("No request token.")
+            logger.exception("No request token.")
             messages.add_message(
                 request,
                 messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails.
                 _("No request token."),
             )
-            raise PermissionDenied
+            raise SuspiciousOperation
 
         # See if we can complete the OAuth process.
         try:
             access_token = handshaker.complete(request_token, response_qs)
-        except:
-            logger.exception("Access token generation failed.")
+        except OAuthException as e:
+            logger.exception(e)
             messages.add_message(
                 request,
                 messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails.
                 _("Access token generation failed."),
             )
-            raise PermissionDenied
+            raise SuspiciousOperation
 
         user = authenticate(
             request=request, access_token=access_token, handshaker=handshaker
@@ -489,12 +491,9 @@ class OAuthCallbackView(View):
                             "User authenticated. Sending them on for "
                             'post-login redirection per "next" parameter.'
                         )
-                    except KeyError:
+                    except KeyError as e:
                         return_url = reverse_lazy("homepage")
-                        logger.warning(
-                            'User authenticated. No "next" parameter '
-                            "for post-login redirection."
-                        )
+                        logger.warning(e)
                 else:
                     return_url = reverse_lazy("terms")
         else:
