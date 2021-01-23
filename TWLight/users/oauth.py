@@ -210,7 +210,7 @@ class OAuthBackend(object):
         try:
             identity = handshaker.identify(access_token, 15)
         except OAuthException as e:
-            logger.exception(e)
+            logger.warning(e)
             messages.add_message(
                 request,
                 messages.WARNING,
@@ -315,7 +315,7 @@ class OAuthInitializeView(View):
             try:
                 redirect, request_token = handshaker.initiate()
             except OAuthException as e:
-                logger.exception(e)
+                logger.warning(e)
                 messages.add_message(
                     request,
                     messages.WARNING,
@@ -351,7 +351,7 @@ class OAuthCallbackView(View):
             assert "oauth_token" in response_qs_parsed
             assert "oauth_verifier" in response_qs_parsed
         except (AssertionError, TypeError) as e:
-            logger.exception(e)
+            logger.warning(e)
             messages.add_message(
                 request,
                 messages.WARNING,
@@ -366,7 +366,7 @@ class OAuthCallbackView(View):
         try:
             assert domain in settings.ALLOWED_HOSTS
         except (AssertionError, DisallowedHost) as e:
-            logger.exception(e)
+            logger.warning(e)
             messages.add_message(
                 request,
                 messages.WARNING,
@@ -379,7 +379,7 @@ class OAuthCallbackView(View):
             handshaker = _get_handshaker()
         except AssertionError as e:
             # get_handshaker will throw AssertionErrors for invalid data.
-            logger.exception(e)
+            logger.warning(e)
             messages.add_message(
                 request,
                 messages.WARNING,
@@ -405,7 +405,7 @@ class OAuthCallbackView(View):
         request_token = _rehydrate_token(session_token)
 
         if not request_token:
-            logger.exception("No request token.")
+            logger.warning("No request token.")
             messages.add_message(
                 request,
                 messages.WARNING,
@@ -418,7 +418,7 @@ class OAuthCallbackView(View):
         try:
             access_token = handshaker.complete(request_token, response_qs)
         except OAuthException as e:
-            logger.exception(e)
+            logger.warning(e)
             messages.add_message(
                 request,
                 messages.WARNING,
