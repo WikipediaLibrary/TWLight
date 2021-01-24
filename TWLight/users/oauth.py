@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.core.exceptions import DisallowedHost, SuspiciousOperation
+from django.core.exceptions import DisallowedHost, PermissionDenied
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
@@ -176,7 +176,7 @@ class OAuthBackend(object):
                     editor = self._create_editor(user, identity)
                     created = True
                 except:
-                    raise SuspiciousOperation
+                    raise PermissionDenied
 
         except User.DoesNotExist:
             logger.info("Can't find user; creating one.")
@@ -217,7 +217,7 @@ class OAuthBackend(object):
                 # Translators: This error message is shown when there's a problem with the authenticated login process.
                 _("You tried to log in but presented an invalid access token."),
             )
-            raise SuspiciousOperation
+            raise PermissionDenied
 
         # Get or create the user.
         logger.info("User has been identified; getting or creating user.")
@@ -270,7 +270,7 @@ class OAuthInitializeView(View):
                 # Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
                 _("{domain} is not an allowed host.").format(domain=domain),
             )
-            raise SuspiciousOperation
+            raise PermissionDenied
 
         # Try to capture the relevant page state, including desired destination
         try:
@@ -322,7 +322,7 @@ class OAuthInitializeView(View):
                     # Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
                     _("Handshaker not initiated, please try logging in again."),
                 )
-                raise SuspiciousOperation
+                raise PermissionDenied
 
             local_redirect = _localize_oauth_redirect(redirect)
 
@@ -358,7 +358,7 @@ class OAuthCallbackView(View):
                 # Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
                 _("Did not receive a valid oauth response."),
             )
-            raise SuspiciousOperation
+            raise PermissionDenied
 
         # Get the handshaker. It should have already been constructed by
         # OAuthInitializeView.
@@ -373,7 +373,7 @@ class OAuthCallbackView(View):
                 # Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
                 _("{domain} is not an allowed host.").format(domain=domain),
             )
-            raise SuspiciousOperation
+            raise PermissionDenied
 
         try:
             handshaker = _get_handshaker()
@@ -386,7 +386,7 @@ class OAuthCallbackView(View):
                 # Translators: This message is shown when the OAuth login process fails.
                 _("Could not find handshaker."),
             )
-            raise SuspiciousOperation
+            raise PermissionDenied
 
         # Get the session token placed by OAuthInitializeView.
         session_token = request.session.pop("request_token", None)
@@ -399,7 +399,7 @@ class OAuthCallbackView(View):
                 # Translators: This message is shown when the OAuth login process fails.
                 _("No session token."),
             )
-            raise SuspiciousOperation
+            raise PermissionDenied
 
         # Rehydrate it into a request token.
         request_token = _rehydrate_token(session_token)
@@ -412,7 +412,7 @@ class OAuthCallbackView(View):
                 # Translators: This message is shown when the OAuth login process fails.
                 _("No request token."),
             )
-            raise SuspiciousOperation
+            raise PermissionDenied
 
         # See if we can complete the OAuth process.
         try:
@@ -425,7 +425,7 @@ class OAuthCallbackView(View):
                 # Translators: This message is shown when the OAuth login process fails.
                 _("Access token generation failed."),
             )
-            raise SuspiciousOperation
+            raise PermissionDenied
 
         user = authenticate(
             request=request, access_token=access_token, handshaker=handshaker
