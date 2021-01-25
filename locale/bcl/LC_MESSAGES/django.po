@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-12-10 13:05:18+0000\n"
-"X-POT-Import-Date: 2020-12-08 06:34:58+0000\n"
+"PO-Revision-Date: 2021-01-25 17:24:46+0000\n"
+"X-POT-Import-Date: 2021-01-22 20:05:09+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bcl\n"
@@ -2365,53 +2365,58 @@ msgid "{wp_username}"
 msgstr "{wp_username}"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
-#: TWLight/users/oauth.py:219
-msgid "You tried to log in but presented an invalid access  token."
+#: TWLight/users/oauth.py:218
+msgid "You tried to log in but presented an invalid access token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/oauth.py:272 TWLight/users/oauth.py:372
+#: TWLight/users/oauth.py:271 TWLight/users/oauth.py:374
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr "{domain} dai tinutugutan na host."
 
+#. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
+#: TWLight/users/oauth.py:323
+msgid "Handshaker not initiated, please try logging in again."
+msgstr ""
+
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-#: TWLight/users/oauth.py:357
+#: TWLight/users/oauth.py:359
 msgid "Did not receive a valid oauth response."
 msgstr "Dai nakaresibe nin balidong simbag kan oauth."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:385
+#: TWLight/users/oauth.py:387
 msgid "Could not find handshaker."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:398
+#: TWLight/users/oauth.py:400
 msgid "No session token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:411
+#: TWLight/users/oauth.py:413
 msgid "No request token."
 msgstr "Mayong hinahagad na token."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:424
+#: TWLight/users/oauth.py:426
 msgid "Access token generation failed."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:442
+#: TWLight/users/oauth.py:444
 msgid "Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:451
+#: TWLight/users/oauth.py:453
 msgid "Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:465
+#: TWLight/users/oauth.py:467
 msgid "Welcome! Please agree to the terms of use."
 msgstr "Dagos! Magtugot tabi sa termino kan paggamit."
 
@@ -3082,22 +3087,22 @@ msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/views.py:63
+#: TWLight/views.py:68
 msgid "500+ edits"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/views.py:65
+#: TWLight/views.py:70
 msgid "6+ months editing"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/views.py:67
+#: TWLight/views.py:72
 msgid "10+ edits in the last month"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/views.py:69
+#: TWLight/views.py:74
 msgid "No active blocks"
 msgstr ""
 
