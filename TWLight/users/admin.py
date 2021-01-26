@@ -58,13 +58,6 @@ class UserProfileInline(admin.StackedInline):
     )
 
 
-class AuthorizationInline(admin.StackedInline):
-    form = AuthorizationInlineForm
-    model = Authorization
-    fk_name = "user"
-    extra = 0
-
-
 class AuthorizationAdmin(admin.ModelAdmin):
     list_display = (
         "id",
@@ -111,6 +104,13 @@ class AuthorizationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Authorization, AuthorizationAdmin)
+
+
+class AuthorizationInline(admin.StackedInline):
+    form = AuthorizationAdminForm
+    model = Authorization
+    fk_name = "user"
+    extra = 0
 
 
 class UserAdmin(AuthUserAdmin):
