@@ -418,10 +418,6 @@ REQUEST_LOG_USER = False
 # We're replacing the default logging config to get better control of the
 # mail_admins behavior.
 
-ADMINS = [("TWLight Developers", "librarycard-dev@lists.wikimedia.org")]
-DJANGO_EMAIL_ADMINS_BACKEND = os.environ.get(
-    "DJANGO_EMAIL_ADMINS_BACKEND", "django.core.mail.backends.console.EmailBackend"
-)
 LOGGING_CONFIG = None
 
 logging.config.dictConfig(
