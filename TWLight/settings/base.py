@@ -454,16 +454,10 @@ logging.config.dictConfig(
                 "class": "logging.StreamHandler",
                 "formatter": "django.server",
             },
-            "mail_admins": {
-                "level": "ERROR",
-                "filters": ["require_debug_false"],
-                "class": "django.utils.log.AdminEmailHandler",
-                "email_backend": DJANGO_EMAIL_ADMINS_BACKEND,
-            },
         },
         "loggers": {
             "django": {
-                "handlers": ["nodebug_console", "debug_console", "mail_admins"],
+                "handlers": ["nodebug_console", "debug_console"],
                 "level": os.environ.get("DJANGO_LOG_LEVEL", "INFO"),
             },
             "django.server": {
@@ -472,7 +466,7 @@ logging.config.dictConfig(
                 "propagate": False,
             },
             "TWLight": {
-                "handlers": ["nodebug_console", "debug_console", "mail_admins"],
+                "handlers": ["nodebug_console", "debug_console"],
                 "level": os.environ.get("DJANGO_LOG_LEVEL", "INFO"),
             },
         },
