@@ -32,6 +32,12 @@ from .views import LanguageWhiteListView, HomePageView
 
 handler400 = "TWLight.views.bad_request"
 
+
+def glitchtip_error(request):
+    error_division = 1 / 0
+    return error_division
+
+
 urlpatterns = [
     # Built-in -----------------------------------------------------------------
     url(r"^admin/doc", include(admindocs)),
@@ -96,4 +102,6 @@ urlpatterns = [
     ),
     url(r"^$", HomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
+    # TODO: THIS IS A TEST FOR GLITCHTIP PLEASE DELETE
+    url(r"glitchtip", glitchtip_error),
 ]
