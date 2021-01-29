@@ -103,5 +103,5 @@ urlpatterns = [
     url(r"^$", HomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
     # TODO: THIS IS A TEST FOR GLITCHTIP PLEASE DELETE
-    url(r"glitchtip", glitchtip_error),
+    url(r"glitchtip/$", glitchtip_error),
 ]
