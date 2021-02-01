@@ -7,31 +7,6 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [
-        ("resources", "0063_auto_20190220_1639"),
-        ("resources", "0064_partner_access_code_instructions"),
-        ("resources", "0065_partner_account_length"),
-        ("resources", "0066_auto_20190507_1736"),
-        ("resources", "0067_auto_20190509_1546"),
-        ("resources", "0068_auto_20190523_1250"),
-        ("resources", "0069_auto_20190530_1757"),
-        ("resources", "0070_auto_20190722_1254"),
-        ("resources", "0071_auto_20190801_1703"),
-        ("resources", "0072_auto_20190808_1849"),
-        ("resources", "0073_auto_20190926_1412"),
-        ("resources", "0074_partner_requested_access_duration"),
-        ("resources", "0075_auto_20191001_1455"),
-        ("resources", "0076_auto_20191011_0137"),
-        ("resources", "0077_auto_20191030_0919"),
-        ("resources", "0078_auto_20191119_2254"),
-        ("resources", "0079_auto_20191210_1832"),
-        ("resources", "0080_textfieldtag_meta_url"),
-        ("resources", "0081_auto_20200615_2030"),
-        ("resources", "0082_auto_20200706_1659"),
-        ("resources", "0083_auto_20200804_1634"),
-        ("resources", "0084_auto_20201019_1310"),
-    ]
-
     dependencies = [
         ("contenttypes", "0002_remove_content_type_name"),
         ("resources", "0062_auto_20190220_1639"),

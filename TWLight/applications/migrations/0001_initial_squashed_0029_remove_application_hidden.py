@@ -27,38 +27,6 @@ def copy_editor_data(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    replaces = [
-        ("applications", "0001_initial"),
-        ("applications", "0002_application_date_created"),
-        ("applications", "0003_application_date_closed"),
-        ("applications", "0004_auto_20160427_2120"),
-        ("applications", "0005_application_earliest_expiry_date"),
-        ("applications", "0006_application_days_open"),
-        ("applications", "0007_application_editor"),
-        ("applications", "0008_auto_20160527_1502"),
-        ("applications", "0009_auto_20160527_1505"),
-        ("applications", "0010_auto_20160706_1409"),
-        ("applications", "0011_auto_20160908_1410"),
-        ("applications", "0012_auto_20160930_1434"),
-        ("applications", "0013_application_sent_by"),
-        ("applications", "0014_application_parent"),
-        ("applications", "0015_auto_20170621_0822"),
-        ("applications", "0016_auto_20170707_1552"),
-        ("applications", "0017_auto_20170709_1859"),
-        ("applications", "0018_remove_application_earliest_expiry_date"),
-        ("applications", "0019_application_account_email"),
-        ("applications", "0020_auto_20180607_1508"),
-        ("applications", "0021_application_hidden"),
-        ("applications", "0022_auto_20190104_1939"),
-        ("applications", "0023_auto_20190329_1631"),
-        ("applications", "0024_application_requested_access_duration"),
-        ("applications", "0025_auto_20191030_0919"),
-        ("applications", "0026_auto_20200305_2144"),
-        ("applications", "0027_application_waitlist_status"),
-        ("applications", "0028_auto_20200428_1347"),
-        ("applications", "0029_remove_application_hidden"),
-    ]
-
     dependencies = [
         ("resources", "0002_auto_20160324_1826"),
         ("users", "0007_auto_20160511_1454"),
