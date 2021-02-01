@@ -7,6 +7,7 @@
 # Author: Evrifaessa
 # Author: Grkn gll
 # Author: Hedda
+# Author: Joseph
 # Author: Mirzali
 # Author: MuratTheTurkish
 # Author: Rapsar
@@ -21,7 +22,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-01-26 17:03+0000\n"
-"PO-Revision-Date: 2021-01-28 18:04:48+0000\n"
+"PO-Revision-Date: 2021-02-01 14:40:52+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2385,7 +2386,7 @@ msgstr "{domain}, izin verilen bir sunucu değil."
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
 #: TWLight/users/oauth.py:323
 msgid "Handshaker not initiated, please try logging in again."
-msgstr ""
+msgstr "El sıkışma başlatılamadı, lütfen tekrar giriş yapmayı deneyin."
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
 #: TWLight/users/oauth.py:359
