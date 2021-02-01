@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("resources", "0075_auto_20191001_1455"),
+        ("resources", "0063_auto_20190220_1639_squashed_0084_auto_20201019_1310"),
         ("users", "0046_auto_20191001_1455"),
     ]
 
