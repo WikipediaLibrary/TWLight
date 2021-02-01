@@ -19,6 +19,10 @@ class Notice(object):
     )
 
 
+class ProjectPage2021Launch(object):
+    launch_notice = Signal(providing_args=["user_wp_username", "user_email"])
+
+
 class ProxyBundleLaunch(object):
     launch_notice = Signal(providing_args=["user_wp_username", "user_email"])
 
