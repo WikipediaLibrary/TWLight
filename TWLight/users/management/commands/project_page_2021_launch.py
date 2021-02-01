@@ -7,9 +7,7 @@ from TWLight.users.models import Editor
 
 
 class Command(BaseCommand):
-    help = (
-        "Sends emails to active editors notifying them of the 2021 project page rollout."
-    )
+    help = "Sends emails to active editors notifying them of the 2021 project page rollout."
 
     def handle(self, *args, **options):
         active_authorized_editors = Editor.objects.filter(
