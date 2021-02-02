@@ -11,7 +11,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("resources", "0001_initial_squashed_0062_auto_20190220_1639"),
         ("users", "0037_auto_20190117_1008"),
     ]
 
@@ -56,36 +55,10 @@ class Migration(migrations.Migration):
                         to=settings.AUTH_USER_MODEL,
                     ),
                 ),
-                (
-                    "partner",
-                    models.ForeignKey(
-                        blank=True,
-                        help_text="The partner for which the editor is authorized.",
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to="resources.Partner",
-                    ),
-                ),
-                (
-                    "stream",
-                    models.ForeignKey(
-                        blank=True,
-                        help_text="The stream for which the editor is authorized.",
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to="resources.Stream",
-                    ),
-                ),
             ],
             options={
                 "verbose_name": "authorization",
                 "verbose_name_plural": "authorizations",
             },
-        ),
-        migrations.AlterUniqueTogether(
-            name="authorization",
-            unique_together=set(
-                [("authorized_user", "partner", "stream", "date_authorized")]
-            ),
         ),
     ]
