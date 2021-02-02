@@ -6,6 +6,12 @@ import django.db.models.deletion
 
 # TWLight.users.migrations.0053_twl_team_user
 # data migration, should come after all userprofile migrations.
+def twl_team(apps, schema_editor):
+    User = apps.get_model(settings.AUTH_USER_MODEL)
+    User.objects.get_or_create(
+        username="TWL Team", email="wikipedialibrary@wikimedia.org"
+    )
+
 
 # TWLight.users.migrations.0055_authorization_data_partners_foreignkey_to_manytomany
 # data migration, may be skipped.
@@ -170,6 +176,7 @@ class Migration(migrations.Migration):
                 help_text="At their last login, did this user meet the criteria in the terms of use?",
             ),
         ),
+        migrations.RunPython(twl_team, migrations.RunPython.noop),
         migrations.AlterField(
             model_name="userprofile",
             name="lang",
