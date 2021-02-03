@@ -19,6 +19,10 @@ CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 # Never debug in prod
 DEBUG = False
 
+DEFAULT_FROM_EMAIL = (
+    "Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>"
+)
+
 # SecurityMiddleware configuration as suggested by
 # python manage.py check --deploy
 SESSION_COOKIE_SECURE = True

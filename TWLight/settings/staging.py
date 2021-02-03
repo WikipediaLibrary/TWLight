@@ -16,6 +16,10 @@ from .base import *
 # Needed to be added for /admin
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
+DEFAULT_FROM_EMAIL = (
+    "Wikipedia Library Card Staging <noreply@twlight-staging.wmflabs.org>"
+)
+
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
