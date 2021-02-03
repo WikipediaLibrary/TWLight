@@ -119,6 +119,8 @@ class UserProfile(models.Model):
         default=True,
         help_text="Does this coordinator want approved app reminder notices?",
     )
+    # Temporary field to track sending of project page 2021 email to prevent duplication in case of error.
+    project_page_2021_notification_sent = models.BooleanField(default=False)
     # Temporary field to track sending of proxy launch email to prevent duplication in case of error.
     proxy_notification_sent = models.BooleanField(default=False)
 
