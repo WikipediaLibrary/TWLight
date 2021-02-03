@@ -7,6 +7,8 @@ Settings file intended for use in production, on WMF servers.  This file:
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 import sys
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *
 
@@ -17,8 +19,9 @@ CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 # Never debug in prod
 DEBUG = False
 
-SERVER_EMAIL = "Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>"
-DEFAULT_FROM_EMAIL = SERVER_EMAIL
+DEFAULT_FROM_EMAIL = (
+    "Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>"
+)
 
 # SecurityMiddleware configuration as suggested by
 # python manage.py check --deploy
@@ -39,3 +42,10 @@ CACHES = {
         "LOCATION": "/var/tmp/django_cache",
     }
 }
+
+# GLITCHTIP CONFIGURATION
+# ------------------------------------------------------------------------------
+sentry_sdk.init(
+    dsn="https://50e927aaca194181afe5c4b8e790d004@glitchtip-wikipedialibrary.wmflabs.org/1",
+    integrations=[DjangoIntegration()],
+)

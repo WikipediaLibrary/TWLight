@@ -7,6 +7,8 @@ Settings file intended for use in staging, on WMF servers.  This file:
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 import sys
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *
 
@@ -14,8 +16,9 @@ from .base import *
 # Needed to be added for /admin
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
-SERVER_EMAIL = "Wikipedia Library Card Staging <noreply@twlight-staging.wmflabs.org>"
-DEFAULT_FROM_EMAIL = SERVER_EMAIL
+DEFAULT_FROM_EMAIL = (
+    "Wikipedia Library Card Staging <noreply@twlight-staging.wmflabs.org>"
+)
 
 CACHES = {
     "default": {
@@ -23,3 +26,10 @@ CACHES = {
         "LOCATION": "/var/tmp/django_cache",
     }
 }
+
+# GLITCHTIP CONFIGURATION
+# ------------------------------------------------------------------------------
+sentry_sdk.init(
+    dsn="https://50e927aaca194181afe5c4b8e790d004@glitchtip-wikipedialibrary.wmflabs.org/1",
+    integrations=[DjangoIntegration()],
+)
