@@ -1,6 +1,5 @@
-{% load i18n %}
-{% comment %}Translators: This is the announcement email sent to users of the Library Card platform, inviting them to participate in our work over the next 2 quarters. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate urls or items in curly braces.{% endcomment %}
-{% blocktrans trimmed %}
+{% comment %} English-only, do not translate.{% endcomment %}
+{% block trimmed %}
 Hello {{ username }},
 
 You’re receiving this email because you’ve used the Library Card platform recently and we’d like to invite you to provide your thoughts and feedback on changes coming in the next 3-6 months. We’re working on two projects - user interface and experience improvements, and integrating a cross-publisher search tool - and we would love to get your input.
@@ -15,4 +14,4 @@ Additionally, we are planning to deploy an Echo notification about the library l
 
 Thanks,
 The Wikipedia Library Team
-{% endblocktrans %}
+{% endblock %}
