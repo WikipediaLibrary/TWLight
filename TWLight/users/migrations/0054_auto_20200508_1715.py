@@ -9,19 +9,9 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("resources", "0063_auto_20190220_1639_squashed_0084_auto_20201019_1310"),
         ("users", "0053_twl_team_user"),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name="authorization",
-            name="partners",
-            field=models.ManyToManyField(
-                blank=True,
-                help_text="The partner(s) for which the editor is authorized.",
-                to="resources.Partner",
-            ),
-        ),
         migrations.AlterUniqueTogether(name="authorization", unique_together=set([])),
     ]

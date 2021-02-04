@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ("contenttypes", "0002_remove_content_type_name"),
         ("resources", "0001_initial_squashed_0062_auto_20190220_1639"),
-        ("users", "0038_auto_20190220_1639"),
+        ("users", "0038_squashed_0067_remove_editor_editcounts"),
     ]
 
     operations = [

@@ -6,6 +6,7 @@ from unittest.mock import patch
 from django_comments import get_form_target
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
+from django.contrib.auth import signals
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core import mail
@@ -669,5 +670,75 @@ class ProxyBundleLaunchTest(TestCase):
         self.user.userprofile.save()
 
         call_command("proxy_bundle_launch")
+
+        self.assertEqual(len(mail.outbox), 0)
+
+
+class ProjectPage2021LaunchTest(TestCase):
+    def setUp(self):
+        super(ProjectPage2021LaunchTest, self).setUp()
+        editor = EditorFactory(user__email="editor@example.com")
+        self.user = editor.user
+
+        # The user logged in:
+        request = RequestFactory().get("/login")
+        signals.user_logged_in.send(
+            sender=self.user.__class__, request=request, user=self.user
+        )
+
+        self.coordinator = EditorFactory().user
+        coordinators = get_coordinators()
+        coordinators.user_set.add(self.coordinator)
+
+        self.partner = PartnerFactory()
+
+        self.authorization = Authorization()
+        self.authorization.user = self.user
+        self.authorization.authorizer = self.coordinator
+        self.authorization.date_expires = datetime.today() + timedelta(weeks=1)
+        self.authorization.save()
+        self.authorization.partners.add(self.partner)
+
+    def test_project_page_2021_launch_email_1(self):
+        """
+        With one user, calling the project page 2021 launch command
+        should send a single email, to that user.
+        """
+        call_command("project_page_2021_launch")
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [self.user.email])
+
+    def test_project_page_2021_launch_email_2(self):
+        """
+        Adding an inactive user shouldn't send another email.
+        """
+        _ = EditorFactory(user__email="editor@example.com")
+        call_command("project_page_2021_launch")
+
+        self.assertEqual(len(mail.outbox), 1)
+
+    def test_project_page_2021_launch_email_3(self):
+        """
+        The project page 2021 launch command should record the
+        email was sent
+        """
+        self.assertFalse(self.user.userprofile.project_page_2021_notification_sent)
+
+        call_command("project_page_2021_launch")
+
+        self.user.userprofile.refresh_from_db()
+        self.assertTrue(self.user.userprofile.project_page_2021_notification_sent)
+
+    def test_project_page_2021_launch_email_4(self):
+        """
+        The project page 2021 launch command should not send
+        to a user we recorded as having received the email
+        already.
+        """
+        self.user.userprofile.project_page_2021_notification_sent = True
+        self.user.userprofile.save()
+
+        call_command("project_page_2021_launch")
 
         self.assertEqual(len(mail.outbox), 0)

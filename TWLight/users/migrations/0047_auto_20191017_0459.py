@@ -10,16 +10,11 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("resources", "0063_auto_20190220_1639_squashed_0084_auto_20201019_1310"),
         ("users", "0046_auto_20191001_1455"),
     ]
 
     operations = [
         migrations.RenameField(
             model_name="authorization", old_name="authorized_user", new_name="user"
-        ),
-        migrations.AlterUniqueTogether(
-            name="authorization",
-            unique_together=set([("user", "partner", "stream", "date_authorized")]),
         ),
     ]
