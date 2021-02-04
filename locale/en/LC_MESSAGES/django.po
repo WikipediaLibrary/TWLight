@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-03 18:22+0000\n"
+"POT-Creation-Date: 2021-02-04 14:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2744,7 +2744,7 @@ msgid "Update email"
 msgstr ""
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:685
+#: TWLight/users/models.py:687
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
