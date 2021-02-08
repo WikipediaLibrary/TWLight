@@ -467,6 +467,13 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
                 # fmt: on
             )
 
+        if self._check_duplicate_applications():
+            # if duplicate applications exists then
+            # redirect user to specific page with error message
+            url, message = self._check_duplicate_applications()
+            messages.add_message(request, messages.ERROR, message)
+            return HttpResponseRedirect(url, message)
+
         return super(SubmitSingleApplicationView, self).dispatch(
             request, *args, **kwargs
         )
@@ -516,6 +523,41 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
             raise
 
         return partners
+
+    def _check_duplicate_applications(self):
+        """
+        Disallow a user from applying to the same partner more than once
+        """
+        partner = self._get_partners()[0]
+        # if partner is collection or has specific title then
+        # multiple applications are allowed
+        if partner.specific_title or partner.specific_stream:
+            return False
+
+        editor = Editor.objects.get(user=self.request.user)
+        # get duplicate applications
+        apps = Application.objects.filter(
+            partner=partner,
+            editor=editor,
+            status__in=(
+                Application.QUESTION,
+                Application.PENDING,
+                Application.APPROVED,
+            ),
+        )
+        if apps.exists():
+            # Translators: This message is shown to user when he tries to apply to same partner more than once
+            message = _("You already have an application for this Partner.")
+            if len(apps) == 1:
+                # if there is only one application then redirect user to that application
+                app = apps[0]
+                url = reverse("applications:evaluate", kwargs={"pk": app.id})
+            else:
+                # if there are more than one application exists then
+                # redirect the user to my_applications page
+                url = reverse("users:my_applications", kwargs={"pk": editor.pk})
+            return (url, message)
+        return False
 
 
 class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
