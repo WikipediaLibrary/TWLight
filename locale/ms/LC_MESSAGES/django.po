@@ -1,14 +1,13 @@
 # Translation of Wikipedia Library Card Platform to Malay (Bahasa Melayu)
 # Exported from translatewiki.net
 #
-# Author: Abijeet Patro
 # Author: BaRaN6161 TURK
 # Author: Tofeiku
 # Author: Zulfadli51
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2021-01-28 18:04:47+0000\n"
+"PO-Revision-Date: 2021-02-11 18:08:11+0000\n"
 "X-POT-Import-Date: 2021-01-22 20:05:09+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2355,7 +2354,7 @@ msgid "Update email"
 msgstr "Kemas kini e-mel"
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:685
+#: TWLight/users/models.py:687
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
