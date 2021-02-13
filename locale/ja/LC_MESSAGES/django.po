@@ -901,7 +901,7 @@ msgstr "申請は保留されました。設定を上回る件数が審査待ち
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:1037
-msgid "Status of INVALID applications Cannot be changed."
+msgid "Status of INVALID applications cannot be changed."
 msgstr "無効な申請の状態を変更することはできません。"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
