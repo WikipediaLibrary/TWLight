@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform to Romanian (română)
 # Exported from translatewiki.net
 #
+# Author: Amire80
 # Author: MSClaudiu
 # Author: MuratTheTurkish
 msgid ""
@@ -8,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-04 14:45+0000\n"
-"PO-Revision-Date: 2021-02-11 18:08:11+0000\n"
+"PO-Revision-Date: 2021-02-15 14:01:58+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2057,7 +2058,7 @@ msgstr "Practicile de citare variază în funcție de proiect și chiar de artic
 #: TWLight/templates/about.html:208
 #, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a href=\"%(contact_url)s\"> contact page</a>."
-msgstr "Dacă aveți întrebări, aveți nevoie de ajutor sau doriți să vă oferiți voluntar, vă rugăm să consultați <a href=\"%(contact_url)s\"> pagina de contact </a>."
+msgstr "Dacă aveți întrebări, aveți nevoie de ajutor sau doriți să vă oferiți voluntar, vă rugăm să consultați <a href=\"%(contact_url)s\">pagina de contact </a>."
 
 #. Translators: Name of the project/tool.
 #: TWLight/templates/base.html:15 TWLight/templates/base.html:73

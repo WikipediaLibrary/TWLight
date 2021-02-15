@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform to German (Deutsch)
 # Exported from translatewiki.net
 #
+# Author: Amire80
 # Author: Asieverd
 # Author: FF11
 # Author: Flori4nK
@@ -20,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-04 14:45+0000\n"
-"PO-Revision-Date: 2021-02-11 18:08:08+0000\n"
+"PO-Revision-Date: 2021-02-15 14:01:54+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2059,7 +2060,7 @@ msgstr "Die Angabe von Belegen kann je Wikimedia-Projekt oder sogar Artikel unte
 #: TWLight/templates/about.html:208
 #, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a href=\"%(contact_url)s\"> contact page</a>."
-msgstr "Falls du Fragen haben solltest, Hilfe benötigst oder uns ehrenamtlich unterstützen möchtest, schau bitte auf der <a href=\"%(contact_url)s\"> Kontaktseite</a> vorbei."
+msgstr "Falls du Fragen haben solltest, Hilfe benötigst oder uns ehrenamtlich unterstützen möchtest, schau bitte auf der <a href=\"%(contact_url)s\">Kontaktseite</a> vorbei."
 
 #. Translators: Name of the project/tool.
 #: TWLight/templates/base.html:15 TWLight/templates/base.html:73
@@ -2284,7 +2285,7 @@ msgstr "              Es sieht so aus, als ob du aktuell in mindestens einem Wik
 #: TWLight/templates/home.html:84
 #, python-format
 msgid "\n              You meet the eligibility criteria! Check out <a href=\"%(library_url)s\">My Library</a> to see what you have access to.\n            "
-msgstr "              Du erfüllst die Zugänglichkeitskriterien! Schau auf <a href=\"%(library_url)s\">My Library</a> vorbei, um dir deine Zugänge anzuschauen.\n            "
+msgstr "              Du erfüllst die Zugänglichkeitskriterien! Schau auf <a href=\"%(library_url)s\">Meine Zugänge</a> nach den verfügbaren Inhalten vorbei.\n            "
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
 #: TWLight/templates/home.html:100

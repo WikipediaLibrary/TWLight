@@ -1,9 +1,12 @@
 # Translation of Wikipedia Library Card Platform to Arabic (العربية)
 # Exported from translatewiki.net
 #
+# Author: Amire80
 # Author: Dr. Mohammed
 # Author: Jsn.sherman
 # Author: Meno25
+# Author: Mido
+# Author: Mr. Ibrahem
 # Author: MuratTheTurkish
 # Author: Nikkimaria
 # Author: Sonic N800
@@ -17,7 +20,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-04 14:45+0000\n"
-"PO-Revision-Date: 2021-02-11 18:08:08+0000\n"
+"PO-Revision-Date: 2021-02-15 14:01:53+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -218,7 +221,7 @@ msgstr "بريد إلكتروني"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "لقد تغيرت شروط الاستخدام الخاصة بنا، لن تتم معالجة طلباتك حتى تقوم بتسجيل الدخول والموافقة على شروطنا المحدثة."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -288,7 +291,7 @@ msgstr "يمكنك توقع استلام تفاصيل الوصول في غضون
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:253
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr ""
+msgstr "انضم هذا الشريك إلى حزمة المكتبة التي لا تتطلب تطبيقات، سيتم وضع علامة على هذا التطبيق على أنه غير صالح."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -435,9 +438,8 @@ msgstr "لا"
 
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:144
-#, fuzzy
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr "تُرجَى مطالبة مقدم الطلب بإضافة بلد الإقامة إلى ملفه الشخصي قبل المتابعة."
+msgstr "يُرجى مطالبة مقدم الطلب بالموافقة على شروط استخدام الموقع قبل الموافقة على هذا الطلب."
 
 #. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/templates/applications/application_evaluation.html:152
@@ -467,9 +469,8 @@ msgstr "نعم (<a href=\"%(parent_url)s\">الطلب السابق</a>)"
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:203
-#, fuzzy
 msgid "Previous access expiry date"
-msgstr "صفحة سابقة"
+msgstr "تاريخ انتهاء صلاحية الوصول السابق"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:213
@@ -478,14 +479,13 @@ msgstr "تعليقات من المحرر"
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:222
-#, fuzzy
 msgid "Recent Applications (last 90 days)"
-msgstr "أحدث الطلبات"
+msgstr "الطلبات الحديثة (آخر 90 يومًا)"
 
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:259
 msgid "No applications were made in last 90 days by the applicant"
-msgstr ""
+msgstr "لم يتم تقديم أي طلبات في آخر 90 يومًا من قبل مقدم الطلب"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:263
@@ -680,9 +680,8 @@ msgstr "تاريخ يوم التقديم"
 
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:19
-#, fuzzy
 msgid "Has agreed to the terms of use?"
-msgstr "أوافق على شروط الإستخدام"
+msgstr "موافق على شروط الاستخدام؟"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #. Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes.
@@ -847,9 +846,9 @@ msgstr "اختر موردا واحدا على الأقل تريد الوصول �
 #. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
 #. Translators: This message is shown to users once they've successfully submitted their application for review.
 #: TWLight/applications/views.py:422 TWLight/applications/views.py:480
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status."
-msgstr "تم تقديم طلبك للمراجعة، يمكنك التحقق من حالة طلباتك على هذه الصفحة."
+msgstr "تم تقديم طلبك للمراجعة، يمكنك التحقق من حالة طلباتك على صفحة <a href='{applications_url}'>تطبيقاتي</a>"
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
@@ -2382,6 +2381,7 @@ msgstr ""
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive pending application reminders or not.
 #: TWLight/users/forms.py:130
+#, fuzzy
 msgid "Send pending application reminders"
 msgstr "الطلبات المرسلة"
 

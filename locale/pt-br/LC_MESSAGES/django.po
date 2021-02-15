@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform to Brazilian Portuguese (português do Brasil)
 # Exported from translatewiki.net
 #
+# Author: Amire80
 # Author: Eduardo Addad de Oliveira
 # Author: Eduardoaddad
 # Author: Luk3
@@ -12,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-04 14:45+0000\n"
-"PO-Revision-Date: 2021-02-11 18:08:11+0000\n"
+"PO-Revision-Date: 2021-02-15 14:01:57+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2049,7 +2050,7 @@ msgstr "As práticas de citação variam de acordo com o projeto e até com o ar
 #: TWLight/templates/about.html:208
 #, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a href=\"%(contact_url)s\"> contact page</a>."
-msgstr "Se você tiver dúvidas, precisar de ajuda ou quiser se voluntariar para ajudar, consulte nossa <a href=\"%(contact_url)s\"> página de contato</a>."
+msgstr "Se você tiver dúvidas, precisar de ajuda ou quiser se voluntariar para ajudar, consulte nossa <a href=\"%(contact_url)s\">página de contato</a>."
 
 #. Translators: Name of the project/tool.
 #: TWLight/templates/base.html:15 TWLight/templates/base.html:73

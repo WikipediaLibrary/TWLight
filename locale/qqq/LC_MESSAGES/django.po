@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform to Message documentation (Message documentation)
 # Exported from translatewiki.net
 #
+# Author: Amire80
 # Author: Pols12
 # Author: Robby
 # Author: Samwalton9 (WMF)
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-04 14:45+0000\n"
-"PO-Revision-Date: 2021-02-11 18:08:13+0000\n"
+"PO-Revision-Date: 2021-02-15 14:02:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -40,7 +41,7 @@ msgstr ""
 #: TWLight/templates/base.html:153 TWLight/templates/home.html:98
 #: TWLight/users/templates/users/resource_tile.html:133
 msgid "Apply"
-msgstr ""
+msgstr "{{doc-important|This means \"Apply for a library card\", \"Start submitting an application\". This doesn't mean what \"Apply\" often means in other buttons.}}"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:206
@@ -311,7 +312,7 @@ msgstr ""
 #. Translators: This is the title of the section of an application page containing information about the request.
 #: TWLight/applications/templates/applications/application_evaluation.html:36
 msgid "Application"
-msgstr ""
+msgstr "{{doc-important|This means \"request\". This doesn't mean \"software application\" or \"app\".}}"
 
 #. Translators: This labels the section of an application showing the date the application was submitted.
 #: TWLight/applications/templates/applications/application_evaluation.html:41
@@ -694,7 +695,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/confirm_renewal.html:13
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
-msgstr ""
+msgstr "\"Confirm\" is {{msg-wm|Wikipedia-library-04a212-Confirm}}"
 
 #. Translators: Labels the submit button requesting confirmation of application renewal.
 #. Translators: This is the button coordinators click to confirm deletion of a suggestion.
@@ -765,7 +766,7 @@ msgstr ""
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.
 #: TWLight/applications/templates/applications/send_partner.html:80
 msgid "When you've processed the data below, click the 'mark as sent' button."
-msgstr ""
+msgstr "\"Mark as sent\" is {{msg-wm|Wikipedia-library-9dbca9-Mark as sent}}."
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
 #: TWLight/applications/templates/applications/send_partner.html:86
@@ -781,7 +782,7 @@ msgstr ""
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.
 #: TWLight/applications/templates/applications/send_partner.html:107
 msgid "Application data"
-msgstr ""
+msgstr "{{doc-important|\"Application\" here means \"request\" and not \"software application\" or \"app\".}}"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.
 #: TWLight/applications/templates/applications/send_partner.html:158
@@ -792,7 +793,7 @@ msgstr ""
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:163
 msgid "Use the dropdown menus to denote which editor will receive each code. Make sure to send each code via email before clicking 'Mark as sent'."
-msgstr ""
+msgstr "\"Mark as sent\" is {{msg-wm|Wikipedia-library-9dbca9-Mark as sent}}."
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:184
@@ -824,7 +825,7 @@ msgstr ""
 #: TWLight/applications/views.py:422 TWLight/applications/views.py:480
 #, python-brace-format
 msgid "Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status."
-msgstr "انا احبك ي عمر فف"
+msgstr "\"My Applications\" is {{msg-wm|Wikipedia-library-c46eb7-My Applications}}."
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
@@ -1344,7 +1345,7 @@ msgstr ""
 #: TWLight/graphs/views.py:455
 #: TWLight/users/templates/users/preferences.html:11
 msgid "Language"
-msgstr "{{Identical|Sprooch}}"
+msgstr "{{Identical|Language}}"
 
 #. Translators: This is the heading of a data file, denoting the column which lists the number of users using a particular language against each available language on the platform
 #: TWLight/graphs/views.py:457
@@ -1396,7 +1397,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:420
 #, python-format
 msgid "View the status of your application(s) on your <strong><a href=\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr ""
+msgstr "\"My Applications\" is {{msg-wm|Wikipedia-library-c46eb7-My Applications}}."
 
 #. Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist.
 #. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
@@ -1608,9 +1609,8 @@ msgstr ""
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
 #: TWLight/resources/templates/resources/partner_detail.html:499
 #: TWLight/resources/templates/resources/partner_detail.html:513
-#, fuzzy
 msgid "Access Collection"
-msgstr "Must be consistent with {{msg-wm|Wikipedia-library-0907f2-Which_authorization_method_doe}}."
+msgstr ""
 
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:506
@@ -1677,7 +1677,7 @@ msgstr ""
 #. Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/)
 #: TWLight/resources/templates/resources/partner_filter.html:36
 msgid "Apply to multiple partners"
-msgstr ""
+msgstr "{{doc-important|This means \"Apply (for using sources from) multiple partners\". This doesn't mean what \"Apply (some change) to multiple partners\".}}"
 
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
 #: TWLight/resources/templates/resources/partner_filter.html:48
@@ -2196,7 +2196,7 @@ msgstr ""
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on applications.
 #: TWLight/templates/dashboard.html:186
 msgid "Applications"
-msgstr ""
+msgstr "{{doc-important|This means \"requests for access\". This doesn't mean \"software applications\" or \"apps\".}}"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the number of approved applications (i.e. accounts distributed) over time.
 #: TWLight/templates/dashboard.html:189
@@ -2347,7 +2347,7 @@ msgstr ""
 #. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
 #: TWLight/users/forms.py:185
 msgid "By unchecking this box and clicking “Update” you may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
-msgstr ""
+msgstr "\"Update\" is {{msg-wm|Wikipedia-library-fb91e2-Update}}."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
@@ -2363,7 +2363,7 @@ msgstr ""
 #: TWLight/users/models.py:687
 #, python-brace-format
 msgid "{wp_username}"
-msgstr ""
+msgstr "{{Ignored}}"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:218
@@ -2782,7 +2782,7 @@ msgstr ""
 #. Translators: This message is displayed on the page where users can request we stop processing their data.
 #: TWLight/users/templates/users/restrict_data.html:12
 msgid "Checking this box and clicking “Restrict” will pause all processing of the data you have entered into this website. You will not be able to apply for access to resources, your applications will not be further processed, and none of your data will be altered, until you return to this page and uncheck the box. This is not the same as deleting your data."
-msgstr ""
+msgstr "\"Restrict\" is {{msg-wm|Wikipedia-library-a66b50-Restrict}}."
 
 #. Translators: This warning message is shown to coordinators who view the data restriction page.
 #: TWLight/users/templates/users/restrict_data.html:23
@@ -3009,7 +3009,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
 msgid "By checking this box and clicking “Submit”, you agree that you have read the above terms and that you will adhere to the terms of use in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
-msgstr ""
+msgstr "\"Submit\" is {{msg-wm|Wikipedia-library-2dacf6-Submit}}."
 
 #. Translators: This is the heading of the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:8
