@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-16 19:01+0000\n"
+"POT-Creation-Date: 2021-02-16 19:27+0000\n"
 "PO-Revision-Date: 2021-02-15 14:02:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2404,7 +2404,7 @@ msgstr ""
 #, python-format
 msgid ""
 "If you have questions, need help, or want to volunteer to help, please see "
-"our <a href=\"%(contact_url)s\"> contact page</a>."
+"our <a href=\"%(contact_url)s\">contact page</a>."
 msgstr ""
 
 #. Translators: Name of the project/tool.

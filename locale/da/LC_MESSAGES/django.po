@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-16 19:00+0000\n"
+"POT-Creation-Date: 2021-02-16 19:26+0000\n"
 "PO-Revision-Date: 2021-02-11 18:08:08+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2413,7 +2413,7 @@ msgstr ""
 #, python-format
 msgid ""
 "If you have questions, need help, or want to volunteer to help, please see "
-"our <a href=\"%(contact_url)s\"> contact page</a>."
+"our <a href=\"%(contact_url)s\">contact page</a>."
 msgstr ""
 
 #. Translators: Name of the project/tool.

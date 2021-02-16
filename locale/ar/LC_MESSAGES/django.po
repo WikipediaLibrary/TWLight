@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-16 19:00+0000\n"
+"POT-Creation-Date: 2021-02-16 19:26+0000\n"
 "PO-Revision-Date: 2021-02-15 14:01:53+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2631,10 +2631,13 @@ msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:208
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "If you have questions, need help, or want to volunteer to help, please "
+#| "see our <a href=\"%(contact_url)s\"> contact page</a>."
 msgid ""
 "If you have questions, need help, or want to volunteer to help, please see "
-"our <a href=\"%(contact_url)s\"> contact page</a>."
+"our <a href=\"%(contact_url)s\">contact page</a>."
 msgstr ""
 "إذا كانت لديك أسئلة أو بحاجة إلى مساعدة أو تريد التطوع للمساعدة، فيُرجَى "
 "الاطلاع على <a href=\"%(contact_url)s\">صفحة الاتصال الخاصة بنا</a>."
