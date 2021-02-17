@@ -128,6 +128,7 @@ THIRD_PARTY_APPS = [
     "django_countries",
     "rest_framework",
     "rest_framework.authtoken",
+    "django_extensions",
 ]
 
 TWLIGHT_APPS = [
