@@ -1076,7 +1076,7 @@ class EvaluateApplicationView(
                 self.request,
                 messages.ERROR,
                 # Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
-                _("Status of INVALID applications Cannot be changed."),
+                _("Status of INVALID applications cannot be changed."),
             )
             return HttpResponseRedirect(
                 reverse("applications:evaluate", kwargs={"pk": app.pk})
