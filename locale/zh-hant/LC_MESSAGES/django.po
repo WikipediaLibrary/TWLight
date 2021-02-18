@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-17 01:47+0000\n"
+"POT-Creation-Date: 2021-02-18 00:11+0000\n"
 "PO-Revision-Date: 2021-02-11 18:08:12+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -836,9 +836,13 @@ msgstr "標記為已發送"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:163
+#, fuzzy
+#| msgid ""
+#| "Use the dropdown menus to denote which editor will receive each code. "
+#| "Make sure to send each code via email before clicking 'Mark as sent'."
 msgid ""
-"Use the dropdown menus to denote which editor will receive each code. Make "
-"sure to send each code via email before clicking 'Mark as sent'."
+"Use the dropdown menus to denote which editor will receive each code. Access "
+"codes will be sent to users automatically."
 msgstr ""
 "使用下拉選單來指示會接收各代碼的編輯者。請確認在透過電子郵件發送各代碼前，有"
 "點擊「標記為已發送」。"

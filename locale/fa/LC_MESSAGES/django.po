@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-17 01:46+0000\n"
+"POT-Creation-Date: 2021-02-18 00:10+0000\n"
 "PO-Revision-Date: 2021-02-11 18:08:09+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -859,9 +859,13 @@ msgstr "علامت‌گذاری به‌عنوان ارسال‌شده"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:163
+#, fuzzy
+#| msgid ""
+#| "Use the dropdown menus to denote which editor will receive each code. "
+#| "Make sure to send each code via email before clicking 'Mark as sent'."
 msgid ""
-"Use the dropdown menus to denote which editor will receive each code. Make "
-"sure to send each code via email before clicking 'Mark as sent'."
+"Use the dropdown menus to denote which editor will receive each code. Access "
+"codes will be sent to users automatically."
 msgstr ""
 "از منوهای کشویی برای مشخص‌کردن اینکه کدام ویرایشگر کدام کد را دریافت کند "
 "استفاده کنید. حتماً قبل از کلیک بر روی «علامت‌گذاری به‌عنوان ارسال‌شده»، هر کد "

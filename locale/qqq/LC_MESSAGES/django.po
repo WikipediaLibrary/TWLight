@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-17 01:47+0000\n"
+"POT-Creation-Date: 2021-02-18 00:11+0000\n"
 "PO-Revision-Date: 2021-02-15 14:02:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -832,9 +832,13 @@ msgstr ""
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:163
+#, fuzzy
+#| msgid ""
+#| "Use the dropdown menus to denote which editor will receive each code. "
+#| "Make sure to send each code via email before clicking 'Mark as sent'."
 msgid ""
-"Use the dropdown menus to denote which editor will receive each code. Make "
-"sure to send each code via email before clicking 'Mark as sent'."
+"Use the dropdown menus to denote which editor will receive each code. Access "
+"codes will be sent to users automatically."
 msgstr "\"Mark as sent\" is {{msg-wm|Wikipedia-library-9dbca9-Mark as sent}}."
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.

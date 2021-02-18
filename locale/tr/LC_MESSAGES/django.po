@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-17 01:47+0000\n"
+"POT-Creation-Date: 2021-02-18 00:11+0000\n"
 "PO-Revision-Date: 2021-02-11 18:08:12+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -866,9 +866,13 @@ msgstr "Gönderildi olarak işaretle"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:163
+#, fuzzy
+#| msgid ""
+#| "Use the dropdown menus to denote which editor will receive each code. "
+#| "Make sure to send each code via email before clicking 'Mark as sent'."
 msgid ""
-"Use the dropdown menus to denote which editor will receive each code. Make "
-"sure to send each code via email before clicking 'Mark as sent'."
+"Use the dropdown menus to denote which editor will receive each code. Access "
+"codes will be sent to users automatically."
 msgstr ""
 "Hangi editörün her kodu alacağını göstermek için açılır menüleri kullanın. "
 "'Gönderildi olarak işaretle'yi tıklamadan önce her kodu e-postayla "
