@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-18 00:10+0000\n"
+"POT-Creation-Date: 2021-02-18 00:39+0000\n"
 "PO-Revision-Date: 2021-02-11 18:08:10+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1005,7 +1005,9 @@ msgstr "申請は保留されました。設定を上回る件数が審査待ち
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:1079
-msgid "Status of INVALID applications Cannot be changed."
+#, fuzzy
+#| msgid "Status of INVALID applications Cannot be changed."
+msgid "Status of INVALID applications cannot be changed."
 msgstr "無効な申請の状態を変更することはできません。"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
