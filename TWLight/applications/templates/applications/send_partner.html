@@ -57,7 +57,7 @@
           </div>
         {% endif %}
   {% endif %}
-  
+
 
   <p>
     {% if object.send_instructions %}
@@ -97,7 +97,7 @@
       {% endif %}
     {% empty %}
       {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-      {% trans "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators." %} 
+      {% trans "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators." %}
     {% endfor %}
   {% endif %}
 
@@ -131,15 +131,15 @@
                   <div class="media-body">
                   <label for="app_{{ app.pk }}">
                     <h4 class="media-heading">{{ app }}
-                
-                    <!--Flag renewals on Send to partners page-->                    
+
+                    <!--Flag renewals on Send to partners page-->
                     {% if app.parent %}
                     <span class="label label-info">
                       {% comment %}Translators: Displayed if an application is a renewal.{% endcomment %}
                       {% trans "Renewal" %}
                     </span>
                   {% endif %}</h4>
-                  
+
                     <ul class="list-unstyled pull-left">
                       {% for key, send_data in output.items %}
                         <li><strong>{{ send_data.label }}</strong> &mdash; {{ send_data.data }}</li>
