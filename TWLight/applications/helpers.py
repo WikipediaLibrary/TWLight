@@ -123,7 +123,7 @@ SEND_DATA_FIELD_LABELS = {
     # Translators: When sending application data to partners, this is the text labelling a user's affiliation
     AFFILIATION: _("Affiliation"),
     # Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
-    SPECIFIC_STREAM: _("Stream requested"),
+    SPECIFIC_STREAM: _("Collection requested"),
     # Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
     SPECIFIC_TITLE: _("Title requested"),
     # Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
