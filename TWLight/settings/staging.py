@@ -9,6 +9,7 @@ Settings file intended for use in staging, on WMF servers.  This file:
 import sys
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+from TWLight.settings.helpers import sentry_before_send
 
 from .base import *
 
@@ -32,4 +33,5 @@ CACHES = {
 sentry_sdk.init(
     dsn="https://50e927aaca194181afe5c4b8e790d004@glitchtip-wikipedialibrary.wmflabs.org/1",
     integrations=[DjangoIntegration()],
+    before_send=sentry_before_send,
 )
