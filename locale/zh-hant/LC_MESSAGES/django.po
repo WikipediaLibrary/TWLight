@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-23 15:11+0000\n"
+"POT-Creation-Date: 2021-02-23 15:21+0000\n"
 "PO-Revision-Date: 2021-02-22 15:59:46+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2044,11 +2044,15 @@ msgstr "登入"
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:537
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "This resource is part of our <a href=\"%(about)s\">Library Bundle</a> "
+#| "access, which you can access if you meet our minimum eligibility "
+#| "criteria. Log in to find out if you are eligible."
 msgid ""
-"This resource is part of our <a href=\"%(about)s\">Library Bundle</a> "
-"access, which you can access if you meet our minimum eligibility criteria. "
-"Log in to find out if you are eligible."
+"This resource is part of our <a href=\"%(about)s\">Library Bundle</a> , "
+"which you can access if you meet our minimum eligibility criteria. Log in to "
+"find out if you are eligible."
 msgstr ""
 "此資源是我們的 <a href=\"%(about)s\">Library Bundle</a> 取用的一部分，若您符"
 "合我們的最低需求條件，便可以取用。請登入來確認您是否符合條件。"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-23 15:10+0000\n"
+"POT-Creation-Date: 2021-02-23 15:21+0000\n"
 "PO-Revision-Date: 2021-02-22 15:59:45+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2181,11 +2181,15 @@ msgstr "Autentificare"
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:537
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "This resource is part of our <a href=\"%(about)s\">Library Bundle</a> "
+#| "access, which you can access if you meet our minimum eligibility "
+#| "criteria. Log in to find out if you are eligible."
 msgid ""
-"This resource is part of our <a href=\"%(about)s\">Library Bundle</a> "
-"access, which you can access if you meet our minimum eligibility criteria. "
-"Log in to find out if you are eligible."
+"This resource is part of our <a href=\"%(about)s\">Library Bundle</a> , "
+"which you can access if you meet our minimum eligibility criteria. Log in to "
+"find out if you are eligible."
 msgstr ""
 "Această resursă face parte din <a href=\"%(about)s\">Library Bundle</a> "
 "acces, pe care îl puteți accesa dacă îndepliniți criteriile noastre minime "
