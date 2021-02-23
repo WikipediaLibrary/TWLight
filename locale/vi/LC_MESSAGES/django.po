@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-23 15:45+0000\n"
+"POT-Creation-Date: 2021-02-23 23:14+0000\n"
 "PO-Revision-Date: 2021-02-22 15:59:46+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
