@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-23 15:21+0000\n"
+"POT-Creation-Date: 2021-02-23 15:33+0000\n"
 "PO-Revision-Date: 2021-02-22 15:59:46+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1625,11 +1625,15 @@ msgstr ""
 
 #. Translators: This text refers to the page containing the content a user is authorized to access.
 #: TWLight/resources/templates/resources/partner_detail.html:58
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "View the status of your application(s) on your <strong><a href="
+#| "\"%(applications_url)s\">My Applications</a></strong> page."
 msgid ""
-"View the status of your access(es) in <strong><a href=\"%(library_url)s\">My "
+"View the status of your access in <strong><a href=\"%(library_url)s\">My "
 "Library</a></strong> page."
 msgstr ""
+"\"My Applications\" is {{msg-wm|Wikipedia-library-c46eb7-My Applications}}."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:67
@@ -1787,11 +1791,15 @@ msgstr ""
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail.html:411
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "View the status of your application(s) on your <strong><a href="
+#| "\"%(applications_url)s\">My Applications</a></strong> page."
 msgid ""
-"View the status of your access(es) on your <strong><a href=\"%(library_url)s"
+"View the status of your access on your <strong><a href=\"%(library_url)s"
 "\">My Library</a></strong> page."
 msgstr ""
+"\"My Applications\" is {{msg-wm|Wikipedia-library-c46eb7-My Applications}}."
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail.html:444
