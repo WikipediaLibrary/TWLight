@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-18 00:38+0000\n"
+"POT-Creation-Date: 2021-02-23 15:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1891,9 +1891,9 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:537
 #, python-format
 msgid ""
-"This resource is part of our <a href=\"%(about)s\">Library Bundle</a> "
-"access, which you can access if you meet our minimum eligibility criteria. "
-"Log in to find out if you are eligible."
+"This resource is part of our <a href=\"%(about)s\">Library Bundle</a> , "
+"which you can access if you meet our minimum eligibility criteria. Log in to "
+"find out if you are eligible."
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
@@ -2635,22 +2635,18 @@ msgstr ""
 #: TWLight/templates/home.html:75
 #, python-format
 msgid ""
-"\n"
-"              It looks like you have an active block on your account on at "
-"least one Wikimedia project. If you meet the other criteria you may still be "
-"permitted access to the Library Bundle - please <a href=\"%(contact_url)s"
-"\">contact us</a>.\n"
-"            "
+"It looks like you have an active block on your account on at least one "
+"Wikimedia project. If you meet the other criteria you may still be permitted "
+"access to the Library Bundle - please <a href=\"%(contact_url)s\">contact "
+"us</a>."
 msgstr ""
 
 #. Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle.
 #: TWLight/templates/home.html:84
 #, python-format
 msgid ""
-"\n"
-"              You meet the eligibility criteria! Check out <a href="
-"\"%(library_url)s\">My Library</a> to see what you have access to.\n"
-"            "
+"You meet the eligibility criteria! Check out <a href=\"%(library_url)s\">My "
+"Library</a> to see what you have access to."
 msgstr ""
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
