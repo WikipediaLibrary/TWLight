@@ -72,7 +72,7 @@
           <p class="block-notice">
             {% url 'contact' as contact_url %}
             {% comment %}Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
-            {% blocktrans %}
+            {% blocktrans trimmed %}
               It looks like you have an active block on your account on at least one Wikimedia project. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
             {% endblocktrans %}
           </p>
@@ -81,7 +81,7 @@
           <div class="alert alert-success">
             {% url 'users:my_library' as library_url %}
             {% comment %}Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle. {% endcomment %}
-            {% blocktrans %}
+            {% blocktrans trimmed %}
               You meet the eligibility criteria! Check out <a href="{{ library_url }}">My Library</a> to see what you have access to.
             {% endblocktrans %}
           </div>
