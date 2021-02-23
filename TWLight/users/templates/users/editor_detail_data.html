@@ -244,8 +244,10 @@
 {# The following is personal data and must ONLY be displayed to its owner. #}
 {% ifequal editor.user user %}
     <hr/>
+    # Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
+    <h3>{% trans "Personal data" %}</h3>
 
-    <h3>Personal data</h3>
+
 
     <p>
         <span class="glyphicon glyphicon-info-sign"></span>
