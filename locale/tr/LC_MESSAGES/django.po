@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-23 15:21+0000\n"
+"POT-Creation-Date: 2021-02-23 15:38+0000\n"
 "PO-Revision-Date: 2021-02-22 15:59:45+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1857,9 +1857,12 @@ msgstr ""
 
 #. Translators: This text refers to the page containing the content a user is authorized to access.
 #: TWLight/resources/templates/resources/partner_detail.html:58
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "View the status of your access(es) in <strong><a href=\"%(library_url)s"
+#| "\">My Library</a></strong> page."
 msgid ""
-"View the status of your access(es) in <strong><a href=\"%(library_url)s\">My "
+"View the status of your access in <strong><a href=\"%(library_url)s\">My "
 "Library</a></strong> page."
 msgstr ""
 "Erişiminizin durumunu <strong><a href=\"%(library_url)s\">Koleksiyonunuz</"
@@ -2033,9 +2036,12 @@ msgstr "Kullanım koşulları mevcut değil."
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail.html:411
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "View the status of your access(es) on your <strong><a href="
+#| "\"%(library_url)s\">My Library</a></strong> page."
 msgid ""
-"View the status of your access(es) on your <strong><a href=\"%(library_url)s"
+"View the status of your access on your <strong><a href=\"%(library_url)s"
 "\">My Library</a></strong> page."
 msgstr ""
 "Erişiminizin durumunu <strong><a href=\"%(library_url)s\">Koleksiyonum</a></"

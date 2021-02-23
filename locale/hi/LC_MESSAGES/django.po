@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-02-23 15:21+0000\n"
+"POT-Creation-Date: 2021-02-23 15:37+0000\n"
 "PO-Revision-Date: 2021-02-22 15:59:43+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1729,7 +1729,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:58
 #, python-format
 msgid ""
-"View the status of your access(es) in <strong><a href=\"%(library_url)s\">My "
+"View the status of your access in <strong><a href=\"%(library_url)s\">My "
 "Library</a></strong> page."
 msgstr ""
 
@@ -1902,7 +1902,7 @@ msgstr "उपयोग की शर्तें उपलब्ध नही�
 #: TWLight/resources/templates/resources/partner_detail.html:411
 #, python-format
 msgid ""
-"View the status of your access(es) on your <strong><a href=\"%(library_url)s"
+"View the status of your access on your <strong><a href=\"%(library_url)s"
 "\">My Library</a></strong> page."
 msgstr ""
 
