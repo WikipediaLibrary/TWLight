@@ -44,8 +44,8 @@ def _mask(dirty: str):
         Output with any known sensitive information masked out.
     """
     # DB credentials as found in called processes.
-    pattern = re.compile("([' ])--(user|password)=.+([' ])")
-    clean = pattern.sub(r"\1--\2=*****\3", dirty)
+    db_creds = re.compile(r"--(user|password)=[^', ]+([', ])")
+    clean = db_creds.sub(r"--\1=*****\2", dirty)
 
     return clean
 
