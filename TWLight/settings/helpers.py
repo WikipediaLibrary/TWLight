@@ -31,7 +31,7 @@ def sentry_before_send(event: dict, hint: dict):
     return event
 
 
-def _mask(dirty: str):
+def _mask_pattern(dirty: str):
     """
     Masks out known sensitive data from string.
     Parameters
@@ -44,8 +44,8 @@ def _mask(dirty: str):
         Output with any known sensitive information masked out.
     """
     # DB credentials as found in called processes.
-    db_creds = re.compile(r"--(user|password)=[^', ]+([', ])")
-    clean = db_creds.sub(r"--\1=*****\2", dirty)
+    call_proc_db_creds = re.compile(r"--(user|password)=[^', ]+([', ])")
+    clean = call_proc_db_creds.sub(r"--\1=*****\2", dirty)
 
     return clean
 
@@ -69,8 +69,14 @@ def _scrub_event(event_data: Any):
     elif isinstance(event_data, (list, tuple)):
         items = enumerate(event_data)
     else:
-        return _mask(str(event_data))
+        return _mask_pattern(str(event_data))
 
     for key, value in items:
-        event_data[key] = _scrub_event(value)
+        # When we can id sensitive data by the key, do a simple replacement.
+        if key == "user" or key == "password" or key == "passwd":
+            event_data[key] = "*****"
+        # Otherwise, continue recursion.
+        else:
+            event_data[key] = _scrub_event(value)
+
     return event_data
