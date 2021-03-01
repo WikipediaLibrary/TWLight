@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-24 22:52+0000\n"
-"PO-Revision-Date: 2021-02-25 15:34:59+0000\n"
+"PO-Revision-Date: 2021-03-01 13:57:50+0000\n"
 "Language: zh-Hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1392,7 +1392,7 @@ msgstr "在申請之前，請先檢閱申請方面的<strong><a href=\"%(about)s
 
 #. Translators: This text refers to the page containing the content a user is authorized to access.
 #: TWLight/resources/templates/resources/partner_detail.html:58
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access in <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
 msgstr "請在<strong><a href=\"%(library_url)s\">我的典藏</a></strong>頁面檢視您的取用狀態。"
 
@@ -1536,7 +1536,7 @@ msgstr "使用條款不可用。"
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail.html:411
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
 msgstr "請在<strong><a href=\"%(library_url)s\">我的典藏</a></strong>頁面檢視您的取用狀態。"
 
@@ -1637,9 +1637,9 @@ msgstr "登入"
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:537
-#, fuzzy, python-format
+#, python-format
 msgid "This resource is part of our <a href=\"%(about)s\">Library Bundle</a> , which you can access if you meet our minimum eligibility criteria. Log in to find out if you are eligible."
-msgstr "此資源是我們的 <a href=\"%(about)s\">Library Bundle</a> 取用的一部分，若您符合我們的最低需求條件，便可以取用。請登入來確認您是否符合條件。"
+msgstr "此資源是我們的 <a href=\"%(about)s\">Library Bundle</a> 一部分，若您符合我們的最低需求條件，便可以取用。請登入來確認您是否符合條件。"
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:566
@@ -2267,15 +2267,15 @@ msgstr "<p>若您滿足以下條件，便可免費與立即取用涵蓋 %(bundle
 
 #. Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/templates/home.html:75
-#, fuzzy, python-format
+#, python-format
 msgid "It looks like you have an active block on your account on at least one Wikimedia project. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr "\n              看起來您的帳號在至少一個維基媒體專案上有生效中的封鎖。若您符合其它條件，您仍可以允許取用 Library Bundle - 請<a href=\"%(contact_url)s\">聯絡我們</a>。\n            "
+msgstr "看起來您的帳號在至少一個維基媒體專案上有生效中的封鎖。若您符合其它條件，您仍可以允許取用 Library Bundle - 請<a href=\"%(contact_url)s\">聯絡我們</a>。"
 
 #. Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle.
 #: TWLight/templates/home.html:84
-#, fuzzy, python-format
+#, python-format
 msgid "You meet the eligibility criteria! Check out <a href=\"%(library_url)s\">My Library</a> to see what you have access to."
-msgstr "\n              您符合需求條件！請進入<a href=\"%(library_url)s\">我的圖書館</a>來查看您可取用的內容。\n            "
+msgstr "您符合需求條件！請進入<a href=\"%(library_url)s\">我的圖書館</a>來查看您可取用的內容。"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
 #: TWLight/templates/home.html:100
@@ -2937,7 +2937,6 @@ msgstr "資料保存與處理"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:189
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
 msgstr "維基媒體基金會與我們的服務提供方會合法使用您的資訊，提供給維基百科圖書館服務來支援我們的慈善使命。當您申請維基百科圖書館帳號，或是使用維基百科圖書館帳號時，我們可能會定期收集以下資訊：您的使用者名稱、電子郵件位址、編輯次數、註冊日期、使用者 ID 號碼、所屬群組、任何特殊使用者權限、您的名稱、居住國家、職業、以及/或是從屬關係（若您所申請的合作夥伴有需求）、您對於您所做出貢獻的敘述性描述、以及申請取用合作夥伴資源的原因、和您同意這些使用條款的日期。"
 

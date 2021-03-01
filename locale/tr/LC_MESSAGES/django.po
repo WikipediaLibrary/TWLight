@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-24 22:51+0000\n"
-"PO-Revision-Date: 2021-02-25 15:34:59+0000\n"
+"PO-Revision-Date: 2021-03-01 13:57:49+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1399,9 +1399,9 @@ msgstr "Başvuru yapmadan önce lütfen erişim için <strong><a href=\"%(about)
 
 #. Translators: This text refers to the page containing the content a user is authorized to access.
 #: TWLight/resources/templates/resources/partner_detail.html:58
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access in <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr "Erişiminizin durumunu <strong><a href=\"%(library_url)s\">Koleksiyonunuz</a></strong> sayfasında görüntüleyin."
+msgstr "Erişiminizin durumunu <strong><a href=\"%(library_url)s\">Kütüphanem</a></strong> sayfasında görüntüleyin."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:67
@@ -1543,9 +1543,9 @@ msgstr "Kullanım koşulları mevcut değil."
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail.html:411
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr "Erişiminizin durumunu <strong><a href=\"%(library_url)s\">Koleksiyonum</a></strong> sayfasında görüntüleyin."
+msgstr "Erişiminizin durumunu <strong><a href=\"%(library_url)s\">Kütüphanem</a></strong> sayfasında görüntüleyin."
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail.html:444
@@ -1644,9 +1644,9 @@ msgstr "Oturum aç"
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:537
-#, fuzzy, python-format
+#, python-format
 msgid "This resource is part of our <a href=\"%(about)s\">Library Bundle</a> , which you can access if you meet our minimum eligibility criteria. Log in to find out if you are eligible."
-msgstr "Bu kaynak, minimum uygunluk ölçütlerimizi karşılıyorsanız erişebileceğiniz <a href=\"%(about)s\">Kütüphane Paketi</a> erişimimizin bir parçasıdır. Uygun olup olmadığınızı öğrenmek için oturum açın."
+msgstr "Bu kaynak, minimum uygunluk ölçütlerimizi karşılıyorsanız erişebileceğiniz <a href=\"%(about)s\">Kütüphane Paketimizin</a> bir parçasıdır. Uygun olup olmadığınızı öğrenmek için oturum açın."
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:566
@@ -2273,15 +2273,15 @@ msgstr "<p>Aşağıdaki kriterleri karşıladığınız takdirde, %(bundle_partn
 
 #. Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/templates/home.html:75
-#, fuzzy, python-format
+#, python-format
 msgid "It looks like you have an active block on your account on at least one Wikimedia project. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr "\n              Görünüşe göre, en az bir Wikimedia projesindeki hesabınızda etkin bir engel var. Diğer ölçütleri karşılıyorsanız, Kütüphane Paketi'ne erişmenize izin verilebilir - lütfen <a href=\"%(contact_url)s\">bize ulaşın</a>.\n            "
+msgstr "Görünüşe göre, en az bir Wikimedia projesindeki hesabınızda etkin bir engel var. Diğer ölçütleri karşılıyorsanız, Kütüphane Paketi'ne erişmenize izin verilebilir - lütfen <a href=\"%(contact_url)s\">bize ulaşın</a>."
 
 #. Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle.
 #: TWLight/templates/home.html:84
-#, fuzzy, python-format
+#, python-format
 msgid "You meet the eligibility criteria! Check out <a href=\"%(library_url)s\">My Library</a> to see what you have access to."
-msgstr "\n              Uygunluk kriterlerini karşılıyorsunuz! Neye erişiminiz olduğunu görmek için <a href=\"%(library_url)s\">Kütüphanem</a>'e göz atın.\n            "
+msgstr "Uygunluk kıstaslarını karşılıyorsunuz! Neye erişiminiz olduğunu görmek için <a href=\"%(library_url)s\">Kütüphanem</a>'e göz atın."
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
 #: TWLight/templates/home.html:100
@@ -2937,7 +2937,6 @@ msgstr "Veri Saklama ve İşleme"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:189
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
 msgstr "Wikimedia Vakfı ve hizmet sağlayıcılarımız, bilgilerinizi, Vikipedi'deki hizmetlerimizi, yasal misyonumuzu desteklemek için meşru bir amaç için kullanırlar. Bir Vikipedi Kütüphanesi hesabına başvurduğunuzda veya Vikipedi Kütüphanesi hesabınızı kullanırken, rutin olarak aşağıdaki bilgileri toplayabiliriz: kullanıcı adınız, e-posta adresiniz, düzenleme sayısını, kayıt tarihini, kullanıcı kimliği numaranızı, ait olduğunuz grupları ve herhangi bir özel kullanıcıyı Haklar; başvuruda bulunacağınız bir ortak tarafından talep edilmesi halinde adınız, ikamet ettiğiniz ülke, mesleğiniz ve/veya bağlılığınız; ortak kaynaklara erişim için başvuruda bulunma konusundaki katkılarınız ve sebepleriniz hakkındaki açıklamalarınızı; ve bu kullanım şartlarını kabul ettiğiniz tarih."
 
