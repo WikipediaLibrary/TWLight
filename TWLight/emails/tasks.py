@@ -39,7 +39,7 @@ from TWLight.applications.signals import Reminder
 from TWLight.emails.signals import ContactUs
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-
+from TWLight.users.signals import Notice, ProjectPage2021Launch
 
 logger = logging.getLogger(__name__)
 
