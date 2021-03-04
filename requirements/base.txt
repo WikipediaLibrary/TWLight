@@ -11,7 +11,7 @@ django-cron==0.5.1
 django-durationfield==0.5.5
 django_extensions==3.1.1
 django-filter==2.4.0
-django-modeltranslation==0.16.1
+django-modeltranslation==0.16.2
 django-premailer
 django-request==1.5.6
 django-reversion==3.0.9
