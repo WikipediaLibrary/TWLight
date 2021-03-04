@@ -1556,10 +1556,11 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             messages.add_message(
                 self.request,
                 messages.WARNING,
+                # fmt: off
                 # Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
-                _("Attempt to renew unapproved app #{pk} has been denied").format(
-                    pk=app.pk
-                ),
+                _("Attempt to renew unapproved application #{pk} has been denied")
+                .format(pk=app.pk),
+                # fmt: on
             )
             raise PermissionDenied
 
