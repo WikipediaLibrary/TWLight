@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-24 22:52+0000\n"
-"PO-Revision-Date: 2021-02-25 15:35:00+0000\n"
+"PO-Revision-Date: 2021-03-04 13:11:02+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -1394,9 +1394,9 @@ msgstr ""
 
 #. Translators: This text refers to the page containing the content a user is authorized to access.
 #: TWLight/resources/templates/resources/partner_detail.html:58
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access in <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr "\"My Applications\" is {{msg-wm|Wikipedia-library-c46eb7-My Applications}}."
+msgstr "“My Library” is {{msg-wm|Wikipedia-library-7996cc-My Library}}."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:67
@@ -1538,9 +1538,9 @@ msgstr ""
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail.html:411
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr "\"My Applications\" is {{msg-wm|Wikipedia-library-c46eb7-My Applications}}."
+msgstr "“My Library” is {{msg-wm|Wikipedia-library-7996cc-My Library}}."
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail.html:444

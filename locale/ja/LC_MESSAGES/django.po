@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-02-24 22:51+0000\n"
-"PO-Revision-Date: 2021-03-01 13:57:47+0000\n"
+"PO-Revision-Date: 2021-03-04 13:10:59+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2275,9 +2275,9 @@ msgstr "あなたのアカウントはウィキメディアのプロジェクト
 
 #. Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle.
 #: TWLight/templates/home.html:84
-#, fuzzy, python-format
+#, python-format
 msgid "You meet the eligibility criteria! Check out <a href=\"%(library_url)s\">My Library</a> to see what you have access to."
-msgstr "\n              登録要件に合格しました。アクセス権の対象は<a href=\"%(library_url)s\">私の図書館</a>を開いてご確認ください。\n            "
+msgstr "登録要件に合格しました。アクセス権の対象は<a href=\"%(library_url)s\">私の図書館</a>を開いてご確認ください。"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
 #: TWLight/templates/home.html:100
