@@ -3,7 +3,7 @@ bleach==3.3.0
 defusedxml==0.6.0
 django>=3.0.8,<3.1
 django-annoying==0.10.6
-django-autocomplete-light==3.8.1
+django-autocomplete-light==3.8.2
 django-contrib-comments==2.0.0
 django-countries==7.0
 django-crispy-forms==1.11.1
