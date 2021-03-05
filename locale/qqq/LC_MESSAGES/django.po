@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-05 01:45+0000\n"
+"POT-Creation-Date: 2021-03-05 02:14+0000\n"
 "PO-Revision-Date: 2021-03-04 13:11:02+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1901,9 +1901,9 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:537
 #, python-format
 msgid ""
-"This resource is part of our <a href=\"%(about)s\">Library Bundle</a> , "
-"which you can access if you meet our minimum eligibility criteria. Log in to "
-"find out if you are eligible."
+"This resource is part of our <a href=\"%(about)s\">Library Bundle</a>, which "
+"you can access if you meet our minimum eligibility criteria. Log in to find "
+"out if you are eligible."
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
