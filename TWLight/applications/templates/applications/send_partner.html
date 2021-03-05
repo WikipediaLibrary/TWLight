@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load i18n %}
+{% load static %}
 {% load cache %}
 {% load twlight_wikicode2html %}
 
@@ -204,11 +205,7 @@
 {% endblock content %}
 
 {% block javascript %}
-  <script
-    src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/2.2.4/jquery.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
-
+  <script type="text/javascript" language="javascript" src="{% static "js/jquery-2.2.4.min.js" %}"></script>
   <script type="text/javascript">
     $('#toggle_all').click(function() {
       $('li.outline input[type="checkbox"]').prop('checked', this.checked)
