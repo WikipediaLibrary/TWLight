@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-05 12:27+0000\n"
+"POT-Creation-Date: 2021-03-05 13:01+0000\n"
 "PO-Revision-Date: 2021-02-25 15:34:58+0000\n"
 "Language: ta\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -182,9 +182,11 @@ msgid "Affiliation"
 msgstr "தொடர்பு"
 
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
+#. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/helpers.py:126
-msgid "Stream requested"
-msgstr "கோரப்பட்ட ஸ்ட்ரீம்"
+#: TWLight/applications/templates/applications/application_evaluation.html:152
+msgid "Collection requested"
+msgstr "கோரப்பட்ட தொகுப்புகள்"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
@@ -470,11 +472,6 @@ msgid ""
 msgstr ""
 "இந்த விண்ணப்பத்திற்கு ஒப்புதல் அளிக்கும் முன் விண்ணப்பதாரர், தளத்தின் பயன்பாட்டு "
 "விதிமுறைகளுக்கு ஒப்புக் கொள்ளுமாறு கோருங்கள்."
-
-#. Translators: This labels the section of an application showing which collection of resources the user requested access to.
-#: TWLight/applications/templates/applications/application_evaluation.html:152
-msgid "Collection requested"
-msgstr "கோரப்பட்ட தொகுப்புகள்"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:171
@@ -813,12 +810,12 @@ msgstr ""
 msgid "Application data for %(object)s"
 msgstr ""
 
-#. Translators: This message is shown when applications exceed the number of accounts available for each stream(s).
+#. Translators: This message is shown when applications exceed the number of accounts available for each collection.
 #: TWLight/applications/templates/applications/send_partner.html:52
 #, python-format
 msgid ""
-"Application(s) for <strong>%(unavailable_streams)s</strong> if sent, will "
-"exceed the total available accounts for the stream(s). Please proceed at "
+"Applications for <strong>%(unavailable_streams)s</strong> if sent, will "
+"exceed the total available accounts for the collections. Please proceed at "
 "your own discretion."
 msgstr ""
 
@@ -2044,11 +2041,12 @@ msgstr ""
 msgid "Renewal?"
 msgstr "புதுப்பிக்கவா?"
 
-#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for.
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the collection the user applied for.
 #: TWLight/resources/templates/resources/partner_users.html:37
 #: TWLight/resources/templates/resources/partner_users.html:88
-msgid "Stream"
-msgstr ""
+#, fuzzy
+msgid "Collection"
+msgstr "கோரப்பட்ட தொகுப்புகள்"
 
 #. Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched.
 #: TWLight/resources/templates/resources/partner_users.html:50
@@ -3722,7 +3720,7 @@ msgstr ""
 #: TWLight/users/views.py:258
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
-"receive at least one type of reminder emails, consider changing your "
+"receive at least one type of reminder emails, so consider changing your "
 "preferences."
 msgstr ""
 
@@ -3817,3 +3815,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Stream requested"
+#~ msgstr "கோரப்பட்ட ஸ்ட்ரீம்"

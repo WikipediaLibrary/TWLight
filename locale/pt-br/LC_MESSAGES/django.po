@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-05 12:27+0000\n"
+"POT-Creation-Date: 2021-03-05 13:01+0000\n"
 "PO-Revision-Date: 2021-02-25 15:34:58+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -182,9 +182,11 @@ msgid "Affiliation"
 msgstr "Afiliação"
 
 #. Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
+#. Translators: This labels the section of an application showing which collection of resources the user requested access to.
 #: TWLight/applications/helpers.py:126
-msgid "Stream requested"
-msgstr "Fluxo solicitado"
+#: TWLight/applications/templates/applications/application_evaluation.html:152
+msgid "Collection requested"
+msgstr "Coleção solicitada"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
@@ -465,11 +467,6 @@ msgid ""
 msgstr ""
 "Solicite que o candidato concorde com os termos de uso do site antes de "
 "aprovar essa candidatura."
-
-#. Translators: This labels the section of an application showing which collection of resources the user requested access to.
-#: TWLight/applications/templates/applications/application_evaluation.html:152
-msgid "Collection requested"
-msgstr "Coleção solicitada"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:171
@@ -807,12 +804,16 @@ msgstr "Não há parceiros com candidaturas prontos para enviar."
 msgid "Application data for %(object)s"
 msgstr "Dados de candidatura para %(object)s"
 
-#. Translators: This message is shown when applications exceed the number of accounts available for each stream(s).
+#. Translators: This message is shown when applications exceed the number of accounts available for each collection.
 #: TWLight/applications/templates/applications/send_partner.html:52
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Application(s) for <strong>%(unavailable_streams)s</strong> if sent, will "
+#| "exceed the total available accounts for the stream(s). Please proceed at "
+#| "your own discretion."
 msgid ""
-"Application(s) for <strong>%(unavailable_streams)s</strong> if sent, will "
-"exceed the total available accounts for the stream(s). Please proceed at "
+"Applications for <strong>%(unavailable_streams)s</strong> if sent, will "
+"exceed the total available accounts for the collections. Please proceed at "
 "your own discretion."
 msgstr ""
 "Candidatura(s) para <strong>%(unavailable_streams)s</strong> se enviados, "
@@ -2291,11 +2292,13 @@ msgstr "Candidatura aprovada"
 msgid "Renewal?"
 msgstr "Renovação?"
 
-#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the stream (collection) the user applied for.
+#. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the collection the user applied for.
 #: TWLight/resources/templates/resources/partner_users.html:37
 #: TWLight/resources/templates/resources/partner_users.html:88
-msgid "Stream"
-msgstr "Fluxo"
+#, fuzzy
+#| msgid "Collections"
+msgid "Collection"
+msgstr "Coleções"
 
 #. Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched.
 #: TWLight/resources/templates/resources/partner_users.html:50
@@ -4339,9 +4342,14 @@ msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:258
+#, fuzzy
+#| msgid ""
+#| "You have chosen not to receive reminder emails. As a coordinator, you "
+#| "should receive at least one type of reminder emails, consider changing "
+#| "your preferences."
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
-"receive at least one type of reminder emails, consider changing your "
+"receive at least one type of reminder emails, so consider changing your "
 "preferences."
 msgstr ""
 "Você optou por não receber e-mails de lembrete. Como coordenador, você deve "
@@ -4441,3 +4449,9 @@ msgstr "5"
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr "6"
+
+#~ msgid "Stream requested"
+#~ msgstr "Fluxo solicitado"
+
+#~ msgid "Stream"
+#~ msgstr "Fluxo"
