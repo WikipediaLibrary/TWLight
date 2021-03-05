@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-04 17:02+0000\n"
+"POT-Creation-Date: 2021-03-05 01:45+0000\n"
 "PO-Revision-Date: 2021-02-25 15:34:56+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,7 +156,7 @@ msgstr "आपको भागीदार की उपयोग की शर�
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
 #: TWLight/applications/helpers.py:118
-#: TWLight/users/templates/users/editor_detail_data.html:288
+#: TWLight/users/templates/users/editor_detail_data.html:290
 msgid "Real name"
 msgstr "वास्तविक नाम"
 
@@ -165,14 +165,14 @@ msgstr "वास्तविक नाम"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
 #: TWLight/applications/helpers.py:120
 #: TWLight/applications/templates/applications/application_evaluation.html:100
-#: TWLight/users/templates/users/editor_detail_data.html:300
+#: TWLight/users/templates/users/editor_detail_data.html:302
 msgid "Country of residence"
 msgstr "आपका निवास देश"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
 #: TWLight/applications/helpers.py:122
-#: TWLight/users/templates/users/editor_detail_data.html:312
+#: TWLight/users/templates/users/editor_detail_data.html:314
 msgid "Occupation"
 msgstr "व्यवसाय"
 
@@ -3240,8 +3240,12 @@ msgstr "मेटा-विकी पंजीकरण या SUL विलय 
 msgid "Wikipedia user ID *"
 msgstr "विकिपीडिया उपयोगकर्ता आईडी *"
 
+#: TWLight/users/templates/users/editor_detail_data.html:248
+msgid "Personal data"
+msgstr ""
+
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/users/templates/users/editor_detail_data.html:253
+#: TWLight/users/templates/users/editor_detail_data.html:255
 msgid ""
 "The following information is visible only to you, site administrators, "
 "publishing partners (where required), and volunteer Wikipedia Library "
@@ -3252,7 +3256,7 @@ msgstr ""
 "हैं)को दिखाई देती है।"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
-#: TWLight/users/templates/users/editor_detail_data.html:263
+#: TWLight/users/templates/users/editor_detail_data.html:265
 #, python-format
 msgid ""
 "You may <a href=\"%(update_url)s\">update or delete</a> your data at any "
@@ -3261,17 +3265,17 @@ msgstr ""
 "आप किसी भी समय अपना डेटा <a href=\"%(update_url)s\">अपडेट या हटा</a> कर सकते हैं।"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
-#: TWLight/users/templates/users/editor_detail_data.html:274
+#: TWLight/users/templates/users/editor_detail_data.html:276
 msgid "Email *"
 msgstr "ईमेल *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
-#: TWLight/users/templates/users/editor_detail_data.html:279
+#: TWLight/users/templates/users/editor_detail_data.html:281
 msgid "update"
 msgstr "अद्यतन"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
-#: TWLight/users/templates/users/editor_detail_data.html:324
+#: TWLight/users/templates/users/editor_detail_data.html:326
 msgid "Institutional affiliation"
 msgstr "संस्थागत संबद्धता"
 
