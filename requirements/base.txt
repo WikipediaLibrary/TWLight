@@ -1,6 +1,6 @@
 black==20.8b1
 bleach==3.3.0
-defusedxml==0.6.0
+defusedxml==0.7.0
 django>=3.0.8,<3.1
 django-annoying==0.10.6
 django-autocomplete-light==3.8.2
