@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-05 02:14+0000\n"
+"POT-Creation-Date: 2021-03-05 12:27+0000\n"
 "PO-Revision-Date: 2021-02-25 15:34:57+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:400
 #: TWLight/resources/templates/resources/partner_detail.html:403
 #: TWLight/resources/templates/resources/partner_tile.html:100
-#: TWLight/templates/base.html:153 TWLight/templates/home.html:98
+#: TWLight/templates/base.html:147 TWLight/templates/home.html:98
 #: TWLight/users/templates/users/resource_tile.html:133
 msgid "Apply"
 msgstr "Kirim permohonan"
@@ -234,7 +234,7 @@ msgstr "Dalam diskusi"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #: TWLight/applications/models.py:58
-#: TWLight/applications/templates/applications/application_list.html:40
+#: TWLight/applications/templates/applications/application_list.html:31
 msgid "Approved"
 msgstr "Disetujui"
 
@@ -311,7 +311,7 @@ msgstr ""
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:21
 #: TWLight/applications/templates/applications/application_list_include.html:6
-#: TWLight/applications/templates/applications/send_partner.html:43
+#: TWLight/applications/templates/applications/send_partner.html:44
 #: TWLight/resources/templates/resources/partner_users.html:15
 msgid ""
 "Coordinators: This page may contain personal information such as real names "
@@ -572,75 +572,75 @@ msgstr "Ditinjau pada %(review_date)s"
 msgid "No previous versions."
 msgstr "Tidak ada versi terdahulu"
 
-#: TWLight/applications/templates/applications/application_list.html:29
+#: TWLight/applications/templates/applications/application_list.html:20
 msgid "View applications which are..."
 msgstr "Lihat permohonan yang ..."
 
-#: TWLight/applications/templates/applications/application_list.html:35
+#: TWLight/applications/templates/applications/application_list.html:26
 msgid "Pending review"
 msgstr "Menunggu keputusan"
 
-#: TWLight/applications/templates/applications/application_list.html:45
+#: TWLight/applications/templates/applications/application_list.html:36
 msgid "Rejected"
 msgstr "Ditolak"
 
-#: TWLight/applications/templates/applications/application_list.html:50
+#: TWLight/applications/templates/applications/application_list.html:41
 msgid "Sent"
 msgstr "Telah dikirim"
 
-#: TWLight/applications/templates/applications/application_list.html:55
+#: TWLight/applications/templates/applications/application_list.html:46
 msgid "Up for renewal"
 msgstr "Waktunya untuk diperpanjang"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
-#: TWLight/applications/templates/applications/application_list.html:70
+#: TWLight/applications/templates/applications/application_list.html:61
 msgid "Filter by..."
 msgstr "Saring berdasarkan"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
-#: TWLight/applications/templates/applications/application_list.html:82
+#: TWLight/applications/templates/applications/application_list.html:73
 msgid "Current filters"
 msgstr "Saringan saat ini"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
-#: TWLight/applications/templates/applications/application_list.html:93
+#: TWLight/applications/templates/applications/application_list.html:84
 msgid "None"
 msgstr "Tidak ada"
 
 #. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
-#: TWLight/applications/templates/applications/application_list.html:105
+#: TWLight/applications/templates/applications/application_list.html:96
 msgid "Page navigation"
 msgstr "Navigasi halaman"
 
 #. Translators: This is the label for a button which goes to the previous page of applications.
-#: TWLight/applications/templates/applications/application_list.html:109
-#: TWLight/applications/templates/applications/application_list.html:111
-#: TWLight/applications/templates/applications/application_list.html:116
-#: TWLight/applications/templates/applications/application_list.html:117
+#: TWLight/applications/templates/applications/application_list.html:100
+#: TWLight/applications/templates/applications/application_list.html:102
+#: TWLight/applications/templates/applications/application_list.html:107
+#: TWLight/applications/templates/applications/application_list.html:108
 msgid "Previous page"
 msgstr "Halaman sebelumnya"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
-#: TWLight/applications/templates/applications/application_list.html:217
+#: TWLight/applications/templates/applications/application_list.html:208
 msgid "Next"
 msgstr "Selanjutnya"
 
 #. Translators: This is the label for a button which goes to the next page of applications.
-#: TWLight/applications/templates/applications/application_list.html:219
-#: TWLight/applications/templates/applications/application_list.html:235
-#: TWLight/applications/templates/applications/application_list.html:236
+#: TWLight/applications/templates/applications/application_list.html:210
+#: TWLight/applications/templates/applications/application_list.html:226
+#: TWLight/applications/templates/applications/application_list.html:227
 msgid "Next page"
 msgstr "Halaman selanjutnya"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications.
-#: TWLight/applications/templates/applications/application_list.html:226
+#: TWLight/applications/templates/applications/application_list.html:217
 msgid "Last"
 msgstr "Akhir"
 
 #. Translators: This is the label for a button which goes to the last page of applications.
-#: TWLight/applications/templates/applications/application_list.html:228
-#: TWLight/applications/templates/applications/application_list.html:240
-#: TWLight/applications/templates/applications/application_list.html:241
+#: TWLight/applications/templates/applications/application_list.html:219
+#: TWLight/applications/templates/applications/application_list.html:231
+#: TWLight/applications/templates/applications/application_list.html:232
 msgid "Last page"
 msgstr "Halaman terakhir"
 
@@ -711,14 +711,14 @@ msgstr "Sudah menyetujui syarat penggunaan?"
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #. Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:28
-#: TWLight/applications/templates/applications/send_partner.html:122
+#: TWLight/applications/templates/applications/send_partner.html:123
 msgid "Select/deselect all"
 msgstr "Pilih/batalkan semua"
 
 #. Translators: Displayed if an application is a renewal.
 #. Translators: Denotes whether an application was a renewal request for a previous application.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:62
-#: TWLight/applications/templates/applications/send_partner.html:141
+#: TWLight/applications/templates/applications/send_partner.html:142
 #: TWLight/resources/templates/resources/partner_users.html:54
 #: TWLight/resources/templates/resources/partner_users.html:105
 msgid "Renewal"
@@ -798,13 +798,13 @@ msgid "There are no partners with applications ready to send."
 msgstr "Tidak ada partner dengan permohonan yang siap dikirim."
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where object will be the name of the partner. Don't translate object.
-#: TWLight/applications/templates/applications/send_partner.html:38
+#: TWLight/applications/templates/applications/send_partner.html:39
 #, python-format
 msgid "Application data for %(object)s"
 msgstr "Data aplikasi untuk %(object)s"
 
 #. Translators: This message is shown when applications exceed the number of accounts available for each stream(s).
-#: TWLight/applications/templates/applications/send_partner.html:51
+#: TWLight/applications/templates/applications/send_partner.html:52
 #, python-format
 msgid ""
 "Application(s) for <strong>%(unavailable_streams)s</strong> if sent, will "
@@ -816,7 +816,7 @@ msgstr ""
 "sebelum melanjutkan."
 
 #. Translators: This message is shown when applications exceed the number of accounts available.
-#: TWLight/applications/templates/applications/send_partner.html:57
+#: TWLight/applications/templates/applications/send_partner.html:58
 #, python-format
 msgid ""
 "Application(s) for %(object)s, if sent, will exceed the total available "
@@ -826,20 +826,20 @@ msgstr ""
 "untuk partner ini. Silakan dipertimbangkan sebelum melanjutkan."
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.
-#: TWLight/applications/templates/applications/send_partner.html:80
+#: TWLight/applications/templates/applications/send_partner.html:81
 msgid "When you've processed the data below, click the 'mark as sent' button."
 msgstr ""
 "Saat Anda telah memproses data di bawah ini, klik tombol 'tandai telah "
 "dikirim'."
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
-#: TWLight/applications/templates/applications/send_partner.html:86
+#: TWLight/applications/templates/applications/send_partner.html:87
 msgid "Contact"
 msgid_plural "Contacts"
 msgstr[0] "Kontak"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/applications/templates/applications/send_partner.html:102
+#: TWLight/applications/templates/applications/send_partner.html:103
 msgid ""
 "Whoops, we don't have any listed contacts. Please notify Wikipedia Library "
 "administrators."
@@ -848,18 +848,18 @@ msgstr ""
 "Perpustakaan Wikipedia."
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.
-#: TWLight/applications/templates/applications/send_partner.html:107
+#: TWLight/applications/templates/applications/send_partner.html:108
 msgid "Application data"
 msgstr "Data permohonan"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.
-#: TWLight/applications/templates/applications/send_partner.html:158
-#: TWLight/applications/templates/applications/send_partner.html:198
+#: TWLight/applications/templates/applications/send_partner.html:159
+#: TWLight/applications/templates/applications/send_partner.html:199
 msgid "Mark as sent"
 msgstr "Tandai telah dikirim"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
-#: TWLight/applications/templates/applications/send_partner.html:163
+#: TWLight/applications/templates/applications/send_partner.html:164
 #, fuzzy
 msgid ""
 "Use the dropdown menus to denote which editor will receive each code. Access "
@@ -870,12 +870,12 @@ msgstr ""
 "'Tandai sebagai terkirim'."
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
-#: TWLight/applications/templates/applications/send_partner.html:184
+#: TWLight/applications/templates/applications/send_partner.html:185
 msgid "Select code:"
 msgstr "Pilih kode:"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
-#: TWLight/applications/templates/applications/send_partner.html:203
+#: TWLight/applications/templates/applications/send_partner.html:204
 msgid "There are no approved, unsent applications."
 msgstr "Tidak ada aplikasi yang disetujui dan tidak terkirim."
 
@@ -1211,7 +1211,7 @@ msgstr ""
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/about.html:204 TWLight/templates/base.html:267
+#: TWLight/templates/about.html:204 TWLight/templates/base.html:261
 msgid "Contact us"
 msgstr "Hubungi kami"
 
@@ -1627,7 +1627,7 @@ msgstr ""
 
 #. Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
 #: TWLight/resources/forms.py:19
-#: TWLight/resources/templates/resources/suggest.html:62
+#: TWLight/resources/templates/resources/suggest.html:55
 msgid "Description"
 msgstr "Keterangan"
 
@@ -1865,7 +1865,7 @@ msgstr ""
 #. Translators: A button on the 'your applications' page which when clicked takes users their collection page.
 #. Translators: Heading of the collection page where users can view all partners they are authorized to access with other relevant information.
 #: TWLight/resources/templates/resources/partner_detail.html:485
-#: TWLight/templates/base.html:112 TWLight/templates/home.html:25
+#: TWLight/templates/base.html:106 TWLight/templates/home.html:25
 #: TWLight/users/templates/users/editor_detail.html:21
 #: TWLight/users/templates/users/my_applications.html:10
 #: TWLight/users/templates/users/my_library.html:6
@@ -1929,7 +1929,7 @@ msgstr ""
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
 #. Translators: This message is shown on the button users click to log in to the website.
 #: TWLight/resources/templates/resources/partner_detail.html:529
-#: TWLight/templates/base.html:144 TWLight/templates/home.html:31
+#: TWLight/templates/base.html:138 TWLight/templates/home.html:31
 msgid "Log in"
 msgstr ""
 
@@ -1975,7 +1975,7 @@ msgstr ""
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_filter.html:30
-#: TWLight/templates/base.html:246
+#: TWLight/templates/base.html:240
 msgid "Suggest a partner"
 msgstr ""
 
@@ -2052,41 +2052,41 @@ msgid "Imported"
 msgstr ""
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
-#: TWLight/resources/templates/resources/suggest.html:25
+#: TWLight/resources/templates/resources/suggest.html:18
 msgid "Suggest partners"
 msgstr ""
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
-#: TWLight/resources/templates/resources/suggest.html:45
+#: TWLight/resources/templates/resources/suggest.html:38
 msgid "Browse and support suggestions"
 msgstr ""
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
-#: TWLight/resources/templates/resources/suggest.html:54
+#: TWLight/resources/templates/resources/suggest.html:47
 #: TWLight/users/templates/users/preferences.html:98
 msgid "Delete"
 msgstr ""
 
 #. Translators: This is the text that appears before the URL of every partner suggestion.
-#: TWLight/resources/templates/resources/suggest.html:66
+#: TWLight/resources/templates/resources/suggest.html:59
 msgid "URL"
 msgstr ""
 
-#: TWLight/resources/templates/resources/suggest.html:67
+#: TWLight/resources/templates/resources/suggest.html:60
 msgid "Proposer"
 msgstr ""
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
-#: TWLight/resources/templates/resources/suggest.html:76
-#: TWLight/resources/templates/resources/suggest.html:100
-#: TWLight/resources/templates/resources/suggest.html:104
+#: TWLight/resources/templates/resources/suggest.html:69
+#: TWLight/resources/templates/resources/suggest.html:93
+#: TWLight/resources/templates/resources/suggest.html:97
 msgid "Upvoted"
 msgstr ""
 
 #. Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse).
-#: TWLight/resources/templates/resources/suggest.html:79
-#: TWLight/resources/templates/resources/suggest.html:102
+#: TWLight/resources/templates/resources/suggest.html:72
+#: TWLight/resources/templates/resources/suggest.html:95
 msgid "Upvote"
 msgstr ""
 
@@ -2443,47 +2443,47 @@ msgid ""
 msgstr ""
 
 #. Translators: Name of the project/tool.
-#: TWLight/templates/base.html:15 TWLight/templates/base.html:73
+#: TWLight/templates/base.html:15 TWLight/templates/base.html:67
 msgid "The Wikipedia Library Card Platform"
 msgstr ""
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
-#: TWLight/templates/base.html:67
+#: TWLight/templates/base.html:61
 msgid "Library Card Platform home"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their respective profiles.
-#: TWLight/templates/base.html:91
+#: TWLight/templates/base.html:85
 msgid "Profile"
 msgstr "Profil"
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown when the current user is a superuser, linking to the administrator interface.
-#: TWLight/templates/base.html:99
+#: TWLight/templates/base.html:93
 msgid "Admin"
 msgstr "Pengurus"
 
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications.
-#: TWLight/templates/base.html:123
+#: TWLight/templates/base.html:117
 msgid "My Applications"
 msgstr "Permohonan Saya"
 
 #. Translators: Shown in the top bar of almost every page when the current user is logged in.
-#: TWLight/templates/base.html:131
+#: TWLight/templates/base.html:125
 msgid "Log out"
 msgstr "Keluar log"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/base.html:161
+#: TWLight/templates/base.html:155
 msgid "Review"
 msgstr "Tinjau"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/base.html:170
+#: TWLight/templates/base.html:164
 msgid "Send data to partners"
 msgstr ""
 
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
-#: TWLight/templates/base.html:188
+#: TWLight/templates/base.html:182
 #, python-format
 msgid ""
 "You don't have an email on file. We can't finalize your access to partner "
@@ -2493,7 +2493,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
-#: TWLight/templates/base.html:199
+#: TWLight/templates/base.html:193
 #, python-format
 msgid ""
 "You have requested a restriction on the processing of your data. Most site "
@@ -2502,7 +2502,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Shown if the current user has not agreed to the terms of use.
-#: TWLight/templates/base.html:210
+#: TWLight/templates/base.html:204
 #, python-format
 msgid ""
 "You have not agreed to the <a href=\"%(terms_url)s\">terms of use</a> of "
@@ -2511,7 +2511,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:225
+#: TWLight/templates/base.html:219
 msgid ""
 "This work is licensed under a <a rel=\"license\" href=\"http://"
 "creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
@@ -2519,17 +2519,17 @@ msgid ""
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:234
+#: TWLight/templates/base.html:228
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:240
+#: TWLight/templates/base.html:234
 msgid "Terms of use and privacy policy"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:252
+#: TWLight/templates/base.html:246
 msgid "Feedback"
 msgstr ""
 
