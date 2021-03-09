@@ -64,7 +64,7 @@ class EditorFactory(factory.django.DjangoModelFactory):
     occupation = "Cat floofer"
     affiliation = "Institut Pasteur"
     wp_username = factory.Faker("name", locale=random.choice(settings.FAKER_LOCALES))
-    wp_registered = datetime.today()
+    wp_registered = datetime.today().date()
     # Increment counter each time we create an editor so that we don't fail
     # the wp_sub + home_wiki uniqueness constraint on Editor.
     wp_sub = factory.Sequence(lambda n: n)
