@@ -10,6 +10,7 @@ from TWLight.users.helpers.editor_data import (
     editor_enough_edits,
     editor_not_blocked,
     editor_bundle_eligible,
+    editor_account_old_enough,
 )
 
 logger = logging.getLogger(__name__)
