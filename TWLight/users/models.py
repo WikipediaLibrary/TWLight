@@ -648,8 +648,13 @@ class Editor(models.Model):
             )
             self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
 
-        self.wp_registered = editor_reg_date(identity, global_userinfo)
-        self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
+        if self.wp_registered is None:
+            self.wp_registered = editor_reg_date(identity, global_userinfo)
+        # if the account is already old enough, we shouldn't run this check everytime
+        # since this flag should never return back to False
+        if not self.wp_account_old_enough:
+            self.wp_account_old_enough = editor_account_old_enough(self.wp_registered)
+
         self.wp_enough_edits = editor_enough_edits(self.wp_editcount)
         self.wp_valid = editor_valid(
             self.wp_enough_edits,

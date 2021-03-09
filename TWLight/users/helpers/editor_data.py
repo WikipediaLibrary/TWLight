@@ -140,7 +140,7 @@ def editor_account_old_enough(wp_registered: datetime.date):
     """
     # If, for some reason, this information hasn't come through,
     # default to user not being valid.
-    if not wp_registered:
+    if wp_registered is None:
         return False
     # Check: registered >= 6 months ago
     return datetime.today().date() - timedelta(days=182) >= wp_registered

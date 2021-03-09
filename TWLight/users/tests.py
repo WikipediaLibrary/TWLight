@@ -980,6 +980,7 @@ class EditorModelTestCase(TestCase):
             wp_username="editor_model_test",
             wp_rights=json.dumps(["cat floofing", "the big red button"]),
             wp_groups=json.dumps(["sysops", "bureaucrats"]),
+            wp_registered=None,
         )
         self.editor.user.userprofile.terms_of_use = True
         self.editor.user.userprofile.save()
@@ -1346,7 +1347,7 @@ class EditorModelTestCase(TestCase):
 
         # Don't change self.editor, or other tests will fail! Make a new one
         # to test instead.
-        new_editor = EditorFactory()
+        new_editor = EditorFactory(wp_registered=None)
         new_identity = dict(identity)
         new_global_userinfo = dict(global_userinfo)
         new_identity["sub"] = new_editor.wp_sub
