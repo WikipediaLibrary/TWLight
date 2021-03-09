@@ -98,9 +98,14 @@ class Command(BaseCommand):
                 # Determine editor validity.
                 editor.wp_enough_edits = editor_enough_edits(editor.wp_editcount)
                 editor.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
+                # We will only check if the account is old enough if the value is False
+                # Accounts that are already old enough will never cease to be old enough
+                if not editor.wp_account_old_enough:
+                    editor.wp_account_old_enough = editor_account_old_enough(
+                        editor.wp_registered
+                    )
                 editor.wp_valid = editor_valid(
                     editor.wp_enough_edits,
-                    # We could recalculate this, but we would only need to do that if upped the minimum required account age.
                     editor.wp_account_old_enough,
                     # editor.wp_not_blocked can only be rechecked on login, so we're going with the existing value.
                     editor.wp_not_blocked,
