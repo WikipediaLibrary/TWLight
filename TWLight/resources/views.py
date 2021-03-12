@@ -139,20 +139,28 @@ class PartnersDetailView(DetailView):
                     # but link to apps page
                     context["has_open_apps"] = True
                     if not partner.specific_title:
-                        context["apply"] = False
+                        if partner.authorization_method in [
+                            Partner.EMAIL,
+                            Partner.CODES,
+                            Partner.LINK,
+                        ]:
+                            context["apply"] = True
+                        else:
+                            context["apply"] = False
                 try:
                     Authorization.objects.get(partners=partner, user=user)
                     # User has an authorization, don't show 'apply',
                     # but link to collection page
                     if not partner.specific_title:
-                        context["apply"] = False
-                    # User fulfills initial authorization
-                    fulfills_auth = True
-                    # Checking if user has agreed to terms and conditions, otherwise
-                    # they shouldn't be authorized to access the collection
-                    user_agreed_terms = user.userprofile.terms_of_use
-                    final_auth = fulfills_auth and user_agreed_terms
-                    context["has_auths"] = final_auth
+                        if partner.authorization_method in [
+                            Partner.EMAIL,
+                            Partner.CODES,
+                            Partner.LINK,
+                        ]:
+                            context["apply"] = True
+                        else:
+                            context["apply"] = False
+                    self._evaluate_has_auths(context, user, partner)
                 except Authorization.DoesNotExist:
                     pass
                 except Authorization.MultipleObjectsReturned:
@@ -175,15 +183,16 @@ class PartnersDetailView(DetailView):
                 )
                 if authorizations.count() == partner_streams.count():
                     # User has correct number of auths, don't show 'apply',
-                    # but link to collection page
-                    context["apply"] = False
-                    # User fulfills initial authorization
-                    fulfills_auth = True
-                    # Checking if user has agreed to terms and conditions, otherwise
-                    # they shouldn't be authorized to access the collection
-                    user_agreed_terms = user.userprofile.terms_of_use
-                    final_auth = fulfills_auth and user_agreed_terms
-                    context["has_auths"] = final_auth
+                    # but link to collection page, unless a partner is not bundle or proxy
+                    if partner.authorization_method in [
+                        Partner.EMAIL,
+                        Partner.CODES,
+                        Partner.LINK,
+                    ]:
+                        context["apply"] = True
+                    else:
+                        context["apply"] = False
+                    self._evaluate_has_auths(context, user, partner)
                     if apps.count() > 0:
                         # User has open apps, link to apps page
                         context["has_open_apps"] = True
@@ -194,14 +203,7 @@ class PartnersDetailView(DetailView):
                         if each_authorization.stream in partner_streams:
                             auth_streams.append(each_authorization.stream)
                     if auth_streams:
-                        # User fulfills initial authorization
-                        fulfills_auth = True
-                        # Checking if user has agreed to terms and conditions, otherwise
-                        # they shouldn't be authorized to access the collection
-                        user_agreed_terms = user.userprofile.terms_of_use
-                        final_auth = fulfills_auth and user_agreed_terms
-                        # User has authorizations, link to collection page
-                        context["has_auths"] = final_auth
+                        self._evaluate_has_auths(context, user, partner)
                     no_auth_streams = partner_streams.exclude(
                         name__in=auth_streams
                     )  # streams with no corresponding authorizations – we'll want to know if these have apps
@@ -265,6 +267,42 @@ class PartnersDetailView(DetailView):
 
         # In all other cases call the default get method.
         return super(PartnersDetailView, self).get(request, *args, **kwargs)
+
+    def _evaluate_has_auths(self, context, user, partner):
+        """
+        Evaluating if the Apply button will be enabled or disabled
+        based on whether the user has agreed to the terms of service and if the
+        partner authorization method is EMAIL, CODES, or LINK type
+
+        Parameters
+        ----------
+        context: dict
+            The context dictionary
+        user : User
+            The logged in user that navigated to the partner detail page
+        partner: Partner
+            The partner object to check what authorization methods it has
+
+        Returns
+        -------
+        bool
+            A boolean value that notes whether a user has the required authorizations or not
+        """
+        # User fulfills initial authorization
+        fulfills_auth = True
+        # Checking if user has agreed to terms and conditions, otherwise
+        # they shouldn't be authorized to access the collection
+        user_agreed_terms = user.userprofile.terms_of_use
+
+        if partner.authorization_method in [Partner.EMAIL, Partner.CODES, Partner.LINK]:
+            partner_renew = True
+            final_auth = fulfills_auth and user_agreed_terms and partner_renew
+        else:
+            final_auth = fulfills_auth and user_agreed_terms
+        # User has authorizations, link to collection page
+        context["has_auths"] = final_auth
+
+        return context["has_auths"]
 
 
 class PartnersToggleWaitlistView(CoordinatorsOnly, View):
