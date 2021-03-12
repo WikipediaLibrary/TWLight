@@ -244,7 +244,7 @@
 {# The following is personal data and must ONLY be displayed to its owner. #}
 {% ifequal editor.user user %}
     <hr/>
-    # Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
+    {% comment %}Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.{% endcomment %}
     <h3>{% trans "Personal data" %}</h3>
 
 
