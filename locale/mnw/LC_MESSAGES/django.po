@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2021-03-08 15:04:37+0000\n"
+"PO-Revision-Date: 2021-03-12 06:14:09+0000\n"
 "X-POT-Import-Date: 2021-03-08 06:03:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2358,7 +2358,7 @@ msgid "Update email"
 msgstr "ပခိုဟ်လဟဵု အီမေလ်"
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:687
+#: TWLight/users/models.py:692
 #, python-brace-format
 msgid "{wp_username}"
 msgstr "{wp_username}"
