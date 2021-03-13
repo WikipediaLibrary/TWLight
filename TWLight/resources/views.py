@@ -139,27 +139,13 @@ class PartnersDetailView(DetailView):
                     # but link to apps page
                     context["has_open_apps"] = True
                     if not partner.specific_title:
-                        if partner.authorization_method in [
-                            Partner.EMAIL,
-                            Partner.CODES,
-                            Partner.LINK,
-                        ]:
-                            context["apply"] = True
-                        else:
-                            context["apply"] = False
+                        self._evaluate_apply(context, partner)
                 try:
                     Authorization.objects.get(partners=partner, user=user)
                     # User has an authorization, don't show 'apply',
                     # but link to collection page
                     if not partner.specific_title:
-                        if partner.authorization_method in [
-                            Partner.EMAIL,
-                            Partner.CODES,
-                            Partner.LINK,
-                        ]:
-                            context["apply"] = True
-                        else:
-                            context["apply"] = False
+                        self._evaluate_apply(context, partner)
                     self._evaluate_has_auths(context, user, partner)
                 except Authorization.DoesNotExist:
                     pass
@@ -184,14 +170,7 @@ class PartnersDetailView(DetailView):
                 if authorizations.count() == partner_streams.count():
                     # User has correct number of auths, don't show 'apply',
                     # but link to collection page, unless a partner is not bundle or proxy
-                    if partner.authorization_method in [
-                        Partner.EMAIL,
-                        Partner.CODES,
-                        Partner.LINK,
-                    ]:
-                        context["apply"] = True
-                    else:
-                        context["apply"] = False
+                    self._evaluate_apply(context, partner)
                     self._evaluate_has_auths(context, user, partner)
                     if apps.count() > 0:
                         # User has open apps, link to apps page
@@ -285,8 +264,9 @@ class PartnersDetailView(DetailView):
 
         Returns
         -------
-        bool
-            A boolean value that notes whether a user has the required authorizations or not
+        dict
+            The context dictionary with a boolean value that notes whether a
+            user has the required authorizations or not
         """
         # User fulfills initial authorization
         fulfills_auth = True
@@ -302,7 +282,37 @@ class PartnersDetailView(DetailView):
         # User has authorizations, link to collection page
         context["has_auths"] = final_auth
 
-        return context["has_auths"]
+        return context
+
+    def _evaluate_apply(self, context, partner):
+        """
+        Evaluating if the Apply button will be enabled or disabled
+        based on whether the user has agreed to the terms of service and if the
+        partner authorization method is EMAIL, CODES, or LINK type
+
+        Parameters
+        ----------
+        context: dict
+            The context dictionary
+        partner: Partner
+            The partner object to check what authorization methods it has
+
+        Returns
+        -------
+        dict
+            The context dictionary with a boolean value that notes whether a
+            user has the required authorizations or not
+        """
+        if partner.authorization_method in [
+            Partner.EMAIL,
+            Partner.CODES,
+            Partner.LINK,
+        ]:
+            context["apply"] = True
+        else:
+            context["apply"] = False
+
+        return context
 
 
 class PartnersToggleWaitlistView(CoordinatorsOnly, View):
