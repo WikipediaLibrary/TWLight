@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-09 19:37+0000\n"
+"POT-Creation-Date: 2021-03-15 10:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2994,6 +2994,7 @@ msgstr ""
 msgid "Wikipedia user ID *"
 msgstr ""
 
+#. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:248
 msgid "Personal data"
 msgstr ""
