@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2021-03-12 06:14:09+0000\n"
+"PO-Revision-Date: 2021-03-15 18:12:39+0000\n"
 "X-POT-Import-Date: 2021-03-08 06:03:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2586,6 +2586,7 @@ msgstr ""
 msgid "Wikipedia user ID *"
 msgstr "ID ညးလွပ် ဝဳကဳပဳဒဳယာ *"
 
+#. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:248
 msgid "Personal data"
 msgstr ""
