@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-15 10:19+0000\n"
+"POT-Creation-Date: 2021-03-15 23:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2015,7 +2015,7 @@ msgstr ""
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
 #: TWLight/resources/templates/resources/suggest.html:47
-#: TWLight/users/templates/users/preferences.html:98
+#: TWLight/users/templates/users/preferences.html:99
 msgid "Delete"
 msgstr ""
 
@@ -3109,23 +3109,28 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
+#. Translators: This text labels the date for when the terms of use were most recently changed.
+#: TWLight/users/templates/users/preferences.html:70
+msgid "Last updated at:"
+msgstr ""
+
 #. Translators: This link is to the site's terms of use.
-#: TWLight/users/templates/users/preferences.html:71
+#: TWLight/users/templates/users/preferences.html:72
 msgid "View Terms of Use"
 msgstr ""
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
-#: TWLight/users/templates/users/preferences.html:81
+#: TWLight/users/templates/users/preferences.html:82
 msgid "Data"
 msgstr ""
 
 #. Translators: This text labels a button users can click to download their data.
-#: TWLight/users/templates/users/preferences.html:87
+#: TWLight/users/templates/users/preferences.html:88
 msgid "Download"
 msgstr ""
 
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
-#: TWLight/users/templates/users/preferences.html:93
+#: TWLight/users/templates/users/preferences.html:94
 msgid "Restrict"
 msgstr ""
 
