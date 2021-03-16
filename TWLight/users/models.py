@@ -887,6 +887,27 @@ class Authorization(models.Model):
             except Application.DoesNotExist:
                 return None
 
+    def get_open_app(self):
+        """
+        Returns an open app corresponding to this auth.
+        Open apps have a status of PENDING, QUESTION, or APPROVED.
+        """
+        from TWLight.applications.models import Application
+
+        if self.partners.all().count() == 1 and self.user and self.user.editor:
+            try:
+                return Application.objects.filter(
+                    editor=self.user.editor,
+                    status__in=(
+                        Application.PENDING,
+                        Application.QUESTION,
+                        Application.APPROVED,
+                    ),
+                    partner__in=self.partners.all(),
+                ).latest("date_created")
+            except Application.DoesNotExist:
+                return None
+
     def get_latest_sent_app(self):
         """
         Returns the latest app corresponding to this auth in which the the status is SENT.

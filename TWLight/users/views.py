@@ -747,41 +747,6 @@ class CollectionUserView(SelfOnly, ListView):
             ],
         ).order_by("partners")
 
-        for authorization_list in [
-            manual_authorizations,
-            proxy_bundle_authorizations,
-            manual_authorizations_expired,
-            proxy_bundle_authorizations_expired,
-        ]:
-            for each_authorization in authorization_list:
-                if (
-                    each_authorization.about_to_expire
-                    or not each_authorization.is_valid
-                ):
-                    latest_app = each_authorization.get_latest_app()
-                    if latest_app:
-                        if latest_app.status != Application.SENT:
-                            each_authorization.latest_sent_app = (
-                                each_authorization.get_latest_sent_app()
-                            )
-                        else:
-                            each_authorization.latest_sent_app = latest_app
-                        if not latest_app.is_renewable:
-                            try:
-                                each_authorization.open_app = (
-                                    Application.objects.filter(
-                                        editor=editor,
-                                        status__in=(
-                                            Application.PENDING,
-                                            Application.QUESTION,
-                                            Application.APPROVED,
-                                        ),
-                                        partner=each_authorization.partners.get(),
-                                    ).latest("date_created")
-                                )
-                            except Application.DoesNotExist:
-                                each_authorization.open_app = None
-
         # Sort the querysets into more useful lists
         manual_authorizations_list = sort_authorizations_into_resource_list(
             manual_authorizations

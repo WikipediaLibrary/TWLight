@@ -43,11 +43,11 @@
       </div>
     {% endif %}
     {% if user|restricted %}
-      {% comment %}Translators: One the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
+      {% comment %}Translators: On the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
       <button type="button" class="btn btn-primary text-center visible-xs z-index-100 disabled btn-block">{% trans "Apply" %}</button><br />
     {% else %}
-      {% comment %}Translators: One the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
-      <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary text-center visible-xs z-index-100 {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
+      {% comment %}Translators: On the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
+      <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary text-center visible-xs z-index-100 {% if not apply  or has_open_apps %}disabled{% endif %}">{% trans "Apply" %}</a><br />
       {% if has_open_apps or has_auths %}
         {% url 'users:my_library' as library_url %}
         {% url 'users:my_applications' user.editor.pk as applications_url %}
@@ -393,11 +393,11 @@
             </div>
           {% endif %}
           {% if user|restricted %}
-            {% comment %}Translators: One the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
+            {% comment %}Translators: On the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
             <button type="button" class="btn btn-primary btn-lg hidden-xs btn-block disabled">{% trans "Apply" %}</button><br />
           {% else %}
-            {% comment %}Translators: One the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
-            <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary btn-lg hidden-xs btn-block {% if not apply %}disabled{% endif %}">{% trans "Apply" %}</a><br />
+            {% comment %}Translators: On the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
+            <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn btn-primary btn-lg hidden-xs btn-block {% if not apply or has_open_apps %}disabled{% endif %}">{% trans "Apply" %}</a><br />
             {% if has_open_apps or has_auths %}
               {% url 'users:my_library' as library_url %}
               {% url 'users:my_applications' user.editor.pk as applications_url %}
