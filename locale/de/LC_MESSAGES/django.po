@@ -22,7 +22,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-15 23:26+0000\n"
+"POT-Creation-Date: 2021-03-16 12:42+0000\n"
 "PO-Revision-Date: 2021-03-15 18:12:38+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +33,7 @@ msgstr ""
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: On the page where users can apply for multiple partners, this text labels the button, which when clicked submits the selections.
-#. Translators: One the partner detail page, this text labels the button which users can click to create an application.
+#. Translators: On the partner detail page, this text labels the button which users can click to create an application.
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and apply for access.
 #. Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners.
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this is the heading of the box on the right, which contains information about collections to which users need to make an application.
@@ -1741,7 +1741,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:402
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:450
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Dazu musst du in den Wikimedia-Projekten ein aktiver Benutzer sein."
 
@@ -2357,7 +2357,7 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "Bist du sicher, <b>%(object)s</b> löschen zu wollen?"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:169
+#: TWLight/resources/views.py:163
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
@@ -2366,27 +2366,27 @@ msgstr ""
 "kontaktiere uns und erwähne dabei diesen Hinweis."
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:262
+#: TWLight/resources/views.py:243
 msgid "This partner is currently not open for applications"
 msgstr "Dieser Partner nimmt derzeit keine Bewerbungen an."
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:285
+#: TWLight/resources/views.py:333
 msgid "This partner is now waitlisted"
 msgstr "Dieser Partner ist jetzt auf der Warteliste."
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:298
+#: TWLight/resources/views.py:346
 msgid "This partner is now available for applications"
 msgstr "Dieser Partner nimmt neue Bewerbungen an."
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:394
+#: TWLight/resources/views.py:442
 msgid "Your suggestion has been added."
 msgstr "Dein Vorschlag wurde hinzugefügt."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:419
+#: TWLight/resources/views.py:467
 msgid "Suggestion has been deleted."
 msgstr "Vorschlag gelöscht."
 
@@ -4433,7 +4433,7 @@ msgstr ""
 "Inhalten unserer Partner abgeben."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:851
+#: TWLight/users/views.py:816
 msgid "Access to {} has been returned."
 msgstr "Der Zugang zu {} wurde zurückgegeben."
 
