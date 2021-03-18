@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2021-03-15 18:12:37+0000\n"
-"X-POT-Import-Date: 2021-03-08 06:03:29+0000\n"
+"PO-Revision-Date: 2021-03-18 12:55:15+0000\n"
+"X-POT-Import-Date: 2021-03-16 01:31:53+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bcl\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: On the page where users can apply for multiple partners, this text labels the button, which when clicked submits the selections.
-#. Translators: One the partner detail page, this text labels the button which users can click to create an application.
+#. Translators: On the partner detail page, this text labels the button which users can click to create an application.
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and apply for access.
 #. Translators: Shown in the top bar of almost every page, taking users to the page where they can browse and apply to partners.
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this is the heading of the box on the right, which contains information about collections to which users need to make an application.
@@ -1257,7 +1257,7 @@ msgstr "An saimong mensahe naipadara na! Mabalik kami saimo sa madaling panahon.
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:402
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:450
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Kaipuhan mong magin paraliwat sa Wikipedya para magibo yan."
 
@@ -1759,7 +1759,7 @@ msgstr "Mag-browse asin magsuporta sa mga suhestiyon"
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
 #: TWLight/resources/templates/resources/suggest.html:47
-#: TWLight/users/templates/users/preferences.html:98
+#: TWLight/users/templates/users/preferences.html:99
 msgid "Delete"
 msgstr "Puraon"
 
@@ -1792,32 +1792,32 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "Sigurado ka nang gusto mong puraon an %(object)s?"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:169
+#: TWLight/resources/views.py:163
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:262
+#: TWLight/resources/views.py:243
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:285
+#: TWLight/resources/views.py:333
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:298
+#: TWLight/resources/views.py:346
 msgid "This partner is now available for applications"
 msgstr "An kaparehang ini handa na para sa mga aplikasyon"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:394
+#: TWLight/resources/views.py:442
 msgid "Your suggestion has been added."
 msgstr "An saimong suhestiyon naidugang na."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:419
+#: TWLight/resources/views.py:467
 msgid "Suggestion has been deleted."
 msgstr "An suhestiyon napura na."
 
@@ -2694,23 +2694,28 @@ msgstr "Pasa-taramon"
 msgid "Update"
 msgstr "Panumpay"
 
+#. Translators: This text labels the date for when the terms of use were most recently changed.
+#: TWLight/users/templates/users/preferences.html:70
+msgid "Last updated at:"
+msgstr ""
+
 #. Translators: This link is to the site's terms of use.
-#: TWLight/users/templates/users/preferences.html:71
+#: TWLight/users/templates/users/preferences.html:72
 msgid "View Terms of Use"
 msgstr ""
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
-#: TWLight/users/templates/users/preferences.html:81
+#: TWLight/users/templates/users/preferences.html:82
 msgid "Data"
 msgstr "Data"
 
 #. Translators: This text labels a button users can click to download their data.
-#: TWLight/users/templates/users/preferences.html:87
+#: TWLight/users/templates/users/preferences.html:88
 msgid "Download"
 msgstr ""
 
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
-#: TWLight/users/templates/users/preferences.html:93
+#: TWLight/users/templates/users/preferences.html:94
 msgid "Restrict"
 msgstr ""
 
@@ -3088,7 +3093,7 @@ msgid "Your email is blank. You can still explore the site, but you won't be abl
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:851
+#: TWLight/users/views.py:816
 msgid "Access to {} has been returned."
 msgstr ""
 
