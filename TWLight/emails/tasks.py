@@ -85,9 +85,6 @@ class ProjectPage2021Email(template_mail.TemplateMail):
     name = "project_page_2021_email"
 
 
-
-
-
 @receiver(Reminder.coordinator_reminder)
 def send_coordinator_reminder_emails(sender, **kwargs):
     """
@@ -183,9 +180,6 @@ def send_project_page_2021_launch_notice(sender, **kwargs):
     email = ProjectPage2021Email()
 
     email.send(user_email, {"username": user_wp_username})
-
-
-
 
 
 @receiver(comment_was_posted)

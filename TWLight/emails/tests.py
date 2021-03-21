@@ -622,9 +622,6 @@ class CoordinatorReminderEmailTest(TestCase):
         self.assertIn("One approved application", mail.outbox[0].body)
 
 
-
-
-
 class ProjectPage2021LaunchTest(TestCase):
     def setUp(self):
         super(ProjectPage2021LaunchTest, self).setUp()
