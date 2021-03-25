@@ -108,7 +108,8 @@
       </div>
       <hr>
     {% endif %}
-    <i class="fa fa-info-circle" aria-hidden="true" title="Partner description page"></i>
+    {% comment %} Translators: This text is found on a tooltip directing users to the description pages of the library's partners. {% endcomment %}
+    <i class="fa fa-info-circle" aria-hidden="true" title="{% trans 'Partner description page' %}"></i>
     <strong><a href="{% url 'partners:detail' resource.partner.pk %}">{{ resource.partner }}</a></strong>
     {% if resource.stream %}({{ resource.stream }}){% endif %}
     {% if not resource.authorization.is_bundle %}
