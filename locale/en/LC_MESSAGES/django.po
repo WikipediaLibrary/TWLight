@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-03-16 12:42+0000\n"
+"POT-Creation-Date: 2021-03-25 22:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:403
 #: TWLight/resources/templates/resources/partner_tile.html:100
 #: TWLight/templates/base.html:147 TWLight/templates/home.html:98
-#: TWLight/users/templates/users/resource_tile.html:133
+#: TWLight/users/templates/users/resource_tile.html:134
 msgid "Apply"
 msgstr ""
 
@@ -3169,33 +3169,38 @@ msgstr ""
 msgid "Go to site"
 msgstr ""
 
+#. Translators: This text is found on a tooltip directing users to the description pages of the library's partners.
+#: TWLight/users/templates/users/resource_tile.html:112
+msgid "Partner description page"
+msgstr ""
+
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
-#: TWLight/users/templates/users/resource_tile.html:117
+#: TWLight/users/templates/users/resource_tile.html:118
 msgid "Renewals are not available for this partner"
 msgstr ""
 
 #. Translators: Labels a button users can click to extend the duration of their access.
-#: TWLight/users/templates/users/resource_tile.html:121
+#: TWLight/users/templates/users/resource_tile.html:122
 msgid "Extend"
 msgstr ""
 
 #. Translators: Labels a button users can click to renew an expired account.
-#: TWLight/users/templates/users/resource_tile.html:124
+#: TWLight/users/templates/users/resource_tile.html:125
 msgid "Renew"
 msgstr ""
 
 #. Translators: Labels a button users can click to view an application requesting access to a resource.
-#: TWLight/users/templates/users/resource_tile.html:141
+#: TWLight/users/templates/users/resource_tile.html:142
 msgid "View application"
 msgstr ""
 
 #. Translators: Text beside the date on which the authorization has expired.
-#: TWLight/users/templates/users/resource_tile.html:148
+#: TWLight/users/templates/users/resource_tile.html:149
 msgid "Expired on"
 msgstr ""
 
 #. Translators: Text beside the date on which the authorization will expire.
-#: TWLight/users/templates/users/resource_tile.html:151
+#: TWLight/users/templates/users/resource_tile.html:152
 msgid "Expires on"
 msgstr ""
 
