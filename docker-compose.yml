@@ -45,6 +45,12 @@ services:
     image: quay.io/wikipedialibrary/nginx:latest
     volumes:
       - type: bind
+        source: ./conf/robots.txt
+        target: /app/robots.txt
+      - type: bind
+        source: ./TWLight/static/img/favicon.ico
+        target: /app/favicon.ico
+      - type: bind
         source: ./media
         target: /app/media
       - type: bind
