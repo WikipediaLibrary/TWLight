@@ -68,7 +68,7 @@
             </li>
           {% endfor %}
         </ul>
-        {% if user.is_authenticated and not user.editor.wp_not_blocked %}
+        {% if user.is_authenticated and not user.editor.ignore_wp_blocks and not user.editor.wp_not_blocked %}
           <p class="block-notice">
             {% url 'contact' as contact_url %}
             {% comment %}Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
