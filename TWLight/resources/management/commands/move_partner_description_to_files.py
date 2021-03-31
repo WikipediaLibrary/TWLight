@@ -6,6 +6,7 @@ import pypandoc
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import FieldDoesNotExist
+from django.utils.encoding import force_str
 
 from TWLight.resources.models import Partner
 
@@ -72,6 +73,6 @@ class Command(BaseCommand):
         file_name = "{language_dir}/partner_descriptions.json".format(
             language_dir=language_dir
         )
-        with open(file_name, "w") as partner_descriptions_file:
+        with open(file_name, "w", encoding="utf-8") as partner_descriptions_file:
             json.dump(partner_dict, partner_descriptions_file, indent=4)
             partner_descriptions_file.write("\n")
