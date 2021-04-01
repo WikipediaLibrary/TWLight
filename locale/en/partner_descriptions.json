@@ -1,4 +1,13 @@
 {
+    "@metadata": {
+        "authors": [
+            "Susana Cárdenas Molinar",
+            "Jason Sherman",
+            "Sam Walton"
+        ],
+        "locale": "en",
+        "message-documentation": "qqq"
+    },
     "24_short_description": "<p><strong><a href=\"http://www.aaas.org/\">AAAS</a></strong> (The American Association for the Advancement of Science) is offering access to the resources on its website, <a href=\"http://www.sciencemag.org/\">sciencemag.org</a>, which include the journal <em>Science</em> (1880-present) and other scientific research, news, commentary, and media.</p>",
     "49_short_description": "<p><strong><a href=\"http://www.amdigital.co.uk/\">Adam Matthew Digital</a></strong> focuses on publishing databases of primary sources and accompanying supporting material; we have access to a large number of databases relevant to major topics in American and World History.</p>",
     "101_short_description": "<p><strong><a href=\"https://www.almanhal.com/\">Al Manhal</a></strong> is a major Arabic provider of full-text electronic journals, theses and ebooks. Its eLibrary includes approximately 36,000 publications across a variety of subject areas.</p>",

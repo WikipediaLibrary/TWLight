@@ -72,7 +72,9 @@ def get_json_schema():
     from TWLight.resources.models import Partner
 
     no_of_partners = Partner.objects.count()
-    no_of_possible_descriptions = no_of_partners * 2
+    no_of_possible_descriptions = (
+        no_of_partners * 2
+    ) + 1  # The extra item is the metadata key
 
     JSON_SCHEMA_PARTNER_DESCRIPTION = {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
