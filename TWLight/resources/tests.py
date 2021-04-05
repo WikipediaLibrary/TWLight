@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 import csv
 from datetime import date, timedelta
+import json
+from jsonschema import validate
 from unittest.mock import patch
 import os
 import random
 
+from django.conf import settings
 from django.contrib.auth.models import AnonymousUser, User
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.management import call_command
@@ -21,7 +24,10 @@ from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, StreamFactory, SuggestionFactory
-from .helpers import check_for_target_url_duplication_and_generate_error_message
+from .helpers import (
+    check_for_target_url_duplication_and_generate_error_message,
+    get_json_schema,
+)
 from .models import (
     Language,
     RESOURCE_LANGUAGES,
@@ -1340,3 +1346,25 @@ class PartnerSuggestionViewTests(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertEquals(Suggestion.objects.count(), 1)
+
+
+class PartnerFilesTest(TestCase):
+    def test_partner_files_json_valid(self):
+        twlight_home = settings.TWLIGHT_HOME
+        locale_dir = "{twlight_home}/locale".format(twlight_home=twlight_home)
+        # Using listdir for directory traversal instead of os.walk because
+        # we only need to traverse the first level of the locale/ directory
+        for dir in os.listdir(locale_dir):
+            language_dir = os.path.join(locale_dir, dir)
+            # Check if the element within local/ directory is also a directory
+            # A directory here represents a language in the application
+            if os.path.isdir(language_dir):
+                partner_file = os.path.join(locale_dir, "partner_descriptions.json")
+                if os.path.isfile(partner_file):
+                    # Validate json with json-schema
+                    with open(partner_file, "r") as partner_file:
+                        partner_json = json.load(partner_file)
+                        validate(
+                            instance=partner_json,
+                            schema=get_json_schema(),
+                        )

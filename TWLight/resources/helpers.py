@@ -63,3 +63,23 @@ def check_for_target_url_duplication_and_generate_error_message(
         )
 
     return None
+
+
+def get_json_schema():
+    """
+    JSON Schema for partner description translations
+    """
+    from TWLight.resources.models import Partner
+
+    no_of_partners = Partner.objects.count()
+    no_of_possible_descriptions = (
+        no_of_partners * 2
+    ) + 1  # The extra item is the metadata key
+
+    JSON_SCHEMA_PARTNER_DESCRIPTION = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "maxItems": no_of_possible_descriptions,
+    }
+
+    return JSON_SCHEMA_PARTNER_DESCRIPTION
