@@ -5,7 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.db.models import Count
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 from django.views.generic import DetailView, View, RedirectView
 from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
@@ -18,6 +18,7 @@ from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 
 from .forms import SuggestionForm
+from .helpers import get_partner_description
 from .models import Partner, Stream, Suggestion, TextFieldTag
 
 import logging
@@ -68,6 +69,18 @@ class PartnersDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(PartnersDetailView, self).get_context_data(**kwargs)
         partner = self.get_object()
+
+        # Obtaining translated partner description
+        language_code = get_language()
+        partner_short_description_key = "{pk}_short_description".format(pk=partner.pk)
+        partner_description_key = "{pk}_description".format(pk=partner.pk)
+        partner_descriptions = get_partner_description(
+            language_code, partner_short_description_key, partner_description_key
+        )
+
+        context["partner_short_description"] = partner_descriptions["short_description"]
+        context["partner_description"] = partner_descriptions["description"]
+
         if partner.status == Partner.NOT_AVAILABLE:
             messages.add_message(
                 self.request,

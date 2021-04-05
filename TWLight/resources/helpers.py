@@ -1,3 +1,8 @@
+from django.conf import settings
+import json
+import os
+
+
 def check_for_target_url_duplication_and_generate_error_message(
     self, partner=False, stream=False
 ):
@@ -83,3 +88,52 @@ def get_json_schema():
     }
 
     return JSON_SCHEMA_PARTNER_DESCRIPTION
+
+
+def get_partner_description(
+    language_code, partner_short_description_key, partner_description_key
+):
+    descriptions = {}
+    # Getting the default file in case the description does not exist in
+    # the language file
+    partner_default_descriptions_dict = _read_partner_description_file("en")
+    partner_descriptions_dict = _read_partner_description_file(language_code)
+
+    descriptions["short_description"] = _get_any_description(
+        partner_default_descriptions_dict,
+        partner_descriptions_dict,
+        partner_short_description_key,
+    )
+
+    descriptions["description"] = _get_any_description(
+        partner_default_descriptions_dict,
+        partner_descriptions_dict,
+        partner_description_key,
+    )
+
+    return descriptions
+
+
+def _read_partner_description_file(language_code):
+    home_dir = settings.TWLIGHT_HOME
+    filepath = "{home_dir}/locale/{language_code}/partner_descriptions.json".format(
+        home_dir=home_dir, language_code=language_code
+    )
+    if os.path.isfile(filepath):
+        with open(filepath, "r") as partner_descriptions_file:
+            return json.load(partner_descriptions_file)
+    else:
+        return {}
+
+
+def _get_any_description(
+    partner_default_descriptions_dict,
+    partner_descriptions_dict,
+    partner_key,
+):
+    if partner_key in partner_descriptions_dict.keys():
+        return partner_descriptions_dict[partner_key]
+    elif partner_key in partner_default_descriptions_dict.keys():
+        return partner_default_descriptions_dict[partner_key]
+    else:
+        return None
