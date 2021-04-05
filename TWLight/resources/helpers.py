@@ -91,8 +91,25 @@ def get_json_schema():
 
 
 def get_partner_description(
-    language_code, partner_short_description_key, partner_description_key
+    language_code: str, partner_short_description_key: str, partner_description_key: str
 ):
+    """
+    Function that gets a partner's short description and description in the language
+    set by the user. If the descriptions don't exist in that language, the default
+    will be returned (English)
+
+    Parameters
+    ----------
+    language_code: str
+        The language code the user has selected on TWL's settings
+    partner_short_description_key: str
+        The partner short description key that should be found in a json file
+    partner_description_key: str
+        The partner description key that should be found in a json file
+    Returns
+    -------
+    dict
+    """
     descriptions = {}
     # Getting the default file in case the description does not exist in
     # the language file
@@ -114,7 +131,18 @@ def get_partner_description(
     return descriptions
 
 
-def _read_partner_description_file(language_code):
+def _read_partner_description_file(language_code: str):
+    """
+    Reads a partner description file and returns a dictionary, if the file exists
+
+    ----------
+    language_code: str
+        The language code the user has selected in their settings
+
+    Returns
+    -------
+    dict
+    """
     home_dir = settings.TWLIGHT_HOME
     filepath = "{home_dir}/locale/{language_code}/partner_descriptions.json".format(
         home_dir=home_dir, language_code=language_code
@@ -127,10 +155,27 @@ def _read_partner_description_file(language_code):
 
 
 def _get_any_description(
-    partner_default_descriptions_dict,
-    partner_descriptions_dict,
-    partner_key,
+    partner_default_descriptions_dict: dict,
+    partner_descriptions_dict: dict,
+    partner_key: str,
 ):
+    """
+    Returns either the default partner description or the partner description in the
+    user's language of choice
+
+    Parameters
+    ----------
+    partner_default_descriptions_dict : dict
+        The default descriptions dictionary.
+    partner_descriptions_dict : dict
+        The descriptions dictionary with descriptions in the user's preferred language
+    partner_key: str
+        The description key we are looking for
+
+    Returns
+    -------
+    str or None
+    """
     if partner_key in partner_descriptions_dict.keys():
         return partner_descriptions_dict[partner_key]
     elif partner_key in partner_default_descriptions_dict.keys():
