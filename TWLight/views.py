@@ -6,9 +6,10 @@ from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
 from django.http import HttpResponse
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language, gettext_lazy as _
 
 from TWLight.resources.models import Partner
+from TWLight.resources.helpers import get_partner_description
 
 from django.http import HttpResponseBadRequest
 from django.template import TemplateDoesNotExist, loader
@@ -85,7 +86,28 @@ class HomePageView(TemplateView):
         # Apply section
         # -----------------------------------------------------
 
-        context["featured_partners"] = Partner.objects.filter(featured=True)[:3]
+        featured_partners_obj = []
+        featured_partners = Partner.objects.filter(featured=True)[:3]
+        for partner in featured_partners:
+            # Obtaining translated partner description
+            language_code = get_language()
+            partner_short_description_key = "{pk}_short_description".format(
+                pk=partner.pk
+            )
+            partner_description_key = "{pk}_description".format(pk=partner.pk)
+            partner_descriptions = get_partner_description(
+                language_code, partner_short_description_key, partner_description_key
+            )
+            featured_partners_obj.append(
+                {
+                    "pk": partner.pk,
+                    "partner_name": partner.company_name,
+                    "partner_logo": partner.logos.logo.url,
+                    "short_description": partner_descriptions["short_description"],
+                    "description": partner_descriptions["description"],
+                }
+            )
+        context["featured_partners"] = featured_partners_obj
 
         return context
 
