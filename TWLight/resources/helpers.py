@@ -143,9 +143,9 @@ def _read_partner_description_file(language_code: str):
     -------
     dict
     """
-    home_dir = settings.TWLIGHT_HOME
-    filepath = "{home_dir}/locale/{language_code}/partner_descriptions.json".format(
-        home_dir=home_dir, language_code=language_code
+    twlight_home = settings.TWLIGHT_HOME
+    filepath = "{twlight_home}/locale/{language_code}/partner_descriptions.json".format(
+        twlight_home=twlight_home, language_code=language_code
     )
     if os.path.isfile(filepath):
         with open(filepath, "r") as partner_descriptions_file:

@@ -38,9 +38,9 @@
   </div>
   <!-- end filtering options/info -->
   <div class="row row-flex">
-    {% for partner in object_list %}
+    {% for partner in partners_list %}
       <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-        {% include "resources/partner_tile.html" %}        
+        {% include "resources/partner_tile.html" %}
       </div>
     {% empty %}
       <div class="col-xs-12">

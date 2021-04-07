@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.urls import reverse, reverse_lazy
 from django.db.models import Count
 from django.http import Http404, HttpResponseRedirect
@@ -53,6 +53,40 @@ class PartnersFilterView(FilterView):
         :return:
         """
         context = super(PartnersFilterView, self).get_context_data(**kwargs)
+
+        partners_list = []
+        partners = self.get_queryset()
+        for partner in partners:
+            partner_dict = {}
+            partner_dict["pk"] = partner.pk
+            partner_dict["authorization_method"] = partner.authorization_method
+            partner_dict["company_name"] = partner.company_name
+            try:
+                partner_dict["partner_logo"] = partner.logos.logo.url
+            except ObjectDoesNotExist:
+                partner_dict["partner_logo"] = None
+            partner_dict["is_not_available"] = partner.is_not_available
+            partner_dict["is_waitlisted"] = partner.is_waitlisted
+            partner_dict["tags"] = partner.tags.all()
+            partner_dict["languages"] = partner.get_languages
+            # Obtaining translated partner description
+            language_code = get_language()
+            partner_short_description_key = "{pk}_short_description".format(
+                pk=partner.pk
+            )
+            partner_description_key = "{pk}_description".format(pk=partner.pk)
+            partner_descriptions = get_partner_description(
+                language_code, partner_short_description_key, partner_description_key
+            )
+
+            partner_dict["short_description"] = partner_descriptions[
+                "short_description"
+            ]
+            partner_dict["description"] = partner_descriptions["description"]
+            partners_list.append(partner_dict)
+
+        context["partners_list"] = partners_list
+
         try:
             filter_data = kwargs.pop("filter").data
             tag_id = filter_data.get("tags")
