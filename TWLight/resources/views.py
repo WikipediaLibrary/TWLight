@@ -32,7 +32,6 @@ class PartnersFilterView(ListView):
 
     def get_queryset(self):
         qs = Partner.objects.order_by("company_name")
-        partner_filtered_list = PartnerFilter(self.request.GET, queryset=qs)
         # The ordering here is useful primarily to people familiar with the
         # English alphabet. :/
         if self.request.user.is_staff:
@@ -43,9 +42,8 @@ class PartnersFilterView(ListView):
                 "Partners who are not yet available to all users.",
             )
             qs = Partner.even_not_available.order_by("company_name")
-            return partner_filtered_list.qs
-        else:
-            return partner_filtered_list.qs
+
+        return qs
 
     def get_context_data(self, **kwargs):
         """
@@ -63,7 +61,6 @@ class PartnersFilterView(ListView):
         )
         context["filter"] = partner_filtered_list
         partners_list = []
-        partners = self.get_queryset()
         for partner in partner_filtered_list.qs:
             partner_dict = {}
             partner_dict["pk"] = partner.pk
@@ -95,13 +92,6 @@ class PartnersFilterView(ListView):
 
         context["partners_list"] = partners_list
 
-        try:
-            filter_data = kwargs.pop("filter").data
-            tag_id = filter_data.get("tags")
-            if tag_id:
-                context["tag"] = TextFieldTag.objects.get(id=tag_id)
-        except (KeyError, ValueError, TextFieldTag.DoesNotExist):
-            pass
         return context
 
 
