@@ -6,7 +6,7 @@ from django.db.models import Count
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import get_language, gettext as _
-from django.views.generic import DetailView, View, RedirectView
+from django.views.generic import DetailView, View, RedirectView, ListView
 from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
 from django.shortcuts import get_object_or_404
@@ -17,6 +17,7 @@ from TWLight.graphs.helpers import get_median
 from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 
+from .filters import PartnerFilter
 from .forms import SuggestionForm
 from .helpers import get_partner_description
 from .models import Partner, Stream, Suggestion, TextFieldTag
@@ -26,10 +27,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class PartnersFilterView(FilterView):
+class PartnersFilterView(ListView):
     model = Partner
 
     def get_queryset(self):
+        qs = Partner.objects.order_by("company_name")
+        partner_filtered_list = PartnerFilter(self.request.GET, queryset=qs)
         # The ordering here is useful primarily to people familiar with the
         # English alphabet. :/
         if self.request.user.is_staff:
@@ -39,9 +42,10 @@ class PartnersFilterView(FilterView):
                 "Because you are a staff member, this page may include "
                 "Partners who are not yet available to all users.",
             )
-            return Partner.even_not_available.order_by("company_name")
+            qs = Partner.even_not_available.order_by("company_name")
+            return partner_filtered_list.qs
         else:
-            return Partner.objects.order_by("company_name")
+            return partner_filtered_list.qs
 
     def get_context_data(self, **kwargs):
         """
@@ -52,11 +56,15 @@ class PartnersFilterView(FilterView):
         :param kwargs:
         :return:
         """
-        context = super(PartnersFilterView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
+        partner_filtered_list = PartnerFilter(
+            self.request.GET, queryset=self.get_queryset()
+        )
+        context["filter"] = partner_filtered_list
         partners_list = []
         partners = self.get_queryset()
-        for partner in partners:
+        for partner in partner_filtered_list.qs:
             partner_dict = {}
             partner_dict["pk"] = partner.pk
             partner_dict["authorization_method"] = partner.authorization_method

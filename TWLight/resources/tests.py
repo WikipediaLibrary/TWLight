@@ -201,7 +201,7 @@ class PartnerModelTests(TestCase):
 
         request = RequestFactory().get(filter_url)
         request.user = editor.user
-        response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
+        response = PartnersFilterView.as_view()(request)
 
         self.assertNotContains(response, partner.get_absolute_url())
 
@@ -239,7 +239,7 @@ class PartnerModelTests(TestCase):
 
         request = RequestFactory().get(filter_url)
         request.user = editor.user
-        response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
+        response = PartnersFilterView.as_view()(request)
 
         self.assertContains(response, partner.get_absolute_url())
 
@@ -1238,7 +1238,7 @@ class PartnerTagTest(TestCase):
 
         request = RequestFactory().get(filter_url)
         request.user = editor.user
-        response = PartnersFilterView.as_view(filterset_class=PartnerFilter)(request)
+        response = PartnersFilterView.as_view()(request)
 
         self.assertNotContains(response, partner1.get_absolute_url())
         self.assertContains(response, partner.get_absolute_url())

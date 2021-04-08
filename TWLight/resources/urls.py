@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     url(
         r"^$",
-        views.PartnersFilterView.as_view(filterset_class=PartnerFilter),
+        views.PartnersFilterView.as_view(),
         name="filter",
     ),
     url(r"^(?P<pk>\d+)/$", views.PartnersDetailView.as_view(), name="detail"),
