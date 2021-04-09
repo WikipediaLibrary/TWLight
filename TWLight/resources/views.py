@@ -92,6 +92,14 @@ class PartnersFilterView(ListView):
 
         context["partners_list"] = partners_list
 
+        try:
+            filter_data = partner_filtered_list.form.data
+            tag_id = filter_data.get("tags")
+            if tag_id:
+                context["tag"] = TextFieldTag.objects.get(id=tag_id)
+        except (KeyError, ValueError, TextFieldTag.DoesNotExist):
+            pass
+
         return context
 
 
