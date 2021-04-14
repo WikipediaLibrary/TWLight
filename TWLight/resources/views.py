@@ -28,6 +28,12 @@ logger = logging.getLogger(__name__)
 
 
 class PartnersFilterView(ListView):
+    """
+    Since T278337, this View has passed from FilterView to ListView because we have to
+    build a Partner dictionary element from the partner descriptions in a JSON file instead of
+    getting everything from the database
+    """
+
     model = Partner
 
     def get_queryset(self):
@@ -56,6 +62,8 @@ class PartnersFilterView(ListView):
         """
         context = super().get_context_data(**kwargs)
 
+        # Changed since T278337: add filter to queryset before we build the partners
+        # dictionary
         partner_filtered_list = PartnerFilter(
             self.request.GET, queryset=self.get_queryset()
         )
