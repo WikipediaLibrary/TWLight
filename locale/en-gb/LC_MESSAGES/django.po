@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-04-05 17:52+0000\n"
-"PO-Revision-Date: 2021-04-08 13:07:37+0000\n"
+"PO-Revision-Date: 2021-04-15 11:22:24+0000\n"
 "Language: en-GB\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2750,9 +2750,8 @@ msgstr ""
 
 #. Translators: This text is found on a tooltip directing users to the description pages of the library's partners.
 #: TWLight/users/templates/users/resource_tile.html:112
-#, fuzzy
 msgid "Partner description page"
-msgstr "Partner name"
+msgstr "Partner description page"
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
 #: TWLight/users/templates/users/resource_tile.html:118
