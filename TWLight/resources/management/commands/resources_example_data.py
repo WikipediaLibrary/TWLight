@@ -183,6 +183,12 @@ class Command(BaseCommand):
                 ),
                 author=author_user,
             )
+            # Truncate company name to 40 characters so it doesn't error out
+            suggestion.suggested_company_name = (
+                suggestion.suggested_company_name[:40]
+                if len(suggestion.suggested_company_name) > 40
+                else suggestion.suggested_company_name
+            )
             suggestion.save()
             suggestion.upvoted_users.add(author_user)
             random_users = random.sample(list(all_users), random.randint(1, 10))
