@@ -294,7 +294,7 @@ class Partner(models.Model):
         "send users a URL to use to create an account.",
     )
 
-    mutually_exclusive = models.NullBooleanField(
+    mutually_exclusive = models.BooleanField(
         blank=True,
         null=True,
         default=None,
