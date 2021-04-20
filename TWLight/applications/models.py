@@ -142,7 +142,7 @@ class Application(models.Model):
     )
 
     # Was this application imported via CLI?
-    imported = models.NullBooleanField(default=False)
+    imported = models.BooleanField(default=False, null=True)
 
     # If this Application is a renewal, the parent is the original Application
     # it was copied from.
