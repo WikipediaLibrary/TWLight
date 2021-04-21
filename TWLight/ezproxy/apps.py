@@ -5,4 +5,5 @@ from django.apps import AppConfig
 
 
 class EzproxyConfig(AppConfig):
-    name = "ezproxy"
+    name = "TWLight.ezproxy"
+    label = "ezproxy"
