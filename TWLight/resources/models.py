@@ -319,9 +319,6 @@ class Partner(models.Model):
 
     tags = TaggableManager(through=TaggedTextField, blank=True)
 
-    # This field has to stick around until all servers are using the new tags.
-    old_tags = TaggableManager(through=None, blank=True, verbose_name="Old Tags")
-
     # Non-universal form fields
     # --------------------------------------------------------------------------
 
