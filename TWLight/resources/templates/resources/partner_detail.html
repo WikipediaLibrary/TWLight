@@ -96,7 +96,7 @@
             </div>
             <div class="timeline-panel">
               <div class="timeline-body">
-                {% if object.short_description %}
+                {% if partner_short_description %}
                   <p>
                     {{ partner_short_description | safe }}
                   </p>
@@ -112,7 +112,7 @@
                   {% endfor %}
                   </div>
                 {% endif %}
-                {% if object.description %}
+                {% if partner_description %}
                   <p>
                     {{ partner_description | safe }}
                   </p>
