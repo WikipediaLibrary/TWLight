@@ -1,9 +1,6 @@
 {% load i18n %}
 {% load cache %}
 {% load static %}
-{% load twlight_wikicode2html %}
-
-{% get_current_language as LANGUAGE_CODE %}
 
 {% comment %}
   To be used in presenting lists of partners plus key data about them.
@@ -15,7 +12,7 @@
 <div class="panel panel-default full-width">
   <div class="panel-heading">
     <a href="{% url 'partners:detail' partner.pk %}"><strong>
-      <span class="panel-title">{{ partner }}</span></strong>
+      <span class="panel-title">{{ partner.company_name }}</span></strong>
     </a>
     {% if partner.authorization_method == partner.BUNDLE %}
       {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
@@ -26,13 +23,13 @@
     {% endif %}
   </div>
   <div class="panel-body">
-    {% if partner.logos.logo.url %}
+    {% if partner.partner_logo %}
     <div class="partner-logo-container">
       <a href="{% url 'partners:detail' partner.pk %}">
-        <img src="{{ partner.logos.logo.url }}" class="img-responsive partner-logo" alt="
+        <img src="{{ partner.partner_logo }}" class="img-responsive partner-logo" alt="
         {% comment %}Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate {{ partner }}. {% endcomment %}
           {% blocktrans trimmed %}
-            Link to {{ partner }} signup page
+            Link to {{ partner.company_name }} signup page
           {% endblocktrans %}
         ">
       </a>
@@ -51,18 +48,18 @@
         <span class="resource-label">{% trans "Waitlisted" %}</span>
       </div>
     {% endif %}
-    {% if partner.tags.all %}
+    {% if partner.tags %}
       <div class="resource-label-subject">
-    {% for tag in partner.tags.all %}
+    {% for tag in partner.tags %}
       <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
       {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
     {% endfor %}
       </div>
     {% endif %}
-      
+
       <div class="resource-label-languages">
-          {% if partner.get_languages %}
-            {% for language in partner.get_languages %}
+          {% if partner.languages %}
+            {% for language in partner.languages %}
               <a class="resource-label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
               {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
             {% endfor %}
@@ -75,16 +72,7 @@
     <hr />
     {% if partner.short_description %}
       <div class="panel-partner-description">
-        {% comment %}
-          Cache lifetime should be None, which would be forever since we're
-          invalidating on update. However, as 2017-04-06 a bug in django
-          doesn't allow for None to be passed from here into cache.  The
-          fix is in master, but not release.
-          https://code.djangoproject.com/ticket/27882
-        {% endcomment %}
-        {% cache 31536000 partner_short_description LANGUAGE_CODE partner.pk %}
-          {{ partner.short_description | twlight_wikicode2html | safe }}
-        {% endcache %}
+          {{ partner.short_description | safe }}
       </div>
       <hr />
     {% endif %}

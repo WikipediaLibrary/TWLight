@@ -1,12 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.urls import reverse, reverse_lazy
 from django.db.models import Count
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from django.utils.translation import gettext as _
-from django.views.generic import DetailView, View, RedirectView
+from django.utils.translation import get_language, gettext as _
+from django.views.generic import DetailView, View, RedirectView, ListView
 from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
 from django.shortcuts import get_object_or_404
@@ -17,7 +17,9 @@ from TWLight.graphs.helpers import get_median
 from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 
+from .filters import PartnerFilter
 from .forms import SuggestionForm
+from .helpers import get_partner_description
 from .models import Partner, Stream, Suggestion, TextFieldTag
 
 import logging
@@ -25,10 +27,17 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class PartnersFilterView(FilterView):
+class PartnersFilterView(ListView):
+    """
+    Since T278337, this View has passed from FilterView to ListView because we have to
+    build a Partner dictionary element from the partner descriptions in a JSON file instead of
+    getting everything from the database
+    """
+
     model = Partner
 
     def get_queryset(self):
+        qs = Partner.objects.order_by("company_name")
         # The ordering here is useful primarily to people familiar with the
         # English alphabet. :/
         if self.request.user.is_staff:
@@ -38,9 +47,9 @@ class PartnersFilterView(FilterView):
                 "Because you are a staff member, this page may include "
                 "Partners who are not yet available to all users.",
             )
-            return Partner.even_not_available.order_by("company_name")
-        else:
-            return Partner.objects.order_by("company_name")
+            qs = Partner.even_not_available.order_by("company_name")
+
+        return qs
 
     def get_context_data(self, **kwargs):
         """
@@ -51,14 +60,54 @@ class PartnersFilterView(FilterView):
         :param kwargs:
         :return:
         """
-        context = super(PartnersFilterView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+
+        # Changed since T278337: add filter to queryset before we build the partners
+        # dictionary
+        partner_filtered_list = PartnerFilter(
+            self.request.GET, queryset=self.get_queryset()
+        )
+        context["filter"] = partner_filtered_list
+        partners_list = []
+        for partner in partner_filtered_list.qs:
+            partner_dict = {}
+            partner_dict["pk"] = partner.pk
+            partner_dict["authorization_method"] = partner.authorization_method
+            partner_dict["company_name"] = partner.company_name
+            try:
+                partner_dict["partner_logo"] = partner.logos.logo.url
+            except ObjectDoesNotExist:
+                partner_dict["partner_logo"] = None
+            partner_dict["is_not_available"] = partner.is_not_available
+            partner_dict["is_waitlisted"] = partner.is_waitlisted
+            partner_dict["tags"] = partner.tags.all()
+            partner_dict["languages"] = partner.get_languages
+            # Obtaining translated partner description
+            language_code = get_language()
+            partner_short_description_key = "{pk}_short_description".format(
+                pk=partner.pk
+            )
+            partner_description_key = "{pk}_description".format(pk=partner.pk)
+            partner_descriptions = get_partner_description(
+                language_code, partner_short_description_key, partner_description_key
+            )
+
+            partner_dict["short_description"] = partner_descriptions[
+                "short_description"
+            ]
+            partner_dict["description"] = partner_descriptions["description"]
+            partners_list.append(partner_dict)
+
+        context["partners_list"] = partners_list
+
         try:
-            filter_data = kwargs.pop("filter").data
+            filter_data = partner_filtered_list.form.data
             tag_id = filter_data.get("tags")
             if tag_id:
                 context["tag"] = TextFieldTag.objects.get(id=tag_id)
         except (KeyError, ValueError, TextFieldTag.DoesNotExist):
             pass
+
         return context
 
 
@@ -68,6 +117,18 @@ class PartnersDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(PartnersDetailView, self).get_context_data(**kwargs)
         partner = self.get_object()
+
+        # Obtaining translated partner description
+        language_code = get_language()
+        partner_short_description_key = "{pk}_short_description".format(pk=partner.pk)
+        partner_description_key = "{pk}_description".format(pk=partner.pk)
+        partner_descriptions = get_partner_description(
+            language_code, partner_short_description_key, partner_description_key
+        )
+
+        context["partner_short_description"] = partner_descriptions["short_description"]
+        context["partner_description"] = partner_descriptions["description"]
+
         if partner.status == Partner.NOT_AVAILABLE:
             messages.add_message(
                 self.request,

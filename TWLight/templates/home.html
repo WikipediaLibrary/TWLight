@@ -102,12 +102,10 @@
           <div class="row">
             <div class="featured-partner">
               <div class="col-md-3">
-                <a href="{% url 'partners:detail' partner.pk %}"><img src="{{ partner.logos.logo.url }}" alt="{{ partner }} logo" class="featured-partner-logo"></a>
+                <a href="{% url 'partners:detail' partner.pk %}"><img src="{{ partner.partner_logo }}" alt="{{ partner.partner_name }} logo" class="featured-partner-logo"></a>
               </div>
               <div class="col-md-9" style="display:inline-block;">
-                {% cache 31536000 partner_short_description LANGUAGE_CODE partner.pk %}
-                  {{ partner.short_description | twlight_wikicode2html | safe |truncatechars_html:300}}
-                {% endcache %}
+                {{ partner.short_description | safe | truncatechars_html:300}}
               </div>
             </div>
           </div>
