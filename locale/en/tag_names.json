@@ -1,0 +1,39 @@
+{
+    "@metadata": {
+		"authors": [
+			"Susana Cárdenas Molinar",
+			"Jason Sherman",
+			"Sam Walton"
+		],
+		"locale": "en",
+		"message-documentation": "qqq"
+	},
+    "language_translation": "language",
+    "multidisciplinary_translation": "multidisciplinary",
+    "physical-science_translation": "physical-science",
+    "music_translation": "music",
+    "art_translation": "art",
+    "social_translation": "social",
+    "sciences_translation": "sciences",
+    "literature_translation": "literature",
+    "economics_translation": "economics",
+    "law_translation": "law",
+    "military_translation": "military",
+    "business_translation": "business",
+    "education_translation": "education",
+    "chemistry_translation": "chemistry",
+    "biology_translation": "biology",
+    "religion_translation": "religion",
+    "psychology_translation": "psychology",
+    "video_translation": "video",
+    "humanities_translation": "humanities",
+    "social-sciences_translation": "social-sciences",
+    "sports_translation": "sports",
+    "politics_translation": "politics",
+    "history_translation": "history",
+    "culture_translation": "culture",
+    "science_translation": "science",
+    "medical_translation": "medical",
+    "newspapers_translation": "newspapers",
+    "statistics_translation": "statistics"
+}
