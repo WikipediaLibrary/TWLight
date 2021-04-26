@@ -7,6 +7,8 @@ volumes:
 
 services:
   db:
+    ports:
+      - "3306:3306"
     image: quay.io/wikipedialibrary/mariadb:10
     volumes:
       - mysql:/var/lib/mysql
@@ -42,6 +44,8 @@ services:
       - TWLIGHT_OAUTH_CONSUMER_SECRET
       - TWLIGHT_EZPROXY_SECRET
   web:
+    ports:
+      - "80:80"
     image: quay.io/wikipedialibrary/nginx:latest
     volumes:
       - type: bind

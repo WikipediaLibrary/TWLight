@@ -44,9 +44,6 @@ services:
       - TWLIGHT_OAUTH_CONSUMER_KEY
       - TWLIGHT_OAUTH_CONSUMER_SECRET
       - TWLIGHT_EZPROXY_SECRET
-  db:
-    ports:
-      - "3306:3306"
   twlight:
     image: quay.io/wikipedialibrary/twlight:branch_production
     command: /app/bin/twlight_docker_entrypoint.sh "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
@@ -60,8 +57,8 @@ services:
       - 'migrate'
   web:
     volumes:
+      - type: volume
+        target: /var/lib/nginx/cache
       - type: bind
         source: ./conf/production.nginx.conf
         target: /etc/nginx/conf.d/default.conf
-    ports:
-      - "80:80"

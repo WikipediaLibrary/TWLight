@@ -22,12 +22,6 @@ secrets:
     file: ./secrets/TWLIGHT_EZPROXY_SECRET
 
 services:
-  db:
-    # Local environment should accommodate a variety of host OSes
-    volumes:
-      - type: bind
-        source: ./conf/db/local.d
-        target: /etc/mysql/conf.d
   twlight:
     image: ${cr_server}/wikipedialibrary/twlight:${BRANCH_TAG}
     build:
