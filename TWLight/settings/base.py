@@ -56,6 +56,9 @@ def get_django_cldr_languages_intersection(dir):
     languages = json.loads(language_data_json.read())["languages"]
     for lang_code, lang_data in languages.items():
         for i, (djlang_code, djlang_name) in enumerate(GLOBAL_LANGUAGES):
+            # Locales are supposed to have underscores, not dashes.
+            lang_code = lang_code.replace("-", "_")
+            djlang_code = djlang_code.replace("-", "_")
             if lang_code == djlang_code:
                 autonym = lang_data[-1]
                 languages_intersection += [(lang_code, autonym)]
