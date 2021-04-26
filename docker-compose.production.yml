@@ -60,6 +60,8 @@ services:
       - 'migrate'
   web:
     volumes:
+      - type: volume
+        target: /var/lib/nginx/cache
       - type: bind
         source: ./conf/production.nginx.conf
         target: /etc/nginx/conf.d/default.conf
