@@ -70,7 +70,7 @@ def check_for_target_url_duplication_and_generate_error_message(
     return None
 
 
-def get_json_schema():
+def get_partner_description_json_schema():
     """
     JSON Schema for partner description translations
     """
@@ -113,8 +113,12 @@ def get_partner_description(
     descriptions = {}
     # Getting the default file in case the description does not exist in
     # the language file
-    partner_default_descriptions_dict = _read_partner_description_file("en")
-    partner_descriptions_dict = _read_partner_description_file(language_code)
+    partner_default_descriptions_dict = _read_translation_file(
+        "en", "partner_descriptions"
+    )
+    partner_descriptions_dict = _read_translation_file(
+        language_code, "partner_descriptions"
+    )
 
     descriptions["short_description"] = _get_any_description(
         partner_default_descriptions_dict,
@@ -131,21 +135,23 @@ def get_partner_description(
     return descriptions
 
 
-def _read_partner_description_file(language_code: str):
+def _read_translation_file(language_code: str, filename: str):
     """
     Reads a partner description file and returns a dictionary, if the file exists
 
     ----------
     language_code: str
         The language code the user has selected in their settings
+    filename: str
+        The name of the translation file you want to open (partner descriptions or tags)
 
     Returns
     -------
     dict
     """
     twlight_home = settings.TWLIGHT_HOME
-    filepath = "{twlight_home}/locale/{language_code}/partner_descriptions.json".format(
-        twlight_home=twlight_home, language_code=language_code
+    filepath = "{twlight_home}/locale/{language_code}/{filename}.json".format(
+        twlight_home=twlight_home, language_code=language_code, filename=filename
     )
     if os.path.isfile(filepath):
         with open(filepath, "r") as partner_descriptions_file:

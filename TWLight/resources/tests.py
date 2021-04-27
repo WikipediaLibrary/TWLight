@@ -26,7 +26,7 @@ from TWLight.users.models import Authorization
 from .factories import PartnerFactory, StreamFactory, SuggestionFactory
 from .helpers import (
     check_for_target_url_duplication_and_generate_error_message,
-    get_json_schema,
+    get_partner_description_json_schema,
 )
 from .models import (
     Language,
@@ -1366,5 +1366,5 @@ class PartnerFilesTest(TestCase):
                         partner_json = json.load(partner_file)
                         validate(
                             instance=partner_json,
-                            schema=get_json_schema(),
+                            schema=get_partner_description_json_schema(),
                         )
