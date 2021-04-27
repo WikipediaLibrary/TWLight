@@ -3,7 +3,6 @@ import csv
 from datetime import date, timedelta
 import json
 from jsonschema import validate
-from jsonschema.exceptions import ValidationError as JSONSchemaValidationError
 from unittest.mock import patch
 import os
 import random
@@ -571,7 +570,7 @@ class PartnerModelTests(TestCase):
         partner5 = PartnerFactory()
 
         partner5.new_tags = {"tags": ["this_doesnt_exist_tag", "biology_tag"]}
-        with self.assertRaises(JSONSchemaValidationError):
+        with self.assertRaises(ValidationError):
             partner5.save()
 
     def test_create_tags_error2(self):
@@ -585,7 +584,7 @@ class PartnerModelTests(TestCase):
             "other_key": "error",
         }
 
-        with self.assertRaises(JSONSchemaValidationError):
+        with self.assertRaises(ValidationError):
             partner5.save()
 
     def test_create_tags_error2(self):
@@ -598,7 +597,7 @@ class PartnerModelTests(TestCase):
 
         partner6.new_tags = {}
 
-        with self.assertRaises(JSONSchemaValidationError):
+        with self.assertRaises(ValidationError):
             partner6.save()
 
 

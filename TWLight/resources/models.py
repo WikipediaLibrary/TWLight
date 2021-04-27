@@ -2,6 +2,7 @@
 import copy
 
 from jsonschema import validate
+from jsonschema.exceptions import ValidationError as JSONSchemaValidationError
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 
@@ -456,10 +457,15 @@ class Partner(models.Model):
         super(Partner, self).save(*args, **kwargs)
         # If new_tags is not empty, validate with JSONSchema
         if self.new_tags is not None:
-            validate(
-                instance=self.new_tags,
-                schema=get_tags_json_schema(),
-            )
+            try:
+                validate(
+                    instance=self.new_tags,
+                    schema=get_tags_json_schema(),
+                )
+            except JSONSchemaValidationError:
+                raise ValidationError(
+                    "Error trying to insert a tag: the JSON is invalid"
+                )
         """Invalidate this partner's pandoc-rendered html from cache"""
         for code in RESOURCE_LANGUAGE_CODES:
             short_description_cache_key = make_template_fragment_key(
