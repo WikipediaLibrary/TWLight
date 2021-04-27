@@ -26,7 +26,7 @@ from TWLight.users.models import Authorization
 from .factories import PartnerFactory, StreamFactory, SuggestionFactory
 from .helpers import (
     check_for_target_url_duplication_and_generate_error_message,
-    get_json_schema,
+    get_partner_description_json_schema,
 )
 from .models import (
     Language,
@@ -552,6 +552,53 @@ class PartnerModelTests(TestCase):
         )
         partner3.specific_stream = True
         self.assertEqual(partner3.clean(), None)
+
+    def test_create_tags_success(self):
+        """
+        Test to check that new tags are created correctly
+        """
+        partner4 = PartnerFactory()
+
+        partner4.new_tags = {"tags": ["military_tag", "biology_tag"]}
+
+        partner4.save()
+
+    def test_create_tags_error(self):
+        """
+        Test to check that an invalid JSON is not saved in the new_tags
+        """
+        partner5 = PartnerFactory()
+
+        partner5.new_tags = {"tags": ["this_doesnt_exist_tag", "biology_tag"]}
+        with self.assertRaises(ValidationError):
+            partner5.save()
+
+    def test_create_tags_error2(self):
+        """
+        Test to check that an invalid JSON is not saved in the new_tags
+        """
+        partner5 = PartnerFactory()
+
+        partner5.new_tags = {
+            "tags": ["military_tag", "biology_tag"],
+            "other_key": "error",
+        }
+
+        with self.assertRaises(ValidationError):
+            partner5.save()
+
+    def test_create_tags_error2(self):
+        """
+        Test to check that an empty JSON is not saved in the new_tags
+        since saving a JSON null is not recommended
+        https://docs.djangoproject.com/en/3.1/topics/db/queries/#storing-and-querying-for-none
+        """
+        partner6 = PartnerFactory()
+
+        partner6.new_tags = {}
+
+        with self.assertRaises(ValidationError):
+            partner6.save()
 
 
 class WaitlistBehaviorTests(TestCase):
@@ -1366,5 +1413,5 @@ class PartnerFilesTest(TestCase):
                         partner_json = json.load(partner_file)
                         validate(
                             instance=partner_json,
-                            schema=get_json_schema(),
+                            schema=get_partner_description_json_schema(),
                         )
