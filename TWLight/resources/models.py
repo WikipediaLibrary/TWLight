@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import copy
 
+from jsonschema import validate
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 
@@ -16,6 +17,7 @@ from django_countries.fields import CountryField
 
 from TWLight.resources.helpers import (
     check_for_target_url_duplication_and_generate_error_message,
+    get_tags_json_schema,
 )
 
 RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
@@ -319,6 +321,9 @@ class Partner(models.Model):
 
     tags = TaggableManager(through=TaggedTextField, blank=True)
 
+    # New tag model that uses JSONField instead of Taggit to make tags translatable
+    new_tags = models.JSONField(null=True, default=None)
+
     # Non-universal form fields
     # --------------------------------------------------------------------------
 
@@ -449,6 +454,12 @@ class Partner(models.Model):
 
     def save(self, *args, **kwargs):
         super(Partner, self).save(*args, **kwargs)
+        # If new_tags is not empty, validate with JSONSchema
+        if self.new_tags is not None:
+            validate(
+                instance=self.new_tags,
+                schema=get_tags_json_schema(),
+            )
         """Invalidate this partner's pandoc-rendered html from cache"""
         for code in RESOURCE_LANGUAGE_CODES:
             short_description_cache_key = make_template_fragment_key(

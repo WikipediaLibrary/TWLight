@@ -154,8 +154,8 @@ def _read_translation_file(language_code: str, filename: str):
         twlight_home=twlight_home, language_code=language_code, filename=filename
     )
     if os.path.isfile(filepath):
-        with open(filepath, "r") as partner_descriptions_file:
-            return json.load(partner_descriptions_file)
+        with open(filepath, "r") as translation_file:
+            return json.load(translation_file)
     else:
         return {}
 
@@ -188,3 +188,35 @@ def _get_any_description(
         return partner_default_descriptions_dict[partner_key]
     else:
         return None
+
+
+def get_tags_json_schema():
+    """
+    JSON Schema for tag names
+    """
+    tags_json = _read_translation_file("en", "tag_names")
+    # We don't need the metadata key, removing it
+    tags_json.pop("@metadata")
+    tag_keys = list(tags_json.keys())
+    number_of_tags = len(tag_keys)
+    JSON_SCHEMA_TAGS = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+            "tags": {
+                "$id": "#/properties/tags",
+                "type": "array",
+                "items": {
+                    "$id": "#/properties/tags/items",
+                    "enum": tag_keys,
+                    "type": "string",
+                    "examples": ["biology_tag", "military_tag"],
+                },
+                "maxItems": number_of_tags,
+            }
+        },
+        "additionalProperties": False,
+        "required": ["tags"],
+    }
+
+    return JSON_SCHEMA_TAGS
