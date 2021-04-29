@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-04-29 17:34+0000\n"
+"POT-Creation-Date: 2021-04-29 17:42+0000\n"
 "PO-Revision-Date: 2021-04-26 13:37:50+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
