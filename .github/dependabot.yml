@@ -1,0 +1,40 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  reviewers:
+  - jsnshrmn
+  ignore:
+  - dependency-name: django
+    versions:
+    - "< 3, >= 2.a"
+  - dependency-name: oauthlib
+    versions:
+    - "< 4, >= 3.a"
+  - dependency-name: requests-oauthlib
+    versions:
+    - "< 1.1.1, >= 1.1.0.a"
+  - dependency-name: black
+    versions:
+    - 21.4b0
+    - 21.4b1
+  - dependency-name: django
+    versions:
+    - 3.1.6
+    - "3.2"
+  - dependency-name: django-extensions
+    versions:
+    - 3.1.2
+  - dependency-name: djangorestframework
+    versions:
+    - 3.12.3
+  - dependency-name: defusedxml
+    versions:
+    - 0.7.0
+  - dependency-name: sentry-sdk
+    versions:
+    - 0.20.0
+    - 0.20.1
