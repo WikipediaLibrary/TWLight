@@ -51,7 +51,7 @@
     {% if partner.tags %}
       <div class="resource-label-subject">
     {% for tag in partner.tags %}
-      <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
+      <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag }}">{{ tag }}</a>
       {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
     {% endfor %}
       </div>

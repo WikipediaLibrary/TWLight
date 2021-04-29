@@ -135,6 +135,36 @@ def get_partner_description(
     return descriptions
 
 
+def get_tag_names(language_code: str, tag_field: dict):
+    """
+    Function that gets a partner's tag in the user's preferred language.
+    If the tags don't exist in that language, the default
+    will be returned (English)
+
+    Parameters
+    ----------
+    language_code: str
+        The language code the user has selected on TWL's settings
+    tag_field: dict
+        The new_tags JSONField that contains the tag's names
+    Returns
+    -------
+    list
+    """
+    tag_names = []
+    tag_names_default = _read_translation_file("en", "tag_names")
+    tag_names_lang = _read_translation_file(language_code, "tag_names")
+
+    if tag_field:
+        for tag in tag_field["tags"]:
+            if tag in tag_names_lang:
+                tag_names.append(tag_names_lang[tag])
+            else:
+                tag_names.append(tag_names_default[tag])
+
+    return tag_names
+
+
 def _read_translation_file(language_code: str, filename: str):
     """
     Reads a partner description file and returns a dictionary, if the file exists

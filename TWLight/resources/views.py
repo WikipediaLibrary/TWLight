@@ -19,7 +19,7 @@ from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, Edit
 
 from .filters import PartnerFilter
 from .forms import SuggestionForm
-from .helpers import get_partner_description
+from .helpers import get_partner_description, get_tag_names
 from .models import Partner, Stream, Suggestion, TextFieldTag
 
 import logging
@@ -70,6 +70,7 @@ class PartnersFilterView(ListView):
         context["filter"] = partner_filtered_list
         partners_list = []
         for partner in partner_filtered_list.qs:
+            language_code = get_language()
             partner_dict = {}
             partner_dict["pk"] = partner.pk
             partner_dict["authorization_method"] = partner.authorization_method
@@ -80,10 +81,12 @@ class PartnersFilterView(ListView):
                 partner_dict["partner_logo"] = None
             partner_dict["is_not_available"] = partner.is_not_available
             partner_dict["is_waitlisted"] = partner.is_waitlisted
-            partner_dict["tags"] = partner.tags.all()
+            new_tags = partner.new_tags
+            # Getting tags from locale files
+            translated_tags = get_tag_names(language_code, new_tags)
+            partner_dict["tags"] = translated_tags
             partner_dict["languages"] = partner.get_languages
             # Obtaining translated partner description
-            language_code = get_language()
             partner_short_description_key = "{pk}_short_description".format(
                 pk=partner.pk
             )
@@ -128,6 +131,8 @@ class PartnersDetailView(DetailView):
 
         context["partner_short_description"] = partner_descriptions["short_description"]
         context["partner_description"] = partner_descriptions["description"]
+
+        context["tags"] = get_tag_names(language_code, partner.new_tags)
 
         if partner.status == Partner.NOT_AVAILABLE:
             messages.add_message(
