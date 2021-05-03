@@ -323,7 +323,7 @@ class Partner(models.Model):
     tags = TaggableManager(through=TaggedTextField, blank=True)
 
     # New tag model that uses JSONField instead of Taggit to make tags translatable
-    new_tags = models.JSONField(null=True, default=None)
+    new_tags = models.JSONField(null=True, default=None, blank=True)
 
     # Non-universal form fields
     # --------------------------------------------------------------------------
