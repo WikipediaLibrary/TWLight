@@ -5,6 +5,7 @@
 # Author: Farras
 # Author: Gombang
 # Author: HaEr48
+# Author: NFarras
 # Author: Sonic Speedy
 # Author: Ulinfaizah
 msgid ""
@@ -12,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-04-29 17:42+0000\n"
-"PO-Revision-Date: 2021-04-30 07:17:44+0000\n"
+"PO-Revision-Date: 2021-05-03 13:38:15+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,9 +54,9 @@ msgstr "Diminta oleh: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:224
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr "<p><small><i>Data pribadi Anda akan diproses sesuai <a href=\"{terms_url}\">kebijakan pribadi</a> kami.</i></small></p>"
+msgstr "<p><small><i>Data pribadi Anda akan diproses sesuai <a href=\"{terms_url}\">kebijakan privasi</a> kami.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:235
@@ -460,7 +461,7 @@ msgstr "Tambahan dari pengguna"
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:222
 msgid "Recent Applications (last 90 days)"
-msgstr "Aplikasi Terbaru (90 hari terakhir)"
+msgstr "Permohonan Terbaru (90 hari terakhir)"
 
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:259
@@ -522,7 +523,7 @@ msgstr "Ditinjau pada %(review_date)s"
 #. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
 #: TWLight/applications/templates/applications/application_evaluation.html:354
 msgid "No previous versions."
-msgstr "Tidak ada versi terdahulu"
+msgstr "Tidak ada versi terdahulu."
 
 #: TWLight/applications/templates/applications/application_list.html:20
 msgid "View applications which are..."
@@ -547,7 +548,7 @@ msgstr "Waktunya untuk diperpanjang"
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:61
 msgid "Filter by..."
-msgstr "Saring berdasarkan"
+msgstr "Saring berdasarkan..."
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
 #: TWLight/applications/templates/applications/application_list.html:73
@@ -977,7 +978,7 @@ msgstr ""
 #: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
 #: TWLight/users/forms.py:191
 msgid "Submit"
-msgstr ""
+msgstr "Kirim"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
@@ -1244,7 +1245,7 @@ msgstr ""
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
 #: TWLight/emails/views.py:59 TWLight/resources/views.py:511
 msgid "You must be a Wikipedia editor to do that."
-msgstr ""
+msgstr "Anda harus menjadi editor Wikipedia untuk melakukan tindakan ini."
 
 #. Translators: When a user is being authenticated to access proxied resources, and the request's missing the editor's username, this error text is displayed.
 #: TWLight/ezproxy/views.py:35
@@ -1545,7 +1546,7 @@ msgstr ""
 #. Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner
 #: TWLight/resources/templates/resources/partner_detail.html:457
 msgid "List applications"
-msgstr ""
+msgstr "Daftar permohonan"
 
 #. Translators: This text labels a button taking users to their library.
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their library.
@@ -1559,7 +1560,7 @@ msgstr ""
 #: TWLight/users/templates/users/my_applications.html:10
 #: TWLight/users/templates/users/my_library.html:6
 msgid "My Library"
-msgstr ""
+msgstr "Perpustakaan Saya"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #. Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.
@@ -1614,7 +1615,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:509
 #: TWLight/templates/base.html:138 TWLight/templates/home.html:31
 msgid "Log in"
-msgstr ""
+msgstr "Masuk log"
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:517
@@ -1683,17 +1684,17 @@ msgstr ""
 #. Translators: This is the text shown to coordinators when a partner is marked not available.
 #: TWLight/resources/templates/resources/partner_tile.html:43
 msgid "Not available"
-msgstr ""
+msgstr "Tidak tersedia"
 
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #: TWLight/resources/templates/resources/partner_tile.html:68
 msgid "Language(s) not known"
-msgstr ""
+msgstr "Bahasa tidak diketahui"
 
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the bundle partner's page, where they can find more information about the partner.
 #: TWLight/resources/templates/resources/partner_tile.html:84
 msgid "More info"
-msgstr ""
+msgstr "Informasi selengkapnya"
 
 #. Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate partner.
 #: TWLight/resources/templates/resources/partner_users.html:8
@@ -1747,12 +1748,12 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggest.html:47
 #: TWLight/users/templates/users/preferences.html:99
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 #. Translators: This is the text that appears before the URL of every partner suggestion.
 #: TWLight/resources/templates/resources/suggest.html:59
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: TWLight/resources/templates/resources/suggest.html:60
 msgid "Proposer"
@@ -1832,7 +1833,7 @@ msgstr ""
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:8
 msgid "Permission denied"
-msgstr ""
+msgstr "Izin ditolak"
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:12
@@ -1848,12 +1849,12 @@ msgstr ""
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:8
 msgid "Not found"
-msgstr ""
+msgstr "Tidak ditemukan"
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:12
 msgid "Sorry; we can't find that."
-msgstr ""
+msgstr "Maaf; kami tidak dapat menemukannya"
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate path or Phabricator.
 #: TWLight/templates/404.html:16
@@ -1869,12 +1870,12 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:6
 msgid "About the Wikipedia Library"
-msgstr ""
+msgstr "Tentang Perpustakaan Wikipedia"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:10
 msgid "The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects."
-msgstr ""
+msgstr "Perpustakaan Wikipedia menyediakan akses gratis terhadap bahan penelitian yang dapat meningkatkan kemampuan Anda dalam berkontribusi di proyek-proyek Wikimedia"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:18
@@ -1890,7 +1891,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:38
 msgid "Who can receive access?"
-msgstr ""
+msgstr "Siapa yang bisa mendapatkan akses?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:42
@@ -1905,17 +1906,17 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:59
 msgid "You have an account that is a minimum of 6 months old"
-msgstr ""
+msgstr "Anda memiliki akun yang berusia minimum 6 bulan"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
-msgstr ""
+msgstr "Anda telah berkontribusi setidaknya 500 suntingan di proyek-proyek Wikimedia"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr ""
+msgstr "Anda telah melakukan setidaknya 10 suntingan di proyek-proyek Wikimedia bulan lalu"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
@@ -2099,17 +2100,17 @@ msgstr ""
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/base.html:228
 msgid "About"
-msgstr ""
+msgstr "Tentang"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
 #: TWLight/templates/base.html:234
 msgid "Terms of use and privacy policy"
-msgstr ""
+msgstr "Ketentuan penggunaan dan kebijakan privasi"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
 #: TWLight/templates/base.html:246
 msgid "Feedback"
-msgstr ""
+msgstr "Umpan balik"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of available partners.
 #: TWLight/templates/dashboard.html:17
@@ -2161,12 +2162,12 @@ msgstr ""
 #: TWLight/templates/dashboard.html:201 TWLight/templates/dashboard.html:217
 #: TWLight/templates/dashboard.html:231 TWLight/templates/dashboard.html:251
 msgid "download as csv"
-msgstr ""
+msgstr "unduh dalam format csv"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data showing the most viewed pages on the site.
 #: TWLight/templates/dashboard.html:126
 msgid "Most popular pages"
-msgstr ""
+msgstr "Halaman paling populer"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the column for pageview numbers for each partner page.
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the data column showing the number of views against eash partner names.
@@ -2217,7 +2218,7 @@ msgstr ""
 #. Translators: This is the title of the section of the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/) dealing with data on users.
 #: TWLight/templates/dashboard.html:244
 msgid "Users"
-msgstr ""
+msgstr "Pengguna"
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this text is the title of the graph showing the current distribution of applications.
 #: TWLight/templates/dashboard.html:248
@@ -2233,7 +2234,7 @@ msgstr ""
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
 #: TWLight/templates/home.html:16 TWLight/templates/home.html:90
 msgid "Learn more"
-msgstr ""
+msgstr "Pelajari selengkapnya"
 
 #. Translators: Alt text for the Library Bundle logo.
 #: TWLight/templates/home.html:44
@@ -2416,7 +2417,7 @@ msgstr ""
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:12
 msgid "Start new application"
-msgstr ""
+msgstr "Ajukan permohonan baru"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.
 #: TWLight/users/templates/users/editor_detail.html:25
@@ -2429,7 +2430,6 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail.html:33
 #: TWLight/users/templates/users/my_applications.html:7
 #: TWLight/users/templates/users/my_library.html:9
-#, fuzzy
 msgid "My applications"
 msgstr "Permohonan saya"
 
@@ -2558,7 +2558,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the recent edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:208
 msgid "Recent global edit count *"
-msgstr ""
+msgstr "Jumlah suntingan global terkini *"
 
 #. Translators: This text is shown next to a user's recent global edit count if less than 30 days has passed since they first logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:213
@@ -2573,7 +2573,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:237
 msgid "Wikipedia user ID *"
-msgstr ""
+msgstr "ID pengguna Wikipedia *"
 
 #. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:248
@@ -2594,7 +2594,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
 #: TWLight/users/templates/users/editor_detail_data.html:276
 msgid "Email *"
-msgstr ""
+msgstr "Surel *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:281
@@ -2609,7 +2609,7 @@ msgstr ""
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
-msgstr ""
+msgstr "Pilih bahasa"
 
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:29
@@ -2634,12 +2634,12 @@ msgstr ""
 #. Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
 #: TWLight/users/templates/users/my_library.html:21
 msgid "Instant access"
-msgstr ""
+msgstr "Akses langsung"
 
 #. Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually.
 #: TWLight/users/templates/users/my_library.html:36
 msgid "Individual access"
-msgstr ""
+msgstr "Akses pribadi"
 
 #. Translators: On the collection page (proxy/bundle access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_library.html:60
@@ -2650,7 +2650,7 @@ msgstr ""
 #: TWLight/users/templates/users/my_library.html:66
 #: TWLight/users/templates/users/my_library.html:99
 msgid "Expired"
-msgstr ""
+msgstr "Kedaluwarsa"
 
 #. Translators: On the collection page (individual access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_library.html:93
@@ -2690,7 +2690,7 @@ msgstr "Halaman terakhir"
 #. Translators: This link is to the site's terms of use.
 #: TWLight/users/templates/users/preferences.html:72
 msgid "View Terms of Use"
-msgstr "Baca Ketentuan Pemakaian"
+msgstr "Baca Ketentuan Penggunaan"
 
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
 #: TWLight/users/templates/users/preferences.html:82
@@ -2740,7 +2740,7 @@ msgstr ""
 #. Translators: Users can click this button to be taken to the website for a resource.
 #: TWLight/users/templates/users/resource_tile.html:105
 msgid "Go to site"
-msgstr ""
+msgstr "Pergi ke situs web"
 
 #. Translators: This text is found on a tooltip directing users to the description pages of the library's partners.
 #: TWLight/users/templates/users/resource_tile.html:112
@@ -2756,27 +2756,27 @@ msgstr ""
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/resource_tile.html:122
 msgid "Extend"
-msgstr ""
+msgstr "Perpanjang"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/resource_tile.html:125
 msgid "Renew"
-msgstr ""
+msgstr "Perbaharui"
 
 #. Translators: Labels a button users can click to view an application requesting access to a resource.
 #: TWLight/users/templates/users/resource_tile.html:142
 msgid "View application"
-msgstr ""
+msgstr "Lihat permohonan"
 
 #. Translators: Text beside the date on which the authorization has expired.
 #: TWLight/users/templates/users/resource_tile.html:149
 msgid "Expired on"
-msgstr ""
+msgstr "Kedaluwarsa pada"
 
 #. Translators: Text beside the date on which the authorization will expire.
 #: TWLight/users/templates/users/resource_tile.html:152
 msgid "Expires on"
-msgstr ""
+msgstr "Kedaluwarsa pada"
 
 #. Translators: This is the title of the page where users can request we stop processing their data.
 #: TWLight/users/templates/users/restrict_data.html:8
@@ -2796,12 +2796,12 @@ msgstr ""
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
 msgid "Last updated 12 November 2019"
-msgstr ""
+msgstr "Terakhir diperbarui pada 12 November 2019"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28
 msgid "Wikimedia Foundation privacy policy"
-msgstr ""
+msgstr "Kebijakan privasi Yayasan Wikimedia"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:32
@@ -2978,7 +2978,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:253
 msgid "Important Note"
-msgstr ""
+msgstr "Catatan Penting"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:258
@@ -2998,7 +2998,7 @@ msgstr ""
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:285
 msgid "Thank you!"
-msgstr ""
+msgstr "Terima kasih!"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:289
@@ -3008,7 +3008,7 @@ msgstr ""
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:291
 msgid "Wikimedia Foundation"
-msgstr ""
+msgstr "Yayasan Wikimedia"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:299
@@ -3018,7 +3018,7 @@ msgstr ""
 #. Translators: This is the heading of the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:8
 msgid "Delete all data"
-msgstr ""
+msgstr "Hapus semua data"
 
 #. Translators: This message is displayed on the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:14
@@ -3063,12 +3063,12 @@ msgstr ""
 #: TWLight/users/views.py:348 TWLight/users/views.py:429
 #: TWLight/users/views.py:482
 msgid "You must be logged in to do that."
-msgstr ""
+msgstr "Anda harus masuk log untuk melakukan tindakan tersebut"
 
 #. Translators: Shown to the user when they successfully modify their personal information.
 #: TWLight/users/views.py:381
 msgid "Your information has been updated."
-msgstr ""
+msgstr "Informasi Anda telah diperbarui"
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
 #: TWLight/users/views.py:413
@@ -3079,7 +3079,7 @@ msgstr ""
 #: TWLight/users/views.py:441
 #, python-brace-format
 msgid "Your email has been changed to {email}."
-msgstr ""
+msgstr "Surel Anda telah diganti menjadi {email}"
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
 #: TWLight/users/views.py:452
@@ -3104,7 +3104,7 @@ msgstr "Aktif 6+ bulan"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/views.py:73
 msgid "10+ edits in the last month"
-msgstr "10+ suntingan per bulan"
+msgstr "10+ suntingan bulan lalu"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/views.py:75

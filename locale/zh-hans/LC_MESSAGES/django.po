@@ -19,6 +19,7 @@
 # Author: Zhang8569
 # Author: 予弦
 # Author: 列维劳德
+# Author: 坑触可
 # Author: 沈澄心
 # Author: 神樂坂秀吉
 # Author: 科劳
@@ -27,7 +28,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-04-29 17:43+0000\n"
-"PO-Revision-Date: 2021-04-30 07:17:47+0000\n"
+"PO-Revision-Date: 2021-05-03 13:38:18+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1700,9 +1701,9 @@ msgstr "返回顶部"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(partner.company_name)s signup page"
-msgstr "链接到%(partner)s注册页面"
+msgstr "链接到%(partner.company_name)s注册页面"
 
 #. Translators: This is the text shown to coordinators when a partner is marked not available.
 #: TWLight/resources/templates/resources/partner_tile.html:43
