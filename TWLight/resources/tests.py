@@ -1417,11 +1417,3 @@ class PartnerFilesTest(TestCase):
                             instance=partner_json,
                             schema=get_partner_description_json_schema(),
                         )
-
-
-class PartnerHelpersTest(TestCase):
-    def test_get_tag_choices(self):
-        import pudb
-
-        pudb.set_trace()
-        get_tag_choices("es")

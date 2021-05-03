@@ -1,4 +1,6 @@
 from django.conf import settings
+from django.utils.translation import get_language
+
 import json
 import os
 
@@ -181,7 +183,7 @@ def get_tag_choices():
     -------
     tuple
     """
-    language_code = settings.LANGUAGE_CODE
+    language_code = get_language()
     tag_choices = []
     tag_names_default = _read_translation_file("en", "tag_names")
     tag_names_lang = _read_translation_file(language_code, "tag_names")
