@@ -149,20 +149,59 @@ def get_tag_names(language_code: str, tag_field: dict):
         The new_tags JSONField that contains the tag's names
     Returns
     -------
-    list
+    dict
     """
-    tag_names = []
+    tag_names = {}
     tag_names_default = _read_translation_file("en", "tag_names")
     tag_names_lang = _read_translation_file(language_code, "tag_names")
+
+    # Remove the "@metadata" key from both dictionaries
+    tag_names_default.pop("@metadata")
+    tag_names_lang.pop("@metadata")
 
     if tag_field:
         for tag in tag_field["tags"]:
             if tag in tag_names_lang:
-                tag_names.append(tag_names_lang[tag])
+                tag_names[tag] = tag_names_lang[tag]
             else:
-                tag_names.append(tag_names_default[tag])
+                tag_names[tag] = tag_names_default[tag]
 
     return tag_names
+
+
+def get_tag_choices():
+    """
+    Function that gets all the tags, preferably translated to the user's preferred
+    language, otherwise the default language
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+    tuple
+    """
+    language_code = settings.LANGUAGE_CODE
+    tag_choices = []
+    tag_names_default = _read_translation_file("en", "tag_names")
+    tag_names_lang = _read_translation_file(language_code, "tag_names")
+
+    # Remove the "@metadata" key from both dictionaries
+    tag_names_default.pop("@metadata")
+    tag_names_lang.pop("@metadata")
+
+    for tag_key, tag_value in tag_names_default.items():
+        lang_keys = tag_names_lang.keys()
+        if tag_key in lang_keys:
+            tag_tuple = (tag_key, tag_names_lang[tag_key])
+        else:
+            tag_tuple = (tag_key, tag_value)
+
+        tag_choices.append(tag_tuple)
+
+    TAG_CHOICES = tuple(tag_choices)
+
+    return TAG_CHOICES
 
 
 def _read_translation_file(language_code: str, filename: str):

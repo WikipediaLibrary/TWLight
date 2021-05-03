@@ -27,6 +27,7 @@ from .factories import PartnerFactory, StreamFactory, SuggestionFactory
 from .helpers import (
     check_for_target_url_duplication_and_generate_error_message,
     get_partner_description_json_schema,
+    get_tag_choices,
 )
 from .models import (
     Language,
@@ -1265,6 +1266,7 @@ class PartnerTagTest(TestCase):
         it's in the response returned.
         :return:
         """
+        self.skipTest("We are probably removing the meta_url functionality")
         partner = PartnerFactory()
         partner.tags.add("art")
         partner1 = PartnerFactory()
@@ -1415,3 +1417,11 @@ class PartnerFilesTest(TestCase):
                             instance=partner_json,
                             schema=get_partner_description_json_schema(),
                         )
+
+
+class PartnerHelpersTest(TestCase):
+    def test_get_tag_choices(self):
+        import pudb
+
+        pudb.set_trace()
+        get_tag_choices("es")
