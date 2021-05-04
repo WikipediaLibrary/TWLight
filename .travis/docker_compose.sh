@@ -12,6 +12,7 @@ docker tag "docker.io/library/nginx:latest" "${cr_server}/wikipedialibrary/nginx
 docker pull "${cr_server}/wikipedialibrary/twlight_base:${BRANCH_TAG}" || true
 docker pull "${cr_server}/wikipedialibrary/twlight_build:${BRANCH_TAG}" || true
 docker pull "${cr_server}/wikipedialibrary/twlight:${BRANCH_TAG}" || true
+docker pull "${cr_server}/wikipedialibrary/twlight_syslog:${BRANCH_TAG}" || true
 
 docker build --cache-from "${cr_server}/wikipedialibrary/alpine:3.11" \
              --cache-from "${cr_server}/wikipedialibrary/twlight_base:${BRANCH_TAG}" \
@@ -33,5 +34,10 @@ docker build --cache-from "${cr_server}/wikipedialibrary/twlight_base:${BRANCH_T
              --tag "${cr_server}/wikipedialibrary/twlight:${COMMIT_TAG}" \
              --tag "${cr_server}/wikipedialibrary/twlight:${BRANCH_TAG}" \
              --tag "${cr_server}/wikipedialibrary/twlight:${BUILD_TAG}" \
+             . && \
+docker build --cache-from "${cr_server}/wikipedialibrary/twlight_syslog:${BRANCH_TAG}" \
+             --tag "${cr_server}/wikipedialibrary/twlight_syslog:${COMMIT_TAG}" \
+             --tag "${cr_server}/wikipedialibrary/twlight_syslog:${BRANCH_TAG}" \
+             --tag "${cr_server}/wikipedialibrary/twlight_syslog:${BUILD_TAG}" \
              . && \
 docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d db twlight

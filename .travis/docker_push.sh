@@ -29,4 +29,8 @@ then
   docker push ${cr_server}/wikipedialibrary/twlight:${COMMIT_TAG}
   docker push ${cr_server}/wikipedialibrary/twlight:${BRANCH_TAG}
   docker push ${cr_server}/wikipedialibrary/twlight:${BUILD_TAG}
+
+  docker push ${cr_server}/wikipedialibrary/twlight_syslog:${COMMIT_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight_syslog:${BRANCH_TAG}
+  docker push ${cr_server}/wikipedialibrary/twlight_syslog:${BUILD_TAG}
 fi
