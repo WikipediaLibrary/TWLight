@@ -66,7 +66,7 @@ class PartnersFilterView(ListView):
         # Changed since T278337: add filter to queryset before we build the partners
         # dictionary
         partner_filtered_list = PartnerFilter(
-            self.request.GET, queryset=self.get_queryset(), request=self.request
+            self.request.GET, queryset=self.get_queryset(), language_code=language_code
         )
         context["filter"] = partner_filtered_list
         partners_list = []

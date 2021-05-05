@@ -166,7 +166,7 @@ def get_tag_names(language_code: str, tag_field: dict):
     return tag_names
 
 
-def get_tag_choices(language_code: str="en"):
+def get_tag_choices(language_code: str = "en"):
     """
     Function that gets all the tags, preferably translated to the user's preferred
     language, otherwise the default language
