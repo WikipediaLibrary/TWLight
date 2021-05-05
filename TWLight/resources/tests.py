@@ -27,7 +27,6 @@ from .factories import PartnerFactory, StreamFactory, SuggestionFactory
 from .helpers import (
     check_for_target_url_duplication_and_generate_error_message,
     get_partner_description_json_schema,
-    get_tag_choices,
 )
 from .models import (
     Language,
