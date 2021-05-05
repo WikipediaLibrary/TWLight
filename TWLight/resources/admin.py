@@ -61,7 +61,9 @@ class PartnerLogoInline(admin.TabularInline):
     model = PartnerLogo
 
 
-class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
+class PartnerAdmin(admin.ModelAdmin):
+    model = Partner
+
     class CustomModelChoiceField(forms.ModelChoiceField):
         """
         This lets us relabel the users in the dropdown with their recognizable
@@ -91,7 +93,7 @@ class PartnerAdmin(TabbedExternalJqueryTranslationAdmin):
     language_strings.short_description = "Languages"
 
     search_fields = ("company_name",)
-    list_display = ("company_name", "short_description", "id", "language_strings")
+    list_display = ("company_name", "id", "language_strings")
     inlines = [ContactInline, VideoInline, PartnerLogoInline]
 
 

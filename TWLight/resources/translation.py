@@ -1,13 +1,8 @@
 from modeltranslation.translator import translator, TranslationOptions
 
-from .models import Partner, Stream, TextFieldTag
+from .models import Stream, TextFieldTag
 
 # See https://django-modeltranslation.readthedocs.io/en/latest/registration.html
-class PartnerTranslationOptions(TranslationOptions):
-    fields = ("short_description", "description", "send_instructions")
-
-
-translator.register(Partner, PartnerTranslationOptions)
 
 
 class StreamTranslationOptions(TranslationOptions):
@@ -34,6 +29,5 @@ translator.register(TextFieldTag, MultilingualTagTO)
 # https://github.com/deschler/django-modeltranslation/issues/455
 # Should be removed as soon as bug is resolved
 
-Partner._meta.base_manager_name = None
 Stream._meta.base_manager_name = None
 TextFieldTag._meta.base_manager_name = None

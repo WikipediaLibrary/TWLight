@@ -241,21 +241,6 @@ class Partner(models.Model):
         "terms of use to get access; optional otherwise.",
     )
 
-    short_description = models.TextField(
-        max_length=1000,
-        blank=True,
-        null=True,
-        help_text="Optional short description of this partner's resources.",
-    )
-
-    description = models.TextField(
-        "long description",
-        blank=True,
-        help_text="Optional detailed description in addition to the short "
-        "description such as collections, instructions, notes, special "
-        "requirements, alternate access options, unique features, citations notes.",
-    )
-
     send_instructions = models.TextField(
         blank=True,
         null=True,
@@ -466,20 +451,6 @@ class Partner(models.Model):
                 raise ValidationError(
                     "Error trying to insert a tag: the JSON is invalid"
                 )
-        """Invalidate this partner's pandoc-rendered html from cache"""
-        for code in RESOURCE_LANGUAGE_CODES:
-            short_description_cache_key = make_template_fragment_key(
-                "partner_short_description", [code, self.pk]
-            )
-            description_cache_key = make_template_fragment_key(
-                "partner_description", [code, self.pk]
-            )
-            send_instructions_cache_key = make_template_fragment_key(
-                "partner_send_instructions", [code, self.pk]
-            )
-            cache.delete(short_description_cache_key)
-            cache.delete(description_cache_key)
-            cache.delete(send_instructions_cache_key)
 
     @property
     def get_languages(self):

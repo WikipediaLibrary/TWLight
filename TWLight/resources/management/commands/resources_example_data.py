@@ -41,9 +41,6 @@ class Command(BaseCommand):
             partner = PartnerFactory(
                 company_location=random.choice(list(countries)),
                 renewals_available=random.choice([True, False]),
-                short_description=Faker(
-                    random.choice(settings.FAKER_LOCALES)
-                ).paragraph(nb_sentences=4),
                 send_instructions=Faker(
                     random.choice(settings.FAKER_LOCALES)
                 ).paragraph(nb_sentences=2),
