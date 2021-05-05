@@ -53,6 +53,10 @@ echo "Enter TWLIGHT_EZPROXY_SECRET:"
 read TWLIGHT_EZPROXY_SECRET
 echo "Enter stack environment (eg. override \| staging \| production):"
 read TWLIGHT_STACK_ENV
+echo "Enter MATOMO_SITEID:"
+read MATOMO_SITEID
+echo "Enter MATOMO_AUTH_TOKEN:"
+read MATOMO_AUTH_TOKEN
 
 chown -R twlight:twlight /srv/TWLight
 
@@ -73,6 +77,8 @@ printf "${SECRET_KEY}" | docker secret create SECRET_KEY -
 printf "${TWLIGHT_OAUTH_CONSUMER_KEY}" | docker secret create TWLIGHT_OAUTH_CONSUMER_KEY -
 printf "${TWLIGHT_OAUTH_CONSUMER_SECRET}" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
 printf "${TWLIGHT_EZPROXY_SECRET}" | docker secret create TWLIGHT_EZPROXY_SECRET -
+printf "${MATOMO_SITEID}" | docker secret create MATOMO_SITEID -
+printf "${MATOMO_AUTH_TOKEN}" | docker secret create MATOMO_AUTH_TOKEN -
 
 docker stack deploy -c "docker-compose.yml" -c "docker-compose.${TWLIGHT_STACK_ENV}.yml" "${TWLIGHT_STACK_ENV}"
 
