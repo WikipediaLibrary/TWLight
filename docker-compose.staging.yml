@@ -19,6 +19,10 @@ secrets:
     external: true
   TWLIGHT_EZPROXY_SECRET:
     external: true
+  MATOMO_SITEID:
+    external: true
+  MATOMO_AUTH_TOKEN:
+    external: true
 
 services:
   migrate:
