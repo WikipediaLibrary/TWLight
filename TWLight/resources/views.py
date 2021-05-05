@@ -19,7 +19,7 @@ from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, Edit
 
 from .filters import PartnerFilter
 from .forms import SuggestionForm
-from .helpers import get_partner_description, get_tag_names, get_tag_choices
+from .helpers import get_partner_description, get_tag_names
 from .models import Partner, Stream, Suggestion, TextFieldTag
 
 import logging
@@ -66,7 +66,7 @@ class PartnersFilterView(ListView):
         # Changed since T278337: add filter to queryset before we build the partners
         # dictionary
         partner_filtered_list = PartnerFilter(
-            self.request.GET, queryset=self.get_queryset()
+            self.request.GET, queryset=self.get_queryset(), request=self.request
         )
         context["filter"] = partner_filtered_list
         partners_list = []
