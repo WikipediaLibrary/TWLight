@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+source /srv/syslog/bin/secrets.sh
+
 while IFS= read -r line; do
   if  [ -n "${MATOMO_FQDN+isset}" ] && [ -n "${MATOMO_AUTH_TOKEN+isset}" ] && [ -n "${MATOMO_SITEID+isset}" ]
   then

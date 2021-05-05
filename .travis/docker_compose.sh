@@ -39,5 +39,5 @@ docker build --cache-from "${cr_server}/wikipedialibrary/twlight_syslog:${BRANCH
              --tag "${cr_server}/wikipedialibrary/twlight_syslog:${COMMIT_TAG}" \
              --tag "${cr_server}/wikipedialibrary/twlight_syslog:${BRANCH_TAG}" \
              --tag "${cr_server}/wikipedialibrary/twlight_syslog:${BUILD_TAG}" \
-             . && \
+             syslog && \
 docker-compose -f docker-compose.yml -f docker-compose.travis.yml up -d db twlight
