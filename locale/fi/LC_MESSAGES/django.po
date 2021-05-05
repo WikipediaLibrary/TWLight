@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-05-03 18:10+0000\n"
+"POT-Creation-Date: 2021-05-05 18:15+0000\n"
 "PO-Revision-Date: 2021-04-30 07:17:44+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1448,7 +1448,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:511
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:516
 #, fuzzy
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Sinun on oltava kirjautuneena sisään tehdäksesi sen."
@@ -2065,39 +2065,39 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:224
+#: TWLight/resources/views.py:229
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:304
+#: TWLight/resources/views.py:309
 msgid "This partner is currently not open for applications"
 msgstr "Yhteistyökumppani ei tällä hetkellä ota hakemuksia vastaan"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:394
+#: TWLight/resources/views.py:399
 #, fuzzy
 msgid "This partner is now waitlisted"
 msgstr ""
 "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:407
+#: TWLight/resources/views.py:412
 #, fuzzy
 msgid "This partner is now available for applications"
 msgstr ""
 "Yhteistyökumppanit, joilla on hyväksyttyjä mutta lähettämättömiä hakemuksia."
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:503
+#: TWLight/resources/views.py:508
 #, fuzzy
 msgid "Your suggestion has been added."
 msgstr "Tietosi on päivitetty."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:528
+#: TWLight/resources/views.py:533
 #, fuzzy
 msgid "Suggestion has been deleted."
 msgstr "Tietosi on päivitetty."
