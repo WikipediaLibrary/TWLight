@@ -1,4 +1,5 @@
 from django.conf import settings
+
 import json
 import os
 
@@ -135,6 +136,68 @@ def get_partner_description(
     return descriptions
 
 
+def get_tag_names(language_code: str, tag_field: dict):
+    """
+    Function that gets a partner's tag in the user's preferred language.
+    If the tags don't exist in that language, the default
+    will be returned (English)
+
+    Parameters
+    ----------
+    language_code: str
+        The language code the user has selected on TWL's settings
+    tag_field: dict
+        The new_tags JSONField that contains the tag's names
+    Returns
+    -------
+    dict
+    """
+    tag_names = {}
+    tag_names_default = _read_translation_file("en", "tag_names")
+    tag_names_lang = _read_translation_file(language_code, "tag_names")
+
+    if tag_field:
+        for tag in tag_field["tags"]:
+            if tag in tag_names_lang:
+                tag_names[tag] = tag_names_lang[tag]
+            else:
+                tag_names[tag] = tag_names_default[tag]
+
+    return tag_names
+
+
+def get_tag_choices(language_code: str = "en"):
+    """
+    Function that gets all the tags, preferably translated to the user's preferred
+    language, otherwise the default language
+
+    Parameters
+    ----------
+    language_code: str
+        The language code the user has selected on TWL's settings
+
+    Returns
+    -------
+    tuple
+    """
+    tag_choices = []
+    tag_names_default = _read_translation_file("en", "tag_names")
+    tag_names_lang = _read_translation_file(language_code, "tag_names")
+
+    for tag_key, tag_value in tag_names_default.items():
+        lang_keys = tag_names_lang.keys()
+        if tag_key in lang_keys:
+            tag_tuple = (tag_key, tag_names_lang[tag_key])
+        else:
+            tag_tuple = (tag_key, tag_value)
+
+        tag_choices.append(tag_tuple)
+
+    TAG_CHOICES = tuple(tag_choices)
+
+    return TAG_CHOICES
+
+
 def _read_translation_file(language_code: str, filename: str):
     """
     Reads a partner description file and returns a dictionary, if the file exists
@@ -155,7 +218,12 @@ def _read_translation_file(language_code: str, filename: str):
     )
     if os.path.isfile(filepath):
         with open(filepath, "r") as translation_file:
-            return json.load(translation_file)
+            translation_dict = json.load(translation_file)
+
+            # Remove the "@metadata" key from the dictionary
+            if "@metadata" in translation_dict:
+                translation_dict.pop("@metadata")
+            return translation_dict
     else:
         return {}
 
@@ -195,8 +263,6 @@ def get_tags_json_schema():
     JSON Schema for tag names
     """
     tags_json = _read_translation_file("en", "tag_names")
-    # We don't need the metadata key, removing it
-    tags_json.pop("@metadata")
     tag_keys = list(tags_json.keys())
     number_of_tags = len(tag_keys)
     JSON_SCHEMA_TAGS = {

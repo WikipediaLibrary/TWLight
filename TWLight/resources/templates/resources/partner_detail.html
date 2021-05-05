@@ -104,10 +104,10 @@
                   {% comment %}Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
                   {% trans "Description not available." %}
                 {% endif %}
-                {% if object.tags.count > 0 %}
+                {% if tags %}
                   <div class="resource-label-subject">
-                  {% for tag in object.tags.all %}
-                    <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag.pk }}">{{ tag }}</a>
+                  {% for tag_key, tag_value in tags.items %}
+                    <a class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag_key }}">{{ tag_value }}</a>
                     {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
                   {% endfor %}
                   </div>

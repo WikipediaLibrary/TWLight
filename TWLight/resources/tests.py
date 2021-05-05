@@ -1265,6 +1265,7 @@ class PartnerTagTest(TestCase):
         it's in the response returned.
         :return:
         """
+        self.skipTest("We are probably removing the meta_url functionality")
         partner = PartnerFactory()
         partner.tags.add("art")
         partner1 = PartnerFactory()
