@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import html
-import random
-import urllib
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 from itertools import chain
-from unittest.mock import patch
+import random
 import reversion
+from testdata import wrap_testdata
+from unittest.mock import patch
+import urllib
 from urllib.parse import urlparse
 
 from django import forms
@@ -19,11 +20,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core import mail
 from django.core.exceptions import PermissionDenied, ValidationError
-from django.urls import reverse
 from django.core.management import call_command
 from django.db import models
 from django.http import Http404
 from django.test import TestCase, Client, RequestFactory
+from django.urls import reverse
 from django.utils.html import escape
 
 from TWLight.helpers import site_id
@@ -358,8 +359,9 @@ class SynchronizeFieldsTest(TestCase):
 
 class BaseApplicationViewTest(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super(BaseApplicationViewTest, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         cls.client = Client()
 
         # Note: not an Editor.
@@ -396,7 +398,7 @@ class BaseApplicationViewTest(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        super(BaseApplicationViewTest, cls).tearDownClass()
+        super().tearDownClass()
         cls.base_user.delete()
         cls.editor.delete()
         cls.editor2.delete()
@@ -405,7 +407,7 @@ class BaseApplicationViewTest(TestCase):
         cls.message_patcher.stop()
 
     def tearDown(self):
-        super(BaseApplicationViewTest, self).tearDown()
+        super().tearDown()
         for partner in Partner.objects.all():
             partner.delete()
 
@@ -426,8 +428,9 @@ class BaseApplicationViewTest(TestCase):
 
 class RequestApplicationTest(BaseApplicationViewTest):
     @classmethod
-    def setUpClass(cls):
-        super(RequestApplicationTest, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         cls.url = reverse("applications:request")
 
     def _get_request_with_session(self, data):
@@ -675,12 +678,13 @@ class RequestApplicationTest(BaseApplicationViewTest):
 
 class SubmitApplicationTest(BaseApplicationViewTest):
     @classmethod
-    def setUpClass(cls):
-        super(SubmitApplicationTest, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         cls.url = reverse("applications:apply")
 
     def tearDown(self):
-        super(SubmitApplicationTest, self).tearDown()
+        super().tearDown()
         for partner in Partner.objects.all():
             partner.delete()
 
@@ -1642,8 +1646,9 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
 class ListApplicationsTest(BaseApplicationViewTest):
     @classmethod
-    def setUpClass(cls):
-        super(ListApplicationsTest, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         cls.superuser = User.objects.create_user(username="super", password="super")
         cls.superuser.is_superuser = True
         cls.superuser.save()
@@ -1694,7 +1699,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
 
     @classmethod
     def tearDownClass(cls):
-        super(ListApplicationsTest, cls).tearDownClass()
+        super().tearDownClass()
         cls.superuser.delete()
         for app in Application.objects.all():
             app.delete()
@@ -3059,53 +3064,55 @@ class ApplicationModelTest(TestCase):
 
 
 class EvaluateApplicationTest(TestCase):
-    def setUp(self):
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.editor = EditorFactory()
+        cls.editor.user.userprofile.terms_of_use = False
+        cls.editor.user.userprofile.save()
+        cls.user = cls.editor.user
 
-        super(EvaluateApplicationTest, self).setUp()
-        self.editor = EditorFactory()
-        self.editor.user.userprofile.terms_of_use = False
-        self.editor.user.userprofile.save()
-        self.user = self.editor.user
+        cls.partner = PartnerFactory()
 
-        self.partner = PartnerFactory()
-
-        self.application = ApplicationFactory(
-            editor=self.editor,
+        cls.application = ApplicationFactory(
+            editor=cls.editor,
             status=Application.PENDING,
-            partner=self.partner,
+            partner=cls.partner,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
-        self.url = reverse("applications:evaluate", kwargs={"pk": self.application.pk})
+        cls.url = reverse("applications:evaluate", kwargs={"pk": cls.application.pk})
 
         editor2 = EditorFactory()
-        self.user_restricted = editor2.user
-        get_restricted().user_set.add(self.user_restricted)
+        cls.user_restricted = editor2.user
+        get_restricted().user_set.add(cls.user_restricted)
 
-        self.restricted_application = ApplicationFactory(
+        cls.restricted_application = ApplicationFactory(
             editor=editor2,
             status=Application.PENDING,
-            partner=self.partner,
+            partner=cls.partner,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
-        self.url_restricted = reverse(
-            "applications:evaluate", kwargs={"pk": self.restricted_application.pk}
+        cls.url_restricted = reverse(
+            "applications:evaluate", kwargs={"pk": cls.restricted_application.pk}
         )
 
-        self.coordinator = UserFactory(username="coordinator")
-        self.coordinator.set_password("coordinator")
+        cls.coordinator = UserFactory(username="coordinator")
+        cls.coordinator.set_password("coordinator")
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.coordinator)
-        self.coordinator.userprofile.terms_of_use = True
-        self.coordinator.userprofile.save()
+        coordinators.user_set.add(cls.coordinator)
+        cls.coordinator.userprofile.terms_of_use = True
+        cls.coordinator.userprofile.save()
 
-        self.message_patcher = patch("TWLight.applications.views.messages.add_message")
-        self.message_patcher.start()
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
+        cls.message_patcher.start()
 
-    def tearDown(self):
-        super(EvaluateApplicationTest, self).tearDown()
-        self.message_patcher.stop()
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.message_patcher.stop()
 
     def test_sets_status(self):
         factory = RequestFactory()
@@ -3779,8 +3786,9 @@ class EvaluateApplicationTest(TestCase):
 
 class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
     @classmethod
-    def setUpClass(cls):
-        super(SignalsUpdateApplicationsTest, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
 
         parent = ApplicationFactory(status=Application.APPROVED)
         user = UserFactory(username="editor")
@@ -3871,79 +3879,82 @@ class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
 
 
 class BatchEditTest(TestCase):
-    def setUp(self):
-        super(BatchEditTest, self).setUp()
-        self.url = reverse("applications:batch_edit")
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.url = reverse("applications:batch_edit")
         editor = EditorFactory()
         editor1 = EditorFactory()
-        self.user = editor.user
-        self.user1 = editor1.user
+        cls.user = editor.user
+        cls.user1 = editor1.user
 
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.user)
+        coordinators.user_set.add(cls.user)
 
-        self.partner = PartnerFactory()
-        self.partner1 = PartnerFactory()
-        self.partner2 = PartnerFactory()
-        self.stream = StreamFactory(accounts_available=None, partner=self.partner2)
+        cls.partner = PartnerFactory()
+        cls.partner1 = PartnerFactory()
+        cls.partner2 = PartnerFactory()
+        cls.stream = StreamFactory(accounts_available=None, partner=cls.partner2)
 
-        self.application = ApplicationFactory(
+        cls.application = ApplicationFactory(
             editor=editor,
             status=Application.PENDING,
-            partner=self.partner,
+            partner=cls.partner,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
-        self.application1 = ApplicationFactory(
+        cls.application1 = ApplicationFactory(
             editor=editor1,
             status=Application.PENDING,
-            partner=self.partner,
+            partner=cls.partner,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
-        self.application2 = ApplicationFactory(
+        cls.application2 = ApplicationFactory(
             editor=editor,
             status=Application.PENDING,
-            partner=self.partner1,
+            partner=cls.partner1,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
-        self.application3 = ApplicationFactory(
+        cls.application3 = ApplicationFactory(
             editor=editor1,
             status=Application.PENDING,
-            partner=self.partner1,
+            partner=cls.partner1,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
-        self.application4 = ApplicationFactory(
+        cls.application4 = ApplicationFactory(
             editor=editor1,
             status=Application.PENDING,
-            partner=self.partner2,
-            specific_stream=self.stream,
+            partner=cls.partner2,
+            specific_stream=cls.stream,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
-        self.coordinator = UserFactory(username="coordinator")
-        self.coordinator.set_password("coordinator")
+        cls.coordinator = UserFactory(username="coordinator")
+        cls.coordinator.set_password("coordinator")
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.coordinator)
-        self.coordinator.userprofile.terms_of_use = True
-        self.coordinator.userprofile.save()
+        coordinators.user_set.add(cls.coordinator)
+        cls.coordinator.userprofile.terms_of_use = True
+        cls.coordinator.userprofile.save()
 
         editor2 = EditorFactory()
-        self.unpriv_user = editor2.user
+        cls.unpriv_user = editor2.user
 
-        self.message_patcher = patch("TWLight.applications.views.messages.add_message")
-        self.message_patcher.start()
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
+        cls.message_patcher.start()
 
-    def tearDown(self):
-        super(BatchEditTest, self).tearDown()
-        self.message_patcher.stop()
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.message_patcher.stop()
 
     def test_missing_params_raise_http_bad_request(self):
         # Create a coordinator with a test client session
@@ -4330,57 +4341,60 @@ class ListReadyApplicationsTest(TestCase):
 
 
 class MarkSentTest(TestCase):
-    def setUp(self):
-        super(MarkSentTest, self).setUp()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         editor = EditorFactory()
-        self.user = editor.user
+        cls.user = editor.user
 
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.user)
+        coordinators.user_set.add(cls.user)
 
         editor2 = EditorFactory()
-        self.user2 = editor2.user
+        cls.user2 = editor2.user
         editor3 = EditorFactory()
-        self.user3 = editor3.user
+        cls.user3 = editor3.user
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.user)
-        coordinators.user_set.add(self.user3)
+        coordinators.user_set.add(cls.user)
+        coordinators.user_set.add(cls.user3)
 
-        self.partner = PartnerFactory(coordinator=self.user)
+        cls.partner = PartnerFactory(coordinator=cls.user)
 
-        self.partner2 = PartnerFactory()
+        cls.partner2 = PartnerFactory()
 
-        self.app1 = ApplicationFactory(
+        cls.app1 = ApplicationFactory(
             editor=editor,
             status=Application.APPROVED,
-            partner=self.partner,
+            partner=cls.partner,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
-        self.app2 = ApplicationFactory(
+        cls.app2 = ApplicationFactory(
             editor=editor,
             status=Application.APPROVED,
-            partner=self.partner2,
+            partner=cls.partner2,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
         editor2 = EditorFactory()
-        self.unpriv_user = editor2.user
+        cls.unpriv_user = editor2.user
 
-        self.url = reverse("applications:send_partner", kwargs={"pk": self.partner.pk})
+        cls.url = reverse("applications:send_partner", kwargs={"pk": cls.partner.pk})
 
         # Set up an access code to distribute
-        self.access_code = AccessCode(code="ABCD-EFGH-IJKL", partner=self.partner)
-        self.access_code.save()
+        cls.access_code = AccessCode(code="ABCD-EFGH-IJKL", partner=cls.partner)
+        cls.access_code.save()
 
-        self.message_patcher = patch("TWLight.applications.views.messages.add_message")
-        self.message_patcher.start()
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
+        cls.message_patcher.start()
 
-    def tearDown(self):
-        super(MarkSentTest, self).tearDown()
-        self.message_patcher.stop()
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.message_patcher.stop()
 
     def test_invalid_params_raise_http_bad_request(self):
         # No post data: bad.
