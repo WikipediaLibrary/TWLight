@@ -2,6 +2,8 @@ import random
 from unittest.mock import patch
 from datetime import date, timedelta
 from faker import Faker
+from testdata import wrap_testdata
+
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core import mail
@@ -11,7 +13,6 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.test import TestCase, RequestFactory, Client
 from django.utils import timezone
-
 
 from rest_framework.test import APIRequestFactory, force_authenticate
 
@@ -91,8 +92,9 @@ class TestEmailRequired(EmailRequired, DispatchProvider):
 
 class ViewMixinTests(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super(ViewMixinTests, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         # Some mixins add messages; don't make the tests fail simply because
         # MessageMiddleware is unavailable.
         cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
@@ -100,7 +102,7 @@ class ViewMixinTests(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        super(ViewMixinTests, cls).tearDownClass()
+        super().tearDownClass()
         cls.message_patcher.stop()
 
     def tearDown(self):
@@ -442,157 +444,159 @@ class AuthorizationBaseTestCase(TestCase):
     Could possibly achieve the same effect via a new factory class.
     """
 
-    def setUp(self):
-        super(AuthorizationBaseTestCase, self).setUp()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
 
-        self.partner1 = PartnerFactory(
+        cls.partner1 = PartnerFactory(
             authorization_method=Partner.EMAIL, status=Partner.AVAILABLE
         )
-        self.partner2 = PartnerFactory(
+        cls.partner2 = PartnerFactory(
             authorization_method=Partner.PROXY,
             status=Partner.AVAILABLE,
             requested_access_duration=True,
         )
-        self.partner3 = PartnerFactory(
+        cls.partner3 = PartnerFactory(
             authorization_method=Partner.CODES, status=Partner.AVAILABLE
         )
-        self.partner4 = PartnerFactory(
+        cls.partner4 = PartnerFactory(
             authorization_method=Partner.EMAIL, status=Partner.AVAILABLE
         )
-        self.partner5 = PartnerFactory(
+        cls.partner5 = PartnerFactory(
             authorization_method=Partner.EMAIL,
             status=Partner.AVAILABLE,
             specific_stream=True,
         )
-        self.partner5_stream1 = StreamFactory(
-            partner=self.partner5, authorization_method=Partner.EMAIL
+        cls.partner5_stream1 = StreamFactory(
+            partner=cls.partner5, authorization_method=Partner.EMAIL
         )
-        self.partner5_stream2 = StreamFactory(
-            partner=self.partner5, authorization_method=Partner.EMAIL
+        cls.partner5_stream2 = StreamFactory(
+            partner=cls.partner5, authorization_method=Partner.EMAIL
         )
 
-        self.editor1 = EditorFactory()
-        self.editor1.user.email = Faker(random.choice(settings.FAKER_LOCALES)).email()
-        self.editor1.user.save()
-        self.editor2 = EditorFactory()
-        self.editor3 = EditorFactory()
+        cls.editor1 = EditorFactory()
+        cls.editor1.user.email = Faker(random.choice(settings.FAKER_LOCALES)).email()
+        cls.editor1.user.save()
+        cls.editor2 = EditorFactory()
+        cls.editor3 = EditorFactory()
         # Editor 4 is a coordinator with a session.
-        self.editor4 = EditorCraftRoom(self, Terms=True, Coordinator=True)
+        cls.editor4 = EditorCraftRoom(cls, Terms=True, Coordinator=True)
         # Editor 4 is the designated coordinator for all partners.
-        self.partner1.coordinator = self.editor4.user
-        self.partner1.account_length = timedelta(days=180)
-        self.partner1.target_url = "http://test.localdomain"
-        self.partner1.save()
-        self.partner2.coordinator = self.editor4.user
-        self.partner2.save()
-        self.partner3.coordinator = self.editor4.user
-        self.partner3.save()
-        self.partner4.coordinator = self.editor4.user
-        self.partner4.save()
-        self.partner5.coordinator = self.editor4.user
-        self.partner5.save()
+        cls.partner1.coordinator = cls.editor4.user
+        cls.partner1.account_length = timedelta(days=180)
+        cls.partner1.target_url = "http://test.localdomain"
+        cls.partner1.save()
+        cls.partner2.coordinator = cls.editor4.user
+        cls.partner2.save()
+        cls.partner3.coordinator = cls.editor4.user
+        cls.partner3.save()
+        cls.partner4.coordinator = cls.editor4.user
+        cls.partner4.save()
+        cls.partner5.coordinator = cls.editor4.user
+        cls.partner5.save()
 
         # Editor 5 is a coordinator without a session and with no designated partners.
-        self.editor5 = EditorFactory()
-        coordinators.user_set.add(self.editor5.user)
+        cls.editor5 = EditorFactory()
+        coordinators.user_set.add(cls.editor5.user)
 
         # Create applications.
-        self.app1 = ApplicationFactory(
-            editor=self.editor1, partner=self.partner1, status=Application.PENDING
+        cls.app1 = ApplicationFactory(
+            editor=cls.editor1, partner=cls.partner1, status=Application.PENDING
         )
-        self.app2 = ApplicationFactory(
-            editor=self.editor2, partner=self.partner1, status=Application.PENDING
+        cls.app2 = ApplicationFactory(
+            editor=cls.editor2, partner=cls.partner1, status=Application.PENDING
         )
-        self.app3 = ApplicationFactory(
-            editor=self.editor3, partner=self.partner1, status=Application.PENDING
+        cls.app3 = ApplicationFactory(
+            editor=cls.editor3, partner=cls.partner1, status=Application.PENDING
         )
-        self.app4 = ApplicationFactory(
-            editor=self.editor1, partner=self.partner2, status=Application.PENDING
+        cls.app4 = ApplicationFactory(
+            editor=cls.editor1, partner=cls.partner2, status=Application.PENDING
         )
-        self.app5 = ApplicationFactory(
-            editor=self.editor2, partner=self.partner2, status=Application.PENDING
+        cls.app5 = ApplicationFactory(
+            editor=cls.editor2, partner=cls.partner2, status=Application.PENDING
         )
-        self.app6 = ApplicationFactory(
-            editor=self.editor3, partner=self.partner2, status=Application.PENDING
+        cls.app6 = ApplicationFactory(
+            editor=cls.editor3, partner=cls.partner2, status=Application.PENDING
         )
-        self.app7 = ApplicationFactory(
-            editor=self.editor1, partner=self.partner3, status=Application.PENDING
+        cls.app7 = ApplicationFactory(
+            editor=cls.editor1, partner=cls.partner3, status=Application.PENDING
         )
-        self.app8 = ApplicationFactory(
-            editor=self.editor1, partner=self.partner4, status=Application.PENDING
+        cls.app8 = ApplicationFactory(
+            editor=cls.editor1, partner=cls.partner4, status=Application.PENDING
         )
-        self.app9 = ApplicationFactory(
-            editor=self.editor2, partner=self.partner3, status=Application.PENDING
+        cls.app9 = ApplicationFactory(
+            editor=cls.editor2, partner=cls.partner3, status=Application.PENDING
         )
-        self.app10 = ApplicationFactory(
-            editor=self.editor1,
-            partner=self.partner5,
-            specific_stream=self.partner5_stream1,
+        cls.app10 = ApplicationFactory(
+            editor=cls.editor1,
+            partner=cls.partner5,
+            specific_stream=cls.partner5_stream1,
             status=Application.PENDING,
         )
-        self.app11 = ApplicationFactory(
-            editor=self.editor1,
-            partner=self.partner5,
-            specific_stream=self.partner5_stream2,
+        cls.app11 = ApplicationFactory(
+            editor=cls.editor1,
+            partner=cls.partner5,
+            specific_stream=cls.partner5_stream2,
             status=Application.PENDING,
         )
 
         # Editor 4 will update status on applications to partners 1, 2, and 5.
         # Send the application
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app1.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app1.pk}),
             data={"status": Application.SENT},
             follow=True,
         )
-        self.app1.refresh_from_db()
-        self.auth_app1 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor1.user, partners=self.partner1
+        cls.app1.refresh_from_db()
+        cls.auth_app1 = Authorization.objects.get(
+            authorizer=cls.editor4.user, user=cls.editor1.user, partners=cls.partner1
         )
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app10.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app10.pk}),
             data={"status": Application.SENT},
             follow=True,
         )
-        self.app10.refresh_from_db()
-        self.auth_app10 = Authorization.objects.get(
-            authorizer=self.editor4.user,
-            user=self.editor1.user,
-            partners=self.partner5,
-            stream=self.partner5_stream1,
+        cls.app10.refresh_from_db()
+        cls.auth_app10 = Authorization.objects.get(
+            authorizer=cls.editor4.user,
+            user=cls.editor1.user,
+            partners=cls.partner5,
+            stream=cls.partner5_stream1,
         )
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app11.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app11.pk}),
             data={"status": Application.SENT},
             follow=True,
         )
-        self.app11.refresh_from_db()
-        self.auth_app11 = Authorization.objects.get(
-            authorizer=self.editor4.user,
-            user=self.editor1.user,
-            partners=self.partner5,
-            stream=self.partner5_stream2,
+        cls.app11.refresh_from_db()
+        cls.auth_app11 = Authorization.objects.get(
+            authorizer=cls.editor4.user,
+            user=cls.editor1.user,
+            partners=cls.partner5,
+            stream=cls.partner5_stream2,
         )
 
         # Send the application
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app2.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app2.pk}),
             data={"status": Application.SENT},
             follow=True,
         )
-        self.app2.refresh_from_db()
-        self.auth_app2 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor2.user, partners=self.partner1
+        cls.app2.refresh_from_db()
+        cls.auth_app2 = Authorization.objects.get(
+            authorizer=cls.editor4.user, user=cls.editor2.user, partners=cls.partner1
         )
 
         # Send the application
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app3.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app3.pk}),
             data={"status": Application.SENT},
             follow=True,
         )
-        self.app3.refresh_from_db()
-        self.auth_app3 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor3.user, partners=self.partner1
+        cls.app3.refresh_from_db()
+        cls.auth_app3 = Authorization.objects.get(
+            authorizer=cls.editor4.user, user=cls.editor3.user, partners=cls.partner1
         )
 
         # PROXY authorization methods don't set .SENT on the evaluate page;
@@ -600,50 +604,50 @@ class AuthorizationBaseTestCase(TestCase):
 
         # This app was created with a factory, which doesn't create a revision.
         # Let's update the status so that we have one.
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app4.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app4.pk}),
             data={"status": Application.QUESTION},
             follow=True,
         )
         # Approve the application
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app4.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app4.pk}),
             data={"status": Application.APPROVED},
             follow=True,
         )
 
-        self.app4.refresh_from_db()
-        self.auth_app4 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor1.user, partners=self.partner2
+        cls.app4.refresh_from_db()
+        cls.auth_app4 = Authorization.objects.get(
+            authorizer=cls.editor4.user, user=cls.editor1.user, partners=cls.partner2
         )
 
         # This app was created with a factory, which doesn't create a revision.
         # Let's update the status so that we have one.
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app5.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app5.pk}),
             data={"status": Application.QUESTION},
             follow=True,
         )
         # Approve the application
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": self.app5.pk}),
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app5.pk}),
             data={"status": Application.APPROVED},
             follow=True,
         )
-        self.app5.refresh_from_db()
-        self.auth_app5 = Authorization.objects.get(
-            authorizer=self.editor4.user, user=self.editor2.user, partners=self.partner2
+        cls.app5.refresh_from_db()
+        cls.auth_app5 = Authorization.objects.get(
+            authorizer=cls.editor4.user, user=cls.editor2.user, partners=cls.partner2
         )
 
         # Set up an access code to distribute
-        self.access_code = AccessCode(code="ABCD-EFGH-IJKL", partner=self.partner3)
-        self.access_code.save()
+        cls.access_code = AccessCode(code="ABCD-EFGH-IJKL", partner=cls.partner3)
+        cls.access_code.save()
 
-        self.message_patcher = patch("TWLight.applications.views.messages.add_message")
-        self.message_patcher.start()
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
+        cls.message_patcher.start()
 
     def tearDown(self):
-        super(AuthorizationBaseTestCase, self).tearDown()
+        super().tearDown()
         self.partner1.delete()
         self.partner2.delete()
         self.partner3.delete()
