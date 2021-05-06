@@ -1,6 +1,6 @@
 ---
 
-version: '3.2'
+version: '3.4'
 
 volumes:
   mysql:
@@ -66,5 +66,8 @@ services:
   syslog:
     build:
       context: syslog
+      cache_from:
+        - quay.io/wikipedialibrary/alpine:3.11
+        - quay.io/wikipedialibrary/twlight_syslog:branch_production
     environment:
       - MATOMO_FQDN=analytics-wikipedialibrary.wmflabs.org
