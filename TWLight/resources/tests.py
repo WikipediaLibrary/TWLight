@@ -3,9 +3,10 @@ import csv
 from datetime import date, timedelta
 import json
 from jsonschema import validate
-from unittest.mock import patch
 import os
+from testdata import wrap_testdata
 import random
+from unittest.mock import patch
 
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser, User
@@ -101,7 +102,9 @@ def EditorCraftRoom(
 
 class LanguageModelTests(TestCase):
     @classmethod
-    def setUpClass(cls):
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         """
         The uniqueness constraint on Language.language can cause tests to fail
         due to IntegrityErrors as we try to create new languages unless we are
@@ -109,7 +112,6 @@ class LanguageModelTests(TestCase):
         truncation that runs between tests isn't sufficient, since it drops the
         primary key but doesn't delete the fields.)
         """
-        super(LanguageModelTests, cls).setUpClass()
         cls.lang_en, _ = Language.objects.get_or_create(language="en")
         cls.lang_fr, _ = Language.objects.get_or_create(language="fr")
 
@@ -136,8 +138,9 @@ class LanguageModelTests(TestCase):
 
 class PartnerModelTests(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super(PartnerModelTests, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         cls.lang_en, _ = Language.objects.get_or_create(language="en")
         cls.lang_fr, _ = Language.objects.get_or_create(language="fr")
 
@@ -157,7 +160,7 @@ class PartnerModelTests(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        super(PartnerModelTests, cls).tearDownClass()
+        super().tearDownClass()
         cls.message_patcher.stop()
 
     def test_get_languages(self):
@@ -609,8 +612,9 @@ class WaitlistBehaviorTests(TestCase):
     """
 
     @classmethod
-    def setUpClass(cls):
-        super(WaitlistBehaviorTests, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
         cls.message_patcher.start()
 
@@ -765,8 +769,9 @@ class WaitlistBehaviorTests(TestCase):
 
 class StreamModelTests(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super(StreamModelTests, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         cls.lang_en, _ = Language.objects.get_or_create(language="en")
         cls.lang_fr, _ = Language.objects.get_or_create(language="fr")
 
@@ -786,8 +791,9 @@ class StreamModelTests(TestCase):
 
 class PartnerViewTests(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super(PartnerViewTests, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
 
         cls.partner = PartnerFactory()
         editor = EditorFactory()
@@ -842,8 +848,9 @@ class PartnerViewTests(TestCase):
 
 class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
     @classmethod
-    def setUpClass(cls):
-        super(CSVUploadTest, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
 
         cls.staff_user = UserFactory(username="staff_user", is_staff=True)
         cls.staff_user.set_password("staff")
@@ -947,77 +954,80 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
 
 
 class AutoWaitlistDisableTest(TestCase):
-    def setUp(self):
-        super(AutoWaitlistDisableTest, self).setUp()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         editor = EditorFactory()
-        self.user = editor.user
+        cls.user = editor.user
 
-        self.partner = PartnerFactory(
+        cls.partner = PartnerFactory(
             status=Partner.WAITLIST,
             authorization_method=Partner.PROXY,
             accounts_available=10,
         )
-        self.partner1 = PartnerFactory(
+        cls.partner1 = PartnerFactory(
             status=Partner.WAITLIST,
             authorization_method=Partner.PROXY,
             accounts_available=2,
         )
 
-        self.application = ApplicationFactory(
+        cls.application = ApplicationFactory(
             editor=editor,
             status=Application.PENDING,
-            partner=self.partner,
+            partner=cls.partner,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
-        self.application1 = ApplicationFactory(
+        cls.application1 = ApplicationFactory(
             editor=editor,
             status=Application.PENDING,
-            partner=self.partner1,
+            partner=cls.partner1,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
 
-        self.coordinator = UserFactory(username="coordinator")
-        self.coordinator.set_password("coordinator")
+        cls.coordinator = UserFactory(username="coordinator")
+        cls.coordinator.set_password("coordinator")
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.coordinator)
-        self.coordinator.userprofile.terms_of_use = True
-        self.coordinator.userprofile.save()
+        coordinators.user_set.add(cls.coordinator)
+        cls.coordinator.userprofile.terms_of_use = True
+        cls.coordinator.userprofile.save()
 
         auth1 = Authorization.objects.create(
-            user=self.user, authorizer=self.coordinator, date_expires=date.today()
+            user=cls.user, authorizer=cls.coordinator, date_expires=date.today()
         )
-        auth1.partners.add(self.partner)
+        auth1.partners.add(cls.partner)
 
         auth2 = Authorization.objects.create(
             user=EditorFactory().user,
-            authorizer=self.coordinator,
+            authorizer=cls.coordinator,
             date_expires=date.today(),
         )
-        auth2.partners.add(self.partner)
+        auth2.partners.add(cls.partner)
 
         auth3 = Authorization.objects.create(
-            user=self.user,
-            authorizer=self.coordinator,
+            user=cls.user,
+            authorizer=cls.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
         )
-        auth3.partners.add(self.partner1)
+        auth3.partners.add(cls.partner1)
 
         auth4 = Authorization.objects.create(
             user=EditorFactory().user,
-            authorizer=self.coordinator,
+            authorizer=cls.coordinator,
             date_expires=date.today() + timedelta(days=random.randint(1, 5)),
         )
-        auth4.partners.add(self.partner1)
+        auth4.partners.add(cls.partner1)
 
-        self.message_patcher = patch("TWLight.applications.views.messages.add_message")
-        self.message_patcher.start()
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
+        cls.message_patcher.start()
 
-    def tearDown(self):
-        super(AutoWaitlistDisableTest, self).tearDown()
-        self.message_patcher.stop()
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.message_patcher.stop()
 
     def test_auto_disable_waitlist_command(self):
         self.assertEqual(self.partner.status, Partner.WAITLIST)
@@ -1033,17 +1043,20 @@ class AutoWaitlistDisableTest(TestCase):
 
 
 class BundlePartnerTest(TestCase):
-    def setUp(self):
-        self.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        self.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        self.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
-        self.bundle_partner_3 = PartnerFactory(
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.bundle_partner_3 = PartnerFactory(
             authorization_method=Partner.BUNDLE, status=Partner.NOT_AVAILABLE
         )
 
-        self.editor = EditorFactory()
-        self.editor.wp_bundle_eligible = True
-        self.editor.save()
+        cls.editor = EditorFactory()
+        cls.editor.wp_bundle_eligible = True
+        cls.editor.save()
 
     def test_switching_partner_to_bundle_updates_auths(self):
         """
@@ -1296,8 +1309,9 @@ class PartnerTagTest(TestCase):
 
 class PartnerSuggestionViewTests(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super(PartnerSuggestionViewTests, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
 
         cls.suggestion = SuggestionFactory()
         cls.suggestion_to_delete = SuggestionFactory()
@@ -1321,7 +1335,7 @@ class PartnerSuggestionViewTests(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        super(PartnerSuggestionViewTests, cls).tearDownClass()
+        super().tearDownClass()
         cls.message_patcher.stop()
 
     def test_partner_suggestion_view_get(self):
