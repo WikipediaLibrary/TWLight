@@ -3,6 +3,7 @@ import copy
 from datetime import datetime, date, timedelta
 import json
 import re
+from testdata import wrap_testdata
 from unittest.mock import patch, Mock
 from urllib.parse import urlparse
 
@@ -103,55 +104,58 @@ def remove_csrfmiddlewaretoken(rendered_html):
 
 
 class ViewsTestCase(TestCase):
-    def setUp(self):
-        super(ViewsTestCase, self).setUp()
-        self.client = Client()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.client = Client()
 
         # User 1: regular Editor
-        self.username1 = "alice"
-        self.user_editor = UserFactory(username=self.username1)
-        self.editor1 = EditorFactory(user=self.user_editor)
-        self.editor1.wp_bundle_eligible = True
-        self.editor1.save()
-        self.url1 = reverse("users:editor_detail", kwargs={"pk": self.editor1.pk})
+        cls.username1 = "alice"
+        cls.user_editor = UserFactory(username=cls.username1)
+        cls.editor1 = EditorFactory(user=cls.user_editor)
+        cls.editor1.wp_bundle_eligible = True
+        cls.editor1.save()
+        cls.url1 = reverse("users:editor_detail", kwargs={"pk": cls.editor1.pk})
 
         # User 2: regular Editor
-        self.username2 = "bob"
-        self.user_editor2 = UserFactory(username=self.username2)
-        self.editor2 = EditorFactory(user=self.user_editor2)
-        self.url2 = reverse("users:editor_detail", kwargs={"pk": self.editor2.pk})
+        cls.username2 = "bob"
+        cls.user_editor2 = UserFactory(username=cls.username2)
+        cls.editor2 = EditorFactory(user=cls.user_editor2)
+        cls.url2 = reverse("users:editor_detail", kwargs={"pk": cls.editor2.pk})
 
         # User 3: Site administrator
-        self.username3 = "carol"
-        self.user_superuser = UserFactory(username=self.username3)
-        self.user_superuser.is_superuser = True
-        self.user_superuser.save()
-        self.editor3 = EditorFactory(user=self.user_superuser)
+        cls.username3 = "carol"
+        cls.user_superuser = UserFactory(username=cls.username3)
+        cls.user_superuser.is_superuser = True
+        cls.user_superuser.save()
+        cls.editor3 = EditorFactory(user=cls.user_superuser)
 
         # User 4: Coordinator
-        self.username4 = "eve"
-        self.user_coordinator = UserFactory(username=self.username4)
-        self.editor4 = EditorFactory(user=self.user_coordinator)
-        get_coordinators().user_set.add(self.user_coordinator)
+        cls.username4 = "eve"
+        cls.user_coordinator = UserFactory(username=cls.username4)
+        cls.editor4 = EditorFactory(user=cls.user_coordinator)
+        get_coordinators().user_set.add(cls.user_coordinator)
 
         # We should mock out any call to messages call in the view, since
         # RequestFactory (unlike Client) doesn't run middleware. If you
         # actually want to test that messages are displayed, use Client(),
         # and stop/restart the patcher.
-        self.message_patcher = patch("TWLight.applications.views.messages.add_message")
-        self.message_patcher.start()
+        cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
+        cls.message_patcher.start()
 
-    def tearDown(self):
-        super(ViewsTestCase, self).tearDown()
-        self.user_editor.delete()
-        self.editor1.delete()
-        self.user_editor2.delete()
-        self.editor2.delete()
-        self.user_superuser.delete()
-        self.editor3.delete()
-        self.user_coordinator.delete()
-        self.editor4.delete()
-        self.message_patcher.stop()
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.user_editor.delete()
+        cls.editor1.delete()
+        cls.user_editor2.delete()
+        cls.editor2.delete()
+        cls.user_superuser.delete()
+        cls.editor3.delete()
+        cls.user_coordinator.delete()
+        cls.editor4.delete()
+        cls.message_patcher.stop()
 
     def test_editor_detail_url_resolves(self):
         """
@@ -958,8 +962,10 @@ class UserProfileModelTestCase(TestCase):
 
 
 class EditorModelTestCase(TestCase):
-    def setUp(self):
-        super(EditorModelTestCase, self).setUp()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         for editor in Editor.objects.all():
             # The test case succeeds when runs alone but fails when run
             # as part of the whole suite, because it grabs the wrong editor
@@ -976,20 +982,21 @@ class EditorModelTestCase(TestCase):
 
         # Wiki 'zh-classical' is 'zh-classical.wikipedia.org'. It's also the
         # longest wiki name in wiki_list.
-        self.editor = EditorFactory(
+        cls.editor = EditorFactory(
             wp_username="editor_model_test",
             wp_rights=json.dumps(["cat floofing", "the big red button"]),
             wp_groups=json.dumps(["sysops", "bureaucrats"]),
             wp_registered=None,
         )
-        self.editor.user.userprofile.terms_of_use = True
-        self.editor.user.userprofile.save()
-        self.editor.user.save()
-        self.editor.save()
+        cls.editor.user.userprofile.terms_of_use = True
+        cls.editor.user.userprofile.save()
+        cls.editor.user.save()
+        cls.editor.save()
 
-    def tearDown(self):
-        super(EditorModelTestCase, self).tearDown()
-        self.editor.delete()
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.editor.delete()
 
     def test_encoder_works_with_special_character_username(self):
         test = Editor().encode_wp_username("editor model&test")
@@ -1377,8 +1384,10 @@ class EditorModelTestCase(TestCase):
 
 
 class OAuthTestCase(TestCase):
-    def setUp(self):
-        super(OAuthTestCase, self).setUp()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         # Prevent failures due to side effects from database artifacts.
         for editor in Editor.objects.all():
             editor.delete()
@@ -1501,12 +1510,15 @@ class HelpersTestCase(TestCase):
 
 
 class AuthorizationsHelpersTestCase(TestCase):
-    def setUp(self):
-        self.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        self.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        self.bundle_partner_3 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        self.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
-        self.proxy_partner_2 = PartnerFactory(authorization_method=Partner.PROXY)
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_3 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.proxy_partner_2 = PartnerFactory(authorization_method=Partner.PROXY)
 
     def test_validate_partners_for_bundle_auth(self):
         """
@@ -1561,25 +1573,28 @@ class AuthorizationsHelpersTestCase(TestCase):
 
 
 class ManagementCommandsTestCase(TestCase):
-    def setUp(self):
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         """
         Creates a bundle-eligible editor.
         Returns
         -------
         None
         """
-        self.editor = EditorFactory()
-        self.editor.wp_bundle_eligible = True
-        self.editor.update_editcount(42, now() - timedelta(days=30))
-        self.editor.wp_account_old_enough = True
-        self.editor.user.userprofile.terms_of_use = True
-        self.editor.user.userprofile.save()
-        self.editor.user.save()
-        self.editor.save()
+        cls.editor = EditorFactory()
+        cls.editor.wp_bundle_eligible = True
+        cls.editor.update_editcount(42, now() - timedelta(days=30))
+        cls.editor.wp_account_old_enough = True
+        cls.editor.user.userprofile.terms_of_use = True
+        cls.editor.user.userprofile.save()
+        cls.editor.user.save()
+        cls.editor.save()
 
-        self.global_userinfo_editor = {
+        cls.global_userinfo_editor = {
             "home": "enwiki",
-            "id": self.editor.wp_sub,
+            "id": cls.editor.wp_sub,
             "registration": "2015-11-06T15:46:29Z",  # Well before first commit.
             "name": "user328",
             "editcount": 5000,
