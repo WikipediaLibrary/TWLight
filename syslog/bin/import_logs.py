@@ -2437,7 +2437,7 @@ class Parser:
                 is_robot=False,
                 is_error=False,
                 is_redirect=False,
-                args={},
+                args=format.get('args'),
             )
 
             if config.options.regex_group_to_page_cvars_map:
