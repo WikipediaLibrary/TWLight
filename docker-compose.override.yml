@@ -1,6 +1,6 @@
 ---
 
-version: '3.2'
+version: '3.4'
 
 # Local environment should mount plaintext files as secrets
 secrets:
@@ -22,8 +22,29 @@ secrets:
     file: ./secrets/TWLIGHT_EZPROXY_SECRET
 
 services:
+  twlight_base:
+    image: quay.io/wikipedialibrary/twlight_base:local
+    build:
+      context: .
+      target: twlight_base
+      cache_from:
+        - quay.io/wikipedialibrary/alpine:3.11
+        - quay.io/wikipedialibrary/twlight_base:branch_production
+  twlight_build:
+    image: quay.io/wikipedialibrary/twlight_build:local
+    build:
+      context: .
+      target: twlight_build
+      cache_from:
+        - quay.io/wikipedialibrary/twlight_base:local
+        - quay.io/wikipedialibrary/twlight_build:branch_production
   twlight:
     image: quay.io/wikipedialibrary/twlight:local
+    build:
+      context: .
+      cache_from:
+        - quay.io/wikipedialibrary/twlight_base:local
+        - quay.io/wikipedialibrary/twlight_build:local
     env_file:
       - ./conf/local.twlight.env
     # Local environment should mount things from the code directory
@@ -36,3 +57,5 @@ services:
       - type: bind
         source: ./conf/local.nginx.conf
         target: /etc/nginx/conf.d/default.conf
+  syslog:
+    image: quay.io/wikipedialibrary/twlight_syslog:local
