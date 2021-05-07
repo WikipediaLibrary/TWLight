@@ -4,6 +4,7 @@ from datetime import date
 
 # django-request analytics package, NOT requests URL library!
 from request.models import Request
+from testdata import wrap_testdata
 
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -23,8 +24,9 @@ from . import views
 
 class GraphsTestCase(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super(GraphsTestCase, cls).setUpClass()
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         cls.factory = RequestFactory()
 
         Request(path="/admin/", ip="127.0.0.1").save()

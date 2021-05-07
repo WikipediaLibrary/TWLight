@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
+from testdata import wrap_testdata
 from unittest.mock import patch
 
 from django_comments import get_form_target
@@ -36,22 +37,24 @@ from .tasks import (
 
 
 class ApplicationCommentTest(TestCase):
-    def setUp(self):
-        super(ApplicationCommentTest, self).setUp()
-        self.editor = EditorFactory(user__email="editor@example.com").user
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.editor = EditorFactory(user__email="editor@example.com").user
 
         coordinators = get_coordinators()
 
-        self.coordinator1 = EditorFactory(
+        cls.coordinator1 = EditorFactory(
             user__email="c1@example.com", user__username="c1"
         ).user
-        self.coordinator2 = EditorFactory(
+        cls.coordinator2 = EditorFactory(
             user__email="c2@example.com", user__username="c2"
         ).user
-        coordinators.user_set.add(self.coordinator1)
-        coordinators.user_set.add(self.coordinator2)
+        coordinators.user_set.add(cls.coordinator1)
+        coordinators.user_set.add(cls.coordinator2)
 
-        self.partner = PartnerFactory()
+        cls.partner = PartnerFactory()
 
     def _create_comment(self, app, user):
         CT = ContentType.objects.get_for_model
@@ -225,11 +228,13 @@ class ApplicationCommentTest(TestCase):
 
 
 class ApplicationStatusTest(TestCase):
-    def setUp(self):
-        super(ApplicationStatusTest, self).setUp()
-        self.coordinator = EditorFactory().user
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.coordinator = EditorFactory().user
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.coordinator)
+        coordinators.user_set.add(cls.coordinator)
 
     @patch("TWLight.emails.tasks.send_approval_notification_email")
     def test_approval_calls_email_function(self, mock_email):
@@ -349,9 +354,11 @@ class ApplicationStatusTest(TestCase):
 
 
 class ContactUsTest(TestCase):
-    def setUp(self):
-        super(ContactUsTest, self).setUp()
-        self.editor = EditorFactory(user__email="editor@example.com").user
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.editor = EditorFactory(user__email="editor@example.com").user
 
     @patch("TWLight.emails.tasks.contact_us_emails")
     def test_contact_us_emails(self, mock_email):
@@ -409,23 +416,25 @@ class ContactUsTest(TestCase):
 
 
 class UserRenewalNoticeTest(TestCase):
-    def setUp(self):
-        super(UserRenewalNoticeTest, self).setUp()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         editor = EditorFactory(user__email="editor@example.com")
-        self.user = editor.user
+        cls.user = editor.user
 
-        self.coordinator = EditorFactory().user
+        cls.coordinator = EditorFactory().user
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.coordinator)
+        coordinators.user_set.add(cls.coordinator)
 
-        self.partner = PartnerFactory()
+        cls.partner = PartnerFactory()
 
-        self.authorization = Authorization()
-        self.authorization.user = self.user
-        self.authorization.authorizer = self.coordinator
-        self.authorization.date_expires = datetime.today() + timedelta(weeks=1)
-        self.authorization.save()
-        self.authorization.partners.add(self.partner)
+        cls.authorization = Authorization()
+        cls.authorization.user = cls.user
+        cls.authorization.authorizer = cls.coordinator
+        cls.authorization.date_expires = datetime.today() + timedelta(weeks=1)
+        cls.authorization.save()
+        cls.authorization.partners.add(cls.partner)
 
     def test_single_user_renewal_notice(self):
         """
@@ -555,19 +564,21 @@ class UserRenewalNoticeTest(TestCase):
 
 
 class CoordinatorReminderEmailTest(TestCase):
-    def setUp(self):
-        super(CoordinatorReminderEmailTest, self).setUp()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         editor = EditorFactory()
-        self.user = editor.user
+        cls.user = editor.user
         editor2 = EditorFactory()
-        self.user2 = editor2.user
+        cls.user2 = editor2.user
 
-        self.coordinator = EditorFactory(user__email="editor@example.com").user
+        cls.coordinator = EditorFactory(user__email="editor@example.com").user
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.coordinator)
+        coordinators.user_set.add(cls.coordinator)
 
-        self.partner = PartnerFactory(coordinator=self.coordinator)
-        self.partner2 = PartnerFactory(coordinator=self.coordinator)
+        cls.partner = PartnerFactory(coordinator=cls.coordinator)
+        cls.partner2 = PartnerFactory(coordinator=cls.coordinator)
 
     def test_send_coordinator_reminder_email(self):
         ApplicationFactory(
@@ -623,29 +634,31 @@ class CoordinatorReminderEmailTest(TestCase):
 
 
 class ProjectPage2021LaunchTest(TestCase):
-    def setUp(self):
-        super(ProjectPage2021LaunchTest, self).setUp()
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
         editor = EditorFactory(user__email="editor@example.com")
-        self.user = editor.user
+        cls.user = editor.user
 
         # The user logged in:
         request = RequestFactory().get("/login")
         signals.user_logged_in.send(
-            sender=self.user.__class__, request=request, user=self.user
+            sender=cls.user.__class__, request=request, user=cls.user
         )
 
-        self.coordinator = EditorFactory().user
+        cls.coordinator = EditorFactory().user
         coordinators = get_coordinators()
-        coordinators.user_set.add(self.coordinator)
+        coordinators.user_set.add(cls.coordinator)
 
-        self.partner = PartnerFactory()
+        cls.partner = PartnerFactory()
 
-        self.authorization = Authorization()
-        self.authorization.user = self.user
-        self.authorization.authorizer = self.coordinator
-        self.authorization.date_expires = datetime.today() + timedelta(weeks=1)
-        self.authorization.save()
-        self.authorization.partners.add(self.partner)
+        cls.authorization = Authorization()
+        cls.authorization.user = cls.user
+        cls.authorization.authorizer = cls.coordinator
+        cls.authorization.date_expires = datetime.today() + timedelta(weeks=1)
+        cls.authorization.save()
+        cls.authorization.partners.add(cls.partner)
 
     def test_project_page_2021_launch_email_1(self):
         """
