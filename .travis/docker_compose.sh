@@ -5,6 +5,8 @@ export COMPOSE_DOCKER_CLI_BUILD=1 # use docker cli for building
 # Pull images from docker hub, but then retag for $cr_server for reuse and mirroring.
 docker pull "docker.io/library/alpine:3.11" || true
 docker tag "docker.io/library/alpine:3.11" "quay.io/wikipedialibrary/alpine:3.11"
+docker pull "docker.io/library/debian:buster-slim" || true
+docker tag "docker.io/library/debian:buster-slim" "quay.io/wikipedialibrary/debian:buster-slim"
 docker pull "docker.io/library/mariadb:10" || true
 docker tag "docker.io/library/mariadb:10" "quay.io/wikipedialibrary/mariadb:10"
 docker pull "docker.io/library/nginx:latest" || true

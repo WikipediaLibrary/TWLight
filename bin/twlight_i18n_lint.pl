@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 # Checks for localization issues.
 # https://phabricator.wikimedia.org/T255167

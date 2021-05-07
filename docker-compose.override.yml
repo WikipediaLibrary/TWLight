@@ -28,7 +28,7 @@ services:
       context: .
       target: twlight_base
       cache_from:
-        - quay.io/wikipedialibrary/alpine:3.11
+        - quay.io/wikipedialibrary/debian:buster-slim
         - quay.io/wikipedialibrary/twlight_base:branch_production
   twlight_build:
     image: quay.io/wikipedialibrary/twlight_build:local
