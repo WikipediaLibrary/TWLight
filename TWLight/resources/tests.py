@@ -34,7 +34,6 @@ from .models import (
     RESOURCE_LANGUAGES,
     Partner,
     AccessCode,
-    TextFieldTag,
     Suggestion,
 )
 from .views import (
@@ -590,7 +589,7 @@ class PartnerModelTests(TestCase):
         with self.assertRaises(ValidationError):
             partner5.save()
 
-    def test_create_tags_error2(self):
+    def test_create_tags_error3(self):
         """
         Test to check that an empty JSON is not saved in the new_tags
         since saving a JSON null is not recommended
