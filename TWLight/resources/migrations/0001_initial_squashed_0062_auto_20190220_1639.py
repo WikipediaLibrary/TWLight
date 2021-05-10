@@ -8,7 +8,6 @@ from django.db import migrations, models
 import django.db.models.manager
 from django.utils.timezone import utc
 import django_countries.fields
-import taggit.managers
 
 
 # Functions from the following migrations need manual copying.
@@ -64,7 +63,6 @@ def delete_access_grant_terms(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("taggit", "0002_auto_20150616_2121"),
         ("contenttypes", "0002_remove_content_type_name"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
@@ -636,11 +634,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="partner",
             name="tags",
-            field=taggit.managers.TaggableManager(
+            field=models.TextField(
                 blank=True,
+                null=True,
+                default=None,
                 help_text="A comma-separated list of tags.",
-                through="taggit.TaggedItem",
-                to="taggit.Tag",
                 verbose_name="Tags",
             ),
         ),
@@ -1093,11 +1091,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="partner",
             name="tags",
-            field=taggit.managers.TaggableManager(
+            field=models.TextField(
                 blank=True,
+                null=True,
+                default=None,
                 help_text="A comma-separated list of tags.",
-                through="resources.TaggedTextField",
-                to="resources.TextFieldTag",
                 verbose_name="Tags",
             ),
         ),
@@ -1113,11 +1111,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="partner",
             name="old_tags",
-            field=taggit.managers.TaggableManager(
+            field=models.TextField(
                 blank=True,
+                null=True,
+                default=None,
                 help_text="A comma-separated list of tags.",
-                through="taggit.TaggedItem",
-                to="taggit.Tag",
                 verbose_name="Old Tags",
             ),
         ),
