@@ -83,6 +83,9 @@ class EZProxyTicket(object):
                 "EZProxy Configuration Error: shared secret cannot be empty."
             )
 
+        # All allowed editors get the "Default" group.
+        groups.append("Default")
+
         packet = "$u" + repr(timegm(gmtime()))
         packet += "$g" + "+".join(groups)
         packet += "$e"
