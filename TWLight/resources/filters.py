@@ -5,7 +5,9 @@ from .helpers import get_tag_choices
 
 
 class PartnerFilter(django_filters.FilterSet):
-    tags = django_filters.ChoiceFilter(choices=get_tag_choices(), method="tags_filter")
+    tags = django_filters.ChoiceFilter(
+        label="Tags", choices=get_tag_choices(), method="tags_filter"
+    )
     languages = django_filters.ModelChoiceFilter(queryset=Language.objects.all())
 
     def __init__(self, *args, **kwargs):
