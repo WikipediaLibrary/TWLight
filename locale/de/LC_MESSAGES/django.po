@@ -26,7 +26,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-05-05 21:59+0000\n"
-"PO-Revision-Date: 2021-05-07 09:13:05+0000\n"
+"PO-Revision-Date: 2021-05-10 12:24:24+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1696,9 +1696,9 @@ msgstr "Zurück nach oben"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(partner.company_name)s signup page"
-msgstr "Link zur Registrierungsseite von %(partner)s"
+msgstr "Link zur Registrierungsseite von %(partner.company_name)s"
 
 #. Translators: This is the text shown to coordinators when a partner is marked not available.
 #: TWLight/resources/templates/resources/partner_tile.html:43
