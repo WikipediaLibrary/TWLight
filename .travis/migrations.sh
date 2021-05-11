@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # Print Travis environment variables and migration count.
-echo "TRAVIS_PULL_REQUEST: ${TRAVIS_PULL_REQUEST}"
+echo "TRAVIS_EVENT_TYPE: ${TRAVIS_EVENT_TYPE}"
 echo "TRAVIS_TAG: ${TRAVIS_TAG}"
 echo "TRAVIS_BRANCH: ${TRAVIS_BRANCH}"
 echo "TWLIGHT_MISSING_MIGRATIONS: ${TWLIGHT_MISSING_MIGRATIONS}"
 
 # Only act if this is build was fired from a push to branch and there are missing migrations.
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -gt 0 ]
+if [ "${TRAVIS_EVENT_TYPE}" = "push" ] && [ -z "${TRAVIS_TAG}" ] && [ -n "${gh_bot_username+isset}" ] && [ -n "${gh_bot_token+isset}" ] && [ -n "${TWLIGHT_MISSING_MIGRATIONS+isset}" ] && [ "${TWLIGHT_MISSING_MIGRATIONS}" -gt 0 ]
 then
     # Configure git.
     git_config() {
