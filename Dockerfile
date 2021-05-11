@@ -24,7 +24,6 @@ RUN apk add \
     zlib-dev ;\
     virtualenv /venv ;\
     source /venv/bin/activate ; \
-    pip3 install --upgrade --force pip setuptools ; \
     pip3 install -r /requirements/wmf.txt
 
 FROM twlight_base
