@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-05-10 18:17+0000\n"
+"POT-Creation-Date: 2021-05-11 14:17+0000\n"
 "PO-Revision-Date: 2021-05-07 09:13:06+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1432,7 +1432,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:516
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:508
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Anda harus menjadi editor Wikipedia untuk melakukan tindakan ini."
 
@@ -1874,30 +1874,25 @@ msgstr "Akun aktif (total)"
 msgid "Browse Partners"
 msgstr ""
 
-#. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to Meta-Wiki for more information on a tag.
-#: TWLight/resources/templates/resources/partner_list.html:25
-msgid "See subject guide on Meta-Wiki"
-msgstr ""
-
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
-#: TWLight/resources/templates/resources/partner_list.html:30
+#: TWLight/resources/templates/resources/partner_list.html:24
 #: TWLight/templates/base.html:240
 msgid "Suggest a partner"
 msgstr ""
 
 #. Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/)
-#: TWLight/resources/templates/resources/partner_list.html:36
+#: TWLight/resources/templates/resources/partner_list.html:30
 msgid "Apply to multiple partners"
 msgstr ""
 
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
-#: TWLight/resources/templates/resources/partner_list.html:48
+#: TWLight/resources/templates/resources/partner_list.html:42
 msgid "No partners meet the specified criteria."
 msgstr ""
 
 #. Translators: This is a button to go back on the top of page.
-#: TWLight/resources/templates/resources/partner_list.html:55
+#: TWLight/resources/templates/resources/partner_list.html:49
 msgid "Back to top"
 msgstr "Kembali ke atas"
 
@@ -2005,34 +2000,34 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:229
+#: TWLight/resources/views.py:221
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:309
+#: TWLight/resources/views.py:301
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:399
+#: TWLight/resources/views.py:391
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:412
+#: TWLight/resources/views.py:404
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:508
+#: TWLight/resources/views.py:500
 msgid "Your suggestion has been added."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:533
+#: TWLight/resources/views.py:525
 msgid "Suggestion has been deleted."
 msgstr ""
 

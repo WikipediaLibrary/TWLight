@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-05-10 18:17+0000\n"
+"POT-Creation-Date: 2021-05-11 14:17+0000\n"
 "PO-Revision-Date: 2021-05-10 12:24:25+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1499,7 +1499,7 @@ msgstr "پیغام شما فرستاده شد. به زودی به شما پاس�
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:516
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:508
 msgid "You must be a Wikipedia editor to do that."
 msgstr "برای اینکار باید یکی از ویرایشگران ویکی‌پدیا باشید."
 
@@ -1978,30 +1978,25 @@ msgstr "حساب‌های فعال (مجموعه‌ها)"
 msgid "Browse Partners"
 msgstr "مرور پایگاه‌ها"
 
-#. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to Meta-Wiki for more information on a tag.
-#: TWLight/resources/templates/resources/partner_list.html:25
-msgid "See subject guide on Meta-Wiki"
-msgstr "به راهنمای موضوع در فراویکی مراجعه کنید"
-
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
-#: TWLight/resources/templates/resources/partner_list.html:30
+#: TWLight/resources/templates/resources/partner_list.html:24
 #: TWLight/templates/base.html:240
 msgid "Suggest a partner"
 msgstr "پیشنهاد منبع جدید"
 
 #. Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/)
-#: TWLight/resources/templates/resources/partner_list.html:36
+#: TWLight/resources/templates/resources/partner_list.html:30
 msgid "Apply to multiple partners"
 msgstr "درخواست دسترسی به چند منبع"
 
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
-#: TWLight/resources/templates/resources/partner_list.html:48
+#: TWLight/resources/templates/resources/partner_list.html:42
 msgid "No partners meet the specified criteria."
 msgstr "هیچ پایگاهی با شرایط مشخص‌شده وجود ندارد."
 
 #. Translators: This is a button to go back on the top of page.
-#: TWLight/resources/templates/resources/partner_list.html:55
+#: TWLight/resources/templates/resources/partner_list.html:49
 msgid "Back to top"
 msgstr "بازگشت به بالا"
 
@@ -2108,7 +2103,7 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "آیا مطمئنید که می‌خواهید <b>%(object)s</b> را حذف کنید؟"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:229
+#: TWLight/resources/views.py:221
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
@@ -2117,27 +2112,27 @@ msgstr ""
 "این پیام را فراموش نکنید."
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:309
+#: TWLight/resources/views.py:301
 msgid "This partner is currently not open for applications"
 msgstr "این پایگاه در حال حاضر آمادهٔ دریافت درخواست‌ها نیست."
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:399
+#: TWLight/resources/views.py:391
 msgid "This partner is now waitlisted"
 msgstr "پایگاه مورد نظر در لیست انتظار قرار گرفت."
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:412
+#: TWLight/resources/views.py:404
 msgid "This partner is now available for applications"
 msgstr "این پایگاه آمادهٔ دریافت درخواست‌ها است."
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:508
+#: TWLight/resources/views.py:500
 msgid "Your suggestion has been added."
 msgstr "پیشنهاد شما اضافه شد."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:533
+#: TWLight/resources/views.py:525
 msgid "Suggestion has been deleted."
 msgstr "پیشنهاد حذف شد."
 
@@ -4141,3 +4136,6 @@ msgstr "۵"
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr "۶"
+
+#~ msgid "See subject guide on Meta-Wiki"
+#~ msgstr "به راهنمای موضوع در فراویکی مراجعه کنید"

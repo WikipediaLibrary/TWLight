@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-05-10 18:17+0000\n"
+"POT-Creation-Date: 2021-05-11 14:17+0000\n"
 "PO-Revision-Date: 2021-05-07 09:13:05+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -1591,7 +1591,7 @@ msgstr "Votre message a été envoyé. Nous reviendrons bientôt vers vous !"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:516
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:508
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Vous devez être un contributeur Wikipédia pour faire cela."
 
@@ -2075,30 +2075,25 @@ msgstr "Comptes actifs (collections)"
 msgid "Browse Partners"
 msgstr "Parcourir tous les partenaires"
 
-#. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to Meta-Wiki for more information on a tag.
-#: TWLight/resources/templates/resources/partner_list.html:25
-msgid "See subject guide on Meta-Wiki"
-msgstr "Voir le guide thématique sur Meta-Wiki"
-
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
-#: TWLight/resources/templates/resources/partner_list.html:30
+#: TWLight/resources/templates/resources/partner_list.html:24
 #: TWLight/templates/base.html:240
 msgid "Suggest a partner"
 msgstr "Suggérer un partenaire"
 
 #. Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/)
-#: TWLight/resources/templates/resources/partner_list.html:36
+#: TWLight/resources/templates/resources/partner_list.html:30
 msgid "Apply to multiple partners"
 msgstr "Faire une candidature pour plusieurs partenaires à la fois"
 
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
-#: TWLight/resources/templates/resources/partner_list.html:48
+#: TWLight/resources/templates/resources/partner_list.html:42
 msgid "No partners meet the specified criteria."
 msgstr "Aucun partenaire ne correspond aux critères spécifiés."
 
 #. Translators: This is a button to go back on the top of page.
-#: TWLight/resources/templates/resources/partner_list.html:55
+#: TWLight/resources/templates/resources/partner_list.html:49
 msgid "Back to top"
 msgstr "Retour au début"
 
@@ -2205,7 +2200,7 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "Êtes-vous sûr de vouloir supprimer <b>%(object)s</b> ?"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:229
+#: TWLight/resources/views.py:221
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
@@ -2214,28 +2209,28 @@ msgstr ""
 "Veuillez nous contacter sans omettre ce message."
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:309
+#: TWLight/resources/views.py:301
 msgid "This partner is currently not open for applications"
 msgstr ""
 "Ce partenaire n’est pour le moment pas disponible pour les candidatures"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:399
+#: TWLight/resources/views.py:391
 msgid "This partner is now waitlisted"
 msgstr "Ce partenaire est maintenant en liste d’attente"
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:412
+#: TWLight/resources/views.py:404
 msgid "This partner is now available for applications"
 msgstr "Ce partenaire est maintenant disponible pour les demandes"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:508
+#: TWLight/resources/views.py:500
 msgid "Your suggestion has been added."
 msgstr "Votre suggestion a été ajoutée."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:533
+#: TWLight/resources/views.py:525
 msgid "Suggestion has been deleted."
 msgstr "Suggestion supprimée."
 
@@ -4346,3 +4341,6 @@ msgstr "5"
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr "6"
+
+#~ msgid "See subject guide on Meta-Wiki"
+#~ msgstr "Voir le guide thématique sur Meta-Wiki"
