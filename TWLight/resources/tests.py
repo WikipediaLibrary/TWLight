@@ -34,7 +34,6 @@ from .models import (
     RESOURCE_LANGUAGES,
     Partner,
     AccessCode,
-    TextFieldTag,
     Suggestion,
 )
 from .views import (
@@ -590,7 +589,7 @@ class PartnerModelTests(TestCase):
         with self.assertRaises(ValidationError):
             partner5.save()
 
-    def test_create_tags_error2(self):
+    def test_create_tags_error3(self):
         """
         Test to check that an empty JSON is not saved in the new_tags
         since saving a JSON null is not recommended
@@ -1266,45 +1265,6 @@ class BundlePartnerTest(TestCase):
 
         # Ultimately we should have one Bundle authorization
         self.assertEqual(bundle_authorization.count(), 1)
-
-
-class PartnerTagTest(TestCase):
-    def test_tag_filtering_with_meta_url(self):
-        """
-        We are testing for a couple for things here.
-        1, Filtering for a particular tag returns the
-        partner(s) with that tag, and
-        2, if there's a meta_url for that tag, we make sure
-        it's in the response returned.
-        :return:
-        """
-        self.skipTest("We are probably removing the meta_url functionality")
-        partner = PartnerFactory()
-        partner.tags.add("art")
-        partner1 = PartnerFactory()
-        partner1.tags.add("science")
-        tag1 = Partner.objects.filter(id=partner.id).values_list("tags", flat=True)
-        tag2 = Partner.objects.filter(id=partner1.id).values_list("tags", flat=True)
-
-        tag1 = TextFieldTag.objects.get(id=tag1[0])
-        tag1.meta_url = "https://www.example.com"
-        tag1.save()
-        tag2 = TextFieldTag.objects.get(id=tag2[0])
-        tag2.meta_url = "https://www.example.com/example"
-        tag2.save()
-        filter_url = reverse("partners:filter")
-        filter_url = filter_url + "?tags={}".format(tag1.pk)
-
-        editor = EditorFactory()
-
-        request = RequestFactory().get(filter_url)
-        request.user = editor.user
-        response = PartnersFilterView.as_view()(request)
-
-        self.assertNotContains(response, partner1.get_absolute_url())
-        self.assertContains(response, partner.get_absolute_url())
-        self.assertContains(response, tag1.meta_url)
-        self.assertNotContains(response, tag2.meta_url)
 
 
 class PartnerSuggestionViewTests(TestCase):

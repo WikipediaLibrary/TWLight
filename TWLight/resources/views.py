@@ -20,7 +20,7 @@ from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, Edit
 from .filters import PartnerFilter
 from .forms import SuggestionForm
 from .helpers import get_partner_description, get_tag_names
-from .models import Partner, Stream, Suggestion, TextFieldTag
+from .models import Partner, Stream, Suggestion
 
 import logging
 
@@ -102,14 +102,6 @@ class PartnersFilterView(ListView):
             partners_list.append(partner_dict)
 
         context["partners_list"] = partners_list
-
-        try:
-            filter_data = partner_filtered_list.form.data
-            tag_id = filter_data.get("tags")
-            if tag_id:
-                context["tag"] = TextFieldTag.objects.get(id=tag_id)
-        except (KeyError, ValueError, TextFieldTag.DoesNotExist):
-            pass
 
         return context
 

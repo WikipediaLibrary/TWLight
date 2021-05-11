@@ -26,13 +26,13 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         num_partners = options["num"][0]
         tag_list = [
-            "science",
-            "humanities",
-            "social science",
-            "history",
-            "law",
-            "video",
-            "multidisciplinary",
+            "science_tag",
+            "humanities_tag",
+            "social-sciences_tag",
+            "history_tag",
+            "law_tag",
+            "video_tag",
+            "multidisciplinary_tag",
         ]
 
         coordinators = User.objects.filter(groups__name="coordinators")
@@ -64,13 +64,17 @@ class Command(BaseCommand):
             for lang in random_languages:
                 partner.languages.add(lang)
 
+            new_tags = {}
+            partner_tags = []
+            for tag in random.sample(tag_list, random.randint(1, 4)):
+                partner_tags.append(tag)
+
+            new_tags["tags"] = partner_tags
+            partner.new_tags = new_tags
+
             partner.save()
 
         all_partners = Partner.even_not_available.all()
-        for partner in all_partners:
-            for tag in random.sample(tag_list, random.randint(1, 4)):
-                partner.tags.add(tag)
-
         # Set 5 partners to need a registration URL. We do this separately
         # because it requires both the account_email and registration_url
         # fields to be set concurrently.

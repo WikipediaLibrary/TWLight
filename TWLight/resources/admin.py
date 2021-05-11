@@ -10,7 +10,6 @@ from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 from TWLight.users.groups import get_coordinators
 
 from .models import (
-    TextFieldTag,
     Partner,
     PartnerLogo,
     Stream,
@@ -28,25 +27,6 @@ class LanguageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Language, LanguageAdmin)
-
-
-class TextFieldTagAdmin(TabbedExternalJqueryTranslationAdmin):
-    model = TextFieldTag
-    search_fields = ("name",)
-    list_display = ("name", "slug")
-
-    def has_add_permission(self, request):
-        """
-        Adding tags directly through the Resources > Tags admin screen exposes
-        the fact that tag model has name unique == False, allowing admins to
-        create tags with duplicate names, but different slugs. Adding them from
-        the resources > Partner/Stream screen does not have this problem. Thus,
-        this hack.
-        """
-        return False
-
-
-admin.site.register(TextFieldTag, TextFieldTagAdmin)
 
 
 class ContactInline(admin.TabularInline):

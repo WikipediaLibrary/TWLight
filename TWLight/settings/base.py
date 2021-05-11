@@ -121,7 +121,6 @@ THIRD_PARTY_APPS = [
     "django_cron",
     "django_filters",
     "modeltranslation",
-    "taggit",
     # DO NOT CONFUSE THIS with requests, the Python URL library! This is
     # django-request, the user analytics package.
     "request",
@@ -370,10 +369,6 @@ TWLIGHT_API_PROVIDER_ENDPOINT = os.environ.get("TWLIGHT_API_PROVIDER_ENDPOINT", 
 # COMMENTS CONFIGURATION
 # ------------------------------------------------------------------------------
 COMMENTS_APP = "TWLight.comments"
-
-# TAGGIT CONFIGURATION
-# ------------------------------------------------------------------------------
-TAGGIT_CASE_INSENSITIVE = True
 
 # REVERSION CONFIGURATION
 # ------------------------------------------------------------------------------

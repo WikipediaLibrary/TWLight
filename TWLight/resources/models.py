@@ -3,8 +3,6 @@ import copy
 
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError as JSONSchemaValidationError
-from taggit.managers import TaggableManager
-from taggit.models import TagBase, GenericTaggedItemBase
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -38,41 +36,6 @@ def validate_language_code(code):
             "https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py",
             params={"code": code},
         )
-
-
-class TextFieldTag(TagBase):
-    """
-    We're defining a custom tag here the following reasons:
-    * Without doing so, the migrations that define our tags end up in the taggit
-      apps migration folder instead of ours, making version control difficult.
-    * So we can use a non-unique Text field for the tag name. This is done to
-      prevent indexing, because translations can cause the number of indexes to
-      exceed the limits of any storage engine available to MySQL/MariaDB.
-      Avoiding indexes has consequences.
-    Docs here: https://django-taggit.readthedocs.io/en/latest/custom_tagging.html#using-a-custom-tag-or-through-model
-    """
-
-    name = models.TextField(verbose_name="Name", unique=False, max_length=100)
-    slug = models.SlugField(verbose_name="Slug", unique=True, max_length=100)
-    meta_url = models.URLField(
-        blank=True,
-        null=True,
-        help_text="Link to Meta-Wiki "
-        "(eg.: https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Collections/Agroforestry) "
-        "for additional information for this tag.",
-    )
-
-    class Meta:
-        verbose_name = "Tag"
-        verbose_name_plural = "Tags"
-
-
-class TaggedTextField(GenericTaggedItemBase):
-    tag = models.ForeignKey(
-        TextFieldTag,
-        related_name="%(app_label)s_%(class)s_items",
-        on_delete=models.CASCADE,
-    )
 
 
 class Language(models.Model):
@@ -304,8 +267,6 @@ class Partner(models.Model):
         help_text="The standard length of an access grant from this Partner. "
         "Entered as &ltdays hours:minutes:seconds&gt.",
     )
-
-    tags = TaggableManager(through=TaggedTextField, blank=True)
 
     # New tag model that uses JSONField instead of Taggit to make tags translatable
     new_tags = models.JSONField(null=True, default=None, blank=True)
