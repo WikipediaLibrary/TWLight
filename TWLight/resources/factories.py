@@ -32,9 +32,7 @@ class SuggestionFactory(factory.django.DjangoModelFactory):
         model = Suggestion
         strategy = factory.CREATE_STRATEGY
 
-    suggested_company_name = factory.Faker(
-        "company", locale=random.choice(settings.FAKER_LOCALES)
-    )
+    suggested_company_name = factory.Faker("pystr", max_chars=40)
     company_url = factory.Faker("url", locale=random.choice(settings.FAKER_LOCALES))
 
 
