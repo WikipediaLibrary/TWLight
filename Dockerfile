@@ -1,11 +1,10 @@
-FROM quay.io/wikipedialibrary/alpine:3.11 as twlight_base
+FROM quay.io/wikipedialibrary/python:3.7-slim-buster as twlight_base
 # Base dependencies.
-RUN apk add --update \
-    libjpeg-turbo \
-    libxslt-dev \
-    mariadb-dev \
-    perl \
-    python3;\
+RUN apt update ; \
+    apt install -y --no-install-recommends \
+    libmariadbclient-dev ; \
+    ln -s /usr/bin/mariadb_config /usr/bin/mysql_config ; \
+    rm -rf /var/lib/apt/lists/*; \
     pip3 install virtualenv
 
 FROM twlight_base as twlight_build
@@ -13,22 +12,19 @@ FROM twlight_base as twlight_build
 COPY requirements /requirements
 
 # Build dependencies.
-RUN apk add \
-    build-base \
+RUN apt update ; \
+    apt install -y --no-install-recommends \
     gcc \
-    libffi-dev \
-    libjpeg-turbo-dev \
-    libxml2-dev \
-    musl-dev \
-    python3-dev \
-    zlib-dev ;\
-    virtualenv /venv ;\
-    source /venv/bin/activate ; \
+    python3-dev ; \
+    rm -rf /var/lib/apt/lists/*; \
+    virtualenv /venv ; \
+    . /venv/bin/activate ; \
     pip3 install -r /requirements/wmf.txt
 
 FROM twlight_base
 COPY --from=twlight_build /venv /venv
-ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv:/usr/lib/python3.8"
+COPY --from=quay.io/wikipedialibrary/debian_perl:latest /opt/perl /opt/perl
+ENV PATH="/opt/perl/bin:${PATH}" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv"
 
 # Runtime dependencies.
 # Refactoring shell code could remove bash dependency
@@ -39,17 +35,19 @@ ENV PATH="${PATH}:/opt/pandoc-2.7.1/bin" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PY
 # CSS Janus is the thing actually used to generate the rtl css.
 # Pandoc is used for rendering wikicode resource descriptions
 # into html for display. We do need this on the live image.
-RUN apk add --update \
+RUN apt update ; \
+    apt install -y --no-install-recommends \
     bash \
     gettext \
     git \
     mariadb-client \
     nodejs \
     npm \
-    tar ;\
-    npm install cssjanus ;\
-    wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-linux.tar.gz -P /tmp ;\
-    tar -xf /tmp/pandoc-2.7.1-linux.tar.gz --directory /opt
+    pandoc \
+    tar \
+    wget ; \
+    rm -rf /var/lib/apt/lists/*; \
+    /usr/bin/npm install cssjanus
 
 # Utility scripts that run in the virtual environment.
 COPY bin /app/bin/

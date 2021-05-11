@@ -12,8 +12,10 @@ language: minimal
 services:
   - docker
 
-# Build and run containers.
 install:
+  # Conditionally mirror images from docker.io to ${cr_server}.
+  - .travis/./docker_mirror.sh
+  # Build and run containers.
   - .travis/./docker_compose.sh
 
 # Initalize the app and test it.

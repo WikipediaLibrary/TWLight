@@ -22,24 +22,47 @@ secrets:
     file: ./secrets/TWLIGHT_EZPROXY_SECRET
 
 services:
+  twlight_base:
+    image: quay.io/wikipedialibrary/twlight_base:local
+    build:
+      context: .
+      target: twlight_base
+      cache_from:
+        - quay.io/wikipedialibrary/twlight_base:branch_production
+  twlight_build:
+    image: quay.io/wikipedialibrary/twlight_build:local
+    build:
+      context: .
+      target: twlight_build
+      cache_from:
+        - quay.io/wikipedialibrary/twlight_base:local
+        - quay.io/wikipedialibrary/twlight_base:branch_production
+        - quay.io/wikipedialibrary/twlight_build:branch_production
   twlight:
     image: quay.io/wikipedialibrary/twlight:local
     build:
       context: .
       cache_from:
+        - quay.io/wikipedialibrary/twlight_base:local
         - quay.io/wikipedialibrary/twlight_base:branch_production
+        - quay.io/wikipedialibrary/twlight_build:local
         - quay.io/wikipedialibrary/twlight_build:branch_production
     env_file:
-      - ./conf/local.twlight.env
+      - ./conf/travis.twlight.env
+    environment:
+      - TRAVIS_JOB_ID
+      - TRAVIS_BRANCH
+      - COVERALLS_REPO_TOKEN
     # Local environment should mount things from the code directory
     volumes:
       - type: bind
         source: .
         target: /app
-  web:
-    volumes:
-      - type: bind
-        source: ./conf/local.nginx.conf
-        target: /etc/nginx/conf.d/default.conf
   syslog:
-    image: quay.io/wikipedialibrary/twlight_syslog:local
+    build:
+      context: syslog
+      cache_from:
+        - quay.io/wikipedialibrary/twlight_syslog:branch_production
+    environment:
+      - MATOMO_FQDN=analytics-wikipedialibrary.wmflabs.org
+
