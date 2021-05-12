@@ -24,11 +24,6 @@ secrets:
 services:
   twlight:
     image: quay.io/wikipedialibrary/twlight:local
-    build:
-      context: .
-      cache_from:
-        - quay.io/wikipedialibrary/twlight_base:branch_production
-        - quay.io/wikipedialibrary/twlight_build:branch_production
     env_file:
       - ./conf/local.twlight.env
     # Local environment should mount things from the code directory

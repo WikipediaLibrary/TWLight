@@ -2,25 +2,6 @@
 
 version: '3.4'
 
-# Local environment should mount plaintext files as secrets
-secrets:
-  DJANGO_DB_NAME:
-    file: ./secrets/DJANGO_DB_NAME
-  DJANGO_DB_USER:
-    file: ./secrets/DJANGO_DB_USER
-  DJANGO_DB_PASSWORD:
-    file: ./secrets/DJANGO_DB_PASSWORD
-  MYSQL_ROOT_PASSWORD:
-    file: ./secrets/MYSQL_ROOT_PASSWORD
-  SECRET_KEY:
-    file: ./secrets/SECRET_KEY
-  TWLIGHT_OAUTH_CONSUMER_KEY:
-    file: ./secrets/TWLIGHT_OAUTH_CONSUMER_KEY
-  TWLIGHT_OAUTH_CONSUMER_SECRET:
-    file: ./secrets/TWLIGHT_OAUTH_CONSUMER_SECRET
-  TWLIGHT_EZPROXY_SECRET:
-    file: ./secrets/TWLIGHT_EZPROXY_SECRET
-
 services:
   twlight:
     image: quay.io/wikipedialibrary/twlight:local
@@ -34,16 +15,3 @@ services:
       - TRAVIS_JOB_ID
       - TRAVIS_BRANCH
       - COVERALLS_REPO_TOKEN
-    # Local environment should mount things from the code directory
-    volumes:
-      - type: bind
-        source: .
-        target: /app
-  syslog:
-    build:
-      context: syslog
-      cache_from:
-        - quay.io/wikipedialibrary/twlight_syslog:branch_production
-    environment:
-      - MATOMO_FQDN=analytics-wikipedialibrary.wmflabs.org
-

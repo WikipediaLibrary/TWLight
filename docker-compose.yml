@@ -28,6 +28,8 @@ services:
   twlight:
     build:
       context: .
+      cache_from:
+        - quay.io/wikipedialibrary/twlight:branch_production
     command: /venv/bin/gunicorn -b 0.0.0.0:80 TWLight.wsgi
     volumes:
       - type: bind
