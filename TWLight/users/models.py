@@ -33,7 +33,6 @@ from datetime import datetime, date, timedelta
 import json
 import logging
 import urllib.request, urllib.error, urllib.parse
-import urllib.request, urllib.parse, urllib.error
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
