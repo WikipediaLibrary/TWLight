@@ -7,8 +7,6 @@ services:
     image: quay.io/wikipedialibrary/twlight:local
     build:
       context: .
-      cache_from:
-        - quay.io/wikipedialibrary/twlight_base:branch_production
     env_file:
       - ./conf/travis.twlight.env
     environment:

@@ -28,8 +28,6 @@ services:
   twlight:
     build:
       context: .
-      cache_from:
-        - quay.io/wikipedialibrary/twlight:branch_production
     command: /venv/bin/gunicorn -b 0.0.0.0:80 TWLight.wsgi
     volumes:
       - type: bind
@@ -68,7 +66,5 @@ services:
   syslog:
     build:
       context: syslog
-      cache_from:
-        - quay.io/wikipedialibrary/twlight_syslog:branch_production
     environment:
       - MATOMO_FQDN=analytics-wikipedialibrary.wmflabs.org
