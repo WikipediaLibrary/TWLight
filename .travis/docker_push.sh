@@ -14,7 +14,7 @@ then
 
   # Push built images to ${cr_server}
   declare -a repositories=("twlight_base" "twlight_build" "twlight" "twlight_syslog")
-  for repository in ${repositories}
+  for repository in "${repositories[@]}"
   do
     docker push ${cr_server}/wikipedialibrary/${repository}:${COMMIT_TAG}
     docker push ${cr_server}/wikipedialibrary/${repository}:${BRANCH_TAG}

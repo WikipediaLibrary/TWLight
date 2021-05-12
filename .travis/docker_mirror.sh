@@ -10,7 +10,7 @@ then
 
   # Pull images from docker hub, then retag for $cr_server for reuse and mirroring.
   declare -a images=("alpine:3.11" "debian:buster-slim" "mariadb:10" "nginx:latest" "python:3.7-slim-buster")
-  for image in $images
+  for image in "${images[@]}"
   do
     docker pull docker.io/library/${image}
     docker tag docker.io/library/${image} ${cr_server}/wikipedialibrary/${image}
