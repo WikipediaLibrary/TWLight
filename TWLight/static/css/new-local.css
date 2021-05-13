@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'),
+       url('../fonts/Roboto-Regular.ttf') format("truetype");
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white;
+}
+
+/* Different buffers for the footer based on screen size */
+@media (max-width: 767px) {
+  body {
+    margin-bottom: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    margin-bottom: 130px;
+  }
+}
+
+/*
+----------------------------------------------------------------------------
+NEW FOOTER CSS
+--------------------------------------------------------------------------*/
+#footer {
+  background-color: #f8f8f8;
+  border-top: 2px solid #eee;
+  padding: 10px 40px 0px 40px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.footer-content{
+    float: right !important;
+}
+.footer-element{
+    text-decoration: none;
+    color: #000;
+}
+
+.login-section{
+    min-height: 430px;
+    background: #3366CC;
+    width: 100%
+}

@@ -151,16 +151,16 @@ header {
 }
 
 .site-title {
-	font-family: Palatino; 
-	font-size:1.5em; 
-	font-weight:bold; 
-	margin: -10px 0px 10px 0px; 
+	font-family: Palatino;
+	font-size:1.5em;
+	font-weight:bold;
+	margin: -10px 0px 10px 0px;
 	color:#000000;
 }
 
 .logo {
-	height:70px; 
-	float:left; 
+	height:70px;
+	float:left;
 	padding:5px 20px 5px 0px;
 }
 
@@ -236,7 +236,7 @@ nav .divider {
 
 .navbar-left {
 	height:78px;
-	padding-top:5px; 
+	padding-top:5px;
 }
 
 @media (max-width: 767px) {
@@ -245,23 +245,23 @@ nav .divider {
   }
 
   li.mobile-menu {
-	font-size:.9em;	
+	font-size:.9em;
 }
 }
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
 .site-title {
-	font-family: Palatino; 
-	font-size:.9em; 
-	font-weight:bold; 
-	margin: -10px 0px 10px 0px; 
+	font-family: Palatino;
+	font-size:.9em;
+	font-weight:bold;
+	margin: -10px 0px 10px 0px;
 	color:#000000;
 }
 
 .logo {
-	height:50px; 
-	float:left; 
+	height:50px;
+	float:left;
 	padding:0px 10px 0px 0px;
 }
 }
@@ -364,7 +364,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   padding: .15em .6em;
   letter-spacing: 0.25px;
   font-weight: 500;
-  margin-top: 5px; 
+  margin-top: 5px;
 }
 
 .resource-label {
@@ -781,5 +781,3 @@ CLEARING COLUMNS
   background-color: #333;
   color: #fff;
 }
-
-
