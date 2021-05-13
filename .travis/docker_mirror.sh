@@ -4,7 +4,7 @@
 echo "TRAVIS_EVENT_TYPE: ${TRAVIS_EVENT_TYPE}"
 
 # Only act if this is build was fired from cron and we have container registry credentials
-if [ "${TRAVIS_EVENT_TYPE}" = "cron" ] && [ -n "${cr_server+isset}" ] && [ -n "${cr_username+isset}" ] && [ -n "${cr_password+isset}" ]
+if [ -n "${cr_server+isset}" ] && [ -n "${cr_username+isset}" ] && [ -n "${cr_password+isset}" ]
 then
   echo "$cr_password" | docker login $cr_server -u "$cr_username" --password-stdin
 
