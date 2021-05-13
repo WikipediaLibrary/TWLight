@@ -112,6 +112,11 @@ class HomePageView(TemplateView):
         return context
 
 
+class NewHomePageView(TemplateView):
+
+    template_name = "homepage.html"
+
+
 @sensitive_variables()
 @requires_csrf_token
 def bad_request(request, exception, template_name=ERROR_400_TEMPLATE_NAME):
