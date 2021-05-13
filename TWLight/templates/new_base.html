@@ -1,0 +1,97 @@
+{% load i18n %}
+{% load static %}
+{% load twlight_perms %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>
+      {% comment %}Translators: Name of the project/tool.{% endcomment %}
+      {% trans "The Wikipedia Library" %}
+    </title>
+
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}"/>
+    <!-- Custom CSS -->
+    {% if LANGUAGE_BIDI %}
+      <!-- RTL Bootstrap CSS -->
+      <link href="{% static "css/bootstrap-4.0.0-rtl.min.css" %}" rel="stylesheet">
+      <!-- RTL Custom CSS -->
+      <link href="{% static "css/startbootstrap/sb-admin-2-rtl.css" %}" rel="stylesheet">
+      <link href="{% static "css/startbootstrap/timeline-rtl.css" %}" rel="stylesheet">
+      <!-- RTL Custom Fonts -->
+      <link href="{% static "css/font-awesome.min-rtl.css" %}" rel="stylesheet" type="text/css">
+      <link href="{% static "css/local-rtl.css" %}" rel="stylesheet" type="text/css">
+    {% else %}
+      <!-- LTR Bootstrap CSS -->
+      <link href="{% static "css/bootstrap-4.6.min.css" %}" rel="stylesheet">
+      <!-- LTR Custom CSS -->
+      <link href="{% static "css/startbootstrap/sb-admin-2.css" %}" rel="stylesheet">
+      <link href="{% static "css/startbootstrap/timeline.css" %}" rel="stylesheet">
+      <!-- LTR Custom Fonts -->
+      <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+      <link href="{% static "css/local.css" %}" rel="stylesheet" type="text/css">
+    {% endif %}
+
+    {% block extra_css %}
+    {% endblock extra_css %}
+
+    {% block head_javascript %}
+      <script type="text/javascript" language="javascript" src="{% static "js/jquery-3.6.0.min.js" %}"></script>
+      <script type="text/javascript" language="javascript" src="{% static "js/bootstrap-4.6.min.js" %}"></script>
+    {% endblock head_javascript %}
+  </head>
+  {% if LANGUAGE_BIDI %}
+    <body dir="rtl">
+  {% else %}
+    <body>
+  {% endif %}
+      <div>
+        {% block content %}
+        {% endblock %}
+      </div>
+      <footer id="footer">
+        <div class="row float-right">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a class="footer-element" href="{% url 'about' %}">
+                  {% comment %}Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
+                  {% trans "About" %}
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="footer-element" href="{% url 'terms' %}">
+                  {% comment %}Translators: This link is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page. {% endcomment %}
+                  {% trans "Terms of use and privacy policy" %}
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="footer-element" href="https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform">
+                  {% comment %}Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content. {% endcomment %}
+                  {% trans "Translate the Library" %}
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="footer-element" href="https://phabricator.wikimedia.org/project/view/2765/">Phabricator</a>
+              </li>
+              <li class="list-inline-item">
+                <a class="footer-element" href="https://github.com/wikipedialibrary/twlight">Github</a>
+              </li>
+              <li class="list-inline-item">
+                <a class="footer-element" href="{% url 'contact' %}">
+                  {% comment %}Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team. {% endcomment %}
+                  {% trans "Contact us" %}
+                </a>
+              </li>
+            </ul>
+        </div>
+      </footer>
+    {% block javascript %}
+      {# We don't use any JS by default; individual pages that need it can add it here. #}
+    {% endblock javascript %}
+  </body>
+</html>

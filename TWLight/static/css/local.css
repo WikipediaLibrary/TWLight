@@ -151,16 +151,16 @@ header {
 }
 
 .site-title {
-	font-family: Palatino; 
-	font-size:1.5em; 
-	font-weight:bold; 
-	margin: -10px 0px 10px 0px; 
+	font-family: Palatino;
+	font-size:1.5em;
+	font-weight:bold;
+	margin: -10px 0px 10px 0px;
 	color:#000000;
 }
 
 .logo {
-	height:70px; 
-	float:left; 
+	height:70px;
+	float:left;
 	padding:5px 20px 5px 0px;
 }
 
@@ -210,8 +210,8 @@ header {
 
 #footer {
   background-color: #f8f8f8;
-  border-top: 1px solid #eee;
-  padding: 20px 40px 15px 40px;
+  border-top: 2px solid #eee;
+  padding: 10px 40px 0px 40px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -236,7 +236,7 @@ nav .divider {
 
 .navbar-left {
 	height:78px;
-	padding-top:5px; 
+	padding-top:5px;
 }
 
 @media (max-width: 767px) {
@@ -245,23 +245,23 @@ nav .divider {
   }
 
   li.mobile-menu {
-	font-size:.9em;	
+	font-size:.9em;
 }
 }
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
 .site-title {
-	font-family: Palatino; 
-	font-size:.9em; 
-	font-weight:bold; 
-	margin: -10px 0px 10px 0px; 
+	font-family: Palatino;
+	font-size:.9em;
+	font-weight:bold;
+	margin: -10px 0px 10px 0px;
 	color:#000000;
 }
 
 .logo {
-	height:50px; 
-	float:left; 
+	height:50px;
+	float:left;
 	padding:0px 10px 0px 0px;
 }
 }
@@ -364,7 +364,7 @@ div.panel-body form.form-inline input#submit-id-submit.btn.btn-default {
   padding: .15em .6em;
   letter-spacing: 0.25px;
   font-weight: 500;
-  margin-top: 5px; 
+  margin-top: 5px;
 }
 
 .resource-label {
@@ -782,4 +782,17 @@ CLEARING COLUMNS
   color: #fff;
 }
 
+/*
+----------------------------------------------------------------------------
+NEW FOOTER CSS
+--------------------------------------------------------------------------*/
+.footer-element{
+    text-decoration: none;
+    color: #000;
+}
 
+.login-section{
+    min-height: 430px;
+    background: #3366CC;
+    width: 100%
+}
