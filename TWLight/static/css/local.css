@@ -210,8 +210,8 @@ header {
 
 #footer {
   background-color: #f8f8f8;
-  border-top: 2px solid #eee;
-  padding: 10px 40px 0px 40px;
+  border-top: 1px solid #eee;
+  padding: 20px 40px 15px 40px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -780,19 +780,4 @@ CLEARING COLUMNS
 #back-to-top:hover {
   background-color: #333;
   color: #fff;
-}
-
-/*
-----------------------------------------------------------------------------
-NEW FOOTER CSS
---------------------------------------------------------------------------*/
-.footer-element{
-    text-decoration: none;
-    color: #000;
-}
-
-.login-section{
-    min-height: 430px;
-    background: #3366CC;
-    width: 100%
 }

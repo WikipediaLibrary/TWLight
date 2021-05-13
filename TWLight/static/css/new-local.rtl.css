@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'),
+       url('../fonts/Roboto-Regular.ttf') format("truetype");
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white;
+}
+
+/* Different buffers for the footer based on screen size */
+@media (max-width: 767px) {
+  body {
+    margin-bottom: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    margin-bottom: 130px;
+  }
+}
+
+
+#footer {
+  background-color: #f8f8f8;
+  border-top: 2px solid #eee;
+  padding: 10px 40px 0px 40px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
