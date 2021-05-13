@@ -13,17 +13,21 @@ services:
   - docker
 
 install:
-  # Conditionally mirror images from docker.io to ${cr_server}.
-  - .travis/./docker_mirror.sh
+  # mirror images from docker.io to ${cr_server}.
+  # Do this step if the job was fired by cron
+  - if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then .travis/./docker_mirror.sh; fi
   # Build and run containers.
-  - .travis/./docker_compose.sh
+  # Skip this step if the job was fired by cron
+  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then .travis/./docker_compose.sh; fi
 
 # Initalize the app and test it.
+# Skip these steps if the job was fired by cron
 script:
-  - docker-compose exec twlight /app/bin/virtualenv_migrate.sh
-  - docker-compose exec twlight /app/bin/virtualenv_translate.sh last-commit
-  - docker-compose exec twlight /app/bin/virtualenv_test.sh
+  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_migrate.sh; fi
+  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_translate.sh last-commit; fi
+  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_test.sh; fi
 
 # Deploy changes if the conditions are met.
+# Skip this steps if the job was fired by cron
 after_success:
-  - .travis/./deploy.sh
+  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then .travis/./deploy.sh; fi
