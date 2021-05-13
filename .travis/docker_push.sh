@@ -13,7 +13,7 @@ then
   echo "$cr_password" | docker login $cr_server -u "$cr_username" --password-stdin
 
   # Push built images to ${cr_server}
-  declare -a repositories=("twlight_base" "twlight_build" "twlight" "twlight_syslog")
+  declare -a repositories=("twlight" "twlight_syslog")
   for repository in "${repositories[@]}"
   do
     docker push ${cr_server}/wikipedialibrary/${repository}:${COMMIT_TAG}
