@@ -28,6 +28,10 @@ body {
 }
 
 
+/*
+----------------------------------------------------------------------------
+NEW FOOTER CSS
+--------------------------------------------------------------------------*/
 #footer {
   background-color: #f8f8f8;
   border-top: 2px solid #eee;
@@ -35,4 +39,14 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+.footer-element{
+    text-decoration: none;
+    color: #000;
+}
+
+.login-section{
+    min-height: 430px;
+    background: #3366CC;
+    width: 100%
 }
