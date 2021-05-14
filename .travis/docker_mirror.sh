@@ -9,7 +9,7 @@ then
   echo "$cr_password" | docker login $cr_server -u "$cr_username" --password-stdin
 
   # Pull images from docker hub, then retag for $cr_server for reuse and mirroring.
-  declare -a images=("alpine:3.11" "debian:buster-slim" "mariadb:10" "nginx:latest" "python:3.7-slim-buster")
+  declare -a images=("alpine:3.11" "debian:buster-slim" "mariadb:10" "nginx:latest" "python:3.8-buster" "python:3.7-slim-buster")
   for image in "${images[@]}"
   do
     docker pull docker.io/library/${image}
