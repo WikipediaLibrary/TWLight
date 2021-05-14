@@ -100,6 +100,7 @@ EXCLUDED_USER_AGENTS = (
     'netcraftsurvey',
     'panopta',
     'pingdom.com_bot_',
+    'python-requests/',
     'robot',
     'spider',
     'surveybot',
