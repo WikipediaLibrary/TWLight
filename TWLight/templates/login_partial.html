@@ -1,0 +1,62 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% load cache %}
+<div class="row col-12">
+  <!-- logo -->
+  <a class="homepage-logo" href="{% url 'homepage' %}">
+    <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
+    {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
+    {% trans "The Wikipedia Library" %}
+    ">
+  </a>
+  <!-- site name -->
+  {% comment %}Translators: Name of the project/tool.{% endcomment %}
+  <a class="homepage-title" href="{% url 'homepage' %}">{% trans "The Wikipedia Library" %}</a>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12 homepage-description">
+    <p>
+      {% comment %}Translators: Information about The Wikipedia Library.{% endcomment %}
+      {% blocktranslate %}
+      Over 90 of the world's top
+      subscription-only databases, free
+      for Wikipedians of all backgrounds
+      {% endblocktranslate %}
+    </p>
+  </div>
+
+  <div class="col-lg-6 col-md-6 col-sm-12 homepage-criteria">
+    <p class="criteria-info">
+      {% comment %}Translators: Information about The Wikipedia Library.{% endcomment %}
+      {% blocktranslate %}
+      Meet this criteria for automatic access
+      {% endblocktranslate %}
+      <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" data-html="true" title="This criteria grants you access to certain collections but not all. Some collections are accessible on a per application basis only."></i>
+    </p>
+    <ul class="criteria-list">
+      {% for criteria in bundle_criteria %}
+        <li>
+          <p class="criteria-item">
+            <i class="fa fa-check criteria-checkmark" aria-hidden="true"></i>
+            {{ criteria }}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 homepage-login">
+      {% comment %}Translators: Button that logs editors in via Wikipedia.{% endcomment %}
+      {% if request.GET %}
+      <a  class="btn btn-light homepage-login-button" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}&{{ request.GET.urlencode }}">
+      {% else %}
+      <a  class="btn btn-light homepage-login-button" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">
+      {% endif %}
+        {% trans "Login via Wikipedia" %}
+      </a>
+    </div>
+</div>

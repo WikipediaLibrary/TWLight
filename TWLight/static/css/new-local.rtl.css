@@ -27,11 +27,42 @@ body {
   }
 }
 
+/*
+----------------------------------------------------------------------------
+LOGIN PARTIAL CSS
+--------------------------------------------------------------------------
+*/
+@media (max-width: 767px) {
+    .login-section{
+        min-height: 489px;
+        background: #3366CC;
+        width: 100%
+    }
+}
+
+@media (min-width: 768px) {
+    .login-section{
+        min-height: 430px;
+        background: #3366CC;
+        width: 100%
+    }
+}
+
+.site-title{
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 19px;
+    weight: 700;
+    text-decoration: none;
+    color: #FFF;
+}
 
 /*
 ----------------------------------------------------------------------------
 NEW FOOTER CSS
---------------------------------------------------------------------------*/
+--------------------------------------------------------------------------
+*/
 #footer {
   background-color: #f8f8f8;
   border-top: 2px solid #eee;

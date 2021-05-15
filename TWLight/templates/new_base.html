@@ -43,7 +43,11 @@
     {% block head_javascript %}
       <script type="text/javascript" language="javascript" src="{% static "js/jquery-3.6.0.min.js" %}"></script>
       <script type="text/javascript" language="javascript" src="{% static "js/popper.min.js" %}"></script>
-      <script type="text/javascript" language="javascript" src="{% static "js/bootstrap-4.6.min.js" %}"></script>
+      {% if LANGUAGE_BIDI %}
+        <script type="text/javascript" language="javascript" src="{% static "js/bootstrap-4.0.0-rtl.min.js" %}"></script>
+      {% else %}
+        <script type="text/javascript" language="javascript" src="{% static "js/bootstrap-4.6.min.js" %}"></script>
+      {% endif %}
     {% endblock head_javascript %}
   </head>
   {% if LANGUAGE_BIDI %}
