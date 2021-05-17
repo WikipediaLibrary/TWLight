@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-05-12 18:36+0000\n"
-"PO-Revision-Date: 2021-05-13 12:02:55+0000\n"
+"PO-Revision-Date: 2021-05-17 11:27:12+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -281,7 +281,7 @@ msgstr "Очікуйте отримати деталі доступу в меж�
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:253
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr ""
+msgstr "Цей партнер приєднався до Library Bundle, де не вимагаються заявки. Цю заявку буде позначено недійсною."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:14
@@ -468,7 +468,7 @@ msgstr "Нещодавні заявки (минулі 90 днів)"
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:259
 msgid "No applications were made in last 90 days by the applicant"
-msgstr ""
+msgstr "Заявник не подавав заявок за минулі 90 днів"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:263
@@ -719,7 +719,7 @@ msgstr "До яких ресурсів ви хочете отримати дос
 #. Translators: This text explains that Library Bundle partners are not shown in this list.
 #: TWLight/applications/templates/applications/request_for_application.html:24
 msgid "Library Bundle partners are not shown as eligibility is determined automatically."
-msgstr ""
+msgstr "Партнери Library Bundle не показуються, оскільки відповідність критеріям участі визначається автоматично."
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:47
@@ -754,9 +754,9 @@ msgstr "Дані заявок до %(object)s"
 
 #. Translators: This message is shown when applications exceed the number of accounts available for each collection.
 #: TWLight/applications/templates/applications/send_partner.html:52
-#, fuzzy, python-format
+#, python-format
 msgid "Applications for <strong>%(unavailable_streams)s</strong> if sent, will exceed the total available accounts for the collections. Please proceed at your own discretion."
-msgstr "Заявка(и) на <strong>%(unavailable_streams)s</strong>, у разі надсилання, перевищить сумарну кількість доступних облікових записів для напрямку(ів). Будь ласка, дійте на власний розсуд."
+msgstr "Заявки на <strong>%(unavailable_streams)s</strong>, у разі надсилання, перевищать сумарну кількість доступних облікових записів для колекцій. Будь ласка, дійте на власний розсуд."
 
 #. Translators: This message is shown when applications exceed the number of accounts available.
 #: TWLight/applications/templates/applications/send_partner.html:58
@@ -795,9 +795,8 @@ msgstr "Позначити як надіслане"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:164
-#, fuzzy
 msgid "Use the dropdown menus to denote which editor will receive each code. Access codes will be sent to users automatically."
-msgstr "Скористайтеся випадним меню, щоб позначити, який редактор отримає кожен код. Переконайтеся, що кожен код надіслано електронною поштою, перш ніж натискати «Позначити як надіслане»."
+msgstr "Скористайтеся випадним меню, щоб позначити, який редактор отримає кожен код. Коди доступу будуть надіслані користувачам автоматично."
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:185
@@ -839,9 +838,8 @@ msgstr "Цей партнер наразі не надає жодних дост
 
 #. Translators: This message is shown to user when he tries to apply to same partner more than once
 #: TWLight/applications/views.py:550
-#, fuzzy
 msgid "You already have an application for this Partner."
-msgstr "Ваша заявка до: {partner}"
+msgstr "Ви уже маєте заявку для цього партнера."
 
 #. Translators: Editor = wikipedia editor, gender unknown.
 #: TWLight/applications/views.py:638 TWLight/applications/views.py:717
@@ -896,7 +894,7 @@ msgstr "Ви зробили спробу створити дублікат ав�
 #: TWLight/applications/views.py:1034
 #, python-brace-format
 msgid "This application cannot be modified since this partner is now part of our <a href='{bundle}'>bundle access</a>. If you are eligible, you can access this resource from <a href='{library}'>your library</a>. <a href='{contact}'>Contact us</a> if you have any questions."
-msgstr ""
+msgstr "Цю заявку не можна змінити, оскільки цей партнер тепер є частиною нашого <a href='{bundle}'>пакетного доступу</a>. Якщо ви відповідаєте критеріям, то можете отримати доступ до цього ресурсу зі <a href='{library}'>своєї бібліотеки</a>. <a href='{contact}'>Зв'яжіться з нами</a>, якщо у вас є якісь запитання."
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:1048
@@ -906,11 +904,10 @@ msgstr "Встановити статус заявки"
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
 #: TWLight/applications/views.py:1066
 msgid "There are more pending applications than available accounts. Your application might get waitlisted."
-msgstr ""
+msgstr "Поданих заявок більше, ніж доступних облікових записів. Ваша заявка може опинитися у списку чекання."
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:1079
-#, fuzzy
 msgid "Status of INVALID applications cannot be changed."
 msgstr "Якщо статус заявки INVALID, його не можна змінити."
 
@@ -946,9 +943,9 @@ msgstr "Не вдалося поновити заявку цього разу, �
 
 #. Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
 #: TWLight/applications/views.py:1561
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Attempt to renew unapproved application #{pk} has been denied"
-msgstr "Була відхилена спроба оновити програму #{pk}, що не була схвалена"
+msgstr "Спробу поновити відхилену заявку #{pk} було відхилено"
 
 #. Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
 #: TWLight/applications/views.py:1633
@@ -1266,17 +1263,17 @@ msgstr "Ви повинні бути редактором Вікіпедії, щ
 #. Translators: When a user is being authenticated to access proxied resources, and the request's missing the editor's username, this error text is displayed.
 #: TWLight/ezproxy/views.py:35
 msgid "Missing Editor username."
-msgstr ""
+msgstr "Не вказано ім'я користувача редактора."
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is invalid.
 #: TWLight/ezproxy/views.py:57
 msgid "Invalid EZProxy target URL."
-msgstr ""
+msgstr "Недійсна цільова URL-адреса EZProxy."
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is missing.
 #: TWLight/ezproxy/views.py:62
 msgid "Missing EZProxy target URL."
-msgstr ""
+msgstr "Відсутня цільова URL-адреса EZProxy."
 
 #. Translators: This is the heading of a data file which lists the number of days it took to decide on applications that have already been accepted/rejected.
 #: TWLight/graphs/views.py:240
@@ -1392,7 +1389,7 @@ msgstr "Перед подачею заявки, будь ласка, перег�
 
 #. Translators: This text refers to the page containing the content a user is authorized to access.
 #: TWLight/resources/templates/resources/partner_detail.html:58
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access in <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
 msgstr "Перегляньте статус свого доступу на сторінці <strong><a href=\"%(library_url)s\">Моя бібліотека</a></strong>."
 
@@ -1536,9 +1533,9 @@ msgstr "Умови використання недоступні."
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail.html:391
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr "Перегляньте статус свого доступу чи доступів на сторінці <strong><a href=\"%(library_url)s\">Моя бібліотека</a></strong>."
+msgstr "Перегляньте статус свого доступу на сторінці <strong><a href=\"%(library_url)s\">Моя бібліотека</a></strong>."
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail.html:424
@@ -1578,7 +1575,7 @@ msgstr "Вивести список заявок"
 #: TWLight/users/templates/users/my_applications.html:10
 #: TWLight/users/templates/users/my_library.html:6
 msgid "My Library"
-msgstr ""
+msgstr "Моя бібліотека"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #. Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.
@@ -1608,7 +1605,7 @@ msgstr "Доступ до Library Bundle"
 #. Translators: Text shown to authenticated, bundle eligible users when they need to visit My Library to access collections.
 #: TWLight/resources/templates/resources/partner_detail.html:472
 msgid "You are eligible to access Library Bundle partners. Click the button above to go to your Library and browse collections from this partner."
-msgstr ""
+msgstr "Ви відповідаєте критеріям доступу до партнерів Library Bundle. Натисніть на кнопку угорі, щоб перейти до своєї бібліотеки і переглянути колекції від цього партнера."
 
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
 #: TWLight/resources/templates/resources/partner_detail.html:479
@@ -1619,13 +1616,13 @@ msgstr "Отримати доступ до колекції"
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:486
 msgid "You are eligible to access Library Bundle partners. Click the button above to access the collection."
-msgstr ""
+msgstr "Ви відповідаєте критеріям доступу до партнерів Library Bundle. Натисніть на кнопку угорі, щоб отримати доступ до колекції."
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:501
 #, python-format
 msgid "You are not eligible to access Library Bundle partners. Visit the <a href=\"%(homepage)s\">homepage</a> to check the eligibility criteria."
-msgstr ""
+msgstr "Ви не відповідаєте критеріям доступу до партнерів Library Bundle. Перейдіть на <a href=\"%(homepage)s\">домашню сторінку</a>, щоб ознайомитися з критеріями."
 
 #. Translators: Buttton prompting users to log in.
 #. Translators: Shown in the top bar of almost every page when the current user is not logged in.
@@ -1639,7 +1636,7 @@ msgstr "Увійти"
 #: TWLight/resources/templates/resources/partner_detail.html:517
 #, python-format
 msgid "This resource is part of our <a href=\"%(about)s\">Library Bundle</a>, which you can access if you meet our minimum eligibility criteria. Log in to find out if you are eligible."
-msgstr ""
+msgstr "Цей ресурс є частиною нашого <a href=\"%(about)s\">Library Bundle</a>, до якого ви можете отримати доступ, якщо відповідаєте нашим мінімальним критеріям доступу. Увійдіть, щоб дізнатися, чи ви відповідає критеріям."
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:546
@@ -1691,9 +1688,9 @@ msgstr "Повернутись угору"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(partner.company_name)s signup page"
-msgstr "Посилання на сторінку реєстрації %(partner)s"
+msgstr "Посилання на сторінку реєстрації %(partner.company_name)s"
 
 #. Translators: This is the text shown to coordinators when a partner is marked not available.
 #: TWLight/resources/templates/resources/partner_tile.html:43
@@ -1737,9 +1734,8 @@ msgstr "Поновлення?"
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the collection the user applied for.
 #: TWLight/resources/templates/resources/partner_users.html:37
 #: TWLight/resources/templates/resources/partner_users.html:88
-#, fuzzy
 msgid "Collection"
-msgstr "Колекції"
+msgstr "Колекція"
 
 #. Translators: Denotes whether an application was imported to the platform, because it was submitted before the library card was launched.
 #: TWLight/resources/templates/resources/partner_users.html:50
@@ -1771,7 +1767,7 @@ msgstr "URL-адреса"
 
 #: TWLight/resources/templates/resources/suggest.html:60
 msgid "Proposer"
-msgstr ""
+msgstr "Пропонувач"
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
 #: TWLight/resources/templates/resources/suggest.html:69
@@ -2026,12 +2022,12 @@ msgstr "Зазвичай, як тільки ви увійшли, ваш сеан
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:172
 msgid "The Library Bundle is a collection of resources for which no application is required. If you meet the criteria laid out above, you will be authorized for access automatically upon logging in to the platform. Only some of our content is currently included in the Library Bundle, however we hope to expand the collection as more publishers become comfortable with participating. All Bundle content is accessed via EZProxy."
-msgstr ""
+msgstr "Library Bundle — це колекція ресурсів, для яких не потрібна заявка. Якщо ви відповідає вищеописаним критеріям, ви будете автоматично авторизовані для доступу до них після того, як увійдете в систему. Лише деякий наш вміст наразі доданий у Library Bundle, однак ми сподіваємося розширити колекцію, коли більше видавців почуватимуться достатньо комфортно, щоб взяти в цьому участь. Доступ до всього вмісту Bundle здійснюється через EZProxy."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:182
 msgid "If your account is blocked on one or more Wikimedia projects, you may still be granted access to the Library Bundle. You will need to contact the Wikipedia Library team, who will review your blocks. If you have been blocked for content issues, most notably copyright violations, or have multiple long-term blocks, we may decline your request. Additionally, if your block status changes after being approved, you will need to request another review."
-msgstr ""
+msgstr "Якщо ваш обліковий запис заблокований в одному чи більше проєктів Вікімедіа, ви все одно можете отримати доступ до Library Bundle. Вам треба буде зв'язатися з командою Бібліотеки Вікіпедії, яка перегляне ваше блокування. Якщо ви були заблоковані за проблеми з вмістом, перш за все, за порушення авторських прав, або маєте численні довготермінові блокування, ми можемо відхилити ваш запит. Окрім цього, якщо ваш статус блокування зміниться після схвалення, вам треба буде подати запит на інший перегляд."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:192
@@ -2046,7 +2042,7 @@ msgstr "Практики використання джерел відрізня�
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:208
-#, fuzzy, python-format
+#, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a href=\"%(contact_url)s\">contact page</a>."
 msgstr "Якщо у вас є запитання, потрібна допомога або ви хочете зголоситися допомагати іншим, будь ласка, завітайте на нашу <a href=\"%(contact_url)s\">контактну сторінку</a>."
 
@@ -2255,30 +2251,30 @@ msgstr "Дізнатися більше"
 #. Translators: Alt text for the Library Bundle logo.
 #: TWLight/templates/home.html:44
 msgid "A stack of books tied together with a ribbon, the Library Bundle icon"
-msgstr ""
+msgstr "Стос книжок, перев'язаний стрічкою, піктограма Library Bundle"
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this message is displayed to all users as the description of Library Bundle eligibility panel. 'Library Bundle' is the set of resources which active users have automatic access to.
 #: TWLight/templates/home.html:48
 #, python-format
 msgid "<p>Free and immediate access to a large selection of resources, spanning %(bundle_partner_count)s collections, if you meet the following criteria:</p>"
-msgstr ""
+msgstr "<p>Безкоштовний та негайний доступ до великого вибору ресурсів, із %(bundle_partner_count)s колекцій, за умови, що ви відповідаєте таким критеріям:</p>"
 
 #. Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/templates/home.html:75
 #, python-format
 msgid "It looks like you have an active block on your account on at least one Wikimedia project. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr ""
+msgstr "Схоже, у вас є активне блокування вашого облікового запису принаймні в одному проєкті Вікімедіа. Якщо ви відповідаєте іншим критеріям, ви все ще можете отримати доступ до Library Bundle — будь ласка, <a href=\"%(contact_url)s\">зв'яжіться з нами</a>."
 
 #. Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle.
 #: TWLight/templates/home.html:84
 #, python-format
 msgid "You meet the eligibility criteria! Check out <a href=\"%(library_url)s\">My Library</a> to see what you have access to."
-msgstr ""
+msgstr "Ви відповідаєте критеріям! Перейдіть на сторінку <a href=\"%(library_url)s\">Моя бібліотека</a>, щоб побачити, до чого у вас є доступ."
 
 #. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
 #: TWLight/templates/home.html:100
 msgid "Some collections have a limited number of concurrent users and require an application."
-msgstr ""
+msgstr "Деякі колекції мають обмеження на кількість одночасних користувачів і вимагають заявки."
 
 #. Translators: This is text on a button on the homepage, which allows users to see more available collections to which they can apply.
 #: TWLight/templates/home.html:115
@@ -2320,7 +2316,7 @@ msgstr "Опишіть свій внесок у Вікіпедії: теми, я
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive account renewal notices or not.
 #: TWLight/users/forms.py:112
 msgid "Send renewal notices"
-msgstr ""
+msgstr "Надсилати сповіщення про поновлення"
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive pending application reminders or not.
 #: TWLight/users/forms.py:130
@@ -2349,9 +2345,8 @@ msgstr "Я погоджуюся з умовами використання"
 
 #. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
 #: TWLight/users/forms.py:185
-#, fuzzy
 msgid "By unchecking this box and clicking “Update” you may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
-msgstr "Ваша електронна пошта порожня. Ви й далі можете переглядати вміст сайту, але ви не зможете подати заявку на доступ до партнерських ресурсів без вказання електронної пошти."
+msgstr "Знявши тут позначку і натиснувши «Оновити» ви можете переглядати вміст сайту, але ви не зможете подати заявку на доступ до матеріалів чи оцінювати заявки, поки не погодитеся з умовами використання."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
@@ -2439,9 +2434,8 @@ msgstr "Почати нову заявку"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.
 #: TWLight/users/templates/users/editor_detail.html:25
-#, fuzzy
 msgid "A collective list of collections you are authorized to access"
-msgstr "Збірний список партнерів, на доступ до яких вас авторизовано"
+msgstr "Збірний список колекцій, на доступ до яких вас авторизовано"
 
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.
 #. Translators: Heading of the applications page where users can view all of their applications listed with other relevant info.
@@ -2449,9 +2443,8 @@ msgstr "Збірний список партнерів, на доступ до �
 #: TWLight/users/templates/users/editor_detail.html:33
 #: TWLight/users/templates/users/my_applications.html:7
 #: TWLight/users/templates/users/my_library.html:9
-#, fuzzy
 msgid "My applications"
-msgstr "Усі заявки"
+msgstr "Мої заявки"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:37
@@ -2511,9 +2504,8 @@ msgstr "Задовольняє умови використання?"
 
 #. Translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a yes or no answer.
 #: TWLight/users/templates/users/editor_detail_data.html:57
-#, fuzzy
 msgid "at their last login, did this user meet the criteria set forth in the terms of use?"
-msgstr "На момент попереднього входу в систему, чи відповідав цей користувач критеріям, заданим в умовах використання?"
+msgstr "на момент попереднього входу в систему, чи відповідав цей користувач критеріям, заданим в умовах використання?"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
 #: TWLight/users/templates/users/editor_detail_data.html:72
@@ -2523,9 +2515,8 @@ msgstr "%(username)s все ще може відповідати критері�
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:83
-#, fuzzy
 msgid "Satisfies minimum account age?"
-msgstr "Задовольняє умови використання?"
+msgstr "Задовольняє мінімальний вік облікового запису?"
 
 #. Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:88
@@ -2534,41 +2525,38 @@ msgstr "Задовольняє умови використання?"
 #: TWLight/users/templates/users/editor_detail_data.html:157
 #: TWLight/users/templates/users/editor_detail_data.html:175
 msgid "Unknown (requires user login)"
-msgstr ""
+msgstr "Невідомо (необхідно виконати вхід користувача)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:100
-#, fuzzy
 msgid "Satisfies minimum edit count?"
-msgstr "Кількість редагувань у Вікіпедії"
+msgstr "Задовольняє мінімальну кількість редагувань?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:118
 msgid "Is not blocked on any project?"
-msgstr ""
+msgstr "Немає блокувань у жодному проєкті?"
 
 #. Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/users/templates/users/editor_detail_data.html:133
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr ""
+msgstr "Схоже, у вас є активне блокування вашого облікового запису. Якщо ви відповідаєте іншим критеріям, ви все ще можете отримати доступ до Library Bundle — будь ласка, <a href=\"%(contact_url)s\">зв'яжіться з нами</a>."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:146
 msgid "Eligible for Bundle?"
-msgstr ""
+msgstr "Відповідає критеріям Bundle?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
 #: TWLight/users/templates/users/editor_detail_data.html:149
-#, fuzzy
 msgid "At their last login, did this user meet the criteria set forth in the Library Bundle? Note that satisfying terms of use is a prerequisite to bundle eligibility."
-msgstr "На момент попереднього входу в систему, чи відповідав цей користувач критеріям, заданим в умовах використання?"
+msgstr "На момент попереднього входу в систему, чи відповідав цей користувач критеріям, заданим в Library Bundle? Зверніть увагу, що відповідність умовам використання — попередня вимога для відповідності критеріям Bundle."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:170
-#, fuzzy
 msgid "Satisfies recent edit count?"
-msgstr "Задовольняє умови використання?"
+msgstr "Задовольняє умову кількості недавніх редагувань?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit current count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:191
@@ -2588,7 +2576,7 @@ msgstr "Нещодавня глобальна кількість редагув�
 #. Translators: This text is shown next to a user's recent global edit count if less than 30 days has passed since they first logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:213
 msgid "Unknown (requires 30 days from initial user login)"
-msgstr ""
+msgstr "Невідомо (необхідні 30 днів з часу першого входу в систему)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:225
@@ -2603,7 +2591,7 @@ msgstr "ID користувача Вікіпедії *"
 #. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:248
 msgid "Personal data"
-msgstr ""
+msgstr "Персональні дані"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:255
@@ -2679,9 +2667,8 @@ msgstr "Термін вийшов"
 
 #. Translators: On the collection page (individual access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_library.html:93
-#, fuzzy
 msgid "You have no active individual access collections."
-msgstr "У вас немає активних колекцій ручного доступу."
+msgstr "У вас немає активних колекцій індивідуального доступу."
 
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
@@ -2709,9 +2696,8 @@ msgstr "Оновити"
 
 #. Translators: This text labels the date for when the terms of use were most recently changed.
 #: TWLight/users/templates/users/preferences.html:70
-#, fuzzy
 msgid "Last updated at:"
-msgstr "Остання сторінка"
+msgstr "Останнє оновлення:"
 
 #. Translators: This link is to the site's terms of use.
 #: TWLight/users/templates/users/preferences.html:72
@@ -2766,13 +2752,12 @@ msgstr "Отримати доступ до колекції"
 #. Translators: Users can click this button to be taken to the website for a resource.
 #: TWLight/users/templates/users/resource_tile.html:105
 msgid "Go to site"
-msgstr ""
+msgstr "Перейти на сайт"
 
 #. Translators: This text is found on a tooltip directing users to the description pages of the library's partners.
 #: TWLight/users/templates/users/resource_tile.html:112
-#, fuzzy
 msgid "Partner description page"
-msgstr "Колекції"
+msgstr "Сторінка опису партнера"
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
 #: TWLight/users/templates/users/resource_tile.html:118
@@ -2962,7 +2947,6 @@ msgstr "Зберігання та обробка даних"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:189
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
 msgstr "Фонд Вікімедіа та провайдери наших послуг використовують вашу інформацію із законною метою надавати послуги Бібліотеки Вікіпедії на підтримку нашої благодійної мети. Коли ви подаєте заявку на обліковий запис Бібліотеки Вікіпедії або використовуєте свій обліковий запис Бібліотеки Вікіпедії, ми можемо регулярно збирати таку інформацію: ваше ім'я користувача, адресу електронної пошти, кількість редагувань, дату реєстрації, ID-номер користувача, групи, до яких ви належите, та будь-які спеціальні права; ваше ім'я, країну проживання, рід занять та/або афіліацію, якщо цього вимагає партнер, до якого ви хочете отримати доступ; вашу розповідь про свій внесок та причини подачі заявки на доступ до партнерських ресурсів; а також дату, коли ви погодилися з цими умовами використання."
 
@@ -3084,7 +3068,6 @@ msgstr "Будь ласка, <a href='{url}'>оновіть свій внесо�
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:258
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
 msgstr "Ви вибрали не отримувати листи-нагадування. Як координатор, ви маєте отримувати хоча б один тип листів-нагадувань, тому будь ласка, змініть свої налаштування."
 
@@ -3131,7 +3114,7 @@ msgstr "Пропозицію було вилучено."
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/views.py:69
 msgid "500+ edits"
-msgstr ""
+msgstr "500+ редагувань"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/views.py:71
@@ -3141,17 +3124,17 @@ msgstr "понад 6 місяців редагування"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/views.py:73
 msgid "10+ edits in the last month"
-msgstr ""
+msgstr "10+ редагувань за останній місяць"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/views.py:75
 msgid "No active blocks"
-msgstr ""
+msgstr "Немає активних блокувань"
 
 #: tests/shunit/data/bad_i18n_comment_1.py:3
 #: tests/shunit/data/bad_i18n_newline_1.py:5
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non viverra vitae, interdum ut aenean ipsum.
 #. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non.
@@ -3159,21 +3142,21 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
 #: tests/shunit/data/good_i18n_2.py:2
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: tests/shunit/data/bad_i18n_newline_3.py:5
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #: tests/shunit/data/bad_i18n_newline_4.py:5
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: tests/shunit/data/bad_i18n_newline_5.py:5
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
-msgstr ""
+msgstr "6"
 
