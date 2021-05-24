@@ -48,14 +48,75 @@ LOGIN PARTIAL CSS
     }
 }
 
-.site-title{
+.homepage-logo{
+    text-decoration: none;
+}
+
+.logo {
+	height:70px;
+	float:left;
+	padding:21px 0px 5px 23px;
+}
+
+.homepage-title{
     font-family: Roboto;
     font-style: normal;
     font-size: 16px;
     line-height: 19px;
-    weight: 700;
+    font-weight: 400;
     text-decoration: none;
     color: #FFF;
+    padding:34px 20px 5px 5px;
+}
+
+.homepage-title:hover{
+    color: #FFF;
+}
+
+.homepage-description{
+    color: #FFF;
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 38px;
+    font-weight: 800;
+    padding: 20px 0px 0px 170px;
+}
+
+.homepage-criteria{
+    color:#FFF;
+    font-family: Roboto;
+    font-style: normal;
+    padding: 35px 0px 0px 95px;
+}
+
+.criteria-info{
+    font-size: 20px;
+}
+
+.criteria-list{
+    list-style-type: none;
+    padding: 0px 0px 0px 0px;
+}
+
+.criteria-item{
+    font-family: Roboto-Light;
+    font-size: 20px;
+    line-height: 32px;
+}
+
+.criteria-checkmark{
+    padding: 0px 10px 0px 0px;
+}
+
+.homepage-login{
+    padding: 0px 0px 0px 170px;
+}
+
+.homepage-login-button{
+    color: #3366CC;
+    width: 95%;
+    font-weight: 700;
+    font-size: 14px;
 }
 
 /*
