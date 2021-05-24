@@ -6,6 +6,7 @@ from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.utils.translation import get_language, gettext_lazy as _
 
 from TWLight.resources.models import Partner
@@ -113,9 +114,6 @@ class HomePageView(TemplateView):
 
 
 class NewHomePageView(TemplateView):
-
-    template_name = "homepage.html"
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["bundle_criteria"] = [
@@ -129,6 +127,13 @@ class NewHomePageView(TemplateView):
             _("No active blocks"),
         ]
         return context
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect("/users/my_library")
+        else:
+            context = self.get_context_data()
+            return render(request, "homepage.html", context)
 
 
 @sensitive_variables()
