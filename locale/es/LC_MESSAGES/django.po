@@ -20,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-05-12 18:35+0000\n"
-"PO-Revision-Date: 2021-05-13 12:02:53+0000\n"
+"PO-Revision-Date: 2021-05-24 12:26:18+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2350,12 +2350,6 @@ msgstr "Usar mi correo electrónico de Wikipedia (se actualizará en tu siguient
 msgid "Update email"
 msgstr "Actualizar dirección de correo electrónico"
 
-#. Translators: Do not translate.
-#: TWLight/users/models.py:689
-#, python-brace-format
-msgid "{wp_username}"
-msgstr "{wp_username}"
-
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:218
 msgid "You tried to log in but presented an invalid access token."
@@ -3112,33 +3106,4 @@ msgstr "10+ ediciones en el último mes"
 #: TWLight/views.py:75
 msgid "No active blocks"
 msgstr "Ningún bloqueo activo"
-
-#: tests/shunit/data/bad_i18n_comment_1.py:3
-#: tests/shunit/data/bad_i18n_newline_1.py:5
-msgid "1"
-msgstr "1"
-
-#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non viverra vitae, interdum ut aenean ipsum.
-#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non.
-#: tests/shunit/data/bad_i18n_comment_2.py:4
-#: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
-#: tests/shunit/data/good_i18n_2.py:2
-msgid "2"
-msgstr "2"
-
-#: tests/shunit/data/bad_i18n_newline_3.py:5
-msgid "3"
-msgstr "3"
-
-#: tests/shunit/data/bad_i18n_newline_4.py:5
-msgid "4"
-msgstr "4"
-
-#: tests/shunit/data/bad_i18n_newline_5.py:5
-msgid "5"
-msgstr "5"
-
-#: tests/shunit/data/bad_i18n_newline_6.py:5
-msgid "6"
-msgstr "6"
 

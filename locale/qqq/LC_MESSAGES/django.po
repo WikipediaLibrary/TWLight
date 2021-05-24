@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-05-12 18:36+0000\n"
-"PO-Revision-Date: 2021-05-13 12:02:56+0000\n"
+"PO-Revision-Date: 2021-05-24 12:26:23+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -2342,7 +2342,7 @@ msgstr ""
 
 #. Translators: Do not translate.
 #: TWLight/users/models.py:689
-#, python-brace-format
+#, ignored, python-brace-format
 msgid "{wp_username}"
 msgstr "{{Ignored}}"
 
@@ -3105,6 +3105,7 @@ msgstr ""
 
 #: tests/shunit/data/bad_i18n_comment_1.py:3
 #: tests/shunit/data/bad_i18n_newline_1.py:5
+#, ignored
 msgid "1"
 msgstr ""
 
@@ -3113,22 +3114,27 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_comment_2.py:4
 #: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
 #: tests/shunit/data/good_i18n_2.py:2
+#, ignored
 msgid "2"
 msgstr ""
 
 #: tests/shunit/data/bad_i18n_newline_3.py:5
+#, ignored
 msgid "3"
 msgstr ""
 
 #: tests/shunit/data/bad_i18n_newline_4.py:5
+#, ignored
 msgid "4"
 msgstr ""
 
 #: tests/shunit/data/bad_i18n_newline_5.py:5
+#, ignored
 msgid "5"
 msgstr ""
 
 #: tests/shunit/data/bad_i18n_newline_6.py:5
+#, ignored
 msgid "6"
 msgstr ""
 

@@ -29,7 +29,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-05-12 18:36+0000\n"
-"PO-Revision-Date: 2021-05-13 12:02:56+0000\n"
+"PO-Revision-Date: 2021-05-24 12:26:23+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1152,7 +1152,7 @@ msgstr "细目分类"
 #, python-format
 msgid "One pending application."
 msgid_plural "%(counter)s pending applications."
-msgstr[0] "%(counter)s个待处理的申请。"
+msgstr[0] "一个待处理的申请。"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
@@ -1160,7 +1160,7 @@ msgstr[0] "%(counter)s个待处理的申请。"
 #, python-format
 msgid "One under discussion application."
 msgid_plural "%(counter)s under discussion applications."
-msgstr[0] "%(counter)s个讨论中的申请。"
+msgstr[0] "一个讨论中的申请。"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
@@ -1186,7 +1186,7 @@ msgstr "尊敬的%(user)s，我们的记录表明您是拥有%(total_apps)s个�
 #, python-format
 msgid "One approved application."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "%(counter)s个批准的申请。"
+msgstr[0] "一个批准的申请。"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate the email address either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
@@ -2355,12 +2355,6 @@ msgstr "使用我的维基百科电子邮件地址（下次登录时将更新）
 msgid "Update email"
 msgstr "更新电子邮件"
 
-#. Translators: Do not translate.
-#: TWLight/users/models.py:689
-#, python-brace-format
-msgid "{wp_username}"
-msgstr "{wp_username}"
-
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:218
 msgid "You tried to log in but presented an invalid access token."
@@ -3117,33 +3111,4 @@ msgstr "在上个月至少编辑10次"
 #: TWLight/views.py:75
 msgid "No active blocks"
 msgstr "无有效的封禁"
-
-#: tests/shunit/data/bad_i18n_comment_1.py:3
-#: tests/shunit/data/bad_i18n_newline_1.py:5
-msgid "1"
-msgstr "1"
-
-#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non viverra vitae, interdum ut aenean ipsum.
-#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non.
-#: tests/shunit/data/bad_i18n_comment_2.py:4
-#: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
-#: tests/shunit/data/good_i18n_2.py:2
-msgid "2"
-msgstr "2"
-
-#: tests/shunit/data/bad_i18n_newline_3.py:5
-msgid "3"
-msgstr "3"
-
-#: tests/shunit/data/bad_i18n_newline_4.py:5
-msgid "4"
-msgstr "4"
-
-#: tests/shunit/data/bad_i18n_newline_5.py:5
-msgid "5"
-msgstr "5"
-
-#: tests/shunit/data/bad_i18n_newline_6.py:5
-msgid "6"
-msgstr "6"
 

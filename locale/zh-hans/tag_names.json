@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shizhao"
+		]
+	},
+	"language_tag": "语言",
+	"multidisciplinary_tag": "多学科",
+	"physical-science_tag": "物理科学",
+	"music_tag": "音乐",
+	"art_tag": "艺术",
+	"literature_tag": "文学",
+	"economics_tag": "经济学",
+	"law_tag": "法律",
+	"military_tag": "军事",
+	"business_tag": "商业",
+	"education_tag": "教育",
+	"chemistry_tag": "化学",
+	"biology_tag": "生物学",
+	"religion_tag": "宗教",
+	"psychology_tag": "心理学",
+	"video_tag": "视频",
+	"humanities_tag": "人文学科",
+	"social-sciences_tag": "社会科学",
+	"sports_tag": "体育",
+	"politics_tag": "政治",
+	"history_tag": "历史",
+	"culture_tag": "文化",
+	"science_tag": "科学",
+	"medical_tag": "医学",
+	"newspapers_tag": "报纸",
+	"statistics_tag": "统计学"
+}
