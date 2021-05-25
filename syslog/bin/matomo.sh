@@ -8,7 +8,9 @@ while IFS= read -r line; do
     echo ${line} | /srv/syslog/bin/import_logs.py \
     --url=https://${MATOMO_FQDN}/ --token-auth=${MATOMO_AUTH_TOKEN} \
     --idsite=${MATOMO_SITEID} --recorders=4 \
-    --enable-http-errors --enable-http-redirects --enable-bots \
+    --enable-http-errors \
+    --enable-http-redirects \
+    --enable-bots \
     --log-format-name=nginx_json -
   fi
 done
