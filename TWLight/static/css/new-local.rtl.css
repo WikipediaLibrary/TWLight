@@ -4,6 +4,12 @@
        url('../fonts/Roboto-Regular.ttf') format("truetype");
 }
 
+@font-face {
+  font-family: 'Roboto-Light';
+  src: local('Roboto-Light'),
+       url('../fonts/Roboto-Light.ttf') format("truetype");
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -38,13 +44,101 @@ LOGIN PARTIAL CSS
         background: #3366CC;
         width: 100%
     }
+    .homepage-description{
+        color: #FFF;
+        font-family: Roboto;
+        font-style: normal;
+        font-size: 25px;
+        font-weight: 800;
+        padding: 20px 0px 0px 45px;
+    }
+
+    .homepage-criteria{
+        color:#FFF;
+        font-family: Roboto;
+        font-style: normal;
+        padding: 0px 0px 0px 45px;
+    }
+    .criteria-info{
+        font-size: 18px;
+    }
+    .criteria-item{
+        font-family: Roboto-Light;
+        font-size: 18px;
+        line-height: 5px;
+    }
+    .homepage-login{
+        padding: 0px 0px 0px 25px;
+    }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 991px) {
     .login-section{
         min-height: 430px;
         background: #3366CC;
         width: 100%
+    }
+    .homepage-description{
+        color: #FFF;
+        font-family: Roboto;
+        font-style: normal;
+        font-size: 30px;
+        font-weight: 800;
+        padding: 20px 0px 0px 45px;
+    }
+
+    .homepage-criteria{
+        color:#FFF;
+        font-family: Roboto;
+        font-style: normal;
+        padding: 0px 0px 0px 45px;
+    }
+
+    .criteria-info{
+        font-size: 18px;
+    }
+    .criteria-item{
+        font-family: Roboto-Light;
+        font-size: 18px;
+        line-height: 0px;
+    }
+    .homepage-login{
+        padding: 0px 0px 0px 45px;
+    }
+}
+
+@media (min-width: 992px) {
+    .login-section{
+        min-height: 430px;
+        background: #3366CC;
+        width: 100%
+    }
+    .homepage-description{
+        color: #FFF;
+        font-family: Roboto;
+        font-style: normal;
+        font-size: 38px;
+        font-weight: 800;
+        padding: 20px 0px 0px 170px;
+    }
+
+    .homepage-criteria{
+        color:#FFF;
+        font-family: Roboto;
+        font-style: normal;
+        padding: 35px 0px 0px 95px;
+    }
+
+    .criteria-info{
+        font-size: 20px;
+    }
+    .criteria-item{
+        font-family: Roboto-Light;
+        font-size: 20px;
+        line-height: 32px;
+    }
+    .homepage-login{
+        padding: 0px 0px 0px 170px;
     }
 }
 
@@ -73,43 +167,13 @@ LOGIN PARTIAL CSS
     color: #FFF;
 }
 
-.homepage-description{
-    color: #FFF;
-    font-family: Roboto;
-    font-style: normal;
-    font-size: 38px;
-    font-weight: 800;
-    padding: 20px 0px 0px 170px;
-}
-
-.homepage-criteria{
-    color:#FFF;
-    font-family: Roboto;
-    font-style: normal;
-    padding: 35px 0px 0px 95px;
-}
-
-.criteria-info{
-    font-size: 20px;
-}
-
 .criteria-list{
     list-style-type: none;
     padding: 0px 0px 0px 0px;
 }
 
-.criteria-item{
-    font-family: Roboto-Light;
-    font-size: 20px;
-    line-height: 32px;
-}
-
 .criteria-checkmark{
     padding: 0px 10px 0px 0px;
-}
-
-.homepage-login{
-    padding: 0px 0px 0px 170px;
 }
 
 .homepage-login-button{
@@ -133,15 +197,9 @@ NEW FOOTER CSS
   width: 100%;
 }
 .footer-content{
-    float: left !important;
+    float: right !important;
 }
 .footer-element{
     text-decoration: none;
     color: #000;
-}
-
-.login-section{
-    min-height: 430px;
-    background: #3366CC;
-    width: 100%
 }
