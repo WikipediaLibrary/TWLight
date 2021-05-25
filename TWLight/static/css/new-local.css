@@ -72,7 +72,42 @@ LOGIN PARTIAL CSS
     }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 991px) {
+    .login-section{
+        min-height: 430px;
+        background: #3366CC;
+        width: 100%
+    }
+    .homepage-description{
+        color: #FFF;
+        font-family: Roboto;
+        font-style: normal;
+        font-size: 38px;
+        font-weight: 800;
+        padding: 20px 0px 0px 45px;
+    }
+
+    .homepage-criteria{
+        color:#FFF;
+        font-family: Roboto;
+        font-style: normal;
+        padding: 0px 0px 0px 45px;
+    }
+
+    .criteria-info{
+        font-size: 20px;
+    }
+    .criteria-item{
+        font-family: Roboto-Light;
+        font-size: 20px;
+        line-height: 0px;
+    }
+    .homepage-login{
+        padding: 0px 0px 0px 45px;
+    }
+}
+
+@media (min-width: 992px) {
     .login-section{
         min-height: 430px;
         background: #3366CC;

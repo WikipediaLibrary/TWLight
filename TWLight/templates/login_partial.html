@@ -16,7 +16,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-6 col-md-6 col-sm-12 homepage-description">
+  <div class="col-lg-6 col-md-12 col-sm-12 homepage-description">
     <p>
       {% comment %}Translators: Information about The Wikipedia Library.{% endcomment %}
       {% blocktranslate %}
@@ -27,7 +27,7 @@
     </p>
   </div>
 
-  <div class="col-lg-6 col-md-6 col-sm-12 homepage-criteria">
+  <div class="col-lg-6 col-md-12 col-sm-12 homepage-criteria">
     <p class="criteria-info">
       {% comment %}Translators: Information about The Wikipedia Library.{% endcomment %}
       {% blocktranslate %}
@@ -49,7 +49,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12 homepage-login">
+    <div class="col-lg-6 col-md-12 col-sm-12 homepage-login">
       {% comment %}Translators: Button that logs editors in via Wikipedia.{% endcomment %}
       <a  class="btn btn-light homepage-login-button" href="{% url 'oauth_login' %}?next={% url 'users:my_library' %}">
         {% trans "Login via Wikipedia" %}
