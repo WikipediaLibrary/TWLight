@@ -10,6 +10,13 @@
        url('../fonts/Roboto-Light.ttf') format("truetype");
 }
 
+/* Quick hack to prevent horizontal scrolling on phones */
+@media (max-width: 375px) {
+  body * {
+    max-width: 99%;
+  }
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -42,7 +49,7 @@ LOGIN PARTIAL CSS
     .login-section{
         min-height: 489px;
         background: #3366CC;
-        width: 100%
+        width: 100%;
     }
     .homepage-description{
         color: #FFF;
@@ -50,25 +57,25 @@ LOGIN PARTIAL CSS
         font-style: normal;
         font-size: 25px;
         font-weight: 800;
-        padding: 20px 0px 0px 45px;
+        padding: 20px 0px 0px 30px;
     }
 
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
         font-style: normal;
-        padding: 0px 0px 0px 45px;
+        padding: 0px 0px 0px 30px;
     }
     .criteria-info{
-        font-size: 18px;
+        font-size: 16px;
     }
     .criteria-item{
         font-family: Roboto-Light;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 5px;
     }
     .homepage-login{
-        padding: 0px 0px 0px 25px;
+        padding: 0px 0px 20px 25px;
     }
 }
 
@@ -76,7 +83,7 @@ LOGIN PARTIAL CSS
     .login-section{
         min-height: 430px;
         background: #3366CC;
-        width: 100%
+        width: 100%;
     }
     .homepage-description{
         color: #FFF;
@@ -84,14 +91,14 @@ LOGIN PARTIAL CSS
         font-style: normal;
         font-size: 30px;
         font-weight: 800;
-        padding: 20px 0px 0px 45px;
+        padding: 20px 20px 0px 0px;
     }
 
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
         font-style: normal;
-        padding: 0px 0px 0px 45px;
+        padding: 0px 0px 0px 0px;
     }
 
     .criteria-info{
@@ -103,7 +110,7 @@ LOGIN PARTIAL CSS
         line-height: 0px;
     }
     .homepage-login{
-        padding: 0px 0px 0px 45px;
+        padding: 0px 20px 20px 0px;
     }
 }
 
@@ -111,7 +118,7 @@ LOGIN PARTIAL CSS
     .login-section{
         min-height: 430px;
         background: #3366CC;
-        width: 100%
+        width: 100%;
     }
     .homepage-description{
         color: #FFF;
@@ -119,14 +126,14 @@ LOGIN PARTIAL CSS
         font-style: normal;
         font-size: 38px;
         font-weight: 800;
-        padding: 20px 0px 0px 170px;
+        padding: 20px 175px 0px 20px;
     }
 
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
         font-style: normal;
-        padding: 35px 0px 0px 95px;
+        padding: 35px 0px 0px 195px;
     }
 
     .criteria-info{
@@ -138,7 +145,7 @@ LOGIN PARTIAL CSS
         line-height: 32px;
     }
     .homepage-login{
-        padding: 0px 0px 0px 170px;
+        padding: 0px 175px 20px 20px;
     }
 }
 
@@ -149,7 +156,7 @@ LOGIN PARTIAL CSS
 .logo {
 	height:70px;
 	float:left;
-	padding:21px 0px 5px 23px;
+	padding:21px 25px 5px 0px;
 }
 
 .homepage-title{
@@ -197,7 +204,7 @@ NEW FOOTER CSS
   width: 100%;
 }
 .footer-content{
-    float: right !important;
+    float: left !important;
 }
 .footer-element{
     text-decoration: none;
