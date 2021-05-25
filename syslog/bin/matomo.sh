@@ -10,7 +10,6 @@ while IFS= read -r line; do
     --idsite=${MATOMO_SITEID} --recorders=4 \
     --enable-http-errors \
     --enable-http-redirects \
-    --enable-bots \
     --log-format-name=nginx_json -
   fi
 done
