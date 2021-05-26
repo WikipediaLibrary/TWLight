@@ -50,6 +50,7 @@ LOGIN PARTIAL CSS
         min-height: 489px;
         background: #3366CC;
         width: 100%;
+        overflow-x: hidden;
     }
     .homepage-description{
         color: #FFF;
@@ -84,6 +85,7 @@ LOGIN PARTIAL CSS
         min-height: 430px;
         background: #3366CC;
         width: 100%;
+        overflow-x: hidden;
     }
     .homepage-description{
         color: #FFF;
@@ -119,6 +121,7 @@ LOGIN PARTIAL CSS
         min-height: 430px;
         background: #3366CC;
         width: 100%;
+        overflow-x: hidden;
     }
     .homepage-description{
         color: #FFF;
@@ -147,10 +150,6 @@ LOGIN PARTIAL CSS
     .homepage-login{
         padding: 0px 175px 20px 20px;
     }
-}
-
-.homepage-logo{
-    text-decoration: none;
 }
 
 .logo {

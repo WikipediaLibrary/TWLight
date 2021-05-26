@@ -10,13 +10,6 @@
        url('../fonts/Roboto-Light.ttf') format("truetype");
 }
 
-/* Quick hack to prevent horizontal scrolling on phones */
-@media (max-width: 375px) {
-  body * {
-    max-width: 99%;
-  }
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -50,6 +43,7 @@ LOGIN PARTIAL CSS
         min-height: 489px;
         background: #3366CC;
         width: 100%;
+        overflow-x: hidden;
     }
     .homepage-description{
         color: #FFF;
@@ -84,6 +78,7 @@ LOGIN PARTIAL CSS
         min-height: 430px;
         background: #3366CC;
         width: 100%;
+        overflow-x: hidden;
     }
     .homepage-description{
         color: #FFF;
@@ -119,6 +114,7 @@ LOGIN PARTIAL CSS
         min-height: 430px;
         background: #3366CC;
         width: 100%;
+        overflow-x: hidden;
     }
     .homepage-description{
         color: #FFF;
@@ -126,14 +122,14 @@ LOGIN PARTIAL CSS
         font-style: normal;
         font-size: 38px;
         font-weight: 800;
-        padding: 20px 0px 0px 170px;
+        padding: 20px 0px 0px 250px;
     }
 
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
         font-style: normal;
-        padding: 35px 0px 0px 95px;
+        padding: 35px 0px 0px 125px;
     }
 
     .criteria-info{
@@ -145,12 +141,8 @@ LOGIN PARTIAL CSS
         line-height: 32px;
     }
     .homepage-login{
-        padding: 0px 0px 20px 170px;
+        padding: 0px 0px 20px 250px;
     }
-}
-
-.homepage-logo{
-    text-decoration: none;
 }
 
 .logo {
