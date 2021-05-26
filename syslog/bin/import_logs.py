@@ -80,6 +80,7 @@ DOWNLOAD_EXTENSIONS = set((
 # https://github.com/matomo-org/device-detector/blob/master/regexes/bots.yml
 # user agents must be lowercase
 EXCLUDED_USER_AGENTS = (
+    'apache-httpclient',
     'adsbot-google',
     'ask jeeves',
     'baidubot',
@@ -100,6 +101,7 @@ EXCLUDED_USER_AGENTS = (
     'netcraftsurvey',
     'panopta',
     'pingdom.com_bot_',
+    'python-requests/',
     'robot',
     'spider',
     'surveybot',
