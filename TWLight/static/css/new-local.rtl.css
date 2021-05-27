@@ -10,13 +10,6 @@
        url('../fonts/Roboto-Light.ttf') format("truetype");
 }
 
-/* Quick hack to prevent horizontal scrolling on phones */
-@media (max-width: 375px) {
-  body * {
-    max-width: 99%;
-  }
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -185,10 +178,6 @@ LOGIN PARTIAL CSS
     text-decoration: none;
     color: #FFF;
     padding:34px 20px 5px 5px;
-}
-
-.homepage-title:hover{
-    color: #FFF;
 }
 
 .criteria-list{
