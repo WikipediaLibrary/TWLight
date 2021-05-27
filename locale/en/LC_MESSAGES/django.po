@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-05-12 18:35+0000\n"
+"POT-Creation-Date: 2021-05-27 14:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1158,8 +1158,10 @@ msgstr ""
 #. Translators: This is the title of the form where users can send messages to the Wikipedia Library team.
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
+#. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
 #: TWLight/templates/about.html:204 TWLight/templates/base.html:261
+#: TWLight/templates/new_base.html:87
 msgid "Contact us"
 msgstr ""
 
@@ -1182,7 +1184,9 @@ msgid "Meta page"
 msgstr ""
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
+#. Translators: Name of the project/tool.
 #: TWLight/emails/templates/emails/contact.html:45
+#: TWLight/templates/new_base.html:15
 msgid "The Wikipedia Library"
 msgstr ""
 
@@ -2375,12 +2379,14 @@ msgid ""
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:228
+#. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
+#: TWLight/templates/base.html:228 TWLight/templates/new_base.html:63
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:234
+#. Translators: This link is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
+#: TWLight/templates/base.html:234 TWLight/templates/new_base.html:69
 msgid "Terms of use and privacy policy"
 msgstr ""
 
@@ -2561,6 +2567,11 @@ msgstr ""
 #. Translators: This is text on a button on the homepage, which allows users to see more available collections to which they can apply.
 #: TWLight/templates/home.html:115
 msgid "See more"
+msgstr ""
+
+#. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
+#: TWLight/templates/new_base.html:75
+msgid "Translate the Library"
 msgstr ""
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
