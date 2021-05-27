@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"그냥기여자"
+		]
+	},
+	"language_tag": "언어",
+	"multidisciplinary_tag": "전문분야 다수",
+	"physical-science_tag": "물리학",
+	"music_tag": "음악",
+	"art_tag": "미술",
+	"literature_tag": "문학",
+	"economics_tag": "경제학",
+	"law_tag": "법",
+	"military_tag": "군사",
+	"business_tag": "사업",
+	"education_tag": "교육",
+	"chemistry_tag": "화학",
+	"biology_tag": "생물학",
+	"religion_tag": "종교",
+	"psychology_tag": "심리학",
+	"video_tag": "동영상",
+	"humanities_tag": "인류",
+	"social-sciences_tag": "사회과학",
+	"sports_tag": "스포츠",
+	"politics_tag": "정치",
+	"history_tag": "역사",
+	"culture_tag": "문화",
+	"science_tag": "과학",
+	"medical_tag": "의학",
+	"newspapers_tag": "신문",
+	"statistics_tag": "통계"
+}

@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajeje Brazorf"
+		]
+	},
+	"language_tag": "Langue",
+	"music_tag": "Musique",
+	"art_tag": "Art",
+	"literature_tag": "Littérature",
+	"economics_tag": "Économie",
+	"law_tag": "Loi",
+	"education_tag": "Éducation",
+	"chemistry_tag": "Chimie",
+	"biology_tag": "Biologie",
+	"religion_tag": "Religion",
+	"psychology_tag": "Psychologie",
+	"video_tag": "Vidéo",
+	"social-sciences_tag": "Sciences sociales",
+	"sports_tag": "Sports",
+	"history_tag": "Histoire",
+	"culture_tag": "Culture",
+	"science_tag": "Science",
+	"statistics_tag": "Statistiques"
+}
