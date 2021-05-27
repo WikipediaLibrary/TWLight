@@ -561,7 +561,7 @@ class PartnerModelTests(TestCase):
         """
         partner4 = PartnerFactory()
 
-        partner4.new_tags = {"tags": ["military_tag", "biology_tag"]}
+        partner4.new_tags = {"tags": ["law_tag", "earth-sciences_tag"]}
 
         partner4.save()
 
@@ -571,7 +571,7 @@ class PartnerModelTests(TestCase):
         """
         partner5 = PartnerFactory()
 
-        partner5.new_tags = {"tags": ["this_doesnt_exist_tag", "biology_tag"]}
+        partner5.new_tags = {"tags": ["this_doesnt_exist_tag", "earth-sciences_tag"]}
         with self.assertRaises(ValidationError):
             partner5.save()
 
@@ -582,7 +582,7 @@ class PartnerModelTests(TestCase):
         partner5 = PartnerFactory()
 
         partner5.new_tags = {
-            "tags": ["military_tag", "biology_tag"],
+            "tags": ["law_tag", "earth-sciences_tag"],
             "other_key": "error",
         }
 
