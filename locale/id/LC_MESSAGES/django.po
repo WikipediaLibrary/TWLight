@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-05-27 14:12+0000\n"
+"POT-Creation-Date: 2021-05-27 18:33+0000\n"
 "PO-Revision-Date: 2021-05-24 12:26:19+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1211,7 +1211,7 @@ msgstr ""
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
 #: TWLight/templates/about.html:204 TWLight/templates/base.html:261
-#: TWLight/templates/new_base.html:87
+#: TWLight/templates/new_base.html:92
 msgid "Contact us"
 msgstr "Hubungi kami"
 
@@ -1234,9 +1234,11 @@ msgid "Meta page"
 msgstr "Halaman meta"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
+#. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #. Translators: Name of the project/tool.
 #: TWLight/emails/templates/emails/contact.html:45
-#: TWLight/templates/new_base.html:15
+#: TWLight/templates/login_partial.html:9
+#: TWLight/templates/login_partial.html:13 TWLight/templates/new_base.html:15
 msgid "The Wikipedia Library"
 msgstr "Perpustakaan Wikipedia"
 
@@ -2433,13 +2435,13 @@ msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:228 TWLight/templates/new_base.html:63
+#: TWLight/templates/base.html:228 TWLight/templates/new_base.html:68
 msgid "About"
 msgstr "Tentang"
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
 #. Translators: This link is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:234 TWLight/templates/new_base.html:69
+#: TWLight/templates/base.html:234 TWLight/templates/new_base.html:74
 msgid "Terms of use and privacy policy"
 msgstr "Ketentuan penggunaan dan kebijakan privasi"
 
@@ -2622,8 +2624,32 @@ msgstr ""
 msgid "See more"
 msgstr "Selengkapnya"
 
+#. Translators: Information about The Wikipedia Library.
+#: TWLight/templates/login_partial.html:20
+msgid ""
+"\n"
+"      Over 90 of the world's top\n"
+"      subscription-only databases, free\n"
+"      for Wikipedians of all backgrounds\n"
+"      "
+msgstr ""
+
+#. Translators: Information about The Wikipedia Library.
+#: TWLight/templates/login_partial.html:31
+msgid ""
+"\n"
+"      Meet this criteria for automatic access\n"
+"      "
+msgstr ""
+
+#: TWLight/templates/login_partial.html:53
+#, fuzzy
+#| msgid "Log in with your Wikipedia account"
+msgid "Login via Wikipedia"
+msgstr "Masuk log dengan akun Wikipedia"
+
 #. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
-#: TWLight/templates/new_base.html:75
+#: TWLight/templates/new_base.html:80
 msgid "Translate the Library"
 msgstr ""
 
@@ -3686,22 +3712,22 @@ msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/views.py:69
+#: TWLight/views.py:70 TWLight/views.py:121
 msgid "500+ edits"
 msgstr "500+ suntingan"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/views.py:71
+#: TWLight/views.py:72 TWLight/views.py:123
 msgid "6+ months editing"
 msgstr "Aktif 6+ bulan"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/views.py:73
+#: TWLight/views.py:74 TWLight/views.py:125
 msgid "10+ edits in the last month"
 msgstr "10+ suntingan bulan lalu"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/views.py:75
+#: TWLight/views.py:76 TWLight/views.py:127
 msgid "No active blocks"
 msgstr "Akun tidak diblokir"
 
