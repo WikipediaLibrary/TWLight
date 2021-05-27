@@ -71,6 +71,12 @@ LOGIN PARTIAL CSS
     .homepage-login{
         padding: 0px 0px 20px 25px;
     }
+    .homepage-login-button{
+        color: #3366CC;
+        width: 90%;
+        font-weight: 700;
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -106,6 +112,12 @@ LOGIN PARTIAL CSS
     }
     .homepage-login{
         padding: 0px 0px 20px 30px;
+    }
+    .homepage-login-button{
+        color: #3366CC;
+        width: 92%;
+        font-weight: 700;
+        font-size: 14px;
     }
 }
 
@@ -143,6 +155,12 @@ LOGIN PARTIAL CSS
     .homepage-login{
         padding: 0px 0px 20px 250px;
     }
+    .homepage-login-button{
+        color: #3366CC;
+        width: 95%;
+        font-weight: 700;
+        font-size: 14px;
+    }
 }
 
 .logo {
@@ -173,13 +191,6 @@ LOGIN PARTIAL CSS
 
 .criteria-checkmark{
     padding: 0px 10px 0px 0px;
-}
-
-.homepage-login-button{
-    color: #3366CC;
-    width: 95%;
-    font-weight: 700;
-    font-size: 14px;
 }
 
 /*
