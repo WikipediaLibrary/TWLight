@@ -26,12 +26,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         num_partners = options["num"][0]
         tag_list = [
-            "science_tag",
-            "humanities_tag",
+            "earth-sciences_tag",
+            "philosophy-and-religion_tag",
             "social-sciences_tag",
             "history_tag",
             "law_tag",
-            "video_tag",
+            "culture_tag",
             "multidisciplinary_tag",
         ]
 
