@@ -6,12 +6,21 @@
 
 {% block content %}
 
-  <!-- <div class="login-section">
+  <div class="login-section">
     {% include "login_partial.html" %}
   </div>
 
   <div class="">
     {% include "partner_carousel.html" %}
-  </div> -->
+  </div>
 
 {% endblock content %}
+
+
+{% block javascript %}
+  <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+{% endblock javascript %}

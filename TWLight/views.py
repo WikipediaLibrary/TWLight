@@ -6,6 +6,7 @@ from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.utils.translation import get_language, gettext_lazy as _
 
 from TWLight.resources.models import Partner
@@ -113,8 +114,26 @@ class HomePageView(TemplateView):
 
 
 class NewHomePageView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["bundle_criteria"] = [
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
+            _("500+ edits"),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
+            _("6+ months editing"),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
+            _("10+ edits in the last month"),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
+            _("No active blocks"),
+        ]
+        return context
 
-    template_name = "homepage.html"
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect("/users/my_library")
+        else:
+            context = self.get_context_data()
+            return render(request, "homepage.html", context)
 
 
 @sensitive_variables()
