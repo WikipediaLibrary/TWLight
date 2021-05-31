@@ -1,4 +1,4 @@
-black==20.8b1
+black==21.5b2
 bleach==3.3.0
 defusedxml==0.7.1
 django==3.1.8
