@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Munkaila Sulemana"
+		]
+	},
+	"language_tag": "Balli",
+	"music_tag": "Yila",
+	"art_tag": "Baŋsim",
+	"literature_tag": "Yɛtɔɣa niɣma",
+	"economics_tag": "Daabiligu yaɣili",
+	"military_tag": "Fukumsi buɣbahi",
+	"business_tag": "Daabiligu",
+	"religion_tag": "Adiini",
+	"video_tag": "Sinii",
+	"humanities_tag": "Ninsali tali",
+	"social-sciences_tag": "Salo tabibi baŋsim",
+	"politics_tag": "Siyaasa",
+	"history_tag": "Taarihi",
+	"culture_tag": "Kali",
+	"science_tag": "Tabibi yaɣli",
+	"medical_tag": "Alaafee",
+	"newspapers_tag": "Lahabali churi",
+	"statistics_tag": "Vaabu pubu"
+}

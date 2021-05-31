@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saederup92"
+		]
+	},
+	"language_tag": "Sprog",
+	"music_tag": "Musik",
+	"art_tag": "Kunst",
+	"literature_tag": "Litteratur",
+	"economics_tag": "Økonomi",
+	"law_tag": "Jura",
+	"business_tag": "Forretning",
+	"education_tag": "Uddannelse",
+	"chemistry_tag": "Kemi",
+	"biology_tag": "Biologi",
+	"religion_tag": "Religion",
+	"psychology_tag": "Psykologi",
+	"video_tag": "Video",
+	"social-sciences_tag": "Samfundsfag",
+	"sports_tag": "Sport",
+	"history_tag": "Historie",
+	"culture_tag": "Kultur",
+	"medical_tag": "Medicin",
+	"statistics_tag": "Statistik"
+}

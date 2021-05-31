@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"محمد أحمد عبد الفتاح"
+		]
+	},
+	"music_tag": "موسيقى",
+	"literature_tag": "أدب",
+	"military_tag": "عسكري",
+	"social-sciences_tag": "علوم اجتماعية",
+	"politics_tag": "سياسة",
+	"history_tag": "تاريخ",
+	"culture_tag": "ثقافة",
+	"science_tag": "علوم",
+	"newspapers_tag": "صحف"
+}
