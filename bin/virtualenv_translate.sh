@@ -14,9 +14,8 @@ fi
 # Load virtual environment
 if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 then
-    # Get a list of languages, and add the reserved code for translation documentation.
-    langs=($(python3 manage.py diffsettings | grep '^LANGUAGES =' | grep -o "('[^']*'" | grep -o "'[^']*'"  | xargs))
-    langs+=('qqq')
+    # Get a list of languages for ugettext translation.
+    langs=($(find ${TWLIGHT_HOME}/locale -type d -wholename "*/LC_MESSAGES" -printf "echo '%p' | cut -d '/' -f 4 -\n" | sh | tr '\n' ' '))
 
     makemessages() {
         echo "makemessages:"
