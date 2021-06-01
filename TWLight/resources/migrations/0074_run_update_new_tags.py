@@ -8,6 +8,6 @@ def update_new_tags(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [("resources", "0073_stream_description_it")]
+    dependencies = [("resources", "0074_auto_20210601_1629")]
 
     operations = [migrations.RunPython(update_new_tags, migrations.RunPython.noop)]
