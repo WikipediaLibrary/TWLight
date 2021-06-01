@@ -28,7 +28,7 @@ from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 from TWLight.ezproxy.urls import urlpatterns as ezproxy_urls
 
-from .views import LanguageWhiteListView, HomePageView, NewHomePageView
+from .views import HomePageView, NewHomePageView
 
 handler400 = "TWLight.views.bad_request"
 
@@ -88,12 +88,6 @@ urlpatterns = [
     ),
     # For contact us form
     url(r"^contact/$", ContactUsView.as_view(), name="contact"),
-    # Cached for 24 hours.
-    url(
-        r"^i18n-whitelist$",
-        cache_page(86400)(LanguageWhiteListView.as_view()),
-        name="i18n_whitelist",
-    ),
     url(r"^$", HomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
     url(r"^homepage/$", NewHomePageView.as_view(), name="new_homepage"),
