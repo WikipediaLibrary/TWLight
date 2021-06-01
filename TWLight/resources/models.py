@@ -19,7 +19,7 @@ from TWLight.resources.helpers import (
     get_tags_json_schema,
 )
 
-RESOURCE_LANGUAGES = copy.copy(settings.INTERSECTIONAL_LANGUAGES)
+RESOURCE_LANGUAGES = copy.copy(settings.LANGUAGES)
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
 
@@ -32,7 +32,7 @@ def validate_language_code(code):
     if code not in RESOURCE_LANGUAGE_CODES:
         raise ValidationError(
             "%(code)s is not a valid language code. You must enter an ISO "
-            "language code, as in the INTERSECTIONAL_LANGUAGES setting at "
+            "language code, as in the LANGUAGES setting at "
             "https://github.com/WikipediaLibrary/TWLight/blob/master/TWLight/settings/base.py",
             params={"code": code},
         )

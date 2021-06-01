@@ -24,23 +24,6 @@ from django.views.defaults import ERROR_400_TEMPLATE_NAME, ERROR_PAGE_TEMPLATE
 logger = logging.getLogger(__name__)
 
 
-class LanguageWhiteListView(View):
-    """
-    JSON dump of current intersection between CLDR and Django languages.
-    For translatewiki.net. Cache set via decorator in urls.py.
-    """
-
-    def get(self, request):
-        whitelist_dict = {}
-        for i, (lang_code, autonym) in enumerate(settings.INTERSECTIONAL_LANGUAGES):
-            whitelist_dict[lang_code] = autonym
-
-        whitelist_json = json.dumps(
-            whitelist_dict, ensure_ascii=False, sort_keys=True, indent=4
-        )
-        return HttpResponse(whitelist_json, content_type="application/json")
-
-
 class HomePageView(TemplateView):
 
     template_name = "home.html"

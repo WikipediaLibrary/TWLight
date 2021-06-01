@@ -22,9 +22,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import json
 
-# Importing global settings is typically not recommended, and un-Django-like,
-# but we're doing something interesting with the LANGUAGES setting.
-from django.conf.global_settings import LANGUAGES as GLOBAL_LANGUAGES
 from django.contrib import messages
 
 from django.urls import reverse_lazy
@@ -47,30 +44,19 @@ TWLIGHT_ENV = os.environ.get("TWLIGHT_ENV")
 # An atypical way of setting django languages for TranslateWiki integration:
 # https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
 
-# Returns the intersectional language codes between Django and Wikimedia CLDR
-# along with the language autonyms from Wikimedia CLDR.
-# https://github.com/wikimedia/language-data
-def get_django_cldr_languages_intersection(dir):
-    languages_intersection = []
-    language_data_json = open(os.path.join(dir, "language-data.json"))
-    languages = json.loads(language_data_json.read())["languages"]
-    for lang_code, lang_data in languages.items():
-        for i, (djlang_code, djlang_name) in enumerate(GLOBAL_LANGUAGES):
-            if lang_code == djlang_code:
-                autonym = lang_data[-1]
-                languages_intersection += [(lang_code, autonym)]
-    return sorted(set(languages_intersection))
-
-
 # Get the language codes from the locale directories, and compare them to the
-# intersecting set of languages between Django and Wikimedia CLDR.
-# Use langauge autonyms from Wikimedia.
+# languages in Wikimedia CLDR. Use langauge autonyms from Wikimedia.
+# We periodically pull:
+# https://raw.githubusercontent.com/wikimedia/language-data/master/data/language-data.json
+# into locale/language-data.json
 def get_languages_from_locale_subdirectories(dir):
     current_languages = []
-    languages_intersection = INTERSECTIONAL_LANGUAGES
+    language_data_json = open(os.path.join(dir, "language-data.json"))
+    languages = json.loads(language_data_json.read())["languages"]
     for locale_dir in os.listdir(dir):
         if os.path.isdir(os.path.join(dir, locale_dir)):
-            for i, (lang_code, autonym) in enumerate(languages_intersection):
+            for lang_code, lang_data in languages.items():
+                autonym = lang_data[-1]
                 if locale_dir == lang_code:
                     current_languages += [(lang_code, autonym)]
     return sorted(set(current_languages))
@@ -267,9 +253,8 @@ LOCALE_PATHS = [
 # available to the system. This keeps our column and index count for db-stored
 # translations as low as possible while allowing translatewiki contributions to
 # be used without reconfiguring the site.
-INTERSECTIONAL_LANGUAGES = get_django_cldr_languages_intersection(LOCALE_PATHS[0])
 LANGUAGES = get_languages_from_locale_subdirectories(LOCALE_PATHS[0])
-FAKER_LOCALES = get_django_faker_languages_intersection(INTERSECTIONAL_LANGUAGES)
+FAKER_LOCALES = get_django_faker_languages_intersection(LANGUAGES)
 
 TIME_ZONE = "UTC"
 
