@@ -157,6 +157,17 @@ class Application(models.Model):
     def get_absolute_url(self):
         return reverse_lazy("applications:evaluate", kwargs={"pk": self.pk})
 
+    def get_status_display(self):
+
+        if (
+            self.status == self.SENT
+            and self.partner.authorization_method != self.partner.EMAIL
+        ):
+            # Translators: This is the status of an application that has been finalised.
+            return _("Finalized")
+
+        return self.STATUS_CHOICES[self.status][1]
+
     # Every single save to this model should create a revision.
     # You can access two models this way: REVISIONS and VERSIONS.
     # Versions contain the model data at the time, accessible via
