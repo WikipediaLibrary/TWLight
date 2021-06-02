@@ -191,6 +191,34 @@ LOGIN PARTIAL CSS
 
 /*
 ----------------------------------------------------------------------------
+HOMEPAGE CAROUSEL CSS
+--------------------------------------------------------------------------
+*/
+.tag-filters{
+    padding: 20px 0px 0px 0px;
+}
+.more-item{
+    color: #3366CC;
+    font-weight: 300;
+}
+.more-item:hover{
+    color: #3366CC;
+    font-weight: 500;
+    text-decoration: underline;
+}
+.more-item:active{
+    color: #3366CC;
+    font-weight: 500;
+    text-decoration: underline;
+}
+.more-option{
+    border-style: solid;
+    border-color: #3366CC;
+    border-width: thin;
+}
+
+/*
+----------------------------------------------------------------------------
 NEW FOOTER CSS
 --------------------------------------------------------------------------
 */

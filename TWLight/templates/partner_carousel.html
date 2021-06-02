@@ -1,0 +1,27 @@
+<div class="row tag-filters">
+  <div class="col-12">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link more-item" href="#">All</a>
+      </li>
+      {% for tag_key, tag_value in tags.items %}
+          <li class="nav-item">
+            <a class="nav-link more-item" href="#">{{ tag_value }}</a>
+          </li>
+        {% endfor %}
+        {% if more_tags %}
+          <li class="nav-item dropdown more-option">
+            <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+            <div class="dropdown-menu">
+              {% for a_tag_key, a_tag_value in more_tags.items %}
+                <a class="dropdown-item more-item" href="#">{{ a_tag_value }}</a>
+              {% endfor %}
+            </div>
+          </li>
+        {% endif %}
+    </ul>
+  </div>
+</div>
+<div class="row">
+
+</div>

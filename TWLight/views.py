@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from django.utils.translation import get_language, gettext_lazy as _
 
 from TWLight.resources.models import Partner
-from TWLight.resources.helpers import get_partner_description
+from TWLight.resources.helpers import get_partner_description, get_tag_dict
 
 from django.http import HttpResponseBadRequest
 from django.template import TemplateDoesNotExist, loader
@@ -109,11 +109,26 @@ class NewHomePageView(TemplateView):
             # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
             _("No active blocks"),
         ]
+
+        language_code = get_language()
+        translated_tags = get_tag_dict(language_code)
+
+        if len(translated_tags) > 9:
+            context["tags"] = dict(list(translated_tags.items())[0:9])
+            context["more_tags"] = dict(
+                list(translated_tags.items())[10 : len(translated_tags)]
+            )
+        else:
+            context["tags"] = translated_tags
+            context["more_tags"] = None
+
+        context["partners"] = Partner.objects.all()
+
         return context
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect("/users/my_library")
+            return redirect("/")
         else:
             context = self.get_context_data()
             return render(request, "homepage.html", context)
