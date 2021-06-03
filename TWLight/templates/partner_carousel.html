@@ -22,6 +22,20 @@
     </ul>
   </div>
 </div>
-<div class="row">
-
+<div class="row glider-contain">
+  <div class="glider">
+    {% for partner in partners %}
+      <div class="row partner-glider-item">
+        <img src="{{ partner.logos.logo.url }}" class="partner-glider-image img-responsive" alt="{{partner.company_name}} logo"/>
+        <br><br>
+        <button type="button" class="btn partner-glider-button">More info</button>
+      </div>
+    {% endfor %}
+  </div>
+  <button aria-label="Previous" class="partner-glider-prev">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  </button>
+  <button aria-label="Next" class="partner-glider-next">
+    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+  </button>
 </div>

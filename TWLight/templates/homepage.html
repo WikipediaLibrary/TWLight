@@ -10,7 +10,7 @@
     {% include "login_partial.html" %}
   </div>
 
-  <div class="">
+  <div class="carousel-section">
     {% include "partner_carousel.html" %}
   </div>
 
@@ -22,6 +22,32 @@
   <script type="text/javascript">
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
+    })
+    window.addEventListener('load', function(){
+      new Glider(document.querySelector('.glider'), {
+        slidesToShow: 3.5,
+        arrows: {
+          prev: '.partner-glider-prev',
+          next: '.partner-glider-next'
+        },
+        draggable: true,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 2.5,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 320,
+            settings: {
+              slidesToShow: 1.5,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      })
     })
   </script>
 {% endblock javascript %}

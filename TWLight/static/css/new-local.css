@@ -194,8 +194,11 @@ LOGIN PARTIAL CSS
 HOMEPAGE CAROUSEL CSS
 --------------------------------------------------------------------------
 */
+.carousel-section{
+    overflow-x: hidden;
+}
 .tag-filters{
-    padding: 20px 0px 0px 0px;
+    padding: 25px 0px 0px 0px;
 }
 .more-item{
     color: #3366CC;
@@ -215,6 +218,102 @@ HOMEPAGE CAROUSEL CSS
     border-style: solid;
     border-color: #3366CC;
     border-width: thin;
+}
+.glider{
+    overflow-x: hidden;
+}
+.partner-glider-prev{
+    border-style: solid;
+    border-color: #3366CC;
+    border-width: 2px;
+    color: #3366CC;
+    position: absolute;
+    z-index: 2;
+    font-size: 30px;
+    font-weight: lighter;
+    text-decoration: none;
+    left: 23px;
+    top: 30%;
+    cursor: pointer;
+    opacity: 1;
+    line-height: 1;
+    transition: opacity .5s cubic-bezier(.17,.67,.83,.67),color .5s cubic-bezier(.17,.67,.83,.67);
+}
+.partner-glider-prev.disabled{
+    opacity: .25;
+    color: #000000;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 2px;
+}
+.partner-glider-next{
+    border-style: solid;
+    border-color: #3366CC;
+    border-width: 2px;
+    color: #3366CC;
+    position: absolute;
+    z-index: 2;
+    font-size: 30px;
+    font-weight: lighter;
+    text-decoration: none;
+    right: 23px;
+    top: 30%;
+    opacity: 1;
+    line-height: 1;
+    transition: opacity .5s cubic-bezier(.17,.67,.83,.67),color .5s cubic-bezier(.17,.67,.83,.67);
+}
+.partner-glider-next.disabled{
+    opacity: .25;
+    color: #000000;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 2px;
+}
+.partner-glider-item{
+    height: 450px;
+}
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .partner-glider-button{
+        width: 75%;
+        color: #FFFFFF;
+        background-color: #3366CC;
+    }
+    .partner-glider-image{
+        height: 176px;
+        width: auto;
+        padding: 35px 45px 15px 40px;
+    }
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    .partner-glider-button{
+        width: 85%;
+        color: #FFFFFF;
+        background-color: #3366CC;
+    }
+    .partner-glider-image{
+        height: 176px;
+        width: auto;
+        padding: 35px 45px 15px 40px;
+    }
+}
+
+@media (min-width: 992px) {
+    .partner-glider-button{
+        width: 90%;
+        color: #FFFFFF;
+        background-color: #3366CC;
+    }
+    .partner-glider-image{
+        height: 176px;
+        width: auto;
+        padding: 35px 90px 15px 0px;
+    }
 }
 
 /*
