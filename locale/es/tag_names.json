@@ -5,30 +5,13 @@
 			"Suecarmol"
 		]
 	},
-	"language_tag": "Idiomas",
 	"multidisciplinary_tag": "Multidisciplinario",
-	"physical-science_tag": "Ciencias físicas",
+	"physical-sciences_tag": "Ciencias físicas",
 	"music_tag": "Música",
 	"art_tag": "Arte",
-	"literature_tag": "Literatura",
-	"economics_tag": "Economía",
 	"law_tag": "Ley",
-	"military_tag": "Ejército",
-	"business_tag": "Negocio",
 	"education_tag": "Educación",
-	"chemistry_tag": "Química",
-	"biology_tag": "Biología",
-	"religion_tag": "Religión",
-	"psychology_tag": "Psicología",
-	"video_tag": "Vídeo",
-	"humanities_tag": "Humanidades",
 	"social-sciences_tag": "Ciencias sociales",
-	"sports_tag": "Deportes",
-	"politics_tag": "Política",
 	"history_tag": "Historia",
-	"culture_tag": "Cultura",
-	"science_tag": "Ciencia",
-	"medical_tag": "Médico",
-	"newspapers_tag": "Periódicos",
-	"statistics_tag": "Estadísticas"
+	"culture_tag": "Cultura"
 }

@@ -4,19 +4,10 @@
 			"Ajeje Brazorf"
 		]
 	},
-	"language_tag": "Lingua",
 	"music_tag": "Mùsica",
 	"art_tag": "Arti",
-	"literature_tag": "Littiratura",
 	"law_tag": "Liggi",
 	"education_tag": "Aducazzioni",
-	"chemistry_tag": "Chìmica",
-	"biology_tag": "Bioluggìa",
-	"religion_tag": "Riliggiuni",
-	"psychology_tag": "Psicoluggìa",
-	"video_tag": "Video",
-	"sports_tag": "Sport",
 	"history_tag": "Storia",
-	"culture_tag": "Cultura",
-	"science_tag": "Scienza"
+	"culture_tag": "Cultura"
 }

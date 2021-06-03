@@ -1,33 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jeeputer"
+			"Jeeputer",
+			"Mardetanha"
 		]
 	},
-	"language_tag": "زبان",
 	"multidisciplinary_tag": "چندرشته‌ای",
-	"physical-science_tag": "علوم فیزیک",
+	"physical-sciences_tag": "علوم فیزیک",
 	"music_tag": "موسیقی",
 	"art_tag": "هنر",
-	"literature_tag": "ادبیات",
-	"economics_tag": "اقتصاد",
+	"business-and-economics_tag": "اقتصاد و تجارت",
 	"law_tag": "حقوق",
-	"military_tag": "نظامی",
-	"business_tag": "تجارت",
 	"education_tag": "آموزش",
-	"chemistry_tag": "شیمی",
-	"biology_tag": "زیست‌شناسی",
-	"religion_tag": "مذهب",
-	"psychology_tag": "روان‌شناسی",
-	"video_tag": "ویدئو",
-	"humanities_tag": "علوم انسانی",
+	"philosophy-and-religion_tag": "فلسفه و مذهب",
 	"social-sciences_tag": "علوم اجتماعی",
-	"sports_tag": "ورزش",
-	"politics_tag": "سیاست",
 	"history_tag": "تاریخ",
 	"culture_tag": "فرهنگ",
-	"science_tag": "علم",
-	"medical_tag": "پزشکی",
-	"newspapers_tag": "روزنامه‌ها",
-	"statistics_tag": "آمار"
+	"life-sciences_tag": "علوم زندگی",
+	"health-sciences_tag": "علوم مربوط به سلامتی",
+	"earth-sciences_tag": "علوم زمینی",
+	"technology_tag": "فناوری"
 }

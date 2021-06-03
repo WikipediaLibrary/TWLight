@@ -4,30 +4,13 @@
 			"Amire80"
 		]
 	},
-	"language_tag": "שפה",
 	"multidisciplinary_tag": "רב־תחומי",
-	"physical-science_tag": "פיזיקה",
+	"physical-sciences_tag": "פיזיקה",
 	"music_tag": "מוזיקה",
 	"art_tag": "אומנות",
-	"literature_tag": "ספרות",
-	"economics_tag": "כלכלה",
 	"law_tag": "משפטים",
-	"military_tag": "צבא",
-	"business_tag": "עסקים",
 	"education_tag": "חינוך",
-	"chemistry_tag": "כימיה",
-	"biology_tag": "מדעי החיים",
-	"religion_tag": "דת",
-	"psychology_tag": "פסיכולוגיה",
-	"video_tag": "וידאו",
-	"humanities_tag": "מדעי הרוח",
 	"social-sciences_tag": "מדעי החברה",
-	"sports_tag": "ספורט",
-	"politics_tag": "מדעי המדינה",
 	"history_tag": "היסטוריה",
-	"culture_tag": "תרבות",
-	"science_tag": "מדע",
-	"medical_tag": "רפואה",
-	"newspapers_tag": "עיתונים",
-	"statistics_tag": "סטטיסטיקה"
+	"culture_tag": "תרבות"
 }

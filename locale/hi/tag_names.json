@@ -1,19 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Abijeet Patro"
+			"Abijeet Patro",
+			"Ajaysajay"
 		]
 	},
-	"language_tag": "भाषा",
 	"music_tag": "संगीत",
-	"law_tag": "कानून",
-	"military_tag": "सैन्य",
-	"business_tag": "व्यापार",
+	"law_tag": "विधि",
 	"education_tag": "शिक्षा",
-	"biology_tag": "जीवविज्ञान",
-	"religion_tag": "धर्म",
-	"sports_tag": "खेल",
-	"history_tag": "इतिहास",
-	"science_tag": "विज्ञान",
-	"statistics_tag": "आँकड़े"
+	"history_tag": "इतिहास"
 }

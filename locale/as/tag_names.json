@@ -4,30 +4,13 @@
 			"Simbu123"
 		]
 	},
-	"language_tag": "ভাষা",
 	"multidisciplinary_tag": "বহু-বিভাগীয়",
-	"physical-science_tag": "ভৌতিক বিজ্ঞান",
+	"physical-sciences_tag": "ভৌতিক বিজ্ঞান",
 	"music_tag": "সংগীত",
 	"art_tag": "কলা",
-	"literature_tag": "সাহিত্য",
-	"economics_tag": "অৰ্থনীতি",
 	"law_tag": "আইন",
-	"military_tag": "সামৰিক",
-	"business_tag": "ব্যৱসায়",
 	"education_tag": "শিক্ষা",
-	"chemistry_tag": "ৰসায়ন বিজ্ঞান",
-	"biology_tag": "জীৱবিজ্ঞান",
-	"religion_tag": "ধৰ্ম",
-	"psychology_tag": "মনোবিজ্ঞান",
-	"video_tag": "ভিডিঅ'",
-	"humanities_tag": "মানৱ বিজ্ঞান",
 	"social-sciences_tag": "সমাজ বিজ্ঞান",
-	"sports_tag": "ক্ৰীড়া",
-	"politics_tag": "ৰাজনীতি",
 	"history_tag": "ইতিহাস",
-	"culture_tag": "সংস্কৃতি",
-	"science_tag": "বিজ্ঞান",
-	"medical_tag": "চিকিৎসা",
-	"newspapers_tag": "বাতৰি কাকত",
-	"statistics_tag": "পৰিসংখ্যা"
+	"culture_tag": "সংস্কৃতি"
 }

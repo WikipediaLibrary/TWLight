@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Gomoko",
 			"Verdy p"
 		]
 	},
@@ -83,7 +84,7 @@
 	"100_short_description": "<strong>RILM</strong> est un éditeur de contenus au sujet de la musique. Ce partenariat inclut l’accès aux Encyclopédies de musique de RILM, de même que <strong>MGG Online</strong>.",
 	"37_short_description": "<strong>Retrospective Index to Music Periodicals</strong> (Index rétrospectif des périodiques sur la musique, RIPM) est la plus grande collection en ligne de périodiques rares sur la musique publiés entre 1760 et 1966.",
 	"37_description": "L’accès au RIPM permet d’utiliser les trois principales publications du RIPM :\n<ul>\n<li>Retrospective Index to Music Periodicals (RIPM, index rétrospectif des périodiques sur la musique) (de 1760 à 1966) ;</li>\n<li>RIPM Online Archive of Music Periodicals (texte intégral) (citations trouvées dans l'index rétrospectif lié aux archives en ligne de texte intégral) ;</li>\n<li>RIPM e-Library of Music Periodicals, une collection de textes qui ne se trouvent pas dans l’index rétrospectif et les archives en ligne.</li>\n</ul>",
-	"69_short_description": "<strong>Rock's Backpages</strong> (Livrets du rock) est une base de données en ligne d’articles sur la musique (qui inclut des passages en revue, des entrevues et des données caractéristiques) venant de la presse spécialisée sur la musique ou d’intérêt général. Le contenu disponible comprend également des enregistrements audio d’entrevues et s’étend des années 1950 à aujourd’hui.",
+	"69_short_description": "<strong>Rock's Backpages</strong> (Livrets du rock) est une base de données en ligne d’articles sur la musique (qui inclut des passages en revue, des entrevues et des données caractéristiques) venant de magazines sur la musique ou de journaux d’intérêt général. Le contenu disponible comprend également des enregistrements audio d’entrevues et s’étend des années 1950 à aujourd’hui.",
 	"30_short_description": "La <strong>Royal Pharmaceutical Society</strong> (Société royale pharmaceutique) offre quatre ressources : The Pharmaceutical Journal, la revue officielle de la Royal Pharmaceutical Society ; Clinic Pharmacist (Pharmacien clinique) ; Tomorrow's Pharmacist (Pharmacien de demain) ; ainsi que des ressources pédagogiques de niveau premium.",
 	"20_short_description": "La <strong>Royal Society</strong> (Société royale) est l’Académie nationale du Royaume-Uni pour la science. La Royal Society fournit une gamme de revues scientifiques.",
 	"21_short_description": "La <strong>Royal Society of Chemistry</strong> (Société royale de chimie, RSC) vous fournit toutes les ressources électroniques disponibles via RSC Gold, qui comprend des livres électroniques et des revues.",

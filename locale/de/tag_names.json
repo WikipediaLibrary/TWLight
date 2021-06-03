@@ -4,29 +4,13 @@
 			"Sandro Halank (WMDE)"
 		]
 	},
-	"language_tag": "Sprache",
 	"multidisciplinary_tag": "multidisziplinär",
-	"physical-science_tag": "Physik",
+	"physical-sciences_tag": "Physik",
 	"music_tag": "Musik",
 	"art_tag": "Kunst",
-	"literature_tag": "Literatur",
-	"economics_tag": "Wirtschaft",
 	"law_tag": "Recht",
-	"military_tag": "Militär",
 	"education_tag": "Bildung",
-	"chemistry_tag": "Chemie",
-	"biology_tag": "Biologie",
-	"religion_tag": "Religion",
-	"psychology_tag": "Psychologie",
-	"video_tag": "Video",
-	"humanities_tag": "Geisteswissenschaften",
 	"social-sciences_tag": "Sozialwissenschaften",
-	"sports_tag": "Sport",
-	"politics_tag": "Politik",
 	"history_tag": "Geschichte",
-	"culture_tag": "Kultur",
-	"science_tag": "Naturwissenschaft",
-	"medical_tag": "Medizin",
-	"newspapers_tag": "Zeitungen",
-	"statistics_tag": "Statistik"
+	"culture_tag": "Kultur"
 }
