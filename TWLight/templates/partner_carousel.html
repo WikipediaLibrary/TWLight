@@ -2,7 +2,7 @@
   <div class="col-12">
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link more-item" href="#">All</a>
+        <a class="nav-link more-item active" href="#">All</a>
       </li>
       {% for tag_key, tag_value in tags.items %}
           <li class="nav-item">
@@ -11,7 +11,9 @@
         {% endfor %}
         {% if more_tags %}
           <li class="nav-item dropdown more-option">
-            <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+            <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              More
+            </a>
             <div class="dropdown-menu">
               {% for a_tag_key, a_tag_value in more_tags.items %}
                 <a class="dropdown-item more-item" href="#">{{ a_tag_value }}</a>
@@ -26,9 +28,19 @@
   <div class="glider">
     {% for partner in partners %}
       <div class="row partner-glider-item">
-        <img src="{{ partner.logos.logo.url }}" class="partner-glider-image img-responsive" alt="{{partner.company_name}} logo"/>
-        <br><br>
-        <button type="button" class="btn partner-glider-button">More info</button>
+        <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
+          class="partner-glider-image img-responsive fade-in-transition"
+          alt="{{partner.partner_name}} logo"/>
+        <p id="partner-description-{{partner.pk}}" class="partner-glider-description invisible">
+          {{ partner.short_description|safe|truncatechars_html:100 }}
+          <a id="partner-link-{{partner.pk}}" class="invisible" href="{% url 'partners:detail' partner.pk %}">
+            See more.
+          </a>
+        </p>
+        <button id="partner-button-{{partner.pk}}" type="button" class="btn partner-glider-button"
+          onclick="toggleDescription({{partner.pk}})">
+          More info
+        </button>
       </div>
     {% endfor %}
   </div>

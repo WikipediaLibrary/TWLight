@@ -49,5 +49,28 @@
         ]
       })
     })
+    function toggleDescription(partnerId) {
+      var partnerImage = document.getElementById("partner-image-" + partnerId);
+      partnerImage.classList.toggle("invisible");
+      partnerImage.classList.toggle("fade-in-transition");
+
+      var partnerDescription = document.getElementById("partner-description-" + partnerId);
+      partnerDescription.classList.toggle("invisible");
+      partnerDescription.classList.toggle("fade-in-transition");
+
+      var partnerLink = document.getElementById("partner-link-" + partnerId);
+      partnerLink.classList.toggle("invisible");
+      partnerLink.classList.toggle("fade-in-transition");
+
+      var partnerButton = document.getElementById("partner-button-" + partnerId);
+      // If the invisible class exists in the partner image, then the button
+      // needs to show "Less info"
+      if (partnerImage.classList.contains("invisible")) {
+        partnerButton.innerHTML = "Less info";
+      } else {
+        partnerButton.innerHTML = "More info";
+      }
+
+    }
   </script>
 {% endblock javascript %}

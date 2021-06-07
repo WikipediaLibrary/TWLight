@@ -122,7 +122,27 @@ class NewHomePageView(TemplateView):
             context["tags"] = translated_tags
             context["more_tags"] = None
 
-        context["partners"] = Partner.objects.all()
+        partners_obj = []
+        partners = Partner.objects.all()
+        for partner in partners:
+            # Obtaining translated partner description
+            partner_short_description_key = "{pk}_short_description".format(
+                pk=partner.pk
+            )
+            partner_description_key = "{pk}_description".format(pk=partner.pk)
+            partner_descriptions = get_partner_description(
+                language_code, partner_short_description_key, partner_description_key
+            )
+            partners_obj.append(
+                {
+                    "pk": partner.pk,
+                    "partner_name": partner.company_name,
+                    "partner_logo": partner.logos.logo.url,
+                    "short_description": partner_descriptions["short_description"],
+                    "description": partner_descriptions["description"],
+                }
+            )
+        context["partners"] = partners_obj
 
         return context
 
