@@ -2,21 +2,42 @@
   <div class="col-12">
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link more-item active" href="#">All</a>
+        {% if not selected %}
+          <a class="nav-link more-item active" href="{% url 'new_homepage' %}?tags=">
+        {% else %}
+          <a class="nav-link more-item" href="{% url 'new_homepage' %}?tags=">
+        {% endif %}
+          All
+        </a>
       </li>
       {% for tag_key, tag_value in tags.items %}
           <li class="nav-item">
-            <a class="nav-link more-item" href="#">{{ tag_value }}</a>
+            {% if selected and tag_key == selected %}
+              <a class="nav-link more-item active" href="{% url 'new_homepage' %}?tags={{tag_key}}">
+            {% else %}
+              <a class="nav-link more-item" href="{% url 'new_homepage' %}?tags={{tag_key}}">
+            {% endif %}
+              {{ tag_value }}
+            </a>
           </li>
         {% endfor %}
         {% if more_tags %}
           <li class="nav-item dropdown more-option">
-            <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              More
+            {% if selected and selected in more_tags.keys %}
+              <a class="nav-link dropdown-toggle more-item active" data-toggle="dropdown"
+                href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                {{ selected_value }}
+              {% else %}
+              <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown"
+                href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                More
+              {% endif %}
             </a>
             <div class="dropdown-menu">
               {% for a_tag_key, a_tag_value in more_tags.items %}
-                <a class="dropdown-item more-item" href="#">{{ a_tag_value }}</a>
+                <a class="dropdown-item more-item" href="{% url 'new_homepage' %}?tags={{a_tag_key}}">
+                  {{ a_tag_value }}
+                </a>
               {% endfor %}
             </div>
           </li>

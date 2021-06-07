@@ -5,17 +5,16 @@ from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
-from django.http import HttpResponse
+from django.db.models import Q
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.utils.translation import get_language, gettext_lazy as _
-
-from TWLight.resources.models import Partner
-from TWLight.resources.helpers import get_partner_description, get_tag_dict
-
-from django.http import HttpResponseBadRequest
 from django.template import TemplateDoesNotExist, loader
 from django.views.decorators.csrf import requires_csrf_token
 from django.views.decorators.debug import sensitive_variables
+
+from TWLight.resources.models import Partner
+from TWLight.resources.helpers import get_partner_description, get_tag_dict
 
 import logging
 
@@ -123,7 +122,26 @@ class NewHomePageView(TemplateView):
             context["more_tags"] = None
 
         partners_obj = []
-        partners = Partner.objects.all()
+        try:
+            tags = self.request.GET.get("tags")
+            if tags:
+                # Since multidisciplinary partners may have content that users may
+                # find useful, we are filtering by the multidisciplinary tag as well
+                tag_filter = Q(
+                    new_tags__tags__contains=self.request.GET.get("tags")
+                ) | Q(new_tags__tags__contains="multidisciplinary_tag")
+                # This variable is to indicate which tag filter has been selected
+                context["selected"] = tags
+                # It is harder to get only one tag value from a dictionary in a
+                # template, so we are getting the translated tag value in the view
+                context["selected_value"] = translated_tags[tags]
+            else:
+                tag_filter = Q()
+        except KeyError:
+            tag_filter = Q()
+
+        # Partners will appear in random order in the carousel
+        partners = Partner.objects.filter(tag_filter).order_by("?")
         for partner in partners:
             # Obtaining translated partner description
             partner_short_description_key = "{pk}_short_description".format(
