@@ -311,13 +311,13 @@ and (max-device-width : 1024px) {
     }
     .partner-glider-description{
         height: 160px;
-        width: auto;
+        width: 300px;
         padding: 35px 45px 15px 40px;
         position: absolute;
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1025px) {
     .partner-glider-button{
         width: 90%;
         color: #FFFFFF;
@@ -342,13 +342,14 @@ and (max-device-width : 1024px) {
         position: absolute;
         overflow: hidden;
     }
-    .fade-in-transition{
-        animation: fadeIn linear 0.300s;
-        -webkit-animation: fadeIn linear 0.300s;
-        -moz-animation: fadeIn linear 0.300s;
-        -o-animation: fadeIn linear 0.300s;
-        -ms-animation: fadeIn linear 0.300s;
-    }
+}
+
+.fade-in-transition{
+    animation: fadeIn linear 0.300s;
+    -webkit-animation: fadeIn linear 0.300s;
+    -moz-animation: fadeIn linear 0.300s;
+    -o-animation: fadeIn linear 0.300s;
+    -ms-animation: fadeIn linear 0.300s;
 }
 
 @keyframes fadeIn {
