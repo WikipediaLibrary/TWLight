@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Jason Sherman",
+			"Robby",
 			"Sam Walton",
 			"Susana Cárdenas Molinar"
 		]
@@ -21,5 +22,5 @@
 	"life-sciences_tag": "Life-sciences tag. Partners who have content about life sciences will have this tag.",
 	"health-sciences_tag": "Health-sciences tag. Partners who have content about health sciences topics will have this tag.",
 	"earth-sciences_tag": "Earth-sciences tag. Partners who have content about earth sciences topics will have this tag.",
-	"technology_tag": "Technology tag. Partners who have content about technology will have this tag."
+	"technology_tag": "Technology tag. Partners who have content about technology will have this tag.\n{{identical|Technology}}"
 }

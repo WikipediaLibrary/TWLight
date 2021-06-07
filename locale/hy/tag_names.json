@@ -6,8 +6,11 @@
 	},
 	"music_tag": "Երաժշտություն",
 	"art_tag": "Արվեստ",
+	"business-and-economics_tag": "Բիզնես և տնտեսագիտություն",
 	"law_tag": "Օրենք",
 	"education_tag": "Կրթություն",
+	"philosophy-and-religion_tag": "Փիլիսոփայություն և կրոն",
 	"history_tag": "Պատմություն",
-	"culture_tag": "Մշակույթ"
+	"culture_tag": "Մշակույթ",
+	"technology_tag": "Տեխնոլոգիա"
 }

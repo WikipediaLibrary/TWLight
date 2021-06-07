@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph"
+		]
+	},
+	"languages-and-literature_tag": "Dil ve Edebiyat",
+	"multidisciplinary_tag": "Çoklu disiplin",
+	"physical-sciences_tag": "Fen Bilimleri",
+	"music_tag": "Müzik",
+	"art_tag": "Sanat",
+	"business-and-economics_tag": "İş ve Ekonomi",
+	"law_tag": "Hukuk",
+	"education_tag": "Eğitim",
+	"philosophy-and-religion_tag": "Felsefe ve Din",
+	"social-sciences_tag": "Sosyal Bilimler",
+	"history_tag": "Tarih",
+	"culture_tag": "Kültür",
+	"life-sciences_tag": "Hayat Bilimleri",
+	"health-sciences_tag": "Sağlık Bilimleri",
+	"earth-sciences_tag": "Yer Bilimleri",
+	"technology_tag": "Teknoloji"
+}

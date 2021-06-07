@@ -4,13 +4,20 @@
 			"Amire80"
 		]
 	},
+	"languages-and-literature_tag": "שפות וספרות",
 	"multidisciplinary_tag": "רב־תחומי",
 	"physical-sciences_tag": "פיזיקה",
 	"music_tag": "מוזיקה",
 	"art_tag": "אומנות",
+	"business-and-economics_tag": "עסקים וכלכלכה",
 	"law_tag": "משפטים",
 	"education_tag": "חינוך",
+	"philosophy-and-religion_tag": "פילוסופיה ודת",
 	"social-sciences_tag": "מדעי החברה",
 	"history_tag": "היסטוריה",
-	"culture_tag": "תרבות"
+	"culture_tag": "תרבות",
+	"life-sciences_tag": "מדעי החיים",
+	"health-sciences_tag": "מדעי הרפואה",
+	"earth-sciences_tag": "מדעי כדור הארץ",
+	"technology_tag": "טכנולוגיה"
 }

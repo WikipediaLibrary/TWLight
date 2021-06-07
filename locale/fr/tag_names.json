@@ -5,13 +5,20 @@
 			"Gomoko"
 		]
 	},
+	"languages-and-literature_tag": "Langues et littérature",
 	"multidisciplinary_tag": "Multidisciplinaire",
-	"physical-sciences_tag": "Science physique",
+	"physical-sciences_tag": "Sciences physiques",
 	"music_tag": "Musique",
 	"art_tag": "Art",
+	"business-and-economics_tag": "Commerce et économie",
 	"law_tag": "Loi",
 	"education_tag": "Éducation",
+	"philosophy-and-religion_tag": "Philosophie et religion",
 	"social-sciences_tag": "Sciences sociales",
 	"history_tag": "Histoire",
-	"culture_tag": "Culture"
+	"culture_tag": "Culture",
+	"life-sciences_tag": "Sciences de la vie",
+	"health-sciences_tag": "Sciences de la santé",
+	"earth-sciences_tag": "Sciences de la terre",
+	"technology_tag": "Technologie"
 }

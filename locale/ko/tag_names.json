@@ -1,16 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ykhwong",
 			"그냥기여자"
 		]
 	},
+	"languages-and-literature_tag": "언어와 문학",
 	"multidisciplinary_tag": "전문분야 다수",
 	"physical-sciences_tag": "물리학",
 	"music_tag": "음악",
 	"art_tag": "미술",
 	"law_tag": "법",
 	"education_tag": "교육",
+	"philosophy-and-religion_tag": "철학과 종교",
 	"social-sciences_tag": "사회과학",
 	"history_tag": "역사",
-	"culture_tag": "문화"
+	"culture_tag": "문화",
+	"life-sciences_tag": "생명과학",
+	"earth-sciences_tag": "지구과학",
+	"technology_tag": "기술"
 }

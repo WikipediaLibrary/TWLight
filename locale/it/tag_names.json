@@ -1,13 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ajeje Brazorf"
+			"Ajeje Brazorf",
+			"Beta16"
 		]
 	},
+	"languages-and-literature_tag": "Lingue e letteratura",
 	"music_tag": "Musica",
 	"art_tag": "Arte",
+	"business-and-economics_tag": "Business ed economia",
 	"law_tag": "Legge",
 	"education_tag": "Istruzione",
+	"philosophy-and-religion_tag": "Filosofia e religione",
+	"social-sciences_tag": "Scienze sociali",
 	"history_tag": "Storia",
-	"culture_tag": "Cultura"
+	"culture_tag": "Cultura",
+	"technology_tag": "Tecnologia"
 }

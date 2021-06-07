@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"languages-and-literature_tag": "Lingui e Literaturo",
+	"physical-sciences_tag": "Fizikala cienci",
+	"business-and-economics_tag": "Aferi ed Ekonomiko",
+	"philosophy-and-religion_tag": "Filozofio e Religio",
+	"social-sciences_tag": "Sociala cienci",
+	"life-sciences_tag": "Vivo-Cienci",
+	"health-sciences_tag": "Saneso-Cienci",
+	"earth-sciences_tag": "Cienci di la Tero",
+	"technology_tag": "Teknologio"
+}
