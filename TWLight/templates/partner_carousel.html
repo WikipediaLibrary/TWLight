@@ -65,10 +65,19 @@
       </div>
     {% endfor %}
   </div>
-  <button aria-label="Previous" class="partner-glider-prev">
-    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-  </button>
-  <button aria-label="Next" class="partner-glider-next">
-    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-  </button>
+  {% if LANGUAGE_BIDI %}
+    <button aria-label="Previous" class="partner-glider-prev">
+      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </button>
+    <button aria-label="Next" class="partner-glider-next">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </button>
+  {% else %}
+    <button aria-label="Previous" class="partner-glider-prev">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </button>
+    <button aria-label="Next" class="partner-glider-next">
+      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </button>
+  {% endif %}
 </div>

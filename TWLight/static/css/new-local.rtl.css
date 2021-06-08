@@ -209,7 +209,7 @@ HOMEPAGE CAROUSEL CSS
     font-weight: 500;
     text-decoration: underline;
 }
-.more-item:active{
+.more-item.active{
     color: #3366CC;
     font-weight: 500;
     text-decoration: underline;
@@ -286,6 +286,14 @@ and (max-device-width : 480px) {
         width: auto;
         padding: 35px 45px 15px 40px;
     }
+    .partner-glider-description{
+        height: 160px;
+        width: 175px;
+        padding: 5px 20px 15px 5px;
+        position: absolute;
+        font-size: 14px;
+        overflow: hidden;
+    }
 }
 
 @media only screen
@@ -301,19 +309,72 @@ and (max-device-width : 1024px) {
         width: auto;
         padding: 35px 45px 15px 40px;
     }
+    .partner-glider-description{
+        height: 160px;
+        width: 300px;
+        padding: 35px 45px 15px 40px;
+        position: absolute;
+    }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1025px) {
     .partner-glider-button{
         width: 90%;
         color: #FFFFFF;
         background-color: #3366CC;
+    }
+    .partner-glider-button:hover{
+        width: 90%;
+        color: #FFFFFF;
+        background-color: #3366CC;
+        text-decoration: underline;
+        font-weight: 500;
     }
     .partner-glider-image{
         height: 176px;
         width: auto;
         padding: 35px 90px 15px 0px;
     }
+    .partner-glider-description{
+        max-height: 135px;
+        width: 600px;
+        padding: 25px 35px 15px 40px;
+        position: absolute;
+        overflow: hidden;
+    }
+}
+
+.fade-in-transition{
+    animation: fadeIn linear 0.300s;
+    -webkit-animation: fadeIn linear 0.300s;
+    -moz-animation: fadeIn linear 0.300s;
+    -o-animation: fadeIn linear 0.300s;
+    -ms-animation: fadeIn linear 0.300s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
 }
 
 /*

@@ -19,36 +19,72 @@
 
 {% block javascript %}
   <script type="text/javascript" language="javascript" src="{% static "js/glider.min.js" %}"></script>
-  <script type="text/javascript">
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-    window.addEventListener('load', function(){
-      new Glider(document.querySelector('.glider'), {
-        slidesToShow: 3.5,
-        arrows: {
-          prev: '.partner-glider-prev',
-          next: '.partner-glider-next'
-        },
-        draggable: true,
-        responsive: [
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 2.5,
-              slidesToScroll: 2
-            }
-          },
-          {
-            breakpoint: 320,
-            settings: {
-              slidesToShow: 1.5,
-              slidesToScroll: 1
-            }
-          }
-        ]
+  {% if LANGUAGE_BIDI %}
+    <script type="text/javascript">
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
       })
-    })
+      window.addEventListener('load', function(){
+        new Glider(document.querySelector('.glider'), {
+          slidesToShow: 3.5,
+          arrows: {
+            prev: '.partner-glider-next',
+            next: '.partner-glider-prev'
+          },
+          draggable: true,
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2.5,
+                slidesToScroll: 2
+              }
+            },
+            {
+              breakpoint: 320,
+              settings: {
+                slidesToShow: 1.5,
+                slidesToScroll: 1
+              }
+            }
+          ]
+        })
+      })
+    </script>
+  {% else %}
+    <script type="text/javascript">
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+      window.addEventListener('load', function(){
+        new Glider(document.querySelector('.glider'), {
+          slidesToShow: 3.5,
+          arrows: {
+            prev: '.partner-glider-prev',
+            next: '.partner-glider-next'
+          },
+          draggable: true,
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2.5,
+                slidesToScroll: 2
+              }
+            },
+            {
+              breakpoint: 320,
+              settings: {
+                slidesToShow: 1.5,
+                slidesToScroll: 1
+              }
+            }
+          ]
+        })
+      })
+    </script>
+  {% endif %}
+  <script type="text/javascript">
     function toggleDescription(partnerId) {
       var partnerImage = document.getElementById("partner-image-" + partnerId);
       partnerImage.classList.toggle("invisible");
