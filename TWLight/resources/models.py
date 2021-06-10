@@ -74,7 +74,7 @@ class Language(models.Model):
 
     language = models.CharField(
         choices=RESOURCE_LANGUAGES,
-        max_length=8,
+        max_length=12,
         validators=[validate_language_code],
         unique=True,
     )
