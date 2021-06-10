@@ -278,7 +278,7 @@ and (max-device-width : 480px) {
     }
     .partner-glider-description{
         max-height: 100px;
-        max-width: 215px;
+        max-width: 270px;
         position: absolute;
         top: 40px;
         font-size: 14px;
@@ -310,7 +310,7 @@ and (max-device-width : 1024px) {
         position: absolute;
         top: 40px;
         max-height: 120px;
-        max-width: 410px;
+        max-width: 475px;
         overflow: hidden;
         white-space: normal;
     }
@@ -337,7 +337,7 @@ and (max-device-width : 1024px) {
         position: absolute;
         top: 40px;
         height: 120px;
-        max-width: 375px;
+        max-width: 550px;
         overflow: hidden;
         white-space: normal;
     }
