@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import copy
+import json
+import os
 
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError as JSONSchemaValidationError
@@ -19,7 +20,16 @@ from TWLight.resources.helpers import (
     get_tags_json_schema,
 )
 
-RESOURCE_LANGUAGES = copy.copy(settings.LANGUAGES)
+# Use language autonyms from Wikimedia.
+# We periodically pull:
+# https://raw.githubusercontent.com/wikimedia/language-data/master/data/language-data.json
+# into locale/language-data.json
+language_data_json = open(os.path.join(settings.LOCALE_PATHS[0], "language-data.json"))
+languages = json.loads(language_data_json.read())["languages"]
+RESOURCE_LANGUAGES = []
+for lang_code, lang_data in languages.items():
+    autonym = lang_data[-1]
+    RESOURCE_LANGUAGES += [(lang_code, autonym)]
 
 RESOURCE_LANGUAGE_CODES = [lang[0] for lang in RESOURCE_LANGUAGES]
 
