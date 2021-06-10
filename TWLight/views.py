@@ -136,9 +136,9 @@ class NewHomePageView(TemplateView):
                 # template, so we are getting the translated tag value in the view
                 context["selected_value"] = translated_tags[tags]
             else:
-                tag_filter = Q()
+                tag_filter = Q(featured=True)
         except KeyError:
-            tag_filter = Q()
+            tag_filter = Q(featured=True)
 
         # Partners will appear in random order in the carousel
         partners = Partner.objects.filter(tag_filter).order_by("?")
