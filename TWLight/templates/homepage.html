@@ -4,6 +4,11 @@
 {% load l10n %}
 {% load cache %}
 
+{% block extra_css %}
+  <link href="{% static "css/glide.core.min.css" %}" rel="stylesheet" type="text/css">
+  <link href="{% static "css/glide.theme.min.css" %}" rel="stylesheet" type="text/css">
+{% endblock extra_css %}
+
 {% block content %}
 
   <div class="login-section">
@@ -18,73 +23,131 @@
 
 
 {% block javascript %}
-  <script type="text/javascript" language="javascript" src="{% static "js/glider.min.js" %}"></script>
+  <script type="text/javascript" language="javascript" src="{% static "js/glide.min.js" %}"></script>
   {% if LANGUAGE_BIDI %}
     <script type="text/javascript">
-      $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-      })
-      window.addEventListener('load', function(){
-        new Glider(document.querySelector('.glider'), {
-          slidesToShow: 3.5,
-          arrows: {
-            prev: '.partner-glider-next',
-            next: '.partner-glider-prev'
-          },
-          draggable: true,
-          responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2.5,
-                slidesToScroll: 2
-              }
+      var glide = new Glide(".glide", {
+        type: "slider",
+        startAt: 0,
+        perView: 3,
+        direction: "rtl",
+        gap: 10,
+        peek: {
+          before: 10,
+          after: 10
+        },
+        breakpoints: {
+          1440: {
+            perView: 2.5,
+            peek: {
+              before: 80,
+              after: 10
             },
-            {
-              breakpoint: 320,
-              settings: {
-                slidesToShow: 1.5,
-                slidesToScroll: 1
-              }
-            }
-          ]
-        })
-      })
+          },
+          1280: {
+            perView: 2.5,
+            peek: {
+              before: 80,
+              after: 10
+            },
+          },
+          1024: {
+            perView: 1.5,
+            peek: {
+              before: 80,
+              after: 10
+            },
+          },
+          1023: {
+            perView: 1,
+            peek: {
+              before: 80,
+              after: 10
+            },
+          },
+          480: {
+            perView: 1,
+            peek: {
+              before: 40,
+              after: 10
+            },
+          },
+          320: {
+            perView: 0.75,
+            peek: {
+              before: 40,
+              after: 10
+            },
+          }
+        }
+      });
+      glide.mount();
     </script>
   {% else %}
     <script type="text/javascript">
-      $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-      })
-      window.addEventListener('load', function(){
-        new Glider(document.querySelector('.glider'), {
-          slidesToShow: 3.5,
-          arrows: {
-            prev: '.partner-glider-prev',
-            next: '.partner-glider-next'
-          },
-          draggable: true,
-          responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2.5,
-                slidesToScroll: 2
-              }
+      var glide = new Glide(".glide", {
+        type: "slider",
+        startAt: 0,
+        perView: 3,
+        direction: "ltr",
+        gap: 10,
+        peek: {
+          before: 50,
+          after: 10
+        },
+        breakpoints: {
+          1440: {
+            perView: 2.5,
+            peek: {
+              before: 50,
+              after: 10
             },
-            {
-              breakpoint: 320,
-              settings: {
-                slidesToShow: 1.5,
-                slidesToScroll: 1
-              }
-            }
-          ]
-        })
-      })
+          },
+          1280: {
+            perView: 2,
+            peek: {
+              before: 50,
+              after: 10
+            },
+          },
+          1024: {
+            perView: 2,
+            peek: {
+              before: 50,
+              after: 10
+            },
+          },
+          1023: {
+            perView: 1.5,
+            peek: {
+              before: 50,
+              after: 10
+            },
+          },
+          480: {
+            perView: 1,
+            peek: {
+              before: 75,
+              after: 10
+            },
+          },
+          320: {
+            perView: 1,
+            peek: {
+              before: 70,
+              after: 10
+            },
+          }
+        }
+      });
+      glide.mount();
     </script>
   {% endif %}
+
   <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
     function toggleDescription(partnerId) {
       var partnerImage = document.getElementById("partner-image-" + partnerId);
       partnerImage.classList.toggle("invisible");

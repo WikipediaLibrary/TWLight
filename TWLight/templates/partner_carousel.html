@@ -25,11 +25,11 @@
           <li class="nav-item dropdown more-option">
             {% if selected and selected in more_tags.keys %}
               <a class="nav-link dropdown-toggle more-item active" data-toggle="dropdown"
-                href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 {{ selected_value }}
               {% else %}
               <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown"
-                href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <strong>More</strong>
               {% endif %}
             </a>
@@ -45,39 +45,37 @@
     </ul>
   </div>
 </div>
-<div class="row glider-contain">
-  <div class="glider">
-    {% for partner in partners %}
-      <div class="row partner-glider-item">
-        <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
-          class="partner-glider-image img-responsive fade-in-transition"
-          alt="{{partner.partner_name}} logo"/>
-        <p id="partner-description-{{partner.pk}}" class="partner-glider-description invisible">
-          {{ partner.short_description|safe|truncatechars_html:100 }}
-          <a id="partner-link-{{partner.pk}}" class="invisible" href="{% url 'partners:detail' partner.pk %}">
-            See more.
-          </a>
-        </p>
-        <button id="partner-button-{{partner.pk}}" type="button" class="btn partner-glider-button"
-          onclick="toggleDescription({{partner.pk}})">
-          More info
-        </button>
-      </div>
-    {% endfor %}
+<div class="row">
+  <div class="glide">
+    <div class="glide__track" data-glide-el="track">
+      <ul class="glide__slides">
+      {% for partner in partners %}
+        <li>
+          <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
+              class="mx-auto d-block partner-glider-image fade-in-transition"
+              alt="{{partner.partner_name}} logo"/>
+          <p id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description invisible">
+            {{ partner.short_description|safe|truncatechars_html:100 }}
+            <a id="partner-link-{{partner.pk}}" class="partner-glider-more-link invisible"
+                href="{% url 'partners:detail' partner.pk %}">
+              See more.
+            </a>
+          </p>
+          <button id="partner-button-{{partner.pk}}" type="button" class="btn partner-glider-button"
+              onclick="toggleDescription({{partner.pk}})">
+            More info
+          </button>
+        </li>
+      {% endfor %}
+    </ul>
+    </div>
+    <div class="glide__arrows" data-glide-el="controls">
+      <button class="glide__arrow--left partner-arrow-left" data-glide-dir="<">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </button>
+      <button class="glide__arrow--right partner-arrow-left" data-glide-dir=">">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
-  {% if LANGUAGE_BIDI %}
-    <button aria-label="Previous" class="partner-glider-prev">
-      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-    </button>
-    <button aria-label="Next" class="partner-glider-next">
-      <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </button>
-  {% else %}
-    <button aria-label="Previous" class="partner-glider-prev">
-      <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </button>
-    <button aria-label="Next" class="partner-glider-next">
-      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-    </button>
-  {% endif %}
 </div>

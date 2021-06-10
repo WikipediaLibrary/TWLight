@@ -198,7 +198,7 @@ HOMEPAGE CAROUSEL CSS
     overflow-x: hidden;
 }
 .tag-filters{
-    padding: 25px 0px 0px 0px;
+    padding: 25px 0px 30px 0px;
 }
 .more-item{
     color: #3366CC;
@@ -219,80 +219,68 @@ HOMEPAGE CAROUSEL CSS
     border-color: #3366CC;
     border-width: thin;
 }
-.glider{
-    overflow-x: hidden;
-}
-.partner-glider-prev{
-    border-style: solid;
-    border-color: #3366CC;
-    border-width: 2px;
-    color: #3366CC;
+.partner-arrow-left{
     position: absolute;
+    display: block;
+    top: 50%;
     z-index: 2;
-    font-size: 30px;
-    font-weight: lighter;
-    text-decoration: none;
-    left: 23px;
-    top: 30%;
+    color: #3366CC;
+    text-transform: uppercase;
+    padding: 9px 12px;
+    background-color: #FFFFFF;
+    border: 2px solid #3366CC;
+    opacity: 1;
     cursor: pointer;
-    opacity: 1;
+    transition: opacity 150ms ease, border 300ms ease-in-out;
+    transform: translateY(-50%);
     line-height: 1;
-    transition: opacity .5s cubic-bezier(.17,.67,.83,.67),color .5s cubic-bezier(.17,.67,.83,.67);
-}
-.partner-glider-prev.disabled{
-    opacity: .25;
-    color: #000000;
-    border-style: solid;
-    border-color: #000000;
-    border-width: 2px;
-}
-.partner-glider-next{
-    border-style: solid;
-    border-color: #3366CC;
-    border-width: 2px;
-    color: #3366CC;
-    position: absolute;
-    z-index: 2;
-    font-size: 30px;
-    font-weight: lighter;
     text-decoration: none;
-    right: 23px;
-    top: 30%;
+}
+.partner-glider-right{
+    position: absolute;
+    display: block;
+    top: 50%;
+    z-index: 2;
+    color: #3366CC;
+    text-transform: uppercase;
+    padding: 9px 12px;
+    background-color: #FFFFFF;
+    border: 2px solid #3366CC;
     opacity: 1;
+    cursor: pointer;
+    transition: opacity 150ms ease, border 300ms ease-in-out;
+    transform: translateY(-50%);
     line-height: 1;
-    transition: opacity .5s cubic-bezier(.17,.67,.83,.67),color .5s cubic-bezier(.17,.67,.83,.67);
-}
-.partner-glider-next.disabled{
-    opacity: .25;
-    color: #000000;
-    border-style: solid;
-    border-color: #000000;
-    border-width: 2px;
-}
-.partner-glider-item{
-    height: 450px;
+    text-decoration: none;
 }
 
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
     .partner-glider-button{
-        width: 75%;
+        width: 98%;
         color: #FFFFFF;
         background-color: #3366CC;
     }
+    .partner-glider-button:hover{
+        color: #FFFFFF;
+        background-color: #3366CC;
+        text-decoration: underline;
+        font-weight: 500;
+    }
     .partner-glider-image{
-        height: 176px;
-        width: auto;
+        height: 150px;
+        max-width: 270px;
         padding: 35px 45px 15px 40px;
     }
     .partner-glider-description{
-        height: 160px;
-        width: 175px;
-        padding: 5px 20px 15px 5px;
+        max-height: 100px;
+        max-width: 270px;
         position: absolute;
+        top: 40px;
         font-size: 14px;
         overflow: hidden;
+        white-space: normal;
     }
 }
 
@@ -300,31 +288,38 @@ and (max-device-width : 480px) {
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
     .partner-glider-button{
-        width: 85%;
+        width: 98%;
         color: #FFFFFF;
         background-color: #3366CC;
     }
+    .partner-glider-button:hover{
+        color: #FFFFFF;
+        background-color: #3366CC;
+        text-decoration: underline;
+        font-weight: 500;
+    }
     .partner-glider-image{
-        height: 176px;
-        width: auto;
-        padding: 35px 45px 15px 40px;
+        height: 150px;
+        max-width: 290px;
+        padding: 0px 0px 45px 0px;
     }
     .partner-glider-description{
-        height: 160px;
-        width: 300px;
-        padding: 35px 45px 15px 40px;
         position: absolute;
+        top: 40px;
+        max-height: 120px;
+        max-width: 475px;
+        overflow: hidden;
+        white-space: normal;
     }
 }
 
 @media (min-width: 1025px) {
     .partner-glider-button{
-        width: 90%;
+        width: 98%;
         color: #FFFFFF;
         background-color: #3366CC;
     }
     .partner-glider-button:hover{
-        width: 90%;
         color: #FFFFFF;
         background-color: #3366CC;
         text-decoration: underline;
@@ -332,17 +327,28 @@ and (max-device-width : 1024px) {
     }
     .partner-glider-image{
         height: 176px;
-        width: auto;
-        padding: 35px 90px 15px 0px;
+        max-width: 375px;
+        padding: 0px 0px 15px 0px;
     }
     .partner-glider-description{
-        max-height: 135px;
-        width: 600px;
-        padding: 25px 35px 15px 40px;
         position: absolute;
+        top: 40px;
+        height: 120px;
+        max-width: 550px;
         overflow: hidden;
+        white-space: normal;
     }
 }
+
+.partner-glider-more-link{
+    color: #3366CC;
+}
+.partner-glider-more-link:hover{
+    color: #3366CC;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
 
 .fade-in-transition{
     animation: fadeIn linear 0.300s;
