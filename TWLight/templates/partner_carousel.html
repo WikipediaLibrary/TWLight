@@ -1,3 +1,8 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% load cache %}
+
 <div class="row tag-filters">
   <div class="col-12">
     <ul class="nav justify-content-center">
@@ -7,7 +12,10 @@
         {% else %}
           <a class="nav-link more-item" href="{% url 'new_homepage' %}?tags=">
         {% endif %}
-          Featured
+          {% comment %}Translators: This is a filter of featured collections of The Wikipedia Library.{% endcomment %}
+          {% blocktranslate %}
+            Featured
+          {% endblocktranslate %}
         </a>
       </li>
       {% for tag_key, tag_value in tags.items %}
@@ -30,7 +38,12 @@
               {% else %}
               <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown"
                   href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <strong>More</strong>
+                <strong>
+                  {% comment %}Translators: A button that indicates there are more tag filter options.{% endcomment %}
+                  {% blocktranslate %}
+                    More
+                  {% endblocktranslate %}
+                </strong>
               {% endif %}
             </a>
             <div class="dropdown-menu">
@@ -58,12 +71,18 @@
             {{ partner.short_description|safe|truncatechars_html:100 }}
             <a id="partner-link-{{partner.pk}}" class="partner-glider-more-link invisible"
                 href="{% url 'partners:detail' partner.pk %}">
-              See more.
+              {% comment %}Translators: A link that takes you to more information about a collection.{% endcomment %}
+              {% blocktranslate %}
+                See more.
+              {% endblocktranslate %}
             </a>
           </p>
           <button id="partner-button-{{partner.pk}}" type="button" class="btn partner-glider-button"
               onclick="toggleDescription({{partner.pk}})">
-            More info
+            {% comment %}Translators: A button that reveals more information about a collection.{% endcomment %}
+            {% blocktranslate %}
+              More info
+            {% endblocktranslate %}
           </button>
         </li>
       {% endfor %}
