@@ -63,7 +63,7 @@
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
       {% for partner in partners %}
-        <li>
+        <li id="partner-{{partner.pk}}">
           <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
               class="mx-auto d-block partner-glider-image fade-in-transition"
               alt="{{partner.partner_name}} logo"/>

@@ -202,16 +202,15 @@ HOMEPAGE CAROUSEL CSS
 }
 .more-item{
     color: #3366CC;
-    font-weight: 300;
+    font-weight: 400;
 }
 .more-item:hover{
     color: #3366CC;
-    font-weight: 500;
-    text-decoration: underline;
+    font-weight: 600;
 }
 .more-item.active{
     color: #3366CC;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: underline;
 }
 .more-option{
@@ -268,7 +267,6 @@ and (max-device-width : 480px) {
     .partner-glider-button:hover{
         color: #FFFFFF;
         background-color: #3366CC;
-        text-decoration: underline;
         font-weight: 500;
     }
     .partner-glider-image{
@@ -298,7 +296,6 @@ and (max-device-width : 1024px) {
     .partner-glider-button:hover{
         color: #FFFFFF;
         background-color: #3366CC;
-        text-decoration: underline;
         font-weight: 500;
     }
     .partner-glider-image{
@@ -325,7 +322,6 @@ and (max-device-width : 1024px) {
     .partner-glider-button:hover{
         color: #FFFFFF;
         background-color: #3366CC;
-        text-decoration: underline;
         font-weight: 500;
     }
     .partner-glider-image{

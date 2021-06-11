@@ -149,19 +149,43 @@
       $('[data-toggle="tooltip"]').tooltip()
     });
     function toggleDescription(partnerId) {
-      var partnerImage = document.getElementById("partner-image-" + partnerId);
-      partnerImage.classList.toggle("invisible");
-      partnerImage.classList.toggle("fade-in-transition");
+      // Before toggling the description, search if there are any descriptions
+      // already toggled and flip them to the image
+      var toggledPartners = document.getElementsByClassName("partner-description-toggled");
+      for (var i = 0; i < toggledPartners.length; i++) {
+        var toggledPartnerId = toggledPartners[i].id.split("-")[1];
+        //This should only be toggled if partnerId is different from the current toggled partner
+        if (toggledPartnerId != partnerId){
+          toggleElement("partner-image-" + toggledPartnerId);
+          toggleElement("partner-description-" + toggledPartnerId);
+          toggleElement("partner-link-" + toggledPartnerId);
+          togglePartnerButton(toggledPartnerId);
+          // Add a class that indicates that the partner's description has been toggled
+          var partnerContainer = document.getElementById("partner-" + toggledPartnerId);
+          partnerContainer.classList.toggle("partner-description-toggled");
+        }
+      }
 
-      var partnerDescription = document.getElementById("partner-description-" + partnerId);
-      partnerDescription.classList.toggle("invisible");
-      partnerDescription.classList.toggle("fade-in-transition");
+      toggleElement("partner-image-" + partnerId);
+      toggleElement("partner-description-" + partnerId);
+      toggleElement("partner-link-" + partnerId);
+      togglePartnerButton(partnerId);
 
-      var partnerLink = document.getElementById("partner-link-" + partnerId);
-      partnerLink.classList.toggle("invisible");
-      partnerLink.classList.toggle("fade-in-transition");
+      // Add a class that indicates that the partner's description has been toggled
+      var partnerContainer = document.getElementById("partner-" + partnerId);
+      partnerContainer.classList.toggle("partner-description-toggled");
 
-      var partnerButton = document.getElementById("partner-button-" + partnerId);
+    }
+
+    function toggleElement(id){
+      var element = document.getElementById(id);
+      element.classList.toggle("invisible");
+      element.classList.toggle("fade-in-transition");
+    }
+
+    function togglePartnerButton(buttonId){
+      var partnerImage = document.getElementById("partner-image-" + buttonId);
+      var partnerButton = document.getElementById("partner-button-" + buttonId);
       // If the invisible class exists in the partner image, then the button
       // needs to show "Less info"
       if (partnerImage.classList.contains("invisible")) {
@@ -169,7 +193,6 @@
       } else {
         partnerButton.innerHTML = "More info";
       }
-
     }
   </script>
 {% endblock javascript %}
