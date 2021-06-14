@@ -282,6 +282,7 @@ and (max-device-width : 480px) {
         font-size: 14px;
         overflow: hidden;
         white-space: normal;
+        padding: 0px 35px 0px 0px;
     }
 }
 
@@ -310,6 +311,7 @@ and (max-device-width : 1024px) {
         max-width: 475px;
         overflow: hidden;
         white-space: normal;
+        padding: 0px 25px 0px 0px;
     }
 }
 
@@ -336,6 +338,7 @@ and (max-device-width : 1024px) {
         max-width: 550px;
         overflow: hidden;
         white-space: normal;
+        padding: 0px 25px 0px 0px;
     }
 }
 
