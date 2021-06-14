@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sandro Halank (WMDE)"
+			"Sandro Halank (WMDE)",
+			"Umlaut"
 		]
 	},
 	"multidisciplinary_tag": "multidisziplinär",
@@ -12,5 +13,6 @@
 	"education_tag": "Bildung",
 	"social-sciences_tag": "Sozialwissenschaften",
 	"history_tag": "Geschichte",
-	"culture_tag": "Kultur"
+	"culture_tag": "Kultur",
+	"technology_tag": "Technologie"
 }
