@@ -200,24 +200,6 @@ HOMEPAGE CAROUSEL CSS
 .tag-filters{
     padding: 25px 0px 30px 0px;
 }
-.more-item{
-    color: #3366CC;
-    font-weight: 400;
-}
-.more-item:hover{
-    color: #3366CC;
-    font-weight: 600;
-}
-.more-item.active{
-    color: #3366CC;
-    font-weight: 600;
-    text-decoration: underline;
-}
-.more-option{
-    border-style: solid;
-    border-color: #3366CC;
-    border-width: thin;
-}
 .partner-arrow-left{
     position: absolute;
     display: block;
@@ -256,6 +238,25 @@ HOMEPAGE CAROUSEL CSS
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
+    .more-item{
+        color: #3366CC;
+        font-weight: 400;
+        padding: 6px;
+    }
+    .more-item:hover{
+        color: #3366CC;
+        font-weight: 600;
+    }
+    .more-item.active{
+        color: #3366CC;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+    .more-option{
+        border-style: solid;
+        border-color: #3366CC;
+        border-width: thin;
+    }
     .partner-glider-button{
         width: 98%;
         color: #FFFFFF;
@@ -286,6 +287,19 @@ and (max-device-width : 480px) {
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
+    .more-item{
+        color: #3366CC;
+        font-weight: 400;
+    }
+    .more-item:hover{
+        color: #3366CC;
+        font-weight: 600;
+    }
+    .more-item.active{
+        color: #3366CC;
+        font-weight: 600;
+        text-decoration: underline;
+    }
     .partner-glider-button{
         width: 98%;
         color: #FFFFFF;
@@ -313,6 +327,19 @@ and (max-device-width : 1024px) {
 }
 
 @media (min-width: 1025px) {
+    .more-item{
+        color: #3366CC;
+        font-weight: 400;
+    }
+    .more-item:hover{
+        color: #3366CC;
+        font-weight: 600;
+    }
+    .more-item.active{
+        color: #3366CC;
+        font-weight: 600;
+        text-decoration: underline;
+    }
     .partner-glider-button{
         width: 98%;
         color: #FFFFFF;
