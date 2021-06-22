@@ -63,13 +63,15 @@
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
       {% for partner in partners %}
-        <li id="partner-{{partner.pk}}">
-          <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
-              class="mx-auto d-block partner-glider-image fade-in-transition"
-              alt="{{partner.partner_name}} logo"/>
-          <p id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description truncate-overflow invisible">
-            {{ partner.short_description|safe }}
-          </p>
+        <li>
+          <div id="partner-{{partner.pk}}" class="partner-image-description-container">
+            <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
+                class="mx-auto d-block partner-glider-image fade-in-transition"
+                alt="{{partner.partner_name}} logo"/>
+            <div id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description truncate-overflow invisible">
+              {{ partner.short_description|safe }}
+            </div>
+          </div>
           <button id="partner-button-{{partner.pk}}" type="button" class="btn partner-glider-button"
               onclick="toggleDescription({{partner.pk}})">
             {% comment %}Translators: A button that reveals more information about a collection.{% endcomment %}

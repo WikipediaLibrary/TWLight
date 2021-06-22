@@ -158,7 +158,6 @@
         if (toggledPartnerId != partnerId){
           toggleElement("partner-image-" + toggledPartnerId);
           toggleElement("partner-description-" + toggledPartnerId);
-          toggleElement("partner-link-" + toggledPartnerId);
           togglePartnerButton(toggledPartnerId);
           // Add a class that indicates that the partner's description has been toggled
           var partnerContainer = document.getElementById("partner-" + toggledPartnerId);
@@ -168,7 +167,6 @@
 
       toggleElement("partner-image-" + partnerId);
       toggleElement("partner-description-" + partnerId);
-      toggleElement("partner-link-" + partnerId);
       togglePartnerButton(partnerId);
 
       // Add a class that indicates that the partner's description has been toggled
