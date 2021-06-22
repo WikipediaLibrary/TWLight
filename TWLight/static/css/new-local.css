@@ -14,6 +14,8 @@ html {
   position: relative;
   min-height: 100%;
   scroll-behavior: smooth;
+  --lh: 1.5rem;
+  line-height: var(--lh);
 }
 
 body {
@@ -273,14 +275,34 @@ and (max-device-width : 480px) {
         padding: 35px 45px 15px 40px;
     }
     .partner-glider-description{
-        max-height: 100px;
         max-width: 270px;
         position: absolute;
         top: 40px;
         font-size: 14px;
         overflow: hidden;
         white-space: normal;
-        padding: 0px 0px 0px 35px;
+        padding: 10px 30px 0px 35px;
+    }
+    .partner-glider-description.truncate-overflow{
+        --max-lines: 4;
+        max-height: calc(var(--lh) * var(--max-lines));
+        overflow: hidden;
+    }
+    .partner-glider-description.truncate-overflow::before {
+        position: absolute;
+        content: '...';
+        bottom: 0;
+        right: 1rem;
+        z-index: 1;
+    }
+    .partner-glider-description.truncate-overflow::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 1rem;
+        width: 1rem;
+        height: 1rem;
+        z-index: 0;
     }
 }
 
@@ -318,11 +340,31 @@ and (max-device-width : 1024px) {
     .partner-glider-description{
         position: absolute;
         top: 40px;
-        max-height: 120px;
         max-width: 475px;
         overflow: hidden;
         white-space: normal;
-        padding: 0px 0px 0px 25px;
+        padding: 0px 30px 0px 25px;
+    }
+    .partner-glider-description.truncate-overflow{
+        --max-lines: 4;
+        max-height: calc(var(--lh) * var(--max-lines));
+        overflow: hidden;
+    }
+    .partner-glider-description.truncate-overflow::before {
+        position: absolute;
+        content: '...';
+        bottom: 0;
+        right: 1rem;
+        z-index: 1;
+    }
+    .partner-glider-description.truncate-overflow::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 1rem;
+        width: 1rem;
+        height: 1rem;
+        z-index: 0;
     }
 }
 
@@ -358,11 +400,31 @@ and (max-device-width : 1024px) {
     .partner-glider-description{
         position: absolute;
         top: 40px;
-        height: 120px;
         max-width: 550px;
         overflow: hidden;
         white-space: normal;
-        padding: 0px 0px 0px 25px;
+        padding: 0px 30px 0px 25px;
+    }
+    .partner-glider-description.truncate-overflow{
+        --max-lines: 5;
+        max-height: calc(var(--lh) * var(--max-lines));
+        overflow: hidden;
+    }
+    .partner-glider-description.truncate-overflow::before {
+        position: absolute;
+        content: '...';
+        bottom: 0;
+        right: 1rem;
+        z-index: 1;
+    }
+    .partner-glider-description.truncate-overflow::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 1rem;
+        width: 1rem;
+        height: 1rem;
+        z-index: 0;
     }
 }
 

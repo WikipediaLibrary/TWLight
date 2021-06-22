@@ -67,8 +67,8 @@
           <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
               class="mx-auto d-block partner-glider-image fade-in-transition"
               alt="{{partner.partner_name}} logo"/>
-          <p id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description invisible">
-            {{ partner.short_description|safe|truncatechars_html:100 }}
+          <p id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description truncate-overflow invisible">
+            {{ partner.short_description|safe }}
             <a id="partner-link-{{partner.pk}}" class="partner-glider-more-link invisible"
                 href="{% url 'partners:detail' partner.pk %}">
               {% comment %}Translators: A link that takes you to more information about a collection.{% endcomment %}
