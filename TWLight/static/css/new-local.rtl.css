@@ -269,15 +269,17 @@ and (max-device-width : 480px) {
         background-color: #3366CC;
         font-weight: 500;
     }
+    .partner-image-description-container{
+        width: inherit;
+    }
     .partner-glider-image{
         height: 150px;
         max-width: 270px;
         padding: 35px 45px 15px 40px;
     }
     .partner-glider-description{
-        max-height: 100px;
-        max-width: 270px;
         position: absolute;
+        width: inherit;
         top: 40px;
         font-size: 14px;
         overflow: hidden;
@@ -320,6 +322,9 @@ and (max-device-width : 1024px) {
         background-color: #3366CC;
         font-weight: 500;
     }
+    .partner-image-description-container{
+        width: inherit;
+    }
     .partner-glider-image{
         height: 150px;
         max-width: 290px;
@@ -328,8 +333,7 @@ and (max-device-width : 1024px) {
     .partner-glider-description{
         position: absolute;
         top: 40px;
-        max-height: 120px;
-        max-width: 475px;
+        width: inherit;
         overflow: hidden;
         white-space: normal;
         padding: 0px 25px 0px 30px;
@@ -368,6 +372,9 @@ and (max-device-width : 1024px) {
         background-color: #3366CC;
         font-weight: 500;
     }
+    .partner-image-description-container{
+        width: inherit;
+    }
     .partner-glider-image{
         height: 176px;
         max-width: 375px;
@@ -376,8 +383,7 @@ and (max-device-width : 1024px) {
     .partner-glider-description{
         position: absolute;
         top: 40px;
-        height: 120px;
-        max-width: 550px;
+        width: inherit;
         overflow: hidden;
         white-space: normal;
         padding: 0px 25px 0px 30px;
