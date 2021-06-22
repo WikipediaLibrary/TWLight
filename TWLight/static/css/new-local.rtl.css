@@ -69,7 +69,7 @@ LOGIN PARTIAL CSS
         line-height: 5px;
     }
     .homepage-login{
-        padding: 0px 0px 20px 25px;
+        padding: 0px 0px 20px 30px;
     }
     .homepage-login-button{
         color: #3366CC;
@@ -92,14 +92,14 @@ LOGIN PARTIAL CSS
         font-style: normal;
         font-size: 30px;
         font-weight: 800;
-        padding: 20px 20px 0px 0px;
+        padding: 20px 0px 0px 30px;
     }
 
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
         font-style: normal;
-        padding: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 40px;
     }
 
     .criteria-info{
@@ -111,7 +111,7 @@ LOGIN PARTIAL CSS
         line-height: 0px;
     }
     .homepage-login{
-        padding: 0px 20px 20px 0px;
+        padding: 0px 0px 20px 30px;
     }
     .homepage-login-button{
         color: #3366CC;
@@ -200,24 +200,6 @@ HOMEPAGE CAROUSEL CSS
 .tag-filters{
     padding: 25px 0px 30px 0px;
 }
-.more-item{
-    color: #3366CC;
-    font-weight: 400;
-}
-.more-item:hover{
-    color: #3366CC;
-    text-decoration: underline;
-}
-.more-item.active{
-    color: #3366CC;
-    font-weight: 600;
-    text-decoration: underline;
-}
-.more-option{
-    border-style: solid;
-    border-color: #3366CC;
-    border-width: thin;
-}
 .glider{
     overflow-x: hidden;
 }
@@ -259,6 +241,25 @@ HOMEPAGE CAROUSEL CSS
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
+    .more-item{
+        color: #3366CC;
+        font-weight: 400;
+        padding: 6px;
+    }
+    .more-item:hover{
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .more-item.active{
+        color: #3366CC;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+    .more-option{
+        border-style: solid;
+        border-color: #3366CC;
+        border-width: thin;
+    }
     .partner-glider-button{
         width: 98%;
         color: #FFFFFF;
@@ -312,6 +313,24 @@ and (max-device-width : 480px) {
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
+    .more-item{
+        color: #3366CC;
+        font-weight: 400;
+    }
+    .more-item:hover{
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .more-item.active{
+        color: #3366CC;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+    .more-option{
+        border-style: solid;
+        border-color: #3366CC;
+        border-width: thin;
+    }
     .partner-glider-button{
         width: 98%;
         color: #FFFFFF;
@@ -362,6 +381,24 @@ and (max-device-width : 1024px) {
 }
 
 @media (min-width: 1025px) {
+    .more-item{
+        color: #3366CC;
+        font-weight: 400;
+    }
+    .more-item:hover{
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .more-item.active{
+        color: #3366CC;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+    .more-option{
+        border-style: solid;
+        border-color: #3366CC;
+        border-width: thin;
+    }
     .partner-glider-button{
         width: 98%;
         color: #FFFFFF;

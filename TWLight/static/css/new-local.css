@@ -325,6 +325,11 @@ and (max-device-width : 1024px) {
         font-weight: 600;
         text-decoration: underline;
     }
+    .more-option{
+        border-style: solid;
+        border-color: #3366CC;
+        border-width: thin;
+    }
     .partner-glider-button{
         width: 98%;
         color: #FFFFFF;
@@ -387,6 +392,11 @@ and (max-device-width : 1024px) {
         color: #3366CC;
         font-weight: 600;
         text-decoration: underline;
+    }
+    .more-option{
+        border-style: solid;
+        border-color: #3366CC;
+        border-width: thin;
     }
     .partner-glider-button{
         width: 98%;
