@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-06-10 17:40+0000\n"
-"PO-Revision-Date: 2021-06-14 08:04:13+0000\n"
+"PO-Revision-Date: 2021-06-24 10:11:57+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -722,7 +722,7 @@ msgstr "¿A qué recursos quieres acceder?"
 #. Translators: This text explains that Library Bundle partners are not shown in this list.
 #: TWLight/applications/templates/applications/request_for_application.html:24
 msgid "Library Bundle partners are not shown as eligibility is determined automatically."
-msgstr ""
+msgstr "Socios del Paquete de la Biblioteca no son mostrados ya que la elegibilidad está determinada automáticamente."
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:47
@@ -1653,7 +1653,7 @@ msgstr "Usuarios que han recibido acceso (histórico)"
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:584
 msgid "Median days from application to decision"
-msgstr ""
+msgstr "Media de días desde el momento de la solicitud hasta una decisión"
 
 #. Translators: This is the header for total accounts on a per-collection level.
 #: TWLight/resources/templates/resources/partner_detail.html:594
@@ -1871,7 +1871,7 @@ msgstr "No se puede encontrar el recurso."
 #: TWLight/templates/404.html:16
 #, python-format
 msgid "If you are certain that something should be here, please email us about this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a> or report it to us on <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\">Phabricator</a>"
-msgstr ""
+msgstr "Si estás seguro que algo debería estar aquí, favor de mandar un correo de este error a <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"></a> o repórtalo en <a href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\">Phabricator</a>"
 
 #. Translators: Alt text for an image shown on the 404 error page.
 #: TWLight/templates/404.html:29

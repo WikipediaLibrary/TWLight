@@ -5,14 +5,19 @@
 			"Umlaut"
 		]
 	},
+	"languages-and-literature_tag": "Sprachen und Literatur",
 	"multidisciplinary_tag": "multidisziplinär",
 	"physical-sciences_tag": "Physik",
 	"music_tag": "Musik",
 	"art_tag": "Kunst",
+	"business-and-economics_tag": "Betriebs- und Volkswirtschaftslehre",
 	"law_tag": "Recht",
 	"education_tag": "Bildung",
+	"philosophy-and-religion_tag": "Philosophie und Religion",
 	"social-sciences_tag": "Sozialwissenschaften",
 	"history_tag": "Geschichte",
 	"culture_tag": "Kultur",
+	"life-sciences_tag": "Naturwissenschaften",
+	"health-sciences_tag": "Gesundheitswissenschaften",
 	"technology_tag": "Technologie"
 }

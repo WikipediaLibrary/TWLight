@@ -26,7 +26,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-06-10 17:41+0000\n"
-"PO-Revision-Date: 2021-06-14 08:04:13+0000\n"
+"PO-Revision-Date: 2021-06-24 10:11:57+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2293,7 +2293,7 @@ msgstr "Mehr erfahren"
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:20
 msgid "\n      Over 90 of the world's top\n      subscription-only databases, free\n      for Wikipedians of all backgrounds\n      "
-msgstr ""
+msgstr "      Über 90 der weltweit besten\n      abonnementpflichtigen Datenbanken,\n      kostenlos für Wikipedianer jeglicher Herkunft\n      "
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:31
