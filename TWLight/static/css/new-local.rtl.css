@@ -292,21 +292,15 @@ and (max-device-width : 480px) {
         max-height: calc(var(--lh) * var(--max-lines));
         overflow: hidden;
     }
-    .partner-glider-description.truncate-overflow::before {
-        position: absolute;
-        content: '...';
-        bottom: 0;
-        left: 1rem;
-        z-index: 1;
-    }
-    .partner-glider-description.truncate-overflow::after {
-        content: '';
+    .partner-glider-description.truncate-overflow:after {
+        content: "";
+        text-align: left;
         position: absolute;
         bottom: 0;
-        left: 1rem;
-        width: 1rem;
-        height: 1rem;
-        z-index: 0;
+        left: 0;
+        width: 40%;
+        height: 1.2em;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
     }
 }
 
@@ -362,21 +356,15 @@ and (max-device-width : 1024px) {
         max-height: calc(var(--lh) * var(--max-lines));
         overflow: hidden;
     }
-    .partner-glider-description.truncate-overflow::before {
-        position: absolute;
-        content: '...';
-        bottom: 0;
-        left: 1rem;
-        z-index: 1;
-    }
-    .partner-glider-description.truncate-overflow::after {
-        content: '';
+    .partner-glider-description.truncate-overflow:after {
+        content: "";
+        text-align: left;
         position: absolute;
         bottom: 0;
-        left: 1rem;
-        width: 1rem;
-        height: 1rem;
-        z-index: 0;
+        left: 0;
+        width: 25%;
+        height: 1.2em;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
     }
 }
 
@@ -430,21 +418,15 @@ and (max-device-width : 1024px) {
         max-height: calc(var(--lh) * var(--max-lines));
         overflow: hidden;
     }
-    .partner-glider-description.truncate-overflow::before {
-        position: absolute;
-        content: '...';
-        bottom: 0;
-        left: 1rem;
-        z-index: 1;
-    }
-    .partner-glider-description.truncate-overflow::after {
-        content: '';
+    .partner-glider-description.truncate-overflow:after {
+        content: "";
+        text-align: left;
         position: absolute;
         bottom: 0;
-        left: 1rem;
-        width: 1rem;
-        height: 1rem;
-        z-index: 0;
+        left: 0;
+        width: 25%;
+        height: 1.2em;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
     }
 }
 
