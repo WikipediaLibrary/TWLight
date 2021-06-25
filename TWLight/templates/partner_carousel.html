@@ -65,9 +65,11 @@
       {% for partner in partners %}
         <li>
           <div id="partner-{{partner.pk}}" class="partner-image-description-container">
-            <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
-                class="mx-auto d-block partner-glider-image fade-in-transition"
-                alt="{{partner.partner_name}} logo"/>
+            <div class="partner-image-container">
+              <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
+                  class="mx-auto d-block partner-glider-image fade-in-transition"
+                  alt="{{partner.partner_name}} logo"/>
+            </div>
             <p id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description truncate-overflow invisible">
               {{ partner.short_description|safe }}
             </p>

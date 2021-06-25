@@ -434,6 +434,10 @@ and (max-device-width : 1024px) {
     }
 }
 
+.partner-image-container{
+    padding-top: 20px;
+}
+
 .partner-glider-more-link{
     color: #3366CC;
 }
