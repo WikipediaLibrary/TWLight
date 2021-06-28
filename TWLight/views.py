@@ -127,9 +127,9 @@ class NewHomePageView(TemplateView):
             if tags:
                 # Since multidisciplinary partners may have content that users may
                 # find useful, we are filtering by the multidisciplinary tag as well
-                tag_filter = Q(
-                    new_tags__tags__contains=self.request.GET.get("tags")
-                ) | Q(new_tags__tags__contains="multidisciplinary_tag")
+                tag_filter = Q(new_tags__tags__contains=tags) | Q(
+                    new_tags__tags__contains="multidisciplinary_tag"
+                )
                 # This variable is to indicate which tag filter has been selected
                 context["selected"] = tags
                 # It is harder to get only one tag value from a dictionary in a
@@ -140,8 +140,23 @@ class NewHomePageView(TemplateView):
         except KeyError:
             tag_filter = Q(featured=True)
 
-        # Partners will appear in random order in the carousel
-        partners = Partner.objects.filter(tag_filter).order_by("new_tags__tags", "?")
+        # Partners will appear ordered by the selected tag first, then by the
+        # multidisciplinary tag
+        if tags:
+            # Order by ascending tag order if tag name is before multidisciplinary
+            if tags < "multidisciplinary_tag":
+                partners = Partner.objects.filter(tag_filter).order_by(
+                    "new_tags__tags", "?"
+                )
+            # Order by descending tag order if tag name is after multidisciplinary
+            else:
+                partners = Partner.objects.filter(tag_filter).order_by(
+                    "-new_tags__tags", "?"
+                )
+        # No tag filter was passed, ordering can be random
+        else:
+            partners = Partner.objects.filter(tag_filter).order_by("?")
+
         for partner in partners:
             # Obtaining translated partner description
             partner_short_description_key = "{pk}_short_description".format(
