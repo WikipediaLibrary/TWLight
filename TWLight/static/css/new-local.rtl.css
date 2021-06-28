@@ -237,7 +237,7 @@ HOMEPAGE CAROUSEL CSS
     line-height: 1;
     text-decoration: none;
 }
-
+/* For smartphones */
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
@@ -304,6 +304,7 @@ and (max-device-width : 480px) {
     }
 }
 
+/* For tablets */
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
@@ -368,66 +369,65 @@ and (max-device-width : 1024px) {
     }
 }
 
-@media (min-width: 1025px) {
-    .more-item{
-        color: #3366CC;
-        font-weight: 400;
-    }
-    .more-item:hover{
-        color: #3366CC;
-        text-decoration: underline;
-    }
-    .more-item.active{
-        color: #3366CC;
-        font-weight: 600;
-        text-decoration: underline;
-    }
-    .more-option{
-        border-style: solid;
-        border-color: #3366CC;
-        border-width: thin;
-    }
-    .partner-glider-button{
-        width: 98%;
-        color: #FFFFFF;
-        background-color: #3366CC;
-    }
-    .partner-glider-button:hover{
-        color: #FFFFFF;
-        background-color: #3366CC;
-        font-weight: 500;
-    }
-    .partner-image-description-container{
-        width: inherit;
-    }
-    .partner-glider-image{
-        height: 176px;
-        max-width: 375px;
-        padding: 0px 0px 15px 0px;
-    }
-    .partner-glider-description{
-        position: absolute;
-        top: 40px;
-        width: inherit;
-        overflow: hidden;
-        white-space: normal;
-        padding: 0px 25px 0px 30px;
-    }
-    .partner-glider-description.truncate-overflow{
-        --max-lines: 5;
-        max-height: calc(var(--lh) * var(--max-lines));
-        overflow: hidden;
-    }
-    .partner-glider-description.truncate-overflow:after {
-        content: "";
-        text-align: left;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 25%;
-        height: 1.2em;
-        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
-    }
+/* For screens larger than tablets */
+.more-item{
+    color: #3366CC;
+    font-weight: 400;
+}
+.more-item:hover{
+    color: #3366CC;
+    text-decoration: underline;
+}
+.more-item.active{
+    color: #3366CC;
+    font-weight: 600;
+    text-decoration: underline;
+}
+.more-option{
+    border-style: solid;
+    border-color: #3366CC;
+    border-width: thin;
+}
+.partner-glider-button{
+    width: 98%;
+    color: #FFFFFF;
+    background-color: #3366CC;
+}
+.partner-glider-button:hover{
+    color: #FFFFFF;
+    background-color: #3366CC;
+    font-weight: 500;
+}
+.partner-image-description-container{
+    width: inherit;
+}
+.partner-glider-image{
+    height: 176px;
+    max-width: 375px;
+    padding: 0px 0px 15px 0px;
+}
+.partner-glider-description{
+    position: absolute;
+    top: 40px;
+    width: inherit;
+    overflow: hidden;
+    white-space: normal;
+    padding: 0px 25px 0px 30px;
+}
+.partner-glider-description.truncate-overflow{
+    --max-lines: 5;
+    max-height: calc(var(--lh) * var(--max-lines));
+    overflow: hidden;
+}
+.partner-glider-description.truncate-overflow:after {
+    content: "";
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 25%;
+    height: 1.2em;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
 }
 
 .partner-glider-more-link{
