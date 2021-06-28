@@ -286,7 +286,7 @@ and (max-device-width : 480px) {
         top: 50px;
         right: 6px;
         bottom: 5px;
-        font-size: 14px;
+        font-size: 15px;
         white-space: normal;
     }
     .partner-glider-description.truncate-overflow{
@@ -416,20 +416,24 @@ and (max-device-width : 1024px) {
     white-space: normal;
     text-overflow: ellipsis;
 }
-.partner-glider-description.truncate-overflow{
-    --max-lines: 5;
-    max-height: calc(var(--lh) * var(--max-lines));
-    overflow: hidden;
-}
-.partner-glider-description.truncate-overflow:after {
-    content: "";
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 25%;
-    height: 1.2em;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+
+@media only screen
+and (min-device-width : 1025px) {
+    .partner-glider-description.truncate-overflow{
+        --max-lines: 5;
+        max-height: calc(var(--lh) * var(--max-lines));
+        overflow: hidden;
+    }
+    .partner-glider-description.truncate-overflow:after {
+        content: "";
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 25%;
+        height: 1.2em;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    }
 }
 
 .partner-image-container{

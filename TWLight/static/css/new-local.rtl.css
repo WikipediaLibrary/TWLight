@@ -414,20 +414,23 @@ and (max-device-width : 1024px) {
     white-space: normal;
     padding: 0px 25px 0px 30px;
 }
-.partner-glider-description.truncate-overflow{
-    --max-lines: 5;
-    max-height: calc(var(--lh) * var(--max-lines));
-    overflow: hidden;
-}
-.partner-glider-description.truncate-overflow:after {
-    content: "";
-    text-align: left;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 25%;
-    height: 1.2em;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+@media only screen
+and (min-device-width : 1025px) {
+    .partner-glider-description.truncate-overflow{
+        --max-lines: 5;
+        max-height: calc(var(--lh) * var(--max-lines));
+        overflow: hidden;
+    }
+    .partner-glider-description.truncate-overflow:after {
+        content: "";
+        text-align: left;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 25%;
+        height: 1.2em;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    }
 }
 
 .partner-glider-more-link{
