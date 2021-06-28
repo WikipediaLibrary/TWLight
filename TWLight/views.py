@@ -141,7 +141,7 @@ class NewHomePageView(TemplateView):
             tag_filter = Q(featured=True)
 
         # Partners will appear in random order in the carousel
-        partners = Partner.objects.filter(tag_filter).order_by("?")
+        partners = Partner.objects.filter(tag_filter).order_by("new_tags__tags", "?")
         for partner in partners:
             # Obtaining translated partner description
             partner_short_description_key = "{pk}_short_description".format(
