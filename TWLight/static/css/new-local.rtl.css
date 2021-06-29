@@ -203,7 +203,7 @@ HOMEPAGE CAROUSEL CSS
 .glider{
     overflow-x: hidden;
 }
-.partner-arrow-left{
+.partner-arrow{
     position: absolute;
     display: block;
     top: 50%;
@@ -220,23 +220,7 @@ HOMEPAGE CAROUSEL CSS
     line-height: 1;
     text-decoration: none;
 }
-.partner-glider-right{
-    position: absolute;
-    display: block;
-    top: 50%;
-    z-index: 2;
-    color: #3366CC;
-    text-transform: uppercase;
-    padding: 9px 12px;
-    background-color: #FFFFFF;
-    border: 2px solid #3366CC;
-    opacity: 1;
-    cursor: pointer;
-    transition: opacity 150ms ease, border 300ms ease-in-out;
-    transform: translateY(-50%);
-    line-height: 1;
-    text-decoration: none;
-}
+
 /* For smartphones */
 @media only screen
 and (min-device-width : 320px)
@@ -271,21 +255,24 @@ and (max-device-width : 480px) {
         font-weight: 500;
     }
     .partner-image-description-container{
-        width: inherit;
+        position: relative;
+        width: 233px;
+        height: 150px;
+        margin-left: 42px;
+        padding-right: 8px;
     }
     .partner-glider-image{
-        height: 150px;
-        max-width: 270px;
-        padding: 35px 45px 15px 40px;
+        max-width: 100%;
+        max-height: 110px;
+        padding: 0px 0px 0px 40px;
     }
     .partner-glider-description{
         position: absolute;
-        width: inherit;
-        top: 40px;
-        font-size: 14px;
-        overflow: hidden;
+        top: 50px;
+        left: 6px;
+        bottom: 5px;
+        font-size: 15px;
         white-space: normal;
-        padding: 10px 35px 0px 35px;
     }
     .partner-glider-description.truncate-overflow{
         --max-lines: 4;
@@ -337,20 +324,22 @@ and (max-device-width : 1024px) {
         font-weight: 500;
     }
     .partner-image-description-container{
-        width: inherit;
+        position: relative;
+        width: 458px;
+        height: 150px;
+        margin-left: 30px;
+        margin-right: auto;
     }
     .partner-glider-image{
-        height: 150px;
-        max-width: 290px;
-        padding: 0px 0px 45px 0px;
+        padding-right: 42px;
+        max-height: 105px;
+        max-width: 100%;
     }
     .partner-glider-description{
         position: absolute;
         top: 40px;
-        width: inherit;
-        overflow: hidden;
+        right: 29.5px;
         white-space: normal;
-        padding: 0px 25px 0px 30px;
     }
     .partner-glider-description.truncate-overflow{
         --max-lines: 4;
@@ -399,21 +388,21 @@ and (max-device-width : 1024px) {
     font-weight: 500;
 }
 .partner-image-description-container{
-    width: inherit;
+    position: relative;
+    height: 176px;
+    margin-left: 25px;
+    margin-right: 30px;
 }
 .partner-glider-image{
-    height: 176px;
-    max-width: 375px;
-    padding: 0px 0px 15px 0px;
+    max-width: 100%;
+    max-height: 125px;
 }
 .partner-glider-description{
     position: absolute;
-    top: 40px;
-    width: inherit;
-    overflow: hidden;
+    top: 35px;
     white-space: normal;
-    padding: 0px 25px 0px 30px;
 }
+
 @media only screen
 and (min-device-width : 1025px) {
     .partner-glider-description.truncate-overflow{

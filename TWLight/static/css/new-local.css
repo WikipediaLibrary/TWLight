@@ -397,7 +397,6 @@ and (max-device-width : 1024px) {
     position: absolute;
     top: 35px;
     white-space: normal;
-    text-overflow: ellipsis;
 }
 
 @media only screen
