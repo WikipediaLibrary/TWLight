@@ -408,7 +408,7 @@ and (max-device-width : 1024px) {
 }
 .partner-glider-image{
     max-width: 100%;
-    height: 125px;
+    max-height: 125px;
 }
 .partner-glider-description{
     position: absolute;
