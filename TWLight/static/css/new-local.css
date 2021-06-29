@@ -202,24 +202,7 @@ HOMEPAGE CAROUSEL CSS
 .tag-filters{
     padding: 25px 0px 30px 0px;
 }
-.partner-arrow-left{
-    position: absolute;
-    display: block;
-    top: 50%;
-    z-index: 2;
-    color: #3366CC;
-    text-transform: uppercase;
-    padding: 9px 12px;
-    background-color: #FFFFFF;
-    border: 2px solid #3366CC;
-    opacity: 1;
-    cursor: pointer;
-    transition: opacity 150ms ease, border 300ms ease-in-out;
-    transform: translateY(-50%);
-    line-height: 1;
-    text-decoration: none;
-}
-.partner-glider-right{
+.partner-arrow{
     position: absolute;
     display: block;
     top: 50%;
