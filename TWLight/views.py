@@ -181,7 +181,7 @@ class NewHomePageView(TemplateView):
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect("/")
+            return redirect("/home")
         else:
             context = self.get_context_data()
             return render(request, "homepage.html", context)

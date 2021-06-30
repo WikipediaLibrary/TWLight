@@ -88,7 +88,7 @@ urlpatterns = [
     ),
     # For contact us form
     url(r"^contact/$", ContactUsView.as_view(), name="contact"),
-    url(r"^$", HomePageView.as_view(), name="homepage"),
+    url(r"^$", NewHomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
-    url(r"^homepage/$", NewHomePageView.as_view(), name="new_homepage"),
+    url(r"^home/$", login_required(HomePageView.as_view()), name="home"),
 ]
