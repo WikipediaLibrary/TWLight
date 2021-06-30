@@ -65,10 +65,10 @@
                   // For bound: true, there will be no empty space & the last slide will never become active
                   // Hence add perView to correctly calculate the last slide
                   const lastSlideIndex = Glide.settings.bound
-                    ? Glide.index + (Glide.settings.perView - 1)
-                    : Glide.index;
+                    ? Math.floor(Glide.index + (Glide.settings.perView - 1))
+                    : Math.floor(Glide.index);
 
-                  if (lastSlideIndex === Components.Sizes.length - 1) {
+                  if (lastSlideIndex === Components.Sizes.length - 1 || lastSlideIndex > Components.Sizes.length -1) {
                     right.setAttribute('disabled', '') // Disable on last slide
                   } else {
                     right.removeAttribute('disabled') // Disable on other slides
@@ -76,6 +76,43 @@
                 }
               }
             })
+
+            Glide.on(['resize', 'run'], () => {
+              // Filter out arrows_control
+              for (let controlItem of Components.Controls.items) {
+                if (controlItem.className !== classes.controls) {
+                  continue
+                }
+
+                // Set left arrow state
+                var left = controlItem.querySelector('.' + classes.backArrow)
+                if (left) {
+                  if (Glide.index === 0) {
+                    left.setAttribute('disabled', '') // Disable on first slide
+                  } else {
+                    left.removeAttribute('disabled') // Enable on other slides
+                  }
+                }
+
+                // Set right arrow state
+                var right = controlItem.querySelector('.' + classes.nextArrow)
+                if (right) {
+                  // Glide.index is based on the active slide
+                  // For bound: true, there will be no empty space & the last slide will never become active
+                  // Hence add perView to correctly calculate the last slide
+                  const lastSlideIndex = Glide.settings.bound
+                    ? Math.floor(Glide.index + (Glide.settings.perView - 1))
+                    : Math.floor(Glide.index);
+
+                  if (lastSlideIndex === Components.Sizes.length - 1 || lastSlideIndex > Components.Sizes.length -1) {
+                    right.setAttribute('disabled', '') // Disable on last slide
+                  } else {
+                    right.removeAttribute('disabled') // Disable on other slides
+                  }
+                }
+              }
+            })
+
           }
         }
       }
@@ -179,10 +216,54 @@
                   // For bound: true, there will be no empty space & the last slide will never become active
                   // Hence add perView to correctly calculate the last slide
                   const lastSlideIndex = Glide.settings.bound
-                    ? Glide.index + (Glide.settings.perView - 1)
-                    : Glide.index;
+                    ? Math.floor(Glide.index + (Glide.settings.perView - 1))
+                    : Math.floor(Glide.index);
 
-                  if (lastSlideIndex === Components.Sizes.length - 1) {
+                  console.log("Last index: " + lastSlideIndex);
+                  console.log("Components.Sizes.length");
+                  console.log(Components.Sizes.length - 1);
+
+                  if (lastSlideIndex === Components.Sizes.length - 1 || lastSlideIndex > Components.Sizes.length -1) {
+                    right.setAttribute('disabled', '') // Disable on last slide
+                  } else {
+                    right.removeAttribute('disabled') // Disable on other slides
+                  }
+                }
+              }
+            })
+
+            Glide.on(['resize', 'run'], () => {
+              // Filter out arrows_control
+              for (let controlItem of Components.Controls.items) {
+                if (controlItem.className !== classes.controls) {
+                  continue
+                }
+
+                // Set left arrow state
+                var left = controlItem.querySelector('.' + classes.backArrow)
+                if (left) {
+                  if (Glide.index === 0) {
+                    left.setAttribute('disabled', '') // Disable on first slide
+                  } else {
+                    left.removeAttribute('disabled') // Enable on other slides
+                  }
+                }
+
+                // Set right arrow state
+                var right = controlItem.querySelector('.' + classes.nextArrow)
+                if (right) {
+                  // Glide.index is based on the active slide
+                  // For bound: true, there will be no empty space & the last slide will never become active
+                  // Hence add perView to correctly calculate the last slide
+                  const lastSlideIndex = Glide.settings.bound
+                    ? Math.floor(Glide.index + (Glide.settings.perView - 1))
+                    : Math.floor(Glide.index);
+
+                  console.log("Last index: " + lastSlideIndex);
+                  console.log("Components.Sizes.length");
+                  console.log(Components.Sizes.length - 1);
+
+                  if (lastSlideIndex === Components.Sizes.length - 1 || lastSlideIndex > Components.Sizes.length -1) {
                     right.setAttribute('disabled', '') // Disable on last slide
                   } else {
                     right.removeAttribute('disabled') // Disable on other slides
