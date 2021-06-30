@@ -219,10 +219,6 @@
                     ? Math.floor(Glide.index + (Glide.settings.perView - 1))
                     : Math.floor(Glide.index);
 
-                  console.log("Last index: " + lastSlideIndex);
-                  console.log("Components.Sizes.length");
-                  console.log(Components.Sizes.length - 1);
-
                   if (lastSlideIndex === Components.Sizes.length - 1 || lastSlideIndex > Components.Sizes.length -1) {
                     right.setAttribute('disabled', '') // Disable on last slide
                   } else {
@@ -258,10 +254,6 @@
                   const lastSlideIndex = Glide.settings.bound
                     ? Math.floor(Glide.index + (Glide.settings.perView - 1))
                     : Math.floor(Glide.index);
-
-                  console.log("Last index: " + lastSlideIndex);
-                  console.log("Components.Sizes.length");
-                  console.log(Components.Sizes.length - 1);
 
                   if (lastSlideIndex === Components.Sizes.length - 1 || lastSlideIndex > Components.Sizes.length -1) {
                     right.setAttribute('disabled', '') // Disable on last slide
