@@ -221,6 +221,11 @@ HOMEPAGE CAROUSEL CSS
     text-decoration: none;
 }
 
+button.partner-arrow:disabled,
+button.partner-arrow[disabled]{
+    opacity: 25%;
+}
+
 /* For smartphones */
 @media only screen
 and (min-device-width : 320px)
@@ -264,7 +269,7 @@ and (max-device-width : 480px) {
     .partner-glider-image{
         max-width: 100%;
         max-height: 110px;
-        padding: 0px 0px 0px 40px;
+        padding: 40px 0 0 0;
     }
     .partner-glider-description{
         position: absolute;
@@ -275,6 +280,7 @@ and (max-device-width : 480px) {
         white-space: normal;
     }
     .partner-glider-description.truncate-overflow{
+        --lh: 1.5rem;
         --max-lines: 4;
         max-height: calc(var(--lh) * var(--max-lines));
         overflow: hidden;
@@ -342,6 +348,7 @@ and (max-device-width : 1024px) {
         white-space: normal;
     }
     .partner-glider-description.truncate-overflow{
+        --lh: 1.5rem;
         --max-lines: 4;
         max-height: calc(var(--lh) * var(--max-lines));
         overflow: hidden;
@@ -406,6 +413,7 @@ and (max-device-width : 1024px) {
 @media only screen
 and (min-device-width : 1025px) {
     .partner-glider-description.truncate-overflow{
+        --lh: 1.5rem;
         --max-lines: 5;
         max-height: calc(var(--lh) * var(--max-lines));
         overflow: hidden;
