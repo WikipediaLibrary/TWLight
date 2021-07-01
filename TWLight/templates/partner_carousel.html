@@ -8,9 +8,9 @@
     <ul class="nav justify-content-center">
       <li class="nav-item">
         {% if not selected %}
-          <a class="nav-link more-item active" href="{% url 'new_homepage' %}?tags=">
+          <a class="nav-link more-item active" href="{% url 'homepage' %}?tags=">
         {% else %}
-          <a class="nav-link more-item" href="{% url 'new_homepage' %}?tags=">
+          <a class="nav-link more-item" href="{% url 'homepage' %}?tags=">
         {% endif %}
           {% comment %}Translators: This is a filter of featured collections of The Wikipedia Library.{% endcomment %}
           {% blocktranslate %}
@@ -21,9 +21,9 @@
       {% for tag_key, tag_value in tags.items %}
           <li class="nav-item">
             {% if selected and tag_key == selected %}
-              <a class="nav-link more-item active" href="{% url 'new_homepage' %}?tags={{tag_key}}">
+              <a class="nav-link more-item active" href="{% url 'homepage' %}?tags={{tag_key}}">
             {% else %}
-              <a class="nav-link more-item" href="{% url 'new_homepage' %}?tags={{tag_key}}">
+              <a class="nav-link more-item" href="{% url 'homepage' %}?tags={{tag_key}}">
             {% endif %}
               {{ tag_value }}
             </a>
@@ -48,7 +48,7 @@
             </a>
             <div class="dropdown-menu">
               {% for a_tag_key, a_tag_value in more_tags.items %}
-                <a class="dropdown-item more-item" href="{% url 'new_homepage' %}?tags={{a_tag_key}}">
+                <a class="dropdown-item more-item" href="{% url 'homepage' %}?tags={{a_tag_key}}">
                   {{ a_tag_value }}
                 </a>
               {% endfor %}

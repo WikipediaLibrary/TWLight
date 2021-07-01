@@ -13,7 +13,7 @@ from django.template import TemplateDoesNotExist, loader
 from django.views.decorators.csrf import requires_csrf_token
 from django.views.decorators.debug import sensitive_variables
 
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.resources.helpers import get_partner_description, get_tag_dict
 
 import logging
@@ -166,11 +166,15 @@ class NewHomePageView(TemplateView):
             partner_descriptions = get_partner_description(
                 language_code, partner_short_description_key, partner_description_key
             )
+            try:
+                partner_logo = partner.logos.logo.url
+            except PartnerLogo.DoesNotExist:
+                partner_logo = None
             partners_obj.append(
                 {
                     "pk": partner.pk,
                     "partner_name": partner.company_name,
-                    "partner_logo": partner.logos.logo.url,
+                    "partner_logo": partner_logo,
                     "short_description": partner_descriptions["short_description"],
                     "description": partner_descriptions["description"],
                 }

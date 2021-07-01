@@ -4,7 +4,8 @@ from datetime import date, timedelta
 from faker import Faker
 from testdata import wrap_testdata
 
-from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from django.contrib.auth.models import User, AnonymousUser
 from django.conf import settings
 from django.core import mail
 from django.core.exceptions import PermissionDenied, ValidationError
@@ -26,6 +27,8 @@ from TWLight.users.factories import UserFactory, EditorFactory
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization
 import TWLight.users.views
+
+from . import views as base_views
 
 from .view_mixins import (
     PartnerCoordinatorOrSelf,
@@ -1267,3 +1270,99 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
         expected_json = [{"wp_username": self.editor1.wp_username}]
 
         self.assertEqual(response.data, expected_json)
+
+
+class TestBaseViews(TestCase):
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.partner1 = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            status=Partner.AVAILABLE,
+            featured=True,
+            new_tags={"tags": ["music_tag"]},
+        )
+        cls.partner2 = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            status=Partner.AVAILABLE,
+            requested_access_duration=True,
+            new_tags={"tags": ["art_tag"]},
+        )
+        cls.partner3 = PartnerFactory(
+            authorization_method=Partner.CODES,
+            status=Partner.AVAILABLE,
+            featured=True,
+            new_tags={"tags": ["music_tag"]},
+        )
+        cls.partner4 = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            status=Partner.AVAILABLE,
+            featured=True,
+            new_tags={"tags": ["art_tag"]},
+        )
+        cls.partner5 = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            status=Partner.AVAILABLE,
+            specific_stream=True,
+            new_tags={"tags": ["multidisciplinary_tag"]},
+        )
+        cls.user_editor = UserFactory(username="Jon Snow")
+        cls.editor1 = EditorFactory(user=cls.user_editor)
+        cls.editor1.wp_bundle_eligible = True
+        cls.editor1.save()
+
+    def test_featured_partners(self):
+        factory = RequestFactory()
+        request = factory.get(reverse("homepage"))
+        request.user = AnonymousUser()
+        response = base_views.NewHomePageView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.content.decode("utf-8")
+
+        self.assertIn(self.partner1.company_name, content)
+        self.assertIn(self.partner3.company_name, content)
+        self.assertIn(self.partner4.company_name, content)
+
+        self.assertNotIn(self.partner2.company_name, content)
+        self.assertNotIn(self.partner5.company_name, content)
+
+    def test_filter_partners_carousel_music(self):
+        factory = RequestFactory()
+        url = reverse("homepage")
+        param_url = "{url}?tags=music_tag".format(url=url)
+        request = factory.get(param_url)
+        request.user = AnonymousUser()
+        response = base_views.NewHomePageView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.content.decode("utf-8")
+
+        self.assertIn(self.partner1.company_name, content)
+        self.assertIn(self.partner3.company_name, content)
+        self.assertIn(self.partner5.company_name, content)
+
+        self.assertNotIn(self.partner2.company_name, content)
+        self.assertNotIn(self.partner4.company_name, content)
+
+    def test_filter_partners_carousel_art(self):
+        factory = RequestFactory()
+        url = reverse("homepage")
+        param_url = "{url}?tags=art_tag".format(url=url)
+        request = factory.get(param_url)
+        request.user = AnonymousUser()
+        response = base_views.NewHomePageView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.content.decode("utf-8")
+
+        self.assertIn(self.partner2.company_name, content)
+        self.assertIn(self.partner4.company_name, content)
+        self.assertIn(self.partner5.company_name, content)
+
+        self.assertNotIn(self.partner1.company_name, content)
+        self.assertNotIn(self.partner3.company_name, content)
