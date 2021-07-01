@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-06-24 10:24+0000\n"
+"POT-Creation-Date: 2021-07-01 14:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1161,7 +1161,7 @@ msgstr ""
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
 #: TWLight/templates/about.html:204 TWLight/templates/base.html:261
-#: TWLight/templates/new_base.html:92
+#: TWLight/templates/new_base.html:91
 msgid "Contact us"
 msgstr ""
 
@@ -1187,8 +1187,8 @@ msgstr ""
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #. Translators: Name of the project/tool.
 #: TWLight/emails/templates/emails/contact.html:45
-#: TWLight/templates/login_partial.html:9
-#: TWLight/templates/login_partial.html:13 TWLight/templates/new_base.html:15
+#: TWLight/templates/login_partial.html:10
+#: TWLight/templates/login_partial.html:14 TWLight/templates/new_base.html:15
 msgid "The Wikipedia Library"
 msgstr ""
 
@@ -2382,13 +2382,13 @@ msgstr ""
 
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:228 TWLight/templates/new_base.html:68
+#: TWLight/templates/base.html:228 TWLight/templates/new_base.html:67
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
 #. Translators: This link is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:234 TWLight/templates/new_base.html:74
+#: TWLight/templates/base.html:234 TWLight/templates/new_base.html:73
 msgid "Terms of use and privacy policy"
 msgstr ""
 
@@ -2572,7 +2572,7 @@ msgid "See more"
 msgstr ""
 
 #. Translators: Information about The Wikipedia Library.
-#: TWLight/templates/login_partial.html:20
+#: TWLight/templates/login_partial.html:21
 msgid ""
 "\n"
 "      Over 90 of the world's top\n"
@@ -2582,20 +2582,44 @@ msgid ""
 msgstr ""
 
 #. Translators: Information about The Wikipedia Library.
-#: TWLight/templates/login_partial.html:31
+#: TWLight/templates/login_partial.html:32
 msgid ""
 "\n"
 "      Meet this criteria for automatic access\n"
 "      "
 msgstr ""
 
-#: TWLight/templates/login_partial.html:53
+#: TWLight/templates/login_partial.html:54
 msgid "Login via Wikipedia"
 msgstr ""
 
 #. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
-#: TWLight/templates/new_base.html:80
+#: TWLight/templates/new_base.html:79
 msgid "Translate the Library"
+msgstr ""
+
+#. Translators: This is a filter of featured collections of The Wikipedia Library.
+#: TWLight/templates/partner_carousel.html:16
+msgid ""
+"\n"
+"            Featured\n"
+"          "
+msgstr ""
+
+#. Translators: A button that indicates there are more tag filter options.
+#: TWLight/templates/partner_carousel.html:43
+msgid ""
+"\n"
+"                    More\n"
+"                  "
+msgstr ""
+
+#. Translators: A button that reveals more information about a collection.
+#: TWLight/templates/partner_carousel.html:80
+msgid ""
+"\n"
+"              More info\n"
+"            "
 msgstr ""
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
@@ -3654,22 +3678,22 @@ msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/views.py:53 TWLight/views.py:104
+#: TWLight/views.py:52 TWLight/views.py:103
 msgid "500+ edits"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/views.py:55 TWLight/views.py:106
+#: TWLight/views.py:54 TWLight/views.py:105
 msgid "6+ months editing"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/views.py:57 TWLight/views.py:108
+#: TWLight/views.py:56 TWLight/views.py:107
 msgid "10+ edits in the last month"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/views.py:59 TWLight/views.py:110
+#: TWLight/views.py:58 TWLight/views.py:109
 msgid "No active blocks"
 msgstr ""
 
