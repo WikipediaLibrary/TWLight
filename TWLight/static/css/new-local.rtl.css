@@ -69,7 +69,7 @@ LOGIN PARTIAL CSS
         line-height: 5px;
     }
     .homepage-login{
-        padding: 0px 0px 20px 25px;
+        padding: 0px 0px 20px 30px;
     }
     .homepage-login-button{
         color: #3366CC;
@@ -92,14 +92,14 @@ LOGIN PARTIAL CSS
         font-style: normal;
         font-size: 30px;
         font-weight: 800;
-        padding: 20px 20px 0px 0px;
+        padding: 20px 0px 0px 30px;
     }
 
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
         font-style: normal;
-        padding: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 40px;
     }
 
     .criteria-info{
@@ -111,7 +111,7 @@ LOGIN PARTIAL CSS
         line-height: 0px;
     }
     .homepage-login{
-        padding: 0px 20px 20px 0px;
+        padding: 0px 0px 20px 30px;
     }
     .homepage-login-button{
         color: #3366CC;
@@ -187,6 +187,289 @@ LOGIN PARTIAL CSS
 
 .criteria-checkmark{
     padding: 0px 10px 0px 0px;
+}
+
+/*
+----------------------------------------------------------------------------
+HOMEPAGE CAROUSEL CSS
+--------------------------------------------------------------------------
+*/
+.carousel-section{
+    overflow-x: hidden;
+}
+.tag-filters{
+    padding: 25px 0px 30px 0px;
+}
+.glider{
+    overflow-x: hidden;
+}
+.partner-arrow{
+    position: absolute;
+    display: block;
+    top: 50%;
+    z-index: 2;
+    color: #3366CC;
+    text-transform: uppercase;
+    padding: 9px 12px;
+    background-color: #FFFFFF;
+    border: 2px solid #3366CC;
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity 150ms ease, border 300ms ease-in-out;
+    transform: translateY(-50%);
+    line-height: 1;
+    text-decoration: none;
+}
+
+button.partner-arrow:disabled,
+button.partner-arrow[disabled]{
+    opacity: 25%;
+}
+
+/* For smartphones */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .more-item{
+        color: #3366CC;
+        font-weight: 400;
+        padding: 6px;
+    }
+    .more-item:hover{
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .more-item.active{
+        color: #3366CC;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+    .more-option{
+        border-style: solid;
+        border-color: #3366CC;
+        border-width: thin;
+    }
+    .partner-glider-button{
+        width: 98%;
+        color: #FFFFFF;
+        background-color: #3366CC;
+    }
+    .partner-glider-button:hover{
+        color: #FFFFFF;
+        background-color: #3366CC;
+        font-weight: 500;
+    }
+    .partner-image-description-container{
+        position: relative;
+        width: 233px;
+        height: 150px;
+        margin-left: 42px;
+        padding-right: 8px;
+    }
+    .partner-glider-image{
+        max-width: 100%;
+        max-height: 110px;
+        padding: 40px 0 0 0;
+    }
+    .partner-glider-description{
+        position: absolute;
+        top: 50px;
+        left: 6px;
+        bottom: 5px;
+        font-size: 15px;
+        white-space: normal;
+    }
+    .partner-glider-description.truncate-overflow{
+        --lh: 1.5rem;
+        --max-lines: 4;
+        max-height: calc(var(--lh) * var(--max-lines));
+        overflow: hidden;
+    }
+    .partner-glider-description.truncate-overflow:after {
+        content: "";
+        text-align: left;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40%;
+        height: 1.2em;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    }
+}
+
+/* For tablets */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    .more-item{
+        color: #3366CC;
+        font-weight: 400;
+    }
+    .more-item:hover{
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .more-item.active{
+        color: #3366CC;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+    .more-option{
+        border-style: solid;
+        border-color: #3366CC;
+        border-width: thin;
+    }
+    .partner-glider-button{
+        width: 98%;
+        color: #FFFFFF;
+        background-color: #3366CC;
+    }
+    .partner-glider-button:hover{
+        color: #FFFFFF;
+        background-color: #3366CC;
+        font-weight: 500;
+    }
+    .partner-image-description-container{
+        position: relative;
+        width: 458px;
+        height: 150px;
+        margin-left: 30px;
+        margin-right: auto;
+    }
+    .partner-glider-image{
+        padding-right: 42px;
+        max-height: 105px;
+        max-width: 100%;
+    }
+    .partner-glider-description{
+        position: absolute;
+        top: 40px;
+        right: 29.5px;
+        white-space: normal;
+    }
+    .partner-glider-description.truncate-overflow{
+        --lh: 1.5rem;
+        --max-lines: 4;
+        max-height: calc(var(--lh) * var(--max-lines));
+        overflow: hidden;
+    }
+    .partner-glider-description.truncate-overflow:after {
+        content: "";
+        text-align: left;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 25%;
+        height: 1.2em;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    }
+}
+
+/* For screens larger than tablets */
+.more-item{
+    color: #3366CC;
+    font-weight: 400;
+}
+.more-item:hover{
+    color: #3366CC;
+    text-decoration: underline;
+}
+.more-item.active{
+    color: #3366CC;
+    font-weight: 600;
+    text-decoration: underline;
+}
+.more-option{
+    border-style: solid;
+    border-color: #3366CC;
+    border-width: thin;
+}
+.partner-glider-button{
+    width: 98%;
+    color: #FFFFFF;
+    background-color: #3366CC;
+}
+.partner-glider-button:hover{
+    color: #FFFFFF;
+    background-color: #3366CC;
+    font-weight: 500;
+}
+.partner-image-description-container{
+    position: relative;
+    height: 176px;
+    margin-left: 25px;
+    margin-right: 30px;
+}
+.partner-glider-image{
+    max-width: 100%;
+    max-height: 125px;
+}
+.partner-glider-description{
+    position: absolute;
+    top: 35px;
+    white-space: normal;
+}
+
+@media only screen
+and (min-device-width : 1025px) {
+    .partner-glider-description.truncate-overflow{
+        --lh: 1.5rem;
+        --max-lines: 5;
+        max-height: calc(var(--lh) * var(--max-lines));
+        overflow: hidden;
+    }
+    .partner-glider-description.truncate-overflow:after {
+        content: "";
+        text-align: left;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 25%;
+        height: 1.2em;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    }
+}
+
+.partner-glider-more-link{
+    color: #3366CC;
+}
+.partner-glider-more-link:hover{
+    color: #3366CC;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.fade-in-transition{
+    animation: fadeIn linear 0.300s;
+    -webkit-animation: fadeIn linear 0.300s;
+    -moz-animation: fadeIn linear 0.300s;
+    -o-animation: fadeIn linear 0.300s;
+    -ms-animation: fadeIn linear 0.300s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
 }
 
 /*

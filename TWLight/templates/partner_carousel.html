@@ -1,0 +1,97 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% load cache %}
+
+<div class="row tag-filters">
+  <div class="col-12">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        {% if not selected %}
+          <a class="nav-link more-item active" href="{% url 'new_homepage' %}?tags=">
+        {% else %}
+          <a class="nav-link more-item" href="{% url 'new_homepage' %}?tags=">
+        {% endif %}
+          {% comment %}Translators: This is a filter of featured collections of The Wikipedia Library.{% endcomment %}
+          {% blocktranslate %}
+            Featured
+          {% endblocktranslate %}
+        </a>
+      </li>
+      {% for tag_key, tag_value in tags.items %}
+          <li class="nav-item">
+            {% if selected and tag_key == selected %}
+              <a class="nav-link more-item active" href="{% url 'new_homepage' %}?tags={{tag_key}}">
+            {% else %}
+              <a class="nav-link more-item" href="{% url 'new_homepage' %}?tags={{tag_key}}">
+            {% endif %}
+              {{ tag_value }}
+            </a>
+          </li>
+        {% endfor %}
+        {% if more_tags %}
+          <li class="nav-item dropdown more-option">
+            {% if selected and selected in more_tags.keys %}
+              <a class="nav-link dropdown-toggle more-item active" data-toggle="dropdown"
+                  href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                {{ selected_value }}
+              {% else %}
+              <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown"
+                  href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <strong>
+                  {% comment %}Translators: A button that indicates there are more tag filter options.{% endcomment %}
+                  {% blocktranslate %}
+                    More
+                  {% endblocktranslate %}
+                </strong>
+              {% endif %}
+            </a>
+            <div class="dropdown-menu">
+              {% for a_tag_key, a_tag_value in more_tags.items %}
+                <a class="dropdown-item more-item" href="{% url 'new_homepage' %}?tags={{a_tag_key}}">
+                  {{ a_tag_value }}
+                </a>
+              {% endfor %}
+            </div>
+          </li>
+        {% endif %}
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="glide">
+    <div class="glide__track" data-glide-el="track">
+      <ul class="glide__slides">
+      {% for partner in partners %}
+        <li>
+          <div id="partner-{{partner.pk}}" class="partner-image-description-container">
+            <div class="partner-image-container">
+              <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
+                  class="mx-auto d-block partner-glider-image fade-in-transition"
+                  alt="{{partner.partner_name}} logo"/>
+            </div>
+            <p id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description truncate-overflow invisible">
+              {{ partner.short_description|safe }}
+            </p>
+          </div>
+          <button id="partner-button-{{partner.pk}}" type="button" class="btn partner-glider-button"
+              onclick="toggleDescription({{partner.pk}})">
+            {% comment %}Translators: A button that reveals more information about a collection.{% endcomment %}
+            {% blocktranslate %}
+              More info
+            {% endblocktranslate %}
+          </button>
+        </li>
+      {% endfor %}
+    </ul>
+    </div>
+    <div class="glide__arrows" data-glide-el="controls">
+      <button class="glide__arrow--left partner-arrow" data-glide-dir="<">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </button>
+      <button class="glide__arrow--right partner-arrow" data-glide-dir=">">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</div>

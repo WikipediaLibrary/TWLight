@@ -198,6 +198,38 @@ def get_tag_choices(language_code: str = "en"):
     return TAG_CHOICES
 
 
+def get_tag_dict(language_code: str = "en"):
+    """
+    Function that gets all the tags in the form of a dictionary, preferably
+    translated to the user's preferred language, otherwise the default language
+
+    Parameters
+    ----------
+    language_code: str
+        The language code the user has selected on TWL's settings
+
+    Returns
+    -------
+    dict
+    """
+    tag_dict = {}
+    sorted_tags = {}
+    tag_names_default = _read_translation_file("en", "tag_names")
+    tag_names_lang = _read_translation_file(language_code, "tag_names")
+
+    for tag_key, tag_value in tag_names_default.items():
+        lang_keys = tag_names_lang.keys()
+        if tag_key in lang_keys:
+            tag_dict[tag_key] = tag_names_lang[tag_key]
+        else:
+            tag_dict[tag_key] = tag_value
+
+    sorted_tuples = sorted(tag_dict.items(), key=lambda item: item[1])
+    sorted_tags = {k: v for k, v in sorted_tuples}
+
+    return sorted_tags
+
+
 def _read_translation_file(language_code: str, filename: str):
     """
     Reads a partner description file and returns a dictionary, if the file exists

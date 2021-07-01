@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load l10n %}
 {% load cache %}
+
 <div class="row col-12">
   <!-- logo -->
   <img class="logo" src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
@@ -49,7 +50,7 @@
 <div class="row">
     <div class="col-lg-6 col-md-12 col-sm-12 homepage-login">
       {% comment %}Translators: Button that logs editors in via Wikipedia.{% endcomment %}
-      <a  class="btn btn-light homepage-login-button" href="{% url 'oauth_login' %}?next={% url 'homepage' %}">
+      <a  class="btn btn-lg btn-light homepage-login-button" href="{% url 'oauth_login' %}?next={% url 'homepage' %}">
         {% trans "Login via Wikipedia" %}
       </a>
     </div>
