@@ -1313,6 +1313,11 @@ class TestBaseViews(TestCase):
         cls.editor1.save()
 
     def test_featured_partners(self):
+        """
+        Test to determine that the carousel filters are working properly.
+        When an anonymous user navigates to the homepage, only the featured
+        partners should appear in the carousel.
+        """
         factory = RequestFactory()
         request = factory.get(reverse("homepage"))
         request.user = AnonymousUser()
@@ -1330,6 +1335,11 @@ class TestBaseViews(TestCase):
         self.assertNotIn(self.partner5.company_name, content)
 
     def test_filter_partners_carousel_music(self):
+        """
+        Test to determine that the carousel filters are working properly.
+        When an anonymous user filters by a tag, only partners with that tag and
+        the "multidisciplinary_tag" should appear
+        """
         factory = RequestFactory()
         url = reverse("homepage")
         param_url = "{url}?tags=music_tag".format(url=url)
@@ -1349,6 +1359,11 @@ class TestBaseViews(TestCase):
         self.assertNotIn(self.partner4.company_name, content)
 
     def test_filter_partners_carousel_art(self):
+        """
+        Test to determine that the carousel filters are working properly.
+        When an anonymous user filters by a tag, only partners with that tag and
+        the "multidisciplinary_tag" should appear
+        """
         factory = RequestFactory()
         url = reverse("homepage")
         param_url = "{url}?tags=art_tag".format(url=url)
