@@ -14,6 +14,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.test import TestCase, RequestFactory, Client
 from django.utils import timezone
+from django.utils.html import escape
 
 from rest_framework.test import APIRequestFactory, force_authenticate
 
@@ -1327,12 +1328,12 @@ class TestBaseViews(TestCase):
 
         content = response.content.decode("utf-8")
 
-        self.assertIn(self.partner1.company_name, content)
-        self.assertIn(self.partner3.company_name, content)
-        self.assertIn(self.partner4.company_name, content)
+        self.assertIn(escape(self.partner1.company_name), content)
+        self.assertIn(escape(self.partner3.company_name), content)
+        self.assertIn(escape(self.partner4.company_name), content)
 
-        self.assertNotIn(self.partner2.company_name, content)
-        self.assertNotIn(self.partner5.company_name, content)
+        self.assertNotIn(escape(self.partner2.company_name), content)
+        self.assertNotIn(escape(self.partner5.company_name), content)
 
     def test_filter_partners_carousel_music(self):
         """
@@ -1351,12 +1352,12 @@ class TestBaseViews(TestCase):
 
         content = response.content.decode("utf-8")
 
-        self.assertIn(self.partner1.company_name, content)
-        self.assertIn(self.partner3.company_name, content)
-        self.assertIn(self.partner5.company_name, content)
+        self.assertIn(escape(self.partner1.company_name), content)
+        self.assertIn(escape(self.partner3.company_name), content)
+        self.assertIn(escape(self.partner5.company_name), content)
 
-        self.assertNotIn(self.partner2.company_name, content)
-        self.assertNotIn(self.partner4.company_name, content)
+        self.assertNotIn(escape(self.partner2.company_name), content)
+        self.assertNotIn(escape(self.partner4.company_name), content)
 
     def test_filter_partners_carousel_art(self):
         """
@@ -1375,9 +1376,9 @@ class TestBaseViews(TestCase):
 
         content = response.content.decode("utf-8")
 
-        self.assertIn(self.partner2.company_name, content)
-        self.assertIn(self.partner4.company_name, content)
-        self.assertIn(self.partner5.company_name, content)
+        self.assertIn(escape(self.partner2.company_name), content)
+        self.assertIn(escape(self.partner4.company_name), content)
+        self.assertIn(escape(self.partner5.company_name), content)
 
-        self.assertNotIn(self.partner1.company_name, content)
-        self.assertNotIn(self.partner3.company_name, content)
+        self.assertNotIn(escape(self.partner1.company_name), content)
+        self.assertNotIn(escape(self.partner3.company_name), content)
