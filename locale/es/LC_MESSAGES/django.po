@@ -6,6 +6,7 @@
 # Author: Canaan9801
 # Author: Carlosmg.dg
 # Author: Fitoschido
+# Author: Jackiezelaya
 # Author: Johny Weissmuller Jr
 # Author: Laura Ospina
 # Author: Madamebiblio
@@ -21,7 +22,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-07-01 14:57+0000\n"
-"PO-Revision-Date: 2021-07-05 11:16:55+0000\n"
+"PO-Revision-Date: 2021-07-08 11:13:42+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2305,17 +2306,17 @@ msgstr "Traducir la Biblioteca"
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
 msgid "\n            Featured\n          "
-msgstr ""
+msgstr "¡Destacado! N! "
 
 #. Translators: A button that indicates there are more tag filter options.
 #: TWLight/templates/partner_carousel.html:43
 msgid "\n                    More\n                  "
-msgstr ""
+msgstr "Más! N! "
 
 #. Translators: A button that reveals more information about a collection.
 #: TWLight/templates/partner_carousel.html:80
 msgid "\n              More info\n            "
-msgstr ""
+msgstr "Más información! N! "
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16

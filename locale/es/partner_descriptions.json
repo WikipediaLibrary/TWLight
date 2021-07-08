@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jackiezelaya",
 			"Suecarmol"
 		]
 	},
@@ -96,5 +97,6 @@
 	"76_short_description": "<strong>Who's Who</strong> contiene más de 34,000 entradas autobiográficas de personas notables. Esta colección también incluye <strong>Who Was Who</strong>, unas 94,000 entradas adicionales de biografías de personas difuntas. Está publicado por Bloomsbury Publishing.",
 	"35_short_description": "<strong>Women Writers Online</strong> (WWO) es una colección completa de escritos viejos de mujeres en inglés. WWO incluye transcripciones completas de más de 350 textos publicados entre 1526 y 1850, particularmente de material que es raro o inaccesible, al igual que otros materiales como ensayos contextuales para ayudar en la investigación de escritos de mujeres.",
 	"34_short_description": "<strong>World Bank eLibrary</strong> es un portal web de suscripción de libros del World Bank, papers y artículos de journals en temas relacionados a la pobreza, desarrollo y ciencias sociales.",
-	"19_short_description": "<strong>World Scientific</strong> es una publicación académica de libros y journal científicos, técnicos y de medicina. A través de esta sociedad puedes tener acceso a más de 120 journals incluyendo el International Journal of Modern Physics, el International Journal of Bifurcation and Chaos y el International Journal of Neural Systems."
+	"19_short_description": "<strong>World Scientific</strong> es una publicación académica de libros y journal científicos, técnicos y de medicina. A través de esta sociedad puedes tener acceso a más de 120 journals incluyendo el International Journal of Modern Physics, el International Journal of Bifurcation and Chaos y el International Journal of Neural Systems.",
+	"108_short_description": "<strong>Taaghche</strong> es una tienda de libros electrónicos que ofrece más de 60.000 libros, revistas, periódicos y audiolibros en tres plataformas: Android, IOS y Web Reader."
 }
