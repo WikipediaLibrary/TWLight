@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-07-01 14:57+0000\n"
-"PO-Revision-Date: 2021-07-05 11:16:57+0000\n"
+"PO-Revision-Date: 2021-07-12 11:13:13+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1681,9 +1681,9 @@ msgstr "Voltar ao topo"
 
 #. Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate partner.
 #: TWLight/resources/templates/resources/partner_tile.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "Link to %(partner.company_name)s signup page"
-msgstr "Hiperligação para a página de registo do parceiro %(partner)s"
+msgstr "Hiperligação para a página de registo do parceiro %(partner.company_name)s"
 
 #. Translators: This is the text shown to coordinators when a partner is marked not available.
 #: TWLight/resources/templates/resources/partner_tile.html:43
@@ -2287,9 +2287,8 @@ msgid "\n      Meet this criteria for automatic access\n      "
 msgstr ""
 
 #: TWLight/templates/login_partial.html:54
-#, fuzzy
 msgid "Login via Wikipedia"
-msgstr "Entre com a sua conta da Wikipédia"
+msgstr "Entrar com a sua conta da Wikipédia"
 
 #. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
 #: TWLight/templates/new_base.html:79
@@ -2720,9 +2719,8 @@ msgstr "Atualizar"
 
 #. Translators: This text labels the date for when the terms of use were most recently changed.
 #: TWLight/users/templates/users/preferences.html:70
-#, fuzzy
 msgid "Last updated at:"
-msgstr "Última página"
+msgstr "Última atualização:"
 
 #. Translators: This link is to the site's terms of use.
 #: TWLight/users/templates/users/preferences.html:72
@@ -2781,9 +2779,8 @@ msgstr "Ir para o <i>site</i>"
 
 #. Translators: This text is found on a tooltip directing users to the description pages of the library's partners.
 #: TWLight/users/templates/users/resource_tile.html:112
-#, fuzzy
 msgid "Partner description page"
-msgstr "Parceiro (conjunto de recursos)"
+msgstr "Página de descrição do parceiro"
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
 #: TWLight/users/templates/users/resource_tile.html:118

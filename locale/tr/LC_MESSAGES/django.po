@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-07-01 14:57+0000\n"
-"PO-Revision-Date: 2021-07-05 11:16:57+0000\n"
+"PO-Revision-Date: 2021-07-12 11:13:14+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: TWLight/templates/base.html:147 TWLight/templates/home.html:98
 #: TWLight/users/templates/users/resource_tile.html:134
 msgid "Apply"
-msgstr "Uygula"
+msgstr "Başvur"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:206
@@ -111,7 +111,7 @@ msgstr "Yenilemeden önce bu erişime sahip olmak istediğiniz ay sayısı"
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:89
 msgid "Your real name"
-msgstr "Gerçek isminiz"
+msgstr "Gerçek adınız"
 
 #. Translators: When filling out an application, users may need to specify the country in which they currently live
 #: TWLight/applications/helpers.py:91
@@ -186,7 +186,7 @@ msgstr "Üyelik/Bağlılık"
 #: TWLight/applications/helpers.py:126
 #: TWLight/applications/templates/applications/application_evaluation.html:152
 msgid "Collection requested"
-msgstr "Koleksiyon isteği"
+msgstr "Koleksiyon istendi"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
@@ -300,7 +300,7 @@ msgstr "Bu iş ortağının şu anda erişim desteği olmadığı için bu başv
 #: TWLight/applications/templates/applications/send_partner.html:44
 #: TWLight/resources/templates/resources/partner_users.html:15
 msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
-msgstr "Koordinatörler: Bu sayfa gerçek isimler ve e-posta adresleri gibi kişisel bilgiler içerebilir. Lütfen bu bilgilerin gizli olduğunu unutmayın."
+msgstr "Koordinatörler: Bu sayfa gerçek adlar ve e-posta adresleri gibi kişisel bilgiler içerebilir. Lütfen bu bilgilerin gizli olduğunu unutmayın."
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:24
@@ -488,7 +488,7 @@ msgstr "Yorum ekle"
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
 #: TWLight/applications/templates/applications/application_evaluation.html:292
 msgid "Comments are visible to all coordinators and to the editor who submitted this application."
-msgstr "Yorumlar tüm koordinatörlere ve bu uygulamayı gönderen editöre görünür."
+msgstr "Yorumlar, tüm koordinatörlere ve bu uygulamayı gönderen editöre görünür."
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
@@ -550,7 +550,7 @@ msgstr "Giden"
 
 #: TWLight/applications/templates/applications/application_list.html:46
 msgid "Up for renewal"
-msgstr "Yenilenmek için hazır"
+msgstr "Yenileme için"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:61
@@ -698,7 +698,7 @@ msgstr "Durumu ayarla"
 #: TWLight/applications/templates/applications/confirm_renewal.html:13
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
-msgstr "Başvurunuzu %(partner)s için yenilemek için 'onayla'yı tıklayın."
+msgstr "Başvurunuzu %(partner)s için yenilemek için 'onayla'ya tıklayın."
 
 #. Translators: Labels the submit button requesting confirmation of application renewal.
 #. Translators: This is the button coordinators click to confirm deletion of a suggestion.
@@ -780,7 +780,7 @@ msgstr[0] "İletişim"
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/applications/templates/applications/send_partner.html:103
 msgid "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators."
-msgstr "Hata, listede kayıtlı kişiler yok. Lütfen Vikipedi Kütüphanesi yöneticilerini bilgilendirin."
+msgstr "Ops, listede kayıtlı kişi yok! Lütfen Vikipedi Kütüphanesi yöneticilerini bilgilendirin."
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.
 #: TWLight/applications/templates/applications/send_partner.html:108
@@ -909,7 +909,7 @@ msgstr "Mevcut hesaplardan daha fazla bekleyen başvuru var. Başvurunuz bekleme
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:1079
 msgid "Status of INVALID applications cannot be changed."
-msgstr "GEÇERSİZ uygulamalarının durumu değiştirilemez."
+msgstr "GEÇERSİZ başvuruların durumu değiştirilemez."
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
 #: TWLight/applications/views.py:1115
@@ -924,7 +924,7 @@ msgstr "Toplu iş/uygulama {} başarılı."
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:1282
 msgid "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available."
-msgstr "{} Uygulamalarını peroksit yetkilendirme yöntemiyle ortak(lar) olarak kabul edemiyor/beklemede ve (veya) yeterli hesabı yok. Yeterli hesap yoksa, başvuruları önceliklendirin ve ardından mevcut hesaplara eşit uygulamaları onaylayın."
+msgstr "{} Başvurularını peroksit yetkilendirme yöntemiyle ortak(lar) olarak kabul edemiyor/beklemede ve (veya) yeterli hesabı yok. Yeterli hesap yoksa, başvuruları önceliklendirin ve ardından mevcut hesaplara eşit başvuruları onaylayın."
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1453
@@ -1189,7 +1189,7 @@ msgstr[0] "Bir onaylı başvuru."
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
 #, python-format
 msgid "This is a gentle reminder that you may review applications at: %(link)s. You can customise your reminders under 'preferences' in your user profile. If you received this message in error, drop us a line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library applications!"
-msgstr "Bu, uygulamaları inceleyebileceğiniz nazik bir hatırlatmadır: %(link)s Hatırlatıcılarınızı kullanıcı profilinizdeki 'tercihler' altında özelleştirebilirsiniz. Bu mesajı yanlışlıkla aldıysanız, bize bir satır bırakın: wikipedialibrary@wikimedia.org Vikipedi Kütüphane uygulamalarını incelemeye yardımcı olduğunuz için teşekkür ederiz!"
+msgstr "Bu, başvuruları inceleyebileceğiniz nazik bir hatırlatmadır: %(link)s Hatırlatıcılarınızı kullanıcı profilinizdeki 'tercihler' altında özelleştirebilirsiniz. Bu mesajı yanlışlıkla aldıysanız, bize bir satır bırakın: wikipedialibrary@wikimedia.org Vikipedi Kütüphane uygulamalarını incelemeye yardımcı olduğunuz için teşekkür ederiz!"
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
@@ -1394,7 +1394,7 @@ msgstr "Erişiminizin durumunu <strong><a href=\"%(library_url)s\">Kütüphanem<
 #: TWLight/resources/templates/resources/partner_detail.html:400
 #, python-format
 msgid "View the status of your application(s) on your <strong><a href=\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr "Uygulamalarınızın durumunu <strong> <a href=\"%(applications_url)s\">Uygulamalarım</a> </strong> sayfanızda görüntüleyin."
+msgstr "Başvurularınızın durumunu <strong> <a href=\"%(applications_url)s\">Başvurularım</a> </strong> sayfanızda görüntüleyin."
 
 #. Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist.
 #. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
@@ -1762,7 +1762,7 @@ msgstr "URL"
 
 #: TWLight/resources/templates/resources/suggest.html:60
 msgid "Proposer"
-msgstr "Önerilen"
+msgstr "Öneren"
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
 #: TWLight/resources/templates/resources/suggest.html:69
@@ -1885,7 +1885,7 @@ msgstr "Vikipedi Kütüphanesi, Wikimedia projelerine içerik katma yeteneğiniz
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:18
 msgid "The Wikipedia Library Card Platform is our central tool for reviewing applications and providing access to our collection. Here you can see which partnerships are available, search their contents, and apply for and access the ones you’re interested in. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review applications and work with publishers to get you your free access. Some content is available without an application."
-msgstr "Vikipedi Kütüphane Kartı Platformu, uygulamaları incelemek ve koleksiyonumuza erişim sağlamak için merkezi bir araçtır. Burada hangi ortaklıkların uygun olduğunu görebilir, içeriğini arayabilir ve ilgilendiğiniz kişilere başvurabilir ve bunlara erişebilirsiniz. Wikimedia Vakfı ile gizlilik sözleşmesi imzalayan, başvuruları inceleyen ve yayıncılarla birlikte çalışmak üzere çalışan gönüllü koordinatörleri ücretsiz erişiminiz. Bazı içerikler uygulama olmadan kullanılabilir."
+msgstr "Vikipedi Kütüphane Kartı Platformu, uygulamaları incelemek ve koleksiyonumuza erişim sağlamak için merkezi bir araçtır. Burada hangi ortaklıkların uygun olduğunu görebilir, içeriğini arayabilir ve ilgilendiğiniz kişilere başvurabilir ve bunlara erişebilirsiniz. Wikimedia Vakfı ile gizlilik sözleşmesi imzalayan, başvuruları inceleyen ve yayıncılarla birlikte çalışmak üzere çalışan gönüllü koordinatörleri ücretsiz erişiminiz. Bazı içerikler başvuru olmadan kullanılabilir."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:30
@@ -2026,7 +2026,7 @@ msgstr "Hesabınız bir veya daha fazla Wikimedia projesinde engellendiyse, yine
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:192
 msgid "Citation practices"
-msgstr "Alıntılama uygulamaları"
+msgstr "Atıf uygulamaları"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:196
@@ -2062,7 +2062,7 @@ msgstr "Yönetici"
 #. Translators: Shown in the top bar of almost every page inside a dropdown, linking the user to their list of applications.
 #: TWLight/templates/base.html:117
 msgid "My Applications"
-msgstr "Uygulamaları"
+msgstr "Başvurularım"
 
 #. Translators: Shown in the top bar of almost every page when the current user is logged in.
 #: TWLight/templates/base.html:125
@@ -2298,17 +2298,17 @@ msgstr "Kütüphaneyi Çevir"
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
 msgid "\n            Featured\n          "
-msgstr ""
+msgstr "\n            Öne çıkan\n          "
 
 #. Translators: A button that indicates there are more tag filter options.
 #: TWLight/templates/partner_carousel.html:43
 msgid "\n                    More\n                  "
-msgstr ""
+msgstr "\n                    Daha fazla\n                  "
 
 #. Translators: A button that reveals more information about a collection.
 #: TWLight/templates/partner_carousel.html:80
 msgid "\n              More info\n            "
-msgstr ""
+msgstr "\n              Daha fazla bilgi\n            "
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16
@@ -2471,7 +2471,7 @@ msgstr "Başvurularım"
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:37
 msgid "Both historical and current, made to various partners"
-msgstr "Çeşitli ortaklara hem tarihi hem de güncel"
+msgstr "Geçmişte ve şu an, çeşitli iş ortaklarına yapılan başvurular"
 
 #. Translators: This is the heading for user information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:44
@@ -3056,7 +3056,7 @@ msgstr "Tüm verileri silin"
 #. Translators: This message is displayed on the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:14
 msgid "<b>Warning:</b> Performing this action will delete your Wikipedia Library Card user account and all associated applications. This process is not reversible. You may lose any partner accounts you were granted, and will not be able to renew those accounts or apply for new ones."
-msgstr "<b>Uyarı:</b> Bu eylemi gerçekleştirmek, Vikipedi Kütüphanesi Kart kullanıcı hesabınızı ve tüm ilişkili uygulamaları silecektir. Bu süreç, bir daha geri alınamaz. Size verilen tüm ortak hesaplarınızı kaybedebilir ve bu hesapları yenileyemez veya yenilerine başvuramazsınız."
+msgstr "<b>Uyarı:</b> Bu eylemi gerçekleştirmek, Vikipedi Kütüphanesi Kart kullanıcı hesabınızı ve tüm ilişkili başvuruları silecektir. Bu süreç, bir daha geri alınamaz. Size verilen tüm ortak hesaplarınızı kaybedebilir ve bu hesapları yenileyemez veya yenilerine başvuramazsınız."
 
 #. Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
 #: TWLight/users/templates/users/user_detail.html:9
