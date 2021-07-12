@@ -37,6 +37,61 @@ body {
 
 /*
 ----------------------------------------------------------------------------
+HEADER CSS
+--------------------------------------------------------------------------
+*/
+.site-title {
+	font-family: Roboto;
+	font-size:16px;
+	font-weight:700;
+    padding: 35px 0px 10px 0px;
+	color: #000000;
+    vertical-align: -moz-middle-with-baseline;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.site-title:hover{
+    color: #000000;
+}
+
+.logo {
+	height:70px;
+	float:right;
+	padding:5px 0px 5px 20px;
+}
+
+#top-nav {
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+}
+
+.mobile-menu {
+    padding: 10px 0px 10px 0px;
+    vertical-align: -moz-middle-with-baseline;
+    vertical-align: -webkit-baseline-middle;
+    vertical-align: middle;
+}
+
+.nav-links {
+    font-family: Roboto;
+    color: black !important;
+}
+
+.user-button {
+    font-family: Roboto;
+    color: #FFFFFF;
+    background-color: #3366CC;
+}
+
+.user-button:hover {
+    color: #FFFFFF;
+    background-color: #3366CC !important;
+    text-decoration: underline !important;
+}
+
+/*
+----------------------------------------------------------------------------
 LOGIN PARTIAL CSS
 --------------------------------------------------------------------------
 */

@@ -2,6 +2,18 @@
 ----------------------------------------------------------------------------
 BODY
 --------------------------------------------------------------------------*/
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'),
+       url('../fonts/Roboto-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Roboto-Light';
+  src: local('Roboto-Light'),
+       url('../fonts/Roboto-Light.ttf') format("truetype");
+}
+
 body {
   background-color: white;
 }
@@ -95,11 +107,18 @@ header {
 }
 
 .site-title {
-	font-family: Palatino;
-	font-size:1.5em;
-	font-weight:bold;
-	margin: -10px 0px 10px 0px;
-	color:#000000;
+	font-family: Roboto;
+	font-size:16px;
+	font-weight:700;
+    padding: 35px 0px 10px 0px;
+	color: #000000;
+    vertical-align: -moz-middle-with-baseline;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.site-title:hover{
+    color: #000000;
 }
 
 .logo {
@@ -154,7 +173,6 @@ header {
 }
 
 #top-nav {
-  border-bottom: 1px solid #eee;
   margin-bottom: 20px;
 }
 
@@ -164,6 +182,30 @@ header {
   margin-top: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.mobile-menu {
+    padding: 10px 0px 10px 0px;
+    vertical-align: -moz-middle-with-baseline;
+    vertical-align: -webkit-baseline-middle;
+    vertical-align: middle;
+}
+
+.nav-links {
+    font-family: Roboto;
+    color: black !important;
+}
+
+.user-button {
+    font-family: Roboto;
+    color: #FFFFFF;
+    background-color: #3366CC;
+}
+
+.user-button:hover {
+    color: #FFFFFF;
+    background-color: #3366CC !important;
+    text-decoration: underline !important;
 }
 
 .nav-greeting {

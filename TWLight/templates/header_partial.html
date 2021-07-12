@@ -1,0 +1,54 @@
+{% load i18n %}
+{% load static %}
+{% load twlight_perms %}
+<!-- navbar -->
+ <div class="navbar" id="top-nav">
+   <div class="navbar-left">
+     <!-- logo -->
+     <a href="{% url 'homepage' %}">
+       <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
+       {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
+       {% trans "The Wikipedia Library home" %}
+       ">
+     </a>
+
+     <!-- site name -->
+     {% comment %}Translators: Name of the project/tool.{% endcomment %}
+     <a class="site-title align-middle" href="{% url 'homepage' %}">{% trans "The Wikipedia Library" %}</a>
+   </div>
+
+   <ul class="nav nav-pills navbar-right">
+     {% if user|coordinators_only %}
+       <li role="presentation" class="mobile-menu align-middle">
+         <a class="nav-links" href="{% url 'applications:list' %}">
+           {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
+           {% trans "Review" %}
+         </a>
+       </li>
+       <li role="presentation" class="mobile-menu align-middle">
+         <a class="nav-links" href="{% url 'applications:send' %}">
+           {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
+           {% trans "Send data to partners" %}
+         </a>
+       </li>
+     {% endif %}
+     <li role="presentation" class="mobile-menu align-middle">
+       <a class="nav-links" href="{% url 'suggest' %}">
+         {% comment %}Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library. {% endcomment %}
+         {% trans "Suggest a collection" %}
+       </a>
+     </li>
+     {% if user %}
+       <li role="presentation" class="mobile-menu align-middle">
+         <a  class="btn user-button" href="{% url 'users:home' %}"> {{ user.editor.wp_username }} </a>
+       </li>
+
+      {% endif %}
+     <li role="presentation" class="mobile-menu align-middle">
+       {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
+       <a class="nav-links" href="{% url 'auth_logout' %}?next=/">
+         {% trans "Log out" %}
+       </a>
+     </li>
+   </ul>
+ </div>
