@@ -2,66 +2,61 @@
 {% load static %}
 {% load twlight_perms %}
 <!-- navbar -->
-<div id="top-nav" class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-          data-target="#library-nav-links" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <i class="fa fa-user"></i>
-        <i class="fa fa-arrow-down"></i>
-      </button>
-      <!-- logo -->
-      <a href="{% url 'homepage' %}">
-        <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
-        {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
-        {% trans "The Wikipedia Library home" %}
-        ">
-      </a>
-      <!-- site name -->
-      {% comment %}Translators: Name of the project/tool.{% endcomment %}
-      <a class="site-title align-middle" href="{% url 'homepage' %}">{% trans "The Wikipedia Library" %}</a>
-    </div>
+<nav id="top-nav" class="navbar navbar-expand-lg navbar-expand-md navbar-default">
+  <!-- logo -->
+  <a class="navbar-brand" href="{% url 'homepage' %}">
+    <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo-header" alt="
+    {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
+    {% trans "The Wikipedia Library home" %}
+    ">
+    <!-- site name -->
+    {% comment %}Translators: Name of the project/tool.{% endcomment %}
+    <p class="site-title align-middle"> {% trans "The Wikipedia Library" %} </p>
+  </a>
+  <!-- toggler button -->
+  <button type="button" class="navbar-toggle collapsed navbar-toggler" data-toggle="collapse"
+      data-target="#library-nav-links" aria-expanded="false" aria-controls="library-nav-links"
+      aria-label="Toggle navigation">
+    <i class="navbar-toggler-icon fa fa-user"></i>
+    <i class="navbar-toggler-icon fa fa-arrow-down"></i>
+  </button>
 
-    <div id="library-nav-links" class="collapse navbar-collapse">
-      <ul class="nav nav-pills navbar-right">
-        {% if user|coordinators_only %}
-        <li role="presentation" class="mobile-menu align-middle">
-          <a class="nav-links" href="{% url 'applications:list' %}">
-            {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
-            {% trans "Review" %}
-          </a>
-        </li>
-        <li role="presentation" class="mobile-menu align-middle">
-          <a class="nav-links" href="{% url 'applications:send' %}">
-            {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
-            {% trans "Send data to partners" %}
-          </a>
-        </li>
-        {% endif %}
-        <li role="presentation" class="mobile-menu align-middle">
-          <a class="nav-links" href="{% url 'suggest' %}">
-            {% comment %}Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library. {% endcomment %}
-            {% trans "Suggest a collection" %}
-          </a>
-        </li>
-        {% if user %}
-        <li role="presentation" class="mobile-menu align-middle">
-          <a  class="btn user-button" href="{% url 'users:home' %}">
-            {{ user.editor.wp_username }}
-          </a>
-        </li>
+  <div id="library-nav-links" class="collapse navbar-collapse justify-content-end">
+    <ul class="nav nav-pills navbar-right navbar-nav">
+      {% if user|coordinators_only %}
+      <li role="presentation" class="mobile-menu align-middle nav-item">
+        <a class="nav-link nav-links" href="{% url 'applications:list' %}">
+          {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
+          {% trans "Review" %}
+        </a>
+      </li>
+      <li role="presentation" class="mobile-menu align-middle nav-item">
+        <a class="nav-link nav-links" href="{% url 'applications:send' %}">
+          {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
+          {% trans "Send data to partners" %}
+        </a>
+      </li>
+      {% endif %}
+      <li role="presentation" class="mobile-menu align-middle nav-item">
+        <a class="nav-link nav-links" href="{% url 'suggest' %}">
+          {% comment %}Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library. {% endcomment %}
+          {% trans "Suggest a collection" %}
+        </a>
+      </li>
+      {% if user %}
+      <li role="presentation" class="mobile-menu align-middle nav-item">
+        <a class="btn user-button" href="{% url 'users:home' %}">
+          {{ user.editor.wp_username }}
+        </a>
+      </li>
 
-        {% endif %}
-        <li role="presentation" class="mobile-menu align-middle">
-          {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
-          <a class="nav-links" href="{% url 'auth_logout' %}?next=/">
-            {% trans "Log out" %}
-          </a>
-        </li>
-      </ul>
-    </div>
-
+      {% endif %}
+      <li role="presentation" class="mobile-menu align-middle nav-item">
+        {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
+        <a class="nav-link nav-links" href="{% url 'auth_logout' %}?next=/">
+          {% trans "Log out" %}
+        </a>
+      </li>
+    </ul>
   </div>
-</div>
+</nav>

@@ -166,15 +166,23 @@ header {
 	font-family: Roboto;
 	font-size: 16px;
 	font-weight: 700;
-	padding: 35px 0px 10px 0px;
-	color: #000000;
+    width: 230px;
+	padding: 0px 0px 10px 0px;
+	color: #000000 !important;
     vertical-align: -moz-middle-with-baseline;
     vertical-align: middle;
     vertical-align: -webkit-baseline-middle;
 }
 
 .site-title:hover{
-    color: #000000;
+    color: #000000 !important;
+}
+
+.logo-header {
+	height: 70px;
+	float: left;
+	margin: -15px 20px 0px 0px;
+    padding: 5px 0px 5px 0px;
 }
 
 .logo {
@@ -246,16 +254,17 @@ header {
 .nav-links {
     font-family: Roboto;
     color: black !important;
+    font-size: 14px;
 }
 
 .user-button {
     font-family: Roboto;
-    color: #FFFFFF;
-    background-color: #3366CC;
+    color: #FFFFFF !important;
+    background-color: #3366CC !important;
 }
 
 .user-button:hover {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     background-color: #3366CC !important;
     text-decoration: underline !important;
 }
@@ -296,9 +305,7 @@ nav .divider {
 @media (max-width: 480px) {
 .site-title {
 	font-family: Roboto;
-	font-size:.9em;
-	font-weight:bold;
-	margin: -10px 0px 10px 0px;
+	margin: 0px 0px 10px 0px;
 	color:#000000;
 }
 
@@ -695,7 +702,6 @@ A few spots just need padding instead of margin.
 
 li.mobile-menu {
   width: 150px;
-  font-size: 14px;
 }
 
  .nav li a {

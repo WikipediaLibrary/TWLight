@@ -184,6 +184,12 @@ header {
   padding-bottom: 20px;
 }
 
+.logo-header {
+	height: 70px;
+	float: left;
+	padding: 5px 0px 5px 20px;
+}
+
 .mobile-menu {
     padding: 10px 0px 10px 0px;
     vertical-align: -moz-middle-with-baseline;
