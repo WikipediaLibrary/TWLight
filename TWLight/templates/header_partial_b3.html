@@ -1,0 +1,70 @@
+{% load i18n %}
+{% load static %}
+{% load twlight_perms %}
+
+<nav id="top-nav" class="navbar navbar-default">
+  <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <!-- logo -->
+        <a class="navbar-brand twl-brand" href="{% url 'homepage' %}">
+          <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo-header"
+              alt="
+                {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
+                {% trans "The Wikipedia Library home" %}
+              ">
+          <!-- site name -->
+          {% comment %}Translators: Name of the project/tool.{% endcomment %}
+          <p class="site-title"> {% trans "The Wikipedia Library" %} </p>
+        </a>
+        <button type="button" class="navbar-toggle collapsed twl-toggle-button" data-toggle="collapse"
+            data-target="#navbarTogglerTWL" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="navbar-toggler-icon fa fa-user"></i>
+          <i class="navbar-toggler-icon fa fa-arrow-down"></i>
+        </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div id="navbarTogglerTWL" class="collapse navbar-collapse">
+      <ul class="nav nav-pills navbar-right navbar-nav">
+        {% if user|coordinators_only %}
+        <li role="presentation" class="mobile-menu nav-item">
+          <a class="nav-links" href="{% url 'applications:list' %}">
+            {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
+            {% trans "Review" %}
+          </a>
+        </li>
+        <li role="presentation" class="mobile-menu nav-item">
+          <a class="nav-links" href="{% url 'applications:send' %}">
+            {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
+            {% trans "Send data to partners" %}
+          </a>
+        </li>
+        {% endif %}
+        <li role="separator" class="divider"></li>
+        <li role="presentation" class="mobile-menu nav-item">
+          <a class="nav-links" href="{% url 'suggest' %}">
+            {% comment %}Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library. {% endcomment %}
+            {% trans "Suggest a collection" %}
+          </a>
+        </li>
+        <li role="separator" class="divider"></li>
+        {% if user %}
+        <li role="presentation" class="mobile-menu nav-item">
+          <a class="btn user-button" href="{% url 'users:home' %}">
+            {{ user.editor.wp_username }}
+          </a>
+        </li>
+
+        {% endif %}
+        <li role="presentation" class="mobile-menu nav-item">
+          {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
+          <a class="nav-links" href="{% url 'auth_logout' %}?next=/">
+            {% trans "Log out" %}
+          </a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

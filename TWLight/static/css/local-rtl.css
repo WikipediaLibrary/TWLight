@@ -108,10 +108,11 @@ header {
 
 .site-title {
 	font-family: Roboto;
-	font-size:16px;
-	font-weight:700;
-    padding: 35px 0px 10px 0px;
-	color: #000000;
+	font-size: 16px;
+	font-weight: 700;
+    width: 230px;
+	padding: 0px 0px 0px 0px;
+	color: #000000 !important;
     vertical-align: -moz-middle-with-baseline;
     vertical-align: middle;
     vertical-align: -webkit-baseline-middle;
@@ -119,6 +120,17 @@ header {
 
 .site-title:hover{
     color: #000000;
+}
+
+.logo-header {
+	height: 70px;
+	float: right;
+    padding: 0px 0px 20px 20px;
+}
+
+.twl-toggle-button{
+    border-color: #f8f8f8 !important;
+    margin: 20px 0px 0px 0px;
 }
 
 .logo {
@@ -184,12 +196,6 @@ header {
   padding-bottom: 20px;
 }
 
-.logo-header {
-	height: 70px;
-	float: left;
-	padding: 5px 0px 5px 20px;
-}
-
 .mobile-menu {
     padding: 10px 0px 10px 0px;
     vertical-align: -moz-middle-with-baseline;
@@ -200,12 +206,13 @@ header {
 .nav-links {
     font-family: Roboto;
     color: black !important;
+    font-size: 14px;
 }
 
 .user-button {
     font-family: Roboto;
-    color: #FFFFFF;
-    background-color: #3366CC;
+    color: #FFFFFF !important;
+    background-color: #3366CC !important;
 }
 
 .user-button:hover {
@@ -241,25 +248,20 @@ nav .divider {
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
-.site-title {
-	font-family: Palatino;
-	font-size:.9em;
-	font-weight:bold;
-	margin: -10px 0px 10px 0px;
-	color:#000000;
-}
+    .twl-brand{
+        height: 80px;
+        padding: 15px 0px 0px 10px;
+    }
 
-.logo {
-	height:50px;
-	float:right;
-	padding:0px 0px 0px 10px;
-}
+    .site-title {
+        font-family: Roboto;
+        padding: 10px 0px 0px 0px;
+    }
 
-.login .btn {
-	padding:10px 12px;
-	font-size: 1em;
-	margin:10px;
-}
+    .logo-header {
+        height: 55px;
+        padding: 0px 0px 0px 10px;
+    }
 }
 
 /*

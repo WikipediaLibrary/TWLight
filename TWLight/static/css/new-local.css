@@ -66,6 +66,10 @@ HEADER CSS
   background-color: #f8f8f8;
 }
 
+.navbar-container{
+    padding: 0px 50px 0px 0px;
+}
+
 .mobile-menu {
     padding: 10px 0px 10px 0px;
     vertical-align: -moz-middle-with-baseline;
@@ -81,6 +85,7 @@ HEADER CSS
 
 .user-button {
     font-family: Roboto;
+    font-size: 14px;
     color: #FFFFFF !important;
     background-color: #3366CC !important;
 }

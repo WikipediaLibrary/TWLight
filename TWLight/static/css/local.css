@@ -167,7 +167,7 @@ header {
 	font-size: 16px;
 	font-weight: 700;
     width: 230px;
-	padding: 0px 0px 10px 0px;
+	padding: 0px 0px 0px 0px;
 	color: #000000 !important;
     vertical-align: -moz-middle-with-baseline;
     vertical-align: middle;
@@ -181,8 +181,12 @@ header {
 .logo-header {
 	height: 70px;
 	float: left;
-	margin: -15px 20px 0px 0px;
-    padding: 5px 0px 5px 0px;
+    padding: 0px 25px 20px 0px;
+}
+
+.twl-toggle-button{
+    border-color: #f8f8f8 !important;
+    margin: 20px 0px 0px 0px;
 }
 
 .logo {
@@ -303,17 +307,20 @@ nav .divider {
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
-.site-title {
-	font-family: Roboto;
-	margin: 0px 0px 10px 0px;
-	color:#000000;
-}
+    .twl-brand{
+        height: 80px;
+        padding: 15px 0px 0px 0px;
+    }
 
-.logo {
-	height:50px;
-	float:left;
-	padding:0px 10px 0px 0px;
-}
+    .site-title {
+    	font-family: Roboto;
+        padding: 10px 0px 0px 0px;
+    }
+
+    .logo-header {
+        height: 55px;
+        padding: 0px 10px 0px 0px;
+    }
 }
 
 /*
