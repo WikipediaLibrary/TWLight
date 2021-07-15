@@ -57,4 +57,9 @@ urlpatterns = [
         login_required(views.WithdrawApplication.as_view()),
         name="withdraw",
     ),
+    url(
+        r"^redesigned_my_library/$",
+        login_required(views.MyLibraryView.as_view()),
+        name="redesigned_my_library",
+    ),
 ]

@@ -833,3 +833,7 @@ class WithdrawApplication(RedirectView):
         message = f"Your application has been withdrawn successfully. Head over to <a href='/users/my_applications/{application_id}'>My Applications</a> to view the status."
         messages.add_message(self.request, messages.SUCCESS, message)
         return super().get_redirect_url(*args, **kwargs)
+
+
+class MyLibraryView(TemplateView):
+    template_name = "users/redesigned_my_library.html"

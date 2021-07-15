@@ -2,6 +2,18 @@
 ----------------------------------------------------------------------------
 BODY
 --------------------------------------------------------------------------*/
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'),
+       url('../fonts/Roboto-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Roboto-Light';
+  src: local('Roboto-Light'),
+       url('../fonts/Roboto-Light.ttf') format("truetype");
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -151,11 +163,30 @@ header {
 }
 
 .site-title {
-	font-family: Palatino;
-	font-size:1.5em;
-	font-weight:bold;
-	margin: -10px 0px 10px 0px;
-	color:#000000;
+	font-family: Roboto;
+	font-size: 16px;
+	font-weight: 700;
+    width: 230px;
+	padding: 0px 0px 0px 0px;
+	color: #000000 !important;
+    vertical-align: -moz-middle-with-baseline;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.site-title:hover{
+    color: #000000 !important;
+}
+
+.logo-header {
+	height: 70px;
+	float: left;
+    padding: 0px 25px 20px 0px;
+}
+
+.twl-toggle-button{
+    border-color: #f8f8f8 !important;
+    margin: 20px 0px 0px 0px;
 }
 
 .logo {
@@ -204,8 +235,8 @@ header {
 
 
 #top-nav {
-  border-bottom: 1px solid #eee;
   margin-bottom: 20px;
+  background-color: #f8f8f8;
 }
 
 #footer {
@@ -215,6 +246,31 @@ header {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.mobile-menu {
+    padding: 10px 0px 10px 0px;
+    vertical-align: -moz-middle-with-baseline;
+    vertical-align: -webkit-baseline-middle;
+    vertical-align: middle;
+}
+
+.nav-links {
+    font-family: Roboto;
+    color: black !important;
+    font-size: 14px;
+}
+
+.user-button {
+    font-family: Roboto;
+    color: #FFFFFF !important;
+    background-color: #3366CC !important;
+}
+
+.user-button:hover {
+    color: #FFFFFF !important;
+    background-color: #3366CC !important;
+    text-decoration: underline !important;
 }
 
 @media (max-width:300px){
@@ -251,19 +307,20 @@ nav .divider {
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
-.site-title {
-	font-family: Palatino;
-	font-size:.9em;
-	font-weight:bold;
-	margin: -10px 0px 10px 0px;
-	color:#000000;
-}
+    .twl-brand{
+        height: 80px;
+        padding: 15px 0px 0px 0px;
+    }
 
-.logo {
-	height:50px;
-	float:left;
-	padding:0px 10px 0px 0px;
-}
+    .site-title {
+    	font-family: Roboto;
+        padding: 10px 0px 0px 0px;
+    }
+
+    .logo-header {
+        height: 55px;
+        padding: 0px 10px 0px 0px;
+    }
 }
 
 /*
@@ -651,12 +708,12 @@ A few spots just need padding instead of margin.
 }
 
 li.mobile-menu {
-  width:150px;
-  font-size:.9em;
+  width: 150px;
 }
 
  .nav li a {
    padding: 5px;
+   color: #00000;
  }
 
 .navbar-left {
