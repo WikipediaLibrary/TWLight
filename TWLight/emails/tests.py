@@ -605,9 +605,9 @@ class CoordinatorReminderEmailTest(TestCase):
         # has enabled reminders only for QUESTION, we send a
         # reminder only when we have an app of status: QUESTION,
         # but include info on all apps in the email.
-        self.assertNotIn("One pending application", mail.outbox[0].body)
-        self.assertIn("One under discussion application", mail.outbox[0].body)
-        self.assertNotIn("One approved application", mail.outbox[0].body)
+        self.assertNotIn("1 pending application", mail.outbox[0].body)
+        self.assertIn("1 under discussion application", mail.outbox[0].body)
+        self.assertNotIn("1 approved application", mail.outbox[0].body)
 
         ApplicationFactory(
             partner=self.partner, status=Application.APPROVED, editor=self.user2.editor
@@ -628,9 +628,9 @@ class CoordinatorReminderEmailTest(TestCase):
 
         call_command("send_coordinator_reminders")
         self.assertEqual(len(mail.outbox), 1)
-        self.assertIn("One pending application", mail.outbox[0].body)
-        self.assertIn("One under discussion application", mail.outbox[0].body)
-        self.assertIn("One approved application", mail.outbox[0].body)
+        self.assertIn("1 pending application", mail.outbox[0].body)
+        self.assertIn("1 under discussion application", mail.outbox[0].body)
+        self.assertIn("1 approved application", mail.outbox[0].body)
 
 
 class ProjectPage2021LaunchTest(TestCase):
