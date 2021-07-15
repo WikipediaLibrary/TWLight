@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-15 14:55+0000\n"
+"POT-Creation-Date: 2021-07-15 18:35+0000\n"
 "PO-Revision-Date: 2021-07-15 11:16:01+0000\n"
 "Language: he\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1310,8 +1310,10 @@ msgstr "פירוט"
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
-#, python-format
-msgid "One pending application."
+#, fuzzy, python-format
+#| msgid "One pending application."
+#| msgid_plural "%(counter)s pending applications."
+msgid "%(counter)s pending application."
 msgid_plural "%(counter)s pending applications."
 msgstr[0] "בקשה ממתינה אחת"
 msgstr[1] "%(counter)s בקשות ממתינות."
@@ -1319,16 +1321,21 @@ msgstr[1] "%(counter)s בקשות ממתינות."
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
-#, python-format
-msgid "One under discussion application."
+#, fuzzy, python-format
+#| msgid "One under discussion application."
+#| msgid_plural "%(counter)s under discussion applications."
+msgid "%(counter)s under discussion application."
 msgid_plural "%(counter)s under discussion applications."
 msgstr[0] "בקשה אחת בדיון"
 msgstr[1] "%(counter)s בקשות בדיון."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
-#, python-format
-msgid "%(approved_count)s approved applications."
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
+#, fuzzy, python-format
+#| msgid "%(approved_count)s approved applications."
+#| msgid_plural "%(counter)s approved applications."
+msgid "%(counter)s approved application."
 msgid_plural "%(counter)s approved applications."
 msgstr[0] "יישום מאושר %(approved_count)s."
 msgstr[1] "%(counter)s יישומים מאושרים."
@@ -1358,14 +1365,6 @@ msgid ""
 msgstr ""
 "%(user)s היקר, לפי הרישומים שלנו, אתה המתאם המוגדר לשותפים שיש להם "
 "%(total_apps)s בקשות."
-
-#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
-#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
-#, python-format
-msgid "One approved application."
-msgid_plural "%(counter)s approved applications."
-msgstr[0] "בקשה מאושרת אחת"
-msgstr[1] "%(counter)s בקשות מאושרות"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate the email address either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
@@ -4134,6 +4133,11 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "One approved application."
+#~ msgid_plural "%(counter)s approved applications."
+#~ msgstr[0] "בקשה מאושרת אחת"
+#~ msgstr[1] "%(counter)s בקשות מאושרות"
 
 #~ msgid "Library Card Platform home"
 #~ msgstr "דף הבית של פלטפורמת כרטיס ספריית ויקיפדיה"

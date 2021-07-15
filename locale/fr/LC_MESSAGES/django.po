@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-15 14:56+0000\n"
+"POT-Creation-Date: 2021-07-15 18:36+0000\n"
 "PO-Revision-Date: 2021-07-15 11:16:01+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -1387,8 +1387,10 @@ msgstr "Panne"
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
-#, python-format
-msgid "One pending application."
+#, fuzzy, python-format
+#| msgid "One pending application."
+#| msgid_plural "%(counter)s pending applications."
+msgid "%(counter)s pending application."
 msgid_plural "%(counter)s pending applications."
 msgstr[0] "Une candidature en attente."
 msgstr[1] "%(counter)s candidatures en attente."
@@ -1396,16 +1398,21 @@ msgstr[1] "%(counter)s candidatures en attente."
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
-#, python-format
-msgid "One under discussion application."
+#, fuzzy, python-format
+#| msgid "One under discussion application."
+#| msgid_plural "%(counter)s under discussion applications."
+msgid "%(counter)s under discussion application."
 msgid_plural "%(counter)s under discussion applications."
 msgstr[0] "Une candidature en discussion."
 msgstr[1] "%(counter)s candidatures en discussion."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
-#, python-format
-msgid "%(approved_count)s approved applications."
+#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
+#, fuzzy, python-format
+#| msgid "%(approved_count)s approved applications."
+#| msgid_plural "%(counter)s approved applications."
+msgid "%(counter)s approved application."
 msgid_plural "%(counter)s approved applications."
 msgstr[0] "%(approved_count)s candidature approuvée."
 msgstr[1] "%(counter)s candidatures approuvées."
@@ -1437,14 +1444,6 @@ msgstr ""
 "<p>Cher/chère %(user)s,</p><p>Nos enregistrements indiquent que vous êtes le "
 "coordinateur désigné ou la coordinatrice désignée pour les partenaires qui "
 "ont un total de %(total_apps)s candidatures.</p>"
-
-#. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
-#: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
-#, python-format
-msgid "One approved application."
-msgid_plural "%(counter)s approved applications."
-msgstr[0] "Une candidature approuvée."
-msgstr[1] "%(counter)s candidatures approuvées."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate the email address either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
@@ -4417,6 +4416,11 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "One approved application."
+#~ msgid_plural "%(counter)s approved applications."
+#~ msgstr[0] "Une candidature approuvée."
+#~ msgstr[1] "%(counter)s candidatures approuvées."
 
 #~ msgid "Library Card Platform home"
 #~ msgstr "Accueil de la plateforme de Carte de Bibliothèque"
