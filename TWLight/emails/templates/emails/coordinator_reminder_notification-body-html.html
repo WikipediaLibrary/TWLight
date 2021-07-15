@@ -13,7 +13,7 @@
 {% if pending_count %}
   {% comment %}Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}.{% endcomment %}
   {% blocktrans count counter=pending_count trimmed%}
-    One pending application.
+    {{ counter }} pending application.
   {% plural %}
     {{ counter }} pending applications.
   {% endblocktrans %}
@@ -21,7 +21,7 @@
 {% if question_count %}
   {% comment %}Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}.{% endcomment %}
   {% blocktrans count counter=question_count trimmed%}
-    One under discussion application.
+    {{ counter }} under discussion application.
   {% plural %}
     {{ counter }} under discussion applications.
   {% endblocktrans %}
@@ -29,7 +29,7 @@
 {% if approved_count %}
   {% comment %}Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like {{ counter }}.{% endcomment %}
   {% blocktrans count counter=approved_count trimmed %}
-    {{ approved_count }} approved applications.
+    {{ counter }} approved application.
   {% plural %}
     {{ counter }} approved applications.
   {% endblocktrans %}
