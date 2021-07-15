@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"GuoPC",
 			"Shizhao",
 			"Tranve",
 			"Zhang8569"
@@ -27,7 +28,7 @@
 	"79_short_description": "<strong>Civilica</strong> 是科学期刊和会议论文集的出版商。可以完全访问超过700,000种已发表的论文。",
 	"15_short_description": "<strong>Cochrane</strong>提供对Cochrane图书馆的访问；包含有关医学主题的6个数据库的馆藏，包括系统的评审，评估和评价数据库。",
 	"105_short_description": "<strong>De Gruyter</strong>是一家学术出版商，专门出版各个学科领域的学术文献。帐户可以访问通过De Gruyter Online提供的所有电子资源，包括艺术、人文、社会科学、自然科学、神学/宗教、医学、数学、法律和参考资料的电子书和期刊。他们提供的产品包括英语，德语和其他几种语言的资源。",
-	"83_short_description": "<strong>Die Zeit</strong>是德国的一份周报。",
+	"83_short_description": "<strong>ZEIT ONLINE</strong>是德国周报Die Zeit的线上版本。",
 	"74_short_description": "<strong>Drama Online</strong>（戏剧在线）是一组文本、戏剧和录制的表演，以及学术笔记，带注释的文本和其他学术资源。它由Bloomsbury Publishing出版。",
 	"57_short_description": "<strong>EBSCO Information Services</strong>是美国一家主要的图书馆资源和信息服务提供商。EBSCO与维基百科图书馆的合作关系包括访问多个数据库。",
 	"57_description": "可用的数据库：\n<ul>\n<li>全部学术搜索</li>\n<li>美国：历史与生活</li>\n<li>应用科学与工程技术来源</li>\n<li>Al-Kotob阿拉伯语电子书馆藏</li>\n<li>阿拉伯世界研究来源：Al Masdar</li>\n<li>艺术来源</li>\n<li>Digest Plus书评</li>\n<li>全部企业搜索</li>\n<li>加勒比海搜索</li>\n<li>全部CINAHL</li>\n<li>全部传播与大众传媒</li>\n<li>DynaMed Plus</li>\n<li>全部教育研究</li>\n<li>Enfermería al Día</li>\n<li>ERIC (教育资源信息中心)</li>\n<li>Fuente Académica Premier</li>\n<li>人文类全文</li>\n<li>LGBT Life全文</li>\n<li>Life Magazine存档</li>\n<li>文学参考中心增强版</li>\n<li>全部MasterFILE</li>\n<li>MedicLatina</li>\n<li>全部MEDLINE</li>\n<li>护理参考中心</li>\n<li>患者教育参考中心</li>\n<li>心理学与行为科学馆藏</li>\n<li>Referencia Latina</li>\n<li>Research Starters Business</li>\n<li>Research Starters Education</li>\n<li>Research Starters Sociology</li>\n<li>Salud en Español</li>\n<li>SocINDEX全文</li>\n<li>SportDiscus全文</li>\n</ul>",
@@ -35,8 +36,8 @@
 	"45_short_description": "<strong>Edinburgh University Press</strong>是人文和社会科学方面的书籍和期刊学术出版商。EUP提供其期刊馆藏的访问权限，其主题包括电影和媒体研究、历史、文学研究和苏格兰研究。",
 	"9_short_description": "<strong>Édition Diffusion Presse Sciences</strong>是用法语和英语出版的科学期刊。他们的期刊包括天文学、天体物理学、运动与体育科学及力学工业。",
 	"85_short_description": "<strong>Electronic Enlightenment</strong>是现代早期范围最广泛的在线馆藏，将17世纪初至19世纪中叶的欧洲、美洲和亚洲的人们联系在一起。EE提供了70,000多个历史文献，其中8,500多个历史人物讨论了从宗教宽容到动物权利，从硫化橡胶到古典考古，从经济模型到名人文化的所有内容。",
-	"23_description": "除了订阅内容外，Elsevier还提供了一些可供所有人阅读的材料。除了寻找开放获取符号之外，以下是查找它的方法：\n<ul>\n<li>浏览开放获取期刊的列表</li>\n<li>通过点击“View all publications with Open Access articles”，在ScienceDirect主页上找到所有具有开放获取文章期刊的列表。</li>\n<li>使用高级搜索，选中“Open access articles only”的框</li>\n</ul>",
 	"23_short_description": "<strong>Elsevier</strong>已授予ScienceDirect访问权限。该数据库包括2,500多种期刊，900份期刊和26,000种书目。期刊包括The Lancet, Cell, Current Biology, Biomaterials, Biological Psychiatry, Social Science &amp; Medicine, Current Biology, Cognition, and Behavioural Brain Research。",
+	"23_description": "除了订阅内容外，Elsevier还提供了一些可供所有人阅读的材料。除了寻找开放获取符号之外，以下是查找它的方法：\n<ul>\n<li>浏览开放获取期刊的列表</li>\n<li>通过点击“View all publications with Open Access articles”，在ScienceDirect主页上找到所有具有开放获取文章期刊的列表。</li>\n<li>使用高级搜索，选中“Open access articles only”的框</li>\n</ul>",
 	"56_short_description": "<strong>Emerald Group Publishing</strong>提供对涉及经济、教育、工程、卫生与公共卫生等学科的各种书籍和期刊的访问权限。社会关怀、市场营销和社会学。",
 	"44_short_description": "<strong>Érudit</strong>是加拿大学术材料门户网站。它的主要重点是人文和社会科学，但也包括一些有关自然科学和自然科学的出版物。",
 	"43_short_description": "<strong>Fold3</strong>是包含美国、英国、澳大利亚和新西兰军事历史的文档、图像和其他材料的数据库。重要藏品包括非裔美国人历史、美洲原住民历史、美国独立战争、美国内战、第一次世界大战、第二次世界大战、越南战争、美国调查局、蓝皮书计划以及其他方面的美国历史和军事组织及冲突。",
