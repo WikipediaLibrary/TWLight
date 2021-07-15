@@ -190,10 +190,18 @@ header {
 
 #footer {
   background-color: #f8f8f8;
-  border-top: 1px solid #eee;
-  margin-top: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  border-top: 2px solid #eee;
+  padding: 10px 40px 5px 40px;
+}
+
+.footer-element{
+    text-decoration: none;
+    font-size: 16px;
+    color: #000;
+}
+
+.footer-element:hover{
+    color: #3366CC;
 }
 
 .mobile-menu {

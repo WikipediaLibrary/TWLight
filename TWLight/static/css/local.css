@@ -241,11 +241,21 @@ header {
 
 #footer {
   background-color: #f8f8f8;
-  border-top: 1px solid #eee;
-  padding: 20px 40px 15px 40px;
+  border-top: 2px solid #eee;
+  padding: 10px 40px 5px 40px;
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.footer-element{
+    text-decoration: none;
+    font-size: 16px;
+    color: #000;
+}
+
+.footer-element:hover{
+    color: #3366CC;
 }
 
 .mobile-menu {
