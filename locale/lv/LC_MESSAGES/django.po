@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TWLight HEAD\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-15 18:35+0000\n"
+"POT-Creation-Date: 2021-07-16 00:37+0000\n"
 "PO-Revision-Date: 2021-07-15 11:16:02+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2508,8 +2508,8 @@ msgstr ""
 msgid "Suggest a collection"
 msgstr "Ieteikt partneri"
 
-#: TWLight/templates/header_partial_b3.html:64
-#: TWLight/templates/header_partial_b4.html:58
+#: TWLight/templates/header_partial_b3.html:62
+#: TWLight/templates/header_partial_b4.html:57
 msgid "Log out"
 msgstr ""
 

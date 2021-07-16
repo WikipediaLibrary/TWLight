@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-15 18:36+0000\n"
+"POT-Creation-Date: 2021-07-16 00:38+0000\n"
 "PO-Revision-Date: 2021-07-15 11:16:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2751,8 +2751,8 @@ msgstr "أرسل المعلومات للشركاء"
 msgid "Suggest a collection"
 msgstr "كودات الوصول"
 
-#: TWLight/templates/header_partial_b3.html:64
-#: TWLight/templates/header_partial_b4.html:58
+#: TWLight/templates/header_partial_b3.html:62
+#: TWLight/templates/header_partial_b4.html:57
 msgid "Log out"
 msgstr "خروج"
 

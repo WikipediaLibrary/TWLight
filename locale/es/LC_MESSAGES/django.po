@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-15 18:35+0000\n"
+"POT-Creation-Date: 2021-07-16 00:37+0000\n"
 "PO-Revision-Date: 2021-07-15 11:16:01+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2686,8 +2686,8 @@ msgstr "Enviar datos a los socios"
 msgid "Suggest a collection"
 msgstr "Acceder a la colección"
 
-#: TWLight/templates/header_partial_b3.html:64
-#: TWLight/templates/header_partial_b4.html:58
+#: TWLight/templates/header_partial_b3.html:62
+#: TWLight/templates/header_partial_b4.html:57
 msgid "Log out"
 msgstr "Salir de la sesión"
 

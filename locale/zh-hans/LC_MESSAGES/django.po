@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-15 18:36+0000\n"
+"POT-Creation-Date: 2021-07-16 00:38+0000\n"
 "PO-Revision-Date: 2021-07-15 11:16:04+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2708,8 +2708,8 @@ msgstr "向合作伙伴发送数据"
 msgid "Suggest a collection"
 msgstr "访问馆藏"
 
-#: TWLight/templates/header_partial_b3.html:64
-#: TWLight/templates/header_partial_b4.html:58
+#: TWLight/templates/header_partial_b3.html:62
+#: TWLight/templates/header_partial_b4.html:57
 msgid "Log out"
 msgstr "退出"
 
