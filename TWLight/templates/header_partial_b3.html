@@ -50,20 +50,19 @@
           </a>
         </li>
         <li role="separator" class="divider"></li>
-        {% if user %}
-        <li role="presentation" class="mobile-menu nav-item">
-          <a class="btn user-button" href="{% url 'users:home' %}">
-            {{ user.editor.wp_username }}
-          </a>
-        </li>
-
+        {% if user and user.is_authenticated %}
+          <li role="presentation" class="mobile-menu nav-item">
+            <a class="btn user-button" href="{% url 'users:home' %}">
+              {{ user.editor.wp_username }}
+            </a>
+          </li>
+          <li role="presentation" class="mobile-menu nav-item">
+            {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
+            <a class="nav-links" href="{% url 'auth_logout' %}?next=/">
+              {% trans "Log out" %}
+            </a>
+          </li>
         {% endif %}
-        <li role="presentation" class="mobile-menu nav-item">
-          {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
-          <a class="nav-links" href="{% url 'auth_logout' %}?next=/">
-            {% trans "Log out" %}
-          </a>
-        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
