@@ -25,7 +25,9 @@ from django.utils.http import is_safe_url
 from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
 from django.utils import timezone
+from django.utils.translation import get_language
 
+from TWLight.resources.helpers import get_partner_description, get_tag_names
 from TWLight.resources.models import Partner
 from TWLight.view_mixins import (
     PartnerCoordinatorOrSelf,
@@ -837,3 +839,100 @@ class WithdrawApplication(RedirectView):
 
 class MyLibraryView(TemplateView):
     template_name = "users/redesigned_my_library.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        editor = Editor.objects.get(pk=self.request.user.editor.pk)
+
+        user_authorizations = Authorization.objects.filter(user=editor.user).distinct()
+
+        # Available collections do not include bundle partners and collections
+        # that the user is already authorized to access
+        available_collections = Partner.objects.exclude(
+            authorization_method__in=[Partner.BUNDLE]
+        )
+
+        user_authorization_obj = []
+        language_code = get_language()
+        for user_authorization in user_authorizations:
+            user_authorization_partner_obj = []
+            for user_authorization_partner in user_authorization.partners.all():
+                # Obtaining translated partner description
+                partner_short_description_key = "{pk}_short_description".format(
+                    pk=user_authorization_partner.pk
+                )
+                partner_description_key = "{pk}_description".format(
+                    pk=user_authorization_partner.pk
+                )
+                partner_descriptions = get_partner_description(
+                    language_code,
+                    partner_short_description_key,
+                    partner_description_key,
+                )
+                try:
+                    partner_logo = user_authorization_partner.logos.logo.url
+                except PartnerLogo.DoesNotExist:
+                    partner_logo = None
+                # Getting tags from locale files
+                translated_tags = get_tag_names(
+                    language_code, user_authorization_partner.new_tags
+                )
+                user_authorization_partner_obj.append(
+                    {
+                        "pk": user_authorization_partner.pk,
+                        "partner_name": user_authorization_partner.company_name,
+                        "partner_logo": partner_logo,
+                        "short_description": partner_descriptions["short_description"],
+                        "description": partner_descriptions["description"],
+                        "languages": user_authorization_partner.get_languages,
+                        "tags": translated_tags,
+                    }
+                )
+
+            user_authorization_obj.append(
+                {
+                    "pk": user_authorization.pk,
+                    "partners": user_authorization_partner_obj,
+                    "date_authorized": user_authorization.date_authorized,
+                    "date_expires": user_authorization.date_expires,
+                }
+            )
+
+        available_collection_obj = []
+        for available_collection in available_collections:
+            # Obtaining translated partner description
+            partner_short_description_key = "{pk}_short_description".format(
+                pk=available_collection.pk
+            )
+            partner_description_key = "{pk}_description".format(
+                pk=available_collection.pk
+            )
+            partner_descriptions = get_partner_description(
+                language_code, partner_short_description_key, partner_description_key
+            )
+            try:
+                partner_logo = available_collection.logos.logo.url
+            except PartnerLogo.DoesNotExist:
+                partner_logo = None
+
+            # Getting tags from locale files
+            translated_tags = get_tag_names(
+                language_code, available_collection.new_tags
+            )
+            available_collection_obj.append(
+                {
+                    "pk": available_collection.pk,
+                    "partner_name": available_collection.company_name,
+                    "partner_logo": partner_logo,
+                    "short_description": partner_descriptions["short_description"],
+                    "description": partner_descriptions["description"],
+                    "languages": available_collection.get_languages,
+                    "tags": translated_tags,
+                }
+            )
+
+        context["user_collections"] = user_authorization_obj
+        context["available_collections"] = available_collection_obj
+
+        return context

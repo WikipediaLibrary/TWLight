@@ -3,4 +3,15 @@
 
 {% block content %}
   {% include "header_partial_b4.html" %}
+  <!-- User Collections -->
+
+  {{user_collections}}
+
+  <!-- Available Collections -->
+  <div class="row row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
+      {% for available_collection in available_collections %}
+        {% include "users/available_collection_tile.html" %}
+      {% endfor %}
+  </div>
+
 {% endblock %}
