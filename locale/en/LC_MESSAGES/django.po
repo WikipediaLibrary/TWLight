@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-16 00:38+0000\n"
+"POT-Creation-Date: 2021-07-19 17:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1159,7 +1159,7 @@ msgstr ""
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/about.html:204 TWLight/templates/base.html:146
+#: TWLight/templates/about.html:204 TWLight/templates/base.html:133
 #: TWLight/templates/new_base.html:91
 msgid "Contact us"
 msgstr ""
@@ -1828,9 +1828,7 @@ msgid "Browse Partners"
 msgstr ""
 
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
-#. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_list.html:24
-#: TWLight/templates/base.html:125
 msgid "Suggest a partner"
 msgstr ""
 
@@ -2330,29 +2328,21 @@ msgid ""
 "apply or access resources you are approved for."
 msgstr ""
 
-#. Translators: This text is at the bottom of every page. Don't translate "Creative Commons Attribution-ShareAlike 4.0 International".
-#: TWLight/templates/base.html:104
-msgid ""
-"This work is licensed under a <a rel=\"license\" href=\"http://"
-"creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-"
-"ShareAlike 4.0 International License</a>."
-msgstr ""
-
 #. Translators: This button is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/base.html:113 TWLight/templates/new_base.html:67
+#: TWLight/templates/base.html:107 TWLight/templates/new_base.html:67
 msgid "About"
 msgstr ""
 
 #. Translators: This button is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
 #. Translators: This link is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
-#: TWLight/templates/base.html:119 TWLight/templates/new_base.html:73
+#: TWLight/templates/base.html:113 TWLight/templates/new_base.html:73
 msgid "Terms of use and privacy policy"
 msgstr ""
 
-#. Translators: This button is at the bottom of every page and can be clicked by users to provide feedback through a form.
-#: TWLight/templates/base.html:131
-msgid "Feedback"
+#. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
+#: TWLight/templates/base.html:119 TWLight/templates/new_base.html:79
+msgid "Translate the Library"
 msgstr ""
 
 #. Translators: On the dashboard page (https://wikipedialibrary.wmflabs.org/dashboard/), this labels a box showing the total number of available partners.
@@ -2578,11 +2568,6 @@ msgstr ""
 
 #: TWLight/templates/login_partial.html:54
 msgid "Login via Wikipedia"
-msgstr ""
-
-#. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
-#: TWLight/templates/new_base.html:79
-msgid "Translate the Library"
 msgstr ""
 
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
