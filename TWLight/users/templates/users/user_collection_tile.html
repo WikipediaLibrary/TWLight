@@ -8,8 +8,8 @@
       <img src="..." class="card-img-top" alt="{{ user_collection_partner.partner_name }} logo">
     {% endif %}
     <div class="card-body">
-      <h5 class="card-title">{{ user_collection_partner.partner_name }}</h5>
       <p class="card-text">{{ user_collection_partner.short_description|safe }}</p>
+      <hr>
       <p class="card-text">
         <strong>Languages: </strong>
         {% if user_collection_partner.languages %}
@@ -24,18 +24,17 @@
       <p class="card-text">
         {% if user_collection_partner.tags %}
           {% for tag_key, tag_value in user_collection_partner.tags.items %}
-            <a href="#" class="badge badge-pill badge-light">
+            <a href="#" class="badge badge-pill collection-tags">
               {{ tag_value }}
             </a>
           {% endfor %}
-        {% else %}
-          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no tags to show. {% endcomment %}
-          {% trans "No tags available" %}
         {% endif %}
       </p>
+    </div>
+    <div class="card-footer">
       {% if user_collection_partner.authorization_method != bundle_authorization %}
         {% if user_collection.date_expires %}
-          <p class="text-right">
+          <p class="text-right expiry-date-text">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired. {% endcomment %}
             {% trans "Expiry date: " %} <span class="text-danger"> {{ user_collection.date_expires }} </span>
           </p>
@@ -54,8 +53,8 @@
             {% else %}
               {% comment %}Translators: Labels a button users can click to extend the duration of their access. {% endcomment %}
               {% trans "Extend" %}
+            {% endif %}
           </a>
-          {% endif %}
         {% endif %}
       {% else %}
         <a href="{{ user_collection_partner.access_url }}"

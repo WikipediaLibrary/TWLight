@@ -549,12 +549,25 @@ NEW MY LIBRARY CSS
 --------------------------------------------------------------------------
 */
 .collection-tile{
-    border: 0px !important;
     margin: 0px 0px 105px 0px;
 }
 
 .library-tile-image{
     max-height: 150px;
+}
+
+.collection-tags{
+    color: #000000;
+    background-color: #AAADB0;
+}
+
+.collection-tags:hover{
+    color: #000000;
+    background-color: #8E9295;
+}
+
+.expiry-date-text{
+    font-size: 14px;
 }
 
 .access-apply-button{
