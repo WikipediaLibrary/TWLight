@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-20 16:01+0000\n"
+"POT-Creation-Date: 2021-07-20 16:50+0000\n"
 "PO-Revision-Date: 2021-07-19 11:14:17+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2000,7 +2000,9 @@ msgid "Language(s) not known"
 msgstr "语言未知"
 
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the bundle partner's page, where they can find more information about the partner.
+#. Translators: A button that reveals more information about a collection.
 #: TWLight/resources/templates/resources/partner_tile.html:84
+#: TWLight/templates/partner_carousel.html:80
 msgid "More info"
 msgstr "更多信息"
 
@@ -2762,20 +2764,26 @@ msgstr "查看更多"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:21
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "      Over 90 of the world's top\n"
+#| "      subscription-only databases, free\n"
+#| "      for Wikipedians of all backgrounds\n"
+#| "      "
 msgid ""
-"\n"
-"      Over 90 of the world's top\n"
-"      subscription-only databases, free\n"
-"      for Wikipedians of all backgrounds\n"
-"      "
+"Over 90 of the world's top subscription-only databases, free for Wikipedians "
+"of all backgrounds"
 msgstr "世界超过百分之九十的订阅制数据库对所有背景的维基百科人免费\n"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:32
-msgid ""
-"\n"
-"      Meet this criteria for automatic access\n"
-"      "
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "      Meet this criteria for automatic access\n"
+#| "      "
+msgid "Meet this criteria for automatic access"
 msgstr "达到了自动访问的需求\n"
 
 #: TWLight/templates/login_partial.html:54
@@ -2784,27 +2792,15 @@ msgstr "通过维基百科登录"
 
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
-msgid ""
-"\n"
-"            Featured\n"
-"          "
+msgid "Featured"
 msgstr ""
 
 #. Translators: A button that indicates there are more tag filter options.
 #: TWLight/templates/partner_carousel.html:43
-msgid ""
-"\n"
-"                    More\n"
-"                  "
-msgstr ""
-
-#. Translators: A button that reveals more information about a collection.
-#: TWLight/templates/partner_carousel.html:80
-msgid ""
-"\n"
-"              More info\n"
-"            "
-msgstr ""
+#, fuzzy
+#| msgid "More info"
+msgid "More"
+msgstr "更多信息"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16
