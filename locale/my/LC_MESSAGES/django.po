@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-07-19 17:06+0000\n"
+"POT-Creation-Date: 2021-07-20 16:00+0000\n"
 "PO-Revision-Date: 2021-07-19 11:14:16+0000\n"
 "Language: my\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -236,7 +236,7 @@ msgstr ""
 msgid "Not approved"
 msgstr ""
 
-#. Translators: This is the status of an application that has been finalised, such as by sending to a partner.
+#. Translators: This is the status of an application that has been sent to a partner upon approval.
 #: TWLight/applications/models.py:62
 msgid "Sent to partner"
 msgstr ""
@@ -269,14 +269,19 @@ msgstr "လ"
 msgid "1 month"
 msgstr "လ"
 
+#. Translators: This is the status of an application that has been finalized upon approval.
+#: TWLight/applications/models.py:167
+msgid "Finalized"
+msgstr ""
+
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
-#: TWLight/applications/models.py:325
+#: TWLight/applications/models.py:336
 #, python-brace-format
 msgid "Access URL: {access_url}"
 msgstr ""
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
-#: TWLight/applications/models.py:331
+#: TWLight/applications/models.py:342
 msgid ""
 "You can expect to receive access details within a week or two once it has "
 "been processed."
