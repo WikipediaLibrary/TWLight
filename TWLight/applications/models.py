@@ -58,7 +58,7 @@ class Application(models.Model):
         (APPROVED, _("Approved")),
         # Translators: This is the status of an application which has been declined by a reviewer.
         (NOT_APPROVED, _("Not approved")),
-        # Translators: This is the status of an application that has been finalised, such as by sending to a partner.
+        # Translators: This is the status of an application that has been sent to a partner upon approval.
         (SENT, _("Sent to partner")),
         # Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
         (INVALID, _("Invalid")),
@@ -163,7 +163,7 @@ class Application(models.Model):
             self.status == self.SENT
             and self.partner.authorization_method != self.partner.EMAIL
         ):
-            # Translators: This is the status of an application that has been finalised.
+            # Translators: This is the status of an application that has been finalized upon approval.
             return _("Finalized")
 
         return self.STATUS_CHOICES[self.status][1]
