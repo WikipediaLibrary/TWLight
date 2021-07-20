@@ -2,7 +2,7 @@
 <body>
 {% load i18n %}
 {% comment %}Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like {{ app_url }}; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-{% blocktrans trimmed %}
+{% blocktranslate trimmed %}
 <p style="color: #500050">{{ submit_date }} - {{ commenter }}</p>
 <blockquote><p>{{ comment }}</p></blockquote>
 
@@ -10,6 +10,6 @@ See it at
 <a href="{{ app_url }}">{{ app_url }}</a>.
 
 Thanks for helping review Wikipedia Library applications!
-{% endblocktrans %}
+{% endblocktranslate %}
 </body>
 </html>

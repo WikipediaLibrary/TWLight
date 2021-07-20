@@ -28,9 +28,9 @@
       <a href="{% url 'partners:detail' partner.pk %}">
         <img src="{{ partner.partner_logo }}" class="img-responsive partner-logo" alt="
         {% comment %}Translators: Alt text for publisher logos on the browse partner page (https://wikipedialibrary.wmflabs.org/partners/). Don't translate {{ partner }}. {% endcomment %}
-          {% blocktrans trimmed %}
+          {% blocktranslate trimmed %}
             Link to {{ partner.company_name }} signup page
-          {% endblocktrans %}
+          {% endblocktranslate %}
         ">
       </a>
     </div>

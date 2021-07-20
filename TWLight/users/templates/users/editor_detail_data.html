@@ -2,11 +2,11 @@
 
 <p>
     {% comment %}Translators: This is shown on editor profiles, under the heading for Wikipedia editor data. {% endcomment %}
-    {% blocktrans trimmed %}
+    {% blocktranslate trimmed %}
         This information is updated automatically from your Wikimedia account
         each time you log in, except for the Contributions field, where you
         can describe your Wikimedia editing history.
-    {% endblocktrans %}
+    {% endblocktranslate %}
 </p>
 
 <hr/>
@@ -54,10 +54,10 @@
         <strong>{% trans "Satisfies terms of use?" %}</strong>
         <p>
             {% comment %}Translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a yes or no answer. {% endcomment %}
-            {% blocktrans trimmed %}
+            {% blocktranslate trimmed %}
                 at their last login, did this user meet the criteria set forth in the
                 terms of use?
-            {% endblocktrans %}
+            {% endblocktranslate %}
         </p>
     </div>
     <div class="col-xs-12 col-sm-9">
@@ -69,10 +69,10 @@
             <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
             <p>
                 {% comment %}Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate {{ username }}.{% endcomment %}
-                {% blocktrans trimmed with username=editor.wp_username %}
+                {% blocktranslate trimmed with username=editor.wp_username %}
                     {{ username }} may still be eligible for access grants at the
                     coordinators' discretion.
-                {% endblocktrans %}
+                {% endblocktranslate %}
             </p>
         {% endif %}
     </div>
@@ -130,9 +130,9 @@
           <p class="block-notice">
             {% url 'contact' as contact_url %}
             {% comment %}Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
-            {% blocktrans trimmed %}
+            {% blocktranslate trimmed %}
               It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </p>
       {% endif %}
   </div>
@@ -146,9 +146,9 @@
         <strong>{% trans "Eligible for Bundle?" %}</strong>
         <p>
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer. {% endcomment %}
-            {% blocktrans trimmed %}
+            {% blocktranslate trimmed %}
                 At their last login, did this user meet the criteria set forth in the Library Bundle? Note that satisfying terms of use is a prerequisite to bundle eligibility.
-            {% endblocktrans %}
+            {% endblocktranslate %}
         </p>
     </div>
     <div class="col-xs-12 col-sm-9">
@@ -252,20 +252,20 @@
     <p>
         <span class="glyphicon glyphicon-info-sign"></span>
         {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-        {% blocktrans trimmed %}
+        {% blocktranslate trimmed %}
             The following information is visible only to you, site administrators,
             publishing partners (where required), and volunteer Wikipedia Library
             coordinators (who have signed a Non-Disclosure Agreement).
-        {% endblocktrans %}
+        {% endblocktranslate %}
     </p>
 
     <p>
         {% url 'users:pii_update' as update_url %}
         {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate {{ update_url }}.{% endcomment %}
-        {% blocktrans trimmed %}
+        {% blocktranslate trimmed %}
             You may <a href="{{ update_url }}">update or delete</a>
             your data at any time.
-        {% endblocktrans %}
+        {% endblocktranslate %}
     </p>
 
     <hr/>

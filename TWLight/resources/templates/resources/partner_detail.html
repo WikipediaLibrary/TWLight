@@ -22,11 +22,11 @@
        <span class="resource-label">{% trans "Waitlisted" %}</span>
        <p>
        {% comment %}Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
-       {% blocktrans trimmed %}
+       {% blocktranslate trimmed %}
        There are no access grants available for this partner
        at this time. You can still apply for access; applications will
        be processed when access is available.
-       {% endblocktrans %}
+       {% endblocktranslate %}
        </p>
     </div>
     {% endif %}
@@ -34,11 +34,11 @@
       <div class="alert alert-info visible-xs">
         <p>
           {% comment %}Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
-          {% blocktrans trimmed %}
+          {% blocktranslate trimmed %}
             Before applying, please review the
             <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
             and our <strong><a href="{{ terms }}">terms of use</a></strong>.
-          {% endblocktrans %}
+          {% endblocktranslate %}
         </p>
       </div>
     {% endif %}
@@ -55,18 +55,18 @@
           <div class="panel-body top-border">
             {% if has_auths %}
               {% comment %}Translators: This text refers to the page containing the content a user is authorized to access. {% endcomment %}
-              {% blocktrans trimmed %}
+              {% blocktranslate trimmed %}
                 View the status of your access in <strong><a href="{{ library_url }}">My Library</a></strong> page.
-              {% endblocktrans %}
+              {% endblocktranslate %}
               {% if has_open_apps %}
                 <hr />
               {% endif %}
             {% endif %}
             {% if has_open_apps %}
               {% comment %}Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
-              {% blocktrans trimmed %}
+              {% blocktranslate trimmed %}
                 View the status of your application(s) on your <strong><a href="{{ applications_url }}">My Applications</a></strong> page.
-              {% endblocktrans %}
+              {% endblocktranslate %}
             {% endif %}
           </div>
         </div>
@@ -179,23 +179,23 @@
                     {% if excerpt_limit_percentage and excerpt_limit %}
                       <li>
                         {% comment %}Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page. {% endcomment %}
-                        {% blocktrans trimmed %}
+                        {% blocktranslate trimmed %}
                           {{ object }} allows a maximum of {{ excerpt_limit }} words or {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% elif excerpt_limit %}
                       <li>
                         {% comment %}Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
-                        {% blocktrans trimmed %}
+                        {% blocktranslate trimmed %}
                           {{ object }} allows a maximum of {{ excerpt_limit }} words be excerpted into a Wikipedia article.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% elif excerpt_limit_percentage %}
                       <li>
                         {% comment %}Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page. {% endcomment %}
-                        {% blocktrans trimmed %}
+                        {% blocktranslate trimmed %}
                           {{ object }} allows a maximum of {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% endif %}
                   </ul>
@@ -220,66 +220,66 @@
                     {% if object.agreement_with_terms_of_use %}
                       <li>
                         {% comment %}Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate {{ publisher }} or {{ url }}. {% endcomment %}
-                        {% blocktrans trimmed with publisher=object.company_name url=object.terms_of_use %}
+                        {% blocktranslate trimmed with publisher=object.company_name url=object.terms_of_use %}
                           {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
                           of use</a>.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% endif %}
 
                     {% if object.real_name %}
                       <li>
                         {% comment %}Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                        {% blocktrans trimmed with publisher=object.company_name %}
+                        {% blocktranslate trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you provide your real name.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% endif %}
 
                     {% if object.country_of_residence %}
                       <li>
                         {% comment %}Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                        {% blocktrans trimmed with publisher=object.company_name %}
+                        {% blocktranslate trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you provide your country of residence.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% endif %}
 
                     {% if object.occupation %}
                       <li>
                         {% comment %}Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                        {% blocktrans trimmed with publisher=object.company_name %}
+                        {% blocktranslate trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you provide your occupation.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% endif %}
 
                     {% if object.affiliation %}
                       <li>
                         {% comment %}Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                        {% blocktrans trimmed with publisher=object.company_name %}
+                        {% blocktranslate trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you provide your institutional affiliation.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% endif %}
 
                     {% if object.specific_title %}
                       <li>
                         {% comment %}Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                        {% blocktrans trimmed with publisher=object.company_name %}
+                        {% blocktranslate trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you specify a particular title that you want
                           to access.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% endif %}
 
                     {% if object.account_email %}
                       <li>
                         {% comment %}Translators: If a user must register on the partner website before applying, they see this message. Don't translate {{ partner }}. {% endcomment %}
-                        {% blocktrans trimmed with publisher=object.company_name %}
+                        {% blocktranslate trimmed with publisher=object.company_name %}
                           {{ publisher }} requires that you sign up for an account before applying
                           for access.
-                        {% endblocktrans %}
+                        {% endblocktranslate %}
                       </li>
                     {% endif %}
                   </ul>
@@ -354,11 +354,11 @@
             <span class="resource-label">{% trans "Waitlisted" %}</span>
             <p>
             {% comment %}Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
-            {% blocktrans trimmed %}
+            {% blocktranslate trimmed %}
             There are no access grants available for this partner
             at this time. You can still apply for access; applications will
             be processed when access is available.
-            {% endblocktrans %}
+            {% endblocktranslate %}
             </p>
           </div>
           {% endif %}
@@ -366,11 +366,11 @@
             <div class="alert alert-info hidden-xs">
               <p>
                 {% comment %}Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
-                {% blocktrans trimmed %}
+                {% blocktranslate trimmed %}
                   Before applying, please review the
                   <strong><a href="{{ about }}#req">minimum requirements</a></strong> for access
                   and our <strong><a href="{{ terms }}">terms of use</a></strong>.
-                {% endblocktrans %}
+                {% endblocktranslate %}
               </p>
             </div>
           {% endif %}
@@ -387,18 +387,18 @@
                 <div class="panel-body top-border">
                   {% if has_auths %}
                     {% comment %}Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
-                    {% blocktrans trimmed %}
+                    {% blocktranslate trimmed %}
                       View the status of your access on your <strong><a href="{{ library_url }}">My Library</a></strong> page.
-                    {% endblocktrans %}
+                    {% endblocktranslate %}
                     {% if has_open_apps %}
                       <hr />
                     {% endif %}
                   {% endif %}
                   {% if has_open_apps %}
                     {% comment %}Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
-                    {% blocktrans trimmed %}
+                    {% blocktranslate trimmed %}
                       View the status of your application(s) on your <strong><a href="{{ applications_url }}">My Applications</a></strong> page.
-                    {% endblocktrans %}
+                    {% endblocktranslate %}
                   {% endif %}
                 </div>
               </div>
@@ -420,9 +420,9 @@
             <div class="well hidden-xs">
               {% if object.coordinator.editor.wp_username %}
                 {% comment %}Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}
-                {% blocktrans trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
+                {% blocktranslate trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
                   <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
-                {% endblocktrans %}
+                {% endblocktranslate %}
 
                 <ul>
                   {% if object.coordinator.editor.wp_talk_page_url %}
@@ -444,11 +444,11 @@
                 </ul>
               {% else %}
                 {% comment %}Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-                {% blocktrans trimmed %}
+                {% blocktranslate trimmed %}
                   The Wikipedia Library team will process this application. Want to
                   help? <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
                   coordinator.</a>
-                {% endblocktrans %}
+                {% endblocktranslate %}
               {% endif %}
             </div>
             {% if object.coordinator == user or user.is_staff %}
@@ -468,11 +468,11 @@
                     {% trans "Library bundle access" %}
                     ">
                     {% comment %}Translators: Text shown to authenticated, bundle eligible users when they need to visit My Library to access collections. {% endcomment %}
-                    {% blocktrans trimmed %}
+                    {% blocktranslate trimmed %}
                       You are eligible to access Library Bundle partners.
                       Click the button above to go to your Library and browse
                       collections from this partner.
-                    {% endblocktrans %}
+                    {% endblocktranslate %}
                   {% else %}
                     {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
                     <a class="btn btn-primary btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
@@ -482,10 +482,10 @@
                     {% trans "Library bundle access" %}
                     ">
                     {% comment %}Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
-                    {% blocktrans trimmed %}
+                    {% blocktranslate trimmed %}
                       You are eligible to access Library Bundle partners.
                       Click the button above to access the collection.
-                    {% endblocktrans %}
+                    {% endblocktranslate %}
                   {% endif %}
                 {% else %}
                   {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
@@ -497,11 +497,11 @@
                   ">
                   {% url 'homepage' as homepage %}
                   {% comment %}Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
-                  {% blocktrans trimmed %}
+                  {% blocktranslate trimmed %}
                     You are not eligible to access Library Bundle partners.
                     Visit the <a href="{{ homepage }}">homepage</a> to check the
                     eligibility criteria.
-                  {% endblocktrans %}
+                  {% endblocktranslate %}
                 {% endif %}
               {% else %}
                 {% comment %}Translators: Buttton prompting users to log in. {% endcomment %}
@@ -513,11 +513,11 @@
                 ">
                 {% url 'about' as about %}
                 {% comment %}Translators: Text shown to unauthenticated users when they visit a Bundle partner page. {% endcomment %}
-                {% blocktrans trimmed %}
+                {% blocktranslate trimmed %}
                   This resource is part of our <a href="{{ about }}">Library Bundle</a>,
                   which you can access if you meet our minimum eligibility criteria.
                   Log in to find out if you are eligible.
-                {% endblocktrans %}
+                {% endblocktranslate %}
               {% endif %}
             </div>
           {% endif %}

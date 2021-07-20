@@ -41,14 +41,14 @@
             {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
               {% if app.get_latest_reviewer %}
                 {% comment %}Translators: If an application was previously reviewed by a coordinator, this text displays the date and the name of the coordinator.{% endcomment %}
-                {% blocktrans trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
+                {% blocktranslate trimmed with reviewer=app.get_latest_reviewer review_date=app.get_latest_review_date|localize %}
                   Last reviewed by {{ reviewer }} on {{ review_date }}
-                {% endblocktrans %}
+                {% endblocktranslate %}
               {% else %}
                 {% comment %}Translators: If an application was previously reviewed, this text displays the date of the review.{% endcomment %}
-                {% blocktrans trimmed with review_date=app.get_latest_review_date|localize %}
+                {% blocktranslate trimmed with review_date=app.get_latest_review_date|localize %}
                   Last reviewed on {{ review_date }}
-                {% endblocktrans %}
+                {% endblocktranslate %}
               {% endif %}
             {% else %}
               {% comment %}Translators: If an application wasn't previously reviewed, this text is displayed.{% endcomment %}
