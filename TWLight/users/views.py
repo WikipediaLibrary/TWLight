@@ -847,14 +847,9 @@ class MyLibraryView(TemplateView):
 
         user_authorizations = Authorization.objects.filter(user=editor.user).distinct()
 
-        # Available collections do not include bundle partners and collections
-        # that the user is already authorized to access
-        available_collections = Partner.objects.exclude(
-            authorization_method__in=[Partner.BUNDLE]
-        )
-
         user_authorization_obj = []
         language_code = get_language()
+        partner_id_set = set()
         for user_authorization in user_authorizations:
             user_authorization_partner_obj = []
             for user_authorization_partner in user_authorization.partners.all():
@@ -891,6 +886,7 @@ class MyLibraryView(TemplateView):
                         "access_url": user_authorization_partner.get_access_url,
                     }
                 )
+                partner_id_set.add(user_authorization_partner.pk)
 
             open_app = user_authorization.get_open_app
             if open_app:
@@ -909,6 +905,12 @@ class MyLibraryView(TemplateView):
                     "has_open_app": open_app,
                 }
             )
+
+        # Available collections do not include bundle partners and collections
+        # that the user is already authorized to access
+        available_collections = Partner.objects.exclude(
+            authorization_method__in=[Partner.BUNDLE]
+        ).exclude(id__in=list(partner_id_set))
 
         available_collection_obj = []
         for available_collection in available_collections:

@@ -4,7 +4,7 @@
 {% block content %}
   {% include "header_partial_b4.html" %}
   <!-- User Collections -->
-  <div class="row row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-sm-12">
+  <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
       {% for user_collection in user_collections %}
         {% for user_collection_partner in user_collection.partners%}
           {% include "users/user_collection_tile.html" %}
@@ -13,7 +13,7 @@
   </div>
 
   <!-- Available Collections -->
-  <div class="row row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-sm-12">
+  <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
       {% for available_collection in available_collections %}
         {% include "users/available_collection_tile.html" %}
       {% endfor %}

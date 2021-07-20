@@ -2,10 +2,14 @@
 <div class="col">
   <div class="card collection-tile">
     {% if available_collection.partner_logo %}
-      <img src="{{ available_collection.partner_logo }}" class="card-img-top library-tile-image"
-          alt="{{ available_collection.partner_name }} logo">
+      <a href="{% url 'partners:detail' available_collection.pk %}" class="text-center">
+        <img src="{{ available_collection.partner_logo }}" class="card-img-top library-tile-image"
+            alt="{{ available_collection.partner_name }} logo">
+      </a>
     {% else %}
-      <img src="..." class="card-img-top" alt="{{ available_collection.partner_name }} logo">
+      <a href="{% url 'partners:detail' available_collection.pk %}" class="text-center">
+        <img src="..." class="card-img-top" alt="{{ available_collection.partner_name }} logo">
+      </a>
     {% endif %}
     <div class="card-body">
       <p class="card-text">{{ available_collection.short_description|safe }}</p>

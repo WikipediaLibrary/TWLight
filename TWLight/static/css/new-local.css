@@ -553,7 +553,8 @@ NEW MY LIBRARY CSS
 }
 
 .library-tile-image{
-    max-height: 150px;
+    max-height: 170px;
+    max-width: 325px;
 }
 
 .collection-tags{
