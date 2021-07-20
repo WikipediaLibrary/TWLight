@@ -53,11 +53,11 @@
 
   <p>
     {% comment %}Translators: This is shown on editor profiles, in their profile page or on applications.{% endcomment %}
-    {% blocktrans trimmed %}
+    {% blocktranslate trimmed %}
       Information with an * was retrieved from Wikipedia directly.
       Other information was entered directly by users or site admins,
       in their preferred language.
-    {% endblocktrans %}
+    {% endblocktranslate %}
   </p>
 
   {% if editor.user|coordinators_only %}
@@ -65,9 +65,9 @@
       <div class="col-xs-12 col-md-10 col-md-offset-1">
         <p class="well">
             {% comment %}Translators: This distinguishes users who have been flagged as account coordinators. Don't translate {{ username }}.{% endcomment %}
-            {% blocktrans trimmed with username=editor.wp_username %}
+            {% blocktranslate trimmed with username=editor.wp_username %}
               {{ username }} has coordinator privileges on this site.
-            {% endblocktrans %}
+            {% endblocktranslate %}
         </p>
       </div>
     </div>

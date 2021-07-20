@@ -36,7 +36,7 @@
 {% block content %}
   <h2>
     {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where {{ object }} will be the name of the partner. Don't translate {{ object }}.{% endcomment %}
-    {% blocktrans trimmed %}Application data for {{ object }}{% endblocktrans %}
+    {% blocktranslate trimmed %}Application data for {{ object }}{% endblocktranslate %}
   </h2>
 
   <div class="alert alert-info">
@@ -48,13 +48,13 @@
   {% if unavailable_streams %}
     <div class="well hidden-xs">
       {% comment %}Translators: This message is shown when applications exceed the number of accounts available for each collection. {% endcomment %}
-      {% blocktrans trimmed %}Applications for <strong>{{ unavailable_streams }}</strong> if sent, will exceed the total available accounts for the collections. Please proceed at your own discretion.{% endblocktrans %}
+      {% blocktranslate trimmed %}Applications for <strong>{{ unavailable_streams }}</strong> if sent, will exceed the total available accounts for the collections. Please proceed at your own discretion.{% endblocktranslate %}
     </div>
   {% elif total_apps_approved_or_sent %}
         {% if object.accounts_available < total_apps_approved_or_sent %}
           <div class="well hidden-xs">
             {% comment %}Translators: This message is shown when applications exceed the number of accounts available. {% endcomment %}
-            {% blocktrans trimmed %}Application(s) for {{ object }}, if sent, will exceed the total available accounts for the partner. Please proceed at your own discretion.{% endblocktrans %}
+            {% blocktranslate trimmed %}Application(s) for {{ object }}, if sent, will exceed the total available accounts for the partner. Please proceed at your own discretion.{% endblocktranslate %}
           </div>
         {% endif %}
   {% endif %}
@@ -82,11 +82,11 @@
   {% if object.authorization_method == object.EMAIL %}
     <h3>
       {% comment %}Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.{% endcomment %}
-      {% blocktrans trimmed count object.contacts.all|length as counter %}
+      {% blocktranslate trimmed count object.contacts.all|length as counter %}
         Contact
       {% plural %}
         Contacts
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </h3>
 
     {% for contact in object.contacts.all %}
@@ -159,10 +159,10 @@
     {% elif object.authorization_method == object.CODES %}
       <p>
       {% comment %}Translators: This text guides coordinators in using the code sending interface for approved applications. {% endcomment %}
-      {% blocktrans trimmed %}
+      {% blocktranslate trimmed %}
         Use the dropdown menus to denote which editor will receive each code.
         Access codes will be sent to users automatically.
-      {% endblocktrans %}
+      {% endblocktranslate %}
       </p>
       <form method="POST">
         {% csrf_token %}

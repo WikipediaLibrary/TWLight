@@ -1,6 +1,6 @@
 {% load i18n %}
 {% comment %}Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like {{ user }} or {{ partner }}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-{% blocktrans trimmed %}
+{% blocktranslate trimmed %}
 Dear {{ user }},
 
 Thank you for applying for access to {{ partner }} resources through
@@ -12,4 +12,4 @@ more accounts become available. You can see all available resources at:
 Best,
 
 The Wikipedia Library
-{% endblocktrans %}
+{% endblocktranslate %}

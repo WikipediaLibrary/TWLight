@@ -21,9 +21,9 @@
 <h1>{% trans 'What resources do you want to access?' %}</h1>
 <div class="well well-sm">
   {% comment %}Translators: This text explains that Library Bundle partners are not shown in this list.{% endcomment %}
-    {% blocktrans trimmed %}
+    {% blocktranslate trimmed %}
       Library Bundle partners are not shown as eligibility is determined automatically.
-    {% endblocktrans %}
+    {% endblocktranslate %}
 </div>
 
 
@@ -70,10 +70,10 @@
 {% if any_waitlisted %}
   <div class="well well-sm">
     {# Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file. #}
-    {% blocktrans trimmed %}
+    {% blocktranslate trimmed %}
       You can apply to <span class="label label-warning">Waitlisted</span>
       partners, but they don't have access grants available right now. We will process those applications when access becomes available.
-    {% endblocktrans %}
+    {% endblocktranslate %}
   </div>
 {% endif %}
 

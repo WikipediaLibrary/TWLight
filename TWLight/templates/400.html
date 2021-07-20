@@ -14,12 +14,12 @@
 
   <p>
     {% comment %}Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate {{ path }} or Phabricator. {% endcomment %}
-    {% blocktrans trimmed with request.path|urlencode as path %}
+    {% blocktranslate trimmed with request.path|urlencode as path %}
       If you think we should know what to do with that, please email us about this error at
       <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20{{ path }}%20Permission%20denied">wikipedialibrary@wikimedia.org</a>
       or report it to us on
       <a href="https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%20Library%20{{ path }}%20Bad%20Request">Phabricator</a>
-    {% endblocktrans %}
+    {% endblocktranslate %}
     (<a href="https://www.mediawiki.org/wiki/Phabricator/Help/{{ LANGUAGE_CODE }}?uselang={{ LANGUAGE_CODE }}">?</a>).
   </p>
 

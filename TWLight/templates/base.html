@@ -64,33 +64,33 @@
         {% url 'users:email_change' as email_url %}
         {% url 'contact' as contact_us_url %}
         {% comment %}Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ contact_us_url }} or {{ email_url }}. {% endcomment %}
-        {% blocktrans trimmed %}
+        {% blocktranslate trimmed %}
           You don't have an email on file. We can't finalize your access to
           partner resources, and you won't be able to <a href="{{ contact_us_url }}">contact us</a> without an email. Please
           <a href="{{ email_url }}">update your email</a>.
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </div>
     {% endif %}
     {% if user|restricted %}
       <div class="alert alert-warning">
         {% url 'users:restrict_data' as restrict_url %}
         {% comment %}Translators: Shown if the current user has requested the processing of their data should be restricted. {% endcomment %}
-        {% blocktrans trimmed %}
+        {% blocktranslate trimmed %}
           You have requested a restriction on the processing of your data.
           Most site functionality will not be available to you until you
           <a href="{{ restrict_url }}">lift this restriction</a>.
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </div>
     {% endif %}
     {% if user.is_authenticated and not user.userprofile.terms_of_use %}
       <div class="alert alert-warning">
         {% url 'terms' as terms_url %}
         {% comment %}Translators: Shown if the current user has not agreed to the terms of use. {% endcomment %}
-        {% blocktrans trimmed %}
+        {% blocktranslate trimmed %}
           You have not agreed to the <a href="{{ terms_url }}">terms of use</a>
           of this site. Your applications will not be processed and you won't be
           able to apply or access resources you are approved for.
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </div>
     {% endif %}
 

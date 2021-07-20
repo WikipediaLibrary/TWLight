@@ -6,9 +6,9 @@
     {% csrf_token %}
     <p>
       {% comment %}Translators: This message is displayed on the page where coordinators can request the deletion of a suggestion. {% endcomment %}
-      {% blocktrans trimmed %}
+      {% blocktranslate trimmed %}
         Are you sure you want to delete <b>{{ object }}</b>?
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </p>
     {% comment %}Translators: This is the button coordinators click to confirm deletion of a suggestion. {% endcomment %}
     <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-danger"/>

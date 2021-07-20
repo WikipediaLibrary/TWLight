@@ -127,9 +127,9 @@
       <strong>
         {% url 'terms' as terms_url %}
         {% comment %}Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.{% endcomment %}
-        {% blocktrans trimmed %}
+        {% blocktranslate trimmed %}
           Has agreed to the site's <a href="{{ terms_url }}">terms of use</a>?
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </strong>
     </div>
     <div class="col-xs-12 col-sm-8">
@@ -187,9 +187,9 @@
       {% if object.parent %}
         {% with object.parent.get_absolute_url as parent_url %}
           {% comment %}Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or {{ parent_url }}.{% endcomment %}
-          {% blocktrans trimmed %}
+          {% blocktranslate trimmed %}
             Yes (<a href="{{ parent_url }}">previous application</a>)
-          {% endblocktrans %}
+          {% endblocktranslate %}
         {% endwith %}
       {% else %}
         {% comment %}Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is not a renewal.{% endcomment %}
@@ -289,10 +289,10 @@
 
   <p>
     {% comment %}Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.{% endcomment %}
-    {% blocktrans trimmed %}
+    {% blocktranslate trimmed %}
       Comments are visible to all
       coordinators and to the editor who submitted this application.
-    {% endblocktrans %}
+    {% endblocktranslate %}
   </p>
 
   {% comment %}Translators: This is the title of the section of an application page which lists information about the user who submitted the application.{% endcomment %}
@@ -317,14 +317,14 @@
                   {% with review_date=version.revision.date_created|localize %}
                     {% if submit_user %}
                       {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate {{ submit_user }} or {{ review_date }}.{% endcomment %}
-                      {% blocktrans trimmed %}
+                      {% blocktranslate trimmed %}
                         Submitted by {{ submit_user }} on {{ review_date }}
-                      {% endblocktrans %}
+                      {% endblocktranslate %}
                     {% else %}
                       {% comment %}Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate {{ review_date }}.{% endcomment %}
-                      {% blocktrans trimmed %}
+                      {% blocktranslate trimmed %}
                         Submitted on {{ review_date }}
-                      {% endblocktrans %}
+                      {% endblocktranslate %}
                     {% endif %}
                   {% endwith %}
                 {% endwith %}
@@ -333,14 +333,14 @@
                   {% with review_date=version.revision.date_created|localize %}
                     {% if review_user %}
                       {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate {{ review_user }} or {{ review_date }}.{% endcomment %}
-                      {% blocktrans trimmed %}
+                      {% blocktranslate trimmed %}
                         Reviewed by {{ review_user }} on {{ review_date }}
-                      {% endblocktrans %}
+                      {% endblocktranslate %}
                     {% else %}
                       {% comment %}Translators: Applications have a revision history section. This message denotes when the application was reviewed by an account coordinator. Don't translate {{ review_date }}.{% endcomment %}
-                      {% blocktrans trimmed %}
+                      {% blocktranslate trimmed %}
                         Reviewed on {{ review_date }}
-                      {% endblocktrans %}
+                      {% endblocktranslate %}
                     {% endif %}
                   {% endwith %}
                 {% endwith %}

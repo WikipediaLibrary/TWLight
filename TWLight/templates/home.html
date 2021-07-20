@@ -9,9 +9,9 @@
   <div class="lead">
     <p>
       {% comment %}Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-      {% blocktrans trimmed %}
+      {% blocktranslate trimmed %}
         The Wikipedia Library provides free access to research databases and collections.
-  		{% endblocktrans %}
+  		{% endblocktranslate %}
       {% comment %}Translators: A link users can click to read more about the project or the tool. {% endcomment %}
       <a href="{% url 'about' %}">{% trans "Learn more" %}</a>
 		</p>
@@ -45,9 +45,9 @@
           ">
         </h2>
         {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this message is displayed to all users as the description of Library Bundle eligibility panel. 'Library Bundle' is the set of resources which active users have automatic access to.{% endcomment %}
-		    {% blocktrans trimmed %}
+		    {% blocktranslate trimmed %}
 				  <p>Free and immediate access to a large selection of resources, spanning {{ bundle_partner_count }} collections, if you meet the following criteria:</p>
-		    {% endblocktrans %}
+		    {% endblocktranslate %}
 				<ul class="bundle-list">
           {% for criteria_text, meets_criteria in bundle_criteria %}
             <li>
@@ -72,18 +72,18 @@
           <p class="block-notice">
             {% url 'contact' as contact_url %}
             {% comment %}Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
-            {% blocktrans trimmed %}
+            {% blocktranslate trimmed %}
               It looks like you have an active block on your account on at least one Wikimedia project. If you meet the other criteria you may still be permitted access to the Library Bundle - please <a href="{{ contact_url }}">contact us</a>.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </p>
         {% endif %}
         {% if user.is_authenticated and user.editor.wp_bundle_eligible %}
           <div class="alert alert-success">
             {% url 'users:my_library' as library_url %}
             {% comment %}Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle. {% endcomment %}
-            {% blocktrans trimmed %}
+            {% blocktranslate trimmed %}
               You meet the eligibility criteria! Check out <a href="{{ library_url }}">My Library</a> to see what you have access to.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </div>
         {% else %}
 				  {% comment %}Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page. {% endcomment %}
