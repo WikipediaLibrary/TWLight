@@ -545,6 +545,76 @@ and (min-device-width : 1025px) {
 
 /*
 ----------------------------------------------------------------------------
+NEW MY LIBRARY CSS
+--------------------------------------------------------------------------
+*/
+.collection-tile{
+    border: 0px !important;
+    margin: 0px 0px 105px 0px;
+}
+
+.library-tile-image{
+    max-height: 150px;
+}
+
+.access-apply-button{
+    color: #FFFFFF;
+    background-color: #3366CC;
+    width: 40%;
+}
+
+.access-apply-button:hover{
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.renew-extend-button{
+    border: 1px solid #8E8E8E;
+    background-color: #FFFFFF;
+    width: 40%;
+}
+
+.renew-extend-button:hover{
+    text-decoration: underline;
+}
+
+/* Smartphones */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .access-apply-button{
+        color: #FFFFFF;
+        background-color: #3366CC;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .renew-extend-button{
+        border: 1px solid #8E8E8E;
+        background-color: #FFFFFF;
+        width: 100%;
+    }
+}
+/* Tablets */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    .access-apply-button{
+        color: #FFFFFF;
+        background-color: #3366CC;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .renew-extend-button{
+        border: 1px solid #8E8E8E;
+        background-color: #FFFFFF;
+        width: 100%;
+    }
+}
+
+/*
+----------------------------------------------------------------------------
 NEW FOOTER CSS
 --------------------------------------------------------------------------
 */

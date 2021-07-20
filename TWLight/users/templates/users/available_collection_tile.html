@@ -1,8 +1,9 @@
 {% load i18n %}
-<div class="col ml-4 mb-4">
-  <div class="card">
+<div class="col">
+  <div class="card collection-tile">
     {% if available_collection.partner_logo %}
-      <img src="{{ available_collection.partner_logo }}" class="card-img-top" alt="{{ available_collection.partner_name }} logo">
+      <img src="{{ available_collection.partner_logo }}" class="card-img-top library-tile-image"
+          alt="{{ available_collection.partner_name }} logo">
     {% else %}
       <img src="..." class="card-img-top" alt="{{ available_collection.partner_name }} logo">
     {% endif %}
@@ -32,7 +33,8 @@
           {% trans "No tags available" %}
         {% endif %}
       </p>
-      <a href="{% url 'applications:apply_single' available_collection.pk %}" class="btn btn-primary" type="button" name="button">
+      <a href="{% url 'applications:apply_single' available_collection.pk %}"
+          class="btn access-apply-button" type="button" name="button">
         {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access. {% endcomment %}
         {% trans "Apply" %}
       </a>

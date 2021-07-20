@@ -1,8 +1,9 @@
 {% load i18n %}
-<div class="col ml-4 mb-4">
-  <div class="card">
+<div class="col">
+  <div class="card collection-tile">
     {% if user_collection_partner.partner_logo %}
-      <img src="{{ user_collection_partner.partner_logo }}" class="card-img-top" alt="{{ user_collection_partner.partner_name }} logo">
+      <img src="{{ user_collection_partner.partner_logo }}" class="card-img-top library-tile-image"
+          alt="{{ user_collection_partner.partner_name }} logo">
     {% else %}
       <img src="..." class="card-img-top" alt="{{ user_collection_partner.partner_name }} logo">
     {% endif %}
@@ -41,12 +42,12 @@
         {% endif %}
         {% if user_collection.latest_sent_app and not user_collection.has_open_app %}
           <a href="{{ user_collection_partner.access_url }}"
-              class="btn btn-primary" type="button" name="button">
+              class="btn access-apply-button" type="button" name="button">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
             {% trans "Go to site" %}
           </a>
           <a href="{% url 'applications:renew' user_collection.latest_sent_app.pk %}"
-              class="btn btn-light pull-right" type="button" name="button">
+              class="btn renew-extend-button pull-right" type="button" name="button">
             {% if user_collection.date_expires %}
               {% comment %}Translators: Labels a button users can click to renew an expired account. {% endcomment %}
               {% trans "Renew" %}
@@ -58,7 +59,7 @@
         {% endif %}
       {% else %}
         <a href="{{ user_collection_partner.access_url }}"
-            class="btn btn-primary" type="button" name="button">
+            class="btn access-apply-button" type="button" name="button">
           {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
           {% trans "Access collection" %}
         </a>
