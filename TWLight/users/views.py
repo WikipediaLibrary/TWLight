@@ -888,6 +888,7 @@ class MyLibraryView(TemplateView):
                         "languages": user_authorization_partner.get_languages,
                         "tags": translated_tags,
                         "authorization_method": user_authorization_partner.authorization_method,
+                        "access_url": user_authorization_partner.get_access_url,
                     }
                 )
 

@@ -40,7 +40,7 @@
           </p>
         {% endif %}
         {% if user_collection.latest_sent_app and not user_collection.has_open_app %}
-          <a href="{% url 'applications:apply_single' user_collection_partner.pk %}"
+          <a href="{{ user_collection_partner.access_url }}"
               class="btn btn-primary" type="button" name="button">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
             {% trans "Go to site" %}
@@ -57,7 +57,7 @@
           {% endif %}
         {% endif %}
       {% else %}
-        <a href="{% url 'applications:apply_single' user_collection_partner.pk %}"
+        <a href="{{ user_collection_partner.access_url }}"
             class="btn btn-primary" type="button" name="button">
           {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
           {% trans "Access collection" %}
