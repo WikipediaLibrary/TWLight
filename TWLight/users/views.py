@@ -28,7 +28,7 @@ from django.utils import timezone
 from django.utils.translation import get_language
 
 from TWLight.resources.helpers import get_partner_description, get_tag_names
-from TWLight.resources.models import Partner
+from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.view_mixins import (
     PartnerCoordinatorOrSelf,
     SelfOnly,
