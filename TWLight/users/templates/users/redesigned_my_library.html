@@ -4,8 +4,13 @@
 {% block content %}
   {% include "header_partial_b4.html" %}
   <!-- User Collections -->
-
-  {{user_collections}}
+  <div class="row row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
+      {% for user_collection in user_collections %}
+        {% for user_collection_partner in user_collection.partners%}
+          {% include "users/user_collection_tile.html" %}
+        {% endfor %}
+      {% endfor %}
+  </div>
 
   <!-- Available Collections -->
   <div class="row row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-sm-2">

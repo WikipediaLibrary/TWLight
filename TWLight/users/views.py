@@ -887,8 +887,15 @@ class MyLibraryView(TemplateView):
                         "description": partner_descriptions["description"],
                         "languages": user_authorization_partner.get_languages,
                         "tags": translated_tags,
+                        "authorization_method": user_authorization_partner.authorization_method,
                     }
                 )
+
+            open_app = user_authorization.get_open_app
+            if open_app:
+                has_open_app = True
+            else:
+                has_open_app = False
 
             user_authorization_obj.append(
                 {
@@ -896,6 +903,9 @@ class MyLibraryView(TemplateView):
                     "partners": user_authorization_partner_obj,
                     "date_authorized": user_authorization.date_authorized,
                     "date_expires": user_authorization.date_expires,
+                    "is_valid": user_authorization.is_valid,
+                    "latest_sent_app": user_authorization.get_latest_sent_app,
+                    "has_open_app": open_app,
                 }
             )
 
@@ -931,7 +941,7 @@ class MyLibraryView(TemplateView):
                     "tags": translated_tags,
                 }
             )
-
+        context["bundle_authorization"] = Partner.BUNDLE
         context["user_collections"] = user_authorization_obj
         context["available_collections"] = available_collection_obj
 
