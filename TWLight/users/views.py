@@ -889,10 +889,14 @@ class MyLibraryView(TemplateView):
                 partner_id_set.add(user_authorization_partner.pk)
 
             open_app = user_authorization.get_open_app
-            if open_app:
-                has_open_app = True
+
+            if user_authorization.date_expires:
+                if user_authorization.date_expires < date.today():
+                    has_expired = True
+                else:
+                    has_expired = False
             else:
-                has_open_app = False
+                has_expired = False
 
             user_authorization_obj.append(
                 {
@@ -903,6 +907,7 @@ class MyLibraryView(TemplateView):
                     "is_valid": user_authorization.is_valid,
                     "latest_sent_app": user_authorization.get_latest_sent_app,
                     "has_open_app": open_app,
+                    "has_expired": has_expired,
                 }
             )
 

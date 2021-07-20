@@ -40,7 +40,7 @@
         {% if user_collection.date_expires %}
           <p class="text-right expiry-date-text">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired. {% endcomment %}
-            {% trans "Expiry date: " %} <span class="text-danger"> {{ user_collection.date_expires }} </span>
+            {% trans "Expiry date: " %} <span {% if user_collection.has_expired %} class="text-danger" {% endif %}> {{ user_collection.date_expires }} </span>
           </p>
         {% endif %}
         {% if user_collection.latest_sent_app and not user_collection.has_open_app %}
