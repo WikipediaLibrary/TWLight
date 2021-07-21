@@ -555,16 +555,17 @@ NEW MY LIBRARY CSS
 .library-tile-image{
     max-height: 210px;
     max-width: 275px;
+    padding: 10px 0px 0px 0px;
 }
 
 .collection-tags{
     color: #000000;
-    background-color: #AAADB0;
+    background-color: #E0E0E0;
 }
 
 .collection-tags:hover{
     color: #000000;
-    background-color: #8E9295;
+    background-color: #AAADB0;
 }
 
 .expiry-date-text{

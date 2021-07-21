@@ -851,6 +851,7 @@ class MyLibraryView(TemplateView):
         )
 
         context["bundle_authorization"] = Partner.BUNDLE
+        context["proxy_authorization"] = Partner.PROXY
 
         return context
 

@@ -14,7 +14,7 @@
     <div class="card-body">
       <p class="card-text">{{ user_collection_partner.short_description|safe }}</p>
       <hr>
-      <p class="card-text">
+      <p class="card-text small">
         <strong>Languages: </strong>
         {% if user_collection_partner.languages %}
           {% for language in user_collection_partner.languages%}
@@ -41,6 +41,13 @@
           <p class="text-right expiry-date-text">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired. {% endcomment %}
             {% trans "Expiry date: " %} <span {% if user_collection.has_expired %} class="text-danger" {% endif %}> {{ user_collection.date_expires }} </span>
+            {% if user_collection_partner.authorization_method == proxy_authorization and user_collection.is_valid %}
+              {% comment %}Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource. {% endcomment %}
+              <a href="{% url 'users:return_authorization' user_collection.pk %}"
+                  class="btn btn-sm btn-outline-danger">
+                <i class="fa fa-times" title="{% trans 'Click to return this access' %}"></i>
+              </a>
+            {% endif %}
           </p>
         {% endif %}
         {% if user_collection.latest_sent_app and not user_collection.has_open_app %}
