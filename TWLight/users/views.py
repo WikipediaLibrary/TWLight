@@ -843,12 +843,38 @@ class MyLibraryView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        language_code = get_language()
+
+        self._build_user_collection_object(context, language_code)
+        self._build_available_collection_object(
+            context, language_code, context["partner_id_set"]
+        )
+
+        context["bundle_authorization"] = Partner.BUNDLE
+
+        return context
+
+    def _build_user_collection_object(self, context, language_code):
+        """
+        Helper function to build a user collections object that will
+        fill the My Collections section of the redesigned My Library
+        template
+        ----------
+        context : dict
+            The context dictionary
+        language_code: str
+            The language code that some tags and descriptions will be translated to
+
+        Returns
+        -------
+        dict
+            The context dictionary with the user collections added
+        """
         editor = Editor.objects.get(pk=self.request.user.editor.pk)
 
         user_authorizations = Authorization.objects.filter(user=editor.user).distinct()
 
         user_authorization_obj = []
-        language_code = get_language()
         partner_id_set = set()
         for user_authorization in user_authorizations:
             user_authorization_partner_obj = []
@@ -911,11 +937,36 @@ class MyLibraryView(TemplateView):
                 }
             )
 
+        context["partner_id_set"] = partner_id_set
+        context["user_collections"] = user_authorization_obj
+        return context
+
+    def _build_available_collection_object(
+        self, context, language_code, partner_id_set
+    ):
+        """
+        Helper function to build an available collections object that will
+        fill the Available Collections section of the redesigned My Library
+        template
+        ----------
+        context : dict
+            The context dictionary
+        language_code: str
+            The language code that some tags and descriptions will be translated to
+        partner_id_set: set
+            A set of partner IDs which are to be excluded from the query because
+            they're already in the My Collections section of the interface
+
+        Returns
+        -------
+        dict
+            The context dictionary with the available collections added
+        """
         # Available collections do not include bundle partners and collections
         # that the user is already authorized to access
         available_collections = Partner.objects.exclude(
             authorization_method__in=[Partner.BUNDLE]
-        ).exclude(id__in=list(partner_id_set))
+        ).exclude(id__in=partner_id_set)
 
         available_collection_obj = []
         for available_collection in available_collections:
@@ -949,8 +1000,7 @@ class MyLibraryView(TemplateView):
                     "tags": translated_tags,
                 }
             )
-        context["bundle_authorization"] = Partner.BUNDLE
-        context["user_collections"] = user_authorization_obj
+
         context["available_collections"] = available_collection_obj
 
         return context
