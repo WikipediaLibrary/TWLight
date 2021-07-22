@@ -52,8 +52,8 @@
         {% endif %}
         {% if user_collection.latest_sent_app and not user_collection.has_open_app %}
           {% if not user_collection.has_expired %}
-            <a href="{{ user_collection_partner.access_url }}"
-                class="btn access-apply-button" type="button" name="button">
+            <a href="{{ user_collection_partner.access_url }}" class="btn access-apply-button"
+                type="button" name="button" target="_blank">
               {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
               {% trans "Go to site" %}
             </a>
@@ -70,8 +70,8 @@
           </a>
         {% endif %}
       {% else %}
-        <a href="{{ user_collection_partner.access_url }}"
-            class="btn access-apply-button" type="button" name="button">
+        <a href="{{ user_collection_partner.access_url }}" class="btn access-apply-button"
+            type="button" name="button" target="_blank">
           {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
           {% trans "Access collection" %}
         </a>
