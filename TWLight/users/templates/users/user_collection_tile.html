@@ -38,7 +38,7 @@
     <div class="card-footer">
       {% if user_collection_partner.authorization_method != bundle_authorization %}
         {% if user_collection.date_expires %}
-          <p class="text-right expiry-date-text">
+          <p class="expiry-date-text">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired. {% endcomment %}
             {% trans "Expiry date: " %} <span {% if user_collection.has_expired %} class="text-danger" {% endif %}> {{ user_collection.date_expires }} </span>
             {% if user_collection_partner.authorization_method == proxy_authorization and user_collection.is_valid %}
