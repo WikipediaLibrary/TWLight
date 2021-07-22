@@ -15,7 +15,8 @@
       <p class="card-text">{{ available_collection.short_description|safe }}</p>
       <hr>
       <p class="card-text small">
-        <strong>Languages: </strong>
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports. {% endcomment %}
+        <strong> {% trans "Languages: " %} </strong>
         {% if available_collection.languages %}
           {% for language in available_collection.languages%}
             {{ language }}{% if not forloop.last %}, {% endif %}
