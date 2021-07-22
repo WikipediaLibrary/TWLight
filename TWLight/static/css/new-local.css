@@ -553,7 +553,7 @@ NEW MY LIBRARY CSS
 }
 
 .library-tile-image{
-    max-height: 210px;
+    max-height: 255px;
     max-width: 275px;
     padding: 10px 0px 0px 0px;
 }
